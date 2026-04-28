@@ -1,0 +1,21 @@
+{
+  "run_id": "wave1c-nupkg-extraction-20260428",
+  "owner": "execution-agent-claude",
+  "task_name": "Wave 1C — NuGet Package Extraction + Framework Selection",
+  "start_time": "2026-04-28T00:00:00Z",
+  "branch": "main",
+  "worktree": "default (single worktree)",
+  "baseline_commit": "f1e6b92",
+  "purpose": "Implement TC-04: nupkg extractor with framework selector, dependency extraction, and extraction manifest.",
+  "overlap_classification": "no_overlap",
+  "overlap_evidence": "git status: clean working tree. Branch main, 3 commits ahead of origin. No stashes, no other branches, no other worktrees.",
+  "safety_decision": "PROCEED — clean baseline from Wave 1B commit f1e6b92.",
+  "intended_files": [
+    "src/plugin_examples/nupkg_extractor/__init__.py",
+    "src/plugin_examples/nupkg_extractor/extractor.py",
+    "src/plugin_examples/nupkg_extractor/framework_selector.py",
+    "tests/unit/test_nupkg_extractor.py",
+    "workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json",
+    "workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json"
+  ]
+}

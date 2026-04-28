@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
+  </ItemGroup>
+
+  <!--
+    SAFETY: No Aspose package references allowed.
+    DLL path is supplied via CLI argument.
+    This tool uses MetadataLoadContext only — no Assembly.Load,
+    no Activator.CreateInstance, no code execution.
+  -->
+
+</Project>

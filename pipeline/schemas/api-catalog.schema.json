@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "api-catalog.schema.json",
+  "title": "API Reflection Catalog",
+  "description": "Schema for the metadata-only reflection catalog produced by DllReflector.",
+  "type": "object",
+  "required": ["assembly_name", "assembly_version", "namespaces", "diagnostics"],
+  "additionalProperties": false,
+  "properties": {
+    "assembly_name": {
+      "type": "string",
+      "description": "Short name of the reflected assembly."
+    },
+    "assembly_version": {
+      "type": ["string", "null"],
+      "description": "Assembly version string."
+    },
+    "target_framework": {
+      "type": ["string", "null"],
+      "description": "Target framework moniker from assembly attributes."
+    },
+    "namespaces": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/namespace_entry" }
+    },
+    "diagnostics": { "$ref": "#/definitions/diagnostics" }
+  },
+  "definitions": {
+    "namespace_entry": {
+      "type": "object",
+      "required": ["namespace", "types"],
+      "additionalProperties": false,
+      "properties": {
+        "namespace": { "type": "string" },
+        "types": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/type_entry" }
+        }
+      }
+    },
+    "type_entry": {
+      "type": "object",
+      "required": ["name", "full_name", "kind", "is_obsolete"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "full_name": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "enum": ["class", "abstract_class", "static_class", "interface", "struct", "enum"]
+        },
+        "is_obsolete": { "type": "boolean" },
+        "xml_summary": { "type": "string" },
+        "constructors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/constructor_entry" }
+        },
+        "methods": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/method_entry" }
+        },
+        "properties": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/property_entry" }
+        },
+        "enum_values": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/enum_value_entry" }
+        }
+      }
+    },
+    "constructor_entry": {
+      "type": "object",
+      "required": ["parameters", "is_obsolete"],
+      "additionalProperties": false,
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/parameter_entry" }
+        },
+        "is_obsolete": { "type": "boolean" },
+        "xml_summary": { "type": "string" }
+      }
+    },
+    "method_entry": {
+      "type": "object",
+      "required": ["name", "return_type", "is_static", "is_obsolete", "parameters"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "return_type": { "type": "string" },
+        "is_static": { "type": "boolean" },
+        "is_obsolete": { "type": "boolean" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/parameter_entry" }
+        },
+        "xml_summary": { "type": "string" }
+      }
+    },
+    "property_entry": {
+      "type": "object",
+      "required": ["name", "type", "can_read", "can_write", "is_obsolete"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "can_read": { "type": "boolean" },
+        "can_write": { "type": "boolean" },
+        "is_obsolete": { "type": "boolean" },
+        "xml_summary": { "type": "string" }
+      }
+    },
+    "enum_value_entry": {
+      "type": "object",
+      "required": ["name", "is_obsolete"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "is_obsolete": { "type": "boolean" }
+      }
+    },
+    "parameter_entry": {
+      "type": "object",
+      "required": ["name", "type", "is_optional"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "is_optional": { "type": "boolean" }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "required": ["xml_documentation_loaded", "metadata_only"],
+      "additionalProperties": true,
+      "properties": {
+        "xml_documentation_loaded": { "type": "boolean" },
+        "xml_warning": { "type": ["string", "null"] },
+        "dependency_paths_provided": { "type": "integer" },
+        "metadata_only": {
+          "type": "boolean",
+          "const": true
+        },
+        "type_load_errors": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

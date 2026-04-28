@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scenario.schema.json",
+  "title": "Scenario Catalog",
+  "type": "object",
+  "required": ["family", "ready_count", "blocked_count", "scenarios"],
+  "properties": {
+    "family": { "type": "string" },
+    "ready_count": { "type": "integer", "minimum": 0 },
+    "blocked_count": { "type": "integer", "minimum": 0 },
+    "scenarios": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/scenario" }
+    }
+  },
+  "definitions": {
+    "scenario": {
+      "type": "object",
+      "required": ["scenario_id", "title", "target_type", "target_namespace", "status"],
+      "properties": {
+        "scenario_id": { "type": "string" },
+        "title": { "type": "string" },
+        "target_type": { "type": "string" },
+        "target_namespace": { "type": "string" },
+        "target_methods": { "type": "array", "items": { "type": "string" } },
+        "required_symbols": { "type": "array", "items": { "type": "string" } },
+        "required_fixtures": { "type": "array", "items": { "type": "string" } },
+        "output_plan": { "type": "string" },
+        "validation_plan": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["ready", "blocked_no_fixture", "blocked_unclear_semantics", "blocked_obsolete"]
+        },
+        "blocked_reason": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

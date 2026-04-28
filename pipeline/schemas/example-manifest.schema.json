@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "example-manifest.schema.json",
+  "title": "Example Manifest",
+  "type": "object",
+  "required": ["total_examples", "examples"],
+  "properties": {
+    "total_examples": { "type": "integer", "minimum": 0 },
+    "generated": { "type": "integer", "minimum": 0 },
+    "repaired": { "type": "integer", "minimum": 0 },
+    "failed": { "type": "integer", "minimum": 0 },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scenario_id", "status"],
+        "properties": {
+          "scenario_id": { "type": "string" },
+          "project_dir": { "type": "string" },
+          "csproj_path": { "type": "string" },
+          "program_path": { "type": "string" },
+          "target_framework": { "type": "string" },
+          "package_id": { "type": "string" },
+          "claimed_symbols": { "type": "array", "items": { "type": "string" } },
+          "status": {
+            "type": "string",
+            "enum": ["generated", "repaired", "failed"]
+          }
+        }
+      }
+    }
+  }
+}

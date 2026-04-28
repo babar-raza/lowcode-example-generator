@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scenario-packet.schema.json",
+  "title": "Scenario Prompt Packet",
+  "type": "object",
+  "required": ["scenario_id", "target_type", "target_namespace", "approved_symbols", "constraints"],
+  "properties": {
+    "scenario_id": { "type": "string" },
+    "target_type": { "type": "string" },
+    "target_namespace": { "type": "string" },
+    "target_methods": { "type": "array", "items": { "type": "string" } },
+    "approved_symbols": { "type": "array", "items": { "type": "string" } },
+    "fixture_files": { "type": "array", "items": { "type": "string" } },
+    "output_plan": { "type": "string" },
+    "constraints": { "type": "array", "items": { "type": "string" } },
+    "system_prompt": { "type": "string" },
+    "user_prompt": { "type": "string" }
+  }
+}

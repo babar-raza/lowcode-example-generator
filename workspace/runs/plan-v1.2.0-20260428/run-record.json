@@ -1,0 +1,38 @@
+{
+  "run_id": "plan-v1.2.0-20260428",
+  "owner": "planning-agent-claude",
+  "task_name": "Plan v1.2.0 — Repository Structure Redesign + Concurrency Model",
+  "start_time": "2026-04-28T00:00:00Z",
+  "branch": "main",
+  "worktree": "default (single worktree)",
+  "purpose": "Amend the execution plan to add: (1) production-grade repository structure v2 replacing the cluttered v1.1.0 layout, (2) concurrency safety model with gates TC-00A/B/C, (3) migration and rollback taskcards, (4) gitignore policy.",
+  "intended_files": [
+    "docs/plans/plugin-example-generation-execution-plan.md",
+    "runs/plan-v1.2.0-20260428/run-record.json",
+    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+  ],
+  "intended_directories": [
+    "runs/plan-v1.2.0-20260428/"
+  ],
+  "expected_outputs": [
+    "Amended plan at docs/plans/plugin-example-generation-execution-plan.md (v1.2.0)",
+    "Run record at runs/plan-v1.2.0-20260428/run-record.json",
+    "Concurrency report at runs/plan-v1.2.0-20260428/concurrency-report.json"
+  ],
+  "overlap_classification": "no_overlap",
+  "overlap_evidence": "git status shows all files are untracked (owned by prior planning session, same agent). No staged changes, no stashes, no worktrees, no other branches. Only committed file is README.md. User backup at docs/plans/plugin-example-generation-execution-plan copy.md is read-only for this run.",
+  "safety_decision": "PROCEED — no parallel work detected, all untracked files were created by this planning lineage.",
+  "rollback_notes": "If plan amendment fails: the user has a backup at docs/plans/plugin-example-generation-execution-plan copy.md. Since nothing is committed, git checkout -- docs/plans/ would restore to empty. All changes are reversible by deleting untracked files.",
+  "verification_commands": [
+    "git status",
+    "git diff --stat",
+    "git diff --name-status",
+    "grep -c 'Gate 0' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'TC-00A' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'TC-00B' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'TC-00C' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'Repository Structure v2' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'Concurrency Safety Model' docs/plans/plugin-example-generation-execution-plan.md",
+    "grep -c 'run-record' docs/plans/plugin-example-generation-execution-plan.md"
+  ]
+}

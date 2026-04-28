@@ -1,0 +1,54 @@
+{
+  "run_id": "wave0-exec-20260428",
+  "owner": "execution-agent-claude",
+  "task_name": "Wave 0A/0B/0C — Concurrency Preflight + Structure Migration + Path Compatibility",
+  "start_time": "2026-04-28T00:00:00Z",
+  "branch": "main",
+  "worktree": "default (single worktree)",
+  "purpose": "Execute TC-00A (concurrency preflight), TC-00D (structure migration to pipeline/ + workspace/), TC-00E (path compatibility updates), TC-00B (midflight checks), TC-00C (pre-commit scope verification).",
+  "intended_files": [
+    "runs/wave0-exec-20260428/run-record.json",
+    "runs/wave0-exec-20260428/concurrency-report.json",
+    ".gitignore",
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/disabled/.gitkeep",
+    "pipeline/configs/llm-routing.yml",
+    "pipeline/schemas/family-config.schema.json",
+    "pipeline/prompts/.gitkeep",
+    "workspace/runs/.gitkeep",
+    "workspace/manifests/.gitkeep",
+    "workspace/verification/latest/.gitkeep",
+    "AGENTS.md",
+    "docs/discovery/current-state.md"
+  ],
+  "intended_directories": [
+    "runs/wave0-exec-20260428/",
+    "pipeline/configs/families/",
+    "pipeline/configs/families/disabled/",
+    "pipeline/schemas/",
+    "pipeline/prompts/",
+    "workspace/runs/",
+    "workspace/manifests/",
+    "workspace/verification/latest/"
+  ],
+  "expected_outputs": [
+    "Run record at runs/wave0-exec-20260428/run-record.json (moves to workspace/runs/wave0-exec-20260428/ after migration)",
+    "Concurrency report at runs/wave0-exec-20260428/concurrency-report.json (moves to workspace/runs/wave0-exec-20260428/)",
+    ".gitignore at repo root",
+    "pipeline/ directory tree with migrated configs, schemas, prompts",
+    "workspace/ directory tree with migrated runs, manifests, verification",
+    "Updated path references in AGENTS.md and docs/discovery/current-state.md"
+  ],
+  "overlap_classification": "no_overlap",
+  "overlap_evidence": "git status: all files untracked, branch main up to date with origin/main. Single commit 62879f4. No stashes, no other branches, no other worktrees, no lock files. All untracked files created by prior planning sessions in the same agent lineage.",
+  "safety_decision": "PROCEED — no parallel work detected, all untracked files owned by this project lineage.",
+  "rollback_notes": "All files are untracked. Rollback = delete new directories and restore old directory names. User backup exists at docs/plans/plugin-example-generation-execution-plan copy.md.",
+  "verification_commands": [
+    "git status",
+    "git stash list",
+    "git branch -a",
+    "git worktree list",
+    "git log --oneline -5",
+    "ls *.lock (none found)"
+  ]
+}

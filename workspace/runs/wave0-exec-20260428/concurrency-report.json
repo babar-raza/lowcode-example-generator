@@ -1,0 +1,78 @@
+{
+  "run_id": "wave0-exec-20260428",
+  "task_name": "Wave 0A/0B/0C — Concurrency Preflight + Structure Migration + Path Compatibility",
+  "taskcards_executed": ["TC-00A", "TC-00D", "TC-00E", "TC-00B (midflight)", "TC-00C"],
+  "overlap_classification": "no_overlap",
+  "final_verdict": "PASS — all Wave 0 taskcards completed successfully",
+  "touched_files": [
+    ".gitignore",
+    "AGENTS.md",
+    "docs/plans/plugin-example-generation-execution-plan.md",
+    "docs/discovery/current-state.md",
+    "workspace/runs/wave0-exec-20260428/run-record.json",
+    "workspace/runs/wave0-exec-20260428/concurrency-report.json"
+  ],
+  "moved_files": [
+    {"from": "configs/families/.gitkeep", "to": "pipeline/configs/families/.gitkeep"},
+    {"from": "schemas/.gitkeep", "to": "pipeline/schemas/.gitkeep"},
+    {"from": "prompts/.gitkeep", "to": "pipeline/prompts/.gitkeep"},
+    {"from": "runs/.gitkeep", "to": "workspace/runs/.gitkeep"},
+    {"from": "runs/plan-v1.2.0-20260428/concurrency-report.json", "to": "workspace/runs/plan-v1.2.0-20260428/concurrency-report.json"},
+    {"from": "runs/plan-v1.2.0-20260428/run-record.json", "to": "workspace/runs/plan-v1.2.0-20260428/run-record.json"},
+    {"from": "runs/wave0-exec-20260428/run-record.json", "to": "workspace/runs/wave0-exec-20260428/run-record.json"},
+    {"from": "manifests/.gitkeep", "to": "workspace/manifests/.gitkeep"},
+    {"from": "verification/latest/.gitkeep", "to": "workspace/verification/latest/.gitkeep"}
+  ],
+  "created_files": [
+    ".gitignore",
+    "pipeline/configs/families/disabled/.gitkeep",
+    "workspace/runs/wave0-exec-20260428/run-record.json",
+    "workspace/runs/wave0-exec-20260428/concurrency-report.json"
+  ],
+  "deleted_directories": [
+    "configs/",
+    "schemas/",
+    "prompts/",
+    "runs/",
+    "manifests/",
+    "verification/"
+  ],
+  "orphan_check": "PASS — all 6 old root-level directories removed, no orphans remain",
+  "path_updates": [
+    {"file": "AGENTS.md", "change": "configs/families/cells.yml → pipeline/configs/families/cells.yml"},
+    {"file": "AGENTS.md", "change": "Gates 1-18 → Gates 0-18 (21 total), Sections 12 and 29"},
+    {"file": "docs/discovery/current-state.md", "change": "schemas/family-config.schema.json → pipeline/schemas/family-config.schema.json"},
+    {"file": "docs/discovery/current-state.md", "change": "configs/families/cells.yml → pipeline/configs/families/cells.yml"},
+    {"file": "docs/plans/plugin-example-generation-execution-plan.md", "change": "Run Record path → workspace/runs/plan-v1.2.0-20260428/run-record.json"}
+  ],
+  "final_structure": {
+    "root_entries": [".gitignore", "AGENTS.md", "README.md", "docs/", "pipeline/", "src/", "tests/", "workspace/"],
+    "pipeline_files": [
+      "pipeline/configs/families/.gitkeep",
+      "pipeline/configs/families/disabled/.gitkeep",
+      "pipeline/prompts/.gitkeep",
+      "pipeline/schemas/.gitkeep"
+    ],
+    "workspace_files": [
+      "workspace/manifests/.gitkeep",
+      "workspace/runs/.gitkeep",
+      "workspace/runs/plan-v1.2.0-20260428/concurrency-report.json",
+      "workspace/runs/plan-v1.2.0-20260428/run-record.json",
+      "workspace/runs/wave0-exec-20260428/run-record.json",
+      "workspace/runs/wave0-exec-20260428/concurrency-report.json",
+      "workspace/verification/latest/.gitkeep"
+    ],
+    "total_files": 20
+  },
+  "verification_commands_run": [
+    "git status — branch main, up to date, untracked: .gitignore, AGENTS.md, docs/, pipeline/, src/, tests/, workspace/",
+    "git stash list — empty",
+    "git branch -a — main only",
+    "git worktree list — single worktree",
+    "git log --oneline -5 — 62879f4 Initial commit",
+    "ls *.lock — no lock files",
+    "find (orphan check) — all 6 old dirs confirmed removed",
+    "find (file count) — 20 total files confirmed"
+  ],
+  "final_git_status": "On branch main. Up to date with origin/main. Untracked files: .gitignore, AGENTS.md, docs/, pipeline/, src/, tests/, workspace/. Nothing staged."
+}

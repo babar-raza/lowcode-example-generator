@@ -1,0 +1,50 @@
+{
+  "run_id": "plan-v1.2.0-20260428",
+  "touched_files": [
+    "docs/plans/plugin-example-generation-execution-plan.md",
+    "runs/plan-v1.2.0-20260428/run-record.json",
+    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+  ],
+  "moved_files": [],
+  "deleted_files": [],
+  "created_files": [
+    "runs/plan-v1.2.0-20260428/run-record.json",
+    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+  ],
+  "detected_overlaps": [
+    "None. All files are untracked (no commits since initial README.md). No other branches, stashes, worktrees, or lock files detected."
+  ],
+  "ownership_decisions": [
+    "All untracked files were created by the same planning agent lineage (v1.0.0 → v1.1.0 → v1.2.0). Ownership is clear.",
+    "docs/plans/plugin-example-generation-execution-plan copy.md is a user backup — not touched by this run."
+  ],
+  "safety_decisions": [
+    "Overlap classification: no_overlap. Safe to proceed with plan amendments.",
+    "Only the plan file and run record files were modified. No source code, test code, or config files were touched.",
+    "User backup preserved at docs/plans/plugin-example-generation-execution-plan copy.md."
+  ],
+  "remaining_risks": [
+    "Structure migration (TC-00D) has not been executed yet. The v1 placeholder directories still exist at root level.",
+    "Path references in AGENTS.md and docs/discovery/current-state.md still use old structure paths. Will be updated in TC-00E.",
+    "No .gitignore exists yet. Will be created in TC-00D."
+  ],
+  "verification_commands_run": [
+    "git status — confirmed: all files untracked, no staged changes, branch main up to date",
+    "git diff --stat — confirmed: empty (nothing staged or modified in tracked files)",
+    "git diff --name-status — confirmed: empty",
+    "git stash list — confirmed: no stashes",
+    "git branch -a — confirmed: only main branch",
+    "git worktree list — confirmed: single worktree",
+    "git log --oneline -10 — confirmed: single commit 62879f4",
+    "grep -c 'Gate 0' plan — confirmed: 12 occurrences",
+    "grep -c 'TC-00A' plan — confirmed: 12 occurrences",
+    "grep -c 'TC-00B' plan — confirmed: 12 occurrences",
+    "grep -c 'TC-00C' plan — confirmed: 8 occurrences",
+    "grep -c 'Repository Structure v2' plan — confirmed: 3 occurrences",
+    "grep -c 'Concurrency Safety Model' plan — confirmed: 2 occurrences",
+    "grep -c 'TC-00D' plan — confirmed: 10 occurrences",
+    "grep -c 'TC-00E' plan — confirmed: 7 occurrences",
+    "grep -c 'gitignore' plan — confirmed: 24 occurrences"
+  ],
+  "final_git_status": "On branch main. Up to date with origin/main. Untracked files: AGENTS.md, configs/, docs/, manifests/, prompts/, runs/, schemas/, src/, tests/, verification/. Nothing staged."
+}

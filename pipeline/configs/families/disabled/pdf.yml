@@ -1,0 +1,6 @@
+enabled: false
+status: disabled
+family: pdf
+display_name: Aspose.PDF for .NET
+# Remaining fields are intentionally incomplete.
+# Complete and move to pipeline/configs/families/ when ready to enable.

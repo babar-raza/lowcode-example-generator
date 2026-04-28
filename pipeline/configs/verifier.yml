@@ -1,0 +1,18 @@
+# Verifier (example-reviewer) Configuration
+# Integration settings for the example-reviewer tool.
+# TC-00X discovery must be completed before TC-15 implementation.
+
+integration_mode: null  # To be determined by TC-00X (cli | subprocess | module)
+
+cli:
+  command: example-reviewer
+  args: []
+
+subprocess:
+  script_path: null
+  python_executable: python
+
+module:
+  import_path: null
+
+timeout_seconds: 60

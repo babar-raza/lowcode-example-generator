@@ -1,0 +1,9 @@
+# Plugin Namespace Patterns
+# Global patterns used to identify plugin/lowcode namespaces across all families.
+# Family-specific overrides are in each family's config under plugin_detection.namespace_patterns.
+
+default_patterns:
+  - "*.LowCode"
+  - "*.LowCode.*"
+  - "*.Plugins"
+  - "*.Plugins.*"

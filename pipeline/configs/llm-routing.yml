@@ -1,0 +1,29 @@
+# LLM Routing Configuration
+# Defines provider order and preflight requirements for LLM-based generation.
+
+providers:
+  llm_professionalize:
+    type: openai_compatible
+    base_url_env: LLM_PROFESSIONALIZE_BASE_URL
+    api_key_env: LLM_PROFESSIONALIZE_API_KEY
+    model: default
+    timeout_seconds: 120
+    max_retries: 2
+
+  ollama:
+    type: ollama
+    host_env: OLLAMA_HOST
+    default_host: "http://localhost:11434"
+    model: codellama
+    timeout_seconds: 300
+    max_retries: 1
+
+default_provider_order:
+  - llm_professionalize
+  - ollama
+
+preflight:
+  required: true
+  test_prompt: "Return the JSON object {\"status\": \"ok\"}"
+  expected_field: status
+  expected_value: ok

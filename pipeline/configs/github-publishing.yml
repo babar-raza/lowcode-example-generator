@@ -1,0 +1,20 @@
+# GitHub Publishing Configuration
+# Settings for PR-based publishing of generated examples.
+
+target_repo:
+  owner: aspose
+  repo: aspose-plugins-examples-dotnet
+  branch: main
+
+pr_settings:
+  draft: false
+  auto_merge: false
+  title_template: "chore(examples): add {family} plugin examples ({version})"
+  body_template: |
+    ## Generated Examples
+    - Family: {family}
+    - NuGet version: {version}
+    - Examples added: {count}
+    - All gates passed: {gates_passed}
+
+dry_run: true  # Set to false when GITHUB_TOKEN is configured

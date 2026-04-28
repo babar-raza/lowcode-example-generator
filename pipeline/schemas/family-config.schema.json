@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FamilyConfig",
+  "type": "object",
+  "required": ["family", "display_name", "enabled", "status", "nuget", "plugin_detection", "github", "fixtures", "existing_examples", "generation", "validation", "llm"],
+  "properties": {
+    "family": { "type": "string" },
+    "display_name": { "type": "string" },
+    "enabled": {
+      "type": "boolean",
+      "description": "If false, this config is never processed by the package watcher or monthly runner."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "disabled", "experimental"],
+      "description": "active = in production pipeline. disabled = excluded entirely. experimental = runs but does not publish."
+    },
+    "nuget": {
+      "type": "object",
+      "required": ["package_id", "version_policy"],
+      "properties": {
+        "package_id": { "type": "string" },
+        "version_policy": { "enum": ["latest-stable", "pinned"] },
+        "pinned_version": { "type": ["string", "null"] },
+        "allow_prerelease": {
+          "type": "boolean",
+          "default": false,
+          "description": "If false, pre-release NuGet versions are excluded from version resolution."
+        },
+        "target_framework_preference": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Ordered preference list. First matching lib/ folder wins."
+        },
+        "dependency_resolution": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "If true, .nuspec dependencies are downloaded and extracted for DllReflector dependency resolution."
+            },
+            "max_depth": {
+              "type": "integer",
+              "default": 2,
+              "description": "Maximum transitive dependency depth to resolve."
+            }
+          }
+        }
+      }
+    },
+    "plugin_detection": {
+      "type": "object",
+      "required": ["namespace_patterns"],
+      "properties": {
+        "namespace_patterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "github": {
+      "type": "object",
+      "required": ["official_examples_repo", "published_plugin_examples_repo"],
+      "properties": {
+        "official_examples_repo": {
+          "type": "object",
+          "required": ["owner", "repo", "branch"],
+          "properties": {
+            "owner": { "type": "string" },
+            "repo": { "type": "string" },
+            "branch": { "type": "string" }
+          }
+        },
+        "published_plugin_examples_repo": {
+          "type": "object",
+          "required": ["owner", "repo", "branch"],
+          "properties": {
+            "owner": { "type": "string" },
+            "repo": { "type": "string" },
+            "branch": { "type": "string" }
+          }
+        }
+      }
+    },
+    "fixtures": {
+      "type": "object",
+      "required": ["sources"],
+      "properties": {
+        "sources": { "type": "array" }
+      }
+    },
+    "existing_examples": {
+      "type": "object",
+      "required": ["sources"],
+      "properties": {
+        "sources": { "type": "array" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "required": ["min_examples_per_family", "max_examples_per_monthly_run"],
+      "properties": {
+        "min_examples_per_family": { "type": "integer", "minimum": 1 },
+        "max_examples_per_monthly_run": { "type": "integer", "minimum": 1 },
+        "allow_new_fixtures": { "type": "boolean" },
+        "allow_generated_input_files": { "type": "boolean" }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "require_restore": { "type": "boolean" },
+        "require_build": { "type": "boolean" },
+        "require_run": { "type": "boolean" },
+        "require_output_validation": { "type": "boolean" },
+        "require_example_reviewer": { "type": "boolean" },
+        "runtime_runner": {
+          "type": "string",
+          "enum": ["linux", "windows", "auto"],
+          "default": "auto",
+          "description": "auto = linux unless only .NET Framework assemblies are available, in which case windows is required."
+        }
+      }
+    },
+    "llm": {
+      "type": "object",
+      "required": ["provider_order"],
+      "properties": {
+        "provider_order": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

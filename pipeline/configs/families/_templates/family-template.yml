@@ -1,0 +1,78 @@
+# Family Config Template
+# Copy this file to pipeline/configs/families/<family>.yml and fill in values.
+# Set enabled: true and status: active when ready to include in the pipeline.
+
+family: <family-name>                    # Short identifier (e.g., cells, words, pdf)
+display_name: Aspose.<Product> for .NET  # Human-readable product name
+enabled: false                           # Set to true when ready for pipeline processing
+status: disabled                         # active | disabled | experimental
+
+nuget:
+  package_id: Aspose.<Product>           # NuGet package ID
+  version_policy: latest-stable          # latest-stable | pinned
+  pinned_version: null                   # Required if version_policy = pinned
+  allow_prerelease: false                # If true, pre-release versions are considered
+  target_framework_preference:           # Ordered preference; first matching lib/ folder wins
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+    - net48                              # net48 triggers requires_windows_runner
+  dependency_resolution:
+    enabled: true                        # Download .nuspec dependencies for reflection
+    max_depth: 2                         # Transitive dependency depth limit
+
+plugin_detection:
+  namespace_patterns:                    # Glob patterns for plugin/lowcode namespaces
+    - Aspose.<Product>.LowCode
+    - Aspose.<Product>.LowCode.*
+    - Aspose.<Product>.Plugins
+    - Aspose.<Product>.Plugins.*
+
+github:
+  official_examples_repo:
+    owner: aspose-<family>               # GitHub org or user
+    repo: Aspose.<Product>-for-.NET      # Official examples repo
+    branch: master
+
+  published_plugin_examples_repo:
+    owner: aspose                        # Target org for generated examples
+    repo: aspose-plugins-examples-dotnet
+    branch: main
+
+fixtures:
+  sources:
+    - type: github
+      owner: aspose-<family>
+      repo: Aspose.<Product>-for-.NET
+      branch: master
+      paths:
+        - Examples/Data                  # Path to fixture files in the official repo
+
+existing_examples:
+  sources:
+    - type: github
+      owner: aspose-<family>
+      repo: Aspose.<Product>-for-.NET
+      branch: master
+      paths:
+        - Examples/CSharp                # Path to existing C# examples
+
+generation:
+  min_examples_per_family: 3             # Minimum ready scenarios before generation starts
+  max_examples_per_monthly_run: 10       # Maximum examples generated per monthly run
+  allow_new_fixtures: true               # Allow creating new fixture files
+  allow_generated_input_files: true      # Allow LLM to generate input data files
+
+validation:
+  require_restore: true                  # dotnet restore must succeed
+  require_build: true                    # dotnet build must succeed
+  require_run: true                      # dotnet run must succeed
+  require_output_validation: true        # Output must match expected patterns
+  require_example_reviewer: true         # example-reviewer must approve
+  runtime_runner: auto                   # linux | windows | auto
+
+llm:
+  provider_order:                        # Ordered list of LLM providers to try
+    - llm_professionalize
+    - ollama

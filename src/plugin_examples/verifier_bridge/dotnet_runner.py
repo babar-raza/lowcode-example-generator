@@ -158,9 +158,12 @@ def _run_dotnet(
 
 
 def _result_to_dict(r: DotnetResult) -> dict:
-    return {
+    d = {
         "operation": r.operation,
         "success": r.success,
         "exit_code": r.exit_code,
         "duration_ms": r.duration_ms,
     }
+    if not r.success and r.stderr:
+        d["stderr"] = r.stderr[:2000]
+    return d

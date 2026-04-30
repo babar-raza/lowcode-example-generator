@@ -1,0 +1,25 @@
+{
+  "total_failures": 2,
+  "classification_summary": {
+    "blocked_runtime_context_required": 1,
+    "unknown_runtime_failure": 1
+  },
+  "classifications": [
+    {
+      "scenario_id": "cells-html-converter",
+      "exit_code": 3221225477,
+      "classification": "blocked_runtime_context_required",
+      "detail": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.",
+      "actionable": false,
+      "recommendation": "Type requires runtime context (e.g., callback/provider called with null). Reclassify type role or provide proper consumer workflow."
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "exit_code": 3762504530,
+      "classification": "unknown_runtime_failure",
+      "detail": "Unhandled exception. Aspose.Cells.CellsException: No input has been specified for the process.\n   at Aspose.Cells.LowCode.LowCodeLoadOptions.\u0005()\n   at Aspose.Cells.LowCode.LowCodeLoadOptions.\b()\n   at",
+      "actionable": false,
+      "recommendation": "Investigate runtime output manually."
+    }
+  ]
+}

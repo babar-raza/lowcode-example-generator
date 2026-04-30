@@ -1,0 +1,11 @@
+{
+  "taskcard": "followup-discovery-sweep-deps",
+  "title": "Discovery sweep does not pass dependency assemblies to DllReflector",
+  "severity": "low",
+  "sprint": "Options-Aware API Usage Sprint",
+  "pre_existing": true,
+  "description": "The discovery_sweep.py module runs DllReflector without the --deps flag, causing reflection to fail for assemblies with external dependencies (e.g., System.Drawing.Common for Aspose.Cells). The regular pipeline in runner.py correctly downloads dependencies and passes them via --deps. discovery_sweep.py needs to replicate the dependency resolution step.",
+  "impact": "Discovery sweep cannot produce catalogs for families with complex dependency chains. Does not affect the regular pipeline.",
+  "evidence": "System.IO.FileNotFoundException: Could not find assembly 'System.Drawing.Common'",
+  "recommendation": "Add dependency resolution to discovery_sweep.py, mirroring the nuget_fetcher + nupkg_extractor logic used in runner.py."
+}

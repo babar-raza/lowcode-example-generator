@@ -135,7 +135,7 @@ class TestScenarioPlanner:
         blocked_ids = [s.scenario_id for s in result.blocked_scenarios]
         assert any("obsolete" in bid.lower() for bid in blocked_ids)
 
-    def test_empty_type_blocked_unclear(self, tmp_path):
+    def test_empty_type_blocked(self, tmp_path):
         proof = _make_proof(tmp_path)
         result = plan_scenarios(
             family="cells",
@@ -143,8 +143,8 @@ class TestScenarioPlanner:
             plugin_namespaces=["Aspose.Cells.LowCode"],
             source_of_truth_proof_path=proof,
         )
-        blocked_statuses = [s.status for s in result.blocked_scenarios]
-        assert "blocked_unclear_semantics" in blocked_statuses
+        blocked_types = [s.target_type for s in result.blocked_scenarios]
+        assert "Aspose.Cells.LowCode.EmptyType" in blocked_types
 
     def test_enums_skipped(self, tmp_path):
         proof = _make_proof(tmp_path)
@@ -217,6 +217,39 @@ class TestScenarioPlanner:
         )
         assert result.ready_count >= 3
 
+    def test_abstract_class_blocked(self, tmp_path):
+        proof = _make_proof(tmp_path)
+        catalog = _make_catalog()
+        catalog["namespaces"][0]["types"].append({
+            "name": "AbstractLowCodeLoadOptionsProvider",
+            "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+            "kind": "abstract_class", "is_obsolete": False,
+            "methods": [{"name": "MoveNext", "return_type": "bool",
+                         "is_static": False, "is_obsolete": False, "parameters": []}],
+            "properties": [], "constructors": [],
+        })
+        result = plan_scenarios(
+            family="cells",
+            catalog=catalog,
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+        )
+        blocked_types = [s.target_type for s in result.blocked_scenarios]
+        assert "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider" in blocked_types
+        ready_types = [s.target_type for s in result.ready_scenarios]
+        assert "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider" not in ready_types
+
+    def test_static_converter_not_blocked(self, tmp_path):
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="cells",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+        )
+        ready_types = [s.target_type for s in result.ready_scenarios]
+        assert "Aspose.Cells.LowCode.SpreadsheetLocker" in ready_types
+
 
 class TestScenarioCatalogWriter:
     def test_write_scenario_catalog(self, tmp_path):
@@ -256,3 +289,44 @@ class TestScenarioCatalogWriter:
         blk_path = write_blocked_scenarios(result, tmp_path / "workspace" / "verification")
         assert "workspace" in str(cat_path)
         assert "workspace" in str(blk_path)
+
+
+class TestFixtureExtension:
+    def test_cells_fixture_uses_xlsx(self, tmp_path):
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="cells",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+            default_fixture_extension=".xlsx",
+        )
+        for s in result.ready_scenarios:
+            for f in s.required_fixtures:
+                assert f.endswith(".xlsx"), f"Expected .xlsx fixture, got {f}"
+
+    def test_words_fixture_uses_docx(self, tmp_path):
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="words",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+            default_fixture_extension=".docx",
+        )
+        for s in result.ready_scenarios:
+            for f in s.required_fixtures:
+                assert f.endswith(".docx"), f"Expected .docx fixture, got {f}"
+
+    def test_pdf_fixture_uses_pdf(self, tmp_path):
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="pdf",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+            default_fixture_extension=".pdf",
+        )
+        for s in result.ready_scenarios:
+            for f in s.required_fixtures:
+                assert f.endswith(".pdf"), f"Expected .pdf fixture, got {f}"

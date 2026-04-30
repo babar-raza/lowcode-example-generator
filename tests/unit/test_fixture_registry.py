@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -20,6 +21,11 @@ from plugin_examples.fixture_registry.fixture_fetcher import (
 )
 
 
+def _mock_github_listing(*args, **kwargs):
+    """Mock GitHub file listing returning a single fixture."""
+    return ["sample-data.xlsx"]
+
+
 CELLS_SOURCES = [
     {
         "type": "github",
@@ -32,6 +38,7 @@ CELLS_SOURCES = [
 
 
 class TestFixtureRegistry:
+    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
     def test_build_from_config(self):
         registry = build_fixture_registry("cells", CELLS_SOURCES)
         assert registry.family == "cells"
@@ -60,10 +67,12 @@ class TestFixtureRegistry:
         registry.add_fixture(entry)
         assert len(registry.fixtures) == 1
 
+    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
     def test_provenance_preserved(self):
         registry = build_fixture_registry("cells", CELLS_SOURCES)
         assert registry.fixtures[0].provenance == "aspose-cells/Aspose.Cells-for-.NET:master"
 
+    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
     def test_write_and_load(self, tmp_path):
         registry = build_fixture_registry("cells", CELLS_SOURCES)
         manifests_dir = tmp_path / "workspace" / "manifests"
@@ -79,6 +88,7 @@ class TestFixtureRegistry:
     def test_load_missing_returns_none(self, tmp_path):
         assert load_fixture_registry(tmp_path) is None
 
+    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
     def test_path_uses_workspace(self, tmp_path):
         registry = build_fixture_registry("cells", CELLS_SOURCES)
         path = write_fixture_registry(registry, tmp_path / "workspace" / "manifests")
@@ -87,6 +97,7 @@ class TestFixtureRegistry:
 
 
 class TestFixtureFetcher:
+    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
     def test_dry_run_mode(self):
         registry = build_fixture_registry("cells", CELLS_SOURCES)
         results = fetch_fixtures(registry, Path("/tmp/fixtures"), dry_run=True)

@@ -1,0 +1,11 @@
+{
+  "taskcard": "followup-github-api-403",
+  "title": "GitHub API 403 rate limits fixture registry without GITHUB_TOKEN",
+  "severity": "low",
+  "sprint": "Options-Aware API Usage Sprint",
+  "pre_existing": true,
+  "description": "The fixture registry's GitHub API calls to aspose-cells/Aspose.Cells-for-.NET:Examples/Data are rate-limited without GITHUB_TOKEN. This causes the registry to fall back to path-only registration. With GITHUB_TOKEN set, the registry should function normally.",
+  "impact": "Fixture registry returns only 1 entry instead of full fixture list. Pipeline works around it with generated fixtures.",
+  "evidence": "WARNING:plugin_examples.fixture_registry.registry:GitHub API unavailable for aspose-cells/Aspose.Cells-for-.NET:Examples/Data",
+  "recommendation": "Document GITHUB_TOKEN requirement in MEMORY.md. Optionally add caching to reduce API calls."
+}

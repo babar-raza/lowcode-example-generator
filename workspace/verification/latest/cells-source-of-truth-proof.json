@@ -1,0 +1,48 @@
+{
+  "package_id": "Aspose.Cells",
+  "resolved_version": "26.4.0",
+  "nupkg_sha256": "68692b88f4b5c395ea00ad20b5a96a176fc1eb39085e0dffae4ac41e280e6ac6",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\extracted\\cells\\primary\\lib\\netstandard2.0\\Aspose.Cells.dll",
+  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\extracted\\cells\\primary\\lib\\netstandard2.0\\Aspose.Cells.xml",
+  "xml_warning": null,
+  "dependency_count": 8,
+  "dependency_paths": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Text.Encoding.CodePages.4.7.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Runtime.CompilerServices.Unsafe.4.7.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Drawing.Common.5.0.3.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Security.Cryptography.Pkcs.6.0.5.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Formats.Asn1.6.0.1.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Buffers.4.5.1.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Memory.4.5.4.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\packages\\cells\\deps\\System.Security.Cryptography.Cng.5.0.0.nupkg"
+  ],
+  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\catalog\\cells\\api-catalog.json",
+  "namespace_count": 4,
+  "matched_plugin_namespaces": [
+    {
+      "namespace": "Aspose.Cells.LowCode",
+      "matched_by_pattern": "Aspose.Cells.LowCode",
+      "public_type_count": 22,
+      "public_method_count": 33
+    }
+  ],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Cells.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.LowCode.*'"
+    },
+    {
+      "pattern": "Aspose.Cells.Plugins",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.Plugins'"
+    },
+    {
+      "pattern": "Aspose.Cells.Plugins.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.Plugins.*'"
+    }
+  ],
+  "public_plugin_type_count": 22,
+  "public_plugin_method_count": 33,
+  "eligibility_status": "eligible",
+  "eligibility_reason": "Plugin namespaces found: Aspose.Cells.LowCode"
+}

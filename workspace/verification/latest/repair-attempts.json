@@ -1,0 +1,12 @@
+{
+  "total_build_repairs": 1,
+  "total_runtime_repairs": 0,
+  "attempts": [
+    {
+      "scenario_id": "cells-html-converter",
+      "repair_type": "build",
+      "attempt": 1,
+      "success": true
+    }
+  ]
+}

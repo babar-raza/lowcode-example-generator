@@ -1,0 +1,11 @@
+{
+  "taskcard": "followup-publisher-evidence-ordering",
+  "title": "Fix publisher stage evidence ordering: gate-results.json not yet written when publisher runs",
+  "severity": "medium",
+  "sprint": "Options-Aware API Usage Sprint",
+  "pre_existing": true,
+  "description": "The publisher stage (stage 17) checks for gate-results.json and scenario-catalog.json as evidence prerequisites. However, gate-results.json is written AFTER the stage loop completes (lines 1124-1178 in runner.py), so it does not exist when the publisher stage runs. This causes the publisher to always report 'Publishing blocked: Missing evidence'. The publisher stage should either be moved after gate evaluation, or gate evaluation should be moved into the stage loop.",
+  "impact": "Publisher always blocked. Does not affect build/runtime/verdict accuracy.",
+  "evidence": "WARNING:plugin_examples.publisher.publisher:Publishing blocked: Missing evidence: ['gate-results.json', 'scenario-catalog.json']",
+  "recommendation": "Move gate evaluation into the stage loop before publisher, or move publisher after gate evaluation."
+}

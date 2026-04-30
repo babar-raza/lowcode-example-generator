@@ -1,0 +1,37 @@
+{
+  "reviewer_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\example-reviewer",
+  "fixture_modules_found": [
+    "src/services/test_data_generator.py",
+    "src/services/fixture_resolver_service.py"
+  ],
+  "fixture_builders_found": [
+    "_generate_xlsx(dest: Path) -> (bool, str)",
+    "_generate_html(dest: Path) -> (bool, str)",
+    "_generate_csv(dest: Path) -> (bool, str)",
+    "_generate_text(dest: Path) -> (bool, str)",
+    "_generate_xml(dest: Path) -> (bool, str)",
+    "_generate_png(dest: Path) -> (bool, str)",
+    "_generate_jpeg(dest: Path) -> (bool, str)",
+    "_generate_bmp(dest: Path) -> (bool, str)",
+    "_generate_gif(dest: Path) -> (bool, str)",
+    "_generate_tiff(dest: Path) -> (bool, str)",
+    "_generate_svg(dest: Path) -> (bool, str)",
+    "_generate_pptx(dest: Path) -> (bool, str)",
+    "_generate_eml(dest: Path) -> (bool, str)",
+    "_generate_epub(dest: Path) -> (bool, str)",
+    "_generate_rtf(dest: Path) -> (bool, str)",
+    "generate_file_for_family(filename, dest, test_data_dir, family) -> (bool, str)"
+  ],
+  "supported_formats": [
+    "xlsx", "html", "csv", "txt", "xml", "rtf",
+    "png", "jpg", "bmp", "gif", "tiff", "svg",
+    "pptx", "eml", "epub", "docx", "doc", "pdf", "odt"
+  ],
+  "reuse_mode": "copy",
+  "recommended_integration": "Copy _generate_xlsx, _generate_html, _generate_csv, _generate_text functions from test_data_generator.py into fixture_factory.py. Add a new _generate_json function. All generators are pure stdlib with no reviewer-specific dependencies.",
+  "gaps": [
+    "No JSON generator in example-reviewer -- must create one",
+    "No PDF generator from scratch (copy-only in reviewer)",
+    "FixtureResolverService pattern (runtime resolution) not applicable to pre-generation placement"
+  ]
+}

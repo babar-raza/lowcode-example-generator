@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -143,15 +144,35 @@ def write_preflight_report(
     return path
 
 
+def _resolve_api_key(provider: str) -> str:
+    """Resolve API key from environment for a provider."""
+    if provider == "gpt_oss":
+        return os.environ.get("GPT_OSS_API_KEY") or os.environ.get("LLM_API_KEY", "")
+    # openai or generic
+    return os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+
+
 def _check_provider(provider: str, *, timeout: int = 30, config: dict | None = None) -> PreflightResult:
     """Check a single provider's availability."""
     result = PreflightResult(provider=provider)
 
     try:
         endpoint = _get_endpoint(provider, config)
-        start = time.time()
 
-        resp = requests.get(endpoint, timeout=timeout)
+        # API-key providers: check key presence + models endpoint
+        if provider in ("openai", "gpt_oss"):
+            api_key = _resolve_api_key(provider)
+            if not api_key:
+                result.error = f"No API key for {provider}"
+                return result
+            start = time.time()
+            resp = requests.get(
+                endpoint, headers={"Authorization": f"Bearer {api_key}"}, timeout=timeout,
+            )
+        else:
+            start = time.time()
+            resp = requests.get(endpoint, timeout=timeout)
+
         result.latency_ms = (time.time() - start) * 1000
         result.timeout_within_limit = result.latency_ms < (timeout * 1000)
         result.endpoint_reachable = resp.status_code < 500
@@ -182,9 +203,12 @@ def _get_endpoint(provider: str, config: dict | None) -> str:
                 return p.get("endpoint", "")
 
     # Default endpoints
+    gpt_oss_base = os.environ.get("GPT_OSS_ENDPOINT", "https://api.openai.com/v1/").rstrip("/")
     defaults = {
         "ollama": "http://localhost:11434/api/tags",
         "llm_professionalize": "http://localhost:8080/v1/models",
+        "openai": "https://api.openai.com/v1/models",
+        "gpt_oss": f"{gpt_oss_base}/models",
     }
     return defaults.get(provider, f"http://localhost:8080/{provider}")
 
@@ -197,6 +221,22 @@ def _call_provider(provider: str, prompt: str, *, system_prompt: str = "", timeo
         return _call_openai_compatible(
             "http://localhost:8080/v1/chat/completions",
             prompt, system_prompt=system_prompt, timeout=timeout,
+        )
+    elif provider == "openai":
+        api_key = _resolve_api_key("openai")
+        return _call_openai_compatible(
+            "https://api.openai.com/v1/chat/completions",
+            prompt, system_prompt=system_prompt, timeout=timeout,
+            api_key=api_key, model="gpt-4o-mini",
+        )
+    elif provider == "gpt_oss":
+        api_key = _resolve_api_key("gpt_oss")
+        base = os.environ.get("GPT_OSS_ENDPOINT", "https://api.openai.com/v1/").rstrip("/")
+        model = os.environ.get("GPT_OSS_MODEL", "recommended")
+        return _call_openai_compatible(
+            f"{base}/chat/completions",
+            prompt, system_prompt=system_prompt, timeout=timeout,
+            api_key=api_key, model=model,
         )
     else:
         raise LLMProviderError(f"Unknown provider: {provider}")
@@ -213,17 +253,29 @@ def _call_ollama(prompt: str, *, system_prompt: str = "", timeout: int = 120) ->
     return resp.json().get("response", "")
 
 
-def _call_openai_compatible(endpoint: str, prompt: str, *, system_prompt: str = "", timeout: int = 120) -> str:
+def _call_openai_compatible(
+    endpoint: str,
+    prompt: str,
+    *,
+    system_prompt: str = "",
+    timeout: int = 120,
+    api_key: str = "",
+    model: str = "",
+) -> str:
     """Call OpenAI-compatible API."""
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": prompt})
 
-    resp = requests.post(
-        endpoint,
-        json={"messages": messages, "temperature": 0.2},
-        timeout=timeout,
-    )
+    body: dict = {"messages": messages, "temperature": 0.2}
+    if model:
+        body["model"] = model
+
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+
+    resp = requests.post(endpoint, json=body, headers=headers, timeout=timeout)
     resp.raise_for_status()
     return resp.json()["choices"][0]["message"]["content"]

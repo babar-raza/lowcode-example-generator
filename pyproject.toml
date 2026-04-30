@@ -12,6 +12,12 @@ dependencies = [
     "requests>=2.31",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-timeout>=2.3",
+]
+
 [project.scripts]
 plugin-examples = "plugin_examples.__main__:main"
 

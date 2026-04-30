@@ -86,6 +86,20 @@ class LLMConfig:
 
 
 @dataclass(frozen=True)
+class TemplateHints:
+    default_input_extension: str = ".xlsx"
+    default_input_filename: str = "input.xlsx"
+    array_input_filenames: list[str] = field(
+        default_factory=lambda: ["input1.xlsx", "input2.xlsx"]
+    )
+    input_creation_lines: list[str] = field(default_factory=list)
+    merger_input_creation_lines: list[str] = field(default_factory=list)
+    additional_usings: list[str] = field(default_factory=list)
+    default_output_extension: str = ".out"
+    default_fixture_extension: str = ".xlsx"
+
+
+@dataclass(frozen=True)
 class FamilyConfig:
     family: str
     display_name: str
@@ -99,3 +113,4 @@ class FamilyConfig:
     generation: GenerationConfig
     validation: ValidationConfig
     llm: LLMConfig
+    template_hints: TemplateHints = field(default_factory=TemplateHints)

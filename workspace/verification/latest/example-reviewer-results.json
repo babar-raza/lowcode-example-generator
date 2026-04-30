@@ -1,0 +1,8 @@
+{
+  "available": true,
+  "passed": true,
+  "error": null,
+  "details": {
+    "raw_output": "\n================================================================================\nSAFE WORKSPACE MODE ENABLED\n================================================================================\n\nSafe workspace root: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\nDatabase path: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\\db\\example_reviewer.db\nArtifacts directory: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\\artifacts\nWorkspace directory: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\\workspace\n================================================================================\n\nSAFE_WORKSPACE_ROOT: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\nDB_PATH: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\\db\\example_reviewer.db\nARTIFACTS_DIR: C:\\Users\\prora\\AppData\\Local\\ExampleReviewer\\workspaces\\20260430_083412\\artifacts\nWORKSPACE_DIR: C:\\Users"
+  }
+}

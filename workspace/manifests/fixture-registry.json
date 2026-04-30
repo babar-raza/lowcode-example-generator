@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "fixtures": [
+    {
+      "filename": "Examples/Data",
+      "source_type": "github",
+      "source_path": "aspose-cells/Aspose.Cells-for-.NET:master:Examples/Data",
+      "provenance": "aspose-cells/Aspose.Cells-for-.NET:master",
+      "available": false
+    }
+  ]
+}

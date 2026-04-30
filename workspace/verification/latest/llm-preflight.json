@@ -1,0 +1,16 @@
+{
+  "selected_provider": "gpt_oss",
+  "results": [
+    {
+      "provider": "gpt_oss",
+      "passed": true,
+      "endpoint_reachable": true,
+      "model_available": true,
+      "json_response": true,
+      "structured_response_parseable": true,
+      "timeout_within_limit": true,
+      "latency_ms": 1952.998399734497,
+      "error": null
+    }
+  ]
+}

@@ -63,16 +63,48 @@ def check_for_updates(
         package_id = family_cfg.get("nuget", {}).get("package_id", "")
         current = lock.get("packages", {}).get(package_id, {}).get("version")
 
+        latest = _resolve_latest_nuget_version(package_id)
+        has_update = bool(latest and current and latest != current)
+
         results.append(UpdateCheck(
             family=family,
             package_id=package_id,
             current_version=current,
-            latest_version=None,  # Would resolve from NuGet in live run
-            has_update=False,  # Conservative — requires live check
+            latest_version=latest,
+            has_update=has_update,
         ))
 
     logger.info("Update check: %d families checked", len(results))
     return results
+
+
+def _resolve_latest_nuget_version(package_id: str) -> str | None:
+    """Resolve the latest stable version from NuGet v3 API.
+
+    Returns None on failure (graceful degradation).
+    """
+    try:
+        import requests
+    except ImportError:
+        logger.warning("requests not installed, cannot resolve NuGet version")
+        return None
+
+    url = f"https://api.nuget.org/v3-flatcontainer/{package_id.lower()}/index.json"
+    try:
+        resp = requests.get(url, timeout=15)
+        if resp.status_code != 200:
+            logger.warning("NuGet API returned %d for %s", resp.status_code, package_id)
+            return None
+        data = resp.json()
+        versions = data.get("versions", [])
+        if not versions:
+            return None
+        # Filter to stable versions (no '-' in version string)
+        stable = [v for v in versions if "-" not in v]
+        return stable[-1] if stable else versions[-1]
+    except Exception as e:
+        logger.warning("NuGet API request failed: %s", e)
+        return None
 
 
 def write_monthly_report(

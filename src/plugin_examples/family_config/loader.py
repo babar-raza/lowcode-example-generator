@@ -19,6 +19,7 @@ from plugin_examples.family_config.models import (
     NuGetConfig,
     PluginDetection,
     RepoRef,
+    TemplateHints,
     ValidationConfig,
 )
 from plugin_examples.family_config.validator import validate_family_config
@@ -127,6 +128,20 @@ def _build_model(data: dict) -> FamilyConfig:
 
     llm = LLMConfig(provider_order=data["llm"]["provider_order"])
 
+    hints_data = data.get("template_hints", {})
+    template_hints = TemplateHints(
+        default_input_extension=hints_data.get("default_input_extension", ".xlsx"),
+        default_input_filename=hints_data.get("default_input_filename", "input.xlsx"),
+        array_input_filenames=hints_data.get(
+            "array_input_filenames", ["input1.xlsx", "input2.xlsx"]
+        ),
+        input_creation_lines=hints_data.get("input_creation_lines", []),
+        merger_input_creation_lines=hints_data.get("merger_input_creation_lines", []),
+        additional_usings=hints_data.get("additional_usings", []),
+        default_output_extension=hints_data.get("default_output_extension", ".out"),
+        default_fixture_extension=hints_data.get("default_fixture_extension", ".xlsx"),
+    )
+
     return FamilyConfig(
         family=data["family"],
         display_name=data["display_name"],
@@ -140,4 +155,5 @@ def _build_model(data: dict) -> FamilyConfig:
         generation=generation,
         validation=validation,
         llm=llm,
+        template_hints=template_hints,
     )

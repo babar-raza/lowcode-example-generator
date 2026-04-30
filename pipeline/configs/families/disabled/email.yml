@@ -1,0 +1,89 @@
+family: email
+display_name: Aspose.Email for .NET
+enabled: true
+status: experimental
+
+nuget:
+  package_id: Aspose.Email
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+    - net48
+  dependency_resolution:
+    enabled: true
+    max_depth: 2
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.Email.LowCode
+    - Aspose.Email.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-email
+    repo: Aspose.Email-for-.NET
+    branch: master
+
+  published_plugin_examples_repo:
+    owner: aspose
+    repo: aspose-plugins-examples-dotnet
+    branch: main
+
+fixtures:
+  sources:
+    - type: github
+      owner: aspose-email
+      repo: Aspose.Email-for-.NET
+      branch: master
+      paths:
+        - Examples/Data
+
+existing_examples:
+  sources:
+    - type: github
+      owner: aspose-email
+      repo: Aspose.Email-for-.NET
+      branch: master
+      paths:
+        - Examples/CSharp
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 10
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: true
+  require_example_reviewer: true
+  runtime_runner: auto
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama
+
+template_hints:
+  default_input_extension: ".eml"
+  default_input_filename: "input.eml"
+  array_input_filenames: ["input1.eml", "input2.eml"]
+  input_creation_lines:
+    - 'var message = new MailMessage("from@test.com", "to@test.com", "Subject", "Body");'
+    - 'message.Save("input.eml", SaveOptions.DefaultEml);'
+  merger_input_creation_lines:
+    - 'var msg1 = new MailMessage("from@test.com", "to@test.com", "Subject 1", "Body 1");'
+    - 'msg1.Save("input1.eml", SaveOptions.DefaultEml);'
+    - 'var msg2 = new MailMessage("from@test.com", "to@test.com", "Subject 2", "Body 2");'
+    - 'msg2.Save("input2.eml", SaveOptions.DefaultEml);'
+  additional_usings:
+    - "Aspose.Email"
+  default_output_extension: ".eml"
+  default_fixture_extension: ".eml"

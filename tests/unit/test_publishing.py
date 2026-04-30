@@ -22,13 +22,22 @@ from plugin_examples.package_watcher.watcher import (
 # --- Tests: publisher ---
 
 
+def _setup_full_evidence(latest: Path) -> None:
+    """Create all required evidence files for publisher tests."""
+    latest.mkdir(parents=True, exist_ok=True)
+    (latest / "cells-source-of-truth-proof.json").write_text("{}")
+    (latest / "validation-results.json").write_text("{}")
+    (latest / "example-reviewer-results.json").write_text("{}")
+    (latest / "scenario-catalog.json").write_text("{}")
+    gate = {"verdict": "PR_READY", "publishable": True,
+            "all_required_passed": True, "blocking_gates": []}
+    (latest / "gate-results.json").write_text(json.dumps(gate))
+
+
 class TestPublisher:
     def test_dry_run_publishes(self, tmp_path):
-        # Set up required evidence
         latest = tmp_path / "workspace" / "verification" / "latest"
-        latest.mkdir(parents=True)
-        (latest / "cells-source-of-truth-proof.json").write_text("{}")
-        (latest / "validation-results.json").write_text("{}")
+        _setup_full_evidence(latest)
 
         result = publish_examples(
             family="cells",
@@ -53,9 +62,7 @@ class TestPublisher:
 
     def test_blocked_no_passing_examples(self, tmp_path):
         latest = tmp_path / "workspace" / "verification" / "latest"
-        latest.mkdir(parents=True)
-        (latest / "cells-source-of-truth-proof.json").write_text("{}")
-        (latest / "validation-results.json").write_text("{}")
+        _setup_full_evidence(latest)
 
         result = publish_examples(
             family="cells",
@@ -67,9 +74,7 @@ class TestPublisher:
 
     def test_never_pushes_to_main(self, tmp_path):
         latest = tmp_path / "workspace" / "verification" / "latest"
-        latest.mkdir(parents=True)
-        (latest / "cells-source-of-truth-proof.json").write_text("{}")
-        (latest / "validation-results.json").write_text("{}")
+        _setup_full_evidence(latest)
 
         result = publish_examples(
             family="cells",

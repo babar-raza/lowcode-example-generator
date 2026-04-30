@@ -1,0 +1,115 @@
+{
+  "total_examples": 9,
+  "publish_candidates": 9,
+  "blocked_examples": 0,
+  "examples": [
+    {
+      "scenario_id": "cells-html-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ]
+}

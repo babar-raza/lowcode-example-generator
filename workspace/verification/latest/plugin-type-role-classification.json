@@ -1,0 +1,254 @@
+{
+  "total_types": 22,
+  "role_summary": {
+    "abstract_base": 3,
+    "workflow_root": 9,
+    "options": 7,
+    "provider_callback": 2,
+    "result_model": 1
+  },
+  "types": [
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+      "name": "AbstractLowCodeLoadOptionsProvider",
+      "role": "abstract_base",
+      "confidence": 1.0,
+      "reason": "Abstract class",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
+      "name": "AbstractLowCodeProtectionProvider",
+      "role": "abstract_base",
+      "confidence": 1.0,
+      "reason": "Abstract class",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": true,
+      "method_count": 6
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+      "name": "AbstractLowCodeSaveOptionsProvider",
+      "role": "abstract_base",
+      "confidence": 1.0,
+      "reason": "Abstract class",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "name": "HtmlConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: HtmlConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.ImageConverter",
+      "name": "ImageConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: ImageConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 3
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.JsonConverter",
+      "name": "JsonConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: JsonConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "name": "LowCodeHtmlSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeHtmlSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "name": "LowCodeImageSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeImageSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "name": "LowCodeLoadOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeLoadOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
+      "name": "LowCodeMergeOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeMergeOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "name": "LowCodePdfSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodePdfSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "name": "LowCodeSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+      "name": "LowCodeSaveOptionsProviderOfAssembling",
+      "role": "provider_callback",
+      "confidence": 0.95,
+      "reason": "Name matches callback/provider pattern: LowCodeSaveOptionsProviderOfAssembling",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": true,
+      "method_count": 1
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+      "name": "LowCodeSaveOptionsProviderOfPlaceHolders",
+      "role": "provider_callback",
+      "confidence": 0.95,
+      "reason": "Name matches callback/provider pattern: LowCodeSaveOptionsProviderOfPlaceHolders",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": true,
+      "method_count": 1
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
+      "name": "LowCodeSplitOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeSplitOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.PdfConverter",
+      "name": "PdfConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: PdfConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SplitPartInfo",
+      "name": "SplitPartInfo",
+      "role": "result_model",
+      "confidence": 0.9,
+      "reason": "Name ends with Result/Info: SplitPartInfo",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "name": "SpreadsheetConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: SpreadsheetConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "name": "SpreadsheetLocker",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: SpreadsheetLocker",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 4
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "name": "SpreadsheetMerger",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: SpreadsheetMerger",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "name": "SpreadsheetSplitter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: SpreadsheetSplitter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.TextConverter",
+      "name": "TextConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: TextConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    }
+  ]
+}

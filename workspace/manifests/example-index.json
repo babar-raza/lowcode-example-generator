@@ -1,0 +1,200 @@
+{
+  "total_examples": 9,
+  "generated": 9,
+  "repaired": 0,
+  "failed": 0,
+  "examples": [
+    {
+      "scenario_id": "cells-html-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\cells-html-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.HtmlConverter",
+        "Aspose.Cells.LowCode.HtmlConverter.Process",
+        "Aspose.Cells.LowCode.HtmlConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\cells-image-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.ImageConverter",
+        "Aspose.Cells.LowCode.ImageConverter.Process",
+        "Aspose.Cells.LowCode.ImageConverter.Process",
+        "Aspose.Cells.LowCode.ImageConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\cells-json-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.JsonConverter",
+        "Aspose.Cells.LowCode.JsonConverter.Process",
+        "Aspose.Cells.LowCode.JsonConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\cells-pdf-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.PdfConverter",
+        "Aspose.Cells.LowCode.PdfConverter.Process",
+        "Aspose.Cells.LowCode.PdfConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\cells-spreadsheet-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetConverter",
+        "Aspose.Cells.LowCode.SpreadsheetConverter.Process",
+        "Aspose.Cells.LowCode.SpreadsheetConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\cells-spreadsheet-locker.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\cells-spreadsheet-merger.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetMerger",
+        "Aspose.Cells.LowCode.SpreadsheetMerger.Process",
+        "Aspose.Cells.LowCode.SpreadsheetMerger.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\cells-spreadsheet-splitter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetSplitter",
+        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process",
+        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\input.xlsx"
+      ]
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\cells-text-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Cells",
+      "claimed_symbols": [
+        "Aspose.Cells.LowCode.TextConverter",
+        "Aspose.Cells.LowCode.TextConverter.Process",
+        "Aspose.Cells.LowCode.TextConverter.Process"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.csv"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\input.csv"
+      ]
+    }
+  ]
+}

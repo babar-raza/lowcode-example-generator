@@ -1,0 +1,253 @@
+{
+  "report_date": "2026-04-29",
+  "baseline_commit": "main",
+  "total_drifts": 16,
+  "severity_counts": {
+    "critical": 4,
+    "high": 6,
+    "medium": 4,
+    "low": 2
+  },
+  "drifts": [
+    {
+      "id": "DRIFT-01",
+      "title": "Runner reports success when builds fail",
+      "plan_requirement": "Gate 15 (validation) must fail if build fails",
+      "current_evidence": {
+        "file": "src/plugin_examples/runner.py",
+        "function": "run_pipeline() stage failure catch-all; _stage_validation()"
+      },
+      "gap_classification": "false_positive_reporting",
+      "severity": "critical",
+      "root_cause": "Catch-all degradation masks real failures; require_validation defaults to False",
+      "required_fix": "Remove blanket degradation. Only degrade stages with explicit optional semantics.",
+      "verification_command": "python -m pytest tests/unit/test_false_success_contracts.py::test_build_failure_blocks_full_e2e -v",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-02",
+      "title": "CLI forces template mode and skips runtime",
+      "plan_requirement": "Default CLI run must allow production mode",
+      "current_evidence": {
+        "file": "src/plugin_examples/__main__.py",
+        "function": "main() — hardcoded skip_run=True, template_mode=True"
+      },
+      "gap_classification": "configuration_override",
+      "severity": "critical",
+      "root_cause": "CLI written for prototype demo, not production",
+      "required_fix": "Add all missing CLI flags. Default to skip_run=False, template_mode=False.",
+      "verification_command": "python -m plugin_examples run --help",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-03",
+      "title": "Generated examples missing required output files",
+      "plan_requirement": "Each scenario must include Program.cs, .csproj, README.md, example.manifest.json, expected-output.json",
+      "current_evidence": {
+        "file": "src/plugin_examples/generator/project_generator.py",
+        "function": "generate_project() — only writes .csproj and Program.cs"
+      },
+      "gap_classification": "incomplete_output_contract",
+      "severity": "high",
+      "root_cause": "Generator written for minimum viable output",
+      "required_fix": "Add README.md, example.manifest.json, expected-output.json generation",
+      "verification_command": "ls workspace/runs/*/generated/cells/*/",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-04",
+      "title": "Generated .csproj uses inline package versions",
+      "plan_requirement": "Projects must use Directory.Packages.props for central version management",
+      "current_evidence": {
+        "file": "src/plugin_examples/generator/project_generator.py",
+        "function": "_generate_csproj() — Version=\"{package_version}\" inline"
+      },
+      "gap_classification": "build_configuration_drift",
+      "severity": "high",
+      "root_cause": "No Directory.Packages.props generation",
+      "required_fix": "Generate Directory.Packages.props. Remove Version from .csproj.",
+      "verification_command": "grep -r Version= workspace/runs/*/generated/cells/*/*.csproj",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-05",
+      "title": "Output validator ignores expected-output.json",
+      "plan_requirement": "Output validation must read expected-output.json and check files, sizes, patterns",
+      "current_evidence": {
+        "file": "src/plugin_examples/verifier_bridge/output_validator.py",
+        "function": "validate_output() — no file reading, no minBytes check"
+      },
+      "gap_classification": "validation_bypass",
+      "severity": "high",
+      "root_cause": "Validator written for basic stdout checking only",
+      "required_fix": "Add project_dir parameter. Read expected-output.json. Implement all checks.",
+      "verification_command": "python -m pytest tests/unit/test_false_success_contracts.py::test_output_validator_reads_expected_output_json -v",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-06",
+      "title": "Fixture registry registers directory paths as filenames",
+      "plan_requirement": "Fixture registry must index real files with metadata",
+      "current_evidence": {
+        "file": "src/plugin_examples/fixture_registry/registry.py",
+        "function": "build_fixture_registry() — registers path strings as filenames"
+      },
+      "gap_classification": "stub_implementation",
+      "severity": "high",
+      "root_cause": "No GitHub Contents API integration",
+      "required_fix": "Use GitHub Contents API to list actual files. Mark available=False on API failure.",
+      "verification_command": "Check workspace/manifests/fixture-registry.json entries",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-07",
+      "title": "Example miner registers paths but does not parse C# examples",
+      "plan_requirement": "Miner must fetch .cs files, extract symbols, cross-check catalog",
+      "current_evidence": {
+        "file": "src/plugin_examples/example_miner/miner.py",
+        "function": "mine_examples() — registers paths only; extract_symbols_from_code() never called"
+      },
+      "gap_classification": "stub_implementation",
+      "severity": "medium",
+      "root_cause": "No GitHub API integration for file fetching",
+      "required_fix": "Fetch .cs files. Call extract_symbols_from_code(). Cross-check catalog.",
+      "verification_command": "Check workspace/manifests/existing-examples-index.json used_symbols",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-08",
+      "title": "Scenario planner ignores missing fixtures",
+      "plan_requirement": "Missing fixture must block scenario",
+      "current_evidence": {
+        "file": "src/plugin_examples/scenario_planner/planner.py",
+        "function": "_build_scenario() — executes pass when fixtures not found"
+      },
+      "gap_classification": "safety_bypass",
+      "severity": "high",
+      "root_cause": "Fixture blocking deferred and never implemented",
+      "required_fix": "Replace pass with status=blocked_no_fixture",
+      "verification_command": "python -m pytest tests/unit/test_false_success_contracts.py::test_scenario_missing_fixture_is_blocked -v",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-09",
+      "title": "LLM router uses localhost only",
+      "plan_requirement": "Configurable endpoints via env vars",
+      "current_evidence": {
+        "file": "src/plugin_examples/llm_router/router.py",
+        "function": "LLMRouter — hardcoded localhost URLs"
+      },
+      "gap_classification": "configuration_limitation",
+      "severity": "medium",
+      "root_cause": "Hardcoded for local development",
+      "required_fix": "Add env var overrides and API key configuration",
+      "verification_command": "Set env vars and verify override behavior",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-10",
+      "title": "example-reviewer command is guessed",
+      "plan_requirement": "Reviewer integration must be proven and operational",
+      "current_evidence": {
+        "file": "src/plugin_examples/verifier_bridge/bridge.py",
+        "function": "run_example_reviewer() — command verified accurate but reviewer not installed"
+      },
+      "gap_classification": "integration_not_operational",
+      "severity": "medium",
+      "root_cause": "Reviewer repo not cloned or configured locally",
+      "required_fix": "Document gaps. Add env var config. Block publishing until operational.",
+      "verification_command": "Check workspace/verification/latest/example-reviewer-integration-surface.json",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-11",
+      "title": "Publisher does not check all required gates",
+      "plan_requirement": "Publisher must verify all 5 gate passes before publishing",
+      "current_evidence": {
+        "file": "src/plugin_examples/publisher/publisher.py",
+        "function": "publish_examples() — only checks status string; _verify_evidence() checks 2 files"
+      },
+      "gap_classification": "safety_bypass",
+      "severity": "critical",
+      "root_cause": "Publisher written for dry-run demo",
+      "required_fix": "Add gate_verdict parameter. Require all 5 passes. Expand evidence checks.",
+      "verification_command": "python -m pytest tests/unit/test_false_success_contracts.py::test_publisher_rejects_failed_build -v",
+      "blocks_publishing": true
+    },
+    {
+      "id": "DRIFT-12",
+      "title": "Package watcher does not resolve NuGet versions",
+      "plan_requirement": "Monthly watcher must resolve latest version from NuGet API",
+      "current_evidence": {
+        "file": "src/plugin_examples/package_watcher/watcher.py",
+        "function": "check_for_updates() — latest_version=None"
+      },
+      "gap_classification": "stub_implementation",
+      "severity": "medium",
+      "root_cause": "NuGet API integration deferred",
+      "required_fix": "Call NuGet Registration API. Compare versions.",
+      "verification_command": "python -m pytest tests/unit/test_false_success_contracts.py::test_package_watcher_detects_changed_version -v",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-13",
+      "title": "Experimental families active by default",
+      "plan_requirement": "Only cells is active pilot. Experimental families skip default runs.",
+      "current_evidence": {
+        "file": "pipeline/configs/families/email.yml, pdf.yml, slides.yml, words.yml",
+        "function": "enabled: true, status: experimental in active directory"
+      },
+      "gap_classification": "scope_creep",
+      "severity": "medium",
+      "root_cause": "Families moved from disabled/ prematurely",
+      "required_fix": "Move to disabled/ or enforce --allow-experimental flag",
+      "verification_command": "ls pipeline/configs/families/ (only cells.yml active)",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-14",
+      "title": "No evidence promotion to durable paths",
+      "plan_requirement": "Evidence promotable to workspace/verification/latest/",
+      "current_evidence": {
+        "file": "src/plugin_examples/runner.py",
+        "function": "run_pipeline() — no --promote-latest mechanism"
+      },
+      "gap_classification": "missing_feature",
+      "severity": "medium",
+      "root_cause": "Evidence promotion not implemented",
+      "required_fix": "Add --promote-latest flag and copy logic",
+      "verification_command": "ls workspace/verification/latest/ after --promote-latest run",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-15",
+      "title": "pytest-timeout not in dependencies",
+      "plan_requirement": "pytest-timeout must be declared if CI uses --timeout",
+      "current_evidence": {
+        "file": "pyproject.toml",
+        "function": "No pytest-timeout in dependencies"
+      },
+      "gap_classification": "missing_dependency",
+      "severity": "low",
+      "root_cause": "Dependency assumed from CI environment",
+      "required_fix": "Add pytest-timeout>=2.2 to optional dev dependencies",
+      "verification_command": "pip install -e '.[dev]'",
+      "blocks_publishing": false
+    },
+    {
+      "id": "DRIFT-16",
+      "title": "DllReflector build artifacts in working tree",
+      "plan_requirement": "Build artifacts must not be committed",
+      "current_evidence": {
+        "file": "tools/DllReflector/bin/, tools/DllReflector/obj/",
+        "function": "Local build artifacts, already gitignored, NOT git-tracked"
+      },
+      "gap_classification": "local_hygiene",
+      "severity": "low",
+      "root_cause": "Local compilation artifacts",
+      "required_fix": "Confirm not tracked. Optionally clean.",
+      "verification_command": "git ls-files tools/DllReflector/bin/ tools/DllReflector/obj/",
+      "blocks_publishing": false
+    }
+  ]
+}

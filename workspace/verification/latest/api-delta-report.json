@@ -1,0 +1,310 @@
+{
+  "initial_run": true,
+  "old_version": null,
+  "new_version": "26.4.0.0",
+  "summary": {
+    "added_types": 22,
+    "removed_types": 0,
+    "modified_types": 0,
+    "total_changes": 22
+  },
+  "added_types": [
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Finish",
+        "MoveNext"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Current"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "GetOpenPassword",
+        "GetWorkbookPassword",
+        "GetWorkbookProtectionType",
+        "GetWorksheetPassword",
+        "GetWorksheetProtectionType",
+        "GetWritePassword"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Finish",
+        "GetSaveOptions"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.ImageConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.JsonConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "HtmlOptions",
+        "SaveFormat"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ImageOptions",
+        "SaveFormat",
+        "SaveOptionsProvider"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "InputFile",
+        "InputStream"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "LoadOptionsProvider",
+        "SaveOptions"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "PdfOptions",
+        "SaveFormat"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OutputFile",
+        "OutputStream",
+        "SaveFormat"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "GetSaveOptions"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "BuildPathWithSheetAlways",
+        "BuildPathWithSplitPartAlways",
+        "PathHeader",
+        "PathTail",
+        "SaveOptionsTemplate",
+        "SheetIndexOffset",
+        "SheetPrefix",
+        "SplitPartIndexOffset",
+        "SplitPartPrefix",
+        "UseSheetName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "GetSaveOptions"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "BuildPathWithSheetAlways",
+        "BuildPathWithSplitPartAlways",
+        "SaveOptionsTemplate",
+        "SheetIndexOffset",
+        "SheetIndexPrefix",
+        "SheetNamePrefix",
+        "SplitPartIndexOffset",
+        "SplitPartPrefix"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "LoadOptions",
+        "SaveOptions",
+        "SaveOptionsProvider"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.PdfConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SplitPartInfo",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "PartIndex",
+        "SheetIndex",
+        "SheetName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.TextConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    }
+  ],
+  "removed_types": [],
+  "modified_types": []
+}

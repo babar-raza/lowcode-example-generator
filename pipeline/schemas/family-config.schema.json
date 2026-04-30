@@ -135,6 +135,32 @@
           "minItems": 1
         }
       }
+    },
+    "template_hints": {
+      "type": "object",
+      "description": "Optional hints for data-driven template generation. All fields have defaults.",
+      "properties": {
+        "default_input_extension": { "type": "string" },
+        "default_input_filename": { "type": "string" },
+        "array_input_filenames": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "input_creation_lines": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "merger_input_creation_lines": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "additional_usings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "default_output_extension": { "type": "string" },
+        "default_fixture_extension": { "type": "string" }
+      }
     }
   }
 }

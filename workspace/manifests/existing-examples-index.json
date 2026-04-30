@@ -1,0 +1,16 @@
+{
+  "family": "cells",
+  "total_examples": 1,
+  "stale_count": 0,
+  "examples": [
+    {
+      "example_id": "cells:Examples/CSharp",
+      "source_path": "Examples/CSharp",
+      "provenance": "aspose-cells/Aspose.Cells-for-.NET:master",
+      "used_symbols": [],
+      "validated": false,
+      "stale": false,
+      "stale_reason": null
+    }
+  ]
+}

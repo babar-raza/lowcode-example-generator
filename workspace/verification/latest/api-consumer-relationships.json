@@ -1,0 +1,210 @@
+{
+  "total_types": 22,
+  "types_with_consumers": 7,
+  "types_without_consumers": 15,
+  "relationships": {
+    "Aspose.Cells.LowCode.SpreadsheetLocker": [],
+    "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling": [],
+    "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "provider",
+        "is_static": true
+      }
+    ],
+    "Aspose.Cells.LowCode.TextConverter": [],
+    "Aspose.Cells.LowCode.SpreadsheetSplitter": [],
+    "Aspose.Cells.LowCode.LowCodeSplitOptions": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+        "consumer_method": "Process",
+        "parameter_name": "options",
+        "is_static": true
+      }
+    ],
+    "Aspose.Cells.LowCode.LowCodeImageSaveOptions": [],
+    "Aspose.Cells.LowCode.SpreadsheetConverter": [],
+    "Aspose.Cells.LowCode.LowCodeMergeOptions": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetMerger",
+        "consumer_method": "Process",
+        "parameter_name": "options",
+        "is_static": true
+      }
+    ],
+    "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.ImageConverter",
+        "consumer_method": "Process",
+        "parameter_name": "provider",
+        "is_static": true
+      }
+    ],
+    "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders": [],
+    "Aspose.Cells.LowCode.LowCodeLoadOptions": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+        "consumer_method": "Finish",
+        "parameter_name": "part",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.HtmlConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.ImageConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.ImageConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.JsonConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.PdfConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.TextConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      }
+    ],
+    "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider": [],
+    "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions": [],
+    "Aspose.Cells.LowCode.PdfConverter": [],
+    "Aspose.Cells.LowCode.SpreadsheetMerger": [],
+    "Aspose.Cells.LowCode.HtmlConverter": [],
+    "Aspose.Cells.LowCode.JsonConverter": [],
+    "Aspose.Cells.LowCode.SplitPartInfo": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+        "consumer_method": "GetSaveOptions",
+        "parameter_name": "part",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+        "consumer_method": "GetSaveOptions",
+        "parameter_name": "part",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+        "consumer_method": "GetSaveOptions",
+        "parameter_name": "part",
+        "is_static": false
+      }
+    ],
+    "Aspose.Cells.LowCode.ImageConverter": [],
+    "Aspose.Cells.LowCode.LowCodePdfSaveOptions": [],
+    "Aspose.Cells.LowCode.LowCodeSaveOptions": [
+      {
+        "consumer_type": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+        "consumer_method": "Finish",
+        "parameter_name": "part",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.HtmlConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.ImageConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.ImageConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.JsonConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.PdfConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Cells.LowCode.TextConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      }
+    ]
+  }
+}

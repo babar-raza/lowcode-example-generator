@@ -1,6 +1,93 @@
-enabled: false
-status: disabled
 family: words
 display_name: Aspose.Words for .NET
-# Remaining fields are intentionally incomplete.
-# Complete and move to pipeline/configs/families/ when ready to enable.
+enabled: true
+status: experimental
+
+nuget:
+  package_id: Aspose.Words
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+    - net48
+  dependency_resolution:
+    enabled: true
+    max_depth: 2
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.Words.LowCode
+    - Aspose.Words.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-words
+    repo: Aspose.Words-for-.NET
+    branch: master
+
+  published_plugin_examples_repo:
+    owner: aspose
+    repo: aspose-plugins-examples-dotnet
+    branch: main
+
+fixtures:
+  sources:
+    - type: github
+      owner: aspose-words
+      repo: Aspose.Words-for-.NET
+      branch: master
+      paths:
+        - Examples/Data
+
+existing_examples:
+  sources:
+    - type: github
+      owner: aspose-words
+      repo: Aspose.Words-for-.NET
+      branch: master
+      paths:
+        - Examples/DocsExamples
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 10
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: true
+  require_example_reviewer: true
+  runtime_runner: auto
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama
+
+template_hints:
+  default_input_extension: ".docx"
+  default_input_filename: "input.docx"
+  array_input_filenames: ["input1.docx", "input2.docx"]
+  input_creation_lines:
+    - 'var doc = new Document();'
+    - 'var builder = new DocumentBuilder(doc);'
+    - 'builder.Writeln("Hello World");'
+    - 'doc.Save("input.docx");'
+  merger_input_creation_lines:
+    - 'var doc1 = new Document();'
+    - 'new DocumentBuilder(doc1).Writeln("Document 1");'
+    - 'doc1.Save("input1.docx");'
+    - 'var doc2 = new Document();'
+    - 'new DocumentBuilder(doc2).Writeln("Document 2");'
+    - 'doc2.Save("input2.docx");'
+  additional_usings:
+    - "Aspose.Words"
+  default_output_extension: ".docx"
+  default_fixture_extension: ".docx"

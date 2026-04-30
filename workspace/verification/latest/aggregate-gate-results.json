@@ -1,0 +1,12 @@
+{
+  "total_generated": 9,
+  "total_built": 9,
+  "total_runtime_passed": 9,
+  "total_runtime_blocked": 0,
+  "total_pr_candidates": 9,
+  "total_excluded": 0,
+  "aggregate_build_status": "passed_all",
+  "aggregate_run_status": "passed_all",
+  "aggregate_reviewer_status": "passed_all",
+  "blocked_reasons": {}
+}

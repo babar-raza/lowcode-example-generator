@@ -1,0 +1,50 @@
+{
+  "report_date": "2026-04-29",
+  "repo": "https://github.com/babar-raza/example-reviewer",
+  "owner": "babar-raza",
+  "cli_exists": true,
+  "cli_entry_point": "python -m src.cli.main",
+  "python_module_exists": true,
+  "python_module_entry": "src.cli.main",
+  "http_api_exists": false,
+  "mcp_server_exists": true,
+  "mcp_transport": "stdio",
+  "required_inputs": [
+    "family config JSON (config/families/{family}.json)",
+    "workspace directory with generated examples",
+    ".NET SDK for compile/runtime operations",
+    "SQLite database (data/example_reviewer.db)"
+  ],
+  "expected_outputs": {
+    "compile_verify": "JSON with pass/fail per example compilation",
+    "runtime_verify": "JSON with pass/fail per example execution",
+    "final_review": "JSON with LLM review results"
+  },
+  "config_files": [
+    "config/families/{family}.json",
+    "data/example_reviewer.db"
+  ],
+  "json_output_supported": true,
+  "json_flag": "--json",
+  "exact_commands": {
+    "status": "python -m src.cli.main status --json",
+    "compile_verify": "python -m src.cli.main compile-verify --family {family} --json",
+    "runtime_verify": "python -m src.cli.main runtime-verify --family {family} --json",
+    "final_review": "python -m src.cli.main final-review --family {family} --json"
+  },
+  "global_flags": ["--config-dir", "--db-path", "--workspace-dir", "--verbose", "--json"],
+  "bridge_file": "src/plugin_examples/verifier_bridge/bridge.py",
+  "bridge_command_accurate": true,
+  "bridge_availability_check": "python -m src.cli.main status --json",
+  "bridge_verify_command": "python -m src.cli.main compile-verify --family {family} --json",
+  "gaps_blocking_integration": [
+    "Reviewer not cloned locally — repo not present as sibling or submodule",
+    "No EXAMPLE_REVIEWER_PATH env var support in bridge.py",
+    "Reviewer SQLite database not initialized",
+    "JSON output schema from compile-verify not validated against bridge parser",
+    "No cells family config validated in reviewer"
+  ],
+  "locally_operational": false,
+  "blocks_publishing": true,
+  "recommended_action": "Clone reviewer repo, install dependencies, initialize database, validate compile-verify JSON output against bridge.py parser"
+}

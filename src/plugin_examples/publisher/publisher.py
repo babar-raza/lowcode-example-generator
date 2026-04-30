@@ -115,11 +115,14 @@ def write_publishing_report(
 
 
 def _verify_evidence(verification_dir: Path, family: str) -> dict:
-    """Verify all required evidence files exist."""
+    """Verify all required evidence files exist for publishing."""
     latest = verification_dir / "latest"
     required = [
         f"{family}-source-of-truth-proof.json",
         "validation-results.json",
+        "gate-results.json",
+        "example-reviewer-results.json",
+        "scenario-catalog.json",
     ]
 
     missing = []
@@ -127,7 +130,20 @@ def _verify_evidence(verification_dir: Path, family: str) -> dict:
         if not (latest / filename).exists():
             missing.append(filename)
 
+    # Also verify gate-results content if present
+    gate_path = latest / "gate-results.json"
+    verdict_ok = False
+    if gate_path.exists():
+        try:
+            with open(gate_path) as f:
+                gate_data = json.load(f)
+            verdict_ok = gate_data.get("publishable", False)
+            if not verdict_ok:
+                missing.append(f"gate verdict not publishable: {gate_data.get('verdict', 'UNKNOWN')}")
+        except (json.JSONDecodeError, OSError):
+            missing.append("gate-results.json unreadable")
+
     return {
-        "all_present": len(missing) == 0,
+        "all_present": len(missing) == 0 and verdict_ok,
         "missing": missing,
     }

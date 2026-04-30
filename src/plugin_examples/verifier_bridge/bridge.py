@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -39,7 +40,8 @@ def check_reviewer_availability(
         return False
 
     try:
-        cmd = ["python", "-m", "src.cli.main", "status", "--json"]
+        python_exe = _get_reviewer_python(reviewer_path)
+        cmd = [python_exe, "-m", "src.cli.main", "--json", "--safe-workspace", "status"]
         result = subprocess.run(
             cmd,
             cwd=str(reviewer_path) if reviewer_path else None,
@@ -50,6 +52,36 @@ def check_reviewer_availability(
         return result.returncode == 0
     except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
         return False
+
+
+def _get_reviewer_python(reviewer_path: Path | None) -> str:
+    """Get the Python executable for the reviewer (prefer its venv)."""
+    if reviewer_path:
+        # Windows venv
+        venv_python = reviewer_path / ".venv" / "Scripts" / "python.exe"
+        if venv_python.exists():
+            return str(venv_python)
+        # Unix venv
+        venv_python = reviewer_path / ".venv" / "bin" / "python"
+        if venv_python.exists():
+            return str(venv_python)
+    return "python"
+
+
+def _resolve_reviewer_path(reviewer_path: Path | None = None) -> Path | None:
+    """Resolve reviewer path from explicit arg, env var, or sibling directory."""
+    if reviewer_path:
+        return reviewer_path
+    env_path = os.environ.get("EXAMPLE_REVIEWER_PATH")
+    if env_path:
+        p = Path(env_path)
+        if p.exists():
+            return p
+    # Try sibling directory convention
+    sibling = Path(__file__).resolve().parents[3] / "example-reviewer"
+    if sibling.exists():
+        return sibling
+    return None
 
 
 def run_example_reviewer(
@@ -73,6 +105,7 @@ def run_example_reviewer(
     Raises:
         ReviewerUnavailableError: If reviewer is not available.
     """
+    reviewer_path = _resolve_reviewer_path(reviewer_path)
     if not check_reviewer_availability(reviewer_path):
         raise ReviewerUnavailableError(
             "example-reviewer is not available. "
@@ -80,11 +113,12 @@ def run_example_reviewer(
         )
 
     try:
+        python_exe = _get_reviewer_python(reviewer_path)
         cmd = [
-            "python", "-m", "src.cli.main",
+            python_exe, "-m", "src.cli.main",
+            "--json", "--safe-workspace",
             "compile-verify",
             "--family", family,
-            "--json",
         ]
 
         proc = subprocess.run(

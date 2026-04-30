@@ -1,0 +1,226 @@
+{
+  "total_scenarios": 22,
+  "ready": 9,
+  "blocked": 13,
+  "strategies": {
+    "generated_fixture_file": 9,
+    "existing_fixture": 0,
+    "programmatic_input": 0,
+    "none": 13,
+    "no_valid_input_strategy": 0
+  },
+  "scenarios": [
+    {
+      "scenario_id": "cells-html-converter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "required_input_formats": [
+        ".xlsx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.xlsx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "required_input_formats": [
+        ".csv"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.csv"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-abstract-low-code-load-options-provider",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_abstract_base",
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-abstract-low-code-protection-provider",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_abstract_base",
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-abstract-low-code-save-options-provider",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_abstract_base",
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-html-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-image-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-load-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-merge-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-pdf-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-save-options-provider-of-assembling",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_provider_callback",
+      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-save-options-provider-of-place-holders",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_provider_callback",
+      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-low-code-split-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_options",
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
+    },
+    {
+      "scenario_id": "cells-split-part-info",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_result_model",
+      "blocked_reason": "Role 'result_model' is not a standalone entrypoint"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "analysis_date": "2026-04-29",
+  "assembly": "Aspose.Cells 26.4.0.0",
+  "namespace": "Aspose.Cells.LowCode",
+  "failing_scenarios": {
+    "cells-html-converter": {
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object.",
+      "root_cause": "Generated code calls HtmlConverter.Process(null, null) to demonstrate the options overload, causing NullReferenceException",
+      "fix": "Remove the second overload call. Use only Process(templateFile, resultFile)."
+    },
+    "cells-spreadsheet-locker": {
+      "error": "Aspose.Cells.CellsException: No input has been specified for the process.",
+      "root_cause": "Generated code creates empty LowCodeLoadOptions without setting InputFile, then calls Process(loadOptions, saveOptions, ...). LowCodeLoadOptions requires InputFile to be set.",
+      "fix": "Remove extra overload calls. Use only Process(templateFile, resultFile, openPassword, writePassword)."
+    }
+  },
+  "options_types": {
+    "LowCodeLoadOptions": {
+      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "kind": "class",
+      "xml_summary": "Options for loading template file.",
+      "constructors": ["default (no parameters)"],
+      "properties": {
+        "InputFile": {"type": "System.String", "read": true, "write": true, "required_before_use": true},
+        "InputStream": {"type": "System.IO.Stream", "read": true, "write": true, "required_before_use": true}
+      },
+      "rule": "MUST set either InputFile or InputStream before passing to any Process method"
+    },
+    "LowCodeSaveOptions": {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "kind": "class",
+      "xml_summary": "Options for saving generated results in low code way.",
+      "constructors": ["default (no parameters)"],
+      "properties": {
+        "OutputFile": {"type": "System.String", "read": true, "write": true},
+        "OutputStream": {"type": "System.IO.Stream", "read": true, "write": true},
+        "SaveFormat": {"type": "Aspose.Cells.SaveFormat", "read": true, "write": true}
+      },
+      "rule": "MUST set either OutputFile or OutputStream before passing to any Process method"
+    },
+    "LowCodeHtmlSaveOptions": {
+      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "kind": "class",
+      "inherits_from": "LowCodeSaveOptions (implied)",
+      "properties": {
+        "HtmlOptions": {"type": "Aspose.Cells.HtmlSaveOptions", "read": true, "write": true},
+        "SaveFormat": {"type": "Aspose.Cells.SaveFormat", "read": true, "write": true}
+      }
+    },
+    "LowCodePdfSaveOptions": {
+      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "kind": "class",
+      "properties": {
+        "PdfOptions": {"type": "Aspose.Cells.PdfSaveOptions", "read": true, "write": true},
+        "SaveFormat": {"type": "Aspose.Cells.SaveFormat", "read": true, "write": true}
+      }
+    },
+    "LowCodeImageSaveOptions": {
+      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "kind": "class",
+      "properties": {
+        "ImageOptions": {"type": "Aspose.Cells.Rendering.ImageOrPrintOptions", "read": true, "write": true},
+        "SaveFormat": {"type": "Aspose.Cells.SaveFormat", "read": true, "write": true},
+        "SaveOptionsProvider": {"type": "AbstractLowCodeSaveOptionsProvider", "read": true, "write": true}
+      }
+    }
+  },
+  "workflow_root_overloads": {
+    "HtmlConverter": {
+      "simple": "Process(templateFile: string, resultFile: string)",
+      "options": "Process(loadOptions: LowCodeLoadOptions, saveOptions: LowCodeSaveOptions)",
+      "preferred": "simple",
+      "reason": "Simple overload works for standard file-to-file conversion"
+    },
+    "SpreadsheetLocker": {
+      "simple": "Process(templateFile: string, resultFile: string, openPassword: string, writePassword: string)",
+      "options_basic": "Process(loadOptions, saveOptions, openPassword: string, writePassword: string)",
+      "options_full": "Process(loadOptions, saveOptions, openPassword, writePassword, workbookPassword, workbookType)",
+      "options_provider": "Process(loadOptions, saveOptions, provider: AbstractLowCodeProtectionProvider)",
+      "preferred": "simple",
+      "reason": "Simple overload works for standard lock-with-password use case"
+    }
+  },
+  "key_insight": "ALL Cells LowCode workflow roots have a simple string-path overload AND an options-based overload. The generated examples MUST use ONLY ONE overload per example — the simplest one. Do NOT demonstrate multiple overloads in a single example.",
+  "rule_for_llm": "Call exactly ONE overload of each LowCode API. Prefer the string-path overload. If you must use options, set LowCodeLoadOptions.InputFile and LowCodeSaveOptions.OutputFile before calling Process()."
+}

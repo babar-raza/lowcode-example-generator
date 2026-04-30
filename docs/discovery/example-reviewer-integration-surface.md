@@ -63,6 +63,16 @@ The example-reviewer expects:
 - .NET SDK for compilation
 - Optional: Ollama/LLM for compile-fix, runtime-fix, final-review
 
+## Gaps Blocking Integration
+
+1. **Reviewer not cloned locally** — The `example-reviewer` repo is not present as a sibling directory or submodule. The bridge (`verifier_bridge/bridge.py`) calls `python -m src.cli.main` but this requires the reviewer repo to be the working directory.
+2. **No family config for cells in reviewer** — The reviewer has configs for: cad, cells, email, html, imaging, medical, page, pdf, slides, smoke, tasks, tex, words, zip. The `cells` config may exist but has not been validated against the pipeline's generated example format.
+3. **No env var configuration** — The bridge hardcodes the subprocess command. There is no `EXAMPLE_REVIEWER_PATH` or `EXAMPLE_REVIEWER_CMD` environment variable support to locate the reviewer installation.
+4. **Reviewer database not initialized** — The reviewer expects a SQLite database at `data/example_reviewer.db`. This database does not exist until the reviewer is installed and initialized.
+5. **No JSON output contract validated** — While `--json` flag is documented, the exact JSON schema of compile-verify output has not been validated against what `bridge.py` parses.
+
+**Verdict:** Reviewer integration is accurately coded but not operational. Publishing MUST be blocked until the reviewer is cloned, configured, and proven to return valid JSON for the cells family.
+
 ## Status
 
 - Repo accessible: YES
@@ -70,3 +80,5 @@ The example-reviewer expects:
 - MCP documented: YES
 - Family configs exist for: cad, cells, email, html, imaging, medical, page, pdf, slides, smoke, tasks, tex, words, zip
 - Integration mode selected: CLI subprocess
+- **Locally operational: NO** (reviewer not cloned, database not initialized)
+- **Blocks publishing: YES**

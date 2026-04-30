@@ -1,0 +1,9 @@
+{
+  "dry_run": true,
+  "branch_name": null,
+  "pr_url": null,
+  "files_included": [],
+  "evidence_verified": false,
+  "status": "blocked",
+  "blocked_reason": "Missing evidence: ['gate-results.json', 'scenario-catalog.json']"
+}

@@ -1,0 +1,11 @@
+{
+  "reviewer_path_configured": true,
+  "reviewer_path_exists": true,
+  "reviewer_python_found": true,
+  "reviewer_cli_responds": true,
+  "reviewer_version": null,
+  "dotnet_sdk_found": true,
+  "dotnet_sdk_version": "9.0.200",
+  "overall_ready": true,
+  "issues": []
+}

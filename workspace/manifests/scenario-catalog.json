@@ -1,0 +1,211 @@
+{
+  "family": "cells",
+  "ready_count": 9,
+  "blocked_count": 13,
+  "scenarios": [
+    {
+      "scenario_id": "cells-html-converter",
+      "title": "Use HtmlConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.HtmlConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.HtmlConverter",
+        "Aspose.Cells.LowCode.HtmlConverter.Process",
+        "Aspose.Cells.LowCode.HtmlConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.html using HtmlConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.html",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "title": "Use ImageConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.ImageConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.ImageConverter",
+        "Aspose.Cells.LowCode.ImageConverter.Process",
+        "Aspose.Cells.LowCode.ImageConverter.Process",
+        "Aspose.Cells.LowCode.ImageConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.png using ImageConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.png",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "title": "Use JsonConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.JsonConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.JsonConverter",
+        "Aspose.Cells.LowCode.JsonConverter.Process",
+        "Aspose.Cells.LowCode.JsonConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.json using JsonConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.json",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "title": "Use PdfConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.PdfConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.PdfConverter",
+        "Aspose.Cells.LowCode.PdfConverter.Process",
+        "Aspose.Cells.LowCode.PdfConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.pdf using PdfConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "title": "Use SpreadsheetConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetConverter",
+        "Aspose.Cells.LowCode.SpreadsheetConverter.Process",
+        "Aspose.Cells.LowCode.SpreadsheetConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.xlsx using SpreadsheetConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "title": "Use SpreadsheetLocker from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetLocker",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
+        "Aspose.Cells.LowCode.SpreadsheetLocker.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.xlsx using SpreadsheetLocker",
+      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "title": "Use SpreadsheetMerger from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetMerger",
+        "Aspose.Cells.LowCode.SpreadsheetMerger.Process",
+        "Aspose.Cells.LowCode.SpreadsheetMerger.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.xlsx using SpreadsheetMerger",
+      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "title": "Use SpreadsheetSplitter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.SpreadsheetSplitter",
+        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process",
+        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process"
+      ],
+      "required_fixtures": [
+        "input.xlsx"
+      ],
+      "output_plan": "Convert input.xlsx to output.xlsx using SpreadsheetSplitter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "title": "Use TextConverter from Aspose.Cells.LowCode",
+      "target_type": "Aspose.Cells.LowCode.TextConverter",
+      "target_namespace": "Aspose.Cells.LowCode",
+      "target_methods": [
+        "Process",
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Cells.LowCode.TextConverter",
+        "Aspose.Cells.LowCode.TextConverter.Process",
+        "Aspose.Cells.LowCode.TextConverter.Process"
+      ],
+      "required_fixtures": [
+        "input.csv"
+      ],
+      "output_plan": "Convert input.csv to output.txt using TextConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.txt",
+      "status": "ready",
+      "blocked_reason": null
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 family: words
 display_name: Aspose.Words for .NET
 enabled: true
-status: experimental
+status: discovery_only
 
 nuget:
   package_id: Aspose.Words

@@ -1,0 +1,64 @@
+Files directly read during this investigation:
+
+README.md (original — 2-line placeholder)
+AGENTS.md
+pyproject.toml
+pipeline/configs/families/cells.yml
+pipeline/configs/families/words.yml
+pipeline/configs/families/pdf.yml
+src/plugin_examples/llm_router/provider_policy.py
+docs/ci/environment-variables.md
+.github/workflows/build-and-test.yml
+workspace/verification/latest/release-status.json
+
+Files explored via Explore agents (not read line-by-line but contents reported):
+src/plugin_examples/__main__.py
+src/plugin_examples/runner.py
+src/plugin_examples/family_config/models.py
+src/plugin_examples/family_config/loader.py
+src/plugin_examples/scenario_planner/planner.py
+src/plugin_examples/scenario_planner/type_classifier.py
+src/plugin_examples/scenario_planner/consumer_mapper.py
+src/plugin_examples/scenario_planner/entrypoint_scorer.py
+src/plugin_examples/llm_router/router.py
+src/plugin_examples/fixture_registry/registry.py
+src/plugin_examples/fixture_registry/fixture_factory.py
+src/plugin_examples/generator/packet_builder.py
+src/plugin_examples/generator/code_generator.py
+src/plugin_examples/generator/project_generator.py
+src/plugin_examples/publisher/publisher.py
+src/plugin_examples/publisher/pr_builder.py
+src/plugin_examples/publisher/github_pr_publisher.py
+src/plugin_examples/publisher/github_pr_merger.py
+src/plugin_examples/publisher/approval_gate.py
+src/plugin_examples/publisher/merge_approval_gate.py
+src/plugin_examples/publisher/readme_renderer.py
+src/plugin_examples/publisher/readme_auditor.py
+src/plugin_examples/publisher/aspose_links.py
+src/plugin_examples/publisher/release_status.py
+src/plugin_examples/publisher/publish_readiness.py
+src/plugin_examples/publisher/publish_permission_probe.py
+src/plugin_examples/publisher/repo_access_resolver.py
+src/plugin_examples/verifier_bridge/bridge.py
+src/plugin_examples/verifier_bridge/dotnet_runner.py
+src/plugin_examples/verifier_bridge/output_validator.py
+src/plugin_examples/verifier_bridge/reviewer_preflight.py
+src/plugin_examples/gates/evaluator.py
+src/plugin_examples/gates/example_gates.py
+src/plugin_examples/gates/models.py
+src/plugin_examples/gates/writer.py
+src/plugin_examples/discovery_sweep.py
+src/plugin_examples/dependencies/assembly_identity.py
+tools/DllReflector/Program.cs
+templates/root-readme/lowcode-family-readme.md.j2
+workspace/verification/latest/scenario-catalog.json (first 50 lines)
+workspace/verification/latest/validation-results.json (first 50 lines)
+workspace/verification/latest/pr-candidate-manifest.json (first 50 lines)
+workspace/manifests/scenario-catalog.json
+workspace/manifests/fixture-registry.json
+pipeline/schemas/family-config.schema.json
+tests/unit/ (all 27 test file names + test summaries via agent)
+.github/workflows/build-and-test.yml
+docs/discovery/ (multiple files sampled)
+docs/publishing/ (sampled)
+docs/ci/environment-variables.md

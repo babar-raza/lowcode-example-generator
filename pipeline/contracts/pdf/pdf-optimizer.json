@@ -1,0 +1,40 @@
+{
+  "scenario_id": "pdf-optimizer",
+  "family": "pdf",
+  "type_name": "Optimizer",
+  "full_type_name": "Aspose.Pdf.LowCode.Optimizer",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Optimizer",
+    "Optimizer.Process",
+    "OptimizeOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "using Aspose.Pdf.LowCode.DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var options = new OptimizeOptions(); options.AddInput(new FileDataSource(...)); options.AddOutput(new FileDataSource(...)); new Optimizer().Process(options). CRITICAL: 'using Aspose.Pdf.LowCode.DataSources' is FORBIDDEN — this sub-namespace does not exist. Use Aspose.Pdf.Plugins namespace for FileDataSource."
+  },
+  "publication_status": "REVIEWER_PASSED",
+  "lifecycle_status": "REVIEWER_PASSED_AWAITING_PR",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/latest/pdf-optimizer-fix-final-verification.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

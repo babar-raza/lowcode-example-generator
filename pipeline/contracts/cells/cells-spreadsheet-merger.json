@@ -1,0 +1,32 @@
+{
+  "scenario_id": "cells-spreadsheet-merger",
+  "family": "cells",
+  "type_name": "SpreadsheetMerger",
+  "full_type_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "generated_fixture_file",
+  "expected_symbols": [
+    "SpreadsheetMerger",
+    "SpreadsheetMerger.Process"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".xlsx",
+    "validation_method": "file_exists",
+    "notes": "Static API: SpreadsheetMerger.Process(inputPaths[], outputPath). Merges multiple xlsx into one."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/cells-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

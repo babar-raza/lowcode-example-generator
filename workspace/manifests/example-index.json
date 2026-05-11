@@ -1,200 +1,137 @@
 {
-  "total_examples": 9,
-  "generated": 9,
-  "repaired": 0,
+  "total_examples": 3,
+  "generated": 0,
+  "repaired": 3,
   "failed": 0,
   "examples": [
     {
-      "scenario_id": "cells-html-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\cells-html-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\Program.cs",
+      "scenario_id": "pdf-optimizer",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-optimizer",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-optimizer\\Program.cs",
       "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
+      "package_id": "Aspose.PDF",
       "claimed_symbols": [
-        "Aspose.Cells.LowCode.HtmlConverter",
-        "Aspose.Cells.LowCode.HtmlConverter.Process",
-        "Aspose.Cells.LowCode.HtmlConverter.Process"
+        "Aspose.Pdf.LowCode.Optimizer",
+        "Aspose.Pdf.LowCode.Optimizer.Process"
       ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
+      "status": "repaired",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf;' and 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
+        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        "REQUIRED: options class is 'OptimizeOptions' \u2014 do NOT use any other class name",
+        "REQUIRED: plugin class is 'Optimizer' \u2014 do NOT use any other class name",
+        "REQUIRED: exact usage pattern:\n    var options = new OptimizeOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Optimizer().Process(options);",
+        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object"
       ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-html-converter\\input.xlsx"
-      ]
+      "type_short": "optimizer"
     },
     {
-      "scenario_id": "cells-image-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\cells-image-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\Program.cs",
+      "scenario_id": "pdf-splitter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-splitter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-splitter\\pdf-splitter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-splitter\\Program.cs",
       "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
+      "package_id": "Aspose.PDF",
       "claimed_symbols": [
-        "Aspose.Cells.LowCode.ImageConverter",
-        "Aspose.Cells.LowCode.ImageConverter.Process",
-        "Aspose.Cells.LowCode.ImageConverter.Process",
-        "Aspose.Cells.LowCode.ImageConverter.Process"
+        "Aspose.Pdf.LowCode.Splitter",
+        "Aspose.Pdf.LowCode.Splitter.Process"
       ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
+      "status": "repaired",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf;' and 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
+        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        "REQUIRED: options class is 'SplitOptions' \u2014 do NOT use any other class name",
+        "REQUIRED: plugin class is 'Splitter' \u2014 do NOT use any other class name",
+        "REQUIRED: exact usage pattern:\n    var options = new SplitOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Splitter().Process(options);",
+        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object"
       ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-image-converter\\input.xlsx"
-      ]
+      "type_short": "splitter"
     },
     {
-      "scenario_id": "cells-json-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\cells-json-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\Program.cs",
+      "scenario_id": "pdf-text-extractor",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-text-extractor",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-text-extractor\\Program.cs",
       "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
+      "package_id": "Aspose.PDF",
       "claimed_symbols": [
-        "Aspose.Cells.LowCode.JsonConverter",
-        "Aspose.Cells.LowCode.JsonConverter.Process",
-        "Aspose.Cells.LowCode.JsonConverter.Process"
+        "Aspose.Pdf.LowCode.TextExtractor"
       ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
+      "status": "repaired",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf;' and 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
+        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        "REQUIRED: options class is 'TextExtractorOptions' \u2014 do NOT use any other class name",
+        "REQUIRED: plugin class is 'TextExtractor' \u2014 do NOT use any other class name",
+        "REQUIRED: exact usage pattern:\n    var options = new TextExtractorOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    var result = new TextExtractor().Process(options);\n    if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)\n        Console.WriteLine(\"Extracted: \" + sr.Text);",
+        "FORBIDDEN: TextAbsorber \u2014 TextAbsorber is in Aspose.Pdf.Text and is the CORE (non-LowCode) API. NEVER use TextAbsorber in a LowCode example.",
+        "FORBIDDEN: pdfDoc.Pages.Accept(absorber) \u2014 this is the core PDF API pattern, not LowCode",
+        "FORBIDDEN: AddOutput() call for TextExtractor \u2014 result is in ResultCollection, not a file",
+        "REQUIRED: 'using Aspose.Pdf.Text;' ONLY for TextFragment creation (input PDF). The extraction MUST use Aspose.Pdf.LowCode.TextExtractor.",
+        "REQUIRED: check result with 'if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)'",
+        "REQUIRED: access extracted text as 'sr.Text'",
+        "FORBIDDEN: result.ResultCollection[0].Value \u2014 StringResult has no .Value property; use .Text (via cast or pattern match)",
+        "REQUIRED: add 'using Aspose.Pdf.Text;' if you use TextFragment to build the input PDF"
       ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-json-converter\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-pdf-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\cells-pdf-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.PdfConverter",
-        "Aspose.Cells.LowCode.PdfConverter.Process",
-        "Aspose.Cells.LowCode.PdfConverter.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-pdf-converter\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-spreadsheet-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\cells-spreadsheet-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.SpreadsheetConverter",
-        "Aspose.Cells.LowCode.SpreadsheetConverter.Process",
-        "Aspose.Cells.LowCode.SpreadsheetConverter.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-converter\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-spreadsheet-locker",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\cells-spreadsheet-locker.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.SpreadsheetLocker",
-        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
-        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
-        "Aspose.Cells.LowCode.SpreadsheetLocker.Process",
-        "Aspose.Cells.LowCode.SpreadsheetLocker.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-locker\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-spreadsheet-merger",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\cells-spreadsheet-merger.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.SpreadsheetMerger",
-        "Aspose.Cells.LowCode.SpreadsheetMerger.Process",
-        "Aspose.Cells.LowCode.SpreadsheetMerger.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-merger\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-spreadsheet-splitter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\cells-spreadsheet-splitter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.SpreadsheetSplitter",
-        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process",
-        "Aspose.Cells.LowCode.SpreadsheetSplitter.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.xlsx"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-spreadsheet-splitter\\input.xlsx"
-      ]
-    },
-    {
-      "scenario_id": "cells-text-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\cells-text-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.Cells",
-      "claimed_symbols": [
-        "Aspose.Cells.LowCode.TextConverter",
-        "Aspose.Cells.LowCode.TextConverter.Process",
-        "Aspose.Cells.LowCode.TextConverter.Process"
-      ],
-      "status": "generated",
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.csv"
-      ],
-      "placed_fixtures": [
-        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260430-132804\\generated\\cells\\cells-text-converter\\input.csv"
-      ]
+      "type_short": "textextractor"
     }
   ]
 }

@@ -46,6 +46,53 @@ _PATTERNS: list[tuple[str, str, bool, str]] = [
         "Use the simple string-path overload, or set InputFile on LowCodeLoadOptions.",
     ),
     (
+        r"Input file not found:.*\.docx",
+        "pdf_wrong_input_extension",
+        True,
+        "PDF: input file referenced as .docx — PDF LowCode requires .pdf inputs. "
+        "Create input with 'new Aspose.Pdf.Document(); doc.Save(\"input.pdf\")' "
+        "and reference 'input.pdf'.",
+    ),
+    (
+        r"cannot convert.*FileSaveTarget.*IDataSource|FileSaveTarget.*cannot.*IDataSource",
+        "pdf_wrong_output_type",
+        True,
+        "PDF: AddOutput() takes IDataSource but FileSaveTarget was used. "
+        "Replace new FileSaveTarget(path) with new FileDataSource(path) for output.",
+    ),
+    (
+        r"no overload.*method.*'Process'|'Process'.*no overload|CS1501.*Process|CS1503.*Process.*string\[\]",
+        "pdf_merger_wrong_overload",
+        True,
+        "PDF: Merger.Process() called with wrong argument types (e.g. string array). "
+        "Use: var options = new MergeOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); "
+        "options.AddOutput(new FileDataSource(\"output.pdf\")); new Merger().Process(options);",
+    ),
+    (
+        r"TextAbsorber|pdfDoc\.Pages\.Accept\(absorber\)",
+        "pdf_wrong_api_textabsorber",
+        True,
+        "PDF: Code references TextAbsorber (core Aspose.Pdf.Text API) instead of LowCode TextExtractor. "
+        "Replace with: var options = new TextExtractorOptions(); "
+        "options.AddInput(new FileDataSource(\"input.pdf\")); "
+        "var result = new TextExtractor().Process(options); "
+        "Console.WriteLine(((StringResult)result.ResultCollection[0]).Text);",
+    ),
+    (
+        r"does not contain a definition for 'IsSuccess'",
+        "pdf_result_is_success_missing",
+        True,
+        "PDF: ResultContainer has no IsSuccess property. "
+        "Replace result.IsSuccess with result.ResultCollection.Count > 0.",
+    ),
+    (
+        r"does not contain a definition for 'OperationResult'",
+        "pdf_result_operation_result_missing",
+        True,
+        "PDF: ResultContainer has no OperationResult property. "
+        "Replace result.OperationResult with result.ResultCollection.",
+    ),
+    (
         r"System\.NullReferenceException.*LowCode|LowCode.*System\.NullReferenceException",
         "null_options_passed",
         True,

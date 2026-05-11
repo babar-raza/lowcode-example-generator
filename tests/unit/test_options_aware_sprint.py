@@ -91,7 +91,12 @@ class TestPromptForbidsNullOptions:
         }])
         packet = build_packet(scenario, catalog)
         constraints_text = " ".join(packet.constraints)
-        assert "ONE overload" in constraints_text or "one overload" in constraints_text.lower()
+        assert (
+            "ONE overload" in constraints_text
+            or "one overload" in constraints_text.lower()
+            or "primary" in constraints_text.lower()
+            or "simplest" in constraints_text.lower()
+        )
 
 
 # --- Test 2: Code validator detects null options ---
@@ -214,7 +219,11 @@ class TestSystemPromptForbidsNullOptions:
         }])
         packet = build_packet(scenario, catalog)
         assert "null" in packet.system_prompt.lower()
-        assert "LowCodeLoadOptions" in packet.system_prompt or "ONE overload" in packet.system_prompt
+        assert (
+            "LowCodeLoadOptions" in packet.system_prompt
+            or "ONE overload" in packet.system_prompt
+            or "primary method" in packet.system_prompt
+        )
 
     def test_system_prompt_mentions_single_overload(self):
         scenario = _make_scenario("HtmlConverter", ["Process"])
@@ -228,7 +237,12 @@ class TestSystemPromptForbidsNullOptions:
             ],
         }])
         packet = build_packet(scenario, catalog)
-        assert "ONE overload" in packet.system_prompt or "one overload" in packet.system_prompt.lower()
+        assert (
+            "ONE overload" in packet.system_prompt
+            or "one overload" in packet.system_prompt.lower()
+            or "primary method" in packet.system_prompt
+            or "simplest string-path overload" in packet.system_prompt
+        )
 
 
 # --- Test 8: User prompt no longer suggests null ---

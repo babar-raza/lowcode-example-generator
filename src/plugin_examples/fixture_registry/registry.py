@@ -19,6 +19,7 @@ class FixtureEntry:
     source_path: str
     provenance: str  # e.g. "aspose-cells/Aspose.Cells-for-.NET:master:Examples/Data"
     available: bool = True
+    unavailable_reason: str | None = None  # set when available=False, e.g. "github_api_403_rate_limited"
 
 
 @dataclass
@@ -69,7 +70,7 @@ def build_fixture_registry(
 
         for path in paths:
             if source_type == "github":
-                files = _fetch_github_file_listing(owner, repo, branch, path)
+                files, failure_reason = _fetch_github_file_listing(owner, repo, branch, path)
                 if files is not None:
                     for fname in files:
                         registry.add_fixture(FixtureEntry(
@@ -80,15 +81,28 @@ def build_fixture_registry(
                             available=True,
                         ))
                     continue
-                # API failed — register path as degraded entry
-                logger.warning("GitHub API unavailable for %s/%s:%s, registering path only", owner, repo, path)
+                # API failed — register path as degraded entry so callers know the source is unavailable
+                logger.warning(
+                    "GitHub API unavailable for %s/%s:%s — reason: %s. "
+                    "Set GITHUB_TOKEN to avoid rate limits. Registering path as unavailable.",
+                    owner, repo, path, failure_reason or "unknown",
+                )
+                registry.add_fixture(FixtureEntry(
+                    filename=path,
+                    source_type=source_type,
+                    source_path=f"{provenance}:{path}",
+                    provenance=provenance,
+                    available=False,
+                    unavailable_reason=failure_reason or "github_api_unavailable",
+                ))
+                continue
 
             registry.add_fixture(FixtureEntry(
                 filename=path,
                 source_type=source_type,
                 source_path=f"{provenance}:{path}",
                 provenance=provenance,
-                available=source_type != "github",  # unknown availability when API failed
+                available=source_type != "github",
             ))
 
     logger.info("Fixture registry built for %s: %d entries", family, len(registry.fixtures))
@@ -112,6 +126,7 @@ def write_fixture_registry(
                 "source_path": f.source_path,
                 "provenance": f.provenance,
                 "available": f.available,
+                "unavailable_reason": f.unavailable_reason,
             }
             for f in registry.fixtures
         ],
@@ -126,7 +141,7 @@ def write_fixture_registry(
 
 def _fetch_github_file_listing(
     owner: str, repo: str, branch: str, path: str,
-) -> list[str] | None:
+) -> tuple[list[str] | None, str | None]:
     """Fetch file listing from GitHub API with fallback chain.
 
     Tries in order:
@@ -134,72 +149,97 @@ def _fetch_github_file_listing(
     2. Trees API (works for large directories, needs GITHUB_TOKEN)
     3. Local cache from previous successful fetch
 
-    Returns list of filenames on success, None on failure (graceful degradation).
+    Returns (filenames, failure_reason). On success failure_reason is None.
+    On failure, filenames is None and failure_reason explains why.
     """
     try:
         import requests
     except ImportError:
         logger.warning("requests not installed, cannot fetch GitHub file listing")
-        return _load_fixture_cache(owner, repo, branch, path)
+        cached = _load_fixture_cache(owner, repo, branch, path)
+        return (cached, None) if cached is not None else (None, "requests_not_installed")
 
     headers = {"Accept": "application/vnd.github.v3+json"}
     token = os.environ.get("GITHUB_TOKEN")
     if token:
         headers["Authorization"] = f"token {token}"
+    else:
+        logger.warning(
+            "GITHUB_TOKEN is not set. GitHub API requests will be unauthenticated "
+            "and may be rate-limited (HTTP 403). Set GITHUB_TOKEN to enable "
+            "authenticated access and avoid rate limits."
+        )
 
     # Strategy 1: Contents API
-    files = _try_contents_api(owner, repo, branch, path, headers)
+    files, reason = _try_contents_api(owner, repo, branch, path, headers)
     if files is not None:
         _save_fixture_cache(owner, repo, branch, path, files)
-        return files
+        return files, None
 
     # Strategy 2: Trees API (gets full tree, filter to path)
     if token:
-        files = _try_trees_api(owner, repo, branch, path, headers)
+        files, _ = _try_trees_api(owner, repo, branch, path, headers)
         if files is not None:
             _save_fixture_cache(owner, repo, branch, path, files)
-            return files
+            return files, None
 
     # Strategy 3: Local cache fallback
     cached = _load_fixture_cache(owner, repo, branch, path)
     if cached is not None:
         logger.info("Using cached fixture listing for %s/%s:%s/%s", owner, repo, branch, path)
-        return cached
+        return cached, None
 
-    return None
+    return None, reason or "github_api_unavailable"
 
 
 def _try_contents_api(
     owner: str, repo: str, branch: str, path: str, headers: dict,
-) -> list[str] | None:
-    """Try GitHub Contents API."""
+) -> tuple[list[str] | None, str | None]:
+    """Try GitHub Contents API. Returns (files, failure_reason)."""
     import requests
     url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}"
     try:
         resp = requests.get(url, headers=headers, timeout=15)
+        if resp.status_code == 403:
+            token_present = "Authorization" in headers
+            reason = (
+                "github_api_403_rate_limited"
+                if not token_present
+                else "github_api_403_forbidden"
+            )
+            logger.warning(
+                "GitHub Contents API returned 403 for %s — %s.",
+                url,
+                "no GITHUB_TOKEN set (rate limited)" if not token_present
+                else "access forbidden (check token permissions)",
+            )
+            return None, reason
         if resp.status_code != 200:
             logger.debug("Contents API returned %d for %s", resp.status_code, url)
-            return None
+            return None, f"github_api_{resp.status_code}"
         items = resp.json()
         if not isinstance(items, list):
-            return None
-        return [item["name"] for item in items if item.get("type") == "file"]
+            return None, "github_api_unexpected_response"
+        return [item["name"] for item in items if item.get("type") == "file"], None
     except Exception as e:
         logger.debug("Contents API request failed: %s", e)
-        return None
+        return None, "github_api_request_failed"
 
 
 def _try_trees_api(
     owner: str, repo: str, branch: str, path: str, headers: dict,
-) -> list[str] | None:
-    """Try GitHub Trees API (recursive) and filter to path prefix."""
+) -> tuple[list[str] | None, str | None]:
+    """Try GitHub Trees API (recursive) and filter to path prefix. Returns (files, failure_reason)."""
     import requests
     url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
     try:
         resp = requests.get(url, headers=headers, timeout=30)
+        if resp.status_code == 403:
+            logger.warning("GitHub Trees API returned 403 — check GITHUB_TOKEN permissions.")
+            return None, "github_api_403_forbidden"
         if resp.status_code != 200:
             logger.debug("Trees API returned %d", resp.status_code)
-            return None
+            return None, f"github_api_{resp.status_code}"
         data = resp.json()
         tree = data.get("tree", [])
         prefix = path.rstrip("/") + "/"
@@ -209,10 +249,10 @@ def _try_trees_api(
                 rel = item["path"][len(prefix):]
                 if "/" not in rel:  # Only direct children
                     files.append(rel)
-        return files if files else None
+        return (files if files else None), None
     except Exception as e:
         logger.debug("Trees API request failed: %s", e)
-        return None
+        return None, "github_api_request_failed"
 
 
 _CACHE_DIR = Path.home() / ".cache" / "plugin-examples" / "fixture-listings"
@@ -261,6 +301,7 @@ def load_fixture_registry(manifests_dir: Path) -> FixtureRegistry | None:
             source_path=entry["source_path"],
             provenance=entry["provenance"],
             available=entry.get("available", True),
+            unavailable_reason=entry.get("unavailable_reason"),
         ))
 
     return registry

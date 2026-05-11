@@ -92,8 +92,9 @@ def build_packet(
         "Print a deterministic success line like: Console.WriteLine(\"Done. Output: \" + outputPath);",
         "Validate that the input file exists before calling the plugin API: "
         "if (!File.Exists(inputPath)) throw new FileNotFoundException(inputPath);",
-        "Call ONLY ONE overload of each LowCode API — the simplest string-path overload. "
-        "Do NOT demonstrate multiple overloads in a single example.",
+        "Demonstrate ONLY the single primary API method for this scenario — the FIRST method "
+        "listed in 'Methods to demonstrate'. Use only its simplest string-path overload. "
+        "Do NOT attempt to demonstrate every listed method. One method, one overload, one clean example.",
         "NEVER pass null for LowCodeLoadOptions or LowCodeSaveOptions parameters.",
         "If you use LowCodeLoadOptions, you MUST set its InputFile property before passing it to Process().",
         "If you use LowCodeSaveOptions, you MUST set its OutputFile property before passing it to Process().",
@@ -101,6 +102,94 @@ def build_packet(
 
     # Add input-strategy-specific constraints
     fixture_instruction = _build_fixture_instruction(input_strategy, input_files)
+
+    # Detect PDF family from namespace
+    is_pdf = target_ns.lower().startswith("aspose.pdf")
+    type_short = target_type.split(".")[-1].lower() if target_type else ""
+
+    if is_pdf:
+        constraints += [
+            "FORBIDDEN: File.Copy() or System.IO.File.Copy() — this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+            "FORBIDDEN: new FileSaveTarget(path) — use new FileDataSource(path) for AddOutput()",
+            "FORBIDDEN: result.IsSuccess — use result.ResultCollection.Count > 0",
+            "FORBIDDEN: result.OperationResult — use result.ResultCollection",
+            "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') — use plain 'output.pdf'",
+            "FORBIDDEN: InputPath or OutputPath properties on any options object — use AddInput() and AddOutput() methods",
+            "FORBIDDEN: defining your own class stubs or fake implementations — use only the real Aspose API",
+            "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor — these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+            "FORBIDDEN: input.docx — PDF LowCode always uses .pdf files, never .docx",
+            "FORBIDDEN: new PluginOptions() — PluginOptions is an abstract base; use the concrete options class for this type",
+            "FORBIDDEN: LowCodePluginOptions — this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+            "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path — always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+            "FORBIDDEN: string array overloads of Process() — always use the options object overload Process(IPluginOptions)",
+            "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+            "REQUIRED: always include 'using Aspose.Pdf;' and 'using Aspose.Pdf.LowCode;'",
+            "REQUIRED: use instance-method pattern — create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+            "REQUIRED: create input PDF programmatically in code before calling the API:\n"
+            "    var doc = new Aspose.Pdf.Document();\n"
+            "    doc.Pages.Add();\n"
+            "    doc.Save(\"input.pdf\");",
+            "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        ]
+        # Per-type exact class name hints — prevent hallucination of wrong options class
+        _pdf_type_hints = {
+            "merger": (
+                "MergeOptions",
+                "Merger",
+                "var options = new MergeOptions();\n"
+                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                "    var result = new Merger().Process(options);",
+            ),
+            "splitter": (
+                "SplitOptions",
+                "Splitter",
+                "var options = new SplitOptions();\n"
+                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                "    var result = new Splitter().Process(options);",
+            ),
+            "optimizer": (
+                "OptimizeOptions",
+                "Optimizer",
+                "var options = new OptimizeOptions();\n"
+                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                "    var result = new Optimizer().Process(options);",
+            ),
+            "textextractor": (
+                "TextExtractorOptions",
+                "TextExtractor",
+                "var options = new TextExtractorOptions();\n"
+                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "    var result = new TextExtractor().Process(options);\n"
+                "    if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)\n"
+                "        Console.WriteLine(\"Extracted: \" + sr.Text);",
+            ),
+        }
+        if type_short in _pdf_type_hints:
+            opts_class, plugin_class, code_snippet = _pdf_type_hints[type_short]
+            constraints += [
+                f"REQUIRED: options class is '{opts_class}' — do NOT use any other class name",
+                f"REQUIRED: plugin class is '{plugin_class}' — do NOT use any other class name",
+                f"REQUIRED: exact usage pattern:\n    {code_snippet}",
+            ]
+
+        if type_short == "textextractor":
+            constraints += [
+                "FORBIDDEN: TextAbsorber — TextAbsorber is in Aspose.Pdf.Text and is the CORE (non-LowCode) API. NEVER use TextAbsorber in a LowCode example.",
+                "FORBIDDEN: pdfDoc.Pages.Accept(absorber) — this is the core PDF API pattern, not LowCode",
+                "FORBIDDEN: AddOutput() call for TextExtractor — result is in ResultCollection, not a file",
+                "REQUIRED: 'using Aspose.Pdf.Text;' ONLY for TextFragment creation (input PDF). The extraction MUST use Aspose.Pdf.LowCode.TextExtractor.",
+                "REQUIRED: check result with 'if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)'",
+                "REQUIRED: access extracted text as 'sr.Text'",
+                "FORBIDDEN: result.ResultCollection[0].Value — StringResult has no .Value property; use .Text (via cast or pattern match)",
+                "REQUIRED: add 'using Aspose.Pdf.Text;' if you use TextFragment to build the input PDF",
+            ]
+        else:
+            constraints += [
+                "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
+            ]
 
     system_prompt = (
         "You are an expert C# developer. Generate a complete, runnable SDK-style "
@@ -111,10 +200,21 @@ def build_packet(
         "passing null for LowCodeLoadOptions/LowCodeSaveOptions. "
         "REQUIRED: validate input file exists before API call, validate output exists after, "
         "print deterministic success output. "
-        "CRITICAL: Call only ONE overload of each API — the simplest string-path overload. "
-        "Do NOT demonstrate multiple overloads. "
+        "CRITICAL: Demonstrate ONLY the single primary method (the FIRST in the provided list) "
+        "using its simplest string-path overload. Do NOT demonstrate multiple methods or overloads. "
         "Return ONLY the C# source code inside a single ```csharp code block. "
         "Do not include any markdown, explanations, or text outside the code block."
+        + (
+            " PDF LowCode API rules: "
+            "NEVER define your own class stubs — use only the real Aspose.Pdf.LowCode namespace. "
+            "AddOutput() takes FileDataSource (IDataSource) — NOT FileSaveTarget (ISaveTarget). "
+            "Check success with result.ResultCollection.Count > 0 (no IsSuccess property). "
+            "Use instance-method pattern: new Plugin().Process(options). "
+            "Options have AddInput()/AddOutput() methods — NOT InputPath/OutputPath properties. "
+            "Always create input PDF programmatically with new Aspose.Pdf.Document() before calling API. "
+            "TextExtractor: no AddOutput(), result is StringResult in ResultCollection."
+            if is_pdf else ""
+        )
     )
 
     user_prompt = _build_user_prompt(scenario, approved, prompt_template, fixture_instruction)
@@ -272,10 +372,11 @@ def _build_user_prompt(
             static = "static " if m.get("is_static") else ""
             prompt_parts.append(f"  Method: {static}{m.get('return_type', 'void')} {m['name']}({params})")
 
-    prompt_parts.append("\nIMPORTANT: Call ONLY ONE overload of each method — the simplest string-path "
-                       "overload. Do NOT demonstrate multiple overloads. Do NOT pass null for "
-                       "LowCodeLoadOptions or LowCodeSaveOptions. If the simplest overload has "
-                       "only string parameters, use that one. Only use the constructors, methods, "
-                       "and properties listed above.")
+    prompt_parts.append("\nIMPORTANT: Demonstrate ONLY the FIRST method listed in 'Methods to demonstrate' "
+                       "above. Use its simplest string-path overload. Do NOT call other methods from "
+                       "the list — they are shown for catalog context only. Do NOT pass null for "
+                       "LowCodeLoadOptions or LowCodeSaveOptions. Only use the constructors, methods, "
+                       "and properties listed above. Use valid output file extensions recognised by "
+                       "Aspose (e.g. '.docx', '.pdf', '.xlsx') — never use '.out' or other ambiguous extensions.")
 
     return "\n".join(prompt_parts)

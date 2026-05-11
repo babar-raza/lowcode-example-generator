@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "denominator.schema.json",
+  "title": "FamilyDenominatorModel",
+  "description": "Machine-readable denominator model for a single Aspose family. Defines the source-of-truth counts for coverage computation.",
+  "type": "object",
+  "required": [
+    "family",
+    "source_package",
+    "source_version",
+    "api_catalog_sha256",
+    "plugin_namespace",
+    "total_lowcode_types",
+    "denominator_basis",
+    "runnable_scenarios",
+    "published_count",
+    "excluded_count",
+    "evidence_sources",
+    "last_verified_at"
+  ],
+  "properties": {
+    "family": {
+      "type": "string",
+      "enum": ["cells", "words", "pdf"],
+      "description": "Family identifier"
+    },
+    "source_package": {
+      "type": "string",
+      "description": "NuGet package ID (e.g., Aspose.Cells)"
+    },
+    "source_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "Package version (e.g., 26.4.0)"
+    },
+    "source_package_sha256": {
+      "type": ["string", "null"],
+      "description": "SHA256 of the resolved .nupkg file"
+    },
+    "api_catalog_sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA256 hex of the api-catalog.json used for this denominator"
+    },
+    "api_catalog_source": {
+      "type": ["string", "null"],
+      "description": "Relative path to the api-catalog.json that was hashed"
+    },
+    "plugin_namespace": {
+      "type": "string",
+      "description": "Primary LowCode namespace (e.g., Aspose.Cells.LowCode)"
+    },
+    "total_lowcode_types": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total public types discovered in the plugin namespace"
+    },
+    "workflow_root_types": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Count of WORKFLOW_ROOT types (directly executable IPlugin implementations). Null if not yet classified."
+    },
+    "non_runnable_types": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Count of non-runnable types (OPTIONS, RESULT, callbacks, etc.). Null if not yet classified."
+    },
+    "allowed_pilot_types": {
+      "type": ["array", "null"],
+      "items": {"type": "string"},
+      "description": "List of type short-names allowed in the current pilot scope. Null means unrestricted (all runnable types allowed)."
+    },
+    "allowed_pilot_count": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Count of allowed_pilot_types. Null if unrestricted."
+    },
+    "denominator_basis": {
+      "type": "string",
+      "enum": ["FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED"],
+      "description": "Which denominator is primary for coverage computation. FULL_SOT=all types, WORKFLOW_ROOT=only IPlugin types, PILOT_ALLOWED=only allowed_types list."
+    },
+    "denominator_basis_note": {
+      "type": ["string", "null"],
+      "description": "Human-readable explanation of why this basis was chosen"
+    },
+    "runnable_scenarios": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The effective denominator for coverage. Equal to allowed_pilot_count if basis=PILOT_ALLOWED, workflow_root_types if basis=WORKFLOW_ROOT, or a computed value for FULL_SOT."
+    },
+    "runnable_scenarios_basis": {
+      "type": ["string", "null"],
+      "enum": ["FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED", null],
+      "description": "Clarifies which basis the runnable_scenarios count uses"
+    },
+    "runnable_scenario_ids": {
+      "type": ["array", "null"],
+      "items": {"type": "string"},
+      "description": "Stable scenario IDs for the runnable set. Required if runnable_scenarios <= 30."
+    },
+    "published_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Scenarios with merged PRs (post-merge verified in target repo)"
+    },
+    "pr_ready_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Scenarios with open live PRs awaiting merge"
+    },
+    "pr_dry_run_ready_count": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Scenarios with validated dry-run package awaiting APPROVE_LIVE_PR"
+    },
+    "reviewer_passed_awaiting_pr_count": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Scenarios where reviewer passed but no PR package yet"
+    },
+    "blocked_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Scenarios blocked by technical issues (e.g., LLM hallucination, missing fixture)"
+    },
+    "excluded_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Scenarios excluded from current scope (by allowed_types or type classification)"
+    },
+    "coverage_pct_of_pilot_runnable": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "description": "Coverage percentage against pilot_allowed denominator"
+    },
+    "coverage_pct_of_runnable": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "description": "Coverage percentage against workflow_root denominator"
+    },
+    "coverage_pct_of_total_types": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "description": "Coverage percentage against all types in namespace"
+    },
+    "evidence_sources": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "description": "List of evidence file paths used to compute this denominator"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of last verification against source"
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "Free-text notes about this denominator"
+    }
+  },
+  "additionalProperties": true
+}

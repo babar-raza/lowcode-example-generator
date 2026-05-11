@@ -67,6 +67,11 @@ def extract_package(
     # Locate DLL and XML
     fw_dir = lib_dir / selection.selected_framework
     dll_path = _find_file(fw_dir, f"{package_id}.dll")
+    # Fallback: some packages use a shorter assembly name than the NuGet package ID.
+    # e.g., Aspose.Slides.NET package ships Aspose.Slides.dll (not Aspose.Slides.NET.dll).
+    if dll_path is None and package_id.endswith(".NET"):
+        alt_id = package_id[: -len(".NET")]
+        dll_path = _find_file(fw_dir, f"{alt_id}.dll")
     xml_path = _find_file_optional(fw_dir, f"{package_id}.xml")
 
     if dll_path is None:

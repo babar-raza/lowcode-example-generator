@@ -1,0 +1,40 @@
+{
+  "scenario_id": "pdf-splitter",
+  "family": "pdf",
+  "type_name": "Splitter",
+  "full_type_name": "Aspose.Pdf.LowCode.Splitter",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Splitter",
+    "Splitter.Process",
+    "SplitOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess",
+    "output_{0}.pdf"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var options = new SplitOptions(); options.AddInput(new FileDataSource(...)); options.AddOutput(new FileDataSource('output.pdf')); new Splitter().Process(options). Output filename must be plain string, NOT format string like 'output_{0}.pdf' (not expanded)."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "REVIEWER_PASSED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/latest/pdf-pr-dry-run-summary.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

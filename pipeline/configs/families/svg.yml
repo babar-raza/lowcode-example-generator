@@ -1,0 +1,64 @@
+family: svg
+display_name: Aspose.SVG for .NET
+enabled: false
+status: disabled
+# REFLECTION_BLOCKED: All-family discovery run 2026-05-09 encountered DllReflector assembly resolution failure.
+# LowCode namespace existence is UNKNOWN. Do not mark as CONFIRMED_NO_LOWCODE without re-investigation.
+# Next step: add missing assembly dependencies to discovery config and re-run.
+# NOTE: package_id below uses standard Aspose naming convention.
+# Verify exact NuGet package ID at nuget.org before enabling generation.
+# Discovery run will fail gracefully if package does not exist.
+
+nuget:
+  package_id: Aspose.SVG
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+  dependency_resolution:
+    enabled: false
+    max_depth: 3
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.SVG.LowCode
+    - Aspose.SVG.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-svg
+    repo: Aspose.SVG-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-svg-net
+    repo: Aspose.SVG.LowCode-for-.NET-Examples
+    branch: main
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

@@ -37,7 +37,7 @@ NON_STANDALONE_ROLES = frozenset({
 _WORKFLOW_VERBS = re.compile(
     r"(Converter|Merger|Splitter|Locker|Unlocker|Processor|Replacer|"
     r"Assembler|Protector|Saver|Compressor|Signer|Extractor|Generator|"
-    r"Renderer|Exporter|Importer)$",
+    r"Renderer|Exporter|Importer|Optimizer)$",
     re.IGNORECASE,
 )
 
@@ -153,6 +153,12 @@ def classify_type(type_info: dict) -> TypeRole:
         if len(properties) > 0:
             return TypeRole(**base, role=SETTINGS_MODEL, confidence=0.6,
                             reason=f"No methods, has properties: {name}")
+        # Workflow verb type with constructors but 0 reflected methods — likely
+        # inherits Process() from a base IPlugin implementation (e.g. TextExtractor).
+        # Classify as OPERATION_FACADE so it can be planned as a scenario.
+        if _WORKFLOW_VERBS.search(name) and has_ctors:
+            return TypeRole(**base, role=OPERATION_FACADE, confidence=0.6,
+                            reason=f"Workflow verb with constructors, Process likely inherited: {name}")
         return TypeRole(**base, role=UNKNOWN, confidence=0.3,
                         reason=f"No methods, no properties: {name}")
 

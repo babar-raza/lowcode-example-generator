@@ -21,7 +21,7 @@ from plugin_examples.family_config.validator import validate_family_config
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CELLS_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "cells.yml"
-WORDS_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "disabled" / "words.yml"
+WORDS_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "words.yml"
 
 
 def _load_raw(path: Path) -> dict:
@@ -73,7 +73,7 @@ class TestCellsConfigLoads:
 
     def test_provider_order(self):
         config = load_family_config(CELLS_CONFIG)
-        assert config.llm.provider_order == ["gpt_oss", "openai", "llm_professionalize", "ollama"]
+        assert config.llm.provider_order == ["llm_professionalize", "ollama"]
 
 
 # --- Schema validation failure tests ---
@@ -166,11 +166,7 @@ class TestTemplateHints:
         assert len(h.input_creation_lines) > 0
 
     def test_words_has_template_hints(self):
-        # Words config is in disabled/ dir, so load raw + validate + build directly
-        data = _load_raw(WORDS_CONFIG)
-        validate_family_config(data)
-        from plugin_examples.family_config.loader import _build_model
-        config = _build_model(data)
+        config = load_family_config(WORDS_CONFIG)
         h = config.template_hints
         assert h.default_input_extension == ".docx"
         assert h.default_input_filename == "input.docx"
@@ -195,3 +191,200 @@ class TestTemplateHints:
         lines = config.template_hints.input_creation_lines
         assert any("Workbook" in line for line in lines)
         assert any("Save" in line for line in lines)
+
+
+# --- Duplicate config cleanup tests ---
+
+
+DISABLED_DIR = REPO_ROOT / "pipeline" / "configs" / "families" / "disabled"
+
+
+class TestDuplicateConfigCleanup:
+    """Verify stale disabled/ configs for words and pdf have been removed."""
+
+    def test_disabled_words_config_does_not_exist(self):
+        assert not (DISABLED_DIR / "words.yml").exists(), (
+            "disabled/words.yml must be deleted — it was superseded by the active words.yml"
+        )
+
+    def test_disabled_pdf_config_does_not_exist(self):
+        assert not (DISABLED_DIR / "pdf.yml").exists(), (
+            "disabled/pdf.yml must be deleted — it was superseded by the active pdf.yml"
+        )
+
+    def test_active_words_config_loads_as_active(self):
+        """Words was promoted from discovery_only to active for the controlled pilot."""
+        config = load_family_config(WORDS_CONFIG)
+        assert config.status == "active"
+
+    def test_active_pdf_config_loads_as_active(self):
+        pdf_config = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config)
+        assert config.status == "active"
+
+
+# --- Family-specific publishing target tests ---
+
+
+class TestFamilyPublishingTarget:
+    def test_cells_central_repo_allowed_defaults_false(self):
+        """cells.yml must NOT set central_repo_allowed (defaults to False)."""
+        config = load_family_config(CELLS_CONFIG)
+        assert config.github.central_repo_allowed is False
+
+    def test_words_central_repo_allowed_defaults_false(self):
+        """words.yml must NOT set central_repo_allowed (defaults to False)."""
+        config = load_family_config(WORDS_CONFIG)
+        assert config.github.central_repo_allowed is False
+
+    def test_central_repo_allowed_true_parsed_correctly(self):
+        """When central_repo_allowed: true is set explicitly, loader parses it as True."""
+        data = _load_raw(CELLS_CONFIG)
+        data["github"]["central_repo_allowed"] = True
+        path = _write_temp_config(data)
+        config = load_family_config(path)
+        assert config.github.central_repo_allowed is True
+
+    def test_published_plugin_examples_repo_required(self):
+        """Config without published_plugin_examples_repo must fail schema validation."""
+        data = _load_raw(CELLS_CONFIG)
+        del data["github"]["published_plugin_examples_repo"]
+        with pytest.raises(Exception):
+            validate_family_config(data)
+
+    def test_github_repo_ref_has_owner_repo_branch(self):
+        """published_plugin_examples_repo must expose owner, repo, branch fields."""
+        config = load_family_config(CELLS_CONFIG)
+        pub = config.github.published_plugin_examples_repo
+        assert hasattr(pub, "owner") and pub.owner
+        assert hasattr(pub, "repo") and pub.repo
+        assert hasattr(pub, "branch") and pub.branch
+
+    def test_cells_publish_target_is_family_specific(self):
+        """cells.yml published_plugin_examples_repo must be family-specific (owner or repo contains 'cells')."""
+        from plugin_examples.publisher.publisher import _is_central_repo
+        config = load_family_config(CELLS_CONFIG)
+        pub = config.github.published_plugin_examples_repo
+        assert not _is_central_repo(pub.owner, pub.repo, "cells"), (
+            f"Cells publish target {pub.owner}/{pub.repo} must be family-specific, not central"
+        )
+
+    def test_words_publish_target_is_family_specific(self):
+        """words.yml published_plugin_examples_repo must be family-specific (owner or repo contains 'words')."""
+        from plugin_examples.publisher.publisher import _is_central_repo
+        config = load_family_config(WORDS_CONFIG)
+        pub = config.github.published_plugin_examples_repo
+        assert not _is_central_repo(pub.owner, pub.repo, "words"), (
+            f"Words publish target {pub.owner}/{pub.repo} must be family-specific, not central"
+        )
+
+    def test_central_repo_not_used_for_cells_or_words(self):
+        """Neither cells.yml nor words.yml may use aspose/aspose-plugins-examples-dotnet as publish target."""
+        _CENTRAL = ("aspose", "aspose-plugins-examples-dotnet")
+        for family, config_path in [("cells", CELLS_CONFIG), ("words", WORDS_CONFIG)]:
+            config = load_family_config(config_path)
+            pub = config.github.published_plugin_examples_repo
+            assert (pub.owner, pub.repo) != _CENTRAL, (
+                f"{family} must not use central placeholder {_CENTRAL[0]}/{_CENTRAL[1]} as publish target"
+            )
+
+    def test_pdf_config_is_active_for_controlled_pilot(self):
+        """PDF must be active now that reflection dedup and publish target are resolved."""
+        pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config_path)
+        assert config.status == "active", (
+            "PDF must be active after controlled-pilot enablement"
+        )
+
+    def test_central_repo_allowed_defaults_false(self):
+        """central_repo_allowed must default to False for all active families."""
+        for config_path in [CELLS_CONFIG, WORDS_CONFIG]:
+            config = load_family_config(config_path)
+            assert config.github.central_repo_allowed is False, (
+                f"{config.family} central_repo_allowed must default to False"
+            )
+
+    def test_pdf_publish_target_is_family_specific(self):
+        """pdf.yml published_plugin_examples_repo must be family-specific (aspose-pdf-net), not central placeholder."""
+        from plugin_examples.publisher.publisher import _is_central_repo
+        pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config_path)
+        pub = config.github.published_plugin_examples_repo
+        assert not _is_central_repo(pub.owner, pub.repo, "pdf"), (
+            f"PDF publish target {pub.owner}/{pub.repo} must be family-specific, not central placeholder"
+        )
+
+    def test_pdf_publish_target_owner_is_aspose_pdf_net(self):
+        """pdf.yml published_plugin_examples_repo.owner must be aspose-pdf-net."""
+        pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config_path)
+        pub = config.github.published_plugin_examples_repo
+        assert pub.owner == "aspose-pdf-net", (
+            f"Expected owner='aspose-pdf-net' but got '{pub.owner}'. "
+            "pdf.yml published_plugin_examples_repo must follow the aspose-{{family}}-net pattern."
+        )
+
+    def test_pdf_publish_target_repo_follows_pattern(self):
+        """pdf.yml published_plugin_examples_repo.repo must be Aspose.PDF.LowCode-for-.NET-Examples."""
+        pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config_path)
+        pub = config.github.published_plugin_examples_repo
+        assert pub.repo == "Aspose.PDF.LowCode-for-.NET-Examples", (
+            f"Expected repo='Aspose.PDF.LowCode-for-.NET-Examples' but got '{pub.repo}'."
+        )
+
+    def test_pdf_central_repo_not_used(self):
+        """pdf.yml must not use aspose/aspose-plugins-examples-dotnet as publish target."""
+        _CENTRAL = ("aspose", "aspose-plugins-examples-dotnet")
+        pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+        config = load_family_config(pdf_config_path)
+        pub = config.github.published_plugin_examples_repo
+        assert (pub.owner, pub.repo) != _CENTRAL, (
+            "pdf.yml must not use the central placeholder aspose/aspose-plugins-examples-dotnet"
+        )
+
+
+class TestExtraPackagesConfig:
+    """Tests for DependencyResolution.extra_packages field."""
+
+    def test_extra_packages_defaults_to_empty(self):
+        """extra_packages defaults to [] when not set."""
+        cells_config = load_family_config(CELLS_CONFIG)
+        assert cells_config.nuget.dependency_resolution.extra_packages == []
+
+    def test_ocr_config_has_extra_packages(self):
+        """ocr.yml declares Aspose.Drawing.Common as an extra_package."""
+        ocr_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "ocr.yml"
+        config = load_family_config(ocr_config_path)
+        extras = config.nuget.dependency_resolution.extra_packages
+        assert "Aspose.Drawing.Common" in extras
+
+    def test_extra_packages_loaded_from_yaml(self, tmp_path):
+        """extra_packages list is parsed correctly from YAML."""
+        raw = _load_raw(CELLS_CONFIG)
+        raw["nuget"]["dependency_resolution"] = {
+            "enabled": True,
+            "max_depth": 2,
+            "extra_packages": ["Pkg.A", "Pkg.B"],
+        }
+        path = _write_temp_config(raw)
+        config = load_family_config(path)
+        assert config.nuget.dependency_resolution.extra_packages == ["Pkg.A", "Pkg.B"]
+
+    def test_extra_packages_schema_valid(self, tmp_path):
+        """Schema allows extra_packages as an array of strings."""
+        raw = _load_raw(CELLS_CONFIG)
+        raw["nuget"]["dependency_resolution"] = {
+            "enabled": True,
+            "max_depth": 2,
+            "extra_packages": ["Some.Package"],
+        }
+        # Should not raise
+        validate_family_config(raw)
+
+    def test_extra_packages_not_required_in_schema(self, tmp_path):
+        """Schema does not require extra_packages — it is optional."""
+        raw = _load_raw(CELLS_CONFIG)
+        raw["nuget"]["dependency_resolution"] = {"enabled": True, "max_depth": 2}
+        # Should not raise
+        validate_family_config(raw)

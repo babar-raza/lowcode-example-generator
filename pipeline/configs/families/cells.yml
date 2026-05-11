@@ -32,8 +32,8 @@ github:
     branch: master
 
   published_plugin_examples_repo:
-    owner: aspose
-    repo: aspose-plugins-examples-dotnet
+    owner: aspose-cells-net
+    repo: Aspose.Cells.LowCode-for-.NET-Examples
     branch: main
 
 fixtures:
@@ -70,8 +70,6 @@ validation:
 
 llm:
   provider_order:
-    - gpt_oss
-    - openai
     - llm_professionalize
     - ollama
 

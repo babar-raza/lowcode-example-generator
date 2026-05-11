@@ -1,9 +1,14 @@
 {
   "dry_run": true,
-  "branch_name": null,
+  "branch_name": "plugin-examples/pdf/20260508-110506",
   "pr_url": null,
-  "files_included": [],
-  "evidence_verified": false,
-  "status": "blocked",
-  "blocked_reason": "Missing evidence: ['gate-results.json', 'scenario-catalog.json']"
+  "pr_number": null,
+  "files_included": [
+    "pdf-optimizer",
+    "pdf-splitter",
+    "pdf-text-extractor"
+  ],
+  "evidence_verified": true,
+  "status": "dry_run",
+  "blocked_reason": null
 }

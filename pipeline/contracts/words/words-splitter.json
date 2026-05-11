@@ -1,0 +1,32 @@
+{
+  "scenario_id": "words-splitter",
+  "family": "words",
+  "type_name": "Splitter",
+  "full_type_name": "Aspose.Words.LowCode.Splitter",
+  "primary_method": "ExtractPages",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Splitter",
+    "Splitter.ExtractPages"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".docx",
+    "validation_method": "docx_zip_check",
+    "notes": "Static API: Splitter.ExtractPages(inputPath, outputPath, pageIndex, pageCount). Input created programmatically with multiple pages. Output is single-page docx."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/words-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

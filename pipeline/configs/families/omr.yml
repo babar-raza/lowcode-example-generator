@@ -1,0 +1,63 @@
+family: omr
+display_name: Aspose.OMR for .NET
+enabled: false
+status: disabled
+# CONFIRMED_NO_LOWCODE: Reflection succeeded 2026-05-09 after adding Newtonsoft.Json as extra_package.
+# DllReflector scanned 18 namespaces. Aspose.OMR.LowCode namespace is NOT present.
+# Source-of-truth proof: workspace/verification/latest/omr-source-of-truth-proof.json
+
+nuget:
+  package_id: Aspose.OMR
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+  dependency_resolution:
+    enabled: true
+    max_depth: 3
+    extra_packages:
+      - Newtonsoft.Json
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.OMR.LowCode
+    - Aspose.OMR.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-omr
+    repo: Aspose.OMR-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-omr-net
+    repo: Aspose.OMR.LowCode-for-.NET-Examples
+    branch: main
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

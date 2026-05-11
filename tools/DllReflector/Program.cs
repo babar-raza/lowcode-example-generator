@@ -67,6 +67,14 @@ var trustedAssemblies = (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as st
     .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries);
 resolverPaths.AddRange(trustedAssemblies);
 
+// Deduplicate resolver paths by assembly simple name (filename without extension).
+// Keeps first-seen path so NuGet deps take precedence over TRUSTED_PLATFORM_ASSEMBLIES
+// when both provide the same assembly (e.g. System.Text.Json v8 in net8.0 trusted + NuGet).
+var seenNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+resolverPaths = resolverPaths
+    .Where(p => seenNames.Add(Path.GetFileNameWithoutExtension(p)))
+    .ToList();
+
 // Load XML documentation if available
 Dictionary<string, string>? xmlDocs = null;
 var xmlWarning = (string?)null;

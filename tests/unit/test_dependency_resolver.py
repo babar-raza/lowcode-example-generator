@@ -12,6 +12,7 @@ import pytest
 
 from plugin_examples.nuget_fetcher.dependency_resolver import (
     _clean_version,
+    _collect_all_tfm_deps,
     _find_nuspec,
     _parse_dependencies,
     resolve_dependencies,
@@ -351,3 +352,183 @@ class TestUpdatePackageLock:
         lock_path = update_package_lock(download, [], manifests_dir)
         assert "workspace" in str(lock_path)
         assert "manifests" in str(lock_path)
+
+
+# --- Tests: _collect_all_tfm_deps ---
+
+# A nuspec that mirrors the OMR/PSD pattern: netstandard2.0 group lacks
+# Newtonsoft.Json while net5.0+ groups include it.
+_NUSPEC_MULTI_TFM = """\
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Aspose.TestPkg</id>
+    <version>1.0.0</version>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Drawing.Common" version="[6.0.0, )" />
+        <dependency id="System.Text.Encoding.CodePages" version="[6.0.0, )" />
+      </group>
+      <group targetFramework="net5.0">
+        <dependency id="System.Drawing.Common" version="[6.0.0, )" />
+        <dependency id="System.Text.Encoding.CodePages" version="[6.0.0, )" />
+        <dependency id="Newtonsoft.Json" version="[13.0.0, )" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="System.Drawing.Common" version="[6.0.0, )" />
+        <dependency id="System.Text.Encoding.CodePages" version="[6.0.0, )" />
+        <dependency id="Newtonsoft.Json" version="[13.0.0, )" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+"""
+
+
+class TestCollectAllTfmDeps:
+    def test_collects_from_all_tfm_groups(self):
+        """All unique package ids across all TFM groups are returned."""
+        deps = _collect_all_tfm_deps(_NUSPEC_MULTI_TFM)
+        ids = [d["id"] for d in deps]
+        assert "System.Drawing.Common" in ids
+        assert "System.Text.Encoding.CodePages" in ids
+        assert "Newtonsoft.Json" in ids
+
+    def test_deduplicates_packages(self):
+        """Each package id appears exactly once even if present in multiple groups."""
+        deps = _collect_all_tfm_deps(_NUSPEC_MULTI_TFM)
+        ids = [d["id"].lower() for d in deps]
+        assert len(ids) == len(set(ids)), "Duplicate package ids found"
+
+    def test_normal_parse_misses_net_only_deps(self):
+        """_parse_dependencies with netstandard2.0 does NOT return Newtonsoft.Json."""
+        deps = _parse_dependencies(_NUSPEC_MULTI_TFM, ["netstandard2.0"])
+        ids = [d["id"] for d in deps]
+        assert "Newtonsoft.Json" not in ids
+
+    def test_collect_all_finds_net_only_deps(self):
+        """_collect_all_tfm_deps returns Newtonsoft.Json that normal parse misses."""
+        deps = _collect_all_tfm_deps(_NUSPEC_MULTI_TFM)
+        ids = [d["id"] for d in deps]
+        assert "Newtonsoft.Json" in ids
+
+    def test_no_deps_returns_empty(self):
+        deps = _collect_all_tfm_deps(_NUSPEC_NO_DEPS)
+        assert deps == []
+
+    def test_flat_deps_returned(self):
+        """Flat dep list (no group elements) is still returned."""
+        deps = _collect_all_tfm_deps(_NUSPEC_FLAT_DEPS)
+        assert len(deps) == 1
+        assert deps[0]["id"] == "Flat.Dep"
+
+
+# --- Tests: resolve_dependencies with include_all_tfm_groups ---
+
+
+class TestResolveWithAllTfmGroups:
+    @patch("plugin_examples.nuget_fetcher.dependency_resolver._download_nupkg")
+    def test_include_all_tfm_groups_collects_extra_deps(self, mock_dl, tmp_path):
+        """include_all_tfm_groups=True downloads Newtonsoft.Json at depth=1."""
+        nupkg = _make_nupkg(_NUSPEC_MULTI_TFM, tmp_path)
+        run_dir = tmp_path / "run"
+        run_dir.mkdir()
+
+        def fake_download(pkg_id, version, target_path):
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            _make_nupkg(_NUSPEC_NO_DEPS, target_path.parent, target_path.name)
+            return f"https://example.com/{pkg_id}"
+
+        mock_dl.side_effect = fake_download
+
+        deps = resolve_dependencies(
+            nupkg,
+            target_frameworks=["netstandard2.0"],
+            max_depth=1,
+            run_dir=run_dir,
+            family="test",
+            include_all_tfm_groups=True,
+        )
+
+        dep_ids = [d["package_id"] for d in deps]
+        assert "Newtonsoft.Json" in dep_ids
+        assert "System.Drawing.Common" in dep_ids
+
+    @patch("plugin_examples.nuget_fetcher.dependency_resolver._download_nupkg")
+    def test_default_does_not_collect_extra_tfm_deps(self, mock_dl, tmp_path):
+        """include_all_tfm_groups=False (default) only collects netstandard2.0 deps."""
+        nupkg = _make_nupkg(_NUSPEC_MULTI_TFM, tmp_path)
+        run_dir = tmp_path / "run"
+        run_dir.mkdir()
+
+        def fake_download(pkg_id, version, target_path):
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            _make_nupkg(_NUSPEC_NO_DEPS, target_path.parent, target_path.name)
+            return f"https://example.com/{pkg_id}"
+
+        mock_dl.side_effect = fake_download
+
+        deps = resolve_dependencies(
+            nupkg,
+            target_frameworks=["netstandard2.0"],
+            max_depth=1,
+            run_dir=run_dir,
+            family="test",
+            include_all_tfm_groups=False,
+        )
+
+        dep_ids = [d["package_id"] for d in deps]
+        # Newtonsoft.Json is only in net5.0+ groups; normal parse misses it
+        assert "Newtonsoft.Json" not in dep_ids
+
+    @patch("plugin_examples.nuget_fetcher.dependency_resolver._download_nupkg")
+    def test_include_all_tfm_groups_transitive_uses_normal_resolution(
+        self, mock_dl, tmp_path
+    ):
+        """Transitive deps at depth=2 always use normal TFM matching (not all-TFM)."""
+        # Primary uses multi-TFM nuspec; transitive dep uses a normal ns2.0 nuspec
+        transitive_nuspec = """\
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>System.Drawing.Common</id>
+    <version>6.0.0</version>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="TransitiveDep.Only.InNs20" version="1.0.0" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="TransitiveDep.Only.InNet60" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+"""
+        nupkg = _make_nupkg(_NUSPEC_MULTI_TFM, tmp_path)
+        run_dir = tmp_path / "run"
+        run_dir.mkdir()
+
+        def fake_download(pkg_id, version, target_path):
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            if pkg_id == "System.Drawing.Common":
+                _make_nupkg(transitive_nuspec, target_path.parent, target_path.name)
+            else:
+                _make_nupkg(_NUSPEC_NO_DEPS, target_path.parent, target_path.name)
+            return f"https://example.com/{pkg_id}"
+
+        mock_dl.side_effect = fake_download
+
+        deps = resolve_dependencies(
+            nupkg,
+            target_frameworks=["netstandard2.0"],
+            max_depth=2,
+            run_dir=run_dir,
+            family="test",
+            include_all_tfm_groups=True,
+        )
+
+        dep_ids = [d["package_id"] for d in deps]
+        # Transitive dep from ns2.0 group IS included
+        assert "TransitiveDep.Only.InNs20" in dep_ids
+        # Transitive dep from net6.0-only group is NOT included (depth=2 uses normal parse)
+        assert "TransitiveDep.Only.InNet60" not in dep_ids

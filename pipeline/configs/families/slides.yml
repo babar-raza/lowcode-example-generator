@@ -1,0 +1,68 @@
+family: slides
+display_name: Aspose.Slides for .NET
+enabled: true
+status: discovery_only
+# Moved from disabled/ to active path for discovery investigation (Phase F / R2).
+# status=discovery_only blocks generation runner; allows NuGet resolution + reflection only.
+# DLL name mismatch fix: package_id=Aspose.Slides.NET but DLL=Aspose.Slides.dll (no .NET suffix).
+# Fix implemented in src/plugin_examples/nupkg_extractor/extractor.py (endswith(".NET") fallback).
+# 4 tests in tests/unit/test_nupkg_extractor_dll_fallback.py cover the fallback logic.
+# Prior run failure (FAIL_PACKAGE_UNSUPPORTED_TFM) should be resolved by DLL name fix.
+# Namespace Aspose.Slides.LowCode is claimed but not yet reflection-proven.
+
+nuget:
+  package_id: Aspose.Slides.NET
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+    - net48
+  dependency_resolution:
+    enabled: true
+    max_depth: 2
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.Slides.LowCode
+    - Aspose.Slides.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-slides
+    repo: Aspose.Slides-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-slides-net
+    repo: Aspose.Slides.LowCode-for-.NET-Examples
+    branch: main
+  # NOTE: dedicated repo placeholder — does not yet exist.
+  # Will be provisioned by maintainer if/when discovery confirms LowCode namespace.
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

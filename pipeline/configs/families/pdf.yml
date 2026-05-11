@@ -1,7 +1,7 @@
 family: pdf
 display_name: Aspose.PDF for .NET
 enabled: true
-status: discovery_only
+status: active
 
 nuget:
   package_id: Aspose.PDF
@@ -30,8 +30,8 @@ github:
     branch: master
 
   published_plugin_examples_repo:
-    owner: aspose
-    repo: aspose-plugins-examples-dotnet
+    owner: aspose-pdf-net
+    repo: Aspose.PDF.LowCode-for-.NET-Examples
     branch: main
 
 fixtures:
@@ -57,6 +57,16 @@ generation:
   max_examples_per_monthly_run: 10
   allow_new_fixtures: true
   allow_generated_input_files: true
+  allowed_types:
+    - Merger
+    - TextExtractor
+    - Splitter
+    - Optimizer
+  preferred_methods_per_type:
+    Merger: Process
+    Splitter: Process
+    Optimizer: Process
+    TextExtractor: Process
 
 validation:
   require_restore: true
@@ -86,7 +96,22 @@ template_hints:
     - 'var doc2 = new Aspose.Pdf.Document();'
     - 'doc2.Pages.Add();'
     - 'doc2.Save("input2.pdf");'
+  text_extractor_input_creation_lines:
+    - 'var doc = new Aspose.Pdf.Document();'
+    - 'var page = doc.Pages.Add();'
+    - 'page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("Hello LowCode PDF"));'
+    - 'doc.Save("input.pdf");'
   additional_usings:
     - "Aspose.Pdf"
+    - "Aspose.Pdf.LowCode"
+  text_extractor_additional_usings:
+    - "Aspose.Pdf"
+    - "Aspose.Pdf.LowCode"
+    - "Aspose.Pdf.Text"
+  # Corrected API patterns (validated via C# harness, Phase 3):
+  output_creation_pattern: 'options.AddOutput(new FileDataSource("output.pdf"))  // FileDataSource, NOT FileSaveTarget'
+  result_check_pattern: 'result.ResultCollection.Count > 0  // no IsSuccess property'
+  text_extractor_result_pattern: '((StringResult)result.ResultCollection[0]).Text  // NOT .OperationResult[0].Data'
+  output_naming_note: 'Do not use format strings in Splitter output filename (e.g. output_{0}.pdf) — use plain output.pdf'
   default_output_extension: ".pdf"
   default_fixture_extension: ".pdf"

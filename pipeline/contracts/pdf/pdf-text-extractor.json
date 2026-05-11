@@ -1,0 +1,40 @@
+{
+  "scenario_id": "pdf-text-extractor",
+  "family": "pdf",
+  "type_name": "TextExtractor",
+  "full_type_name": "Aspose.Pdf.LowCode.TextExtractor",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "TextExtractor",
+    "TextExtractor.Process",
+    "TextExtractorOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "TextAbsorber",
+    "OperationResult",
+    "IsSuccess",
+    ".Value"
+  ],
+  "output_expectations": {
+    "output_format": "text_string",
+    "validation_method": "string_result_check",
+    "notes": "Instance API: TextExtractor has no AddOutput — read StringResult from result.ResultCollection[0]. Access text via cast ((StringResult)r).Text or reflection. TextAbsorber is BANNED. Unlicensed PDFs include evaluation watermark text; use Contains() not Equals()."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/latest/pdf-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

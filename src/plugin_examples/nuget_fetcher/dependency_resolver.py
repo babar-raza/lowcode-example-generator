@@ -138,6 +138,59 @@ def _deps_from_group(group: ET.Element, prefix: str) -> list[dict]:
     return result
 
 
+def _collect_all_tfm_deps(nuspec_xml: str) -> list[dict]:
+    """Collect deps from ALL TFM groups in a .nuspec (union, deduplicated by package id).
+
+    Used in reflection mode to capture dependencies that are only declared in
+    net5.0+ groups (e.g. Newtonsoft.Json in OMR/PSD nuspec) alongside deps in
+    the netstandard2.0 group.  This ensures DllReflector receives every assembly
+    the primary DLL might reference, regardless of which TFM group declared it.
+
+    Returns a deduplicated list of dicts with 'id' and 'version' keys.
+    If a package appears in multiple groups the first occurrence wins
+    (groups are ordered from most-specific to least-specific by NuGet convention).
+    """
+    root = ET.fromstring(nuspec_xml)
+
+    for ns in _NS_VARIANTS:
+        prefix = f"{{{ns}}}" if ns else ""
+        metadata = root.find(f"{prefix}metadata")
+        if metadata is None:
+            continue
+        deps_elem = metadata.find(f"{prefix}dependencies")
+        if deps_elem is None:
+            return []
+
+        seen_ids: set[str] = set()
+        result: list[dict] = []
+
+        groups = deps_elem.findall(f"{prefix}group")
+        if groups:
+            for group in groups:
+                for dep in group.findall(f"{prefix}dependency"):
+                    dep_id = dep.get("id")
+                    if dep_id and dep_id.lower() not in seen_ids:
+                        seen_ids.add(dep_id.lower())
+                        result.append({
+                            "id": dep_id,
+                            "version": _clean_version(dep.get("version", "")),
+                        })
+        else:
+            # Flat dependency list (no groups) — same as _parse_dependencies fallback
+            for dep in deps_elem.findall(f"{prefix}dependency"):
+                dep_id = dep.get("id")
+                if dep_id and dep_id.lower() not in seen_ids:
+                    seen_ids.add(dep_id.lower())
+                    result.append({
+                        "id": dep_id,
+                        "version": _clean_version(dep.get("version", "")),
+                    })
+
+        return result
+
+    return []
+
+
 def _clean_version(version_range: str) -> str:
     """Extract the minimum version from a NuGet version range.
 
@@ -160,6 +213,7 @@ def resolve_dependencies(
     max_depth: int = 2,
     run_dir: Path,
     family: str,
+    include_all_tfm_groups: bool = False,
     _current_depth: int = 1,
     _seen: set[str] | None = None,
 ) -> list[dict]:
@@ -168,13 +222,23 @@ def resolve_dependencies(
     Downloads dependency packages and recursively resolves their deps
     up to max_depth.
 
+    When ``include_all_tfm_groups=True`` (reflection mode), the union of deps
+    from ALL TFM groups in the primary package nuspec is collected instead of
+    only the best-matching group.  This is required for packages like Aspose.OMR
+    and Aspose.PSD whose netstandard2.0 nuspec group omits Newtonsoft.Json even
+    though the netstandard2.0 DLL references it.  The flag only applies at
+    depth=1; transitive deps always use the normal TFM-matched resolution.
+
     Returns a list of dependency records for the dependency manifest.
     """
     if _seen is None:
         _seen = set()
 
     nuspec_xml = _find_nuspec(nupkg_path)
-    direct_deps = _parse_dependencies(nuspec_xml, target_frameworks)
+    if include_all_tfm_groups and _current_depth == 1:
+        direct_deps = _collect_all_tfm_deps(nuspec_xml)
+    else:
+        direct_deps = _parse_dependencies(nuspec_xml, target_frameworks)
 
     all_deps: list[dict] = []
     deps_dir = run_dir / "packages" / family / "deps"

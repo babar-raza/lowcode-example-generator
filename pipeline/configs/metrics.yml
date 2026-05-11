@@ -1,0 +1,95 @@
+# Agent Metrics Configuration
+# This pipeline generates examples for aspose.net (.NET plugin SDK documentation).
+# The website field below reflects that target.
+
+metrics:
+  enabled: false
+  dry_run: true
+  strict_mode: false
+
+  agent_owner: "Babar Raza"
+  agent_name: "Lowcode Example Generator"
+  agent_name_test_prefix: "test-"
+
+  # Target website — config-owned, never hardcoded in source
+  website: "aspose.net"
+  website_section: "Examples"
+  platform: ".NET"
+
+  family_to_product:
+    cells: "Aspose.Cells"
+    words: "Aspose.Words"
+    pdf: "Aspose.PDF"
+
+  command_to_job_type:
+    run: "Examples Generation"
+    discover-lowcode: "Discovery"
+    publish-pr: "Publishing"
+    merge-pr: "Publishing"
+    release-status: "Reporting"
+    render-root-readme: "Publishing"
+    publish-readme: "Publishing"
+    validate-publish-targets: "Reporting"
+    resolve-repo-access: "Reporting"
+    probe-publish-permissions: "Reporting"
+    sync-taskcard-docs: "Reporting"
+
+  command_to_item_name:
+    run: "Examples"
+    discover-lowcode: "API Types"
+    publish-pr: "Pull Requests"
+    merge-pr: "Pull Requests"
+    release-status: "Reports"
+    render-root-readme: "README Files"
+    publish-readme: "README Files"
+    validate-publish-targets: "Validation Checks"
+    resolve-repo-access: "Repository Probes"
+    probe-publish-permissions: "Permission Probes"
+    sync-taskcard-docs: "Taskcard Documents"
+
+  # All 18 verdicts from src/plugin_examples/gates/models.py
+  verdict_to_status:
+    FULL_E2E_PASSED: "success"
+    PR_READY: "success"
+    PR_DRY_RUN_READY: "success"
+    PARTIAL_PR_READY: "partial_success"
+    PARTIAL_PR_DRY_RUN_READY: "partial_success"
+    SOURCE_OF_TRUTH_PROVEN_ONLY: "partial_success"
+    DATA_FLOW_PROTOTYPE_ONLY: "partial_success"
+    BLOCKED_SOURCE_OF_TRUTH: "failure"
+    BLOCKED_FIXTURE_DISCOVERY: "failure"
+    BLOCKED_SCENARIO_PLANNING: "failure"
+    BLOCKED_GENERATION: "failure"
+    BLOCKED_RESTORE_FAILED: "failure"
+    BLOCKED_BUILD_FAILED: "failure"
+    BLOCKED_RUN_FAILED: "failure"
+    BLOCKED_OUTPUT_VALIDATION_FAILED: "failure"
+    BLOCKED_REVIEWER_UNAVAILABLE: "failure"
+    BLOCKED_REVIEWER_FAILED: "failure"
+    BLOCKED_NO_PUBLISHABLE_EXAMPLES: "failure"
+
+  allowed_statuses:
+    - "success"
+    - "partial_success"
+    - "failure"
+
+  allowed_job_types:
+    - "Examples Generation"
+    - "Discovery"
+    - "Publishing"
+    - "Reporting"
+    - "Test"
+
+  env:
+    metrics_token: "AGENT_METRICS_TOKEN"
+    metrics_endpoint: "AGENT_METRICS_ENDPOINT"
+    metrics_enabled: "AGENT_METRICS_ENABLED"
+    metrics_dry_run: "AGENT_METRICS_DRY_RUN"
+    metrics_strict: "AGENT_METRICS_STRICT"
+
+  # api_endpoint is intentionally not stored in this file.
+  # Set AGENT_METRICS_ENDPOINT env var before running with --metrics-post.
+  api_endpoint: ""
+
+  post_ledger_path: "workspace/verification/agent-metrics-post-ledger.jsonl"
+  ledger_max_entries: 500

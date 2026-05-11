@@ -21,6 +21,7 @@ from plugin_examples.scenario_planner.type_classifier import (
     ABSTRACT_BASE,
     INTERFACE_CONTRACT,
     ENUM,
+    UNKNOWN,
     classify_type,
     classify_catalog,
 )
@@ -188,6 +189,53 @@ class TestEntrypointScorer:
     def test_options_not_runnable(self):
         t = _make_options_type()
         role = classify_type(t)
+        score = score_entrypoint(t, role, {})
+        assert score.runnable is False
+
+    def test_operation_facade_with_inherited_process_is_runnable(self):
+        """OPERATION_FACADE with 0 reflected methods but constructors must be runnable.
+        Handles TextExtractor pattern where Process() is inherited from IPlugin."""
+        from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+        t = {
+            "name": "TextExtractor", "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+            "kind": "class", "is_obsolete": False,
+            "methods": [], "properties": [],
+            "constructors": [{}],
+        }
+        # Manually create an OPERATION_FACADE role (as type_classifier would return)
+        role = TypeRole(
+            full_name="Aspose.Pdf.LowCode.TextExtractor",
+            name="TextExtractor",
+            role=OPERATION_FACADE,
+            confidence=0.6,
+            reason="Workflow verb with constructors, Process likely inherited: TextExtractor",
+            has_static_methods=False,
+            has_instance_methods=False,
+            has_constructors=True,
+            method_count=0,
+        )
+        score = score_entrypoint(t, role, {})
+        assert score.runnable is True, (
+            f"TextExtractor (OPERATION_FACADE with 0 methods + constructors) must be runnable. "
+            f"rejection_reason={score.rejection_reason}"
+        )
+
+    def test_operation_facade_no_methods_no_ctor_not_runnable(self):
+        """OPERATION_FACADE with 0 methods AND 0 constructors is NOT runnable."""
+        from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+        t = {
+            "name": "SomeFacade", "full_name": "Aspose.Pdf.LowCode.SomeFacade",
+            "kind": "class", "is_obsolete": False,
+            "methods": [], "properties": [],
+            "constructors": [],
+        }
+        role = TypeRole(
+            full_name="Aspose.Pdf.LowCode.SomeFacade",
+            name="SomeFacade",
+            role=OPERATION_FACADE,
+            confidence=0.5,
+            reason="Classified as facade",
+        )
         score = score_entrypoint(t, role, {})
         assert score.runnable is False
 
@@ -359,3 +407,58 @@ def _find_type_in_catalog(catalog: dict, full_name: str) -> dict:
             if t.get("full_name") == full_name:
                 return t
     return {}
+
+
+class TestPdfTypeClassifierFixes:
+    """PDF pilot type classifier fixes — Optimizer + TextExtractor."""
+
+    def test_optimizer_classified_as_operation_facade(self):
+        """Optimizer must be OPERATION_FACADE — it was previously classified as utility."""
+        t = {
+            "name": "Optimizer", "full_name": "Aspose.Pdf.LowCode.Optimizer",
+            "kind": "class", "is_obsolete": False,
+            "methods": [{"name": "Process", "is_static": False, "is_obsolete": False, "parameters": []}],
+            "properties": [], "constructors": [{}],
+        }
+        role = classify_type(t)
+        assert role.role == OPERATION_FACADE, (
+            f"Optimizer must be OPERATION_FACADE (was {role.role}): {role.reason}"
+        )
+
+    def test_textextractor_with_zero_reflected_methods_is_operation_facade(self):
+        """TextExtractor has 0 reflected methods (Process is inherited from IPlugin base).
+        Must be classified as OPERATION_FACADE, not unknown."""
+        t = {
+            "name": "TextExtractor", "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+            "kind": "class", "is_obsolete": False,
+            "methods": [], "properties": [],
+            "constructors": [{}],  # has a default constructor
+        }
+        role = classify_type(t)
+        assert role.role == OPERATION_FACADE, (
+            f"TextExtractor with constructors+workflow-verb must be OPERATION_FACADE (was {role.role})"
+        )
+        assert role.confidence >= 0.6
+
+    def test_unknown_type_with_zero_methods_no_ctor_stays_unknown(self):
+        """Types with no methods AND no constructors stay unknown."""
+        t = {
+            "name": "SomeHelper", "full_name": "Aspose.Pdf.LowCode.SomeHelper",
+            "kind": "class", "is_obsolete": False,
+            "methods": [], "properties": [],
+            "constructors": [],
+        }
+        role = classify_type(t)
+        assert role.role == UNKNOWN
+
+    def test_non_workflow_verb_with_ctor_only_not_operation_facade(self):
+        """A type with constructors but no workflow verb stays utility/unknown, not operation_facade."""
+        t = {
+            "name": "ProcessResult", "full_name": "Aspose.Pdf.LowCode.ProcessResult",
+            "kind": "class", "is_obsolete": False,
+            "methods": [], "properties": [],
+            "constructors": [{}],
+        }
+        role = classify_type(t)
+        # ProcessResult ends with Result → RESULT_MODEL, not OPERATION_FACADE
+        assert role.role != OPERATION_FACADE

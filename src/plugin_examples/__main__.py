@@ -7,6 +7,89 @@ import logging
 from pathlib import Path
 
 
+def _add_metrics_flags(parser: argparse.ArgumentParser) -> None:
+    """Add shared metrics flags to any subparser."""
+    parser.add_argument("--metrics", action="store_true",
+                        help="Enable metrics collection (dry-run by default)")
+    parser.add_argument("--metrics-post", action="store_true",
+                        help="POST metrics to API (requires AGENT_METRICS_TOKEN)")
+    parser.add_argument("--metrics-job-type", metavar="TYPE",
+                        help="Override job_type (e.g., 'Test' for test rows)")
+    parser.add_argument("--metrics-strict", action="store_true",
+                        help="Fail pipeline on metrics errors")
+    parser.add_argument("--metrics-force-repost", action="store_true",
+                        help="Bypass ledger duplicate check")
+    parser.add_argument("--metrics-config", metavar="PATH",
+                        help="Override metrics config path (default: pipeline/configs/metrics.yml)")
+
+
+def _create_metrics_session(args, *, command: str, family: str = "",
+                             repo_root: Path | None = None):
+    """Create a MetricsSession from CLI args if metrics are enabled.
+
+    Returns (session, collector) or (None, None).
+    """
+    metrics_enabled = (
+        getattr(args, "metrics", False)
+        or os.environ.get("AGENT_METRICS_ENABLED", "").lower() == "true"
+    )
+    if not metrics_enabled:
+        return None, None
+
+    from plugin_examples.metrics.models import MetricsCollector
+    from plugin_examples.metrics.config import load_metrics_config
+    from plugin_examples.metrics.session import MetricsSession
+
+    collector = MetricsCollector()
+    config_path = None
+    if getattr(args, "metrics_config", None):
+        config_path = Path(args.metrics_config)
+    config = load_metrics_config(config_path=config_path)
+
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[2]
+
+    from datetime import datetime, timezone
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    run_id = f"metrics-{command}-{family or 'global'}-{ts}"
+
+    # Create evidence dir for non-run commands
+    evidence_dir = repo_root / "workspace" / "runs" / run_id / "evidence"
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+
+    session = MetricsSession(
+        command=command,
+        family=family,
+        config=config,
+        collector=collector,
+        dry_run=not getattr(args, "metrics_post", False),
+        post=getattr(args, "metrics_post", False),
+        job_type_override=getattr(args, "metrics_job_type", None),
+        force_repost=getattr(args, "metrics_force_repost", False),
+        strict=getattr(args, "metrics_strict", False),
+        evidence_dir=evidence_dir,
+        repo_root=repo_root,
+        run_id=run_id,
+    )
+    session.start()
+    return session, collector
+
+
+def _finalize_metrics_session(session, **kwargs) -> dict | None:
+    """Finalize a metrics session and print status. Returns result or None."""
+    if session is None:
+        return None
+    result = session.finalize(**kwargs)
+    if result.get("post_result", {}).get("posted"):
+        print("Metrics: posted successfully")
+    elif result.get("error"):
+        print(f"Metrics: error — {result['error']}")
+    else:
+        reason = result.get("post_result", {}).get("reason", "dry_run")
+        print(f"Metrics: not posted ({reason})")
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         prog="plugin-examples",
@@ -46,6 +129,11 @@ def main() -> int:
                             help="Copy evidence to workspace/verification/latest/")
     run_parser.add_argument("--allow-experimental", action="store_true",
                             help="Allow experimental families to run")
+    run_parser.add_argument("--compare-run", metavar="PRIOR_RUN_ID",
+                            help="Compare current run results against a prior run to detect regressions")
+
+    # Agent metrics flags (shared across commands)
+    _add_metrics_flags(run_parser)
 
     # Discover-LowCode command
     discover_parser = subparsers.add_parser("discover-lowcode",
@@ -63,6 +151,7 @@ def main() -> int:
                                   help="Include experimental families")
     discover_parser.add_argument("--rank", action="store_true",
                                   help="Compute and write generation readiness ranking")
+    _add_metrics_flags(discover_parser)
 
     # Validate-publish-targets command
     vpt_parser = subparsers.add_parser(
@@ -78,6 +167,8 @@ def main() -> int:
         help="Write report to workspace/verification/latest/ (always on)",
     )
 
+    _add_metrics_flags(vpt_parser)
+
     # Resolve-repo-access command
     rra_parser = subparsers.add_parser(
         "resolve-repo-access",
@@ -91,6 +182,8 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
+
+    _add_metrics_flags(rra_parser)
 
     # Probe-publish-permissions command
     ppp_parser = subparsers.add_parser(
@@ -109,6 +202,8 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
+
+    _add_metrics_flags(ppp_parser)
 
     # Publish-PR command (dry-run simulation and live PR creation)
     publish_pr_parser = subparsers.add_parser(
@@ -134,6 +229,8 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/",
     )
+
+    _add_metrics_flags(publish_pr_parser)
 
     # Merge-PR command (dry-run verification and future live merge)
     merge_pr_parser = subparsers.add_parser(
@@ -163,19 +260,23 @@ def main() -> int:
         help="Write report to workspace/verification/latest/",
     )
 
+    _add_metrics_flags(merge_pr_parser)
+
     # Release-status command
     rs_parser = subparsers.add_parser(
         "release-status",
         help="Report per-family release state from evidence files (read-only)",
     )
     rs_parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=["cells", "words"],
-        help="Families to report on (default: cells words)",
+        "--families", nargs="+", metavar="FAMILY", default=["cells", "words", "pdf"],
+        help="Families to report on (default: cells words pdf)",
     )
     rs_parser.add_argument(
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
+
+    _add_metrics_flags(rs_parser)
 
     # Render-root-readme command
     rrr_parser = subparsers.add_parser(
@@ -191,6 +292,8 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write audit evidence to workspace/verification/latest/ (always on)",
     )
+
+    _add_metrics_flags(rrr_parser)
 
     # publish-readme command
     pr_readme_parser = subparsers.add_parser(
@@ -211,6 +314,8 @@ def main() -> int:
         help="Write evidence to workspace/verification/latest/ (always on)",
     )
 
+    _add_metrics_flags(pr_readme_parser)
+
     # Sync-taskcard-docs command
     std_parser = subparsers.add_parser(
         "sync-taskcard-docs",
@@ -220,6 +325,8 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="No-op (included for CLI consistency; output always written to docs/discovery/)",
     )
+
+    _add_metrics_flags(std_parser)
 
     # Check command
     check_parser = subparsers.add_parser("check", help="Check for package updates")
@@ -268,6 +375,23 @@ def main() -> int:
         if args.dry_run:
             dry_run = True
 
+        # Metrics initialization (lazy — only when --metrics flag is set)
+        metrics_collector = None
+        metrics_config = None
+        metrics_enabled = getattr(args, "metrics", False) or os.environ.get("AGENT_METRICS_ENABLED", "").lower() == "true"
+
+        if metrics_enabled:
+            from plugin_examples.metrics.models import MetricsCollector
+            from plugin_examples.metrics.config import load_metrics_config
+
+            metrics_collector = MetricsCollector()
+            config_path = None
+            if getattr(args, "metrics_config", None):
+                config_path = Path(args.metrics_config)
+            metrics_config = load_metrics_config(config_path=config_path)
+            # run command uses run_pipeline's built-in finalize_metrics
+            # which has access to full PipelineContext for accurate counts
+
         report = run_pipeline(
             family=args.family,
             dry_run=dry_run,
@@ -279,6 +403,13 @@ def main() -> int:
             max_tier=args.tier,
             promote_latest=args.promote_latest,
             allow_experimental=args.allow_experimental,
+            compare_run=getattr(args, "compare_run", None),
+            metrics_collector=metrics_collector,
+            metrics_config=metrics_config,
+            metrics_post=getattr(args, "metrics_post", False),
+            metrics_job_type=getattr(args, "metrics_job_type", None),
+            metrics_strict=getattr(args, "metrics_strict", False),
+            metrics_force_repost=getattr(args, "metrics_force_repost", False),
         )
         gs = report.get("gate_summary", {})
         verdict = report.get("verdict", "UNKNOWN")
@@ -305,6 +436,19 @@ def main() -> int:
                   f"{gen_count - pr_candidates} excluded")
 
         print(f"Verdict: {verdict}")
+
+        # Metrics finalization (only when --metrics enabled)
+        if metrics_enabled and metrics_config:
+            metrics_result = report.get("_metrics_result")
+            if metrics_result:
+                if metrics_result.get("post_result", {}).get("posted"):
+                    print("Metrics: posted successfully")
+                elif metrics_result.get("error"):
+                    print(f"Metrics: error — {metrics_result['error']}")
+                else:
+                    reason = metrics_result.get("post_result", {}).get("reason", "dry_run")
+                    print(f"Metrics: not posted ({reason})")
+
         return 1 if gs.get("hard_stopped") else 0
 
     if args.command == "discover-lowcode":
@@ -319,6 +463,12 @@ def main() -> int:
             families = [args.family]
 
         repo_root = _Path(__file__).resolve().parents[2]
+
+        msession, mcollector = _create_metrics_session(
+            args, command="discover-lowcode",
+            family=",".join(families) if families else "all",
+            repo_root=repo_root,
+        )
 
         result = run_discovery_sweep(
             families=families,
@@ -368,6 +518,12 @@ def main() -> int:
             )
             print(f"  readiness ranking: {len(merged)} families (scope={_scope})")
 
+        _finalize_metrics_session(
+            msession,
+            items_discovered=total,
+            items_succeeded=eligible,
+            items_failed=total - eligible,
+        )
         return 0
 
     if args.command == "validate-publish-targets":
@@ -379,6 +535,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="validate-publish-targets", repo_root=repo_root,
+        )
         config_dir = repo_root / "pipeline" / "configs" / "families"
         verification_dir = repo_root / "workspace" / "verification"
 
@@ -404,6 +563,12 @@ def main() -> int:
             status = "READY" if rec["publish_ready"] else f"BLOCKED ({rec['blocked_reason']})"
             print(f"  {rec['family']}: {status}")
         print(f"Report: {report_path}")
+        _finalize_metrics_session(
+            msession,
+            items_discovered=result["total_families"],
+            items_succeeded=result["publish_ready_count"],
+            items_failed=result["total_families"] - result["publish_ready_count"],
+        )
         return 0 if result["publish_ready_count"] > 0 else 1
 
     if args.command == "resolve-repo-access":
@@ -412,6 +577,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="resolve-repo-access", repo_root=repo_root,
+        )
         config_dir = repo_root / "pipeline" / "configs" / "families"
         verification_dir = repo_root / "workspace" / "verification"
 
@@ -444,6 +612,12 @@ def main() -> int:
         print(f"live_publish_allowed: {summary['live_publish_allowed']}")
         report_path = verification_dir / "latest" / "family-repo-access-resolution.json"
         print(f"Report: {report_path}")
+        _finalize_metrics_session(
+            msession,
+            items_discovered=summary["total_checked"],
+            items_succeeded=summary["accessible"],
+            items_failed=summary["total_checked"] - summary["accessible"],
+        )
         return 0 if summary["accessible"] > 0 else 1
 
     if args.command == "probe-publish-permissions":
@@ -452,6 +626,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="probe-publish-permissions", repo_root=repo_root,
+        )
         config_dir = repo_root / "pipeline" / "configs" / "families"
         verification_dir = repo_root / "workspace" / "verification"
 
@@ -485,6 +662,12 @@ def main() -> int:
         print(f"live_publish_authorized: {summary['live_publish_authorized']}")
         report_path = verification_dir / "latest" / "publish-permission-probe.json"
         print(f"Report: {report_path}")
+        _finalize_metrics_session(
+            msession,
+            items_discovered=summary["total_probed"],
+            items_succeeded=summary["permission_ready"],
+            items_failed=summary["total_probed"] - summary["permission_ready"],
+        )
         return 0 if summary["permission_ready"] > 0 else 1
 
     if args.command == "publish-pr":
@@ -497,6 +680,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="publish-pr", family=args.family, repo_root=repo_root,
+        )
         config_dir = repo_root / "pipeline" / "configs" / "families"
         verification_dir = repo_root / "workspace" / "verification"
         family = args.family
@@ -527,6 +713,23 @@ def main() -> int:
                         pr_permission_ready = fam_rec.get("pr_permission_ready", False)
             except (OSError, _json.JSONDecodeError):
                 pass
+
+        # Fallback: check family-repo-access-resolution.json (authoritative source
+        # written by resolve-repo-access command) if readiness flags are still False
+        if not repo_access_ready or not pr_permission_ready:
+            resolver_path = verification_dir / "latest" / "family-repo-access-resolution.json"
+            if resolver_path.exists():
+                try:
+                    with open(resolver_path) as _f:
+                        resolver_data = _json.load(_f)
+                    for fam_rec in resolver_data.get("families", []):
+                        if fam_rec.get("family") == family:
+                            if fam_rec.get("repo_access_ready", False):
+                                repo_access_ready = True
+                            if fam_rec.get("pr_permission_ready", False):
+                                pr_permission_ready = True
+                except (OSError, _json.JSONDecodeError):
+                    pass
 
         # Load gate verdict
         gate_path = verification_dir / "latest" / "gate-results.json"
@@ -597,6 +800,7 @@ def main() -> int:
                     examples=_examples_meta,
                     package_version=pkg_version,
                     generation_date=_gen_date,
+                    package_path=package_path,
                 )
                 _readme_content = _render_readme(_readme_ctx)
                 _write_readme(_readme_content, package_path / "README.md")
@@ -623,6 +827,10 @@ def main() -> int:
         run_ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
         run_id = run_ts  # used in branch: plugin-examples/{family}/{run_id}
 
+        # Load excluded scenario summaries for PR body
+        from plugin_examples.publisher.publisher import _load_excluded_scenario_summaries
+        excluded_scenario_lines = _load_excluded_scenario_summaries(verification_dir, family)
+
         # Build PR content
         pr_content = build_pr(
             family=family,
@@ -630,6 +838,7 @@ def main() -> int:
             examples_count=len(example_dirs),
             package_version=pkg_version,
             examples_list=example_dirs,
+            excluded_scenarios=excluded_scenario_lines or None,
         )
 
         # Check approval token (always evaluate — blocks live mode if missing)
@@ -742,6 +951,7 @@ def main() -> int:
             print(f"  Files committed: {files_count}")
             print(f"  DO NOT MERGE without human review")
             print(f"Report: {output_path}")
+            _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
             return 0
 
         # --- DRY-RUN / SIMULATION MODE ---
@@ -822,6 +1032,11 @@ def main() -> int:
         print(f"  PR title: {pr_content.title}")
         print(f"  live_push_performed: False")
         print(f"Report: {output_path}")
+        _finalize_metrics_session(
+            msession, items_discovered=1,
+            items_succeeded=1 if simulation_passed else 0,
+            items_failed=0 if simulation_passed else 1,
+        )
         return 0 if simulation_passed else 1
 
     if args.command == "merge-pr":
@@ -836,6 +1051,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="merge-pr", family=args.family, repo_root=repo_root,
+        )
         config_dir = repo_root / "pipeline" / "configs" / "families"
         verification_dir = repo_root / "workspace" / "verification"
 
@@ -927,6 +1145,7 @@ def main() -> int:
             print(f"PR MERGED: #{pr_number} — merge commit SHA: {merge_commit_sha}")
             print(f"  DO NOT delete branch without explicit approval")
             print(f"Report: {output_path}")
+            _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
             return 0
 
         # --- DRY-RUN / SIMULATION MODE ---
@@ -1004,7 +1223,13 @@ def main() -> int:
         print(f"  Approval gate: {'PASSED' if approved else f'BLOCKED ({approval_blocked})'}")
         print(f"  live_merge_performed: False")
         print(f"Report: {output_path}")
-        return 0 if simulation_result["simulation_passed"] else 1
+        _sim_ok = simulation_result["simulation_passed"]
+        _finalize_metrics_session(
+            msession, items_discovered=1,
+            items_succeeded=1 if _sim_ok else 0,
+            items_failed=0 if _sim_ok else 1,
+        )
+        return 0 if _sim_ok else 1
 
     if args.command == "release-status":
         from plugin_examples.publisher.release_status import (
@@ -1014,6 +1239,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="release-status", repo_root=repo_root,
+        )
         verification_dir = repo_root / "workspace" / "verification"
 
         families = list(args.families)
@@ -1032,6 +1260,12 @@ def main() -> int:
         print(f"  all_merged: {status['all_merged']}")
         print(f"  all_post_merge_validated: {status['all_post_merge_validated']}")
         print(f"Report: {report_path}")
+        _finalize_metrics_session(
+            msession,
+            items_discovered=len(families),
+            items_succeeded=len(families),
+            items_failed=0,
+        )
         return 0
 
     if args.command == "sync-taskcard-docs":
@@ -1039,6 +1273,9 @@ def main() -> int:
         from pathlib import Path as _Path
 
         repo_root = _Path(__file__).resolve().parents[2]
+        msession, mcollector = _create_metrics_session(
+            args, command="sync-taskcard-docs", repo_root=repo_root,
+        )
         matrix_path = repo_root / "workspace" / "verification" / "latest" / "open-taskcard-closure-matrix.json"
         output_path = repo_root / "docs" / "discovery" / "open-taskcard-closure-matrix.md"
 
@@ -1058,7 +1295,7 @@ def main() -> int:
         sprint = matrix.get("sprint", "unknown")
 
         open_cards = [tc for tc in taskcards if tc.get("status") == "OPEN"]
-        closed_cards = [tc for tc in taskcards if tc.get("status") == "CLOSED"]
+        closed_cards = [tc for tc in taskcards if tc.get("status") in ("CLOSED", "CLOSED_VERIFIED")]
         total = len(taskcards)
         open_count = len(open_cards)
         closed_count = len(closed_cards)
@@ -1109,6 +1346,9 @@ def main() -> int:
         print(f"sync-taskcard-docs: {total} taskcards ({open_count} open, {closed_count} closed)")
         print(f"  Source: {matrix_path}")
         print(f"  Output: {output_path}")
+        _finalize_metrics_session(
+            msession, items_discovered=total, items_succeeded=total, items_failed=0,
+        )
         return 0
 
     if args.command == "render-root-readme":
@@ -1123,6 +1363,9 @@ def main() -> int:
         repo_root = _Path(__file__).resolve().parents[2]
         verification_dir = repo_root / "workspace" / "verification"
         family = args.family
+        msession, mcollector = _create_metrics_session(
+            args, command="render-root-readme", family=family, repo_root=repo_root,
+        )
 
         # --- Load family config ---
         config_path = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
@@ -1205,6 +1448,7 @@ def main() -> int:
                 examples=examples_meta,
                 package_version=pkg_version,
                 generation_date=generation_date,
+                package_path=package_path,
             )
         except ValueError as exc:
             print(f"ERROR: Cannot build README context: {exc}")
@@ -1287,7 +1531,9 @@ def main() -> int:
 
         if not audit_result.passed:
             print(f"README audit FAILED for {family} — see warnings above")
+            _finalize_metrics_session(msession, items_discovered=1, items_succeeded=0, items_failed=1)
             return 1
+        _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
         return 0
 
     if args.command == "publish-readme":
@@ -1304,6 +1550,9 @@ def main() -> int:
         repo_root = _Path(__file__).resolve().parents[2]
         verification_dir = repo_root / "workspace" / "verification"
         family = args.family
+        msession, mcollector = _create_metrics_session(
+            args, command="publish-readme", family=family, repo_root=repo_root,
+        )
         live_mode = getattr(args, "publish", False)
         dry_run = not live_mode
         generation_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -1375,6 +1624,7 @@ def main() -> int:
                 examples=examples_meta,
                 package_version=pkg_version,
                 generation_date=generation_date,
+                package_path=package_path,
             )
             readme_content = render_readme(ctx)
         except Exception as exc:
@@ -1445,6 +1695,7 @@ def main() -> int:
             }
             _ev_path = verification_dir / "latest" / f"{family}-readme-backfill-result.json"
             _ev_path.write_text(_json.dumps(_ev, indent=2), encoding="utf-8")
+            _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
             return 0
 
         # --- Approval check ---
@@ -1496,6 +1747,7 @@ def main() -> int:
             print(f"  Simulation verdict: {sim['simulation_verdict']}")
             print(f"  Evidence: {ev_path}")
             print("  No remote write performed (dry-run).")
+            _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
             return 0
 
         # --- LIVE MODE ---
@@ -1569,6 +1821,7 @@ def main() -> int:
         print(f"  PR number: #{pr_number}")
         print(f"  Files committed: {files_count}")
         print(f"  Evidence: {ev_path}")
+        _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
         return 0
 
     if args.command == "check":

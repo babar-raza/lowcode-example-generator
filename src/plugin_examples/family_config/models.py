@@ -16,6 +16,7 @@ class RepoRef:
 class DependencyResolution:
     enabled: bool = True
     max_depth: int = 2
+    extra_packages: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -41,6 +42,7 @@ class PluginDetection:
 class GitHubConfig:
     official_examples_repo: RepoRef
     published_plugin_examples_repo: RepoRef
+    central_repo_allowed: bool = False
 
 
 @dataclass(frozen=True)
@@ -68,6 +70,8 @@ class GenerationConfig:
     max_examples_per_monthly_run: int
     allow_new_fixtures: bool = True
     allow_generated_input_files: bool = True
+    allowed_types: list[str] = field(default_factory=list)
+    preferred_methods_per_type: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

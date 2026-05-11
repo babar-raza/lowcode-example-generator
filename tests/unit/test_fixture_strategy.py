@@ -402,8 +402,8 @@ class TestCellsConverterScenarioHasValidInputStrategy:
     def test_all_supported_formats_produce_valid_strategy(self):
         """Every format in SUPPORTED_FORMATS must produce a ready scenario."""
         type_info = {
-            "full_name": "Aspose.Test.LowCode.Converter",
-            "name": "Converter",
+            "full_name": "Aspose.Test.LowCode.SpreadsheetConverter",
+            "name": "SpreadsheetConverter",
             "kind": "class",
             "methods": [
                 {

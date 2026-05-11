@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 import re
 from dataclasses import dataclass, field
@@ -70,6 +72,9 @@ def plan_scenarios(
     min_examples: int = 3,
     source_of_truth_proof_path: str | None = None,
     default_fixture_extension: str = ".xlsx",
+    allowed_types: list[str] | None = None,
+    preferred_methods_per_type: dict[str, str] | None = None,
+    repo_root: Path | None = None,
 ) -> PlanningResult:
     """Plan example scenarios from reflected API catalog.
 
@@ -84,6 +89,11 @@ def plan_scenarios(
         fixture_registry: Fixture registry dict (optional).
         min_examples: Minimum required ready scenarios.
         source_of_truth_proof_path: Path to proof file (gate check).
+        allowed_types: Optional allowlist of type short-names (e.g. ["Converter", "Splitter"]).
+            When non-empty, types not in this list are blocked as pilot_not_in_scope.
+        preferred_methods_per_type: Optional map of type short-name to preferred primary method
+            (e.g. {"Watermarker": "SetText"}). The specified method is placed first in
+            target_methods so the LLM demonstrates it as the primary operation.
 
     Returns:
         PlanningResult with ready and blocked scenarios.
@@ -95,7 +105,13 @@ def plan_scenarios(
     if source_of_truth_proof_path:
         assert_source_of_truth_eligible(source_of_truth_proof_path)
 
+    # Catalog hash validation (B-013): detect API catalog drift
+    if repo_root is not None:
+        validate_catalog_hash(family, catalog, repo_root)
+
     result = PlanningResult(family=family)
+    _allowed = set(allowed_types) if allowed_types else set()
+    _preferred = preferred_methods_per_type or {}
 
     # Build consumer map for entrypoint scoring
     consumer_map = build_consumer_map(catalog, plugin_namespaces)
@@ -108,11 +124,21 @@ def plan_scenarios(
 
         for type_info in ns.get("types", []):
             full_name = type_info.get("full_name", "")
+            type_short_name = type_info.get("name", "")
 
             if type_info.get("is_obsolete", False):
                 result.blocked_scenarios.append(_make_blocked_scenario(
                     family, type_info, ns_name, "blocked_obsolete",
                     f"Type {full_name} is obsolete",
+                ))
+                continue
+
+            # Allowlist enforcement: if allowed_types is set, block types not in it
+            if _allowed and type_short_name not in _allowed:
+                result.blocked_scenarios.append(_make_blocked_scenario(
+                    family, type_info, ns_name, "blocked_pilot_not_in_scope",
+                    f"Type '{type_short_name}' is not in the controlled pilot allowlist. "
+                    f"Allowed: {sorted(_allowed)}",
                 ))
                 continue
 
@@ -150,7 +176,11 @@ def plan_scenarios(
                 continue
 
             # Build scenario for this type
-            scenario = _build_scenario(family, type_info, ns_name, fixture_registry, default_fixture_extension)
+            preferred_method = _preferred.get(type_short_name)
+            scenario = _build_scenario(
+                family, type_info, ns_name, fixture_registry,
+                default_fixture_extension, preferred_method=preferred_method,
+            )
             if scenario.status == "ready":
                 result.ready_scenarios.append(scenario)
             else:
@@ -161,6 +191,112 @@ def plan_scenarios(
         family, result.ready_count, result.blocked_count,
     )
     return result
+
+
+# ---------------------------------------------------------------------------
+# Catalog hash enforcement (B-013)
+# ---------------------------------------------------------------------------
+
+
+class CatalogHashMismatchError(Exception):
+    """Raised in strict mode when catalog hash doesn't match denominator."""
+
+
+@dataclass
+class CatalogHashResult:
+    """Result of catalog hash validation against denominator."""
+    family: str
+    match: bool | None  # None = indeterminate (no denominator)
+    current_hash: str
+    denominator_hash: str | None
+    denominator_path: str | None
+
+    def to_dict(self) -> dict:
+        return {
+            "family": self.family,
+            "match": self.match,
+            "current_hash": self.current_hash,
+            "denominator_hash": self.denominator_hash,
+            "denominator_path": self.denominator_path,
+        }
+
+
+def compute_catalog_hash(catalog: dict) -> str:
+    """Compute deterministic SHA-256 hash of an API catalog dict."""
+    canonical = json.dumps(catalog, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def validate_catalog_hash(
+    family: str,
+    catalog: dict,
+    repo_root: Path,
+    *,
+    strict: bool = False,
+) -> CatalogHashResult:
+    """Validate the current catalog hash against the denominator file.
+
+    Args:
+        family: Family name (e.g. "cells").
+        catalog: The API catalog dict from DllReflector.
+        repo_root: Repository root path.
+        strict: If True, raise CatalogHashMismatchError on mismatch.
+
+    Returns:
+        CatalogHashResult with match status and hashes.
+    """
+    current_hash = compute_catalog_hash(catalog)
+    denom_path = repo_root / "pipeline" / "configs" / "denominators" / f"{family}.json"
+
+    if not denom_path.exists():
+        logger.info(
+            "No denominator file for %s — catalog hash check skipped", family,
+        )
+        return CatalogHashResult(
+            family=family,
+            match=None,
+            current_hash=current_hash,
+            denominator_hash=None,
+            denominator_path=None,
+        )
+
+    denom = json.loads(denom_path.read_text(encoding="utf-8"))
+    denom_hash = denom.get("api_catalog_sha256")
+
+    if not denom_hash:
+        logger.info(
+            "Denominator for %s has no api_catalog_sha256 — check skipped", family,
+        )
+        return CatalogHashResult(
+            family=family,
+            match=None,
+            current_hash=current_hash,
+            denominator_hash=None,
+            denominator_path=str(denom_path),
+        )
+
+    is_match = current_hash == denom_hash
+
+    if is_match:
+        logger.info("Catalog hash for %s matches denominator", family)
+    else:
+        msg = (
+            f"Catalog hash MISMATCH for {family}: "
+            f"current={current_hash[:16]}... "
+            f"denominator={denom_hash[:16]}... "
+            f"The API catalog has changed since the denominator was created."
+        )
+        if strict:
+            raise CatalogHashMismatchError(msg)
+        logger.warning(msg)
+
+    return CatalogHashResult(
+        family=family,
+        match=is_match,
+        current_hash=current_hash,
+        denominator_hash=denom_hash,
+        denominator_path=str(denom_path),
+    )
 
 
 def _check_fixture_available(
@@ -182,19 +318,43 @@ def _build_scenario(
     namespace: str,
     fixture_registry: dict | None,
     default_fixture_extension: str = ".xlsx",
+    preferred_method: str | None = None,
 ) -> Scenario:
-    """Build a scenario for a single type."""
+    """Build a scenario for a single type.
+
+    Args:
+        preferred_method: When set, this method is placed FIRST in target_methods
+            so the LLM demonstrates it as the primary operation.
+    """
     full_name = type_info["full_name"]
     name = type_info["name"]
     methods = type_info.get("methods", [])
 
-    # Determine required symbols
+    # Determine required symbols — deduplicate method names (multiple overloads
+    # map to a single representative entry; the LLM will pick the simplest overload).
+    # Factory methods (Create/CreateXxx) are moved to the END so the LLM picks
+    # the primary OPERATION method first.
     required_symbols = [full_name]
-    target_methods = []
+    operation_methods: list[str] = []
+    factory_methods: list[str] = []
+    seen_methods: set[str] = set()
     for m in methods:
         if not m.get("is_obsolete", False):
-            target_methods.append(m["name"])
-            required_symbols.append(f"{full_name}.{m['name']}")
+            method_name = m["name"]
+            required_symbols.append(f"{full_name}.{method_name}")
+            if method_name not in seen_methods:
+                seen_methods.add(method_name)
+                if method_name == "Create" or method_name.startswith("Create"):
+                    factory_methods.append(method_name)
+                else:
+                    operation_methods.append(method_name)
+
+    # Operation methods first, factory/Create methods last
+    target_methods = operation_methods + factory_methods
+
+    # If a preferred method is specified, move it to position 0
+    if preferred_method and preferred_method in target_methods:
+        target_methods = [preferred_method] + [m for m in target_methods if m != preferred_method]
 
     # Generate slug
     slug = _to_slug(name)
@@ -248,10 +408,17 @@ def _build_scenario(
                 f"supported generator formats and no existing fixture found"
             )
     else:
-        input_strategy = "none"
+        # PDF types use instance-method IPlugin pattern — Process(XxxOptions) takes an
+        # options object, not a raw file path. _needs_fixture() returns False because
+        # the method signature has no string/Stream file-path parameter. However, the
+        # options object requires an input PDF to be created programmatically first.
+        if family == "pdf":
+            input_strategy = "programmatic_input"
+        else:
+            input_strategy = "none"
 
     # Build output and validation plans
-    inferred_output_format = _infer_output_format(name)
+    inferred_output_format = _infer_output_format(name, family_default=default_fixture_extension)
     output_plan = f"Convert input{inferred_input_format} to output{inferred_output_format} using {name}"
     validation_plan = f"Build succeeds, runs without exception, produces output{inferred_output_format}"
 
@@ -308,6 +475,7 @@ def _to_slug(name: str) -> str:
 # Converters that IMPORT a format use that format as input.
 # Converters that EXPORT to a format use the family default as input.
 _INPUT_FORMAT_MAP: dict[str, str] = {
+    # Cells types
     "textconverter": ".csv",        # TextConverter processes text-based formats only
     "jsonconverter": ".xlsx",       # JsonConverter exports spreadsheet to JSON
     "htmlconverter": ".xlsx",       # HtmlConverter exports spreadsheet to HTML
@@ -317,6 +485,16 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
     "spreadsheetmerger": ".xlsx",   # Merges multiple spreadsheets
     "spreadsheetsplitter": ".xlsx", # Splits spreadsheet into sheets
     "spreadsheetlocker": ".xlsx",   # Locks/protects a spreadsheet
+    # Words types (merger/splitter omitted — fall through to family_default so
+    # Words uses .docx and PDF uses .pdf without a separate entry for each).
+    "converter": ".docx",
+    "watermarker": ".docx",
+    "replacer": ".docx",
+    "comparer": ".docx",
+    "mailmerger": ".docx",
+    "reportbuilder": ".docx",
+    "processor": ".docx",
+    "signer": ".docx",
 }
 
 
@@ -334,10 +512,16 @@ def _infer_input_format(type_name: str, family_default: str) -> str:
     return _INPUT_FORMAT_MAP.get(key, family_default)
 
 
-def _infer_output_format(type_name: str) -> str:
-    """Infer the output format from the type name."""
+def _infer_output_format(type_name: str, family_default: str = ".out") -> str:
+    """Infer the output format from the type name.
+
+    Falls back to ``family_default`` (e.g. ".xlsx" or ".docx") when the type
+    is not in the explicit map — avoids the generic ".out" extension which is
+    not a recognised SaveFormat for any Aspose product.
+    """
     name_lower = type_name.lower()
     _map = {
+        # Cells types
         "textconverter": ".txt",
         "jsonconverter": ".json",
         "htmlconverter": ".html",
@@ -347,8 +531,22 @@ def _infer_output_format(type_name: str) -> str:
         "spreadsheetmerger": ".xlsx",
         "spreadsheetsplitter": ".xlsx",
         "spreadsheetlocker": ".xlsx",
+        # Words types — Converter outputs PDF as the canonical cross-format demo;
+        # all other Words types fall through to family_default (".docx" for Words,
+        # ".pdf" for PDF family — both correct via family_default fallback).
+        "converter": ".pdf",
+        "watermarker": ".docx",
+        "replacer": ".docx",
+        "comparer": ".docx",
+        "mailmerger": ".docx",
+        "reportbuilder": ".docx",
+        "processor": ".docx",
+        "signer": ".docx",
+        # PDF types — TextExtractor has no file output (result in ResultCollection).
+        # Merger, Splitter, Optimizer fall through to family_default (".pdf").
+        "textextractor": "",
     }
-    return _map.get(name_lower, ".out")
+    return _map.get(name_lower, family_default)
 
 
 def _has_static_methods(methods: list[dict]) -> bool:

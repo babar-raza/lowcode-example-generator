@@ -1,7 +1,7 @@
 family: words
 display_name: Aspose.Words for .NET
 enabled: true
-status: discovery_only
+status: active
 
 nuget:
   package_id: Aspose.Words
@@ -30,8 +30,8 @@ github:
     branch: master
 
   published_plugin_examples_repo:
-    owner: aspose
-    repo: aspose-plugins-examples-dotnet
+    owner: aspose-words-net
+    repo: Aspose.Words.LowCode-for-.NET-Examples
     branch: main
 
 fixtures:
@@ -57,6 +57,16 @@ generation:
   max_examples_per_monthly_run: 10
   allow_new_fixtures: true
   allow_generated_input_files: true
+  allowed_types:
+    - Converter
+    - Watermarker
+    - Splitter
+    - Replacer
+  preferred_methods_per_type:
+    Watermarker: SetText
+    Splitter: ExtractPages
+    Replacer: Replace
+    Converter: Convert
 
 validation:
   require_restore: true

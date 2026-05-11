@@ -65,14 +65,92 @@ def generate_example(
             failure_reason=f"LLM generation failed: {e}",
         )
 
+    # Detect family from packet namespace for family-specific validation
+    _family = "pdf" if packet.target_namespace.lower().startswith("aspose.pdf") else ""
+    _type_short = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
+
     # Validate generated code
-    issues = _validate_code(code)
+    issues = _validate_code(code, family=_family, type_short=_type_short)
     if issues and max_repairs > 0:
         logger.info("Attempting repair for %s: %s", packet.scenario_id, issues)
         try:
-            repair_prompt = f"Fix these issues in the code:\n{issues}\n\nCode:\n{code}"
+            # For PDF, re-state the required exact pattern explicitly so the repair
+            # doesn't lose AddInput/AddOutput when rewriting from scratch.
+            pdf_pattern_reminder = ""
+            if _family == "pdf":
+                pattern_constraints = [
+                    c for c in packet.constraints
+                    if "REQUIRED: exact usage pattern" in c
+                    or "REQUIRED: use AddInput" in c
+                    or "REQUIRED: use AddOutput" in c
+                    or "REQUIRED: options class is" in c
+                ]
+                # Also carry forward critical FORBIDDEN constraints so the repair LLM
+                # cannot re-introduce hallucinated namespaces or invalid patterns
+                # (e.g. 'using Aspose.Pdf.LowCode.DataSources;') that were banned in
+                # the initial generation prompt.
+                forbidden_constraints = [
+                    c for c in packet.constraints
+                    if c.startswith("FORBIDDEN:") and any(
+                        kw in c for kw in ("DataSources", "PluginOptions", "File.Copy")
+                    )
+                ]
+                all_repair_constraints = pattern_constraints + forbidden_constraints
+                if all_repair_constraints:
+                    pdf_pattern_reminder = (
+                        "\n\nREQUIRED AND FORBIDDEN PATTERNS (must be respected in fixed code):\n"
+                        + "\n".join(all_repair_constraints)
+                    )
+                # For TextExtractor: add full reference example to guide the LLM
+                # beyond the 4-line snippet — non-deterministic failures need this.
+                if _type_short == "textextractor":
+                    pdf_pattern_reminder += (
+                        "\n\nMANDATORY REFERENCE EXAMPLE for TextExtractor (your fixed code MUST follow this exact pattern):\n"
+                        "```csharp\n"
+                        "using System;\n"
+                        "using System.IO;\n"
+                        "using Aspose.Pdf;\n"
+                        "using Aspose.Pdf.LowCode;\n"
+                        "using Aspose.Pdf.Text;\n"
+                        "\n"
+                        "var document = new Document();\n"
+                        "var page = document.Pages.Add();\n"
+                        "page.Paragraphs.Add(new TextFragment(\"Sample text for extraction.\"));\n"
+                        "document.Save(\"input.pdf\");\n"
+                        "\n"
+                        "var options = new TextExtractorOptions();\n"
+                        "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                        "var result = new TextExtractor().Process(options);\n"
+                        "if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)\n"
+                        "    Console.WriteLine(\"Extracted text: \" + sr.Text);\n"
+                        "else\n"
+                        "    Console.WriteLine(\"No text extracted.\");\n"
+                        "```\n"
+                        "CRITICAL: Do NOT use TextAbsorber. Do NOT use AddOutput(). Do NOT access .Value — use .Text."
+                    )
+            repair_prompt = (
+                f"Fix these issues in the code:\n{issues}"
+                f"{pdf_pattern_reminder}\n\nCode:\n{code}"
+            )
             response = llm_generate(repair_prompt, packet.system_prompt)
-            code = _extract_code(response)
+            repaired_code = _extract_code(response)
+            # Re-validate repaired code — reject if still failing
+            post_repair_issues = _validate_code(repaired_code, family=_family, type_short=_type_short)
+            if post_repair_issues:
+                logger.warning(
+                    "Repair for %s still has validation issues: %s",
+                    packet.scenario_id,
+                    post_repair_issues,
+                )
+                return GeneratedExample(
+                    scenario_id=packet.scenario_id,
+                    code=repaired_code,
+                    claimed_symbols=packet.approved_symbols,
+                    repair_attempts=1,
+                    status="failed",
+                    failure_reason=f"Post-repair validation failed: {post_repair_issues}",
+                )
+            code = repaired_code
             return GeneratedExample(
                 scenario_id=packet.scenario_id,
                 code=code,
@@ -405,7 +483,7 @@ def _extract_code(response: str) -> str:
     return ""
 
 
-def _validate_code(code: str) -> list[str]:
+def _validate_code(code: str, family: str = "", type_short: str = "") -> list[str]:
     """Validate generated code for common issues."""
     issues = []
 
@@ -468,5 +546,141 @@ def _validate_code(code: str) -> list[str]:
             f"Contains {len(process_calls)} Process() calls — use only ONE overload per example. "
             "Remove the extra Process() calls and keep only the simplest string-path overload."
         )
+
+    # PDF-specific validation rules
+    if family == "pdf":
+        if "new FileSaveTarget(" in code:
+            issues.append(
+                "PDF: uses FileSaveTarget for output — WRONG type. "
+                "AddOutput() takes IDataSource. Use new FileDataSource(path) instead."
+            )
+        if ".IsSuccess" in code:
+            issues.append(
+                "PDF: uses result.IsSuccess — property does not exist on ResultContainer. "
+                "Use result.ResultCollection.Count > 0 instead."
+            )
+        if ".OperationResult" in code:
+            issues.append(
+                "PDF: uses result.OperationResult — property does not exist on ResultContainer. "
+                "Use result.ResultCollection instead."
+            )
+        if re.search(r'output_\{0\}\.pdf|output_\{[0-9]+\}\.pdf', code):
+            issues.append(
+                "PDF Splitter: uses format string in output filename (e.g. 'output_{0}.pdf'). "
+                "Splitter does not expand format strings — use plain 'output.pdf' instead."
+            )
+        if "TextExtractor" in code and "AddOutput(" in code:
+            issues.append(
+                "PDF TextExtractor: calls AddOutput() — TextExtractor has no file output. "
+                "Remove AddOutput() and read result from result.ResultCollection[0] as StringResult."
+            )
+        if "input.docx" in code or '"input.docx"' in code:
+            issues.append(
+                "PDF: references input.docx — PDF LowCode requires .pdf input files. "
+                "Create input with 'new Aspose.Pdf.Document(); doc.Save(\"input.pdf\")' and use 'input.pdf'."
+            )
+        if "InputPath" in code or "OutputPath" in code:
+            issues.append(
+                "PDF: uses InputPath/OutputPath properties — PDF LowCode options use AddInput()/AddOutput() methods. "
+                "Replace '.InputPath =' with '.AddInput(new FileDataSource(...))' "
+                "and '.OutputPath =' with '.AddOutput(new FileDataSource(...))'."
+            )
+        # Check that non-TextExtractor types actually use AddInput
+        if "TextExtractor" not in code and "AddInput(" not in code:
+            issues.append(
+                "PDF: missing AddInput() call — options must have AddInput(new FileDataSource(\"input.pdf\")) "
+                "before calling Process()."
+            )
+        # Detect use of abstract PluginOptions base class instead of concrete options class
+        if "new PluginOptions(" in code or "new PluginOptions{" in code or "new PluginOptions " in code:
+            issues.append(
+                "PDF: uses 'new PluginOptions()' — PluginOptions is abstract. "
+                "Use the concrete options class: MergeOptions, SplitOptions, OptimizeOptions, or TextExtractorOptions."
+            )
+        # Detect hallucinated LowCodePluginOptions class (does not exist)
+        if "LowCodePluginOptions" in code:
+            issues.append(
+                "PDF: uses 'LowCodePluginOptions' — this class does not exist. "
+                "Use the concrete options class: MergeOptions, SplitOptions, OptimizeOptions, or TextExtractorOptions."
+            )
+        # Detect AddInput/AddOutput called with plain string (must use FileDataSource)
+        if re.search(r'\.AddInput\s*\(\s*[a-zA-Z_][a-zA-Z0-9_]*\s*\)', code) or \
+           re.search(r'\.AddInput\s*\(\s*"[^"]*"\s*\)', code):
+            # Only flag if FileDataSource is absent — string-arg form doesn't exist in PDF LowCode
+            if "FileDataSource" not in code:
+                issues.append(
+                    "PDF: AddInput() called with a plain string — must use FileDataSource: "
+                    "AddInput(new FileDataSource(\"input.pdf\")). The string overload does not exist."
+                )
+        # Detect wrong Process() overload (string array)
+        if re.search(r"\.Process\s*\(\s*new\s*\[\s*\]", code):
+            issues.append(
+                "PDF: calls Process() with a string array — use the options object overload: "
+                "Process(IPluginOptions). Create a MergeOptions/SplitOptions/etc, call AddInput()/AddOutput(), "
+                "then call plugin.Process(options)."
+            )
+        # Detect TextExtractor called without TextExtractorOptions
+        if "TextExtractor" in code and "TextExtractorOptions" not in code:
+            issues.append(
+                "PDF TextExtractor: must instantiate TextExtractorOptions and call Process(options). "
+                "Example: var options = new TextExtractorOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); "
+                "var result = new TextExtractor().Process(options);"
+            )
+        # Detect TextAbsorber usage — this is the CORE PDF API, not the LowCode API
+        if "TextAbsorber" in code:
+            issues.append(
+                "PDF: uses TextAbsorber (Aspose.Pdf.Text namespace) — this is the CORE PDF API, NOT the LowCode API. "
+                "Replace with Aspose.Pdf.LowCode.TextExtractor + TextExtractorOptions: "
+                "var options = new TextExtractorOptions(); "
+                "options.AddInput(new FileDataSource(\"input.pdf\")); "
+                "var result = new TextExtractor().Process(options); "
+                "Console.WriteLine(((StringResult)result.ResultCollection[0]).Text);"
+            )
+        # Detect fake local class definitions that shadow real LowCode plugin classes
+        if re.search(r'^\s*class\s+(Merger|Splitter|Optimizer|TextExtractor)\b', code, re.MULTILINE):
+            issues.append(
+                "PDF: defines a local class with the same name as a real Aspose.Pdf.LowCode plugin class. "
+                "Remove the local class — use the imported Aspose.Pdf.LowCode class directly."
+            )
+        # Detect wrong StringResult property access (.Value does not exist — use .Text)
+        if "TextExtractor" in code and re.search(r'ResultCollection\s*\[\s*\d+\s*\]\s*\.Value', code):
+            issues.append(
+                "PDF TextExtractor: accesses result.ResultCollection[0].Value — StringResult has no .Value property. "
+                "Cast and use .Text instead: ((StringResult)result.ResultCollection[0]).Text"
+            )
+        # Detect TextFragment usage without required 'using Aspose.Pdf.Text'
+        if "TextFragment" in code and "using Aspose.Pdf.Text" not in code:
+            issues.append(
+                "PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. "
+                "Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment."
+            )
+        # Detect hallucinated sub-namespace Aspose.Pdf.LowCode.DataSources — does not exist
+        if "Aspose.Pdf.LowCode.DataSources" in code:
+            issues.append(
+                "PDF: uses 'using Aspose.Pdf.LowCode.DataSources;' — this sub-namespace does NOT exist in the Aspose.PDF assembly. "
+                "FileDataSource lives in Aspose.Pdf.LowCode. Remove the sub-namespace using directive; "
+                "'using Aspose.Pdf.LowCode;' already covers FileDataSource."
+            )
+        # Detect File.Copy as semantic substitute for any PDF LowCode operation — FORBIDDEN
+        if re.search(r'\bFile\.Copy\s*\(', code):
+            issues.append(
+                "PDF: uses File.Copy() — this is NOT a LowCode operation and does not demonstrate the Aspose API. "
+                "You MUST use the LowCode plugin class (Merger, Splitter, Optimizer, TextExtractor) "
+                "with its concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions) "
+                "and call plugin.Process(options)."
+            )
+        # Optimizer-specific: require OptimizeOptions
+        if type_short == "optimizer" and "OptimizeOptions" not in code:
+            issues.append(
+                "PDF Optimizer: must use 'OptimizeOptions' — do NOT use any other class. "
+                "var options = new OptimizeOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); "
+                "options.AddOutput(new FileDataSource(\"output.pdf\")); var result = new Optimizer().Process(options);"
+            )
+        # Optimizer-specific: require Optimizer().Process pattern
+        if type_short == "optimizer" and not re.search(r'new\s+Optimizer\s*\(\s*\)\s*\.Process\s*\(', code):
+            issues.append(
+                "PDF Optimizer: must call 'new Optimizer().Process(options)' — the Optimizer class must be instantiated "
+                "and its Process() method called with an OptimizeOptions instance."
+            )
 
     return issues

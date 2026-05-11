@@ -764,6 +764,137 @@ class TestGenerationFramework:
         assert 'extraction.get("selected_framework"' not in source
 
 
+class TestDiscoveryOnlySafetyGuard:
+    """Verify discovery_only families are blocked from the generation pipeline."""
+
+    def _make_mock_config(self, status: str, family: str = "words") -> MagicMock:
+        mock_cfg = MagicMock()
+        mock_cfg.status = status
+        mock_cfg.family = family
+        mock_cfg.nuget = MagicMock()
+        mock_cfg.nuget.package_id = "Aspose.Words"
+        return mock_cfg
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_run_blocks_discovery_only_family(self, mock_load, tmp_path):
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("discovery_only")
+        ctx = _make_ctx(tmp_path, family="words")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "discovery_only" in result.error
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_discovery_only_not_suppressed_by_allow_experimental(self, mock_load, tmp_path):
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("discovery_only")
+        ctx = _make_ctx(tmp_path, family="words")
+        ctx._allow_experimental = True
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "discovery_only" in result.error
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_run_allows_active_family(self, mock_load, tmp_path):
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("active", family="cells")
+        ctx = _make_ctx(tmp_path, family="cells")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "success"
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_experimental_blocked_without_flag(self, mock_load, tmp_path):
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("experimental")
+        ctx = _make_ctx(tmp_path, family="words")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "experimental" in result.error
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_experimental_allowed_with_flag(self, mock_load, tmp_path):
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("experimental")
+        ctx = _make_ctx(tmp_path, family="words")
+        ctx._allow_experimental = True
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "success"
+
+    @patch("plugin_examples.family_config.load_family_config")
+    @patch("plugin_examples.nuget_fetcher.fetch_package")
+    def test_discover_lowcode_allows_discovery_only_family(self, mock_fetch, mock_load, tmp_path):
+        """discover-lowcode must NOT skip discovery_only families.
+
+        In discovery_sweep, discovery_only families are never experimental_skipped.
+        Only experimental families (without --allow-experimental) get that status.
+        """
+        from plugin_examples.discovery_sweep import _discover_family
+        mock_load.return_value = self._make_mock_config("discovery_only", family="words")
+        # Raise at fetch so we don't need the full pipeline — we only need to prove
+        # the guard does NOT return experimental_skipped for discovery_only.
+        mock_fetch.side_effect = RuntimeError("blocked at fetch (test sentinel)")
+
+        result = _discover_family("words", tmp_path, allow_experimental=False,
+                                  verification_dir=tmp_path)
+        # discovery_only must NOT be treated as experimental_skipped
+        assert result["status"] != "experimental_skipped", (
+            "discovery_only families must be allowed in discover-lowcode, "
+            f"got status: {result['status']}"
+        )
+        # Must also not be silently disabled
+        assert result["status"] != "disabled"
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_discovery_only_does_not_call_llm(self, mock_load, tmp_path):
+        """discovery_only family must fail at stage 1 — before LLM preflight (stage 12).
+
+        The stage-1 guard in _stage_load_config raises RuntimeError for discovery_only.
+        This provably prevents all downstream stages (2-17) from executing, including
+        LLM preflight at stage 12.
+        """
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("discovery_only")
+        ctx = _make_ctx(tmp_path, family="words")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "discovery_only" in result.error
+        # Stage 1 fails — LLM preflight is stage 12, unreachable
+        assert result.order == 1
+        assert result.name == "load_config"
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_discovery_only_does_not_generate_examples(self, mock_load, tmp_path):
+        """discovery_only family must fail at stage 1 — before generation (stage 13).
+
+        The stage-1 guard provably prevents example generation from executing.
+        """
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("discovery_only")
+        ctx = _make_ctx(tmp_path, family="words")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "discovery_only" in result.error
+        # Stage 1 fails — generation is stage 13, unreachable
+        assert result.order == 1
+        assert result.name == "load_config"
+
+    @patch("plugin_examples.family_config.load_family_config")
+    def test_discovery_only_does_not_publish(self, mock_load, tmp_path):
+        """discovery_only family must fail at stage 1 — before publisher (stage 17).
+
+        The stage-1 guard provably prevents the publisher from executing.
+        """
+        from plugin_examples.runner import _stage_load_config
+        mock_load.return_value = self._make_mock_config("discovery_only")
+        ctx = _make_ctx(tmp_path, family="words")
+        result = _run_stage("load_config", 1, _stage_load_config, ctx)
+        assert result.status == "failed"
+        assert "discovery_only" in result.error
+        # Stage 1 fails — publisher is stage 17, unreachable
+        assert result.order == 1
+        assert result.name == "load_config"
+
+
 class TestTemplateModeVerdict:
     def test_template_mode_not_full_e2e(self, tmp_path):
         """Template mode must NOT produce FULL E2E PASSED verdict."""

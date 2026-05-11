@@ -1,0 +1,32 @@
+{
+  "scenario_id": "words-converter",
+  "family": "words",
+  "type_name": "Converter",
+  "full_type_name": "Aspose.Words.LowCode.Converter",
+  "primary_method": "Convert",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Converter",
+    "Converter.Convert"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Static API: Converter.Convert(inputPath, outputPath). Input created programmatically via Document+DocumentBuilder. Output validated by %PDF header."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/words-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

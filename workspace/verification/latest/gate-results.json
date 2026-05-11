@@ -1,58 +1,58 @@
 {
-  "verdict": "PR_DRY_RUN_READY",
+  "verdict": "BLOCKED_SOURCE_OF_TRUTH",
   "publishable": false,
-  "all_required_passed": true,
-  "blocking_gates": [],
+  "all_required_passed": false,
+  "blocking_gates": [
+    "gate_source_of_truth",
+    "gate_scenarios",
+    "gate_generation"
+  ],
   "gates": [
+    {
+      "gate_id": "gate_source_of_truth",
+      "name": "Source of Truth",
+      "status": "failed",
+      "required": true,
+      "evidence_files": [],
+      "failure_reason": "Hard-stop stage(s) failed: load_config",
+      "downstream_blocked": [
+        "gate_scenarios",
+        "gate_generation",
+        "gate_build",
+        "gate_run",
+        "gate_output_validation",
+        "gate_reviewer",
+        "gate_publish"
+      ],
+      "stage_name": "load_config"
+    },
     {
       "gate_id": "gate_scenarios",
       "name": "Scenario Planning",
-      "status": "passed",
+      "status": "blocked",
       "required": true,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "No ready scenarios",
       "downstream_blocked": [],
       "stage_name": "scenario_planning"
     },
     {
       "gate_id": "gate_generation",
       "name": "Example Generation",
-      "status": "passed",
+      "status": "blocked",
       "required": true,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "No examples generated",
       "downstream_blocked": [],
       "stage_name": "generation"
     },
     {
-      "gate_id": "gate_build",
-      "name": "Build Validation",
-      "status": "passed",
-      "required": true,
-      "evidence_files": [
-        "validation-results.json"
-      ],
-      "failure_reason": null,
-      "downstream_blocked": [],
-      "stage_name": "validation"
-    },
-    {
-      "gate_id": "gate_run",
-      "name": "Runtime Validation",
-      "status": "passed",
-      "required": true,
-      "evidence_files": [],
-      "failure_reason": null,
-      "downstream_blocked": [],
-      "stage_name": "validation"
-    },
-    {
       "gate_id": "gate_reviewer",
       "name": "Example Reviewer",
-      "status": "passed",
+      "status": "skipped",
       "required": false,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "Reviewer unavailable",
       "downstream_blocked": [],
       "stage_name": "reviewer"
     }

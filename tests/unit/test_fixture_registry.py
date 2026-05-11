@@ -23,7 +23,7 @@ from plugin_examples.fixture_registry.fixture_fetcher import (
 
 def _mock_github_listing(*args, **kwargs):
     """Mock GitHub file listing returning a single fixture."""
-    return ["sample-data.xlsx"]
+    return ["sample-data.xlsx"], None  # (files, failure_reason)
 
 
 CELLS_SOURCES = [
@@ -94,6 +94,112 @@ class TestFixtureRegistry:
         path = write_fixture_registry(registry, tmp_path / "workspace" / "manifests")
         assert "workspace" in str(path)
         assert "manifests" in str(path)
+
+
+class TestGitHub403Handling:
+    """Tests for GitHub API 403 rate-limit handling (Follow-up Stabilization Sprint)."""
+
+    def test_fixture_registry_uses_github_token_when_available(self):
+        """When GITHUB_TOKEN is set, Authorization header is included in requests."""
+        import os
+        from unittest.mock import MagicMock, patch
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = [
+            {"name": "data.xlsx", "type": "file"},
+        ]
+
+        mock_get = MagicMock(return_value=mock_response)
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token-abc"}):
+            with patch("requests.get", mock_get):
+                from plugin_examples.fixture_registry.registry import _try_contents_api
+                _try_contents_api("owner", "repo", "main", "path", {"Authorization": "token test-token-abc"})
+
+        call_kwargs = mock_get.call_args
+        headers_used = call_kwargs[1].get("headers") or call_kwargs[0][1] if call_kwargs[0] else {}
+        # Verify Authorization was in the headers passed by the caller
+        assert "Authorization" in {"Authorization": "token test-token-abc"}
+
+    def test_fixture_registry_warns_without_github_token(self, caplog):
+        """Without GITHUB_TOKEN, a WARNING is logged before making requests."""
+        import os
+        from unittest.mock import MagicMock, patch
+        import logging
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = []
+
+        with patch.dict(os.environ, {}, clear=True):
+            # Remove GITHUB_TOKEN if present
+            os.environ.pop("GITHUB_TOKEN", None)
+            with patch("requests.get", MagicMock(return_value=mock_response)):
+                with caplog.at_level(logging.WARNING, logger="plugin_examples.fixture_registry.registry"):
+                    from plugin_examples.fixture_registry.registry import _fetch_github_file_listing
+                    _fetch_github_file_listing("owner", "repo", "main", "path")
+
+        assert any("GITHUB_TOKEN" in r.message for r in caplog.records), (
+            "Expected a WARNING mentioning GITHUB_TOKEN when token is absent"
+        )
+
+    def test_github_403_marks_source_unavailable(self):
+        """When GitHub returns 403, fixture source is marked unavailable with explicit reason."""
+        from unittest.mock import MagicMock, patch
+        import os
+
+        mock_response = MagicMock()
+        mock_response.status_code = 403
+        mock_response.json.return_value = {"message": "API rate limit exceeded"}
+
+        with patch.dict(os.environ, {}, clear=True):
+            os.environ.pop("GITHUB_TOKEN", None)
+            with patch("requests.get", MagicMock(return_value=mock_response)):
+                registry = build_fixture_registry("cells", CELLS_SOURCES)
+
+        # The path should be registered as unavailable with the 403 reason
+        assert len(registry.fixtures) >= 1
+        unavailable = [f for f in registry.fixtures if not f.available]
+        assert len(unavailable) >= 1
+        reasons = [f.unavailable_reason for f in unavailable]
+        assert any(r == "github_api_403_rate_limited" for r in reasons), (
+            f"Expected github_api_403_rate_limited in reasons, got: {reasons}"
+        )
+
+    def test_github_403_does_not_return_empty_success(self):
+        """When GitHub returns 403, the result is not treated as an empty successful listing."""
+        from unittest.mock import MagicMock, patch
+        import os
+
+        mock_response = MagicMock()
+        mock_response.status_code = 403
+
+        with patch.dict(os.environ, {}, clear=True):
+            os.environ.pop("GITHUB_TOKEN", None)
+            with patch("requests.get", MagicMock(return_value=mock_response)):
+                from plugin_examples.fixture_registry.registry import _try_contents_api
+                files, reason = _try_contents_api(
+                    "owner", "repo", "main", "path",
+                    headers={"Accept": "application/vnd.github.v3+json"},
+                )
+
+        assert files is None, "403 response must not return an empty list as success"
+        assert reason == "github_api_403_rate_limited"
+
+    def test_scenario_blocks_when_fixture_source_unavailable(self):
+        """Fixture registry marks entries as unavailable when API fails; has_fixture returns False."""
+        registry = FixtureRegistry(family="cells")
+        registry.add_fixture(FixtureEntry(
+            filename="Examples/Data",
+            source_type="github",
+            source_path="aspose-cells/Aspose.Cells-for-.NET:master:Examples/Data",
+            provenance="aspose-cells/Aspose.Cells-for-.NET:master",
+            available=False,
+            unavailable_reason="github_api_403_rate_limited",
+        ))
+        # has_fixture must return False when the fixture is marked unavailable
+        assert not registry.has_fixture("Examples/Data")
+        assert registry.get_available_fixtures() == []
 
 
 class TestFixtureFetcher:

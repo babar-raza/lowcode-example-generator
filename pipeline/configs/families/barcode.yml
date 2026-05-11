@@ -1,0 +1,64 @@
+family: barcode
+display_name: Aspose.BarCode for .NET
+enabled: false
+status: disabled
+# CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
+# NuGet package resolved successfully; DllReflector found 0 plugin types.
+# Do not re-enable without evidence of a new LowCode namespace release.
+# NOTE: package_id below uses standard Aspose naming convention.
+# Verify exact NuGet package ID at nuget.org before enabling generation.
+# Discovery run will fail gracefully if package does not exist.
+
+nuget:
+  package_id: Aspose.BarCode
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+  dependency_resolution:
+    enabled: true
+    max_depth: 2
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.BarCode.LowCode
+    - Aspose.BarCode.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-barcode
+    repo: Aspose.BarCode-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-barcode-net
+    repo: Aspose.BarCode.LowCode-for-.NET-Examples
+    branch: main
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

@@ -1,0 +1,65 @@
+family: ocr
+display_name: Aspose.OCR for .NET
+enabled: true
+status: discovery_only
+# REFLECTION_BLOCKED: Aspose.Drawing.Common dependency fixed by extra_packages (2026-05-09).
+# New blocker: Aspose.AI.LLM Version=25.12.0.0 - internal Aspose assembly NOT available on NuGet.org.
+# LowCode namespace existence is UNKNOWN until Aspose.AI.LLM becomes downloadable.
+# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection has not yet completed successfully.
+# Blocker details: workspace/verification/latest/ocr-reflection-blocker.json
+
+nuget:
+  package_id: Aspose.OCR
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+  dependency_resolution:
+    enabled: true
+    max_depth: 3
+    extra_packages:
+      - Aspose.Drawing.Common
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.OCR.LowCode
+    - Aspose.OCR.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-ocr
+    repo: Aspose.OCR-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-ocr-net
+    repo: Aspose.OCR.LowCode-for-.NET-Examples
+    branch: main
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

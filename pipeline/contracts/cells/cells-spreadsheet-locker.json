@@ -1,0 +1,32 @@
+{
+  "scenario_id": "cells-spreadsheet-locker",
+  "family": "cells",
+  "type_name": "SpreadsheetLocker",
+  "full_type_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "generated_fixture_file",
+  "expected_symbols": [
+    "SpreadsheetLocker",
+    "SpreadsheetLocker.Process"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".xlsx",
+    "validation_method": "file_exists",
+    "notes": "Static API: SpreadsheetLocker.Process(inputPath, outputPath, password). Output is password-protected xlsx."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/cells-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

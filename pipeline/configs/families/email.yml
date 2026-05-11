@@ -1,0 +1,66 @@
+family: email
+display_name: Aspose.Email for .NET
+enabled: true
+status: discovery_only
+# Moved from disabled/ to active path for discovery investigation (Phase F / R2).
+# status=discovery_only blocks generation runner; allows NuGet resolution + reflection only.
+# Namespace Aspose.Email.LowCode is claimed but not yet reflection-proven.
+# If discovery confirms LowCode namespace exists, promote to status: experimental or active.
+# If discovery returns no LowCode namespace, set status: disabled with evidence.
+
+nuget:
+  package_id: Aspose.Email
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+    - net48
+  dependency_resolution:
+    enabled: true
+    max_depth: 2
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.Email.LowCode
+    - Aspose.Email.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-email
+    repo: Aspose.Email-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-email-net
+    repo: Aspose.Email.LowCode-for-.NET-Examples
+    branch: main
+  # NOTE: dedicated repo placeholder — does not yet exist.
+  # Will be provisioned by maintainer if/when discovery confirms LowCode namespace.
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

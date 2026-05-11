@@ -61,6 +61,21 @@ def _load_json(path: Path) -> dict:
         return {}
 
 
+def _count_cumulative_prs(family: str, latest: Path) -> int:
+    """Count distinct merged PRs for a family by scanning all *merge-result*.json files.
+
+    Scans latest/ for files matching the pattern ``{family}*merge-result*.json``,
+    loads each, and counts unique non-null ``merge_commit_sha`` values.
+    """
+    shas: set[str] = set()
+    for path in latest.glob(f"{family}*merge-result*.json"):
+        data = _load_json(path)
+        sha = data.get("merge_commit_sha")
+        if sha:
+            shas.add(sha)
+    return len(shas)
+
+
 def _get_next_action(family: str, post_merge_status: str, merge_sha: str | None) -> str:
     """Derive next required action from current state."""
     if not merge_sha:
@@ -122,6 +137,7 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         )
 
         next_action = _get_next_action(family, post_merge_status, merge_sha)
+        cumulative_pr_count = _count_cumulative_prs(family, latest)
 
         results.append({
             "family": family,
@@ -138,6 +154,7 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
             "open_followups": open_followups,
             "taskcard_evidence_source": taskcard_source,
             "next_required_action": next_action,
+            "cumulative_pr_count": cumulative_pr_count,
         })
 
     all_merged = all(r["last_merge_sha"] is not None for r in results)

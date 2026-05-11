@@ -1,0 +1,32 @@
+{
+  "scenario_id": "cells-text-converter",
+  "family": "cells",
+  "type_name": "TextConverter",
+  "full_type_name": "Aspose.Cells.LowCode.TextConverter",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "generated_fixture_file",
+  "expected_symbols": [
+    "TextConverter",
+    "TextConverter.Process"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".csv",
+    "validation_method": "file_exists",
+    "notes": "Static API: TextConverter.Process(inputPath, outputPath). Input is .csv; output can be .txt or .csv."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/cells-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-08T00:00:00Z"
+}

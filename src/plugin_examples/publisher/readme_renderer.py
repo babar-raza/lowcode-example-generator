@@ -6,6 +6,7 @@ from the family config and current run evidence. No hardcoded Cells/Words conten
 
 from __future__ import annotations
 
+import json
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -52,6 +53,38 @@ _FAMILY_URL_SLUG: dict[str, str] = {
     "gis": "gis",
     "diagram": "diagram",
 }
+
+
+def read_manifest_api_symbol(manifest_path: Path) -> str | None:
+    """Read the primary demonstrated API symbol from example.manifest.json.
+
+    Extracts ``ClassName.MethodName`` from the ``claimed_symbols`` list.
+    The first symbol with 5+ dot-separated parts is treated as a method
+    reference (e.g. ``Aspose.Cells.LowCode.HtmlConverter.Process``); the
+    last two parts are returned as ``HtmlConverter.Process``.
+
+    Args:
+        manifest_path: Path to example.manifest.json.
+
+    Returns:
+        ``ClassName.MethodName`` string, or None if the manifest is missing,
+        unreadable, or contains no method-level symbol.
+    """
+    try:
+        data = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    claimed = data.get("claimed_symbols", [])
+    seen: set[str] = set()
+    for sym in claimed:
+        parts = sym.split(".")
+        # Method symbols: Aspose.Family.LowCode.ClassName.MethodName = 5 parts
+        if len(parts) >= 5:
+            api_sym = f"{parts[-2]}.{parts[-1]}"
+            if api_sym not in seen:
+                seen.add(api_sym)
+                return api_sym
+    return None
 
 
 @dataclass
@@ -137,6 +170,7 @@ def build_readme_context(
     package_version: str,
     gate_verdict: str = "PR_DRY_RUN_READY",
     generation_date: str = "",
+    package_path: Path | None = None,
 ) -> ReadmeContext:
     """Build a ReadmeContext from family config and runtime evidence.
 
@@ -148,6 +182,11 @@ def build_readme_context(
         package_version: NuGet package version string (e.g. "26.4.0").
         gate_verdict: Gate verdict string written into the Validation Status table.
         generation_date: ISO timestamp string; defaults to utcnow if empty.
+        package_path: Path to the PR dry-run package directory containing
+            ``examples/{family}/lowcode/{name}/example.manifest.json`` files.
+            When set, the renderer reads each manifest to populate ``api_class``
+            with a method-qualified symbol (e.g. ``HtmlConverter.Process``).
+            Falls back to the directory-name inference if the manifest is absent.
 
     Returns:
         Populated ReadmeContext ready to pass to render_readme().
@@ -252,6 +291,13 @@ def build_readme_context(
 
         input_fmt = _infer_input_format(name, family, default_ext)
         api_class = _infer_api_class(name)
+        if package_path is not None:
+            manifest_path = (
+                Path(package_path) / "examples" / family / "lowcode" / name / "example.manifest.json"
+            )
+            sym = read_manifest_api_symbol(manifest_path)
+            if sym:
+                api_class = sym
 
         example_entries.append(ExampleEntry(
             name=name,

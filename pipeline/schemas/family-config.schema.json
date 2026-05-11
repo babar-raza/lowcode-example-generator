@@ -2,26 +2,63 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "FamilyConfig",
   "type": "object",
-  "required": ["family", "display_name", "enabled", "status", "nuget", "plugin_detection", "github", "fixtures", "existing_examples", "generation", "validation", "llm"],
+  "required": [
+    "family",
+    "display_name",
+    "enabled",
+    "status",
+    "nuget",
+    "plugin_detection",
+    "github",
+    "fixtures",
+    "existing_examples",
+    "generation",
+    "validation",
+    "llm"
+  ],
   "properties": {
-    "family": { "type": "string" },
-    "display_name": { "type": "string" },
+    "family": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
     "enabled": {
       "type": "boolean",
       "description": "If false, this config is never processed by the package watcher or monthly runner."
     },
     "status": {
       "type": "string",
-      "enum": ["active", "disabled", "experimental"],
-      "description": "active = in production pipeline. disabled = excluded entirely. experimental = runs but does not publish."
+      "enum": [
+        "active",
+        "disabled",
+        "experimental",
+        "discovery_only"
+      ],
+      "description": "active = in production pipeline. disabled = excluded entirely. experimental = runs but does not publish. discovery_only = NuGet resolution + reflection only, no generation."
     },
     "nuget": {
       "type": "object",
-      "required": ["package_id", "version_policy"],
+      "required": [
+        "package_id",
+        "version_policy"
+      ],
       "properties": {
-        "package_id": { "type": "string" },
-        "version_policy": { "enum": ["latest-stable", "pinned"] },
-        "pinned_version": { "type": ["string", "null"] },
+        "package_id": {
+          "type": "string"
+        },
+        "version_policy": {
+          "enum": [
+            "latest-stable",
+            "pinned"
+          ]
+        },
+        "pinned_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "allow_prerelease": {
           "type": "boolean",
           "default": false,
@@ -29,7 +66,9 @@
         },
         "target_framework_preference": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1,
           "description": "Ordered preference list. First matching lib/ folder wins."
         },
@@ -45,6 +84,13 @@
               "type": "integer",
               "default": 2,
               "description": "Maximum transitive dependency depth to resolve."
+            },
+            "extra_packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Additional NuGet package IDs to download for DllReflector dependency resolution. Use when a required assembly is not declared in any nuspec TFM group for the primary package (e.g. Aspose.Drawing.Common for Aspose.OCR)."
             }
           }
         }
@@ -52,74 +98,155 @@
     },
     "plugin_detection": {
       "type": "object",
-      "required": ["namespace_patterns"],
+      "required": [
+        "namespace_patterns"
+      ],
       "properties": {
         "namespace_patterns": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1
         }
       }
     },
     "github": {
       "type": "object",
-      "required": ["official_examples_repo", "published_plugin_examples_repo"],
+      "required": [
+        "official_examples_repo",
+        "published_plugin_examples_repo"
+      ],
       "properties": {
         "official_examples_repo": {
           "type": "object",
-          "required": ["owner", "repo", "branch"],
+          "required": [
+            "owner",
+            "repo",
+            "branch"
+          ],
           "properties": {
-            "owner": { "type": "string" },
-            "repo": { "type": "string" },
-            "branch": { "type": "string" }
+            "owner": {
+              "type": "string"
+            },
+            "repo": {
+              "type": "string"
+            },
+            "branch": {
+              "type": "string"
+            }
           }
         },
         "published_plugin_examples_repo": {
           "type": "object",
-          "required": ["owner", "repo", "branch"],
+          "required": [
+            "owner",
+            "repo",
+            "branch"
+          ],
           "properties": {
-            "owner": { "type": "string" },
-            "repo": { "type": "string" },
-            "branch": { "type": "string" }
+            "owner": {
+              "type": "string"
+            },
+            "repo": {
+              "type": "string"
+            },
+            "branch": {
+              "type": "string"
+            }
           }
+        },
+        "central_repo_allowed": {
+          "type": "boolean",
+          "default": false,
+          "description": "When false (default), live publishing is blocked if published_plugin_examples_repo appears to be a central shared repository not specific to this family. Set to true only with an explicit human approval decision that the target repo is shared by design."
         }
       }
     },
     "fixtures": {
       "type": "object",
-      "required": ["sources"],
+      "required": [
+        "sources"
+      ],
       "properties": {
-        "sources": { "type": "array" }
+        "sources": {
+          "type": "array"
+        }
       }
     },
     "existing_examples": {
       "type": "object",
-      "required": ["sources"],
+      "required": [
+        "sources"
+      ],
       "properties": {
-        "sources": { "type": "array" }
+        "sources": {
+          "type": "array"
+        }
       }
     },
     "generation": {
       "type": "object",
-      "required": ["min_examples_per_family", "max_examples_per_monthly_run"],
+      "required": [
+        "min_examples_per_family",
+        "max_examples_per_monthly_run"
+      ],
       "properties": {
-        "min_examples_per_family": { "type": "integer", "minimum": 1 },
-        "max_examples_per_monthly_run": { "type": "integer", "minimum": 1 },
-        "allow_new_fixtures": { "type": "boolean" },
-        "allow_generated_input_files": { "type": "boolean" }
+        "min_examples_per_family": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_examples_per_monthly_run": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "allow_new_fixtures": {
+          "type": "boolean"
+        },
+        "allow_generated_input_files": {
+          "type": "boolean"
+        },
+        "allowed_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional allowlist of type short-names (e.g. Converter, Splitter). When non-empty, only these types are planned as generation scenarios. Used for controlled pilots."
+        },
+        "preferred_methods_per_type": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional map of type short-name to preferred primary method (e.g. {Watermarker: SetText}). When set, the specified method is placed first in target_methods so the LLM demonstrates it as the primary operation."
+        }
       }
     },
     "validation": {
       "type": "object",
       "properties": {
-        "require_restore": { "type": "boolean" },
-        "require_build": { "type": "boolean" },
-        "require_run": { "type": "boolean" },
-        "require_output_validation": { "type": "boolean" },
-        "require_example_reviewer": { "type": "boolean" },
+        "require_restore": {
+          "type": "boolean"
+        },
+        "require_build": {
+          "type": "boolean"
+        },
+        "require_run": {
+          "type": "boolean"
+        },
+        "require_output_validation": {
+          "type": "boolean"
+        },
+        "require_example_reviewer": {
+          "type": "boolean"
+        },
         "runtime_runner": {
           "type": "string",
-          "enum": ["linux", "windows", "auto"],
+          "enum": [
+            "linux",
+            "windows",
+            "auto"
+          ],
           "default": "auto",
           "description": "auto = linux unless only .NET Framework assemblies are available, in which case windows is required."
         }
@@ -127,11 +254,15 @@
     },
     "llm": {
       "type": "object",
-      "required": ["provider_order"],
+      "required": [
+        "provider_order"
+      ],
       "properties": {
         "provider_order": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1
         }
       }
@@ -140,26 +271,42 @@
       "type": "object",
       "description": "Optional hints for data-driven template generation. All fields have defaults.",
       "properties": {
-        "default_input_extension": { "type": "string" },
-        "default_input_filename": { "type": "string" },
+        "default_input_extension": {
+          "type": "string"
+        },
+        "default_input_filename": {
+          "type": "string"
+        },
         "array_input_filenames": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "input_creation_lines": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "merger_input_creation_lines": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "additional_usings": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
-        "default_output_extension": { "type": "string" },
-        "default_fixture_extension": { "type": "string" }
+        "default_output_extension": {
+          "type": "string"
+        },
+        "default_fixture_extension": {
+          "type": "string"
+        }
       }
     }
   }

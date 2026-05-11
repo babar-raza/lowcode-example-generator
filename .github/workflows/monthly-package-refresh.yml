@@ -44,3 +44,39 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python -m plugin_examples run --family ${{ inputs.family || 'cells' }} ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Validate evidence integrity
+        run: |
+          python -m pytest tests/unit/test_denominator_model.py tests/unit/test_scenario_contracts.py -q --tb=short
+        if: always()
+        continue-on-error: false
+
+  regression-check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Validate published examples build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/validate_published_examples_build.py
+
+      - name: Upload regression report
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-build-regression-report
+          path: workspace/verification/latest/monthly-build-regression-report.json
+        if: always()

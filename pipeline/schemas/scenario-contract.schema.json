@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/babar-raza/lowcode-example-generator/pipeline/schemas/scenario-contract.schema.json",
+  "title": "ScenarioContract",
+  "description": "Static contract for a single LowCode example scenario. Pins the expected code structure, symbols, fixture type, and publication status for a given scenario_id.",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "family",
+    "type_name",
+    "primary_method",
+    "contract_version",
+    "fixture_type",
+    "expected_symbols",
+    "forbidden_patterns",
+    "output_expectations",
+    "publication_status",
+    "lifecycle_status",
+    "evidence_sources",
+    "last_verified_at"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "description": "Stable unique identifier for this scenario (e.g. cells-html-converter)"
+    },
+    "family": {
+      "type": "string",
+      "enum": ["cells", "words", "pdf"],
+      "description": "Plugin family this scenario belongs to"
+    },
+    "type_name": {
+      "type": "string",
+      "description": "Short class name of the LowCode workflow type (e.g. HtmlConverter)"
+    },
+    "full_type_name": {
+      "type": "string",
+      "description": "Fully-qualified .NET type name (e.g. Aspose.Cells.LowCode.HtmlConverter)"
+    },
+    "primary_method": {
+      "type": "string",
+      "description": "The primary method demonstrated in the example (e.g. Process, Convert)"
+    },
+    "contract_version": {
+      "type": "string",
+      "description": "Semantic version of this contract (e.g. 1.0.0)"
+    },
+    "fixture_type": {
+      "type": "string",
+      "enum": [
+        "generated_fixture_file",
+        "programmatic_input",
+        "programmatic_pdf_single",
+        "programmatic_pdf_multi_page",
+        "programmatic_pdf_pair",
+        "programmatic_pdf_known_text",
+        "existing_fixture",
+        "none"
+      ],
+      "description": "How the test fixture (input file) is provided"
+    },
+    "expected_symbols": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "description": "Symbols that MUST appear in generated code (short or fully-qualified names)"
+    },
+    "forbidden_patterns": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Code patterns that must NOT appear in generated code"
+    },
+    "output_expectations": {
+      "type": "object",
+      "required": ["output_format"],
+      "properties": {
+        "output_format": {
+          "type": "string",
+          "description": "Expected output file extension (e.g. .pdf, .html, text_string)"
+        },
+        "validation_method": {
+          "type": "string",
+          "description": "How to validate the output (e.g. file_exists, pdf_header_check, docx_zip_check)"
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "publication_status": {
+      "type": "string",
+      "enum": ["MERGED", "PR_DRY_RUN_READY", "REVIEWER_PASSED", "PR_OPEN", "IN_GENERATION", "PLANNED"],
+      "description": "Current publication status of this scenario's example"
+    },
+    "lifecycle_status": {
+      "type": "string",
+      "description": "Lifecycle stage at time of contract creation"
+    },
+    "evidence_sources": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Relative paths to evidence files backing this contract"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when contract was last verified against source evidence"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional human notes about this contract"
+    }
+  },
+  "additionalProperties": false
+}

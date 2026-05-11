@@ -1,0 +1,39 @@
+{
+  "family": "email",
+  "source_package": "Aspose.Email",
+  "source_version": "26.4.0",
+  "source_package_sha256": "87f227c5ebf7f471c702b85e2a65018fccf8a2852fbf1c62da67d4aa827c8c9f",
+  "api_catalog_sha256": null,
+  "api_catalog_source": "workspace/verification/latest/email-source-of-truth-proof.json",
+  "plugin_namespace": "Aspose.Email.LowCode",
+  "total_lowcode_types": 3,
+  "workflow_root_types": 1,
+  "workflow_root_types_basis": "Manually classified from api-catalog: Converter has static Convert methods. FolderOutputHandler and IOutputHandler are output/callback types, not standalone workflow roots.",
+  "non_runnable_types": 2,
+  "non_runnable_breakdown": {
+    "DATA_SOURCE_OR_OUTPUT_HANDLER": 1,
+    "INTERFACE": 1
+  },
+  "workflow_root_type_names": ["Converter"],
+  "allowed_pilot_types": [],
+  "allowed_pilot_count": 0,
+  "denominator_basis": "DISCOVERY_ONLY",
+  "denominator_basis_note": "Email is in discovery_only status. No pilot has been approved. allowed_types is empty. Current denominator = 0 published. FULL_SOT workflow_root_count = 1 (Converter). Controlled pilot requires: (1) fixture strategy for email files, (2) controlled_pilot_approved=true in email.yml, (3) APPROVE_LIVE_PR for publication.",
+  "runnable_scenarios": 0,
+  "runnable_scenarios_basis": "DISCOVERY_ONLY — no scenarios planned until pilot approved",
+  "runnable_scenario_ids": [],
+  "published_count": 0,
+  "pr_ready_count": 0,
+  "reviewer_passed_awaiting_pr_count": 0,
+  "blocked_count": 0,
+  "excluded_count": 3,
+  "excluded_count_basis": "All 3 types excluded: no pilot approved. 1 workflow_root (Converter) is deferred pending pilot. 2 non-runnable types are OUTPUT_HANDLER and INTERFACE.",
+  "coverage_pct_of_workflow_root": 0.0,
+  "coverage_pct_of_total_types": 0.0,
+  "evidence_sources": [
+    "workspace/verification/latest/email-source-of-truth-proof.json",
+    "pipeline/configs/families/email.yml"
+  ],
+  "last_verified_at": "2026-05-09T00:00:00Z",
+  "notes": "Email LowCode namespace confirmed: Aspose.Email.LowCode, 3 types, 11 methods. Converter class has 7 static methods for email format conversion (EML, MSG, HTML, MHT, MHTML). FolderOutputHandler implements IOutputHandler for stream output routing. Controlled pilot requires fixture strategy (email files: .eml or .msg inputs). Phase H planned."
+}

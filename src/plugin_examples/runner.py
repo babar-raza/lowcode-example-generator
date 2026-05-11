@@ -60,6 +60,13 @@ class PipelineContext:
     generated_projects: list[dict] = field(default_factory=list)
     validation_results: list = field(default_factory=list)
     gate_verdict: Any = None
+    # Stages completed so far during the loop (updated after each stage appends).
+    # Used by _stage_publisher to evaluate gates before the post-loop block runs.
+    _completed_stages: list = field(default_factory=list)
+    # Lifecycle registry — tracks every planned example through all stages.
+    lifecycle_registry: Any = None
+    # Agent metrics collector — optional, set when --metrics is enabled.
+    metrics_collector: Any = None
 
 
 # ---------------------------------------------------------------------------
@@ -87,6 +94,17 @@ def scenario_to_dict(s) -> dict:
         "input_files": getattr(s, "input_files", []),
         "required_input_format": getattr(s, "required_input_format", ""),
     }
+
+
+def _write_catalog_hash_evidence(result, evidence_dir: Path) -> None:
+    """Write catalog-hash-validation.json evidence."""
+    import json as _json
+    from datetime import datetime, timezone
+    out = evidence_dir / "latest" / "catalog-hash-validation.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    data = result.to_dict()
+    data["validated_at"] = datetime.now(timezone.utc).isoformat()
+    out.write_text(_json.dumps(data, indent=2), encoding="utf-8")
 
 
 def _write_fixture_strategy_plan(planning, evidence_dir: Path) -> None:
@@ -277,6 +295,12 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
         raise RuntimeError(
             f"Family '{ctx.family}' is experimental. "
             "Use --allow-experimental to run experimental families."
+        )
+    if ctx.config.status == "discovery_only":
+        raise RuntimeError(
+            f"Family '{ctx.family}' is discovery_only. "
+            "Use 'discover-lowcode' to run source-of-truth discovery. "
+            "Generation is not allowed for discovery_only families."
         )
     return {"family": ctx.config.family, "package_id": ctx.config.nuget.package_id}
 
@@ -498,6 +522,15 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
                                            fixture_available=fixture_avail))
     write_entrypoint_scores(scores, ctx.evidence_dir)
 
+    # Catalog hash validation (B-013)
+    from plugin_examples.scenario_planner.planner import (
+        validate_catalog_hash,
+    )
+    catalog_hash_result = validate_catalog_hash(
+        ctx.family, ctx.catalog, ctx.repo_root,
+    )
+    _write_catalog_hash_evidence(catalog_hash_result, ctx.evidence_dir)
+
     ctx.planning = plan_scenarios(
         family=ctx.family,
         catalog=ctx.catalog,
@@ -506,6 +539,9 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         min_examples=ctx.config.generation.min_examples_per_family,
         source_of_truth_proof_path=str(ctx.proof_path),
         default_fixture_extension=fixture_ext,
+        allowed_types=ctx.config.generation.allowed_types or None,
+        preferred_methods_per_type=ctx.config.generation.preferred_methods_per_type or None,
+        repo_root=ctx.repo_root,
     )
     write_scenario_catalog(ctx.planning, ctx.evidence_dir)
     write_blocked_scenarios(ctx.planning, ctx.evidence_dir)
@@ -528,7 +564,10 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
 def _stage_llm_preflight(ctx: PipelineContext) -> dict:
     from plugin_examples.llm_router import LLMRouter
     from plugin_examples.llm_router.router import write_preflight_report
-    ctx.llm_router = LLMRouter(provider_order=ctx.config.llm.provider_order)
+    ctx.llm_router = LLMRouter(
+        provider_order=ctx.config.llm.provider_order,
+        metrics_collector=ctx.metrics_collector,
+    )
     preflight = ctx.llm_router.run_preflight()
     ctx.llm_available = ctx.llm_router.selected_provider is not None
     write_preflight_report(preflight, ctx.llm_router.selected_provider, ctx.evidence_dir)
@@ -549,6 +588,23 @@ def _stage_generation(ctx: PipelineContext) -> dict:
         generate_project,
         write_example_index,
     )
+    from plugin_examples.gates.example_lifecycle import ExampleLifecycleRegistry
+
+    # Initialize lifecycle registry before early return so blocked scenarios are
+    # always tracked even when ready_count == 0.
+    if ctx.lifecycle_registry is None:
+        ctx.lifecycle_registry = ExampleLifecycleRegistry(
+            family=ctx.family, run_id=ctx.run_id,
+        )
+
+    # Register blocked/excluded scenarios in lifecycle so they are never silently
+    # dropped from evidence.  Each gets a lifecycle record with EXCLUDED_BY_SCOPE.
+    if ctx.planning:
+        for blocked in ctx.planning.blocked_scenarios:
+            rec = ctx.lifecycle_registry.create_record(blocked.scenario_id)
+            reason = getattr(blocked, "blocked_reason", None) or getattr(blocked, "status", "blocked")
+            rec.mark_excluded(reason)
+            rec.final_verdict = "EXCLUDED_BY_SCOPE"
 
     if not ctx.planning or ctx.planning.ready_count == 0:
         return {"examples_generated": 0, "reason": "no ready scenarios"}
@@ -563,6 +619,9 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 
     for scenario in ctx.planning.ready_scenarios:
         scenario_dict = scenario_to_dict(scenario)
+        # Create lifecycle record for every planned scenario
+        lifecycle_rec = ctx.lifecycle_registry.create_record(scenario.scenario_id)
+        lifecycle_rec.update_stage("generation_attempted")
         try:
             hints = {}
             if ctx.config and hasattr(ctx.config, "template_hints"):
@@ -571,9 +630,11 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             packet = build_packet(scenario_dict, ctx.catalog, template_hints=hints)
             example = generate_example(packet, llm_generate=llm_fn)
             if example.status == "failed" or not example.code.strip():
-                logger.warning("Skipping project for %s: %s", scenario.scenario_id,
-                               example.failure_reason or "empty code")
+                reason = example.failure_reason or "empty code"
+                logger.warning("Generation failed for %s: %s", scenario.scenario_id, reason)
+                lifecycle_rec.mark_generation_failed(reason)
                 continue
+            lifecycle_rec.mark_generated()
             project = generate_project(
                 example,
                 package_id=ctx.config.nuget.package_id,
@@ -583,9 +644,17 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                 input_strategy=getattr(scenario, "input_strategy", "none"),
                 input_files=getattr(scenario, "input_files", []),
             )
+            # Store PDF-specific constraints so build repair can re-inject them.
+            # The packet is not available in _stage_validation, so we persist here.
+            project["pdf_constraints"] = [
+                c for c in packet.constraints
+                if "REQUIRED:" in c or "FORBIDDEN:" in c
+            ]
+            project["type_short"] = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
             ctx.generated_projects.append(project)
         except Exception as e:
             logger.warning("Generation failed for %s: %s", scenario.scenario_id, e)
+            lifecycle_rec.mark_generation_failed(str(e))
 
     write_example_index(ctx.generated_projects, ctx.evidence_dir)
 
@@ -621,7 +690,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 def _stage_validation(ctx: PipelineContext) -> dict:
     from plugin_examples.verifier_bridge import run_dotnet_validation
     from plugin_examples.verifier_bridge.dotnet_runner import write_validation_results
-    from plugin_examples.generator.code_generator import _extract_code
+    from plugin_examples.generator.code_generator import _extract_code, _validate_code
 
     if not ctx.generated_projects:
         return {"validated": 0, "reason": "no generated projects"}
@@ -660,6 +729,15 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 break
             program_path = Path(proj["program_path"])
             current_code = program_path.read_text(encoding="utf-8")
+            # Re-inject PDF-specific packet constraints so LLM cannot fall back to
+            # semantically wrong but compilable code (e.g. File.Copy).
+            pdf_constraints = proj.get("pdf_constraints", [])
+            pdf_constraint_reminder = ""
+            if pdf_constraints:
+                pdf_constraint_reminder = (
+                    "\n\nREQUIRED CONSTRAINTS (must be satisfied in fixed code):\n"
+                    + "\n".join(f"- {c}" for c in pdf_constraints)
+                )
             repair_prompt = (
                 f"The following C# code fails to compile. Fix it.\n\n"
                 f"Compiler stdout:\n{build_stdout[:800]}\n\n"
@@ -668,6 +746,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"RULES: Do NOT use Console.ReadKey() or Console.ReadLine(). "
                 f"Do NOT use try/catch to hide errors. "
                 f"Return ONLY the fixed C# code in a ```csharp code block."
+                f"{pdf_constraint_reminder}"
             )
             try:
                 response = ctx.llm_router.generate(repair_prompt, system_prompt=(
@@ -677,6 +756,25 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 ))
                 fixed_code = _extract_code(response)
                 if fixed_code and fixed_code != current_code:
+                    # Semantic validation before writing — catch File.Copy and other
+                    # semantically wrong but compilable substitutes.
+                    proj_family = "pdf" if pdf_constraints else ""
+                    proj_type_short = proj.get("type_short", "")
+                    semantic_issues = _validate_code(fixed_code, family=proj_family, type_short=proj_type_short)
+                    if semantic_issues:
+                        logger.warning(
+                            "Build repair attempt %d for %s produced semantically invalid code: %s",
+                            attempt, proj["scenario_id"], semantic_issues,
+                        )
+                        repair_log.append({
+                            "scenario_id": proj["scenario_id"],
+                            "repair_type": "build",
+                            "attempt": attempt,
+                            "success": False,
+                            "semantic_issues": semantic_issues,
+                        })
+                        # Do NOT write the invalid code — continue to next attempt or stop
+                        break
                     program_path.write_text(fixed_code, encoding="utf-8")
                     vr = run_dotnet_validation(
                         Path(proj["project_dir"]),
@@ -762,6 +860,28 @@ def _stage_validation(ctx: PipelineContext) -> dict:
 
         ctx.validation_results.append(vr)
 
+        # Update lifecycle record with validation outcome
+        if ctx.lifecycle_registry:
+            rec = ctx.lifecycle_registry.get_record(proj["scenario_id"])
+            if rec:
+                if vr.build and vr.build.success:
+                    if repairs_done > 0:
+                        rec.mark_build_repaired(repairs_done)
+                    else:
+                        rec.mark_build_passed()
+                elif vr.failure_stage == "build":
+                    rec.mark_build_failed(
+                        (vr.build.stderr or vr.build.stdout or "unknown")[:200] if vr.build else "unknown"
+                    )
+                if vr.run and vr.run.success:
+                    if runtime_repairs_done > 0:
+                        rec.mark_run_repaired(runtime_repairs_done)
+                    else:
+                        rec.mark_run_passed()
+                elif vr.failure_stage == "run":
+                    run_err = (vr.run.stderr or vr.run.stdout or "unknown")[:200] if vr.run else "unknown"
+                    rec.mark_run_failed(run_err)
+
     write_validation_results(ctx.validation_results, ctx.evidence_dir)
 
     # Classify runtime failures for feedback
@@ -783,6 +903,30 @@ def _stage_validation(ctx: PipelineContext) -> dict:
             "total_runtime_repairs": runtime_repairs_done,
             "attempts": repair_log,
         }, indent=2))
+
+    # Backlog failed examples with root cause and recommended fix
+    if ctx.lifecycle_registry:
+        for rec in ctx.lifecycle_registry.records:
+            if rec.generation_status == "failed":
+                rec.mark_backlogged(
+                    root_cause=rec.generation_failure_reason or "generation_failed",
+                    recommended_fix="Review LLM constraints and few-shot patterns for this scenario",
+                    priority="high",
+                )
+            elif rec.build_status == "failed":
+                rec.mark_backlogged(
+                    root_cause=rec.build_failure_reason or "build_failed",
+                    recommended_fix="Feed compiler errors to LLM with stronger constraints",
+                    priority="high",
+                )
+            elif rec.run_status == "failed":
+                rec.mark_backlogged(
+                    root_cause=rec.run_failure_reason or "run_failed",
+                    recommended_fix="Classify runtime failure and add to repairable set or fix constraints",
+                    priority="medium",
+                )
+            elif rec.build_status in ("passed", "repaired") and rec.run_status in ("passed", "repaired"):
+                rec.mark_pr_candidate()
 
     passed = sum(1 for v in ctx.validation_results if v.passed)
     failed = len(ctx.validation_results) - passed
@@ -837,6 +981,22 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
             raise RuntimeError("Reviewer unavailable and --require-reviewer is set")
 
     write_reviewer_results(result, ctx.evidence_dir)
+
+    # Update lifecycle records with reviewer outcome
+    if ctx.lifecycle_registry:
+        for rec in ctx.lifecycle_registry.pr_candidates:
+            if not result.available:
+                rec.mark_reviewer_unavailable()
+            elif result.passed:
+                rec.mark_reviewer_passed()
+            else:
+                rec.mark_reviewer_failed(result.error or "reviewer_failed")
+                rec.mark_backlogged(
+                    root_cause="reviewer_failed",
+                    recommended_fix="Address reviewer feedback and regenerate",
+                    priority="high",
+                )
+
     return {
         "available": result.available,
         "passed": result.passed,
@@ -847,6 +1007,15 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
 def _stage_publisher(ctx: PipelineContext) -> dict:
     from plugin_examples.publisher import publish_examples
     from plugin_examples.publisher.publisher import write_publishing_report
+    from plugin_examples.gates.evaluator import evaluate_gates
+
+    # Pre-evaluate gates from stages completed before the publisher runs.
+    # The post-loop gate evaluation (which writes gate-results.json) runs after
+    # the stage loop ends, so ctx.gate_verdict is None here. We compute it now
+    # from ctx._completed_stages (stages 1-16) so the publisher can use the
+    # verdict directly without depending on gate-results.json existing on disk.
+    if ctx.gate_verdict is None:
+        ctx.gate_verdict = evaluate_gates(ctx._completed_stages, ctx)
 
     examples = ctx.generated_projects or []
     result = publish_examples(
@@ -855,6 +1024,8 @@ def _stage_publisher(ctx: PipelineContext) -> dict:
         examples=examples,
         verification_dir=ctx.evidence_dir,
         dry_run=ctx.dry_run,
+        gate_verdict=ctx.gate_verdict,
+        family_config=ctx.config,
     )
     write_publishing_report(result, ctx.evidence_dir)
     return {
@@ -1037,6 +1208,13 @@ def run_pipeline(
     command: str = "",
     promote_latest: bool = False,
     allow_experimental: bool = False,
+    compare_run: str | None = None,
+    metrics_collector: Any = None,
+    metrics_config: Any = None,
+    metrics_post: bool = False,
+    metrics_job_type: str | None = None,
+    metrics_strict: bool = False,
+    metrics_force_repost: bool = False,
 ) -> dict:
     """Run the full pipeline and return a structured report dict."""
     if repo_root is None:
@@ -1066,6 +1244,7 @@ def run_pipeline(
         repo_root=repo_root,
         run_dir=run_dir,
         evidence_dir=evidence_dir,
+        metrics_collector=metrics_collector,
     )
     ctx._allow_experimental = allow_experimental
 
@@ -1091,12 +1270,16 @@ def run_pipeline(
 
     for name, order, fn in effective_stages:
         if hard_stopped:
-            stages.append(StageResult(name=name, order=order, status="skipped"))
+            r = StageResult(name=name, order=order, status="skipped")
+            stages.append(r)
+            ctx._completed_stages = list(stages)
             continue
 
         if order > max_stage_order:
-            stages.append(StageResult(name=name, order=order, status="skipped",
-                                       error=f"Skipped: max tier {max_tier}"))
+            r = StageResult(name=name, order=order, status="skipped",
+                            error=f"Skipped: max tier {max_tier}")
+            stages.append(r)
+            ctx._completed_stages = list(stages)
             continue
 
         result = _run_stage(name, order, fn, ctx)
@@ -1116,6 +1299,7 @@ def run_pipeline(
             # All other failures stay "failed" — no blanket degradation
 
         stages.append(result)
+        ctx._completed_stages = list(stages)
 
     pipeline_end = time.time()
     end_time = datetime.now(timezone.utc).isoformat()
@@ -1177,6 +1361,40 @@ def run_pipeline(
 
     write_gate_results(ctx.gate_verdict, evidence_dir)
 
+    # Write lifecycle evidence and update per-family backlog
+    if ctx.lifecycle_registry:
+        from plugin_examples.gates.example_lifecycle import (
+            write_lifecycle_evidence,
+            update_backlog_from_lifecycle,
+        )
+        write_lifecycle_evidence(ctx.lifecycle_registry, evidence_dir)
+        backlog_dir = verification_dir / "latest"
+        update_backlog_from_lifecycle(ctx.lifecycle_registry, backlog_dir)
+
+    # Run-to-run comparison (only when --compare-run is provided)
+    comparison_result = None
+    if compare_run and ctx.lifecycle_registry:
+        from plugin_examples.gates.example_lifecycle import (
+            compare_with_prior_run,
+            write_comparison_evidence,
+        )
+        comparison_result = compare_with_prior_run(
+            ctx.lifecycle_registry, compare_run, repo_root,
+        )
+        write_comparison_evidence(comparison_result, evidence_dir)
+        # Re-write lifecycle evidence with comparison fields populated
+        write_lifecycle_evidence(ctx.lifecycle_registry, evidence_dir)
+        if comparison_result.regression_detected:
+            logger.warning(
+                "RUN-TO-RUN REGRESSION DETECTED: %d scenario(s) regressed vs %s",
+                comparison_result.regressed_count, compare_run,
+            )
+        else:
+            logger.info(
+                "Run-to-run comparison vs %s: %s",
+                compare_run, comparison_result.verdict,
+            )
+
     # After snapshot
     after = _snapshot_workspace(manifests_dir, verification_dir)
 
@@ -1201,14 +1419,11 @@ def run_pipeline(
     # Promote evidence to durable paths if requested
     if promote_latest:
         import shutil
+        from plugin_examples.evidence_layout import promote_family_evidence
+
         src_latest = evidence_dir / "latest"
-        dst_latest = verification_dir / "latest"
-        dst_latest.mkdir(parents=True, exist_ok=True)
-        if src_latest.exists():
-            for f in src_latest.iterdir():
-                if f.is_file() and f.name != ".gitkeep":
-                    shutil.copy2(f, dst_latest / f.name)
-            logger.info("Evidence promoted to %s", dst_latest)
+        # Promote to families/{family}/ (primary) and verification/latest/ (compat alias)
+        promote_family_evidence(src_latest, verification_dir, family, run_id)
 
         # Promote manifests (package-lock, fixture-registry, etc.)
         dst_manifests = manifests_dir
@@ -1221,5 +1436,29 @@ def run_pipeline(
             if src_mf.exists():
                 shutil.copy2(src_mf, dst_manifests / mf)
         logger.info("Manifests promoted to %s", dst_manifests)
+
+    # Metrics finalization (only when metrics_collector is set)
+    if metrics_collector and metrics_config:
+        try:
+            from plugin_examples.metrics.pipeline_hook import finalize_metrics
+            from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
+            metrics_result = finalize_metrics(
+                ctx=ctx,
+                config=metrics_config,
+                report=report,
+                command=command or "run",
+                dry_run=not metrics_post,
+                post=metrics_post,
+                job_type_override=metrics_job_type,
+                force_repost=metrics_force_repost,
+                strict=metrics_strict,
+                test_only_sprint=not is_agent_metrics_production_enabled(),
+            )
+            report["_metrics_result"] = metrics_result
+        except Exception as exc:
+            logger.error("Metrics finalization failed: %s", exc)
+            if metrics_strict:
+                raise
 
     return report

@@ -159,8 +159,14 @@ def score_entrypoint(
         result.runnable = False
         result.rejection_reason = f"Net score {net_score:.1f} is negative"
     elif not methods:
-        result.runnable = False
-        result.rejection_reason = "No public methods to demonstrate"
+        # Exception: OPERATION_FACADE with constructors — Process is inherited and
+        # not reflected by DllReflector (e.g. TextExtractor inherits from IPlugin).
+        # The type classifier already flagged this with reason "Process likely inherited".
+        if role.role == "operation_facade" and type_info.get("constructors"):
+            result.runnable = True
+        else:
+            result.runnable = False
+            result.rejection_reason = "No public methods to demonstrate"
     else:
         result.runnable = True
 

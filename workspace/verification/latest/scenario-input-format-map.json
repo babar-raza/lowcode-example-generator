@@ -1,93 +1,43 @@
 {
   "scenarios": [
     {
-      "scenario_id": "cells-html-converter",
-      "workflow_type": "HtmlConverter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".html",
-      "reason": "Inferred from type name HtmlConverter",
+      "scenario_id": "pdf-merger",
+      "workflow_type": "Merger",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Merger",
       "source": "input_format_map",
-      "confidence": "high",
+      "confidence": "medium",
       "blocked_if_unclear": false
     },
     {
-      "scenario_id": "cells-image-converter",
-      "workflow_type": "ImageConverter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".png",
-      "reason": "Inferred from type name ImageConverter",
+      "scenario_id": "pdf-optimizer",
+      "workflow_type": "Optimizer",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Optimizer",
       "source": "input_format_map",
-      "confidence": "high",
+      "confidence": "medium",
       "blocked_if_unclear": false
     },
     {
-      "scenario_id": "cells-json-converter",
-      "workflow_type": "JsonConverter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".json",
-      "reason": "Inferred from type name JsonConverter",
+      "scenario_id": "pdf-splitter",
+      "workflow_type": "Splitter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Splitter",
       "source": "input_format_map",
-      "confidence": "high",
+      "confidence": "medium",
       "blocked_if_unclear": false
     },
     {
-      "scenario_id": "cells-pdf-converter",
-      "workflow_type": "PdfConverter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".pdf",
-      "reason": "Inferred from type name PdfConverter",
+      "scenario_id": "pdf-text-extractor",
+      "workflow_type": "TextExtractor",
+      "selected_input_format": ".pdf",
+      "selected_output_format": "",
+      "reason": "Inferred from type name TextExtractor",
       "source": "input_format_map",
-      "confidence": "high",
-      "blocked_if_unclear": false
-    },
-    {
-      "scenario_id": "cells-spreadsheet-converter",
-      "workflow_type": "SpreadsheetConverter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".xlsx",
-      "reason": "Inferred from type name SpreadsheetConverter",
-      "source": "input_format_map",
-      "confidence": "high",
-      "blocked_if_unclear": false
-    },
-    {
-      "scenario_id": "cells-spreadsheet-locker",
-      "workflow_type": "SpreadsheetLocker",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".xlsx",
-      "reason": "Inferred from type name SpreadsheetLocker",
-      "source": "input_format_map",
-      "confidence": "high",
-      "blocked_if_unclear": false
-    },
-    {
-      "scenario_id": "cells-spreadsheet-merger",
-      "workflow_type": "SpreadsheetMerger",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".xlsx",
-      "reason": "Inferred from type name SpreadsheetMerger",
-      "source": "input_format_map",
-      "confidence": "high",
-      "blocked_if_unclear": false
-    },
-    {
-      "scenario_id": "cells-spreadsheet-splitter",
-      "workflow_type": "SpreadsheetSplitter",
-      "selected_input_format": ".xlsx",
-      "selected_output_format": ".xlsx",
-      "reason": "Inferred from type name SpreadsheetSplitter",
-      "source": "input_format_map",
-      "confidence": "high",
-      "blocked_if_unclear": false
-    },
-    {
-      "scenario_id": "cells-text-converter",
-      "workflow_type": "TextConverter",
-      "selected_input_format": ".csv",
-      "selected_output_format": ".txt",
-      "reason": "Inferred from type name TextConverter",
-      "source": "input_format_map",
-      "confidence": "high",
+      "confidence": "medium",
       "blocked_if_unclear": false
     }
   ]

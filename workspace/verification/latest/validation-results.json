@@ -1,213 +1,75 @@
 {
-  "total": 9,
-  "passed": 9,
+  "total": 3,
+  "passed": 3,
   "failed": 0,
   "results": [
     {
-      "scenario_id": "cells-html-converter",
+      "scenario_id": "pdf-optimizer",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3293.6179637908936
+        "duration_ms": 4105.7116985321045
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3554.4891357421875
+        "duration_ms": 3380.3560733795166
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1957.0395946502686
+        "duration_ms": 1651.4508724212646
       }
     },
     {
-      "scenario_id": "cells-image-converter",
+      "scenario_id": "pdf-splitter",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1019.5841789245605
+        "duration_ms": 1016.4592266082764
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1366.614580154419
+        "duration_ms": 1614.0999794006348
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1288.6898517608643
+        "duration_ms": 1551.8391132354736
       }
     },
     {
-      "scenario_id": "cells-json-converter",
+      "scenario_id": "pdf-text-extractor",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 967.8101539611816
+        "duration_ms": 999.5002746582031
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1296.9162464141846
+        "duration_ms": 1363.8935089111328
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1029.5238494873047
-      }
-    },
-    {
-      "scenario_id": "cells-pdf-converter",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1094.486951828003
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1278.5141468048096
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1266.8612003326416
-      }
-    },
-    {
-      "scenario_id": "cells-spreadsheet-converter",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 987.3559474945068
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1364.6585941314697
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1138.899326324463
-      }
-    },
-    {
-      "scenario_id": "cells-spreadsheet-locker",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 978.6622524261475
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1189.4664764404297
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1143.4223651885986
-      }
-    },
-    {
-      "scenario_id": "cells-spreadsheet-merger",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 973.0632305145264
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1297.1317768096924
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1078.406572341919
-      }
-    },
-    {
-      "scenario_id": "cells-spreadsheet-splitter",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 967.7252769470215
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1187.6471042633057
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1004.3313503265381
-      }
-    },
-    {
-      "scenario_id": "cells-text-converter",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 959.9521160125732
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1261.7573738098145
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 991.5120601654053
+        "duration_ms": 2138.6120319366455
       }
     }
   ]

@@ -676,6 +676,205 @@ class TestPublishReadmeCommand:
 
 
 # ---------------------------------------------------------------------------
+# TestManifestApiSymbolExtraction
+# ---------------------------------------------------------------------------
+
+class TestManifestApiSymbolExtraction:
+    """Tests for read_manifest_api_symbol() and the package_path integration."""
+
+    def _write_manifest(self, tmp_path: Path, claimed_symbols: list) -> Path:
+        import json
+        manifest = tmp_path / "example.manifest.json"
+        manifest.write_text(json.dumps({
+            "scenario_id": "test-scenario",
+            "package_id": "Aspose.Test",
+            "package_version": "26.4.0",
+            "target_framework": "net8.0",
+            "claimed_symbols": claimed_symbols,
+            "status": "generated",
+        }), encoding="utf-8")
+        return manifest
+
+    def test_read_manifest_api_symbol_extracts_cells_process_method(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import read_manifest_api_symbol
+        manifest = self._write_manifest(tmp_path, [
+            "Aspose.Cells.LowCode.HtmlConverter",
+            "Aspose.Cells.LowCode.HtmlConverter.Process",
+            "Aspose.Cells.LowCode.HtmlConverter.Process",
+        ])
+        result = read_manifest_api_symbol(manifest)
+        assert result == "HtmlConverter.Process"
+
+    def test_read_manifest_api_symbol_extracts_words_specific_method(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import read_manifest_api_symbol
+        manifest = self._write_manifest(tmp_path, [
+            "Aspose.Words.LowCode.Watermarker",
+            "Aspose.Words.LowCode.Watermarker.SetText",
+        ])
+        result = read_manifest_api_symbol(manifest)
+        assert result == "Watermarker.SetText"
+
+    def test_read_manifest_api_symbol_returns_none_for_missing_file(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import read_manifest_api_symbol
+        missing = tmp_path / "nonexistent" / "example.manifest.json"
+        result = read_manifest_api_symbol(missing)
+        assert result is None
+
+    def test_read_manifest_api_symbol_returns_none_for_class_only_symbols(self, tmp_path):
+        """When all symbols have ≤4 parts (class-only), return None."""
+        from plugin_examples.publisher.readme_renderer import read_manifest_api_symbol
+        manifest = self._write_manifest(tmp_path, [
+            "Aspose.Cells.LowCode.HtmlConverter",
+        ])
+        result = read_manifest_api_symbol(manifest)
+        assert result is None
+
+    def test_read_manifest_api_symbol_returns_none_for_empty_symbols(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import read_manifest_api_symbol
+        manifest = self._write_manifest(tmp_path, [])
+        result = read_manifest_api_symbol(manifest)
+        assert result is None
+
+    def test_build_readme_context_reads_manifest_when_package_path_given(self, tmp_path):
+        """When package_path is set, build_readme_context reads manifest for api_class."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context
+        import json
+        # Create manifest at expected path: {package_path}/examples/cells/lowcode/html-converter/
+        manifest_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
+        manifest_dir.mkdir(parents=True)
+        (manifest_dir / "example.manifest.json").write_text(json.dumps({
+            "claimed_symbols": [
+                "Aspose.Cells.LowCode.HtmlConverter",
+                "Aspose.Cells.LowCode.HtmlConverter.Process",
+            ]
+        }), encoding="utf-8")
+
+        cfg = _make_family_config(
+            family="cells",
+            display_name="Aspose.Cells for .NET",
+            nuget_package_id="Aspose.Cells",
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+        )
+        ctx = build_readme_context(
+            family="cells", family_config=cfg,
+            examples=[{"name": "html-converter", "output_format": "html"}],
+            package_version="26.4.0",
+            package_path=tmp_path,
+        )
+        assert ctx.examples[0].api_class == "HtmlConverter.Process"
+
+    def test_build_readme_context_falls_back_when_no_manifest(self, tmp_path):
+        """When package_path set but manifest absent, fall back to _infer_api_class."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context
+        cfg = _make_family_config(
+            family="cells",
+            display_name="Aspose.Cells for .NET",
+            nuget_package_id="Aspose.Cells",
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+        )
+        ctx = build_readme_context(
+            family="cells", family_config=cfg,
+            examples=[{"name": "html-converter", "output_format": "html"}],
+            package_version="26.4.0",
+            package_path=tmp_path,  # no manifest file under tmp_path
+        )
+        assert ctx.examples[0].api_class == "HtmlConverter"
+
+    def test_build_readme_context_skips_manifest_when_package_path_is_none(self):
+        """When package_path=None (default), manifest is not read — inferred class name used."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context
+        cfg = _make_family_config(
+            family="cells",
+            display_name="Aspose.Cells for .NET",
+            nuget_package_id="Aspose.Cells",
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+        )
+        ctx = build_readme_context(
+            family="cells", family_config=cfg,
+            examples=[{"name": "html-converter", "output_format": "html"}],
+            package_version="26.4.0",
+            # package_path omitted — defaults to None
+        )
+        assert ctx.examples[0].api_class == "HtmlConverter"
+
+    def test_auditor_warns_for_unqualified_api_class(self):
+        """audit_readme warns when api_class column has no dot (class-only, no method)."""
+        from plugin_examples.publisher.readme_auditor import audit_readme
+        readme = (
+            "## Overview\n\n"
+            "## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Description |\n"
+            "|---------|-----------------|-------|--------|-------------|\n"
+            "| `html-converter` | `HtmlConverter` | xlsx | html | Convert |\n\n"
+            "## Requirements\n\n## How to Run\n\n## Package Installation\n\n"
+            "## Validation Status\n\n## Useful Links\n\n"
+        )
+        context = {
+            "package_version": "26.4.0",
+            "examples": [{"name": "html-converter"}],
+            "family": "cells",
+        }
+        result = audit_readme(readme, context)
+        assert "html-converter" in result.unqualified_api_classes, \
+            "html-converter must be flagged as having unqualified api_class"
+        assert any("HtmlConverter" in w for w in result.warnings), \
+            "Warning must mention the api_class value"
+
+    def test_auditor_does_not_fail_for_unqualified_api_class(self):
+        """Unqualified api_class is advisory only — must NOT set passed=False alone."""
+        from plugin_examples.publisher.readme_auditor import audit_readme
+        # Complete README that satisfies all non-advisory checks, including kb link
+        readme = (
+            "## Overview\n\n"
+            "## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Description |\n"
+            "|---------|-----------------|-------|--------|-------------|\n"
+            "| `html-converter` | `HtmlConverter` | xlsx | html | Convert |\n\n"
+            "## Requirements\n\n## How to Run\n\n## Package Installation\n\n"
+            "## Validation Status\n\n"
+            "## Useful Links\n\nhttps://kb.aspose.net/cells/\n\n"
+        )
+        context = {
+            "package_version": "",
+            "examples": [{"name": "html-converter"}],
+            "family": "cells",
+        }
+        result = audit_readme(readme, context)
+        # Advisory: unqualified_api_classes is populated
+        assert "html-converter" in result.unqualified_api_classes, \
+            "html-converter should be flagged as advisory"
+        # But passed must be True — the qualifier warning is advisory only
+        assert result.passed is True, \
+            "Unqualified api_class is advisory only — audit must still pass when no other issues"
+
+    def test_auditor_accepts_method_qualified_api_class_without_unqualified_warning(self):
+        """When api_class contains a dot (e.g. HtmlConverter.Process), no advisory warning."""
+        from plugin_examples.publisher.readme_auditor import audit_readme
+        readme = (
+            "## Overview\n\n"
+            "## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Description |\n"
+            "|---------|-----------------|-------|--------|-------------|\n"
+            "| `html-converter` | `HtmlConverter.Process` | xlsx | html | Convert |\n\n"
+            "## Requirements\n\n## How to Run\n\n## Package Installation\n\n"
+            "## Validation Status\n\n## Useful Links\n\n"
+        )
+        context = {
+            "package_version": "26.4.0",
+            "examples": [{"name": "html-converter"}],
+            "family": "cells",
+        }
+        result = audit_readme(readme, context)
+        assert result.unqualified_api_classes == [], \
+            "No unqualified api_classes expected when method qualifier present"
+        assert not any("lacks method qualifier" in w for w in result.warnings), \
+            "No advisory warning expected for method-qualified api_class"
+
+
+# ---------------------------------------------------------------------------
 # TestReadmeRendererAsposeNetUrls
 # ---------------------------------------------------------------------------
 

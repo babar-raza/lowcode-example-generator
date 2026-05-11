@@ -68,6 +68,8 @@ class ReadmeAuditResult:
     found_version: str | None = None
     expected_example_count: int = 0
     found_example_count: int = 0
+    # Method-level symbol check: examples whose api_class lacks a method qualifier (advisory)
+    unqualified_api_classes: list[str] = field(default_factory=list)
 
 
 def _extract_examples_section(content: str) -> str:
@@ -100,6 +102,25 @@ def _find_example_names_in_table(examples_section: str) -> list[str]:
             if m:
                 names.append(m.group(1))
     return names
+
+
+def _find_api_class_for_example(examples_section: str, example_name: str) -> str | None:
+    """Return the api_class column value for a specific example row.
+
+    Scans the table for the row whose first column contains ``example_name``
+    and returns the backtick-quoted second column (the Demonstrated API field).
+    Returns None if the row or column is not found.
+    """
+    for line in examples_section.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("|") and f"`{example_name}`" in stripped:
+            cols = stripped.split("|")
+            # cols: ['', ' `name` ', ' `api_class` ', ...]
+            if len(cols) >= 3:
+                m = re.search(r"`([^`]+)`", cols[2])
+                if m:
+                    return m.group(1)
+    return None
 
 
 def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
@@ -192,7 +213,24 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
             failures.append(f"Catalog symbol noise detected (pattern: {pattern!r})")
             break
 
-    # --- 7. Blocked scenario reference check ---
+    # --- 7. Method-qualifier check (advisory, non-fatal) ---
+    # Warn when any example's api_class in the table lacks a dot separator —
+    # this indicates the directory-name inference fallback was used instead of
+    # the manifest-backed method symbol (e.g. "HtmlConverter" vs "HtmlConverter.Process").
+    for ex in examples:
+        name = ex.get("name", "") if isinstance(ex, dict) else ex
+        if not name:
+            continue
+        api_cls = _find_api_class_for_example(examples_section, name)
+        if api_cls is not None and "." not in api_cls:
+            result.unqualified_api_classes.append(name)
+            result.warnings.append(
+                f"Example '{name}' api_class '{api_cls}' lacks method qualifier "
+                "(expected format: 'ClassName.MethodName', e.g. 'HtmlConverter.Process'). "
+                "Check that example.manifest.json is present and package_path was passed to build_readme_context()."
+            )
+
+    # --- 8. Blocked scenario reference check ---
     # Check that no scenario marked as "blocked" in the context appears in the README
     # (Only applicable if context provides a blocked list; otherwise skip)
     blocked: list[str] = []

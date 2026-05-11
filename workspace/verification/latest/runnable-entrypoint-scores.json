@@ -1,11 +1,1799 @@
 {
-  "total_scored": 22,
-  "runnable_count": 9,
-  "rejected_count": 13,
+  "total_scored": 101,
+  "runnable_count": 12,
+  "rejected_count": 89,
   "scores": [
     {
-      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
-      "name": "AbstractLowCodeLoadOptionsProvider",
+      "full_name": "Aspose.Pdf.LowCode.CompressOptions",
+      "name": "CompressOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ConversionMode",
+      "name": "ConversionMode",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DataType",
+      "name": "DataType",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DecryptionOptions",
+      "name": "DecryptionOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DocConverter",
+      "name": "DocConverter",
+      "role": "operation_facade",
+      "score": 5.5,
+      "max_score": 6.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.EncryptionOptions",
+      "name": "EncryptionOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileDataSource",
+      "name": "FileDataSource",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileResult",
+      "name": "FileResult",
+      "role": "result_model",
+      "score": 3.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileSaveTarget",
+      "name": "FileSaveTarget",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions",
+      "name": "FormCheckBoxFieldCreateOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions",
+      "name": "FormCheckBoxFieldSetOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldCreateOptions",
+      "name": "FormComboBoxFieldCreateOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions",
+      "name": "FormComboBoxFieldSetOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditor",
+      "name": "FormEditor",
+      "role": "utility",
+      "score": 0.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorAddOptions",
+      "name": "FormEditorAddOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorOptions",
+      "name": "FormEditorOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorRemoveOptions",
+      "name": "FormEditorRemoveOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorSetOptions",
+      "name": "FormEditorSetOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporter",
+      "name": "FormExporter",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporterOptions",
+      "name": "FormExporterOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporterToJsonOptions",
+      "name": "FormExporterToJsonOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions",
+      "name": "FormExporterValuesToCsvOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldCreateOptions",
+      "name": "FormFieldCreateOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldOptions",
+      "name": "FormFieldOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldSetOptions",
+      "name": "FormFieldSetOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions",
+      "name": "FormFlattenAllFieldsOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattener",
+      "name": "FormFlattener",
+      "role": "utility",
+      "score": 0.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenerOptions",
+      "name": "FormFlattenerOptions",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions",
+      "name": "FormFlattenSelectedFieldsOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormImporter",
+      "name": "FormImporter",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+      "name": "FormImporterJsonOptions",
+      "role": "options",
+      "score": 2.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "3 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormJsonImportSource",
+      "name": "FormJsonImportSource",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormOptions",
+      "name": "FormOptions",
+      "role": "abstract_base",
+      "score": -3.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions",
+      "name": "FormRemoveAllFieldsOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions",
+      "name": "FormRemoveSelectedFieldsOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions",
+      "name": "FormTextBoxFieldCreateOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions",
+      "name": "FormTextBoxFieldSetOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Html",
+      "name": "Html",
+      "role": "utility",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.HtmlToPdfOptions",
+      "name": "HtmlToPdfOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IDataSource",
+      "name": "IDataSource",
+      "role": "interface_contract",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractor",
+      "name": "ImageExtractor",
+      "role": "operation_facade",
+      "score": 1.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractorOptions",
+      "name": "ImageExtractorOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IOperationResult",
+      "name": "IOperationResult",
+      "role": "interface_contract",
+      "score": -1.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IPlugin",
+      "name": "IPlugin",
+      "role": "interface_contract",
+      "score": -4.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IPluginOptions",
+      "name": "IPluginOptions",
+      "role": "interface_contract",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ISaveTarget",
+      "name": "ISaveTarget",
+      "role": "interface_contract",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Jpeg",
+      "name": "Jpeg",
+      "role": "unknown",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.JpegOptions",
+      "name": "JpegOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.MergeOptions",
+      "name": "MergeOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Merger",
+      "name": "Merger",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ObjectResult",
+      "name": "ObjectResult",
+      "role": "result_model",
+      "score": 3.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "3 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Ofd",
+      "name": "Ofd",
+      "role": "utility",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OfdToPdfOptions",
+      "name": "OfdToPdfOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OptimizeOptions",
+      "name": "OptimizeOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Optimizer",
+      "name": "Optimizer",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+      "name": "OrganizerBaseOptions",
+      "role": "options",
+      "score": 2.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAConverter",
+      "name": "PdfAConverter",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAConvertOptions",
+      "name": "PdfAConvertOptions",
+      "role": "options",
+      "score": 2.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAOptionsBase",
+      "name": "PdfAOptionsBase",
+      "role": "abstract_base",
+      "score": -3.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAStandardVersion",
+      "name": "PdfAStandardVersion",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidateOptions",
+      "name": "PdfAValidateOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidationResult",
+      "name": "PdfAValidationResult",
+      "role": "result_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfConverterOptions",
+      "name": "PdfConverterOptions",
+      "role": "abstract_base",
+      "score": -3.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractor",
+      "name": "PdfExtractor",
       "role": "abstract_base",
       "score": -2.5,
       "max_score": 3.5,
@@ -40,10 +1828,134 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
-      "name": "AbstractLowCodeProtectionProvider",
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractorOptions",
+      "name": "PdfExtractorOptions",
       "role": "abstract_base",
+      "score": -3.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+      "name": "PdfGeneratorOptions",
+      "role": "abstract_base",
+      "score": -3.0,
+      "max_score": 3.0,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToDocOptions",
+      "name": "PdfToDocOptions",
+      "role": "options",
       "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToHtmlOptions",
+      "name": "PdfToHtmlOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToImage",
+      "name": "PdfToImage",
+      "role": "abstract_base",
+      "score": -2.5,
       "max_score": 3.5,
       "runnable": false,
       "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
@@ -51,7 +1963,7 @@
         {
           "signal": "simple_parameters",
           "weight": 2.0,
-          "detail": "6 methods with simple params"
+          "detail": "1 methods with simple params"
         },
         {
           "signal": "has_xml_summary",
@@ -67,19 +1979,29 @@
           "signal": "abstract_or_interface",
           "weight": -5.0,
           "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
-      "name": "AbstractLowCodeSaveOptionsProvider",
+      "full_name": "Aspose.Pdf.LowCode.PdfToImageOptions",
+      "name": "PdfToImageOptions",
       "role": "abstract_base",
-      "score": -4.5,
-      "max_score": 1.5,
+      "score": -3.0,
+      "max_score": 3.0,
       "runnable": false,
       "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
       "signals": [
         {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
           "signal": "has_xml_summary",
           "weight": 0.5,
           "detail": "Type has XML documentation"
@@ -102,34 +2024,196 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.HtmlConverter",
-      "name": "HtmlConverter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.PdfToXlsOptions",
+      "name": "PdfToXlsOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
       "signals": [
         {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
         },
         {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
         },
         {
-          "signal": "simple_parameters",
-          "weight": 2.0,
-          "detail": "1 methods with simple params"
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Png",
+      "name": "Png",
+      "role": "unknown",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
         },
         {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
         },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PngOptions",
+      "name": "PngOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ResizeOptions",
+      "name": "ResizeOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ResultContainer",
+      "name": "ResultContainer",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.RotateOptions",
+      "name": "RotateOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.SaveFormat",
+      "name": "SaveFormat",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Security",
+      "name": "Security",
+      "role": "utility",
+      "score": 0.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -143,43 +2227,23 @@
         {
           "signal": "complex_parameters",
           "weight": -1.0,
-          "detail": "2 complex object parameters"
+          "detail": "1 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.ImageConverter",
-      "name": "ImageConverter",
-      "role": "workflow_root",
-      "score": 8.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.SelectField",
+      "name": "SelectField",
+      "role": "utility",
+      "score": -0.5,
+      "max_score": 2.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
       "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "3 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
-        {
-          "signal": "simple_parameters",
-          "weight": 2.0,
-          "detail": "1 methods with simple params"
-        },
         {
           "signal": "file_io_semantics",
           "weight": 1.5,
           "detail": "Methods reference file paths"
-        },
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
         },
         {
           "signal": "fixture_available",
@@ -199,34 +2263,14 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.JsonConverter",
-      "name": "JsonConverter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.Signature",
+      "name": "Signature",
+      "role": "utility",
+      "score": 0.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
       "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
-        {
-          "signal": "simple_parameters",
-          "weight": 2.0,
-          "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
-        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -240,13 +2284,13 @@
         {
           "signal": "complex_parameters",
           "weight": -1.0,
-          "detail": "2 complex object parameters"
+          "detail": "1 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
-      "name": "LowCodeHtmlSaveOptions",
+      "full_name": "Aspose.Pdf.LowCode.SignOptions",
+      "name": "SignOptions",
       "role": "options",
       "score": -1.5,
       "max_score": 1.5,
@@ -271,8 +2315,8 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
-      "name": "LowCodeImageSaveOptions",
+      "full_name": "Aspose.Pdf.LowCode.SplitOptions",
+      "name": "SplitOptions",
       "role": "options",
       "score": -1.5,
       "max_score": 1.5,
@@ -297,14 +2341,19 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
-      "name": "LowCodeLoadOptions",
-      "role": "options",
-      "score": -1.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "full_name": "Aspose.Pdf.LowCode.Splitter",
+      "name": "Splitter",
+      "role": "operation_facade",
+      "score": 3.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -314,115 +2363,6 @@
           "signal": "fixture_available",
           "weight": 1.0,
           "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "no_methods",
-          "weight": -3.0,
-          "detail": "No public methods"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
-      "name": "LowCodeMergeOptions",
-      "role": "options",
-      "score": -1.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'options' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "no_methods",
-          "weight": -3.0,
-          "detail": "No public methods"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
-      "name": "LowCodePdfSaveOptions",
-      "role": "options",
-      "score": -1.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'options' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "no_methods",
-          "weight": -3.0,
-          "detail": "No public methods"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
-      "name": "LowCodeSaveOptions",
-      "role": "options",
-      "score": -1.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'options' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "no_methods",
-          "weight": -3.0,
-          "detail": "No public methods"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
-      "name": "LowCodeSaveOptionsProviderOfAssembling",
-      "role": "provider_callback",
-      "score": -4.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "provider_callback_role",
-          "weight": -5.0,
-          "detail": "Provider/callback type \u2014 not standalone"
         },
         {
           "signal": "complex_parameters",
@@ -432,44 +2372,13 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
-      "name": "LowCodeSaveOptionsProviderOfPlaceHolders",
-      "role": "provider_callback",
-      "score": -4.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "provider_callback_role",
-          "weight": -5.0,
-          "detail": "Provider/callback type \u2014 not standalone"
-        },
-        {
-          "signal": "complex_parameters",
-          "weight": -1.0,
-          "detail": "1 complex object parameters"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
-      "name": "LowCodeSplitOptions",
-      "role": "options",
+      "full_name": "Aspose.Pdf.LowCode.StreamDataSource",
+      "name": "StreamDataSource",
+      "role": "settings_model",
       "score": -1.5,
       "max_score": 1.5,
       "runnable": false,
-      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
       "signals": [
         {
           "signal": "has_xml_summary",
@@ -489,61 +2398,41 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.PdfConverter",
-      "name": "PdfConverter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
-      "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
-        {
-          "signal": "simple_parameters",
-          "weight": 2.0,
-          "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
-        },
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "fixture_available",
-          "weight": 1.0,
-          "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "complex_parameters",
-          "weight": -1.0,
-          "detail": "2 complex object parameters"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Cells.LowCode.SplitPartInfo",
-      "name": "SplitPartInfo",
+      "full_name": "Aspose.Pdf.LowCode.StreamResult",
+      "name": "StreamResult",
       "role": "result_model",
-      "score": -1.5,
-      "max_score": 1.5,
+      "score": 3.5,
+      "max_score": 3.5,
       "runnable": false,
       "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
       "signals": [
         {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.StreamSaveTarget",
+      "name": "StreamSaveTarget",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
           "signal": "has_xml_summary",
           "weight": 0.5,
           "detail": "Type has XML documentation"
@@ -561,33 +2450,18 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
-      "name": "SpreadsheetConverter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.StringResult",
+      "name": "StringResult",
+      "role": "result_model",
+      "score": 3.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
       "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
-          "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
+          "detail": "3 methods with simple params"
         },
         {
           "signal": "has_xml_summary",
@@ -598,42 +2472,22 @@
           "signal": "fixture_available",
           "weight": 1.0,
           "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "complex_parameters",
-          "weight": -1.0,
-          "detail": "2 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
-      "name": "SpreadsheetLocker",
-      "role": "workflow_root",
-      "score": 8.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.TableBuilder",
+      "name": "TableBuilder",
+      "role": "unknown",
+      "score": 3.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
       "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "4 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
-          "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
+          "detail": "4 methods with simple params"
         },
         {
           "signal": "has_xml_summary",
@@ -644,47 +2498,22 @@
           "signal": "fixture_available",
           "weight": 1.0,
           "detail": "Fixture files accessible"
-        },
-        {
-          "signal": "requires_callback_params",
-          "weight": -2.0,
-          "detail": "1 parameters are callback types"
-        },
-        {
-          "signal": "complex_parameters",
-          "weight": -1.0,
-          "detail": "7 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
-      "name": "SpreadsheetMerger",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.TableCellBuilder",
+      "name": "TableCellBuilder",
+      "role": "unknown",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
       "signals": [
-        {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
-        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
           "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
         },
         {
           "signal": "has_xml_summary",
@@ -704,33 +2533,23 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
-      "name": "SpreadsheetSplitter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
+      "full_name": "Aspose.Pdf.LowCode.TableGenerator",
+      "name": "TableGenerator",
+      "role": "operation_facade",
+      "score": 5.5,
+      "max_score": 6.5,
       "runnable": true,
       "rejection_reason": null,
       "signals": [
         {
-          "signal": "has_static_methods",
-          "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
           "signal": "standalone_role",
           "weight": 3.0,
-          "detail": "Role: workflow_root"
+          "detail": "Role: operation_facade"
         },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
           "detail": "1 methods with simple params"
-        },
-        {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
         },
         {
           "signal": "has_xml_summary",
@@ -750,33 +2569,184 @@
       ]
     },
     {
-      "full_name": "Aspose.Cells.LowCode.TextConverter",
-      "name": "TextConverter",
-      "role": "workflow_root",
-      "score": 10.0,
-      "max_score": 11.0,
-      "runnable": true,
-      "rejection_reason": null,
+      "full_name": "Aspose.Pdf.LowCode.TableOptions",
+      "name": "TableOptions",
+      "role": "options",
+      "score": 6.5,
+      "max_score": 6.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
       "signals": [
         {
           "signal": "has_static_methods",
           "weight": 3.0,
-          "detail": "2 static methods"
-        },
-        {
-          "signal": "standalone_role",
-          "weight": 3.0,
-          "detail": "Role: workflow_root"
+          "detail": "1 static methods"
         },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
-          "detail": "1 methods with simple params"
+          "detail": "4 methods with simple params"
         },
         {
-          "signal": "file_io_semantics",
-          "weight": 1.5,
-          "detail": "Methods reference file paths"
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableRowBuilder",
+      "name": "TableRowBuilder",
+      "role": "unknown",
+      "score": 3.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+      "name": "TextExtractor",
+      "role": "operation_facade",
+      "score": 1.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TextExtractorOptions",
+      "name": "TextExtractorOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Tiff",
+      "name": "Tiff",
+      "role": "unknown",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TiffOptions",
+      "name": "TiffOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Timestamp",
+      "name": "Timestamp",
+      "role": "utility",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
         },
         {
           "signal": "has_xml_summary",
@@ -791,7 +2761,131 @@
         {
           "signal": "complex_parameters",
           "weight": -1.0,
-          "detail": "2 complex object parameters"
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TimestampOptions",
+      "name": "TimestampOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TocGenerator",
+      "name": "TocGenerator",
+      "role": "operation_facade",
+      "score": 5.5,
+      "max_score": 6.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TocOptions",
+      "name": "TocOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "name": "XlsConverter",
+      "role": "operation_facade",
+      "score": 5.5,
+      "max_score": 6.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
         }
       ]
     }

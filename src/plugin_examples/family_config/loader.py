@@ -80,6 +80,7 @@ def _build_model(data: dict) -> FamilyConfig:
         dependency_resolution=DependencyResolution(
             enabled=dep_res.get("enabled", True),
             max_depth=dep_res.get("max_depth", 2),
+            extra_packages=dep_res.get("extra_packages", []),
         ),
     )
 
@@ -93,6 +94,7 @@ def _build_model(data: dict) -> FamilyConfig:
         published_plugin_examples_repo=RepoRef(
             **github_data["published_plugin_examples_repo"]
         ),
+        central_repo_allowed=github_data.get("central_repo_allowed", False),
     )
 
     fixtures = FixturesConfig(
@@ -114,6 +116,8 @@ def _build_model(data: dict) -> FamilyConfig:
         allow_generated_input_files=gen_data.get(
             "allow_generated_input_files", True
         ),
+        allowed_types=gen_data.get("allowed_types", []),
+        preferred_methods_per_type=gen_data.get("preferred_methods_per_type", {}),
     )
 
     val_data = data.get("validation", {})

@@ -1,0 +1,63 @@
+family: psd
+display_name: Aspose.PSD for .NET
+enabled: true
+status: discovery_only
+# REFLECTION_BLOCKED: Newtonsoft.Json dependency fixed by include_all_tfm_groups (2026-05-09).
+# New blocker: Aspose.JavaAttributes Version=1.0.0.0 - internal Aspose assembly NOT available on NuGet.org.
+# LowCode namespace existence is UNKNOWN until Aspose.JavaAttributes becomes downloadable.
+# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection has not yet completed successfully.
+# Blocker details: workspace/verification/latest/psd-reflection-blocker.json
+
+nuget:
+  package_id: Aspose.PSD
+  version_policy: latest-stable
+  pinned_version: null
+  allow_prerelease: false
+  target_framework_preference:
+    - netstandard2.0
+    - netstandard2.1
+    - net8.0
+    - net6.0
+  dependency_resolution:
+    enabled: true
+    max_depth: 3
+
+plugin_detection:
+  namespace_patterns:
+    - Aspose.PSD.LowCode
+    - Aspose.PSD.LowCode.*
+
+github:
+  official_examples_repo:
+    owner: aspose-psd
+    repo: Aspose.PSD-for-.NET
+    branch: master
+  published_plugin_examples_repo:
+    owner: aspose-psd-net
+    repo: Aspose.PSD.LowCode-for-.NET-Examples
+    branch: main
+
+fixtures:
+  sources: []
+
+existing_examples:
+  sources: []
+
+generation:
+  min_examples_per_family: 3
+  max_examples_per_monthly_run: 5
+  allow_new_fixtures: true
+  allow_generated_input_files: true
+  allowed_types: []
+
+validation:
+  require_restore: true
+  require_build: true
+  require_run: true
+  require_output_validation: false
+  require_example_reviewer: false
+
+llm:
+  provider_order:
+    - llm_professionalize
+    - ollama

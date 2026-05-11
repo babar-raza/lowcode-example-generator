@@ -103,9 +103,28 @@ def build_packet(
     # Add input-strategy-specific constraints
     fixture_instruction = _build_fixture_instruction(input_strategy, input_files)
 
-    # Detect PDF family from namespace
-    is_pdf = target_ns.lower().startswith("aspose.pdf")
+    # Detect family from namespace
+    ns_lower = target_ns.lower()
+    is_pdf = ns_lower.startswith("aspose.pdf")
     type_short = target_type.split(".")[-1].lower() if target_type else ""
+
+    # Detect family name for programmatic fixture guidance
+    _family_name = ""
+    if ns_lower.startswith("aspose.diagram"):
+        _family_name = "diagram"
+    elif ns_lower.startswith("aspose.email"):
+        _family_name = "email"
+    elif ns_lower.startswith("aspose.slides"):
+        _family_name = "slides"
+
+    # Inject family-specific programmatic fixture guidance
+    fixture_constraints, fixture_appendix = _build_programmatic_fixture_guidance(
+        _family_name, type_short, input_strategy,
+    )
+    if fixture_constraints:
+        constraints.extend(fixture_constraints)
+    if fixture_appendix:
+        fixture_instruction += fixture_appendix
 
     if is_pdf:
         constraints += [
@@ -213,7 +232,16 @@ def build_packet(
             "Options have AddInput()/AddOutput() methods — NOT InputPath/OutputPath properties. "
             "Always create input PDF programmatically with new Aspose.Pdf.Document() before calling API. "
             "TextExtractor: no AddOutput(), result is StringResult in ResultCollection."
-            if is_pdf else ""
+            if is_pdf
+            else (
+                " Diagram LowCode API rules: "
+                "Create input VSDX using Aspose.Diagram.Diagram() with Shape objects — NOT raw ZIP bytes. "
+                "PdfConverter.Process(inputPath, outputPath) converts Visio to PDF. "
+                "DiagramConverter.Process(inputPath, outputPath) converts Visio to Visio formats ONLY (VDX, VSDX, VSD). "
+                "DiagramConverter does NOT support PDF, SVG, or PNG output. "
+                "Core Aspose.Diagram API is allowed ONLY for creating the input fixture."
+                if _family_name == "diagram" else ""
+            )
         )
     )
 
@@ -280,9 +308,15 @@ def _build_fixture_instruction(input_strategy: str, input_files: list[str]) -> s
     elif input_strategy == "programmatic_input":
         return (
             "\nINPUT STRATEGY: Create any required input data programmatically before "
-            "calling the plugin API. Use the Aspose API (e.g., new Workbook()) to create "
-            "input files. Verify the file exists and is non-empty before passing it to the "
-            "plugin API. Do NOT reference files that are not created in the code."
+            "calling the plugin API. Use the product's core Aspose API to create a valid "
+            "input file. Do NOT write raw bytes, do NOT create empty placeholder files, "
+            "do NOT use File.WriteAllBytes with byte arrays. "
+            "Verify the file exists and is non-empty before passing it to the "
+            "plugin API. Do NOT reference files that are not created in the code. "
+            "Structure your code in three sections: "
+            "(1) INPUT FIXTURE CREATION — create the input file using the core product API, "
+            "(2) LOWCODE OPERATION — call the LowCode API for the operation under test, "
+            "(3) OUTPUT VALIDATION — verify the output file exists and print its size."
         )
     return ""
 
@@ -314,6 +348,110 @@ def _build_fewshot_snippet(input_strategy: str, input_files: list[str]) -> str:
         '    throw new InvalidOperationException("Output file was not created");\n'
         "```\n"
     )
+
+
+# ---------------------------------------------------------------------------
+# Family-scoped programmatic fixture guidance registry
+# ---------------------------------------------------------------------------
+# Each entry teaches the LLM how to create valid input files using the
+# product's core API (allowed for fixture setup only) and how to call the
+# LowCode API for the operation under test.
+# To add a new family: add an entry keyed by family name.
+
+_PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
+    "diagram": {
+        "fixture_code": (
+            "// Create a valid VSDX input file using Aspose.Diagram (core API — allowed for fixture setup only)\n"
+            "var diagram = new Aspose.Diagram.Diagram();\n"
+            "var page = diagram.Pages[0];\n"
+            "page.Name = \"TestPage\";\n"
+            "\n"
+            "var shape = new Aspose.Diagram.Shape();\n"
+            "shape.ID = 1;\n"
+            "shape.Name = \"SampleRect\";\n"
+            "shape.Type = Aspose.Diagram.TypeValue.Shape;\n"
+            "shape.XForm.PinX.Value = 4.0;\n"
+            "shape.XForm.PinY.Value = 5.0;\n"
+            "shape.XForm.Width.Value = 2.0;\n"
+            "shape.XForm.Height.Value = 1.5;\n"
+            "page.Shapes.Add(shape);\n"
+            "\n"
+            "diagram.Save(inputPath, Aspose.Diagram.SaveFileFormat.Vsdx);"
+        ),
+        "operation_examples": {
+            "pdfconverter": (
+                "// LowCode operation: convert VSDX to PDF\n"
+                "Aspose.Diagram.LowCode.PdfConverter.Process(inputPath, outputPath);\n"
+                "// outputPath must end in .pdf"
+            ),
+            "diagramconverter": (
+                "// LowCode operation: convert VSDX to another Visio format\n"
+                "Aspose.Diagram.LowCode.DiagramConverter.Process(inputPath, outputPath);\n"
+                "// outputPath must end in a Visio format (.vdx, .vsdx, .vsd)\n"
+                "// DiagramConverter does NOT support PDF, SVG, or PNG output"
+            ),
+        },
+        "forbidden_patterns": [
+            "FORBIDDEN: File.WriteAllBytes() with raw byte arrays to create VSDX — this creates invalid files. Use Aspose.Diagram.Diagram() API to create valid VSDX.",
+            "FORBIDDEN: creating empty placeholder .vsdx files — always use Aspose.Diagram.Diagram() programmatic creation.",
+            "FORBIDDEN: fake or dummy binary content for input files.",
+            "FORBIDDEN: using DiagramConverter for PDF output — DiagramConverter only supports Visio formats (VDX, VSDX, VSD). Use PdfConverter for PDF output.",
+            "FORBIDDEN: using core Aspose.Diagram API for the conversion operation — the conversion MUST use the LowCode API (Aspose.Diagram.LowCode namespace).",
+        ],
+        "required_patterns": [
+            "REQUIRED: create input VSDX using Aspose.Diagram.Diagram() with at least one Page and one Shape.",
+            "REQUIRED: set Shape.ID, Shape.Name, Shape.Type, and Shape.XForm properties (PinX, PinY, Width, Height).",
+            "REQUIRED: save input as VSDX using diagram.Save(path, Aspose.Diagram.SaveFileFormat.Vsdx).",
+            "REQUIRED: include 'using Aspose.Diagram;' for fixture creation and 'using Aspose.Diagram.LowCode;' for the LowCode operation.",
+            "REQUIRED: structure code in three sections: (1) INPUT FIXTURE CREATION using core API, (2) LOWCODE OPERATION using LowCode namespace, (3) OUTPUT VALIDATION.",
+        ],
+    },
+}
+
+
+def _build_programmatic_fixture_guidance(
+    family: str,
+    type_short: str,
+    input_strategy: str,
+) -> tuple[list[str], str]:
+    """Build family-specific fixture creation guidance for programmatic_input scenarios.
+
+    Returns:
+        Tuple of (constraints_to_add, fixture_instruction_appendix).
+    """
+    if input_strategy != "programmatic_input":
+        return [], ""
+    guidance = _PROGRAMMATIC_FIXTURE_GUIDANCE.get(family)
+    if not guidance:
+        return [], ""
+
+    constraints: list[str] = []
+    constraints.extend(guidance.get("forbidden_patterns", []))
+    constraints.extend(guidance.get("required_patterns", []))
+
+    # Build fixture instruction with code example
+    parts: list[str] = []
+    fixture_code = guidance.get("fixture_code", "")
+    if fixture_code:
+        parts.append(
+            "\nPROGRAMMATIC INPUT FIXTURE — REFERENCE PATTERN (use this exact approach):\n"
+            "```csharp\n"
+            f"{fixture_code}\n"
+            "```"
+        )
+
+    # Add type-specific operation example
+    op_examples = guidance.get("operation_examples", {})
+    op_code = op_examples.get(type_short.lower(), "")
+    if op_code:
+        parts.append(
+            "\nLOWCODE OPERATION — REFERENCE PATTERN:\n"
+            "```csharp\n"
+            f"{op_code}\n"
+            "```"
+        )
+
+    return constraints, "\n".join(parts)
 
 
 def _build_user_prompt(

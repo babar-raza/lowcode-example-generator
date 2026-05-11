@@ -99,6 +99,8 @@ def _download_nupkg(
     package_id: str,
     version: str,
     target_path: Path,
+    *,
+    max_retries: int = 3,
 ) -> str:
     """Download a .nupkg from the NuGet flat container. Returns the source URL."""
     base_url = _get_service_url("PackageBaseAddress")
@@ -108,20 +110,32 @@ def _download_nupkg(
 
     target_path.parent.mkdir(parents=True, exist_ok=True)
 
-    try:
-        resp = requests.get(url, timeout=120, stream=True)
-        resp.raise_for_status()
-    except requests.RequestException as e:
-        raise NuGetFetchError(
-            f"Failed to download {package_id} {version}: {e}"
-        ) from e
+    last_error: Exception | None = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = requests.get(url, timeout=300, stream=True)
+            resp.raise_for_status()
 
-    with open(target_path, "wb") as f:
-        for chunk in resp.iter_content(chunk_size=8192):
-            f.write(chunk)
+            with open(target_path, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=65536):
+                    f.write(chunk)
 
-    logger.info("Downloaded %s %s → %s", package_id, version, target_path)
-    return url
+            logger.info("Downloaded %s %s → %s", package_id, version, target_path)
+            return url
+        except requests.RequestException as e:
+            last_error = e
+            if attempt < max_retries:
+                logger.warning(
+                    "Download attempt %d/%d for %s %s failed: %s — retrying",
+                    attempt, max_retries, package_id, version, e,
+                )
+            # Clean up partial download
+            if target_path.exists():
+                target_path.unlink()
+
+    raise NuGetFetchError(
+        f"Failed to download {package_id} {version} after {max_retries} attempts: {last_error}"
+    ) from last_error
 
 
 def fetch_package(

@@ -1,12 +1,11 @@
 {
   "dry_run": true,
-  "branch_name": "plugin-examples/pdf/20260508-110506",
+  "branch_name": "plugin-examples/diagram/20260511-122619",
   "pr_url": null,
   "pr_number": null,
   "files_included": [
-    "pdf-optimizer",
-    "pdf-splitter",
-    "pdf-text-extractor"
+    "diagram-diagram-converter",
+    "diagram-pdf-converter"
   ],
   "evidence_verified": true,
   "status": "dry_run",

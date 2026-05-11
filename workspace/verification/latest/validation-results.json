@@ -1,75 +1,52 @@
 {
-  "total": 3,
-  "passed": 3,
+  "total": 2,
+  "passed": 2,
   "failed": 0,
   "results": [
     {
-      "scenario_id": "pdf-optimizer",
+      "scenario_id": "diagram-diagram-converter",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 4105.7116985321045
+        "duration_ms": 3568.8512325286865
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3380.3560733795166
+        "duration_ms": 3189.7218227386475
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1651.4508724212646
+        "duration_ms": 2403.2790660858154
       }
     },
     {
-      "scenario_id": "pdf-splitter",
+      "scenario_id": "diagram-pdf-converter",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1016.4592266082764
+        "duration_ms": 2348.768949508667
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1614.0999794006348
+        "duration_ms": 3381.993055343628
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1551.8391132354736
-      }
-    },
-    {
-      "scenario_id": "pdf-text-extractor",
-      "passed": true,
-      "failure_stage": null,
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 999.5002746582031
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1363.8935089111328
-      },
-      "run": {
-        "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 2138.6120319366455
+        "duration_ms": 3246.716260910034
       }
     }
   ]

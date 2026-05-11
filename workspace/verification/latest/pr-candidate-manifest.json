@@ -1,9 +1,20 @@
 {
-  "included_examples": [],
+  "included_examples": [
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-diagram-20260511-172446\\generated\\diagram\\diagram-diagram-converter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-diagram-20260511-172446\\generated\\diagram\\diagram-pdf-converter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
   "excluded_examples": [],
   "exclusion_reasons": {},
   "dry_run": true,
   "live_publish_attempted": false,
-  "publishable_candidate_count": 0,
+  "publishable_candidate_count": 2,
   "blocked_candidate_count": 0
 }

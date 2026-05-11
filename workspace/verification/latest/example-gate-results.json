@@ -1,6 +1,31 @@
 {
-  "total_examples": 0,
-  "publish_candidates": 0,
+  "total_examples": 2,
+  "publish_candidates": 2,
   "blocked_examples": 0,
-  "examples": []
+  "examples": [
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-diagram-20260511-172446\\generated\\diagram\\diagram-diagram-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-diagram-20260511-172446\\generated\\diagram\\diagram-pdf-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ]
 }

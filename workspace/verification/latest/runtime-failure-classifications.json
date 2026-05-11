@@ -1,20 +1,24 @@
 {
-  "total_failures": 1,
+  "total_failures": 2,
   "classification_summary": {
-    "wrong_input_format": 1
+    "unknown_runtime_failure": 2
   },
   "classifications": [
     {
-      "scenario_id": "pdf-splitter",
-      "exit_code": 1,
-      "classification": "wrong_input_format",
-      "detail": "Input file not found: input.docx",
-      "actionable": true,
-      "recommendation": "Stale record from an earlier run attempt that used a DOCX input fixture instead of a PDF fixture. Root cause: WRONG_FIXTURE_SHAPE (wrong input file type used). This failure is superseded -- the most recent run (pilot-pdf-20260508-155520) shows Splitter PASS with correct programmatic_pdf_single fixture. Resolution: RC-005 in root-cause register. Status: SUPERSEDED_BY_SUBSEQUENT_PASS.",
-      "resolution_status": "SUPERSEDED_BY_SUBSEQUENT_PASS",
-      "superseded_by_run": "pilot-pdf-20260508-155520",
-      "root_cause_id": "RC-005",
-      "audit_note": "R6.5 audit 2026-05-09: classified as wrong_input_format (not unknown). The 'input.docx' error occurred when an earlier run incorrectly used a DOCX fixture for a PDF-only operation. The Splitter was subsequently fixed and achieved PASS. This record is retained for audit completeness but is no longer an open failure."
+      "scenario_id": "diagram-diagram-converter",
+      "exit_code": 3762504530,
+      "classification": "unknown_runtime_failure",
+      "detail": "Unhandled exception. \b\u001a\u000f\u0016: Cannot read that as a ZipFile\n ---> \u0003\u001a\u000f\u0016:   Bad signature (0x6D6D7544) at position  0x00000000\n   at \u000f\u001a\u0017\u0016.\u0002(\u000f\u001a\u0017\u0016 \u0002, Encoding \b)\n   at \u000f\u001a\u0017\u0016.\u0002(\u0003\u001a\u0017\u0016 \u0002, Boolean \b)\n   at \u000f\u001b\u0017\u0016.\u0006(",
+      "actionable": false,
+      "recommendation": "Investigate runtime output manually."
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "exit_code": 3762504530,
+      "classification": "unknown_runtime_failure",
+      "detail": "Unhandled exception. Aspose.Diagram.DiagramException: There's no page in this document\n   at \u0002\u001b\u000f.\u0002(String \u0002)\n   at \u000e\u0015\u0018\u0016.\u0002(Stream \u0002, PdfSaveOptions \b, Diagram \u0005)\n   at System.RuntimeMethodHandle.Invoke",
+      "actionable": false,
+      "recommendation": "Investigate runtime output manually."
     }
   ]
 }

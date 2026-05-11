@@ -1,9 +1,9 @@
 {
-  "total_patterns": 3,
+  "total_patterns": 2,
   "verified_passing": 0,
   "patterns": [
     {
-      "scenario_id": "pdf-optimizer",
+      "scenario_id": "diagram-diagram-converter",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
@@ -11,18 +11,10 @@
       "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "pdf-splitter",
+      "scenario_id": "diagram-pdf-converter",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-text-extractor",
-      "uses_basedir": false,
-      "validates_input": true,
-      "validates_output": false,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"
     }

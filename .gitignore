@@ -39,3 +39,4 @@ workspace/verification/latest/*.zip
 # OS
 .DS_Store
 Thumbs.db
+/workspace

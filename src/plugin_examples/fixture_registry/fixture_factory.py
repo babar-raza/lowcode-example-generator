@@ -136,6 +136,42 @@ def generate_json(dest: Path) -> bool:
     return True
 
 
+def generate_docx(dest: Path) -> bool:
+    """Generate a minimal valid .docx file (OOXML via stdlib zipfile)."""
+    content_types = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/word/document.xml" '
+        'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
+        '</Types>'
+    )
+    rels = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
+        'Target="word/document.xml"/>'
+        '</Relationships>'
+    )
+    document = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+        '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+        '<w:body>'
+        '<w:p><w:r><w:t>Aspose LowCode Fixture Test Document</w:t></w:r></w:p>'
+        '<w:p><w:r><w:t>This is a programmatically generated DOCX for fixture validation.</w:t></w:r></w:p>'
+        '</w:body>'
+        '</w:document>'
+    )
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(dest, 'w', compression=zipfile.ZIP_STORED) as zf:
+        zf.writestr('[Content_Types].xml', content_types)
+        zf.writestr('_rels/.rels', rels)
+        zf.writestr('word/document.xml', document)
+    return True
+
+
 def generate_html(dest: Path) -> bool:
     """Generate a minimal valid HTML file with deterministic known values."""
     content = (
@@ -158,6 +194,7 @@ def generate_html(dest: Path) -> bool:
 
 _FORMAT_GENERATORS: dict[str, callable] = {
     ".xlsx": generate_xlsx,
+    ".docx": generate_docx,
     ".csv": generate_csv,
     ".txt": generate_txt,
     ".json": generate_json,

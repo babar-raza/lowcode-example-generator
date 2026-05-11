@@ -22,6 +22,7 @@ from plugin_examples.fixture_registry.fixture_factory import (
     generate_txt,
     generate_json,
     generate_html,
+    generate_docx,
     write_generated_fixtures_evidence,
 )
 from plugin_examples.scenario_planner.planner import (
@@ -438,3 +439,167 @@ class TestFixtureEvidenceWriter:
         data = json.loads(path.read_text())
         assert data["total_generated"] == 1
         assert data["total_ready"] == 1
+
+
+# --- New family fixture strategy tests ---
+
+class TestDocxFixtureGenerator:
+    """Tests for DOCX fixture generation (stdlib OOXML)."""
+
+    def test_generate_docx_creates_valid_file(self, tmp_path):
+        dest = tmp_path / "input.docx"
+        assert generate_docx(dest) is True
+        assert dest.exists()
+        assert dest.stat().st_size > 0
+
+    def test_generate_docx_is_valid_zip(self, tmp_path):
+        dest = tmp_path / "input.docx"
+        generate_docx(dest)
+        with zipfile.ZipFile(dest, 'r') as zf:
+            names = zf.namelist()
+            assert '[Content_Types].xml' in names
+            assert 'word/document.xml' in names
+
+    def test_docx_in_supported_formats(self):
+        assert ".docx" in SUPPORTED_FORMATS
+
+    def test_generate_fixture_docx(self, tmp_path):
+        fixture = generate_fixture("input.docx", tmp_path)
+        assert fixture is not None
+        assert fixture.format == ".docx"
+        assert fixture.ready is True
+
+
+class TestDiagramFixtureStrategy:
+    """Tests for Diagram family fixture strategy (programmatic_input)."""
+
+    def test_diagram_pdfconverter_uses_programmatic_input(self):
+        """PdfConverter with static methods and .vsdx input should use programmatic_input."""
+        type_info = {
+            "full_name": "Aspose.Diagram.LowCode.PdfConverter",
+            "name": "PdfConverter",
+            "kind": "class",
+            "methods": [
+                {"name": "Process", "is_static": True,
+                 "parameters": [{"name": "templateFile", "type": "System.String"},
+                                {"name": "resultStream", "type": "System.String"}]},
+            ],
+        }
+        scenario = _build_scenario("diagram", type_info, "Aspose.Diagram.LowCode", None, ".vsdx")
+        assert scenario.status == "ready"
+        # .vsdx is not in SUPPORTED_FORMATS, but static methods exist → programmatic_input
+        assert scenario.input_strategy == "programmatic_input"
+
+    def test_diagram_diagramconverter_uses_programmatic_input(self):
+        """DiagramConverter with static methods and .vsdx input → programmatic_input."""
+        type_info = {
+            "full_name": "Aspose.Diagram.LowCode.DiagramConverter",
+            "name": "DiagramConverter",
+            "kind": "class",
+            "methods": [
+                {"name": "Process", "is_static": True,
+                 "parameters": [{"name": "templateFile", "type": "System.String"},
+                                {"name": "resultStream", "type": "System.String"}]},
+            ],
+        }
+        scenario = _build_scenario("diagram", type_info, "Aspose.Diagram.LowCode", None, ".vsdx")
+        assert scenario.status == "ready"
+        assert scenario.input_strategy == "programmatic_input"
+
+    def test_diagram_input_format_map(self):
+        """Diagram types should map to .vsdx input format."""
+        from plugin_examples.scenario_planner.planner import _infer_input_format
+        assert _infer_input_format("PdfConverter", ".vsdx", family="diagram") == ".vsdx"
+        assert _infer_input_format("DiagramConverter", ".vsdx", family="diagram") == ".vsdx"
+
+    def test_diagram_pdfconverter_no_collision_with_cells(self):
+        """Diagram PdfConverter should not collide with Cells PdfConverter."""
+        from plugin_examples.scenario_planner.planner import _infer_input_format
+        assert _infer_input_format("PdfConverter", ".xlsx", family="cells") == ".xlsx"
+        assert _infer_input_format("PdfConverter", ".vsdx", family="diagram") == ".vsdx"
+
+    def test_diagram_output_format_map(self):
+        """Diagram types should map to correct output formats."""
+        from plugin_examples.scenario_planner.planner import _infer_output_format
+        assert _infer_output_format("DiagramConverter", ".vsdx", family="diagram") == ".vdx"
+        assert _infer_output_format("PdfConverter", ".vsdx", family="diagram") == ".pdf"
+
+
+class TestEmailFixtureStrategy:
+    """Tests for Email family fixture strategy (programmatic_input)."""
+
+    def test_email_converter_no_collision_with_words(self):
+        """Email Converter should use .eml default, not Words .docx."""
+        from plugin_examples.scenario_planner.planner import _infer_input_format
+        # Words Converter → .docx (scoped)
+        assert _infer_input_format("Converter", ".docx", family="words") == ".docx"
+        # Email Converter → .eml (falls to family_default, no email:converter entry)
+        assert _infer_input_format("Converter", ".eml", family="email") == ".eml"
+
+    def test_email_converter_uses_programmatic_input(self):
+        """Email Converter with static async methods and .eml input → programmatic_input."""
+        type_info = {
+            "full_name": "Aspose.Email.LowCode.Converter",
+            "name": "Converter",
+            "kind": "class",
+            "methods": [
+                {"name": "ConvertToMsg", "is_static": True,
+                 "parameters": [{"name": "input", "type": "System.IO.Stream"},
+                                {"name": "inputName", "type": "System.String"},
+                                {"name": "handler", "type": "IOutputHandler"}]},
+            ],
+        }
+        # Email default extension is .eml, not in SUPPORTED_FORMATS
+        scenario = _build_scenario("email", type_info, "Aspose.Email.LowCode", None, ".eml")
+        assert scenario.status == "ready"
+        assert scenario.input_strategy == "programmatic_input"
+
+
+class TestSlidesFixtureStrategy:
+    """Tests for Slides family fixture strategy (programmatic_input)."""
+
+    def test_slides_convert_uses_programmatic_input(self):
+        """Slides Convert with static methods and .pptx input → programmatic_input."""
+        type_info = {
+            "full_name": "Aspose.Slides.LowCode.Convert",
+            "name": "Convert",
+            "kind": "class",
+            "methods": [
+                {"name": "ToPdf", "is_static": True,
+                 "parameters": [{"name": "presPath", "type": "System.String"},
+                                {"name": "outPath", "type": "System.String"}]},
+            ],
+        }
+        scenario = _build_scenario("slides", type_info, "Aspose.Slides.LowCode", None, ".pptx")
+        assert scenario.status == "ready"
+        assert scenario.input_strategy == "programmatic_input"
+
+    def test_slides_merger_uses_programmatic_input(self):
+        """Slides Merger with static methods and .pptx input → programmatic_input."""
+        type_info = {
+            "full_name": "Aspose.Slides.LowCode.Merger",
+            "name": "Merger",
+            "kind": "class",
+            "methods": [
+                {"name": "Process", "is_static": True,
+                 "parameters": [{"name": "inputFileNames", "type": "System.String[]"},
+                                {"name": "outputFileName", "type": "System.String"}]},
+            ],
+        }
+        scenario = _build_scenario("slides", type_info, "Aspose.Slides.LowCode", None, ".pptx")
+        assert scenario.status == "ready"
+        assert scenario.input_strategy == "programmatic_input"
+
+    def test_slides_input_format_map(self):
+        """Slides types should map to .pptx input format."""
+        from plugin_examples.scenario_planner.planner import _infer_input_format
+        assert _infer_input_format("Convert", ".pptx", family="slides") == ".pptx"
+        assert _infer_input_format("Merger", ".pptx", family="slides") == ".pptx"
+        assert _infer_input_format("Compress", ".pptx", family="slides") == ".pptx"
+
+    def test_slides_output_format_map(self):
+        """Slides types should map to correct output formats."""
+        from plugin_examples.scenario_planner.planner import _infer_output_format
+        assert _infer_output_format("Convert", ".pptx", family="slides") == ".pdf"
+        assert _infer_output_format("Merger", ".pptx", family="slides") == ".pptx"
+        assert _infer_output_format("Compress", ".pptx", family="slides") == ".pptx"

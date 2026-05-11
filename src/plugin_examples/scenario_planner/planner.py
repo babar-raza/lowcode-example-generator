@@ -368,7 +368,7 @@ def _build_scenario(
         required_fixtures = [fixture_name]
 
     # Infer the correct input format for this specific scenario
-    inferred_input_format = _infer_input_format(name, default_fixture_extension)
+    inferred_input_format = _infer_input_format(name, default_fixture_extension, family=family)
 
     # Determine input strategy with proven input resolution
     status = "ready"
@@ -418,7 +418,7 @@ def _build_scenario(
             input_strategy = "none"
 
     # Build output and validation plans
-    inferred_output_format = _infer_output_format(name, family_default=default_fixture_extension)
+    inferred_output_format = _infer_output_format(name, family_default=default_fixture_extension, family=family)
     output_plan = f"Convert input{inferred_input_format} to output{inferred_output_format} using {name}"
     validation_plan = f"Build succeeds, runs without exception, produces output{inferred_output_format}"
 
@@ -479,15 +479,14 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
     "textconverter": ".csv",        # TextConverter processes text-based formats only
     "jsonconverter": ".xlsx",       # JsonConverter exports spreadsheet to JSON
     "htmlconverter": ".xlsx",       # HtmlConverter exports spreadsheet to HTML
-    "pdfconverter": ".xlsx",        # PdfConverter exports spreadsheet to PDF
+    "cells:pdfconverter": ".xlsx",  # Cells PdfConverter exports spreadsheet to PDF
     "imageconverter": ".xlsx",      # ImageConverter renders spreadsheet to image
     "spreadsheetconverter": ".xlsx",  # Converts between spreadsheet formats
     "spreadsheetmerger": ".xlsx",   # Merges multiple spreadsheets
     "spreadsheetsplitter": ".xlsx", # Splits spreadsheet into sheets
     "spreadsheetlocker": ".xlsx",   # Locks/protects a spreadsheet
-    # Words types (merger/splitter omitted — fall through to family_default so
-    # Words uses .docx and PDF uses .pdf without a separate entry for each).
-    "converter": ".docx",
+    # Words types — use family-scoped keys for names shared with other families
+    "words:converter": ".docx",
     "watermarker": ".docx",
     "replacer": ".docx",
     "comparer": ".docx",
@@ -495,29 +494,46 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
     "reportbuilder": ".docx",
     "processor": ".docx",
     "signer": ".docx",
+    # Diagram types — both take Visio input (.vsdx)
+    "diagramconverter": ".vsdx",
+    "diagram:pdfconverter": ".vsdx",
+    # Slides types — use family-scoped keys for shared names
+    "slides:convert": ".pptx",
+    "slides:merger": ".pptx",
+    "slides:compress": ".pptx",
+    "slides:foreach": ".pptx",
+    "slides:collect": ".pptx",
 }
 
 
-def _infer_input_format(type_name: str, family_default: str) -> str:
+def _infer_input_format(type_name: str, family_default: str, family: str = "") -> str:
     """Infer the correct input format for a scenario based on type name.
+
+    Uses family-scoped lookup (``family:type``) first to resolve ambiguous type
+    names like ``Converter`` (Words vs Email) or ``PdfConverter`` (Cells vs Diagram),
+    then falls back to unscoped lookup, then to ``family_default``.
 
     Args:
         type_name: Simple type name (e.g., "TextConverter").
         family_default: Default input extension for the family (e.g., ".xlsx").
+        family: Optional family name for disambiguation.
 
     Returns:
         The inferred input extension.
     """
     key = type_name.lower()
+    if family:
+        scoped = f"{family}:{key}"
+        if scoped in _INPUT_FORMAT_MAP:
+            return _INPUT_FORMAT_MAP[scoped]
     return _INPUT_FORMAT_MAP.get(key, family_default)
 
 
-def _infer_output_format(type_name: str, family_default: str = ".out") -> str:
+def _infer_output_format(type_name: str, family_default: str = ".out", family: str = "") -> str:
     """Infer the output format from the type name.
 
-    Falls back to ``family_default`` (e.g. ".xlsx" or ".docx") when the type
-    is not in the explicit map — avoids the generic ".out" extension which is
-    not a recognised SaveFormat for any Aspose product.
+    Uses family-scoped lookup (``family:type``) first to resolve ambiguous type
+    names, then falls back to unscoped lookup, then to ``family_default``.
     """
     name_lower = type_name.lower()
     _map = {
@@ -525,15 +541,14 @@ def _infer_output_format(type_name: str, family_default: str = ".out") -> str:
         "textconverter": ".txt",
         "jsonconverter": ".json",
         "htmlconverter": ".html",
-        "pdfconverter": ".pdf",
         "imageconverter": ".png",
         "spreadsheetconverter": ".xlsx",
         "spreadsheetmerger": ".xlsx",
         "spreadsheetsplitter": ".xlsx",
         "spreadsheetlocker": ".xlsx",
-        # Words types — Converter outputs PDF as the canonical cross-format demo;
-        # all other Words types fall through to family_default (".docx" for Words,
-        # ".pdf" for PDF family — both correct via family_default fallback).
+        # Words types — Converter outputs PDF as canonical cross-format demo.
+        # Email also has "Converter" but its output goes through FolderOutputHandler,
+        # so it falls through to family_default.
         "converter": ".pdf",
         "watermarker": ".docx",
         "replacer": ".docx",
@@ -545,7 +560,18 @@ def _infer_output_format(type_name: str, family_default: str = ".out") -> str:
         # PDF types — TextExtractor has no file output (result in ResultCollection).
         # Merger, Splitter, Optimizer fall through to family_default (".pdf").
         "textextractor": "",
+        # Diagram types
+        "diagramconverter": ".vdx",
+        "pdfconverter": ".pdf",  # Both Cells and Diagram PdfConverter output PDF
+        # Slides types — use scoped keys for shared names
+        "slides:convert": ".pdf",
+        "slides:merger": ".pptx",
+        "slides:compress": ".pptx",
     }
+    if family:
+        scoped = f"{family}:{name_lower}"
+        if scoped in _map:
+            return _map[scoped]
     return _map.get(name_lower, family_default)
 
 

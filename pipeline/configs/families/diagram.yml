@@ -1,8 +1,9 @@
 family: diagram
 display_name: Aspose.Diagram for .NET
 enabled: true
-status: experimental
-# Promoted from discovery_only on 2026-05-11 for controlled pilot.
+status: active
+# Promoted discovery_only -> experimental on 2026-05-11 for controlled pilot.
+# Promoted experimental -> active on 2026-05-11 after LLM generation 2/2 PASS.
 # 2 WORKFLOW_ROOT types: DiagramConverter, PdfConverter.
 # Fixture: programmatic VSDX via Aspose.Diagram.Diagram() (harness validated 4/4 PASS).
 

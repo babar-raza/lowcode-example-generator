@@ -1,4 +1,4 @@
-# AGENTS.md — Pipeline Governance
+﻿# AGENTS.md â€” Pipeline Governance
 
 This file governs how automated agents and human contributors interact with this repository.
 
@@ -12,19 +12,19 @@ It generates, validates, and publishes SDK-style C# examples for Aspose .NET plu
 
 ## Plan
 
-The full normalized execution plan is at:
+The active governance and architecture decision summary is at:
 
 ```
-docs/plans/plugin-example-generation-execution-plan.md
+docs/architecture/decisions.md
 ```
 
 Read it before implementing anything.
 
 ## Source of Truth Hierarchy
 
-1. **Official NuGet package** — primary authority for all API symbols.
-2. **DocFX markdown API reference** — secondary, for descriptions only.
-3. **Existing Aspose .NET example repos** — style hints and fixture discovery only.
+1. **Official NuGet package** â€” primary authority for all API symbols.
+2. **DocFX markdown API reference** â€” secondary, for descriptions only.
+3. **Existing Aspose .NET example repos** â€” style hints and fixture discovery only.
 
 The LLM proposes. The compiler, runtime, output validator, and example-reviewer approve.
 
@@ -39,9 +39,9 @@ The LLM proposes. The compiler, runtime, output validator, and example-reviewer 
 ## Gate Order
 
 ```
-NuGet fetch → extract → reflect → detect → delta → fixtures → scenarios →
-LLM preflight → generate → restore → build → run → output validation →
-example-reviewer → PR
+NuGet fetch â†’ extract â†’ reflect â†’ detect â†’ delta â†’ fixtures â†’ scenarios â†’
+LLM preflight â†’ generate â†’ restore â†’ build â†’ run â†’ output validation â†’
+example-reviewer â†’ PR
 ```
 
 ## Verification Gates (summary)
@@ -60,7 +60,7 @@ Use `--dry-run` mode when credentials are unavailable.
 
 ## Pilot
 
-Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
+Aspose.Cells for .NET â€” config at `pipeline/configs/families/cells.yml`.
 
 ## Agent Rules
 
@@ -69,7 +69,7 @@ Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
 - Do not trust DocFX markdown as the source of truth for API symbols.
 - Do not proceed to generation if the reflection catalog is empty.
 - Do not create PRs if any mandatory gate has failed.
-- Always record evidence before exiting — even on partial failure.
+- Always record evidence before exiting â€” even on partial failure.
 
 ## Discovery
 

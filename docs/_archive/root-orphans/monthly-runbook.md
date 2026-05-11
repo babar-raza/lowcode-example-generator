@@ -1,4 +1,4 @@
-# Monthly Runbook
+﻿# Monthly Runbook
 
 ## Overview
 
@@ -22,16 +22,16 @@ python -m plugin_examples run --family cells
 
 ## Pipeline Stages
 
-1. **Package check** — compare NuGet version against package-lock.json
-2. **Fetch & extract** — download .nupkg, resolve dependencies, extract DLLs
-3. **Reflect** — run DllReflector to build API catalog
-4. **Detect** — match plugin namespaces, write source-of-truth proof
-5. **Delta** — compare current catalog against previous version
-6. **Plan** — build scenarios from delta and catalog
-7. **Generate** — create C# examples via LLM
-8. **Validate** — restore, build, run each example
-9. **Review** — run example-reviewer gate
-10. **Publish** — create PR with validated examples
+1. **Package check** â€” compare NuGet version against package-lock.json
+2. **Fetch & extract** â€” download .nupkg, resolve dependencies, extract DLLs
+3. **Reflect** â€” run DllReflector to build API catalog
+4. **Detect** â€” match plugin namespaces, write source-of-truth proof
+5. **Delta** â€” compare current catalog against previous version
+6. **Plan** â€” build scenarios from delta and catalog
+7. **Generate** â€” create C# examples via LLM
+8. **Validate** â€” restore, build, run each example
+9. **Review** â€” run example-reviewer gate
+10. **Publish** â€” create PR with validated examples
 
 ## Exit Conditions
 

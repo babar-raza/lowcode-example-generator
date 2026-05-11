@@ -82,7 +82,7 @@ class TestQueueFileIntegrity:
 
     def test_families_are_valid(self, entries):
         for entry in entries:
-            assert entry["family"] in ("cells", "words", "pdf"), (
+            assert entry["family"] in ("cells", "words", "pdf", "diagram"), (
                 f"Entry {entry['scenario_id']} has invalid family: {entry['family']}"
             )
 
@@ -128,29 +128,32 @@ class TestQueueCoversDenominator:
         )
 
     def test_active_pipeline_entries_match_denominator(self, entries):
-        # Active (non-BACKLOGGED) entries: cells: 9, words: 4, pdf: 4 = 17
-        cells_denom = self._load_denom("cells")
-        words_denom = self._load_denom("words")
-        pdf_denom = self._load_denom("pdf")
-        expected_active = (
-            cells_denom["published_count"] +
-            words_denom["published_count"] +
-            pdf_denom["published_count"] +
-            pdf_denom.get("pr_dry_run_ready_count", 0) +
-            pdf_denom.get("reviewer_passed_awaiting_pr_count", 0)
-        )
+        # Active (non-BACKLOGGED) entries across all families with denominators
+        expected_active = 0
+        for family in ("cells", "words", "pdf", "diagram"):
+            denom_path = _DENOMINATOR_DIR / f"{family}.json"
+            if not denom_path.exists():
+                continue
+            denom = json.loads(denom_path.read_text(encoding="utf-8"))
+            expected_active += (
+                denom.get("published_count", 0) +
+                denom.get("pr_ready_count", 0) +
+                denom.get("pr_dry_run_ready_count", 0) +
+                denom.get("reviewer_passed_awaiting_pr_count", 0)
+            )
         active_entries = [e for e in entries if e["state"] != "BACKLOGGED"]
         assert len(active_entries) == expected_active, (
             f"Active pipeline entries ({len(active_entries)}) != expected ({expected_active})"
         )
 
     def test_total_queue_covers_active_plus_backlogged(self, entries):
-        # Total queue = active (17) + backlogged deferred entries (26)
+        # Total queue = active + backlogged deferred entries
         active = [e for e in entries if e["state"] != "BACKLOGGED"]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
-        # At minimum: 17 active + 26 deferred (21 PDF + 5 Words)
-        assert len(active) >= 17, f"Expected at least 17 active entries, got {len(active)}"
-        assert len(backlogged) >= 26, f"Expected at least 26 backlogged entries, got {len(backlogged)}"
+        # At minimum: 19 active (cells 9 + words 4 + pdf 4 + diagram 2)
+        # + 29 backlogged (21 PDF WR + 5 Words + 3 Diagram OPTIONS)
+        assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
+        assert len(backlogged) >= 29, f"Expected at least 29 backlogged entries, got {len(backlogged)}"
         assert len(entries) == len(active) + len(backlogged)
 
 
@@ -235,9 +238,14 @@ class TestBackloggedEntries:
     def test_backlogged_entries_have_blocking_taskcard(self, entries):
         for entry in entries:
             if entry["state"] == "BACKLOGGED":
-                assert entry.get("blocking_taskcard"), (
-                    f"BACKLOGGED entry {entry['scenario_id']} missing blocking_taskcard"
-                )
+                reason = entry.get("blocking_reason") or ""
+                # Non-runnable OPTIONS/RESULT/CALLBACK types don't need taskcards
+                is_non_runnable = reason.startswith("OPTIONS_CLASS:") or \
+                    reason.startswith("NON_RUNNABLE:")
+                if not is_non_runnable:
+                    assert entry.get("blocking_taskcard"), (
+                        f"BACKLOGGED entry {entry['scenario_id']} missing blocking_taskcard"
+                    )
 
     def test_pdf_deferred_workflow_roots_in_queue(self, entries):
         # 21 PDF WORKFLOW_ROOT types deferred from pilot scope must be in queue

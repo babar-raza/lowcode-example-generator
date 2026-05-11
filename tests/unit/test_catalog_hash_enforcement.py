@@ -167,3 +167,134 @@ class TestPlanScenariosWithRepoRoot:
             plugin_namespaces=["Aspose.Cells.LowCode"],
         )
         assert result.family == "cells"
+
+    def test_plan_scenarios_raises_on_hash_mismatch(self, tmp_path):
+        """plan_scenarios with repo_root raises on catalog hash mismatch (F-1 closure)."""
+        from plugin_examples.scenario_planner.planner import plan_scenarios
+
+        _write_denominator(tmp_path, "cells", "0" * 64)
+
+        with pytest.raises(CatalogHashMismatchError):
+            plan_scenarios(
+                family="cells",
+                catalog=SAMPLE_CATALOG,
+                plugin_namespaces=["Aspose.Cells.LowCode"],
+                repo_root=tmp_path,
+            )
+
+    def test_plan_scenarios_passes_on_hash_match(self, tmp_path):
+        """plan_scenarios with matching hash proceeds normally (F-1 closure)."""
+        from plugin_examples.scenario_planner.planner import plan_scenarios
+
+        expected_hash = compute_catalog_hash(SAMPLE_CATALOG)
+        _write_denominator(tmp_path, "cells", expected_hash)
+
+        result = plan_scenarios(
+            family="cells",
+            catalog=SAMPLE_CATALOG,
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            repo_root=tmp_path,
+        )
+        assert result.family == "cells"
+
+
+# ---------------------------------------------------------------------------
+# Runner strict enforcement (F-1 closure)
+# ---------------------------------------------------------------------------
+
+
+class TestRunnerCatalogHashEnforcement:
+    """Verify runner.py enforces catalog hash strictly during generation."""
+
+    def test_scenario_planning_is_hard_stop_stage(self):
+        """scenario_planning must be in HARD_STOP_STAGES."""
+        from plugin_examples.runner import HARD_STOP_STAGES
+
+        assert "scenario_planning" in HARD_STOP_STAGES
+
+    def test_runner_raises_on_catalog_hash_mismatch(self, tmp_path):
+        """_stage_scenario_planning raises CatalogHashMismatchError on mismatch."""
+        from unittest.mock import MagicMock
+        from plugin_examples.runner import _stage_scenario_planning
+
+        ctx = MagicMock()
+        ctx.family = "cells"
+        ctx.catalog = SAMPLE_CATALOG
+        ctx.repo_root = tmp_path
+        ctx.evidence_dir = tmp_path
+        ctx.config.generation.min_examples_per_family = 1
+        ctx.config.generation.allowed_types = None
+        ctx.config.generation.preferred_methods_per_type = None
+        ctx.proof_path = None
+
+        _write_denominator(tmp_path, "cells", "0" * 64)
+        # Ensure latest dir exists for evidence writing
+        (tmp_path / "latest").mkdir(parents=True, exist_ok=True)
+
+        with pytest.raises(CatalogHashMismatchError):
+            _stage_scenario_planning(ctx)
+
+    def test_runner_writes_evidence_before_raising(self, tmp_path):
+        """Evidence file is written even when hash mismatch raises."""
+        from unittest.mock import MagicMock
+        from plugin_examples.runner import _stage_scenario_planning
+
+        ctx = MagicMock()
+        ctx.family = "cells"
+        ctx.catalog = SAMPLE_CATALOG
+        ctx.repo_root = tmp_path
+        ctx.evidence_dir = tmp_path
+        ctx.config.generation.min_examples_per_family = 1
+        ctx.config.generation.allowed_types = None
+        ctx.config.generation.preferred_methods_per_type = None
+        ctx.proof_path = None
+
+        _write_denominator(tmp_path, "cells", "0" * 64)
+        (tmp_path / "latest").mkdir(parents=True, exist_ok=True)
+
+        with pytest.raises(CatalogHashMismatchError):
+            _stage_scenario_planning(ctx)
+
+        evidence_file = tmp_path / "latest" / "catalog-hash-validation.json"
+        assert evidence_file.exists(), "Evidence must be written before raising"
+        data = json.loads(evidence_file.read_text(encoding="utf-8"))
+        assert data["match"] is False
+
+    def test_runner_proceeds_on_hash_match(self, tmp_path, monkeypatch):
+        """_stage_scenario_planning does not raise when hash matches."""
+        from unittest.mock import MagicMock
+        from plugin_examples.runner import _stage_scenario_planning
+        import plugin_examples.runner as runner_mod
+
+        ctx = MagicMock()
+        ctx.family = "cells"
+        ctx.catalog = SAMPLE_CATALOG
+        ctx.repo_root = tmp_path
+        ctx.evidence_dir = tmp_path
+        ctx.config.generation.min_examples_per_family = 1
+        ctx.config.generation.allowed_types = None
+        ctx.config.generation.preferred_methods_per_type = None
+        ctx.proof_path = None
+
+        expected_hash = compute_catalog_hash(SAMPLE_CATALOG)
+        _write_denominator(tmp_path, "cells", expected_hash)
+        (tmp_path / "latest").mkdir(parents=True, exist_ok=True)
+
+        # The hash check passes, so execution reaches plan_scenarios.
+        # We verify evidence was written with match=True, then let plan_scenarios
+        # be mocked since we only care about the hash enforcement path.
+        original_fn = _stage_scenario_planning.__wrapped__ if hasattr(_stage_scenario_planning, "__wrapped__") else _stage_scenario_planning
+
+        evidence_file = tmp_path / "latest" / "catalog-hash-validation.json"
+
+        # Call the function — it will proceed past hash check but fail on
+        # source-of-truth gate. We catch that expected error.
+        from plugin_examples.plugin_detector.proof_reporter import SourceOfTruthGateError
+        with pytest.raises(SourceOfTruthGateError):
+            _stage_scenario_planning(ctx)
+
+        # The key assertion: evidence was written with match=True and
+        # CatalogHashMismatchError was NOT raised (SourceOfTruthGateError was).
+        assert evidence_file.exists()
+        data = json.loads(evidence_file.read_text(encoding="utf-8"))
+        assert data["match"] is True

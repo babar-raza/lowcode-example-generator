@@ -105,9 +105,9 @@ def plan_scenarios(
     if source_of_truth_proof_path:
         assert_source_of_truth_eligible(source_of_truth_proof_path)
 
-    # Catalog hash validation (B-013): detect API catalog drift
+    # Catalog hash validation (B-013): strict enforcement (F-1 closure)
     if repo_root is not None:
-        validate_catalog_hash(family, catalog, repo_root)
+        validate_catalog_hash(family, catalog, repo_root, strict=True)
 
     result = PlanningResult(family=family)
     _allowed = set(allowed_types) if allowed_types else set()

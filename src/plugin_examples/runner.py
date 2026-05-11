@@ -522,14 +522,24 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
                                            fixture_available=fixture_avail))
     write_entrypoint_scores(scores, ctx.evidence_dir)
 
-    # Catalog hash validation (B-013)
+    # Catalog hash validation (B-013) — strict enforcement (F-1 closure)
     from plugin_examples.scenario_planner.planner import (
+        CatalogHashMismatchError,
         validate_catalog_hash,
     )
     catalog_hash_result = validate_catalog_hash(
         ctx.family, ctx.catalog, ctx.repo_root,
     )
     _write_catalog_hash_evidence(catalog_hash_result, ctx.evidence_dir)
+    # Evidence is written first; now enforce strict blocking on mismatch
+    if catalog_hash_result.match is False:
+        raise CatalogHashMismatchError(
+            f"Catalog hash MISMATCH for {ctx.family}: "
+            f"current={catalog_hash_result.current_hash[:16]}... "
+            f"denominator={catalog_hash_result.denominator_hash[:16]}... "
+            f"The API catalog has changed since the denominator was created. "
+            f"Update the denominator file to proceed."
+        )
 
     ctx.planning = plan_scenarios(
         family=ctx.family,
@@ -1190,7 +1200,8 @@ STAGE_DEFINITIONS = [
 
 # Hard-stop stages (pipeline halts on failure)
 HARD_STOP_STAGES = {"load_config", "nuget_fetch", "dependency_resolution",
-                     "extraction", "reflection", "plugin_detection"}
+                     "extraction", "reflection", "plugin_detection",
+                     "scenario_planning"}
 
 
 def run_pipeline(

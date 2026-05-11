@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "F1-CLOSURE-STRICT-MODE",
+  "phase": "POLICY",
+
+  "policy": {
+    "title": "Catalog hash enforcement is BLOCKING in the generation pipeline",
+    "description": "When the runner executes _stage_scenario_planning, a catalog hash mismatch against the denominator file halts the pipeline. This prevents generating examples from a drifted API catalog.",
+
+    "enforcement_points": [
+      {
+        "location": "runner.py _stage_scenario_planning",
+        "behavior": "Call validate_catalog_hash non-strict to get result and write evidence. Then check result.match is False and raise CatalogHashMismatchError. Add scenario_planning to HARD_STOP_STAGES.",
+        "evidence_written_before_raise": true,
+        "rationale": "Evidence must always be captured for diagnostics, even when blocking."
+      },
+      {
+        "location": "planner.py plan_scenarios line 110",
+        "behavior": "Pass strict=True to validate_catalog_hash. This blocks direct callers of plan_scenarios from silently proceeding on mismatch.",
+        "rationale": "Belt-and-suspenders. If someone calls plan_scenarios directly (e.g., future CLI command), they also get strict enforcement."
+      }
+    ],
+
+    "non_strict_paths_preserved": [
+      "Direct calls to validate_catalog_hash() with strict=False (default) for diagnostics/reporting",
+      "discovery-sweep commands that inspect catalogs without generating"
+    ],
+
+    "graceful_degradation": {
+      "no_denominator_file": "match=None, pipeline proceeds (new families without denominator are allowed)",
+      "no_api_catalog_sha256_field": "match=None, pipeline proceeds (denominator not yet populated with hash)",
+      "hash_matches": "match=True, pipeline proceeds normally",
+      "hash_mismatch": "HARD STOP — CatalogHashMismatchError raised, evidence written, pipeline halts"
+    },
+
+    "no_cli_flag_added": true,
+    "rationale_no_flag": "Generation should never proceed with a drifted catalog. An override flag would weaken the guarantee. Users should update the denominator file if the catalog legitimately changed."
+  }
+}

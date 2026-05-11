@@ -18,6 +18,17 @@ obj/
 # Pipeline runtime
 workspace/runs/*/
 !workspace/runs/.gitkeep
+workspace/backlog/
+workspace/fixture-validation/
+workspace/pr-dry-run/
+workspace/queues/
+
+# Evidence bundles
+workspace/verification/*.zip
+workspace/verification/latest/*.zip
+
+# Local agent settings
+.claude/
 
 # IDE
 .idea/

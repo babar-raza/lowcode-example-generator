@@ -1,0 +1,30 @@
+{
+  "scenario_id": "diagram-diagram-converter",
+  "family": "diagram",
+  "type_name": "DiagramConverter",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_vsdx_single",
+  "expected_symbols": [
+    "Aspose.Diagram.LowCode.DiagramConverter",
+    "Aspose.Diagram.LowCode.DiagramConverter.Process"
+  ],
+  "forbidden_patterns": [
+    "File.WriteAllBytes",
+    "new byte[]",
+    "ZipArchive",
+    "MemoryStream",
+    "new FileStream"
+  ],
+  "output_expectations": {
+    "output_format": ".vdx",
+    "validation_method": "file_exists_nonzero"
+  },
+  "publication_status": "PR_READY",
+  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "evidence_sources": [
+    "workspace/runs/pilot-diagram-20260511-171233/evidence/latest/example-lifecycle-records.json",
+    "workspace/verification/latest/diagram-fewshot-generation-verdict.json"
+  ],
+  "last_verified_at": "2026-05-11T00:00:00Z"
+}

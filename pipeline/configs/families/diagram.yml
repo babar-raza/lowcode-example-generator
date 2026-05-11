@@ -1,10 +1,10 @@
 family: diagram
 display_name: Aspose.Diagram for .NET
 enabled: true
-status: discovery_only
-# NOTE: package_id below uses standard Aspose naming convention.
-# Verify exact NuGet package ID at nuget.org before enabling generation.
-# Discovery run will fail gracefully if package does not exist.
+status: experimental
+# Promoted from discovery_only on 2026-05-11 for controlled pilot.
+# 2 WORKFLOW_ROOT types: DiagramConverter, PdfConverter.
+# Fixture: programmatic VSDX via Aspose.Diagram.Diagram() (harness validated 4/4 PASS).
 
 nuget:
   package_id: Aspose.Diagram
@@ -42,11 +42,19 @@ existing_examples:
   sources: []
 
 generation:
-  min_examples_per_family: 3
+  min_examples_per_family: 2
   max_examples_per_monthly_run: 5
   allow_new_fixtures: true
   allow_generated_input_files: true
-  allowed_types: []
+  allowed_types:
+    - DiagramConverter
+    - PdfConverter
+  preferred_methods_per_type:
+    DiagramConverter: Process
+    PdfConverter: Process
+
+template_hints:
+  default_fixture_extension: .vsdx
 
 validation:
   require_restore: true

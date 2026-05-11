@@ -1,13 +1,4 @@
 {
-  "family": "pdf",
-  "fixtures": [
-    {
-      "filename": "Examples/Data",
-      "source_type": "github",
-      "source_path": "aspose-pdf/Aspose.PDF-for-.NET:master:Examples/Data",
-      "provenance": "aspose-pdf/Aspose.PDF-for-.NET:master",
-      "available": false,
-      "unavailable_reason": "github_api_403_forbidden"
-    }
-  ]
+  "family": "diagram",
+  "fixtures": []
 }

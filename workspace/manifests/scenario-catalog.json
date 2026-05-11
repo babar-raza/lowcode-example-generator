@@ -1,74 +1,43 @@
 {
-  "family": "pdf",
-  "ready_count": 4,
-  "blocked_count": 97,
+  "family": "diagram",
+  "ready_count": 2,
+  "blocked_count": 3,
   "scenarios": [
     {
-      "scenario_id": "pdf-merger",
-      "title": "Use Merger from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Merger",
-      "target_namespace": "Aspose.Pdf.LowCode",
+      "scenario_id": "diagram-diagram-converter",
+      "title": "Use DiagramConverter from Aspose.Diagram.LowCode",
+      "target_type": "Aspose.Diagram.LowCode.DiagramConverter",
+      "target_namespace": "Aspose.Diagram.LowCode",
       "target_methods": [
         "Process"
       ],
       "required_symbols": [
-        "Aspose.Pdf.LowCode.Merger",
-        "Aspose.Pdf.LowCode.Merger.Process"
+        "Aspose.Diagram.LowCode.DiagramConverter",
+        "Aspose.Diagram.LowCode.DiagramConverter.Process",
+        "Aspose.Diagram.LowCode.DiagramConverter.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Merger",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.vsdx to output.vdx using DiagramConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.vdx",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "pdf-optimizer",
-      "title": "Use Optimizer from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Optimizer",
-      "target_namespace": "Aspose.Pdf.LowCode",
+      "scenario_id": "diagram-pdf-converter",
+      "title": "Use PdfConverter from Aspose.Diagram.LowCode",
+      "target_type": "Aspose.Diagram.LowCode.PdfConverter",
+      "target_namespace": "Aspose.Diagram.LowCode",
       "target_methods": [
         "Process"
       ],
       "required_symbols": [
-        "Aspose.Pdf.LowCode.Optimizer",
-        "Aspose.Pdf.LowCode.Optimizer.Process"
+        "Aspose.Diagram.LowCode.PdfConverter",
+        "Aspose.Diagram.LowCode.PdfConverter.Process",
+        "Aspose.Diagram.LowCode.PdfConverter.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Optimizer",
+      "output_plan": "Convert input.vsdx to output.pdf using PdfConverter",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-splitter",
-      "title": "Use Splitter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Splitter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Splitter",
-        "Aspose.Pdf.LowCode.Splitter.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Splitter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-text-extractor",
-      "title": "Use TextExtractor from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.TextExtractor",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.TextExtractor"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output using TextExtractor",
-      "validation_plan": "Build succeeds, runs without exception, produces output",
       "status": "ready",
       "blocked_reason": null
     }

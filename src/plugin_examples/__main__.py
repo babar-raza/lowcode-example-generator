@@ -268,8 +268,8 @@ def main() -> int:
         help="Report per-family release state from evidence files (read-only)",
     )
     rs_parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=["cells", "words", "pdf"],
-        help="Families to report on (default: cells words pdf)",
+        "--families", nargs="+", metavar="FAMILY", default=None,
+        help="Families to report on (default: cells words pdf diagram email slides)",
     )
     rs_parser.add_argument(
         "--promote-latest", action="store_true",
@@ -1233,6 +1233,7 @@ def main() -> int:
 
     if args.command == "release-status":
         from plugin_examples.publisher.release_status import (
+            ALL_RELEASE_FAMILIES,
             compute_release_status,
             write_release_status_report,
         )
@@ -1244,7 +1245,7 @@ def main() -> int:
         )
         verification_dir = repo_root / "workspace" / "verification"
 
-        families = list(args.families)
+        families = list(args.families or ALL_RELEASE_FAMILIES)
         status = compute_release_status(families, verification_dir)
         report_path = write_release_status_report(status, verification_dir)
 
@@ -1254,8 +1255,9 @@ def main() -> int:
             sha = rec["last_merge_sha"] or "not merged"
             validation = rec["last_post_merge_validation_status"]
             count = rec["published_examples_count"]
+            scope = rec.get("release_scope_status", "UNKNOWN")
             print(f"  {fam}: merged={sha[:12] if rec['last_merge_sha'] else 'no'}, "
-                  f"examples={count}, post_merge={validation}")
+                  f"examples={count}, post_merge={validation}, scope={scope}")
             print(f"    next: {rec['next_required_action']}")
         print(f"  all_merged: {status['all_merged']}")
         print(f"  all_post_merge_validated: {status['all_post_merge_validated']}")

@@ -170,6 +170,7 @@ class TestReleaseStatusModule:
             "published_examples_count", "last_pr_url", "last_merge_sha",
             "last_post_merge_validation_status", "open_followups",
             "taskcard_evidence_source", "next_required_action",
+            "release_scope_status", "family_coverage_status", "denominator_basis",
         ]
         for field in required_fields:
             assert field in rec, f"Missing required field: {field}"
@@ -262,6 +263,24 @@ class TestReleaseStatusCLI:
         assert "families" in data
         assert "all_merged" in data
 
+    def test_cli_default_writes_all_six_families(self):
+        """release-status default must not regress to cells/words-only evidence."""
+        repo_root = Path(__file__).resolve().parents[2]
+        result = subprocess.run(
+            [sys.executable, "-m", "plugin_examples", "release-status",
+             "--promote-latest"],
+            capture_output=True, text=True, timeout=30,
+            env={**__import__("os").environ, "PYTHONPATH": "src"},
+            cwd=str(repo_root),
+        )
+        assert result.returncode == 0, f"Unexpected exit: {result.stdout}\n{result.stderr}"
+        report_path = repo_root / "workspace" / "verification" / "latest" / "release-status.json"
+        data = json.loads(report_path.read_text(encoding="utf-8"))
+        expected = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        assert data["families_checked"] == expected
+        assert [r["family"] for r in data["families"]] == expected
+        assert all("release_scope_status" in r for r in data["families"])
+
     def test_cli_output_contains_family_lines(self):
         """CLI output mentions each requested family."""
         result = subprocess.run(
@@ -344,3 +363,28 @@ class TestReleaseStatusAllFamilies:
         from plugin_examples.publisher.release_status import _get_next_action
         action = _get_next_action("unknown_family", "POST_MERGE_VERIFIED", "sha123")
         assert "monitor" in action.lower() or "unknown_family" in action.lower()
+
+    def test_real_release_status_scope_statuses(self):
+        from plugin_examples.publisher.release_status import compute_release_status
+        repo_root = Path(__file__).resolve().parents[2]
+        families = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        status = compute_release_status(families, repo_root / "workspace" / "verification")
+        by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
+        assert by_family["cells"] == "FAMILY_COMPLETE"
+        assert by_family["words"] == "PILOT_COMPLETE"
+        assert by_family["pdf"] == "PARTIAL_CANARY"
+        assert by_family["diagram"] == "PILOT_COMPLETE"
+        assert by_family["email"] == "DISCOVERY_ONLY"
+        assert by_family["slides"] == "DISCOVERY_ONLY"
+
+        coverage = {r["family"]: r["family_coverage_status"] for r in status["families"]}
+        assert coverage["words"] == "PARTIAL_FAMILY_COVERAGE"
+        assert coverage["pdf"] == "PARTIAL_FAMILY_COVERAGE"
+
+    def test_discovery_only_next_action_does_not_request_live_pr(self):
+        from plugin_examples.publisher.release_status import compute_release_status
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(["email", "slides"], repo_root / "workspace" / "verification")
+        for rec in status["families"]:
+            assert rec["release_scope_status"] == "DISCOVERY_ONLY"
+            assert "do not create live PR" in rec["next_required_action"]

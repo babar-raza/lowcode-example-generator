@@ -8,6 +8,8 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+ALL_RELEASE_FAMILIES = ["cells", "words", "pdf", "diagram", "email", "slides"]
+
 # Taskcard ID prefixes that indicate a family association.
 _FAMILY_TASKCARD_PREFIXES: dict[str, str] = {
     "cells": "followup-cells-",
@@ -19,6 +21,11 @@ _FAMILY_TASKCARD_PREFIXES: dict[str, str] = {
 }
 
 _TASKCARD_MATRIX_FILENAME = "open-taskcard-closure-matrix.json"
+
+
+def _repo_root_from_verification_dir(verification_dir: Path) -> Path:
+    """Return repo root from workspace/verification."""
+    return verification_dir.resolve().parents[1]
 
 
 def _load_open_taskcards_from_matrix(
@@ -79,6 +86,66 @@ def _count_cumulative_prs(family: str, latest: Path) -> int:
     return len(shas)
 
 
+def _load_denominator(verification_dir: Path, family: str) -> dict:
+    repo_root = _repo_root_from_verification_dir(verification_dir)
+    return _load_json(repo_root / "pipeline" / "configs" / "denominators" / f"{family}.json")
+
+
+def _compute_release_scope_status(denominator: dict, published_count: int) -> tuple[str, str]:
+    """Classify release completeness for reporting.
+
+    The primary status answers "what should an operator believe about this family now?"
+    It intentionally separates pilot completion from family completion.
+    """
+    basis = denominator.get("denominator_basis")
+    workflow_roots = denominator.get("workflow_root_types")
+    allowed_pilot = denominator.get("allowed_pilot_count")
+
+    if basis == "DISCOVERY_ONLY":
+        return "DISCOVERY_ONLY", "Pilot not launched; generation/publish intentionally blocked."
+
+    if workflow_roots is None:
+        return "NEEDS_CLASSIFICATION", "workflow_root_types is null; family completeness cannot be determined."
+
+    if basis == "PILOT_ALLOWED":
+        if allowed_pilot is None:
+            return "BLOCKED", "PILOT_ALLOWED denominator is missing allowed_pilot_count."
+        if allowed_pilot > 0 and published_count >= allowed_pilot:
+            return (
+                "PILOT_COMPLETE",
+                f"{published_count}/{allowed_pilot} pilot types published; "
+                f"{published_count}/{workflow_roots} workflow roots published overall.",
+            )
+        return (
+            "PARTIAL_CANARY",
+            f"{published_count}/{allowed_pilot or 0} pilot types published; "
+            f"{published_count}/{workflow_roots} workflow roots published overall.",
+        )
+
+    if workflow_roots > 0 and published_count >= workflow_roots:
+        return "FAMILY_COMPLETE", f"{published_count}/{workflow_roots} workflow roots published."
+
+    if published_count > 0:
+        return "PARTIAL_FAMILY_COVERAGE", f"{published_count}/{workflow_roots} workflow roots published."
+
+    return "BLOCKED", f"0/{workflow_roots} workflow roots published."
+
+
+def _compute_family_coverage_status(denominator: dict, published_count: int) -> tuple[str, str]:
+    workflow_roots = denominator.get("workflow_root_types")
+    basis = denominator.get("denominator_basis")
+
+    if basis == "DISCOVERY_ONLY":
+        return "DISCOVERY_ONLY", "Pilot not launched; family coverage intentionally deferred."
+    if workflow_roots is None:
+        return "NEEDS_CLASSIFICATION", "workflow_root_types is null."
+    if workflow_roots > 0 and published_count >= workflow_roots:
+        return "FAMILY_COMPLETE", f"{published_count}/{workflow_roots} workflow roots published."
+    if published_count > 0:
+        return "PARTIAL_FAMILY_COVERAGE", f"{published_count}/{workflow_roots} workflow roots published."
+    return "BLOCKED", f"0/{workflow_roots} workflow roots published."
+
+
 def _get_next_action(family: str, post_merge_status: str, merge_sha: str | None) -> str:
     """Derive next required action from current state."""
     if not merge_sha:
@@ -110,12 +177,18 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
     results = []
 
     for family in families:
+        denominator = _load_denominator(verification_dir, family)
+
         # Source of truth version from discovery
         discovery = _load_json(latest / "all-family-lowcode-discovery.json")
-        source_version = None
+        source_version = denominator.get("source_version")
         for entry in discovery.get("families", []):
             if entry.get("family") == family:
-                source_version = entry.get("nuget_version") or entry.get("package_version")
+                source_version = (
+                    entry.get("nuget_version")
+                    or entry.get("package_version")
+                    or source_version
+                )
                 break
 
         # Latest published version from live PR result
@@ -143,14 +216,34 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
             verification_dir, family
         )
 
-        next_action = _get_next_action(family, post_merge_status, merge_sha)
         cumulative_pr_count = _count_cumulative_prs(family, latest)
+        scope_status, scope_reason = _compute_release_scope_status(
+            denominator, published_count
+        )
+        family_coverage_status, family_coverage_reason = _compute_family_coverage_status(
+            denominator, published_count
+        )
+        if scope_status == "DISCOVERY_ONLY":
+            next_action = (
+                f"pilot_not_yet_launched - status discovery_only; "
+                f"do not create live PR until fixture strategy and pilot approval are complete"
+            )
+        else:
+            next_action = _get_next_action(family, post_merge_status, merge_sha)
 
         results.append({
             "family": family,
             "source_of_truth_version": source_version,
             "latest_published_version": published_version,
             "published_examples_count": published_count,
+            "release_scope_status": scope_status,
+            "release_scope_reason": scope_reason,
+            "family_coverage_status": family_coverage_status,
+            "family_coverage_reason": family_coverage_reason,
+            "denominator_basis": denominator.get("denominator_basis"),
+            "workflow_root_types": denominator.get("workflow_root_types"),
+            "allowed_pilot_count": denominator.get("allowed_pilot_count"),
+            "total_lowcode_types": denominator.get("total_lowcode_types"),
             "last_pr_url": last_pr_url,
             "last_pr_number": last_pr_number,
             "last_merge_sha": merge_sha,

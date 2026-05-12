@@ -69,42 +69,34 @@ def generate_example(
     _family = "pdf" if packet.target_namespace.lower().startswith("aspose.pdf") else ""
     _type_short = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
 
-    # Validate generated code
+    # Validate generated code — PDF-specific + generic checks
     issues = _validate_code(code, family=_family, type_short=_type_short)
+
+    # Also run config-driven FORBIDDEN pattern check for all families
+    _type_name = packet.target_type.split(".")[-1] if packet.target_type else ""
+    _ptc = packet.per_type_constraints.get(_type_name, {}) if packet.per_type_constraints else {}
+    if _ptc:
+        issues.extend(_validate_code_from_constraints(code, _ptc))
+
     if issues and max_repairs > 0:
         logger.info("Attempting repair for %s: %s", packet.scenario_id, issues)
         try:
-            # For PDF, re-state the required exact pattern explicitly so the repair
-            # doesn't lose AddInput/AddOutput when rewriting from scratch.
-            pdf_pattern_reminder = ""
-            if _family == "pdf":
-                pattern_constraints = [
-                    c for c in packet.constraints
-                    if "REQUIRED: exact usage pattern" in c
-                    or "REQUIRED: use AddInput" in c
-                    or "REQUIRED: use AddOutput" in c
-                    or "REQUIRED: options class is" in c
-                ]
-                # Also carry forward critical FORBIDDEN constraints so the repair LLM
-                # cannot re-introduce hallucinated namespaces or invalid patterns
-                # (e.g. 'using Aspose.Pdf.LowCode.DataSources;') that were banned in
-                # the initial generation prompt.
-                forbidden_constraints = [
-                    c for c in packet.constraints
-                    if c.startswith("FORBIDDEN:") and any(
-                        kw in c for kw in ("DataSources", "PluginOptions", "File.Copy")
-                    )
-                ]
-                all_repair_constraints = pattern_constraints + forbidden_constraints
-                if all_repair_constraints:
-                    pdf_pattern_reminder = (
-                        "\n\nREQUIRED AND FORBIDDEN PATTERNS (must be respected in fixed code):\n"
-                        + "\n".join(all_repair_constraints)
-                    )
-                # For TextExtractor: add full reference example to guide the LLM
-                # beyond the 4-line snippet — non-deterministic failures need this.
-                if _type_short == "textextractor":
-                    pdf_pattern_reminder += (
+            # Re-inject all REQUIRED: and FORBIDDEN: constraints for any family so the
+            # repair LLM cannot drop critical directives or re-introduce banned patterns.
+            all_repair_constraints = [
+                c for c in packet.constraints
+                if c.startswith("REQUIRED:") or c.startswith("FORBIDDEN:")
+            ]
+            constraint_reminder = ""
+            if all_repair_constraints:
+                constraint_reminder = (
+                    "\n\nREQUIRED AND FORBIDDEN PATTERNS (must be respected in fixed code):\n"
+                    + "\n".join(all_repair_constraints)
+                )
+            # For PDF TextExtractor: add full reference example to guide the LLM
+            # beyond the 4-line snippet — non-deterministic failures need this.
+            if _family == "pdf" and _type_short == "textextractor":
+                constraint_reminder += (
                         "\n\nMANDATORY REFERENCE EXAMPLE for TextExtractor (your fixed code MUST follow this exact pattern):\n"
                         "```csharp\n"
                         "using System;\n"
@@ -130,12 +122,14 @@ def generate_example(
                     )
             repair_prompt = (
                 f"Fix these issues in the code:\n{issues}"
-                f"{pdf_pattern_reminder}\n\nCode:\n{code}"
+                f"{constraint_reminder}\n\nCode:\n{code}"
             )
             response = llm_generate(repair_prompt, packet.system_prompt)
             repaired_code = _extract_code(response)
             # Re-validate repaired code — reject if still failing
             post_repair_issues = _validate_code(repaired_code, family=_family, type_short=_type_short)
+            if _ptc:
+                post_repair_issues.extend(_validate_code_from_constraints(repaired_code, _ptc))
             if post_repair_issues:
                 logger.warning(
                     "Repair for %s still has validation issues: %s",
@@ -481,6 +475,22 @@ def _extract_code(response: str) -> str:
         return stripped
     # Return empty — generation failed to produce code
     return ""
+
+
+def _validate_code_from_constraints(code: str, type_constraints: dict) -> list[str]:
+    """Validate generated code against FORBIDDEN patterns from per_type_constraints config.
+
+    Applies to all families (not PDF-only). Checks the primary identifier extracted
+    from each FORBIDDEN: entry against the generated code.
+    """
+    issues = []
+    for forb in type_constraints.get("forbidden", []):
+        # Extract the primary identifier: "FORBIDDEN: Document.Save() as..." -> "Document.Save"
+        forb_stripped = forb.replace("FORBIDDEN:", "").strip()
+        first_token = forb_stripped.split("(")[0].split(" ")[0].strip()
+        if first_token and len(first_token) >= 4 and first_token in code:
+            issues.append(f"Uses forbidden pattern: {forb}")
+    return issues
 
 
 def _validate_code(code: str, family: str = "", type_short: str = "") -> list[str]:

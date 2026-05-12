@@ -274,3 +274,73 @@ class TestReleaseStatusCLI:
         assert result.returncode == 0
         assert "cells" in result.stdout
         assert "words" in result.stdout
+
+
+class TestReleaseStatusAllFamilies:
+    """Tests that release_status covers all 6 active families."""
+
+    _SAMPLE_MATRIX = {"taskcards": [
+        {"id": "followup-diagram-pr1-token-fix", "status": "OPEN"},
+        {"id": "followup-email-fixture-strategy-design", "status": "OPEN"},
+        {"id": "followup-slides-fixture-strategy-design", "status": "OPEN"},
+    ]}
+
+    def _make_dir(self, tmp_path: Path) -> Path:
+        latest = tmp_path / "workspace" / "verification" / "latest"
+        latest.mkdir(parents=True)
+        (latest / "open-taskcard-closure-matrix.json").write_text(
+            json.dumps(self._SAMPLE_MATRIX), encoding="utf-8"
+        )
+        return tmp_path / "workspace" / "verification"
+
+    def test_diagram_in_family_taskcard_prefixes(self):
+        from plugin_examples.publisher.release_status import _FAMILY_TASKCARD_PREFIXES
+        assert "diagram" in _FAMILY_TASKCARD_PREFIXES
+        assert _FAMILY_TASKCARD_PREFIXES["diagram"] == "followup-diagram-"
+
+    def test_email_in_family_taskcard_prefixes(self):
+        from plugin_examples.publisher.release_status import _FAMILY_TASKCARD_PREFIXES
+        assert "email" in _FAMILY_TASKCARD_PREFIXES
+
+    def test_slides_in_family_taskcard_prefixes(self):
+        from plugin_examples.publisher.release_status import _FAMILY_TASKCARD_PREFIXES
+        assert "slides" in _FAMILY_TASKCARD_PREFIXES
+
+    def test_compute_status_for_diagram(self, tmp_path):
+        from plugin_examples.publisher.release_status import compute_release_status
+        verification_dir = self._make_dir(tmp_path)
+        status = compute_release_status(["diagram"], verification_dir)
+        assert len(status["families"]) == 1
+        assert status["families"][0]["family"] == "diagram"
+
+    def test_compute_status_for_all_six_families(self, tmp_path):
+        from plugin_examples.publisher.release_status import compute_release_status
+        verification_dir = self._make_dir(tmp_path)
+        families = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        status = compute_release_status(families, verification_dir)
+        assert len(status["families"]) == 6
+        returned_families = {f["family"] for f in status["families"]}
+        assert returned_families == set(families)
+
+    def test_diagram_open_followups_from_matrix(self, tmp_path):
+        from plugin_examples.publisher.release_status import compute_release_status
+        verification_dir = self._make_dir(tmp_path)
+        status = compute_release_status(["diagram"], verification_dir)
+        diagram = status["families"][0]
+        assert "followup-diagram-pr1-token-fix" in diagram["open_followups"]
+
+    def test_next_action_for_pdf_includes_pilot_expansion(self):
+        from plugin_examples.publisher.release_status import _get_next_action
+        action = _get_next_action("pdf", "POST_MERGE_VERIFIED", "abc123")
+        assert "pdf" in action.lower() or "pilot" in action.lower()
+
+    def test_next_action_for_email_mentions_discovery_only(self):
+        from plugin_examples.publisher.release_status import _get_next_action
+        action = _get_next_action("email", "NOT_RUN", None)
+        # No merge SHA — falls into "create_live_pr" branch first
+        assert "merged" in action.lower() or "pr" in action.lower()
+
+    def test_next_action_generic_family_has_fallback(self):
+        from plugin_examples.publisher.release_status import _get_next_action
+        action = _get_next_action("unknown_family", "POST_MERGE_VERIFIED", "sha123")
+        assert "monitor" in action.lower() or "unknown_family" in action.lower()

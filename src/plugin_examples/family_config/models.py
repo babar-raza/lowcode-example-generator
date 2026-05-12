@@ -118,3 +118,4 @@ class FamilyConfig:
     validation: ValidationConfig
     llm: LLMConfig
     template_hints: TemplateHints = field(default_factory=TemplateHints)
+    per_type_constraints: dict = field(default_factory=dict)

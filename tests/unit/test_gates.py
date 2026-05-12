@@ -263,3 +263,167 @@ class TestWriteGateResults:
         verdict = GateVerdict(verdict="DATA_FLOW_PROTOTYPE_ONLY")
         path = write_gate_results(verdict, tmp_path)
         assert (tmp_path / "latest" / "gate-results.json").exists()
+
+
+# ---------------------------------------------------------------------------
+# CompletenessGate tests
+# ---------------------------------------------------------------------------
+
+
+from plugin_examples.gates.completeness_gate import (
+    check_completeness,
+    write_completeness_gate_result,
+    write_denominator_ledger,
+    CompletenessViolationError,
+)
+from plugin_examples.scenario_planner.planner import PlanningResult, Scenario
+
+
+def _make_scenario(scenario_id: str, target_type: str, status: str = "ready", blocked_reason: str | None = None) -> Scenario:
+    return Scenario(
+        scenario_id=scenario_id,
+        title=f"Use {target_type}",
+        target_type=target_type,
+        target_namespace="Aspose.Cells.LowCode",
+        status=status,
+        blocked_reason=blocked_reason,
+    )
+
+
+def _make_planning_result(family: str, ready: int, blocked: int) -> PlanningResult:
+    result = PlanningResult(family=family)
+    for i in range(ready):
+        result.ready_scenarios.append(
+            _make_scenario(f"{family}-ready-{i}", f"Aspose.{family}.LowCode.Type{i}")
+        )
+    for i in range(blocked):
+        result.blocked_scenarios.append(
+            _make_scenario(
+                f"{family}-blocked-{i}",
+                f"Aspose.{family}.LowCode.Blocked{i}",
+                status="blocked_low_score",
+            )
+        )
+    return result
+
+
+class TestCompletenessGatePass:
+    def test_pilot_allowed_equation_holds(self):
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 4,
+        }
+        planning = _make_planning_result("pdf", ready=3, blocked=1)
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        assert result.status == "pass"
+        assert result.holds is True
+        assert result.accounted_count == 4
+        assert result.gap == 0
+
+    def test_full_sot_equation_holds(self):
+        denominator = {
+            "denominator_basis": "FULL_SOT",
+            "workflow_root_types": 9,
+        }
+        planning = _make_planning_result("cells", ready=9, blocked=0)
+        result = check_completeness("cells", denominator, planning, dry_run=True)
+        assert result.status == "pass"
+
+    def test_discovery_only_is_skipped(self):
+        denominator = {"denominator_basis": "DISCOVERY_ONLY"}
+        planning = _make_planning_result("email", ready=0, blocked=0)
+        result = check_completeness("email", denominator, planning, dry_run=True)
+        assert result.status == "skip"
+        assert result.holds is True
+
+    def test_over_accounted_still_passes(self):
+        """More scenarios than denominator expected is a pass (expanded pilot)."""
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 2,
+        }
+        planning = _make_planning_result("words", ready=3, blocked=1)
+        result = check_completeness("words", denominator, planning, dry_run=True)
+        assert result.status == "pass"
+
+
+class TestCompletenessGateFail:
+    def test_shortfall_warns_in_dry_run(self):
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 4,
+        }
+        planning = _make_planning_result("pdf", ready=2, blocked=0)  # only 2, need 4
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        assert result.status == "warn"
+        assert result.holds is False
+        assert len(result.violations) > 0
+
+    def test_shortfall_raises_in_live_mode(self):
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 4,
+        }
+        planning = _make_planning_result("pdf", ready=2, blocked=0)
+        with pytest.raises(CompletenessViolationError):
+            check_completeness("pdf", denominator, planning, dry_run=False)
+
+    def test_missing_allowed_pilot_count_warns(self):
+        denominator = {"denominator_basis": "PILOT_ALLOWED"}  # no allowed_pilot_count
+        planning = _make_planning_result("pdf", ready=2, blocked=0)
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        assert result.status == "warn"
+        assert any("allowed_pilot_count missing" in v for v in result.violations)
+
+    def test_unknown_basis_warns(self):
+        denominator = {"denominator_basis": "CUSTOM_BASIS"}
+        planning = _make_planning_result("pdf", ready=2, blocked=0)
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        assert result.status == "warn"
+
+
+class TestCompletenessGateWrite:
+    def test_write_completeness_gate_result(self, tmp_path):
+        denominator = {"denominator_basis": "PILOT_ALLOWED", "allowed_pilot_count": 4}
+        planning = _make_planning_result("pdf", ready=4, blocked=0)
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        path = write_completeness_gate_result(result, tmp_path)
+        assert path.exists()
+        data = json.loads(path.read_text())
+        assert data["family"] == "pdf"
+        assert data["status"] == "pass"
+        assert data["holds"] is True
+
+    def test_write_creates_family_subdirectory(self, tmp_path):
+        denominator = {"denominator_basis": "DISCOVERY_ONLY"}
+        planning = _make_planning_result("email", ready=0, blocked=0)
+        result = check_completeness("email", denominator, planning, dry_run=True)
+        write_completeness_gate_result(result, tmp_path)
+        assert (tmp_path / "latest" / "families" / "email").is_dir()
+
+
+class TestDenominatorLedger:
+    def test_write_denominator_ledger_basic(self, tmp_path):
+        from plugin_examples.scenario_planner.type_classifier import TypeRole
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_types": ["Merger"],
+        }
+        planning = _make_planning_result("pdf", ready=1, blocked=0)
+        # Override the ready scenario's target_type to match type_roles
+        planning.ready_scenarios[0] = _make_scenario(
+            "pdf-ready-0", "Aspose.Pdf.LowCode.Merger"
+        )
+        type_roles = [
+            TypeRole(full_name="Aspose.Pdf.LowCode.Merger", name="Merger", role="workflow_root", confidence=1.0, reason="test"),
+            TypeRole(full_name="Aspose.Pdf.LowCode.MergeOptions", name="MergeOptions", role="options", confidence=1.0, reason="test"),
+        ]
+        path = write_denominator_ledger("pdf", denominator, planning, type_roles, tmp_path)
+        assert path.exists()
+        data = json.loads(path.read_text())
+        assert data["family"] == "pdf"
+        assert data["total_types"] == 2
+        entries_by_name = {e["type_name"]: e for e in data["entries"]}
+        assert entries_by_name["Merger"]["lifecycle_state"] == "ready"
+        assert entries_by_name["Merger"]["pilot_scope"] == "in_scope"
+        assert entries_by_name["MergeOptions"]["pilot_scope"] == "out_of_scope"

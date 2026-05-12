@@ -146,7 +146,8 @@ class TestScenarioPlanner:
         blocked_types = [s.target_type for s in result.blocked_scenarios]
         assert "Aspose.Cells.LowCode.EmptyType" in blocked_types
 
-    def test_enums_skipped(self, tmp_path):
+    def test_enums_in_blocked_scenarios(self, tmp_path):
+        """ENUM types must appear in blocked_scenarios, not silently vanish."""
         proof = _make_proof(tmp_path)
         result = plan_scenarios(
             family="cells",
@@ -154,8 +155,36 @@ class TestScenarioPlanner:
             plugin_namespaces=["Aspose.Cells.LowCode"],
             source_of_truth_proof_path=proof,
         )
-        all_types = [s.target_type for s in result.ready_scenarios + result.blocked_scenarios]
-        assert "Aspose.Cells.LowCode.SaveFormat" not in all_types
+        blocked_types = [s.target_type for s in result.blocked_scenarios]
+        assert "Aspose.Cells.LowCode.SaveFormat" in blocked_types
+
+    def test_enum_blocked_reason(self, tmp_path):
+        """ENUM blocked scenarios must carry reason 'blocked_enum_not_runnable'."""
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="cells",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+        )
+        enum_scenarios = [
+            s for s in result.blocked_scenarios
+            if s.target_type == "Aspose.Cells.LowCode.SaveFormat"
+        ]
+        assert len(enum_scenarios) == 1
+        assert enum_scenarios[0].status == "blocked_enum_not_runnable"
+
+    def test_enums_not_in_ready_scenarios(self, tmp_path):
+        """ENUM types must never appear in ready_scenarios."""
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="cells",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+        )
+        ready_types = [s.target_type for s in result.ready_scenarios]
+        assert "Aspose.Cells.LowCode.SaveFormat" not in ready_types
 
     def test_required_symbols_populated(self, tmp_path):
         proof = _make_proof(tmp_path)

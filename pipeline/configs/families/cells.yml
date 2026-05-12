@@ -92,3 +92,15 @@ template_hints:
     - "Aspose.Cells"
   default_output_extension: ".xlsx"
   default_fixture_extension: ".xlsx"
+
+per_type_constraints:
+  SpreadsheetLocker:
+    required:
+      - "REQUIRED: using Aspose.Cells.LowCode;"
+    forbidden:
+      - "FORBIDDEN: Cells.Protect() replacing SpreadsheetLocker.Process() — use LowCode SpreadsheetLocker"
+  PdfConverter:
+    required:
+      - "REQUIRED: using Aspose.Cells.LowCode;"
+    forbidden:
+      - "FORBIDDEN: Workbook.Save() replacing PdfConverter.Convert() — use LowCode PdfConverter"

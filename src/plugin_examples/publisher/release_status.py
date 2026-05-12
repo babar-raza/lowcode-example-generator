@@ -13,6 +13,9 @@ _FAMILY_TASKCARD_PREFIXES: dict[str, str] = {
     "cells": "followup-cells-",
     "words": "followup-words-",
     "pdf": "followup-pdf-",
+    "diagram": "followup-diagram-",
+    "email": "followup-email-",
+    "slides": "followup-slides-",
 }
 
 _TASKCARD_MATRIX_FILENAME = "open-taskcard-closure-matrix.json"
@@ -82,11 +85,15 @@ def _get_next_action(family: str, post_merge_status: str, merge_sha: str | None)
         return "create_live_pr — no merge SHA recorded; PR not yet merged"
     if post_merge_status not in ("POST_MERGE_VERIFIED", "ALL_PASS"):
         return "post_merge_validation — merge SHA recorded but post-merge validation not complete"
-    if family == "words":
-        return "resolve_open_taskcards_for_broader_generation (followup-words-* series)"
-    if family == "cells":
-        return "monitor_for_package_updates — all examples published"
-    return "monitor"
+    _family_actions = {
+        "words": "resolve_open_taskcards_for_broader_generation (followup-words-* series)",
+        "cells": "monitor_for_package_updates — all examples published",
+        "pdf": "resolve_open_taskcards_for_pilot_expansion (followup-pdf-* series)",
+        "diagram": "monitor_for_package_updates — pilot examples published",
+        "email": "pilot_not_yet_launched — status discovery_only; see followup-email-controlled-pilot-planning",
+        "slides": "pilot_not_yet_launched — status discovery_only; see followup-slides-controlled-pilot-planning",
+    }
+    return _family_actions.get(family, f"monitor — {family} pilot complete")
 
 
 def compute_release_status(families: list[str], verification_dir: Path) -> dict:

@@ -57,6 +57,23 @@ generation:
 template_hints:
   default_fixture_extension: .vsdx
 
+per_type_constraints:
+  DiagramConverter:
+    required:
+      - "REQUIRED: using Aspose.Diagram.LowCode;"
+      - "REQUIRED: DiagramConverter.Process(inputPath, outputPath) for Visio-to-Visio conversion"
+    forbidden:
+      - "FORBIDDEN: IDiagramPlugin — use LowCode DiagramConverter, not the core plugin interface"
+      - "FORBIDDEN: Manual Visio file manipulation replacing DiagramConverter.Process()"
+      - "FORBIDDEN: PDF output with DiagramConverter — use PdfConverter for PDF output"
+  PdfConverter:
+    required:
+      - "REQUIRED: using Aspose.Diagram.LowCode;"
+      - "REQUIRED: PdfConverter.Process(inputPath, outputPath) for Visio-to-PDF conversion"
+    forbidden:
+      - "FORBIDDEN: IDiagramPlugin — use LowCode PdfConverter, not the core plugin interface"
+      - "FORBIDDEN: Manual diagram-to-PDF conversion replacing PdfConverter.Process()"
+
 validation:
   require_restore: true
   require_build: true

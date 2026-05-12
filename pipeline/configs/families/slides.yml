@@ -55,6 +55,23 @@ generation:
   allow_generated_input_files: true
   allowed_types: []
 
+per_type_constraints:
+  Convert:
+    required:
+      - "REQUIRED: using Aspose.Slides.LowCode;"
+    forbidden:
+      - "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() — use LowCode Convert"
+  Compress:
+    required:
+      - "REQUIRED: using Aspose.Slides.LowCode;"
+    forbidden:
+      - "FORBIDDEN: Manual slide manipulation replacing Compress methods — use LowCode Compress"
+  Merger:
+    required:
+      - "REQUIRED: using Aspose.Slides.LowCode;"
+    forbidden:
+      - "FORBIDDEN: Manual slide copy replacing Merger.Process() — use LowCode Merger"
+
 validation:
   require_restore: true
   require_build: true

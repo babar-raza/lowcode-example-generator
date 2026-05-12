@@ -388,3 +388,61 @@ class TestExtraPackagesConfig:
         raw["nuget"]["dependency_resolution"] = {"enabled": True, "max_depth": 2}
         # Should not raise
         validate_family_config(raw)
+
+
+class TestPerTypeConstraints:
+    """per_type_constraints is loaded from YAML into FamilyConfig."""
+
+    REPO_ROOT = Path(__file__).resolve().parents[2]
+    PDF_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
+    WORDS_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "words.yml"
+    CELLS_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "cells.yml"
+    DIAGRAM_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "diagram.yml"
+
+    def test_pdf_config_has_per_type_constraints(self):
+        config = load_family_config(self.PDF_CONFIG)
+        assert isinstance(config.per_type_constraints, dict)
+        assert "Merger" in config.per_type_constraints
+
+    def test_pdf_merger_required_includes_text_fragment(self):
+        """Critical fix: Merger must carry the using Aspose.Pdf.Text constraint."""
+        config = load_family_config(self.PDF_CONFIG)
+        merger = config.per_type_constraints["Merger"]
+        required = merger.get("required", [])
+        assert any("Aspose.Pdf.Text" in r for r in required), (
+            "Merger per_type_constraints must include REQUIRED: using Aspose.Pdf.Text;"
+        )
+
+    def test_pdf_merger_forbidden_includes_pdffileeditor(self):
+        config = load_family_config(self.PDF_CONFIG)
+        merger = config.per_type_constraints["Merger"]
+        forbidden = merger.get("forbidden", [])
+        assert any("PdfFileEditor" in f for f in forbidden)
+
+    def test_words_config_has_per_type_constraints(self):
+        config = load_family_config(self.WORDS_CONFIG)
+        assert isinstance(config.per_type_constraints, dict)
+        assert "Converter" in config.per_type_constraints
+
+    def test_words_converter_forbidden_document_save(self):
+        config = load_family_config(self.WORDS_CONFIG)
+        converter = config.per_type_constraints["Converter"]
+        forbidden = converter.get("forbidden", [])
+        assert any("Document.Save" in f for f in forbidden)
+
+    def test_cells_config_has_per_type_constraints(self):
+        config = load_family_config(self.CELLS_CONFIG)
+        assert isinstance(config.per_type_constraints, dict)
+
+    def test_diagram_config_has_per_type_constraints(self):
+        config = load_family_config(self.DIAGRAM_CONFIG)
+        assert isinstance(config.per_type_constraints, dict)
+        assert "DiagramConverter" in config.per_type_constraints
+
+    def test_config_without_per_type_constraints_defaults_empty(self, tmp_path):
+        """Configs without per_type_constraints field load fine with empty dict."""
+        raw = _load_raw(CELLS_CONFIG)
+        raw.pop("per_type_constraints", None)
+        path = _write_temp_config(raw)
+        config = load_family_config(path)
+        assert config.per_type_constraints == {}

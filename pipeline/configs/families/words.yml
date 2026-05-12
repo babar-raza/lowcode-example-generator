@@ -101,3 +101,29 @@ template_hints:
     - "Aspose.Words"
   default_output_extension: ".docx"
   default_fixture_extension: ".docx"
+
+per_type_constraints:
+  Converter:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: Converter.Convert(inputFile, outputFile) — NOT Document.Save()"
+    forbidden:
+      - "FORBIDDEN: Document.Save() as the primary operation — always use LowCode Converter.Convert()"
+  Watermarker:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: Watermarker.SetText(inputFile, outputFile, watermarkText)"
+    forbidden:
+      - "FORBIDDEN: manually adding watermark shapes to document.xml — use LowCode Watermarker.SetText()"
+  Splitter:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: Splitter.ExtractPages(inputFile, outputFile, pageIndex)"
+    forbidden:
+      - "FORBIDDEN: Document.Save() replacing Splitter.ExtractPages() — use LowCode Splitter"
+  Replacer:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: Replacer.Replace(inputFile, outputFile, pattern, replacement)"
+    forbidden:
+      - "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() — use LowCode Replacer"

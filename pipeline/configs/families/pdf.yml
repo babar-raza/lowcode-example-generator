@@ -115,3 +115,21 @@ template_hints:
   output_naming_note: 'Do not use format strings in Splitter output filename (e.g. output_{0}.pdf) — use plain output.pdf'
   default_output_extension: ".pdf"
   default_fixture_extension: ".pdf"
+
+per_type_constraints:
+  Merger:
+    required:
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — TextFragment lives in Aspose.Pdf.Text namespace)"
+    forbidden:
+      - "FORBIDDEN: PdfFileEditor — this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
+  TextExtractor:
+    required:
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+    forbidden: []
+  Splitter:
+    required: []
+    forbidden:
+      - "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead"
+  Optimizer:
+    required: []
+    forbidden: []

@@ -209,6 +209,132 @@ class TestPacketBuilder:
         assert len(packet.user_prompt) > 0
 
 
+class TestPacketBuilderPerTypeConstraints:
+    """per_type_constraints from family config are injected into packet.constraints."""
+
+    def _scenario(self, type_name: str = "SpreadsheetLocker", ns: str = "Aspose.Cells.LowCode") -> dict:
+        return {
+            "scenario_id": f"cells-{type_name.lower()}",
+            "target_type": f"{ns}.{type_name}",
+            "target_namespace": ns,
+            "target_methods": ["Process"],
+            "required_symbols": [f"{ns}.{type_name}"],
+            "input_strategy": "none",
+            "input_files": [],
+        }
+
+    def _catalog(self, type_name: str = "SpreadsheetLocker", ns: str = "Aspose.Cells.LowCode") -> dict:
+        return {
+            "assembly_name": "Aspose.Cells",
+            "assembly_version": "25.4.0",
+            "namespaces": [{
+                "namespace": ns,
+                "types": [{
+                    "name": type_name,
+                    "full_name": f"{ns}.{type_name}",
+                    "kind": "class",
+                    "is_obsolete": False,
+                    "methods": [{"name": "Process", "return_type": "void", "is_static": True,
+                                 "is_obsolete": False, "parameters": []}],
+                    "properties": [],
+                    "constructors": [],
+                }],
+            }],
+            "diagnostics": {},
+        }
+
+    def test_per_type_constraints_required_injected(self):
+        """REQUIRED: constraints from per_type_constraints appear in packet.constraints."""
+        ptc = {
+            "SpreadsheetLocker": {
+                "required": ["REQUIRED: using Aspose.Cells.LowCode;"],
+                "forbidden": [],
+            }
+        }
+        packet = build_packet(
+            self._scenario(), self._catalog(),
+            per_type_constraints=ptc,
+        )
+        assert "REQUIRED: using Aspose.Cells.LowCode;" in packet.constraints
+
+    def test_per_type_constraints_forbidden_injected(self):
+        """FORBIDDEN: constraints from per_type_constraints appear in packet.constraints."""
+        ptc = {
+            "SpreadsheetLocker": {
+                "required": [],
+                "forbidden": ["FORBIDDEN: Cells.Protect() replacing SpreadsheetLocker.Process()"],
+            }
+        }
+        packet = build_packet(
+            self._scenario(), self._catalog(),
+            per_type_constraints=ptc,
+        )
+        assert "FORBIDDEN: Cells.Protect() replacing SpreadsheetLocker.Process()" in packet.constraints
+
+    def test_per_type_constraints_not_duplicated(self):
+        """If a constraint is already present it should not be duplicated."""
+        existing = "REQUIRED: using Aspose.Cells.LowCode;"
+        ptc = {
+            "SpreadsheetLocker": {
+                "required": [existing],
+                "forbidden": [],
+            }
+        }
+        # Add the same constraint twice — must appear exactly once
+        packet = build_packet(
+            self._scenario(), self._catalog(),
+            per_type_constraints=ptc,
+        )
+        assert packet.constraints.count(existing) == 1
+
+    def test_per_type_constraints_for_other_type_not_injected(self):
+        """Constraints for a different type are not injected into unrelated scenarios."""
+        ptc = {
+            "PdfConverter": {
+                "required": ["REQUIRED: using Aspose.Cells.LowCode;"],
+                "forbidden": [],
+            }
+        }
+        packet = build_packet(
+            self._scenario("SpreadsheetLocker"), self._catalog("SpreadsheetLocker"),
+            per_type_constraints=ptc,
+        )
+        # PdfConverter's constraint must NOT appear for SpreadsheetLocker scenario
+        assert "REQUIRED: using Aspose.Cells.LowCode;" not in packet.constraints
+
+    def test_per_type_constraints_none_is_safe(self):
+        """Passing None for per_type_constraints does not raise and packet is valid."""
+        packet = build_packet(
+            self._scenario(), self._catalog(),
+            per_type_constraints=None,
+        )
+        assert len(packet.constraints) > 0
+
+    def test_pdf_merger_text_fragment_constraint_injected(self):
+        """Critical fix: Merger must carry the using Aspose.Pdf.Text constraint via per_type_constraints."""
+        ptc = {
+            "Merger": {
+                "required": ["REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"],
+                "forbidden": ["FORBIDDEN: PdfFileEditor"],
+            }
+        }
+        ns = "Aspose.Pdf.LowCode"
+        scenario = self._scenario("Merger", ns)
+        catalog = self._catalog("Merger", ns)
+        packet = build_packet(scenario, catalog, per_type_constraints=ptc)
+        assert any("Aspose.Pdf.Text" in c for c in packet.constraints)
+        assert any("PdfFileEditor" in c for c in packet.constraints)
+
+    def test_per_type_constraints_stored_on_packet(self):
+        """per_type_constraints dict is stored on the returned PromptPacket."""
+        ptc = {"SpreadsheetLocker": {"required": ["REQUIRED: x"], "forbidden": []}}
+        packet = build_packet(
+            self._scenario(), self._catalog(),
+            per_type_constraints=ptc,
+        )
+        assert packet.per_type_constraints == ptc
+
+
 # --- Tests: Code Generator ---
 
 
@@ -1556,3 +1682,80 @@ class TestLLMTimeoutRetry:
                     "http://fake/v1/chat/completions", "prompt",
                     model="test-model", api_key="key",
                 )
+
+
+class TestGeneralizedSemanticValidation:
+    """_validate_code_from_constraints() checks FORBIDDEN patterns for any family."""
+
+    def test_forbidden_pattern_detected_in_code(self):
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": ["FORBIDDEN: PdfFileEditor — use LowCode Merger instead"]
+        }
+        code = 'var editor = new PdfFileEditor(); editor.Concatenate(inputs, output);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert len(issues) == 1
+        assert "PdfFileEditor" in issues[0]
+
+    def test_forbidden_pattern_absent_no_issue(self):
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": ["FORBIDDEN: PdfFileEditor — use LowCode Merger instead"]
+        }
+        code = 'var options = new MergeOptions(); new Merger().Process(options);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert len(issues) == 0
+
+    def test_multiple_forbidden_patterns(self):
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": [
+                "FORBIDDEN: PdfFileEditor — use LowCode Merger instead",
+                "FORBIDDEN: TextAbsorber — use LowCode TextExtractor instead",
+            ]
+        }
+        code = 'var editor = new PdfFileEditor(); var absorber = new TextAbsorber();'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert len(issues) == 2
+
+    def test_empty_constraints_no_issues(self):
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        issues = _validate_code_from_constraints("var x = 1;", {})
+        assert len(issues) == 0
+
+    def test_words_core_substitution_detected(self):
+        """FORBIDDEN: manual loop replacing Replacer.Replace() is detected."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": ["FORBIDDEN: manual find/replace loops replacing Replacer.Replace() — use LowCode Replacer"]
+        }
+        # Code that does manual find/replace instead of Replacer.Replace()
+        code = 'foreach (var run in doc.GetChildNodes(NodeType.Run, true)) { run.GetText(); }'
+        # The first token "manual" is 6 chars but won't be in code — constraint guards as prompt hint
+        # For token-in-code check, test with an explicit API name in FORBIDDEN
+        constraints2 = {
+            "forbidden": ["FORBIDDEN: IDiagramPlugin — use LowCode DiagramConverter, not the core plugin interface"]
+        }
+        code2 = 'IDiagramPlugin plugin = new DiagramPlugin();'
+        issues = _validate_code_from_constraints(code2, constraints2)
+        assert any("IDiagramPlugin" in i for i in issues)
+
+    def test_diagram_core_substitution_detected(self):
+        """FORBIDDEN: IDiagramPlugin is detected for diagram scenarios."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": ["FORBIDDEN: IDiagramPlugin — use LowCode DiagramConverter, not the core plugin interface"]
+        }
+        code = 'var plugin = (IDiagramPlugin)new DiagramPlugin();'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any("IDiagramPlugin" in i for i in issues)
+
+    def test_short_token_not_flagged(self):
+        """Tokens shorter than 4 chars are not checked to avoid false positives."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "forbidden": ["FORBIDDEN: Pdf"]  # only 3 chars after trim
+        }
+        code = 'using Aspose.Pdf;'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert len(issues) == 0

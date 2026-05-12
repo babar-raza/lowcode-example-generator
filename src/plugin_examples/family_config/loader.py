@@ -160,4 +160,5 @@ def _build_model(data: dict) -> FamilyConfig:
         validation=validation,
         llm=llm,
         template_hints=template_hints,
+        per_type_constraints=data.get("per_type_constraints", {}),
     )

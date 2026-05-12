@@ -53,6 +53,13 @@ generation:
   allow_generated_input_files: true
   allowed_types: []
 
+per_type_constraints:
+  Converter:
+    required:
+      - "REQUIRED: using Aspose.Email.LowCode;"
+    forbidden:
+      - "FORBIDDEN: MailMessage.Save() as the primary operation — use LowCode Converter.Convert()"
+
 validation:
   require_restore: true
   require_build: true

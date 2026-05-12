@@ -637,7 +637,12 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             if ctx.config and hasattr(ctx.config, "template_hints"):
                 from dataclasses import asdict as _asdict
                 hints = _asdict(ctx.config.template_hints)
-            packet = build_packet(scenario_dict, ctx.catalog, template_hints=hints)
+            _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
+            packet = build_packet(
+                scenario_dict, ctx.catalog,
+                template_hints=hints,
+                per_type_constraints=_ptc,
+            )
             example = generate_example(packet, llm_generate=llm_fn)
             if example.status == "failed" or not example.code.strip():
                 reason = example.failure_reason or "empty code"
@@ -654,12 +659,13 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                 input_strategy=getattr(scenario, "input_strategy", "none"),
                 input_files=getattr(scenario, "input_files", []),
             )
-            # Store PDF-specific constraints so build repair can re-inject them.
+            # Store constraints for build repair re-injection (all families).
             # The packet is not available in _stage_validation, so we persist here.
             project["pdf_constraints"] = [
                 c for c in packet.constraints
                 if "REQUIRED:" in c or "FORBIDDEN:" in c
             ]
+            project["family_name"] = ctx.family
             project["type_short"] = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
             ctx.generated_projects.append(project)
         except Exception as e:
@@ -768,7 +774,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 if fixed_code and fixed_code != current_code:
                     # Semantic validation before writing — catch File.Copy and other
                     # semantically wrong but compilable substitutes.
-                    proj_family = "pdf" if pdf_constraints else ""
+                    proj_family = proj.get("family_name", "pdf" if pdf_constraints else "")
                     proj_type_short = proj.get("type_short", "")
                     semantic_issues = _validate_code(fixed_code, family=proj_family, type_short=proj_type_short)
                     if semantic_issues:

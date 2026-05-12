@@ -29,6 +29,7 @@ class PromptPacket:
     template_hints: dict = field(default_factory=dict)
     input_strategy: str = "none"
     input_files: list[str] = field(default_factory=list)
+    per_type_constraints: dict = field(default_factory=dict)
 
 
 def build_packet(
@@ -37,6 +38,7 @@ def build_packet(
     *,
     prompt_template: str | None = None,
     template_hints: dict | None = None,
+    per_type_constraints: dict | None = None,
 ) -> PromptPacket:
     """Build a constrained prompt packet from a scenario.
 
@@ -210,6 +212,22 @@ def build_packet(
                 "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
             ]
 
+    # Inject config-driven per_type_constraints for the target type (all families)
+    _type_name = target_type.split(".")[-1] if target_type else ""
+    if per_type_constraints and _type_name in per_type_constraints:
+        type_cfg = per_type_constraints[_type_name]
+        for req in type_cfg.get("required", []):
+            if req not in constraints:
+                constraints.append(req)
+        for forb in type_cfg.get("forbidden", []):
+            if forb not in constraints:
+                constraints.append(forb)
+        logger.debug(
+            "Injected %d per_type_constraints for %s from family config",
+            len(type_cfg.get("required", [])) + len(type_cfg.get("forbidden", [])),
+            _type_name,
+        )
+
     system_prompt = (
         "You are an expert C# developer. Generate a complete, runnable SDK-style "
         "console application example that demonstrates the specified API. "
@@ -262,6 +280,7 @@ def build_packet(
         template_hints=template_hints or {},
         input_strategy=input_strategy,
         input_files=input_files,
+        per_type_constraints=per_type_constraints or {},
     )
 
 

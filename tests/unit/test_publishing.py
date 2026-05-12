@@ -242,6 +242,107 @@ class TestPRBuilder:
         assert pr.branch == "plugin-examples/cells/run-123"
         assert "cells" in pr.labels
 
+    def test_pr_scope_defaults_to_partial_canary(self):
+        pr = build_pr(
+            family="cells",
+            run_id="run-123",
+            examples_count=5,
+            package_version="25.4.0",
+        )
+        assert pr.pr_scope_type == "PARTIAL_CANARY"
+
+    def test_pr_scope_family_complete_when_specified(self):
+        pr = build_pr(
+            family="cells",
+            run_id="run-123",
+            examples_count=9,
+            package_version="25.4.0",
+            pr_scope_type="FAMILY_COMPLETE",
+            denominator_total=9,
+            denominator_remaining=0,
+        )
+        assert pr.pr_scope_type == "FAMILY_COMPLETE"
+        assert pr.denominator_total == 9
+        assert pr.denominator_remaining == 0
+
+    def test_pr_body_includes_coverage_section_when_denominator_provided(self):
+        pr = build_pr(
+            family="pdf",
+            run_id="run-123",
+            examples_count=2,
+            package_version="26.4.0",
+            pr_scope_type="PARTIAL_CANARY",
+            denominator_total=4,
+            denominator_remaining=2,
+        )
+        assert "## Coverage" in pr.body
+        assert "PARTIAL_CANARY" in pr.body
+        assert "2/4" in pr.body
+
+    def test_pr_body_no_coverage_section_without_denominator(self):
+        pr = build_pr(
+            family="cells",
+            run_id="run-123",
+            examples_count=5,
+            package_version="25.4.0",
+        )
+        assert "## Coverage" not in pr.body
+
+    def test_partial_canary_not_labeled_family_complete_unless_remaining_zero(self):
+        pr = build_pr(
+            family="words",
+            run_id="run-123",
+            examples_count=4,
+            package_version="26.5.0",
+            pr_scope_type="PARTIAL_CANARY",
+            denominator_total=25,
+            denominator_remaining=21,
+        )
+        assert pr.pr_scope_type != "FAMILY_COMPLETE"
+        assert "PARTIAL_CANARY" in pr.body
+
+
+class TestComputePRScopeType:
+    """Tests for compute_pr_scope_type() helper."""
+
+    def test_family_complete_when_all_published(self):
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+        denominator = {"workflow_root_types": 4, "allowed_pilot_count": None}
+        result = compute_pr_scope_type("cells", denominator, 4)
+        assert result == PR_SCOPE_FAMILY_COMPLETE
+
+    def test_pilot_complete_when_pilot_published(self):
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type
+        denominator = {"workflow_root_types": 25, "allowed_pilot_count": 4}
+        result = compute_pr_scope_type("words", denominator, 4)
+        assert result == "PILOT_COMPLETE"
+
+    def test_partial_canary_when_not_all_published(self):
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        denominator = {"workflow_root_types": 25, "allowed_pilot_count": 4}
+        result = compute_pr_scope_type("words", denominator, 2)
+        assert result == PR_SCOPE_PARTIAL_CANARY
+
+    def test_words_guard_null_workflow_root_count_prevents_family_complete(self):
+        """Words guard: FAMILY_COMPLETE cannot be returned when workflow_root_types is null."""
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+        denominator = {"workflow_root_types": None, "allowed_pilot_count": 4}
+        result = compute_pr_scope_type("words", denominator, 4)
+        assert result != PR_SCOPE_FAMILY_COMPLETE
+        assert result == "PILOT_COMPLETE"
+
+    def test_partial_canary_when_zero_published(self):
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        denominator = {"workflow_root_types": 5, "allowed_pilot_count": 2}
+        result = compute_pr_scope_type("diagram", denominator, 0)
+        assert result == PR_SCOPE_PARTIAL_CANARY
+
+    def test_family_complete_requires_nonzero_denominator(self):
+        """No denominator → PARTIAL_CANARY fallback."""
+        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        result = compute_pr_scope_type("cells", {}, 3)
+        assert result == PR_SCOPE_PARTIAL_CANARY
+
 
 # --- Tests: package_watcher ---
 

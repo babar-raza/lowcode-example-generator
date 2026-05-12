@@ -7,6 +7,36 @@ from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
 
+# PR scope types — ordered by completeness level
+PR_SCOPE_PARTIAL_CANARY = "PARTIAL_CANARY"
+PR_SCOPE_PILOT_COMPLETE = "PILOT_COMPLETE"
+PR_SCOPE_FAMILY_COMPLETE = "FAMILY_COMPLETE"
+
+
+def compute_pr_scope_type(
+    family: str,
+    denominator: dict,
+    published_count: int,
+) -> str:
+    """Compute the PR scope type from denominator and published count.
+
+    Returns one of: PARTIAL_CANARY, PILOT_COMPLETE, FAMILY_COMPLETE.
+
+    Words guard: If workflow_root_types is null, FAMILY_COMPLETE is never returned
+    because the full SOT classification has not been completed.
+    """
+    workflow_root_count = denominator.get("workflow_root_types")
+    pilot_allowed = denominator.get("allowed_pilot_count")
+
+    # Cannot be FAMILY_COMPLETE if workflow_root_count is unknown
+    if workflow_root_count is not None and published_count >= workflow_root_count > 0:
+        return PR_SCOPE_FAMILY_COMPLETE
+
+    if pilot_allowed is not None and published_count >= pilot_allowed > 0:
+        return PR_SCOPE_PILOT_COMPLETE
+
+    return PR_SCOPE_PARTIAL_CANARY
+
 
 @dataclass
 class PRContent:
@@ -15,6 +45,9 @@ class PRContent:
     body: str
     branch: str
     labels: list[str] = field(default_factory=list)
+    pr_scope_type: str = "PARTIAL_CANARY"
+    denominator_total: int | None = None
+    denominator_remaining: int | None = None
 
 
 def build_pr(
@@ -27,6 +60,9 @@ def build_pr(
     excluded_scenarios: list[str] | None = None,
     gate_verdict: str = "PR_DRY_RUN_READY",
     reviewer_passed: bool = True,
+    pr_scope_type: str = "PARTIAL_CANARY",
+    denominator_total: int | None = None,
+    denominator_remaining: int | None = None,
 ) -> PRContent:
     """Build PR title and body with full evidence references.
 
@@ -62,6 +98,23 @@ def build_pr(
 
     reviewer_result = "PASSED" if reviewer_passed else "FAILED"
 
+    # Build coverage section
+    if denominator_total is not None:
+        if denominator_remaining is not None and denominator_remaining > 0:
+            coverage_note = (
+                f"**PR scope:** `{pr_scope_type}`  \n"
+                f"**Pilot coverage:** {examples_count}/{denominator_total} types  \n"
+                f"**Remaining denominator:** {denominator_remaining} types not yet published  \n"
+            )
+        else:
+            coverage_note = (
+                f"**PR scope:** `{pr_scope_type}`  \n"
+                f"**Coverage:** {examples_count}/{denominator_total} types — pilot complete  \n"
+            )
+        coverage_section = f"\n## Coverage\n\n{coverage_note}\n---\n"
+    else:
+        coverage_section = ""
+
     body = f"""## Scope
 
 This PR adds {examples_count} verified Aspose.{family_cap} LowCode examples for .NET.
@@ -71,7 +124,7 @@ build + runtime + reviewer gate.
 **DO NOT MERGE without human review of the examples.**
 
 ---
-
+{coverage_section}
 ## Package
 
 **NuGet Package:** `Aspose.{family_cap}` v{package_version}
@@ -144,4 +197,7 @@ No manual edits. LLM proposed — compiler/runtime/reviewer approved.
         body=body,
         branch=f"plugin-examples/{family}/{run_id}",
         labels=["automated", "plugin-examples", family],
+        pr_scope_type=pr_scope_type,
+        denominator_total=denominator_total,
+        denominator_remaining=denominator_remaining,
     )

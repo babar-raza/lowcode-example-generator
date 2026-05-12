@@ -145,8 +145,13 @@ def plan_scenarios(
             # Classify the type role
             role = classify_type(type_info)
 
-            # Enum — skip entirely
+            # Enum — not a runnable LowCode API; record in blocked_scenarios for tracking
             if role.role == "enum":
+                result.blocked_scenarios.append(_make_blocked_scenario(
+                    family, type_info, ns_name,
+                    "blocked_enum_not_runnable",
+                    f"Type '{type_info['name']}' is an ENUM — not a runnable LowCode API.",
+                ))
                 continue
 
             # Score the entrypoint

@@ -439,7 +439,7 @@ class TestCompletenessGateEquation:
 
     def test_full_sot_overcount_warns(self):
         """FULL_SOT with more accounted than expected triggers overcount warning."""
-        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 5}
+        denominator = {"denominator_basis": "FULL_SOT", "total_lowcode_types": 5, "workflow_root_types": 3}
         planning = _make_planning_result("cells", ready=6, blocked=1)  # 7 > 5
         result = check_completeness("cells", denominator, planning, dry_run=True)
         assert result.status == "warn"
@@ -448,7 +448,7 @@ class TestCompletenessGateEquation:
 
     def test_full_sot_overcount_raises_in_live_mode(self):
         """FULL_SOT overcount raises in live mode."""
-        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 5}
+        denominator = {"denominator_basis": "FULL_SOT", "total_lowcode_types": 5, "workflow_root_types": 3}
         planning = _make_planning_result("cells", ready=6, blocked=1)
         with pytest.raises(CompletenessViolationError):
             check_completeness("cells", denominator, planning, dry_run=False)

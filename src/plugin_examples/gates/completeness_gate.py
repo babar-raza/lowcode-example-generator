@@ -8,7 +8,8 @@ Equation (simplified):
     ready_count + blocked_count >= denominator_expected_count
 
 For PILOT_ALLOWED families: denominator_expected_count = allowed_pilot_count
-For FULL_SOT families: denominator_expected_count = workflow_root_types
+For FULL_SOT families: denominator_expected_count = total_lowcode_types when present,
+otherwise workflow_root_types for backward compatibility
 For DISCOVERY_ONLY families: gate is skipped (no generation expected)
 """
 
@@ -103,7 +104,7 @@ def check_completeness(
                 violations=["allowed_pilot_count missing from denominator"],
             )
     elif basis == "FULL_SOT":
-        expected = denominator.get("workflow_root_types")
+        expected = denominator.get("total_lowcode_types", denominator.get("workflow_root_types"))
         if expected is None:
             return CompletenessResult(
                 family=family,
@@ -114,8 +115,11 @@ def check_completeness(
                 blocked_count=planning_result.blocked_count,
                 accounted_count=planning_result.ready_count + planning_result.blocked_count,
                 gap=0,
-                message=f"Family '{family}': FULL_SOT but workflow_root_types is missing from denominator.",
-                violations=["workflow_root_types missing from denominator"],
+                message=(
+                    f"Family '{family}': FULL_SOT but total_lowcode_types and "
+                    "workflow_root_types are missing from denominator."
+                ),
+                violations=["total_lowcode_types/workflow_root_types missing from denominator"],
             )
     else:
         return CompletenessResult(
@@ -149,7 +153,7 @@ def check_completeness(
     # (For PILOT_ALLOWED this is expected — all non-pilot types also appear in blocked_scenarios)
     if basis == "FULL_SOT" and accounted > expected:
         violations.append(
-            f"Equation overcount: {accounted} accounted > {expected} expected workflow_root types. "
+            f"Equation overcount: {accounted} accounted > {expected} expected types. "
             f"Package may have added new types since denominator was created. "
             f"Update the denominator file."
         )
@@ -269,7 +273,7 @@ def write_denominator_ledger(
     for s in planning_result.blocked_scenarios:
         blocked_map[s.target_type] = s.status  # status IS the blocked reason
 
-    allowed_pilot = set(denominator.get("allowed_pilot_types", []))
+    allowed_pilot = set(denominator.get("allowed_pilot_types") or [])
     basis = denominator.get("denominator_basis", "UNKNOWN")
 
     entries = []

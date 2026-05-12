@@ -186,6 +186,23 @@ class TestScenarioPlanner:
         ready_types = [s.target_type for s in result.ready_scenarios]
         assert "Aspose.Cells.LowCode.SaveFormat" not in ready_types
 
+    def test_enums_are_tracked_before_allowed_types_filter(self, tmp_path):
+        """ENUM types must be classified as enums even when outside pilot allowlist."""
+        proof = _make_proof(tmp_path)
+        result = plan_scenarios(
+            family="cells",
+            catalog=_make_catalog(),
+            plugin_namespaces=["Aspose.Cells.LowCode"],
+            source_of_truth_proof_path=proof,
+            allowed_types=["PdfConverter"],
+        )
+        enum_scenarios = [
+            s for s in result.blocked_scenarios
+            if s.target_type == "Aspose.Cells.LowCode.SaveFormat"
+        ]
+        assert len(enum_scenarios) == 1
+        assert enum_scenarios[0].status == "blocked_enum_not_runnable"
+
     def test_required_symbols_populated(self, tmp_path):
         proof = _make_proof(tmp_path)
         result = plan_scenarios(

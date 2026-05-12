@@ -133,15 +133,6 @@ def plan_scenarios(
                 ))
                 continue
 
-            # Allowlist enforcement: if allowed_types is set, block types not in it
-            if _allowed and type_short_name not in _allowed:
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name, "blocked_pilot_not_in_scope",
-                    f"Type '{type_short_name}' is not in the controlled pilot allowlist. "
-                    f"Allowed: {sorted(_allowed)}",
-                ))
-                continue
-
             # Classify the type role
             role = classify_type(type_info)
 
@@ -151,6 +142,17 @@ def plan_scenarios(
                     family, type_info, ns_name,
                     "blocked_enum_not_runnable",
                     f"Type '{type_info['name']}' is an ENUM — not a runnable LowCode API.",
+                ))
+                continue
+
+            # Allowlist enforcement: if allowed_types is set, block types not in it.
+            # ENUMs are classified before this gate so they remain visible as
+            # blocked_enum_not_runnable instead of pilot scope exclusions.
+            if _allowed and type_short_name not in _allowed:
+                result.blocked_scenarios.append(_make_blocked_scenario(
+                    family, type_info, ns_name, "blocked_pilot_not_in_scope",
+                    f"Type '{type_short_name}' is not in the controlled pilot allowlist. "
+                    f"Allowed: {sorted(_allowed)}",
                 ))
                 continue
 

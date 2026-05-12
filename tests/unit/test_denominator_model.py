@@ -186,6 +186,10 @@ class TestWordsDenominator:
     def test_words_published_count_is_4(self):
         assert self.d["published_count"] == 4
 
+    def test_words_workflow_root_types_is_classified(self):
+        assert self.d["workflow_root_types"] == 9
+        assert self.d["non_runnable_types"] == 16
+
     def test_words_excluded_count_is_21(self):
         assert self.d["excluded_count"] == 21
 
@@ -212,6 +216,18 @@ class TestWordsDenominator:
         excluded = self.d["excluded_count"]
         assert total == pilot + excluded, (
             f"Words: total ({total}) != pilot ({pilot}) + excluded ({excluded})"
+        )
+
+    def test_words_full_sot_classification_evidence_present(self):
+        sources = self.d["evidence_sources"]
+        assert "workspace/verification/latest/words-full-sot-type-classification.json" in sources
+
+    def test_words_total_equals_runnable_plus_non_runnable(self):
+        total = self.d["total_lowcode_types"]
+        runnable = self.d["workflow_root_types"]
+        non_runnable = self.d["non_runnable_types"]
+        assert total == runnable + non_runnable, (
+            f"Words: total ({total}) != runnable ({runnable}) + non_runnable ({non_runnable})"
         )
 
 

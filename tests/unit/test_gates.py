@@ -427,3 +427,132 @@ class TestDenominatorLedger:
         assert entries_by_name["Merger"]["lifecycle_state"] == "ready"
         assert entries_by_name["Merger"]["pilot_scope"] == "in_scope"
         assert entries_by_name["MergeOptions"]["pilot_scope"] == "out_of_scope"
+
+
+# ---------------------------------------------------------------------------
+# Completeness gate equation — overcount, unknown types, integration
+# ---------------------------------------------------------------------------
+
+
+class TestCompletenessGateEquation:
+    """Equation correctness: overcount, unknown types, PILOT full-WRT reporting."""
+
+    def test_full_sot_overcount_warns(self):
+        """FULL_SOT with more accounted than expected triggers overcount warning."""
+        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 5}
+        planning = _make_planning_result("cells", ready=6, blocked=1)  # 7 > 5
+        result = check_completeness("cells", denominator, planning, dry_run=True)
+        assert result.status == "warn"
+        assert result.holds is False
+        assert any("overcount" in v.lower() for v in result.violations)
+
+    def test_full_sot_overcount_raises_in_live_mode(self):
+        """FULL_SOT overcount raises in live mode."""
+        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 5}
+        planning = _make_planning_result("cells", ready=6, blocked=1)
+        with pytest.raises(CompletenessViolationError):
+            check_completeness("cells", denominator, planning, dry_run=False)
+
+    def test_pilot_allowed_overcount_does_not_warn(self):
+        """PILOT_ALLOWED with more accounted than pilot count is expected — no overcount warning."""
+        denominator = {"denominator_basis": "PILOT_ALLOWED", "allowed_pilot_count": 4}
+        planning = _make_planning_result("pdf", ready=4, blocked=97)  # 101 total — all non-pilot blocked
+        result = check_completeness("pdf", denominator, planning, dry_run=True)
+        # accounted = 101 >> 4, but this is expected for PILOT_ALLOWED
+        assert result.status == "pass"
+        assert not any("overcount" in v.lower() for v in result.violations)
+
+    def test_unknown_type_count_zero_no_violation(self):
+        """unknown_type_count=0 adds no violation."""
+        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
+        planning = _make_planning_result("cells", ready=3, blocked=0)
+        result = check_completeness("cells", denominator, planning, dry_run=True,
+                                    unknown_type_count=0)
+        assert result.status == "pass"
+        assert result.unknown_type_count == 0
+
+    def test_unknown_type_count_positive_warns(self):
+        """unknown_type_count > 0 always adds a warning violation."""
+        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
+        planning = _make_planning_result("cells", ready=3, blocked=0)
+        result = check_completeness("cells", denominator, planning, dry_run=True,
+                                    unknown_type_count=2)
+        # Should warn even though equation holds (3 == 3)
+        assert result.status == "warn"
+        assert result.unknown_type_count == 2
+        assert any("unknown" in v.lower() for v in result.violations)
+
+    def test_unknown_type_count_does_not_raise_in_live_mode(self):
+        """Unknown types produce a warning, not a hard failure, even in live mode."""
+        denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
+        planning = _make_planning_result("cells", ready=3, blocked=0)
+        # Should NOT raise — unknown types are a soft warning
+        result = check_completeness("cells", denominator, planning, dry_run=False,
+                                    unknown_type_count=2)
+        assert result.status == "warn"
+
+    def test_pilot_allowed_full_wrt_count_reported(self):
+        """PILOT_ALLOWED families report full_wrt_count from denominator for visibility."""
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 4,
+            "workflow_root_types": 25,  # full SOT visible
+        }
+        planning = _make_planning_result("words", ready=4, blocked=0)
+        result = check_completeness("words", denominator, planning, dry_run=True)
+        assert result.status == "pass"
+        assert result.full_wrt_count == 25  # full denominator reported for visibility
+
+    def test_completeness_result_json_includes_new_fields(self, tmp_path):
+        """Written JSON includes unknown_type_count and full_wrt_count fields."""
+        denominator = {
+            "denominator_basis": "PILOT_ALLOWED",
+            "allowed_pilot_count": 4,
+            "workflow_root_types": 10,
+        }
+        planning = _make_planning_result("words", ready=4, blocked=0)
+        result = check_completeness("words", denominator, planning, dry_run=True,
+                                    unknown_type_count=1)
+        path = write_completeness_gate_result(result, tmp_path)
+        data = json.loads(path.read_text())
+        assert "unknown_type_count" in data
+        assert data["unknown_type_count"] == 1
+        assert "full_wrt_count" in data
+        assert data["full_wrt_count"] == 10
+
+
+class TestCompletenessGateRunnerIntegration:
+    """Verify completeness gate is integrated into runner — not just unit-tested."""
+
+    def test_real_denominator_loads_and_validates(self):
+        """Load real denominator file and call check_completeness — no crash expected."""
+        import json
+        from pathlib import Path
+        denom_path = (
+            Path(__file__).resolve().parents[2]
+            / "pipeline" / "configs" / "denominators" / "cells.json"
+        )
+        if not denom_path.exists():
+            pytest.skip("cells.json denominator not found")
+        denominator = json.loads(denom_path.read_text(encoding="utf-8"))
+        planning = _make_planning_result("cells", ready=9, blocked=0)
+        result = check_completeness("cells", denominator, planning, dry_run=True)
+        # Should not crash; result holds since cells is FULL_SOT with 9 types
+        assert result.status in ("pass", "warn", "skip")
+        assert result.denominator_basis in ("FULL_SOT", "PILOT_ALLOWED", "DISCOVERY_ONLY", "UNKNOWN")
+
+    def test_runner_scenario_planning_imports_completeness_gate(self):
+        """runner._stage_scenario_planning must import and call check_completeness."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_scenario_planning)
+        assert "check_completeness" in source, (
+            "_stage_scenario_planning must call check_completeness(). "
+            "The completeness gate is not integrated — Gap 1 fix incomplete."
+        )
+        assert "write_completeness_gate_result" in source, (
+            "_stage_scenario_planning must call write_completeness_gate_result()."
+        )
+        assert "completeness_gate_status" in source, (
+            "_stage_scenario_planning must return completeness_gate_status in stage artifacts."
+        )

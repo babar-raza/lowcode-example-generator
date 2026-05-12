@@ -562,12 +562,45 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
     # Write scenario input format map evidence
     _write_scenario_input_format_map(ctx.planning, ctx.evidence_dir)
 
+    # Completeness gate — verify denominator equation after planning
+    from plugin_examples.gates.completeness_gate import (
+        check_completeness,
+        write_completeness_gate_result,
+    )
+    import json as _json
+    _denom_path = ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
+    _denominator: dict = {}
+    if _denom_path.exists():
+        try:
+            _denominator = _json.loads(_denom_path.read_text(encoding="utf-8"))
+        except Exception as _e:
+            logger.warning("Could not load denominator for completeness gate: %s", _e)
+
+    # Unknown types: in matched namespaces but not in any planning result
+    _accounted_types = (
+        {s.target_type for s in ctx.planning.ready_scenarios}
+        | {s.target_type for s in ctx.planning.blocked_scenarios}
+    )
+    _unknown_count = sum(
+        1 for r in roles
+        if any(r.full_name.startswith(ns) for ns in matched_ns)
+        and r.full_name not in _accounted_types
+    )
+
+    _completeness_result = check_completeness(
+        ctx.family, _denominator, ctx.planning,
+        dry_run=ctx.dry_run,
+        unknown_type_count=_unknown_count,
+    )
+    write_completeness_gate_result(_completeness_result, ctx.evidence_dir)
+
     standalone_roles = sum(1 for r in roles if r.role in {"workflow_root", "operation_facade"})
     return {
         "ready_count": ctx.planning.ready_count,
         "blocked_count": ctx.planning.blocked_count,
         "total_types_classified": len(roles),
         "standalone_types": standalone_roles,
+        "completeness_gate_status": _completeness_result.status,
     }
 
 
@@ -666,7 +699,9 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                 if "REQUIRED:" in c or "FORBIDDEN:" in c
             ]
             project["family_name"] = ctx.family
-            project["type_short"] = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
+            _type_name_ptc = packet.target_type.split(".")[-1] if packet.target_type else ""
+            project["type_short"] = _type_name_ptc.lower()
+            project["type_constraints"] = _ptc.get(_type_name_ptc, {}) if _ptc else {}
             ctx.generated_projects.append(project)
         except Exception as e:
             logger.warning("Generation failed for %s: %s", scenario.scenario_id, e)
@@ -706,7 +741,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 def _stage_validation(ctx: PipelineContext) -> dict:
     from plugin_examples.verifier_bridge import run_dotnet_validation
     from plugin_examples.verifier_bridge.dotnet_runner import write_validation_results
-    from plugin_examples.generator.code_generator import _extract_code, _validate_code
+    from plugin_examples.generator.code_generator import _extract_code, _validate_code, _validate_code_from_constraints
 
     if not ctx.generated_projects:
         return {"validated": 0, "reason": "no generated projects"}
@@ -772,11 +807,15 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 ))
                 fixed_code = _extract_code(response)
                 if fixed_code and fixed_code != current_code:
-                    # Semantic validation before writing — catch File.Copy and other
-                    # semantically wrong but compilable substitutes.
+                    # Semantic validation before writing — PDF-specific check + per-type constraints
                     proj_family = proj.get("family_name", "pdf" if pdf_constraints else "")
                     proj_type_short = proj.get("type_short", "")
                     semantic_issues = _validate_code(fixed_code, family=proj_family, type_short=proj_type_short)
+                    proj_type_constraints = proj.get("type_constraints", {})
+                    if proj_type_constraints:
+                        semantic_issues.extend(
+                            _validate_code_from_constraints(fixed_code, proj_type_constraints)
+                        )
                     if semantic_issues:
                         logger.warning(
                             "Build repair attempt %d for %s produced semantically invalid code: %s",

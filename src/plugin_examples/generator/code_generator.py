@@ -478,18 +478,71 @@ def _extract_code(response: str) -> str:
 
 
 def _validate_code_from_constraints(code: str, type_constraints: dict) -> list[str]:
-    """Validate generated code against FORBIDDEN patterns from per_type_constraints config.
+    """Validate generated code against REQUIRED and FORBIDDEN patterns from per_type_constraints.
 
-    Applies to all families (not PDF-only). Checks the primary identifier extracted
-    from each FORBIDDEN: entry against the generated code.
+    REQUIRED: checks primary LowCode API calls (method calls) and critical using directives.
+    FORBIDDEN: checks for banned API substitutions, but skips the check when the complementary
+               LowCode call is present — this allows support/fixture code that happens to use
+               a non-LowCode API alongside the required LowCode call.
+
+    Design principle: avoid false positives on REQUIRED_SUPPORTING_DEPENDENCY usage.
+    A FORBIDDEN pattern is only flagged when the required LowCode call is absent,
+    indicating the forbidden API has replaced the LowCode API entirely.
     """
     issues = []
+
+    # --- Parse REQUIRED entries ---
+    required_calls: list[tuple[str, str]] = []   # (method_token, full_entry)
+    required_usings: list[tuple[str, str]] = []  # (using_stmt, full_entry)
+
+    for req in type_constraints.get("required", []):
+        # Extract pattern: strip "REQUIRED:" and remove explanation suffix (" — " or " (")
+        req_stripped = req.replace("REQUIRED:", "").strip()
+        for sep in (" — ", " ("):
+            if sep in req_stripped:
+                req_stripped = req_stripped.split(sep)[0].strip()
+                break
+
+        if req_stripped.startswith("using "):
+            # Using directive: check literal presence (normalize to end with semicolon)
+            using_stmt = req_stripped.rstrip(";") + ";"
+            required_usings.append((using_stmt, req))
+        elif "(" in req_stripped and len(req_stripped) >= 5:
+            # Method/constructor call: extract token up to first "("
+            # Handles static calls "Converter.Convert(...)" → token "Converter.Convert"
+            # AND instance calls "new Merger().Process(...)" → token "new Merger"
+            token = req_stripped.split("(")[0].strip()
+            if token and len(token) >= 4:
+                required_calls.append((token, req))
+
+    # Check REQUIRED using directives — must appear literally in code
+    for using_stmt, req_entry in required_usings:
+        if using_stmt not in code:
+            issues.append(f"Missing required using directive: {req_entry}")
+
+    # Check REQUIRED method calls — primary LowCode API must be present
+    for call_token, req_entry in required_calls:
+        if call_token not in code:
+            issues.append(f"Missing required LowCode API call: {req_entry}")
+
+    # --- FORBIDDEN check ---
+    # If the required LowCode call IS present, a forbidden pattern in the same code
+    # is likely fixture/support code — exempt it to avoid false positives.
+    has_required_lowcode_call = any(token in code for token, _ in required_calls)
+
     for forb in type_constraints.get("forbidden", []):
-        # Extract the primary identifier: "FORBIDDEN: Document.Save() as..." -> "Document.Save"
         forb_stripped = forb.replace("FORBIDDEN:", "").strip()
         first_token = forb_stripped.split("(")[0].split(" ")[0].strip()
-        if first_token and len(first_token) >= 4 and first_token in code:
-            issues.append(f"Uses forbidden pattern: {forb}")
+        if not first_token or len(first_token) < 4:
+            continue
+        if first_token not in code:
+            continue
+        # Forbidden token present — skip if the required LowCode call is also present
+        # (forbidden API is being used for fixture/support, not as a substitute)
+        if has_required_lowcode_call:
+            continue
+        issues.append(f"Uses forbidden pattern: {forb}")
+
     return issues
 
 

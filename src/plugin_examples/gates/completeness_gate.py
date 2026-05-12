@@ -36,6 +36,8 @@ class CompletenessResult:
     message: str
     violations: list[str] = field(default_factory=list)
     ledger_path: str | None = None
+    unknown_type_count: int = 0
+    full_wrt_count: int | None = None  # full workflow_root_types for PILOT_ALLOWED reporting
 
     @property
     def holds(self) -> bool:
@@ -52,6 +54,7 @@ def check_completeness(
     planning_result,  # PlanningResult from planner.py
     *,
     dry_run: bool = True,
+    unknown_type_count: int = 0,
 ) -> CompletenessResult:
     """Verify the denominator conservation equation for a family.
 
@@ -131,7 +134,10 @@ def check_completeness(
     accounted = planning_result.ready_count + planning_result.blocked_count
     gap = accounted - expected
     violations = []
+    # For PILOT_ALLOWED: also capture full workflow_root_types if present (reporting only)
+    full_wrt = denominator.get("workflow_root_types") if basis == "PILOT_ALLOWED" else None
 
+    # Shortfall: not enough types accounted for
     if accounted < expected:
         violations.append(
             f"Equation shortfall: {accounted} accounted ({planning_result.ready_count} ready + "
@@ -139,17 +145,37 @@ def check_completeness(
             f"Gap of {expected - accounted} types unaccounted for."
         )
 
+    # Overcount for FULL_SOT: more types accounted than denominator expects
+    # (For PILOT_ALLOWED this is expected — all non-pilot types also appear in blocked_scenarios)
+    if basis == "FULL_SOT" and accounted > expected:
+        violations.append(
+            f"Equation overcount: {accounted} accounted > {expected} expected workflow_root types. "
+            f"Package may have added new types since denominator was created. "
+            f"Update the denominator file."
+        )
+
+    # Unknown types: in the namespace but not in any planning result
+    if unknown_type_count > 0:
+        violations.append(
+            f"Unknown types: {unknown_type_count} types in namespace not in ready or blocked "
+            f"scenarios. Run a full classification sweep to account for them."
+        )
+
     if violations:
+        # Determine severity: shortfall and overcount are hard failures in live mode;
+        # unknown-only is always a warning (may be non-runnable helper types)
+        has_hard_violation = any(
+            "shortfall" in v or "overcount" in v for v in violations
+        )
         msg = (
             f"Family '{family}' completeness check FAILED ({basis}): "
             + "; ".join(violations)
         )
-        status = "warn" if dry_run else "fail"
-        if dry_run:
-            logger.warning("%s", msg)
-        else:
+        if has_hard_violation and not dry_run:
             logger.error("%s", msg)
             raise CompletenessViolationError(msg)
+        logger.warning("%s", msg)
+        status = "warn" if dry_run else ("fail" if has_hard_violation else "warn")
         return CompletenessResult(
             family=family,
             status=status,
@@ -161,11 +187,13 @@ def check_completeness(
             gap=gap,
             message=msg,
             violations=violations,
+            unknown_type_count=unknown_type_count,
+            full_wrt_count=full_wrt,
         )
 
     msg = (
         f"Family '{family}' completeness check PASS ({basis}): "
-        f"{accounted} accounted == {expected} expected."
+        f"{accounted} accounted >= {expected} expected."
     )
     logger.info("%s", msg)
     return CompletenessResult(
@@ -178,6 +206,8 @@ def check_completeness(
         accounted_count=accounted,
         gap=gap,
         message=msg,
+        unknown_type_count=unknown_type_count,
+        full_wrt_count=full_wrt,
     )
 
 
@@ -201,6 +231,8 @@ def write_completeness_gate_result(
         "message": result.message,
         "violations": result.violations,
         "holds": result.holds,
+        "unknown_type_count": result.unknown_type_count,
+        "full_wrt_count": result.full_wrt_count,
     }
     path.write_text(json.dumps(data, indent=2), encoding="utf-8")
     logger.info("Completeness gate result written: %s", path)

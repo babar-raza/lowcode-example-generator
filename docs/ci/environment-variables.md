@@ -8,11 +8,14 @@ These variables must be stored as CI secrets (e.g., GitHub Actions secrets) and 
 
 | Variable | Purpose |
 |----------|---------|
-| `GITHUB_TOKEN` | Classic PAT with `repo` scope for GitHub API access (reading, writing, creating PRs) |
+| `GH_TOKEN` | **Operator storage.** Classic PAT (`ghp_*`) with `repo` scope. Stored as a Windows system environment variable or CI secret. Never read directly by the pipeline — must be mapped to `GITHUB_TOKEN` before running commands. |
+| `GITHUB_TOKEN` | **Read by the pipeline.** Always populated from `GH_TOKEN` at command time. Used for live PR creation, merge, repo access probes, permission probes, and build regression. |
 | `GPT_OSS_ENDPOINT` | LLM provider endpoint URL (e.g., `https://llm.professionalize.com/v1/`) |
 | `GPT_OSS_API_KEY` | LLM provider API key |
 | `GPT_OSS_MODEL` | LLM model name (default: `recommended`) |
 | `EXAMPLE_REVIEWER_PATH` | Absolute path to the `example-reviewer` repository on the runner |
+
+**Token type requirement:** `GH_TOKEN` must be a **classic PAT** (`ghp_*`) with `repo` scope. Fine-grained PATs with a personal account as resource owner cannot write to org-owned repositories — they return HTTP 403 on the Git Data API even when the user is an org admin.
 
 ## Approval Tokens (Human Operator — NOT CI Secrets)
 
@@ -37,14 +40,18 @@ They must be provided interactively by an authorized human operator at the point
 |----------|---------|
 | `PYTHONPATH` | Set to `src` when running the pipeline locally |
 
-## Example: Running a Live Pipeline Step
+## Example: Running a Live Pipeline Step (PowerShell)
 
-```bash
+```powershell
+# Map GH_TOKEN to GITHUB_TOKEN for the current session
+$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
+$env:PYTHONPATH = "src"
+$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = "APPROVE_LIVE_PR"
+
 # Publish a live PR (human operator must provide APPROVE_LIVE_PR interactively)
-PYTHONPATH=src \
-  GITHUB_TOKEN="$GITHUB_TOKEN" \
-  GPT_OSS_ENDPOINT="$GPT_OSS_ENDPOINT" \
-  GPT_OSS_API_KEY="$GPT_OSS_API_KEY" \
-  PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL="APPROVE_LIVE_PR" \
-  .venv/Scripts/python.exe -m plugin_examples run --family cells --tier 5 --promote-latest
+.venv\Scripts\python.exe -m plugin_examples publish-pr `
+    --family cells `
+    --publish `
+    --approval-token APPROVE_LIVE_PR `
+    --promote-latest
 ```

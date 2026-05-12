@@ -1,4 +1,4 @@
-﻿# Operator Quickstart
+# Operator Quickstart
 
 Audience: Operator
 
@@ -7,7 +7,21 @@ Audience: Operator
 - Python 3.12 or newer.
 - .NET SDK 8.0 for reflector and generated project validation.
 - Dependencies installed with `pip install -e ".[dev]"` for test workflows or `pip install -e .` for basic operation.
-- `GITHUB_TOKEN` only for live GitHub operations.
+- `GH_TOKEN` set as a Windows system environment variable (classic PAT, `repo` scope) for live GitHub operations.
+
+## Token Setup
+
+Store your GitHub classic PAT once:
+
+```powershell
+[Environment]::SetEnvironmentVariable("GH_TOKEN", "ghp_YOUR_TOKEN", "User")
+```
+
+Before any live command, map it to what the pipeline reads:
+
+```powershell
+$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
+```
 
 ## Check the CLI
 
@@ -33,3 +47,4 @@ Inspect:
 - Evidence files: [File Contracts](../reference/file-contracts.md)
 - Monthly operation: [Monthly Maintenance](../operations/monthly-maintenance.md)
 - Publishing: [Live Publishing](../operations/live-publishing.md)
+- Environment variables: [Environment Variables](../reference/environment-variables.md)

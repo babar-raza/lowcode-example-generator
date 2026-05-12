@@ -1759,3 +1759,151 @@ class TestGeneralizedSemanticValidation:
         code = 'using Aspose.Pdf;'
         issues = _validate_code_from_constraints(code, constraints)
         assert len(issues) == 0
+
+
+class TestRequiredValidation:
+    """_validate_code_from_constraints() REQUIRED constraint enforcement."""
+
+    def test_required_method_call_absent_flagged(self):
+        """Code missing a REQUIRED method call is flagged."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: Converter.Convert(inputFile, outputFile) — NOT Document.Save()"]
+        }
+        code = 'var doc = new Document(); doc.Save("output.docx");'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any("Converter.Convert" in i for i in issues)
+
+    def test_required_method_call_present_passes(self):
+        """Code with the required method call passes."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: Converter.Convert(inputFile, outputFile) — NOT Document.Save()"]
+        }
+        code = 'Converter.Convert("input.docx", "output.pdf");'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert not any("Converter.Convert" in i for i in issues)
+
+    def test_required_using_directive_absent_flagged(self):
+        """Code missing a required using directive is flagged."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"]
+        }
+        code = 'using Aspose.Pdf;\nvar doc = new Document();'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any("using Aspose.Pdf.Text" in i for i in issues)
+
+    def test_required_using_directive_present_passes(self):
+        """Code with the required using directive passes."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"]
+        }
+        code = 'using Aspose.Pdf.Text;\nvar doc = new Document();'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert not any("using Aspose.Pdf.Text" in i for i in issues)
+
+    def test_words_converter_fails_without_lowcode_call(self):
+        """Words Converter: code with only Document.Save and no Converter.Convert is flagged."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: Converter.Convert(inputFile, outputFile) — NOT Document.Save()"],
+            "forbidden": ["FORBIDDEN: Document.Save() as the primary operation — use LowCode Converter.Convert()"]
+        }
+        # No Converter.Convert — only Document.Save
+        code = 'var doc = new Document(); var builder = new DocumentBuilder(doc); doc.Save("output.docx");'
+        issues = _validate_code_from_constraints(code, constraints)
+        # REQUIRED call is absent — must be flagged
+        assert any("Converter.Convert" in i for i in issues)
+
+    def test_words_converter_passes_with_fixture_and_lowcode_call(self):
+        """Words Converter: fixture Document.Save + primary Converter.Convert — both pass."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": ["REQUIRED: Converter.Convert(inputFile, outputFile) — NOT Document.Save()"],
+            "forbidden": ["FORBIDDEN: Document.Save() as the primary operation — use LowCode Converter.Convert()"]
+        }
+        # Fixture creation uses Document.Save; primary call is Converter.Convert
+        code = (
+            'var doc = new Document();\n'
+            'new DocumentBuilder(doc).Writeln("Hello");\n'
+            'doc.Save("input.docx");\n'
+            'Converter.Convert("input.docx", "output.pdf");\n'
+        )
+        issues = _validate_code_from_constraints(code, constraints)
+        # Both REQUIRED present and FORBIDDEN exempt because LowCode call is present
+        assert len(issues) == 0
+
+    def test_pdf_merger_passes_with_new_merger_and_using(self):
+        """PDF Merger: new Merger().Process and using Aspose.Pdf.Text both pass."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+                "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin",
+            ]
+        }
+        code = (
+            'using Aspose.Pdf.Text;\n'
+            'var options = new MergeOptions();\n'
+            'options.AddInput(new FileDataSource("input1.pdf"));\n'
+            'new Merger().Process(options);\n'
+        )
+        issues = _validate_code_from_constraints(code, constraints)
+        # Both "using Aspose.Pdf.Text;" and "new Merger" are present — no issues
+        assert len(issues) == 0
+
+    def test_pdf_merger_fails_without_using_directive(self):
+        """PDF Merger: code missing 'using Aspose.Pdf.Text;' is flagged."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+                "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin",
+            ]
+        }
+        code = (
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '// no Aspose.Pdf.Text using\n'
+            'new Merger().Process(new MergeOptions());\n'
+        )
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any("using Aspose.Pdf.Text" in i for i in issues)
+
+    def test_pdf_merger_fails_without_merger_process(self):
+        """PDF Merger: code without new Merger() is flagged."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+                "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin",
+            ]
+        }
+        code = 'using Aspose.Pdf.Text;\nvar fe = new PdfFileEditor(); fe.Concatenate(null);'
+        issues = _validate_code_from_constraints(code, constraints)
+        # "new Merger" is absent — should be flagged; PdfFileEditor also caught
+        assert any("new Merger" in i for i in issues)
+
+    def test_build_repair_stores_type_constraints_in_project(self):
+        """project dict must contain type_constraints for build-repair validation."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_generation)
+        assert "type_constraints" in source, (
+            "runner._stage_generation must store type_constraints in project dict for build-repair."
+        )
+
+    def test_build_repair_calls_validate_from_constraints(self):
+        """Build repair path must call _validate_code_from_constraints for all families."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_validation)
+        assert "_validate_code_from_constraints" in source, (
+            "runner._stage_validation build-repair must call _validate_code_from_constraints(). "
+            "Gap 4 fix is missing."
+        )
+        assert "type_constraints" in source, (
+            "runner._stage_validation must use proj['type_constraints'] for per-type validation."
+        )

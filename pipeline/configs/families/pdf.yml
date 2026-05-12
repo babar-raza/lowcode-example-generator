@@ -120,16 +120,20 @@ per_type_constraints:
   Merger:
     required:
       - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — TextFragment lives in Aspose.Pdf.Text namespace)"
+      - "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin, not PdfFileEditor"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
   TextExtractor:
     required:
       - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+      - "REQUIRED: new TextExtractor().Process(options) — use the LowCode TextExtractor plugin"
     forbidden: []
   Splitter:
-    required: []
+    required:
+      - "REQUIRED: new Splitter().Process(options) — use the LowCode Splitter plugin, not PdfFileEditor"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead"
   Optimizer:
-    required: []
+    required:
+      - "REQUIRED: new Optimizer().Process(options) — use the LowCode Optimizer plugin"
     forbidden: []

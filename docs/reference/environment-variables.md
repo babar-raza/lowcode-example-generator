@@ -1,4 +1,4 @@
-﻿# Environment Variables
+# Environment Variables
 
 Audience: Operator, Contributor
 Source of truth: `src/plugin_examples/__main__.py`, `src/plugin_examples/llm_router/router.py`, `src/plugin_examples/metrics/config.py`, `src/plugin_examples/publisher/`, `src/plugin_examples/verifier_bridge/`
@@ -7,7 +7,21 @@ Source of truth: `src/plugin_examples/__main__.py`, `src/plugin_examples/llm_rou
 
 | Variable | Purpose |
 |---|---|
-| `GITHUB_TOKEN` | Live PR creation, live merge, repo access probes, permission probes, published example build regression. |
+| `GH_TOKEN` | **Operator storage only.** Classic PAT (`ghp_*`) with `repo` scope, stored as a Windows system environment variable. Never read directly by the pipeline. Must be mapped to `GITHUB_TOKEN` before running any live command. |
+| `GITHUB_TOKEN` | **Read by the pipeline.** Live PR creation, live merge, repo access probes, permission probes, published example build regression. Map from `GH_TOKEN` at command time. |
+
+`GH_TOKEN` is the storage convention. `GITHUB_TOKEN` is what the pipeline reads. They must contain the same value at the point of use.
+
+**Mapping (PowerShell, before each live command):**
+
+```powershell
+$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "Machine")
+if (-not $env:GITHUB_TOKEN) {
+    $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
+}
+```
+
+**Token type requirement:** Use a classic PAT with `repo` scope. Fine-grained PATs require the resource owner to be the target organization — a fine-grained PAT owned by a personal account cannot write to org-owned repos even when the user is an org admin. The symptom is HTTP 403 on the Git Data API (`/git/blobs`).
 
 ## Approval Gates
 

@@ -13,17 +13,30 @@
   "non_runnable_breakdown": {
     "OPTIONS": 3
   },
-  "workflow_root_type_names": ["DiagramConverter", "PdfConverter"],
-  "non_runnable_type_names": ["LowCodeLoadOptions", "LowCodePdfSaveOptions", "LowCodeSaveOptions"],
-  "allowed_pilot_types": ["DiagramConverter", "PdfConverter"],
+  "workflow_root_type_names": [
+    "DiagramConverter",
+    "PdfConverter"
+  ],
+  "non_runnable_type_names": [
+    "LowCodeLoadOptions",
+    "LowCodePdfSaveOptions",
+    "LowCodeSaveOptions"
+  ],
+  "allowed_pilot_types": [
+    "DiagramConverter",
+    "PdfConverter"
+  ],
   "allowed_pilot_count": 2,
   "denominator_basis": "PILOT_ALLOWED",
   "denominator_basis_note": "Diagram pilot approved and executed. 2/2 allowed types generated, built, and runtime-passed in run pilot-diagram-20260511-171233. Fixture strategy: programmatic VSDX via Aspose.Diagram.Diagram() with Shape objects (harness validated 4/4 PASS). Denominator = PILOT_ALLOWED (2 workflow_root types = 2 allowed).",
   "runnable_scenarios": 2,
-  "runnable_scenarios_basis": "PILOT_ALLOWED — 2 workflow_root types approved and validated: DiagramConverter, PdfConverter",
-  "runnable_scenario_ids": ["diagram-diagram-converter", "diagram-pdf-converter"],
-  "published_count": 0,
-  "pr_ready_count": 2,
+  "runnable_scenarios_basis": "PILOT_ALLOWED \u00e2\u20ac\u201d 2 workflow_root types approved and validated: DiagramConverter, PdfConverter",
+  "runnable_scenario_ids": [
+    "diagram-diagram-converter",
+    "diagram-pdf-converter"
+  ],
+  "published_count": 2,
+  "pr_ready_count": 0,
   "reviewer_passed_awaiting_pr_count": 0,
   "blocked_count": 0,
   "excluded_count": 3,
@@ -37,5 +50,5 @@
     "pipeline/configs/families/diagram.yml"
   ],
   "last_verified_at": "2026-05-11T00:00:00Z",
-  "notes": "Diagram pilot PASSED: 2/2 examples generated, built, runtime-passed. DiagramConverter outputs .vdx (Visio), PdfConverter outputs .pdf. Programmatic VSDX fixture via Aspose.Diagram.Diagram() API. PR dry-run ready — awaiting APPROVE_LIVE_PR for live publication."
+  "notes": "Diagram pilot PASSED: 2/2 examples generated, built, runtime-passed. DiagramConverter outputs .vdx (Visio), PdfConverter outputs .pdf. Programmatic VSDX fixture via Aspose.Diagram.Diagram() API. PR dry-run ready \u00e2\u20ac\u201d awaiting APPROVE_LIVE_PR for live publication."
 }

@@ -1,12 +1,12 @@
 {
   "merge_type": "live_pr_merge_result",
-  "merge_date": "2026-05-06T11:01:11+00:00",
+  "merge_date": "2026-05-13T15:30:49+00:00",
   "family": "pdf",
-  "pr_number": 1,
+  "pr_number": 2,
   "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
   "live_merge_performed": true,
   "merged": true,
-  "merge_commit_sha": "a9f9e254fbdbd012e6486e699395298e427169eb",
+  "merge_commit_sha": "94adfab0886d6d77b26cd6ff55a909d8befb6457",
   "merge_method": "merge",
   "pr_title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
   "preconditions": {
@@ -20,7 +20,7 @@
     },
     "head_ref_not_main": {
       "result": "PASS",
-      "detail": "plugin-examples/pdf/20260506-083146"
+      "detail": "plugin-examples/pdf/20260513-152958"
     },
     "target_repo_correct": {
       "result": "PASS",
@@ -28,7 +28,7 @@
     },
     "no_unexpected_files": {
       "result": "PASS",
-      "detail": "12 files, none unexpected"
+      "detail": "13 files, none unexpected"
     },
     "clean_checkout_evidence": {
       "result": "PASS",

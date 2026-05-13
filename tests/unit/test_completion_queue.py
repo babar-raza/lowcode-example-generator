@@ -215,9 +215,9 @@ class TestQueueStateConsistency:
                 f"{sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
             )
 
-    def test_pdf_splitter_is_pr_ready(self, entries):
+    def test_pdf_splitter_is_post_merge_verified(self, entries):
         queue_dict = {e["scenario_id"]: e for e in entries}
-        assert queue_dict["pdf-splitter"]["state"] == "PR_READY"
+        assert queue_dict["pdf-splitter"]["state"] == "POST_MERGE_VERIFIED"
 
     def test_pdf_optimizer_is_reviewed(self, entries):
         queue_dict = {e["scenario_id"]: e for e in entries}

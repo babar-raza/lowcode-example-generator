@@ -371,7 +371,7 @@ class TestReleaseStatusAllFamilies:
         status = compute_release_status(families, repo_root / "workspace" / "verification")
         by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
         assert by_family["cells"] == "FAMILY_COMPLETE"
-        assert by_family["words"] == "PARTIAL_CANARY"
+        assert by_family["words"] == "PILOT_COMPLETE"
         assert by_family["pdf"] == "PARTIAL_CANARY"
         assert by_family["diagram"] == "PILOT_COMPLETE"
         assert by_family["email"] == "DISCOVERY_ONLY"

@@ -1,0 +1,32 @@
+{
+  "scenario_id": "words-mail-merger",
+  "family": "words",
+  "type_name": "MailMerger",
+  "full_type_name": "Aspose.Words.LowCode.MailMerger",
+  "primary_method": "Execute",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "MailMerger",
+    "MailMerger.Execute"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "DataSources"
+  ],
+  "output_expectations": {
+    "output_format": ".docx",
+    "validation_method": "docx_zip_check",
+    "notes": "Static API: MailMerger.Execute(templatePath, outputPath, fieldNames[], fieldValues[]). Template fixture via DocumentBuilder.InsertField(MERGEFIELD). MERGEFIELD resolved in output."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/words-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-13T00:00:00Z"
+}

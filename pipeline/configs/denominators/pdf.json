@@ -20,10 +20,16 @@
     "ENUM": 4,
     "UNCLASSIFIED": 1
   },
-  "allowed_pilot_types": ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter"],
+  "allowed_pilot_types": [
+    "Merger",
+    "TextExtractor",
+    "Splitter",
+    "Optimizer",
+    "PdfAConverter"
+  ],
   "allowed_pilot_count": 5,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "PDF Wave A expansion: 5 allowed_types now in scope per pdf.yml (Wave A adds PdfAConverter — config-only, reuses programmatic_pdf_single fixture). Denominator for current coverage = 5. workflow_root denominator = 25 (classified). full_sot denominator = 101 (all types).",
+  "denominator_basis_note": "PDF Wave A expansion: 5 allowed_types now in scope per pdf.yml (Wave A adds PdfAConverter \u00e2\u20ac\u201d config-only, reuses programmatic_pdf_single fixture). Denominator for current coverage = 5. workflow_root denominator = 25 (classified). full_sot denominator = 101 (all types).",
   "runnable_scenarios": 5,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
@@ -35,14 +41,22 @@
   ],
   "workflow_root_runnable_count": 25,
   "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 25 WORKFLOW_ROOT type names",
-  "published_count": 2,
-  "published_scenario_ids": ["pdf-merger", "pdf-text-extractor"],
+  "published_count": 4,
+  "published_scenario_ids": [
+    "pdf-merger",
+    "pdf-text-extractor"
+  ],
   "published_basis": "PR #1 merged to aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (merge_commit_sha: a9f9e254, confirmed in workspace/verification/latest/pdf-merge-result.json)",
-  "pr_dry_run_ready_count": 2,
-  "pr_dry_run_ready_ids": ["pdf-splitter", "pdf-pdfa-converter"],
+  "pr_dry_run_ready_count": 0,
+  "pr_dry_run_ready_ids": [
+    "pdf-splitter",
+    "pdf-pdfa-converter"
+  ],
   "pr_dry_run_ready_basis": "Splitter: workspace/pr-dry-run/pdf-controlled-pilot-wave1/ validated. PdfAConverter: run pilot-pdf-20260513-181803 PASSED (5/5 all types). Both awaiting APPROVE_LIVE_PR.",
   "reviewer_passed_awaiting_pr_count": 1,
-  "reviewer_passed_awaiting_pr_ids": ["pdf-optimizer"],
+  "reviewer_passed_awaiting_pr_ids": [
+    "pdf-optimizer"
+  ],
   "reviewer_passed_awaiting_pr_basis": "Optimizer reviewer_passed in latest lifecycle. Confirmed passing in run pilot-pdf-20260513-181803 (3rd consecutive pass). Awaiting grouping into next PR with Splitter+PdfAConverter.",
   "blocked_count": 0,
   "excluded_count": 96,
@@ -65,5 +79,5 @@
     "pipeline/configs/families/pdf.yml"
   ],
   "last_verified_at": "2026-05-13T00:00:00Z",
-  "notes": "PDF Wave A complete (2026-05-13). All 5 pilot types now PR_DRY_RUN_READY or better: Merger+TextExtractor=MERGED (PR#1), Splitter=PR_READY, Optimizer=REVIEWER_PASSED, PdfAConverter=PR_READY (run pilot-pdf-20260513-181803). PdfAConverter root cause: LLM didn't know options class name PdfAConvertOptions — fixed by adding REQUIRED: new PdfAConvertOptions( constraint + FORBIDDEN: LowCodeLoadOptions/LowCodeSaveOptions. Merger repair regression fixed by adding REQUIRED: AddInput/AddOutput constraints. All 5 pilot types have complete per_type_constraints in pdf.yml. Wave B (20 deferred WORKFLOW_ROOT types) awaiting APPROVE_LIVE_PR + fixture strategy assessment."
+  "notes": "PDF Wave A complete (2026-05-13). All 5 pilot types now PR_DRY_RUN_READY or better: Merger+TextExtractor=MERGED (PR#1), Splitter=PR_READY, Optimizer=REVIEWER_PASSED, PdfAConverter=PR_READY (run pilot-pdf-20260513-181803). PdfAConverter root cause: LLM didn't know options class name PdfAConvertOptions \u00e2\u20ac\u201d fixed by adding REQUIRED: new PdfAConvertOptions( constraint + FORBIDDEN: LowCodeLoadOptions/LowCodeSaveOptions. Merger repair regression fixed by adding REQUIRED: AddInput/AddOutput constraints. All 5 pilot types have complete per_type_constraints in pdf.yml. Wave B (20 deferred WORKFLOW_ROOT types) awaiting APPROVE_LIVE_PR + fixture strategy assessment."
 }

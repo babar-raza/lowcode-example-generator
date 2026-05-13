@@ -185,8 +185,8 @@ class TestWordsDenominator:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
         assert "Processor" not in types, "Processor must NOT be in allowed_pilot_types (API investigation required)"
 
-    def test_words_published_count_is_4(self):
-        assert self.d["published_count"] == 4
+    def test_words_published_count_is_7(self):
+        assert self.d["published_count"] == 7
 
     def test_words_workflow_root_types_is_classified(self):
         assert self.d["workflow_root_types"] == 9
@@ -259,9 +259,9 @@ class TestPdfDenominator:
         for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
-    def test_pdf_published_count_is_2(self):
-        assert self.d["published_count"] == 2, (
-            f"PDF published_count should be 2 (PR#1: Merger+TextExtractor), got {self.d['published_count']}"
+    def test_pdf_published_count_is_4(self):
+        assert self.d["published_count"] == 4, (
+            f"PDF published_count should be 4 (Merger+TextExtractor+Splitter+PdfAConverter), got {self.d['published_count']}"
         )
 
     def test_pdf_denominator_basis_is_pilot_allowed(self):
@@ -319,9 +319,9 @@ class TestDenominatorCrossFamily:
         d = _load_denominator(family)
         assert d["denominator_basis"] in {"FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED"}
 
-    def test_total_published_across_families_is_15(self):
+    def test_total_published_across_families_is_20(self):
         """Integration: total published examples across all families."""
         total = sum(_load_denominator(f)["published_count"] for f in FAMILIES)
-        assert total == 15, (
-            f"Total published count across all families should be 15 (Cells=9, Words=4, PDF=2), got {total}"
+        assert total == 20, (
+            f"Total published count across all families should be 20 (Cells=9, Words=7, PDF=4), got {total}"
         )

@@ -131,6 +131,29 @@ def main() -> int:
                             help="Allow experimental families to run")
     run_parser.add_argument("--compare-run", metavar="PRIOR_RUN_ID",
                             help="Compare current run results against a prior run to detect regressions")
+    run_parser.add_argument(
+        "--replay-from",
+        metavar="STEP",
+        choices=["generation", "validation", "reviewer", "publisher"],
+        default=None,
+        help=(
+            "Replay pipeline from STEP, reusing artifacts from a prior run for earlier stages. "
+            "Valid values: generation, validation, reviewer, publisher. "
+            "Infra stages (nuget_fetch, extraction, reflection) are always skipped and "
+            "catalog restored from the prior run. scenario_planning always re-runs (denominator safety). "
+            "Requires a prior pilot-{family}-* run (auto-detected or specified via --reuse-run)."
+        ),
+    )
+    run_parser.add_argument(
+        "--reuse-run",
+        metavar="RUN_ID",
+        default=None,
+        help=(
+            "Prior run ID to load reusable artifacts from (e.g., pilot-pdf-20260513-180040). "
+            "If omitted with --replay-from, the most recent pilot-{family}-* run is used. "
+            "Must be a pilot run; discovery- and multi-family- prefixed runs are rejected."
+        ),
+    )
 
     # Agent metrics flags (shared across commands)
     _add_metrics_flags(run_parser)
@@ -404,6 +427,8 @@ def main() -> int:
             promote_latest=args.promote_latest,
             allow_experimental=args.allow_experimental,
             compare_run=getattr(args, "compare_run", None),
+            replay_from=getattr(args, "replay_from", None),
+            reuse_run_id=getattr(args, "reuse_run", None),
             metrics_collector=metrics_collector,
             metrics_config=metrics_config,
             metrics_post=getattr(args, "metrics_post", False),

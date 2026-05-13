@@ -283,6 +283,8 @@ def _run_stage(
 # ---------------------------------------------------------------------------
 
 def _stage_load_config(ctx: PipelineContext) -> dict:
+    import hashlib as _hashlib
+    import re as _re
     from plugin_examples.family_config import load_family_config
     config_path = ctx.repo_root / "pipeline" / "configs" / "families" / f"{ctx.family}.yml"
     # Check disabled directory as fallback
@@ -302,7 +304,18 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
             "Use 'discover-lowcode' to run source-of-truth discovery. "
             "Generation is not allowed for discovery_only families."
         )
-    return {"family": ctx.config.family, "package_id": ctx.config.nuget.package_id}
+    # Compute config/constraints hashes for replay integrity checks (non-fatal if unavailable)
+    artifacts: dict = {"family": ctx.config.family, "package_id": ctx.config.nuget.package_id}
+    try:
+        if config_path.exists():
+            raw_text = config_path.read_text(encoding="utf-8")
+            artifacts["config_hash"] = _hashlib.sha256(raw_text.encode("utf-8")).hexdigest()
+            m = _re.search(r"per_type_constraints\s*:(.+?)(?=\n\S|\Z)", raw_text, _re.DOTALL)
+            constraints_text = m.group(1) if m else ""
+            artifacts["constraints_hash"] = _hashlib.sha256(constraints_text.encode("utf-8")).hexdigest()
+    except Exception:
+        pass  # Non-fatal; integrity checks will report "skipped"
+    return artifacts
 
 
 def _stage_nuget_fetch(ctx: PipelineContext) -> dict:
@@ -1183,7 +1196,7 @@ def _build_report(
     passed = sum(1 for s in stages if s.status == "success")
     degraded = sum(1 for s in stages if s.status == "degraded")
     failed = sum(1 for s in stages if s.status == "failed")
-    skipped = sum(1 for s in stages if s.status == "skipped")
+    skipped = sum(1 for s in stages if s.status in ("skipped", "skipped_replayed"))
 
     hard_stopped = any(
         s.status == "failed" for s in stages[:7]
@@ -1231,7 +1244,8 @@ def _build_report(
         "reviewer_available": rev_stage.artifacts.get("available", False) if rev_stage else False,
         "reviewer_result": "passed" if (rev_stage and rev_stage.artifacts.get("passed")) else "unavailable",
         "publisher_status": pub_stage.artifacts.get("status", "skipped") if pub_stage else "skipped",
-        "skipped_stages": [s.name for s in stages if s.status == "skipped"],
+        "skipped_stages": [s.name for s in stages if s.status in ("skipped", "skipped_replayed")],
+        "replayed_stages": [s.name for s in stages if s.status == "skipped_replayed"],
         "degraded_stages": [s.name for s in stages if s.status == "degraded"],
     }
 
@@ -1327,6 +1341,8 @@ def run_pipeline(
     promote_latest: bool = False,
     allow_experimental: bool = False,
     compare_run: str | None = None,
+    replay_from: str | None = None,
+    reuse_run_id: str | None = None,
     metrics_collector: Any = None,
     metrics_config: Any = None,
     metrics_post: bool = False,
@@ -1366,6 +1382,94 @@ def run_pipeline(
     )
     ctx._allow_experimental = allow_experimental
 
+    # ---------------------------------------------------------------------------
+    # Replay setup (fail-closed; runs before any stage)
+    # ---------------------------------------------------------------------------
+    _replay_skip: frozenset = frozenset()
+    _reuse_run_id: str | None = None
+
+    if replay_from:
+        from plugin_examples.replay import (  # noqa: PLC0415
+            ReplayIntegrityError,
+            check_replay_integrity,
+            copy_reviewer_evidence,
+            find_prior_run,
+            restore_catalog,
+            restore_generated_projects,
+            restore_validation_results,
+            stages_to_skip,
+            write_replay_manifest,
+        )
+
+        _reuse_run_id = reuse_run_id or find_prior_run(family, repo_root)
+        if not _reuse_run_id:
+            raise RuntimeError(
+                f"--replay-from {replay_from!r} requires a prior pilot run; "
+                f"none found for family '{family}' in workspace/runs/. "
+                "Run the pipeline at least once normally before replaying."
+            )
+        _prior_run_dir = repo_root / "workspace" / "runs" / _reuse_run_id
+        if not _prior_run_dir.is_dir():
+            raise RuntimeError(
+                f"--reuse-run '{_reuse_run_id}' does not exist at {_prior_run_dir}"
+            )
+
+        logger.info(
+            "replay: starting %r replay from run '%s'", replay_from, _reuse_run_id
+        )
+
+        # Integrity checks (writes stale-artifact-check.json; raises on hard fail)
+        _integrity = check_replay_integrity(
+            family=family,
+            replay_from=replay_from,
+            prior_run_dir=_prior_run_dir,
+            repo_root=repo_root,
+        )
+
+        # Restore catalog (used by plugin_detection → scenario_planning which re-run)
+        ctx.catalog, ctx.catalog_path = restore_catalog(_prior_run_dir, family)
+
+        # Restore download_manifest from prior run's nuget_fetch artifacts
+        # (plugin_detection reads version/sha256 even when nuget_fetch is skipped)
+        _prior_report = _prior_run_dir / "pilot-report.json"
+        if _prior_report.exists():
+            import json as _json
+            _prior_data = _json.loads(_prior_report.read_text(encoding="utf-8"))
+            _nf_stage = next(
+                (s for s in _prior_data.get("stages", []) if s.get("name") == "nuget_fetch"),
+                None,
+            )
+            if _nf_stage and _nf_stage.get("artifacts"):
+                ctx.download_manifest = dict(_nf_stage["artifacts"])
+
+        # Point ctx.extraction at prior extracted dir (plugin_detection uses dll_path)
+        _prior_extracted = _prior_run_dir / "extracted" / family
+        ctx.extraction = {
+            "dll_path": str(_prior_extracted / "primary"),
+            "xml_path": str(_prior_extracted / "primary"),
+            "selected_framework": "",
+        }
+
+        # Restore generated_projects for validation / reviewer / publisher modes
+        if replay_from in {"validation", "reviewer", "publisher"}:
+            ctx.generated_projects = restore_generated_projects(
+                _prior_run_dir, family, repo_root
+            )
+
+        # Restore validation_results (typed) for reviewer / publisher modes
+        if replay_from in {"reviewer", "publisher"}:
+            ctx.validation_results = restore_validation_results(_prior_run_dir)
+
+        # Copy prior reviewer evidence into current run for publisher mode
+        if replay_from == "publisher":
+            copy_reviewer_evidence(_prior_run_dir, evidence_dir, family)
+
+        _replay_skip = stages_to_skip(replay_from)
+        logger.info(
+            "replay: skipping stages %s; scenario_planning will re-run for denominator safety",
+            sorted(_replay_skip),
+        )
+
     # Before snapshot
     before = _snapshot_workspace(manifests_dir, verification_dir)
 
@@ -1400,6 +1504,18 @@ def run_pipeline(
             ctx._completed_stages = list(stages)
             continue
 
+        # Replay: skip stages whose artifacts are reused from a prior run
+        if _replay_skip and name in _replay_skip:
+            r = StageResult(
+                name=name,
+                order=order,
+                status="skipped_replayed",
+                artifacts={"reuse_run_id": _reuse_run_id, "replay_from": replay_from},
+            )
+            stages.append(r)
+            ctx._completed_stages = list(stages)
+            continue
+
         result = _run_stage(name, order, fn, ctx)
 
         # Determine if failure is hard stop or degraded.
@@ -1422,6 +1538,22 @@ def run_pipeline(
     pipeline_end = time.time()
     end_time = datetime.now(timezone.utc).isoformat()
     total_ms = (pipeline_end - pipeline_start) * 1000
+
+    # Write replay manifest (only when replay mode was active)
+    if replay_from and _reuse_run_id:
+        try:
+            from plugin_examples.replay import write_replay_manifest  # noqa: PLC0415
+            write_replay_manifest(
+                evidence_dir=evidence_dir,
+                replay_from=replay_from,
+                reuse_run_id=_reuse_run_id,
+                new_run_id=run_id,
+                family=family,
+                skipped_stages=_replay_skip,
+                integrity_result=_integrity,
+            )
+        except Exception as _rme:
+            logger.warning("replay: failed to write replay manifest: %s", _rme)
 
     # Per-example gate evaluation and partitioning
     from plugin_examples.gates.example_gates import (

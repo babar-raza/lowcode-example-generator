@@ -1,0 +1,68 @@
+{
+  "report_type": "publication-closure-report",
+  "version": "2.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "classic-token-publication-healing-activation",
+  "preflight_result": {
+    "branch": "main",
+    "head_commit": "cad4714",
+    "head_commit_message": "feat(healing-intelligence): establish persistent healing intelligence registry",
+    "working_tree": "clean (new work staged for this sprint commit)",
+    "cad4714_verified": true
+  },
+  "token_validation": {
+    "GH_TOKEN": {
+      "present": true,
+      "type": "classic_pat",
+      "prefix": "ghp_",
+      "verdict": "CORRECT"
+    },
+    "GITHUB_TOKEN": {
+      "present": true,
+      "type": "fine_grained_pat",
+      "prefix": "github_pat_",
+      "verdict": "WRONG_TYPE"
+    },
+    "effective_token_for_pipeline": "GITHUB_TOKEN (fine_grained — BLOCKED)",
+    "required_action": "Map GH_TOKEN to GITHUB_TOKEN: $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+    "verdict": "PUBLICATION_BLOCKED_TOKEN_MAPPING_REQUIRED"
+  },
+  "approval_gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET",
+    "EXAMPLE_REVIEWER_PATH": "NOT_SET",
+    "publication_unblocked": false,
+    "merge_unblocked": false,
+    "reviewer_unblocked": false
+  },
+  "pr_ready_inventory": {
+    "total_pr_ready": 6,
+    "scenarios": [
+      {"scenario_id": "pdf-splitter", "family": "pdf", "type": "Splitter", "state": "PR_READY"},
+      {"scenario_id": "pdf-optimizer", "family": "pdf", "type": "Optimizer", "state": "REVIEWED_NEEDS_2ND_PASS"},
+      {"scenario_id": "pdf-pdfa-converter", "family": "pdf", "type": "PdfAConverter", "state": "PR_READY"},
+      {"scenario_id": "words-merger", "family": "words", "type": "Merger", "state": "PR_READY"},
+      {"scenario_id": "words-comparer", "family": "words", "type": "Comparer", "state": "PR_READY"},
+      {"scenario_id": "words-mail-merger", "family": "words", "type": "MailMerger", "state": "PR_READY"}
+    ]
+  },
+  "reviewer_second_pass": {
+    "required_for": "pdf-optimizer",
+    "gate": "EXAMPLE_REVIEWER_PATH must be set",
+    "status": "BLOCKED — EXAMPLE_REVIEWER_PATH not set"
+  },
+  "prs_created_this_sprint": 0,
+  "merges_executed_this_sprint": 0,
+  "publication_verdict": "BLOCKED_APPROVAL",
+  "blockers": [
+    "WRONG_TOKEN_MAPPED: GITHUB_TOKEN currently fine-grained (github_pat_); must map GH_TOKEN (ghp_) to GITHUB_TOKEN",
+    "MISSING_APPROVE_LIVE_PR: PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+    "MISSING_EXAMPLE_REVIEWER: EXAMPLE_REVIEWER_PATH not set (required for Optimizer 2nd pass)"
+  ],
+  "unblock_commands": {
+    "set_token": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+    "set_approval": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR'",
+    "publish_pdf": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+    "publish_words": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family words --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+  }
+}

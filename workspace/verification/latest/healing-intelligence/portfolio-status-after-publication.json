@@ -1,0 +1,79 @@
+{
+  "report_type": "portfolio-status-after-publication",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "classic-token-publication-healing-activation",
+  "publication_result": "BLOCKED_APPROVAL — no new PRs created this sprint (token mapping needed + approvals not set)",
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_root_count": 9,
+      "coverage_pct": 100.0,
+      "pr_ready": 0,
+      "merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+      "post_merge_validation": "POST_MERGE_VERIFIED",
+      "next_action": "Monitor for Aspose.Cells package version updates"
+    },
+    "words": {
+      "status": "PARTIAL_CANARY",
+      "published": 4,
+      "workflow_root_count": 9,
+      "coverage_pct_of_pilot": 57.14,
+      "coverage_pct_of_all_roots": 44.44,
+      "pr_ready": 3,
+      "pr_ready_entries": ["words-comparer", "words-merger", "words-mail-merger"],
+      "reviewed_needs_2nd_pass": 0,
+      "permanently_blocked": 1,
+      "permanently_blocked_entries": ["words-processor (UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT)"],
+      "not_yet_piloted": 1,
+      "not_yet_piloted_entries": ["words-report-builder (Wave 4)"],
+      "next_action": "Set APPROVE_LIVE_PR + classic PAT in GH_TOKEN to publish 3 PR_READY scenarios"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 2,
+      "pilot_allowed": 5,
+      "workflow_root_count": 25,
+      "coverage_pct_of_pilot": 40.0,
+      "pr_ready": 4,
+      "pr_ready_entries": ["pdf-splitter", "pdf-pdfa-converter", "pdf-merger (in pr-dry-run package)", "pdf-optimizer (REVIEWED, needs 2nd pass)"],
+      "next_action": "Set APPROVE_LIVE_PR + classic PAT; run Optimizer 2nd reviewer pass with EXAMPLE_REVIEWER_PATH"
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "workflow_root_count": 2,
+      "coverage_pct": 100.0,
+      "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "post_merge_validation": "ALL_PASS",
+      "next_action": "Monitor for Aspose.Diagram package version updates"
+    },
+    "email": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_root_count": 1,
+      "next_action": "Design programmatic .eml fixture; launch Email pilot (TC-EMAIL-01)"
+    },
+    "slides": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_root_count": 3,
+      "next_action": "Design programmatic PPTX fixture; launch Slides pilot (TC-SLIDES-01)"
+    }
+  },
+  "totals": {
+    "published": 17,
+    "pr_ready_pending_publication": 6,
+    "permanently_blocked": 1,
+    "total_in_pipeline": 24,
+    "overall_completion_pct": 70.8
+  },
+  "unblock_commands": {
+    "set_token": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')  # GH_TOKEN must be classic PAT (ghp_)",
+    "set_approval": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR'",
+    "publish_pdf": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+    "publish_words": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family words --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+    "optimizer_reviewer": "EXAMPLE_REVIEWER_PATH=<path> PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family pdf --dry-run --promote-latest"
+  }
+}

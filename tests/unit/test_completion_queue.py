@@ -23,6 +23,7 @@ _VALID_STATES = {
     "DISCOVERED", "CONTRACTED", "FIXTURE_READY", "GENERATION_READY",
     "GENERATED", "BUILT", "RAN", "REVIEWED", "PR_READY", "PR_OPEN",
     "MERGED", "POST_MERGE_VERIFIED", "BACKLOGGED", "BLOCKED",
+    "PERMANENTLY_BLOCKED",
 }
 
 
@@ -141,22 +142,28 @@ class TestQueueCoversDenominator:
                 denom.get("pr_dry_run_ready_count", 0) +
                 denom.get("reviewer_passed_awaiting_pr_count", 0)
             )
-        active_entries = [e for e in entries if e["state"] != "BACKLOGGED"]
+        active_entries = [
+            e for e in entries
+            if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")
+        ]
         assert len(active_entries) == expected_active, (
             f"Active pipeline entries ({len(active_entries)}) != expected ({expected_active})"
         )
 
     def test_total_queue_covers_active_plus_backlogged(self, entries):
-        # Total queue = active + backlogged deferred entries
-        active = [e for e in entries if e["state"] != "BACKLOGGED"]
+        # Total queue = active + backlogged + permanently_blocked entries
+        active = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
+        permanently_blocked = [e for e in entries if e["state"] == "PERMANENTLY_BLOCKED"]
         # At minimum: 22 active (cells 9 + words published 4 + words wave2/3 PR-ready 3 + pdf 4 + diagram 2)
-        # + 28 backlogged (21 PDF WR + 4 Words + 3 Diagram OPTIONS)
-        # Words Wave 3: MailMerger moved BACKLOGGED->PR_READY; Processor remains BACKLOGGED (API gap)
+        # + 26 backlogged (21 PDF WR + 3 Words + 3 Diagram OPTIONS)
+        # + 1 permanently blocked (Processor: API_ACCESS_PARADOX, FP-008)
+        # Words Wave 3: MailMerger moved BACKLOGGED->PR_READY; Processor reclassified PERMANENTLY_BLOCKED
         # PDF Wave A: PdfAConverter moved BACKLOGGED->PR_READY in run pilot-pdf-20260513-181803
         assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 27, f"Expected at least 27 backlogged entries, got {len(backlogged)}"
-        assert len(entries) == len(active) + len(backlogged)
+        assert len(backlogged) >= 26, f"Expected at least 26 backlogged entries, got {len(backlogged)}"
+        assert len(permanently_blocked) >= 1, "Expected at least 1 PERMANENTLY_BLOCKED entry (Processor)"
+        assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 
 
 class TestQueueStateConsistency:
@@ -184,8 +191,8 @@ class TestQueueStateConsistency:
 
     def test_words_pilot_entries_post_merge_verified(self, entries):
         # Words entries may be POST_MERGE_VERIFIED (Wave 1 published), PR_READY (Wave 2 pending pub),
-        # REVIEWED, or BACKLOGGED (deferred/config-ready awaiting generation)
-        valid_states = ("POST_MERGE_VERIFIED", "PR_READY", "REVIEWED", "BACKLOGGED")
+        # REVIEWED, BACKLOGGED (deferred/config-ready), or PERMANENTLY_BLOCKED (unreachable API)
+        valid_states = ("POST_MERGE_VERIFIED", "PR_READY", "REVIEWED", "BACKLOGGED", "PERMANENTLY_BLOCKED")
         words = [e for e in entries if e["family"] == "words"]
         for entry in words:
             assert entry["state"] in valid_states, (

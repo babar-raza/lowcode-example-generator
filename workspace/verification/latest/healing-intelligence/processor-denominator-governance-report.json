@@ -1,0 +1,40 @@
+{
+  "report_type": "processor-denominator-governance-report",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "subject": "Aspose.Words.LowCode.Processor",
+  "question": "Should Processor remain in workflow_root_type_names or move to accepted_non_runnable / unreachable_api?",
+  "decision": "REMAINS_IN_WORKFLOW_ROOT_PLUS_ADDED_TO_PERMANENTLY_BLOCKED_SECTION",
+  "reasoning": {
+    "why_it_stays_in_workflow_root": "Processor IS a workflow root by design: it has From(inputFile).To(outputFile, SaveFormat).Execute() — a fluent workflow chain. Moving it to accepted_non_runnable would misclassify its intent. It belongs in the WORKFLOW_ROOT category for classification accuracy.",
+    "why_it_needs_permanent_block_tracking": "Despite being a workflow root by design, Processor is structurally unreachable: constructors:[] + all is_static:false methods = CS1729+CS0120. This is a distinct state from non-runnable types (OPTIONS/ENUM/ABSTRACT) which are non-runnable by design. A new category is needed: WORKFLOW_ROOT_PERMANENTLY_BLOCKED.",
+    "why_not_accepted_non_runnable": "accepted_non_runnable covers types not designed for standalone use (OPTIONS, ENUM, ABSTRACT_BASE). Processor was designed for standalone use but is inaccessible due to an API surface defect. Hiding it in accepted_non_runnable would lose the tracking of a real gap.",
+    "why_not_deleted_from_denominator": "Processor must remain visible in the denominator to ensure the conservation equation holds and to track the remediation path."
+  },
+  "denominator_changes": {
+    "words_json_field_added": "permanently_blocked_workflow_roots",
+    "words_json_count_added": "permanently_blocked_workflow_roots_count = 1",
+    "workflow_root_type_names": "UNCHANGED — Processor remains in this list",
+    "workflow_root_types_count": "UNCHANGED = 9",
+    "notes": "UPDATED — added definitive evidence reference"
+  },
+  "blocked_reason_assigned": "UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT",
+  "evidence_file": "workspace/verification/latest/healing-intelligence/processor-root-cause-investigation.json",
+  "failure_pattern": "FP-008 (processor_api_access_paradox)",
+  "rerun_eligibility": "BLOCKED — requires external change",
+  "required_external_change_options": [
+    "Aspose.Words package upgrade that adds public constructor to Processor",
+    "Aspose.Words package upgrade that makes Processor.From() static",
+    "Discovery of an undocumented static factory method or companion factory class",
+    "Vendor documentation confirming a ProcessorContext.Create() pattern"
+  ],
+  "conservation_equation_check": {
+    "workflow_root_count": 9,
+    "published_count": 4,
+    "pr_ready_count": 3,
+    "permanently_blocked_count": 1,
+    "remaining_active_pilot_count": 1,
+    "equation": "4 (published) + 3 (PR_READY: Comparer/Merger/MailMerger) + 1 (PERMANENTLY_BLOCKED: Processor) + 1 (NOT_YET_PILOTED: ReportBuilder) = 9 workflow roots",
+    "equation_holds": true
+  }
+}

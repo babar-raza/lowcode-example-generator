@@ -32,6 +32,48 @@ TOKEN_INSUFFICIENT_SCOPE = "token_insufficient_scope"
 TOKEN_NOT_AUTHORIZED = "token_not_authorized_for_repo"
 API_RATE_LIMITED = "api_rate_limited"
 UNKNOWN_ERROR = "unknown_github_error"
+FINE_GRAINED_TOKEN_REJECTED = "fine_grained_token_rejected"
+
+# Token type classification constants
+TOKEN_TYPE_CLASSIC_PAT = "classic_pat"
+TOKEN_TYPE_FINE_GRAINED = "fine_grained_pat"
+TOKEN_TYPE_MISSING = "missing"
+TOKEN_TYPE_UNKNOWN = "unknown"
+
+# Error message shown when a fine-grained PAT is detected
+FINE_GRAINED_TOKEN_ERROR_MESSAGE = (
+    "Classic PAT with repo scope required; fine-grained token is not accepted. "
+    "Fine-grained PATs (prefix 'github_pat_') cannot write to org-owned repos via the "
+    "Git Data API (HTTP 403 on /git/blobs). "
+    "Store a classic PAT (prefix 'ghp_', repo scope) in GH_TOKEN and map it: "
+    "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')"
+)
+
+
+def classify_token_type(token: str) -> str:
+    """Classify a GitHub token as classic PAT, fine-grained PAT, missing, or unknown."""
+    if not token:
+        return TOKEN_TYPE_MISSING
+    if token.startswith("ghp_"):
+        return TOKEN_TYPE_CLASSIC_PAT
+    if token.startswith("github_pat_"):
+        return TOKEN_TYPE_FINE_GRAINED
+    return TOKEN_TYPE_UNKNOWN
+
+
+def check_classic_token(token: str) -> tuple[bool, str]:
+    """Verify a token is a classic PAT. Fail closed on fine-grained tokens.
+
+    Returns (is_classic: bool, reason: str). reason is empty when is_classic=True.
+    """
+    token_type = classify_token_type(token)
+    if token_type == TOKEN_TYPE_CLASSIC_PAT:
+        return True, ""
+    if token_type == TOKEN_TYPE_MISSING:
+        return False, "token_missing"
+    if token_type == TOKEN_TYPE_FINE_GRAINED:
+        return False, FINE_GRAINED_TOKEN_ERROR_MESSAGE
+    return False, f"token_type_unknown: prefix '{token[:6]}' is not a recognized classic PAT prefix"
 
 
 def _get_headers() -> dict[str, str] | None:

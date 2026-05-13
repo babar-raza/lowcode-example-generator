@@ -1,0 +1,45 @@
+{
+  "report_type": "token-readiness-hardening-report",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "classic-token-publication-healing-activation",
+  "current_token_state": {
+    "GH_TOKEN": {
+      "present": true,
+      "prefix": "ghp_",
+      "type": "classic_pat",
+      "verdict": "CORRECT — use this for publication"
+    },
+    "GITHUB_TOKEN": {
+      "present": true,
+      "prefix": "github_pat_",
+      "type": "fine_grained_pat",
+      "verdict": "WRONG TYPE — pipeline reads GITHUB_TOKEN; must be mapped from GH_TOKEN before publication"
+    },
+    "mapping_required": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')"
+  },
+  "hardening_changes": {
+    "file": "src/plugin_examples/publisher/repo_access_resolver.py",
+    "added_constants": [
+      "FINE_GRAINED_TOKEN_REJECTED = 'fine_grained_token_rejected'",
+      "TOKEN_TYPE_CLASSIC_PAT = 'classic_pat'",
+      "TOKEN_TYPE_FINE_GRAINED = 'fine_grained_pat'",
+      "TOKEN_TYPE_MISSING = 'missing'",
+      "TOKEN_TYPE_UNKNOWN = 'unknown'",
+      "FINE_GRAINED_TOKEN_ERROR_MESSAGE (actionable error with GH_TOKEN mapping instruction)"
+    ],
+    "added_functions": [
+      "classify_token_type(token) -> str — pure function, no I/O",
+      "check_classic_token(token) -> (bool, str) — fails closed on fine-grained PAT"
+    ]
+  },
+  "fail_closed_behavior": {
+    "ghp_token": "ACCEPTED — returns (True, '')",
+    "github_pat_token": "REJECTED — returns (False, FINE_GRAINED_TOKEN_ERROR_MESSAGE)",
+    "empty_token": "REJECTED — returns (False, 'token_missing')",
+    "unknown_prefix": "REJECTED — returns (False, 'token_type_unknown: ...')"
+  },
+  "error_message_content": "Classic PAT with repo scope required; fine-grained token is not accepted. Fine-grained PATs (prefix 'github_pat_') cannot write to org-owned repos via the Git Data API (HTTP 403 on /git/blobs). Store a classic PAT (prefix 'ghp_', repo scope) in GH_TOKEN and map it: $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+  "test_coverage": "tests/unit/test_token_readiness_hardening.py — 5 test classes, 22 test cases",
+  "publication_verdict": "BLOCKED_WRONG_TOKEN_MAPPED — GH_TOKEN has correct classic PAT but GITHUB_TOKEN is currently fine-grained. Map GH_TOKEN to GITHUB_TOKEN before publication."
+}

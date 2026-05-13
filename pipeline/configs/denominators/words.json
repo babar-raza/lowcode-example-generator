@@ -48,10 +48,18 @@
     "SplitterContext",
     "WatermarkerContext"
   ],
-  "allowed_pilot_types": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger"],
+  "allowed_pilot_types": [
+    "Converter",
+    "Watermarker",
+    "Splitter",
+    "Replacer",
+    "Merger",
+    "Comparer",
+    "MailMerger"
+  ],
   "allowed_pilot_count": 7,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "Words Wave 3 execution complete. 7 active pilot types in words.yml. Processor removed from pilot: Processor.From() is instance method with no public constructor (CS0120 + CS1729) — API access pattern unclear, ProcessorContext investigation required. Full-SOT runnable denominator is 9 workflow roots.",
+  "denominator_basis_note": "Words Wave 3 execution complete. 7 active pilot types in words.yml. Processor removed from pilot: Processor.From() is instance method with no public constructor (CS0120 + CS1729) \u2014 API access pattern unclear, ProcessorContext investigation required. Full-SOT runnable denominator is 9 workflow roots.",
   "runnable_scenarios": 7,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
@@ -65,7 +73,7 @@
   ],
   "pilot_allowed_count": 7,
   "full_sot_runnable_estimate": 9,
-  "full_sot_runnable_note": "Verified by full classification of all 25 Words LowCode types. Two runnable roots remain outside the current pilot scope: ReportBuilder (Wave 4 — LINQ template syntax, medium risk) and Processor (blocked — API access pattern unclear).",
+  "full_sot_runnable_note": "Verified by full classification of all 25 Words LowCode types. Two runnable roots remain outside the current pilot scope: ReportBuilder (Wave 4 \u2014 LINQ template syntax, medium risk) and Processor (blocked \u2014 API access pattern unclear).",
   "published_count": 4,
   "pr_ready_count": 0,
   "pr_dry_run_ready_count": 3,
@@ -85,5 +93,33 @@
     "pipeline/configs/families/words.yml"
   ],
   "last_verified_at": "2026-05-13T00:00:00Z",
-  "notes": "Words Wave 3 execution complete (2026-05-13). MailMerger PASSED in run pilot-words-20260513-175418 — PR_DRY_RUN_READY. Processor BLOCKED: Processor.From() confirmed instance method (CS0120) but Processor has no public constructor (CS1729). Cannot instantiate or call statically. ProcessorContext may be factory — investigation required (taskcard: followup-words-processor-api-investigation). Processor removed from allowed_types. Full-SOT classification complete: 9 runnable roots and 16 non-standalone types. Two runnable roots outside current pilot: ReportBuilder (Wave 4) and Processor (blocked)."
+  "notes": "Words Wave 3 execution complete (2026-05-13). MailMerger PASSED in run pilot-words-20260513-175418 \u2014 PR_DRY_RUN_READY. Processor BLOCKED: Processor.From() confirmed instance method (CS0120) but Processor has no public constructor (CS1729). Cannot instantiate or call statically. ProcessorContext may be factory \u2014 investigation required (taskcard: followup-words-processor-api-investigation). Processor removed from allowed_types. Full-SOT classification complete: 9 runnable roots and 16 non-standalone types. Two runnable roots outside current pilot: ReportBuilder (Wave 4) and Processor (blocked). Processor reclassified as PERMANENTLY_BLOCKED (UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT) based on definitive evidence from processor-root-cause-investigation.json: constructors:[] + all is_static:false methods = CS1729+CS0120. Processor remains in workflow_root_type_names (correct design classification) but is tracked in permanently_blocked_workflow_roots.",
+  "permanently_blocked_workflow_roots": [
+    {
+      "type_name": "Processor",
+      "full_name": "Aspose.Words.LowCode.Processor",
+      "blocked_reason": "UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT",
+      "evidence": {
+        "constructors_count": 0,
+        "all_methods_static": false,
+        "methods": [
+          "From (is_static:false)",
+          "To (is_static:false)",
+          "Execute (is_static:false)"
+        ],
+        "compiler_errors": [
+          "CS1729 - no public constructor",
+          "CS0120 - instance method called statically"
+        ],
+        "investigation_report": "workspace/verification/latest/healing-intelligence/processor-root-cause-investigation.json"
+      },
+      "classification": "WORKFLOW_ROOT_PERMANENTLY_BLOCKED",
+      "classification_note": "Processor IS a workflow root by design (fluent From/To/Execute chain) but is structurally unreachable in user code. It remains in workflow_root_type_names for classification accuracy. It is separately tracked here as permanently blocked.",
+      "rerun_eligibility": "BLOCKED \u2014 requires Aspose.Words package upgrade with public constructor or static factory, or ProcessorContext factory discovery",
+      "taskcard": "followup-words-processor-api-investigation",
+      "failure_pattern": "FP-008",
+      "blocked_since": "2026-05-13T00:00:00Z"
+    }
+  ],
+  "permanently_blocked_workflow_roots_count": 1
 }

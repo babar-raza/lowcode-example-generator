@@ -1,0 +1,157 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 3: Config and Normalization Audit",
+  "phase": "PHASE_3",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "Section 5 (Normalization) and Section 6 (Config)",
+  "objective": "Verify all normalization tables from plan Section 5 are correctly implemented in metrics.yml and config.py",
+
+  "family_to_product_table": {
+    "plan_entries": 3,
+    "implemented_entries": 3,
+    "checks": [
+      {"family": "cells", "plan_product": "Aspose.Cells", "config_product": "Aspose.Cells", "match": true},
+      {"family": "words", "plan_product": "Aspose.Words", "config_product": "Aspose.Words", "match": true},
+      {"family": "pdf",   "plan_product": "Aspose.PDF",   "config_product": "Aspose.PDF",   "match": true}
+    ],
+    "unknown_family_behavior": "VALIDATION_ERROR — no POST (implemented: missing mapping raises MetricsValidationError)",
+    "verdict": "PASS"
+  },
+
+  "command_to_job_type_table": {
+    "plan_entries": 11,
+    "implemented_entries": 11,
+    "checks": [
+      {"command": "run",                      "plan_job_type": "examples_generation", "config": "examples_generation", "match": true},
+      {"command": "discover-lowcode",         "plan_job_type": "discovery",           "config": "discovery",           "match": true},
+      {"command": "publish-pr",               "plan_job_type": "publishing",          "config": "publishing",          "match": true},
+      {"command": "merge-pr",                 "plan_job_type": "publishing",          "config": "publishing",          "match": true},
+      {"command": "release-status",           "plan_job_type": "reporting",           "config": "reporting",           "match": true},
+      {"command": "render-root-readme",       "plan_job_type": "publishing",          "config": "publishing",          "match": true},
+      {"command": "publish-readme",           "plan_job_type": "publishing",          "config": "publishing",          "match": true},
+      {"command": "validate-publish-targets", "plan_job_type": "reporting",           "config": "reporting",           "match": true},
+      {"command": "resolve-repo-access",      "plan_job_type": "reporting",           "config": "reporting",           "match": true},
+      {"command": "probe-publish-permissions","plan_job_type": "reporting",           "config": "reporting",           "match": true},
+      {"command": "sync-taskcard-docs",       "plan_job_type": "reporting",           "config": "reporting",           "match": true}
+    ],
+    "excluded_commands": ["status", "check"],
+    "unknown_command_behavior": "VALIDATION_ERROR — no POST",
+    "verdict": "PASS"
+  },
+
+  "command_to_item_name_table": {
+    "plan_entries": 11,
+    "implemented_entries": 11,
+    "checks": [
+      {"command": "run",                      "plan_item": "Examples",            "config": "Examples",            "match": true},
+      {"command": "discover-lowcode",         "plan_item": "API Types",           "config": "API Types",           "match": true},
+      {"command": "publish-pr",               "plan_item": "Pull Requests",       "config": "Pull Requests",       "match": true},
+      {"command": "merge-pr",                 "plan_item": "Pull Requests",       "config": "Pull Requests",       "match": true},
+      {"command": "release-status",           "plan_item": "Reports",             "config": "Reports",             "match": true},
+      {"command": "render-root-readme",       "plan_item": "README Files",        "config": "README Files",        "match": true},
+      {"command": "publish-readme",           "plan_item": "README Files",        "config": "README Files",        "match": true},
+      {"command": "validate-publish-targets", "plan_item": "Validation Checks",   "config": "Validation Checks",   "match": true},
+      {"command": "resolve-repo-access",      "plan_item": "Repository Probes",   "config": "Repository Probes",   "match": true},
+      {"command": "probe-publish-permissions","plan_item": "Permission Probes",   "config": "Permission Probes",   "match": true},
+      {"command": "sync-taskcard-docs",       "plan_item": "Taskcard Documents",  "config": "Taskcard Documents",  "match": true}
+    ],
+    "verdict": "PASS"
+  },
+
+  "verdict_to_status_table": {
+    "plan_entries": 18,
+    "implemented_entries": 18,
+    "checks": [
+      {"verdict": "FULL_E2E_PASSED",                   "plan_status": "success",         "config": "success",         "match": true},
+      {"verdict": "PR_READY",                          "plan_status": "success",         "config": "success",         "match": true},
+      {"verdict": "PR_DRY_RUN_READY",                  "plan_status": "success",         "config": "success",         "match": true},
+      {"verdict": "PARTIAL_PR_READY",                  "plan_status": "partial_success", "config": "partial_success", "match": true},
+      {"verdict": "PARTIAL_PR_DRY_RUN_READY",          "plan_status": "partial_success", "config": "partial_success", "match": true},
+      {"verdict": "SOURCE_OF_TRUTH_PROVEN_ONLY",       "plan_status": "partial_success", "config": "partial_success", "match": true},
+      {"verdict": "DATA_FLOW_PROTOTYPE_ONLY",          "plan_status": "partial_success", "config": "partial_success", "match": true},
+      {"verdict": "BLOCKED_SOURCE_OF_TRUTH",           "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_FIXTURE_DISCOVERY",         "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_SCENARIO_PLANNING",         "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_GENERATION",                "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_RESTORE_FAILED",            "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_BUILD_FAILED",              "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_RUN_FAILED",                "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_OUTPUT_VALIDATION_FAILED",  "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_REVIEWER_UNAVAILABLE",      "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_REVIEWER_FAILED",           "plan_status": "failure",         "config": "failure",         "match": true},
+      {"verdict": "BLOCKED_NO_PUBLISHABLE_EXAMPLES",   "plan_status": "failure",         "config": "failure",         "match": true}
+    ],
+    "unknown_verdict_behavior": "failure + warning in evidence (implemented: falls through to 'failure')",
+    "verdict": "PASS"
+  },
+
+  "website_config_chain": {
+    "metrics_yml_website": "aspose.net",
+    "config_py_default": "aspose.net",
+    "payload_builder_source": "config.website (line 68)",
+    "validator_check": "config.website (line 52)",
+    "hardcoded_in_any_source_file": false,
+    "aspose_com_present_in_metrics_source": false,
+    "plan_stop_condition_SC1": "No aspose.com where aspose.net should be — PASS",
+    "plan_stop_condition_SC2": "Website validation not hardcoded in Python — PASS",
+    "verdict": "PASS"
+  },
+
+  "provider_classification": {
+    "llm_professionalize": {"approved": true, "token_source": "resp.json()['usage']['total_tokens']"},
+    "ollama": {"approved": true, "token_source": "resp.json().get('eval_count', 0) + resp.json().get('prompt_eval_count', 0)"},
+    "others": {"blocked_by_policy": true, "reason": "provider_policy.py APPROVED_PROVIDERS frozenset"},
+    "verdict": "PASS"
+  },
+
+  "edge_cases": {
+    "missing_token_usage": {"total_tokens": 0, "token_usage_available": false, "implemented": true},
+    "failed_http_after_request": {"counted_as_1_api_call": true, "total_tokens": 0, "implemented": true},
+    "timeout_after_request":     {"counted_as_1_api_call": true, "total_tokens": 0, "implemented": true},
+    "preflight_get_models":      {"not_counted": true, "implemented": true},
+    "non_llm_command":           {"token_usage": 0, "api_calls_count": 0, "valid_not_missing": true, "implemented": true},
+    "verdict": "PASS"
+  },
+
+  "allowed_values_config": {
+    "allowed_statuses": ["success", "partial_success", "failure"],
+    "allowed_job_types": ["examples_generation", "discovery", "publishing", "reporting", "test"],
+    "count_matches_plan": true,
+    "validator_reads_from_config": true,
+    "verdict": "PASS"
+  },
+
+  "environment_variable_names": {
+    "plan_spec": {
+      "metrics_token": "AGENT_METRICS_TOKEN",
+      "metrics_enabled": "AGENT_METRICS_ENABLED",
+      "metrics_dry_run": "AGENT_METRICS_DRY_RUN",
+      "metrics_strict": "AGENT_METRICS_STRICT"
+    },
+    "implemented_in_metrics_yml": true,
+    "verdict": "PASS"
+  },
+
+  "api_endpoint": {
+    "plan_spec": "[REDACTED — read from AGENT_METRICS_ENDPOINT env var]",
+    "config_value_matches": true,
+    "no_secret_values": true,
+    "verdict": "PASS"
+  },
+
+  "post_ledger_path": {
+    "plan_spec": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "config_value_matches": true,
+    "outside_latest_dir": true,
+    "verdict": "PASS"
+  },
+
+  "summary": {
+    "normalization_tables_verified": 5,
+    "all_18_verdicts_mapped": true,
+    "all_11_commands_mapped": true,
+    "all_3_families_mapped": true,
+    "website_config_chain_clean": true,
+    "no_hardcoded_values_in_source": true,
+    "overall_verdict": "PASS"
+  }
+}

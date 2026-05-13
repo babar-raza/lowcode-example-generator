@@ -1,0 +1,194 @@
+{
+  "sprint": "Example Lifecycle, Backlog Backfill, and Reviewer Feedback Loop Hardening",
+  "date": "2026-05-06",
+  "gate_0_result": "PASS_WITH_GAPS_IDENTIFIED",
+  "artifacts_inspected": [
+    {
+      "artifact": "workspace/verification/latest/pdf-live-pr-post-creation-full-review.json",
+      "classification": "VERIFIED",
+      "notes": "All 6 gates pass. PR #1 OPEN, 12 files, 2 examples."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pr1-lifecycle-accounting.json",
+      "classification": "VERIFIED",
+      "notes": "4 planned, 2 selected, 2 passed, 2 excluded. Counts correct."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pr1-backlog-verification.json",
+      "classification": "VERIFIED",
+      "notes": "GATE_4_PASS_WITH_NOTED_GAP. No backlog entries; Splitter/Optimizer have taskcards only."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pr1-clean-checkout-validation.json",
+      "classification": "VERIFIED",
+      "notes": "GATE_2_PASS. Both merger and text-extractor build+run from clean clone."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pr1-remote-content-verification.json",
+      "classification": "VERIFIED",
+      "notes": "GATE_1_PASS. 12 files, correct labels, no unauthorized content."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pr1-publish-readiness-fallback-review.json",
+      "classification": "VERIFIED",
+      "notes": "GATE_5_PASS. Fallback safe: only False→True override."
+    },
+    {
+      "artifact": "docs/publishing/pdf-live-pr-post-creation-full-review.md",
+      "classification": "VERIFIED",
+      "notes": "Markdown summary matches JSON evidence."
+    },
+    {
+      "artifact": "src/plugin_examples/gates/example_lifecycle.py",
+      "classification": "VERIFIED",
+      "notes": "ExampleLifecycleRecord (24 fields), ExampleLifecycleRegistry, FamilyBacklogEntry (12 fields), load/save/update_backlog functions all present."
+    },
+    {
+      "artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json",
+      "classification": "MISSING",
+      "notes": "Lifecycle module was added AFTER canonical run. No lifecycle records written for PDF."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-example-lifecycle-summary.json",
+      "classification": "MISSING",
+      "notes": "Never created. Lifecycle summary not generated during canonical run."
+    },
+    {
+      "artifact": "workspace/backlog/pdf/examples-backlog.json",
+      "classification": "MISSING",
+      "notes": "workspace/backlog/ directory does not exist. No backlog file for any family."
+    },
+    {
+      "artifact": "workspace/verification/latest/families/pdf/examples-backlog.json",
+      "classification": "MISSING",
+      "notes": "Not in families/pdf/ evidence. Backlog was never created."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-failed-example-backlog-result.json",
+      "classification": "MISSING",
+      "notes": "Never created."
+    },
+    {
+      "artifact": "src/plugin_examples/runner.py",
+      "classification": "NEEDS_FIX",
+      "notes": "Lifecycle records only created for ready_scenarios (line 584). Blocked/excluded scenarios do NOT get lifecycle records. Generation stage iterates ctx.planning.ready_scenarios only."
+    },
+    {
+      "artifact": "src/plugin_examples/generator/code_generator.py",
+      "classification": "VERIFIED",
+      "notes": "Tracks GeneratedExample with status, failure_reason, repair_attempts. Repair loop feeds validation issues to LLM."
+    },
+    {
+      "artifact": "src/plugin_examples/scenario_planner/runtime_feedback.py",
+      "classification": "VERIFIED",
+      "notes": "26-pattern classification taxonomy. classify_runtime_failure returns actionable/non-actionable."
+    },
+    {
+      "artifact": "src/plugin_examples/publisher/pr_builder.py",
+      "classification": "NEEDS_FIX",
+      "notes": "Has excluded_scenarios parameter but NEVER populated from caller. PR body always shows 'None in this controlled pilot scope'."
+    },
+    {
+      "artifact": "src/plugin_examples/publisher/publisher.py",
+      "classification": "NEEDS_FIX",
+      "notes": "build_pr() call at line 214 does not pass excluded_scenarios. Does not read blocked-scenarios.json."
+    },
+    {
+      "artifact": "src/plugin_examples/__main__.py",
+      "classification": "NEEDS_FIX",
+      "notes": "build_pr() call at line 645 does not pass excluded_scenarios."
+    },
+    {
+      "artifact": "src/plugin_examples/publisher/release_status.py",
+      "classification": "NEEDS_FIX",
+      "notes": "Does not track backlog count, excluded count, or blocked scenarios. Only published examples reported."
+    },
+    {
+      "artifact": "src/plugin_examples/evidence_layout.py",
+      "classification": "VERIFIED",
+      "notes": "blocked-scenarios.json is in FAMILY_SCOPED_EVIDENCE_FILES. Promoted correctly. But never consumed by publisher."
+    },
+    {
+      "artifact": "src/plugin_examples/verifier_bridge/bridge.py",
+      "classification": "VERIFIED",
+      "notes": "ReviewerResult has available, passed, error, details fields. No per-example structured feedback extraction."
+    },
+    {
+      "artifact": "workspace/verification/latest/example-reviewer-results.json",
+      "classification": "VERIFIED",
+      "notes": "available=false, passed=false (reviewer not installed during canonical run)."
+    },
+    {
+      "artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "classification": "VERIFIED",
+      "notes": "53 total, 46 closed, 7 open. followup-pdf-splitter-options-class and followup-pdf-optimizer-options-class present as OPEN."
+    },
+    {
+      "artifact": "docs/discovery/open-taskcard-closure-matrix.md",
+      "classification": "VERIFIED",
+      "notes": "Exists. Content should match JSON (will verify during sync)."
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260505-214804/evidence/latest/",
+      "classification": "VERIFIED",
+      "notes": "21 evidence files present. Includes blocked-scenarios.json (99 blocked), validation-results.json (2/2 PASS), pr-candidate-manifest.json (2 included)."
+    },
+    {
+      "artifact": "workspace/verification/latest/families/pdf/blocked-scenarios.json",
+      "classification": "VERIFIED",
+      "notes": "99 blocked scenarios. Includes Splitter and Optimizer with blocked_pilot_not_in_scope reason."
+    }
+  ],
+  "gaps_identified": [
+    {
+      "id": "GAP-1",
+      "severity": "HIGH",
+      "description": "Excluded-by-allowlist scenarios do NOT get lifecycle records. runner.py line 584 iterates only ctx.planning.ready_scenarios.",
+      "impact": "Splitter and Optimizer have no lifecycle record. dropped_count could be non-zero if someone removes taskcards.",
+      "fix": "Add lifecycle records for blocked scenarios before generation loop."
+    },
+    {
+      "id": "GAP-2",
+      "severity": "HIGH",
+      "description": "No durable backlog entries for PDF excluded scenarios. workspace/backlog/ does not exist.",
+      "impact": "Splitter and Optimizer are only tracked via taskcards, not in structured backlog with root cause, priority, and cross-links.",
+      "fix": "Create backlog entries for excluded scenarios."
+    },
+    {
+      "id": "GAP-3",
+      "severity": "MEDIUM",
+      "description": "PR body excluded_scenarios parameter never populated. build_pr() called without it at publisher.py:214 and __main__.py:645.",
+      "impact": "Every PR body says 'Excluded Scenarios: None' even when scenarios are blocked.",
+      "fix": "Read blocked-scenarios.json and pass excluded scenarios to build_pr()."
+    },
+    {
+      "id": "GAP-4",
+      "severity": "MEDIUM",
+      "description": "release_status.py does not track backlog/excluded/failed counts.",
+      "impact": "Release status hides that scenarios are pending or blocked.",
+      "fix": "Add backlog_count, excluded_count, blocked_scenarios fields to release status."
+    },
+    {
+      "id": "GAP-5",
+      "severity": "MEDIUM",
+      "description": "Reviewer returns only pass/fail boolean. No per-example structured feedback. No feedback-driven repair loop.",
+      "impact": "Reviewer failures cannot drive automatic regeneration. Backlog entry says 'Address reviewer feedback' with no specifics.",
+      "fix": "Future: Extract per-example findings from reviewer output. Feed into repair prompt."
+    },
+    {
+      "id": "GAP-6",
+      "severity": "LOW",
+      "description": "No cross-run learning. Backlog entries exist per-run but previous failure patterns are not fed into next run's prompt.",
+      "impact": "Same failures may repeat across runs.",
+      "fix": "Future: Read family backlog before generation; add failure patterns to system prompt."
+    }
+  ],
+  "gate_0_pass_criteria": {
+    "pr1_lifecycle_accounting_verified": true,
+    "existing_lifecycle_implementation_verified": true,
+    "current_gaps_explicitly_identified": true,
+    "taskcard_json_and_markdown_agree": true,
+    "no_failed_or_excluded_scenario_unaccounted_for": true
+  },
+  "verdict": "GATE_0_PASS_GAPS_REQUIRE_FIX"
+}

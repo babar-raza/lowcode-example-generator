@@ -1,0 +1,69 @@
+{
+  "plan_type": "pdf_family_repo_target_mapping_plan",
+  "plan_date": "2026-05-04",
+  "sprint": "Unified State Reconciliation and PDF Controlled Pilot Planning Sprint",
+  "taskcard": "followup-pdf-family-repo-target-mapping",
+
+  "current_state": {
+    "pdf_yml_published_plugin_examples_repo": {
+      "owner": "aspose",
+      "repo": "aspose-plugins-examples-dotnet",
+      "branch": "main"
+    },
+    "assessment": "PLACEHOLDER — central repo, not PDF-specific. Consistent with the discovery_only status. No actual examples will be published to this repo until PDF generation is enabled.",
+    "is_blocking_generation": false,
+    "is_blocking_discovery": false
+  },
+
+  "target_repo_naming_pattern": {
+    "cells_pattern": "aspose-cells-net / Aspose.Cells.LowCode-for-.NET-Examples",
+    "words_pattern": "aspose-words-net / Aspose.Words.LowCode-for-.NET-Examples",
+    "pdf_recommendation": "aspose-pdf-net / Aspose.PDF.LowCode-for-.NET-Examples",
+    "rationale": "Consistent naming convention. Family-specific org separates access control per product team."
+  },
+
+  "proposed_config_change": {
+    "file": "pipeline/configs/families/pdf.yml",
+    "section": "github.published_plugin_examples_repo",
+    "current": {
+      "owner": "aspose",
+      "repo": "aspose-plugins-examples-dotnet",
+      "branch": "main"
+    },
+    "proposed": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main"
+    },
+    "alternative_if_org_unavailable": {
+      "owner": "babar-raza",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "note": "Same owner as other family repos; fallback if org creation requires approval"
+    }
+  },
+
+  "repo_provisioning_requirements": [
+    "Create GitHub org aspose-pdf-net (or use owner babar-raza)",
+    "Create repo Aspose.PDF.LowCode-for-.NET-Examples (public, initialized with README)",
+    "Add GITHUB_TOKEN with push access to the repo",
+    "Run resolve-repo-access to confirm repo_access_ready=true and pr_permission_ready=true",
+    "Update pdf.yml with the confirmed repo target"
+  ],
+
+  "blocking_dependencies": [
+    "followup-pdf-role-classification-review — needed before example generation can target this repo",
+    "followup-pdf-options-aware-review — needed before generation pipeline is configured",
+    "followup-pdf-fixture-strategy-review — needed before fixtures are validated"
+  ],
+
+  "does_not_enable_generation": true,
+  "note": "Completing repo target mapping alone does NOT enable PDF generation. All 4 PDF taskcards must be resolved and pdf.yml status must change to active with human approval.",
+
+  "acceptance_criteria": [
+    "pdf.yml published_plugin_examples_repo updated to PDF-specific repo",
+    "resolve-repo-access confirms repo_access_ready=true for pdf family",
+    "validate-publish-targets shows pdf as READY (after other blockers also cleared)",
+    "family-repo-access-check.json updated with PDF repo check result"
+  ]
+}

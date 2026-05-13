@@ -1,0 +1,84 @@
+{
+  "family": "words",
+  "sprint": "Words Controlled Pilot Sprint",
+  "sprint_date": "2026-05-01",
+  "run_dir": "workspace/runs/pilot-words-20260501-144945",
+  "validation_method": "manual_output_inspection",
+  "overall_result": "PASSED",
+  "scenarios": [
+    {
+      "scenario_id": "words-converter",
+      "primary_method": "Converter.Convert",
+      "output_file": "output.pdf",
+      "output_size_bytes": 58073,
+      "checks": {
+        "output_exists": true,
+        "output_non_empty": true,
+        "output_extension_correct": true,
+        "pdf_header_valid": true,
+        "pdf_header": "%PDF"
+      },
+      "result": "PASSED"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "primary_method": "Watermarker.SetText",
+      "output_file": "output.docx",
+      "output_size_bytes": 22032,
+      "checks": {
+        "output_exists": true,
+        "output_non_empty": true,
+        "output_extension_correct": true,
+        "valid_docx_zip": true,
+        "watermark_shape_in_header": true,
+        "watermark_text_confirmed": true,
+        "watermark_text_value": "CONFIDENTIAL",
+        "watermark_location": "word/header1.xml (VML shape with v:textpath string='CONFIDENTIAL')"
+      },
+      "result": "PASSED"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "primary_method": "Splitter.ExtractPages",
+      "output_file": "output.docx",
+      "output_size_bytes": 18062,
+      "checks": {
+        "output_exists": true,
+        "output_non_empty": true,
+        "output_extension_correct": true,
+        "valid_docx_zip": true,
+        "extracted_page_1_present": true,
+        "extracted_page_2_absent": true,
+        "note": "ExtractPages(startPageIndex:0, pageCount:1) correctly extracted only page 1"
+      },
+      "result": "PASSED"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "primary_method": "Replacer.Replace",
+      "output_file": "output.docx",
+      "output_size_bytes": 18064,
+      "checks": {
+        "output_exists": true,
+        "output_non_empty": true,
+        "output_extension_correct": true,
+        "valid_docx_zip": true,
+        "replacement_text_present": true,
+        "replacement_text_value": "World",
+        "original_placeholder_absent": true,
+        "original_placeholder": "{{name}}",
+        "replace_count_nonzero": true,
+        "note": "Replacer.Replace('{{name}}', 'World') confirmed via document.xml inspection"
+      },
+      "result": "PASSED"
+    }
+  ],
+  "deep_validation_gaps": [
+    {
+      "scenario_id": "words-replacer",
+      "gap": "DOCX text extraction validation not automated in pipeline",
+      "taskcard": "followup-words-docx-semantic-validation",
+      "current_status": "manual_verified_this_sprint"
+    }
+  ]
+}

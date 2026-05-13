@@ -1,0 +1,40 @@
+{
+  "sprint": "Wave 1 — PDF Splitter and Optimizer Completion",
+  "phase": "Phase 7 — PR Dry-Run Simulation",
+  "date": "2026-05-07",
+  "status": "AWAITING_LLM_RUN",
+  "reason": "PR dry-run simulation cannot be executed without validated Splitter and Optimizer examples. Phase 4 (Wave 1 LLM run) is the prerequisite.",
+  "simulation_plan": {
+    "pr_title": "feat(pdf): add Splitter and Optimizer LowCode examples",
+    "pr_branch": "feat/pdf-wave1-splitter-optimizer",
+    "pr_base": "main",
+    "pr_target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "files_to_add": [
+      "examples/pdf/lowcode/splitter/Program.cs",
+      "examples/pdf/lowcode/splitter/pdf-splitter.csproj",
+      "examples/pdf/lowcode/splitter/README.md",
+      "examples/pdf/lowcode/splitter/example.manifest.json",
+      "examples/pdf/lowcode/optimizer/Program.cs",
+      "examples/pdf/lowcode/optimizer/pdf-optimizer.csproj",
+      "examples/pdf/lowcode/optimizer/README.md",
+      "examples/pdf/lowcode/optimizer/example.manifest.json"
+    ],
+    "publisher_gate": "APPROVE_LIVE_PR required (not provided in this session)",
+    "dry_run_only": true
+  },
+  "prior_state": {
+    "existing_merged_pr": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/1",
+    "merged_examples": ["merger", "text-extractor"],
+    "merge_commit_sha": "a9f9e254fbdbd012e6486e699395298e427169eb"
+  },
+  "gates_required_before_live_pr": [
+    "Wave 1 LLM run: PENDING",
+    "Splitter build PASS: PENDING",
+    "Splitter run PASS: PENDING",
+    "Optimizer build PASS: PENDING",
+    "Optimizer run PASS: PENDING",
+    "Reviewer PASS for both: PENDING",
+    "APPROVE_LIVE_PR set in environment: NOT PROVIDED IN THIS SESSION"
+  ],
+  "verdict": "DRY_RUN_READY_TO_EXECUTE — all source code changes are in place; awaiting Wave 1 LLM run results and APPROVE_LIVE_PR authorization to create live PR"
+}

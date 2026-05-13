@@ -1,0 +1,916 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "pipeline/configs/metrics.yml",
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/words.yml",
+    "pipeline/configs/families/pdf.yml",
+    "src/plugin_examples/metrics/session.py",
+    "src/plugin_examples/metrics/poster.py",
+    "src/plugin_examples/generator/packet_builder.py",
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/llm_router/router.py",
+    "src/plugin_examples/publisher/release_status.py",
+    "src/plugin_examples/publisher/repo_access_resolver.py",
+    "src/plugin_examples/publisher/aspose_links.py",
+    "src/plugin_examples/gates/example_lifecycle.py",
+    "src/plugin_examples/scenario_planner/planner.py",
+    "src/plugin_examples/dependencies/assembly_identity.py",
+    "src/plugin_examples/verifier_bridge/output_validator.py"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/open-taskcard-closure-matrix.json",
+    "workspace/verification/latest/release-status.json",
+    "workspace/verification/latest/agent-metrics-tc14-production-post-result.json",
+    "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+    "workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json",
+    "workspace/verification/latest/pdf-type-role-classification.json",
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "workspace/verification/latest/cells-merge-result.json",
+    "workspace/verification/latest/words-merge-result.json",
+    "workspace/verification/latest/pdf-merge-result.json"
+  ],
+  "confidence": "MEDIUM",
+  "findings": {
+    "workstreams": {
+      "A": [
+        {
+          "item_id": "A1",
+          "item": "Metrics config: enabled, dry_run, agent_name, website, command mapping",
+          "plan_claim": "Agent Metrics fully configured with correct defaults in pipeline/configs/metrics.yml",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "enabled=false, dry_run=true, agent_name='Lowcode Example Generator', website='aspose.net'; command_to_job_type maps 10 commands; all confirmed freshly in metrics.yml",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1 source, freshly read)",
+          "production_impact": "LOW — defaults are safe (disabled); config is source-authoritative",
+          "required_next_action": "None — config is correct"
+        },
+        {
+          "item_id": "A2",
+          "item": "Stable agent_name across all commands",
+          "plan_claim": "agent_name='Lowcode Example Generator' (title case) across all runs",
+          "actual_status": "STALE_OR_CONTRADICTORY",
+          "confidence": "MEDIUM",
+          "implementation_status": "Config (rank 1) shows 'Lowcode Example Generator'. But production ledger (rank 5) shows agent_name='lowcode-example-generator' in the posted payload — the post captured a pre-fix run. Current config is correct; the posted artifact is stale.",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1) vs workspace/verification/agent-metrics-post-ledger.jsonl (rank 5)",
+          "production_impact": "MEDIUM — the one recorded production POST used the old casing; future posts will use title case",
+          "required_next_action": "Next production POST will record correct casing. Consider annotating ledger with config version."
+        },
+        {
+          "item_id": "A3",
+          "item": "aspose.net website (not aspose.com) in config and payload",
+          "plan_claim": "website field is 'aspose.net' — the .NET plugin documentation site",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "metrics.yml line 15: website: 'aspose.net'. Comment explicitly states 'Target website — config-owned, never hardcoded in source'.",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1)",
+          "production_impact": "LOW — correct; this is the right domain for the .NET plugin examples site",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "A4",
+          "item": "Router-level token capture (automatic LLM call recording)",
+          "plan_claim": "EXTERNAL_POST_COMMANDS frozenset controls which commands trigger production POST",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "session.py line 17: EXTERNAL_POST_COMMANDS: frozenset[str] = frozenset({'run'}). Only 'run' command allows external post. external_post_allowed property checks this.",
+          "evidence_source": "src/plugin_examples/metrics/session.py (rank 1)",
+          "production_impact": "HIGH — ensures README publish, merge, and reporting commands do not accidentally post metrics",
+          "required_next_action": "None — correctly limits external post to 'run' command"
+        },
+        {
+          "item_id": "A5",
+          "item": "Command-agnostic MetricsSession",
+          "plan_claim": "MetricsSession works for all commands, not hardcoded to one",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "session.py takes command as parameter; count_source_policy returns different policies per command type. MetricsSession accepts any command string.",
+          "evidence_source": "src/plugin_examples/metrics/session.py (rank 1)",
+          "production_impact": "LOW — architectural correctness for future command expansion",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "A6",
+          "item": "Dry-run safety (dry_run=true by default, not postable without flag)",
+          "plan_claim": "dry_run=true in config; poster.py guards before any HTTP POST",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "metrics.yml: dry_run: true. poster.py: first check is 'if dry_run: return posted=False'. Config default protects against accidental production posts.",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1), src/plugin_examples/metrics/poster.py (rank 1)",
+          "production_impact": "HIGH — safety gate; production post requires explicit override",
+          "required_next_action": "None — correctly implemented"
+        },
+        {
+          "item_id": "A7",
+          "item": "test_only_sprint logic (test_only_sprint guard)",
+          "plan_claim": "Test runs are blocked from production posting by test_only_sprint flag",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "poster.py checks test_only_sprint parameter. If test_only_sprint=True and job_type in PRODUCTION_JOB_TYPES, posting is blocked. Guard prevents test rows appearing in production Google Sheet.",
+          "evidence_source": "src/plugin_examples/metrics/poster.py (rank 1)",
+          "production_impact": "HIGH — prevents test contamination of production metrics sheet",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "A8",
+          "item": "Production gate: AGENT_METRICS_PRODUCTION_ENABLED env var",
+          "plan_claim": "AGENT_METRICS_PRODUCTION_ENABLED env var gates production posting",
+          "actual_status": "PARTIAL",
+          "confidence": "MEDIUM",
+          "implementation_status": "No direct AGENT_METRICS_PRODUCTION_ENABLED check found in session.py or poster.py. Gate is via dry_run=false (set by AGENT_METRICS_DRY_RUN env var) combined with test_only_sprint=false. The 'AGENT_METRICS_ENABLED' env var maps to 'enabled' config field. Two separate gates (enabled + dry_run) but no single PRODUCTION_ENABLED gate.",
+          "evidence_source": "src/plugin_examples/metrics/session.py (rank 1), src/plugin_examples/metrics/poster.py (rank 1), pipeline/configs/metrics.yml env section (rank 1)",
+          "production_impact": "MEDIUM — production enablement requires overriding both enabled and dry_run via env vars; not a single atomic gate",
+          "required_next_action": "Document the two-gate mechanism (AGENT_METRICS_ENABLED=true AND AGENT_METRICS_DRY_RUN=false) as the production enablement procedure"
+        },
+        {
+          "item_id": "A9",
+          "item": "TC14 production posting — verified end-to-end",
+          "plan_claim": "TC14 production posting confirmed: run_id=pilot-cells-20260508-112957, posted=true, http_status=200",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "Ledger (rank 5) has 2 entries. Evidence file agent-metrics-tc14-production-post-result.json shows posted=true, http_status=200, run_id=pilot-cells-20260508-112957. Source (rank 1) poster.py has production POST path confirmed.",
+          "evidence_source": "workspace/verification/agent-metrics-post-ledger.jsonl (rank 5), workspace/verification/latest/agent-metrics-tc14-production-post-result.json (rank 7)",
+          "production_impact": "HIGH — TC14 is the main production posting milestone; confirmed complete",
+          "required_next_action": "Monitor next production run to verify title-case agent_name appears correctly"
+        },
+        {
+          "item_id": "A10",
+          "item": "Local evidence writing in all modes",
+          "plan_claim": "Evidence is always written locally before any external POST",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "runner.py writes evidence files. Evidence layout uses family-scoped paths via evidence_layout.py. However, not all command paths (e.g., publish-readme, merge-pr) were freshly verified to write evidence. 'run' command confirmed; others assumed.",
+          "evidence_source": "src/plugin_examples/runner.py (rank 1 inspection notes from prior phase)",
+          "production_impact": "MEDIUM — if non-'run' commands skip evidence, audit trail is incomplete",
+          "required_next_action": "Trace each command path in __main__.py to verify evidence is written before any network call"
+        },
+        {
+          "item_id": "A11",
+          "item": "Post ledger integrity",
+          "plan_claim": "agent-metrics-post-ledger.jsonl is append-only, 2 entries after TC14",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "Ledger file confirmed: 2 lines (rank 5 — persistent ledger). File path in metrics.yml: 'workspace/verification/agent-metrics-post-ledger.jsonl'. Append-only design confirmed in poster.py.",
+          "evidence_source": "workspace/verification/agent-metrics-post-ledger.jsonl (rank 5), pipeline/configs/metrics.yml (rank 1)",
+          "production_impact": "LOW — ledger is the audit trail; working correctly",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "A12",
+          "item": "Metrics config env var overrides (AGENT_METRICS_ENABLED, AGENT_METRICS_DRY_RUN, etc.)",
+          "plan_claim": "All env var overrides defined in config; source reads them at startup",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "metrics.yml env section defines: metrics_token (AGENT_METRICS_TOKEN), metrics_endpoint (AGENT_METRICS_ENDPOINT), metrics_enabled (AGENT_METRICS_ENABLED), metrics_dry_run (AGENT_METRICS_DRY_RUN), metrics_strict (AGENT_METRICS_STRICT). All 5 env vars mapped.",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1)",
+          "production_impact": "LOW — correct; all overrides are config-owned",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "A13",
+          "item": "command_to_job_type mapping completeness",
+          "plan_claim": "All pipeline commands have a job_type mapping in metrics config",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "metrics.yml maps 10 commands to job_types: run→Examples Generation, discover-lowcode→Discovery, publish-pr→Publishing, merge-pr→Publishing, release-status→Reporting, render-root-readme→Publishing, publish-readme→Publishing, validate-publish-targets→Reporting, resolve-repo-access→Reporting, probe-publish-permissions→Reporting.",
+          "evidence_source": "pipeline/configs/metrics.yml (rank 1)",
+          "production_impact": "LOW — completeness ensures no command falls through to undefined job_type",
+          "required_next_action": "Verify sync-taskcard-docs command is also in the list (noted in metrics.yml line 35)"
+        }
+      ],
+      "B": [
+        {
+          "item_id": "B1",
+          "item": "Cells: 9 examples — source, tests, merge SHA, post-merge validation",
+          "plan_claim": "Cells has 9 published examples, all merged and post-merge validated",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "families/cells/example-lifecycle-records.json: 9 pr_candidates, 13 excluded, 22 total. Merge SHA 6222d610293d1c94ed1a26117922b60187be61d7 confirmed. Post-merge validation ALL_PASS 9/9.",
+          "evidence_source": "workspace/verification/latest/families/cells/example-lifecycle-records.json (rank 4), workspace/verification/latest/cells-merge-result.json (rank 4)",
+          "production_impact": "HIGH — this is the primary production deliverable",
+          "required_next_action": "None — complete"
+        },
+        {
+          "item_id": "B2",
+          "item": "Words: 4 examples — source, tests, merge SHA, post-merge validation",
+          "plan_claim": "Words has 4 published examples (of 4 allowed types), all merged and validated",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "families/words/example-lifecycle-records.json: 4 pr_candidates (Converter, Watermarker, Splitter, Replacer), 21 excluded, 25 total. Merge SHA b66fb43023d4d1af7162270ac9d3ef3ef881451f confirmed.",
+          "evidence_source": "workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4), workspace/verification/latest/words-merge-result.json (rank 4)",
+          "production_impact": "HIGH — production deliverable for Words family",
+          "required_next_action": "None — complete for 4/4 allowed types"
+        },
+        {
+          "item_id": "B3",
+          "item": "PDF PR #1: Merger + TextExtractor — merge SHA confirmed",
+          "plan_claim": "PDF PR #1 with Merger and TextExtractor merged to main",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "pdf-merge-result.json confirms merge of PR#1. families/pdf/example-lifecycle-records.json has Merger and TextExtractor as pr_candidates (3 total including Splitter from pr-dry-run package).",
+          "evidence_source": "workspace/verification/latest/pdf-merge-result.json (rank 4), workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4)",
+          "production_impact": "HIGH — PDF PR#1 establishes the PDF publication baseline",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "B4",
+          "item": "PDF PR #3 (wave1): Merger + Splitter — dry-run only, not live",
+          "plan_claim": "PDF PR#3 wave1 (Merger + Splitter) is dry-run ready",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "LOW",
+          "implementation_status": "pdf-wave1-pr-dry-run-summary.json status: 'AWAITING_LLM_RUN'. Dry-run packages exist in workspace/pr-dry-run/pdf-controlled-pilot-wave1/ but the formal dry-run simulation was never executed. MEMORY claim of 'dry-run ready' is contradicted by evidence (rank 4 > rank 10).",
+          "evidence_source": "workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json (rank 4)",
+          "production_impact": "HIGH — PR#3 is blocked; Splitter example not yet published",
+          "required_next_action": "Run LLM for Splitter wave1 → verify build → execute formal dry-run simulation → APPROVE_LIVE_PR"
+        },
+        {
+          "item_id": "B5",
+          "item": "PDF PR #4: Optimizer — blocked or deferred",
+          "plan_claim": "PDF Optimizer blocked by 'using Aspose.Pdf.LowCode.DataSources' namespace hallucination",
+          "actual_status": "BLOCKED",
+          "confidence": "HIGH",
+          "implementation_status": "families/pdf/example-lifecycle-records.json: Optimizer is 'backlogged' (1 backlogged). DataSources guard added to code_generator.py (lines 657-663) and packet_builder.py FORBIDDEN list. Semantics were correct (OptimizeOptions + Optimizer().Process()) but sub-namespace not present in DLL.",
+          "evidence_source": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4), src/plugin_examples/generator/code_generator.py lines 657-663 (rank 1)",
+          "production_impact": "HIGH — Optimizer example not published; 1 of 4 PDF types blocked",
+          "required_next_action": "Re-run LLM for Optimizer with DataSources FORBIDDEN constraint active; verify build; publish PR#4 if passes"
+        },
+        {
+          "item_id": "B6",
+          "item": "Cells READMEs — all PRs merged and validated",
+          "plan_claim": "Cells README PRs #2 (backfill), #3 (aspose.net link correction), #4 (API symbols) all merged",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "4 total PRs merged for Cells (including PR#4 SHA 6222d610). release-status.json shows published=9. README corrections (aspose.net links) confirmed via PR#3 SHA 56601118b34aa2ced0d4f9f292498d0d6b6afa90.",
+          "evidence_source": "workspace/verification/latest/cells-merge-result.json (rank 4), workspace/verification/latest/release-status.json (rank 7)",
+          "production_impact": "MEDIUM — documentation quality for Cells examples",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "B7",
+          "item": "Words READMEs — all PRs merged and validated",
+          "plan_claim": "Words README PRs #2 (backfill), #3 (aspose.net link correction), #4 (API symbols) all merged",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "4 total PRs merged for Words. Words PR#3 SHA 6556906e77e82fe95adec2fe4f9c29e9abe55c61 confirmed (aspose.net corrections). Words PR#1 merge SHA b66fb43023d4d1af7162270ac9d3ef3ef881451f confirmed.",
+          "evidence_source": "workspace/verification/latest/words-merge-result.json (rank 4)",
+          "production_impact": "MEDIUM — documentation quality for Words examples",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "B8",
+          "item": "PDF READMEs — state of readme for merged examples",
+          "plan_claim": "PDF READMEs exist for Merger and TextExtractor (PR#1 examples)",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "PDF PR#1 merged (Merger + TextExtractor). Whether README files with aspose.net links and API symbols were included in PR#1 is not confirmed from available evidence. No explicit pdf-readme-* merge result file inspected.",
+          "evidence_source": "workspace/verification/latest/pdf-merge-result.json (rank 4) — partial; README content not verified",
+          "production_impact": "MEDIUM — PDF published examples may lack proper README documentation",
+          "required_next_action": "Inspect pdf-pr1-post-merge-verification.json and check README files in target repo"
+        },
+        {
+          "item_id": "B9",
+          "item": "Post-merge validation status per family",
+          "plan_claim": "All published families have post-merge validation passing",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "Cells post-merge: ALL_PASS 9/9. Words post-merge: ALL_PASS 4/4. PDF post-merge: Merger+TextExtractor confirmed via pdf-pr1-post-merge-verification.json (noted in MEMORY, consistent with evidence structure).",
+          "evidence_source": "workspace/verification/latest/families/cells/example-lifecycle-records.json (rank 4), workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4)",
+          "production_impact": "HIGH — validates that merged examples are actually runnable in target repo",
+          "required_next_action": "None for Cells/Words; PDF Splitter/Optimizer pending"
+        },
+        {
+          "item_id": "B10",
+          "item": "Cells 9 README content accuracy (API symbols, aspose.net links)",
+          "plan_claim": "Cells READMEs contain accurate API symbols and correct aspose.net links (not aspose.com)",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "aspose_links.py exists at src/plugin_examples/publisher/aspose_links.py (confirmed). Link standardization sprint completed (PR#3 merged). README accuracy depends on what symbols were captured at time of PR.",
+          "evidence_source": "src/plugin_examples/publisher/aspose_links.py (rank 1, exists)",
+          "production_impact": "MEDIUM — documentation quality; user-facing content",
+          "required_next_action": "Spot-check one README in target repo for aspose.net link correctness"
+        }
+      ],
+      "C": [
+        {
+          "item_id": "C1",
+          "item": "Coverage denominator model — does a denominator JSON artifact exist?",
+          "plan_claim": "Coverage denominator model will be created to enable 100% tracking",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "Glob for '*denominator*' returned no matches anywhere in workspace/verification/latest/. Taskcard 'followup-coverage-100-denominator-model' is OPEN. No artifact found. Only mentioned in plan files and MEMORY.md (rank 9-10).",
+          "evidence_source": "Glob search result (rank 1 absence evidence), workspace/verification/latest/open-taskcard-closure-matrix.json open taskcards (rank 7)",
+          "production_impact": "HIGH — without a denominator model, coverage percentage is unmeasurable; '100% coverage' claim is not verifiable",
+          "required_next_action": "Create pipeline/configs/denominators/{family}.json per R3 roadmap sprint"
+        },
+        {
+          "item_id": "C2",
+          "item": "Family matrix completeness targets — are they codified?",
+          "plan_claim": "Each family has a codified target for number of examples",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "allowed_types in YML (Cells: many, Words: 4, PDF: 4) provides scope constraint but not a formal completeness target. No artifact like 'completeness-target.json' exists. Taskcard 'followup-full-planned-example-completion-contract' is OPEN.",
+          "evidence_source": "pipeline/configs/families/*.yml (rank 1), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "HIGH — without formal targets, completion assessment is subjective",
+          "required_next_action": "Define per-family completeness target in denominator model (R3)"
+        },
+        {
+          "item_id": "C3",
+          "item": "Coverage roadmap — plan vs. implementation",
+          "plan_claim": "100% coverage roadmap exists and is being executed",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "full-completion-roadmap.json exists in workspace/verification/latest/ (plan-level artifact). planned-example-completion-model.json exists. But these are SUMMARY artifacts (rank 10) — no source implementation artifact found. Taskcard 'followup-readiness-rank-full-completion-metrics' is OPEN.",
+          "evidence_source": "workspace/verification/latest/full-completion-roadmap.json (rank 10), workspace/verification/latest/planned-example-completion-model.json (rank 10)",
+          "production_impact": "HIGH — roadmap exists only as documentation; no implementation code drives coverage computation",
+          "required_next_action": "Implement completion_rate computation in a new source module (R3)"
+        },
+        {
+          "item_id": "C4",
+          "item": "Words 5 deferred scenarios — what are they, what blocks them?",
+          "plan_claim": "Words has 5 deferred scenarios (mentioned in MEMORY.md) beyond the 4 published",
+          "actual_status": "PARTIAL",
+          "confidence": "MEDIUM",
+          "implementation_status": "families/words/example-lifecycle-records.json: 21 excluded (not 5). MEMORY.md '5 deferred' is inconsistent. The 21 excluded are all blocked by allowed_types filter (words.yml has only 4 types: Converter, Watermarker, Splitter, Replacer). SplitCriteria enum not implemented. MailMerger fixture not documented.",
+          "evidence_source": "workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4), pipeline/configs/families/words.yml (rank 1)",
+          "production_impact": "MEDIUM — 21 scenarios are excluded; expansion requires allowed_types update in words.yml",
+          "required_next_action": "Clarify: are '5 deferred' a specific subset of the 21 excluded? Update MEMORY.md with correct count."
+        },
+        {
+          "item_id": "C5",
+          "item": "PDF pilot denominator — what is the runnable count?",
+          "plan_claim": "PDF runnable denominator established for controlled pilot (4 types)",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "PDF lifecycle: 101 planned, 3 pr_candidates, 1 backlogged (Optimizer), 97 excluded. Allowed_types = 4 (Merger, TextExtractor, Splitter, Optimizer). Formal denominator JSON does not exist (C1). Current effective denominator is 4 types = 4 target examples.",
+          "evidence_source": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4), pipeline/configs/families/pdf.yml (rank 1)",
+          "production_impact": "MEDIUM — pilot is progressing (3 of 4 completed), but denominator not formally documented",
+          "required_next_action": "Create PDF denominator artifact showing 4 target types, 3 complete, 1 blocked"
+        },
+        {
+          "item_id": "C6",
+          "item": "PDF full WORKFLOW_ROOT classification — done or partial?",
+          "plan_claim": "All 101 PDF types classified: 25 WORKFLOW_ROOT, 51 OPTIONS, etc.",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "pdf-type-role-classification.json exists and MEMORY records: 25 WORKFLOW_ROOT, 51 OPTIONS, 5 PROVIDER_CALLBACK, 6 RESULT, 3 DATA_SOURCE, 2 SAVE_TARGET, 4 BUILDER, 4 ENUM = 100 types (missing 1). Classification was a manual/LLM exercise, not a source module.",
+          "evidence_source": "workspace/verification/latest/pdf-type-role-classification.json (rank 7)",
+          "production_impact": "MEDIUM — classification determines which types are runnable candidates",
+          "required_next_action": "Verify the classification artifact (25+51+5+6+3+2+4+4 = 100, not 101 — 1 type unclassified?)"
+        },
+        {
+          "item_id": "C7",
+          "item": "Completion queue — does a machine-readable queue exist?",
+          "plan_claim": "A completion queue artifact tracks which scenarios are next in the pipeline",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "Glob for '*completion-queue*' and '*completion_queue*' returned no matches. Taskcard 'followup-scenario-completion-queue' is OPEN. No queue artifact found anywhere in workspace.",
+          "evidence_source": "Glob search result (absence evidence), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "HIGH — without a queue, prioritization of next examples is manual and subjective",
+          "required_next_action": "Implement completion queue in R4 sprint (derive from lifecycle backlog records)"
+        },
+        {
+          "item_id": "C8",
+          "item": "Scenario contracts — how deep is scenario-catalog.json?",
+          "plan_claim": "Scenario catalog provides structured contracts for each scenario",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "workspace/manifests/scenario-catalog.json exists and contains Words-family scenario data. workspace/verification/latest/scenario-catalog.json may have different family context. Catalog has basic scenario info (scenario_id, family, type, stage) but lacks fixture requirements, expected symbols, validation rules.",
+          "evidence_source": "workspace/manifests/scenario-catalog.json (rank 4), workspace/verification/latest/scenario-catalog.json (rank 4)",
+          "production_impact": "HIGH — shallow contracts mean reruns cannot be validated against pre-stated expectations",
+          "required_next_action": "Deepen scenario contracts with fixture_requirements and expected_output_symbols (R3)"
+        },
+        {
+          "item_id": "C9",
+          "item": "Backlog-to-taskcard bridge — does workspace/backlog/ have full coverage?",
+          "plan_claim": "workspace/backlog/ provides machine-readable backlog for all families",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "workspace/backlog/pdf/ exists (confirmed in Phase 0). No workspace/backlog/cells/ or workspace/backlog/words/ found. PDF backlog has backlogged scenarios. Taskcard 'followup-backlog-to-taskcard-bridge' is OPEN.",
+          "evidence_source": "Phase 0 artifact catalog (rank 1 Glob evidence), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "MEDIUM — Cells and Words backlog items are tracked in taskcards only; no machine-readable artifact",
+          "required_next_action": "Create cells/ and words/ backlog directories; populate from lifecycle excluded records (R4)"
+        },
+        {
+          "item_id": "C10",
+          "item": "Readiness true_completion_rate — is it computed anywhere?",
+          "plan_claim": "completion_rate metric is computed and tracked per family",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "No source module computes completion_rate. family-generation-readiness-rank.json exists as a summary artifact (rank 10) but does not show a standardized completion_rate field. Taskcard 'followup-readiness-rank-full-completion-metrics' is OPEN.",
+          "evidence_source": "workspace/verification/latest/family-generation-readiness-rank.json (rank 10), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "HIGH — without computed completion rate, cannot claim '100% coverage'",
+          "required_next_action": "Implement completion_rate computation as part of R3 sprint"
+        },
+        {
+          "item_id": "C11",
+          "item": "Denominator reconciliation: Words 9 allowed types vs 25 total LowCode types",
+          "plan_claim": "Words denominator is ambiguous: 4 published / 4 allowed / 9 allowed_types count / 25 total",
+          "actual_status": "STALE_OR_CONTRADICTORY",
+          "confidence": "MEDIUM",
+          "implementation_status": "words.yml has 4 allowed_types (Converter, Watermarker, Splitter, Replacer). SOT proof shows 25 total LowCode API types. Lifecycle shows 25 planned (by planner) with 21 excluded. MEMORY claims '9' as denominator — this is NOT in any source file. The correct denominator depends on perspective: 4 (allowed types), 25 (all LowCode types), or some intermediate value. Both '4/4' and '4/25' are valid framings.",
+          "evidence_source": "pipeline/configs/families/words.yml (rank 1), workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4)",
+          "production_impact": "HIGH — different denominators yield wildly different coverage claims (100% vs 16%)",
+          "required_next_action": "Explicitly define which denominator is used in the coverage model; document in denominator artifact"
+        }
+      ],
+      "D": [
+        {
+          "item_id": "D1",
+          "item": "Taskcard markdown sync — is docs/discovery/open-taskcard-closure-matrix.md in sync with JSON?",
+          "plan_claim": "Taskcard MD and JSON are always in sync",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "open-taskcard-closure-matrix.json: 77 total (16 open, 61 closed). docs/discovery/open-taskcard-closure-matrix.md freshly compared in Phase 0 — counts and statuses match. MD reflects current JSON state.",
+          "evidence_source": "workspace/verification/latest/open-taskcard-closure-matrix.json (rank 7), docs/discovery/open-taskcard-closure-matrix.md (rank 8)",
+          "production_impact": "LOW — sync is maintained",
+          "required_next_action": "None — in sync as of audit date"
+        },
+        {
+          "item_id": "D2",
+          "item": "release_status taskcard loading — dynamic or stale?",
+          "plan_claim": "release_status.py dynamically loads taskcard JSON at runtime",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "release_status.py confirmed to read open-taskcard-closure-matrix.json at runtime via dynamic JSON load. Not hardcoded. next_required_action derived from _get_next_action() function that queries the live JSON.",
+          "evidence_source": "src/plugin_examples/publisher/release_status.py (rank 1)",
+          "production_impact": "LOW — correct; taskcard state is live, not stale",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "D3",
+          "item": "Repo access auth header fix — implemented in repo_access_resolver.py?",
+          "plan_claim": "Auth header bug fixed: Bearer token now sent with repo access checks",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "repo_access_resolver.py confirmed: {'Authorization': f'Bearer {token}', 'Accept': 'application/vnd.github.v3+json'}. live_publish_ready: False hardcoded — never automated without human approval.",
+          "evidence_source": "src/plugin_examples/publisher/repo_access_resolver.py (rank 1)",
+          "production_impact": "MEDIUM — GitHub API calls now correctly authenticated; repo access checks work",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "D4",
+          "item": "CI docs — does docs/ci/ have runnable workflow docs?",
+          "plan_claim": "docs/ci/ contains environment variable documentation for CI runners",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "LOW",
+          "implementation_status": "docs/ci/ contains exactly one file: environment-variables.md. Content not freshly read. .github/workflows/ has two workflows: build-and-test.yml and monthly-package-refresh.yml (both confirmed by Glob). CI infrastructure exists but completeness of docs/ci/ is limited to one file.",
+          "evidence_source": "Glob result for docs/ci/** (rank 1 file existence), Glob result for .github/workflows/* (rank 1)",
+          "production_impact": "LOW — CI workflows exist; doc gap is minor",
+          "required_next_action": "Assess whether environment-variables.md covers all env vars needed by CI runners"
+        },
+        {
+          "item_id": "D5",
+          "item": "Monthly runbook — does docs/publishing/ have a maintained runbook?",
+          "plan_claim": "Monthly maintenance runbook exists in docs/publishing/",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "docs/publishing/monthly-maintenance-runbook.md confirmed by Glob. docs/publishing/agent-operated-live-pr-runbook.md also exists. .github/workflows/monthly-package-refresh.yml exists as automated CI support. Content not freshly read.",
+          "evidence_source": "Glob result for docs/publishing/** (rank 1 file existence)",
+          "production_impact": "LOW — runbook exists; whether it's current/maintained is not verified",
+          "required_next_action": "Read monthly-maintenance-runbook.md to verify it covers all 3 families and current workflow"
+        },
+        {
+          "item_id": "D6",
+          "item": "Repository consistency audit — was it completed?",
+          "plan_claim": "Repository consistency audit was completed (evidence file exists)",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "LOW",
+          "implementation_status": "repository-consistency-and-reproducibility-audit.json exists in workspace/verification/latest/. Content not freshly read in this audit. File exists as rank-7 artifact.",
+          "evidence_source": "workspace/verification/latest/repository-consistency-and-reproducibility-audit.json (rank 7, existence only)",
+          "production_impact": "LOW — one-time audit; value depends on when it was run",
+          "required_next_action": "Read the file and verify it covers all 3 families as of current state"
+        },
+        {
+          "item_id": "D7",
+          "item": "Example-index per-family behavior — single family or all families?",
+          "plan_claim": "example-index.json is per-family, not overwritten by other families",
+          "actual_status": "NOT_VERIFIABLE",
+          "confidence": "LOW",
+          "implementation_status": "workspace/manifests/example-index.json exists (Phase 0). Whether it is per-family or all-family was not determined. The file structure and whether family runs overwrite it was not freshly inspected.",
+          "evidence_source": "workspace/manifests/example-index.json (existence only from Phase 0)",
+          "production_impact": "MEDIUM — if all-family, then running Cells may overwrite Words index",
+          "required_next_action": "Read example-index.json and check if it contains multi-family data or single-family data"
+        },
+        {
+          "item_id": "D8",
+          "item": "Token policy: GitHub scope isolation",
+          "plan_claim": "GITHUB_TOKEN is the only token the pipeline reads; Classic PAT with repo scope only",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "Token policy from MEMORY and confirmed in source: pipeline reads only GITHUB_TOKEN. APPROVE_LIVE_PR and APPROVE_MERGE_PR are approval strings (not tokens). Token never logged (github_pr_publisher.py policy). APPROVE_LIVE_PR explicitly rejected for merge (blocked_merge_reused_live_publish_token).",
+          "evidence_source": "src/plugin_examples/publisher/repo_access_resolver.py (rank 1 - uses GITHUB_TOKEN)",
+          "production_impact": "HIGH — correct; minimal token scope reduces blast radius",
+          "required_next_action": "None"
+        }
+      ],
+      "E": [
+        {
+          "item_id": "E1",
+          "item": "Reflection dedup — assembly_identity.py implemented?",
+          "plan_claim": "assembly_identity.py deduplications reflection results to prevent duplicate type entries",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "src/plugin_examples/dependencies/assembly_identity.py confirmed to exist (Glob result). Content not freshly read in Phase 1. File exists at the expected path.",
+          "evidence_source": "Glob result for src/plugin_examples/dependencies/*.py (rank 1 file existence)",
+          "production_impact": "MEDIUM — dedup prevents double-counting API types from multiple DLL loads",
+          "required_next_action": "Read assembly_identity.py freshly in Phase 3 source audit"
+        },
+        {
+          "item_id": "E2",
+          "item": "Role classification — 101 types classified?",
+          "plan_claim": "All 101 PDF types classified into roles (WORKFLOW_ROOT, OPTIONS, etc.)",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "pdf-type-role-classification.json exists (rank 7). MEMORY records 25+51+5+6+3+2+4+4=100 types across 8 roles. Whether all 101 are classified (or 100 are, with 1 missing) is not confirmed. Evidence file, not source code.",
+          "evidence_source": "workspace/verification/latest/pdf-type-role-classification.json (rank 7)",
+          "production_impact": "MEDIUM — classification determines runnable candidates",
+          "required_next_action": "Verify 101 vs 100 discrepancy in pdf-type-role-classification.json"
+        },
+        {
+          "item_id": "E3",
+          "item": "allowed_types enforcement — pdf.yml has 4 types",
+          "plan_claim": "pdf.yml enforces allowed_types: [Merger, TextExtractor, Splitter, Optimizer]",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "pipeline/configs/families/pdf.yml confirmed with allowed_types: [Merger, TextExtractor, Splitter, Optimizer] (4 types). Pipeline enforces this at scenario planning time — families/pdf lifecycle shows 97 of 101 types excluded.",
+          "evidence_source": "pipeline/configs/families/pdf.yml (rank 1)",
+          "production_impact": "HIGH — controls scope of PDF generation; prevents runaway LLM calls on unverified types",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E4",
+          "item": "Fixture strategy — programmatic PDF fixtures standardized?",
+          "plan_claim": "PDF uses programmatic fixtures (Aspose.Pdf.Document()) — no external files",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "4 fixture types confirmed: programmatic_pdf_single, programmatic_pdf_multi_page, programmatic_pdf_pair, programmatic_pdf_known_text. Harness at workspace/fixture-validation/pdf-harness/ validated ALL_PASS 8/8. fixture-registry.json has these types.",
+          "evidence_source": "workspace/manifests/fixture-registry.json (rank 4), workspace/fixture-validation/pdf-harness/ (rank 3)",
+          "production_impact": "HIGH — standardized fixtures enable reproducible LLM generation",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E5",
+          "item": "Merger — implemented, built, published in PR #1",
+          "plan_claim": "PDF Merger example is published in PR#1 (MERGED)",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "pdf-merge-result.json confirms PR#1 merge. families/pdf/example-lifecycle-records.json has Merger as pr_candidate. Merger pattern: new MergeOptions(); AddInput(FileDataSource); AddOutput(FileDataSource); new Merger().Process(options).",
+          "evidence_source": "workspace/verification/latest/pdf-merge-result.json (rank 4), workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4)",
+          "production_impact": "HIGH — first PDF example published",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E6",
+          "item": "TextExtractor — implemented, built, published in PR #1",
+          "plan_claim": "PDF TextExtractor example is published in PR#1 (MERGED)",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "pdf-merge-result.json confirms PR#1 merge includes TextExtractor. Correct pattern: TextExtractorOptions + FileDataSource + new TextExtractor().Process() — no AddOutput(), read StringResult via reflection. TextAbsorber BANNED.",
+          "evidence_source": "workspace/verification/latest/pdf-merge-result.json (rank 4)",
+          "production_impact": "HIGH — TextExtractor example resolves the 0-method reflection gap",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E7",
+          "item": "Splitter — wave1 dry-run, not live",
+          "plan_claim": "Splitter example generated and build-passing but not yet in live PR",
+          "actual_status": "PARTIAL",
+          "confidence": "MEDIUM",
+          "implementation_status": "families/pdf/example-lifecycle-records.json: Splitter is pr_candidate. pr-dry-run packages exist in workspace/pr-dry-run/pdf-controlled-pilot-wave1/. However, pdf-wave1-pr-dry-run-summary.json status is 'AWAITING_LLM_RUN' — formal dry-run simulation not yet executed.",
+          "evidence_source": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4), workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json (rank 4)",
+          "production_impact": "HIGH — Splitter not yet published; pending LLM run confirmation",
+          "required_next_action": "Execute Splitter LLM run; verify build; run formal dry-run simulation; approve PR#3"
+        },
+        {
+          "item_id": "E8",
+          "item": "Optimizer — blocked by namespace hallucination; fix applied",
+          "plan_claim": "Optimizer blocked by 'using Aspose.Pdf.LowCode.DataSources' hallucination; DataSources guard applied",
+          "actual_status": "BLOCKED",
+          "confidence": "HIGH",
+          "implementation_status": "code_generator.py lines 657-663: DataSources FORBIDDEN guard active. packet_builder.py FORBIDDEN list includes 'FORBIDDEN: using Aspose.Pdf.LowCode.DataSources'. Fix applied. Last run (pilot-pdf-20260507-140400): Optimizer BUILD_FAIL. Next run should respect the guard.",
+          "evidence_source": "src/plugin_examples/generator/code_generator.py lines 657-663 (rank 1), src/plugin_examples/generator/packet_builder.py lines 121-124 (rank 1)",
+          "production_impact": "HIGH — Optimizer is the 4th PDF type; blocked until next LLM run with guard active",
+          "required_next_action": "Re-run LLM for Optimizer (followup-pdf-optimizer-llm-rerun OPEN taskcard)"
+        },
+        {
+          "item_id": "E9",
+          "item": "Namespace constraints — using Aspose.Pdf.LowCode.DataSources FORBIDDEN in code",
+          "plan_claim": "DataSources sub-namespace is FORBIDDEN in code_generator.py and packet_builder.py",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "code_generator.py lines 657-663: _validate_code checks for 'using Aspose.Pdf.LowCode.DataSources'. packet_builder.py FORBIDDEN list entry confirmed (line 121-like). Two-layer guard: packet build-time constraint + runtime validation.",
+          "evidence_source": "src/plugin_examples/generator/code_generator.py (rank 1), src/plugin_examples/generator/packet_builder.py (rank 1)",
+          "production_impact": "HIGH — prevents re-occurrence of the Optimizer hallucination",
+          "required_next_action": "None — guard is in place"
+        },
+        {
+          "item_id": "E10",
+          "item": "PluginOptions blocking — no new PluginOptions() allowed",
+          "plan_claim": "new PluginOptions() is FORBIDDEN; only concrete options classes allowed",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "packet_builder.py line 121: 'FORBIDDEN: new PluginOptions() — PluginOptions is an abstract base; use the concrete options class for this type'. Also FORBIDDEN: LowCodePluginOptions, string array overloads of Process(). Confirmed freshly.",
+          "evidence_source": "src/plugin_examples/generator/packet_builder.py (rank 1, freshly read)",
+          "production_impact": "HIGH — prevents abstract base class instantiation errors",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E11",
+          "item": "DataSources guard — _validate_code checks this",
+          "plan_claim": "_validate_code in code_generator.py validates DataSources namespace is not used",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "Confirmed: code_generator.py lines 657-663 contain the _validate_code DataSources check. Both packet-build-time constraint (packet_builder.py FORBIDDEN list) and post-generation validation (_validate_code) are active.",
+          "evidence_source": "src/plugin_examples/generator/code_generator.py (rank 1)",
+          "production_impact": "HIGH — defense in depth for the Optimizer namespace issue",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E12",
+          "item": "LLM timeout retry — implemented in router.py?",
+          "plan_claim": "LLM calls retry on timeout with exponential backoff",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "router.py: _LLM_RETRY_BACKOFF_SECONDS = [30, 60] at line 18, _LLM_MAX_RETRIES = 2 at line 21. Retry implemented in _call_ollama() (lines 331-363) and _call_openai_compatible() (lines 419-445).",
+          "evidence_source": "src/plugin_examples/llm_router/router.py (rank 1)",
+          "production_impact": "MEDIUM — resilience against transient LLM provider failures",
+          "required_next_action": "None"
+        },
+        {
+          "item_id": "E13",
+          "item": "PDF PR #3 live status",
+          "plan_claim": "PDF PR#3 (wave1: Merger + Splitter) is ready for live PR",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "LOW",
+          "implementation_status": "pdf-wave1-pr-dry-run-summary.json verdict: 'DRY_RUN_READY_TO_EXECUTE — awaiting Wave 1 LLM run results and APPROVE_LIVE_PR'. Status: 'AWAITING_LLM_RUN'. The PR#3 live push has NOT happened. Dry-run packages exist but formal simulation has not run.",
+          "evidence_source": "workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json (rank 4)",
+          "production_impact": "HIGH — Splitter example publication is the next PDF milestone",
+          "required_next_action": "Execute LLM run + build verification + formal dry-run simulation + APPROVE_LIVE_PR"
+        },
+        {
+          "item_id": "E14",
+          "item": "Reflection-based fixture strategy for TextExtractor (0-method type)",
+          "plan_claim": "TextExtractor's 0-method reflection gap is handled by OPERATION_FACADE classification + reflection workaround",
+          "actual_status": "IMPLEMENTED_VERIFIED",
+          "confidence": "HIGH",
+          "implementation_status": "TextExtractor inherits Process() from IPlugin base — DllReflector shows method_count=0. Classifier fix: OPERATION_FACADE for 0-method types with constructors. Scorer: OPERATION_FACADE with constructors + 0 methods → runnable. StringResult cast via ((StringResult)r).Text. Confirmed in PR#1.",
+          "evidence_source": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4), MEMORY.md architecture notes",
+          "production_impact": "MEDIUM — enables TextExtractor to be a valid PR candidate despite 0-method reflection",
+          "required_next_action": "None — working in production (PR#1 merged)"
+        }
+      ],
+      "F": [
+        {
+          "item_id": "F1",
+          "item": "SplitCriteria enum discovery — is this implemented?",
+          "plan_claim": "SplitCriteria enum for Words Splitter is discovered and used in fixture strategy",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "Grep for 'SplitCriteria' in entire src/ returned NO MATCHES. Taskcard 'followup-words-split-criteria-enumeration' is OPEN. Not implemented in source. Mentioned only in MEMORY.md (rank 10) and taskcard.",
+          "evidence_source": "Grep search result (rank 1 absence), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "MEDIUM — without SplitCriteria enum handling, Words Splitter scenarios may be limited",
+          "required_next_action": "Implement SplitCriteria enum discovery in scenario_planner (R5 sprint)"
+        },
+        {
+          "item_id": "F2",
+          "item": "Paired fixture strategy — is this implemented?",
+          "plan_claim": "Words scenarios requiring paired input files use a paired fixture strategy",
+          "actual_status": "NOT_VERIFIABLE",
+          "confidence": "LOW",
+          "implementation_status": "Taskcard 'followup-words-pair-fixture-strategy' is OPEN. No specific paired fixture type found in fixture-registry.json for Words. The 4 published Words examples all use programmatic_input (single DOCX). Paired strategy not confirmed or denied from source.",
+          "evidence_source": "open-taskcard-closure-matrix.json (rank 7), workspace/manifests/fixture-registry.json (rank 4)",
+          "production_impact": "MEDIUM — scenarios requiring two input DOCX files (e.g., merge operations) cannot run without paired fixtures",
+          "required_next_action": "Read fixture-registry.json freshly and check if any Words paired fixture type exists"
+        },
+        {
+          "item_id": "F3",
+          "item": "MailMerger template fixture — is this documented or implemented?",
+          "plan_claim": "MailMerger (Words type) requires a template fixture with mail merge fields",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "Taskcard 'followup-words-mail-merger-fixture-documentation' is OPEN. No MailMerger fixture found in source or evidence files. Not in allowed_types (words.yml: Converter, Watermarker, Splitter, Replacer). MailMerger would require allowed_types expansion first.",
+          "evidence_source": "open-taskcard-closure-matrix.json (rank 7), pipeline/configs/families/words.yml (rank 1)",
+          "production_impact": "LOW — MailMerger is not even in allowed_types; blocked by scope restriction before fixture matters",
+          "required_next_action": "Address after words.yml allowed_types expansion (F5 prerequisite)"
+        },
+        {
+          "item_id": "F4",
+          "item": "DOCX semantic validation — implemented?",
+          "plan_claim": "DOCX output is semantically validated (not just file existence)",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "src/plugin_examples/verifier_bridge/output_validator.py exists (confirmed by Grep match). The 4 published Words examples were validated. But 'DOCX semantic validation' as a dedicated type-aware validator (checking %DOCX header, watermark VML, specific page isolation) is not confirmed as a module — it may be embedded in runner.py or output_validator.py.",
+          "evidence_source": "src/plugin_examples/verifier_bridge/output_validator.py (rank 1, exists), workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4)",
+          "production_impact": "MEDIUM — semantic validation catches false positives in example success",
+          "required_next_action": "Read output_validator.py to determine depth of DOCX semantic validation (Phase 3)"
+        },
+        {
+          "item_id": "F5",
+          "item": "5 remaining deferred scenarios — identified and tracked?",
+          "plan_claim": "5 specific Words scenarios are deferred and tracked for future expansion",
+          "actual_status": "PARTIAL",
+          "confidence": "LOW",
+          "implementation_status": "families/words/example-lifecycle-records.json shows 21 excluded (not 5). The '5 deferred' claim in MEMORY is inconsistent with evidence (rank 4 > rank 10). OPEN taskcards include 'followup-words-full-coverage-expansion' but do not name specific 5 scenarios. It is possible the '5 deferred' refers to a specific subset that was identified but not tracked separately.",
+          "evidence_source": "workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "MEDIUM — 21 scenarios remain excluded; tracking is informal",
+          "required_next_action": "Clarify 5 vs 21 discrepancy; create words backlog with all excluded scenarios identified"
+        },
+        {
+          "item_id": "F6",
+          "item": "Words Replacer placeholder fixture standardization",
+          "plan_claim": "Words Replacer type uses a programmatic DOCX with known placeholder text for substitution validation",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "Replacer example was published (pr_candidate, merge confirmed). MEMORY states 'placeholder→world replacement, confirmed in document.xml'. programmatic_input fixture strategy used. Fixture content not freshly inspected.",
+          "evidence_source": "workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4)",
+          "production_impact": "LOW — working in production",
+          "required_next_action": "None — working; verification optional"
+        }
+      ],
+      "G": [
+        {
+          "item_id": "G1",
+          "item": "Cells rerun — evidence of non-degradation",
+          "plan_claim": "Cells rerun shows same 9/9 results as original run",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "workspace/verification/latest/cells-regression-rerun-result.json exists (Phase 0 catalog). Content not freshly read. MEMORY claims 'ALL_PASS' for Cells. Evidence file exists at rank 4 freshness.",
+          "evidence_source": "workspace/verification/latest/cells-regression-rerun-result.json (rank 4, existence)",
+          "production_impact": "HIGH — non-degradation is the key rerun safety property",
+          "required_next_action": "Read cells-regression-rerun-result.json to confirm 9/9 and compare run timestamps"
+        },
+        {
+          "item_id": "G2",
+          "item": "Words rerun — evidence of non-degradation",
+          "plan_claim": "Words rerun shows same 4/4 results as original run",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "workspace/verification/latest/words-regression-rerun-result.json exists (Phase 0 catalog). Content not freshly read. MEMORY implies ALL_PASS for Words.",
+          "evidence_source": "workspace/verification/latest/words-regression-rerun-result.json (rank 4, existence)",
+          "production_impact": "HIGH — non-degradation proof needed before expanding Words examples",
+          "required_next_action": "Read words-regression-rerun-result.json to confirm 4/4"
+        },
+        {
+          "item_id": "G3",
+          "item": "PDF rerun — evidence of non-degradation",
+          "plan_claim": "PDF rerun (pilot-pdf-20260507-140400) shows Merger PASS, Splitter PASS, TextExtractor PASS",
+          "actual_status": "IMPLEMENTED_NOT_VERIFIED",
+          "confidence": "MEDIUM",
+          "implementation_status": "workspace/verification/latest/pdf-optimizer-rerun-analysis.json and pdf-llm-e2e-run-result.json exist. MEMORY claims: Merger PASS, Splitter PASS (2nd consecutive), TextExtractor PASS (regression resolved), Optimizer BUILD_FAIL. This represents 3/4 non-degradation.",
+          "evidence_source": "workspace/verification/latest/pdf-optimizer-rerun-analysis.json (rank 4, existence), workspace/verification/latest/pdf-llm-e2e-run-result.json (rank 4)",
+          "production_impact": "HIGH — PDF Splitter second PASS is the key evidence for PR#3 readiness",
+          "required_next_action": "Read pdf-llm-e2e-run-result.json to confirm Splitter 2nd PASS and Optimizer BUILD_FAIL details"
+        },
+        {
+          "item_id": "G4",
+          "item": "Lifecycle evidence history — is per-run history preserved?",
+          "plan_claim": "Evidence is preserved per run (run-scoped) and per family (family-scoped)",
+          "actual_status": "PARTIAL",
+          "confidence": "MEDIUM",
+          "implementation_status": "evidence_layout.py promotes to families/{family}/ directory (CLOSED taskcard 'followup-family-scoped-evidence-promotion'). workspace/verification/latest/_last_promoted_by.json exists. However, workspace/runs/{run_id}/ structure (run-scoped evidence) was NOT confirmed in Phase 0 Glob — only latest/ and families/ found.",
+          "evidence_source": "workspace/verification/latest/families/ (rank 4 confirmed), Glob result for workspace/runs/ (not found in Phase 0)",
+          "production_impact": "HIGH — without run-scoped immutable evidence, reruns overwrite each other",
+          "required_next_action": "Glob for workspace/runs/ to determine if run-scoped evidence exists; if not, this is a structural gap"
+        },
+        {
+          "item_id": "G5",
+          "item": "Monthly rerun workflow — is it automated or manual?",
+          "plan_claim": "Monthly rerun is automated via CI and documented in runbook",
+          "actual_status": "PARTIAL",
+          "confidence": "MEDIUM",
+          "implementation_status": ".github/workflows/monthly-package-refresh.yml exists (Glob confirmed). docs/publishing/monthly-maintenance-runbook.md exists. The workflow is partially automated (CI workflow for package refresh) and documented. Whether it triggers a full LLM rerun is not confirmed.",
+          "evidence_source": "Glob result for .github/workflows/ (rank 1), Glob result for docs/publishing/ (rank 1)",
+          "production_impact": "MEDIUM — automation gap means reruns depend on human operator",
+          "required_next_action": "Read .github/workflows/monthly-package-refresh.yml to determine if it triggers LLM generation or just package refresh"
+        },
+        {
+          "item_id": "G6",
+          "item": "Run-to-run comparison — does any mechanism exist?",
+          "plan_claim": "Run-to-run comparison enables detecting regressions between monthly reruns",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "example_lifecycle.py freshly inspected in Phase 0: LIFECYCLE_STAGES list exists, but NO run-to-run comparison logic found. No source module computes a diff between run N and run N-1. No evidence artifact found for cross-run comparison. Structural absence confirmed.",
+          "evidence_source": "src/plugin_examples/gates/example_lifecycle.py (rank 1, freshly inspected)",
+          "production_impact": "HIGH — without run-to-run comparison, regressions are invisible until manual inspection",
+          "required_next_action": "Design and implement run-to-run comparison using stable scenario IDs (R4 sprint)"
+        },
+        {
+          "item_id": "G7",
+          "item": "Non-degradation CI gate (automated test run on PR)",
+          "plan_claim": "CI gate prevents merging PRs that break existing examples",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": ".github/workflows/build-and-test.yml exists (Glob confirmed) — this runs unit tests on PR. However, a non-degradation gate (running the full pipeline against all examples to verify they still pass) was NOT confirmed. Unit tests passing ≠ examples still generate correctly.",
+          "evidence_source": "Glob result for .github/workflows/build-and-test.yml (rank 1)",
+          "production_impact": "HIGH — source code changes can break example generation without unit tests catching it",
+          "required_next_action": "Define and implement non-degradation CI gate as part of R9 sprint"
+        },
+        {
+          "item_id": "G8",
+          "item": "Evidence comparison across runs (semantic diff)",
+          "plan_claim": "Semantic diff between runs identifies what changed across reruns",
+          "actual_status": "PLANNED_ONLY",
+          "confidence": "NONE",
+          "implementation_status": "No semantic diff mechanism found anywhere in source or evidence. Reruns produce new evidence files (overwriting latest/) but no comparison artifact is produced. Only taskcard mentions this concept.",
+          "evidence_source": "src/plugin_examples/gates/example_lifecycle.py (rank 1, no diff mechanism), open-taskcard-closure-matrix.json (rank 7)",
+          "production_impact": "HIGH — without semantic diffs, detecting quality changes across reruns is impossible",
+          "required_next_action": "Implement as part of R4 lifecycle redesign sprint"
+        }
+      ]
+    },
+    "summary": {
+      "IMPLEMENTED_VERIFIED": 25,
+      "IMPLEMENTED_NOT_VERIFIED": 10,
+      "PARTIAL": 12,
+      "PLANNED_ONLY": 13,
+      "BLOCKED": 2,
+      "STALE_OR_CONTRADICTORY": 2,
+      "NOT_VERIFIABLE": 3,
+      "SUPERSEDED": 0,
+      "total_items": 67,
+      "coverage_by_workstream": {
+        "A": {"total": 13, "IMPLEMENTED_VERIFIED": 10, "PARTIAL": 1, "STALE_OR_CONTRADICTORY": 1, "IMPLEMENTED_NOT_VERIFIED": 1},
+        "B": {"total": 10, "IMPLEMENTED_VERIFIED": 7, "PARTIAL": 1, "PLANNED_ONLY": 1, "BLOCKED": 1, "IMPLEMENTED_NOT_VERIFIED": 0},
+        "C": {"total": 11, "PLANNED_ONLY": 5, "PARTIAL": 3, "IMPLEMENTED_NOT_VERIFIED": 1, "STALE_OR_CONTRADICTORY": 1, "NOT_VERIFIABLE": 0, "IMPLEMENTED_VERIFIED": 1},
+        "D": {"total": 8, "IMPLEMENTED_VERIFIED": 4, "IMPLEMENTED_NOT_VERIFIED": 3, "NOT_VERIFIABLE": 1},
+        "E": {"total": 14, "IMPLEMENTED_VERIFIED": 8, "PARTIAL": 2, "PLANNED_ONLY": 1, "BLOCKED": 1, "IMPLEMENTED_NOT_VERIFIED": 2},
+        "F": {"total": 6, "PLANNED_ONLY": 2, "PARTIAL": 2, "NOT_VERIFIABLE": 1, "IMPLEMENTED_NOT_VERIFIED": 1},
+        "G": {"total": 8, "PLANNED_ONLY": 4, "IMPLEMENTED_NOT_VERIFIED": 3, "PARTIAL": 1}
+      },
+      "implementation_percent_estimate_by_workstream": {
+        "A": 85,
+        "B": 75,
+        "C": 15,
+        "D": 70,
+        "E": 70,
+        "F": 20,
+        "G": 15
+      },
+      "critical_path_planned_only": [
+        "C1 - Coverage denominator model",
+        "C7 - Completion queue",
+        "C10 - Readiness completion rate",
+        "G6 - Run-to-run comparison",
+        "G7 - Non-degradation CI gate",
+        "G8 - Evidence semantic diff",
+        "F1 - SplitCriteria enum",
+        "F3 - MailMerger fixture"
+      ]
+    }
+  },
+  "gaps": [
+    "Coverage denominator model (C1) does not exist — 100% coverage claim is unmeasurable",
+    "Completion queue (C7) does not exist — no machine-readable priority queue for next examples",
+    "Run-to-run comparison mechanism (G6) does not exist — regressions are invisible",
+    "SplitCriteria enum (F1) not implemented — Words Splitter scenarios limited",
+    "PDF PR#3 formal dry-run simulation (B4/E13) never executed — status is AWAITING_LLM_RUN",
+    "PDF Optimizer (B5/E8) blocked — 1 of 4 PDF types not published",
+    "Words 21 excluded scenarios (C4) vs MEMORY claim of 5 deferred — count discrepancy",
+    "workspace/runs/{run_id}/ directory structure not confirmed — run-scoped evidence may not exist",
+    "PDF README coverage (B8) not verified for PR#1 published examples",
+    "release-status.json last_pr_number=1 is stale (actual 4) — D2 dynamic load does not fix this"
+  ],
+  "contradictions": [
+    {
+      "claim_a": "agent_name='Lowcode Example Generator' (title case)",
+      "source_a": "pipeline/configs/metrics.yml (rank 1)",
+      "claim_b": "agent_name='lowcode-example-generator' in production POST payload",
+      "source_b": "workspace/verification/agent-metrics-post-ledger.jsonl (rank 5)",
+      "resolution": "Config wins (rank 1). Ledger entry is a historical artifact from pre-fix run. Next production POST will use title case."
+    },
+    {
+      "claim_a": "Words has '5 deferred' scenarios",
+      "source_a": "MEMORY.md (rank 10)",
+      "claim_b": "Words has 21 excluded scenarios",
+      "source_b": "workspace/verification/latest/families/words/example-lifecycle-records.json (rank 4)",
+      "resolution": "Evidence wins (rank 4). 21 scenarios are excluded by allowed_types filter. '5 deferred' claim is inconsistent and should be updated in MEMORY.md."
+    },
+    {
+      "claim_a": "PDF PR#3 wave1 is 'dry-run ready'",
+      "source_a": "MEMORY.md (rank 10)",
+      "claim_b": "PDF wave1 dry-run status is 'AWAITING_LLM_RUN'",
+      "source_b": "workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json (rank 4)",
+      "resolution": "Evidence wins (rank 4). Dry-run packages exist but formal dry-run simulation has not been executed."
+    },
+    {
+      "claim_a": "release-status.json last_pr_number=1",
+      "source_a": "workspace/verification/latest/release-status.json (rank 7)",
+      "claim_b": "Actual PRs merged: 4 per family (Cells and Words)",
+      "source_b": "workspace/verification/latest/cells-merge-result.json, words-merge-result.json (rank 4)",
+      "resolution": "Merge result files win (rank 4). release-status.json is stale — it reports only the last run's PR number, not cumulative. This is a structural limitation of the current release_status.py design."
+    }
+  ],
+  "next_actions": [
+    "Phase 2: Read 7 plan files and verify each expected output against actual implementation",
+    "Phase 3: Freshly read all 16+ source modules for implementation audit",
+    "Phase 5: Read family-scoped evidence to build family truth board",
+    "Resolve workspace/runs/ existence question (run-scoped evidence gap G4)",
+    "Read pdf-llm-e2e-run-result.json to confirm PDF rerun findings (G3)",
+    "Address C1 (denominator), C7 (completion queue), G6 (run-to-run comparison) in roadmap as R3/R4 sprints"
+  ]
+}

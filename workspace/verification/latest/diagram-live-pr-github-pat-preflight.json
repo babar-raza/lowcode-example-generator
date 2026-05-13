@@ -1,0 +1,53 @@
+{
+  "artifact": "diagram-live-pr-github-pat-preflight",
+  "phase": "Phase 0 - Preflight",
+  "timestamp": "2026-05-12T08:09:00Z",
+  "git": {
+    "branch": "main",
+    "commit": "4a72f84e52216beec8adb893a351f43a0e3f4d71",
+    "status": "clean"
+  },
+  "runtime": {
+    "python": "3.13.2",
+    "dotnet": "9.0.200"
+  },
+  "env_vars": {
+    "GITHUB_PAT": "PRESENT (system env, visible via PowerShell GetEnvironmentVariable, NOT inherited by bash shell)",
+    "GITHUB_PAT_length": 93,
+    "GITHUB_PAT_prefix": "github_pat_",
+    "GITHUB_PAT_type": "fine_grained_pat",
+    "GITHUB_PAT_expiry": "2027-05-11T19:00:00Z",
+    "GITHUB_TOKEN": "PRESENT (inherited from previous session, likely old token)",
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "github_pat_permission_probe": {
+    "repo_metadata_http": 200,
+    "repo_metadata_push": true,
+    "repo_metadata_admin": true,
+    "git_blobs_api_http": 403,
+    "git_blobs_api_error": "Resource not accessible by personal access token",
+    "token_scope_header": "x-accepted-github-permissions: allows_permissionless_access=true",
+    "diagnosis": "Fine-grained PAT has repo metadata push/admin via org role but lacks 'Contents: Write' PAT-scope. Git Data API (blob creation) enforces PAT-level permissions separately from org-level repo role. The 'allows_permissionless_access=true' header confirms only public/permissionless access is granted."
+  },
+  "package_state": {
+    "path": "workspace/pr-dry-run/diagram-controlled-pilot",
+    "exists": true,
+    "examples": ["diagram-diagram-converter", "diagram-pdf-converter"],
+    "examples_count": 2,
+    "readme_exists": true,
+    "status": "VALID"
+  },
+  "gate_result": "BLOCKED",
+  "blocker": "GITHUB_PAT_CONTENTS_WRITE_STILL_MISSING",
+  "blocker_detail": "GITHUB_PAT is a fine-grained PAT that was created without 'Contents: Read and write' permission for aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples. The Git Data API returns HTTP 403 on blob creation despite repo metadata showing push=True (which reflects org role, not PAT scope).",
+  "fix_required": {
+    "action": "Edit the fine-grained PAT on GitHub Settings > Personal access tokens > Fine-grained tokens",
+    "find": "The token named in GITHUB_PAT (expiry 2027-05-11)",
+    "add_permission": "Repository permissions > Contents: Read and write",
+    "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+    "also_ensure": "Pull requests: Read and write (required for PR creation step)",
+    "then": "Update GITHUB_PAT system env var with regenerated token value (fine-grained PATs must be regenerated after permission changes)"
+  },
+  "verdict": "DIAGRAM_PUBLICATION_TOKEN_STILL_BLOCKED"
+}

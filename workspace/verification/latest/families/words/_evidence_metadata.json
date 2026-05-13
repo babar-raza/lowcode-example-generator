@@ -1,0 +1,33 @@
+{
+  "scope": "family",
+  "family": "words",
+  "run_id": "pilot-words-20260513-114425",
+  "promoted_at": "2026-05-13T06:48:49.143904+00:00",
+  "source_run_path": "workspace\\runs\\pilot-words-20260513-114425\\evidence\\latest",
+  "files": [
+    "aggregate-gate-results.json",
+    "api-consumer-relationships.json",
+    "api-delta-report.json",
+    "blocked-scenarios.json",
+    "catalog-hash-validation.json",
+    "example-gate-results.json",
+    "example-impact-report.json",
+    "example-lifecycle-records.json",
+    "example-reviewer-results.json",
+    "fixture-strategy-plan.json",
+    "gate-results.json",
+    "generated-fixtures.json",
+    "llm-fewshot-patterns.json",
+    "llm-preflight.json",
+    "plugin-type-role-classification.json",
+    "pr-candidate-manifest.json",
+    "publishing-report.json",
+    "reviewer-preflight.json",
+    "runnable-entrypoint-scores.json",
+    "scenario-feedback-updates.json",
+    "scenario-input-format-map.json",
+    "stale-existing-examples.json",
+    "validation-results.json",
+    "words-source-of-truth-proof.json"
+  ]
+}

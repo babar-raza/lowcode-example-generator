@@ -1,0 +1,41 @@
+{
+  "sprint": "TC14 One-Row Production POST",
+  "phase": "Phase 4 — Sheet Verification Handoff",
+  "note": "Google Sheet UI verification is human-only. No read-only Sheets API connector is available to the agent. The agent must not edit the sheet.",
+
+  "search_instructions": {
+    "run_id_to_find": "pilot-cells-20260508-112957",
+    "expected_row_fields": {
+      "agent_name": "lowcode-example-generator",
+      "agent_owner": "Babar Raza",
+      "job_type": "examples_generation",
+      "run_id": "pilot-cells-20260508-112957",
+      "status": "success",
+      "product": "Aspose.Cells",
+      "website": "aspose.net",
+      "website_section": "Examples",
+      "platform": ".NET",
+      "item_name": "Examples",
+      "items_discovered": 22,
+      "items_succeeded": 9,
+      "items_failed": 0,
+      "token_usage": 11900,
+      "api_calls_count": 9,
+      "run_duration_ms": 224658,
+      "timestamp": "2026-05-08T06:33:42.653416+00:00"
+    },
+    "payload_hash": "1303d6ff644f4e39",
+    "api_response_confirmed": "{\"status\":200,\"ok\":true,\"message\":\"Metrics recorded\",\"run_id\":\"pilot-cells-20260508-112957\"}"
+  },
+
+  "human_verification_checklist": [
+    "Open the Google Sheet at the verified URL",
+    "Search for run_id: pilot-cells-20260508-112957",
+    "Confirm row exists with agent_name=lowcode-example-generator (not test-lowcode-example-generator)",
+    "Confirm job_type=examples_generation",
+    "Confirm status=success",
+    "Confirm website=aspose.net",
+    "Confirm items_succeeded=9",
+    "Record confirmation in TC14-09-independent-verification taskcard"
+  ]
+}

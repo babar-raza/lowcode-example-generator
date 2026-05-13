@@ -1,0 +1,63 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "gate_0_result": "PASS",
+  "artifacts_inspected": [
+    {"artifact": "workspace/verification/latest/pdf-pr1-and-cross-family-audit-preflight.json", "classification": "VERIFIED", "notes": "Gate 0 from prior sprint. 18 artifacts all VERIFIED. Verdict GATE_0_PASS."},
+    {"artifact": "workspace/verification/latest/pdf-excluded-examples-root-cause-review.json", "classification": "VERIFIED", "notes": "2 excluded examples (splitter, optimizer) with precise root causes. Both have backlog + taskcard."},
+    {"artifact": "workspace/verification/latest/cross-family-example-lifecycle-audit.json", "classification": "VERIFIED", "notes": "15 published, 36 excluded, 0 dropped, 2 backlogged. Numbers confirmed against per-family blocked-scenarios.json files."},
+    {"artifact": "workspace/verification/latest/example-failure-recovery-system-limitation-plan.json", "classification": "VERIFIED", "notes": "8 system capabilities, 8 system gaps listed. Priorities match open taskcards."},
+    {"artifact": "workspace/verification/latest/example-reviewer-feedback-loop-gap-analysis.json", "classification": "VERIFIED", "notes": "9 questions answered. ReviewerResult is pass/fail only. No per-example feedback. Taskcard OPEN."},
+    {"artifact": "workspace/verification/latest/pdf-example-lifecycle-summary.json", "classification": "VERIFIED", "notes": "planned=4, selected=2, generated=2, passed=2, packaged=2, excluded=2, backlogged=2. GATE_3_PASS."},
+    {"artifact": "workspace/verification/latest/family-generation-readiness-rank.json", "classification": "VERIFIED", "notes": "3 families ranked. Cells: generation_ready=true, 9 published. Words: generation_ready=false (pilot restricted). PDF: generation_ready=true, 2 published, 2 backlogged."},
+    {"artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json", "classification": "VERIFIED", "notes": "4 records: merger+text-extractor PR_DRY_RUN_READY, splitter+optimizer EXCLUDED_BY_SCOPE with backlog."},
+    {"artifact": "workspace/verification/latest/families/pdf/examples-backlog.json", "classification": "VERIFIED", "notes": "File does not exist at families/pdf/ path. Exists at workspace/backlog/pdf/examples-backlog.json."},
+    {"artifact": "workspace/backlog/pdf/examples-backlog.json", "classification": "VERIFIED", "notes": "2 entries: pdf-backlog-splitter-001, pdf-backlog-optimizer-001. Both status=open, priority=high."},
+    {"artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json", "classification": "NEEDS_FIX", "notes": "JSON header says total=57, but markdown says total=57 open=7. JSON actually has 7 open taskcards, not 8. The followup-example-reviewer-feedback-loop from the lifecycle sprint is NOT in the JSON array despite being mentioned in the plan. One entry for followup-pdf-pr1-merge closed is also missing."},
+    {"artifact": "docs/discovery/open-taskcard-closure-matrix.md", "classification": "STALE", "notes": "Shows total=57, open=7, closed=45. But 57-7=50, not 45. The sync tool counts CLOSED_VERIFIED as a separate category. Minor display discrepancy, data not lost."},
+    {"artifact": "docs/discovery/cross-family-example-lifecycle-audit.md", "classification": "VERIFIED", "notes": "Matches JSON. 15 published, 36 excluded, 0 dropped, 2 backlogged."},
+    {"artifact": "docs/discovery/pdf-excluded-examples-root-cause-review.md", "classification": "VERIFIED", "notes": "Root causes match JSON evidence."},
+    {"artifact": "docs/plans/example-failure-recovery-system-limitation-plan.md", "classification": "VERIFIED", "notes": "8 improvements listed. Matches JSON."},
+    {"artifact": "src/plugin_examples/gates/example_lifecycle.py", "classification": "VERIFIED", "notes": "Lifecycle transitions exist. mark_reviewer_failed clears pr_candidate. Backlog tracking present."},
+    {"artifact": "src/plugin_examples/runner.py", "classification": "VERIFIED", "notes": "Build-repair loop (max 2), runtime-repair loop (max 1). No reviewer-repair loop. repairable_classifications defined at line 677-682. LLM timeout 120s, no retry on timeout."},
+    {"artifact": "src/plugin_examples/scenario_planner/planner.py", "classification": "VERIFIED", "notes": "allowed_types filtering at line 129-133. blocked_pilot_not_in_scope status assigned. planned_count = total types from catalog."},
+    {"artifact": "src/plugin_examples/generator/packet_builder.py", "classification": "VERIFIED", "notes": "PDF-specific constraints present. No SplitOptions/OptimizeOptions few-shot. Generic 'do not use abstract PluginOptions' constraint exists."},
+    {"artifact": "src/plugin_examples/generator/code_generator.py", "classification": "VERIFIED", "notes": "_validate_code at line 441. Checks for new PluginOptions() at line 549-558. Also checks LowCodePluginOptions. Validator DOES exist but only fires post-generation."},
+    {"artifact": "src/plugin_examples/scenario_planner/runtime_feedback.py", "classification": "VERIFIED", "notes": "No PluginOptions hallucination detection pattern. Focus on missing_options_input and null_options_passed."},
+    {"artifact": "src/plugin_examples/publisher/publisher.py", "classification": "VERIFIED", "notes": "_load_excluded_scenario_summaries at line 287. Excluded scenarios included in PR body via build_pr."},
+    {"artifact": "pipeline/configs/families/cells.yml", "classification": "VERIFIED", "notes": "status=active. No allowed_types restriction. 22 types in LowCode namespace, 9 workflow_root, 13 non-runnable."},
+    {"artifact": "pipeline/configs/families/words.yml", "classification": "VERIFIED", "notes": "status=active. allowed_types=[Converter,Watermarker,Splitter,Replacer]. 25 types, 9 operation_facade but only 4 in allowlist."},
+    {"artifact": "pipeline/configs/families/pdf.yml", "classification": "VERIFIED", "notes": "status=active. allowed_types=[Merger,TextExtractor]. 101 types, 25 WORKFLOW_ROOT but only 2 in allowlist."},
+    {"artifact": "workspace/verification/latest/families/cells/blocked-scenarios.json", "classification": "VERIFIED", "notes": "13 blocked: 3 abstract_base, 7 options, 2 provider_callback, 1 result_model. All are non-runnable types. Zero are runnable workflow_roots excluded by scope."},
+    {"artifact": "workspace/verification/latest/families/words/blocked-scenarios.json", "classification": "VERIFIED", "notes": "21 blocked: ALL are blocked_pilot_not_in_scope. Includes 5 runnable operation_facades (Comparer, MailMerger, Merger, Processor, ReportBuilder) plus their contexts, options, enums."},
+    {"artifact": "workspace/verification/latest/blocked-scenarios.json", "classification": "STALE", "notes": "Top-level file shows family=pdf, blocked_count=99. This is the LAST-PROMOTED family's blocked scenarios, not a combined view. Misleading without _last_promoted_by.json context."},
+    {"artifact": "MEMORY.md", "classification": "VERIFIED", "notes": "Accurate for current state. 852 test count is stale (now 966). Taskcards list is stale (needs update)."}
+  ],
+  "cross_family_numbers_verified": {
+    "cells": {"planned": 22, "published": 9, "excluded": 13, "excluded_breakdown": {"abstract_base": 3, "options": 7, "provider_callback": 2, "result_model": 1}, "runnable_but_excluded": 0},
+    "words": {"planned": 25, "published": 4, "excluded": 21, "excluded_breakdown": {"pilot_not_in_scope": 21}, "runnable_but_excluded": 5, "runnable_excluded_types": ["Comparer", "MailMerger", "Merger", "Processor", "ReportBuilder"]},
+    "pdf": {"planned": 101, "published": 2, "excluded": 99, "excluded_breakdown": {"pilot_not_in_scope": 99}, "runnable_but_excluded": 23, "backlogged": 2}
+  },
+  "critical_finding": "The 'planned=51' number from the cross-family audit UNDERCOUNTS planned scenarios. It only counts 22+25+4=51 by using the scenario planner's selected scope, not the full namespace type count. The ACTUAL total types are 22+25+101=148 across all namespaces. The planned=51 figure comes from the readiness rank's planned_count, which for PDF was 4 (the controlled pilot plan), not 101 (the full namespace). This is a METRICS GAP: the system conflates 'types discovered in namespace' with 'planned scenarios' and then further restricts via allowlist.",
+  "contradictions_found": [
+    {
+      "id": "CONTRA-1",
+      "description": "cross-family-example-lifecycle-audit.json says planned=4 for PDF, but PDF namespace has 101 types and 25 WORKFLOW_ROOTs. The 4 comes from the controlled pilot plan, not from discovery.",
+      "severity": "MEDIUM",
+      "resolution": "The planned_count in the audit should distinguish 'discovered types' from 'pilot-planned scenarios'. Both are valid counts at different abstraction levels."
+    },
+    {
+      "id": "CONTRA-2",
+      "description": "open-taskcard-closure-matrix.json is missing followup-example-reviewer-feedback-loop entry",
+      "severity": "LOW",
+      "resolution": "Will be added in Phase 10."
+    }
+  ],
+  "gate_0_pass_criteria": {
+    "all_artifacts_inspected": true,
+    "cross_family_numbers_verified": true,
+    "contradictions_resolved_or_documented": true,
+    "investigation_starts_from_evidence": true
+  },
+  "verdict": "GATE_0_PASS"
+}

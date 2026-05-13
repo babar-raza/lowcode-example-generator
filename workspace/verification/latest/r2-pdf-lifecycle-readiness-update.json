@@ -1,0 +1,72 @@
+{
+  "artifact_type": "r2-pdf-lifecycle-readiness-update",
+  "sprint": "Sprint R2 Revised — PDF Optimizer Repair Constraint Injection Fix and Rerun",
+  "date": "2026-05-08",
+  "phase": "Phase 7 — Lifecycle, backlog, readiness update",
+
+  "lifecycle_update": {
+    "file": "workspace/verification/latest/families/pdf/example-lifecycle.json",
+    "run_id_updated_to": "pilot-pdf-20260508-155520",
+    "key_change": "Optimizer record updated from BACKLOGGED/SEMANTIC_FAIL to PR_CANDIDATE/EXAMPLE_READY_FOR_PR_DRY_RUN (first ever PASS)",
+    "merger_note": "Merger shows R2 GENERATION_FAILED (non-deterministic). Lifecycle retains prior PASS verdict; R2 regression documented in r2_run_result field.",
+    "all_4_scenarios_now_pass": true,
+    "scenarios": {
+      "pdf-merger": "PR_CANDIDATE — 3 prior passes; R2 single regression (non-deterministic); existing PR#3 package valid",
+      "pdf-text-extractor": "PR_CANDIDATE — PUBLISHED on main (PR#1); R2 PASS confirmed",
+      "pdf-splitter": "PR_CANDIDATE — 4 consecutive passes; PR3 dry-run package ready",
+      "pdf-optimizer": "PR_CANDIDATE — FIRST PASS EVER in R2 run pilot-pdf-20260508-155520"
+    }
+  },
+
+  "backlog_update": {
+    "file": "workspace/backlog/pdf/examples-backlog.json",
+    "optimizer_entry_status": "RESOLVED — OPTIMIZER_FIRST_PASS_ACHIEVED",
+    "all_3_entries_resolved": true,
+    "entries": {
+      "pdf-backlog-splitter-001": "status=resolved (unchanged)",
+      "pdf-backlog-optimizer-001": "status=resolved — updated in Phase 7 to reflect R2 first PASS",
+      "pdf-backlog-text-extractor-regression-001": "status=resolved (unchanged)"
+    }
+  },
+
+  "readiness_rank_update": {
+    "file": "workspace/verification/latest/family-generation-readiness-rank.json",
+    "pdf_entry_changes": {
+      "recommended_next_action": "create_pr3_live_pr_then_pr4_optimizer",
+      "controlled_pilot_types": ["Merger", "TextExtractor", "Splitter", "Optimizer"],
+      "controlled_pilot_result": "ALL_4_TYPES_PASS_READY",
+      "controlled_pilot_pass_count": 4,
+      "passed_count": 4,
+      "backlogged_count": 0,
+      "pr3_dry_run_ready_count": 2,
+      "pr4_candidate_count": 1,
+      "r2_verdict": "R2_OPTIMIZER_REPAIR_CONSTRAINT_FIXED_AND_PR_READY"
+    }
+  },
+
+  "release_status_update": {
+    "command_run": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples release-status --families pdf --promote-latest",
+    "output": "Release status: 1 families — pdf: merged=a9f9e254fbdb, examples=2, post_merge=ALL_PASS",
+    "note": "Release status reflects PUBLISHED state only (PR#1 merged examples: Merger+TextExtractor). PR#3 and PR#4 are not yet published — publication requires APPROVE_LIVE_PR.",
+    "file": "workspace/verification/latest/release-status.json",
+    "open_followups_shown": [
+      "followup-pdf-optimizer-options-class",
+      "followup-pdf-remaining-candidate-classification",
+      "followup-pdf-optimizer-llm-rerun",
+      "followup-pdf-optimizer-repair-constraint-injection"
+    ],
+    "note_on_followups": "These 4 taskcards will be updated/closed in Phase 8 taskcard matrix update"
+  },
+
+  "coverage_impact": {
+    "published_count": 2,
+    "pr3_ready_count": 2,
+    "pr4_candidate_count": 1,
+    "total_pilot_denominator": 4,
+    "publication_completion": "50% published (2/4)",
+    "pr_ready_completion": "75% at PR-ready stage (3/4: Splitter in PR3 + Optimizer in PR4)",
+    "full_pilot_completion": "100% — all 4 pilot types have PASS examples (first time ever)"
+  },
+
+  "gate_7_verdict": "LIFECYCLE_READINESS_UPDATED"
+}

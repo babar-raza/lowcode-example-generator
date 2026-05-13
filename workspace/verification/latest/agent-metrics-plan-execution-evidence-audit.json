@@ -1,0 +1,127 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 8: Evidence Design Audit",
+  "phase": "PHASE_8",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "Section 9 (Evidence Design), TC-08",
+  "objective": "Verify all plan-specified evidence files, paths, and write-safety requirements are correctly implemented",
+
+  "per_run_evidence_files": [
+    {
+      "file": "agent-metrics-llm-calls.jsonl",
+      "location_plan": "workspace/runs/{run_id}/evidence/",
+      "written_when": "After each LLM call",
+      "format": "JSONL (one record per line)",
+      "implemented": true,
+      "write_mode": "append-only (atomic per line)",
+      "secrets_present": false
+    },
+    {
+      "file": "agent-metrics-run-summary.json",
+      "location_plan": "workspace/runs/{run_id}/evidence/",
+      "written_when": "Pipeline end",
+      "format": "JSON",
+      "implemented": true,
+      "write_safety": "atomic write via tmp+rename",
+      "secrets_present": false
+    },
+    {
+      "file": "agent-metrics-payload.json",
+      "location_plan": "workspace/runs/{run_id}/evidence/",
+      "written_when": "After validation",
+      "format": "JSON",
+      "implemented": true,
+      "write_safety": "atomic write",
+      "secrets_present": false
+    },
+    {
+      "file": "agent-metrics-validation.json",
+      "location_plan": "workspace/runs/{run_id}/evidence/",
+      "written_when": "After validation",
+      "format": "JSON",
+      "implemented": true,
+      "write_safety": "atomic write",
+      "secrets_present": false
+    },
+    {
+      "file": "agent-metrics-post-result.json",
+      "location_plan": "workspace/runs/{run_id}/evidence/",
+      "written_when": "After POST attempt",
+      "format": "JSON",
+      "implemented": true,
+      "write_safety": "atomic write",
+      "secrets_present": false
+    }
+  ],
+
+  "persistent_evidence_files": [
+    {
+      "file": "agent-metrics-post-ledger.jsonl",
+      "location_plan": "workspace/verification/ (NOT under latest/)",
+      "actual_location": "workspace/verification/agent-metrics-post-ledger.jsonl",
+      "outside_latest": true,
+      "written_when": "After successful POST",
+      "format": "JSONL append-only",
+      "implemented": true,
+      "current_entries": 1,
+      "entry_fields": ["run_id", "job_type", "posted_at", "http_status", "payload_hash", "dry_run"]
+    }
+  ],
+
+  "path_convention_verification": {
+    "during_run": "workspace/runs/{run_id}/evidence/agent-metrics-*.{json,jsonl}",
+    "after_run_promotion": "workspace/verification/latest/families/{family}/",
+    "persistent_ledger": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "global_evidence": "workspace/verification/latest/",
+    "plan_stop_condition_SC10": {
+      "condition": "Evidence is not run-scoped (written directly to latest/)",
+      "triggered": false,
+      "evidence": "_create_metrics_session() in __main__.py line 57 creates path workspace/runs/{run_id}/evidence/",
+      "verdict": "PASS"
+    }
+  },
+
+  "run_scoped_dirs_observed": {
+    "workspace_runs_count": 105,
+    "confirms_run_scoped_evidence_pattern": true,
+    "ledger_location_correct": true
+  },
+
+  "write_safety_mechanisms": {
+    "jsonl_append_only": true,
+    "json_atomic_tmp_rename": true,
+    "no_prompts_in_evidence": true,
+    "no_completions_in_evidence": true,
+    "no_request_response_bodies": true,
+    "no_tokens_auth_headers": true,
+    "no_secrets_of_any_kind": true
+  },
+
+  "naming_collision_audit": {
+    "prefix_used": "agent-metrics-",
+    "collisions_with_existing_files": 0,
+    "existing_patterns": ["gate-results.json", "llm-preflight.json", "validation-results.json"],
+    "agent_metrics_prefix_unique": true
+  },
+
+  "redaction_test_coverage": {
+    "test_file": "tests/unit/test_agent_metrics_evidence.py",
+    "tests_count": 6,
+    "tests_passed": 6,
+    "key_tests": [
+      "test_no_secrets_in_evidence_files",
+      "test_token_patterns_absent",
+      "test_jsonl_correct_format",
+      "test_run_scoped_paths"
+    ]
+  },
+
+  "plan_section_9_compliance": {
+    "all_5_per_run_files_implemented": true,
+    "persistent_ledger_outside_latest": true,
+    "no_naming_collisions": true,
+    "write_safety_satisfied": true,
+    "promotion_path_correct": true
+  },
+
+  "overall_verdict": "PASS — all evidence design requirements from Section 9 satisfied; stop condition SC-10 not triggered"
+}

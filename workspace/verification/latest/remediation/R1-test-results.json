@@ -1,0 +1,21 @@
+{
+  "sprint_id": "R1",
+  "generated_at": "2026-05-08T00:00:00Z",
+  "targeted_tests": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_denominator_model.py -v --tb=short",
+    "result": "62 passed in 0.40s",
+    "pass_count": 62,
+    "fail_count": 0,
+    "error_count": 0
+  },
+  "full_suite": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ --tb=short -q",
+    "result": "1087 passed in 28.20s",
+    "pass_count": 1087,
+    "fail_count": 0,
+    "error_count": 0,
+    "baseline_count": 1025,
+    "new_tests_added": 62
+  },
+  "regression_detected": false
+}

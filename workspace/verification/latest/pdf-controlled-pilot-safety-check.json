@@ -1,0 +1,50 @@
+{
+  "sprint": "PDF Controlled Pilot LLM E2E Dry-Run Trial",
+  "phase": "Phase 1 — Safety and Regression Verification",
+  "date": "2026-05-05",
+  "verdict": "SAFETY_CHECK_PASS",
+  "checks": {
+    "compileall_src": {
+      "command": ".venv/Scripts/python.exe -m compileall src -q",
+      "exit_code": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "dotnet_build_dll_reflector": {
+      "command": "dotnet build tools/DllReflector/DllReflector.csproj -c Release -q",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "pytest_unit": {
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit -q --timeout=60",
+      "tests_passed": 813,
+      "tests_failed": 0,
+      "duration_seconds": 27.35,
+      "status": "PASS"
+    },
+    "config_safety": {
+      "pdf_status": "active",
+      "pdf_allowed_types": ["Merger", "Splitter", "Optimizer", "TextExtractor"],
+      "pdf_allowed_types_count": 4,
+      "pdf_broad_generation_enabled": false,
+      "cells_status": "active",
+      "cells_allowed_types": "unrestricted",
+      "words_status": "active",
+      "words_allowed_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+      "words_broad_generation_enabled": false,
+      "discovery_only_guard_active": true,
+      "status": "PASS"
+    },
+    "llm_environment": {
+      "gpt_oss_endpoint_set": true,
+      "gpt_oss_api_key_set": true,
+      "gpt_oss_model": "recommended (default)",
+      "provider_policy_compliant": true,
+      "status": "PASS"
+    }
+  },
+  "test_baseline": 813,
+  "proceed_to_phase_2": true
+}

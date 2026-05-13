@@ -1,0 +1,113 @@
+{
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "date": "2026-05-06",
+  "system_capabilities": {
+    "what_system_handles_today": [
+      "Source-of-truth discovery via NuGet reflection",
+      "Scenario planning with allowlist-based scope control",
+      "LLM-driven code generation with prompt constraints",
+      "Build validation with compiler error extraction",
+      "Build-repair loop (feeds compiler errors back to LLM)",
+      "Runtime validation with error classification",
+      "Runtime-repair loop (feeds runtime errors back to LLM)",
+      "Code quality validation (forbidden patterns, null-options, etc.)",
+      "PR dry-run packaging with README, manifest, expected-output",
+      "Live PR creation via GitHub REST API",
+      "Live PR merge with separate approval gate",
+      "Post-merge clean-checkout validation",
+      "Family-scoped evidence promotion",
+      "Lifecycle records for all planned examples (including excluded)",
+      "Durable backlog with root cause and taskcard cross-links",
+      "Excluded scenario listing in PR body"
+    ],
+    "what_system_cannot_handle": [
+      "Reviewer-driven repair loop (reviewer is pass/fail only, no per-example feedback)",
+      "Cross-run learning from backlog (previous failure patterns not fed into next prompt)",
+      "Type-specific few-shot examples for PDF Splitter/Optimizer concrete options classes",
+      "LLM timeout recovery (no retry with backoff on timeout)",
+      "Automated DOCX semantic validation (text extraction from DOCX output)",
+      "Paired-input fixture strategy (2+ input files for Comparer/Merger)",
+      "SplitCriteria enum enumeration (values not in API catalog from DllReflector)",
+      "MailMerger template fixture with documented merge fields"
+    ]
+  },
+  "excluded_examples_analysis": [
+    {
+      "scenario_id": "pdf-splitter",
+      "excluded_because": "LLM behavior — PluginOptions hallucination",
+      "api_complexity_factor": "LOW — SplitOptions API is straightforward",
+      "llm_behavior_factor": "HIGH — LLM consistently picks abstract base class",
+      "missing_reviewer_feedback_factor": "N/A — excluded before reviewer",
+      "fix_category": "few-shot + validator + repair feedback",
+      "taskcard": "followup-pdf-splitter-options-class"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "excluded_because": "LLM behavior (PluginOptions) + infrastructure (timeout)",
+      "api_complexity_factor": "LOW — OptimizeOptions API is straightforward",
+      "llm_behavior_factor": "HIGH — same hallucination as Splitter",
+      "missing_reviewer_feedback_factor": "N/A — excluded before reviewer",
+      "fix_category": "few-shot + validator + timeout policy + repair feedback",
+      "taskcard": "followup-pdf-optimizer-options-class"
+    }
+  ],
+  "improvement_priorities": [
+    {
+      "priority": 1,
+      "taskcard": "followup-pdf-splitter-options-class",
+      "fix": "Add SplitOptions few-shot, prompt constraint, code validator rule rejecting PluginOptions, repair feedback",
+      "effort": "medium",
+      "impact": "Unblocks pdf-splitter, may fix optimizer pattern too"
+    },
+    {
+      "priority": 2,
+      "taskcard": "followup-pdf-optimizer-options-class",
+      "fix": "Add OptimizeOptions few-shot, timeout/retry policy, same validator rule",
+      "effort": "medium",
+      "impact": "Unblocks pdf-optimizer, completes PDF 4/4 pilot"
+    },
+    {
+      "priority": 3,
+      "taskcard": "followup-example-reviewer-feedback-loop",
+      "fix": "Structured ReviewerResult findings, reviewer-repair loop in runner.py",
+      "effort": "high",
+      "impact": "Enables automated quality improvement across all families"
+    },
+    {
+      "priority": 4,
+      "taskcard": "followup-words-split-criteria-enumeration",
+      "fix": "Add enum value enumeration to DllReflector output",
+      "effort": "medium",
+      "impact": "Unblocks WORDS-005 Splitter.Split"
+    },
+    {
+      "priority": 5,
+      "taskcard": "followup-words-pair-fixture-strategy",
+      "fix": "Support paired-input fixtures in fixture registry",
+      "effort": "medium",
+      "impact": "Unblocks WORDS-006 Comparer, WORDS-007 Merger"
+    },
+    {
+      "priority": 6,
+      "taskcard": "followup-words-mail-merger-fixture-documentation",
+      "fix": "Create template DOCX with documented merge fields",
+      "effort": "low",
+      "impact": "Unblocks WORDS-008 MailMerger"
+    },
+    {
+      "priority": 7,
+      "taskcard": "followup-words-docx-semantic-validation",
+      "fix": "Automate DOCX text extraction for output validation",
+      "effort": "medium",
+      "impact": "Better validation for all Words examples"
+    },
+    {
+      "priority": 8,
+      "taskcard": "followup-family-readiness-ranker-trust",
+      "fix": "Add confidence and evidence_source to ranking",
+      "effort": "low",
+      "impact": "Observability only"
+    }
+  ],
+  "recommended_next_sprint": "PDF Splitter+Optimizer Few-Shot and Options-Class Fix Sprint — close followup-pdf-splitter-options-class and followup-pdf-optimizer-options-class. If both pass, create PDF PR #2 with 4/4 examples."
+}

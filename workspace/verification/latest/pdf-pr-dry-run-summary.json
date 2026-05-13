@@ -1,0 +1,120 @@
+{
+  "sprint": "PDF Partial Pilot PR Dry-Run Packaging",
+  "date": "2026-05-05",
+  "sprint_verdict": "PDF_PARTIAL_PR_DRY_RUN_PACKAGE_READY",
+  "overall_status": "PARTIAL_SUCCESS_MERGER_BLOCKED",
+  "phases": {
+    "phase_0": {
+      "name": "Mandatory Referenced-Artifact Review",
+      "result": "GATE_0_FAIL_CONTRADICTIONS_FOUND",
+      "contradictions_found": 4,
+      "reconciliation": "Reduced scope to text-extractor only; merger excluded",
+      "evidence": "workspace/verification/latest/pdf-pr-packaging-preflight-review.json"
+    },
+    "phase_1": {
+      "name": "Package Scope",
+      "result": "PASS",
+      "included": ["pdf-text-extractor"],
+      "excluded": ["pdf-merger", "pdf-splitter", "pdf-optimizer"],
+      "evidence": "workspace/verification/latest/pdf-pr-package-scope.json"
+    },
+    "phase_2": {
+      "name": "Package Build",
+      "result": "PASS",
+      "package_path": "workspace/pr-dry-run/pdf-controlled-pilot/",
+      "files_created": 9,
+      "evidence": "workspace/verification/latest/pdf-pr-package-layout-audit.json"
+    },
+    "phase_3": {
+      "name": "Package Validation (dotnet restore/build/run)",
+      "result": "PASS",
+      "examples_validated": 1,
+      "examples_pass": 1,
+      "examples_fail": 0,
+      "evidence": "workspace/verification/latest/pdf-pr-package-validation.json"
+    },
+    "phase_4": {
+      "name": "Root README Render and Audit",
+      "result": "PASS",
+      "readme_bytes": 3968,
+      "examples_in_readme": 1,
+      "audit": "PASS",
+      "readme_path": "workspace/pr-dry-run/pdf-controlled-pilot/README.md",
+      "evidence": "workspace/verification/latest/pdf-root-readme-audit.json"
+    },
+    "phase_5": {
+      "name": "Publish-PR Dry-Run Simulation",
+      "result": "SIMULATION_BLOCKED_AS_EXPECTED",
+      "live_push_performed": false,
+      "blocked_reasons": [
+        "repo_access_not_ready (followup-pdf-repo-provisioning OPEN)",
+        "pr_permission_not_ready",
+        "blocked_live_pr_approval_required (required for live publish only)"
+      ],
+      "gate_verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "target": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "simulated_branch": "plugin-examples/pdf/20260505-141329",
+      "evidence": "workspace/verification/latest/pdf-live-pr-simulation.json"
+    }
+  },
+  "included_examples": [
+    {
+      "scenario_id": "pdf-text-extractor",
+      "build": "PASS",
+      "run": "PASS",
+      "output_validation": "PASS",
+      "readme_audit": "PASS",
+      "limitation": "NEEDS_LLM_REMEDIATION (TextAbsorber, not TextExtractor LowCode)",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
+  "excluded_examples": [
+    {
+      "scenario_id": "pdf-merger",
+      "verdict": "EXAMPLE_BLOCKED_NO_VALID_LOWCODE_CODE",
+      "followup": "followup-pdf-merger-few-shot-fix (NEW — add few-shot MergeOptions example)"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "verdict": "EXAMPLE_BLOCKED_BUILD_FAILED",
+      "followup": "followup-pdf-splitter-options-class (OPEN)"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "verdict": "EXAMPLE_BLOCKED_BUILD_FAILED",
+      "followup": "followup-pdf-optimizer-options-class (OPEN)"
+    }
+  ],
+  "safety_verification": {
+    "live_pr_created": false,
+    "live_push_performed": false,
+    "merge_performed": false,
+    "remote_mutation": "NONE",
+    "approval_token_persisted": false,
+    "github_token_logged": false,
+    "safety_gates_intact": true
+  },
+  "package_contents": {
+    "Directory.Packages.props": "PRESENT",
+    "Directory.Build.props": "PRESENT",
+    "global.json": "PRESENT",
+    "README.md": "PRESENT (rendered 2026-05-05, 3968 bytes, audit PASS)",
+    "examples/pdf/lowcode/text-extractor/Program.cs": "PRESENT (unchanged from run pilot-pdf-20260505-143724)",
+    "examples/pdf/lowcode/text-extractor/pdf-text-extractor.csproj": "PRESENT",
+    "examples/pdf/lowcode/text-extractor/README.md": "PRESENT (corrected: TextAbsorber, NEEDS_LLM_REMEDIATION note)",
+    "examples/pdf/lowcode/text-extractor/example.manifest.json": "PRESENT (corrected: claimed_symbols=TextAbsorber, limitation field added)",
+    "examples/pdf/lowcode/text-extractor/expected-output.json": "PRESENT (corrected: must_contain=Text extraction succeeded)"
+  },
+  "blocking_issues_for_live_pr": [
+    "followup-pdf-repo-provisioning OPEN: Repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples not yet created",
+    "followup-pdf-live-pr-approval OPEN: Explicit human approval required (APPROVE_LIVE_PR token)",
+    "pdf-merger EXCLUDED: Needs few-shot LLM fix before a complete pilot PR can be attempted"
+  ],
+  "next_actions": [
+    "followup-pdf-repo-provisioning: Human creates repo + grants token access",
+    "followup-pdf-merger-few-shot-fix (NEW): Add MergeOptions few-shot example, regenerate pdf-merger",
+    "followup-pdf-splitter-options-class (OPEN): Fix PluginOptions hallucination for Splitter",
+    "followup-pdf-optimizer-options-class (OPEN): Fix PluginOptions hallucination for Optimizer",
+    "After all 4 examples pass: create live PR with APPROVE_LIVE_PR"
+  ]
+}

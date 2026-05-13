@@ -1,0 +1,140 @@
+{
+  "sprint": "PDF Fixture Strategy Review",
+  "phase": "Phase 3 — Programmatic Fixture Validation",
+  "date": "2026-05-05",
+  "harness_project": "workspace/fixture-validation/pdf-harness/PdfFixtureHarness.csproj",
+  "does_not_enable_generation": true,
+  "overall_status": "ALL_PASS",
+  "pass_count": 8,
+  "fail_count": 0,
+  "total_tests": 9,
+  "build_status": "BUILD_OK_0_WARNINGS_0_ERRORS",
+  "api_corrections_confirmed": {
+    "add_output_type": "FileDataSource implements IDataSource — NOT FileSaveTarget (which implements ISaveTarget)",
+    "result_container_property": "ResultCollection (List<IOperationResult>), not OperationResult",
+    "result_success_check": "ResultCollection.Count > 0 (no IsSuccess property on ResultContainer)",
+    "string_result_property": "StringResult.Text for extracted text content",
+    "prior_sprint_documentation_error": "pdf-options-aware-review.json and pdf-controlled-pilot-recommendation.json documented AddOutput(FileSaveTarget) — INCORRECT. Correct pattern: AddOutput(FileDataSource). Must update LLM code generation rules and options-aware documentation."
+  },
+  "fixture_results": [
+    {
+      "fixture": "programmatic_pdf_single",
+      "filename": "input-single.pdf",
+      "strategy": "Aspose.Pdf.Document() + Pages.Add() x1",
+      "bytes": 28837,
+      "header_valid": true,
+      "pages": 1,
+      "status": "PASS",
+      "used_by": ["Optimizer"]
+    },
+    {
+      "fixture": "programmatic_pdf_multi_page",
+      "filename": "input-three-page.pdf",
+      "strategy": "Aspose.Pdf.Document() + Pages.Add() x3",
+      "bytes": 30192,
+      "header_valid": true,
+      "pages": 3,
+      "status": "PASS",
+      "used_by": ["Splitter"]
+    },
+    {
+      "fixture": "programmatic_pdf_pair",
+      "filenames": ["input-merge-a.pdf", "input-merge-b.pdf"],
+      "strategy": "Two separate Aspose.Pdf.Document() instances, each with 1 page",
+      "bytes_a": 28837,
+      "bytes_b": 28837,
+      "header_valid_a": true,
+      "header_valid_b": true,
+      "status": "PASS",
+      "used_by": ["Merger"]
+    },
+    {
+      "fixture": "programmatic_pdf_known_text",
+      "filename": "input-text.pdf",
+      "strategy": "Aspose.Pdf.Document() + TextFragment(\"Hello LowCode PDF\")",
+      "bytes": 29359,
+      "header_valid": true,
+      "known_text": "Hello LowCode PDF",
+      "status": "PASS",
+      "used_by": ["TextExtractor"]
+    }
+  ],
+  "api_test_results": [
+    {
+      "test": "Merger.Process(MergeOptions)",
+      "api_pattern": "new MergeOptions() + AddInput(FileDataSource) x2 + AddOutput(FileDataSource) + new Merger().Process()",
+      "result_collection_count": 1,
+      "output_exists": true,
+      "output_header_valid": true,
+      "output_bytes": 84533,
+      "status": "PASS",
+      "notes": "84533 bytes from 2 x 28837 byte inputs — merge successful, output > inputs combined"
+    },
+    {
+      "test": "Splitter.Process(SplitOptions)",
+      "api_pattern": "new SplitOptions() + AddInput(FileDataSource) + AddOutput(FileDataSource pattern) + new Splitter().Process()",
+      "result_collection_count": 1,
+      "output_file_count": 1,
+      "output_files": ["output_{0}.pdf"],
+      "first_output_header_valid": true,
+      "status": "PASS",
+      "IMPORTANT_FINDING": "Splitter does NOT expand {0} as a format string. The output filename 'output_{0}.pdf' is used LITERALLY. The splitter outputs to a single file (not one-per-page as assumed). LLM code generation must NOT use format string patterns. Use a simple output filename like 'output.pdf'.",
+      "splitter_output_naming_correction": "Use 'output.pdf' as the output filename, not 'output_{0}.pdf'"
+    },
+    {
+      "test": "Optimizer.Process(OptimizeOptions)",
+      "api_pattern": "new OptimizeOptions() + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Optimizer().Process()",
+      "result_collection_count": 1,
+      "output_exists": true,
+      "output_header_valid": true,
+      "output_bytes": 56521,
+      "status": "PASS",
+      "notes": "56521 bytes from 28837 byte input — output is ~2x input (evaluation mode overhead; in licensed mode would be smaller)"
+    },
+    {
+      "test": "TextExtractor.Process(TextExtractorOptions)",
+      "api_pattern": "new TextExtractorOptions() + AddInput(FileDataSource) [NO AddOutput] + new TextExtractor().Process()",
+      "no_add_output": true,
+      "result_collection_count": 1,
+      "result_is_string": true,
+      "extracted_text_contains_known": true,
+      "extracted_text_preview": "Hello LowCode PDF\r\nEvaluation Only. Created with Aspose.PDF. Copyright 2002-2026",
+      "status": "PASS",
+      "notes": "Known text 'Hello LowCode PDF' found at start of extraction. Evaluation watermark text also present — expected in unlicensed mode."
+    }
+  ],
+  "key_findings": [
+    {
+      "finding": "API_CORRECTION_ADD_OUTPUT",
+      "severity": "HIGH",
+      "description": "AddOutput() takes FileDataSource (IDataSource), NOT FileSaveTarget. Prior sprint documentation was incorrect.",
+      "impact": "All LLM code generation rules and code templates must be updated. FileSaveTarget is unusable in this context."
+    },
+    {
+      "finding": "SPLITTER_OUTPUT_NAMING",
+      "severity": "MEDIUM",
+      "description": "SplitOptions.AddOutput does not expand format strings like {0}. The literal filename is used. Splitter produces a single output file.",
+      "impact": "LLM must use a simple output filename (e.g., 'output.pdf') for Splitter, not a format string."
+    },
+    {
+      "finding": "RESULT_CONTAINER_API",
+      "severity": "MEDIUM",
+      "description": "ResultContainer.ResultCollection (not OperationResult), no IsSuccess. Check Count > 0 for success.",
+      "impact": "Validator and LLM code templates must use ResultCollection."
+    },
+    {
+      "finding": "EVALUATION_WATERMARK",
+      "severity": "LOW",
+      "description": "Unlicensed API adds 'Evaluation Only. Created with Aspose.PDF.' text. TextExtractor captures this. Validation must accept the known text at any position in the extracted content.",
+      "impact": "TextExtractor validation: use Contains() not Equals() for text matching."
+    },
+    {
+      "finding": "ALL_FIXTURES_VALID",
+      "severity": "INFO",
+      "description": "All 4 programmatic fixture strategies produce valid PDFs. The Aspose.Pdf.Document() API works without a license for simple content.",
+      "impact": "Fixture strategy is confirmed viable. No external fixture files needed."
+    }
+  ],
+  "phase3_conclusion": "ALL_PASS. All 4 fixture strategies validated. All 4 pilot API patterns confirmed working with corrected API signatures. Critical API corrections documented. Cleared to proceed to Phase 4 strategy definition.",
+  "cleared_for_phase4": true
+}

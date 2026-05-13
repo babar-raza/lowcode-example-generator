@@ -1,0 +1,16 @@
+{
+  "total_failures": 1,
+  "classification_summary": {
+    "unknown_runtime_failure": 1
+  },
+  "classifications": [
+    {
+      "scenario_id": "pdf-splitter",
+      "exit_code": 1,
+      "classification": "unknown_runtime_failure",
+      "detail": "Input file not found: input.docx",
+      "actionable": false,
+      "recommendation": "Investigate runtime output manually."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "artifact_type": "r3-pdf-optimizer-pr4-readiness-note",
+  "sprint": "Sprint R3 — PDF PR #3 Publication",
+  "date": "2026-05-08",
+  "phase": "Phase 9 — Optimizer PR #4 Readiness Note",
+
+  "optimizer_current_state": {
+    "first_pass_run_id": "pilot-pdf-20260508-155520",
+    "first_pass_date": "2026-05-08",
+    "consecutive_passes": 1,
+    "verdict_in_first_pass": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+    "build_status": "PASS",
+    "run_status": "PASS",
+    "reviewer_status": "PASS",
+    "code_pattern": "OptimizeOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Optimizer().Process(options)",
+    "generated_code_path": "workspace/runs/pilot-pdf-20260508-155520/generated/pdf/pdf-optimizer/Program.cs",
+    "no_datasources_namespace": true,
+    "no_plugin_options": true,
+    "no_file_copy": true
+  },
+
+  "pr4_prerequisites": {
+    "second_consecutive_pass_required": true,
+    "second_pass_policy_reason": "Prior policy for Splitter required 2 consecutive passes before live PR. Same policy applies to Optimizer for reliability. Optimizer is a first-pass-only result.",
+    "dry_run_package_assembly_required": true,
+    "dry_run_package_target_path": "workspace/pr-dry-run/pdf-optimizer/",
+    "approve_live_pr_required": true,
+    "approve_merge_pr_required": true,
+    "post_merge_verification_required": true
+  },
+
+  "taskcards_already_closed": [
+    "followup-pdf-optimizer-options-class — CLOSED_VERIFIED (Sprint R2)",
+    "followup-pdf-optimizer-llm-rerun — CLOSED_VERIFIED (Sprint R2)",
+    "followup-pdf-optimizer-repair-constraint-injection — CLOSED_VERIFIED (Sprint R2)"
+  ],
+
+  "what_remains_before_pr4": [
+    "1. Run PDF pilot again to achieve 2nd consecutive Optimizer PASS",
+    "2. Assemble dry-run PR package for Optimizer at workspace/pr-dry-run/pdf-optimizer/",
+    "3. Validate package: dotnet build + dotnet run",
+    "4. Human provides APPROVE_LIVE_PR",
+    "5. Create live PR#4 with Optimizer example only",
+    "6. Human provides APPROVE_MERGE_PR",
+    "7. Merge PR#4",
+    "8. Post-merge clean checkout validation"
+  ],
+
+  "recommended_rerun_command": "PYTHONPATH=src EXAMPLE_REVIEWER_PATH=C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer GPT_OSS_ENDPOINT=... GPT_OSS_API_KEY=... GPT_OSS_MODEL=... .venv/Scripts/python.exe -m plugin_examples run --family pdf --tier 5 --promote-latest",
+
+  "pr4_scope": ["Optimizer"],
+  "pr4_blocked_by": "Second consecutive PASS not yet achieved (only 1 pass so far)",
+  "pr4_note": "No action needed in Sprint R3. PR#4 is a Sprint R4 task after Optimizer 2nd PASS confirmed."
+}

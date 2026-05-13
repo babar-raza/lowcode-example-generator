@@ -1,0 +1,106 @@
+{
+  "sprint": "Example Lifecycle, Backlog Backfill, and Reviewer Feedback Loop Hardening",
+  "date": "2026-05-06",
+  "phase": "Phase 5 — Reviewer feedback loop gap analysis",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What reviewer interface exists today?",
+      "answer": "CLI subprocess to example-reviewer repo. Command: python -m src.cli.main --json --safe-workspace compile-verify --family {family}. Located in src/plugin_examples/verifier_bridge/bridge.py."
+    },
+    {
+      "id": 2,
+      "question": "Does reviewer return per-example structured feedback?",
+      "answer": "NO. ReviewerResult contains: available (bool), passed (bool), error (str|None), details (dict|None). The details field is raw stdout (JSON-parsed if valid, else truncated string). No per-example findings."
+    },
+    {
+      "id": 3,
+      "question": "Does it return only ReviewerResult(passed=bool)?",
+      "answer": "Effectively YES. The passed field is the only actionable signal. details captures raw output but it is never parsed for per-example errors."
+    },
+    {
+      "id": 4,
+      "question": "Where is reviewer called?",
+      "answer": "Stage 16 of 17: _stage_reviewer() in runner.py:884-932. Runs after validation, before publishing."
+    },
+    {
+      "id": 5,
+      "question": "Can reviewer output be mapped to scenario_id/example_name?",
+      "answer": "NOT CURRENTLY. The reviewer runs against the entire workspace, not per-example. Output is not tagged with scenario IDs."
+    },
+    {
+      "id": 6,
+      "question": "Can reviewer feedback be fed into repair prompt today?",
+      "answer": "NO. The build-repair loop (runner.py:680-726) feeds compiler errors to LLM. The runtime-repair loop (runner.py:728-787) feeds runtime errors. There is no reviewer-repair loop."
+    },
+    {
+      "id": 7,
+      "question": "What schema change is needed?",
+      "answer": "ReviewerResult.details needs structured findings: list of {scenario_id, severity, category, file, line_or_symbol, message, recommendation}. The bridge must parse reviewer JSON output into this schema."
+    },
+    {
+      "id": 8,
+      "question": "What changes are required in the generator to use reviewer feedback?",
+      "answer": "1. Add reviewer-repair loop in runner.py after _stage_reviewer(). 2. Extract per-example findings from ReviewerResult.details. 3. Feed findings into LLM repair prompt (similar to build-repair). 4. Update lifecycle record with reviewer_repair_attempts. 5. Re-run reviewer after repair."
+    },
+    {
+      "id": 9,
+      "question": "What taskcard should track this?",
+      "answer": "followup-example-reviewer-feedback-loop (NEW)"
+    }
+  ],
+  "current_state": {
+    "reviewer_available": false,
+    "reviewer_env_var": "EXAMPLE_REVIEWER_PATH",
+    "reviewer_installed_during_canonical_run": false,
+    "reviewer_result_type": "pass_fail_only",
+    "per_example_feedback": false,
+    "feedback_driven_repair": false,
+    "reviewer_repair_loop_exists": false
+  },
+  "required_changes": [
+    {
+      "id": "RC-1",
+      "component": "ReviewerResult schema",
+      "change": "Add structured findings field with per-example severity/file/message",
+      "priority": "high"
+    },
+    {
+      "id": "RC-2",
+      "component": "bridge.py",
+      "change": "Parse reviewer JSON output into structured findings",
+      "priority": "high"
+    },
+    {
+      "id": "RC-3",
+      "component": "runner.py",
+      "change": "Add reviewer-repair loop (similar to build-repair) after _stage_reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "RC-4",
+      "component": "ExampleLifecycleRecord",
+      "change": "Add reviewer_repair_attempts field",
+      "priority": "medium"
+    },
+    {
+      "id": "RC-5",
+      "component": "Backlog entries",
+      "change": "Include reviewer findings in backlog_root_cause when reviewer fails",
+      "priority": "low"
+    }
+  ],
+  "taskcard": {
+    "id": "followup-example-reviewer-feedback-loop",
+    "title": "Implement structured reviewer feedback extraction and reviewer-driven repair loop",
+    "status": "OPEN",
+    "priority": "medium",
+    "acceptance_criteria": [
+      "Reviewer returns per-example structured findings (severity, file, line_or_symbol, message)",
+      "Generator repair prompt can consume reviewer findings",
+      "Lifecycle records reviewer repair attempts",
+      "Backlog records reviewer feedback detail if still failing"
+    ]
+  },
+  "verdict": "REVIEWER_FEEDBACK_LOOP_NOT_IMPLEMENTED"
+}

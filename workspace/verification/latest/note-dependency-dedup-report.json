@@ -1,0 +1,16 @@
+{
+  "family": "note",
+  "total_input_paths": 5,
+  "kept_count": 5,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-note-20260509-113847\\extracted\\note\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-note-20260509-113847\\extracted\\note\\resolved-libs\\System.Security.Permissions.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-note-20260509-113847\\extracted\\note\\resolved-libs\\System.Security.AccessControl.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-note-20260509-113847\\extracted\\note\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-note-20260509-113847\\extracted\\note\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

@@ -1,0 +1,39 @@
+{
+  "artifact_id": "lowcode-execution-handoff",
+  "created": "2026-05-09",
+  "sprint": "R0",
+
+  "complete": [
+    "Cells 9/9 published (SHA f6e5515c)",
+    "Words 4/4 pilot published (SHA b66fb43)",
+    "PDF PR#1 merged (SHA a9f9e254)",
+    "PDF PR#3 package validated (workspace/pr-dry-run/pdf-controlled-pilot-wave1/)",
+    "PDF Optimizer 1st PASS (pilot-pdf-20260508-155520)",
+    "R2 constraint injection fix (code_generator.py)",
+    "Denominator model (cells/words/pdf)",
+    "1168 tests passing"
+  ],
+
+  "blocked": {
+    "pdf_pr3_live": "APPROVE_LIVE_PR not set",
+    "pdf_pr3_merge": "APPROVE_MERGE_PR not set",
+    "pdf_optimizer_pr4": "2nd PASS needed + approval tokens",
+    "reviewer_gate": "EXAMPLE_REVIEWER_PATH not set",
+    "all_family_discovery": "~20 families have no YAML config"
+  },
+
+  "next_parallel_work": {
+    "D_safe_repairs": "Fix release-status PDF default; monthly workflow extension",
+    "E_yaml_creation": "R1: Create discovery_only YAML for 20 Group C families",
+    "F_email_slides": "R2: Email/Slides blocker investigation",
+    "C_taskcards": "Phase C: Add 18 new taskcards to matrix"
+  },
+
+  "non_negotiable": [
+    "No live PR without APPROVE_LIVE_PR",
+    "No live merge without APPROVE_MERGE_PR",
+    "No silent drop of any planned runnable scenario",
+    "No weakening of tests",
+    "Stop on HTTP 403 from GitHub"
+  ]
+}

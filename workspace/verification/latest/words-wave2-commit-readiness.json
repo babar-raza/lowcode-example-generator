@@ -1,0 +1,44 @@
+{
+  "artifact_type": "words_wave2_commit_readiness",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "lane": 2,
+  "commit_ready": true,
+  "config_changes": {
+    "words.yml": {
+      "allowed_types": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer"],
+      "allowed_count": 6,
+      "per_type_constraints_added": ["Merger", "Comparer"],
+      "preferred_methods_added": ["Merger: Merge", "Comparer: Compare"],
+      "comparer_input_creation_lines_added": true
+    },
+    "words.json": {
+      "allowed_pilot_count": 6,
+      "allowed_pilot_types_count": 6,
+      "runnable_scenarios": 6,
+      "excluded_count": 19,
+      "coverage_pct_of_pilot_runnable": 66.67
+    }
+  },
+  "code_patterns_verified": {
+    "Merger": "Merger.Merge(outputFile, new[] { inputFile1, inputFile2 }) — static, correct",
+    "Comparer": "Comparer.Compare(inputPath1, inputPath2, outputPath, \"DemoAuthor\", DateTime.UtcNow) — static, correct",
+    "no_forbidden_patterns": true
+  },
+  "pair_fixtures_verified": {
+    "Merger": "2 programmatic DOCX via Document+DocumentBuilder (CreateDocument helper)",
+    "Comparer": "2 programmatic DOCX with different content ('first document' vs 'second document with different content')"
+  },
+  "regression_check": {
+    "words-converter": "PASS",
+    "words-watermarker": "PASS",
+    "words-splitter": "PASS",
+    "words-replacer": "PASS"
+  },
+  "release_scope_status": "PARTIAL_CANARY",
+  "family_coverage_status": "PARTIAL_FAMILY_COVERAGE",
+  "is_FAMILY_COMPLETE": false,
+  "published": 4,
+  "pilot_allowed": 6,
+  "pr_dry_run_ready": 2,
+  "note": "Wave 2 adds Merger + Comparer at PR_DRY_RUN_READY. Next action: APPROVE_LIVE_PR."
+}

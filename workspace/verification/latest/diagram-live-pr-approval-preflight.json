@@ -1,0 +1,22 @@
+{
+  "artifact": "diagram-live-pr-approval-preflight",
+  "timestamp": "2026-05-11T18:30:00Z",
+  "branch": "main",
+  "commit": "16c901272021e12a19afe3e73c69e176d7f49b78",
+  "python_version": "3.13.2",
+  "dotnet_version": "9.0.200",
+  "env_gates": {
+    "GITHUB_TOKEN": "SET",
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "approval_match": {
+    "APPROVE_LIVE_PR": false,
+    "APPROVE_MERGE_PR": false
+  },
+  "prior_evidence_valid": true,
+  "package_revalidation": "PASSED",
+  "permission_probe": "PUSH_READY",
+  "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is not set. Must be APPROVE_LIVE_PR.",
+  "verdict": "BLOCKED_APPROVAL_GATE_MISSING"
+}

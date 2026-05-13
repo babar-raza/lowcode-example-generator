@@ -1,0 +1,21 @@
+{
+  "family": "slides",
+  "total_input_paths": 10,
+  "kept_count": 10,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Text.Json.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\Microsoft.Bcl.AsyncInterfaces.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Text.Encodings.Web.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Buffers.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Memory.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Numerics.Vectors.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-slides-20260509-122053\\extracted\\slides\\resolved-libs\\System.Threading.Tasks.Extensions.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

@@ -1,0 +1,59 @@
+{
+  "allowlist_version": "1.0",
+  "sprint": "Words Controlled Pilot Sprint",
+  "sprint_date": "2026-05-01",
+  "family": "words",
+  "config_source": "pipeline/configs/families/words.yml",
+  "allowed_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+  "preferred_methods_per_type": {
+    "Converter": "Convert",
+    "Watermarker": "SetText",
+    "Splitter": "ExtractPages",
+    "Replacer": "Replace"
+  },
+  "approved_scenarios": [
+    {
+      "scenario_id": "WORDS-001",
+      "type": "Converter",
+      "primary_method": "Convert",
+      "output_format": ".pdf",
+      "input_strategy": "programmatic_input",
+      "approved": true
+    },
+    {
+      "scenario_id": "WORDS-002",
+      "type": "Watermarker",
+      "primary_method": "SetText",
+      "output_format": ".docx",
+      "input_strategy": "programmatic_input",
+      "approved": true
+    },
+    {
+      "scenario_id": "WORDS-003",
+      "type": "Splitter",
+      "primary_method": "ExtractPages",
+      "output_format": ".docx",
+      "input_strategy": "programmatic_input",
+      "approved": true
+    },
+    {
+      "scenario_id": "WORDS-004",
+      "type": "Replacer",
+      "primary_method": "Replace",
+      "output_format": ".docx",
+      "input_strategy": "programmatic_input",
+      "approved": true
+    }
+  ],
+  "blocked_scenarios": [
+    {"scenario_id": "WORDS-005", "type": "Splitter", "method": "Split", "blocked_reason": "needs_options_strategy: SplitCriteria enum not in catalog"},
+    {"scenario_id": "WORDS-006", "type": "Comparer", "method": "Compare", "blocked_reason": "needs_fixture_strategy: requires 2+ paired fixture files"},
+    {"scenario_id": "WORDS-007", "type": "Merger", "method": "Merge", "blocked_reason": "needs_fixture_strategy: requires 2+ paired fixture files"},
+    {"scenario_id": "WORDS-008", "type": "MailMerger", "method": "Execute", "blocked_reason": "blocked_unclear_semantics: needs template with documented merge field names"},
+    {"scenario_id": "WORDS-009", "type": "ReportBuilder", "method": "BuildReport", "blocked_reason": "blocked_unclear_semantics: needs data source strategy"},
+    {"scenario_id": "WORDS-010", "type": "Processor", "method": "Process", "blocked_reason": "needs_options_strategy: ProcessOptions required"}
+  ],
+  "enforcement_mechanism": "blocked_pilot_not_in_scope in scenario planner (planner.py)",
+  "enforcement_verified": true,
+  "planner_blocked_count": 21
+}

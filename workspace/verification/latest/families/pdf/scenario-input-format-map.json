@@ -1,0 +1,44 @@
+{
+  "scenarios": [
+    {
+      "scenario_id": "pdf-merger",
+      "workflow_type": "Merger",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Merger",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "workflow_type": "Optimizer",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Optimizer",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "workflow_type": "Splitter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Splitter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "workflow_type": "TextExtractor",
+      "selected_input_format": ".pdf",
+      "selected_output_format": "",
+      "reason": "Inferred from type name TextExtractor",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    }
+  ]
+}

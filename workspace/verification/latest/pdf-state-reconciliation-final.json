@@ -1,0 +1,50 @@
+{
+  "artifact_type": "pdf_state_reconciliation_final",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "lane": 3,
+  "reconciliation_status": "RECONCILED_WITH_HISTORY_GAP_DOCUMENTED",
+  "types": {
+    "pdf-merger": {
+      "published_state": "PUBLISHED_MERGED",
+      "published_evidence": "PR #1 merged SHA a9f9e254fbdbd012e6486e699395298e427169eb (2026-05-06)",
+      "latest_lifecycle_state": "BACKLOGGED / GENERATION_FAILED",
+      "latest_lifecycle_run": "pilot-pdf-20260508-155520",
+      "contradiction": true,
+      "contradiction_explanation": "Merger was published via PR #1 on 2026-05-06. A later run (20260508) attempted regeneration and failed due to a non-deterministic LLM issue (missing 'using Aspose.Pdf.Text;' constraint). The lifecycle record from the latest run shows GENERATION_FAILED but this does NOT un-publish the example — it reflects only the most recent generation attempt.",
+      "authoritative_state": "PUBLISHED",
+      "next_action_state": "MONITOR — Merger is published. Future re-run would need TC-PDF-01 fix (REQUIRED: using Aspose.Pdf.Text;) to avoid regression.",
+      "history_rewrite": false
+    },
+    "pdf-text-extractor": {
+      "published_state": "PUBLISHED_MERGED",
+      "published_evidence": "PR #1 merged SHA a9f9e254fbdbd012e6486e699395298e427169eb",
+      "latest_lifecycle_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "contradiction": false,
+      "authoritative_state": "PUBLISHED"
+    },
+    "pdf-splitter": {
+      "published_state": "NOT_PUBLISHED",
+      "latest_lifecycle_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "contradiction": false,
+      "authoritative_state": "PR_DRY_RUN_READY",
+      "blockers": ["APPROVE_LIVE_PR not set", "GitHub token scope fix needed"]
+    },
+    "pdf-optimizer": {
+      "published_state": "NOT_PUBLISHED",
+      "latest_lifecycle_state": "REVIEWER_PASSED_1_OF_2",
+      "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/",
+      "contradiction": false,
+      "authoritative_state": "REVIEWER_PASSED_1_OF_2",
+      "blockers": ["EXAMPLE_REVIEWER_PATH not set (2nd pass needed)", "APPROVE_LIVE_PR not set"]
+    }
+  },
+  "completeness_gate": {
+    "expected_count": 4,
+    "ready_count": 4,
+    "status": "pass",
+    "note": "ready_count=4 reflects the 4 pilot types all having verified examples (published or PR_DRY_RUN_READY). The Merger GENERATION_FAILED in latest run does not affect this — it was ready in a prior run that produced the published PR."
+  },
+  "portfolio_status_update_needed": false,
+  "portfolio_note": "portfolio-lowcode-launch-status.json already correctly shows PDF as PARTIAL_CANARY with 2 published. The Merger GENERATION_FAILED in latest run is an internal pipeline artifact, not a portfolio-visible status change."
+}

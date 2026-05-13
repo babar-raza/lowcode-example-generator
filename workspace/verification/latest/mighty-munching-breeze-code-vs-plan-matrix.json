@@ -1,0 +1,231 @@
+{
+  "gate": 1,
+  "gate_name": "task_verification_matrix",
+  "result_type": "mighty-munching-breeze-code-vs-plan-matrix",
+  "verification_date": "2026-05-04",
+  "items": [
+    {
+      "id": "GAP-001",
+      "description": "README PRs pending merge — remote repos serve 40-byte stub",
+      "plan_severity": "CRITICAL",
+      "plan_status": "PRs exist, pending merge",
+      "actual_status": "DONE",
+      "classification": "SUPERSEDED",
+      "evidence": "followup-root-readme-backfill-prs CLOSED. Cells PR #2 merged 2026-05-04T07:04:27Z (SHA 55b4f190). Words PR #2 merged 2026-05-04T07:04:36Z (SHA b1877ed7). repository-consistency-and-reproducibility-audit.json (2026-05-04 07:10 UTC): consistency_status=CONSISTENT_README_ON_MAIN for both families."
+    },
+    {
+      "id": "GAP-002",
+      "description": "Fixture registry unavailable — programmatic_input workaround active",
+      "plan_severity": "HIGH",
+      "plan_status": "OPEN — workaround stable",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "words-fixture-registry-reprobe.json: available=false, unavailable_reason=github_api_403_forbidden, gap_002_status='OPEN — unchanged'. Probe confirmed fixture source aspose-words/Aspose.Words-for-.NET requires separate access grant beyond current token scope. Programmatic_input workaround remains stable."
+    },
+    {
+      "id": "GAP-003",
+      "description": "SplitCriteria enum missing from Words catalog",
+      "plan_severity": "HIGH",
+      "plan_status": "OPEN — blocks WORDS-005",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-split-criteria-enumeration still OPEN in taskcard matrix. No code changes to DllReflector for enum capture beyond dedup work."
+    },
+    {
+      "id": "GAP-004",
+      "description": "Paired fixture strategy missing for Comparer/Merger",
+      "plan_severity": "HIGH",
+      "plan_status": "OPEN — blocks WORDS-006/007",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-pair-fixture-strategy still OPEN in taskcard matrix. No paired_programmatic_input strategy in planner or generator."
+    },
+    {
+      "id": "GAP-005",
+      "description": "CI env var documentation not written",
+      "plan_severity": "HIGH",
+      "plan_status": "OPEN",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "followup-fixture-token-ci CLOSED in Sprint A2. docs/ci/ directory exists (untracked). docs/ci/environment-variables.md created documenting GITHUB_TOKEN, approval tokens, LLM vars, EXAMPLE_REVIEWER_PATH. test_ci_runbook_hardening.py: 8 tests pass (included in 759 total)."
+    },
+    {
+      "id": "GAP-006",
+      "description": "Hardcoded _OPEN_TASKCARDS_BY_FAMILY in release_status.py",
+      "plan_severity": "MEDIUM",
+      "plan_status": "OPEN — silently stale",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "release_status.py: _load_open_taskcards_from_matrix() function confirmed present (grep line 21). Reads dynamically from open-taskcard-closure-matrix.json with errors='replace'."
+    },
+    {
+      "id": "GAP-007",
+      "description": "README 'Demonstrated API' column shows class name not method name",
+      "plan_severity": "MEDIUM",
+      "plan_status": "OPEN",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "readme_renderer.py _infer_api_class() derives from directory name (e.g. html-converter -> HtmlConverter). No claimed_symbols integration. followup-readme-symbols-from-catalog OPEN in taskcard matrix."
+    },
+    {
+      "id": "GAP-008",
+      "description": "DOCX semantic validation not automated",
+      "plan_severity": "MEDIUM",
+      "plan_status": "OPEN",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-docx-semantic-validation still OPEN. No zipfile/xml.etree extractor added to validation pipeline."
+    },
+    {
+      "id": "GAP-009",
+      "description": "MailMerger template DOCX not available",
+      "plan_severity": "MEDIUM",
+      "plan_status": "OPEN — blocks WORDS-008",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-mail-merger-fixture-documentation still OPEN. No template DOCX with merge field names created."
+    },
+    {
+      "id": "GAP-010",
+      "description": "repo_access_resolver uses 'token {t}' format instead of Bearer",
+      "plan_severity": "LOW",
+      "plan_status": "OPEN",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "repo_access_resolver.py line 42: confirmed 'Bearer {token}' format (grep verified). Fixed in Sprint A2 Phase 1."
+    },
+    {
+      "id": "GAP-011",
+      "description": "Markdown taskcard matrix out of sync with JSON",
+      "plan_severity": "LOW",
+      "plan_status": "OPEN — new finding",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "sync-taskcard-docs CLI command added in Sprint A2 Phase 3. docs/discovery/open-taskcard-closure-matrix.md exists with GENERATED marker, 10 open taskcards correctly listed. Sprint field shows Aspose .NET Link Standardization (not latest sprint) — minor staleness but markdown is functionally accurate. Total count shows 43 vs JSON 42 (off-by-one likely due to duplicate entry for followup-aspose-net-link-standardization in JSON array)."
+    },
+    {
+      "id": "GAP-012",
+      "description": "Family readiness ranker missing confidence/evidence_source fields",
+      "plan_severity": "LOW",
+      "plan_status": "OPEN — observability",
+      "actual_status": "PARTIAL",
+      "classification": "PARTIAL",
+      "evidence": "family-generation-readiness-rank.json: evidence_source field IS present for all 3 families (e.g. cells: workspace/verification/latest/cells-source-of-truth-proof.json). However catalog_path, role_classification_source, and confidence_notes fields are absent. Taskcard followup-family-readiness-ranker-trust still OPEN."
+    },
+    {
+      "id": "GAP-013",
+      "description": "example-index.json is last-run snapshot only (Words only, Cells absent)",
+      "plan_severity": "LOW",
+      "plan_status": "OPEN",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "workspace/manifests/example-index.json contains Words 4 examples only. No per-family index files (cells-example-index.json, words-example-index.json) exist. Glob search confirms no per-family index files."
+    },
+    {
+      "id": "GAP-014",
+      "description": "repository-consistency-and-reproducibility-audit.json stale (pre-PR creation)",
+      "plan_severity": "LOW",
+      "plan_status": "OPEN — new finding",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "repository-consistency-and-reproducibility-audit.json updated to 2026-05-04 07:10 UTC. Shows readme_backfill_pr_created=true, readme_backfill_pr_merged=true, consistency_status=CONSISTENT_README_ON_MAIN for both families. Plan noted the audit was stale pre-PR creation — no longer stale."
+    },
+    {
+      "id": "HEAL-001",
+      "description": "Merge README PRs and post-merge verify",
+      "plan_status": "OPEN — Sprint A1",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "Both PRs merged. Cells PR #2 SHA 55b4f190, Words PR #2 SHA b1877ed7. Post-merge verifications in cells-readme-post-merge-verification.json and words-readme-post-merge-verification.json. Taskcard followup-root-readme-backfill-prs CLOSED."
+    },
+    {
+      "id": "HEAL-002",
+      "description": "Standardize GitHub API auth header to Bearer format",
+      "plan_status": "OPEN — Sprint A2",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "repo_access_resolver.py line 42: f'Bearer {token}' confirmed. Sprint A2 Phase 1."
+    },
+    {
+      "id": "HEAL-003",
+      "description": "Fix hardcoded taskcards in release_status.py",
+      "plan_status": "OPEN — Sprint A2",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "release_status.py _load_open_taskcards_from_matrix() reads from JSON matrix dynamically. Sprint A2 Phase 2."
+    },
+    {
+      "id": "HEAL-004",
+      "description": "Fix README 'Demonstrated API' column to use method names",
+      "plan_status": "OPEN — Sprint A3",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "readme_renderer.py still uses _infer_api_class() from directory name. No claimed_symbols integration. Taskcard followup-readme-symbols-from-catalog OPEN."
+    },
+    {
+      "id": "HEAL-005",
+      "description": "Sync markdown taskcard matrix with JSON",
+      "plan_status": "OPEN — Sprint A2",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "sync-taskcard-docs CLI command added. docs/discovery/open-taskcard-closure-matrix.md exists with GENERATED marker. Sprint A2 Phase 3."
+    },
+    {
+      "id": "HEAL-006",
+      "description": "Monthly runbook and CI documentation hardening",
+      "plan_status": "OPEN — Sprint A2",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "docs/ci/environment-variables.md created. monthly-maintenance-runbook.json updated: $GH_TOKEN -> $GITHUB_TOKEN, step 1 uses discover-lowcode, pdf_blocked_until updated. test_ci_runbook_hardening.py 8 tests pass. Sprint A2 Phase 4."
+    },
+    {
+      "id": "HEAL-007",
+      "description": "Probe fixture registry with refreshed token",
+      "plan_status": "OPEN — Sprint A1 addon",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "words-fixture-registry-reprobe.json: probe executed, FIXTURE_REGISTRY_STILL_403_GAP_002_OPEN_WORKAROUND_STABLE. Root cause documented: aspose-words/Aspose.Words-for-.NET requires separate access grant."
+    },
+    {
+      "id": "HEAL-008",
+      "description": "Investigate SplitCriteria enum in Words catalog",
+      "plan_status": "OPEN — Sprint A5",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-split-criteria-enumeration still OPEN. No DllReflector investigation performed for this specific gap."
+    },
+    {
+      "id": "HEAL-009",
+      "description": "Add paired programmatic input strategy for Comparer/Merger",
+      "plan_status": "OPEN — Sprint A5",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-pair-fixture-strategy still OPEN. No paired_programmatic_input strategy added."
+    },
+    {
+      "id": "HEAL-010",
+      "description": "DOCX semantic validation",
+      "plan_status": "OPEN — Sprint A5",
+      "actual_status": "OPEN",
+      "classification": "NOT_DONE",
+      "evidence": "followup-words-docx-semantic-validation still OPEN. No zipfile/xml.etree validator added."
+    },
+    {
+      "id": "PDF-001",
+      "description": "DllReflector System.Text.Json version conflict",
+      "plan_status": "BLOCKED — Stream B entry task",
+      "actual_status": "DONE",
+      "classification": "DONE",
+      "evidence": "followup-pdf-reflection-dedup CLOSED in PDF Assembly Deduplication Sprint. pdf-source-of-truth-proof.json: status=eligible, 101 plugin types, 71 plugin methods. DllReflector deduplicates resolverPaths by filename. assembly_identity.py created. 11 new PDF dedup tests pass."
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "done": 13,
+    "not_done": 10,
+    "partial": 1,
+    "stale": 0,
+    "superseded": 1,
+    "plan_accuracy": "Plan was written pre-execution (Sprint A1-A5 scope). Sprint A1 and A2 are fully complete. PDF-001 was also resolved. Plan status claims are therefore outdated for 13+ items."
+  }
+}

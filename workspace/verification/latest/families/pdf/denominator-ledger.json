@@ -1,0 +1,818 @@
+{
+  "family": "pdf",
+  "denominator_basis": "PILOT_ALLOWED",
+  "total_types": 101,
+  "ready_count": 4,
+  "blocked_count": 97,
+  "unknown_count": 0,
+  "entries": [
+    {
+      "type_name": "CompressOptions",
+      "full_name": "Aspose.Pdf.LowCode.CompressOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ConversionMode",
+      "full_name": "Aspose.Pdf.LowCode.ConversionMode",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "DataType",
+      "full_name": "Aspose.Pdf.LowCode.DataType",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "DecryptionOptions",
+      "full_name": "Aspose.Pdf.LowCode.DecryptionOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "DocConverter",
+      "full_name": "Aspose.Pdf.LowCode.DocConverter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "EncryptionOptions",
+      "full_name": "Aspose.Pdf.LowCode.EncryptionOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FileDataSource",
+      "full_name": "Aspose.Pdf.LowCode.FileDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FileResult",
+      "full_name": "Aspose.Pdf.LowCode.FileResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "result_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FileSaveTarget",
+      "full_name": "Aspose.Pdf.LowCode.FileSaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormCheckBoxFieldCreateOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormCheckBoxFieldSetOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormComboBoxFieldCreateOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormComboBoxFieldSetOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormEditor",
+      "full_name": "Aspose.Pdf.LowCode.FormEditor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormEditorAddOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormEditorAddOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormEditorOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormEditorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormEditorRemoveOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormEditorRemoveOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormEditorSetOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormEditorSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormExporter",
+      "full_name": "Aspose.Pdf.LowCode.FormExporter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormExporterOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormExporterOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormExporterToJsonOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormExporterToJsonOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormExporterValuesToCsvOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFieldCreateOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFieldOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFieldOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFieldSetOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFlattenAllFieldsOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFlattener",
+      "full_name": "Aspose.Pdf.LowCode.FormFlattener",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFlattenerOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenerOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormFlattenSelectedFieldsOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormImporter",
+      "full_name": "Aspose.Pdf.LowCode.FormImporter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormImporterJsonOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormJsonImportSource",
+      "full_name": "Aspose.Pdf.LowCode.FormJsonImportSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormRemoveAllFieldsOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormRemoveSelectedFieldsOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormTextBoxFieldCreateOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "FormTextBoxFieldSetOptions",
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Html",
+      "full_name": "Aspose.Pdf.LowCode.Html",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "HtmlToPdfOptions",
+      "full_name": "Aspose.Pdf.LowCode.HtmlToPdfOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "IDataSource",
+      "full_name": "Aspose.Pdf.LowCode.IDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ImageExtractor",
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ImageExtractorOptions",
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "IOperationResult",
+      "full_name": "Aspose.Pdf.LowCode.IOperationResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "IPlugin",
+      "full_name": "Aspose.Pdf.LowCode.IPlugin",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "IPluginOptions",
+      "full_name": "Aspose.Pdf.LowCode.IPluginOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ISaveTarget",
+      "full_name": "Aspose.Pdf.LowCode.ISaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Jpeg",
+      "full_name": "Aspose.Pdf.LowCode.Jpeg",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "JpegOptions",
+      "full_name": "Aspose.Pdf.LowCode.JpegOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MergeOptions",
+      "full_name": "Aspose.Pdf.LowCode.MergeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Merger",
+      "full_name": "Aspose.Pdf.LowCode.Merger",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "ObjectResult",
+      "full_name": "Aspose.Pdf.LowCode.ObjectResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "result_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Ofd",
+      "full_name": "Aspose.Pdf.LowCode.Ofd",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "OfdToPdfOptions",
+      "full_name": "Aspose.Pdf.LowCode.OfdToPdfOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "OptimizeOptions",
+      "full_name": "Aspose.Pdf.LowCode.OptimizeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Optimizer",
+      "full_name": "Aspose.Pdf.LowCode.Optimizer",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "OrganizerBaseOptions",
+      "full_name": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAConverter",
+      "full_name": "Aspose.Pdf.LowCode.PdfAConverter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAConvertOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfAConvertOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAOptionsBase",
+      "full_name": "Aspose.Pdf.LowCode.PdfAOptionsBase",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAStandardVersion",
+      "full_name": "Aspose.Pdf.LowCode.PdfAStandardVersion",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAValidateOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfAValidationResult",
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidationResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "result_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfConverterOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfConverterOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfExtractor",
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfExtractorOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfGeneratorOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfToDocOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfToDocOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfToHtmlOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfToHtmlOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfToImage",
+      "full_name": "Aspose.Pdf.LowCode.PdfToImage",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfToImageOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfToImageOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfToXlsOptions",
+      "full_name": "Aspose.Pdf.LowCode.PdfToXlsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Png",
+      "full_name": "Aspose.Pdf.LowCode.Png",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PngOptions",
+      "full_name": "Aspose.Pdf.LowCode.PngOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ResizeOptions",
+      "full_name": "Aspose.Pdf.LowCode.ResizeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ResultContainer",
+      "full_name": "Aspose.Pdf.LowCode.ResultContainer",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "RotateOptions",
+      "full_name": "Aspose.Pdf.LowCode.RotateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SaveFormat",
+      "full_name": "Aspose.Pdf.LowCode.SaveFormat",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Security",
+      "full_name": "Aspose.Pdf.LowCode.Security",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SelectField",
+      "full_name": "Aspose.Pdf.LowCode.SelectField",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Signature",
+      "full_name": "Aspose.Pdf.LowCode.Signature",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SignOptions",
+      "full_name": "Aspose.Pdf.LowCode.SignOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SplitOptions",
+      "full_name": "Aspose.Pdf.LowCode.SplitOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Splitter",
+      "full_name": "Aspose.Pdf.LowCode.Splitter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "StreamDataSource",
+      "full_name": "Aspose.Pdf.LowCode.StreamDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "StreamResult",
+      "full_name": "Aspose.Pdf.LowCode.StreamResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "result_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "StreamSaveTarget",
+      "full_name": "Aspose.Pdf.LowCode.StreamSaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "StringResult",
+      "full_name": "Aspose.Pdf.LowCode.StringResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "result_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TableBuilder",
+      "full_name": "Aspose.Pdf.LowCode.TableBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TableCellBuilder",
+      "full_name": "Aspose.Pdf.LowCode.TableCellBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TableGenerator",
+      "full_name": "Aspose.Pdf.LowCode.TableGenerator",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TableOptions",
+      "full_name": "Aspose.Pdf.LowCode.TableOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TableRowBuilder",
+      "full_name": "Aspose.Pdf.LowCode.TableRowBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TextExtractor",
+      "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "TextExtractorOptions",
+      "full_name": "Aspose.Pdf.LowCode.TextExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Tiff",
+      "full_name": "Aspose.Pdf.LowCode.Tiff",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "unknown",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TiffOptions",
+      "full_name": "Aspose.Pdf.LowCode.TiffOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Timestamp",
+      "full_name": "Aspose.Pdf.LowCode.Timestamp",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "utility",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TimestampOptions",
+      "full_name": "Aspose.Pdf.LowCode.TimestampOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TocGenerator",
+      "full_name": "Aspose.Pdf.LowCode.TocGenerator",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "TocOptions",
+      "full_name": "Aspose.Pdf.LowCode.TocOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "XlsConverter",
+      "full_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    }
+  ]
+}

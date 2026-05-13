@@ -1,0 +1,148 @@
+{
+  "artifact_type": "pdf-optimizer-fix-preflight-review",
+  "sprint": "PDF Optimizer Build-Repair Constraint Injection Fix",
+  "date": "2026-05-07",
+  "phase": "Phase 0 — Mandatory Referenced-Artifact Review Gate",
+
+  "artifact_review": [
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-tier5-preflight-review.json",
+      "status": "VERIFIED",
+      "notes": "Gate 0 PASS confirmed from prior sprint. All pre-run artifacts verified."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-tier5-env-preflight.json",
+      "status": "VERIFIED",
+      "notes": "GPT_OSS_ENDPOINT set, GPT_OSS_API_KEY set (25 chars, not logged), provider=llm_professionalize (approved), reviewer path exists."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-tier5-llm-run-result.json",
+      "status": "VERIFIED",
+      "notes": "run_id=pilot-pdf-20260507-110824. 4 attempted: Merger (generated_with_repair, 0 build repairs, PASS), Optimizer (generated_with_repair, 2 build repairs, pipeline PASS but agent SEMANTIC_FAIL), Splitter (generated_with_repair, 0 build repairs, PASS), TextExtractor (FAILED — generation). Timeout retry not triggered."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-splitter-optimizer-result-analysis.json",
+      "status": "VERIFIED",
+      "notes": "Optimizer semantic failure confirmed: code_actually_generated='File.Copy(inputPath, outputPath, overwrite: true)'. Root cause documented: build repair path does not re-inject PDF constraints. Splitter PASS confirmed with SplitOptions. TextExtractor regression documented."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-tier5-lifecycle-backlog-update.json",
+      "status": "VERIFIED",
+      "notes": "Lifecycle updated: Merger re-validated, TextExtractor regression, Splitter first success, Optimizer semantic fail. 2 new taskcards documented. Backlog v2.0.0 written."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-pr2-package-validation.json",
+      "status": "VERIFIED",
+      "notes": "Package at pdf-controlled-pilot-wave1/ contains merger + splitter only. Both build PASS. Optimizer and TextExtractor excluded with documented reasons."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-pr2-dry-run-summary.json",
+      "status": "VERIFIED",
+      "notes": "Publisher simulation PASS (against old package). Wave 1 package (merger+splitter) builds clean. Live PR SKIP — 4/4 gate not met."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-tier5-final-verification.json",
+      "status": "VERIFIED",
+      "notes": "compileall CLEAN, DllReflector Build PASS, pytest 996/996. Sprint summary confirmed."
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260507-110824/generated/pdf/pdf-optimizer/Program.cs",
+      "status": "VERIFIED",
+      "notes": "CONFIRMED: File.Copy(inputPath, outputPath, overwrite: true) with comment 'Simulate optimization by copying the file'. No OptimizeOptions, no Optimizer().Process(). This is the semantic failure code."
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260507-110824/generated/pdf/pdf-splitter/Program.cs",
+      "status": "VERIFIED",
+      "notes": "CONFIRMED: SplitOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Splitter().Process(options). Correct API. Publishable."
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260507-110824/generated/pdf/pdf-merger/Program.cs",
+      "status": "VERIFIED",
+      "notes": "CONFIRMED: MergeOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Merger().Process(options). Correct API."
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260507-110824/generated/pdf/pdf-text-extractor/",
+      "status": "MISSING — expected",
+      "notes": "TextExtractor generation failed — no directory exists. This is correct: generation_failed means no project was written. PR #1 published TextExtractor is unaffected."
+    },
+    {
+      "artifact": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "status": "VERIFIED",
+      "notes": "Directory exists with merger/ and splitter/ subdirs. Directory.Build.props, Directory.Packages.props, global.json present. Both examples build PASS (confirmed in prior sprint)."
+    },
+    {
+      "artifact": "src/plugin_examples/runner.py",
+      "status": "VERIFIED — GAP CONFIRMED",
+      "notes": "Build repair loop at lines 695-741. repair_prompt at lines 704-712 contains ONLY build errors + basic rules. Does NOT include: REQUIRED: options class is 'OptimizeOptions', REQUIRED: plugin class is 'Optimizer', REQUIRED: exact usage pattern, FORBIDDEN: File.Copy. This is the confirmed gap."
+    },
+    {
+      "artifact": "src/plugin_examples/generator/code_generator.py",
+      "status": "VERIFIED — GAPS IDENTIFIED",
+      "notes": "Generation repair at lines 79-92 re-injects PDF constraints from packet.constraints — CORRECT. _validate_code at lines 444-616 — does NOT check for File.Copy, does NOT require OptimizeOptions for Optimizer type, does NOT check that required plugin class is present. These are semantic validation gaps."
+    },
+    {
+      "artifact": "src/plugin_examples/generator/packet_builder.py",
+      "status": "VERIFIED",
+      "notes": "_pdf_type_hints at lines 133-167: Optimizer entry has OptimizeOptions, Optimizer class, exact 4-line code snippet. Constraints injected at lines 168-174. FORBIDDEN: File.Copy NOT in current constraint list — gap identified."
+    },
+    {
+      "artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json",
+      "status": "VERIFIED",
+      "notes": "4 records: Merger (pr_candidate), TextExtractor (backlogged/GENERATION_FAILED), Splitter (pr_candidate/first_success), Optimizer (backlogged/SEMANTIC_FAIL_NOT_PUBLISHABLE). Summary counts correct."
+    },
+    {
+      "artifact": "workspace/backlog/pdf/examples-backlog.json",
+      "status": "VERIFIED",
+      "notes": "v2.0.0. 3 entries: Splitter (resolved), Optimizer (open/new root cause), TextExtractor regression (new open entry). All have taskcard_id cross-links."
+    },
+    {
+      "artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "status": "VERIFIED",
+      "notes": "68 total / 50 closed / 18 open. followup-pdf-splitter-options-class CLOSED_VERIFIED. followup-pdf-optimizer-build-repair-constraint-injection OPEN (new). followup-pdf-text-extractor-static-validation-regression OPEN (new)."
+    },
+    {
+      "artifact": "docs/discovery/open-taskcard-closure-matrix.md",
+      "status": "VERIFIED — MINOR HEADER DISCREPANCY",
+      "notes": "Markdown shows Total: 68 | Open: 18 | Closed: 49 (header). But 68-18=50 closed, JSON says 50. The markdown header 'Closed: 49' is stale — the linter reverted this. Needs correction.",
+      "needs_fix": true,
+      "fix": "Update markdown header Closed count from 49 to 50"
+    },
+    {
+      "artifact": "src/plugin_examples/generator/runtime_feedback.py",
+      "status": "NOT_READ — pending Phase 1",
+      "notes": "Will read in Phase 1 analysis."
+    },
+    {
+      "artifact": "src/plugin_examples/llm_router/router.py",
+      "status": "VERIFIED (from prior sprint)",
+      "notes": "_LLM_RETRY_BACKOFF_SECONDS=[30,60], _LLM_MAX_RETRIES=2. Retry on Timeout/ConnectionError only. Provider policy enforced."
+    },
+    {
+      "artifact": "pipeline/configs/families/pdf.yml",
+      "status": "VERIFIED (from prior sprint)",
+      "notes": "allowed_types: [Merger, TextExtractor, Splitter, Optimizer]. provider_order: [llm_professionalize]. status: active."
+    },
+    {
+      "artifact": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "status": "STALE",
+      "notes": "Shows controlled_pilot_types: [Merger, TextExtractor] — pre-Wave-1 state. Splitter and Optimizer now in allowed_types. Documented as acceptable; will be updated after this sprint's retry run."
+    }
+  ],
+
+  "gate_0_checks": {
+    "optimizer_file_copy_confirmed": true,
+    "optimizer_file_copy_code": "File.Copy(inputPath, outputPath, overwrite: true) — comment says 'Simulate optimization by copying the file'",
+    "build_repair_gap_confirmed": true,
+    "build_repair_gap_location": "runner.py lines 704-712 — repair_prompt has no PDF constraints",
+    "splitter_success_verified": true,
+    "splitter_code_correct": "SplitOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Splitter().Process(options)",
+    "textextractor_regression_understood": true,
+    "textextractor_pr1_unaffected": true,
+    "taskcard_json_md_discrepancy": "MINOR — markdown header shows Closed:49, JSON shows 50. Fix required.",
+    "contradictions": [
+      "docs/discovery/open-taskcard-closure-matrix.md header shows Closed: 49 but JSON says 50 and math 68-18=50. Linter reverted our edit."
+    ]
+  },
+
+  "gate_0_verdict": "GATE_0_PASS_WITH_ONE_MINOR_FIX_REQUIRED — Optimizer semantic failure and build repair gap confirmed from source code. Splitter success verified. TextExtractor regression understood. One markdown header mismatch must be fixed."
+}

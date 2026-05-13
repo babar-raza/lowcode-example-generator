@@ -1,0 +1,73 @@
+{
+  "gate": "GATE_2_CONTRADICTION_AUDIT",
+  "date": "2026-05-04",
+  "verdict": "4_CONTRADICTIONS_FOUND_3_FIXED_1_REQUIRES_MATRIX_UPDATE",
+  "contradictions": {
+    "A_pr2_vs_pr3_mixed": {
+      "description": "PR #2 vs PR #3 evidence is mixed in the prior sprint closure",
+      "finding": "open-taskcard-closure-matrix.json references PR #2 as the README backfill. PR #2 was the initial README add (with wrong aspose.com links). PR #3 is the aspose.net link-standardization backfill. Prior closure did not clearly distinguish these.",
+      "pr_history": {
+        "PR1": "Example launch PR — merged, contains all examples",
+        "PR2": "First README backfill — merged (2026-05-04T07:04), introduced aspose.com URLs (wrong)",
+        "PR3": "Aspose.net link-standardization backfill — OPEN, corrects PR #2's wrong links"
+      },
+      "resolution": "Evidence files that reference PR #2 as 'current' are now classified as historical. New status artifact created (aspose-net-link-standardization-status.json).",
+      "status": "RESOLVED"
+    },
+    "B_pdf_canary_overclaimed": {
+      "description": "PDF canary status PDF_CANARY_DRY_RUN_PASSED_BLOCKED_BY_REFLECTION_DEDUP is stale and incorrect",
+      "finding": [
+        "1. followup-pdf-reflection-dedup is CLOSED in open-taskcard-closure-matrix.json — claiming 'blocked by reflection dedup' is stale",
+        "2. pdf-root-readme-audit.json shows passed=false due to central_repo_reference_found=true — not due to reflection dedup",
+        "3. The actual PDF blockers are: (a) central_repo_reference in pdf.yml pointing to aspose-plugins-examples-dotnet, (b) 4 open PDF taskcards (role-classification, options-aware, fixture-strategy, repo-target-mapping)"
+      ],
+      "correct_status": "PDF_CANARY_URL_POLICY_PASSED_FULL_AUDIT_BLOCKED",
+      "resolution": "pdf-net-link-canary.json updated with correct status. Detailed PDF canary review written.",
+      "status": "RESOLVED"
+    },
+    "C_taskcard_not_in_matrix": {
+      "description": "followup-aspose-net-link-standardization not in open-taskcard-closure-matrix.json",
+      "finding": "The taskcard was created in aspose-net-link-standardization-closure.json but not integrated into the canonical matrix",
+      "resolution": "Added to open-taskcard-closure-matrix.json in this sprint as CLOSED_VERIFIED",
+      "status": "RESOLVED"
+    },
+    "D_release_status_stale": {
+      "description": "release-status.json does not reflect PR #3 open state or link-standardization work",
+      "finding": "release-status.json shows last_pr_number=1 (example launch), all_merged=true — misleading when PR #3 is open and awaiting merge",
+      "resolution": "Created aspose-net-link-standardization-status.json as dedicated status artifact. release-status.json left as-is (it tracks example publishing status, not README link status — these are separate concerns).",
+      "status": "RESOLVED"
+    }
+  },
+  "evidence_classification": {
+    "current_closure_evidence": [
+      "aspose-net-link-hardening-preflight.json",
+      "aspose-net-link-hardening-contradiction-audit.json",
+      "aspose-net-link-hardening-source-review.json",
+      "aspose-net-link-hardening-negative-gate-results.json",
+      "aspose-net-link-hardening-targeted-tests.txt",
+      "aspose-net-link-hardening-full-tests.txt",
+      "aspose-net-link-hardening-test-summary.json",
+      "cells-root-readme-audit.json",
+      "words-root-readme-audit.json",
+      "aspose-link-occurrence-inventory-after.json",
+      "aspose-net-link-hardening-pr3-verification.json",
+      "aspose-net-link-hardening-pdf-canary-review.json",
+      "pdf-net-link-canary.json",
+      "aspose-net-link-standardization-status.json",
+      "aspose-net-link-hardening-evidence-manifest.json"
+    ],
+    "historical_only": [
+      "readme-pr2-post-merge-verification.json (PR #2 — superseded by PR #3)",
+      "cells-readme-backfill-pr-verification.json (PR #2 context)",
+      "words-readme-backfill-pr-verification.json (PR #2 context)",
+      "remote-root-readme-status.json (pre-PR #3, stale main branch status)",
+      "aspose-net-link-standardization-closure.json (prior sprint closure — replaced by hardening closure)",
+      "readme-backfill-pr-review-preflight.json (PR #2 context)"
+    ],
+    "unrelated": [
+      "pdf-source-of-truth-proof.json (PDF discovery, separate sprint)",
+      "pdf-reflection-failure-reproduction.json (reflection dedup, separate sprint — CLOSED)",
+      "pdf-dependency-dedup-report.json (dependency dedup, separate sprint)"
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "sprint": "PDF Controlled Pilot LLM E2E Dry-Run Trial",
+  "date": "2026-05-05",
+  "canonical_run_id": "pilot-pdf-20260505-143724",
+  "verdict": "PARTIAL_PR_DRY_RUN_READY",
+  "mode": "real_llm_dry_run",
+  "template_mode": false,
+  "skip_run": false,
+  "llm_provider": "llm_professionalize",
+  "package": "Aspose.PDF 26.4.0",
+
+  "planning": {
+    "total_planned": 4,
+    "ready_scenarios": 4,
+    "blocked_scenarios": 97,
+    "pilot_types": ["Merger", "Splitter", "Optimizer", "TextExtractor"],
+    "planning_gate": "PASSED"
+  },
+
+  "generation_results": [
+    {
+      "scenario_id": "pdf-merger",
+      "type": "Merger",
+      "options_class": "MergeOptions",
+      "build": "PASSED",
+      "run": "PASSED",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "repair_attempts": 2,
+      "notes": "Required 2 pre-validator repairs; final code correctly uses MergeOptions with AddInput/AddOutput"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "type": "TextExtractor",
+      "options_class": "TextExtractorOptions",
+      "build": "PASSED",
+      "run": "PASSED",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "repair_attempts": 1,
+      "notes": "Required 1 build repair; final code correctly uses TextExtractorOptions with StringResult"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "type": "Splitter",
+      "options_class": "SplitOptions",
+      "build": "FAILED",
+      "run": null,
+      "verdict": "BLOCKED_BUILD_FAILED",
+      "repair_attempts": 2,
+      "failure_reason": "LLM consistently generates 'new PluginOptions()' (abstract base) instead of 'new SplitOptions()'. Even with explicit class name constraint, LLM defaults to generic base class name.",
+      "follow_up": "followup-pdf-splitter-options-class"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "type": "Optimizer",
+      "options_class": "OptimizeOptions",
+      "build": "FAILED",
+      "run": null,
+      "verdict": "BLOCKED_BUILD_FAILED",
+      "failure_reason": "LLM timeout during repair. Initial code used wrong class name (OptimizerLoadOptions). Without successful repair, code remains uncompilable.",
+      "follow_up": "followup-pdf-optimizer-options-class"
+    }
+  ],
+
+  "summary": {
+    "total_generated": 4,
+    "build_passed": 2,
+    "runtime_passed": 2,
+    "pr_candidates": 2,
+    "pass_rate": "2/4 (50%)"
+  },
+
+  "infrastructure_assessment": {
+    "type_classifier_fixes": "VERIFIED — Optimizer (added to _WORKFLOW_VERBS) and TextExtractor (inherited Process handling) now correctly classified as OPERATION_FACADE",
+    "entrypoint_scorer_fix": "VERIFIED — OPERATION_FACADE types with 0 reflected methods + constructors are now runnable (handles TextExtractor IPlugin inheritance pattern)",
+    "input_format_fix": "VERIFIED — merger/splitter removed from _INPUT_FORMAT_MAP; PDF family defaults to .pdf (not .docx)",
+    "programmatic_input_fix": "VERIFIED — PDF family force-sets programmatic_input strategy regardless of _needs_fixture() result",
+    "packet_builder_constraints": "PARTIALLY EFFECTIVE — TextExtractor constraints work; MergeOptions constraints work; SplitOptions/OptimizeOptions constraints ignored by LLM",
+    "validator_new_checks": "VERIFIED — PluginOptions detection, TextExtractorOptions requirement, string-array overload detection"
+  },
+
+  "root_causes_remaining": {
+    "splitter_optimizer": {
+      "issue": "LLM defaults to 'new PluginOptions()' instead of concrete options class",
+      "attempted_fixes": [
+        "Added REQUIRED class name constraints",
+        "Added exact code snippet in constraints",
+        "Added FORBIDDEN: new PluginOptions()",
+        "Added validator check for PluginOptions"
+      ],
+      "hypothesis": "LLM has training data where PluginOptions is the common pattern for Aspose.Pdf.LowCode. The concrete class names (SplitOptions, OptimizeOptions) may not appear in training data. The constraints are ignored because the LLM's prior is too strong.",
+      "recommended_fix": "Use template_mode for splitter/optimizer until LLM quality improves; or provide a few-shot example in the system prompt"
+    }
+  },
+
+  "phase_fixes_applied": {
+    "type_classifier.py": ["Added Optimizer to _WORKFLOW_VERBS", "Added 0-method OPERATION_FACADE special case for inherited Process"],
+    "planner.py": ["Removed merger/splitter from _INPUT_FORMAT_MAP", "Force programmatic_input for pdf family"],
+    "packet_builder.py": ["Added 3 new FORBIDDEN constraints", "Added per-type class name hints", "Added FORBIDDEN: PluginOptions", "Added FORBIDDEN: string array Process overloads"],
+    "code_generator.py": ["Added PluginOptions detection", "Added string-array Process detection", "Added TextExtractorOptions requirement check"],
+    "entrypoint_scorer.py": ["OPERATION_FACADE with constructors but 0 methods → runnable"],
+    "runtime_feedback.py": ["Added pdf_wrong_input_extension pattern"],
+    "tests": ["840 unit tests passing (was 833 before sprint)"]
+  },
+
+  "taskcards_opened": [
+    {
+      "id": "followup-pdf-splitter-options-class",
+      "title": "PDF Splitter: fix LLM PluginOptions → SplitOptions hallucination",
+      "priority": "HIGH",
+      "description": "LLM consistently generates 'new PluginOptions()' for Splitter despite explicit SplitOptions constraint. Fix: add few-shot example or template override for this type.",
+      "acceptance": "pdf-splitter builds and runs successfully in a controlled pilot run"
+    },
+    {
+      "id": "followup-pdf-optimizer-options-class",
+      "title": "PDF Optimizer: fix LLM OptimizerLoadOptions/PluginOptions hallucination + timeout",
+      "priority": "HIGH",
+      "description": "LLM generates wrong class names for Optimizer options. Also suffers from LLM API timeouts during repair loop. Fix: class name constraint + longer timeout or retry logic.",
+      "acceptance": "pdf-optimizer builds and runs successfully in a controlled pilot run"
+    },
+    {
+      "id": "followup-pdf-pr-packaging",
+      "title": "PDF PR Package: assemble and validate dry-run PR package for 2 passing examples",
+      "priority": "MEDIUM",
+      "description": "Merger and TextExtractor examples pass build+run. Package them in workspace/pr-dry-run/pdf-controlled-pilot/ following the cells/words pattern. Validate completeness.",
+      "acceptance": "workspace/pr-dry-run/pdf-controlled-pilot/ built and validated; all 2 examples build from clean checkout"
+    }
+  ]
+}

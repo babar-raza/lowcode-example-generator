@@ -1,0 +1,67 @@
+{
+  "title": "Agent Metrics Safety Verification",
+  "audit_date": "2026-05-06",
+  "sprint": "gap-closure-sprint-2",
+  "objective": "Verify all production safety properties hold",
+  "safety_properties": {
+    "dry_run_default": {
+      "verified": true,
+      "evidence": "MetricsSession.dry_run defaults to True. Config dry_run defaults to True. --metrics without --metrics-post = dry-run.",
+      "test": "TestSafetyGates::test_dry_run_session_never_posts"
+    },
+    "test_only_sprint": {
+      "verified": true,
+      "evidence": "poster.py test_only_sprint=True blocks all non-test job_types",
+      "test": "TestSafetyGates::test_force_repost_cannot_bypass_production_safety"
+    },
+    "no_secrets_in_evidence": {
+      "verified": true,
+      "evidence": "Token read from env at POST time only, never stored in result dicts or evidence files",
+      "test": "test_agent_metrics_poster.py::TestTokenSecurity::test_token_not_in_result"
+    },
+    "persistent_ledger_dedup": {
+      "verified": true,
+      "evidence": "Poster checks run_id+job_type in JSONL ledger before POST",
+      "test": "test_agent_metrics_poster.py::TestDuplicatePrevention::test_duplicate_blocked"
+    },
+    "force_repost_cannot_bypass_test_only": {
+      "verified": true,
+      "evidence": "--metrics-force-repost bypasses ledger but NOT test_only_sprint gate",
+      "test": "TestSafetyGates::test_force_repost_cannot_bypass_production_safety"
+    },
+    "no_aspose_com_hardcoding": {
+      "verified": true,
+      "evidence": "Website always from config (metrics.yml: aspose.net). No hardcoded domain in source.",
+      "test": "test_agent_metrics_config.py::TestProductionConfig::test_no_aspose_com_in_config_website"
+    },
+    "config_driven_validation": {
+      "verified": true,
+      "evidence": "Validator reads allowed_statuses, allowed_job_types from config, not hardcoded Python sets",
+      "test": "test_agent_metrics_payload.py::TestPayloadValidator::test_status_validated_against_config"
+    },
+    "excluded_commands_no_overhead": {
+      "verified": true,
+      "evidence": "status and check commands: MetricsSession.active=False, finalize() returns noop dict",
+      "test": "TestSessionLifecycle::test_excluded_command_not_active"
+    },
+    "router_return_type_unchanged": {
+      "verified": true,
+      "evidence": "_call_openai_compatible still returns str. All 988 tests pass.",
+      "test": "Full regression: 988 passed"
+    }
+  },
+  "google_sheet_safety": {
+    "production_rows_this_sprint": 0,
+    "test_rows_this_sprint": 0,
+    "test_only_sprint_active": true,
+    "human_controlled_test_row_from_prior_sprint": "Verified correct in Google Sheet"
+  },
+  "regression_results": {
+    "total_tests": 988,
+    "passed": 988,
+    "failed": 0,
+    "metrics_specific_tests": 205,
+    "metrics_tests_passed": 205
+  },
+  "verdict": "ALL_SAFETY_PROPERTIES_VERIFIED"
+}

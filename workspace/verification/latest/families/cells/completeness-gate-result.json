@@ -1,0 +1,15 @@
+{
+  "family": "cells",
+  "status": "pass",
+  "denominator_basis": "FULL_SOT",
+  "expected_count": 22,
+  "ready_count": 9,
+  "blocked_count": 13,
+  "accounted_count": 22,
+  "gap": 0,
+  "message": "Family 'cells' completeness check PASS (FULL_SOT): 22 accounted >= 22 expected.",
+  "violations": [],
+  "holds": true,
+  "unknown_type_count": 0,
+  "full_wrt_count": null
+}

@@ -1,0 +1,79 @@
+{
+  "artifact_type": "r1-runner-llm-timeout-retry-fix",
+  "sprint": "R1 — Immediate Blockers and Proof Reruns",
+  "date": "2026-05-08",
+
+  "verdict": "NO_CODE_CHANGE_REQUIRED_RETRY_ALREADY_IMPLEMENTED",
+
+  "finding": "The LLM timeout retry/backoff required by the R1 plan is already fully implemented in src/plugin_examples/llm_router/router.py. The plan's claim that 'runner.py lacks retry' was based on looking at runner.py specifically; the retry logic is correctly in router.py at the HTTP call layer, which is the appropriate location.",
+
+  "implementation_location": "src/plugin_examples/llm_router/router.py",
+  "retry_constants": {
+    "_LLM_MAX_RETRIES": 2,
+    "_LLM_RETRY_BACKOFF_SECONDS": [30, 60]
+  },
+  "retry_coverage": {
+    "_call_openai_compatible": "Lines 419-446: for attempt in range(_LLM_MAX_RETRIES + 1) — retries on Timeout and ConnectionError only",
+    "_call_ollama": "Lines 331-363: same pattern for Ollama provider"
+  },
+  "non_retriable_errors": [
+    "LLMProviderError (policy rejection) — propagates immediately",
+    "HTTP 4xx/5xx responses (non-timeout failures) — propagates immediately via raise_for_status",
+    "General Python exceptions — propagates immediately"
+  ],
+
+  "tests_verified": [
+    {
+      "name": "test_openai_compatible_retries_on_timeout_and_succeeds",
+      "covers": "Timeout retries up to max, succeeds on 3rd attempt",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestLLMTimeoutRetry"
+    },
+    {
+      "name": "test_openai_compatible_does_not_retry_policy_failure",
+      "covers": "LLMProviderError (policy) does not trigger retry",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestLLMTimeoutRetry"
+    },
+    {
+      "name": "test_openai_compatible_raises_after_all_retries_exhausted",
+      "covers": "After max retries, Timeout propagates",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestLLMTimeoutRetry"
+    },
+    {
+      "name": "test_packet_builder_splitter_injects_split_options",
+      "covers": "SplitOptions constraint injected for Splitter",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestPdfWave1ConstraintInjection"
+    },
+    {
+      "name": "test_packet_builder_optimizer_injects_optimize_options",
+      "covers": "OptimizeOptions constraint injected for Optimizer",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestPdfWave1ConstraintInjection"
+    },
+    {
+      "name": "test_packet_builder_splitter_code_snippet_present",
+      "covers": "Splitter packet includes code snippet with SplitOptions+AddInput",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestPdfWave1ConstraintInjection"
+    },
+    {
+      "name": "test_packet_builder_optimizer_code_snippet_present",
+      "covers": "Optimizer packet includes code snippet with OptimizeOptions+AddInput",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestPdfWave1ConstraintInjection"
+    },
+    {
+      "name": "test_code_generator_plugin_options_is_blocking_error",
+      "covers": "PluginOptions usage causes blocking validation error",
+      "file": "tests/unit/test_llm_generation.py",
+      "class": "TestPdfWave1ConstraintInjection"
+    }
+  ],
+
+  "gate_1_passed": true,
+  "code_changes_made": false,
+  "tc14_touched": false
+}

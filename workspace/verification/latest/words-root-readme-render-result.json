@@ -1,0 +1,19 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-13 09:58 UTC",
+  "family": "words",
+  "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
+  "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
+  "readme_bytes": 4480,
+  "package_version": "26.4.0",
+  "examples_count": 4,
+  "example_names": [
+    "converter",
+    "replacer",
+    "splitter",
+    "watermarker"
+  ],
+  "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

@@ -1,0 +1,44 @@
+{
+  "preflight_date": "2026-05-06",
+  "branch": "main",
+  "uncommitted_files": 335,
+  "uncommitted_note": "Prior pipeline development work — not touched by metrics sprint",
+  "source_verification": {
+    "router_py": {
+      "file": "src/plugin_examples/llm_router/router.py",
+      "LLMRouter_line": 45,
+      "LLMRouter_type": "@dataclass",
+      "_call_openai_compatible_line": 315,
+      "_call_openai_compatible_returns": "str",
+      "usage_discarded_line": 340,
+      "status": "VERIFIED"
+    },
+    "provider_policy_py": {
+      "file": "src/plugin_examples/llm_router/provider_policy.py",
+      "APPROVED_PROVIDERS": ["llm_professionalize", "ollama"],
+      "status": "VERIFIED"
+    },
+    "runner_py": {
+      "file": "src/plugin_examples/runner.py",
+      "PipelineContext_line": 34,
+      "run_id_format": "pilot-{family}-{YYYYMMDD-HHMMSS}",
+      "evidence_dir": "workspace/runs/{run_id}/evidence/",
+      "llm_call_lines": [579, 699, 759],
+      "status": "VERIFIED"
+    },
+    "gates_models_py": {
+      "file": "src/plugin_examples/gates/models.py",
+      "VERDICTS_count": 18,
+      "status": "VERIFIED"
+    },
+    "aspose_links_py": {
+      "file": "src/plugin_examples/publisher/aspose_links.py",
+      "canonical_domain": "aspose.net",
+      "status": "VERIFIED"
+    }
+  },
+  "production_post_occurred": false,
+  "metrics_dir_exists": false,
+  "metrics_config_exists": false,
+  "preflight_gate": "PASSED"
+}

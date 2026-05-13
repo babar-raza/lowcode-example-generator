@@ -1,0 +1,37 @@
+{
+  "validation_type": "pdf_live_pr_clean_checkout_validation",
+  "validation_date": "2026-05-06",
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "clone_source": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples.git",
+  "clone_branch": "plugin-examples/pdf/20260506-083146",
+  "clone_result": "SUCCESS",
+  "examples_validated": [
+    {
+      "example": "merger",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_file": "output.pdf",
+      "output_size_bytes": 56346,
+      "output_pdf_header": true,
+      "result": "PASS"
+    },
+    {
+      "example": "text-extractor",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_contains_text": true,
+      "api_is_lowcode": true,
+      "result": "PASS"
+    }
+  ],
+  "summary": {
+    "total_examples": 2,
+    "passed": 2,
+    "failed": 0,
+    "overall_result": "ALL_PASS"
+  }
+}

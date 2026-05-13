@@ -1,0 +1,38 @@
+{
+  "family": "epub",
+  "package_id": "Aspose.Epub",
+  "blocker_type": "PACKAGE_DOWNLOAD_FAILED",
+  "blocker_severity": "HIGH",
+  "discovery_status": "BLOCKED_DOWNLOAD_FAILED",
+  "verified_at": "2026-05-09",
+  "run_dir": "workspace/runs/discovery-epub-20260509-113640",
+  "run_dir_empty": true,
+  "root_cause": "The Aspose.Epub NuGet package (package_id='Aspose.Epub') does not appear to be publicly available on NuGet.org. The discovery run directory was created but left empty — no extraction manifest, no downloaded .nupkg, and no DLL extracted. This is distinct from the reflection-failure pattern seen in html/ocr/omr/psd/svg where the DLL was successfully extracted.",
+  "root_cause_category": "PACKAGE_NOT_PUBLICLY_AVAILABLE",
+  "evidence": {
+    "run_dir_contents": "empty",
+    "extraction_manifest_present": false,
+    "dll_present": false,
+    "catalog_present": false
+  },
+  "resolution_options": [
+    {
+      "option": "VERIFY_PACKAGE_ID",
+      "description": "Verify the exact NuGet package ID. Aspose.Epub may be published under a different ID (e.g. 'Aspose.Epub for .NET' or not available as a NuGet package).",
+      "action": "Search NuGet.org for 'Aspose.Epub' and verify correct package ID"
+    },
+    {
+      "option": "CHECK_PRIVATE_FEED",
+      "description": "Aspose.Epub may only be available on Aspose's private NuGet feed, not the public NuGet.org feed.",
+      "action": "Investigate if epub package is on releases.aspose.com/net/epub/ or similar"
+    },
+    {
+      "option": "MARK_OUT_OF_SCOPE",
+      "description": "If no public NuGet package exists, mark epub as OUT_OF_SCOPE with evidence.",
+      "action": "Update epub.yml to disabled=true with out_of_scope_reason='no_public_nuget_package'"
+    }
+  ],
+  "taskcard": "NEW-22-followup-epub-reflection-blocker-investigation",
+  "relaunch_allowed": false,
+  "relaunch_prerequisite": "Verify NuGet package existence and correct package ID before any relaunch"
+}

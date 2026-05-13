@@ -1,0 +1,69 @@
+{
+  "artifact_type": "r2-pdf-publication-scope-recommendation",
+  "sprint": "Sprint R2 Revised — PDF Optimizer Repair Constraint Injection Fix and Rerun",
+  "date": "2026-05-08",
+
+  "current_publication_state": {
+    "pr1_merged": "Merger + TextExtractor — MERGED to main 2026-05-05",
+    "pr3_package_status": "DRY_RUN_READY (Merger+Splitter, 3+ consecutive passes for both)",
+    "pr3_live_pr_created": false,
+    "optimizer_prior_status": "Never PASS until this sprint"
+  },
+
+  "r2_run_results": {
+    "optimizer": "EXAMPLE_READY_FOR_PR_DRY_RUN (FIRST PASS)",
+    "splitter": "EXAMPLE_READY_FOR_PR_DRY_RUN (4th consecutive)",
+    "text_extractor": "EXAMPLE_READY_FOR_PR_DRY_RUN (already on main)",
+    "merger": "GENERATION_FAILED (non-deterministic regression — 3 prior passes)"
+  },
+
+  "recommendation": "OPTION_A_RECOMMENDED",
+
+  "options": {
+    "option_a": {
+      "description": "Keep PR#3 as Merger+Splitter (existing dry-run package). Add Optimizer as PR#4.",
+      "pr3_scope": ["Merger", "Splitter"],
+      "pr3_evidence": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/ — prior dry-run PASS 3+ runs for both",
+      "pr3_requires_fresh_dry_run": false,
+      "pr3_note": "Merger failed in R2 run but has 3 prior passes. This single non-deterministic failure does not invalidate the existing PR#3 dry-run package. Package was already assembled and validated.",
+      "pr4_scope": ["Optimizer"],
+      "pr4_evidence": "workspace/runs/pilot-pdf-20260508-155520/generated/pdf/pdf-optimizer/",
+      "pr4_requires_dry_run_package": true,
+      "pr4_requires_approval": "APPROVE_LIVE_PR",
+      "pr4_requires_post_merge_verification": true
+    },
+    "option_b": {
+      "description": "Refresh PR#3 to include Splitter+Optimizer (both PASS in R2 run). Exclude Merger until rerun passes.",
+      "pr3_scope": ["Splitter", "Optimizer"],
+      "requires_fresh_dry_run": true,
+      "risk": "HIGHER — abandons proven Merger package; Optimizer is first-pass only; requires new package assembly",
+      "not_recommended_reason": "Optimizer has only 1 pass. Merger has 3+ passes. Conservative policy: Merger should be in PR#3 as already evidenced."
+    }
+  },
+
+  "recommended_next_pr_number": 3,
+  "recommended_pr3_included_examples": ["Merger", "Splitter"],
+  "recommended_pr3_excluded_examples": [],
+  "recommended_pr3_reason": "Prior dry-run package already validated. Merger single regression is non-deterministic — 3 prior passes establish reliability. PR#3 requires only APPROVE_LIVE_PR to proceed.",
+
+  "pr4_recommendation": {
+    "scope": ["Optimizer"],
+    "requires": [
+      "Assemble fresh dry-run package for Optimizer in workspace/pr-dry-run/",
+      "APPROVE_LIVE_PR from human",
+      "Post-merge verification after merge",
+      "Consider whether second consecutive Optimizer PASS needed before publishing — policy decision"
+    ],
+    "risk_note": "Optimizer has only 1 pass. Prior policy required 2 consecutive passes for Splitter. Same policy should apply to Optimizer for reliability."
+  },
+
+  "merger_regression_handling": {
+    "recommended_action": "Rerun PDF pilot 1-2 more times to confirm Merger non-determinism. If 2 more passes: include in PR#3. If fails again: investigate and add repair constraint.",
+    "blocking_pr3": false,
+    "existing_package_valid": true
+  },
+
+  "required_approval_token": "APPROVE_LIVE_PR",
+  "no_live_pr_in_r2": true,
+  "gate_6_verdict": "PACKAGE_SCOPE_DECIDED"
+}

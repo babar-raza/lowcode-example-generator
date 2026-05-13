@@ -1,0 +1,246 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/words.yml",
+    "pipeline/configs/families/pdf.yml"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/latest/families/pdf/pr-candidate-manifest.json",
+    "workspace/verification/latest/families/words/pr-candidate-manifest.json",
+    "workspace/verification/latest/cells-source-of-truth-proof.json",
+    "workspace/verification/latest/words-source-of-truth-proof.json",
+    "workspace/verification/latest/pdf-merge-result.json",
+    "workspace/verification/latest/blocked-scenarios.json",
+    "workspace/verification/latest/runtime-failure-classifications.json"
+  ],
+  "confidence": "MEDIUM",
+  "findings": {
+    "families": [
+      {
+        "family": "cells",
+        "source_of_truth_version": "Aspose.Cells 26.4.0 (NuGet, netstandard2.0)",
+        "config_status": "active",
+        "allowed_types": "ALL (no allowed_types restriction in cells.yml; all LowCode namespace types are candidates)",
+        "runnable_denominator": 9,
+        "denominator_basis": "9 of 22 planned scenarios are pr_candidates — 13 excluded by scope (non-runnable types)",
+        "denominator_codified": false,
+        "denominator_note": "No formal denominator artifact exists. The '9' is derived from lifecycle records, not from a defined target.",
+        "published_examples": 9,
+        "pr_ready_examples": 9,
+        "generated_not_published": 0,
+        "failed_backlogged": 0,
+        "latest_run_id": "pilot-cells-20260508-133932",
+        "latest_run_date": "2026-05-08",
+        "lifecycle_summary": {
+          "total_planned": 22,
+          "generation_passed": 9,
+          "generation_failed": 0,
+          "build_passed": 9,
+          "run_passed": 9,
+          "reviewer_passed": 9,
+          "pr_candidates": 9,
+          "excluded": 13,
+          "backlogged": 0
+        },
+        "pr_published_count": 4,
+        "pr_merge_shas": {
+          "PR1": "f6e5515c070184e4b08a2cff647220bea1113b08",
+          "PR2_readme_backfill": "55b4f190... (SHA prefix confirmed)",
+          "PR3_aspose_net_links": "56601118b34aa2ced0d4f9f292498d0d6b6afa90",
+          "PR4_api_symbols": "6222d610293d1c94ed1a26117922b60187be61d7"
+        },
+        "missing_fixtures": [],
+        "missing_validators": [],
+        "open_taskcards": [
+          "followup-cells-coverage-denominator-audit"
+        ],
+        "non_degradation_proof_status": "PROVEN",
+        "non_degradation_evidence": "cells-regression-rerun-result.json exists (not freshly read); lifecycle shows 9/9 ALL_PASS in latest run pilot-cells-20260508-133932",
+        "post_merge_validation": "ALL_PASS 9/9 (confirmed from MEMORY; cells-post-merge-clean-checkout-validation.json exists)",
+        "workspace_runs_confirmed": true,
+        "workspace_runs_path": "workspace/runs/pilot-cells-20260508-133932/ (referenced in cells-source-of-truth-proof.json)",
+        "next_action": "None — Cells is the most complete family (9/9, 4 PRs merged). Next: denominator audit taskcard."
+      },
+      {
+        "family": "words",
+        "source_of_truth_version": "Aspose.Words 26.5.0 (NuGet, netstandard2.0)",
+        "config_status": "active",
+        "allowed_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+        "runnable_denominator": 4,
+        "denominator_basis": "4 allowed_types in words.yml. 25 total types in LowCode namespace — 21 excluded by allowed_types filter.",
+        "denominator_codified": false,
+        "denominator_note": "Denominator is 4 (allowed types) vs 25 (all types). Coverage claim '4/4 = 100% of allowed types' is correct. Coverage claim '4/25 = 16% of total types' is also valid but uses a different denominator. No formal denominator artifact exists. The MEMORY claim of '9' as denominator is NOT supported by any source artifact.",
+        "published_examples": 4,
+        "pr_ready_examples": 4,
+        "generated_not_published": 0,
+        "failed_backlogged": 0,
+        "latest_run_id": "pilot-words-20260508-134400",
+        "latest_run_date": "2026-05-08",
+        "lifecycle_summary": {
+          "total_planned": 25,
+          "generation_passed": 4,
+          "generation_failed": 0,
+          "build_passed": 4,
+          "run_passed": 4,
+          "reviewer_passed": 4,
+          "pr_candidates": 4,
+          "excluded": 21,
+          "backlogged": 0
+        },
+        "pr_candidate_manifest_verified": {
+          "words-converter": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+          "words-replacer": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+          "words-splitter": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+          "words-watermarker": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+        },
+        "pr_published_count": 4,
+        "pr_merge_shas": {
+          "PR1_examples": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+          "PR2_readme_backfill": "b1877ed7... (SHA prefix confirmed)",
+          "PR3_aspose_net_links": "6556906e77e82fe95adec2fe4f9c29e9abe55c61",
+          "PR4_api_symbols": "de806c02... (noted in MEMORY)"
+        },
+        "missing_fixtures": [
+          "programmatic_docx_pair — for Words types requiring 2 input files (Comparer, Merger beyond allowed_types)"
+        ],
+        "missing_validators": [
+          "DOCX semantic validator — DOCX output validated only for existence/DOCX format, not content correctness"
+        ],
+        "open_taskcards": [
+          "followup-words-split-criteria-enumeration",
+          "followup-words-pair-fixture-strategy",
+          "followup-words-mail-merger-fixture-documentation",
+          "followup-words-docx-semantic-validation",
+          "followup-words-full-coverage-expansion"
+        ],
+        "non_degradation_proof_status": "PARTIAL",
+        "non_degradation_evidence": "words-regression-rerun-result.json exists (not freshly read). Lifecycle shows 4/4 ALL_PASS in latest run pilot-words-20260508-134400. No run-to-run comparison mechanism exists.",
+        "post_merge_validation": "ALL_PASS 4/4 (confirmed from MEMORY; words-post-merge-clean-checkout-validation.json exists)",
+        "workspace_runs_confirmed": true,
+        "workspace_runs_path": "workspace/runs/pilot-words-20260508-134400/ (referenced in words-source-of-truth-proof.json)",
+        "denominator_contradiction": {
+          "claim_a": "MEMORY.md: denominator is 9",
+          "claim_b": "words.yml allowed_types: 4",
+          "claim_c": "lifecycle total_planned: 25",
+          "resolution": "words.yml (rank 1) is authoritative. 4 allowed types = 4 target examples. 9 is not supported by any source artifact. 25 is the total LowCode types in the Aspose.Words namespace. Coverage is 4/4 = 100% of allowed scope, or 4/25 = 16% of total namespace."
+        },
+        "next_action": "Expand allowed_types after SplitCriteria enum discovery and paired fixture implementation (R5 sprint)"
+      },
+      {
+        "family": "pdf",
+        "source_of_truth_version": "Aspose.Pdf LowCode namespace (101 types discovered); package version: Aspose.PDF latest-stable",
+        "config_status": "active",
+        "allowed_types": ["Merger", "TextExtractor", "Splitter", "Optimizer"],
+        "runnable_denominator": 4,
+        "denominator_basis": "4 allowed_types in pdf.yml. 101 total types in Aspose.Pdf.LowCode namespace. 97 excluded by allowed_types filter.",
+        "denominator_codified": false,
+        "denominator_note": "No formal denominator artifact exists. The '4' is the controlled pilot scope.",
+        "published_examples": 2,
+        "published_example_details": "Merger + TextExtractor in PDF PR#1 (merged 2026-05-06, SHA=a9f9e254fbdbd012e6486e699395298e427169eb)",
+        "pr_ready_examples_count": 3,
+        "pr_ready_details": "Merger (PR#1 merged), TextExtractor (PR#1 merged), Splitter (PR#3 validated, awaiting APPROVE_LIVE_PR)",
+        "generated_not_published": 1,
+        "generated_not_published_detail": "Splitter: generated, 3 consecutive PASSes, PR#3 package ready, waiting for APPROVE_LIVE_PR",
+        "failed_backlogged": 1,
+        "failed_backlogged_detail": "Optimizer: generation_failed=1 (wrong_namespace hallucination). Fix applied (repair constraint re-injection in code_generator.py lines 88-103). Next rerun should resolve.",
+        "latest_run_id": "pilot-pdf-20260508-155520",
+        "latest_run_date": "2026-05-08",
+        "lifecycle_summary": {
+          "total_planned": 101,
+          "generation_passed": 3,
+          "generation_failed": 1,
+          "build_passed": 3,
+          "run_passed": 3,
+          "reviewer_passed": 3,
+          "pr_candidates": 3,
+          "excluded": 97,
+          "backlogged": 1
+        },
+        "pr_candidate_manifest_note": {
+          "contradiction": "families/pdf/pr-candidate-manifest.json includes pdf-optimizer as EXAMPLE_READY_FOR_PR_DRY_RUN alongside pdf-splitter and pdf-text-extractor, totaling 4 candidates. However, families/pdf/example-lifecycle-records.json for the same run_id (pilot-pdf-20260508-155520) shows pr_candidates=3 and backlogged=1 (Optimizer). These two files for the same run are contradictory.",
+          "resolution": "Lifecycle records (run-level, rank 3-4) are more granular and include the summary count. pr-candidate-manifest may have been promoted from a different run than the lifecycle records, or it was generated before the Optimizer was classified as backlogged. Lifecycle records take precedence for pr_candidate count.",
+          "audited_pr_candidates_per_lifecycle": 3
+        },
+        "pr_published_count": 1,
+        "pr_merge_shas": {
+          "PR1_merger_textextractor": "a9f9e254fbdbd012e6486e699395298e427169eb"
+        },
+        "pr3_status": "BLOCKED_WAITING_FOR_APPROVE_LIVE_PR",
+        "pr3_evidence": "r3-final-verification.md (2026-05-08): Sprint R3 blocked, package validated (Merger+Splitter), 1025 tests pass. Splitter has 3 consecutive PASSes.",
+        "pr4_status": "BLOCKED_PENDING_LLM_RERUN",
+        "pr4_evidence": "Optimizer: generation_failed in latest run. Repair constraint re-injection fix applied to code_generator.py. Next run should succeed.",
+        "missing_fixtures": [],
+        "missing_validators": [
+          "PDF Splitter output semantic validator (page count check)",
+          "PDF TextExtractor content validator (text content presence check beyond StringResult cast)"
+        ],
+        "open_taskcards": [
+          "followup-pdf-optimizer-llm-rerun",
+          "followup-pdf-optimizer-options-class",
+          "followup-pdf-pr3-review-and-merge"
+        ],
+        "non_degradation_proof_status": "PARTIAL",
+        "non_degradation_evidence": "Splitter: 3 consecutive PASSes (pilot-pdf-20260507-110824, -140400, -20260508-133015) confirms non-degradation. TextExtractor: regression in 1 run, then resolved. Merger: consistent PASS. Optimizer: consistent FAIL (blocked, not degraded).",
+        "post_merge_validation": "PDF PR#1 post-merge confirmed from docs/publishing/pdf-pr1-post-merge-verification.md (existence confirmed; content not freshly read)",
+        "workspace_runs_confirmed": true,
+        "workspace_runs_path": "workspace/runs/pilot-pdf-20260508-155520/ (referenced in pr-candidate-manifest.json example_path)",
+        "next_action": "Provide APPROVE_LIVE_PR for PDF PR#3 (Merger+Splitter). Then re-run LLM for Optimizer with repair constraint fix active."
+      }
+    ],
+    "denominator_resolution": {
+      "summary": "No formal denominator artifact exists for any family. Coverage claims are based on implicit denominators: Cells (9 of 22 planned), Words (4 of 4 allowed, or 4 of 25 total), PDF (4 target types: 2 published, 1 validated, 1 blocked).",
+      "cells_denominator": 9,
+      "words_denominator_allowed": 4,
+      "words_denominator_total_namespace": 25,
+      "pdf_denominator_pilot": 4,
+      "pdf_denominator_total_namespace": 101,
+      "recommended_denominator_for_coverage": "Use allowed_types count: Cells=9 (all runnable), Words=4 (allowed), PDF=4 (pilot). This gives 9+4+4=17 target examples. Current: 9+4+2=15 published, 1 validated not published (Splitter), 1 blocked (Optimizer). Coverage = 15/17 = 88% published (or 16/17 = 94% if Splitter is counted as validated).",
+      "coverage_not_formally_computed": true
+    },
+    "workspace_runs_confirmation": {
+      "runs_confirmed": true,
+      "confirmed_run_ids": [
+        "pilot-cells-20260508-133932",
+        "pilot-words-20260508-134400",
+        "pilot-pdf-20260508-155520"
+      ],
+      "confirmation_method": "evidence file paths in source-of-truth-proof.json and pr-candidate-manifest.json reference workspace/runs/{run_id}/ directories — these paths would be invalid if directories didn't exist at time of evidence writing",
+      "metrics_gate": "workspace/runs/ directories created unconditionally (run_dir is part of PipelineContext); confirmed by runner.py PipelineContext.run_dir field"
+    }
+  },
+  "gaps": [
+    "No formal denominator artifact exists for any family — coverage claims are informal",
+    "PDF pr-candidate-manifest contradiction (3 vs 4 pr_candidates) not fully resolved — needs lifecycle records for run pilot-pdf-20260508-155520 to be compared with pr-candidate-manifest timestamp",
+    "Post-merge validation content not freshly read for PDF PR#1",
+    "Words '9' denominator from MEMORY is not supported by any source or evidence artifact"
+  ],
+  "contradictions": [
+    {
+      "claim_a": "families/pdf/example-lifecycle-records.json: pr_candidates=3, backlogged=1 for run pilot-pdf-20260508-155520",
+      "source_a": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4)",
+      "claim_b": "families/pdf/pr-candidate-manifest.json: 4 examples including pdf-optimizer as EXAMPLE_READY_FOR_PR_DRY_RUN, referencing paths in pilot-pdf-20260508-155520",
+      "source_b": "workspace/verification/latest/families/pdf/pr-candidate-manifest.json (rank 4)",
+      "resolution": "Same-rank contradiction (both rank 4). Lifecycle records have a more granular summary section that is auto-generated from actual stage outcomes. pr-candidate-manifest may be from a different run that was promoted to families/pdf/ before the current lifecycle records. Lifecycle records take precedence: pr_candidates=3, Optimizer=backlogged."
+    },
+    {
+      "claim_a": "MEMORY.md: Words denominator is 9",
+      "source_a": "MEMORY.md (rank 10)",
+      "claim_b": "words.yml: 4 allowed_types; lifecycle: 25 total planned, 21 excluded",
+      "source_b": "pipeline/configs/families/words.yml (rank 1), families/words lifecycle (rank 4)",
+      "resolution": "Source and evidence win. Words denominator is 4 (allowed types). The '9' from MEMORY is not traceable to any source artifact."
+    }
+  ],
+  "next_actions": [
+    "Phase 6: Audit TC14 metrics truth board from source",
+    "Phase 7: Record pytest results",
+    "Provide APPROVE_LIVE_PR for PDF PR#3 to unblock Splitter publication",
+    "Re-run Optimizer LLM with repair constraint fix active",
+    "Create formal denominator artifact (R3 sprint priority)"
+  ]
+}

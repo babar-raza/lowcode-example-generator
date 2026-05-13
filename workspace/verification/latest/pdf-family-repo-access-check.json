@@ -1,0 +1,51 @@
+{
+  "sprint": "PDF Family Repo Target Mapping",
+  "phase": "Phase 2 — GitHub Org/Repo Access Check",
+  "date": "2026-05-05",
+  "does_not_enable_generation": true,
+  "probe_type": "READ_ONLY_GET",
+  "token_present": true,
+  "probed_targets": {
+    "org": {
+      "org_name": "aspose-pdf-net",
+      "http_status": 200,
+      "org_exists": true,
+      "org_display_name": "Aspose.PDF for .NET",
+      "public_repos": 0,
+      "interpretation": "Org aspose-pdf-net EXISTS. display_name='Aspose.PDF for .NET' confirms this is the correct org for the PDF family. public_repos=0 means no public repos visible (all may be private or not yet created)."
+    },
+    "repo": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "http_status": 404,
+      "repo_exists": false,
+      "can_read": false,
+      "can_push": null,
+      "interpretation": "HTTP 404 — repo does not exist OR token lacks read access. Given org has 0 public repos, this repo has not been created yet (same situation as cells/words before provisioning)."
+    }
+  },
+  "probe_summary": {
+    "org_access_ready": true,
+    "repo_access_ready": false,
+    "pr_permission_ready": false,
+    "live_publish_ready": false,
+    "error_classification": "repo_not_found_or_no_access",
+    "blocked_reason": "blocked_repo_not_provisioned"
+  },
+  "comparison_with_cells_words": {
+    "cells_pattern": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples — initially 404, then provisioned, now active with merged examples",
+    "words_pattern": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples — same pattern",
+    "pdf_pattern": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples — 404 (not yet provisioned)"
+  },
+  "required_human_action": {
+    "action": "Create repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples and grant GITHUB_TOKEN read+write access",
+    "details": [
+      "Create repo: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples with main branch",
+      "Add babar-raza as collaborator with write access (same as cells/words pattern)",
+      "OR configure fine-grained PAT with 'Contents: Read and Write' permission for the new repo"
+    ],
+    "verification_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples resolve-repo-access --families pdf --promote-latest",
+    "expected_after_provisioning": "HTTP 200 for repo, can_push=true, repo_access_ready=true"
+  },
+  "phase2_conclusion": "Org aspose-pdf-net exists and has the correct display name. The target repo Aspose.PDF.LowCode-for-.NET-Examples does not yet exist (HTTP 404). Config update to pdf.yml is being applied in Phase 5 to document the intended target. Repo creation is a human action tracked in followup-pdf-repo-provisioning."
+}

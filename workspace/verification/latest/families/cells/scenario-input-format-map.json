@@ -1,0 +1,94 @@
+{
+  "scenarios": [
+    {
+      "scenario_id": "cells-html-converter",
+      "workflow_type": "HtmlConverter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".html",
+      "reason": "Inferred from type name HtmlConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "workflow_type": "ImageConverter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".png",
+      "reason": "Inferred from type name ImageConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "workflow_type": "JsonConverter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".json",
+      "reason": "Inferred from type name JsonConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "workflow_type": "PdfConverter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".pdf",
+      "reason": "Inferred from type name PdfConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "workflow_type": "SpreadsheetConverter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".xlsx",
+      "reason": "Inferred from type name SpreadsheetConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "workflow_type": "SpreadsheetLocker",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".xlsx",
+      "reason": "Inferred from type name SpreadsheetLocker",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "workflow_type": "SpreadsheetMerger",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".xlsx",
+      "reason": "Inferred from type name SpreadsheetMerger",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "workflow_type": "SpreadsheetSplitter",
+      "selected_input_format": ".xlsx",
+      "selected_output_format": ".xlsx",
+      "reason": "Inferred from type name SpreadsheetSplitter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "workflow_type": "TextConverter",
+      "selected_input_format": ".csv",
+      "selected_output_format": ".txt",
+      "reason": "Inferred from type name TextConverter",
+      "source": "input_format_map",
+      "confidence": "high",
+      "blocked_if_unclear": false
+    }
+  ]
+}

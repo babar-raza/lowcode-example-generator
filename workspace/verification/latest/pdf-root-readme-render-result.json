@@ -1,0 +1,17 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-05 16:53 UTC",
+  "family": "pdf",
+  "package_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot",
+  "readme_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot\\README.md",
+  "readme_bytes": 4083,
+  "package_version": "26.4.0",
+  "examples_count": 2,
+  "example_names": [
+    "merger",
+    "text-extractor"
+  ],
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

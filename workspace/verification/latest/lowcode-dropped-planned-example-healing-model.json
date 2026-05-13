@@ -1,0 +1,90 @@
+{
+  "artifact_id": "lowcode-dropped-planned-example-healing-model",
+  "created": "2026-05-09",
+  "sprint": "R6.5",
+  "verdict": "GOVERNANCE_GAPS_CLOSED",
+  "amendment_note": "Updated in R6.5 audit sprint to reflect closed governance gaps (RC-011, RC-014, RC-005).",
+
+  "cells_examples": {
+    "total_types": 22,
+    "published": 9,
+    "non_runnable": 13,
+    "equation_holds": true,
+    "equation": "22 = 9 (published) + 13 (non_runnable)",
+    "gaps": []
+  },
+
+  "words_examples": {
+    "total_types": 25,
+    "published": 4,
+    "deferred_in_completion_queue": [
+      {"type": "Comparer", "scenario_id": "words-comparer", "state": "BACKLOGGED", "root_cause": "RC-007", "blocking_reason": "MISSING_PAIR_FIXTURE", "taskcard": "followup-words-pair-fixture-strategy", "relaunch_allowed": false, "prerequisite": "pair_fixture_strategy"},
+      {"type": "Merger", "scenario_id": "words-merger", "state": "BACKLOGGED", "root_cause": "RC-007", "blocking_reason": "MISSING_PAIR_FIXTURE", "taskcard": "followup-words-pair-fixture-strategy", "relaunch_allowed": false, "prerequisite": "pair_fixture_strategy"},
+      {"type": "MailMerger", "scenario_id": "words-mail-merger", "state": "BACKLOGGED", "root_cause": "RC-008", "blocking_reason": "MISSING_TEMPLATE_FIXTURE", "taskcard": "followup-words-mail-merger-fixture-documentation", "relaunch_allowed": false, "prerequisite": "template_docx_fixture"},
+      {"type": "SplitCriteria", "scenario_id": "words-splitter-split", "state": "BACKLOGGED", "root_cause": "RC-009", "blocking_reason": "MISSING_ENUM_STRATEGY", "taskcard": "followup-words-split-criteria-enumeration", "relaunch_allowed": false, "prerequisite": "enum_discovery_strategy"},
+      {"type": "ReportBuilder", "scenario_id": "words-report-builder", "state": "BACKLOGGED", "root_cause": "CLASSIFICATION_GAP", "blocking_reason": "PILOT_SCOPE_DEFERRED", "taskcard": "followup-words-full-coverage-expansion", "relaunch_allowed": false, "prerequisite": "NEW-07"}
+    ],
+    "non_runnable_pending_classification": 16,
+    "governance_gap_rc012_status": "OPEN: workflow_root_types=NULL; 16 of 21 excluded types not formally classified via DllReflector",
+    "taskcard_rc012": "followup-words-workflow-root-classification (NEW-07)"
+  },
+
+  "pdf_examples": {
+    "total_types": 101,
+    "workflow_roots": 25,
+    "non_runnable": 76,
+    "published": 2,
+    "pr_ready": 1,
+    "reviewed": 1,
+    "equation_pilot": "4 = 2(published)+1(pr_ready)+1(reviewed) HOLDS",
+    "equation_workflow_root": "25 = 2+1+1+21(deferred_backlogged) HOLDS",
+    "equation_full_sot": "101 = 25(workflow_root)+76(non_runnable) HOLDS",
+    "deferred_workflow_roots_in_queue": 21,
+    "governance_gap_rc011_status": "CLOSED: 21 deferred WORKFLOW_ROOT types added to completion queue as BACKLOGGED"
+  },
+
+  "rc005_resolution": {
+    "root_cause_id": "RC-005",
+    "scenario_id": "pdf-splitter",
+    "prior_classification": "unknown_runtime_failure",
+    "corrected_classification": "wrong_input_format",
+    "detail": "Stale record from earlier run using DOCX fixture for PDF-only operation. Superseded by PASS in pilot-pdf-20260508-155520.",
+    "resolution_status": "CLOSED",
+    "evidence_file": "workspace/verification/latest/runtime-failure-classifications.json"
+  },
+
+  "nine_term_equation_verification": {
+    "cells": {"holds": true, "equation": "9 = 9+0+0+0+0+0+0+0 (runnable); 22 = 9+13 (all types)"},
+    "words_pilot": {"holds": true, "equation": "4 = 4+0+0+0+0+0+0+0 (pilot scope)"},
+    "pdf_pilot": {"holds": true, "equation": "4 = 2+1+1+0+0+0+0+0 (pilot scope)"},
+    "pdf_workflow_root": {"holds": true, "equation": "25 = 2+1+1+21+0+0+0+0 (workflow roots)"},
+    "pdf_full_sot": {"holds": true, "equation": "101 = 25+76 (all types)"}
+  },
+
+  "completion_queue_state_after_r6_5": {
+    "total_entries": 43,
+    "active_pipeline": 17,
+    "backlogged_deferred": 26,
+    "pdf_deferred_workflow_roots": 21,
+    "words_deferred_scenarios": 5
+  },
+
+  "tests_after_r6_5": {
+    "test_completion_queue": 28,
+    "test_denominator_model": 62,
+    "total_suite": 1179,
+    "all_pass": true
+  },
+
+  "healing_priority_queue": [
+    {"priority": "HIGH", "item": "PDF PR#3 live publication", "blocker": "APPROVE_LIVE_PR_NOT_SET", "sprint": "R8"},
+    {"priority": "HIGH", "item": "RC-011 closed: 21 PDF deferred types added to completion queue", "status": "DONE", "sprint": "R6.5"},
+    {"priority": "HIGH", "item": "RC-014 closed: 26 total deferred entries added to completion queue", "status": "DONE", "sprint": "R6.5"},
+    {"priority": "HIGH", "item": "RC-005 closed: stale runtime failure reclassified", "status": "DONE", "sprint": "R6.5"},
+    {"priority": "HIGH", "item": "Words workflow_root classification", "root_cause": "RC-012", "sprint": "R7", "taskcard": "NEW-07", "status": "OPEN"},
+    {"priority": "MEDIUM", "item": "Implement pair fixture strategy (Words)", "root_cause": "RC-007", "sprint": "R9", "status": "OPEN"},
+    {"priority": "MEDIUM", "item": "Implement template DOCX fixture", "root_cause": "RC-008", "sprint": "R9", "status": "OPEN"},
+    {"priority": "MEDIUM", "item": "Implement enum discovery strategy", "root_cause": "RC-009", "sprint": "R9", "status": "OPEN"},
+    {"priority": "LOW", "item": "Implement backlog-to-taskcard bridge", "root_cause": "RC-013", "sprint": "R8", "status": "OPEN"}
+  ]
+}

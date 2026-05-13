@@ -1,0 +1,48 @@
+{
+  "sprint": "README API Accuracy PR Review, Merge, and Post-Merge Verification",
+  "phase": "Phase 6 — Post-Merge Verification",
+  "date": "2026-05-05",
+  "cells": {
+    "pr_number": 4,
+    "pr_state": "closed",
+    "merged": true,
+    "merge_commit_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+    "readme_on_main": {
+      "bytes": 5507,
+      "sha": "b9ff4261f306",
+      "has_qualified_cells_symbols": true,
+      "sample_symbols_confirmed": [
+        "HtmlConverter.Process",
+        "SpreadsheetMerger.Process",
+        "TextConverter.Process"
+      ]
+    },
+    "files_changed": ["README.md"],
+    "token_leakage": false,
+    "cross_family_contamination": false,
+    "result": "POST_MERGE_VERIFIED"
+  },
+  "words": {
+    "pr_number": 4,
+    "pr_state": "closed",
+    "merged": true,
+    "merge_commit_sha": "de806c02a0733cd438504ae14ec62d5a7f54e3cb",
+    "readme_on_main": {
+      "bytes": 4681,
+      "sha": "5f61c919dc99",
+      "has_qualified_words_symbols": true,
+      "sample_symbols_confirmed": [
+        "Converter.Convert",
+        "Splitter.ExtractPages",
+        "Watermarker.SetText",
+        "Replacer.Replace"
+      ]
+    },
+    "files_changed": ["README.md"],
+    "token_leakage": false,
+    "cross_family_contamination": false,
+    "result": "POST_MERGE_VERIFIED"
+  },
+  "overall_verdict": "README_API_ACCURACY_MERGED_AND_VERIFIED",
+  "sprint_complete": true
+}

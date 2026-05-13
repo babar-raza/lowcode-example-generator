@@ -1,0 +1,35 @@
+{
+  "artifact_type": "cells-regression-rerun-result",
+  "sprint": "R1 — Immediate Blockers and Proof Reruns",
+  "date": "2026-05-08",
+  "run_id": "pilot-cells-20260508-133932",
+  "prior_run_id": "pilot-cells-20260508-113533",
+
+  "verdict": "NON_DEGRADATION_CONFIRMED",
+
+  "summary": {
+    "pipeline_stages": 16,
+    "stages_succeeded": 16,
+    "stages_degraded": 0,
+    "stages_failed": 0,
+    "examples_generated": 9,
+    "examples_built": 9,
+    "runtime_passed": 9,
+    "runtime_blocked": 0,
+    "pr_candidates": 9,
+    "excluded": 0,
+    "overall_verdict": "PR_DRY_RUN_READY"
+  },
+
+  "regression_check": {
+    "prior_result": "9/9 PASS (pilot-cells-20260508-113533)",
+    "current_result": "9/9 PASS (pilot-cells-20260508-133932)",
+    "regressions": 0,
+    "new_failures": 0,
+    "previously_passing_now_failing": []
+  },
+
+  "gate_5_passed": true,
+  "no_live_pr_created": true,
+  "no_publication": true
+}

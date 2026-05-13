@@ -1,0 +1,13 @@
+{
+  "phase": "Phase 2 — runner.py production gate change",
+  "file": "src/plugin_examples/runner.py",
+  "line_changed": 1409,
+  "before": "                test_only_sprint=True,",
+  "after": "                test_only_sprint=not is_agent_metrics_production_enabled(),",
+  "import_added_at": "metrics finalization block (alongside existing pipeline_hook import)",
+  "import_text": "from plugin_examples.metrics.config import is_agent_metrics_production_enabled",
+  "default_behavior": "AGENT_METRICS_PRODUCTION_ENABLED absent → is_agent_metrics_production_enabled()=False → test_only_sprint=True (unchanged from before)",
+  "production_behavior": "AGENT_METRICS_PRODUCTION_ENABLED=true → is_agent_metrics_production_enabled()=True → test_only_sprint=False (enables non-test job_types)",
+  "no_other_changes": true,
+  "all_existing_gates_intact": true
+}

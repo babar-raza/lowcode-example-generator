@@ -1,0 +1,60 @@
+{
+  "sprint": "Words PR Packaging Sprint",
+  "sprint_date": "2026-05-01",
+  "package_root": "workspace/pr-dry-run/words-controlled-pilot/",
+  "overall_result": "PASSED",
+  "validation_type": "clean_package_path",
+  "note": "Each example built and run in isolation from package path, not from original run directory",
+
+  "results": [
+    {
+      "scenario_id": "words-converter",
+      "package_path": "examples/words/lowcode/converter/",
+      "restore": "PASSED",
+      "build": "PASSED (0 warnings, 0 errors)",
+      "run": "PASSED",
+      "stdout": "Conversion succeeded: C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf",
+      "exit_code": 0,
+      "expected_output_match": true
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "package_path": "examples/words/lowcode/watermarker/",
+      "restore": "PASSED",
+      "build": "PASSED (0 warnings, 0 errors)",
+      "run": "PASSED",
+      "stdout": "Watermark applied successfully.",
+      "exit_code": 0,
+      "expected_output_match": true
+    },
+    {
+      "scenario_id": "words-splitter",
+      "package_path": "examples/words/lowcode/splitter/",
+      "restore": "PASSED",
+      "build": "PASSED (0 warnings, 0 errors)",
+      "run": "PASSED",
+      "stdout": "ExtractPages succeeded: 'C:\\Users\\prora\\AppData\\Local\\Temp\\AsposeWordsLowCodeDemo\\output.docx'",
+      "exit_code": 0,
+      "expected_output_match": true
+    },
+    {
+      "scenario_id": "words-replacer",
+      "package_path": "examples/words/lowcode/replacer/",
+      "restore": "PASSED",
+      "build": "PASSED (0 warnings, 0 errors)",
+      "run": "PASSED",
+      "stdout": "Replace succeeded (result=1). Output file created at: C:\\Users\\prora\\AppData\\Local\\Temp\\...\\output.docx",
+      "exit_code": 0,
+      "expected_output_match": true,
+      "replace_count": 1
+    }
+  ],
+
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "all_build_clean": true,
+    "all_run_exit_0": true
+  }
+}

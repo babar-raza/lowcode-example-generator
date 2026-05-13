@@ -1,0 +1,78 @@
+{
+  "total_patterns": 9,
+  "verified_passing": 0,
+  "patterns": [
+    {
+      "scenario_id": "cells-html-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    }
+  ]
+}

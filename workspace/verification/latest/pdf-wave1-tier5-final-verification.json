@@ -1,0 +1,65 @@
+{
+  "artifact_type": "pdf-wave1-tier5-final-verification",
+  "sprint": "Wave 1 PDF Tier 5 LLM Pilot Sprint",
+  "run_id": "pilot-pdf-20260507-110824",
+  "date": "2026-05-07",
+  "phase": "Phase 9 — Final Verification",
+
+  "verification_commands": {
+    "python_compileall": {
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m compileall src -q",
+      "result": "CLEAN",
+      "output": "(no output — all .py files compiled successfully)"
+    },
+    "dotnet_build": {
+      "command": "dotnet build tools/DllReflector/DllReflector.csproj -c Release --nologo -v q",
+      "result": "PASS",
+      "output": "Build succeeded. 0 Warning(s). 0 Error(s)."
+    },
+    "pytest": {
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit -q --timeout=60",
+      "result": "PASS",
+      "total_tests": 996,
+      "passed": 996,
+      "failed": 0,
+      "note": "1 test (test_pdf_splitter_optimizer_backfilled_to_backlog) updated this sprint to reflect Splitter resolved status. Wave 1 source changes: 8 new tests. Test update this sprint: 1."
+    }
+  },
+
+  "sprint_summary": {
+    "run_id": "pilot-pdf-20260507-110824",
+    "pilot_results": {
+      "pdf-merger": "EXAMPLE_READY_FOR_PR_DRY_RUN — re-validated. MergeOptions + new Merger().Process(). Agent PASS.",
+      "pdf-splitter": "EXAMPLE_READY_FOR_PR_DRY_RUN — FIRST SUCCESS. SplitOptions + new Splitter().Process(). Agent PASS. Taskcard CLOSED.",
+      "pdf-optimizer": "SEMANTIC_FAIL_NOT_PUBLISHABLE — File.Copy() generated instead of OptimizeOptions + Optimizer().Process(). Agent override. New root cause: build repair constraint injection gap.",
+      "pdf-text-extractor": "GENERATION_FAILED — non-deterministic regression. Already on main from PR #1. Not affected."
+    },
+    "taskcards_closed_this_sprint": ["followup-pdf-splitter-options-class"],
+    "taskcards_opened_this_sprint": [
+      "followup-pdf-optimizer-build-repair-constraint-injection",
+      "followup-pdf-text-extractor-static-validation-regression"
+    ],
+    "taskcard_matrix": "68 total / 50 closed / 18 open",
+    "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/ — Merger + Splitter, both build PASS",
+    "live_pr_decision": "SKIP — 4/4 gate not met",
+    "coverage_update": "PDF 3/25 examples ready or merged. 17/43 cross-family."
+  },
+
+  "artifacts_created_this_sprint": [
+    "workspace/verification/latest/pdf-wave1-tier5-lifecycle-backlog-update.json",
+    "workspace/verification/latest/pdf-wave1-pr2-package-validation.json",
+    "workspace/verification/latest/pdf-wave1-pr2-dry-run-summary.json",
+    "workspace/pr-dry-run/pdf-controlled-pilot-wave1/ (full directory)",
+    "workspace/verification/latest/pdf-wave1-tier5-final-verification.json"
+  ],
+
+  "artifacts_updated_this_sprint": [
+    "workspace/verification/latest/families/pdf/example-lifecycle.json (Wave 1 results)",
+    "workspace/backlog/pdf/examples-backlog.json (v2.0.0 — Splitter resolved, Optimizer new root cause, TextExtractor new entry)",
+    "workspace/verification/latest/open-taskcard-closure-matrix.json (total 68, open 18, closed 50)",
+    "docs/discovery/open-taskcard-closure-matrix.md (synced)",
+    "tests/unit/test_lifecycle_hardening.py (1 test updated for resolved Splitter status)"
+  ],
+
+  "final_verdict": "WAVE1_TIER5_PILOT_COMPLETE — PARTIAL SUCCESS. Splitter: first ever success, taskcard closed. Optimizer: new root cause identified, fix required before PR #2. TextExtractor: regression tracked, live example unaffected. 996/996 tests pass."
+}

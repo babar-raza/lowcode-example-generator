@@ -1,0 +1,77 @@
+{
+  "sprint": "PDF Family Repo Target Mapping",
+  "phase": "Phase 1 — Current PDF Publish Target Audit",
+  "date": "2026-05-05",
+  "does_not_enable_generation": true,
+  "current_config": {
+    "source_file": "pipeline/configs/families/pdf.yml",
+    "family": "pdf",
+    "status": "discovery_only",
+    "published_plugin_examples_repo": {
+      "owner": "aspose",
+      "repo": "aspose-plugins-examples-dotnet",
+      "branch": "main"
+    },
+    "official_examples_repo": {
+      "owner": "aspose-pdf",
+      "repo": "Aspose.PDF-for-.NET",
+      "branch": "master"
+    },
+    "central_repo_allowed": null,
+    "notes": "central_repo_allowed field is absent from pdf.yml (not yet added)"
+  },
+  "current_target_analysis": {
+    "target_owner": "aspose",
+    "target_repo": "aspose-plugins-examples-dotnet",
+    "is_central_placeholder": true,
+    "is_family_specific": false,
+    "placeholder_meaning": "This is the original placeholder repo used before family-specific targets were configured. It was replaced for cells (aspose-cells-net) and words (aspose-words-net) but never updated for pdf.",
+    "publish_readiness_result": "blocked_family_not_active",
+    "publish_readiness_tier": {
+      "config_ready": false,
+      "repo_access_ready": false,
+      "pr_permission_ready": false,
+      "live_publish_ready": false
+    },
+    "note": "Even if the target were configured, pdf is discovery_only so publish_readiness.py returns blocked_family_not_active before reaching the repo check."
+  },
+  "reference_targets": {
+    "cells": {
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "pattern": "aspose-{family_short}-net/Aspose.{Family}.LowCode-for-.NET-Examples",
+      "status": "ACTIVE_MERGED"
+    },
+    "words": {
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "pattern": "aspose-{family_short}-net/Aspose.{Family}.LowCode-for-.NET-Examples",
+      "status": "ACTIVE_MERGED"
+    }
+  },
+  "inferred_pdf_target": {
+    "owner": "aspose-pdf-net",
+    "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+    "branch": "main",
+    "inference_basis": "Pattern from cells and words: aspose-{family_short}-net / Aspose.{Family}.LowCode-for-.NET-Examples",
+    "inference_confidence": "HIGH — pattern is consistent across all 3 families; official_examples_repo.owner=aspose-pdf confirms 'pdf' is the family slug",
+    "requires_confirmation": true,
+    "confirmation_method": "GitHub API probe in Phase 2"
+  },
+  "config_changes_required_for_this_sprint": [
+    {
+      "id": "CC-1",
+      "file": "pipeline/configs/families/pdf.yml",
+      "field": "github.published_plugin_examples_repo",
+      "current": "{owner: aspose, repo: aspose-plugins-examples-dotnet, branch: main}",
+      "required": "{owner: aspose-pdf-net, repo: Aspose.PDF.LowCode-for-.NET-Examples, branch: main}",
+      "blocked_until": "Phase 2 confirms repo exists and token has access",
+      "gated_by": "human approval (repo may not exist yet)"
+    }
+  ],
+  "generation_policy_unchanged": {
+    "pdf": "BLOCKED (discovery_only)",
+    "note": "Config change CC-1 only maps the publish target. It does NOT enable generation. pdf.yml status stays discovery_only."
+  },
+  "phase1_conclusion": "Current PDF publish target is the central placeholder (aspose/aspose-plugins-examples-dotnet). This was never updated when cells and words got their family-specific targets. The inferred correct target is aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples based on the consistent pattern. Phase 2 must confirm whether this repo exists and is accessible before the config can be updated."
+}

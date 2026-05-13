@@ -1,0 +1,134 @@
+{
+  "verification_date": "2026-05-06",
+  "phase": "PHASE 10: Claim-by-Claim Audit",
+  "claims": [
+    {
+      "id": 1,
+      "claim": "MetricsCollector is instance-scoped on LLMRouter, not global or thread-local",
+      "verdict": "CONFIRMED",
+      "evidence": "router.py line 50: metrics_collector field on LLMRouter dataclass. No module-level collector. No threading constructs."
+    },
+    {
+      "id": 2,
+      "claim": "Config loaded lazily only when --metrics flag or env var set",
+      "verdict": "CONFIRMED",
+      "evidence": "__main__.py: metrics block guarded by `if args.metrics or os.environ.get('AGENT_METRICS_ENABLED') == 'true'`. No import at module level."
+    },
+    {
+      "id": 3,
+      "claim": "Website is aspose.net from config, never hardcoded in metrics source",
+      "verdict": "CONFIRMED",
+      "evidence": "metrics.yml: website: aspose.net. payload_builder.py reads config.website. Grep for aspose.com in src/plugin_examples/metrics/ returns 0 hits. Test proves custom website propagates."
+    },
+    {
+      "id": 4,
+      "claim": "All 18 verdicts from gates/models.py are mapped in metrics.yml verdict_to_status",
+      "verdict": "CONFIRMED",
+      "evidence": "gates/models.py VERDICTS frozenset has 18 entries. metrics.yml verdict_to_status has 18 entries. Sets match exactly."
+    },
+    {
+      "id": 5,
+      "claim": "Router _call_openai_compatible still returns str",
+      "verdict": "CONFIRMED",
+      "evidence": "router.py line 428: return statement returns cleaned string. No LLMCallResult wrapper. Signature unchanged."
+    },
+    {
+      "id": 6,
+      "claim": "Token usage extracted from resp.json()['usage'] in router",
+      "verdict": "CONFIRMED",
+      "evidence": "router.py: usage = resp_data.get('usage', {}), prompt_tokens/completion_tokens/total_tokens extracted with .get() defaults to 0."
+    },
+    {
+      "id": 7,
+      "claim": "No secrets in evidence files",
+      "verdict": "CONFIRMED",
+      "evidence": "evidence.py writes only structured data. LLMCallRecord has no prompt/completion text fields. Grep for AGENT_METRICS_TOKEN, Bearer, Authorization, api_key in metrics/ source finds only env var name references."
+    },
+    {
+      "id": 8,
+      "claim": "Atomic JSON writes via tempfile.mkstemp + os.replace",
+      "verdict": "CONFIRMED",
+      "evidence": "evidence.py:13-26 _atomic_json_write uses mkstemp, writes to temp, then os.replace."
+    },
+    {
+      "id": 9,
+      "claim": "JSONL append-only for LLM calls",
+      "verdict": "CONFIRMED",
+      "evidence": "evidence.py:33 opens with mode 'a' for JSONL appending."
+    },
+    {
+      "id": 10,
+      "claim": "Persistent post ledger outside latest/ directory",
+      "verdict": "CONFIRMED",
+      "evidence": "Ledger at workspace/verification/agent-metrics-post-ledger.jsonl (not under latest/). Config: post_ledger_path field."
+    },
+    {
+      "id": 11,
+      "claim": "Dry-run never sends HTTP POST",
+      "verdict": "CONFIRMED",
+      "evidence": "poster.py: dry_run check at line 80-87 returns before any HTTP logic. Test test_dry_run_no_http asserts mock_post not called."
+    },
+    {
+      "id": 12,
+      "claim": "Duplicate prevention via SHA256 payload hash in ledger",
+      "verdict": "CONFIRMED",
+      "evidence": "poster.py: payload_hash computed, checked against ledger entries. Same run_id+job_type blocks re-POST."
+    },
+    {
+      "id": 13,
+      "claim": "test_only_sprint=True blocks production job_types",
+      "verdict": "CONFIRMED",
+      "evidence": "poster.py: test_only_sprint check after dry_run check blocks non-test job_types with clear error message."
+    },
+    {
+      "id": 14,
+      "claim": "Google Apps Script auth uses query parameter, not Bearer header",
+      "verdict": "CONFIRMED",
+      "evidence": "poster.py: token appended as ?token=VALUE query parameter. No Authorization header set."
+    },
+    {
+      "id": 15,
+      "claim": "Pipeline hook called from run_pipeline() with real PipelineContext",
+      "verdict": "CONFIRMED",
+      "evidence": "runner.py: finalize_metrics called inside run_pipeline with ctx (PipelineContext instance), not a mock wrapper."
+    },
+    {
+      "id": 16,
+      "claim": "CLI flags registered: --metrics, --metrics-post, --metrics-job-type, --metrics-strict, --metrics-force-repost, --metrics-config",
+      "verdict": "CONFIRMED",
+      "evidence": "__main__.py: all 6 flags added to run subparser. test_metrics_flags_registered confirms parsing."
+    },
+    {
+      "id": 17,
+      "claim": "run_pipeline signature accepts all metrics parameters",
+      "verdict": "CONFIRMED",
+      "evidence": "runner.py: metrics_collector, metrics_config, metrics_post, metrics_job_type, metrics_strict, metrics_force_repost in signature. Test test_run_pipeline_accepts_metrics_params confirms via inspect."
+    },
+    {
+      "id": 18,
+      "claim": "966 tests pass in full regression",
+      "verdict": "CONFIRMED",
+      "evidence": "pytest tests/ -v: 966 passed, 0 failed."
+    },
+    {
+      "id": 19,
+      "claim": "Live test POST succeeded with HTTP 200",
+      "verdict": "CONFIRMED_LOCALLY",
+      "evidence": "agent-metrics-test-post-result.json: http_status=200, api_response.ok=true, message='Metrics recorded'. Google Sheet row NOT independently verified (requires authenticated access)."
+    },
+    {
+      "id": 20,
+      "claim": "Only run command has metrics wiring; other commands not yet instrumented",
+      "verdict": "CONFIRMED",
+      "evidence": "__main__.py: metrics flags only on run subparser. Other commands (discover-lowcode, publish-pr, etc.) do not pass metrics params. This is by design — count formulas for other commands are BLOCKED_UNTIL_COUNT_SOURCE_VERIFIED per plan."
+    }
+  ],
+  "summary": {
+    "total_claims": 20,
+    "confirmed": 18,
+    "confirmed_locally": 1,
+    "refuted": 0,
+    "not_verifiable": 1,
+    "notes": "Claim 19 confirmed locally (HTTP 200 in evidence files and ledger) but Google Sheet row presence cannot be verified from agent. Claim 20 is a known scope limitation, not a defect."
+  }
+}

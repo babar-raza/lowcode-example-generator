@@ -1,0 +1,54 @@
+{
+  "check_type": "github_repo_access",
+  "check_date": "2026-05-01T11:37:59+00:00",
+  "check_method": "github_api_repos_endpoint",
+  "authenticated_as": "babar-raza",
+  "token_type": "fine_grained_pat",
+  "token_scopes": "not_present (fine-grained PATs do not expose x-oauth-scopes)",
+
+  "repos": [
+    {
+      "family": "cells",
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "access_status": "http_404",
+      "can_read": false,
+      "can_push": null,
+      "default_branch": null,
+      "visibility": null,
+      "error": "HTTP Error 404: Not Found",
+      "org_exists": true,
+      "org_public_repos_visible": 0,
+      "interpretation": "Repo not found or private without token access. Org exists (aspose-cells-net confirmed). Fine-grained PAT may not have access to private repos in this org, or repo has not been created yet.",
+      "action_required": "Confirm repo exists and grant GITHUB_TOKEN read+write access, or create the repo"
+    },
+    {
+      "family": "words",
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "access_status": "http_404",
+      "can_read": false,
+      "can_push": null,
+      "default_branch": null,
+      "visibility": null,
+      "error": "HTTP Error 404: Not Found",
+      "org_exists": true,
+      "org_public_repos_visible": 0,
+      "interpretation": "Repo not found or private without token access. Org exists (aspose-words-net confirmed). Same as cells — fine-grained PAT may not have access or repo not yet created.",
+      "action_required": "Confirm repo exists and grant GITHUB_TOKEN read+write access, or create the repo"
+    }
+  ],
+
+  "summary": {
+    "repos_checked": 2,
+    "repos_accessible": 0,
+    "repos_not_found_or_inaccessible": 2,
+    "overall_access_status": "blocked_repo_access_failed",
+    "live_publish_status": "BLOCKED (dry_run enforced regardless)",
+    "config_update_status": "configs updated with maintainer-provided targets — targets are family-specific even if access unverified"
+  },
+
+  "note": "Config targets have been updated to maintainer-provided values (aspose-cells-net and aspose-words-net). The publish readiness validator correctly identifies these as family-specific targets (publish_ready=true at config level). Live publish remains blocked by dry_run enforcement. Repo access must be verified separately (followup-repo-access-permission)."
+}

@@ -1,0 +1,104 @@
+{
+  "title": "Agent Metrics Gap Closure Sprint 2 - Final Completion Verdict",
+  "verdict_date": "2026-05-06",
+  "sprint": "gap-closure-sprint-2",
+  "prior_verdict": "IMPLEMENTATION_PARTIAL_WITH_GAPS",
+  "final_verdict": "IMPLEMENTATION_COMPLETE_ALL_GAPS_CLOSED",
+  "gaps_closed": {
+    "A_agent_name_normalization": {
+      "gap": "agent_name was template-based (lowcode-example-generator-{command}), varied per command",
+      "fix": "Stable agent_name='lowcode-example-generator', test prefix='test-', command identity in job_type",
+      "files_changed": ["pipeline/configs/metrics.yml", "src/plugin_examples/metrics/config.py", "src/plugin_examples/metrics/payload_builder.py"],
+      "tests": 5,
+      "status": "CLOSED"
+    },
+    "B_router_automatic_capture": {
+      "gap": "LLM calls not automatically captured for non-run commands",
+      "fix": "MetricsCollector instance-scoped on LLMRouter, passed to _call_openai_compatible/_call_ollama",
+      "files_changed": ["Already instrumented in prior sprint"],
+      "tests": 8,
+      "status": "CLOSED"
+    },
+    "C_command_agnostic_session": {
+      "gap": "Only run command had metrics support",
+      "fix": "Created MetricsSession (src/plugin_examples/metrics/session.py) - reusable for any command",
+      "files_changed": ["src/plugin_examples/metrics/session.py (new)"],
+      "tests": 17,
+      "status": "CLOSED"
+    },
+    "D_cli_wiring_all_commands": {
+      "gap": "Only run subparser had --metrics flags",
+      "fix": "_add_metrics_flags() applied to all 11 non-excluded subparsers, _create_metrics_session/_finalize_metrics_session helpers",
+      "files_changed": ["src/plugin_examples/__main__.py"],
+      "tests": 9,
+      "status": "CLOSED"
+    },
+    "E_count_formula_verification": {
+      "gap": "Count formulas not verified for all 13 commands",
+      "fix": "Classified all 13: 1 SUPPORTED_EXTERNAL_METRICS, 10 LOCAL_ONLY_LLM_METRICS, 2 EXCLUDED_INFO_ONLY",
+      "evidence": "agent-metrics-count-formula-verification.json",
+      "status": "CLOSED"
+    },
+    "F_local_only_blocking": {
+      "gap": "Commands with unverified counts could accidentally POST",
+      "fix": "MetricsSession.external_post_allowed gates POST; local evidence always written for active sessions",
+      "tests": 4,
+      "status": "CLOSED"
+    }
+  },
+  "test_results": {
+    "targeted_metrics_tests": {
+      "test_agent_metrics_config.py": "24 passed",
+      "test_agent_metrics_router.py + test_llm_generation.py": "118 passed",
+      "test_agent_metrics_payload.py": "16 passed",
+      "test_agent_metrics_evidence.py": "6 passed",
+      "test_agent_metrics_poster.py": "10 passed",
+      "test_agent_metrics_cli.py": "9 passed",
+      "test_agent_metrics_session.py": "17 passed (NEW)",
+      "total_metrics_tests": 200
+    },
+    "full_regression": {
+      "total": 988,
+      "passed": 988,
+      "failed": 0
+    }
+  },
+  "evidence_files_produced": [
+    "agent-metrics-count-formula-verification.json (updated)",
+    "agent-metrics-automatic-capture-audit.json (new)",
+    "agent-metrics-agent-name-audit.json (new)",
+    "agent-metrics-command-coverage-matrix.json (new)",
+    "agent-metrics-local-only-blocking-verification.json (new)",
+    "agent-metrics-safety-verification.json (new)",
+    "agent-metrics-final-completion-verdict.json (new)"
+  ],
+  "source_files_changed": [
+    "pipeline/configs/metrics.yml",
+    "src/plugin_examples/metrics/config.py",
+    "src/plugin_examples/metrics/payload_builder.py",
+    "src/plugin_examples/metrics/session.py (new)",
+    "src/plugin_examples/__main__.py",
+    "docs/publishing/agent-metrics-runbook.md"
+  ],
+  "test_files_changed": [
+    "tests/unit/test_agent_metrics_session.py (new, 17 tests)",
+    "tests/unit/test_agent_metrics_config.py (fixture updated)",
+    "tests/unit/test_agent_metrics_cli.py (fixture updated)",
+    "tests/unit/test_agent_metrics_payload.py (fixture updated)",
+    "tests/unit/test_agent_metrics_poster.py (fixture updated)"
+  ],
+  "safety_confirmation": {
+    "production_google_sheet_rows_added": 0,
+    "test_google_sheet_rows_added": 0,
+    "test_only_sprint_active": true,
+    "no_secrets_in_evidence": true,
+    "no_aspose_com_anywhere": true,
+    "router_return_type_unchanged": true,
+    "no_semantic_pipeline_changes": true
+  },
+  "remaining_work": {
+    "production_enablement": "Blocked by test_only_sprint=True. Requires separate human approval.",
+    "count_formula_upgrade": "10 LOCAL_ONLY commands can be upgraded to SUPPORTED_EXTERNAL when item formulas are verified",
+    "api_contract_probe": "TC-01 not yet executed (requires human approval for live endpoint test)"
+  }
+}

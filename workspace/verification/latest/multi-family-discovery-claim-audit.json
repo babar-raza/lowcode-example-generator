@@ -1,0 +1,206 @@
+{
+  "audit_date": "2026-04-30",
+  "audited_sprint": "Multi-Family API Catalog Expansion Sprint",
+  "branch": "main",
+  "head_commit": "b501f67",
+  "test_suite_result": "457 passed in 12.85s",
+  "discovery_rerun_result": "stable — cells:eligible, words:eligible, pdf:blocked_reflection_failed",
+  "claims": [
+    {
+      "id": "claim-1",
+      "claim": "Discovery expanded from Cells-only to Cells + Words + PDF",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/all-family-lowcode-discovery.json",
+      "command_or_code_reference": "discover-lowcode --families cells words pdf --promote-latest",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-2",
+      "claim": "No examples were generated outside Cells",
+      "verdict": "MISLEADING",
+      "evidence_file": "workspace/runs/multi-family-words/pilot-report.json",
+      "command_or_code_reference": "find workspace -type f | grep words.*Program.cs",
+      "risk": "HIGH",
+      "notes": "12 Words examples exist in workspace/runs/multi-family-words/generated/ from 2026-04-29 pilot run using scripts/pilot_run.py --template-mode. 2 Email examples exist in workspace/runs/multi-family-email/generated/. These predate the discover-lowcode sprint but were not disclosed in the final report. The discover-lowcode command itself has no generation pathway (verified by code inspection).",
+      "reopened_taskcard_id": "followup-discovery-only-safety",
+      "next_action": "Add discovery_only guard to runner.py; disclose pre-existing generated artifacts"
+    },
+    {
+      "id": "claim-3",
+      "claim": "No LLM calls occurred",
+      "verdict": "PARTIALLY_TRUE",
+      "evidence_file": "workspace/runs/multi-family-words/pilot-report.json",
+      "command_or_code_reference": "grep -Ri gpt_oss workspace/runs/discovery-*",
+      "risk": "medium",
+      "notes": "discover-lowcode command has no LLM import. multi-family-words pilot showed llm_available=false. workspace/verification/latest/llm-preflight.json from prior Cells run shows gpt_oss was live. No LLM API called in the April 30 discovery runs.",
+      "reopened_taskcard_id": null,
+      "next_action": "Disclose that prior Cells runs did call LLM; discovery sweep isolation is proven"
+    },
+    {
+      "id": "claim-4",
+      "claim": "No live publishing occurred",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/publishing-report.json",
+      "command_or_code_reference": "cat workspace/verification/latest/publishing-report.json",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-5",
+      "claim": "Cells is eligible with Aspose.Cells.LowCode",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/cells-source-of-truth-proof.json",
+      "command_or_code_reference": "discover-lowcode --families cells",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-6",
+      "claim": "Words is eligible with Aspose.Words.LowCode",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/words-source-of-truth-proof.json",
+      "command_or_code_reference": "classify_catalog on workspace/runs/discovery-words-*/catalog/words/api-catalog.json",
+      "risk": "low",
+      "notes": "25 types, 230 methods, 9 workflow_root candidates confirmed by type_classifier. MailMergeDataSource is classified workflow_root at confidence 0.70 and warrants review.",
+      "reopened_taskcard_id": "followup-words-role-classification-review",
+      "next_action": "Review MailMergeDataSource classification before enabling generation"
+    },
+    {
+      "id": "claim-7",
+      "claim": "PDF blocked due to MetadataLoadContext duplicate System.Text.Json",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/all-family-lowcode-discovery.json",
+      "command_or_code_reference": "discover-lowcode --families pdf (reproduced 3 times)",
+      "risk": "low",
+      "notes": "FileLoadException stack trace in evidence. Root cause: System.Text.Json.dll extracted twice via System.Net.Http.Json + direct dep.",
+      "reopened_taskcard_id": "followup-pdf-reflection-dedup",
+      "next_action": "Deduplicate dependency DLLs by assembly identity before DllReflector"
+    },
+    {
+      "id": "claim-8",
+      "claim": "all-family-lowcode-discovery.json written",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/all-family-lowcode-discovery.json",
+      "command_or_code_reference": "ls workspace/verification/latest/",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-9",
+      "claim": "family-generation-readiness-rank.json written",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "command_or_code_reference": "ls workspace/verification/latest/",
+      "risk": "low",
+      "notes": "NOTE: claim was written before __main__.py logger bug was fixed. Ranking was written correctly (line 178) but logger.info (line 179) caused NameError and exit code 1. Bug fixed in this audit.",
+      "reopened_taskcard_id": null,
+      "next_action": "Bug fixed. Verify ranking on next run."
+    },
+    {
+      "id": "claim-10",
+      "claim": "cells-source-of-truth-proof.json written",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/cells-source-of-truth-proof.json",
+      "command_or_code_reference": "ls workspace/verification/latest/",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-11",
+      "claim": "words-source-of-truth-proof.json written",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/words-source-of-truth-proof.json",
+      "command_or_code_reference": "ls workspace/verification/latest/",
+      "risk": "low",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-12",
+      "claim": "PDF proof not written because reflection failed before catalog stage",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/all-family-lowcode-discovery.json",
+      "command_or_code_reference": "cat all-family-lowcode-discovery.json | grep pdf -A5",
+      "risk": "low",
+      "notes": "catalog_path=null, write_source_of_truth_proof not called. By design.",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-13",
+      "claim": "All 457 unit tests pass",
+      "verdict": "VERIFIED",
+      "evidence_file": null,
+      "command_or_code_reference": "PYTHONPATH=src pytest tests/unit -q --timeout=60",
+      "risk": "low",
+      "notes": "457 passed in 12.85s. Independently confirmed.",
+      "reopened_taskcard_id": null,
+      "next_action": "none"
+    },
+    {
+      "id": "claim-14",
+      "claim": "Outstanding taskcards: followup-pdf-reflection-dedup and followup-words-generation-enable only",
+      "verdict": "FALSE_INCOMPLETE",
+      "evidence_file": "src/plugin_examples/runner.py",
+      "command_or_code_reference": "grep -n 'discovery_only' src/plugin_examples/runner.py",
+      "risk": "HIGH",
+      "notes": "At minimum 6 additional taskcards required. See taskcards section.",
+      "reopened_taskcard_id": "followup-discovery-only-safety, followup-words-options-aware-review, followup-words-role-classification-review, followup-disabled-configs-cleanup, followup-family-readiness-ranker-trust, followup-fixture-token-ci",
+      "next_action": "See individual taskcard definitions"
+    }
+  ],
+  "bugs_found": [
+    {
+      "id": "BUG-1",
+      "file": "src/plugin_examples/__main__.py",
+      "line": 179,
+      "description": "NameError: name 'logger' is not defined in discover-lowcode handler",
+      "status": "FIXED",
+      "fix": "Replaced logger.info with logging.getLogger(__name__).info"
+    },
+    {
+      "id": "BUG-2",
+      "file": "src/plugin_examples/runner.py",
+      "line": 279,
+      "description": "discovery_only families not blocked from generation pipeline",
+      "status": "OPEN",
+      "fix": "Add discovery_only guard to _stage_load_config"
+    },
+    {
+      "id": "BUG-3",
+      "file": "pipeline/configs/families/disabled/",
+      "line": null,
+      "description": "Stale disabled/ configs for words.yml and pdf.yml still exist with status:experimental alongside new active discovery_only configs",
+      "status": "OPEN",
+      "fix": "Delete pipeline/configs/families/disabled/words.yml and pdf.yml"
+    }
+  ],
+  "opened_taskcards": [
+    "followup-pdf-reflection-dedup",
+    "followup-discovery-only-safety",
+    "followup-words-options-aware-review",
+    "followup-words-role-classification-review",
+    "followup-disabled-configs-cleanup",
+    "followup-family-readiness-ranker-trust",
+    "followup-fixture-token-ci"
+  ],
+  "closed_taskcards": [
+    "followup-publisher-evidence-ordering",
+    "followup-discovery-sweep-deps",
+    "followup-github-api-403"
+  ],
+  "generation_policy": {
+    "cells": "ALLOWED — active, PR_DRY_RUN_READY, options-aware rules in place",
+    "words": "BLOCKED — pending TC-3 (safety guard), TC-4 (options-aware review), TC-5 (role review)",
+    "pdf": "BLOCKED — pending TC-1 (reflection dedup)",
+    "email": "BLOCKED — not in active config",
+    "slides": "BLOCKED — reflection failure (DLL name mismatch)",
+    "all_family": "BLOCKED"
+  }
+}

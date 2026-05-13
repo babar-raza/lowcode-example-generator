@@ -1,0 +1,52 @@
+{
+  "artifact_type": "words_wave2_publication_readiness",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "lane": 1,
+  "sprint": "Portfolio Launch Sprint 2",
+  "family": "words",
+  "wave": 2,
+  "new_types": ["Merger", "Comparer"],
+  "publication_action": "words_wave2_live_pr",
+  "readiness_verdict": "READY_PENDING_APPROVAL",
+  "approval_gate_status": "BLOCKED — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+  "technical_readiness": {
+    "words_merger": {
+      "lifecycle_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "code_pattern": "Merger.Merge(outputFile, new[] { inputFile1, inputFile2 })",
+      "pattern_type": "static_call",
+      "fixture_strategy": "programmatic_pair_docx",
+      "build_status": "PASS",
+      "runtime_status": "PASS",
+      "reviewer_status": "NOT_REQUIRED_FOR_PILOT",
+      "ready_for_pr": true
+    },
+    "words_comparer": {
+      "lifecycle_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "code_pattern": "Comparer.Compare(inputPath1, inputPath2, outputPath, \"DemoAuthor\", DateTime.UtcNow)",
+      "pattern_type": "static_call",
+      "fixture_strategy": "programmatic_pair_docx",
+      "build_status": "PASS",
+      "runtime_status": "PASS",
+      "reviewer_status": "NOT_REQUIRED_FOR_PILOT",
+      "ready_for_pr": true
+    }
+  },
+  "pr_dry_run_package": "workspace/pr-dry-run/words-wave2/",
+  "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+  "pr_scope": "PARTIAL_CANARY",
+  "denominator_after_publish": {
+    "published": 6,
+    "pilot_allowed": 6,
+    "coverage_pct": 100.0,
+    "release_scope_status": "PILOT_COMPLETE"
+  },
+  "next_action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR and run: .venv/Scripts/python.exe -m plugin_examples publish-pr --family words --approval-token APPROVE_LIVE_PR --promote-latest",
+  "blockers": [
+    "APPROVE_LIVE_PR not set (PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL)"
+  ],
+  "non_blockers": [
+    "GITHUB_TOKEN present (classic PAT with repo scope)",
+    "Both examples build and run without errors",
+    "PR dry-run package verified"
+  ]
+}

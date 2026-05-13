@@ -1,0 +1,37 @@
+{
+  "title": "CORRECTION ADDENDUM — agent-metrics-safety-verification.json",
+  "addendum_type": "stale_count_correction",
+  "corrected_by": "agent-metrics-gap2-evidence-hygiene",
+  "correction_date": "2026-05-06",
+  "original_file": "workspace/verification/latest/agent-metrics-safety-verification.json",
+  "correction_reason": "Independent verification found stale test-count claims. All functional safety properties remain verified. This addendum supersedes only the stale regression_results count fields.",
+  "stale_fields_in_original": {
+    "regression_results.metrics_specific_tests": {
+      "original_value": 205,
+      "corrected_value": 99,
+      "correction_evidence": "agent-metrics-gap2-current-test-counts.json"
+    },
+    "regression_results.metrics_tests_passed": {
+      "original_value": 205,
+      "corrected_value": 99,
+      "correction_evidence": "agent-metrics-gap2-current-test-counts.json"
+    }
+  },
+  "root_cause": "Implementation sprint counted 118 from a combined run of test_agent_metrics_router.py+test_llm_generation.py, and added this to the metrics-specific total. test_llm_generation.py (109 tests) covers LLM API correctness (Aspose PDF API patterns, few-shot rules, repair validators) and is not a metrics-specific test file.",
+  "corrected_regression_results": {
+    "total_tests": 988,
+    "passed": 988,
+    "failed": 0,
+    "metrics_specific_tests": 99,
+    "metrics_tests_passed": 99
+  },
+  "verification_command": ".venv/Scripts/python.exe -m pytest tests/unit/test_agent_metrics_config.py tests/unit/test_agent_metrics_router.py tests/unit/test_agent_metrics_payload.py tests/unit/test_agent_metrics_evidence.py tests/unit/test_agent_metrics_poster.py tests/unit/test_agent_metrics_cli.py tests/unit/test_agent_metrics_session.py tests/unit/test_agent_metrics_runner.py -v",
+  "verification_result": "99 passed in 2.52s",
+  "unchanged_fields": {
+    "verdict": "ALL_SAFETY_PROPERTIES_VERIFIED",
+    "safety_properties": "All 9 properties remain VERIFIED",
+    "google_sheet_safety": "Unchanged — 0 production rows, 0 test rows",
+    "full_regression": "988 passed, 0 failed"
+  },
+  "functional_verdict_impact": "NONE — stale counts in regression_results did not affect any safety property verdict"
+}

@@ -1,0 +1,26 @@
+{
+  "artifact": "healing-remediation-commit-record",
+  "timestamp": "2026-05-11T15:10:00Z",
+  "commit_sha": "5f9e917",
+  "commit_message": "feat: add catalog hash enforcement, monthly build regression, 25-family discovery configs, and denominator governance",
+  "files_committed": 163,
+  "insertions": 27331,
+  "deletions": 2093,
+  "categories": {
+    "source_modified": 22,
+    "source_new": 12,
+    "tests_modified": 11,
+    "tests_new": 28,
+    "config_modified": 5,
+    "config_new": 50,
+    "scripts_new": 6,
+    "manifests_modified": 5,
+    "verification_modified": 22,
+    "tools_modified": 1,
+    "schemas_new": 2
+  },
+  "pre_commit_test_result": "1235 passed in 44.89s",
+  "sensitive_files_staged": false,
+  "unrelated_files_staged": false,
+  "gate_1_verdict": "HEALING_COMMIT_CREATED"
+}

@@ -1,0 +1,121 @@
+{
+  "sprint": "Combined Cells + Words PR Packaging Review Sprint",
+  "sprint_date": "2026-05-01",
+  "family": "cells",
+  "source_run": "workspace/runs/pilot-cells-20260430-175422",
+  "source_verdict": "PR_DRY_RUN_READY",
+  "selection_method": "All examples with final_example_verdict=EXAMPLE_READY_FOR_PR_DRY_RUN in example-gate-results.json",
+
+  "evidence_files_verified": {
+    "cells-source-of-truth-proof.json": {
+      "path": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/cells-source-of-truth-proof.json",
+      "package_id": "Aspose.Cells",
+      "resolved_version": "26.4.0",
+      "eligibility_status": "eligible"
+    },
+    "example-gate-results.json": {
+      "path": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/example-gate-results.json",
+      "total_examples": 9,
+      "publish_candidates": 9,
+      "blocked_examples": 0
+    },
+    "validation-results.json": {
+      "path": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/validation-results.json",
+      "all_9_restore": true,
+      "all_9_build": true,
+      "all_9_run": true
+    },
+    "example-reviewer-results.json": {
+      "path": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/example-reviewer-results.json",
+      "available": true,
+      "passed": true
+    },
+    "pilot-report.json": {
+      "path": "workspace/runs/pilot-cells-20260430-175422/pilot-report.json",
+      "verdict": "PR_DRY_RUN_READY",
+      "dotnet_build_passed": 9,
+      "dotnet_run_passed": 9,
+      "reviewer_result": "passed",
+      "publisher_status": "dry_run"
+    }
+  },
+
+  "selected_candidates": [
+    {
+      "scenario_id": "cells-html-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-html-converter",
+      "dest_path": "examples/cells/lowcode/html-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-image-converter",
+      "dest_path": "examples/cells/lowcode/image-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-json-converter",
+      "dest_path": "examples/cells/lowcode/json-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-pdf-converter",
+      "dest_path": "examples/cells/lowcode/pdf-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-spreadsheet-converter",
+      "dest_path": "examples/cells/lowcode/spreadsheet-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-spreadsheet-locker",
+      "dest_path": "examples/cells/lowcode/spreadsheet-locker/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-spreadsheet-merger",
+      "dest_path": "examples/cells/lowcode/spreadsheet-merger/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-spreadsheet-splitter",
+      "dest_path": "examples/cells/lowcode/spreadsheet-splitter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.xlsx"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "source_path": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-text-converter",
+      "dest_path": "examples/cells/lowcode/text-converter/",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "has_fixture_file": true,
+      "fixture_file": "input.csv"
+    }
+  ],
+
+  "total_selected": 9,
+  "total_blocked": 0,
+  "selection_verdict": "ALL_9_SELECTED"
+}

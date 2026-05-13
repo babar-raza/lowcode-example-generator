@@ -1,0 +1,78 @@
+{
+  "audit_type": "family-publishing-target",
+  "audit_date": "2026-05-01",
+  "sprint": "Family-Specific Repo Mapping Verification and Config Update Sprint",
+  "verdict": "CELLS_WORDS_FAMILY_SPECIFIC_PDF_BLOCKED_REPO_ACCESS_UNVERIFIED",
+
+  "families_audited": [
+    {
+      "family": "cells",
+      "config_path": "pipeline/configs/families/cells.yml",
+      "published_plugin_examples_repo": {
+        "owner": "aspose-cells-net",
+        "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+        "branch": "main"
+      },
+      "is_central_repo": false,
+      "is_family_specific": true,
+      "central_repo_allowed": false,
+      "readiness_validator_result": "publish_ready=true",
+      "repo_access_status": "http_404 (blocked_repo_access_failed)",
+      "live_publish_status": "BLOCKED (dry_run + repo_access_unverified)",
+      "dry_run_status": "ALLOWED",
+      "finding": "Target is family-specific (aspose-cells-net contains 'cells'). Config correctly updated from central placeholder. Repo API returns 404 — see followup-repo-access-permission.",
+      "previous_target": "aspose/aspose-plugins-examples-dotnet (central placeholder)"
+    },
+    {
+      "family": "words",
+      "config_path": "pipeline/configs/families/words.yml",
+      "published_plugin_examples_repo": {
+        "owner": "aspose-words-net",
+        "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+        "branch": "main"
+      },
+      "is_central_repo": false,
+      "is_family_specific": true,
+      "central_repo_allowed": false,
+      "readiness_validator_result": "publish_ready=true",
+      "repo_access_status": "http_404 (blocked_repo_access_failed)",
+      "live_publish_status": "BLOCKED (dry_run + repo_access_unverified)",
+      "dry_run_status": "ALLOWED",
+      "finding": "Target is family-specific (aspose-words-net contains 'words'). Config correctly updated from central placeholder. Repo API returns 404 — see followup-repo-access-permission.",
+      "previous_target": "aspose/aspose-plugins-examples-dotnet (central placeholder)"
+    },
+    {
+      "family": "pdf",
+      "config_path": "pipeline/configs/families/pdf.yml",
+      "published_plugin_examples_repo": {
+        "owner": "aspose",
+        "repo": "aspose-plugins-examples-dotnet",
+        "branch": "main"
+      },
+      "is_central_repo": true,
+      "is_family_specific": false,
+      "central_repo_allowed": false,
+      "readiness_validator_result": "publish_ready=false (blocked_family_not_active)",
+      "repo_access_status": "not_checked (family not active)",
+      "live_publish_status": "BLOCKED (discovery_only + central_placeholder)",
+      "dry_run_status": "BLOCKED (discovery_only — no generation)",
+      "finding": "PDF status=discovery_only blocks generation AND publishing. Central placeholder still in config. PDF not updated — pending followup-pdf-reflection-dedup and a separate maintainer decision on PDF publish target.",
+      "previous_target": "aspose/aspose-plugins-examples-dotnet (unchanged)"
+    }
+  ],
+
+  "summary": {
+    "total_families": 3,
+    "family_specific_targets": 2,
+    "central_targets_remaining": 1,
+    "readiness_validator_ready": 2,
+    "blocked_by_repo_access": 2,
+    "blocked_family_not_active": 1,
+    "live_publish_blocked_all": true
+  },
+
+  "detection_method": {
+    "function": "_is_central_repo(owner, repo, family)",
+    "source": "src/plugin_examples/publisher/publisher.py"
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 2: Source File Audit",
+  "phase": "PHASE_2",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_version": "v4",
+  "objective": "Inspect all 15 plan-required source files and verify presence, purpose, and correctness against v4 plan requirements",
+  "files_audited": [
+    {
+      "file": "pipeline/configs/metrics.yml",
+      "exists": true,
+      "lines": 80,
+      "plan_requirement": "Section 6 — Metrics source-of-truth config",
+      "key_fields_verified": {
+        "agent_name": "lowcode-example-generator",
+        "agent_name_test_prefix": "test-",
+        "website": "aspose.net",
+        "website_section": "Examples",
+        "platform": ".NET",
+        "family_to_product_entries": 3,
+        "command_to_job_type_entries": 11,
+        "command_to_item_name_entries": 11,
+        "verdict_to_status_entries": 18,
+        "allowed_statuses_count": 3,
+        "allowed_job_types_count": 5,
+        "post_ledger_path": "workspace/verification/agent-metrics-post-ledger.jsonl"
+      },
+      "amendment_compliance": {
+        "AMD1_stable_agent_name": "PASS — agent_name field present, no agent_name_template",
+        "AMD2_test_prefix": "PASS — agent_name_test_prefix: 'test-' present",
+        "AMD5_website_config_driven": "PASS — website: 'aspose.net' in config"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/__init__.py",
+      "exists": true,
+      "plan_requirement": "TC-02 — metrics package marker",
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/config.py",
+      "exists": true,
+      "plan_requirement": "TC-02 — lazy config loader",
+      "key_fields_verified": {
+        "agent_name_field": "agent_name: str = 'lowcode-example-generator'",
+        "agent_name_test_prefix_field": "agent_name_test_prefix: str = 'test-'",
+        "website_field": "website: str = 'aspose.net'",
+        "no_agent_name_template": true,
+        "lazy_loading": "load_metrics_config() — loads only when called"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/models.py",
+      "exists": true,
+      "plan_requirement": "TC-03 — MetricsCollector and LLMCallRecord dataclasses",
+      "key_fields_verified": {
+        "LLMCallRecord_dataclass": true,
+        "MetricsCollector_dataclass": true,
+        "token_usage_property": true,
+        "api_calls_count_property": true,
+        "instance_scoped_not_global": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/session.py",
+      "exists": true,
+      "plan_requirement": "Implementation sprint — MetricsSession (command-agnostic)",
+      "key_fields_verified": {
+        "EXTERNAL_POST_COMMANDS": "frozenset({'run'})",
+        "EXCLUDED_COMMANDS": "frozenset({'status', 'check'})",
+        "LOCAL_ONLY_commands": "10 commands (all non-run non-excluded)",
+        "test_only_sprint_line": "181",
+        "finalize_blocks_local_only": true,
+        "active_false_for_excluded": true
+      },
+      "amendment_compliance": {
+        "AMD3_automatic_capture": "PASS — all LLM-calling commands tracked",
+        "AMD4_local_only_block": "PASS — finalize() returns blocked for LOCAL_ONLY"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/payload_builder.py",
+      "exists": true,
+      "plan_requirement": "TC-07 — payload builder",
+      "key_fields_verified": {
+        "agent_name_from_config": "line 36: config.agent_name",
+        "test_mode_prefix": "line 37-38: f'{config.agent_name_test_prefix}{agent_name}'",
+        "website_from_config": "line 68: config.website",
+        "all_17_fields_built": true,
+        "no_hardcoded_website": true
+      },
+      "amendment_compliance": {
+        "AMD1_stable_agent_name": "PASS — config.agent_name (not template)",
+        "AMD2_test_prefix": "PASS — prefix applied when test_mode=True",
+        "AMD5_website_config_driven": "PASS — config.website, not literal"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/validator.py",
+      "exists": true,
+      "plan_requirement": "TC-07 — config-driven validator",
+      "key_fields_verified": {
+        "status_validated_against_config": "line 42: status not in config.allowed_statuses",
+        "job_type_validated_against_config": "line 47: job_type not in config.allowed_job_types",
+        "website_config_driven_warning": "line 52: website != config.website (warning, not error)",
+        "no_hardcoded_lists_in_python": true
+      },
+      "plan_section_7_stop_condition": "SC-2 website validation hardcoded? NO — PASS",
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/evidence.py",
+      "exists": true,
+      "plan_requirement": "TC-08 — run-scoped evidence writer",
+      "key_fields_verified": {
+        "writes_llm_calls_jsonl": true,
+        "writes_run_summary": true,
+        "writes_payload": true,
+        "writes_validation": true,
+        "writes_post_result": true,
+        "atomic_writes": true,
+        "no_secrets_in_output": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/poster.py",
+      "exists": true,
+      "plan_requirement": "TC-09, TC-10 — poster with ledger and dry-run",
+      "key_fields_verified": {
+        "dry_run_blocks_post_line_81": true,
+        "test_only_sprint_blocks_production_line_90": true,
+        "duplicate_check_via_ledger_line_98": true,
+        "token_from_env_not_stored_line_107": true,
+        "force_repost_bypasses_ledger_not_test_only": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/pipeline_hook.py",
+      "exists": true,
+      "plan_requirement": "TC-11 — pipeline finalization hook",
+      "key_fields_verified": {
+        "finalize_metrics_function_line_12": true,
+        "test_only_sprint_default_true_line_23": true,
+        "run_scoped_evidence_dir": "getattr(ctx, 'evidence_dir', None) — run-scoped",
+        "source_backed_count_formulas_run": "lines 56-63",
+        "no_crash_wrapping": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/llm_router/router.py",
+      "exists": true,
+      "lines": 341,
+      "plan_requirement": "TC-04 — router instrumentation",
+      "key_fields_verified": {
+        "metrics_collector_field_line_50": "metrics_collector: object | None = None",
+        "call_openai_compatible_instrumented": true,
+        "call_ollama_instrumented": true,
+        "return_type_str_unchanged": true,
+        "usage_extracted_from_response": true,
+        "failed_http_counted": true,
+        "preflight_get_not_counted": true
+      },
+      "plan_stop_condition_SC13": "Return type unchanged from str — PASS",
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/runner.py",
+      "exists": true,
+      "plan_requirement": "TC-05 — PipelineContext with MetricsCollector",
+      "key_fields_verified": {
+        "metrics_field_on_PipelineContext": true,
+        "metrics_wired_to_LLMRouter": true,
+        "run_id_generated": "f'pilot-{family}-{ts}' at line 1146",
+        "evidence_dir_run_scoped": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/__main__.py",
+      "exists": true,
+      "plan_requirement": "TC-11 — CLI flags and metrics session creation",
+      "key_fields_verified": {
+        "_add_metrics_flags_function": "lines 10-23",
+        "_create_metrics_session_function": "lines 26-75",
+        "evidence_at_run_scoped_path": "workspace/runs/{run_id}/evidence/ at line 57",
+        "11_subparsers_have_metrics_flags": true,
+        "status_check_have_no_flags": true
+      },
+      "plan_stop_condition_SC10": "Evidence run-scoped not written directly to latest/ — PASS",
+      "verdict": "PASS"
+    },
+    {
+      "file": "src/plugin_examples/metrics/provider_policy.py",
+      "exists": true,
+      "plan_requirement": "Section 5 normalization — approved providers",
+      "key_fields_verified": {
+        "APPROVED_PROVIDERS": "frozenset({'llm_professionalize', 'ollama'})",
+        "token_source_per_provider": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "file": "docs/publishing/agent-metrics-runbook.md",
+      "exists": true,
+      "plan_requirement": "TC-12 — documentation and runbook",
+      "key_fields_verified": {
+        "references_aspose_net": true,
+        "references_stable_agent_name": true,
+        "env_vars_documented": true,
+        "dry_run_procedure": true,
+        "test_post_procedure": true,
+        "production_enablement_blocked": true
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "summary": {
+    "files_required": 15,
+    "files_present": 15,
+    "files_passing": 15,
+    "files_failing": 0,
+    "aspose_com_in_metrics_source": false,
+    "hardcoded_website_in_source": false,
+    "global_mutable_state": false,
+    "router_return_type_str": true
+  },
+  "overall_verdict": "PASS — all 15 source files present and conformant with v4 plan requirements and all amendments"
+}

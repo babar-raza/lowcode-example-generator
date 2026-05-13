@@ -1,0 +1,141 @@
+{
+  "review_type": "readme_backfill_pr_review_preflight",
+  "review_date": "2026-05-04 12:30 UTC",
+  "sprint": "README Backfill PR Review, Merge, and Post-Merge Verification Sprint",
+  "reviewed_by": "pipeline_agent",
+
+  "q1_prs_exist": {
+    "question": "Do both PRs exist?",
+    "answer": true,
+    "cells": {"pr_number": 2, "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/2"},
+    "words": {"pr_number": 2, "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/2"}
+  },
+
+  "q2_prs_open_unmerged": {
+    "question": "Are both PRs open and unmerged?",
+    "answer": true,
+    "cells": {"state": "open", "merged": false, "mergeable": true},
+    "words": {"state": "open", "merged": false, "mergeable": true}
+  },
+
+  "q3_only_readme_changed": {
+    "question": "Does each PR change only README.md?",
+    "answer": true,
+    "cells_files": ["README.md"],
+    "words_files": ["README.md"],
+    "no_example_files": true,
+    "no_props_files": true,
+    "no_global_json": true,
+    "no_pr_summary_md": true
+  },
+
+  "q4_readme_matches_rendered_output": {
+    "question": "Does each README match the rendered/audited output?",
+    "answer": true,
+    "cells": {
+      "local_bytes": 5081,
+      "pr_patch_first_line": "# Aspose.Cells for .NET LowCode Examples",
+      "title_correct": true,
+      "badges_present": true,
+      "audit_passed": true
+    },
+    "words": {
+      "local_bytes": 4337,
+      "pr_patch_first_line": "# Aspose.Words for .NET LowCode Examples",
+      "title_correct": true,
+      "badges_present": true,
+      "audit_passed": true
+    }
+  },
+
+  "q5_readme_matches_actual_examples": {
+    "question": "Do README contents match actual examples on main?",
+    "answer": true,
+    "cells": {
+      "main_examples": ["html-converter","image-converter","json-converter","pdf-converter","spreadsheet-converter","spreadsheet-locker","spreadsheet-merger","spreadsheet-splitter","text-converter"],
+      "readme_examples": ["html-converter","image-converter","json-converter","pdf-converter","spreadsheet-converter","spreadsheet-locker","spreadsheet-merger","spreadsheet-splitter","text-converter"],
+      "match": true
+    },
+    "words": {
+      "main_examples": ["converter","replacer","splitter","watermarker"],
+      "readme_examples": ["converter","replacer","splitter","watermarker"],
+      "match": true
+    }
+  },
+
+  "q6_package_versions_correct": {
+    "question": "Are package versions correct?",
+    "answer": true,
+    "cells_version": "26.4.0",
+    "words_version": "26.4.0",
+    "evidence": "cells-root-readme-audit.json: expected_version=26.4.0, found_version=26.4.0. words-root-readme-audit.json: same."
+  },
+
+  "q7_run_commands_correct": {
+    "question": "Are run commands correct?",
+    "answer": true,
+    "cells_sample": "dotnet run --project examples/cells/lowcode/html-converter",
+    "words_sample": "dotnet run --project examples/words/lowcode/converter",
+    "format": "dotnet run --project examples/{family}/lowcode/{name}",
+    "verified": "All 9 cells + 4 words run commands follow correct path pattern"
+  },
+
+  "q8_no_catalog_symbol_noise": {
+    "question": "Is there any catalog symbol noise?",
+    "answer": false,
+    "cells": "catalog_symbol_noise_found: false (cells-root-readme-audit.json)",
+    "words": "catalog_symbol_noise_found: false (words-root-readme-audit.json)"
+  },
+
+  "q9_no_central_repo_references": {
+    "question": "Are there any central repo references?",
+    "answer": false,
+    "cells": "central_repo_reference_found: false",
+    "words": "central_repo_reference_found: false"
+  },
+
+  "q10_no_cross_family_contamination": {
+    "question": "Is there any cross-family contamination?",
+    "answer": false,
+    "cells_has_words_ref": false,
+    "words_has_cells_ref": false,
+    "evidence": "grep for Aspose.Words in cells README: no matches. grep for Aspose.Cells in words README: no matches."
+  },
+
+  "q11_no_token_leakage": {
+    "question": "Is there any token leakage?",
+    "answer": false,
+    "readme_files_checked": true,
+    "evidence_files_checked": true,
+    "pr_body_checked": true,
+    "result": "No token, secret, or credential references found in any README or evidence file"
+  },
+
+  "q12_safe_to_merge": {
+    "question": "Is it safe to merge both README PRs?",
+    "answer": true,
+    "reasons": [
+      "Both PRs change only README.md (+141/-1 for cells, +134/-1 for words)",
+      "README content matches rendered/audited local output",
+      "Examples in README match examples on main (9 cells, 4 words)",
+      "Package versions correct (26.4.0)",
+      "No catalog noise, no central repo refs, no cross-family contamination",
+      "No token leakage",
+      "Clean-checkout evidence present (ALL_PASS for both families)",
+      "Merge approval: APPROVE_MERGE_PR provided for this sprint"
+    ]
+  },
+
+  "merge_preconditions": {
+    "cells_clean_checkout_evidence": "cells-live-pr-clean-checkout-validation.json: ALL_PASS (9/9)",
+    "words_clean_checkout_evidence": "words-live-pr-clean-checkout-validation.json: ALL_PASS (4/4)",
+    "merge_approval": "APPROVE_MERGE_PR provided",
+    "github_token_required": true,
+    "note": "merge-pr uses GITHUB_TOKEN; GH_TOKEN used as process-scoped override per token policy"
+  },
+
+  "code_bug_found": false,
+  "blocker_found": false,
+
+  "verdict": "PREFLIGHT_PASS_PROCEED_TO_MERGE"
+}

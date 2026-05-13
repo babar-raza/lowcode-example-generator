@@ -1,0 +1,17 @@
+{
+  "artifact": "diagram-live-pr-created",
+  "timestamp": "2026-05-11T18:12:00Z",
+  "live_pr_created": false,
+  "blocker": "DIAGRAM_LIVE_PR_BLOCKED_BY_APPROVAL_GATE",
+  "blocker_detail": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is not set. Must be 'APPROVE_LIVE_PR'.",
+  "all_other_gates_passed": {
+    "source_committed": true,
+    "package_revalidated": true,
+    "target_repo_push_ready": true,
+    "github_token_set": true,
+    "examples_build_run_passed": true
+  },
+  "ready_to_publish_on_approval": true,
+  "publish_command": "PYTHONPATH=src PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR .venv/Scripts/python.exe -m plugin_examples publish-pr --families diagram --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+  "verdict": "BLOCKED_BY_APPROVAL"
+}

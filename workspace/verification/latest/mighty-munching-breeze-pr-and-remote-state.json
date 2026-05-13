@@ -1,0 +1,85 @@
+{
+  "gate": 4,
+  "gate_name": "pr_and_remote_state",
+  "result_type": "mighty-munching-breeze-pr-and-remote-state",
+  "verification_date": "2026-05-04",
+  "note": "Remote repo state verified via evidence files in workspace/verification/latest/. No live GitHub API calls made in this verification gate — all state inferred from sprint evidence artifacts.",
+  "cells": {
+    "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "pr1_examples": {
+      "pr_number": 1,
+      "status": "MERGED",
+      "merge_commit_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+      "merged_at": "2026-05-03T09:03:13Z",
+      "post_merge_validation": "ALL_PASS 9/9",
+      "evidence": "workspace/verification/latest/cells-merge-result.json + cells-post-merge-clean-checkout-validation.json"
+    },
+    "pr2_readme": {
+      "pr_number": 2,
+      "status": "MERGED",
+      "merge_commit_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+      "merged_at": "2026-05-04T07:04:27Z",
+      "remote_readme_state": "pipeline_generated_5346_bytes",
+      "evidence": "workspace/verification/latest/cells-readme-backfill-result.json + repository-consistency-and-reproducibility-audit.json"
+    },
+    "pr3_readme_correction": {
+      "pr_number": 3,
+      "status": "OPEN",
+      "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3",
+      "branch": "plugin-examples/cells/readme/20260504-092305",
+      "purpose": "Correct aspose.com links to aspose.net links",
+      "evidence": "workspace/verification/latest/cells-readme-backfill-result.json"
+    },
+    "current_remote_state": "Main branch has 9 examples (PR #1) + README.md with aspose.com links (PR #2). PR #3 corrects links but is OPEN pending merge."
+  },
+  "words": {
+    "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "pr1_examples": {
+      "pr_number": 1,
+      "status": "MERGED",
+      "merge_commit_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+      "merged_at": "2026-05-03T08:35:49Z",
+      "post_merge_validation": "ALL_PASS 4/4",
+      "evidence": "workspace/verification/latest/words-merge-result.json + words-post-merge-clean-checkout-validation.json"
+    },
+    "pr2_readme": {
+      "pr_number": 2,
+      "status": "MERGED",
+      "merge_commit_sha": "b1877ed728ee34d04dea6c03143c49b86d2d4d72",
+      "merged_at": "2026-05-04T07:04:36Z",
+      "remote_readme_state": "pipeline_generated_4555_bytes",
+      "evidence": "workspace/verification/latest/words-readme-backfill-result.json + repository-consistency-and-reproducibility-audit.json"
+    },
+    "pr3_readme_correction": {
+      "pr_number": 3,
+      "status": "OPEN",
+      "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3",
+      "branch": "plugin-examples/words/readme/20260504-092317",
+      "purpose": "Correct aspose.com links to aspose.net links",
+      "evidence": "workspace/verification/latest/words-readme-backfill-result.json"
+    },
+    "current_remote_state": "Main branch has 4 examples (PR #1) + README.md with aspose.com links (PR #2). PR #3 corrects links but is OPEN pending merge."
+  },
+  "gap_001_resolution": {
+    "plan_state": "CRITICAL — PRs open, remote repos have 40-byte stub",
+    "actual_state": "Both README PRs #2 MERGED. Remote repos now have pipeline-generated READMEs. PR #3 (link correction) OPEN.",
+    "residual_gap": "PR #3 open — remote READMEs have aspose.com links (not aspose.net). This is a new gap from followup-aspose-net-link-standardization sprint, not present in original plan."
+  },
+  "new_open_prs_not_in_plan": [
+    {
+      "pr": "Cells PR #3",
+      "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3",
+      "purpose": "Correct aspose.com -> aspose.net links in README",
+      "taskcard": "followup-aspose-net-link-standardization (CLOSED_CODE_PR_PENDING)",
+      "blocking": "Human APPROVE_MERGE_PR required to merge"
+    },
+    {
+      "pr": "Words PR #3",
+      "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3",
+      "purpose": "Correct aspose.com -> aspose.net links in README",
+      "taskcard": "followup-aspose-net-link-standardization (CLOSED_CODE_PR_PENDING)",
+      "blocking": "Human APPROVE_MERGE_PR required to merge"
+    }
+  ],
+  "verdict": "PR_STATE_VERIFIED — GAP-001 resolved (PRs #2 merged). New open PRs #3 exist for link correction (not in original plan). All example PRs #1 remain merged with ALL_PASS validation."
+}

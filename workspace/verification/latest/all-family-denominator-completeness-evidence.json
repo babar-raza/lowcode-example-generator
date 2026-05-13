@@ -1,0 +1,92 @@
+{
+  "artifact_type": "all_family_denominator_completeness_evidence",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "note": "Regenerated after evidence promotion bug fix (evidence_layout.py subdirectory promotion). Words completeness gate now correctly reflects expected_count=6 (Wave 2 expansion).",
+  "families": [
+    {
+      "family": "cells",
+      "denominator_basis": "FULL_SOT",
+      "total_lowcode_types": 22,
+      "workflow_root_types": 9,
+      "expected_count": 22,
+      "ready_count": 9,
+      "blocked_count": 13,
+      "unknown_type_count": 0,
+      "completeness_status": "pass",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/cells/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/cells/completeness-gate-result.json"
+    },
+    {
+      "family": "words",
+      "denominator_basis": "PILOT_ALLOWED",
+      "total_lowcode_types": 25,
+      "workflow_root_types": 9,
+      "expected_count": 6,
+      "ready_count": 6,
+      "blocked_count": 19,
+      "unknown_type_count": 0,
+      "completeness_status": "pass",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/words/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/words/completeness-gate-result.json"
+    },
+    {
+      "family": "pdf",
+      "denominator_basis": "PILOT_ALLOWED",
+      "total_lowcode_types": 101,
+      "workflow_root_types": 25,
+      "expected_count": 4,
+      "ready_count": 4,
+      "blocked_count": 97,
+      "unknown_type_count": 0,
+      "completeness_status": "pass",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/pdf/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/pdf/completeness-gate-result.json"
+    },
+    {
+      "family": "diagram",
+      "denominator_basis": "PILOT_ALLOWED",
+      "total_lowcode_types": 5,
+      "workflow_root_types": 2,
+      "expected_count": 2,
+      "ready_count": 2,
+      "blocked_count": 3,
+      "unknown_type_count": 0,
+      "completeness_status": "pass",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/diagram/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/diagram/completeness-gate-result.json"
+    },
+    {
+      "family": "email",
+      "denominator_basis": "DISCOVERY_ONLY",
+      "total_lowcode_types": 3,
+      "workflow_root_types": 1,
+      "expected_count": null,
+      "ready_count": 1,
+      "blocked_count": 2,
+      "unknown_type_count": 0,
+      "completeness_status": "skip",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/email/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/email/completeness-gate-result.json"
+    },
+    {
+      "family": "slides",
+      "denominator_basis": "DISCOVERY_ONLY",
+      "total_lowcode_types": 5,
+      "workflow_root_types": 3,
+      "expected_count": null,
+      "ready_count": 5,
+      "blocked_count": 0,
+      "unknown_type_count": 0,
+      "completeness_status": "skip",
+      "completeness_holds": true,
+      "ledger_path": "workspace/verification/latest/families/slides/denominator-ledger.json",
+      "completeness_gate_path": "workspace/verification/latest/families/slides/completeness-gate-result.json"
+    }
+  ],
+  "all_required_generation_families_hold": true
+}

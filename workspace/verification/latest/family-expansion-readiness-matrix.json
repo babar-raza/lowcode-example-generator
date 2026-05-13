@@ -1,0 +1,207 @@
+{
+  "artifact_type": "family_expansion_readiness_matrix",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Family Expansion Readiness Sprint",
+  "baseline_state": {
+    "cells": "FAMILY_COMPLETE — 9/9 published, no expansion needed",
+    "words": "PILOT_COMPLETE — 4/4 pilot published, 5 unpublished roots assessed",
+    "pdf": "PARTIAL_CANARY — 2/4 pilot published, 21 deferred roots assessed in 5 batches",
+    "diagram": "FAMILY_COMPLETE — 2/2 published, no expansion needed",
+    "email": "DISCOVERY_ONLY — fixture design complete, pilot not launched",
+    "slides": "DISCOVERY_ONLY — fixture design complete, pilot not launched"
+  },
+  "families": [
+    {
+      "family": "cells",
+      "current_scope_status": "FAMILY_COMPLETE",
+      "expansion_action": "NONE",
+      "expansion_rationale": "All 9 workflow roots published. No LowCode types remain unpublished.",
+      "proposed_allowed_types_change": null,
+      "gating_prerequisites": [],
+      "next_sprint_priority": "NONE",
+      "expansion_sprint": "N/A",
+      "risk_level": "NONE"
+    },
+    {
+      "family": "diagram",
+      "current_scope_status": "FAMILY_COMPLETE",
+      "expansion_action": "NONE",
+      "expansion_rationale": "All 2 workflow roots published. PR #1 merged 2026-05-12. FAMILY_COMPLETE is end state for this package version.",
+      "proposed_allowed_types_change": null,
+      "gating_prerequisites": [],
+      "next_sprint_priority": "NONE",
+      "expansion_sprint": "N/A",
+      "risk_level": "NONE"
+    },
+    {
+      "family": "words",
+      "current_scope_status": "PILOT_COMPLETE",
+      "expansion_action": "EXPAND_WAVE_2",
+      "expansion_rationale": "5 unpublished runnable roots assessed. Merger and Comparer have straightforward programmatic pair fixtures. Wave 2 adds 2 types with known patterns.",
+      "proposed_allowed_types_change": {
+        "current": ["Converter", "Watermarker", "Splitter", "Replacer"],
+        "wave_2_proposed": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer"],
+        "wave_3_proposed": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger"],
+        "wave_4_proposed": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger", "Processor", "ReportBuilder"],
+        "note": "PROPOSED ONLY — do not apply until human approval"
+      },
+      "wave_2_types": ["Merger", "Comparer"],
+      "wave_2_fixture_strategy": "programmatic_pair — 2 DOCX files via Document+DocumentBuilder (same pattern as existing pilot)",
+      "wave_2_template_hints_needed": {
+        "merger_input_creation_lines": ["var doc1 = new Document(); new DocumentBuilder(doc1).Writeln(\"Section 1\"); doc1.Save(\"input1.docx\");", "var doc2 = new Document(); new DocumentBuilder(doc2).Writeln(\"Section 2\"); doc2.Save(\"input2.docx\");"]
+      },
+      "gating_prerequisites": [
+        "CLOSE followup-words-pair-fixture-strategy (resolution: programmatic_pair documented above)",
+        "Add words.yml merger_input_creation_lines to template_hints",
+        "Add per_type_constraints for Merger and Comparer to words.yml"
+      ],
+      "next_sprint_priority": "HIGH",
+      "expansion_sprint": "R7-WORDS-WAVE2",
+      "risk_level": "LOW",
+      "coverage_target": "6/9 workflow roots after wave 2 (66%)"
+    },
+    {
+      "family": "pdf",
+      "current_scope_status": "PARTIAL_CANARY",
+      "expansion_action": "EXPAND_BATCH_1_AFTER_PR3_MERGED",
+      "expansion_rationale": "21 deferred types assessed in 5 batches. Batch 1 (PdfAConverter, Html, XlsConverter, DocConverter) have HIGH fixture feasibility with same programmatic PDF pattern as existing pilot. No new infrastructure needed.",
+      "proposed_allowed_types_change": {
+        "current": ["Merger", "TextExtractor", "Splitter", "Optimizer"],
+        "batch_1_proposed": ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter", "Html", "XlsConverter", "DocConverter"],
+        "batch_2_proposed": "batch_1 + [TableGenerator, TocGenerator, PdfToImage, Jpeg, Png, Tiff]",
+        "batch_3_proposed": "batch_2 + [ImageExtractor, PdfExtractor, Security] (Signature pending cert strategy)",
+        "batch_4_proposed": "batch_3 + [FormFlattener, FormEditor, FormExporter, SelectField, FormImporter]",
+        "batch_5_proposed": "batch_4 + [Ofd, Timestamp] (external deps resolved)",
+        "note": "PROPOSED ONLY — batch 1 requires PR #3 merged + 2 consecutive PASS runs for Optimizer before proceeding"
+      },
+      "gating_prerequisites": [
+        "PR #3 (Merger+Splitter) live and merged — requires APPROVE_LIVE_PR",
+        "Optimizer 2nd consecutive PASS run",
+        "PR #4 (Optimizer) live and merged",
+        "Then batch 1 expansion can be approved"
+      ],
+      "immediate_blocker": "PDF PR #3 needs APPROVE_LIVE_PR to unblock. TC-PDF-03 is the batch assessment taskcard.",
+      "next_sprint_priority": "HIGH",
+      "expansion_sprint": "R7-PDF-BATCH1 (after PR #3+#4 merged)",
+      "risk_level": "LOW (batch 1 types are structurally identical to existing pilot)",
+      "coverage_target": "8/25 workflow roots after batch 1 (32%)"
+    },
+    {
+      "family": "email",
+      "current_scope_status": "DISCOVERY_ONLY",
+      "expansion_action": "DESIGN_COMPLETE_PILOT_PENDING_APPROVAL",
+      "expansion_rationale": "Fixture strategy designed. Converter uses static async methods with IOutputHandler callback. Programmatic EML creation via RFC 2822 string — no Aspose.Email API needed for fixture.",
+      "proposed_allowed_types_change": {
+        "current": [],
+        "pilot_proposed": ["Converter"],
+        "note": "PROPOSED ONLY — requires human pilot approval + target repo provisioned"
+      },
+      "api_key_facts": [
+        "All Converter methods are static and return Task — async/await required",
+        "Output via IOutputHandler (FolderOutputHandler) — NOT file path parameter",
+        "7 conversion methods: ConvertToHtml, ConvertToMsg, ConvertToEml, ConvertToMht, ConvertToMhtml, Convert (generic), ConvertEmlOrMsg"
+      ],
+      "gating_prerequisites": [
+        "Target repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples provisioned",
+        "email.yml updated: status=active, allowed_types=[Converter], controlled_pilot_approved=true",
+        "template_hints and per_type_constraints added to email.yml",
+        "Human pilot approval (APPROVE_LIVE_PR for first PR)"
+      ],
+      "next_sprint_priority": "MEDIUM",
+      "expansion_sprint": "R7-EMAIL-PILOT (after repo provisioned + approval)",
+      "risk_level": "MEDIUM (async/await pattern + IOutputHandler callback is novel vs existing families)"
+    },
+    {
+      "family": "slides",
+      "current_scope_status": "DISCOVERY_ONLY",
+      "expansion_action": "DESIGN_COMPLETE_PILOT_PENDING_APPROVAL",
+      "expansion_rationale": "Fixture strategy designed for all 3 workflow roots. Convert.ToPdf is simplest (file-path to PDF). Compress works on Presentation object in-place. Merger.Process takes string[] array. XML docs gap is non-blocking.",
+      "proposed_allowed_types_change": {
+        "current": [],
+        "pilot_proposed": ["Compress", "Convert", "Merger"],
+        "note": "PROPOSED ONLY — requires human pilot approval + target repo provisioned"
+      },
+      "api_key_facts": [
+        "All Compress/Convert/Merger methods are STATIC — no instance needed",
+        "Compress takes Presentation object (in-memory), mutates in-place — must save after calling",
+        "Convert.ToPdf has both file-path and Presentation-object overloads — use file-path (simplest)",
+        "Merger.Process takes string[] input array — programmatic pair fixture needed",
+        "XML docs missing (xml_warning) — non-blocking, reflection catalog complete"
+      ],
+      "gating_prerequisites": [
+        "Target repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples provisioned",
+        "slides.yml updated: status=active, allowed_types=[Compress, Convert, Merger], controlled_pilot_approved=true",
+        "template_hints and per_type_constraints added to slides.yml",
+        "Human pilot approval (APPROVE_LIVE_PR for first PR)"
+      ],
+      "next_sprint_priority": "MEDIUM",
+      "expansion_sprint": "R7-SLIDES-PILOT (after repo provisioned + approval)",
+      "risk_level": "LOW-MEDIUM (all-static API with file-path overloads; Compress in-place pattern is the main novelty)"
+    }
+  ],
+  "recommended_next_sprint": {
+    "name": "R7-EXPANSION-WAVE1",
+    "scope": "Execute safe expansions with explicit approval",
+    "actions_in_priority_order": [
+      {
+        "priority": 1,
+        "family": "pdf",
+        "action": "Authorize and create PDF PR #3 (Merger+Splitter) — requires APPROVE_LIVE_PR",
+        "blocker": "APPROVE_LIVE_PR token not present in current session"
+      },
+      {
+        "priority": 2,
+        "family": "pdf",
+        "action": "Run Optimizer 2nd consecutive PASS, then create PDF PR #4 (Optimizer) — requires APPROVE_LIVE_PR",
+        "blocker": "GPT_OSS_MODEL + EXAMPLE_REVIEWER_PATH must be set; APPROVE_LIVE_PR required"
+      },
+      {
+        "priority": 3,
+        "family": "words",
+        "action": "Add Merger+Comparer to words.yml allowed_types (Wave 2), run generation, create PR — requires APPROVE_LIVE_PR",
+        "blocker": "APPROVE_LIVE_PR token required; words.yml must be updated"
+      },
+      {
+        "priority": 4,
+        "family": "email",
+        "action": "Provision target repo, update email.yml, run Email Converter generation — requires repo provisioning + APPROVE_LIVE_PR",
+        "blocker": "Target repo must be provisioned by maintainer"
+      },
+      {
+        "priority": 5,
+        "family": "slides",
+        "action": "Provision target repo, update slides.yml, run Slides Compress/Convert/Merger generation — requires repo provisioning + APPROVE_LIVE_PR",
+        "blocker": "Target repo must be provisioned by maintainer"
+      },
+      {
+        "priority": 6,
+        "family": "pdf",
+        "action": "After PR #3+#4 merged, add batch 1 types to pdf.yml allowed_types (PdfAConverter, Html, XlsConverter, DocConverter)",
+        "blocker": "PR #3+#4 must be merged first"
+      }
+    ],
+    "gate_not_to_cross": "Do not expand Email/Slides/PDF batch 1 before explicit APPROVE_LIVE_PR and target repo provisioning"
+  },
+  "proposed_config_changes": {
+    "words_yml_wave_2": {
+      "file": "pipeline/configs/families/words.yml",
+      "change": "allowed_types: add Merger, Comparer",
+      "template_hints_additions": "merger_input_creation_lines, comparer_input_creation_lines",
+      "per_type_constraints_additions": "Merger and Comparer entries"
+    },
+    "pdf_yml_batch_1": {
+      "file": "pipeline/configs/families/pdf.yml",
+      "change": "allowed_types: add PdfAConverter, Html, XlsConverter, DocConverter",
+      "per_type_constraints_additions": "PdfAConverter, Html, XlsConverter, DocConverter entries"
+    },
+    "email_yml_pilot": {
+      "file": "pipeline/configs/families/email.yml",
+      "change": "status: active, allowed_types: [Converter], controlled_pilot_approved: true, template_hints: <programmatic_eml>, per_type_constraints: Converter (async, IOutputHandler)"
+    },
+    "slides_yml_pilot": {
+      "file": "pipeline/configs/families/slides.yml",
+      "change": "status: active, allowed_types: [Compress, Convert, Merger], controlled_pilot_approved: true, template_hints: <programmatic_pptx>, per_type_constraints: all 3 types"
+    },
+    "note": "NONE OF THESE CHANGES ARE APPLIED. All are proposed pending human approval."
+  }
+}

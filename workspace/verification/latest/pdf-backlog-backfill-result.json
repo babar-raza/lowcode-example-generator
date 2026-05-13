@@ -1,0 +1,38 @@
+{
+  "sprint": "Example Lifecycle, Backlog Backfill, and Reviewer Feedback Loop Hardening",
+  "date": "2026-05-06",
+  "phase": "Phase 2 — Backfill PDF backlog entries",
+  "result": "BACKLOG_BACKFILL_COMPLETE",
+  "entries_created": 2,
+  "entries": [
+    {
+      "backlog_id": "pdf-backlog-splitter-001",
+      "scenario_id": "pdf-splitter",
+      "taskcard_id": "followup-pdf-splitter-options-class",
+      "root_cause": "LLM hallucinated abstract PluginOptions instead of SplitOptions",
+      "status": "open",
+      "priority": "high"
+    },
+    {
+      "backlog_id": "pdf-backlog-optimizer-001",
+      "scenario_id": "pdf-optimizer",
+      "taskcard_id": "followup-pdf-optimizer-options-class",
+      "root_cause": "LLM used abstract PluginOptions + timeout during repair",
+      "status": "open",
+      "priority": "high"
+    }
+  ],
+  "gate_2_pass_criteria": {
+    "pdf_splitter_has_backlog_entry": true,
+    "pdf_optimizer_has_backlog_entry": true,
+    "backlog_entries_cross_link_taskcards": true,
+    "no_passing_examples_backlogged": true,
+    "no_vague_backlog_without_root_cause": true
+  },
+  "files_written": [
+    "workspace/backlog/pdf/examples-backlog.json",
+    "workspace/backlog/pdf/examples-backlog.md",
+    "workspace/verification/latest/families/pdf/examples-backlog.json"
+  ],
+  "verdict": "GATE_2_PASS"
+}

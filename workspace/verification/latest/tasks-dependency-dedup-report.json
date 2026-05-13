@@ -1,0 +1,16 @@
+{
+  "family": "tasks",
+  "total_input_paths": 5,
+  "kept_count": 5,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-tasks-20260509-114712\\extracted\\tasks\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-tasks-20260509-114712\\extracted\\tasks\\resolved-libs\\System.Security.Permissions.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-tasks-20260509-114712\\extracted\\tasks\\resolved-libs\\System.Security.AccessControl.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-tasks-20260509-114712\\extracted\\tasks\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-tasks-20260509-114712\\extracted\\tasks\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

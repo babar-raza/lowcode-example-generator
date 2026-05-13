@@ -1,0 +1,60 @@
+{
+  "sprint": "Words PR Packaging Sprint",
+  "sprint_date": "2026-05-01",
+  "family": "words",
+  "source_run": "workspace/runs/pilot-words-20260501-150103",
+  "source_verdict": "PR_DRY_RUN_READY",
+  "candidates": ["words-converter", "words-watermarker", "words-splitter", "words-replacer"],
+
+  "target_repo": {
+    "owner": "aspose",
+    "repo": "aspose-plugins-examples-dotnet",
+    "branch": "main",
+    "pr_destination_path": "examples/words/lowcode/",
+    "repo_type": "central_multi_family",
+    "note": "Shared repo also holds Cells examples; Words goes under examples/words/lowcode/"
+  },
+
+  "local_dry_run_path": "workspace/pr-dry-run/words-controlled-pilot/",
+  "dry_run_only": true,
+  "live_push_attempted": false,
+  "live_push_allowed": false,
+  "live_push_blocked_reason": "Publishing policy: dry-run only until live publish explicitly approved",
+
+  "package_layout": {
+    "root": "workspace/pr-dry-run/words-controlled-pilot/",
+    "shared_files": [
+      "Directory.Packages.props",
+      "Directory.Build.props",
+      "global.json",
+      "PR_SUMMARY.md"
+    ],
+    "example_dirs": {
+      "converter":   "examples/words/lowcode/converter/",
+      "watermarker": "examples/words/lowcode/watermarker/",
+      "splitter":    "examples/words/lowcode/splitter/",
+      "replacer":    "examples/words/lowcode/replacer/"
+    },
+    "per_example_files": [
+      "Program.cs",
+      "{scenario_id}.csproj",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "excluded": ["bin/", "obj/"]
+  },
+
+  "nuget_version": "Aspose.Words 26.4.0",
+  "target_framework": "net8.0",
+
+  "verification": {
+    "source_run_verdict": "PR_DRY_RUN_READY",
+    "all_4_passed_build": true,
+    "all_4_passed_runtime": true,
+    "all_4_passed_reviewer": true,
+    "all_4_passed_semantic_output": true,
+    "allowlist_enforced": true,
+    "programmatic_input_strategy": true
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "review_type": "root_readme_workflow_manual_review",
+  "review_date": "2026-05-03",
+  "sprint_reviewed": "Root README Template and Update Workflow Sprint",
+  "commit_hash": "b501f67cef9ba3a87b86c00066ba384954c62910",
+  "reviewed_by": "pipeline_agent",
+
+  "claim_audit": [
+    {"id": 1,  "claim": "Jinja2 dependency is correctly declared", "verdict": "VERIFIED", "evidence": "pyproject.toml: Jinja2>=3.1 present; jinja2 3.1.6 importable from .venv"},
+    {"id": 2,  "claim": "Jinja2 is importable from the project venv", "verdict": "VERIFIED", "evidence": "import jinja2; print(jinja2.__version__) -> 3.1.6"},
+    {"id": 3,  "claim": "Template path resolves inside repo root", "verdict": "VERIFIED", "evidence": "_TEMPLATE_PATH = parents[3] / templates/root-readme/...; exists() == True"},
+    {"id": 4,  "claim": "Template is generic and not hardcoded to Cells or Words", "verdict": "VERIFIED", "evidence": "Template uses {{ display_name }}, {{ family }}, {{ nuget_package_id }} — no literal 'Cells' or 'Words'"},
+    {"id": 5,  "claim": "Template includes all required sections", "verdict": "VERIFIED", "evidence": "## Overview, ## Included Examples, ## Requirements, ## How to Run, ## Package Installation, ## Validation Status, ## Useful Links, ## License all present"},
+    {"id": 6,  "claim": "Template does not mention central repo", "verdict": "VERIFIED", "evidence": "grep 'aspose-plugins-examples-dotnet' template returns no match"},
+    {"id": 7,  "claim": "Template does not mention PDF in Cells or Words output", "verdict": "VERIFIED", "evidence": "No hardcoded 'pdf' family reference; template uses family-parameterized {{ family }} in paths"},
+    {"id": 8,  "claim": "Renderer uses family config, not hardcoded repo names", "verdict": "VERIFIED", "evidence": "build_readme_context reads family_config.github.published_plugin_examples_repo.owner/.repo"},
+    {"id": 9,  "claim": "Renderer excludes failed or blocked examples", "verdict": "VERIFIED", "evidence": "build_readme_context includes only examples passed in the list; CLI passes only validated dirs from package"},
+    {"id": 10, "claim": "Renderer uses package/version evidence correctly", "verdict": "VERIFIED", "evidence": "CLI reads {family}-live-pr-result.json.nuget_version; falls back to Directory.Packages.props Version attr"},
+    {"id": 11, "claim": "Auditor catches stale version", "verdict": "VERIFIED", "evidence": "test_root_readme_auditor_detects_stale_package_version passes; stale_version=True when versions differ"},
+    {"id": 12, "claim": "Auditor catches missing examples", "verdict": "VERIFIED", "evidence": "test_root_readme_auditor_detects_missing_example passes; missing_examples list populated"},
+    {"id": 13, "claim": "Auditor catches extra examples", "verdict": "VERIFIED", "evidence": "extra_examples logic in audit_readme checks table names vs context_names"},
+    {"id": 14, "claim": "Auditor catches central repo references", "verdict": "VERIFIED", "evidence": "_CENTRAL_REPO_PATTERNS checked; 'aspose-plugins-examples-dotnet' triggers failure"},
+    {"id": 15, "claim": "Auditor catches catalog symbol noise", "verdict": "VERIFIED", "evidence": "test_root_readme_auditor_detects_catalog_symbol_noise passes; M: DocFX patterns detected"},
+    {"id": 16, "claim": "CLI render-root-readme exists", "verdict": "VERIFIED", "evidence": "subparser added in __main__.py; test_cli_render_root_readme_exits_zero_for_cells/words pass"},
+    {"id": 17, "claim": "CLI exits non-zero on audit failure", "verdict": "VERIFIED", "evidence": "render-root-readme handler lines 1149-1151: if not audit_result.passed: return 1"},
+    {"id": 18, "claim": "publish-pr integration renders README before PR build/create", "verdict": "VERIFIED", "evidence": "lines 512-563 in __main__.py fire before build_pr() call at line 570"},
+    {"id": 19, "claim": "Live publish blocks if README audit fails", "verdict": "FIXED", "evidence": "GAP FOUND: original code only warned on audit failure even in live mode. FIXED: lines 553-558 now check live_mode and return 1 on failure. test_publish_pr_source_blocks_live_on_audit_failure added and passes."},
+    {"id": 20, "claim": "Dry-run READMEs for Cells and Words exist", "verdict": "VERIFIED", "evidence": "workspace/pr-dry-run/cells-controlled-pilot/README.md (5081 bytes); workspace/pr-dry-run/words-controlled-pilot/README.md (4337 bytes)"},
+    {"id": 21, "claim": "Cells README lists exactly 9 Cells examples", "verdict": "VERIFIED", "evidence": "cells-root-readme-audit.json: found_example_count=9; cells README table has 9 rows"},
+    {"id": 22, "claim": "Words README lists exactly 4 Words examples", "verdict": "VERIFIED", "evidence": "words-root-readme-audit.json: found_example_count=4; words README table: converter, replacer, splitter, watermarker"},
+    {"id": 23, "claim": "Cells README does not mention Words examples", "verdict": "VERIFIED", "evidence": "auditor cross-family contamination check: no Aspose.Words or aspose-words-net in cells README"},
+    {"id": 24, "claim": "Words README does not mention Cells examples", "verdict": "VERIFIED", "evidence": "auditor cross-family contamination check: no Aspose.Cells or aspose-cells-net in words README"},
+    {"id": 25, "claim": "README run commands match real package paths", "verdict": "VERIFIED", "evidence": "cells paths: examples/cells/lowcode/<name>; words paths: examples/words/lowcode/<name>; both match workspace/pr-dry-run/{family}-controlled-pilot/examples/{family}/lowcode/ on disk"},
+    {"id": 26, "claim": "followup-root-readme-template-workflow was closed only with evidence", "verdict": "VERIFIED", "evidence": "audit JSON files exist; 19+2 tests pass; dry-run renders produced and verified"},
+    {"id": 27, "claim": "followup-readme-symbols-from-catalog remains open with accurate next action", "verdict": "VERIFIED", "evidence": "open-taskcard-closure-matrix.json status=open; next_action: pull method names from all-family-lowcode-discovery.json"},
+    {"id": 28, "claim": "Master plan has Root README Template and Update Workflow Sprint section", "verdict": "VERIFIED", "evidence": "linked-nibbling-hamster.md: ## Root README Template and Update Workflow Sprint section appended"},
+    {"id": 29, "claim": "No remote write occurred", "verdict": "VERIFIED", "evidence": "no_remote_write_performed=true in all render result JSON files; no git push executed; no PR created"},
+    {"id": 30, "claim": "PDF work has not started", "verdict": "VERIFIED", "evidence": "No changes to PDF-related files; followup-pdf-reflection-dedup still open"}
+  ],
+
+  "gaps_found": [
+    {
+      "id": "gap-1",
+      "claim_id": 19,
+      "severity": "HIGH",
+      "description": "publish-pr audit failure did not block live publish — only printed WARNING for both dry-run and live mode",
+      "file": "src/plugin_examples/__main__.py",
+      "lines": "553-556 (original)",
+      "fix_applied": "Added live_mode guard: if live_mode: print ERROR + return 1; else print WARNING (dry-run only)",
+      "test_added": "test_publish_pr_source_blocks_live_on_audit_failure + test_readme_audit_failure_is_detectable",
+      "evidence_doc": "preflight-review.json design_decisions.audit_blocks_packaging: 'README audit failure blocks package step'"
+    },
+    {
+      "id": "gap-2",
+      "claim_id": 4,
+      "severity": "LOW",
+      "description": "Template title 'for .NET LowCode for .NET Examples' — redundant 'for .NET' because display_name already includes it",
+      "file": "templates/root-readme/lowcode-family-readme.md.j2",
+      "lines": "1",
+      "original": "# {{ display_name }} LowCode for .NET Examples",
+      "fixed": "# {{ display_name }} LowCode Examples",
+      "result_cells": "# Aspose.Cells for .NET LowCode Examples",
+      "result_words": "# Aspose.Words for .NET LowCode Examples",
+      "test_impact": "No test broke; template structural tests still pass"
+    }
+  ],
+
+  "fixes_applied": [
+    {
+      "file": "src/plugin_examples/__main__.py",
+      "change": "publish-pr README audit failure now returns 1 for live mode"
+    },
+    {
+      "file": "templates/root-readme/lowcode-family-readme.md.j2",
+      "change": "Title changed from '{{ display_name }} LowCode for .NET Examples' to '{{ display_name }} LowCode Examples'"
+    },
+    {
+      "file": "tests/unit/test_readme_renderer.py",
+      "change": "Added TestPublishPrLiveBlocksOnAuditFailure class with 2 tests (21 total)"
+    }
+  ],
+
+  "readme_render_results": {
+    "cells": {
+      "path": "workspace/pr-dry-run/cells-controlled-pilot/README.md",
+      "bytes": 5081,
+      "examples_count": 9,
+      "title": "# Aspose.Cells for .NET LowCode Examples",
+      "audit": "PASS",
+      "version": "26.4.0"
+    },
+    "words": {
+      "path": "workspace/pr-dry-run/words-controlled-pilot/README.md",
+      "bytes": 4337,
+      "examples_count": 4,
+      "title": "# Aspose.Words for .NET LowCode Examples",
+      "audit": "PASS",
+      "version": "26.4.0"
+    }
+  },
+
+  "test_results": {
+    "total_passed": 655,
+    "baseline": 634,
+    "new_tests_this_sprint": 19,
+    "new_tests_this_review": 2,
+    "total_new": 21,
+    "compile_check": "PASS",
+    "dllreflector_build": "PASS (0 errors)",
+    "jinja2_version": "3.1.6"
+  },
+
+  "taskcard_decisions": {
+    "followup-root-readme-template-workflow": "REMAINS CLOSED — all claims verified after fixes; gaps found and fixed within this review",
+    "followup-readme-symbols-from-catalog": "REMAINS OPEN — next action: pull method names from all-family-lowcode-discovery.json",
+    "followup-pdf-reflection-dedup": "REMAINS OPEN — PDF work has not started; cleared to be next sprint"
+  },
+
+  "overall_verdict": "ROOT_README_WORKFLOW_VERIFIED_READY_FOR_PDF",
+  "pdf_sprint_approved": true,
+  "no_remote_write_performed": true
+}

@@ -1,0 +1,138 @@
+{
+  "plan_type": "pdf_controlled_pilot_plan",
+  "plan_date": "2026-05-04",
+  "sprint": "Unified State Reconciliation and PDF Controlled Pilot Planning Sprint",
+  "taskcard": "followup-pdf-role-classification-review + followup-pdf-options-aware-review + followup-pdf-fixture-strategy-review",
+  "status": "DRAFT — generation blocked until all 4 PDF taskcards resolved",
+
+  "prerequisites": {
+    "required_before_generation": [
+      {
+        "taskcard": "followup-pdf-role-classification-review",
+        "status": "OPEN",
+        "description": "Classify 101 types into roles. Required to set workflow_root_candidate_count > 0 in family-generation-readiness-rank."
+      },
+      {
+        "taskcard": "followup-pdf-options-aware-review",
+        "status": "OPEN",
+        "description": "Review 51 options types. Identify which are required vs optional for each WORKFLOW_ROOT candidate."
+      },
+      {
+        "taskcard": "followup-pdf-fixture-strategy-review",
+        "status": "OPEN",
+        "description": "Confirm that programmatic PDF creation via Aspose.Pdf.Document() works as input strategy. Validate that generated PDFs pass DllReflector reflection."
+      },
+      {
+        "taskcard": "followup-pdf-family-repo-target-mapping",
+        "status": "OPEN",
+        "description": "Map PDF to a dedicated target repo (e.g., aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples). Configure in pdf.yml."
+      }
+    ],
+    "required_config_changes": [
+      "pdf.yml: status must change from discovery_only to active",
+      "pdf.yml: allowed_types must be populated with pilot-approved types",
+      "pdf.yml: published_plugin_examples_repo must point to family-specific repo (not central placeholder)"
+    ]
+  },
+
+  "proposed_pilot_scope": {
+    "rationale": "Select types that are simple, well-understood, and don't require complex fixture setup. Prefer types with programmatic input creation (no external fixture file needed).",
+    "proposed_initial_types": [
+      {
+        "type": "Merger",
+        "method": "Process(MergeOptions)",
+        "input_strategy": "programmatic_input (2× Aspose.Pdf.Document with 1 page each, saved as input1.pdf and input2.pdf)",
+        "output_validation": "output PDF exists, byte count > 0, %PDF header check",
+        "options_required": ["MergeOptions", "FileDataSource", "FileSaveTarget"],
+        "confidence": "high"
+      },
+      {
+        "type": "Splitter",
+        "method": "Process(SplitOptions)",
+        "input_strategy": "programmatic_input (Aspose.Pdf.Document with 3 pages)",
+        "output_validation": "output PDFs exist, page count per part matches expectation",
+        "options_required": ["SplitOptions", "FileDataSource", "FileSaveTarget"],
+        "confidence": "high"
+      },
+      {
+        "type": "Optimizer",
+        "method": "Process(OptimizeOptions)",
+        "input_strategy": "programmatic_input (Aspose.Pdf.Document with content)",
+        "output_validation": "output PDF exists and is smaller than or equal to input size",
+        "options_required": ["OptimizeOptions", "FileDataSource", "FileSaveTarget"],
+        "confidence": "high"
+      },
+      {
+        "type": "TextExtractor",
+        "method": "Process(TextExtractorOptions)",
+        "input_strategy": "programmatic_input (Aspose.Pdf.Document with known text added via TextFragment)",
+        "output_validation": "extracted text contains known string",
+        "options_required": ["TextExtractorOptions", "FileDataSource", "StringResult"],
+        "confidence": "medium (text extraction pattern differs from file-output pattern)"
+      }
+    ],
+    "types_deferred_to_later_pilot": [
+      "DocConverter — requires format-specific output validation",
+      "Security — requires certificate fixture",
+      "Signature — requires PKCS12 certificate fixture",
+      "FormEditor / FormFlattener / FormExporter / FormImporter — require PDF with form fields (complex fixture)",
+      "PdfAConverter — requires PDF/A conformance validation",
+      "Html — HTML-to-PDF may require license check",
+      "TableGenerator — requires table data object construction (complex builder pattern)"
+    ]
+  },
+
+  "fixture_strategy": {
+    "primary_strategy": "programmatic_input",
+    "mechanism": "Generate input PDF files in-line within the generated C# Program.cs, using Aspose.Pdf.Document() API",
+    "template_hints_in_pdf_yml": {
+      "input_creation_lines": [
+        "var doc = new Aspose.Pdf.Document();",
+        "doc.Pages.Add();",
+        "doc.Save(\"input.pdf\");"
+      ],
+      "merger_input_creation_lines": [
+        "var doc1 = new Aspose.Pdf.Document();",
+        "doc1.Pages.Add();",
+        "doc1.Save(\"input1.pdf\");",
+        "var doc2 = new Aspose.Pdf.Document();",
+        "doc2.Pages.Add();",
+        "doc2.Save(\"input2.pdf\");"
+      ],
+      "default_input_extension": ".pdf",
+      "default_output_extension": ".pdf"
+    },
+    "notes": "template_hints section already present in pdf.yml. These hints will be used by packet_builder.py to guide LLM code generation."
+  },
+
+  "validation_strategy": {
+    "build": "dotnet build — MSBuild compile check",
+    "run": "dotnet run — runtime execution",
+    "output_validation": "PDF output: check file exists + %PDF header (first 4 bytes)",
+    "example_reviewer": "Aspose example-reviewer if available for PDF",
+    "text_extraction_validation": "For TextExtractor: verify extracted text contains known string placed during programmatic input creation"
+  },
+
+  "llm_guidance_additions_needed": {
+    "pdf_specific_notes": [
+      "PDF LowCode uses instance-method pattern, not static: new Merger().Process(options) — not Merger.Process(...)",
+      "Always construct options object first, then call AddInput()/AddOutput()",
+      "Use FileDataSource for file-path inputs, FileSaveTarget for file-path outputs",
+      "ResultContainer is returned by Process() — check IsSuccess before reading results",
+      "Aspose.Pdf namespace needed for programmatic input creation: using Aspose.Pdf;"
+    ]
+  },
+
+  "blocking_config_changes": {
+    "pdf_yml_changes_needed": [
+      "status: active (change from discovery_only)",
+      "generation.allowed_types: [Merger, Splitter, Optimizer, TextExtractor] (initial pilot)",
+      "generation.preferred_methods_per_type: {Merger: Process, Splitter: Process, Optimizer: Process, TextExtractor: Process}",
+      "published_plugin_examples_repo: point to PDF-specific repo"
+    ],
+    "note": "These changes must NOT be made until all 4 taskcards are closed and human approval given."
+  },
+
+  "verdict": "CONTROLLED_PILOT_PLAN_DRAFT_COMPLETE",
+  "next_action": "Close 4 PDF taskcards (role-classification, options-aware, fixture-strategy, repo-target-mapping). Then update pdf.yml and seek human approval before enabling generation."
+}

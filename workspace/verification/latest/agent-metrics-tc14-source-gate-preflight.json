@@ -1,0 +1,55 @@
+{
+  "sprint": "TC14 Source Gate and Production-Shaped Dry Run",
+  "gate": "Gate 0 — Referenced Artifact Review",
+  "verdict": "GATE_0_PASS",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "no_post_occurred": true,
+  "no_secrets_in_evidence": true,
+
+  "artifact_review": [
+    {"file": "pipeline/configs/metrics.yml", "status": "VERIFIED", "notes": "enabled=false, dry_run=true, website=aspose.net confirmed"},
+    {"file": "src/plugin_examples/metrics/session.py", "status": "VERIFIED", "notes": "EXTERNAL_POST_COMMANDS={'run'} at line 17"},
+    {"file": "src/plugin_examples/metrics/pipeline_hook.py", "status": "VERIFIED", "notes": "defaults: dry_run=True, post=False, test_only_sprint=True"},
+    {"file": "src/plugin_examples/metrics/poster.py", "status": "VERIFIED", "notes": "dry_run gate lines 81-87, sprint gate 89-95, token gate 107-112, POST 124+"},
+    {"file": "src/plugin_examples/metrics/payload_builder.py", "status": "VERIFIED", "notes": "test_mode param controls agent_name/item_name/run_id prefixes"},
+    {"file": "src/plugin_examples/metrics/validator.py", "status": "VERIFIED", "notes": "17 REQUIRED_FIELDS, config-driven checks"},
+    {"file": "src/plugin_examples/metrics/evidence.py", "status": "VERIFIED", "notes": "atomic writes via tempfile+os.replace, no secrets ever written"},
+    {"file": "src/plugin_examples/metrics/config.py", "status": "VERIFIED", "notes": "os already imported at line 5; is_agent_metrics_production_enabled() does not yet exist — NEEDS_FIX in Phase 1"},
+    {"file": "src/plugin_examples/runner.py", "status": "VERIFIED", "notes": "test_only_sprint=True CONFIRMED at line 1409; NEEDS_FIX in Phase 2"},
+    {"file": "src/plugin_examples/__main__.py", "status": "VERIFIED", "notes": "6 metrics flags, run handler at lines 353-422, no production gate flag"},
+    {"file": "tests/unit/test_agent_metrics_poster.py", "status": "VERIFIED", "notes": "181 lines, 10 tests across 5 classes; all safety gates tested"},
+    {"file": "tests/unit/test_agent_metrics_runner.py", "status": "VERIFIED", "notes": "69 lines, 3 PipelineContext tests"},
+    {"file": "workspace/verification/agent-metrics-post-ledger.jsonl", "status": "VERIFIED", "notes": "1 entry: run_id=test-metrics-integration-1, job_type=test, http_status=200, dry_run=false; no production entries"},
+    {"file": "workspace/verification/latest/agent-metrics-api-contract.json", "status": "VERIFIED", "notes": "Endpoint URL confirmed, payload schema confirmed, TC-13 test row confirmed"},
+    {"file": "workspace/verification/latest/open-taskcard-closure-matrix.json", "status": "VERIFIED", "notes": "69 total, 51 closed, 17 open"},
+    {"file": "docs/discovery/open-taskcard-closure-matrix.md", "status": "VERIFIED", "notes": "Mirrors JSON matrix"},
+    {"file": "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md", "status": "VERIFIED", "notes": "Healing sprint plan present; H0 complete"},
+    {"file": "tests/unit/test_agent_metrics_production_gate.py", "status": "MISSING", "notes": "Does not exist yet — to be created in Phase 3"}
+  ],
+
+  "production_blockers_verified": {
+    "test_only_sprint_hardcoded_true": {"file": "src/plugin_examples/runner.py", "line": 1409, "value": "True", "confirmed": true},
+    "metrics_enabled_false_by_default": {"file": "pipeline/configs/metrics.yml", "line": 6, "confirmed": true},
+    "dry_run_true_by_default": {"file": "pipeline/configs/metrics.yml", "line": 7, "confirmed": true},
+    "token_required_at_post_time": {"file": "src/plugin_examples/metrics/poster.py", "lines": "107-112", "confirmed": true},
+    "duplicate_ledger_active": {"file": "workspace/verification/agent-metrics-post-ledger.jsonl", "entries": 1, "production_entries": 0, "confirmed": true}
+  },
+
+  "ledger_state": {
+    "path": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "total_entries": 1,
+    "non_dry_run_entries": 1,
+    "production_job_type_entries": 0,
+    "entries": [
+      {"run_id": "test-metrics-integration-1", "job_type": "test", "http_status": 200, "dry_run": false}
+    ]
+  },
+
+  "gate_0_checks": {
+    "production_blocker_verified": true,
+    "ledger_state_verified": true,
+    "no_production_post": true,
+    "no_secrets_in_evidence": true,
+    "no_unsupported_plan_claims": true
+  }
+}

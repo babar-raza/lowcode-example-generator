@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "pipeline/configs/metrics.yml",
+    "src/plugin_examples/metrics/config.py",
+    "src/plugin_examples/metrics/session.py",
+    "src/plugin_examples/metrics/poster.py",
+    "src/plugin_examples/metrics/models.py",
+    "src/plugin_examples/__main__.py"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "workspace/verification/latest/agent-metrics-tc14-production-post-result.json",
+    "workspace/verification/latest/agent-metrics-final-completion-verdict.json"
+  ],
+  "confidence": "HIGH",
+  "findings": {
+    "config_state": {
+      "enabled": false,
+      "dry_run": true,
+      "strict_mode": false,
+      "agent_name": "Lowcode Example Generator",
+      "agent_owner": "Babar Raza",
+      "website": "aspose.net",
+      "website_section": "Examples",
+      "platform": ".NET",
+      "post_ledger_path": "workspace/verification/agent-metrics-post-ledger.jsonl",
+      "ledger_max_entries": 500,
+      "api_endpoint": "",
+      "env_vars": {
+        "token": "AGENT_METRICS_TOKEN",
+        "endpoint": "AGENT_METRICS_ENDPOINT",
+        "enabled": "AGENT_METRICS_ENABLED",
+        "dry_run": "AGENT_METRICS_DRY_RUN",
+        "strict": "AGENT_METRICS_STRICT"
+      },
+      "command_to_job_type_entries": 10,
+      "verdict_to_status_entries": 18,
+      "allowed_job_types": ["Examples Generation", "Discovery", "Publishing", "Reporting", "Test"],
+      "config_source": "pipeline/configs/metrics.yml (rank 1, freshly read)",
+      "config_defaults_source": "src/plugin_examples/metrics/config.py (rank 1, freshly read)"
+    },
+    "source_state": {
+      "external_post_commands": ["run"],
+      "external_post_commands_source": "src/plugin_examples/metrics/session.py line 17: EXTERNAL_POST_COMMANDS: frozenset[str] = frozenset({'run'})",
+      "excluded_commands": ["status", "check"],
+      "excluded_commands_source": "src/plugin_examples/metrics/session.py line 20: EXCLUDED_COMMANDS: frozenset[str] = frozenset({'status', 'check'})",
+      "count_source_policy_values": ["EXCLUDED_INFO_ONLY", "SUPPORTED_EXTERNAL_METRICS", "LOCAL_ONLY_LLM_METRICS"],
+      "dry_run_gate": "src/plugin_examples/metrics/poster.py: first check 'if dry_run: return posted=False' — highest priority gate",
+      "test_only_sprint_gate": "src/plugin_examples/metrics/poster.py: checks test_only_sprint parameter; blocks posting for production job_types when test_only_sprint=True",
+      "production_enablement_mechanism": "Operator sets AGENT_METRICS_ENABLED=true (enables metrics) AND AGENT_METRICS_DRY_RUN=false (enables POST) at CLI invocation. No single AGENT_METRICS_PRODUCTION_ENABLED env var check in source — this is an operator convention, not a code gate.",
+      "run_scoped_evidence_dir": "workspace/runs/{run_id}/evidence/ — created by src/plugin_examples/__main__.py line 57 when metrics are enabled",
+      "metrics_collector_design": "Instance-scoped (MetricsCollector in models.py) — no global state. Created fresh per session.",
+      "llm_call_record_fields": ["call_index", "timestamp", "stage", "provider", "model", "success", "http_status", "prompt_tokens", "completion_tokens", "total_tokens", "token_usage_available", "duration_ms", "error_category"]
+    },
+    "test_state": {
+      "all_agent_metrics_test_files": 9,
+      "total_agent_metrics_tests": 117,
+      "breakdown": {
+        "test_agent_metrics_production_gate.py": 14,
+        "test_agent_metrics_session.py": 22,
+        "test_agent_metrics_payload.py": 16,
+        "test_agent_metrics_config.py": 28,
+        "test_agent_metrics_poster.py": 10,
+        "test_agent_metrics_router.py": 9,
+        "test_agent_metrics_cli.py": 9,
+        "test_agent_metrics_evidence.py": 6,
+        "test_agent_metrics_runner.py": 3
+      },
+      "production_gate_tests": 14,
+      "session_tests": 22,
+      "count_freshness": "Freshly grep'd from test files (rank 2 source)"
+    },
+    "tc14_classification": "PRODUCTION_POSTING_VERIFIED_AND_BLOCKED_BY_DEFAULT",
+    "tc14_classification_rationale": {
+      "step1_poster_has_production_path": "YES — poster.py has HTTP POST path confirmed from source inspection",
+      "step2_gate_mechanism": "Two-gate design: (1) dry_run=True by default blocks all posts; (2) test_only_sprint=True blocks production job_types. Production requires operator to set AGENT_METRICS_DRY_RUN=false AND not set test_only_sprint=True.",
+      "step3_ledger_entries": "2 entries — see production_ledger_contents",
+      "step4_evidence_posted_true": "agent-metrics-tc14-production-post-result.json: posted=true, http_status=200 (rank 7, consistent with ledger rank 5)",
+      "step5_authority_chain": "Source (rank 1) confirms POST path exists. Ledger (rank 5) confirms 2 actual POSTs occurred. Evidence JSON (rank 7) confirms TC14 result. All consistent."
+    },
+    "production_ledger_contents": {
+      "total_entries": 2,
+      "entries": [
+        {
+          "run_id": "test-metrics-integration-1",
+          "job_type": "test",
+          "posted_at": "2026-05-06T10:51:03.283550+00:00",
+          "http_status": 200,
+          "dry_run": false,
+          "classification": "TEST_INTEGRATION_ROW — job_type=test indicates this was a connectivity/integration test, not a production generation run"
+        },
+        {
+          "run_id": "pilot-cells-20260508-112957",
+          "job_type": "examples_generation",
+          "posted_at": "2026-05-08T06:33:50.403761+00:00",
+          "http_status": 200,
+          "dry_run": false,
+          "classification": "PRODUCTION_TC14_ROW — job_type=examples_generation confirms this is the TC14 production POST milestone"
+        }
+      ],
+      "note_on_first_entry": "test-metrics-integration-1 with job_type=test was posted with dry_run=false. The test_only_sprint guard would have blocked this from being a 'production' row by test_only_sprint=True logic. But both entries are in the ledger regardless of classification. The test row appeared in the external endpoint before the TC14 production row."
+    },
+    "production_posting_last_verified": "2026-05-08T06:33:50.403761+00:00 (pilot-cells-20260508-112957)",
+    "agent_name_in_tc14_payload": "lowcode-example-generator (hyphenated, pre-title-case-fix)",
+    "agent_name_in_current_config": "Lowcode Example Generator (title case)",
+    "agent_name_contradiction": "TC14 post used old casing. Config (rank 1) now shows title case. Contradiction resolved: config wins; future posts will use title case.",
+    "gaps": [
+      "api_endpoint is empty in config (set via AGENT_METRICS_ENDPOINT env var at runtime) — if not set, POST will fail with empty URL",
+      "AGENT_METRICS_PRODUCTION_ENABLED env var is used as convention (documented in TC14 checklist) but not checked in source code — possible operator error if checklist is skipped",
+      "Ledger has 1 test row (job_type=test) that posted with dry_run=false to the production endpoint — this is expected per TC14 test design, but means the production endpoint was touched by a test run",
+      "Only 'run' command supports external POST — all other commands (publish-readme, merge-pr, etc.) get LOCAL_ONLY_LLM_METRICS or EXCLUDED_INFO_ONLY"
+    ]
+  },
+  "gaps": [
+    "metrics/payload_builder.py not freshly read — exact payload structure not confirmed from source",
+    "poster.py full content not read — retry logic and error handling on POST failure not confirmed",
+    "No freshly-counted test for test_agent_metrics_agent_name.py (if it exists) — some test files not enumerated"
+  ],
+  "contradictions": [
+    {
+      "claim_a": "agent-metrics-final-completion-verdict.json: 988 tests passing",
+      "source_a": "workspace/verification/latest/agent-metrics-final-completion-verdict.json (rank 10)",
+      "claim_b": "r3-final-verification.md: 1025 tests passing",
+      "source_b": "docs/plans/r3-final-verification.md (rank 9, dated 2026-05-08)",
+      "resolution": "Phase 7 live pytest count (rank 2) will be definitive. r3-final-verification.md (dated same day as audit) shows 1025 and is more authoritative than the older verdict JSON (rank 10). Both 988 and 1021 (MEMORY) are stale."
+    }
+  ],
+  "next_actions": [
+    "Phase 7: Run pytest --collect-only for live count; compare against 1025 from r3-final-verification.md",
+    "Verify full poster.py for retry logic on HTTP failure (Phase 3 gap)",
+    "Next production POST will capture corrected agent_name='Lowcode Example Generator' in title case"
+  ]
+}

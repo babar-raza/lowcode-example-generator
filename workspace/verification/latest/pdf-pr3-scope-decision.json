@@ -1,0 +1,68 @@
+{
+  "artifact_type": "pdf-pr3-scope-decision",
+  "sprint": "PDF Optimizer LLM Rerun and PR #3 Readiness",
+  "date": "2026-05-07",
+  "phase": "Phase 4 — Splitter Re-validation and PR #3 Scope Decision",
+  "source_run_id": "pilot-pdf-20260507-140400",
+
+  "splitter_revalidation": {
+    "verdict": "STABLE_PASS",
+    "build": "PASS (0 warnings, 0 errors) — wave1 package build confirmed",
+    "run": "PASS — pilot-pdf-20260507-140400",
+    "reviewer": "PASS — pilot-pdf-20260507-140400",
+    "code_semantics": "CORRECT — SplitOptions + new Splitter().Process(options) + FileDataSource. Uses Aspose.Pdf.LowCode namespace correctly (no hallucinated sub-namespace).",
+    "consecutive_passes": 2,
+    "run_ids": ["pilot-pdf-20260507-110824", "pilot-pdf-20260507-140400"]
+  },
+
+  "merger_revalidation": {
+    "verdict": "STABLE_PASS",
+    "build": "PASS (0 warnings, 0 errors) — wave1 package build confirmed",
+    "run": "PASS — pilot-pdf-20260507-140400",
+    "reviewer": "PASS — pilot-pdf-20260507-140400",
+    "code_semantics": "CORRECT — MergeOptions + new Merger().Process(options) + FileDataSource.",
+    "note": "Merger already in wave1 package; re-validated this run"
+  },
+
+  "text_extractor_status": {
+    "verdict": "ALREADY_MERGED",
+    "merged_sha": "a9f9e254fbdbd012e6486e699395298e427169eb",
+    "pr": "PDF PR #1",
+    "regression_status": "RESOLVED — passes build + run + reviewer in run pilot-pdf-20260507-140400",
+    "action": "EXCLUDED_FROM_PR3 — already on main"
+  },
+
+  "optimizer_status": {
+    "verdict": "DEFERRED_TO_PR4",
+    "blocker": "build_fail_hallucinated_namespace — 'using Aspose.Pdf.LowCode.DataSources;' does not exist",
+    "semantic_progress": "LLM generated correct OptimizeOptions + new Optimizer().Process(options) — first time correct semantics achieved",
+    "fix_applied": "FORBIDDEN constraint + _validate_code guard — will catch namespace hallucination on next run",
+    "action": "EXCLUDED_FROM_PR3 — deferred to PR #4 after LLM rerun with fix"
+  },
+
+  "pr3_scope": {
+    "verdict": "PR3_SCOPE_FINAL",
+    "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+    "examples": [
+      {
+        "scenario_id": "pdf-merger",
+        "path": "examples/pdf/lowcode/merger/",
+        "source_run": "pilot-pdf-20260507-110824",
+        "build_status": "PASS — 0 Warning(s), 0 Error(s)"
+      },
+      {
+        "scenario_id": "pdf-splitter",
+        "path": "examples/pdf/lowcode/splitter/",
+        "source_run": "pilot-pdf-20260507-110824",
+        "build_status": "PASS — 0 Warning(s), 0 Error(s)"
+      }
+    ],
+    "excluded": [
+      {"scenario_id": "pdf-text-extractor", "reason": "Already merged in PR #1"},
+      {"scenario_id": "pdf-optimizer", "reason": "Build fails — hallucinated namespace; fix applied; deferred to PR #4"}
+    ],
+    "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "target_branch": "main",
+    "pr_title": "feat(pdf): add Merger and Splitter LowCode examples"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "family": "slides",
+  "denominator_basis": "DISCOVERY_ONLY",
+  "total_types": 5,
+  "ready_count": 5,
+  "blocked_count": 0,
+  "unknown_count": 0,
+  "entries": [
+    {
+      "type_name": "Collect",
+      "full_name": "Aspose.Slides.LowCode.Collect",
+      "namespace": "Aspose.Slides.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "Compress",
+      "full_name": "Aspose.Slides.LowCode.Compress",
+      "namespace": "Aspose.Slides.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "Convert",
+      "full_name": "Aspose.Slides.LowCode.Convert",
+      "namespace": "Aspose.Slides.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "ForEach",
+      "full_name": "Aspose.Slides.LowCode.ForEach",
+      "namespace": "Aspose.Slides.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "Merger",
+      "full_name": "Aspose.Slides.LowCode.Merger",
+      "namespace": "Aspose.Slides.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    }
+  ]
+}

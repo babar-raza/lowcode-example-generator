@@ -1,0 +1,63 @@
+{
+  "artifact_type": "words_wave2_code_pattern_audit",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "audit_status": "ALL_PASS",
+  "scenarios_audited": {
+    "words-merger": {
+      "file": "workspace/runs/pilot-words-20260513-114425/generated/words/words-merger/Program.cs",
+      "checks": {
+        "uses_static_Merger_Merge": true,
+        "pattern_found": "Merger.Merge(outputFile, new[] { inputFile1, inputFile2 })",
+        "creates_2_programmatic_docx": true,
+        "uses_Document_and_DocumentBuilder": true,
+        "has_using_Aspose_Words_LowCode": true,
+        "has_using_Aspose_Words": true,
+        "forbidden_Document_AppendDocument_absent": true,
+        "forbidden_new_Merger_absent": true
+      },
+      "verdict": "PASS"
+    },
+    "words-comparer": {
+      "file": "workspace/runs/pilot-words-20260513-114425/generated/words/words-comparer/Program.cs",
+      "checks": {
+        "uses_static_Comparer_Compare": true,
+        "pattern_found": "Comparer.Compare(inputPath1, inputPath2, outputPath, \"DemoAuthor\", DateTime.UtcNow)",
+        "creates_2_programmatic_docx": true,
+        "inputs_have_different_content": true,
+        "has_using_Aspose_Words_LowCode": true,
+        "has_using_Aspose_Words": true,
+        "forbidden_Document_Compare_absent": true,
+        "forbidden_new_Comparer_absent": true
+      },
+      "verdict": "PASS"
+    }
+  },
+  "per_type_constraints_applied": {
+    "Merger": {
+      "required_checked": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: Merger.Merge(outputFile, inputFiles) -- static call",
+        "REQUIRED: 2 input DOCX files created programmatically"
+      ],
+      "forbidden_checked": [
+        "FORBIDDEN: Document.AppendDocument()",
+        "FORBIDDEN: new Merger().Merge()"
+      ],
+      "all_constraints_satisfied": true
+    },
+    "Comparer": {
+      "required_checked": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: Comparer.Compare(v1, v2, outputFile, author, DateTime.UtcNow) -- static call",
+        "REQUIRED: 2 input DOCX files with DIFFERENT content"
+      ],
+      "forbidden_checked": [
+        "FORBIDDEN: Document.Compare()",
+        "FORBIDDEN: new Comparer().Compare()"
+      ],
+      "all_constraints_satisfied": true
+    }
+  }
+}

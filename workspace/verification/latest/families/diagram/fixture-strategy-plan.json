@@ -1,0 +1,58 @@
+{
+  "total_scenarios": 5,
+  "ready": 2,
+  "blocked": 3,
+  "strategies": {
+    "generated_fixture_file": 0,
+    "existing_fixture": 0,
+    "programmatic_input": 2,
+    "none": 3,
+    "no_valid_input_strategy": 0
+  },
+  "scenarios": [
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "required_input_formats": [
+        ".vsdx"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "required_input_formats": [
+        ".vsdx"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "diagram-low-code-load-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'LowCodeLoadOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']"
+    },
+    {
+      "scenario_id": "diagram-low-code-pdf-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'LowCodePdfSaveOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']"
+    },
+    {
+      "scenario_id": "diagram-low-code-save-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'LowCodeSaveOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']"
+    }
+  ]
+}

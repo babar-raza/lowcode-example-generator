@@ -1,0 +1,29 @@
+{
+  "title": "Gap Closure Sprint 2 — Evidence Redaction Verification",
+  "verification_date": "2026-05-06",
+  "claim_21_no_secrets_in_evidence": {
+    "verified": true,
+    "evidence_writer_audit": {
+      "file": "src/plugin_examples/metrics/evidence.py",
+      "grep_for_token_secret_password": "0 matches",
+      "writes_only": ["LLMCallRecord fields (no prompt/completion)", "run summary dict", "payload dict", "validation dict", "post result dict"],
+      "atomic_writes": "tempfile.mkstemp + os.replace (evidence.py line 13-26)"
+    },
+    "poster_token_handling": {
+      "file": "src/plugin_examples/metrics/poster.py",
+      "token_read": "line 107: token = os.environ.get(config.env_token_var, '')",
+      "token_used": "line 117-119: appended to URL as query parameter",
+      "token_never_in_result_dict": true,
+      "result_dict_fields": ["posted", "http_status", "response_preview", "payload_hash", "reason"],
+      "test_proves_it": "test_agent_metrics_poster.py::TestTokenSecurity::test_token_not_in_result — PASS"
+    },
+    "no_prompts_completions_in_evidence": {
+      "verified": true,
+      "LLMCallRecord_fields": ["call_index", "timestamp", "stage", "provider", "model", "success", "http_status", "prompt_tokens", "completion_tokens", "total_tokens", "token_usage_available", "duration_ms", "error_category"],
+      "no_prompt_content_field": true,
+      "no_completion_content_field": true,
+      "no_raw_request_field": true,
+      "no_raw_response_field": true
+    }
+  }
+}

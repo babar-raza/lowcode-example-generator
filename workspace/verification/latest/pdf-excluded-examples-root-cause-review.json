@@ -1,0 +1,76 @@
+{
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "date": "2026-05-06",
+  "excluded_examples": [
+    {
+      "scenario_id": "pdf-splitter",
+      "plugin_type": "Aspose.Pdf.LowCode.Splitter",
+      "questions": {
+        "1_was_it_planned": true,
+        "2_was_it_selected_by_allowlist": false,
+        "2_note": "Excluded by allowlist. pdf.yml allowed_types=[Merger, TextExtractor]. Splitter not in list.",
+        "3_was_it_generated": false,
+        "3_note": "Never reached generation stage. Blocked at scenario_planning by allowlist filter.",
+        "4_failure_stage": "scenario_planning (blocked_pilot_not_in_scope)",
+        "4_note": "Did not fail static validation, build, runtime, output validation, or reviewer. Was excluded BEFORE generation.",
+        "5_excluded_before_or_after_failure": "BEFORE generation. Prior runs (pre-allowlist restriction) showed generation failures.",
+        "6_exact_root_cause": "In prior runs (pilot-pdf-20260505-140928, 142605, 143724), the LLM consistently hallucinated the abstract base class 'PluginOptions' instead of the concrete 'SplitOptions'. The generated code instantiated 'new PluginOptions()' which does not compile (abstract class). Even when forced to compile (via user-defined local class), the resulting code was not a valid LowCode API demonstration. Splitter was subsequently removed from the allowlist to de-risk the pilot.",
+        "7_limitation_category": "LLM behavior — prompt insufficient to constrain the LLM to use the concrete SplitOptions class. Also missing: SplitOptions few-shot example, concrete options class validator, SplitOptions-specific prompt constraints.",
+        "8_system_fix_required": [
+          "Add SplitOptions few-shot example to LLM prompt packet",
+          "Add prompt constraint: 'For Splitter, use SplitOptions (not PluginOptions)'",
+          "Add code validator rule: reject code containing 'new PluginOptions()'",
+          "Add repair feedback for PluginOptions hallucination"
+        ],
+        "9_backlog_entry": "pdf-backlog-splitter-001 in workspace/backlog/pdf/examples-backlog.json",
+        "10_taskcard": "followup-pdf-splitter-options-class (status: OPEN, priority: high)",
+        "11_needed_for_next_pr": [
+          "Close followup-pdf-splitter-options-class",
+          "Add Splitter to pdf.yml allowed_types",
+          "Regenerate with SplitOptions few-shot",
+          "Build and runtime validation must pass",
+          "Reviewer must pass (when available)"
+        ]
+      }
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "plugin_type": "Aspose.Pdf.LowCode.Optimizer",
+      "questions": {
+        "1_was_it_planned": true,
+        "2_was_it_selected_by_allowlist": false,
+        "2_note": "Excluded by allowlist. pdf.yml allowed_types=[Merger, TextExtractor]. Optimizer not in list.",
+        "3_was_it_generated": false,
+        "3_note": "Never reached generation stage in canonical run. Blocked at scenario_planning by allowlist filter.",
+        "4_failure_stage": "scenario_planning (blocked_pilot_not_in_scope)",
+        "4_note": "Did not fail static validation, build, runtime, output validation, or reviewer. Was excluded BEFORE generation.",
+        "5_excluded_before_or_after_failure": "BEFORE generation. Prior runs showed generation failures plus LLM timeout.",
+        "6_exact_root_cause": "In prior runs, the LLM generated code using abstract 'PluginOptions' instead of concrete 'OptimizeOptions'. Additionally, the LLM timed out during the repair attempt, leaving the example in a broken state. The combination of wrong options class and timeout made Optimizer unreliable. It was removed from the allowlist to de-risk the pilot.",
+        "7_limitation_category": "LLM behavior (PluginOptions hallucination) + infrastructure (LLM timeout during repair). Also missing: OptimizeOptions few-shot example, concrete options class validator, timeout/retry policy.",
+        "8_system_fix_required": [
+          "Add OptimizeOptions few-shot example to LLM prompt packet",
+          "Add prompt constraint: 'For Optimizer, use OptimizeOptions (not PluginOptions)'",
+          "Add code validator rule: reject code containing 'new PluginOptions()'",
+          "Increase LLM timeout or add retry with backoff",
+          "Add repair feedback for PluginOptions hallucination"
+        ],
+        "9_backlog_entry": "pdf-backlog-optimizer-001 in workspace/backlog/pdf/examples-backlog.json",
+        "10_taskcard": "followup-pdf-optimizer-options-class (status: OPEN, priority: high)",
+        "11_needed_for_next_pr": [
+          "Close followup-pdf-optimizer-options-class",
+          "Add Optimizer to pdf.yml allowed_types",
+          "Regenerate with OptimizeOptions few-shot",
+          "Build and runtime validation must pass",
+          "Reviewer must pass (when available)"
+        ]
+      }
+    }
+  ],
+  "gate_1_pass_criteria": {
+    "both_exclusions_have_precise_root_cause": true,
+    "both_have_backlog_entries": true,
+    "both_have_taskcards": true,
+    "neither_was_silently_dropped": true
+  },
+  "verdict": "GATE_1_PASS"
+}

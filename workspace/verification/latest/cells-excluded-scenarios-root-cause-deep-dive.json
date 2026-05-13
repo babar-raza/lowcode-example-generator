@@ -1,0 +1,64 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "phase": "Phase 6 — Cells Excluded Scenarios Root-Cause Deep Dive",
+
+  "family": "cells",
+  "discovered_types": 22,
+  "runnable_types": 9,
+  "published_types": 9,
+  "excluded_types": 13,
+  "completion_rate": 1.0,
+
+  "excluded_type_analysis": [
+    {"type": "AbstractLowCodeLoadOptionsProvider", "role": "abstract_base", "standalone_runnable": false, "reason": "Abstract class. Cannot be instantiated. Used as base class for custom load options providers.", "expandable": false},
+    {"type": "AbstractLowCodeProtectionProvider", "role": "abstract_base", "standalone_runnable": false, "reason": "Abstract class. Cannot be instantiated. Used as base class for custom protection providers.", "expandable": false},
+    {"type": "AbstractLowCodeSaveOptionsProvider", "role": "abstract_base", "standalone_runnable": false, "reason": "Abstract class. Cannot be instantiated. Used as base class for custom save options providers.", "expandable": false},
+    {"type": "LowCodeHtmlSaveOptions", "role": "options", "standalone_runnable": false, "reason": "Options bag passed to HtmlConverter.Process(). Already demonstrated via HtmlConverter example.", "expandable": false},
+    {"type": "LowCodeImageSaveOptions", "role": "options", "standalone_runnable": false, "reason": "Options bag passed to ImageConverter.Process(). Already demonstrated via ImageConverter example.", "expandable": false},
+    {"type": "LowCodeLoadOptions", "role": "options", "standalone_runnable": false, "reason": "Base load options. Consumed by converter types internally.", "expandable": false},
+    {"type": "LowCodeMergeOptions", "role": "options", "standalone_runnable": false, "reason": "Options bag passed to SpreadsheetMerger.Process(). Already demonstrated via SpreadsheetMerger example.", "expandable": false},
+    {"type": "LowCodePdfSaveOptions", "role": "options", "standalone_runnable": false, "reason": "Options bag passed to PdfConverter.Process(). Already demonstrated via PdfConverter example.", "expandable": false},
+    {"type": "LowCodeSaveOptions", "role": "options", "standalone_runnable": false, "reason": "Base save options. Consumed by converter types internally.", "expandable": false},
+    {"type": "LowCodeSplitOptions", "role": "options", "standalone_runnable": false, "reason": "Options bag passed to SpreadsheetSplitter.Process(). Already demonstrated via SpreadsheetSplitter example.", "expandable": false},
+    {"type": "LowCodeSaveOptionsProviderOfAssembling", "role": "provider_callback", "standalone_runnable": false, "reason": "Callback interface for custom save logic. Requires user to implement abstract methods. Not a standalone example.", "expandable": "ADVANCED_SCENARIO_POSSIBLE"},
+    {"type": "LowCodeSaveOptionsProviderOfPlaceHolders", "role": "provider_callback", "standalone_runnable": false, "reason": "Callback interface for placeholder-based save logic. Requires user to implement abstract methods.", "expandable": "ADVANCED_SCENARIO_POSSIBLE"},
+    {"type": "SplitPartInfo", "role": "result_model", "standalone_runnable": false, "reason": "Result data class returned by SpreadsheetSplitter. Not something a user creates.", "expandable": false}
+  ],
+
+  "fixture_api_403_analysis": {
+    "impact_on_cells": "NONE for published examples",
+    "detail": "GitHub API 403 blocked fixture lookups for 20/22 types when GITHUB_TOKEN was absent. However, all 9 published Cells examples use programmatic input (template_hints.input_creation_lines in cells.yml). The fixture registry's available=false for those files did not prevent generation.",
+    "hidden_scenarios": false,
+    "note": "No Cells scenario was blocked by fixture unavailability. The 403 affected fixture file discovery but not generation, since Cells uses synthetic/programmatic input."
+  },
+
+  "can_cells_be_expanded": {
+    "answer": "Limited expansion possible",
+    "possible_advanced_examples": [
+      {
+        "concept": "Custom SaveOptionsProvider",
+        "types_involved": ["SpreadsheetSplitter", "LowCodeSaveOptionsProviderOfPlaceHolders"],
+        "description": "Demonstrate implementing a custom SaveOptionsProvider to control per-split output settings. User creates a class inheriting AbstractLowCodeSaveOptionsProvider.",
+        "difficulty": "HIGH — requires LLM to generate both a custom class AND the usage code",
+        "system_gap": "Planner does not support multi-class examples"
+      },
+      {
+        "concept": "Custom LoadOptionsProvider",
+        "types_involved": ["Any converter", "AbstractLowCodeLoadOptionsProvider"],
+        "description": "Demonstrate implementing a custom LoadOptionsProvider to control how files are loaded.",
+        "difficulty": "HIGH — same multi-class challenge",
+        "system_gap": "Same as above"
+      }
+    ],
+    "recommendation": "Cells is functionally complete for all standalone LowCode APIs. Advanced provider_callback scenarios are possible but require significant planner/prompt system changes (multi-class generation). Not recommended as a priority."
+  },
+
+  "synthetic_fixture_strategy_assessment": {
+    "cells_uses_synthetic": true,
+    "adequate": true,
+    "detail": "template_hints.input_creation_lines in cells.yml creates valid XLSX input programmatically via Aspose.Cells Workbook API. This is sufficient for all 9 published converter/locker/merger/splitter examples."
+  },
+
+  "verdict": "CELLS_FULLY_COMPLETE_NO_SYSTEM_GAPS_FOR_STANDALONE_APIS"
+}

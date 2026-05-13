@@ -1,0 +1,30 @@
+{
+  "verification_date": "2026-05-06",
+  "commands": {
+    "run": {
+      "items_discovered": "len(ready_scenarios) + blocked_count from ctx.planning",
+      "items_succeeded": "sum(1 for v in ctx.validation_results if v.passed)",
+      "items_failed": "len(ctx.generated_projects) - items_succeeded",
+      "source_backed": true,
+      "status": "VERIFIED"
+    },
+    "discover-lowcode": {"status": "NOT_WIRED — no --metrics flag on this command", "can_post": false},
+    "validate-publish-targets": {"status": "NOT_WIRED", "can_post": false},
+    "resolve-repo-access": {"status": "NOT_WIRED", "can_post": false},
+    "probe-publish-permissions": {"status": "NOT_WIRED", "can_post": false},
+    "publish-pr": {"status": "NOT_WIRED", "can_post": false},
+    "merge-pr": {"status": "NOT_WIRED", "can_post": false},
+    "release-status": {"status": "NOT_WIRED", "can_post": false},
+    "render-root-readme": {"status": "NOT_WIRED", "can_post": false},
+    "publish-readme": {"status": "NOT_WIRED", "can_post": false},
+    "sync-taskcard-docs": {"status": "NOT_WIRED", "can_post": false},
+    "status": {"status": "EXCLUDED_INFO_ONLY", "can_post": false},
+    "check": {"status": "EXCLUDED_INFO_ONLY", "can_post": false}
+  },
+  "pipeline_hook_non_run_fallback": {
+    "behavior": "Uses simple 1/0 items_discovered/succeeded/failed",
+    "risk": "LOW — these commands have no CLI wiring for metrics, so the fallback code is unreachable in normal operation",
+    "status": "SAFE_BUT_INCOMPLETE"
+  },
+  "verdict": "PASS_WITH_NOTE — only 'run' command has source-backed count formulas; other commands are not wired for metrics (safe)"
+}

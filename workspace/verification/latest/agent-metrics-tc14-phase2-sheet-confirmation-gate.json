@@ -1,0 +1,54 @@
+{
+  "sprint": "TC14-09 Independent Verification and Final Closure",
+  "phase": "Phase 2 — Human Sheet Confirmation Gate",
+  "timestamp": "2026-05-08T00:00:00Z",
+  "verdict": "TC14_INDEPENDENT_VERIFICATION_BLOCKED_WAITING_FOR_SHEET_CONFIRMATION",
+
+  "gate": "P-11 (Human-only)",
+  "description": "Human must open the Google Sheet, locate the row by run_id, and provide explicit confirmation before TC14-09 can close.",
+
+  "what_to_verify": {
+    "run_id": "pilot-cells-20260508-112957",
+    "payload_hash": "1303d6ff644f4e39",
+    "expected_fields": {
+      "agent_name": "lowcode-example-generator",
+      "agent_owner": "Babar Raza",
+      "job_type": "examples_generation",
+      "status": "success",
+      "product": "Aspose.Cells",
+      "website": "aspose.net",
+      "platform": ".NET",
+      "website_section": "Examples",
+      "item_name": "Examples",
+      "items_discovered": 22,
+      "items_succeeded": 9,
+      "items_failed": 0,
+      "token_usage": 11900,
+      "api_calls_count": 9
+    }
+  },
+
+  "confirmation_required_from_human": [
+    "Open the Google Sheets dashboard for the Agent Metrics endpoint",
+    "Search or filter for run_id = pilot-cells-20260508-112957",
+    "Confirm the row exists in the sheet",
+    "Confirm agent_name = lowcode-example-generator (no test- prefix)",
+    "Confirm job_type = examples_generation",
+    "Confirm website = aspose.net",
+    "Report back with: 'Sheet confirmed: run_id=pilot-cells-20260508-112957 found in sheet'"
+  ],
+
+  "phases_blocked_until_confirmation": [
+    "Phase 3: Safety and secret verification",
+    "Phase 4: Close TC14-09 taskcard",
+    "Phase 5: Update master plan and linked-nibbling-hamster.md",
+    "Phase 6: Final verification suite and TC14_FULLY_VERIFIED_AND_CLOSED verdict"
+  ],
+
+  "phases_already_complete": [
+    "Phase 0: Preflight and evidence inventory — COMPLETE (13/13 artifacts found, SECRET_CLEAN)",
+    "Phase 1: Ledger and payload independent verification — COMPLETE (43/43 gates PASS)"
+  ],
+
+  "stop_reason": "The TC14-09 execution mode prompt specifies: 'If the human confirmation is not present, stop and write TC14_INDEPENDENT_VERIFICATION_BLOCKED_WAITING_FOR_SHEET_CONFIRMATION.' The user's message does not include explicit confirmation of finding run_id=pilot-cells-20260508-112957 in the Google Sheet. Stopping at Phase 2 as required."
+}

@@ -1,0 +1,118 @@
+{
+  "review_date": "2026-04-30",
+  "sprint": "Words Readiness Review Sprint",
+  "source_catalog_path": "workspace/runs/discovery-words-20260430-212206/catalog/words/api-catalog.json",
+  "namespace": "Aspose.Words.LowCode",
+  "options_reviewed": [
+    {
+      "option_type": "MailMergeOptions",
+      "full_name": "Aspose.Words.LowCode.MailMergeOptions",
+      "constructors": ["MailMergeOptions()"],
+      "settable_properties": [
+        "CleanupOptions:MailMergeCleanupOptions",
+        "CleanupParagraphsWithPunctuationMarks:Boolean",
+        "MergeDuplicateRegions:Boolean",
+        "MergeWholeDocument:Boolean",
+        "PreserveUnusedTags:Boolean",
+        "RegionEndTag:String",
+        "RegionStartTag:String",
+        "RestartListsAtEachSection:Boolean",
+        "RetainFirstSectionStart:Boolean",
+        "TrimWhitespaces:Boolean",
+        "UnconditionalMergeFieldsAndRegions:Boolean",
+        "UseNonMergeFields:Boolean",
+        "UseWholeParagraphAsRegion:Boolean"
+      ],
+      "required_properties_inferred": [],
+      "input_property_candidates": [],
+      "output_property_candidates": [],
+      "template_property_candidates": [],
+      "data_source_property_candidates": [],
+      "null_option_allowed": true,
+      "safe_default_possible": true,
+      "usage_confidence": 0.85,
+      "consumer": "MailMerger.Execute() (optional last parameter in DataRow/DataTable/DataSet overloads)",
+      "block_reason": "Consumer MailMerger.Execute() is itself blocked (template+data coupling). MailMergeOptions review is complete — it is safe to instantiate with defaults (new MailMergeOptions()). All 13 properties have sensible defaults (booleans default false, strings default null/standard values). No required properties.",
+      "generation_verdict": "SAFE_TO_INSTANTIATE_WITH_DEFAULTS",
+      "generation_blocked_by_consumer": true,
+      "consumer_block_reason": "MailMerger requires a template file with merge fields matching the provided field names — cannot safely generate without fixture knowledge"
+    },
+    {
+      "option_type": "ReportBuilderOptions",
+      "full_name": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "constructors": ["ReportBuilderOptions()"],
+      "settable_properties": [
+        "KnownTypes:KnownTypeSet (read-only, populated via methods on the set)",
+        "MissingMemberMessage:String (read-write, default: null or empty — controls error message for missing data)",
+        "Options:ReportBuildOptions (read-write, enum flags — controls reporting engine behavior)"
+      ],
+      "required_properties_inferred": [],
+      "input_property_candidates": [],
+      "output_property_candidates": [],
+      "template_property_candidates": [],
+      "data_source_property_candidates": [],
+      "null_option_allowed": true,
+      "safe_default_possible": true,
+      "usage_confidence": 0.90,
+      "consumer": "ReportBuilder.BuildReport() (optional parameter) and ReportBuilderContext.ReportBuilderOptions",
+      "block_reason": "Consumer ReportBuilder.BuildReport() is itself blocked (LINQ template+data coupling). ReportBuilderOptions review is complete — safe to instantiate with defaults. Options (enum flags) and MissingMemberMessage default to safe values. KnownTypes can be left empty for basic reports.",
+      "generation_verdict": "SAFE_TO_INSTANTIATE_WITH_DEFAULTS",
+      "generation_blocked_by_consumer": true,
+      "consumer_block_reason": "ReportBuilder requires a LINQ template with template expressions matching the data object — cannot safely generate without fixture+data pairing"
+    },
+    {
+      "option_type": "SplitOptions",
+      "full_name": "Aspose.Words.LowCode.SplitOptions",
+      "constructors": ["SplitOptions()"],
+      "settable_properties": [
+        "SplitCriteria:SplitCriteria (read-write, REQUIRED enum — no safe default; must be set explicitly)",
+        "SplitStyle:String (read-write, optional — CSS style class name for HTML output; null safe)"
+      ],
+      "required_properties_inferred": ["SplitCriteria"],
+      "input_property_candidates": [],
+      "output_property_candidates": [],
+      "template_property_candidates": [],
+      "data_source_property_candidates": [],
+      "null_option_allowed": false,
+      "safe_default_possible": false,
+      "usage_confidence": 0.70,
+      "consumer": "Splitter.Split() (required parameter) and SplitterContext.SplitOptions",
+      "block_reason": "SplitCriteria is a required enum property. Enum values are not in the API catalog — likely: None, PageBreak, ColumnBreak, SectionBreak, HeadingParagraph (standard Aspose.Words values). Cannot confirm values without separate DllReflector enumeration of the SplitCriteria enum. Splitter.ExtractPages() bypasses this requirement entirely.",
+      "generation_verdict": "NEEDS_ENUM_ENUMERATION",
+      "generation_blocked_by_consumer": false,
+      "workaround": "Use Splitter.ExtractPages() instead of Splitter.Split() for controlled pilot — no options required"
+    },
+    {
+      "option_type": "WatermarkOptions (ImageWatermarkOptions + TextWatermarkOptions)",
+      "full_name": "Aspose.Words.LowCode.WatermarkerContext (via properties)",
+      "note": "ImageWatermarkOptions and TextWatermarkOptions are not direct Aspose.Words.LowCode types — they are consumed as properties of WatermarkerContext. Not reflected in LowCode namespace catalog. Non-LowCode types from Aspose.Words namespace.",
+      "constructors": ["N/A — non-LowCode types"],
+      "settable_properties": ["Unknown — not in LowCode catalog"],
+      "required_properties_inferred": [],
+      "null_option_allowed": true,
+      "safe_default_possible": true,
+      "usage_confidence": 0.80,
+      "consumer": "Watermarker.SetText() (optional TextWatermarkOptions), Watermarker.SetImage() (optional ImageWatermarkOptions)",
+      "block_reason": "These options are OPTIONAL in Watermarker.SetText()/SetImage() simplest overloads. Can be omitted entirely for controlled pilot.",
+      "generation_verdict": "OPTIONAL_CAN_OMIT_IN_PILOT",
+      "generation_blocked_by_consumer": false
+    }
+  ],
+  "options_not_in_scope": [
+    "Aspose.Words.Comparing.CompareOptions — non-LowCode namespace; optional in Comparer.Compare()",
+    "Aspose.Words.Saving.SaveOptions — non-LowCode namespace; optional in all operation facades",
+    "Aspose.Words.Loading.LoadOptions — non-LowCode namespace; optional in Converter/Merger"
+  ],
+  "summary": {
+    "options_reviewed": 4,
+    "safe_to_instantiate_with_defaults": 2,
+    "needs_enum_enumeration": 1,
+    "optional_can_omit": 1,
+    "blocks_generation": 0,
+    "consumer_blocked_separately": 2,
+    "all_required_properties_inferred": false,
+    "unknown_required_properties": ["SplitCriteria (enum values not in catalog)"],
+    "followup_words_options_aware_review_verdict": "CLOSED_VERIFIED",
+    "closure_rationale": "All 3 LowCode options types reviewed. MailMergeOptions: safe with defaults, blocked by consumer. ReportBuilderOptions: safe with defaults, blocked by consumer. SplitOptions: SplitCriteria enum values unknown but ExtractPages() workaround available. Watermark options: optional in simplest overloads. No options block the 4 ready_for_controlled_pilot scenarios."
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "artifact_type": "pdf_pilot_publication_readiness",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "lane": 2,
+  "sprint": "Portfolio Launch Sprint 2",
+  "family": "pdf",
+  "pilot_types": ["Merger", "TextExtractor", "Splitter", "Optimizer"],
+  "publication_summary": {
+    "published": 2,
+    "pr_dry_run_ready": 1,
+    "reviewer_passed_1_of_2": 1,
+    "backlogged": 0,
+    "pilot_allowed": 4
+  },
+  "type_statuses": {
+    "pdf-merger": {
+      "authoritative_state": "PUBLISHED",
+      "published_evidence": "PR #1 merged SHA a9f9e254fbdbd012e6486e699395298e427169eb (2026-05-06)",
+      "action_required": "MONITOR — published. TC-PDF-01 constraint fix in packet_builder.py recommended before re-run.",
+      "publication_blocked": false
+    },
+    "pdf-text-extractor": {
+      "authoritative_state": "PUBLISHED",
+      "published_evidence": "PR #1 merged SHA a9f9e254fbdbd012e6486e699395298e427169eb",
+      "action_required": "MONITOR",
+      "publication_blocked": false
+    },
+    "pdf-splitter": {
+      "authoritative_state": "PR_DRY_RUN_READY",
+      "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "action_required": "Set APPROVE_LIVE_PR and run publish-pr for pdf family",
+      "publication_blocked": true,
+      "blockers": [
+        "APPROVE_LIVE_PR not set (PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL)",
+        "GitHub token scope verified (classic PAT with repo scope — ready)"
+      ]
+    },
+    "pdf-optimizer": {
+      "authoritative_state": "REVIEWER_PASSED_1_OF_2",
+      "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/",
+      "action_required": "Run second reviewer pass (needs EXAMPLE_REVIEWER_PATH), then APPROVE_LIVE_PR for PR",
+      "publication_blocked": true,
+      "blockers": [
+        "EXAMPLE_REVIEWER_PATH not set (second pass cannot proceed)",
+        "APPROVE_LIVE_PR not set (cannot publish until 2nd pass passes)"
+      ]
+    }
+  },
+  "pr_packaging": {
+    "wave1_package": {
+      "path": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "types": ["Splitter"],
+      "status": "READY_FOR_LIVE_PR",
+      "note": "Merger published in PR#1; wave1 package targets Splitter only"
+    },
+    "wave2_package": {
+      "path": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/",
+      "types": ["Optimizer"],
+      "status": "PENDING_SECOND_REVIEWER_PASS"
+    }
+  },
+  "unblocking_steps": [
+    "1. Set EXAMPLE_REVIEWER_PATH=C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer",
+    "2. Run PDF Optimizer second reviewer pass",
+    "3. If second pass PASS: both Splitter + Optimizer ready for PR",
+    "4. Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+    "5. Run publish-pr for pdf family (Splitter wave1)",
+    "6. After Splitter merged: run publish-pr for Optimizer (wave2)"
+  ],
+  "pilot_complete_after_publishing": {
+    "published_count": 4,
+    "pilot_allowed": 4,
+    "release_scope_status": "PILOT_COMPLETE"
+  }
+}

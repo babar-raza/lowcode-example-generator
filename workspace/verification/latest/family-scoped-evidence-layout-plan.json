@@ -1,0 +1,119 @@
+{
+  "plan_type": "family_scoped_evidence_layout_plan",
+  "plan_date": "2026-05-05",
+  "sprint": "Family-Scoped Evidence Promotion and Latest-State Isolation",
+
+  "layout_policy": {
+    "run_scoped": {
+      "path_pattern": "workspace/runs/{run_id}/evidence/latest/{file}",
+      "description": "Canonical single-run evidence. Never deleted. Never promoted anywhere automatically. Always authoritative.",
+      "examples": [
+        "workspace/runs/pilot-cells-20260430-175422/evidence/latest/validation-results.json",
+        "workspace/runs/pilot-words-20260501-150103/evidence/latest/validation-results.json"
+      ]
+    },
+    "family_scoped_promoted": {
+      "path_pattern": "workspace/verification/latest/families/{family}/{file}",
+      "description": "Primary promoted evidence for a single family. Written by promote_latest. Each family run writes only to its own subdirectory. Cross-family contamination impossible.",
+      "metadata_file": "_evidence_metadata.json",
+      "metadata_fields": ["scope", "family", "run_id", "promoted_at", "source_run_path", "files"],
+      "examples": [
+        "workspace/verification/latest/families/cells/validation-results.json",
+        "workspace/verification/latest/families/words/validation-results.json"
+      ]
+    },
+    "global_promoted": {
+      "path_pattern": "workspace/verification/latest/{file}",
+      "description": "Global evidence spanning multiple families. Written by multi-family commands (discover-lowcode --all, release-status, family-readiness-rank). NOT written by single-family runs.",
+      "examples": [
+        "workspace/verification/latest/all-family-lowcode-discovery.json",
+        "workspace/verification/latest/family-generation-readiness-rank.json",
+        "workspace/verification/latest/open-taskcard-closure-matrix.json",
+        "workspace/verification/latest/release-status.json",
+        "workspace/verification/latest/family-publish-readiness.json"
+      ]
+    },
+    "backward_compat_alias": {
+      "path_pattern": "workspace/verification/latest/{file}",
+      "description": "Backward-compat: single-family run evidence ALSO written to top-level for legacy readers. Tagged with _last_promoted_by.json. Deprecated — prefer families/{family}/ path.",
+      "deprecated_latest_alias": true,
+      "notice_file": "_last_promoted_by.json",
+      "notice_fields": ["deprecated_latest_alias", "last_promoted_by_family", "last_promoted_run_id", "last_promoted_at", "warning"]
+    }
+  },
+
+  "files_by_scope": {
+    "always_family_scoped": [
+      "validation-results.json",
+      "pr-candidate-manifest.json",
+      "example-gate-results.json",
+      "example-reviewer-results.json",
+      "aggregate-gate-results.json",
+      "api-consumer-relationships.json",
+      "api-delta-report.json",
+      "blocked-scenarios.json",
+      "example-impact-report.json",
+      "fixture-strategy-plan.json",
+      "gate-results.json",
+      "generated-fixtures.json",
+      "llm-fewshot-patterns.json",
+      "llm-preflight.json",
+      "plugin-type-role-classification.json",
+      "publishing-report.json",
+      "repair-attempts.json",
+      "reviewer-preflight.json",
+      "runnable-entrypoint-scores.json",
+      "scenario-feedback-updates.json",
+      "scenario-input-format-map.json",
+      "stale-existing-examples.json"
+    ],
+    "already_family_prefixed_safe_at_top_level": [
+      "{family}-source-of-truth-proof.json",
+      "{family}-live-pr-result.json",
+      "{family}-merge-result.json",
+      "{family}-post-merge-clean-checkout-validation.json",
+      "{family}-live-pr-canary-preflight.json",
+      "{family}-dependency-dedup-report.json",
+      "{family}-pr-dry-run-summary.json"
+    ],
+    "global_only": [
+      "all-family-lowcode-discovery.json",
+      "family-generation-readiness-rank.json",
+      "family-publish-readiness.json",
+      "family-repo-access-resolution.json",
+      "open-taskcard-closure-matrix.json",
+      "monthly-maintenance-runbook.json",
+      "release-status.json",
+      "release-inventory-cells-words.json",
+      "publish-permission-probe.json",
+      "agent-operated-live-pr-runbook.json"
+    ]
+  },
+
+  "reader_preference_policy": {
+    "rule": "Readers that consume family-specific evidence MUST check families/{family}/ first, then fall back to top-level verification/latest/ with a logged warning.",
+    "function": "resolve_family_evidence_path(verification_dir, family, filename) -> Path",
+    "fallback_warning": "WARN: Reading {file} from deprecated top-level path (verification/latest/{file}). Prefer family-scoped path (verification/latest/families/{family}/{file}).",
+    "readers_to_update": [
+      "publisher.py _verify_evidence: validation-results.json",
+      "publisher.py _verify_evidence: gate-results.json fallback"
+    ],
+    "readers_already_correct": [
+      "release_status.py: reads only {family}-prefixed and global files, unaffected",
+      "readme_renderer.py: reads from package_path, not verification/latest/"
+    ]
+  },
+
+  "implementation_files": [
+    "src/plugin_examples/evidence_layout.py (NEW) — layout constants and utilities",
+    "src/plugin_examples/runner.py (MODIFY) — use promote_family_evidence()",
+    "src/plugin_examples/publisher/publisher.py (MODIFY) — use resolve_family_evidence_path()",
+    "tests/unit/test_discovery_readiness_preservation.py (MODIFY or NEW) — family isolation tests"
+  ],
+
+  "backward_compatibility": {
+    "strategy": "Continue writing to verification/latest/ top-level for all family-specific files. Add _last_promoted_by.json notice. Readers updated to prefer families/{family}/ but fall back to top-level.",
+    "breaking_changes": "None. Existing tests and tools that read from verification/latest/ continue to work.",
+    "migration_path": "Once all readers are updated to prefer families/{family}/, the backward-compat top-level writes can be removed in a future sprint."
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "runbook_type": "agent_operated_live_pr_runbook",
+  "runbook_date": "2026-05-01",
+  "sprint": "Live PR Approval Gate Implementation Review and Agent-Operated PR Readiness Sprint",
+  "version": "1.0",
+  "status": "READY_PENDING_HUMAN_APPROVAL",
+
+  "principle": "Human gives explicit approval. Agent creates the live PRs using the approved, repeatable pipeline.",
+
+  "targets": [
+    {
+      "family": "words",
+      "target_owner": "aspose-words-net",
+      "target_repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "target_branch": "main",
+      "examples_count": 4,
+      "nuget_version": "26.4.0",
+      "package_path": "workspace/pr-dry-run/words-controlled-pilot",
+      "simulation_result": "workspace/verification/latest/words-live-pr-simulation.json",
+      "simulation_status": "SIMULATION_PASSED"
+    },
+    {
+      "family": "cells",
+      "target_owner": "aspose-cells-net",
+      "target_repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "target_branch": "main",
+      "examples_count": 9,
+      "nuget_version": "26.4.0",
+      "package_path": "workspace/pr-dry-run/cells-controlled-pilot",
+      "simulation_result": "workspace/verification/latest/cells-live-pr-simulation.json",
+      "simulation_status": "SIMULATION_PASSED"
+    }
+  ],
+
+  "approval_model": {
+    "approval_required": true,
+    "approval_mode": "manual_token",
+    "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "expected_value": "APPROVE_LIVE_PR",
+    "github_token_as_approval": "FORBIDDEN",
+    "approval_stored_in_evidence": false
+  },
+
+  "steps": [
+    {
+      "step": 1,
+      "actor": "agent",
+      "action": "Run pre-PR audit",
+      "commands": [
+        "PYTHONPATH=src python -m plugin_examples validate-publish-targets --families cells words pdf --promote-latest",
+        "PYTHONPATH=src python -m plugin_examples probe-publish-permissions --families cells words --promote-latest"
+      ]
+    },
+    {
+      "step": 2,
+      "actor": "agent",
+      "action": "Run dry-run simulation",
+      "commands": [
+        "PYTHONPATH=src python -m plugin_examples publish-pr --family words --dry-run --promote-latest",
+        "PYTHONPATH=src python -m plugin_examples publish-pr --family cells --dry-run --promote-latest"
+      ],
+      "expected": "SIMULATION_PASSED for both families"
+    },
+    {
+      "step": 3,
+      "actor": "human",
+      "action": "Provide explicit approval",
+      "required_actions": [
+        "Review simulation outputs",
+        "Review dry-run packages",
+        "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+        "Set GITHUB_TOKEN",
+        "Document sign-off in workspace/verification/latest/live-pr-sign-off.json"
+      ]
+    },
+    {
+      "step": 4,
+      "actor": "agent",
+      "action": "Create live PRs (human authorized)",
+      "commands": [
+        "PYTHONPATH=src python -m plugin_examples publish-pr --family words --approval-token APPROVE_LIVE_PR --promote-latest",
+        "PYTHONPATH=src python -m plugin_examples publish-pr --family cells --approval-token APPROVE_LIVE_PR --promote-latest"
+      ],
+      "note": "GITHUB_TOKEN must be set. Live PR creation logic not yet implemented — publish-pr command currently simulates only."
+    },
+    {
+      "step": 5,
+      "actor": "human",
+      "action": "Review and merge PRs on GitHub"
+    }
+  ],
+
+  "current_readiness": {
+    "cells_simulation_passed": true,
+    "words_simulation_passed": true,
+    "repo_access_ready": true,
+    "pr_permission_ready": true,
+    "packages_assembled": true,
+    "live_publish_ready": false,
+    "blocked_reason": "blocked_live_pr_approval_required",
+    "publisher_live_pr_stub": "publisher.py line 185 — real implementation deferred to followup-agent-operated-live-pr-creation"
+  },
+
+  "no_content_pushed": true,
+  "no_live_pr_created": true,
+  "live_publish_allowed": false
+}

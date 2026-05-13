@@ -1,0 +1,460 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "src/plugin_examples/evidence_layout.py",
+    "src/plugin_examples/runner.py",
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/generator/packet_builder.py",
+    "src/plugin_examples/scenario_planner/planner.py",
+    "src/plugin_examples/gates/example_lifecycle.py",
+    "src/plugin_examples/publisher/release_status.py",
+    "src/plugin_examples/publisher/pr_builder.py",
+    "src/plugin_examples/dependencies/assembly_identity.py",
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/words.yml",
+    "pipeline/configs/families/pdf.yml"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/production-truth-source-implementation-audit.json",
+    "workspace/verification/latest/production-truth-rerun-root-cause-analysis.json",
+    "workspace/verification/latest/production-truth-family-board.json",
+    "workspace/verification/latest/production-truth-evidence-integrity-audit.json",
+    "workspace/verification/latest/production-truth-master-scope-matrix.json"
+  ],
+  "confidence": "HIGH",
+  "findings": {
+    "design_principles": [
+      "Every layer change must preserve Cells 9/9 and Words 4/4 non-degradation",
+      "No layer may touch generator/code_generator.py and publisher/github_pr_publisher.py simultaneously",
+      "DataSources FORBIDDEN guard in code_generator.py and packet_builder.py must be preserved",
+      "Agent metrics dry_run=True and enabled=False defaults must be preserved",
+      "Approval gate tokens (APPROVE_LIVE_PR, APPROVE_MERGE_PR) must remain separate"
+    ],
+    "layers": [
+      {
+        "layer": "1_source_of_truth",
+        "name": "Source-of-Truth Layer",
+        "current_state": "API catalog via DllReflector (PE metadata parsing in assembly_identity.py). Family configs in pipeline/configs/families/*.yml define allowed_types but no denominator artifact. Coverage claims ('15/43 = 35%') are undocumented and unverifiable. DllReflector output stored per-run in workspace/runs/{run_id}/catalog/{family}/api-catalog.json but never pinned to a stable family version.",
+        "root_cause_addressed": "No stable denominator model means coverage claims cannot be validated. WORKFLOW_ROOT type count changes when DllReflector re-runs against a new Aspose package version, silently invalidating prior coverage percentages.",
+        "target_state": "Versioned denominator model per family. Stable scenario IDs that survive package version bumps. api-catalog.json checksum pinned per family version in a lockfile. Coverage computed only against denominator model, never against live catalog.",
+        "implementation_direction": "Create pipeline/configs/denominators/{family}-denominator-v{N}.json per family. Lockfile: pipeline/configs/denominators/{family}-catalog-lock.json (stores api-catalog sha256). planner.py reads denominator file for coverage computation. api-catalog.json hash check at run start — fail fast if hash mismatch without explicit --update-denominator flag.",
+        "target_files_or_modules": [
+          "pipeline/configs/denominators/cells-denominator-v1.json (NEW)",
+          "pipeline/configs/denominators/words-denominator-v1.json (NEW)",
+          "pipeline/configs/denominators/pdf-denominator-v1.json (NEW)",
+          "pipeline/configs/denominators/cells-catalog-lock.json (NEW)",
+          "pipeline/configs/denominators/words-catalog-lock.json (NEW)",
+          "pipeline/configs/denominators/pdf-catalog-lock.json (NEW)",
+          "src/plugin_examples/scenario_planner/planner.py (MODIFY: read denominator, fail if catalog hash mismatch)",
+          "src/plugin_examples/discovery_sweep.py (MODIFY: write denominator on first run or --update-denominator)"
+        ],
+        "expected_behavior": "On every run: planner.py loads denominator JSON, checks api-catalog.json sha256 against lockfile. If mismatch, run halts with DENOMINATOR_MISMATCH unless --update-denominator is passed. Coverage = published_examples / denominator.runnable_count. Denominator is never recomputed mid-run.",
+        "tests_to_add": [
+          "test_planner_fails_if_catalog_hash_mismatch",
+          "test_planner_passes_with_matching_catalog_hash",
+          "test_coverage_computation_uses_denominator_not_live_catalog",
+          "test_denominator_file_schema_validation"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/denominator-model.json (per run)",
+          "pipeline/configs/denominators/{family}-denominator-v1.json (one-time, committed to repo)"
+        ],
+        "migration_risk": "LOW",
+        "migration_risk_rationale": "New files only; planner.py change is additive (new check at run start). Does not touch code_generator.py or publisher.",
+        "rollback_strategy": "Delete denominator JSON files; remove hash check from planner.py. Cells/Words/PDF generation unaffected.",
+        "tradeoffs": [
+          "Denominator file requires manual creation per new Aspose package major version",
+          "Hash lockfile introduces run-time coupling between catalog and denominator",
+          "Does not prevent LLM from hallucinating types not in denominator"
+        ],
+        "risks": [
+          "Denominator becomes stale if Aspose removes or renames types between versions without --update-denominator",
+          "Hash mismatch false-positive if DllReflector output changes format without content change"
+        ],
+        "what_to_preserve": [
+          "DllReflector PE metadata parsing in assembly_identity.py (fragile but working)",
+          "api-catalog.json schema and per-run scoped output",
+          "allowed_types enforcement in family YML (independent of denominator)"
+        ],
+        "what_to_redesign": [
+          "Coverage percentage computation (currently ad-hoc or absent)",
+          "Absence of any denominator artifact (critical gap confirmed in Phase 8)"
+        ]
+      },
+      {
+        "layer": "2_scenario_contract",
+        "name": "Scenario Contract Layer",
+        "current_state": "Scenarios inferred at runtime by planner.py from api-catalog.json + allowed_types + preferred_methods_per_type. No static scenario contract file. scenario-catalog.json in workspace/manifests/ is Words-only and shallow (no fixture requirements, no expected symbols, no validation rules). Scenario IDs are stable strings (e.g., 'cells-merger') but not formally registered with schemas.",
+        "root_cause_addressed": "Without contracts, a rerun of the same scenario can silently produce a different code structure, fixture, or expected output. There is no pre-validation step to detect contract violations before generation.",
+        "target_state": "Static scenario contracts with stable IDs, fixture requirements, expected symbol references, and expected output specs. Contracts act as the invariant specification for each scenario — LLM generation must satisfy the contract to pass.",
+        "implementation_direction": "Create pipeline/contracts/{family}/{scenario_id}.json for each approved scenario. Schema: {scenario_id, family, type_short_name, primary_method, fixture_type, expected_symbols: [], expected_output_pattern, forbidden_symbols: [], contract_version}. planner.py validates generated scenario plan against contract at plan time. validator in runner.py checks generated code against contract expected_symbols and forbidden_symbols.",
+        "target_files_or_modules": [
+          "pipeline/contracts/cells/ (NEW directory — 9 contract files)",
+          "pipeline/contracts/words/ (NEW directory — 4 contract files)",
+          "pipeline/contracts/pdf/ (NEW directory — 3 contract files: merger, splitter, text-extractor)",
+          "src/plugin_examples/scenario_planner/planner.py (MODIFY: load and validate contract)",
+          "src/plugin_examples/generator/code_generator.py (MODIFY: post-generation contract symbol check)",
+          "src/plugin_examples/gates/example_lifecycle.py (MODIFY: record contract_version in lifecycle record)"
+        ],
+        "expected_behavior": "Before generation: planner.py loads contract for scenario, verifies fixture_type matches registry. After generation: code_generator.py checks that expected_symbols appear in generated code and forbidden_symbols do not. Contract violation causes GENERATION_FAILED immediately, not after build attempt. Contracts are versioned — contract_v1 files can be upgraded to contract_v2 when Aspose API changes.",
+        "tests_to_add": [
+          "test_planner_rejects_scenario_missing_contract",
+          "test_code_generator_fails_on_forbidden_symbol_in_generated_code",
+          "test_code_generator_passes_when_expected_symbols_present",
+          "test_lifecycle_records_contract_version",
+          "test_contract_schema_validation_all_families"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/contract-compliance-results.json (per run)",
+          "pipeline/contracts/{family}/{scenario_id}.json (16 contract files, committed to repo)"
+        ],
+        "migration_risk": "MEDIUM",
+        "migration_risk_rationale": "Adding contract symbol check to code_generator.py introduces new failure mode for existing passing scenarios. Must create contracts from currently-passing examples to avoid false negatives. Contracts for 16 scenarios = non-trivial creation effort.",
+        "rollback_strategy": "Remove contract load from planner.py; remove symbol check from code_generator.py. Contract files remain harmless on disk. All 3 families continue generating as before.",
+        "tradeoffs": [
+          "Contract creation requires reading 16 passing examples to extract expected symbols — upfront cost",
+          "Contract maintenance required on Aspose API version bumps",
+          "Contract symbol check adds generation time (string search in generated code)"
+        ],
+        "risks": [
+          "Contracts may be too strict (expected symbol renamed in new Aspose version → false failures)",
+          "Contracts may be too loose (forbidden list incomplete → allows invalid code through)"
+        ],
+        "what_to_preserve": [
+          "FORBIDDEN: DataSources guard in code_generator.py lines 657-663 (already a manual contract)",
+          "FORBIDDEN: PluginOptions guard (same)",
+          "preferred_methods_per_type in planner.py (working per-type method preference system)"
+        ],
+        "what_to_redesign": [
+          "Ad-hoc FORBIDDEN strings in packet_builder.py (replace with contract forbidden_symbols list)",
+          "No pre-generation contract validation step in planner.py"
+        ]
+      },
+      {
+        "layer": "3_generation",
+        "name": "Generation Layer",
+        "current_state": "Prompts built at runtime by packet_builder.py from api-catalog.json. FORBIDDEN constraints re-injected in repair prompts (code_generator.py lines 88-103) but only for DataSources, PluginOptions, File.Copy keywords. Few-shot examples in llm-fewshot-patterns.json not pinned to source API version. LLM provider routed by router.py with 3-attempt retry and exponential backoff. TextExtractor hardcoded as reference example in repair prompt (fragile).",
+        "root_cause_addressed": "Repair prompts that lose constraint context cause constraint violations to reappear. Few-shot examples not pinned to package version may encode APIs that were renamed or removed. TextExtractor hardcode creates single-point-of-failure if TextExtractor API changes.",
+        "target_state": "Contract-bound prompts: all constraints derived from scenario contract file. Few-shot examples pinned to api-catalog.json hash. Repair prompts re-inject ALL constraints from contract (not just 3 hardcoded keywords). Reference examples in repair prompts auto-selected from workspace/runs/{run_id}/generated/ (from a passing example), not hardcoded.",
+        "implementation_direction": "packet_builder.py reads scenario contract to build constraint list. code_generator.py repair prompt loop re-injects all contract.forbidden_symbols (not just DataSources/PluginOptions/File.Copy). llm-fewshot-patterns.json includes api_catalog_hash field. Repair reference example lookup: find most recently passing example for same family in workspace/runs/ instead of hardcoding TextExtractor.",
+        "target_files_or_modules": [
+          "src/plugin_examples/generator/packet_builder.py (MODIFY: read contract, include all forbidden_symbols)",
+          "src/plugin_examples/generator/code_generator.py (MODIFY: repair prompt re-injects all contract constraints, not just 3 keywords; remove hardcoded TextExtractor reference)",
+          "src/plugin_examples/llm_router/router.py (MODIFY: log api_catalog_hash in LLMCallRecord)",
+          "src/plugin_examples/scenario_planner/packet_builder.py (MODIFY: add contract_version to packet metadata)"
+        ],
+        "expected_behavior": "Generation packet for each scenario includes all forbidden_symbols from contract. Repair prompt loop passes all forbidden_symbols to LLM, not just the 3 hardcoded ones. If contract has forbidden_symbols=[\"DataSources\", \"PluginOptions\", \"File.Copy\", \"TextAbsorber\"], all 4 are re-injected in repair. LLMCallRecord includes api_catalog_hash for traceability.",
+        "tests_to_add": [
+          "test_packet_builder_includes_all_contract_forbidden_symbols",
+          "test_repair_prompt_reinjects_all_forbidden_not_just_3",
+          "test_llm_call_record_includes_api_catalog_hash",
+          "test_no_hardcoded_textextractor_reference_in_repair_prompt"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/llm-fewshot-patterns.json (includes api_catalog_hash)",
+          "workspace/runs/{run_id}/evidence/constraint-injection-audit.json (NEW: logs which constraints were injected per scenario)"
+        ],
+        "migration_risk": "HIGH",
+        "migration_risk_rationale": "code_generator.py is the core generation module. Changing repair prompt logic risks breaking currently-passing scenarios. Must run full regression (Cells 9/9, Words 4/4) after any change. Do not touch code_generator.py and github_pr_publisher.py simultaneously.",
+        "rollback_strategy": "Revert code_generator.py to prior commit. All 3 families can re-generate with prior logic. Scenario contracts continue to exist as reference artifacts.",
+        "tradeoffs": [
+          "More constraint injection in repair = longer prompts = higher token cost",
+          "Removing hardcoded TextExtractor reference makes repair less guided for TextExtractor scenario",
+          "Contract-driven constraints require contracts to exist before generation changes are safe"
+        ],
+        "risks": [
+          "LLM may still violate constraints even with full re-injection (nondeterminism is irreducible)",
+          "Constraint list expansion may confuse LLM if too many forbidden items listed"
+        ],
+        "what_to_preserve": [
+          "3-attempt retry with exponential backoff in router.py (working)",
+          "DataSources FORBIDDEN guard in _validate_code() lines 657-663 (working, do not remove)",
+          "PluginOptions guard (working)",
+          "FORBIDDEN strings in packet_builder.py (keep, augment with contract-derived items)"
+        ],
+        "what_to_redesign": [
+          "Hardcoded TextExtractor repair reference (lines 104-120+ in code_generator.py)",
+          "3-keyword filter in repair re-injection (lines 88-103) — should be all contract forbidden_symbols"
+        ]
+      },
+      {
+        "layer": "4_validation",
+        "name": "Validation Layer",
+        "current_state": "Compile (dotnet build) + run (dotnet run with fixture inputs) + unstructured example-reviewer LLM call. Reviewer output is a pass/fail verdict from the example-reviewer subprocess. No semantic output validator per family. No structured reviewer feedback schema (reviewer returns natural language). Output validation for TextExtractor uses Contains() check in harness; Words uses VML shape check in word/header1.xml — both are family-specific heuristics embedded in test fixtures, not in the pipeline validator.",
+        "root_cause_addressed": "Without per-family semantic validators, a generated example can produce an output file that exists but is semantically wrong (e.g., empty PDF, PDF with only watermark text). The reviewer LLM detects some of these but inconsistently.",
+        "target_state": "Per-family semantic output validators that verify generated output files meet minimum correctness criteria. Structured reviewer feedback schema. Validators run after dotnet run, before reviewer call.",
+        "implementation_direction": "Create src/plugin_examples/verifier_bridge/output_validator.py with per-family, per-type validators. Each validator: check file exists, check file is non-empty, check family-specific semantic properties (PDF: valid PDF header %PDF; Words: valid ZIP structure for DOCX; Cells: valid ZIP structure for XLSX). Reviewer output: require reviewer to produce structured JSON with verdict, reason, issue_list — not freeform text.",
+        "target_files_or_modules": [
+          "src/plugin_examples/verifier_bridge/output_validator.py (NEW: per-family semantic validators)",
+          "src/plugin_examples/verifier_bridge/bridge.py (MODIFY: call output_validator before reviewer)",
+          "src/plugin_examples/runner.py (MODIFY: check validator result in stage pipeline)",
+          "src/plugin_examples/scenario_planner/type_classifier.py (MODIFY: output_format field used by validator to choose check)",
+          "docs/publishing/reviewer-output-schema.md (NEW: structured reviewer JSON contract)"
+        ],
+        "expected_behavior": "After dotnet run: output_validator.py checks output file for semantic validity. For PDF: header check (%PDF). For DOCX: ZIP magic bytes (PK\\x03\\x04). For XLSX: ZIP magic bytes. For TextExtractor: string result non-empty and does not contain only whitespace. Validator failure causes VALIDATION_FAILED (before reviewer call). Reviewer receives structured prompt requesting JSON output with: {verdict: PASS|FAIL, reason: str, issues: []}.",
+        "tests_to_add": [
+          "test_pdf_validator_rejects_empty_output",
+          "test_pdf_validator_rejects_non_pdf_file",
+          "test_docx_validator_rejects_invalid_zip",
+          "test_xlsx_validator_rejects_invalid_zip",
+          "test_text_extractor_validator_rejects_whitespace_only_result",
+          "test_validator_runs_before_reviewer",
+          "test_reviewer_structured_output_parsed_correctly"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/validation-results.json (ENHANCED: includes semantic_validator_result field)",
+          "workspace/runs/{run_id}/evidence/output-validation-results.json (NEW: per-scenario validator output)"
+        ],
+        "migration_risk": "MEDIUM",
+        "migration_risk_rationale": "New validator module is new code, low risk. Modifying bridge.py to call validator adds a step before reviewer — could cause currently-passing scenarios to fail if validator is too strict. Must tune validator thresholds against currently-passing examples.",
+        "rollback_strategy": "Remove output_validator.py call from bridge.py. Validator module remains harmless. All families continue with existing reviewer-only validation.",
+        "tradeoffs": [
+          "Semantic validators add per-scenario execution time (file I/O)",
+          "False positives possible if output file format varies by Aspose version",
+          "Reviewer structured output requires reviewer repo changes (external dependency)"
+        ],
+        "risks": [
+          "Reviewer repo (example-reviewer) requires separate changes to produce structured JSON — external dependency not controlled by this pipeline",
+          "PDF %PDF header check will fail for encrypted or malformed PDFs — need more robust check"
+        ],
+        "what_to_preserve": [
+          "Existing compile + run + reviewer pipeline stages (add validator between run and reviewer)",
+          "example-reviewer subprocess call mechanism in verifier_bridge/bridge.py",
+          "Reviewer verdict taxonomy (PASS/FAIL/SKIP)"
+        ],
+        "what_to_redesign": [
+          "Absence of any semantic output validator between run and reviewer",
+          "Unstructured reviewer output (natural language → structured JSON)"
+        ]
+      },
+      {
+        "layer": "5_lifecycle",
+        "name": "Lifecycle Layer",
+        "current_state": "example_lifecycle.py tracks stage (GENERATION_PENDING → GENERATION_PASSED → BUILD_PASSED → RUN_PASSED → REVIEWER_PASSED → EXAMPLE_READY_FOR_PR_DRY_RUN). LifecycleRegistry writes per-scenario records to lifecycle-records.json. No run-to-run comparison mechanism. No stable scenario ID registry — IDs generated by planner.py at runtime. backlog-to-taskcard bridge missing: workspace/backlog/cells/ and workspace/backlog/words/ do not exist (only workspace/backlog/pdf/).",
+        "root_cause_addressed": "Without run-to-run comparison, a previously-passing scenario silently regressing to GENERATION_FAILED is only visible by manually comparing two evidence files. No automated non-degradation check.",
+        "target_state": "Stable scenario IDs registered in scenario-catalog.json (committed to repo). Run-to-run lifecycle diff: compare current run results against previous run results, flag regressions. Backlog-to-taskcard bridge for all 3 families. lifecycle-records.json includes prior_run_result for each scenario.",
+        "implementation_direction": "Extend LifecycleRegistry to load prior lifecycle-records.json from previous run (workspace/runs/{prior_run_id}/evidence/lifecycle-records.json) and compute diff. Add field prior_run_result to each lifecycle record. Write regression_detected=True if prior_run_result=EXAMPLE_READY_FOR_PR_DRY_RUN and current=GENERATION_FAILED. Create workspace/backlog/cells/ and workspace/backlog/words/ with same schema as workspace/backlog/pdf/.",
+        "target_files_or_modules": [
+          "src/plugin_examples/gates/example_lifecycle.py (MODIFY: add run-to-run diff logic, prior_run_result field)",
+          "workspace/manifests/scenario-catalog.json (MODIFY: make it all-family, not Words-only)",
+          "workspace/backlog/cells/ (NEW directory — excluded scenarios per root-cause)",
+          "workspace/backlog/words/ (NEW directory — excluded scenarios per root-cause)",
+          "src/plugin_examples/runner.py (MODIFY: pass prior_run_id to LifecycleRegistry if --compare-run flag provided)"
+        ],
+        "expected_behavior": "On each run: if --compare-run={prior_run_id} provided, LifecycleRegistry loads prior lifecycle-records.json and attaches prior_run_result to each scenario record. If any scenario regressed (was PR_READY, now GENERATION_FAILED), runner logs REGRESSION_DETECTED and fails the run. backlog/ directories contain JSON files for each excluded scenario with: {scenario_id, exclusion_reason, root_cause, unblock_condition, taskcard_id}.",
+        "tests_to_add": [
+          "test_lifecycle_registry_detects_regression_from_prior_run",
+          "test_lifecycle_registry_no_regression_if_no_prior_run",
+          "test_lifecycle_records_include_prior_run_result_field",
+          "test_backlog_schema_validates_for_all_families",
+          "test_runner_fails_on_regression_detected"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/lifecycle-regression-report.json (NEW: per run)",
+          "workspace/backlog/{family}/{scenario_id}.json (16 excluded scenarios across 3 families)"
+        ],
+        "migration_risk": "LOW",
+        "migration_risk_rationale": "Prior run loading is opt-in (--compare-run flag). Existing runs without the flag are unaffected. backlog/ directories are new files, no existing code changed.",
+        "rollback_strategy": "Remove --compare-run flag handling from runner.py. Delete backlog/ directories if needed. LifecycleRegistry reverts to current behavior.",
+        "tradeoffs": [
+          "Prior run ID must be provided manually — not auto-detected",
+          "Prior run evidence must exist in workspace/runs/ (requires --metrics flag on prior run)",
+          "Backlog maintenance requires manual updates when exclusion reasons change"
+        ],
+        "risks": [
+          "workspace/runs/ only created when --metrics is used (confirmed in Phase 3 source audit) — prior run may not have evidence directory",
+          "Prior lifecycle-records.json may be stale if scenario IDs changed between runs"
+        ],
+        "what_to_preserve": [
+          "LIFECYCLE_STAGES list and transition logic in example_lifecycle.py",
+          "LifecycleRegistry per-scenario stage tracking (working correctly for all 3 families)",
+          "example-lifecycle-records.json schema (add fields, do not change existing)"
+        ],
+        "what_to_redesign": [
+          "No run-to-run comparison mechanism (PLANNED_ONLY per Phase 1 audit)",
+          "Missing backlog directories for Cells and Words (confirmed gap in Phase 8)"
+        ]
+      },
+      {
+        "layer": "6_publication",
+        "name": "Publication Layer",
+        "current_state": "PR packaging (pr_builder.py) selects candidates from pr-candidate-manifest.json. release_status.py shows last_pr_number from most recent run only (structural staleness — design limitation). README renderer (readme_renderer.py) generates README from manifest. github_pr_publisher.py creates PRs via 8-step GitHub API flow. Token never logged. Approval gate (APPROVE_LIVE_PR) enforced. Merge gate (APPROVE_MERGE_PR) separate. post-merge validation runs as a separate command.",
+        "root_cause_addressed": "PR candidates derived from pr-candidate-manifest.json may not reflect lifecycle truth (evidenced by PDF pr-candidate-manifest showing 4 vs lifecycle showing 3). README sync is triggered manually, not derived from lifecycle state. release_status.json cumulative PR count structurally stale.",
+        "target_state": "PR candidates derived directly from family lifecycle records (not from a separate manifest). README sync triggered automatically when new PR candidates detected. release_status.py computes cumulative PR count across all merge-result.json files, not just most recent.",
+        "implementation_direction": "pr_builder.py reads families/{family}/example-lifecycle-records.json as primary source for PR candidate selection (not pr-candidate-manifest.json). release_status.py scans all workspace/verification/latest/families/{family}/*-merge-result.json files and aggregates cumulative_pr_count. README renderer called automatically after PR candidate manifest is written.",
+        "target_files_or_modules": [
+          "src/plugin_examples/publisher/pr_builder.py (MODIFY: read lifecycle records directly, not manifest-first)",
+          "src/plugin_examples/publisher/release_status.py (MODIFY: cumulative PR count from all merge-result files)",
+          "src/plugin_examples/publisher/readme_renderer.py (MODIFY: called automatically post-manifest)",
+          "src/plugin_examples/publisher/readme_auditor.py (MODIFY: flag stale README if lifecycle records newer than README commit)"
+        ],
+        "expected_behavior": "pr_builder.py queries lifecycle records for all scenarios with stage=EXAMPLE_READY_FOR_PR_DRY_RUN. pr-candidate-manifest.json is derived output (not input). release_status.py scans all *-merge-result.json and sums merged_pr_count per family. cumulative_pr_count field added to release-status.json. README renderer runs as part of PR packaging pipeline stage, not a separate command.",
+        "tests_to_add": [
+          "test_pr_builder_derives_candidates_from_lifecycle_not_manifest",
+          "test_release_status_cumulative_count_from_all_merge_results",
+          "test_release_status_not_stale_after_multiple_prs",
+          "test_readme_renderer_called_post_manifest_write"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/pr-candidate-manifest.json (UNCHANGED schema, derived from lifecycle)",
+          "workspace/verification/latest/release-status.json (ENHANCED: cumulative_pr_count field added)"
+        ],
+        "migration_risk": "MEDIUM",
+        "migration_risk_rationale": "pr_builder.py change inverts the data flow (lifecycle → manifest instead of manifest-driven). Must verify that derived manifest is equivalent to current manifest for Cells 9/9 and Words 4/4. release_status.py cumulative count is additive change (new field).",
+        "rollback_strategy": "Revert pr_builder.py to read manifest first. release_status.py reverts to single-run PR count. All published examples remain published (no unpublishing).",
+        "tradeoffs": [
+          "Lifecycle as source of truth requires lifecycle records to be always up-to-date before PR packaging",
+          "Cumulative merge count scan is O(n files) — negligible at current scale, needs capping at large scale"
+        ],
+        "risks": [
+          "If lifecycle records are stale (from cached run), derived PR candidates may be wrong",
+          "Automatic README renderer may produce incorrect READMEs if manifest is incomplete"
+        ],
+        "what_to_preserve": [
+          "github_pr_publisher.py 8-step GitHub API flow (working, token never logged)",
+          "APPROVE_LIVE_PR and APPROVE_MERGE_PR gate separation",
+          "Post-merge validation command (independent, must remain available)",
+          "readme_auditor.py aspose.net link checking"
+        ],
+        "what_to_redesign": [
+          "pr-candidate-manifest.json as input to pr_builder.py (should be output, not input)",
+          "release_status.py last_pr_number structural staleness (confirmed design limitation in Phase 3)"
+        ]
+      },
+      {
+        "layer": "7_observability",
+        "name": "Observability Layer",
+        "current_state": "3-tier evidence layout: run-scoped (workspace/runs/{run_id}/evidence/ — canonical), family-scoped (workspace/verification/latest/families/{family}/ — primary, 22 files promoted), global latest (workspace/verification/latest/ root — deprecated alias, overwrite risk). latest/ root overwritten by any family run (_last_promoted_by.json tracks this). workspace/runs/ only created when --metrics flag is used. Agent metrics with dry_run=True default, EXTERNAL_POST_COMMANDS=frozenset({\"run\"}).",
+        "root_cause_addressed": "Evidence in latest/ root is unreliable in multi-family environments. Non-metrics runs produce no run-scoped evidence. Latest/ alias treated as authoritative by humans reading files directly, despite deprecation notice.",
+        "target_state": "Run-scoped evidence always created (not just with --metrics). Family-scoped evidence as the single authoritative tier for automated consumption. latest/ root limited to a subset of non-overwritable files (plan governance, global aggregate). Agent metrics evidence always written locally regardless of dry_run setting.",
+        "implementation_direction": "Decouple evidence_dir creation from --metrics flag in __main__.py (line 57). evidence_layout.py: rename FAMILY_SCOPED_EVIDENCE_FILES to AUTHORITATIVE_FAMILY_FILES; add GLOBAL_AGGREGATE_FILES = frozenset of files that ARE safe at latest/ root (e.g., release-status.json, scenario-catalog.json). Metrics evidence: always write to workspace/runs/{run_id}/metrics/ regardless of dry_run. Add a LATEST_ROOT_ALLOWLIST check — files not in allowlist should not be written to latest/ root directly.",
+        "target_files_or_modules": [
+          "src/plugin_examples/__main__.py (MODIFY: create evidence_dir unconditionally, not only when --metrics)",
+          "src/plugin_examples/evidence_layout.py (MODIFY: add GLOBAL_AGGREGATE_FILES allowlist; rename constants for clarity)",
+          "src/plugin_examples/metrics/poster.py (MODIFY: always write local evidence even when dry_run=True)",
+          "src/plugin_examples/runner.py (MODIFY: pass evidence_dir always, not conditionally)"
+        ],
+        "expected_behavior": "Every run creates workspace/runs/{run_id}/evidence/ regardless of --metrics flag. Evidence promotion: family-scoped files → families/{family}/ always; global aggregate files → latest/ root (small allowlist); all other files → families/{family}/ only. Metrics evidence: workspace/runs/{run_id}/metrics/metrics-payload.json always written (local), posted only if not dry_run. latest/ root contains ONLY: release-status.json, scenario-catalog.json, _last_promoted_by.json, and aggregate-gate-results.json.",
+        "tests_to_add": [
+          "test_evidence_dir_created_without_metrics_flag",
+          "test_latest_root_only_receives_allowlisted_files",
+          "test_metrics_evidence_written_locally_even_when_dry_run",
+          "test_family_scoped_files_not_overwritten_by_other_family_run"
+        ],
+        "evidence_to_produce": [
+          "workspace/runs/{run_id}/evidence/ (always created, not metrics-gated)",
+          "workspace/runs/{run_id}/metrics/metrics-payload.json (always written locally)"
+        ],
+        "migration_risk": "LOW",
+        "migration_risk_rationale": "Decoupling evidence_dir from --metrics is additive (more evidence created, none removed). LATEST_ROOT_ALLOWLIST is a new restriction — may cause confusion if callers expect files at latest/ root that are now family-scoped only.",
+        "rollback_strategy": "Revert __main__.py line 57 to conditional creation. Revert evidence_layout.py constants. Latest/ root returns to current overwrite behavior.",
+        "tradeoffs": [
+          "Always creating evidence_dir uses disk space on every run",
+          "Restricting latest/ root may break existing scripts that read files from latest/",
+          "Metrics evidence always written may create noise when dry_run=True"
+        ],
+        "risks": [
+          "workspace/runs/ growth unchecked — needs cleanup policy (e.g., keep last N runs)",
+          "Callers reading from workspace/verification/latest/ root directly may break if files moved to families/{family}/"
+        ],
+        "what_to_preserve": [
+          "FAMILY_SCOPED_EVIDENCE_FILES frozenset (keep all 22 files family-scoped)",
+          "workspace/runs/{run_id}/ immutable per-run structure",
+          "Agent metrics post_ledger append-only behavior",
+          "_last_promoted_by.json tracking (keep, but make it less relied-upon)"
+        ],
+        "what_to_redesign": [
+          "evidence_dir creation gated on --metrics (confirmed in Phase 3 source audit, __main__.py line 57)",
+          "latest/ root overwrite risk (documented in _last_promoted_by.json itself)"
+        ]
+      },
+      {
+        "layer": "8_governance",
+        "name": "Governance Layer",
+        "current_state": "Taskcards tracked in open-taskcard-closure-matrix.json (77 total, 16 open, 61 closed as of audit date). Taskcard markdown sync maintained manually. No programmatic stop condition enforcement based on evidence completeness. No evidence completeness check before verdict written. Monthly rerun strategy is manual (no CI workflow found in .github/workflows/). release_status.py reads taskcard matrix dynamically (rank 1 source check). CI docs in docs/ci/ exist but content not verified as runnable workflows.",
+        "root_cause_addressed": "Evidence completeness check missing means a run can produce an incomplete evidence set without being halted. Evidence integrity score (77/100 from Phase 8) reveals that stale and missing evidence is a systemic pattern, not a one-off. Governance cannot catch this because it has no automated enforcement.",
+        "target_state": "Programmatic evidence completeness check before any verdict is written. Stop conditions enforced by a gate module. Monthly CI workflow that runs regression check for all 3 families and posts results. Taskcard sync maintained by a script, not manually.",
+        "implementation_direction": "Create src/plugin_examples/gates/evidence_completeness.py — checks that all FAMILY_SCOPED_EVIDENCE_FILES exist in families/{family}/ before allowing lifecycle verdict to be written. Create .github/workflows/monthly-rerun.yml — triggers on schedule (first Monday of month), runs pipeline in check-only mode, posts diff to a verification file. Create scripts/sync_taskcards.py — reads open-taskcard-closure-matrix.json and regenerates docs/discovery/open-taskcard-closure-matrix.md automatically.",
+        "target_files_or_modules": [
+          "src/plugin_examples/gates/evidence_completeness.py (NEW: checks evidence set completeness)",
+          "src/plugin_examples/runner.py (MODIFY: call evidence_completeness gate before verdict stage)",
+          ".github/workflows/monthly-rerun.yml (NEW: scheduled regression workflow)",
+          "scripts/sync_taskcards.py (NEW: JSON-to-MD taskcard sync automation)",
+          "src/plugin_examples/gates/example_lifecycle.py (MODIFY: call evidence_completeness before writing lifecycle verdict)"
+        ],
+        "expected_behavior": "Before lifecycle verdict is written: evidence_completeness.py checks that all 22 FAMILY_SCOPED_EVIDENCE_FILES exist for the current family. If any are missing: EVIDENCE_INCOMPLETE status, run continues but verdict lowered to NOT_VERIFIABLE. Monthly CI workflow: runs release-status --check-only, compares lifecycle records from current run to prior run, writes regression report to workspace/verification/latest/monthly-regression-report.json. sync_taskcards.py: reads JSON matrix, writes MD file with consistent formatting — eliminates manual sync.",
+        "tests_to_add": [
+          "test_evidence_completeness_fails_if_any_family_scoped_file_missing",
+          "test_evidence_completeness_passes_if_all_files_present",
+          "test_runner_lowers_verdict_on_evidence_incomplete",
+          "test_sync_taskcards_generates_md_from_json",
+          "test_sync_taskcards_preserves_all_taskcard_ids"
+        ],
+        "evidence_to_produce": [
+          "workspace/verification/latest/families/{family}/evidence-completeness-check.json (NEW: per run)",
+          "workspace/verification/latest/monthly-regression-report.json (NEW: monthly CI output)",
+          "docs/discovery/open-taskcard-closure-matrix.md (AUTO-GENERATED from JSON, not manually maintained)"
+        ],
+        "migration_risk": "LOW",
+        "migration_risk_rationale": "New module (evidence_completeness.py) and new workflow (.github/workflows/monthly-rerun.yml). No existing source logic modified. sync_taskcards.py is a standalone script. Runner modification is additive (new gate call).",
+        "rollback_strategy": "Remove evidence_completeness gate call from runner.py. Delete .github/workflows/monthly-rerun.yml. sync_taskcards.py remains available for manual use. All families continue operating as before.",
+        "tradeoffs": [
+          "Evidence completeness gate adds a new failure mode — runs that previously passed may now halt on incomplete evidence",
+          "Monthly CI workflow requires GitHub Actions minutes and .NET SDK available in runner",
+          "sync_taskcards.py needs to be run on every taskcard change — adds process step"
+        ],
+        "risks": [
+          "Monthly CI workflow may fail if LLM endpoint is unavailable on scheduled day",
+          "Evidence completeness gate may be overly strict — some evidence files are optional for some families",
+          "sync_taskcards.py auto-generation may produce different MD formatting than hand-maintained file — causing merge conflicts"
+        ],
+        "what_to_preserve": [
+          "Taskcard taxonomy (OPEN/CLOSED_VERIFIED/CLOSED_SUPERSEDED) — matches current JSON schema",
+          "release_status.py dynamic taskcard loading from JSON (rank 1 source, confirmed working)",
+          "docs/ci/ directory structure (existing CI documentation)"
+        ],
+        "what_to_redesign": [
+          "Manual taskcard markdown sync (confirmed gap in Phase 8 — currently in sync but fragile)",
+          "Absence of programmatic evidence completeness check (confirmed in Phase 8 — evidence integrity 77/100)",
+          "Monthly rerun is entirely manual (G5 PLANNED_ONLY per Phase 1 scope matrix)"
+        ]
+      }
+    ],
+    "implementation_sequencing": {
+      "safe_to_start_now": ["1_source_of_truth", "5_lifecycle", "7_observability", "8_governance"],
+      "requires_denominator_first": ["2_scenario_contract", "3_generation"],
+      "requires_contract_layer": ["3_generation"],
+      "requires_validation_layer_design": ["4_validation"],
+      "do_not_touch_simultaneously": [
+        "3_generation (code_generator.py) and 6_publication (github_pr_publisher.py)"
+      ],
+      "cells_words_non_degradation_gate": "All layers that touch planner.py or code_generator.py must run full Cells+Words regression before sprint closure"
+    },
+    "preserved_invariants": [
+      "Cells 9/9 example publication (PR packages in workspace/pr-dry-run/)",
+      "Words 4/4 example publication (all PRs merged)",
+      "Agent metrics safe defaults: enabled=False, dry_run=True",
+      "DataSources FORBIDDEN guard in code_generator.py lines 657-663",
+      "PluginOptions FORBIDDEN guard in code_generator.py",
+      "Provider policy: APPROVED_PROVIDERS=frozenset({'llm_professionalize','ollama'}), UNAPPROVED_PROVIDERS=frozenset({'gpt_oss','openai','azure_openai'})",
+      "PR approval gate separation: APPROVE_LIVE_PR != APPROVE_MERGE_PR",
+      "Token never logged in github_pr_publisher.py",
+      "Run-scoped evidence immutable structure (workspace/runs/{run_id}/evidence/)"
+    ]
+  },
+  "gaps": [
+    "output_validator.py requires example-reviewer repo changes for structured output — external dependency",
+    "monthly-rerun.yml requires GitHub Actions runner with .NET SDK — infrastructure dependency",
+    "Contract creation for 16 existing scenarios requires reading all passing examples — upfront effort not scoped here",
+    "workspace/runs/ cleanup policy not specified — disk growth unchecked at scale"
+  ],
+  "contradictions": [],
+  "next_actions": [
+    "Phase 10: Production-truth roadmap (R1-R9 sprints implementing these 8 layers)",
+    "Phase 11: Risk register (mapping layer migration risks to residual risks)",
+    "Phase 12: Claim audit (21 claims — CA-01 through CA-21)",
+    "Phase 13: Final verdict (derived from Phases 0-12)"
+  ]
+}

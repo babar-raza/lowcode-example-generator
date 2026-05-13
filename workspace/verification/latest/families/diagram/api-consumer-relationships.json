@@ -1,0 +1,38 @@
+{
+  "total_types": 5,
+  "types_with_consumers": 2,
+  "types_without_consumers": 3,
+  "relationships": {
+    "Aspose.Diagram.LowCode.LowCodeLoadOptions": [
+      {
+        "consumer_type": "Aspose.Diagram.LowCode.DiagramConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Diagram.LowCode.PdfConverter",
+        "consumer_method": "Process",
+        "parameter_name": "loadOptions",
+        "is_static": true
+      }
+    ],
+    "Aspose.Diagram.LowCode.PdfConverter": [],
+    "Aspose.Diagram.LowCode.LowCodePdfSaveOptions": [],
+    "Aspose.Diagram.LowCode.LowCodeSaveOptions": [
+      {
+        "consumer_type": "Aspose.Diagram.LowCode.DiagramConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Diagram.LowCode.PdfConverter",
+        "consumer_method": "Process",
+        "parameter_name": "saveOptions",
+        "is_static": true
+      }
+    ],
+    "Aspose.Diagram.LowCode.DiagramConverter": []
+  }
+}

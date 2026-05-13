@@ -1,0 +1,799 @@
+{
+  "total_scored": 22,
+  "runnable_count": 9,
+  "rejected_count": 13,
+  "scores": [
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+      "name": "AbstractLowCodeLoadOptionsProvider",
+      "role": "abstract_base",
+      "score": -2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
+      "name": "AbstractLowCodeProtectionProvider",
+      "role": "abstract_base",
+      "score": -1.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "6 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+      "name": "AbstractLowCodeSaveOptionsProvider",
+      "role": "abstract_base",
+      "score": -4.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "name": "HtmlConverter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.ImageConverter",
+      "name": "ImageConverter",
+      "role": "workflow_root",
+      "score": 8.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "3 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "requires_callback_params",
+          "weight": -2.0,
+          "detail": "1 parameters are callback types"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "4 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.JsonConverter",
+      "name": "JsonConverter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "name": "LowCodeHtmlSaveOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "name": "LowCodeImageSaveOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "name": "LowCodeLoadOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
+      "name": "LowCodeMergeOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "name": "LowCodePdfSaveOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "name": "LowCodeSaveOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+      "name": "LowCodeSaveOptionsProviderOfAssembling",
+      "role": "provider_callback",
+      "score": -4.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "provider_callback_role",
+          "weight": -5.0,
+          "detail": "Provider/callback type \u2014 not standalone"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+      "name": "LowCodeSaveOptionsProviderOfPlaceHolders",
+      "role": "provider_callback",
+      "score": -4.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "provider_callback_role",
+          "weight": -5.0,
+          "detail": "Provider/callback type \u2014 not standalone"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
+      "name": "LowCodeSplitOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.PdfConverter",
+      "name": "PdfConverter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SplitPartInfo",
+      "name": "SplitPartInfo",
+      "role": "result_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'result_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "name": "SpreadsheetConverter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "name": "SpreadsheetLocker",
+      "role": "workflow_root",
+      "score": 8.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "4 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "requires_callback_params",
+          "weight": -2.0,
+          "detail": "1 parameters are callback types"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "7 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "name": "SpreadsheetMerger",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "name": "SpreadsheetSplitter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.TextConverter",
+      "name": "TextConverter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    }
+  ]
+}

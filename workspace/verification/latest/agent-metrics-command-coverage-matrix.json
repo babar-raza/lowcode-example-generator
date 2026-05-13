@@ -1,0 +1,113 @@
+{
+  "title": "Agent Metrics Command Coverage Matrix",
+  "audit_date": "2026-05-06",
+  "sprint": "gap-closure-sprint-2",
+  "objective": "Verify all 13 CLI commands have metrics wiring in __main__.py",
+  "total_commands": 13,
+  "commands": {
+    "run": {
+      "metrics_wired": true,
+      "wiring_method": "run_pipeline() built-in finalize_metrics via PipelineContext",
+      "session_type": "PipelineContext-integrated (not MetricsSession)",
+      "count_source_policy": "SUPPORTED_EXTERNAL_METRICS",
+      "flags_added": true
+    },
+    "discover-lowcode": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession via _create_metrics_session / _finalize_metrics_session",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "validate-publish-targets": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "resolve-repo-access": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "probe-publish-permissions": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "publish-pr": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "merge-pr": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "release-status": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "render-root-readme": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "publish-readme": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "sync-taskcard-docs": {
+      "metrics_wired": true,
+      "wiring_method": "MetricsSession",
+      "count_source_policy": "LOCAL_ONLY_LLM_METRICS",
+      "flags_added": true
+    },
+    "status": {
+      "metrics_wired": false,
+      "wiring_method": "N/A",
+      "count_source_policy": "EXCLUDED_INFO_ONLY",
+      "flags_added": false,
+      "reason": "Info-only command, no pipeline execution"
+    },
+    "check": {
+      "metrics_wired": false,
+      "wiring_method": "N/A",
+      "count_source_policy": "EXCLUDED_INFO_ONLY",
+      "flags_added": false,
+      "reason": "Config validation only, no pipeline execution"
+    }
+  },
+  "helper_functions": {
+    "_add_metrics_flags": {
+      "location": "src/plugin_examples/__main__.py",
+      "purpose": "Adds shared --metrics flags to any subparser",
+      "flags": ["--metrics", "--metrics-post", "--metrics-job-type", "--metrics-strict", "--metrics-force-repost", "--metrics-config"]
+    },
+    "_create_metrics_session": {
+      "location": "src/plugin_examples/__main__.py",
+      "purpose": "Creates MetricsSession from CLI args, returns (session, collector)",
+      "returns": "Tuple[MetricsSession | None, MetricsCollector | None]"
+    },
+    "_finalize_metrics_session": {
+      "location": "src/plugin_examples/__main__.py",
+      "purpose": "Finalizes session and prints status to stderr"
+    }
+  },
+  "summary": {
+    "wired": 11,
+    "excluded": 2,
+    "total": 13,
+    "coverage": "100% (all commands classified and handled)"
+  },
+  "verdict": "ALL_COMMANDS_COVERED"
+}

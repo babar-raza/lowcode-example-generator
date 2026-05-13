@@ -1,0 +1,314 @@
+{
+  "sprint": "PDF Live PR Post-Creation Review, Lifecycle Accounting, and Publish Safety Verification",
+  "date": "2026-05-06",
+  "overall_verdict": "PDF_PR1_VERIFIED_READY_FOR_HUMAN_REVIEW",
+
+  "gate_0_artifact_review": {
+    "result": "PASS",
+    "artifacts": [
+      {"artifact": "workspace/verification/latest/pdf-live-pr-result.json", "classification": "VERIFIED", "notes": "PR #1 created, 12 files, 2 examples, target aspose-pdf-net. live_pr_created=true."},
+      {"artifact": "workspace/verification/latest/pdf-live-pr-post-creation-verification.json", "classification": "VERIFIED", "notes": "All 19 checks pass. PR OPEN, not merged, 12 files, labels correct."},
+      {"artifact": "workspace/verification/latest/pdf-pr-dry-run-summary.json", "classification": "STALE", "notes": "Dated 2026-05-05, from EARLIER packaging sprint. Shows only text-extractor (1 example). The later healing sprint (pilot-pdf-20260505-214804) added merger. This file was not updated. Non-blocking: current PR includes both."},
+      {"artifact": "workspace/verification/latest/pdf-pr-package-validation.json", "classification": "STALE", "notes": "Dated 2026-05-05, validates only text-extractor. Merger was added later by healing sprint. Non-blocking: clean checkout validates both (Phase 2)."},
+      {"artifact": "workspace/verification/latest/pdf-pr-package-scope.json", "classification": "STALE", "notes": "Dated 2026-05-05, shows merger EXCLUDED. Later healing sprint fixed merger. Non-blocking: current PR includes both verified examples."},
+      {"artifact": "workspace/verification/latest/family-repo-access-resolution.json", "classification": "VERIFIED", "notes": "pdf: repo_access_ok, can_push=true, HTTP 200, visibility=public. Dated 2026-05-06."},
+      {"artifact": "workspace/verification/latest/family-publish-readiness.json", "classification": "VERIFIED", "notes": "pdf: publish_ready=true, config_ready=true. repo_access_ready=false (stale from pre-resolver state). Non-blocking: fallback reads resolver."},
+      {"artifact": "workspace/verification/latest/family-generation-readiness-rank.json", "classification": "VERIFIED", "notes": "pdf: controlled_pilot_pass_count=2, passing_types=[Merger, TextExtractor], generation_ready=true."},
+      {"artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json", "classification": "VERIFIED", "notes": "total=53, closed=46, open=7. PDF live PR canary sprint entry present."},
+      {"artifact": "pipeline/configs/families/pdf.yml", "classification": "VERIFIED", "notes": "status: active, allowed_types: [Merger, TextExtractor], published_plugin_examples_repo: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples."},
+      {"artifact": "src/plugin_examples/__main__.py", "classification": "VERIFIED", "notes": "Fallback at lines 531-546 reads family-repo-access-resolution.json when readiness lacks flags. Safe: only overrides False with True, never True with False."},
+      {"artifact": "src/plugin_examples/gates/example_lifecycle.py", "classification": "VERIFIED", "notes": "Module exists. ExampleLifecycleRecord (24 fields), ExampleLifecycleRegistry, FamilyBacklogEntry (12 fields) all present."},
+      {"artifact": "src/plugin_examples/runner.py", "classification": "VERIFIED", "notes": "lifecycle_registry on PipelineContext. Wired into generation, validation, reviewer stages."},
+      {"artifact": "src/plugin_examples/publisher/publisher.py", "classification": "VERIFIED", "notes": "Line 118 filters to status in (generated, repaired). Central repo detection active."},
+      {"artifact": "src/plugin_examples/publisher/github_pr_publisher.py", "classification": "VERIFIED", "notes": "collect_package_files excludes bin/, obj/, .git/, __pycache__. 8-step API flow. Token never logged."},
+      {"artifact": "src/plugin_examples/publisher/publish_readiness.py", "classification": "VERIFIED", "notes": "4-tier readiness model. merge_repo_access_results merges resolver data."},
+      {"artifact": "src/plugin_examples/publisher/repo_access_resolver.py", "classification": "VERIFIED", "notes": "Read-only GET probes. Token never logged. check_repo_access returns 4-tier fields."},
+      {"artifact": "src/plugin_examples/evidence_layout.py", "classification": "VERIFIED", "notes": "promote_family_evidence copies to families/{family}/. resolve_family_evidence_path with fallback."},
+      {"artifact": "workspace/pr-dry-run/pdf-controlled-pilot/", "classification": "VERIFIED", "notes": "Contains merger + text-extractor examples. ALSO has bin/obj artifacts from local build (not included in PR due to publisher exclusion)."},
+      {"artifact": "workspace/runs/pilot-pdf-20260505-214804/", "classification": "VERIFIED", "notes": "Canonical run. 2 generated (merger + text-extractor). validation-results: 2/2 PASS. pr-candidate-manifest: 2 included, 0 excluded."},
+      {"artifact": "workspace/verification/latest/pdf-live-pr-package-revalidation.json", "classification": "MISSING", "notes": "Was never created. Non-blocking: clean checkout (Phase 2) validates build+run for both examples."},
+      {"artifact": "workspace/verification/latest/pdf-live-pr-dry-run-simulation.json", "classification": "MISSING", "notes": "Was never created under this name. pdf-live-pr-simulation.json exists at workspace/verification/ (not /latest/)."},
+      {"artifact": "workspace/verification/latest/pdf-repo-provisioning-recheck.json", "classification": "MISSING", "notes": "Was never created. Repo access verified via family-repo-access-resolution.json."},
+      {"artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json", "classification": "MISSING", "notes": "Lifecycle evidence only written during pipeline runs. The canonical run evidence is at workspace/runs/pilot-pdf-20260505-214804/evidence/latest/. Lifecycle module exists but was not invoked for this specific run because lifecycle was added AFTER the canonical run completed."},
+      {"artifact": "workspace/backlog/pdf/examples-backlog.json", "classification": "MISSING", "notes": "Backlog directory not created. Lifecycle backlog code exists but was not invoked. Splitter and Optimizer are tracked via taskcards instead."},
+      {"artifact": "workspace/verification/latest/pdf-example-lifecycle-summary.json", "classification": "MISSING", "notes": "Was never created. Lifecycle summary only generated during pipeline runs with lifecycle module wired in."},
+      {"artifact": "workspace/verification/latest/pdf-failed-example-backlog-result.json", "classification": "MISSING", "notes": "Was never created. Backlog result only generated during pipeline runs with lifecycle module wired in."},
+      {"artifact": "docs/discovery/open-taskcard-closure-matrix.md", "classification": "VERIFIED", "notes": "Markdown version exists."}
+    ],
+    "contradictions": [
+      {
+        "id": "STALE-1",
+        "severity": "LOW",
+        "description": "pdf-pr-dry-run-summary.json and pdf-pr-package-scope.json are from the EARLIER packaging sprint (2026-05-05) which had only text-extractor. The later healing sprint added merger. These files were not refreshed.",
+        "impact": "NON-BLOCKING — current PR includes both verified examples as confirmed by canonical run + clean checkout.",
+        "resolution": "Documented as STALE. Current PR state is authoritative."
+      },
+      {
+        "id": "STALE-2",
+        "severity": "LOW",
+        "description": "family-publish-readiness.json has repo_access_ready=false for PDF (stale from pre-resolver state).",
+        "impact": "NON-BLOCKING — fallback to family-repo-access-resolution.json resolves this. Tested with 4 new tests.",
+        "resolution": "Fallback fix verified and tested."
+      },
+      {
+        "id": "PR-BODY-1",
+        "severity": "MEDIUM",
+        "description": "PR body says 'Excluded Scenarios: None in this controlled pilot scope'. Actually Splitter and Optimizer were excluded from the PDF pilot. The PR body should mention them.",
+        "impact": "COSMETIC — does not affect code quality or safety. Human reviewer can see the examples list directly.",
+        "resolution": "Documented. Not a blocker for merge."
+      }
+    ],
+    "missing_lifecycle_evidence_impact": "ACKNOWLEDGED — The lifecycle module exists and is tested (17 tests in test_example_lifecycle.py). It was added AFTER the canonical run completed. The canonical run's evidence (validation-results.json, pr-candidate-manifest.json, blocked-scenarios.json) provides equivalent lifecycle data. Formal lifecycle tracking will apply to future runs."
+  },
+
+  "gate_1_remote_pr_verification": {
+    "result": "PASS",
+    "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/1",
+    "pr_number": 1,
+    "state": "OPEN",
+    "merged": false,
+    "mergeable": "MERGEABLE",
+    "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "base_branch": "main",
+    "source_branch": "plugin-examples/pdf/20260506-083146",
+    "changed_files": 12,
+    "additions": 347,
+    "deletions": 1,
+    "labels": ["automated", "plugin-examples", "pdf"],
+    "files": [
+      "Directory.Build.props", "Directory.Packages.props", "README.md", "global.json",
+      "examples/pdf/lowcode/merger/Program.cs", "examples/pdf/lowcode/merger/README.md",
+      "examples/pdf/lowcode/merger/example.manifest.json", "examples/pdf/lowcode/merger/pdf-merger.csproj",
+      "examples/pdf/lowcode/text-extractor/Program.cs", "examples/pdf/lowcode/text-extractor/README.md",
+      "examples/pdf/lowcode/text-extractor/example.manifest.json", "examples/pdf/lowcode/text-extractor/pdf-text-extractor.csproj"
+    ],
+    "checks": {
+      "contains_merger": true,
+      "contains_text_extractor": true,
+      "no_splitter": true,
+      "no_optimizer": true,
+      "no_cells": true,
+      "no_words": true,
+      "no_bin": true,
+      "no_obj": true,
+      "no_logs": true,
+      "no_workspace_files": true,
+      "no_secrets": true,
+      "readme_exists": true,
+      "readme_lists_only_merger_and_text_extractor": true,
+      "labels_correct": true,
+      "token_not_in_pr_body": true
+    }
+  },
+
+  "gate_2_clean_checkout_validation": {
+    "result": "ALL_PASS",
+    "clone_source": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples.git",
+    "clone_branch": "plugin-examples/pdf/20260506-083146",
+    "clone_depth": 1,
+    "isolation": "Temp directory /tmp/tmp.z39Y8t3v0I/pdf-pr1",
+    "examples": [
+      {
+        "name": "merger",
+        "restore": "PASS",
+        "build": "PASS (0 warnings, 0 errors)",
+        "run": "PASS (Merge succeeded: ...output.pdf)",
+        "output_file": "output.pdf",
+        "output_size": 56346,
+        "output_header": "%PDF-1.7",
+        "api_pattern": "MergeOptions + FileDataSource + new Merger().Process(options) — CORRECT LowCode API"
+      },
+      {
+        "name": "text-extractor",
+        "restore": "PASS",
+        "build": "PASS (0 warnings, 0 errors)",
+        "run": "PASS (Extracted: Evaluation Only...)",
+        "output": "Extracted text includes evaluation watermark — expected with unlicensed Aspose.PDF",
+        "api_pattern": "TextExtractorOptions + FileDataSource + new TextExtractor().Process(options) — CORRECT LowCode API",
+        "text_access_pattern": "Reflection-based .Text access on ResultCollection[0] — safe fallback for StringResult"
+      }
+    ],
+    "no_local_workspace_contamination": true
+  },
+
+  "gate_3_lifecycle_accounting": {
+    "result": "PASS",
+    "scenarios": [
+      {
+        "scenario_id": "pdf-merger",
+        "planned": true,
+        "selected_by_allowlist": true,
+        "generated": true,
+        "static_validation": "pass",
+        "build": "pass",
+        "runtime": "pass",
+        "output_validation": "pass",
+        "reviewer": "pass",
+        "repair_attempts": 0,
+        "final_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+        "package_included": true,
+        "pr_included": true,
+        "excluded": false,
+        "exclusion_reason": null,
+        "backlog_entry_exists": false,
+        "taskcard_exists": false,
+        "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-merger",
+        "root_cause_if_failed": null
+      },
+      {
+        "scenario_id": "pdf-text-extractor",
+        "planned": true,
+        "selected_by_allowlist": true,
+        "generated": true,
+        "static_validation": "pass",
+        "build": "pass",
+        "runtime": "pass",
+        "output_validation": "pass",
+        "reviewer": "pass",
+        "repair_attempts": 0,
+        "final_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+        "package_included": true,
+        "pr_included": true,
+        "excluded": false,
+        "exclusion_reason": null,
+        "backlog_entry_exists": false,
+        "taskcard_exists": false,
+        "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-text-extractor",
+        "root_cause_if_failed": null
+      },
+      {
+        "scenario_id": "pdf-splitter",
+        "planned": true,
+        "selected_by_allowlist": false,
+        "generated": false,
+        "static_validation": "not_run",
+        "build": "not_run",
+        "runtime": "not_run",
+        "output_validation": "not_run",
+        "reviewer": "not_run",
+        "repair_attempts": 0,
+        "final_status": "blocked_pilot_not_in_scope",
+        "package_included": false,
+        "pr_included": false,
+        "excluded": true,
+        "exclusion_reason": "Type 'Splitter' not in controlled pilot allowlist [Merger, TextExtractor]",
+        "backlog_entry_exists": false,
+        "taskcard_exists": true,
+        "taskcard_id": "followup-pdf-splitter-options-class",
+        "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/evidence/latest/blocked-scenarios.json",
+        "root_cause_if_failed": "Excluded from allowlist for this sprint. Prior runs showed PluginOptions hallucination."
+      },
+      {
+        "scenario_id": "pdf-optimizer",
+        "planned": true,
+        "selected_by_allowlist": false,
+        "generated": false,
+        "static_validation": "not_run",
+        "build": "not_run",
+        "runtime": "not_run",
+        "output_validation": "not_run",
+        "reviewer": "not_run",
+        "repair_attempts": 0,
+        "final_status": "blocked_pilot_not_in_scope",
+        "package_included": false,
+        "pr_included": false,
+        "excluded": true,
+        "exclusion_reason": "Type 'Optimizer' not in controlled pilot allowlist [Merger, TextExtractor]",
+        "backlog_entry_exists": false,
+        "taskcard_exists": true,
+        "taskcard_id": "followup-pdf-optimizer-options-class",
+        "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/evidence/latest/blocked-scenarios.json",
+        "root_cause_if_failed": "Excluded from allowlist for this sprint. Prior runs showed PluginOptions hallucination + LLM timeout."
+      }
+    ],
+    "counts": {
+      "planned_count": 4,
+      "selected_count": 2,
+      "generated_count": 2,
+      "validation_pass_count": 2,
+      "build_pass_count": 2,
+      "runtime_pass_count": 2,
+      "output_validation_pass_count": 2,
+      "reviewer_pass_count": 2,
+      "packaged_count": 2,
+      "pr_included_count": 2,
+      "excluded_count": 2,
+      "dropped_count": 0,
+      "backlogged_count": 0,
+      "taskcard_count": 2
+    },
+    "assertions": {
+      "dropped_count_is_zero": true,
+      "every_excluded_has_taskcard": true,
+      "pr_included_equals_packaged_passing": true,
+      "no_failed_example_in_pr": true
+    },
+    "note": "99 additional types were blocked by pilot allowlist (blocked_pilot_not_in_scope). Only 4 primary pilot types counted in lifecycle accounting."
+  },
+
+  "gate_4_backlog_verification": {
+    "result": "PASS_WITH_NOTED_GAP",
+    "backlog_directory_exists": false,
+    "backlog_file_exists": false,
+    "note": "workspace/backlog/pdf/ does not exist. The lifecycle backlog module (example_lifecycle.py) was added AFTER the canonical run. Backlog entries are only written during pipeline runs with lifecycle wired in. Splitter and Optimizer are tracked via taskcards instead.",
+    "taskcard_coverage": [
+      {
+        "scenario": "pdf-splitter",
+        "taskcard": "followup-pdf-splitter-options-class",
+        "status": "OPEN",
+        "root_cause": "LLM uses PluginOptions instead of SplitOptions",
+        "next_action": "Fix few-shot to use SplitOptions; regenerate and validate"
+      },
+      {
+        "scenario": "pdf-optimizer",
+        "taskcard": "followup-pdf-optimizer-options-class",
+        "status": "OPEN",
+        "root_cause": "LLM uses PluginOptions + timeout on repair",
+        "next_action": "Fix few-shot to use OptimizeOptions; regenerate and validate"
+      }
+    ],
+    "gap": "No formal FamilyBacklogEntry exists for Splitter/Optimizer. Tracked via taskcards only. Future pipeline runs will auto-populate backlog entries via lifecycle module."
+  },
+
+  "gate_5_publish_readiness_fallback_review": {
+    "result": "PASS",
+    "fallback_location": "src/plugin_examples/__main__.py lines 531-546",
+    "fallback_behavior": "When family-publish-readiness.json has repo_access_ready=False or pr_permission_ready=False, reads family-repo-access-resolution.json as authoritative fallback. Only overrides False with True, never True with False.",
+    "safety_analysis": {
+      "can_override_negative_readiness_incorrectly": false,
+      "reason": "Fallback only sets True when resolver explicitly confirms True. If resolver also says False, flags remain False.",
+      "family_match_required": true,
+      "only_triggers_when_readiness_false": true
+    },
+    "tests_added": 4,
+    "test_names": [
+      "test_fallback_reads_resolver_when_readiness_lacks_flags",
+      "test_fallback_does_not_override_negative_resolver",
+      "test_fallback_skips_when_readiness_already_true",
+      "test_fallback_requires_family_match"
+    ],
+    "all_tests_pass": true,
+    "publish_safety_regression": false
+  },
+
+  "gate_6_normal_flow_verification": {
+    "result": "PASS",
+    "compileall": "PASS (0 errors)",
+    "dotnet_build_dll_reflector": "PASS (0 warnings, 0 errors)",
+    "pytest": "873 passed (869 baseline + 4 new fallback tests)",
+    "validate_publish_targets": "pdf: READY",
+    "release_status": "pdf: merged=no, examples=2, post_merge=NOT_RUN (PR open, not merged)",
+    "remote_mutation": false
+  },
+
+  "pr_body_issue": {
+    "severity": "MEDIUM_COSMETIC",
+    "description": "PR body says 'Excluded Scenarios: None in this controlled pilot scope'. Splitter and Optimizer were excluded. This is inaccurate but does not affect code.",
+    "recommendation": "Human reviewer should note this when reviewing PR. Can be corrected in a follow-up comment or PR body edit."
+  },
+
+  "local_package_bin_obj_note": {
+    "description": "Local workspace/pr-dry-run/pdf-controlled-pilot/ contains bin/ and obj/ build artifacts from Phase 1 revalidation in the prior sprint. These are correctly excluded by github_pr_publisher.py's collect_package_files() exclusion list. The remote PR has only 12 clean source files.",
+    "remote_pr_clean": true
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "phase": "Phase 2 — Cross-Family Completion Gap Analysis",
+
+  "cells": {
+    "discovered_types": 22,
+    "runnable_candidate_count": 9,
+    "published_count": 9,
+    "excluded_count": 13,
+    "completion_rate": 1.0,
+    "published_types": ["HtmlConverter", "ImageConverter", "JsonConverter", "PdfConverter", "SpreadsheetConverter", "SpreadsheetLocker", "SpreadsheetMerger", "SpreadsheetSplitter", "TextConverter"],
+    "excluded_scenarios": [
+      {"type": "AbstractLowCodeLoadOptionsProvider", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "abstract_base"},
+      {"type": "AbstractLowCodeProtectionProvider", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "abstract_base"},
+      {"type": "AbstractLowCodeSaveOptionsProvider", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "abstract_base"},
+      {"type": "LowCodeHtmlSaveOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeImageSaveOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeLoadOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeMergeOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodePdfSaveOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeSaveOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeSplitOptions", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "options"},
+      {"type": "LowCodeSaveOptionsProviderOfAssembling", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "provider_callback"},
+      {"type": "LowCodeSaveOptionsProviderOfPlaceHolders", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "provider_callback"},
+      {"type": "SplitPartInfo", "root_cause": "PERMANENT_NON_RUNNABLE", "role": "result_model"}
+    ],
+    "system_gaps": [],
+    "needed_for_full_coverage": "Already at 100% of runnable types. No action needed. Cells could potentially demonstrate advanced patterns (e.g., custom SaveOptionsProvider implementations) in future, but those are not standalone examples.",
+    "fixture_api_403_impact": "GitHub API 403 blocked 20/22 fixture lookups without GITHUB_TOKEN. However, all 9 published examples use programmatic input (template_hints.input_creation_lines), not fixture files. The fixture API gap did not block any Cells scenarios."
+  },
+
+  "words": {
+    "discovered_types": 25,
+    "runnable_candidate_count": 9,
+    "published_count": 4,
+    "excluded_count": 21,
+    "completion_rate": 0.44,
+    "published_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+    "excluded_runnable_scenarios": [
+      {
+        "type": "Comparer",
+        "scenario_id": "WORDS-006",
+        "root_cause": "MISSING_FIXTURE_STRATEGY",
+        "detail": "Compare(v1, v2, output, author, dateTime) needs 2 input fixture files. No paired fixture generation strategy exists. template_hints has merger_input_creation_lines for 2 files, but Comparer needs 2 DIFFERENT documents to compare.",
+        "blocker_taskcard": "followup-words-pair-fixture-strategy",
+        "system_gap": true
+      },
+      {
+        "type": "MailMerger",
+        "scenario_id": "WORDS-008",
+        "root_cause": "MISSING_FIXTURE_STRATEGY",
+        "detail": "MailMerger.Execute(template, output, fieldNames, fieldValues) needs a DOCX template with merge field placeholders whose names are known. No merge-field-aware fixture strategy exists.",
+        "blocker_taskcard": "followup-words-mail-merger-fixture-documentation",
+        "system_gap": true
+      },
+      {
+        "type": "Merger",
+        "scenario_id": "WORDS-007",
+        "root_cause": "MISSING_FIXTURE_STRATEGY",
+        "detail": "Merger.Merge(output, inputFiles[]) needs 2+ input files. merger_input_creation_lines exist in words.yml but planner does not pass them to scenarios requiring array inputs.",
+        "blocker_taskcard": "followup-words-pair-fixture-strategy",
+        "system_gap": true
+      },
+      {
+        "type": "Processor",
+        "scenario_id": "WORDS-010",
+        "root_cause": "MISSING_OPTIONS_STRATEGY",
+        "detail": "Processor uses a builder pattern: new Processor().From().To().Execute(). This is not the standard static-method pattern. The planner and prompt system do not support builder-pattern APIs.",
+        "blocker_taskcard": null,
+        "system_gap": true
+      },
+      {
+        "type": "ReportBuilder",
+        "scenario_id": "WORDS-009",
+        "root_cause": "MISSING_FIXTURE_STRATEGY",
+        "detail": "ReportBuilder.BuildReport(template, output, data) needs a DOCX template with LINQ Reporting Engine tags AND matching data. No template-with-data fixture strategy exists.",
+        "blocker_taskcard": null,
+        "system_gap": true
+      }
+    ],
+    "excluded_non_runnable_types": [
+      {"type": "ComparerContext", "role": "settings_model"},
+      {"type": "ConverterContext", "role": "settings_model"},
+      {"type": "MailMergeDataSource", "role": "data_source_adapter"},
+      {"type": "MailMergeOptions", "role": "options"},
+      {"type": "MailMergerContext", "role": "settings_model"},
+      {"type": "MergeFormatMode", "role": "enum"},
+      {"type": "MergerContext", "role": "settings_model"},
+      {"type": "ProcessorContext", "role": "settings_model"},
+      {"type": "ReplacerContext", "role": "settings_model"},
+      {"type": "ReportBuilderContext", "role": "settings_model"},
+      {"type": "ReportBuilderOptions", "role": "options"},
+      {"type": "SignerContext", "role": "settings_model"},
+      {"type": "SplitCriteria", "role": "enum"},
+      {"type": "SplitOptions", "role": "options"},
+      {"type": "SplitterContext", "role": "settings_model"},
+      {"type": "WatermarkerContext", "role": "settings_model"}
+    ],
+    "additional_blocker": {
+      "id": "followup-words-split-criteria-enumeration",
+      "description": "Splitter.Split(SplitOptions) needs SplitCriteria enum values, which are not in the DllReflector catalog. The current Splitter.ExtractPages workaround is published, but Splitter.Split remains blocked.",
+      "impacts": "WORDS-005 — an advanced Splitter scenario using SplitOptions"
+    },
+    "system_gaps": [
+      "No paired fixture strategy (blocks Comparer, Merger)",
+      "No template-with-merge-fields fixture (blocks MailMerger)",
+      "No template-with-data fixture (blocks ReportBuilder)",
+      "No builder-pattern API support in planner/prompt (blocks Processor)",
+      "No SplitCriteria enum enumeration in DllReflector (blocks Splitter.Split advanced scenario)",
+      "No automated DOCX semantic validation (non-blocking but limits quality assurance)"
+    ],
+    "needed_for_full_coverage": "Close 4 system gaps: paired fixture strategy, mail-merge template fixture, ReportBuilder template, builder-pattern support. Then expand allowlist to include Comparer, MailMerger, Merger, ReportBuilder, Processor."
+  },
+
+  "pdf": {
+    "discovered_types": 101,
+    "runnable_candidate_count": 25,
+    "published_count": 2,
+    "excluded_count": 99,
+    "completion_rate": 0.08,
+    "published_types": ["Merger", "TextExtractor"],
+    "backlogged_types": [
+      {
+        "type": "Splitter",
+        "root_cause": "LLM_WRONG_API_USAGE",
+        "detail": "LLM consistently generates 'new PluginOptions()' instead of 'new SplitOptions()'. PluginOptions is abstract. Code validator (line 549) catches this but only AFTER generation. No pre-generation few-shot example or prompt constraint specific to SplitOptions.",
+        "blocker_taskcard": "followup-pdf-splitter-options-class",
+        "system_gap": true
+      },
+      {
+        "type": "Optimizer",
+        "root_cause": "LLM_WRONG_API_USAGE",
+        "detail": "Same PluginOptions hallucination as Splitter. Additionally, LLM repair timed out (120s timeout, no retry). Compound failure: wrong class + infrastructure timeout.",
+        "blocker_taskcard": "followup-pdf-optimizer-options-class",
+        "system_gap": true
+      }
+    ],
+    "remaining_workflow_roots_not_in_any_pilot": [
+      {"type": "DocConverter", "options": "PdfConverterOptions", "gap": "format-specific output validation"},
+      {"type": "FormEditor", "options": "FormEditorOptions", "gap": "complex fixture (PDF with form fields)"},
+      {"type": "FormExporter", "options": "FormExporterOptions", "gap": "complex fixture + data format validation"},
+      {"type": "FormFlattener", "options": "FormFlattenerOptions", "gap": "complex fixture"},
+      {"type": "FormImporter", "options": "FormImportOptions", "gap": "complex fixture + JSON input data"},
+      {"type": "Grayscale", "options": "GrayscaleOptions", "gap": "visual validation"},
+      {"type": "HtmlConverter", "options": "HtmlConverterOptions", "gap": "HTML output validation"},
+      {"type": "ImageStamper", "options": "ImageStamperOptions", "gap": "image fixture + visual validation"},
+      {"type": "NumberingStamper", "options": "NumberingStamperOptions", "gap": "output validation"},
+      {"type": "PdfAConverter", "options": "PdfAConverterOptions", "gap": "PDF/A validation"},
+      {"type": "PdfToDocConverter", "options": "PdfToDocConverterOptions", "gap": "DOC format validation"},
+      {"type": "PdfToExcelConverter", "options": "PdfToExcelConverterOptions", "gap": "Excel format validation"},
+      {"type": "PdfToImageConverter", "options": "PdfToImageConverterOptions", "gap": "image output validation"},
+      {"type": "PdfToPowerPointConverter", "options": "PdfToPowerPointConverterOptions", "gap": "PPTX validation"},
+      {"type": "PdfToWordConverter", "options": "PdfToWordConverterOptions", "gap": "DOCX validation"},
+      {"type": "Redactor", "options": "RedactorOptions", "gap": "text redaction validation"},
+      {"type": "Repair", "options": "RepairOptions", "gap": "PDF repair validation"},
+      {"type": "Security", "options": "SecurityOptions", "gap": "encryption/permission validation"},
+      {"type": "Signature", "options": "SignatureOptions", "gap": "certificate fixture + signature validation"},
+      {"type": "TableGenerator", "options": "TableGeneratorOptions", "gap": "table data input + output validation"},
+      {"type": "TextStamper", "options": "TextStamperOptions", "gap": "text stamp validation"}
+    ],
+    "system_gaps": [
+      "No SplitOptions/OptimizeOptions few-shot examples in LLM prompt",
+      "No LLM timeout retry with backoff",
+      "Code validator catches PluginOptions AFTER generation but repair prompt does not specifically guide toward correct concrete class",
+      "No format-specific output validators (DOC, PPTX, XLSX, image)",
+      "No complex fixture generation (PDFs with form fields, signatures, existing text)",
+      "No cross-format output validation framework",
+      "21 of 25 WORKFLOW_ROOTs have never been attempted"
+    ],
+    "needed_for_full_coverage": "1) Fix Splitter/Optimizer (few-shot + validator). 2) Add format-specific output validators. 3) Add complex fixture strategies. 4) Progressively expand allowlist in batches of 3-5 types. 5) Add LLM timeout retry."
+  },
+
+  "gate_2_pass_criteria": {
+    "every_excluded_has_root_cause": true,
+    "no_unexplained_planned_to_published_loss": true,
+    "cells_fully_explained": true,
+    "words_fully_explained": true,
+    "pdf_fully_explained": true
+  },
+  "verdict": "GATE_2_PASS"
+}

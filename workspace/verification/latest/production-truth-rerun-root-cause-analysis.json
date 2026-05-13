@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/generator/packet_builder.py",
+    "src/plugin_examples/gates/example_lifecycle.py",
+    "src/plugin_examples/evidence_layout.py",
+    "src/plugin_examples/scenario_planner/planner.py"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/runtime-failure-classifications.json",
+    "workspace/verification/latest/blocked-scenarios.json",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "docs/plans/r1-pdf-optimizer-rerun-result.md",
+    "docs/plans/example-failure-recovery-system-limitation-plan.md"
+  ],
+  "confidence": "MEDIUM",
+  "findings": {
+    "root_cause_categories": [
+      {
+        "category": "LLM nondeterminism",
+        "symptoms": [
+          "Optimizer failed with 'using Aspose.Pdf.LowCode.DataSources' in 2 consecutive LLM runs before fix",
+          "Splitter passed in 3 consecutive runs after initial failure",
+          "TextExtractor had a regression run (pilot-pdf-20260507-140400) between two passing runs",
+          "Same Optimizer failure persisted through max_repairs=1 repair attempt"
+        ],
+        "root_cause": "LLM temperature and sampling produce different code paths for the same prompt across runs. Even with FORBIDDEN constraints, the LLM can generate hallucinated namespaces that survive beyond the constraint window in multi-step reasoning.",
+        "structural_weakness": "max_repairs=1 in code_generator.py — single repair attempt is insufficient for persistent hallucinations. No escalation to a different few-shot template or different LLM temperature on persistent failure.",
+        "supporting_evidence": [
+          "runtime-failure-classifications.json: 1 failure (pdf-splitter input.docx, now stale — from older run where fixture was wrong)",
+          "r1-pdf-optimizer-rerun-result.md: Optimizer GENERATION_FAILED with 'wrong_namespace' + 'missing_optimizer_process' classifications",
+          "families/pdf/example-lifecycle-records.json: generation_failed=1 (Optimizer), generation_passed=3 (run_id=pilot-pdf-20260508-155520)"
+        ],
+        "what_to_preserve": [
+          "_validate_code() in code_generator.py — blocks hallucinated code before it reaches build stage",
+          "FORBIDDEN list in packet_builder.py — provides generation-time constraint",
+          "Repair constraint re-injection (code_generator.py lines 88-103) — preserves constraints through repair cycle"
+        ],
+        "what_to_redesign": [
+          "max_repairs=1 default — increase to 2 or 3 for PDF types known to hallucinate",
+          "No escalation policy when repair fails — need different few-shot template on second repair attempt",
+          "Static FORBIDDEN list in packet_builder.py — should be dynamically built from per-type backlog"
+        ],
+        "durable_fix_direction": "Add per-type max_repairs_override in family config (pdf.yml). Add escalation: second repair attempt uses a different temperature or few-shot template. Track repair_attempt_count in GeneratedExample to enable escalation logic."
+      },
+      {
+        "category": "Evidence and lifecycle weakness",
+        "symptoms": [
+          "workspace/verification/latest/ root files are overwritten by any family run (evidence_layout.py backward-compat alias)",
+          "runtime-failure-classifications.json is stale (shows pdf-splitter failure from older run, but Splitter now passes 3 consecutive times)",
+          "release-status.json last_pr_number=1 despite 4 PRs merged per family",
+          "workspace/runs/{run_id}/ only created when metrics are enabled",
+          "No run-to-run comparison mechanism exists"
+        ],
+        "root_cause": "Evidence is written to workspace/verification/latest/ as a backward-compat alias, meaning any family run can overwrite all-family shared files. There is no immutable run-scoped evidence tier used by agents — workspace/runs/ is created by code but is not the primary reference for any downstream process.",
+        "structural_weakness": "The 3-tier evidence layout (run-scoped → family-scoped → global latest) is documented in evidence_layout.py but the top tier (run-scoped) is optional (metrics-gated) and unused by agents. Agents read from workspace/verification/latest/ — the overwrite-vulnerable tier.",
+        "supporting_evidence": [
+          "evidence_layout.py docstring: 'backward-compat alias: workspace/verification/latest/{file} (still written, deprecated)'",
+          "evidence_layout.py: FAMILY_SCOPED_EVIDENCE_FILES frozenset of 22 files promoted to families/{family}/",
+          "workspace/verification/latest/_last_promoted_by.json: tracks which family last promoted to latest/",
+          "runtime-failure-classifications.json: shows pdf-splitter failure from stale run (Splitter now passes)"
+        ],
+        "what_to_preserve": [
+          "families/{family}/ scoped evidence directories — no cross-family collision",
+          "FAMILY_SCOPED_EVIDENCE_FILES frozenset — correct set of files to promote",
+          "_last_promoted_by.json — tells which family last touched latest/"
+        ],
+        "what_to_redesign": [
+          "workspace/verification/latest/ backward-compat alias writes — phase out; agents should read from families/{family}/",
+          "Run-scoped evidence creation — make it unconditional (not metrics-gated) so all runs get a permanent record",
+          "No run-to-run comparison — add a mechanism to compare scenario outcomes between run N and run N-1"
+        ],
+        "durable_fix_direction": "Move all agent reads from workspace/verification/latest/ to workspace/verification/latest/families/{family}/. Create workspace/runs/{run_id}/ unconditionally (not only when --metrics). Add a run-comparison step in evidence_layout.py that writes a delta artifact comparing current vs prior run."
+      },
+      {
+        "category": "Scenario contract weakness",
+        "symptoms": [
+          "scenario-catalog.json is shallow — lacks required_options_class, known_invalid_patterns, fixture requirements",
+          "No completion queue exists — scenario prioritization is manual",
+          "blocked-scenarios.json shows 97 scenarios blocked with generic 'not in scope' reason — no per-scenario notes",
+          "Coverage denominator '43' from roadmap is undocumented",
+          "Scenario IDs are stable (family-slug) but scenario contracts are not stable"
+        ],
+        "root_cause": "Scenarios are planned dynamically at runtime by planner.py from DllReflector output. There is no static scenario contract that pre-declares what a scenario needs. Without pre-declared contracts, each run discovers scenarios anew and cannot compare against prior expectations.",
+        "structural_weakness": "The Scenario dataclass in planner.py is populated at runtime from API reflection — it is not sourced from a pre-existing contract file. Any API change (new method, deprecated type) immediately affects all planned scenarios without warning.",
+        "supporting_evidence": [
+          "blocked-scenarios.json: 97 scenarios blocked with status='blocked_pilot_not_in_scope' — no individual root cause tracking per blocked scenario",
+          "families/pdf/example-lifecycle-records.json: 101 planned, 1 backlogged (Optimizer), 97 excluded",
+          "workspace/backlog/pdf/ exists but cells/ and words/ backlog dirs do not",
+          "open-taskcard-closure-matrix.json: 'followup-scenario-completion-queue' OPEN"
+        ],
+        "what_to_preserve": [
+          "Stable scenario IDs (family-slug format)",
+          "DllReflector-based dynamic discovery of new API types",
+          "planner.py allowed_types enforcement"
+        ],
+        "what_to_redesign": [
+          "Shallow scenario-catalog.json — add required_options_class, required_fixtures, expected_output_symbols, known_invalid_patterns",
+          "No completion queue — replace binary excluded/backlogged with a state machine (as designed in full-completion-remediation-architecture.md)",
+          "blocked-scenarios.json generic reasons — add per-type root cause tracking"
+        ],
+        "durable_fix_direction": "Create pipeline/contracts/{family}/{scenario_id}.json per scenario with required_options_class, known_invalid_patterns, required_fixtures, validation_rules. Source planner.py from these contracts rather than solely from DllReflector output. Build completion queue from contract state."
+      },
+      {
+        "category": "Fixture weakness",
+        "symptoms": [
+          "runtime-failure-classifications.json: pdf-splitter 'Input file not found: input.docx' — DOCX fixture passed to PDF scenario (now stale, fixed)",
+          "Words Splitter scenarios (SplitCriteria enum) cannot run without enum discovery",
+          "Words types requiring 2 input files (Comparer, Merger) have no paired fixture",
+          "PDF Optimizer uses programmatic fixture but its options class has no type-specific fixture hint",
+          "PDF Splitter initially failed due to wrong fixture type (now fixed programmatically)"
+        ],
+        "root_cause": "Fixtures are assigned by input_strategy in planner.py, which infers strategy from API reflection output. For new types with unusual fixture requirements (enum parameters, multi-file inputs), the inference may produce wrong strategy. No per-type fixture contract exists.",
+        "structural_weakness": "fixture-registry.json has 4 PDF fixture types and 1 Words fixture type (programmatic_input). New types with unusual requirements fall through to generic strategies. No fixture validation step checks whether the assigned fixture matches the API's actual input requirements.",
+        "supporting_evidence": [
+          "runtime-failure-classifications.json: pdf-splitter 'input.docx' failure (stale — from older run before programmatic PDF fixture was standardized)",
+          "docs/plans/example-failure-recovery-system-limitation-plan.md: 'Paired-input fixtures — Comparer/Merger need 2+ files' (gap P5)",
+          "docs/plans/example-failure-recovery-system-limitation-plan.md: 'SplitCriteria enum — not in DllReflector output' (gap P4)",
+          "workspace/manifests/fixture-registry.json (4 PDF programmatic fixture types)"
+        ],
+        "what_to_preserve": [
+          "programmatic PDF fixture types (all 4: single, multi_page, pair, known_text) — validated in harness",
+          "Words programmatic_input strategy — works for 4/4 published types",
+          "PDF harness at workspace/fixture-validation/pdf-harness/ — standalone build+run validation"
+        ],
+        "what_to_redesign": [
+          "Fixture inference from API reflection — add per-type fixture requirement hints in family config or scenario contracts",
+          "No paired fixture type for Words — add programmatic_docx_pair (2-file DOCX fixture)",
+          "No SplitCriteria fixture parameter — need enum discovery mechanism for Words Splitter",
+          "Fixture validation is build-time only — add runtime fixture pre-check before LLM generation"
+        ],
+        "durable_fix_direction": "Add fixture_requirements field to scenario contracts (pipeline/contracts/{family}/{id}.json). For PDF Optimizer, specify that OptimizeOptions needs a PDF with embedded images. For Words paired types, specify programmatic_docx_pair strategy. Validate fixture assignment against contract before generation."
+      },
+      {
+        "category": "Validator weakness",
+        "symptoms": [
+          "output_validator.py exists but DOCX semantic depth is unconfirmed (Phase 3 gap)",
+          "reviewer failures (reviewer_passed=N) block examples but trigger no repair",
+          "Optimizer failure is caught at _validate_code (FORBIDDEN pattern check) but the LLM still generates it after repair",
+          "ResultContainer.ResultCollection validation is structural but does not check semantic output correctness",
+          "PDF Splitter output validation uses presence check, not content check (page count etc.)"
+        ],
+        "root_cause": "Validation has 3 levels (compile, runtime, reviewer) but none provide semantic feedback that can guide LLM repair. The compiler says what is syntactically wrong. The runtime says what throws an exception. The reviewer says PASS/FAIL. None say 'your output content is incorrect in this specific way' — which is what the LLM needs to self-correct.",
+        "structural_weakness": "reviewer feedback is binary (PASS/FAIL) and does not trigger LLM repair. Semantic output validation (does the output PDF actually have the merged content?) is not implemented — only file existence is checked for most types.",
+        "supporting_evidence": [
+          "docs/plans/example-failure-recovery-system-limitation-plan.md: 'Reviewer-driven repair loop — reviewer failures require manual intervention' (gap P3)",
+          "docs/plans/example-failure-recovery-system-limitation-plan.md: 'DOCX semantic validation — Words output not text-validated' (gap P7)",
+          "families/words/example-lifecycle-records.json: reviewer_passed=4 (all pass, but semantic validation depth unknown)"
+        ],
+        "what_to_preserve": [
+          "_validate_code() DataSources FORBIDDEN guard — catches hallucination before build",
+          "Compiler error → repair loop — catches C# syntax/type errors",
+          "Runtime exit code check — catches null reference and missing file errors"
+        ],
+        "what_to_redesign": [
+          "Reviewer failure → LLM repair — add reviewer_failed → repair cycle (currently manual)",
+          "DOCX semantic validation — check VML watermark, page isolation, replacement text presence",
+          "PDF semantic validation — check page count, content presence for Splitter; text content for TextExtractor",
+          "Result container validation — check ResultCollection.Count > 0 programmatically in example code, not just compile success"
+        ],
+        "durable_fix_direction": "Add per-type semantic validators in verifier_bridge/output_validator.py: Words watermark validator (checks VML presence), Words page isolation validator (checks page count), PDF text extraction validator (checks non-empty text). Route reviewer_failed state to a targeted repair prompt with semantic failure reason."
+      },
+      {
+        "category": "Publication weakness",
+        "symptoms": [
+          "release-status.json last_pr_number=1 (stale) despite 4 PRs per family",
+          "PR#3 (PDF Merger+Splitter) awaiting APPROVE_LIVE_PR — no automated pathway",
+          "Post-merge validation is manual — not connected to lifecycle records",
+          "README backfill required 3 separate PRs per family for 3 different aspects (content, links, symbols)",
+          "No mechanism to re-publish if a merged example is found to be wrong"
+        ],
+        "root_cause": "Publication is a sequence of manual approval gates, not an automated pipeline stage. Each PR requires a separate APPROVE_LIVE_PR token. Post-merge validation is run separately and results are not fed back into lifecycle records. There is no unified publication state.",
+        "structural_weakness": "PR publication (github_pr_publisher.py), merge (github_pr_merger.py), and post-merge validation are separate commands with separate evidence files. No single source of truth tracks 'this scenario_id was published in PR N, merged at SHA X, validated at time Y.'",
+        "supporting_evidence": [
+          "workspace/verification/latest/release-status.json: last_pr_number=1 (stale, actual 4)",
+          "docs/plans/r3-final-verification.md: Sprint R3 BLOCKED_WAITING_FOR_APPROVE_LIVE_PR",
+          "workspace/verification/latest/families/cells/example-lifecycle-records.json: pr_candidates=9, no pr_number or merge_sha fields in lifecycle records"
+        ],
+        "what_to_preserve": [
+          "Live publish approval gate (APPROVE_LIVE_PR) — required; prevents accidental live PRs",
+          "Merge approval gate (APPROVE_MERGE_PR) — separate from live publish; prevents token reuse",
+          "Post-merge validation step — validates published examples are runnable"
+        ],
+        "what_to_redesign": [
+          "release_status.py last_pr_number — should accumulate across runs, not just reflect latest run",
+          "Lifecycle records should include pr_number, pr_url, merge_sha, post_merge_validated fields",
+          "README, code, and symbols should be in a single PR (not 3-4 separate PRs per family)",
+          "Add 'published' stage to LIFECYCLE_STAGES — currently lifecycle doesn't track post-merge state"
+        ],
+        "durable_fix_direction": "Add 'published' and 'validated_post_merge' stages to LIFECYCLE_STAGES. Update lifecycle records with pr_number and merge_sha when PR is published and merged. Change release_status.py to compute cumulative PR count from all lifecycle records, not just the latest run artifact."
+      },
+      {
+        "category": "Governance weakness",
+        "symptoms": [
+          "77 taskcards (16 open) — no automated check that open taskcards have evidence artifacts",
+          "MEMORY.md contains stale claims (21 excluded scenarios vs '5 deferred', test count 1021 vs 1025)",
+          "Plans claim '100% coverage in 10-14 sprints' but no denominator is codified",
+          "open-taskcard-closure-matrix.md and JSON are in sync — but sync is manual",
+          "r3-final-verification.md says Sprint R3 is BLOCKED but PDF PR#3 appears in pr-candidate-manifest — no automated gate prevents re-running without human approval"
+        ],
+        "root_cause": "Governance is documentation-driven, not code-driven. Taskcards are closed by manual evidence review, not by automated system assertions. Coverage claims are made in plan files but not computed from a denominator model. There is no programmatic stop condition that halts the pipeline if a required gate is unclosed.",
+        "structural_weakness": "No source module enforces task card completeness, evidence integrity, or coverage denominator consistency. The 16 open taskcards could remain open indefinitely with no automated alert. Plans and MEMORY.md drift from source truth as more sprints run.",
+        "supporting_evidence": [
+          "open-taskcard-closure-matrix.json: 16 open taskcards, 0 automated closure triggers",
+          "MEMORY.md: test count 1021 (stale), '5 deferred Words scenarios' (stale — actually 21 excluded)",
+          "full-completion-roadmap.md: '10-14 sprints to 100%' — no denominator artifact supporting this claim",
+          "docs/plans/r3-final-verification.md: BLOCKED_WAITING_FOR_APPROVE_LIVE_PR — blocking state documented but not enforced programmatically"
+        ],
+        "what_to_preserve": [
+          "open-taskcard-closure-matrix.json — single source of truth for taskcard state",
+          "Manual evidence review gates — important for quality; should not be automated away",
+          "MEMORY.md as an agent working memory — useful but must not be treated as authoritative"
+        ],
+        "what_to_redesign": [
+          "MEMORY.md maintenance — should be updated after each sprint; stale claims create false assumptions in future sessions",
+          "Coverage denominator — must be codified in a source artifact, not just plan prose",
+          "Taskcard closure evidence requirements — each taskcard should require a specific evidence artifact to close",
+          "No automated gate for evidence integrity before publication — add pre-publish evidence completeness check"
+        ],
+        "durable_fix_direction": "Create a pre-publication evidence completeness gate (src/plugin_examples/gates/evidence_completeness.py) that checks: (a) all scenarios have a final lifecycle stage, (b) all CRITICAL taskcards have linked evidence, (c) denominator model exists and matches lifecycle counts. Block publication until gate passes."
+      }
+    ],
+    "systemic_rerun_risk_summary": {
+      "highest_risk": [
+        "LLM nondeterminism for types with hallucination history (Optimizer) — max_repairs=1 insufficient",
+        "Evidence overwrite in workspace/verification/latest/ — stale evidence causes wrong decisions",
+        "No run-to-run comparison — regressions are invisible"
+      ],
+      "medium_risk": [
+        "Fixture inference for unusual types (enum params, multi-file) — may produce wrong strategy",
+        "FORBIDDEN keyword matching is hardcoded — new hallucinations not covered automatically",
+        "Reviewer failures don't trigger repair — manual intervention required"
+      ],
+      "low_risk": [
+        "Cells (9/9) is well-established — regression risk low given non-degradation evidence",
+        "Words (4/4) is stable — 4 allowed types consistently pass",
+        "PR packaging and merge governance are well-designed — approval gate prevents accidental publication"
+      ]
+    }
+  },
+  "gaps": [
+    "No repair-attempts.json was freshly read for cells or words families (only pdf runtime-failure-classifications.json inspected)",
+    "llm-fewshot-patterns.json content not freshly read — few-shot quality not assessed",
+    "stale-existing-examples.json content not freshly read",
+    "Cross-run comparison artifact does not exist — gap confirmed but mechanism design is incomplete"
+  ],
+  "contradictions": [
+    {
+      "claim_a": "runtime-failure-classifications.json: pdf-splitter 'Input file not found: input.docx'",
+      "source_a": "workspace/verification/latest/runtime-failure-classifications.json (rank 4, stale run)",
+      "claim_b": "PDF Splitter PASSES in 3 consecutive runs (pilot-pdf-20260507-110824, -140400, -20260508-133015)",
+      "source_b": "docs/plans/r1-pdf-optimizer-rerun-result.md (rank 9), families/pdf/example-lifecycle-records.json (rank 4, run_id=pilot-pdf-20260508-155520)",
+      "resolution": "runtime-failure-classifications.json is from an older stale run (before fixture fix). Most recent evidence shows Splitter passing 3 consecutive times. The stale failure record should be re-promoted from the most recent run."
+    }
+  ],
+  "next_actions": [
+    "Phase 5: Build family truth board using lifecycle records freshly read",
+    "Read repair-attempts.json for PDF family to confirm backlog root causes",
+    "Design run-to-run comparison mechanism as part of R4 roadmap sprint"
+  ]
+}

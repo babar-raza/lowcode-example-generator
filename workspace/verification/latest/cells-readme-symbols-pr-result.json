@@ -1,0 +1,28 @@
+{
+  "sprint": "README Demonstrated API Accuracy From Manifest/Catalog Sprint",
+  "family": "cells",
+  "date": "2026-05-05",
+  "pr_number": 4,
+  "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/4",
+  "branch": "plugin-examples/cells/readme/20260505-063855",
+  "base": "main",
+  "files_changed": ["README.md"],
+  "readme_bytes": 5241,
+  "example_count": 9,
+  "symbols_rendered": [
+    "HtmlConverter.Process",
+    "ImageConverter.Process",
+    "JsonConverter.Process",
+    "PdfConverter.Process",
+    "SpreadsheetConverter.Process",
+    "SpreadsheetLocker.Process",
+    "SpreadsheetMerger.Process",
+    "SpreadsheetSplitter.Process",
+    "TextConverter.Process"
+  ],
+  "audit_passed": true,
+  "unqualified_api_classes": [],
+  "pr_state": "open",
+  "merged": false,
+  "merge_ready": true
+}

@@ -1,0 +1,15 @@
+{
+  "family": "pdf",
+  "status": "pass",
+  "denominator_basis": "PILOT_ALLOWED",
+  "expected_count": 4,
+  "ready_count": 4,
+  "blocked_count": 97,
+  "accounted_count": 101,
+  "gap": 97,
+  "message": "Family 'pdf' completeness check PASS (PILOT_ALLOWED): 101 accounted >= 4 expected.",
+  "violations": [],
+  "holds": true,
+  "unknown_type_count": 0,
+  "full_wrt_count": 25
+}

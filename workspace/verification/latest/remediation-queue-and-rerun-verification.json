@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "verification_sprint": "keen-sparking-aho-verification-v1",
+  "phase": 5,
+  "phase_name": "Completion Queue and Run-to-Run Comparison Verification",
+  "completion_queue_verification": {
+    "file_exists": true,
+    "file_path": "workspace/queues/example-completion-queue.json",
+    "entry_count": 17,
+    "state_counts": {
+      "POST_MERGE_VERIFIED": 15,
+      "PR_READY": 1,
+      "REVIEWED": 1,
+      "BACKLOGGED": 0,
+      "BLOCKED": 0
+    },
+    "denominator_coverage_check": {
+      "cells_denominator_runnable": 9,
+      "cells_queue_entries": 9,
+      "cells_coverage": "CONSISTENT",
+      "words_denominator_runnable": 4,
+      "words_queue_entries": 4,
+      "words_coverage": "CONSISTENT",
+      "pdf_denominator_runnable": 4,
+      "pdf_queue_entries": 4,
+      "pdf_coverage": "CONSISTENT",
+      "total_queue_entries_vs_denominators": "17 queue entries covers all runnable scenarios (9+4+4=17)"
+    },
+    "merged_entries_have_sha": {
+      "cells_post_merge_verified": "9 entries — merge_sha populated (confirmed via cross-check with post-merge-clean-checkout-validation.json)",
+      "words_post_merge_verified": "4 entries — merge_sha populated",
+      "pdf_merged_entries": "2 entries (merger + text-extractor) — merge_sha populated",
+      "check": "PASS"
+    },
+    "b009_status": "RESOLVED — queue exists, covers all denominator scenarios, states are accurate"
+  },
+  "run_to_run_comparison_verification": {
+    "compare_run_flag_in_main_py": {
+      "exists": false,
+      "verification": "grep for '--compare-run' in src/plugin_examples/__main__.py returned NO MATCHES",
+      "classification": "NOT_IMPLEMENTED"
+    },
+    "prior_run_result_in_lifecycle": {
+      "exists": false,
+      "verification": "grep for 'prior_run_result' in src/plugin_examples/gates/example_lifecycle.py returned NO MATCHES",
+      "classification": "NOT_IMPLEMENTED"
+    },
+    "regression_detected_in_lifecycle": {
+      "exists": false,
+      "verification": "grep for 'regression_detected' in example_lifecycle.py returned NO MATCHES",
+      "classification": "NOT_IMPLEMENTED"
+    },
+    "design_document_exists": {
+      "exists": true,
+      "path": "workspace/verification/latest/run-to-run-comparison-design.json",
+      "classification": "DESIGN_COMPLETE_IMPLEMENTATION_DEFERRED"
+    },
+    "b002_status": "DESIGN_COMPLETE_IMPLEMENTATION_DEFERRED",
+    "b014_status": "DESIGN_COMPLETE_IMPLEMENTATION_DEFERRED",
+    "non_degradation_proof": "MANUAL_ONLY — lifecycle records confirm 9/9 cells and 4/4 words, but no automated comparison mechanism exists"
+  },
+  "r4_classification": "PARTIAL",
+  "r4_classification_rationale": "Completion queue is fully implemented and verified (B-009 RESOLVED). Run-to-run comparison is design-only (B-002 and B-014 remain DESIGN_COMPLETE_IMPLEMENTATION_DEFERRED).",
+  "sprint_result_self_report_accuracy": "ACCURATE — R4 sprint result correctly labels B-002 and B-014 as partially addressed, REM-014 and REM-016 as deferred"
+}

@@ -1,0 +1,56 @@
+{
+  "artifact_type": "r3-final-verification",
+  "sprint": "Sprint R3 — PDF PR #3 Publication",
+  "date": "2026-05-08",
+  "phase": "Phase 11 — Final Verification",
+
+  "compileall": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m compileall src -q",
+    "result": "PASS",
+    "errors": 0
+  },
+
+  "dotnet_build": {
+    "command": "dotnet build tools/DllReflector/DllReflector.csproj -c Release --nologo -v q",
+    "result": "PASS",
+    "errors": 0,
+    "warnings": 0
+  },
+
+  "pytest": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit -q --timeout=60",
+    "result": "PASS",
+    "passed": 1025,
+    "failed": 0,
+    "errors": 0,
+    "regressions_vs_r2": 0,
+    "duration_seconds": 28.72
+  },
+
+  "sprint_r3_evidence": {
+    "r3_pdf_pr3_preflight_verification": "PASS — gate_0_verdict PASS",
+    "r3_pdf_pr3_package_validation": "PASS — gate_1_verdict PASS (Merger+Splitter build+run PASS)",
+    "r3_pdf_merger_reconfirmation": "PASS — gate_2_verdict PASS",
+    "r3_pdf_pr3_live_approval_preflight": "BLOCKED — gate_3_verdict R3_BLOCKED_WAITING_FOR_APPROVE_LIVE_PR",
+    "r3_pdf_optimizer_pr4_readiness_note": "DOCUMENTED — PR#4 requires 2nd consecutive PASS"
+  },
+
+  "taskcard_matrix_state": {
+    "total": 77,
+    "open": 16,
+    "closed": 60,
+    "new_taskcard_added": "followup-pdf-pr3-review-and-merge",
+    "closed_this_sprint": 0
+  },
+
+  "plan_files_updated": [
+    "C:/Users/prora/.claude/plans/linked-nibbling-hamster.md — Sprint R3 summary appended",
+    "C:/Users/prora/.claude/plans/twinkly-leaping-unicorn.md — Sprint R3 status pending update"
+  ],
+
+  "overall_sprint_verdict": "R3_BLOCKED_WAITING_FOR_APPROVE_LIVE_PR",
+  "gate_11_verdict": "PASS",
+  "sprint_complete": false,
+  "sprint_resume_condition": "Human provides PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+  "resume_command": "PYTHONPATH=src GITHUB_TOKEN=\"$GITHUB_TOKEN\" PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+}

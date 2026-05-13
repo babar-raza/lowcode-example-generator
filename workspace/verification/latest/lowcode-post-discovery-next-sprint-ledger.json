@@ -1,0 +1,188 @@
+{
+  "artifact_id": "lowcode-post-discovery-next-sprint-ledger",
+  "created": "2026-05-09",
+  "sprint": "post-discovery-next-sprint",
+  "ledger_type": "execution",
+  "phase_a_preflight": {
+    "branch": "main",
+    "head_commit": "79f19ae62fc3fc6f796a6b923382a8afdafc0edc",
+    "python_version": "3.13.2",
+    "dotnet_version": "9.0.200",
+    "baseline_tests": 1179,
+    "baseline_tests_result": "ALL_PASS",
+    "env_gates": {
+      "GPT_OSS_ENDPOINT": "SET",
+      "GPT_OSS_API_KEY": "SET",
+      "GPT_OSS_MODEL": "NOT_SET",
+      "GITHUB_TOKEN": "SET",
+      "EXAMPLE_REVIEWER_PATH": "NOT_SET",
+      "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+      "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+    },
+    "phase_gates": {
+      "phase_e_pdf_pr3_live": "GATED: PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "phase_f_optimizer_2nd_pass": "GATED: GPT_OSS_MODEL and EXAMPLE_REVIEWER_PATH not set",
+      "phase_g_words_expansion": "GATED: pilot_completed_expansion_review_required"
+    }
+  },
+  "phase_b_state_board": {
+    "status": "COMPLETE",
+    "artifacts_created": [
+      "workspace/verification/latest/lowcode-all-family-current-state-board.json",
+      "workspace/verification/latest/lowcode-all-family-candidate-inventory.json",
+      "workspace/verification/latest/lowcode-post-discovery-roadmap-update.json"
+    ],
+    "key_findings": [
+      "6 eligible LowCode families: cells, words, pdf, email, slides, diagram",
+      "13 original CONFIRMED_NO_LOWCODE: barcode, cad, drawing, finance, font, gis, imaging, note, page, tasks, tex, threed, zip",
+      "6 originally blocked: epub, html, ocr, omr, psd, svg"
+    ]
+  },
+  "phase_c_denominators": {
+    "status": "COMPLETE",
+    "artifacts_created": [
+      "pipeline/configs/denominators/email.json",
+      "pipeline/configs/denominators/slides.json",
+      "pipeline/configs/denominators/diagram.json"
+    ],
+    "email": {
+      "workflow_roots": 1,
+      "types": [
+        "Converter"
+      ],
+      "denominator_basis": "DISCOVERY_ONLY"
+    },
+    "slides": {
+      "workflow_roots": 3,
+      "types": [
+        "Compress",
+        "Convert",
+        "Merger"
+      ],
+      "denominator_basis": "DISCOVERY_ONLY"
+    },
+    "diagram": {
+      "workflow_roots": 2,
+      "types": [
+        "DiagramConverter",
+        "PdfConverter"
+      ],
+      "denominator_basis": "DISCOVERY_ONLY"
+    }
+  },
+  "phase_d_reflection_blockers": {
+    "status": "COMPLETE_WITH_FINDINGS",
+    "artifacts_created": [
+      "workspace/verification/latest/epub-reflection-blocker.json",
+      "workspace/verification/latest/html-reflection-blocker.json",
+      "workspace/verification/latest/ocr-reflection-blocker.json",
+      "workspace/verification/latest/omr-reflection-blocker.json",
+      "workspace/verification/latest/psd-reflection-blocker.json",
+      "workspace/verification/latest/svg-reflection-blocker.json"
+    ],
+    "html_verdict": "CONFIRMED_NO_LOWCODE \u2014 manually verified via DllReflector with explicit dep; 49 namespaces, none LowCode",
+    "svg_verdict": "CONFIRMED_NO_LOWCODE \u2014 manually verified via DllReflector with explicit dep; 36 namespaces, none LowCode",
+    "html_yml_updated": "disabled",
+    "svg_yml_updated": "disabled",
+    "ocr_verdict": "STILL_BLOCKED: Aspose.Drawing.Common 26.3.0.0 not captured by dep resolution",
+    "omr_verdict": "STILL_BLOCKED: Newtonsoft.Json 13.0.0.0 not captured by dep resolution",
+    "psd_verdict": "STILL_BLOCKED: Newtonsoft.Json 13.0.0.0 not captured by dep resolution",
+    "epub_verdict": "BLOCKED: Package download failed (no public NuGet package or wrong ID)",
+    "max_depth_yamls_updated": [
+      "html",
+      "ocr",
+      "omr",
+      "psd",
+      "svg"
+    ],
+    "pipeline_fix_needed": "resolved-libs population must include ALL deps/ packages, not just directly resolved dep_nupkg_paths"
+  },
+  "phase_e_status": "GATED \u2014 APPROVE_LIVE_PR not set",
+  "phase_f_status": "GATED \u2014 GPT_OSS_MODEL and EXAMPLE_REVIEWER_PATH not set",
+  "phase_g_status": "GATED \u2014 pilot_completed_expansion_review_required",
+  "phase_h_status": {
+    "status": "PLANNING_COMPLETE",
+    "artifacts_created": [
+      "workspace/verification/latest/lowcode-post-discovery-roadmap-update.json (Phase H section)"
+    ],
+    "next_actions": [
+      "Create programmatic fixture strategies for email (EML), slides (PPTX), diagram (VSDX)",
+      "Add allowed_types to email.yml, slides.yml, diagram.yml",
+      "Set controlled_pilot_approved=true in each YAML when pilot is ready",
+      "Provision target GitHub repos for each family"
+    ]
+  },
+  "phase_i_status": {
+    "status": "COMPLETE",
+    "artifacts_created": [
+      "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    ],
+    "total_families_documented": 15,
+    "families_with_source_of_truth_proof": 13,
+    "families_reclassified_this_sprint": 2,
+    "reclassified": [
+      "html",
+      "svg"
+    ],
+    "taskcard_opened": "NEW-28-followup-confirmed-no-lowcode-documentation"
+  },
+  "phase_j_status": {
+    "status": "COMPLETE",
+    "bundle_path": "workspace\\verification\\post-discovery-next-sprint-evidence-bundle.zip",
+    "files_in_bundle": 33,
+    "completed_date": "2026-05-09"
+  },
+  "taskcards_added_this_sprint": [
+    "NEW-19-followup-email-controlled-pilot-planning",
+    "NEW-20-followup-slides-controlled-pilot-planning",
+    "NEW-21-followup-diagram-controlled-pilot-planning",
+    "NEW-22-followup-epub-reflection-blocker-investigation",
+    "NEW-23-followup-html-reflection-blocker-investigation (CLOSED_VERIFIED)",
+    "NEW-24-followup-ocr-reflection-blocker-investigation",
+    "NEW-25-followup-omr-reflection-blocker-investigation",
+    "NEW-26-followup-psd-reflection-blocker-investigation",
+    "NEW-27-followup-svg-reflection-blocker-investigation (CLOSED_VERIFIED)",
+    "NEW-28-followup-confirmed-no-lowcode-documentation"
+  ],
+  "final_test_count": 1179,
+  "final_test_result": "ALL_PASS",
+  "execution_status": "ALL_PHASES_COMPLETE_EXCEPT_GATED",
+  "phases_completed": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "H-planning",
+    "I"
+  ],
+  "phases_gated": {
+    "E": "APPROVE_LIVE_PR not set",
+    "F": "GPT_OSS_MODEL and EXAMPLE_REVIEWER_PATH not set",
+    "G": "pilot_completed_expansion_review_required"
+  },
+  "config_changes_made": [
+    "html.yml: max_depth 2\u21923, status discovery_only\u2192disabled, enabled true\u2192false",
+    "svg.yml: max_depth 2\u21923, status discovery_only\u2192disabled, enabled true\u2192false",
+    "ocr.yml: max_depth 2\u21923",
+    "omr.yml: max_depth 2\u21923",
+    "psd.yml: max_depth 2\u21923"
+  ],
+  "new_denominator_files": [
+    "email.json",
+    "slides.json",
+    "diagram.json"
+  ],
+  "new_evidence_files": [
+    "lowcode-post-discovery-next-sprint-ledger.json",
+    "lowcode-all-family-current-state-board.json",
+    "lowcode-all-family-candidate-inventory.json",
+    "lowcode-post-discovery-roadmap-update.json",
+    "epub-reflection-blocker.json",
+    "html-reflection-blocker.json",
+    "ocr-reflection-blocker.json",
+    "omr-reflection-blocker.json",
+    "psd-reflection-blocker.json",
+    "svg-reflection-blocker.json",
+    "confirmed-no-lowcode-family-registry.json"
+  ]
+}

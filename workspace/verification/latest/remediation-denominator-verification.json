@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "verification_sprint": "keen-sparking-aho-verification-v1",
+  "phase": 3,
+  "phase_name": "Denominator Verification",
+  "files_inspected": [
+    "pipeline/configs/denominators/cells.json",
+    "pipeline/configs/denominators/words.json",
+    "pipeline/configs/denominators/pdf.json",
+    "pipeline/schemas/denominator.schema.json",
+    "tests/unit/test_denominator_model.py",
+    "workspace/verification/latest/families/cells/example-lifecycle-records.json",
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "cells_denominator": {
+    "file_exists": true,
+    "parses_as_json": true,
+    "family": "cells",
+    "total_lowcode_types": 22,
+    "workflow_root_types": 9,
+    "runnable_scenarios": 9,
+    "published_count": 9,
+    "denominator_basis": "FULL_SOT",
+    "lifecycle_cross_check": {
+      "generation_passed_in_lifecycle": 9,
+      "published_count_matches_lifecycle": true
+    },
+    "cells_non_regression": "CONFIRMED — generation_passed=9 in lifecycle records",
+    "scope_clarity": "CLEAR — FULL_SOT means all 9 workflow_root types are runnable and published",
+    "verdict": "PASS"
+  },
+  "words_denominator": {
+    "file_exists": true,
+    "parses_as_json": true,
+    "family": "words",
+    "total_lowcode_types": 25,
+    "allowed_pilot_count": 4,
+    "runnable_scenarios": 4,
+    "published_count": 4,
+    "denominator_basis": "PILOT_ALLOWED",
+    "lifecycle_cross_check": {
+      "generation_passed_in_lifecycle": 4,
+      "published_count_matches_lifecycle": true
+    },
+    "scope_clarity": "CLEAR — explicitly uses PILOT_ALLOWED basis (4 types) vs FULL_SOT (25 types). Both denominators documented.",
+    "pilot_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+    "words_non_regression": "CONFIRMED — generation_passed=4, build_passed=4, run_passed=4, reviewer_passed=4",
+    "verdict": "PASS"
+  },
+  "pdf_denominator": {
+    "file_exists": true,
+    "parses_as_json": true,
+    "family": "pdf",
+    "total_lowcode_types": 101,
+    "workflow_root_types": 25,
+    "allowed_pilot_count": 4,
+    "runnable_scenarios": 4,
+    "published_count": 2,
+    "denominator_basis": "PILOT_ALLOWED",
+    "lifecycle_cross_check": {
+      "reviewer_passed_in_lifecycle": 3,
+      "published_count_check": "published_count=2 matches PR#1 merged (Merger+TextExtractor). Splitter is PR_DRY_RUN_READY (not merged). Optimizer is REVIEWER_PASSED (not published). 2 is correct."
+    },
+    "scope_clarity": "CLEAR — separates pilot (4), workflow_root (25), full API (101). All three denominators documented.",
+    "pdf_non_regression": "CONFIRMED — reviewer_passed=3 (Merger, TextExtractor, Splitter). Optimizer reviewer_passed in R7 evidence.",
+    "verdict": "PASS"
+  },
+  "schema_verification": {
+    "schema_file_exists": "pipeline/schemas/denominator.schema.json — EXISTS",
+    "test_file_exists": "tests/unit/test_denominator_model.py — EXISTS",
+    "tests_in_suite": 62,
+    "all_tests_pass": true
+  },
+  "coverage_computation": {
+    "cells_coverage_of_runnable": "9/9 = 100.0%",
+    "cells_coverage_of_total": "9/22 = 40.9%",
+    "words_coverage_of_pilot_allowed": "4/4 = 100.0%",
+    "words_coverage_of_full_sot": "4/25 = 16.0%",
+    "pdf_coverage_of_pilot_allowed": "2/4 = 50.0% (published), 3/4 = 75.0% (reviewer_passed)",
+    "pdf_coverage_of_workflow_root": "2/25 = 8.0%",
+    "pdf_coverage_of_full_api": "2/101 = 2.0%",
+    "cross_family_published": "15/17 published in pipeline (Splitter PR_DRY_RUN_READY, Optimizer REVIEWER_PASSED)"
+  },
+  "b001_status": "RESOLVED",
+  "b012_status": "RESOLVED",
+  "overall_verdict": "PASS — all 3 denominator files present, parse, and are internally consistent with lifecycle evidence"
+}

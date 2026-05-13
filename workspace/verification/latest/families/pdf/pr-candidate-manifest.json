@@ -1,0 +1,25 @@
+{
+  "included_examples": [
+    {
+      "scenario_id": "pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-optimizer",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-splitter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260508-155520\\generated\\pdf\\pdf-text-extractor",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
+  "excluded_examples": [],
+  "exclusion_reasons": {},
+  "dry_run": true,
+  "live_publish_attempted": false,
+  "publishable_candidate_count": 3,
+  "blocked_candidate_count": 0
+}

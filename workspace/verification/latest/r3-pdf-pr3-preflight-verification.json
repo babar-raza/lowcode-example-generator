@@ -1,0 +1,84 @@
+{
+  "artifact_type": "r3-pdf-pr3-preflight-verification",
+  "sprint": "Sprint R3 — PDF PR #3 Publication",
+  "date": "2026-05-08",
+  "phase": "Phase 0 — Mandatory Preflight and Evidence Verification",
+
+  "governing_evidence": {
+    "r2_verdict": "R2_OPTIMIZER_REPAIR_CONSTRAINT_FIXED_AND_PR_READY — VERIFIED",
+    "r2_final_verification": "workspace/verification/latest/r2-final-verification.json — VERIFIED (1025 tests pass)",
+    "r2_publication_scope": "workspace/verification/latest/r2-pdf-publication-scope-recommendation.json — VERIFIED (Option A: PR#3=Merger+Splitter)",
+    "r2_lifecycle_update": "workspace/verification/latest/r2-pdf-lifecycle-readiness-update.json — VERIFIED",
+    "taskcard_matrix": "workspace/verification/latest/open-taskcard-closure-matrix.json — VERIFIED (76 total, 15 open, 61 closed)"
+  },
+
+  "pr3_scope_verification": {
+    "confirmed_scope": ["Merger", "Splitter"],
+    "optimizer_excluded": true,
+    "text_extractor_excluded": true,
+    "text_extractor_note": "TextExtractor already published on main via PR #1 — not re-included",
+    "scope_source": "r2-pdf-publication-scope-recommendation.json — OPTION_A_RECOMMENDED"
+  },
+
+  "package_location": {
+    "path": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+    "status": "LOCATED_AND_VERIFIED",
+    "source_files_present": [
+      "Directory.Build.props",
+      "Directory.Packages.props",
+      "global.json",
+      "examples/pdf/lowcode/merger/Program.cs",
+      "examples/pdf/lowcode/merger/pdf-merger.csproj",
+      "examples/pdf/lowcode/merger/README.md",
+      "examples/pdf/lowcode/merger/example.manifest.json",
+      "examples/pdf/lowcode/splitter/Program.cs",
+      "examples/pdf/lowcode/splitter/pdf-splitter.csproj",
+      "examples/pdf/lowcode/splitter/README.md",
+      "examples/pdf/lowcode/splitter/example.manifest.json"
+    ],
+    "bin_obj_present": true,
+    "bin_obj_note": "bin/obj directories present locally from prior validation runs; publisher filters these when staging for GitHub PR",
+    "optimizer_present": false,
+    "text_extractor_present": false
+  },
+
+  "merger_regression_analysis": {
+    "r2_run_result": "GENERATION_FAILED (non-deterministic)",
+    "r2_root_cause": "LLM dropped AddInput during repair; DataSources correctly absent — not caused by R2 fix",
+    "prior_passes": 3,
+    "policy": "Single non-deterministic failure on 3-pass-verified example does not invalidate existing validated package",
+    "pr3_package_source_run": "pilot-pdf-20260507-110824 (Merger PASS) — package built from this run",
+    "package_code_verification": "PASS — MergeOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Merger().Process(options)",
+    "invalidates_package": false
+  },
+
+  "artifact_classification": {
+    "r2-final-verification.json": "VERIFIED",
+    "r2-pdf-publication-scope-recommendation.json": "VERIFIED",
+    "r2-pdf-lifecycle-readiness-update.json": "VERIFIED",
+    "r2-pdf-optimizer-rerun-result.json": "VERIFIED",
+    "families/pdf/example-lifecycle.json": "VERIFIED (all 4 PR_CANDIDATE)",
+    "backlog/pdf/examples-backlog.json": "VERIFIED (all 3 resolved)",
+    "family-generation-readiness-rank.json": "VERIFIED (passed_count=4, backlogged=0)",
+    "release-status.json": "VERIFIED (pdf: 2 published, post_merge=ALL_PASS)",
+    "open-taskcard-closure-matrix.json": "VERIFIED (76 total, 15 open)",
+    "pdf-controlled-pilot-wave1/": "VERIFIED — Merger+Splitter source files confirmed",
+    "repair-attempts.json": "STALE (pre-R2; does not reflect R2 run results) — not blocking",
+    "pdf.yml": "VERIFIED (allowed_types=[Merger, TextExtractor, Splitter, Optimizer])",
+    "twinkly-leaping-unicorn.md": "VERIFIED (R2 completion recorded)",
+    "linked-nibbling-hamster.md": "VERIFIED (Sprint R2 appended)"
+  },
+
+  "contradictions_found": 0,
+  "blocking_conflicts": [],
+
+  "gate_0_verdict": "PASS",
+  "gate_0_notes": [
+    "PR#3 scope confirmed: Merger + Splitter only",
+    "Optimizer excluded from PR#3",
+    "R2 Merger regression documented as non-deterministic, does not invalidate package",
+    "Package located at workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+    "All R2 evidence verified — no contradictions",
+    "APPROVE_LIVE_PR status: will be checked in Phase 3"
+  ]
+}

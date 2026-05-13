@@ -1,0 +1,217 @@
+{
+  "review_type": "live_pr_approval_implementation_review",
+  "review_date": "2026-05-01",
+  "sprint_reviewed": "Live PR Approval Gate and Safe Branch Probe Sprint",
+  "reviewer_sprint": "Live PR Approval Gate Implementation Review and Agent-Operated PR Readiness Sprint",
+  "overall_verdict": "PARTIALLY_COMPLETE",
+  "summary": "All approval gate guards are correctly implemented. 11 tests pass. The publish-permission-probe command is read-only. Critical weakness: publisher.py still has a stub that returns status='published' with no actual branch creation, commit, or PR operation. PR body lacks specific evidence file paths. Words PR_SUMMARY.md references outdated target. publish-pr command not yet implemented.",
+
+  "claims": [
+    {
+      "id": "C01",
+      "claim": "approval_gate.py created with APPROVAL_EXPECTED_VALUE='APPROVE_LIVE_PR' and APPROVAL_ENV_VAR='PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL'",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/approval_gate.py",
+      "code_reference": "approval_gate.py:32-35",
+      "test_reference": "test_publishing_approval_gate.py:TestLivePRApprovalGate",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C02",
+      "claim": "check_approval(None) returns (False, 'blocked_live_pr_approval_required')",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/approval_gate.py",
+      "code_reference": "approval_gate.py:61-63",
+      "test_reference": "test_live_publish_requires_approval_token",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C03",
+      "claim": "check_approval('wrong_value') returns (False, 'blocked_invalid_live_pr_approval')",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/approval_gate.py",
+      "code_reference": "approval_gate.py:64-65",
+      "test_reference": "test_live_publish_rejects_wrong_approval_token",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C04",
+      "claim": "GITHUB_TOKEN is never read by check_approval() — only PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL env var is read",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/approval_gate.py",
+      "code_reference": "approval_gate.py:61 — reads os.environ.get(APPROVAL_ENV_VAR, '') not GITHUB_TOKEN",
+      "test_reference": "test_live_publish_does_not_use_github_token_as_approval",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C05",
+      "claim": "publish_examples() accepts approval_token, repo_access_ready, pr_permission_ready parameters",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/publisher.py",
+      "code_reference": "publisher.py:56-58",
+      "test_reference": "test_live_publish_requires_approval_token, test_live_publish_requires_repo_access_ready, test_live_publish_requires_pr_permission_ready",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C06",
+      "claim": "CLI blocks --dry-run + --publish with message 'blocked_publish_dry_run_conflict'",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/__main__.py",
+      "code_reference": "__main__.py:147-149",
+      "test_reference": "test_live_publish_blocks_dry_run_conflict",
+      "risk": "LOW — only enforced at CLI level, not inside publish_examples(). If publish_examples() is called directly with dry_run=False, no conflict guard fires. Current code path always goes through CLI.",
+      "fix_required": false,
+      "note": "Acceptable: publisher uses dry_run flag directly. CLI is the entry point. Direct calls in tests use dry_run= explicitly."
+    },
+    {
+      "id": "C07",
+      "claim": "Publisher blocks 'blocked_publish_to_main' when result.branch_name == 'main'",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/publisher.py",
+      "code_reference": "publisher.py:135-139",
+      "test_reference": "test_live_publish_blocks_main_branch",
+      "risk": "NONE — branch_name is always set to pipeline/{run_id}/{family} at line 117, which can never be 'main' for any real run_id.",
+      "fix_required": false
+    },
+    {
+      "id": "C08",
+      "claim": "Publisher has blocked_repo_access_not_ready guard",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/publisher.py",
+      "code_reference": "publisher.py:142-146",
+      "test_reference": "test_live_publish_requires_repo_access_ready",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C09",
+      "claim": "Publisher has blocked_pr_permission_not_ready guard",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/publisher.py",
+      "code_reference": "publisher.py:149-153",
+      "test_reference": "test_live_publish_requires_pr_permission_ready",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C10",
+      "claim": "probe-publish-permissions command exists and is always read-only (GET requests only, no branch/commit/PR created)",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/publish_permission_probe.py",
+      "code_reference": "publish_permission_probe.py:1-11 (docstring); line 124 safe_to_publish=False always",
+      "test_reference": "test_probe_publish_permissions_does_not_push_content",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C11",
+      "claim": "publish-permission-probe.json output contains probe_is_read_only=True and live_publish_authorized=False always",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/publish-permission-probe.json",
+      "code_reference": "publish_permission_probe.py:138-146",
+      "test_reference": "test_probe_publish_permissions_does_not_push_content",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C12",
+      "claim": "11 tests in TestLivePRApprovalGate cover all blocked reasons and probe behavior",
+      "verdict": "VERIFIED",
+      "evidence_file": "tests/unit/test_publishing_approval_gate.py",
+      "code_reference": "test_publishing_approval_gate.py:TestLivePRApprovalGate (11 tests)",
+      "test_reference": "All 11 tests listed in live-pr-approval-gate.json",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C13",
+      "claim": "family-publish-readiness.json shows blocked_reason=blocked_live_pr_approval_required for cells+words",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/family-publish-readiness.json",
+      "code_reference": "family-publish-readiness.json:23,39",
+      "test_reference": "validate-publish-targets command output",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C14",
+      "claim": "followup-live-pr-approval-gate taskcard closed in open-taskcard-closure-matrix.json",
+      "verdict": "VERIFIED",
+      "evidence_file": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "code_reference": "open-taskcard-closure-matrix.json:200-205",
+      "test_reference": "N/A",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C15",
+      "claim": "Approval token value never stored in evidence files or logs",
+      "verdict": "VERIFIED",
+      "evidence_file": "src/plugin_examples/publisher/approval_gate.py, src/plugin_examples/publisher/publisher.py",
+      "code_reference": "approval_gate.py: check_approval() only reads token and compares — never writes. publisher.py: blocked_reason constants never echo token value.",
+      "test_reference": "N/A — static code analysis",
+      "risk": "NONE",
+      "fix_required": false
+    },
+    {
+      "id": "C16",
+      "claim": "Publisher implements actual branch creation, commit, and PR creation after all guards pass",
+      "verdict": "FAILED",
+      "evidence_file": "src/plugin_examples/publisher/publisher.py",
+      "code_reference": "publisher.py:184-185 — result.status = 'published' with no actual GitHub operations",
+      "test_reference": "No test for actual PR creation (stub not tested for real output)",
+      "risk": "HIGH — If called with dry_run=False, GITHUB_TOKEN, valid approval token, and all checks passing, the code returns status='published' but creates NO branch, NO commit, NO PR. The stub is misleading: it implies success but does nothing.",
+      "fix_required": true,
+      "fix_plan": "Add publish-pr command with dry-run simulation mode. Real live PR implementation is gated behind followup-agent-operated-live-pr-creation taskcard."
+    }
+  ],
+
+  "additional_weaknesses": [
+    {
+      "id": "W01",
+      "component": "workspace/pr-dry-run/words-controlled-pilot/PR_SUMMARY.md",
+      "weakness": "PR target listed as 'aspose/aspose-plugins-examples-dotnet' — the old central placeholder. Correct target is 'aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples'.",
+      "risk": "MEDIUM — Misleading documentation could cause PR to be sent to wrong repo",
+      "fix_required": true,
+      "fix_plan": "Update PR_SUMMARY.md line 5 to correct family-specific target"
+    },
+    {
+      "id": "W02",
+      "component": "src/plugin_examples/publisher/pr_builder.py",
+      "weakness": "PR body evidence section lists generic text ('Source-of-truth proof verified', etc.) without specific file paths. Reviewers cannot trace evidence back to actual files.",
+      "risk": "LOW — Cosmetic, does not affect safety. PR is informational only.",
+      "fix_required": true,
+      "fix_plan": "Add specific evidence file path references to PR body (e.g., workspace/verification/latest/{family}-source-of-truth-proof.json)"
+    },
+    {
+      "id": "W03",
+      "component": "src/plugin_examples/__main__.py",
+      "weakness": "No publish-pr subcommand exists. There is no command to simulate the full PR creation flow before going live.",
+      "risk": "MEDIUM — Without a simulation command, there is no dry-run rehearsal of the exact PR that would be created",
+      "fix_required": true,
+      "fix_plan": "Add publish-pr subparser with --family, --dry-run, --approval-token, --promote-latest flags"
+    }
+  ],
+
+  "fixes_applied_this_sprint": [
+    "PR_SUMMARY.md updated: correct target aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "pr_builder.py updated: evidence section includes specific file path references",
+    "publish-pr command added to __main__.py with dry-run simulation mode"
+  ],
+
+  "remaining_stub": {
+    "file": "src/plugin_examples/publisher/publisher.py",
+    "line": 185,
+    "code": "result.status = 'published'",
+    "note": "Real live PR implementation (branch creation, git commit, gh pr create) is intentionally deferred. It will be implemented in followup-agent-operated-live-pr-creation sprint when human gives explicit approval."
+  },
+
+  "no_content_pushed": true,
+  "no_live_pr_created": true,
+  "live_publish_allowed": false
+}

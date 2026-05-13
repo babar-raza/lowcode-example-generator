@@ -1,0 +1,47 @@
+{
+  "artifact": "post-parallel-fixture-registry-integration-decision",
+  "timestamp": "2026-05-11T14:15:00Z",
+  "decision": "DEFERRED",
+  "reason": "Three shared files have active healing-stream modifications that would conflict with fixture registry additions",
+  "conflicting_files": [
+    {
+      "file": "workspace/manifests/fixture-registry.json",
+      "healing_change": "Family changed cells->pdf, added unavailable_reason field, new JSON structure",
+      "fixture_need": "Add 5 new programmatic fixture entries for diagram/email/slides"
+    },
+    {
+      "file": "tests/unit/test_fixture_registry.py",
+      "healing_change": "+106 lines (GitHub 403 handling tests, _mock_github_listing return tuple change)",
+      "fixture_need": "Add test cases for new family fixture resolution"
+    },
+    {
+      "file": "tests/unit/test_fixture_strategy.py",
+      "healing_change": "Renamed Converter->SpreadsheetConverter in test data",
+      "fixture_need": "Add fixture strategy tests for diagram/email/slides input formats"
+    }
+  ],
+  "deferred_integration_plan": {
+    "trigger": "After healing-stream changes are committed (single commit or batch)",
+    "steps": [
+      "1. Read updated fixture-registry.json schema (may have new fields from healing)",
+      "2. Add 5 programmatic fixture entries preserving healing structure",
+      "3. Add fixture strategy tests aligned with healing's SpreadsheetConverter rename",
+      "4. Add fixture registry tests compatible with healing's tuple return format",
+      "5. Run full test suite to confirm no regressions"
+    ],
+    "entries_to_add": {
+      "diagram": [
+        {"id": "programmatic_vsdx_single", "strategy": "Aspose.Diagram.Diagram() + manual Shape + Save(Vsdx)", "bytes": 8187}
+      ],
+      "email": [
+        {"id": "programmatic_eml_single", "strategy": "MailMessage() + Save(DefaultEml)", "bytes": 599},
+        {"id": "programmatic_msg_single", "strategy": "MapiMessage.FromMailMessage() + Save()", "bytes": 10240}
+      ],
+      "slides": [
+        {"id": "programmatic_pptx_single", "strategy": "Presentation() + AddAutoShape + Save(Pptx)", "bytes": 33845},
+        {"id": "programmatic_pptx_pair", "strategy": "Two Presentation instances for Merger input", "bytes": 33845}
+      ]
+    }
+  },
+  "verdict": "INTEGRATION_DEFERRED_SAFE"
+}

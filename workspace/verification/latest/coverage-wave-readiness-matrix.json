@@ -1,0 +1,103 @@
+{
+  "artifact_type": "coverage_wave_readiness_matrix",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "lane": 3,
+  "sprint": "Portfolio Launch Sprint 2",
+  "matrix_purpose": "Readiness assessment for next coverage expansion per family",
+  "families": {
+    "cells": {
+      "current_status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_roots": 9,
+      "next_coverage_action": "MONITOR — 100% coverage. No expansion needed.",
+      "expansion_readiness": "N/A",
+      "blocking_gaps": []
+    },
+    "words": {
+      "current_status": "PARTIAL_CANARY",
+      "published": 4,
+      "pilot_allowed": 6,
+      "pr_dry_run_ready": 2,
+      "next_coverage_action": "Publish Wave 2 (Merger + Comparer) → PILOT_COMPLETE",
+      "expansion_readiness": "READY_PENDING_APPROVAL",
+      "blocking_gaps": [
+        "APPROVE_LIVE_PR not set"
+      ],
+      "post_pilot_path": {
+        "full_sot_classification_needed": true,
+        "workflow_root_count": null,
+        "note": "After PILOT_COMPLETE, run full SOT classification to determine if further expansion is needed"
+      }
+    },
+    "pdf": {
+      "current_status": "PARTIAL_CANARY",
+      "published": 2,
+      "pilot_allowed": 4,
+      "pr_dry_run_ready": 1,
+      "reviewer_passed_1_of_2": 1,
+      "next_coverage_action": "Optimizer 2nd pass → publish Splitter + Optimizer → PILOT_COMPLETE",
+      "expansion_readiness": "PARTIALLY_READY",
+      "blocking_gaps": [
+        "EXAMPLE_REVIEWER_PATH not set (Optimizer 2nd pass blocked)",
+        "APPROVE_LIVE_PR not set (Splitter PR blocked)"
+      ],
+      "post_pilot_path": {
+        "deferred_types": 21,
+        "batch_A_assessed": false,
+        "note": "After 4/4 pilot complete, assess Batch A (5 simple format converters) for expansion"
+      }
+    },
+    "diagram": {
+      "current_status": "PILOT_COMPLETE",
+      "published": 2,
+      "workflow_roots": 2,
+      "next_coverage_action": "MONITOR — pilot complete (2/2 workflow roots). No OPTIONS types runnable.",
+      "expansion_readiness": "COMPLETE_FOR_PILOT",
+      "blocking_gaps": []
+    },
+    "email": {
+      "current_status": "DISCOVERY_ONLY",
+      "published": 0,
+      "pilot_allowed": 0,
+      "next_coverage_action": "Design .eml fixture strategy → get pilot approval → launch Email Converter pilot",
+      "expansion_readiness": "FIXTURE_STRATEGY_NEEDED",
+      "blocking_gaps": [
+        "Fixture strategy not designed (followup-email-fixture-strategy-design)",
+        "Pilot approval not obtained (followup-email-controlled-pilot-planning)"
+      ],
+      "types_available": {
+        "Converter": {"status": "WORKFLOW_ROOT", "methods": 7, "feasibility": "HIGH"},
+        "FolderOutputHandler": {"status": "DATA_SOURCE_OR_OUTPUT_HANDLER", "feasibility": "N/A"},
+        "IOutputHandler": {"status": "INTERFACE", "feasibility": "N/A"}
+      }
+    },
+    "slides": {
+      "current_status": "DISCOVERY_ONLY",
+      "published": 0,
+      "pilot_allowed": 0,
+      "next_coverage_action": "Design .pptx fixture strategy → get pilot approval → launch Slides Convert+Compress pilot",
+      "expansion_readiness": "FIXTURE_STRATEGY_NEEDED",
+      "blocking_gaps": [
+        "Fixture strategy not designed (followup-slides-fixture-strategy-design)",
+        "Pilot approval not obtained (followup-slides-controlled-pilot-planning)",
+        "Aspose.Slides.NET.xml missing from package (DLL fallback in place)"
+      ],
+      "types_available": {
+        "Convert": {"status": "WORKFLOW_ROOT", "methods": 6, "feasibility": "HIGH"},
+        "Compress": {"status": "WORKFLOW_ROOT", "methods": 3, "feasibility": "HIGH"},
+        "Merger": {"status": "WORKFLOW_ROOT", "methods": 4, "feasibility": "MEDIUM — needs pair fixture"},
+        "Collect": {"status": "UTILITY_HELPER", "feasibility": "N/A"},
+        "ForEach": {"status": "UTILITY_HELPER", "feasibility": "N/A"}
+      }
+    }
+  },
+  "portfolio_totals": {
+    "families_complete": 2,
+    "families_pilot_complete": 1,
+    "families_partial_canary": 2,
+    "families_discovery_only": 2,
+    "total_published": 17,
+    "total_pr_dry_run_ready": 3,
+    "next_publishable_without_new_runs": 3
+  }
+}

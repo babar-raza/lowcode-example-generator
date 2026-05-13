@@ -1,0 +1,101 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 5: Session and Command Classification Audit",
+  "phase": "PHASE_5",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "Section 5 (command→job_type), TC-11, Amendment AMD3, AMD4",
+  "objective": "Verify MetricsSession correctly classifies all 13 CLI commands and enforces LOCAL_ONLY blocking",
+
+  "command_classification_model": {
+    "EXTERNAL_POST_COMMANDS": {
+      "value": "frozenset({'run'})",
+      "source_file": "src/plugin_examples/metrics/session.py",
+      "count": 1,
+      "description": "Commands eligible for external Google Sheet POST",
+      "reason": "Only 'run' has source-backed count formulas (items_discovered, items_succeeded, items_failed)"
+    },
+    "EXCLUDED_COMMANDS": {
+      "value": "frozenset({'status', 'check'})",
+      "source_file": "src/plugin_examples/metrics/session.py",
+      "count": 2,
+      "description": "Commands excluded from metrics entirely (info-only)",
+      "behavior": "MetricsSession.active = False, finalize() returns noop dict"
+    },
+    "LOCAL_ONLY_COMMANDS": {
+      "count": 10,
+      "description": "Commands where LLM calls ARE tracked locally but external POST is blocked (count_source_unverified)",
+      "commands": [
+        "discover-lowcode",
+        "publish-pr",
+        "merge-pr",
+        "release-status",
+        "render-root-readme",
+        "publish-readme",
+        "validate-publish-targets",
+        "resolve-repo-access",
+        "probe-publish-permissions",
+        "sync-taskcard-docs"
+      ]
+    }
+  },
+
+  "all_13_commands_classified": [
+    {"command": "run",                      "classification": "EXTERNAL_POST",  "active": true,  "post_eligible": true,  "plan_job_type": "examples_generation"},
+    {"command": "discover-lowcode",         "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "discovery"},
+    {"command": "publish-pr",               "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "publishing"},
+    {"command": "merge-pr",                 "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "publishing"},
+    {"command": "release-status",           "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "reporting"},
+    {"command": "render-root-readme",       "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "publishing"},
+    {"command": "publish-readme",           "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "publishing"},
+    {"command": "validate-publish-targets", "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "reporting"},
+    {"command": "resolve-repo-access",      "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "reporting"},
+    {"command": "probe-publish-permissions","classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "reporting"},
+    {"command": "sync-taskcard-docs",       "classification": "LOCAL_ONLY",     "active": true,  "post_eligible": false, "plan_job_type": "reporting"},
+    {"command": "status",                   "classification": "EXCLUDED",       "active": false, "post_eligible": false, "plan_job_type": "excluded"},
+    {"command": "check",                    "classification": "EXCLUDED",       "active": false, "post_eligible": false, "plan_job_type": "excluded"}
+  ],
+
+  "local_only_blocking_behavior": {
+    "implemented": true,
+    "mechanism": "session.finalize() checks command in LOCAL_ONLY set, returns blocked result with reason='count_source_unverified_for_{command}'",
+    "no_external_post_for_local_only": true,
+    "local_evidence_still_written": true,
+    "plan_stop_condition_SC5": "Count formulas guessed without source verification? NO — LOCAL_ONLY blocks POST until verified — PASS"
+  },
+
+  "amendment_compliance": {
+    "AMD3_automatic_capture": {
+      "requirement": "All commands triggering llm.professionalize.com are captured automatically",
+      "implementation": "MetricsSession.active=True for all non-EXCLUDED commands. LLMRouter.metrics_collector wired at session creation.",
+      "status": "PASS"
+    },
+    "AMD4_local_only_block": {
+      "requirement": "LOCAL_ONLY commands block external POST",
+      "implementation": "finalize() returns {posted: false, reason: count_source_unverified_for_{command}} for LOCAL_ONLY",
+      "status": "PASS"
+    }
+  },
+
+  "test_coverage": {
+    "test_file": "tests/unit/test_agent_metrics_session.py",
+    "tests_count": 22,
+    "tests_passed": 22,
+    "key_tests": [
+      "TestSessionLifecycle::test_excluded_command_not_active",
+      "TestSessionLifecycle::test_local_only_blocks_external_post",
+      "TestSessionLifecycle::test_run_command_post_eligible",
+      "TestSafetyGates::test_dry_run_session_never_posts",
+      "TestSafetyGates::test_force_repost_cannot_bypass_production_safety"
+    ]
+  },
+
+  "plan_section_11_cli_contract_compliance": {
+    "status_excluded": true,
+    "check_excluded": true,
+    "defaults_metrics_disabled": true,
+    "dry_run_default_when_enabled": true,
+    "real_post_requires_explicit_optin": true,
+    "token_never_in_evidence": true
+  },
+
+  "overall_verdict": "PASS — all 13 commands correctly classified; LOCAL_ONLY blocking enforced; AMD3 and AMD4 satisfied"
+}

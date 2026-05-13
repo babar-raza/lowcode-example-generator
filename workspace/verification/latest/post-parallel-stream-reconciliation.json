@@ -1,0 +1,167 @@
+{
+  "artifact": "post-parallel-stream-reconciliation",
+  "timestamp": "2026-05-11T14:00:00Z",
+  "purpose": "Classify every working-tree change by owner stream and determine fixture registry integration safety",
+  "streams": {
+    "healing_remediation": {
+      "description": "B-013 catalog hash enforcement + B-005/B-006/B-007 monthly build regression",
+      "modified_files": [
+        {
+          "path": "src/plugin_examples/scenario_planner/planner.py",
+          "change_type": "M",
+          "delta": "+220 -35 lines",
+          "content": "compute_catalog_hash(), validate_catalog_hash(), CatalogHashResult, CatalogHashMismatchError"
+        },
+        {
+          "path": "src/plugin_examples/fixture_registry/registry.py",
+          "change_type": "M",
+          "delta": "+89 -35 lines",
+          "content": "GitHub 403 handling, _try_contents_api refactor, GITHUB_TOKEN auth header, unavailable_reason field"
+        },
+        {
+          "path": "workspace/manifests/fixture-registry.json",
+          "change_type": "M",
+          "delta": "Family changed cells->pdf, added unavailable_reason field",
+          "content": "Registry now points to pdf family with github_api_403_forbidden reason"
+        },
+        {
+          "path": "tests/unit/test_fixture_registry.py",
+          "change_type": "M",
+          "delta": "+106 lines",
+          "content": "TestGitHub403Handling class (GITHUB_TOKEN auth, 403 warning, unavailable_reason tracking)"
+        },
+        {
+          "path": "tests/unit/test_fixture_strategy.py",
+          "change_type": "M",
+          "delta": "Renamed Converter->SpreadsheetConverter in test fixture",
+          "content": "Test data alignment with actual Cells API type names"
+        },
+        {
+          "path": ".github/workflows/monthly-package-refresh.yml",
+          "change_type": "M",
+          "delta": "+36 lines",
+          "content": "New regression-check job for monthly published example builds"
+        },
+        {
+          "path": "scripts/validate_published_examples_build.py",
+          "change_type": "??",
+          "delta": "NEW file",
+          "content": "Monthly regression check: clone repos, dotnet build, JSON report"
+        },
+        {
+          "path": "pipeline/configs/denominators/diagram.json",
+          "change_type": "??",
+          "delta": "NEW file",
+          "content": "Denominator with api_catalog_sha256 for diagram"
+        },
+        {
+          "path": "pipeline/configs/denominators/email.json",
+          "change_type": "??",
+          "delta": "NEW file",
+          "content": "Denominator with api_catalog_sha256 for email"
+        },
+        {
+          "path": "pipeline/configs/denominators/slides.json",
+          "change_type": "??",
+          "delta": "NEW file",
+          "content": "Denominator with api_catalog_sha256 for slides"
+        }
+      ],
+      "new_test_files": [
+        "tests/unit/test_catalog_hash_enforcement.py",
+        "tests/unit/test_monthly_build_regression.py"
+      ]
+    },
+    "fixture_harness": {
+      "description": "New family fixture harness projects (diagram, email, slides)",
+      "created_files": [
+        {
+          "path": "workspace/fixture-validation/diagram-harness/DiagramFixtureHarness.csproj",
+          "content": ".NET 8.0 console app, Aspose.Diagram 26.4.0"
+        },
+        {
+          "path": "workspace/fixture-validation/diagram-harness/Program.cs",
+          "content": "VSDX fixture creation + PdfConverter/DiagramConverter validation"
+        },
+        {
+          "path": "workspace/fixture-validation/email-harness/EmailFixtureHarness.csproj",
+          "content": ".NET 8.0 console app, Aspose.Email 26.4.0"
+        },
+        {
+          "path": "workspace/fixture-validation/email-harness/Program.cs",
+          "content": "EML/MSG fixture creation + async Converter validation"
+        },
+        {
+          "path": "workspace/fixture-validation/slides-harness/SlidesFixtureHarness.csproj",
+          "content": ".NET 8.0 console app, Aspose.Slides.NET 26.5.0"
+        },
+        {
+          "path": "workspace/fixture-validation/slides-harness/Program.cs",
+          "content": "PPTX fixture creation + Convert/Merger/Compress validation"
+        }
+      ],
+      "evidence_files": [
+        "workspace/verification/latest/new-family-fixture-harness-preflight.json",
+        "workspace/verification/latest/new-family-fixture-system-inventory.json",
+        "workspace/verification/latest/new-family-fixture-harness-verdict.json",
+        "workspace/verification/latest/new-family-fixture-readiness-matrix.json",
+        "workspace/verification/latest/new-family-fixture-taskcard-updates.json",
+        "workspace/verification/latest/new-family-fixture-harness-bundle-manifest.json",
+        "docs/plans/new-family-fixture-harness-verdict.md"
+      ],
+      "modified_shared_files": "NONE — all fixture harness files are NEW and isolated in workspace/fixture-validation/"
+    }
+  },
+  "conflict_analysis": {
+    "fixture_registry_json": {
+      "owner": "healing_remediation",
+      "conflict_risk": "HIGH",
+      "reason": "Healing stream changed family from cells->pdf and added unavailable_reason field. Adding diagram/email/slides fixtures would require merging into this modified structure.",
+      "verdict": "UNSAFE_TO_INTEGRATE"
+    },
+    "test_fixture_registry_py": {
+      "owner": "healing_remediation",
+      "conflict_risk": "HIGH",
+      "reason": "Healing stream added 106+ lines (TestGitHub403Handling class, _mock_github_listing return tuple change). Adding new family fixture tests would interleave with these changes.",
+      "verdict": "UNSAFE_TO_INTEGRATE"
+    },
+    "test_fixture_strategy_py": {
+      "owner": "healing_remediation",
+      "conflict_risk": "MEDIUM",
+      "reason": "Healing stream renamed test data types (Converter->SpreadsheetConverter). New family fixture strategy tests would need awareness of this change.",
+      "verdict": "UNSAFE_TO_INTEGRATE"
+    },
+    "planner_py": {
+      "owner": "healing_remediation",
+      "conflict_risk": "HIGH",
+      "reason": "220 new lines for catalog hash enforcement. Fixture harness does not need planner changes.",
+      "verdict": "NO_CONFLICT — fixture stream does not modify this file"
+    },
+    "registry_py": {
+      "owner": "healing_remediation",
+      "conflict_risk": "HIGH",
+      "reason": "89 lines changed for GitHub 403 handling. Fixture harness does not modify this file.",
+      "verdict": "NO_CONFLICT — fixture stream does not modify this file"
+    },
+    "monthly_workflow": {
+      "owner": "healing_remediation",
+      "conflict_risk": "LOW",
+      "reason": "36 new lines for regression-check job. Fixture harness does not modify this file.",
+      "verdict": "NO_CONFLICT"
+    }
+  },
+  "integration_decision": {
+    "fixture_registry_integration": "DEFERRED",
+    "reason": "fixture-registry.json, test_fixture_registry.py, and test_fixture_strategy.py all have active healing-stream modifications. Adding new family fixtures would create merge conflicts or require understanding the healing stream's new tuple return format and unavailable_reason schema.",
+    "deferred_to": "post-healing-merge sprint",
+    "what_to_integrate_later": [
+      "programmatic_vsdx_single fixture entry for diagram",
+      "programmatic_eml_single + programmatic_msg_single fixture entries for email",
+      "programmatic_pptx_single + programmatic_pptx_pair fixture entries for slides",
+      "Corresponding test cases in test_fixture_registry.py and test_fixture_strategy.py"
+    ]
+  },
+  "stream_isolation_verified": true,
+  "shared_file_conflicts": 0,
+  "verdict": "STREAMS_ISOLATED_INTEGRATION_DEFERRED"
+}

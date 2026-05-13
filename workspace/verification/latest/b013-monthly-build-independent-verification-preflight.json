@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "verification_type": "INDEPENDENT_VERIFICATION",
+  "sprint": "B-013-MONTHLY-BUILD",
+  "environment": {
+    "branch": "main",
+    "commit": "79f19ae",
+    "last_commit_message": "docs: add comprehensive README and investigation evidence bundle",
+    "python_version": "3.13.2",
+    "dotnet_version": "9.0.200",
+    "platform": "win32"
+  },
+  "commit_state": {
+    "remediation_committed": false,
+    "remediation_state": "WORKING_TREE_ONLY",
+    "note": "All remediation changes are uncommitted working-tree modifications. Last commit 79f19ae does not include any B-013 or monthly-build changes."
+  },
+  "evidence_bundle": {
+    "bundle_exists": true,
+    "bundle_path": "workspace/verification/b013-monthly-build-remediation-evidence-bundle.zip",
+    "bundle_size_bytes": 8557,
+    "manifest_exists": true,
+    "manifest_path": "workspace/verification/latest/b013-monthly-build-evidence-bundle-manifest.json",
+    "files_listed": 7,
+    "all_valid_json": true,
+    "no_secrets_found": true,
+    "no_binaries_found": true,
+    "bundle_integrity": "COMPLETE"
+  },
+  "gate_0_result": "PREFLIGHT_PASS"
+}

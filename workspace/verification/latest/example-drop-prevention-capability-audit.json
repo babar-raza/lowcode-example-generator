@@ -1,0 +1,114 @@
+{
+  "sprint": "Example Lifecycle, Backlog Backfill, and Reviewer Feedback Loop Hardening",
+  "date": "2026-05-06",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Does every planned example get a lifecycle record before generation?",
+      "answer": "NO",
+      "evidence": "runner.py:584 iterates ctx.planning.ready_scenarios only. Blocked/excluded scenarios (ctx.planning.blocked_scenarios) are never registered in lifecycle_registry.",
+      "gap": "GAP-1: Excluded-by-allowlist scenarios get no lifecycle record."
+    },
+    {
+      "id": 2,
+      "question": "Does every generation failure get a lifecycle record?",
+      "answer": "YES",
+      "evidence": "runner.py:596-599 calls mark_generation_failed() when example.status=='failed' or code is empty. runner.py:612-614 catches exceptions and marks generation_failed."
+    },
+    {
+      "id": 3,
+      "question": "Does every static validation failure get a lifecycle record?",
+      "answer": "PARTIAL",
+      "evidence": "code_generator.py validates code (lines 72-85) but failures in validation are tracked as generation failure (status='failed'), not as a separate lifecycle stage. The lifecycle record exists but the failure_reason may conflate code-gen with validation."
+    },
+    {
+      "id": 4,
+      "question": "Does every build failure get a lifecycle record?",
+      "answer": "YES",
+      "evidence": "runner.py:800-801 calls mark_build_failed() when validation result is not passed. runner.py:844-848 marks build failures as backlogged."
+    },
+    {
+      "id": 5,
+      "question": "Does every runtime failure get a lifecycle record?",
+      "answer": "YES",
+      "evidence": "runner.py:810-811 calls mark_run_failed() with error text. runner.py:850-855 marks runtime failures as backlogged with medium priority."
+    },
+    {
+      "id": 6,
+      "question": "Does every output validation failure get a lifecycle record?",
+      "answer": "NO",
+      "evidence": "Output validation failures are not tracked as a separate lifecycle stage. The lifecycle record has no mark_output_validation_failed() method. Output validation is bundled into the runtime stage.",
+      "gap": "Minor: output validation is implicit in runtime pass/fail."
+    },
+    {
+      "id": 7,
+      "question": "Does every reviewer failure get a lifecycle record?",
+      "answer": "YES",
+      "evidence": "runner.py:921-926 calls mark_reviewer_failed() and mark_backlogged() when reviewer fails."
+    },
+    {
+      "id": 8,
+      "question": "Does every excluded-by-scope example get a lifecycle record?",
+      "answer": "NO",
+      "evidence": "runner.py:584 iterates only ready_scenarios. Blocked scenarios from planner (blocked_pilot_not_in_scope) are never registered in lifecycle. This is the primary gap.",
+      "gap": "GAP-1: Critical. Excluded scenarios invisible to lifecycle system."
+    },
+    {
+      "id": 9,
+      "question": "Does every failed or excluded example get a backlog entry or taskcard?",
+      "answer": "PARTIAL",
+      "evidence": "Failed examples (generation/build/runtime/reviewer) get backlog entries via runner.py:835-857. Excluded-by-allowlist examples have manual taskcards but no structured backlog entries. workspace/backlog/ directory does not exist.",
+      "gap": "GAP-2: No durable backlog for excluded scenarios."
+    },
+    {
+      "id": 10,
+      "question": "Does PR packaging list excluded examples and reasons?",
+      "answer": "NO",
+      "evidence": "pr_builder.py has excluded_scenarios parameter (line 27) but publisher.py:214 and __main__.py:645 never pass it. PR body always shows 'None in this controlled pilot scope'.",
+      "gap": "GAP-3: PR body hides excluded scenarios."
+    },
+    {
+      "id": 11,
+      "question": "Does readiness rank count planned/generated/passed/failed/backlogged/packaged/excluded?",
+      "answer": "PARTIAL",
+      "evidence": "family-generation-readiness-rank.json has controlled_pilot_pass_count and passing_types but lacks planned_count, excluded_count, backlogged_count, failed_count.",
+      "gap": "GAP-4: Readiness rank incomplete."
+    },
+    {
+      "id": 12,
+      "question": "Does the reviewer provide structured feedback that can drive regeneration?",
+      "answer": "NO",
+      "evidence": "ReviewerResult in bridge.py has only available, passed, error, details fields. details is raw stdout (JSON or truncated string). No per-example structured findings (severity, file, line, symbol).",
+      "gap": "GAP-5: Reviewer feedback is pass/fail only."
+    },
+    {
+      "id": 13,
+      "question": "Does the repair loop actually consume reviewer feedback?",
+      "answer": "NO",
+      "evidence": "Repair loop in runner.py:680-787 handles build and runtime repairs only. No reviewer repair loop exists. When reviewer fails, examples are just marked backlogged.",
+      "gap": "GAP-5: No reviewer-driven repair."
+    },
+    {
+      "id": 14,
+      "question": "Can the system learn from failures across runs?",
+      "answer": "NO",
+      "evidence": "update_backlog_from_lifecycle() writes to persistent backlog JSON. But load_family_backlog() is never called before generation. Previous failure patterns are not fed into prompts.",
+      "gap": "GAP-6: No cross-run learning."
+    },
+    {
+      "id": 15,
+      "question": "Can failed examples still disappear from latest evidence?",
+      "answer": "PARTIAL_YES",
+      "evidence": "Failed examples that get lifecycle records are preserved in example-lifecycle-records.json and backlog. But excluded-by-allowlist scenarios are NOT in lifecycle and can only be found in blocked-scenarios.json (which is promoted but not consumed by publisher/release-status). If a new run with different allowlist runs, previous blocked-scenarios.json is overwritten.",
+      "gap": "GAP-1 + GAP-2 combined: excluded scenarios can be lost."
+    }
+  ],
+  "scores": {
+    "lifecycle_coverage": "11/15 (73%)",
+    "backlog_coverage": "PARTIAL — works for generation/build/runtime/reviewer failures; missing for excluded-by-scope",
+    "pr_summary_coverage": "INCOMPLETE — excluded_scenarios parameter exists but unused",
+    "reviewer_feedback_loop": "NOT_IMPLEMENTED",
+    "cross_run_learning": "NOT_IMPLEMENTED"
+  },
+  "verdict": "EXAMPLE_DROP_PREVENTION_PARTIAL_REVIEWER_LOOP_PENDING"
+}

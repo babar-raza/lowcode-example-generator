@@ -1,0 +1,128 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 7: Count Formula and Policy Audit",
+  "phase": "PHASE_7",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "Section 10 (Count Formula Verification), TC-06",
+  "objective": "Verify count formula policy — BLOCKED_UNTIL_COUNT_SOURCE_VERIFIED respected; run command formulas source-backed",
+
+  "policy_tiers": {
+    "SUPPORTED_EXTERNAL_METRICS": {
+      "commands": ["run"],
+      "count": 1,
+      "description": "Source-backed count formulas verified — eligible for external POST",
+      "external_post_allowed": true
+    },
+    "LOCAL_ONLY_LLM_METRICS": {
+      "commands": [
+        "discover-lowcode", "publish-pr", "merge-pr", "release-status",
+        "render-root-readme", "publish-readme", "validate-publish-targets",
+        "resolve-repo-access", "probe-publish-permissions", "sync-taskcard-docs"
+      ],
+      "count": 10,
+      "description": "LLM calls tracked locally; external POST blocked (count_source_unverified)",
+      "external_post_allowed": false,
+      "plan_section_10_note": "Plan marked these as BLOCKED_UNTIL_COUNT_SOURCE_VERIFIED"
+    },
+    "EXCLUDED_INFO_ONLY": {
+      "commands": ["status", "check"],
+      "count": 2,
+      "description": "No metrics at all — info-only commands",
+      "metrics_active": false
+    }
+  },
+
+  "run_command_count_formulas": {
+    "source": "src/plugin_examples/metrics/pipeline_hook.py lines 56-63",
+    "items_discovered": {
+      "formula": "len(ctx.planning.ready_scenarios) + ctx.planning.blocked_count",
+      "source": "scenario_planning stage populates ctx.planning",
+      "confidence": "HIGH",
+      "plan_rating": "HIGH"
+    },
+    "items_succeeded": {
+      "formula": "sum(1 for v in ctx.validation_results if v.passed)",
+      "source": "validation stage populates ctx.validation_results",
+      "confidence": "HIGH",
+      "plan_rating": "HIGH"
+    },
+    "items_failed": {
+      "formula": "len(ctx.generated_projects) - items_succeeded",
+      "source": "generation stage populates ctx.generated_projects",
+      "confidence": "HIGH",
+      "plan_rating": "HIGH"
+    },
+    "verdict": "PASS — all three formulas source-backed"
+  },
+
+  "blocked_commands_detail": [
+    {
+      "command": "discover-lowcode",
+      "plan_confidence": "MEDIUM",
+      "implemented": "LOCAL_ONLY — POST blocked, LLM calls tracked locally",
+      "why_blocked": "Return structure not fully verified for clean item counts"
+    },
+    {
+      "command": "publish-pr",
+      "plan_confidence": "HIGH (items_discovered=1)",
+      "implemented": "LOCAL_ONLY — POST blocked",
+      "note": "Even HIGH-confidence reporting commands blocked pending formal TC-06 execution"
+    },
+    {
+      "command": "merge-pr",
+      "plan_confidence": "HIGH (items_discovered=1)",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "release-status",
+      "plan_confidence": "LOW",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "render-root-readme",
+      "plan_confidence": "MEDIUM",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "publish-readme",
+      "plan_confidence": "MEDIUM",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "validate-publish-targets",
+      "plan_confidence": "LOW",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "resolve-repo-access",
+      "plan_confidence": "LOW",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "probe-publish-permissions",
+      "plan_confidence": "LOW",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    },
+    {
+      "command": "sync-taskcard-docs",
+      "plan_confidence": "BLOCKED_UNTIL_COUNT_SOURCE_VERIFIED",
+      "implemented": "LOCAL_ONLY — POST blocked"
+    }
+  ],
+
+  "tc06_execution_status": {
+    "taskcard": "TC-06 — metrics-v4-count-formula-verification",
+    "mode": "VERIFICATION",
+    "status": "IMPLEMENTED_VIA_LOCAL_ONLY_POLICY",
+    "evidence": "workspace/verification/latest/agent-metrics-count-formula-verification.json",
+    "plan_acceptance": "Every command either has source-backed formula OR explicitly BLOCKED — SATISFIED"
+  },
+
+  "plan_stop_condition_SC5": {
+    "condition": "Count formulas are guessed without source verification",
+    "triggered": false,
+    "evidence": "All 10 non-run commands are LOCAL_ONLY (POST blocked). Only 'run' has external POST with source-backed formulas.",
+    "verdict": "PASS — stop condition NOT triggered"
+  },
+
+  "overall_verdict": "PASS — count formula policy correctly implemented; run command formulas source-backed; all other commands LOCAL_ONLY as plan required"
+}

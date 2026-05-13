@@ -1,0 +1,28 @@
+{
+  "package_id": "Aspose.Drawing",
+  "resolved_version": "26.4.0",
+  "nupkg_sha256": "b42da1773d6f69c764a0408d5fba0728e779c08f621228f90a205a3b5d3ecefc",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-drawing-20260509-113558\\extracted\\drawing\\primary\\lib\\netstandard2.0\\Aspose.Drawing.dll",
+  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-drawing-20260509-113558\\extracted\\drawing\\primary\\lib\\netstandard2.0\\Aspose.Drawing.xml",
+  "xml_warning": null,
+  "dependency_count": 0,
+  "dependency_paths": [],
+  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-drawing-20260509-113558\\catalog\\drawing\\api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Drawing.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Drawing.LowCode'"
+    },
+    {
+      "pattern": "Aspose.Drawing.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Drawing.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

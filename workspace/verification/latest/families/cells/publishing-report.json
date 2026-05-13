@@ -1,0 +1,20 @@
+{
+  "dry_run": true,
+  "branch_name": "plugin-examples/cells/20260508-084354",
+  "pr_url": null,
+  "pr_number": null,
+  "files_included": [
+    "cells-html-converter",
+    "cells-image-converter",
+    "cells-json-converter",
+    "cells-pdf-converter",
+    "cells-spreadsheet-converter",
+    "cells-spreadsheet-locker",
+    "cells-spreadsheet-merger",
+    "cells-spreadsheet-splitter",
+    "cells-text-converter"
+  ],
+  "evidence_verified": true,
+  "status": "dry_run",
+  "blocked_reason": null
+}

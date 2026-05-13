@@ -1,0 +1,54 @@
+{
+  "artifact_id": "dependency-resolution-fix-verdict",
+  "created": "2026-05-09",
+  "verdict": "FIX_IMPLEMENTED_AND_PARTIALLY_VERIFIED",
+  "fix_1": {
+    "name": "All-TFM Group Collection",
+    "parameter": "include_all_tfm_groups=True",
+    "function": "_collect_all_tfm_deps(nuspec_xml)",
+    "target_families": [
+      "psd"
+    ],
+    "status": "IMPLEMENTED_AND_TESTED",
+    "runtime_outcome": "Newtonsoft.Json now downloaded for PSD. Next blocker: Aspose.JavaAttributes (internal, not on NuGet).",
+    "tests_added": 9
+  },
+  "fix_2": {
+    "name": "Extra Packages Config Support",
+    "field": "extra_packages in DependencyResolution",
+    "target_families": [
+      "ocr",
+      "omr"
+    ],
+    "status": "IMPLEMENTED_AND_TESTED",
+    "runtime_outcome": {
+      "omr": "FULLY RESOLVED. Newtonsoft.Json downloaded. Reflection succeeded. 18 namespaces found. No LowCode namespace. OMR classified CONFIRMED_NO_LOWCODE.",
+      "ocr": "PARTIALLY RESOLVED. Aspose.Drawing.Common downloaded. New blocker: Aspose.AI.LLM (internal, not on NuGet)."
+    },
+    "tests_added": 7
+  },
+  "unresolved_blockers": {
+    "psd": {
+      "family": "psd",
+      "missing_assembly": "Aspose.JavaAttributes",
+      "version": "1.0.0.0",
+      "on_nuget": false,
+      "blocker_category": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+      "resolution": "Cannot be resolved with current pipeline capabilities"
+    },
+    "ocr": {
+      "family": "ocr",
+      "missing_assembly": "Aspose.AI.LLM",
+      "version": "25.12.0.0",
+      "on_nuget": false,
+      "blocker_category": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+      "resolution": "Cannot be resolved with current pipeline capabilities"
+    }
+  },
+  "governance": {
+    "no_silent_drop": "All families explicitly tracked in blocker files with updated root causes",
+    "no_false_no_lowcode": "OCR and PSD remain BLOCKED, not marked CONFIRMED_NO_LOWCODE",
+    "tests_passing": 1193,
+    "regressions": 0
+  }
+}

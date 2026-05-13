@@ -1,0 +1,70 @@
+{
+  "reproduction_type": "pdf_reflection_failure_reproduction",
+  "reproduction_date": "2026-05-04 12:55 UTC",
+  "sprint": "PDF Assembly Deduplication Sprint — Phase 1",
+
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --families pdf --promote-latest",
+  "exit_code": "blocked_reflection_failed (DllReflector exit 3762504530 = 0xE0000232 = unhandled .NET exception)",
+  "pdf_version_resolved": "26.4.0",
+  "selected_framework": "netstandard2.0",
+  "dependencies_resolved": 23,
+
+  "dll_reflector_invocation": {
+    "dll_path": "extracted/pdf/primary/lib/netstandard2.0/Aspose.PDF.dll",
+    "xml_path": "extracted/pdf/primary/lib/netstandard2.0/Aspose.PDF.xml",
+    "deps_passed": [
+      "System.Security.Permissions.dll",
+      "System.Security.AccessControl.dll",
+      "System.Text.Encoding.CodePages.dll",
+      "System.Memory.dll",
+      "System.Runtime.CompilerServices.Unsafe.dll",
+      "System.Drawing.Common.dll",
+      "System.Diagnostics.PerformanceCounter.dll",
+      "System.Reflection.Emit.dll",
+      "System.Reflection.Emit.ILGeneration.dll",
+      "System.Security.Cryptography.Pkcs.dll",
+      "System.Buffers.dll",
+      "System.Memory.dll",
+      "System.Security.Cryptography.Cng.dll",
+      "System.Buffers.dll",
+      "System.Diagnostics.DiagnosticSource.dll",
+      "Newtonsoft.Json.dll",
+      "System.Text.Json.dll",
+      "Microsoft.Bcl.AsyncInterfaces.dll",
+      "System.Text.Encodings.Web.dll",
+      "System.Threading.Tasks.Extensions.dll",
+      "System.Net.Http.Json.dll"
+    ],
+    "duplicate_paths_in_deps": {
+      "System.Memory.dll": {"occurrences": 2, "packages": ["System.Memory.4.5.5", "System.Memory.4.5.3"]},
+      "System.Buffers.dll": {"occurrences": 2, "packages": ["System.Buffers.4.5.0", "System.Buffers.4.5.1"]}
+    }
+  },
+
+  "exception": {
+    "type": "System.IO.FileLoadException",
+    "message": "The assembly 'System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' has already loaded been loaded into this MetadataLoadContext.",
+    "throw_site": "System.Reflection.MetadataLoadContext.LoadFromStreamCore",
+    "call_chain": [
+      "MetadataLoadContext.LoadFromStreamCore",
+      "MetadataLoadContext.LoadFromAssemblyPath",
+      "PathAssemblyResolver.Resolve",
+      "MetadataLoadContext.TryFindAssemblyByCallingResolveHandler",
+      "MetadataLoadContext.ResolveToAssemblyOrExceptionAssembly",
+      "EcmaResolver.ResolveAssembly",
+      "EcmaResolver.ComputeTypeRefResolution",
+      "EcmaResolver.ResolveTypeRef",
+      "EcmaCustomAttributeData.ComputeAttributeType",
+      "RoCustomAttributeData.get_AttributeType",
+      "Program.HasObsolete (Program.cs:211)",
+      "Program.GetProperties (Program.cs:279)",
+      "Program.BuildTypeInfo (Program.cs:192)",
+      "Program.Main (Program.cs:138)"
+    ],
+    "triggered_at": "HasObsolete() iterating property custom attributes — AttributeType resolution triggers System.Text.Json assembly load"
+  },
+
+  "gate_1_result": "PASS",
+  "verdict": "PDF_FAILURE_REPRODUCED",
+  "conclusion": "Failure is consistent and reproducible. Root cause identified: duplicate assembly paths in PathAssemblyResolver. Two separate issues compound: (1) Python-side duplicate dep_dll_paths; (2) DllReflector-side conflict between NuGet dep System.Text.Json.dll and TRUSTED_PLATFORM_ASSEMBLIES System.Text.Json.dll."
+}

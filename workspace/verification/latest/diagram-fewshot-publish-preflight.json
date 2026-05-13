@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "DIAGRAM-FEWSHOT-PUBLISH",
+  "phase": "PREFLIGHT",
+
+  "environment": {
+    "branch": "main",
+    "commit": "c7fa225800fd34549c66a9f34709f37f626e8d40",
+    "commit_short": "c7fa225",
+    "python_version": "3.13.2",
+    "dotnet_version": "9.0.200",
+    "platform": "win32"
+  },
+
+  "f1_strict_enforcement_verification": {
+    "commit_present": true,
+    "runner_writes_evidence_before_raising": true,
+    "runner_raises_CatalogHashMismatchError_on_mismatch": true,
+    "scenario_planning_in_HARD_STOP_STAGES": true,
+    "plan_scenarios_passes_strict_true": true,
+    "tests_19_of_19_pass": true,
+    "verified_from_source": true
+  },
+
+  "env_var_status": {
+    "GPT_OSS_ENDPOINT": "SET",
+    "GPT_OSS_API_KEY": "SET",
+    "GPT_OSS_MODEL": "NOT_SET",
+    "EXAMPLE_REVIEWER_PATH": "NOT_SET",
+    "GITHUB_TOKEN": "SET",
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+
+  "env_blockers": [
+    "GPT_OSS_MODEL not set — generation will use default 'recommended' model",
+    "EXAMPLE_REVIEWER_PATH not set — reviewer stage will be skipped/degraded"
+  ],
+
+  "baseline_tests": {
+    "collected": 1276,
+    "passed": 1276,
+    "failed": 0,
+    "duration_sec": 124.0
+  },
+
+  "prior_diagram_state": {
+    "dry_run_passed": true,
+    "ready_scenarios": ["DiagramConverter", "PdfConverter"],
+    "blocked_scenarios": ["LowCodeLoadOptions", "LowCodePdfSaveOptions", "LowCodeSaveOptions"],
+    "runtime_passed": 0,
+    "root_cause": "invalid generated VSDX fixture (raw ZIP bytes instead of Aspose.Diagram-generated)",
+    "pr_eligible": false
+  },
+
+  "gate_0_result": "PREFLIGHT_PASS"
+}

@@ -1,0 +1,75 @@
+{
+  "phase": "Phase 5 — Production-shaped dry-run",
+  "run_id": "pilot-cells-20260507-140836",
+  "command": "run --family cells --tier 5 --metrics --promote-latest",
+  "env_vars_set": ["AGENT_METRICS_ENABLED=true", "AGENT_METRICS_PRODUCTION_ENABLED=true"],
+  "env_vars_NOT_set": ["AGENT_METRICS_TOKEN", "AGENT_METRICS_DRY_RUN"],
+  "flags_NOT_used": ["--metrics-post", "--metrics-force-repost"],
+
+  "pipeline_verdict": "PR_DRY_RUN_READY",
+  "pipeline_summary": "9 generated, 9 built, 9 runtime passed, 0 blocked",
+
+  "dry_run_gates": {
+    "DR-1_posted_false": {"expected": false, "actual": false, "pass": true},
+    "DR-2_reason_dry_run": {"expected": "dry_run", "actual": "dry_run", "pass": true},
+    "DR-3_website_aspose_net": {"expected": "aspose.net", "actual": "aspose.net", "pass": true},
+    "DR-4_agent_name_no_test_prefix": {"expected": "lowcode-example-generator", "actual": "lowcode-example-generator", "pass": true},
+    "DR-5_job_type_examples_generation": {"expected": "examples_generation", "actual": "examples_generation", "pass": true},
+    "DR-6_run_id_no_test_prefix": {"expected": "no 'test-' prefix", "actual": "pilot-cells-20260507-140836", "pass": true},
+    "DR-7_product_aspose_cells": {"expected": "Aspose.Cells", "actual": "Aspose.Cells", "pass": true},
+    "DR-8_item_name_no_test_prefix": {"expected": "Examples", "actual": "Examples", "pass": true},
+    "DR-9_token_usage_integer_gte_0": {"expected": "integer >= 0", "actual": 12293, "pass": true},
+    "DR-10_api_calls_count_integer_gte_0": {"expected": "integer >= 0", "actual": 9, "pass": true},
+    "DR-11_platform_net": {"expected": ".NET", "actual": ".NET", "pass": true},
+    "DR-12_validation_valid_true": {"expected": true, "actual": true, "pass": true},
+    "DR-13_no_token_in_evidence": {"expected": "AGENT_METRICS_TOKEN absent", "actual": "NOT_FOUND", "pass": true},
+    "DR-14_evidence_files_written": {"expected": 5, "actual": 5, "pass": true}
+  },
+
+  "all_gates_pass": true,
+  "gates_passed": 14,
+  "gates_failed": 0,
+
+  "payload": {
+    "timestamp": "2026-05-07T09:13:05.191516+00:00",
+    "agent_name": "lowcode-example-generator",
+    "agent_owner": "Babar Raza",
+    "job_type": "examples_generation",
+    "run_id": "pilot-cells-20260507-140836",
+    "status": "success",
+    "product": "Aspose.Cells",
+    "platform": ".NET",
+    "website": "aspose.net",
+    "website_section": "Examples",
+    "item_name": "Examples",
+    "items_discovered": 22,
+    "items_succeeded": 9,
+    "items_failed": 0,
+    "run_duration_ms": 268514,
+    "token_usage": 12293,
+    "api_calls_count": 9
+  },
+  "payload_hash": "41e0c9efe4314479",
+
+  "post_result": {"posted": false, "reason": "dry_run", "dry_run": true},
+  "validation": {"valid": true, "errors": [], "warnings": []},
+
+  "ledger_check": {
+    "total_entries_before": 1,
+    "total_entries_after": 1,
+    "new_production_entries": 0,
+    "ledger_unchanged": true
+  },
+
+  "secret_check": {"agent_metrics_token_in_evidence": false},
+
+  "evidence_files": [
+    "workspace/runs/pilot-cells-20260507-140836/evidence/agent-metrics-llm-calls.jsonl",
+    "workspace/runs/pilot-cells-20260507-140836/evidence/agent-metrics-payload.json",
+    "workspace/runs/pilot-cells-20260507-140836/evidence/agent-metrics-post-result.json",
+    "workspace/runs/pilot-cells-20260507-140836/evidence/agent-metrics-run-summary.json",
+    "workspace/runs/pilot-cells-20260507-140836/evidence/agent-metrics-validation.json"
+  ],
+
+  "dry_run_verdict": "DRY_RUN_ALL_GATES_PASS_READY_FOR_PRODUCTION_APPROVAL"
+}

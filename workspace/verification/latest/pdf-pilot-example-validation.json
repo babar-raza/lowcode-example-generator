@@ -1,0 +1,75 @@
+{
+  "sprint": "PDF Controlled Pilot LLM E2E Dry-Run Trial",
+  "date": "2026-05-05",
+  "canonical_run_id": "pilot-pdf-20260505-143724",
+  "package": "Aspose.PDF 26.4.0",
+  "mode": "real_llm_dry_run",
+  "template_mode": false,
+
+  "examples": [
+    {
+      "scenario_id": "pdf-merger",
+      "type": "Merger",
+      "options_class": "MergeOptions",
+      "build_result": "PASSED",
+      "run_result": "PASSED",
+      "exit_code": 0,
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "output_verified": true,
+      "notes": [
+        "Creates 2 input PDFs programmatically with Aspose.Pdf.Document",
+        "Uses MergeOptions with AddInput(x2) + AddOutput",
+        "Calls new Merger().Process(options)",
+        "Checks result.ResultCollection.Count > 0"
+      ]
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "type": "TextExtractor",
+      "options_class": "TextExtractorOptions",
+      "build_result": "PASSED",
+      "run_result": "PASSED",
+      "exit_code": 0,
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "output_verified": true,
+      "notes": [
+        "Creates input PDF programmatically with 'Hello Aspose PDF LowCode!' text",
+        "Uses TextExtractorOptions with AddInput only (no AddOutput — correct)",
+        "Calls new TextExtractor().Process(options)",
+        "Reads result as StringResult from ResultCollection[0]",
+        "Note: Evaluation watermark text expected due to unlicensed run"
+      ]
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "type": "Splitter",
+      "options_class": "SplitOptions",
+      "build_result": "FAILED",
+      "run_result": null,
+      "exit_code": 1,
+      "verdict": "BLOCKED_BUILD_FAILED",
+      "failure_reason": "LLM generated 'new PluginOptions()' (abstract base class) instead of 'new SplitOptions()'. Two build repairs also failed — LLM's prior for PluginOptions is too strong despite explicit class name constraint.",
+      "follow_up": "followup-pdf-splitter-options-class"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "type": "Optimizer",
+      "options_class": "OptimizeOptions",
+      "build_result": "FAILED",
+      "run_result": null,
+      "exit_code": 1,
+      "verdict": "BLOCKED_BUILD_FAILED",
+      "failure_reason": "LLM timeout during repair loop. Initial code used 'OptimizerLoadOptions' (wrong class name). Repair timed out, leaving uncompilable code.",
+      "follow_up": "followup-pdf-optimizer-options-class"
+    }
+  ],
+
+  "summary": {
+    "total": 4,
+    "passed": 2,
+    "failed": 2,
+    "pass_rate": "50%",
+    "pr_ready_count": 2,
+    "overall_verdict": "PARTIAL_PR_DRY_RUN_READY"
+  }
+}

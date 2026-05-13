@@ -1,0 +1,56 @@
+{
+  "artifact_type": "r2-final-verification",
+  "sprint": "Sprint R2 Revised — PDF Optimizer Repair Constraint Injection Fix and Rerun",
+  "date": "2026-05-08",
+  "phase": "Phase 9 — Final Verification",
+
+  "verification_results": {
+    "python_compileall": "CLEAN — 0 errors",
+    "dotnet_build_dll_reflector": "Build succeeded. 0 Warning(s). 0 Error(s).",
+    "pytest_unit": "1025 passed in 37.00s"
+  },
+
+  "test_count_before_r2": 1021,
+  "test_count_after_r2": 1025,
+  "tests_added_this_sprint": 4,
+
+  "new_tests_r2": [
+    "TestPdfOptimizerRepairPromptForbiddenConstraint::test_code_generator_optimizer_repair_prompt_includes_datasources_forbidden_constraint",
+    "TestPdfOptimizerRepairPromptForbiddenConstraint::test_code_generator_optimizer_repair_prompt_includes_pluginoptions_forbidden_constraint",
+    "TestPdfOptimizerRepairPromptForbiddenConstraint::test_code_generator_optimizer_repair_prompt_includes_filecopy_forbidden_constraint",
+    "TestPdfOptimizerRepairPromptForbiddenConstraint::test_existing_splitter_repair_constraints_not_broken"
+  ],
+
+  "test_fix_this_sprint": "TestPdfSplitterOptimizerBackfilledToBacklog::test_pdf_splitter_optimizer_backfilled_to_backlog — assertion updated: optimizer_entry['status'] now accepts 'resolved' (previously hardcoded '== open'); Optimizer resolved in Sprint R2 first PASS.",
+
+  "no_regressions": true,
+  "existing_tests_pass": true,
+  "all_new_tests_pass": true,
+
+  "files_changed_this_sprint": [
+    "src/plugin_examples/generator/code_generator.py (repair prompt FORBIDDEN constraint injection)",
+    "tests/unit/test_code_quality_sprint.py (4 new tests for forbidden constraint in repair prompt)",
+    "tests/unit/test_lifecycle_hardening.py (1 test updated: optimizer status assertion accepts resolved)",
+    "workspace/backlog/pdf/examples-backlog.json (optimizer entry status=resolved)",
+    "workspace/verification/latest/families/pdf/example-lifecycle.json (optimizer BACKLOGGED→PR_CANDIDATE)",
+    "workspace/verification/latest/family-generation-readiness-rank.json (pdf passed_count=4, backlogged=0)",
+    "workspace/verification/latest/open-taskcard-closure-matrix.json (3 taskcards CLOSED, open 18→15)",
+    "docs/discovery/open-taskcard-closure-matrix.md (synced to open 15)"
+  ],
+
+  "artifacts_created_this_sprint": [
+    "workspace/verification/latest/r2-optimizer-repair-constraint-preflight.json",
+    "workspace/verification/latest/r2-post-fix-test-results.json",
+    "workspace/verification/latest/r2-pdf-optimizer-env-preflight.json",
+    "workspace/verification/latest/r2-pdf-optimizer-rerun-result.json",
+    "workspace/verification/latest/r2-pdf-publication-scope-recommendation.json",
+    "workspace/verification/latest/r2-pdf-lifecycle-readiness-update.json",
+    "workspace/verification/latest/r2-final-verification.json",
+    "docs/plans/r2-pdf-lifecycle-readiness-update.md",
+    "docs/plans/r2-final-verification.md"
+  ],
+
+  "gate_9_verdict": "PASS",
+  "r2_overall_verdict": "R2_OPTIMIZER_REPAIR_CONSTRAINT_FIXED_AND_PR_READY",
+  "sprint_complete": true
+}

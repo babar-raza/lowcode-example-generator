@@ -1,0 +1,64 @@
+{
+  "total_types": 5,
+  "role_summary": {
+    "workflow_root": 2,
+    "options": 3
+  },
+  "types": [
+    {
+      "full_name": "Aspose.Diagram.LowCode.DiagramConverter",
+      "name": "DiagramConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: DiagramConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodeLoadOptions",
+      "name": "LowCodeLoadOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeLoadOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodePdfSaveOptions",
+      "name": "LowCodePdfSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodePdfSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodeSaveOptions",
+      "name": "LowCodeSaveOptions",
+      "role": "options",
+      "confidence": 0.9,
+      "reason": "Name ends with Options: LowCodeSaveOptions",
+      "has_static_methods": false,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 0
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.PdfConverter",
+      "name": "PdfConverter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: PdfConverter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 2
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "review_date": "2026-04-30",
+  "sprint": "Words Readiness Review Sprint",
+  "package_id": "Aspose.Words",
+  "resolved_version": "26.4.0",
+  "nupkg_sha256": "ac9fea08e0bb83621268abd65af3d999714c563131234788fd0068438a657e11",
+  "selected_target_framework": "netstandard2.0",
+  "dependency_count": 17,
+  "key_dependencies": [
+    "SkiaSharp.3.119.0",
+    "System.Memory.4.5.5",
+    "System.Text.Encoding.CodePages.7.0.0",
+    "Microsoft.Extensions.DependencyInjection.6.0.2"
+  ],
+  "catalog_path": "workspace/runs/discovery-words-20260430-212206/catalog/words/api-catalog.json",
+  "discovery_run_id": "discovery-words-20260430-212206",
+  "matched_lowcode_namespace": "Aspose.Words.LowCode",
+  "namespace_matched_by_pattern": "Aspose.Words.LowCode",
+  "public_type_count": 25,
+  "public_method_count": 230,
+  "reflection_errors": [],
+  "reflection_status": "clean",
+  "type_breakdown": {
+    "operation_facade": 9,
+    "settings_model": 9,
+    "options": 3,
+    "enum": 2,
+    "abstract_base": 1,
+    "data_source_adapter": 1
+  },
+  "operation_facades": [
+    "Comparer", "Converter", "MailMerger", "Merger", "Processor",
+    "Replacer", "ReportBuilder", "Splitter", "Watermarker"
+  ],
+  "options_types": ["MailMergeOptions", "ReportBuilderOptions", "SplitOptions"],
+  "notable_findings": [
+    "MailMergeDataSource has no consumers in LowCode API — only static Create() factory methods; reclassified from workflow_root (confidence 0.70) to data_source_adapter (confidence 0.95)",
+    "SignerContext has no corresponding Signer class in LowCode namespace — consumer is unknown; likely accessed via Processor or non-LowCode API",
+    "Watermarker.SetImage stream overloads require SKBitmap (SkiaSharp native) — file-path overloads are safe for generation",
+    "Splitter.Split() requires SplitOptions with SplitCriteria enum — enum values not in catalog; needs separate enumeration",
+    "MailMerger and ReportBuilder require template+data coupling — cannot generate without known fixture field names",
+    "Processor uses fluent instance pattern (From/To/Execute) with no explicit constructor in catalog — default constructor assumed"
+  ],
+  "eligibility_verdict": "eligible_for_partial_controlled_pilot",
+  "eligible_scenario_count": 4,
+  "blocked_scenario_count": 6
+}

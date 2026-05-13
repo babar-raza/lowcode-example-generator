@@ -1,0 +1,37 @@
+{
+  "artifact_id": "lowcode-failed-verification-root-cause-register",
+  "created": "2026-05-09",
+  "sprint": "R0",
+
+  "taxonomy_categories": [
+    "WRONG_OPTIONS_CLASS", "FORBIDDEN_CORE_API_USAGE", "LLM_REPAIR_PROMPT_GAP",
+    "HALLUCINATED_NAMESPACE", "WRONG_METHOD_SIGNATURE", "WRONG_RESULT_ACCESS",
+    "MISSING_USING_DIRECTIVE", "WRONG_TYPE_ARGUMENT", "MISSING_NUGET_REFERENCE",
+    "NAMESPACE_NOT_FOUND", "WRONG_INPUT_FORMAT", "MISSING_FIXTURE_FILE",
+    "API_EXCEPTION", "OUTPUT_MISSING", "WRONG_OUTPUT_CONTENT", "UNKNOWN_RUNTIME_FAILURE",
+    "MISSING_FIXTURE", "MISSING_PAIR_FIXTURE", "MISSING_TEMPLATE_FIXTURE",
+    "MISSING_ENUM_STRATEGY", "WRONG_FIXTURE_SHAPE", "CLASSIFICATION_GAP",
+    "LOWCODE_API_REQUIRES_STATEFUL_CONTEXT", "LOWCODE_API_NOT_STANDALONE",
+    "COMPLETION_QUEUE_GAP", "DENOMINATOR_GAP", "BACKLOG_SYNC_GAP",
+    "TASKCARD_SYNC_GAP", "POST_MERGE_VERIFICATION_GAP", "STALE_RECORD",
+    "VALIDATOR_FALSE_POSITIVE", "PRODUCT_API_LIMITATION"
+  ],
+
+  "known_cases": [
+    {"id": "RC-001", "family": "pdf", "example": "pdf-optimizer", "category": "WRONG_OPTIONS_CLASS", "resolved": true, "fix": "R2 constraint injection"},
+    {"id": "RC-002", "family": "pdf", "example": "pdf-optimizer", "category": "FORBIDDEN_CORE_API_USAGE", "resolved": true, "fix": "FORBIDDEN(DataSources) added"},
+    {"id": "RC-003", "family": "pdf", "example": "pdf-optimizer", "category": "LLM_REPAIR_PROMPT_GAP", "resolved": true, "fix": "Full REQUIRED+FORBIDDEN block"},
+    {"id": "RC-004", "family": "pdf", "example": "pdf-splitter", "category": "WRONG_DATASOURCE_USAGE", "resolved": true, "fix": "FileDataSource not FileSaveTarget"},
+    {"id": "RC-005", "family": "pdf", "example": "pdf-splitter", "category": "STALE_RECORD", "resolved": false, "required_action": "Mark superseded in runtime-failure-classifications.json"},
+    {"id": "RC-006", "family": "pdf", "example": "pdf-text-extractor", "category": "LLM_REPAIR_PROMPT_GAP", "resolved": true, "fix": "Full C# reference block"},
+    {"id": "RC-007", "family": "words", "example": "words-comparer,words-merger", "category": "MISSING_PAIR_FIXTURE", "resolved": false, "sprint": "R9"},
+    {"id": "RC-008", "family": "words", "example": "words-mailmerger", "category": "MISSING_TEMPLATE_FIXTURE", "resolved": false, "sprint": "R9"},
+    {"id": "RC-009", "family": "words", "example": "words-splitter-split", "category": "MISSING_ENUM_STRATEGY", "resolved": false, "sprint": "R9"},
+    {"id": "RC-010", "family": "words", "example": "context_classes_8", "category": "LOWCODE_API_REQUIRES_STATEFUL_CONTEXT", "resolved": false, "sprint": "R7", "note": "Assumed; needs formal classification"},
+    {"id": "RC-011", "family": "pdf", "example": "21_deferred_workflow_roots", "category": "COMPLETION_QUEUE_GAP", "resolved": false, "sprint": "R6.5"},
+    {"id": "RC-012", "family": "words", "example": "all_25_types", "category": "DENOMINATOR_GAP", "resolved": false, "sprint": "R7"},
+    {"id": "RC-013", "family": "all", "example": "n/a", "category": "BACKLOG_SYNC_GAP", "resolved": false},
+    {"id": "RC-014", "family": "all", "example": "n/a", "category": "TASKCARD_SYNC_GAP", "resolved": false, "sprint": "R6.5"},
+    {"id": "RC-015", "family": "all", "example": "n/a", "category": "POST_MERGE_VERIFICATION_GAP", "resolved": false, "sprint": "R7"}
+  ]
+}

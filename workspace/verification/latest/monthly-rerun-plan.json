@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "sprint": "R5",
+  "plan_type": "monthly_rerun_runbook",
+  "workflow_file": ".github/workflows/monthly-package-refresh.yml",
+  "existing_workflow_behavior": {
+    "trigger": "1st of each month at 06:00 UTC, or manual dispatch",
+    "runs_on": "windows-latest",
+    "what_it_does": "Runs python -m plugin_examples run --family {cells} to generate new examples",
+    "what_it_does_NOT_do": [
+      "Does not compare this run against prior run (no --compare-run flag)",
+      "Does not check evidence completeness",
+      "Does not verify published examples still build in target repo",
+      "Does not run regression detection"
+    ]
+  },
+  "planned_enhancements": {
+    "evidence_validation_step": {
+      "description": "After generation run, validate evidence completeness",
+      "command": "python -m plugin_examples evidence-check --family {family}",
+      "status": "PLANNED — requires evidence-check CLI command (not yet implemented)",
+      "depends_on": "REM-008 (evidence_completeness gate) is complete"
+    },
+    "denominator_integrity_step": {
+      "description": "Verify denominator files match current api-catalog hash",
+      "command": "python -m plugin_examples verify-denominator --family {family}",
+      "status": "PLANNED — requires catalog hash check in planner.py (REM-013 deferred)",
+      "depends_on": "B-013 resolution (catalog hash check in planner.py)"
+    },
+    "run_to_run_comparison_step": {
+      "description": "Compare this run against prior run to detect regressions",
+      "command": "python -m plugin_examples run --family {family} --compare-run {prior_run_id}",
+      "status": "PLANNED — requires --compare-run CLI flag (REM-016 deferred)",
+      "depends_on": "REM-016 (run-to-run comparison implementation)"
+    }
+  },
+  "what_monthly_runbook_should_check": [
+    "Did the generation run pass or fail? (check exit code)",
+    "How many scenarios passed reviewer? (check lifecycle records summary)",
+    "Did any previously-passing scenario now fail? (manual check until R4 comparison implemented)",
+    "Are all 22 FAMILY_SCOPED_EVIDENCE_FILES present? (manual check or evidence-check command)",
+    "Did the denominator api_catalog_sha256 change? (check cells.json, words.json, pdf.json)",
+    "Are all 17 scenario contracts still valid? (run test_scenario_contracts.py)"
+  ],
+  "current_status": "GENERATION_ONLY — monthly workflow runs generation but not regression check",
+  "next_action": "Implement REM-016 (run-to-run comparison) to enable automated regression detection in monthly workflow",
+  "test_for_monthly_schema": "No dedicated test yet — monthly run produces no structured output artifact to validate"
+}

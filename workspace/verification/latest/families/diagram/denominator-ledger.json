@@ -1,0 +1,50 @@
+{
+  "family": "diagram",
+  "denominator_basis": "PILOT_ALLOWED",
+  "total_types": 5,
+  "ready_count": 2,
+  "blocked_count": 3,
+  "unknown_count": 0,
+  "entries": [
+    {
+      "type_name": "DiagramConverter",
+      "full_name": "Aspose.Diagram.LowCode.DiagramConverter",
+      "namespace": "Aspose.Diagram.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "LowCodeLoadOptions",
+      "full_name": "Aspose.Diagram.LowCode.LowCodeLoadOptions",
+      "namespace": "Aspose.Diagram.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "LowCodePdfSaveOptions",
+      "full_name": "Aspose.Diagram.LowCode.LowCodePdfSaveOptions",
+      "namespace": "Aspose.Diagram.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "LowCodeSaveOptions",
+      "full_name": "Aspose.Diagram.LowCode.LowCodeSaveOptions",
+      "namespace": "Aspose.Diagram.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "PdfConverter",
+      "full_name": "Aspose.Diagram.LowCode.PdfConverter",
+      "namespace": "Aspose.Diagram.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    }
+  ]
+}

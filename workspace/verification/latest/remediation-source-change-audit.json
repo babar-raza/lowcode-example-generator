@@ -1,0 +1,177 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "verification_sprint": "keen-sparking-aho-verification-v1",
+  "phase": 2,
+  "phase_name": "Source Change Audit by Sprint",
+  "sprint_audits": {
+    "R1": {
+      "expected_artifacts": [
+        "pipeline/configs/denominators/cells.json",
+        "pipeline/configs/denominators/words.json",
+        "pipeline/configs/denominators/pdf.json",
+        "pipeline/schemas/denominator.schema.json",
+        "tests/unit/test_denominator_model.py"
+      ],
+      "artifact_status": {
+        "pipeline/configs/denominators/cells.json": "PRESENT_VERIFIED",
+        "pipeline/configs/denominators/words.json": "PRESENT_VERIFIED",
+        "pipeline/configs/denominators/pdf.json": "PRESENT_VERIFIED",
+        "pipeline/schemas/denominator.schema.json": "PRESENT_VERIFIED",
+        "tests/unit/test_denominator_model.py": "PRESENT_VERIFIED"
+      },
+      "source_change_main_py_evidence_dir": {
+        "expected": "Decouple evidence_dir from --metrics flag",
+        "status": "NOT_REQUIRED",
+        "finding": "runner.py lines 1207-1208 create evidence_dir unconditionally — pre-existing code resolved B-011",
+        "evidence": "workspace/verification/latest/evidence-dir-decoupling-review.json"
+      },
+      "sprint_classification": "PRESENT_VERIFIED",
+      "tests_added": 62,
+      "test_result": "ALL_PASS"
+    },
+    "R2": {
+      "expected_artifacts": [
+        "src/plugin_examples/gates/evidence_completeness.py",
+        "scripts/sync_taskcards.py",
+        "workspace/backlog/cells/",
+        "workspace/backlog/words/",
+        "src/plugin_examples/evidence_layout.py (GLOBAL_AGGREGATE_ALLOWLIST)",
+        "src/plugin_examples/publisher/release_status.py (cumulative_pr_count)"
+      ],
+      "artifact_status": {
+        "src/plugin_examples/gates/evidence_completeness.py": "PRESENT_VERIFIED",
+        "scripts/sync_taskcards.py": "PRESENT_VERIFIED",
+        "workspace/backlog/cells/excluded-scenarios.json": "PRESENT_VERIFIED",
+        "workspace/backlog/words/excluded-scenarios.json": "PRESENT_VERIFIED",
+        "evidence_layout.py_GLOBAL_AGGREGATE_ALLOWLIST": "PRESENT_VERIFIED — frozenset found in source",
+        "release_status.py_cumulative_pr_count": "PRESENT_VERIFIED — _count_cumulative_prs function confirmed"
+      },
+      "sprint_classification": "PRESENT_VERIFIED",
+      "tests_added": 17,
+      "test_result": "ALL_PASS"
+    },
+    "R3": {
+      "expected_artifacts": [
+        "pipeline/schemas/scenario-contract.schema.json",
+        "pipeline/contracts/cells/ (9 files)",
+        "pipeline/contracts/words/ (4 files)",
+        "pipeline/contracts/pdf/ (3 planned, 4 created)",
+        "tests/unit/test_scenario_contracts.py"
+      ],
+      "artifact_status": {
+        "pipeline/schemas/scenario-contract.schema.json": "PRESENT_VERIFIED",
+        "pipeline/contracts/cells (9 files)": "PRESENT_VERIFIED — cells-html-converter, image-converter, json-converter, pdf-converter, spreadsheet-converter, spreadsheet-locker, spreadsheet-merger, spreadsheet-splitter, text-converter",
+        "pipeline/contracts/words (4 files)": "PRESENT_VERIFIED — converter, replacer, splitter, watermarker",
+        "pipeline/contracts/pdf (4 files)": "PRESENT_VERIFIED — merger, text-extractor, splitter, optimizer (1 more than plan's 16)",
+        "tests/unit/test_scenario_contracts.py": "PRESENT_VERIFIED"
+      },
+      "contract_count_note": "Plan expected 16 contracts (9+4+3). R3 created 17 (9+4+4). Extra PDF contract is pdf-optimizer.json with lifecycle_status=REVIEWER_PASSED. Justified: all 4 PDF in-pipeline scenarios have contracts.",
+      "planner_py_contract_support": {
+        "expected": "Load contract, validate fixture_type, add catalog hash check",
+        "status": "DEFERRED — planner.py not modified",
+        "impact": "Contracts are static artifacts only; planner does not enforce them at runtime"
+      },
+      "sprint_classification": "PRESENT_VERIFIED (with noted planner.py deferral)",
+      "tests_added": 43,
+      "test_result": "ALL_PASS"
+    },
+    "R4": {
+      "expected_artifacts": [
+        "workspace/queues/example-completion-queue.json",
+        "workspace/verification/latest/run-to-run-comparison-design.json",
+        "--compare-run flag in __main__.py",
+        "regression_detected in example_lifecycle.py",
+        "tests/unit/test_completion_queue.py"
+      ],
+      "artifact_status": {
+        "workspace/queues/example-completion-queue.json": "PRESENT_VERIFIED — 17 entries",
+        "workspace/verification/latest/run-to-run-comparison-design.json": "PRESENT_VERIFIED — design document",
+        "__compare_run_flag_in_main_py": "MISSING — not implemented",
+        "regression_detected_in_lifecycle": "MISSING — not implemented",
+        "tests/unit/test_completion_queue.py": "PRESENT_VERIFIED"
+      },
+      "sprint_classification": "PARTIAL — completion queue present, run-to-run comparison design-only",
+      "deferred_items": ["REM-014 (queue state machine update)", "REM-016 (compare-run implementation)"],
+      "tests_added": 21,
+      "test_result": "ALL_PASS"
+    },
+    "R5": {
+      "expected_artifacts": [
+        "workspace/verification/latest/monthly-rerun-plan.json",
+        ".github/workflows/monthly-package-refresh.yml (regression check job)",
+        "docs/ci/monthly-rerun-runbook.md"
+      ],
+      "artifact_status": {
+        "workspace/verification/latest/monthly-rerun-plan.json": "PRESENT_VERIFIED",
+        "monthly_workflow_evidence_validation": "PRESENT_VERIFIED — 'Validate evidence integrity' step runs test_denominator_model.py and test_scenario_contracts.py",
+        "monthly_workflow_dotnet_regression_check": "MISSING — not implemented (deferred)",
+        "docs/ci/monthly-rerun-runbook.md": "DEFERRED — markdown file creation not permitted per user instructions"
+      },
+      "sprint_classification": "PARTIAL — evidence validation added, dotnet build regression not automated",
+      "tests_added": 0,
+      "test_result": "N/A (no new tests)"
+    },
+    "R6": {
+      "expected_artifacts": [
+        "workspace/verification/latest/families/words/split-criteria-investigation.json",
+        "workspace/verification/latest/families/words/paired-fixture-strategy.json",
+        "src/plugin_examples/verifier_bridge/output_validator.py",
+        "docs/discovery/words-mailmerger-fixture.md"
+      ],
+      "artifact_status": {
+        "split_criteria_investigation": "PRESENT_VERIFIED",
+        "paired_fixture_strategy": "PRESENT_VERIFIED",
+        "output_validator_py": "DEFERRED — not implemented (medium blast radius)",
+        "mailmerger_fixture_doc": "DEFERRED — markdown creation not permitted"
+      },
+      "sprint_classification": "PARTIAL — investigation complete, implementation deferred",
+      "tests_added": 0,
+      "test_result": "N/A"
+    },
+    "R7": {
+      "expected_artifacts": [
+        "workspace/verification/latest/pdf-optimizer-status-reconciliation.json",
+        "workspace/verification/latest/pdf-pr3-publication-readiness.json"
+      ],
+      "artifact_status": {
+        "pdf_optimizer_status_reconciliation": "PRESENT_VERIFIED",
+        "pdf_pr3_publication_readiness": "PRESENT_VERIFIED"
+      },
+      "unauthorized_prs": "NONE — no PRs created during R7",
+      "sprint_classification": "PRESENT_VERIFIED",
+      "tests_added": 0
+    },
+    "R8": {
+      "expected_artifacts": [
+        "workspace/verification/latest/tc14-production-post-reconciliation.json"
+      ],
+      "artifact_status": {
+        "tc14_production_post_reconciliation": "PRESENT_VERIFIED"
+      },
+      "ledger_unchanged": true,
+      "ledger_entry_count": 2,
+      "sprint_classification": "PRESENT_VERIFIED",
+      "tests_added": 0
+    },
+    "R9": {
+      "expected_artifacts": [
+        "workspace/verification/latest/final-production-readiness-gate.json"
+      ],
+      "artifact_status": {
+        "final_production_readiness_gate": "PRESENT_VERIFIED — all 12 gate checks PASS"
+      },
+      "sprint_classification": "PRESENT_VERIFIED",
+      "tests_added": 0
+    }
+  },
+  "overall_source_change_audit": {
+    "fully_implemented_sprints": ["R1", "R2", "R3", "R7", "R8", "R9"],
+    "partially_implemented_sprints": ["R4", "R5", "R6"],
+    "total_new_files": "26+ files created",
+    "total_modified_files": 3,
+    "source_code_files_changed": 2,
+    "no_publisher_code_touched": true,
+    "no_generation_code_touched": true,
+    "no_metrics_code_touched": true
+  }
+}

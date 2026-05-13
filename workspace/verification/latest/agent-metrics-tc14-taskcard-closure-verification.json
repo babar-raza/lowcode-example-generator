@@ -1,0 +1,60 @@
+{
+  "sprint": "TC14-09 Independent Verification and Final Closure",
+  "phase": "Phase 4 — TC14 Taskcard Closure Verification",
+  "timestamp": "2026-05-08T00:00:00Z",
+  "verdict": "ALL_TC14_TASKCARDS_CLOSED",
+
+  "newly_closed": [
+    {
+      "id": "TC14-09-independent-verification",
+      "title": "Independent read-only audit of all Sprint 2 evidence — confirm 1 production row, all gates verified, no secrets",
+      "closed_in": "TC14 Independent Verification and Final Closure Sprint",
+      "closed_date": "2026-05-08",
+      "evidence": "Phase 0-3 all PASS. Human sheet confirmation received. 28 ledger+payload gates + 10 safety gates = 38 total gates PASS. TC14_FULLY_VERIFIED_AND_CLOSED."
+    }
+  ],
+
+  "already_closed_confirmed": [
+    {
+      "id": "TC14-03-production-gate-tests",
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "TC14 Source Gate and Production-Shaped Dry Run Sprint",
+      "note": "14 production gate tests added and passing"
+    },
+    {
+      "id": "TC14-04-production-shaped-dry-run",
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "TC14 Source Gate and Production-Shaped Dry Run Sprint",
+      "note": "14 dry-run gates all PASS"
+    },
+    {
+      "id": "TC14-05-production-approval-checklist",
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "TC14 One-Row Production POST Sprint",
+      "note": "18-item checklist completed, human approval obtained"
+    },
+    {
+      "id": "TC14-06-one-row-production-post",
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "TC14 One-Row Production POST Sprint",
+      "note": "posted=true, http_status=200, run_id=pilot-cells-20260508-112957, 10 gates PASS"
+    },
+    {
+      "id": "TC14-08-rollback-disable-verification",
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "TC14 One-Row Production POST Sprint",
+      "note": "Rollback posted=false, reason=dry_run, instant disable confirmed"
+    }
+  ],
+
+  "matrix_files_updated": [
+    "workspace/verification/latest/open-taskcard-closure-matrix.json",
+    "docs/discovery/open-taskcard-closure-matrix.md"
+  ],
+
+  "summary_before": {"total": 75, "closed": 57, "open": 18},
+  "summary_after": {"total": 75, "closed": 58, "open": 17},
+
+  "all_tc14_taskcards_closed": true,
+  "tc14_series_complete": true
+}

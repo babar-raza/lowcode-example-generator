@@ -1,0 +1,61 @@
+{
+  "gate": "GATE_8_AFTER_FIX",
+  "date": "2026-05-04",
+  "policy_verdict": "ALL_PASS",
+  "readme_files": [
+    {
+      "file_or_repo": "workspace/pr-dry-run/cells-controlled-pilot/README.md",
+      "all_aspose_net_links_found": [
+        "https://products.aspose.net/cells",
+        "https://docs.aspose.net/cells",
+        "https://reference.aspose.net/cells",
+        "https://kb.aspose.net/cells",
+        "https://blog.aspose.net/categories/aspose.cells-plugin-family/",
+        "https://forum.aspose.net/c/cells/",
+        "https://purchase.aspose.net/temporary-license",
+        "https://about.aspose.net/contact/"
+      ],
+      "forbidden_aspose_com_links": [],
+      "platform_path_errors": [],
+      "wrong_blog_links": [],
+      "wrong_contact_links": [],
+      "missing_required_links": [],
+      "kb_link_present": true,
+      "contact_link_present": true,
+      "pass_fail_under_new_policy": "PASS",
+      "audit_verdict": "PASS",
+      "readme_bytes": 5169
+    },
+    {
+      "file_or_repo": "workspace/pr-dry-run/words-controlled-pilot/README.md",
+      "all_aspose_net_links_found": [
+        "https://products.aspose.net/words",
+        "https://docs.aspose.net/words",
+        "https://reference.aspose.net/words",
+        "https://kb.aspose.net/words",
+        "https://blog.aspose.net/categories/aspose.words-plugin-family/",
+        "https://forum.aspose.net/c/words/",
+        "https://purchase.aspose.net/temporary-license",
+        "https://about.aspose.net/contact/"
+      ],
+      "forbidden_aspose_com_links": [],
+      "platform_path_errors": [],
+      "wrong_blog_links": [],
+      "wrong_contact_links": [],
+      "missing_required_links": [],
+      "kb_link_present": true,
+      "contact_link_present": true,
+      "pass_fail_under_new_policy": "PASS",
+      "audit_verdict": "PASS",
+      "readme_bytes": 4425
+    }
+  ],
+  "fix_summary": {
+    "aspose_com_links_removed": 7,
+    "aspose_net_links_added": 8,
+    "kb_links_added": 2,
+    "contact_links_corrected": 2,
+    "blog_urls_corrected": 2,
+    "platform_suffix_removed": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sprint_id": "R1",
+  "generated_at": "2026-05-08T00:00:00Z",
+  "files_created": [
+    "pipeline/configs/denominators/cells.json",
+    "pipeline/configs/denominators/words.json",
+    "pipeline/configs/denominators/pdf.json",
+    "pipeline/schemas/denominator.schema.json",
+    "tests/unit/test_denominator_model.py",
+    "workspace/verification/latest/evidence-dir-decoupling-review.json",
+    "workspace/verification/latest/remediation-execution-state.json"
+  ],
+  "files_modified": [],
+  "files_deleted": [],
+  "source_code_changes": false,
+  "forbidden_files_touched": false,
+  "forbidden_files_list": [
+    "src/plugin_examples/generator/code_generator.py — NOT TOUCHED",
+    "src/plugin_examples/generator/packet_builder.py — NOT TOUCHED",
+    "src/plugin_examples/publisher/github_pr_publisher.py — NOT TOUCHED",
+    "src/plugin_examples/publisher/github_pr_merger.py — NOT TOUCHED",
+    "pipeline/configs/families/cells.yml — NOT TOUCHED",
+    "pipeline/configs/families/words.yml — NOT TOUCHED",
+    "pipeline/configs/families/pdf.yml — NOT TOUCHED"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "merge_type": "live_pr_merge_result",
+  "merge_date": "2026-05-05T07:05:27+00:00",
+  "family": "cells",
+  "pr_number": 4,
+  "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+  "live_merge_performed": true,
+  "merged": true,
+  "merge_commit_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+  "merge_method": "merge",
+  "pr_title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples",
+  "preconditions": {
+    "pr_not_merged": {
+      "result": "PASS",
+      "detail": "merged=false"
+    },
+    "pr_is_open": {
+      "result": "PASS",
+      "detail": "state=open"
+    },
+    "head_ref_not_main": {
+      "result": "PASS",
+      "detail": "plugin-examples/cells/readme/20260505-063855"
+    },
+    "target_repo_correct": {
+      "result": "PASS",
+      "detail": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples"
+    },
+    "no_unexpected_files": {
+      "result": "PASS",
+      "detail": "1 files, none unexpected"
+    },
+    "clean_checkout_evidence": {
+      "result": "PASS",
+      "detail": "ALL_PASS from cells-live-pr-clean-checkout-validation.json"
+    },
+    "ci_check": {
+      "result": "PASS",
+      "detail": "no CI configured in target repo \u2014 skipped"
+    }
+  }
+}

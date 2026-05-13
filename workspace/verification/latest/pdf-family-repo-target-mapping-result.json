@@ -1,0 +1,71 @@
+{
+  "sprint": "PDF Family Repo Target Mapping",
+  "date": "2026-05-05",
+  "verdict": "PDF_FAMILY_REPO_TARGET_MAPPING_COMPLETE_GENERATION_STILL_BLOCKED",
+  "does_not_enable_generation": true,
+  "gate0_result": "PASS",
+  "artifacts_inspected": 19,
+  "artifacts_verified": 17,
+  "artifacts_stale_expected": 1,
+  "artifacts_stale_verified": 1,
+  "phase1_audit": {
+    "old_target": {
+      "owner": "aspose",
+      "repo": "aspose-plugins-examples-dotnet",
+      "classification": "central_placeholder"
+    },
+    "new_target": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "classification": "family_specific"
+    },
+    "inference_basis": "Pattern from cells (aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples) and words (aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples)"
+  },
+  "phase2_access_check": {
+    "org_aspose_pdf_net": {
+      "http_status": 200,
+      "org_exists": true,
+      "display_name": "Aspose.PDF for .NET"
+    },
+    "repo_aspose_pdf_net_examples": {
+      "http_status": 404,
+      "repo_exists": false,
+      "interpretation": "Repo not yet created. Org confirmed correct. Human must create repo and grant token access."
+    }
+  },
+  "config_changes": [
+    {
+      "file": "pipeline/configs/families/pdf.yml",
+      "field": "github.published_plugin_examples_repo",
+      "old": "aspose/aspose-plugins-examples-dotnet",
+      "new": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "applied": true
+    }
+  ],
+  "tests_added": {
+    "test_family_config.py_TestFamilyPublishingTarget": 4,
+    "test_publishing.py_TestPdfPublishReadiness": 5,
+    "total_new": 9,
+    "all_pass": true
+  },
+  "total_tests": 792,
+  "test_delta": "+9 (was 783)",
+  "compileall": "PASS",
+  "dotnet_build": "PASS (0 errors, 0 warnings)",
+  "run_family_pdf_dry_run": "CORRECTLY_BLOCKED (BLOCKED_SOURCE_OF_TRUTH, discovery_only guard)",
+  "validate_publish_targets": "2/3 ready (cells, words). pdf: blocked_family_not_active (expected — discovery_only status)",
+  "pdf_status_unchanged": true,
+  "pdf_generation_policy": "BLOCKED (discovery_only)",
+  "taskcard_changes": {
+    "closed": ["followup-pdf-family-repo-target-mapping"],
+    "opened": ["followup-pdf-repo-provisioning"],
+    "matrix_before": {"total": 45, "closed": 38, "open": 7},
+    "matrix_after": {"total": 46, "closed": 39, "open": 7}
+  },
+  "open_blockers_for_pdf_generation": [
+    "pdf.yml status must be changed from discovery_only to active (human approval required)",
+    "followup-pdf-repo-provisioning: create aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples repo",
+    "followup-pdf-controlled-pilot-enablement: human approval gate"
+  ],
+  "sprint_conclusion": "PDF family publish target successfully mapped to family-specific repository (aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples) following the established pattern for cells and words. The target org exists (HTTP 200). The specific repo needs to be created (HTTP 404). Config is updated. 9 new tests enforce the correct target. PDF generation remains blocked (discovery_only). followup-pdf-family-repo-target-mapping is CLOSED_VERIFIED."
+}

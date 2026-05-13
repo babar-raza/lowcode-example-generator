@@ -1,0 +1,89 @@
+{
+  "title": "Agent Metrics Provider Policy Path Audit",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "objective": "Verify provider policy file location, inheritance, and confirm no drift for llm_professionalize or ollama routing",
+
+  "files_inspected": [
+    {
+      "path": "src/plugin_examples/llm_router/provider_policy.py",
+      "exists": true,
+      "lines": 181,
+      "role": "CANONICAL — the authoritative provider policy module",
+      "key_constants": {
+        "APPROVED_PROVIDERS": "frozenset({'llm_professionalize', 'ollama'})",
+        "UNAPPROVED_PROVIDERS": "frozenset({'gpt_oss', 'openai', 'azure_openai'})",
+        "FORBIDDEN_PIPELINE_MODELS": "frozenset({'gpt-4o-mini'})"
+      },
+      "key_functions": [
+        "get_policy_violations(provider_order) → list[str]",
+        "filter_to_approved(provider_order) → list[str]",
+        "classify_provider_hit(location, provider, context) → dict",
+        "is_forbidden_model(model_name) → bool",
+        "validate_provider_family(provider_family) → list[str]",
+        "validate_model_for_provider(provider_family, model_name) → list[str]",
+        "classify_llm_hit(text, location) → dict"
+      ]
+    },
+    {
+      "path": "src/plugin_examples/metrics/provider_policy.py",
+      "exists": false,
+      "note": "Does NOT exist. Confirmed via filesystem check."
+    }
+  ],
+
+  "relationship_verdict": {
+    "classification": "CORRECT_SINGLE_SOURCE",
+    "description": "There is exactly one provider_policy.py in the codebase: src/plugin_examples/llm_router/provider_policy.py. The metrics module does not have its own provider_policy.py, nor does it need one.",
+    "how_metrics_uses_provider_policy": "The metrics module (src/plugin_examples/metrics/) does not directly import provider_policy.py. Provider enforcement happens upstream in the LLM router layer. By the time metrics.MetricsCollector.record_call() is invoked, the router has already enforced provider policy — only approved providers (llm_professionalize, ollama) can reach the instrumented call paths.",
+    "no_shadowing": true,
+    "no_duplication": true,
+    "no_drift": true
+  },
+
+  "phase2_source_audit_error": {
+    "error_found": true,
+    "description": "The Phase 2 source audit (agent-metrics-plan-execution-source-audit.json) listed 'src/plugin_examples/metrics/provider_policy.py' as a file to audit and incorrectly reported it as existing with verdict PASS. This was an error — the file does not exist.",
+    "impact": "Low — the plan Section 5 requirement (approved providers: llm_professionalize, ollama) is correctly satisfied by the canonical llm_router/provider_policy.py. The metrics module does not need its own copy.",
+    "correction_action": "This audit file documents the truth. The Phase 2 source audit contained a false positive. No source code change required."
+  },
+
+  "provider_routing_verification": {
+    "llm_professionalize": {
+      "in_APPROVED_PROVIDERS": true,
+      "routed_via": "_call_openai_compatible() in router.py",
+      "instrumented": true,
+      "token_source": "resp.json()['usage']['total_tokens']",
+      "status": "CORRECT"
+    },
+    "ollama": {
+      "in_APPROVED_PROVIDERS": true,
+      "routed_via": "_call_ollama() in router.py",
+      "instrumented": true,
+      "token_source": "eval_count + prompt_eval_count",
+      "status": "CORRECT"
+    },
+    "gpt_oss": {
+      "in_APPROVED_PROVIDERS": false,
+      "in_UNAPPROVED_PROVIDERS": true,
+      "blocked_by_policy": true,
+      "note": "May appear as model_name under ollama (acceptable) but cannot be provider_family",
+      "status": "CORRECT — blocked as provider family"
+    },
+    "openai": {
+      "in_APPROVED_PROVIDERS": false,
+      "in_UNAPPROVED_PROVIDERS": true,
+      "blocked_by_policy": true,
+      "status": "CORRECT — blocked"
+    }
+  },
+
+  "plan_section_5_compliance": {
+    "approved_providers_defined": true,
+    "token_source_per_provider_correct": true,
+    "unapproved_providers_blocked": true,
+    "metrics_instrumentation_covers_approved_paths_only": true,
+    "verdict": "PASS — no provider policy drift; llm_professionalize and ollama routing unaffected by metrics layer"
+  },
+
+  "overall_verdict": "PASS — single canonical provider_policy.py at llm_router/; no metrics/provider_policy.py exists (correct, not needed); no drift; Phase 2 source audit had false positive for this file path"
+}

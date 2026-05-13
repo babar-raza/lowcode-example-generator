@@ -1,0 +1,32 @@
+{
+  "artifact": "diagram-live-pr-regenerated-token-permission-probe",
+  "phase": "Phase 2 - Strong Permission Probe",
+  "timestamp": "2026-05-12T08:15:00Z",
+  "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "probe_results": {
+    "repo_metadata_http": 200,
+    "can_read": true,
+    "can_push": true,
+    "can_admin": true,
+    "token_expiry_from_api": "2027-05-11T19:00:00Z",
+    "x_accepted_github_permissions": "allows_permissionless_access=true",
+    "x_oauth_scopes": "",
+    "git_blobs_write_http": 403,
+    "git_blobs_write_result": "FAIL",
+    "git_blobs_error": "Resource not accessible by personal access token"
+  },
+  "diagnosis": {
+    "classification": "TOKEN_VALUE_NOT_UPDATED_IN_SYSTEM_ENV",
+    "evidence": [
+      "TOKEN_EXPIRY=2027-05-11T19:00:00Z — same as previous sprint (token created 2026-05-11 with 1-year expiry). If a new token was regenerated today (2026-05-12), expiry would be 2027-05-12.",
+      "x-accepted-github-permissions=allows_permissionless_access=true — unchanged from previous sprint. This header confirms the fine-grained PAT still has no explicit resource scopes beyond public/permissionless access.",
+      "X-OAuth-Scopes is empty — consistent with fine-grained PAT that has no contents:write scope.",
+      "Git Data API /git/blobs returns HTTP 403 — identical to previous sprint failure."
+    ],
+    "conclusion": "The GITHUB_PAT system environment variable most likely still contains the original token value from before the operator's permission changes. Fine-grained PATs on GitHub must be explicitly REGENERATED to get a new token string after permission edits — editing permissions on an existing token does not change the token value, the user must regenerate to get a new string. The old token string continues to have the old (no Contents:write) permissions even after the UI shows updated permissions.",
+    "secondary_possibility": "Alternatively, a new token was created with the correct expiry date set manually to 2027-05-11 but still without Contents: Write scope."
+  },
+  "gate_result": "BLOCKED",
+  "gate_classification": "DIAGRAM_PUBLICATION_TOKEN_STILL_BLOCKED",
+  "sub_classification": "TOKEN_VALUE_NOT_UPDATED_IN_SYSTEM_ENV"
+}

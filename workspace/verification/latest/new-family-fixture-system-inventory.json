@@ -1,0 +1,70 @@
+{
+  "artifact_id": "new-family-fixture-system-inventory",
+  "created": "2026-05-11T11:40:27.012433",
+  "sprint": "new-family-fixture-harness-parallel",
+  "fixture_system": {
+    "registry_file": "workspace/manifests/fixture-registry.json",
+    "registry_module": "src/plugin_examples/fixture_registry/registry.py",
+    "registry_model": "FixtureRegistry with FixtureEntry dataclass",
+    "registration_method": "build_fixture_registry() reads from family config fixtures.sources",
+    "source_types": [
+      "github",
+      "generated",
+      "local"
+    ],
+    "programmatic_generation": "Standalone C# harness projects in workspace/fixture-validation/{family}-harness/",
+    "validation": "Harness creates fixture, runs LowCode API, checks output",
+    "existing_harness": "workspace/fixture-validation/pdf-harness/ (validated 4 fixture types)",
+    "can_register_without_promotion": true,
+    "can_validate_independently": true
+  },
+  "existing_fixtures": {
+    "pdf": {
+      "registry_entries": 1,
+      "source": "github (aspose-pdf/Aspose.PDF-for-.NET)",
+      "available": false,
+      "reason": "github_api_403_forbidden",
+      "programmatic_fixtures_validated": [
+        "programmatic_pdf_single",
+        "programmatic_pdf_multi_page",
+        "programmatic_pdf_pair",
+        "programmatic_pdf_known_text"
+      ]
+    },
+    "cells": "fixture sources in cells.yml (github-based, available status depends on GITHUB_TOKEN)",
+    "words": "programmatic input via Document+DocumentBuilder (no harness project, inline in generation)"
+  },
+  "new_family_fixture_plan": {
+    "diagram": {
+      "harness_path": "workspace/fixture-validation/diagram-harness/",
+      "package": "Aspose.Diagram",
+      "fixture_types": [
+        "programmatic_vsdx_single"
+      ],
+      "creation_api": "new Aspose.Diagram.Diagram() -> add page -> add shape -> save .vsdx",
+      "validation_api": "DiagramConverter.Process(input.vsdx, output.pdf) or PdfConverter.Process(input.vsdx, output.pdf)"
+    },
+    "email": {
+      "harness_path": "workspace/fixture-validation/email-harness/",
+      "package": "Aspose.Email",
+      "fixture_types": [
+        "programmatic_eml_single",
+        "programmatic_msg_single"
+      ],
+      "creation_api": "new Aspose.Email.MailMessage() -> set From/To/Subject/Body -> Save(.eml/.msg)",
+      "validation_api": "Converter.ConvertToMsg(stream, name, new FolderOutputHandler(outDir))"
+    },
+    "slides": {
+      "harness_path": "workspace/fixture-validation/slides-harness/",
+      "package": "Aspose.Slides.NET",
+      "fixture_types": [
+        "programmatic_pptx_single",
+        "programmatic_pptx_pair"
+      ],
+      "creation_api": "new Aspose.Slides.Presentation() -> add slide -> add shape -> save .pptx",
+      "validation_api": "Convert.ToPdf(input.pptx, output.pdf) and Merger.Process(files, output.pptx)"
+    }
+  },
+  "registry_integration_deferred": true,
+  "registry_integration_reason": "fixture-registry.json and registry.py are modified in working tree by prior sprint. Defer integration to post-healing."
+}

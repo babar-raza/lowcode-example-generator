@@ -1,0 +1,56 @@
+{
+  "review_type": "repo-access-self-service-preflight",
+  "review_date": "2026-05-01",
+  "sprint": "Repo Access Self-Service Resolution Review",
+  "purpose": "Confirm prior repo access work before attempting gh CLI check and deep diagnosis",
+
+  "prior_work_confirmed": [
+    {"claim": "cells.yml: published_plugin_examples_repo.owner=aspose-cells-net", "verified": true},
+    {"claim": "words.yml: published_plugin_examples_repo.owner=aspose-words-net", "verified": true},
+    {"claim": "token_present=true", "verified": true},
+    {"claim": "token_valid=true (babar-raza, own repo HTTP 200)", "verified": true},
+    {"claim": "cells: http_status=404 with valid auth", "verified": true},
+    {"claim": "words: http_status=404 with valid auth", "verified": true},
+    {"claim": "cells: http_status_unauthenticated=404", "verified": true},
+    {"claim": "words: http_status_unauthenticated=404", "verified": true},
+    {"claim": "both orgs exist (HTTP 200 on org endpoint)", "verified": true},
+    {"claim": "org_public_repos_visible=0 for both orgs", "verified": true},
+    {"claim": "repo_access_ready=false for both families", "verified": true},
+    {"claim": "pr_permission_ready=false for both families", "verified": true},
+    {"claim": "live_publish_ready=false for all families", "verified": true},
+    {"claim": "no live push occurred", "verified": true},
+    {"claim": "dry_run=True enforced in publisher", "verified": true},
+    {"claim": "words dry-run package exists at workspace/pr-dry-run/words-controlled-pilot/", "verified": true}
+  ],
+
+  "prior_diagnosis": {
+    "token_valid": true,
+    "root_cause_hypothesis": "Fine-grained PAT has not been granted repository access to aspose-cells-net and aspose-words-net org repos. GitHub returns 404 for private repos without access — same HTTP response as missing repos.",
+    "orgs_confirmed_exist": ["aspose-cells-net", "aspose-words-net"],
+    "org_repos_visible": 0,
+    "membership_check": "HTTP 403 — fine-grained PAT cannot read org membership"
+  },
+
+  "this_sprint_actions": [
+    "Check gh CLI availability",
+    "Attempt gh auth status using GH_TOKEN set from existing GITHUB_TOKEN (process scope only)",
+    "Run gh repo view for both target repos if gh CLI auth works",
+    "Re-run API access check with enhanced error classification",
+    "Probe git ls-remote safely if access is gained",
+    "Update family-repo-access-resolution.json with full results",
+    "Update publish readiness, package audits, taskcards, master plan"
+  ],
+
+  "forbidden_actions": [
+    "gh auth login",
+    "gh auth refresh",
+    "Create or store new tokens",
+    "Print/log/serialize GITHUB_TOKEN",
+    "Create live PRs",
+    "Push files to remote",
+    "Generate new examples",
+    "Merge anything"
+  ],
+
+  "verdict": "PREFLIGHT_COMPLETE_PROCEED_TO_GH_CLI_CHECK"
+}

@@ -1,0 +1,35 @@
+{
+  "artifact_type": "r3-resume-final-verification",
+  "sprint": "Sprint R3 Continuation — PDF PR #3 Live PR Creation",
+  "date": "2026-05-08",
+  "phase": "Phase 6 — Final Verification",
+
+  "compileall": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m compileall src -q",
+    "result": "PASS",
+    "errors": 0
+  },
+
+  "dotnet_build": {
+    "command": "dotnet build tools/DllReflector/DllReflector.csproj -c Release --nologo -v q",
+    "result": "PASS",
+    "errors": 0,
+    "warnings": 0
+  },
+
+  "pytest": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit -q --timeout=60",
+    "result": "PASS",
+    "passed": 1025,
+    "failed": 0,
+    "errors": 0,
+    "regressions_vs_r2": 0,
+    "duration_seconds": 28.49
+  },
+
+  "new_blocker_documented": "R3_BLOCKED_GITHUB_TOKEN_WRITE_ACCESS_REQUIRED",
+  "blocker_evidence": "workspace/verification/latest/r3-pdf-pr3-live-pr-result.json",
+  "pr_created": false,
+  "gate_6_verdict": "PASS",
+  "overall_sprint_verdict": "R3_BLOCKED_GITHUB_TOKEN_WRITE_ACCESS_REQUIRED"
+}

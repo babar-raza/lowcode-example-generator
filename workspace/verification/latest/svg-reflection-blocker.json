@@ -1,0 +1,19 @@
+{
+  "family": "svg",
+  "package_id": "Aspose.SVG",
+  "package_version": "26.4.0",
+  "package_sha256": "bcaf4f4a02790fe893bf9c0bd852827b6dbf3a74f47b2e19b54c5fa1fd1e8788",
+  "blocker_type": "MISSING_TRANSITIVE_DEPENDENCY",
+  "blocker_severity": "RESOLVED",
+  "discovery_status": "CONFIRMED_NO_LOWCODE",
+  "verified_at": "2026-05-09",
+  "original_blocker": "MISSING_TRANSITIVE_DEP: Microsoft.Extensions.Logging.Abstractions 7.0.0.0",
+  "resolution": "DllReflector run manually with --deps Microsoft.Extensions.Logging.Abstractions.dll succeeded (no crash). Catalog produced with 36 namespaces. No LowCode namespace found.",
+  "lowcode_namespace_exists": false,
+  "final_verdict": "CONFIRMED_NO_LOWCODE",
+  "namespace_count": 36,
+  "lowcode_namespaces": [],
+  "pipeline_status_note": "Pipeline still shows blocked_reflection_failed due to resolved-libs population gap. Since no LowCode namespace exists, svg is not a pipeline target.",
+  "action_required": "NONE — svg confirmed no LowCode namespace. Update svg.yml status to 'disabled' with no_lowcode_confirmed=true.",
+  "dllreflector_error_was": "System.IO.FileNotFoundException: Could not find assembly 'Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'"
+}

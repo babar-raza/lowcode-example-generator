@@ -1,0 +1,210 @@
+{
+  "family": "words",
+  "denominator_basis": "PILOT_ALLOWED",
+  "total_types": 25,
+  "ready_count": 4,
+  "blocked_count": 21,
+  "unknown_count": 0,
+  "entries": [
+    {
+      "type_name": "Comparer",
+      "full_name": "Aspose.Words.LowCode.Comparer",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ComparerContext",
+      "full_name": "Aspose.Words.LowCode.ComparerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Converter",
+      "full_name": "Aspose.Words.LowCode.Converter",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "ConverterContext",
+      "full_name": "Aspose.Words.LowCode.ConverterContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MailMergeDataSource",
+      "full_name": "Aspose.Words.LowCode.MailMergeDataSource",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "data_source_adapter",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MailMergeOptions",
+      "full_name": "Aspose.Words.LowCode.MailMergeOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MailMerger",
+      "full_name": "Aspose.Words.LowCode.MailMerger",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MailMergerContext",
+      "full_name": "Aspose.Words.LowCode.MailMergerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MergeFormatMode",
+      "full_name": "Aspose.Words.LowCode.MergeFormatMode",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Merger",
+      "full_name": "Aspose.Words.LowCode.Merger",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "MergerContext",
+      "full_name": "Aspose.Words.LowCode.MergerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Processor",
+      "full_name": "Aspose.Words.LowCode.Processor",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ProcessorContext",
+      "full_name": "Aspose.Words.LowCode.ProcessorContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "abstract_base",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Replacer",
+      "full_name": "Aspose.Words.LowCode.Replacer",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "ReplacerContext",
+      "full_name": "Aspose.Words.LowCode.ReplacerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ReportBuilder",
+      "full_name": "Aspose.Words.LowCode.ReportBuilder",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ReportBuilderContext",
+      "full_name": "Aspose.Words.LowCode.ReportBuilderContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "ReportBuilderOptions",
+      "full_name": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SignerContext",
+      "full_name": "Aspose.Words.LowCode.SignerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SplitCriteria",
+      "full_name": "Aspose.Words.LowCode.SplitCriteria",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "enum",
+      "lifecycle_state": "blocked_enum_not_runnable",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "SplitOptions",
+      "full_name": "Aspose.Words.LowCode.SplitOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "options",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Splitter",
+      "full_name": "Aspose.Words.LowCode.Splitter",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "SplitterContext",
+      "full_name": "Aspose.Words.LowCode.SplitterContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    },
+    {
+      "type_name": "Watermarker",
+      "full_name": "Aspose.Words.LowCode.Watermarker",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "operation_facade",
+      "lifecycle_state": "ready",
+      "pilot_scope": "in_scope"
+    },
+    {
+      "type_name": "WatermarkerContext",
+      "full_name": "Aspose.Words.LowCode.WatermarkerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "role": "settings_model",
+      "lifecycle_state": "blocked_pilot_not_in_scope",
+      "pilot_scope": "out_of_scope"
+    }
+  ]
+}

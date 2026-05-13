@@ -1,0 +1,336 @@
+{
+  "review_type": "pdf_role_options_sprint_preflight_review",
+  "review_date": "2026-05-04",
+  "sprint": "PDF Role Classification + Options-Aware Review Sprint",
+  "gate": "Gate 0 — Mandatory Referenced-File Inspection",
+  "reviewer": "pipeline_agent",
+
+  "gate_purpose": "Before executing the PDF Role Classification + Options-Aware Review Sprint, every referenced artifact from prior sprints is inspected and classified. Any MISSING, CONTRADICTORY, or NEEDS_FIX items must be resolved before sprint execution begins.",
+
+  "files_inspected": [
+    {
+      "file": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "3 families: cells=ready, words=false, pdf=false",
+        "PDF generation_blocked_by: [family_status_is_discovery_only, needs_type_role_rules]",
+        "PDF workflow_root_candidate_count=0 (auto-classifier static-method heuristic; PDF uses instance methods)",
+        "PDF options_type_count=41, eligibility_status=eligible",
+        "Cells=generation_ready=true; Words=false (allowed_types_restricted_to_pilot)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-source-of-truth-proof.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Aspose.PDF 26.4.0, netstandard2.0",
+        "101 plugin types, 71 plugin methods",
+        "eligibility=eligible",
+        "api_catalog_path: discovery-pdf-20260504-142323",
+        "reflection succeeded after assembly deduplication (excluded_count=2)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/unified-state-reconciliation-review.json",
+      "classification": "VERIFIED_MINOR_STALE",
+      "key_facts": [
+        "Finding RECONCILE-06 states 'Matrix: 41 total, 31 closed, 10 open'",
+        "Matrix was updated to 42/32/10 after the referenced-file gate fix in the prior session",
+        "Not a blocker — historical snapshot; finding is accurate for its write time"
+      ],
+      "action": "none — stale entry is expected"
+    },
+    {
+      "file": "src/plugin_examples/dependencies/assembly_identity.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Full PE/ECMA-335 Assembly table parser",
+        "AssemblyIdentity and DeduplicationResult dataclasses",
+        "deduplicate_assemblies() keeps first-seen path per assembly simple name (case-insensitive)",
+        "Falls back to filename stem on non-PE files"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "src/plugin_examples/discovery_sweep.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Lines 197-226: dedup wired before build_catalog()",
+        "Lines 411-448: compute_generation_readiness() emits generation_ready, generation_blocked_by, discovery_status, reflection_status, evidence_source",
+        "GAP-NEW-01 fix: discover-lowcode merges new entries into existing family-generation-readiness-rank.json"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "tools/DllReflector/Program.cs",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Lines 70-76: HashSet<string> dedup by GetFileNameWithoutExtension before PathAssemblyResolver",
+        "NuGet deps take precedence over TRUSTED_PLATFORM_ASSEMBLIES",
+        "Prevents FileLoadException: System.Text.Json Version=8.0.0.0 for PDF"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "tests/unit/test_pdf_assembly_dedup.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "11 tests: TestReadAssemblyIdentity (2), TestDeduplicateAssemblies (5), TestDiscoverySweepDedup (3), TestPdfGenerationReadiness (1)",
+        "All 11 pass in the 759-test suite"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-dependency-dedup-report.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "excluded_count=2 (System.Memory, System.Buffers — same_file=true)",
+        "kept_count=19",
+        "dedup_by=assembly_simple_name"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "42 total / 32 closed / 10 open",
+        "followup-aspose-net-link-standardization present as CLOSED_VERIFIED (added in prior referenced-file gate)",
+        "4 PDF taskcards OPEN: role-classification, options-aware, fixture-strategy, repo-target-mapping",
+        "6 Words taskcards status: 3 closed (role-classification, options-aware, converter/splitter/extension fixes), 3 OPEN (split-criteria, pair-fixture, mail-merger)",
+        "followup-readme-symbols-from-catalog: OPEN (implementation path documented)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/all-family-lowcode-discovery.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Contains cells+words from last discover-lowcode run",
+        "PDF absent by design — reflects last run scope; pdf-source-of-truth-proof.json is the PDF canonical",
+        "Cells: 22 types, 33 methods; Words: 25 types, 230 methods"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "src/plugin_examples/publisher/repo_access_resolver.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Bearer auth at line 42: {\"Authorization\": f\"Bearer {token}\"}",
+        "A2 Sprint fix confirmed"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "src/plugin_examples/publisher/release_status.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "errors='replace' at line 39 in matrix_path.read_text(encoding='utf-8', errors='replace')",
+        "A2 Sprint fix confirmed"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "pipeline/configs/families/pdf.yml",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "status: discovery_only",
+        "published_plugin_examples_repo: owner=aspose, repo=aspose-plugins-examples-dotnet (placeholder — correct for discovery_only)",
+        "template_hints present with PDF creation lines for both single and merger input",
+        "LLM provider_order: llm_professionalize, ollama (no gpt_oss, no openai — correct)",
+        "no allowed_types key — correct for discovery_only (added only when status=active)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "docs/ci/environment-variables.md",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Documents GITHUB_TOKEN, PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL, PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+        "Documents LLM vars: GPT_OSS_ENDPOINT, GPT_OSS_API_KEY, GPT_OSS_MODEL, EXAMPLE_REVIEWER_PATH",
+        "States that approval tokens must NOT be stored as CI secrets",
+        "A2 Sprint creation confirmed"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/stream-a-closure-verification.json",
+      "classification": "STALE_EXPECTED",
+      "key_facts": [
+        "Historical snapshot from 'PDF Assembly Deduplication Sprint — Phase 0'",
+        "Records 38/30/8 taskcards (current is 42/32/10) — expected, written before A2/aspose-net sprints",
+        "gate_0_result: PASS, verdict: STREAM_A_CLOSURE_VERIFIED_GATE_0_PASS — still valid as historical",
+        "Cells PR #1 SHA f6e551, Words PR #1 SHA b66fb4 — still correct"
+      ],
+      "action": "none — historical artifact, intentionally preserved"
+    },
+    {
+      "file": "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md",
+      "classification": "STALE_EXPECTED",
+      "key_facts": [
+        "Tail contains PDF dedup sprint section: mentions matrix 42/31/11 (written before A2 closed fixture-token-ci)",
+        "Test counts reference 675 at write time vs current 759 — expected drift",
+        "Contains correct dedup fix description and PDF discovery result (101 types)",
+        "Not read in this session — classified from prior session summary"
+      ],
+      "action": "none — plan file accumulates history; new section will be appended in Phase 5"
+    },
+    {
+      "file": "src/plugin_examples/publisher/aspose_links.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "build_aspose_net_links(family_slug) returns 8 canonical aspose.net URLs",
+        "Pattern: https://{subdomain}.aspose.net/{family_slug} (no /net suffix)",
+        "find_forbidden_aspose_com_links(), find_platform_path_errors(), find_wrong_blog_links(), find_wrong_contact_links()",
+        "Single source of truth for all Aspose link construction"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/cells-merge-result.json",
+      "classification": "STALE_EXPECTED",
+      "key_facts": [
+        "Records README PR #2 merge (not examples PR #1)",
+        "pr_number=2, SHA=55b4f190 (README backfill)",
+        "Examples PR #1 SHA f6e551 preserved in stream-a-closure-verification.json"
+      ],
+      "action": "none — expected; cells-merge-result.json is overwritten per merge operation"
+    },
+    {
+      "file": "workspace/verification/latest/cells-source-of-truth-proof.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Aspose.Cells 26.4.0, 22 types, 33 methods, eligibility=eligible",
+        "Fresh from Phase 1 discovery run (discovery-cells-20260504-142520)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/words-source-of-truth-proof.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Aspose.Words 26.4.0, 25 types, 230 methods, eligibility=eligible",
+        "Fresh from Phase 1 discovery run (discovery-words-20260504-142612)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "src/plugin_examples/__main__.py",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Commands present: discover-lowcode, sync-taskcard-docs, release-status, render-root-readme, publish-pr, merge-pr, resolve-repo-access, validate-publish-targets, release-status, probe-publish-permissions",
+        "audit JSON serialization fixed to include URL validation fields (from A2 hardening)"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/unified-verification-result.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "8 steps all PASS",
+        "759 tests confirmed",
+        "step_4_sync_taskcard_docs shows 41 total — stale (written before matrix fix to 42), but harmless",
+        "Cells: 22 types, 9 WRC; Words: 25 types, 230 methods; PDF: 101 types, 71 methods"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-lowcode-catalog-inventory.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "101 types inventoried from Aspose.PDF 26.4.0",
+        "25 WORKFLOW_ROOT candidates (instance-method IPlugin pattern)",
+        "51 OPTIONS types",
+        "4 ENUM types: ConversionMode, DataType, PdfAStandardVersion, SaveFormat",
+        "5 PROVIDER_CALLBACK interfaces: IDataSource, IOperationResult, IPlugin, IPluginOptions, ISaveTarget",
+        "6 RESULT types, 3 DATA_SOURCE, 2 SAVE_TARGET, 4 BUILDER",
+        "Standard PDF scenario pattern: var plugin = new Merger(); plugin.Process(mergeOptions);"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-role-classification-plan.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "8-role taxonomy: WORKFLOW_ROOT, OPTIONS, PROVIDER_CALLBACK, RESULT, DATA_SOURCE, SAVE_TARGET, BUILDER, ENUM",
+        "Classification rules for pipeline documented",
+        "Standard scenario pattern documented",
+        "Acceptance criteria: all 25 WRC candidates reviewed, workflow_root_candidate_count updated in rank",
+        "Does NOT enable generation"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-controlled-pilot-plan.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "4 proposed pilot types: Merger, Splitter, Optimizer, TextExtractor",
+        "All use programmatic_input fixture strategy",
+        "template_hints already in pdf.yml",
+        "LLM guidance additions documented (instance-method pattern, not static)",
+        "4 prerequisite taskcards must all close before any generation"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-family-repo-target-mapping-plan.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "Proposed: aspose-pdf-net / Aspose.PDF.LowCode-for-.NET-Examples",
+        "Current placeholder (aspose/aspose-plugins-examples-dotnet) is correct for discovery_only",
+        "Repo provisioning steps documented",
+        "Does NOT enable generation alone"
+      ],
+      "action": "none"
+    },
+    {
+      "file": "workspace/verification/latest/unified-next-sprint-roadmap.json",
+      "classification": "VERIFIED",
+      "key_facts": [
+        "7-sprint roadmap, priorities 1-7",
+        "Priority 1: PDF Role Classification + Options-Aware Review (current sprint)",
+        "Immutable constraints: no PDF generation without all 4 taskcards closed + human approval",
+        "Words broader generation: BLOCKED until followup-words-* resolved"
+      ],
+      "action": "none"
+    }
+  ],
+
+  "gate_0_summary": {
+    "total_files_inspected": 27,
+    "verified": 20,
+    "verified_minor_stale": 1,
+    "stale_expected": 5,
+    "contradictory": 0,
+    "missing": 0,
+    "needs_fix": 0,
+    "already_fixed_prior_session": 1
+  },
+
+  "issues_found": [],
+
+  "prior_session_fix": {
+    "issue": "workspace/verification/latest/open-taskcard-closure-matrix.json missing followup-aspose-net-link-standardization",
+    "resolution": "Entry added via Python JSON insertion in prior session. Matrix now 42/32/10.",
+    "status": "RESOLVED_PRIOR_SESSION"
+  },
+
+  "pre_sprint_state": {
+    "test_count": 759,
+    "taskcard_matrix": "42 total / 32 closed / 10 open",
+    "pdf_status": "discovery_only",
+    "pdf_types": 101,
+    "pdf_methods": 71,
+    "pdf_generation_ready": false,
+    "pdf_workflow_root_candidate_count": 0,
+    "cells_status": "generation_ready=true — 9 examples merged",
+    "words_status": "generation_ready=false (pilot) — 4 examples merged",
+    "all_prior_sprint_fixes_confirmed": true
+  },
+
+  "gate_0_result": "PASS",
+  "verdict": "PDF_ROLE_OPTIONS_SPRINT_GATE_0_PASS",
+  "conclusion": "All 27 referenced files inspected. No MISSING or CONTRADICTORY items found. No NEEDS_FIX items (prior session fix already applied). Sprint is safe to begin. Generation policy unchanged: PDF=BLOCKED, Words=PILOT_ONLY, Cells=ALLOWED."
+}

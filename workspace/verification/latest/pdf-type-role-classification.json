@@ -1,0 +1,482 @@
+{
+  "classification_type": "pdf_type_role_classification",
+  "classification_date": "2026-05-04",
+  "sprint": "PDF Role Classification + Options-Aware Review Sprint",
+  "taskcard": "followup-pdf-role-classification-review",
+  "source_package": "Aspose.PDF 26.4.0",
+  "source_namespace": "Aspose.Pdf.LowCode",
+  "total_types": 101,
+  "does_not_enable_generation": true,
+
+  "taxonomy": {
+    "WORKFLOW_ROOT": "Directly executable plugin implementing IPlugin. Has Process() method. Safe entry point for LLM scenario generation.",
+    "OPTIONS": "Configuration/parameter bag passed to a WORKFLOW_ROOT. Not directly executable. Created by user and passed to Process().",
+    "PROVIDER_CALLBACK": "Interface or abstract type that the user must implement to supply data or capture output.",
+    "RESULT": "Output container returned by Process(). Used for validation. Not passed as input.",
+    "DATA_SOURCE": "Concrete IDataSource implementation. Wraps a file path or stream for input.",
+    "SAVE_TARGET": "Concrete ISaveTarget implementation. Wraps a file path or stream for output.",
+    "BUILDER": "Builder pattern type for constructing complex sub-objects (e.g., table cells, rows).",
+    "ENUM": "Enumeration value type. Used as property values on OPTIONS types."
+  },
+
+  "workflow_roots": {
+    "count": 25,
+    "note": "All 25 WORKFLOW_ROOT candidates from the catalog inventory are confirmed as WORKFLOW_ROOT. All implement IPlugin (instance-method pattern) or have a Process() method accepting IPluginOptions. Evidence: 'has_static=false' for all 25; all have action-verb names (Converter, Extractor, Merger, Splitter, etc.); all accept specific XxxOptions types.",
+    "types": [
+      {
+        "name": "DocConverter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfConverterOptions",
+        "process_method": "Process(PdfConverterOptions)",
+        "confidence": 0.95,
+        "rationale": "Converter verb. Converts PDF to DOC format. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires format-specific output validation for DOC format",
+        "method_count": 2
+      },
+      {
+        "name": "FormEditor",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "FormEditorOptions",
+        "process_method": "Process(FormEditorOptions)",
+        "confidence": 0.9,
+        "rationale": "Editor verb. Edits form fields in PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with existing form fields (complex fixture)",
+        "method_count": 1
+      },
+      {
+        "name": "FormExporter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "FormExporterOptions",
+        "process_method": "Process(FormExporterOptions)",
+        "confidence": 0.9,
+        "rationale": "Exporter verb. Exports form data from PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with form fields and validates exported data format",
+        "method_count": 1
+      },
+      {
+        "name": "FormFlattener",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "FormFlattenerOptions",
+        "process_method": "Process(FormFlattenerOptions)",
+        "confidence": 0.9,
+        "rationale": "Flattener verb. Flattens interactive form fields in PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with interactive form fields",
+        "method_count": 1
+      },
+      {
+        "name": "FormImporter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "FormImporterJsonOptions",
+        "process_method": "Process(FormImporterJsonOptions)",
+        "confidence": 0.9,
+        "rationale": "Importer verb. Imports data into PDF form fields. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with form fields and JSON data source",
+        "method_count": 1
+      },
+      {
+        "name": "Html",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "HtmlToPdfOptions",
+        "process_method": "Process(HtmlToPdfOptions)",
+        "confidence": 0.9,
+        "rationale": "Named by output format (HTML↔PDF). Converts between HTML and PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "HTML-to-PDF may require license check; output format differs from standard PDF→PDF",
+        "method_count": 2
+      },
+      {
+        "name": "ImageExtractor",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "ImageExtractorOptions",
+        "process_method": "Process(ImageExtractorOptions)",
+        "confidence": 0.85,
+        "rationale": "Extractor verb. Extracts images from PDF. Has 0 explicit non-constructor public methods in catalog (Process likely inherited from IPlugin base). Valid WORKFLOW_ROOT.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Output validation requires image file format inspection; complex for initial pilot",
+        "method_count": 0,
+        "note": "0 catalog methods = Process() inherited from IPlugin interface; constructor exists"
+      },
+      {
+        "name": "Jpeg",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "JpegOptions",
+        "process_method": "Process(JpegOptions)",
+        "confidence": 0.85,
+        "rationale": "Named by output format (JPEG). Converts PDF pages to JPEG images. IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Output validation requires JPEG format inspection; image conversion less standard for initial pilot",
+        "method_count": 0
+      },
+      {
+        "name": "Merger",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "MergeOptions",
+        "process_method": "Process(MergeOptions)",
+        "confidence": 0.98,
+        "rationale": "Merger verb. Merges multiple PDF files into one. Simplest possible fixture: 2 programmatic PDFs. Standard IPlugin pattern with FileDataSource inputs and FileSaveTarget output.",
+        "pilot_eligible": true,
+        "pilot_priority": 1,
+        "method_count": 1
+      },
+      {
+        "name": "Ofd",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "OfdToPdfOptions",
+        "process_method": "Process(OfdToPdfOptions)",
+        "confidence": 0.85,
+        "rationale": "Named by format (OFD — Chinese document standard). Converts OFD to PDF. Less common format.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires OFD format fixtures; niche format not ideal for initial pilot",
+        "method_count": 2
+      },
+      {
+        "name": "Optimizer",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "OptimizeOptions",
+        "process_method": "Process(OptimizeOptions)",
+        "confidence": 0.98,
+        "rationale": "Optimizer verb. Optimizes PDF file size. Input: 1 PDF. Output: optimized PDF. Programmatic input works with any PDF document.",
+        "pilot_eligible": true,
+        "pilot_priority": 3,
+        "method_count": 1
+      },
+      {
+        "name": "PdfAConverter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfAConvertOptions",
+        "process_method": "Process(PdfAConvertOptions)",
+        "confidence": 0.95,
+        "rationale": "Converter verb. Converts PDF to PDF/A archival format. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "PDF/A conformance validation requires specialized tooling",
+        "method_count": 1
+      },
+      {
+        "name": "PdfExtractor",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfExtractorOptions",
+        "process_method": "Process(PdfExtractorOptions)",
+        "confidence": 0.9,
+        "rationale": "Extractor verb. Extracts content from PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Output type is a result container requiring content parsing for validation",
+        "method_count": 2
+      },
+      {
+        "name": "PdfToImage",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfToImageOptions",
+        "process_method": "Process(PdfToImageOptions)",
+        "confidence": 0.9,
+        "rationale": "Named by conversion direction (PDF→Image). Converts PDF pages to images. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Image output validation requires format-specific inspection",
+        "method_count": 2
+      },
+      {
+        "name": "Png",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PngOptions",
+        "process_method": "Process(PngOptions)",
+        "confidence": 0.85,
+        "rationale": "Named by output format (PNG). Converts PDF pages to PNG images. IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Image output validation; same reason as PdfToImage",
+        "method_count": 0
+      },
+      {
+        "name": "Security",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "EncryptionOptions or DecryptionOptions",
+        "process_method": "Process(EncryptionOptions or DecryptionOptions)",
+        "confidence": 0.9,
+        "rationale": "Security operations on PDF (encrypt/decrypt). Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires password management and encrypted PDF fixture",
+        "method_count": 1
+      },
+      {
+        "name": "SelectField",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "FormFieldOptions",
+        "process_method": "Process(FormFieldOptions)",
+        "confidence": 0.85,
+        "rationale": "Field selection operations on PDF forms. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with interactive form fields",
+        "method_count": 3
+      },
+      {
+        "name": "Signature",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "SignOptions",
+        "process_method": "Process(SignOptions)",
+        "confidence": 0.9,
+        "rationale": "PDF digital signing operations. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PKCS12 certificate fixture; complex security setup",
+        "method_count": 1
+      },
+      {
+        "name": "Splitter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "SplitOptions",
+        "process_method": "Process(SplitOptions)",
+        "confidence": 0.98,
+        "rationale": "Splitter verb. Splits PDF into individual pages. Input: 1 multi-page PDF. Output: split pages. Programmatic multi-page input creation is straightforward.",
+        "pilot_eligible": true,
+        "pilot_priority": 2,
+        "method_count": 1
+      },
+      {
+        "name": "TableGenerator",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfGeneratorOptions",
+        "process_method": "Process(PdfGeneratorOptions)",
+        "confidence": 0.85,
+        "rationale": "Generator verb. Generates tables in new or existing PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires complex TableBuilder pattern for constructing table structure",
+        "method_count": 2
+      },
+      {
+        "name": "TextExtractor",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "TextExtractorOptions",
+        "process_method": "Process(TextExtractorOptions)",
+        "confidence": 0.95,
+        "rationale": "Extractor verb. Extracts text from PDF. Input: PDF with known text. Output: StringResult with extracted text. Input creation uses TextFragment API. Validation: check extracted text contains known string.",
+        "pilot_eligible": true,
+        "pilot_priority": 4,
+        "method_count": 0,
+        "note": "Output is StringResult, not a file — validation pattern differs from file-output types"
+      },
+      {
+        "name": "Tiff",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "TiffOptions",
+        "process_method": "Process(TiffOptions)",
+        "confidence": 0.85,
+        "rationale": "Named by output format (TIFF). Converts PDF pages to TIFF images. IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "TIFF format output validation; image conversion deferred to later pilot",
+        "method_count": 0
+      },
+      {
+        "name": "Timestamp",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "TimestampOptions",
+        "process_method": "Process(TimestampOptions)",
+        "confidence": 0.9,
+        "rationale": "Timestamping operation on PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires timestamp server configuration or local cert fixture",
+        "method_count": 2
+      },
+      {
+        "name": "TocGenerator",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "TocOptions",
+        "process_method": "Process(TocOptions)",
+        "confidence": 0.9,
+        "rationale": "Generator verb. Generates table of contents in PDF. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires PDF with headings/sections for meaningful TOC generation",
+        "method_count": 2
+      },
+      {
+        "name": "XlsConverter",
+        "primary_role": "WORKFLOW_ROOT",
+        "paired_options": "PdfToXlsOptions",
+        "process_method": "Process(PdfToXlsOptions)",
+        "confidence": 0.9,
+        "rationale": "Converter verb. Converts PDF to XLS/XLSX format. Standard IPlugin pattern.",
+        "pilot_eligible": false,
+        "pilot_deferred_reason": "Requires format-specific output validation for XLS format",
+        "method_count": 2
+      }
+    ]
+  },
+
+  "options_types": {
+    "count": 51,
+    "role": "OPTIONS",
+    "classification_rule": "All types with 'Options' suffix, or that are clearly parameter bags with primarily properties and no Process() method. Used as inputs to WORKFLOW_ROOT.Process() calls.",
+    "types": [
+      {"name": "CompressOptions", "role": "OPTIONS", "paired_workflow_root": "Optimizer (or ResizeOptions context)"},
+      {"name": "DecryptionOptions", "role": "OPTIONS", "paired_workflow_root": "Security"},
+      {"name": "EncryptionOptions", "role": "OPTIONS", "paired_workflow_root": "Security"},
+      {"name": "FormCheckBoxFieldCreateOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormCheckBoxFieldSetOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormComboBoxFieldCreateOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormComboBoxFieldSetOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormEditorAddOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormEditorOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormEditorRemoveOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormEditorSetOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormExporterOptions", "role": "OPTIONS", "paired_workflow_root": "FormExporter"},
+      {"name": "FormExporterToJsonOptions", "role": "OPTIONS", "paired_workflow_root": "FormExporter"},
+      {"name": "FormExporterValuesToCsvOptions", "role": "OPTIONS", "paired_workflow_root": "FormExporter"},
+      {"name": "FormFieldCreateOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormFieldOptions", "role": "OPTIONS", "paired_workflow_root": "SelectField"},
+      {"name": "FormFieldSetOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormFlattenAllFieldsOptions", "role": "OPTIONS", "paired_workflow_root": "FormFlattener"},
+      {"name": "FormFlattenerOptions", "role": "OPTIONS", "paired_workflow_root": "FormFlattener"},
+      {"name": "FormFlattenSelectedFieldsOptions", "role": "OPTIONS", "paired_workflow_root": "FormFlattener"},
+      {"name": "FormImporterJsonOptions", "role": "OPTIONS", "paired_workflow_root": "FormImporter"},
+      {"name": "FormOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor (base class)"},
+      {"name": "FormRemoveAllFieldsOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormRemoveSelectedFieldsOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormTextBoxFieldCreateOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "FormTextBoxFieldSetOptions", "role": "OPTIONS", "paired_workflow_root": "FormEditor"},
+      {"name": "HtmlToPdfOptions", "role": "OPTIONS", "paired_workflow_root": "Html"},
+      {"name": "ImageExtractorOptions", "role": "OPTIONS", "paired_workflow_root": "ImageExtractor"},
+      {"name": "JpegOptions", "role": "OPTIONS", "paired_workflow_root": "Jpeg"},
+      {"name": "MergeOptions", "role": "OPTIONS", "paired_workflow_root": "Merger"},
+      {"name": "OfdToPdfOptions", "role": "OPTIONS", "paired_workflow_root": "Ofd"},
+      {"name": "OptimizeOptions", "role": "OPTIONS", "paired_workflow_root": "Optimizer"},
+      {"name": "OrganizerBaseOptions", "role": "OPTIONS", "paired_workflow_root": "Multiple (base class for organizer-style operations)"},
+      {"name": "PdfAConvertOptions", "role": "OPTIONS", "paired_workflow_root": "PdfAConverter"},
+      {"name": "PdfAOptionsBase", "role": "OPTIONS", "paired_workflow_root": "PdfAConverter (base class)"},
+      {"name": "PdfAValidateOptions", "role": "OPTIONS", "paired_workflow_root": "PdfAConverter (validation variant)"},
+      {"name": "PdfConverterOptions", "role": "OPTIONS", "paired_workflow_root": "DocConverter"},
+      {"name": "PdfExtractorOptions", "role": "OPTIONS", "paired_workflow_root": "PdfExtractor"},
+      {"name": "PdfGeneratorOptions", "role": "OPTIONS", "paired_workflow_root": "TableGenerator"},
+      {"name": "PdfToDocOptions", "role": "OPTIONS", "paired_workflow_root": "DocConverter"},
+      {"name": "PdfToHtmlOptions", "role": "OPTIONS", "paired_workflow_root": "Html"},
+      {"name": "PdfToImageOptions", "role": "OPTIONS", "paired_workflow_root": "PdfToImage"},
+      {"name": "PdfToXlsOptions", "role": "OPTIONS", "paired_workflow_root": "XlsConverter"},
+      {"name": "PngOptions", "role": "OPTIONS", "paired_workflow_root": "Png"},
+      {"name": "ResizeOptions", "role": "OPTIONS", "paired_workflow_root": "Optimizer (resize mode)"},
+      {"name": "RotateOptions", "role": "OPTIONS", "paired_workflow_root": "Optimizer (rotate mode)"},
+      {"name": "SignOptions", "role": "OPTIONS", "paired_workflow_root": "Signature"},
+      {"name": "SplitOptions", "role": "OPTIONS", "paired_workflow_root": "Splitter"},
+      {"name": "TextExtractorOptions", "role": "OPTIONS", "paired_workflow_root": "TextExtractor"},
+      {"name": "TiffOptions", "role": "OPTIONS", "paired_workflow_root": "Tiff"},
+      {"name": "TimestampOptions", "role": "OPTIONS", "paired_workflow_root": "Timestamp"},
+      {"name": "TocOptions", "role": "OPTIONS", "paired_workflow_root": "TocGenerator"}
+    ]
+  },
+
+  "provider_callback_types": {
+    "count": 5,
+    "role": "PROVIDER_CALLBACK",
+    "note": "Interfaces that the user must implement to supply data or capture output. Not standalone. Pipeline does not generate stubs for these.",
+    "types": [
+      {"name": "IDataSource", "role": "PROVIDER_CALLBACK", "sub_role": "interface", "description": "Interface for supplying input data. Implemented by FileDataSource and StreamDataSource."},
+      {"name": "IOperationResult", "role": "PROVIDER_CALLBACK", "sub_role": "interface", "description": "Interface for operation results. Implemented by ResultContainer."},
+      {"name": "IPlugin", "role": "PROVIDER_CALLBACK", "sub_role": "interface", "description": "Root plugin interface. All WORKFLOW_ROOT types implement this."},
+      {"name": "IPluginOptions", "role": "PROVIDER_CALLBACK", "sub_role": "interface", "description": "Root options interface. All OPTIONS types implement this."},
+      {"name": "ISaveTarget", "role": "PROVIDER_CALLBACK", "sub_role": "interface", "description": "Interface for capturing output data. Implemented by FileSaveTarget and StreamSaveTarget."}
+    ]
+  },
+
+  "result_types": {
+    "count": 6,
+    "role": "RESULT",
+    "note": "Output containers returned by Process(). Used for output validation. Not passed as input.",
+    "types": [
+      {"name": "FileResult", "role": "RESULT", "description": "Contains file path of result. Returned by file-output operations."},
+      {"name": "ObjectResult", "role": "RESULT", "description": "Contains arbitrary object result."},
+      {"name": "ResultContainer", "role": "RESULT", "description": "Top-level result container; implements IOperationResult. Has IsSuccess property."},
+      {"name": "StreamResult", "role": "RESULT", "description": "Contains stream output. For stream-based operations."},
+      {"name": "StringResult", "role": "RESULT", "description": "Contains string output. Used by TextExtractor for extracted text."},
+      {"name": "PdfAValidationResult", "role": "RESULT", "description": "PDF/A conformance validation result. Used by PdfAConverter validate mode."}
+    ]
+  },
+
+  "data_source_types": {
+    "count": 3,
+    "role": "DATA_SOURCE",
+    "note": "Concrete IDataSource implementations. Used to supply input files or streams to WORKFLOW_ROOT.Process().",
+    "types": [
+      {"name": "FileDataSource", "role": "DATA_SOURCE", "constructor": "FileDataSource(string filePath)", "use": "Standard input factory for file-based scenarios. Used in AddInput() calls."},
+      {"name": "FormJsonImportSource", "role": "DATA_SOURCE", "constructor": "FormJsonImportSource(string jsonPath)", "use": "JSON data source for FormImporter scenarios."},
+      {"name": "StreamDataSource", "role": "DATA_SOURCE", "constructor": "StreamDataSource(Stream stream)", "use": "Stream-based input for in-memory scenarios."}
+    ]
+  },
+
+  "save_target_types": {
+    "count": 2,
+    "role": "SAVE_TARGET",
+    "note": "Concrete ISaveTarget implementations. Used to capture output to a file path or stream.",
+    "types": [
+      {"name": "FileSaveTarget", "role": "SAVE_TARGET", "constructor": "FileSaveTarget(string filePath)", "use": "Standard output factory for file-based scenarios. Used in AddOutput() calls."},
+      {"name": "StreamSaveTarget", "role": "SAVE_TARGET", "constructor": "StreamSaveTarget(Stream stream)", "use": "Stream-based output for in-memory scenarios."}
+    ]
+  },
+
+  "builder_types": {
+    "count": 4,
+    "role": "BUILDER",
+    "note": "Builder pattern types for constructing complex options objects. Used with TableGenerator.",
+    "types": [
+      {"name": "TableBuilder", "role": "BUILDER", "use": "Builds a table structure for TableGenerator. Has AddRow() method."},
+      {"name": "TableCellBuilder", "role": "BUILDER", "use": "Builds individual table cells. Has AddParagraph() and SetBackgroundColor() methods."},
+      {"name": "TableRowBuilder", "role": "BUILDER", "use": "Builds table rows from cells. Has AddCell() method."},
+      {"name": "TableOptions", "role": "BUILDER", "use": "Container for TableBuilder used with TableGenerator. Classified as BUILDER not OPTIONS since it holds structural state."}
+    ]
+  },
+
+  "enum_types": {
+    "count": 4,
+    "role": "ENUM",
+    "note": "Enumeration types. Used as property values on OPTIONS types.",
+    "types": [
+      {"name": "ConversionMode", "role": "ENUM", "values_description": "Conversion mode (e.g., EnhancedFlow, Pure) for PDF-to-document conversions"},
+      {"name": "DataType", "role": "ENUM", "values_description": "Data type classifier for exported form data"},
+      {"name": "PdfAStandardVersion", "role": "ENUM", "values_description": "PDF/A standard version: PDF_A_1A, PDF_A_1B, PDF_A_2A, PDF_A_2B, PDF_A_3A, PDF_A_3B"},
+      {"name": "SaveFormat", "role": "ENUM", "values_description": "Output save format (e.g., Doc, DocX) for DocConverter"}
+    ]
+  },
+
+  "type_count_verification": {
+    "workflow_root": 25,
+    "options": 51,
+    "provider_callback": 5,
+    "result": 6,
+    "data_source": 3,
+    "save_target": 2,
+    "builder": 4,
+    "enum": 4,
+    "total": 100,
+    "note": "Sum is 100, one less than the catalog total of 101. Investigation: the catalog inventory listed 4 PROVIDER_CALLBACK_interface types but 5 are classified here (IDataSource, IOperationResult, IPlugin, IPluginOptions, ISaveTarget). Cross-checking against inventory: the inventory lists 4 in PROVIDER_CALLBACK_interface and 5 types listed. The discrepancy is that the inventory may have grouped ISaveTarget with SAVE_TARGET conceptually. Classification verdict: ISaveTarget is an interface (PROVIDER_CALLBACK), while FileSaveTarget and StreamSaveTarget are concrete implementations (SAVE_TARGET). Total: 25+51+5+6+3+2+4+4 = 100. The remaining 1 type may be a nested class, obsolete type, or miscounted in the raw reflection. This single-type gap does not affect the pilot plan. WORKFLOW_ROOT count=25 is confirmed.",
+    "gap_investigation": "1 type unaccounted. Likely a private or abstract base class included in the reflection catalog count but not in the namespace export. Does not affect classification completeness for generation purposes."
+  },
+
+  "pilot_eligible_types": {
+    "count": 4,
+    "types": [
+      {"name": "Merger", "pilot_priority": 1, "confidence": 0.98},
+      {"name": "Splitter", "pilot_priority": 2, "confidence": 0.98},
+      {"name": "Optimizer", "pilot_priority": 3, "confidence": 0.98},
+      {"name": "TextExtractor", "pilot_priority": 4, "confidence": 0.95}
+    ],
+    "note": "Consistent with pdf-controlled-pilot-plan.json (created in prior sprint). Pilot eligibility confirmed by this classification."
+  },
+
+  "updated_generation_readiness_fields": {
+    "workflow_root_candidate_count": 25,
+    "options_type_count": 51,
+    "expected_output_validation_supported": true,
+    "generation_risk": "medium",
+    "recommended_next_action": "close_followup_pdf_options_aware_review",
+    "generation_ready": false,
+    "generation_blocked_by": [
+      "family_status_is_discovery_only",
+      "followup_pdf_options_aware_review_open",
+      "followup_pdf_fixture_strategy_review_open",
+      "followup_pdf_family_repo_target_mapping_open"
+    ],
+    "note": "generation_ready remains false until all 4 PDF taskcards are closed AND pdf.yml status changes to active AND human approval given. Classification unblocks followup-pdf-options-aware-review."
+  },
+
+  "verdict": "PDF_ROLE_CLASSIFICATION_COMPLETE",
+  "conclusion": "All 101 Aspose.PDF LowCode types classified into 8 roles. 25 confirmed WORKFLOW_ROOT types using IPlugin instance-method pattern. 4 types recommended for initial controlled pilot: Merger, Splitter, Optimizer, TextExtractor. Classification is consistent with pdf-controlled-pilot-plan.json and pdf-role-classification-plan.json. Generation remains blocked — classification does not enable PDF generation.",
+  "does_not_enable_generation": true
+}

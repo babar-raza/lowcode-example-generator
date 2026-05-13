@@ -1,0 +1,77 @@
+{
+  "preflight_type": "cells_merge_preflight_review",
+  "preflight_date": "2026-05-03",
+  "sprint": "Cells PR Merge and Post-Merge Verification Sprint",
+
+  "governance_review": {
+    "merge_approval_gate_present": true,
+    "merge_gate_module": "src/plugin_examples/publisher/merge_approval_gate.py",
+    "approval_token_required": "APPROVE_MERGE_PR",
+    "approve_live_pr_rejected": true,
+    "blocked_reason_for_reuse": "blocked_merge_reused_live_publish_token",
+    "env_var": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+    "token_not_stored_in_evidence": true,
+    "token_not_logged": true,
+    "merge_governance_tests_pass": true,
+    "words_merge_previously_verified": true,
+    "words_merge_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f"
+  },
+
+  "words_pr_review": {
+    "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-05-03T08:35:49Z",
+    "merge_commit_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+    "post_merge_clean_checkout": "POST_MERGE_VERIFIED (4/4 ALL_PASS)",
+    "evidence_file": "workspace/verification/latest/words-post-merge-clean-checkout-validation.json"
+  },
+
+  "cells_pr_state_verification": {
+    "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/1",
+    "pr_number": 1,
+    "family": "cells",
+    "state": "open",
+    "merged": false,
+    "merged_at": null,
+    "mergeable": true,
+    "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "head_ref": "plugin-examples/cells/20260502-153727",
+    "base_ref": "main",
+    "head_not_main": true,
+    "files_changed": 57,
+    "pr_title": "Add verified Aspose.Cells LowCode examples for .NET controlled pilot"
+  },
+
+  "merge_repo_settings": {
+    "allow_merge_commit": true,
+    "allow_squash_merge": true,
+    "allow_rebase_merge": true,
+    "merge_method_to_use": "merge",
+    "default_branch": "main"
+  },
+
+  "precondition_checks": {
+    "approval_token_valid": {"result": "PASS", "detail": "APPROVE_MERGE_PR"},
+    "approve_live_pr_not_reused": {"result": "PASS", "detail": "separate token required and enforced"},
+    "pr_exists_and_open": {"result": "PASS", "detail": "state=open"},
+    "pr_not_merged": {"result": "PASS", "detail": "merged=false, merged_at=null"},
+    "target_repo_correct": {"result": "PASS", "detail": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples"},
+    "branch_not_main": {"result": "PASS", "detail": "plugin-examples/cells/20260502-153727"},
+    "files_count_expected": {"result": "PASS", "detail": "57 files (3 root + 9 examples × 6)"},
+    "no_unexpected_files": {"result": "PASS", "detail": "no PR_SUMMARY.md, no bin/, no obj/"},
+    "no_ci_failures": {"result": "PASS", "detail": "no CI configured in target repo"},
+    "clean_checkout_evidence_exists": {"result": "PASS", "detail": "cells-live-pr-clean-checkout-validation.json ALL_PASS"},
+    "clean_checkout_all_pass": {"result": "PASS", "detail": "9/9 examples: html-converter/image-converter/json-converter/pdf-converter/spreadsheet-converter/spreadsheet-locker/spreadsheet-merger/spreadsheet-splitter/text-converter"},
+    "merge_simulation_passed": {"result": "PASS", "detail": "cells-merge-pr-simulation.json simulation_passed=true"},
+    "github_token_present": {"result": "PASS", "detail": "GITHUB_TOKEN set (not logged)"},
+    "no_words_in_scope": {"result": "PASS", "detail": "Words PR already merged; only Cells PR authorized in this sprint"},
+    "no_direct_push_to_main": {"result": "PASS", "detail": "merge via GitHub API PUT /pulls/{n}/merge only"}
+  },
+
+  "overall_verdict": "ALL_CHECKS_PASS — Cells PR #1 ready for live merge",
+  "merge_authorized": true,
+  "merge_method": "merge",
+  "words_merge_authorized": false,
+  "note": "Only Cells PR #1 approved. Words PR already merged. No other PR or family is in scope."
+}

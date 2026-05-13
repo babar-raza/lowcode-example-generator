@@ -1,0 +1,14 @@
+{
+  "dry_run": true,
+  "branch_name": "plugin-examples/pdf/20260508-110506",
+  "pr_url": null,
+  "pr_number": null,
+  "files_included": [
+    "pdf-optimizer",
+    "pdf-splitter",
+    "pdf-text-extractor"
+  ],
+  "evidence_verified": true,
+  "status": "dry_run",
+  "blocked_reason": null
+}

@@ -1,0 +1,87 @@
+{
+  "review_type": "release_closure_review",
+  "review_date": "2026-05-03",
+  "sprint": "Release Closure and Maintenance Baseline Sprint",
+  "scope": "Cells + Words controlled pilot release — first two family PRs",
+
+  "words_release": {
+    "family": "words",
+    "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "pr_number": 1,
+    "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
+    "pr_state": "closed",
+    "pr_merged": true,
+    "merged_at": "2026-05-03T08:35:49Z",
+    "merge_commit_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+    "merge_method": "merge",
+    "source_branch": "plugin-examples/words/20260502-135703",
+    "source_branch_deleted": false,
+    "examples_published": 4,
+    "example_names": ["converter", "watermarker", "splitter", "replacer"],
+    "post_merge_validation": "POST_MERGE_VERIFIED",
+    "post_merge_passed": 4,
+    "post_merge_total": 4,
+    "evidence_file": "workspace/verification/latest/words-post-merge-clean-checkout-validation.json"
+  },
+
+  "cells_release": {
+    "family": "cells",
+    "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "pr_number": 1,
+    "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/1",
+    "pr_state": "closed",
+    "pr_merged": true,
+    "merged_at": "2026-05-03T09:03:13Z",
+    "merge_commit_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+    "merge_method": "merge",
+    "source_branch": "plugin-examples/cells/20260502-153727",
+    "source_branch_deleted": false,
+    "examples_published": 9,
+    "example_names": [
+      "html-converter", "image-converter", "json-converter", "pdf-converter",
+      "spreadsheet-converter", "spreadsheet-locker", "spreadsheet-merger",
+      "spreadsheet-splitter", "text-converter"
+    ],
+    "post_merge_validation": "POST_MERGE_VERIFIED",
+    "post_merge_passed": 9,
+    "post_merge_total": 9,
+    "evidence_file": "workspace/verification/latest/cells-post-merge-clean-checkout-validation.json"
+  },
+
+  "aggregate": {
+    "total_examples_published": 13,
+    "families_released": 2,
+    "all_post_merge_pass": true,
+    "any_branch_deleted": false,
+    "any_token_leaked": false,
+    "both_shas_recorded": true
+  },
+
+  "governance_checks": {
+    "live_pr_approval_gate_used": true,
+    "merge_approval_gate_used": true,
+    "approve_live_pr_separate_from_approve_merge_pr": true,
+    "github_token_never_logged": true,
+    "no_direct_push_to_main": true,
+    "dry_run_before_live_pr": true,
+    "clean_checkout_before_merge": true,
+    "post_merge_clean_checkout_confirmed": true
+  },
+
+  "open_taskcards_at_closure": [
+    "followup-pdf-reflection-dedup",
+    "followup-words-split-criteria-enumeration",
+    "followup-words-pair-fixture-strategy",
+    "followup-words-mail-merger-fixture-documentation",
+    "followup-words-docx-semantic-validation",
+    "followup-readme-symbols-from-catalog",
+    "followup-family-readiness-ranker-trust",
+    "followup-fixture-token-ci"
+  ],
+
+  "incorrectly_closed_taskcards": "none — all 8 open taskcards confirmed open; 27 closed taskcards confirmed verified",
+
+  "overall_verdict": "RELEASE_CLOSURE_VERIFIED",
+  "maintenance_baseline_ready": true,
+  "next_sprint": "followup-pdf-reflection-dedup — PDF assembly-identity deduplication in DllReflector"
+}

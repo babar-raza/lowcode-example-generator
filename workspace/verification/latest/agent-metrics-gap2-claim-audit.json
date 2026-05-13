@@ -1,0 +1,43 @@
+{
+  "title": "Gap Closure Sprint 2 — Implementation Claim Audit",
+  "verification_date": "2026-05-06",
+  "claims_verified": {
+    "claim_1_git_status": {"verdict": "VERIFIED"},
+    "claim_2_files_created_modified": {"verdict": "VERIFIED"},
+    "claim_3_production_agent_name": {"verdict": "VERIFIED", "value": "lowcode-example-generator"},
+    "claim_4_test_prefix": {"verdict": "VERIFIED", "value": "test-lowcode-example-generator"},
+    "claim_5_session_py_exists": {"verdict": "VERIFIED"},
+    "claim_6_11_commands_have_flags": {"verdict": "VERIFIED", "count": 11},
+    "claim_7_which_11_commands": {"verdict": "VERIFIED"},
+    "claim_8_2_excluded_commands": {"verdict": "VERIFIED", "commands": ["status", "check"]},
+    "claim_9_1_external_metrics": {"verdict": "VERIFIED", "commands": ["run"]},
+    "claim_10_10_local_only": {"verdict": "VERIFIED", "count": 10},
+    "claim_11_local_only_blocks_post": {"verdict": "VERIFIED"},
+    "claim_12_every_inference_captured": {"verdict": "VERIFIED"},
+    "claim_13_no_uninstrumented_calls": {"verdict": "VERIFIED"},
+    "claim_14_dry_run_cannot_post": {"verdict": "VERIFIED"},
+    "claim_15_test_only_sprint_blocks": {"verdict": "VERIFIED"},
+    "claim_16_force_repost_safety": {"verdict": "VERIFIED"},
+    "claim_17_no_aspose_com": {"verdict": "VERIFIED"},
+    "claim_18_website_config_driven": {"verdict": "VERIFIED"},
+    "claim_19_router_return_unchanged": {"verdict": "VERIFIED"},
+    "claim_20_no_global_mutable_collector": {"verdict": "VERIFIED"},
+    "claim_21_no_secrets_in_evidence": {"verdict": "VERIFIED"},
+    "claim_22_988_tests_pass": {"verdict": "VERIFIED", "result": "988 passed"},
+    "claim_23_205_metrics_tests": {"verdict": "DISPUTED", "claimed": 205, "actual": 99},
+    "claim_24_17_session_tests": {"verdict": "DISPUTED", "claimed": 17, "actual": 22},
+    "claim_25_7_evidence_files": {"verdict": "VERIFIED"},
+    "claim_26_zip_bundle": {"verdict": "VERIFIED", "files_in_zip": 7}
+  },
+  "summary": {
+    "total_claims": 26,
+    "verified": 24,
+    "disputed": 2,
+    "failed": 0,
+    "disputed_claims": {
+      "claim_23": "Test count inflated: claimed 205, actual 99. Implementation included non-metrics tests (test_llm_generation.py: 118 tests) in the count.",
+      "claim_24": "Session test count understated: claimed 17, actual 22. More tests exist than claimed."
+    },
+    "disputed_severity": "LOW — all tests pass, implementation is correct. Only the documentation/evidence files contain wrong numbers."
+  }
+}

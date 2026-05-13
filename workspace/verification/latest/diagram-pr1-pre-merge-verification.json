@@ -1,0 +1,44 @@
+{
+  "artifact": "diagram-pr1-pre-merge-verification",
+  "timestamp": "2026-05-12T09:39:53Z",
+  "pr_number": 1,
+  "pr_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/pull/1",
+  "state": "open",
+  "head_branch": "plugin-examples/diagram/20260512-091424",
+  "head_sha": "4120268e03ef",
+  "base": "main",
+  "mergeable": true,
+  "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "files_count": 14,
+  "files": [
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "README.md",
+    "global.json",
+    "examples/diagram/lowcode/diagram-diagram-converter/Program.cs",
+    "examples/diagram/lowcode/diagram-diagram-converter/README.md",
+    "examples/diagram/lowcode/diagram-diagram-converter/diagram-diagram-converter.csproj",
+    "examples/diagram/lowcode/diagram-diagram-converter/example.manifest.json",
+    "examples/diagram/lowcode/diagram-diagram-converter/expected-output.json",
+    "examples/diagram/lowcode/diagram-pdf-converter/Program.cs",
+    "examples/diagram/lowcode/diagram-pdf-converter/README.md",
+    "examples/diagram/lowcode/diagram-pdf-converter/diagram-pdf-converter.csproj",
+    "examples/diagram/lowcode/diagram-pdf-converter/example.manifest.json",
+    "examples/diagram/lowcode/diagram-pdf-converter/expected-output.json"
+  ],
+  "no_bin_obj_artifacts": true,
+  "examples_verified": [
+    "diagram-diagram-converter",
+    "diagram-pdf-converter"
+  ],
+  "checks": {
+    "target_repo_correct": true,
+    "branch_correct": true,
+    "file_count_matches": true,
+    "no_runtime_artifacts": true,
+    "readme_present": true,
+    "lowcode_api_used": true,
+    "no_raw_zip_bytes": true
+  },
+  "gate_result": "PASS"
+}

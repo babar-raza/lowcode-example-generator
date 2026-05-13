@@ -1,0 +1,242 @@
+{
+  "initial_run": true,
+  "delta_summary": {
+    "old_version": null,
+    "new_version": "26.4.0.0",
+    "added_types": 22,
+    "removed_types": 0,
+    "modified_types": 0
+  },
+  "new_api_examples_needed": [
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Finish",
+        "MoveNext"
+      ],
+      "properties": [
+        "Current"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "GetOpenPassword",
+        "GetWorkbookPassword",
+        "GetWorkbookProtectionType",
+        "GetWorksheetPassword",
+        "GetWorksheetProtectionType",
+        "GetWritePassword"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Finish",
+        "GetSaveOptions"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.ImageConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.JsonConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "HtmlOptions",
+        "SaveFormat"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "ImageOptions",
+        "SaveFormat",
+        "SaveOptionsProvider"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "InputFile",
+        "InputStream"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "LoadOptionsProvider",
+        "SaveOptions"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "PdfOptions",
+        "SaveFormat"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "OutputFile",
+        "OutputStream",
+        "SaveFormat"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "GetSaveOptions"
+      ],
+      "properties": [
+        "BuildPathWithSheetAlways",
+        "BuildPathWithSplitPartAlways",
+        "PathHeader",
+        "PathTail",
+        "SaveOptionsTemplate",
+        "SheetIndexOffset",
+        "SheetPrefix",
+        "SplitPartIndexOffset",
+        "SplitPartPrefix",
+        "UseSheetName"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "GetSaveOptions"
+      ],
+      "properties": [
+        "BuildPathWithSheetAlways",
+        "BuildPathWithSplitPartAlways",
+        "SaveOptionsTemplate",
+        "SheetIndexOffset",
+        "SheetIndexPrefix",
+        "SheetNamePrefix",
+        "SplitPartIndexOffset",
+        "SplitPartPrefix"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "LoadOptions",
+        "SaveOptions",
+        "SaveOptionsProvider"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.PdfConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SplitPartInfo",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [],
+      "properties": [
+        "PartIndex",
+        "SheetIndex",
+        "SheetName"
+      ]
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process",
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Cells.LowCode.TextConverter",
+      "namespace": "Aspose.Cells.LowCode",
+      "methods": [
+        "Process",
+        "Process"
+      ],
+      "properties": []
+    }
+  ],
+  "existing_example_impacts": []
+}

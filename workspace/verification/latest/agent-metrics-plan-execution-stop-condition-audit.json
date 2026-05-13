@@ -1,0 +1,132 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 15: Stop Condition Audit",
+  "phase": "PHASE_15",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "Section 16 (Stop Conditions)",
+  "objective": "Verify all 14 plan stop conditions — determine which were triggered (should be none)",
+
+  "stop_conditions": [
+    {
+      "id": "SC-1",
+      "condition": "Any aspose.com reference where aspose.net / config-owned website should be",
+      "detection": "Grep source + evidence",
+      "triggered": false,
+      "evidence": "metrics.yml: website: 'aspose.net'. config.py: aspose.net default. payload_builder: config.website. No aspose.com in any metrics source file.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-2",
+      "condition": "Website validation is hardcoded in Python (not config-driven)",
+      "detection": "Code review TC-07 test",
+      "triggered": false,
+      "evidence": "validator.py line 52: website != config.website (not hardcoded list). test_agent_metrics_payload.py::test_website_from_config_not_hardcoded PASSES.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-3",
+      "condition": "API contract is unverified and POST is attempted",
+      "detection": "TC-01 not complete before POST",
+      "triggered": false,
+      "evidence": "TC-13 test POST executed after contract proven via GET response. Ledger shows only 1 approved test entry.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-4",
+      "condition": "Router instrumentation uses global mutable state",
+      "detection": "Code review TC-04",
+      "triggered": false,
+      "evidence": "MetricsCollector is instance field on LLMRouter (line 50). No module-level state. Two independent routers accumulate independently (test proves it).",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-5",
+      "condition": "Count formulas are guessed without source verification",
+      "detection": "TC-06 not complete",
+      "triggered": false,
+      "evidence": "run command: source-backed formulas (pipeline_hook.py lines 56-63). All other 10 commands: LOCAL_ONLY policy blocks POST.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-6",
+      "condition": "Secrets may leak in evidence",
+      "detection": "TC-08 test failure",
+      "triggered": false,
+      "evidence": "test_agent_metrics_evidence.py: 6 tests all pass. Token read from env at POST time only, never stored. No token patterns in any evidence file.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-7",
+      "condition": "Dry-run attempts a real POST",
+      "detection": "TC-10 test failure",
+      "triggered": false,
+      "evidence": "poster.py line 81: if dry_run: return {posted: False}. TestDryRun::test_dry_run_never_posts verifies no HTTP call made.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-8",
+      "condition": "Production POST attempted without explicit human approval",
+      "detection": "Missing TC-14 approval",
+      "triggered": false,
+      "evidence": "test_only_sprint=True in session.py:181 and pipeline_hook.py:23. poster.py line 90 blocks production job_types. production_rows=0.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-9",
+      "condition": "Existing tests fail after instrumentation",
+      "detection": "Regression gate failure",
+      "triggered": false,
+      "evidence": "Full regression: 996 passed, 0 failed. All tests pass including original test_llm_generation.py suite (117 tests).",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-10",
+      "condition": "Evidence is not run-scoped (written directly to latest/)",
+      "detection": "Code review",
+      "triggered": false,
+      "evidence": "__main__.py line 57: creates workspace/runs/{run_id}/evidence/. 105 run dirs exist. Promotion to latest/ happens separately via promote_family_evidence().",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-11",
+      "condition": "Taskcards are missing or non-standard",
+      "detection": "Plan review",
+      "triggered": false,
+      "evidence": "All 15 taskcards defined in Section 12 with full metadata (ID, title, mode, files, tests, evidence, acceptance criteria).",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-12",
+      "condition": "Independent verification is not planned",
+      "detection": "TC-15 missing",
+      "triggered": false,
+      "evidence": "TC-15 defined in plan Section 12. Implementation complete. Evidence: agent-metrics-independent-verification.json.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-13",
+      "condition": "_call_openai_compatible return type changed from str",
+      "detection": "Code review",
+      "triggered": false,
+      "evidence": "router.py _call_openai_compatible: return type str, unchanged. test_agent_metrics_router.py::test_return_type_is_str PASSES. All 117 test_llm_generation tests pass.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    },
+    {
+      "id": "SC-14",
+      "condition": "VERDICTS frozenset count != 18 (taxonomy changed)",
+      "detection": "Test in TC-07",
+      "triggered": false,
+      "evidence": "gates/models.py VERDICTS frozenset has exactly 18 entries. metrics.yml verdict_to_status has 18 entries. test_agent_metrics_payload.py::test_all_18_verdicts_map PASSES.",
+      "verdict": "NOT_TRIGGERED — PASS"
+    }
+  ],
+
+  "summary": {
+    "stop_conditions_total": 14,
+    "stop_conditions_triggered": 0,
+    "stop_conditions_not_triggered": 14,
+    "execution_blocked": false,
+    "all_critical_safety_properties_intact": true
+  },
+
+  "overall_verdict": "PASS — all 14 stop conditions NOT triggered; execution proceeded safely; no safety violations detected"
+}

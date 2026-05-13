@@ -1,0 +1,28 @@
+{
+  "artifact": "diagram-fewshot-publication-taskcard-update",
+  "timestamp": "2026-05-11T17:42:00Z",
+  "taskcards_updated": [
+    {
+      "id": "NEW-DIAGRAM-PILOT",
+      "status": "PR_READY",
+      "prior_status": "GENERATION_GATED",
+      "note": "Few-shot guidance implemented. Real LLM generation 2/2 PASS. PR dry-run package validated. Target repo PUSH_READY. Blocked only by APPROVE_LIVE_PR."
+    },
+    {
+      "id": "diagram-fewshot-fixture-guidance",
+      "status": "IMPLEMENTED_AND_VERIFIED",
+      "note": "Family-scoped _PROGRAMMATIC_FIXTURE_GUIDANCE registry. 20 tests. Real LLM followed guidance perfectly — both examples use Aspose.Diagram.Diagram() fixture, three-section structure, correct LowCode operations."
+    },
+    {
+      "id": "diagram-nuget-download-retry",
+      "status": "IMPLEMENTED",
+      "note": "Added retry logic (3 attempts, 64KB chunks, 5min timeout) to _download_nupkg in fetcher.py. Fixed transient NuGet download failures for 38MB Aspose.Diagram package."
+    }
+  ],
+  "taskcards_not_closeable": [
+    {
+      "id": "NEW-DIAGRAM-PILOT",
+      "reason": "Cannot close until live PR is created, merged, and post-merge verified."
+    }
+  ]
+}

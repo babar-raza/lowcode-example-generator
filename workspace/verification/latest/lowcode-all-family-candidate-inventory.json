@@ -1,0 +1,51 @@
+{
+  "artifact_id": "lowcode-all-family-candidate-inventory",
+  "created": "2026-05-09",
+  "sprint": "post-discovery-next-sprint",
+  "status": "INVENTORY_COMPLETE_WITH_DISCOVERY_RESULTS",
+  "total_candidates": 25,
+  "discovery_completed": true,
+  "discovery_date": "2026-05-09",
+
+  "group_a_lowcode_confirmed": [
+    {"key": "cells", "package_id": "Aspose.Cells", "version": "26.4.0", "namespace": "Aspose.Cells.LowCode", "types": 22, "workflow_roots": 9, "pipeline_status": "active", "published": 9},
+    {"key": "words", "package_id": "Aspose.Words", "version": "26.5.0", "namespace": "Aspose.Words.LowCode", "types": 25, "workflow_roots": null, "pipeline_status": "active", "published": 4},
+    {"key": "pdf", "package_id": "Aspose.PDF", "version": "26.4.0", "namespace": "Aspose.Pdf.LowCode", "types": 101, "workflow_roots": 25, "pipeline_status": "active", "published": 2},
+    {"key": "email", "package_id": "Aspose.Email", "version": "26.4.0", "namespace": "Aspose.Email.LowCode", "types": 3, "workflow_roots": 1, "pipeline_status": "discovery_only", "published": 0},
+    {"key": "slides", "package_id": "Aspose.Slides.NET", "version": "26.5.0", "namespace": "Aspose.Slides.LowCode", "types": 5, "workflow_roots": 3, "pipeline_status": "discovery_only", "published": 0, "notes": "XML docs missing in package"},
+    {"key": "diagram", "package_id": "Aspose.Diagram", "version": "26.4.0", "namespace": "Aspose.Diagram.LowCode", "types": 5, "workflow_roots": 2, "pipeline_status": "discovery_only", "published": 0}
+  ],
+
+  "group_b_confirmed_no_lowcode": [
+    {"key": "barcode", "package_id": "Aspose.BarCode", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "cad", "package_id": "Aspose.CAD", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "drawing", "package_id": "Aspose.Drawing", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "finance", "package_id": "Aspose.Finance", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "font", "package_id": "Aspose.Font", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "gis", "package_id": "Aspose.GIS", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "imaging", "package_id": "Aspose.Imaging", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "note", "package_id": "Aspose.Note", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "page", "package_id": "Aspose.Page", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "tasks", "package_id": "Aspose.Tasks", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "tex", "package_id": "Aspose.TeX", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "threed", "package_id": "Aspose.3D", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "zip", "package_id": "Aspose.ZIP", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "successful_reflection_no_lowcode_namespace"},
+    {"key": "html", "package_id": "Aspose.HTML", "version": "26.4.0", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "reflection_completed_after_dep_fix_49_namespaces_no_lowcode", "notes": "Previously blocked by MISSING_TRANSITIVE_DEP; fixed by max_depth=3. Reflection confirmed 49 namespaces, none are LowCode."},
+    {"key": "svg", "package_id": "Aspose.SVG", "version": "26.4.0", "verdict": "CONFIRMED_NO_LOWCODE", "evidence": "reflection_completed_after_dep_fix_36_namespaces_no_lowcode", "notes": "Previously blocked by MISSING_TRANSITIVE_DEP; fixed by max_depth=3. Reflection confirmed 36 namespaces, none are LowCode."}
+  ],
+
+  "group_c_still_blocked": [
+    {"key": "epub", "package_id": "Aspose.Epub", "blocker": "PACKAGE_DOWNLOAD_FAILED", "verdict": "UNKNOWN", "taskcard": "NEW-22-followup-epub-reflection-blocker-investigation", "evidence": "workspace/verification/latest/epub-reflection-blocker.json"},
+    {"key": "ocr", "package_id": "Aspose.OCR", "version": "26.4.0", "blocker": "MISSING_TRANSITIVE_DEP: Aspose.Drawing.Common 26.3.0.0", "verdict": "UNKNOWN_PENDING_RERUN", "taskcard": "NEW-24-followup-ocr-reflection-blocker-investigation", "evidence": "workspace/verification/latest/ocr-reflection-blocker.json"},
+    {"key": "omr", "package_id": "Aspose.OMR", "version": "26.1.0", "blocker": "MISSING_TRANSITIVE_DEP: Newtonsoft.Json 13.0.0.0", "verdict": "UNKNOWN_PENDING_RERUN", "taskcard": "NEW-25-followup-omr-reflection-blocker-investigation", "evidence": "workspace/verification/latest/omr-reflection-blocker.json"},
+    {"key": "psd", "package_id": "Aspose.PSD", "version": "26.4.0", "blocker": "MISSING_TRANSITIVE_DEP: Newtonsoft.Json 13.0.0.0", "verdict": "UNKNOWN_PENDING_RERUN", "taskcard": "NEW-26-followup-psd-reflection-blocker-investigation", "evidence": "workspace/verification/latest/psd-reflection-blocker.json"}
+  ],
+
+  "summary": {
+    "group_a_lowcode_confirmed": 6,
+    "group_b_confirmed_no_lowcode": 15,
+    "group_c_still_blocked": 4,
+    "total": 25,
+    "note": "html and svg reclassified from BLOCKED to CONFIRMED_NO_LOWCODE after dep fix. ocr/omr/psd pending rerun with max_depth=3. epub pending package ID investigation."
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "total_scored": 5,
+  "runnable_count": 2,
+  "rejected_count": 3,
+  "scores": [
+    {
+      "full_name": "Aspose.Diagram.LowCode.DiagramConverter",
+      "name": "DiagramConverter",
+      "role": "workflow_root",
+      "score": 9.0,
+      "max_score": 10.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodeLoadOptions",
+      "name": "LowCodeLoadOptions",
+      "role": "options",
+      "score": -2.5,
+      "max_score": 0.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodePdfSaveOptions",
+      "name": "LowCodePdfSaveOptions",
+      "role": "options",
+      "score": -2.5,
+      "max_score": 0.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.LowCodeSaveOptions",
+      "name": "LowCodeSaveOptions",
+      "role": "options",
+      "score": -2.5,
+      "max_score": 0.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Diagram.LowCode.PdfConverter",
+      "name": "PdfConverter",
+      "role": "workflow_root",
+      "score": 9.0,
+      "max_score": 10.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "2 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    }
+  ]
+}

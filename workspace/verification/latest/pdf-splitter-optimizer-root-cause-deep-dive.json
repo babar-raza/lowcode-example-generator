@@ -1,0 +1,116 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "phase": "Phase 4 — PDF Splitter and Optimizer Root-Cause Deep Dive",
+
+  "splitter": {
+    "scenario_id": "pdf-splitter",
+    "target_type": "Aspose.Pdf.LowCode.Splitter",
+    "correct_options_class": "SplitOptions",
+    "correct_code_pattern": "var options = new SplitOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); options.AddOutput(new FileDataSource(\"output.pdf\")); new Splitter().Process(options);",
+
+    "generated_bad_code_summary": "In runs pilot-pdf-20260505-140928, 142605, and 143724, the LLM generated code containing 'new PluginOptions()'. PluginOptions is the abstract base class (Aspose.Pdf.LowCode.PluginOptions) that SplitOptions inherits from. The compiler error was 'Cannot create an instance of the abstract type PluginOptions'.",
+
+    "compiler_errors": [
+      "CS0144: Cannot create an instance of the abstract type or interface 'PluginOptions'"
+    ],
+
+    "repair_prompt_analysis": {
+      "what_repair_prompt_contained": "The compiler error message + original bad code + generic 'fix the compilation errors' instruction",
+      "what_repair_prompt_lacked": [
+        "The name of the correct concrete class (SplitOptions)",
+        "The type-role-classification showing Splitter.paired_options = SplitOptions",
+        "A few-shot example of correct Splitter code",
+        "A negative constraint: 'PluginOptions is abstract, use SplitOptions instead'"
+      ],
+      "why_repair_failed": "Without the correct class name in the prompt, the LLM had no way to discover SplitOptions from the compiler error alone. It either kept using PluginOptions or invented a non-existent class."
+    },
+
+    "source_of_truth_visibility": {
+      "split_options_in_catalog": true,
+      "split_options_in_type_role_classification": true,
+      "split_options_in_prompt_packet": false,
+      "split_options_in_few_shot": false,
+      "split_options_in_repair_context": false,
+      "note": "SplitOptions exists in the API catalog and type-role-classification. However, the prompt packet builder does not read the type-role-classification to inject the correct options class name. The LLM receives the full method signature list but not the options class mapping."
+    },
+
+    "validators_analysis": {
+      "code_generator_validate_code": {
+        "catches_plugin_options": true,
+        "line": 549,
+        "note": "_validate_code() checks for 'new PluginOptions(' at line 549-558. This fires AFTER code is generated, NOT before. It adds a validation issue but the generated code has already consumed an LLM call. The validation error is returned but NOT fed back into a repair loop — the issues are logged and the code is accepted with warnings.",
+        "gap": "CRITICAL: _validate_code() issues are NOT used to trigger a targeted repair. They are informational only. The code is submitted to build anyway, where it fails with CS0144."
+      },
+      "runtime_feedback": {
+        "has_plugin_options_pattern": false,
+        "note": "runtime_feedback.py has no pattern for PluginOptions hallucination. It only detects runtime errors, not build-time abstract class issues."
+      }
+    },
+
+    "conclusion": {
+      "failure_avoidable": true,
+      "first_subsystem_failed": "packet_builder.py — did not include SplitOptions in the prompt",
+      "should_have_caught_earlier": "code_generator._validate_code() catches it but does not trigger repair",
+      "change_to_prevent_recurrence": [
+        "packet_builder: read type-role-classification, inject paired_options name into prompt as MANDATORY constraint",
+        "packet_builder: add SplitOptions few-shot code example",
+        "code_generator: when _validate_code() returns PluginOptions issue, trigger a targeted repair with explicit 'use SplitOptions' instruction instead of proceeding to build",
+        "Add 'new PluginOptions()' to the code validator as a BLOCKING issue that triggers repair, not just a warning"
+      ]
+    }
+  },
+
+  "optimizer": {
+    "scenario_id": "pdf-optimizer",
+    "target_type": "Aspose.Pdf.LowCode.Optimizer",
+    "correct_options_class": "OptimizeOptions",
+    "correct_code_pattern": "var options = new OptimizeOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); options.AddOutput(new FileDataSource(\"output.pdf\")); new Optimizer().Process(options);",
+
+    "generated_bad_code_summary": "Same PluginOptions hallucination as Splitter. Additionally, during the repair attempt, the LLM HTTP request timed out (120s limit, no retry).",
+
+    "compiler_errors": [
+      "CS0144: Cannot create an instance of the abstract type or interface 'PluginOptions'"
+    ],
+
+    "timeout_analysis": {
+      "llm_timeout_seconds": 120,
+      "retry_on_timeout": false,
+      "timeout_is_per_request": true,
+      "what_happened": "The LLM repair call exceeded 120 seconds. The requests.post() raised a Timeout exception. The runner caught it as a generic exception at line 740 and logged 'Build repair failed'. No retry was attempted.",
+      "fix": "Add retry with exponential backoff (e.g., 120s, 180s, 240s). Or increase base timeout for repair calls which tend to be more complex."
+    },
+
+    "repair_prompt_analysis": {
+      "same_as_splitter": true,
+      "additional_issue": "Even if the repair prompt had the correct class name, the timeout prevented the repair from completing."
+    },
+
+    "source_of_truth_visibility": {
+      "same_as_splitter": true,
+      "optimize_options_in_catalog": true,
+      "optimize_options_in_prompt_packet": false,
+      "optimize_options_in_few_shot": false
+    },
+
+    "conclusion": {
+      "failure_avoidable": true,
+      "first_subsystem_failed": "packet_builder.py (same as Splitter) + router.py timeout handling",
+      "should_have_caught_earlier": "Same as Splitter + timeout should have retried",
+      "change_to_prevent_recurrence": [
+        "Same 4 changes as Splitter for the PluginOptions issue",
+        "router.py: add retry_count parameter to generate() with exponential backoff",
+        "runner.py: pass retry_count=2 for repair calls"
+      ]
+    }
+  },
+
+  "shared_root_cause": {
+    "primary": "The prompt packet builder does not use the type-role-classification to inject the correct concrete options class name. The LLM sees method signatures but not the options class mapping.",
+    "secondary": "The code validator detects PluginOptions usage but treats it as informational, not as a trigger for targeted repair.",
+    "tertiary": "No LLM timeout retry exists.",
+    "systemic_pattern": "The source-of-truth API catalog has all the information needed (concrete class names, inheritance relationships, paired options), but this information does not flow into the LLM prompt or repair context."
+  },
+
+  "verdict": "ROOT_CAUSE_IDENTIFIED_FIX_DEFINED"
+}

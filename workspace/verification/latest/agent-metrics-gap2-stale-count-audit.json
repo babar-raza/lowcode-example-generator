@@ -1,0 +1,112 @@
+{
+  "title": "Agent Metrics Gap Closure Sprint 2 — Stale Count Audit",
+  "phase": "PHASE_1",
+  "timestamp": "2026-05-06T00:00:00Z",
+  "search_terms": ["205", "\"17 passed\"", "17 tests", "session_tests.*17", "total_metrics_tests.*200", "metrics_specific_tests.*205"],
+  "occurrences": [
+    {
+      "file": "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+      "line": 57,
+      "text": "\"test_agent_metrics_session.py\": \"17 passed (NEW)\"",
+      "classification": "STALE_IMPLEMENTATION_EVIDENCE",
+      "correct_value": "22 passed",
+      "action_required": "Add correction addendum — do not silently overwrite"
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+      "line": 58,
+      "text": "\"total_metrics_tests\": 200",
+      "classification": "STALE_IMPLEMENTATION_EVIDENCE",
+      "correct_value": 99,
+      "action_required": "Add correction addendum",
+      "note": "Original file also claims 205 in the outer summary via test_agent_metrics_router.py + test_llm_generation.py being counted as one block of 118. 118 of those are not metrics-specific."
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+      "line": 84,
+      "text": "\"tests/unit/test_agent_metrics_session.py (new, 17 tests)\"",
+      "classification": "STALE_IMPLEMENTATION_EVIDENCE",
+      "correct_value": "22 tests",
+      "action_required": "Add correction addendum"
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-safety-verification.json",
+      "line": 63,
+      "text": "\"metrics_specific_tests\": 205",
+      "classification": "STALE_IMPLEMENTATION_EVIDENCE",
+      "correct_value": 99,
+      "action_required": "Add correction addendum",
+      "root_cause": "Incorrectly counted test_llm_generation.py (118 tests) as metrics-specific. It is not."
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-safety-verification.json",
+      "line": 64,
+      "text": "\"metrics_tests_passed\": 205",
+      "classification": "STALE_IMPLEMENTATION_EVIDENCE",
+      "correct_value": 99,
+      "action_required": "Add correction addendum"
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-gap2-test-audit.json",
+      "classification": "CORRECTED_VERIFICATION_EVIDENCE",
+      "note": "Already documents the dispute: claims 23 and 24 marked DISPUTED with correct values",
+      "action_required": "None — already correct"
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-gap2-claim-audit.json",
+      "classification": "CORRECTED_VERIFICATION_EVIDENCE",
+      "note": "Already marks claim_23 and claim_24 as DISPUTED with actual values 99 and 22",
+      "action_required": "None — already correct"
+    },
+    {
+      "file": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "line": 492,
+      "text": "test_example_lifecycle.py: 17 tests",
+      "classification": "TEST_NAME_OR_UNRELATED",
+      "note": "Refers to test_example_lifecycle.py (lifecycle module), NOT test_agent_metrics_session.py. Unrelated to Agent Metrics sprint.",
+      "action_required": "None"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-live-pr-canary-preflight-review.json",
+      "line": 115,
+      "text": "lifecycle module exists, is tested (17 tests)",
+      "classification": "TEST_NAME_OR_UNRELATED",
+      "note": "Refers to test_example_lifecycle.py, not metrics session tests",
+      "action_required": "None"
+    },
+    {
+      "file": "workspace/verification/latest/pdf-live-pr-post-creation-full-review.json",
+      "line": 61,
+      "text": "17 tests in test_example_lifecycle.py",
+      "classification": "TEST_NAME_OR_UNRELATED",
+      "action_required": "None"
+    },
+    {
+      "file": "workspace/verification/latest/live-pr-approval-implementation-review.json",
+      "line": 146,
+      "text": "code_reference: open-taskcard-closure-matrix.json:200-205",
+      "classification": "TEST_NAME_OR_UNRELATED",
+      "note": "Line range reference (200-205 = JSON lines), not a test count",
+      "action_required": "None"
+    },
+    {
+      "file": "workspace/verification/latest/families/cells/validation-results.json",
+      "text": "duration_ms: 1205.310",
+      "classification": "TEST_NAME_OR_UNRELATED",
+      "note": "Duration timestamp, not a test count",
+      "action_required": "None"
+    },
+    {
+      "file": "docs/ (all files)",
+      "classification": "CHECKED",
+      "result": "No stale test count references found",
+      "action_required": "None"
+    }
+  ],
+  "files_requiring_correction": [
+    "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+    "workspace/verification/latest/agent-metrics-safety-verification.json"
+  ],
+  "correction_method": "Addendum files — preserve originals with stale values, addendum supersedes count fields only",
+  "root_cause_of_stale_counts": "Implementation sprint counted test_agent_metrics_router.py+test_llm_generation.py together as '118 passed'. test_llm_generation.py (109 tests at time of report) is a general LLM API correctness suite, not a metrics-specific test file. Metrics-specific files are only the 8 test_agent_metrics_*.py files."
+}

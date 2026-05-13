@@ -1,0 +1,62 @@
+{
+  "audit_type": "words-family-pr-package-retarget",
+  "audit_date": "2026-05-01",
+  "sprint": "Repo Access Self-Service Resolution Review",
+  "verdict": "WORDS_TARGET_CONFIGURED_REPO_ACCESS_READY_LIVE_PUBLISH_BLOCKED_PENDING_HUMAN_APPROVAL",
+
+  "package_path": "workspace/pr-dry-run/words-controlled-pilot/",
+  "examples_included": [
+    "examples/words/lowcode/converter/",
+    "examples/words/lowcode/watermarker/",
+    "examples/words/lowcode/splitter/",
+    "examples/words/lowcode/replacer/"
+  ],
+  "total_examples": 4,
+  "source_run": "workspace/runs/pilot-words-20260501-controlled/",
+
+  "current_target": {
+    "owner": "aspose-words-net",
+    "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+    "branch": "main",
+    "is_central": false,
+    "is_family_specific": true,
+    "central_repo_allowed": false,
+    "source": "maintainer-provided"
+  },
+
+  "target_config_ready": true,
+  "repo_access_ready": true,
+  "repo_empty": false,
+  "repo_contents_note": "README.md only — no example content pushed yet",
+  "pr_permission_ready": true,
+  "dry_run_package_allowed": true,
+  "live_publish_allowed": false,
+  "blocked_reason": "blocked_live_pr_approval_required — repo_access_ready=true and pr_permission_ready=true; human approval gate (followup-live-pr-approval-gate) and repo initialization (followup-family-repo-initialization) still required",
+
+  "repo_access_diagnosis": {
+    "methods_tried": ["REST API", "gh CLI GraphQL", "git ls-remote", "collaborator grant"],
+    "resolution_method": "collaborator_grant",
+    "resolution_date": "2026-05-01",
+    "error_classification": "repo_access_ok",
+    "token_type_observed": "fine_grained_pat (github_pat_ prefix)",
+    "token_type_user_stated": "classic_pat",
+    "resolution": "babar-raza added as collaborator with write access to aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples. resolve-repo-access confirms HTTP 200, can_push=True."
+  },
+
+  "readiness": {
+    "config_ready": true,
+    "repo_access_ready": true,
+    "pr_permission_ready": true,
+    "live_publish_ready": false
+  },
+
+  "dry_run_package_valid": true,
+  "dry_run_package_notes": "All 4 examples built and ran from clean package path. No live push occurred. Package remains valid for human review.",
+
+  "required_action_before_live_publish": [
+    "1. Close followup-live-pr-approval-gate: define approval workflow (who approves, what evidence required, how approval is recorded)",
+    "2. Close followup-family-repo-initialization: confirm both repos ready to receive example content",
+    "3. Obtain explicit human sign-off documented before running --publish flag",
+    "4. Then run: python -m plugin_examples run --family words --publish (dry_run=False requires explicit override + human approval on record)"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "family": "psd",
+  "total_input_paths": 9,
+  "kept_count": 8,
+  "excluded_count": 1,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Memory.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Buffers.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Numerics.Vectors.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\Newtonsoft.Json.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\Aspose.Drawing.dll"
+  ],
+  "excluded": [
+    {
+      "assembly_name": "System.Runtime.CompilerServices.Unsafe",
+      "excluded_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+      "kept_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-psd-20260509-134405\\extracted\\psd\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+      "same_file": true,
+      "reason": "duplicate_assembly_name"
+    }
+  ],
+  "conflicts": []
+}

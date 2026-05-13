@@ -1,0 +1,200 @@
+{
+  "report_date": "2026-05-06",
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "verdict": "PLANNED_EXAMPLE_COMPLETION_GAP_ANALYSIS_COMPLETE",
+  "sprint_type": "investigation_only",
+  "remote_mutations": "NONE",
+
+  "A_true_completion_rate": {
+    "published": 15,
+    "total_candidates": 43,
+    "rate": 0.35,
+    "cells": { "published": 9, "candidates": 9, "rate": 1.0 },
+    "words": { "published": 4, "candidates": 9, "rate": 0.44 },
+    "pdf": { "published": 2, "candidates": 25, "rate": 0.08 },
+    "note": "Candidates = runnable types (workflow_root or operation_facade). NOT all discovered types."
+  },
+
+  "B_completion_model": {
+    "stages": 12,
+    "stage_names": [
+      "discovered", "type_classified", "scenario_planned", "fixture_available",
+      "prompt_assembled", "llm_generated", "static_validated", "build_passed",
+      "runtime_passed", "output_validated", "reviewer_passed", "published"
+    ],
+    "evidence": "workspace/verification/latest/planned-example-completion-model.json"
+  },
+
+  "C_cross_family_gap_analysis": {
+    "cells": {
+      "status": "COMPLETE",
+      "published": 9,
+      "candidates": 9,
+      "excluded_runnable": 0,
+      "excluded_non_runnable": 13,
+      "system_gaps": "NONE"
+    },
+    "words": {
+      "status": "PARTIALLY_COMPLETE",
+      "published": 4,
+      "candidates": 9,
+      "excluded_runnable": 5,
+      "root_causes": ["MISSING_FIXTURE_STRATEGY (3)", "MISSING_ENUM_VALUES (1)", "MISSING_OPTIONS_STRATEGY (1)"],
+      "system_gaps": 5
+    },
+    "pdf": {
+      "status": "EARLY_STAGE",
+      "published": 2,
+      "candidates": 25,
+      "backlogged": 2,
+      "not_attempted": 21,
+      "root_causes": ["LLM_PLUGINOPTIONS_HALLUCINATION (2)", "NOT_YET_ATTEMPTED (21)"],
+      "system_gaps": 3
+    },
+    "evidence": "workspace/verification/latest/cross-family-planned-completion-gap-analysis.json"
+  },
+
+  "D_feasibility_questions": {
+    "all_10_questions_answered": true,
+    "all_answers": "NO",
+    "blocking_gaps_identified": 10,
+    "evidence": "workspace/verification/latest/full-planned-example-completion-feasibility.json"
+  },
+
+  "E_pdf_splitter_optimizer_root_cause": {
+    "shared_root_cause": "LLM generates new PluginOptions() instead of concrete SplitOptions/OptimizeOptions",
+    "first_subsystem_that_failed": "packet_builder.py (no paired_options in prompt)",
+    "secondary_failure": "code_generator._validate_code() treats PluginOptions as INFORMATIONAL, not blocking",
+    "tertiary_failure": "router.py has no retry on LLM timeout (120s, 0 retries)",
+    "fix_components": 4,
+    "evidence": "workspace/verification/latest/pdf-splitter-optimizer-root-cause-deep-dive.json"
+  },
+
+  "F_words_excluded_root_cause": {
+    "excluded_runnable": 5,
+    "root_causes": {
+      "Comparer": "MISSING_FIXTURE_STRATEGY (needs 2 different docs)",
+      "Merger": "MISSING_FIXTURE_STRATEGY (needs array input)",
+      "MailMerger": "MISSING_FIXTURE_STRATEGY (needs merge field template)",
+      "ReportBuilder": "MISSING_FIXTURE_STRATEGY (needs LINQ tag template)",
+      "Processor": "MISSING_OPTIONS_STRATEGY (builder pattern API)"
+    },
+    "additional_blocked": "Splitter.Split — MISSING_ENUM_VALUES (SplitCriteria)",
+    "all_fixable": true,
+    "estimated_sprints": "2-3",
+    "evidence": "workspace/verification/latest/words-excluded-scenarios-root-cause-deep-dive.json"
+  },
+
+  "G_cells_excluded_root_cause": {
+    "status": "CELLS_FULLY_COMPLETE_NO_SYSTEM_GAPS_FOR_STANDALONE_APIS",
+    "published": 9,
+    "excluded_non_runnable": 13,
+    "system_gaps": 0,
+    "evidence": "workspace/verification/latest/cells-excluded-scenarios-root-cause-deep-dive.json"
+  },
+
+  "H_remediation_architecture": {
+    "components": 6,
+    "names": [
+      "Planned Scenario Contract",
+      "Scenario Completion Queue",
+      "Learning/Repair System",
+      "Backlog-to-Taskcard Bridge",
+      "Readiness Rank Upgrade",
+      "Completion Policy"
+    ],
+    "evidence": "workspace/verification/latest/full-completion-remediation-architecture.json"
+  },
+
+  "I_execution_roadmap": {
+    "waves": 8,
+    "estimated_sprints_to_100_percent": "10-14",
+    "first_action": "Wave 1 — PDF Splitter/Optimizer fix (HIGHEST priority)",
+    "evidence": "workspace/verification/latest/full-completion-roadmap.json"
+  },
+
+  "J_new_taskcards_proposed": {
+    "count": 5,
+    "ids": [
+      "followup-full-planned-example-completion-contract",
+      "followup-scenario-completion-queue",
+      "followup-backlog-to-taskcard-bridge",
+      "followup-readiness-rank-full-completion-metrics",
+      "followup-learning-repair-system"
+    ],
+    "none_closed_this_sprint": true
+  },
+
+  "K_taskcard_matrix_after_sprint": {
+    "total": 62,
+    "closed": 49,
+    "open": 13,
+    "casing_inconsistencies_fixed": 4,
+    "new_entries_added": 5
+  },
+
+  "L_master_plan_updated": true,
+
+  "M_verification_results": {
+    "compileall_src": "PASS (0 errors)",
+    "dotnet_build_dllreflector": "PASS (0 warnings, 0 errors)",
+    "pytest_unit_tests": "PASS (966 passed, 0 failed)",
+    "test_count_change": "966 (unchanged from prior sprint baseline)"
+  },
+
+  "N_files_created_this_sprint": [
+    "workspace/verification/latest/planned-example-completion-gap-preflight.json",
+    "workspace/verification/latest/planned-example-completion-model.json",
+    "workspace/verification/latest/cross-family-planned-completion-gap-analysis.json",
+    "workspace/verification/latest/full-planned-example-completion-feasibility.json",
+    "workspace/verification/latest/pdf-splitter-optimizer-root-cause-deep-dive.json",
+    "workspace/verification/latest/words-excluded-scenarios-root-cause-deep-dive.json",
+    "workspace/verification/latest/cells-excluded-scenarios-root-cause-deep-dive.json",
+    "workspace/verification/latest/full-completion-remediation-architecture.json",
+    "workspace/verification/latest/full-completion-roadmap.json",
+    "workspace/verification/latest/planned-example-completion-gap-analysis-final-report.json",
+    "docs/discovery/planned-example-completion-gap-preflight.md",
+    "docs/discovery/planned-example-completion-model.md",
+    "docs/discovery/cross-family-planned-completion-gap-analysis.md",
+    "docs/discovery/full-planned-example-completion-feasibility.md",
+    "docs/discovery/pdf-splitter-optimizer-root-cause-deep-dive.md",
+    "docs/discovery/words-excluded-scenarios-root-cause-deep-dive.md",
+    "docs/discovery/cells-excluded-scenarios-root-cause-deep-dive.md",
+    "docs/plans/full-completion-remediation-architecture.md",
+    "docs/plans/full-completion-roadmap.md"
+  ],
+
+  "O_files_modified_this_sprint": [
+    "workspace/verification/latest/open-taskcard-closure-matrix.json",
+    "docs/discovery/open-taskcard-closure-matrix.md",
+    "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md"
+  ],
+
+  "P_remote_mutations": {
+    "branches_created": 0,
+    "commits_pushed": 0,
+    "prs_created": 0,
+    "prs_merged": 0,
+    "live_publish_performed": false
+  },
+
+  "Q_generation_policy_unchanged": {
+    "cells": "ALLOWED (do not run unless new batch authorized)",
+    "words": "CONTROLLED_PILOT (4 types: Converter, Watermarker, Splitter, Replacer)",
+    "pdf": "CONTROLLED_PILOT (2 types: Merger, TextExtractor)",
+    "all_family": "NOT_ALLOWED",
+    "live_publish": "BLOCKED"
+  },
+
+  "R_next_sprint_recommendation": {
+    "sprint": "Wave 1 — PDF Splitter/Optimizer Fix Sprint",
+    "priority": "HIGHEST",
+    "actions": [
+      "Inject paired_options from type-role-classification into LLM prompt (packet_builder.py)",
+      "Add SplitOptions/OptimizeOptions few-shot code examples",
+      "Change PluginOptions check from informational to blocking in _validate_code()",
+      "Add retry_count=2 with exponential backoff for generate() in router.py"
+    ],
+    "expected_outcome": "4/4 PDF pilot types passing → create PDF PR #2"
+  }
+}

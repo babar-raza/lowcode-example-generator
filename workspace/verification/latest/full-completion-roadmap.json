@@ -1,0 +1,147 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "phase": "Phase 9 — Full-Completion Execution Roadmap",
+
+  "roadmap": [
+    {
+      "wave": 1,
+      "title": "PDF Splitter and Optimizer Fix",
+      "priority": "HIGHEST",
+      "description": "Fix the 2 backlogged PDF scenarios by adding few-shots, strengthening validators, and adding timeout retry.",
+      "tasks": [
+        "Add SplitOptions and OptimizeOptions few-shot code examples to packet_builder.py",
+        "Change _validate_code() PluginOptions check from informational to blocking (triggers repair)",
+        "Add paired_options name from type-role-classification to LLM prompt",
+        "Add LLM timeout retry (2 retries with backoff) in router.py",
+        "Expand pdf.yml allowed_types to [Merger, TextExtractor, Splitter, Optimizer]",
+        "Regenerate: python -m plugin_examples run --family pdf --tier 4 --dry-run",
+        "Validate: 4/4 build+run PASS",
+        "Package and create PDF PR #2 with Splitter + Optimizer"
+      ],
+      "unblocks": ["pdf-splitter", "pdf-optimizer"],
+      "expected_completion_after": "PDF 4/25 candidate scenarios (from 2/25)",
+      "estimated_effort": "1 sprint"
+    },
+    {
+      "wave": 2,
+      "title": "Scenario Completion Contract and Queue",
+      "priority": "HIGH",
+      "description": "Implement the scenario contract model and completion queue state machine.",
+      "tasks": [
+        "Create src/plugin_examples/scenario_planner/scenario_contract.py",
+        "Extend example_lifecycle.py with full state machine",
+        "Add contract fields to blocked-scenarios.json output",
+        "Add auto_create_taskcard() for backlogged scenarios",
+        "Wire readiness rank to expose true_completion_rate",
+        "Add 15+ tests for contract validation and state transitions"
+      ],
+      "unblocks": ["System-wide tracking and metrics"],
+      "estimated_effort": "1 sprint"
+    },
+    {
+      "wave": 3,
+      "title": "Words Paired Fixture and Enum Strategy",
+      "priority": "HIGH",
+      "description": "Enable Comparer, Merger, and Splitter.Split scenarios for Words.",
+      "tasks": [
+        "Add enum value enumeration to DllReflector (SplitCriteria)",
+        "Add comparer_input_creation_lines to words.yml (2 different documents)",
+        "Extend planner to detect array-input methods",
+        "Add Comparer, Merger to words.yml allowed_types",
+        "Regenerate: Words pilot with 6 types",
+        "Add Splitter.Split scenario using SplitCriteria enum"
+      ],
+      "unblocks": ["WORDS-005", "WORDS-006", "WORDS-007"],
+      "expected_completion_after": "Words 7/9 candidate scenarios (from 4/9)",
+      "estimated_effort": "1-2 sprints"
+    },
+    {
+      "wave": 4,
+      "title": "Words Template Fixture Strategy",
+      "priority": "MEDIUM",
+      "description": "Enable MailMerger and ReportBuilder with template-based fixtures.",
+      "tasks": [
+        "Add mail_merge_template_creation_lines to words.yml",
+        "Add report_builder_template_creation_lines to words.yml",
+        "Add MailMerger, ReportBuilder to words.yml allowed_types",
+        "Add Processor few-shot for builder pattern",
+        "Regenerate: Words full coverage run"
+      ],
+      "unblocks": ["WORDS-008", "WORDS-009", "WORDS-010"],
+      "expected_completion_after": "Words 9/9 candidate scenarios (100%)",
+      "estimated_effort": "1-2 sprints"
+    },
+    {
+      "wave": 5,
+      "title": "PDF Expanded Coverage (Batch 1: Simple Converters)",
+      "priority": "MEDIUM",
+      "description": "Expand PDF pilot to include simple converter types that follow standard IPlugin pattern.",
+      "tasks": [
+        "Select 5-8 straightforward WORKFLOW_ROOTs (DocConverter, HtmlConverter, PdfAConverter, etc.)",
+        "Add format-specific output validators (HTML header, DOC header, PDF/A compliance check)",
+        "Expand pdf.yml allowed_types incrementally",
+        "Regenerate and validate each batch"
+      ],
+      "unblocks": ["8-10 more PDF scenarios"],
+      "expected_completion_after": "PDF 10-12/25 candidate scenarios",
+      "estimated_effort": "2 sprints"
+    },
+    {
+      "wave": 6,
+      "title": "PDF Complex Fixture Types",
+      "priority": "LOWER",
+      "description": "Enable PDF types requiring complex fixtures (form fields, signatures, tables).",
+      "tasks": [
+        "Add form_field_pdf_creation_lines to pdf.yml",
+        "Add certificate/signature fixture strategy",
+        "Add table data input fixtures",
+        "Enable FormEditor, FormExporter, Signature, TableGenerator, etc."
+      ],
+      "unblocks": ["Remaining 13-15 PDF WORKFLOW_ROOTs"],
+      "expected_completion_after": "PDF 25/25 candidate scenarios (100%)",
+      "estimated_effort": "2-3 sprints"
+    },
+    {
+      "wave": 7,
+      "title": "Reviewer Structured Feedback Loop",
+      "priority": "MEDIUM",
+      "description": "Implement per-example reviewer feedback and reviewer-repair loop.",
+      "tasks": [
+        "RC-1: Add structured findings field to ReviewerResult",
+        "RC-2: Parse reviewer JSON output into structured findings",
+        "RC-3: Add reviewer-repair loop in runner.py",
+        "RC-4: Add reviewer_repair_attempts to lifecycle records",
+        "RC-5: Include reviewer findings in backlog entries"
+      ],
+      "unblocks": ["Automated quality improvement across all families"],
+      "estimated_effort": "1 sprint"
+    },
+    {
+      "wave": 8,
+      "title": "Cross-Run Learning and Readiness Metrics",
+      "priority": "LOWER",
+      "description": "Implement backlog-to-prompt feedback and full completion metrics.",
+      "tasks": [
+        "Read backlog entries at prompt-build time",
+        "Save successful Program.cs as few-shot templates",
+        "Upgrade readiness rank with full_completion_possible and true_completion_rate",
+        "Add monthly regression detection"
+      ],
+      "unblocks": ["Long-term system improvement"],
+      "estimated_effort": "1 sprint"
+    }
+  ],
+
+  "summary": {
+    "total_waves": 8,
+    "estimated_total_sprints": "10-14",
+    "current_completion": "15/43 candidate scenarios (35%)",
+    "after_wave_1": "17/43 (40%)",
+    "after_wave_4": "28/43 (65%)",
+    "after_wave_6": "43/43 (100%)",
+    "first_action": "Wave 1 — PDF Splitter/Optimizer fix. Highest impact per effort."
+  },
+
+  "verdict": "ROADMAP_DEFINED"
+}

@@ -1,0 +1,37 @@
+{
+  "sprint": "Wave 1 PDF Tier 5 LLM Pilot Completion",
+  "phase": "Phase 1 — Safe Environment Preflight",
+  "date": "2026-05-07",
+  "environment_check": {
+    "GPT_OSS_ENDPOINT": {"set": true, "note": "Value not logged"},
+    "GPT_OSS_API_KEY": {"set": true, "length": 25, "note": "Value not logged"},
+    "GPT_OSS_MODEL": {"set": false, "effective_value": "recommended", "note": "Defaults to 'recommended' in router.py — acceptable"},
+    "EXAMPLE_REVIEWER_PATH": {"set": false, "note": "Will be set inline in run command to C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer"}
+  },
+  "reviewer_directory": {
+    "path": "C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer",
+    "exists": true,
+    "will_be_set_inline": true
+  },
+  "provider_policy": {
+    "configured_provider": "llm_professionalize",
+    "approved_providers": ["llm_professionalize", "ollama"],
+    "unapproved_providers": ["gpt_oss", "openai", "azure_openai"],
+    "provider_approved": true,
+    "gpt_oss_as_provider_forbidden": true,
+    "gpt_oss_env_vars_used_by_llm_professionalize": true,
+    "note": "gpt_oss appears as env var prefix (GPT_OSS_ENDPOINT, GPT_OSS_API_KEY) but the pipeline provider is llm_professionalize which reads those vars. gpt_oss is NOT the provider family.",
+    "forbidden_model_gpt4o_mini": false
+  },
+  "run_command": {
+    "form": "PYTHONPATH=src EXAMPLE_REVIEWER_PATH='C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer' .venv/Scripts/python.exe -m plugin_examples run --family pdf --tier 5 --promote-latest",
+    "gpt_oss_vars_from_process_environment": true,
+    "no_secrets_in_command": true
+  },
+  "gate_1_pass_criteria": {
+    "llm_route_available": true,
+    "reviewer_path_available": true,
+    "no_secret_values_logged": true
+  },
+  "verdict": "GATE_1_PASS — all required credentials present; reviewer path exists; no secrets logged; ready to run Phase 2"
+}

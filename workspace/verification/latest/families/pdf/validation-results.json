@@ -1,0 +1,76 @@
+{
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "results": [
+    {
+      "scenario_id": "pdf-optimizer",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 4105.7116985321045
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 3380.3560733795166
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1651.4508724212646
+      }
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1016.4592266082764
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1614.0999794006348
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1551.8391132354736
+      }
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 999.5002746582031
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1363.8935089111328
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2138.6120319366455
+      }
+    }
+  ]
+}

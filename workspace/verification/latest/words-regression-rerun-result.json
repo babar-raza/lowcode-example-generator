@@ -1,0 +1,38 @@
+{
+  "artifact_type": "words-regression-rerun-result",
+  "sprint": "R1 — Immediate Blockers and Proof Reruns",
+  "date": "2026-05-08",
+  "run_id": "pilot-words-20260508-134400",
+  "prior_run_id": "pilot-words-20260501-150103",
+
+  "verdict": "NON_DEGRADATION_CONFIRMED",
+
+  "summary": {
+    "pipeline_stages": 16,
+    "stages_succeeded": 16,
+    "stages_degraded": 0,
+    "stages_failed": 0,
+    "examples_generated": 4,
+    "examples_built": 4,
+    "runtime_passed": 4,
+    "runtime_blocked": 0,
+    "pr_candidates": 4,
+    "excluded": 0,
+    "overall_verdict": "PR_DRY_RUN_READY"
+  },
+
+  "regression_check": {
+    "prior_result": "4/4 PASS (post-merge clean checkout validation)",
+    "current_result": "4/4 PASS (pilot-words-20260508-134400)",
+    "regressions": 0,
+    "new_failures": 0,
+    "previously_passing_now_failing": [],
+    "deferred_scenarios_still_deferred": ["Splitter.Split (SplitCriteria)", "Comparer.Compare (paired fixture)", "Merger.Merge (paired fixture)", "MailMerger.Execute (template fixture)", "Processor/ReportBuilder (builder pattern)"]
+  },
+
+  "words_lifecycle_note": "No family-scoped lifecycle file exists for Words (family predates lifecycle module). Lifecycle evidence is in run-specific evidence directories.",
+
+  "gate_6_passed": true,
+  "no_live_pr_created": true,
+  "no_publication": true
+}

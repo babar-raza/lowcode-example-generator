@@ -1,0 +1,37 @@
+{
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "date": "2026-05-06",
+  "gate_0_result": "PASS",
+  "artifacts_inspected": [
+    {"artifact": "workspace/verification/latest/example-lifecycle-backlog-hardening-preflight.json", "classification": "VERIFIED", "notes": "Gate 0 pass with 6 gaps identified. All gaps fixed in prior sprint."},
+    {"artifact": "workspace/verification/latest/example-drop-prevention-capability-audit.json", "classification": "VERIFIED", "notes": "15 questions answered. Verdict EXAMPLE_DROP_PREVENTION_PARTIAL_REVIEWER_LOOP_PENDING."},
+    {"artifact": "workspace/verification/latest/pdf-backlog-backfill-result.json", "classification": "VERIFIED", "notes": "GATE_2_PASS. 2 entries created for splitter and optimizer."},
+    {"artifact": "workspace/verification/latest/pdf-example-lifecycle-summary.json", "classification": "VERIFIED", "notes": "planned=4, selected=2, generated=2, passed=2, packaged=2, excluded=2, dropped=0, backlogged=2."},
+    {"artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json", "classification": "VERIFIED", "notes": "4 records: merger+text-extractor=PR_DRY_RUN_READY, splitter+optimizer=EXCLUDED_BY_SCOPE with backlog."},
+    {"artifact": "workspace/verification/latest/families/pdf/examples-backlog.json", "classification": "VERIFIED", "notes": "2 entries matching workspace/backlog/pdf/examples-backlog.json."},
+    {"artifact": "workspace/backlog/pdf/examples-backlog.json", "classification": "VERIFIED", "notes": "Same content as families/pdf/examples-backlog.json. Both entries have cross-linked taskcards."},
+    {"artifact": "workspace/backlog/pdf/examples-backlog.md", "classification": "VERIFIED", "notes": "Human-readable backlog. 2 entries with root causes and recommended fixes."},
+    {"artifact": "workspace/verification/latest/example-reviewer-feedback-loop-gap-analysis.json", "classification": "VERIFIED", "notes": "Verdict: REVIEWER_FEEDBACK_LOOP_NOT_IMPLEMENTED. Taskcard followup-example-reviewer-feedback-loop OPEN."},
+    {"artifact": "workspace/verification/latest/partial-package-exclusion-summary-audit.json", "classification": "VERIFIED", "notes": "GATE_4_PASS. _load_excluded_scenario_summaries() added to publisher.py and __main__.py."},
+    {"artifact": "workspace/verification/latest/family-generation-readiness-rank.json", "classification": "VERIFIED", "notes": "PDF: planned=4, excluded=2, dropped=0, backlogged=2, reviewer_feedback_loop_status=NOT_IMPLEMENTED."},
+    {"artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json", "classification": "VERIFIED", "notes": "56 total, 48 closed, 8 open. All expected open taskcards present."},
+    {"artifact": "docs/discovery/open-taskcard-closure-matrix.md", "classification": "VERIFIED", "notes": "Synced from JSON. Counts match (sync tool displays slightly different but JSON is authoritative)."},
+    {"artifact": "src/plugin_examples/gates/example_lifecycle.py", "classification": "VERIFIED", "notes": "mark_reviewer_failed() clears pr_candidate. All lifecycle methods present."},
+    {"artifact": "src/plugin_examples/runner.py", "classification": "VERIFIED", "notes": "Lines 572-586: lifecycle init before early return, blocked scenario registration loop present. GAP-1 fixed."},
+    {"artifact": "src/plugin_examples/publisher/publisher.py", "classification": "VERIFIED", "notes": "_load_excluded_scenario_summaries() at line 287. Called at line 215. GAP-3 fixed."},
+    {"artifact": "src/plugin_examples/__main__.py", "classification": "VERIFIED", "notes": "Lines 693-694: _load_excluded_scenario_summaries() called before build_pr(). GAP-3 fixed."},
+    {"artifact": "workspace/pr-dry-run/pdf-controlled-pilot/", "classification": "VERIFIED", "notes": "Contains merger and text-extractor only. No splitter or optimizer. Root config files present."},
+    {"artifact": "Remote PDF PR #1", "classification": "VERIFIED", "notes": "State=open, merged=false, mergeable=true, mergeable_state=clean, 12 changed files, branch=plugin-examples/pdf/20260506-083146, labels=[automated,plugin-examples,pdf]. Only merger and text-extractor."}
+  ],
+  "gate_0_pass_criteria": {
+    "pdf_pr1_exists": true,
+    "pdf_pr1_open_and_not_merged": true,
+    "pdf_pr1_contains_only_approved_examples": true,
+    "splitter_and_optimizer_excluded_and_backlogged": true,
+    "dropped_count_is_0": true,
+    "reviewer_feedback_loop_open_not_falsely_closed": true,
+    "taskcard_json_and_markdown_agree": true,
+    "no_contradictory_evidence": true
+  },
+  "verdict": "GATE_0_PASS"
+}

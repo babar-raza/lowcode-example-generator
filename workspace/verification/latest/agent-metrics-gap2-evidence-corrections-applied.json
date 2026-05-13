@@ -1,0 +1,49 @@
+{
+  "title": "Agent Metrics Gap Closure Sprint 2 — Evidence Corrections Applied",
+  "phase": "PHASE_3",
+  "timestamp": "2026-05-06T00:00:00Z",
+  "method": "addendum_files",
+  "note": "Original stale evidence files are preserved unchanged. Addendum files supersede only the stale count fields.",
+  "corrections": [
+    {
+      "stale_file": "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+      "addendum_file": "workspace/verification/latest/agent-metrics-final-completion-verdict-correction.json",
+      "fields_corrected": [
+        "test_results.targeted_metrics_tests.test_agent_metrics_session.py: 17 passed -> 22 passed",
+        "test_results.targeted_metrics_tests.total_metrics_tests: 200 -> 99",
+        "test_files_changed[0]: 17 tests -> 22 tests"
+      ],
+      "fields_unchanged": ["final_verdict", "gaps_closed", "full_regression", "safety_confirmation"],
+      "functional_verdict_impact": "NONE"
+    },
+    {
+      "stale_file": "workspace/verification/latest/agent-metrics-safety-verification.json",
+      "addendum_file": "workspace/verification/latest/agent-metrics-safety-verification-correction.json",
+      "fields_corrected": [
+        "regression_results.metrics_specific_tests: 205 -> 99",
+        "regression_results.metrics_tests_passed: 205 -> 99"
+      ],
+      "fields_unchanged": ["verdict", "safety_properties", "google_sheet_safety", "full_regression"],
+      "functional_verdict_impact": "NONE"
+    }
+  ],
+  "already_correct_files": [
+    {
+      "file": "workspace/verification/latest/agent-metrics-gap2-test-audit.json",
+      "status": "Already marked claims DISPUTED with correct values (99, 22)"
+    },
+    {
+      "file": "workspace/verification/latest/agent-metrics-gap2-claim-audit.json",
+      "status": "Already marks claim_23 (205->99) and claim_24 (17->22) as DISPUTED"
+    }
+  ],
+  "not_requiring_correction": [
+    "docs/ — no stale metrics test count references found",
+    "workspace/verification/latest/ other files — the '17 tests' references in open-taskcard-closure-matrix.json and pdf files refer to test_example_lifecycle.py (unrelated module)"
+  ],
+  "authoritative_counts_after_correction": {
+    "full_regression": 988,
+    "metrics_specific_tests": 99,
+    "session_tests": 22
+  }
+}

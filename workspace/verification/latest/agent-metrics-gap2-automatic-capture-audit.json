@@ -1,0 +1,42 @@
+{
+  "title": "Gap Closure Sprint 2 — Automatic LLM Capture Verification",
+  "verification_date": "2026-05-06",
+  "claim_12_every_inference_call_captured": {
+    "verified": true,
+    "evidence": {
+      "router_field": "router.py line 50: metrics_collector: object | None = None",
+      "generate_passes_collector": "router.py line 112: metrics_collector=self.metrics_collector",
+      "_call_openai_compatible_instrumented": {
+        "success_path": "router.py lines 350-355: metrics_collector.record_call(...) after successful response",
+        "failure_path": "router.py lines 339-347: metrics_collector.record_call(...) in except block"
+      },
+      "_call_ollama_instrumented": {
+        "success_path": "router.py lines 350-362: metrics_collector.record_call(...)",
+        "failure_path": "router.py lines 339-348: metrics_collector.record_call(...)"
+      },
+      "collector_field_type": "instance-scoped on LLMRouter dataclass, not module-level"
+    }
+  },
+  "claim_13_no_uninstrumented_calls": {
+    "verified": true,
+    "evidence": {
+      "all_requests_post_locations": [
+        "llm_router/router.py:328 (_call_openai_compatible — instrumented)",
+        "llm_router/router.py:395 (_call_ollama — instrumented)",
+        "metrics/poster.py:124 (metrics POST endpoint, not LLM)"
+      ],
+      "llm_professionalize_references": "Only in llm_router/router.py and llm_router/provider_policy.py",
+      "no_direct_http_calls_to_professionalize_outside_router": true,
+      "preflight_GET_not_counted": "router.py lines 193-198: GET /models does not call record_call"
+    }
+  },
+  "claim_20_no_global_mutable_collector": {
+    "verified": true,
+    "evidence": {
+      "grep_module_level_collector": "0 matches for ^(collector|_collector|metrics_collector)\\s*= in src/plugin_examples/",
+      "MetricsCollector_is_dataclass": "models.py line 29: @dataclass class MetricsCollector",
+      "instance_scoped": "Each LLMRouter has its own metrics_collector field",
+      "no_singletons": true
+    }
+  }
+}

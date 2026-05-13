@@ -1,0 +1,126 @@
+{
+  "artifact": "diagram-pilot-readiness-gate",
+  "timestamp": "2026-05-11T14:25:00Z",
+  "family": "diagram",
+  "gate_questions": {
+    "Q1_source_of_truth_proof_exists": {
+      "answer": true,
+      "evidence": "workspace/verification/latest/diagram-source-of-truth-proof.json",
+      "details": "Package Aspose.Diagram 26.4.0, SHA256=6a490df1..., 5 types, 4 methods in Aspose.Diagram.LowCode namespace"
+    },
+    "Q2_type_role_classification_complete": {
+      "answer": true,
+      "evidence": "pipeline/configs/denominators/diagram.json + new-family-type-role-classification-summary-20260511-105914.json",
+      "details": "2 WORKFLOW_ROOT (DiagramConverter, PdfConverter), 3 OPTIONS (LowCodeLoadOptions, LowCodePdfSaveOptions, LowCodeSaveOptions)"
+    },
+    "Q3_workflow_root_types_identified": {
+      "answer": true,
+      "types": ["DiagramConverter", "PdfConverter"],
+      "count": 2,
+      "method_count": 4
+    },
+    "Q4_fixture_strategy_validated": {
+      "answer": true,
+      "evidence": "workspace/fixture-validation/diagram-harness/ — 4/4 PASS",
+      "fixture_id": "programmatic_vsdx_single",
+      "strategy": "new Aspose.Diagram.Diagram() + manual Shape (ID, Name, Type, XForm properties) + Save(Vsdx)",
+      "fixture_size": "8,187 bytes",
+      "key_learning": "Masters not needed for programmatic fixture — manual Shape creation works"
+    },
+    "Q5_lowcode_api_operations_confirmed": {
+      "answer": true,
+      "confirmed_operations": [
+        "PdfConverter.Process(string inputPath, string outputPath) — Visio-to-PDF",
+        "DiagramConverter.Process(string inputPath, string outputPath) — Visio-to-Visio (VDX, VSDX, VSD)",
+        "PdfConverter.Process(LowCodeLoadOptions, LowCodeSaveOptions) — with options overload"
+      ],
+      "api_corrections": [
+        "DiagramConverter only supports Visio-to-Visio output formats — NOT PDF, SVG, etc.",
+        "PdfConverter handles all Visio-to-PDF conversions"
+      ]
+    },
+    "Q6_denominator_file_exists": {
+      "answer": true,
+      "path": "pipeline/configs/denominators/diagram.json",
+      "workflow_root_types": 2,
+      "api_catalog_sha256": null,
+      "note": "SHA256 null until first tier-5 run computes it"
+    },
+    "Q7_yaml_config_exists": {
+      "answer": true,
+      "path": "pipeline/configs/families/diagram.yml",
+      "current_status": "discovery_only",
+      "needs_promotion_to": "experimental",
+      "allowed_types_current": [],
+      "allowed_types_needed": ["DiagramConverter", "PdfConverter"]
+    },
+    "Q8_xml_docs_available": {
+      "answer": true,
+      "evidence": "diagram-source-of-truth-proof.json: xml_warning=null",
+      "details": "XML documentation IS included in Aspose.Diagram package (unlike Slides)"
+    },
+    "Q9_fixture_registry_entry_exists": {
+      "answer": false,
+      "reason": "Deferred due to healing-stream modifications to fixture-registry.json",
+      "blocking": false,
+      "workaround": "Programmatic fixture generation in code_generator — registry entry not strictly required for pilot"
+    },
+    "Q10_target_repo_exists": {
+      "answer": "UNKNOWN",
+      "configured_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "details": "Not yet probed — needs GITHUB_TOKEN with access. Not a blocking requirement for generation dry-run.",
+      "action_needed": "Run probe-publish-permissions before live PR creation"
+    },
+    "Q11_generation_dry_run_possible": {
+      "answer": true,
+      "prerequisites": [
+        "Promote diagram.yml status: discovery_only -> experimental",
+        "Set allowed_types: [DiagramConverter, PdfConverter]",
+        "Set preferred_methods_per_type: {DiagramConverter: Process, PdfConverter: Process}"
+      ],
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family diagram --tier 5 --dry-run --promote-latest"
+    },
+    "Q12_llm_generation_possible": {
+      "answer": true,
+      "requires": ["GPT_OSS_ENDPOINT", "GPT_OSS_API_KEY", "GPT_OSS_MODEL", "EXAMPLE_REVIEWER_PATH"],
+      "command": "PYTHONPATH=src EXAMPLE_REVIEWER_PATH=\"...\" .venv/Scripts/python.exe -m plugin_examples run --family diagram --tier 5 --promote-latest"
+    },
+    "Q13_scenario_count_expected": {
+      "answer": 2,
+      "scenarios": [
+        "DiagramConverter.Process — Visio-to-Visio conversion (e.g., VSDX to VDX)",
+        "PdfConverter.Process — Visio-to-PDF conversion"
+      ]
+    },
+    "Q14_input_format_requirements": {
+      "answer": "VSDX (Visio 2013+ XML format)",
+      "programmatic_creation": true,
+      "validated": true,
+      "alternative_formats": ["VSD (legacy binary)", "VDX (Visio XML)"]
+    },
+    "Q15_known_blockers": {
+      "answer": "NONE",
+      "blockers": [],
+      "notes": "Diagram has the simplest API surface (2 types, 4 methods) and XML docs available. Lowest-risk new family to pilot."
+    },
+    "Q16_recommended_pilot_order": {
+      "answer": "FIRST",
+      "reasoning": "Smallest API surface (2 WORKFLOW_ROOT, 4 methods), XML docs available, simple static Process() pattern, fixture validated, no async complexity, no missing XML docs"
+    },
+    "Q17_remaining_steps_to_pilot": {
+      "answer": [
+        "1. Promote diagram.yml: status -> experimental, allowed_types -> [DiagramConverter, PdfConverter]",
+        "2. Set preferred_methods_per_type: {DiagramConverter: Process, PdfConverter: Process}",
+        "3. Add template_hints: default_input_extension -> .vsdx",
+        "4. Run tier-5 dry-run to verify scenario planning",
+        "5. Run tier-5 with LLM credentials for generation",
+        "6. Build-repair loop (automatic, up to 3 attempts)",
+        "7. If examples pass: PR dry-run packaging",
+        "8. Probe target repo access before live PR"
+      ]
+    }
+  },
+  "overall_readiness": "READY_FOR_PILOT",
+  "risk_level": "LOW",
+  "verdict": "DIAGRAM_PILOT_GATE_PASSED"
+}

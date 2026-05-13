@@ -1,0 +1,15 @@
+{
+  "family": "email",
+  "status": "skip",
+  "denominator_basis": "DISCOVERY_ONLY",
+  "expected_count": null,
+  "ready_count": 1,
+  "blocked_count": 2,
+  "accounted_count": 3,
+  "gap": 0,
+  "message": "Family 'email' is DISCOVERY_ONLY \u2014 completeness gate skipped.",
+  "violations": [],
+  "holds": true,
+  "unknown_type_count": 0,
+  "full_wrt_count": null
+}

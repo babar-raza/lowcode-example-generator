@@ -1,0 +1,32 @@
+{
+  "simulation_type": "publish_pr_live_result",
+  "publish_date": "2026-05-02T15:38:11+00:00",
+  "family": "cells",
+  "dry_run": false,
+  "live_pr_created": true,
+  "live_push_performed": true,
+  "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "branch_name": "plugin-examples/cells/20260502-153727",
+  "files_committed": 57,
+  "pr_title": "Add verified Aspose.Cells LowCode examples for .NET controlled pilot",
+  "examples_count": 9,
+  "example_names": [
+    "html-converter",
+    "image-converter",
+    "json-converter",
+    "pdf-converter",
+    "spreadsheet-converter",
+    "spreadsheet-locker",
+    "spreadsheet-merger",
+    "spreadsheet-splitter",
+    "text-converter"
+  ],
+  "nuget_version": "26.4.0",
+  "target_owner": "aspose-cells-net",
+  "target_repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+  "target_branch": "main",
+  "gate_verdict": "PR_DRY_RUN_READY",
+  "repo_access_ready": true,
+  "pr_permission_ready": true
+}

@@ -1,0 +1,69 @@
+{
+  "artifact_type": "denominator_gate_sprint1_reconciliation",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "reconciliation_status": "RECONCILED",
+  "summary": "All 6 family completeness gates verified. Words gate corrected from stale expected_count=4 to expected_count=6 after evidence promotion bug fix.",
+  "families": {
+    "cells": {
+      "denominator_basis": "FULL_SOT",
+      "expected_count": 22,
+      "ready_count": 9,
+      "blocked_count": 13,
+      "status": "pass",
+      "holds": true,
+      "reconciled": true
+    },
+    "words": {
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 6,
+      "ready_count": 6,
+      "blocked_count": 19,
+      "status": "pass",
+      "holds": true,
+      "reconciled": true,
+      "was_stale": true,
+      "stale_expected_count": 4,
+      "corrected_expected_count": 6,
+      "root_cause": "evidence_layout.py subdirectory promotion bug"
+    },
+    "pdf": {
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 4,
+      "ready_count": 4,
+      "blocked_count": 97,
+      "status": "pass",
+      "holds": true,
+      "reconciled": true
+    },
+    "diagram": {
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 2,
+      "ready_count": 2,
+      "blocked_count": 3,
+      "status": "pass",
+      "holds": true,
+      "reconciled": true
+    },
+    "email": {
+      "denominator_basis": "DISCOVERY_ONLY",
+      "expected_count": null,
+      "status": "skip",
+      "holds": true,
+      "reconciled": true
+    },
+    "slides": {
+      "denominator_basis": "DISCOVERY_ONLY",
+      "expected_count": null,
+      "status": "skip",
+      "holds": true,
+      "reconciled": true
+    }
+  },
+  "conservation_equation": {
+    "all_families_hold": true,
+    "cells": "9 ready + 13 blocked = 22 total (HOLDS)",
+    "words": "6 ready + 19 blocked = 25 total (HOLDS)",
+    "pdf": "4 ready + 97 blocked = 101 total (HOLDS)",
+    "diagram": "2 ready + 3 blocked = 5 total (HOLDS)"
+  }
+}

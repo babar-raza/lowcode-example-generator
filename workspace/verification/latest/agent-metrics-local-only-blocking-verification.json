@@ -1,0 +1,56 @@
+{
+  "title": "Agent Metrics Local-Only Blocking Verification",
+  "audit_date": "2026-05-06",
+  "sprint": "gap-closure-sprint-2",
+  "objective": "Verify commands with unverified count formulas write local evidence but block external POST",
+  "design": {
+    "session_module": "src/plugin_examples/metrics/session.py",
+    "EXTERNAL_POST_COMMANDS": "frozenset({'run'})",
+    "EXCLUDED_COMMANDS": "frozenset({'status', 'check'})",
+    "local_only_commands": "All commands not in EXTERNAL_POST_COMMANDS and not in EXCLUDED_COMMANDS",
+    "blocking_mechanism": "MetricsSession.finalize() checks external_post_allowed before calling poster",
+    "blocking_reason_format": "count_source_unverified_for_{command}"
+  },
+  "local_evidence_written_for_local_only": {
+    "agent-metrics-llm-calls.jsonl": true,
+    "agent-metrics-run-summary.json": true,
+    "agent-metrics-payload.json": true,
+    "agent-metrics-validation.json": true,
+    "agent-metrics-post-result.json": "Written with posted=false, reason=count_source_unverified"
+  },
+  "test_verification": [
+    {
+      "test": "TestLocalOnlyBlocking::test_local_only_command_blocks_external_post",
+      "what_it_proves": "discover-lowcode with post=True still does NOT call requests.post",
+      "mock_verified": "requests.post.assert_not_called()",
+      "result_checks": ["posted == false", "reason contains count_source_unverified"],
+      "passed": true
+    },
+    {
+      "test": "TestLocalOnlyBlocking::test_local_only_command_records_llm_metrics",
+      "what_it_proves": "LLM token/call data captured in payload even for blocked commands",
+      "result_checks": ["payload.token_usage == 500", "payload.api_calls_count == 1"],
+      "passed": true
+    },
+    {
+      "test": "TestLocalOnlyBlocking::test_test_job_type_bypasses_local_only",
+      "what_it_proves": "job_type_override='test' allows POST even for local-only commands",
+      "result_checks": ["reason != count_source_unverified"],
+      "passed": true
+    },
+    {
+      "test": "TestEvidenceWriting::test_summary_includes_count_policy",
+      "what_it_proves": "Run summary JSON includes count_source_policy and external_post_allowed",
+      "result_checks": ["count_source_policy == LOCAL_ONLY_LLM_METRICS", "external_post_allowed == false"],
+      "passed": true
+    }
+  ],
+  "safety_properties": {
+    "local_only_never_posts": true,
+    "local_only_always_writes_evidence": true,
+    "test_job_type_can_bypass": true,
+    "production_job_type_cannot_bypass": true,
+    "excluded_commands_produce_no_evidence": true
+  },
+  "verdict": "LOCAL_ONLY_BLOCKING_VERIFIED"
+}

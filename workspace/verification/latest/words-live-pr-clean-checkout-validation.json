@@ -1,0 +1,69 @@
+{
+  "validation_type": "words_live_pr_clean_checkout_validation",
+  "validation_date": "2026-05-02",
+  "sprint": "Words Live PR Post-Creation Verification and Token Policy Cleanup Sprint",
+  "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "branch": "plugin-examples/words/20260502-135703",
+
+  "clone_method": "git clone --depth=1 --branch plugin-examples/words/20260502-135703",
+  "clone_source": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples.git",
+  "clone_result": "SUCCESS",
+  "clone_is_isolated": true,
+  "no_local_workspace_contamination": true,
+
+  "examples": [
+    {
+      "name": "converter",
+      "path": "examples/words/lowcode/converter",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "Conversion succeeded: output.pdf",
+      "output_format": "pdf",
+      "overall": "PASS"
+    },
+    {
+      "name": "watermarker",
+      "path": "examples/words/lowcode/watermarker",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "Watermark applied successfully.",
+      "output_format": "docx",
+      "overall": "PASS"
+    },
+    {
+      "name": "splitter",
+      "path": "examples/words/lowcode/splitter",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "ExtractPages succeeded: output.docx",
+      "output_format": "docx",
+      "overall": "PASS"
+    },
+    {
+      "name": "replacer",
+      "path": "examples/words/lowcode/replacer",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "Replace succeeded (result=1). Output file created at: output.docx",
+      "output_format": "docx",
+      "overall": "PASS"
+    }
+  ],
+
+  "ci_status": {
+    "configured": false,
+    "note": "no checks reported on branch — target repo has no CI workflows"
+  },
+
+  "summary": {
+    "total_examples": 4,
+    "passed": 4,
+    "failed": 0,
+    "overall_result": "ALL_PASS"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Agent Metrics Gap Closure Sprint 2 — Evidence Hygiene Preflight",
+  "phase": "PHASE_0",
+  "timestamp": "2026-05-06T00:00:00Z",
+  "branch": "main",
+  "commit": "79f19ae62fc3fc6f796a6b923382a8afdafc0edc",
+  "commit_message": "docs: add comprehensive README and investigation evidence bundle",
+  "git_status": "33 modified tracked files (workspace/manifests, workspace/verification/latest, src, tests — all prior sprint work)",
+  "objective": "Correct stale test count claims in implementation sprint evidence without altering functional verdicts",
+  "stale_values_to_correct": {
+    "metrics_specific_tests": {"claimed": 205, "actual": 99},
+    "session_tests": {"claimed": 17, "actual": 22},
+    "total_metrics_tests_claimed": {"claimed": 200, "actual": 99}
+  },
+  "scope_confirmed": {
+    "no_source_code_changes": true,
+    "no_metrics_behavior_changes": true,
+    "no_google_sheet_posts": true,
+    "no_git_commits_or_pushes": true
+  },
+  "existing_gap2_evidence_files": [
+    "agent-metrics-gap-closure-sprint-2.zip",
+    "agent-metrics-gap2-agent-name-audit.json",
+    "agent-metrics-gap2-automatic-capture-audit.json",
+    "agent-metrics-gap2-claim-audit.json",
+    "agent-metrics-gap2-command-coverage-audit.json",
+    "agent-metrics-gap2-count-policy-audit.json",
+    "agent-metrics-gap2-domain-audit.json",
+    "agent-metrics-gap2-evidence-redaction-audit.json",
+    "agent-metrics-gap2-file-audit.json",
+    "agent-metrics-gap2-final-verification-verdict.json",
+    "agent-metrics-gap2-google-sheet-safety-audit.json",
+    "agent-metrics-gap2-test-audit.json",
+    "agent-metrics-gap2-verification-preflight.json"
+  ],
+  "stale_implementation_evidence_files": [
+    "agent-metrics-final-completion-verdict.json",
+    "agent-metrics-safety-verification.json"
+  ],
+  "corrected_verification_evidence_files": [
+    "agent-metrics-gap2-test-audit.json (already documents the dispute)",
+    "agent-metrics-gap2-claim-audit.json (already marks claims 23 and 24 DISPUTED)"
+  ]
+}

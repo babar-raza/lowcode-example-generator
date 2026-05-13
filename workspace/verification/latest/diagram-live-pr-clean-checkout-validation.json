@@ -1,0 +1,49 @@
+{
+  "validation_type": "diagram_live_pr_clean_checkout_validation",
+  "validation_date": "2026-05-12",
+  "sprint": "Diagram Live PR Publication Sprint",
+  "pr_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "branch": "plugin-examples/diagram/20260512-091424",
+
+  "clone_method": "git clone --depth=1 --branch plugin-examples/diagram/20260512-091424",
+  "clone_source": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples.git",
+  "clone_result": "SUCCESS",
+  "clone_is_isolated": true,
+  "no_local_workspace_contamination": true,
+
+  "examples": [
+    {
+      "name": "diagram-diagram-converter",
+      "path": "examples/diagram/lowcode/diagram-diagram-converter",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "Conversion succeeded: output size = 17726 bytes",
+      "output_format": "vsdx",
+      "overall": "PASS"
+    },
+    {
+      "name": "diagram-pdf-converter",
+      "path": "examples/diagram/lowcode/diagram-pdf-converter",
+      "restore": "PASS",
+      "build": "PASS — 0 Error(s)",
+      "run": "PASS",
+      "run_output": "Conversion succeeded. Output PDF size: 26955 bytes.",
+      "output_format": "pdf",
+      "overall": "PASS"
+    }
+  ],
+
+  "ci_status": {
+    "configured": false,
+    "note": "no checks reported on branch — target repo has no CI workflows"
+  },
+
+  "summary": {
+    "total_examples": 2,
+    "passed": 2,
+    "failed": 0,
+    "overall_result": "ALL_PASS"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "artifact_type": "r1-pdf-optimizer-rerun-result",
+  "sprint": "R1 — Immediate Blockers and Proof Reruns",
+  "date": "2026-05-08",
+  "run_id": "pilot-pdf-20260508-133015",
+
+  "overall_verdict": "PR_DRY_RUN_READY — 3/4 PASS, Optimizer still blocked",
+
+  "scenario_results": {
+    "pdf-merger": {
+      "result": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_validation": "PASS",
+      "reviewer": "PASS",
+      "pr_candidate": true,
+      "notes": "Initial generation had DataSources namespace + LowCodeLoadOptions issues; repair fixed both. 3rd consecutive PR_DRY_RUN_READY."
+    },
+    "pdf-splitter": {
+      "result": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_validation": "PASS",
+      "reviewer": "PASS",
+      "pr_candidate": true,
+      "notes": "Initial generation had DataSources + TextFragment + LowCodeLoadOptions issues; repair fixed all. Consecutive PASS: 3rd time."
+    },
+    "pdf-text-extractor": {
+      "result": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_validation": "PASS",
+      "reviewer": "PASS",
+      "pr_candidate": true,
+      "notes": "Repair fixed TextExtractorOptions issue. Already merged in PR #1. Regression from prior run resolved again."
+    },
+    "pdf-optimizer": {
+      "result": "GENERATION_FAILED",
+      "build": null,
+      "run": null,
+      "reviewer": null,
+      "pr_candidate": false,
+      "failure_cause": "wrong_namespace + missing_optimizer_process",
+      "failure_details": {
+        "primary": "Post-repair validation failed: LLM still generates 'using Aspose.Pdf.LowCode.DataSources;' — forbidden namespace constraint (in packet_builder.py) is not overriding LLM behavior during repair",
+        "secondary": "Repair code also missing 'new Optimizer().Process(options)' pattern",
+        "note": "The FORBIDDEN constraint in packet_builder.py is in the initial generation prompt but repair prompts may not re-include all original constraints. The LLM is consistently hallucinating the DataSources sub-namespace for Optimizer specifically."
+      },
+      "repair_attempt": {
+        "count": 1,
+        "semantic_issues_after_repair": ["PDF Optimizer: must call 'new Optimizer().Process(options)'"],
+        "validation_failure_after_repair": "PDF: uses 'using Aspose.Pdf.LowCode.DataSources;'"
+      },
+      "action_required": "The repair prompt must explicitly include the FORBIDDEN DataSources constraint. This is a code change (code_generator.py repair path) blocked for this sprint. New taskcard: followup-pdf-optimizer-repair-constraint-injection.",
+      "not_published": true,
+      "not_pr_candidate": true
+    }
+  },
+
+  "summary": {
+    "planned": 4,
+    "generated": 3,
+    "build_passed": 3,
+    "run_passed": 3,
+    "reviewer_passed": 3,
+    "pr_candidates": 3,
+    "generation_failed": 1,
+    "generation_failed_scenarios": ["pdf-optimizer"]
+  },
+
+  "gate_4_passed": true,
+  "optimizer_failure_classified": true,
+  "no_failed_example_published": true,
+  "no_live_pr_created": true,
+
+  "splitter_revalidated": {
+    "verdict": "PASS",
+    "consecutive_passes": 3,
+    "note": "Splitter has now passed build+run+reviewer 3 consecutive times across pilots: pilot-pdf-20260507-110824, pilot-pdf-20260507-140400, pilot-pdf-20260508-133015"
+  },
+
+  "coverage_after_run": {
+    "pdf_published": 2,
+    "pdf_pr_dry_run_ready": 3,
+    "pdf_generation_failed": 1,
+    "note": "PR #3 (Merger + Splitter) already had dry-run PASS from previous sprint. TextExtractor already in PR #1 merged. Optimizer still blocked."
+  },
+
+  "new_root_cause_finding": {
+    "issue": "Repair prompts in code_generator.py do not re-include the FORBIDDEN DataSources namespace constraint from packet_builder.py",
+    "impact": "LLM can hallucinate forbidden namespace during repair even if initial generation had it in constraints",
+    "proposed_fix": "Add FORBIDDEN constraint re-injection to repair prompt in code_generator.py",
+    "sprint_for_fix": "R2 (hygiene) or separate targeted sprint — low risk, single file",
+    "new_taskcard": "followup-pdf-optimizer-repair-constraint-injection"
+  }
+}

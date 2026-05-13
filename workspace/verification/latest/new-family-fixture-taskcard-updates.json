@@ -1,0 +1,27 @@
+{
+  "artifact_id": "new-family-fixture-taskcard-updates",
+  "created": "2026-05-11T11:47:57.552847",
+  "sprint": "new-family-fixture-harness-parallel",
+  "note": "Cannot mutate taskcard matrix due to potential concurrent changes. Proposals only.",
+  "taskcard_status_proposals": [
+    {
+      "taskcard_id": "NEW-32-diagram-fixture-strategy",
+      "proposed_status": "CLOSED_VERIFIED",
+      "evidence": "workspace/fixture-validation/diagram-harness/ \u2014 4/4 PASS",
+      "remaining_work": "Registry integration deferred to post-healing sprint"
+    },
+    {
+      "taskcard_id": "NEW-33-email-fixture-strategy",
+      "proposed_status": "CLOSED_WITH_KNOWN_ISSUE",
+      "evidence": "workspace/fixture-validation/email-harness/ \u2014 4/5 PASS",
+      "remaining_work": "ConvertToHtml file lock fix in harness + registry integration + async code template",
+      "known_issue": "ConvertToHtml harness file lock (not API defect)"
+    },
+    {
+      "taskcard_id": "NEW-34-slides-fixture-strategy",
+      "proposed_status": "CLOSED_VERIFIED",
+      "evidence": "workspace/fixture-validation/slides-harness/ \u2014 6/6 PASS",
+      "remaining_work": "Registry integration + XML docs compensation (NEW-35) deferred to post-healing sprint"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "sprint": "Example Failure Recovery, Reviewer Repair Loop, and Per-Family Backlog Tracking",
+  "date": "2026-05-06",
+  "gate_0_result": "PASS",
+  "gate_0_criteria": {
+    "canonical_run_verified": true,
+    "passing_and_failing_pdf_scenarios_identified": true,
+    "evidence_for_dropped_or_excluded_examples_located": true,
+    "current_repair_loop_behavior_understood": true,
+    "example_reviewer_integration_located": true,
+    "no_contradictory_evidence_remains_unmarked": true
+  },
+  "artifact_review": [
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-merger/Program.cs",
+      "classification": "VERIFIED",
+      "notes": "Correct MergeOptions+FileDataSource+AddInput+AddOutput+new Merger().Process(options) pattern"
+    },
+    {
+      "artifact": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-text-extractor/Program.cs",
+      "classification": "VERIFIED",
+      "notes": "Correct TextExtractorOptions+FileDataSource+AddInput+new TextExtractor().Process(options)+reflection-based .Text access"
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-pilot-api-healing-sprint-result.json",
+      "classification": "VERIFIED",
+      "notes": "2/2 pass, 4 runs total, all validator fixes documented"
+    },
+    {
+      "artifact": "workspace/verification/latest/pr-candidate-manifest.json",
+      "classification": "VERIFIED",
+      "notes": "2 included, 0 excluded. But only covers examples that survived generation+validation."
+    },
+    {
+      "artifact": "workspace/verification/latest/blocked-scenarios.json",
+      "classification": "VERIFIED",
+      "notes": "99 blocked by pilot allowlist. Only Merger+TextExtractor allowed through."
+    },
+    {
+      "artifact": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/merger/Program.cs",
+      "classification": "VERIFIED",
+      "notes": "Matches canonical run output exactly"
+    },
+    {
+      "artifact": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/text-extractor/Program.cs",
+      "classification": "VERIFIED",
+      "notes": "Matches canonical run output"
+    },
+    {
+      "artifact": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "classification": "VERIFIED",
+      "notes": "PDF controlled_pilot_pass_count=2, controlled_pilot_passing_types=[Merger, TextExtractor]"
+    },
+    {
+      "artifact": "src/plugin_examples/runner.py:584-587",
+      "classification": "NEEDS_FIX",
+      "notes": "SILENT DROP: When generate_example returns failed/empty, runner logs warning and continues. Example is never tracked in generated_projects, never appears in validation, never appears in pr-candidate-manifest excluded list."
+    },
+    {
+      "artifact": "src/plugin_examples/runner.py:640-774",
+      "classification": "VERIFIED",
+      "notes": "Build-repair cycle (2 attempts) and runtime-repair cycle (1 attempt) exist and work. repair-attempts.json written. But failed examples after repair exhaustion are only tracked in validation_results — no backlog mechanism."
+    },
+    {
+      "artifact": "src/plugin_examples/publisher/publisher.py:118",
+      "classification": "NEEDS_FIX",
+      "notes": "Publisher filters to status in (generated, repaired) — examples that failed build/run after repair exhaustion are silently excluded from PR. No record of WHY excluded or WHAT to fix next."
+    },
+    {
+      "artifact": "src/plugin_examples/verifier_bridge/bridge.py",
+      "classification": "VERIFIED",
+      "notes": "Reviewer is available (ReviewerResult with compile-verify). But it only runs ONCE as a pipeline stage — no repair loop using reviewer feedback."
+    },
+    {
+      "artifact": "src/plugin_examples/gates/example_gates.py",
+      "classification": "VERIFIED",
+      "notes": "Example gates DO track per-example verdicts (BLOCKED_BUILD_FAILED, BLOCKED_RUN_FAILED, etc.). But only for examples that reached generated_projects. Dropped-at-generation examples are invisible."
+    },
+    {
+      "artifact": "C:/Users/prora/AppData/Local/Temp/claude/tasks/bfqddr2eo.output",
+      "classification": "MISSING",
+      "notes": "Background task temp file cleared. Non-blocking — run results are in workspace/runs/"
+    },
+    {
+      "artifact": "C:/Users/prora/AppData/Local/Temp/claude/tasks/bwvy3spma.output",
+      "classification": "MISSING",
+      "notes": "Background task temp file cleared. Non-blocking — run results are in workspace/runs/"
+    },
+    {
+      "artifact": "src/plugin_examples/generator/code_generator.py:73-107",
+      "classification": "VERIFIED",
+      "notes": "Pre-generation validation + repair with post-repair gate. PDF pattern reminder injected. Working correctly."
+    },
+    {
+      "artifact": "pipeline/configs/families/pdf.yml",
+      "classification": "VERIFIED",
+      "notes": "status: active, allowed_types: [Merger, TextExtractor]"
+    }
+  ],
+  "key_findings": {
+    "silent_drop_points": [
+      {
+        "location": "runner.py:584-587 (_stage_generation)",
+        "behavior": "example.status=='failed' or empty code → logger.warning + continue",
+        "impact": "Example never enters generated_projects, never reaches validation/gates/pr-manifest",
+        "fix_needed": "Track failed generation in a lifecycle record; include in excluded_examples"
+      },
+      {
+        "location": "publisher.py:118",
+        "behavior": "Filter examples to status in (generated, repaired)",
+        "impact": "Examples that failed build/run after repair exhaustion are silently excluded from PR",
+        "fix_needed": "Already partially addressed by example_gates.py exclusion tracking, but no backlog/next-fix recommendation"
+      }
+    ],
+    "repair_loop_gaps": [
+      {
+        "gap": "No reviewer-driven repair loop",
+        "current": "Reviewer runs once as stage 16, after all build/run repair is done. No feedback from reviewer to re-generate.",
+        "fix_needed": "Optional reviewer feedback → re-generation cycle for failed examples"
+      },
+      {
+        "gap": "No persistent backlog for failed examples",
+        "current": "Failed examples appear in validation-results.json and example-gate-results.json but no structured backlog with root cause + next fix recommendation",
+        "fix_needed": "Per-family backlog with root_cause, last_failure_stage, recommended_fix, attempt_history"
+      }
+    ],
+    "existing_strengths": [
+      "Build repair cycle works (2 attempts with LLM feedback)",
+      "Runtime repair cycle works (1 attempt for repairable classifications)",
+      "Pre-generation validation with post-repair gate catches API misuse",
+      "example_gates.py tracks per-example verdicts with blocked reasons",
+      "repair-attempts.json provides audit trail of repair attempts",
+      "runtime-failure-classifications.json classifies failure types"
+    ]
+  },
+  "reviewer_integration_status": {
+    "module_exists": true,
+    "module_path": "src/plugin_examples/verifier_bridge/bridge.py",
+    "current_behavior": "Runs compile-verify once as stage 16. Returns ReviewerResult(passed=bool).",
+    "repair_loop_present": false,
+    "feedback_parsed": false,
+    "reviewer_available": "Depends on EXAMPLE_REVIEWER_PATH env var"
+  },
+  "test_baseline": 852,
+  "verdict": "GATE_0_PASS"
+}

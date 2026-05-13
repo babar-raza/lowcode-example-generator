@@ -1,0 +1,89 @@
+{
+  "sprint": "Wave 1 — PDF Splitter and Optimizer Completion",
+  "phase": "Phase 5 — Lifecycle, Backlog, Readiness Validation",
+  "date": "2026-05-07",
+  "lifecycle_state": {
+    "file": "workspace/verification/latest/families/pdf/example-lifecycle.json",
+    "run_id": "pilot-pdf-20260505-214804",
+    "records": [
+      {
+        "scenario_id": "pdf-merger",
+        "current_stage": "pr_candidate",
+        "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+        "merged": true,
+        "note": "Previously published and merged. Will be re-included in Wave 1 PR package as part of 4/4 complete set."
+      },
+      {
+        "scenario_id": "pdf-text-extractor",
+        "current_stage": "pr_candidate",
+        "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+        "merged": true,
+        "note": "Previously published and merged. Will be re-included in Wave 1 PR package as part of 4/4 complete set."
+      },
+      {
+        "scenario_id": "pdf-splitter",
+        "current_stage": "excluded",
+        "final_verdict": "EXCLUDED_BY_SCOPE",
+        "merged": false,
+        "note": "Correctly shows prior-run exclusion. Wave 1 LLM run will update this record to 'pr_candidate' if Splitter passes all gates. No update until run completes."
+      },
+      {
+        "scenario_id": "pdf-optimizer",
+        "current_stage": "excluded",
+        "final_verdict": "EXCLUDED_BY_SCOPE",
+        "merged": false,
+        "note": "Correctly shows prior-run exclusion. Wave 1 LLM run will update this record to 'pr_candidate' if Optimizer passes all gates. No update until run completes."
+      }
+    ],
+    "summary_at_phase5": {
+      "planned_count": 4,
+      "currently_merged": 2,
+      "awaiting_wave1_run": 2,
+      "dropped_count": 0,
+      "no_silent_drops": true
+    }
+  },
+  "backlog_state": {
+    "file": "workspace/backlog/pdf/examples-backlog.json",
+    "entries": [
+      {
+        "backlog_id": "pdf-backlog-splitter-001",
+        "status": "open",
+        "fix_status": "FIXES_APPLIED_AWAITING_VALIDATION",
+        "fixes_applied": [
+          "packet_builder.py injects SplitOptions constraint at lines 168-174",
+          "code_generator.py blocks PluginOptions as ERROR at line 550",
+          "code_generator.py repair filter now re-states options class constraint",
+          "pdf.yml updated: Splitter added to allowed_types 2026-05-07"
+        ],
+        "remaining_action": "Run Wave 1 LLM pilot; close backlog entry if Splitter passes all gates"
+      },
+      {
+        "backlog_id": "pdf-backlog-optimizer-001",
+        "status": "open",
+        "fix_status": "FIXES_APPLIED_AWAITING_VALIDATION",
+        "fixes_applied": [
+          "packet_builder.py injects OptimizeOptions constraint at lines 168-174",
+          "code_generator.py blocks PluginOptions as ERROR at line 550",
+          "code_generator.py repair filter now re-states options class constraint",
+          "router.py now has timeout retry with bounded backoff (max 2 retries: 30s, 60s)",
+          "pdf.yml updated: Optimizer added to allowed_types 2026-05-07"
+        ],
+        "remaining_action": "Run Wave 1 LLM pilot; close backlog entry if Optimizer passes all gates"
+      }
+    ]
+  },
+  "readiness_checklist": {
+    "pdf_yml_updated": true,
+    "split_options_injection_active": true,
+    "optimize_options_injection_active": true,
+    "plugin_options_blocking_error_active": true,
+    "llm_timeout_retry_implemented": true,
+    "repair_filter_options_class_fixed": true,
+    "backlog_entries_reflect_current_state": true,
+    "lifecycle_file_consistent_with_prior_run": true,
+    "no_silent_drops_in_lifecycle": true,
+    "tests_passing_996": true
+  },
+  "verdict": "WAVE1_RUN_READY — all preconditions verified; backlog updated to reflect fixes applied; lifecycle correctly shows prior-run state; awaiting real LLM run to validate Splitter and Optimizer"
+}

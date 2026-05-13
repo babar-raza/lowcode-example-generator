@@ -1,0 +1,59 @@
+{
+  "verification_type": "readme_pr2_post_merge_verification",
+  "verification_date": "2026-05-04 07:20 UTC",
+  "sprint": "Sprint A1 — README PR Merge and Post-Merge Verification",
+
+  "cells": {
+    "pr_number": 2,
+    "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/2",
+    "merge_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+    "merged_at": "2026-05-04T07:04:27Z",
+    "remote_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "remote_readme_on_main": true,
+    "remote_readme_bytes": 5346,
+    "remote_readme_is_stub": false,
+    "readme_title_expected": "Aspose.Cells for .NET LowCode Examples",
+    "local_audit_passed": true,
+    "local_audit_bytes": 5081,
+    "local_example_count": 9,
+    "local_version": "26.4.0",
+    "consistency_status": "CONSISTENT_README_ON_MAIN",
+    "gap_001_resolved": true,
+    "verification_result": "PASS"
+  },
+
+  "words": {
+    "pr_number": 2,
+    "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/2",
+    "merge_sha": "b1877ed728ee34d04dea6c03143c49b86d2d4d72",
+    "merged_at": "2026-05-04T07:04:36Z",
+    "remote_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "remote_readme_on_main": true,
+    "remote_readme_bytes": 4555,
+    "remote_readme_is_stub": false,
+    "readme_title_expected": "Aspose.Words for .NET LowCode Examples",
+    "local_audit_passed": true,
+    "local_audit_bytes": 4337,
+    "local_example_count": 4,
+    "local_version": "26.4.0",
+    "consistency_status": "CONSISTENT_README_ON_MAIN",
+    "gap_001_resolved": true,
+    "verification_result": "PASS"
+  },
+
+  "gap_001_status": "RESOLVED",
+  "gap_001_previous_state": "40-byte stub README on main for both remote repos",
+  "gap_001_current_state": "Pipeline-generated README on main for both remote repos (cells: 5346 bytes, words: 4555 bytes)",
+
+  "taskcard_followup_root_readme_backfill_prs": "CLOSED",
+
+  "evidence_sources": [
+    "workspace/verification/latest/repository-consistency-and-reproducibility-audit.json",
+    "workspace/verification/latest/cells-readme-backfill-result.json",
+    "workspace/verification/latest/words-readme-backfill-result.json",
+    "workspace/verification/latest/cells-root-readme-audit.json",
+    "workspace/verification/latest/words-root-readme-audit.json"
+  ],
+
+  "verdict": "README_PR2_POST_MERGE_VERIFIED_BOTH_FAMILIES"
+}

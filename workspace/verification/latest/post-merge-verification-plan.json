@@ -1,0 +1,95 @@
+{
+  "plan_type": "post_merge_verification_plan",
+  "plan_date": "2026-05-03",
+  "sprint": "PR Review and Merge Governance Sprint",
+  "status": "PLANNED — no PR merged yet",
+
+  "verification_steps": [
+    {
+      "step": 1,
+      "name": "confirm_merge_state",
+      "description": "Verify PR merged=true, state=closed, merge_commit_sha present via GitHub API",
+      "command": "gh api repos/{owner}/{repo}/pulls/{pr_number} --jq '{state,merged,merged_at,merge_commit_sha}'",
+      "evidence_written": false,
+      "required": true
+    },
+    {
+      "step": 2,
+      "name": "verify_default_branch_files",
+      "description": "Verify all expected files present in main branch tree; no unexpected files",
+      "command": "gh api repos/{owner}/{repo}/git/trees/main?recursive=1 --jq '[.tree[] | .path]'",
+      "evidence_written": false,
+      "required": true
+    },
+    {
+      "step": 3,
+      "name": "clean_clone_from_default_branch",
+      "description": "Clone main branch into isolated tmpdir; dotnet restore+build+run for each example",
+      "command": "git clone --depth=1 https://github.com/{owner}/{repo}.git $TMPDIR/{family}-post-merge",
+      "evidence_written": false,
+      "required": true
+    },
+    {
+      "step": 4,
+      "name": "write_release_evidence",
+      "description": "Write {family}-post-merge-verification.json with merge SHA, build/run results",
+      "output_path": "workspace/verification/latest/{family}-post-merge-verification.json",
+      "evidence_written": false,
+      "required": true
+    },
+    {
+      "step": 5,
+      "name": "branch_cleanup_decision",
+      "description": "Do NOT delete PR branch unless explicitly authorized by human",
+      "evidence_written": false,
+      "required": false
+    }
+  ],
+
+  "families_pending_merge": [
+    {
+      "family": "words",
+      "pr_number": 1,
+      "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
+      "pre_merge_clean_checkout": "ALL_PASS (4/4)",
+      "merge_status": "PENDING_HUMAN_APPROVAL",
+      "approval_required": "APPROVE_MERGE_PR",
+      "merge_command": "PYTHONPATH=src GITHUB_TOKEN=\"$GH_TOKEN\" .venv/Scripts/python.exe -m plugin_examples merge-pr --family words --pr-number 1 --merge --approval-token APPROVE_MERGE_PR --promote-latest"
+    },
+    {
+      "family": "cells",
+      "pr_number": 1,
+      "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/1",
+      "pre_merge_clean_checkout": "ALL_PASS (9/9)",
+      "merge_status": "PENDING_HUMAN_APPROVAL",
+      "approval_required": "APPROVE_MERGE_PR",
+      "merge_command": "PYTHONPATH=src GITHUB_TOKEN=\"$GH_TOKEN\" .venv/Scripts/python.exe -m plugin_examples merge-pr --family cells --pr-number 1 --merge --approval-token APPROVE_MERGE_PR --promote-latest"
+    }
+  ],
+
+  "safety_rules": {
+    "do_not_merge_without_approve_merge_pr": true,
+    "approve_live_pr_rejected_for_merge": true,
+    "no_direct_push_to_main": true,
+    "no_branch_delete_without_explicit_approval": true,
+    "rollback_requires_human_decision": true,
+    "merge_must_specify_family_and_pr_number": true,
+    "merge_must_not_run_for_multiple_prs_unless_listed": true
+  },
+
+  "rollback_plan": {
+    "trigger": "post-merge clean-clone fails for any example",
+    "actions": [
+      "Document failure in {family}-post-merge-verification.json with overall_result=POST_MERGE_FAILED",
+      "Write docs/publishing/{family}-post-merge-failure.md",
+      "Create followup-{family}-post-merge-rollback taskcard",
+      "Present options to human: revert commit / create fix PR / accept failure"
+    ],
+    "auto_revert": false,
+    "note": "Do NOT automatically revert without human approval"
+  },
+
+  "runbook": "docs/publishing/post-merge-verification-runbook.md",
+  "live_merge_enabled": false,
+  "live_merge_blocked_reason": "Pending human APPROVE_MERGE_PR approval in a future sprint"
+}

@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "sprint": "R6",
+  "taskcard": "REM-022",
+  "scenario": "words-comparer-and-merger",
+  "design_question": "How to create paired DOCX input fixtures for Words Comparer and Merger scenarios?",
+  "current_pilot_scope": "words.yml allowed_types = [Converter, Watermarker, Splitter, Replacer] — Comparer and Merger are NOT in current pilot scope",
+  "finding": "Comparer and Merger are outside current allowed_types. No fixture design is needed until allowed_types is expanded in words.yml.",
+  "paired_fixture_design_for_future": {
+    "approach": "programmatic_pair",
+    "docx_1": "Create via Document+DocumentBuilder with known content (e.g., 'Version 1 content')",
+    "docx_2": "Create via Document+DocumentBuilder with modified content (e.g., 'Version 2 content')",
+    "fixture_type": "programmatic_pdf_pair (adapted for DOCX: programmatic_docx_pair)",
+    "code_pattern": "var doc1 = new Document(); var builder1 = new DocumentBuilder(doc1); builder1.Write('Version 1 content'); doc1.Save('input1.docx'); var doc2 = new Document(); var builder2 = new DocumentBuilder(doc2); builder2.Write('Version 2 content'); doc2.Save('input2.docx');"
+  },
+  "blocking_taskcard": "followup-words-pair-fixture-strategy",
+  "conclusion": "Paired fixture design documented here for future use when Comparer/Merger are added to allowed_types. Not blocking current Words pilot.",
+  "status": "DESIGN_COMPLETE_NOT_BLOCKING"
+}

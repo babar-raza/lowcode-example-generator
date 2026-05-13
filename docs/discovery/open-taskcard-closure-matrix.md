@@ -1,9 +1,9 @@
 <!-- GENERATED — do not edit manually. Run: python -m plugin_examples sync-taskcard-docs -->
 # Open Taskcard Closure Matrix
 
-**Matrix date:** 2026-05-09
-**Sprint:** Post-Discovery Next Sprint (Phases A-H) — state board update
-**Total:** 126 | **Open:** 50 | **Closed:** 75
+**Matrix date:** 2026-05-13
+**Sprint:** Portfolio Launch Sprint 2
+**Total:** 126 | **Open:** 48 | **Closed:** 77
 
 ---
 
@@ -54,8 +54,6 @@
 | `TC-WORDS-01-words-full-sot-classification` |  |  |
 | `TC-PDF-01-pdf-merger-rerun-post-fix` |  |  |
 | `TC-PDF-02-pdf-optimizer-2nd-pass` |  |  |
-| `TC-SYS-01-github-token-contents-write-fix` |  |  |
-| `TC-WORDS-02-words-wave2-merger-comparer` | Words Wave 2: add Merger and Comparer to allowed_types and run generation |  |
 | `TC-WORDS-03-words-wave3-mailmerger` | Words Wave 3: add MailMerger to allowed_types |  |
 | `TC-WORDS-04-words-wave4-processor-reportbuilder` | Words Wave 4: add Processor and ReportBuilder |  |
 | `TC-PDF-04-pdf-batch1-expansion` | PDF Batch 1: add PdfAConverter, Html, XlsConverter, DocConverter |  |
@@ -140,6 +138,8 @@
 | `SPRINT-R5-release-status-all-families` |  |  |
 | `SPRINT-R5-pdf-merger-textfragment-constraint-fix` |  |  |
 | `SPRINT-R5-words-denominator-guard` |  |  |
+| `TC-SYS-01-github-token-contents-write-fix` |  | Portfolio Launch Sprint 2 — Preflight |
 | `TC-PDF-03-pdf-21-type-fixture-assessment` |  | Family Expansion Readiness Sprint |
 | `TC-EMAIL-01-email-fixture-strategy-design` |  | Family Expansion Readiness Sprint |
 | `TC-SLIDES-01-slides-fixture-strategy-design` |  | Family Expansion Readiness Sprint |
+| `TC-WORDS-02-words-wave2-merger-comparer` | Words Wave 2: add Merger and Comparer to allowed_types and run generation | Portfolio Launch Sprint 1 (Wave 2 generation) |

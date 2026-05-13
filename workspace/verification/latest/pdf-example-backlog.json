@@ -1,0 +1,51 @@
+{
+  "family": "pdf",
+  "updated_at": "2026-05-08T11:05:06.512838+00:00",
+  "total_entries": 3,
+  "open_entries": 1,
+  "resolved_entries": 2,
+  "entries": [
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "last_run_id": "pilot-pdf-20260507-110824",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['PDF TextExtractor: must instantiate TextExtractorOptions and call Process(options). Example: var options = new TextExtractorOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); var result = new TextExtractor().Process(options);']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 1,
+      "first_seen": "2026-05-07T06:14:59.717359+00:00",
+      "last_seen": "2026-05-07T07:06:20.011272+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260507-120332"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "last_run_id": "pilot-pdf-20260508-133015",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: [\"PDF: uses 'using Aspose.Pdf.LowCode.DataSources;' \u2014 this sub-namespace does NOT exist in the Aspose.PDF assembly. FileDataSource lives in Aspose.Pdf.LowCode. Remove the sub-namespace using directive; 'using Aspose.Pdf.LowCode;' already covers FileDataSource.\"]",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 2,
+      "first_seen": "2026-05-07T09:11:27.141427+00:00",
+      "last_seen": "2026-05-08T11:05:06.512493+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260508-155520"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "last_run_id": "pilot-pdf-20260508-155520",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['PDF: missing AddInput() call \u2014 options must have AddInput(new FileDataSource(\"input.pdf\")) before calling Process().', \"PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment.\"]",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 1,
+      "first_seen": "2026-05-08T11:05:06.512474+00:00",
+      "last_seen": "2026-05-08T11:05:06.512487+00:00",
+      "resolved": false,
+      "resolved_in_run": null
+    }
+  ]
+}

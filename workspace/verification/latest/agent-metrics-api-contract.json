@@ -1,0 +1,95 @@
+{
+  "title": "Agent Metrics API Contract — Reconstructed from TC-13 Evidence",
+  "artifact_type": "retroactive_reconstruction",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "source_evidence": "workspace/verification/latest/agent-metrics-test-post-result.json",
+  "construction_note": "This artifact was not produced during the formal TC-01 plan sprint. It is reconstructed post-hoc from the confirmed successful TC-13 controlled test POST. No new HTTP call was made to produce this file.",
+
+  "endpoint": {
+    "url": "[REDACTED — read from AGENT_METRICS_ENDPOINT env var]",
+    "source": "AGENT_METRICS_ENDPOINT env var (formerly pipeline/configs/metrics.yml: api_endpoint)",
+    "protocol": "HTTPS",
+    "type": "Google Apps Script Web App",
+    "method_used": "POST"
+  },
+
+  "auth_method": {
+    "type": "query_parameter_token",
+    "parameter_name": "token",
+    "value": "[REDACTED — read from AGENT_METRICS_TOKEN env var at POST time only, never stored]",
+    "source": "agent-metrics-test-post-result.json: auth_method=query_parameter_token"
+  },
+
+  "accepted_payload_shape": {
+    "content_type": "application/json",
+    "method": "POST",
+    "fields": {
+      "agent_name": "string — e.g. 'lowcode-example-generator' or 'test-lowcode-example-generator'",
+      "agent_owner": "string — e.g. 'Babar Raza'",
+      "command": "string — CLI subcommand name",
+      "job_type": "string — one of: examples_generation, discovery, publishing, reporting, test",
+      "status": "string — one of: success, partial_success, failure",
+      "product": "string — e.g. 'Aspose.Cells'",
+      "website": "string — e.g. 'aspose.net'",
+      "website_section": "string — e.g. 'Examples'",
+      "platform": "string — e.g. '.NET'",
+      "item_name": "string — e.g. 'Examples'",
+      "items_discovered": "integer",
+      "items_succeeded": "integer",
+      "items_failed": "integer",
+      "token_usage": "integer — total LLM tokens consumed",
+      "api_calls_count": "integer — number of LLM HTTP requests",
+      "run_id": "string — unique run identifier",
+      "timestamp": "string — ISO 8601"
+    },
+    "note": "Payload shape inferred from payload_builder.py and confirmed accepted by HTTP 200 response"
+  },
+
+  "confirmed_test_row": {
+    "run_id": "test-metrics-integration-1",
+    "job_type": "test",
+    "status": "success",
+    "product": "Aspose.Cells",
+    "website": "aspose.net",
+    "platform": ".NET",
+    "http_status": 200,
+    "api_response": {
+      "status": 200,
+      "ok": true,
+      "message": "Metrics recorded",
+      "run_id": "test-metrics-integration-1"
+    },
+    "agent_name_used": "test-lowcode-example-generator",
+    "payload_hash": "ce28510199e84944"
+  },
+
+  "response_shape": {
+    "status": 200,
+    "content_type": "application/json",
+    "fields": {
+      "status": "integer — HTTP status mirrored",
+      "ok": "boolean — true on success",
+      "message": "string — human-readable result",
+      "run_id": "string — echoed from request payload"
+    }
+  },
+
+  "duplicate_behavior": {
+    "observed": "Second POST with same run_id=test-metrics-integration-1 blocked locally by ledger (not sent)",
+    "local_dedup_result": {"posted": false, "reason": "duplicate_already_posted"},
+    "server_side_dedup": "unknown — local dedup prevented sending; server behavior on duplicate not probed"
+  },
+
+  "invalid_payload_test": {
+    "performed": false,
+    "note": "No invalid live payload was sent. The plan specified this for the TC-01 execution phase, which was not formally executed as a separate sprint. Invalid-payload behavior is not documented from live testing."
+  },
+
+  "verified": true,
+  "verification_basis": "Successful HTTP 200 POST with well-formed payload. Response matches expected shape. api_response.ok=true. run_id echoed correctly.",
+  "limitations": [
+    "Not produced during formal TC-01 plan-sprint execution — reconstructed retroactively",
+    "Invalid payload test not performed live",
+    "Server-side duplicate detection not probed (local dedup prevented second send)"
+  ]
+}

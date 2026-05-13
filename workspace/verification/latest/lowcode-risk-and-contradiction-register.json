@@ -1,0 +1,50 @@
+{
+  "artifact_id": "lowcode-risk-and-contradiction-register",
+  "created": "2026-05-09",
+  "sprint": "R0",
+
+  "contradictions": [
+    {"id": "C1", "status": "RESOLVED", "resolution": "cells-post-merge-clean-checkout-validation.json confirms SHA f6e5515c070184e4b08a2cff647220bea1113b08"},
+    {"id": "C2", "status": "RESOLVED", "resolution": "words-post-merge-clean-checkout-validation.json confirms SHA b66fb43023d4d1af7162270ac9d3ef3ef881451f"},
+    {"id": "C3", "status": "OPEN", "severity": "HIGH", "description": "release-status defaults exclude PDF", "action": "Fix __main__.py lines 269-270", "sprint": "R7", "blocking": true},
+    {"id": "C4", "status": "OPEN", "severity": "MEDIUM", "description": "email.yml enabled=true but in disabled/ directory", "action": "R2 investigation", "sprint": "R2", "blocking": false},
+    {"id": "C5", "status": "OPEN", "severity": "MEDIUM", "description": "slides.yml enabled=true but in disabled/ directory", "action": "R2 investigation", "sprint": "R2", "blocking": false},
+    {"id": "C6", "status": "OPEN", "severity": "MEDIUM", "description": "monthly workflow defaults to cells only", "action": "Extend workflow", "sprint": "R14", "blocking": false},
+    {"id": "C7", "status": "OPEN", "severity": "MEDIUM", "description": "Words workflow_root_types=NULL vs readiness rank showing 9 candidates", "action": "NEW-07 classification", "sprint": "R7", "blocking": true},
+    {"id": "C8", "status": "RESOLVED", "resolution": "77 taskcards, 16 open is correct; memory was stale"},
+    {"id": "C9", "status": "RESOLVED", "resolution": "Template-mode examples from 2026-04-29 are historical; not production artifacts"}
+  ],
+
+  "risks": [
+    {"id": "RK-001", "category": "CREDENTIAL", "description": "GITHUB_TOKEN may lack Contents:Write for aspose-pdf-net", "likelihood": "MEDIUM", "impact": "HIGH", "sprint": "R8"},
+    {"id": "RK-002", "category": "LLM", "description": "PDF Optimizer 2nd consecutive PASS non-deterministic", "likelihood": "MEDIUM", "impact": "MEDIUM", "sprint": "R8"},
+    {"id": "RK-003", "category": "DISCOVERY", "description": "Group C families may have no LowCode namespaces", "likelihood": "HIGH", "impact": "MEDIUM", "sprint": "R3"},
+    {"id": "RK-004", "category": "FIXTURE", "description": "Words Comparer/Merger blocked by missing pair-fixture strategy", "likelihood": "HIGH", "impact": "MEDIUM", "sprint": "R9"},
+    {"id": "RK-005", "category": "FIXTURE", "description": "PDF form-type examples blocked by missing form-fields PDF fixture", "likelihood": "HIGH", "impact": "MEDIUM", "sprint": "R10"},
+    {"id": "RK-006", "category": "CLASSIFICATION", "description": "16 Words types labeled NON_RUNNABLE but not formally classified", "likelihood": "MEDIUM", "impact": "MEDIUM", "sprint": "R7"},
+    {"id": "RK-007", "category": "COMPLETION_QUEUE", "description": "37 deferred types not in completion queue", "likelihood": "HIGH", "impact": "HIGH", "sprint": "R6.5"},
+    {"id": "RK-008", "category": "DENOMINATOR", "description": "Words workflow_root_types=NULL", "likelihood": "HIGH", "impact": "MEDIUM", "sprint": "R7"},
+    {"id": "RK-009", "category": "NETWORK", "description": "NuGet download failures for Group C families", "likelihood": "MEDIUM", "impact": "MEDIUM", "sprint": "R3"},
+    {"id": "RK-010", "category": "SCOPE", "description": "Some Aspose products may be Java-only", "likelihood": "MEDIUM", "impact": "LOW", "sprint": "R1"},
+    {"id": "RK-011", "category": "REVIEWER", "description": "EXAMPLE_REVIEWER_PATH not set; new family examples skip reviewer gate", "likelihood": "HIGH", "impact": "MEDIUM", "sprint": "R11"},
+    {"id": "RK-012", "category": "STALE_RECORD", "description": "PDF Splitter runtime failure stale record RC-005 not superseded", "likelihood": "LOW", "impact": "LOW", "sprint": "R6.5"}
+  ],
+
+  "root_causes": [
+    {"id": "RC-001", "family": "pdf", "example": "pdf-optimizer", "category": "WRONG_OPTIONS_CLASS", "resolved": true},
+    {"id": "RC-002", "family": "pdf", "example": "pdf-optimizer", "category": "FORBIDDEN_CORE_API_USAGE", "resolved": true},
+    {"id": "RC-003", "family": "pdf", "example": "pdf-optimizer", "category": "LLM_REPAIR_PROMPT_GAP", "resolved": true},
+    {"id": "RC-004", "family": "pdf", "example": "pdf-splitter", "category": "WRONG_DATASOURCE_USAGE", "resolved": true},
+    {"id": "RC-005", "family": "pdf", "example": "pdf-splitter", "category": "STALE_RECORD", "resolved": false, "note": "Stale runtime failure entry; needs superseded marker"},
+    {"id": "RC-006", "family": "pdf", "example": "pdf-text-extractor", "category": "LLM_REPAIR_PROMPT_GAP", "resolved": true},
+    {"id": "RC-007", "family": "words", "example": "words-comparer,words-merger", "category": "MISSING_PAIR_FIXTURE", "resolved": false},
+    {"id": "RC-008", "family": "words", "example": "words-mailmerger", "category": "MISSING_TEMPLATE_FIXTURE", "resolved": false},
+    {"id": "RC-009", "family": "words", "example": "words-splitter-split", "category": "MISSING_ENUM_STRATEGY", "resolved": false},
+    {"id": "RC-010", "family": "words", "example": "context_classes_8", "category": "LOWCODE_API_REQUIRES_STATEFUL_CONTEXT", "resolved": false, "note": "Assumed non-runnable; needs formal classification"},
+    {"id": "RC-011", "family": "pdf", "example": "21_deferred_workflow_roots", "category": "COMPLETION_QUEUE_GAP", "resolved": false},
+    {"id": "RC-012", "family": "words", "example": "all_25_types", "category": "DENOMINATOR_GAP", "resolved": false},
+    {"id": "RC-013", "family": "all", "example": "n/a", "category": "BACKLOG_SYNC_GAP", "resolved": false},
+    {"id": "RC-014", "family": "all", "example": "n/a", "category": "TASKCARD_SYNC_GAP", "resolved": false},
+    {"id": "RC-015", "family": "all", "example": "n/a", "category": "POST_MERGE_VERIFICATION_GAP", "resolved": false}
+  ]
+}

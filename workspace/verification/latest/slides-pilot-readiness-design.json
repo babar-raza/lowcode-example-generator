@@ -1,0 +1,120 @@
+{
+  "artifact_type": "slides_pilot_readiness_design",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Family Expansion Readiness Sprint",
+  "taskcard": "TC-SLIDES-01-slides-fixture-strategy-design",
+  "related_taskcards": ["NEW-20-followup-slides-controlled-pilot-planning"],
+  "pilot_launch_status": "NOT_LAUNCHED — design only, do not activate",
+  "family": "slides",
+  "source_namespace": "Aspose.Slides.LowCode",
+  "workflow_roots": ["Compress", "Convert", "Merger"],
+  "non_runnable_types": ["Collect", "ForEach"],
+  "xml_docs_gap": {
+    "issue": "Package Aspose.Slides.NET contains Aspose.Slides.xml but pipeline expects Aspose.Slides.NET.xml",
+    "impact": "xml_warning in source-of-truth proof. DllReflector still works (DLL found via endswith('.NET') fallback). XML docs missing means method parameter descriptions unavailable in catalog.",
+    "mitigation": "DLL fallback already implemented. XML docs absence is non-blocking for generation — API catalog has method signatures from reflection. LLM prompts will lack docstring context but method signatures are sufficient.",
+    "severity": "LOW — non-blocking for generation"
+  },
+  "api_architecture": {
+    "pattern": "ALL_STATIC — all workflow root methods are static",
+    "compress_pattern": "Compress.CompressEmbeddedFonts(Presentation pres) — takes Presentation object (in-memory), mutates in place",
+    "convert_pattern": "Convert.ToPdf(Presentation pres, string outPath) OR Convert.ToPdf(string presPath, string outPath) — both file and in-memory overloads",
+    "merger_pattern": "Merger.Process(string[] inputFileNames, string outputFileName) — file path array input, simplest overload",
+    "key_difference": "Compress modifies Presentation object IN PLACE (no output path). Save Presentation after calling Compress."
+  },
+  "fixture_strategy": {
+    "fixture_type": "programmatic_pptx",
+    "approach": "Create Presentation object programmatically via Aspose.Slides.Presentation. Add slides with ISlide.Shapes. Save to .pptx file.",
+    "fixture_creation_code": [
+      "var pres = new Aspose.Slides.Presentation();",
+      "var slide = pres.Slides[0];",
+      "var shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 100);",
+      "shape.TextFrame.Text = \"LowCode Slides Example\";",
+      "pres.Save(\"input.pptx\", Aspose.Slides.Export.SaveFormat.Pptx);"
+    ],
+    "pair_fixture_for_merger": [
+      "// Presentation 1",
+      "var pres1 = new Aspose.Slides.Presentation();",
+      "pres1.Slides[0].Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 100).TextFrame.Text = \"Slide 1\";",
+      "pres1.Save(\"input1.pptx\", Aspose.Slides.Export.SaveFormat.Pptx);",
+      "// Presentation 2",
+      "var pres2 = new Aspose.Slides.Presentation();",
+      "pres2.Slides[0].Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 100).TextFrame.Text = \"Slide 2\";",
+      "pres2.Save(\"input2.pptx\", Aspose.Slides.Export.SaveFormat.Pptx);"
+    ],
+    "compress_fixture_note": "Compress takes Presentation object, NOT file path. Must load (or create) Presentation, call Compress static method, then save.",
+    "dependencies": ["Aspose.Slides.NET (primary)"],
+    "dependency_resolution_max_depth": 2,
+    "dependency_gap_risk": "LOW — discovery succeeded; DLL and deps resolved"
+  },
+  "per_type_designs": {
+    "Compress": {
+      "primary_method": "Compress.RemoveUnusedLayoutSlides",
+      "rationale": "RemoveUnusedLayoutSlides is safest for any presentation — removes unused layout slides without visible content loss. CompressEmbeddedFonts requires embedded fonts. RemoveUnusedMasterSlides is more destructive.",
+      "simplest_call": "Compress.RemoveUnusedLayoutSlides(pres); // then pres.Save(outputPath)",
+      "fixture_note": "Compress takes Presentation object, NOT file path. Load with new Presentation(path) or create programmatically.",
+      "output_validation": "output .pptx file exists; size > 0",
+      "proposed_per_type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Slides.LowCode;",
+          "REQUIRED: Compress.RemoveUnusedLayoutSlides(pres) — static call on Presentation object",
+          "REQUIRED: pres.Save(outputPath, SaveFormat.Pptx) after calling Compress — Compress mutates in-place"
+        ],
+        "forbidden": [
+          "FORBIDDEN: manual slide manipulation replacing Compress — use LowCode Compress static methods",
+          "FORBIDDEN: passing file path to Compress — Compress takes Presentation object, not string path"
+        ]
+      }
+    },
+    "Convert": {
+      "primary_method": "Convert.ToPdf",
+      "rationale": "ToPdf with file-path overload: Convert.ToPdf(presPath, outPath) is the simplest — no Presentation object needed. Converts PPTX to PDF directly from file paths.",
+      "simplest_call": "Convert.ToPdf(\"input.pptx\", \"output.pdf\");",
+      "alternative": "Convert.AutoByExtension(\"input.pptx\", \"output.pdf\") — auto-detects format from extension",
+      "output_validation": "output .pdf file exists; magic bytes %PDF",
+      "proposed_per_type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Slides.LowCode;",
+          "REQUIRED: Convert.ToPdf(presPath, outputPath) — static file-path call, simplest overload"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() — use LowCode Convert static method",
+          "FORBIDDEN: IPresentation.Save() replacing Convert.ToPdf()"
+        ]
+      }
+    },
+    "Merger": {
+      "primary_method": "Merger.Process",
+      "rationale": "Merger.Process(string[] inputFileNames, string outputFileName) is the simplest file-path overload. Merges multiple PPTX into one.",
+      "simplest_call": "Merger.Process(new[] { \"input1.pptx\", \"input2.pptx\" }, \"output.pptx\");",
+      "input_count": 2,
+      "output_validation": "output .pptx file exists; size > 0; slide count >= sum of inputs",
+      "pair_fixture_required": true,
+      "pair_fixture_strategy": "programmatic_pptx_pair — same as programmatic_pptx but create 2 separate files",
+      "proposed_per_type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Slides.LowCode;",
+          "REQUIRED: Merger.Process(inputFiles, outputFile) — static file-path array call",
+          "REQUIRED: input files array with 2+ PPTX paths"
+        ],
+        "forbidden": [
+          "FORBIDDEN: manual slide copy/import replacing Merger.Process() — use LowCode Merger",
+          "FORBIDDEN: IPresentation.Slides.AddClone() replacing Merger.Process()"
+        ]
+      }
+    }
+  },
+  "activation_prerequisites": [
+    "1. slides.yml: set status=active (currently discovery_only)",
+    "2. slides.yml: set allowed_types=[Compress, Convert, Merger]",
+    "3. slides.yml: add controlled_pilot_approved=true",
+    "4. slides.yml: add template_hints section with programmatic_pptx fixture",
+    "5. slides.yml: update per_type_constraints for all 3 types",
+    "6. Target repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples provisioned by maintainer",
+    "7. Human APPROVE_LIVE_PR authorization before any PR creation",
+    "8. xml_warning is non-blocking — proceed with reflection-only catalog"
+  ],
+  "xml_docs_gap_recommendation": "Accept xml_warning as non-blocking. DLL reflection provides full method signatures. No action required before pilot launch.",
+  "pilot_not_launched": true,
+  "do_not_apply": "All above are PROPOSED DESIGN only. Do not modify slides.yml until explicit expansion approval is granted."
+}

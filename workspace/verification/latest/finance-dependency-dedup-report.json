@@ -1,0 +1,10 @@
+{
+  "family": "finance",
+  "total_input_paths": 0,
+  "kept_count": 0,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [],
+  "excluded": [],
+  "conflicts": []
+}

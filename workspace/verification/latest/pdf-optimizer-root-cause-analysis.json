@@ -1,0 +1,121 @@
+{
+  "artifact_type": "pdf-optimizer-root-cause-analysis",
+  "sprint": "PDF Optimizer Build-Repair Constraint Injection Fix",
+  "date": "2026-05-07",
+  "phase": "Phase 1 — Root-Cause Analysis",
+
+  "questions_answered": [
+    {
+      "q": "1. Where did File.Copy enter the generated Optimizer code?",
+      "a": "File.Copy entered during BUILD REPAIR attempt 2. The Optimizer generated initial code with LowCodeLoadOptions issues, which triggered static validation repair in code_generator.py. After generation repair, the code still had compiler errors (likely OptimizeOptions type not resolving or wrong API usage). Build repair in runner.py was invoked 2 times. On build repair attempt 2, the LLM — without PDF constraints — fell back to the simplest compilable code: File.Copy() with a comment 'Simulate optimization by copying the file'."
+    },
+    {
+      "q": "2. Did initial generation prompt include OptimizeOptions constraints?",
+      "a": "YES. packet_builder.py lines 168-174 inject REQUIRED: options class is 'OptimizeOptions', REQUIRED: plugin class is 'Optimizer', REQUIRED: exact usage pattern for Optimizer. The generation prompt had full constraints."
+    },
+    {
+      "q": "3. Did build repair prompt include OptimizeOptions constraints?",
+      "a": "NO. runner.py build repair at lines 704-712 sends ONLY: (1) compiler stdout/stderr, (2) current failing code, (3) basic RULES about ReadKey/ReadLine/try-catch/return-csharp. It does NOT include any PDF-specific constraints. This is the confirmed gap."
+    },
+    {
+      "q": "4. Did repair prompt include forbidden File.Copy or lowcode-only requirements?",
+      "a": "NO on both counts. 'FORBIDDEN: File.Copy' is NOT in packet_builder.py constraints (gap). 'FORBIDDEN: File.Copy' is NOT in the build repair prompt (gap). Neither the generation packet nor the build repair prompt explicitly prohibits File.Copy."
+    },
+    {
+      "q": "5. Which repair path dropped packet constraints?",
+      "a": "The BUILD REPAIR path in runner.py _stage_validation (lines 704-712). The packet is built in _stage_generation and NOT stored in the proj dict or ctx.generated_projects. The _stage_validation function has access only to proj dict which contains: scenario_id, project_dir, csproj_path, program_path, target_framework, package_id, claimed_symbols, status, input_strategy, input_files, placed_fixtures. The packet.constraints are NOT stored — they are discarded after code_generator.py's generate_example() completes."
+    },
+    {
+      "q": "6. Was the failure static validation, build validation, semantic validation, runtime validation, or reviewer validation?",
+      "a": "SEMANTIC VALIDATION failure — but detected by AGENT OVERRIDE, not by any automated system. The pipeline classified Optimizer as PASS at all automated gates: static validation (after repair), build (after 2 repairs), runtime, reviewer. The File.Copy code compiles, runs, produces output, and doesn't obviously fail the reviewer's pattern checks. Only the agent inspecting the actual code detected the semantic failure."
+    },
+    {
+      "q": "7. Which subsystem should have caught File.Copy earlier?",
+      "a": "THREE systems should have caught it but didn't: (1) _validate_code in code_generator.py — does not check for File.Copy in PDF context; (2) build repair prompt in runner.py — does not re-inject PDF constraints telling LLM to use OptimizeOptions; (3) The reviewer — passed code that doesn't demonstrate the claimed API (reviewer checks style/quality not semantic API correctness)."
+    },
+    {
+      "q": "8. Which validation rule must be added?",
+      "a": "Add to _validate_code in code_generator.py: (A) For PDF family: FORBIDDEN File.Copy — if 'File.Copy' in code and family='pdf', flag it. (B) For PDF optimizer type: REQUIRED OptimizeOptions — if type_short='optimizer' and 'OptimizeOptions' not in code, flag it. (C) For PDF optimizer type: REQUIRED Optimizer.Process — if type_short='optimizer' and 'Optimizer().Process' not in code, flag it. (D) General: after build repair, call _validate_code on repaired code to catch semantic failures."
+    },
+    {
+      "q": "9. Which prompt path must be patched?",
+      "a": "The build repair prompt in runner.py _stage_validation lines 704-712. Must add: (1) PDF constraint re-injection from proj.get('pdf_constraints', []). This requires storing packet constraints in the proj dict during generation. (2) Add FORBIDDEN: File.Copy to packet_builder.py PDF constraints so it's available for re-injection."
+    }
+  ],
+
+  "root_cause_chain": {
+    "step_1_initial_generation": {
+      "what_happened": "LLM generated code with LowCodeLoadOptions (wrong class) and missing Aspose.Pdf.Text using directive",
+      "detected_by": "_validate_code in code_generator.py",
+      "static_issues": ["Creates LowCodeLoadOptions without setting InputFile", "missing using Aspose.Pdf.Text"],
+      "repair_triggered": "generation repair in code_generator.py with pdf_pattern_reminder"
+    },
+    "step_2_generation_repair": {
+      "what_happened": "LLM repair produced code that passed static validation — likely used OptimizeOptions correctly. However the code still had compiler errors (OptimizeOptions API usage incorrect at compile time).",
+      "detected_by": "code_generator.py post-repair _validate_code — PASSED static check",
+      "note": "The static validator only checks string patterns, not actual compilation correctness. Code can pass static validation but fail to compile."
+    },
+    "step_3_build_repair_attempt_1": {
+      "what_happened": "dotnet build failed on the generation-repaired code. runner.py build repair attempt 1: sent compiler error + code to LLM with NO PDF constraints. LLM attempted to fix the compile error but produced code that still failed to compile.",
+      "prompt_contents": "compiler stdout, compiler stderr, current code, basic rules (no ReadKey/ReadLine/try-catch)",
+      "missing_from_prompt": "REQUIRED: OptimizeOptions, REQUIRED: Optimizer, REQUIRED: exact code pattern, FORBIDDEN: File.Copy"
+    },
+    "step_4_build_repair_attempt_2": {
+      "what_happened": "dotnet build failed again. runner.py build repair attempt 2: sent updated compiler error + new code to LLM with NO PDF constraints. LLM, unable to make OptimizeOptions compile correctly with only error context, fell back to a semantically wrong but compilable solution: File.Copy() with a comment 'replace with real optimizer when available'.",
+      "prompt_contents": "compiler stdout, compiler stderr, current code, basic rules",
+      "missing_from_prompt": "REQUIRED: OptimizeOptions, REQUIRED: Optimizer, REQUIRED: exact code pattern, FORBIDDEN: File.Copy",
+      "result": "File.Copy code written to Program.cs — compiles and runs"
+    },
+    "step_5_missed_catches": {
+      "_validate_code": "Not called in runner.py build repair — only in code_generator.py generation. File.Copy is not in validation rules.",
+      "build_gate": "PASS — File.Copy compiles and produces output file",
+      "run_gate": "PASS — File.Copy copies input.pdf to output.pdf, file exists, non-empty",
+      "reviewer_gate": "PASS — reviewer checks code style/patterns not LowCode API semantic correctness",
+      "agent_review": "SEMANTIC_FAIL DETECTED — File.Copy does not demonstrate Aspose.Pdf.LowCode.Optimizer"
+    }
+  },
+
+  "fixes_required": {
+    "fix_1_packet_constraints_in_proj": {
+      "file": "src/plugin_examples/runner.py",
+      "location": "_stage_generation, after generate_project call",
+      "change": "Store packet's PDF constraints in project dict: project['pdf_constraints'] = [c for c in packet.constraints if 'REQUIRED:' in c or 'FORBIDDEN:' in c]"
+    },
+    "fix_2_build_repair_pdf_injection": {
+      "file": "src/plugin_examples/runner.py",
+      "location": "_stage_validation build repair loop, lines 704-712",
+      "change": "Before building repair_prompt, extract proj.get('pdf_constraints', []). If non-empty, append constraint reminder to repair_prompt (same pattern as code_generator.py lines 79-92)."
+    },
+    "fix_3_validate_after_build_repair": {
+      "file": "src/plugin_examples/runner.py",
+      "location": "_stage_validation build repair loop, after fixed_code is written",
+      "change": "Call _validate_code(fixed_code, family=ctx.family, type_short=proj.get('type_short', '')) before dotnet build. If issues found, log them and skip writing — treat as failed repair."
+    },
+    "fix_4_file_copy_forbidden_in_packet": {
+      "file": "src/plugin_examples/generator/packet_builder.py",
+      "location": "PDF constraints list, around line 111",
+      "change": "Add: 'FORBIDDEN: File.Copy() or System.IO.File.Copy — this is not a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.'"
+    },
+    "fix_5_semantic_validator": {
+      "file": "src/plugin_examples/generator/code_generator.py",
+      "location": "_validate_code function, PDF-specific section",
+      "change": "Add: (A) File.Copy check for PDF family; (B) type_short parameter to enable per-type validation; (C) Optimizer-specific: require OptimizeOptions + Optimizer().Process; (D) Update call sites to pass type_short."
+    },
+    "fix_6_build_repair_semantic_check": {
+      "file": "src/plugin_examples/runner.py",
+      "location": "After each successful build repair (before running dotnet validation again)",
+      "change": "Call _validate_code on fixed_code. If semantic issues found, reject the repair and try again or stop."
+    }
+  },
+
+  "textextractor_regression_analysis": {
+    "rule_that_failed": "_validate_code line 581-586: if 'TextExtractor' in code and 'TextExtractorOptions' not in code",
+    "what_happened": "LLM generated code with TextExtractor reference but without TextExtractorOptions. Generation repair in code_generator.py included the exact pattern (via pdf_pattern_reminder), but after one repair attempt (max_repairs=1 by default), the LLM still did not produce TextExtractorOptions code. Post-repair validation confirmed failure. Generation failed.",
+    "is_rule_too_strict": "NO — the rule is correct. TextExtractor MUST use TextExtractorOptions. The generated code was wrong.",
+    "is_llm_at_fault": "YES — non-deterministic. Prior run succeeded with same constraints.",
+    "pr1_published_status": "UNAFFECTED — PR #1 merged (SHA a9f9e254fbdbd012e6486e699395298e427169eb), TextExtractor on main is correct.",
+    "fix_required": "Strengthen TextExtractor repair prompt by adding the full known-good code as a mandatory example in the repair message, not just the constraints."
+  },
+
+  "root_cause_verdict": "CONFIRMED: Build repair path dropped PDF constraints, allowing LLM to use File.Copy as semantic substitute. Two additional gaps: (1) File.Copy not in FORBIDDEN list; (2) _validate_code not called post-build-repair. All three must be fixed to prevent recurrence."
+}

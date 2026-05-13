@@ -1,0 +1,75 @@
+{
+  "artifact_id": "lowcode-scope-correction-verdict",
+  "created": "2026-05-09",
+  "sprint": "R0",
+  "verdict": "SCOPE_CORRECTION_REQUIRED_AND_APPLIED",
+
+  "wrong_assumptions_discarded": [
+    "Cells/Words/PDF = the project (they are pilot families only)",
+    "Others TBD is acceptable as final state",
+    "All-family discovery can wait until Phase 6",
+    "Existing YAMLs define all families (only 5 configured; 20+ are not)",
+    "release-status covers all active families (defaults exclude PDF)",
+    "Monthly workflow covers all families (defaults to cells only)"
+  ],
+
+  "parts_remaining_useful": [
+    "All Cells/Words/PDF evidence and sprint records",
+    "PDF PR#3/PR#4 sprint cards (reordered)",
+    "No-silent-drop governance findings",
+    "Root-cause register findings",
+    "Contradiction register (C1/C2 resolved, C3-C9 remain)"
+  ],
+
+  "corrected_execution_order": [
+    "R0: Plan amendment (this sprint)",
+    "R1: YAML creation for ~20 candidate families (parallel with R7, R8)",
+    "R2: Email/Slides blocker investigation (parallel with R1, R8)",
+    "R3: All-family discovery after YAML coverage",
+    "R4-R6: Source-of-truth, classification, denominators for new families",
+    "R6.5: Dropped planned example verification failure audit",
+    "R7: Existing family reconciliation (parallel with R1-R6)",
+    "R8: PDF PR publication unblocker (parallel with R1-R7)",
+    "R9+: Words/PDF/new family expansion waves",
+    "R12.5: Verification-failure healing and relaunch",
+    "R13-R15: Post-merge verification, monthly automation, final audit"
+  ],
+
+  "verified_current_state": {
+    "cells": {
+      "status": "COMPLETE",
+      "published": 9,
+      "post_merge_verified": 9,
+      "evidence": "cells-post-merge-clean-checkout-validation.json"
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 4,
+      "post_merge_verified": 4,
+      "deferred": 21,
+      "evidence": "words-post-merge-clean-checkout-validation.json"
+    },
+    "pdf": {
+      "status": "IN_PROGRESS",
+      "published": 2,
+      "pr_ready": 1,
+      "reviewed_awaiting_pr": 1,
+      "evidence": "pdf-pr1-merge-result.json, pdf-pr3-package-validation.json"
+    },
+    "email": {
+      "status": "DISCOVERY_BLOCKED",
+      "config": "disabled/email.yml",
+      "blocker": "config not in active scan path; reflection unproven"
+    },
+    "slides": {
+      "status": "DISCOVERY_BLOCKED",
+      "config": "disabled/slides.yml",
+      "blocker": "DLL name mismatch (Aspose.Slides.NET vs Aspose.Slides.dll)"
+    },
+    "other_families": {
+      "count": "~20",
+      "status": "DISCOVERY_NOT_ATTEMPTED",
+      "blocker": "No YAML config in pipeline/configs/families/"
+    }
+  }
+}

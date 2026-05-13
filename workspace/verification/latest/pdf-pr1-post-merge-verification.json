@@ -1,0 +1,52 @@
+{
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "date": "2026-05-06",
+  "phase": "Part 6 — Post-merge verification",
+  "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "pr_state": "closed",
+  "pr_merged": true,
+  "merge_commit_sha": "a9f9e254fbdbd012e6486e699395298e427169eb",
+  "merged_at": "2026-05-06T11:01:12Z",
+  "remote_verification": {
+    "main_contains_merger": true,
+    "main_contains_text_extractor": true,
+    "main_contains_splitter": false,
+    "main_contains_optimizer": false,
+    "readme_exists": true,
+    "readme_size_bytes": 4282,
+    "readme_lists_only_merger_and_text_extractor": true,
+    "no_bin_obj_workspace_secrets": true,
+    "token_leakage": false
+  },
+  "post_merge_clean_checkout": {
+    "clone_method": "git clone --depth 1 (main branch)",
+    "clone_dir": "isolated temp directory",
+    "examples_found": ["merger", "text-extractor"],
+    "unexpected_examples": [],
+    "validation_results": [
+      {
+        "example": "merger",
+        "restore": "PASS",
+        "build": "PASS (0W 0E)",
+        "run": "PASS — Merge succeeded: output.pdf",
+        "verdict": "PASS"
+      },
+      {
+        "example": "text-extractor",
+        "restore": "PASS",
+        "build": "PASS (0W 0E)",
+        "run": "PASS — Extracted text (evaluation watermark present)",
+        "verdict": "PASS"
+      }
+    ],
+    "overall_result": "ALL_PASS"
+  },
+  "gate_6_pass_criteria": {
+    "pr_is_merged": true,
+    "main_builds_and_runs": true,
+    "no_failed_backlogged_published": true,
+    "no_unexpected_files": true
+  },
+  "verdict": "POST_MERGE_VERIFIED"
+}

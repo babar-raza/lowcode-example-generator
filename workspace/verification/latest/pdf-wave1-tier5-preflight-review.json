@@ -1,0 +1,143 @@
+{
+  "sprint": "Wave 1 PDF Tier 5 LLM Pilot Completion",
+  "phase": "Phase 0 — Mandatory Referenced-Artifact Review Gate",
+  "date": "2026-05-07",
+  "verdict": "GATE_0_PASS",
+  "artifact_review": [
+    {
+      "artifact": "src/plugin_examples/llm_router/router.py",
+      "status": "VERIFIED",
+      "notes": "_LLM_RETRY_BACKOFF_SECONDS=[30,60] at line 18. _LLM_MAX_RETRIES=2 at line 21. Retry loop in _call_ollama (line 331) and _call_openai_compatible (line 419) — catches Timeout and ConnectionError only. Non-transient exceptions raised immediately without retry. Approved provider check at line 282."
+    },
+    {
+      "artifact": "src/plugin_examples/generator/code_generator.py",
+      "status": "VERIFIED",
+      "notes": "Repair filter at lines 80-86 includes 'REQUIRED: options class is' in c — confirmed present. PluginOptions blocking error at lines 553-557 added to issues list. Filter covers 4 conditions: exact usage pattern, AddInput, AddOutput, options class."
+    },
+    {
+      "artifact": "src/plugin_examples/generator/packet_builder.py",
+      "status": "VERIFIED",
+      "notes": "_pdf_type_hints dict at lines 133-167 with entries for merger (MergeOptions), splitter (SplitOptions), optimizer (OptimizeOptions), textextractor (TextExtractorOptions). Used at lines 168-174 to inject REQUIRED constraints. SplitOptions and OptimizeOptions injected for Splitter and Optimizer respectively."
+    },
+    {
+      "artifact": "src/plugin_examples/scenario_planner/runtime_feedback.py",
+      "status": "VERIFIED",
+      "notes": "PDF runtime classifiers present: FileSaveTarget, TextAbsorber, pdf_wrong_input_extension, missing_options_input patterns. No PluginOptions runtime classifier — static validation in code_generator.py catches this before runtime. Appropriate."
+    },
+    {
+      "artifact": "src/plugin_examples/runner.py",
+      "status": "VERIFIED",
+      "notes": "LLM calls delegated to router via llm_generate callback. No redundant retry in runner — retry is in router._call_openai_compatible and _call_ollama. Correct by design."
+    },
+    {
+      "artifact": "pipeline/configs/families/pdf.yml",
+      "status": "VERIFIED",
+      "notes": "allowed_types: [Merger, TextExtractor, Splitter, Optimizer] — confirmed at lines 60-64. provider_order: [llm_professionalize] at lines 80-81. preferred_methods_per_type has all 4 types. No unexpected types added."
+    },
+    {
+      "artifact": "tests/unit/test_llm_generation.py",
+      "status": "VERIFIED",
+      "notes": "8 new tests found: TestPdfWave1ConstraintInjection at line 1450 (5 tests: splitter_injects_split_options, optimizer_injects_optimize_options, splitter_code_snippet_present, optimizer_code_snippet_present, plugin_options_is_blocking_error); TestLLMTimeoutRetry at line 1503 (3 tests: retries_on_timeout_and_succeeds, does_not_retry_policy_failure, raises_after_all_retries_exhausted). Total 996 tests previously verified."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-preflight-review.json",
+      "status": "VERIFIED",
+      "notes": "Gate 0 PASS from prior hardening sprint. Documents all source code verification."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-config-change-audit.json",
+      "status": "VERIFIED",
+      "notes": "Documents config change: allowed_types updated from [Merger, TextExtractor] to [Merger, TextExtractor, Splitter, Optimizer]. All safety checks confirmed."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-lifecycle-readiness-result.json",
+      "status": "VERIFIED",
+      "notes": "Documents WAVE1_RUN_READY verdict. Preconditions all confirmed. Lifecycle correctly shows EXCLUDED_BY_SCOPE for Splitter/Optimizer from prior run."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-pr-dry-run-summary.json",
+      "status": "VERIFIED",
+      "notes": "Documents DRY_RUN_READY_TO_EXECUTE. Correctly shows Splitter/Optimizer as PENDING pending LLM run."
+    },
+    {
+      "artifact": "workspace/verification/latest/pdf-wave1-final-verification.json",
+      "status": "VERIFIED",
+      "notes": "Documents 996 tests passing. Compileall clean. DllReflector Build succeeded."
+    },
+    {
+      "artifact": "workspace/verification/latest/families/pdf/example-lifecycle.json",
+      "status": "VERIFIED",
+      "notes": "2 PASS (Merger, TextExtractor at pr_candidate stage), 2 EXCLUDED_BY_SCOPE (Splitter, Optimizer). Backlog entries have fix_status=FIXES_APPLIED_AWAITING_VALIDATION. Lifecycle will be updated by runner after Wave 1 run."
+    },
+    {
+      "artifact": "workspace/backlog/pdf/examples-backlog.json",
+      "status": "VERIFIED",
+      "notes": "2 open entries (Splitter, Optimizer). Both updated with fix_status=FIXES_APPLIED_AWAITING_VALIDATION and fix_applied_date=2026-05-07."
+    },
+    {
+      "artifact": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "status": "STALE",
+      "notes": "Shows controlled_pilot_types=[Merger, TextExtractor], selected_count=2, generated_count=2, passed_count=2. Does NOT reflect Wave 1 config change. This file will be updated by the runner after the Wave 1 run completes."
+    },
+    {
+      "artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "status": "VERIFIED",
+      "notes": "total=66, open=17, closed=49. 4 new taskcards added (followup-coverage-100-denominator-model, followup-pdf-remaining-candidate-classification, followup-words-full-coverage-expansion, followup-cells-coverage-denominator-audit). Wave 1 sprint section present."
+    },
+    {
+      "artifact": "docs/discovery/open-taskcard-closure-matrix.md",
+      "status": "NEEDS_FIX",
+      "notes": "Shows Closed: 48 but JSON shows 49 (66-17=49 is correct). Fixed in this sprint by changing '48' to '49'. Matrix date still 2026-05-06 — acceptable, reflects sprint date."
+    },
+    {
+      "artifact": "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md",
+      "status": "VERIFIED",
+      "notes": "Updated with Wave 1 source changes. PDF generation policy updated to 4 types. Run command documented. Next sprint recommendations present."
+    }
+  ],
+  "new_taskcard_duplicate_review": {
+    "followup-coverage-100-denominator-model": {
+      "is_duplicate": false,
+      "reason": "No existing taskcard covers formal denominator model with per-family rules and evidence-backed baseline. New category: coverage_infrastructure."
+    },
+    "followup-pdf-remaining-candidate-classification": {
+      "is_duplicate": false,
+      "reason": "Covers 21 unattempted PDF WORKFLOW_ROOT types — distinct from pilot classification work. No existing taskcard."
+    },
+    "followup-words-full-coverage-expansion": {
+      "is_duplicate": "PARTIAL",
+      "reason": "Overlaps with followup-words-split-criteria-enumeration, followup-words-pair-fixture-strategy, followup-words-mail-merger-fixture-documentation — but serves as group roadmap taskcard. Adds 5th type (Processor/ReportBuilder) not covered by individual taskcards. Acceptable as grouping taskcard.",
+      "action": "RETAIN — adds 5th type; serves as roadmap group taskcard"
+    },
+    "followup-cells-coverage-denominator-audit": {
+      "is_duplicate": false,
+      "reason": "No existing taskcard covers formal audit of 13 non-runnable Cells classifications with DllReflector evidence."
+    }
+  },
+  "source_code_verification_summary": {
+    "timeout_retry_implemented": true,
+    "timeout_retry_location": "router.py _call_openai_compatible line 419 and _call_ollama line 331",
+    "retry_transient_only": true,
+    "retry_policy_failures_not_retried": true,
+    "repair_filter_options_class_added": true,
+    "repair_filter_location": "code_generator.py line 85",
+    "pdf_yml_allows_exactly_four_types": true,
+    "pdf_yml_four_types": ["Merger", "TextExtractor", "Splitter", "Optimizer"],
+    "approved_provider": "llm_professionalize",
+    "approved_provider_policy_file": "src/plugin_examples/llm_router/provider_policy.py",
+    "tier5_llm_pilot_not_yet_run": true,
+    "pdf_pr2_not_created": true
+  },
+  "gate_0_pass_criteria": {
+    "timeout_retry_verified": true,
+    "repair_prompt_preservation_verified": true,
+    "pdf_yml_exactly_four_pilot_types": true,
+    "taskcard_json_md_match": true,
+    "new_taskcards_reviewed_for_duplicates": true,
+    "no_contradictory_wave1_evidence": true,
+    "tier5_pilot_not_already_succeeded": true
+  },
+  "fixes_applied_in_this_phase": [
+    "docs/discovery/open-taskcard-closure-matrix.md: corrected Closed count from 48 to 49 (66-17=49)"
+  ]
+}

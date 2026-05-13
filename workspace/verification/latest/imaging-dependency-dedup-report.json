@@ -1,0 +1,16 @@
+{
+  "family": "imaging",
+  "total_input_paths": 5,
+  "kept_count": 5,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-imaging-20260509-113801\\extracted\\imaging\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-imaging-20260509-113801\\extracted\\imaging\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-imaging-20260509-113801\\extracted\\imaging\\resolved-libs\\System.Memory.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-imaging-20260509-113801\\extracted\\imaging\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-imaging-20260509-113801\\extracted\\imaging\\resolved-libs\\Newtonsoft.Json.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

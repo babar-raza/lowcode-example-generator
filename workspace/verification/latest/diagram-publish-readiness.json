@@ -1,0 +1,39 @@
+{
+  "artifact_type": "diagram_publish_readiness_assessment",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Family Expansion Readiness Sprint",
+  "family": "diagram",
+  "current_state": {
+    "release_scope_status": "PILOT_COMPLETE",
+    "family_coverage_status": "FAMILY_COMPLETE",
+    "last_merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+    "last_merge_date": "2026-05-12T09:46:15+00:00",
+    "last_post_merge_validation_status": "ALL_PASS",
+    "post_merge_passed": 2,
+    "post_merge_total": 2,
+    "published_examples_count": 2,
+    "workflow_root_types": 2,
+    "allowed_pilot_count": 2,
+    "cumulative_pr_count": 1,
+    "open_followups": [],
+    "last_pr_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/pull/1"
+  },
+  "publish_readiness_verdict": "FULLY_PUBLISHED",
+  "explanation": "Diagram PR #1 was already MERGED to main on 2026-05-12. Both workflow roots (DiagramConverter, PdfConverter) are published. Post-merge validation: ALL_PASS (2/2). Family is PILOT_COMPLETE and FAMILY_COMPLETE (no additional types exist beyond the 2 pilot types).",
+  "is_live_pr_needed": false,
+  "reason": "No new examples exist to publish. PR #1 already merged. There is nothing to create a new live PR for at this time.",
+  "next_action": "MONITOR — await new Aspose.Diagram package version with additional LowCode types before next publish cycle.",
+  "approval_gate_check": {
+    "question": "Can diagram proceed to live PR with explicit APPROVE_LIVE_PR?",
+    "answer": "NOT APPLICABLE — no new examples are pending. Diagram is fully published. APPROVE_LIVE_PR would only be relevant if a new example batch were generated (requires package update with new types).",
+    "if_new_types_discovered": "Diagram has only 5 types total (2 WORKFLOW_ROOT + 3 OPTIONS). No expansion candidates exist until Aspose.Diagram package adds new LowCode types. Discovery re-run required after next package release."
+  },
+  "new_type_expansion_potential": "LOW — Diagram namespace is small (5 types). Unlikely to expand significantly. FAMILY_COMPLETE is the natural end state.",
+  "token_readiness": {
+    "repo_access": true,
+    "push_permission": true,
+    "live_publish_authorized": false,
+    "note": "Token is ready. But no new PR is needed. If a new example is generated in a future sprint, APPROVE_LIVE_PR would unblock publication."
+  },
+  "recommended_action": "NO ACTION REQUIRED. Diagram is FAMILY_COMPLETE. Close NEW-21-followup-diagram-controlled-pilot-planning as CLOSED_VERIFIED (pilot was already completed in prior sprint)."
+}

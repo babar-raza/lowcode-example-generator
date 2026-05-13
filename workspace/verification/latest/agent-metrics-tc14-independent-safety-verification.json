@@ -1,0 +1,79 @@
+{
+  "sprint": "TC14-09 Independent Verification and Final Closure",
+  "phase": "Phase 3 — Rollback and Safety Verification",
+  "timestamp": "2026-05-08T00:00:00Z",
+  "verdict": "SAFETY_VERIFIED",
+
+  "production_env_vars_in_current_process": {
+    "AGENT_METRICS_PRODUCTION_ENABLED": "not set (default False — production posting disabled)",
+    "AGENT_METRICS_DRY_RUN_false": "not set (default True — dry_run active)",
+    "AGENT_METRICS_TOKEN": "not set (not needed for verification sprint)",
+    "verification_method": "No production POST was attempted in TC14-09. Env vars were not set by agent. Production gate is disabled by default.",
+    "production_post_in_this_sprint": false,
+    "production_env_vars_active": false
+  },
+
+  "rollback_verification": {
+    "source": "workspace/verification/latest/agent-metrics-tc14-rollback-verification.json",
+    "rollback_command_excluded_metrics_post_flag": true,
+    "rollback_command_excluded_production_enabled_var": true,
+    "rollback_command_excluded_dry_run_false_var": true,
+    "posted": false,
+    "reason": "dry_run",
+    "log_line": "Metrics not posted: dry_run",
+    "summary_line": "Metrics: not posted (dry_run)",
+    "rollback_added_no_new_ledger_rows": true,
+    "ledger_entries_after_rollback": 2,
+    "delta_from_rollback_run": 0,
+    "instant_disable_confirmed": true
+  },
+
+  "no_retry_occurred": true,
+  "no_force_repost_used": true,
+  "no_duplicate_row_created": true,
+
+  "ledger_final_state": {
+    "total_entries": 2,
+    "production_dry_run_false_rows": 2,
+    "examples_generation_dry_run_false_rows": 1,
+    "test_dry_run_false_rows": 1,
+    "no_additional_rows_added_in_tc14_09": true
+  },
+
+  "secret_safety": {
+    "AGENT_METRICS_TOKEN_value_in_any_evidence_file": false,
+    "AGENT_METRICS_ENDPOINT_url_in_any_evidence_file": false,
+    "endpoint_redacted_in_api_contract": true,
+    "endpoint_redacted_in_test_post_result": true,
+    "endpoint_redacted_in_config_normalization_audit": true,
+    "token_never_written_to_disk": true,
+    "token_not_in_post_result": true,
+    "result": "SECRET_CLEAN"
+  },
+
+  "source_code_safety": {
+    "is_agent_metrics_production_enabled_requires_exact_lowercase_true": true,
+    "default_returns_false": true,
+    "dry_run_gate_is_first_gate_in_poster": true,
+    "poster_gate_order": ["dry_run_check", "sprint_gate", "duplicate_ledger", "token_check", "POST"],
+    "metrics_yml_api_endpoint_is_empty_string": true,
+    "no_hardcoded_endpoint_url_in_codebase": true
+  },
+
+  "safety_gates": {
+    "S1_no_production_post_in_tc14_09_sprint": true,
+    "S2_no_retry_attempt_occurred": true,
+    "S3_no_force_repost_used": true,
+    "S4_rollback_posted_false": true,
+    "S5_rollback_reason_dry_run": true,
+    "S6_rollback_added_no_new_ledger_rows": true,
+    "S7_production_env_vars_not_set_in_verification_sprint": true,
+    "S8_token_not_in_any_evidence_file": true,
+    "S9_endpoint_url_not_in_any_evidence_file": true,
+    "S10_google_sheet_not_modified_by_agent": true
+  },
+
+  "total_safety_gates_passed": 10,
+  "total_safety_gates_failed": 0,
+  "phase3_verdict": "ALL_SAFETY_GATES_PASS"
+}

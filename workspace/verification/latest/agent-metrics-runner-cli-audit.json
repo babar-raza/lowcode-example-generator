@@ -1,0 +1,21 @@
+{
+  "verification_date": "2026-05-06",
+  "checks": {
+    "metrics_disabled_by_default": {"status": "PASS", "detail": "metrics.yml: enabled=false; CLI: --metrics absent by default; __main__.py checks getattr(args, 'metrics', False)"},
+    "dry_run_default": {"status": "PASS", "detail": "poster.py:64 dry_run=True default; metrics.yml: dry_run=true"},
+    "real_post_requires_explicit_opt_in": {"status": "PASS", "detail": "--metrics-post flag required; poster.py:81 dry_run check is first"},
+    "real_post_requires_token": {"status": "PASS", "detail": "poster.py:107-112 checks env var, returns 'missing env var' if empty"},
+    "production_job_type_blocked": {"status": "PASS", "detail": "poster.py:90 test_only_sprint=True blocks non-test job_types"},
+    "metrics_job_type_test_works": {"status": "PASS", "detail": "test_test_job_type_allowed passes"},
+    "force_repost_cannot_bypass_sprint_safety": {"status": "PASS", "detail": "force_repost only bypasses duplicate check (line 98), not test_only_sprint (line 90)"},
+    "pipeline_unchanged_when_disabled": {"status": "PASS", "detail": "metrics_collector=None by default; no imports unless --metrics set"},
+    "metrics_finalization_after_evidence": {"status": "PASS", "detail": "runner.py calls finalize_metrics after _build_report and before return"},
+    "metrics_failure_does_not_fail_pipeline": {"status": "PASS", "detail": "runner.py wraps finalize_metrics in try/except; only raises if metrics_strict=True"},
+    "strict_mode_tested": {"status": "PASS", "detail": "test_finalize_strict_raises_on_invalid passes"},
+    "cli_flags_available": {"status": "PASS", "detail": "--metrics, --metrics-post, --metrics-job-type, --metrics-strict, --metrics-force-repost, --metrics-config all parsed"},
+    "unsupported_commands_not_posting": {
+      "status": "PARTIAL",
+      "detail": "Metrics flags only on 'run' subparser. Other commands have no --metrics flag, so they cannot trigger metrics. However, pipeline_hook.py has a fallback '1/0' count for non-run commands. Since no CLI wiring exists for those commands, this is currently safe but incomplete."
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "sprint": "README API Accuracy PR Review, Merge, and Post-Merge Verification",
+  "phase": "Phase 1 — Method Accuracy Verification",
+  "date": "2026-05-05",
+  "verification_sources": ["README.md (PR #4 branch)", "example.manifest.json claimed_symbols", "Program.cs actual API call"],
+  "cells_examples": [
+    {
+      "name": "html-converter",
+      "readme_symbol": "HtmlConverter.Process",
+      "manifest_symbol": "HtmlConverter.Process",
+      "programcs_call": "HtmlConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "image-converter",
+      "readme_symbol": "ImageConverter.Process",
+      "manifest_symbol": "ImageConverter.Process",
+      "programcs_call": "ImageConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "json-converter",
+      "readme_symbol": "JsonConverter.Process",
+      "manifest_symbol": "JsonConverter.Process",
+      "programcs_call": "JsonConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "pdf-converter",
+      "readme_symbol": "PdfConverter.Process",
+      "manifest_symbol": "PdfConverter.Process",
+      "programcs_call": "PdfConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "spreadsheet-converter",
+      "readme_symbol": "SpreadsheetConverter.Process",
+      "manifest_symbol": "SpreadsheetConverter.Process",
+      "programcs_call": "SpreadsheetConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "spreadsheet-locker",
+      "readme_symbol": "SpreadsheetLocker.Process",
+      "manifest_symbol": "SpreadsheetLocker.Process",
+      "programcs_call": "SpreadsheetLocker.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "spreadsheet-merger",
+      "readme_symbol": "SpreadsheetMerger.Process",
+      "manifest_symbol": "SpreadsheetMerger.Process",
+      "programcs_call": "SpreadsheetMerger.Process(new[] { inputPath }, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS",
+      "note": "Array overload is still SpreadsheetMerger.Process — method name correct"
+    },
+    {
+      "name": "spreadsheet-splitter",
+      "readme_symbol": "SpreadsheetSplitter.Process",
+      "manifest_symbol": "SpreadsheetSplitter.Process",
+      "programcs_call": "SpreadsheetSplitter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "text-converter",
+      "readme_symbol": "TextConverter.Process",
+      "manifest_symbol": "TextConverter.Process",
+      "programcs_call": "TextConverter.Process(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    }
+  ],
+  "words_examples": [
+    {
+      "name": "converter",
+      "readme_symbol": "Converter.Convert",
+      "manifest_symbol": "Converter.Convert",
+      "programcs_call": "Converter.Convert(inputPath, outputPath)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "replacer",
+      "readme_symbol": "Replacer.Replace",
+      "manifest_symbol": "Replacer.Replace",
+      "programcs_call": "Replacer.Replace(inputPath, outputPath, pattern, replacement)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "splitter",
+      "readme_symbol": "Splitter.ExtractPages",
+      "manifest_symbol": "Splitter.ExtractPages",
+      "programcs_call": "Splitter.ExtractPages(inputPath, outputPath, 0, 1)",
+      "three_way_match": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "watermarker",
+      "readme_symbol": "Watermarker.SetText",
+      "manifest_symbol": "Watermarker.SetText",
+      "programcs_call": "Watermarker.SetText(inputPath, outputPath, \"CONFIDENTIAL\")",
+      "three_way_match": true,
+      "verdict": "PASS"
+    }
+  ],
+  "summary": {
+    "total_examples": 13,
+    "three_way_match_pass": 13,
+    "three_way_match_fail": 0,
+    "cells_pass": 9,
+    "words_pass": 4,
+    "all_pass": true
+  },
+  "cells_api_pattern_note": "All 9 Cells examples use static XxxConverter.Process() — correct for Aspose.Cells.LowCode API (static entry points). NOT misleading: .Process is the real method name.",
+  "words_api_pattern_note": "Each Words example uses the type-specific primary method — Converter.Convert, Replacer.Replace, Splitter.ExtractPages, Watermarker.SetText — as confirmed in words.yml preferred_methods_per_type.",
+  "overall_verdict": "ALL_13_EXAMPLES_THREE_WAY_MATCH_PASS"
+}

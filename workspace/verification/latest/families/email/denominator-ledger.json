@@ -1,0 +1,34 @@
+{
+  "family": "email",
+  "denominator_basis": "DISCOVERY_ONLY",
+  "total_types": 3,
+  "ready_count": 1,
+  "blocked_count": 2,
+  "unknown_count": 0,
+  "entries": [
+    {
+      "type_name": "Converter",
+      "full_name": "Aspose.Email.LowCode.Converter",
+      "namespace": "Aspose.Email.LowCode",
+      "role": "workflow_root",
+      "lifecycle_state": "ready",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "FolderOutputHandler",
+      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
+      "namespace": "Aspose.Email.LowCode",
+      "role": "provider_callback",
+      "lifecycle_state": "blocked_provider_callback",
+      "pilot_scope": "not_applicable"
+    },
+    {
+      "type_name": "IOutputHandler",
+      "full_name": "Aspose.Email.LowCode.IOutputHandler",
+      "namespace": "Aspose.Email.LowCode",
+      "role": "interface_contract",
+      "lifecycle_state": "blocked_interface_contract",
+      "pilot_scope": "not_applicable"
+    }
+  ]
+}

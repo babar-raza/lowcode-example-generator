@@ -1,0 +1,67 @@
+{
+  "artifact_type": "token_readiness_report",
+  "generated_at": "2026-05-12T10:35:12+00:00",
+  "token_present": true,
+  "probe_is_read_only": true,
+  "no_live_pr_created": true,
+  "no_content_pushed": true,
+  "families": [
+    {
+      "family": "pdf",
+      "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "can_read": true,
+      "can_push": true,
+      "http_status": 200,
+      "error_classification": "repo_access_ok",
+      "permissions_object": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
+      },
+      "live_publish_authorized": false,
+      "safe_to_publish_now": false,
+      "missing_requirements": [
+        "explicit APPROVE_LIVE_PR approval token (not provided in this sprint)"
+      ],
+      "exact_missing_scope_or_repo_permission": "none"
+    },
+    {
+      "family": "diagram",
+      "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "can_read": true,
+      "can_push": true,
+      "http_status": 200,
+      "error_classification": "repo_access_ok",
+      "permissions_object": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
+      },
+      "live_publish_authorized": false,
+      "safe_to_publish_now": false,
+      "missing_requirements": [
+        "explicit APPROVE_LIVE_PR approval token (not provided in this sprint)"
+      ],
+      "exact_missing_scope_or_repo_permission": "none"
+    }
+  ],
+  "summary": {
+    "repo_and_pr_permission_ready": true,
+    "live_publish_authorized": false,
+    "verdict": "TOKEN_READY_FOR_PDF_DIAGRAM_PR_CREATION_BUT_LIVE_APPROVAL_NOT_PRESENT"
+  },
+  "source_evidence": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\latest\\family-repo-access-resolution.json",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\latest\\publish-permission-probe.json"
+  ]
+}

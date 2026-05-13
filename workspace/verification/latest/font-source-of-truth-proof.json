@@ -1,0 +1,32 @@
+{
+  "package_id": "Aspose.Font",
+  "resolved_version": "26.4.0",
+  "nupkg_sha256": "c4a42eafb2d37af0c2372ace4bc28a503217febd1cadd35e3ef4525e3bbe06bc",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\extracted\\font\\primary\\lib\\netstandard2.0\\Aspose.Font.dll",
+  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\extracted\\font\\primary\\lib\\netstandard2.0\\Aspose.Font.xml",
+  "xml_warning": null,
+  "dependency_count": 3,
+  "dependency_paths": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\packages\\font\\deps\\System.Security.Permissions.5.0.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\packages\\font\\deps\\System.Security.AccessControl.5.0.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\packages\\font\\deps\\System.Text.Encoding.CodePages.4.4.0.nupkg"
+  ],
+  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-font-20260509-113649\\catalog\\font\\api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Font.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Font.LowCode'"
+    },
+    {
+      "pattern": "Aspose.Font.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Font.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

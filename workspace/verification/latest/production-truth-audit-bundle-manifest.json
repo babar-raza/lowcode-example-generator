@@ -1,0 +1,124 @@
+{
+  "bundle_created_at": "2026-05-08T14:17:10.771888+00:00",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "files_expected": 16,
+  "files": [
+    {
+      "filename": "production-truth-audit-input-universe.json",
+      "sha256": "2b08b78208f177d7c8cb7feb603d2157fcbb6b3a3ea688743e0f26bcdf2383d6",
+      "size_bytes": 17369,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-master-scope-matrix.json",
+      "sha256": "456003adba25bde1308e2e271cafe2f025cea33d1234b3dacaa652460cdf11b3",
+      "size_bytes": 70502,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "FLAGGED_FALSE_POSITIVE"
+    },
+    {
+      "filename": "production-truth-plan-vs-actual.json",
+      "sha256": "52acb0ba03df5fc68ba2c3b4b61464379d21befd1895d22507ec0019b8155994",
+      "size_bytes": 31445,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-source-implementation-audit.json",
+      "sha256": "c74de988b1c3cabc06d237b361527034eb9d2c0f50b68de7a31834ec85852724",
+      "size_bytes": 34227,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "FLAGGED_FALSE_POSITIVE"
+    },
+    {
+      "filename": "production-truth-rerun-root-cause-analysis.json",
+      "sha256": "c43d18019ec7bbb89c20035d92fe8d37072d14a35fb4779f3977397984b8865f",
+      "size_bytes": 22825,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-family-board.json",
+      "sha256": "fbbd4da063403d6d6e2fc406823fe3964558dc7f68047df1aa1ecc5dfe9975e6",
+      "size_bytes": 15441,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-metrics-board.json",
+      "sha256": "29dd588c5e00ebe43a2a7caeb0e6a42889e91f70ef5a7b8a8b8cfecfa63a87cc",
+      "size_bytes": 8661,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-test-reproducibility.json",
+      "sha256": "be076dcc1e32cdf85cc54bb57f502ae979b2da3a7df11e36c29c67bf4e9c324d",
+      "size_bytes": 6160,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-evidence-integrity-audit.json",
+      "sha256": "1ce0c716dd52c196c65195abc8216eacaf116b1d9188550e5ca25b5b055d86d5",
+      "size_bytes": 14053,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-grade-lowcode-system-design.json",
+      "sha256": "41f1111d301936b5723c2b5350298c4e1d025a195fc8d9d14004147d5b73da8c",
+      "size_bytes": 42730,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-roadmap.json",
+      "sha256": "9333cdbe61c5056ae16864b9f71bc2023e9f2a9b4b791b52e7412eb8736ba51c",
+      "size_bytes": 33676,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "FLAGGED_FALSE_POSITIVE"
+    },
+    {
+      "filename": "production-truth-risk-register.json",
+      "sha256": "83fb6121eb7fc7950ed47dc2f5d1bf9fe2ad9774269f5e08183cd5544b7ebadf",
+      "size_bytes": 17813,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-final-verdict.json",
+      "sha256": "f93b1fa96744fa569f567be0fdb6b2da07f1af0b4dd898076ab996562713c189",
+      "size_bytes": 14758,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-claim-audit.json",
+      "sha256": "48a3913dc4f78367936a623dd4515567287071a738984a9311aa1616f7a47254",
+      "size_bytes": 25391,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "production-truth-independent-verification.json",
+      "sha256": "b2bf3e1eb4aeb45f979750176bb130b2ab29bb438498747780b83c495025b668",
+      "size_bytes": 11685,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "FLAGGED_FALSE_POSITIVE"
+    },
+    {
+      "filename": "production-truth-audit-bundle-manifest.json",
+      "sha256": "667ebc64d34a2783f704ae18e95357c1229be8b97b11e50c38ea2e19aced4d35",
+      "size_bytes": 4792,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    }
+  ],
+  "missing_files": [],
+  "final_verdict_file": "production-truth-final-verdict.json",
+  "test_output_reference": "production-truth-test-reproducibility.json",
+  "secret_scan_note": "naive string scan; false positives noted in production-truth-independent-verification.json check_04",
+  "bundle_integrity": "COMPLETE"
+}

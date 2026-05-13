@@ -1,0 +1,17 @@
+{
+  "sprint": "README API Accuracy PR Review, Merge, and Post-Merge Verification",
+  "family": "words",
+  "pr_number": 4,
+  "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/4",
+  "date": "2026-05-05",
+  "live_merge_performed": true,
+  "merged": true,
+  "merge_commit_sha": "de806c02a0733cd438504ae14ec62d5a7f54e3cb",
+  "base": "main",
+  "merge_method": "merge",
+  "approval_token_used": "APPROVE_MERGE_PR",
+  "live_publish_token_used": false,
+  "token_logged": false,
+  "branch_deleted": false,
+  "branch_preserved": "plugin-examples/words/readme/20260505-063914"
+}

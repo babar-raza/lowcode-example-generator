@@ -1,0 +1,84 @@
+{
+  "artifact_id": "new-family-fixture-readiness-matrix",
+  "created": "2026-05-11T11:47:57.541153",
+  "sprint": "new-family-fixture-harness-parallel",
+  "families": [
+    {
+      "family": "diagram",
+      "fixture_id": "programmatic_vsdx_single",
+      "implemented_or_planned": "IMPLEMENTED_AND_VALIDATED",
+      "input_format": "VSDX",
+      "generated_by": "new Aspose.Diagram.Diagram() + Shape + Save(VSDX)",
+      "fixture_bytes": 8187,
+      "validation_strategy": "PdfConverter.Process(input.vsdx, output.pdf) -> check %PDF header",
+      "harness_path": "workspace/fixture-validation/diagram-harness/",
+      "harness_results": "4/4 PASS",
+      "tests": "Harness-validated. Test integration deferred (test_fixture_strategy.py has concurrent changes).",
+      "blockers": [],
+      "next_pilot_dependency": "YAML promotion to experimental + allowed_types + registry entry",
+      "api_discovery": {
+        "DiagramConverter": "Only supports Visio-to-Visio output formats (VSDX, VSD, VDX). Does NOT support SVG/PNG/PDF output.",
+        "PdfConverter": "Converts Visio to PDF. Works with both Process(string, string) and Process(LoadOptions, SaveOptions)."
+      }
+    },
+    {
+      "family": "email",
+      "fixture_id": "programmatic_eml_single",
+      "implemented_or_planned": "IMPLEMENTED_AND_VALIDATED",
+      "input_format": "EML",
+      "generated_by": "new MailMessage() + From/To/Subject/Body + Save(DefaultEml)",
+      "fixture_bytes": 599,
+      "validation_strategy": "Converter.ConvertToMsg(stream, name, FolderOutputHandler) -> check output file exists",
+      "harness_path": "workspace/fixture-validation/email-harness/",
+      "harness_results": "4/5 PASS (ConvertToHtml: file lock issue in harness, not API blocker)",
+      "tests": "Harness-validated. Test integration deferred.",
+      "blockers": [
+        "Code template needed for async+Stream+FolderOutputHandler pattern"
+      ],
+      "next_pilot_dependency": "YAML promotion + allowed_types + registry entry + async code template",
+      "additional_fixture": {
+        "fixture_id": "programmatic_msg_single",
+        "input_format": "MSG",
+        "generated_by": "MailMessage -> MapiMessage.FromMailMessage() + Save(.msg)",
+        "fixture_bytes": 10752,
+        "status": "VALIDATED"
+      },
+      "api_discovery": {
+        "Converter": "All methods are async (return Task). Input via Stream, output via IOutputHandler (FolderOutputHandler). .GetAwaiter().GetResult() works for sync harness.",
+        "FolderOutputHandler": "Concrete IOutputHandler. Constructor takes output folder path. Writes output files to that folder.",
+        "ConvertToHtml_issue": "File locking in harness due to using/async interaction. Not an API defect - harness code needs to avoid disposing Stream before Task completes."
+      }
+    },
+    {
+      "family": "slides",
+      "fixture_id": "programmatic_pptx_single",
+      "implemented_or_planned": "IMPLEMENTED_AND_VALIDATED",
+      "input_format": "PPTX",
+      "generated_by": "new Presentation() + AddAutoShape(Rectangle) + TextFrame.Text + Save(Pptx)",
+      "fixture_bytes": 34188,
+      "validation_strategy": "Convert.ToPdf(input.pptx, output.pdf) -> check %PDF header",
+      "harness_path": "workspace/fixture-validation/slides-harness/",
+      "harness_results": "6/6 PASS",
+      "tests": "Harness-validated. Test integration deferred.",
+      "blockers": [
+        "XML docs missing - few-shot code templates needed (NEW-35)"
+      ],
+      "next_pilot_dependency": "YAML promotion + allowed_types + registry entry + XML docs compensation",
+      "additional_fixture": {
+        "fixture_id": "programmatic_pptx_pair",
+        "input_format": "PPTX (2 files)",
+        "generated_by": "Two Presentation() instances, each with 1 slide + text shape",
+        "fixture_bytes_a": 33927,
+        "fixture_bytes_b": 33926,
+        "status": "VALIDATED",
+        "used_by": "Merger.Process(string[], string) - verified 2 slides in merged output"
+      },
+      "api_discovery": {
+        "Convert": "Static class. ToPdf(string, string) and AutoByExtension(string, string) are simplest overloads. Both produce identical output.",
+        "Merger": "Static class. Process(string[], string) merges multiple PPTX into one. Slide count = sum of input slides.",
+        "Compress": "Static class. CompressEmbeddedFonts(Presentation) modifies in-place. Requires manual Save() after.",
+        "ForEach_Collect": "NOT TESTED - require delegate callbacks. Deferred to pilot sprint."
+      }
+    }
+  ]
+}

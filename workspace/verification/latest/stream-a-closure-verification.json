@@ -1,0 +1,139 @@
+{
+  "verification_type": "stream_a_closure_verification",
+  "verification_date": "2026-05-04 07:30 UTC",
+  "verified_by": "pipeline_agent",
+  "sprint": "PDF Assembly Deduplication Sprint — Phase 0",
+
+  "local_evidence_checks": {
+    "cells_merge_result": {
+      "file": "workspace/verification/latest/cells-merge-result.json",
+      "pr_number": 2,
+      "live_merge_performed": true,
+      "merge_commit_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+      "all_preconditions": "PASS (7/7)",
+      "verdict": "VERIFIED"
+    },
+    "words_merge_result": {
+      "file": "workspace/verification/latest/words-merge-result.json",
+      "pr_number": 2,
+      "live_merge_performed": true,
+      "merge_commit_sha": "b1877ed728ee34d04dea6c03143c49b86d2d4d72",
+      "all_preconditions": "PASS (7/7)",
+      "verdict": "VERIFIED"
+    },
+    "cells_post_merge_clean_checkout": {
+      "file": "workspace/verification/latest/cells-post-merge-clean-checkout-validation.json",
+      "pr_number": 1,
+      "merge_commit_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+      "merged_at": "2026-05-03T09:03:13Z",
+      "total_examples": 9,
+      "passed": 9,
+      "failed": 0,
+      "overall_result": "POST_MERGE_VERIFIED",
+      "verdict": "VERIFIED"
+    },
+    "words_post_merge_clean_checkout": {
+      "file": "workspace/verification/latest/words-post-merge-clean-checkout-validation.json",
+      "pr_number": 1,
+      "merge_commit_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+      "merged_at": "2026-05-03T08:35:49Z",
+      "total_examples": 4,
+      "passed": 4,
+      "failed": 0,
+      "overall_result": "POST_MERGE_VERIFIED",
+      "verdict": "VERIFIED"
+    },
+    "cells_readme_post_merge": {
+      "file": "workspace/verification/latest/cells-readme-post-merge-verification.json",
+      "pr_number": 2,
+      "merge_commit_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+      "only_readme_changed": true,
+      "readme_size_bytes": 5346,
+      "token_leakage": "CLEAN",
+      "cross_family_contamination": "CLEAN",
+      "overall_result": "POST_MERGE_PASS",
+      "verdict": "VERIFIED"
+    },
+    "words_readme_post_merge": {
+      "file": "workspace/verification/latest/words-readme-post-merge-verification.json",
+      "pr_number": 2,
+      "merge_commit_sha": "b1877ed728ee34d04dea6c03143c49b86d2d4d72",
+      "only_readme_changed": true,
+      "readme_size_bytes": 4555,
+      "token_leakage": "CLEAN",
+      "cross_family_contamination": "CLEAN",
+      "overall_result": "POST_MERGE_PASS",
+      "verdict": "VERIFIED"
+    },
+    "consistency_audit": {
+      "file": "workspace/verification/latest/repository-consistency-and-reproducibility-audit.json",
+      "cells_consistency_status": "CONSISTENT_README_ON_MAIN",
+      "words_consistency_status": "CONSISTENT_README_ON_MAIN",
+      "open_items": 0,
+      "verdict_recorded": "LAUNCH_CONSISTENCY_VERIFIED_READY_FOR_STREAM_A_HEALING",
+      "verdict": "VERIFIED"
+    },
+    "taskcard_matrix": {
+      "file": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "total_taskcards": 38,
+      "closed": 30,
+      "open": 8,
+      "followup_root_readme_backfill_prs_status": "CLOSED",
+      "last_sprint": "README Backfill PR Review, Merge, and Post-Merge Verification Sprint",
+      "verdict": "VERIFIED"
+    },
+    "master_plan": {
+      "file": "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md",
+      "readme_backfill_sprint_section_present": true,
+      "merge_shas_recorded": true,
+      "next_sprint_noted": "PDF Assembly Deduplication Sprint (followup-pdf-reflection-dedup)",
+      "verdict": "VERIFIED"
+    }
+  },
+
+  "remote_verification": {
+    "cells_pr2": {
+      "state": "closed",
+      "merged": true,
+      "merge_commit_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+      "files_in_merge_commit": ["README.md"],
+      "only_readme_changed": true,
+      "verdict": "VERIFIED"
+    },
+    "words_pr2": {
+      "state": "closed",
+      "merged": true,
+      "merge_commit_sha": "b1877ed728ee34d04dea6c03143c49b86d2d4d72",
+      "files_in_merge_commit": ["README.md"],
+      "only_readme_changed": true,
+      "verdict": "VERIFIED"
+    },
+    "cells_main_tree": {
+      "readme_present": true,
+      "example_dirs": ["html-converter","image-converter","json-converter","pdf-converter","spreadsheet-converter","spreadsheet-locker","spreadsheet-merger","spreadsheet-splitter","text-converter"],
+      "example_count": 9,
+      "verdict": "VERIFIED"
+    },
+    "words_main_tree": {
+      "readme_present": true,
+      "example_dirs": ["converter","replacer","splitter","watermarker"],
+      "example_count": 4,
+      "verdict": "VERIFIED"
+    }
+  },
+
+  "gate_0_criteria": {
+    "cells_repo_consistent": true,
+    "words_repo_consistent": true,
+    "readme_backfill_complete": true,
+    "taskcard_matrix_accurate": true,
+    "master_plan_reflects_real_state": true,
+    "no_stream_a_blocker_preventing_pdf_work": true
+  },
+
+  "open_stream_a_blockers": [],
+
+  "gate_0_result": "PASS",
+  "verdict": "STREAM_A_CLOSURE_VERIFIED_GATE_0_PASS",
+  "conclusion": "All Stream A work verified through both local evidence and remote GitHub API. Both repos have examples and pipeline-generated READMEs on main. All PRs closed/merged. No open Stream A blockers. Safe to proceed to PDF Assembly Deduplication Sprint."
+}

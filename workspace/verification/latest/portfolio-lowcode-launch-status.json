@@ -1,0 +1,182 @@
+{
+  "artifact_type": "portfolio_lowcode_launch_status",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Portfolio Full-Coverage Launch Sprint 1",
+  "sprint_scope": {
+    "authorized": [
+      "PDF pilot closure (Splitter + Optimizer)",
+      "Words Wave 2 (Merger + Comparer)",
+      "Portfolio roadmap update"
+    ],
+    "not_authorized": [
+      "PDF Batch 1 expansion",
+      "Email pilot launch",
+      "Slides pilot launch",
+      "Live PRs without APPROVE_LIVE_PR"
+    ]
+  },
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_roots": 9,
+      "coverage_pct": 100.0,
+      "next_action": "MONITOR — await package version update",
+      "sprint_changes": "NONE"
+    },
+    "words": {
+      "status": "PILOT_WAVE2_PR_DRY_RUN_READY",
+      "published": 4,
+      "wave2_pr_dry_run_ready": 2,
+      "wave2_types": ["Merger", "Comparer"],
+      "total_pr_candidates": 6,
+      "workflow_roots": 9,
+      "pilot_allowed": 6,
+      "coverage_pct_of_pilot": 66.67,
+      "coverage_pct_of_runnable": 44.44,
+      "run_id": "pilot-words-20260513-114425",
+      "run_verdict": "PR_DRY_RUN_READY",
+      "next_action": "APPROVE_LIVE_PR to create PR with 6 examples (4 existing + 2 new Wave 2)",
+      "remaining_roots": {
+        "wave3": ["MailMerger"],
+        "wave4": ["Processor", "ReportBuilder"],
+        "wave3_blocker": "Template DOCX with merge fields fixture needed",
+        "wave4_blockers": ["Processor: fluent API design decision needed", "ReportBuilder: LINQ Reporting Engine template fixture needed"]
+      },
+      "sprint_changes": "words.yml allowed_types expanded 4→6, per_type_constraints added for Merger+Comparer, comparer_input_creation_lines added to template_hints, denominator updated"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 2,
+      "published_types": ["Merger", "TextExtractor"],
+      "pr_ready": {
+        "splitter": {
+          "status": "PR_DRY_RUN_READY",
+          "package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+          "blocker": "APPROVE_LIVE_PR not set"
+        },
+        "optimizer": {
+          "status": "REVIEWER_PASSED_1_OF_2",
+          "package": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/",
+          "build_run_verified": true,
+          "reviewer_passes": 1,
+          "reviewer_passes_required": 2,
+          "blocker": "EXAMPLE_REVIEWER_PATH not set (cannot achieve 2nd pass); APPROVE_LIVE_PR not set"
+        }
+      },
+      "workflow_roots": 25,
+      "pilot_allowed": 4,
+      "coverage_pct_of_pilot": 50.0,
+      "coverage_pct_of_runnable": 8.0,
+      "next_action": "Set EXAMPLE_REVIEWER_PATH for Optimizer 2nd pass, then APPROVE_LIVE_PR for Splitter+Optimizer PRs",
+      "remaining_roots": {
+        "batch1_proposed": ["PdfAConverter", "Html", "XlsConverter", "DocConverter"],
+        "batch1_blocker": "PDF PR #3 (Splitter) and PR #4 (Optimizer) must be merged first",
+        "total_deferred": 21,
+        "total_assessed_batches": 5
+      },
+      "sprint_changes": "Optimizer PR dry-run package created; Splitter wave1 package verified"
+    },
+    "diagram": {
+      "status": "FAMILY_COMPLETE",
+      "published": 2,
+      "workflow_roots": 2,
+      "coverage_pct": 100.0,
+      "pr_merged": "PR #1 merged 2026-05-12",
+      "next_action": "MONITOR — await package version update",
+      "sprint_changes": "NONE"
+    },
+    "email": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_roots": 1,
+      "pilot_design_complete": true,
+      "pilot_type": "Converter",
+      "api_pattern": "STATIC_ASYNC — IOutputHandler callback",
+      "fixture_strategy": "programmatic_eml via RFC 2822 string",
+      "next_action": "Provision target repo, update email.yml to active, obtain APPROVE_LIVE_PR",
+      "gating_prerequisites": [
+        "Target repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples provisioned",
+        "email.yml set status=active, allowed_types=[Converter]",
+        "Human APPROVE_LIVE_PR"
+      ],
+      "sprint_changes": "NONE (design only, not authorized for this sprint)"
+    },
+    "slides": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_roots": 3,
+      "pilot_design_complete": true,
+      "pilot_types": ["Compress", "Convert", "Merger"],
+      "api_pattern": "ALL_STATIC — Compress mutates in-place, Convert file-path overload, Merger string[] input",
+      "fixture_strategy": "programmatic_pptx via Aspose.Slides.Presentation",
+      "next_action": "Provision target repo, update slides.yml to active, obtain APPROVE_LIVE_PR",
+      "gating_prerequisites": [
+        "Target repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples provisioned",
+        "slides.yml set status=active, allowed_types=[Compress, Convert, Merger]",
+        "Human APPROVE_LIVE_PR"
+      ],
+      "sprint_changes": "NONE (design only, not authorized for this sprint)"
+    }
+  },
+  "aggregate_coverage": {
+    "total_published_examples": 17,
+    "total_workflow_roots": 49,
+    "families_complete": ["cells", "diagram"],
+    "families_in_pilot": ["words", "pdf"],
+    "families_discovery_only": ["email", "slides"],
+    "published_by_family": {
+      "cells": 9,
+      "words": 4,
+      "pdf": 2,
+      "diagram": 2,
+      "email": 0,
+      "slides": 0
+    }
+  },
+  "sprint_1_results": {
+    "pdf_splitter": "PR_DRY_RUN_READY — package verified, blocked by APPROVE_LIVE_PR",
+    "pdf_optimizer": "REVIEWER_PASSED_1_OF_2 — package verified, blocked by EXAMPLE_REVIEWER_PATH + APPROVE_LIVE_PR",
+    "words_merger": "EXAMPLE_READY_FOR_PR_DRY_RUN — reviewer_passed, correct Merger.Merge() static call",
+    "words_comparer": "EXAMPLE_READY_FOR_PR_DRY_RUN — reviewer_passed, correct Comparer.Compare() static call",
+    "words_wave2_verdict": "PR_DRY_RUN_READY (6/6 all passed: generation, build, runtime, reviewer)",
+    "no_regressions_detected": true,
+    "no_examples_lost": true
+  },
+  "roadmap_to_full_coverage": {
+    "sprint_2_proposed": {
+      "name": "R7-PDF-CLOSURE + WORDS-WAVE2-LIVE-PR",
+      "actions": [
+        "Set EXAMPLE_REVIEWER_PATH, run PDF Optimizer 2nd pass",
+        "APPROVE_LIVE_PR for PDF Splitter PR and Optimizer PR",
+        "APPROVE_LIVE_PR for Words Wave 2 PR (6 examples: 4 existing + 2 new)",
+        "Merge all PRs when ready"
+      ],
+      "prerequisites": ["EXAMPLE_REVIEWER_PATH set", "APPROVE_LIVE_PR set", "APPROVE_MERGE_PR for merge"]
+    },
+    "sprint_3_proposed": {
+      "name": "R7-EMAIL-SLIDES-PILOT + PDF-BATCH1",
+      "actions": [
+        "Provision Email target repo, launch Email Converter pilot",
+        "Provision Slides target repo, launch Slides Compress/Convert/Merger pilot",
+        "After PDF pilot closure, expand PDF to Batch 1 (PdfAConverter, Html, XlsConverter, DocConverter)"
+      ],
+      "prerequisites": ["Target repos provisioned", "PDF PRs merged", "APPROVE_LIVE_PR"]
+    },
+    "sprint_4_proposed": {
+      "name": "R8-WORDS-WAVE3 + PDF-BATCH2",
+      "actions": [
+        "Words Wave 3: MailMerger (template DOCX with merge fields)",
+        "PDF Batch 2: TableGenerator, TocGenerator, PdfToImage, Jpeg, Png, Tiff"
+      ]
+    },
+    "full_coverage_estimate": {
+      "cells": "DONE (9/9)",
+      "diagram": "DONE (2/2)",
+      "words": "Sprint 2: 6/9 published → Sprint 3: 7/9 → Sprint 4: 9/9",
+      "pdf": "Sprint 2: 4/25 → Sprint 3: 8/25 → Sprint 4+: progressive batches",
+      "email": "Sprint 3: 1/1",
+      "slides": "Sprint 3: 3/3"
+    }
+  }
+}

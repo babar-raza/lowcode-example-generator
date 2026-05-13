@@ -1,0 +1,81 @@
+{
+  "check_type": "gh_cli_access_check",
+  "check_date": "2026-05-01",
+  "sprint": "Repo Access Self-Service Resolution Review",
+
+  "gh_cli_available": true,
+  "gh_cli_version": "2.83.2",
+
+  "gh_auth_usable_with_existing_token": true,
+  "gh_auth_method": "GH_TOKEN env var set from GITHUB_TOKEN (process scope only, no gh auth login run)",
+  "gh_auth_active_account": "babar-raza",
+  "gh_auth_error_if_any": null,
+
+  "token_type_diagnosis": {
+    "github_token_env_prefix_observed": "github_pat_",
+    "classification": "fine_grained_pat",
+    "note": "Fine-grained PATs start with 'github_pat_'. Classic PATs start with 'ghp_' (newer) or 40-char hex (legacy). The GITHUB_TOKEN in env is definitively a fine-grained PAT. User stated 'classic PAT' but token prefix contradicts this — verify token creation method.",
+    "fine_grained_pat_limitation": "Fine-grained PATs require explicit per-repo grants. Cross-org repo access requires the org repos to be explicitly added to the token's repository access list.",
+    "keyring_token_observed": true,
+    "keyring_token_prefix": "gho_",
+    "keyring_token_scopes": "gist, read:org, repo",
+    "keyring_token_note": "gho_ prefix = OAuth App token (issued by gh CLI during gh auth login). Has repo scope. NOT used in this check — only GITHUB_TOKEN env var used per instructions."
+  },
+
+  "repos_checked": [
+    {
+      "family": "cells",
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "api_http_status": 404,
+      "gh_status": "GraphQL error: Could not resolve to a Repository",
+      "git_ls_remote_result": "invalid credentials (fatal: Authentication failed)",
+      "access_status": "blocked",
+      "can_read": false,
+      "can_push": null,
+      "error_classification": "token_not_authorized_for_repo"
+    },
+    {
+      "family": "words",
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "api_http_status": 404,
+      "gh_status": "GraphQL error: Could not resolve to a Repository",
+      "git_ls_remote_result": "invalid credentials (fatal: Authentication failed)",
+      "access_status": "blocked",
+      "can_read": false,
+      "can_push": null,
+      "error_classification": "token_not_authorized_for_repo"
+    }
+  ],
+
+  "variant_names_tried": [
+    "aspose-cells-net/aspose-cells-lowcode-for-dotnet-examples",
+    "aspose-cells-net/Aspose.Cells-LowCode-for-.NET-Examples",
+    "aspose-cells-net/cells-lowcode-examples",
+    "aspose-words-net/aspose-words-lowcode-for-dotnet-examples"
+  ],
+  "variant_names_result": "All 404 — repo names confirmed as originally specified",
+
+  "sso_restriction": false,
+  "sso_header": "not_present",
+  "rate_limit_ok": true,
+
+  "root_cause": "GITHUB_TOKEN is a fine-grained PAT (github_pat_ prefix). Fine-grained PATs require explicit per-repo access grants. The token is not scoped to include aspose-cells-net or aspose-words-net org repositories.",
+
+  "resolution_required": {
+    "if_keeping_fine_grained_pat": [
+      "In GitHub: Settings > Developer settings > Personal access tokens > Fine-grained tokens > [token]",
+      "Under 'Repository access': change from 'Only select repositories' to include:",
+      "  - aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "  - aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "OR grant access to both orgs: aspose-cells-net, aspose-words-net",
+      "Required permissions: Contents (Read), Metadata (Read), Pull requests (Write)"
+    ],
+    "if_switching_to_classic_pat": [
+      "Create a classic PAT (ghp_ prefix) with 'repo' scope",
+      "babar-raza must be a collaborator on both target repos (or org member with repo access)",
+      "Set GITHUB_TOKEN to the new classic PAT"
+    ]
+  }
+}

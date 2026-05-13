@@ -1,0 +1,52 @@
+{
+  "artifact_type": "enum_tracking_evidence",
+  "generated_at": "2026-05-12T10:38:15+00:00",
+  "planner_status": "ENUM roles append to blocked_scenarios with status blocked_enum_not_runnable before pilot allowlist filtering",
+  "families": [
+    {
+      "family": "cells",
+      "enum_blocked_count": 0,
+      "enum_types": [],
+      "all_enums_tracked": true
+    },
+    {
+      "family": "words",
+      "enum_blocked_count": 2,
+      "enum_types": [
+        "Aspose.Words.LowCode.MergeFormatMode",
+        "Aspose.Words.LowCode.SplitCriteria"
+      ],
+      "all_enums_tracked": true
+    },
+    {
+      "family": "pdf",
+      "enum_blocked_count": 4,
+      "enum_types": [
+        "Aspose.Pdf.LowCode.ConversionMode",
+        "Aspose.Pdf.LowCode.DataType",
+        "Aspose.Pdf.LowCode.PdfAStandardVersion",
+        "Aspose.Pdf.LowCode.SaveFormat"
+      ],
+      "all_enums_tracked": true
+    },
+    {
+      "family": "diagram",
+      "enum_blocked_count": 0,
+      "enum_types": [],
+      "all_enums_tracked": true
+    },
+    {
+      "family": "email",
+      "enum_blocked_count": 0,
+      "enum_types": [],
+      "all_enums_tracked": true
+    },
+    {
+      "family": "slides",
+      "enum_blocked_count": 0,
+      "enum_types": [],
+      "all_enums_tracked": true
+    }
+  ],
+  "total_enum_blocked_count": 6
+}

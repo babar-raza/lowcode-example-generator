@@ -1,0 +1,209 @@
+{
+  "review_type": "family_scoped_evidence_preflight_review",
+  "review_date": "2026-05-05",
+  "sprint": "Family-Scoped Evidence Promotion and Latest-State Isolation",
+  "overall_gate": "PASS_PROCEED_TO_IMPLEMENTATION",
+
+  "referenced_artifact_review": {
+    "total": 14,
+    "verified": 14,
+    "stale": 0,
+    "contradictory": 0,
+    "missing": 0,
+    "needs_fix": 0,
+    "details": [
+      {
+        "artifact": "workspace/verification/latest/cells-tier5-monthly-rerun-proof.json",
+        "classification": "VERIFIED",
+        "note": "Created last sprint. run_id=pilot-cells-20260430-175422, 16/16 stages, verdict=PR_DRY_RUN_READY, provider=llm_professionalize."
+      },
+      {
+        "artifact": "workspace/verification/latest/cells-tier5-e2e-evidence-review.json",
+        "classification": "VERIFIED",
+        "note": "Created last sprint. overall_verdict=E2E_VERIFIED_WITH_KNOWN_LIMITATION. 4 stale files reconciled, 16/16 quality checks PASS."
+      },
+      {
+        "artifact": "docs/discovery/cells-tier5-monthly-rerun-proof.md",
+        "classification": "VERIFIED",
+        "note": "Created last sprint. Documents full Cells run with build/runtime table."
+      },
+      {
+        "artifact": "docs/discovery/cells-tier5-e2e-evidence-review.md",
+        "classification": "VERIFIED",
+        "note": "Created last sprint. Documents A-P structured response and known limitations KL-1/KL-2/KL-3."
+      },
+      {
+        "artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+        "classification": "VERIFIED",
+        "note": "45 total, 35 closed, 10 open. followup-family-scoped-evidence-promotion is OPEN."
+      },
+      {
+        "artifact": "docs/discovery/open-taskcard-closure-matrix.md",
+        "classification": "MISSING",
+        "note": "File does not exist at this path. The JSON matrix is authoritative. MD will be created in Phase 6."
+      },
+      {
+        "artifact": "workspace/verification/latest/family-generation-readiness-rank.json",
+        "classification": "VERIFIED",
+        "note": "3 families: cells=eligible/generation_ready, words=eligible/blocked(allowed_types), pdf=eligible/blocked(discovery_only). evidence_source fields point to top-level latest/ (limitation)."
+      },
+      {
+        "artifact": "workspace/verification/latest/all-family-lowcode-discovery.json",
+        "classification": "VERIFIED",
+        "note": "Confirms cells/words/pdf discovery results. Global file."
+      },
+      {
+        "artifact": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/",
+        "classification": "VERIFIED",
+        "note": "22 files: aggregate-gate-results.json, api-consumer-relationships.json, api-delta-report.json, blocked-scenarios.json, cells-source-of-truth-proof.json, example-gate-results.json, example-impact-report.json, example-reviewer-results.json, fixture-strategy-plan.json, gate-results.json, generated-fixtures.json, llm-fewshot-patterns.json, llm-preflight.json, plugin-type-role-classification.json, pr-candidate-manifest.json, publishing-report.json, repair-attempts.json, reviewer-preflight.json, runnable-entrypoint-scores.json, scenario-feedback-updates.json, scenario-input-format-map.json, stale-existing-examples.json, validation-results.json."
+      },
+      {
+        "artifact": "workspace/runs/pilot-words-20260501-150103/evidence/latest/",
+        "classification": "VERIFIED",
+        "note": "20 files: all of above except generated-fixtures.json, repair-attempts.json, publishing-report.json. words-source-of-truth-proof.json instead of cells-source-of-truth-proof.json. Confirmed: 19 non-family-prefixed files overlap with Cells run and would overwrite."
+      },
+      {
+        "artifact": "src/plugin_examples/runner.py (promote_latest block, lines 1229-1250)",
+        "classification": "NEEDS_FIX",
+        "note": "Root cause. Copies ALL files from evidence_dir/latest/ to verification_dir/latest/ with shutil.copy2. No family scoping. Any family run overwrites all prior family run evidence."
+      },
+      {
+        "artifact": "src/plugin_examples/publisher/publisher.py (_verify_evidence)",
+        "classification": "NEEDS_FIX",
+        "note": "Reads validation-results.json from verification_dir/latest/ without family-scoped fallback. Must prefer families/{family}/ path."
+      },
+      {
+        "artifact": "src/plugin_examples/publisher/release_status.py",
+        "classification": "VERIFIED",
+        "note": "Reads only family-prefixed files ({family}-live-pr-result.json, etc.) and global files (all-family-lowcode-discovery.json, open-taskcard-closure-matrix.json). Not affected by contamination."
+      },
+      {
+        "artifact": "c:/Users/prora/.claude/plans/linked-nibbling-hamster.md",
+        "classification": "VERIFIED",
+        "note": "Exists. Master plan (very large). Family-Scoped Evidence Promotion section will be appended in Phase 6."
+      }
+    ]
+  },
+
+  "q1_overwritten_files": {
+    "question": "Which 4 latest evidence files were overwritten by Words?",
+    "answer": "The 4 files specifically identified as stale in the Cells E2E review were: validation-results.json, pr-candidate-manifest.json, example-gate-results.json, example-reviewer-results.json. However, ACTUAL overwrite count was 19: all non-family-prefixed files shared between Cells and Words runs. The 4 identified were the ones with visible discrepancies (e.g., 9 Cells scenarios vs 4 Words scenarios in validation-results.json).",
+    "files_with_visible_discrepancy": [
+      "validation-results.json",
+      "pr-candidate-manifest.json",
+      "example-gate-results.json",
+      "example-reviewer-results.json"
+    ],
+    "all_overwritten": [
+      "aggregate-gate-results.json",
+      "api-consumer-relationships.json",
+      "api-delta-report.json",
+      "blocked-scenarios.json",
+      "example-gate-results.json",
+      "example-impact-report.json",
+      "example-reviewer-results.json",
+      "fixture-strategy-plan.json",
+      "gate-results.json",
+      "llm-fewshot-patterns.json",
+      "llm-preflight.json",
+      "plugin-type-role-classification.json",
+      "pr-candidate-manifest.json",
+      "reviewer-preflight.json",
+      "runnable-entrypoint-scores.json",
+      "scenario-feedback-updates.json",
+      "scenario-input-format-map.json",
+      "stale-existing-examples.json",
+      "validation-results.json"
+    ]
+  },
+
+  "q2_correct_cells_versions": {
+    "question": "What are their correct Cells versions in the canonical Cells run folder?",
+    "canonical_path": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/",
+    "note": "All 22 files in this directory are the authoritative Cells versions. They were verified in the previous sprint."
+  },
+
+  "q3_root_cause_code": {
+    "question": "What code promoted them into workspace/verification/latest/?",
+    "file": "src/plugin_examples/runner.py",
+    "lines": "1229-1250",
+    "mechanism": "shutil.copy2(f, dst_latest / f.name) — copies ALL files from evidence_dir/latest/ to verification_dir/latest/ without any family tag. No family-scoped subdirectory.",
+    "trigger": "promote_latest=True flag passed to run_pipeline()"
+  },
+
+  "q4_global_by_design": {
+    "question": "Which evidence files are global by design?",
+    "files": [
+      "all-family-lowcode-discovery.json — multi-family discovery summary",
+      "family-generation-readiness-rank.json — multi-family readiness rank",
+      "family-publish-readiness.json — multi-family publish readiness",
+      "family-repo-access-resolution.json — multi-family repo access",
+      "open-taskcard-closure-matrix.json — project-wide taskcard registry",
+      "monthly-maintenance-runbook.json — global runbook",
+      "release-status.json — multi-family release status",
+      "family-publishing-target-audit.json — multi-family audit",
+      "release-closure-review.json — global",
+      "release-inventory-cells-words.json — multi-family inventory"
+    ]
+  },
+
+  "q5_family_scoped_by_design": {
+    "question": "Which evidence files are family-scoped by design?",
+    "files": [
+      "validation-results.json — per-example build/run results for one family run",
+      "pr-candidate-manifest.json — PR candidates for one family run",
+      "example-gate-results.json — per-example gate results for one family run",
+      "example-reviewer-results.json — reviewer output for one family run",
+      "aggregate-gate-results.json — aggregate gate summary for one family run",
+      "api-consumer-relationships.json — API consumer graph for one family",
+      "api-delta-report.json — delta report for one family version",
+      "blocked-scenarios.json — blocked scenarios for one family",
+      "example-impact-report.json — impact report for one family",
+      "fixture-strategy-plan.json — fixture strategy for one family",
+      "gate-results.json — overall gate verdict for one family run",
+      "llm-fewshot-patterns.json — LLM patterns for one family",
+      "llm-preflight.json — LLM preflight for one family run",
+      "plugin-type-role-classification.json — role classification for one family",
+      "publishing-report.json — publishing status for one family run",
+      "repair-attempts.json — repair history for one family run",
+      "reviewer-preflight.json — reviewer preflight for one family run",
+      "runnable-entrypoint-scores.json — entrypoint scores for one family",
+      "scenario-feedback-updates.json — scenario feedback for one family run",
+      "scenario-input-format-map.json — input format map for one family run",
+      "stale-existing-examples.json — stale detection for one family",
+      "generated-fixtures.json — fixtures for one family run",
+      "{family}-source-of-truth-proof.json — already family-prefixed, safe at top level"
+    ]
+  },
+
+  "q6_run_scoped_only": {
+    "question": "Which evidence files are run-scoped only?",
+    "files": [
+      "pilot-report.json — written to workspace/runs/{run_id}/ only, NOT promoted to verification/latest/",
+      "evidence_dir/latest/{file} — canonical single-run source, stays in workspace/runs/{run_id}/evidence/latest/"
+    ]
+  },
+
+  "q7_never_overwrite": {
+    "question": "Which files should never be overwritten by another family run?",
+    "answer": "ALL 22 evidence files in evidence_dir/latest/ are family-run specific. None should be overwritten by a different family run. The fix is to write them to verification/latest/families/{family}/ rather than verification/latest/.",
+    "special_note": "{family}-source-of-truth-proof.json is already family-prefixed and won't collide. All other 21 files have generic names and WILL collide."
+  },
+
+  "q8_tests_missed": {
+    "question": "What current tests missed this?",
+    "answer": "No existing tests verify that a Cells promotion followed by a Words promotion does NOT overwrite Cells evidence in verification/latest/. Tests in test_runner.py verify stage behavior but not the file promotion layout. tests/unit/test_publishing.py tests the publisher with mock verification dirs but does not test for cross-family contamination of shared filenames."
+  },
+
+  "q9_behavior_must_change": {
+    "question": "What exact behavior must change?",
+    "current": "runner.py promote_latest copies all evidence_dir/latest/ files to verification_dir/latest/ flat — any family run overwrites all prior runs.",
+    "required": [
+      "1. Primary write: verification/latest/families/{family}/{file} — all run evidence files",
+      "2. Backward-compat write: verification/latest/{file} — still written for legacy readers, but tagged with _last_promoted_by.json notice",
+      "3. publisher.py _verify_evidence must prefer verification/latest/families/{family}/ before falling back to verification/latest/",
+      "4. _evidence_metadata.json must be written to verification/latest/families/{family}/ with scope, family, run_id, promoted_at, source_run_path",
+      "5. _last_promoted_by.json must be written to verification/latest/ identifying last writer family and run_id"
+    ]
+  }
+}

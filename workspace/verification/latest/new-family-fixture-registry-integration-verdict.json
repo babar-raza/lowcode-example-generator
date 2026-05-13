@@ -1,0 +1,40 @@
+{
+  "artifact": "new-family-fixture-registry-integration-verdict",
+  "timestamp": "2026-05-11T15:45:00Z",
+  "commit_sha": "d6e73f9",
+  "integration_approach": "Family-scoped format maps + programmatic_input strategy",
+  "changes_made": {
+    "planner.py": {
+      "input_format_map": "Added family-scoped keys (cells:pdfconverter, words:converter, diagram:pdfconverter, slides:convert/merger/compress/foreach/collect) + unscoped DiagramConverter",
+      "output_format_map": "Added family-scoped keys (diagram:pdfconverter, slides:convert/merger/compress) + unscoped diagramconverter/pdfconverter/converter",
+      "_infer_input_format": "Added family parameter for disambiguation",
+      "_infer_output_format": "Added family parameter for disambiguation"
+    },
+    "fixture_factory.py": {
+      "generate_docx": "New DOCX generator (stdlib OOXML via zipfile)",
+      "SUPPORTED_FORMATS": "Added .docx"
+    },
+    "test_fixture_strategy.py": {
+      "new_tests": 15,
+      "test_classes": [
+        "TestDocxFixtureGenerator (4 tests)",
+        "TestDiagramFixtureStrategy (5 tests)",
+        "TestEmailFixtureStrategy (2 tests)",
+        "TestSlidesFixtureStrategy (4 tests)"
+      ]
+    }
+  },
+  "fixture_strategy_per_family": {
+    "diagram": "programmatic_input (.vsdx not in SUPPORTED_FORMATS; LLM generates Aspose.Diagram fixture code in Program.cs)",
+    "email": "programmatic_input (.eml not in SUPPORTED_FORMATS; LLM generates MailMessage fixture code in Program.cs)",
+    "slides": "programmatic_input (.pptx not in SUPPORTED_FORMATS; LLM generates Presentation fixture code in Program.cs)"
+  },
+  "collision_resolutions": [
+    "Converter (Words .docx vs Email .eml): scoped words:converter in input map; unscoped converter in output map (both → .pdf)",
+    "PdfConverter (Cells .xlsx vs Diagram .vsdx): scoped cells:pdfconverter and diagram:pdfconverter in input map",
+    "Merger (Slides .pptx vs PDF/Words family_default): scoped slides:merger in both maps"
+  ],
+  "test_results": "1250 passed in 44.79s (15 new tests)",
+  "regressions": "NONE",
+  "verdict": "FIXTURE_REGISTRY_INTEGRATION_COMPLETE"
+}

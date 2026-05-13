@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "REM-016",
+  "phase": 0,
+  "phase_name": "Current State Reconciliation",
+  "current_branch": "main",
+  "current_commit": "79f19ae",
+  "python_version": "3.13.2",
+  "dotnet_version": "9.0.200",
+  "bundle_vs_current_head": {
+    "bundle_test_count": 1168,
+    "current_test_count": 1193,
+    "bundle_queue_entries": 17,
+    "current_queue_entries": 43,
+    "bundle_denominator_files": 3,
+    "current_denominator_files": 6,
+    "bundle_is_older_than_head": true,
+    "newer_denominator_files": ["diagram.json", "email.json", "slides.json"],
+    "newer_queue_entries": "26 BACKLOGGED entries added for deferred types",
+    "newer_tests": "25 additional tests from post-bundle work"
+  },
+  "rem016_current_implementation_status": {
+    "compare_run_flag_in_main_py": false,
+    "prior_run_result_in_lifecycle": false,
+    "regression_detected_in_lifecycle": false,
+    "run_to_run_comparison_design_exists": true,
+    "run_to_run_comparison_design_path": "workspace/verification/latest/run-to-run-comparison-design.json",
+    "any_partial_implementation": false
+  },
+  "files_to_modify": [
+    "src/plugin_examples/__main__.py (add --compare-run flag)",
+    "src/plugin_examples/gates/example_lifecycle.py (add fields + comparison logic)",
+    "src/plugin_examples/runner.py (integrate comparison after lifecycle write)"
+  ],
+  "files_to_create": [
+    "tests/unit/test_run_to_run_comparison.py"
+  ],
+  "preservation_checks": {
+    "cells_9_of_9": "confirmed via lifecycle records",
+    "words_4_of_4": "confirmed via lifecycle records",
+    "pdf_pr1_merged": "confirmed via merge result",
+    "metrics_defaults_safe": "metrics.yml enabled=false, dry_run=true",
+    "approval_gates_intact": "APPROVE_LIVE_PR and APPROVE_MERGE_PR gates untouched"
+  },
+  "gate_0_result": "PASS — bundle is older than HEAD; no partial REM-016 implementation exists; proceed with implementation"
+}

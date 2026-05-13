@@ -1,0 +1,34 @@
+{
+  "artifact": "diagram-publication-taskcard-update",
+  "timestamp": "2026-05-12T09:14:42Z",
+  "updated_at": "2026-05-12T00:00:00Z",
+  "taskcards_updated": [
+    {
+      "id": "NEW-DIAGRAM-PILOT",
+      "status": "CLOSED_VERIFIED",
+      "prior_status": "LIVE_PR_OPEN",
+      "pr_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/pull/1",
+      "pr_number": 1,
+      "merge_commit_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "branch": "plugin-examples/diagram/20260512-091424",
+      "files_committed": 14,
+      "examples": ["diagram-diagram-converter", "diagram-pdf-converter"],
+      "post_merge_verification": "ALL_PASS",
+      "note": "PR #1 merged to main. Post-merge clean-checkout validation: ALL_PASS (2/2 examples build+run). Taskcard closed."
+    },
+    {
+      "id": "diagram-fewshot-fixture-guidance",
+      "status": "IMPLEMENTED_AND_VERIFIED",
+      "note": "Committed in e8aea7d. 20 tests. LLM generation follows guidance correctly."
+    },
+    {
+      "id": "diagram-nuget-download-retry",
+      "status": "IMPLEMENTED_AND_VERIFIED",
+      "note": "Committed in 633fe79. Fixed transient NuGet timeouts for 38MB package."
+    }
+  ],
+  "token_resolution": {
+    "token_used": "GH_TOKEN (classic PAT, ghp_, 40 chars)",
+    "reason": "Fine-grained GITHUB_PAT had resource_owner=babar-raza (personal). Target repo is org-owned (aspose-diagram-net). Classic PAT inherits full org access via user membership."
+  }
+}

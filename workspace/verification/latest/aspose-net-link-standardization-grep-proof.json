@@ -1,0 +1,32 @@
+{
+  "gate": "GATE_11_GREP_PROOF",
+  "date": "2026-05-04",
+  "verdict": "PASS",
+  "checks": {
+    "readme_renderer_py_aspose_com_url_constants": {
+      "result": "PASS",
+      "detail": "Zero live aspose.com URL constants in readme_renderer.py. Only a comment ('no aspose.com constants') remains — no URL strings."
+    },
+    "template_jinja2_aspose_com": {
+      "result": "PASS",
+      "detail": "Zero aspose.com references in templates/root-readme/lowcode-family-readme.md.j2"
+    },
+    "cells_readme_aspose_com": {
+      "result": "PASS",
+      "detail": "Zero aspose.com links in workspace/pr-dry-run/cells-controlled-pilot/README.md"
+    },
+    "words_readme_aspose_com": {
+      "result": "PASS",
+      "detail": "Zero aspose.com links in workspace/pr-dry-run/words-controlled-pilot/README.md"
+    },
+    "cells_readme_aspose_net_count": {
+      "result": "PASS",
+      "detail": "9 aspose.net link occurrences in cells README (products, docs, kb, reference, blog, purchase, forum, about x2)"
+    },
+    "words_readme_aspose_net_count": {
+      "result": "PASS",
+      "detail": "9 aspose.net link occurrences in words README"
+    }
+  },
+  "summary": "All grep checks pass. The renderer and template contain zero aspose.com URL constants. Generated READMEs for Cells and Words contain only aspose.net links."
+}

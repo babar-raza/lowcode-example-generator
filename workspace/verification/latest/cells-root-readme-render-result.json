@@ -1,0 +1,24 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-13 09:58 UTC",
+  "family": "cells",
+  "package_path": "workspace\\pr-dry-run\\cells-controlled-pilot",
+  "readme_path": "workspace\\pr-dry-run\\cells-controlled-pilot\\README.md",
+  "readme_bytes": 5241,
+  "package_version": "26.4.0",
+  "examples_count": 9,
+  "example_names": [
+    "html-converter",
+    "image-converter",
+    "json-converter",
+    "pdf-converter",
+    "spreadsheet-converter",
+    "spreadsheet-locker",
+    "spreadsheet-merger",
+    "spreadsheet-splitter",
+    "text-converter"
+  ],
+  "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

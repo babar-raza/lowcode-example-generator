@@ -1,0 +1,139 @@
+{
+  "sprint": "PDF Fixture Strategy Review",
+  "phase": "Phase 4 — Repeatable Fixture Strategy Definition",
+  "date": "2026-05-05",
+  "does_not_enable_generation": true,
+  "taskcard": "followup-pdf-fixture-strategy-review",
+  "verdict": "PDF_FIXTURE_STRATEGY_REVIEW_COMPLETE_GENERATION_STILL_BLOCKED",
+  "strategies": {
+    "programmatic_pdf_single": {
+      "id": "programmatic_pdf_single",
+      "description": "Single-page blank PDF created programmatically",
+      "used_by_pilot_types": ["Optimizer"],
+      "fixture_count": 1,
+      "fixture_filenames": ["input.pdf"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "doc.Pages.Add();",
+        "doc.Save(\"input.pdf\");"
+      ],
+      "required_usings": ["Aspose.Pdf"],
+      "source_in_pdf_yml": "template_hints.input_creation_lines",
+      "validated": true,
+      "validation_bytes": 28837,
+      "validation_header": true
+    },
+    "programmatic_pdf_multi_page": {
+      "id": "programmatic_pdf_multi_page",
+      "description": "Multi-page (3-page) blank PDF created programmatically",
+      "used_by_pilot_types": ["Splitter"],
+      "fixture_count": 1,
+      "fixture_filenames": ["input.pdf"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "doc.Pages.Add();",
+        "doc.Pages.Add();",
+        "doc.Pages.Add();",
+        "doc.Save(\"input.pdf\");"
+      ],
+      "required_usings": ["Aspose.Pdf"],
+      "source_in_pdf_yml": "Extends template_hints.input_creation_lines with 2 extra Pages.Add()",
+      "validated": true,
+      "validation_bytes": 30192,
+      "validation_header": true
+    },
+    "programmatic_pdf_pair": {
+      "id": "programmatic_pdf_pair",
+      "description": "Two separate single-page PDFs for merge input",
+      "used_by_pilot_types": ["Merger"],
+      "fixture_count": 2,
+      "fixture_filenames": ["input1.pdf", "input2.pdf"],
+      "creation_code": [
+        "var doc1 = new Aspose.Pdf.Document();",
+        "doc1.Pages.Add();",
+        "doc1.Save(\"input1.pdf\");",
+        "var doc2 = new Aspose.Pdf.Document();",
+        "doc2.Pages.Add();",
+        "doc2.Save(\"input2.pdf\");"
+      ],
+      "required_usings": ["Aspose.Pdf"],
+      "source_in_pdf_yml": "template_hints.merger_input_creation_lines",
+      "validated": true,
+      "validation_bytes_a": 28837,
+      "validation_bytes_b": 28837,
+      "validation_header_a": true,
+      "validation_header_b": true
+    },
+    "programmatic_pdf_known_text": {
+      "id": "programmatic_pdf_known_text",
+      "description": "Single-page PDF with known text fragment for extraction validation",
+      "used_by_pilot_types": ["TextExtractor"],
+      "fixture_count": 1,
+      "fixture_filenames": ["input.pdf"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "var page = doc.Pages.Add();",
+        "page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Hello LowCode PDF\"));",
+        "doc.Save(\"input.pdf\");"
+      ],
+      "required_usings": ["Aspose.Pdf", "Aspose.Pdf.Text"],
+      "source_in_pdf_yml": "Extends template_hints.input_creation_lines with TextFragment",
+      "known_text": "Hello LowCode PDF",
+      "validated": true,
+      "validation_bytes": 29359,
+      "validation_header": true
+    }
+  },
+  "corrected_api_patterns": {
+    "corrected_add_output": "options.AddOutput(new FileDataSource(\"output.pdf\")) — FileDataSource, NOT FileSaveTarget",
+    "corrected_result_check": "result.ResultCollection.Count > 0 — NOT result.IsSuccess",
+    "corrected_string_result": "((StringResult)result.ResultCollection[0]).Text — NOT .Data",
+    "splitter_output_naming": "Use plain filename for output (e.g., 'output.pdf') — NOT format string 'output_{0}.pdf'"
+  },
+  "corrected_code_templates": {
+    "Merger": "var mergeOptions = new MergeOptions();\nmergeOptions.AddInput(new FileDataSource(\"input1.pdf\"));\nmergeOptions.AddInput(new FileDataSource(\"input2.pdf\"));\nmergeOptions.AddOutput(new FileDataSource(\"output.pdf\"));\nvar merger = new Merger();\nvar result = merger.Process(mergeOptions);\nConsole.WriteLine(result.ResultCollection.Count > 0 ? \"Merge succeeded\" : \"Merge failed\");",
+    "Splitter": "var splitOptions = new SplitOptions();\nsplitOptions.AddInput(new FileDataSource(\"input.pdf\"));\nsplitOptions.AddOutput(new FileDataSource(\"output.pdf\"));\nvar splitter = new Splitter();\nvar result = splitter.Process(splitOptions);\nConsole.WriteLine(result.ResultCollection.Count > 0 ? \"Split succeeded\" : \"Split failed\");",
+    "Optimizer": "var optimizeOptions = new OptimizeOptions();\noptimizeOptions.AddInput(new FileDataSource(\"input.pdf\"));\noptimizeOptions.AddOutput(new FileDataSource(\"output.pdf\"));\nvar optimizer = new Optimizer();\nvar result = optimizer.Process(optimizeOptions);\nConsole.WriteLine(result.ResultCollection.Count > 0 ? \"Optimize succeeded\" : \"Optimize failed\");",
+    "TextExtractor": "// Create input with known text\nvar doc = new Aspose.Pdf.Document();\nvar page = doc.Pages.Add();\npage.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Hello LowCode PDF\"));\ndoc.Save(\"input.pdf\");\n\n// Extract text — NO AddOutput()\nvar textOptions = new TextExtractorOptions();\ntextOptions.AddInput(new FileDataSource(\"input.pdf\"));\nvar extractor = new TextExtractor();\nvar result = extractor.Process(textOptions);\nif (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)\n    Console.WriteLine($\"Extracted: {sr.Text}\");"
+  },
+  "output_validation_strategy": {
+    "Merger": {
+      "check": "File.Exists(outputPath) + byte[0..3] == \"%PDF\"",
+      "console_output": "result.ResultCollection.Count > 0 printed",
+      "validated": true
+    },
+    "Splitter": {
+      "check": "File.Exists(outputPath) + byte[0..3] == \"%PDF\"",
+      "console_output": "result.ResultCollection.Count > 0 printed",
+      "output_naming_note": "Output filename is the literal string passed to AddOutput(FileDataSource). No format expansion.",
+      "validated": true
+    },
+    "Optimizer": {
+      "check": "File.Exists(outputPath) + byte[0..3] == \"%PDF\"",
+      "console_output": "result.ResultCollection.Count > 0 printed",
+      "validated": true
+    },
+    "TextExtractor": {
+      "check": "result.ResultCollection.Count > 0 AND result.ResultCollection[0] is StringResult AND sr.Text.Contains(knownText)",
+      "console_output": "Extracted text containing known string",
+      "evaluation_mode_note": "Evaluation watermark text will be present. Use Contains(), not Equals().",
+      "validated": true
+    }
+  },
+  "fixture_strategy_summary": {
+    "all_inputs_programmatic": true,
+    "no_external_fixture_files": true,
+    "no_github_api_calls_for_fixtures": true,
+    "all_creation_uses_aspose_pdf_document": true,
+    "pdf_yml_template_hints_sufficient": true,
+    "validation_harness_passes": true,
+    "critical_api_corrections_found": 4,
+    "generation_still_blocked": true,
+    "generation_blocked_by": [
+      "family_status_is_discovery_only",
+      "followup-pdf-family-repo-target-mapping (open)",
+      "followup-pdf-controlled-pilot-enablement (requires human approval)"
+    ]
+  },
+  "phase4_conclusion": "All 4 PDF fixture strategies are validated and repeatable. The programmatic creation approach using Aspose.Pdf.Document() is confirmed. Critical API corrections found: AddOutput() takes FileDataSource (not FileSaveTarget), ResultContainer uses ResultCollection, no IsSuccess, Splitter does not expand format strings. All corrections must be applied to LLM code generation rules before PDF pilot can run. Generation remains blocked."
+}

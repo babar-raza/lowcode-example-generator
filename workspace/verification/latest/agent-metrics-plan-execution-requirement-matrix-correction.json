@@ -1,0 +1,58 @@
+{
+  "title": "Agent Metrics Plan Execution — Requirement Matrix Count Correction",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "correction_type": "evidence_only",
+  "source_file": "workspace/verification/latest/agent-metrics-plan-execution-requirement-matrix.json",
+  "no_implementation_changes": true,
+  "no_behavior_changes": true,
+
+  "previous_summary_block": {
+    "claimed_total": 35,
+    "claimed_pass": 32,
+    "claimed_partial": 1,
+    "claimed_fail": 1,
+    "source": "agent-metrics-plan-execution-requirement-matrix.json: summary block"
+  },
+
+  "actual_list_count": {
+    "method": "len(data['requirements']) computed by Python",
+    "total_items_in_list": 39,
+    "pass_in_list": 37,
+    "partial_in_list": 1,
+    "fail_in_list": 1
+  },
+
+  "discrepancy": {
+    "total_delta": 4,
+    "pass_delta": 5,
+    "explanation": "The requirements list contains 39 items. The summary block was hand-written and counted 35 (total) and 32 (PASS). The 4-item discrepancy exists because 4 requirements were added to the list after the summary block was initially drafted — the summary was not updated to match the final list length."
+  },
+
+  "corrected_summary": {
+    "total": 39,
+    "PASS": 37,
+    "PARTIAL": 1,
+    "FAIL": 1,
+    "BLOCKER_fails": 0,
+    "HIGH_fails": 0,
+    "partial_items": ["S8-contract-preflight — formal artifact was missing; now RESOLVED by creation of agent-metrics-api-contract.json"],
+    "fail_items": ["S18-plan-bundle — historical plan-sprint artifact, LOW severity, not functional"]
+  },
+
+  "impact_on_verdict": {
+    "previous_verdict": "PLAN_EXECUTION_VERIFIED_WITH_KNOWN_GAPS",
+    "corrected_verdict": "PLAN_EXECUTION_VERIFIED_WITH_KNOWN_GAPS",
+    "verdict_unchanged": true,
+    "reason": "Increasing the PASS count from 32→37 only strengthens the result. The single PARTIAL and single FAIL are unchanged. No new failures discovered."
+  },
+
+  "additional_note_on_s8": {
+    "previous_status": "PARTIAL",
+    "current_status": "RESOLVED",
+    "resolution": "agent-metrics-api-contract.json created in evidence closure mode using TC-13 evidence. No new POST sent.",
+    "note": "S8 remains listed as PARTIAL in the original matrix file (not modified) — this addendum supersedes the S8 status description only."
+  },
+
+  "source_file_not_modified": true,
+  "this_file_supersedes_summary_block_only": true
+}

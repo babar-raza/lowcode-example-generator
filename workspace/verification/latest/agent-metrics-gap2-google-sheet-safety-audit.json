@@ -1,0 +1,35 @@
+{
+  "title": "Gap Closure Sprint 2 — Google Sheet Safety Verification",
+  "verification_date": "2026-05-06",
+  "claim_14_dry_run_cannot_post": {
+    "verified": true,
+    "poster_py_lines_80_87": "if dry_run: return {posted: False, reason: 'dry_run', ...}",
+    "dry_run_checked_before_any_other_logic": true,
+    "test_proves_it": "test_agent_metrics_poster.py::TestDryRun::test_dry_run_never_posts — PASS"
+  },
+  "claim_15_test_only_sprint_blocks_production": {
+    "verified": true,
+    "poster_py_lines_89_95": "if test_only_sprint and job_type != 'test': return {posted: False, reason: 'production job_type blocked'}",
+    "test_only_sprint_hardcoded_true": "session.py line 181: test_only_sprint=True",
+    "test_proves_it": "test_agent_metrics_poster.py::TestTestOnlySprint::test_production_job_type_blocked — PASS"
+  },
+  "claim_16_force_repost_cannot_bypass_production_safety": {
+    "verified": true,
+    "evidence": {
+      "poster_py_order": "dry_run check (line 81) → test_only_sprint check (line 90) → duplicate check (line 98). force_repost only bypasses duplicate check at line 98",
+      "force_repost_does_not_skip_test_only": true,
+      "test_proves_it": "test_agent_metrics_session.py::TestSafetyGates::test_force_repost_cannot_bypass_production_safety — PASS"
+    }
+  },
+  "claim_19_router_return_types_unchanged": {
+    "verified": true,
+    "_call_openai_compatible_returns": "str (router.py line 377: ) -> str)",
+    "_call_ollama_returns": "str (router.py line 322: ) -> str)",
+    "generate_returns": "str (via _call_openai_compatible / _call_ollama)"
+  },
+  "google_sheet_mutations_this_sprint": {
+    "production_rows_added": 0,
+    "test_rows_added": 0,
+    "verification_method": "No AGENT_METRICS_TOKEN in env, test_only_sprint=True hardcoded, no --metrics-post invoked"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Gap Closure Sprint 2 — File Audit",
+  "verification_date": "2026-05-06",
+  "claim_1_git_status": {
+    "verified": true,
+    "modified_tracked_files": 33,
+    "metrics_specific_untracked_source": [
+      "src/plugin_examples/metrics/__init__.py",
+      "src/plugin_examples/metrics/config.py",
+      "src/plugin_examples/metrics/evidence.py",
+      "src/plugin_examples/metrics/models.py",
+      "src/plugin_examples/metrics/payload_builder.py",
+      "src/plugin_examples/metrics/pipeline_hook.py",
+      "src/plugin_examples/metrics/poster.py",
+      "src/plugin_examples/metrics/session.py",
+      "src/plugin_examples/metrics/validator.py"
+    ],
+    "metrics_specific_untracked_tests": [
+      "tests/unit/test_agent_metrics_cli.py",
+      "tests/unit/test_agent_metrics_config.py",
+      "tests/unit/test_agent_metrics_evidence.py",
+      "tests/unit/test_agent_metrics_payload.py",
+      "tests/unit/test_agent_metrics_poster.py",
+      "tests/unit/test_agent_metrics_router.py",
+      "tests/unit/test_agent_metrics_runner.py",
+      "tests/unit/test_agent_metrics_session.py"
+    ],
+    "metrics_source_files_count": 9,
+    "metrics_test_files_count": 8
+  },
+  "claim_2_files_created_modified": {
+    "verified": true,
+    "new_files": [
+      "src/plugin_examples/metrics/session.py"
+    ],
+    "modified_files": [
+      "pipeline/configs/metrics.yml",
+      "src/plugin_examples/metrics/config.py",
+      "src/plugin_examples/metrics/payload_builder.py",
+      "src/plugin_examples/__main__.py",
+      "docs/publishing/agent-metrics-runbook.md"
+    ],
+    "note": "Other metrics/ files (models.py, poster.py, evidence.py, etc.) existed from prior sprint"
+  }
+}

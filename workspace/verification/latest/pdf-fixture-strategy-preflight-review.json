@@ -1,0 +1,161 @@
+{
+  "sprint": "PDF Fixture Strategy Review",
+  "phase": "Gate 0 — Referenced Artifact Inspection",
+  "date": "2026-05-05",
+  "inspector": "automated",
+  "gate_result": "PASS",
+  "summary": {
+    "total_artifacts": 24,
+    "verified": 22,
+    "stale_fixed": 2,
+    "missing": 0,
+    "contradictory": 0,
+    "needs_fix": 0
+  },
+  "stale_items_fixed": [
+    {
+      "artifact": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "issue": "matrix_date was 2026-05-04 (prior sprint date)",
+      "fix": "Updated matrix_date to 2026-05-05, sprint to current sprint name",
+      "verification": "File written and re-inspected"
+    },
+    {
+      "artifact": "docs/discovery/open-taskcard-closure-matrix.md",
+      "issue": "Stale — reflected prior matrix_date in header",
+      "fix": "Regenerated via sync-taskcard-docs command",
+      "verification": "Header now shows 2026-05-05, 45 taskcards, 8 open, 37 closed"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "workspace/verification/latest/readme-api-pr4-review-preflight.json",
+      "classification": "VERIFIED",
+      "notes": "24 VERIFIED artifacts classified; Gate 0 PASS for README API accuracy sprint. Authoritative pre-merge preflight."
+    },
+    {
+      "path": "workspace/verification/latest/readme-api-pr4-method-accuracy.json",
+      "classification": "VERIFIED",
+      "notes": "All 13 examples THREE_WAY_MATCH. Cells 9/9 XxxConverter.Process, Words 4/4 type-specific."
+    },
+    {
+      "path": "workspace/verification/latest/cells-readme-api-pr4-verification.json",
+      "classification": "VERIFIED",
+      "notes": "Shows merged:false — expected, written before merge command. Non-contradictory. Merge result in cells-readme-api-pr4-merge-result.json."
+    },
+    {
+      "path": "workspace/verification/latest/words-readme-api-pr4-verification.json",
+      "classification": "VERIFIED",
+      "notes": "Same pattern as cells — pre-merge state snapshot. Non-contradictory."
+    },
+    {
+      "path": "workspace/verification/latest/cells-readme-api-pr4-merge-result.json",
+      "classification": "VERIFIED",
+      "notes": "merged:true, SHA 6222d610293d1c94ed1a26117922b60187be61d7, APPROVE_MERGE_PR used, token_logged:false."
+    },
+    {
+      "path": "workspace/verification/latest/words-readme-api-pr4-merge-result.json",
+      "classification": "VERIFIED",
+      "notes": "merged:true, SHA de806c02a0733cd438504ae14ec62d5a7f54e3cb, APPROVE_MERGE_PR used, token_logged:false."
+    },
+    {
+      "path": "workspace/verification/latest/readme-api-pr4-post-merge-verification.json",
+      "classification": "VERIFIED",
+      "notes": "Cells 5507 bytes with HtmlConverter.Process etc. Words 4681 bytes with Converter.Convert etc. overall_verdict: README_API_ACCURACY_MERGED_AND_VERIFIED."
+    },
+    {
+      "path": "workspace/verification/latest/readme-symbols-from-catalog-result.json",
+      "classification": "VERIFIED",
+      "notes": "read_manifest_api_symbol() documented, all_qualified:true, test_count:783."
+    },
+    {
+      "path": "workspace/verification/latest/cells-readme-symbols-pr-result.json",
+      "classification": "VERIFIED",
+      "notes": "Cells PR #4 details, 9 symbols rendered, audit_passed:true."
+    },
+    {
+      "path": "workspace/verification/latest/words-readme-symbols-pr-result.json",
+      "classification": "VERIFIED",
+      "notes": "Words PR #4 details, 4 symbols rendered, audit_passed:true."
+    },
+    {
+      "path": "workspace/verification/latest/open-taskcard-closure-matrix.json",
+      "classification": "STALE_FIXED",
+      "notes": "matrix_date updated from 2026-05-04 to 2026-05-05. Sprint name updated. followup-readme-symbols-from-catalog now CLOSED_VERIFIED. total=45, closed=37, open=8."
+    },
+    {
+      "path": "docs/discovery/open-taskcard-closure-matrix.md",
+      "classification": "STALE_FIXED",
+      "notes": "Regenerated via sync-taskcard-docs. Now shows 2026-05-05, 8 open taskcards including followup-pdf-fixture-strategy-review."
+    },
+    {
+      "path": "pipeline/configs/families/pdf.yml",
+      "classification": "VERIFIED",
+      "notes": "status: discovery_only (correct, must not change). template_hints section present with Aspose.Pdf.Document() creation patterns."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-source-of-truth-proof.json",
+      "classification": "VERIFIED",
+      "notes": "eligibility_status: eligible. 101 public_plugin_type_count, 71 public_plugin_method_count. Aspose.PDF 26.4.0, netstandard2.0. dedup: 19 kept, 2 excluded."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-dependency-dedup-report.json",
+      "classification": "VERIFIED",
+      "notes": "2 assemblies excluded: System.Memory (kept newer), System.Buffers (kept newer). No FileLoadException after fix."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-lowcode-catalog-inventory.json",
+      "classification": "VERIFIED",
+      "notes": "25 WORKFLOW_ROOT candidates confirmed. IPlugin instance-method pattern: new Plugin().Process(options)."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-role-classification-plan.json",
+      "classification": "VERIFIED",
+      "notes": "8-role taxonomy defined. All 101 types classified."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-controlled-pilot-plan.json",
+      "classification": "VERIFIED",
+      "notes": "does_not_enable_generation:true. Pilot types: Merger, Splitter, Optimizer, TextExtractor. Fixture strategy: programmatic via Aspose.Pdf.Document()."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-type-role-classification.json",
+      "classification": "VERIFIED",
+      "notes": "25 WORKFLOW_ROOT confirmed. Count gap (100 vs 101) explained: type_list_count uses distinct type-name extraction. All 4 pilot types classified."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-options-aware-review.json",
+      "classification": "VERIFIED",
+      "notes": "All 25 WORKFLOW_ROOTs reviewed. Code templates for all 4 pilot types. 10 LLM rules documented. TextExtractor exception: no AddOutput(), read StringResult."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-role-options-sprint-preflight-review.json",
+      "classification": "VERIFIED",
+      "notes": "Gate 0 for PDF role+options sprint. All 27 artifacts classified. Gate 0 result: PASS."
+    },
+    {
+      "path": "docs/discovery/pdf-role-options-sprint-preflight-review.md",
+      "classification": "VERIFIED",
+      "notes": "Corresponding markdown for pdf-role-options sprint preflight."
+    },
+    {
+      "path": "workspace/verification/latest/pdf-controlled-pilot-recommendation.json",
+      "classification": "VERIFIED",
+      "notes": "Recommendation: Merger, Splitter, Optimizer, TextExtractor for pilot. Code patterns and fixture strategies per type documented."
+    },
+    {
+      "path": "workspace/verification/latest/family-generation-readiness-rank.json",
+      "classification": "VERIFIED",
+      "notes": "PDF: generation_ready:false, generation_blocked_by:[family_status_is_discovery_only, needs_type_role_rules was false after fix]. workflow_root_candidate_count:25."
+    }
+  ],
+  "phase1_results_summary": {
+    "compileall_src": "COMPILE_OK",
+    "dotnet_build_dll_reflector": "BUILD_OK_0_WARNINGS_0_ERRORS",
+    "pytest_tests_unit": "783_PASSED",
+    "discover_lowcode_pdf": "eligible_lowcode_found_101_types_71_methods",
+    "run_family_pdf_tier1_dry_run": "BLOCKED_SOURCE_OF_TRUTH",
+    "run_blocked_reason": "Family 'pdf' is discovery_only. Use 'discover-lowcode' to run source-of-truth discovery."
+  },
+  "gate_conclusion": "All prior sprint artifacts verified. Two stale metadata fields fixed (matrix_date, sprint name). No missing or contradictory artifacts. PDF generation correctly blocked. Phase 1 verification commands all pass. Cleared to proceed to Phase 2.",
+  "sprint_entry_criteria_met": true
+}

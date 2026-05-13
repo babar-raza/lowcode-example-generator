@@ -1,0 +1,90 @@
+{
+  "resolution_type": "github_repo_access_resolution",
+  "resolution_date": "2026-05-12T10:25:47+00:00",
+  "sprint": "Repo Access Resolution and Repeatable Target Provisioning Sprint",
+  "token_present": true,
+  "families": [
+    {
+      "family": "pdf",
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\pdf.yml",
+      "error_classification": "repo_access_ok",
+      "can_read": true,
+      "can_push": true,
+      "default_branch": "main",
+      "visibility": "public",
+      "branch_exists": true,
+      "permissions_object": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
+      },
+      "http_status": 200,
+      "org_probe": {
+        "org": "aspose-pdf-net",
+        "org_exists": true,
+        "member_role": "admin",
+        "can_create_repos": true,
+        "http_status_org": 200,
+        "http_status_membership": 200,
+        "interpretation": "Org 'aspose-pdf-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
+      },
+      "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
+      "config_ready": true,
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "live_publish_ready": false
+    },
+    {
+      "family": "diagram",
+      "owner": "aspose-diagram-net",
+      "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\diagram.yml",
+      "error_classification": "repo_access_ok",
+      "can_read": true,
+      "can_push": true,
+      "default_branch": "main",
+      "visibility": "public",
+      "branch_exists": true,
+      "permissions_object": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
+      },
+      "http_status": 200,
+      "org_probe": {
+        "org": "aspose-diagram-net",
+        "org_exists": true,
+        "member_role": "admin",
+        "can_create_repos": true,
+        "http_status_org": 200,
+        "http_status_membership": 200,
+        "interpretation": "Org 'aspose-diagram-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
+      },
+      "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
+      "config_ready": true,
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "live_publish_ready": false
+    }
+  ],
+  "summary": {
+    "total_checked": 2,
+    "accessible": 2,
+    "blocked": 0,
+    "accessible_families": [
+      "pdf",
+      "diagram"
+    ],
+    "blocked_families": [],
+    "live_publish_allowed": false,
+    "note": "live_publish_ready=False for all families. Live publish requires: repo_access_ready=True, pr_permission_ready=True, and explicit human approval gate. dry_run=True is enforced in publisher regardless."
+  }
+}

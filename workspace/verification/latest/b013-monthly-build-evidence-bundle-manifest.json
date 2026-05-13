@@ -1,0 +1,61 @@
+{
+  "bundle_created_at": "2026-05-11T06:08:13.330916+00:00",
+  "sprint": "B-013-MONTHLY-BUILD",
+  "files_expected": 7,
+  "files_included": 7,
+  "missing_files": [],
+  "bundle_integrity": "COMPLETE",
+  "files": [
+    {
+      "filename": "b013-monthly-build-current-state-reconciliation.json",
+      "sha256": "bcc419dc746ad4083a81bd1252d9c114ec9f1a5393f865baf49e11009015e0e2",
+      "size_bytes": 1618,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "b013-catalog-hash-enforcement-design.json",
+      "sha256": "ada4bfaa4464836bd80b54e6cb0b7753d8fc1940c48100b5a89d4be04bde1f81",
+      "size_bytes": 4205,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "b013-catalog-hash-implementation-verdict.json",
+      "sha256": "66878f28fb3e36ee41f69bf4dd2ca45fe46c3c2aa3434b0ce5af0a973b634e3f",
+      "size_bytes": 2052,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "monthly-dotnet-build-regression-design.json",
+      "sha256": "af39a1536257d471dcee443b83ad775096177cc32040062153c346f55d9fc9af",
+      "size_bytes": 2588,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "monthly-build-regression-implementation-verdict.json",
+      "sha256": "8d3338ce91f8c357521bcd147d376144e20f40f07e03db990234651b27f99cf1",
+      "size_bytes": 2501,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "b013-monthly-build-blocker-closure.json",
+      "sha256": "c12f89c989d7bf8f1829ec929e5cdbbc41bf030fdb416303ac13cdc79cb15689",
+      "size_bytes": 2892,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    },
+    {
+      "filename": "b013-monthly-build-final-verification.json",
+      "sha256": "9a9ec1ad5ac6e318e0d82436dbd9d7fc0fc9d5108a3a37ab458fe8bd5df511f8",
+      "size_bytes": 1775,
+      "parse_status": "VALID_JSON",
+      "secret_scan_status": "CLEAN"
+    }
+  ],
+  "bundle_path": "workspace\\verification\\b013-monthly-build-remediation-evidence-bundle.zip",
+  "bundle_size_bytes": 8557
+}

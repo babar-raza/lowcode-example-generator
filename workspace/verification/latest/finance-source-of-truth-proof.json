@@ -1,0 +1,28 @@
+{
+  "package_id": "Aspose.Finance",
+  "resolved_version": "26.4.4",
+  "nupkg_sha256": "6721b6fbd8a96320b963c88c4b64bd3f2c71a3263c18b14f20487d5858c0a063",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-finance-20260509-113642\\extracted\\finance\\primary\\lib\\netstandard2.0\\Aspose.Finance.dll",
+  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-finance-20260509-113642\\extracted\\finance\\primary\\lib\\netstandard2.0\\Aspose.Finance.xml",
+  "xml_warning": null,
+  "dependency_count": 0,
+  "dependency_paths": [],
+  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-finance-20260509-113642\\catalog\\finance\\api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Finance.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Finance.LowCode'"
+    },
+    {
+      "pattern": "Aspose.Finance.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Finance.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

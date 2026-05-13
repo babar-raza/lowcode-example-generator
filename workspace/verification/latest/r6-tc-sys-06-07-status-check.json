@@ -1,0 +1,40 @@
+{
+  "artifact_type": "r6_tc_sys_06_07_status_check",
+  "generated_at": "2026-05-12T15:15:02+00:00",
+  "tc_sys_06_partial_pr_labeling": {
+    "status": "implemented_verified",
+    "code": "src/plugin_examples/publisher/pr_builder.py",
+    "tests": "tests/unit/test_publishing.py::TestPRBuilder and TestComputePRScopeType",
+    "notes": "PRContent includes pr_scope_type, denominator_total, and denominator_remaining; coverage section includes PARTIAL_CANARY/PILOT_COMPLETE/FAMILY_COMPLETE labels."
+  },
+  "tc_sys_07_release_status_all_families": {
+    "status": "implemented_verified",
+    "code": "src/plugin_examples/publisher/release_status.py and src/plugin_examples/__main__.py",
+    "tests": "tests/unit/test_release_status.py including CLI default all-six coverage and real scope status assertions",
+    "evidence": "workspace/verification/latest/release-status.json",
+    "families_checked": [
+      "cells",
+      "words",
+      "pdf",
+      "diagram",
+      "email",
+      "slides"
+    ],
+    "release_scope_statuses": {
+      "cells": "FAMILY_COMPLETE",
+      "words": "PILOT_COMPLETE",
+      "pdf": "PARTIAL_CANARY",
+      "diagram": "PILOT_COMPLETE",
+      "email": "DISCOVERY_ONLY",
+      "slides": "DISCOVERY_ONLY"
+    },
+    "family_coverage_statuses": {
+      "cells": "FAMILY_COMPLETE",
+      "words": "PARTIAL_FAMILY_COVERAGE",
+      "pdf": "PARTIAL_FAMILY_COVERAGE",
+      "diagram": "FAMILY_COMPLETE",
+      "email": "DISCOVERY_ONLY",
+      "slides": "DISCOVERY_ONLY"
+    }
+  }
+}

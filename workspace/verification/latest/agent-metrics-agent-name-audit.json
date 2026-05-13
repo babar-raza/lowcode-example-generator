@@ -1,0 +1,60 @@
+{
+  "title": "Agent Metrics Agent Name Normalization Audit",
+  "audit_date": "2026-05-06",
+  "sprint": "gap-closure-sprint-2",
+  "objective": "Verify agent_name is stable across all commands, not command-specific",
+  "before": {
+    "config_field": "agent_name_template: lowcode-example-generator-{command}",
+    "payload_derivation": "config.agent_name_template.format(command=command)",
+    "problem": "Each command produced different agent_name (e.g., lowcode-example-generator-run, lowcode-example-generator-discover-lowcode)"
+  },
+  "after": {
+    "config_field": "agent_name: lowcode-example-generator",
+    "test_prefix_field": "agent_name_test_prefix: test-",
+    "payload_derivation": "config.agent_name (stable), prefixed with test- for test mode",
+    "production_value": "lowcode-example-generator",
+    "test_value": "test-lowcode-example-generator",
+    "command_identity": "Carried in job_type field, not agent_name"
+  },
+  "files_changed": [
+    {
+      "file": "pipeline/configs/metrics.yml",
+      "change": "agent_name_template -> agent_name + agent_name_test_prefix"
+    },
+    {
+      "file": "src/plugin_examples/metrics/config.py",
+      "change": "MetricsConfig.agent_name_template -> .agent_name + .agent_name_test_prefix"
+    },
+    {
+      "file": "src/plugin_examples/metrics/payload_builder.py",
+      "change": "Template format -> stable config.agent_name with optional test prefix"
+    }
+  ],
+  "test_verification": {
+    "test_file": "tests/unit/test_agent_metrics_session.py",
+    "tests": [
+      {
+        "name": "TestAgentName::test_production_agent_name_is_stable",
+        "assertion": "payload['agent_name'] == 'lowcode-example-generator'"
+      },
+      {
+        "name": "TestAgentName::test_production_agent_name_same_for_all_commands",
+        "assertion": "run and discover-lowcode produce identical agent_name"
+      },
+      {
+        "name": "TestAgentName::test_test_mode_prefixes_agent_name",
+        "assertion": "payload['agent_name'] == 'test-lowcode-example-generator'"
+      },
+      {
+        "name": "TestAgentName::test_command_in_job_type_not_agent_name",
+        "assertion": "'run' not in agent_name AND job_type == 'examples_generation'"
+      },
+      {
+        "name": "TestAgentName::test_production_config_agent_name",
+        "assertion": "metrics.yml agent_name == 'lowcode-example-generator', no template syntax"
+      }
+    ],
+    "all_passed": true
+  },
+  "verdict": "AGENT_NAME_NORMALIZED"
+}

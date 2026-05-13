@@ -1,0 +1,71 @@
+{
+  "status_type": "aspose_net_link_standardization",
+  "date": "2026-05-04",
+  "hardening_sprint": "Aspose .NET Link Standardization Hardening Review",
+  "overall_status": "IMPLEMENTATION_VERIFIED_PRS_OPEN_AWAITING_MERGE",
+  "pr_history": {
+    "PR1_cells": {
+      "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/1",
+      "status": "MERGED",
+      "purpose": "Example launch (9 examples)",
+      "merge_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+      "contains_readme": false
+    },
+    "PR1_words": {
+      "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
+      "status": "MERGED",
+      "purpose": "Example launch (4 examples)",
+      "merge_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+      "contains_readme": false
+    },
+    "PR2_cells": {
+      "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/2",
+      "status": "MERGED (2026-05-04T07:04:27Z)",
+      "purpose": "Initial README backfill",
+      "merge_sha": "55b4f190a9299c636c2a487b41a659668e0df12b",
+      "contains_wrong_aspose_com_links": true,
+      "superseded_by": "PR #3"
+    },
+    "PR2_words": {
+      "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/2",
+      "status": "MERGED (2026-05-04T07:04:36Z)",
+      "purpose": "Initial README backfill",
+      "merge_sha": "b1877ed728ee34d04dea6c03413c49b86d2d4d72",
+      "contains_wrong_aspose_com_links": true,
+      "superseded_by": "PR #3"
+    },
+    "PR3_cells": {
+      "url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3",
+      "status": "OPEN — awaiting human review and APPROVE_MERGE_PR",
+      "purpose": "Aspose.net link-standardization backfill — replaces all aspose.com links with aspose.net",
+      "branch": "plugin-examples/cells/readme/20260504-092305",
+      "files_changed": ["README.md"],
+      "audit_status": "PASS",
+      "corrective_comment_added": true,
+      "corrective_comment_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3#issuecomment-4370739471"
+    },
+    "PR3_words": {
+      "url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3",
+      "status": "OPEN — awaiting human review and APPROVE_MERGE_PR",
+      "purpose": "Aspose.net link-standardization backfill — replaces all aspose.com links with aspose.net",
+      "branch": "plugin-examples/words/readme/20260504-092317",
+      "files_changed": ["README.md"],
+      "audit_status": "PASS",
+      "corrective_comment_added": true,
+      "corrective_comment_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3#issuecomment-4370740054"
+    }
+  },
+  "main_branch_status": {
+    "cells_main_has_wrong_links": true,
+    "words_main_has_wrong_links": true,
+    "note": "After PR #2 merged, main branch README on each repo has wrong aspose.com links. PR #3 will correct them upon merge."
+  },
+  "implementation_status": {
+    "aspose_links_module": "VERIFIED — aspose_links.py staged, all 7 functions present, correct aspose.net URLs",
+    "renderer_fix": "VERIFIED — no aspose.com constants, uses build_aspose_net_links(), ReadmeContext has kb_url+contact_url",
+    "template_fix": "VERIFIED — uses {{ contact_url }}, {{ kb_url }}, no hardcoded aspose.com",
+    "auditor_fix": "VERIFIED — all 5 URL validation checks present, each violation correctly blocks audit",
+    "audit_serialization_fix": "VERIFIED — __main__.py now outputs all 5 URL fields in audit JSON (fix applied in hardening sprint)"
+  },
+  "next_human_action": "Review PR #3 diff (shows all 7 aspose.com→aspose.net replacements plus KB add). Merge with APPROVE_MERGE_PR token when satisfied."
+}

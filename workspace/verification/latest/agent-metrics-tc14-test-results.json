@@ -1,0 +1,40 @@
+{
+  "phase": "Phase 3 — Production gate tests",
+  "test_file": "tests/unit/test_agent_metrics_production_gate.py",
+  "tests_added": 14,
+  "tests_passed": 14,
+  "tests_failed": 0,
+  "test_fix_required": {
+    "issue": "Initial implementation used .lower() making 'True' enable production",
+    "fix": "Changed is_agent_metrics_production_enabled() to use exact string match: == 'true' (no .lower())",
+    "reason": "Only exact lowercase 'true' should enable production for maximum deliberate intent"
+  },
+  "test_names": [
+    "TestProductionGateEnvVar::test_production_gate_absent_keeps_sprint_true",
+    "TestProductionGateEnvVar::test_production_gate_empty_string_keeps_sprint_true",
+    "TestProductionGateEnvVar::test_production_gate_false_keeps_sprint_true",
+    "TestProductionGateEnvVar::test_production_gate_mixed_case_invalid_keeps_sprint_true",
+    "TestProductionGateEnvVar::test_production_gate_true_enables_production",
+    "TestProductionGateDoesNotBypassOtherGates::test_production_gate_does_not_bypass_dry_run",
+    "TestProductionGateDoesNotBypassOtherGates::test_production_gate_does_not_bypass_missing_token",
+    "TestProductionGateDoesNotBypassOtherGates::test_production_gate_does_not_bypass_duplicate_ledger",
+    "TestProductionGateDoesNotBypassOtherGates::test_production_gate_does_not_bypass_external_command_allowlist",
+    "TestProductionGateDoesNotBypassOtherGates::test_force_repost_cannot_bypass_test_only_sprint",
+    "TestProductionPayloadShape::test_production_payload_has_no_test_prefixes",
+    "TestProductionPayloadShape::test_website_remains_aspose_net_in_production_mode",
+    "TestRunnerProductionGateIntegration::test_runner_passes_test_only_sprint_false_when_gate_enabled",
+    "TestRunnerProductionGateIntegration::test_runner_passes_test_only_sprint_true_by_default"
+  ],
+  "full_suite": {
+    "total_tests": 1017,
+    "passed": 1017,
+    "failed": 0,
+    "duration_s": 28.24
+  },
+  "additional_fix": {
+    "file": "src/plugin_examples/metrics/payload_builder.py",
+    "issue": "run_duration_ms passed as float from pipeline timing — validator requires non-negative integer",
+    "fix": "Added int() cast: 'run_duration_ms': int(run_duration_ms)",
+    "impact": "All existing tests still pass after fix"
+  }
+}

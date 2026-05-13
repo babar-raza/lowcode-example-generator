@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "src/plugin_examples/runner.py",
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/metrics/session.py",
+    "src/plugin_examples/evidence_layout.py",
+    "src/plugin_examples/gates/example_lifecycle.py",
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/words.yml",
+    "pipeline/configs/families/pdf.yml"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/production-truth-master-scope-matrix.json",
+    "workspace/verification/latest/production-truth-plan-vs-actual.json",
+    "workspace/verification/latest/production-truth-source-implementation-audit.json",
+    "workspace/verification/latest/production-truth-rerun-root-cause-analysis.json",
+    "workspace/verification/latest/production-truth-family-board.json",
+    "workspace/verification/latest/production-truth-metrics-board.json",
+    "workspace/verification/latest/production-truth-test-reproducibility.json",
+    "workspace/verification/latest/production-truth-evidence-integrity-audit.json",
+    "workspace/verification/latest/production-truth-claim-audit.json"
+  ],
+  "confidence": "HIGH",
+  "findings": {
+    "final_verdict": "IMPLEMENTED_WITH_PRODUCTION_GAPS",
+    "verdict_rationale": "The core LowCode Example Generator pipeline is end-to-end functional for Cells (9/9 scenarios published, 4 PRs merged), Words (4/4 scenarios published, 4 PRs merged), and PDF (PR #1 merged, PR #3 validated and awaiting APPROVE_LIVE_PR). Agent Metrics are implemented with production posting verified once (pilot-cells run, http_status=200). Tests pass at 1025 (full suite, 24.64s, 0 failures). However, 3 CRITICAL structural gaps prevent the verdict from being FULLY_IMPLEMENTED_AND_PRODUCTION_READY: (1) no coverage denominator model artifact (coverage claims are unverifiable), (2) no run-to-run comparison mechanism (non-degradation is real but not automated), (3) no scenario contracts (rerun consistency is structurally weak). Evidence integrity score is 77/100. Governance workstream is only 15% implemented-verified.",
+
+    "why_not_fully_implemented_and_production_ready": [
+      "CRITICAL GAP 1 (C1): No coverage denominator model artifact exists anywhere in the repository. Coverage claims ('15/43 = 35%') cannot be verified against any artifact. This is a structural gap, not a documentation gap — there is no machine that computes the denominator.",
+      "CRITICAL GAP 2 (G6): Run-to-run comparison mechanism does not exist (CA-21 VERIFIED_FALSE). Non-degradation of Cells 9/9 and Words 4/4 is real but proven only manually by reading two evidence files, not by any automated check. A new LLM run could silently regress a passing scenario without detection.",
+      "CRITICAL GAP 3 (C7): No machine-readable completion queue exists. Backlog exists only for PDF family (workspace/backlog/pdf/). Cells has 13 excluded scenarios, Words has 21 excluded scenarios — none have machine-readable backlog entries.",
+      "CRITICAL GAP 4 (C12, pipeline/contracts/): No static scenario contracts exist. Scenario plans are inferred at runtime from api-catalog.json, meaning a different api-catalog.json could produce a different scenario plan silently.",
+      "EVIDENCE GAP: Evidence integrity score is 77/100 (23 deductions). Latest/ root is overwrite-vulnerable (_last_promoted_by.json = pdf). 5 ZIP bundles without manifests. 4 MEMORY.md contradictions with higher-authority sources.",
+      "GOVERNANCE GAP (G workstream at 15%): Monthly rerun is manual, CI workflow absent, taskcard markdown sync is manual (currently in sync but fragile)."
+    ],
+
+    "why_not_partially_implemented_with_structural_gaps": "The pipeline IS fully functional for all 3 families end-to-end. Cells 9/9 and Words 4/4 are published. PDF PR #1 is merged. PDF PR #3 is validated (not blocked by technical issues, only by APPROVE_LIVE_PR human token). Agent metrics production posting is verified. 1025 tests pass. The gaps are in observability, governance, and coverage computation — not in the core generation, validation, and publication pipeline. The pipeline can process a new scenario if added to allowed_types — it is not structurally broken.",
+
+    "implementation_percent_by_workstream": {
+      "A_agent_metrics_tc14": 85,
+      "B_lowcode_publication": 75,
+      "C_100_percent_coverage_plan": 15,
+      "D_stream_a_hygiene": 70,
+      "E_pdf_system_healing": 70,
+      "F_words_system_healing": 20,
+      "G_regression_rerun_strategy": 15,
+      "overall": 50
+    },
+
+    "fully_implemented_items": [
+      "A1: metrics.yml config — enabled=False, dry_run=True, agent_name='Lowcode Example Generator', website='aspose.net'",
+      "A2: Stable agent_name across all commands — 'Lowcode Example Generator' in config (title case mismatch in TC14 payload noted but config is authoritative)",
+      "A3: aspose.net website in config and payload (not aspose.com)",
+      "A4: Router-level token capture — LLMCallRecord in models.py, MetricsCollector per-instance",
+      "A5: Command-agnostic MetricsSession — EXTERNAL_POST_COMMANDS=frozenset({'run'})",
+      "A6: Dry-run safety — dry_run=True by default in config.py and metrics.yml",
+      "A7: Test-only sprint guard — blocks test job_type from external POST",
+      "A8: Production gate — AGENT_METRICS_PRODUCTION_ENABLED env var in poster.py",
+      "A10: Local evidence writing — metrics written to workspace/runs/{run_id}/metrics/ when --metrics used",
+      "B1: Cells 9/9 scenarios published — 4 PRs merged, post-merge ALL_PASS",
+      "B2: Words 4/4 scenarios published — 4 PRs merged, post-merge ALL_PASS",
+      "B3: PDF PR #1 merged — Merger + TextExtractor, SHA=a9f9e254, target repo confirmed",
+      "B6: Cells READMEs — 4 README PRs merged (including symbols and api PRs)",
+      "B7: Words READMEs — 4 README PRs merged",
+      "D1: Taskcard markdown sync — currently in sync (77 total, 16 open, 61 closed)",
+      "D2: release_status.py dynamic taskcard loading — reads JSON at runtime (lines 29-51)",
+      "E2: PDF role classification — 101 types classified (WORKFLOW_ROOT=25, OPTIONS=51, etc.)",
+      "E3: allowed_types enforcement — pdf.yml has 4 types [Merger, TextExtractor, Splitter, Optimizer]",
+      "E5: PDF Merger — implemented, built, published in PR #1",
+      "E6: PDF TextExtractor — implemented, built, published in PR #1",
+      "E7: PDF Splitter — wave1 package validated (PR #3 awaiting APPROVE_LIVE_PR)"
+    ],
+
+    "partially_implemented_items": [
+      "A9: TC14 production posting — posted once successfully (pilot-cells, http_status=200); not systematically enabled for all runs (PARTIAL: one-time proof, not routine)",
+      "A11: Post ledger integrity — 2 entries confirmed; no integrity check mechanism beyond append-only JSONL",
+      "B4: PDF PR #3 — package validated, BLOCKED_WAITING_FOR_APPROVE_LIVE_PR (human token required)",
+      "B5: PDF Optimizer (PR #4) — BLOCKED by namespace hallucination; fix applied in source; rerun pending",
+      "B8: PDF READMEs — PR #1 READMEs generated; PR #3+ READMEs not yet published",
+      "E1: Reflection dedup — assembly_identity.py exists (ECMA-335 PE parser); fragile but functional",
+      "E8: PDF Optimizer — fix applied (constraint re-injection in code_generator.py lines 88-103); LLM rerun not yet completed for current source state",
+      "E12: LLM timeout retry — 3-attempt retry with backoff implemented; no escalation beyond 3 retries",
+      "F2: Words paired fixture strategy — existing fixture works for 4 scenarios; MailMerger strategy not designed"
+    ],
+
+    "planned_only_items": [
+      "C1: Coverage denominator model — no artifact exists anywhere in repository",
+      "C2: Family matrix completeness targets — no codified targets beyond allowed_types lists",
+      "C7: Completion queue — no machine-readable queue; followup-scenario-completion-queue taskcard OPEN",
+      "C8: Scenario contracts — pipeline/contracts/ does not exist",
+      "C9: Backlog-to-taskcard bridge — workspace/backlog/cells/ and workspace/backlog/words/ do not exist",
+      "C10: True completion rate — no computed metric anywhere",
+      "F1: Words SplitCriteria enum — investigation not completed",
+      "F3: MailMerger template fixture — not designed or documented",
+      "F4: DOCX semantic validator — output_validator.py does not exist",
+      "G5: Monthly rerun workflow — no CI workflow; manual only",
+      "G6: Run-to-run comparison — example_lifecycle.py has no prior_run_result field or diff logic",
+      "G7: Non-degradation CI gate — .github/workflows/ has no monthly-rerun.yml",
+      "G8: Evidence semantic diff — no mechanism to compare lifecycle records across runs"
+    ],
+
+    "blocked_items": [
+      "B5/E8: PDF Optimizer — LLM consistently hallucinating DataSources namespace; fix applied in source but rerun not yet completed; taskcard followup-pdf-optimizer-llm-rerun OPEN",
+      "B4: PDF PR #3 live publish — technically ready, awaiting APPROVE_LIVE_PR human token"
+    ],
+
+    "stale_or_contradictory_items": [
+      "agent-metrics-final-completion-verdict.json: claims 988 tests (actual: 1025, stale by 37)",
+      "MEMORY.md: claims 1021 tests (actual: 1025, stale by 4)",
+      "MEMORY.md: claims 'Words has 5 deferred scenarios' (actual: 21 excluded by allowed_types)",
+      "pdf-wave1-pr-dry-run-summary.json: claims status=AWAITING_LLM_RUN (actual: BLOCKED_WAITING_FOR_APPROVE_LIVE_PR)",
+      "families/pdf/pr-candidate-manifest.json: claims 4 pr_candidates (actual per lifecycle: 3 pr_candidates + 1 backlogged)",
+      "runtime-failure-classifications.json: shows pdf-splitter failure from old run (Splitter now passes 3 consecutive times)"
+    ],
+
+    "root_causes": [
+      "RC-01: No coverage denominator model — coverage planning is informal; percentages are ad-hoc computations without a stable denominator artifact",
+      "RC-02: Latest/ root overwrite risk — multi-family runs overwrite global evidence files; family-scoped evidence (22 files) is protected but global files are not",
+      "RC-03: No run-to-run comparison — lifecycle records track current stage only; no historical comparison; non-degradation must be checked manually",
+      "RC-04: LLM nondeterminism for PDF Optimizer — DataSources hallucination persists despite FORBIDDEN guard; source says re-injection is present but run results show Optimizer still failing",
+      "RC-05: Governance workstream planned-only — taskcards exist but 8 of 13 governance items are PLANNED_ONLY (15% implemented)"
+    ],
+
+    "structural_weaknesses": [
+      "SW-01: Scenario plans inferred at runtime — no static contracts; a changed api-catalog.json silently produces different scenarios",
+      "SW-02: Evidence in latest/ root is overwrite-vulnerable — _last_promoted_by.json=pdf means all latest/ root data is PDF-family data; Cells/Words data was overwritten",
+      "SW-03: Coverage claims are unverifiable — no denominator model, no completion rate computation, no machine-readable completion queue",
+      "SW-04: release_status.py last_pr_number is structurally stale — design limitation; shows only most recent run's PR, not cumulative count",
+      "SW-05: Non-degradation proof is manual — no --compare-run flag, no regression_detected field, no CI gate; Cells 9/9 could silently regress"
+    ],
+
+    "production_readiness": "PRODUCTION_CAPABLE_WITH_OPERATIONAL_GAPS — The core pipeline is production-capable: it generates, validates, and publishes C# examples to real GitHub repos via real API calls. All 3 families have published examples in production repos. However, for sustained production operation, the following are gaps: (1) no automated regression detection means human must manually compare evidence files after each run; (2) no coverage denominator means progress cannot be reported authoritatively; (3) evidence integrity at 77/100 means stale artifacts exist that could mislead operators",
+
+    "immediate_next_action": "Execute R1 sprint: create denominator model artifacts for all 3 families in pipeline/configs/denominators/; decouple evidence_dir from --metrics flag in __main__.py line 57; fix release_status.py cumulative_pr_count. R1 is safe (no generation or publisher code touched) and addresses the most critical structural gap (missing denominator model).",
+
+    "recommended_roadmap_sprint": "R1",
+
+    "what_not_to_do_next": [
+      "Do NOT mark any workstream FULLY_IMPLEMENTED_AND_PRODUCTION_READY before denominator model exists (C1 gap)",
+      "Do NOT expand Words allowed_types before scenario contracts exist (R3 prerequisite)",
+      "Do NOT enable TC14 production posting for all runs before test reproducibility is confirmed stable across 3+ runs",
+      "Do NOT create PDF PR #4 (Optimizer) before Optimizer LLM rerun passes with current source constraints",
+      "Do NOT merge any PR without post-merge validation gate passing (ALL_PASS required)",
+      "Do NOT delete workspace/verification/latest/families/ directory — it contains the only family-scoped evidence not overwritten by other families"
+    ]
+  },
+  "gaps": [
+    "CA-19 (repo_access_resolver.py auth header fix) remains NOT_VERIFIABLE — affects D3 workstream item confidence",
+    "CA-15 (monthly rerun CI) is MEDIUM confidence — .github/workflows/ not directly enumerated",
+    "PDF denominator (WORKFLOW_ROOT count for PDF) is 25 per classification — but 101 total types; exact denominator depends on WORKFLOW_ROOT classification completeness"
+  ],
+  "contradictions": [
+    {
+      "claim_a": "PDF pr-candidate-manifest.json: 4 pr_candidates (including Optimizer)",
+      "source_a": "workspace/verification/latest/families/pdf/pr-candidate-manifest.json (rank 4)",
+      "claim_b": "PDF example-lifecycle-records.json: 3 pr_candidates, 1 backlogged",
+      "source_b": "workspace/verification/latest/families/pdf/example-lifecycle-records.json (rank 4)",
+      "resolution": "Same-rank contradiction — lifecycle records are more granular and directly computed from stage outcomes. Lifecycle wins: pr_candidates=3, backlogged=1. pr-candidate-manifest.json may have been generated from a prior run snapshot."
+    }
+  ],
+  "next_actions": [
+    "Phase 14: Create production-truth-audit-bundle-manifest.json and production-truth-audit-bundle.zip",
+    "Phase 15: Write production-truth-independent-verification.json",
+    "Update MEMORY.md: test count 1021→1025, Words '5 deferred'→'21 excluded', Words denominator clarification"
+  ]
+}

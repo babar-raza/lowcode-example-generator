@@ -1,0 +1,26 @@
+{
+  "artifact_type": "r2-pdf-optimizer-env-preflight",
+  "sprint": "Sprint R2 Revised — PDF Optimizer Repair Constraint Injection Fix and Rerun",
+  "date": "2026-05-08",
+
+  "credentials_check": {
+    "GPT_OSS_ENDPOINT": "SET",
+    "GPT_OSS_API_KEY": "SET",
+    "GPT_OSS_MODEL": "NOT_SET — defaults to 'recommended'",
+    "EXAMPLE_REVIEWER_PATH": "NOT_SET — default path C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer exists"
+  },
+
+  "provider_policy_check": {
+    "configured_provider": "llm_professionalize (via GPT_OSS_ENDPOINT=https://llm.professionalize.com/v1/)",
+    "approved_providers": ["llm_professionalize", "ollama"],
+    "policy_compliant": true,
+    "forbidden_providers_absent": ["openai_direct", "gpt-4o-mini"]
+  },
+
+  "targeted_filter_available": false,
+  "targeted_filter_note": "No --type or --scenario filter in CLI. Full PDF family run required.",
+  "run_command": "PYTHONPATH=src EXAMPLE_REVIEWER_PATH=C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer .venv/Scripts/python.exe -m plugin_examples run --family pdf --tier 5 --promote-latest",
+
+  "gate_4_verdict": "PREFLIGHT_PASS_CREDENTIALS_AVAILABLE",
+  "no_secrets_printed": true
+}

@@ -1,0 +1,24 @@
+{
+  "sprint": "PDF Live PR Post-Creation Review",
+  "date": "2026-05-06",
+  "fallback_file": "src/plugin_examples/__main__.py",
+  "fallback_lines": "531-546",
+  "fallback_description": "When family-publish-readiness.json has repo_access_ready=False or pr_permission_ready=False for a family, reads family-repo-access-resolution.json as authoritative fallback. Only overrides False->True, never True->False.",
+  "safety_checks": {
+    "only_overrides_false_with_true": true,
+    "never_overrides_true_with_false": true,
+    "requires_family_match": true,
+    "only_triggers_when_readiness_false": true,
+    "fallback_is_read_only": true,
+    "no_publish_gate_weakened": true
+  },
+  "tests_added": 4,
+  "tests": [
+    "test_fallback_reads_resolver_when_readiness_lacks_flags",
+    "test_fallback_does_not_override_negative_resolver",
+    "test_fallback_skips_when_readiness_already_true",
+    "test_fallback_requires_family_match"
+  ],
+  "all_tests_pass": true,
+  "verdict": "GATE_5_PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "artifact_type": "pdf-wave1-pr2-dry-run-summary",
+  "sprint": "Wave 1 PDF Tier 5 LLM Pilot",
+  "run_id": "pilot-pdf-20260507-110824",
+  "date": "2026-05-07",
+  "phase": "Phase 6 — PR Dry-Run Simulation",
+
+  "publisher_simulation": {
+    "command": "python -m plugin_examples publish-pr --family pdf --dry-run --promote-latest",
+    "result": "SIMULATION_PASSED",
+    "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+    "examples_in_publisher_package": ["merger", "text-extractor"],
+    "note": "Publisher simulation uses the configured pr-dry-run path (pdf-controlled-pilot). This is the PR #1 package (already merged to main). Publisher infrastructure CONFIRMED WORKING.",
+    "gate_verdict": "PR_DRY_RUN_READY",
+    "repo_access_ready": true,
+    "pr_permission_ready": true,
+    "approval_gate_passed": false,
+    "approval_blocked_reason": "blocked_live_pr_approval_required — no APPROVE_LIVE_PR token provided",
+    "live_push_performed": false
+  },
+
+  "wave1_package_validation": {
+    "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+    "examples": ["merger", "splitter"],
+    "merger_build": "PASS",
+    "splitter_build": "PASS",
+    "pr_title_candidate": "feat(pdf): add Splitter example — Wave 1 (Merger + Splitter verified)",
+    "pr_body_summary": "Adds Splitter (first success) and re-validates Merger. Optimizer excluded (semantic fail). TextExtractor excluded (generation fail — already on main).",
+    "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "target_branch": "main"
+  },
+
+  "live_pr_gate": {
+    "gate_condition": "Only create live PR if all 4 pilot examples pass agent verification",
+    "gate_passed": false,
+    "gate_blocked_reasons": [
+      "pdf-optimizer: SEMANTIC_FAIL — File.Copy() instead of OptimizeOptions + Optimizer().Process()",
+      "pdf-text-extractor: GENERATION_FAILED — static validation regression (already on main from PR #1)"
+    ],
+    "agent_verified_examples": ["pdf-merger", "pdf-splitter"],
+    "live_pr_decision": "SKIP — live PR not created. Gate condition not met. Wave 1 partial package ready for PR #2 when Optimizer is fixed."
+  },
+
+  "phase6_verdict": "DRY_RUN_PASS — Publisher infrastructure working. Wave 1 package (merger+splitter) builds clean. Live PR BLOCKED pending Optimizer fix (followup-pdf-optimizer-build-repair-constraint-injection)."
+}

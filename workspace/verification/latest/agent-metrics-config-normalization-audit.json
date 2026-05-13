@@ -1,0 +1,23 @@
+{
+  "verification_date": "2026-05-06",
+  "checks": {
+    "no_secrets_in_config": {"status": "PASS", "detail": "metrics.yml contains no tokens or keys"},
+    "lazy_loading": {"status": "PASS", "detail": "load_metrics_config called only when --metrics flag set or AGENT_METRICS_ENABLED=true"},
+    "missing_family_blocks_posting": {"status": "PASS", "detail": "validate_family returns error; payload product='' causes validation failure"},
+    "missing_command_blocks_posting": {"status": "PASS", "detail": "validate_command returns error; payload job_type='' causes validation failure"},
+    "unknown_verdict_never_success": {"status": "PASS", "detail": "resolve_status returns ('failure', True) for unknown verdicts"},
+    "allowed_statuses_from_config": {"status": "PASS", "detail": "validator.py:42 reads config.allowed_statuses"},
+    "allowed_job_types_from_config": {"status": "PASS", "detail": "validator.py:47 reads config.allowed_job_types"},
+    "family_to_product_coverage": {"status": "PASS", "detail": "cells, words, pdf all mapped"},
+    "command_to_job_type_coverage": {"status": "PASS", "detail": "11 commands mapped; status and check excluded"},
+    "command_to_item_name_coverage": {"status": "PASS", "detail": "11 commands mapped"},
+    "verdict_to_status_vs_VERDICTS": {
+      "status": "PASS",
+      "verdicts_in_frozenset": 18,
+      "verdicts_in_config": 18,
+      "missing": [],
+      "extra": [],
+      "exact_match": true
+    }
+  }
+}

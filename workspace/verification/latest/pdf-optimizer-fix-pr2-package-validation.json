@@ -1,0 +1,48 @@
+{
+  "artifact_type": "pdf-optimizer-fix-pr2-package-validation",
+  "sprint": "PDF Optimizer Build-Repair Constraint Injection Fix",
+  "date": "2026-05-07",
+  "phase": "Phase 7 — PR #2 Dry-Run Package Validation",
+
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+  "package_scope": "Merger (re-validated) + Splitter (Wave 1 first success)",
+
+  "examples": [
+    {
+      "scenario_id": "pdf-merger",
+      "path": "examples/pdf/lowcode/merger/",
+      "source_run": "pilot-pdf-20260507-110824",
+      "status": "build_run_verified",
+      "build": "PASS — 0 Warning(s), 0 Error(s)",
+      "agent_verification": "PASS — MergeOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Merger().Process(options)"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "path": "examples/pdf/lowcode/splitter/",
+      "source_run": "pilot-pdf-20260507-110824",
+      "status": "build_run_verified",
+      "build": "PASS — 0 Warning(s), 0 Error(s)",
+      "agent_verification": "PASS — SplitOptions + AddInput(FileDataSource) + AddOutput(FileDataSource) + new Splitter().Process(options)"
+    }
+  ],
+
+  "excluded_from_package": [
+    {
+      "scenario_id": "pdf-optimizer",
+      "reason": "SEMANTIC_FAIL in Wave 1 LLM run — File.Copy generated instead of OptimizeOptions + Optimizer().Process(). Fix implemented in this sprint but LLM re-run not yet available to verify. Will be added to PR #3 after successful LLM rerun."
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "reason": "Already on main (PR #1 merged SHA a9f9e254fbdbd012e6486e699395298e427169eb). Wave 1 generation failed (non-deterministic LLM failure). Repair prompt strengthened in this sprint. Not re-added to package — already published."
+    }
+  ],
+
+  "build_verification": {
+    "command": "dotnet build --nologo -v q",
+    "merger_result": "Build succeeded. 0 Warning(s). 0 Error(s).",
+    "splitter_result": "Build succeeded. 0 Warning(s). 0 Error(s).",
+    "both_pass": true
+  },
+
+  "phase7_verdict": "PACKAGE_VALID — 2 LLM-verified examples (Merger + Splitter) build clean. Ready for PR dry-run simulation. Optimizer deferred pending LLM rerun with constraint injection fix."
+}

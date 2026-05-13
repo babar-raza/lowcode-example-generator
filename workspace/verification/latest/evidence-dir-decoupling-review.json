@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "taskcard": "REM-005",
+  "blocker": "B-011",
+  "blocker_description": "evidence_dir coupled to --metrics flag in __main__.py",
+  "source_files_inspected": [
+    "src/plugin_examples/__main__.py",
+    "src/plugin_examples/runner.py"
+  ],
+  "finding": "B-011 IS ALREADY RESOLVED FOR THE RUN COMMAND",
+  "finding_detail": {
+    "audit_assumption": "The audit (production-truth-source-implementation-audit.json, CMF-02) assumed evidence_dir creation was gated by --metrics because _create_metrics_session() checks metrics_enabled and returns early if not enabled (lines 32-37 of __main__.py). The audit assumed _create_metrics_session() was the only path to evidence_dir creation for run command.",
+    "actual_code_path_for_run_command": "The 'run' command handler at __main__.py lines 353-449 does NOT call _create_metrics_session(). Instead it calls run_pipeline() directly (line 393). run_pipeline() in runner.py lines 1207-1208 creates evidence_dir unconditionally: 'evidence_dir = run_dir / \"evidence\"' and 'evidence_dir.mkdir(parents=True, exist_ok=True)'.",
+    "evidence_dir_creation_location": "src/plugin_examples/runner.py lines 1207-1208 — unconditional, regardless of metrics flag",
+    "_create_metrics_session_usage": "_create_metrics_session() is called for non-run commands: discover-lowcode, validate-publish-targets, resolve-repo-access, probe-publish-permissions, publish-pr, merge-pr, release-status, render-root-readme, publish-readme, sync-taskcard-docs. These commands use a session-level run_id (not a pipeline run_id) and write evidence to metrics-{command}-{family}-{ts}/evidence/.",
+    "impact_on_b011": "B-011 is NOT a blocker for the run command. Evidence_dir is created unconditionally by runner.py for every run command invocation, whether or not --metrics is enabled.",
+    "residual_concern": "For non-run commands, evidence_dir creation IS gated by --metrics (via _create_metrics_session). However, non-run commands don't execute the full pipeline, so their 'evidence_dir' is a metrics session directory, not a pipeline evidence directory. This is architecturally correct — non-run commands don't generate the FAMILY_SCOPED_EVIDENCE_FILES."
+  },
+  "source_code_citations": {
+    "runner_py_evidence_dir_creation": {
+      "file": "src/plugin_examples/runner.py",
+      "lines": "1205-1208",
+      "code": "run_dir = repo_root / 'workspace' / 'runs' / run_id\nrun_dir.mkdir(parents=True, exist_ok=True)\nevidence_dir = run_dir / 'evidence'\nevidence_dir.mkdir(parents=True, exist_ok=True)"
+    },
+    "main_py_run_command_handler": {
+      "file": "src/plugin_examples/__main__.py",
+      "lines": "353-449",
+      "note": "run command handler calls run_pipeline() at line 393 without going through _create_metrics_session(). No evidence_dir creation in this block — runner.py handles it."
+    },
+    "_create_metrics_session_called_at": [464, 535, 577, 626, 680, 1051, 1239, 1273, 1363, 1550]
+  },
+  "remediation_decision": {
+    "remi_005_status": "COMPLETED — review confirms B-011 is not a real blocker for run command",
+    "remi_006_status": "NOT_REQUIRED — evidence_dir is already unconditionally created in runner.py for run command",
+    "b011_blocker_status": "RESOLVED_BY_EXISTING_CODE",
+    "resolution_evidence": "runner.py:1207-1208 creates evidence_dir unconditionally",
+    "no_source_change_needed": true
+  },
+  "implications": {
+    "run_to_run_comparison": "Run-to-run comparison (B-002/REM-016) IS viable without source change — prior run evidence_dir exists at workspace/runs/{prior_run_id}/evidence/ after any run command.",
+    "b002_can_proceed": "B-002 (run-to-run comparison) can be implemented without first fixing B-011, since B-011 is already resolved.",
+    "non_run_commands": "Non-run commands (discover-lowcode, publish-pr, etc.) do not generate FAMILY_SCOPED_EVIDENCE_FILES — their evidence_dir gating by --metrics is architecturally correct and should not be changed."
+  },
+  "tests_required": "test_evidence_dir_created_without_metrics_flag — can verify runner.py behavior directly",
+  "confidence": "HIGH — verified from source code, not from plan documents"
+}

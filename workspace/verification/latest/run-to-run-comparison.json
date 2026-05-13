@@ -1,0 +1,171 @@
+{
+  "current_run_id": "pilot-cells-20260508-133932",
+  "prior_run_id": "pilot-cells-20260508-113533",
+  "family": "cells",
+  "generated_at": "2026-05-11T05:43:48.939581+00:00",
+  "total_prior_scenarios": 22,
+  "total_current_scenarios": 22,
+  "unchanged_count": 22,
+  "improved_count": 0,
+  "regressed_count": 0,
+  "missing_from_current_count": 0,
+  "new_scenario_count": 0,
+  "regression_detected": false,
+  "per_scenario_results": [
+    {
+      "scenario_id": "cells-abstract-low-code-load-options-provider",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-abstract-low-code-protection-provider",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-abstract-low-code-save-options-provider",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-html-save-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-image-save-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-load-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-merge-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-pdf-save-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-save-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-save-options-provider-of-assembling",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-save-options-provider-of-place-holders",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-low-code-split-options",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-split-part-info",
+      "prior_state": "excluded",
+      "current_state": "excluded",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-html-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "prior_state": "reviewer_passed",
+      "current_state": "reviewer_passed",
+      "classification": "UNCHANGED",
+      "regression_reason": null
+    }
+  ],
+  "verdict": "RUN_TO_RUN_COMPARISON_PASS"
+}

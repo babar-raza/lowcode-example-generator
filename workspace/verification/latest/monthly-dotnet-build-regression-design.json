@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "B-013-MONTHLY-BUILD",
+  "phase": 3,
+  "phase_name": "Monthly Dotnet Build Regression Design",
+  "blocker_ids": ["B-005", "B-006", "B-007"],
+  "design_questions": {
+    "Q1_what_to_build": {
+      "answer": "For each family with published examples, clone the target repo and run dotnet build on the .sln or .csproj at the repo root.",
+      "published_families": {
+        "cells": {"repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples", "published": 9},
+        "words": {"repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples", "published": 4},
+        "pdf": {"repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples", "published": 2}
+      }
+    },
+    "Q2_script_location": {
+      "answer": "scripts/validate_published_examples_build.py",
+      "rationale": "Standalone script callable from CI and locally. Does not import pipeline code."
+    },
+    "Q3_output_format": {
+      "answer": "JSON report at workspace/verification/latest/monthly-build-regression-report.json with: per_family results (build_exit_code, stdout, stderr, pass/fail), overall verdict, timestamp."
+    },
+    "Q4_ci_integration": {
+      "answer": "Add a new job 'regression-check' to monthly-package-refresh.yml that runs the validation script. Separate from generation job. No LLM, no publishing.",
+      "trigger": "Same schedule (1st of month) + workflow_dispatch"
+    },
+    "Q5_clone_strategy": {
+      "answer": "Shallow clone (depth=1) into temp directory. Clean up after build. Uses GITHUB_TOKEN for private repos.",
+      "rationale": "Minimal disk and network usage."
+    },
+    "Q6_dotnet_version": {
+      "answer": "Use .NET 8.0 (matches CI setup-dotnet version and published project target framework net8.0)."
+    },
+    "Q7_failure_handling": {
+      "answer": "Build failure is recorded as REGRESSED for that family. Script returns exit code 1 if any family fails, 0 if all pass. CI job uses continue-on-error: false.",
+      "rationale": "CI should fail visibly on regression."
+    },
+    "Q8_what_not_to_do": {
+      "answer": "No LLM generation. No example publishing. No metrics posting. No PR creation. Read-only clone and build only."
+    },
+    "Q9_test_plan": {
+      "answer": "3 tests: report schema validation, script module importability, simulated build result handling."
+    },
+    "Q10_family_registry": {
+      "answer": "Script reads family list from merge-result evidence files (workspace/verification/latest/*-merge-result.json) to discover which repos have published examples."
+    }
+  }
+}

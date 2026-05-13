@@ -1,0 +1,90 @@
+{
+  "title": "Agent Metrics v4 Plan Execution Challenge — Phase 0 Preflight",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "branch": "main",
+  "commit": "79f19ae62fc3fc6f796a6b923382a8afdafc0edc",
+  "commit_message": "docs: add comprehensive README and investigation evidence bundle",
+  "plan_file": "C:\\Users\\prora\\.claude\\plans\\logical-purring-unicorn.md",
+  "plan_version": "v4",
+  "prior_evidence_bundles_found": [
+    "workspace/verification/latest/agent-metrics-gap-closure-sprint-2.zip",
+    "workspace/verification/latest/agent-metrics-gap2-verification-bundle.zip",
+    "workspace/verification/latest/agent-metrics-gap2-final-clean-verification-bundle.zip"
+  ],
+  "prior_final_verdict_files_found": [
+    "workspace/verification/latest/agent-metrics-final-completion-verdict.json",
+    "workspace/verification/latest/agent-metrics-gap2-final-verification-verdict.json",
+    "workspace/verification/latest/agent-metrics-gap2-final-closure-verdict.json",
+    "workspace/verification/latest/agent-metrics-independent-verification.json",
+    "workspace/verification/latest/agent-metrics-v4-execution-verdict.json"
+  ],
+  "changed_files_classification": {
+    "EXPECTED_METRICS_SOURCE": [
+      "src/plugin_examples/__main__.py",
+      "src/plugin_examples/llm_router/router.py",
+      "src/plugin_examples/runner.py"
+    ],
+    "EXPECTED_METRICS_SOURCE_NEW_UNTRACKED": [
+      "pipeline/configs/metrics.yml",
+      "src/plugin_examples/metrics/__init__.py",
+      "src/plugin_examples/metrics/config.py",
+      "src/plugin_examples/metrics/evidence.py",
+      "src/plugin_examples/metrics/models.py",
+      "src/plugin_examples/metrics/payload_builder.py",
+      "src/plugin_examples/metrics/pipeline_hook.py",
+      "src/plugin_examples/metrics/poster.py",
+      "src/plugin_examples/metrics/session.py",
+      "src/plugin_examples/metrics/validator.py"
+    ],
+    "EXPECTED_TEST": [
+      "tests/unit/test_agent_metrics_cli.py",
+      "tests/unit/test_agent_metrics_config.py",
+      "tests/unit/test_agent_metrics_evidence.py",
+      "tests/unit/test_agent_metrics_payload.py",
+      "tests/unit/test_agent_metrics_poster.py",
+      "tests/unit/test_agent_metrics_router.py",
+      "tests/unit/test_agent_metrics_runner.py",
+      "tests/unit/test_agent_metrics_session.py",
+      "tests/unit/test_llm_generation.py",
+      "tests/unit/test_runner.py"
+    ],
+    "EXPECTED_DOC": [
+      "docs/publishing/agent-metrics-runbook.md"
+    ],
+    "EXPECTED_EVIDENCE": [
+      "workspace/verification/latest/* (all agent-metrics-*.json)"
+    ],
+    "UNRELATED_USER_CHANGE": [
+      "pipeline/configs/families/cells.yml (family config, not metrics)",
+      "pipeline/configs/families/pdf.yml (family config)",
+      "pipeline/configs/families/words.yml (family config)",
+      "pipeline/schemas/family-config.schema.json (schema, not metrics)",
+      "pyproject.toml (test config, no metrics risk)",
+      "src/plugin_examples/discovery_sweep.py",
+      "src/plugin_examples/family_config/loader.py",
+      "src/plugin_examples/family_config/models.py",
+      "src/plugin_examples/fixture_registry/registry.py",
+      "src/plugin_examples/generator/code_generator.py",
+      "src/plugin_examples/generator/packet_builder.py",
+      "src/plugin_examples/publisher/ (4 files)",
+      "src/plugin_examples/scenario_planner/ (4 files)",
+      "tools/DllReflector/Program.cs",
+      "workspace/manifests/*.json (5 files)",
+      "workspace/verification/latest/*.json (non-metrics gate files)"
+    ],
+    "SUSPICIOUS": [],
+    "unrelated_changes_at_risk": false,
+    "note": "Unrelated changes are pre-existing pipeline work (examples, publishing) and do not affect metrics module. No risk to metrics verification."
+  },
+  "key_observations": {
+    "full_regression": "996 passed (was 988 in gap2-hygiene — 8 new tests added to test_llm_generation.py: TestLLMTimeoutRetry x3 + TestLLMTimeoutRetry variants)",
+    "metrics_specific_tests": "99 passed (stable)",
+    "session_tests": "22 passed (stable)",
+    "ledger_entries": 1,
+    "ledger_single_test_row": "run_id=test-metrics-integration-1, job_type=test, http_status=200",
+    "TC01_artifact_missing": "agent-metrics-api-contract.json not found",
+    "plan_bundle_files_missing": ["agent-metrics-v4-plan-verification.json", "agent-metrics-v4-plan-verdict.json"],
+    "workspace_runs_directories": 105,
+    "evidence_is_run_scoped": true
+  }
+}

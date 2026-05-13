@@ -1,0 +1,62 @@
+{
+  "artifact_type": "all_family_completeness_sprint2",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "sprint": "Portfolio Launch Sprint 2",
+  "families": [
+    {
+      "family": "cells",
+      "denominator_basis": "FULL_SOT",
+      "expected_count": 22,
+      "ready_count": 9,
+      "blocked_count": 13,
+      "status": "pass",
+      "holds": true
+    },
+    {
+      "family": "words",
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 6,
+      "ready_count": 6,
+      "blocked_count": 19,
+      "status": "pass",
+      "holds": true
+    },
+    {
+      "family": "pdf",
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 4,
+      "ready_count": 4,
+      "blocked_count": 97,
+      "status": "pass",
+      "holds": true
+    },
+    {
+      "family": "diagram",
+      "denominator_basis": "PILOT_ALLOWED",
+      "expected_count": 2,
+      "ready_count": 2,
+      "blocked_count": 3,
+      "status": "pass",
+      "holds": true
+    },
+    {
+      "family": "email",
+      "denominator_basis": "DISCOVERY_ONLY",
+      "expected_count": null,
+      "ready_count": 1,
+      "blocked_count": 2,
+      "status": "skip",
+      "holds": true
+    },
+    {
+      "family": "slides",
+      "denominator_basis": "DISCOVERY_ONLY",
+      "expected_count": null,
+      "ready_count": 5,
+      "blocked_count": 0,
+      "status": "skip",
+      "holds": true
+    }
+  ],
+  "all_generation_families_hold": true
+}

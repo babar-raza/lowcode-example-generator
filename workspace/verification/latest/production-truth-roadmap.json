@@ -1,0 +1,503 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "src/plugin_examples/__main__.py",
+    "src/plugin_examples/evidence_layout.py",
+    "src/plugin_examples/runner.py",
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/publisher/release_status.py",
+    "src/plugin_examples/gates/example_lifecycle.py"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/production-truth-master-scope-matrix.json",
+    "workspace/verification/latest/production-truth-evidence-integrity-audit.json",
+    "workspace/verification/latest/production-grade-lowcode-system-design.json",
+    "workspace/verification/latest/production-truth-family-board.json"
+  ],
+  "confidence": "HIGH",
+  "findings": {
+    "first_safe_sprint": "R1",
+    "first_safe_sprint_reason": "R1 adds observability (evidence_dir always created) and a non-degradation baseline check — purely additive changes. No generation or publisher code is touched. Cells 9/9 and Words 4/4 cannot regress from R1 changes. R1 also produces the denominator model artifact that all subsequent sprints depend on.",
+    "what_must_not_be_done_next": [
+      "Do not expand Words allowed_types before R3 denominator model exists (coverage claims become unverifiable)",
+      "Do not touch code_generator.py and github_pr_publisher.py in the same sprint",
+      "Do not enable TC14 production posting (R8) before test reproducibility is confirmed stable (R7+)",
+      "Do not create PDF PR #4 (Optimizer) before Optimizer LLM rerun passes (R6)",
+      "Do not merge any PR without post-merge validation gate passing",
+      "Do not mark any taskcard CLOSED_VERIFIED without source evidence file citation"
+    ],
+    "sprints": [
+      {
+        "sprint_id": "R1",
+        "objective": "Stabilize observability — always create run-scoped evidence, produce denominator model artifacts, fix release_status cumulative PR count",
+        "exact_scope": "1. Decouple evidence_dir creation from --metrics flag in __main__.py line 57. 2. Create denominator JSON files for all 3 families in pipeline/configs/denominators/. 3. Fix release_status.py to compute cumulative_pr_count from all merge-result.json files. 4. Add LATEST_ROOT_ALLOWLIST in evidence_layout.py.",
+        "non_goals": [
+          "No changes to code_generator.py",
+          "No changes to github_pr_publisher.py",
+          "No new examples generated",
+          "No PR publishing",
+          "No TC14 production enablement"
+        ],
+        "files_likely_to_change": [
+          "src/plugin_examples/__main__.py (line 57: remove metrics gate on evidence_dir creation)",
+          "src/plugin_examples/evidence_layout.py (add GLOBAL_AGGREGATE_FILES allowlist)",
+          "src/plugin_examples/publisher/release_status.py (add cumulative_pr_count from all merge-result files)",
+          "pipeline/configs/denominators/cells-denominator-v1.json (NEW)",
+          "pipeline/configs/denominators/words-denominator-v1.json (NEW)",
+          "pipeline/configs/denominators/pdf-denominator-v1.json (NEW)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/generator/packet_builder.py",
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "pipeline/configs/families/*.yml"
+        ],
+        "dependencies": [],
+        "tests": [
+          "test_evidence_dir_created_without_metrics_flag",
+          "test_release_status_cumulative_count_from_all_merge_results",
+          "test_denominator_schema_validates_for_cells",
+          "test_denominator_schema_validates_for_words",
+          "test_denominator_schema_validates_for_pdf"
+        ],
+        "evidence_outputs": [
+          "pipeline/configs/denominators/cells-denominator-v1.json",
+          "pipeline/configs/denominators/words-denominator-v1.json",
+          "pipeline/configs/denominators/pdf-denominator-v1.json",
+          "workspace/verification/latest/release-status.json (enhanced with cumulative_pr_count)"
+        ],
+        "gates": [
+          "Run full pytest suite — 1025 tests must still pass (zero regressions)",
+          "Run Words + Cells pipelines in dry-run mode — both must complete without errors",
+          "Verify evidence_dir exists after a run without --metrics flag",
+          "Verify release-status.json has cumulative_pr_count field with correct value"
+        ],
+        "stop_conditions": [
+          "STOP if pytest fails any existing test after __main__.py change",
+          "STOP if Words or Cells dry-run produces different lifecycle results than baseline",
+          "STOP if denominator JSON schema cannot be validated"
+        ],
+        "rollback": "Revert __main__.py line 57 change. Delete denominator JSON files. Revert release_status.py. All families unaffected.",
+        "expected_coverage_impact": "Coverage computation becomes verifiable for first time. Cells: 9/N (N from denominator). Words: 4/N. PDF: 3/N. Exact percentages depend on denominator WORKFLOW_ROOT counts.",
+        "risk_level": "LOW",
+        "parallelization_rules": "Denominator JSON creation (3 families) can be parallelized. __main__.py and release_status.py changes must be sequential (shared runner context)."
+      },
+      {
+        "sprint_id": "R2",
+        "objective": "Evidence and taskcard hygiene — automate taskcard markdown sync, create backlog directories for Cells and Words, add evidence completeness gate",
+        "exact_scope": "1. Create scripts/sync_taskcards.py to regenerate docs/discovery/open-taskcard-closure-matrix.md from JSON. 2. Create workspace/backlog/cells/ and workspace/backlog/words/ with excluded scenario JSON files. 3. Create src/plugin_examples/gates/evidence_completeness.py and integrate into runner.py. 4. Verify docs/ci/ runbook content is accurate.",
+        "non_goals": [
+          "No new examples generated",
+          "No changes to allowed_types in family YMLs",
+          "No PR publishing",
+          "No changes to code_generator.py or packet_builder.py"
+        ],
+        "files_likely_to_change": [
+          "scripts/sync_taskcards.py (NEW)",
+          "workspace/backlog/cells/ (NEW — 13 excluded scenario files based on lifecycle records)",
+          "workspace/backlog/words/ (NEW — 21 excluded scenario files based on lifecycle records)",
+          "src/plugin_examples/gates/evidence_completeness.py (NEW)",
+          "src/plugin_examples/runner.py (MODIFY: call evidence_completeness gate)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "workspace/verification/latest/open-taskcard-closure-matrix.json (source — never modify directly)"
+        ],
+        "dependencies": ["R1 (evidence_dir always created)"],
+        "tests": [
+          "test_evidence_completeness_fails_if_family_scoped_file_missing",
+          "test_evidence_completeness_passes_if_all_22_files_present",
+          "test_sync_taskcards_produces_valid_md_from_json",
+          "test_backlog_schema_validates_cells",
+          "test_backlog_schema_validates_words"
+        ],
+        "evidence_outputs": [
+          "workspace/backlog/cells/{scenario_id}.json (13 files)",
+          "workspace/backlog/words/{scenario_id}.json (21 files)",
+          "workspace/verification/latest/families/{family}/evidence-completeness-check.json"
+        ],
+        "gates": [
+          "Pytest must still pass 1025+ tests after runner.py evidence_completeness integration",
+          "sync_taskcards.py must produce MD file that matches current hand-maintained MD (content equivalent)",
+          "All 34 excluded scenario backlog files must parse as valid JSON with required fields"
+        ],
+        "stop_conditions": [
+          "STOP if evidence_completeness gate causes currently-passing runs to halt (tune threshold first)",
+          "STOP if sync_taskcards.py produces MD with different taskcard count than JSON source"
+        ],
+        "rollback": "Remove evidence_completeness call from runner.py. Delete backlog/ directories if needed. sync_taskcards.py remains available for manual use.",
+        "expected_coverage_impact": "No change to coverage metrics. Governance quality improves — evidence completeness now enforced programmatically.",
+        "risk_level": "LOW",
+        "parallelization_rules": "backlog/ file creation (Cells and Words) can be parallelized. evidence_completeness.py and sync_taskcards.py development can be parallelized."
+      },
+      {
+        "sprint_id": "R3",
+        "objective": "Scenario contracts — create static contract files for all 16 approved scenarios, add contract validation in planner.py and post-generation symbol check in code_generator.py",
+        "exact_scope": "1. Create pipeline/contracts/{family}/{scenario_id}.json for all 16 approved scenarios (9 Cells + 4 Words + 3 PDF). 2. Modify planner.py to load and validate contract at plan time. 3. Add post-generation contract symbol check in code_generator.py (expected_symbols check only — not forbidden, which already exists). 4. Add contract_version to lifecycle records.",
+        "non_goals": [
+          "No changes to packet_builder.py FORBIDDEN list (done in R5)",
+          "No new examples generated",
+          "No changes to allowed_types",
+          "No changes to PR publishing flow"
+        ],
+        "files_likely_to_change": [
+          "pipeline/contracts/cells/ (NEW — 9 contract files)",
+          "pipeline/contracts/words/ (NEW — 4 contract files)",
+          "pipeline/contracts/pdf/ (NEW — 3 contract files)",
+          "src/plugin_examples/scenario_planner/planner.py (MODIFY: load contract, validate fixture_type)",
+          "src/plugin_examples/generator/code_generator.py (MODIFY: post-generation expected_symbols check — additive, not changing existing guards)",
+          "src/plugin_examples/gates/example_lifecycle.py (MODIFY: add contract_version field to lifecycle record)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "src/plugin_examples/generator/packet_builder.py (wait for R5)"
+        ],
+        "dependencies": ["R1 (denominator model provides WORKFLOW_ROOT context for contract creation)"],
+        "tests": [
+          "test_planner_loads_contract_and_validates_fixture_type",
+          "test_code_generator_fails_if_expected_symbol_missing",
+          "test_code_generator_passes_if_expected_symbols_present",
+          "test_lifecycle_records_contract_version",
+          "test_all_16_contracts_parse_valid_json"
+        ],
+        "evidence_outputs": [
+          "pipeline/contracts/{family}/{scenario_id}.json (16 files)",
+          "workspace/verification/latest/families/{family}/contract-compliance-results.json"
+        ],
+        "gates": [
+          "Pytest must pass 1025+ tests after code_generator.py change",
+          "Run Cells + Words in dry-run — all currently-passing scenarios must still pass with contracts loaded",
+          "All 16 contract files must parse as valid JSON with required schema fields"
+        ],
+        "stop_conditions": [
+          "STOP if any currently-passing Cells or Words scenario fails the expected_symbols check — tune contract first",
+          "STOP if planner.py contract loading slows run start by more than 5 seconds",
+          "STOP if code_generator.py change breaks existing DataSources FORBIDDEN guard"
+        ],
+        "rollback": "Remove contract load from planner.py. Remove expected_symbols check from code_generator.py. Contract files remain harmless on disk.",
+        "expected_coverage_impact": "Coverage computation now anchored to denominator (from R1) + contracts provide per-scenario verification. Coverage claims become fully auditable.",
+        "risk_level": "MEDIUM",
+        "parallelization_rules": "Contract file creation (16 files) can be parallelized. planner.py and code_generator.py changes must be sequential (planner feeds code_generator)."
+      },
+      {
+        "sprint_id": "R4",
+        "objective": "Lifecycle run-to-run comparison — add prior_run_result field to lifecycle records, detect regressions, add --compare-run flag to runner",
+        "exact_scope": "1. Extend LifecycleRegistry to load prior lifecycle-records.json from workspace/runs/{prior_run_id}/evidence/. 2. Add prior_run_result field to each lifecycle record. 3. Add regression_detected flag when prior=PR_READY and current=GENERATION_FAILED. 4. Add --compare-run flag to runner CLI.",
+        "non_goals": [
+          "No changes to code_generator.py",
+          "No changes to publisher modules",
+          "No automated prior run ID detection (manual --compare-run only)",
+          "No CI integration in this sprint (that is R9)"
+        ],
+        "files_likely_to_change": [
+          "src/plugin_examples/gates/example_lifecycle.py (MODIFY: add run-to-run diff logic)",
+          "src/plugin_examples/__main__.py (MODIFY: add --compare-run flag)",
+          "src/plugin_examples/runner.py (MODIFY: pass prior_run_id to LifecycleRegistry)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py"
+        ],
+        "dependencies": ["R1 (workspace/runs/ always created so prior run evidence exists)"],
+        "tests": [
+          "test_lifecycle_registry_detects_regression_from_prior_run",
+          "test_lifecycle_no_regression_if_no_prior_run",
+          "test_lifecycle_records_include_prior_run_result_field",
+          "test_runner_cli_accepts_compare_run_flag"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/latest/families/{family}/lifecycle-regression-report.json"
+        ],
+        "gates": [
+          "Pytest must pass 1025+ tests",
+          "Run Cells with --compare-run pointing to most recent pilot-cells run — no regressions expected",
+          "Run Words with --compare-run pointing to most recent pilot-words run — no regressions expected"
+        ],
+        "stop_conditions": [
+          "STOP if regression_detected fires false positives on scenarios that never passed",
+          "STOP if workspace/runs/{prior_run_id} does not exist and run halts rather than gracefully skipping comparison"
+        ],
+        "rollback": "Remove --compare-run flag from __main__.py. Remove diff logic from LifecycleRegistry. lifecycle-records.json reverts to current schema (without prior_run_result field).",
+        "expected_coverage_impact": "Non-degradation proof becomes automated. G4 and partial G5 scope matrix items move from PLANNED_ONLY to IMPLEMENTED_VERIFIED.",
+        "risk_level": "LOW",
+        "parallelization_rules": "All 3 file changes can be developed in parallel but must be integration-tested together."
+      },
+      {
+        "sprint_id": "R5",
+        "objective": "Words system prerequisites — SplitCriteria enum investigation, paired fixture strategy, DOCX semantic validator (output_validator.py), contract-driven forbidden symbols in packet_builder.py",
+        "exact_scope": "1. Investigate SplitCriteria enum availability in Aspose.Words.LowCode namespace via DllReflector. 2. Design and document paired fixture strategy for MailMerger. 3. Create src/plugin_examples/verifier_bridge/output_validator.py with DOCX and XLSX semantic validators. 4. Modify packet_builder.py to read forbidden_symbols from scenario contract (augments existing FORBIDDEN list).",
+        "non_goals": [
+          "No Words allowed_types expansion (words.yml stays at 4 types)",
+          "No new PR publishing for Words",
+          "No MailMerger example generation (fixture design only)"
+        ],
+        "files_likely_to_change": [
+          "src/plugin_examples/verifier_bridge/output_validator.py (NEW)",
+          "src/plugin_examples/verifier_bridge/bridge.py (MODIFY: call output_validator before reviewer)",
+          "src/plugin_examples/generator/packet_builder.py (MODIFY: read contract forbidden_symbols)",
+          "docs/discovery/words-fixture-strategy-reprobe.md or docs/discovery/words-mail-merger-fixture.md (NEW: MailMerger fixture design doc)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py (R6 scope)",
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "pipeline/configs/families/words.yml (no allowed_types expansion yet)"
+        ],
+        "dependencies": ["R3 (scenario contracts must exist before contract-driven packet_builder.py change)"],
+        "tests": [
+          "test_output_validator_docx_rejects_invalid_zip",
+          "test_output_validator_xlsx_rejects_invalid_zip",
+          "test_output_validator_pdf_rejects_non_pdf_header",
+          "test_output_validator_runs_before_reviewer_in_bridge",
+          "test_packet_builder_includes_contract_forbidden_symbols"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/latest/families/words/split-criteria-investigation.json (NEW)",
+          "workspace/verification/latest/families/words/fixture-strategy-v2.json (NEW)"
+        ],
+        "gates": [
+          "Pytest must pass 1025+ tests after output_validator.py integration",
+          "Run all 4 Words examples in dry-run — output_validator must not flag any as VALIDATION_FAILED",
+          "Run all 9 Cells examples in dry-run — output_validator must not flag any as VALIDATION_FAILED"
+        ],
+        "stop_conditions": [
+          "STOP if output_validator creates false positives for any currently-passing Cells or Words scenario",
+          "STOP if packet_builder.py contract-driven forbidden symbols change breaks existing Cells scenarios"
+        ],
+        "rollback": "Remove output_validator.py call from bridge.py. Revert packet_builder.py to hardcoded FORBIDDEN list. Words system prerequisites can be re-attempted independently.",
+        "expected_coverage_impact": "F1 (SplitCriteria), F2 (paired fixture), F3 (MailMerger fixture design), F4 (DOCX semantic validation) all move from PLANNED_ONLY toward IMPLEMENTED_VERIFIED. E3 (packet_builder contract integration) improves.",
+        "risk_level": "MEDIUM",
+        "parallelization_rules": "output_validator.py development and packet_builder.py contract integration can be parallelized. SplitCriteria investigation and MailMerger fixture design can be parallelized."
+      },
+      {
+        "sprint_id": "R6",
+        "objective": "PDF Optimizer LLM rerun — re-run LLM for Optimizer with all constraints active, publish PDF PR #3 (Merger + Splitter) live if APPROVE_LIVE_PR provided",
+        "exact_scope": "1. Re-run pipeline for PDF with --family pdf --tier 5 (Optimizer only, or full rerun). Verify Optimizer builds with constraints. 2. If Optimizer passes: include in PR #4 candidate manifest. 3. If APPROVE_LIVE_PR token provided: publish PDF PR #3 (Merger + Splitter) live. 4. Verify post-merge validation for PR #3.",
+        "non_goals": [
+          "No source code changes to code_generator.py in this sprint (constraints already fixed per Phase 3 audit)",
+          "No Cells or Words changes",
+          "No TC14 production enablement"
+        ],
+        "files_likely_to_change": [
+          "workspace/verification/latest/families/pdf/example-lifecycle-records.json (GENERATED by pipeline run)",
+          "workspace/pr-dry-run/pdf-controlled-pilot-wave1/ (UPDATED by pipeline run if Optimizer passes)",
+          "workspace/verification/latest/pdf-live-pr-result.json (GENERATED if live PR published)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py (already has fix per Phase 3 audit)",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "pipeline/configs/families/cells.yml",
+          "pipeline/configs/families/words.yml"
+        ],
+        "dependencies": [
+          "R1 (stabilized observability ensures run-scoped evidence created)",
+          "APPROVE_LIVE_PR token provided by human for live PR #3 publish"
+        ],
+        "tests": [
+          "No new tests in this sprint — pipeline run is the test",
+          "Post-merge validation gate must pass for all examples in PR #3"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/latest/families/pdf/example-lifecycle-records.json (updated)",
+          "workspace/verification/latest/pdf-optimizer-rerun-result.json (NEW)",
+          "workspace/verification/latest/pdf-live-pr-result.json (if PR published)"
+        ],
+        "gates": [
+          "Optimizer must build AND run without DataSources namespace in generated code",
+          "Splitter must pass for 4th consecutive time before being included in live PR",
+          "Post-merge validation: all examples in PR #3 must return ALL_PASS",
+          "No currently-passing scenario (Cells 9, Words 4) may regress during PDF rerun"
+        ],
+        "stop_conditions": [
+          "STOP if Optimizer still hallucinating DataSources after rerun — investigate constraint delivery",
+          "STOP if Splitter regresses in this rerun — do not publish PR #3 until resolved",
+          "STOP if APPROVE_LIVE_PR is not provided — publish PR #3 as dry-run only"
+        ],
+        "rollback": "If live PR #3 created but post-merge validation fails: create PR to revert. Cells and Words unaffected. Optimizer deferral continues.",
+        "expected_coverage_impact": "PDF published examples: 2 (PR #1) → 4 (PR #3 adds Merger + Splitter, but PR #1 already had Merger — effectively Splitter added). If Optimizer passes: 5th scenario queued for PR #4.",
+        "risk_level": "MEDIUM",
+        "parallelization_rules": "LLM rerun is single-threaded by scenario. If Optimizer rerun and PR #3 live publish are both attempted: do them sequentially (rerun first, then publish)."
+      },
+      {
+        "sprint_id": "R7",
+        "objective": "Publication consistency — PR candidates derived from lifecycle records (not manifest), README sync automated post-manifest write",
+        "exact_scope": "1. Modify pr_builder.py to derive PR candidates from families/{family}/example-lifecycle-records.json as primary input (lifecycle-first, not manifest-first). 2. Add cumulative_merged_pr_count to release-status.json (cumulative scan confirmed in R1 already — ensure field populated). 3. README renderer called automatically as post-manifest step.",
+        "non_goals": [
+          "No new PR publishing",
+          "No changes to GitHub API integration in github_pr_publisher.py",
+          "No changes to allowed_types"
+        ],
+        "files_likely_to_change": [
+          "src/plugin_examples/publisher/pr_builder.py (MODIFY: lifecycle-first candidate selection)",
+          "src/plugin_examples/publisher/readme_renderer.py (MODIFY: called post-manifest automatically)",
+          "src/plugin_examples/publisher/readme_auditor.py (MODIFY: staleness check against lifecycle timestamp)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/generator/packet_builder.py"
+        ],
+        "dependencies": ["R3 (contracts provide scenario IDs), R4 (lifecycle records have stable schema)"],
+        "tests": [
+          "test_pr_builder_derives_candidates_from_lifecycle_not_manifest",
+          "test_pr_builder_lifecycle_and_manifest_candidates_are_equivalent_for_cells",
+          "test_readme_renderer_called_post_manifest_write",
+          "test_release_status_has_cumulative_merged_pr_count"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/latest/families/{family}/pr-candidate-manifest.json (derived from lifecycle)",
+          "workspace/verification/latest/release-status.json (with cumulative_merged_pr_count)"
+        ],
+        "gates": [
+          "Pytest must pass 1025+ tests",
+          "For Cells: lifecycle-derived manifest must contain exactly 9 candidates (matches current manifest)",
+          "For Words: lifecycle-derived manifest must contain exactly 4 candidates",
+          "README render output for Cells and Words must match current READMEs in target repos"
+        ],
+        "stop_conditions": [
+          "STOP if lifecycle-derived manifest produces different candidates than current manifest — investigate lifecycle record accuracy first",
+          "STOP if automatic README render overwrites a manually-maintained README"
+        ],
+        "rollback": "Revert pr_builder.py to manifest-first logic. Revert readme_renderer.py to manual invocation. All published examples remain published.",
+        "expected_coverage_impact": "No change to coverage numbers. Evidence consistency improves — pr-candidate-manifest and lifecycle records now guaranteed in sync.",
+        "risk_level": "MEDIUM",
+        "parallelization_rules": "pr_builder.py and readme_renderer.py changes can be developed in parallel but must be integration-tested together."
+      },
+      {
+        "sprint_id": "R8",
+        "objective": "TC14 production enablement — enable external POST under AGENT_METRICS_PRODUCTION_ENABLED=true, verify in staging first, confirm test rows do not appear in production Google Sheet",
+        "exact_scope": "1. Verify AGENT_METRICS_PRODUCTION_ENABLED env var gate in poster.py works correctly. 2. Run a staging post (dry_run=False, AGENT_METRICS_PRODUCTION_ENABLED=true, but with test job_type to verify test_only_sprint guard). 3. Confirm test row is BLOCKED by test_only_sprint guard. 4. Run production post for a real run (pilot-words or pilot-cells). 5. Confirm row appears in Google Sheet with correct fields.",
+        "non_goals": [
+          "No source code changes to metrics modules (they are already correctly implemented per Phase 6 audit)",
+          "No changes to TC14 session logic",
+          "No new examples generated"
+        ],
+        "files_likely_to_change": [
+          "workspace/verification/agent-metrics-post-ledger.jsonl (APPEND: new post records)",
+          "workspace/verification/latest/agent-metrics-tc14-production-post-result.json (UPDATED)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/metrics/session.py",
+          "src/plugin_examples/metrics/poster.py",
+          "src/plugin_examples/metrics/config.py",
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/publisher/github_pr_publisher.py"
+        ],
+        "dependencies": [
+          "Test reproducibility confirmed stable (1025 tests passing across multiple runs)",
+          "No failing tests in current suite",
+          "AGENT_METRICS_TOKEN and AGENT_METRICS_ENDPOINT environment variables available"
+        ],
+        "tests": [
+          "test_production_gate_blocks_test_job_type (existing test must pass)",
+          "test_poster_uses_production_enabled_env_var (existing test must pass)",
+          "Manual verification: Google Sheet does not contain test row after test_only_sprint guard fires"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/agent-metrics-post-ledger.jsonl (new production entries)",
+          "workspace/verification/latest/agent-metrics-tc14-r8-production-verification.json (NEW)"
+        ],
+        "gates": [
+          "test_only_sprint guard must block test job_type POST — verified by existing tests",
+          "Production post must appear in Google Sheet within 5 minutes",
+          "Post ledger entry must show http_status=200 and dry_run=false",
+          "No test row may appear in production Sheet"
+        ],
+        "stop_conditions": [
+          "STOP immediately if test row appears in production Google Sheet — investigate test_only_sprint guard",
+          "STOP if http_status != 200 — do not retry more than 3 times",
+          "STOP if AGENT_METRICS_TOKEN is not available — do not post without authentication"
+        ],
+        "rollback": "Set AGENT_METRICS_PRODUCTION_ENABLED=false (or unset). Post ledger entries cannot be deleted from Google Sheet — notify maintainer to remove test rows if any appear.",
+        "expected_coverage_impact": "A7 (test_only_sprint guard) moves to IMPLEMENTED_VERIFIED. A9 (TC14 production posting) moves to IMPLEMENTED_VERIFIED. Agent metrics classification upgrades to PRODUCTION_POSTING_ENABLED_AND_SAFE.",
+        "risk_level": "MEDIUM",
+        "parallelization_rules": "Cannot be parallelized — staging post must complete and be verified before production post."
+      },
+      {
+        "sprint_id": "R9",
+        "objective": "Monthly rerun and regression workflow — automate monthly regression check, add CI workflow, establish non-degradation gate in CI",
+        "exact_scope": "1. Create .github/workflows/monthly-rerun.yml — scheduled workflow (first Monday of month), runs release-status --check-only for all 3 families, writes monthly-regression-report.json. 2. Verify docs/ci/ runbook is accurate and reflects current pipeline commands. 3. Use scripts/sync_taskcards.py (from R2) as part of monthly workflow to keep taskcard MD in sync.",
+        "non_goals": [
+          "No LLM example generation in CI (too expensive and non-deterministic for automated CI)",
+          "No PR publishing in CI",
+          "No changes to example_lifecycle.py or code_generator.py"
+        ],
+        "files_likely_to_change": [
+          ".github/workflows/monthly-rerun.yml (NEW)",
+          ".github/workflows/pytest.yml (NEW or VERIFY: ensure full test suite runs on PR)",
+          "docs/ci/monthly-rerun-runbook.md (NEW or UPDATE: accurate commands)",
+          "docs/publishing/agent-operated-live-pr-runbook.md (VERIFY: still accurate)"
+        ],
+        "files_forbidden_to_touch": [
+          "src/plugin_examples/generator/code_generator.py",
+          "src/plugin_examples/publisher/github_pr_publisher.py",
+          "src/plugin_examples/publisher/github_pr_merger.py",
+          "pipeline/configs/families/*.yml"
+        ],
+        "dependencies": [
+          "R1 (denominator model enables verifiable coverage in monthly report)",
+          "R4 (run-to-run comparison enables regression detection in monthly workflow)",
+          "R2 (sync_taskcards.py available for monthly MD sync)"
+        ],
+        "tests": [
+          "test_monthly_workflow_yml_is_valid_github_actions_syntax",
+          "test_monthly_regression_report_schema_validation"
+        ],
+        "evidence_outputs": [
+          "workspace/verification/latest/monthly-regression-report.json (first monthly run)",
+          ".github/workflows/monthly-rerun.yml (committed to repo)"
+        ],
+        "gates": [
+          "GitHub Actions workflow syntax validation (yamllint or gh workflow validate)",
+          "Monthly workflow dry run completes without LLM calls",
+          "Pytest workflow runs full suite (1025+ tests) and passes",
+          "Monthly report contains non_degradation_verdict for all 3 families"
+        ],
+        "stop_conditions": [
+          "STOP if monthly workflow attempts to run LLM generation — remove that step",
+          "STOP if GitHub Actions runner does not have .NET SDK — add SDK setup step first",
+          "STOP if monthly workflow would POST to metrics without explicit --metrics-post flag"
+        ],
+        "rollback": "Delete .github/workflows/monthly-rerun.yml. Monthly rerun reverts to manual process. docs/ci/ docs remain for reference.",
+        "expected_coverage_impact": "G5 (monthly rerun workflow) moves from PLANNED_ONLY to IMPLEMENTED_VERIFIED. G1-G3 (non-degradation proofs) become automated. Overall governance workstream coverage improves from 15% to ~60%.",
+        "risk_level": "LOW",
+        "parallelization_rules": "monthly-rerun.yml and pytest.yml can be developed in parallel. Runbook updates can be parallelized with workflow development."
+      }
+    ],
+    "sprint_dependency_graph": {
+      "R1": [],
+      "R2": ["R1"],
+      "R3": ["R1"],
+      "R4": ["R1"],
+      "R5": ["R3"],
+      "R6": ["R1"],
+      "R7": ["R3", "R4"],
+      "R8": [],
+      "R9": ["R1", "R2", "R4"]
+    },
+    "critical_path": ["R1", "R3", "R5", "R7"],
+    "parallelizable_sprints": [
+      {"group": "A", "sprints": ["R2", "R3", "R4", "R6"], "note": "All depend only on R1; can run in parallel after R1 completes"},
+      {"group": "B", "sprints": ["R8"], "note": "Independent of all other sprints except stable test suite"}
+    ]
+  },
+  "gaps": [
+    "R6 depends on APPROVE_LIVE_PR human token — cannot be automated without human action",
+    "R8 depends on AGENT_METRICS_TOKEN and Google Sheet access — infrastructure dependency",
+    "R9 GitHub Actions runner .NET SDK availability not verified (docs/ci/ content not fully read in audit)"
+  ],
+  "contradictions": [],
+  "next_actions": [
+    "Phase 11: Write production-truth-risk-register.json",
+    "Phase 12: Write production-truth-claim-audit.json (21 claims)",
+    "Phase 13: Write production-truth-final-verdict.json"
+  ]
+}

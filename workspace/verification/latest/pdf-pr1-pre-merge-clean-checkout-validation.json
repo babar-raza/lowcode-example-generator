@@ -1,0 +1,43 @@
+{
+  "sprint": "PDF PR #1 Merge, Post-Merge Verification, and Cross-Family Failure-Recovery Audit",
+  "date": "2026-05-06",
+  "phase": "Part 3 — Pre-merge clean checkout validation",
+  "clone_source": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples.git",
+  "clone_branch": "plugin-examples/pdf/20260506-083146",
+  "clone_method": "git clone --depth 1 --branch",
+  "clone_dir": "isolated temp directory (C:/Users/prora/AppData/Local/Temp/tmp.BxMTgYQXWj/pdf-pr1-checkout)",
+  "examples_found": ["merger", "text-extractor"],
+  "unexpected_examples": [],
+  "validation_results": [
+    {
+      "example": "merger",
+      "restore": "PASS",
+      "build": "PASS (0 warnings, 0 errors)",
+      "run": "PASS — 'Merge succeeded: ...output.pdf'",
+      "output_file": "output.pdf",
+      "output_size_bytes": 56346,
+      "output_starts_with_pdf_header": true,
+      "api_used": "Aspose.Pdf.LowCode.Merger.Process(MergeOptions)",
+      "verdict": "PASS"
+    },
+    {
+      "example": "text-extractor",
+      "restore": "PASS",
+      "build": "PASS (0 warnings, 0 errors)",
+      "run": "PASS — 'Extracted: Evaluation Only. Created with Aspose.PDF. Copyright 2002-2026 Aspose Pty Ltd.'",
+      "output_contains_text": true,
+      "evaluation_watermark_present": true,
+      "api_used": "Aspose.Pdf.LowCode.TextExtractor.Process(TextExtractorOptions)",
+      "uses_text_absorber": false,
+      "verdict": "PASS"
+    }
+  ],
+  "no_failed_or_backlogged_examples_in_checkout": true,
+  "no_splitter_or_optimizer_present": true,
+  "gate_2_pass_criteria": {
+    "both_examples_build_and_run": true,
+    "output_validation_passes": true,
+    "no_failed_backlogged_in_checkout": true
+  },
+  "verdict": "GATE_2_PASS"
+}

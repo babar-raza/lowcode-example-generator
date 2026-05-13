@@ -1,0 +1,122 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 9: Google Sheet Safety Audit",
+  "phase": "PHASE_9",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "TC-13 (controlled test POST), TC-14 (production), Section 11 (CLI contract), Amendments AMD6, AMD7",
+  "objective": "Verify Google Sheet POST history, safety gates, and that no unauthorized rows were written",
+
+  "post_ledger_state": {
+    "file": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "total_entries": 1,
+    "entry_1": {
+      "run_id": "test-metrics-integration-1",
+      "job_type": "test",
+      "posted_at": "2026-05-06T10:51:03.283550+00:00",
+      "http_status": 200,
+      "payload_hash": "ce28510199e84944",
+      "dry_run": false,
+      "agent_name": "test-lowcode-example-generator"
+    }
+  },
+
+  "tc13_controlled_test_post_result": {
+    "taskcard": "TC-13 — metrics-v4-controlled-test-post-gate",
+    "status": "EXECUTED_AND_VERIFIED",
+    "evidence_file": "workspace/verification/latest/agent-metrics-test-post-result.json",
+    "test_rows_posted": 1,
+    "http_status": 200,
+    "api_response": {"status": 200, "ok": true, "message": "Metrics recorded"},
+    "website_in_payload": "aspose.net",
+    "job_type": "test",
+    "agent_name_used": "test-lowcode-example-generator",
+    "duplicate_prevention_verified": true,
+    "human_approval_gated": true
+  },
+
+  "tc14_production_post_status": {
+    "taskcard": "TC-14 — metrics-v4-production-rollout-gate",
+    "status": "BLOCKED_PENDING_SEPARATE_APPROVAL",
+    "test_only_sprint_active": true,
+    "production_rows_this_sprint": 0,
+    "blocked_by": "poster.py line 90: test_only_sprint=True blocks all non-test job_types",
+    "reason": "Production enablement requires separate explicit human approval — not yet granted"
+  },
+
+  "amendment_compliance": {
+    "AMD6_no_production_row_without_approval": {
+      "requirement": "No production row without separate approval",
+      "status": "PASS",
+      "evidence": "test_only_sprint=True hardcoded in session.py:181 and pipeline_hook.py:23. production_rows=0."
+    },
+    "AMD7_no_new_live_test_rows_during_verification": {
+      "requirement": "No new live test rows during this verification challenge",
+      "status": "PASS",
+      "evidence": "Ledger has exactly 1 entry (from TC-13 in prior sprint). No new POSTs during this challenge."
+    }
+  },
+
+  "safety_gate_inventory": [
+    {
+      "gate": "dry_run_default",
+      "description": "MetricsSession.dry_run defaults to True",
+      "verified": true,
+      "test": "TestSafetyGates::test_dry_run_session_never_posts"
+    },
+    {
+      "gate": "test_only_sprint",
+      "description": "poster.py test_only_sprint=True blocks all non-test job_types",
+      "verified": true,
+      "hardcoded_in": ["session.py:181", "pipeline_hook.py:23"],
+      "test": "TestSafetyGates::test_force_repost_cannot_bypass_production_safety"
+    },
+    {
+      "gate": "no_secrets_in_evidence",
+      "description": "Token read from env at POST time only, never stored",
+      "verified": true,
+      "test": "test_agent_metrics_poster.py::TestTokenSecurity::test_token_not_in_result"
+    },
+    {
+      "gate": "persistent_ledger_dedup",
+      "description": "Poster checks run_id+job_type in JSONL ledger before POST",
+      "verified": true,
+      "test": "test_agent_metrics_poster.py::TestDuplicatePrevention::test_duplicate_blocked"
+    },
+    {
+      "gate": "force_repost_cannot_bypass_test_only",
+      "description": "--metrics-force-repost bypasses ledger but NOT test_only_sprint gate",
+      "verified": true,
+      "test": "TestSafetyGates::test_force_repost_cannot_bypass_production_safety"
+    },
+    {
+      "gate": "local_only_blocks_external_post",
+      "description": "10 LOCAL_ONLY commands cannot POST to Google Sheet",
+      "verified": true,
+      "test": "TestSessionLifecycle::test_local_only_blocks_external_post"
+    }
+  ],
+
+  "google_sheet_row_accounting": {
+    "prior_sprint_human_controlled_test_row": "1 row (verified correct in Google Sheet)",
+    "this_sprint_test_rows": 0,
+    "this_sprint_production_rows": 0,
+    "total_new_rows_this_sprint": 0,
+    "new_row_during_verification_challenge": 0
+  },
+
+  "plan_acceptance_gate_test_post": {
+    "gate": "Test-Post Gate",
+    "entry_criteria": "TC-01 approved, TC-11 done",
+    "checks": "Real POST with job_type=test",
+    "evidence": "agent-metrics-test-post-result.json — HTTP 200, row in sheet",
+    "pass_criteria": "Local evidence matches sheet row, job_type=test",
+    "status": "PASS (completed in prior sprint)"
+  },
+
+  "plan_acceptance_gate_production": {
+    "gate": "Production Gate",
+    "status": "BLOCKED — requires separate human approval (TC-14 not yet approved)",
+    "no_production_rows": true
+  },
+
+  "overall_verdict": "PASS — exactly 1 test row exists from approved TC-13; 0 production rows; test_only_sprint active; AMD6 and AMD7 satisfied"
+}

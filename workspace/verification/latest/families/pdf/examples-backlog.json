@@ -1,0 +1,61 @@
+{
+  "family": "pdf",
+  "backlog_version": "1.0.0",
+  "last_updated": "2026-05-06",
+  "entries": [
+    {
+      "backlog_id": "pdf-backlog-splitter-001",
+      "family": "pdf",
+      "scenario_id": "pdf-splitter",
+      "example_name": "splitter",
+      "plugin_type": "Aspose.Pdf.LowCode.Splitter",
+      "package_version": "26.4.0",
+      "source_run_id": "pilot-pdf-20260505-214804",
+      "planned": true,
+      "selected": false,
+      "generated": false,
+      "exclusion_stage": "scenario_planning",
+      "failure_stage": null,
+      "failure_type": "blocked_pilot_not_in_scope",
+      "root_cause": "Type 'Splitter' excluded from controlled pilot allowlist [Merger, TextExtractor]. Prior runs showed LLM hallucinating abstract PluginOptions instead of SplitOptions.",
+      "taskcard_id": "followup-pdf-splitter-options-class",
+      "next_recommended_fix": "Add SplitOptions few-shot example to LLM prompt. Ensure prompt constraints specify concrete options class SplitOptions, not abstract PluginOptions. Regenerate and validate.",
+      "evidence_paths": [
+        "workspace/verification/latest/families/pdf/blocked-scenarios.json",
+        "workspace/verification/latest/pdf-options-aware-review.json",
+        "workspace/verification/latest/pdf-fixture-strategy-review.json"
+      ],
+      "status": "open",
+      "priority": "high",
+      "created_at": "2026-05-06",
+      "updated_at": "2026-05-06"
+    },
+    {
+      "backlog_id": "pdf-backlog-optimizer-001",
+      "family": "pdf",
+      "scenario_id": "pdf-optimizer",
+      "example_name": "optimizer",
+      "plugin_type": "Aspose.Pdf.LowCode.Optimizer",
+      "package_version": "26.4.0",
+      "source_run_id": "pilot-pdf-20260505-214804",
+      "planned": true,
+      "selected": false,
+      "generated": false,
+      "exclusion_stage": "scenario_planning",
+      "failure_stage": null,
+      "failure_type": "blocked_pilot_not_in_scope",
+      "root_cause": "Type 'Optimizer' excluded from controlled pilot allowlist [Merger, TextExtractor]. Prior runs showed LLM using abstract PluginOptions instead of OptimizeOptions, plus LLM timeout during repair attempt.",
+      "taskcard_id": "followup-pdf-optimizer-options-class",
+      "next_recommended_fix": "Add OptimizeOptions few-shot example to LLM prompt. Ensure prompt constraints specify concrete options class OptimizeOptions. Increase LLM timeout or retry. Regenerate and validate.",
+      "evidence_paths": [
+        "workspace/verification/latest/families/pdf/blocked-scenarios.json",
+        "workspace/verification/latest/pdf-options-aware-review.json",
+        "workspace/verification/latest/pdf-fixture-strategy-review.json"
+      ],
+      "status": "open",
+      "priority": "high",
+      "created_at": "2026-05-06",
+      "updated_at": "2026-05-06"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "sprint": "Planned Example Completion Gap Analysis and Full-Coverage Generation Design",
+  "date": "2026-05-06",
+  "phase": "Phase 7 — Full-Completion Remediation Architecture",
+
+  "architecture": {
+    "1_planned_scenario_contract": {
+      "description": "Every planned scenario must declare its requirements upfront, before generation.",
+      "fields": {
+        "scenario_id": "Unique identifier",
+        "family": "cells|words|pdf",
+        "target_type": "Full type name",
+        "primary_method": "Method to demonstrate",
+        "required_options_class": "Concrete options class name (from type-role-classification.paired_options)",
+        "required_inputs": "List of input file specifications (count, format, creation_lines)",
+        "required_fixtures": "External fixture files if any",
+        "required_output_validation": "Output format + validation strategy",
+        "known_invalid_patterns": "Patterns the LLM must NOT use (from backlog failures)",
+        "few_shot_required": "Whether a few-shot code example is needed",
+        "few_shot_code": "The few-shot code if required (from fixture harness or prior successful run)",
+        "reviewer_requirement": "none|advisory|blocking",
+        "completion_blocker": "null or description of what blocks this scenario"
+      },
+      "source_of_data": {
+        "required_options_class": "type-role-classification.json → workflow_roots[].paired_options",
+        "required_inputs": "family config yaml → template_hints + per-type overrides",
+        "known_invalid_patterns": "backlog entries → root_cause field",
+        "few_shot_code": "fixture-validation harness or prior successful runs"
+      },
+      "implementation": "New module src/plugin_examples/scenario_planner/scenario_contract.py"
+    },
+
+    "2_scenario_completion_queue": {
+      "description": "Instead of binary pass/exclude, every scenario flows through a state machine.",
+      "states": [
+        "discovered",
+        "classified",
+        "contract_defined",
+        "ready_to_generate",
+        "blocked_missing_fixture",
+        "blocked_missing_options",
+        "blocked_missing_enum",
+        "blocked_missing_validation",
+        "generation_in_progress",
+        "generation_failed",
+        "build_repair_in_progress",
+        "runtime_repair_in_progress",
+        "reviewer_feedback_needed",
+        "validated",
+        "packaged",
+        "pr_published",
+        "merged",
+        "backlogged",
+        "permanently_excluded"
+      ],
+      "transitions": {
+        "discovered → classified": "type-role-classification assigns role",
+        "classified → contract_defined": "scenario_contract.py fills all required fields",
+        "contract_defined → ready_to_generate": "all requirements met (fixture, options, validation)",
+        "contract_defined → blocked_*": "one or more requirements not met",
+        "blocked_* → contract_defined": "blocker resolved (taskcard closed, capability added)",
+        "ready_to_generate → generation_in_progress": "LLM call initiated",
+        "generation_in_progress → validated": "all gates pass",
+        "generation_in_progress → generation_failed": "max repairs exhausted",
+        "generation_failed → backlogged": "failure recorded with root cause",
+        "backlogged → ready_to_generate": "fix applied, next run retries"
+      },
+      "implementation": "Extend example_lifecycle.py with full state machine. Replace blocked-scenarios.json with scenario-completion-queue.json."
+    },
+
+    "3_learning_repair_system": {
+      "description": "Feed prior failure patterns into future prompts and validators.",
+      "components": {
+        "backlog_to_prompt": {
+          "how": "At prompt-build time, read backlog entries for the target type. Inject known_invalid_patterns as negative constraints.",
+          "example": "For pdf-splitter: 'Do NOT use new PluginOptions(). PluginOptions is abstract. Use new SplitOptions() instead.'"
+        },
+        "few_shot_from_success": {
+          "how": "After a successful generation, save the validated Program.cs as a few-shot template for the same type in future runs.",
+          "storage": "workspace/few-shots/{family}/{type}/Program.cs"
+        },
+        "validator_rule_from_failure": {
+          "how": "When a failure pattern is identified (e.g., PluginOptions hallucination), add it to _validate_code() as a blocking issue that triggers targeted repair.",
+          "current_state": "_validate_code() has the PluginOptions check but it is informational only. Change to blocking."
+        },
+        "repair_context_enrichment": {
+          "how": "Include type-role-classification.paired_options and fixture harness code patterns in repair prompts.",
+          "current_state": "Repair prompt only includes compiler error + original code."
+        }
+      },
+      "implementation": "Modify packet_builder.py, code_generator.py, runner.py"
+    },
+
+    "4_backlog_to_taskcard_bridge": {
+      "description": "Backlog entries should automatically create or link to taskcards.",
+      "current_state": "Backlog entries have a taskcard_id field but it is manually populated. No automation.",
+      "proposed": "When a scenario enters 'backlogged' state in the completion queue, auto-generate a taskcard entry in open-taskcard-closure-matrix.json with the root cause, affected scenario, and recommended fix.",
+      "implementation": "Add auto_create_taskcard() to example_lifecycle.py"
+    },
+
+    "5_readiness_rank_upgrade": {
+      "description": "Readiness rank should expose full-completion metrics.",
+      "new_fields": {
+        "full_completion_possible": "bool — all candidate scenarios have a path to completion",
+        "completion_blockers": "list of {scenario_id, blocker_type, taskcard_id}",
+        "excluded_by_scope_count": "int — in allowlist pilot scope",
+        "excluded_by_system_gap_count": "int — missing capability",
+        "next_blocker_to_clear": "the single taskcard that unblocks the most scenarios",
+        "expected_completion_after_fixes": "int — how many scenarios would complete if all open taskcards were closed",
+        "true_completion_rate": "float — merged / candidate_scenarios"
+      },
+      "implementation": "Modify __main__.py compute_generation_readiness()"
+    },
+
+    "6_completion_policy": {
+      "controlled_pilot": {
+        "partial_publishing_allowed": true,
+        "condition": "Every excluded scenario has a backlog entry AND a taskcard",
+        "metric": "backlogged + published = planned"
+      },
+      "full_family_launch": {
+        "partial_publishing_allowed": false,
+        "condition": "All candidate scenarios must be merged OR permanently excluded with documented waiver",
+        "metric": "merged + permanently_excluded = candidate_scenarios"
+      },
+      "monthly_updates": {
+        "regression_protection": true,
+        "condition": "Every previously merged scenario must still build+run from clean clone. api-delta-report flags breaking changes.",
+        "metric": "All prior examples in release-status.json still POST_MERGE_VERIFIED"
+      }
+    }
+  },
+
+  "verdict": "REMEDIATION_ARCHITECTURE_DEFINED"
+}

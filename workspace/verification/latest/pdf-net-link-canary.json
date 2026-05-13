@@ -1,0 +1,35 @@
+{
+  "gate": "GATE_9_PDF_CANARY",
+  "date": "2026-05-04",
+  "canary_status": "PDF_CANARY_URL_POLICY_PASSED_FULL_AUDIT_BLOCKED",
+  "canary_status_correction": "Previous value 'PDF_CANARY_DRY_RUN_PASSED_BLOCKED_BY_REFLECTION_DEDUP' was WRONG — followup-pdf-reflection-dedup is CLOSED; the actual audit blocker is central_repo_reference in pdf.yml",
+  "url_builder_status": "PASS",
+  "url_builder_test": {
+    "product_page_url": "https://products.aspose.net/pdf",
+    "docs_url": "https://docs.aspose.net/pdf",
+    "kb_url": "https://kb.aspose.net/pdf",
+    "api_reference_url": "https://reference.aspose.net/pdf",
+    "blog_url": "https://blog.aspose.net/categories/aspose.pdf-plugin-family/",
+    "temporary_license_url": "https://purchase.aspose.net/temporary-license",
+    "free_support_url": "https://forum.aspose.net/c/pdf/",
+    "contact_url": "https://about.aspose.net/contact/"
+  },
+  "dry_run_render_status": "PASS",
+  "dry_run_readme_bytes": 3734,
+  "dry_run_url_links_correct": true,
+  "dry_run_forbidden_aspose_com_links": [],
+  "dry_run_platform_path_errors": [],
+  "dry_run_kb_link_present": true,
+  "dry_run_contact_link_correct": true,
+  "audit_status": "FAIL_UNRELATED_TO_URL_POLICY",
+  "audit_failure_reason": "Central repo reference found: 'aspose-plugins-examples-dotnet' — PDF config still points to central combined repo; this is a pre-existing PDF config issue blocking followup-pdf-family-repo-target-mapping taskcard (OPEN)",
+  "reflection_dedup_status": "RESOLVED — followup-pdf-reflection-dedup CLOSED. PDF reflection now discovers 101 types, 71 methods.",
+  "current_pdf_blockers": [
+    "followup-pdf-family-repo-target-mapping (OPEN) — pdf.yml uses central repo placeholder",
+    "followup-pdf-role-classification-review (OPEN) — 101 types not classified",
+    "followup-pdf-options-aware-review (OPEN) — 51 options types not reviewed",
+    "followup-pdf-fixture-strategy-review (OPEN) — fixture strategy not validated"
+  ],
+  "url_policy_verdict": "PASS — all 8 PDF aspose.net links are correct; no forbidden aspose.com links; no /net platform suffix",
+  "notes": "The URL builder and renderer produce correct aspose.net links for PDF. The PDF full-audit failure is caused by the PDF config using the central combined repo pattern (unrelated to URL standardization). PDF URL policy passes the canary test. PDF launch remains blocked by 4 open taskcards (not by URL policy)."
+}

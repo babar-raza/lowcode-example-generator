@@ -1,0 +1,106 @@
+{
+  "artifact_type": "pdf-optimizer-fix-final-verification",
+  "sprint": "PDF Optimizer Build-Repair Constraint Injection Fix",
+  "date": "2026-05-07",
+  "phase": "Phase 11 — Final Verification",
+
+  "verification_checks": {
+    "compileall": {
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m compileall src -q",
+      "result": "CLEAN — no output, 0 errors"
+    },
+    "dotnet_build_dllreflector": {
+      "command": "dotnet build tools/DllReflector -c Release --nologo -v q",
+      "result": "Build succeeded. 0 Warning(s). 0 Error(s)."
+    },
+    "pytest_full_suite": {
+      "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit -q --timeout=60",
+      "result": "1003 passed in 22.44s",
+      "prior_count": 996,
+      "new_tests_added": 7,
+      "test_delta": "+7 (TestPdfOptimizerBuildRepairConstraints x5, TestPdfTextExtractorRegressionRules x2)"
+    }
+  },
+
+  "code_changes_summary": {
+    "files_modified": [
+      {
+        "file": "src/plugin_examples/runner.py",
+        "changes": [
+          "Import _validate_code from code_generator in _stage_validation",
+          "_stage_generation: store project['pdf_constraints'] (all REQUIRED/FORBIDDEN constraints) and project['type_short'] after generate_project",
+          "_stage_validation build repair: extract pdf_constraints from proj dict, append as REQUIRED CONSTRAINTS block to repair_prompt",
+          "_stage_validation build repair: call _validate_code(fixed_code, family, type_short) before writing — break on semantic issues without writing"
+        ]
+      },
+      {
+        "file": "src/plugin_examples/generator/code_generator.py",
+        "changes": [
+          "_validate_code: added type_short=''; parameter",
+          "_validate_code: added File.Copy detection (PDF family — FORBIDDEN semantic substitute)",
+          "_validate_code: added Optimizer-specific OptimizeOptions required check",
+          "_validate_code: added Optimizer-specific new Optimizer().Process() required check",
+          "generate_example: compute _type_short from packet.target_type; pass to _validate_code calls",
+          "generate_example repair: add mandatory reference example for TextExtractor type_short"
+        ]
+      },
+      {
+        "file": "src/plugin_examples/generator/packet_builder.py",
+        "changes": [
+          "PDF constraints list: added 'FORBIDDEN: File.Copy() or System.IO.File.Copy()' constraint"
+        ]
+      },
+      {
+        "file": "tests/unit/test_code_quality_sprint.py",
+        "changes": [
+          "TestPdfOptimizerBuildRepairConstraints: 5 new tests (OptimizeOptions injection, exact pattern, File.Copy rejection, Optimizer().Process required, all 4 pilot types)",
+          "TestPdfTextExtractorRegressionRules: 2 new tests (valid code passes, TextAbsorber rejected)"
+        ]
+      }
+    ],
+    "files_created": [
+      "workspace/verification/latest/pdf-optimizer-fix-preflight-review.json",
+      "workspace/verification/latest/pdf-optimizer-root-cause-analysis.json",
+      "workspace/verification/latest/pdf-optimizer-fix-tier5-retry-result.json",
+      "workspace/verification/latest/pdf-optimizer-fix-pr2-package-validation.json",
+      "workspace/verification/latest/pdf-optimizer-fix-final-verification.json"
+    ],
+    "files_updated": [
+      "workspace/verification/latest/open-taskcard-closure-matrix.json (2 CLOSED, 1 new OPEN)",
+      "docs/discovery/open-taskcard-closure-matrix.md (header updated, Closed table updated)"
+    ]
+  },
+
+  "taskcard_matrix_state": {
+    "total": 69,
+    "open": 17,
+    "closed": 52,
+    "closed_this_sprint": [
+      "followup-pdf-optimizer-build-repair-constraint-injection",
+      "followup-pdf-text-extractor-static-validation-regression"
+    ],
+    "new_open_this_sprint": [
+      "followup-pdf-optimizer-llm-rerun"
+    ]
+  },
+
+  "root_cause_resolution": {
+    "original_root_cause": "Build repair path in runner.py dropped PDF constraints — LLM fell back to File.Copy() on attempt 2",
+    "fix_1_constraints_in_proj": "IMPLEMENTED — runner.py _stage_generation stores pdf_constraints and type_short in project dict",
+    "fix_2_build_repair_injection": "IMPLEMENTED — build repair prompt now includes REQUIRED CONSTRAINTS block from pdf_constraints",
+    "fix_3_validate_post_repair": "IMPLEMENTED — _validate_code called on fixed_code before write; semantic failures break loop",
+    "fix_4_file_copy_forbidden": "IMPLEMENTED — packet_builder.py PDF constraints include FORBIDDEN: File.Copy()",
+    "fix_5_semantic_validator": "IMPLEMENTED — _validate_code has type_short param, File.Copy detection, Optimizer-specific rules",
+    "fix_6_textextractor_reference": "IMPLEMENTED — repair prompt for textextractor includes full mandatory reference example"
+  },
+
+  "pending_items": [
+    {
+      "item": "followup-pdf-optimizer-llm-rerun",
+      "reason": "LLM env vars (GPT_OSS_ENDPOINT, GPT_OSS_API_KEY, GPT_OSS_MODEL) not set in current shell. Template mode run completed (4/4 pass). LLM run required to validate OptimizeOptions code is generated correctly with constraint injection in place.",
+      "command": "PYTHONPATH=src EXAMPLE_REVIEWER_PATH=... GPT_OSS_ENDPOINT=... GPT_OSS_API_KEY=... GPT_OSS_MODEL=... .venv/Scripts/python.exe -m plugin_examples run --family pdf --tier 5 --promote-latest"
+    }
+  ],
+
+  "final_verdict": "PDF_OPTIMIZER_FIX_IMPLEMENTATION_VERIFIED_LLM_RERUN_PENDING — All 6 root-cause fixes implemented. 1003/1003 tests pass. Template mode pipeline verified 4/4. LLM rerun required for full semantic validation and PR #3 packaging."
+}

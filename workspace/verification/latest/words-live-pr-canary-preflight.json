@@ -1,0 +1,130 @@
+{
+  "preflight_type": "words_live_pr_canary_preflight",
+  "preflight_date": "2026-05-02",
+  "sprint": "Words Live PR Canary Sprint",
+  "purpose": "Final preflight review before creating the first live Words controlled pilot PR",
+
+  "publisher_implementation": {
+    "real_publisher_path": "src/plugin_examples/publisher/github_pr_publisher.py",
+    "real_publisher_exists": true,
+    "api_flow": "GET ref → GET commit → POST blobs (×N) → POST tree → POST commit → POST ref → POST pulls → POST labels",
+    "stub_removed": true,
+    "stub_was_at": "publisher.py line 185 (result.status = 'published')",
+    "stub_replaced_with": "blocked_real_publisher_not_implemented when package_path=None; calls create_github_pr() when package_path provided"
+  },
+
+  "approval_gate": {
+    "required": true,
+    "approval_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "approval_expected_value": "APPROVE_LIVE_PR",
+    "token_is_not_github_pat": true,
+    "token_not_written_to_logs": true,
+    "token_not_written_to_evidence": true
+  },
+
+  "dry_run_simulation": {
+    "source_file": "workspace/verification/latest/words-live-pr-simulation.json",
+    "simulation_passed": true,
+    "family": "words",
+    "examples_count": 4,
+    "example_names": ["converter", "replacer", "splitter", "watermarker"],
+    "gate_verdict": "PR_DRY_RUN_READY",
+    "approval_gate_passed": true,
+    "live_push_performed": false
+  },
+
+  "target_repo": {
+    "owner": "aspose-words-net",
+    "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+    "branch": "main",
+    "is_words_specific": true,
+    "is_cells_repo": false,
+    "is_central_placeholder": false,
+    "source": "family-publish-readiness.json"
+  },
+
+  "package": {
+    "path": "workspace/pr-dry-run/words-controlled-pilot",
+    "exists": true,
+    "publishable_files_count": 23,
+    "pr_summary_excluded": true,
+    "bin_excluded": true,
+    "obj_excluded": true,
+    "cells_files_present": false,
+    "pdf_files_present": false,
+    "blocked_examples_present": false,
+    "examples": [
+      "examples/words/lowcode/converter",
+      "examples/words/lowcode/replacer",
+      "examples/words/lowcode/splitter",
+      "examples/words/lowcode/watermarker"
+    ],
+    "root_files": [
+      "Directory.Build.props",
+      "Directory.Packages.props",
+      "global.json"
+    ]
+  },
+
+  "permission_probe": {
+    "source_file": "workspace/verification/latest/publish-permission-probe.json",
+    "words_can_read": true,
+    "words_can_push": true,
+    "words_repo_access_ready": true,
+    "words_pr_permission_ready": true,
+    "probe_is_read_only": true
+  },
+
+  "branch_safety": {
+    "branch_format": "plugin-examples/words/{timestamp}",
+    "branch_never_equals_main": true,
+    "enforced_in": "github_pr_publisher.py create_github_pr() — raises PublishingError if branch_name == base_branch",
+    "no_push_to_main": true
+  },
+
+  "pr_body": {
+    "includes_evidence_references": true,
+    "evidence_files_referenced": [
+      "workspace/verification/latest/words-source-of-truth-proof.json",
+      "workspace/verification/latest/validation-results.json",
+      "workspace/verification/latest/example-gate-results.json",
+      "workspace/verification/latest/gate-results.json",
+      "workspace/verification/latest/publish-permission-probe.json"
+    ],
+    "merge_warning_present": true,
+    "merge_warning_text": "DO NOT MERGE without human review of the examples."
+  },
+
+  "github_token": {
+    "present": true,
+    "value_printed": false,
+    "value_in_evidence": false,
+    "passed_via_env": true,
+    "note": "Token presence confirmed. Value never written."
+  },
+
+  "preflight_checks": {
+    "real_publisher_path_exists": "PASS",
+    "fake_published_stub_gone": "PASS",
+    "dry_run_simulation_passed": "PASS",
+    "target_repo_is_words_specific": "PASS",
+    "package_path_exists": "PASS",
+    "no_pdf_or_cells_files": "PASS",
+    "no_blocked_words_examples": "PASS",
+    "approval_gate_required": "PASS",
+    "branch_name_not_main": "PASS",
+    "pr_body_includes_evidence": "PASS",
+    "github_token_present_not_printed": "PASS"
+  },
+
+  "preflight_result": "ALL_CHECKS_PASS",
+  "authorized_action": "Create exactly one live PR for words controlled pilot (4 examples)",
+  "not_authorized": [
+    "Cells live PR",
+    "PDF live PR",
+    "push to main",
+    "merge",
+    "all-family generation",
+    "new example generation"
+  ]
+}

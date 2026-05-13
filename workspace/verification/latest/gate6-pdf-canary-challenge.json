@@ -1,0 +1,39 @@
+{
+  "gate": "GATE_6_PDF_CANARY_CHALLENGE",
+  "date": "2026-05-04",
+  "claimed_status": "PDF_CANARY_URL_POLICY_PASSED_FULL_AUDIT_BLOCKED",
+  "challenge_verdict": "CONFIRMED_CORRECT",
+  "url_builder_test": {
+    "family": "pdf",
+    "product_page_url": "https://products.aspose.net/pdf",
+    "docs_url": "https://docs.aspose.net/pdf",
+    "kb_url": "https://kb.aspose.net/pdf",
+    "api_reference_url": "https://reference.aspose.net/pdf",
+    "blog_url": "https://blog.aspose.net/categories/aspose.pdf-plugin-family/",
+    "temporary_license_url": "https://purchase.aspose.net/temporary-license",
+    "free_support_url": "https://forum.aspose.net/c/pdf/",
+    "contact_url": "https://about.aspose.net/contact/",
+    "covered_by_unit_tests": true,
+    "test_class": "TestAsposeNetLinksBuilder::test_pdf_links_use_aspose_net_not_aspose_com",
+    "verdict": "PASS"
+  },
+  "pdf_yml_state": {
+    "path": "pipeline/configs/families/pdf.yml",
+    "published_plugin_examples_repo_owner": "aspose",
+    "published_plugin_examples_repo_repo": "aspose-plugins-examples-dotnet",
+    "is_central_combined_repo": true,
+    "causes_central_repo_reference_audit_failure": true
+  },
+  "full_audit_status": "FAIL_UNRELATED_TO_URL_POLICY",
+  "full_audit_failure_reason": "central_repo_reference_found — pdf.yml points to 'aspose-plugins-examples-dotnet' central combined repo placeholder",
+  "previous_claimed_blocker": "followup-pdf-reflection-dedup",
+  "previous_claimed_blocker_is_stale": true,
+  "previous_claimed_blocker_reason": "followup-pdf-reflection-dedup is CLOSED in open-taskcard-closure-matrix.json. PDF reflection discovers 101 types, 71 methods. This is no longer a blocker.",
+  "current_pdf_blockers": [
+    "followup-pdf-family-repo-target-mapping (OPEN)",
+    "followup-pdf-role-classification-review (OPEN)",
+    "followup-pdf-options-aware-review (OPEN)",
+    "followup-pdf-fixture-strategy-review (OPEN)"
+  ],
+  "adversarial_challenge_result": "CONFIRMED — PDF canary status PDF_CANARY_URL_POLICY_PASSED_FULL_AUDIT_BLOCKED is correct. URL builder verified via unit tests. Full audit blocked by central repo reference (unrelated to URL policy). Previous 'blocked by reflection dedup' claim was stale and correctly replaced."
+}

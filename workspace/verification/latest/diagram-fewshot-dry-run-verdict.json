@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "DIAGRAM-FEWSHOT-PUBLISH",
+  "phase": "DRY_RUN",
+
+  "run_id": "pilot-diagram-20260511-171233",
+  "pipeline_result": {
+    "stages_executed": 16,
+    "succeeded": 16,
+    "failed": 0,
+    "skipped": 0,
+    "verdict": "PR_DRY_RUN_READY"
+  },
+
+  "scenarios": {
+    "ready": ["DiagramConverter", "PdfConverter"],
+    "blocked": ["LowCodeLoadOptions", "LowCodePdfSaveOptions", "LowCodeSaveOptions"]
+  },
+
+  "generation": {
+    "examples_generated": 2,
+    "examples_built": 2,
+    "examples_runtime_passed": 2,
+    "examples_runtime_failed": 0,
+    "pr_candidates": 2
+  },
+
+  "code_quality": {
+    "diagram_converter_uses_lowcode": true,
+    "pdf_converter_uses_lowcode": true,
+    "no_raw_zip_bytes": true,
+    "programmatic_fixture_via_aspose_diagram": true,
+    "three_section_structure": true
+  },
+
+  "catalog_hash_check": "SKIPPED_GRACEFUL (denominator has null hash)",
+  "fewshot_guidance_active": true,
+  "no_publication": true,
+  "no_metrics_posts": true,
+
+  "gate_5_result": "DRY_RUN_PASS_PROCEED_TO_GENERATION"
+}

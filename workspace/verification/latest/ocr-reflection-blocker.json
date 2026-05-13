@@ -1,0 +1,47 @@
+{
+  "family": "ocr",
+  "package_id": "Aspose.OCR",
+  "package_version": "26.4.0",
+  "package_sha256": "36715da4e1a19eb38091dded55cbb3ae69013a44c56f5c6057dca7357697d72e",
+  "blocker_type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+  "blocker_severity": "HIGH",
+  "discovery_status": "BLOCKED_REFLECTION_FAILED",
+  "verified_at": "2026-05-09",
+  "run_dir": "workspace/runs/discovery-ocr-20260509-113943",
+  "dll_extracted": true,
+  "dll_path": "workspace/runs/discovery-ocr-20260509-113943/extracted/ocr/primary/lib/netstandard2.0/Aspose.OCR.dll",
+  "root_cause": "DllReflector crashed with FileNotFoundException when attempting to load Aspose.OCR.dll. After resolving Aspose.Drawing.Common via extra_packages, a new undeclared internal dependency was discovered: Aspose.AI.LLM Version=25.12.0.0. This is an internal Aspose assembly NOT available on NuGet.org and cannot be downloaded via the extra_packages mechanism.",
+  "root_cause_category": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+  "missing_assembly": "Aspose.AI.LLM",
+  "missing_version": "25.12.0.0",
+  "dllreflector_error": "System.IO.FileNotFoundException: Could not find assembly 'Aspose.AI.LLM, Version=25.12.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56'",
+  "lowcode_namespace_existence": "UNKNOWN \u00e2\u20ac\u201d reflection failed before namespace scan could complete",
+  "max_depth_3_rerun_result": {
+    "rerun_date": "2026-05-09",
+    "result": "blocked_reflection_failed",
+    "conclusion": "max_depth=3 was set in ocr.yml and rerun was executed. Still blocked. Root cause confirmed: resolved-libs population in extractor.py includes only packages from dep_nupkg_paths (directly downloaded), NOT all packages in deps/ directory. Even if Aspose.Drawing.Common is downloaded transitively at depth=3, it is not passed to DllReflector via --deps."
+  },
+  "resolution_options": [
+    {
+      "option": "WAIT_FOR_ASPOSE_TO_PUBLISH",
+      "description": "Wait for Aspose to publish Aspose.AI.LLM on NuGet.org.",
+      "priority": "LOW"
+    },
+    {
+      "option": "EXTRACT_FROM_OFFICIAL_ASPOSE_INSTALLER",
+      "description": "Obtain Aspose.AI.LLM.dll from the official Aspose.OCR installer or release package and add as a local file dependency.",
+      "priority": "MEDIUM"
+    }
+  ],
+  "taskcard": "NEW-24-followup-ocr-reflection-blocker-investigation",
+  "relaunch_allowed": true,
+  "relaunch_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --family ocr --promote-latest",
+  "relaunch_prerequisite": "Aspose.AI.LLM must become available (NuGet or local file) before OCR discovery can complete",
+  "original_blocker": {
+    "assembly": "Aspose.Drawing.Common",
+    "status": "RESOLVED",
+    "resolution": "Added extra_packages: [Aspose.Drawing.Common] to ocr.yml. Aspose.Drawing.Common downloaded successfully.",
+    "resolved_date": "2026-05-09"
+  },
+  "nuget_availability": "NOT_ON_NUGET - api.nuget.org returns BlobNotFound for Aspose.AI.LLM"
+}

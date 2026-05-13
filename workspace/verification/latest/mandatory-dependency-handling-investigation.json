@@ -1,0 +1,109 @@
+{
+  "artifact_id": "mandatory-dependency-handling-investigation",
+  "created": "2026-05-09",
+  "sprint": "Mandatory Dependency Handling Investigation and Fix",
+  "investigation_verdict": "COMPLETED_WITH_PARTIAL_UNBLOCK",
+  "summary": "Investigated and fixed mandatory dependency handling for LowCode reflection and example generation. Implemented two-part fix: (1) all-TFM group collection for packages missing deps in netstandard2.0 nuspec group, (2) extra_packages config support for internal Aspose assemblies not declared in any nuspec group.",
+  "phase_a_preflight": {
+    "status": "COMPLETE",
+    "finding": "Three families were reflection-blocked: ocr (Aspose.Drawing.Common missing), omr (Newtonsoft.Json missing), psd (Newtonsoft.Json missing). Prior diagnosis of extractor.py resolved-libs gap was incorrect."
+  },
+  "phase_b_investigation": {
+    "status": "COMPLETE",
+    "confirmed_root_causes": {
+      "omr": "Newtonsoft.Json NOT declared in any nuspec group for Aspose.OMR 26.1.0. Completely undeclared dependency.",
+      "psd": "Newtonsoft.Json present in net5.0+ nuspec groups but absent from .NETStandard2.0 group. _match_framework_group() selected ns2.0 exclusively.",
+      "ocr": "Aspose.Drawing.Common NOT declared in any nuspec group for Aspose.OCR 26.4.0. Completely undeclared dependency."
+    },
+    "prior_diagnosis_correction": "Prior sprint notes claimed the fix was in extractor.py (resolved-libs population). This was INCORRECT. The actual gap is upstream in resolve_dependencies() which only processes the best-matching TFM group, plus packages that are truly undeclared in any group."
+  },
+  "phase_c_implementation": {
+    "status": "COMPLETE",
+    "files_changed": [
+      "src/plugin_examples/nuget_fetcher/dependency_resolver.py",
+      "src/plugin_examples/family_config/models.py",
+      "src/plugin_examples/family_config/loader.py",
+      "pipeline/schemas/family-config.schema.json",
+      "pipeline/configs/families/ocr.yml",
+      "pipeline/configs/families/omr.yml",
+      "src/plugin_examples/discovery_sweep.py"
+    ],
+    "changes": {
+      "_collect_all_tfm_deps": "New function: collects deps from ALL TFM groups in nuspec (union, deduplicated). Fixes packages that declare runtime deps only in net5.0+ groups.",
+      "include_all_tfm_groups": "New parameter for resolve_dependencies(). When True at depth=1, uses _collect_all_tfm_deps instead of _parse_dependencies. Transitive deps always use normal TFM matching.",
+      "extra_packages": "New field in DependencyResolution model. Allows YAML configs to declare packages that must be downloaded even though they are not in any nuspec group.",
+      "discovery_sweep_changes": "Now passes include_all_tfm_groups=True to resolve_dependencies(). Downloads and includes extra_packages in dep_nupkg_paths before extraction."
+    }
+  },
+  "phase_d_tests": {
+    "status": "COMPLETE",
+    "new_tests": 16,
+    "test_classes": [
+      "TestCollectAllTfmDeps (6 tests)",
+      "TestResolveWithAllTfmGroups (3 tests)",
+      "TestExtraPackagesConfig (5 tests in test_family_config.py)",
+      "plus 2 import additions"
+    ],
+    "total_suite": "1193 tests passing, 0 failures"
+  },
+  "phase_e_reruns": {
+    "status": "COMPLETE",
+    "omr": {
+      "fix_applied": "extra_packages: [Newtonsoft.Json]",
+      "result": "REFLECTION_SUCCEEDED",
+      "namespaces_found": 18,
+      "lowcode_namespace": false,
+      "verdict": "CONFIRMED_NO_LOWCODE",
+      "run_dir": "workspace/runs/discovery-omr-20260509-134735"
+    },
+    "psd": {
+      "fix_applied": "include_all_tfm_groups=True (Newtonsoft.Json now resolved from net5.0+ group)",
+      "result": "STILL_BLOCKED",
+      "new_blocker": "Aspose.JavaAttributes Version=1.0.0.0 - internal Aspose assembly NOT on NuGet",
+      "verdict": "BLOCKED_REQUIRES_INTERNAL_ASSEMBLY"
+    },
+    "ocr": {
+      "fix_applied": "extra_packages: [Aspose.Drawing.Common]",
+      "result": "STILL_BLOCKED",
+      "new_blocker": "Aspose.AI.LLM Version=25.12.0.0 - internal Aspose assembly NOT on NuGet",
+      "verdict": "BLOCKED_REQUIRES_INTERNAL_ASSEMBLY"
+    }
+  },
+  "family_status_changes": [
+    {
+      "family": "omr",
+      "before": "BLOCKED_REFLECTION_FAILED (Newtonsoft.Json missing)",
+      "after": "CONFIRMED_NO_LOWCODE",
+      "yaml_change": "status=disabled, enabled=false"
+    },
+    {
+      "family": "psd",
+      "before": "BLOCKED_REFLECTION_FAILED (Newtonsoft.Json missing from ns2.0 group)",
+      "after": "BLOCKED_REFLECTION_FAILED (Aspose.JavaAttributes missing - internal Aspose assembly)",
+      "yaml_change": "Comment updated; remains discovery_only"
+    },
+    {
+      "family": "ocr",
+      "before": "BLOCKED_REFLECTION_FAILED (Aspose.Drawing.Common missing)",
+      "after": "BLOCKED_REFLECTION_FAILED (Aspose.AI.LLM missing - internal Aspose assembly)",
+      "yaml_change": "extra_packages: [Aspose.Drawing.Common] added; comment updated; remains discovery_only"
+    }
+  ],
+  "dep_type_taxonomy": {
+    "reflection_deps": "DLLs DllReflector needs to load the primary assembly via MetadataLoadContext",
+    "runtime_deps": "DLLs needed for dotnet run execution of generated examples",
+    "fixture_deps": "Test inputs and tooling for example validation",
+    "product_package_deps": "Primary Aspose NuGet package dependency",
+    "manual_extra_deps": "Packages not in any nuspec group; must be declared explicitly via extra_packages"
+  },
+  "governance_compliance": {
+    "no_hacks": true,
+    "fix_is_durable": true,
+    "fix_is_config_driven": true,
+    "no_silent_drop": true,
+    "no_false_no_lowcode": true,
+    "tests_added": true
+  },
+  "confirmed_no_lowcode_registry_updated": true,
+  "total_confirmed_no_lowcode_families": 16
+}

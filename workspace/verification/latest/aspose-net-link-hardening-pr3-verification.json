@@ -1,0 +1,79 @@
+{
+  "gate": "GATE_7_PR3_VERIFICATION",
+  "date": "2026-05-04",
+  "verdict": "BOTH_PRS_VERIFIED_CORRECT_AWAITING_MERGE",
+  "cells": {
+    "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "pr_number": 3,
+    "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3",
+    "state": "OPEN",
+    "base_branch": "main",
+    "head_branch": "plugin-examples/cells/readme/20260504-092305",
+    "files_changed": ["README.md"],
+    "file_count": 1,
+    "no_example_source_files_changed": true,
+    "diff_verified": {
+      "removes_products_aspose_com": true,
+      "removes_docs_aspose_com": true,
+      "removes_reference_aspose_com": true,
+      "removes_blog_aspose_com": true,
+      "removes_forum_aspose_com": true,
+      "removes_purchase_aspose_com": true,
+      "removes_about_aspose_com_contact_us": true,
+      "adds_products_aspose_net": true,
+      "adds_docs_aspose_net": true,
+      "adds_reference_aspose_net": true,
+      "adds_blog_aspose_net_categories": true,
+      "adds_forum_aspose_net": true,
+      "adds_purchase_aspose_net": true,
+      "adds_about_aspose_net_contact": true,
+      "adds_kb_aspose_net": true
+    },
+    "pr_body_issue": "Original body says 'currently has a 40-byte GitHub auto-init stub' — INCORRECT. PR #2 already merged a full README. PR #3 is an aspose.net link-standardization backfill.",
+    "corrective_comment_added": true,
+    "corrective_comment_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/3#issuecomment-4370739471",
+    "head_readme_audits_passed": true,
+    "head_readme_audit_url_fields": {
+      "forbidden_aspose_com_links": [],
+      "platform_path_errors": [],
+      "wrong_blog_links": [],
+      "wrong_contact_links": [],
+      "missing_required_links": []
+    },
+    "main_branch_has_wrong_links": true,
+    "main_branch_wrong_link_note": "PR #2 merged README still has aspose.com links — PR #3 will fix them upon merge"
+  },
+  "words": {
+    "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "pr_number": 3,
+    "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3",
+    "state": "OPEN",
+    "base_branch": "main",
+    "head_branch": "plugin-examples/words/readme/20260504-092317",
+    "files_changed": ["README.md"],
+    "file_count": 1,
+    "no_example_source_files_changed": true,
+    "diff_verified": {
+      "removes_all_aspose_com_product_links": true,
+      "adds_all_aspose_net_correct_links": true,
+      "adds_kb_aspose_net": true,
+      "adds_correct_blog_categories_pattern": true,
+      "adds_correct_contact_about_aspose_net": true
+    },
+    "pr_body_issue": "Same misleading text as Cells — mentions 40-byte stub, does not describe link-standardization purpose",
+    "corrective_comment_added": true,
+    "corrective_comment_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/3#issuecomment-4370740054",
+    "head_readme_audits_passed": true,
+    "head_readme_audit_url_fields": {
+      "forbidden_aspose_com_links": [],
+      "platform_path_errors": [],
+      "wrong_blog_links": [],
+      "wrong_contact_links": [],
+      "missing_required_links": []
+    },
+    "main_branch_has_wrong_links": true,
+    "main_branch_wrong_link_note": "PR #2 merged README still has aspose.com links — PR #3 will fix them upon merge"
+  },
+  "merge_gate": "DO NOT MERGE without human review and APPROVE_MERGE_PR token",
+  "summary": "Both PR #3 verified: single-file change (README.md only), all 7 aspose.com links replaced with aspose.net equivalents, KB link added, audit passes on head commit. Corrective comments added to both PRs clarifying this is an aspose.net link-standardization backfill (not an initial README add)."
+}

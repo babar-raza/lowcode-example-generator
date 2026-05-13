@@ -1,0 +1,70 @@
+{
+  "sprint": "PDF Partial Pilot PR Dry-Run Packaging",
+  "date": "2026-05-05",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot/",
+  "validation_mode": "clean_package_path",
+  "overall_result": "PASS",
+  "examples": [
+    {
+      "scenario_id": "pdf-text-extractor",
+      "path": "examples/pdf/lowcode/text-extractor/",
+      "restore": {
+        "command": "dotnet restore",
+        "result": "PASS",
+        "detail": "Restored pdf-text-extractor.csproj in 1.7s. Aspose.PDF 26.4.0 resolved from central management."
+      },
+      "build": {
+        "command": "dotnet build --no-restore",
+        "result": "PASS",
+        "warnings": 0,
+        "errors": 0,
+        "output": "Build succeeded. 0 Warning(s), 0 Error(s). Time Elapsed 00:00:03.15"
+      },
+      "run": {
+        "command": "dotnet run --no-build",
+        "result": "PASS",
+        "exit_code": 0,
+        "stdout": "Text extraction succeeded. Extracted text saved to: C:\\Users\\prora\\AppData\\Local\\Temp\\output.txt",
+        "stderr": ""
+      },
+      "output_validation": {
+        "must_contain_checks": [
+          {"pattern": "Text extraction succeeded", "found": true, "result": "PASS"}
+        ],
+        "must_not_contain_checks": [
+          {"pattern": "Unhandled exception", "found": false, "result": "PASS"},
+          {"pattern": "System.Exception", "found": false, "result": "PASS"},
+          {"pattern": "Text extraction failed", "found": false, "result": "PASS"}
+        ],
+        "overall": "PASS"
+      },
+      "limitation_verified": "Code prints 'Text extraction succeeded' confirming TextAbsorber extracted text. API used is Aspose.Pdf.Text.TextAbsorber (core), not Aspose.Pdf.LowCode.TextExtractor. NEEDS_LLM_REMEDIATION documented in manifest.",
+      "verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
+  "excluded_examples": [
+    {
+      "scenario_id": "pdf-merger",
+      "verdict": "EXAMPLE_BLOCKED_NO_VALID_LOWCODE_CODE",
+      "reason": "No run produced correct Aspose.Pdf.LowCode.Merger code that compiles."
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "verdict": "EXAMPLE_BLOCKED_BUILD_FAILED",
+      "reason": "PluginOptions hallucination in all runs."
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "verdict": "EXAMPLE_BLOCKED_BUILD_FAILED",
+      "reason": "PluginOptions hallucination in all runs."
+    }
+  ],
+  "build_artifacts_cleaned": true,
+  "forbidden_files_in_package": {
+    "bin": false,
+    "obj": false
+  },
+  "total_validated": 1,
+  "total_excluded": 3,
+  "sprint_verdict": "PDF_PARTIAL_PR_DRY_RUN_PACKAGE_READY"
+}

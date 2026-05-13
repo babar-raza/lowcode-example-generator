@@ -1,0 +1,152 @@
+{
+  "sprint": "TC14-09 Independent Verification and Final Closure",
+  "phase": "Phase 1 — Ledger, Payload, and Source Independent Verification",
+  "timestamp": "2026-05-08T00:00:00Z",
+  "verdict": "PHASE1_ALL_GATES_PASS",
+
+  "ledger_independent_verification": {
+    "source_file": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "total_entries": 2,
+    "entry_1": {
+      "run_id": "test-metrics-integration-1",
+      "job_type": "test",
+      "http_status": 200,
+      "dry_run": false,
+      "payload_hash": "ce28510199e84944",
+      "classification": "TC-13 controlled test row"
+    },
+    "entry_2": {
+      "run_id": "pilot-cells-20260508-112957",
+      "job_type": "examples_generation",
+      "posted_at": "2026-05-08T06:33:50.403761+00:00",
+      "http_status": 200,
+      "dry_run": false,
+      "payload_hash": "1303d6ff644f4e39",
+      "classification": "TC-14 production row"
+    },
+    "production_rows_count": 1,
+    "duplicate_rows_present": false,
+    "ledger_gates": {
+      "L1_exactly_two_entries": true,
+      "L2_exactly_one_production_examples_generation_row": true,
+      "L3_production_row_run_id_matches_post_result": true,
+      "L4_production_row_payload_hash_matches_post_result": true,
+      "L5_production_row_dry_run_is_false": true,
+      "L6_production_row_http_status_200": true,
+      "L7_prior_test_row_untouched": true
+    }
+  },
+
+  "payload_independent_verification": {
+    "source_file": "agent-metrics-tc14-production-post-result.json",
+    "run_id": "pilot-cells-20260508-112957",
+    "field_count": 17,
+    "fields_verified": [
+      "timestamp", "agent_name", "agent_owner", "job_type", "run_id",
+      "status", "product", "platform", "website", "website_section",
+      "item_name", "items_discovered", "items_succeeded", "items_failed",
+      "run_duration_ms", "token_usage", "api_calls_count"
+    ],
+    "payload_gates": {
+      "P1_agent_name_equals_lowcode_example_generator": true,
+      "P2_agent_name_has_no_test_prefix": true,
+      "P3_job_type_equals_examples_generation": true,
+      "P4_run_id_has_no_test_prefix": true,
+      "P5_website_equals_aspose_net": true,
+      "P6_product_equals_aspose_cells": true,
+      "P7_platform_equals_dotnet": true,
+      "P8_status_is_success_or_partial_success": true,
+      "P9_token_usage_is_non_negative_integer": true,
+      "P10_api_calls_count_is_non_negative_integer": true,
+      "P11_items_discovered_integer": true,
+      "P12_items_succeeded_integer": true,
+      "P13_items_failed_is_zero": true,
+      "P14_run_duration_ms_positive_integer": true,
+      "P15_validation_valid_true": true,
+      "P16_validation_errors_empty": true,
+      "P17_payload_hash_non_empty": true
+    },
+    "payload_values": {
+      "agent_name": "lowcode-example-generator",
+      "agent_owner": "Babar Raza",
+      "job_type": "examples_generation",
+      "run_id": "pilot-cells-20260508-112957",
+      "status": "success",
+      "product": "Aspose.Cells",
+      "platform": ".NET",
+      "website": "aspose.net",
+      "website_section": "Examples",
+      "item_name": "Examples",
+      "items_discovered": 22,
+      "items_succeeded": 9,
+      "items_failed": 0,
+      "run_duration_ms": 224658,
+      "token_usage": 11900,
+      "api_calls_count": 9
+    }
+  },
+
+  "source_code_independent_verification": {
+    "config_py": {
+      "is_agent_metrics_production_enabled_present": true,
+      "exact_lowercase_true_match_required": true,
+      "upper_case_True_not_accepted": true,
+      "default_return_value": false,
+      "token_not_read_by_function": true,
+      "endpoint_not_read_by_function": true,
+      "no_network_io": true
+    },
+    "poster_py": {
+      "gate_order_verified": ["dry_run", "test_only_sprint", "duplicate_ledger", "token_check", "POST"],
+      "dry_run_gate_lines": "81-87",
+      "sprint_gate_lines": "89-95",
+      "token_appended_to_url_only_never_in_result": true,
+      "ledger_appended_only_on_success": true,
+      "force_repost_bypasses_duplicate_only_not_dry_run_or_sprint": true
+    },
+    "payload_builder_py": {
+      "field_count": 17,
+      "test_mode_false_removes_all_prefixes": true,
+      "run_duration_ms_int_cast_applied": true,
+      "all_values_from_config_or_params": true,
+      "no_hardcoded_strings": true
+    },
+    "metrics_yml": {
+      "api_endpoint_is_empty": true,
+      "no_naked_url_in_file": true,
+      "env_block_has_metrics_endpoint_key": true,
+      "env_block_has_metrics_token_key": true,
+      "website_equals_aspose_net": true,
+      "enabled_equals_false": true,
+      "dry_run_equals_true": true
+    }
+  },
+
+  "post_result_cross_check": {
+    "ledger_hash_matches_post_result_hash": true,
+    "ledger_run_id_matches_post_result_run_id": true,
+    "ledger_http_status_matches_post_result": true,
+    "ledger_dry_run_false_matches_post_result_posted_true": true,
+    "rollback_run_added_no_new_ledger_entries": true
+  },
+
+  "secret_safety": {
+    "AGENT_METRICS_TOKEN_value_in_any_evidence_file": false,
+    "AGENT_METRICS_ENDPOINT_url_in_any_evidence_file": false,
+    "endpoint_redacted_in_api_contract": true,
+    "endpoint_redacted_in_test_post_result": true,
+    "endpoint_redacted_in_config_normalization_audit": true,
+    "result": "SECRET_CLEAN"
+  },
+
+  "phase1_summary": {
+    "ledger_gates_passed": 7,
+    "payload_gates_passed": 17,
+    "source_code_gates_passed": 14,
+    "cross_check_gates_passed": 5,
+    "total_gates_passed": 43,
+    "total_gates_failed": 0
+  },
+
+  "phase1_verdict": "PHASE1_COMPLETE — all 43 independent verification gates PASS. Proceeding to Phase 2 (human sheet confirmation gate)."
+}

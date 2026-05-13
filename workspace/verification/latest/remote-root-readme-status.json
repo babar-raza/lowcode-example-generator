@@ -1,0 +1,54 @@
+{
+  "audit_type": "remote_root_readme_status",
+  "audit_date": "2026-05-03 12:30 UTC",
+  "method": "gh api repos/{owner}/{repo}/contents/README.md",
+
+  "families": {
+    "cells": {
+      "remote_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "remote_readme_exists": true,
+      "remote_readme_size_bytes": 40,
+      "remote_readme_sha": "04d2b668aed45811a8e41b00e12c469efa70557f",
+      "remote_readme_content": "# Aspose.Cells.LowCode-for-.NET-Examples",
+      "is_pipeline_generated": false,
+      "readme_source": "github_auto_init",
+      "pipeline_readme_size_bytes": 5081,
+      "pipeline_readme_path": "workspace/pr-dry-run/cells-controlled-pilot/README.md",
+      "pipeline_readme_audit_passed": true,
+      "needs_backfill": true,
+      "pr1_merge_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+      "pr1_included_readme": false,
+      "latest_main_commit": "f6e5515c070184e4b08a2cff647220bea1113b08",
+      "examples_in_pipeline_readme": 9,
+      "backfill_action": "create README-only PR to replace 40-byte stub with pipeline-generated README"
+    },
+    "words": {
+      "remote_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "remote_readme_exists": true,
+      "remote_readme_size_bytes": 40,
+      "remote_readme_sha": "ba21da69c5c03691ecdb59b74bcd1eece347e93c",
+      "remote_readme_content": "# Aspose.Words.LowCode-for-.NET-Examples\n",
+      "is_pipeline_generated": false,
+      "readme_source": "github_auto_init",
+      "pipeline_readme_size_bytes": 4337,
+      "pipeline_readme_path": "workspace/pr-dry-run/words-controlled-pilot/README.md",
+      "pipeline_readme_audit_passed": true,
+      "needs_backfill": true,
+      "pr1_merge_sha": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+      "pr1_included_readme": false,
+      "latest_main_commit": "b66fb43023d4d1af7162270ac9d3ef3ef881451f",
+      "examples_in_pipeline_readme": 4,
+      "backfill_action": "create README-only PR to replace 40-byte stub with pipeline-generated README"
+    }
+  },
+
+  "summary": {
+    "total_families_checked": 2,
+    "families_needing_backfill": 2,
+    "families_up_to_date": 0,
+    "root_cause": "PR #1 for both families was created before the README Sprint (Sprint 1). Neither PR package included README.md. GitHub auto-created 40-byte stubs when each repo was initialized."
+  },
+
+  "verdict": "BACKFILL_REQUIRED",
+  "recommended_action": "Implement publish-readme command; run dry-run simulation for both families; with APPROVE_LIVE_PR approval create README-only PRs for cells and words"
+}

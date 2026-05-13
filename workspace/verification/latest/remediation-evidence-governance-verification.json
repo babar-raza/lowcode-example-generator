@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "verification_sprint": "keen-sparking-aho-verification-v1",
+  "phase": 6,
+  "phase_name": "Evidence Integrity and Completeness Verification",
+  "evidence_completeness_gate": {
+    "file_exists": true,
+    "path": "src/plugin_examples/gates/evidence_completeness.py",
+    "line_count": 216,
+    "has_check_completeness_function": true,
+    "has_completion_result_type": true,
+    "mode": "WARNING_NON_BLOCKING — logs warning on missing files, does not halt pipeline",
+    "runner_py_integration": "Not verified in this phase (runner.py not modified per sprint results)",
+    "b008_status": "RESOLVED — evidence_completeness.py exists with check_completeness(family, evidence_dir) function",
+    "tests": "tests/unit/test_evidence_completeness.py — 17 tests passing"
+  },
+  "global_aggregate_allowlist": {
+    "exists_in_evidence_layout": true,
+    "verification": "GLOBAL_AGGREGATE_ALLOWLIST frozenset confirmed present in src/plugin_examples/evidence_layout.py",
+    "allowlist_size": 12,
+    "behavior": "Files in allowlist are safe to write to latest/ root. Family-scoped files outside allowlist trigger debug log (warning mode, not enforcement).",
+    "b003_status": "MITIGATED — allowlist defines safe files; enforcement is logging-only (not hard block)",
+    "remaining_risk": "Files not in allowlist can still be written to latest/ root without error (only logged)"
+  },
+  "release_status_cumulative_pr_count": {
+    "exists": true,
+    "function": "_count_cumulative_prs(family, latest)",
+    "implementation": "Scans {family}*merge-result*.json files in latest/, collects unique merge_commit_sha values, returns count",
+    "b003_partial_resolution": "Cumulative PR count now scannable from evidence files",
+    "tests": "Covered in test_release_status.py suite"
+  },
+  "taskcard_sync_script": {
+    "exists": true,
+    "path": "scripts/sync_taskcards.py",
+    "b015_status": "RESOLVED — sync script exists",
+    "tests": "tests/unit/test_sync_taskcard_docs.py — 7 tests passing"
+  },
+  "backlog_directories": {
+    "cells_backlog": {
+      "exists": true,
+      "path": "workspace/backlog/cells/excluded-scenarios.json",
+      "content": "Excluded Cells scenarios with reasons"
+    },
+    "words_backlog": {
+      "exists": true,
+      "path": "workspace/backlog/words/excluded-scenarios.json",
+      "content": "Excluded Words scenarios with reasons"
+    },
+    "pdf_backlog": {
+      "existed_pre_remediation": true,
+      "path": "workspace/backlog/pdf/ (pre-existing)"
+    }
+  },
+  "family_scoped_evidence": {
+    "cells_family_dir": "workspace/verification/latest/families/cells/ — EXISTS",
+    "words_family_dir": "workspace/verification/latest/families/words/ — EXISTS",
+    "pdf_family_dir": "workspace/verification/latest/families/pdf/ — EXISTS",
+    "family_scoped_evidence_files_count": 21,
+    "note": "FAMILY_SCOPED_EVIDENCE_FILES = 21 (source shows 21, audit doc said 22 — minor discrepancy noted in R1)"
+  },
+  "evidence_integrity_score": {
+    "original_audit_score": "77/100",
+    "improvements_made": [
+      "GLOBAL_AGGREGATE_ALLOWLIST added (reduces overwrite risk)",
+      "Evidence completeness gate added (programmatic check)",
+      "Family-scoped evidence directories fully populated for Cells, Words, PDF"
+    ],
+    "remaining_gap": "latest/ root files not in allowlist still writable without error (warning-only mode)"
+  },
+  "overall_verdict": "SUBSTANTIALLY_IMPROVED — evidence governance baseline established with non-blocking completeness gate and allowlist. Remaining gaps are logging-only, not hard enforcement."
+}

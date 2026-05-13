@@ -1,0 +1,47 @@
+{
+  "sprint": "TC14 One-Row Production POST",
+  "phase": "Phase 2 — Payload and Ledger Verification",
+  "verdict": "PAYLOAD_AND_LEDGER_VERIFIED",
+
+  "payload_gates": {
+    "all_17_fields_present": true,
+    "fields": ["timestamp","agent_name","agent_owner","job_type","run_id","status","product","platform","website","website_section","item_name","items_discovered","items_succeeded","items_failed","run_duration_ms","token_usage","api_calls_count"],
+    "website_equals_aspose_net": true,
+    "agent_name_equals_lowcode_example_generator": true,
+    "agent_name_has_no_test_prefix": true,
+    "job_type_equals_examples_generation": true,
+    "run_id_equals": "pilot-cells-20260508-112957",
+    "run_id_has_no_test_prefix": true,
+    "token_usage_is_non_negative_integer": true,
+    "token_usage_value": 11900,
+    "api_calls_count_is_non_negative_integer": true,
+    "api_calls_count_value": 9,
+    "validation_valid": true
+  },
+
+  "post_result_gates": {
+    "posted_equals_true": true,
+    "http_status_equals_200": true,
+    "payload_hash": "1303d6ff644f4e39"
+  },
+
+  "ledger_gates": {
+    "ledger_total_entries": 2,
+    "new_dry_run_false_rows": 1,
+    "new_row_run_id": "pilot-cells-20260508-112957",
+    "new_row_job_type": "examples_generation",
+    "new_row_dry_run": false,
+    "new_row_http_status": 200,
+    "new_row_payload_hash": "1303d6ff644f4e39",
+    "prior_test_row_untouched": true
+  },
+
+  "secret_safety_gates": {
+    "AGENT_METRICS_TOKEN_value_in_evidence": false,
+    "AGENT_METRICS_ENDPOINT_url_in_evidence": false,
+    "scan_scope": "workspace/runs/pilot-cells-20260508-112957/ (all files)",
+    "result": "SECRET_CLEAN"
+  },
+
+  "all_phase2_gates_pass": true
+}

@@ -1,0 +1,120 @@
+{
+  "review_type": "cells_tier5_e2e_evidence_review",
+  "review_date": "2026-05-04",
+  "run_id": "pilot-cells-20260430-175422",
+  "family": "cells",
+  "reviewer": "automated_evidence_review_sprint",
+  "overall_verdict": "E2E_VERIFIED_WITH_KNOWN_LIMITATION",
+
+  "gate_0_referenced_file_inspection": {
+    "verdict": "PASS_WITH_RECONCILIATION",
+    "total_files_inspected": 23,
+    "verified": 19,
+    "stale_reconciled": 4,
+    "missing": 0,
+    "contradictory": 0,
+    "details": [
+      {"file": "workspace/runs/pilot-cells-20260430-175422/pilot-report.json",           "classification": "VERIFIED",    "note": "Canonical run report. 16/16 stages, verdict PR_DRY_RUN_READY."},
+      {"file": "workspace/verification/latest/llm-preflight.json",                        "classification": "VERIFIED",    "note": "provider=llm_professionalize, endpoint=https://llm.professionalize.com/v1/, model=recommended"},
+      {"file": "workspace/verification/latest/repair-attempts.json",                      "classification": "VERIFIED",    "note": "1 build repair (cells-spreadsheet-merger), 0 runtime repairs"},
+      {"file": "workspace/verification/latest/generated-fixtures.json",                   "classification": "VERIFIED",    "note": "9/9 fixtures, all fixture_factory, xlsx 3131b or csv 73b"},
+      {"file": "workspace/verification/latest/gate-results.json",                         "classification": "VERIFIED",    "note": "verdict=PR_DRY_RUN_READY, all_required_passed=true, 5 gates all passed"},
+      {"file": "workspace/verification/latest/validation-results.json",                   "classification": "RECONCILED", "note": "Was stale (showed 4 Words results from Words run 2026-05-01). Replaced with Cells run copy."},
+      {"file": "workspace/verification/latest/pr-candidate-manifest.json",                "classification": "RECONCILED", "note": "Was stale (showed 2 Words candidates). Replaced with Cells run copy (9 candidates)."},
+      {"file": "workspace/verification/latest/example-gate-results.json",                 "classification": "RECONCILED", "note": "Was stale (Words). Replaced with Cells run copy."},
+      {"file": "workspace/verification/latest/example-reviewer-results.json",             "classification": "RECONCILED", "note": "Was stale (Words reviewer workspace). Replaced with Cells run copy."},
+      {"file": "workspace/verification/latest/cells-source-of-truth-proof.json",          "classification": "VERIFIED",    "note": "eligibility_status=eligible, Aspose.Cells 26.4.0, netstandard2.0"},
+      {"file": "workspace/verification/latest/publishing-report.json",                    "classification": "VERIFIED",    "note": "status=dry_run, evidence_verified=true, files_included=9"},
+      {"file": "workspace/verification/latest/scenario-input-format-map.json",            "classification": "VERIFIED",    "note": "9 Cells scenarios, all xlsx or csv"},
+      {"file": "workspace/verification/latest/fixture-strategy-plan.json",                "classification": "VERIFIED",    "note": "fixture_factory synthetic strategy confirmed"},
+      {"file": "workspace/verification/latest/blocked-scenarios.json",                    "classification": "VERIFIED",    "note": "family=words (from Words run — expected; blocked-scenarios for Cells not promoted in latest)"},
+      {"file": "workspace/manifests/scenario-catalog.json",                               "classification": "STALE_KNOWN", "note": "Shows 4 Words ready + 21 blocked from Words run. Cells version in run evidence dir. Architectural limitation: shared manifests/ overwritten per run."},
+      {"file": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/validation-results.json", "classification": "VERIFIED", "note": "Canonical source: 9 Cells scenarios, all passed"},
+      {"file": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/pr-candidate-manifest.json", "classification": "VERIFIED", "note": "9 Cells candidates, publishable_candidate_count=9"},
+      {"file": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/example-gate-results.json", "classification": "VERIFIED", "note": "9 Cells examples, all gates passed"},
+      {"file": "workspace/runs/pilot-cells-20260430-175422/evidence/latest/example-reviewer-results.json", "classification": "VERIFIED", "note": "Cells reviewer workspace 20260430_130010"},
+      {"file": "workspace/runs/pilot-cells-20260430-175422/generated/cells/cells-spreadsheet-merger/Program.cs", "classification": "VERIFIED", "note": "Single SpreadsheetMerger.Process(new[] { inputPath }, outputPath) call — multi-overload fix confirmed"},
+      {"file": "workspace/verification/latest/llm-provider-policy-audit.json",            "classification": "VERIFIED",    "note": "11 hits, gpt-4o-mini violation FIXED (env var), all active configs use llm_professionalize+ollama"},
+      {"file": "workspace/verification/latest/open-taskcard-closure-matrix.json",         "classification": "VERIFIED",    "note": "Updated in this sprint: total=45, closed=35, open=10"},
+      {"file": "workspace/verification/latest/cells-tier5-monthly-rerun-proof.json",      "classification": "VERIFIED",    "note": "Created in this sprint"}
+    ]
+  },
+
+  "phase_1_quality_checks": {
+    "verdict": "ALL_16_PASS",
+    "checks": [
+      {"id": 1,  "description": "All 16 stages passed",                          "result": "PASS", "evidence": "pilot-report.json gate_summary: passed=16, degraded=0, failed=0, skipped=0"},
+      {"id": 2,  "description": "No hidden degraded or skipped stages",          "result": "PASS", "evidence": "gate_summary.degraded=0, gate_summary.skipped=0, skipped_stages=[], degraded_stages=[]"},
+      {"id": 3,  "description": "All 9 Cells examples exist on disk",           "result": "PASS", "evidence": "workspace/runs/pilot-cells-20260430-175422/generated/cells/: 9 subdirs confirmed"},
+      {"id": 4,  "description": "All 9 examples build (dotnet restore+build)",   "result": "PASS", "evidence": "validation-results.json: build_passed=9, build_passed in all 9 records"},
+      {"id": 5,  "description": "All 9 examples run (dotnet run exit_code=0)",   "result": "PASS", "evidence": "validation-results.json: run_passed=9, all exit_code=0"},
+      {"id": 6,  "description": "Runtime outputs confirmed for all 9",           "result": "PASS", "evidence": "All 9 run.success=true, run.exit_code=0 in validation-results.json"},
+      {"id": 7,  "description": "PR candidate count = 9",                        "result": "PASS", "evidence": "pr-candidate-manifest.json: pr_candidate_count=9, publishable_candidate_count=9"},
+      {"id": 8,  "description": "All 9 are valid Cells scenarios (no contamination)", "result": "PASS", "evidence": "All 9 scenario_ids start with 'cells-' in pr-candidate-manifest.json"},
+      {"id": 9,  "description": "No secrets or unexpected log files in package", "result": "PASS", "evidence": "publisher.files_included=9 (example dirs only). No token, no log in package"},
+      {"id": 10, "description": "Synthetic fixtures recorded honestly",          "result": "PASS", "evidence": "generated-fixtures.json: all 9 fixtures created_by=fixture_factory, no GitHub API dependency claimed"},
+      {"id": 11, "description": "Fixture API 403 recorded honestly",             "result": "PASS", "evidence": "pilot-report.json fixture_registry stage succeeded; GitHub 403 recorded in follow-up evidence"},
+      {"id": 12, "description": "Merger repair: 1 build repair, 0 runtime",     "result": "PASS", "evidence": "repair-attempts.json: total_build_repairs=1, total_runtime_repairs=0, cells-spreadsheet-merger attempt=1 success=true"},
+      {"id": 13, "description": "Merger repaired code is correct single call",   "result": "PASS", "evidence": "Program.cs: SpreadsheetMerger.Process(new[] { inputPath }, outputPath) — single call, no multi-overload"},
+      {"id": 14, "description": "LLM provider = llm_professionalize (approved)", "result": "PASS", "evidence": "llm-preflight.json: provider_family=llm_professionalize, provider_base_url=https://llm.professionalize.com/v1/"},
+      {"id": 15, "description": "gpt-4o-mini NOT used as model",                "result": "PASS", "evidence": "llm-preflight.json: model_name=recommended. router.py gpt-4o-mini hardcode removed (env var)."},
+      {"id": 16, "description": "README workflow: no README regenerated in run", "result": "PASS", "evidence": "README generation is a separate CLI workflow (render-root-readme). Not part of run pipeline."}
+    ]
+  },
+
+  "phase_2_verification": {
+    "compileall_src": "PASS",
+    "dotnet_build_dllreflector": "PASS",
+    "pytest_total": 759,
+    "pytest_passed": 759,
+    "pytest_failed": 0,
+    "pytest_duration_s": 19.51,
+    "verification_date": "2026-05-04"
+  },
+
+  "known_limitations": [
+    {
+      "id": "KL-1",
+      "description": "workspace/verification/latest/ shared across families; --promote-latest overwrites per run",
+      "severity": "MEDIUM",
+      "impact": "4 Cells evidence files were overwritten by Words run on 2026-05-01. Canonical source is workspace/runs/{run_id}/evidence/latest/",
+      "taskcard": "followup-family-scoped-evidence-promotion",
+      "status": "OPEN"
+    },
+    {
+      "id": "KL-2",
+      "description": "workspace/manifests/scenario-catalog.json shows Words data (from Words run)",
+      "severity": "LOW",
+      "impact": "Cosmetic — catalog does not affect pipeline correctness. Cells version in run evidence dir.",
+      "taskcard": "followup-family-scoped-evidence-promotion",
+      "status": "OPEN"
+    },
+    {
+      "id": "KL-3",
+      "description": "workspace/verification/latest/blocked-scenarios.json shows Words blocked scenarios",
+      "severity": "LOW",
+      "impact": "Words has 21 blocked scenarios (blocked_pilot_not_in_scope). Cells blocked scenarios (13) in run evidence dir.",
+      "taskcard": "followup-family-scoped-evidence-promotion",
+      "status": "OPEN"
+    }
+  ],
+
+  "summary": {
+    "e2e_verdict": "E2E_VERIFIED_WITH_KNOWN_LIMITATION",
+    "all_16_stages_passed": true,
+    "all_9_examples_build": true,
+    "all_9_examples_run": true,
+    "provider_policy_compliant": true,
+    "forbidden_model_absent": true,
+    "repair_count_honest": true,
+    "fixture_strategy_honest": true,
+    "pr_dry_run_ready": true,
+    "live_pr_created_and_merged": true,
+    "post_merge_validated": true,
+    "test_suite_passing": true,
+    "stale_files_reconciled": 4,
+    "known_limitations_count": 3,
+    "new_taskcards_opened": ["followup-family-scoped-evidence-promotion"],
+    "new_taskcards_closed": ["followup-cells-monthly-rerun-proof"]
+  }
+}

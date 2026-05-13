@@ -1,0 +1,68 @@
+{
+  "sprint": "PDF Family Repo Target Mapping",
+  "phase": "Phase 3 — Config Update Plan",
+  "date": "2026-05-05",
+  "does_not_enable_generation": true,
+  "plan_id": "pdf-family-repo-config-plan",
+  "changes": [
+    {
+      "id": "CC-1",
+      "file": "pipeline/configs/families/pdf.yml",
+      "section": "github.published_plugin_examples_repo",
+      "change_type": "value_update",
+      "description": "Replace central placeholder repo with family-specific target following the pattern established by cells and words",
+      "current": {
+        "owner": "aspose",
+        "repo": "aspose-plugins-examples-dotnet",
+        "branch": "main"
+      },
+      "new_value": {
+        "owner": "aspose-pdf-net",
+        "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+        "branch": "main"
+      },
+      "status": "APPLYING",
+      "notes": "Org aspose-pdf-net confirmed to exist (HTTP 200). Repo is 404 (not provisioned yet). Config update documents the intended target. repo_access_ready=false until repo is created."
+    }
+  ],
+  "tests_to_add": [
+    {
+      "id": "T-1",
+      "class": "TestPdfPublishingTarget",
+      "file": "tests/unit/test_publishing.py",
+      "tests": [
+        "test_pdf_publish_target_is_family_specific",
+        "test_pdf_publish_target_not_central_placeholder",
+        "test_pdf_family_remains_blocked_as_not_active",
+        "test_pdf_central_repo_allowed_defaults_false"
+      ]
+    },
+    {
+      "id": "T-2",
+      "class": "TestPdfFamilyPublishReadiness",
+      "file": "tests/unit/test_publishing.py",
+      "tests": [
+        "test_pdf_publish_readiness_blocked_family_not_active",
+        "test_pdf_target_owner_matches_family_pattern"
+      ]
+    }
+  ],
+  "effect_of_config_change": {
+    "generation_pipeline": "UNAFFECTED — pdf status remains discovery_only",
+    "publish_readiness": "blocked_reason changes from blocked_missing_family_publish_target (central placeholder) to blocked_family_not_active (discovery_only). Both result in publish_ready=false.",
+    "validate_publish_targets": "pdf will show is_family_specific=true, config_ready=false (because not active), blocked_reason=blocked_family_not_active",
+    "resolve_repo_access": "pdf will be skipped (status != active)",
+    "live_publish": "Still fully blocked"
+  },
+  "new_taskcards": [
+    {
+      "id": "followup-pdf-repo-provisioning",
+      "title": "Create aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples repo and grant token access",
+      "priority": "HIGH",
+      "blocking": "PDF live publishing",
+      "details": "Org aspose-pdf-net exists. Repo must be created (main branch initialized). GITHUB_TOKEN must have write access. Then run resolve-repo-access to confirm.",
+      "acceptance": "resolve-repo-access --families pdf shows repo_access_ready=true, pr_permission_ready=true"
+    }
+  ],
+  "phase3_conclusion": "Config update CC-1 is safe to apply now — it corrects the placeholder to the inferred family-specific target. This does not enable generation or publishing. A new taskcard tracks the repo provisioning step."
+}

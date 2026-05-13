@@ -1,0 +1,174 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "audit_plan_id": "keen-sparking-aho-v2",
+  "repo_root": "c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator",
+  "source_files_inspected": [
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/llm_router/provider_policy.py",
+    "src/plugin_examples/dependencies/assembly_identity.py",
+    "src/plugin_examples/evidence_layout.py",
+    "src/plugin_examples/metrics/session.py",
+    "src/plugin_examples/metrics/poster.py"
+  ],
+  "evidence_files_inspected": [
+    "workspace/verification/latest/production-truth-evidence-integrity-audit.json",
+    "workspace/verification/latest/production-truth-rerun-root-cause-analysis.json",
+    "workspace/verification/latest/production-truth-source-implementation-audit.json",
+    "workspace/verification/latest/production-truth-family-board.json",
+    "workspace/verification/latest/runtime-failure-classifications.json",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "confidence": "HIGH",
+  "findings": {
+    "total_risks": 12,
+    "risks": [
+      {
+        "risk_id": "RR-01",
+        "name": "LLM instability — model change, provider outage, or nondeterminism",
+        "likelihood": "HIGH",
+        "impact": "HIGH",
+        "evidence": "PDF Optimizer has failed every LLM run due to hallucinated namespace (using Aspose.Pdf.LowCode.DataSources). Splitter required 3 consecutive runs before being trusted. LLM nondeterminism is documented in runtime-failure-classifications.json and production-truth-rerun-root-cause-analysis.json.",
+        "mitigation": "1. Scenario contracts (R3) provide expected_symbols check to catch nondeterminism early. 2. FORBIDDEN guards in code_generator.py lines 657-663 filter known hallucinations. 3. 3-attempt retry with exponential backoff in router.py. 4. provider_policy.py blocks unapproved providers (gpt-4o-mini, openai, azure_openai).",
+        "residual_risk": "HIGH",
+        "residual_risk_rationale": "Even with all mitigations, LLM nondeterminism is irreducible. A new Aspose API pattern not seen in few-shot examples will likely hallucinate. Scenario contracts reduce blast radius but cannot prevent LLM failure."
+      },
+      {
+        "risk_id": "RR-02",
+        "name": "Aspose package version drift breaking API assumptions",
+        "likelihood": "MEDIUM",
+        "impact": "HIGH",
+        "evidence": "Entire pipeline is predicated on API catalog derived from a specific NuGet package version (e.g., Aspose.Words 26.5.0, Aspose.Cells 26.4.0 per family-board.json). If Aspose renames or removes a LowCode type between monthly runs, existing contracts and FORBIDDEN lists may become incorrect.",
+        "mitigation": "1. Source-of-truth denominator model (R1) with catalog hash lockfile — run halts if api-catalog.json hash mismatch. 2. DllReflector always re-reflects the installed NuGet package. 3. Scenario contracts (R3) encode current expected_symbols — will fail on renamed API. 4. allowed_types filter in family YMLs limits surface area.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "Hash lockfile prevents silent API drift. However, updating denominator and contracts after an API change requires manual intervention. Between monthly runs, new Aspose packages may introduce breaking changes undetected."
+      },
+      {
+        "risk_id": "RR-03",
+        "name": "Programmatic fixture brittleness — PDF and Words inputs may not match expected API behavior",
+        "likelihood": "MEDIUM",
+        "impact": "MEDIUM",
+        "evidence": "PDF fixtures use Aspose.Pdf.Document() to create programmatic PDFs. TextExtractor fixture creates PDFs with TextFragment for 'Hello World' content. If Aspose.Pdf.Document() API changes, fixtures fail at build time. Words fixtures use Document+DocumentBuilder. Both fixture strategies confirmed working in Phase 3 harness but are tightly coupled to current Aspose API.",
+        "mitigation": "1. Fixture types are explicitly documented in fixture-registry.json (programmatic_pdf_single, programmatic_pdf_known_text, etc.). 2. Fixtures re-generated per run from source (not cached). 3. Scenario contracts will encode expected fixture_type (R3). 4. Fixture failures caught at BUILD stage — early in pipeline before LLM generation.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "Fixture brittleness is inherent to programmatic fixture strategy. No alternative (binary fixture files) avoids version coupling entirely. MEDIUM residual because the coupling is at BUILD stage (fast detection) not at LLM stage."
+      },
+      {
+        "risk_id": "RR-04",
+        "name": "Semantic validator false positives or negatives — output_validator.py may misclassify valid outputs",
+        "likelihood": "LOW",
+        "impact": "MEDIUM",
+        "evidence": "output_validator.py is planned but not yet implemented (PLANNED_ONLY per Phase 1 scope matrix F4). PDF semantic validation is currently heuristic (Contains() in harness test). Words validation checks VML shape in header1.xml. False positives would cause currently-passing examples to fail; false negatives would allow semantically invalid outputs to reach reviewer.",
+        "mitigation": "1. Validator designed as optional pre-reviewer stage (R5 design doc). 2. Initial validator only checks file format (magic bytes, %PDF header) — not semantic content. 3. Validator can be disabled per scenario in scenario contract. 4. Calibrate against all 16 currently-passing examples before enabling.",
+        "residual_risk": "LOW",
+        "residual_risk_rationale": "Format-only validation (file magic bytes) has very low false-positive rate. False negatives remain possible for semantically-wrong-but-valid-format outputs, but those are caught by reviewer."
+      },
+      {
+        "risk_id": "RR-05",
+        "name": "Stale evidence masking real failures — workspace/verification/latest/ overwrite risk",
+        "likelihood": "HIGH",
+        "impact": "HIGH",
+        "evidence": "integrity_score=77/100 from Phase 8 evidence integrity audit. _last_promoted_by.json confirms latest/ root last written by PDF run (pilot-pdf-20260508-155520). 5 runtime-failure-classifications.json shows pdf-splitter failure from OLDER run — Splitter has since passed 3 times. Evidence overwrite is documented and confirmed in Phase 8 checks.",
+        "mitigation": "1. evidence_layout.py FAMILY_SCOPED_EVIDENCE_FILES frozenset (22 files) promoted to families/{family}/ — not overwritten by other families. 2. _last_promoted_by.json warning notice explicitly documents overwrite risk. 3. R1 sprint adds LATEST_ROOT_ALLOWLIST to restrict which files can be written to latest/ root. 4. R7 sprint makes latest/ root contain only a small allowlist of aggregate files.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "Family-scoped evidence (22 files) is protected. Global latest/ root (non-family files) remains at risk until R7 is complete. MEDIUM after LATEST_ROOT_ALLOWLIST implemented."
+      },
+      {
+        "risk_id": "RR-06",
+        "name": "PR target repo structure change — aspose-pdf-net or aspose-cells-net repo changes break PR packaging",
+        "likelihood": "LOW",
+        "impact": "HIGH",
+        "evidence": "github_pr_publisher.py uses a hardcoded 8-step GitHub API flow. If target repo branch name changes, or if repo is renamed, PR creation fails silently or with API error. Family configs specify target_repo in family YML — change requires YML update. PDF target repo: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (confirmed in pdf-merge-result.json).",
+        "mitigation": "1. family YML target_repo field is the single configuration point — easy to update. 2. Post-merge validation catches PR merge failures. 3. PR dry-run mode (--dry-run) allows package validation before live publish. 4. github_pr_publisher.py API calls return structured errors that are logged.",
+        "residual_risk": "LOW",
+        "residual_risk_rationale": "Target repo changes are infrequent and detectable immediately on first PR attempt. Recovery is a YML config update — no code change needed."
+      },
+      {
+        "risk_id": "RR-07",
+        "name": "Metrics sheet pollution — test rows appearing in production Google Sheet",
+        "likelihood": "MEDIUM",
+        "impact": "HIGH",
+        "evidence": "Agent metrics test_only_sprint guard blocks POST when job_type == 'Test' (per session.py EXTERNAL_POST_COMMANDS=frozenset({'run'}) and test_mode logic). However, TC14 production post has only been attempted twice (ledger: 2 entries). test_only_sprint guard is tested (117 agent_metrics tests per Phase 6) but production volume is low.",
+        "mitigation": "1. test_only_sprint guard in session.py blocks test job_type from being counted. 2. dry_run=True default — external POST requires explicit opt-in. 3. EXTERNAL_POST_COMMANDS=frozenset({'run'}) — only 'run' command can trigger external POST. 4. R8 sprint verifies test_only_sprint guard before any production posting expansion.",
+        "residual_risk": "LOW",
+        "residual_risk_rationale": "Multiple independent guards (dry_run default, EXTERNAL_POST_COMMANDS, test_only_sprint). For test row to appear in Sheet, all 3 guards must fail simultaneously. Residual is LOW after R8 staging verification."
+      },
+      {
+        "risk_id": "RR-08",
+        "name": "Overengineering risk — added complexity slowing iteration without proportional value",
+        "likelihood": "MEDIUM",
+        "impact": "MEDIUM",
+        "evidence": "The R1-R9 roadmap proposes 8 architectural layers and 9 sprints. Current pipeline already works for 16 scenarios (9 Cells, 4 Words, 3 PDF). Risk is that adding scenario contracts, output validators, evidence completeness gates, and denominator lockfiles makes the pipeline harder to operate and slower to add new scenarios.",
+        "mitigation": "1. Each sprint has explicit non_goals list to prevent scope creep. 2. Contracts and validators designed as opt-in (can be disabled per scenario). 3. files_forbidden_to_touch per sprint prevents blast radius. 4. R1-R4 are additive only (no existing logic removed). 5. Roadmap explicitly does not expand to new families or new types until denominator model exists.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "MEDIUM residual because the pipeline has 13 stages in runner.py, 22 FAMILY_SCOPED_EVIDENCE_FILES, and 77 taskcards. Adding 8 more architectural concepts increases cognitive load. Some overengineering is likely — periodic simplification reviews needed."
+      },
+      {
+        "risk_id": "RR-09",
+        "name": "Per-family contract maintenance burden — 16 contracts become stale with Aspose API changes",
+        "likelihood": "MEDIUM",
+        "impact": "MEDIUM",
+        "evidence": "Scenario contracts (R3) require expected_symbols and forbidden_symbols per scenario. With 3 families releasing monthly Aspose updates, contracts may need updates 3x/month. Current pace: Aspose.Words 26.5.0 (May), Aspose.Cells 26.4.0 (April), Aspose.Pdf (multiple versions). No automated contract update mechanism proposed.",
+        "mitigation": "1. Contract version field (contract_version) allows tracking staleness. 2. Hash lockfile (R1) halts run on catalog change — alerts operator to update contract. 3. Contract schema is simple (expected_symbols list) — updates are low-effort per scenario. 4. Contract files are in pipeline/contracts/ — committed to repo, version-controlled.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "Maintenance burden is real. 16 contracts × 3 families updating monthly = potential for frequent updates. No automated contract refresh mechanism exists. MEDIUM residual — manual but manageable given current scale."
+      },
+      {
+        "risk_id": "RR-10",
+        "name": "Local-only fixes mischaracterized as platform architecture — single-machine assumptions in path handling",
+        "likelihood": "MEDIUM",
+        "impact": "HIGH",
+        "evidence": "Multiple files use Windows-specific paths (hardcoded in evidence JSONs as C:\\Users\\prora\\...). assembly_identity.py uses PE binary parsing that assumes little-endian byte order. runner.py uses Path() objects (cross-platform) but workspace layout assumes local filesystem. Evidence files contain absolute Windows paths (words-source-of-truth-proof.json). No CI runner confirmed for cross-platform (GitHub Actions Linux runner may behave differently).",
+        "mitigation": "1. runner.py already uses pathlib.Path (cross-platform). 2. R9 CI workflow development will surface cross-platform issues. 3. Absolute paths in evidence files are acceptable (they are per-machine artifacts). 4. assembly_identity.py PE parsing is read-only — different behavior on ARM vs x86 would need investigation.",
+        "residual_risk": "HIGH",
+        "residual_risk_rationale": "CI runners typically use Linux. .NET SDK on Linux handles netstandard2.0 differently. DllReflector (C#) may need platform-specific builds. Until R9 CI workflow runs on a Linux runner, this risk is unmitigated for CI scenarios."
+      },
+      {
+        "risk_id": "RR-11",
+        "name": "LLM timeout retry gap — long LLM calls fail silently after 3 attempts, Optimizer rerun affected",
+        "likelihood": "MEDIUM",
+        "impact": "HIGH",
+        "evidence": "router.py has 3-attempt retry with exponential backoff (confirmed in Phase 3 source audit). However, Optimizer scenario consistently fails after all 3 attempts (wrong_namespace in every rerun). runtime-failure-classifications.json shows pdf-splitter 'Input file not found: input.docx' from older run — a different failure mode but same retry exhaustion pattern. No dead-letter queue or human escalation after 3 attempts.",
+        "mitigation": "1. Existing repair loop in runner.py attempts up to 3 build repairs (separate from LLM retry). 2. Backlog mechanism (R2) records failed scenarios with root_cause for human review. 3. Scenario contract (R3) expected_symbols check catches wrong-namespace failure early (before build attempt). 4. FORBIDDEN guard in _validate_code() halts generation immediately on DataSources — reduces wasted retries.",
+        "residual_risk": "MEDIUM",
+        "residual_risk_rationale": "After 3 retries + 3 repairs, failure is recorded in lifecycle as GENERATION_FAILED and moved to backlog. Human must investigate. No automated escalation beyond backlog recording. MEDIUM because failure is recorded, not silent."
+      },
+      {
+        "risk_id": "RR-12",
+        "name": "DataSources FORBIDDEN guard false-matching future valid patterns",
+        "likelihood": "LOW",
+        "impact": "MEDIUM",
+        "evidence": "code_generator.py lines 657-663 check if 'DataSources' appears in generated code. This is a string match — if Aspose introduces a legitimate namespace containing 'DataSources' in a future package, the guard would block valid code. Current check confirmed working (Phase 3 source audit). Only known false namespace: 'Aspose.Pdf.LowCode.DataSources' (not in current Aspose.Pdf 26.x API).",
+        "mitigation": "1. Guard checks for exact substring 'DataSources' — Aspose namespace convention makes collision unlikely. 2. Scenario contracts (R3) will document the exact forbidden symbols per scenario — making the guard explicit rather than implicit. 3. If Aspose adds legitimate DataSources support, contract can explicitly allow it per scenario. 4. Guard produces GENERATION_FAILED verdict — not silent failure.",
+        "residual_risk": "LOW",
+        "residual_risk_rationale": "False match is detectable (GENERATION_FAILED with reason). Recovery is removing or scoping the guard for the specific scenario. LOW because the Aspose naming convention makes 'DataSources' in LowCode namespace collision unlikely in near term."
+      }
+    ],
+    "risk_summary": {
+      "HIGH_likelihood_HIGH_impact": ["RR-01 (LLM instability)", "RR-05 (stale evidence)"],
+      "MEDIUM_likelihood_HIGH_impact": ["RR-02 (API version drift)", "RR-07 (metrics sheet pollution)", "RR-10 (local-only fixes)", "RR-11 (LLM timeout retry gap)"],
+      "MEDIUM_likelihood_MEDIUM_impact": ["RR-03 (fixture brittleness)", "RR-08 (overengineering)", "RR-09 (contract maintenance)"],
+      "LOW_likelihood_HIGH_impact": ["RR-06 (PR target repo change)"],
+      "LOW_likelihood_MEDIUM_impact": ["RR-04 (validator false positive/negative)", "RR-12 (DataSources guard false match)"],
+      "risks_requiring_immediate_attention": ["RR-01 (active for PDF Optimizer)", "RR-05 (evidence integrity at 77/100 — confirmed stale)"],
+      "risks_mitigated_by_roadmap_sprints": {
+        "R1": ["RR-05 (LATEST_ROOT_ALLOWLIST)", "RR-02 (catalog hash lockfile)"],
+        "R2": ["RR-05 (evidence completeness gate)"],
+        "R3": ["RR-01 (contract expected_symbols)", "RR-09 (contract versioning)", "RR-12 (contract scoped guards)"],
+        "R5": ["RR-04 (output_validator.py)"],
+        "R6": ["RR-01 (Optimizer rerun)", "RR-11 (DataSources guard reduces wasted retries)"],
+        "R8": ["RR-07 (staging post verification)"],
+        "R9": ["RR-10 (CI runner cross-platform)"]
+      }
+    }
+  },
+  "gaps": [
+    "Risk RR-10 (cross-platform) not fully evaluated — .github/workflows/ not inspected in full",
+    "Risk RR-09 (contract maintenance) has no automated mitigation proposed — manual process only",
+    "No risk assessed for secrets exposure in generated C# code (API keys hardcoded by LLM)"
+  ],
+  "contradictions": [],
+  "next_actions": [
+    "Phase 12: Write production-truth-claim-audit.json (21 claims verified)",
+    "Phase 13: Write production-truth-final-verdict.json"
+  ]
+}

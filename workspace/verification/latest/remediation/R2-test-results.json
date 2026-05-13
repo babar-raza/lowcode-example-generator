@@ -1,0 +1,32 @@
+{
+  "sprint": "R2",
+  "run_date": "2026-05-08",
+  "test_suite": "tests/unit/",
+  "total_tests": 1104,
+  "passed": 1104,
+  "failed": 0,
+  "errors": 0,
+  "duration_seconds": 27.22,
+  "new_test_files": [
+    "tests/unit/test_evidence_completeness.py",
+    "tests/unit/test_denominator_model.py"
+  ],
+  "key_tests_passing": [
+    "test_complete_when_all_files_present",
+    "test_incomplete_when_file_missing",
+    "test_error_when_latest_dir_missing",
+    "test_blocking_mode_raises_on_always_expected_missing",
+    "test_warning_mode_does_not_raise_on_missing",
+    "test_global_aggregate_allowlist_is_frozenset",
+    "test_family_scoped_files_do_not_overlap_with_allowlist",
+    "test_expected_evidence_files_matches_family_scoped",
+    "test_total_published_across_families_is_15",
+    "test_denominator_schema_validates_for_cells",
+    "test_denominator_schema_validates_for_words",
+    "test_denominator_schema_validates_for_pdf",
+    "test_sync_taskcard_markdown_counts_match_json",
+    "test_release_status_reads_open_taskcards_from_matrix"
+  ],
+  "gate_result": "PASS",
+  "stop_conditions_triggered": 0
+}

@@ -1,0 +1,74 @@
+{
+  "sprint": "PDF Live PR Post-Creation Review",
+  "date": "2026-05-06",
+  "canonical_run": "pilot-pdf-20260505-214804",
+  "scenarios": [
+    {
+      "scenario_id": "pdf-merger",
+      "planned": true, "selected_by_allowlist": true, "generated": true,
+      "static_validation": "pass", "build": "pass", "runtime": "pass",
+      "output_validation": "pass", "reviewer": "pass", "repair_attempts": 0,
+      "final_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "package_included": true, "pr_included": true,
+      "excluded": false, "exclusion_reason": null,
+      "backlog_entry_exists": false, "taskcard_exists": false,
+      "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-merger",
+      "root_cause_if_failed": null
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "planned": true, "selected_by_allowlist": true, "generated": true,
+      "static_validation": "pass", "build": "pass", "runtime": "pass",
+      "output_validation": "pass", "reviewer": "pass", "repair_attempts": 0,
+      "final_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "package_included": true, "pr_included": true,
+      "excluded": false, "exclusion_reason": null,
+      "backlog_entry_exists": false, "taskcard_exists": false,
+      "evidence_path": "workspace/runs/pilot-pdf-20260505-214804/generated/pdf/pdf-text-extractor",
+      "root_cause_if_failed": null
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "planned": true, "selected_by_allowlist": false, "generated": false,
+      "static_validation": "not_run", "build": "not_run", "runtime": "not_run",
+      "output_validation": "not_run", "reviewer": "not_run", "repair_attempts": 0,
+      "final_status": "blocked_pilot_not_in_scope",
+      "package_included": false, "pr_included": false,
+      "excluded": true, "exclusion_reason": "Not in controlled pilot allowlist [Merger, TextExtractor]",
+      "backlog_entry_exists": false, "taskcard_exists": true,
+      "taskcard_id": "followup-pdf-splitter-options-class",
+      "evidence_path": "blocked-scenarios.json",
+      "root_cause_if_failed": "Prior runs: LLM uses abstract PluginOptions instead of SplitOptions"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "planned": true, "selected_by_allowlist": false, "generated": false,
+      "static_validation": "not_run", "build": "not_run", "runtime": "not_run",
+      "output_validation": "not_run", "reviewer": "not_run", "repair_attempts": 0,
+      "final_status": "blocked_pilot_not_in_scope",
+      "package_included": false, "pr_included": false,
+      "excluded": true, "exclusion_reason": "Not in controlled pilot allowlist [Merger, TextExtractor]",
+      "backlog_entry_exists": false, "taskcard_exists": true,
+      "taskcard_id": "followup-pdf-optimizer-options-class",
+      "evidence_path": "blocked-scenarios.json",
+      "root_cause_if_failed": "Prior runs: LLM uses abstract PluginOptions + timeout"
+    }
+  ],
+  "counts": {
+    "planned_count": 4,
+    "selected_count": 2,
+    "generated_count": 2,
+    "validation_pass_count": 2,
+    "build_pass_count": 2,
+    "runtime_pass_count": 2,
+    "output_validation_pass_count": 2,
+    "reviewer_pass_count": 2,
+    "packaged_count": 2,
+    "pr_included_count": 2,
+    "excluded_count": 2,
+    "dropped_count": 0,
+    "backlogged_count": 0,
+    "taskcard_count": 2
+  },
+  "verdict": "GATE_3_PASS"
+}

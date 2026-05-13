@@ -1,0 +1,47 @@
+{
+  "gate": "GATE_9_CONTROLLED_FIXES",
+  "date": "2026-05-04",
+  "fixes_applied": [
+    {
+      "fix": "PR body text correction — Cells PR #3",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "pr_number": 3,
+      "old_body_summary": "Said 'repository currently has a 40-byte GitHub auto-init stub' — INCORRECT",
+      "new_body_summary": "Clearly describes aspose.net link-standardization backfill purpose with 8-row change table and verification status",
+      "method": "gh api PATCH /repos/.../pulls/3 -f body=...",
+      "result": "state=open, updated_at=2026-05-04T13:30:47Z",
+      "safe": true,
+      "reversible": true
+    },
+    {
+      "fix": "PR body text correction — Words PR #3",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "pr_number": 3,
+      "old_body_summary": "Same misleading 40-byte stub text as Cells",
+      "new_body_summary": "Clearly describes aspose.net link-standardization backfill purpose with 8-row change table",
+      "method": "gh api PATCH /repos/.../pulls/3 -f body=...",
+      "result": "state=open, updated_at=2026-05-04T13:30:55Z",
+      "safe": true,
+      "reversible": true
+    }
+  ],
+  "fixes_deferred_to_human": [
+    {
+      "fix": "Commit staged pipeline implementation files",
+      "reason": "Committing to main is a significant action; user should explicitly approve. Staged files include: aspose_links.py, readme_auditor.py, readme_renderer.py, template, __main__.py, test_aspose_links.py",
+      "recommended_command": "git commit -m 'feat(readme): add aspose.net link standardization — URL builder, auditor checks, 49 new tests'"
+    },
+    {
+      "fix": "Merge PR #3 Cells",
+      "reason": "Requires human review and APPROVE_MERGE_PR token",
+      "command": "PYTHONPATH=src GITHUB_TOKEN=\"$GH_TOKEN\" .venv/Scripts/python.exe -m plugin_examples merge-pr --family cells --pr-number 3 --merge --approval-token APPROVE_MERGE_PR --promote-latest"
+    },
+    {
+      "fix": "Merge PR #3 Words",
+      "reason": "Requires human review and APPROVE_MERGE_PR token",
+      "command": "PYTHONPATH=src GITHUB_TOKEN=\"$GH_TOKEN\" .venv/Scripts/python.exe -m plugin_examples merge-pr --family words --pr-number 3 --merge --approval-token APPROVE_MERGE_PR --promote-latest"
+    }
+  ],
+  "code_changes_made": "NONE — no source code changes. Only PR body text (GitHub metadata) updated.",
+  "tests_still_pass": "NOT RE-RUN (no code changed; 759/759 verified before this gate)"
+}

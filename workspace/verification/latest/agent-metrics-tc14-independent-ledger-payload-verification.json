@@ -1,0 +1,106 @@
+{
+  "sprint": "TC14-09 Independent Verification and Final Closure",
+  "phase": "Phase 1 — Independent Ledger and Payload Verification",
+  "timestamp": "2026-05-08T00:00:00Z",
+  "verdict": "LEDGER_AND_PAYLOAD_INDEPENDENTLY_VERIFIED",
+
+  "ledger_verification": {
+    "source": "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "total_entries": 2,
+    "entry_1": {
+      "run_id": "test-metrics-integration-1",
+      "job_type": "test",
+      "http_status": 200,
+      "dry_run": false,
+      "payload_hash": "ce28510199e84944",
+      "classification": "TC-13 controlled test row — expected, pre-existing"
+    },
+    "entry_2": {
+      "run_id": "pilot-cells-20260508-112957",
+      "job_type": "examples_generation",
+      "posted_at": "2026-05-08T06:33:50.403761+00:00",
+      "http_status": 200,
+      "dry_run": false,
+      "payload_hash": "1303d6ff644f4e39",
+      "classification": "TC-14 production row"
+    },
+    "ledger_gates": {
+      "L1_exactly_two_total_entries": true,
+      "L2_exactly_one_production_examples_generation_row": true,
+      "L3_run_id_is_pilot_cells_20260508_112957": true,
+      "L4_http_status_200": true,
+      "L5_dry_run_false": true,
+      "L6_payload_hash_non_empty": true,
+      "L7_no_duplicate_run_id_entries": true,
+      "L8_prior_test_row_untouched": true
+    }
+  },
+
+  "payload_verification": {
+    "source": "workspace/verification/latest/agent-metrics-tc14-production-post-result.json",
+    "run_id": "pilot-cells-20260508-112957",
+    "all_17_fields_present": true,
+    "fields": [
+      "timestamp", "agent_name", "agent_owner", "job_type", "run_id",
+      "status", "product", "platform", "website", "website_section",
+      "item_name", "items_discovered", "items_succeeded", "items_failed",
+      "run_duration_ms", "token_usage", "api_calls_count"
+    ],
+    "payload_gates": {
+      "P1_agent_name_equals_lowcode_example_generator": true,
+      "P2_agent_name_no_test_prefix": true,
+      "P3_job_type_equals_examples_generation": true,
+      "P4_run_id_equals_pilot_cells_20260508_112957": true,
+      "P5_run_id_no_test_prefix": true,
+      "P6_website_equals_aspose_net": true,
+      "P7_status_equals_success": true,
+      "P8_product_equals_aspose_cells": true,
+      "P9_platform_equals_dotnet": true,
+      "P10_website_section_equals_examples": true,
+      "P11_item_name_equals_examples": true,
+      "P12_item_name_no_test_prefix": true,
+      "P13_items_discovered_non_negative_integer": true,
+      "P14_items_succeeded_equals_9": true,
+      "P15_items_failed_equals_0": true,
+      "P16_token_usage_non_negative_integer": true,
+      "P17_api_calls_count_non_negative_integer": true,
+      "P18_run_duration_ms_positive_integer": true,
+      "P19_validation_valid_true": true,
+      "P20_validation_errors_empty": true
+    },
+    "payload_values": {
+      "agent_name": "lowcode-example-generator",
+      "agent_owner": "Babar Raza",
+      "job_type": "examples_generation",
+      "run_id": "pilot-cells-20260508-112957",
+      "status": "success",
+      "product": "Aspose.Cells",
+      "platform": ".NET",
+      "website": "aspose.net",
+      "website_section": "Examples",
+      "item_name": "Examples",
+      "items_discovered": 22,
+      "items_succeeded": 9,
+      "items_failed": 0,
+      "run_duration_ms": 224658,
+      "token_usage": 11900,
+      "api_calls_count": 9
+    }
+  },
+
+  "cross_verification": {
+    "ledger_hash_matches_post_result_hash": true,
+    "sheet_values_match_payload_values": true,
+    "sheet_confirmed_by_human": true
+  },
+
+  "secret_check": {
+    "AGENT_METRICS_TOKEN_in_evidence": false,
+    "AGENT_METRICS_ENDPOINT_url_in_evidence": false,
+    "result": "SECRET_CLEAN"
+  },
+
+  "total_gates_passed": 28,
+  "total_gates_failed": 0,
+  "phase1_verdict": "ALL_GATES_PASS"
+}

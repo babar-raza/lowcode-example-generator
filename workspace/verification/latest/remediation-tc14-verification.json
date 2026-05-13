@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-05-08T00:00:00Z",
+  "verification_sprint": "keen-sparking-aho-verification-v1",
+  "phase": 9,
+  "phase_name": "TC14 Verification",
+  "files_inspected": [
+    "workspace/verification/agent-metrics-post-ledger.jsonl",
+    "workspace/verification/latest/tc14-production-post-reconciliation.json",
+    "pipeline/configs/metrics.yml",
+    "src/plugin_examples/metrics/poster.py (not modified during remediation)",
+    "src/plugin_examples/metrics/session.py (not modified during remediation)"
+  ],
+  "ledger_verification": {
+    "entry_count": 2,
+    "entry_count_unchanged_during_remediation": true,
+    "entry_1": {
+      "run_id": "test-metrics-integration-1",
+      "job_type": "test",
+      "http_status": 200,
+      "dry_run": false,
+      "classification": "TEST_POST — blocked by production gate (test_production_gate_blocks_test_job_type)"
+    },
+    "entry_2": {
+      "run_id": "pilot-cells-20260508-112957",
+      "job_type": "examples_generation",
+      "http_status": 200,
+      "dry_run": false,
+      "classification": "CONTROLLED_VERIFICATION_POST — deliberate TC14 verification sprint post"
+    },
+    "new_entries_during_r1_to_r9": false,
+    "stop_condition_11_clear": true
+  },
+  "metrics_yml_verification": {
+    "enabled": false,
+    "dry_run": true,
+    "agent_name": "Lowcode Example Generator",
+    "safe_defaults_intact": true,
+    "modified_during_remediation": false,
+    "stop_condition_12_clear": true
+  },
+  "production_gate_verification": {
+    "test_production_gate_blocks_test_job_type": "PASSING (confirmed in 1168-test suite)",
+    "gate_requires_production_enabled_env": true,
+    "no_new_production_posts_during_remediation": true
+  },
+  "agent_name_casing_analysis": {
+    "current_config_agent_name": "Lowcode Example Generator",
+    "ledger_agent_name_field": null,
+    "casing_discrepancy": "NONE_DETECTED — no evidence of old hyphenated 'lowcode-example-generator' in current config",
+    "correction_post_needed": false,
+    "reconciliation_decision": "ACCEPTABLE_AS_HISTORICAL_ARTIFACT"
+  },
+  "reconciliation_document": {
+    "exists": true,
+    "path": "workspace/verification/latest/tc14-production-post-reconciliation.json",
+    "classification_in_document": "CONTROLLED_VERIFICATION_POST",
+    "stop_conditions_in_document": "STOP_CONDITIONS_NOT_TRIGGERED"
+  },
+  "b010_status": "RESOLVED — ledger reconciled, post classified, current defaults verified safe",
+  "overall_verdict": "PASS — TC14 production post correctly classified. Ledger unchanged at 2 entries. metrics.yml safe defaults intact. No new unauthorized posts."
+}

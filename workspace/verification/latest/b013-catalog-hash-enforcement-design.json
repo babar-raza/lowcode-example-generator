@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-05-11T00:00:00Z",
+  "sprint": "B-013-MONTHLY-BUILD",
+  "phase": 1,
+  "phase_name": "B-013 Catalog Hash Enforcement Design",
+  "blocker_id": "B-013",
+  "design_questions": {
+    "Q1_where_to_add_check": {
+      "answer": "Add validate_catalog_hash() function to planner.py. Call it from plan_scenarios() at the top, before building any scenarios. Also callable standalone from runner.py _stage_scenario_planning().",
+      "rationale": "planner.py is the single place where catalog is consumed for scenario building. Hash check at entry point catches drift before any planning work."
+    },
+    "Q2_what_hash_to_compare": {
+      "answer": "Compute SHA-256 of the JSON-serialized catalog dict (json.dumps with sort_keys=True, no indent). Compare against denominator's api_catalog_sha256 field.",
+      "rationale": "Canonical JSON serialization ensures deterministic hash. sort_keys=True prevents key-order changes from triggering false mismatches."
+    },
+    "Q3_where_to_find_denominator": {
+      "answer": "pipeline/configs/denominators/{family}.json — loaded by a new helper function _load_denominator_hash(family, repo_root).",
+      "rationale": "Denominator files already exist for all 6 families with api_catalog_sha256 fields."
+    },
+    "Q4_behavior_on_mismatch": {
+      "answer": "Log WARNING and return a CatalogHashResult with mismatch=True, prior_hash, current_hash. Do NOT raise an exception by default — the pipeline should continue but record the mismatch in evidence. An optional strict=True parameter raises CatalogHashMismatchError.",
+      "rationale": "Non-blocking by default avoids breaking monthly reruns when a new package version changes the catalog. The mismatch is recorded in evidence for governance review. Strict mode available for CI enforcement."
+    },
+    "Q5_new_function_signature": {
+      "answer": "validate_catalog_hash(family: str, catalog: dict, repo_root: Path, strict: bool = False) -> CatalogHashResult",
+      "fields": ["match", "current_hash", "denominator_hash", "denominator_path", "family"]
+    },
+    "Q6_integration_point": {
+      "answer": "Called from plan_scenarios() with new optional repo_root parameter. Also write evidence artifact catalog-hash-validation.json to evidence_dir.",
+      "rationale": "plan_scenarios already takes family and catalog. Adding optional repo_root (default None = skip check) is backward compatible."
+    },
+    "Q7_hash_computation": {
+      "answer": "hashlib.sha256(json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()",
+      "rationale": "Deterministic, reproducible, matches how denominator files were originally computed."
+    },
+    "Q8_what_if_no_denominator": {
+      "answer": "If denominator file doesn't exist, return CatalogHashResult with match=None (indeterminate), log INFO. No failure.",
+      "rationale": "Some families may not have denominator files yet. Graceful degradation."
+    },
+    "Q9_evidence_artifact": {
+      "answer": "Write catalog-hash-validation.json to evidence_dir with: family, current_hash, denominator_hash, match, denominator_path, validated_at.",
+      "integration": "Written by runner.py _stage_scenario_planning() after calling validate_catalog_hash()."
+    },
+    "Q10_backward_compatibility": {
+      "answer": "plan_scenarios() gains optional repo_root parameter (default None). When None, hash check is skipped. All existing callers and tests unaffected.",
+      "rationale": "Zero breaking changes."
+    },
+    "Q11_test_plan": {
+      "answer": "9 tests: hash computation deterministic, match passes, mismatch detected, missing denominator graceful, strict mode raises, plan_scenarios accepts repo_root, evidence artifact written, hash differs on catalog change, unknown family graceful."
+    }
+  },
+  "files_to_modify": [
+    "src/plugin_examples/scenario_planner/planner.py",
+    "src/plugin_examples/runner.py"
+  ],
+  "files_to_create": [
+    "tests/unit/test_catalog_hash_enforcement.py"
+  ],
+  "files_forbidden": [
+    "src/plugin_examples/generator/code_generator.py",
+    "src/plugin_examples/publisher/github_pr_publisher.py",
+    "src/plugin_examples/publisher/github_pr_merger.py"
+  ]
+}

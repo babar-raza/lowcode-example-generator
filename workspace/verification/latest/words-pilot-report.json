@@ -1,0 +1,106 @@
+{
+  "sprint": "Words Controlled Pilot Sprint + Verification Review",
+  "sprint_date": "2026-05-01",
+  "run_dir": "workspace/runs/pilot-words-20260501-144945",
+  "family": "words",
+  "tier": 4,
+  "dry_run": true,
+  "live_publish_attempted": false,
+  "overall_verdict": "PR_DRY_RUN_READY",
+  "summary": {
+    "planned_scenarios": 4,
+    "blocked_scenarios": 21,
+    "generated": 4,
+    "build_passed": 4,
+    "runtime_passed": 4,
+    "runtime_failed": 0,
+    "pr_candidate_count": 4,
+    "blocked_candidate_count": 0
+  },
+  "gate_results": {
+    "gate_scenarios": "PASSED",
+    "gate_generation": "PASSED",
+    "gate_build": "PASSED (4/4)",
+    "gate_run": "PASSED (4/4)",
+    "gate_reviewer": "PASSED"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "words-converter",
+      "type": "Converter",
+      "method": "Convert",
+      "build_pass": true,
+      "runtime_pass": true,
+      "pr_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "failure_stage": null,
+      "failure_class": null
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "type": "Watermarker",
+      "method": "SetText",
+      "build_pass": true,
+      "runtime_pass": true,
+      "pr_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "failure_stage": null,
+      "failure_class": null
+    },
+    {
+      "scenario_id": "words-splitter",
+      "type": "Splitter",
+      "method": "ExtractPages",
+      "build_pass": true,
+      "runtime_pass": true,
+      "pr_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "failure_stage": null,
+      "failure_class": null
+    },
+    {
+      "scenario_id": "words-replacer",
+      "type": "Replacer",
+      "method": "Replace",
+      "build_pass": true,
+      "runtime_pass": true,
+      "pr_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "failure_stage": null,
+      "failure_class": null
+    }
+  ],
+  "fixes_applied": [
+    {
+      "fix_id": "fix-planner-output-format",
+      "description": "Added Words type entries to _INPUT_FORMAT_MAP and _infer_output_format in planner.py. Changed fallback from '.out' to family default (e.g. '.docx' for Words). Converter → '.pdf', all other Words types → '.docx'.",
+      "files_changed": ["src/plugin_examples/scenario_planner/planner.py"]
+    },
+    {
+      "fix_id": "fix-planner-method-dedup",
+      "description": "Deduplicated target_methods in _build_scenario: each unique method name appears once. Previously all overloads were included separately.",
+      "files_changed": ["src/plugin_examples/scenario_planner/planner.py"]
+    },
+    {
+      "fix_id": "fix-packet-builder-primary-method-constraint",
+      "description": "Strengthened prompt constraint from 'Call ONLY ONE overload of each LowCode API' to 'Demonstrate ONLY the single primary API method (the FIRST listed). Do NOT call other methods.' Also added output extension guidance to user prompt footer.",
+      "files_changed": ["src/plugin_examples/generator/packet_builder.py"]
+    }
+  ],
+  "allowed_types_enforcement": {
+    "verdict": "ENFORCED_CORRECTLY",
+    "planned_types": ["Converter", "Watermarker", "Splitter", "Replacer"],
+    "blocked_types_count": 21,
+    "blocked_reason": "blocked_pilot_not_in_scope"
+  },
+  "pr_ready_examples": [
+    "words-converter",
+    "words-watermarker",
+    "words-splitter",
+    "words-replacer"
+  ],
+  "sprint_conclusion": "Words Controlled Pilot Sprint complete. All 4 approved scenarios (Converter, Watermarker, Splitter.ExtractPages, Replacer) reached PR_DRY_RUN_READY. Three prompt/planner fixes were required: output format mapping (.out → .docx/.pdf), method deduplication, and single-primary-method constraint. The allowed_types allowlist correctly blocked 21 out-of-scope scenarios. 528 tests passing.",
+  "generation_policy_after_pilot": {
+    "words_generation_status": "ACTIVE_CONTROLLED_PILOT",
+    "all_pilot_scenarios_ready": true,
+    "immediately_publishable": ["words-converter", "words-watermarker", "words-splitter", "words-replacer"],
+    "still_blocked": ["Comparer", "Merger", "MailMerger", "ReportBuilder", "Processor"],
+    "still_blocked_reason": "Awaiting fixture strategy (Comparer, Merger), semantics clarification (MailMerger, ReportBuilder), options strategy (Processor)"
+  }
+}

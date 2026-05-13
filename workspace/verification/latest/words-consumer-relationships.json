@@ -1,0 +1,150 @@
+{
+  "review_date": "2026-04-30",
+  "sprint": "Words Readiness Review Sprint",
+  "source_catalog_path": "workspace/runs/discovery-words-20260430-212206/catalog/words/api-catalog.json",
+  "namespace": "Aspose.Words.LowCode",
+  "consumer_map": [
+    {
+      "type_name": "MailMergeOptions",
+      "role": "options",
+      "consumers": [
+        {
+          "consumer_type": "MailMerger",
+          "consumer_method": "Execute (multiple overloads)",
+          "parameter_name": "mailMergeOptions",
+          "is_optional": true,
+          "consumer_note": "Optional last parameter in Execute overloads that accept DataRow, DataTable, DataSet"
+        },
+        {
+          "consumer_type": "MailMergerContext",
+          "consumer_method": "MailMergeOptions (property, read-only)",
+          "parameter_name": null,
+          "is_optional": false,
+          "consumer_note": "Property on MailMergerContext — populated via object initializer or reflection"
+        }
+      ],
+      "standalone_consequence": "Cannot be used standalone. Requires MailMerger.Execute() to be useful. new MailMergeOptions() alone produces no output.",
+      "null_safe": true,
+      "generation_blocked": true,
+      "block_reason": "not_standalone — consumer MailMerger.Execute() itself is blocked_unclear_semantics"
+    },
+    {
+      "type_name": "ReportBuilderOptions",
+      "role": "options",
+      "consumers": [
+        {
+          "consumer_type": "ReportBuilder",
+          "consumer_method": "BuildReport (overloads with reportBuilderOptions param)",
+          "parameter_name": "reportBuilderOptions",
+          "is_optional": true,
+          "consumer_note": "Optional parameter in BuildReport overloads"
+        },
+        {
+          "consumer_type": "ReportBuilderContext",
+          "consumer_method": "ReportBuilderOptions (property, read-only)",
+          "parameter_name": null,
+          "is_optional": false,
+          "consumer_note": "Property on ReportBuilderContext"
+        }
+      ],
+      "standalone_consequence": "Cannot be used standalone. Requires ReportBuilder.BuildReport() to be useful.",
+      "null_safe": true,
+      "generation_blocked": true,
+      "block_reason": "not_standalone — consumer ReportBuilder.BuildReport() is blocked_unclear_semantics"
+    },
+    {
+      "type_name": "SplitOptions",
+      "role": "options",
+      "consumers": [
+        {
+          "consumer_type": "Splitter",
+          "consumer_method": "Split(inputFileName, outputFileName, options)",
+          "parameter_name": "options",
+          "is_optional": false,
+          "consumer_note": "REQUIRED parameter — cannot call Split() without SplitOptions"
+        },
+        {
+          "consumer_type": "SplitterContext",
+          "consumer_method": "SplitOptions (property, read-only)",
+          "parameter_name": null,
+          "is_optional": false,
+          "consumer_note": "Property on SplitterContext"
+        }
+      ],
+      "standalone_consequence": "Cannot be used standalone. Splitter.Split() requires SplitOptions.",
+      "null_safe": false,
+      "generation_blocked": true,
+      "block_reason": "not_standalone AND SplitCriteria enum values not in catalog — blocks Splitter.Split() generation"
+    },
+    {
+      "type_name": "MailMergeDataSource",
+      "role": "data_source_adapter",
+      "consumers": [],
+      "consumer_search_result": "NONE — no MailMerger LowCode method accepts MailMergeDataSource as parameter. MailMerger.Execute() accepts fieldNames[]+fieldValues[], DataRow, DataTable, or DataSet directly.",
+      "standalone_consequence": "Cannot be used standalone. No consumer in LowCode API. Creates IMailMergeDataSource for lower-level Aspose.Words API (non-LowCode).",
+      "null_safe": false,
+      "generation_blocked": true,
+      "block_reason": "blocked_adapter_not_standalone — no LowCode consumer"
+    },
+    {
+      "type_name": "SignerContext",
+      "role": "settings_model",
+      "consumers": [],
+      "consumer_search_result": "NONE — no Signer class found in Aspose.Words.LowCode namespace. SignerContext consumer is unknown.",
+      "standalone_consequence": "Cannot be used standalone. No consumer found in LowCode namespace.",
+      "null_safe": false,
+      "generation_blocked": true,
+      "block_reason": "blocked_no_consumer_in_lowcode_namespace"
+    },
+    {
+      "type_name": "MergeFormatMode",
+      "role": "enum",
+      "consumers": [
+        {
+          "consumer_type": "Merger",
+          "consumer_method": "Merge(outputFile, inputFiles[], saveFormat, mergeFormatMode)",
+          "parameter_name": "mergeFormatMode",
+          "is_optional": false,
+          "consumer_note": "Required in 3-param+ Merge overloads. The simplest Merge(outputFile, inputFiles[]) does NOT require MergeFormatMode."
+        },
+        {
+          "consumer_type": "MergerContext",
+          "consumer_method": "MergeFormatMode (property)",
+          "parameter_name": null,
+          "is_optional": false,
+          "consumer_note": "Property on MergerContext"
+        }
+      ],
+      "standalone_consequence": "Not standalone — consumed by Merger. Simplest Merge() overload does not require it.",
+      "null_safe": false,
+      "generation_blocked": false,
+      "block_reason": null,
+      "generation_note": "Merger.Merge(outputFile, inputFiles[]) is the simplest overload — MergeFormatMode not required there."
+    },
+    {
+      "type_name": "SplitCriteria",
+      "role": "enum",
+      "consumers": [
+        {
+          "consumer_type": "SplitOptions",
+          "consumer_method": "SplitCriteria (property)",
+          "parameter_name": null,
+          "is_optional": false,
+          "consumer_note": "Required property on SplitOptions"
+        }
+      ],
+      "standalone_consequence": "Not standalone. Used by SplitOptions which is used by Splitter.Split().",
+      "null_safe": false,
+      "generation_blocked": true,
+      "block_reason": "Enum values not in catalog — cannot enumerate valid values without separate reflection"
+    }
+  ],
+  "summary": {
+    "options_with_consumers": 3,
+    "options_blocked_not_standalone": 3,
+    "adapters_with_no_lowcode_consumer": 1,
+    "contexts_with_no_lowcode_consumer": 1,
+    "enums_requiring_enumeration": 1,
+    "all_options_standalone_allowed": false
+  }
+}

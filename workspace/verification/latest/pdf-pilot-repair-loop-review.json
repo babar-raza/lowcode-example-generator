@@ -1,0 +1,88 @@
+{
+  "sprint": "PDF Controlled Pilot LLM E2E Dry-Run Trial",
+  "date": "2026-05-05",
+  "canonical_run_id": "pilot-pdf-20260505-143724",
+
+  "phase4_fixes_applied": {
+    "type_classifier_py": {
+      "fix1": "Added 'Optimizer' to _WORKFLOW_VERBS regex — was classified as 'utility', now 'operation_facade'",
+      "fix2": "Added special case for 0-method OPERATION_FACADE types with constructors — handles TextExtractor IPlugin inheritance"
+    },
+    "entrypoint_scorer_py": {
+      "fix": "OPERATION_FACADE with constructors but 0 reflected methods is now runnable — fixes TextExtractor exclusion from scenario planning"
+    },
+    "planner_py": {
+      "fix1": "Removed 'merger' and 'splitter' from _INPUT_FORMAT_MAP — these were being given .docx extension (correct for Words, wrong for PDF)",
+      "fix2": "Force programmatic_input strategy for pdf family regardless of _needs_fixture() result — PDF options-based API always needs programmatic input"
+    },
+    "packet_builder_py": {
+      "fix1": "Added FORBIDDEN: new FileSaveTarget() (use FileDataSource)",
+      "fix2": "Added FORBIDDEN: InputPath/OutputPath properties (use AddInput/AddOutput)",
+      "fix3": "Added FORBIDDEN: defining class stubs",
+      "fix4": "Added FORBIDDEN: input.docx",
+      "fix5": "Added FORBIDDEN: new PluginOptions() (abstract base)",
+      "fix6": "Added FORBIDDEN: string array overloads of Process()",
+      "fix7": "Added per-type class name hints (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions) with exact code snippets"
+    },
+    "code_generator_py": {
+      "fix1": "Validator detects 'input.docx' in PDF code",
+      "fix2": "Validator detects InputPath/OutputPath property usage",
+      "fix3": "Validator detects missing AddInput() in non-TextExtractor PDF code",
+      "fix4": "Validator detects 'new PluginOptions()' abstract base usage",
+      "fix5": "Validator detects string array Process() overload",
+      "fix6": "Validator requires TextExtractorOptions when TextExtractor is present"
+    },
+    "runtime_feedback_py": {
+      "fix": "Added pdf_wrong_input_extension pattern (actionable) — classifies 'input.docx' runtime error"
+    }
+  },
+
+  "repair_loop_effectiveness": {
+    "pdf_merger": {
+      "initial_issue": "Creates LowCodeLoadOptions without InputFile",
+      "repair_result": "PASSED — final code uses MergeOptions correctly",
+      "repair_attempts": 2,
+      "outcome": "REPAIRED_OK"
+    },
+    "pdf_optimizer": {
+      "initial_issue": "Missing AddInput() call",
+      "repair_result": "LLM timeout — repair attempt failed with HTTP timeout",
+      "repair_attempts": 0,
+      "outcome": "REPAIR_TIMEOUT"
+    },
+    "pdf_splitter": {
+      "initial_issue": "PDF: uses new PluginOptions() (abstract base)",
+      "repair_result": "Repair also generated PluginOptions or fabricated stubs — still fails build",
+      "repair_attempts": 2,
+      "outcome": "REPAIR_FAILED_SAME_ISSUE"
+    },
+    "pdf_text_extractor": {
+      "initial_issue": "Missing AddInput() (validator did not catch correctly in first attempt)",
+      "repair_result": "PASSED — final code uses TextExtractorOptions correctly",
+      "repair_attempts": 1,
+      "outcome": "REPAIRED_OK"
+    }
+  },
+
+  "remaining_issues": [
+    {
+      "scenario": "pdf-splitter",
+      "root_cause": "LLM's strong prior for generic 'PluginOptions' class overrides our 'SplitOptions' constraint",
+      "evidence": "Across 3 independent runs, LLM always generates PluginOptions for Splitter",
+      "recommended_fix": "Few-shot example injection or template override for Splitter type"
+    },
+    {
+      "scenario": "pdf-optimizer",
+      "root_cause": "LLM generates wrong class name (OptimizerLoadOptions or PluginOptions); also hits timeout during repair",
+      "evidence": "Run 2 had OptimizerLoadOptions; Run 4 had PluginOptions; repair timeout in run 3",
+      "recommended_fix": "Longer repair timeout; few-shot example; or template fallback"
+    }
+  ],
+
+  "test_suite_status": {
+    "before_sprint": 813,
+    "after_sprint": 840,
+    "new_tests": 27,
+    "all_pass": true
+  }
+}

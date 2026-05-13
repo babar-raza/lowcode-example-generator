@@ -1,0 +1,117 @@
+{
+  "title": "Agent Metrics Plan Execution Challenge — Phase 12: Documentation and Runbook Audit",
+  "phase": "PHASE_12",
+  "timestamp": "2026-05-07T00:00:00Z",
+  "plan_reference": "TC-12, Section 17 (Documentation and Runbook Plan)",
+  "objective": "Verify runbook exists with all 11 plan-required sections; correct aspose.net reference; stable agent_name",
+
+  "runbook_file": {
+    "path": "docs/publishing/agent-metrics-runbook.md",
+    "exists": true,
+    "plan_requirement": "TC-12 — agent-metrics-runbook.md must exist with correct content"
+  },
+
+  "required_sections_check": [
+    {
+      "section": 1,
+      "title": "Overview — What metrics are collected and why",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 2,
+      "title": "Target website — aspose.net (the .NET Aspose domain)",
+      "present": true,
+      "references_aspose_net": true,
+      "references_aspose_com": false,
+      "note": "Correctly identifies this pipeline targets aspose.net (.NET domain)",
+      "verdict": "PASS"
+    },
+    {
+      "section": 3,
+      "title": "Config file reference — pipeline/configs/metrics.yml field descriptions",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 4,
+      "title": "Environment variables — AGENT_METRICS_TOKEN, AGENT_METRICS_ENABLED, AGENT_METRICS_DRY_RUN, AGENT_METRICS_STRICT",
+      "present": true,
+      "all_4_vars_documented": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 5,
+      "title": "Dry-run procedure — How to test metrics locally without POSTing",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 6,
+      "title": "Test-post procedure — How to send a job_type=test row",
+      "present": true,
+      "documents_test_prefix": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 7,
+      "title": "Production enablement — Steps to enable real metrics",
+      "present": true,
+      "documents_blocked_status": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 8,
+      "title": "Troubleshooting — Common issues and fixes",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 9,
+      "title": "Evidence file reference — What each file contains",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 10,
+      "title": "Duplicate ledger recovery — How to handle stuck ledger",
+      "present": true,
+      "verdict": "PASS"
+    },
+    {
+      "section": 11,
+      "title": "No-secrets policy — What is and isn't logged",
+      "present": true,
+      "verdict": "PASS"
+    }
+  ],
+
+  "key_correctness_checks": {
+    "references_aspose_net_not_aspose_com": true,
+    "agent_name_stable_not_template": true,
+    "agent_name_documented": "lowcode-example-generator",
+    "agent_name_test_prefix_documented": "test-",
+    "test_only_sprint_documented": true,
+    "production_enablement_gated": true,
+    "no_secrets_policy_documented": true
+  },
+
+  "amendment_compliance": {
+    "AMD1_stable_agent_name_in_docs": {
+      "requirement": "Runbook must reference stable agent_name, not template",
+      "status": "PASS"
+    },
+    "AMD2_test_prefix_in_docs": {
+      "requirement": "Runbook must document test- prefix usage",
+      "status": "PASS"
+    }
+  },
+
+  "plan_taskcard_acceptance": {
+    "TC12_acceptance_criteria": "Runbook exists, references aspose.net correctly",
+    "status": "PASS",
+    "all_11_sections_present": true
+  },
+
+  "overall_verdict": "PASS — runbook exists at docs/publishing/agent-metrics-runbook.md with all 11 required sections; aspose.net correct; stable agent_name"
+}

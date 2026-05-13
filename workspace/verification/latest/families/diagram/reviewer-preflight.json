@@ -1,0 +1,13 @@
+{
+  "reviewer_path_configured": false,
+  "reviewer_path_exists": false,
+  "reviewer_python_found": false,
+  "reviewer_cli_responds": false,
+  "reviewer_version": null,
+  "dotnet_sdk_found": true,
+  "dotnet_sdk_version": "9.0.200",
+  "overall_ready": false,
+  "issues": [
+    "EXAMPLE_REVIEWER_PATH not set and no --reviewer-path given"
+  ]
+}

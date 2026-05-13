@@ -1,0 +1,27 @@
+{
+  "artifact_id": "lowcode-all-family-roadmap",
+  "created": "2026-05-09",
+  "sprint": "R0",
+  "supersedes": "docs/plans/full-completion-roadmap.md",
+
+  "phases": [
+    {"id": "R0", "name": "Plan Amendment", "status": "COMPLETE"},
+    {"id": "R1", "name": "YAML Creation for 20 candidate families", "status": "PENDING", "parallel_with": ["R2", "R7", "R8"], "taskcard": "NEW-01"},
+    {"id": "R2", "name": "Email/Slides blocker investigation", "status": "PENDING", "parallel_with": ["R1", "R7", "R8"], "taskcards": ["NEW-02", "NEW-03"]},
+    {"id": "R3", "name": "All-family discovery", "status": "PENDING", "requires": ["R1", "R2"]},
+    {"id": "R4", "name": "Source-of-truth proofs", "status": "PENDING", "requires": ["R3"]},
+    {"id": "R5", "name": "Type-role classification", "status": "PENDING", "requires": ["R4"]},
+    {"id": "R6", "name": "All-family denominators", "status": "PENDING", "requires": ["R5"]},
+    {"id": "R6.5", "name": "Dropped example audit", "status": "PENDING", "requires": ["R6"], "taskcards": ["TASK-NEW-08", "TASK-NEW-09", "TASK-NEW-10"]},
+    {"id": "R7", "name": "Existing family reconciliation", "status": "PENDING", "parallel_with": ["R1", "R2", "R3", "R4", "R5", "R6", "R8"], "taskcards": ["NEW-05", "NEW-06", "NEW-07"]},
+    {"id": "R8", "name": "PDF PR#3/PR#4 publication", "status": "BLOCKED_APPROVE_LIVE_PR_NOT_SET", "parallel_with": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"], "taskcard": "followup-pdf-pr3-review-and-merge"},
+    {"id": "R9", "name": "Words full expansion", "status": "PENDING", "requires": ["R7"]},
+    {"id": "R10", "name": "PDF full expansion", "status": "PENDING", "requires": ["R8", "R5"]},
+    {"id": "R11", "name": "New family generation waves", "status": "PENDING", "requires": ["R6", "R3"]},
+    {"id": "R12", "name": "Backlog relaunch", "status": "PENDING", "requires": ["R11"]},
+    {"id": "R12.5", "name": "Verification-failure healing", "status": "PENDING", "requires": ["R12", "R6.5"]},
+    {"id": "R13", "name": "All-family post-merge verification", "status": "PENDING", "requires": ["R12.5"]},
+    {"id": "R14", "name": "Monthly automation extension", "status": "PENDING", "requires": ["R11"], "taskcard": "NEW-04"},
+    {"id": "R15", "name": "Final all-family completion audit", "status": "PENDING", "requires": ["ALL"]}
+  ]
+}

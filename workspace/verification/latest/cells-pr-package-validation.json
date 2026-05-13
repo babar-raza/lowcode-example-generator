@@ -1,0 +1,110 @@
+{
+  "validation_type": "cells_pr_package_validation",
+  "validation_date": "2026-05-01",
+  "sprint": "Live PR Approval Gate Implementation Review and Agent-Operated PR Readiness Sprint",
+  "source_run_id": "pilot-cells-20260430-175422",
+  "package_path": "workspace/pr-dry-run/cells-controlled-pilot",
+  "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+  "target_branch": "main",
+  "nuget_version": "26.4.0",
+  "target_framework": "net8.0",
+
+  "package_structure": {
+    "directory_build_props": true,
+    "directory_packages_props": true,
+    "global_json": true,
+    "pr_summary_md": true,
+    "examples_root": "examples/cells/lowcode/"
+  },
+
+  "examples": [
+    {
+      "scenario_id": "cells-html-converter",
+      "package_subdir": "html-converter",
+      "files_present": ["Program.cs", "cells-html-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "package_subdir": "image-converter",
+      "files_present": ["Program.cs", "cells-image-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "package_subdir": "json-converter",
+      "files_present": ["Program.cs", "cells-json-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "package_subdir": "pdf-converter",
+      "files_present": ["Program.cs", "cells-pdf-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "package_subdir": "spreadsheet-converter",
+      "files_present": ["Program.cs", "cells-spreadsheet-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "package_subdir": "spreadsheet-locker",
+      "files_present": ["Program.cs", "cells-spreadsheet-locker.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "package_subdir": "spreadsheet-merger",
+      "files_present": ["Program.cs", "cells-spreadsheet-merger.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "package_subdir": "spreadsheet-splitter",
+      "files_present": ["Program.cs", "cells-spreadsheet-splitter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "package_subdir": "text-converter",
+      "files_present": ["Program.cs", "cells-text-converter.csproj", "README.md", "example.manifest.json", "expected-output.json", "input.xlsx"],
+      "source_build_verdict": "PASS",
+      "source_run_verdict": "PASS",
+      "source_reviewer_verdict": "PASS"
+    }
+  ],
+
+  "summary": {
+    "total_examples": 9,
+    "all_files_present": true,
+    "all_build_pass": true,
+    "all_run_pass": true,
+    "all_reviewer_pass": true,
+    "package_valid": true,
+    "pr_dry_run_ready": true
+  },
+
+  "source_evidence": {
+    "pilot_report": "workspace/runs/pilot-cells-20260430-175422/pilot-report.json",
+    "gate_results": "workspace/verification/latest/gate-results.json",
+    "source_of_truth_proof": "workspace/verification/latest/cells-source-of-truth-proof.json"
+  }
+}

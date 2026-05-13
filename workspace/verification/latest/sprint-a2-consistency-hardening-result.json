@@ -1,0 +1,100 @@
+{
+  "result_type": "sprint_a2_consistency_hardening_result",
+  "sprint": "Sprint A2 — Consistency Hardening",
+  "sprint_date": "2026-05-04",
+  "verdict": "SPRINT_A2_CONSISTENCY_HARDENING_COMPLETE",
+
+  "phases_completed": {
+    "phase_0_preflight": {
+      "status": "COMPLETE",
+      "finding": "No concurrent work detected. Sprint A1 confirmed complete. All target files assessed.",
+      "evidence": "workspace/verification/latest/sprint-a2-preflight-review.json"
+    },
+    "phase_1_bearer_auth": {
+      "status": "COMPLETE",
+      "change": "src/plugin_examples/publisher/repo_access_resolver.py line 42: 'token {token}' → 'Bearer {token}'",
+      "tests_added": 3,
+      "test_file": "tests/unit/test_publishing.py (class TestRepoAccessResolverAuthHeader)"
+    },
+    "phase_2_dynamic_taskcards": {
+      "status": "COMPLETE",
+      "change": "src/plugin_examples/publisher/release_status.py: removed _OPEN_TASKCARDS_BY_FAMILY hardcoded dict; added _load_open_taskcards_from_matrix() reading JSON matrix dynamically",
+      "fix_applied": "errors='replace' for non-UTF-8 bytes in matrix file",
+      "tests_added": 3,
+      "test_file": "tests/unit/test_release_status.py (3 new tests in TestReleaseStatusModule)"
+    },
+    "phase_3_sync_taskcard_docs": {
+      "status": "COMPLETE",
+      "change": "Added 'sync-taskcard-docs' CLI subcommand to __main__.py. Reads open-taskcard-closure-matrix.json, generates docs/discovery/open-taskcard-closure-matrix.md with GENERATED marker, counts, and taskcard tables.",
+      "tests_added": 7,
+      "test_file": "tests/unit/test_sync_taskcard_docs.py (TestSyncTaskcardDocs)"
+    },
+    "phase_4_runbook_ci_docs": {
+      "status": "COMPLETE",
+      "changes": [
+        "workspace/verification/latest/monthly-maintenance-runbook.json: pdf_blocked_until updated (followup-pdf-reflection-dedup is CLOSED); $GH_TOKEN → $GITHUB_TOKEN; step 1 uses discover-lowcode instead of non-existent check command",
+        "docs/ci/environment-variables.md: created; documents GITHUB_TOKEN, approval tokens, LLM vars, EXAMPLE_REVIEWER_PATH, CI secrets guidance"
+      ],
+      "taskcard_closed": "followup-fixture-token-ci",
+      "tests_added": 8,
+      "test_file": "tests/unit/test_ci_runbook_hardening.py (TestMonthlyRunbook, TestCIEnvDocs)"
+    },
+    "phase_5_gap_new_01": {
+      "status": "COMPLETE",
+      "change": "src/plugin_examples/__main__.py discover-lowcode handler: now merges new ranking entries with existing file instead of overwriting. Preserves family entries not in current run. Logs scope (partial/complete).",
+      "impact": "Single-family 'discover-lowcode --families words' no longer destroys cells and pdf entries.",
+      "tests_added": 6,
+      "test_file": "tests/unit/test_discovery_readiness_preservation.py (TestDiscoveryReadinessPreservation)"
+    }
+  },
+
+  "test_counts": {
+    "before_sprint_a2": 681,
+    "added_this_sprint": 27,
+    "after_sprint_a2": 708
+  },
+
+  "files_changed": [
+    "src/plugin_examples/publisher/repo_access_resolver.py",
+    "src/plugin_examples/publisher/release_status.py",
+    "src/plugin_examples/__main__.py",
+    "workspace/verification/latest/monthly-maintenance-runbook.json",
+    "workspace/verification/latest/open-taskcard-closure-matrix.json"
+  ],
+
+  "files_created": [
+    "docs/ci/environment-variables.md",
+    "docs/discovery/open-taskcard-closure-matrix.md",
+    "tests/unit/test_sync_taskcard_docs.py",
+    "tests/unit/test_ci_runbook_hardening.py",
+    "tests/unit/test_discovery_readiness_preservation.py",
+    "workspace/verification/latest/sprint-a2-consistency-hardening-result.json"
+  ],
+
+  "taskcard_matrix_update": {
+    "followup_fixture_token_ci": "CLOSED",
+    "previous_open_count": 11,
+    "new_open_count": 10,
+    "previous_closed_count": 30,
+    "new_closed_count": 31
+  },
+
+  "gap_register_updates": {
+    "GAP-NEW-01": "CLOSED — single-family discover-lowcode now merges with existing ranking file; no manual repopulation needed",
+    "GAP-006": "CLOSED — release_status.py now reads taskcards dynamically from JSON matrix",
+    "GAP-010": "CLOSED — repo_access_resolver.py now uses Bearer format (consistent with github_pr_publisher.py and github_pr_merger.py)",
+    "GAP-011": "CLOSED — sync-taskcard-docs CLI command generates markdown from JSON; no manual drift",
+    "GAP-005_partial": "CLOSED — docs/ci/environment-variables.md created documenting all required env vars"
+  },
+
+  "gates_passed": {
+    "gate_1_no_concurrent_work": true,
+    "gate_2_tests_pass_before_changes": true,
+    "gate_3_sync_markdown_counts_match": true,
+    "gate_4_no_gh_token_in_runbook": true,
+    "gate_5_single_family_preserves_multi_family_data": true,
+    "gate_6_pdf_blocked": true,
+    "gate_7_no_live_prs_created": true,
+    "gate_8_no_examples_generated": true
+  }
+}

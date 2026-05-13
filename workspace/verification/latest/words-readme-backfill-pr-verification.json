@@ -1,0 +1,62 @@
+{
+  "verification_type": "readme_backfill_pr_verification",
+  "verification_date": "2026-05-04 06:10 UTC",
+  "family": "words",
+  "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+
+  "pr_exists": true,
+  "pr_number": 2,
+  "pr_state": "open",
+  "pr_title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples",
+  "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/2",
+  "pr_merged": false,
+  "pr_base_ref": "main",
+  "pr_head_ref": "plugin-examples/words/readme/20260504-060834",
+  "branch_is_main": false,
+
+  "changed_files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 134,
+      "deletions": 1
+    }
+  ],
+  "changed_files_count": 1,
+  "only_readme_changed": true,
+  "example_files_changed": false,
+  "props_files_changed": false,
+  "global_json_changed": false,
+  "pr_summary_md_present": false,
+
+  "readme_content_verification": {
+    "first_line_stub_removed": true,
+    "first_line_old": "# Aspose.Words.LowCode-for-.NET-Examples",
+    "first_line_new": "# Aspose.Words for .NET LowCode Examples",
+    "badges_present": true,
+    "pipeline_generated": true
+  },
+
+  "token_leakage_check": {
+    "token_in_pr_body": false,
+    "token_in_commit_message": false,
+    "token_in_evidence": false
+  },
+
+  "checks": {
+    "pr_exists": "PASS",
+    "pr_open": "PASS",
+    "pr_not_merged": "PASS",
+    "target_repo_correct": "PASS",
+    "branch_not_main": "PASS",
+    "changed_files_exactly_readme": "PASS",
+    "no_example_files_changed": "PASS",
+    "no_props_files_changed": "PASS",
+    "no_global_json_changed": "PASS",
+    "no_token_leakage": "PASS"
+  },
+
+  "all_checks_passed": true,
+  "verdict": "README_BACKFILL_PR_VERIFIED",
+  "ready_for_human_review": true
+}

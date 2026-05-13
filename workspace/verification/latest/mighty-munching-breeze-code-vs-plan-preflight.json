@@ -1,0 +1,70 @@
+{
+  "gate": 0,
+  "gate_name": "preflight",
+  "result_type": "mighty-munching-breeze-code-vs-plan-preflight",
+  "verification_date": "2026-05-04",
+  "plan_id": "mighty-munching-breeze",
+  "plan_path": "C:\\Users\\prora\\.claude\\plans\\mighty-munching-breeze.md",
+  "repo_branch": "main",
+  "repo_head_sha": "b501f67cef9ba3a87b86c00066ba384954c62910",
+  "recent_commits": [
+    "b501f67 feat(options-aware): fix 2 blocked Cells scenarios, achieve 9/9 PR_DRY_RUN_READY",
+    "b3ecbc3 feat(automation): add publisher monthly runner and CI workflows",
+    "aa97adc feat(validation): add local and reviewer validation gates",
+    "4027b34 feat(generation): add LLM routing packets and example generator",
+    "cbe48bd feat(scenarios): add catalog planner and blocked scenario reporting"
+  ],
+  "working_tree_summary": {
+    "staged_files": ["src/plugin_examples/__main__.py", "several publisher/* files (A)"],
+    "modified_unstaged": [
+      "pipeline/configs/families/cells.yml",
+      "pipeline/schemas/family-config.schema.json",
+      "src/plugin_examples/discovery_sweep.py",
+      "src/plugin_examples/runner.py"
+    ],
+    "untracked_notable": [
+      ".claude/",
+      "docs/ci/",
+      "docs/discovery/open-taskcard-closure-matrix.md",
+      "workspace/verification/latest/sprint-a2-consistency-hardening-result.json",
+      "workspace/verification/latest/family-generation-readiness-rank.json",
+      "workspace/verification/latest/repository-consistency-and-reproducibility-audit.json",
+      "workspace/verification/latest/words-fixture-registry-reprobe.json"
+    ],
+    "no_uncommitted_regressions": true
+  },
+  "test_count_at_verification_start": 759,
+  "taskcard_matrix_summary": {
+    "total": 42,
+    "open": 10,
+    "closed": 32,
+    "latest_sprint_in_json": "Unified State Reconciliation and PDF Controlled Pilot Planning Sprint",
+    "latest_sprint_in_markdown": "Aspose .NET Link Standardization Hardening Review",
+    "markdown_vs_json_sprint_discrepancy": "markdown was last regenerated in Aspose .NET Link Standardization sprint; JSON was updated in subsequent Unified State Reconciliation sprint — minor staleness in markdown sprint field only"
+  },
+  "plan_state_at_time_of_writing": {
+    "sprint_claimed_open": "Sprint A1 (HEAL-001 merge README PRs) — PRs open, not merged",
+    "test_count_claimed": 655,
+    "gap_001_state_in_plan": "CRITICAL — PRs exist, pending merge",
+    "gap_005_state_in_plan": "HIGH — CI docs not yet written",
+    "gap_006_state_in_plan": "MEDIUM — hardcoded taskcards in release_status.py",
+    "pdf_001_state_in_plan": "Stream B entry task — DllReflector System.Text.Json conflict",
+    "plan_written_before_execution": true
+  },
+  "actual_state_summary": {
+    "sprints_completed_since_plan": [
+      "Sprint A1 — README PR merge and post-merge verification (HEAL-001, HEAL-007)",
+      "Sprint A2 — Consistency Hardening (HEAL-002, HEAL-003, HEAL-005, HEAL-006)",
+      "Aspose .NET Link Standardization",
+      "PDF Assembly Deduplication (PDF-001 closed)",
+      "Unified State Reconciliation + PDF Controlled Pilot Planning"
+    ],
+    "test_count_actual": 759,
+    "readme_prs_merged": true,
+    "ci_docs_created": true,
+    "bearer_auth_fixed": true,
+    "taskcard_reading_dynamic": true,
+    "pdf_dll_reflector_fixed": true
+  },
+  "preflight_verdict": "PREFLIGHT_PASS — plan pre-dates execution; many items completed; verification proceeds item by item from actual code state"
+}

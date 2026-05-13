@@ -1,6 +1,5 @@
 {
   "family": "email",
-  "generated_at": "2026-05-12T10:38:15+00:00",
   "blocked_count": 2,
   "blocked_scenarios": [
     {
@@ -13,11 +12,8 @@
       "required_fixtures": [],
       "output_plan": "",
       "validation_plan": "",
-      "status": "blocked_provider_callback",
-      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FolderOutputHandler' is not in the controlled pilot allowlist. Allowed: ['Converter']"
     },
     {
       "scenario_id": "email-ioutput-handler",
@@ -29,11 +25,8 @@
       "required_fixtures": [],
       "output_plan": "",
       "validation_plan": "",
-      "status": "blocked_interface_contract",
-      "blocked_reason": "Role 'interface_contract' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'IOutputHandler' is not in the controlled pilot allowlist. Allowed: ['Converter']"
     }
   ]
 }

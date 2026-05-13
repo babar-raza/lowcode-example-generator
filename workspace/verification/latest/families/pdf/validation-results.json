@@ -11,19 +11,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2466.602563858032
+        "duration_ms": 3351.942539215088
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2855.6690216064453
+        "duration_ms": 3618.3762550354004
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 4387.153625488281
+        "duration_ms": 5985.598802566528
       }
     },
     {
@@ -34,19 +34,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2478.1792163848877
+        "duration_ms": 2777.395725250244
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2689.441442489624
+        "duration_ms": 3081.806182861328
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3717.702865600586
+        "duration_ms": 5553.160190582275
       }
     },
     {
@@ -57,19 +57,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2386.2009048461914
+        "duration_ms": 2708.048105239868
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2833.040952682495
+        "duration_ms": 2899.3005752563477
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 5393.411874771118
+        "duration_ms": 6300.724744796753
       }
     },
     {
@@ -80,19 +80,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2467.419385910034
+        "duration_ms": 7473.068475723267
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2657.0987701416016
+        "duration_ms": 2897.3169326782227
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 4791.008234024048
+        "duration_ms": 5457.181692123413
       }
     },
     {
@@ -103,19 +103,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2670.0291633605957
+        "duration_ms": 2802.5059700012207
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2631.1705112457275
+        "duration_ms": 2819.740056991577
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 4750.06365776062
+        "duration_ms": 4982.633113861084
       }
     }
   ]

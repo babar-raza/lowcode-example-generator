@@ -1,6 +1,6 @@
 {
   "probe_type": "publish_permission_probe",
-  "probe_date": "2026-05-13T15:28:16+00:00",
+  "probe_date": "2026-05-13T16:56:13+00:00",
   "sprint": "Live PR Approval Gate and Safe Branch Probe Sprint",
   "token_present": true,
   "dry_run": true,
@@ -8,11 +8,30 @@
   "no_content_pushed": true,
   "families": [
     {
-      "family": "words",
-      "owner": "aspose-words-net",
-      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "family": "email",
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
       "branch": "main",
-      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\words.yml",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\email.yml",
+      "probe_status": "completed",
+      "error_classification": "repo_access_ok",
+      "can_read": true,
+      "can_push": true,
+      "http_status": 200,
+      "visibility": "public",
+      "default_branch": "main",
+      "branch_exists": true,
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "safe_to_publish": false,
+      "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True"
+    },
+    {
+      "family": "slides",
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\slides.yml",
       "probe_status": "completed",
       "error_classification": "repo_access_ok",
       "can_read": true,
@@ -28,11 +47,12 @@
     }
   ],
   "summary": {
-    "total_probed": 1,
-    "permission_ready": 1,
+    "total_probed": 2,
+    "permission_ready": 2,
     "not_ready": 0,
     "permission_ready_families": [
-      "words"
+      "email",
+      "slides"
     ],
     "not_ready_families": [],
     "live_publish_authorized": false,

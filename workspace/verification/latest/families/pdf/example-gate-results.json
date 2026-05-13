@@ -5,7 +5,7 @@
   "examples": [
     {
       "scenario_id": "pdf-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -17,7 +17,7 @@
     },
     {
       "scenario_id": "pdf-optimizer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-optimizer",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -29,7 +29,7 @@
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-pdf-aconverter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -41,7 +41,7 @@
     },
     {
       "scenario_id": "pdf-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-splitter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -53,7 +53,7 @@
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-text-extractor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",

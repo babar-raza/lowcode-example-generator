@@ -1,6 +1,6 @@
 {
   "family": "pdf",
-  "run_id": "pilot-pdf-20260513-181803",
+  "run_id": "pilot-pdf-20260513-215830",
   "summary": {
     "total_planned": 101,
     "generation_passed": 5,
@@ -9,7 +9,7 @@
     "build_failed": 0,
     "run_passed": 5,
     "run_failed": 0,
-    "reviewer_passed": 0,
+    "reviewer_passed": 5,
     "pr_candidates": 5,
     "excluded": 96,
     "backlogged": 0
@@ -18,7 +18,7 @@
     {
       "scenario_id": "pdf-compress-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -43,13 +43,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020054+00:00",
-      "last_updated": "2026-05-13T13:20:40.020078+00:00"
+      "created_at": "2026-05-13T17:01:31.342679+00:00",
+      "last_updated": "2026-05-13T17:01:31.342703+00:00"
     },
     {
       "scenario_id": "pdf-conversion-mode",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -74,13 +74,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020088+00:00",
-      "last_updated": "2026-05-13T13:20:40.020097+00:00"
+      "created_at": "2026-05-13T17:01:31.342713+00:00",
+      "last_updated": "2026-05-13T17:01:31.342723+00:00"
     },
     {
       "scenario_id": "pdf-data-type",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -105,13 +105,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020103+00:00",
-      "last_updated": "2026-05-13T13:20:40.020109+00:00"
+      "created_at": "2026-05-13T17:01:31.342729+00:00",
+      "last_updated": "2026-05-13T17:01:31.342736+00:00"
     },
     {
       "scenario_id": "pdf-decryption-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -136,13 +136,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020115+00:00",
-      "last_updated": "2026-05-13T13:20:40.020120+00:00"
+      "created_at": "2026-05-13T17:01:31.342741+00:00",
+      "last_updated": "2026-05-13T17:01:31.342747+00:00"
     },
     {
       "scenario_id": "pdf-doc-converter",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -167,13 +167,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020126+00:00",
-      "last_updated": "2026-05-13T13:20:40.020132+00:00"
+      "created_at": "2026-05-13T17:01:31.342753+00:00",
+      "last_updated": "2026-05-13T17:01:31.342760+00:00"
     },
     {
       "scenario_id": "pdf-encryption-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -198,13 +198,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020136+00:00",
-      "last_updated": "2026-05-13T13:20:40.020141+00:00"
+      "created_at": "2026-05-13T17:01:31.342765+00:00",
+      "last_updated": "2026-05-13T17:01:31.342771+00:00"
     },
     {
       "scenario_id": "pdf-file-data-source",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -229,13 +229,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020145+00:00",
-      "last_updated": "2026-05-13T13:20:40.020151+00:00"
+      "created_at": "2026-05-13T17:01:31.342776+00:00",
+      "last_updated": "2026-05-13T17:01:31.342781+00:00"
     },
     {
       "scenario_id": "pdf-file-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -260,13 +260,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020155+00:00",
-      "last_updated": "2026-05-13T13:20:40.020161+00:00"
+      "created_at": "2026-05-13T17:01:31.342786+00:00",
+      "last_updated": "2026-05-13T17:01:31.342792+00:00"
     },
     {
       "scenario_id": "pdf-file-save-target",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -291,13 +291,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020165+00:00",
-      "last_updated": "2026-05-13T13:20:40.020170+00:00"
+      "created_at": "2026-05-13T17:01:31.342796+00:00",
+      "last_updated": "2026-05-13T17:01:31.342802+00:00"
     },
     {
       "scenario_id": "pdf-form-check-box-field-create-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -322,13 +322,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020180+00:00",
-      "last_updated": "2026-05-13T13:20:40.020186+00:00"
+      "created_at": "2026-05-13T17:01:31.342816+00:00",
+      "last_updated": "2026-05-13T17:01:31.342822+00:00"
     },
     {
       "scenario_id": "pdf-form-check-box-field-set-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -353,13 +353,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020190+00:00",
-      "last_updated": "2026-05-13T13:20:40.020195+00:00"
+      "created_at": "2026-05-13T17:01:31.342827+00:00",
+      "last_updated": "2026-05-13T17:01:31.342832+00:00"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-create-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -384,13 +384,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020200+00:00",
-      "last_updated": "2026-05-13T13:20:40.020207+00:00"
+      "created_at": "2026-05-13T17:01:31.342838+00:00",
+      "last_updated": "2026-05-13T17:01:31.342844+00:00"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-set-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -415,13 +415,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020211+00:00",
-      "last_updated": "2026-05-13T13:20:40.020217+00:00"
+      "created_at": "2026-05-13T17:01:31.342848+00:00",
+      "last_updated": "2026-05-13T17:01:31.342854+00:00"
     },
     {
       "scenario_id": "pdf-form-editor",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -446,13 +446,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020222+00:00",
-      "last_updated": "2026-05-13T13:20:40.020229+00:00"
+      "created_at": "2026-05-13T17:01:31.342858+00:00",
+      "last_updated": "2026-05-13T17:01:31.342863+00:00"
     },
     {
       "scenario_id": "pdf-form-editor-add-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -477,13 +477,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020234+00:00",
-      "last_updated": "2026-05-13T13:20:40.020243+00:00"
+      "created_at": "2026-05-13T17:01:31.342868+00:00",
+      "last_updated": "2026-05-13T17:01:31.342873+00:00"
     },
     {
       "scenario_id": "pdf-form-editor-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -508,13 +508,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020247+00:00",
-      "last_updated": "2026-05-13T13:20:40.020256+00:00"
+      "created_at": "2026-05-13T17:01:31.342878+00:00",
+      "last_updated": "2026-05-13T17:01:31.342885+00:00"
     },
     {
       "scenario_id": "pdf-form-editor-remove-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -539,13 +539,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020260+00:00",
-      "last_updated": "2026-05-13T13:20:40.020267+00:00"
+      "created_at": "2026-05-13T17:01:31.342890+00:00",
+      "last_updated": "2026-05-13T17:01:31.342896+00:00"
     },
     {
       "scenario_id": "pdf-form-editor-set-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -570,13 +570,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020271+00:00",
-      "last_updated": "2026-05-13T13:20:40.020281+00:00"
+      "created_at": "2026-05-13T17:01:31.342901+00:00",
+      "last_updated": "2026-05-13T17:01:31.342906+00:00"
     },
     {
       "scenario_id": "pdf-form-exporter",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -601,13 +601,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020287+00:00",
-      "last_updated": "2026-05-13T13:20:40.020293+00:00"
+      "created_at": "2026-05-13T17:01:31.342911+00:00",
+      "last_updated": "2026-05-13T17:01:31.342917+00:00"
     },
     {
       "scenario_id": "pdf-form-exporter-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -632,13 +632,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020297+00:00",
-      "last_updated": "2026-05-13T13:20:40.020302+00:00"
+      "created_at": "2026-05-13T17:01:31.342921+00:00",
+      "last_updated": "2026-05-13T17:01:31.342927+00:00"
     },
     {
       "scenario_id": "pdf-form-exporter-to-json-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -663,13 +663,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020306+00:00",
-      "last_updated": "2026-05-13T13:20:40.020311+00:00"
+      "created_at": "2026-05-13T17:01:31.342932+00:00",
+      "last_updated": "2026-05-13T17:01:31.342938+00:00"
     },
     {
       "scenario_id": "pdf-form-exporter-values-to-csv-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -694,13 +694,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020315+00:00",
-      "last_updated": "2026-05-13T13:20:40.020321+00:00"
+      "created_at": "2026-05-13T17:01:31.342943+00:00",
+      "last_updated": "2026-05-13T17:01:31.342949+00:00"
     },
     {
       "scenario_id": "pdf-form-field-create-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -725,13 +725,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020325+00:00",
-      "last_updated": "2026-05-13T13:20:40.020330+00:00"
+      "created_at": "2026-05-13T17:01:31.342954+00:00",
+      "last_updated": "2026-05-13T17:01:31.342959+00:00"
     },
     {
       "scenario_id": "pdf-form-field-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -756,13 +756,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020334+00:00",
-      "last_updated": "2026-05-13T13:20:40.020339+00:00"
+      "created_at": "2026-05-13T17:01:31.342964+00:00",
+      "last_updated": "2026-05-13T17:01:31.342970+00:00"
     },
     {
       "scenario_id": "pdf-form-field-set-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -787,13 +787,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020343+00:00",
-      "last_updated": "2026-05-13T13:20:40.020348+00:00"
+      "created_at": "2026-05-13T17:01:31.342975+00:00",
+      "last_updated": "2026-05-13T17:01:31.342981+00:00"
     },
     {
       "scenario_id": "pdf-form-flatten-all-fields-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -818,13 +818,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020352+00:00",
-      "last_updated": "2026-05-13T13:20:40.020357+00:00"
+      "created_at": "2026-05-13T17:01:31.342985+00:00",
+      "last_updated": "2026-05-13T17:01:31.342991+00:00"
     },
     {
       "scenario_id": "pdf-form-flattener",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -849,13 +849,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020364+00:00",
-      "last_updated": "2026-05-13T13:20:40.020370+00:00"
+      "created_at": "2026-05-13T17:01:31.342997+00:00",
+      "last_updated": "2026-05-13T17:01:31.343003+00:00"
     },
     {
       "scenario_id": "pdf-form-flattener-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -880,13 +880,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020375+00:00",
-      "last_updated": "2026-05-13T13:20:40.020380+00:00"
+      "created_at": "2026-05-13T17:01:31.343008+00:00",
+      "last_updated": "2026-05-13T17:01:31.343014+00:00"
     },
     {
       "scenario_id": "pdf-form-flatten-selected-fields-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -911,13 +911,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020385+00:00",
-      "last_updated": "2026-05-13T13:20:40.020391+00:00"
+      "created_at": "2026-05-13T17:01:31.343019+00:00",
+      "last_updated": "2026-05-13T17:01:31.343025+00:00"
     },
     {
       "scenario_id": "pdf-form-importer",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -942,13 +942,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020397+00:00",
-      "last_updated": "2026-05-13T13:20:40.020403+00:00"
+      "created_at": "2026-05-13T17:01:31.343030+00:00",
+      "last_updated": "2026-05-13T17:01:31.343036+00:00"
     },
     {
       "scenario_id": "pdf-form-importer-json-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -973,13 +973,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020407+00:00",
-      "last_updated": "2026-05-13T13:20:40.020413+00:00"
+      "created_at": "2026-05-13T17:01:31.343040+00:00",
+      "last_updated": "2026-05-13T17:01:31.343046+00:00"
     },
     {
       "scenario_id": "pdf-form-json-import-source",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1004,13 +1004,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020416+00:00",
-      "last_updated": "2026-05-13T13:20:40.020422+00:00"
+      "created_at": "2026-05-13T17:01:31.343051+00:00",
+      "last_updated": "2026-05-13T17:01:31.343057+00:00"
     },
     {
       "scenario_id": "pdf-form-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1035,13 +1035,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020426+00:00",
-      "last_updated": "2026-05-13T13:20:40.020431+00:00"
+      "created_at": "2026-05-13T17:01:31.343061+00:00",
+      "last_updated": "2026-05-13T17:01:31.343067+00:00"
     },
     {
       "scenario_id": "pdf-form-remove-all-fields-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1066,13 +1066,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020435+00:00",
-      "last_updated": "2026-05-13T13:20:40.020440+00:00"
+      "created_at": "2026-05-13T17:01:31.343072+00:00",
+      "last_updated": "2026-05-13T17:01:31.343078+00:00"
     },
     {
       "scenario_id": "pdf-form-remove-selected-fields-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1097,13 +1097,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020444+00:00",
-      "last_updated": "2026-05-13T13:20:40.020450+00:00"
+      "created_at": "2026-05-13T17:01:31.343083+00:00",
+      "last_updated": "2026-05-13T17:01:31.343089+00:00"
     },
     {
       "scenario_id": "pdf-form-text-box-field-create-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1128,13 +1128,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020455+00:00",
-      "last_updated": "2026-05-13T13:20:40.020461+00:00"
+      "created_at": "2026-05-13T17:01:31.343093+00:00",
+      "last_updated": "2026-05-13T17:01:31.343100+00:00"
     },
     {
       "scenario_id": "pdf-form-text-box-field-set-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1159,13 +1159,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020466+00:00",
-      "last_updated": "2026-05-13T13:20:40.020472+00:00"
+      "created_at": "2026-05-13T17:01:31.343104+00:00",
+      "last_updated": "2026-05-13T17:01:31.343110+00:00"
     },
     {
       "scenario_id": "pdf-html",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1190,13 +1190,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020476+00:00",
-      "last_updated": "2026-05-13T13:20:40.020481+00:00"
+      "created_at": "2026-05-13T17:01:31.343115+00:00",
+      "last_updated": "2026-05-13T17:01:31.343122+00:00"
     },
     {
       "scenario_id": "pdf-html-to-pdf-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1221,13 +1221,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020487+00:00",
-      "last_updated": "2026-05-13T13:20:40.020493+00:00"
+      "created_at": "2026-05-13T17:01:31.343126+00:00",
+      "last_updated": "2026-05-13T17:01:31.343132+00:00"
     },
     {
       "scenario_id": "pdf-idata-source",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1252,13 +1252,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020497+00:00",
-      "last_updated": "2026-05-13T13:20:40.020502+00:00"
+      "created_at": "2026-05-13T17:01:31.343136+00:00",
+      "last_updated": "2026-05-13T17:01:31.343142+00:00"
     },
     {
       "scenario_id": "pdf-image-extractor",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1283,13 +1283,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020507+00:00",
-      "last_updated": "2026-05-13T13:20:40.020512+00:00"
+      "created_at": "2026-05-13T17:01:31.343146+00:00",
+      "last_updated": "2026-05-13T17:01:31.343152+00:00"
     },
     {
       "scenario_id": "pdf-image-extractor-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1314,13 +1314,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020517+00:00",
-      "last_updated": "2026-05-13T13:20:40.020522+00:00"
+      "created_at": "2026-05-13T17:01:31.343157+00:00",
+      "last_updated": "2026-05-13T17:01:31.343162+00:00"
     },
     {
       "scenario_id": "pdf-ioperation-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1345,13 +1345,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020526+00:00",
-      "last_updated": "2026-05-13T13:20:40.020531+00:00"
+      "created_at": "2026-05-13T17:01:31.343167+00:00",
+      "last_updated": "2026-05-13T17:01:31.343172+00:00"
     },
     {
       "scenario_id": "pdf-iplugin",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1376,13 +1376,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020535+00:00",
-      "last_updated": "2026-05-13T13:20:40.020540+00:00"
+      "created_at": "2026-05-13T17:01:31.343177+00:00",
+      "last_updated": "2026-05-13T17:01:31.343183+00:00"
     },
     {
       "scenario_id": "pdf-iplugin-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1407,13 +1407,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020543+00:00",
-      "last_updated": "2026-05-13T13:20:40.020548+00:00"
+      "created_at": "2026-05-13T17:01:31.343187+00:00",
+      "last_updated": "2026-05-13T17:01:31.343192+00:00"
     },
     {
       "scenario_id": "pdf-isave-target",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1438,13 +1438,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020552+00:00",
-      "last_updated": "2026-05-13T13:20:40.020557+00:00"
+      "created_at": "2026-05-13T17:01:31.343197+00:00",
+      "last_updated": "2026-05-13T17:01:31.343202+00:00"
     },
     {
       "scenario_id": "pdf-jpeg",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1469,13 +1469,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020561+00:00",
-      "last_updated": "2026-05-13T13:20:40.020566+00:00"
+      "created_at": "2026-05-13T17:01:31.343206+00:00",
+      "last_updated": "2026-05-13T17:01:31.343211+00:00"
     },
     {
       "scenario_id": "pdf-jpeg-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1500,13 +1500,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020570+00:00",
-      "last_updated": "2026-05-13T13:20:40.020575+00:00"
+      "created_at": "2026-05-13T17:01:31.343215+00:00",
+      "last_updated": "2026-05-13T17:01:31.343220+00:00"
     },
     {
       "scenario_id": "pdf-merge-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1531,13 +1531,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020579+00:00",
-      "last_updated": "2026-05-13T13:20:40.020584+00:00"
+      "created_at": "2026-05-13T17:01:31.343224+00:00",
+      "last_updated": "2026-05-13T17:01:31.343230+00:00"
     },
     {
       "scenario_id": "pdf-object-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1562,13 +1562,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020588+00:00",
-      "last_updated": "2026-05-13T13:20:40.020593+00:00"
+      "created_at": "2026-05-13T17:01:31.343234+00:00",
+      "last_updated": "2026-05-13T17:01:31.343240+00:00"
     },
     {
       "scenario_id": "pdf-ofd",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1593,13 +1593,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020596+00:00",
-      "last_updated": "2026-05-13T13:20:40.020601+00:00"
+      "created_at": "2026-05-13T17:01:31.343244+00:00",
+      "last_updated": "2026-05-13T17:01:31.343249+00:00"
     },
     {
       "scenario_id": "pdf-ofd-to-pdf-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1624,13 +1624,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020605+00:00",
-      "last_updated": "2026-05-13T13:20:40.020610+00:00"
+      "created_at": "2026-05-13T17:01:31.343254+00:00",
+      "last_updated": "2026-05-13T17:01:31.343259+00:00"
     },
     {
       "scenario_id": "pdf-optimize-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1655,13 +1655,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020614+00:00",
-      "last_updated": "2026-05-13T13:20:40.020619+00:00"
+      "created_at": "2026-05-13T17:01:31.343263+00:00",
+      "last_updated": "2026-05-13T17:01:31.343268+00:00"
     },
     {
       "scenario_id": "pdf-organizer-base-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1686,13 +1686,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020635+00:00",
-      "last_updated": "2026-05-13T13:20:40.020641+00:00"
+      "created_at": "2026-05-13T17:01:31.343273+00:00",
+      "last_updated": "2026-05-13T17:01:31.343279+00:00"
     },
     {
       "scenario_id": "pdf-pdf-aconvert-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1717,13 +1717,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020646+00:00",
-      "last_updated": "2026-05-13T13:20:40.020651+00:00"
+      "created_at": "2026-05-13T17:01:31.343284+00:00",
+      "last_updated": "2026-05-13T17:01:31.343289+00:00"
     },
     {
       "scenario_id": "pdf-pdf-aoptions-base",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1748,13 +1748,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020655+00:00",
-      "last_updated": "2026-05-13T13:20:40.020660+00:00"
+      "created_at": "2026-05-13T17:01:31.343295+00:00",
+      "last_updated": "2026-05-13T17:01:31.343301+00:00"
     },
     {
       "scenario_id": "pdf-pdf-astandard-version",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1779,13 +1779,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020664+00:00",
-      "last_updated": "2026-05-13T13:20:40.020670+00:00"
+      "created_at": "2026-05-13T17:01:31.343305+00:00",
+      "last_updated": "2026-05-13T17:01:31.343310+00:00"
     },
     {
       "scenario_id": "pdf-pdf-avalidate-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1810,13 +1810,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020675+00:00",
-      "last_updated": "2026-05-13T13:20:40.020681+00:00"
+      "created_at": "2026-05-13T17:01:31.343315+00:00",
+      "last_updated": "2026-05-13T17:01:31.343322+00:00"
     },
     {
       "scenario_id": "pdf-pdf-avalidation-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1841,13 +1841,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020686+00:00",
-      "last_updated": "2026-05-13T13:20:40.020690+00:00"
+      "created_at": "2026-05-13T17:01:31.343327+00:00",
+      "last_updated": "2026-05-13T17:01:31.343333+00:00"
     },
     {
       "scenario_id": "pdf-pdf-converter-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1872,13 +1872,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020695+00:00",
-      "last_updated": "2026-05-13T13:20:40.020701+00:00"
+      "created_at": "2026-05-13T17:01:31.343337+00:00",
+      "last_updated": "2026-05-13T17:01:31.343343+00:00"
     },
     {
       "scenario_id": "pdf-pdf-extractor",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1903,13 +1903,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020706+00:00",
-      "last_updated": "2026-05-13T13:20:40.020711+00:00"
+      "created_at": "2026-05-13T17:01:31.343348+00:00",
+      "last_updated": "2026-05-13T17:01:31.343353+00:00"
     },
     {
       "scenario_id": "pdf-pdf-extractor-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1934,13 +1934,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020715+00:00",
-      "last_updated": "2026-05-13T13:20:40.020721+00:00"
+      "created_at": "2026-05-13T17:01:31.343358+00:00",
+      "last_updated": "2026-05-13T17:01:31.343364+00:00"
     },
     {
       "scenario_id": "pdf-pdf-generator-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1965,13 +1965,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020726+00:00",
-      "last_updated": "2026-05-13T13:20:40.020731+00:00"
+      "created_at": "2026-05-13T17:01:31.343368+00:00",
+      "last_updated": "2026-05-13T17:01:31.343374+00:00"
     },
     {
       "scenario_id": "pdf-pdf-to-doc-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -1996,13 +1996,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020735+00:00",
-      "last_updated": "2026-05-13T13:20:40.020740+00:00"
+      "created_at": "2026-05-13T17:01:31.343379+00:00",
+      "last_updated": "2026-05-13T17:01:31.343385+00:00"
     },
     {
       "scenario_id": "pdf-pdf-to-html-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2027,13 +2027,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020744+00:00",
-      "last_updated": "2026-05-13T13:20:40.020750+00:00"
+      "created_at": "2026-05-13T17:01:31.343389+00:00",
+      "last_updated": "2026-05-13T17:01:31.343397+00:00"
     },
     {
       "scenario_id": "pdf-pdf-to-image",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2058,13 +2058,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020755+00:00",
-      "last_updated": "2026-05-13T13:20:40.020761+00:00"
+      "created_at": "2026-05-13T17:01:31.343402+00:00",
+      "last_updated": "2026-05-13T17:01:31.343408+00:00"
     },
     {
       "scenario_id": "pdf-pdf-to-image-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2089,13 +2089,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020765+00:00",
-      "last_updated": "2026-05-13T13:20:40.020770+00:00"
+      "created_at": "2026-05-13T17:01:31.343413+00:00",
+      "last_updated": "2026-05-13T17:01:31.343418+00:00"
     },
     {
       "scenario_id": "pdf-pdf-to-xls-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2120,13 +2120,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020774+00:00",
-      "last_updated": "2026-05-13T13:20:40.020778+00:00"
+      "created_at": "2026-05-13T17:01:31.343423+00:00",
+      "last_updated": "2026-05-13T17:01:31.343428+00:00"
     },
     {
       "scenario_id": "pdf-png",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2151,13 +2151,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020783+00:00",
-      "last_updated": "2026-05-13T13:20:40.020788+00:00"
+      "created_at": "2026-05-13T17:01:31.343433+00:00",
+      "last_updated": "2026-05-13T17:01:31.343439+00:00"
     },
     {
       "scenario_id": "pdf-png-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2182,13 +2182,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020792+00:00",
-      "last_updated": "2026-05-13T13:20:40.020798+00:00"
+      "created_at": "2026-05-13T17:01:31.343443+00:00",
+      "last_updated": "2026-05-13T17:01:31.343513+00:00"
     },
     {
       "scenario_id": "pdf-resize-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2213,13 +2213,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020802+00:00",
-      "last_updated": "2026-05-13T13:20:40.020807+00:00"
+      "created_at": "2026-05-13T17:01:31.343520+00:00",
+      "last_updated": "2026-05-13T17:01:31.343525+00:00"
     },
     {
       "scenario_id": "pdf-result-container",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2244,13 +2244,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020812+00:00",
-      "last_updated": "2026-05-13T13:20:40.020817+00:00"
+      "created_at": "2026-05-13T17:01:31.343530+00:00",
+      "last_updated": "2026-05-13T17:01:31.343535+00:00"
     },
     {
       "scenario_id": "pdf-rotate-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2275,13 +2275,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020820+00:00",
-      "last_updated": "2026-05-13T13:20:40.020826+00:00"
+      "created_at": "2026-05-13T17:01:31.343540+00:00",
+      "last_updated": "2026-05-13T17:01:31.343546+00:00"
     },
     {
       "scenario_id": "pdf-save-format",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2306,13 +2306,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020830+00:00",
-      "last_updated": "2026-05-13T13:20:40.020836+00:00"
+      "created_at": "2026-05-13T17:01:31.343679+00:00",
+      "last_updated": "2026-05-13T17:01:31.343688+00:00"
     },
     {
       "scenario_id": "pdf-security",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2337,13 +2337,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020840+00:00",
-      "last_updated": "2026-05-13T13:20:40.020845+00:00"
+      "created_at": "2026-05-13T17:01:31.343693+00:00",
+      "last_updated": "2026-05-13T17:01:31.343698+00:00"
     },
     {
       "scenario_id": "pdf-select-field",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2368,13 +2368,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020849+00:00",
-      "last_updated": "2026-05-13T13:20:40.020855+00:00"
+      "created_at": "2026-05-13T17:01:31.343702+00:00",
+      "last_updated": "2026-05-13T17:01:31.343708+00:00"
     },
     {
       "scenario_id": "pdf-signature",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2399,13 +2399,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020859+00:00",
-      "last_updated": "2026-05-13T13:20:40.020866+00:00"
+      "created_at": "2026-05-13T17:01:31.343712+00:00",
+      "last_updated": "2026-05-13T17:01:31.343720+00:00"
     },
     {
       "scenario_id": "pdf-sign-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2430,13 +2430,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020875+00:00",
-      "last_updated": "2026-05-13T13:20:40.020880+00:00"
+      "created_at": "2026-05-13T17:01:31.343724+00:00",
+      "last_updated": "2026-05-13T17:01:31.343729+00:00"
     },
     {
       "scenario_id": "pdf-split-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2461,13 +2461,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020884+00:00",
-      "last_updated": "2026-05-13T13:20:40.020890+00:00"
+      "created_at": "2026-05-13T17:01:31.343734+00:00",
+      "last_updated": "2026-05-13T17:01:31.343740+00:00"
     },
     {
       "scenario_id": "pdf-stream-data-source",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2492,13 +2492,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020894+00:00",
-      "last_updated": "2026-05-13T13:20:40.020900+00:00"
+      "created_at": "2026-05-13T17:01:31.343744+00:00",
+      "last_updated": "2026-05-13T17:01:31.343750+00:00"
     },
     {
       "scenario_id": "pdf-stream-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2523,13 +2523,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020905+00:00",
-      "last_updated": "2026-05-13T13:20:40.020911+00:00"
+      "created_at": "2026-05-13T17:01:31.343755+00:00",
+      "last_updated": "2026-05-13T17:01:31.343760+00:00"
     },
     {
       "scenario_id": "pdf-stream-save-target",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2554,13 +2554,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020915+00:00",
-      "last_updated": "2026-05-13T13:20:40.020921+00:00"
+      "created_at": "2026-05-13T17:01:31.343765+00:00",
+      "last_updated": "2026-05-13T17:01:31.343770+00:00"
     },
     {
       "scenario_id": "pdf-string-result",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2585,13 +2585,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020925+00:00",
-      "last_updated": "2026-05-13T13:20:40.020931+00:00"
+      "created_at": "2026-05-13T17:01:31.343776+00:00",
+      "last_updated": "2026-05-13T17:01:31.343780+00:00"
     },
     {
       "scenario_id": "pdf-table-builder",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2616,13 +2616,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020935+00:00",
-      "last_updated": "2026-05-13T13:20:40.020941+00:00"
+      "created_at": "2026-05-13T17:01:31.343785+00:00",
+      "last_updated": "2026-05-13T17:01:31.343790+00:00"
     },
     {
       "scenario_id": "pdf-table-cell-builder",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2647,13 +2647,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020945+00:00",
-      "last_updated": "2026-05-13T13:20:40.020950+00:00"
+      "created_at": "2026-05-13T17:01:31.343795+00:00",
+      "last_updated": "2026-05-13T17:01:31.343800+00:00"
     },
     {
       "scenario_id": "pdf-table-generator",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2678,13 +2678,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020955+00:00",
-      "last_updated": "2026-05-13T13:20:40.020960+00:00"
+      "created_at": "2026-05-13T17:01:31.343804+00:00",
+      "last_updated": "2026-05-13T17:01:31.343810+00:00"
     },
     {
       "scenario_id": "pdf-table-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2709,13 +2709,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020964+00:00",
-      "last_updated": "2026-05-13T13:20:40.020970+00:00"
+      "created_at": "2026-05-13T17:01:31.343814+00:00",
+      "last_updated": "2026-05-13T17:01:31.343820+00:00"
     },
     {
       "scenario_id": "pdf-table-row-builder",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2740,13 +2740,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020974+00:00",
-      "last_updated": "2026-05-13T13:20:40.020979+00:00"
+      "created_at": "2026-05-13T17:01:31.343825+00:00",
+      "last_updated": "2026-05-13T17:01:31.343830+00:00"
     },
     {
       "scenario_id": "pdf-text-extractor-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2771,13 +2771,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020984+00:00",
-      "last_updated": "2026-05-13T13:20:40.020989+00:00"
+      "created_at": "2026-05-13T17:01:31.343835+00:00",
+      "last_updated": "2026-05-13T17:01:31.343841+00:00"
     },
     {
       "scenario_id": "pdf-tiff",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2802,13 +2802,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.020992+00:00",
-      "last_updated": "2026-05-13T13:20:40.020997+00:00"
+      "created_at": "2026-05-13T17:01:31.343845+00:00",
+      "last_updated": "2026-05-13T17:01:31.343851+00:00"
     },
     {
       "scenario_id": "pdf-tiff-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2833,13 +2833,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021001+00:00",
-      "last_updated": "2026-05-13T13:20:40.021006+00:00"
+      "created_at": "2026-05-13T17:01:31.343854+00:00",
+      "last_updated": "2026-05-13T17:01:31.343860+00:00"
     },
     {
       "scenario_id": "pdf-timestamp",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2864,13 +2864,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021010+00:00",
-      "last_updated": "2026-05-13T13:20:40.021015+00:00"
+      "created_at": "2026-05-13T17:01:31.343864+00:00",
+      "last_updated": "2026-05-13T17:01:31.343869+00:00"
     },
     {
       "scenario_id": "pdf-timestamp-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2895,13 +2895,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021019+00:00",
-      "last_updated": "2026-05-13T13:20:40.021025+00:00"
+      "created_at": "2026-05-13T17:01:31.343872+00:00",
+      "last_updated": "2026-05-13T17:01:31.343878+00:00"
     },
     {
       "scenario_id": "pdf-toc-generator",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2926,13 +2926,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021029+00:00",
-      "last_updated": "2026-05-13T13:20:40.021034+00:00"
+      "created_at": "2026-05-13T17:01:31.343882+00:00",
+      "last_updated": "2026-05-13T17:01:31.343887+00:00"
     },
     {
       "scenario_id": "pdf-toc-options",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2957,13 +2957,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021038+00:00",
-      "last_updated": "2026-05-13T13:20:40.021043+00:00"
+      "created_at": "2026-05-13T17:01:31.344022+00:00",
+      "last_updated": "2026-05-13T17:01:31.344031+00:00"
     },
     {
       "scenario_id": "pdf-xls-converter",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
+      "run_id": "pilot-pdf-20260513-215830",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -2988,14 +2988,14 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021047+00:00",
-      "last_updated": "2026-05-13T13:20:40.021051+00:00"
+      "created_at": "2026-05-13T17:01:31.344036+00:00",
+      "last_updated": "2026-05-13T17:01:31.344042+00:00"
     },
     {
       "scenario_id": "pdf-merger",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
-      "current_stage": "reviewer_attempted",
+      "run_id": "pilot-pdf-20260513-215830",
+      "current_stage": "reviewer_passed",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
       "generation_failure_reason": null,
@@ -3006,7 +3006,7 @@
       "run_failure_reason": null,
       "run_repair_attempts": 0,
       "run_failure_classification": null,
-      "reviewer_status": "unavailable",
+      "reviewer_status": "passed",
       "reviewer_failure_reason": null,
       "pr_candidate": true,
       "excluded_reason": null,
@@ -3019,14 +3019,14 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:20:40.021085+00:00",
-      "last_updated": "2026-05-13T13:24:04.177413+00:00"
+      "created_at": "2026-05-13T17:01:31.345209+00:00",
+      "last_updated": "2026-05-13T17:07:15.481656+00:00"
     },
     {
       "scenario_id": "pdf-optimizer",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
-      "current_stage": "reviewer_attempted",
+      "run_id": "pilot-pdf-20260513-215830",
+      "current_stage": "reviewer_passed",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
       "generation_failure_reason": null,
@@ -3037,7 +3037,7 @@
       "run_failure_reason": null,
       "run_repair_attempts": 0,
       "run_failure_classification": null,
-      "reviewer_status": "unavailable",
+      "reviewer_status": "passed",
       "reviewer_failure_reason": null,
       "pr_candidate": true,
       "excluded_reason": null,
@@ -3050,14 +3050,14 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:21:11.215054+00:00",
-      "last_updated": "2026-05-13T13:24:04.177432+00:00"
+      "created_at": "2026-05-13T17:02:10.010264+00:00",
+      "last_updated": "2026-05-13T17:07:15.481673+00:00"
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
-      "current_stage": "reviewer_attempted",
+      "run_id": "pilot-pdf-20260513-215830",
+      "current_stage": "reviewer_passed",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
       "generation_failure_reason": null,
@@ -3068,7 +3068,7 @@
       "run_failure_reason": null,
       "run_repair_attempts": 0,
       "run_failure_classification": null,
-      "reviewer_status": "unavailable",
+      "reviewer_status": "passed",
       "reviewer_failure_reason": null,
       "pr_candidate": true,
       "excluded_reason": null,
@@ -3081,14 +3081,14 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:21:48.911640+00:00",
-      "last_updated": "2026-05-13T13:24:04.177438+00:00"
+      "created_at": "2026-05-13T17:02:36.553091+00:00",
+      "last_updated": "2026-05-13T17:07:15.481678+00:00"
     },
     {
       "scenario_id": "pdf-splitter",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
-      "current_stage": "reviewer_attempted",
+      "run_id": "pilot-pdf-20260513-215830",
+      "current_stage": "reviewer_passed",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
       "generation_failure_reason": null,
@@ -3099,7 +3099,7 @@
       "run_failure_reason": null,
       "run_repair_attempts": 0,
       "run_failure_classification": null,
-      "reviewer_status": "unavailable",
+      "reviewer_status": "passed",
       "reviewer_failure_reason": null,
       "pr_candidate": true,
       "excluded_reason": null,
@@ -3112,14 +3112,14 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:22:16.031073+00:00",
-      "last_updated": "2026-05-13T13:24:04.177442+00:00"
+      "created_at": "2026-05-13T17:03:01.726943+00:00",
+      "last_updated": "2026-05-13T17:07:15.481681+00:00"
     },
     {
       "scenario_id": "pdf-text-extractor",
       "family": "pdf",
-      "run_id": "pilot-pdf-20260513-181803",
-      "current_stage": "reviewer_attempted",
+      "run_id": "pilot-pdf-20260513-215830",
+      "current_stage": "reviewer_passed",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
       "generation_failure_reason": null,
@@ -3130,7 +3130,7 @@
       "run_failure_reason": null,
       "run_repair_attempts": 0,
       "run_failure_classification": null,
-      "reviewer_status": "unavailable",
+      "reviewer_status": "passed",
       "reviewer_failure_reason": null,
       "pr_candidate": true,
       "excluded_reason": null,
@@ -3143,8 +3143,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-13T13:22:44.562510+00:00",
-      "last_updated": "2026-05-13T13:24:04.177445+00:00"
+      "created_at": "2026-05-13T17:03:52.797863+00:00",
+      "last_updated": "2026-05-13T17:07:15.481686+00:00"
     }
   ]
 }

@@ -1,15 +1,15 @@
 {
   "resolution_type": "github_repo_access_resolution",
-  "resolution_date": "2026-05-13T15:28:45+00:00",
+  "resolution_date": "2026-05-13T16:56:25+00:00",
   "sprint": "Repo Access Resolution and Repeatable Target Provisioning Sprint",
   "token_present": true,
   "families": [
     {
-      "family": "words",
-      "owner": "aspose-words-net",
-      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "family": "email",
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
       "branch": "main",
-      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\words.yml",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\email.yml",
       "error_classification": "repo_access_ok",
       "can_read": true,
       "can_push": true,
@@ -25,13 +25,13 @@
       },
       "http_status": 200,
       "org_probe": {
-        "org": "aspose-words-net",
+        "org": "aspose-email-net",
         "org_exists": true,
         "member_role": "admin",
         "can_create_repos": true,
         "http_status_org": 200,
         "http_status_membership": 200,
-        "interpretation": "Org 'aspose-words-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
+        "interpretation": "Org 'aspose-email-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
       },
       "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
       "config_ready": true,
@@ -40,11 +40,11 @@
       "live_publish_ready": false
     },
     {
-      "family": "pdf",
-      "owner": "aspose-pdf-net",
-      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "family": "slides",
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
       "branch": "main",
-      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\pdf.yml",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\slides.yml",
       "error_classification": "repo_access_ok",
       "can_read": true,
       "can_push": true,
@@ -60,13 +60,13 @@
       },
       "http_status": 200,
       "org_probe": {
-        "org": "aspose-pdf-net",
+        "org": "aspose-slides-net",
         "org_exists": true,
         "member_role": "admin",
         "can_create_repos": true,
         "http_status_org": 200,
         "http_status_membership": 200,
-        "interpretation": "Org 'aspose-pdf-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
+        "interpretation": "Org 'aspose-slides-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
       },
       "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
       "config_ready": true,
@@ -80,8 +80,8 @@
     "accessible": 2,
     "blocked": 0,
     "accessible_families": [
-      "words",
-      "pdf"
+      "email",
+      "slides"
     ],
     "blocked_families": [],
     "live_publish_allowed": false,

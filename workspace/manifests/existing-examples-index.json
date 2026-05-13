@@ -1,16 +1,6 @@
 {
-  "family": "pdf",
-  "total_examples": 1,
+  "family": "email",
+  "total_examples": 0,
   "stale_count": 0,
-  "examples": [
-    {
-      "example_id": "pdf:Examples/CSharp",
-      "source_path": "Examples/CSharp",
-      "provenance": "aspose-pdf/Aspose.PDF-for-.NET:master",
-      "used_symbols": [],
-      "validated": false,
-      "stale": false,
-      "stale_reason": null
-    }
-  ]
+  "examples": []
 }

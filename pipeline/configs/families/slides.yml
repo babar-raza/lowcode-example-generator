@@ -1,14 +1,13 @@
 family: slides
 display_name: Aspose.Slides for .NET
 enabled: true
-status: discovery_only
-# Moved from disabled/ to active path for discovery investigation (Phase F / R2).
-# status=discovery_only blocks generation runner; allows NuGet resolution + reflection only.
-# DLL name mismatch fix: package_id=Aspose.Slides.NET but DLL=Aspose.Slides.dll (no .NET suffix).
-# Fix implemented in src/plugin_examples/nupkg_extractor/extractor.py (endswith(".NET") fallback).
-# 4 tests in tests/unit/test_nupkg_extractor_dll_fallback.py cover the fallback logic.
-# Prior run failure (FAIL_PACKAGE_UNSUPPORTED_TFM) should be resolved by DLL name fix.
-# Namespace Aspose.Slides.LowCode is claimed but not yet reflection-proven.
+status: active
+# Promoted from discovery_only to active (2026-05-13, Sprint 6).
+# Aspose.Slides.LowCode confirmed: 5 types (Compress, Convert, Merger, Collect, ForEach).
+# Controlled pilot: allowed_types=[Compress, Convert, Merger] only (Collect/ForEach are utility helpers, not standalone).
+# DLL name mismatch handled: Aspose.Slides.NET → Aspose.Slides.dll (endswith(".NET") fallback in extractor).
+# XML docs: Aspose.Slides.xml present (not .NET.xml); xml_warning is non-blocking — reflection provides full signatures.
+# Target repo provisioned: aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples (push=True).
 
 nuget:
   package_id: Aspose.Slides.NET
@@ -39,8 +38,7 @@ github:
     owner: aspose-slides-net
     repo: Aspose.Slides.LowCode-for-.NET-Examples
     branch: main
-  # NOTE: dedicated repo placeholder — does not yet exist.
-  # Will be provisioned by maintainer if/when discovery confirms LowCode namespace.
+  # Repo provisioned and push access confirmed (2026-05-13).
 
 fixtures:
   sources: []
@@ -53,7 +51,10 @@ generation:
   max_examples_per_monthly_run: 5
   allow_new_fixtures: true
   allow_generated_input_files: true
-  allowed_types: []
+  allowed_types:
+    - Compress
+    - Convert
+    - Merger
 
 template_hints:
   default_input_extension: ".pptx"

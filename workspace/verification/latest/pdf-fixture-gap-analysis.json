@@ -1,0 +1,280 @@
+{
+  "artifact_type": "pdf_fixture_gap_analysis",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "generated_by": "LANE_1_healing_analysis",
+  "source_files": [
+    "pipeline/configs/families/pdf.yml",
+    "workspace/verification/latest/pdf-type-role-classification.json",
+    "src/plugin_examples/fixture_registry/fixture_factory.py"
+  ],
+  "existing_fixtures": [
+    {
+      "fixture_id": "programmatic_pdf_single",
+      "description": "1-page PDF created via Aspose.Pdf.Document() + doc.Pages.Add() + doc.Save(\"input.pdf\")",
+      "source": "pipeline/configs/families/pdf.yml template_hints.input_creation_lines",
+      "used_by_pilot_types": ["Optimizer", "Splitter"],
+      "usable_for_deferred": ["DocConverter", "Jpeg", "Png", "Tiff", "PdfToImage", "XlsConverter", "PdfAConverter", "PdfExtractor", "Security"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "doc.Pages.Add();",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "fixture_id": "programmatic_pdf_multi_page",
+      "description": "3-page PDF for operations that need multiple pages (e.g., splitting)",
+      "source": "pipeline/configs/families/pdf.yml template_hints (inferred from Splitter pilot)",
+      "used_by_pilot_types": ["Splitter"],
+      "usable_for_deferred": ["Jpeg", "Png", "Tiff", "PdfToImage", "TocGenerator"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "doc.Pages.Add();",
+        "doc.Pages.Add();",
+        "doc.Pages.Add();",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "fixture_id": "programmatic_pdf_pair",
+      "description": "2 separate PDF files (input1.pdf + input2.pdf) for merge operations",
+      "source": "pipeline/configs/families/pdf.yml template_hints.merger_input_creation_lines",
+      "used_by_pilot_types": ["Merger"],
+      "usable_for_deferred": [],
+      "creation_code": [
+        "var doc1 = new Aspose.Pdf.Document();",
+        "doc1.Pages.Add();",
+        "doc1.Save(\"input1.pdf\");",
+        "var doc2 = new Aspose.Pdf.Document();",
+        "doc2.Pages.Add();",
+        "doc2.Save(\"input2.pdf\");"
+      ]
+    },
+    {
+      "fixture_id": "programmatic_pdf_known_text",
+      "description": "PDF with a known text string embedded via TextFragment for extraction validation",
+      "source": "pipeline/configs/families/pdf.yml template_hints.text_extractor_input_creation_lines",
+      "used_by_pilot_types": ["TextExtractor"],
+      "usable_for_deferred": ["PdfExtractor", "TocGenerator"],
+      "creation_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "var page = doc.Pages.Add();",
+        "page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Hello LowCode PDF\"));",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "fixture_id": "html_file",
+      "description": "Minimal HTML file with table structure — already implemented in fixture_factory.py generate_html()",
+      "source": "src/plugin_examples/fixture_registry/fixture_factory.py",
+      "used_by_pilot_types": [],
+      "usable_for_deferred": ["Html"],
+      "creation_code": [
+        "// fixture_factory.py generate_html() produces a valid HTML file",
+        "// Content: DOCTYPE html + head + body with table"
+      ]
+    }
+  ],
+  "fixture_gaps": [
+    {
+      "gap_id": "FG-001",
+      "gap_name": "programmatic_pdf_with_headings",
+      "needed_for_types": ["TocGenerator"],
+      "description": "PDF with heading-style paragraphs (large font size) to give TocGenerator meaningful content to index",
+      "implementation_effort": "LOW",
+      "implementation_approach": "Extend programmatic_pdf_multi_page: add TextFragment objects with FontSize=18/14 as section headings. Add to pdf.yml template_hints as toc_generator_input_creation_lines.",
+      "blocking_wave": "A",
+      "sample_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "var page1 = doc.Pages.Add();",
+        "page1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Chapter 1\") { TextState = { FontSize = 18 } });",
+        "page1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Introduction content here.\"));",
+        "var page2 = doc.Pages.Add();",
+        "page2.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Chapter 2\") { TextState = { FontSize = 18 } });",
+        "page2.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"Second chapter content.\"));",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "gap_id": "FG-002",
+      "gap_name": "html_input_strategy",
+      "needed_for_types": ["Html"],
+      "description": "HTML file fixture strategy for HtmlToPdfOptions. fixture_factory.py already has generate_html() but pdf.yml template_hints does not document an HTML input path.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "Add html_input_creation_lines to pdf.yml template_hints. Reference fixture_factory.py HTML generator. Add per_type_constraints for Html type documenting HtmlToPdfOptions usage.",
+      "blocking_wave": "A",
+      "sample_code": [
+        "// HTML file created by fixture_factory.py generate_html()",
+        "// Template hint in pdf.yml:",
+        "// html_input_creation_lines:",
+        "//   - '// input.html pre-generated by fixture factory'",
+        "//   - 'var options = new HtmlToPdfOptions();'",
+        "//   - 'options.AddInput(new FileDataSource(\"input.html\"));'"
+      ]
+    },
+    {
+      "gap_id": "FG-003",
+      "gap_name": "programmatic_pdf_with_image",
+      "needed_for_types": ["ImageExtractor"],
+      "description": "PDF containing at least one embedded raster image for ImageExtractor to extract",
+      "implementation_effort": "MEDIUM",
+      "implementation_approach": "Create a PDF via Aspose.Pdf.Document with an Aspose.Pdf.Image added to a page paragraph collection. The image can be a minimal PNG or BMP generated in-memory. Requires a small programmatic image (e.g., 1x1 pixel PNG bytes) as the image source.",
+      "blocking_wave": "B",
+      "sample_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "var page = doc.Pages.Add();",
+        "var image = new Aspose.Pdf.Image();",
+        "image.File = \"sample.png\";  // pre-generated minimal PNG",
+        "page.Paragraphs.Add(image);",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "gap_id": "FG-004",
+      "gap_name": "table_builder_config",
+      "needed_for_types": ["TableGenerator"],
+      "description": "TableGenerator takes no input file — it generates a PDF from scratch using TableBuilder BUILDER types. The 'fixture' is the C# builder code for constructing table options.",
+      "implementation_effort": "MEDIUM",
+      "implementation_approach": "Add table_generator_input_creation_lines to pdf.yml template_hints documenting the TableBuilder pattern. Add per_type_constraints for TableGenerator with REQUIRED: TableOptions + TableBuilder + TableRowBuilder + TableCellBuilder usage.",
+      "blocking_wave": "B",
+      "sample_code": [
+        "var options = new PdfGeneratorOptions();",
+        "var tableOptions = new TableOptions();",
+        "var builder = new TableBuilder();",
+        "var row = new TableRowBuilder();",
+        "var cell = new TableCellBuilder();",
+        "cell.AddParagraph(\"Hello from LowCode TableGenerator\");",
+        "row.AddCell(cell);",
+        "builder.AddRow(row);",
+        "tableOptions.AddTable(builder);",
+        "options.AddOutput(new FileDataSource(\"output.pdf\"));",
+        "new TableGenerator().Process(options);"
+      ]
+    },
+    {
+      "gap_id": "FG-005",
+      "gap_name": "acroform_pdf_fixture",
+      "needed_for_types": ["FormEditor", "FormFlattener", "FormExporter", "SelectField"],
+      "description": "PDF with interactive AcroForm fields (text box, checkbox) programmatically created via Aspose.Pdf.Forms namespace",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "Create a PDF with AcroForm fields using Aspose.Pdf core API (not LowCode). Add TextBoxField and CheckBoxField to a page. Save as input.pdf. This fixture is shared across all Form-family types.",
+      "blocking_wave": "C",
+      "sample_code": [
+        "var doc = new Aspose.Pdf.Document();",
+        "var page = doc.Pages.Add();",
+        "var textBox = new Aspose.Pdf.Forms.TextBoxField(page, new Aspose.Pdf.Rectangle(100, 700, 300, 720));",
+        "textBox.PartialName = \"TextField1\";",
+        "textBox.Value = \"Default\";",
+        "doc.Form.Add(textBox, 1);",
+        "doc.Save(\"input.pdf\");"
+      ]
+    },
+    {
+      "gap_id": "FG-006",
+      "gap_name": "acroform_plus_json_data_fixture",
+      "needed_for_types": ["FormImporter"],
+      "description": "Dual-input fixture: AcroForm PDF (from FG-005) + JSON file with field name/value pairs for FormJsonImportSource",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "Reuse AcroForm PDF from FG-005. Generate a JSON file with field_name: field_value pairs matching the form field names. FormJsonImportSource wraps this JSON file.",
+      "blocking_wave": "C",
+      "sample_code": [
+        "// JSON fixture file (form-data.json):",
+        "// {\"TextField1\": \"Imported Value\", \"CheckBox1\": \"true\"}",
+        "",
+        "var options = new FormImporterJsonOptions();",
+        "options.AddInput(new FileDataSource(\"input.pdf\"));",
+        "options.AddInput(new FormJsonImportSource(\"form-data.json\"));",
+        "options.AddOutput(new FileDataSource(\"output.pdf\"));",
+        "new FormImporter().Process(options);"
+      ]
+    },
+    {
+      "gap_id": "FG-007",
+      "gap_name": "encrypted_pdf_fixture",
+      "needed_for_types": ["Security"],
+      "description": "Programmatically created encrypted PDF for Security (Decryption scenario) or plain PDF + password for Security (Encryption scenario)",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "For encryption scenario: use programmatic_pdf_single as input. For decryption scenario: must first encrypt a PDF (using Aspose.Pdf.Document.Encrypt() with owner+user passwords), save it, then use as input. Self-contained encrypt-then-decrypt example is most testable.",
+      "blocking_wave": "C",
+      "sample_code": [
+        "// Encryption scenario (plain PDF in, encrypted PDF out):",
+        "var options = new EncryptionOptions();",
+        "options.OwnerPassword = \"owner123\";",
+        "options.UserPassword = \"user123\";",
+        "options.AddInput(new FileDataSource(\"input.pdf\"));",
+        "options.AddOutput(new FileDataSource(\"encrypted.pdf\"));",
+        "new Security().Process(options);",
+        "",
+        "// Decryption scenario (encrypted PDF in, plain PDF out):",
+        "// Use encrypted.pdf from above as input — requires two-step example or pre-built fixture"
+      ]
+    },
+    {
+      "gap_id": "FG-008",
+      "gap_name": "pkcs12_certificate_fixture",
+      "needed_for_types": ["Signature"],
+      "description": "PKCS12 (.pfx) certificate file for digital signing. Can be self-signed using .NET X509Certificate2 APIs.",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "Two options: (1) Generate self-signed cert inline in the C# example using System.Security.Cryptography.X509Certificates.CertificateRequest. (2) Ship a pre-generated test.pfx file as a binary fixture artifact. Option 2 is simpler but adds a binary to the repository.",
+      "blocking_wave": "D",
+      "sample_code": [
+        "// Option 1: Inline self-signed cert generation",
+        "using System.Security.Cryptography;",
+        "using System.Security.Cryptography.X509Certificates;",
+        "using var rsa = RSA.Create(2048);",
+        "var req = new CertificateRequest(\"cn=TestSigner\", rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);",
+        "var cert = req.CreateSelfSigned(DateTimeOffset.Now, DateTimeOffset.Now.AddYears(1));",
+        "File.WriteAllBytes(\"test.pfx\", cert.Export(X509ContentType.Pfx, \"password\"));"
+      ]
+    },
+    {
+      "gap_id": "FG-009",
+      "gap_name": "tsa_server_config",
+      "needed_for_types": ["Timestamp"],
+      "description": "TSA (Timestamp Authority) server URL or offline timestamp stub for RFC 3161 timestamping",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "Option 1: Use a public free TSA URL (e.g., http://timestamp.digicert.com) — requires network access. Option 2: Investigate if TimestampOptions supports PKCS9 local timestamps without network TSA. Option 3: Implement a minimal RFC 3161 response stub — significant infrastructure work.",
+      "blocking_wave": "D",
+      "external_dependency": "Requires either: (a) network access to a public TSA server, or (b) a local TSA stub implementation. Neither is available in the current CI-safe test infrastructure.",
+      "sample_code": []
+    },
+    {
+      "gap_id": "FG-010",
+      "gap_name": "ofd_sample_file",
+      "needed_for_types": ["Ofd"],
+      "description": "A valid OFD (Open Fixed-layout Document) file conforming to GB/T 33190-2016 standard",
+      "implementation_effort": "HIGH",
+      "implementation_approach": "Source a valid OFD sample file from a public repository or Chinese government document portal. OFD is not programmatically generatable from current stack (no Python/C# OFD authoring library available). Must be sourced externally.",
+      "blocking_wave": "D",
+      "external_dependency": "OFD format requires external sourcing. Cannot be generated programmatically from Aspose.Pdf API or current fixture infrastructure.",
+      "sample_code": []
+    }
+  ],
+  "fixture_gap_summary": {
+    "total_gaps": 10,
+    "gaps_by_wave": {
+      "wave_A": ["FG-001", "FG-002"],
+      "wave_B": ["FG-003", "FG-004"],
+      "wave_C": ["FG-005", "FG-006", "FG-007"],
+      "wave_D": ["FG-008", "FG-009", "FG-010"]
+    },
+    "gaps_by_effort": {
+      "LOW": ["FG-001", "FG-002"],
+      "MEDIUM": ["FG-003", "FG-004"],
+      "HIGH": ["FG-005", "FG-006", "FG-007", "FG-008", "FG-009", "FG-010"]
+    },
+    "shared_fixture_opportunities": [
+      {
+        "fixture_gap": "FG-005",
+        "shared_by_count": 4,
+        "types": ["FormEditor", "FormFlattener", "FormExporter", "SelectField"],
+        "note": "Building the AcroForm PDF fixture once unblocks all 4 form-field types simultaneously. Highest leverage fixture investment."
+      },
+      {
+        "fixture_gap": "FG-003",
+        "shared_by_count": 1,
+        "types": ["ImageExtractor"],
+        "note": "PDF-with-image fixture is specific to ImageExtractor. However, the minimal PNG used as embedded image source could be generated by fixture_factory.py generate_png() once added."
+      }
+    ]
+  }
+}

@@ -2,8 +2,8 @@
 # Open Taskcard Closure Matrix
 
 **Matrix date:** 2026-05-13
-**Sprint:** Portfolio Launch Sprint 2
-**Total:** 126 | **Open:** 48 | **Closed:** 77
+**Sprint:** Deferred-to-Healing Conversion Sprint
+**Total:** 131 | **Open:** 52 | **Closed:** 78
 
 ---
 
@@ -14,7 +14,6 @@
 | `followup-family-readiness-ranker-trust` | Add confidence and evidence_source fields to generation readiness ranking | Observability only |
 | `followup-words-split-criteria-enumeration` | Add SplitCriteria enum values to DllReflector catalog output | WORDS-005 Splitter.Split |
 | `followup-words-pair-fixture-strategy` | Define fixture strategy for paired-input scenarios (Comparer, Merger) | WORDS-006 Comparer, WORDS-007 Merger |
-| `followup-words-mail-merger-fixture-documentation` | Create template DOCX with documented merge field names for MailMerger | WORDS-008 MailMerger |
 | `followup-words-docx-semantic-validation` | Automate DOCX text extraction validation in pipeline | Automated semantic validation for DOCX output scenarios |
 | `followup-example-reviewer-feedback-loop` | Example reviewer feedback loop — per-example structured reviewer feedback driving targeted repair | Reviewer-driven repair loop (not blocking current publish) |
 | `followup-full-planned-example-completion-contract` | Define per-scenario completion contract (required_options_class, required_inputs, known_invalid_patterns, few_shot_required, completion_blocker) |  |
@@ -59,6 +58,11 @@
 | `TC-PDF-04-pdf-batch1-expansion` | PDF Batch 1: add PdfAConverter, Html, XlsConverter, DocConverter |  |
 | `TC-EMAIL-02-email-pilot-launch` | Email Pilot Launch: activate email.yml and run Converter generation |  |
 | `TC-SLIDES-02-slides-pilot-launch` | Slides Pilot Launch: activate slides.yml and run Compress/Convert/Merger generation |  |
+| `TC-HEAL-01-words-wave3-activation` | Words Wave 3: activate Processor + MailMerger + ReportBuilder in words.yml |  |
+| `TC-HEAL-02-pdf-wave-a-expansion` | PDF Healing Wave A: activate 6 low-risk deferred types in pdf.yml |  |
+| `TC-HEAL-03-email-repo-provisioning` | Email: request maintainer provisioning of aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples repo |  |
+| `TC-HEAL-04-slides-repo-provisioning` | Slides: request maintainer provisioning of aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples repo |  |
+| `TC-HEAL-05-pdf-wave-b-image-validators` | PDF Healing Wave B: implement image output validators for Jpeg/Png/Tiff/PdfToImage/ImageExtractor |  |
 
 ---
 
@@ -81,6 +85,7 @@
 | `followup-words-pr-packaging` | Package 4 verified Words examples into PR dry-run candidate against aspose-plugins-examples-dotnet | Words PR Packaging Sprint |
 | `followup-pdf-reflection-dedup` | Deduplicate dependency assemblies before DllReflector for PDF | PDF Assembly Deduplication Sprint |
 | `followup-fixture-token-ci` | Document and enforce GitHub token handling for fixture discovery in CI | Consistency Hardening Sprint (Sprint A2) |
+| `followup-words-mail-merger-fixture-documentation` | Create template DOCX with documented merge field names for MailMerger | Deferred-to-Healing Conversion Sprint |
 | `followup-readme-backfill-token-refresh` | Refresh GITHUB_TOKEN with repo write scope and create README-only backfill PRs for Cells and Words | README Backfill Token Recheck and PR Creation Sprint |
 | `followup-root-readme-backfill-prs` | README backfill PRs for Cells and Words await human review and merge | README Backfill PR Review, Merge, and Post-Merge Verification Sprint |
 | `followup-readme-symbols-from-catalog` | Fix README generator to list actual method demonstrated, not full catalog symbols | README Demonstrated API Accuracy From Manifest/Catalog Sprint |

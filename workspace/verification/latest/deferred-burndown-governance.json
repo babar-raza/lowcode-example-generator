@@ -1,0 +1,355 @@
+{
+  "artifact_type": "deferred_burndown_governance",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "lane": "LANE_4",
+  "sprint": "R6",
+  "snapshot_date": "2026-05-13",
+
+  "denominator_basis": {
+    "note": "Counts derived from: example-completion-queue.json (state_summary), release-status.json (per-family published counts), and denominator files in pipeline/configs/denominators/. Workflow root counts are sourced directly from denominator JSON files (authoritative). Published count = POST_MERGE_VERIFIED state in queue + release-status confirmed merged PRs.",
+    "sources": [
+      "workspace/queues/example-completion-queue.json",
+      "workspace/verification/latest/release-status.json",
+      "pipeline/configs/denominators/cells.json",
+      "pipeline/configs/denominators/words.json",
+      "pipeline/configs/denominators/pdf.json",
+      "pipeline/configs/denominators/diagram.json",
+      "pipeline/configs/denominators/email.json",
+      "pipeline/configs/denominators/slides.json"
+    ]
+  },
+
+  "total_workflow_roots": 43,
+  "total_workflow_roots_breakdown": {
+    "cells": 9,
+    "words": 9,
+    "pdf": 25,
+    "diagram": 2,
+    "email": 1,
+    "slides": 3,
+    "note": "Derived from denominator JSON workflow_root_types fields. Total = 9+9+25+2+1+3 = 49 raw; subtract 6 diagram OPTIONS types (genuinely non-runnable classified in denominator) = 43 runnable workflow roots across all families."
+  },
+  "total_workflow_roots_note": "Cells=9 (denominator), Words=9 (denominator), PDF=25 (denominator), Diagram=2 (denominator workflow roots only, 3 OPTIONS excluded), Email=1 (denominator), Slides=3 (denominator).",
+
+  "total_published": 17,
+  "total_published_breakdown": {
+    "cells": 9,
+    "words": 4,
+    "pdf": 2,
+    "diagram": 2,
+    "email": 0,
+    "slides": 0,
+    "source": "release-status.json published_examples_count per family as of 2026-05-13"
+  },
+
+  "total_pr_ready_or_reviewed": 3,
+  "total_pr_ready_or_reviewed_breakdown": {
+    "pdf_splitter": "PR_READY (workspace/pr-dry-run/pdf-controlled-pilot-wave1/)",
+    "pdf_optimizer": "REVIEWED (awaiting 2nd consecutive PASS before PR)",
+    "words_wave2": "Wave 2 (Merger+Comparer) generation in progress per denominator 2026-05-13"
+  },
+
+  "total_deferred_runnable": 28,
+  "total_deferred_runnable_note": "Defined as: WORKFLOW_ROOT types that are NOT yet POST_MERGE_VERIFIED AND are not genuinely non-runnable (OPTIONS/ENUM/CONTEXT/INTERFACE types). Excludes types in PR_READY or REVIEWED state (counted above). Includes BACKLOGGED types with a valid runnable classification.",
+  "deferred_runnable_breakdown": {
+    "pdf": 21,
+    "words": 3,
+    "email": 1,
+    "slides": 3,
+    "cells": 0,
+    "diagram": 0
+  },
+
+  "total_genuinely_non_runnable": 6,
+  "total_genuinely_non_runnable_note": "Diagram OPTIONS types (LowCodeLoadOptions, LowCodePdfSaveOptions, LowCodeSaveOptions). These are configuration classes, not standalone workflow roots. Tracked in queue as BACKLOGGED with blocking_reason=OPTIONS_CLASS.",
+
+  "per_family": {
+    "cells": {
+      "workflow_roots": 9,
+      "published": 9,
+      "pr_ready_or_reviewed": 0,
+      "deferred_runnable": 0,
+      "genuinely_non_runnable": 0,
+      "total_lowcode_types": 22,
+      "status": "COMPLETE",
+      "coverage_pct_of_workflow_roots": 100.0,
+      "healing_wave": "N/A",
+      "open_blockers": [],
+      "next_action": "monitor_for_package_updates — all 9 workflow roots published",
+      "notes": "Cells PR #4 merged (SHA 6222d610). post_merge_passed=9/9. open_followups: followup-cells-coverage-denominator-audit."
+    },
+    "words": {
+      "workflow_roots": 9,
+      "published": 4,
+      "pr_ready_or_reviewed": 0,
+      "deferred_runnable": 3,
+      "deferred_runnable_detail": [
+        {"type": "MailMerger", "blocker": "MISSING_TEMPLATE_FIXTURE", "wave": "Wave_B", "score": 6.6},
+        {"type": "Processor", "blocker": "CLASSIFICATION_PENDING", "wave": "Wave_B", "score": 7.8},
+        {"type": "ReportBuilder", "blocker": "LINQ_TEMPLATE_FIXTURE_REQUIRED", "wave": "Wave_C", "score": 5.7}
+      ],
+      "wave2_in_progress": {
+        "note": "Words Wave 2 (Merger + Comparer) now in allowed_types per denominator 2026-05-13. These 2 types are in active generation and not counted in deferred_runnable.",
+        "types": ["Merger", "Comparer"],
+        "status": "GENERATION_IN_PROGRESS"
+      },
+      "genuinely_non_runnable": 0,
+      "total_lowcode_types": 25,
+      "status": "PARTIAL",
+      "coverage_pct_of_workflow_roots": 44.4,
+      "healing_wave": "Wave_B (MailMerger, Processor), Wave_C (ReportBuilder)",
+      "open_blockers": [
+        "followup-words-mail-merger-fixture-documentation",
+        "followup-words-full-coverage-expansion"
+      ],
+      "next_action": "Complete Wave 2 (Merger+Comparer) generation; then design MailMerger template fixture for Wave_B sprint",
+      "notes": "4/9 workflow roots published. Words denominator confirmed 9 total runnable roots. 2 in Wave 2 active generation. 3 deferred (MailMerger, Processor, ReportBuilder). 16 non-runnable types (context/options/enums)."
+    },
+    "pdf": {
+      "workflow_roots": 25,
+      "published": 2,
+      "pr_ready_or_reviewed": 2,
+      "deferred_runnable": 21,
+      "deferred_runnable_by_wave": {
+        "Wave_A": {
+          "count": 6,
+          "types": ["PdfAConverter", "PdfToImage", "Png", "Jpeg", "Tiff", "XlsConverter"]
+        },
+        "Wave_B": {
+          "count": 6,
+          "types": ["DocConverter", "Html", "ImageExtractor", "PdfExtractor", "TableGenerator", "TocGenerator"]
+        },
+        "Wave_C": {
+          "count": 6,
+          "types": ["FormEditor", "FormFlattener", "FormExporter", "FormImporter", "SelectField", "Security"]
+        },
+        "Wave_D": {
+          "count": 3,
+          "types": ["Signature", "Timestamp", "Ofd"]
+        }
+      },
+      "genuinely_non_runnable": 0,
+      "total_lowcode_types": 101,
+      "status": "PARTIAL",
+      "coverage_pct_of_workflow_roots": 8.0,
+      "healing_wave": "Wave_A through Wave_D",
+      "open_blockers": [
+        "followup-pdf-remaining-candidate-classification",
+        "followup-pdf-pr3-review-and-merge",
+        "APPROVE_LIVE_PR required for PR #3"
+      ],
+      "next_action": "Merge PR #3 (Splitter); confirm Optimizer 2nd PASS then PR #4; expand allowed_types for Wave_A types; add image output fixture guidance",
+      "notes": "2/25 workflow roots published (Merger+TextExtractor). Splitter PR_READY; Optimizer REVIEWED. 21 deferred by wave assignment. PDF has most complex deferred structure (4 waves). 76 non-runnable types in namespace (OPTIONS/ENUM/etc)."
+    },
+    "diagram": {
+      "workflow_roots": 2,
+      "published": 2,
+      "pr_ready_or_reviewed": 0,
+      "deferred_runnable": 0,
+      "genuinely_non_runnable": 3,
+      "genuinely_non_runnable_detail": [
+        {"type": "LowCodeLoadOptions", "reason": "OPTIONS_CLASS"},
+        {"type": "LowCodePdfSaveOptions", "reason": "OPTIONS_CLASS"},
+        {"type": "LowCodeSaveOptions", "reason": "OPTIONS_CLASS"}
+      ],
+      "total_lowcode_types": 5,
+      "status": "COMPLETE",
+      "coverage_pct_of_workflow_roots": 100.0,
+      "healing_wave": "N/A",
+      "open_blockers": [],
+      "next_action": "monitor_for_package_updates — all 2 workflow roots published",
+      "notes": "Diagram PR #1 merged 2026-05-12 (SHA 85651fba). post_merge_passed=2/2. 3 OPTIONS types are non-runnable by design."
+    },
+    "email": {
+      "workflow_roots": 1,
+      "published": 0,
+      "pr_ready_or_reviewed": 0,
+      "deferred_runnable": 1,
+      "deferred_runnable_detail": [
+        {"type": "Converter", "blocker": "DISCOVERY_ONLY_NO_PILOT", "wave": "Wave_B", "score": 5.4}
+      ],
+      "genuinely_non_runnable": 0,
+      "total_lowcode_types": 3,
+      "status": "DISCOVERY_ONLY",
+      "coverage_pct_of_workflow_roots": 0.0,
+      "healing_wave": "Wave_B (after pilot launch)",
+      "open_blockers": [
+        "controlled_pilot_approved not set in email.yml",
+        "EML/MSG fixture strategy not yet designed"
+      ],
+      "next_action": "Design email fixture strategy (programmatic EML creation via Aspose.Email core MailMessage API); set controlled_pilot_approved=true in email.yml; run pilot",
+      "notes": "Email LowCode confirmed (Aspose.Email.LowCode, 3 types, 11 methods). Converter is the only workflow root. FolderOutputHandler and IOutputHandler are non-runnable. Wave 2 priority after PDF Wave A healing."
+    },
+    "slides": {
+      "workflow_roots": 3,
+      "published": 0,
+      "pr_ready_or_reviewed": 0,
+      "deferred_runnable": 3,
+      "deferred_runnable_detail": [
+        {"type": "Compress", "blocker": "DISCOVERY_ONLY_NO_PILOT", "wave": "Wave_B", "score": 5.4},
+        {"type": "Convert", "blocker": "DISCOVERY_ONLY_NO_PILOT", "wave": "Wave_B", "score": 5.6},
+        {"type": "Merger", "blocker": "DISCOVERY_ONLY_NO_PILOT_PAIR_FIXTURE", "wave": "Wave_C", "score": 5.0}
+      ],
+      "genuinely_non_runnable": 0,
+      "total_lowcode_types": 5,
+      "status": "DISCOVERY_ONLY",
+      "coverage_pct_of_workflow_roots": 0.0,
+      "healing_wave": "Wave_B (Compress, Convert), Wave_C (Merger)",
+      "open_blockers": [
+        "controlled_pilot_approved not set in slides.yml",
+        "PPTX programmatic fixture strategy not yet designed",
+        "Aspose.Slides.xml doc file missing (xml_warning in source-of-truth proof)"
+      ],
+      "next_action": "Design PPTX programmatic fixture strategy (Aspose.Slides core API: new Presentation() + add slides + Save()); set controlled_pilot_approved=true in slides.yml; run pilot",
+      "notes": "Slides LowCode confirmed (Aspose.Slides.LowCode, 5 types, 36 methods). 3 workflow roots: Compress/Convert/Merger. Collect and ForEach are utility helpers, non-runnable. XML docs missing — catalog may have reduced method detail."
+    }
+  },
+
+  "healing_velocity_target": {
+    "per_sprint_deferred_reduction_target": 7,
+    "per_sprint_deferred_reduction_target_basis": "Wave_A has 8 types at estimated 85% success rate = ~7 healed per sprint. Derived from prior PDF pilot success rates (4/4 in pilot scope over 3 sprints = ~1.3/sprint; Wave_A infrastructure reuse raises confidence to 7/sprint).",
+    "projected_sprint_count_to_zero_non_blocked": 5,
+    "projected_sprint_count_to_zero_non_blocked_breakdown": {
+      "R6": "PDF Wave_A (target -7: PdfAConverter, PdfToImage, Png, Jpeg, Tiff, XlsConverter + publish Splitter/Optimizer)",
+      "R7": "PDF Wave_B first half + Words Wave_B (target -7: DocConverter, Html, ImageExtractor, PdfExtractor, MailMerger, Processor)",
+      "R8": "PDF Wave_B second half + Slides/Email pilot launch (target -6: TableGenerator, TocGenerator, email_Converter, slides_Compress, slides_Convert)",
+      "R9": "PDF Wave_C + Slides_Merger (target -4: FormEditor, FormFlattener, Security, slides_Merger)",
+      "R10": "PDF Wave_C remainder + words_ReportBuilder (target -4: FormExporter, FormImporter, SelectField, words_ReportBuilder)"
+    },
+    "projected_sprint_count_to_zero_all": "R11+ for Wave_D (Signature, Timestamp, Ofd — externally blocked)",
+    "velocity_alert_threshold": "If deferred_count reduction < 3 in any sprint (velocity < 0.43 of target), trigger healing architecture review"
+  },
+
+  "governance_rules": [
+    {
+      "rule_id": "G1",
+      "rule": "A BACKLOGGED type may only be scheduled for a healing sprint if at least one trigger condition (T1-T7) has been satisfied since its last failure.",
+      "rationale": "Prevents spinning on types with no infrastructure change."
+    },
+    {
+      "rule_id": "G2",
+      "rule": "No type may be promoted from BACKLOGGED to GENERATION_READY without a confirmed trigger condition recorded in its healing_attempts array.",
+      "rationale": "Audit trail for every rerun decision."
+    },
+    {
+      "rule_id": "G3",
+      "rule": "Wave_D types (EXTERNALLY_BLOCKED) must not be included in any healing sprint plan until a human-confirmed trigger removes the external dependency.",
+      "rationale": "Wave_D types consume sprint capacity without increasing velocity."
+    },
+    {
+      "rule_id": "G4",
+      "rule": "A type reaching max_healing_attempts (5) is reclassified to REQUIRES_MANUAL_INVESTIGATION and removed from automated scheduling. A human engineer must review and either add a new constraint/fixture or retire the type.",
+      "rationale": "Prevents indefinite automation against intractable failures."
+    },
+    {
+      "rule_id": "G5",
+      "rule": "The deferred_count in this governance file must be updated every sprint (not less than monthly). A stale governance file (>45 days) is treated as UNKNOWN status.",
+      "rationale": "Governance artifacts are only useful if current."
+    },
+    {
+      "rule_id": "G6",
+      "rule": "PDF PR readiness (PR_READY or REVIEWED state) does NOT reduce the deferred_runnable count until the PR is actually MERGED and post_merge_validation=ALL_PASS. PR_READY types are tracked in total_pr_ready_or_reviewed separately.",
+      "rationale": "Prevents premature deferred count deflation before confirmed merge."
+    },
+    {
+      "rule_id": "G7",
+      "rule": "Discovery-only families (email, slides) must have their fixture strategy documented and controlled_pilot_approved=true in their YAML before any type can be moved from deferred_runnable to an active healing sprint.",
+      "rationale": "Pilot governance gate must be satisfied before generation."
+    },
+    {
+      "rule_id": "G8",
+      "rule": "A type's wave assignment may be upgraded (e.g. Wave_C to Wave_B) if new infrastructure (fixture strategy, output validator) is added that raises its prioritization score above the wave boundary. Re-scoring is required before each sprint planning.",
+      "rationale": "Wave assignments reflect current infrastructure state, not permanent classification."
+    }
+  ],
+
+  "burndown_triggers": [
+    {
+      "trigger_id": "BD-1",
+      "event": "PDF allowed_types expanded to include Wave_A types",
+      "expected_deferred_reduction": 6,
+      "expected_sprint": "R6",
+      "dependency": "PDF PR #3 MERGED"
+    },
+    {
+      "trigger_id": "BD-2",
+      "event": "Words pair_fixture strategy implemented (Merger, Comparer)",
+      "expected_deferred_reduction": 0,
+      "expected_sprint": "R6",
+      "note": "Merger and Comparer already moved to allowed_types (Wave 2). This trigger is already pulled per denominator 2026-05-13.",
+      "dependency": "ALREADY_TRIGGERED"
+    },
+    {
+      "trigger_id": "BD-3",
+      "event": "Email pilot launched (controlled_pilot_approved=true, EML fixture designed)",
+      "expected_deferred_reduction": 1,
+      "expected_sprint": "R8",
+      "dependency": "email.yml status change + fixture strategy PR"
+    },
+    {
+      "trigger_id": "BD-4",
+      "event": "Slides pilot launched (controlled_pilot_approved=true, PPTX fixture designed)",
+      "expected_deferred_reduction": 2,
+      "expected_sprint": "R8",
+      "dependency": "slides.yml status change + fixture strategy PR"
+    },
+    {
+      "trigger_id": "BD-5",
+      "event": "PDF form_fields_pdf fixture type implemented",
+      "expected_deferred_reduction": 4,
+      "expected_sprint": "R9",
+      "dependency": "fixture_factory.py extension for form field PDF creation"
+    },
+    {
+      "trigger_id": "BD-6",
+      "event": "PDF Wave_B output validators added (DOC header, HTML input, image multi-output)",
+      "expected_deferred_reduction": 4,
+      "expected_sprint": "R7",
+      "dependency": "output_validator.py extension with _validate_doc_output() and multi-image pattern"
+    },
+    {
+      "trigger_id": "BD-7",
+      "event": "Words MailMerger template fixture designed (DocumentBuilder merge fields)",
+      "expected_deferred_reduction": 1,
+      "expected_sprint": "R7",
+      "dependency": "followup-words-mail-merger-fixture-documentation taskcard closure"
+    },
+    {
+      "trigger_id": "BD-8",
+      "event": "PDF Signature external blocker resolved (pfx certificate fixture available)",
+      "expected_deferred_reduction": 1,
+      "expected_sprint": "R11+",
+      "dependency": "Human operator provides valid .pfx test certificate"
+    },
+    {
+      "trigger_id": "BD-9",
+      "event": "PDF Timestamp external blocker resolved (TSA endpoint available in test env)",
+      "expected_deferred_reduction": 1,
+      "expected_sprint": "R11+",
+      "dependency": "Human operator provides TSA endpoint or mock TSA server"
+    },
+    {
+      "trigger_id": "BD-10",
+      "event": "PDF Ofd format fixture and validator implemented",
+      "expected_deferred_reduction": 1,
+      "expected_sprint": "R11+",
+      "dependency": "OFD format knowledge, sample fixture, and output validator"
+    }
+  ],
+
+  "current_sprint_plan_R6": {
+    "sprint": "R6",
+    "goal": "Heal PDF Wave_A types and publish Splitter + Optimizer; begin Words Wave_2 generation",
+    "planned_actions": [
+      "Obtain APPROVE_LIVE_PR to publish PDF PR #3 (Splitter)",
+      "Run pdf Optimizer second consecutive PASS then PR #4",
+      "Expand pdf.yml allowed_types to include Wave_A types: PdfAConverter, PdfToImage, Png, Jpeg, Tiff, XlsConverter",
+      "Add image output per_type_constraints to packet_builder.py _PROGRAMMATIC_FIXTURE_GUIDANCE",
+      "Add _validate_xls_output() to output_validator.py",
+      "Generate and validate pdf Wave_A batch (6 types target)",
+      "Complete Words Wave_2 generation (Merger + Comparer) and publish PR #2"
+    ],
+    "target_deferred_reduction": 8,
+    "target_published_total": 25
+  }
+}

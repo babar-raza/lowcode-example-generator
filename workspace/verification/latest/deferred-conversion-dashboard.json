@@ -1,0 +1,105 @@
+{
+  "artifact_type": "deferred_conversion_dashboard",
+  "generated_at": "2026-05-13T12:00:00+00:00",
+  "sprint": "Deferred-to-Healing Conversion Sprint",
+  "dashboard_version": "v2",
+  "total_deferred_runnable": 28,
+  "deferred_with_healing_paths_this_sprint": 28,
+  "deferred_remaining_terminal": 0,
+  "healing_classification_summary": {
+    "HEALABLE_LOW_RISK": {
+      "count": 10,
+      "types": ["PDF:TocGenerator", "PDF:PdfAConverter", "PDF:DocConverter", "PDF:XlsConverter", "PDF:PdfExtractor", "PDF:Html", "Words:Processor", "Words:MailMerger"],
+      "note": "Processor reclassified from RESEARCH_REQUIRED to LOW_RISK — fluent chain API fully understood"
+    },
+    "HEALABLE_MEDIUM_RISK": {
+      "count": 9,
+      "types": ["PDF:Jpeg", "PDF:Png", "PDF:Tiff", "PDF:PdfToImage", "PDF:ImageExtractor", "PDF:TableGenerator", "PDF:FormFlattener", "Words:ReportBuilder"],
+      "note": "ReportBuilder reclassified from RESEARCH_REQUIRED to MEDIUM_RISK — LINQ <<[FieldName]>> syntax understood"
+    },
+    "HEALABLE_HIGH_RISK": {
+      "count": 5,
+      "types": ["PDF:FormEditor", "PDF:FormExporter", "PDF:FormImporter", "PDF:SelectField", "PDF:Security"]
+    },
+    "EXTERNALLY_BLOCKED": {
+      "count": 4,
+      "types": ["PDF:Signature (PKCS12 cert needed)", "PDF:Timestamp (TSA server needed)", "PDF:Ofd (niche Chinese format)", "Email:Converter (repo not provisioned)"],
+      "slides_note": "Slides 3 types (Convert, Compress, Merger) also externally blocked on repo provisioning — classified as EXTERNALLY_BLOCKED_THEN_HEALABLE after provisioning"
+    },
+    "RESEARCH_REQUIRED": {
+      "count": 0,
+      "note": "Previously RESEARCH_REQUIRED: Processor (fully resolved — fluent API), ReportBuilder (fully resolved — LINQ syntax), MailMerger (fully resolved — string array overload, no IMailMergeDataSource needed)"
+    },
+    "GENUINELY_NON_RUNNABLE": {
+      "count": 0
+    }
+  },
+  "per_family_deferred": {
+    "cells": {
+      "deferred_count": 0,
+      "healing_status": "COMPLETE"
+    },
+    "words": {
+      "deferred_count": 3,
+      "types": ["MailMerger", "Processor", "ReportBuilder"],
+      "healing_status": "CLASSIFICATION_COMPLETE",
+      "key_insight": "All 3 types fully analyzable with known API patterns and programmatic fixture strategies. None require external dependencies.",
+      "sprint_target": "Sprint 3"
+    },
+    "pdf": {
+      "deferred_count": 21,
+      "healing_status": "CLASSIFICATION_COMPLETE",
+      "wave_A": 6,
+      "wave_B": 7,
+      "wave_C": 5,
+      "wave_D": 3,
+      "key_insight": "6 types can run with ONLY config changes (Wave A). 3 types are externally blocked (Wave D). Remaining 12 need code work but are all technically healable.",
+      "sprint_target": "Wave A: Sprint 3; Wave B: Sprint 4; Wave C: Sprint 5; Wave D: Sprint 6+"
+    },
+    "diagram": {
+      "deferred_count": 0,
+      "healing_status": "COMPLETE"
+    },
+    "email": {
+      "deferred_count": 1,
+      "types": ["Converter"],
+      "healing_status": "ACTIVATION_PLAN_COMPLETE",
+      "key_insight": "Converter uses async/await with IOutputHandler (FolderOutputHandler) — NOT file path output param. Hard blocker is repo provisioning (maintainer action only).",
+      "sprint_target": "Sprint 3 (pending repo provisioning)"
+    },
+    "slides": {
+      "deferred_count": 3,
+      "types": ["Convert", "Compress", "Merger"],
+      "healing_status": "ACTIVATION_PLAN_COMPLETE",
+      "key_insight": "Convert.ToPdf(presPath, outPath) is safest start — file-path API. Compress takes Presentation object (needs pres.Save() after). Hard blocker: repo provisioning.",
+      "sprint_target": "Convert: Sprint 3/4; Compress+Merger: Sprint 4/5"
+    }
+  },
+  "sprint_governance_outcome": {
+    "before_this_sprint": "28 deferred types in passive backlog state with no healing paths",
+    "after_this_sprint": "28 deferred types fully classified with healing strategies, wave assignments, fixture strategies, validator strategies, and rerun feasibility",
+    "research_required_resolved": 3,
+    "terminal_deferrals_eliminated": true,
+    "healing_engine_established": true
+  },
+  "critical_reclassifications": [
+    {
+      "type": "Words:Processor",
+      "from": "RESEARCH_REQUIRED (semantics unknown)",
+      "to": "HEALABLE_LOW_RISK",
+      "reason": "Fluent chain API confirmed: new Processor().From(input).To(output, SaveFormat.Pdf).Execute(). No new fixture code needed — reuses existing programmatic_docx_single pattern."
+    },
+    {
+      "type": "Words:MailMerger",
+      "from": "HEALABLE_MEDIUM_RISK (IMailMergeDataSource complexity)",
+      "to": "HEALABLE_LOW_RISK",
+      "reason": "IMailMergeDataSource NOT needed. String array overload Execute(template, output, fieldNames[], fieldValues[]) is sufficient. Template via DocumentBuilder.InsertField()."
+    },
+    {
+      "type": "Words:ReportBuilder",
+      "from": "RESEARCH_REQUIRED (LINQ semantics unknown)",
+      "to": "HEALABLE_MEDIUM_RISK",
+      "reason": "LINQ tag syntax <<[FieldName]>> confirmed. BuildReport(template, output, new { Name = 'World' }) is the pattern. Template via DocumentBuilder.Write('<<[Name]>>')."
+    }
+  ]
+}

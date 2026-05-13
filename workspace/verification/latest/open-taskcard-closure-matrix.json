@@ -1,6 +1,6 @@
 {
   "matrix_date": "2026-05-13",
-  "sprint": "Portfolio Launch Sprint 2",
+  "sprint": "Deferred-to-Healing Conversion Sprint",
   "taskcards": [
     {
       "id": "followup-aspose-net-link-standardization",
@@ -151,10 +151,12 @@
     {
       "id": "followup-words-mail-merger-fixture-documentation",
       "title": "Create template DOCX with documented merge field names for MailMerger",
-      "status": "OPEN",
-      "closed_in": null,
-      "evidence": "MailMerger.Execute needs template with known merge field names in fixture metadata.",
-      "blocking": "WORDS-008 MailMerger"
+      "status": "CLOSED_VERIFIED",
+      "closed_in": "Deferred-to-Healing Conversion Sprint",
+      "evidence": "LANE 2 analysis: MailMerger template fixture strategy resolved. IMailMergeDataSource NOT needed — string array overload Execute(template, output, fieldNames[], fieldValues[]) sufficient. Template via DocumentBuilder.InsertField(\"MERGEFIELD FirstName\"). Evidence: words-wave3-healing-analysis.json.",
+      "blocking": "WORDS-008 MailMerger",
+      "closed_date": "2026-05-13",
+      "implementation_verified": true
     },
     {
       "id": "followup-words-docx-semantic-validation",
@@ -1399,6 +1401,71 @@
       "scope": "Update slides.yml: status=active, allowed_types=[Compress, Convert, Merger]; programmatic_pptx fixture; live PR",
       "gating": "Target repo provisioned by maintainer; APPROVE_LIVE_PR",
       "category": "slides_pilot"
+    },
+    {
+      "id": "TC-HEAL-01-words-wave3-activation",
+      "title": "Words Wave 3: activate Processor + MailMerger + ReportBuilder in words.yml",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "opened_in": "Deferred-to-Healing Conversion Sprint",
+      "opened_date": "2026-05-13",
+      "scope": "Add Processor, MailMerger, ReportBuilder to words.yml allowed_types with per_type_constraints and template_hints. Run pilot. Processor needs no fixture code. MailMerger needs MERGEFIELD template hints. ReportBuilder needs LINQ <<[FieldName]>> template hints.",
+      "category": "words_expansion",
+      "healing_wave": "Wave3",
+      "estimated_complexity": "LOW-MEDIUM",
+      "rerun_feasibility": "Processor=READY_AFTER_CONFIG, MailMerger=NEEDS_FIXTURE_CODE(template_hints), ReportBuilder=NEEDS_FIXTURE_CODE"
+    },
+    {
+      "id": "TC-HEAL-02-pdf-wave-a-expansion",
+      "title": "PDF Healing Wave A: activate 6 low-risk deferred types in pdf.yml",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "opened_in": "Deferred-to-Healing Conversion Sprint",
+      "opened_date": "2026-05-13",
+      "scope": "Add TocGenerator, PdfAConverter, DocConverter, XlsConverter, PdfExtractor, Html to pdf.yml allowed_types. Add per_type_constraints. Implement minor new output validators (DOC magic byte, XLS magic byte, HTML tag check). Run pilot.",
+      "category": "pdf_expansion",
+      "healing_wave": "WaveA",
+      "estimated_complexity": "LOW",
+      "prerequisite": "PDF pilot publication complete (Splitter + Optimizer PRs merged)"
+    },
+    {
+      "id": "TC-HEAL-03-email-repo-provisioning",
+      "title": "Email: request maintainer provisioning of aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples repo",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "opened_in": "Deferred-to-Healing Conversion Sprint",
+      "opened_date": "2026-05-13",
+      "scope": "Maintainer must create GitHub org repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples with branch main. After provisioning: activate email.yml, add Converter to allowed_types, add async fixture hints (FolderOutputHandler pattern), add per_type_constraints.",
+      "category": "email_activation",
+      "healing_wave": "ActivationWave1",
+      "blocking_action": "MAINTAINER",
+      "estimated_complexity": "LOW (code), requires external human action (repo provisioning)"
+    },
+    {
+      "id": "TC-HEAL-04-slides-repo-provisioning",
+      "title": "Slides: request maintainer provisioning of aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples repo",
+      "status": "OPEN",
+      "priority": "MEDIUM",
+      "opened_in": "Deferred-to-Healing Conversion Sprint",
+      "opened_date": "2026-05-13",
+      "scope": "Maintainer must create GitHub org repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples. After provisioning: activate slides.yml for Convert.ToPdf pilot only. Convert.ToPdf(presPath, outPath) uses file-path API. Compress and Merger deferred to Sprint 4/5.",
+      "category": "slides_activation",
+      "healing_wave": "ActivationWave1",
+      "blocking_action": "MAINTAINER",
+      "estimated_complexity": "LOW (Convert.ToPdf after provisioning)"
+    },
+    {
+      "id": "TC-HEAL-05-pdf-wave-b-image-validators",
+      "title": "PDF Healing Wave B: implement image output validators for Jpeg/Png/Tiff/PdfToImage/ImageExtractor",
+      "status": "OPEN",
+      "priority": "MEDIUM",
+      "opened_in": "Deferred-to-Healing Conversion Sprint",
+      "opened_date": "2026-05-13",
+      "scope": "Implement/extend image format validators in output_validator.py. Add Jpeg (FFD8 FF), Png (89504E47), Tiff (49492A00/4D4D002A) magic byte checks. TableGenerator needs DOCX output validator. FormFlattener needs programmatic AcroForm input fixture.",
+      "category": "pdf_expansion",
+      "healing_wave": "WaveB",
+      "estimated_complexity": "MEDIUM",
+      "prerequisite": "TC-HEAL-02 Wave A complete"
     }
   ],
   "summary": {

@@ -1,0 +1,254 @@
+{
+  "artifact_type": "pdf_validator_gap_analysis",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "generated_by": "LANE_1_healing_analysis",
+  "source_files": [
+    "src/plugin_examples/verifier_bridge/output_validator.py",
+    "workspace/verification/latest/pdf-type-role-classification.json",
+    "workspace/verification/latest/pdf-deferred-healing-matrix.json"
+  ],
+  "existing_validators": [
+    {
+      "validator_id": "pdf_magic_byte",
+      "function": "_validate_pdf_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Checks first 5 bytes of output file equal b'%PDF-'. Also checks min_bytes threshold.",
+      "triggers_on_extension": [".pdf"],
+      "used_by_pilot_types": ["Merger", "Splitter", "Optimizer", "TextExtractor (input fixture validation)"],
+      "usable_for_deferred_types": [
+        "DocConverter (if DOCX output, use xlsx_check instead)",
+        "FormEditor",
+        "FormExporter (PDF output variant)",
+        "FormFlattener",
+        "FormImporter",
+        "Html (HTML-to-PDF output)",
+        "PdfAConverter",
+        "PdfExtractor (if file output)",
+        "Security",
+        "SelectField",
+        "Signature",
+        "TableGenerator",
+        "Timestamp",
+        "TocGenerator",
+        "XlsConverter (not applicable — different format)"
+      ]
+    },
+    {
+      "validator_id": "image_format",
+      "function": "_validate_image_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Checks image file format headers: PNG (0x89 0x50 0x4E 0x47), JPEG (0xFF 0xD8), BMP (0x42 0x4D), TIFF (0x49 0x49 or 0x4D 0x4D). Falls back to non-empty file check for other formats.",
+      "triggers_on_extension": [".png", ".jpg", ".jpeg", ".bmp", ".tiff"],
+      "used_by_pilot_types": [],
+      "usable_for_deferred_types": ["Jpeg", "Png", "Tiff", "PdfToImage", "ImageExtractor"]
+    },
+    {
+      "validator_id": "html_check",
+      "function": "_validate_html_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Checks HTML output file for <html> tag and <table> tag presence.",
+      "triggers_on_extension": [".html", ".htm"],
+      "used_by_pilot_types": [],
+      "usable_for_deferred_types": ["Html (PDF-to-HTML variant via PdfToHtmlOptions)"]
+    },
+    {
+      "validator_id": "xlsx_check",
+      "function": "_validate_xlsx_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Validates XLSX output as a valid ZIP file containing xl/workbook.xml. Counts ZIP entries.",
+      "triggers_on_extension": [".xlsx"],
+      "used_by_pilot_types": [],
+      "usable_for_deferred_types": ["XlsConverter (XLSX output variant)", "DocConverter (DOCX output variant via ZIP+word/document.xml check)"]
+    },
+    {
+      "validator_id": "json_check",
+      "function": "_validate_json_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Validates JSON output file is parseable. Checks array vs. object shape.",
+      "triggers_on_extension": [".json"],
+      "used_by_pilot_types": [],
+      "usable_for_deferred_types": ["FormExporter (FormExporterToJsonOptions variant)"]
+    },
+    {
+      "validator_id": "text_check",
+      "function": "_validate_text_output",
+      "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+      "description": "Validates text/CSV output file is UTF-8 readable. Checks content_contains and content_not_contains from expected-output.json.",
+      "triggers_on_extension": [".csv", ".txt"],
+      "used_by_pilot_types": [],
+      "usable_for_deferred_types": ["FormExporter (FormExporterValuesToCsvOptions variant)"]
+    }
+  ],
+  "validator_gaps": [
+    {
+      "gap_id": "VG-001",
+      "gap_name": "doc_format_check",
+      "needed_for_types": ["DocConverter"],
+      "description": "Validator for DOC/DOCX output from PDF-to-document conversion. Two sub-variants needed: (1) DOCX output — reuse xlsx_check pattern checking for word/document.xml inside ZIP, (2) Legacy DOC output — check OLE2 compound document magic bytes (D0 CF 11 E0 A1 B1 1A E1).",
+      "implementation_effort": "LOW",
+      "implementation_approach": "Add a new check in _validate_xlsx_output (or a new _validate_docx_output function) that looks for word/document.xml in the ZIP namelist instead of xl/workbook.xml. Extend the extension dispatch in validate_output_file_semantic to route .docx to this new check.",
+      "blocking_wave": "A",
+      "healing_batch": "HealingWaveA-Batch1",
+      "proposed_implementation": {
+        "function_name": "_validate_docx_output",
+        "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+        "logic": "Open as zipfile.ZipFile; check 'word/document.xml' in namelist. For .doc: check header bytes D0 CF 11 E0.",
+        "extension_routing": "Add .docx case to validate_output_file_semantic dispatch"
+      }
+    },
+    {
+      "gap_id": "VG-002",
+      "gap_name": "pdf_a_conformance_check",
+      "needed_for_types": ["PdfAConverter"],
+      "description": "Light-weight PDF/A conformance marker check. Full PDF/A validation requires specialized tools (VeraPDF). Minimum viable check: verify %PDF- header (pdf_magic_byte already covers this) + search for XMP conformance metadata block.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "After pdf_magic_byte check, read first 4KB of file and search for b'pdfa:conformance' or b'pdfaid:conformance' XMP namespace strings. If found, report as conformance_marker_found=True (bonus check). Basic healing only requires pdf_magic_byte passing.",
+      "blocking_wave": "A",
+      "healing_batch": "HealingWaveA-Batch1",
+      "proposed_implementation": {
+        "function_name": "_validate_pdfa_output (optional enhancement)",
+        "module": "src/plugin_examples/verifier_bridge/output_validator.py",
+        "logic": "Run pdf_magic_byte first. Optionally scan binary content for XMP namespace marker b'pdfaid:part'. This is a best-effort check — not required to pass for initial healing.",
+        "note": "For Healing Wave A, pdf_magic_byte alone is sufficient for PdfAConverter healing. The conformance check is a future enhancement."
+      }
+    },
+    {
+      "gap_id": "VG-003",
+      "gap_name": "string_result_check",
+      "needed_for_types": ["PdfExtractor"],
+      "description": "Validator for ResultCollection output where results are StringResult (text content) rather than file outputs. Pattern established by TextExtractor pilot: cast ResultCollection[0] to StringResult, check .Text contains expected string.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "The TextExtractor validation pattern is already in production code. For PdfExtractor, add per_type_constraints documenting the same StringResult/FileResult handling. No new validator code needed if PdfExtractor outputs StringResult — reuse TextExtractor expected-output.json pattern with content_contains check.",
+      "blocking_wave": "A",
+      "healing_batch": "HealingWaveA-Batch1",
+      "proposed_implementation": {
+        "approach": "Reuse stdout validation (validate_output function) with must_contain patterns in expected-output.json. If PdfExtractor outputs files to ResultCollection, pdf_magic_byte applies to those files. No new validator code strictly required.",
+        "note": "Needs API verification: does PdfExtractor.Process() produce StringResult or FileResult entries? If StringResult, stdout validation already handles it. If FileResult with PDF output, pdf_magic_byte applies."
+      }
+    },
+    {
+      "gap_id": "VG-004",
+      "gap_name": "image_output_per_page_check",
+      "needed_for_types": ["PdfToImage", "ImageExtractor", "Jpeg", "Png", "Tiff"],
+      "description": "When PDF-to-image conversion outputs multiple files (one per page), the current _validate_image_output checks a single file path. Need to validate ResultCollection entries where each entry is a FileResult pointing to an image file.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "The existing _validate_image_output works correctly on individual file paths. The integration layer (runner.py / bridge) needs to iterate ResultCollection entries and call validate_output_file_semantic on each FileResult path. This is an integration-level change, not a new validator function.",
+      "blocking_wave": "B",
+      "healing_batch": "HealingWaveB-Batch1",
+      "proposed_implementation": {
+        "approach": "In expected-output.json for image-output types, specify result_collection_validation: true + expected_result_count: 1 (for single-page input) + each_result_extension: .png. The runner validates each ResultCollection entry.",
+        "note": "For Healing Wave B, validate only that at least 1 image file exists in output dir and passes image_format check. Full per-page count validation is a future enhancement."
+      }
+    },
+    {
+      "gap_id": "VG-005",
+      "gap_name": "table_pdf_content_check",
+      "needed_for_types": ["TableGenerator"],
+      "description": "TableGenerator output is a newly created PDF. pdf_magic_byte is sufficient for basic healing. Optional enhancement: extract text from the generated PDF to verify table content appears.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "For Healing Wave B, pdf_magic_byte + min_bytes check is sufficient. No new validator needed. The 'fixture' for TableGenerator is the builder code, not an input file.",
+      "blocking_wave": "B",
+      "healing_batch": "HealingWaveB-Batch2",
+      "proposed_implementation": {
+        "approach": "pdf_magic_byte validator is sufficient for initial healing. Per expected-output.json pattern, set min_bytes to reasonable threshold (e.g., 500) to confirm non-empty PDF generated.",
+        "note": "No new validator code needed for Wave B healing of TableGenerator."
+      }
+    },
+    {
+      "gap_id": "VG-006",
+      "gap_name": "pdf_encryption_state_check",
+      "needed_for_types": ["Security"],
+      "description": "Validator for encrypted/decrypted PDF output. For basic healing, pdf_magic_byte is sufficient. For semantic validation: encrypted PDF should contain /Encrypt entry in PDF cross-reference; decrypted PDF should not.",
+      "implementation_effort": "MEDIUM",
+      "implementation_approach": "For Healing Wave C, pdf_magic_byte is sufficient. Optional enhancement: read PDF binary and search for b'/Encrypt' token in first 1KB to confirm encryption dict presence. This is a heuristic check — not authoritative but sufficient for smoke testing.",
+      "blocking_wave": "C",
+      "healing_batch": "HealingWaveC-Batch2",
+      "proposed_implementation": {
+        "approach": "For initial healing: pdf_magic_byte only. Enhanced validator: scan binary for /Encrypt token. Document as 'encryption_marker_check' in expected-output.json.",
+        "note": "The primary challenge for Security is the fixture (FG-007), not the validator."
+      }
+    },
+    {
+      "gap_id": "VG-007",
+      "gap_name": "pdf_signature_presence_check",
+      "needed_for_types": ["Signature"],
+      "description": "Validator to confirm digital signature was added to PDF. Check for /Sig annotation or /AcroForm /Sig structure in PDF binary.",
+      "implementation_effort": "MEDIUM",
+      "implementation_approach": "Scan PDF binary for b'/Sig' token or b'adbe.pkcs7' OID string to confirm signature dict present. Heuristic but sufficient for smoke testing. Full cryptographic signature verification would require pyhanko or similar library.",
+      "blocking_wave": "D",
+      "healing_batch": "HealingWaveD-Batch1",
+      "proposed_implementation": {
+        "approach": "Binary scan for /Sig and /AcroForm presence. pdf_magic_byte check passes first. The signature-specific check is bonus validation.",
+        "note": "For Wave D healing, pdf_magic_byte + no-error-in-stdout is the minimum bar. Signature presence check is a bonus."
+      }
+    },
+    {
+      "gap_id": "VG-008",
+      "gap_name": "timestamp_token_check",
+      "needed_for_types": ["Timestamp"],
+      "description": "Validator to confirm RFC 3161 timestamp token embedded in PDF. Check for /DocTimeStamp annotation.",
+      "implementation_effort": "MEDIUM",
+      "implementation_approach": "Binary scan for b'/DocTimeStamp' or b'1.2.840.113549.1.9.16.1.4' OID (RFC 3161 id-smime-ct-TSTInfo). Heuristic only.",
+      "blocking_wave": "D",
+      "healing_batch": "HealingWaveD-Batch1",
+      "proposed_implementation": {
+        "approach": "Binary scan for /DocTimeStamp token. However, the primary blocker for Timestamp is the TSA server fixture gap (FG-009), not the validator. Validator implementation is secondary.",
+        "note": "Cannot heal Timestamp until FG-009 (TSA server/stub) is resolved."
+      }
+    },
+    {
+      "gap_id": "VG-009",
+      "gap_name": "form_data_round_trip_check",
+      "needed_for_types": ["FormExporter", "FormImporter"],
+      "description": "Validator for form field export/import round-trip. For FormExporter (JSON variant): json_check already exists. For FormImporter: pdf_magic_byte on output PDF. Optional round-trip check: export-then-verify field values.",
+      "implementation_effort": "LOW",
+      "implementation_approach": "For FormExporter JSON: existing json_check + content_contains check for expected field value in JSON output. For FormImporter: pdf_magic_byte on output. No new validator code strictly needed.",
+      "blocking_wave": "C",
+      "healing_batch": "HealingWaveC-Batch1",
+      "proposed_implementation": {
+        "approach": "Reuse json_check for FormExporter JSON output. Use text_check for CSV output. Use pdf_magic_byte for FormImporter output. All existing validators apply.",
+        "note": "The primary challenge for Form types is the AcroForm fixture (FG-005, FG-006), not the validators."
+      }
+    }
+  ],
+  "validator_gap_summary": {
+    "total_gaps": 9,
+    "gaps_by_wave": {
+      "wave_A": ["VG-001", "VG-002", "VG-003"],
+      "wave_B": ["VG-004", "VG-005"],
+      "wave_C": ["VG-006", "VG-009"],
+      "wave_D": ["VG-007", "VG-008"]
+    },
+    "gaps_by_effort": {
+      "LOW": ["VG-001", "VG-002", "VG-003", "VG-004", "VG-005", "VG-009"],
+      "MEDIUM": ["VG-006", "VG-007", "VG-008"],
+      "HIGH": []
+    },
+    "types_with_no_new_validator_needed": {
+      "types": ["FormFlattener", "FormEditor", "FormImporter", "SelectField", "Security (basic)", "TableGenerator", "TocGenerator", "Signature (basic)"],
+      "reason": "pdf_magic_byte validator already covers these types' output format. Primary blocker is fixture code, not validator code."
+    },
+    "validator_reuse_opportunities": [
+      {
+        "validator": "pdf_magic_byte",
+        "reusable_for_count": 13,
+        "note": "The single most impactful existing validator — covers all PDF-output types in the deferred set."
+      },
+      {
+        "validator": "image_format",
+        "reusable_for_count": 5,
+        "note": "All four image converters (Jpeg, Png, Tiff, PdfToImage) plus ImageExtractor can use this without modification."
+      },
+      {
+        "validator": "xlsx_check",
+        "reusable_for_count": 2,
+        "note": "XlsConverter (XLSX variant) and DocConverter (DOCX variant — needs word/document.xml check instead of xl/workbook.xml) can leverage this with minor adaptation."
+      }
+    ],
+    "new_code_required_summary": {
+      "strictly_required": ["VG-001 (_validate_docx_output function)"],
+      "optional_enhancements": ["VG-002 (pdfa conformance scan)", "VG-004 (result_collection iteration)", "VG-006 (encryption marker scan)", "VG-007 (signature presence scan)", "VG-008 (timestamp token scan)"],
+      "not_required_reuse_existing": ["VG-003 (stdout validation pattern)", "VG-005 (pdf_magic_byte sufficient)", "VG-009 (json_check + pdf_magic_byte sufficient)"]
+    }
+  }
+}

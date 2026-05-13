@@ -1,10 +1,10 @@
 {
   "render_type": "root_readme_render_result",
-  "render_date": "2026-05-13 11:00 UTC",
+  "render_date": "2026-05-13 11:21 UTC",
   "family": "words",
   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
-  "readme_bytes": 4480,
+  "readme_bytes": 4503,
   "package_version": "26.4.0",
   "examples_count": 4,
   "example_names": [

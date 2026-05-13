@@ -62,11 +62,13 @@ generation:
     - TextExtractor
     - Splitter
     - Optimizer
+    - PdfAConverter
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
     Optimizer: Process
     TextExtractor: Process
+    PdfAConverter: Process
 
 validation:
   require_restore: true
@@ -137,3 +139,16 @@ per_type_constraints:
     required:
       - "REQUIRED: new Optimizer().Process(options) — use the LowCode Optimizer plugin"
     forbidden: []
+  PdfAConverter:
+    required:
+      - "REQUIRED: new PdfAConverter().Process(options) — use the LowCode PdfAConverter plugin"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for PdfAConverter and FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: options.AddInput(new FileDataSource(\"input.pdf\")) — standard PDF input"
+      - "REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) — FileDataSource, NOT FileSaveTarget"
+      - "REQUIRED: programmatic PDF input created via new Aspose.Pdf.Document() + doc.Pages.Add() + doc.Save()"
+    forbidden:
+      - "FORBIDDEN: PdfFormatConversionOptions — use LowCode PdfAConverter with its own options class"
+      - "FORBIDDEN: Document.Convert() — use LowCode PdfAConverter.Process() instead"
+      - "FORBIDDEN: PdfSaveOptions with PDF/A standard — use LowCode PdfAConverter"
+      - "FORBIDDEN: FileSaveTarget as AddOutput argument — use FileDataSource(path) instead"

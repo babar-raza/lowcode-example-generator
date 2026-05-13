@@ -55,22 +55,61 @@ generation:
   allow_generated_input_files: true
   allowed_types: []
 
+template_hints:
+  default_input_extension: ".pptx"
+  default_input_filename: "input.pptx"
+  array_input_filenames: ["input1.pptx", "input2.pptx"]
+  input_creation_lines:
+    - 'var pres = new Aspose.Slides.Presentation();'
+    - 'pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);'
+    - 'pres.Save("input.pptx", Aspose.Slides.Export.SaveFormat.Pptx);'
+  merger_input_creation_lines:
+    - 'var pres1 = new Aspose.Slides.Presentation();'
+    - 'pres1.Slides.AddEmptySlide(pres1.LayoutSlides[0]);'
+    - 'pres1.Save("input1.pptx", Aspose.Slides.Export.SaveFormat.Pptx);'
+    - 'var pres2 = new Aspose.Slides.Presentation();'
+    - 'pres2.Slides.AddEmptySlide(pres2.LayoutSlides[0]);'
+    - 'pres2.Save("input2.pptx", Aspose.Slides.Export.SaveFormat.Pptx);'
+  additional_usings:
+    - "Aspose.Slides"
+    - "Aspose.Slides.LowCode"
+    - "Aspose.Slides.Export"
+  default_output_extension: ".pptx"
+  default_fixture_extension: ".pptx"
+
 per_type_constraints:
   Convert:
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
+      - "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
+      - "REQUIRED: using Aspose.Slides.Export; (for SaveFormat)"
+      - "REQUIRED: Convert.ToPdf(presPath, outputPath) — file-path overload, no Presentation object needed"
+      - "REQUIRED: input PPTX created programmatically via new Presentation() + AddEmptySlide + Save()"
     forbidden:
       - "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() — use LowCode Convert"
+      - "FORBIDDEN: new Convert() — Convert methods are static, call Convert.ToPdf() directly"
   Compress:
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
+      - "REQUIRED: using Aspose.Slides; (for loading Presentation)"
+      - "REQUIRED: using Aspose.Slides.Export; (for SaveFormat)"
+      - "REQUIRED: var pres = new Presentation(inputPath); — load presentation as object first"
+      - "REQUIRED: Compress.RemoveUnusedLayoutSlides(pres) OR Compress.RemoveUnusedMasterSlides(pres) OR Compress.CompressEmbeddedFonts(pres) — call Compress method on the Presentation object"
+      - "REQUIRED: pres.Save(outputPath, SaveFormat.Pptx); — MUST call pres.Save() AFTER Compress methods (Compress mutates object in-place, output is NOT automatic)"
     forbidden:
+      - "FORBIDDEN: return or exit after calling Compress without calling pres.Save() — the presentation will NOT be saved"
+      - "FORBIDDEN: Compress.RemoveUnusedLayoutSlides(inputPath, outputPath) — Compress takes Presentation OBJECT, not file path strings"
       - "FORBIDDEN: Manual slide manipulation replacing Compress methods — use LowCode Compress"
+      - "FORBIDDEN: new Compress() — Compress methods are static"
   Merger:
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
+      - "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
+      - "REQUIRED: Merger.Process(new string[] { input1, input2 }, outputPath) — static array overload"
+      - "REQUIRED: 2 input PPTX files created programmatically via Presentation + AddEmptySlide + Save()"
     forbidden:
       - "FORBIDDEN: Manual slide copy replacing Merger.Process() — use LowCode Merger"
+      - "FORBIDDEN: new Merger() — Merger.Process() is static, call directly"
 
 validation:
   require_restore: true

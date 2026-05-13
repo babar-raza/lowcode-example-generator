@@ -178,6 +178,18 @@ def validate_output_file_semantic(
         result["checks"].extend(_validate_image_output(output_path))
     elif ext == ".xlsx":
         result["checks"].extend(_validate_xlsx_output(output_path, expected_output))
+    elif ext in (".docx",):
+        result["checks"].extend(_validate_ooxml_output(output_path, expected_output, "docx"))
+    elif ext in (".pptx",):
+        result["checks"].extend(_validate_ooxml_output(output_path, expected_output, "pptx"))
+    elif ext in (".doc",):
+        result["checks"].extend(_validate_ole2_output(output_path, "doc"))
+    elif ext in (".xls",):
+        result["checks"].extend(_validate_ole2_output(output_path, "xls"))
+    elif ext in (".eml",):
+        result["checks"].extend(_validate_eml_output(output_path))
+    elif ext in (".msg",):
+        result["checks"].extend(_validate_msg_output(output_path))
 
     result["passed"] = all(c["passed"] for c in result["checks"])
     return result
@@ -292,6 +304,94 @@ def _validate_xlsx_output(path: Path, expected: dict | None) -> list[dict]:
             checks.append({"check": "xlsx_has_workbook", "passed": has_wb, "detail": f"workbook.xml {'found' if has_wb else 'not found'}"})
     except Exception as e:
         checks.append({"check": "xlsx_valid_zip", "passed": False, "detail": str(e)})
+    return checks
+
+
+def _validate_ooxml_output(path: Path, expected: dict | None, doc_type: str = "docx") -> list[dict]:
+    checks: list[dict] = []
+    try:
+        with open(path, "rb") as f:
+            magic = f.read(4)
+        is_zip = magic == b"PK\x03\x04"
+        checks.append({
+            "check": f"{doc_type}_zip_magic",
+            "passed": is_zip,
+            "detail": f"ZIP magic bytes {'valid' if is_zip else 'invalid'}",
+        })
+        if not is_zip:
+            return checks
+    except Exception as e:
+        return [{"check": f"{doc_type}_zip_magic", "passed": False, "detail": str(e)}]
+
+    # Check expected internal XML entry
+    internal_entry = "word/document.xml" if doc_type == "docx" else "ppt/presentation.xml"
+    try:
+        with zipfile.ZipFile(path, "r") as z:
+            names = z.namelist()
+            has_entry = internal_entry in names
+            checks.append({
+                "check": f"{doc_type}_internal_xml",
+                "passed": has_entry,
+                "detail": f"{internal_entry} {'found' if has_entry else 'not found'}",
+            })
+    except Exception as e:
+        checks.append({"check": f"{doc_type}_internal_xml", "passed": False, "detail": str(e)})
+
+    return checks
+
+
+def _validate_ole2_output(path: Path, doc_type: str = "doc") -> list[dict]:
+    checks: list[dict] = []
+    _OLE2_MAGIC = b"\xd0\xcf\x11\xe0"
+    try:
+        with open(path, "rb") as f:
+            header = f.read(8)
+        is_ole2 = header[:4] == _OLE2_MAGIC
+        checks.append({
+            "check": f"{doc_type}_ole2_magic",
+            "passed": is_ole2,
+            "detail": f"OLE2 magic bytes {'valid' if is_ole2 else 'invalid'}",
+        })
+    except Exception as e:
+        checks.append({"check": f"{doc_type}_ole2_magic", "passed": False, "detail": str(e)})
+    return checks
+
+
+def _validate_eml_output(path: Path) -> list[dict]:
+    checks: list[dict] = []
+    _RFC2822_HEADERS = ("From:", "To:", "Subject:", "MIME-Version:")
+    try:
+        with open(path, "rb") as f:
+            raw = f.read(2000)
+        try:
+            text = raw.decode("utf-8", errors="replace")
+        except Exception:
+            text = raw.decode("latin-1", errors="replace")
+        has_header = any(h in text for h in _RFC2822_HEADERS)
+        checks.append({
+            "check": "eml_rfc2822_headers",
+            "passed": has_header,
+            "detail": f"RFC 2822 headers {'found' if has_header else 'not found'}",
+        })
+    except Exception as e:
+        checks.append({"check": "eml_rfc2822_headers", "passed": False, "detail": str(e)})
+    return checks
+
+
+def _validate_msg_output(path: Path) -> list[dict]:
+    checks: list[dict] = []
+    _OLE2_MAGIC = b"\xd0\xcf\x11\xe0"
+    try:
+        with open(path, "rb") as f:
+            header = f.read(8)
+        is_ole2 = header[:4] == _OLE2_MAGIC
+        checks.append({
+            "check": "msg_ole2_magic",
+            "passed": is_ole2,
+            "detail": f"OLE2 magic bytes (Outlook .msg) {'valid' if is_ole2 else 'invalid'}",
+        })
+    except Exception as e:
+        checks.append({"check": "msg_ole2_magic", "passed": False, "detail": str(e)})
     return checks
 
 

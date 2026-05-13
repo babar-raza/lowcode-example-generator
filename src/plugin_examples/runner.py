@@ -871,6 +871,43 @@ def _stage_validation(ctx: PipelineContext) -> dict:
             current_code = program_path.read_text(encoding="utf-8")
             run_stdout = vr.run.stdout or ""
             run_stderr = vr.run.stderr or ""
+            # Re-inject PDF-specific packet constraints so LLM cannot regress to
+            # semantically wrong but runnable code (e.g. replacing LowCode API with core API).
+            rt_pdf_constraints = proj.get("pdf_constraints", [])
+            rt_pdf_constraint_reminder = ""
+            if rt_pdf_constraints:
+                rt_pdf_constraint_reminder = (
+                    "\n\nREQUIRED CONSTRAINTS (must be satisfied in fixed code):\n"
+                    + "\n".join(f"- {c}" for c in rt_pdf_constraints)
+                )
+                logger.info(
+                    "Runtime repair attempt %d for %s: re-injecting %d pdf_constraints",
+                    rt_attempt, proj["scenario_id"], len(rt_pdf_constraints),
+                )
+            rt_type_constraints = proj.get("type_constraints", {})
+            rt_type_constraint_reminder = ""
+            if rt_type_constraints:
+                required_lines = [
+                    c for c in rt_type_constraints.get("REQUIRED", [])
+                ]
+                forbidden_lines = [
+                    c for c in rt_type_constraints.get("FORBIDDEN", [])
+                ]
+                if required_lines or forbidden_lines:
+                    parts = []
+                    if required_lines:
+                        parts.append("REQUIRED:\n" + "\n".join(f"  - {c}" for c in required_lines))
+                    if forbidden_lines:
+                        parts.append("FORBIDDEN:\n" + "\n".join(f"  - {c}" for c in forbidden_lines))
+                    rt_type_constraint_reminder = (
+                        "\n\nPER-TYPE CONSTRAINTS (must be respected):\n" + "\n".join(parts)
+                    )
+                    logger.info(
+                        "Runtime repair attempt %d for %s: re-injecting type_constraints "
+                        "(%d required, %d forbidden)",
+                        rt_attempt, proj["scenario_id"],
+                        len(required_lines), len(forbidden_lines),
+                    )
             repair_prompt = (
                 f"The following C# code compiles but fails at runtime.\n\n"
                 f"Runtime classification: {rc.classification}\n"
@@ -881,6 +918,8 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"Do NOT use try/catch to hide errors. "
                 f"Validate input file exists before API call. "
                 f"Return ONLY the fixed C# code in a ```csharp code block."
+                f"{rt_pdf_constraint_reminder}"
+                f"{rt_type_constraint_reminder}"
             )
             try:
                 response = ctx.llm_router.generate(repair_prompt, system_prompt=(
@@ -890,6 +929,29 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 ))
                 fixed_code = _extract_code(response)
                 if fixed_code and fixed_code != current_code:
+                    # Semantic validation before writing — PDF-specific check + per-type constraints
+                    rt_proj_family = proj.get("family_name", "pdf" if rt_pdf_constraints else "")
+                    rt_proj_type_short = proj.get("type_short", "")
+                    rt_semantic_issues = _validate_code(fixed_code, family=rt_proj_family, type_short=rt_proj_type_short)
+                    if rt_type_constraints:
+                        rt_semantic_issues.extend(
+                            _validate_code_from_constraints(fixed_code, rt_type_constraints)
+                        )
+                    if rt_semantic_issues:
+                        logger.warning(
+                            "Runtime repair attempt %d for %s produced semantically invalid code: %s",
+                            rt_attempt, proj["scenario_id"], rt_semantic_issues,
+                        )
+                        repair_log.append({
+                            "scenario_id": proj["scenario_id"],
+                            "repair_type": "runtime",
+                            "classification": rc.classification,
+                            "attempt": rt_attempt,
+                            "success": False,
+                            "semantic_issues": rt_semantic_issues,
+                        })
+                        # Do NOT write the invalid code — continue to next attempt or stop
+                        break
                     program_path.write_text(fixed_code, encoding="utf-8")
                     vr = run_dotnet_validation(
                         Path(proj["project_dir"]),

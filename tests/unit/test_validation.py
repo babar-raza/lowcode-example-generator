@@ -14,9 +14,13 @@ from plugin_examples.verifier_bridge.dotnet_runner import (
     run_dotnet_validation,
     write_validation_results,
 )
+import io
+import zipfile as _zipfile
+
 from plugin_examples.verifier_bridge.output_validator import (
     OutputValidation,
     validate_output,
+    validate_output_file_semantic,
     write_output_validation,
 )
 from plugin_examples.verifier_bridge.bridge import (
@@ -142,6 +146,136 @@ class TestOutputValidator:
         v = OutputValidation(scenario_id="s1", passed=True, has_output=True)
         path = write_output_validation(v, tmp_path / "workspace" / "runs" / "test")
         assert path.exists()
+
+
+# --- Tests: semantic file validators ---
+
+
+def _make_minimal_ooxml(tmp_path: Path, filename: str, internal_entry: str) -> Path:
+    """Create a minimal OOXML ZIP file with the given internal XML entry."""
+    out = tmp_path / filename
+    buf = io.BytesIO()
+    with _zipfile.ZipFile(buf, "w") as z:
+        z.writestr(internal_entry, "<root/>")
+    out.write_bytes(buf.getvalue())
+    return out
+
+
+def _make_bad_file(tmp_path: Path, filename: str, content: bytes = b"NOTAVALIDFORMAT") -> Path:
+    out = tmp_path / filename
+    out.write_bytes(content)
+    return out
+
+
+_OLE2_HEADER = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1" + b"\x00" * 504
+
+
+class TestOoxmlValidator:
+    def test_docx_valid_passes(self, tmp_path):
+        path = _make_minimal_ooxml(tmp_path, "output.docx", "word/document.xml")
+        result = validate_output_file_semantic(path)
+        zip_check = next(c for c in result["checks"] if c["check"] == "docx_zip_magic")
+        xml_check = next(c for c in result["checks"] if c["check"] == "docx_internal_xml")
+        assert zip_check["passed"]
+        assert xml_check["passed"]
+
+    def test_docx_wrong_bytes_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.docx")
+        result = validate_output_file_semantic(path)
+        zip_check = next(c for c in result["checks"] if c["check"] == "docx_zip_magic")
+        assert not zip_check["passed"]
+
+    def test_pptx_valid_passes(self, tmp_path):
+        path = _make_minimal_ooxml(tmp_path, "output.pptx", "ppt/presentation.xml")
+        result = validate_output_file_semantic(path)
+        zip_check = next(c for c in result["checks"] if c["check"] == "pptx_zip_magic")
+        xml_check = next(c for c in result["checks"] if c["check"] == "pptx_internal_xml")
+        assert zip_check["passed"]
+        assert xml_check["passed"]
+
+    def test_pptx_wrong_bytes_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.pptx")
+        result = validate_output_file_semantic(path)
+        zip_check = next(c for c in result["checks"] if c["check"] == "pptx_zip_magic")
+        assert not zip_check["passed"]
+
+    def test_docx_missing_internal_xml_fails(self, tmp_path):
+        """Valid ZIP but without word/document.xml."""
+        out = tmp_path / "output.docx"
+        buf = io.BytesIO()
+        with _zipfile.ZipFile(buf, "w") as z:
+            z.writestr("other/file.xml", "<root/>")
+        out.write_bytes(buf.getvalue())
+        result = validate_output_file_semantic(out)
+        xml_check = next(c for c in result["checks"] if c["check"] == "docx_internal_xml")
+        assert not xml_check["passed"]
+
+
+class TestOle2Validator:
+    def test_doc_valid_passes(self, tmp_path):
+        path = tmp_path / "output.doc"
+        path.write_bytes(_OLE2_HEADER)
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "doc_ole2_magic")
+        assert ole2_check["passed"]
+
+    def test_doc_wrong_bytes_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.doc")
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "doc_ole2_magic")
+        assert not ole2_check["passed"]
+
+    def test_xls_valid_passes(self, tmp_path):
+        path = tmp_path / "output.xls"
+        path.write_bytes(_OLE2_HEADER)
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "xls_ole2_magic")
+        assert ole2_check["passed"]
+
+    def test_xls_wrong_bytes_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.xls")
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "xls_ole2_magic")
+        assert not ole2_check["passed"]
+
+
+class TestEmlValidator:
+    _VALID_EML = b"From: test@test.com\nTo: to@test.com\nSubject: Test\n\nBody text."
+
+    def test_eml_valid_passes(self, tmp_path):
+        path = tmp_path / "output.eml"
+        path.write_bytes(self._VALID_EML)
+        result = validate_output_file_semantic(path)
+        hdr_check = next(c for c in result["checks"] if c["check"] == "eml_rfc2822_headers")
+        assert hdr_check["passed"]
+
+    def test_eml_no_headers_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.eml", b"This is just plain text without headers.")
+        result = validate_output_file_semantic(path)
+        hdr_check = next(c for c in result["checks"] if c["check"] == "eml_rfc2822_headers")
+        assert not hdr_check["passed"]
+
+    def test_eml_mime_version_header_passes(self, tmp_path):
+        path = tmp_path / "output.eml"
+        path.write_bytes(b"MIME-Version: 1.0\nContent-Type: text/plain\n\nBody.")
+        result = validate_output_file_semantic(path)
+        hdr_check = next(c for c in result["checks"] if c["check"] == "eml_rfc2822_headers")
+        assert hdr_check["passed"]
+
+
+class TestMsgValidator:
+    def test_msg_valid_passes(self, tmp_path):
+        path = tmp_path / "output.msg"
+        path.write_bytes(_OLE2_HEADER)
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "msg_ole2_magic")
+        assert ole2_check["passed"]
+
+    def test_msg_wrong_bytes_fails(self, tmp_path):
+        path = _make_bad_file(tmp_path, "output.msg")
+        result = validate_output_file_semantic(path)
+        ole2_check = next(c for c in result["checks"] if c["check"] == "msg_ole2_magic")
+        assert not ole2_check["passed"]
 
 
 # --- Tests: bridge ---

@@ -181,20 +181,22 @@ class TestQueueStateConsistency:
             )
 
     def test_words_pilot_entries_post_merge_verified(self, entries):
-        # Pilot words entries (published) must be POST_MERGE_VERIFIED; deferred are BACKLOGGED
+        # Words entries may be POST_MERGE_VERIFIED (Wave 1 published), PR_READY (Wave 2 pending pub),
+        # REVIEWED, or BACKLOGGED (deferred/config-ready awaiting generation)
+        valid_states = ("POST_MERGE_VERIFIED", "PR_READY", "REVIEWED", "BACKLOGGED")
         words = [e for e in entries if e["family"] == "words"]
         for entry in words:
-            assert entry["state"] in ("POST_MERGE_VERIFIED", "BACKLOGGED"), (
+            assert entry["state"] in valid_states, (
                 f"Words entry {entry['scenario_id']} has unexpected state: {entry['state']} "
-                f"(expected POST_MERGE_VERIFIED for pilot or BACKLOGGED for deferred)"
+                f"(expected one of {valid_states})"
             )
-        # The 4 pilot types specifically must be POST_MERGE_VERIFIED
+        # The 4 Wave 1 pilot types specifically must be POST_MERGE_VERIFIED
         pilot_ids = {"words-converter", "words-replacer", "words-splitter", "words-watermarker"}
         queue_dict = {e["scenario_id"]: e for e in words}
         for sid in pilot_ids:
             assert sid in queue_dict, f"Words pilot entry {sid} missing from queue"
             assert queue_dict[sid]["state"] == "POST_MERGE_VERIFIED", (
-                f"Words pilot entry {sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
+                f"Words Wave 1 entry {sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
             )
 
     def test_pdf_merger_and_text_extractor_are_post_merge_verified(self, entries):

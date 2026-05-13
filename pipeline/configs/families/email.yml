@@ -53,12 +53,42 @@ generation:
   allow_generated_input_files: true
   allowed_types: []
 
+template_hints:
+  default_input_extension: ".eml"
+  default_input_filename: "input.eml"
+  input_creation_lines:
+    - '// RFC 2822 string fixture — create minimal valid .eml file'
+    - 'var emlContent = "From: sender@test.com\r\nTo: recipient@test.com\r\nSubject: Test Email\r\nContent-Type: text/plain\r\n\r\nHello, this is a test email body.";'
+    - 'System.IO.File.WriteAllText("input.eml", emlContent);'
+  output_handler_creation_lines:
+    - 'var outputDir = "output_dir";'
+    - 'System.IO.Directory.CreateDirectory(outputDir);'
+    - 'var outputHandler = new Aspose.Email.LowCode.FolderOutputHandler(outputDir);'
+  additional_usings:
+    - "Aspose.Email.LowCode"
+    - "System.IO"
+  default_output_extension: ".html"
+  default_fixture_extension: ".eml"
+  async_required: true
+  async_note: "Converter.ConvertToHtml is async (returns Task). Main entry must be async Task Main(string[] args) and use await."
+
 per_type_constraints:
   Converter:
     required:
       - "REQUIRED: using Aspose.Email.LowCode;"
+      - "REQUIRED: using System.IO; (for File.ReadAllBytes, MemoryStream, Directory.CreateDirectory)"
+      - "REQUIRED: async Task Main(string[] args) — ConvertToHtml is async and MUST be awaited"
+      - "REQUIRED: await Converter.ConvertToHtml(stream, fileName, outputHandler) — async call with await"
+      - "REQUIRED: var stream = new MemoryStream(File.ReadAllBytes(\"input.eml\")); — wrap file bytes in MemoryStream"
+      - "REQUIRED: var outputHandler = new FolderOutputHandler(outputDir); — IOutputHandler implementation for folder output"
+      - "REQUIRED: Directory.CreateDirectory(outputDir); — create output directory before passing to FolderOutputHandler"
+      - "REQUIRED: input .eml file created via RFC 2822 string: From: / To: / Subject: / Content-Type: / blank line / body"
     forbidden:
-      - "FORBIDDEN: MailMessage.Save() as the primary operation — use LowCode Converter.Convert()"
+      - "FORBIDDEN: MailMessage.Save() as the primary operation — use LowCode Converter.ConvertToHtml()"
+      - "FORBIDDEN: Converter.ConvertToHtml(inputFilePath, outputFilePath) — output is NOT a file path; use IOutputHandler (FolderOutputHandler)"
+      - "FORBIDDEN: new Converter() — Converter.ConvertToHtml() is static async, call directly with await"
+      - "FORBIDDEN: synchronous void Main() when using async Converter — must be async Task Main()"
+      - "FORBIDDEN: IOutputHandler custom implementation — use FolderOutputHandler(directory) which is the concrete impl"
 
 validation:
   require_restore: true

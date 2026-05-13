@@ -1,6 +1,6 @@
 {
   "report_type": "release_status",
-  "generated_at": "2026-05-13T11:00:40.223148+00:00",
+  "generated_at": "2026-05-13T11:21:32.862630+00:00",
   "families_checked": [
     "cells",
     "words"
@@ -41,12 +41,12 @@
       "latest_published_version": "26.4.0",
       "published_examples_count": 4,
       "release_scope_status": "PARTIAL_CANARY",
-      "release_scope_reason": "4/6 pilot types published; 4/9 workflow roots published overall.",
+      "release_scope_reason": "4/8 pilot types published; 4/9 workflow roots published overall.",
       "family_coverage_status": "PARTIAL_FAMILY_COVERAGE",
       "family_coverage_reason": "4/9 workflow roots published.",
       "denominator_basis": "PILOT_ALLOWED",
       "workflow_root_types": 9,
-      "allowed_pilot_count": 6,
+      "allowed_pilot_count": 8,
       "total_lowcode_types": 25,
       "last_pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/1",
       "last_pr_number": 1,

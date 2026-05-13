@@ -48,11 +48,11 @@
     "SplitterContext",
     "WatermarkerContext"
   ],
-  "allowed_pilot_types": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer"],
-  "allowed_pilot_count": 6,
+  "allowed_pilot_types": ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "Processor", "MailMerger"],
+  "allowed_pilot_count": 8,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "Words Wave 2 expansion approved. 6 allowed_types now in scope per words.yml (Wave 2 adds Merger + Comparer). Denominator for current generate/publish coverage = 6. Full-SOT runnable denominator is 9 workflow roots; Words is PILOT_WAVE2_IN_PROGRESS.",
-  "runnable_scenarios": 6,
+  "denominator_basis_note": "Words Wave 3 expansion approved. 8 allowed_types now in scope per words.yml (Wave 3 adds Processor + MailMerger). Denominator for current generate/publish coverage = 8. Full-SOT runnable denominator is 9 workflow roots; Words is PILOT_WAVE3_IN_PROGRESS.",
+  "runnable_scenarios": 8,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
     "words-converter",
@@ -60,22 +60,24 @@
     "words-splitter",
     "words-replacer",
     "words-merger",
-    "words-comparer"
+    "words-comparer",
+    "words-processor",
+    "words-mailmerger"
   ],
-  "pilot_allowed_count": 6,
+  "pilot_allowed_count": 8,
   "full_sot_runnable_estimate": 9,
-  "full_sot_runnable_note": "Verified by full classification of all 25 Words LowCode types. Three runnable roots remain outside the current pilot scope: MailMerger, Processor, ReportBuilder.",
+  "full_sot_runnable_note": "Verified by full classification of all 25 Words LowCode types. One runnable root remains outside the current pilot scope: ReportBuilder (Wave 4 — LINQ template syntax, medium risk).",
   "published_count": 4,
   "pr_ready_count": 0,
-  "pr_dry_run_ready_count": 0,
+  "pr_dry_run_ready_count": 2,
   "reviewer_passed_awaiting_pr_count": 0,
   "blocked_count": 0,
-  "excluded_count": 19,
-  "excluded_count_basis": "19 types excluded from current pilot scope: 3 classified runnable roots outside allowed_types (MailMerger, Processor, ReportBuilder) plus 16 non-standalone types.",
-  "coverage_pct_of_pilot_runnable": 66.67,
+  "excluded_count": 17,
+  "excluded_count_basis": "17 types excluded from current pilot scope: 1 classified runnable root outside allowed_types (ReportBuilder) plus 16 non-standalone types.",
+  "coverage_pct_of_pilot_runnable": 50.0,
   "coverage_pct_of_runnable": 44.44,
   "coverage_pct_of_total_types": 16.0,
-  "coverage_pct_note": "4 of 6 pilot-allowed scenarios published (66.67% of Wave 2 pilot scope). 44.44% of classified runnable roots published (4/9). 16% of all 25 types in namespace published. Wave 2 (Merger+Comparer) in generation.",
+  "coverage_pct_note": "4 of 8 pilot-allowed scenarios published (50% of Wave 3 pilot scope). 44.44% of classified runnable roots published (4/9). 16% of all 25 types in namespace published. Wave 2 (Merger+Comparer) in PR_DRY_RUN. Wave 3 (Processor+MailMerger) config-ready for generation.",
   "evidence_sources": [
     "workspace/verification/latest/words-source-of-truth-proof.json",
     "workspace/verification/latest/families/words/example-lifecycle-records.json",
@@ -84,5 +86,5 @@
     "pipeline/configs/families/words.yml"
   ],
   "last_verified_at": "2026-05-13T00:00:00Z",
-  "notes": "Words Wave 2 expansion: allowed_types expanded from 4 to 6 (added Merger + Comparer). Full-SOT classification is complete: 9 runnable roots and 16 non-standalone types. Merger uses static Merger.Merge(outputFile, inputFiles[]) with programmatic DOCX pair fixture. Comparer uses static Comparer.Compare(v1, v2, outputFile, author, DateTime) with different-content DOCX pair fixture. Three runnable roots remain outside allowed_types: MailMerger (Wave 3), Processor (Wave 4 design decision needed), ReportBuilder (Wave 4 LINQ template)."
+  "notes": "Words Wave 3 expansion: allowed_types expanded from 6 to 8 (added Processor + MailMerger). Full-SOT classification is complete: 9 runnable roots and 16 non-standalone types. Processor uses fluent instance chain: new Processor().From(input).To(output, SaveFormat.Pdf).Execute() — READY_AFTER_CONFIG, reuses existing single-DOCX fixture. MailMerger uses static string-array overload: MailMerger.Execute(template, output, fieldNames[], fieldValues[]) — IMailMergeDataSource NOT needed. Template created via DocumentBuilder.InsertField('MERGEFIELD FieldName'). One runnable root remains outside allowed_types: ReportBuilder (Wave 4 — LINQ <<[FieldName]>> template syntax, medium risk)."
 }

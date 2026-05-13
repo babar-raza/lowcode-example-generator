@@ -174,13 +174,13 @@ class TestWordsDenominator:
     def test_words_total_types_is_25(self):
         assert self.d["total_lowcode_types"] == 25
 
-    def test_words_pilot_allowed_count_is_6(self):
-        assert self.d["allowed_pilot_count"] == 6
+    def test_words_pilot_allowed_count_is_8(self):
+        assert self.d["allowed_pilot_count"] == 8
 
     def test_words_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 6
-        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer"]:
+        assert isinstance(types, list) and len(types) == 8
+        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "Processor", "MailMerger"]:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
 
     def test_words_published_count_is_4(self):
@@ -190,20 +190,20 @@ class TestWordsDenominator:
         assert self.d["workflow_root_types"] == 9
         assert self.d["non_runnable_types"] == 16
 
-    def test_words_excluded_count_is_19(self):
-        assert self.d["excluded_count"] == 19
+    def test_words_excluded_count_is_17(self):
+        assert self.d["excluded_count"] == 17
 
-    def test_words_runnable_scenarios_is_6(self):
-        assert self.d["runnable_scenarios"] == 6
+    def test_words_runnable_scenarios_is_8(self):
+        assert self.d["runnable_scenarios"] == 8
 
     def test_words_denominator_basis_is_pilot_allowed(self):
         assert self.d["denominator_basis"] == "PILOT_ALLOWED", (
             "Words is in pilot mode; denominator_basis must be PILOT_ALLOWED"
         )
 
-    def test_words_coverage_pct_of_pilot_runnable_is_66_67(self):
+    def test_words_coverage_pct_of_pilot_runnable_is_50(self):
         pct = self.d.get("coverage_pct_of_pilot_runnable")
-        assert pct is not None and abs(pct - 66.67) < 0.01
+        assert pct is not None and abs(pct - 50.0) < 0.01
 
     def test_words_does_not_claim_full_sot_basis(self):
         assert self.d["denominator_basis"] != "FULL_SOT", (
@@ -245,13 +245,13 @@ class TestPdfDenominator:
     def test_pdf_workflow_root_types_is_25(self):
         assert self.d["workflow_root_types"] == 25
 
-    def test_pdf_pilot_allowed_count_is_4(self):
-        assert self.d["allowed_pilot_count"] == 4
+    def test_pdf_pilot_allowed_count_is_5(self):
+        assert self.d["allowed_pilot_count"] == 5
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 4
-        for t in ["Merger", "TextExtractor", "Splitter", "Optimizer"]:
+        assert isinstance(types, list) and len(types) == 5
+        for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_2(self):
@@ -279,11 +279,11 @@ class TestPdfDenominator:
         sha = self.d["api_catalog_sha256"]
         assert len(sha) == 64
 
-    def test_pdf_excluded_count_is_97(self):
-        assert self.d["excluded_count"] == 97
+    def test_pdf_excluded_count_is_96(self):
+        assert self.d["excluded_count"] == 96
 
-    def test_pdf_runnable_scenarios_is_4(self):
-        assert self.d["runnable_scenarios"] == 4
+    def test_pdf_runnable_scenarios_is_5(self):
+        assert self.d["runnable_scenarios"] == 5
 
 
 # ---------------------------------------------------------------------------

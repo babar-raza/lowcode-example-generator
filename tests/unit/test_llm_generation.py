@@ -1907,3 +1907,58 @@ class TestRequiredValidation:
         assert "type_constraints" in source, (
             "runner._stage_validation must use proj['type_constraints'] for per-type validation."
         )
+
+    def test_runtime_repair_receives_required_constraints(self):
+        """REQUIRED: constraints from pdf_constraints must appear in runtime repair prompt."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_validation)
+        # Verify the runtime repair section re-injects pdf_constraints
+        assert "rt_pdf_constraints" in source, (
+            "runner._stage_validation runtime-repair must read pdf_constraints via rt_pdf_constraints. "
+            "Runtime constraint re-injection is missing."
+        )
+        assert "rt_pdf_constraint_reminder" in source, (
+            "runner._stage_validation runtime-repair must build rt_pdf_constraint_reminder "
+            "and append it to the runtime repair prompt."
+        )
+        assert "REQUIRED CONSTRAINTS" in source, (
+            "runner._stage_validation runtime-repair prompt must contain 'REQUIRED CONSTRAINTS' "
+            "so the LLM cannot regress semantic correctness during runtime repair."
+        )
+
+    def test_runtime_repair_receives_forbidden_constraints(self):
+        """FORBIDDEN: constraints from type_constraints must appear in runtime repair prompt."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_validation)
+        # Verify the runtime repair section re-injects type_constraints with FORBIDDEN entries
+        assert "rt_type_constraints" in source, (
+            "runner._stage_validation runtime-repair must read type_constraints via rt_type_constraints. "
+            "Per-type constraint re-injection is missing."
+        )
+        assert "rt_type_constraint_reminder" in source, (
+            "runner._stage_validation runtime-repair must build rt_type_constraint_reminder "
+            "and append it to the runtime repair prompt."
+        )
+        assert "FORBIDDEN" in source, (
+            "runner._stage_validation runtime-repair prompt must include FORBIDDEN constraints "
+            "to prevent the LLM from introducing banned patterns during runtime repair."
+        )
+
+    def test_runtime_repair_receives_per_type_constraints(self):
+        """Per-type constraints must be re-injected and validated in the runtime repair path."""
+        import inspect
+        from plugin_examples import runner
+        source = inspect.getsource(runner._stage_validation)
+        # Verify semantic validation runs after runtime repair (mirrors build repair)
+        assert "rt_semantic_issues" in source, (
+            "runner._stage_validation runtime-repair must perform semantic validation "
+            "via rt_semantic_issues before writing the fixed code. "
+            "This prevents semantically invalid code from being written after runtime repair."
+        )
+        assert "_validate_code_from_constraints(fixed_code, rt_type_constraints)" in source, (
+            "runner._stage_validation runtime-repair must call "
+            "_validate_code_from_constraints(fixed_code, rt_type_constraints) "
+            "so per-type REQUIRED/FORBIDDEN rules are enforced after runtime repair."
+        )

@@ -1,0 +1,89 @@
+{
+  "report_type": "processor-root-cause-investigation",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "subject": "Aspose.Words.LowCode.Processor",
+  "family": "words",
+  "package_version": "26.5.0",
+  "verdict": "PERMANENTLY_BLOCKED — API_ACCESS_PARADOX",
+  "catalog_evidence": {
+    "source_file": "workspace/runs/pilot-words-20260513-175418/catalog/words/api-catalog.json",
+    "type_entry": {
+      "type_name": "Processor",
+      "full_name": "Aspose.Words.LowCode.Processor",
+      "constructors": [],
+      "constructor_count": 0,
+      "methods": [
+        {"name": "From", "is_static": false, "return_type": "Aspose.Words.LowCode.Processor"},
+        {"name": "To", "is_static": false, "return_type": "Aspose.Words.LowCode.Processor"},
+        {"name": "Execute", "is_static": false, "return_type": "void"}
+      ],
+      "method_count": 3,
+      "all_methods_static": false
+    }
+  },
+  "paradox_analysis": {
+    "problem_1": {
+      "id": "CS1729",
+      "description": "No public constructors — cannot call 'new Processor()'",
+      "compiler_error": "CS1729: 'Processor' does not contain a constructor that takes 0 arguments",
+      "evidence": "constructors: [] in api-catalog.json"
+    },
+    "problem_2": {
+      "id": "CS0120",
+      "description": "All methods are instance methods — cannot call them statically",
+      "compiler_error": "CS0120: An object reference is required for the non-static field, method, or property 'Processor.From(string)'",
+      "evidence": "is_static: false for From(), To(), Execute() in api-catalog.json"
+    },
+    "combined_effect": "Cannot instantiate (CS1729) AND cannot call statically (CS0120). No code path can reach any Processor method.",
+    "api_pattern": "FLUENT_BUILDER — From(inputFile).To(outputFile, SaveFormat.Pdf).Execute() is a fluent chain but requires a Processor instance to start",
+    "entry_point_missing": "The fluent chain requires an initial Processor instance, but there is no public static factory method and no public constructor"
+  },
+  "processorcontext_investigation": {
+    "type_name": "ProcessorContext",
+    "full_name": "Aspose.Words.LowCode.ProcessorContext",
+    "constructors_count": 1,
+    "methods_count": 0,
+    "assessment": "ProcessorContext has a public constructor (1) but zero methods. It appears to be a settings/context container, not a factory for Processor. Cannot produce a Processor instance from ProcessorContext.",
+    "catalog_note": "Neither the Processor nor any other type in Aspose.Words.LowCode exposes a public static factory returning Processor."
+  },
+  "attempted_code_patterns": [
+    {
+      "pattern": "var processor = new Processor();",
+      "result": "CS1729 — no zero-arg constructor",
+      "note": "constructors: [] means no public constructors exist at all"
+    },
+    {
+      "pattern": "Processor.From(inputFile).To(outputFile, SaveFormat.Pdf).Execute();",
+      "result": "CS0120 — From() is not static",
+      "note": "is_static: false confirmed in catalog; static call syntax is invalid"
+    },
+    {
+      "pattern": "var ctx = new ProcessorContext(); var processor = ctx.GetProcessor();",
+      "result": "NOT_POSSIBLE — ProcessorContext has 0 methods, no factory method exists",
+      "note": "ProcessorContext is a settings container, not a Processor factory"
+    }
+  ],
+  "resolution": {
+    "immediate": "Processor removed from words.yml allowed_types. Added to backlog with PERMANENTLY_BLOCKED state.",
+    "backlog_entry": {
+      "type": "Processor",
+      "family": "words",
+      "state": "PERMANENTLY_BLOCKED",
+      "reason": "API_ACCESS_PARADOX",
+      "detail": "constructors:[] + all instance methods (From/To/Execute all is_static:false) = CS1729+CS0120. No code path can reach any Processor method.",
+      "rerun_eligibility": "BLOCKED — requires external change",
+      "required_external_change": "Aspose.Words package version upgrade that either (a) adds a public constructor to Processor, or (b) makes From() static, or (c) adds a public static factory method returning Processor"
+    }
+  },
+  "future_investigation": {
+    "check_changelog": "Review Aspose.Words 26.6.0+ changelog for Processor API changes",
+    "check_reflection_depth": "Verify DllReflector did not miss internal factory methods due to max_depth or access modifier filtering",
+    "check_interface": "Investigate if Processor implements an interface with a factory pattern (e.g., IProcessorFactory in a companion class)",
+    "check_aspose_docs": "Check official Aspose.Words LowCode documentation for Processor usage examples — may reveal undiscovered entry point"
+  },
+  "lesson_learned": {
+    "catalog_check_rule": "Before adding ANY type to allowed_types: verify constructors.length > 0 OR at least one method has is_static:true. Types with constructors:[] and all instance methods are unreachable without a factory.",
+    "automation_needed": "VR-012 in validator-pattern-registry.json: automate this check in type_classifier.py before planning"
+  }
+}

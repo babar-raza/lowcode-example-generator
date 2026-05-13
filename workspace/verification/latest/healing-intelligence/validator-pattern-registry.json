@@ -1,0 +1,205 @@
+{
+  "registry_type": "validator-pattern-registry",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "description": "Validation rules derived from empirical pilot runs. Each rule specifies what to check, how to check it, and what failure it prevents.",
+  "rules": [
+    {
+      "id": "VR-001",
+      "name": "required_using_directive_present",
+      "applies_to": {"families": ["pdf", "words", "cells", "diagram"], "types": "all"},
+      "check_type": "SUBSTRING_PRESENCE",
+      "description": "All REQUIRED: using directives in per_type_constraints must appear in generated code.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "For each required constraint containing 'using ', verify that the full using statement appears in the generated code.",
+        "case_sensitive": true
+      },
+      "failure_mode_prevented": ["FP-002", "FP-006"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED_PDF_ONLY — generalization pending (Gap 2 in plan)"
+    },
+    {
+      "id": "VR-002",
+      "name": "forbidden_namespace_absent",
+      "applies_to": {"families": ["pdf"], "types": ["Merger", "Optimizer", "Splitter"]},
+      "check_type": "SUBSTRING_ABSENCE",
+      "description": "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources must NOT appear in generated code.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code()",
+        "logic": "Scan generated code for 'LowCode.DataSources'; fail if present.",
+        "case_sensitive": true
+      },
+      "failure_mode_prevented": ["FP-003"],
+      "severity": "BUILD_FAILED_OR_GENERATION_FAILED",
+      "current_status": "IMPLEMENTED"
+    },
+    {
+      "id": "VR-003",
+      "name": "abstract_options_not_instantiated",
+      "applies_to": {"families": ["pdf"], "types": "all"},
+      "check_type": "SUBSTRING_ABSENCE",
+      "description": "FORBIDDEN: new PluginOptions() must NOT appear in generated code. PluginOptions is abstract.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code()",
+        "logic": "Scan for 'new PluginOptions()'; fail if present.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["FP-004"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED"
+    },
+    {
+      "id": "VR-004",
+      "name": "text_absorber_not_used",
+      "applies_to": {"families": ["pdf"], "types": "all"},
+      "check_type": "SUBSTRING_ABSENCE",
+      "description": "FORBIDDEN: TextAbsorber must NOT be used. It is a core API substitution for the LowCode TextExtractor.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code()",
+        "logic": "Scan for 'TextAbsorber'; fail if present.",
+        "case_sensitive": true
+      },
+      "failure_mode_prevented": ["CORE_SUBSTITUTION"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED"
+    },
+    {
+      "id": "VR-005",
+      "name": "concrete_options_class_used_pdfa",
+      "applies_to": {"families": ["pdf"], "types": ["PdfAConverter"]},
+      "check_type": "SUBSTRING_PRESENCE",
+      "description": "REQUIRED: PdfAConvertOptions must appear in generated code for PdfAConverter.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "Check that 'PdfAConvertOptions' appears in generated code; fail if absent.",
+        "case_sensitive": true
+      },
+      "failure_mode_prevented": ["FP-004", "FP-009"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED_VIA_CONSTRAINTS — validator reads per_type_constraints"
+    },
+    {
+      "id": "VR-006",
+      "name": "wrong_generic_options_absent_pdfa",
+      "applies_to": {"families": ["pdf"], "types": ["PdfAConverter"]},
+      "check_type": "SUBSTRING_ABSENCE_MULTI",
+      "description": "FORBIDDEN: LowCodeLoadOptions and LowCodeSaveOptions must NOT appear in PdfAConverter code.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "Check for 'LowCodeLoadOptions' and 'LowCodeSaveOptions'; fail if either present.",
+        "case_sensitive": true
+      },
+      "failure_mode_prevented": ["FP-009"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED_VIA_CONSTRAINTS"
+    },
+    {
+      "id": "VR-007",
+      "name": "add_input_call_present",
+      "applies_to": {"families": ["pdf"], "types": ["Merger", "Splitter", "Optimizer", "PdfAConverter"]},
+      "check_type": "SUBSTRING_PRESENCE",
+      "description": "REQUIRED: AddInput( call must be present in options setup. Missing AddInput means no input file will be processed.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "Check that 'AddInput(' appears in generated code; fail if absent.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["FP-005"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED_VIA_CONSTRAINTS"
+    },
+    {
+      "id": "VR-008",
+      "name": "add_output_call_present_non_extractor",
+      "applies_to": {"families": ["pdf"], "types": ["Merger", "Splitter", "Optimizer", "PdfAConverter"]},
+      "check_type": "SUBSTRING_PRESENCE",
+      "description": "REQUIRED: AddOutput( call must be present for all PDF types except TextExtractor.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "Check that 'AddOutput(' appears in generated code; fail if absent. NOT applied to TextExtractor (which has no output file).",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["FP-005"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "IMPLEMENTED_VIA_CONSTRAINTS"
+    },
+    {
+      "id": "VR-009",
+      "name": "add_output_absent_text_extractor",
+      "applies_to": {"families": ["pdf"], "types": ["TextExtractor"]},
+      "check_type": "SUBSTRING_ABSENCE",
+      "description": "FORBIDDEN: AddOutput( must NOT be called for TextExtractor — it has no output file; read StringResult instead.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py _validate_code_from_constraints()",
+        "logic": "Check that 'AddOutput(' does NOT appear in TextExtractor code; fail if present.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["WRONG_API_SHAPE"],
+      "severity": "BUILD_FAILED",
+      "current_status": "IMPLEMENTED_VIA_CONSTRAINTS"
+    },
+    {
+      "id": "VR-010",
+      "name": "catalog_api_hash_matches_denominator",
+      "applies_to": {"families": "all", "types": "all"},
+      "check_type": "HASH_EQUALITY",
+      "description": "The api_catalog_sha256 in the denominator file must match the current run's catalog hash. Prevents stale-catalog generation.",
+      "implementation": {
+        "location": "src/plugin_examples/scenario_planner/planner.py (catalog hash validation step)",
+        "logic": "Compute SHA-256 of current api-catalog.json; compare to denominator api_catalog_sha256; fail if mismatch.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["FP-001"],
+      "severity": "BLOCKED_SCENARIO_PLANNING",
+      "current_status": "IMPLEMENTED"
+    },
+    {
+      "id": "VR-011",
+      "name": "lowcode_api_not_substituted_by_core",
+      "applies_to": {"families": "all", "types": "all"},
+      "check_type": "LOWCODE_CALL_PRESENCE",
+      "description": "Every generated example must contain at least one call to the primary LowCode type. A core API substitution (e.g., Document.Save instead of Converter.Convert) must be rejected.",
+      "implementation": {
+        "location": "src/plugin_examples/generator/code_generator.py (generalized validation — pending implementation)",
+        "logic": "Extract the type_short_name from the packet; verify that the generated code contains a call to that type (new TypeName() or TypeName.Method()). Fail if absent.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["CORE_SUBSTITUTION"],
+      "severity": "GENERATION_FAILED",
+      "current_status": "NOT_IMPLEMENTED — planned in Gap 2 (Design 2 in plan)"
+    },
+    {
+      "id": "VR-012",
+      "name": "processor_constructors_check",
+      "applies_to": {"families": "all", "types": "all"},
+      "check_type": "CATALOG_INSPECTION",
+      "description": "Before adding any type to allowed_types, verify constructors array is not empty and at least one static method exists (or the API is an instance type with public constructors).",
+      "implementation": {
+        "location": "src/plugin_examples/scenario_planner/type_classifier.py (pre-planning catalog check)",
+        "logic": "For each type in allowed_types: if constructors:[] AND no is_static:true methods → raise PermanentBlocker('API_ACCESS_PARADOX'). Log to backlog, skip type.",
+        "case_sensitive": false
+      },
+      "failure_mode_prevented": ["FP-008"],
+      "severity": "PERMANENTLY_BLOCKED",
+      "current_status": "NOT_IMPLEMENTED — manual check performed for Processor; automated check pending"
+    }
+  ],
+  "validation_gaps": [
+    {
+      "gap_id": "VG-001",
+      "description": "VR-001, VR-005, VR-006, VR-007, VR-008, VR-009 are only active for PDF. Need generalization to all families using per_type_constraints config.",
+      "plan_reference": "Gap 2 / Design 2 in plan lazy-puzzling-seal.md"
+    },
+    {
+      "gap_id": "VG-002",
+      "description": "VR-011 (LowCode call presence check) is not implemented. Core API substitutions can pass build+runtime undetected for non-PDF families.",
+      "plan_reference": "Gap 2 / Design 2 in plan"
+    },
+    {
+      "gap_id": "VG-003",
+      "description": "VR-012 (API access paradox pre-check) is not implemented. New types with constructors:[] can be added to allowed_types and will fail at build time.",
+      "plan_reference": "FP-008 resolution"
+    }
+  ]
+}

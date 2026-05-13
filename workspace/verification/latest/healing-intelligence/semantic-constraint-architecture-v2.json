@@ -1,0 +1,155 @@
+{
+  "report_type": "semantic-constraint-architecture",
+  "version": "2.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "description": "Architectural description of the constraint system as it must evolve from v1 (PDF-only, hardcoded) to v2 (all-family, config-driven). Covers where constraints live, how they flow, and what guarantees they provide.",
+  "architecture_v1": {
+    "status": "CURRENT — in production",
+    "description": "PDF constraints are hardcoded in packet_builder.py. No other family has equivalent constraint injection.",
+    "constraint_locations": {
+      "pdf_hardcoded": "src/plugin_examples/generator/packet_builder.py lines 129-211",
+      "pdf_per_type_in_yaml": "pipeline/configs/families/pdf.yml per_type_constraints (added Sprint R5)",
+      "other_families": "NONE — no constraint definitions"
+    },
+    "repair_injection": {
+      "location": "src/plugin_examples/runner.py lines 659-662",
+      "mechanism": "Filters packet.constraints for 'REQUIRED:' or 'FORBIDDEN:' prefix; re-injects into repair prompts",
+      "variable_name": "pdf_constraints (misnamed — actually family-agnostic filter)",
+      "gap": "Template hints and inline guidance NOT re-injected — only REQUIRED:/FORBIDDEN: survive repair"
+    },
+    "semantic_validation": {
+      "location": "src/plugin_examples/generator/code_generator.py lines 68-73",
+      "scope": "PDF only (family == 'pdf')",
+      "gap": "All other families have no semantic validation"
+    }
+  },
+  "architecture_v2": {
+    "status": "TARGET — to be implemented in Sprint R5 TC-SYS-03 + TC-SYS-04",
+    "description": "All constraints are config-driven, stored in family YAML per_type_constraints, read by packet_builder.py, and validated by a generalized code_generator.py validator.",
+    "constraint_locations": {
+      "family_yaml": "pipeline/configs/families/{family}.yml per_type_constraints section",
+      "packet_builder": "src/plugin_examples/generator/packet_builder.py reads per_type_constraints from family config and merges with hardcoded PDF block",
+      "hardcoded_pdf": "PRESERVED as fallback — packet_builder.py hardcoded PDF constraints remain active alongside config-driven constraints"
+    },
+    "constraint_schema": {
+      "per_type_constraints": {
+        "TypeName": {
+          "required": ["list of REQUIRED: strings"],
+          "forbidden": ["list of FORBIDDEN: strings"],
+          "supporting_using_directives": ["list of using statements required for fixture creation"]
+        }
+      }
+    },
+    "repair_injection_v2": {
+      "mechanism": "Same filter as v1 — REQUIRED:/FORBIDDEN: prefix. Config-driven constraints use same prefix so they survive automatically.",
+      "no_code_change_needed": true,
+      "but_variable_rename_recommended": "pdf_constraints → family_constraints (cosmetic)"
+    },
+    "semantic_validation_v2": {
+      "target_location": "src/plugin_examples/generator/code_generator.py",
+      "new_function": "_validate_code_from_constraints(code, per_type_constraints)",
+      "logic": {
+        "required_check": "For each REQUIRED: constraint, extract token (text before first '(', trimmed). If token not in 'using' and token not found in code → add issue.",
+        "forbidden_check": "For each FORBIDDEN: constraint, extract token (first word after 'FORBIDDEN: '). If token found in code → add issue.",
+        "using_check": "For each REQUIRED: constraint containing 'using ', check full 'using X;' statement present in code."
+      },
+      "applies_to": "All families with per_type_constraints defined. Falls back to v1 PDF-only logic if no per_type_constraints."
+    }
+  },
+  "constraint_flow_diagram": {
+    "generation_time": [
+      "1. Family YAML loaded → per_type_constraints extracted for target type",
+      "2. packet_builder.py merges hardcoded PDF constraints + config-driven constraints into packet.constraints",
+      "3. LLM receives full constraint list in generation prompt",
+      "4. Generated code returned",
+      "5. _validate_code_from_constraints() scans for REQUIRED patterns and FORBIDDEN patterns",
+      "6. If validation fails → GENERATION_FAILED (code not written to disk)",
+      "7. If validation passes → code written; proceed to build"
+    ],
+    "repair_time": [
+      "1. Build or runtime failure detected",
+      "2. runner.py filters packet.constraints for REQUIRED:/FORBIDDEN: prefix",
+      "3. Filtered constraints re-injected into repair prompt",
+      "4. LLM receives: error message + original code + re-injected constraints",
+      "5. Repaired code returned",
+      "6. _validate_code_from_constraints() runs again on repaired code",
+      "7. If validation fails → mark as post-repair validation failure",
+      "8. If validation passes → attempt build again"
+    ]
+  },
+  "constraint_taxonomy": {
+    "REQUIRED": {
+      "description": "Pattern that MUST appear in generated code. Failure to include → GENERATION_FAILED.",
+      "survives_repair": true,
+      "examples": [
+        "REQUIRED: new MergeOptions() — use MergeOptions as the concrete options class",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+        "REQUIRED: options.AddInput(new FileDataSource("
+      ]
+    },
+    "FORBIDDEN": {
+      "description": "Pattern that must NOT appear in generated code. Presence → GENERATION_FAILED.",
+      "survives_repair": true,
+      "examples": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber — use TextExtractor instead",
+        "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
+      ]
+    },
+    "TEMPLATE_HINT": {
+      "description": "Guidance included in initial generation prompt only. NOT re-injected into repair prompts.",
+      "survives_repair": false,
+      "risk": "HIGH — patterns in template_hints can be lost during repair (confirmed in FP-005)",
+      "recommendation": "Promote any template_hint that describes a structural pattern to REQUIRED"
+    }
+  },
+  "migration_plan": {
+    "phase_1": {
+      "sprint": "R5 — TC-SYS-03",
+      "action": "Add per_type_constraints to ALL family YAMLs. Update packet_builder.py to read from config.",
+      "families": ["pdf", "words", "cells", "diagram"],
+      "estimated_effort": "4-6 hours"
+    },
+    "phase_2": {
+      "sprint": "R5 — TC-SYS-04",
+      "action": "Implement _validate_code_from_constraints() in code_generator.py. Apply to all families.",
+      "estimated_effort": "4-6 hours"
+    },
+    "phase_3": {
+      "sprint": "R6",
+      "action": "Add per_type_constraints for email and slides before their pilot launches.",
+      "families": ["email", "slides"],
+      "estimated_effort": "2 hours each"
+    }
+  },
+  "known_constraint_gaps": [
+    {
+      "gap_id": "CG-001",
+      "family": "words",
+      "types": ["Comparer", "Merger"],
+      "gap": "No REQUIRED/FORBIDDEN constraints defined. Pair fixture strategy not yet designed.",
+      "risk": "Medium — LLM may use Document.Save() instead of Comparer.Compare() or Merger.Process()"
+    },
+    {
+      "gap_id": "CG-002",
+      "family": "pdf",
+      "types": ["21 deferred WORKFLOW_ROOT types"],
+      "gap": "No constraints defined. Types not yet in allowed_types.",
+      "risk": "Low — types not in scope until pilot expansion"
+    },
+    {
+      "gap_id": "CG-003",
+      "family": "cells",
+      "types": ["all 9 published"],
+      "gap": "No REQUIRED/FORBIDDEN constraints defined. All examples pass without them.",
+      "risk": "Low — examples are already published. Add constraints before any rerun."
+    },
+    {
+      "gap_id": "CG-004",
+      "family": "pdf",
+      "types": ["all"],
+      "gap": "PdfFileEditor (Facades API) not in FORBIDDEN list. Could substitute for Merger/Splitter.",
+      "risk": "Medium — add FORBIDDEN: PdfFileEditor to global_forbidden in pdf.yml"
+    }
+  ]
+}

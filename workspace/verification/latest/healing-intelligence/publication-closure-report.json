@@ -1,0 +1,53 @@
+{
+  "report_type": "publication-closure-report",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "persistent-healing-intelligence",
+  "preflight_result": {
+    "branch": "main",
+    "head_commit": "ec5fb0a",
+    "head_commit_message": "feat(r5-verification): close Sprint R5 with all-family completeness enforcement",
+    "working_tree": "clean",
+    "ec5fb0a_verified": true
+  },
+  "token_validation": {
+    "github_token_set": true,
+    "token_type": "fine_grained_pat",
+    "token_prefix": "github_pat_",
+    "classic_pat_required": true,
+    "classic_pat_present": false,
+    "verdict": "BLOCKED_WRONG_TOKEN_TYPE",
+    "reason": "Fine-grained PAT cannot write to org-owned repos via Git Data API (HTTP 403 on /git/blobs). Must use classic PAT (ghp_) with repo scope stored in GH_TOKEN."
+  },
+  "approval_gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET",
+    "EXAMPLE_REVIEWER_PATH": "NOT_SET",
+    "publication_unblocked": false,
+    "merge_unblocked": false,
+    "reviewer_unblocked": false
+  },
+  "pr_ready_inventory": {
+    "total_pr_ready": 7,
+    "scenarios": [
+      {"scenario_id": "pdf-splitter", "family": "pdf", "type": "Splitter", "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/"},
+      {"scenario_id": "pdf-optimizer", "family": "pdf", "type": "Optimizer", "state": "REVIEWER_PASSED_1_OF_2"},
+      {"scenario_id": "pdf-pdfa-converter", "family": "pdf", "type": "PdfAConverter", "pr_dry_run_package": "workspace/runs/pilot-pdf-20260513-181803/"},
+      {"scenario_id": "words-merger", "family": "words", "type": "Merger", "state": "PR_DRY_RUN_READY"},
+      {"scenario_id": "words-comparer", "family": "words", "type": "Comparer", "state": "PR_DRY_RUN_READY"},
+      {"scenario_id": "words-splitter", "family": "words", "type": "Splitter", "state": "PR_DRY_RUN_READY"},
+      {"scenario_id": "words-mail-merger", "family": "words", "type": "MailMerger", "pr_dry_run_package": "workspace/runs/pilot-words-20260513-175418/"}
+    ]
+  },
+  "publication_verdict": "BLOCKED_APPROVAL",
+  "blockers": [
+    "WRONG_TOKEN_TYPE: fine-grained PAT set; classic PAT (ghp_, repo scope) required for org-repo Git Data API writes",
+    "MISSING_APPROVE_LIVE_PR: PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+    "MISSING_EXAMPLE_REVIEWER: EXAMPLE_REVIEWER_PATH not set (required for Optimizer 2nd pass)"
+  ],
+  "unblock_commands": {
+    "set_token": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')  # requires classic PAT in GH_TOKEN",
+    "set_approval": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR'",
+    "publish_pdf_wave_a": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+    "publish_words_wave23": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family words --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+  }
+}

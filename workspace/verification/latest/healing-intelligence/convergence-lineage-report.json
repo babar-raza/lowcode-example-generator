@@ -1,0 +1,165 @@
+{
+  "report_type": "convergence-lineage-report",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "description": "Authoritative record of which runs are superseded, which are authoritative, and the convergence path for each scenario.",
+  "families": {
+    "pdf": {
+      "pilot_wave": "Wave A (5 types: Merger, TextExtractor, Splitter, Optimizer, PdfAConverter)",
+      "run_sequence": [
+        {
+          "run_id": "pilot-pdf-20260513-173851",
+          "timestamp": "2026-05-13T17:38:51Z",
+          "ordinal": 1,
+          "status": "SUPERSEDED",
+          "superseded_by": "pilot-pdf-20260513-175041",
+          "result_summary": "BLOCKED — catalog hash mismatch (FP-001). Zero scenarios planned.",
+          "scenarios": {},
+          "authoritative": false,
+          "fix_applied": "Updated api_catalog_sha256 in pdf.json denominator to 402ddee5..."
+        },
+        {
+          "run_id": "pilot-pdf-20260513-175041",
+          "timestamp": "2026-05-13T17:50:41Z",
+          "ordinal": 2,
+          "status": "SUPERSEDED",
+          "superseded_by": "pilot-pdf-20260513-180040",
+          "result_summary": "4/5 — PdfAConverter GENERATION_FAILED (used new Aspose.Pdf.Document() as token, FP-004 partial)",
+          "scenarios": {
+            "pdf-merger": "PASS",
+            "pdf-text-extractor": "PASS",
+            "pdf-splitter": "PASS",
+            "pdf-optimizer": "PASS",
+            "pdf-pdfa-converter": "GENERATION_FAILED"
+          },
+          "authoritative": false,
+          "fix_applied": "Added REQUIRED: new PdfAConvertOptions( and FORBIDDEN constraints for PdfAConverter"
+        },
+        {
+          "run_id": "pilot-pdf-20260513-180040",
+          "timestamp": "2026-05-13T18:00:40Z",
+          "ordinal": 3,
+          "status": "SUPERSEDED",
+          "superseded_by": "pilot-pdf-20260513-180851",
+          "result_summary": "3/5 — PdfAConverter still FAILED (FP-004, FP-009), Splitter FAILED (FP-006)",
+          "scenarios": {
+            "pdf-merger": "PASS",
+            "pdf-text-extractor": "PASS",
+            "pdf-splitter": "GENERATION_FAILED",
+            "pdf-optimizer": "PASS",
+            "pdf-pdfa-converter": "GENERATION_FAILED"
+          },
+          "authoritative": false,
+          "fix_applied": "Added REQUIRED: using Aspose.Pdf.Text; for Splitter; strengthened PdfAConverter constraints"
+        },
+        {
+          "run_id": "pilot-pdf-20260513-180851",
+          "timestamp": "2026-05-13T18:08:51Z",
+          "ordinal": 4,
+          "status": "SUPERSEDED",
+          "superseded_by": "pilot-pdf-20260513-181803",
+          "result_summary": "3/5 — Merger REGRESSION (FP-005: repair dropped AddInput), PdfAConverter still FAILED (FP-004 partial)",
+          "scenarios": {
+            "pdf-merger": "GENERATION_FAILED",
+            "pdf-text-extractor": "PASS",
+            "pdf-splitter": "PASS",
+            "pdf-optimizer": "PASS",
+            "pdf-pdfa-converter": "GENERATION_FAILED"
+          },
+          "authoritative": false,
+          "fix_applied": "Promoted AddInput/AddOutput/MergeOptions to REQUIRED for Merger; added FORBIDDEN LowCodeLoadOptions/LowCodeSaveOptions for PdfAConverter"
+        },
+        {
+          "run_id": "pilot-pdf-20260513-181803",
+          "timestamp": "2026-05-13T18:18:03Z",
+          "ordinal": 5,
+          "status": "AUTHORITATIVE",
+          "superseded_by": null,
+          "result_summary": "5/5 CONVERGED — all PDF Wave A scenarios PR_DRY_RUN_READY",
+          "scenarios": {
+            "pdf-merger": "PASS",
+            "pdf-text-extractor": "PASS",
+            "pdf-splitter": "PASS",
+            "pdf-optimizer": "PASS",
+            "pdf-pdfa-converter": "PASS"
+          },
+          "authoritative": true,
+          "fix_applied": null
+        }
+      ],
+      "convergence_achieved": true,
+      "runs_to_convergence": 5,
+      "constraint_iterations": 4,
+      "regressions_observed": 1,
+      "authoritative_run": "pilot-pdf-20260513-181803"
+    },
+    "words": {
+      "pilot_wave": "Wave 3 (2 new types: MailMerger, Processor)",
+      "run_sequence": [
+        {
+          "run_id": "pilot-words-20260513-173848",
+          "timestamp": "2026-05-13T17:38:48Z",
+          "ordinal": 1,
+          "status": "SUPERSEDED",
+          "superseded_by": "pilot-words-20260513-175418",
+          "result_summary": "MailMerger GENERATION_FAILED (FP-007: complex InsertField constraint token), Processor BUILD_FAILED (FP-008: API_ACCESS_PARADOX)",
+          "scenarios": {
+            "words-mail-merger": "GENERATION_FAILED",
+            "words-processor": "BUILD_FAILED"
+          },
+          "authoritative": false,
+          "fix_applied": "Simplified InsertField constraint token; removed Processor from allowed_types"
+        },
+        {
+          "run_id": "pilot-words-20260513-175418",
+          "timestamp": "2026-05-13T17:54:18Z",
+          "ordinal": 2,
+          "status": "AUTHORITATIVE",
+          "superseded_by": null,
+          "result_summary": "MailMerger PASSED, Processor EXCLUDED (permanent API_ACCESS_PARADOX)",
+          "scenarios": {
+            "words-mail-merger": "PASS",
+            "words-processor": "EXCLUDED_PERMANENTLY"
+          },
+          "authoritative": true,
+          "fix_applied": null
+        }
+      ],
+      "convergence_achieved": true,
+      "runs_to_convergence": 2,
+      "constraint_iterations": 1,
+      "regressions_observed": 0,
+      "authoritative_run": "pilot-words-20260513-175418"
+    }
+  },
+  "supersession_rules": {
+    "rule_1": "A run is SUPERSEDED when a subsequent run for the same family+wave exists with the same or expanded scenario set.",
+    "rule_2": "Only the AUTHORITATIVE run's artifacts are valid for PR publishing. Superseded run artifacts must not be submitted as PRs.",
+    "rule_3": "A run may be PARTIALLY_AUTHORITATIVE if it contains the only passing artifact for a specific scenario and the subsequent runs did not re-run that scenario.",
+    "rule_4": "Historical superseded runs are preserved in workspace/runs/ as audit evidence — they are not deleted.",
+    "rule_5": "The pdf-controlled-pilot-wave1 PR dry-run package at workspace/pr-dry-run/pdf-controlled-pilot-wave1/ was built from earlier runs and may include artifacts from run2 (Merger, Splitter from that run). This package predates run5 — use run5 artifacts for Merger and Splitter in the final PR."
+  },
+  "pr_dry_run_package_notes": [
+    {
+      "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "built_from": "Prior runs (pre-run5)",
+      "contains": ["Merger", "Splitter"],
+      "status": "VALID_BUT_PRE_RUN5 — run5 artifacts for Merger and Splitter are preferred for final PR",
+      "action_required": "Promote run5 artifacts for Merger and Splitter before live PR"
+    },
+    {
+      "package_path": "workspace/runs/pilot-pdf-20260513-181803/",
+      "built_from": "run5 (AUTHORITATIVE)",
+      "contains": ["all 5 PDF Wave A scenarios"],
+      "status": "AUTHORITATIVE",
+      "action_required": "Use this package for all 5 PDF Wave A PRs"
+    },
+    {
+      "package_path": "workspace/runs/pilot-words-20260513-175418/",
+      "built_from": "words-run2 (AUTHORITATIVE)",
+      "contains": ["MailMerger"],
+      "status": "AUTHORITATIVE",
+      "action_required": "Use this package for MailMerger PR"
+    }
+  ]
+}

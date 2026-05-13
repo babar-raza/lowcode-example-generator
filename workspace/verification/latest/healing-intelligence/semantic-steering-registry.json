@@ -1,0 +1,257 @@
+{
+  "registry_type": "semantic-steering-registry",
+  "version": "1.0.0",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "description": "Semantic steering knowledge: what the LLM must be guided toward (REQUIRED) and steered away from (FORBIDDEN) for each family and type. Derived from empirical pilot observations.",
+  "families": {
+    "pdf": {
+      "global_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber — use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor — use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use the concrete options class"
+      ],
+      "per_type": {
+        "Merger": {
+          "required": [
+            "REQUIRED: new MergeOptions() — use MergeOptions as the concrete options class",
+            "REQUIRED: options.AddInput(new FileDataSource( — add all input files via AddInput",
+            "REQUIRED: options.AddOutput(new FileDataSource( — set output file via AddOutput",
+            "REQUIRED: new Merger().Process(options) — call Process on instance",
+            "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — sub-namespace does not exist"
+          ],
+          "rationale": "Merger uses MergeOptions (not PluginOptions). AddOutput takes FileDataSource (IDataSource), NOT FileSaveTarget (ISaveTarget). TextFragment fixture requires Aspose.Pdf.Text namespace."
+        },
+        "Splitter": {
+          "required": [
+            "REQUIRED: new SplitOptions() — use SplitOptions as the concrete options class",
+            "REQUIRED: options.AddInput(new FileDataSource( — add input file via AddInput",
+            "REQUIRED: options.AddOutput(new FileDataSource( — set output file via AddOutput",
+            "REQUIRED: new Splitter().Process(options) — call Process on instance",
+            "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — sub-namespace does not exist"
+          ],
+          "rationale": "Splitter non-deterministically uses TextFragment in fixture; Text namespace must be REQUIRED. Output filename must be plain string, not format string with {0}."
+        },
+        "Optimizer": {
+          "required": [
+            "REQUIRED: new OptimizeOptions() — use OptimizeOptions as the concrete options class",
+            "REQUIRED: options.AddInput(new FileDataSource( — add input file via AddInput",
+            "REQUIRED: options.AddOutput(new FileDataSource( — set output file via AddOutput",
+            "REQUIRED: new Optimizer().Process(options) — call Process on instance"
+          ],
+          "forbidden": [
+            "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — sub-namespace does not exist"
+          ],
+          "rationale": "Optimizer follows the standard AddInput/AddOutput/Process pattern."
+        },
+        "TextExtractor": {
+          "required": [
+            "REQUIRED: new TextExtractorOptions() — use TextExtractorOptions as the concrete options class",
+            "REQUIRED: options.AddInput(new FileDataSource( — add input file via AddInput",
+            "REQUIRED: new TextExtractor().Process(options) — call Process on instance",
+            "REQUIRED: StringResult — read text from result via cast to StringResult",
+            "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: TextAbsorber — use TextExtractor (LowCode API), not TextAbsorber (core API)",
+            "FORBIDDEN: options.AddOutput( — TextExtractor has NO AddOutput; read StringResult from result.ResultCollection"
+          ],
+          "rationale": "TextExtractor has no AddOutput; text is returned via result.ResultCollection[0] cast to StringResult. AddOutput would cause a build error."
+        },
+        "PdfAConverter": {
+          "required": [
+            "REQUIRED: new PdfAConvertOptions( — use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
+            "REQUIRED: using Aspose.Pdf; (for PdfAStandard enum)",
+            "REQUIRED: options.AddInput(new FileDataSource( — add input file via AddInput",
+            "REQUIRED: options.AddOutput(new FileDataSource( — set output file via AddOutput",
+            "REQUIRED: new PdfAConverter().Process(options) — call Process on instance",
+            "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: new PluginOptions() — PluginOptions is abstract, use PdfAConvertOptions",
+            "FORBIDDEN: LowCodeLoadOptions — wrong options class for PdfAConverter",
+            "FORBIDDEN: LowCodeSaveOptions — wrong options class for PdfAConverter"
+          ],
+          "rationale": "PdfAConvertOptions is the concrete class. LLM defaults to PluginOptions (abstract), LowCodeLoadOptions, or LowCodeSaveOptions — all wrong. Must be explicit."
+        }
+      }
+    },
+    "words": {
+      "global_required": [
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() — use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() — use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() — use LowCode API"
+      ],
+      "per_type": {
+        "Converter": {
+          "required": [
+            "REQUIRED: Converter.Convert(inputFile, outputFile — static entry, two-argument form",
+            "REQUIRED: using Aspose.Words; (for Document fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: Document.Save() as primary conversion — must use LowCode Converter.Convert()"
+          ],
+          "rationale": "Converter.Convert is the primary LowCode API. Document.Save() is a core API substitution."
+        },
+        "Watermarker": {
+          "required": [
+            "REQUIRED: Watermarker.SetText(inputFile, outputFile, — static entry",
+            "REQUIRED: using Aspose.Words; (for Document fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: manual shape/header insertion replacing Watermarker.SetText()"
+          ],
+          "rationale": "Watermarker.SetText is the primary LowCode API. Text watermarks are stored as VML shapes in word/header*.xml."
+        },
+        "Splitter": {
+          "required": [
+            "REQUIRED: Splitter.ExtractPages(inputFile, outputFile — static entry",
+            "REQUIRED: using Aspose.Words; (for Document fixture creation)"
+          ],
+          "forbidden": [],
+          "rationale": "Splitter.ExtractPages is the primary LowCode API."
+        },
+        "Replacer": {
+          "required": [
+            "REQUIRED: Replacer.Replace(inputFile, outputFile — static entry",
+            "REQUIRED: using Aspose.Words; (for Document fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: manual regex loops replacing Replacer.Replace()"
+          ],
+          "rationale": "Replacer.Replace is the primary LowCode API."
+        },
+        "MailMerger": {
+          "required": [
+            "REQUIRED: MailMerger.Execute( — static entry, execute mail merge",
+            "REQUIRED: InsertField(\"MERGEFIELD — create MERGEFIELD fields in template via DocumentBuilder.InsertField",
+            "REQUIRED: using Aspose.Words; (for Document+DocumentBuilder fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: manual string replacement instead of MailMerger.Execute()"
+          ],
+          "rationale": "MailMerger.Execute requires a template DOCX with MERGEFIELD fields created via DocumentBuilder.InsertField. Constraint token must be simple ('InsertField') not complex."
+        },
+        "Processor": {
+          "required": [],
+          "forbidden": [],
+          "status": "API_ACCESS_PARADOX_EXCLUDED",
+          "rationale": "Processor has constructors:[] and all instance methods — cannot be instantiated or called statically. Removed from allowed_types. Requires ProcessorContext factory investigation or Aspose.Words version upgrade."
+        }
+      }
+    },
+    "cells": {
+      "global_required": [
+        "using Aspose.Cells.LowCode;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: Workbook.Save() as primary conversion — use LowCode API",
+        "FORBIDDEN: Cells.Protect() replacing SpreadsheetLocker"
+      ],
+      "per_type": {},
+      "note": "All 9 published examples pass without per-type constraints. Add before any rerun to protect against repair regression."
+    },
+    "diagram": {
+      "global_required": [
+        "using Aspose.Diagram.LowCode;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: IDiagramPlugin core interface replacing LowCode DiagramConverter.Process()",
+        "FORBIDDEN: manual VSDX file manipulation replacing LowCode API"
+      ],
+      "per_type": {
+        "DiagramConverter": {
+          "required": [
+            "REQUIRED: DiagramConverter.Process( — primary LowCode call",
+            "REQUIRED: using Aspose.Diagram; (for Diagram fixture creation)"
+          ],
+          "forbidden": [],
+          "rationale": "DiagramConverter.Process() is the primary LowCode API."
+        },
+        "PdfConverter": {
+          "required": [
+            "REQUIRED: PdfConverter.Process( — primary LowCode call",
+            "REQUIRED: using Aspose.Diagram; (for Diagram fixture creation)"
+          ],
+          "forbidden": [],
+          "rationale": "PdfConverter.Process() is the primary LowCode API."
+        }
+      }
+    },
+    "email": {
+      "global_required": [
+        "using Aspose.Email.LowCode;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: MailMessage.Save() as primary conversion — use LowCode Converter.Convert()"
+      ],
+      "per_type": {
+        "Converter": {
+          "required": [
+            "REQUIRED: Converter.Convert( — primary LowCode call (static)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: MailMessage.Save() replacing Converter.Convert()"
+          ],
+          "rationale": "Not yet piloted. Constraints anticipated from pattern analysis."
+        }
+      },
+      "note": "Email is in DISCOVERY_ONLY state. Constraints are anticipatory — validate empirically when pilot launches."
+    },
+    "slides": {
+      "global_required": [
+        "using Aspose.Slides.LowCode;"
+      ],
+      "global_forbidden": [
+        "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() or similar LowCode method",
+        "FORBIDDEN: manual slide manipulation replacing Compress.* methods"
+      ],
+      "per_type": {
+        "Convert": {
+          "required": [
+            "REQUIRED: Convert.ToPdf( or Convert.ToJpeg( or Convert.AutoByExtension( — primary LowCode call (static)",
+            "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: Presentation.Save() as primary conversion"
+          ],
+          "rationale": "Not yet piloted. Constraints are anticipatory."
+        },
+        "Compress": {
+          "required": [
+            "REQUIRED: Compress.RemoveUnusedLayoutSlides( or Compress.CompressEmbeddedFonts( — primary LowCode call (static)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: manual slide/layout removal replacing Compress.*"
+          ],
+          "rationale": "Not yet piloted. Constraints are anticipatory."
+        },
+        "Merger": {
+          "required": [
+            "REQUIRED: Merger.Process( — primary LowCode call",
+            "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
+          ],
+          "forbidden": [
+            "FORBIDDEN: manual slide copy replacing Merger.Process()"
+          ],
+          "rationale": "Not yet piloted. Pair fixture strategy needed (2 PPTX inputs)."
+        }
+      },
+      "note": "Slides is in DISCOVERY_ONLY state. Missing XML docs may affect generation quality (DLL name mismatch, fallback implemented)."
+    }
+  }
+}

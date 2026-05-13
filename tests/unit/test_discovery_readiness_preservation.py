@@ -283,6 +283,84 @@ class TestFamilyScopedEvidencePromotion:
         warnings = detect_cross_family_contamination(verification_dir, expected_family="cells")
         assert warnings == [], f"No warnings expected for same-family, got: {warnings}"
 
+    def test_subdirectory_files_promoted_to_family_scoped_path(self, tmp_path):
+        """Files in evidence/latest/families/{family}/ must be promoted to verification."""
+        family = "words"
+        src = self._make_src_latest(tmp_path, family)
+        # Simulate completeness gate writing to families/{family}/ subdirectory
+        sub = src / "families" / family
+        sub.mkdir(parents=True)
+        gate_data = {"family": family, "expected_count": 6, "ready_count": 6, "status": "pass"}
+        (sub / "completeness-gate-result.json").write_text(
+            json.dumps(gate_data), encoding="utf-8"
+        )
+
+        verification_dir = tmp_path / "verification"
+        result = promote_family_evidence(src, verification_dir, family, "pilot-words-20260513")
+
+        # The subdirectory file must be promoted to families/words/
+        dst = verification_dir / "latest" / "families" / family / "completeness-gate-result.json"
+        assert dst.exists(), "Subdirectory completeness-gate-result.json must be promoted"
+        promoted_gate = json.loads(dst.read_text(encoding="utf-8"))
+        assert promoted_gate["expected_count"] == 6, "Promoted gate must have expected_count=6"
+        assert promoted_gate["ready_count"] == 6
+        # Must appear in the promoted files list
+        assert f"families/{family}/completeness-gate-result.json" in result["files_promoted"]
+
+    def test_subdirectory_promotion_does_not_duplicate_top_level_files(self, tmp_path):
+        """Top-level files must not be confused with subdirectory files."""
+        family = "cells"
+        src = self._make_src_latest(tmp_path, family)
+        # Top-level has validation-results.json
+        assert (src / "validation-results.json").exists()
+        # Subdirectory has a different file
+        sub = src / "families" / family
+        sub.mkdir(parents=True)
+        (sub / "completeness-gate-result.json").write_text(
+            json.dumps({"family": family, "status": "pass"}), encoding="utf-8"
+        )
+
+        verification_dir = tmp_path / "verification"
+        result = promote_family_evidence(src, verification_dir, family, "pilot-cells-20260430")
+
+        # Both files must exist in destination
+        dst_family = verification_dir / "latest" / "families" / family
+        assert (dst_family / "validation-results.json").exists()
+        assert (dst_family / "completeness-gate-result.json").exists()
+
+    def test_wave2_completeness_gate_not_stale_after_promotion(self, tmp_path):
+        """Regression test: Words Wave 2 run with expected_count=6 must not leave stale expected_count=4."""
+        family = "words"
+        verification_dir = tmp_path / "verification"
+
+        # Simulate pre-existing stale gate with expected_count=4
+        stale_dst = verification_dir / "latest" / "families" / family
+        stale_dst.mkdir(parents=True)
+        stale_gate = {"family": family, "expected_count": 4, "ready_count": 4, "status": "pass"}
+        (stale_dst / "completeness-gate-result.json").write_text(
+            json.dumps(stale_gate), encoding="utf-8"
+        )
+
+        # Simulate new run with expected_count=6 in subdirectory
+        src = self._make_src_latest(tmp_path, family)
+        sub = src / "families" / family
+        sub.mkdir(parents=True)
+        new_gate = {"family": family, "expected_count": 6, "ready_count": 6, "status": "pass"}
+        (sub / "completeness-gate-result.json").write_text(
+            json.dumps(new_gate), encoding="utf-8"
+        )
+
+        promote_family_evidence(src, verification_dir, family, "pilot-words-20260513-wave2")
+
+        # After promotion, the gate must have the new data (expected_count=6), not stale (4)
+        promoted = json.loads(
+            (stale_dst / "completeness-gate-result.json").read_text(encoding="utf-8")
+        )
+        assert promoted["expected_count"] == 6, (
+            f"Completeness gate must show expected_count=6 after Wave 2, got {promoted['expected_count']}"
+        )
+        assert promoted["ready_count"] == 6
+
     def test_family_scoped_evidence_files_constant_is_complete(self):
         """FAMILY_SCOPED_EVIDENCE_FILES must contain all the files that caused contamination."""
         contaminated = {

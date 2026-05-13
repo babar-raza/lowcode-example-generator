@@ -150,6 +150,18 @@ def promote_family_evidence(
             shutil.copy2(f, dst_top / f.name)
             files_promoted.append(f.name)
 
+    # Promote family-scoped subdirectory files (e.g. families/{family}/*.json)
+    # The completeness gate and other per-family evidence may be written to
+    # evidence/latest/families/{family}/ during a run. These must be promoted
+    # to workspace/verification/latest/families/{family}/ as well.
+    src_family_sub = src_latest / "families" / family
+    if src_family_sub.exists() and src_family_sub.is_dir():
+        for f in sorted(src_family_sub.iterdir()):
+            if not f.is_file() or f.name == ".gitkeep":
+                continue
+            shutil.copy2(f, dst_family / f.name)
+            files_promoted.append(f"families/{family}/{f.name}")
+
     # Write metadata to family-scoped directory
     metadata: dict = {
         "scope": "family",

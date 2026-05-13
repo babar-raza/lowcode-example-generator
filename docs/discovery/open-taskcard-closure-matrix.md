@@ -3,7 +3,7 @@
 
 **Matrix date:** 2026-05-09
 **Sprint:** Post-Discovery Next Sprint (Phases A-H) — state board update
-**Total:** 120 | **Open:** 48 | **Closed:** 71
+**Total:** 126 | **Open:** 50 | **Closed:** 75
 
 ---
 
@@ -46,7 +46,6 @@
 | `TASK-NEW-18-followup-post-merge-failure-relaunch-policy` | Document relaunch policy for post-merge checkout validation failures |  |
 | `NEW-19-followup-email-controlled-pilot-planning` | Plan and configure Email controlled pilot: fixture strategy, allowed_types, target repo |  |
 | `NEW-20-followup-slides-controlled-pilot-planning` | Plan and configure Slides controlled pilot: fixture strategy, allowed_types, target repo |  |
-| `NEW-21-followup-diagram-controlled-pilot-planning` | Plan and configure Diagram controlled pilot: fixture strategy, allowed_types, target repo |  |
 | `NEW-22-followup-epub-reflection-blocker-investigation` | Investigate Aspose.Epub NuGet package availability and correct package ID |  |
 | `NEW-24-followup-ocr-reflection-blocker-investigation` | Fix OCR reflection blocker: Aspose.Drawing.Common missing transitive dep |  |
 | `NEW-25-followup-omr-reflection-blocker-investigation` | Fix OMR reflection blocker: Newtonsoft.Json missing transitive dep |  |
@@ -56,9 +55,12 @@
 | `TC-PDF-01-pdf-merger-rerun-post-fix` |  |  |
 | `TC-PDF-02-pdf-optimizer-2nd-pass` |  |  |
 | `TC-SYS-01-github-token-contents-write-fix` |  |  |
-| `TC-PDF-03-pdf-21-type-fixture-assessment` |  |  |
-| `TC-EMAIL-01-email-fixture-strategy-design` |  |  |
-| `TC-SLIDES-01-slides-fixture-strategy-design` |  |  |
+| `TC-WORDS-02-words-wave2-merger-comparer` | Words Wave 2: add Merger and Comparer to allowed_types and run generation |  |
+| `TC-WORDS-03-words-wave3-mailmerger` | Words Wave 3: add MailMerger to allowed_types |  |
+| `TC-WORDS-04-words-wave4-processor-reportbuilder` | Words Wave 4: add Processor and ReportBuilder |  |
+| `TC-PDF-04-pdf-batch1-expansion` | PDF Batch 1: add PdfAConverter, Html, XlsConverter, DocConverter |  |
+| `TC-EMAIL-02-email-pilot-launch` | Email Pilot Launch: activate email.yml and run Converter generation |  |
+| `TC-SLIDES-02-slides-pilot-launch` | Slides Pilot Launch: activate slides.yml and run Compress/Convert/Merger generation |  |
 
 ---
 
@@ -127,6 +129,7 @@
 | `TC14-08-rollback-disable-verification` | Verify production posting is instantly disabled after Sprint 2 by unsetting env vars | TC14 One-Row Production POST Sprint |
 | `TC14-09-independent-verification` | Independent read-only audit of all Sprint 2 evidence — confirm 1 production row, all gates verified, no secrets | TC14 Independent Verification and Final Closure Sprint |
 | `NEW-05-followup-release-status-pdf-default` | Fix release-status CLI default to include pdf alongside cells and words |  |
+| `NEW-21-followup-diagram-controlled-pilot-planning` | Plan and configure Diagram controlled pilot: fixture strategy, allowed_types, target repo | Family Expansion Readiness Sprint |
 | `NEW-23-followup-html-reflection-blocker-investigation` | CLOSED: html confirmed CONFIRMED_NO_LOWCODE after manual DllReflector run | Post-Discovery Next Sprint Phase D (same sprint) |
 | `NEW-27-followup-svg-reflection-blocker-investigation` | CLOSED: svg confirmed CONFIRMED_NO_LOWCODE after manual DllReflector run | Post-Discovery Next Sprint Phase D (same sprint) |
 | `SPRINT-R5-enum-blocked-scenarios-tracking` |  |  |
@@ -137,3 +140,6 @@
 | `SPRINT-R5-release-status-all-families` |  |  |
 | `SPRINT-R5-pdf-merger-textfragment-constraint-fix` |  |  |
 | `SPRINT-R5-words-denominator-guard` |  |  |
+| `TC-PDF-03-pdf-21-type-fixture-assessment` |  | Family Expansion Readiness Sprint |
+| `TC-EMAIL-01-email-fixture-strategy-design` |  | Family Expansion Readiness Sprint |
+| `TC-SLIDES-01-slides-fixture-strategy-design` |  | Family Expansion Readiness Sprint |

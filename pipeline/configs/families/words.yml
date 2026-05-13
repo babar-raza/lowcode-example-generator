@@ -62,11 +62,15 @@ generation:
     - Watermarker
     - Splitter
     - Replacer
+    - Merger
+    - Comparer
   preferred_methods_per_type:
     Watermarker: SetText
     Splitter: ExtractPages
     Replacer: Replace
     Converter: Convert
+    Merger: Merge
+    Comparer: Compare
 
 validation:
   require_restore: true
@@ -97,6 +101,13 @@ template_hints:
     - 'var doc2 = new Document();'
     - 'new DocumentBuilder(doc2).Writeln("Document 2");'
     - 'doc2.Save("input2.docx");'
+  comparer_input_creation_lines:
+    - 'var doc1 = new Document();'
+    - 'new DocumentBuilder(doc1).Writeln("Original content");'
+    - 'doc1.Save("original.docx");'
+    - 'var doc2 = new Document();'
+    - 'new DocumentBuilder(doc2).Writeln("Modified content");'
+    - 'doc2.Save("modified.docx");'
   additional_usings:
     - "Aspose.Words"
   default_output_extension: ".docx"
@@ -127,3 +138,21 @@ per_type_constraints:
       - "REQUIRED: Replacer.Replace(inputFile, outputFile, pattern, replacement)"
     forbidden:
       - "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() — use LowCode Replacer"
+  Merger:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: using Aspose.Words;"
+      - "REQUIRED: Merger.Merge(outputFile, inputFiles) — static call, NOT new Merger().Merge()"
+      - "REQUIRED: 2 input DOCX files created programmatically via Document+DocumentBuilder"
+    forbidden:
+      - "FORBIDDEN: Document.AppendDocument() replacing Merger.Merge() — use LowCode Merger"
+      - "FORBIDDEN: new Merger().Merge() — Merger.Merge() is static, call directly"
+  Comparer:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: using Aspose.Words;"
+      - "REQUIRED: Comparer.Compare(v1, v2, outputFile, author, DateTime.UtcNow) — static call"
+      - "REQUIRED: 2 input DOCX files with DIFFERENT content for comparison to produce meaningful output"
+    forbidden:
+      - "FORBIDDEN: Document.Compare() replacing Comparer.Compare() — use LowCode Comparer"
+      - "FORBIDDEN: new Comparer().Compare() — Comparer.Compare() is static, call directly"

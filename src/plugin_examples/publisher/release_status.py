@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+from datetime import datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -265,6 +266,7 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
 
     return {
         "report_type": "release_status",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "families_checked": families,
         "all_merged": all_merged,
         "all_post_merge_validated": all_validated,

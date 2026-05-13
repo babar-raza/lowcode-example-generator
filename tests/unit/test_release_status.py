@@ -371,7 +371,7 @@ class TestReleaseStatusAllFamilies:
         status = compute_release_status(families, repo_root / "workspace" / "verification")
         by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
         assert by_family["cells"] == "FAMILY_COMPLETE"
-        assert by_family["words"] == "PILOT_COMPLETE"
+        assert by_family["words"] == "PARTIAL_CANARY"
         assert by_family["pdf"] == "PARTIAL_CANARY"
         assert by_family["diagram"] == "PILOT_COMPLETE"
         assert by_family["email"] == "DISCOVERY_ONLY"
@@ -388,3 +388,23 @@ class TestReleaseStatusAllFamilies:
         for rec in status["families"]:
             assert rec["release_scope_status"] == "DISCOVERY_ONLY"
             assert "do not create live PR" in rec["next_required_action"]
+
+    def test_release_status_output_has_generated_at(self, tmp_path):
+        """compute_release_status must include generated_at ISO timestamp."""
+        from plugin_examples.publisher.release_status import compute_release_status
+        verification_dir = self._make_dir(tmp_path)
+        status = compute_release_status(["cells"], verification_dir)
+        assert "generated_at" in status, "release-status.json must include generated_at"
+        ts = status["generated_at"]
+        assert "T" in ts and "Z" in ts or "+" in ts, f"generated_at must be ISO 8601: {ts}"
+
+    def test_canonical_release_status_covers_all_six_families(self):
+        """compute_release_status with all 6 families must return all 6 (not stale cells/words-only)."""
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        assert status.get("families_checked") == ["cells", "words", "pdf", "diagram", "email", "slides"], (
+            f"compute_release_status must cover all 6 families, got: {status.get('families_checked')}"
+        )
+        assert "generated_at" in status, "release status must include generated_at timestamp"
+        assert len(status["families"]) == 6

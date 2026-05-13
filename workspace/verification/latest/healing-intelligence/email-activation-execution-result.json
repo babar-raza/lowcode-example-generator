@@ -1,0 +1,57 @@
+{
+  "artifact_type": "email_activation_execution_result",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Sprint 5 — LLM-Unblocked Generation and Publication Closure",
+  "lane": "LANE 3 — Email Activation Gate",
+
+  "execution_verdict": "EXTERNALLY_BLOCKED",
+  "execution_status": "NOT_EXECUTED",
+
+  "repo_probe": {
+    "org": "aspose-email-net",
+    "org_exists": true,
+    "org_http_status": 200,
+    "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+    "repo_exists": false,
+    "repo_http_status": 404,
+    "probe_method": "GET https://api.github.com/repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "verdict": "REPO_NOT_PROVISIONED — org exists but target repo has not been created"
+  },
+
+  "blockers": [
+    {
+      "blocker_type": "EXTERNAL_REPO_PROVISIONING",
+      "severity": "BLOCKING",
+      "detail": "Repository aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples does not exist (HTTP 404). Org aspose-email-net exists (HTTP 200). Repo must be created by maintainer before any PR can be published.",
+      "resolution": "Maintainer creates repo: org=aspose-email-net, name=Aspose.Email.LowCode-for-.NET-Examples, default_branch=main, visibility=public"
+    },
+    {
+      "blocker_type": "ENV_GPT_OSS_MODEL",
+      "severity": "BLOCKING",
+      "detail": "GPT_OSS_MODEL not set — generation cannot proceed even after repo is provisioned",
+      "resolution": "Set GPT_OSS_MODEL environment variable"
+    },
+    {
+      "blocker_type": "HUMAN_PILOT_APPROVAL",
+      "severity": "BLOCKING",
+      "detail": "email.yml status=discovery_only, allowed_types=[]. Human must approve pilot launch to change to status=active and populate allowed_types=[Converter]",
+      "resolution": "Human approval: email.yml status=active, allowed_types=[Converter]"
+    }
+  ],
+
+  "activation_readiness_when_unblocked": {
+    "per_type_constraints": "DEFINED (email.yml)",
+    "fixture_strategy": "DEFINED (RFC2822 string, MemoryStream, FolderOutputHandler)",
+    "async_pattern": "DOCUMENTED (async Task Main + await ConvertToHtml)",
+    "denominator": "1 workflow root (Converter)",
+    "expected_coverage_after_pilot": "1/1 = 100% of Email workflow roots"
+  },
+
+  "activation_command_when_approved": {
+    "step1": "Maintainer provisions aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "step2": "Human updates email.yml: status=active, allowed_types=[Converter]",
+    "step3": "$env:GPT_OSS_MODEL='<MODEL>'; .venv\\Scripts\\python.exe -m plugin_examples run --family email --tier 5 --promote-latest",
+    "step4": "Review async ConvertToHtml example (MemoryStream, FolderOutputHandler, await)",
+    "step5": "Publish with APPROVE_LIVE_PR after all gates pass"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "artifact_type": "words_reportbuilder_generation_result",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Sprint 5 — LLM-Unblocked Generation and Publication Closure",
+  "lane": "LANE 2 — Words ReportBuilder Generation",
+
+  "execution_verdict": "BLOCKED_ENV",
+  "execution_status": "NOT_EXECUTED",
+
+  "config_readiness": {
+    "words_yml_status": "COMPLETE",
+    "allowed_types_includes_reportbuilder": true,
+    "preferred_method": "BuildReport",
+    "template_hints_reportbuilder_creation_lines": true,
+    "per_type_constraints_defined": true,
+    "required_constraints_count": 5,
+    "forbidden_constraints_count": 5,
+    "key_constraints": [
+      "REQUIRED: ReportBuilder.BuildReport(templateFile, outputFile, dataObject) — static method",
+      "REQUIRED: LINQ template using <<[FieldName]>> syntax",
+      "FORBIDDEN: {{ FieldName }} or {FieldName} template syntax",
+      "FORBIDDEN: MailMerge MERGEFIELD syntax in ReportBuilder template",
+      "FORBIDDEN: new ReportBuilder() — static, no constructor"
+    ]
+  },
+
+  "blockers": [
+    {
+      "var": "GPT_OSS_MODEL",
+      "status": "NOT_SET",
+      "blocks": "All LLM generation — Words pilot run cannot proceed without model name",
+      "resolution": "Set GPT_OSS_MODEL to model name (not gpt-4o-mini)"
+    }
+  ],
+
+  "generation_command": {
+    "description": "Run Words pilot to generate ReportBuilder example",
+    "powershell": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User'); $env:PYTHONPATH = 'src'; $env:GPT_OSS_MODEL = '<MODEL_NAME>'; $env:EXAMPLE_REVIEWER_PATH = '<PATH_TO_EXAMPLE_REVIEWER>'; .venv\\Scripts\\python.exe -m plugin_examples run --family words --tier 5 --promote-latest",
+    "expected_result": "ReportBuilder example BUILT + RAN + REVIEWED → PR_DRY_RUN_READY",
+    "validation_assertions": [
+      "Code calls ReportBuilder.BuildReport(templateFile, outputFile, dataObject)",
+      "Template DOCX uses <<[Name]>> LINQ syntax (NOT {{ Name }} or MERGEFIELD)",
+      "Template created via DocumentBuilder.Write with <<[Name]>> literal",
+      "Output DOCX file exists, size > 0",
+      "Reviewer PASS on LowCode API usage"
+    ]
+  },
+
+  "pr_command": {
+    "description": "After generation PASS, package and publish Words PR #6 (ReportBuilder)",
+    "powershell": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User'); $env:PYTHONPATH = 'src'; $env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family words --approval-token APPROVE_LIVE_PR --promote-latest",
+    "coverage_after_publish": "8/8 Words pilot types = 100% pilot coverage"
+  }
+}

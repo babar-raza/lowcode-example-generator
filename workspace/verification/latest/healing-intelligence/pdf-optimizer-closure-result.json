@@ -1,0 +1,47 @@
+{
+  "artifact_type": "pdf_optimizer_closure_result",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Sprint 5 — LLM-Unblocked Generation and Publication Closure",
+  "lane": "LANE 1 — PDF Optimizer Closure",
+
+  "execution_verdict": "BLOCKED_ENV",
+  "execution_status": "NOT_EXECUTED",
+
+  "blockers": [
+    {
+      "var": "EXAMPLE_REVIEWER_PATH",
+      "status": "NOT_SET",
+      "blocks": "PDF Optimizer 2nd reviewer pass — reviewer cannot be invoked without path to example-reviewer repo",
+      "resolution": "Set EXAMPLE_REVIEWER_PATH to absolute path of example-reviewer repository checkout"
+    },
+    {
+      "var": "GPT_OSS_MODEL",
+      "status": "NOT_SET",
+      "blocks": "Rerun generation if needed after reviewer pass",
+      "resolution": "Set GPT_OSS_MODEL to model name (not gpt-4o-mini)"
+    }
+  ],
+
+  "current_state": {
+    "scenario_id": "pdf-optimizer",
+    "state": "REVIEWED",
+    "reviewer_passes": 1,
+    "reviewer_passes_required": 2,
+    "pr_number": null,
+    "merge_sha": null,
+    "first_pass_run": "pilot-pdf-20260508-155520"
+  },
+
+  "rerun_command": {
+    "description": "Run PDF pilot with reviewer to get Optimizer 2nd pass",
+    "powershell": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User'); $env:PYTHONPATH = 'src'; $env:EXAMPLE_REVIEWER_PATH = '<PATH_TO_EXAMPLE_REVIEWER>'; $env:GPT_OSS_MODEL = '<MODEL_NAME>'; .venv\\Scripts\\python.exe -m plugin_examples run --family pdf --tier 5 --promote-latest",
+    "expected_result": "Optimizer REVIEWED (2nd pass) → state transition to PR_READY",
+    "then": "Create PDF PR #3 with APPROVE_LIVE_PR: .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --approval-token APPROVE_LIVE_PR --promote-latest"
+  },
+
+  "pr_creation_command": {
+    "description": "After 2nd reviewer PASS, create PDF PR #3",
+    "powershell": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User'); $env:PYTHONPATH = 'src'; $env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --approval-token APPROVE_LIVE_PR --promote-latest",
+    "requires": ["EXAMPLE_REVIEWER_PATH", "GPT_OSS_MODEL (for rerun if needed)", "APPROVE_LIVE_PR", "GH_TOKEN"]
+  }
+}

@@ -21,6 +21,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-pdf-aconverter",
+      "workflow_type": "PdfAConverter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name PdfAConverter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-splitter",
       "workflow_type": "Splitter",
       "selected_input_format": ".pdf",

@@ -64,8 +64,10 @@ generation:
     - Replacer
     - Merger
     - Comparer
-    - Processor
     - MailMerger
+    # Processor: REMOVED from pilot — Processor.From() is instance method but no public constructor exists.
+    # CS0120 error confirmed. ProcessorContext investigation required before re-enabling.
+    # See taskcard: followup-words-processor-api-investigation
   preferred_methods_per_type:
     Watermarker: SetText
     Splitter: ExtractPages
@@ -73,7 +75,6 @@ generation:
     Converter: Convert
     Merger: Merge
     Comparer: Compare
-    Processor: Execute
     MailMerger: Execute
 
 validation:
@@ -176,13 +177,13 @@ per_type_constraints:
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
-      - "REQUIRED: new Processor().From(inputFile).To(outputFile, SaveFormat.Pdf).Execute() — fluent instance chain"
+      - "REQUIRED: Processor.From(inputFile).To(outputFile, SaveFormat.Pdf).Execute() — static-entry fluent chain"
       - "REQUIRED: SaveFormat enum from Aspose.Words namespace"
       - "REQUIRED: input DOCX created programmatically via Document+DocumentBuilder before calling Processor"
     forbidden:
       - "FORBIDDEN: Document.Save() replacing Processor chain — use LowCode Processor fluent API"
-      - "FORBIDDEN: Processor.Convert() — does not exist; use new Processor().From().To().Execute()"
-      - "FORBIDDEN: static Processor.Execute() — Processor uses instance fluent chain, NOT static call"
+      - "FORBIDDEN: Processor.Convert() — does not exist; use Processor.From().To().Execute()"
+      - "FORBIDDEN: new Processor() — Processor has no public constructor; entry point is static Processor.From(inputPath)"
   MailMerger:
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
@@ -190,7 +191,7 @@ per_type_constraints:
       - "REQUIRED: MailMerger.Execute(templateFile, outputFile, fieldNames, fieldValues) — static string-array overload"
       - "REQUIRED: string[] fieldNames = { \"FirstName\", \"LastName\" }; — array of merge field names"
       - "REQUIRED: string[] fieldValues = { \"John\", \"Doe\" }; — array of merge field values"
-      - "REQUIRED: template DOCX created with MERGEFIELD fields via DocumentBuilder.InsertField(\"MERGEFIELD FieldName\")"
+      - "REQUIRED: InsertField(\"MERGEFIELD — create MERGEFIELD fields in template via DocumentBuilder.InsertField"
     forbidden:
       - "FORBIDDEN: Document.MailMerge.Execute() — use LowCode MailMerger.Execute() static method"
       - "FORBIDDEN: IMailMergeDataSource — NOT needed; string array overload is sufficient"

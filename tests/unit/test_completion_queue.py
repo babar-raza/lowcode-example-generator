@@ -150,10 +150,12 @@ class TestQueueCoversDenominator:
         # Total queue = active + backlogged deferred entries
         active = [e for e in entries if e["state"] != "BACKLOGGED"]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
-        # At minimum: 19 active (cells 9 + words 4 + pdf 4 + diagram 2)
-        # + 29 backlogged (21 PDF WR + 5 Words + 3 Diagram OPTIONS)
+        # At minimum: 22 active (cells 9 + words published 4 + words wave2/3 PR-ready 3 + pdf 4 + diagram 2)
+        # + 28 backlogged (21 PDF WR + 4 Words + 3 Diagram OPTIONS)
+        # Words Wave 3: MailMerger moved BACKLOGGED->PR_READY; Processor remains BACKLOGGED (API gap)
+        # PDF Wave A: PdfAConverter moved BACKLOGGED->PR_READY in run pilot-pdf-20260513-181803
         assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 29, f"Expected at least 29 backlogged entries, got {len(backlogged)}"
+        assert len(backlogged) >= 27, f"Expected at least 27 backlogged entries, got {len(backlogged)}"
         assert len(entries) == len(active) + len(backlogged)
 
 

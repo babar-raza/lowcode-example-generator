@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "words",
-  "run_id": "pilot-words-20260513-114425",
-  "promoted_at": "2026-05-13T06:48:49.143904+00:00",
-  "source_run_path": "workspace\\runs\\pilot-words-20260513-114425\\evidence\\latest",
+  "run_id": "pilot-words-20260513-175418",
+  "promoted_at": "2026-05-13T12:59:56.561479+00:00",
+  "source_run_path": "workspace\\runs\\pilot-words-20260513-175418\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -14,6 +14,7 @@
     "example-impact-report.json",
     "example-lifecycle-records.json",
     "example-reviewer-results.json",
+    "families/words/completeness-gate-result.json",
     "fixture-strategy-plan.json",
     "gate-results.json",
     "generated-fixtures.json",
@@ -22,6 +23,7 @@
     "plugin-type-role-classification.json",
     "pr-candidate-manifest.json",
     "publishing-report.json",
+    "repair-attempts.json",
     "reviewer-preflight.json",
     "runnable-entrypoint-scores.json",
     "scenario-feedback-updates.json",

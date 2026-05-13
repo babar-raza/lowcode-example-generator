@@ -1,9 +1,9 @@
 {
-  "total_generated": 6,
-  "total_built": 6,
-  "total_runtime_passed": 6,
+  "total_generated": 5,
+  "total_built": 5,
+  "total_runtime_passed": 5,
   "total_runtime_blocked": 0,
-  "total_pr_candidates": 6,
+  "total_pr_candidates": 5,
   "total_excluded": 0,
   "aggregate_build_status": "passed_all",
   "aggregate_run_status": "passed_all",

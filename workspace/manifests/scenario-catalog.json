@@ -1,257 +1,92 @@
 {
-  "family": "words",
-  "ready_count": 6,
-  "blocked_count": 19,
+  "family": "pdf",
+  "ready_count": 5,
+  "blocked_count": 96,
   "scenarios": [
     {
-      "scenario_id": "words-comparer",
-      "title": "Use Comparer from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Comparer",
-      "target_namespace": "Aspose.Words.LowCode",
+      "scenario_id": "pdf-merger",
+      "title": "Use Merger from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.Merger",
+      "target_namespace": "Aspose.Pdf.LowCode",
       "target_methods": [
-        "Compare",
-        "CompareToImages",
-        "Create"
+        "Process"
       ],
       "required_symbols": [
-        "Aspose.Words.LowCode.Comparer",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.Compare",
-        "Aspose.Words.LowCode.Comparer.CompareToImages",
-        "Aspose.Words.LowCode.Comparer.CompareToImages",
-        "Aspose.Words.LowCode.Comparer.CompareToImages",
-        "Aspose.Words.LowCode.Comparer.CompareToImages",
-        "Aspose.Words.LowCode.Comparer.Create",
-        "Aspose.Words.LowCode.Comparer.Create"
+        "Aspose.Pdf.LowCode.Merger",
+        "Aspose.Pdf.LowCode.Merger.Process"
       ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.docx using Comparer",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "words-converter",
-      "title": "Use Converter from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Converter",
-      "target_namespace": "Aspose.Words.LowCode",
-      "target_methods": [
-        "Convert",
-        "ConvertToImages",
-        "Create"
-      ],
-      "required_symbols": [
-        "Aspose.Words.LowCode.Converter",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.Convert",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.ConvertToImages",
-        "Aspose.Words.LowCode.Converter.Create",
-        "Aspose.Words.LowCode.Converter.Create"
-      ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.pdf using Converter",
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using Merger",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-merger",
-      "title": "Use Merger from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Merger",
-      "target_namespace": "Aspose.Words.LowCode",
+      "scenario_id": "pdf-optimizer",
+      "title": "Use Optimizer from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.Optimizer",
+      "target_namespace": "Aspose.Pdf.LowCode",
       "target_methods": [
-        "Merge",
-        "MergeToImages",
-        "Create"
+        "Process"
       ],
       "required_symbols": [
-        "Aspose.Words.LowCode.Merger",
-        "Aspose.Words.LowCode.Merger.Create",
-        "Aspose.Words.LowCode.Merger.Create",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.Merge",
-        "Aspose.Words.LowCode.Merger.MergeToImages",
-        "Aspose.Words.LowCode.Merger.MergeToImages"
+        "Aspose.Pdf.LowCode.Optimizer",
+        "Aspose.Pdf.LowCode.Optimizer.Process"
       ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.docx using Merger",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using Optimizer",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-replacer",
-      "title": "Use Replacer from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Replacer",
-      "target_namespace": "Aspose.Words.LowCode",
+      "scenario_id": "pdf-pdf-aconverter",
+      "title": "Use PdfAConverter from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.PdfAConverter",
+      "target_namespace": "Aspose.Pdf.LowCode",
       "target_methods": [
-        "Replace",
-        "ReplaceToImages",
-        "Create"
+        "Process"
       ],
       "required_symbols": [
-        "Aspose.Words.LowCode.Replacer",
-        "Aspose.Words.LowCode.Replacer.Create",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.Replace",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
-        "Aspose.Words.LowCode.Replacer.ReplaceToImages"
+        "Aspose.Pdf.LowCode.PdfAConverter",
+        "Aspose.Pdf.LowCode.PdfAConverter.Process"
       ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.docx using Replacer",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using PdfAConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-splitter",
-      "title": "Use Splitter from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Splitter",
-      "target_namespace": "Aspose.Words.LowCode",
+      "scenario_id": "pdf-splitter",
+      "title": "Use Splitter from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.Splitter",
+      "target_namespace": "Aspose.Pdf.LowCode",
       "target_methods": [
-        "ExtractPages",
-        "RemoveBlankPages",
-        "Split",
-        "Create"
+        "Process"
       ],
       "required_symbols": [
-        "Aspose.Words.LowCode.Splitter",
-        "Aspose.Words.LowCode.Splitter.Create",
-        "Aspose.Words.LowCode.Splitter.ExtractPages",
-        "Aspose.Words.LowCode.Splitter.ExtractPages",
-        "Aspose.Words.LowCode.Splitter.ExtractPages",
-        "Aspose.Words.LowCode.Splitter.ExtractPages",
-        "Aspose.Words.LowCode.Splitter.ExtractPages",
-        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
-        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
-        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
-        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
-        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
-        "Aspose.Words.LowCode.Splitter.Split",
-        "Aspose.Words.LowCode.Splitter.Split",
-        "Aspose.Words.LowCode.Splitter.Split",
-        "Aspose.Words.LowCode.Splitter.Split",
-        "Aspose.Words.LowCode.Splitter.Split"
+        "Aspose.Pdf.LowCode.Splitter",
+        "Aspose.Pdf.LowCode.Splitter.Process"
       ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.docx using Splitter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using Splitter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-watermarker",
-      "title": "Use Watermarker from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.Watermarker",
-      "target_namespace": "Aspose.Words.LowCode",
-      "target_methods": [
-        "SetText",
-        "SetImage",
-        "SetWatermarkToImages",
-        "Create"
-      ],
+      "scenario_id": "pdf-text-extractor",
+      "title": "Use TextExtractor from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.TextExtractor",
+      "target_namespace": "Aspose.Pdf.LowCode",
+      "target_methods": [],
       "required_symbols": [
-        "Aspose.Words.LowCode.Watermarker",
-        "Aspose.Words.LowCode.Watermarker.Create",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetImage",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetText",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
-        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages"
+        "Aspose.Pdf.LowCode.TextExtractor"
       ],
-      "required_fixtures": [
-        "input.docx"
-      ],
-      "output_plan": "Convert input.docx to output.docx using Watermarker",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output using TextExtractor",
+      "validation_plan": "Build succeeds, runs without exception, produces output",
       "status": "ready",
       "blocked_reason": null
     }

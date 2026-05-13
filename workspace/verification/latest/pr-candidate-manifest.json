@@ -1,33 +1,28 @@
 {
   "included_examples": [
     {
-      "scenario_id": "words-comparer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-comparer",
+      "scenario_id": "pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-merger",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-converter",
+      "scenario_id": "pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-optimizer",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-merger",
+      "scenario_id": "pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-pdf-aconverter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-replacer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-replacer",
+      "scenario_id": "pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-splitter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-splitter",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "words-watermarker",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-114425\\generated\\words\\words-watermarker",
+      "scenario_id": "pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-181803\\generated\\pdf\\pdf-text-extractor",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     }
   ],
@@ -35,6 +30,6 @@
   "exclusion_reasons": {},
   "dry_run": true,
   "live_publish_attempted": false,
-  "publishable_candidate_count": 6,
+  "publishable_candidate_count": 5,
   "blocked_candidate_count": 0
 }

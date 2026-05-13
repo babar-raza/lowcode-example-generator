@@ -1,0 +1,43 @@
+{
+  "scenario_id": "pdf-pdfa-converter",
+  "family": "pdf",
+  "type_name": "PdfAConverter",
+  "full_type_name": "Aspose.Pdf.LowCode.PdfAConverter",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "PdfAConverter",
+    "PdfAConverter.Process",
+    "PdfAConvertOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess",
+    "Document.Convert(",
+    "PdfFormatConversionOptions",
+    "LowCodeLoadOptions",
+    "LowCodeSaveOptions"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var options = new PdfAConvertOptions(); options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.pdf')); new PdfAConverter().Process(options). Converts PDF to PDF/A compliance format. Options class is PdfAConvertOptions (NOT PluginOptions, LowCodeLoadOptions, or PdfFormatConversionOptions)."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "REVIEWER_ATTEMPTED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
+    "workspace/runs/pilot-pdf-20260513-181803/evidence/latest/gate-results.json"
+  ],
+  "last_verified_at": "2026-05-13T00:00:00Z"
+}

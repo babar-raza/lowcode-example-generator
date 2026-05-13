@@ -21,11 +21,31 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "words-mail-merger",
+      "workflow_type": "MailMerger",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name MailMerger",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "words-merger",
       "workflow_type": "Merger",
       "selected_input_format": ".docx",
       "selected_output_format": ".out",
       "reason": "Inferred from type name Merger",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-processor",
+      "workflow_type": "Processor",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name Processor",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

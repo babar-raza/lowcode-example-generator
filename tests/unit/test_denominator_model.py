@@ -174,14 +174,16 @@ class TestWordsDenominator:
     def test_words_total_types_is_25(self):
         assert self.d["total_lowcode_types"] == 25
 
-    def test_words_pilot_allowed_count_is_8(self):
-        assert self.d["allowed_pilot_count"] == 8
+    def test_words_pilot_allowed_count_is_7(self):
+        # Processor removed from pilot: Processor.From() is instance method but no public constructor
+        assert self.d["allowed_pilot_count"] == 7
 
     def test_words_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 8
-        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "Processor", "MailMerger"]:
+        assert isinstance(types, list) and len(types) == 7
+        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger"]:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
+        assert "Processor" not in types, "Processor must NOT be in allowed_pilot_types (API investigation required)"
 
     def test_words_published_count_is_4(self):
         assert self.d["published_count"] == 4
@@ -190,20 +192,23 @@ class TestWordsDenominator:
         assert self.d["workflow_root_types"] == 9
         assert self.d["non_runnable_types"] == 16
 
-    def test_words_excluded_count_is_17(self):
-        assert self.d["excluded_count"] == 17
+    def test_words_excluded_count_is_18(self):
+        # 16 non-standalone + ReportBuilder (Wave 4) + Processor (API gap) = 18
+        assert self.d["excluded_count"] == 18
 
-    def test_words_runnable_scenarios_is_8(self):
-        assert self.d["runnable_scenarios"] == 8
+    def test_words_runnable_scenarios_is_7(self):
+        # 7 active pilot types (Processor removed; API access pattern unclear)
+        assert self.d["runnable_scenarios"] == 7
 
     def test_words_denominator_basis_is_pilot_allowed(self):
         assert self.d["denominator_basis"] == "PILOT_ALLOWED", (
             "Words is in pilot mode; denominator_basis must be PILOT_ALLOWED"
         )
 
-    def test_words_coverage_pct_of_pilot_runnable_is_50(self):
+    def test_words_coverage_pct_of_pilot_runnable_is_57(self):
+        # 4 published / 7 active-pilot types = 57.14%
         pct = self.d.get("coverage_pct_of_pilot_runnable")
-        assert pct is not None and abs(pct - 50.0) < 0.01
+        assert pct is not None and abs(pct - 57.14) < 0.1
 
     def test_words_does_not_claim_full_sot_basis(self):
         assert self.d["denominator_basis"] != "FULL_SOT", (

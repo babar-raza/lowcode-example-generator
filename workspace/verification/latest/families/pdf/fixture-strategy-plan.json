@@ -1,12 +1,12 @@
 {
   "total_scenarios": 101,
-  "ready": 4,
-  "blocked": 97,
+  "ready": 5,
+  "blocked": 96,
   "strategies": {
     "generated_fixture_file": 0,
     "existing_fixture": 0,
-    "programmatic_input": 4,
-    "none": 97,
+    "programmatic_input": 5,
+    "none": 96,
     "no_valid_input_strategy": 0
   },
   "scenarios": [
@@ -22,6 +22,16 @@
     },
     {
       "scenario_id": "pdf-optimizer",
+      "required_input_formats": [
+        ".pdf"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
       "required_input_formats": [
         ".pdf"
       ],
@@ -56,23 +66,23 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'CompressOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'CompressOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-conversion-mode",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ConversionMode' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'ConversionMode' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
       "scenario_id": "pdf-data-type",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'DataType' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'DataType' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
       "scenario_id": "pdf-decryption-options",
@@ -80,7 +90,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'DecryptionOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'DecryptionOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-doc-converter",
@@ -88,7 +98,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'DocConverter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'DocConverter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-encryption-options",
@@ -96,7 +106,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'EncryptionOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'EncryptionOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-file-data-source",
@@ -104,7 +114,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FileDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-file-result",
@@ -112,7 +122,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FileResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-file-save-target",
@@ -120,7 +130,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileSaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FileSaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-check-box-field-create-options",
@@ -128,7 +138,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormCheckBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormCheckBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-check-box-field-set-options",
@@ -136,7 +146,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormCheckBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormCheckBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-create-options",
@@ -144,7 +154,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormComboBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormComboBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-set-options",
@@ -152,7 +162,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormComboBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormComboBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-editor",
@@ -160,7 +170,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormEditor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-editor-add-options",
@@ -168,7 +178,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorAddOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormEditorAddOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-editor-options",
@@ -176,7 +186,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormEditorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-editor-remove-options",
@@ -184,7 +194,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorRemoveOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormEditorRemoveOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-editor-set-options",
@@ -192,7 +202,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormEditorSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-exporter",
@@ -200,7 +210,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormExporter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-exporter-options",
@@ -208,7 +218,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormExporterOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-exporter-to-json-options",
@@ -216,7 +226,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterToJsonOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormExporterToJsonOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-exporter-values-to-csv-options",
@@ -224,7 +234,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterValuesToCsvOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormExporterValuesToCsvOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-field-create-options",
@@ -232,7 +242,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-field-options",
@@ -240,7 +250,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFieldOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-field-set-options",
@@ -248,7 +258,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-flatten-all-fields-options",
@@ -256,7 +266,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFlattenAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-flattener",
@@ -264,7 +274,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattener' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFlattener' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-flattener-options",
@@ -272,7 +282,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenerOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFlattenerOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-flatten-selected-fields-options",
@@ -280,7 +290,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormFlattenSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-importer",
@@ -288,7 +298,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormImporter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormImporter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-importer-json-options",
@@ -296,7 +306,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormImporterJsonOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormImporterJsonOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-json-import-source",
@@ -304,7 +314,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormJsonImportSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormJsonImportSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-options",
@@ -312,7 +322,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-remove-all-fields-options",
@@ -320,7 +330,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormRemoveAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormRemoveAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-remove-selected-fields-options",
@@ -328,7 +338,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormRemoveSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormRemoveSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-text-box-field-create-options",
@@ -336,7 +346,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormTextBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormTextBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-form-text-box-field-set-options",
@@ -344,7 +354,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormTextBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'FormTextBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-html",
@@ -352,7 +362,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Html' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Html' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-html-to-pdf-options",
@@ -360,7 +370,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'HtmlToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'HtmlToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-idata-source",
@@ -368,7 +378,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'IDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-image-extractor",
@@ -376,7 +386,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ImageExtractor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ImageExtractor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-image-extractor-options",
@@ -384,7 +394,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ImageExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ImageExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-ioperation-result",
@@ -392,7 +402,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IOperationResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'IOperationResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-iplugin",
@@ -400,7 +410,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IPlugin' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'IPlugin' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-iplugin-options",
@@ -408,7 +418,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IPluginOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'IPluginOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-isave-target",
@@ -416,7 +426,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ISaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ISaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-jpeg",
@@ -424,7 +434,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Jpeg' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Jpeg' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-jpeg-options",
@@ -432,7 +442,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'JpegOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'JpegOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-merge-options",
@@ -440,7 +450,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MergeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'MergeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-object-result",
@@ -448,7 +458,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ObjectResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ObjectResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-ofd",
@@ -456,7 +466,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Ofd' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Ofd' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-ofd-to-pdf-options",
@@ -464,7 +474,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OfdToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'OfdToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-optimize-options",
@@ -472,7 +482,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OptimizeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'OptimizeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-organizer-base-options",
@@ -480,15 +490,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OrganizerBaseOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
-    },
-    {
-      "scenario_id": "pdf-pdf-aconverter",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAConverter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'OrganizerBaseOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-aconvert-options",
@@ -496,7 +498,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAConvertOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfAConvertOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-aoptions-base",
@@ -504,15 +506,15 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAOptionsBase' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfAOptionsBase' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-astandard-version",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAStandardVersion' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'PdfAStandardVersion' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
       "scenario_id": "pdf-pdf-avalidate-options",
@@ -520,7 +522,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAValidateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfAValidateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-avalidation-result",
@@ -528,7 +530,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAValidationResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfAValidationResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-converter-options",
@@ -536,7 +538,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfConverterOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfConverterOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-extractor",
@@ -544,7 +546,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfExtractor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfExtractor' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-extractor-options",
@@ -552,7 +554,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-generator-options",
@@ -560,7 +562,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfGeneratorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfGeneratorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-to-doc-options",
@@ -568,7 +570,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToDocOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfToDocOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-to-html-options",
@@ -576,7 +578,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToHtmlOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfToHtmlOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-to-image",
@@ -584,7 +586,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToImage' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfToImage' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-to-image-options",
@@ -592,7 +594,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToImageOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfToImageOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-pdf-to-xls-options",
@@ -600,7 +602,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToXlsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PdfToXlsOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-png",
@@ -608,7 +610,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Png' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Png' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-png-options",
@@ -616,7 +618,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PngOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'PngOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-resize-options",
@@ -624,7 +626,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ResizeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ResizeOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-result-container",
@@ -632,7 +634,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ResultContainer' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'ResultContainer' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-rotate-options",
@@ -640,15 +642,15 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'RotateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'RotateOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-save-format",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SaveFormat' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'SaveFormat' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
       "scenario_id": "pdf-security",
@@ -656,7 +658,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Security' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Security' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-select-field",
@@ -664,7 +666,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SelectField' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'SelectField' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-signature",
@@ -672,7 +674,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Signature' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Signature' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-sign-options",
@@ -680,7 +682,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SignOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'SignOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-split-options",
@@ -688,7 +690,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-stream-data-source",
@@ -696,7 +698,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'StreamDataSource' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-stream-result",
@@ -704,7 +706,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'StreamResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-stream-save-target",
@@ -712,7 +714,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamSaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'StreamSaveTarget' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-string-result",
@@ -720,7 +722,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StringResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'StringResult' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-table-builder",
@@ -728,7 +730,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TableBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-table-cell-builder",
@@ -736,7 +738,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableCellBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TableCellBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-table-generator",
@@ -744,7 +746,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableGenerator' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TableGenerator' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-table-options",
@@ -752,7 +754,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TableOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-table-row-builder",
@@ -760,7 +762,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableRowBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TableRowBuilder' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-text-extractor-options",
@@ -768,7 +770,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TextExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TextExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-tiff",
@@ -776,7 +778,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Tiff' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Tiff' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-tiff-options",
@@ -784,7 +786,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TiffOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TiffOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-timestamp",
@@ -792,7 +794,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Timestamp' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'Timestamp' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-timestamp-options",
@@ -800,7 +802,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TimestampOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TimestampOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-toc-generator",
@@ -808,7 +810,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TocGenerator' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TocGenerator' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-toc-options",
@@ -816,7 +818,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TocOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'TocOptions' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     },
     {
       "scenario_id": "pdf-xls-converter",
@@ -824,7 +826,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'XlsConverter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'Splitter', 'TextExtractor']"
+      "blocked_reason": "Type 'XlsConverter' is not in the controlled pilot allowlist. Allowed: ['Merger', 'Optimizer', 'PdfAConverter', 'Splitter', 'TextExtractor']"
     }
   ]
 }

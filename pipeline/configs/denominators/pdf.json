@@ -3,8 +3,8 @@
   "source_package": "Aspose.PDF",
   "source_version": "26.4.0",
   "source_package_sha256": "f936b349abe6aa8f11c7881c193eaad12a76186cf2f2b9e17fdfa95b2ea3bdb8",
-  "api_catalog_sha256": "2242abba540486b85bb40467a877f88c3c6e234fd8a89521d59673eb057206c4",
-  "api_catalog_source": "workspace/runs/pilot-pdf-20260508-155520/catalog/pdf/api-catalog.json",
+  "api_catalog_sha256": "402ddee53932f3bb6640975fa96d2fc32c0dab16e8b21d0beb2fa1e5273d2408",
+  "api_catalog_source": "workspace/runs/pilot-pdf-20260513-175041/catalog/pdf/api-catalog.json",
   "plugin_namespace": "Aspose.Pdf.LowCode",
   "total_lowcode_types": 101,
   "workflow_root_types": 25,
@@ -38,23 +38,23 @@
   "published_count": 2,
   "published_scenario_ids": ["pdf-merger", "pdf-text-extractor"],
   "published_basis": "PR #1 merged to aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (merge_commit_sha: a9f9e254, confirmed in workspace/verification/latest/pdf-merge-result.json)",
-  "pr_dry_run_ready_count": 1,
-  "pr_dry_run_ready_ids": ["pdf-splitter"],
-  "pr_dry_run_ready_basis": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/ validated. PR #3 package ready. Blocked by APPROVE_LIVE_PR human token.",
+  "pr_dry_run_ready_count": 2,
+  "pr_dry_run_ready_ids": ["pdf-splitter", "pdf-pdfa-converter"],
+  "pr_dry_run_ready_basis": "Splitter: workspace/pr-dry-run/pdf-controlled-pilot-wave1/ validated. PdfAConverter: run pilot-pdf-20260513-181803 PASSED (5/5 all types). Both awaiting APPROVE_LIVE_PR.",
   "reviewer_passed_awaiting_pr_count": 1,
   "reviewer_passed_awaiting_pr_ids": ["pdf-optimizer"],
-  "reviewer_passed_awaiting_pr_basis": "Optimizer reviewer_passed in latest lifecycle. LLM rerun needed due to DataSources namespace fix (fix applied in code_generator.py lines 657-663). Taskcard followup-pdf-optimizer-llm-rerun OPEN.",
+  "reviewer_passed_awaiting_pr_basis": "Optimizer reviewer_passed in latest lifecycle. Confirmed passing in run pilot-pdf-20260513-181803 (3rd consecutive pass). Awaiting grouping into next PR with Splitter+PdfAConverter.",
   "blocked_count": 0,
   "excluded_count": 96,
-  "excluded_count_basis": "96 types excluded: 5 pilot allowed + 96 others = 101. Excludes all non-WORKFLOW_ROOT types (76) plus 20 WORKFLOW_ROOT types not in allowed_pilot_types (PdfAConverter moved from excluded to pilot in Wave A).",
-  "unclassified_workflow_root_count": 21,
-  "unclassified_workflow_root_note": "21 WORKFLOW_ROOT types are classified but NOT in allowed_pilot_types. These are generation candidates for future sprints post-APPROVE_LIVE_PR for PR#3. See followup-pdf-remaining-candidate-classification taskcard.",
+  "excluded_count_basis": "96 types excluded: 5 pilot allowed + 96 others = 101. Excludes all non-WORKFLOW_ROOT types (76) plus 20 WORKFLOW_ROOT types not in allowed_pilot_types.",
+  "unclassified_workflow_root_count": 20,
+  "unclassified_workflow_root_note": "20 WORKFLOW_ROOT types are classified but NOT in allowed_pilot_types (PdfAConverter promoted to pilot in Wave A). Generation candidates for future sprints. See followup-pdf-remaining-candidate-classification taskcard.",
   "coverage_pct_of_pilot_allowed": 40.0,
   "coverage_pct_of_workflow_root": 8.0,
   "coverage_pct_of_total_types": 2.0,
   "coverage_pct_detail": {
-    "pilot_allowed": "2/5 published = 40% (2 merged, 1 dry-run ready, 1 reviewer_passed awaiting rerun, 1 config-ready for generation)",
-    "workflow_root": "2/25 published = 8% (2 merged of 25 WORKFLOW_ROOT types)",
+    "pilot_allowed": "2/5 published = 40% (2 merged, 2 dry-run ready, 1 reviewer_passed; all 5 pilot types now PR_DRY_RUN_READY or better)",
+    "workflow_root": "2/25 published = 8% (2 merged of 25 WORKFLOW_ROOT types); 3 more PR-ready pending APPROVE_LIVE_PR",
     "full_sot": "2/101 published = 2% (2 merged of 101 total types in namespace)"
   },
   "evidence_sources": [
@@ -64,6 +64,6 @@
     "workspace/verification/latest/pdf-merge-result.json",
     "pipeline/configs/families/pdf.yml"
   ],
-  "last_verified_at": "2026-05-08T00:00:00Z",
-  "notes": "PDF Wave A expansion: pilot expanded from 4 to 5 types (added PdfAConverter — Wave A config-only, reuses programmatic_pdf_single fixture). PR #1 merged Merger+TextExtractor. PR #3 dry-run package validated (Splitter). Optimizer pending 2nd reviewer pass. PdfAConverter READY_AFTER_CONFIG: new PdfAConverter().Process(options) — same instance-plugin pattern as all PDF LowCode types. Options class: PdfAConvertOptions. DataSources FORBIDDEN guard active in code_generator.py. Wave A remaining: TocGenerator, DocConverter, XlsConverter, PdfExtractor, Html (deferred to Sprint 4-5)."
+  "last_verified_at": "2026-05-13T00:00:00Z",
+  "notes": "PDF Wave A complete (2026-05-13). All 5 pilot types now PR_DRY_RUN_READY or better: Merger+TextExtractor=MERGED (PR#1), Splitter=PR_READY, Optimizer=REVIEWER_PASSED, PdfAConverter=PR_READY (run pilot-pdf-20260513-181803). PdfAConverter root cause: LLM didn't know options class name PdfAConvertOptions — fixed by adding REQUIRED: new PdfAConvertOptions( constraint + FORBIDDEN: LowCodeLoadOptions/LowCodeSaveOptions. Merger repair regression fixed by adding REQUIRED: AddInput/AddOutput constraints. All 5 pilot types have complete per_type_constraints in pdf.yml. Wave B (20 deferred WORKFLOW_ROOT types) awaiting APPROVE_LIVE_PR + fixture strategy assessment."
 }

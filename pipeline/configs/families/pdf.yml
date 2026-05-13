@@ -122,7 +122,10 @@ per_type_constraints:
   Merger:
     required:
       - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — TextFragment lives in Aspose.Pdf.Text namespace)"
+      - "REQUIRED: new MergeOptions( — use MergeOptions as the concrete options class for Merger"
       - "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin, not PdfFileEditor"
+      - "REQUIRED: options.AddInput(new FileDataSource( — each input PDF must be added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — output must be added via AddOutput(new FileDataSource(path))"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
   TextExtractor:
@@ -132,6 +135,7 @@ per_type_constraints:
     forbidden: []
   Splitter:
     required:
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — Splitter fixture may use TextFragment to add page content)"
       - "REQUIRED: new Splitter().Process(options) — use the LowCode Splitter plugin, not PdfFileEditor"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead"
@@ -144,11 +148,15 @@ per_type_constraints:
       - "REQUIRED: new PdfAConverter().Process(options) — use the LowCode PdfAConverter plugin"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for PdfAConverter and FileDataSource)"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
-      - "REQUIRED: options.AddInput(new FileDataSource(\"input.pdf\")) — standard PDF input"
-      - "REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) — FileDataSource, NOT FileSaveTarget"
-      - "REQUIRED: programmatic PDF input created via new Aspose.Pdf.Document() + doc.Pages.Add() + doc.Save()"
+      - "REQUIRED: new PdfAConvertOptions( — use PdfAConvertOptions as the concrete options class (NOT PluginOptions)"
+      - "REQUIRED: options.AddInput(new FileDataSource( — input must be added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — output must be added via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: new Document( — programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()"
     forbidden:
       - "FORBIDDEN: PdfFormatConversionOptions — use LowCode PdfAConverter with its own options class"
       - "FORBIDDEN: Document.Convert() — use LowCode PdfAConverter.Process() instead"
       - "FORBIDDEN: PdfSaveOptions with PDF/A standard — use LowCode PdfAConverter"
       - "FORBIDDEN: FileSaveTarget as AddOutput argument — use FileDataSource(path) instead"
+      - "FORBIDDEN: LowCodeLoadOptions — use PdfAConvertOptions instead"
+      - "FORBIDDEN: LowCodeSaveOptions — use PdfAConvertOptions instead"
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use PdfAConvertOptions"

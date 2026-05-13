@@ -1,5 +1,5 @@
 {
-  "verdict": "PR_DRY_RUN_READY",
+  "verdict": "PARTIAL_PR_DRY_RUN_READY",
   "publishable": false,
   "all_required_passed": true,
   "blocking_gates": [],
@@ -49,10 +49,10 @@
     {
       "gate_id": "gate_reviewer",
       "name": "Example Reviewer",
-      "status": "passed",
+      "status": "failed",
       "required": false,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "Reviewer unavailable",
       "downstream_blocked": [],
       "stage_name": "reviewer"
     }

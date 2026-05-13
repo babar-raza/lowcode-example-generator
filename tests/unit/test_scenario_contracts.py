@@ -1,7 +1,7 @@
 """Tests for scenario contract files (REM-009 through REM-012 / B-004).
 
 Verifies:
-- All 16 scenario contracts parse as valid JSON
+- All 18 scenario contracts parse as valid JSON
 - Schema validates all contracts
 - Contract coverage matches denominator model published counts
 - Published (MERGED) scenarios have post-merge evidence sources
@@ -68,14 +68,14 @@ class TestContractFilesExist:
         contracts = _load_contracts("words")
         assert len(contracts) == 4, f"Expected 4 words contracts, got {len(contracts)}"
 
-    def test_pdf_has_4_contracts(self):
+    def test_pdf_has_5_contracts(self):
         contracts = _load_contracts("pdf")
-        assert len(contracts) == 4, f"Expected 4 pdf contracts, got {len(contracts)}"
+        assert len(contracts) == 5, f"Expected 5 pdf contracts, got {len(contracts)}"
 
-    def test_total_contracts_is_17(self):
-        """Total = 9 cells + 4 words + 4 pdf = 17."""
+    def test_total_contracts_is_18(self):
+        """Total = 9 cells + 4 words + 5 pdf = 18."""
         total = len(_all_contracts())
-        assert total == 17, f"Expected 17 total contracts, got {total}"
+        assert total == 18, f"Expected 18 total contracts, got {total}"
 
 
 # ---------------------------------------------------------------------------
@@ -233,7 +233,7 @@ class TestWordsContracts:
 
 class TestPdfContracts:
     def test_pdf_scenario_ids_present(self):
-        expected_ids = {"pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer"}
+        expected_ids = {"pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer", "pdf-pdfa-converter"}
         actual_ids = {c["scenario_id"] for c in _load_contracts("pdf")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
 
@@ -298,7 +298,7 @@ class TestContractConsistencyWithDenominator:
     def test_pdf_contract_count_matches_denominator_published_plus_pipeline(self):
         denom = self._load_denominator("pdf")
         contracts = _load_contracts("pdf")
-        # PDF has 2 merged + 1 PR_DRY_RUN_READY + 1 REVIEWER_PASSED = 4 in pipeline
+        # PDF has 2 merged + 2 PR_DRY_RUN_READY + 1 REVIEWER_PASSED = 5 in pipeline
         pipeline_count = denom.get("published_count", 0) + denom.get("pr_dry_run_ready_count", 0) + denom.get("reviewer_passed_awaiting_pr_count", 0)
         assert len(contracts) >= pipeline_count, (
             f"PDF: {len(contracts)} contracts < {pipeline_count} scenarios in pipeline"

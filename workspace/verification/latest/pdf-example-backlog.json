@@ -1,9 +1,9 @@
 {
   "family": "pdf",
-  "updated_at": "2026-05-08T11:05:06.512838+00:00",
-  "total_entries": 3,
-  "open_entries": 1,
-  "resolved_entries": 2,
+  "updated_at": "2026-05-13T13:24:04.237021+00:00",
+  "total_entries": 5,
+  "open_entries": 0,
+  "resolved_entries": 5,
   "entries": [
     {
       "scenario_id": "pdf-text-extractor",
@@ -36,16 +36,44 @@
     {
       "scenario_id": "pdf-merger",
       "family": "pdf",
-      "last_run_id": "pilot-pdf-20260508-155520",
+      "last_run_id": "pilot-pdf-20260513-180851",
       "last_failure_stage": "backlogged",
-      "root_cause": "Post-repair validation failed: ['PDF: missing AddInput() call \u2014 options must have AddInput(new FileDataSource(\"input.pdf\")) before calling Process().', \"PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment.\"]",
+      "root_cause": "Post-repair validation failed: ['PDF: missing AddInput() call \u2014 options must have AddInput(new FileDataSource(\"input.pdf\")) before calling Process().']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 2,
+      "first_seen": "2026-05-08T11:05:06.512474+00:00",
+      "last_seen": "2026-05-13T13:15:29.606840+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260513-175041"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "family": "pdf",
+      "last_run_id": "pilot-pdf-20260513-180851",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['PDF: missing AddInput() call \u2014 options must have AddInput(new FileDataSource(\"input.pdf\")) before calling Process().', 'Missing required using directive: REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u00e2\u20ac\u201d PdfAConverter fixture may use TextFragment)', 'Missing required LowCode API call: REQUIRED: options.AddInput(new FileDataSource(\"input.pdf\")) \u00e2\u20ac\u201d standard PDF input', 'Missing required LowCode API call: REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) \u00e2\u20ac\u201d FileDataSource, NOT FileSaveTarget']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 3,
+      "first_seen": "2026-05-13T12:56:52.553487+00:00",
+      "last_seen": "2026-05-13T13:24:04.236596+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260513-181803"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "last_run_id": "pilot-pdf-20260513-180040",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: [\"PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment.\"]",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
       "attempt_count": 1,
-      "first_seen": "2026-05-08T11:05:06.512474+00:00",
-      "last_seen": "2026-05-08T11:05:06.512487+00:00",
-      "resolved": false,
-      "resolved_in_run": null
+      "first_seen": "2026-05-13T13:06:44.039434+00:00",
+      "last_seen": "2026-05-13T13:15:29.606861+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260513-180851"
     }
   ]
 }

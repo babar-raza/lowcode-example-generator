@@ -1,12 +1,12 @@
 {
   "total_scenarios": 25,
-  "ready": 6,
-  "blocked": 19,
+  "ready": 8,
+  "blocked": 17,
   "strategies": {
-    "generated_fixture_file": 6,
+    "generated_fixture_file": 8,
     "existing_fixture": 0,
     "programmatic_input": 0,
-    "none": 19,
+    "none": 17,
     "no_valid_input_strategy": 0
   },
   "scenarios": [
@@ -35,7 +35,31 @@
       "blocked_reason": null
     },
     {
+      "scenario_id": "words-mail-merger",
+      "required_input_formats": [
+        ".docx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
       "scenario_id": "words-merger",
+      "required_input_formats": [
+        ".docx"
+      ],
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "words-processor",
       "required_input_formats": [
         ".docx"
       ],
@@ -88,7 +112,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ComparerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ComparerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-converter-context",
@@ -96,7 +120,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ConverterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ConverterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merge-data-source",
@@ -104,7 +128,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeDataSource' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergeDataSource' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merge-options",
@@ -112,15 +136,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-mail-merger",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMerger' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergeOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merger-context",
@@ -128,7 +144,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-merge-format-mode",
@@ -144,15 +160,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-processor",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Processor' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-processor-context",
@@ -160,7 +168,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ProcessorContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ProcessorContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-replacer-context",
@@ -168,7 +176,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReplacerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReplacerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-report-builder",
@@ -176,7 +184,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilder' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReportBuilder' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-report-builder-context",
@@ -184,7 +192,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReportBuilderContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-report-builder-options",
@@ -192,7 +200,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReportBuilderOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-signer-context",
@@ -200,7 +208,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SignerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SignerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-split-criteria",
@@ -216,7 +224,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-splitter-context",
@@ -224,7 +232,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SplitterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-watermarker-context",
@@ -232,7 +240,7 @@
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'WatermarkerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'Merger', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'WatermarkerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
     }
   ]
 }

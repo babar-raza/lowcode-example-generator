@@ -1,8 +1,37 @@
 {
   "family": "words",
-  "updated_at": "2026-05-13T06:48:49.037566+00:00",
-  "total_entries": 0,
-  "open_entries": 0,
-  "resolved_entries": 0,
-  "entries": []
+  "updated_at": "2026-05-13T12:59:56.361474+00:00",
+  "total_entries": 2,
+  "open_entries": 1,
+  "resolved_entries": 1,
+  "entries": [
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "last_run_id": "pilot-words-20260513-173848",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['Missing required LowCode API call: REQUIRED: template DOCX created with MERGEFIELD fields via DocumentBuilder.InsertField(\"MERGEFIELD FieldName\")']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 1,
+      "first_seen": "2026-05-13T12:45:09.865362+00:00",
+      "last_seen": "2026-05-13T12:59:56.360941+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-words-20260513-175418"
+    },
+    {
+      "scenario_id": "words-processor",
+      "family": "words",
+      "last_run_id": "pilot-words-20260513-175418",
+      "last_failure_stage": "backlogged",
+      "root_cause": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-processor\\Program.cs(25,9): error CS0120: An object reference is req",
+      "recommended_fix": "Feed compiler errors to LLM with stronger constraints",
+      "priority": "high",
+      "attempt_count": 2,
+      "first_seen": "2026-05-13T12:45:09.865389+00:00",
+      "last_seen": "2026-05-13T12:59:56.360957+00:00",
+      "resolved": false,
+      "resolved_in_run": null
+    }
+  ]
 }

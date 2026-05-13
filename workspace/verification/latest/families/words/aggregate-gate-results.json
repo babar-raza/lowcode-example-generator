@@ -1,12 +1,14 @@
 {
-  "total_generated": 6,
-  "total_built": 6,
-  "total_runtime_passed": 6,
+  "total_generated": 8,
+  "total_built": 7,
+  "total_runtime_passed": 7,
   "total_runtime_blocked": 0,
-  "total_pr_candidates": 6,
-  "total_excluded": 0,
-  "aggregate_build_status": "passed_all",
-  "aggregate_run_status": "passed_all",
+  "total_pr_candidates": 7,
+  "total_excluded": 1,
+  "aggregate_build_status": "passed_partial",
+  "aggregate_run_status": "passed_partial",
   "aggregate_reviewer_status": "passed_all",
-  "blocked_reasons": {}
+  "blocked_reasons": {
+    "EXAMPLE_BLOCKED_BUILD_FAILED": 1
+  }
 }

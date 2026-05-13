@@ -1,15 +1,14 @@
 {
   "dry_run": true,
-  "branch_name": "plugin-examples/words/20260513-064848",
+  "branch_name": "plugin-examples/pdf/20260513-132404",
   "pr_url": null,
   "pr_number": null,
   "files_included": [
-    "words-comparer",
-    "words-converter",
-    "words-merger",
-    "words-replacer",
-    "words-splitter",
-    "words-watermarker"
+    "pdf-merger",
+    "pdf-optimizer",
+    "pdf-pdf-aconverter",
+    "pdf-splitter",
+    "pdf-text-extractor"
   ],
   "evidence_verified": true,
   "status": "dry_run",

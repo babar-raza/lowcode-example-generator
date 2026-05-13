@@ -1,13 +1,13 @@
 {
-  "reviewer_path_configured": true,
-  "reviewer_path_exists": true,
-  "reviewer_python_found": true,
+  "reviewer_path_configured": false,
+  "reviewer_path_exists": false,
+  "reviewer_python_found": false,
   "reviewer_cli_responds": false,
   "reviewer_version": null,
   "dotnet_sdk_found": true,
   "dotnet_sdk_version": "10.0.204",
   "overall_ready": false,
   "issues": [
-    "Reviewer CLI check failed: Command '['C:\\\\Users\\\\prora\\\\OneDrive\\\\Documents\\\\GitHub\\\\example-reviewer\\\\.venv\\\\Scripts\\\\python.exe', '-m', 'src.cli.main', '--json', '--safe-workspace', 'status']' timed out after 30 seconds"
+    "EXAMPLE_REVIEWER_PATH not set and no --reviewer-path given"
   ]
 }

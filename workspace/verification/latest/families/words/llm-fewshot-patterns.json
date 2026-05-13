@@ -1,5 +1,5 @@
 {
-  "total_patterns": 6,
+  "total_patterns": 8,
   "verified_passing": 0,
   "patterns": [
     {
@@ -19,7 +19,23 @@
       "input_strategy": "generated_fixture_file"
     },
     {
+      "scenario_id": "words-mail-merger",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
       "scenario_id": "words-merger",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-processor",
       "uses_basedir": true,
       "validates_input": true,
       "validates_output": true,

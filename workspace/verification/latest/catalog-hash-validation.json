@@ -1,8 +1,8 @@
 {
-  "family": "words",
+  "family": "pdf",
   "match": true,
-  "current_hash": "db3ec3dda66504d98f3a0cac9b03397c723470afe528d06f712b2e2cf3bf7d03",
-  "denominator_hash": "db3ec3dda66504d98f3a0cac9b03397c723470afe528d06f712b2e2cf3bf7d03",
-  "denominator_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\denominators\\words.json",
-  "validated_at": "2026-05-13T06:45:38.619796+00:00"
+  "current_hash": "402ddee53932f3bb6640975fa96d2fc32c0dab16e8b21d0beb2fa1e5273d2408",
+  "denominator_hash": "402ddee53932f3bb6640975fa96d2fc32c0dab16e8b21d0beb2fa1e5273d2408",
+  "denominator_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\denominators\\pdf.json",
+  "validated_at": "2026-05-13T13:20:38.104814+00:00"
 }

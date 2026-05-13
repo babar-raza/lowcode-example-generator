@@ -1,22 +1,7 @@
 {
-  "total_build_repairs": 2,
+  "total_build_repairs": 1,
   "total_runtime_repairs": 0,
   "attempts": [
-    {
-      "scenario_id": "pdf-optimizer",
-      "repair_type": "build",
-      "attempt": 1,
-      "success": false,
-      "semantic_issues": [
-        "PDF Optimizer: must call 'new Optimizer().Process(options)' \u2014 the Optimizer class must be instantiated and its Process() method called with an OptimizeOptions instance."
-      ]
-    },
-    {
-      "scenario_id": "pdf-splitter",
-      "repair_type": "build",
-      "attempt": 1,
-      "success": true
-    },
     {
       "scenario_id": "pdf-text-extractor",
       "repair_type": "build",

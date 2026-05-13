@@ -1,0 +1,42 @@
+{
+  "report_type": "pdf-pilot-closure-status",
+  "generated_at": "2026-05-13T16:04:31Z",
+  "sprint": "pilot-closure-next-coverage-wave",
+  "pdf_pilot_types": [
+    {
+      "type": "Merger",
+      "state": "POST_MERGE_VERIFIED",
+      "pr": "PR#1",
+      "merge_sha": "included in pr#1"
+    },
+    {
+      "type": "TextExtractor",
+      "state": "POST_MERGE_VERIFIED",
+      "pr": "PR#1",
+      "merge_sha": "included in pr#1"
+    },
+    {
+      "type": "Splitter",
+      "state": "POST_MERGE_VERIFIED",
+      "pr": "PR#2",
+      "merge_sha": "94adfab0886d"
+    },
+    {
+      "type": "PdfAConverter",
+      "state": "POST_MERGE_VERIFIED",
+      "pr": "PR#2",
+      "merge_sha": "94adfab0886d"
+    },
+    {
+      "type": "Optimizer",
+      "state": "REVIEWED_1_OF_2",
+      "pr": null,
+      "next_action": "Run 2nd reviewer pass with EXAMPLE_REVIEWER_PATH"
+    }
+  ],
+  "pilot_completion_pct": 80.0,
+  "pilot_closure_verdict": "PARTIAL \u2014 Optimizer blocked on 2nd reviewer pass",
+  "pdf_denominator_published": 4,
+  "pdf_denominator_pilot_allowed": 5,
+  "pdf_denominator_workflow_root": 25
+}

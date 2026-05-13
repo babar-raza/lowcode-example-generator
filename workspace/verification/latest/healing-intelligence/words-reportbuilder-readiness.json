@@ -1,0 +1,50 @@
+{
+  "report_type": "words-reportbuilder-readiness",
+  "generated_at": "2026-05-13T16:07:35Z",
+  "sprint": "pilot-closure-next-coverage-wave",
+  "scenario_id": "words-report-builder",
+  "type_name": "ReportBuilder",
+  "full_type_name": "Aspose.Words.LowCode.ReportBuilder",
+  "readiness_verdict": "READY_TO_GENERATE_WHEN_LLM_AVAILABLE",
+  "api_readiness": {
+    "api_confirmed": true,
+    "primary_method": "BuildReport(templateFile, outputFile, dataObject)",
+    "method_style": "static (0 constructors, 36 public methods)",
+    "simplest_overload": "BuildReport(inputFileName:String, outputFileName:String, data:Object)",
+    "confidence": 0.75,
+    "source": "words-full-sot-type-classification.json"
+  },
+  "fixture_strategy": {
+    "template_creation": "Programmatic DOCX via Document+DocumentBuilder",
+    "template_syntax": "LINQ Reporting Engine: <<[FieldName]>>",
+    "example_template_line": "templateBuilder.Write(\"Hello, <<[Name]>>!\")",
+    "data_object": "Anonymous object: new { Name = \"World\" }",
+    "output_format": ".docx",
+    "validation_method": "docx_zip_check (check document.xml contains substituted value)",
+    "feasibility": "FEASIBLE"
+  },
+  "constraints_defined": {
+    "in_words_yml": true,
+    "required_count": 5,
+    "forbidden_count": 5,
+    "template_hints_added": true,
+    "preferred_method": "BuildReport"
+  },
+  "blockers": [
+    {
+      "blocker": "GPT_OSS_MODEL not set",
+      "severity": "HARD_BLOCK",
+      "prevents": "LLM generation cannot execute",
+      "resolution": "Set GPT_OSS_MODEL to a valid model name before running"
+    }
+  ],
+  "allowed_types_updated": true,
+  "generation_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family words --promote-latest",
+  "pre_conditions_for_generation": [
+    "GPT_OSS_MODEL must be set",
+    "GPT_OSS_ENDPOINT must be set (already set)",
+    "words.yml has ReportBuilder in allowed_types (DONE)",
+    "words.yml has per_type_constraints.ReportBuilder (DONE)",
+    "words.yml has reportbuilder_template_creation_lines (DONE)"
+  ]
+}

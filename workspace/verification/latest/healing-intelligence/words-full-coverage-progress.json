@@ -1,0 +1,60 @@
+{
+  "report_type": "words-full-coverage-progress",
+  "generated_at": "2026-05-13T16:07:35Z",
+  "sprint": "pilot-closure-next-coverage-wave",
+  "words_workflow_root_count": 9,
+  "coverage_summary": [
+    {
+      "type": "Converter",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "Watermarker",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "Splitter",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "Replacer",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "Merger",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "Comparer",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "MailMerger",
+      "state": "POST_MERGE_VERIFIED",
+      "published": true
+    },
+    {
+      "type": "ReportBuilder",
+      "state": "READINESS_PROVEN_AWAITING_LLM",
+      "published": false,
+      "next": "Generate when GPT_OSS_MODEL is set"
+    },
+    {
+      "type": "Processor",
+      "state": "PERMANENTLY_BLOCKED",
+      "published": false,
+      "reason": "UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT"
+    }
+  ],
+  "published_count": 7,
+  "readiness_proven_count": 1,
+  "permanently_blocked_count": 1,
+  "coverage_pct_of_runnable": "87.5% (7/8 runnable types published; Processor excluded as unreachable)",
+  "next_action": "Set GPT_OSS_MODEL and run words pilot to generate ReportBuilder example"
+}

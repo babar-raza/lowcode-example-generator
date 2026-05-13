@@ -1,0 +1,104 @@
+{
+  "artifact_type": "healing_intelligence_current_state",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "sprint": "Sprint 4 — Pilot Closure and Next Coverage Wave",
+  "lane": "LANE 5 — Completion Queue and Healing Intelligence Sync",
+
+  "portfolio_snapshot": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_root_count": 9,
+      "coverage_pct": 100.0
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 7,
+      "pilot_types": 8,
+      "coverage_pct_pilot": 87.5,
+      "next_type": "ReportBuilder (constraints defined, waiting for LLM)",
+      "denominator_basis": "PILOT_ALLOWED"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 4,
+      "pilot_types": 5,
+      "coverage_pct_pilot": 80.0,
+      "reviewed_awaiting_2nd_pass": 1,
+      "next_action": "Optimizer 2nd reviewer pass (EXAMPLE_REVIEWER_PATH + GPT_OSS_MODEL required)"
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "pilot_types": 2,
+      "coverage_pct_pilot": 100.0
+    },
+    "email": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_root_count": 1,
+      "activation_blockers": ["repo not provisioned", "human approval not granted"]
+    },
+    "slides": {
+      "status": "DISCOVERY_ONLY",
+      "published": 0,
+      "workflow_root_count": 3,
+      "activation_blockers": ["repo not provisioned", "human approval not granted"]
+    }
+  },
+
+  "sprint_4_achievements": {
+    "words_wave2_3_published": {
+      "types": ["Comparer", "Merger", "MailMerger"],
+      "pr": "PR #5 (Words)",
+      "merge_sha": "04eb94bba3d921d3a51fe8b546d0ef10abcbba6b"
+    },
+    "pdf_wave_a_published": {
+      "types": ["Splitter", "PdfAConverter"],
+      "pr": "PR #2 (PDF)",
+      "merge_sha": "94adfab0886d6d77b26cd6ff55a909d8befb6457"
+    },
+    "words_reportbuilder_config_ready": {
+      "status": "COMPLETE",
+      "detail": "words.yml updated with allowed_types, preferred_methods_per_type, template_hints, per_type_constraints for ReportBuilder"
+    },
+    "email_activation_readiness_documented": "email-activation-readiness-next.json written",
+    "slides_activation_readiness_documented": "slides-activation-readiness-next.json written",
+    "completion_queue_sync": "pdf-optimizer blocking_reason updated; conservation verified (50/50)"
+  },
+
+  "active_blockers": {
+    "GPT_OSS_MODEL": {
+      "severity": "HIGH",
+      "blocks": ["Words ReportBuilder generation", "PDF Optimizer 2nd pass", "Any new family generation"],
+      "resolution": "Set GPT_OSS_MODEL environment variable before next generation run"
+    },
+    "EXAMPLE_REVIEWER_PATH": {
+      "severity": "HIGH",
+      "blocks": ["PDF Optimizer 2nd reviewer pass"],
+      "resolution": "Set EXAMPLE_REVIEWER_PATH to example-reviewer repo path"
+    },
+    "repo_provisioning_email_slides": {
+      "severity": "MEDIUM",
+      "blocks": ["Email pilot publication", "Slides pilot publication"],
+      "resolution": "Maintainer provisions aspose-email-net/* and aspose-slides-net/* repos"
+    }
+  },
+
+  "healing_registries_verified": {
+    "failure_pattern_registry": "workspace/verification/latest/healing-intelligence/failure-pattern-registry.json",
+    "repair_pattern_registry": "workspace/verification/latest/healing-intelligence/repair-pattern-registry.json",
+    "semantic_steering_registry": "workspace/verification/latest/healing-intelligence/semantic-steering-registry.json",
+    "validator_pattern_registry": "workspace/verification/latest/healing-intelligence/validator-pattern-registry.json",
+    "last_proof": "workspace/verification/latest/healing-intelligence/healing-intelligence-runtime-proof-v2.json"
+  },
+
+  "denominator_conservation": {
+    "cells": "HOLDS (9 published / 9 workflow root = 100%)",
+    "words": "HOLDS (7 published / pilot 8 = 87.5%; full SOT classification pending)",
+    "pdf": "HOLDS (4 published + 1 REVIEWED + 21 deferred = 26 accounted of 25 WORKFLOW_ROOT)",
+    "diagram": "HOLDS (2 published / 2 pilot = 100%)",
+    "email": "HOLDS (trivially — 0 active, 1 deferred pending pilot)",
+    "slides": "HOLDS (trivially — 0 active, 3 deferred pending pilot)"
+  }
+}

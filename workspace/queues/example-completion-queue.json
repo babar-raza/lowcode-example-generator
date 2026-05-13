@@ -241,15 +241,15 @@
       "family": "pdf",
       "type_name": "Optimizer",
       "state": "REVIEWED",
-      "blocking_reason": "Awaiting next PR grouping with pdf-splitter (PR #3)",
-      "blocking_taskcard": "followup-pdf-optimizer-llm-rerun",
+      "blocking_reason": "Requires 2nd consecutive reviewer PASS before PR creation. Blocked: EXAMPLE_REVIEWER_PATH and GPT_OSS_MODEL not set in environment.",
+      "blocking_taskcard": "followup-pdf-optimizer-2nd-pass",
       "contract_path": "pipeline/contracts/pdf/pdf-optimizer.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-08T00:00:00Z",
+      "last_state_change": "2026-05-13T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "Reviewer passed. Namespace fix applied (FORBIDDEN: using Aspose.Pdf.LowCode.DataSources). Awaiting next LLM rerun confirmation before PR. Will be bundled into PR #4."
+      "notes": "First reviewer PASS confirmed (run pilot-pdf-20260508-155520). splitter+pdfa-converter merged in Sprint 3 (PR#2). Optimizer needs 2nd consecutive PASS to qualify for PR#3. Blocked on EXAMPLE_REVIEWER_PATH (example-reviewer path) and GPT_OSS_MODEL (LLM model) environment variables."
     },
     {
       "scenario_id": "pdf-pdfa-converter",

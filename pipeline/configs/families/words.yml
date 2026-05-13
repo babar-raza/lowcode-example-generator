@@ -65,6 +65,7 @@ generation:
     - Merger
     - Comparer
     - MailMerger
+    - ReportBuilder
     # Processor: REMOVED from pilot — Processor.From() is instance method but no public constructor exists.
     # CS0120 error confirmed. ProcessorContext investigation required before re-enabling.
     # See taskcard: followup-words-processor-api-investigation
@@ -76,6 +77,7 @@ generation:
     Merger: Merge
     Comparer: Compare
     MailMerger: Execute
+    ReportBuilder: BuildReport
 
 validation:
   require_restore: true
@@ -123,6 +125,11 @@ template_hints:
     - 'templateBuilder.InsertField("MERGEFIELD FirstName");'
     - 'templateBuilder.Write(" ");'
     - 'templateBuilder.InsertField("MERGEFIELD LastName");'
+    - 'templateDoc.Save("template.docx");'
+  reportbuilder_template_creation_lines:
+    - 'var templateDoc = new Document();'
+    - 'var templateBuilder = new DocumentBuilder(templateDoc);'
+    - 'templateBuilder.Write("Hello, <<[Name]>>!");'
     - 'templateDoc.Save("template.docx");'
   processor_input_creation_lines:
     - 'var doc = new Document();'
@@ -197,3 +204,16 @@ per_type_constraints:
       - "FORBIDDEN: IMailMergeDataSource — NOT needed; string array overload is sufficient"
       - "FORBIDDEN: MailMergeDataSource class — use string[] fieldNames + string[] fieldValues instead"
       - "FORBIDDEN: new MailMerger() — MailMerger.Execute() is static, call directly"
+  ReportBuilder:
+    required:
+      - "REQUIRED: using Aspose.Words.LowCode;"
+      - "REQUIRED: using Aspose.Words;"
+      - "REQUIRED: ReportBuilder.BuildReport(templateFile, outputFile, dataObject) — static method"
+      - "REQUIRED: LINQ template using <<[FieldName]>> syntax in template DOCX — create via DocumentBuilder.Write(\"Hello, <<[Name]>>!\")"
+      - "REQUIRED: template DOCX created programmatically via Document+DocumentBuilder before calling BuildReport"
+    forbidden:
+      - "FORBIDDEN: Document.Save() replacing ReportBuilder.BuildReport() — always use LowCode ReportBuilder"
+      - "FORBIDDEN: new ReportBuilder() — ReportBuilder.BuildReport() is static, no constructor"
+      - "FORBIDDEN: {{ FieldName }} or {FieldName} template syntax — use LINQ <<[FieldName]>> only"
+      - "FORBIDDEN: MailMerge MERGEFIELD syntax in ReportBuilder template — use LINQ <<[FieldName]>> only"
+      - "FORBIDDEN: Aspose.Words.Reporting namespace direct use — let ReportBuilder handle LINQ engine invocation"

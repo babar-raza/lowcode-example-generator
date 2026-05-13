@@ -1,0 +1,29 @@
+{
+  "report_type": "preflight-report",
+  "generated_at": "2026-05-13T16:03:01Z",
+  "sprint": "pilot-closure-next-coverage-wave",
+  "branch": "main",
+  "head_commit": "b2bcf5d",
+  "head_commit_verified": true,
+  "working_tree": "clean (only gitignored workspace simulation files modified)",
+  "token_state": {
+    "GH_TOKEN_prefix": "ghp_",
+    "GH_TOKEN_type": "classic_pat",
+    "verdict": "CORRECT"
+  },
+  "approval_state": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET",
+    "EXAMPLE_REVIEWER_PATH": "NOT_SET",
+    "GPT_OSS_MODEL": "NOT_SET",
+    "GPT_OSS_ENDPOINT": "SET (https://llm.professionalize.com/v1/)"
+  },
+  "lane_gate_results": {
+    "LANE_1_portfolio_truth": "UNBLOCKED",
+    "LANE_2_optimizer_2nd_pass": "BLOCKED (EXAMPLE_REVIEWER_PATH not set, GPT_OSS_MODEL not set)",
+    "LANE_3_reportbuilder_generation": "BLOCKED (GPT_OSS_MODEL not set) \u2014 readiness assessment only",
+    "LANE_4_email_slides_readiness": "UNBLOCKED (assessment only)",
+    "LANE_5_queue_sync": "UNBLOCKED"
+  },
+  "verdict": "PROCEED_WITHOUT_BLOCKED_LANES"
+}

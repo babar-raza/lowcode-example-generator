@@ -1,0 +1,9 @@
+{
+  "report_type": "pdf-optimizer-publication-result",
+  "generated_at": "2026-05-13T16:04:31Z",
+  "sprint": "pilot-closure-next-coverage-wave",
+  "publication_status": "NOT_EXECUTED",
+  "reason": "BLOCKED \u2014 second reviewer pass requires EXAMPLE_REVIEWER_PATH (not set)",
+  "pr_number": null,
+  "merge_sha": null
+}

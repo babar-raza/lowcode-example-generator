@@ -35,7 +35,7 @@
       "input_strategy": "generated_fixture_file"
     },
     {
-      "scenario_id": "words-processor",
+      "scenario_id": "words-replacer",
       "uses_basedir": true,
       "validates_input": true,
       "validates_output": true,
@@ -43,7 +43,7 @@
       "input_strategy": "generated_fixture_file"
     },
     {
-      "scenario_id": "words-replacer",
+      "scenario_id": "words-report-builder",
       "uses_basedir": true,
       "validates_input": true,
       "validates_output": true,

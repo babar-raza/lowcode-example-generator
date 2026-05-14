@@ -1,21 +1,227 @@
 {
-  "total_scored": 3,
-  "runnable_count": 1,
-  "rejected_count": 2,
+  "total_scored": 25,
+  "runnable_count": 10,
+  "rejected_count": 15,
   "scores": [
     {
-      "full_name": "Aspose.Email.LowCode.Converter",
-      "name": "Converter",
+      "full_name": "Aspose.Words.LowCode.Comparer",
+      "name": "Comparer",
       "role": "workflow_root",
-      "score": 6.0,
-      "max_score": 8.0,
+      "score": 10.0,
+      "max_score": 11.0,
       "runnable": true,
       "rejection_reason": null,
       "signals": [
         {
           "signal": "has_static_methods",
           "weight": 3.0,
-          "detail": "7 static methods"
+          "detail": "16 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "34 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ComparerContext",
+      "name": "ComparerContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Converter",
+      "name": "Converter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "20 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "3 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "23 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ConverterContext",
+      "name": "ConverterContext",
+      "role": "unknown",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMergeDataSource",
+      "name": "MailMergeDataSource",
+      "role": "workflow_root",
+      "score": 6.5,
+      "max_score": 7.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "4 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "4 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMergeOptions",
+      "name": "MailMergeOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMerger",
+      "name": "MailMerger",
+      "role": "workflow_root",
+      "score": 8.0,
+      "max_score": 9.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "42 static methods"
         },
         {
           "signal": "standalone_role",
@@ -33,51 +239,200 @@
           "detail": "Type has XML documentation"
         },
         {
-          "signal": "requires_callback_params",
-          "weight": -2.0,
-          "detail": "7 parameters are callback types"
-        }
-      ]
-    },
-    {
-      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
-      "name": "FolderOutputHandler",
-      "role": "provider_callback",
-      "score": -5.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "signals": [
-        {
-          "signal": "has_xml_summary",
-          "weight": 0.5,
-          "detail": "Type has XML documentation"
-        },
-        {
-          "signal": "provider_callback_role",
-          "weight": -5.0,
-          "detail": "Provider/callback type \u2014 not standalone"
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
         },
         {
           "signal": "complex_parameters",
           "weight": -1.0,
-          "detail": "2 complex object parameters"
+          "detail": "108 complex object parameters"
         }
       ]
     },
     {
-      "full_name": "Aspose.Email.LowCode.IOutputHandler",
-      "name": "IOutputHandler",
-      "role": "interface_contract",
-      "score": -5.5,
-      "max_score": 0.5,
+      "full_name": "Aspose.Words.LowCode.MailMergerContext",
+      "name": "MailMergerContext",
+      "role": "utility",
+      "score": 0.5,
+      "max_score": 1.5,
       "runnable": false,
-      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
       "signals": [
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
           "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "5 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MergeFormatMode",
+      "name": "MergeFormatMode",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Merger",
+      "name": "Merger",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "16 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "32 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MergerContext",
+      "name": "MergerContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Processor",
+      "name": "Processor",
+      "role": "operation_facade",
+      "score": 7.0,
+      "max_score": 8.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "4 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "11 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ProcessorContext",
+      "name": "ProcessorContext",
+      "role": "abstract_base",
+      "score": -6.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'abstract_base' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
         },
         {
           "signal": "abstract_or_interface",
@@ -85,9 +440,406 @@
           "detail": "Cannot be instantiated"
         },
         {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Replacer",
+      "name": "Replacer",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "27 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
           "signal": "complex_parameters",
           "weight": -1.0,
-          "detail": "2 complex object parameters"
+          "detail": "50 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReplacerContext",
+      "name": "ReplacerContext",
+      "role": "utility",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": false,
+      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilder",
+      "name": "ReportBuilder",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "36 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "1 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "80 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilderContext",
+      "name": "ReportBuilderContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "name": "ReportBuilderOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SignerContext",
+      "name": "SignerContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitCriteria",
+      "name": "SplitCriteria",
+      "role": "enum",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'enum' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitOptions",
+      "name": "SplitOptions",
+      "role": "options",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'options' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Splitter",
+      "name": "Splitter",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "16 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "18 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitterContext",
+      "name": "SplitterContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Watermarker",
+      "name": "Watermarker",
+      "role": "workflow_root",
+      "score": 10.0,
+      "max_score": 11.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "33 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "51 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.WatermarkerContext",
+      "name": "WatermarkerContext",
+      "role": "settings_model",
+      "score": -1.5,
+      "max_score": 1.5,
+      "runnable": false,
+      "rejection_reason": "Role 'settings_model' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "fixture_available",
+          "weight": 1.0,
+          "detail": "Fixture files accessible"
+        },
+        {
+          "signal": "no_methods",
+          "weight": -3.0,
+          "detail": "No public methods"
         }
       ]
     }

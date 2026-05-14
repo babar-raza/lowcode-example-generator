@@ -13,7 +13,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ComparerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ComparerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-converter-context",
@@ -26,7 +26,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ConverterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ConverterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merge-data-source",
@@ -39,7 +39,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeDataSource' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergeDataSource' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merge-options",
@@ -52,7 +52,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergeOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-mail-merger-context",
@@ -65,7 +65,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MailMergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-merge-format-mode",
@@ -91,7 +91,20 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'MergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
+    },
+    {
+      "scenario_id": "words-processor",
+      "title": "Use Processor from Aspose.Words.LowCode",
+      "target_type": "Aspose.Words.LowCode.Processor",
+      "target_namespace": "Aspose.Words.LowCode",
+      "target_methods": [],
+      "required_symbols": [],
+      "required_fixtures": [],
+      "output_plan": "",
+      "validation_plan": "",
+      "status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Processor' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-processor-context",
@@ -104,7 +117,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ProcessorContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ProcessorContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-replacer-context",
@@ -117,20 +130,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReplacerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-report-builder",
-      "title": "Use ReportBuilder from Aspose.Words.LowCode",
-      "target_type": "Aspose.Words.LowCode.ReportBuilder",
-      "target_namespace": "Aspose.Words.LowCode",
-      "target_methods": [],
-      "required_symbols": [],
-      "required_fixtures": [],
-      "output_plan": "",
-      "validation_plan": "",
-      "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilder' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReplacerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-report-builder-context",
@@ -143,7 +143,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReportBuilderContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-report-builder-options",
@@ -156,7 +156,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'ReportBuilderOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-signer-context",
@@ -169,7 +169,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SignerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SignerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-split-criteria",
@@ -195,7 +195,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-splitter-context",
@@ -208,7 +208,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'SplitterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     },
     {
       "scenario_id": "words-watermarker-context",
@@ -221,7 +221,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'WatermarkerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Processor', 'Replacer', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'WatermarkerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
     }
   ]
 }

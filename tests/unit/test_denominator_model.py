@@ -175,30 +175,30 @@ class TestWordsDenominator:
         assert self.d["total_lowcode_types"] == 25
 
     def test_words_pilot_allowed_count_is_7(self):
-        # Processor removed from pilot: Processor.From() is instance method but no public constructor
-        assert self.d["allowed_pilot_count"] == 7
+        # Sprint 6: ReportBuilder added to pilot, count is now 8
+        assert self.d["allowed_pilot_count"] == 8
 
     def test_words_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 7
-        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger"]:
+        assert isinstance(types, list) and len(types) == 8
+        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger", "ReportBuilder"]:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
         assert "Processor" not in types, "Processor must NOT be in allowed_pilot_types (API investigation required)"
 
     def test_words_published_count_is_7(self):
-        assert self.d["published_count"] == 7
+        assert self.d["published_count"] == 8
 
     def test_words_workflow_root_types_is_classified(self):
         assert self.d["workflow_root_types"] == 9
         assert self.d["non_runnable_types"] == 16
 
     def test_words_excluded_count_is_18(self):
-        # 16 non-standalone + ReportBuilder (Wave 4) + Processor (API gap) = 18
-        assert self.d["excluded_count"] == 18
+        # 16 non-standalone + Processor (API gap permanently blocked) = 17
+        assert self.d["excluded_count"] == 17
 
     def test_words_runnable_scenarios_is_7(self):
-        # 7 active pilot types (Processor removed; API access pattern unclear)
-        assert self.d["runnable_scenarios"] == 7
+        # Sprint 6: ReportBuilder added, now 8 active pilot types
+        assert self.d["runnable_scenarios"] == 8
 
     def test_words_denominator_basis_is_pilot_allowed(self):
         assert self.d["denominator_basis"] == "PILOT_ALLOWED", (
@@ -206,9 +206,9 @@ class TestWordsDenominator:
         )
 
     def test_words_coverage_pct_of_pilot_runnable_is_57(self):
-        # 4 published / 7 active-pilot types = 57.14%
+        # Sprint 6: 8 published / 8 active-pilot types = 100%
         pct = self.d.get("coverage_pct_of_pilot_runnable")
-        assert pct is not None and abs(pct - 57.14) < 0.1
+        assert pct is not None and abs(pct - 100.0) < 0.1
 
     def test_words_does_not_claim_full_sot_basis(self):
         assert self.d["denominator_basis"] != "FULL_SOT", (
@@ -260,8 +260,8 @@ class TestPdfDenominator:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_4(self):
-        assert self.d["published_count"] == 4, (
-            f"PDF published_count should be 4 (Merger+TextExtractor+Splitter+PdfAConverter), got {self.d['published_count']}"
+        assert self.d["published_count"] == 5, (
+            f"PDF published_count should be 5 (Merger+TextExtractor+Splitter+PdfAConverter+Optimizer), got {self.d['published_count']}"
         )
 
     def test_pdf_denominator_basis_is_pilot_allowed(self):
@@ -322,6 +322,6 @@ class TestDenominatorCrossFamily:
     def test_total_published_across_families_is_20(self):
         """Integration: total published examples across all families."""
         total = sum(_load_denominator(f)["published_count"] for f in FAMILIES)
-        assert total == 20, (
-            f"Total published count across all families should be 20 (Cells=9, Words=7, PDF=4), got {total}"
+        assert total == 22, (
+            f"Total published count across cells+words+pdf should be 22 (Cells=9, Words=8, PDF=5), got {total}"
         )

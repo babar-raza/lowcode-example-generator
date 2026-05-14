@@ -1,55 +1,528 @@
 {
   "initial_run": true,
   "old_version": null,
-  "new_version": "26.4.0.0",
+  "new_version": "26.5.0.0",
   "summary": {
-    "added_types": 3,
+    "added_types": 25,
     "removed_types": 0,
     "modified_types": 0,
-    "total_changes": 3
+    "total_changes": 25
   },
   "added_types": [
     {
-      "full_name": "Aspose.Email.LowCode.Converter",
-      "namespace": "Aspose.Email.LowCode",
+      "full_name": "Aspose.Words.LowCode.Comparer",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "Compare",
+        "CompareToImages",
+        "CompareToImages",
+        "CompareToImages",
+        "CompareToImages",
+        "Create",
+        "Create"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ComparerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "AcceptRevisions",
+        "Author",
+        "CompareOptions",
+        "DateTime"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Converter",
+      "namespace": "Aspose.Words.LowCode",
       "change_type": "added",
       "added_methods": [
         "Convert",
-        "ConvertEmlOrMsg",
-        "ConvertToEml",
-        "ConvertToHtml",
-        "ConvertToMht",
-        "ConvertToMhtml",
-        "ConvertToMsg"
+        "Convert",
+        "Convert",
+        "Convert",
+        "Convert",
+        "Convert",
+        "Convert",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "ConvertToImages",
+        "Create",
+        "Create"
       ],
       "removed_methods": [],
       "added_properties": [],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
-      "namespace": "Aspose.Email.LowCode",
+      "full_name": "Aspose.Words.LowCode.ConverterContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMergeDataSource",
+      "namespace": "Aspose.Words.LowCode",
       "change_type": "added",
       "added_methods": [
-        "AddOutputStream",
-        "AddOutputStream"
+        "Create",
+        "Create",
+        "Create",
+        "Create"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMergeOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "CleanupOptions",
+        "CleanupParagraphsWithPunctuationMarks",
+        "MergeDuplicateRegions",
+        "MergeWholeDocument",
+        "PreserveUnusedTags",
+        "RegionEndTag",
+        "RegionStartTag",
+        "RestartListsAtEachSection",
+        "RetainFirstSectionStart",
+        "TrimWhitespaces",
+        "UnconditionalMergeFieldsAndRegions",
+        "UseNonMergeFields",
+        "UseWholeParagraphAsRegion"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMerger",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Create",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "Execute",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteToImages",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegions",
+        "ExecuteWithRegionsToImages",
+        "ExecuteWithRegionsToImages",
+        "ExecuteWithRegionsToImages",
+        "ExecuteWithRegionsToImages"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MailMergerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "SetRegionsDataSource",
+        "SetRegionsDataSource",
+        "SetSimpleDataSource",
+        "SetSimpleDataSource",
+        "SetSimpleDataSource"
       ],
       "removed_methods": [],
       "added_properties": [
-        "Path"
+        "MailMergeOptions"
       ],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Email.LowCode.IOutputHandler",
-      "namespace": "Aspose.Email.LowCode",
+      "full_name": "Aspose.Words.LowCode.MergeFormatMode",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Merger",
+      "namespace": "Aspose.Words.LowCode",
       "change_type": "added",
       "added_methods": [
-        "AddOutputStream",
-        "AddOutputStream"
+        "Create",
+        "Create",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "Merge",
+        "MergeToImages",
+        "MergeToImages"
       ],
       "removed_methods": [],
       "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.MergerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "MergeFormatMode"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Processor",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Execute",
+        "Execute",
+        "From",
+        "From",
+        "From",
+        "From",
+        "To",
+        "To",
+        "To",
+        "To",
+        "To",
+        "To",
+        "To"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ProcessorContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "FontSettings",
+        "LayoutOptions",
+        "WarningCallback"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Replacer",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Create",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages",
+        "ReplaceToImages"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReplacerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "SetReplacement",
+        "SetReplacement"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "FindReplaceOptions"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilder",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReport",
+        "BuildReportToImages",
+        "BuildReportToImages",
+        "BuildReportToImages",
+        "BuildReportToImages",
+        "Create",
+        "Create"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilderContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "DataSources",
+        "ReportBuilderOptions"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "KnownTypes",
+        "MissingMemberMessage",
+        "Options"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SignerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "CertificateHolder",
+        "SignOptions"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitCriteria",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitOptions",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "SplitCriteria",
+        "SplitStyle"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Splitter",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Create",
+        "ExtractPages",
+        "ExtractPages",
+        "ExtractPages",
+        "ExtractPages",
+        "ExtractPages",
+        "RemoveBlankPages",
+        "RemoveBlankPages",
+        "RemoveBlankPages",
+        "RemoveBlankPages",
+        "RemoveBlankPages",
+        "Split",
+        "Split",
+        "Split",
+        "Split",
+        "Split"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.SplitterContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "SplitOptions"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.Watermarker",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Create",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetImage",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetText",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages",
+        "SetWatermarkToImages"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Words.LowCode.WatermarkerContext",
+      "namespace": "Aspose.Words.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ImageWatermark",
+        "ImageWatermarkOptions",
+        "TextWatermark",
+        "TextWatermarkOptions"
+      ],
       "removed_properties": []
     }
   ],

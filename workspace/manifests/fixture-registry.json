@@ -1,4 +1,2477 @@
 {
-  "family": "email",
-  "fixtures": []
+  "family": "words",
+  "fixtures": [
+    {
+      "filename": "Absolute position tab.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Absolute position tab.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "ActiveX controls.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/ActiveX controls.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Alte DIN 1451 Mittelschrift.ttf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Alte DIN 1451 Mittelschrift.ttf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Asian typography.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Asian typography.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Azw3 document.azw3",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Azw3 document.azw3",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Background images (word to pdf).pdf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Background images (word to pdf).pdf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Background images.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Background images.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bibliography custom style.xsl",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bibliography custom style.xsl",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bibliography sources.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bibliography sources.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bibliography.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bibliography.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Big document.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Big document.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Blank pages.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Blank pages.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Blank.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Blank.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bookmarks in headers and footers.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bookmarks in headers and footers.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bookmarks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bookmarks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Borders.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Borders.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Bullet points with alternative font.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Bullet points with alternative font.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Business brochure.dotx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Business brochure.dotx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "CD collection XSL transformation.xsl",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/CD collection XSL transformation.xsl",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "CD collection data.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/CD collection data.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Cell revisions.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Cell revisions.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Colored pages.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Colored pages.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Combo chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Combo chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Comments.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Comments.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Content-ID.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Content-ID.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Continuous section page numbering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Continuous section page numbering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Corrupted document.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Corrupted document.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Corrupted footnotes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Corrupted footnotes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Corrupted image.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Corrupted image.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom XML part in structured document tag.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom XML part in structured document tag.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom font fallback settings.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom font fallback settings.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom list numbering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom list numbering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom parts OOXML package.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom parts OOXML package.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom style.css",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom style.css",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Custom style.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Custom style.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DML unique ID compare.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DML unique ID compare.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DML unique ID original.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DML unique ID original.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DataPoint format.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DataPoint format.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Decorative shapes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Decorative shapes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Different lists.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Different lists.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Digitally signed.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Digitally signed.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Digitally signed.odt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Digitally signed.odt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Digitally signed.ott",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Digitally signed.ott",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Dirty field.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Dirty field.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document destination with list.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document destination with list.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document insertion 1.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document insertion 1.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document insertion 2.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document insertion 2.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document insertion destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document insertion destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document layout.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document layout.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document source with list.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document source with list.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document source.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document source.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document with SDT 1.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document with SDT 1.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document with SDT 2.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document with SDT 2.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document with WebP image.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document with WebP image.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document with ms-its links.chm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document with ms-its links.chm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.mobi",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.mobi",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.odt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.odt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Document.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Document.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DocumentVisitor-compatible features.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DocumentVisitor-compatible features.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DrawingML shape 3D effects.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DrawingML shape 3D effects.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DrawingML shape effects.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DrawingML shape effects.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DrawingML shape fallbacks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DrawingML shape fallbacks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "DrawingML text effects.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/DrawingML text effects.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "EMF.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/EMF.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Embedded font rights.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Embedded font rights.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Embedded font.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Embedded font.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Embedded font.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Embedded font.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Emphases markdown warning.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Emphases markdown warning.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Encoded in UTF-7.txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Encoded in UTF-7.txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Encrypted.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Encrypted.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Encrypted.odt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Encrypted.odt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Encrypted.ott",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Encrypted.ott",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "English text.txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/English text.txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Epub document.epub",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Epub document.epub",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Extended properties.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Extended properties.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "External XML schema.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/External XML schema.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Extract content.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Extract content.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "FB2 document.fb2",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/FB2 document.fb2",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - ADDIN.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - ADDIN.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - ADDRESSBLOCK.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - ADDRESSBLOCK.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - BARCODE.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - BARCODE.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - EQ.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - EQ.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - Field with data.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - Field with data.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - INCLUDEPICTURE.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - INCLUDEPICTURE.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - MERGEFIELD.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - MERGEFIELD.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - PRINTDATE.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - PRINTDATE.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - PRIVATE.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - PRIVATE.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Field sample - TOC.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Field sample - TOC.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Find and highlight.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Find and highlight.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Floating object.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Floating object.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Font fallback rules.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Font fallback rules.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Font substitution rules.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Font substitution rules.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Footer.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Footer.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Footnotes and endnotes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Footnotes and endnotes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Form fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Form fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Format revision.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Format revision.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Formatted elements.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Formatted elements.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Frameset.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Frameset.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "German text.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/German text.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Get substitution without suffixes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Get substitution without suffixes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "HTML help.chm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/HTML help.chm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Header and footer types.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Header and footer types.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Heading pairs and titles of parts.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Heading pairs and titles of parts.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Hebrew text.txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Hebrew text.txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Hidden content.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Hidden content.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Html with FontFace.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Html with FontFace.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Hyperlinks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Hyperlinks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Id prefix.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Id prefix.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Iframe.htm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Iframe.htm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Iframes.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Iframes.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Image bullet points.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Image bullet points.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Images.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Images.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Images.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Images.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Images.pdf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Images.pdf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Ink object.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Ink object.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "JavaScript in HREF.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/JavaScript in HREF.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Korean backslash symbol.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Korean backslash symbol.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Layout entities.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Layout entities.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Legacy control character.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Legacy control character.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Legacy drop-down.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Legacy drop-down.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Legacy fields.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Legacy fields.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Linked fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Linked fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Linked image.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Linked image.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List item.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List item.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List of people.csv",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List of people.csv",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List of people.json",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List of people.json",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List of people.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List of people.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List source.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List source.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List with leading zero.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List with leading zero.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List with the same definition identifier - destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List with the same definition identifier - destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "List with the same definition identifier - source.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/List with the same definition identifier - source.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Macro.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Macro.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge data - Customers.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge data - Customers.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge data - Orders.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge data - Orders.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge data - Purchase order.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge data - Purchase order.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge data - Vendors.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge data - Vendors.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destination - Northwind employees.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destination - Northwind employees.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destination - Northwind suppliers.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destination - Northwind suppliers.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destination - Suppliers.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destination - Suppliers.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Complex template.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Complex template.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Fax.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Fax.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Invoice.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Invoice.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - LINQ.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - LINQ.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Mustache syntax.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Mustache syntax.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Orders.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Orders.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Registration complete.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Registration complete.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge destinations - Vendor.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge destinations - Vendor.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge mustache tags.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge mustache tags.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge regions.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge regions.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge tables.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge tables.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge template.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge template.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge with regions data set.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge with regions data set.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge with regions.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge with regions.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Mail merge.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Mail merge.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Master document.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Master document.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Math shapes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Math shapes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Merged table.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Merged table.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Microsoft equation object.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Microsoft equation object.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Missing font.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Missing font.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Missing font.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Missing font.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Missing image.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Missing image.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Multi-section structured document tags.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Multi-section structured document tags.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Nested elements.json",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Nested elements.json",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Nested elements.xml",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Nested elements.xml",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Nested fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Nested fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Nested tables.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Nested tables.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "No default editing language.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/No default editing language.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Non compatible table.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Non compatible table.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Northwind traders.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Northwind traders.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Number detection.txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Number detection.txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "OLE ActiveX controls.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/OLE ActiveX controls.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "OLE objects.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/OLE objects.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "OLE shape.rtf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/OLE shape.rtf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "OLE spreadsheet.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/OLE spreadsheet.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Odso data.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Odso data.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Office math.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Office math.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "OpenType text shaping.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/OpenType text shaping.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "PDF artifacts.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/PDF artifacts.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Page fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Page fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Paragraph frame.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Paragraph frame.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Paragraphs.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Paragraphs.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Pdf Document.pdf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Pdf Document.pdf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Phonetic guide.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Phonetic guide.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Presentation.pptx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Presentation.pptx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Properties.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Properties.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Protected pdf document.pdf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Protected pdf document.pdf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Quotes.md",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Quotes.md",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Radio buttons.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Radio buttons.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Rendering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Rendering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Replace regex.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Replace regex.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Replace text with fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Replace text with fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Report building.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Report building.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Background color.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Background color.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Bubble chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Bubble chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Bulleted list.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Bulleted list.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - CSV data destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - CSV data destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Chart series color.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Chart series color.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Chart series.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Chart series.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Chart with filtering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Chart with filtering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - CheckBox Content Control.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - CheckBox Content Control.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Common master detail.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Common master detail.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Contextual object member access.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Contextual object member access.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Cross table.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Cross table.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Data destination with nested elements.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Data destination with nested elements.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Data table (base64).txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Data table (base64).txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Data table.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Data table.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Dynamic stretching.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Dynamic stretching.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Extension methods.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Extension methods.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Header variable.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Header variable.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Html.html",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Html.html",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - If greedy.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - If greedy.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - If-else.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - If-else.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Image exif orientation.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Image exif orientation.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Index of.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Index of.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Inserting hyperlinks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Inserting hyperlinks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - JSON data destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - JSON data destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - List numbering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - List numbering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Merging table cells dynamically.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Merging table cells dynamically.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Multicolored numbered list.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Multicolored numbered list.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Nested data table.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Nested data table.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Numbered list.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Numbered list.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Operators.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Operators.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Pie chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Pie chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Point color.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Point color.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Remove empty paragraphs.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Remove empty paragraphs.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Scatter chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Scatter chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Selective remove paragraphs.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Selective remove paragraphs.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Table row conditional blocks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Table row conditional blocks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Table row greedy.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Table row greedy.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Table row.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Table row.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Table with filtering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Table with filtering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Text color.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Text color.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Total.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Total.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - Word 2016 Charts.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - Word 2016 Charts.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - XML data destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - XML data destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Reporting engine template - base64 image.txt",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Reporting engine template - base64 image.txt",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Revision footnotes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Revision footnotes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Revision runs.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Revision runs.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Revision shape.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Revision shape.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Revisions at list levels.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Revisions at list levels.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Revisions.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Revisions.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Rotated cell text.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Rotated cell text.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Rounded rectangle shape.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Rounded rectangle shape.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Section breaks with numbering.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Section breaks with numbering.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Shadow color.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Shadow color.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Shape high dpi.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Shape high dpi.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Shape shadow effect.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Shape shadow effect.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Shape stroke pattern border.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Shape stroke pattern border.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Shape with linked chart.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Shape with linked chart.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Signature line.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Signature line.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Smart tags.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Smart tags.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "SmartArt.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/SmartArt.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Special symbol.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Special symbol.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Spreadsheet.xlsx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Spreadsheet.xlsx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Stroke gradient outline.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Stroke gradient outline.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Structured document tag with HTML content.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Structured document tag with HTML content.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Structured document tags by id.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Structured document tags by id.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Structured document tags with building blocks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Structured document tags with building blocks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Structured document tags.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Structured document tags.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Style with alias.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Style with alias.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Styles destination.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Styles destination.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Styles source.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Styles source.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Styles.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Styles.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Subdocument.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Subdocument.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table column bookmark.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table column bookmark.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table column bookmarks.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table column bookmarks.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table column bookmarks.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table column bookmarks.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table of content template.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table of content template.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table of contents.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table of contents.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table spanning two pages.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table spanning two pages.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table with fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table with fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table with merged cells.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table with merged cells.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Table wrapped by text.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Table wrapped by text.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Tables.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Tables.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "TestShapesUnsupportedBevel.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/TestShapesUnsupportedBevel.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "TestWarningsForBevels.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/TestWarningsForBevels.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "TestWarningsForLighting.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/TestWarningsForLighting.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "TestWarningsForMaterial.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/TestWarningsForMaterial.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Text positioning operators.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Text positioning operators.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "TextBoxes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/TextBoxes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Textbox control.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Textbox control.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Textboxes in drawing canvas.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Textboxes in drawing canvas.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Theme colors.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Theme colors.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Two color gradient.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Two color gradient.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "UTF-8 characters.rtf",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/UTF-8 characters.rtf",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Unoptimized document.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Unoptimized document.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Unused styles.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Unused styles.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "VBA project.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/VBA project.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "VML conditional.htm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/VML conditional.htm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Various fields.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Various fields.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Various shapes.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Various shapes.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Vba protected.docm",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Vba protected.docm",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Versions.doc",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Versions.doc",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "WMF with image.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/WMF with image.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "WMF with text.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/WMF with text.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Web extension.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Web extension.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Word document with missing file extension",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Word document with missing file extension",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Xlsx DateTime.docx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Xlsx DateTime.docx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Xlsx Document.xlsx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Xlsx Document.xlsx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "Zip file.zip",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/Zip file.zip",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "hyph_de_CH.dic",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/hyph_de_CH.dic",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "hyph_en_US.dic",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/hyph_en_US.dic",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    },
+    {
+      "filename": "morzal.pfx",
+      "source_type": "github",
+      "source_path": "aspose-words/Aspose.Words-for-.NET:master:Examples/Data/morzal.pfx",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "available": true,
+      "unavailable_reason": null
+    }
+  ]
 }

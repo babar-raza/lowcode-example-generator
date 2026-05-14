@@ -1,21 +1,21 @@
 {
   "family": "words",
-  "updated_at": "2026-05-13T16:59:07.861892+00:00",
+  "updated_at": "2026-05-14T05:51:56.546411+00:00",
   "total_entries": 3,
-  "open_entries": 2,
-  "resolved_entries": 1,
+  "open_entries": 1,
+  "resolved_entries": 2,
   "entries": [
     {
       "scenario_id": "words-mail-merger",
       "family": "words",
-      "last_run_id": "pilot-words-20260513-173848",
+      "last_run_id": "pilot-words-20260513-220333",
       "last_failure_stage": "backlogged",
-      "root_cause": "Post-repair validation failed: ['Missing required LowCode API call: REQUIRED: template DOCX created with MERGEFIELD fields via DocumentBuilder.InsertField(\"MERGEFIELD FieldName\")']",
+      "root_cause": "Repair failed: 502 Server Error: Bad Gateway for url: https://llm.professionalize.com/v1/chat/completions",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 1,
+      "attempt_count": 2,
       "first_seen": "2026-05-13T12:45:09.865362+00:00",
-      "last_seen": "2026-05-13T12:59:56.360941+00:00",
+      "last_seen": "2026-05-13T17:12:07.284395+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-words-20260513-175418"
     },
@@ -36,16 +36,16 @@
     {
       "scenario_id": "words-report-builder",
       "family": "words",
-      "last_run_id": "pilot-words-20260513-215459",
+      "last_run_id": "pilot-words-20260513-222512",
       "last_failure_stage": "backlogged",
-      "root_cause": "Post-repair validation failed: ['Missing required LowCode API call: REQUIRED: LINQ template using <<[FieldName]>> syntax in template DOCX \u00e2\u20ac\u201d create via DocumentBuilder.Write(\"Hello, <<[Name]>>!\")']",
-      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
-      "priority": "high",
-      "attempt_count": 2,
+      "root_cause": "Unhandled exception. System.ArgumentException: A data source object must be of a visible type or implement 'System.Collections.IEnumerable'. (Parameter 'dataSource')\n   at zp.d(Object d)\n   at Kv.d(Ob",
+      "recommended_fix": "Classify runtime failure and add to repairable set or fix constraints",
+      "priority": "medium",
+      "attempt_count": 4,
       "first_seen": "2026-05-13T16:56:28.686765+00:00",
-      "last_seen": "2026-05-13T16:59:07.861363+00:00",
-      "resolved": false,
-      "resolved_in_run": null
+      "last_seen": "2026-05-14T05:51:56.545944+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-words-20260514-104648"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "dry_run": true,
-  "branch_name": "plugin-examples/words/20260513-125956",
+  "branch_name": "plugin-examples/words/20260514-055156",
   "pr_url": null,
   "pr_number": null,
   "files_included": [
@@ -8,8 +8,8 @@
     "words-converter",
     "words-mail-merger",
     "words-merger",
-    "words-processor",
     "words-replacer",
+    "words-report-builder",
     "words-splitter",
     "words-watermarker"
   ],

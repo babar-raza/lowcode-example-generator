@@ -1,53 +1,476 @@
 {
-  "total_types": 3,
-  "types_with_consumers": 1,
-  "types_without_consumers": 2,
+  "total_types": 25,
+  "types_with_consumers": 12,
+  "types_without_consumers": 13,
   "relationships": {
-    "Aspose.Email.LowCode.Converter": [],
-    "Aspose.Email.LowCode.IOutputHandler": [
+    "Aspose.Words.LowCode.SplitOptions": [
       {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "Convert",
-        "parameter_name": "handler",
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Split",
+        "parameter_name": "options",
         "is_static": true
       },
       {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertEmlOrMsg",
-        "parameter_name": "handler",
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Split",
+        "parameter_name": "options",
         "is_static": true
       },
       {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertToEml",
-        "parameter_name": "handler",
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Split",
+        "parameter_name": "options",
         "is_static": true
       },
       {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertToHtml",
-        "parameter_name": "handler",
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Split",
+        "parameter_name": "options",
         "is_static": true
       },
       {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertToMht",
-        "parameter_name": "handler",
-        "is_static": true
-      },
-      {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertToMhtml",
-        "parameter_name": "handler",
-        "is_static": true
-      },
-      {
-        "consumer_type": "Aspose.Email.LowCode.Converter",
-        "consumer_method": "ConvertToMsg",
-        "parameter_name": "handler",
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Split",
+        "parameter_name": "options",
         "is_static": true
       }
     ],
-    "Aspose.Email.LowCode.FolderOutputHandler": []
+    "Aspose.Words.LowCode.SplitterContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Splitter",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.MergeFormatMode": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Merge",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "MergeToImages",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "MergeToImages",
+        "parameter_name": "mergeFormatMode",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.MailMerger": [],
+    "Aspose.Words.LowCode.Comparer": [],
+    "Aspose.Words.LowCode.ReportBuilderOptions": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReport",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReportToImages",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "BuildReportToImages",
+        "parameter_name": "reportBuilderOptions",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.ProcessorContext": [],
+    "Aspose.Words.LowCode.Splitter": [],
+    "Aspose.Words.LowCode.Converter": [],
+    "Aspose.Words.LowCode.ReportBuilderContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.ReportBuilder",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.MailMergeOptions": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Execute",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegions",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegionsToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegionsToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegionsToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "ExecuteWithRegionsToImages",
+        "parameter_name": "mailMergeOptions",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.Merger": [],
+    "Aspose.Words.LowCode.ComparerContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Comparer",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.Replacer": [],
+    "Aspose.Words.LowCode.SplitCriteria": [],
+    "Aspose.Words.LowCode.MergerContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Merger",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.ReportBuilder": [],
+    "Aspose.Words.LowCode.Watermarker": [],
+    "Aspose.Words.LowCode.MailMergeDataSource": [],
+    "Aspose.Words.LowCode.Processor": [],
+    "Aspose.Words.LowCode.MailMergerContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.MailMerger",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.WatermarkerContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Watermarker",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.ReplacerContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Replacer",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.ConverterContext": [
+      {
+        "consumer_type": "Aspose.Words.LowCode.Converter",
+        "consumer_method": "Create",
+        "parameter_name": "context",
+        "is_static": true
+      }
+    ],
+    "Aspose.Words.LowCode.SignerContext": []
   }
 }

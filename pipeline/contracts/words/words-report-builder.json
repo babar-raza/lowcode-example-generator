@@ -1,0 +1,32 @@
+{
+  "scenario_id": "words-report-builder",
+  "family": "words",
+  "type_name": "ReportBuilder",
+  "full_type_name": "Aspose.Words.LowCode.ReportBuilder",
+  "primary_method": "BuildReport",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "ReportBuilder",
+    "ReportBuilder.BuildReport"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new ReportBuilder()"
+  ],
+  "output_expectations": {
+    "output_format": ".docx",
+    "validation_method": "docx_zip_check",
+    "notes": "Static API: ReportBuilder.BuildReport(templatePath, outputPath, dataObject). Template via DocumentBuilder.Write with LINQ markers <<[FieldName]>>. Data source must be a public named class."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/verification/latest/families/words/example-lifecycle-records.json",
+    "workspace/verification/latest/words-merge-result.json"
+  ],
+  "last_verified_at": "2026-05-14T00:00:00Z"
+}

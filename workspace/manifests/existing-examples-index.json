@@ -1,6 +1,16 @@
 {
-  "family": "email",
-  "total_examples": 0,
+  "family": "words",
+  "total_examples": 1,
   "stale_count": 0,
-  "examples": []
+  "examples": [
+    {
+      "example_id": "words:Examples/DocsExamples",
+      "source_path": "Examples/DocsExamples",
+      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "used_symbols": [],
+      "validated": false,
+      "stale": false,
+      "stale_reason": null
+    }
+  ]
 }

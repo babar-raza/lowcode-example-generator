@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "words",
-  "run_id": "pilot-words-20260513-175418",
-  "promoted_at": "2026-05-13T12:59:56.561479+00:00",
-  "source_run_path": "workspace\\runs\\pilot-words-20260513-175418\\evidence\\latest",
+  "run_id": "pilot-words-20260514-104648",
+  "promoted_at": "2026-05-14T05:51:56.675336+00:00",
+  "source_run_path": "workspace\\runs\\pilot-words-20260514-104648\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -23,7 +23,6 @@
     "plugin-type-role-classification.json",
     "pr-candidate-manifest.json",
     "publishing-report.json",
-    "repair-attempts.json",
     "reviewer-preflight.json",
     "runnable-entrypoint-scores.json",
     "scenario-feedback-updates.json",

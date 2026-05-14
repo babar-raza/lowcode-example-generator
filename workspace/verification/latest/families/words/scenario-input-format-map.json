@@ -41,21 +41,21 @@
       "blocked_if_unclear": false
     },
     {
-      "scenario_id": "words-processor",
-      "workflow_type": "Processor",
-      "selected_input_format": ".docx",
-      "selected_output_format": ".docx",
-      "reason": "Inferred from type name Processor",
-      "source": "input_format_map",
-      "confidence": "medium",
-      "blocked_if_unclear": false
-    },
-    {
       "scenario_id": "words-replacer",
       "workflow_type": "Replacer",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
       "reason": "Inferred from type name Replacer",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "workflow_type": "ReportBuilder",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name ReportBuilder",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

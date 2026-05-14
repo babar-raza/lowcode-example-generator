@@ -1,20 +1,18 @@
 {
   "simulation_type": "publish_pr_live_result",
-  "publish_date": "2026-05-13T15:30:26+00:00",
+  "publish_date": "2026-05-14T05:54:37+00:00",
   "family": "pdf",
   "dry_run": false,
   "live_pr_created": true,
   "live_push_performed": true,
-  "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/2",
-  "pr_number": 2,
-  "branch_name": "plugin-examples/pdf/20260513-152958",
-  "files_committed": 20,
+  "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/4",
+  "pr_number": 4,
+  "branch_name": "plugin-examples/pdf/20260514-055423",
+  "files_committed": 10,
   "pr_title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
-  "examples_count": 3,
+  "examples_count": 1,
   "example_names": [
-    "pdfa-converter",
-    "splitter",
-    "text-extractor"
+    "optimizer"
   ],
   "nuget_version": "26.4.0",
   "target_owner": "aspose-pdf-net",

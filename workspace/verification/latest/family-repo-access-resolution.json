@@ -1,15 +1,15 @@
 {
   "resolution_type": "github_repo_access_resolution",
-  "resolution_date": "2026-05-13T16:56:25+00:00",
+  "resolution_date": "2026-05-14T06:03:03+00:00",
   "sprint": "Repo Access Resolution and Repeatable Target Provisioning Sprint",
   "token_present": true,
   "families": [
     {
-      "family": "email",
-      "owner": "aspose-email-net",
-      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+      "family": "words",
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
       "branch": "main",
-      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\email.yml",
+      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\words.yml",
       "error_classification": "repo_access_ok",
       "can_read": true,
       "can_push": true,
@@ -25,48 +25,13 @@
       },
       "http_status": 200,
       "org_probe": {
-        "org": "aspose-email-net",
+        "org": "aspose-words-net",
         "org_exists": true,
         "member_role": "admin",
         "can_create_repos": true,
         "http_status_org": 200,
         "http_status_membership": 200,
-        "interpretation": "Org 'aspose-email-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
-      },
-      "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
-      "config_ready": true,
-      "repo_access_ready": true,
-      "pr_permission_ready": true,
-      "live_publish_ready": false
-    },
-    {
-      "family": "slides",
-      "owner": "aspose-slides-net",
-      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
-      "branch": "main",
-      "config_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\families\\slides.yml",
-      "error_classification": "repo_access_ok",
-      "can_read": true,
-      "can_push": true,
-      "default_branch": "main",
-      "visibility": "public",
-      "branch_exists": true,
-      "permissions_object": {
-        "admin": true,
-        "maintain": true,
-        "push": true,
-        "triage": true,
-        "pull": true
-      },
-      "http_status": 200,
-      "org_probe": {
-        "org": "aspose-slides-net",
-        "org_exists": true,
-        "member_role": "admin",
-        "can_create_repos": true,
-        "http_status_org": 200,
-        "http_status_membership": 200,
-        "interpretation": "Org 'aspose-slides-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
+        "interpretation": "Org 'aspose-words-net' exists. Member role=admin. can_create_repos=True (requires admin role in org)."
       },
       "interpretation": "Repo accessible. visibility=public, default_branch=main, can_push=True",
       "config_ready": true,
@@ -76,12 +41,11 @@
     }
   ],
   "summary": {
-    "total_checked": 2,
-    "accessible": 2,
+    "total_checked": 1,
+    "accessible": 1,
     "blocked": 0,
     "accessible_families": [
-      "email",
-      "slides"
+      "words"
     ],
     "blocked_families": [],
     "live_publish_allowed": false,

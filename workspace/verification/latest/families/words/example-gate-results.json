@@ -1,11 +1,11 @@
 {
   "total_examples": 8,
-  "publish_candidates": 7,
-  "blocked_examples": 1,
+  "publish_candidates": 8,
+  "blocked_examples": 0,
   "examples": [
     {
       "scenario_id": "words-comparer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-comparer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -17,7 +17,7 @@
     },
     {
       "scenario_id": "words-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -29,7 +29,7 @@
     },
     {
       "scenario_id": "words-mail-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-mail-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -41,7 +41,7 @@
     },
     {
       "scenario_id": "words-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -52,20 +52,20 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-processor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-processor",
+      "scenario_id": "words-replacer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer",
       "restore_status": "passed",
-      "build_status": "failed",
-      "run_status": "not_evaluated",
-      "output_validation_status": "not_evaluated",
-      "reviewer_status": "not_evaluated",
-      "publish_candidate": false,
-      "blocked_reason": "Build failed",
-      "final_example_verdict": "EXAMPLE_BLOCKED_BUILD_FAILED"
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-replacer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-replacer",
+      "scenario_id": "words-report-builder",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -77,7 +77,7 @@
     },
     {
       "scenario_id": "words-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -89,7 +89,7 @@
     },
     {
       "scenario_id": "words-watermarker",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260513-175418\\generated\\words\\words-watermarker",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",

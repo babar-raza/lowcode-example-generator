@@ -41,7 +41,7 @@
   ],
   "workflow_root_runnable_count": 25,
   "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 25 WORKFLOW_ROOT type names",
-  "published_count": 4,
+  "published_count": 5,
   "published_scenario_ids": [
     "pdf-merger",
     "pdf-text-extractor"
@@ -53,7 +53,7 @@
     "pdf-pdfa-converter"
   ],
   "pr_dry_run_ready_basis": "Splitter: workspace/pr-dry-run/pdf-controlled-pilot-wave1/ validated. PdfAConverter: run pilot-pdf-20260513-181803 PASSED (5/5 all types). Both awaiting APPROVE_LIVE_PR.",
-  "reviewer_passed_awaiting_pr_count": 1,
+  "reviewer_passed_awaiting_pr_count": 0,
   "reviewer_passed_awaiting_pr_ids": [
     "pdf-optimizer"
   ],

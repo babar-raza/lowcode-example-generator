@@ -1,64 +1,532 @@
 {
-  "total_examples": 1,
-  "generated": 0,
-  "repaired": 1,
+  "total_examples": 8,
+  "generated": 4,
+  "repaired": 4,
   "failed": 0,
   "examples": [
     {
-      "scenario_id": "email-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260513-220337\\generated\\email\\email-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260513-220337\\generated\\email\\email-converter\\email-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260513-220337\\generated\\email\\email-converter\\Program.cs",
+      "scenario_id": "words-comparer",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer\\words-comparer.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer\\Program.cs",
       "target_framework": "net8.0",
-      "package_id": "Aspose.Email",
+      "package_id": "Aspose.Words",
       "claimed_symbols": [
-        "Aspose.Email.LowCode.Converter",
-        "Aspose.Email.LowCode.Converter.Convert",
-        "Aspose.Email.LowCode.Converter.ConvertEmlOrMsg",
-        "Aspose.Email.LowCode.Converter.ConvertToEml",
-        "Aspose.Email.LowCode.Converter.ConvertToHtml",
-        "Aspose.Email.LowCode.Converter.ConvertToMht",
-        "Aspose.Email.LowCode.Converter.ConvertToMhtml",
-        "Aspose.Email.LowCode.Converter.ConvertToMsg"
+        "Aspose.Words.LowCode.Comparer",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.Compare",
+        "Aspose.Words.LowCode.Comparer.CompareToImages",
+        "Aspose.Words.LowCode.Comparer.CompareToImages",
+        "Aspose.Words.LowCode.Comparer.CompareToImages",
+        "Aspose.Words.LowCode.Comparer.CompareToImages",
+        "Aspose.Words.LowCode.Comparer.Create",
+        "Aspose.Words.LowCode.Comparer.Create"
       ],
       "status": "repaired",
-      "input_strategy": "programmatic_input",
-      "input_files": [],
-      "placed_fixtures": [],
-      "pdf_constraints": [
-        "REQUIRED: using Aspose.Email.LowCode;",
-        "REQUIRED: using System.IO; (for File.ReadAllBytes, MemoryStream, Directory.CreateDirectory)",
-        "REQUIRED: async Task Main(string[] args) \u00e2\u20ac\u201d ConvertToHtml is async and MUST be awaited",
-        "REQUIRED: await Converter.ConvertToHtml(stream, fileName, outputHandler) \u00e2\u20ac\u201d async call with await",
-        "REQUIRED: var stream = new MemoryStream(File.ReadAllBytes(\"input.eml\")); \u00e2\u20ac\u201d wrap file bytes in MemoryStream",
-        "REQUIRED: var outputHandler = new FolderOutputHandler(outputDir); \u00e2\u20ac\u201d IOutputHandler implementation for folder output",
-        "REQUIRED: Directory.CreateDirectory(outputDir); \u00e2\u20ac\u201d create output directory before passing to FolderOutputHandler",
-        "REQUIRED: input .eml file created via RFC 2822 string: From: / To: / Subject: / Content-Type: / blank line / body",
-        "FORBIDDEN: MailMessage.Save() as the primary operation \u00e2\u20ac\u201d use LowCode Converter.ConvertToHtml()",
-        "FORBIDDEN: Converter.ConvertToHtml(inputFilePath, outputFilePath) \u00e2\u20ac\u201d output is NOT a file path; use IOutputHandler (FolderOutputHandler)",
-        "FORBIDDEN: new Converter() \u00e2\u20ac\u201d Converter.ConvertToHtml() is static async, call directly with await",
-        "FORBIDDEN: synchronous void Main() when using async Converter \u00e2\u20ac\u201d must be async Task Main()",
-        "FORBIDDEN: IOutputHandler custom implementation \u00e2\u20ac\u201d use FolderOutputHandler(directory) which is the concrete impl"
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
       ],
-      "family_name": "email",
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: Comparer.Compare(v1, v2, outputFile, author, DateTime.UtcNow) \u00e2\u20ac\u201d static call",
+        "REQUIRED: 2 input DOCX files with DIFFERENT content for comparison to produce meaningful output",
+        "FORBIDDEN: Document.Compare() replacing Comparer.Compare() \u00e2\u20ac\u201d use LowCode Comparer",
+        "FORBIDDEN: new Comparer().Compare() \u00e2\u20ac\u201d Comparer.Compare() is static, call directly"
+      ],
+      "family_name": "words",
+      "type_short": "comparer",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: using Aspose.Words;",
+          "REQUIRED: Comparer.Compare(v1, v2, outputFile, author, DateTime.UtcNow) \u00e2\u20ac\u201d static call",
+          "REQUIRED: 2 input DOCX files with DIFFERENT content for comparison to produce meaningful output"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Document.Compare() replacing Comparer.Compare() \u00e2\u20ac\u201d use LowCode Comparer",
+          "FORBIDDEN: new Comparer().Compare() \u00e2\u20ac\u201d Comparer.Compare() is static, call directly"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-converter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter\\words-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.Converter",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.Convert",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.ConvertToImages",
+        "Aspose.Words.LowCode.Converter.Create",
+        "Aspose.Words.LowCode.Converter.Create"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: Converter.Convert(inputFile, outputFile) \u00e2\u20ac\u201d NOT Document.Save()",
+        "FORBIDDEN: Document.Save() as the primary operation \u00e2\u20ac\u201d always use LowCode Converter.Convert()"
+      ],
+      "family_name": "words",
       "type_short": "converter",
       "type_constraints": {
         "required": [
-          "REQUIRED: using Aspose.Email.LowCode;",
-          "REQUIRED: using System.IO; (for File.ReadAllBytes, MemoryStream, Directory.CreateDirectory)",
-          "REQUIRED: async Task Main(string[] args) \u00e2\u20ac\u201d ConvertToHtml is async and MUST be awaited",
-          "REQUIRED: await Converter.ConvertToHtml(stream, fileName, outputHandler) \u00e2\u20ac\u201d async call with await",
-          "REQUIRED: var stream = new MemoryStream(File.ReadAllBytes(\"input.eml\")); \u00e2\u20ac\u201d wrap file bytes in MemoryStream",
-          "REQUIRED: var outputHandler = new FolderOutputHandler(outputDir); \u00e2\u20ac\u201d IOutputHandler implementation for folder output",
-          "REQUIRED: Directory.CreateDirectory(outputDir); \u00e2\u20ac\u201d create output directory before passing to FolderOutputHandler",
-          "REQUIRED: input .eml file created via RFC 2822 string: From: / To: / Subject: / Content-Type: / blank line / body"
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: Converter.Convert(inputFile, outputFile) \u00e2\u20ac\u201d NOT Document.Save()"
         ],
         "forbidden": [
-          "FORBIDDEN: MailMessage.Save() as the primary operation \u00e2\u20ac\u201d use LowCode Converter.ConvertToHtml()",
-          "FORBIDDEN: Converter.ConvertToHtml(inputFilePath, outputFilePath) \u00e2\u20ac\u201d output is NOT a file path; use IOutputHandler (FolderOutputHandler)",
-          "FORBIDDEN: new Converter() \u00e2\u20ac\u201d Converter.ConvertToHtml() is static async, call directly with await",
-          "FORBIDDEN: synchronous void Main() when using async Converter \u00e2\u20ac\u201d must be async Task Main()",
-          "FORBIDDEN: IOutputHandler custom implementation \u00e2\u20ac\u201d use FolderOutputHandler(directory) which is the concrete impl"
+          "FORBIDDEN: Document.Save() as the primary operation \u00e2\u20ac\u201d always use LowCode Converter.Convert()"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger\\words-mail-merger.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.MailMerger",
+        "Aspose.Words.LowCode.MailMerger.Create",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.Execute",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegions",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegionsToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegionsToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegionsToImages",
+        "Aspose.Words.LowCode.MailMerger.ExecuteWithRegionsToImages"
+      ],
+      "status": "repaired",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: MailMerger.Execute(templateFile, outputFile, fieldNames, fieldValues) \u00e2\u20ac\u201d static string-array overload",
+        "REQUIRED: string[] fieldNames = { \"FirstName\", \"LastName\" }; \u00e2\u20ac\u201d array of merge field names",
+        "REQUIRED: string[] fieldValues = { \"John\", \"Doe\" }; \u00e2\u20ac\u201d array of merge field values",
+        "REQUIRED: InsertField(\"MERGEFIELD \u00e2\u20ac\u201d create MERGEFIELD fields in template via DocumentBuilder.InsertField",
+        "FORBIDDEN: Document.MailMerge.Execute() \u00e2\u20ac\u201d use LowCode MailMerger.Execute() static method",
+        "FORBIDDEN: IMailMergeDataSource \u00e2\u20ac\u201d NOT needed; string array overload is sufficient",
+        "FORBIDDEN: MailMergeDataSource class \u00e2\u20ac\u201d use string[] fieldNames + string[] fieldValues instead",
+        "FORBIDDEN: new MailMerger() \u00e2\u20ac\u201d MailMerger.Execute() is static, call directly"
+      ],
+      "family_name": "words",
+      "type_short": "mailmerger",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: using Aspose.Words;",
+          "REQUIRED: MailMerger.Execute(templateFile, outputFile, fieldNames, fieldValues) \u00e2\u20ac\u201d static string-array overload",
+          "REQUIRED: string[] fieldNames = { \"FirstName\", \"LastName\" }; \u00e2\u20ac\u201d array of merge field names",
+          "REQUIRED: string[] fieldValues = { \"John\", \"Doe\" }; \u00e2\u20ac\u201d array of merge field values",
+          "REQUIRED: InsertField(\"MERGEFIELD \u00e2\u20ac\u201d create MERGEFIELD fields in template via DocumentBuilder.InsertField"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Document.MailMerge.Execute() \u00e2\u20ac\u201d use LowCode MailMerger.Execute() static method",
+          "FORBIDDEN: IMailMergeDataSource \u00e2\u20ac\u201d NOT needed; string array overload is sufficient",
+          "FORBIDDEN: MailMergeDataSource class \u00e2\u20ac\u201d use string[] fieldNames + string[] fieldValues instead",
+          "FORBIDDEN: new MailMerger() \u00e2\u20ac\u201d MailMerger.Execute() is static, call directly"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-merger",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger\\words-merger.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.Merger",
+        "Aspose.Words.LowCode.Merger.Create",
+        "Aspose.Words.LowCode.Merger.Create",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.Merge",
+        "Aspose.Words.LowCode.Merger.MergeToImages",
+        "Aspose.Words.LowCode.Merger.MergeToImages"
+      ],
+      "status": "repaired",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: Merger.Merge(outputFile, inputFiles) \u00e2\u20ac\u201d static call, NOT new Merger().Merge()",
+        "REQUIRED: 2 input DOCX files created programmatically via Document+DocumentBuilder",
+        "FORBIDDEN: Document.AppendDocument() replacing Merger.Merge() \u00e2\u20ac\u201d use LowCode Merger",
+        "FORBIDDEN: new Merger().Merge() \u00e2\u20ac\u201d Merger.Merge() is static, call directly"
+      ],
+      "family_name": "words",
+      "type_short": "merger",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: using Aspose.Words;",
+          "REQUIRED: Merger.Merge(outputFile, inputFiles) \u00e2\u20ac\u201d static call, NOT new Merger().Merge()",
+          "REQUIRED: 2 input DOCX files created programmatically via Document+DocumentBuilder"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Document.AppendDocument() replacing Merger.Merge() \u00e2\u20ac\u201d use LowCode Merger",
+          "FORBIDDEN: new Merger().Merge() \u00e2\u20ac\u201d Merger.Merge() is static, call directly"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-replacer",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer\\words-replacer.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.Replacer",
+        "Aspose.Words.LowCode.Replacer.Create",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.Replace",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages",
+        "Aspose.Words.LowCode.Replacer.ReplaceToImages"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: Replacer.Replace(inputFile, outputFile, pattern, replacement)",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u00e2\u20ac\u201d use LowCode Replacer"
+      ],
+      "family_name": "words",
+      "type_short": "replacer",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: Replacer.Replace(inputFile, outputFile, pattern, replacement)"
+        ],
+        "forbidden": [
+          "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u00e2\u20ac\u201d use LowCode Replacer"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder\\words-report-builder.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.ReportBuilder",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReport",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReportToImages",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReportToImages",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReportToImages",
+        "Aspose.Words.LowCode.ReportBuilder.BuildReportToImages",
+        "Aspose.Words.LowCode.ReportBuilder.Create",
+        "Aspose.Words.LowCode.ReportBuilder.Create"
+      ],
+      "status": "repaired",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: using Aspose.Words;",
+        "REQUIRED: ReportBuilder.BuildReport(templateFile, outputFile, dataObject) \u00e2\u20ac\u201d static method",
+        "REQUIRED: <<[ \u00e2\u20ac\u201d LINQ syntax marker in template DOCX (e.g. <<[Name]>>)",
+        "REQUIRED: new DocumentBuilder \u00e2\u20ac\u201d create template DOCX using DocumentBuilder before calling BuildReport",
+        "REQUIRED: public class \u00e2\u20ac\u201d data source must be a public named class with public properties, NOT anonymous new {} object",
+        "FORBIDDEN: Document.Save() replacing ReportBuilder.BuildReport() \u00e2\u20ac\u201d always use LowCode ReportBuilder",
+        "FORBIDDEN: new ReportBuilder() \u00e2\u20ac\u201d ReportBuilder.BuildReport() is static, no constructor",
+        "FORBIDDEN: {{ FieldName }} or {FieldName} template syntax \u00e2\u20ac\u201d use LINQ <<[FieldName]>> only",
+        "FORBIDDEN: MailMerge MERGEFIELD syntax in ReportBuilder template \u00e2\u20ac\u201d use LINQ <<[FieldName]>> only",
+        "FORBIDDEN: Aspose.Words.Reporting namespace direct use \u00e2\u20ac\u201d let ReportBuilder handle LINQ engine invocation",
+        "FORBIDDEN: anonymous object new {} as data source \u00e2\u20ac\u201d anonymous types cause System.ArgumentException at runtime; always use a public class instance"
+      ],
+      "family_name": "words",
+      "type_short": "reportbuilder",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: using Aspose.Words;",
+          "REQUIRED: ReportBuilder.BuildReport(templateFile, outputFile, dataObject) \u00e2\u20ac\u201d static method",
+          "REQUIRED: <<[ \u00e2\u20ac\u201d LINQ syntax marker in template DOCX (e.g. <<[Name]>>)",
+          "REQUIRED: new DocumentBuilder \u00e2\u20ac\u201d create template DOCX using DocumentBuilder before calling BuildReport",
+          "REQUIRED: public class \u00e2\u20ac\u201d data source must be a public named class with public properties, NOT anonymous new {} object"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Document.Save() replacing ReportBuilder.BuildReport() \u00e2\u20ac\u201d always use LowCode ReportBuilder",
+          "FORBIDDEN: new ReportBuilder() \u00e2\u20ac\u201d ReportBuilder.BuildReport() is static, no constructor",
+          "FORBIDDEN: {{ FieldName }} or {FieldName} template syntax \u00e2\u20ac\u201d use LINQ <<[FieldName]>> only",
+          "FORBIDDEN: MailMerge MERGEFIELD syntax in ReportBuilder template \u00e2\u20ac\u201d use LINQ <<[FieldName]>> only",
+          "FORBIDDEN: Aspose.Words.Reporting namespace direct use \u00e2\u20ac\u201d let ReportBuilder handle LINQ engine invocation",
+          "FORBIDDEN: anonymous object new {} as data source \u00e2\u20ac\u201d anonymous types cause System.ArgumentException at runtime; always use a public class instance"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-splitter",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter\\words-splitter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.Splitter",
+        "Aspose.Words.LowCode.Splitter.Create",
+        "Aspose.Words.LowCode.Splitter.ExtractPages",
+        "Aspose.Words.LowCode.Splitter.ExtractPages",
+        "Aspose.Words.LowCode.Splitter.ExtractPages",
+        "Aspose.Words.LowCode.Splitter.ExtractPages",
+        "Aspose.Words.LowCode.Splitter.ExtractPages",
+        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
+        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
+        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
+        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
+        "Aspose.Words.LowCode.Splitter.RemoveBlankPages",
+        "Aspose.Words.LowCode.Splitter.Split",
+        "Aspose.Words.LowCode.Splitter.Split",
+        "Aspose.Words.LowCode.Splitter.Split",
+        "Aspose.Words.LowCode.Splitter.Split",
+        "Aspose.Words.LowCode.Splitter.Split"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: Splitter.ExtractPages(inputFile, outputFile, pageIndex)",
+        "FORBIDDEN: Document.Save() replacing Splitter.ExtractPages() \u00e2\u20ac\u201d use LowCode Splitter"
+      ],
+      "family_name": "words",
+      "type_short": "splitter",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: Splitter.ExtractPages(inputFile, outputFile, pageIndex)"
+        ],
+        "forbidden": [
+          "FORBIDDEN: Document.Save() replacing Splitter.ExtractPages() \u00e2\u20ac\u201d use LowCode Splitter"
+        ]
+      }
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker\\words-watermarker.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.Words",
+      "claimed_symbols": [
+        "Aspose.Words.LowCode.Watermarker",
+        "Aspose.Words.LowCode.Watermarker.Create",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetImage",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetText",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
+        "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages"
+      ],
+      "status": "generated",
+      "input_strategy": "generated_fixture_file",
+      "input_files": [
+        "input.docx"
+      ],
+      "placed_fixtures": [
+        "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker\\input.docx"
+      ],
+      "pdf_constraints": [
+        "REQUIRED: using Aspose.Words.LowCode;",
+        "REQUIRED: Watermarker.SetText(inputFile, outputFile, watermarkText)",
+        "FORBIDDEN: manually adding watermark shapes to document.xml \u00e2\u20ac\u201d use LowCode Watermarker.SetText()"
+      ],
+      "family_name": "words",
+      "type_short": "watermarker",
+      "type_constraints": {
+        "required": [
+          "REQUIRED: using Aspose.Words.LowCode;",
+          "REQUIRED: Watermarker.SetText(inputFile, outputFile, watermarkText)"
+        ],
+        "forbidden": [
+          "FORBIDDEN: manually adding watermark shapes to document.xml \u00e2\u20ac\u201d use LowCode Watermarker.SetText()"
         ]
       }
     }

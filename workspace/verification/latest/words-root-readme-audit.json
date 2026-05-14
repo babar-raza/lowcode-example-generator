@@ -1,6 +1,6 @@
 {
   "audit_type": "root_readme_audit",
-  "audit_date": "2026-05-13 17:06 UTC",
+  "audit_date": "2026-05-14 06:15 UTC",
   "family": "words",
   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
@@ -21,6 +21,6 @@
   "warnings": [],
   "expected_version": "26.4.0",
   "found_version": "26.4.0",
-  "expected_example_count": 7,
-  "found_example_count": 7
+  "expected_example_count": 8,
+  "found_example_count": 8
 }

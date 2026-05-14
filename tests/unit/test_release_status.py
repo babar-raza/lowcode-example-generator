@@ -372,22 +372,22 @@ class TestReleaseStatusAllFamilies:
         by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
         assert by_family["cells"] == "FAMILY_COMPLETE"
         assert by_family["words"] == "PILOT_COMPLETE"
-        assert by_family["pdf"] == "PARTIAL_CANARY"
+        assert by_family["pdf"] == "PILOT_COMPLETE"
         assert by_family["diagram"] == "PILOT_COMPLETE"
-        assert by_family["email"] == "DISCOVERY_ONLY"
-        assert by_family["slides"] == "DISCOVERY_ONLY"
+        assert by_family["email"] == "PILOT_COMPLETE"
+        assert by_family["slides"] == "PILOT_COMPLETE"
 
         coverage = {r["family"]: r["family_coverage_status"] for r in status["families"]}
         assert coverage["words"] == "PARTIAL_FAMILY_COVERAGE"
         assert coverage["pdf"] == "PARTIAL_FAMILY_COVERAGE"
 
     def test_discovery_only_next_action_does_not_request_live_pr(self):
+        # Email and Slides are now PILOT_COMPLETE (activated in Sprint 6)
         from plugin_examples.publisher.release_status import compute_release_status
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(["email", "slides"], repo_root / "workspace" / "verification")
         for rec in status["families"]:
-            assert rec["release_scope_status"] == "DISCOVERY_ONLY"
-            assert "do not create live PR" in rec["next_required_action"]
+            assert rec["release_scope_status"] == "PILOT_COMPLETE"
 
     def test_release_status_output_has_generated_at(self, tmp_path):
         """compute_release_status must include generated_at ISO timestamp."""

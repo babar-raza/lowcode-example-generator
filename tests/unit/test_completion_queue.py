@@ -83,7 +83,7 @@ class TestQueueFileIntegrity:
 
     def test_families_are_valid(self, entries):
         for entry in entries:
-            assert entry["family"] in ("cells", "words", "pdf", "diagram"), (
+            assert entry["family"] in ("cells", "words", "pdf", "diagram", "email", "slides"), (
                 f"Entry {entry['scenario_id']} has invalid family: {entry['family']}"
             )
 
@@ -131,7 +131,7 @@ class TestQueueCoversDenominator:
     def test_active_pipeline_entries_match_denominator(self, entries):
         # Active (non-BACKLOGGED) entries across all families with denominators
         expected_active = 0
-        for family in ("cells", "words", "pdf", "diagram"):
+        for family in ("cells", "words", "pdf", "diagram", "email", "slides"):
             denom_path = _DENOMINATOR_DIR / f"{family}.json"
             if not denom_path.exists():
                 continue
@@ -161,7 +161,7 @@ class TestQueueCoversDenominator:
         # Words Wave 3: MailMerger moved BACKLOGGED->PR_READY; Processor reclassified PERMANENTLY_BLOCKED
         # PDF Wave A: PdfAConverter moved BACKLOGGED->PR_READY in run pilot-pdf-20260513-181803
         assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 26, f"Expected at least 26 backlogged entries, got {len(backlogged)}"
+        assert len(backlogged) >= 25, f"Expected at least 25 backlogged entries, got {len(backlogged)}"
         assert len(permanently_blocked) >= 1, "Expected at least 1 PERMANENTLY_BLOCKED entry (Processor)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 
@@ -221,7 +221,7 @@ class TestQueueStateConsistency:
 
     def test_pdf_optimizer_is_reviewed(self, entries):
         queue_dict = {e["scenario_id"]: e for e in entries}
-        assert queue_dict["pdf-optimizer"]["state"] == "REVIEWED"
+        assert queue_dict["pdf-optimizer"]["state"] == "POST_MERGE_VERIFIED"
 
     def test_state_summary_counts_match_entries(self, queue, entries):
         actual_counts: dict[str, int] = {}

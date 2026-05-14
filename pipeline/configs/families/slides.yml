@@ -83,9 +83,8 @@ per_type_constraints:
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
       - "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
-      - "REQUIRED: using Aspose.Slides.Export; (for SaveFormat)"
       - "REQUIRED: Convert.ToPdf(presPath, outputPath) — file-path overload, no Presentation object needed"
-      - "REQUIRED: input PPTX created programmatically via new Presentation() + AddEmptySlide + Save()"
+      - "REQUIRED: new Presentation() — create input PPTX programmatically before calling Convert"
     forbidden:
       - "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() — use LowCode Convert"
       - "FORBIDDEN: new Convert() — Convert methods are static, call Convert.ToPdf() directly"
@@ -94,20 +93,18 @@ per_type_constraints:
       - "REQUIRED: using Aspose.Slides.LowCode;"
       - "REQUIRED: using Aspose.Slides; (for loading Presentation)"
       - "REQUIRED: using Aspose.Slides.Export; (for SaveFormat)"
-      - "REQUIRED: var pres = new Presentation(inputPath); — load presentation as object first"
-      - "REQUIRED: Compress.RemoveUnusedLayoutSlides(pres) OR Compress.RemoveUnusedMasterSlides(pres) OR Compress.CompressEmbeddedFonts(pres) — call Compress method on the Presentation object"
-      - "REQUIRED: pres.Save(outputPath, SaveFormat.Pptx); — MUST call pres.Save() AFTER Compress methods (Compress mutates object in-place, output is NOT automatic)"
+      - "REQUIRED: new Presentation(inputPath) — load presentation as Presentation object first"
+      - "REQUIRED: Compress.RemoveUnusedLayoutSlides(pres) — call this Compress method on the Presentation object"
+      - "REQUIRED: pres.Save(outputPath, SaveFormat.Pptx) — MUST call pres.Save() AFTER Compress"
     forbidden:
-      - "FORBIDDEN: return or exit after calling Compress without calling pres.Save() — the presentation will NOT be saved"
-      - "FORBIDDEN: Compress.RemoveUnusedLayoutSlides(inputPath, outputPath) — Compress takes Presentation OBJECT, not file path strings"
-      - "FORBIDDEN: Manual slide manipulation replacing Compress methods — use LowCode Compress"
       - "FORBIDDEN: new Compress() — Compress methods are static"
+      - "FORBIDDEN: Manual slide manipulation replacing Compress methods — use LowCode Compress"
   Merger:
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
       - "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)"
       - "REQUIRED: Merger.Process(new string[] { input1, input2 }, outputPath) — static array overload"
-      - "REQUIRED: 2 input PPTX files created programmatically via Presentation + AddEmptySlide + Save()"
+      - "REQUIRED: new Presentation() — create 2 input PPTX files programmatically"
     forbidden:
       - "FORBIDDEN: Manual slide copy replacing Merger.Process() — use LowCode Merger"
       - "FORBIDDEN: new Merger() — Merger.Process() is static, call directly"

@@ -1,18 +1,19 @@
 {
   "render_type": "root_readme_render_result",
-  "render_date": "2026-05-13 17:06 UTC",
+  "render_date": "2026-05-14 06:15 UTC",
   "family": "words",
   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
-  "readme_bytes": 4928,
+  "readme_bytes": 5092,
   "package_version": "26.4.0",
-  "examples_count": 7,
+  "examples_count": 8,
   "example_names": [
     "comparer",
     "converter",
     "mail-merger",
     "merger",
     "replacer",
+    "report-builder",
     "splitter",
     "watermarker"
   ],

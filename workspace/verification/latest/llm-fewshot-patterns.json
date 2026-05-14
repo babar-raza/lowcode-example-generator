@@ -1,14 +1,70 @@
 {
-  "total_patterns": 1,
+  "total_patterns": 8,
   "verified_passing": 0,
   "patterns": [
     {
-      "scenario_id": "email-converter",
-      "uses_basedir": false,
+      "scenario_id": "words-comparer",
+      "uses_basedir": true,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-converter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-merger",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "uses_basedir": true,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "generated_fixture_file"
     }
   ]
 }

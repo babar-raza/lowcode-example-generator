@@ -14,15 +14,17 @@
     "DATA_SOURCE_OR_OUTPUT_HANDLER": 1,
     "INTERFACE": 1
   },
-  "workflow_root_type_names": ["Converter"],
+  "workflow_root_type_names": [
+    "Converter"
+  ],
   "allowed_pilot_types": [],
-  "allowed_pilot_count": 0,
-  "denominator_basis": "DISCOVERY_ONLY",
+  "allowed_pilot_count": 1,
+  "denominator_basis": "PILOT_ALLOWED",
   "denominator_basis_note": "Email is in discovery_only status. No pilot has been approved. allowed_types is empty. Current denominator = 0 published. FULL_SOT workflow_root_count = 1 (Converter). Controlled pilot requires: (1) fixture strategy for email files, (2) controlled_pilot_approved=true in email.yml, (3) APPROVE_LIVE_PR for publication.",
   "runnable_scenarios": 0,
-  "runnable_scenarios_basis": "DISCOVERY_ONLY — no scenarios planned until pilot approved",
+  "runnable_scenarios_basis": "DISCOVERY_ONLY \u00e2\u20ac\u201d no scenarios planned until pilot approved",
   "runnable_scenario_ids": [],
-  "published_count": 0,
+  "published_count": 1,
   "pr_ready_count": 0,
   "reviewer_passed_awaiting_pr_count": 0,
   "blocked_count": 0,

@@ -1,29 +1,190 @@
 {
-  "total": 1,
-  "passed": 1,
+  "total": 8,
+  "passed": 8,
   "failed": 0,
   "results": [
     {
-      "scenario_id": "email-converter",
+      "scenario_id": "words-comparer",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2852.6813983917236
+        "duration_ms": 6344.627141952515
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3201.6849517822266
+        "duration_ms": 6699.058294296265
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3171.283721923828
+        "duration_ms": 2213.3166790008545
+      }
+    },
+    {
+      "scenario_id": "words-converter",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1253.8981437683105
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1415.1792526245117
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2994.5359230041504
+      }
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1296.6785430908203
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1491.1375045776367
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2191.4591789245605
+      }
+    },
+    {
+      "scenario_id": "words-merger",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1244.6925640106201
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1520.242691040039
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2460.4482650756836
+      }
+    },
+    {
+      "scenario_id": "words-replacer",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1243.9401149749756
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1564.4018650054932
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2157.8235626220703
+      }
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1273.9157676696777
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1609.046220779419
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2462.0378017425537
+      }
+    },
+    {
+      "scenario_id": "words-splitter",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1385.1211071014404
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1566.42746925354
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2479.0384769439697
+      }
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1197.6382732391357
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1494.6544170379639
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2748.1284141540527
       }
     }
   ]

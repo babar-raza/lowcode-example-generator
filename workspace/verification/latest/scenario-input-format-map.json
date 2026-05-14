@@ -1,11 +1,81 @@
 {
   "scenarios": [
     {
-      "scenario_id": "email-converter",
+      "scenario_id": "words-comparer",
+      "workflow_type": "Comparer",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name Comparer",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-converter",
       "workflow_type": "Converter",
-      "selected_input_format": ".eml",
+      "selected_input_format": ".docx",
       "selected_output_format": ".pdf",
       "reason": "Inferred from type name Converter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "workflow_type": "MailMerger",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name MailMerger",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-merger",
+      "workflow_type": "Merger",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Merger",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-replacer",
+      "workflow_type": "Replacer",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name Replacer",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "workflow_type": "ReportBuilder",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name ReportBuilder",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-splitter",
+      "workflow_type": "Splitter",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Splitter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "workflow_type": "Watermarker",
+      "selected_input_format": ".docx",
+      "selected_output_format": ".docx",
+      "reason": "Inferred from type name Watermarker",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

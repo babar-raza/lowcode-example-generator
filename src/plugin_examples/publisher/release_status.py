@@ -158,8 +158,8 @@ def _get_next_action(family: str, post_merge_status: str, merge_sha: str | None)
         "cells": "monitor_for_package_updates — all examples published",
         "pdf": "resolve_open_taskcards_for_pilot_expansion (followup-pdf-* series)",
         "diagram": "monitor_for_package_updates — pilot examples published",
-        "email": "pilot_not_yet_launched — status discovery_only; see followup-email-controlled-pilot-planning",
-        "slides": "pilot_not_yet_launched — status discovery_only; see followup-slides-controlled-pilot-planning",
+        "email": "expand_email_pilot — Converter published; expand to additional Email LowCode types",
+        "slides": "expand_slides_pilot — Compress/Convert/Merger published; expand to additional Slides LowCode types",
     }
     return _family_actions.get(family, f"monitor — {family} pilot complete")
 
@@ -195,7 +195,9 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         # Latest published version from live PR result
         live_pr = _load_json(latest / f"{family}-live-pr-result.json")
         published_version = live_pr.get("nuget_version")
-        published_count = live_pr.get("examples_count", 0)
+        # Use denominator published_count as authoritative cumulative total;
+        # fall back to last-PR examples_count for families without a denominator entry.
+        published_count = denominator.get("published_count") or live_pr.get("examples_count", 0)
         last_pr_url = live_pr.get("pr_url")
         last_pr_number = live_pr.get("pr_number")
 

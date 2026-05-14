@@ -54,12 +54,13 @@
     "pdf-text-extractor"
   ],
   "published_basis": "PR #1 merged to aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (merge_commit_sha: a9f9e254, confirmed in workspace/verification/latest/pdf-merge-result.json)",
-  "pr_dry_run_ready_count": 2,
+  "pr_dry_run_ready_count": 3,
   "pr_dry_run_ready_ids": [
     "pdf-doc-converter",
-    "pdf-xls-converter"
+    "pdf-xls-converter",
+    "pdf-html"
   ],
-  "pr_dry_run_ready_basis": "DocConverter: run pilot-pdf-20260514-182836 PASSED (build=repaired, run=passed, reviewer=unavailable). XlsConverter: same run. Both awaiting APPROVE_LIVE_PR. Html: run 3 in progress (classifier+fixture fix applied).",
+  "pr_dry_run_ready_basis": "DocConverter: run pilot-pdf-20260514-182836 PASSED (build=repaired, run=passed, reviewer=unavailable). XlsConverter: same run. Html: run pilot-pdf-20260514-190422 PASSED (build=repaired 1 attempt, run=passed, reviewer=unavailable). All 3 awaiting APPROVE_LIVE_PR.",
   "reviewer_passed_awaiting_pr_count": 0,
   "reviewer_passed_awaiting_pr_ids": [
     "pdf-optimizer"
@@ -70,13 +71,13 @@
   "excluded_count_basis": "93 types excluded: 8 pilot allowed + 93 others = 101. Excludes all non-WORKFLOW_ROOT types (77, including PdfExtractor reclassified ABSTRACT_BASE) plus 16 WORKFLOW_ROOT types not in allowed_pilot_types.",
   "unclassified_workflow_root_count": 16,
   "unclassified_workflow_root_note": "16 WORKFLOW_ROOT types are classified but NOT in allowed_pilot_types (Wave A=5 types, Wave B=3 types promoted to pilot). PdfExtractor reclassified to ABSTRACT_BASE (not runnable). Generation candidates for future sprints. See followup-pdf-remaining-candidate-classification taskcard.",
-  "coverage_pct_of_pilot_allowed": 40.0,
+  "coverage_pct_of_pilot_allowed": 62.5,
   "coverage_pct_of_workflow_root": 8.0,
   "coverage_pct_of_total_types": 2.0,
   "coverage_pct_detail": {
-    "pilot_allowed": "2/5 published = 40% (2 merged, 2 dry-run ready, 1 reviewer_passed; all 5 pilot types now PR_DRY_RUN_READY or better)",
-    "workflow_root": "2/25 published = 8% (2 merged of 25 WORKFLOW_ROOT types); 3 more PR-ready pending APPROVE_LIVE_PR",
-    "full_sot": "2/101 published = 2% (2 merged of 101 total types in namespace)"
+    "pilot_allowed": "5/8 published = 62.5% (5 merged; 3 dry-run ready pending APPROVE_LIVE_PR; all 8 pilot types now EXAMPLE_READY_FOR_PR_DRY_RUN or published)",
+    "workflow_root": "5/24 published = 20.8% (5 merged of 24 WORKFLOW_ROOT types); 3 more PR-ready pending APPROVE_LIVE_PR",
+    "full_sot": "5/101 published = 4.95% (5 merged of 101 total types in namespace)"
   },
   "evidence_sources": [
     "workspace/verification/latest/pdf-source-of-truth-proof.json",

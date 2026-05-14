@@ -6,8 +6,8 @@
   "total_entries": 54,
   "state_summary": {
     "POST_MERGE_VERIFIED": 28,
-    "PR_READY": 2,
-    "BACKLOGGED": 22,
+    "PR_READY": 3,
+    "BACKLOGGED": 21,
     "PERMANENTLY_BLOCKED": 2
   },
   "entries": [
@@ -346,16 +346,16 @@
       "scenario_id": "pdf-html",
       "family": "pdf",
       "type_name": "Html",
-      "state": "BACKLOGGED",
-      "blocking_reason": "GENERATION_RETRY: type_classifier fix applied (IPlugin Process-method detection); self-sufficient-fixture fix applied; run 3 in progress",
-      "blocking_taskcard": "TC-PDF-WAVE-B-HTML-GENERATION",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": "pipeline/contracts/pdf/pdf-html-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-14T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "Sprint 7 Wave B: Html classified as UTILITY in run 1 (classifier bug). Fix applied to type_classifier.py (IPlugin Process-method detection). Run 2 in progress to generate."
+      "notes": "Sprint 7 Wave B: EXAMPLE_READY_FOR_PR_DRY_RUN in run pilot-pdf-20260514-190422. HtmlToPdfOptions + File.WriteAllText fixture + AddInput(new FileDataSource('input.html')). Build repaired (1 attempt). Reviewer unavailable (EXAMPLE_REVIEWER_PATH not set)."
     },
     {
       "scenario_id": "pdf-image-extractor",

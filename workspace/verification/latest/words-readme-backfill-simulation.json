@@ -1,10 +1,10 @@
 {
   "result_type": "readme_backfill_simulation",
-  "date": "2026-05-14 06:15 UTC",
+  "date": "2026-05-14 13:20 UTC",
   "family": "words",
   "dry_run": true,
   "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
-  "branch_name": "plugin-examples/words/readme/20260514-061523",
+  "branch_name": "plugin-examples/words/readme/20260514-132042",
   "pr_title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples",
   "readme_bytes": 5092,
   "audit_passed": true,

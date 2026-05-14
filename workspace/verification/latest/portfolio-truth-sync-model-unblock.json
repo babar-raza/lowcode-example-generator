@@ -1,0 +1,104 @@
+{
+  "produced_at": "2026-05-14T12:00:00Z",
+  "sprint": "model-unblock-activation-sprint",
+  "title": "Portfolio Truth Sync — Model Unblock Activation Sprint",
+  "lane": 5,
+  "release_status_run": "2026-05-14T12:00:00Z",
+  "all_merged": true,
+  "all_post_merge_validated": false,
+  "total_examples_published": 28,
+  "families": {
+    "cells": {
+      "examples": 9,
+      "scope": "FAMILY_COMPLETE",
+      "post_merge_status": "POST_MERGE_VERIFIED",
+      "merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+      "delta_this_sprint": 0,
+      "note": "No change — complete"
+    },
+    "words": {
+      "examples": 8,
+      "scope": "PILOT_COMPLETE",
+      "post_merge_status": "POST_MERGE_VERIFIED",
+      "merge_sha": "c22788ebda0514910c6daedfde0e29b435a72ff1",
+      "merged_at": "2026-05-14T06:03:08Z",
+      "delta_this_sprint": 1,
+      "delta_detail": "words-report-builder added (PR #6)",
+      "pilot_coverage_pct": 100.0,
+      "note": "8/8 allowed pilot types — PILOT 100% COMPLETE"
+    },
+    "pdf": {
+      "examples": 5,
+      "scope": "PILOT_COMPLETE",
+      "post_merge_status": "ALL_PASS",
+      "merge_sha": "671547a1027c",
+      "merged_at": "2026-05-14T06:00:36Z",
+      "delta_this_sprint": 1,
+      "delta_detail": "pdf-optimizer added (PR #4, 2nd reviewer pass confirmed)",
+      "pilot_coverage_pct": 100.0,
+      "note": "5/5 allowed pilot types — PILOT 100% COMPLETE"
+    },
+    "diagram": {
+      "examples": 2,
+      "scope": "PILOT_COMPLETE",
+      "post_merge_status": "ALL_PASS",
+      "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "delta_this_sprint": 0,
+      "note": "No change — pilot complete"
+    },
+    "email": {
+      "examples": 1,
+      "scope": "PILOT_COMPLETE",
+      "post_merge_status": "NOT_RUN",
+      "merge_sha": "023ad66970d2",
+      "merged_at": "2026-05-14T06:02:38Z",
+      "delta_this_sprint": 1,
+      "delta_detail": "email-converter added (PR #1, first ever)",
+      "prior_activation_blocker": "REPO_NOT_PROVISIONED → RESOLVED",
+      "remaining_gap": "post_merge_validation + denominator_basis update (DISCOVERY_ONLY → PILOT_ALLOWED)",
+      "note": "First Email LowCode example ever published"
+    },
+    "slides": {
+      "examples": 3,
+      "scope": "PILOT_COMPLETE",
+      "post_merge_status": "NOT_RUN",
+      "merge_sha": "bf05fc43124f",
+      "merged_at": "2026-05-14T06:02:51Z",
+      "delta_this_sprint": 3,
+      "delta_detail": "slides-convert, slides-compress, slides-merger added (PR #1, first ever)",
+      "prior_activation_blocker": "REPO_NOT_PROVISIONED → RESOLVED",
+      "remaining_gap": "post_merge_validation + denominator_basis update (DISCOVERY_ONLY → PILOT_ALLOWED)",
+      "note": "First Slides LowCode examples ever published"
+    }
+  },
+  "sprint_delta_summary": {
+    "examples_added": 6,
+    "families_newly_launched": ["email", "slides"],
+    "families_pilot_completed": ["words", "pdf"],
+    "prev_total": 22,
+    "new_total": 28
+  },
+  "completion_queue_updates": {
+    "words_report_builder": "BACKLOGGED → POST_MERGE_VERIFIED",
+    "pdf_optimizer": "REVIEWED_1_OF_2 → POST_MERGE_VERIFIED",
+    "email_converter": "ACTIVATION_BLOCKED_ENV → POST_MERGE_VERIFIED (pending validation)",
+    "slides_compress": "ACTIVATION_BLOCKED_ENV → POST_MERGE_VERIFIED (pending validation)",
+    "slides_convert": "ACTIVATION_BLOCKED_ENV → POST_MERGE_VERIFIED (pending validation)",
+    "slides_merger": "ACTIVATION_BLOCKED_ENV → POST_MERGE_VERIFIED (pending validation)"
+  },
+  "open_items": [
+    "email post-merge validation (clean checkout + run)",
+    "slides post-merge validation (clean checkout + run)",
+    "email.json denominator_basis: DISCOVERY_ONLY → PILOT_ALLOWED",
+    "slides.json denominator_basis: DISCOVERY_ONLY → PILOT_ALLOWED",
+    "email completeness gate activation",
+    "slides completeness gate activation"
+  ],
+  "replay_metrics_this_sprint": {
+    "pdf_optimizer_reviewer_replay": "82.5% time savings",
+    "words_reportbuilder_full_run_mode": "full pipeline — no replay needed (clean generation)",
+    "cumulative_replay_runs": 7,
+    "governance_compliance": "100%"
+  },
+  "overall_verdict": "PORTFOLIO_ALL_MERGED_PILOT_COMPLETE_PENDING_EMAIL_SLIDES_POSTMERGE"
+}

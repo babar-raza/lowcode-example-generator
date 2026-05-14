@@ -1,0 +1,60 @@
+{
+  "produced_at": "2026-05-14T12:00:00Z",
+  "sprint": "model-unblock-activation-sprint",
+  "title": "Words ReportBuilder Strong-Model Rerun Result — Lane 1",
+  "lane": 1,
+  "verdict": "PUBLISHED",
+  "model_used": {
+    "provider": "llm_professionalize",
+    "provider_base_url": "https://llm.professionalize.com/v1/",
+    "model_name": "recommended",
+    "preflight_passed": true,
+    "latency_ms": 1995,
+    "note": "Default 'recommended' model from llm_professionalize succeeded — prior failures were transient/prompt-related, not model-quality blockers"
+  },
+  "generation_run": {
+    "run_id": "pilot-words-20260513-222512",
+    "replay": false,
+    "full_pipeline": true,
+    "examples_generated": 8,
+    "examples_passing_validation": 7,
+    "reviewer_run": true,
+    "reviewer_duration_ms": 63108,
+    "publisher_duration_ms": 15
+  },
+  "post_merge_validation_run": {
+    "run_id": "pilot-words-20260514-104648",
+    "examples_generated": 8,
+    "reviewer_status": "success",
+    "validation_total": 8,
+    "validation_passed": 8
+  },
+  "words_report_builder_scenario": {
+    "scenario_id": "words-report-builder",
+    "build": "PASS",
+    "run": "PASS",
+    "reviewer": "PASS",
+    "required_constraint_met": "LINQ template <<[FieldName]>> syntax confirmed in generated template DOCX via DocumentBuilder",
+    "forbidden_constraints_verified": ["MERGEFIELD", "{{ }}", "PluginOptions"]
+  },
+  "pr": {
+    "pr_number": 6,
+    "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "branch": "plugin-examples/words/20260514-055156",
+    "merge_sha": "c22788ebda0514910c6daedfde0e29b435a72ff1",
+    "merged_at": "2026-05-14T06:03:08Z",
+    "files_included": [
+      "words-comparer", "words-converter", "words-mail-merger", "words-merger",
+      "words-replacer", "words-report-builder", "words-splitter", "words-watermarker"
+    ]
+  },
+  "denominator_update": {
+    "family": "words",
+    "published_count_before": 7,
+    "published_count_after": 8,
+    "allowed_pilot_count": 8,
+    "coverage_pct": 100.0,
+    "pilot_complete": true
+  },
+  "outcome": "WORDS_PILOT_COMPLETE — all 8 allowed types published and post-merge verified"
+}

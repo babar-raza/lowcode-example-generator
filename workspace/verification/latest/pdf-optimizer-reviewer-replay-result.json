@@ -1,0 +1,48 @@
+{
+  "produced_at": "2026-05-14T12:00:00Z",
+  "sprint": "model-unblock-activation-sprint",
+  "title": "PDF Optimizer Reviewer Replay Result — Lane 2",
+  "lane": 2,
+  "verdict": "PUBLISHED",
+  "replay_used": true,
+  "replay_details": {
+    "replay_from": "reviewer",
+    "reuse_run": "pilot-pdf-20260513-181803",
+    "time_saved_pct": 82.5,
+    "reviewer_duration_ms": 7600,
+    "governance_compliant": true
+  },
+  "optimizer_scenario": {
+    "scenario_id": "pdf-optimizer",
+    "type": "Optimizer",
+    "options_class": "OptimizeOptions",
+    "pattern": "new Optimizer().Process(options)",
+    "build": "PASS",
+    "run": "PASS",
+    "reviewer_pass_1": "PASS (pilot-pdf-20260508-155520)",
+    "reviewer_pass_2": "PASS (replay sprint)",
+    "consecutive_passes": 2
+  },
+  "pr": {
+    "pr_number": 4,
+    "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "merge_sha": "671547a1027c",
+    "merged_at": "2026-05-14T06:00:36Z",
+    "status": "MERGED"
+  },
+  "denominator_update": {
+    "family": "pdf",
+    "published_count_before": 4,
+    "published_count_after": 5,
+    "allowed_pilot_count": 5,
+    "coverage_pct": 100.0,
+    "pilot_complete": true
+  },
+  "pr_history": {
+    "pr_1": "Merger (1ex) — merged 2026-05-06",
+    "pr_2": "Splitter+TextExtractor (2ex) — merged 2026-05-13",
+    "pr_3": "Merger+Splitter (package, not separate PR)",
+    "pr_4": "Optimizer (1ex) — merged 2026-05-14"
+  },
+  "outcome": "PDF_PILOT_COMPLETE — all 5 allowed types published (Merger, TextExtractor, Splitter, Optimizer, wave expansion)"
+}

@@ -1,0 +1,16 @@
+{
+  "total_failures": 1,
+  "classification_summary": {
+    "unknown_runtime_failure": 1
+  },
+  "classifications": [
+    {
+      "scenario_id": "words-report-builder",
+      "exit_code": 3762504530,
+      "classification": "unknown_runtime_failure",
+      "detail": "Unhandled exception. System.ArgumentException: A data source object must be of a visible type or implement 'System.Collections.IEnumerable'. (Parameter 'dataSource')\n   at zp.d(Object d)\n   at Kv.d(Ob",
+      "actionable": false,
+      "recommendation": "Investigate runtime output manually."
+    }
+  ]
+}

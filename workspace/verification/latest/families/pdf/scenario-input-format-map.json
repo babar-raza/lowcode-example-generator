@@ -21,6 +21,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-jpeg",
+      "workflow_type": "Jpeg",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Jpeg",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-merger",
       "workflow_type": "Merger",
       "selected_input_format": ".pdf",
@@ -51,6 +61,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-png",
+      "workflow_type": "Png",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Png",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-splitter",
       "workflow_type": "Splitter",
       "selected_input_format": ".pdf",
@@ -66,6 +86,16 @@
       "selected_input_format": ".pdf",
       "selected_output_format": "",
       "reason": "Inferred from type name TextExtractor",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "workflow_type": "Tiff",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Tiff",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

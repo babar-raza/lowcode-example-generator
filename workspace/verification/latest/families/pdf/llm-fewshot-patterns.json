@@ -1,5 +1,5 @@
 {
-  "total_patterns": 5,
+  "total_patterns": 10,
   "verified_passing": 0,
   "patterns": [
     {
@@ -11,7 +11,7 @@
       "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "pdf-html",
+      "scenario_id": "pdf-jpeg",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
@@ -20,6 +20,30 @@
     },
     {
       "scenario_id": "pdf-merger",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-png",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
@@ -36,6 +60,22 @@
     },
     {
       "scenario_id": "pdf-text-extractor",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": false,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,

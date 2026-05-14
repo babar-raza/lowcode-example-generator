@@ -1,0 +1,63 @@
+{
+  "total_types": 5,
+  "role_summary": {
+    "workflow_root": 5
+  },
+  "types": [
+    {
+      "full_name": "Aspose.Slides.LowCode.Collect",
+      "name": "Collect",
+      "role": "workflow_root",
+      "confidence": 0.7,
+      "reason": "Has static methods, no special suffix: Collect",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 1
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Compress",
+      "name": "Compress",
+      "role": "workflow_root",
+      "confidence": 0.7,
+      "reason": "Has static methods, no special suffix: Compress",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 3
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Convert",
+      "name": "Convert",
+      "role": "workflow_root",
+      "confidence": 0.7,
+      "reason": "Has static methods, no special suffix: Convert",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 18
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.ForEach",
+      "name": "ForEach",
+      "role": "workflow_root",
+      "confidence": 0.7,
+      "reason": "Has static methods, no special suffix: ForEach",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 10
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Merger",
+      "name": "Merger",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: Merger",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": false,
+      "method_count": 4
+    }
+  ]
+}

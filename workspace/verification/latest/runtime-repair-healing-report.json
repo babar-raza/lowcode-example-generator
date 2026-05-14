@@ -1,0 +1,16 @@
+{
+  "artifact_type": "runtime_repair_healing_report",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "lane": 2,
+  "change_implemented": true,
+  "file_changed": "src/plugin_examples/runner.py",
+  "change_description": "Added constraint re-injection and semantic validation to the runtime repair path in _stage_validation. The runtime repair prompt now appends pdf_constraints (as 'REQUIRED CONSTRAINTS') and type_constraints (as 'PER-TYPE CONSTRAINTS' with REQUIRED/FORBIDDEN sub-sections). Semantic validation (_validate_code + _validate_code_from_constraints) now runs before writing runtime-repaired code, matching the existing build-repair pattern. Logging was added to report how many constraints were re-injected for each runtime repair attempt.",
+  "lines_changed": "Replaced lines 870-893 (old runtime repair block) with ~65 lines implementing: (1) rt_pdf_constraints re-injection with logging, (2) rt_type_constraints REQUIRED/FORBIDDEN re-injection with logging, (3) runtime repair prompt extended with constraint reminders, (4) semantic validation (rt_semantic_issues) before writing fixed code, (5) repair_log entry on semantic rejection.",
+  "tests_added": [
+    "test_runtime_repair_receives_required_constraints — verifies rt_pdf_constraints and rt_pdf_constraint_reminder and 'REQUIRED CONSTRAINTS' are present in _stage_validation source",
+    "test_runtime_repair_receives_forbidden_constraints — verifies rt_type_constraints and rt_type_constraint_reminder and 'FORBIDDEN' are present in _stage_validation source",
+    "test_runtime_repair_receives_per_type_constraints — verifies rt_semantic_issues and _validate_code_from_constraints(fixed_code, rt_type_constraints) call are present in _stage_validation source"
+  ],
+  "tests_pass": true,
+  "implementation_notes": "15 repair tests pass total (12 pre-existing + 3 new). Build repair logic was not touched. Change is backward-compatible: if pdf_constraints and type_constraints are both empty/absent, rt_pdf_constraint_reminder and rt_type_constraint_reminder are empty strings and nothing is appended to the prompt. Semantic validation only runs if fixed_code is non-empty and differs from current_code, same as build repair."
+}

@@ -1,0 +1,42 @@
+{
+  "merge_type": "live_pr_merge_result",
+  "merge_date": "2026-05-14T06:02:51+00:00",
+  "family": "slides",
+  "pr_number": 1,
+  "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+  "live_merge_performed": true,
+  "merged": true,
+  "merge_commit_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076",
+  "merge_method": "merge",
+  "pr_title": "Add verified Aspose.Slides LowCode examples for .NET controlled pilot",
+  "preconditions": {
+    "pr_not_merged": {
+      "result": "PASS",
+      "detail": "merged=false"
+    },
+    "pr_is_open": {
+      "result": "PASS",
+      "detail": "state=open"
+    },
+    "head_ref_not_main": {
+      "result": "PASS",
+      "detail": "plugin-examples/slides/20260514-055744"
+    },
+    "target_repo_correct": {
+      "result": "PASS",
+      "detail": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"
+    },
+    "no_unexpected_files": {
+      "result": "PASS",
+      "detail": "19 files, none unexpected"
+    },
+    "clean_checkout_evidence": {
+      "result": "PASS",
+      "detail": "ALL_PASS from slides-live-pr-clean-checkout-validation.json"
+    },
+    "ci_check": {
+      "result": "PASS",
+      "detail": "no CI configured in target repo \u2014 skipped"
+    }
+  }
+}

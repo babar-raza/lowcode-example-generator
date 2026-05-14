@@ -1,11 +1,11 @@
 {
-  "total_examples": 8,
+  "total_examples": 10,
   "publish_candidates": 8,
-  "blocked_examples": 0,
+  "blocked_examples": 2,
   "examples": [
     {
-      "scenario_id": "words-comparer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer",
+      "scenario_id": "pdf-doc-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -16,8 +16,20 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter",
+      "scenario_id": "pdf-jpeg",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "failed",
+      "output_validation_status": "not_evaluated",
+      "reviewer_status": "not_evaluated",
+      "publish_candidate": false,
+      "blocked_reason": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -28,8 +40,8 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-mail-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger",
+      "scenario_id": "pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -40,8 +52,8 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger",
+      "scenario_id": "pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -52,8 +64,8 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-replacer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer",
+      "scenario_id": "pdf-png",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -64,8 +76,8 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-report-builder",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder",
+      "scenario_id": "pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -76,8 +88,8 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter",
+      "scenario_id": "pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -88,8 +100,20 @@
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-watermarker",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker",
+      "scenario_id": "pdf-tiff",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "failed",
+      "output_validation_status": "not_evaluated",
+      "reviewer_status": "not_evaluated",
+      "publish_candidate": false,
+      "blocked_reason": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",

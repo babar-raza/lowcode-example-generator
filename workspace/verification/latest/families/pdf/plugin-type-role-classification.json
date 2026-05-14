@@ -3,13 +3,13 @@
   "role_summary": {
     "options": 41,
     "enum": 4,
-    "operation_facade": 19,
+    "operation_facade": 22,
     "settings_model": 6,
     "result_model": 5,
     "abstract_base": 14,
     "interface_contract": 5,
-    "unknown": 6,
-    "utility": 1
+    "utility": 1,
+    "unknown": 3
   },
   "types": [
     {
@@ -521,9 +521,9 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Jpeg",
       "name": "Jpeg",
-      "role": "unknown",
-      "confidence": 0.3,
-      "reason": "No methods, no properties: Jpeg",
+      "role": "operation_facade",
+      "confidence": 0.5,
+      "reason": "No methods, no properties, has constructors \u2014 IPlugin implementor (inherited Process()): Jpeg",
       "has_static_methods": false,
       "has_instance_methods": false,
       "has_constructors": true,
@@ -796,9 +796,9 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Png",
       "name": "Png",
-      "role": "unknown",
-      "confidence": 0.3,
-      "reason": "No methods, no properties: Png",
+      "role": "operation_facade",
+      "confidence": 0.5,
+      "reason": "No methods, no properties, has constructors \u2014 IPlugin implementor (inherited Process()): Png",
       "has_static_methods": false,
       "has_instance_methods": false,
       "has_constructors": true,
@@ -1049,9 +1049,9 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Tiff",
       "name": "Tiff",
-      "role": "unknown",
-      "confidence": 0.3,
-      "reason": "No methods, no properties: Tiff",
+      "role": "operation_facade",
+      "confidence": 0.5,
+      "reason": "No methods, no properties, has constructors \u2014 IPlugin implementor (inherited Process()): Tiff",
       "has_static_methods": false,
       "has_instance_methods": false,
       "has_constructors": true,

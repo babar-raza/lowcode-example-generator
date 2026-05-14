@@ -1,0 +1,167 @@
+{
+  "total_scored": 5,
+  "runnable_count": 5,
+  "rejected_count": 0,
+  "scores": [
+    {
+      "full_name": "Aspose.Slides.LowCode.Collect",
+      "name": "Collect",
+      "role": "workflow_root",
+      "score": 5.0,
+      "max_score": 6.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "1 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "1 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Compress",
+      "name": "Compress",
+      "role": "workflow_root",
+      "score": 5.0,
+      "max_score": 6.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "3 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "3 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Convert",
+      "name": "Convert",
+      "role": "workflow_root",
+      "score": 6.5,
+      "max_score": 9.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "18 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "3 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "requires_callback_params",
+          "weight": -2.0,
+          "detail": "3 parameters are callback types"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "24 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.ForEach",
+      "name": "ForEach",
+      "role": "workflow_root",
+      "score": 3.0,
+      "max_score": 6.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "10 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "requires_callback_params",
+          "weight": -2.0,
+          "detail": "10 parameters are callback types"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "10 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Slides.LowCode.Merger",
+      "name": "Merger",
+      "role": "workflow_root",
+      "score": 8.5,
+      "max_score": 9.5,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "4 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "simple_parameters",
+          "weight": 2.0,
+          "detail": "2 methods with simple params"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "report_type": "sprint10_readiness_report",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 9: PDF Wave B Publication + Next Wave Execution",
+  "lane": "LANE 6 \u2014 Sprint 10 Readiness",
+
+  "sprint9_outcomes": {
+    "LANE0": "COMPLETE \u2014 Preflight verified. Branch main, all env probes run.",
+    "LANE1": "COMPLETE \u2014 Wave B PR#3 dry-run simulation produced. Package assembled (doc-converter, xls-converter, html). Blocked by APPROVE_LIVE_PR not set. Evidence: pdf-waveb-pr3-publication-result.json",
+    "LANE2": "COMPLETE \u2014 Manifest consolidation (prior_manifest_path fix) validated. Cross-run merge confirmed working. Evidence: manifest-live-publication-validation.json",
+    "LANE3": "PARTIAL \u2014 Type classifier fixed (0-method OPERATION_FACADE). Png PASSED (first image type). Jpeg/Tiff failed (wrong output extensions). 8 total PR_DRY_RUN_READY including Png. Evidence: pdf-image-wave-generation-results.json",
+    "LANE4": "COMPLETE \u2014 No pipeline validator changes needed. Image validators pre-exist in output_validator.py. Evidence: pdf-validator-fixture-unlock-report.json",
+    "LANE5": "COMPLETE \u2014 1503 tests passing (all families non-regressed). Evidence: portfolio-nonregression-sprint9.json",
+    "LANE6": "IN_PROGRESS \u2014 This report."
+  },
+
+  "sprint10_priorities": [
+    {
+      "priority": 1,
+      "task": "PDF Wave B PR#3 publication",
+      "description": "Wave B package assembled: doc-converter, xls-converter, html. 3 examples validated and PR_DRY_RUN_READY. Blocked only by APPROVE_LIVE_PR env var.",
+      "command": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+      "blocker": "Operator must set APPROVE_LIVE_PR",
+      "taskcard": "TC-PDF-WAVE-B-PR3"
+    },
+    {
+      "priority": 2,
+      "task": "Fix Jpeg output extension constraint",
+      "description": "LLM used output.pdf instead of output.jpg for Jpeg type. PdfToImage internally tries to create directory at output path — conflicts with existing file. Fix: add explicit REQUIRED constraint: 'REQUIRED: AddOutput(new FileDataSource(\"output.jpg\")) \u2014 extension must be .jpg not .pdf'.",
+      "file": "pipeline/configs/families/pdf.yml",
+      "section": "per_type_constraints.Jpeg.required",
+      "constraint_to_add": "REQUIRED: AddOutput(new FileDataSource(\"output.jpg\")) \u2014 output file extension MUST be .jpg (not .pdf, not .jpeg)",
+      "taskcard": "TC-PDF-JPEG-EXTENSION-FIX"
+    },
+    {
+      "priority": 3,
+      "task": "Fix Tiff output extension constraint",
+      "description": "LLM used output.tif instead of output.tiff. File.Exists check failed because plugin uses .tiff extension. Fix: add explicit REQUIRED constraint specifying 'output.tiff' (four letters).",
+      "file": "pipeline/configs/families/pdf.yml",
+      "section": "per_type_constraints.Tiff.required",
+      "constraint_to_add": "REQUIRED: AddOutput(new FileDataSource(\"output.tiff\")) \u2014 output file extension MUST be .tiff (four letters, not .tif)",
+      "taskcard": "TC-PDF-TIFF-EXTENSION-FIX"
+    },
+    {
+      "priority": 4,
+      "task": "Re-run Jpeg and Tiff generation after constraint fixes",
+      "description": "After fixing extension constraints in pdf.yml, re-run pilot. Both types built successfully and the API usage is correct \u2014 only the output filename extension was wrong. High confidence these will pass on next run.",
+      "prerequisite": "Priorities 2 and 3 complete",
+      "expected_outcome": "Jpeg PASS, Tiff PASS \u2014 then 10/11 allowed types have examples",
+      "taskcard": "TC-PDF-IMAGE-RERUN"
+    },
+    {
+      "priority": 5,
+      "task": "PDF Optimizer 2nd reviewer pass",
+      "description": "Optimizer needs 2nd consecutive reviewer pass before PR#4. Set EXAMPLE_REVIEWER_PATH and GPT_OSS_MODEL.",
+      "blocker": "EXAMPLE_REVIEWER_PATH not set",
+      "taskcard": "TC-PDF-02-pdf-optimizer-2nd-pass"
+    },
+    {
+      "priority": 6,
+      "task": "Package Wave C (Png + Jpeg + Tiff) for PR#5 after image types pass",
+      "description": "Once Jpeg and Tiff re-run passes, assemble PR#5 package with image types (Png already passing). This would add 3 new examples.",
+      "prerequisite": "Priority 4 complete",
+      "taskcard": "TC-PDF-WAVE-C-IMAGE-PR5"
+    },
+    {
+      "priority": 7,
+      "task": "Email pilot launch",
+      "description": "Repo provisioning + pilot launch for Email.Converter (async IOutputHandler pattern).",
+      "blocker": "Target repo not provisioned",
+      "taskcard": "TC-EMAIL-02-email-pilot-launch"
+    },
+    {
+      "priority": 8,
+      "task": "Slides pilot launch",
+      "description": "Repo provisioning + pilot launch for Slides.Compress/Convert/Merger.",
+      "blocker": "Target repo not provisioned",
+      "taskcard": "TC-SLIDES-02-slides-pilot-launch"
+    }
+  ],
+
+  "sprint9_new_passes": {
+    "pdf_png": {
+      "status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "first_time_pass": true,
+      "notes": "First PDF image type to pass. Correct API: PngOptions, new Png().Process(options), output.png"
+    }
+  },
+
+  "manifest_state_at_sprint9_close": {
+    "publishable_candidates": 8,
+    "candidates": ["merger", "text-extractor", "splitter", "optimizer", "pdf-aconverter", "doc-converter", "xls-converter", "html", "png"],
+    "wave_b_assembled_for_pr3": ["doc-converter", "xls-converter", "html"],
+    "wave_c_ready_for_package": ["png"],
+    "wave_a_already_published": ["merger", "text-extractor", "splitter", "optimizer", "pdf-aconverter"]
+  },
+
+  "technical_debt_addressed_in_sprint9": [
+    "Type classifier 0-method OPERATION_FACADE fix (Jpeg/Png/Tiff now plannable)",
+    "Manifest merge cross-run fragility (prior_manifest_path global fallback)",
+    "Runner manifest wiring (global manifest path passed to write_pr_candidate_manifest)",
+    "Image type per_type_constraints with FORBIDDEN hallucinated APIs"
+  ],
+
+  "technical_debt_remaining": [
+    "Jpeg output extension constraint too weak (allows .pdf extension) \u2014 TC-PDF-JPEG-EXTENSION-FIX",
+    "Tiff output extension constraint too weak (allows .tif extension) \u2014 TC-PDF-TIFF-EXTENSION-FIX",
+    "Package assembly still manual (no CLI assemble-package command)",
+    "Optimizer needs 2nd reviewer pass before PR#4",
+    "Email/Slides pilots blocked by repo provisioning"
+  ],
+
+  "sprint10_readiness_verdict": "READY \u2014 Sprint 9 structural fixes complete. Wave B PR#3 operator-actionable. Image type Png ready for Wave C package. Jpeg/Tiff constraint fixes are simple YAML additions (high confidence rerun will pass). Sprint 10 can focus on: (1) Wave B publication, (2) Jpeg/Tiff constraint fix + rerun, (3) Optimizer 2nd pass, (4) Wave C packaging."
+}

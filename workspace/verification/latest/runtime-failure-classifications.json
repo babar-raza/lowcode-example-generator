@@ -1,16 +1,25 @@
 {
-  "total_failures": 1,
+  "total_failures": 2,
   "classification_summary": {
-    "unknown_runtime_failure": 1
+    "unknown_runtime_failure": 1,
+    "blocked_invalid_operation": 1
   },
   "classifications": [
     {
-      "scenario_id": "words-report-builder",
+      "scenario_id": "pdf-jpeg",
       "exit_code": 3762504530,
       "classification": "unknown_runtime_failure",
-      "detail": "Unhandled exception. System.ArgumentException: A data source object must be of a visible type or implement 'System.Collections.IEnumerable'. (Parameter 'dataSource')\n   at zp.d(Object d)\n   at Kv.d(Ob",
+      "detail": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat",
       "actionable": false,
       "recommendation": "Investigate runtime output manually."
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "exit_code": 3762504530,
+      "classification": "blocked_invalid_operation",
+      "detail": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.",
+      "actionable": true,
+      "recommendation": "Operation invalid in current state. Review API usage sequence."
     }
   ]
 }

@@ -1,0 +1,63 @@
+{
+  "report_type": "pdf_waveb_publication_result",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 7 PDF Wave B Expansion + Portfolio Hardening",
+  "lane": "LANE 4 — Publication",
+  "publication_status": "BLOCKED",
+  "blocking_reasons": [
+    "APPROVE_LIVE_PR env var not set (required for all live PR creation)",
+    "APPROVE_MERGE_PR env var not set (required for PR merge)",
+    "Reviewer gate unavailable (EXAMPLE_REVIEWER_PATH not set — reviewer stage skipped)"
+  ],
+  "wave_b_generation_results": {
+    "pdf-doc-converter": {
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "build_status": "repaired",
+      "run_status": "passed",
+      "reviewer_status": "unavailable",
+      "pr_candidate": true,
+      "run_id": "pilot-pdf-20260514-182836"
+    },
+    "pdf-xls-converter": {
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "build_status": "repaired",
+      "run_status": "passed",
+      "reviewer_status": "unavailable",
+      "pr_candidate": true,
+      "run_id": "pilot-pdf-20260514-182836"
+    },
+    "pdf-html": {
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "build_status": "repaired",
+      "run_status": "passed",
+      "reviewer_status": "unavailable",
+      "pr_candidate": true,
+      "run_id": "pilot-pdf-20260514-190422",
+      "note": "Passed in run 5 after 5-iteration fix cycle: type_classifier.py IPlugin Process-method detection, packet_builder.py self-sufficient fixture + Html constraint block, pdf.yml flexible AddInput/AddOutput tokens. HtmlToPdfOptions + File.WriteAllText('input.html') + AddInput(FileDataSource('input.html')) pattern."
+    },
+    "pdf-pdf-extractor": {
+      "final_verdict": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "ABSTRACT_BASE_CLASS — PdfExtractor and PdfExtractorOptions are both abstract, cannot instantiate",
+      "pr_candidate": false,
+      "reclassification": "WORKFLOW_ROOT -> ABSTRACT_BASE (Sprint 7, 2026-05-14)"
+    }
+  },
+  "pr_packaging_plan": {
+    "wave_b_pr": {
+      "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "candidates": ["pdf-doc-converter", "pdf-xls-converter", "pdf-html"],
+      "status": "BLOCKED_PENDING_APPROVALS",
+      "required_env_vars": [
+        "APPROVE_LIVE_PR=APPROVE_LIVE_PR",
+        "GITHUB_TOKEN (classic PAT, repo scope)"
+      ],
+      "command_template": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+    }
+  },
+  "wave_a_publication_status": {
+    "published_examples": 5,
+    "published_scenario_ids": ["pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer", "pdf-pdfa-converter"],
+    "status": "MERGED_AND_POST_MERGE_VERIFIED"
+  },
+  "lane4_verdict": "BLOCKED — ALL 3 Wave B types EXAMPLE_READY_FOR_PR_DRY_RUN (DocConverter+XlsConverter+Html); requires APPROVE_LIVE_PR + GITHUB_TOKEN (classic PAT, repo scope) to publish PDF PR#3"
+}

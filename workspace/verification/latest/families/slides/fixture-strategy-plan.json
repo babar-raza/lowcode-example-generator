@@ -1,0 +1,60 @@
+{
+  "total_scenarios": 5,
+  "ready": 3,
+  "blocked": 2,
+  "strategies": {
+    "generated_fixture_file": 0,
+    "existing_fixture": 0,
+    "programmatic_input": 2,
+    "none": 3,
+    "no_valid_input_strategy": 0
+  },
+  "scenarios": [
+    {
+      "scenario_id": "slides-compress",
+      "required_input_formats": [
+        ".pptx"
+      ],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "slides-convert",
+      "required_input_formats": [
+        ".pptx"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "slides-merger",
+      "required_input_formats": [
+        ".pptx"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "slides-collect",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Collect' is not in the controlled pilot allowlist. Allowed: ['Compress', 'Convert', 'Merger']"
+    },
+    {
+      "scenario_id": "slides-for-each",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ForEach' is not in the controlled pilot allowlist. Allowed: ['Compress', 'Convert', 'Merger']"
+    }
+  ]
+}

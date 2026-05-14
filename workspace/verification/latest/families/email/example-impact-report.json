@@ -1,0 +1,47 @@
+{
+  "initial_run": true,
+  "delta_summary": {
+    "old_version": null,
+    "new_version": "26.4.0.0",
+    "added_types": 3,
+    "removed_types": 0,
+    "modified_types": 0
+  },
+  "new_api_examples_needed": [
+    {
+      "full_name": "Aspose.Email.LowCode.Converter",
+      "namespace": "Aspose.Email.LowCode",
+      "methods": [
+        "Convert",
+        "ConvertEmlOrMsg",
+        "ConvertToEml",
+        "ConvertToHtml",
+        "ConvertToMht",
+        "ConvertToMhtml",
+        "ConvertToMsg"
+      ],
+      "properties": []
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
+      "namespace": "Aspose.Email.LowCode",
+      "methods": [
+        "AddOutputStream",
+        "AddOutputStream"
+      ],
+      "properties": [
+        "Path"
+      ]
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.IOutputHandler",
+      "namespace": "Aspose.Email.LowCode",
+      "methods": [
+        "AddOutputStream",
+        "AddOutputStream"
+      ],
+      "properties": []
+    }
+  ],
+  "existing_example_impacts": []
+}

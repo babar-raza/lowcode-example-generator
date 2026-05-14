@@ -159,8 +159,17 @@ def classify_type(type_info: dict) -> TypeRole:
         if _WORKFLOW_VERBS.search(name) and has_ctors:
             return TypeRole(**base, role=OPERATION_FACADE, confidence=0.6,
                             reason=f"Workflow verb with constructors, Process likely inherited: {name}")
+        # Format-named IPlugin implementors (e.g. Jpeg, Png, Tiff, Ofd) — concrete
+        # classes with constructors but 0 visible methods. By this point the type is
+        # not an enum, interface, abstract class, options, result, settings, or
+        # callback type. A constructor-only type with no properties is a concrete
+        # IPlugin implementor whose Process() is fully inherited and invisible to
+        # reflection. Classify as OPERATION_FACADE so it can be planned as a scenario.
+        if has_ctors:
+            return TypeRole(**base, role=OPERATION_FACADE, confidence=0.5,
+                            reason=f"No methods, no properties, has constructors — IPlugin implementor (inherited Process()): {name}")
         return TypeRole(**base, role=UNKNOWN, confidence=0.3,
-                        reason=f"No methods, no properties: {name}")
+                        reason=f"No methods, no properties, no constructors: {name}")
 
     # IPlugin implementor: has Process method (the IPlugin contract) + constructors.
     # Applies to non-verb-named LowCode types like 'Html' (HTML→PDF converter) that

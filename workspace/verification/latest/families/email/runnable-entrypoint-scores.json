@@ -1,0 +1,95 @@
+{
+  "total_scored": 3,
+  "runnable_count": 1,
+  "rejected_count": 2,
+  "scores": [
+    {
+      "full_name": "Aspose.Email.LowCode.Converter",
+      "name": "Converter",
+      "role": "workflow_root",
+      "score": 6.0,
+      "max_score": 8.0,
+      "runnable": true,
+      "rejection_reason": null,
+      "signals": [
+        {
+          "signal": "has_static_methods",
+          "weight": 3.0,
+          "detail": "7 static methods"
+        },
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: workflow_root"
+        },
+        {
+          "signal": "file_io_semantics",
+          "weight": 1.5,
+          "detail": "Methods reference file paths"
+        },
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "requires_callback_params",
+          "weight": -2.0,
+          "detail": "7 parameters are callback types"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
+      "name": "FolderOutputHandler",
+      "role": "provider_callback",
+      "score": -5.5,
+      "max_score": 0.5,
+      "runnable": false,
+      "rejection_reason": "Role 'provider_callback' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "provider_callback_role",
+          "weight": -5.0,
+          "detail": "Provider/callback type \u2014 not standalone"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.IOutputHandler",
+      "name": "IOutputHandler",
+      "role": "interface_contract",
+      "score": -5.5,
+      "max_score": 0.5,
+      "runnable": false,
+      "rejection_reason": "Role 'interface_contract' is not a standalone entrypoint",
+      "signals": [
+        {
+          "signal": "has_xml_summary",
+          "weight": 0.5,
+          "detail": "Type has XML documentation"
+        },
+        {
+          "signal": "abstract_or_interface",
+          "weight": -5.0,
+          "detail": "Cannot be instantiated"
+        },
+        {
+          "signal": "complex_parameters",
+          "weight": -1.0,
+          "detail": "2 complex object parameters"
+        }
+      ]
+    }
+  ]
+}

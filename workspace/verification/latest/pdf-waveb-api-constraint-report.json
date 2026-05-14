@@ -1,0 +1,102 @@
+{
+  "report_type": "pdf_waveb_api_constraint_report",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 7 PDF Wave B Expansion + Portfolio Hardening",
+  "lane": "LANE 1 — API/Constraint",
+  "harness_source": "workspace/fixture-validation/pdf-harness/ (Aspose.PDF 26.4.0, net8.0)",
+  "wave_b_types": {
+    "DocConverter": {
+      "full_type_name": "Aspose.Pdf.LowCode.DocConverter",
+      "concrete_instantiable": true,
+      "options_class": "PdfToDocOptions",
+      "options_concrete": true,
+      "options_base": "PdfConverterOptions (ABSTRACT)",
+      "critical_findings": [
+        "PdfConverterOptions is ABSTRACT — cannot instantiate directly",
+        "Must use PdfToDocOptions (concrete subclass)",
+        "SaveFormat enum: SaveFormat.Doc=0 (OLE2 .doc), SaveFormat.DocX=1 (OOXML .docx)",
+        "ConversionMode enum: TextBox=0, Flow=1, EnhancedFlow=2",
+        "SaveFormat is Aspose.Pdf.LowCode.SaveFormat namespace"
+      ],
+      "harness_verified_pattern": "var options = new PdfToDocOptions(); options.SaveFormat = SaveFormat.DocX; options.AddInput(new FileDataSource(\"input.pdf\")); options.AddOutput(new FileDataSource(\"output.docx\")); new DocConverter().Process(options);",
+      "harness_result": "PASS",
+      "output_magic": "50-4B-03-04",
+      "output_format": ".docx",
+      "output_validator": "docx_zip_check",
+      "fixture_strategy": "programmatic_pdf_single (new Aspose.Pdf.Document() + TextFragment + doc.Save('input.pdf'))",
+      "contract_file": "pipeline/contracts/pdf/pdf-doc-converter.json"
+    },
+    "XlsConverter": {
+      "full_type_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "concrete_instantiable": true,
+      "options_class": "PdfToXlsOptions",
+      "options_concrete": true,
+      "options_base": "PdfConverterOptions (ABSTRACT)",
+      "critical_findings": [
+        "PdfConverterOptions is ABSTRACT — use PdfToXlsOptions (concrete subclass)",
+        "ExcelFormat is a NESTED ENUM: PdfToXlsOptions.ExcelFormat",
+        "ExcelFormat values: XMLSpreadSheet2003=0, XLSX=1, CSV=2, XLSM=3, ODS=4",
+        "Must set opts.Format = PdfToXlsOptions.ExcelFormat.XLSX for OOXML output"
+      ],
+      "harness_verified_pattern": "var options = new PdfToXlsOptions(); options.Format = PdfToXlsOptions.ExcelFormat.XLSX; options.AddInput(new FileDataSource(\"input.pdf\")); options.AddOutput(new FileDataSource(\"output.xlsx\")); new XlsConverter().Process(options);",
+      "harness_result": "PASS",
+      "output_magic": "50-4B-03-04",
+      "output_format": ".xlsx",
+      "output_validator": "xlsx_zip_check",
+      "fixture_strategy": "programmatic_pdf_single (new Aspose.Pdf.Document() + TextFragment + doc.Save('input.pdf'))",
+      "contract_file": "pipeline/contracts/pdf/pdf-xls-converter.json"
+    },
+    "Html": {
+      "full_type_name": "Aspose.Pdf.LowCode.Html",
+      "concrete_instantiable": true,
+      "options_class": "HtmlToPdfOptions",
+      "options_concrete": true,
+      "options_base": "PdfConverterOptions (ABSTRACT)",
+      "critical_findings": [
+        "Html plugin converts HTML TO PDF (NOT PDF to HTML)",
+        "HtmlToPdfOptions is the correct concrete options class",
+        "Input MUST be an HTML file (not a PDF)",
+        "Fixture: System.IO.File.WriteAllText('input.html', htmlContent)",
+        "Input extension is .html, output extension is .pdf",
+        "Optional: BasePath, HtmlMediaType, IsRenderToSinglePage, PageLayoutOption, PageInfo"
+      ],
+      "harness_verified_pattern": "System.IO.File.WriteAllText(\"input.html\", \"<html><body><h1>Hello</h1></body></html>\"); var options = new HtmlToPdfOptions(); options.AddInput(new FileDataSource(\"input.html\")); options.AddOutput(new FileDataSource(\"output.pdf\")); new Html().Process(options);",
+      "harness_result": "PASS",
+      "output_magic": "%PDF",
+      "output_size_bytes": 110112,
+      "output_format": ".pdf",
+      "output_validator": "pdf_header_check",
+      "fixture_strategy": "programmatic_html_input (System.IO.File.WriteAllText — NO Aspose.Pdf.Document needed)",
+      "contract_file": "pipeline/contracts/pdf/pdf-html-converter.json"
+    },
+    "PdfExtractor": {
+      "full_type_name": "Aspose.Pdf.LowCode.PdfExtractor",
+      "concrete_instantiable": false,
+      "options_class": "PdfExtractorOptions",
+      "options_concrete": false,
+      "critical_findings": [
+        "PdfExtractor is ABSTRACT — cannot instantiate",
+        "PdfExtractorOptions is ABSTRACT — cannot instantiate",
+        "PdfExtractor is NOT in the IPlugin implementors list",
+        "PdfExtractor is the abstract base for TextExtractor and ImageExtractor",
+        "TextExtractorOptions and ImageExtractorOptions are concrete subclasses of PdfExtractorOptions",
+        "RECLASSIFICATION REQUIRED: PdfExtractor should be reclassified from WORKFLOW_ROOT to ABSTRACT_BASE",
+        "This reduces runnable WORKFLOW_ROOT count from 25 to 24"
+      ],
+      "status": "EXPLICITLY_BLOCKED",
+      "blocking_reason": "ABSTRACT_BASE_CLASS — not instantiable, not a standalone runnable IPlugin",
+      "reclassification": "WORKFLOW_ROOT -> ABSTRACT_BASE",
+      "action_required": "Update pdf-type-role-classification.json; update denominator workflow_root_types 25->24; add to blocked_scenarios as ABSTRACT_BASE"
+    }
+  },
+  "validators_assessment": {
+    "docx_zip_check": "ALREADY EXISTS in output_validator.py line 181 — validates .docx OOXML ZIP magic",
+    "xlsx_zip_check": "ALREADY EXISTS in output_validator.py line 179 (_validate_xlsx_output) — validates .xlsx ZIP + workbook.xml",
+    "pdf_header_check": "ALREADY EXISTS in output_validator.py line 254 (_validate_pdf_output) — validates %PDF magic",
+    "new_validators_needed": "NONE — all Wave B output formats already supported"
+  },
+  "lane1_verdict": "COMPLETE",
+  "per_type_constraints_added_to_pdf_yml": ["DocConverter", "XlsConverter", "Html"],
+  "contracts_created": ["pdf-doc-converter.json", "pdf-xls-converter.json", "pdf-html-converter.json"],
+  "allowed_types_expanded": "pdf.yml allowed_types now includes DocConverter, XlsConverter, Html (total: 8 types)"
+}

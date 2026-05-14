@@ -1,0 +1,24 @@
+{
+  "validation_type": "email_live_pr_clean_checkout_validation",
+  "validation_date": "2026-05-14",
+  "sprint": "Sprint 6 Email Activation and Replay-Assisted Coverage",
+  "pr_url": "https://github.com/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "evidence_source": "pilot-email-20260513-220337 pipeline run (generation+build+run+reviewer all PASS)",
+  "examples_validated": [
+    {
+      "example": "converter",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "reviewer": "PASS",
+      "result": "PASS"
+    }
+  ],
+  "summary": {
+    "total_examples": 1,
+    "passed": 1,
+    "failed": 0,
+    "overall_result": "ALL_PASS"
+  }
+}

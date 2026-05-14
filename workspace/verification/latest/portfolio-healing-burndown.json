@@ -1,0 +1,154 @@
+{
+  "artifact_type": "portfolio_healing_burndown",
+  "generated_at": "2026-05-13T14:00:00+00:00",
+  "sprint": "Portfolio Healing Acceleration Sprint",
+  "governing_principle": "No deferred runnable type may remain in passive backlog state. Every type must have explicit healing strategy, wave assignment, and rerun feasibility.",
+
+  "summary": {
+    "total_workflow_roots_all_families": 44,
+    "total_published": 17,
+    "total_pr_dry_run_ready": 3,
+    "total_deferred_runnable_before_this_sprint": 28,
+    "total_deferred_after_this_sprint": 28,
+    "deferred_with_explicit_healing_paths": 28,
+    "deferred_terminal_state_count": 0,
+    "new_types_activated_this_sprint": 4,
+    "types_activated_detail": ["Words:Processor", "Words:MailMerger", "PDF:PdfAConverter", "Words:Merger+Comparer (Wave2 config confirmed)"],
+    "config_ready_for_generation": 3,
+    "generation_blocked_by": "GPT_OSS_ENDPOINT + GPT_OSS_MODEL not set in current env"
+  },
+
+  "per_family_burndown": {
+    "cells": {
+      "total_workflow_roots": 9,
+      "published": 9,
+      "pr_dry_run_ready": 0,
+      "deferred": 0,
+      "healing_status": "COMPLETE",
+      "coverage_pct_of_roots": 100.0,
+      "sprint_delta": "no change — fully complete"
+    },
+    "words": {
+      "total_workflow_roots": 9,
+      "published": 4,
+      "pr_dry_run_ready": 2,
+      "pilot_allowed": 8,
+      "deferred_outside_pilot": 1,
+      "deferred_type_names": ["ReportBuilder"],
+      "healing_status": "ACTIVE_HEALING",
+      "coverage_pct_of_roots": 44.44,
+      "coverage_pct_of_pilot": 50.0,
+      "sprint_delta": "Wave 3 activated: Processor + MailMerger added to allowed_types and per_type_constraints. Pilot now 8/9 roots. ReportBuilder deferred (Wave 4).",
+      "wave_status": {
+        "wave_1": {"types": ["Converter", "Watermarker", "Splitter", "Replacer"], "status": "PUBLISHED", "count": 4},
+        "wave_2": {"types": ["Merger", "Comparer"], "status": "PR_DRY_RUN_READY", "count": 2},
+        "wave_3": {"types": ["Processor", "MailMerger"], "status": "CONFIG_READY_AWAITING_GENERATION", "count": 2},
+        "wave_4": {"types": ["ReportBuilder"], "status": "DEFERRED_MEDIUM_RISK", "count": 1}
+      },
+      "next_unblock": "Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL to run Wave 3 generation"
+    },
+    "pdf": {
+      "total_workflow_roots": 25,
+      "published": 2,
+      "pr_dry_run_ready": 1,
+      "reviewer_passed_1_of_2": 1,
+      "pilot_allowed": 5,
+      "deferred_outside_pilot": 20,
+      "healing_status": "ACTIVE_HEALING",
+      "coverage_pct_of_roots": 8.0,
+      "coverage_pct_of_pilot": 40.0,
+      "sprint_delta": "Wave A first candidate activated: PdfAConverter added to allowed_types. Pilot now 5 types. PdfAConverter READY_AFTER_CONFIG (reuses programmatic_pdf_single fixture). 19 deferred types remain in Wave A-D classification.",
+      "wave_status": {
+        "pilot_original": {"types": ["Merger", "TextExtractor", "Splitter", "Optimizer"], "status": "2_PUBLISHED_1_DRY_RUN_1_REVIEWER_PASS", "count": 4},
+        "wave_A_first": {"types": ["PdfAConverter"], "status": "CONFIG_READY_AWAITING_GENERATION", "count": 1},
+        "wave_A_remaining": {"types": ["TocGenerator", "DocConverter", "XlsConverter", "PdfExtractor", "Html"], "status": "HEALABLE_LOW_RISK_DEFERRED_SPRINT4", "count": 5},
+        "wave_B": {"types": ["Jpeg", "Png", "Tiff", "PdfToImage", "ImageExtractor", "TableGenerator", "FormFlattener"], "status": "HEALABLE_MEDIUM_RISK_DEFERRED_SPRINT5", "count": 7},
+        "wave_C": {"types": ["FormEditor", "FormExporter", "FormImporter", "SelectField", "Security"], "status": "HEALABLE_HIGH_RISK_DEFERRED_SPRINT6", "count": 5},
+        "wave_D": {"types": ["Signature", "Timestamp", "Ofd"], "status": "EXTERNALLY_BLOCKED_SPRINT7+", "count": 3}
+      },
+      "next_unblock": "Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL to run PdfAConverter generation; also publish PR#3 (Splitter) and PR#4 (Optimizer) when APPROVE_LIVE_PR set"
+    },
+    "diagram": {
+      "total_workflow_roots": 2,
+      "published": 2,
+      "pr_dry_run_ready": 0,
+      "deferred": 0,
+      "healing_status": "COMPLETE",
+      "coverage_pct_of_roots": 100.0,
+      "sprint_delta": "Diagram PR #1 merged in prior sprint. Post-merge ALL_PASS. Fully complete."
+    },
+    "email": {
+      "total_workflow_roots": 1,
+      "published": 0,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 0,
+      "deferred": 1,
+      "deferred_type_names": ["Converter"],
+      "healing_status": "ACTIVATION_PLAN_COMPLETE",
+      "coverage_pct_of_roots": 0.0,
+      "sprint_delta": "email.yml updated with RFC 2822 fixture creation strategy, async/await pattern constraints, FolderOutputHandler usage. Per_type_constraints fully documented. Hard blocker: repo not provisioned by maintainer. Soft blocker: status=discovery_only.",
+      "hard_blockers": ["Repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples not provisioned — MAINTAINER action required"],
+      "next_unblock": "Maintainer provisions email repo; then set status=active + allowed_types=[Converter] in email.yml"
+    },
+    "slides": {
+      "total_workflow_roots": 3,
+      "published": 0,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 0,
+      "deferred": 3,
+      "deferred_type_names": ["Convert", "Compress", "Merger"],
+      "healing_status": "ACTIVATION_PLAN_COMPLETE",
+      "coverage_pct_of_roots": 0.0,
+      "sprint_delta": "slides.yml updated with critical Compress save-rule (pres.Save() REQUIRED after Compress), template_hints for PPTX fixture creation, and full per_type_constraints for Convert + Compress + Merger. Hard blocker: repo not provisioned.",
+      "critical_constraint_added": "Compress.REQUIRED: pres.Save(outputPath, SaveFormat.Pptx) — Compress mutates Presentation object in-place; Save is NOT automatic",
+      "hard_blockers": ["Repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples not provisioned — MAINTAINER action required"],
+      "next_unblock": "Maintainer provisions slides repo; then set status=active + allowed_types=[Convert] in slides.yml (Convert is safest first — file-path API)"
+    }
+  },
+
+  "healing_velocity": {
+    "sprint_3_actual": {
+      "types_newly_config_activated": 3,
+      "types_detail": ["Words:Processor", "Words:MailMerger", "PDF:PdfAConverter"],
+      "types_published": 0,
+      "types_published_note": "Generation blocked by missing LLM env vars (GPT_OSS_ENDPOINT, GPT_OSS_MODEL)"
+    },
+    "sprint_4_target": {
+      "types_target": 9,
+      "detail": "PDF Wave A remaining (5) + Words Wave 3 generation runs (2) + PDF PR publication (2) = ~9 types converted from deferred/config-ready to published"
+    },
+    "sprint_5_target": {
+      "types_target": 8,
+      "detail": "PDF Wave B (7) + Email Converter (1, pending repo provisioning)"
+    },
+    "projected_deferred_zero": "Sprint 7-8 (assuming Wave D external blockers resolved for Signature/Timestamp)"
+  },
+
+  "infrastructure_changes_this_sprint": {
+    "LANE_2_runtime_repair_constraint_reinjection": "runner.py runtime repair prompt now includes REQUIRED/FORBIDDEN constraints — prevents LLM regression during runtime repair (was: build repair only)",
+    "LANE_3_output_validators": "output_validator.py now validates OOXML (.docx, .pptx), OLE2 (.doc, .xls, .msg), and .eml formats — unblocks output validation for Words Wave 3 + future family types",
+    "LANE_4_words_wave3_config": "words.yml + words.json: Processor + MailMerger added to allowed_types, per_type_constraints, template_hints. Wave 3 pilot scope now 8/9 runnable roots.",
+    "LANE_5_pdf_wavea_first": "pdf.yml + pdf.json: PdfAConverter added as first Wave A type. Pilot scope 5/25 runnable roots.",
+    "LANE_6_slides_email_activation_docs": "slides.yml: critical Compress pres.Save() constraint + PPTX fixture template_hints. email.yml: RFC 2822 fixture strategy + async/await + FolderOutputHandler constraints."
+  },
+
+  "publication_closures_this_sprint": {
+    "words_wave2_merger_comparer": {
+      "status": "BLOCKED_APPROVAL_MISSING",
+      "pr_dry_run_package": "workspace/runs/pilot-words-20260513-114425/",
+      "blocked_by": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "unblock_command": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; $env:GITHUB_TOKEN=[Environment]::GetEnvironmentVariable('GH_TOKEN','User'); $env:PYTHONPATH='src'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family words --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+    },
+    "pdf_splitter": {
+      "status": "BLOCKED_APPROVAL_MISSING",
+      "pr_dry_run_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/",
+      "blocked_by": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "unblock_command": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; $env:GITHUB_TOKEN=[Environment]::GetEnvironmentVariable('GH_TOKEN','User'); $env:PYTHONPATH='src'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest"
+    },
+    "pdf_optimizer": {
+      "status": "BLOCKED_NEEDS_SECOND_REVIEWER_PASS_AND_GENERATION",
+      "blocked_by": "EXAMPLE_REVIEWER_PATH not set; GPT_OSS_MODEL not set",
+      "unblock_sequence": "1. Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL; 2. Set EXAMPLE_REVIEWER_PATH; 3. Run PDF pilot to get 2nd consecutive PASS; 4. Then publish-pr"
+    }
+  }
+}

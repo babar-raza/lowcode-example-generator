@@ -1,5 +1,5 @@
 {
-  "verdict": "PR_DRY_RUN_READY",
+  "verdict": "PARTIAL_PR_DRY_RUN_READY",
   "publishable": false,
   "all_required_passed": true,
   "blocking_gates": [],
@@ -42,7 +42,7 @@
       "status": "passed",
       "required": true,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "8/10 examples passed runtime",
       "downstream_blocked": [],
       "stage_name": "validation"
     },

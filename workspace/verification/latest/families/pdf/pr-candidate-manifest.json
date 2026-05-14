@@ -2,34 +2,67 @@
   "included_examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-doc-converter",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "pdf-html",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     }
   ],
-  "excluded_examples": [],
-  "exclusion_reasons": {},
+  "excluded_examples": [
+    {
+      "scenario_id": "pdf-jpeg",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "blocked_reason": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "blocked_reason": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created."
+    }
+  ],
+  "exclusion_reasons": {
+    "EXAMPLE_BLOCKED_RUN_FAILED": [
+      "pdf-jpeg",
+      "pdf-tiff"
+    ]
+  },
   "dry_run": true,
   "live_publish_attempted": false,
-  "publishable_candidate_count": 5,
-  "blocked_candidate_count": 0
+  "publishable_candidate_count": 8,
+  "blocked_candidate_count": 2
 }

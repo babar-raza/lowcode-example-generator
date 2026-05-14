@@ -1,0 +1,25 @@
+{
+  "included_examples": [
+    {
+      "scenario_id": "slides-compress",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260513-221516\\generated\\slides\\slides-compress",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260513-221516\\generated\\slides\\slides-convert",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260513-221516\\generated\\slides\\slides-merger",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
+  "excluded_examples": [],
+  "exclusion_reasons": {},
+  "dry_run": true,
+  "live_publish_attempted": false,
+  "publishable_candidate_count": 3,
+  "blocked_candidate_count": 0
+}

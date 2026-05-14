@@ -1,0 +1,143 @@
+{
+  "artifact_type": "healing_prioritization_dashboard",
+  "generated_at": "2026-05-13T14:00:00+00:00",
+  "sprint": "Portfolio Healing Acceleration Sprint",
+
+  "priority_queue": [
+    {
+      "rank": 1,
+      "action": "Publish Words Wave 2 (Merger + Comparer)",
+      "family": "words",
+      "types": ["Merger", "Comparer"],
+      "current_state": "PR_DRY_RUN_READY",
+      "target_state": "PUBLISHED",
+      "effort": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL + GITHUB_TOKEN → run publish-pr",
+      "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL missing",
+      "healing_risk": "LOW",
+      "denominator_impact": "+2 published (4→6 of 9 Words roots)"
+    },
+    {
+      "rank": 2,
+      "action": "Publish PDF Splitter (PR #3)",
+      "family": "pdf",
+      "types": ["Splitter"],
+      "current_state": "PR_DRY_RUN_READY",
+      "target_state": "PUBLISHED",
+      "effort": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL + GITHUB_TOKEN → run publish-pr for pdf",
+      "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL missing",
+      "healing_risk": "LOW",
+      "denominator_impact": "+1 published (2→3 of 25 PDF roots)"
+    },
+    {
+      "rank": 3,
+      "action": "Run Words Wave 3 generation (Processor + MailMerger)",
+      "family": "words",
+      "types": ["Processor", "MailMerger"],
+      "current_state": "CONFIG_READY_AWAITING_GENERATION",
+      "target_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "effort": "Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL → run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family words --tier 5 --promote-latest",
+      "blocker": "GPT_OSS_ENDPOINT + GPT_OSS_MODEL not set",
+      "healing_risk": "LOW (Processor READY_AFTER_CONFIG; MailMerger NEEDS_FIXTURE_CODE but template_hints in yml)",
+      "denominator_impact": "+2 workflow_roots in generation (6→8 of 9 Words roots in pilot)"
+    },
+    {
+      "rank": 4,
+      "action": "Run PDF Optimizer 2nd reviewer pass + publish PR #4",
+      "family": "pdf",
+      "types": ["Optimizer"],
+      "current_state": "REVIEWER_PASSED_1_OF_2",
+      "target_state": "PUBLISHED",
+      "effort": "Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL + EXAMPLE_REVIEWER_PATH → run PDF pilot → then publish-pr",
+      "blocker": "GPT_OSS_MODEL + EXAMPLE_REVIEWER_PATH missing",
+      "healing_risk": "LOW (1 pass already; fix active in code_generator.py)",
+      "denominator_impact": "+1 published (3→4 of 5 PDF pilot types once PR#3 also published)"
+    },
+    {
+      "rank": 5,
+      "action": "Run PDF PdfAConverter generation (Wave A first)",
+      "family": "pdf",
+      "types": ["PdfAConverter"],
+      "current_state": "CONFIG_READY_AWAITING_GENERATION",
+      "target_state": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "effort": "Set GPT_OSS_ENDPOINT + GPT_OSS_MODEL → run PDF pilot (PdfAConverter now in allowed_types)",
+      "blocker": "GPT_OSS_ENDPOINT + GPT_OSS_MODEL not set",
+      "healing_risk": "LOW (Wave A config-only; same plugin pattern as other PDF types)",
+      "denominator_impact": "+1 generation candidate (adds to PDF wave progression)"
+    },
+    {
+      "rank": 6,
+      "action": "Provision Email + Slides repos (maintainer action)",
+      "family": "email + slides",
+      "types": ["Email:Converter", "Slides:Convert", "Slides:Compress", "Slides:Merger"],
+      "current_state": "EXTERNALLY_BLOCKED_REPO_NOT_PROVISIONED",
+      "target_state": "REPO_PROVISIONED",
+      "effort": "Maintainer creates GitHub repos: aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples + aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "blocker": "Maintainer action — no pipeline code change can unblock",
+      "healing_risk": "LOW_AFTER_PROVISIONING (activation plans fully documented in email.yml + slides.yml)",
+      "denominator_impact": "+4 types immediately activatable after provisioning"
+    },
+    {
+      "rank": 7,
+      "action": "PDF Wave A remaining 5 types (TocGenerator, DocConverter, XlsConverter, PdfExtractor, Html)",
+      "family": "pdf",
+      "types": ["TocGenerator", "DocConverter", "XlsConverter", "PdfExtractor", "Html"],
+      "current_state": "HEALABLE_LOW_RISK_CLASSIFIED",
+      "target_state": "CONFIG_READY_THEN_PUBLISHED",
+      "effort": "Add 5 types to pdf.yml allowed_types + per_type_constraints (output validators may need extension for DOC/XLS/HTML) → run generation",
+      "blocker": "Sprint 4 target — deferred from this sprint",
+      "healing_risk": "LOW",
+      "denominator_impact": "+5 PDF generation candidates (deferred-to-healable conversion)"
+    },
+    {
+      "rank": 8,
+      "action": "PDF Wave B: 7 image output types",
+      "family": "pdf",
+      "types": ["Jpeg", "Png", "Tiff", "PdfToImage", "ImageExtractor", "TableGenerator", "FormFlattener"],
+      "current_state": "HEALABLE_MEDIUM_RISK_CLASSIFIED",
+      "target_state": "CONFIG_READY_THEN_PUBLISHED",
+      "effort": "New image validators or config extension per type → add to allowed_types → run generation",
+      "blocker": "Sprint 5 target",
+      "healing_risk": "MEDIUM",
+      "denominator_impact": "+7 PDF generation candidates"
+    },
+    {
+      "rank": 9,
+      "action": "Words Wave 4: ReportBuilder (LINQ template)",
+      "family": "words",
+      "types": ["ReportBuilder"],
+      "current_state": "HEALABLE_MEDIUM_RISK_CLASSIFIED",
+      "target_state": "CONFIG_READY_THEN_PUBLISHED",
+      "effort": "Add to words.yml with LINQ <<[FieldName]>> template_hints and explicit constraints → run generation",
+      "blocker": "Sprint 4/5 target — LINQ syntax risk requires careful constraint injection",
+      "healing_risk": "MEDIUM",
+      "denominator_impact": "+1 Words root (8→9 of 9 = 100% Words pilot coverage)"
+    },
+    {
+      "rank": 10,
+      "action": "PDF Wave C: 5 AcroForm types",
+      "family": "pdf",
+      "types": ["FormEditor", "FormExporter", "FormImporter", "SelectField", "Security"],
+      "current_state": "HEALABLE_HIGH_RISK_CLASSIFIED",
+      "target_state": "CONFIG_READY_THEN_PUBLISHED",
+      "effort": "Programmatic AcroForm fixture via Aspose.Pdf.Forms. Security needs encrypted PDF creation fixture.",
+      "blocker": "Sprint 5/6 target — needs new fixture code",
+      "healing_risk": "HIGH",
+      "denominator_impact": "+5 PDF generation candidates"
+    }
+  ],
+
+  "env_unblock_checklist": {
+    "to_unblock_publication": [
+      "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "GITHUB_TOKEN (classic PAT with repo scope, from GH_TOKEN env var)"
+    ],
+    "to_unblock_generation": [
+      "GPT_OSS_ENDPOINT=<llm endpoint url>",
+      "GPT_OSS_MODEL=<model name>"
+    ],
+    "to_unblock_reviewer": [
+      "EXAMPLE_REVIEWER_PATH=C:/Users/prora/OneDrive/Documents/GitHub/example-reviewer"
+    ],
+    "note": "All env vars reported as empty string in current session — set before running any pipeline command"
+  }
+}

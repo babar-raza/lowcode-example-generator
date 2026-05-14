@@ -491,6 +491,7 @@ def write_pr_candidate_manifest(
     manifest: dict,
     verification_dir: Path,
     merge_existing: bool = True,
+    prior_manifest_path: Path | None = None,
 ) -> Path:
     """Write PR candidate manifest.
 
@@ -498,20 +499,28 @@ def write_pr_candidate_manifest(
     using merge_pr_candidate_manifests() — preserving previously-passing candidates
     that were not re-attempted or regressed in the current run.
 
+    The merge looks up the prior manifest from (in order):
+    1. verification_dir / "latest" / "pr-candidate-manifest.json" (run-local evidence)
+    2. prior_manifest_path (e.g. the global workspace/verification/latest/ path)
+
     When merge_existing=False, overwrites the existing manifest (legacy behavior).
     """
     latest = verification_dir / "latest"
     latest.mkdir(parents=True, exist_ok=True)
     path = latest / "pr-candidate-manifest.json"
 
+    # Determine the prior manifest to merge from: run-local first, then global fallback
+    prior_path = path if path.exists() else (prior_manifest_path if prior_manifest_path and prior_manifest_path.exists() else None)
+
     final_manifest = manifest
-    if merge_existing and path.exists():
+    if merge_existing and prior_path is not None:
         try:
-            with open(path) as f:
+            with open(prior_path) as f:
                 existing = json.load(f)
             final_manifest = merge_pr_candidate_manifests(existing, manifest)
             logger.info(
-                "PR candidate manifest merged: %d included (%d from prior runs preserved)",
+                "PR candidate manifest merged from %s: %d included (%d from prior runs preserved)",
+                prior_path,
                 final_manifest["publishable_candidate_count"],
                 final_manifest["publishable_candidate_count"] - manifest.get("publishable_candidate_count", 0),
             )

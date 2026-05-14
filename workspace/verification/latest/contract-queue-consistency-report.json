@@ -1,0 +1,59 @@
+{
+  "produced_at": "2026-05-13T16:18:11.617056+00:00",
+  "contracts_per_family": {
+    "cells": 9,
+    "words": 7,
+    "pdf": 5,
+    "diagram": 0
+  },
+  "total_contracts": 21,
+  "contract_test_expectation": 21,
+  "contract_queue_alignment": {
+    "all_POST_MERGE_VERIFIED_have_contracts": true,
+    "all_REVIEWED_have_contracts": true,
+    "PERMANENTLY_BLOCKED_no_contract_required": true,
+    "BACKLOGGED_no_contract_required": true,
+    "issues": []
+  },
+  "denominator_queue_match": {
+    "words": {
+      "published_count": 7,
+      "POST_MERGE_VERIFIED": 7,
+      "match": true
+    },
+    "pdf": {
+      "published_count": 4,
+      "POST_MERGE_VERIFIED": 4,
+      "match": true
+    },
+    "cells": {
+      "published_count": 9,
+      "POST_MERGE_VERIFIED": 9,
+      "match": true
+    },
+    "diagram": {
+      "published_count": 2,
+      "POST_MERGE_VERIFIED": 2,
+      "match": true
+    }
+  },
+  "processor_governance": {
+    "scenario_id": "words-processor",
+    "state": "PERMANENTLY_BLOCKED",
+    "reason": "UNREACHABLE_LOWCODE_API_NO_PUBLIC_CONSTRUCTOR_NO_STATIC_ENTRYPOINT",
+    "contract_required": false,
+    "denominator_workflow_root": true,
+    "classification_note": "Correct: Processor is a workflow root by design but structurally unreachable; permanently blocked, no contract needed"
+  },
+  "new_words_contracts_in_b2bcf5d": {
+    "words-comparer.json": "COMMITTED",
+    "words-mail-merger.json": "COMMITTED",
+    "words-merger.json": "COMMITTED"
+  },
+  "pdf_pdfa_converter_contract": {
+    "file": "pipeline/contracts/pdf/pdf-pdfa-converter.json",
+    "state_in_queue": "POST_MERGE_VERIFIED",
+    "status": "CONTRACT_EXISTS"
+  },
+  "overall_verdict": "CONTRACTS_AND_QUEUE_FULLY_CONSISTENT"
+}

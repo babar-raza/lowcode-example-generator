@@ -1,0 +1,15 @@
+{
+  "included_examples": [
+    {
+      "scenario_id": "email-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260513-220337\\generated\\email\\email-converter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    }
+  ],
+  "excluded_examples": [],
+  "exclusion_reasons": {},
+  "dry_run": true,
+  "live_publish_attempted": false,
+  "publishable_candidate_count": 1,
+  "blocked_candidate_count": 0
+}

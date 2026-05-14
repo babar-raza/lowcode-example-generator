@@ -1,7 +1,7 @@
 {
-  "total": 5,
-  "passed": 5,
-  "failed": 0,
+  "total": 10,
+  "passed": 8,
+  "failed": 2,
   "results": [
     {
       "scenario_id": "pdf-doc-converter",
@@ -11,42 +11,43 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 878.3097267150879
+        "duration_ms": 966.9060707092285
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1256.0791969299316
+        "duration_ms": 1389.09912109375
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3090.6717777252197
+        "duration_ms": 3577.2082805633545
       }
     },
     {
-      "scenario_id": "pdf-html",
-      "passed": true,
-      "failure_stage": null,
+      "scenario_id": "pdf-jpeg",
+      "passed": false,
+      "failure_stage": "run",
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1106.198787689209
+        "duration_ms": 1286.834716796875
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1407.0937633514404
+        "duration_ms": 1432.5947761535645
       },
       "run": {
         "operation": "run",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 3220.8595275878906
+        "success": false,
+        "exit_code": 3762504530,
+        "duration_ms": 2606.454610824585,
+        "stderr": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.CreateDirectory(String fullPath, Byte[] securityDescriptor)\n   at System.IO.Directory.CreateDirectory(String path)\n   at Aspose.Pdf.LowCode.PdfToImage.#=zzBg_pes=(PdfToImageOptions #=zbYULmk8=, ResultContainer #=zbOOFwtRW0n1w)\n   at Aspose.Pdf.LowCode.PdfToImage.Process(IPluginOptions pdfImageOptions)\n   at Program.Main() in C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg\\Program.cs:line 34\n"
       }
     },
     {
@@ -57,19 +58,88 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1165.6501293182373
+        "duration_ms": 1222.332239151001
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1400.275468826294
+        "duration_ms": 1539.1428470611572
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1871.2189197540283
+        "duration_ms": 2014.7180557250977
+      }
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1213.7694358825684
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1506.9820880889893
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2652.6272296905518
+      }
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1332.31782913208
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1554.1348457336426
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 3091.0563468933105
+      }
+    },
+    {
+      "scenario_id": "pdf-png",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1361.8509769439697
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1718.5797691345215
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2794.7001457214355
       }
     },
     {
@@ -80,19 +150,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1108.8898181915283
+        "duration_ms": 1229.5103073120117
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1284.3122482299805
+        "duration_ms": 1416.778326034546
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2352.141857147217
+        "duration_ms": 2562.5851154327393
       }
     },
     {
@@ -103,19 +173,66 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1132.9960823059082
+        "duration_ms": 1236.4897727966309
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1346.447467803955
+        "duration_ms": 1410.0885391235352
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2323.8675594329834
+        "duration_ms": 2446.6333389282227
+      }
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "passed": false,
+      "failure_stage": "run",
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 928.6298751831055
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1209.3160152435303
+      },
+      "run": {
+        "operation": "run",
+        "success": false,
+        "exit_code": 3762504530,
+        "duration_ms": 2984.5826625823975,
+        "stderr": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.\n   at Program.Main() in C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff\\Program.cs:line 36\n"
+      }
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1249.0825653076172
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1392.0526504516602
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2779.8092365264893
       }
     }
   ]

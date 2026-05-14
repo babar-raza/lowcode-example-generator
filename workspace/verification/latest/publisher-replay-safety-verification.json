@@ -1,0 +1,64 @@
+{
+  "produced_at": "2026-05-13T16:20:00Z",
+  "version": "1.0",
+  "purpose": "Verify publisher replay remains fail-closed under all unsafe conditions",
+  "test_results": {
+    "unit_tests": {
+      "test_publisher_reviewer_unavailable_raises": "PASS",
+      "test_publisher_stale_gate_verdict_raises": "PASS",
+      "test_publisher_missing_candidates_raises": "PASS",
+      "test_stale_check_always_written": "PASS",
+      "test_copies_reviewer_file": "PASS",
+      "test_unavailable_reviewer_raises": "PASS",
+      "test_missing_reviewer_evidence_raises": "PASS",
+      "test_publisher_skips_reviewer": "PASS",
+      "suite": "12/12 publisher-safety tests PASS"
+    },
+    "live_fail_closed_tests": {
+      "words_publisher_replay_reviewer_unavailable": {
+        "run": "pilot-words-20260513-175418",
+        "check_triggered": "publisher_reviewer_available",
+        "error": "Reviewer evidence shows available=false. Publisher replay requires a run where reviewer actually executed.",
+        "result": "FAIL_CLOSED_BEFORE_ANY_STAGE_RAN",
+        "stale_artifact_check_written": true
+      },
+      "pdf_publisher_replay_reviewer_unavailable": {
+        "run": "pilot-pdf-20260513-181803",
+        "check_triggered": "publisher_reviewer_available",
+        "error": "Reviewer evidence shows available=false. Publisher replay requires a run where reviewer actually executed.",
+        "result": "FAIL_CLOSED_BEFORE_ANY_STAGE_RAN",
+        "stale_artifact_check_written": true
+      }
+    }
+  },
+  "fail_closed_conditions_verified": {
+    "reviewer_available_false": {
+      "behavior": "HARD FAIL — ReplayIntegrityError raised before any stage runs",
+      "test_coverage": "unit + live",
+      "verdict": "VERIFIED"
+    },
+    "stale_gate_verdict": {
+      "behavior": "HARD FAIL — verdict not in {PR_DRY_RUN_READY, PR_READY, FULL_E2E_PASSED, PARTIAL_PR_DRY_RUN_READY, PARTIAL_PR_READY}",
+      "test_coverage": "unit",
+      "verdict": "VERIFIED"
+    },
+    "missing_pr_candidates": {
+      "behavior": "HARD FAIL — publishable_candidate_count=0",
+      "test_coverage": "unit",
+      "verdict": "VERIFIED"
+    },
+    "missing_reviewer_evidence_file": {
+      "behavior": "HARD FAIL — example-reviewer-results.json not found",
+      "test_coverage": "unit",
+      "verdict": "VERIFIED"
+    }
+  },
+  "governance_invariants_verified": {
+    "scenario_planning_not_skippable": true,
+    "completeness_gate_not_bypassable": true,
+    "reviewer_not_bypassable_in_publisher_mode": true,
+    "release_status_always_refreshed": "scenario_planning re-runs, refreshing lifecycle/completion state",
+    "stale_artifact_check_always_written_before_raise": true
+  },
+  "overall_verdict": "PUBLISHER_REPLAY_FAIL_CLOSED_VERIFIED"
+}

@@ -1,0 +1,68 @@
+{
+  "report_type": "pdf_validator_fixture_unlock_report",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 9: PDF Wave B Publication + Next Wave Execution",
+  "lane": "LANE 4 \u2014 Validator/Fixture Unlocks for Wave C",
+
+  "wave_c_types": ["Jpeg", "Png", "Tiff"],
+
+  "output_validator_audit": {
+    "file": "src/plugin_examples/verifier_bridge/output_validator.py",
+    "image_validation_line": 177,
+    "image_extensions_supported": [".png", ".jpg", ".jpeg", ".bmp", ".tiff"],
+    "validation_method": "_validate_image_output(output_path)",
+    "png_check": "header b'\\x89PNG'",
+    "jpeg_check": "header b'\\xff\\xd8'",
+    "tiff_check": "header b'II' or b'MM' (little/big-endian TIFF magic)",
+    "status": "ALREADY_IMPLEMENTED \u2014 no code changes required"
+  },
+
+  "pipeline_validation_integration": {
+    "note": "validate_output_file_semantic() exists in output_validator.py but is NOT called from the runner pipeline. Validation in runner.py is based on build exit code + run exit code (dotnet_runner.py). Image type success = exit code 0.",
+    "implication": "Image types pass pipeline validation when: (1) dotnet build succeeds, (2) dotnet run exits 0, (3) C# code prints success to stdout.",
+    "no_pipeline_changes_needed": true
+  },
+
+  "fixture_strategy_for_image_types": {
+    "Jpeg": {
+      "input": "Programmatic PDF via new Document() + doc.Pages.Add() + doc.Save(\"input.pdf\") \u2014 same as all other PDF types",
+      "options_class": "JpegOptions",
+      "output_extension": ".jpg",
+      "output_file": "output.jpg",
+      "pattern": "new Jpeg().Process(new JpegOptions() with AddInput/AddOutput)",
+      "fixture_feasibility": "LOW_COMPLEXITY \u2014 same fixture as Splitter/Optimizer"
+    },
+    "Png": {
+      "input": "Programmatic PDF \u2014 same as all other PDF types",
+      "options_class": "PngOptions",
+      "output_extension": ".png",
+      "output_file": "output.png",
+      "pattern": "new Png().Process(new PngOptions() with AddInput/AddOutput)",
+      "fixture_feasibility": "LOW_COMPLEXITY"
+    },
+    "Tiff": {
+      "input": "Programmatic PDF \u2014 same as all other PDF types",
+      "options_class": "TiffOptions",
+      "output_extension": ".tiff",
+      "output_file": "output.tiff",
+      "pattern": "new Tiff().Process(new TiffOptions() with AddInput/AddOutput)",
+      "fixture_feasibility": "LOW_COMPLEXITY"
+    }
+  },
+
+  "per_type_constraints_added_to_pdf_yml": {
+    "Jpeg": true,
+    "Png": true,
+    "Tiff": true,
+    "constraints_cover": ["REQUIRED options class", "REQUIRED using directives", "REQUIRED Process() call", "REQUIRED AddInput/AddOutput", "FORBIDDEN PluginOptions", "FORBIDDEN legacy image APIs"]
+  },
+
+  "no_changes_required_in": [
+    "output_validator.py \u2014 image validators already implemented",
+    "dotnet_runner.py \u2014 build/run flow unchanged",
+    "runner.py \u2014 no pipeline stage changes",
+    "project_generator.py \u2014 output extension inferred from generated code"
+  ],
+
+  "lane4_verdict": "UNLOCKED \u2014 All image type validators already implemented. No pipeline changes required. per_type_constraints added to pdf.yml for Jpeg/Png/Tiff. Image wave generation can proceed immediately."
+}

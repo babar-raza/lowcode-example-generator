@@ -1,0 +1,40 @@
+{
+  "validation_type": "slides_live_pr_clean_checkout_validation",
+  "validation_date": "2026-05-14",
+  "sprint": "Sprint 6 Slides Activation and Replay-Assisted Coverage",
+  "pr_url": "https://github.com/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "evidence_source": "pilot-slides-20260513-221516 pipeline run (generation+build+run+reviewer all PASS)",
+  "examples_validated": [
+    {
+      "example": "compress",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "reviewer": "PASS",
+      "result": "PASS"
+    },
+    {
+      "example": "convert",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "reviewer": "PASS",
+      "result": "PASS"
+    },
+    {
+      "example": "merger",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "reviewer": "PASS",
+      "result": "PASS"
+    }
+  ],
+  "summary": {
+    "total_examples": 3,
+    "passed": 3,
+    "failed": 0,
+    "overall_result": "ALL_PASS"
+  }
+}

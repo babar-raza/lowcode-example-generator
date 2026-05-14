@@ -1,0 +1,43 @@
+{
+  "total_types": 3,
+  "role_summary": {
+    "workflow_root": 1,
+    "provider_callback": 1,
+    "interface_contract": 1
+  },
+  "types": [
+    {
+      "full_name": "Aspose.Email.LowCode.Converter",
+      "name": "Converter",
+      "role": "workflow_root",
+      "confidence": 0.95,
+      "reason": "Workflow verb + static methods: Converter",
+      "has_static_methods": true,
+      "has_instance_methods": false,
+      "has_constructors": true,
+      "method_count": 7
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.FolderOutputHandler",
+      "name": "FolderOutputHandler",
+      "role": "provider_callback",
+      "confidence": 0.95,
+      "reason": "Name matches callback/provider pattern: FolderOutputHandler",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": true,
+      "method_count": 2
+    },
+    {
+      "full_name": "Aspose.Email.LowCode.IOutputHandler",
+      "name": "IOutputHandler",
+      "role": "interface_contract",
+      "confidence": 1.0,
+      "reason": "Interface type",
+      "has_static_methods": false,
+      "has_instance_methods": true,
+      "has_constructors": false,
+      "method_count": 2
+    }
+  ]
+}

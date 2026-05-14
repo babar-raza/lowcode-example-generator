@@ -1,0 +1,14 @@
+{
+  "scenarios": [
+    {
+      "scenario_id": "email-converter",
+      "workflow_type": "Converter",
+      "selected_input_format": ".eml",
+      "selected_output_format": ".pdf",
+      "reason": "Inferred from type name Converter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    }
+  ]
+}

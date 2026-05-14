@@ -1,0 +1,81 @@
+{
+  "report_type": "pdf_image_wave_generation_results",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 9: PDF Wave B Publication + Next Wave Execution",
+  "lane": "LANE 3 — PDF Image Wave Generation (Jpeg/Png/Tiff)",
+
+  "pilot_run": "pilot-pdf-20260514-211320",
+
+  "infrastructure_changes": {
+    "type_classifier_fix": {
+      "file": "src/plugin_examples/scenario_planner/type_classifier.py",
+      "change": "0-method constructor-only types now classified as OPERATION_FACADE (was UNKNOWN)",
+      "impact": "Jpeg/Png/Tiff now planned as runnable scenarios instead of blocked_unknown"
+    },
+    "manifest_merge_fix": {
+      "file": "src/plugin_examples/gates/example_gates.py",
+      "change": "write_pr_candidate_manifest() accepts prior_manifest_path parameter for global manifest fallback",
+      "impact": "Cross-run passes preserved in manifest even when run-local evidence dir is empty"
+    },
+    "runner_manifest_wiring": {
+      "file": "src/plugin_examples/runner.py",
+      "change": "Passes global verification_dir/latest/pr-candidate-manifest.json as prior_manifest_path",
+      "impact": "Manifest merge correctly finds global promoted manifest across runs"
+    },
+    "pdf_yml_changes": [
+      "Added Jpeg, Png, Tiff to allowed_types (total: 11 allowed)",
+      "Added preferred_methods_per_type for Jpeg/Png/Tiff: Process",
+      "Added per_type_constraints for Jpeg/Png/Tiff with FORBIDDEN hallucinated APIs",
+      "Added template_hints for image output (extensions, converter note)",
+      "Increased max_examples_per_monthly_run: 10 -> 15"
+    ]
+  },
+
+  "results": {
+    "total_run": 10,
+    "build_passed": 10,
+    "runtime_passed": 8,
+    "runtime_failed": 2,
+    "passed_types": ["doc-converter", "merger", "optimizer", "pdf-aconverter", "png", "splitter", "text-extractor", "xls-converter"],
+    "failed_types": ["jpeg", "tiff"]
+  },
+
+  "image_type_outcomes": {
+    "png": {
+      "status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "build": "PASS",
+      "runtime": "PASS",
+      "output_extension_used": ".png",
+      "notes": "First image type to pass. Correct API usage: PngOptions, new Png().Process(options), output.png"
+    },
+    "jpeg": {
+      "status": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "build": "PASS",
+      "runtime": "FAIL",
+      "failure_type": "unknown_runtime_failure",
+      "error": "System.IO.IOException: Cannot create 'output.pdf' because a file or directory with the same name already exists.",
+      "root_cause": "LLM used output.pdf extension instead of output.jpg. The Jpeg plugin (internally PdfToImage) attempts to create a directory at the output path for page images — conflicting with existing output.pdf file.",
+      "fix_needed": "Add REQUIRED constraint specifying 'output.jpg' filename explicitly, or FORBIDDEN: AddOutput with .pdf extension for Jpeg type",
+      "sprint10_action": "Add per_type_constraints Jpeg.required: 'REQUIRED: AddOutput(new FileDataSource(\"output.jpg\")) — extension must be .jpg not .pdf'"
+    },
+    "tiff": {
+      "status": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "build": "PASS",
+      "runtime": "FAIL",
+      "failure_type": "blocked_invalid_operation",
+      "error": "System.InvalidOperationException: Output TIFF was not created.",
+      "root_cause": "LLM used .tif extension instead of .tiff. File.Exists('output.tif') returned false because plugin creates 'output.tiff'. The constraint specified 'output.tiff' but LLM truncated to '.tif'.",
+      "fix_needed": "Add REQUIRED constraint explicitly specifying 'output.tiff' (not '.tif') filename",
+      "sprint10_action": "Add per_type_constraints Tiff.required: 'REQUIRED: AddOutput(new FileDataSource(\"output.tiff\")) — extension must be .tiff not .tif'"
+    }
+  },
+
+  "manifest_state": {
+    "publishable_candidates": 8,
+    "merge_source": "workspace/verification/latest/pr-candidate-manifest.json (global promoted)",
+    "merge_confirmed": true,
+    "included": ["doc-converter", "html", "merger", "optimizer", "pdf-aconverter", "png", "splitter", "text-extractor", "xls-converter"]
+  },
+
+  "lane3_verdict": "PARTIAL_WAVE_SUCCESS — Png PASSED (first image type). Jpeg/Tiff failed due to wrong output file extensions in LLM-generated code. Root causes diagnosed. Sprint 10 constraint fixes identified."
+}

@@ -54,7 +54,7 @@ existing_examples:
 
 generation:
   min_examples_per_family: 3
-  max_examples_per_monthly_run: 10
+  max_examples_per_monthly_run: 15
   allow_new_fixtures: true
   allow_generated_input_files: true
   allowed_types:
@@ -66,6 +66,9 @@ generation:
     - DocConverter
     - XlsConverter
     - Html
+    - Jpeg
+    - Png
+    - Tiff
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
@@ -75,6 +78,9 @@ generation:
     DocConverter: Process
     XlsConverter: Process
     Html: Process
+    Jpeg: Process
+    Png: Process
+    Tiff: Process
 
 validation:
   require_restore: true
@@ -144,6 +150,13 @@ template_hints:
   html_input_extension: ".html"
   html_output_extension: ".pdf"
   html_options_note: 'HtmlToPdfOptions: use AddInput(new FileDataSource("input.html")) and AddOutput(new FileDataSource("output.pdf")). Input MUST be an HTML file, not a PDF.'
+  # Wave C: Image output types (Jpeg, Png, Tiff)
+  # All three use the same programmatic PDF input as other converters.
+  # Output extension differs per type. Options class matches type name + Options.
+  jpeg_output_extension: ".jpg"
+  png_output_extension: ".png"
+  tiff_output_extension: ".tiff"
+  image_converter_note: 'For Jpeg/Png/Tiff: new JpegOptions()/PngOptions()/TiffOptions(), AddInput(FileDataSource(input.pdf)), AddOutput(FileDataSource(output.jpg/png/tiff)), new Jpeg()/Png()/Tiff().Process(options)'
 
 per_type_constraints:
   Merger:
@@ -230,3 +243,42 @@ per_type_constraints:
       - "FORBIDDEN: Document(htmlFile) — this is core Aspose.Pdf constructor; use LowCode Html.Process() instead"
       - "FORBIDDEN: input.pdf as input to Html plugin — Html plugin takes HTML file input, NOT PDF input"
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
+  Jpeg:
+    required:
+      - "REQUIRED: new JpegOptions( — use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)"
+      - "REQUIRED: new Jpeg().Process(options) — use the LowCode Jpeg plugin to convert PDF to JPEG image"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Jpeg, JpegOptions, FileDataSource)"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use JpegOptions instead"
+      - "FORBIDDEN: ImageDevice or PdfConverter — use LowCode Jpeg plugin instead"
+      - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
+      - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
+  Png:
+    required:
+      - "REQUIRED: new PngOptions( — use PngOptions as the concrete options class (NOT PluginOptions which is abstract)"
+      - "REQUIRED: new Png().Process(options) — use the LowCode Png plugin to convert PDF to PNG image"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — PNG output added via AddOutput(new FileDataSource(\"output.png\"))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Png, PngOptions, FileDataSource)"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use PngOptions instead"
+      - "FORBIDDEN: ImageDevice or PdfConverter — use LowCode Png plugin instead"
+      - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
+      - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
+  Tiff:
+    required:
+      - "REQUIRED: new TiffOptions( — use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)"
+      - "REQUIRED: new Tiff().Process(options) — use the LowCode Tiff plugin to convert PDF to TIFF image"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Tiff, TiffOptions, FileDataSource)"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use TiffOptions instead"
+      - "FORBIDDEN: TiffDevice or PdfConverter — use LowCode Tiff plugin instead"
+      - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
+      - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"

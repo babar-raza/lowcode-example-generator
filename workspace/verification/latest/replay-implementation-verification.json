@@ -1,0 +1,118 @@
+{
+  "verified_at": "2026-05-13T16:15:29.457909+00:00",
+  "commit": "bec5362",
+  "files_inspected": [
+    "src/plugin_examples/replay.py",
+    "src/plugin_examples/__main__.py",
+    "src/plugin_examples/runner.py",
+    "tests/unit/test_replay.py"
+  ],
+  "checks": {
+    "cli_replay_from_arg": {
+      "status": "PASS",
+      "detail": "choices=[generation,validation,reviewer,publisher], default=None"
+    },
+    "cli_reuse_run_arg": {
+      "status": "PASS",
+      "detail": "metavar=RUN_ID, default=None, passed to run_pipeline()"
+    },
+    "valid_replay_steps_constant": {
+      "status": "PASS",
+      "detail": "VALID_REPLAY_STEPS = frozenset({generation,validation,reviewer,publisher})"
+    },
+    "find_prior_run": {
+      "status": "PASS",
+      "detail": "pilot-{family}-* prefix filter; ignores discovery-/multi-family-; sorted descending"
+    },
+    "stages_to_skip": {
+      "status": "PASS",
+      "detail": "generation->INFRA; validation->+generation; reviewer->+validation; publisher->+reviewer; scenario_planning NEVER in set"
+    },
+    "scenario_planning_never_skipped": {
+      "status": "PASS",
+      "detail": "scenario_planning absent from all skip frozensets; confirmed in stages_to_skip()"
+    },
+    "catalog_hash_canonical": {
+      "status": "PASS",
+      "detail": "json.dumps(sort_keys=True,ensure_ascii=False) hash \u2014 matches scenario_planner.compute_catalog_hash()"
+    },
+    "catalog_hash_hard_fail": {
+      "status": "PASS",
+      "detail": "status=fail recorded; raise_if_failed() called after writing stale-artifact-check.json"
+    },
+    "package_version_hard_fail": {
+      "status": "PASS",
+      "detail": "yml_version != catalog_version -> fail (when both present)"
+    },
+    "config_hash_warn_only": {
+      "status": "PASS",
+      "detail": "warn_only=True in _check_stored_hash for config_hash"
+    },
+    "denominator_hash_warn_only": {
+      "status": "PASS",
+      "detail": "warn_only=True in _check_stored_hash for denominator_hash"
+    },
+    "constraints_hash_hard_fail_for_validation": {
+      "status": "PASS",
+      "detail": "warn_only=(replay_from==generation); hard fail for validation+"
+    },
+    "path_safety_absolute": {
+      "status": "PASS",
+      "detail": "original_path.is_absolute() checked BEFORE fallback; repo_root escape -> ReplayIntegrityError"
+    },
+    "path_safety_resolved": {
+      "status": "PASS",
+      "detail": "resolved path checked against repo_root_resolved after fallback"
+    },
+    "typed_validation_results": {
+      "status": "PASS",
+      "detail": "ValidationResult/DotnetResult dataclasses constructed from JSON; no SimpleNamespace/plain dict"
+    },
+    "download_manifest_restored": {
+      "status": "PASS",
+      "detail": "nuget_fetch artifacts read from pilot-report.json; ctx.download_manifest set before plugin_detection"
+    },
+    "skipped_replayed_status": {
+      "status": "PASS",
+      "detail": "StageResult.status=skipped_replayed for all skipped stages; artifacts contain reuse_run_id"
+    },
+    "stale_artifact_check_always_written": {
+      "status": "PASS",
+      "detail": "_write_stale_check() called before raise_if_failed()"
+    },
+    "replay_manifest_output": {
+      "status": "PASS",
+      "detail": "write_replay_manifest() writes replay-manifest.json to evidence/latest/"
+    },
+    "restored_artifacts_report_output": {
+      "status": "PASS",
+      "detail": "write_replay_manifest() also writes restored-artifacts-report.json"
+    },
+    "publisher_reviewer_available_check": {
+      "status": "PASS",
+      "detail": "_check_publisher_evidence: available=false -> fail"
+    },
+    "publisher_gate_verdict_check": {
+      "status": "PASS",
+      "detail": "_PUBLISHABLE_VERDICTS checked; non-publishable -> fail"
+    },
+    "publisher_candidate_count_check": {
+      "status": "PASS",
+      "detail": "publishable_candidate_count=0 -> fail"
+    },
+    "copy_reviewer_evidence": {
+      "status": "PASS",
+      "detail": "publisher mode: reviewer JSON copied; available=False raises immediately"
+    },
+    "gate_summary_skipped_replayed": {
+      "status": "PASS",
+      "detail": "skipped count uses status in (skipped, skipped_replayed); replayed_stages key added to comparison dict"
+    },
+    "all_checks_deferred": {
+      "status": "PASS",
+      "detail": "_Checks collects all results; raise only after writing stale-artifact-check.json"
+    }
+  },
+  "all_pass": true,
+  "verdict": "IMPLEMENTATION_CONFORMS_TO_HARDENED_PLAN"
+}

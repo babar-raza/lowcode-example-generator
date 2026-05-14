@@ -1,7 +1,7 @@
 {
   "total_scored": 101,
-  "runnable_count": 19,
-  "rejected_count": 82,
+  "runnable_count": 22,
+  "rejected_count": 79,
   "scores": [
     {
       "full_name": "Aspose.Pdf.LowCode.CompressOptions",
@@ -1087,12 +1087,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Jpeg",
       "name": "Jpeg",
-      "role": "unknown",
-      "score": -2.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 0.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -1717,12 +1722,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Png",
       "name": "Png",
-      "role": "unknown",
-      "score": -2.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 0.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -2245,12 +2255,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Tiff",
       "name": "Tiff",
-      "role": "unknown",
-      "score": -2.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 0.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,

@@ -1,0 +1,43 @@
+{
+  "produced_at": "2026-05-13T16:36:34.313623+00:00",
+  "sprint": "REPLAY_DRIVEN_HEALING_CONVERGENCE",
+  "normalized_verdict": "REPLAY_DRIVEN_HEALING_CONVERGENCE_ESTABLISHED",
+  "head_at_sprint_start": "d327164 (feat(sprint4-pilot-closure))",
+  "commits_this_sprint": "NONE \u2014 all deliverables are governance documents in workspace/ (gitignored); no source changes required",
+  "replay_governance_result": "IMPLEMENTATION_CONFORMS_TO_HARDENED_PLAN \u2014 26/26 checks; all 4 replay modes proven",
+  "healing_acceleration": {
+    "reviewer_replay_speedup": "44x vs full run (7.6s vs 337.4s)",
+    "validation_replay_speedup": "3.5x vs full run (97s vs 337s)",
+    "pdf_healing_run": "pilot-pdf-20260513-213228 \u2014 82.5% time savings, 5/5 validation pass, PR_DRY_RUN_READY",
+    "replay_materially_accelerated_healing": true
+  },
+  "publisher_replay_safety": {
+    "fail_closed": true,
+    "words_family_blocked": "publisher_reviewer_available=false \u2014 ReplayIntegrityError before any stage",
+    "pdf_family_blocked": "publisher_reviewer_available=false \u2014 ReplayIntegrityError before any stage",
+    "unit_tests": "12/12 publisher-safety tests PASS"
+  },
+  "integrity_checks": {
+    "any_integrity_check_failed": false,
+    "catalog_hash_in_pdf_healing_run": "PASS",
+    "overall_integrity_in_pdf_healing_run": "PASS",
+    "scenario_planning_ran_in_all_modes": true,
+    "completeness_gate_ran_in_all_modes": true
+  },
+  "replay_integrated_into_healing_governance": true,
+  "governance_artifacts_produced": [
+    "replay-aware-queue-governance.json",
+    "replay-healing-policy-v1.json",
+    "replay-convergence-metrics.json",
+    "replay-efficiency-dashboard.json",
+    "publisher-replay-safety-verification.json",
+    "replay-assisted-healing-proof.json",
+    "replay-governance-hardening-report.json"
+  ],
+  "test_results": {
+    "test_replay_py": "50/50 pass",
+    "test_completion_queue_py": "28/28 pass",
+    "full_suite": "1496/1496 pass"
+  },
+  "system_evolution": "ESTABLISHED \u2014 moved from manual reruns toward governed replay-assisted convergence. Replay is a healing primitive with explicit policy (replay-healing-policy-v1.json), queue integration (replay-aware-queue-governance.json), and measured metrics (44x speedup for reviewer replays)."
+}

@@ -2,53 +2,67 @@
   "included_examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-doc-converter",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "pdf-html",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
       "scenario_id": "pdf-xls-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-182836\\generated\\pdf\\pdf-xls-converter",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
-      "_preserved_from_run": "pilot-pdf-20260514-182836",
-      "_preservation_reason": "Sprint 8 merge backfill: XlsConverter passed in run 1 but was absent from run 5 manifest due to overwrite bug. Canonical artifacts in workspace/runs/pilot-pdf-20260514-182836/generated/pdf/pdf-xls-converter/"
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     }
   ],
   "excluded_examples": [
     {
-      "scenario_id": "pdf-xls-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-xls-converter",
-      "final_example_verdict": "EXAMPLE_BLOCKED_GENERATION_FAILED",
-      "blocked_reason": "Post-repair validation failed in run pilot-pdf-20260514-190422. Prior pass from run pilot-pdf-20260514-182836 preserved via Sprint 8 merge fix."
+      "scenario_id": "pdf-jpeg",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "blocked_reason": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff",
+      "final_example_verdict": "EXAMPLE_BLOCKED_RUN_FAILED",
+      "blocked_reason": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created."
     }
   ],
   "exclusion_reasons": {
-    "EXAMPLE_BLOCKED_GENERATION_FAILED": ["pdf-xls-converter"]
+    "EXAMPLE_BLOCKED_RUN_FAILED": [
+      "pdf-jpeg",
+      "pdf-tiff"
+    ]
   },
   "dry_run": true,
   "live_publish_attempted": false,
-  "publishable_candidate_count": 6,
-  "blocked_candidate_count": 1,
-  "_manifest_version": "v2_merged",
-  "_merge_applied_at": "2026-05-14",
-  "_merge_notes": "Sprint 8 backfill: merge_pr_candidate_manifests() logic applied retroactively. XlsConverter preserved from run 1 (Rule 3: prior pass preserved when new run fails)."
+  "publishable_candidate_count": 8,
+  "blocked_candidate_count": 2
 }

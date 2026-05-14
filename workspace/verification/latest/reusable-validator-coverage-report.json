@@ -1,0 +1,78 @@
+{
+  "artifact_type": "reusable_validator_coverage_report",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "lane": 3,
+  "validators_added": [
+    {
+      "format": ".docx",
+      "check_type": "OOXML_ZIP",
+      "function": "_validate_ooxml_output",
+      "checks": ["docx_zip_magic (PK\\x03\\x04)", "docx_internal_xml (word/document.xml)"],
+      "unlocks_types": ["Words:DocConverter", "PDF:DocConverter"]
+    },
+    {
+      "format": ".pptx",
+      "check_type": "OOXML_ZIP",
+      "function": "_validate_ooxml_output",
+      "checks": ["pptx_zip_magic (PK\\x03\\x04)", "pptx_internal_xml (ppt/presentation.xml)"],
+      "unlocks_types": ["Slides:Convert.ToPptx"]
+    },
+    {
+      "format": ".doc",
+      "check_type": "OLE2_MAGIC",
+      "function": "_validate_ole2_output",
+      "checks": ["doc_ole2_magic (\\xd0\\xcf\\x11\\xe0)"],
+      "unlocks_types": ["PDF:DocConverter (DOC variant)"]
+    },
+    {
+      "format": ".xls",
+      "check_type": "OLE2_MAGIC",
+      "function": "_validate_ole2_output",
+      "checks": ["xls_ole2_magic (\\xd0\\xcf\\x11\\xe0)"],
+      "unlocks_types": ["PDF:XlsConverter"]
+    },
+    {
+      "format": ".eml",
+      "check_type": "RFC2822_HEADERS",
+      "function": "_validate_eml_output",
+      "checks": ["eml_rfc2822_headers (From:/To:/Subject:/MIME-Version:)"],
+      "unlocks_types": ["Email:Converter"]
+    },
+    {
+      "format": ".msg",
+      "check_type": "OLE2_MAGIC",
+      "function": "_validate_msg_output",
+      "checks": ["msg_ole2_magic (\\xd0\\xcf\\x11\\xe0 OLE2 compound)"],
+      "unlocks_types": ["Email:Converter (MSG output)"]
+    }
+  ],
+  "tests_added": [
+    "TestOoxmlValidator::test_docx_valid_passes",
+    "TestOoxmlValidator::test_docx_wrong_bytes_fails",
+    "TestOoxmlValidator::test_pptx_valid_passes",
+    "TestOoxmlValidator::test_pptx_wrong_bytes_fails",
+    "TestOoxmlValidator::test_docx_missing_internal_xml_fails",
+    "TestOle2Validator::test_doc_valid_passes",
+    "TestOle2Validator::test_doc_wrong_bytes_fails",
+    "TestOle2Validator::test_xls_valid_passes",
+    "TestOle2Validator::test_xls_wrong_bytes_fails",
+    "TestEmlValidator::test_eml_valid_passes",
+    "TestEmlValidator::test_eml_no_headers_fails",
+    "TestEmlValidator::test_eml_mime_version_header_passes",
+    "TestMsgValidator::test_msg_valid_passes",
+    "TestMsgValidator::test_msg_wrong_bytes_fails"
+  ],
+  "tests_pass": true,
+  "tests_count": 14,
+  "dispatch_registrations": [
+    ".docx -> _validate_ooxml_output(path, expected, 'docx')",
+    ".pptx -> _validate_ooxml_output(path, expected, 'pptx')",
+    ".doc  -> _validate_ole2_output(path, 'doc')",
+    ".xls  -> _validate_ole2_output(path, 'xls')",
+    ".eml  -> _validate_eml_output(path)",
+    ".msg  -> _validate_msg_output(path)"
+  ],
+  "total_deferred_types_unlocked": 6,
+  "source_file": "src/plugin_examples/verifier_bridge/output_validator.py",
+  "test_file": "tests/unit/test_validation.py"
+}

@@ -3,183 +3,36 @@
   "types_with_consumers": 6,
   "types_without_consumers": 95,
   "relationships": {
-    "Aspose.Pdf.LowCode.TextExtractor": [],
-    "Aspose.Pdf.LowCode.OfdToPdfOptions": [],
-    "Aspose.Pdf.LowCode.Png": [],
-    "Aspose.Pdf.LowCode.PdfToDocOptions": [],
-    "Aspose.Pdf.LowCode.TableBuilder": [],
-    "Aspose.Pdf.LowCode.PdfGeneratorOptions": [],
-    "Aspose.Pdf.LowCode.FormEditorAddOptions": [],
-    "Aspose.Pdf.LowCode.FileDataSource": [],
+    "Aspose.Pdf.LowCode.SplitOptions": [],
+    "Aspose.Pdf.LowCode.TocOptions": [],
     "Aspose.Pdf.LowCode.FormEditorOptions": [],
-    "Aspose.Pdf.LowCode.FormFieldOptions": [],
-    "Aspose.Pdf.LowCode.OptimizeOptions": [],
     "Aspose.Pdf.LowCode.FormImporter": [],
-    "Aspose.Pdf.LowCode.FormJsonImportSource": [],
-    "Aspose.Pdf.LowCode.PdfAValidateOptions": [],
-    "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions": [],
-    "Aspose.Pdf.LowCode.Timestamp": [],
-    "Aspose.Pdf.LowCode.TocGenerator": [],
-    "Aspose.Pdf.LowCode.StreamResult": [],
-    "Aspose.Pdf.LowCode.MergeOptions": [],
-    "Aspose.Pdf.LowCode.CompressOptions": [],
-    "Aspose.Pdf.LowCode.Tiff": [],
-    "Aspose.Pdf.LowCode.IDataSource": [
+    "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions": [],
+    "Aspose.Pdf.LowCode.PdfExtractorOptions": [],
+    "Aspose.Pdf.LowCode.XlsConverter": [],
+    "Aspose.Pdf.LowCode.TextExtractorOptions": [],
+    "Aspose.Pdf.LowCode.SignOptions": [],
+    "Aspose.Pdf.LowCode.FileResult": [],
+    "Aspose.Pdf.LowCode.FormOptions": [],
+    "Aspose.Pdf.LowCode.SaveFormat": [
       {
-        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "pdfSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "jsonSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormJsonImportSource",
+        "consumer_type": "Aspose.Pdf.LowCode.PdfToDocOptions",
         "consumer_method": ".ctor",
-        "parameter_name": "pdfSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormJsonImportSource",
-        "consumer_method": ".ctor",
-        "parameter_name": "jsonSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.FormOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfAConvertOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfAOptionsBase",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfConverterOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfConverterOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfExtractorOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfToImageOptions",
-        "consumer_method": "AddInput",
-        "parameter_name": "dataSource",
-        "is_static": false
-      },
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfToImageOptions",
-        "consumer_method": "AddOutput",
-        "parameter_name": "saveDataSource",
+        "parameter_name": "format",
         "is_static": false
       }
     ],
-    "Aspose.Pdf.LowCode.PdfAConverter": [],
-    "Aspose.Pdf.LowCode.StreamDataSource": [],
-    "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions": [],
-    "Aspose.Pdf.LowCode.Html": [],
-    "Aspose.Pdf.LowCode.SplitOptions": [],
-    "Aspose.Pdf.LowCode.TimestampOptions": [],
-    "Aspose.Pdf.LowCode.FormImporterJsonOptions": [],
-    "Aspose.Pdf.LowCode.FormEditorSetOptions": [],
-    "Aspose.Pdf.LowCode.FormExporter": [],
-    "Aspose.Pdf.LowCode.FormFieldCreateOptions": [],
-    "Aspose.Pdf.LowCode.ImageExtractor": [],
-    "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions": [],
-    "Aspose.Pdf.LowCode.SignOptions": [],
-    "Aspose.Pdf.LowCode.ISaveTarget": [],
-    "Aspose.Pdf.LowCode.PdfToImageOptions": [],
-    "Aspose.Pdf.LowCode.Optimizer": [],
-    "Aspose.Pdf.LowCode.Ofd": [],
-    "Aspose.Pdf.LowCode.TableRowBuilder": [],
-    "Aspose.Pdf.LowCode.OrganizerBaseOptions": [],
-    "Aspose.Pdf.LowCode.HtmlToPdfOptions": [],
-    "Aspose.Pdf.LowCode.TextExtractorOptions": [],
+    "Aspose.Pdf.LowCode.PdfAValidateOptions": [],
+    "Aspose.Pdf.LowCode.EncryptionOptions": [],
+    "Aspose.Pdf.LowCode.OfdToPdfOptions": [],
     "Aspose.Pdf.LowCode.IPlugin": [],
-    "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions": [],
-    "Aspose.Pdf.LowCode.Splitter": [],
-    "Aspose.Pdf.LowCode.Merger": [],
+    "Aspose.Pdf.LowCode.FormExporter": [],
     "Aspose.Pdf.LowCode.FormComboBoxFieldCreateOptions": [],
-    "Aspose.Pdf.LowCode.RotateOptions": [],
-    "Aspose.Pdf.LowCode.IOperationResult": [],
-    "Aspose.Pdf.LowCode.FileSaveTarget": [],
-    "Aspose.Pdf.LowCode.TiffOptions": [],
-    "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions": [],
-    "Aspose.Pdf.LowCode.PdfAValidationResult": [],
-    "Aspose.Pdf.LowCode.DataType": [],
-    "Aspose.Pdf.LowCode.FormExporterOptions": [],
-    "Aspose.Pdf.LowCode.DocConverter": [],
-    "Aspose.Pdf.LowCode.TableCellBuilder": [],
-    "Aspose.Pdf.LowCode.PdfAOptionsBase": [],
-    "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions": [],
-    "Aspose.Pdf.LowCode.FormOptions": [],
-    "Aspose.Pdf.LowCode.Signature": [],
-    "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions": [],
-    "Aspose.Pdf.LowCode.XlsConverter": [],
-    "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions": [],
-    "Aspose.Pdf.LowCode.PdfExtractor": [],
-    "Aspose.Pdf.LowCode.Security": [],
-    "Aspose.Pdf.LowCode.PdfAStandardVersion": [],
+    "Aspose.Pdf.LowCode.PngOptions": [],
+    "Aspose.Pdf.LowCode.FormFieldOptions": [],
+    "Aspose.Pdf.LowCode.PdfAConvertOptions": [],
+    "Aspose.Pdf.LowCode.CompressOptions": [],
+    "Aspose.Pdf.LowCode.StreamDataSource": [],
     "Aspose.Pdf.LowCode.IPluginOptions": [
       {
         "consumer_type": "Aspose.Pdf.LowCode.DocConverter",
@@ -302,25 +155,13 @@
         "is_static": false
       }
     ],
-    "Aspose.Pdf.LowCode.SaveFormat": [
-      {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfToDocOptions",
-        "consumer_method": ".ctor",
-        "parameter_name": "format",
-        "is_static": false
-      }
-    ],
-    "Aspose.Pdf.LowCode.FormFlattenerOptions": [],
-    "Aspose.Pdf.LowCode.ResultContainer": [],
-    "Aspose.Pdf.LowCode.FileResult": [],
-    "Aspose.Pdf.LowCode.FormEditorRemoveOptions": [],
-    "Aspose.Pdf.LowCode.PdfToHtmlOptions": [],
-    "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions": [],
-    "Aspose.Pdf.LowCode.PngOptions": [],
-    "Aspose.Pdf.LowCode.ResizeOptions": [],
-    "Aspose.Pdf.LowCode.ObjectResult": [],
-    "Aspose.Pdf.LowCode.PdfExtractorOptions": [],
+    "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions": [],
+    "Aspose.Pdf.LowCode.FormJsonImportSource": [],
     "Aspose.Pdf.LowCode.Jpeg": [],
+    "Aspose.Pdf.LowCode.ISaveTarget": [],
+    "Aspose.Pdf.LowCode.TableOptions": [],
+    "Aspose.Pdf.LowCode.PdfToImage": [],
+    "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions": [],
     "Aspose.Pdf.LowCode.FormFieldSetOptions": [
       {
         "consumer_type": "Aspose.Pdf.LowCode.FormEditorSetOptions",
@@ -329,18 +170,146 @@
         "is_static": false
       }
     ],
-    "Aspose.Pdf.LowCode.TableOptions": [],
-    "Aspose.Pdf.LowCode.FormExporterToJsonOptions": [],
-    "Aspose.Pdf.LowCode.TocOptions": [],
-    "Aspose.Pdf.LowCode.ConversionMode": [
+    "Aspose.Pdf.LowCode.FormImporterJsonOptions": [],
+    "Aspose.Pdf.LowCode.OptimizeOptions": [],
+    "Aspose.Pdf.LowCode.FileSaveTarget": [],
+    "Aspose.Pdf.LowCode.DataType": [],
+    "Aspose.Pdf.LowCode.RotateOptions": [],
+    "Aspose.Pdf.LowCode.ObjectResult": [],
+    "Aspose.Pdf.LowCode.OrganizerBaseOptions": [],
+    "Aspose.Pdf.LowCode.ResultContainer": [],
+    "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions": [],
+    "Aspose.Pdf.LowCode.PdfToHtmlOptions": [],
+    "Aspose.Pdf.LowCode.DocConverter": [],
+    "Aspose.Pdf.LowCode.ResizeOptions": [],
+    "Aspose.Pdf.LowCode.PdfToXlsOptions": [],
+    "Aspose.Pdf.LowCode.FormExporterOptions": [],
+    "Aspose.Pdf.LowCode.PdfGeneratorOptions": [],
+    "Aspose.Pdf.LowCode.TableRowBuilder": [],
+    "Aspose.Pdf.LowCode.Png": [],
+    "Aspose.Pdf.LowCode.PdfConverterOptions": [],
+    "Aspose.Pdf.LowCode.HtmlToPdfOptions": [],
+    "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions": [],
+    "Aspose.Pdf.LowCode.Security": [],
+    "Aspose.Pdf.LowCode.Optimizer": [],
+    "Aspose.Pdf.LowCode.Merger": [],
+    "Aspose.Pdf.LowCode.DecryptionOptions": [],
+    "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions": [],
+    "Aspose.Pdf.LowCode.TextExtractor": [],
+    "Aspose.Pdf.LowCode.TableBuilder": [],
+    "Aspose.Pdf.LowCode.PdfAValidationResult": [],
+    "Aspose.Pdf.LowCode.PdfAOptionsBase": [],
+    "Aspose.Pdf.LowCode.Signature": [],
+    "Aspose.Pdf.LowCode.IDataSource": [
       {
-        "consumer_type": "Aspose.Pdf.LowCode.PdfToDocOptions",
+        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "pdfSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "jsonSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormJsonImportSource",
         "consumer_method": ".ctor",
-        "parameter_name": "mode",
+        "parameter_name": "pdfSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormJsonImportSource",
+        "consumer_method": ".ctor",
+        "parameter_name": "jsonSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.FormOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfAConvertOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfAOptionsBase",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfConverterOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfConverterOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfExtractorOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfToImageOptions",
+        "consumer_method": "AddInput",
+        "parameter_name": "dataSource",
+        "is_static": false
+      },
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfToImageOptions",
+        "consumer_method": "AddOutput",
+        "parameter_name": "saveDataSource",
         "is_static": false
       }
     ],
-    "Aspose.Pdf.LowCode.PdfToXlsOptions": [],
     "Aspose.Pdf.LowCode.SelectField": [
       {
         "consumer_type": "Aspose.Pdf.LowCode.FormEditorSetOptions",
@@ -373,18 +342,49 @@
         "is_static": false
       }
     ],
-    "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions": [],
-    "Aspose.Pdf.LowCode.EncryptionOptions": [],
-    "Aspose.Pdf.LowCode.FormEditor": [],
-    "Aspose.Pdf.LowCode.PdfAConvertOptions": [],
-    "Aspose.Pdf.LowCode.JpegOptions": [],
-    "Aspose.Pdf.LowCode.PdfToImage": [],
-    "Aspose.Pdf.LowCode.ImageExtractorOptions": [],
-    "Aspose.Pdf.LowCode.DecryptionOptions": [],
-    "Aspose.Pdf.LowCode.TableGenerator": [],
+    "Aspose.Pdf.LowCode.FormFlattenerOptions": [],
+    "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions": [],
+    "Aspose.Pdf.LowCode.IOperationResult": [],
+    "Aspose.Pdf.LowCode.Html": [],
     "Aspose.Pdf.LowCode.StreamSaveTarget": [],
-    "Aspose.Pdf.LowCode.StringResult": [],
+    "Aspose.Pdf.LowCode.FileDataSource": [],
+    "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions": [],
+    "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions": [],
+    "Aspose.Pdf.LowCode.TiffOptions": [],
+    "Aspose.Pdf.LowCode.MergeOptions": [],
+    "Aspose.Pdf.LowCode.Timestamp": [],
     "Aspose.Pdf.LowCode.FormFlattener": [],
-    "Aspose.Pdf.LowCode.PdfConverterOptions": []
+    "Aspose.Pdf.LowCode.Splitter": [],
+    "Aspose.Pdf.LowCode.FormEditorAddOptions": [],
+    "Aspose.Pdf.LowCode.JpegOptions": [],
+    "Aspose.Pdf.LowCode.FormEditorRemoveOptions": [],
+    "Aspose.Pdf.LowCode.ImageExtractorOptions": [],
+    "Aspose.Pdf.LowCode.TocGenerator": [],
+    "Aspose.Pdf.LowCode.StreamResult": [],
+    "Aspose.Pdf.LowCode.PdfAStandardVersion": [],
+    "Aspose.Pdf.LowCode.FormEditorSetOptions": [],
+    "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions": [],
+    "Aspose.Pdf.LowCode.TableCellBuilder": [],
+    "Aspose.Pdf.LowCode.TableGenerator": [],
+    "Aspose.Pdf.LowCode.PdfToImageOptions": [],
+    "Aspose.Pdf.LowCode.FormExporterToJsonOptions": [],
+    "Aspose.Pdf.LowCode.TimestampOptions": [],
+    "Aspose.Pdf.LowCode.ConversionMode": [
+      {
+        "consumer_type": "Aspose.Pdf.LowCode.PdfToDocOptions",
+        "consumer_method": ".ctor",
+        "parameter_name": "mode",
+        "is_static": false
+      }
+    ],
+    "Aspose.Pdf.LowCode.Tiff": [],
+    "Aspose.Pdf.LowCode.PdfAConverter": [],
+    "Aspose.Pdf.LowCode.PdfToDocOptions": [],
+    "Aspose.Pdf.LowCode.FormEditor": [],
+    "Aspose.Pdf.LowCode.Ofd": [],
+    "Aspose.Pdf.LowCode.PdfExtractor": [],
+    "Aspose.Pdf.LowCode.StringResult": [],
+    "Aspose.Pdf.LowCode.FormFieldCreateOptions": [],
+    "Aspose.Pdf.LowCode.ImageExtractor": []
   }
 }

@@ -1,0 +1,57 @@
+{
+  "produced_at": "2026-05-13T17:30:00Z",
+  "sprint": "replay-assisted-publication-coverage",
+  "title": "Words ReportBuilder Generation Replay Result — Lane 2",
+  "lane": 2,
+  "family": "words",
+  "scenario": "words-report-builder",
+  "replay_run": {
+    "run_id": "pilot-words-20260513-215459",
+    "reuse_run": "pilot-words-20260513-175418",
+    "replay_from": "generation",
+    "total_duration_ms": 248100,
+    "total_duration_s": 248.1,
+    "pipeline_summary": "7 succeeded, 0 degraded, 0 failed, 4 skipped (infra replayed)"
+  },
+  "outcomes": {
+    "words_comparer": "PASS",
+    "words_converter": "PASS",
+    "words_mail_merger": "PASS",
+    "words_merger": "PASS",
+    "words_replacer": "PASS",
+    "words_splitter": "PASS",
+    "words_watermarker": "PASS",
+    "words_report_builder": "DROPPED_PRE_VALIDATION"
+  },
+  "gate_verdict": "PR_DRY_RUN_READY",
+  "report_builder_failure": {
+    "failure_type": "post_generation_validation_failure",
+    "failed_constraint": "REQUIRED: LINQ template using <<[FieldName]>> syntax in template DOCX — create via DocumentBuilder.Write(\"Hello, <<[Name]>>!\")",
+    "error_message": "Post-repair validation failed: ['Missing required LowCode API call: REQUIRED: LINQ template using <<[FieldName]>> syntax in template DOCX — create via DocumentBuilder.Write(\"Hello, <<[Name]>>\")']",
+    "root_cause": "LLM with default model 'recommended' consistently fails to generate <<[FieldName]>> LINQ syntax in DocumentBuilder.Write calls — the non-standard angle-bracket syntax is omitted or replaced with conventional string literals during generation and repair cycles",
+    "dropped_before": "validation stage — scenario never entered generated/ directory",
+    "scenarios_in_generated_count": 7,
+    "words_report_builder_in_generated": false
+  },
+  "blocker_classification": {
+    "blocker_type": "LLM_GENERATION_QUALITY",
+    "env_dependency": "GPT_OSS_MODEL — more capable model (e.g. gpt-4o) required for LINQ syntax fidelity",
+    "workaround_options": [
+      "Set GPT_OSS_MODEL=gpt-4o and retry generation replay",
+      "Add explicit few-shot example showing <<[Name]>> in the LLM prompt prefix",
+      "Add template DOCX fixture pre-generation to fixture_registry stage (bypass LLM template creation)"
+    ],
+    "severity": "MEDIUM — does not block existing 7 passing scenarios; only blocks words-report-builder addition"
+  },
+  "words_wave3_status": {
+    "words_mail_merger": "PASS — words-mail-merger passed in this run (Wave 3 complete)",
+    "words_report_builder": "BLOCKED_LLM_QUALITY — Wave 3 partially complete",
+    "overall_wave3": "PARTIAL — MailMerger OK, ReportBuilder needs stronger LLM"
+  },
+  "replay_efficiency": {
+    "infra_skipped": ["nuget_fetch", "dependency_resolution", "extraction", "reflection"],
+    "time_saved_vs_full_run_pct": 23.3,
+    "generation_ran_fresh": true,
+    "validation_ran_fresh": true
+  }
+}

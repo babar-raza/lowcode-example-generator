@@ -1,0 +1,93 @@
+{
+  "produced_at": "2026-05-13T16:16:55.464418+00:00",
+  "family": "words",
+  "reuse_run": "pilot-words-20260513-175418",
+  "proofs": {
+    "validation_replay": {
+      "run_id": "pilot-words-20260513-203139",
+      "command": "--replay-from validation --reuse-run pilot-words-20260513-175418 --tier 5",
+      "skipped_stages": [
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "generation"
+      ],
+      "scenario_planning_ran": true,
+      "completeness_gate_ran": true,
+      "validation_ran": true,
+      "reviewer_ran": true,
+      "publisher_ran": true,
+      "pipeline_summary": "11 succeeded, 0 failed, 5 skipped",
+      "verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "replay_manifest_written": true,
+      "stale_artifact_check_written": true,
+      "catalog_hash": "pass",
+      "overall_integrity": "pass",
+      "result": "PASS"
+    },
+    "reviewer_replay": {
+      "run_id": "pilot-words-20260513-211540",
+      "command": "--replay-from reviewer --reuse-run pilot-words-20260513-175418 --tier 5",
+      "skipped_stages": [
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "generation",
+        "validation"
+      ],
+      "scenario_planning_ran": true,
+      "completeness_gate_ran": true,
+      "reviewer_ran": true,
+      "publisher_ran": true,
+      "pipeline_summary": "10 succeeded, 0 failed, 6 skipped",
+      "verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "result": "PASS"
+    },
+    "publisher_replay_fail_closed": {
+      "run_id": "none (blocked before stages ran)",
+      "command": "--replay-from publisher --reuse-run pilot-words-20260513-175418 --tier 5",
+      "block_reason": "ReplayIntegrityError: [publisher_reviewer_available] Reviewer evidence shows available=false. Publisher replay requires a run where reviewer actually executed.",
+      "fail_closed_before_any_stage": true,
+      "stale_artifact_check_written": true,
+      "result": "FAIL_CLOSED_AS_EXPECTED"
+    },
+    "generation_replay": {
+      "run_id": "pilot-words-20260513-211631",
+      "command": "--replay-from generation --reuse-run pilot-words-20260513-175418 --tier 2",
+      "skipped_stages": [
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection"
+      ],
+      "scenario_planning_ran": true,
+      "completeness_gate_ran": true,
+      "pipeline_summary": "7 succeeded, 0 failed, 9 skipped",
+      "verdict": "SOURCE_OF_TRUTH_PROVEN_ONLY",
+      "result": "PASS"
+    }
+  },
+  "governance_checks": {
+    "scenario_planning_never_skipped": {
+      "all_4_modes": true,
+      "evidence": "visible in log: Planning for words: 8 ready, 17 blocked (or 8/17 in reviewer/generation)"
+    },
+    "completeness_gate_ran_in_all_pass_modes": true,
+    "publisher_blocked_when_reviewer_unavailable": true,
+    "catalog_hash_canonical_json": {
+      "status": "pass",
+      "method": "json.dumps(sort_keys=True,ensure_ascii=False)"
+    },
+    "download_manifest_restored": {
+      "status": "pass",
+      "source": "pilot-report.json nuget_fetch artifacts"
+    },
+    "typed_validation_results_restored": {
+      "status": "pass",
+      "detail": "restored from validation-results.json via ValidationResult/DotnetResult dataclasses"
+    }
+  },
+  "overall": "ALL_PROOFS_PASS_OR_FAIL_CLOSED_AS_DESIGNED"
+}

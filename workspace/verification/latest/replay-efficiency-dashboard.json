@@ -1,0 +1,77 @@
+{
+  "produced_at": "2026-05-13T16:19:00Z",
+  "title": "Replay Efficiency Dashboard — Healing Convergence Sprint",
+  "family": "words (baseline measurement)",
+  "headline_metrics": {
+    "reviewer_replay_speedup": "44x faster than full run",
+    "validation_replay_speedup": "3.5x faster than full run",
+    "generation_replay_speedup": "1.3x faster than full run",
+    "reviewer_replay_time_s": 7.6,
+    "validation_replay_time_s": 97.0,
+    "full_run_time_s": 337.4,
+    "max_time_savings_per_run_s": 329.8,
+    "token_savings_per_replay": "~8000 LLM tokens when generation skipped"
+  },
+  "stage_cost_breakdown": {
+    "nuget_fetch": {"ms": 24598, "pct_of_total": 7.3, "skipped_by": ["generation","validation","reviewer","publisher"]},
+    "dependency_resolution": {"ms": 49280, "pct_of_total": 14.6, "skipped_by": ["generation","validation","reviewer","publisher"]},
+    "extraction": {"ms": 3808, "pct_of_total": 1.1, "skipped_by": ["generation","validation","reviewer","publisher"]},
+    "reflection": {"ms": 1063, "pct_of_total": 0.3, "skipped_by": ["generation","validation","reviewer","publisher"]},
+    "generation": {"ms": 156802, "pct_of_total": 46.5, "skipped_by": ["validation","reviewer","publisher"]},
+    "validation": {"ms": 95155, "pct_of_total": 28.2, "skipped_by": ["reviewer","publisher"]},
+    "reviewer": {"ms": 480, "pct_of_total": 0.1, "skipped_by": ["publisher"]},
+    "infra_total": {"ms": 78749, "pct_of_total": 23.3},
+    "generation_pct": 46.5,
+    "validation_pct": 28.2
+  },
+  "replay_mode_comparison": [
+    {
+      "mode": "full_run",
+      "time_s": 337.4,
+      "stages_skipped": 0,
+      "llm_tokens_est": 8000,
+      "dotnet_cycles": 1,
+      "governance_gates": ["scenario_planning","completeness","source_of_truth","validation","reviewer"]
+    },
+    {
+      "mode": "generation",
+      "time_s": 259.0,
+      "stages_skipped": 4,
+      "llm_tokens_est": 8000,
+      "dotnet_cycles": 1,
+      "governance_gates": ["scenario_planning","completeness","source_of_truth","validation","reviewer"],
+      "use_case": "semantic repair reruns"
+    },
+    {
+      "mode": "validation",
+      "time_s": 97.0,
+      "stages_skipped": 5,
+      "llm_tokens_est": 0,
+      "dotnet_cycles": 1,
+      "governance_gates": ["scenario_planning","completeness","source_of_truth","validation","reviewer"],
+      "use_case": "build/run fix reruns"
+    },
+    {
+      "mode": "reviewer",
+      "time_s": 7.6,
+      "stages_skipped": 6,
+      "llm_tokens_est": 0,
+      "dotnet_cycles": 0,
+      "governance_gates": ["scenario_planning","completeness","source_of_truth","reviewer"],
+      "use_case": "2nd consecutive reviewer pass (e.g., pdf-optimizer)"
+    }
+  ],
+  "healing_queue_leverage": {
+    "pdf_optimizer_recommended_replay": "reviewer",
+    "pdf_optimizer_time_if_replay_s": 7.6,
+    "pdf_optimizer_time_if_full_run_s": 337.4,
+    "savings_for_optimizer_s": 329.8,
+    "blocker": "EXAMPLE_REVIEWER_PATH + GPT_OSS_MODEL required"
+  },
+  "governance_cost": {
+    "scenario_planning_ms_in_replay": 112,
+    "completeness_gate_ms_in_replay": "included in scenario_planning",
+    "governance_overhead_pct": 0.1,
+    "note": "Governance is nearly free — scenario_planning takes <0.1% of reviewer replay time"
+  }
+}

@@ -1,246 +1,844 @@
 {
-  "total_scenarios": 25,
-  "ready": 8,
-  "blocked": 17,
+  "total_scenarios": 101,
+  "ready": 11,
+  "blocked": 90,
   "strategies": {
-    "generated_fixture_file": 8,
+    "generated_fixture_file": 0,
     "existing_fixture": 0,
-    "programmatic_input": 0,
-    "none": 17,
+    "programmatic_input": 11,
+    "none": 90,
     "no_valid_input_strategy": 0
   },
   "scenarios": [
     {
-      "scenario_id": "words-comparer",
+      "scenario_id": "pdf-doc-converter",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-converter",
+      "scenario_id": "pdf-html",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-mail-merger",
+      "scenario_id": "pdf-jpeg",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-merger",
+      "scenario_id": "pdf-merger",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-replacer",
+      "scenario_id": "pdf-optimizer",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-report-builder",
+      "scenario_id": "pdf-pdf-aconverter",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-splitter",
+      "scenario_id": "pdf-png",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-watermarker",
+      "scenario_id": "pdf-splitter",
       "required_input_formats": [
-        ".docx"
+        ".pdf"
       ],
-      "input_strategy": "generated_fixture_file",
-      "input_files": [
-        "input.docx"
-      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
       "strategy_status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "words-comparer-context",
+      "scenario_id": "pdf-text-extractor",
+      "required_input_formats": [
+        ".pdf"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "required_input_formats": [
+        ".pdf"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "required_input_formats": [
+        ".pdf"
+      ],
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "strategy_status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-compress-options",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ComparerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'CompressOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
     },
     {
-      "scenario_id": "words-converter-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ConverterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-mail-merge-data-source",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeDataSource' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-mail-merge-options",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergeOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-mail-merger-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MailMergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-merge-format-mode",
+      "scenario_id": "pdf-conversion-mode",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_enum_not_runnable",
-      "blocked_reason": "Type 'MergeFormatMode' is an ENUM \u2014 not a runnable LowCode API."
+      "blocked_reason": "Type 'ConversionMode' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
-      "scenario_id": "words-merger-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MergerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-processor",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Processor' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-processor-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ProcessorContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-replacer-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReplacerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-report-builder-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-report-builder-options",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ReportBuilderOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-signer-context",
-      "required_input_formats": [],
-      "input_strategy": "none",
-      "input_files": [],
-      "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SignerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
-    },
-    {
-      "scenario_id": "words-split-criteria",
+      "scenario_id": "pdf-data-type",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_enum_not_runnable",
-      "blocked_reason": "Type 'SplitCriteria' is an ENUM \u2014 not a runnable LowCode API."
+      "blocked_reason": "Type 'DataType' is an ENUM \u2014 not a runnable LowCode API."
     },
     {
-      "scenario_id": "words-split-options",
+      "scenario_id": "pdf-decryption-options",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'DecryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
     },
     {
-      "scenario_id": "words-splitter-context",
+      "scenario_id": "pdf-encryption-options",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitterContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'EncryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
     },
     {
-      "scenario_id": "words-watermarker-context",
+      "scenario_id": "pdf-file-data-source",
       "required_input_formats": [],
       "input_strategy": "none",
       "input_files": [],
       "strategy_status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'WatermarkerContext' is not in the controlled pilot allowlist. Allowed: ['Comparer', 'Converter', 'MailMerger', 'Merger', 'Replacer', 'ReportBuilder', 'Splitter', 'Watermarker']"
+      "blocked_reason": "Type 'FileDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-file-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FileResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-file-save-target",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FileSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-check-box-field-create-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormCheckBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-check-box-field-set-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormCheckBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-combo-box-field-create-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormComboBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-combo-box-field-set-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormComboBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormEditor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-editor-add-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormEditorAddOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-editor-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormEditorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-editor-remove-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormEditorRemoveOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-editor-set-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormEditorSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormExporter' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-exporter-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormExporterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-exporter-to-json-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormExporterToJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-exporter-values-to-csv-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormExporterValuesToCsvOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-field-create-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-field-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFieldOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-field-set-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-flatten-all-fields-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFlattenAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFlattener' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-flattener-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFlattenerOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-flatten-selected-fields-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormFlattenSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-importer",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormImporter' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-importer-json-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormImporterJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-json-import-source",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormJsonImportSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-remove-all-fields-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormRemoveAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-remove-selected-fields-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormRemoveSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-text-box-field-create-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormTextBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-form-text-box-field-set-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'FormTextBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-html-to-pdf-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'HtmlToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-idata-source",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'IDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ImageExtractor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-image-extractor-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ImageExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-ioperation-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'IOperationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-iplugin",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'IPlugin' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-iplugin-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'IPluginOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-isave-target",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ISaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-jpeg-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'JpegOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-merge-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'MergeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-object-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ObjectResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-ofd",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Ofd' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-ofd-to-pdf-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'OfdToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-optimize-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'OptimizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-organizer-base-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'OrganizerBaseOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconvert-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfAConvertOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-aoptions-base",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfAOptionsBase' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-astandard-version",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'PdfAStandardVersion' is an ENUM \u2014 not a runnable LowCode API."
+    },
+    {
+      "scenario_id": "pdf-pdf-avalidate-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfAValidateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-avalidation-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfAValidationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-converter-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfConverterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-extractor",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfExtractor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-extractor-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-generator-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfGeneratorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-to-doc-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfToDocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-to-html-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfToHtmlOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-to-image",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfToImage' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-to-image-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfToImageOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-pdf-to-xls-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PdfToXlsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-png-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'PngOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-resize-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ResizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-result-container",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'ResultContainer' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-rotate-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'RotateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-save-format",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_enum_not_runnable",
+      "blocked_reason": "Type 'SaveFormat' is an ENUM \u2014 not a runnable LowCode API."
+    },
+    {
+      "scenario_id": "pdf-security",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Security' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-select-field",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'SelectField' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Signature' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-sign-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'SignOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-split-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-stream-data-source",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'StreamDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-stream-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'StreamResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-stream-save-target",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'StreamSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-string-result",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'StringResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-table-builder",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TableBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-table-cell-builder",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TableCellBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TableGenerator' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-table-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TableOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-table-row-builder",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TableRowBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-text-extractor-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TextExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-tiff-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TiffOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-timestamp",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'Timestamp' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-timestamp-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TimestampOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TocGenerator' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
+    },
+    {
+      "scenario_id": "pdf-toc-options",
+      "required_input_formats": [],
+      "input_strategy": "none",
+      "input_files": [],
+      "strategy_status": "blocked_pilot_not_in_scope",
+      "blocked_reason": "Type 'TocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'Html', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Splitter', 'TextExtractor', 'Tiff', 'XlsConverter']"
     }
   ]
 }

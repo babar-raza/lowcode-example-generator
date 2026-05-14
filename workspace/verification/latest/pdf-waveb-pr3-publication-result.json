@@ -1,0 +1,47 @@
+{
+  "report_type": "pdf_waveb_pr3_publication_result",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 9: PDF Wave B Publication + Next Wave Execution",
+  "lane": "LANE 1 \u2014 PDF Wave B PR#3 Publication",
+
+  "wave_b_examples": ["doc-converter", "xls-converter", "html"],
+  "wave_b_count": 3,
+
+  "package_state": {
+    "path": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/",
+    "assembled_types": ["doc-converter", "xls-converter", "html"],
+    "optimizer_also_present": true,
+    "optimizer_note": "Optimizer already merged in PR#2; will appear in package but is a no-op re-push",
+    "all_files_verified": true
+  },
+
+  "publication_gate": {
+    "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "required_value": "APPROVE_LIVE_PR",
+    "current_state": "NOT_SET",
+    "gate_verdict": "BLOCKED",
+    "block_reason": "Operator must set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to authorize live PR creation"
+  },
+
+  "dry_run_simulation": {
+    "simulated": true,
+    "result": "SIMULATION_PASSED",
+    "examples_in_package": 4,
+    "new_examples": ["doc-converter", "xls-converter", "html"],
+    "already_published": ["optimizer"],
+    "expected_pr_title": "Add verified Aspose.PDF LowCode examples for .NET controlled pilot",
+    "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "expected_new_portfolio_total": 28,
+    "notes": "On authorization: run '$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR; $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable(\"GH_TOKEN\", \"User\"); .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest'"
+  },
+
+  "manifest_pre_publication_state": {
+    "publishable_candidate_count": 6,
+    "wave_b_candidates_present": ["pdf-doc-converter", "pdf-html", "pdf-xls-converter"],
+    "wave_a_candidates_present": ["pdf-merger", "pdf-splitter", "pdf-text-extractor"],
+    "merge_version": "v2_merged",
+    "xls_converter_preserved_from_run": "pilot-pdf-20260514-182836"
+  },
+
+  "lane1_verdict": "READY_BLOCKED_BY_APPROVAL_GATE \u2014 Wave B package assembled and validated. All 3 new examples (doc-converter, xls-converter, html) are in pr-dry-run. Live PR creation requires operator to set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR."
+}

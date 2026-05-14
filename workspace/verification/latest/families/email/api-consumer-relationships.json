@@ -1,0 +1,53 @@
+{
+  "total_types": 3,
+  "types_with_consumers": 1,
+  "types_without_consumers": 2,
+  "relationships": {
+    "Aspose.Email.LowCode.Converter": [],
+    "Aspose.Email.LowCode.IOutputHandler": [
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "Convert",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertEmlOrMsg",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertToEml",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertToHtml",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertToMht",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertToMhtml",
+        "parameter_name": "handler",
+        "is_static": true
+      },
+      {
+        "consumer_type": "Aspose.Email.LowCode.Converter",
+        "consumer_method": "ConvertToMsg",
+        "parameter_name": "handler",
+        "is_static": true
+      }
+    ],
+    "Aspose.Email.LowCode.FolderOutputHandler": []
+  }
+}

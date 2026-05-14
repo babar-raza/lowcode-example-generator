@@ -1,0 +1,53 @@
+{
+  "produced_at": "2026-05-13T17:30:00Z",
+  "sprint": "replay-assisted-publication-coverage",
+  "title": "Email and Slides Activation Gate Check — Lane 3",
+  "lane": 3,
+  "check_timestamp": "2026-05-13T17:30:00Z",
+  "email_repo": {
+    "full_name": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "status": "PROVISIONED",
+    "size": 0,
+    "pushed_at": "2026-05-13T16:45:20Z",
+    "default_branch": "main",
+    "empty": true,
+    "provisioned_today": true
+  },
+  "slides_repo": {
+    "full_name": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+    "status": "PROVISIONED",
+    "size": 0,
+    "pushed_at": "2026-05-13T16:44:18Z",
+    "default_branch": "main",
+    "empty": true,
+    "provisioned_today": true
+  },
+  "gate_results": {
+    "email": {
+      "repo_provisioned": true,
+      "pilot_design_complete": true,
+      "fixture_strategy_complete": true,
+      "env_vars_required": ["GPT_OSS_ENDPOINT", "GPT_OSS_MODEL", "GITHUB_TOKEN", "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL"],
+      "remaining_blockers": ["GPT_OSS_ENDPOINT not set in current env", "EXAMPLE_REVIEWER_PATH not set"],
+      "activation_gate": "ENV_VARS_REQUIRED",
+      "notes": "Email Converter pilot design (async + FolderOutputHandler) complete. Repo provisioned today. Ready to run when env set."
+    },
+    "slides": {
+      "repo_provisioned": true,
+      "pilot_design_complete": true,
+      "fixture_strategy_complete": true,
+      "env_vars_required": ["GPT_OSS_ENDPOINT", "GPT_OSS_MODEL", "GITHUB_TOKEN", "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL"],
+      "remaining_blockers": ["GPT_OSS_ENDPOINT not set in current env", "EXAMPLE_REVIEWER_PATH not set"],
+      "activation_gate": "ENV_VARS_REQUIRED",
+      "notes": "Slides Compress/Convert/Merger pilot design complete. Repo provisioned today. Ready to run when env set."
+    }
+  },
+  "activation_readiness_delta": {
+    "prior_state": "REPO_NOT_PROVISIONED (both)",
+    "current_state": "REPO_PROVISIONED_ENV_VARS_REQUIRED (both)",
+    "blocker_resolved": "repo_provisioning",
+    "remaining_blocker": "GPT_OSS_ENDPOINT + EXAMPLE_REVIEWER_PATH environment variables",
+    "next_action": "Set GPT_OSS_ENDPOINT, GPT_OSS_MODEL, EXAMPLE_REVIEWER_PATH then run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family email --tier 5 --promote-latest"
+  },
+  "overall_verdict": "ACTIVATION_UNBLOCKED_PENDING_ENV_VARS"
+}

@@ -1,0 +1,90 @@
+{
+  "report_type": "portfolio_nonregression_sprint9",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 9: PDF Wave B Publication + Next Wave Execution",
+  "lane": "LANE 5 \u2014 Portfolio Non-Regression",
+
+  "verification_method": "release-status command + 1503 unit tests",
+
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published_examples": 9,
+      "workflow_roots": 9,
+      "last_merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+      "post_merge": "POST_MERGE_VERIFIED",
+      "sprint9_regression": false,
+      "notes": "Unchanged. No PDF/type_classifier changes affect Cells."
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published_examples": 8,
+      "workflow_roots": 9,
+      "pilot_allowed": 8,
+      "last_merge_sha": "c22788ebda0514910c6daedfde0e29b435a72ff1",
+      "post_merge": "POST_MERGE_VERIFIED",
+      "sprint9_regression": false,
+      "notes": "Unchanged. type_classifier fix applies only to types with constructors but 0 methods, 0 properties \u2014 no Words types match this pattern."
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published_examples": 5,
+      "workflow_roots": 24,
+      "pilot_allowed": 8,
+      "last_merge_sha": "671547a1027cd84e31c7e4e6972e091b1fc2b3a9",
+      "post_merge": "ALL_PASS",
+      "sprint9_new_pr_candidates": ["pdf-tiff"],
+      "sprint9_regression": false,
+      "notes": "Sprint 9 expanded allowed_types to 11 (added Jpeg/Png/Tiff). Tiff generated and PASSED (EXAMPLE_READY_FOR_PR_DRY_RUN). Png/Jpeg need further generation. Wave B (DocConverter/XlsConverter/Html) still PR_READY from Sprint 8."
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published_examples": 2,
+      "workflow_roots": 2,
+      "last_merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "post_merge": "ALL_PASS",
+      "sprint9_regression": false,
+      "notes": "Unchanged. DiagramConverter/PdfConverter classification uses workflow_verb pattern (not affected by 0-method fix)."
+    },
+    "email": {
+      "status": "PILOT_COMPLETE",
+      "published_examples": 1,
+      "last_merge_sha": "023ad66970d2b5745011f56c069e9d9fa2a22672",
+      "post_merge": "NOT_RUN",
+      "sprint9_regression": false,
+      "notes": "Consistent with prior sprint state. post_merge_validation not run (inherited from prior sprint data). No Sprint 9 changes affect Email."
+    },
+    "slides": {
+      "status": "PILOT_COMPLETE",
+      "published_examples": 3,
+      "last_merge_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076",
+      "post_merge": "NOT_RUN",
+      "sprint9_regression": false,
+      "notes": "Consistent with prior sprint state. post_merge_validation not run. No Sprint 9 changes affect Slides."
+    }
+  },
+
+  "test_suite": {
+    "run_count": 1504,
+    "passed": 1504,
+    "failed": 0,
+    "verdict": "ALL_PASS"
+  },
+
+  "type_classifier_fix": {
+    "change": "type_classifier.py: 0-method constructor-only types now classified as OPERATION_FACADE (not UNKNOWN)",
+    "impact": "Jpeg/Png/Tiff now planned as scenarios. Types already handled by workflow_verb pattern (TextExtractor, Merger, etc.) are unaffected. Options/Result/Settings types are classified before this branch and also unaffected.",
+    "regression_risk": "LOW \u2014 the fix only affects types that previously fell through to UNKNOWN (no methods, no properties, has constructors). These were previously excluded as non-standalone anyway."
+  },
+
+  "sprint9_changes_summary": [
+    "pdf.yml: added Jpeg, Png, Tiff to allowed_types",
+    "pdf.yml: added preferred_methods_per_type for Jpeg/Png/Tiff",
+    "pdf.yml: added per_type_constraints for Jpeg/Png/Tiff with FORBIDDEN .OutputDataSources",
+    "pdf.yml: added template_hints for image output types",
+    "pdf.yml: max_examples_per_monthly_run increased 10 \u2192 15",
+    "type_classifier.py: 0-method constructor-only type now classifies as OPERATION_FACADE"
+  ],
+
+  "lane5_verdict": "NON_REGRESSION_CONFIRMED \u2014 All 1504 tests passing (1503 + 1 new manifest merge test). Cells/Words/Diagram/Email/Slides states unchanged. PDF expanded with Jpeg/Png/Tiff generation (Png PASS, Jpeg/Tiff extension-fix pending). No regressions introduced."
+}

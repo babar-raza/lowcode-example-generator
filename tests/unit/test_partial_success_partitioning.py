@@ -486,3 +486,22 @@ class TestMergePrCandidateManifests:
         assert "xls-converter" not in ids, "overwrite must drop xls-converter"
         assert "html" in ids
         assert saved["publishable_candidate_count"] == 1
+
+    def test_write_manifest_merges_from_global_path(self, tmp_path):
+        """write_pr_candidate_manifest merges from prior_manifest_path when run-local is empty."""
+        # Simulate global workspace/verification/latest/ having a prior manifest
+        global_dir = tmp_path / "global"
+        m_global = _make_manifest(["tiff"], [])
+        write_pr_candidate_manifest(m_global, global_dir, merge_existing=False)
+        global_manifest_path = global_dir / "latest" / "pr-candidate-manifest.json"
+
+        # New run-local evidence dir (fresh, no prior manifest)
+        run_dir = tmp_path / "run_local"
+        m_new = _make_manifest(["merger"], ["tiff"])  # tiff fails in new run
+        write_pr_candidate_manifest(m_new, run_dir, merge_existing=True, prior_manifest_path=global_manifest_path)
+
+        saved = json.loads((run_dir / "latest" / "pr-candidate-manifest.json").read_text())
+        ids = {e["scenario_id"] for e in saved["included_examples"]}
+        assert "tiff" in ids, "tiff must be preserved from global manifest via Rule 3 (prior pass, new run fails)"
+        assert "merger" in ids, "merger must be included from new run"
+        assert saved["publishable_candidate_count"] == 2

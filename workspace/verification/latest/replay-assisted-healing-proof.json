@@ -1,0 +1,61 @@
+{
+  "produced_at": "2026-05-13T16:32:00Z",
+  "sprint": "replay-driven-healing-convergence",
+  "title": "Replay-Assisted Healing Execution Proof — PDF Family",
+  "family": "pdf",
+  "healing_run": {
+    "run_id": "pilot-pdf-20260513-213228",
+    "replay_from": "validation",
+    "reuse_run": "pilot-pdf-20260513-181803",
+    "command": "--family pdf --tier 5 --replay-from validation --reuse-run pilot-pdf-20260513-181803",
+    "total_duration_ms": 62881,
+    "total_duration_s": 62.9,
+    "pipeline_summary": "11 succeeded, 0 degraded, 0 failed, 5 skipped",
+    "verdict": "PR_DRY_RUN_READY"
+  },
+  "reference_full_run": {
+    "run_id": "pilot-pdf-20260513-181803",
+    "total_duration_ms": 360288,
+    "total_duration_s": 360.3
+  },
+  "savings": {
+    "time_saved_ms": 297407,
+    "time_saved_s": 297.4,
+    "time_saved_pct": 82.5,
+    "stages_skipped": ["nuget_fetch", "dependency_resolution", "extraction", "reflection", "generation"],
+    "stages_skipped_count": 5,
+    "llm_tokens_saved_est": "~5000 tokens (5 scenarios, generation skipped)"
+  },
+  "governance_verified": {
+    "scenario_planning_ran": true,
+    "completeness_gate_ran": true,
+    "completeness_gate_result": "PASS — 101 accounted >= 5 expected",
+    "catalog_hash": "pass",
+    "overall_integrity": "pass",
+    "denominator_governance_maintained": true
+  },
+  "validation_results": {
+    "passed": ["pdf-merger", "pdf-optimizer", "pdf-pdf-aconverter", "pdf-splitter", "pdf-text-extractor"],
+    "failed": [],
+    "pass_count": 5,
+    "fail_count": 0
+  },
+  "healing_candidate_context": {
+    "pdf_optimizer_state": "REVIEWED — needs 2nd consecutive reviewer PASS",
+    "healing_replay_recommended_next": "reviewer",
+    "blocker": "EXAMPLE_REVIEWER_PATH + GPT_OSS_MODEL not set in current environment",
+    "what_replay_enables": "When EXAMPLE_REVIEWER_PATH is set, --replay-from reviewer will skip infra+generation+validation and run reviewer+publisher in ~8 seconds instead of ~360 seconds"
+  },
+  "healing_materiality": {
+    "replay_materially_accelerated_healing": true,
+    "evidence": "82.5% time reduction; 5/5 validation pass; PR_DRY_RUN_READY verdict achieved without any NuGet download, DLL extraction, or LLM generation",
+    "governance_cost_pct": 0.1,
+    "conclusion": "Replay is a material healing accelerator. The dominant costs (infra 23%, generation 46%) are eliminated. Validation cost (28%) is preserved as it is the semantic correctness gate."
+  },
+  "replay_lineage": {
+    "generation_origin": "pilot-pdf-20260513-181803 (original full run)",
+    "healing_replay": "pilot-pdf-20260513-213228 (validation replay)",
+    "replay_manifest": "workspace/runs/pilot-pdf-20260513-213228/evidence/latest/replay-manifest.json",
+    "stale_artifact_check": "workspace/runs/pilot-pdf-20260513-181803/evidence/latest/stale-artifact-check.json"
+  }
+}

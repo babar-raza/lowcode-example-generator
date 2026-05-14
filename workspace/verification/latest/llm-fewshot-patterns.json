@@ -1,70 +1,86 @@
 {
-  "total_patterns": 8,
+  "total_patterns": 10,
   "verified_passing": 0,
   "patterns": [
     {
-      "scenario_id": "words-comparer",
-      "uses_basedir": true,
+      "scenario_id": "pdf-doc-converter",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-converter",
-      "uses_basedir": true,
+      "scenario_id": "pdf-jpeg",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-mail-merger",
-      "uses_basedir": true,
+      "scenario_id": "pdf-merger",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-merger",
-      "uses_basedir": true,
+      "scenario_id": "pdf-optimizer",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-replacer",
-      "uses_basedir": true,
+      "scenario_id": "pdf-pdf-aconverter",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-report-builder",
-      "uses_basedir": true,
+      "scenario_id": "pdf-png",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-splitter",
-      "uses_basedir": true,
+      "scenario_id": "pdf-splitter",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "words-watermarker",
-      "uses_basedir": true,
+      "scenario_id": "pdf-text-extractor",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": false,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "generated_fixture_file"
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
     }
   ]
 }

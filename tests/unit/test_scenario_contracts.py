@@ -68,14 +68,14 @@ class TestContractFilesExist:
         contracts = _load_contracts("words")
         assert len(contracts) == 8, f"Expected 8 words contracts, got {len(contracts)}"
 
-    def test_pdf_has_5_contracts(self):
+    def test_pdf_has_8_contracts(self):
         contracts = _load_contracts("pdf")
-        assert len(contracts) == 5, f"Expected 5 pdf contracts, got {len(contracts)}"
+        assert len(contracts) == 8, f"Expected 8 pdf contracts, got {len(contracts)}"
 
-    def test_total_contracts_is_21(self):
-        """Total = 9 cells + 8 words + 5 pdf = 22."""
+    def test_total_contracts_is_25(self):
+        """Total = 9 cells + 8 words + 8 pdf = 25."""
         total = len(_all_contracts())
-        assert total == 22, f"Expected 22 total contracts, got {total}"
+        assert total == 25, f"Expected 25 total contracts, got {total}"
 
 
 # ---------------------------------------------------------------------------
@@ -236,7 +236,10 @@ class TestWordsContracts:
 
 class TestPdfContracts:
     def test_pdf_scenario_ids_present(self):
-        expected_ids = {"pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer", "pdf-pdfa-converter"}
+        expected_ids = {
+            "pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer", "pdf-pdfa-converter",
+            "pdf-doc-converter", "pdf-xls-converter", "pdf-html-converter",
+        }
         actual_ids = {c["scenario_id"] for c in _load_contracts("pdf")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
 

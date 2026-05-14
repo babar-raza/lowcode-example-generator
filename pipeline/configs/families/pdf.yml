@@ -63,12 +63,18 @@ generation:
     - Splitter
     - Optimizer
     - PdfAConverter
+    - DocConverter
+    - XlsConverter
+    - Html
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
     Optimizer: Process
     TextExtractor: Process
     PdfAConverter: Process
+    DocConverter: Process
+    XlsConverter: Process
+    Html: Process
 
 validation:
   require_restore: true
@@ -117,6 +123,27 @@ template_hints:
   output_naming_note: 'Do not use format strings in Splitter output filename (e.g. output_{0}.pdf) — use plain output.pdf'
   default_output_extension: ".pdf"
   default_fixture_extension: ".pdf"
+  # Wave B: DocConverter fixture (programmatic PDF input, DOCX output)
+  doc_converter_input_creation_lines:
+    - 'var doc = new Aspose.Pdf.Document();'
+    - 'var page = doc.Pages.Add();'
+    - 'page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("LowCode DocConverter Test"));'
+    - 'doc.Save("input.pdf");'
+  doc_converter_output_extension: ".docx"
+  # Wave B: XlsConverter fixture (programmatic PDF with table-like content, XLSX output)
+  xls_converter_input_creation_lines:
+    - 'var doc = new Aspose.Pdf.Document();'
+    - 'var page = doc.Pages.Add();'
+    - 'page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("Name    Score"));'
+    - 'doc.Save("input.pdf");'
+  xls_converter_output_extension: ".xlsx"
+  # Wave B: Html converter fixture (HTML string input, PDF output)
+  # IMPORTANT: Html plugin converts HTML to PDF. Input must be an HTML file (NOT a PDF).
+  html_input_creation_lines:
+    - 'System.IO.File.WriteAllText("input.html", "<html><body><h1>Hello LowCode</h1><p>HTML to PDF conversion via Aspose.PDF LowCode.</p></body></html>");'
+  html_input_extension: ".html"
+  html_output_extension: ".pdf"
+  html_options_note: 'HtmlToPdfOptions: use AddInput(new FileDataSource("input.html")) and AddOutput(new FileDataSource("output.pdf")). Input MUST be an HTML file, not a PDF.'
 
 per_type_constraints:
   Merger:
@@ -160,3 +187,46 @@ per_type_constraints:
       - "FORBIDDEN: LowCodeLoadOptions — use PdfAConvertOptions instead"
       - "FORBIDDEN: LowCodeSaveOptions — use PdfAConvertOptions instead"
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use PdfAConvertOptions"
+  DocConverter:
+    required:
+      - "REQUIRED: new PdfToDocOptions( — use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)"
+      - "REQUIRED: new DocConverter().Process(options) — use the LowCode DocConverter plugin"
+      - "REQUIRED: options.SaveFormat = SaveFormat.DocX — set SaveFormat to DocX to get OOXML .docx output (harness-verified magic 50-4B-03-04)"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — output added via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for DocConverter, PdfToDocOptions, FileDataSource, SaveFormat)"
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
+    forbidden:
+      - "FORBIDDEN: new PdfConverterOptions() — PdfConverterOptions is abstract; use PdfToDocOptions instead"
+      - "FORBIDDEN: Document.Save(SaveFormat.DocX) — this is core API; use LowCode DocConverter.Process() instead"
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
+  XlsConverter:
+    required:
+      - "REQUIRED: new PdfToXlsOptions( — use PdfToXlsOptions as the concrete options class"
+      - "REQUIRED: new XlsConverter().Process(options) — use the LowCode XlsConverter plugin"
+      - "REQUIRED: options.Format = PdfToXlsOptions.ExcelFormat.XLSX — set Format to XLSX for OOXML output (harness-verified magic 50-4B-03-04)"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — XLSX output added via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for XlsConverter, PdfToXlsOptions, FileDataSource)"
+    forbidden:
+      - "FORBIDDEN: new PdfConverterOptions() — PdfConverterOptions is abstract; use PdfToXlsOptions instead"
+      - "FORBIDDEN: ExcelFormat.XLS without namespace prefix — use PdfToXlsOptions.ExcelFormat.XLSX (nested enum)"
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
+      - "FORBIDDEN: Aspose.Cells — use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
+  Html:
+    required:
+      - "REQUIRED: new HtmlToPdfOptions( — use HtmlToPdfOptions as the concrete options class"
+      - "REQUIRED: new Html().Process(options) — use the LowCode Html plugin to convert HTML to PDF"
+      - "REQUIRED: AddInput(new FileDataSource(\"input.html\") — input MUST be an HTML file (var name may differ; .AddInput must receive FileDataSource with input.html)"
+      - "REQUIRED: AddOutput(new FileDataSource(\"output.pdf\") — PDF output via AddOutput(new FileDataSource(\"output.pdf\"))"
+      - "REQUIRED: File.WriteAllText(\"input.html\", — create the HTML input file programmatically before calling Process (use File.WriteAllText or System.IO.File.WriteAllText)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Html, HtmlToPdfOptions, FileDataSource)"
+      - "REQUIRED: <html> tag in HTML input content — the input file must be valid HTML"
+    forbidden:
+      - "FORBIDDEN: new PdfConverterOptions() — PdfConverterOptions is abstract; use HtmlToPdfOptions"
+      - "FORBIDDEN: HtmlLoadOptions — this is core Aspose.Pdf API; use LowCode HtmlToPdfOptions instead"
+      - "FORBIDDEN: Document(htmlFile) — this is core Aspose.Pdf constructor; use LowCode Html.Process() instead"
+      - "FORBIDDEN: input.pdf as input to Html plugin — Html plugin takes HTML file input, NOT PDF input"
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"

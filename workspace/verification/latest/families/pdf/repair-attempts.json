@@ -3,7 +3,7 @@
   "total_runtime_repairs": 0,
   "attempts": [
     {
-      "scenario_id": "pdf-text-extractor",
+      "scenario_id": "pdf-doc-converter",
       "repair_type": "build",
       "attempt": 1,
       "success": true

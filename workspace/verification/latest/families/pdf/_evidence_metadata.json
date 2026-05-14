@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "pdf",
-  "run_id": "pilot-pdf-20260513-215830",
-  "promoted_at": "2026-05-13T17:07:15.735853+00:00",
-  "source_run_path": "workspace\\runs\\pilot-pdf-20260513-215830\\evidence\\latest",
+  "run_id": "pilot-pdf-20260514-190422",
+  "promoted_at": "2026-05-14T14:10:39.210737+00:00",
+  "source_run_path": "workspace\\runs\\pilot-pdf-20260514-190422\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -23,6 +23,7 @@
     "plugin-type-role-classification.json",
     "pr-candidate-manifest.json",
     "publishing-report.json",
+    "repair-attempts.json",
     "reviewer-preflight.json",
     "runnable-entrypoint-scores.json",
     "scenario-feedback-updates.json",

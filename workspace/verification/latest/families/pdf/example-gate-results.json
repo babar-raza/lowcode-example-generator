@@ -4,32 +4,32 @@
   "blocked_examples": 0,
   "examples": [
     {
+      "scenario_id": "pdf-doc-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-doc-converter",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-html",
+      "restore_status": "passed",
+      "build_status": "passed",
+      "run_status": "passed",
+      "output_validation_status": "passed",
+      "reviewer_status": "passed",
+      "publish_candidate": true,
+      "blocked_reason": null,
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+    },
+    {
       "scenario_id": "pdf-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-merger",
-      "restore_status": "passed",
-      "build_status": "passed",
-      "run_status": "passed",
-      "output_validation_status": "passed",
-      "reviewer_status": "passed",
-      "publish_candidate": true,
-      "blocked_reason": null,
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "pdf-optimizer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-optimizer",
-      "restore_status": "passed",
-      "build_status": "passed",
-      "run_status": "passed",
-      "output_validation_status": "passed",
-      "reviewer_status": "passed",
-      "publish_candidate": true,
-      "blocked_reason": null,
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "pdf-pdf-aconverter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -41,7 +41,7 @@
     },
     {
       "scenario_id": "pdf-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-splitter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -53,7 +53,7 @@
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260513-215830\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-text-extractor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",

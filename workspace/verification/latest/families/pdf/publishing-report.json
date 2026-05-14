@@ -1,12 +1,12 @@
 {
   "dry_run": true,
-  "branch_name": "plugin-examples/pdf/20260513-170715",
+  "branch_name": "plugin-examples/pdf/20260514-141039",
   "pr_url": null,
   "pr_number": null,
   "files_included": [
+    "pdf-doc-converter",
+    "pdf-html",
     "pdf-merger",
-    "pdf-optimizer",
-    "pdf-pdf-aconverter",
     "pdf-splitter",
     "pdf-text-extractor"
   ],

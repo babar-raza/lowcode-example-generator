@@ -1,7 +1,7 @@
 {
   "total_scored": 101,
-  "runnable_count": 12,
-  "rejected_count": 89,
+  "runnable_count": 19,
+  "rejected_count": 82,
   "scores": [
     {
       "full_name": "Aspose.Pdf.LowCode.CompressOptions",
@@ -289,12 +289,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.FormEditor",
       "name": "FormEditor",
-      "role": "utility",
-      "score": -0.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -592,12 +597,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.FormFlattener",
       "name": "FormFlattener",
-      "role": "utility",
-      "score": -0.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -848,12 +858,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Html",
       "name": "Html",
-      "role": "utility",
-      "score": 1.5,
-      "max_score": 2.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 4.5,
+      "max_score": 5.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
@@ -1182,12 +1197,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Ofd",
       "name": "Ofd",
-      "role": "utility",
-      "score": 1.5,
-      "max_score": 2.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 4.5,
+      "max_score": 5.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,
@@ -1823,12 +1843,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Security",
       "name": "Security",
-      "role": "utility",
-      "score": -0.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -1870,12 +1895,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Signature",
       "name": "Signature",
-      "role": "utility",
-      "score": -0.5,
-      "max_score": 0.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 2.5,
+      "max_score": 3.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,
@@ -2257,12 +2287,17 @@
     {
       "full_name": "Aspose.Pdf.LowCode.Timestamp",
       "name": "Timestamp",
-      "role": "utility",
-      "score": 1.5,
-      "max_score": 2.5,
-      "runnable": false,
-      "rejection_reason": "Role 'utility' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 4.5,
+      "max_score": 5.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "simple_parameters",
           "weight": 2.0,

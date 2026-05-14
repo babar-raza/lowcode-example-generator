@@ -2,14 +2,14 @@
   "family": "pdf",
   "status": "pass",
   "denominator_basis": "PILOT_ALLOWED",
-  "expected_count": 5,
-  "ready_count": 5,
-  "blocked_count": 96,
+  "expected_count": 8,
+  "ready_count": 8,
+  "blocked_count": 93,
   "accounted_count": 101,
-  "gap": 96,
-  "message": "Family 'pdf' completeness check PASS (PILOT_ALLOWED): 101 accounted >= 5 expected.",
+  "gap": 93,
+  "message": "Family 'pdf' completeness check PASS (PILOT_ALLOWED): 101 accounted >= 8 expected.",
   "violations": [],
   "holds": true,
   "unknown_type_count": 0,
-  "full_wrt_count": 25
+  "full_wrt_count": 24
 }

@@ -162,6 +162,17 @@ def classify_type(type_info: dict) -> TypeRole:
         return TypeRole(**base, role=UNKNOWN, confidence=0.3,
                         reason=f"No methods, no properties: {name}")
 
+    # IPlugin implementor: has Process method (the IPlugin contract) + constructors.
+    # Applies to non-verb-named LowCode types like 'Html' (HTML→PDF converter) that
+    # are concrete IPlugin implementations but don't follow the *Converter naming pattern.
+    has_process_method = any(
+        m.get("name") == "Process" or (isinstance(m, str) and m == "Process")
+        for m in methods
+    )
+    if has_process_method and has_ctors:
+        return TypeRole(**base, role=OPERATION_FACADE, confidence=0.75,
+                        reason=f"Has Process method (IPlugin pattern) + constructors, no workflow verb: {name}")
+
     # Instance-only with constructors but no workflow verb
     if has_instance and has_ctors and not has_static:
         return TypeRole(**base, role=UTILITY, confidence=0.5,

@@ -1,12 +1,12 @@
 {
-  "family": "words",
+  "family": "pdf",
   "total_examples": 1,
   "stale_count": 0,
   "examples": [
     {
-      "example_id": "words:Examples/DocsExamples",
-      "source_path": "Examples/DocsExamples",
-      "provenance": "aspose-words/Aspose.Words-for-.NET:master",
+      "example_id": "pdf:Examples/CSharp",
+      "source_path": "Examples/CSharp",
+      "provenance": "aspose-pdf/Aspose.PDF-for-.NET:master",
       "used_symbols": [],
       "validated": false,
       "stale": false,

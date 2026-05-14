@@ -1,0 +1,41 @@
+{
+  "scenario_id": "pdf-xls-converter",
+  "family": "pdf",
+  "type_name": "XlsConverter",
+  "full_type_name": "Aspose.Pdf.LowCode.XlsConverter",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "XlsConverter",
+    "XlsConverter.Process",
+    "PdfToXlsOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "new PdfConverterOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess",
+    "Aspose.Cells",
+    "ExcelFormat.XLS "
+  ],
+  "output_expectations": {
+    "output_format": ".xlsx",
+    "validation_method": "xlsx_zip_check",
+    "notes": "Instance API: var options = new PdfToXlsOptions(); options.Format = PdfToXlsOptions.ExcelFormat.XLSX; options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.xlsx')); new XlsConverter().Process(options). CRITICAL: PdfConverterOptions is abstract — use PdfToXlsOptions. ExcelFormat is a nested enum: PdfToXlsOptions.ExcelFormat.XLSX (value=1). ExcelFormat values: XMLSpreadSheet2003=0, XLSX=1, CSV=2, XLSM=3, ODS=4. Harness-verified: ResultCollection.Count=1, XLSX magic 50-4B-03-04."
+  },
+  "publication_status": "IN_GENERATION",
+  "lifecycle_status": "GENERATION_STARTED",
+  "evidence_sources": [
+    "workspace/verification/latest/pdf-waveb-api-constraint-report.json"
+  ],
+  "last_verified_at": "2026-05-14T00:00:00Z"
+}

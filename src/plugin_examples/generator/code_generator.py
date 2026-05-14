@@ -637,6 +637,28 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
                 "PDF TextExtractor: calls AddOutput() — TextExtractor has no file output. "
                 "Remove AddOutput() and read result from result.ResultCollection[0] as StringResult."
             )
+        # Html plugin: TextFragment is NEVER valid — input must be an HTML file, not a PDF
+        if type_short.lower() == "html" and "TextFragment" in code:
+            issues.append(
+                "HTML plugin MUST NOT use TextFragment — Html plugin converts HTML to PDF. "
+                "Input MUST be an HTML file created with File.WriteAllText(\"input.html\", htmlContent). "
+                "Do NOT use Aspose.Pdf.Document or TextFragment for input creation."
+            )
+        # Html plugin: must not create PDF input (Document fixture is for PDF-input plugins only)
+        if type_short.lower() == "html" and re.search(r'new\s+(Aspose\.Pdf\.)?Document\s*\(', code):
+            issues.append(
+                "HTML plugin MUST NOT create a PDF Document fixture. "
+                "Html plugin converts HTML->PDF, so input is an HTML file. "
+                "Create input with: File.WriteAllText(\"input.html\", \"<html><body><h1>Hello</h1></body></html>\");"
+            )
+        # Html plugin: must not use input.pdf as input
+        if type_short.lower() == "html" and "input.pdf" in code and "output.pdf" not in code.replace("input.pdf", ""):
+            # allow output.pdf but not input.pdf as input
+            if re.search(r'FileDataSource\s*\(\s*"input\.pdf"', code):
+                issues.append(
+                    "HTML plugin: AddInput must receive 'input.html', NOT 'input.pdf'. "
+                    "Html plugin takes HTML file as input, not PDF."
+                )
         if "input.docx" in code or '"input.docx"' in code:
             issues.append(
                 "PDF: references input.docx — PDF LowCode requires .pdf input files. "

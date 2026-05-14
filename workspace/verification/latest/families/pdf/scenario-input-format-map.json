@@ -1,6 +1,26 @@
 {
   "scenarios": [
     {
+      "scenario_id": "pdf-doc-converter",
+      "workflow_type": "DocConverter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name DocConverter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-html",
+      "workflow_type": "Html",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Html",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-merger",
       "workflow_type": "Merger",
       "selected_input_format": ".pdf",
@@ -46,6 +66,16 @@
       "selected_input_format": ".pdf",
       "selected_output_format": "",
       "reason": "Inferred from type name TextExtractor",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "workflow_type": "XlsConverter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name XlsConverter",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

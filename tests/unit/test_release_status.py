@@ -372,7 +372,7 @@ class TestReleaseStatusAllFamilies:
         by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
         assert by_family["cells"] == "FAMILY_COMPLETE"
         assert by_family["words"] == "PILOT_COMPLETE"
-        assert by_family["pdf"] == "PILOT_COMPLETE"
+        assert by_family["pdf"] == "PARTIAL_CANARY"  # Wave B (3 types) added to pilot but not yet published
         assert by_family["diagram"] == "PILOT_COMPLETE"
         assert by_family["email"] == "PILOT_COMPLETE"
         assert by_family["slides"] == "PILOT_COMPLETE"

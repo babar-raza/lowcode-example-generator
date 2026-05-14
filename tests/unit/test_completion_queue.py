@@ -114,10 +114,12 @@ class TestQueueCoversDenominator:
 
     def test_pdf_pilot_active_pipeline_in_queue(self, entries):
         denom = self._load_denom("pdf")
-        # Active PDF entries (not BACKLOGGED) should match published + pr_dry_run_ready + reviewer_passed
+        # Active PDF entries (not BACKLOGGED or PERMANENTLY_BLOCKED)
+        # should match published + pr_dry_run_ready + reviewer_passed
+        _inactive = {"BACKLOGGED", "PERMANENTLY_BLOCKED"}
         queue_pdf_active = [
             e for e in entries
-            if e["family"] == "pdf" and e["state"] != "BACKLOGGED"
+            if e["family"] == "pdf" and e["state"] not in _inactive
         ]
         pipeline_count = (
             denom.get("published_count", 0) +
@@ -155,13 +157,12 @@ class TestQueueCoversDenominator:
         active = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
         permanently_blocked = [e for e in entries if e["state"] == "PERMANENTLY_BLOCKED"]
-        # At minimum: 22 active (cells 9 + words published 4 + words wave2/3 PR-ready 3 + pdf 4 + diagram 2)
-        # + 26 backlogged (21 PDF WR + 3 Words + 3 Diagram OPTIONS)
-        # + 1 permanently blocked (Processor: API_ACCESS_PARADOX, FP-008)
-        # Words Wave 3: MailMerger moved BACKLOGGED->PR_READY; Processor reclassified PERMANENTLY_BLOCKED
-        # PDF Wave A: PdfAConverter moved BACKLOGGED->PR_READY in run pilot-pdf-20260513-181803
+        # At minimum: 30 active (cells 9 + words 8 + pdf 7 PR-ready/published + diagram 2 + email/slides)
+        # + 22 backlogged (19 PDF WR deferred + 3 Words + 3 Diagram OPTIONS - Wave B moved to PR_READY)
+        # + 2 permanently blocked (Processor: API_ACCESS_PARADOX, PdfExtractor: ABSTRACT_BASE)
+        # Sprint 7: DocConverter+XlsConverter moved BACKLOGGED->PR_READY; PdfExtractor PERMANENTLY_BLOCKED
         assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 25, f"Expected at least 25 backlogged entries, got {len(backlogged)}"
+        assert len(backlogged) >= 22, f"Expected at least 22 backlogged entries, got {len(backlogged)}"
         assert len(permanently_blocked) >= 1, "Expected at least 1 PERMANENTLY_BLOCKED entry (Processor)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 

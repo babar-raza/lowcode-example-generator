@@ -1,0 +1,42 @@
+{
+  "scenario_id": "pdf-html-converter",
+  "family": "pdf",
+  "type_name": "Html",
+  "full_type_name": "Aspose.Pdf.LowCode.Html",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Html",
+    "Html.Process",
+    "HtmlToPdfOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "new PdfConverterOptions()",
+    "HtmlLoadOptions",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess",
+    "new Document(inputHtml",
+    "new Document(\"input.html"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: create HTML input file first, then var options = new HtmlToPdfOptions(); options.AddInput(new FileDataSource('input.html')); options.AddOutput(new FileDataSource('output.pdf')); new Html().Process(options). CRITICAL: Html plugin converts HTML to PDF (NOT PDF to HTML). Input MUST be an HTML file. Create input with System.IO.File.WriteAllText('input.html', htmlContent). Harness-verified: ResultCollection.Count=1, output PDF magic %PDF, size ~110KB."
+  },
+  "publication_status": "IN_GENERATION",
+  "lifecycle_status": "GENERATION_STARTED",
+  "evidence_sources": [
+    "workspace/verification/latest/pdf-waveb-api-constraint-report.json"
+  ],
+  "last_verified_at": "2026-05-14T00:00:00Z"
+}

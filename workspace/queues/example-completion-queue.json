@@ -6,8 +6,9 @@
   "total_entries": 54,
   "state_summary": {
     "POST_MERGE_VERIFIED": 28,
-    "BACKLOGGED": 25,
-    "PERMANENTLY_BLOCKED": 1
+    "PR_READY": 2,
+    "BACKLOGGED": 22,
+    "PERMANENTLY_BLOCKED": 2
   },
   "entries": [
     {
@@ -270,16 +271,16 @@
       "scenario_id": "pdf-doc-converter",
       "family": "pdf",
       "type_name": "DocConverter",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: format-specific DOC output validation not yet implemented",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
-      "contract_path": null,
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
+      "contract_path": "pipeline/contracts/pdf/pdf-doc-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-14T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "Sprint 7 Wave B: DocConverter generated build=repaired run=passed reviewer=unavailable. Options: PdfToDocOptions + SaveFormat.DocX (OOXML). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
     },
     {
       "scenario_id": "pdf-form-editor",
@@ -346,15 +347,15 @@
       "family": "pdf",
       "type_name": "Html",
       "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: HTML input fixture strategy differs from PDF input strategy",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
-      "contract_path": null,
+      "blocking_reason": "GENERATION_RETRY: type_classifier fix applied (IPlugin Process-method detection); self-sufficient-fixture fix applied; run 3 in progress",
+      "blocking_taskcard": "TC-PDF-WAVE-B-HTML-GENERATION",
+      "contract_path": "pipeline/contracts/pdf/pdf-html-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-14T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "Sprint 7 Wave B: Html classified as UTILITY in run 1 (classifier bug). Fix applied to type_classifier.py (IPlugin Process-method detection). Run 2 in progress to generate."
     },
     {
       "scenario_id": "pdf-image-extractor",
@@ -420,16 +421,16 @@
       "scenario_id": "pdf-pdf-extractor",
       "family": "pdf",
       "type_name": "PdfExtractor",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: output validation for extracted content not yet defined",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "ABSTRACT_BASE_CLASS: PdfExtractor and PdfExtractorOptions are both abstract \u2014 cannot instantiate. PdfExtractor is the abstract base for TextExtractor and ImageExtractor. Sprint 7 harness-confirmed (CS0144 error).",
+      "blocking_taskcard": "TC-PDF-WAVE-B-RECLASSIFY",
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-14T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "Sprint 7: Reclassified WORKFLOW_ROOT -> ABSTRACT_BASE. PdfExtractor cannot be instantiated. Reduces runnable WORKFLOW_ROOT count 25->24. Evidence: pdf-waveb-api-constraint-report.json."
     },
     {
       "scenario_id": "pdf-pdf-to-image",
@@ -570,16 +571,16 @@
       "scenario_id": "pdf-xls-converter",
       "family": "pdf",
       "type_name": "XlsConverter",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: XLS output validation not yet implemented",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
-      "contract_path": null,
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
+      "contract_path": "pipeline/contracts/pdf/pdf-xls-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-14T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "Sprint 7 Wave B: XlsConverter generated build=repaired(2) run=passed reviewer=unavailable. Options: PdfToXlsOptions + PdfToXlsOptions.ExcelFormat.XLSX (nested enum). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
     },
     {
       "scenario_id": "words-comparer",

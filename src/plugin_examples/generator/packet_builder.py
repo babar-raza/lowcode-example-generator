@@ -144,14 +144,31 @@ def build_packet(
             "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path — always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
             "FORBIDDEN: string array overloads of Process() — always use the options object overload Process(IPluginOptions)",
             "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
-            "REQUIRED: always include 'using Aspose.Pdf;' and 'using Aspose.Pdf.LowCode;'",
+            "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
             "REQUIRED: use instance-method pattern — create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
-            "REQUIRED: create input PDF programmatically in code before calling the API:\n"
-            "    var doc = new Aspose.Pdf.Document();\n"
-            "    doc.Pages.Add();\n"
-            "    doc.Save(\"input.pdf\");",
-            "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         ]
+        if type_short == "html":
+            constraints += [
+                "REQUIRED: Html plugin converts HTML -> PDF. Input MUST be an HTML file, NOT a PDF.",
+                "REQUIRED: create HTML input file: File.WriteAllText(\"input.html\", \"<html><body><h1>Hello</h1></body></html>\");",
+                "REQUIRED: use HtmlToPdfOptions as the options class (NOT PluginOptions, NOT PdfConverterOptions)",
+                "REQUIRED: options.AddInput(new FileDataSource(\"input.html\")) — HTML file as input",
+                "REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) — PDF file as output",
+                "REQUIRED: new Html().Process(options) — use the LowCode Html plugin",
+                "FORBIDDEN: new Aspose.Pdf.Document() for Html plugin — no PDF fixture needed; input is HTML",
+                "FORBIDDEN: TextFragment for Html plugin — input is an HTML string, not a PDF document",
+                "FORBIDDEN: AddInput(new FileDataSource(\"input.pdf\")) — Html plugin takes HTML file input, NOT PDF",
+                "FORBIDDEN: HtmlLoadOptions — use HtmlToPdfOptions (LowCode namespace)",
+            ]
+        else:
+            constraints += [
+                "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
+                "REQUIRED: create input PDF programmatically in code before calling the API:\n"
+                "    var doc = new Aspose.Pdf.Document();\n"
+                "    doc.Pages.Add();\n"
+                "    doc.Save(\"input.pdf\");",
+                "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+            ]
         # Per-type exact class name hints — prevent hallucination of wrong options class
         _pdf_type_hints = {
             "merger": (
@@ -425,6 +442,70 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
             "REQUIRED: structure code in three sections: (1) INPUT FIXTURE CREATION using core API, (2) LOWCODE OPERATION using LowCode namespace, (3) OUTPUT VALIDATION.",
         ],
     },
+    "pdf": {
+        "fixture_code": (
+            "// Create a PDF input file using Aspose.Pdf (core API — allowed for fixture setup only)\n"
+            "var doc = new Aspose.Pdf.Document();\n"
+            "var page = doc.Pages.Add();\n"
+            "page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"LowCode PDF Example\"));\n"
+            "doc.Save(\"input.pdf\");"
+        ),
+        "operation_examples": {
+            "docconverter": (
+                "// LowCode operation: convert PDF to DOCX (OOXML format)\n"
+                "var options = new PdfToDocOptions();\n"
+                "options.SaveFormat = SaveFormat.DocX;  // DocX = OOXML .docx; Doc = OLE2 .doc\n"
+                "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "options.AddOutput(new FileDataSource(\"output.docx\"));\n"
+                "var result = new DocConverter().Process(options);\n"
+                "// result.ResultCollection.Count > 0 on success\n"
+                "// CRITICAL: PdfConverterOptions is abstract — use PdfToDocOptions"
+            ),
+            "xlsconverter": (
+                "// LowCode operation: convert PDF to XLSX\n"
+                "var options = new PdfToXlsOptions();\n"
+                "options.Format = PdfToXlsOptions.ExcelFormat.XLSX;  // nested enum\n"
+                "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                "options.AddOutput(new FileDataSource(\"output.xlsx\"));\n"
+                "var result = new XlsConverter().Process(options);\n"
+                "// result.ResultCollection.Count > 0 on success\n"
+                "// CRITICAL: ExcelFormat is PdfToXlsOptions.ExcelFormat (nested), NOT ExcelFormat directly"
+            ),
+            "html": (
+                "// LowCode operation: convert HTML to PDF\n"
+                "// CRITICAL: Html plugin converts HTML -> PDF. Input MUST be an HTML file, NOT a PDF!\n"
+                "// Step 1: Create HTML input file (no Aspose.Pdf.Document needed for Html plugin)\n"
+                "System.IO.File.WriteAllText(\"input.html\",\n"
+                "    \"<html><body><h1>Hello LowCode</h1><p>HTML to PDF.</p></body></html>\");\n"
+                "// Step 2: Convert HTML to PDF using LowCode Html plugin\n"
+                "var options = new HtmlToPdfOptions();\n"
+                "options.AddInput(new FileDataSource(\"input.html\"));\n"
+                "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                "var result = new Html().Process(options);\n"
+                "// result.ResultCollection.Count > 0 on success"
+            ),
+        },
+        # Types whose operation example includes its own input fixture (skip general PDF fixture)
+        "self_sufficient_op_types": {"html"},
+        "forbidden_patterns": [
+            "FORBIDDEN: new PdfConverterOptions() — PdfConverterOptions is abstract; use PdfToDocOptions for DocConverter or PdfToXlsOptions for XlsConverter.",
+            "FORBIDDEN: using core Document.Save() to replace LowCode conversion operations.",
+            "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use the concrete options class.",
+            "FORBIDDEN: FileSaveTarget as AddOutput argument — use FileDataSource(path) instead.",
+            "FORBIDDEN: result.IsSuccess — no IsSuccess property; use result.ResultCollection.Count > 0.",
+            "FORBIDDEN: for Html plugin: using input.pdf as input — Html plugin requires an HTML file as input.",
+            "FORBIDDEN: for Html plugin: using HtmlLoadOptions or new Document(htmlPath) — use HtmlToPdfOptions with the LowCode Html plugin.",
+        ],
+        "required_patterns": [
+            "REQUIRED: use the concrete options class for the target type (PdfToDocOptions, PdfToXlsOptions, HtmlToPdfOptions, etc.).",
+            "REQUIRED: options.AddInput(new FileDataSource(path)) — add input via AddInput with FileDataSource.",
+            "REQUIRED: options.AddOutput(new FileDataSource(path)) — add output via AddOutput with FileDataSource.",
+            "REQUIRED: result.ResultCollection.Count > 0 to verify success.",
+            "REQUIRED: for DocConverter: set options.SaveFormat = SaveFormat.DocX for OOXML .docx output.",
+            "REQUIRED: for XlsConverter: set options.Format = PdfToXlsOptions.ExcelFormat.XLSX for OOXML .xlsx output.",
+            "REQUIRED: for Html plugin: create HTML input file with System.IO.File.WriteAllText before calling Process.",
+        ],
+    },
 }
 
 
@@ -450,8 +531,17 @@ def _build_programmatic_fixture_guidance(
 
     # Build fixture instruction with code example
     parts: list[str] = []
+
+    # Add type-specific operation example first (may contain self-sufficient fixture)
+    op_examples = guidance.get("operation_examples", {})
+    op_code = op_examples.get(type_short.lower(), "")
+
+    # Types whose operation example is self-sufficient (no separate fixture needed)
+    self_sufficient_op_types = guidance.get("self_sufficient_op_types", set())
+    skip_default_fixture = type_short.lower() in self_sufficient_op_types
+
     fixture_code = guidance.get("fixture_code", "")
-    if fixture_code:
+    if fixture_code and not skip_default_fixture:
         parts.append(
             "\nPROGRAMMATIC INPUT FIXTURE — REFERENCE PATTERN (use this exact approach):\n"
             "```csharp\n"
@@ -459,12 +549,14 @@ def _build_programmatic_fixture_guidance(
             "```"
         )
 
-    # Add type-specific operation example
-    op_examples = guidance.get("operation_examples", {})
-    op_code = op_examples.get(type_short.lower(), "")
     if op_code:
-        parts.append(
+        label = (
+            "\nCOMPLETE EXAMPLE — REFERENCE PATTERN (this type uses its own input creation, not the PDF fixture above):\n"
+            if skip_default_fixture else
             "\nLOWCODE OPERATION — REFERENCE PATTERN:\n"
+        )
+        parts.append(
+            f"{label}"
             "```csharp\n"
             f"{op_code}\n"
             "```"

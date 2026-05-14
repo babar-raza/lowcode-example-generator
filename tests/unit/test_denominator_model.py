@@ -247,16 +247,19 @@ class TestPdfDenominator:
     def test_pdf_total_types_is_101(self):
         assert self.d["total_lowcode_types"] == 101
 
-    def test_pdf_workflow_root_types_is_25(self):
-        assert self.d["workflow_root_types"] == 25
+    def test_pdf_workflow_root_types_is_24(self):
+        assert self.d["workflow_root_types"] == 24, (
+            "PdfExtractor reclassified ABSTRACT_BASE in Sprint 7 — workflow_root_types 25->24"
+        )
 
-    def test_pdf_pilot_allowed_count_is_5(self):
-        assert self.d["allowed_pilot_count"] == 5
+    def test_pdf_pilot_allowed_count_is_8(self):
+        assert self.d["allowed_pilot_count"] == 8
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 5
-        for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter"]:
+        assert isinstance(types, list) and len(types) == 8
+        for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter",
+                  "DocConverter", "XlsConverter", "Html"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_4(self):
@@ -284,11 +287,13 @@ class TestPdfDenominator:
         sha = self.d["api_catalog_sha256"]
         assert len(sha) == 64
 
-    def test_pdf_excluded_count_is_96(self):
-        assert self.d["excluded_count"] == 96
+    def test_pdf_excluded_count_is_93(self):
+        assert self.d["excluded_count"] == 93, (
+            "Wave B adds DocConverter/XlsConverter/Html to pilot (8 total) — excluded 101-8=93"
+        )
 
-    def test_pdf_runnable_scenarios_is_5(self):
-        assert self.d["runnable_scenarios"] == 5
+    def test_pdf_runnable_scenarios_is_8(self):
+        assert self.d["runnable_scenarios"] == 8
 
 
 # ---------------------------------------------------------------------------
@@ -319,7 +324,7 @@ class TestDenominatorCrossFamily:
         d = _load_denominator(family)
         assert d["denominator_basis"] in {"FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED"}
 
-    def test_total_published_across_families_is_20(self):
+    def test_total_published_across_families_is_22(self):
         """Integration: total published examples across all families."""
         total = sum(_load_denominator(f)["published_count"] for f in FAMILIES)
         assert total == 22, (

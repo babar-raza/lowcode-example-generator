@@ -1,50 +1,54 @@
 {
   "included_examples": [
     {
-      "scenario_id": "words-comparer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer",
+      "scenario_id": "pdf-doc-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-doc-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter",
+      "scenario_id": "pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-html",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-mail-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger",
+      "scenario_id": "pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-merger",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger",
+      "scenario_id": "pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-splitter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-replacer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer",
+      "scenario_id": "pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-text-extractor",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
     },
     {
-      "scenario_id": "words-report-builder",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "words-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
-    },
-    {
-      "scenario_id": "words-watermarker",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker",
-      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      "scenario_id": "pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-182836\\generated\\pdf\\pdf-xls-converter",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "_preserved_from_run": "pilot-pdf-20260514-182836",
+      "_preservation_reason": "Sprint 8 merge backfill: XlsConverter passed in run 1 but was absent from run 5 manifest due to overwrite bug. Canonical artifacts in workspace/runs/pilot-pdf-20260514-182836/generated/pdf/pdf-xls-converter/"
     }
   ],
-  "excluded_examples": [],
-  "exclusion_reasons": {},
+  "excluded_examples": [
+    {
+      "scenario_id": "pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-190422\\generated\\pdf\\pdf-xls-converter",
+      "final_example_verdict": "EXAMPLE_BLOCKED_GENERATION_FAILED",
+      "blocked_reason": "Post-repair validation failed in run pilot-pdf-20260514-190422. Prior pass from run pilot-pdf-20260514-182836 preserved via Sprint 8 merge fix."
+    }
+  ],
+  "exclusion_reasons": {
+    "EXAMPLE_BLOCKED_GENERATION_FAILED": ["pdf-xls-converter"]
+  },
   "dry_run": true,
   "live_publish_attempted": false,
-  "publishable_candidate_count": 8,
-  "blocked_candidate_count": 0
+  "publishable_candidate_count": 6,
+  "blocked_candidate_count": 1,
+  "_manifest_version": "v2_merged",
+  "_merge_applied_at": "2026-05-14",
+  "_merge_notes": "Sprint 8 backfill: merge_pr_candidate_manifests() logic applied retroactively. XlsConverter preserved from run 1 (Rule 3: prior pass preserved when new run fails)."
 }

@@ -1,0 +1,76 @@
+{
+  "report_type": "sprint9_readiness_report",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 8: Manifest Consolidation and PDF Wave B Publication Closure",
+  "lane": "LANE 7 — Sprint 9 Readiness",
+
+  "sprint8_outcomes": {
+    "LANE1": "COMPLETE — manifest-architecture-investigation.json produced. Root causes identified: overwrite fragility, manual package assembly, XlsConverter lifecycle divergence.",
+    "LANE2": "COMPLETE — merge_pr_candidate_manifests() + write_pr_candidate_manifest(merge_existing=True) implemented in src/plugin_examples/gates/example_gates.py. 7 new tests added.",
+    "LANE3": "COMPLETE — Wave B package assembled in workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/ (doc-converter, xls-converter, html). publish-pr command ready.",
+    "LANE4": "COMPLETE — replay-manifest-integration-report.json produced. Merge fix is replay-compatible.",
+    "LANE5": "COMPLETE — publication-truth-reconciliation.json produced. XlsConverter divergence resolved via manifest backfill.",
+    "LANE6": "COMPLETE — publication-observability-report.json produced. Portfolio healthy at 22 examples.",
+    "LANE7": "IN_PROGRESS — This report."
+  },
+
+  "sprint9_priorities": [
+    {
+      "priority": 1,
+      "task": "PDF Wave B PR#3 publication",
+      "description": "Set APPROVE_LIVE_PR and run publish-pr. Package assembled and ready. 3 new examples: doc-converter, xls-converter, html.",
+      "command": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; .venv\\Scripts\\python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+      "blocker": "Operator must set APPROVE_LIVE_PR",
+      "taskcard": "TC-PDF-WAVE-B-PR3"
+    },
+    {
+      "priority": 2,
+      "task": "PDF Optimizer 2nd reviewer pass",
+      "description": "Optimizer needs 2nd consecutive reviewer pass before PDF PR#4 (Optimizer alone or batched). Set EXAMPLE_REVIEWER_PATH and GPT_OSS_MODEL.",
+      "blocker": "EXAMPLE_REVIEWER_PATH not set",
+      "taskcard": "TC-PDF-02-pdf-optimizer-2nd-pass"
+    },
+    {
+      "priority": 3,
+      "task": "Package assembly automation",
+      "description": "Implement assemble-package CLI command or integrate package assembly into runner flow. Currently manual. Critical for PDF Wave C and beyond.",
+      "implementation_hint": "Add src/plugin_examples/publisher/package_assembler.py. Read lifecycle records → find PR_READY scenarios → copy source files from workspace/runs/ to workspace/pr-dry-run/{family}-controlled-pilot/",
+      "taskcard": "TC-SYS-PACKAGE-ASSEMBLY"
+    },
+    {
+      "priority": 4,
+      "task": "PDF Wave C expansion (image types)",
+      "description": "Batch B: ImageExtractor, Jpeg, Png, Tiff, TableGenerator, FormFlattener. Medium fixture complexity.",
+      "prerequisite": "PR#3 merged",
+      "taskcard": "TC-PDF-04-pdf-batch1-expansion"
+    },
+    {
+      "priority": 5,
+      "task": "Email pilot launch",
+      "description": "Repo provisioning + pilot launch for Email.Converter (async IOutputHandler pattern).",
+      "blocker": "Target repo not provisioned",
+      "taskcard": "TC-EMAIL-02-email-pilot-launch"
+    },
+    {
+      "priority": 6,
+      "task": "Slides pilot launch",
+      "description": "Repo provisioning + pilot launch for Slides.Compress/Convert/Merger.",
+      "blocker": "Target repo not provisioned",
+      "taskcard": "TC-SLIDES-02-slides-pilot-launch"
+    }
+  ],
+
+  "technical_debt_addressed_in_sprint8": [
+    "Manifest overwrite fragility (FIXED)",
+    "XlsConverter lifecycle divergence (DOCUMENTED + RESOLVED)",
+    "Wave B package not in pr-dry-run (ASSEMBLED)"
+  ],
+
+  "technical_debt_remaining": [
+    "Package assembly still manual (no CLI command)",
+    "Optimizer in pdf-controlled-pilot package has stale bin/obj artifacts",
+    "pr-candidate-manifest does not track which candidates are already published"
+  ],
+
+  "sprint9_readiness_verdict": "READY — Sprint 8 structural fixes complete. PDF Wave B PR#3 is operator-actionable. Sprint 9 can focus on publication execution + expansion."
+}

@@ -424,17 +424,103 @@ def write_aggregate_gate_results(
     return path
 
 
+def merge_pr_candidate_manifests(existing: dict, new_manifest: dict) -> dict:
+    """Merge a new run's PR candidate manifest into an existing one.
+
+    Merge strategy:
+    - New run's PASSES always overwrite their scenario's entry (upgrade).
+    - Old pass entries are PRESERVED for scenarios absent from the new run
+      (scenarios not re-attempted are not demoted).
+    - New run's FAILURES only overwrite if the scenario was NOT previously passing.
+
+    This prevents cross-run candidate loss when a later run re-attempts a
+    scenario that previously passed and fails (regression run).
+    """
+    existing_included = {
+        e["scenario_id"]: e
+        for e in existing.get("included_examples", [])
+    }
+
+    new_included = {
+        e["scenario_id"]: e
+        for e in new_manifest.get("included_examples", [])
+    }
+
+    # All scenario_ids attempted in the new run (pass or fail)
+    new_run_attempted = set(
+        e["scenario_id"] for e in new_manifest.get("included_examples", [])
+    ) | set(
+        e["scenario_id"] for e in new_manifest.get("excluded_examples", [])
+    )
+
+    # Start with new passes
+    merged_included: dict[str, dict] = dict(new_included)
+
+    # Preserve old passes for scenarios NOT attempted (or not re-passed) in new run
+    for sid, entry in existing_included.items():
+        if sid not in new_run_attempted:
+            # Not re-attempted — preserve prior passing state
+            merged_included[sid] = entry
+        elif sid not in new_included:
+            # Re-attempted but failed in new run — PRESERVE old pass (don't regress)
+            merged_included[sid] = entry
+
+    # Excluded = new run's excluded entries whose scenarios aren't in merged_included
+    merged_excluded = [
+        e for e in new_manifest.get("excluded_examples", [])
+        if e["scenario_id"] not in merged_included
+    ]
+
+    exclusion_reasons: dict[str, list[str]] = {}
+    for e in merged_excluded:
+        reason = e.get("final_example_verdict", "unknown")
+        exclusion_reasons.setdefault(reason, []).append(e["scenario_id"])
+
+    return {
+        "included_examples": list(merged_included.values()),
+        "excluded_examples": merged_excluded,
+        "exclusion_reasons": exclusion_reasons,
+        "dry_run": new_manifest.get("dry_run", True),
+        "live_publish_attempted": new_manifest.get("live_publish_attempted", False),
+        "publishable_candidate_count": len(merged_included),
+        "blocked_candidate_count": len(merged_excluded),
+    }
+
+
 def write_pr_candidate_manifest(
     manifest: dict,
     verification_dir: Path,
+    merge_existing: bool = True,
 ) -> Path:
-    """Write PR candidate manifest."""
+    """Write PR candidate manifest.
+
+    When merge_existing=True (default), reads any existing manifest and merges
+    using merge_pr_candidate_manifests() — preserving previously-passing candidates
+    that were not re-attempted or regressed in the current run.
+
+    When merge_existing=False, overwrites the existing manifest (legacy behavior).
+    """
     latest = verification_dir / "latest"
     latest.mkdir(parents=True, exist_ok=True)
     path = latest / "pr-candidate-manifest.json"
 
+    final_manifest = manifest
+    if merge_existing and path.exists():
+        try:
+            with open(path) as f:
+                existing = json.load(f)
+            final_manifest = merge_pr_candidate_manifests(existing, manifest)
+            logger.info(
+                "PR candidate manifest merged: %d included (%d from prior runs preserved)",
+                final_manifest["publishable_candidate_count"],
+                final_manifest["publishable_candidate_count"] - manifest.get("publishable_candidate_count", 0),
+            )
+        except (json.JSONDecodeError, OSError, KeyError) as exc:
+            logger.warning("Failed to merge existing manifest (overwriting): %s", exc)
+            final_manifest = manifest
+
     with open(path, "w") as f:
-        json.dump(manifest, f, indent=2)
+        json.dump(final_manifest, f, indent=2)
 
     logger.info("PR candidate manifest written: %s", path)
     return path

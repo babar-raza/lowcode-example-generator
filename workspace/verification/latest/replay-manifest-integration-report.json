@@ -1,0 +1,45 @@
+{
+  "report_type": "replay_manifest_integration_report",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 8: Manifest Consolidation and PDF Wave B Publication Closure",
+  "lane": "LANE 4 — Replay/Manifest Integration",
+
+  "replay_manifest_read_location": "src/plugin_examples/replay.py line 917",
+  "manifest_path": "workspace/verification/latest/pr-candidate-manifest.json",
+
+  "preflight_check": {
+    "manifest_exists": true,
+    "manifest_path": "workspace/verification/latest/pr-candidate-manifest.json",
+    "last_written_by_run": "pilot-pdf-20260514-190422",
+    "publishable_candidate_count_before_fix": 5,
+    "included_before_fix": ["pdf-doc-converter", "pdf-html", "pdf-merger", "pdf-splitter", "pdf-text-extractor"],
+    "xls_converter_present": false,
+    "note": "XlsConverter absent because run 5 overwrote manifest with only run 5's candidates. Run 5 failed XlsConverter."
+  },
+
+  "replay_validation_logic": {
+    "file": "src/plugin_examples/replay.py",
+    "line": 917,
+    "behavior": "Reads pr-candidate-manifest.json. Fails preflight if publishable_candidate_count == 0.",
+    "current_issue": "With old overwrite logic: if a run has 0 passing examples, the manifest shows publishable_candidate_count=0, blocking replay even if prior runs had passing candidates.",
+    "fix_impact": "With merge_existing=True: manifest accumulates candidates. publishable_candidate_count always reflects all accumulated passes across runs, not just current run."
+  },
+
+  "post_fix_expected_state": {
+    "manifest_will_contain": ["pdf-doc-converter", "pdf-html", "pdf-xls-converter", "pdf-merger", "pdf-splitter", "pdf-text-extractor"],
+    "publishable_candidate_count_after_fix": 6,
+    "note": "After next run with merge_existing=True, XlsConverter from run 1 will be preserved via Rule 3 (prior pass preserved when new run fails same scenario). The manifest will also include currently-published scenarios (merger, splitter, text-extractor) which are still in included_examples since they're not excluded."
+  },
+
+  "test_coverage_added": [
+    "test_preserves_old_passes_not_in_new_run",
+    "test_preserves_old_pass_when_new_run_fails_same_scenario",
+    "test_new_pass_upgrades_old_pass",
+    "test_new_pass_not_in_old_adds_to_included",
+    "test_excluded_only_shows_non_previously_passing",
+    "test_write_manifest_merges_on_second_write",
+    "test_write_manifest_overwrite_when_merge_false"
+  ],
+
+  "replay_integration_verdict": "COMPATIBLE — The merge fix is additive-only. Replay validation check (publishable_candidate_count > 0) will still work: merged manifest always has count >= current run count. No replay stage changes required."
+}

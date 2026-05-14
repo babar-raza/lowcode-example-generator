@@ -24,6 +24,7 @@ from plugin_examples.gates.example_gates import (
     write_aggregate_gate_results,
     write_pr_candidate_manifest,
     write_scenario_feedback,
+    merge_pr_candidate_manifests,
 )
 
 
@@ -386,3 +387,102 @@ class TestSelfGeneratedStrategy:
         assert manifest["publishable_candidate_count"] == 1
         assert manifest["blocked_candidate_count"] == 1
         assert manifest["excluded_examples"][0]["scenario_id"] == "fail"
+
+
+# --- Manifest merge tests (Sprint 8: cross-run candidate preservation) ---
+
+def _make_manifest(included_ids: list[str], excluded_ids: list[str]) -> dict:
+    """Build a minimal manifest dict for merge tests."""
+    included = [
+        {"scenario_id": s, "example_path": f"/path/{s}", "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"}
+        for s in included_ids
+    ]
+    excluded = [
+        {"scenario_id": s, "example_path": f"/path/{s}", "final_example_verdict": "EXAMPLE_BLOCKED_BUILD_FAILED", "blocked_reason": "build failed"}
+        for s in excluded_ids
+    ]
+    return {
+        "included_examples": included,
+        "excluded_examples": excluded,
+        "exclusion_reasons": {"EXAMPLE_BLOCKED_BUILD_FAILED": excluded_ids} if excluded_ids else {},
+        "dry_run": True,
+        "live_publish_attempted": False,
+        "publishable_candidate_count": len(included),
+        "blocked_candidate_count": len(excluded),
+    }
+
+
+class TestMergePrCandidateManifests:
+    def test_preserves_old_passes_not_in_new_run(self):
+        """Scenarios not re-attempted in the new run keep their old pass state."""
+        old = _make_manifest(["xls-converter", "doc-converter"], [])
+        new = _make_manifest(["html"], [])  # xls-converter not re-attempted
+        merged = merge_pr_candidate_manifests(old, new)
+        ids = {e["scenario_id"] for e in merged["included_examples"]}
+        assert "xls-converter" in ids, "xls-converter (not re-attempted) must be preserved"
+        assert "doc-converter" in ids, "doc-converter (not re-attempted) must be preserved"
+        assert "html" in ids, "html (new pass) must be in merged"
+        assert merged["publishable_candidate_count"] == 3
+
+    def test_preserves_old_pass_when_new_run_fails_same_scenario(self):
+        """When a new run re-attempts a scenario and FAILS, the old pass is preserved (no regression demotion)."""
+        old = _make_manifest(["xls-converter"], [])
+        new = _make_manifest([], ["xls-converter"])  # xls-converter failed in new run
+        merged = merge_pr_candidate_manifests(old, new)
+        ids = {e["scenario_id"] for e in merged["included_examples"]}
+        assert "xls-converter" in ids, "xls-converter pass must survive new-run regression"
+        assert merged["publishable_candidate_count"] == 1
+
+    def test_new_pass_upgrades_old_pass(self):
+        """A new pass for a scenario always replaces the old pass entry."""
+        old_entry = {"scenario_id": "doc", "example_path": "/old/path", "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"}
+        new_entry = {"scenario_id": "doc", "example_path": "/new/path", "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"}
+        old = {"included_examples": [old_entry], "excluded_examples": [], "exclusion_reasons": {},
+               "dry_run": True, "live_publish_attempted": False, "publishable_candidate_count": 1, "blocked_candidate_count": 0}
+        new = {"included_examples": [new_entry], "excluded_examples": [], "exclusion_reasons": {},
+               "dry_run": True, "live_publish_attempted": False, "publishable_candidate_count": 1, "blocked_candidate_count": 0}
+        merged = merge_pr_candidate_manifests(old, new)
+        included = {e["scenario_id"]: e for e in merged["included_examples"]}
+        assert included["doc"]["example_path"] == "/new/path", "new pass must overwrite old pass path"
+
+    def test_new_pass_not_in_old_adds_to_included(self):
+        """A brand-new pass scenario gets added to included_examples."""
+        old = _make_manifest(["a"], [])
+        new = _make_manifest(["a", "b"], [])
+        merged = merge_pr_candidate_manifests(old, new)
+        ids = {e["scenario_id"] for e in merged["included_examples"]}
+        assert "a" in ids and "b" in ids
+        assert merged["publishable_candidate_count"] == 2
+
+    def test_excluded_only_shows_non_previously_passing(self):
+        """Excluded list only contains scenarios that weren't passing before."""
+        old = _make_manifest(["good"], [])
+        new = _make_manifest([], ["good", "bad"])  # good regressed, bad is new failure
+        merged = merge_pr_candidate_manifests(old, new)
+        excluded_ids = {e["scenario_id"] for e in merged["excluded_examples"]}
+        assert "good" not in excluded_ids, "previously-passing good must not appear in excluded"
+        assert "bad" in excluded_ids, "newly-failed bad must appear in excluded"
+
+    def test_write_manifest_merges_on_second_write(self, tmp_path):
+        """write_pr_candidate_manifest with merge_existing=True merges on second write."""
+        m1 = _make_manifest(["xls-converter"], [])
+        write_pr_candidate_manifest(m1, tmp_path, merge_existing=False)
+        m2 = _make_manifest(["html"], ["xls-converter"])  # xls-converter fails in run 2
+        write_pr_candidate_manifest(m2, tmp_path, merge_existing=True)
+        saved = json.loads((tmp_path / "latest" / "pr-candidate-manifest.json").read_text())
+        ids = {e["scenario_id"] for e in saved["included_examples"]}
+        assert "xls-converter" in ids, "xls-converter must survive run-2 regression via merge"
+        assert "html" in ids, "html must be in merged manifest"
+        assert saved["publishable_candidate_count"] == 2
+
+    def test_write_manifest_overwrite_when_merge_false(self, tmp_path):
+        """write_pr_candidate_manifest with merge_existing=False overwrites (legacy behavior)."""
+        m1 = _make_manifest(["xls-converter"], [])
+        write_pr_candidate_manifest(m1, tmp_path, merge_existing=False)
+        m2 = _make_manifest(["html"], [])
+        write_pr_candidate_manifest(m2, tmp_path, merge_existing=False)
+        saved = json.loads((tmp_path / "latest" / "pr-candidate-manifest.json").read_text())
+        ids = {e["scenario_id"] for e in saved["included_examples"]}
+        assert "xls-converter" not in ids, "overwrite must drop xls-converter"
+        assert "html" in ids
+        assert saved["publishable_candidate_count"] == 1

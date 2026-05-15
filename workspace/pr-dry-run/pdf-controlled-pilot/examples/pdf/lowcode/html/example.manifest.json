@@ -1,0 +1,14 @@
+{
+  "scenario_id": "pdf-html",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.4.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.Html",
+    "Aspose.Pdf.LowCode.Html.Dispose",
+    "Aspose.Pdf.LowCode.Html.Process"
+  ],
+  "status": "repaired",
+  "input_strategy": "programmatic_input",
+  "input_files": []
+}

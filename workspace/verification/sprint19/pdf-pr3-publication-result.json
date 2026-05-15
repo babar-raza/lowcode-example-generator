@@ -1,0 +1,36 @@
+{
+  "sprint": "sprint19",
+  "pr_id": "PR#3",
+  "target_types": ["DocConverter", "XlsConverter", "Html"],
+  "examples_count": 3,
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "package_fixed": true,
+  "package_fix_note": "Removed optimizer/ subdirectory (already published in PR#4) from package before dry-run",
+  "package_contents": ["doc-converter", "html", "xls-converter"],
+  "dry_run_result": {
+    "simulation_passed": true,
+    "simulation_type": "publish_pr_dry_run_simulation",
+    "simulation_date": "2026-05-15T15:16:13+00:00",
+    "examples_count": 3,
+    "target_owner": "aspose-pdf-net",
+    "target_repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+    "target_branch": "main",
+    "gate_verdict_ok": true,
+    "repo_access_ready": true,
+    "pr_permission_ready": true,
+    "approval_gate_passed": false,
+    "blocked_reason": "blocked_live_pr_approval_required",
+    "live_push_performed": false,
+    "pr_title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+    "pr_branch": "plugin-examples/pdf/20260515-151613",
+    "nuget_version": "26.4.0"
+  },
+  "candidate_integrity": {
+    "doc_converter": "current_run pilot-pdf-20260515-193905 | build=pass | run=pass | reviewer=pass | generated_template_first",
+    "html": "current_run pilot-pdf-20260515-193905 | build=pass | run=pass | reviewer=pass | generated_template_first",
+    "xls_converter": "current_run pilot-pdf-20260515-193905 | build=repaired | run=pass | reviewer=pass | generated_template_first"
+  },
+  "live_publish_status": "BLOCKED_APPROVAL_GATE",
+  "live_publish_command": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR GITHUB_TOKEN=$GH_TOKEN .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+  "verdict": "DRY_RUN_READY_APPROVAL_BLOCKED"
+}

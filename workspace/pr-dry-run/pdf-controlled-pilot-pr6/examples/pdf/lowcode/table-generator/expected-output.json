@@ -1,0 +1,19 @@
+{
+  "must_contain": [
+    "Example: pdf-table-generator"
+  ],
+  "must_not_contain": [
+    "Unhandled exception",
+    "System.Exception",
+    "Console.ReadKey",
+    "Console.ReadLine"
+  ],
+  "has_output": true,
+  "input_dependencies": [],
+  "forbidden_code_patterns": [
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "TODO",
+    "NotImplementedException"
+  ]
+}

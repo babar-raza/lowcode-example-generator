@@ -1,0 +1,56 @@
+{
+  "sprint": "sprint19",
+  "date": "2026-05-15",
+  "pdf_denominator_version": "Aspose.PDF 26.5.0",
+  "workflow_root_total": 24,
+  "pilot_allowed_types_actual": 14,
+  "pilot_allowed_types_denominator_file": 11,
+  "pilot_count_discrepancy_note": "pdf.json denominator shows 11 but pdf.yml allowed_types has 14 (TocGenerator, TableGenerator, ImageExtractor added in Sprint 18). Denominator file needs update.",
+  "state_after_pr3_pr5_pr6_publication": {
+    "published": 14,
+    "published_note": "5 already published + 9 new from PR#3+PR#5+PR#6",
+    "pilot_coverage": "14/14 (100% of pilot allowed types)",
+    "workflow_root_coverage": "14/24 (58.3%)",
+    "full_sot_coverage": "14/101 (13.9%)"
+  },
+  "currently_published": {
+    "count": 5,
+    "types": ["Merger", "TextExtractor", "PdfAConverter", "Splitter", "Optimizer"]
+  },
+  "pr_ready_pending_approval": {
+    "pr3": ["DocConverter", "XlsConverter", "Html"],
+    "pr5": ["Jpeg", "Tiff", "Png"],
+    "pr6": ["TableGenerator", "TocGenerator", "ImageExtractor"],
+    "total": 9
+  },
+  "remaining_non_pilot_workflow_roots": {
+    "count": 10,
+    "types_from_classification": [
+      "Security", "Signature", "Timestamp", "FormEditor", "FormExporter",
+      "FormFlattener", "FormImporter", "SelectField", "XmlProcessor", "Ofd"
+    ],
+    "assessment": {
+      "Security": {"wave": "D (BLOCKED)", "reason": "Certificate/encryption fixtures required"},
+      "Signature": {"wave": "D (BLOCKED)", "reason": "Digital certificate fixtures required"},
+      "Timestamp": {"wave": "D (BLOCKED)", "reason": "TSA server dependency"},
+      "Ofd": {"wave": "D (BLOCKED)", "reason": "OFD format external dependency"},
+      "FormEditor": {"wave": "C (COMPLEX)", "reason": "AcroForm fixture required (PDF with form fields)"},
+      "FormExporter": {"wave": "C (COMPLEX)", "reason": "AcroForm fixture required"},
+      "FormFlattener": {"wave": "C (COMPLEX)", "reason": "AcroForm fixture required"},
+      "FormImporter": {"wave": "C (COMPLEX)", "reason": "AcroForm fixture + data file"},
+      "SelectField": {"wave": "C (COMPLEX)", "reason": "AcroForm select field fixture"},
+      "XmlProcessor": {"wave": "B (MEDIUM)", "reason": "XML template fixture needed"}
+    }
+  },
+  "pdfextractor_note": "PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7 — not a runnable type",
+  "next_wave_recommendation": "Wave D expansion: XmlProcessor (MEDIUM) feasible next. Form types (Wave C) require AcroForm fixture strategy. Security/Signature/Timestamp/Ofd remain blocked by external dependencies.",
+  "denominator_file_update_needed": true,
+  "denominator_file_update_items": [
+    "allowed_pilot_count: 11 -> 14",
+    "allowed_pilot_types: add TocGenerator, TableGenerator, ImageExtractor",
+    "runnable_scenarios: 11 -> 14",
+    "pr_dry_run_ready_count: update after publication",
+    "published_count: update after publication",
+    "coverage_pct_of_pilot_allowed: update to reflect 14 pilot types"
+  ]
+}

@@ -1,0 +1,9 @@
+ .../latest/cells-readme-backfill-simulation.json   |   4 +-
+ .../latest/cells-root-readme-audit.json            |   2 +-
+ .../latest/cells-root-readme-render-result.json    |   2 +-
+ .../latest/pdf-live-pr-simulation.json             |  20 ++--
+ workspace/verification/latest/release-status.json  | 113 ++++++++++++++++++++-
+ .../latest/words-readme-backfill-simulation.json   |   4 +-
+ .../latest/words-root-readme-audit.json            |   2 +-
+ .../latest/words-root-readme-render-result.json    |   2 +-
+ 8 files changed, 129 insertions(+), 20 deletions(-)

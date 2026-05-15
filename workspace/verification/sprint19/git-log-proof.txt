@@ -1,0 +1,30 @@
+bd71e09 feat(sprint18-toc-image-template-first): TocGenerator + ImageExtractor FIRST EVER PASS — all 14 PDF pilot types PR_DRY_RUN_READY
+7f34faf feat(sprint17-template-first-closure): PDF Wave B/C/TableGen all EXAMPLE_READY — encoding fix + SaveFormat fix
+20dae8a feat(sprint16-pdf-fresh-run-next-wave): PDF fresh run validated, TocGenerator/ImageExtractor wave started
+654573c fix(router): treat GPT_OSS_MODEL='' same as absent — use 'recommended' default
+63170d5 feat(runner): add version_drift_preflight stage after nuget_fetch
+0e5728e fix(gates+codegen): persisted quarantine propagation + 5 PDF reference examples
+6976af2 chore(pdf): update LowCode denominator for Aspose.PDF 26.5.0
+cc50580 feat(sprint11-candidate-integrity): demotion-aware manifest, degraded gate semantics, PDF Wave C stabilization
+48d4bd1 feat(sprint10-convergence-intelligence): literal-string constraint validator + Jpeg/Tiff extension fix
+357ac51 feat(sprint9-waveb-image-wave): PDF Wave B dry-run, image type expansion, manifest merge fix
+5480495 feat(sprint8-manifest-consolidation): Wave B package assembly + manifest merge fix
+a25e425 feat(sprint7-waveb-closure): Html PR_READY — all 3 Wave B types EXAMPLE_READY_FOR_PR_DRY_RUN
+2281ee8 feat(sprint7-pdf-waveb): PDF Wave B expansion + Html validator hardening
+afca831 feat(model-unblock-activation-sprint): all 6 families PILOT_COMPLETE+, 28 examples published
+7f88385 feat(replay-publication-sprint): email/slides activation, Words ReportBuilder, PDF Optimizer — Sprint 6 closure
+6cc4ca0 feat(replay-publication-sprint): replay-assisted publication coverage sprint closure
+e2a7d32 feat(sprint5-env-blocked): lane evidence, repo probes, portfolio sync
+d327164 feat(sprint4-pilot-closure): Words ReportBuilder config, Email/Slides readiness, queue sync
+b2bcf5d feat(publication-closure): publish Words PR#5 (7ex) and PDF PR#2 (3ex), close Sprint R3
+bec5362 feat(replay): add hardened stage replay pipeline
+008e6f7 feat(classic-token-publication-healing-activation): token hardening, healing intelligence activation, Processor governance
+cad4714 feat(healing-intelligence): establish persistent healing intelligence registry
+ec5fb0a feat(r5-verification): close Sprint R5 with all-family completeness enforcement
+c38788b feat(healing): portfolio healing acceleration sprint — activate waves 3+A and repair infrastructure
+ad541be feat(healing): establish deferred-to-healing governance for all 28 deferred runnable types
+6ce73da feat(sprint2): portfolio launch sprint 2 — readiness documentation and taskcard closure
+171969d fix(lowcode): close portfolio sprint1 evidence and words wave2 readiness
+0461c79 fix: report release status for all families
+998a60b fix: close r6 preflight blockers
+1491130 feat(r5-verification): close Sprint R5 with all-family completeness enforcement

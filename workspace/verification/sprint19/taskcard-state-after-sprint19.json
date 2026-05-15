@@ -1,0 +1,67 @@
+{
+  "sprint": "sprint19",
+  "date": "2026-05-15",
+  "new_taskcards_opened": [
+    {
+      "id": "TC-PDF-PR3-PUBLISH",
+      "title": "Live publish PDF PR#3 (DocConverter + XlsConverter + Html)",
+      "status": "OPEN",
+      "blocking": true,
+      "action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR, map GH_TOKEN to GITHUB_TOKEN, run publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR",
+      "package": "workspace/pr-dry-run/pdf-controlled-pilot (doc-converter, html, xls-converter)"
+    },
+    {
+      "id": "TC-PDF-PR5-PUBLISH",
+      "title": "Live publish PDF PR#5 (Jpeg + Tiff + Png)",
+      "status": "OPEN",
+      "blocking": false,
+      "action": "After PR#3: update pdf-controlled-pilot with jpeg/tiff/png contents, run publish-pr",
+      "package": "workspace/pr-dry-run/pdf-controlled-pilot-pr5 (assembled)"
+    },
+    {
+      "id": "TC-PDF-PR6-PUBLISH",
+      "title": "Live publish PDF PR#6 (TableGenerator + TocGenerator + ImageExtractor)",
+      "status": "OPEN",
+      "blocking": false,
+      "action": "After PR#5: update pdf-controlled-pilot with table/toc/image-extractor contents, run publish-pr",
+      "package": "workspace/pr-dry-run/pdf-controlled-pilot-pr6 (assembled)"
+    },
+    {
+      "id": "TC-PDF-DENOMINATOR-UPDATE",
+      "title": "Update pdf.json denominator: allowed_pilot_count 11->14, add TocGenerator/TableGenerator/ImageExtractor",
+      "status": "OPEN",
+      "blocking": false,
+      "action": "Edit pipeline/configs/denominators/pdf.json to reflect 14 pilot types"
+    },
+    {
+      "id": "TC-EMAIL-POST-MERGE-VALIDATE",
+      "title": "Run email post-merge validation",
+      "status": "OPEN",
+      "blocking": false,
+      "action": "Run post-merge validation for email (PR#1 merged SHA 023ad66970d2)"
+    },
+    {
+      "id": "TC-SLIDES-POST-MERGE-VALIDATE",
+      "title": "Run slides post-merge validation",
+      "status": "OPEN",
+      "blocking": false,
+      "action": "Run post-merge validation for slides (PR#1 merged SHA bf05fc43124f)"
+    }
+  ],
+  "taskcards_closed_this_sprint": [
+    {
+      "id": "TC-PDF-SPRINT18-TOC-IMAGE-TEMPLATE-FIRST",
+      "title": "TocGenerator and ImageExtractor template_first implementation",
+      "closed_by": "Sprint 18 commit bd71e09, pilot pilot-pdf-20260515-193905 FIRST EVER PASS"
+    }
+  ],
+  "open_followup_taskcards": [
+    "followup-pdf-remaining-candidate-classification (10 non-pilot workflow roots)",
+    "followup-pdf-form-types-acroform-fixture (FormEditor/FormExporter/FormFlattener/FormImporter/SelectField)",
+    "followup-pdf-xmlprocessor-generation (next viable non-pilot type)",
+    "followup-words-split-criteria-enumeration",
+    "followup-words-pair-fixture-strategy",
+    "followup-words-docx-semantic-validation",
+    "followup-words-full-coverage-expansion"
+  ]
+}

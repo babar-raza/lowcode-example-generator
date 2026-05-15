@@ -1,0 +1,45 @@
+{
+  "sprint": "sprint19",
+  "pr_id": "PR#6",
+  "target_types": ["TableGenerator", "TocGenerator", "ImageExtractor"],
+  "examples_count": 3,
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6",
+  "package_assembled": true,
+  "package_assembly_note": "Copied from pilot-pdf-20260515-193905 generated examples. table-generator, toc-generator, image-extractor.",
+  "package_contents": ["image-extractor", "table-generator", "toc-generator"],
+  "candidate_integrity": {
+    "table_generator": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "repaired (1 attempt)",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "lowcode_api": "TableGenerator plugin + TableGeneratorOptions + AddInput + AddOutput",
+      "template_first": true
+    },
+    "toc_generator": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "repaired (1 attempt)",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "pass_history": "FIRST_EVER_PASS in Sprint 18",
+      "lowcode_api": "TocOptions + AddInput(FileDataSource('input.pdf')) + AddOutput(FileDataSource('output.pdf')) + new TocGenerator().Process(options)",
+      "template_first": true
+    },
+    "image_extractor": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "passed",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "pass_history": "FIRST_EVER_PASS in Sprint 18",
+      "lowcode_api": "58-byte BMP embedded via page.Resources.Images.Add(new MemoryStream(bmpBytes)) + ImageExtractorOptions + AddInput + new ImageExtractor().Process(options) + ResultCollection.Count > 0",
+      "no_add_output": "extractor pattern — results in ResultCollection, no file output",
+      "template_first": true
+    }
+  },
+  "dry_run_note": "PR#6 package assembled at pdf-controlled-pilot-pr6 for dry-run verification. For live publication: update pdf-controlled-pilot to contain table-generator/toc-generator/image-extractor after PR#5 is pushed, then run publish-pr for PR#6.",
+  "live_publish_status": "BLOCKED_APPROVAL_GATE",
+  "verdict": "PACKAGE_ASSEMBLED_APPROVAL_BLOCKED"
+}

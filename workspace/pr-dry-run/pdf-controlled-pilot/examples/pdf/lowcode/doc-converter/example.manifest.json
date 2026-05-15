@@ -1,0 +1,14 @@
+{
+  "scenario_id": "pdf-doc-converter",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.4.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.DocConverter",
+    "Aspose.Pdf.LowCode.DocConverter.Dispose",
+    "Aspose.Pdf.LowCode.DocConverter.Process"
+  ],
+  "status": "repaired",
+  "input_strategy": "programmatic_input",
+  "input_files": []
+}

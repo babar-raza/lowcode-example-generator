@@ -1,0 +1,12 @@
+{
+  "scenario_id": "pdf-png",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.Png"
+  ],
+  "status": "generated_template_first",
+  "input_strategy": "programmatic_input",
+  "input_files": []
+}

@@ -1,0 +1,85 @@
+{
+  "audit_date": "2026-05-15",
+  "sprint": "sprint19",
+  "audited_commit": "bd71e09bd58c99e1176a15e3179a8d1c47e254dd",
+  "expected_commit": "bd71e09",
+  "commit_is_head": true,
+  "branch": "main",
+  "commit_message": "feat(sprint18-toc-image-template-first): TocGenerator + ImageExtractor FIRST EVER PASS — all 14 PDF pilot types PR_DRY_RUN_READY",
+  "commit_date": "2026-05-15T19:55:09+0500",
+  "files_changed_count": 38,
+  "source_files_changed": [
+    "pipeline/configs/families/pdf.yml",
+    "src/plugin_examples/generator/code_generator.py",
+    "tests/unit/test_llm_generation.py"
+  ],
+  "workspace_files_changed": 35,
+  "workspace_tracked_deliberately": true,
+  "workspace_tracking_note": "workspace/ was in .gitignore (line 42 adds /workspace) before Sprint 9. Files already tracked before gitignore addition remain tracked by git. Workspace evidence files are committed as sprint artifacts.",
+  "source_changes_verified": {
+    "pdf_yml": {
+      "change": "Added template_first: true to TocGenerator and ImageExtractor sections",
+      "constraint_fix": "ImageExtractor REQUIRED constraint token changed from description to code pattern: 'page.Resources.Images.Add('",
+      "verified": true
+    },
+    "code_generator_py": {
+      "change": "Added tocgenerator and imageextractor cases to _generate_deterministic_template_for_scenario()",
+      "tocgenerator_template": "TocOptions + AddInput/AddOutput + new TocGenerator().Process(options)",
+      "imageextractor_template": "58-byte BMP + page.Resources.Images.Add() + ImageExtractorOptions + no AddOutput (extractor pattern)",
+      "verified": true
+    },
+    "test_llm_generation_py": {
+      "change": "4 new template-first tests + expanded 9-type validation loop",
+      "new_tests": [
+        "test_tocgenerator_template_first_bypasses_llm",
+        "test_imageextractor_template_first_bypasses_llm",
+        "test_tocgenerator_template_contains_required_patterns",
+        "test_imageextractor_template_contains_required_patterns"
+      ],
+      "updated_tests": ["test_all_template_first_types_pass_validation_with_utf8_config — now loops 9 types"],
+      "verified": true
+    }
+  },
+  "accidental_inclusions_check": {
+    "secrets_in_sprint18_files": false,
+    "stale_tier14_run_in_evidence": false,
+    "tier14_run_id": "pilot-pdf-20260515-185930",
+    "authoritative_run_id": "pilot-pdf-20260515-193905",
+    "tier14_appears_in_manifests": false,
+    "temp_files": false,
+    "bulky_irrelevant_logs": false
+  },
+  "legacy_secret_references": {
+    "present": true,
+    "note": "Some legacy evidence files (from prior sprints) contain 'ghp_' and 'bearer' as string references (token format descriptions), not actual values. Spot-checked: approval-environment-report.json contains 'Classic PAT (ghp_) with repo scope...' — a description, not a secret.",
+    "sprint18_specific_files_clean": true
+  },
+  "authoritative_run_proof": {
+    "run_id": "pilot-pdf-20260515-193905",
+    "verdict": "PR_DRY_RUN_READY",
+    "stages": 17,
+    "stages_succeeded": 17,
+    "generated": 12,
+    "built": 12,
+    "run_passed": 12,
+    "runtime_blocked": 0,
+    "pr_candidates_current_run": 12,
+    "pr_candidates_prior_run_preserved": 2,
+    "pr_candidates_total": 14,
+    "toc_generator_status": "FIRST_EVER_PASS",
+    "image_extractor_status": "FIRST_EVER_PASS",
+    "start_time": "2026-05-15T14:39:05+00:00",
+    "end_time": "2026-05-15T14:52:29+00:00"
+  },
+  "stale_run_analysis": {
+    "stale_run_id": "pilot-pdf-20260515-185930",
+    "failure_reason": "invalid choice: --tier 14 (CLI only accepts 0-5)",
+    "exit_code": 1,
+    "in_authoritative_evidence": false,
+    "in_candidate_manifest": false,
+    "in_lifecycle_records": false,
+    "verdict": "STALE_ONLY_HISTORICAL — no contamination of authoritative evidence"
+  },
+  "audit_verdict": "PASS",
+  "audit_notes": "bd71e09 is HEAD on main. All Sprint 18 source changes verified. Authoritative run pilot-pdf-20260515-193905 is the only run referenced in authoritative evidence. Stale --tier 14 failure is isolated to task output logs. No secrets exposed in Sprint 18 specific evidence. Workspace tracking is deliberate and consistent with prior sprints."
+}

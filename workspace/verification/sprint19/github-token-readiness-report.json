@@ -1,0 +1,35 @@
+{
+  "sprint": "sprint19",
+  "check_date": "2026-05-15",
+  "gh_token_present": true,
+  "gh_token_type": "classic PAT (ghp_) — correct type for repo write access",
+  "github_token_present": true,
+  "github_token_type": "fine-grained PAT (github_pat_) — WARNING: may lack git blob write on org repos",
+  "effective_token": "GH_TOKEN (classic PAT) must be mapped to GITHUB_TOKEN at publish time",
+  "mapping_command": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+  "gh_auth_status": {
+    "account": "babar-raza",
+    "token_type": "GH_TOKEN (classic PAT)",
+    "token_scopes": ["repo", "workflow"],
+    "missing_scopes": ["read:org"],
+    "missing_scope_impact": "read:org is not required for PR creation or git push operations"
+  },
+  "target_repo_access": {
+    "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "http_status": 200,
+    "accessible": true,
+    "last_push": "2026-05-14T06:00:36Z"
+  },
+  "approval_gate": {
+    "required_value": "APPROVE_LIVE_PR",
+    "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "currently_set": false,
+    "blocked": true,
+    "blocked_reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set to APPROVE_LIVE_PR"
+  },
+  "repo_access_ready": true,
+  "pr_permission_ready": true,
+  "live_publish_blocked_by": "approval_gate_only",
+  "live_publish_command": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR GITHUB_TOKEN=$GH_TOKEN .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --promote-latest",
+  "verdict": "TOKEN_READY_APPROVAL_BLOCKED"
+}

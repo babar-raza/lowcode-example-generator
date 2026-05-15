@@ -1,0 +1,47 @@
+{
+  "sprint": "sprint19",
+  "pr_id": "PR#5",
+  "target_types": ["Jpeg", "Tiff", "Png"],
+  "examples_count": 3,
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+  "package_assembled": true,
+  "package_assembly_note": "Copied from pilot-pdf-20260515-193905 generated examples. jpeg->jpeg, pdf-tiff->tiff, pdf-png->png.",
+  "package_contents": ["jpeg", "png", "tiff"],
+  "candidate_integrity": {
+    "jpeg": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "passed",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "output_extension": "output.jpg present",
+      "lowcode_api": "Jpeg plugin + JpegOptions + AddInput + AddOutput(output.jpg)",
+      "template_first": true
+    },
+    "tiff": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "repaired (1 attempt)",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "output_extension": "output.tiff present",
+      "lowcode_api": "Tiff plugin + TiffOptions + AddInput + AddOutput(output.tiff)",
+      "template_first": true
+    },
+    "png": {
+      "run_id": "pilot-pdf-20260515-193905",
+      "status": "current_run",
+      "build": "passed",
+      "runtime": "passed",
+      "reviewer": "passed",
+      "quarantine_cleared": true,
+      "quarantine_evidence": "quarantined_count=0 in pr-candidate-manifest.json; no quarantine gate in aggregate-gate-results.json",
+      "lowcode_api": "Png plugin + PngOptions + ResultCollection.Count > 0",
+      "template_first": true
+    }
+  },
+  "dry_run_note": "publish-pr CLI reads from {family}-controlled-pilot only. PR#5 package assembled at pdf-controlled-pilot-pr5 for dry-run verification. For live publication: update pdf-controlled-pilot to contain jpeg/tiff/png and run publish-pr --publish after PR#3 is merged.",
+  "live_publish_status": "BLOCKED_APPROVAL_GATE",
+  "live_publish_sequential_note": "PR#5 requires sequential publishing: update pdf-controlled-pilot contents after PR#3 branch is pushed, then run publish-pr for PR#5.",
+  "verdict": "PACKAGE_ASSEMBLED_APPROVAL_BLOCKED"
+}

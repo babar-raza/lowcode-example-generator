@@ -916,3 +916,91 @@ class TestTemplateModeVerdict:
         verdict = _determine_verdict(stages, ctx)
         assert verdict != "FULL_E2E_PASSED"
         assert verdict == "DATA_FLOW_PROTOTYPE_ONLY"
+
+
+# ---------------------------------------------------------------------------
+# Lane M — version drift preflight stage tests
+# ---------------------------------------------------------------------------
+
+from plugin_examples.runner import _stage_version_drift_preflight
+
+
+class TestVersionDriftPreflight:
+    """Tests for _stage_version_drift_preflight — early catalog drift detection."""
+
+    def _make_denom(self, tmp_path: Path, family: str, source_version: str) -> None:
+        denom_dir = tmp_path / "pipeline" / "configs" / "denominators"
+        denom_dir.mkdir(parents=True, exist_ok=True)
+        (denom_dir / f"{family}.json").write_text(
+            json.dumps({"source_version": source_version, "workflow_root_types": 9}),
+            encoding="utf-8",
+        )
+
+    def test_no_drift_when_versions_match(self, tmp_path):
+        """No warning when fetched version matches denominator source_version."""
+        self._make_denom(tmp_path, "cells", "26.5.0")
+        ctx = _make_ctx(tmp_path, family="cells")
+        ctx.download_manifest = {"version": "26.5.0", "sha256": "abc", "cached_path": "x"}
+        result = _stage_version_drift_preflight(ctx)
+        assert result["drift_detected"] is False
+        assert result["fetched_version"] == "26.5.0"
+        assert result["denominator_version"] == "26.5.0"
+        assert result["action_required"] == "none"
+
+    def test_drift_detected_when_versions_differ(self, tmp_path):
+        """drift_detected=True and actionable message when versions differ."""
+        self._make_denom(tmp_path, "pdf", "26.4.0")
+        ctx = _make_ctx(tmp_path, family="pdf")
+        ctx.download_manifest = {"version": "26.5.0", "sha256": "abc", "cached_path": "x"}
+        result = _stage_version_drift_preflight(ctx)
+        assert result["drift_detected"] is True
+        assert result["fetched_version"] == "26.5.0"
+        assert result["denominator_version"] == "26.4.0"
+        assert "26.5.0" in result["action_required"]
+        assert "pdf.json" in result["action_required"]
+
+    def test_no_drift_when_denominator_missing(self, tmp_path):
+        """Missing denominator file → drift_detected=False (non-fatal)."""
+        ctx = _make_ctx(tmp_path, family="email")
+        ctx.download_manifest = {"version": "26.5.0", "sha256": "abc", "cached_path": "x"}
+        # No denominator file written
+        result = _stage_version_drift_preflight(ctx)
+        assert result["drift_detected"] is False
+        assert result["denominator_version"] is None
+
+    def test_no_drift_when_download_manifest_missing(self, tmp_path):
+        """Missing download_manifest (pre-stage failure) → drift_detected=False."""
+        self._make_denom(tmp_path, "words", "26.5.0")
+        ctx = _make_ctx(tmp_path, family="words")
+        ctx.download_manifest = None
+        result = _stage_version_drift_preflight(ctx)
+        assert result["drift_detected"] is False
+        assert result["fetched_version"] is None
+
+    def test_denominator_without_source_version_field(self, tmp_path):
+        """Denominator missing source_version key → no drift (graceful)."""
+        denom_dir = tmp_path / "pipeline" / "configs" / "denominators"
+        denom_dir.mkdir(parents=True, exist_ok=True)
+        (denom_dir / "cells.json").write_text(
+            json.dumps({"workflow_root_types": 9}), encoding="utf-8"
+        )
+        ctx = _make_ctx(tmp_path, family="cells")
+        ctx.download_manifest = {"version": "26.5.0", "sha256": "abc", "cached_path": "x"}
+        result = _stage_version_drift_preflight(ctx)
+        assert result["drift_detected"] is False
+        assert result["denominator_version"] is None
+
+    def test_stage_in_definitions_after_nuget_fetch(self):
+        """version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS."""
+        from plugin_examples.runner import STAGE_DEFINITIONS
+        names = [s[0] for s in STAGE_DEFINITIONS]
+        assert "version_drift_preflight" in names
+        nuget_idx = names.index("nuget_fetch")
+        drift_idx = names.index("version_drift_preflight")
+        assert drift_idx > nuget_idx, (
+            "version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS"
+        )
+        dep_idx = names.index("dependency_resolution")
+        assert drift_idx < dep_idx, (
+            "version_drift_preflight must appear before dependency_resolution"
+        )

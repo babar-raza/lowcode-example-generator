@@ -334,6 +334,57 @@ def _stage_nuget_fetch(ctx: PipelineContext) -> dict:
     }
 
 
+def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
+    """Warn early when the fetched package version differs from the denominator's source_version.
+
+    This check runs immediately after nuget_fetch so catalog hash mismatches are
+    anticipated *before* the expensive reflection/detection stages run.  A drift
+    is not a hard stop — the operator may be intentionally testing a new package
+    version prior to updating the denominator — but the warning is actionable and
+    surfaced at the top of the run log rather than buried inside scenario_planning.
+
+    Returns a dict with keys:
+        fetched_version      — version resolved by NuGet
+        denominator_version  — source_version from the denominator file (or None)
+        drift_detected       — bool
+        action_required      — human-readable next step when drift is detected
+    """
+    import json as _json
+
+    fetched = ctx.download_manifest["version"] if ctx.download_manifest else None
+    denom_path = (
+        ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
+    )
+    denominator_version: str | None = None
+    if denom_path.exists():
+        try:
+            denom = _json.loads(denom_path.read_text(encoding="utf-8"))
+            denominator_version = denom.get("source_version")
+        except Exception:
+            pass
+
+    drift = bool(fetched and denominator_version and fetched != denominator_version)
+    action = (
+        f"Update pipeline/configs/denominators/{ctx.family}.json — set "
+        f"source_version to '{fetched}' and refresh api_catalog_sha256 after "
+        f"running a fresh reflection pass."
+        if drift
+        else "none"
+    )
+    if drift:
+        logger.warning(
+            "VERSION DRIFT DETECTED for family '%s': fetched=%s, denominator=%s. "
+            "The catalog hash check will likely fail at scenario_planning. %s",
+            ctx.family, fetched, denominator_version, action,
+        )
+    return {
+        "fetched_version": fetched,
+        "denominator_version": denominator_version,
+        "drift_detected": drift,
+        "action_required": action,
+    }
+
+
 def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
     from plugin_examples.nuget_fetcher import resolve_dependencies
     from plugin_examples.nuget_fetcher.dependency_resolver import (
@@ -1302,6 +1353,7 @@ def _build_report(
 STAGE_DEFINITIONS = [
     ("load_config", 1, _stage_load_config),
     ("nuget_fetch", 2, _stage_nuget_fetch),
+    ("version_drift_preflight", 2, _stage_version_drift_preflight),
     ("dependency_resolution", 3, _stage_dependency_resolution),
     ("extraction", 4, _stage_extraction),
     ("reflection", 5, _stage_reflection),

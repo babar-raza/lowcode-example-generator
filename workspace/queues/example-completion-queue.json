@@ -7,8 +7,8 @@
   "state_summary": {
     "POST_MERGE_VERIFIED": 28,
     "PR_READY": 3,
-    "BACKLOGGED": 21,
-    "PERMANENTLY_BLOCKED": 2
+    "BACKLOGGED": 20,
+    "PERMANENTLY_BLOCKED": 3
   },
   "entries": [
     {
@@ -649,16 +649,16 @@
       "scenario_id": "words-splitter-split",
       "family": "words",
       "type_name": "SplitCriteria",
-      "state": "BACKLOGGED",
-      "blocking_reason": "MISSING_ENUM_STRATEGY: SplitCriteria enum values not discoverable from DllReflector catalog",
+      "state": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "blocked_enum_not_runnable: SplitCriteria is an ENUM type (Aspose.Words.LowCode.SplitCriteria), not a standalone runnable LowCode API. It is a parameter enum for Splitter.Split(). Classified in words.json non_runnable_breakdown.ENUM (2 enums: SplitCriteria, MergeFormatMode). No generation, build, or PR will ever be attempted.",
       "blocking_taskcard": "followup-words-split-criteria-enumeration",
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/words/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-15T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "SplitCriteria is a parameter enum for Splitter.Split(). Needs enum value discovery in scenario planner. Backlog entry: backlog/words/excluded-scenarios.json"
+      "notes": "RECLASSIFIED sprint16: was BACKLOGGED/MISSING_ENUM_STRATEGY. Correct classification is PERMANENTLY_BLOCKED/blocked_enum_not_runnable. SplitCriteria is already in words.json non_runnable_type_names and non_runnable_breakdown.ENUM:2. No scenario should be attempted."
     },
     {
       "scenario_id": "words-report-builder",

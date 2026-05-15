@@ -446,3 +446,48 @@ class TestPerTypeConstraints:
         path = _write_temp_config(raw)
         config = load_family_config(path)
         assert config.per_type_constraints == {}
+
+    def test_pdf_toc_generator_in_per_type_constraints(self):
+        """Sprint 16: TocGenerator must have per_type_constraints defined in pdf.yml."""
+        config = load_family_config(self.PDF_CONFIG)
+        assert "TocGenerator" in config.per_type_constraints, (
+            "TocGenerator must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
+        )
+        toc = config.per_type_constraints["TocGenerator"]
+        required = toc.get("required", [])
+        assert any("TocOptions" in r for r in required), "TocGenerator constraints must require TocOptions"
+        assert any("TocGenerator" in r for r in required), "TocGenerator constraints must require TocGenerator.Process"
+
+    def test_pdf_toc_generator_forbidden_plugin_options(self):
+        """TocGenerator constraints must forbid abstract PluginOptions."""
+        config = load_family_config(self.PDF_CONFIG)
+        toc = config.per_type_constraints["TocGenerator"]
+        forbidden = toc.get("forbidden", [])
+        assert any("PluginOptions" in f for f in forbidden)
+
+    def test_pdf_image_extractor_in_per_type_constraints(self):
+        """Sprint 16: ImageExtractor must have per_type_constraints defined in pdf.yml."""
+        config = load_family_config(self.PDF_CONFIG)
+        assert "ImageExtractor" in config.per_type_constraints, (
+            "ImageExtractor must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
+        )
+        ie = config.per_type_constraints["ImageExtractor"]
+        required = ie.get("required", [])
+        assert any("ImageExtractorOptions" in r for r in required), "ImageExtractor must require ImageExtractorOptions"
+        assert any("ImageExtractor" in r for r in required), "ImageExtractor constraints must require .Process call"
+
+    def test_pdf_image_extractor_forbidden_add_output(self):
+        """ImageExtractor constraints must forbid AddOutput (extractor pattern, not converter)."""
+        config = load_family_config(self.PDF_CONFIG)
+        ie = config.per_type_constraints["ImageExtractor"]
+        forbidden = ie.get("forbidden", [])
+        assert any("AddOutput" in f for f in forbidden), (
+            "ImageExtractor is an extractor — AddOutput must be forbidden"
+        )
+
+    def test_pdf_allowed_types_includes_toc_and_image_extractor(self):
+        """Sprint 16: TocGenerator and ImageExtractor must appear in allowed_types."""
+        config = load_family_config(self.PDF_CONFIG)
+        allowed = config.generation.allowed_types or []
+        assert "TocGenerator" in allowed, "TocGenerator must be in pdf.yml allowed_types"
+        assert "ImageExtractor" in allowed, "ImageExtractor must be in pdf.yml allowed_types"

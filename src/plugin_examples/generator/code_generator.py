@@ -279,6 +279,50 @@ def generate_example(
                     "CRITICAL: output filename MUST be \"output.tiff\" (four letters — NEVER output.tif). "
                     "Do NOT use File.Exists — use result.ResultCollection.Count > 0."
                 )
+            elif _family == "pdf" and _type_short == "tocgenerator":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for TocGenerator (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "document.Pages.Add();\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new TocOptions();\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                    "var result = new TocGenerator().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"TOC added\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: use TocOptions (not PluginOptions which is abstract). "
+                    "AddInput + AddOutput pattern identical to other converters. "
+                    "Validate via result.ResultCollection.Count > 0."
+                )
+            elif _family == "pdf" and _type_short == "imageextractor":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for ImageExtractor (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "var page = document.Pages.Add();\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new ImageExtractorOptions();\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "var result = new ImageExtractor().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Images extracted\" : \"No images found\");\n"
+                    "```\n"
+                    "CRITICAL: use ImageExtractorOptions (not PluginOptions). "
+                    "ImageExtractor is an EXTRACTOR (like TextExtractor) — no AddOutput needed; images are in ResultCollection. "
+                    "Validate via result.ResultCollection.Count >= 0 (even 0 is valid if PDF has no images). "
+                    "Do NOT use PdfExtractor from Aspose.Pdf.Facades — use LowCode ImageExtractor."
+                )
             elif _family == "pdf" and _type_short == "png":
                 constraint_reminder += (
                     "\n\nMANDATORY REFERENCE EXAMPLE for Png (output validation MUST use result.ResultCollection.Count > 0):\n"

@@ -2328,3 +2328,57 @@ class TestPdfImageWaveReferenceInjection:
         """Tiff reference must NOT appear in Jpeg repair prompt."""
         reminder = self._get_repair_reminder("jpeg", "Jpeg")
         assert "MANDATORY REFERENCE EXAMPLE for Tiff" not in reminder
+
+
+class TestPdfNextWaveReferenceInjection(TestPdfImageWaveReferenceInjection):
+    """Tests for Sprint 16 next-wave types: TocGenerator, ImageExtractor.
+
+    Inherits _get_repair_reminder from parent class.
+    """
+
+    def test_tocgenerator_reference_example_injected(self):
+        """TocGenerator repair prompt must include TocOptions and TocGenerator pattern."""
+        reminder = self._get_repair_reminder("tocgenerator", "TocGenerator")
+        assert "MANDATORY REFERENCE EXAMPLE for TocGenerator" in reminder
+        assert "TocOptions" in reminder
+        assert "new TocGenerator().Process(options)" in reminder
+        assert "result.ResultCollection.Count" in reminder
+
+    def test_tocgenerator_reference_forbids_plugin_options(self):
+        """TocGenerator reference must forbid abstract PluginOptions."""
+        reminder = self._get_repair_reminder("tocgenerator", "TocGenerator")
+        assert "PluginOptions" in reminder
+
+    def test_tocgenerator_has_add_input_and_add_output(self):
+        """TocGenerator reference must include AddInput and AddOutput."""
+        reminder = self._get_repair_reminder("tocgenerator", "TocGenerator")
+        assert "AddInput" in reminder
+        assert "AddOutput" in reminder
+
+    def test_imageextractor_reference_example_injected(self):
+        """ImageExtractor repair prompt must include ImageExtractorOptions and no AddOutput."""
+        reminder = self._get_repair_reminder("imageextractor", "ImageExtractor")
+        assert "MANDATORY REFERENCE EXAMPLE for ImageExtractor" in reminder
+        assert "ImageExtractorOptions" in reminder
+        assert "new ImageExtractor().Process(options)" in reminder
+        assert "result.ResultCollection" in reminder
+
+    def test_imageextractor_reference_forbids_add_output(self):
+        """ImageExtractor reference must warn against AddOutput (extractor, not converter)."""
+        reminder = self._get_repair_reminder("imageextractor", "ImageExtractor")
+        assert "AddOutput" in reminder  # mentioned as forbidden in the text
+
+    def test_imageextractor_reference_forbids_pdf_extractor_facades(self):
+        """ImageExtractor reference must forbid PdfExtractor from Facades."""
+        reminder = self._get_repair_reminder("imageextractor", "ImageExtractor")
+        assert "PdfExtractor" in reminder
+
+    def test_tocgenerator_reference_not_injected_for_imageextractor(self):
+        """TocGenerator reference must NOT appear in ImageExtractor repair prompt."""
+        reminder = self._get_repair_reminder("imageextractor", "ImageExtractor")
+        assert "MANDATORY REFERENCE EXAMPLE for TocGenerator" not in reminder
+
+    def test_imageextractor_reference_not_injected_for_tocgenerator(self):
+        """ImageExtractor reference must NOT appear in TocGenerator repair prompt."""
+        reminder = self._get_repair_reminder("tocgenerator", "TocGenerator")
+        assert "MANDATORY REFERENCE EXAMPLE for ImageExtractor" not in reminder

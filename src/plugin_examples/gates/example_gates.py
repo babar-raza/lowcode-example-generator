@@ -432,18 +432,37 @@ def merge_pr_candidate_manifests(
     """Merge a new run's PR candidate manifest into an existing one.
 
     Merge strategy:
-    - New run's PASSES always overwrite their scenario's entry (upgrade).
+    - New run's PASSES always overwrite their scenario's entry (upgrade),
+      and also clear any prior quarantine for that scenario.
     - Old pass entries are PRESERVED for scenarios absent from the new run
       (scenarios not re-attempted are not demoted).
     - New run's FAILURES only overwrite if the scenario was NOT previously passing.
     - Demoted scenarios (in demoted_scenario_ids) are ALWAYS quarantined regardless
       of prior passing state — a demotion in the latest run supersedes any old pass.
+    - PERSISTED QUARANTINES: scenarios already marked demoted_quarantined in the
+      existing manifest (excluded_examples) remain quarantined in future runs
+      even when the current run does not explicitly demote them.  Only a new
+      current_run PASS can clear a persisted quarantine.
 
     The demoted_scenario_ids set should be populated from scenario_feedback_updates.json
     for the current run.  Any scenario explicitly demoted (e.g. blocked_missing_fixture)
     must not appear as a PR candidate even if it passed in an older run.
     """
-    _demoted = demoted_scenario_ids or set()
+    _demoted: set[str] = set(demoted_scenario_ids or set())
+
+    # Accumulate persisted quarantines from the prior manifest's excluded_examples.
+    # These are scenarios previously quarantined (demoted_quarantined) and stored in
+    # excluded_examples of the existing manifest.  They remain quarantined in this
+    # merge UNLESS the current run produces a current_run PASS for them (which clears
+    # the quarantine).  Unlike _demoted (current-run demotion), a current-run pass
+    # CAN override _prior_quarantined.
+    _prior_quarantined: set[str] = set()
+    _prior_quarantined_entries: dict[str, dict] = {}
+    for e in existing.get("excluded_examples", []):
+        if e.get("candidate_integrity_status") == "demoted_quarantined":
+            sid = e["scenario_id"]
+            _prior_quarantined.add(sid)
+            _prior_quarantined_entries[sid] = e
 
     existing_included = {
         e["scenario_id"]: e
@@ -462,17 +481,21 @@ def merge_pr_candidate_manifests(
         e["scenario_id"] for e in new_manifest.get("excluded_examples", [])
     )
 
-    # Start with new passes — annotate as current-run candidates
+    # Start with new passes — annotate as current-run candidates.
+    # current_run PASS clears prior quarantine (_prior_quarantined), but
+    # current-run DEMOTION (_demoted) blocks even a new pass.
     merged_included: dict[str, dict] = {}
     for sid, entry in new_included.items():
         if sid in _demoted:
-            continue  # Demoted even if new run produced it — quarantine
+            continue  # Current-run demotion wins over a new pass — keep quarantined
         merged_included[sid] = {**entry, "candidate_integrity_status": "current_run"}
 
-    # Preserve old passes for scenarios NOT attempted (or not re-passed) in new run
+    # Preserve old passes for scenarios NOT attempted (or not re-passed) in new run.
+    # Both current-run demotions and persisted prior-run quarantines block preservation.
+    _all_blocked = _demoted | (_prior_quarantined - set(merged_included.keys()))
     for sid, entry in existing_included.items():
-        if sid in _demoted:
-            continue  # Demoted in latest run — quarantine regardless of old pass
+        if sid in _all_blocked:
+            continue  # Quarantined — do not preserve
         if sid not in new_run_attempted:
             # Not re-attempted — preserve prior passing state
             merged_included[sid] = {**entry, "candidate_integrity_status": "prior_run_preserved_not_reattempted"}
@@ -487,7 +510,7 @@ def merge_pr_candidate_manifests(
         e for e in new_manifest.get("excluded_examples", [])
         if e["scenario_id"] not in merged_included
     ]
-    # Add quarantined demoted scenarios from prior runs
+    # Add quarantined demoted scenarios from prior runs (existing_included entries demoted now)
     for sid in _demoted:
         if sid in existing_included and sid not in merged_included:
             entry = existing_included[sid]
@@ -495,6 +518,14 @@ def merge_pr_candidate_manifests(
                 **entry,
                 "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
                 "blocked_reason": "Scenario was demoted in scenario_feedback_updates for the latest run",
+                "candidate_integrity_status": "demoted_quarantined",
+            })
+    # Carry forward persisted quarantines not cleared by a current_run pass
+    already_in_excluded_ids = {e["scenario_id"] for e in merged_excluded}
+    for sid, entry in _prior_quarantined_entries.items():
+        if sid not in merged_included and sid not in already_in_excluded_ids:
+            merged_excluded.append({
+                **entry,
                 "candidate_integrity_status": "demoted_quarantined",
             })
 

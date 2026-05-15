@@ -93,9 +93,126 @@ def generate_example(
                     "\n\nREQUIRED AND FORBIDDEN PATTERNS (must be respected in fixed code):\n"
                     + "\n".join(all_repair_constraints)
                 )
+            # For PDF types: add full reference examples to ensure deterministic
+            # API patterns even after package version changes (26.5.0+).
+            if _family == "pdf" and _type_short == "optimizer":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for Optimizer (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "document.Pages.Add();\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new OptimizeOptions();\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                    "var result = new Optimizer().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Optimized\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: MUST use 'new Optimizer().Process(options)' — instantiate Optimizer then call .Process(). "
+                    "MUST use OptimizeOptions. MUST use AddInput(new FileDataSource(...)) and AddOutput(new FileDataSource(...))."
+                )
+            elif _family == "pdf" and _type_short == "pdfaconverter":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for PdfAConverter (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "document.Pages.Add();\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new PdfAConvertOptions();\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                    "var result = new PdfAConverter().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Converted to PDF/A\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: MUST use 'new PdfAConvertOptions()' (NOT PluginOptions, NOT PdfFormatConversionOptions). "
+                    "MUST use 'new PdfAConverter().Process(options)'. "
+                    "MUST use AddInput(new FileDataSource(...)) and AddOutput(new FileDataSource(...))."
+                )
+            elif _family == "pdf" and _type_short == "docconverter":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for DocConverter (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "using Aspose.Pdf.Text;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "var page = document.Pages.Add();\n"
+                    "page.Paragraphs.Add(new TextFragment(\"LowCode DocConverter Test\"));\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new PdfToDocOptions();\n"
+                    "options.SaveFormat = SaveFormat.DocX;\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.docx\"));\n"
+                    "var result = new DocConverter().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Converted to DOCX\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: MUST use 'new PdfToDocOptions()' (NOT PdfConverterOptions which is abstract). "
+                    "MUST set 'options.SaveFormat = SaveFormat.DocX' — this line is non-negotiable. "
+                    "MUST use 'new DocConverter().Process(options)'. "
+                    "MUST use AddInput(new FileDataSource(...)) and AddOutput(new FileDataSource(...))."
+                )
+            elif _family == "pdf" and _type_short == "xlsconverter":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for XlsConverter (your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using Aspose.Pdf;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "var document = new Document();\n"
+                    "document.Pages.Add();\n"
+                    "document.Save(\"input.pdf\");\n"
+                    "\n"
+                    "var options = new PdfToXlsOptions();\n"
+                    "options.Format = PdfToXlsOptions.ExcelFormat.XLSX;\n"
+                    "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.xlsx\"));\n"
+                    "var result = new XlsConverter().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Converted to XLSX\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: MUST use 'new PdfToXlsOptions()' (NOT PdfConverterOptions which is abstract). "
+                    "MUST set 'options.Format = PdfToXlsOptions.ExcelFormat.XLSX' — this exact line is required. "
+                    "MUST use 'new XlsConverter().Process(options)'. "
+                    "MUST use AddInput(new FileDataSource(...)) and AddOutput(new FileDataSource(...))."
+                )
+            elif _family == "pdf" and _type_short == "html":
+                constraint_reminder += (
+                    "\n\nMANDATORY REFERENCE EXAMPLE for Html (HTML-to-PDF converter — your fixed code MUST follow this exact pattern):\n"
+                    "```csharp\n"
+                    "using System;\n"
+                    "using System.IO;\n"
+                    "using Aspose.Pdf.LowCode;\n"
+                    "\n"
+                    "File.WriteAllText(\"input.html\", \"<html><body><h1>Hello LowCode</h1><p>HTML to PDF.</p></body></html>\");\n"
+                    "\n"
+                    "var options = new HtmlToPdfOptions();\n"
+                    "options.AddInput(new FileDataSource(\"input.html\"));\n"
+                    "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                    "var result = new Html().Process(options);\n"
+                    "Console.WriteLine(result.ResultCollection.Count > 0 ? \"HTML converted to PDF\" : \"No output\");\n"
+                    "```\n"
+                    "CRITICAL: MUST use 'new HtmlToPdfOptions()' (NOT HtmlLoadOptions). "
+                    "MUST use 'new Html().Process(options)'. "
+                    "Input MUST be an HTML file created with File.WriteAllText(\"input.html\", htmlContent). "
+                    "Do NOT create a PDF Document. Do NOT use TextFragment. Input is HTML, not PDF. "
+                    "MUST use AddInput(new FileDataSource(\"input.html\")) — .html extension, NOT .pdf."
+                )
             # For PDF TextExtractor: add full reference example to guide the LLM
             # beyond the 4-line snippet — non-deterministic failures need this.
-            if _family == "pdf" and _type_short == "textextractor":
+            elif _family == "pdf" and _type_short == "textextractor":
                 constraint_reminder += (
                         "\n\nMANDATORY REFERENCE EXAMPLE for TextExtractor (your fixed code MUST follow this exact pattern):\n"
                         "```csharp\n"

@@ -724,6 +724,122 @@ class TestMergePrCandidateManifestsDemotionAware:
         assert "pdf-png" not in included_ids, "Demoted pdf-png must be excluded by feedback gate"
         assert "pdf-merger" in included_ids
 
+    def test_persisted_quarantine_in_excluded_survives_next_run(self):
+        """A scenario quarantined (demoted_quarantined) in excluded_examples of the prior
+        manifest must remain quarantined even when the next run does NOT emit a demotion."""
+        # Prior manifest: pdf-png was previously demoted and persisted as excluded
+        prior_quarantined = {
+            "scenario_id": "pdf-png",
+            "example_path": "workspace/runs/run-old/generated/pdf/pdf-png",
+            "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+            "blocked_reason": "Demoted in prior run",
+            "candidate_integrity_status": "demoted_quarantined",
+        }
+        existing = {
+            "included_examples": [_make_candidate("pdf-merger", "run-old")],
+            "excluded_examples": [prior_quarantined],
+            "exclusion_reasons": {"EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN": ["pdf-png"]},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 1,
+        }
+        # New run: pdf-png failed generation (not reattempted at runtime) — NO demotion emitted
+        new_run = {
+            "included_examples": [_make_candidate("pdf-merger", "run-new")],
+            "excluded_examples": [],  # generation failure — not in excluded list
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 0,
+        }
+        # No demoted_scenario_ids from current run
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
+
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        excluded_ids = {e["scenario_id"] for e in result["excluded_examples"]}
+
+        assert "pdf-png" not in included_ids, (
+            "Persisted quarantine must survive even when current run emits no demotion"
+        )
+        assert "pdf-png" in excluded_ids, "Quarantined scenario must remain in excluded_examples"
+        quarantine_entry = next(
+            e for e in result["excluded_examples"] if e["scenario_id"] == "pdf-png"
+        )
+        assert quarantine_entry.get("candidate_integrity_status") == "demoted_quarantined"
+
+    def test_persisted_quarantine_cleared_by_current_run_pass(self):
+        """A scenario that was demoted_quarantined in the prior manifest is cleared
+        (upgraded to current_run) when the current run produces a passing example."""
+        prior_quarantined = {
+            "scenario_id": "pdf-png",
+            "example_path": "workspace/runs/run-old/generated/pdf/pdf-png",
+            "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+            "blocked_reason": "Demoted in prior run",
+            "candidate_integrity_status": "demoted_quarantined",
+        }
+        existing = {
+            "included_examples": [],
+            "excluded_examples": [prior_quarantined],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 0,
+            "blocked_candidate_count": 1,
+        }
+        # Current run: pdf-png PASSES this time (full generation + runtime pass)
+        new_run = {
+            "included_examples": [_make_candidate("pdf-png", "run-new")],
+            "excluded_examples": [],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 0,
+        }
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
+
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        assert "pdf-png" in included_ids, (
+            "A current_run PASS must clear the prior quarantine"
+        )
+        png_entry = next(e for e in result["included_examples"] if e["scenario_id"] == "pdf-png")
+        assert png_entry.get("candidate_integrity_status") == "current_run"
+
+    def test_persisted_quarantine_not_included_in_publishable_count(self):
+        """publishable_candidate_count must not count persisted-quarantined scenarios."""
+        prior_quarantined = {
+            "scenario_id": "pdf-png",
+            "example_path": "workspace/runs/run-old/generated/pdf/pdf-png",
+            "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+            "blocked_reason": "Demoted in prior run",
+            "candidate_integrity_status": "demoted_quarantined",
+        }
+        existing = {
+            "included_examples": [],
+            "excluded_examples": [prior_quarantined],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 0,
+            "blocked_candidate_count": 1,
+        }
+        new_run = {
+            "included_examples": [_make_candidate("pdf-merger", "run-new")],
+            "excluded_examples": [],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 0,
+        }
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
+
+        assert result["publishable_candidate_count"] == 1, (
+            "Only non-quarantined candidates count toward publishable_candidate_count"
+        )
+
 
 # ---------------------------------------------------------------------------
 # LANE C: Gate semantics — degraded status for partial runtime

@@ -2033,3 +2033,106 @@ class TestRequiredValidation:
             "_validate_code_from_constraints(fixed_code, rt_type_constraints) "
             "so per-type REQUIRED/FORBIDDEN rules are enforced after runtime repair."
         )
+
+
+# ---------------------------------------------------------------------------
+# Sprint 14 Lane C — PDF reference example injection tests
+# Verify that code_generator.generate_example injects the correct MANDATORY
+# REFERENCE EXAMPLE into the repair prompt for each failing PDF type.
+# ---------------------------------------------------------------------------
+
+
+def _make_failing_pdf_packet(type_short: str, namespace_type: str) -> object:
+    """Create a minimal PromptPacket-like object for a failing PDF type."""
+    from plugin_examples.generator.packet_builder import PromptPacket
+    return PromptPacket(
+        scenario_id=f"pdf-{type_short}",
+        target_type=f"Aspose.Pdf.LowCode.{namespace_type}",
+        target_namespace="Aspose.Pdf.LowCode",
+        target_methods=["Process"],
+        user_prompt="Generate a C# example.",
+        system_prompt="You are a C# developer.",
+        approved_symbols=[],
+        constraints=[
+            f"REQUIRED: new {namespace_type}().Process(options)",
+            "REQUIRED: options.AddInput(new FileDataSource(",
+        ],
+        template_hints={},
+        input_strategy="generated",
+        input_files=[],
+        type_details=None,
+        per_type_constraints={},
+    )
+
+
+class TestPdfReferenceExampleInjection:
+    """Verify MANDATORY REFERENCE EXAMPLEs are injected into repair prompts
+    for Sprint 14 Lane C PDF types: Optimizer, PdfAConverter, DocConverter,
+    XlsConverter, Html."""
+
+    def _get_repair_reminder(self, type_short: str, namespace_type: str) -> str:
+        """Run generate_example with an LLM that always returns invalid code,
+        capture what the repair prompt contains."""
+        from plugin_examples.generator.code_generator import generate_example
+
+        captured_prompts = []
+
+        def mock_llm(prompt: str, system: str) -> str:
+            captured_prompts.append(prompt)
+            # Return code that always fails validation (missing required patterns)
+            return "```csharp\nusing System;\nclass Program { static void Main() {} }\n```"
+
+        packet = _make_failing_pdf_packet(type_short, namespace_type)
+        generate_example(packet, llm_generate=mock_llm, max_repairs=1)
+        # The second call (repair) contains the constraint_reminder
+        assert len(captured_prompts) >= 2, f"Expected repair call for {type_short}"
+        return captured_prompts[1]  # repair prompt
+
+    def test_optimizer_reference_example_injected(self):
+        """Optimizer repair prompt must include OptimizeOptions and new Optimizer().Process pattern."""
+        reminder = self._get_repair_reminder("optimizer", "Optimizer")
+        assert "MANDATORY REFERENCE EXAMPLE for Optimizer" in reminder
+        assert "new Optimizer().Process(options)" in reminder
+        assert "OptimizeOptions" in reminder
+
+    def test_pdfaconverter_reference_example_injected(self):
+        """PdfAConverter repair prompt must include PdfAConvertOptions and new PdfAConverter().Process."""
+        reminder = self._get_repair_reminder("pdfaconverter", "PdfAConverter")
+        assert "MANDATORY REFERENCE EXAMPLE for PdfAConverter" in reminder
+        assert "new PdfAConvertOptions()" in reminder
+        assert "new PdfAConverter().Process(options)" in reminder
+
+    def test_docconverter_reference_example_injected(self):
+        """DocConverter repair prompt must include PdfToDocOptions and SaveFormat.DocX."""
+        reminder = self._get_repair_reminder("docconverter", "DocConverter")
+        assert "MANDATORY REFERENCE EXAMPLE for DocConverter" in reminder
+        assert "new PdfToDocOptions()" in reminder
+        assert "options.SaveFormat = SaveFormat.DocX" in reminder
+        assert "new DocConverter().Process(options)" in reminder
+
+    def test_xlsconverter_reference_example_injected(self):
+        """XlsConverter repair prompt must include PdfToXlsOptions and ExcelFormat.XLSX."""
+        reminder = self._get_repair_reminder("xlsconverter", "XlsConverter")
+        assert "MANDATORY REFERENCE EXAMPLE for XlsConverter" in reminder
+        assert "new PdfToXlsOptions()" in reminder
+        assert "options.Format = PdfToXlsOptions.ExcelFormat.XLSX" in reminder
+        assert "new XlsConverter().Process(options)" in reminder
+
+    def test_html_reference_example_injected(self):
+        """Html repair prompt must include HtmlToPdfOptions and File.WriteAllText for HTML input."""
+        reminder = self._get_repair_reminder("html", "Html")
+        assert "MANDATORY REFERENCE EXAMPLE for Html" in reminder
+        assert "new HtmlToPdfOptions()" in reminder
+        assert "File.WriteAllText" in reminder
+        assert "input.html" in reminder
+        assert "new Html().Process(options)" in reminder
+
+    def test_optimizer_reference_not_injected_for_other_types(self):
+        """The Optimizer reference example must NOT appear in non-Optimizer repair prompts."""
+        reminder = self._get_repair_reminder("xlsconverter", "XlsConverter")
+        assert "MANDATORY REFERENCE EXAMPLE for Optimizer" not in reminder
+
+    def test_docconverter_reference_not_injected_for_html(self):
+        """DocConverter reference must NOT appear in Html repair prompt."""
+        reminder = self._get_repair_reminder("html", "Html")
+        assert "MANDATORY REFERENCE EXAMPLE for DocConverter" not in reminder

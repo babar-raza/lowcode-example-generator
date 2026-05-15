@@ -29,12 +29,15 @@
     "PdfAConverter",
     "DocConverter",
     "XlsConverter",
-    "Html"
+    "Html",
+    "Jpeg",
+    "Png",
+    "Tiff"
   ],
-  "allowed_pilot_count": 8,
+  "allowed_pilot_count": 11,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "PDF Wave B expansion (Sprint 7, 2026-05-14): 8 allowed_types now in scope per pdf.yml. Wave A (5 types: Merger/TextExtractor/Splitter/Optimizer/PdfAConverter) + Wave B (3 types: DocConverter/XlsConverter/Html). PdfExtractor excluded — ABSTRACT_BASE, not runnable. Denominator for current coverage = 8. workflow_root denominator = 24 (classified, PdfExtractor reclassified). full_sot denominator = 101 (all types).",
-  "runnable_scenarios": 8,
+  "denominator_basis_note": "PDF Wave C expansion (Sprint 9, 2026-05-14): 11 allowed_types now in scope per pdf.yml. Wave A (5 types: Merger/TextExtractor/Splitter/Optimizer/PdfAConverter) + Wave B (3 types: DocConverter/XlsConverter/Html) + Wave C (3 image types: Jpeg/Png/Tiff). PdfExtractor excluded — ABSTRACT_BASE, not runnable. Denominator for current coverage = 11. workflow_root denominator = 24 (classified, PdfExtractor reclassified). full_sot denominator = 101 (all types).",
+  "runnable_scenarios": 11,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
     "pdf-merger",
@@ -44,7 +47,10 @@
     "pdf-pdfaconverter",
     "pdf-doc-converter",
     "pdf-xls-converter",
-    "pdf-html"
+    "pdf-html",
+    "pdf-jpeg",
+    "pdf-png",
+    "pdf-tiff"
   ],
   "workflow_root_runnable_count": 24,
   "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 24 WORKFLOW_ROOT type names (PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7)",
@@ -67,16 +73,16 @@
   ],
   "reviewer_passed_awaiting_pr_basis": "Optimizer reviewer_passed in latest lifecycle. Confirmed passing in run pilot-pdf-20260513-181803 (3rd consecutive pass). Awaiting grouping into next PR with Splitter+PdfAConverter.",
   "blocked_count": 0,
-  "excluded_count": 93,
-  "excluded_count_basis": "93 types excluded: 8 pilot allowed + 93 others = 101. Excludes all non-WORKFLOW_ROOT types (77, including PdfExtractor reclassified ABSTRACT_BASE) plus 16 WORKFLOW_ROOT types not in allowed_pilot_types.",
-  "unclassified_workflow_root_count": 16,
-  "unclassified_workflow_root_note": "16 WORKFLOW_ROOT types are classified but NOT in allowed_pilot_types (Wave A=5 types, Wave B=3 types promoted to pilot). PdfExtractor reclassified to ABSTRACT_BASE (not runnable). Generation candidates for future sprints. See followup-pdf-remaining-candidate-classification taskcard.",
-  "coverage_pct_of_pilot_allowed": 62.5,
-  "coverage_pct_of_workflow_root": 8.0,
-  "coverage_pct_of_total_types": 2.0,
+  "excluded_count": 90,
+  "excluded_count_basis": "90 types excluded: 11 pilot allowed + 90 others = 101. Excludes all non-WORKFLOW_ROOT types (77, including PdfExtractor reclassified ABSTRACT_BASE) plus 13 WORKFLOW_ROOT types not in allowed_pilot_types.",
+  "unclassified_workflow_root_count": 13,
+  "unclassified_workflow_root_note": "13 WORKFLOW_ROOT types are classified but NOT in allowed_pilot_types (Wave A=5, Wave B=3, Wave C=3 promoted to pilot; 13 remaining). PdfExtractor reclassified to ABSTRACT_BASE (not runnable). Generation candidates for future sprints. See followup-pdf-remaining-candidate-classification taskcard.",
+  "coverage_pct_of_pilot_allowed": 45.45,
+  "coverage_pct_of_workflow_root": 20.83,
+  "coverage_pct_of_total_types": 4.95,
   "coverage_pct_detail": {
-    "pilot_allowed": "5/8 published = 62.5% (5 merged; 3 dry-run ready pending APPROVE_LIVE_PR; all 8 pilot types now EXAMPLE_READY_FOR_PR_DRY_RUN or published)",
-    "workflow_root": "5/24 published = 20.8% (5 merged of 24 WORKFLOW_ROOT types); 3 more PR-ready pending APPROVE_LIVE_PR",
+    "pilot_allowed": "5/11 published = 45.45% (5 merged; 3 dry-run ready Wave B pending APPROVE_LIVE_PR; Jpeg/Tiff convergence fix in progress; Png quarantined)",
+    "workflow_root": "5/24 published = 20.83% (5 merged of 24 WORKFLOW_ROOT types); 3 more Wave B PR-ready pending APPROVE_LIVE_PR",
     "full_sot": "5/101 published = 4.95% (5 merged of 101 total types in namespace)"
   },
   "evidence_sources": [
@@ -86,6 +92,6 @@
     "workspace/verification/latest/pdf-merge-result.json",
     "pipeline/configs/families/pdf.yml"
   ],
-  "last_verified_at": "2026-05-14T00:00:00Z",
-  "notes": "PDF Wave B expansion complete (2026-05-14, Sprint 7). Pilot expanded 5->8 types: DocConverter (PdfToDocOptions + SaveFormat.DocX), XlsConverter (PdfToXlsOptions + nested PdfToXlsOptions.ExcelFormat.XLSX), Html (HtmlToPdfOptions, HTML->PDF, input via System.IO.File.WriteAllText). PdfExtractor reclassified WORKFLOW_ROOT->ABSTRACT_BASE (abstract class, cannot instantiate). All 3 Wave B types generated with build+runtime PASS. Reviewer gate unavailable (EXAMPLE_REVIEWER_PATH not set). Publication blocked pending APPROVE_LIVE_PR. See workspace/verification/latest/pdf-waveb-api-constraint-report.json and pdf-waveb-fixture-validator-report.json for LANE 1+2 evidence."
+  "last_verified_at": "2026-05-15T00:00:00Z",
+  "notes": "PDF Wave C expansion complete (2026-05-15, Sprint 9-11). Pilot expanded 8->11 types: Jpeg/Png/Tiff added as image output types. Wave C image stabilization: Jpeg (REQUIRED output.jpg fix), Tiff (REQUIRED output.tiff fix), Png (quarantined — page-numbered output; File.Exists check wrong; fix: result.ResultCollection.Count > 0). Wave B PR#3 assembled: DocConverter+XlsConverter+Html awaiting APPROVE_LIVE_PR. Sprint 10 literal-string constraint validator added. Sprint 11 candidate integrity fixes: demotion-aware manifest merge, degraded gate semantics. See workspace/verification/sprint11-candidate-integrity/pdf-wave-stabilization-report.json."
 }

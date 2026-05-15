@@ -48,14 +48,27 @@ example-reviewer → PR
 
 Gates 0-18 (21 total) are documented in Sections 12 and 29 of the execution plan.
 
+## LLM Endpoint Governance
+
+**Authoritative endpoint:** All LLM inference calls MUST use `https://llm.professionalize.com/v1/` exclusively.
+
+- Any other LLM endpoint (OpenAI direct, Azure OpenAI, Ollama, Anthropic, etc.) is **out of bounds** and MUST NOT be used.
+- Only models served at `llm.professionalize.com` are permitted. Do not hardcode or configure any other base URL.
+- The environment variable `GPT_OSS_ENDPOINT` MUST be set to `https://llm.professionalize.com/v1/`. If it is absent or points elsewhere, the pipeline MUST abort before generation with a clear error message.
+- The environment variable `GPT_OSS_MODEL` selects the model. Only model names available on `llm.professionalize.com` are valid. Never use `gpt-4o-mini` or any model name that is not confirmed to be served by that endpoint.
+- The environment variable `GPT_OSS_API_KEY` carries the API key for `llm.professionalize.com`. No key from any other provider may be substituted.
+
+**Agent rule:** If `GPT_OSS_ENDPOINT` is unset, empty, or does not match `https://llm.professionalize.com/v1/`, treat it as a hard blocker — record the error in evidence and halt. Do not fall back to any alternative endpoint.
+
 ## Credentials Required
 
 | Secret | Purpose | How to set |
 |---|---|---|
 | `GH_TOKEN` | Operator storage for GitHub classic PAT (`ghp_*`, `repo` scope). Never read by pipeline directly — map to `GITHUB_TOKEN` before each live command. | Windows system env: `[Environment]::SetEnvironmentVariable("GH_TOKEN", "ghp_...", "User")` |
 | `GITHUB_TOKEN` | Read by the pipeline for PR creation, merge, repo probes. Always populated from `GH_TOKEN` at command time: `$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")` | Set in current PowerShell session only. |
-| `LLM_PROFESSIONALIZE_API_KEY` | LLM generation | GitHub Actions secret |
-| `OLLAMA_HOST` | Ollama fallback endpoint | GitHub Actions variable (optional) |
+| `GPT_OSS_ENDPOINT` | LLM base URL — **must be** `https://llm.professionalize.com/v1/`. Any other value is rejected. | Set in current PowerShell session or Windows system env. |
+| `GPT_OSS_MODEL` | Model name served by `llm.professionalize.com`. | Set in current PowerShell session or Windows system env. |
+| `GPT_OSS_API_KEY` | API key for `llm.professionalize.com`. | Windows system env (never log or print). |
 
 **Fine-grained PAT warning:** Fine-grained PATs with a personal account resource owner cannot write to org-owned repos via the Git Data API. Always use a classic PAT with `repo` scope stored in `GH_TOKEN`.
 
@@ -74,6 +87,7 @@ Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
 - Do not create PRs if any mandatory gate has failed.
 - Always record evidence before exiting — even on partial failure.
 - When running live publish or merge commands, always read `GH_TOKEN` from Windows system env and map to `GITHUB_TOKEN` in the current process — never assume `GITHUB_TOKEN` is already set.
+- **LLM endpoint is non-negotiable:** Never configure, suggest, or fall back to any LLM endpoint other than `https://llm.professionalize.com/v1/`. If `GPT_OSS_ENDPOINT` is missing or wrong, halt and report — do not substitute another provider.
 
 ## Discovery
 

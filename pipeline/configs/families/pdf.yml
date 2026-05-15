@@ -263,12 +263,14 @@ per_type_constraints:
       - "REQUIRED: new Png().Process(options) — use the LowCode Png plugin to convert PDF to PNG image"
       - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
       - "REQUIRED: options.AddOutput(new FileDataSource( — PNG output added via AddOutput(new FileDataSource(\"output.png\"))"
+      - "REQUIRED: result.ResultCollection.Count > 0 — validate using result.ResultCollection.Count, NOT File.Exists. The Png plugin creates page-numbered files (e.g. output_0.png); File.Exists(\"output.png\") always returns false."
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for Png, PngOptions, FileDataSource)"
     forbidden:
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use PngOptions instead"
       - "FORBIDDEN: ImageDevice or PdfConverter — use LowCode Png plugin instead"
-      - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
+      - "FORBIDDEN: File.Exists(\"output.png\") — the Png plugin creates page-numbered output files (output_0.png etc); File.Exists will always return false. Use result.ResultCollection.Count > 0 instead."
+      - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property"
       - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
   Tiff:
     required:

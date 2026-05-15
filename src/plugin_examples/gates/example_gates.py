@@ -424,7 +424,11 @@ def write_aggregate_gate_results(
     return path
 
 
-def merge_pr_candidate_manifests(existing: dict, new_manifest: dict) -> dict:
+def merge_pr_candidate_manifests(
+    existing: dict,
+    new_manifest: dict,
+    demoted_scenario_ids: set[str] | None = None,
+) -> dict:
     """Merge a new run's PR candidate manifest into an existing one.
 
     Merge strategy:
@@ -432,10 +436,15 @@ def merge_pr_candidate_manifests(existing: dict, new_manifest: dict) -> dict:
     - Old pass entries are PRESERVED for scenarios absent from the new run
       (scenarios not re-attempted are not demoted).
     - New run's FAILURES only overwrite if the scenario was NOT previously passing.
+    - Demoted scenarios (in demoted_scenario_ids) are ALWAYS quarantined regardless
+      of prior passing state — a demotion in the latest run supersedes any old pass.
 
-    This prevents cross-run candidate loss when a later run re-attempts a
-    scenario that previously passed and fails (regression run).
+    The demoted_scenario_ids set should be populated from scenario_feedback_updates.json
+    for the current run.  Any scenario explicitly demoted (e.g. blocked_missing_fixture)
+    must not appear as a PR candidate even if it passed in an older run.
     """
+    _demoted = demoted_scenario_ids or set()
+
     existing_included = {
         e["scenario_id"]: e
         for e in existing.get("included_examples", [])
@@ -453,23 +462,41 @@ def merge_pr_candidate_manifests(existing: dict, new_manifest: dict) -> dict:
         e["scenario_id"] for e in new_manifest.get("excluded_examples", [])
     )
 
-    # Start with new passes
-    merged_included: dict[str, dict] = dict(new_included)
+    # Start with new passes — annotate as current-run candidates
+    merged_included: dict[str, dict] = {}
+    for sid, entry in new_included.items():
+        if sid in _demoted:
+            continue  # Demoted even if new run produced it — quarantine
+        merged_included[sid] = {**entry, "candidate_integrity_status": "current_run"}
 
     # Preserve old passes for scenarios NOT attempted (or not re-passed) in new run
     for sid, entry in existing_included.items():
+        if sid in _demoted:
+            continue  # Demoted in latest run — quarantine regardless of old pass
         if sid not in new_run_attempted:
             # Not re-attempted — preserve prior passing state
-            merged_included[sid] = entry
-        elif sid not in new_included:
-            # Re-attempted but failed in new run — PRESERVE old pass (don't regress)
-            merged_included[sid] = entry
+            merged_included[sid] = {**entry, "candidate_integrity_status": "prior_run_preserved_not_reattempted"}
+        elif sid not in merged_included:
+            # Re-attempted but failed in new run and NOT demoted — PRESERVE old pass
+            # (regression protection for probabilistic failures)
+            merged_included[sid] = {**entry, "candidate_integrity_status": "prior_run_preserved_regression_protected"}
 
     # Excluded = new run's excluded entries whose scenarios aren't in merged_included
+    # Also add demoted scenarios that were in existing as quarantined excluded entries
     merged_excluded = [
         e for e in new_manifest.get("excluded_examples", [])
         if e["scenario_id"] not in merged_included
     ]
+    # Add quarantined demoted scenarios from prior runs
+    for sid in _demoted:
+        if sid in existing_included and sid not in merged_included:
+            entry = existing_included[sid]
+            merged_excluded.append({
+                **entry,
+                "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+                "blocked_reason": "Scenario was demoted in scenario_feedback_updates for the latest run",
+                "candidate_integrity_status": "demoted_quarantined",
+            })
 
     exclusion_reasons: dict[str, list[str]] = {}
     for e in merged_excluded:
@@ -492,6 +519,7 @@ def write_pr_candidate_manifest(
     verification_dir: Path,
     merge_existing: bool = True,
     prior_manifest_path: Path | None = None,
+    scenario_feedback: dict | None = None,
 ) -> Path:
     """Write PR candidate manifest.
 
@@ -504,10 +532,26 @@ def write_pr_candidate_manifest(
     2. prior_manifest_path (e.g. the global workspace/verification/latest/ path)
 
     When merge_existing=False, overwrites the existing manifest (legacy behavior).
+
+    scenario_feedback: optional dict from scenario_feedback_updates.json for the current
+        run.  Demoted scenarios in this dict are quarantined from the merged manifest
+        regardless of prior passing state, preventing stale candidates from being included.
     """
     latest = verification_dir / "latest"
     latest.mkdir(parents=True, exist_ok=True)
     path = latest / "pr-candidate-manifest.json"
+
+    # Extract demoted scenario IDs from current-run feedback
+    demoted_ids: set[str] = set()
+    if scenario_feedback:
+        for update in scenario_feedback.get("updates", []):
+            new_status = update.get("new_status", "")
+            if new_status.startswith("blocked") or new_status in (
+                "demoted", "quarantined", "failed", "excluded"
+            ):
+                sid = update.get("scenario_id")
+                if sid:
+                    demoted_ids.add(sid)
 
     # Determine the prior manifest to merge from: run-local first, then global fallback
     prior_path = path if path.exists() else (prior_manifest_path if prior_manifest_path and prior_manifest_path.exists() else None)
@@ -517,12 +561,14 @@ def write_pr_candidate_manifest(
         try:
             with open(prior_path) as f:
                 existing = json.load(f)
-            final_manifest = merge_pr_candidate_manifests(existing, manifest)
+            final_manifest = merge_pr_candidate_manifests(existing, manifest, demoted_scenario_ids=demoted_ids)
+            preserved = final_manifest["publishable_candidate_count"] - manifest.get("publishable_candidate_count", 0)
             logger.info(
-                "PR candidate manifest merged from %s: %d included (%d from prior runs preserved)",
+                "PR candidate manifest merged from %s: %d included (%d from prior runs preserved, %d demoted/quarantined)",
                 prior_path,
                 final_manifest["publishable_candidate_count"],
-                final_manifest["publishable_candidate_count"] - manifest.get("publishable_candidate_count", 0),
+                preserved,
+                len(demoted_ids),
             )
         except (json.JSONDecodeError, OSError, KeyError) as exc:
             logger.warning("Failed to merge existing manifest (overwriting): %s", exc)

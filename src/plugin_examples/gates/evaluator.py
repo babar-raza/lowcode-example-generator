@@ -141,15 +141,27 @@ def evaluate_gates(
         elif agg_run == "passed_partial":
             run_failure_reason = f"{run_passed}/{run_total} examples passed runtime"
 
+        # Use "degraded" (not "passed") for partial runtime success so that the gate
+        # status and failure_reason are semantically coherent.  A gate marked "passed"
+        # must have a null failure_reason; partial results use "degraded" to explicitly
+        # signal that not all examples passed, satisfying partial-PR-dry-run semantics.
+        if agg_run == "passed_all":
+            run_gate_status = "passed"
+        elif agg_run == "passed_partial":
+            run_gate_status = "degraded"
+        else:
+            run_gate_status = "failed"
+
         gate = GateResult(
             gate_id="gate_run",
             name="Runtime Validation",
-            status="passed" if run_passed > 0 else "failed",
+            status=run_gate_status,
             required=True,
             failure_reason=run_failure_reason,
             stage_name="validation",
         )
-        if gate.status != "passed":
+        # "degraded" is not a hard block — partial pass allows PARTIAL_PR_DRY_RUN_READY
+        if gate.status == "failed":
             blocking.append(gate.gate_id)
         gates.append(gate)
     elif build_passed == 0 and gen_count > 0:
@@ -196,9 +208,12 @@ def evaluate_gates(
             blocking.append(gate.gate_id)
         gates.append(gate)
 
-    # Determine publishability and verdict
+    # Determine publishability and verdict.
+    # "degraded" counts as satisfying a required gate for partial-pass verdicts:
+    # it signals that the gate was not fully passed but is not a hard failure either.
+    # This allows PARTIAL_PR_DRY_RUN_READY when gate_run is degraded (some passed).
     all_required_passed = all(
-        g.status == "passed" for g in gates if g.required
+        g.status in ("passed", "degraded") for g in gates if g.required
     )
 
     verdict = _compute_verdict(

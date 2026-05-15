@@ -1591,11 +1591,16 @@ def run_pipeline(
     write_aggregate_gate_results(aggregate, evidence_dir)
 
     pr_manifest = build_pr_candidate_manifest(example_gates, dry_run=dry_run)
-    global_manifest_path = verification_dir / "latest" / "pr-candidate-manifest.json"
-    write_pr_candidate_manifest(pr_manifest, evidence_dir, prior_manifest_path=global_manifest_path)
-
     scenario_fb = build_scenario_feedback(example_gates)
     write_scenario_feedback(scenario_fb, evidence_dir)
+
+    global_manifest_path = verification_dir / "latest" / "pr-candidate-manifest.json"
+    write_pr_candidate_manifest(
+        pr_manifest,
+        evidence_dir,
+        prior_manifest_path=global_manifest_path,
+        scenario_feedback=scenario_fb,
+    )
 
     # Gate evaluation — compute honest verdict (now with partitioned awareness)
     from plugin_examples.gates.evaluator import evaluate_gates

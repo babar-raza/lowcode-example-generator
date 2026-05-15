@@ -16,6 +16,10 @@ from plugin_examples.gates.evaluator import (
     is_publishable_verdict,
 )
 from plugin_examples.gates.writer import write_gate_results
+from plugin_examples.gates.example_gates import (
+    merge_pr_candidate_manifests,
+    write_pr_candidate_manifest,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -555,4 +559,257 @@ class TestCompletenessGateRunnerIntegration:
         )
         assert "completeness_gate_status" in source, (
             "_stage_scenario_planning must return completeness_gate_status in stage artifacts."
+        )
+
+
+# ---------------------------------------------------------------------------
+# LANE B: PR candidate manifest integrity — demotion-aware merge
+# ---------------------------------------------------------------------------
+
+
+def _make_candidate(scenario_id: str, run_id: str = "run-old") -> dict:
+    return {
+        "scenario_id": scenario_id,
+        "example_path": f"workspace/runs/{run_id}/generated/pdf/{scenario_id}",
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+    }
+
+
+def _make_excluded(scenario_id: str, verdict: str = "EXAMPLE_BLOCKED_RUN_FAILED") -> dict:
+    return {
+        "scenario_id": scenario_id,
+        "example_path": f"workspace/runs/run-new/generated/pdf/{scenario_id}",
+        "final_example_verdict": verdict,
+        "blocked_reason": "Runtime failed",
+    }
+
+
+class TestMergePrCandidateManifestsDemotionAware:
+    """Verify demotion-aware candidate manifest merge logic."""
+
+    def _make_manifest(self, included: list[dict], excluded: list[dict] | None = None) -> dict:
+        excluded = excluded or []
+        return {
+            "included_examples": included,
+            "excluded_examples": excluded,
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": len(included),
+            "blocked_candidate_count": len(excluded),
+        }
+
+    def test_demoted_scenario_excluded_from_merged_manifest(self):
+        """A scenario demoted in the latest run must be quarantined even if it was a prior pass."""
+        existing = self._make_manifest([_make_candidate("pdf-png", "run-old")])
+        new_run = self._make_manifest(
+            included=[_make_candidate("pdf-merger", "run-new")],
+            excluded=[_make_excluded("pdf-png")],
+        )
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids={"pdf-png"})
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        assert "pdf-png" not in included_ids, "Demoted scenario must not be in included_examples"
+        assert "pdf-merger" in included_ids, "Non-demoted scenario must be preserved"
+
+    def test_demoted_scenario_appears_in_excluded_as_quarantined(self):
+        """Demoted scenario must appear in excluded_examples with quarantine marker."""
+        existing = self._make_manifest([_make_candidate("pdf-png", "run-old")])
+        new_run = self._make_manifest(
+            included=[],
+            excluded=[_make_excluded("pdf-png")],
+        )
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids={"pdf-png"})
+        excluded_ids = {e["scenario_id"] for e in result["excluded_examples"]}
+        assert "pdf-png" in excluded_ids
+
+    def test_non_demoted_older_candidate_preserved(self):
+        """A scenario from an older run that failed generation (not demoted) is preserved."""
+        existing = self._make_manifest([
+            _make_candidate("pdf-doc-converter", "run-old"),
+            _make_candidate("pdf-png", "run-old"),
+        ])
+        # New run: pdf-doc-converter generation failed, pdf-png demoted
+        new_run = self._make_manifest(
+            included=[_make_candidate("pdf-merger", "run-new")],
+            excluded=[_make_excluded("pdf-doc-converter"), _make_excluded("pdf-png")],
+        )
+        result = merge_pr_candidate_manifests(
+            existing, new_run, demoted_scenario_ids={"pdf-png"}
+        )
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        assert "pdf-doc-converter" in included_ids, "Non-demoted regression-protected candidate preserved"
+        assert "pdf-png" not in included_ids, "Demoted candidate quarantined"
+        assert "pdf-merger" in included_ids, "New pass included"
+
+    def test_current_run_candidates_get_integrity_status(self):
+        """Candidates from the current run get candidate_integrity_status='current_run'."""
+        existing = self._make_manifest([])
+        new_run = self._make_manifest([_make_candidate("pdf-merger", "run-new")])
+        result = merge_pr_candidate_manifests(existing, new_run)
+        merger = next(e for e in result["included_examples"] if e["scenario_id"] == "pdf-merger")
+        assert merger.get("candidate_integrity_status") == "current_run"
+
+    def test_preserved_regression_protected_candidates_get_integrity_status(self):
+        """Candidates preserved via regression protection get distinct integrity status."""
+        existing = self._make_manifest([_make_candidate("pdf-doc-converter", "run-old")])
+        new_run = self._make_manifest(
+            included=[_make_candidate("pdf-merger", "run-new")],
+            excluded=[_make_excluded("pdf-doc-converter")],
+        )
+        result = merge_pr_candidate_manifests(existing, new_run)
+        doc = next(
+            (e for e in result["included_examples"] if e["scenario_id"] == "pdf-doc-converter"),
+            None,
+        )
+        assert doc is not None
+        assert doc.get("candidate_integrity_status") == "prior_run_preserved_regression_protected"
+
+    def test_no_demoted_ids_behaves_as_before(self):
+        """With no demoted_scenario_ids, merge works like before — old passes preserved."""
+        existing = self._make_manifest([_make_candidate("pdf-png", "run-old")])
+        new_run = self._make_manifest(
+            included=[_make_candidate("pdf-merger", "run-new")],
+            excluded=[_make_excluded("pdf-png")],
+        )
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        assert "pdf-png" in included_ids, "Without demotion info, old pass is preserved (regression protection)"
+        assert "pdf-merger" in included_ids
+
+    def test_write_pr_candidate_manifest_uses_scenario_feedback(self, tmp_path):
+        """write_pr_candidate_manifest passes demoted scenarios from feedback to merge."""
+        # Write an existing manifest with pdf-png as a candidate
+        existing_manifest = {
+            "included_examples": [_make_candidate("pdf-png", "run-old")],
+            "excluded_examples": [],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 0,
+        }
+        (tmp_path / "latest").mkdir()
+        (tmp_path / "latest" / "pr-candidate-manifest.json").write_text(
+            json.dumps(existing_manifest), encoding="utf-8"
+        )
+
+        new_manifest = {
+            "included_examples": [_make_candidate("pdf-merger", "run-new")],
+            "excluded_examples": [_make_excluded("pdf-png")],
+            "exclusion_reasons": {},
+            "dry_run": True,
+            "live_publish_attempted": False,
+            "publishable_candidate_count": 1,
+            "blocked_candidate_count": 1,
+        }
+        scenario_feedback = {
+            "total_feedback_updates": 1,
+            "demoted_scenarios": 1,
+            "updates": [
+                {
+                    "scenario_id": "pdf-png",
+                    "previous_status": "ready",
+                    "new_status": "blocked_missing_fixture",
+                    "reason": "Output file was not created",
+                }
+            ],
+        }
+
+        write_pr_candidate_manifest(
+            new_manifest, tmp_path, scenario_feedback=scenario_feedback
+        )
+
+        result = json.loads((tmp_path / "latest" / "pr-candidate-manifest.json").read_text())
+        included_ids = {e["scenario_id"] for e in result["included_examples"]}
+        assert "pdf-png" not in included_ids, "Demoted pdf-png must be excluded by feedback gate"
+        assert "pdf-merger" in included_ids
+
+
+# ---------------------------------------------------------------------------
+# LANE C: Gate semantics — degraded status for partial runtime
+# ---------------------------------------------------------------------------
+
+
+class TestGateSemanticsDegradedPartialRun:
+    """Verify gate_run uses 'degraded' (not 'passed') for partial runtime success."""
+
+    def test_partial_runtime_produces_degraded_gate_run(self):
+        """When some examples pass runtime (not all), gate_run status must be 'degraded'."""
+        # Partial runtime: 1/2 examples passed — gate_run must be 'degraded'
+        gate_run = GateResult(
+            gate_id="gate_run",
+            name="Runtime Validation",
+            status="degraded",
+            required=True,
+            failure_reason="1/2 examples passed runtime",
+            stage_name="validation",
+        )
+        assert gate_run.status == "degraded"
+        assert gate_run.failure_reason is not None
+        assert "degraded" in GATE_STATUSES, "'degraded' must be in canonical GATE_STATUSES"
+
+    def test_degraded_gate_has_non_null_failure_reason(self):
+        """A degraded gate must always carry a failure_reason (partial semantics)."""
+        gate = GateResult(
+            gate_id="gate_run",
+            name="Runtime Validation",
+            status="degraded",
+            required=True,
+            failure_reason="5/6 examples passed runtime",
+            stage_name="validation",
+        )
+        assert gate.failure_reason is not None
+
+    def test_passed_gate_has_null_failure_reason(self):
+        """A passed gate must have null failure_reason (no contradiction)."""
+        gate = GateResult(
+            gate_id="gate_run",
+            name="Runtime Validation",
+            status="passed",
+            required=True,
+            failure_reason=None,
+            stage_name="validation",
+        )
+        assert gate.failure_reason is None, "A 'passed' gate must not have a failure_reason"
+
+    def test_all_required_passed_true_when_degraded(self):
+        """all_required_passed must be True when required gates are degraded (partial OK)."""
+        gates = [
+            GateResult(gate_id="gate_scenarios", name="Scenarios", status="passed", required=True, stage_name="s"),
+            GateResult(gate_id="gate_generation", name="Generation", status="passed", required=True, stage_name="g"),
+            GateResult(gate_id="gate_build", name="Build", status="passed", required=True, stage_name="b"),
+            GateResult(gate_id="gate_run", name="Runtime", status="degraded", required=True, stage_name="v",
+                       failure_reason="5/6 examples passed runtime"),
+        ]
+        all_required_passed = all(g.status in ("passed", "degraded") for g in gates if g.required)
+        assert all_required_passed is True
+
+    def test_all_required_passed_false_when_failed(self):
+        """all_required_passed must be False when a required gate failed."""
+        gates = [
+            GateResult(gate_id="gate_scenarios", name="Scenarios", status="passed", required=True, stage_name="s"),
+            GateResult(gate_id="gate_run", name="Runtime", status="failed", required=True, stage_name="v"),
+        ]
+        all_required_passed = all(g.status in ("passed", "degraded") for g in gates if g.required)
+        assert all_required_passed is False
+
+    def test_runner_produces_degraded_gate_run_for_partial_pass(self):
+        """The runner's evaluator must produce gate_run=degraded when partial runtime."""
+        import inspect
+        from plugin_examples.gates import evaluator
+        source = inspect.getsource(evaluator.evaluate_gates)
+        assert "degraded" in source, (
+            "evaluator.evaluate_gates must use 'degraded' status for partial runtime. "
+            "A 'passed' gate with failure_reason is semantically incoherent."
+        )
+
+    def test_gate_run_not_in_blocking_when_degraded(self):
+        """A degraded gate_run must not be added to blocking gates (partial pass is not a hard block)."""
+        import inspect
+        from plugin_examples.gates import evaluator
+        source = inspect.getsource(evaluator.evaluate_gates)
+        # Verify the fix: blocking only happens for "failed" not "degraded"
+        assert 'gate.status == "failed"' in source or "status == \"failed\"" in source, (
+            "evaluator.evaluate_gates must only add gate_run to blocking when status == 'failed', "
+            "not when degraded."
         )

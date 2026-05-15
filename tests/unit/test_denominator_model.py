@@ -252,14 +252,16 @@ class TestPdfDenominator:
             "PdfExtractor reclassified ABSTRACT_BASE in Sprint 7 — workflow_root_types 25->24"
         )
 
-    def test_pdf_pilot_allowed_count_is_8(self):
-        assert self.d["allowed_pilot_count"] == 8
+    def test_pdf_pilot_allowed_count_is_11(self):
+        assert self.d["allowed_pilot_count"] == 11, (
+            "PDF pilot expanded to 11 types in Sprint 9 (Wave C: Jpeg/Png/Tiff added to Wave A=5 + Wave B=3)"
+        )
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 8
+        assert isinstance(types, list) and len(types) == 11
         for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter",
-                  "DocConverter", "XlsConverter", "Html"]:
+                  "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_4(self):
@@ -287,13 +289,15 @@ class TestPdfDenominator:
         sha = self.d["api_catalog_sha256"]
         assert len(sha) == 64
 
-    def test_pdf_excluded_count_is_93(self):
-        assert self.d["excluded_count"] == 93, (
-            "Wave B adds DocConverter/XlsConverter/Html to pilot (8 total) — excluded 101-8=93"
+    def test_pdf_excluded_count_is_90(self):
+        assert self.d["excluded_count"] == 90, (
+            "Wave C adds Jpeg/Png/Tiff to pilot (11 total) — excluded 101-11=90"
         )
 
-    def test_pdf_runnable_scenarios_is_8(self):
-        assert self.d["runnable_scenarios"] == 8
+    def test_pdf_runnable_scenarios_is_11(self):
+        assert self.d["runnable_scenarios"] == 11, (
+            "PDF pilot expanded to 11 types in Sprint 9 (Wave A=5 + Wave B=3 + Wave C=3)"
+        )
 
 
 # ---------------------------------------------------------------------------

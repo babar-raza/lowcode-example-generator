@@ -514,6 +514,11 @@ def _validate_code_from_constraints(code: str, type_constraints: dict) -> list[s
             token = req_stripped.split("(")[0].strip()
             if token and len(token) >= 4:
                 required_calls.append((token, req))
+        elif len(req_stripped) >= 4:
+            # Literal string check — pattern must appear verbatim in generated code.
+            # Use this for filename/value constraints (e.g. "output.jpg") where a
+            # method-call token would be too broad and would produce false positives.
+            required_calls.append((req_stripped, req))
 
     # Check REQUIRED using directives — must appear literally in code
     for using_stmt, req_entry in required_usings:

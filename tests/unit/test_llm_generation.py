@@ -1886,6 +1886,77 @@ class TestRequiredValidation:
         # "new Merger" is absent — should be flagged; PdfFileEditor also caught
         assert any("new Merger" in i for i in issues)
 
+    def test_literal_string_required_absent_flagged(self):
+        """Literal-string REQUIRED constraint (no parentheses) flags code missing the string."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                'REQUIRED: "output.jpg" — JPEG output filename MUST be output.jpg (not output.pdf)'
+            ]
+        }
+        # Code has output.pdf — the literal "output.jpg" is absent
+        code = 'string outputPath = Path.Combine(Path.GetTempPath(), "output.pdf");\nnew Jpeg().Process(options);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any('"output.jpg"' in i or "output.jpg" in i for i in issues)
+
+    def test_literal_string_required_present_passes(self):
+        """Literal-string REQUIRED constraint passes when the string appears in code."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                'REQUIRED: "output.jpg" — JPEG output filename MUST be output.jpg (not output.pdf)'
+            ]
+        }
+        code = 'string outputPath = Path.Combine(Path.GetTempPath(), "output.jpg");\nnew Jpeg().Process(options);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert not any('"output.jpg"' in i for i in issues)
+
+    def test_literal_string_tiff_extension_absent_flagged(self):
+        """Literal-string REQUIRED for output.tiff flags code using output.tif."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                'REQUIRED: "output.tiff" — TIFF output filename MUST be output.tiff (not output.tif)'
+            ]
+        }
+        # Code uses .tif (wrong) — "output.tiff" is absent
+        code = 'string outputPath = "output.tif";\nnew Tiff().Process(options);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert any("output.tiff" in i for i in issues)
+
+    def test_literal_string_tiff_extension_present_passes(self):
+        """Literal-string REQUIRED for output.tiff passes when code uses output.tiff."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                'REQUIRED: "output.tiff" — TIFF output filename MUST be output.tiff (not output.tif)'
+            ]
+        }
+        code = 'string outputPath = Path.Combine(Path.GetTempPath(), "output.tiff");\nnew Tiff().Process(options);'
+        issues = _validate_code_from_constraints(code, constraints)
+        assert not any("output.tiff" in i for i in issues)
+
+    def test_literal_string_combined_with_method_constraint(self):
+        """Literal-string and method-call REQUIRED constraints work together."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        constraints = {
+            "required": [
+                'REQUIRED: new Jpeg().Process(options) — use the LowCode Jpeg plugin',
+                'REQUIRED: "output.jpg" — JPEG output filename MUST be output.jpg',
+            ]
+        }
+        # Has Jpeg().Process but uses wrong output extension
+        code = (
+            'var options = new JpegOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'new Jpeg().Process(options);\n'
+        )
+        issues = _validate_code_from_constraints(code, constraints)
+        # Method call is present, but "output.jpg" is absent — only filename issue flagged
+        assert any("output.jpg" in i for i in issues)
+        assert not any("new Jpeg" in i for i in issues)
+
     def test_build_repair_stores_type_constraints_in_project(self):
         """project dict must contain type_constraints for build-repair validation."""
         import inspect

@@ -249,6 +249,7 @@ per_type_constraints:
       - "REQUIRED: new Jpeg().Process(options) — use the LowCode Jpeg plugin to convert PDF to JPEG image"
       - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
       - "REQUIRED: options.AddOutput(new FileDataSource( — JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))"
+      - "REQUIRED: \"output.jpg\" — JPEG output filename MUST be output.jpg (not output.pdf, not output.jpeg). The Jpeg plugin writes a .jpg file, never a .pdf."
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for Jpeg, JpegOptions, FileDataSource)"
     forbidden:
@@ -275,6 +276,7 @@ per_type_constraints:
       - "REQUIRED: new Tiff().Process(options) — use the LowCode Tiff plugin to convert PDF to TIFF image"
       - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
       - "REQUIRED: options.AddOutput(new FileDataSource( — TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))"
+      - "REQUIRED: \"output.tiff\" — TIFF output filename MUST be output.tiff (four letters, not output.tif). The Tiff plugin writes a .tiff file."
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for Tiff, TiffOptions, FileDataSource)"
     forbidden:

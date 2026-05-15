@@ -2136,3 +2136,195 @@ class TestPdfReferenceExampleInjection:
         """DocConverter reference must NOT appear in Html repair prompt."""
         reminder = self._get_repair_reminder("html", "Html")
         assert "MANDATORY REFERENCE EXAMPLE for DocConverter" not in reminder
+
+
+# ---------------------------------------------------------------------------
+# Lane A — LLM empty-model 400 fix tests
+# ---------------------------------------------------------------------------
+
+class TestLLMEmptyModelFix:
+    """Tests proving GPT_OSS_MODEL='' is treated the same as absent (=> 'recommended').
+
+    Root cause of Sprint 14 400 error:
+      Background command used $GPT_OSS_MODEL shell expansion.
+      GPT_OSS_MODEL was unset in bash → expanded to "" → subprocess got GPT_OSS_MODEL="".
+      os.environ.get("GPT_OSS_MODEL", "recommended") returns "" (key present, value empty).
+      _call_openai_compatible: `if model:` is False for "" → model field omitted from body.
+      API returns 400: "Invalid model name passed in model=None."
+
+    Fix: (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
+    """
+
+    def test_get_provider_model_absent_returns_recommended(self, monkeypatch):
+        """GPT_OSS_MODEL absent → _get_provider_model returns 'recommended'."""
+        from plugin_examples.llm_router.router import _get_provider_model
+        monkeypatch.delenv("GPT_OSS_MODEL", raising=False)
+        assert _get_provider_model("llm_professionalize") == "recommended"
+
+    def test_get_provider_model_empty_string_returns_recommended(self, monkeypatch):
+        """GPT_OSS_MODEL='' (shell expansion of unset var) → 'recommended', not ''."""
+        from plugin_examples.llm_router.router import _get_provider_model
+        monkeypatch.setenv("GPT_OSS_MODEL", "")
+        assert _get_provider_model("llm_professionalize") == "recommended"
+
+    def test_get_provider_model_whitespace_returns_recommended(self, monkeypatch):
+        """GPT_OSS_MODEL='   ' (whitespace only) → 'recommended'."""
+        from plugin_examples.llm_router.router import _get_provider_model
+        monkeypatch.setenv("GPT_OSS_MODEL", "   ")
+        assert _get_provider_model("llm_professionalize") == "recommended"
+
+    def test_get_provider_model_explicit_value_preserved(self, monkeypatch):
+        """GPT_OSS_MODEL='my-model' → 'my-model' preserved as-is."""
+        from plugin_examples.llm_router.router import _get_provider_model
+        monkeypatch.setenv("GPT_OSS_MODEL", "my-model")
+        assert _get_provider_model("llm_professionalize") == "my-model"
+
+    def test_call_provider_empty_model_uses_recommended(self, monkeypatch):
+        """_call_provider for llm_professionalize uses 'recommended' when GPT_OSS_MODEL=''."""
+        import unittest.mock as mock
+        from plugin_examples.llm_router.router import _call_provider
+        monkeypatch.setenv("GPT_OSS_MODEL", "")
+        monkeypatch.setenv("GPT_OSS_ENDPOINT", "https://llm.example.com/v1/")
+        monkeypatch.setenv("GPT_OSS_API_KEY", "test-key")
+
+        captured = {}
+        def fake_call_openai(endpoint, prompt, *, system_prompt="", timeout=120,
+                             api_key="", model="", **kwargs):
+            captured["model"] = model
+            return "ok"
+
+        with mock.patch("plugin_examples.llm_router.router._call_openai_compatible", fake_call_openai):
+            result = _call_provider("llm_professionalize", "hello")
+
+        assert captured["model"] == "recommended", (
+            f"Expected 'recommended' when GPT_OSS_MODEL='', got {captured['model']!r}"
+        )
+
+    def test_call_provider_absent_model_uses_recommended(self, monkeypatch):
+        """_call_provider uses 'recommended' when GPT_OSS_MODEL is completely absent."""
+        import unittest.mock as mock
+        from plugin_examples.llm_router.router import _call_provider
+        monkeypatch.delenv("GPT_OSS_MODEL", raising=False)
+        monkeypatch.setenv("GPT_OSS_ENDPOINT", "https://llm.example.com/v1/")
+        monkeypatch.setenv("GPT_OSS_API_KEY", "test-key")
+
+        captured = {}
+        def fake_call_openai(endpoint, prompt, *, system_prompt="", timeout=120,
+                             api_key="", model="", **kwargs):
+            captured["model"] = model
+            return "ok"
+
+        with mock.patch("plugin_examples.llm_router.router._call_openai_compatible", fake_call_openai):
+            result = _call_provider("llm_professionalize", "hello")
+
+        assert captured["model"] == "recommended"
+
+    def test_model_field_included_in_request_body_when_recommended(self, monkeypatch):
+        """When model='recommended', the model field IS included in the JSON body (not omitted)."""
+        import unittest.mock as mock
+        import requests as req_lib
+        from plugin_examples.llm_router import router
+
+        monkeypatch.delenv("GPT_OSS_MODEL", raising=False)
+        monkeypatch.setenv("GPT_OSS_ENDPOINT", "https://llm.example.com/v1/")
+        monkeypatch.setenv("GPT_OSS_API_KEY", "test-key")
+
+        sent_bodies = []
+
+        class FakeResp:
+            status_code = 200
+            def raise_for_status(self): pass
+            def json(self):
+                return {"choices": [{"message": {"content": "ok"}}], "usage": {}}
+
+        def fake_post(url, json=None, headers=None, timeout=None):
+            sent_bodies.append(json)
+            return FakeResp()
+
+        with mock.patch.object(req_lib, "post", fake_post):
+            router._call_provider("llm_professionalize", "hello")
+
+        assert sent_bodies, "No request was sent"
+        body = sent_bodies[0]
+        assert "model" in body, f"'model' key missing from request body: {body}"
+        assert body["model"] == "recommended", f"Expected 'recommended', got {body['model']!r}"
+
+
+# ---------------------------------------------------------------------------
+# Lane C — PDF Jpeg/Tiff/Png MANDATORY REFERENCE EXAMPLE injection tests
+# ---------------------------------------------------------------------------
+
+class TestPdfImageWaveReferenceInjection:
+    """Verify MANDATORY REFERENCE EXAMPLEs are injected for Jpeg, Tiff, Png
+    so the LLM uses correct output filenames and validation patterns.
+
+    Root cause of Sprint 9 Wave C failures:
+    - Jpeg: LLM used output.pdf instead of output.jpg
+    - Tiff: LLM used output.tif instead of output.tiff
+    - Png: LLM used File.Exists("output.png") (always False — plugin writes output_0.png)
+    """
+
+    def _get_repair_reminder(self, type_short: str, namespace_type: str) -> str:
+        """Capture repair prompt content for a given PDF image type."""
+        from plugin_examples.generator.code_generator import generate_example
+
+        captured_prompts = []
+
+        def mock_llm(prompt: str, system: str) -> str:
+            captured_prompts.append(prompt)
+            return "```csharp\nusing System;\nclass Program { static void Main() {} }\n```"
+
+        packet = _make_failing_pdf_packet(type_short, namespace_type)
+        generate_example(packet, llm_generate=mock_llm, max_repairs=1)
+        assert len(captured_prompts) >= 2, f"Expected repair call for {type_short}"
+        return captured_prompts[1]
+
+    def test_jpeg_reference_example_injected(self):
+        """Jpeg repair prompt must include output.jpg reference, never output.pdf."""
+        reminder = self._get_repair_reminder("jpeg", "Jpeg")
+        assert "MANDATORY REFERENCE EXAMPLE for Jpeg" in reminder
+        assert 'output.jpg' in reminder
+        assert "JpegOptions" in reminder
+        assert "new Jpeg().Process(options)" in reminder
+
+    def test_jpeg_reference_forbids_output_pdf(self):
+        """Jpeg reference explicitly forbids output.pdf filename."""
+        reminder = self._get_repair_reminder("jpeg", "Jpeg")
+        assert "NEVER output.pdf" in reminder or "not output.pdf" in reminder
+
+    def test_tiff_reference_example_injected(self):
+        """Tiff repair prompt must include output.tiff reference (four letters, never .tif)."""
+        reminder = self._get_repair_reminder("tiff", "Tiff")
+        assert "MANDATORY REFERENCE EXAMPLE for Tiff" in reminder
+        assert 'output.tiff' in reminder
+        assert "TiffOptions" in reminder
+        assert "new Tiff().Process(options)" in reminder
+
+    def test_tiff_reference_forbids_output_tif(self):
+        """Tiff reference explicitly forbids output.tif (three letters)."""
+        reminder = self._get_repair_reminder("tiff", "Tiff")
+        assert "NEVER output.tif" in reminder or "not output.tif" in reminder
+
+    def test_png_reference_example_injected(self):
+        """Png repair prompt must validate via result.ResultCollection.Count, not File.Exists."""
+        reminder = self._get_repair_reminder("png", "Png")
+        assert "MANDATORY REFERENCE EXAMPLE for Png" in reminder
+        assert "result.ResultCollection.Count" in reminder
+        assert "PngOptions" in reminder
+        assert "new Png().Process(options)" in reminder
+
+    def test_png_reference_forbids_file_exists(self):
+        """Png reference explicitly forbids File.Exists (output_0.png page-numbering issue)."""
+        reminder = self._get_repair_reminder("png", "Png")
+        assert "File.Exists" in reminder  # must mention it as forbidden
+        assert "always return false" in reminder or "always returns false" in reminder
+
+    def test_jpeg_reference_not_injected_for_tiff(self):
+        """Jpeg reference must NOT appear in Tiff repair prompt."""
+        reminder = self._get_repair_reminder("tiff", "Tiff")
+        assert "MANDATORY REFERENCE EXAMPLE for Jpeg" not in reminder
+
+    def test_tiff_reference_not_injected_for_jpeg(self):
+        """Tiff reference must NOT appear in Jpeg repair prompt."""
+        reminder = self._get_repair_reminder("jpeg", "Jpeg")
+        assert "MANDATORY REFERENCE EXAMPLE for Tiff" not in reminder

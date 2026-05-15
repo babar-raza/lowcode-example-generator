@@ -257,9 +257,14 @@ def _get_provider_base_url(provider: str | None) -> str | None:
 
 
 def _get_provider_model(provider: str | None) -> str | None:
-    """Return the configured model name for a known provider."""
+    """Return the configured model name for a known provider.
+
+    Treats an explicitly-set-but-empty GPT_OSS_MODEL the same as absent.
+    This prevents a 400 "model=None" error when the variable is set to ""
+    (e.g. via shell variable expansion in a background task: $GPT_OSS_MODEL).
+    """
     if provider == "llm_professionalize":
-        return os.environ.get("GPT_OSS_MODEL", "recommended")
+        return (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
     if provider == "ollama":
         return "codellama"
     return None
@@ -290,7 +295,8 @@ def _call_provider(
     elif provider == "llm_professionalize":
         api_key = _resolve_api_key("llm_professionalize")
         base = os.environ.get("GPT_OSS_ENDPOINT", "http://localhost:8080/v1/").rstrip("/")
-        model = os.environ.get("GPT_OSS_MODEL", "recommended")
+        # Treat empty-string GPT_OSS_MODEL (e.g. from "$GPT_OSS_MODEL" shell expansion) as absent.
+        model = (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
         return _call_openai_compatible(
             f"{base}/chat/completions",
             prompt, system_prompt=system_prompt, timeout=timeout,
@@ -311,7 +317,7 @@ def _call_provider(
     elif provider == "gpt_oss":
         api_key = _resolve_api_key("gpt_oss")
         base = os.environ.get("GPT_OSS_ENDPOINT", "https://api.openai.com/v1/").rstrip("/")
-        model = os.environ.get("GPT_OSS_MODEL", "recommended")
+        model = (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
         return _call_openai_compatible(
             f"{base}/chat/completions",
             prompt, system_prompt=system_prompt, timeout=timeout,

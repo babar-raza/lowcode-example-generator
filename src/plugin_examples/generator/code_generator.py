@@ -643,6 +643,47 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'var result = new TableGenerator().Process(options);\n'
             'Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");\n'
         )
+    if t == "tocgenerator":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new TocOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new TocGenerator().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "TOC added" : "No output");\n'
+        )
+    if t == "imageextractor":
+        return (
+            'using System;\n'
+            'using System.IO;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            '// Minimal 1x1 red pixel BMP (58 bytes) as fixture image\n'
+            'var bmpBytes = new byte[] {\n'
+            '    66, 77, 58, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0,\n'
+            '    40, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0,\n'
+            '    0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n'
+            '    0, 0, 0, 0, 0, 0, 0, 0,\n'
+            '    0, 0, 255, 0\n'
+            '};\n'
+            'var document = new Document();\n'
+            'var page = document.Pages.Add();\n'
+            'page.Resources.Images.Add(new MemoryStream(bmpBytes));\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new ImageExtractorOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'var result = new ImageExtractor().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Images extracted" : "No images found");\n'
+        )
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
 

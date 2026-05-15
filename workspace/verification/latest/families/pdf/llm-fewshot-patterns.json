@@ -1,5 +1,5 @@
 {
-  "total_patterns": 10,
+  "total_patterns": 12,
   "verified_passing": 0,
   "patterns": [
     {
@@ -15,6 +15,14 @@
       "uses_basedir": false,
       "validates_input": false,
       "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "uses_basedir": false,
+      "validates_input": false,
+      "validates_output": false,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"
     },
@@ -62,12 +70,20 @@
       "scenario_id": "pdf-text-extractor",
       "uses_basedir": false,
       "validates_input": true,
-      "validates_output": false,
+      "validates_output": true,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"
     },
     {
       "scenario_id": "pdf-tiff",
+      "uses_basedir": false,
+      "validates_input": false,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
       "uses_basedir": false,
       "validates_input": false,
       "validates_output": true,

@@ -2519,6 +2519,41 @@ class TestTemplateFIrstGeneration:
         assert "result.ResultCollection.Count" in code
         assert "File.Exists" not in code
 
+    def test_tocgenerator_template_first_bypasses_llm(self):
+        """TocGenerator template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("tocgenerator", "TocGenerator")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_imageextractor_template_first_bypasses_llm(self):
+        """ImageExtractor template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("imageextractor", "ImageExtractor")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_tocgenerator_template_contains_required_patterns(self):
+        """TocGenerator template must use TocOptions, AddInput, AddOutput, result.ResultCollection.Count."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("tocgenerator", "TocGenerator")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "new TocOptions()" in code
+        assert "new TocGenerator().Process(options)" in code
+        assert 'options.AddInput(new FileDataSource("input.pdf"))' in code
+        assert 'options.AddOutput(new FileDataSource("output.pdf"))' in code
+        assert "result.ResultCollection.Count > 0" in code
+
+    def test_imageextractor_template_contains_required_patterns(self):
+        """ImageExtractor template must embed an image, use ImageExtractorOptions, no AddOutput."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("imageextractor", "ImageExtractor")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "new ImageExtractorOptions()" in code
+        assert "new ImageExtractor().Process(options)" in code
+        assert "options.AddInput(new FileDataSource(" in code
+        assert "options.AddOutput" not in code
+        assert "page.Resources.Images.Add(" in code
+        assert "result.ResultCollection.Count > 0" in code
+
     def test_template_first_false_does_not_bypass_llm(self):
         """When template_first is absent/false, LLM IS called normally."""
         from plugin_examples.generator.packet_builder import PromptPacket
@@ -2607,6 +2642,7 @@ class TestTemplateFIrstGeneration:
         for type_name in [
             "DocConverter", "XlsConverter", "Html",
             "Jpeg", "Tiff", "Png", "TableGenerator",
+            "TocGenerator", "ImageExtractor",
         ]:
             packet = MagicMock()
             packet.target_type = f"Aspose.Pdf.LowCode.{type_name}"

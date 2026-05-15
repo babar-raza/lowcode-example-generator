@@ -2,61 +2,73 @@
   "included_examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-doc-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-doc-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-html",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-html",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "candidate_integrity_status": "current_run"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-image-extractor",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-jpeg",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-jpeg",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-jpeg",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-optimizer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-optimizer",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-pdf-aconverter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-png",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-png",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-png",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-table-generator",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-table-generator",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-table-generator",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-text-extractor",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-tiff",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-tiff",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-tiff",
+      "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "candidate_integrity_status": "current_run"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-toc-generator",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
     {
       "scenario_id": "pdf-xls-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-xls-converter",
       "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "candidate_integrity_status": "current_run"
     },
@@ -77,14 +89,14 @@
   "exclusion_reasons": {},
   "dry_run": true,
   "live_publish_attempted": false,
-  "included_manifest_candidate_count": 12,
-  "current_run_pr_eligible_count": 10,
+  "included_manifest_candidate_count": 14,
+  "current_run_pr_eligible_count": 12,
   "replay_validated_pr_eligible_count": 0,
   "prior_run_preserved_count": 2,
   "replay_required_count": 2,
   "quarantined_count": 0,
-  "live_publishable_count": 10,
-  "approval_blocked_count": 10,
-  "publishable_candidate_count": 10,
+  "live_publishable_count": 12,
+  "approval_blocked_count": 12,
+  "publishable_candidate_count": 12,
   "blocked_candidate_count": 0
 }

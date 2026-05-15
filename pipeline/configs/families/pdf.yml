@@ -299,6 +299,7 @@ per_type_constraints:
       - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
       - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
   TocGenerator:
+    template_first: true
     required:
       - "REQUIRED: new TocOptions( — use TocOptions as the concrete options class for TocGenerator"
       - "REQUIRED: new TocGenerator().Process(options) — use the LowCode TocGenerator plugin to add table of contents to a PDF"
@@ -313,6 +314,7 @@ per_type_constraints:
       - "FORBIDDEN: TocOptions.Create() without TocGenerator.Process() — must call Process to apply"
       - "FORBIDDEN: PdfToImage — abstract class, not directly instantiable; use Jpeg/Png/Tiff instead"
   ImageExtractor:
+    template_first: true
     required:
       - "REQUIRED: new ImageExtractorOptions( — use ImageExtractorOptions as the concrete options class"
       - "REQUIRED: new ImageExtractor().Process(options) — use the LowCode ImageExtractor plugin to extract images from PDF"
@@ -320,7 +322,7 @@ per_type_constraints:
       - "REQUIRED: result.ResultCollection.Count > 0 — validate that ImageExtractor produced results (no file output path needed; results in ResultCollection)"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for ImageExtractor, ImageExtractorOptions, FileDataSource)"
-      - "REQUIRED: input PDF must contain at least one embedded image — create a PDF with an image using doc.Pages[1].Resources.Images.Add() or load a PDF that contains images"
+      - "REQUIRED: page.Resources.Images.Add( — embed at least one image in the fixture PDF so ImageExtractor has images to extract"
     forbidden:
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use ImageExtractorOptions instead"
       - "FORBIDDEN: PdfExtractor (Aspose.Pdf.Facades) — use LowCode ImageExtractor instead"

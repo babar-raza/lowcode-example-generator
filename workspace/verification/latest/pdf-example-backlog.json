@@ -1,9 +1,9 @@
 {
   "family": "pdf",
-  "updated_at": "2026-05-15T14:21:39.050999+00:00",
+  "updated_at": "2026-05-15T14:52:29.366251+00:00",
   "total_entries": 14,
-  "open_entries": 2,
-  "resolved_entries": 12,
+  "open_entries": 0,
+  "resolved_entries": 14,
   "entries": [
     {
       "scenario_id": "pdf-text-extractor",
@@ -36,14 +36,14 @@
     {
       "scenario_id": "pdf-merger",
       "family": "pdf",
-      "last_run_id": "pilot-pdf-20260515-185930",
+      "last_run_id": "pilot-pdf-20260515-193905",
       "last_failure_stage": "backlogged",
       "root_cause": "Post-repair validation failed: ['Missing required using directive: REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u2014 TextFragment lives in Aspose.Pdf.Text namespace)']",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 5,
+      "attempt_count": 6,
       "first_seen": "2026-05-08T11:05:06.512474+00:00",
-      "last_seen": "2026-05-15T14:21:39.050761+00:00",
+      "last_seen": "2026-05-15T14:52:29.365890+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-pdf-20260513-175041"
     },
@@ -64,14 +64,14 @@
     {
       "scenario_id": "pdf-splitter",
       "family": "pdf",
-      "last_run_id": "pilot-pdf-20260515-185930",
+      "last_run_id": "pilot-pdf-20260515-193905",
       "last_failure_stage": "backlogged",
       "root_cause": "Post-repair validation failed: ['Missing required using directive: REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u2014 Splitter fixture may use TextFragment to add page content)']",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 5,
+      "attempt_count": 6,
       "first_seen": "2026-05-13T13:06:44.039434+00:00",
-      "last_seen": "2026-05-15T14:21:39.050765+00:00",
+      "last_seen": "2026-05-15T14:52:29.365897+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-pdf-20260513-180851"
     },
@@ -169,9 +169,9 @@
       "priority": "high",
       "attempt_count": 5,
       "first_seen": "2026-05-15T13:13:59.914642+00:00",
-      "last_seen": "2026-05-15T14:21:39.050750+00:00",
-      "resolved": false,
-      "resolved_in_run": null
+      "last_seen": "2026-05-15T14:52:29.365874+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260515-193905"
     },
     {
       "scenario_id": "pdf-toc-generator",
@@ -183,9 +183,9 @@
       "priority": "high",
       "attempt_count": 5,
       "first_seen": "2026-05-15T13:13:59.914676+00:00",
-      "last_seen": "2026-05-15T14:21:39.050767+00:00",
-      "resolved": false,
-      "resolved_in_run": null
+      "last_seen": "2026-05-15T14:52:29.365903+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-pdf-20260515-193905"
     },
     {
       "scenario_id": "pdf-table-generator",

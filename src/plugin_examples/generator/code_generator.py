@@ -44,6 +44,10 @@ def generate_example(
     Returns:
         GeneratedExample with generated code.
     """
+    # Extract per-type constraints early (needed for template_first check)
+    _type_name = packet.target_type.split(".")[-1] if packet.target_type else ""
+    _ptc = packet.per_type_constraints.get(_type_name, {}) if packet.per_type_constraints else {}
+
     if llm_generate is None:
         # Generate template without LLM
         code = _generate_template(packet)
@@ -52,6 +56,33 @@ def generate_example(
             code=code,
             claimed_symbols=packet.approved_symbols,
             status="generated",
+        )
+
+    # Template-first: bypass LLM for known deterministic API patterns
+    if _ptc.get("template_first"):
+        code = _generate_deterministic_template_for_scenario(packet)
+        _family = "pdf" if packet.target_namespace.lower().startswith("aspose.pdf") else ""
+        _type_short = _type_name.lower()
+        tf_issues = _validate_code(code, family=_family, type_short=_type_short)
+        tf_issues.extend(_validate_code_from_constraints(code, _ptc))
+        if tf_issues:
+            logger.error(
+                "Template-first code for %s failed validation: %s",
+                packet.scenario_id,
+                tf_issues,
+            )
+            return GeneratedExample(
+                scenario_id=packet.scenario_id,
+                code=code,
+                claimed_symbols=packet.approved_symbols,
+                status="failed",
+                failure_reason=f"Template-first validation failed: {tf_issues}",
+            )
+        return GeneratedExample(
+            scenario_id=packet.scenario_id,
+            code=code,
+            claimed_symbols=packet.approved_symbols,
+            status="generated_template_first",
         )
 
     try:
@@ -67,14 +98,12 @@ def generate_example(
 
     # Detect family from packet namespace for family-specific validation
     _family = "pdf" if packet.target_namespace.lower().startswith("aspose.pdf") else ""
-    _type_short = packet.target_type.split(".")[-1].lower() if packet.target_type else ""
+    _type_short = _type_name.lower()
 
     # Validate generated code — PDF-specific + generic checks
     issues = _validate_code(code, family=_family, type_short=_type_short)
 
-    # Also run config-driven FORBIDDEN pattern check for all families
-    _type_name = packet.target_type.split(".")[-1] if packet.target_type else ""
-    _ptc = packet.per_type_constraints.get(_type_name, {}) if packet.per_type_constraints else {}
+    # Config-driven FORBIDDEN pattern check for all families
     if _ptc:
         issues.extend(_validate_code_from_constraints(code, _ptc))
 
@@ -153,14 +182,14 @@ def generate_example(
                     "document.Save(\"input.pdf\");\n"
                     "\n"
                     "var options = new PdfToDocOptions();\n"
-                    "options.SaveFormat = SaveFormat.DocX;\n"
+                    "options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX;\n"
                     "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
                     "options.AddOutput(new FileDataSource(\"output.docx\"));\n"
                     "var result = new DocConverter().Process(options);\n"
                     "Console.WriteLine(result.ResultCollection.Count > 0 ? \"Converted to DOCX\" : \"No output\");\n"
                     "```\n"
                     "CRITICAL: MUST use 'new PdfToDocOptions()' (NOT PdfConverterOptions which is abstract). "
-                    "MUST set 'options.SaveFormat = SaveFormat.DocX' — this line is non-negotiable. "
+                    "MUST set 'options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX' (fully-qualified to avoid CS0104 ambiguity with Aspose.Pdf.SaveFormat) — this line is non-negotiable. "
                     "MUST use 'new DocConverter().Process(options)'. "
                     "MUST use AddInput(new FileDataSource(...)) and AddOutput(new FileDataSource(...))."
                 )
@@ -473,6 +502,149 @@ namespace PluginExample
     }}
 }}
 """
+
+
+def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
+    """Return a verified, harness-validated C# script for known PDF LowCode types.
+
+    Called when ``template_first: true`` is set in per_type_constraints.  The
+    templates are the same code shown as MANDATORY REFERENCE EXAMPLEs in the
+    repair path; keeping them in one place avoids drift.
+
+    For unrecognised types the generic ``_generate_template`` fallback is used.
+    """
+    type_name = packet.target_type.split(".")[-1] if packet.target_type else ""
+    t = type_name.lower()
+
+    if t == "docconverter":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Text;\n'
+            '\n'
+            'var document = new Document();\n'
+            'var page = document.Pages.Add();\n'
+            'page.Paragraphs.Add(new TextFragment("LowCode DocConverter Test"));\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new PdfToDocOptions();\n'
+            'options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX;\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.docx"));\n'
+            'var result = new DocConverter().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Converted to DOCX" : "No output");\n'
+        )
+    if t == "xlsconverter":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new PdfToXlsOptions();\n'
+            'options.Format = PdfToXlsOptions.ExcelFormat.XLSX;\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.xlsx"));\n'
+            'var result = new XlsConverter().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Converted to XLSX" : "No output");\n'
+        )
+    if t == "html":
+        return (
+            'using System;\n'
+            'using System.IO;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'File.WriteAllText("input.html", "<html><body><h1>Hello LowCode</h1><p>HTML to PDF.</p></body></html>");\n'
+            '\n'
+            'var options = new HtmlToPdfOptions();\n'
+            'options.AddInput(new FileDataSource("input.html"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new Html().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "HTML converted to PDF" : "No output");\n'
+        )
+    if t == "jpeg":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new JpegOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.jpg"));\n'
+            'var result = new Jpeg().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "JPEG created" : "No output");\n'
+        )
+    if t == "tiff":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new TiffOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.tiff"));\n'
+            'var result = new Tiff().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "TIFF created" : "No output");\n'
+        )
+    if t == "png":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = new PngOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.png"));\n'
+            'var result = new Png().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "PNG created" : "No output");\n'
+        )
+    if t == "tablegenerator":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Text;\n'
+            '\n'
+            'var document = new Document();\n'
+            'document.Pages.Add();\n'
+            'document.Save("input.pdf");\n'
+            '\n'
+            'var options = TableOptions.Create()\n'
+            '    .InsertPageBefore(1)\n'
+            '    .AddTable()\n'
+            '        .AddRow()\n'
+            '            .AddCell()\n'
+            '                .AddParagraph(new TextFragment("Header 1"))\n'
+            '            .AddCell()\n'
+            '                .AddParagraph(new TextFragment("Header 2"))\n'
+            '        .AddRow()\n'
+            '            .AddCell()\n'
+            '                .AddParagraph(new TextFragment("Cell 1"))\n'
+            '            .AddCell()\n'
+            '                .AddParagraph(new TextFragment("Cell 2"));\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new TableGenerator().Process(options);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");\n'
+        )
+    # Unrecognised type — fall back to the generic catalog-driven template
+    return _generate_template(packet)
 
 
 # ---------------------------------------------------------------------------

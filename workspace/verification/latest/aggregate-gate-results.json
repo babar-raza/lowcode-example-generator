@@ -1,14 +1,12 @@
 {
   "total_generated": 10,
   "total_built": 10,
-  "total_runtime_passed": 8,
-  "total_runtime_blocked": 2,
-  "total_pr_candidates": 8,
-  "total_excluded": 2,
+  "total_runtime_passed": 10,
+  "total_runtime_blocked": 0,
+  "total_pr_candidates": 10,
+  "total_excluded": 0,
   "aggregate_build_status": "passed_all",
-  "aggregate_run_status": "passed_partial",
+  "aggregate_run_status": "passed_all",
   "aggregate_reviewer_status": "passed_all",
-  "blocked_reasons": {
-    "EXAMPLE_BLOCKED_RUN_FAILED": 2
-  }
+  "blocked_reasons": {}
 }

@@ -71,6 +71,7 @@ generation:
     - Tiff
     - TocGenerator
     - ImageExtractor
+    - TableGenerator
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
@@ -85,6 +86,7 @@ generation:
     Tiff: Process
     TocGenerator: Process
     ImageExtractor: Process
+    TableGenerator: Process
 
 validation:
   require_restore: true
@@ -205,10 +207,11 @@ per_type_constraints:
       - "FORBIDDEN: LowCodeSaveOptions — use PdfAConvertOptions instead"
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use PdfAConvertOptions"
   DocConverter:
+    template_first: true
     required:
       - "REQUIRED: new PdfToDocOptions( — use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)"
       - "REQUIRED: new DocConverter().Process(options) — use the LowCode DocConverter plugin"
-      - "REQUIRED: options.SaveFormat = SaveFormat.DocX — set SaveFormat to DocX to get OOXML .docx output (harness-verified magic 50-4B-03-04)"
+      - "REQUIRED: options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX — use fully-qualified SaveFormat.DocX to avoid CS0104 ambiguity with Aspose.Pdf.SaveFormat"
       - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
       - "REQUIRED: options.AddOutput(new FileDataSource( — output added via AddOutput(new FileDataSource(path))"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
@@ -219,6 +222,7 @@ per_type_constraints:
       - "FORBIDDEN: Document.Save(SaveFormat.DocX) — this is core API; use LowCode DocConverter.Process() instead"
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
   XlsConverter:
+    template_first: true
     required:
       - "REQUIRED: new PdfToXlsOptions( — use PdfToXlsOptions as the concrete options class"
       - "REQUIRED: new XlsConverter().Process(options) — use the LowCode XlsConverter plugin"
@@ -233,6 +237,7 @@ per_type_constraints:
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
       - "FORBIDDEN: Aspose.Cells — use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
   Html:
+    template_first: true
     required:
       - "REQUIRED: new HtmlToPdfOptions( — use HtmlToPdfOptions as the concrete options class"
       - "REQUIRED: new Html().Process(options) — use the LowCode Html plugin to convert HTML to PDF"
@@ -240,7 +245,7 @@ per_type_constraints:
       - "REQUIRED: AddOutput(new FileDataSource(\"output.pdf\") — PDF output via AddOutput(new FileDataSource(\"output.pdf\"))"
       - "REQUIRED: File.WriteAllText(\"input.html\", — create the HTML input file programmatically before calling Process (use File.WriteAllText or System.IO.File.WriteAllText)"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for Html, HtmlToPdfOptions, FileDataSource)"
-      - "REQUIRED: <html> tag in HTML input content — the input file must be valid HTML"
+      - "REQUIRED: <html> — the File.WriteAllText input string must contain the html root element"
     forbidden:
       - "FORBIDDEN: new PdfConverterOptions() — PdfConverterOptions is abstract; use HtmlToPdfOptions"
       - "FORBIDDEN: HtmlLoadOptions — this is core Aspose.Pdf API; use LowCode HtmlToPdfOptions instead"
@@ -248,6 +253,7 @@ per_type_constraints:
       - "FORBIDDEN: input.pdf as input to Html plugin — Html plugin takes HTML file input, NOT PDF input"
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract"
   Jpeg:
+    template_first: true
     required:
       - "REQUIRED: new JpegOptions( — use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)"
       - "REQUIRED: new Jpeg().Process(options) — use the LowCode Jpeg plugin to convert PDF to JPEG image"
@@ -262,6 +268,7 @@ per_type_constraints:
       - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)"
       - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
   Png:
+    template_first: true
     required:
       - "REQUIRED: new PngOptions( — use PngOptions as the concrete options class (NOT PluginOptions which is abstract)"
       - "REQUIRED: new Png().Process(options) — use the LowCode Png plugin to convert PDF to PNG image"
@@ -277,6 +284,7 @@ per_type_constraints:
       - "FORBIDDEN: .OutputDataSources — IOperationResult has no OutputDataSources property"
       - "FORBIDDEN: result.ResultCollection[0].Path — IOperationResult has no Path property; use the output path you provided to AddOutput()"
   Tiff:
+    template_first: true
     required:
       - "REQUIRED: new TiffOptions( — use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)"
       - "REQUIRED: new Tiff().Process(options) — use the LowCode Tiff plugin to convert PDF to TIFF image"
@@ -319,3 +327,49 @@ per_type_constraints:
       - "FORBIDDEN: File.Exists(outputPath) — ImageExtractor stores extracted images in ResultCollection, not a file path"
       - "FORBIDDEN: options.AddOutput — ImageExtractor is an extractor (like TextExtractor); output is in ResultCollection, no AddOutput needed"
       - "FORBIDDEN: PdfToImage — abstract class, not directly instantiable"
+  TableGenerator:
+    template_first: true
+    required:
+      - "REQUIRED: TableOptions.Create() — use the static factory method to create options (NOT new TableOptions())"
+      - "REQUIRED: new TableGenerator().Process(options) — use the LowCode TableGenerator plugin"
+      - "REQUIRED: .AddTable() — call AddTable() on TableOptions to get a TableBuilder"
+      - "REQUIRED: .AddRow() — call AddRow() on TableBuilder to get a TableRowBuilder"
+      - "REQUIRED: .AddCell() — call AddCell() on TableRowBuilder to get a TableCellBuilder"
+      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: options.AddOutput(new FileDataSource( — PDF output added via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for TableGenerator, TableOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment paragraph content)"
+      - "REQUIRED: result.ResultCollection.Count > 0 — validate that TableGenerator produced output"
+    forbidden:
+      - "FORBIDDEN: new TableOptions() without .Create() — use TableOptions.Create() factory method"
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use TableOptions.Create()"
+      - "FORBIDDEN: Document.Pages[1].Paragraphs.Add() — use LowCode TableGenerator, not manual table insertion"
+      - "FORBIDDEN: Aspose.Pdf.Table — use the LowCode fluent builder (TableOptions/TableBuilder/TableRowBuilder/TableCellBuilder)"
+    mandatory_reference_example: |
+      using System;
+      using Aspose.Pdf;
+      using Aspose.Pdf.LowCode;
+      using Aspose.Pdf.Text;
+
+      var document = new Document();
+      document.Pages.Add();
+      document.Save("input.pdf");
+
+      var options = TableOptions.Create()
+          .InsertPageBefore(1)
+          .AddTable()
+              .AddRow()
+                  .AddCell()
+                      .AddParagraph(new TextFragment("Header 1"))
+                  .AddCell()
+                      .AddParagraph(new TextFragment("Header 2"))
+              .AddRow()
+                  .AddCell()
+                      .AddParagraph(new TextFragment("Cell 1"))
+                  .AddCell()
+                      .AddParagraph(new TextFragment("Cell 2"));
+      options.AddInput(new FileDataSource("input.pdf"));
+      options.AddOutput(new FileDataSource("output.pdf"));
+      var result = new TableGenerator().Process(options);
+      Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");

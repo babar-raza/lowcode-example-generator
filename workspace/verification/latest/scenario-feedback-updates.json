@@ -1,22 +1,5 @@
 {
-  "total_feedback_updates": 2,
-  "demoted_scenarios": 2,
-  "updates": [
-    {
-      "scenario_id": "pdf-jpeg",
-      "previous_status": "ready",
-      "new_status": "blocked_run_failed",
-      "reason": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat",
-      "evidence_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg",
-      "preserve_failed_attempt": true
-    },
-    {
-      "scenario_id": "pdf-tiff",
-      "previous_status": "ready",
-      "new_status": "blocked_run_failed",
-      "reason": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.",
-      "evidence_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff",
-      "preserve_failed_attempt": true
-    }
-  ]
+  "total_feedback_updates": 0,
+  "demoted_scenarios": 0,
+  "updates": []
 }

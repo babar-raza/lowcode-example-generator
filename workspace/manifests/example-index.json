@@ -1,14 +1,14 @@
 {
   "total_examples": 10,
   "generated": 0,
-  "repaired": 10,
+  "repaired": 3,
   "failed": 0,
   "examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-doc-converter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-doc-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-doc-converter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -16,7 +16,7 @@
         "Aspose.Pdf.LowCode.DocConverter.Dispose",
         "Aspose.Pdf.LowCode.DocConverter.Process"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -41,49 +41,129 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new PdfToDocOptions( \u00e2\u20ac\u201d use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)",
-        "REQUIRED: new DocConverter().Process(options) \u00e2\u20ac\u201d use the LowCode DocConverter plugin",
-        "REQUIRED: options.SaveFormat = SaveFormat.DocX \u00e2\u20ac\u201d set SaveFormat to DocX to get OOXML .docx output (harness-verified magic 50-4B-03-04)",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output added via AddOutput(new FileDataSource(path))",
+        "REQUIRED: new PdfToDocOptions( \u2014 use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)",
+        "REQUIRED: new DocConverter().Process(options) \u2014 use the LowCode DocConverter plugin",
+        "REQUIRED: options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX \u2014 use fully-qualified SaveFormat.DocX to avoid CS0104 ambiguity with Aspose.Pdf.SaveFormat",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 output added via AddOutput(new FileDataSource(path))",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
         "REQUIRED: using Aspose.Pdf.LowCode; (for DocConverter, PdfToDocOptions, FileDataSource, SaveFormat)",
         "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
-        "FORBIDDEN: new PdfConverterOptions() \u00e2\u20ac\u201d PdfConverterOptions is abstract; use PdfToDocOptions instead",
-        "FORBIDDEN: Document.Save(SaveFormat.DocX) \u00e2\u20ac\u201d this is core API; use LowCode DocConverter.Process() instead",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract"
+        "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use PdfToDocOptions instead",
+        "FORBIDDEN: Document.Save(SaveFormat.DocX) \u2014 this is core API; use LowCode DocConverter.Process() instead",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract"
       ],
       "family_name": "pdf",
       "type_short": "docconverter",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: new PdfToDocOptions( \u00e2\u20ac\u201d use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)",
-          "REQUIRED: new DocConverter().Process(options) \u00e2\u20ac\u201d use the LowCode DocConverter plugin",
-          "REQUIRED: options.SaveFormat = SaveFormat.DocX \u00e2\u20ac\u201d set SaveFormat to DocX to get OOXML .docx output (harness-verified magic 50-4B-03-04)",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output added via AddOutput(new FileDataSource(path))",
+          "REQUIRED: new PdfToDocOptions( \u2014 use PdfToDocOptions as the concrete options class (NOT PdfConverterOptions which is abstract)",
+          "REQUIRED: new DocConverter().Process(options) \u2014 use the LowCode DocConverter plugin",
+          "REQUIRED: options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX \u2014 use fully-qualified SaveFormat.DocX to avoid CS0104 ambiguity with Aspose.Pdf.SaveFormat",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 output added via AddOutput(new FileDataSource(path))",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
           "REQUIRED: using Aspose.Pdf.LowCode; (for DocConverter, PdfToDocOptions, FileDataSource, SaveFormat)",
           "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
         ],
         "forbidden": [
-          "FORBIDDEN: new PdfConverterOptions() \u00e2\u20ac\u201d PdfConverterOptions is abstract; use PdfToDocOptions instead",
-          "FORBIDDEN: Document.Save(SaveFormat.DocX) \u00e2\u20ac\u201d this is core API; use LowCode DocConverter.Process() instead",
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract"
+          "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use PdfToDocOptions instead",
+          "FORBIDDEN: Document.Save(SaveFormat.DocX) \u2014 this is core API; use LowCode DocConverter.Process() instead",
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract"
+        ]
+      }
+    },
+    {
+      "scenario_id": "pdf-html",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-html",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-html\\pdf-html.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-html\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.PDF",
+      "claimed_symbols": [
+        "Aspose.Pdf.LowCode.Html",
+        "Aspose.Pdf.LowCode.Html.Dispose",
+        "Aspose.Pdf.LowCode.Html.Process"
+      ],
+      "status": "generated_template_first",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: Html plugin converts HTML -> PDF. Input MUST be an HTML file, NOT a PDF.",
+        "REQUIRED: create HTML input file: File.WriteAllText(\"input.html\", \"<html><body><h1>Hello</h1></body></html>\");",
+        "REQUIRED: use HtmlToPdfOptions as the options class (NOT PluginOptions, NOT PdfConverterOptions)",
+        "REQUIRED: options.AddInput(new FileDataSource(\"input.html\")) \u2014 HTML file as input",
+        "REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) \u2014 PDF file as output",
+        "REQUIRED: new Html().Process(options) \u2014 use the LowCode Html plugin",
+        "FORBIDDEN: new Aspose.Pdf.Document() for Html plugin \u2014 no PDF fixture needed; input is HTML",
+        "FORBIDDEN: TextFragment for Html plugin \u2014 input is an HTML string, not a PDF document",
+        "FORBIDDEN: AddInput(new FileDataSource(\"input.pdf\")) \u2014 Html plugin takes HTML file input, NOT PDF",
+        "FORBIDDEN: HtmlLoadOptions \u2014 use HtmlToPdfOptions (LowCode namespace)",
+        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
+        "REQUIRED: new HtmlToPdfOptions( \u2014 use HtmlToPdfOptions as the concrete options class",
+        "REQUIRED: new Html().Process(options) \u2014 use the LowCode Html plugin to convert HTML to PDF",
+        "REQUIRED: AddInput(new FileDataSource(\"input.html\") \u2014 input MUST be an HTML file (var name may differ; .AddInput must receive FileDataSource with input.html)",
+        "REQUIRED: AddOutput(new FileDataSource(\"output.pdf\") \u2014 PDF output via AddOutput(new FileDataSource(\"output.pdf\"))",
+        "REQUIRED: File.WriteAllText(\"input.html\", \u2014 create the HTML input file programmatically before calling Process (use File.WriteAllText or System.IO.File.WriteAllText)",
+        "REQUIRED: using Aspose.Pdf.LowCode; (for Html, HtmlToPdfOptions, FileDataSource)",
+        "REQUIRED: <html> \u2014 the File.WriteAllText input string must contain the html root element",
+        "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use HtmlToPdfOptions",
+        "FORBIDDEN: HtmlLoadOptions \u2014 this is core Aspose.Pdf API; use LowCode HtmlToPdfOptions instead",
+        "FORBIDDEN: Document(htmlFile) \u2014 this is core Aspose.Pdf constructor; use LowCode Html.Process() instead",
+        "FORBIDDEN: input.pdf as input to Html plugin \u2014 Html plugin takes HTML file input, NOT PDF input",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract"
+      ],
+      "family_name": "pdf",
+      "type_short": "html",
+      "type_constraints": {
+        "template_first": true,
+        "required": [
+          "REQUIRED: new HtmlToPdfOptions( \u2014 use HtmlToPdfOptions as the concrete options class",
+          "REQUIRED: new Html().Process(options) \u2014 use the LowCode Html plugin to convert HTML to PDF",
+          "REQUIRED: AddInput(new FileDataSource(\"input.html\") \u2014 input MUST be an HTML file (var name may differ; .AddInput must receive FileDataSource with input.html)",
+          "REQUIRED: AddOutput(new FileDataSource(\"output.pdf\") \u2014 PDF output via AddOutput(new FileDataSource(\"output.pdf\"))",
+          "REQUIRED: File.WriteAllText(\"input.html\", \u2014 create the HTML input file programmatically before calling Process (use File.WriteAllText or System.IO.File.WriteAllText)",
+          "REQUIRED: using Aspose.Pdf.LowCode; (for Html, HtmlToPdfOptions, FileDataSource)",
+          "REQUIRED: <html> \u2014 the File.WriteAllText input string must contain the html root element"
+        ],
+        "forbidden": [
+          "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use HtmlToPdfOptions",
+          "FORBIDDEN: HtmlLoadOptions \u2014 this is core Aspose.Pdf API; use LowCode HtmlToPdfOptions instead",
+          "FORBIDDEN: Document(htmlFile) \u2014 this is core Aspose.Pdf constructor; use LowCode Html.Process() instead",
+          "FORBIDDEN: input.pdf as input to Html plugin \u2014 Html plugin takes HTML file input, NOT PDF input",
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract"
         ]
       }
     },
     {
       "scenario_id": "pdf-jpeg",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-jpeg",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-jpeg\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
         "Aspose.Pdf.LowCode.Jpeg"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -108,102 +188,44 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new JpegOptions( \u00e2\u20ac\u201d use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)",
-        "REQUIRED: new Jpeg().Process(options) \u00e2\u20ac\u201d use the LowCode Jpeg plugin to convert PDF to JPEG image",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))",
+        "REQUIRED: new JpegOptions( \u2014 use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)",
+        "REQUIRED: new Jpeg().Process(options) \u2014 use the LowCode Jpeg plugin to convert PDF to JPEG image",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))",
+        "REQUIRED: \"output.jpg\" \u2014 JPEG output filename MUST be output.jpg (not output.pdf, not output.jpeg). The Jpeg plugin writes a .jpg file, never a .pdf.",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
         "REQUIRED: using Aspose.Pdf.LowCode; (for Jpeg, JpegOptions, FileDataSource)",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use JpegOptions instead",
-        "FORBIDDEN: ImageDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Jpeg plugin instead",
-        "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-        "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use JpegOptions instead",
+        "FORBIDDEN: ImageDevice or PdfConverter \u2014 use LowCode Jpeg plugin instead",
+        "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
+        "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
       ],
       "family_name": "pdf",
       "type_short": "jpeg",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: new JpegOptions( \u00e2\u20ac\u201d use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)",
-          "REQUIRED: new Jpeg().Process(options) \u00e2\u20ac\u201d use the LowCode Jpeg plugin to convert PDF to JPEG image",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))",
+          "REQUIRED: new JpegOptions( \u2014 use JpegOptions as the concrete options class (NOT PluginOptions which is abstract)",
+          "REQUIRED: new Jpeg().Process(options) \u2014 use the LowCode Jpeg plugin to convert PDF to JPEG image",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 JPEG output added via AddOutput(new FileDataSource(\"output.jpg\"))",
+          "REQUIRED: \"output.jpg\" \u2014 JPEG output filename MUST be output.jpg (not output.pdf, not output.jpeg). The Jpeg plugin writes a .jpg file, never a .pdf.",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
           "REQUIRED: using Aspose.Pdf.LowCode; (for Jpeg, JpegOptions, FileDataSource)"
         ],
         "forbidden": [
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use JpegOptions instead",
-          "FORBIDDEN: ImageDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Jpeg plugin instead",
-          "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-          "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
-        ]
-      }
-    },
-    {
-      "scenario_id": "pdf-merger",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger\\pdf-merger.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-merger\\Program.cs",
-      "target_framework": "net8.0",
-      "package_id": "Aspose.PDF",
-      "claimed_symbols": [
-        "Aspose.Pdf.LowCode.Merger",
-        "Aspose.Pdf.LowCode.Merger.Process"
-      ],
-      "status": "repaired",
-      "input_strategy": "programmatic_input",
-      "input_files": [],
-      "placed_fixtures": [],
-      "pdf_constraints": [
-        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
-        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
-        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
-        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
-        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
-        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
-        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
-        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
-        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
-        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
-        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
-        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
-        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
-        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
-        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
-        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
-        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
-        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
-        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
-        "REQUIRED: options class is 'MergeOptions' \u2014 do NOT use any other class name",
-        "REQUIRED: plugin class is 'Merger' \u2014 do NOT use any other class name",
-        "REQUIRED: exact usage pattern:\n    var options = new MergeOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Merger().Process(options);",
-        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u00e2\u20ac\u201d TextFragment lives in Aspose.Pdf.Text namespace)",
-        "REQUIRED: new MergeOptions( \u00e2\u20ac\u201d use MergeOptions as the concrete options class for Merger",
-        "REQUIRED: new Merger().Process(options) \u00e2\u20ac\u201d use the LowCode Merger plugin, not PdfFileEditor",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d each input PDF must be added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output must be added via AddOutput(new FileDataSource(path))",
-        "FORBIDDEN: PdfFileEditor \u00e2\u20ac\u201d this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
-      ],
-      "family_name": "pdf",
-      "type_short": "merger",
-      "type_constraints": {
-        "required": [
-          "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u00e2\u20ac\u201d TextFragment lives in Aspose.Pdf.Text namespace)",
-          "REQUIRED: new MergeOptions( \u00e2\u20ac\u201d use MergeOptions as the concrete options class for Merger",
-          "REQUIRED: new Merger().Process(options) \u00e2\u20ac\u201d use the LowCode Merger plugin, not PdfFileEditor",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d each input PDF must be added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output must be added via AddOutput(new FileDataSource(path))"
-        ],
-        "forbidden": [
-          "FORBIDDEN: PdfFileEditor \u00e2\u20ac\u201d this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use JpegOptions instead",
+          "FORBIDDEN: ImageDevice or PdfConverter \u2014 use LowCode Jpeg plugin instead",
+          "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
+          "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
         ]
       }
     },
     {
       "scenario_id": "pdf-optimizer",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-optimizer\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-optimizer",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-optimizer\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -238,22 +260,22 @@
         "REQUIRED: plugin class is 'Optimizer' \u2014 do NOT use any other class name",
         "REQUIRED: exact usage pattern:\n    var options = new OptimizeOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Optimizer().Process(options);",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new Optimizer().Process(options) \u00e2\u20ac\u201d use the LowCode Optimizer plugin"
+        "REQUIRED: new Optimizer().Process(options) \u2014 use the LowCode Optimizer plugin"
       ],
       "family_name": "pdf",
       "type_short": "optimizer",
       "type_constraints": {
         "required": [
-          "REQUIRED: new Optimizer().Process(options) \u00e2\u20ac\u201d use the LowCode Optimizer plugin"
+          "REQUIRED: new Optimizer().Process(options) \u2014 use the LowCode Optimizer plugin"
         ],
         "forbidden": []
       }
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-pdf-aconverter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -285,55 +307,55 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new PdfAConverter().Process(options) \u00e2\u20ac\u201d use the LowCode PdfAConverter plugin",
+        "REQUIRED: new PdfAConverter().Process(options) \u2014 use the LowCode PdfAConverter plugin",
         "REQUIRED: using Aspose.Pdf.LowCode; (for PdfAConverter and FileDataSource)",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
-        "REQUIRED: new PdfAConvertOptions( \u00e2\u20ac\u201d use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d input must be added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output must be added via AddOutput(new FileDataSource(path))",
-        "REQUIRED: new Document( \u00e2\u20ac\u201d programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()",
-        "FORBIDDEN: PdfFormatConversionOptions \u00e2\u20ac\u201d use LowCode PdfAConverter with its own options class",
-        "FORBIDDEN: Document.Convert() \u00e2\u20ac\u201d use LowCode PdfAConverter.Process() instead",
-        "FORBIDDEN: PdfSaveOptions with PDF/A standard \u00e2\u20ac\u201d use LowCode PdfAConverter",
-        "FORBIDDEN: FileSaveTarget as AddOutput argument \u00e2\u20ac\u201d use FileDataSource(path) instead",
-        "FORBIDDEN: LowCodeLoadOptions \u00e2\u20ac\u201d use PdfAConvertOptions instead",
-        "FORBIDDEN: LowCodeSaveOptions \u00e2\u20ac\u201d use PdfAConvertOptions instead",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use PdfAConvertOptions"
+        "REQUIRED: new PdfAConvertOptions( \u2014 use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 input must be added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 output must be added via AddOutput(new FileDataSource(path))",
+        "REQUIRED: new Document( \u2014 programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()",
+        "FORBIDDEN: PdfFormatConversionOptions \u2014 use LowCode PdfAConverter with its own options class",
+        "FORBIDDEN: Document.Convert() \u2014 use LowCode PdfAConverter.Process() instead",
+        "FORBIDDEN: PdfSaveOptions with PDF/A standard \u2014 use LowCode PdfAConverter",
+        "FORBIDDEN: FileSaveTarget as AddOutput argument \u2014 use FileDataSource(path) instead",
+        "FORBIDDEN: LowCodeLoadOptions \u2014 use PdfAConvertOptions instead",
+        "FORBIDDEN: LowCodeSaveOptions \u2014 use PdfAConvertOptions instead",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use PdfAConvertOptions"
       ],
       "family_name": "pdf",
       "type_short": "pdfaconverter",
       "type_constraints": {
         "required": [
-          "REQUIRED: new PdfAConverter().Process(options) \u00e2\u20ac\u201d use the LowCode PdfAConverter plugin",
+          "REQUIRED: new PdfAConverter().Process(options) \u2014 use the LowCode PdfAConverter plugin",
           "REQUIRED: using Aspose.Pdf.LowCode; (for PdfAConverter and FileDataSource)",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
-          "REQUIRED: new PdfAConvertOptions( \u00e2\u20ac\u201d use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d input must be added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output must be added via AddOutput(new FileDataSource(path))",
-          "REQUIRED: new Document( \u00e2\u20ac\u201d programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()"
+          "REQUIRED: new PdfAConvertOptions( \u2014 use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 input must be added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 output must be added via AddOutput(new FileDataSource(path))",
+          "REQUIRED: new Document( \u2014 programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()"
         ],
         "forbidden": [
-          "FORBIDDEN: PdfFormatConversionOptions \u00e2\u20ac\u201d use LowCode PdfAConverter with its own options class",
-          "FORBIDDEN: Document.Convert() \u00e2\u20ac\u201d use LowCode PdfAConverter.Process() instead",
-          "FORBIDDEN: PdfSaveOptions with PDF/A standard \u00e2\u20ac\u201d use LowCode PdfAConverter",
-          "FORBIDDEN: FileSaveTarget as AddOutput argument \u00e2\u20ac\u201d use FileDataSource(path) instead",
-          "FORBIDDEN: LowCodeLoadOptions \u00e2\u20ac\u201d use PdfAConvertOptions instead",
-          "FORBIDDEN: LowCodeSaveOptions \u00e2\u20ac\u201d use PdfAConvertOptions instead",
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use PdfAConvertOptions"
+          "FORBIDDEN: PdfFormatConversionOptions \u2014 use LowCode PdfAConverter with its own options class",
+          "FORBIDDEN: Document.Convert() \u2014 use LowCode PdfAConverter.Process() instead",
+          "FORBIDDEN: PdfSaveOptions with PDF/A standard \u2014 use LowCode PdfAConverter",
+          "FORBIDDEN: FileSaveTarget as AddOutput argument \u2014 use FileDataSource(path) instead",
+          "FORBIDDEN: LowCodeLoadOptions \u2014 use PdfAConvertOptions instead",
+          "FORBIDDEN: LowCodeSaveOptions \u2014 use PdfAConvertOptions instead",
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use PdfAConvertOptions"
         ]
       }
     },
     {
       "scenario_id": "pdf-png",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png\\pdf-png.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-png\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-png",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-png\\pdf-png.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-png\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
         "Aspose.Pdf.LowCode.Png"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -358,48 +380,54 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new PngOptions( \u00e2\u20ac\u201d use PngOptions as the concrete options class (NOT PluginOptions which is abstract)",
-        "REQUIRED: new Png().Process(options) \u00e2\u20ac\u201d use the LowCode Png plugin to convert PDF to PNG image",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d PNG output added via AddOutput(new FileDataSource(\"output.png\"))",
+        "REQUIRED: new PngOptions( \u2014 use PngOptions as the concrete options class (NOT PluginOptions which is abstract)",
+        "REQUIRED: new Png().Process(options) \u2014 use the LowCode Png plugin to convert PDF to PNG image",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 PNG output added via AddOutput(new FileDataSource(\"output.png\"))",
+        "REQUIRED: result.ResultCollection.Count > 0 \u2014 validate using result.ResultCollection.Count, NOT File.Exists. The Png plugin creates page-numbered files (e.g. output_0.png); File.Exists(\"output.png\") always returns false.",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
         "REQUIRED: using Aspose.Pdf.LowCode; (for Png, PngOptions, FileDataSource)",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use PngOptions instead",
-        "FORBIDDEN: ImageDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Png plugin instead",
-        "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-        "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use PngOptions instead",
+        "FORBIDDEN: ImageDevice or PdfConverter \u2014 use LowCode Png plugin instead",
+        "FORBIDDEN: File.Exists(\"output.png\") \u2014 the Png plugin creates page-numbered output files (output_0.png etc); File.Exists will always return false. Use result.ResultCollection.Count > 0 instead.",
+        "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property",
+        "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
       ],
       "family_name": "pdf",
       "type_short": "png",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: new PngOptions( \u00e2\u20ac\u201d use PngOptions as the concrete options class (NOT PluginOptions which is abstract)",
-          "REQUIRED: new Png().Process(options) \u00e2\u20ac\u201d use the LowCode Png plugin to convert PDF to PNG image",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d PNG output added via AddOutput(new FileDataSource(\"output.png\"))",
+          "REQUIRED: new PngOptions( \u2014 use PngOptions as the concrete options class (NOT PluginOptions which is abstract)",
+          "REQUIRED: new Png().Process(options) \u2014 use the LowCode Png plugin to convert PDF to PNG image",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 PNG output added via AddOutput(new FileDataSource(\"output.png\"))",
+          "REQUIRED: result.ResultCollection.Count > 0 \u2014 validate using result.ResultCollection.Count, NOT File.Exists. The Png plugin creates page-numbered files (e.g. output_0.png); File.Exists(\"output.png\") always returns false.",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
           "REQUIRED: using Aspose.Pdf.LowCode; (for Png, PngOptions, FileDataSource)"
         ],
         "forbidden": [
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use PngOptions instead",
-          "FORBIDDEN: ImageDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Png plugin instead",
-          "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-          "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use PngOptions instead",
+          "FORBIDDEN: ImageDevice or PdfConverter \u2014 use LowCode Png plugin instead",
+          "FORBIDDEN: File.Exists(\"output.png\") \u2014 the Png plugin creates page-numbered output files (output_0.png etc); File.Exists will always return false. Use result.ResultCollection.Count > 0 instead.",
+          "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property",
+          "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
         ]
       }
     },
     {
-      "scenario_id": "pdf-splitter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter\\pdf-splitter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-splitter\\Program.cs",
+      "scenario_id": "pdf-table-generator",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-table-generator",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-table-generator\\pdf-table-generator.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-table-generator\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
-        "Aspose.Pdf.LowCode.Splitter",
-        "Aspose.Pdf.LowCode.Splitter.Process"
+        "Aspose.Pdf.LowCode.TableGenerator",
+        "Aspose.Pdf.LowCode.TableGenerator.Dispose",
+        "Aspose.Pdf.LowCode.TableGenerator.Process"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -423,31 +451,54 @@
         "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
-        "REQUIRED: options class is 'SplitOptions' \u2014 do NOT use any other class name",
-        "REQUIRED: plugin class is 'Splitter' \u2014 do NOT use any other class name",
-        "REQUIRED: exact usage pattern:\n    var options = new SplitOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Splitter().Process(options);",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u00e2\u20ac\u201d Splitter fixture may use TextFragment to add page content)",
-        "REQUIRED: new Splitter().Process(options) \u00e2\u20ac\u201d use the LowCode Splitter plugin, not PdfFileEditor",
-        "FORBIDDEN: PdfFileEditor \u00e2\u20ac\u201d use Aspose.Pdf.LowCode.Splitter instead"
+        "REQUIRED: TableOptions.Create() \u2014 use the static factory method to create options (NOT new TableOptions())",
+        "REQUIRED: new TableGenerator().Process(options) \u2014 use the LowCode TableGenerator plugin",
+        "REQUIRED: .AddTable() \u2014 call AddTable() on TableOptions to get a TableBuilder",
+        "REQUIRED: .AddRow() \u2014 call AddRow() on TableBuilder to get a TableRowBuilder",
+        "REQUIRED: .AddCell() \u2014 call AddCell() on TableRowBuilder to get a TableCellBuilder",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 PDF output added via AddOutput(new FileDataSource(path))",
+        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+        "REQUIRED: using Aspose.Pdf.LowCode; (for TableGenerator, TableOptions, FileDataSource)",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment paragraph content)",
+        "REQUIRED: result.ResultCollection.Count > 0 \u2014 validate that TableGenerator produced output",
+        "FORBIDDEN: new TableOptions() without .Create() \u2014 use TableOptions.Create() factory method",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use TableOptions.Create()",
+        "FORBIDDEN: Document.Pages[1].Paragraphs.Add() \u2014 use LowCode TableGenerator, not manual table insertion",
+        "FORBIDDEN: Aspose.Pdf.Table \u2014 use the LowCode fluent builder (TableOptions/TableBuilder/TableRowBuilder/TableCellBuilder)"
       ],
       "family_name": "pdf",
-      "type_short": "splitter",
+      "type_short": "tablegenerator",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation \u00e2\u20ac\u201d Splitter fixture may use TextFragment to add page content)",
-          "REQUIRED: new Splitter().Process(options) \u00e2\u20ac\u201d use the LowCode Splitter plugin, not PdfFileEditor"
+          "REQUIRED: TableOptions.Create() \u2014 use the static factory method to create options (NOT new TableOptions())",
+          "REQUIRED: new TableGenerator().Process(options) \u2014 use the LowCode TableGenerator plugin",
+          "REQUIRED: .AddTable() \u2014 call AddTable() on TableOptions to get a TableBuilder",
+          "REQUIRED: .AddRow() \u2014 call AddRow() on TableBuilder to get a TableRowBuilder",
+          "REQUIRED: .AddCell() \u2014 call AddCell() on TableRowBuilder to get a TableCellBuilder",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 PDF output added via AddOutput(new FileDataSource(path))",
+          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+          "REQUIRED: using Aspose.Pdf.LowCode; (for TableGenerator, TableOptions, FileDataSource)",
+          "REQUIRED: using Aspose.Pdf.Text; (for TextFragment paragraph content)",
+          "REQUIRED: result.ResultCollection.Count > 0 \u2014 validate that TableGenerator produced output"
         ],
         "forbidden": [
-          "FORBIDDEN: PdfFileEditor \u00e2\u20ac\u201d use Aspose.Pdf.LowCode.Splitter instead"
-        ]
+          "FORBIDDEN: new TableOptions() without .Create() \u2014 use TableOptions.Create() factory method",
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use TableOptions.Create()",
+          "FORBIDDEN: Document.Pages[1].Paragraphs.Add() \u2014 use LowCode TableGenerator, not manual table insertion",
+          "FORBIDDEN: Aspose.Pdf.Table \u2014 use the LowCode fluent builder (TableOptions/TableBuilder/TableRowBuilder/TableCellBuilder)"
+        ],
+        "mandatory_reference_example": "using System;\nusing Aspose.Pdf;\nusing Aspose.Pdf.LowCode;\nusing Aspose.Pdf.Text;\n\nvar document = new Document();\ndocument.Pages.Add();\ndocument.Save(\"input.pdf\");\n\nvar options = TableOptions.Create()\n    .InsertPageBefore(1)\n    .AddTable()\n        .AddRow()\n            .AddCell()\n                .AddParagraph(new TextFragment(\"Header 1\"))\n            .AddCell()\n                .AddParagraph(new TextFragment(\"Header 2\"))\n        .AddRow()\n            .AddCell()\n                .AddParagraph(new TextFragment(\"Cell 1\"))\n            .AddCell()\n                .AddParagraph(new TextFragment(\"Cell 2\"));\noptions.AddInput(new FileDataSource(\"input.pdf\"));\noptions.AddOutput(new FileDataSource(\"output.pdf\"));\nvar result = new TableGenerator().Process(options);\nConsole.WriteLine(result.ResultCollection.Count > 0 ? \"Table added\" : \"No output\");\n"
       }
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-text-extractor\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-text-extractor",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-text-extractor\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -489,29 +540,29 @@
         "FORBIDDEN: result.ResultCollection[0].Value \u2014 StringResult has no .Value property; use .Text (via cast or pattern match)",
         "REQUIRED: add 'using Aspose.Pdf.Text;' if you use TextFragment to build the input PDF",
         "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
-        "REQUIRED: new TextExtractor().Process(options) \u00e2\u20ac\u201d use the LowCode TextExtractor plugin"
+        "REQUIRED: new TextExtractor().Process(options) \u2014 use the LowCode TextExtractor plugin"
       ],
       "family_name": "pdf",
       "type_short": "textextractor",
       "type_constraints": {
         "required": [
           "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
-          "REQUIRED: new TextExtractor().Process(options) \u00e2\u20ac\u201d use the LowCode TextExtractor plugin"
+          "REQUIRED: new TextExtractor().Process(options) \u2014 use the LowCode TextExtractor plugin"
         ],
         "forbidden": []
       }
     },
     {
       "scenario_id": "pdf-tiff",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-tiff",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-tiff\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
         "Aspose.Pdf.LowCode.Tiff"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -536,41 +587,44 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new TiffOptions( \u00e2\u20ac\u201d use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)",
-        "REQUIRED: new Tiff().Process(options) \u00e2\u20ac\u201d use the LowCode Tiff plugin to convert PDF to TIFF image",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))",
+        "REQUIRED: new TiffOptions( \u2014 use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)",
+        "REQUIRED: new Tiff().Process(options) \u2014 use the LowCode Tiff plugin to convert PDF to TIFF image",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))",
+        "REQUIRED: \"output.tiff\" \u2014 TIFF output filename MUST be output.tiff (four letters, not output.tif). The Tiff plugin writes a .tiff file.",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
         "REQUIRED: using Aspose.Pdf.LowCode; (for Tiff, TiffOptions, FileDataSource)",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use TiffOptions instead",
-        "FORBIDDEN: TiffDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Tiff plugin instead",
-        "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-        "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use TiffOptions instead",
+        "FORBIDDEN: TiffDevice or PdfConverter \u2014 use LowCode Tiff plugin instead",
+        "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
+        "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
       ],
       "family_name": "pdf",
       "type_short": "tiff",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: new TiffOptions( \u00e2\u20ac\u201d use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)",
-          "REQUIRED: new Tiff().Process(options) \u00e2\u20ac\u201d use the LowCode Tiff plugin to convert PDF to TIFF image",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))",
+          "REQUIRED: new TiffOptions( \u2014 use TiffOptions as the concrete options class (NOT PluginOptions which is abstract)",
+          "REQUIRED: new Tiff().Process(options) \u2014 use the LowCode Tiff plugin to convert PDF to TIFF image",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 TIFF output added via AddOutput(new FileDataSource(\"output.tiff\"))",
+          "REQUIRED: \"output.tiff\" \u2014 TIFF output filename MUST be output.tiff (four letters, not output.tif). The Tiff plugin writes a .tiff file.",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
           "REQUIRED: using Aspose.Pdf.LowCode; (for Tiff, TiffOptions, FileDataSource)"
         ],
         "forbidden": [
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract; use TiffOptions instead",
-          "FORBIDDEN: TiffDevice or PdfConverter \u00e2\u20ac\u201d use LowCode Tiff plugin instead",
-          "FORBIDDEN: .OutputDataSources \u00e2\u20ac\u201d IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
-          "FORBIDDEN: result.ResultCollection[0].Path \u00e2\u20ac\u201d IOperationResult has no Path property; use the output path you provided to AddOutput()"
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use TiffOptions instead",
+          "FORBIDDEN: TiffDevice or PdfConverter \u2014 use LowCode Tiff plugin instead",
+          "FORBIDDEN: .OutputDataSources \u2014 IOperationResult has no OutputDataSources property; validate by checking File.Exists(outputPath)",
+          "FORBIDDEN: result.ResultCollection[0].Path \u2014 IOperationResult has no Path property; use the output path you provided to AddOutput()"
         ]
       }
     },
     {
       "scenario_id": "pdf-xls-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-xls-converter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-xls-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-185930\\generated\\pdf\\pdf-xls-converter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -578,7 +632,7 @@
         "Aspose.Pdf.LowCode.XlsConverter.Dispose",
         "Aspose.Pdf.LowCode.XlsConverter.Process"
       ],
-      "status": "repaired",
+      "status": "generated_template_first",
       "input_strategy": "programmatic_input",
       "input_files": [],
       "placed_fixtures": [],
@@ -603,35 +657,36 @@
         "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
         "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
         "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
-        "REQUIRED: new PdfToXlsOptions( \u00e2\u20ac\u201d use PdfToXlsOptions as the concrete options class",
-        "REQUIRED: new XlsConverter().Process(options) \u00e2\u20ac\u201d use the LowCode XlsConverter plugin",
-        "REQUIRED: options.Format = PdfToXlsOptions.ExcelFormat.XLSX \u00e2\u20ac\u201d set Format to XLSX for OOXML output (harness-verified magic 50-4B-03-04)",
-        "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-        "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d XLSX output added via AddOutput(new FileDataSource(path))",
+        "REQUIRED: new PdfToXlsOptions( \u2014 use PdfToXlsOptions as the concrete options class",
+        "REQUIRED: new XlsConverter().Process(options) \u2014 use the LowCode XlsConverter plugin",
+        "REQUIRED: options.Format = PdfToXlsOptions.ExcelFormat.XLSX \u2014 set Format to XLSX for OOXML output (harness-verified magic 50-4B-03-04)",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 XLSX output added via AddOutput(new FileDataSource(path))",
         "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
         "REQUIRED: using Aspose.Pdf.LowCode; (for XlsConverter, PdfToXlsOptions, FileDataSource)",
-        "FORBIDDEN: new PdfConverterOptions() \u00e2\u20ac\u201d PdfConverterOptions is abstract; use PdfToXlsOptions instead",
-        "FORBIDDEN: ExcelFormat.XLS without namespace prefix \u00e2\u20ac\u201d use PdfToXlsOptions.ExcelFormat.XLSX (nested enum)",
-        "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract",
-        "FORBIDDEN: Aspose.Cells \u00e2\u20ac\u201d use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
+        "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use PdfToXlsOptions instead",
+        "FORBIDDEN: ExcelFormat.XLS without namespace prefix \u2014 use PdfToXlsOptions.ExcelFormat.XLSX (nested enum)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract",
+        "FORBIDDEN: Aspose.Cells \u2014 use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
       ],
       "family_name": "pdf",
       "type_short": "xlsconverter",
       "type_constraints": {
+        "template_first": true,
         "required": [
-          "REQUIRED: new PdfToXlsOptions( \u00e2\u20ac\u201d use PdfToXlsOptions as the concrete options class",
-          "REQUIRED: new XlsConverter().Process(options) \u00e2\u20ac\u201d use the LowCode XlsConverter plugin",
-          "REQUIRED: options.Format = PdfToXlsOptions.ExcelFormat.XLSX \u00e2\u20ac\u201d set Format to XLSX for OOXML output (harness-verified magic 50-4B-03-04)",
-          "REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d PDF input added via AddInput(new FileDataSource(path))",
-          "REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d XLSX output added via AddOutput(new FileDataSource(path))",
+          "REQUIRED: new PdfToXlsOptions( \u2014 use PdfToXlsOptions as the concrete options class",
+          "REQUIRED: new XlsConverter().Process(options) \u2014 use the LowCode XlsConverter plugin",
+          "REQUIRED: options.Format = PdfToXlsOptions.ExcelFormat.XLSX \u2014 set Format to XLSX for OOXML output (harness-verified magic 50-4B-03-04)",
+          "REQUIRED: options.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: options.AddOutput(new FileDataSource( \u2014 XLSX output added via AddOutput(new FileDataSource(path))",
           "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
           "REQUIRED: using Aspose.Pdf.LowCode; (for XlsConverter, PdfToXlsOptions, FileDataSource)"
         ],
         "forbidden": [
-          "FORBIDDEN: new PdfConverterOptions() \u00e2\u20ac\u201d PdfConverterOptions is abstract; use PdfToXlsOptions instead",
-          "FORBIDDEN: ExcelFormat.XLS without namespace prefix \u00e2\u20ac\u201d use PdfToXlsOptions.ExcelFormat.XLSX (nested enum)",
-          "FORBIDDEN: new PluginOptions() \u00e2\u20ac\u201d PluginOptions is abstract",
-          "FORBIDDEN: Aspose.Cells \u00e2\u20ac\u201d use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
+          "FORBIDDEN: new PdfConverterOptions() \u2014 PdfConverterOptions is abstract; use PdfToXlsOptions instead",
+          "FORBIDDEN: ExcelFormat.XLS without namespace prefix \u2014 use PdfToXlsOptions.ExcelFormat.XLSX (nested enum)",
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract",
+          "FORBIDDEN: Aspose.Cells \u2014 use LowCode XlsConverter only; do not import Aspose.Cells for conversion"
         ]
       }
     }

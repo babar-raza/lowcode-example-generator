@@ -923,13 +923,18 @@ def _check_publisher_evidence(checks: _Checks, prior_run_dir: Path) -> None:
     else:
         try:
             md = json.loads(manifest_file.read_text(encoding="utf-8"))
-            count = md.get("publishable_candidate_count", 0)
+            # Use included_manifest_candidate_count (new safe field) if present,
+            # otherwise fall back to publishable_candidate_count for older manifests.
+            count = md.get(
+                "included_manifest_candidate_count",
+                md.get("publishable_candidate_count", 0),
+            )
             if count == 0:
                 checks.record(
                     "publisher_candidate_count", "fail",
                     actual=str(count),
-                    message="publishable_candidate_count=0 in prior pr-candidate-manifest.json. "
-                            "Nothing to publish."
+                    message="No candidates in prior pr-candidate-manifest.json "
+                            "(included_manifest_candidate_count=0). Nothing to replay."
                 )
             else:
                 checks.record("publisher_candidate_count", "pass",

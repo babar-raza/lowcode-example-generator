@@ -1,19 +1,12 @@
 {
   "total_build_repairs": 1,
-  "total_runtime_repairs": 1,
+  "total_runtime_repairs": 0,
   "attempts": [
     {
-      "scenario_id": "pdf-doc-converter",
+      "scenario_id": "pdf-table-generator",
       "repair_type": "build",
       "attempt": 1,
       "success": true
-    },
-    {
-      "scenario_id": "pdf-tiff",
-      "repair_type": "runtime",
-      "classification": "blocked_invalid_operation",
-      "attempt": 1,
-      "success": false
     }
   ]
 }

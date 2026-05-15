@@ -1,25 +1,16 @@
 {
-  "total_failures": 2,
+  "total_failures": 1,
   "classification_summary": {
-    "unknown_runtime_failure": 1,
-    "blocked_invalid_operation": 1
+    "blocked_missing_fixture": 1
   },
   "classifications": [
     {
-      "scenario_id": "pdf-jpeg",
+      "scenario_id": "pdf-png",
       "exit_code": 3762504530,
-      "classification": "unknown_runtime_failure",
-      "detail": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.Creat",
-      "actionable": false,
-      "recommendation": "Investigate runtime output manually."
-    },
-    {
-      "scenario_id": "pdf-tiff",
-      "exit_code": 3762504530,
-      "classification": "blocked_invalid_operation",
-      "detail": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.",
+      "classification": "blocked_missing_fixture",
+      "detail": "Unhandled exception. System.IO.FileNotFoundException: Output file was not created.",
       "actionable": true,
-      "recommendation": "Operation invalid in current state. Review API usage sequence."
+      "recommendation": "Input file not found. Ensure fixture file is available."
     }
   ]
 }

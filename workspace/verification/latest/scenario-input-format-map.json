@@ -21,6 +21,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-image-extractor",
+      "workflow_type": "ImageExtractor",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name ImageExtractor",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-jpeg",
       "workflow_type": "Jpeg",
       "selected_input_format": ".pdf",
@@ -81,6 +91,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-table-generator",
+      "workflow_type": "TableGenerator",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name TableGenerator",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-text-extractor",
       "workflow_type": "TextExtractor",
       "selected_input_format": ".pdf",
@@ -96,6 +116,16 @@
       "selected_input_format": ".pdf",
       "selected_output_format": ".out",
       "reason": "Inferred from type name Tiff",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "workflow_type": "TocGenerator",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name TocGenerator",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

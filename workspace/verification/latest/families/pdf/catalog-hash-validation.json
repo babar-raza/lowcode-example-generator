@@ -1,8 +1,8 @@
 {
   "family": "pdf",
   "match": true,
-  "current_hash": "402ddee53932f3bb6640975fa96d2fc32c0dab16e8b21d0beb2fa1e5273d2408",
-  "denominator_hash": "402ddee53932f3bb6640975fa96d2fc32c0dab16e8b21d0beb2fa1e5273d2408",
+  "current_hash": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
+  "denominator_hash": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
   "denominator_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\denominators\\pdf.json",
-  "validated_at": "2026-05-14T16:15:28.335190+00:00"
+  "validated_at": "2026-05-15T14:13:52.534237+00:00"
 }

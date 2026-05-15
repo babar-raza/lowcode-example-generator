@@ -422,7 +422,14 @@ class TestMergePrCandidateManifests:
         assert "xls-converter" in ids, "xls-converter (not re-attempted) must be preserved"
         assert "doc-converter" in ids, "doc-converter (not re-attempted) must be preserved"
         assert "html" in ids, "html (new pass) must be in merged"
-        assert merged["publishable_candidate_count"] == 3
+        # included_manifest_candidate_count = all 3 included (current_run + prior_run_preserved)
+        assert merged["included_manifest_candidate_count"] == 3
+        # prior_run_preserved: xls-converter + doc-converter (not reattempted)
+        assert merged["prior_run_preserved_count"] == 2
+        # publishable_candidate_count = SAFE = only current_run (html)
+        assert merged["publishable_candidate_count"] == 1, (
+            "publishable_candidate_count must only count current_run candidates, not prior_run_preserved"
+        )
 
     def test_preserves_old_pass_when_new_run_fails_same_scenario(self):
         """When a new run re-attempts a scenario and FAILS, the old pass is preserved (no regression demotion)."""
@@ -431,7 +438,12 @@ class TestMergePrCandidateManifests:
         merged = merge_pr_candidate_manifests(old, new)
         ids = {e["scenario_id"] for e in merged["included_examples"]}
         assert "xls-converter" in ids, "xls-converter pass must survive new-run regression"
-        assert merged["publishable_candidate_count"] == 1
+        # xls-converter is regression_protected (prior_run_preserved) — NOT live-publishable
+        assert merged["included_manifest_candidate_count"] == 1
+        assert merged["prior_run_preserved_count"] == 1
+        assert merged["publishable_candidate_count"] == 0, (
+            "regression_protected prior_run candidate must not count as publishable"
+        )
 
     def test_new_pass_upgrades_old_pass(self):
         """A new pass for a scenario always replaces the old pass entry."""
@@ -473,7 +485,9 @@ class TestMergePrCandidateManifests:
         ids = {e["scenario_id"] for e in saved["included_examples"]}
         assert "xls-converter" in ids, "xls-converter must survive run-2 regression via merge"
         assert "html" in ids, "html must be in merged manifest"
-        assert saved["publishable_candidate_count"] == 2
+        assert saved["included_manifest_candidate_count"] == 2
+        assert saved["prior_run_preserved_count"] == 1, "xls-converter is regression_protected"
+        assert saved["publishable_candidate_count"] == 1, "only html (current_run) is live-publishable"
 
     def test_write_manifest_overwrite_when_merge_false(self, tmp_path):
         """write_pr_candidate_manifest with merge_existing=False overwrites (legacy behavior)."""
@@ -504,4 +518,99 @@ class TestMergePrCandidateManifests:
         ids = {e["scenario_id"] for e in saved["included_examples"]}
         assert "tiff" in ids, "tiff must be preserved from global manifest via Rule 3 (prior pass, new run fails)"
         assert "merger" in ids, "merger must be included from new run"
-        assert saved["publishable_candidate_count"] == 2
+        assert saved["included_manifest_candidate_count"] == 2
+        assert saved["prior_run_preserved_count"] == 1, "tiff is regression_protected prior_run"
+        assert saved["publishable_candidate_count"] == 1, "only merger (current_run) is live-publishable"
+
+
+# ---------------------------------------------------------------------------
+# Sprint 17 Lane A — Manifest count semantics safety tests
+# ---------------------------------------------------------------------------
+
+
+class TestManifestCountSemantics:
+    """Verify that publishable_candidate_count is SAFE (current_run only)."""
+
+    def test_prior_run_preserved_not_counted_as_publishable(self):
+        """prior_run_preserved_not_reattempted candidates are included but NOT publishable."""
+        old = _make_manifest(["doc-converter"], [])
+        new = _make_manifest(["merger"], [])  # doc-converter not reattempted
+        merged = merge_pr_candidate_manifests(old, new)
+        # doc-converter is prior_run_preserved_not_reattempted
+        doc_entry = next(e for e in merged["included_examples"] if e["scenario_id"] == "doc-converter")
+        assert doc_entry["candidate_integrity_status"] == "prior_run_preserved_not_reattempted"
+        # It IS in included_manifest_candidate_count
+        assert merged["included_manifest_candidate_count"] == 2
+        # It is NOT in publishable_candidate_count
+        assert merged["publishable_candidate_count"] == 1, (
+            "prior_run_preserved_not_reattempted must not count as publishable"
+        )
+        assert merged["prior_run_preserved_count"] == 1
+        assert merged["live_publishable_count"] == 1
+
+    def test_current_run_candidate_is_live_publishable(self):
+        """A current_run candidate contributes to publishable_candidate_count and live_publishable_count."""
+        old = _make_manifest([], [])
+        new = _make_manifest(["merger"], [])
+        merged = merge_pr_candidate_manifests(old, new)
+        merger_entry = next(e for e in merged["included_examples"] if e["scenario_id"] == "merger")
+        assert merger_entry["candidate_integrity_status"] == "current_run"
+        assert merged["publishable_candidate_count"] == 1
+        assert merged["live_publishable_count"] == 1
+        assert merged["current_run_pr_eligible_count"] == 1
+        assert merged["prior_run_preserved_count"] == 0
+
+    def test_quarantined_candidate_excluded_and_not_publishable(self):
+        """A demoted_quarantined candidate is excluded and never publishable."""
+        old = _make_manifest(["png"], [])
+        new = _make_manifest(["merger"], ["png"])
+        merged = merge_pr_candidate_manifests(old, new, demoted_scenario_ids={"png"})
+        included_ids = {e["scenario_id"] for e in merged["included_examples"]}
+        excluded_ids = {e["scenario_id"] for e in merged["excluded_examples"]}
+        assert "png" not in included_ids
+        assert "png" in excluded_ids
+        assert merged["quarantined_count"] == 1
+        assert merged["publishable_candidate_count"] == 1  # only merger
+        assert merged["live_publishable_count"] == 1
+
+    def test_root_and_family_counts_agree(self):
+        """included_manifest_candidate_count == len(included_examples)."""
+        old = _make_manifest(["a", "b"], [])
+        new = _make_manifest(["c"], [])
+        merged = merge_pr_candidate_manifests(old, new)
+        assert merged["included_manifest_candidate_count"] == len(merged["included_examples"])
+        assert merged["blocked_candidate_count"] == len(merged["excluded_examples"])
+
+    def test_mixed_integrity_counts_are_correct(self):
+        """With current_run + prior_run_preserved + quarantined, all counts are correct."""
+        # Prior: doc-converter, xls-converter, png (quarantined)
+        prior_quarantined = {
+            "scenario_id": "png",
+            "example_path": "old/path",
+            "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+            "blocked_reason": "Demoted",
+            "candidate_integrity_status": "demoted_quarantined",
+        }
+        existing = {
+            "included_examples": [
+                {"scenario_id": "doc-converter", "example_path": "old/path",
+                 "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"},
+                {"scenario_id": "xls-converter", "example_path": "old/path",
+                 "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"},
+            ],
+            "excluded_examples": [prior_quarantined],
+            "exclusion_reasons": {},
+            "dry_run": True, "live_publish_attempted": False,
+            "publishable_candidate_count": 2, "blocked_candidate_count": 1,
+        }
+        # New run: merger (current_run), doc-converter and xls-converter not reattempted
+        new_run = _make_manifest(["merger"], [])
+        merged = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
+        # 3 included: merger(current_run) + doc-converter + xls-converter (prior_run_preserved)
+        assert merged["included_manifest_candidate_count"] == 3
+        assert merged["current_run_pr_eligible_count"] == 1
+        assert merged["prior_run_preserved_count"] == 2
+        assert merged["live_publishable_count"] == 1
+        assert merged["publishable_candidate_count"] == 1
+        assert merged["quarantined_count"] == 1
+        assert merged["blocked_candidate_count"] == 1  # png in excluded

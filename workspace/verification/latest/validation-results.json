@@ -1,7 +1,7 @@
 {
   "total": 10,
-  "passed": 8,
-  "failed": 2,
+  "passed": 10,
+  "failed": 0,
   "results": [
     {
       "scenario_id": "pdf-doc-converter",
@@ -11,66 +11,65 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 966.9060707092285
+        "duration_ms": 1380.737543106079
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1389.09912109375
+        "duration_ms": 3851.64213180542
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3577.2082805633545
+        "duration_ms": 3624.565601348877
       }
     },
     {
-      "scenario_id": "pdf-jpeg",
-      "passed": false,
-      "failure_stage": "run",
-      "restore": {
-        "operation": "restore",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1286.834716796875
-      },
-      "build": {
-        "operation": "build",
-        "success": true,
-        "exit_code": 0,
-        "duration_ms": 1432.5947761535645
-      },
-      "run": {
-        "operation": "run",
-        "success": false,
-        "exit_code": 3762504530,
-        "duration_ms": 2606.454610824585,
-        "stderr": "Unhandled exception. System.IO.IOException: Cannot create 'C:\\Users\\prora\\AppData\\Local\\Temp\\output.pdf' because a file or directory with the same name already exists.\n   at System.IO.FileSystem.CreateDirectory(String fullPath, Byte[] securityDescriptor)\n   at System.IO.Directory.CreateDirectory(String path)\n   at Aspose.Pdf.LowCode.PdfToImage.#=zzBg_pes=(PdfToImageOptions #=zbYULmk8=, ResultContainer #=zbOOFwtRW0n1w)\n   at Aspose.Pdf.LowCode.PdfToImage.Process(IPluginOptions pdfImageOptions)\n   at Program.Main() in C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-jpeg\\Program.cs:line 34\n"
-      }
-    },
-    {
-      "scenario_id": "pdf-merger",
+      "scenario_id": "pdf-html",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1222.332239151001
+        "duration_ms": 3656.0239791870117
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1539.1428470611572
+        "duration_ms": 1384.730577468872
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2014.7180557250977
+        "duration_ms": 3824.836254119873
+      }
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1349.4524955749512
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1805.7866096496582
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2792.2890186309814
       }
     },
     {
@@ -81,19 +80,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1213.7694358825684
+        "duration_ms": 1419.6832180023193
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1506.9820880889893
+        "duration_ms": 1957.2622776031494
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2652.6272296905518
+        "duration_ms": 2090.9886360168457
       }
     },
     {
@@ -104,19 +103,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1332.31782913208
+        "duration_ms": 1194.1313743591309
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1554.1348457336426
+        "duration_ms": 2087.5470638275146
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 3091.0563468933105
+        "duration_ms": 2543.2887077331543
       }
     },
     {
@@ -127,42 +126,42 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1361.8509769439697
+        "duration_ms": 1196.5367794036865
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1718.5797691345215
+        "duration_ms": 2981.8360805511475
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2794.7001457214355
+        "duration_ms": 3210.021495819092
       }
     },
     {
-      "scenario_id": "pdf-splitter",
+      "scenario_id": "pdf-table-generator",
       "passed": true,
       "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1229.5103073120117
+        "duration_ms": 1057.7476024627686
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1416.778326034546
+        "duration_ms": 2020.8265781402588
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2562.5851154327393
+        "duration_ms": 2778.620481491089
       }
     },
     {
@@ -173,43 +172,42 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1236.4897727966309
+        "duration_ms": 1321.9919204711914
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1410.0885391235352
+        "duration_ms": 1498.671531677246
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2446.6333389282227
+        "duration_ms": 3083.8115215301514
       }
     },
     {
       "scenario_id": "pdf-tiff",
-      "passed": false,
-      "failure_stage": "run",
+      "passed": true,
+      "failure_stage": null,
       "restore": {
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 928.6298751831055
+        "duration_ms": 1287.7576351165771
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1209.3160152435303
+        "duration_ms": 2106.748342514038
       },
       "run": {
         "operation": "run",
-        "success": false,
-        "exit_code": 3762504530,
-        "duration_ms": 2984.5826625823975,
-        "stderr": "Unhandled exception. System.InvalidOperationException: Output TIFF was not created.\n   at Program.Main() in C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260514-211320\\generated\\pdf\\pdf-tiff\\Program.cs:line 36\n"
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2812.946319580078
       }
     },
     {
@@ -220,19 +218,19 @@
         "operation": "restore",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1249.0825653076172
+        "duration_ms": 1430.0501346588135
       },
       "build": {
         "operation": "build",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 1392.0526504516602
+        "duration_ms": 2132.863998413086
       },
       "run": {
         "operation": "run",
         "success": true,
         "exit_code": 0,
-        "duration_ms": 2779.8092365264893
+        "duration_ms": 2647.797107696533
       }
     }
   ]

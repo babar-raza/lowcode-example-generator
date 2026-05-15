@@ -2107,7 +2107,7 @@ class TestPdfReferenceExampleInjection:
         reminder = self._get_repair_reminder("docconverter", "DocConverter")
         assert "MANDATORY REFERENCE EXAMPLE for DocConverter" in reminder
         assert "new PdfToDocOptions()" in reminder
-        assert "options.SaveFormat = SaveFormat.DocX" in reminder
+        assert "options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX" in reminder
         assert "new DocConverter().Process(options)" in reminder
 
     def test_xlsconverter_reference_example_injected(self):
@@ -2382,3 +2382,234 @@ class TestPdfNextWaveReferenceInjection(TestPdfImageWaveReferenceInjection):
         """ImageExtractor reference must NOT appear in TocGenerator repair prompt."""
         reminder = self._get_repair_reminder("tocgenerator", "TocGenerator")
         assert "MANDATORY REFERENCE EXAMPLE for ImageExtractor" not in reminder
+
+
+# ---------------------------------------------------------------------------
+# Sprint 17 Lane C — Template-first generation architecture tests
+# Verify that template_first: true in per_type_constraints causes
+# generate_example() to bypass LLM and emit deterministic, validated code.
+# ---------------------------------------------------------------------------
+
+
+def _make_template_first_packet(type_short: str, namespace_type: str) -> object:
+    """Create a PromptPacket with template_first=True for the given PDF type."""
+    from plugin_examples.generator.packet_builder import PromptPacket
+    return PromptPacket(
+        scenario_id=f"pdf-{type_short}",
+        target_type=f"Aspose.Pdf.LowCode.{namespace_type}",
+        target_namespace="Aspose.Pdf.LowCode",
+        target_methods=["Process"],
+        user_prompt="Generate a C# example.",
+        system_prompt="You are a C# developer.",
+        approved_symbols=[],
+        constraints=[],
+        template_hints={},
+        input_strategy="generated",
+        input_files=[],
+        type_details=None,
+        per_type_constraints={namespace_type: {"template_first": True, "required": [], "forbidden": []}},
+    )
+
+
+class TestTemplateFIrstGeneration:
+    """template_first: true causes generate_example to bypass LLM entirely."""
+
+    def test_docconverter_template_first_bypasses_llm(self):
+        """With template_first, LLM callable is never invoked for DocConverter."""
+        packet = _make_template_first_packet("docconverter", "DocConverter")
+        llm_called = []
+
+        def llm_should_not_be_called(prompt, system):
+            llm_called.append(True)
+            return "```csharp\nusing System;\n```"
+
+        example = generate_example(packet, llm_generate=llm_should_not_be_called)
+        assert not llm_called, "LLM must NOT be called when template_first=True"
+        assert example.status == "generated_template_first"
+
+    def test_xlsconverter_template_first_status(self):
+        """XlsConverter template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("xlsconverter", "XlsConverter")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_html_template_first_bypasses_llm(self):
+        """Html (HTML-to-PDF) template-first returns generated_template_first."""
+        packet = _make_template_first_packet("html", "Html")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_jpeg_template_first_bypasses_llm(self):
+        """Jpeg template-first returns generated_template_first."""
+        packet = _make_template_first_packet("jpeg", "Jpeg")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_tiff_template_first_bypasses_llm(self):
+        """Tiff template-first returns generated_template_first."""
+        packet = _make_template_first_packet("tiff", "Tiff")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_png_template_first_bypasses_llm(self):
+        """Png template-first returns generated_template_first."""
+        packet = _make_template_first_packet("png", "Png")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_docconverter_template_contains_required_patterns(self):
+        """DocConverter template must include PdfToDocOptions and SaveFormat.DocX."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("docconverter", "DocConverter")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "PdfToDocOptions" in code
+        assert "SaveFormat.DocX" in code
+        assert "new DocConverter().Process(options)" in code
+        assert "output.docx" in code
+
+    def test_xlsconverter_template_contains_required_patterns(self):
+        """XlsConverter template must include PdfToXlsOptions and ExcelFormat.XLSX."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("xlsconverter", "XlsConverter")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "PdfToXlsOptions" in code
+        assert "PdfToXlsOptions.ExcelFormat.XLSX" in code
+        assert "new XlsConverter().Process(options)" in code
+        assert "output.xlsx" in code
+
+    def test_html_template_contains_required_patterns(self):
+        """Html template must use HtmlToPdfOptions and File.WriteAllText for HTML input."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("html", "Html")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "HtmlToPdfOptions" in code
+        assert "File.WriteAllText" in code
+        assert "input.html" in code
+        assert "new Html().Process(options)" in code
+        assert "output.pdf" in code
+
+    def test_jpeg_template_contains_required_patterns(self):
+        """Jpeg template must use JpegOptions and output.jpg (not output.pdf)."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("jpeg", "Jpeg")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "JpegOptions" in code
+        assert "output.jpg" in code
+        assert "new Jpeg().Process(options)" in code
+        assert "output.pdf" not in code
+
+    def test_tiff_template_contains_required_patterns(self):
+        """Tiff template must use TiffOptions and output.tiff (not output.tif)."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("tiff", "Tiff")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "TiffOptions" in code
+        assert "output.tiff" in code
+        assert "output.tif" not in code.replace("output.tiff", "")
+        assert "new Tiff().Process(options)" in code
+
+    def test_png_template_contains_required_patterns(self):
+        """Png template must use PngOptions and result.ResultCollection.Count (not File.Exists)."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("png", "Png")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "PngOptions" in code
+        assert "output.png" in code
+        assert "new Png().Process(options)" in code
+        assert "result.ResultCollection.Count" in code
+        assert "File.Exists" not in code
+
+    def test_template_first_false_does_not_bypass_llm(self):
+        """When template_first is absent/false, LLM IS called normally."""
+        from plugin_examples.generator.packet_builder import PromptPacket
+        packet = PromptPacket(
+            scenario_id="pdf-merger",
+            target_type="Aspose.Pdf.LowCode.Merger",
+            target_namespace="Aspose.Pdf.LowCode",
+            target_methods=["Process"],
+            user_prompt="Generate a C# example.",
+            system_prompt="You are a C# developer.",
+            approved_symbols=[],
+            constraints=[],
+            template_hints={},
+            input_strategy="generated",
+            input_files=[],
+            type_details=None,
+            per_type_constraints={"Merger": {"required": [], "forbidden": []}},
+        )
+        llm_called = []
+
+        def counting_llm(prompt, system):
+            llm_called.append(True)
+            return "```csharp\nusing System;\nclass P { static void Main() {} }\n```"
+
+        generate_example(packet, llm_generate=counting_llm, max_repairs=0)
+        assert llm_called, "LLM MUST be called when template_first is absent/false"
+
+    def test_template_first_none_per_type_constraints_does_not_bypass_llm(self):
+        """When per_type_constraints is None, LLM is called normally (no template_first)."""
+        from plugin_examples.generator.packet_builder import PromptPacket
+        packet = PromptPacket(
+            scenario_id="pdf-merger",
+            target_type="Aspose.Pdf.LowCode.Merger",
+            target_namespace="Aspose.Pdf.LowCode",
+            target_methods=["Process"],
+            user_prompt="Generate a C# example.",
+            system_prompt="You are a C# developer.",
+            approved_symbols=[],
+            constraints=[],
+            template_hints={},
+            input_strategy="generated",
+            input_files=[],
+            type_details=None,
+            per_type_constraints=None,
+        )
+        llm_called = []
+
+        def counting_llm(prompt, system):
+            llm_called.append(True)
+            return "```csharp\nusing System;\nclass P { static void Main() {} }\n```"
+
+        generate_example(packet, llm_generate=counting_llm, max_repairs=0)
+        assert llm_called
+
+    def test_family_config_loader_uses_utf8_encoding(self):
+        """Loader must open YAML with UTF-8 so em-dash separators in constraints survive."""
+        from plugin_examples.family_config.loader import load_family_config
+        cfg = load_family_config("pipeline/configs/families/pdf.yml")
+        ptc = cfg.per_type_constraints
+        dc = ptc.get("DocConverter", {})
+        # The em-dash separator (U+2014) must round-trip correctly so validation
+        # can strip the description suffix.  If the loader used cp1252 the
+        # constraint would contain â€" instead of — and separation would fail.
+        savefmt_req = next(
+            (r for r in dc.get("required", []) if "SaveFormat.DocX" in r), None
+        )
+        assert savefmt_req is not None
+        # After stripping REQUIRED: prefix and splitting on em-dash the token
+        # must be exactly the code pattern (no mojibake, no description suffix).
+        stripped = savefmt_req.replace("REQUIRED:", "").strip()
+        token = stripped.split("\u2014")[0].strip()  # U+2014 em-dash
+        assert token == "options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX"
+
+    def test_all_template_first_types_pass_validation_with_utf8_config(self):
+        """All 7 template-first types must produce code that passes constraint validation."""
+        from plugin_examples.generator.code_generator import (
+            _validate_code_from_constraints,
+            _generate_deterministic_template_for_scenario,
+        )
+        from plugin_examples.family_config.loader import load_family_config
+        from unittest.mock import MagicMock
+
+        cfg = load_family_config("pipeline/configs/families/pdf.yml")
+        ptc = cfg.per_type_constraints
+
+        for type_name in [
+            "DocConverter", "XlsConverter", "Html",
+            "Jpeg", "Tiff", "Png", "TableGenerator",
+        ]:
+            packet = MagicMock()
+            packet.target_type = f"Aspose.Pdf.LowCode.{type_name}"
+            code = _generate_deterministic_template_for_scenario(packet)
+            issues = _validate_code_from_constraints(code, ptc.get(type_name, {}))
+            assert not issues, f"{type_name} template failed validation: {issues}"

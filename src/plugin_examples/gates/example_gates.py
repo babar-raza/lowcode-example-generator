@@ -273,6 +273,50 @@ def compute_partitioned_verdict(
     return "PARTIAL_PR_READY"
 
 
+def _compute_manifest_counts(included: list[dict], excluded: list[dict]) -> dict:
+    """Compute safe candidate counts with integrity breakdown.
+
+    publishable_candidate_count is SAFE: it equals live_publishable_count, which
+    counts only current_run and replay_validated candidates. Prior-run preserved
+    candidates are included in the manifest but are NOT live-publishable without
+    a replay or current-run pass — they are tracked separately.
+    """
+    current_run = [
+        e for e in included
+        if e.get("candidate_integrity_status", "current_run") == "current_run"
+    ]
+    replay_validated = [
+        e for e in included
+        if e.get("candidate_integrity_status") == "replay_validated"
+    ]
+    prior_run_preserved = [
+        e for e in included
+        if e.get("candidate_integrity_status") in (
+            "prior_run_preserved_not_reattempted",
+            "prior_run_preserved_regression_protected",
+        )
+    ]
+    quarantined = [
+        e for e in excluded
+        if e.get("candidate_integrity_status") == "demoted_quarantined"
+    ]
+    live_publishable = current_run + replay_validated
+    return {
+        "included_manifest_candidate_count": len(included),
+        "current_run_pr_eligible_count": len(current_run),
+        "replay_validated_pr_eligible_count": len(replay_validated),
+        "prior_run_preserved_count": len(prior_run_preserved),
+        "replay_required_count": len(prior_run_preserved),
+        "quarantined_count": len(quarantined),
+        "live_publishable_count": len(live_publishable),
+        "approval_blocked_count": len(live_publishable),
+        # SAFE: publishable_candidate_count = live-publishable only (current_run + replay_validated)
+        # Prior-run preserved candidates do NOT count as publishable.
+        "publishable_candidate_count": len(live_publishable),
+        "blocked_candidate_count": len(excluded),
+    }
+
+
 def build_pr_candidate_manifest(
     example_gates: list[ExampleGateResult],
     dry_run: bool = True,
@@ -299,14 +343,15 @@ def build_pr_candidate_manifest(
             reason = eg.final_example_verdict
             exclusion_reasons.setdefault(reason, []).append(eg.scenario_id)
 
+    # In the initial build all included examples are current_run by definition
+    counts = _compute_manifest_counts(included, excluded)
     return {
         "included_examples": included,
         "excluded_examples": excluded,
         "exclusion_reasons": exclusion_reasons,
         "dry_run": dry_run,
         "live_publish_attempted": not dry_run,
-        "publishable_candidate_count": len(included),
-        "blocked_candidate_count": len(excluded),
+        **counts,
     }
 
 
@@ -534,14 +579,15 @@ def merge_pr_candidate_manifests(
         reason = e.get("final_example_verdict", "unknown")
         exclusion_reasons.setdefault(reason, []).append(e["scenario_id"])
 
+    included_list = list(merged_included.values())
+    counts = _compute_manifest_counts(included_list, merged_excluded)
     return {
-        "included_examples": list(merged_included.values()),
+        "included_examples": included_list,
         "excluded_examples": merged_excluded,
         "exclusion_reasons": exclusion_reasons,
         "dry_run": new_manifest.get("dry_run", True),
         "live_publish_attempted": new_manifest.get("live_publish_attempted", False),
-        "publishable_candidate_count": len(merged_included),
-        "blocked_candidate_count": len(merged_excluded),
+        **counts,
     }
 
 
@@ -593,12 +639,12 @@ def write_pr_candidate_manifest(
             with open(prior_path) as f:
                 existing = json.load(f)
             final_manifest = merge_pr_candidate_manifests(existing, manifest, demoted_scenario_ids=demoted_ids)
-            preserved = final_manifest["publishable_candidate_count"] - manifest.get("publishable_candidate_count", 0)
             logger.info(
-                "PR candidate manifest merged from %s: %d included (%d from prior runs preserved, %d demoted/quarantined)",
+                "PR candidate manifest merged from %s: %d included (%d current_run, %d prior_run_preserved, %d demoted/quarantined)",
                 prior_path,
-                final_manifest["publishable_candidate_count"],
-                preserved,
+                final_manifest.get("included_manifest_candidate_count", len(final_manifest.get("included_examples", []))),
+                final_manifest.get("current_run_pr_eligible_count", 0),
+                final_manifest.get("prior_run_preserved_count", 0),
                 len(demoted_ids),
             )
         except (json.JSONDecodeError, OSError, KeyError) as exc:

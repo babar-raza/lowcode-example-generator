@@ -46,7 +46,7 @@ def load_family_config(path: str | Path) -> FamilyConfig:
         logger.info("[SKIP] %s — disabled", path)
         raise DisabledFamilyError(f"Config is in disabled directory: {path}")
 
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = yaml.safe_load(f)
 
     # Check enabled field before schema validation (may be partial config)

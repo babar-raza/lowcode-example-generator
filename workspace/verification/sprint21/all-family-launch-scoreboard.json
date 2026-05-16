@@ -1,0 +1,78 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "total_published": 28,
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "pilot_coverage": "9/9 (100%)",
+      "workflow_root_coverage": "9/9 (100%)",
+      "post_merge_status": "POST_MERGE_VERIFIED",
+      "regression_risk": "NONE",
+      "merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7"
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "pilot_coverage": "8/8 (100%)",
+      "workflow_root_coverage": "8/9 (89%)",
+      "post_merge_status": "POST_MERGE_VERIFIED",
+      "regression_risk": "NONE",
+      "merge_sha": "c22788ebda05",
+      "open_taskcards": ["followup-words-pair-fixture-strategy", "followup-words-full-coverage-expansion"]
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pr_dry_run_ready": 9,
+      "pilot_coverage_published": "5/14 (35.7%)",
+      "pilot_coverage_after_approval": "14/14 (100%)",
+      "workflow_root_coverage_published": "5/24 (20.8%)",
+      "workflow_root_coverage_after_approval": "14/24 (58.3%)",
+      "post_merge_status": "ALL_PASS",
+      "regression_risk": "LOW",
+      "pr_groups": {
+        "PR3": {"examples": ["doc-converter", "html", "xls-converter"], "status": "DRY_RUN_READY_APPROVAL_BLOCKED"},
+        "PR5": {"examples": ["jpeg", "png", "tiff"], "status": "DRY_RUN_READY_APPROVAL_BLOCKED"},
+        "PR6": {"examples": ["image-extractor", "table-generator", "toc-generator"], "status": "DRY_RUN_READY_APPROVAL_BLOCKED"}
+      },
+      "frontier": {
+        "xmlprocessor": "DOES_NOT_EXIST — removed from roadmap",
+        "pdftoimage": "ABSTRACT_BASE — reclassify from WORKFLOW_ROOT",
+        "security": "NEXT_CANDIDATE — harness verification needed",
+        "acroform_types": "MEDIUM — after AcroForm fixture harness"
+      }
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "pilot_coverage": "2/2 (100%)",
+      "workflow_root_coverage": "2/2 (100%)",
+      "post_merge_status": "ALL_PASS",
+      "regression_risk": "NONE",
+      "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd"
+    },
+    "email": {
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "pilot_coverage": "1/1 (100%)",
+      "workflow_root_coverage": "1/1 (100%)",
+      "post_merge_status": "MERGE_CONFIRMED_RUNTIME_DEFERRED",
+      "regression_risk": "LOW",
+      "merge_sha": "023ad66970d2b5745011f56c069e9d9fa2a22672"
+    },
+    "slides": {
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "pilot_coverage": "3/3 (100%)",
+      "workflow_root_coverage": "3/3 (100%)",
+      "post_merge_status": "MERGE_CONFIRMED_RUNTIME_DEFERRED",
+      "regression_risk": "LOW",
+      "merge_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076"
+    }
+  },
+  "all_merged": true,
+  "all_post_merge_validated": false,
+  "primary_blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set — blocks PDF PR#3/5/6"
+}

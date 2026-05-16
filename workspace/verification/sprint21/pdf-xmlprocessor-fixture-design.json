@@ -1,0 +1,40 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "subject": "Security type fixture design (replacing XmlProcessor which does not exist)",
+  "type": "Security",
+  "scenario_id": "pdf-security",
+  "fixture_type": "programmatic_input",
+  "encrypt_fixture": {
+    "input": "programmatic PDF via new Aspose.Pdf.Document() — same as all Wave A/B/C fixtures",
+    "options_class": "EncryptionOptions",
+    "ctor_call": "var opts = new EncryptionOptions(\"owner456\", \"user123\", DocumentPrivilege.Print, CryptoAlgorithm.RC4x128);",
+    "required_usings": ["using Aspose.Pdf.LowCode;", "using Aspose.Pdf.Facades;", "using Aspose.Pdf;"],
+    "add_input_output": "opts.AddInput(new FileDataSource(\"input.pdf\")); opts.AddOutput(new FileDataSource(\"output_encrypted.pdf\"));",
+    "process_call": "var result = new Security().Process(opts);",
+    "validation": "result.ResultCollection.Count > 0 OR File.Exists(\"output_encrypted.pdf\")",
+    "api_gap_note": "AddInput/AddOutput on EncryptionOptions needs harness verification — possibly inherited from OrganizerBaseOptions"
+  },
+  "decrypt_fixture": {
+    "input": "encrypted PDF created by the encrypt fixture",
+    "options_class": "DecryptionOptions",
+    "ctor_call": "var opts = new DecryptionOptions(\"owner456\");",
+    "required_usings": ["using Aspose.Pdf.LowCode;"],
+    "process_call": "var result = new Security().Process(opts);",
+    "note": "Decrypt scenario is a follow-on — encrypt scenario should be validated first"
+  },
+  "supporting_deps": {
+    "Aspose.Pdf.Facades.DocumentPrivilege": "REQUIRED_SUPPORTING_DEPENDENCY — needed for EncryptionOptions ctor. NOT in LowCode namespace but not a forbidden substitution.",
+    "Aspose.Pdf.CryptoAlgorithm": "REQUIRED_SUPPORTING_DEPENDENCY — encryption algorithm enum.",
+    "Aspose.Pdf.Document": "REQUIRED_SUPPORTING_DEPENDENCY — fixture creation (same as all PDF types)"
+  },
+  "forbidden_patterns": [
+    "FORBIDDEN: Document.Encrypt() — core API substitution",
+    "FORBIDDEN: PdfFileSecurity — core Facades API",
+    "FORBIDDEN: new PluginOptions()"
+  ],
+  "harness_needed": true,
+  "harness_test_command": "dotnet run in workspace/fixture-validation/pdf-security-harness/ (to be created)",
+  "estimated_effort": "1 sprint day (harness build + verify + run pilot)",
+  "verdict": "FIXTURE_DESIGN_COMPLETE_PENDING_HARNESS_VERIFICATION"
+}

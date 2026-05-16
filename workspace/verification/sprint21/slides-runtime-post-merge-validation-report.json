@@ -1,0 +1,27 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "family": "slides",
+  "pr": {
+    "number": 1,
+    "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+    "state": "MERGED",
+    "merged_at": "2026-05-14T06:02:51Z",
+    "merge_commit_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076"
+  },
+  "file_presence_check": {
+    "examples/slides/lowcode/compress/Program.cs": {"exists": true, "sha": "9e04b9103bbb6af55fbe74bb6af897a8c2f7818f", "size_bytes": 802},
+    "examples/slides/lowcode/convert/Program.cs": {"exists": true, "sha": "3f9b95804fd1a666eec59a0fac8e8e155f6682f4", "size_bytes": 1519},
+    "examples/slides/lowcode/merger/Program.cs": {"exists": true, "sha": "217772c4e5a48b9c1ff9486bdbe22c9f742bbd90", "size_bytes": 1460},
+    "verified_via": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/contents/..."
+  },
+  "runtime_validation": {
+    "attempted": false,
+    "method": "NOT_ATTEMPTED",
+    "reason": "Runtime validation requires cloning the target repo and running dotnet restore + build + run. This requires NuGet access to Aspose.Slides packages and a clean working directory. Deferred.",
+    "status": "MERGE_CONFIRMED_RUNTIME_DEFERRED"
+  },
+  "blocker": "dotnet restore requires Aspose.Slides NuGet package access in a separate clean checkout context",
+  "verdict": "MERGE_CONFIRMED_RUNTIME_DEFERRED",
+  "upgrade_condition": "Status can be upgraded to RUNTIME_VERIFIED when dotnet restore+build+run passes on a clean checkout of the target repo"
+}

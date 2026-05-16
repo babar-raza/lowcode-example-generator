@@ -1,0 +1,71 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "taskcards_verified_still_open": [
+    {
+      "id": "TC-PDF-PR3-PUBLISH",
+      "status": "OPEN",
+      "blocking": true,
+      "action": "Set APPROVE_LIVE_PR, publish PR#3 with --package-path workspace/pr-dry-run/pdf-controlled-pilot",
+      "dry_run_status": "SIMULATION_PASSED"
+    },
+    {
+      "id": "TC-PDF-PR5-PUBLISH",
+      "status": "OPEN",
+      "action": "After PR#3: publish PR#5 with --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+      "dry_run_status": "SIMULATION_PASSED"
+    },
+    {
+      "id": "TC-PDF-PR6-PUBLISH",
+      "status": "OPEN",
+      "action": "After PR#5: publish PR#6 with --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr6",
+      "dry_run_status": "SIMULATION_PASSED"
+    }
+  ],
+  "taskcards_updated_this_sprint": [
+    {
+      "id": "TC-PDF-XMLPROCESSOR-NEXT",
+      "old_status": "OPEN",
+      "new_status": "CLOSED_INVALIDATED",
+      "reason": "XmlProcessor does NOT exist in Aspose.PDF.LowCode namespace. Type does not appear in 101-type catalog from Aspose.PDF 26.5.0. Sprint 20 plan was incorrect."
+    }
+  ],
+  "taskcards_opened_this_sprint": [
+    {
+      "id": "TC-PDF-SECURITY-HARNESS",
+      "title": "Build Security standalone harness to verify EncryptionOptions.AddInput/AddOutput",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "action": "Create workspace/fixture-validation/pdf-security-harness/ C# project. Verify new Security().Process(new EncryptionOptions(pw, pw2, DocumentPrivilege.Print, CryptoAlgorithm.RC4x128)) + AddInput/AddOutput pattern. If passes: add to pdf.yml."
+    },
+    {
+      "id": "TC-PDF-PDFTOIMAGE-RECLASSIFY",
+      "title": "Reclassify PdfToImage as ABSTRACT_BASE in type classification and denominator",
+      "status": "OPEN",
+      "priority": "MEDIUM",
+      "action": "Update workspace/verification/latest/pdf-type-role-classification.json: PdfToImage role WORKFLOW_ROOT -> ABSTRACT_BASE. Update pdf.json: workflow_root_types 24->23, unclassified_workflow_root_count 10->9.",
+      "evidence": "PdfToImage and PdfToImageOptions both have kind: abstract_class in catalog. Cannot instantiate."
+    },
+    {
+      "id": "TC-PDF-ACROFORM-HARNESS",
+      "title": "Build AcroForm fixture harness",
+      "status": "OPEN",
+      "priority": "MEDIUM",
+      "action": "Create workspace/fixture-validation/pdf-acroform-harness/. Use Aspose.Pdf.Forms to create PDF with TextBoxField + CheckboxField. Validate doc.Form.Count > 0. This unlocks FormFlattener, FormExporter, FormImporter, SelectField."
+    },
+    {
+      "id": "TC-EMAIL-RUNTIME-VALIDATE",
+      "title": "Email runtime post-merge validation (clean checkout)",
+      "status": "OPEN",
+      "priority": "LOW",
+      "action": "Clone aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples, run dotnet restore+build+run in examples/email/lowcode/converter/. Record result. Update status from MERGE_CONFIRMED to RUNTIME_VERIFIED or flag blockers."
+    },
+    {
+      "id": "TC-SLIDES-RUNTIME-VALIDATE",
+      "title": "Slides runtime post-merge validation (clean checkout)",
+      "status": "OPEN",
+      "priority": "LOW",
+      "action": "Clone aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples, run dotnet restore+build+run on compress/convert/merger examples. Record result."
+    }
+  ]
+}

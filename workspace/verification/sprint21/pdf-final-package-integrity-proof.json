@@ -1,0 +1,15 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "packages_audited": 3,
+  "all_clean": true,
+  "pr3": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["doc-converter", "html", "xls-converter"]},
+  "pr5": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["jpeg", "png", "tiff"], "png_quarantine_cleared": true},
+  "pr6": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["image-extractor", "table-generator", "toc-generator"]},
+  "already_published_not_duplicated": true,
+  "published_5": ["merger", "text-extractor", "pdfa-converter", "splitter", "optimizer"],
+  "no_bin_obj": true,
+  "no_secrets_detected": true,
+  "all_dry_runs_passed": true,
+  "overall_verdict": "ALL_PACKAGES_CLEAN_PUBLICATION_SAFE"
+}

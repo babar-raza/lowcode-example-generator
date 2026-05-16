@@ -1,0 +1,21 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "release_status_source": "workspace/verification/latest/release-status.json",
+  "families": {
+    "cells": {"published": 9, "scope": "FAMILY_COMPLETE", "post_merge": "POST_MERGE_VERIFIED"},
+    "words": {"published": 8, "scope": "PILOT_COMPLETE", "post_merge": "POST_MERGE_VERIFIED"},
+    "pdf": {"published": 5, "scope": "PARTIAL_CANARY", "post_merge": "ALL_PASS", "pr_ready": 9},
+    "diagram": {"published": 2, "scope": "PILOT_COMPLETE", "post_merge": "ALL_PASS"},
+    "email": {"published": 1, "scope": "PILOT_COMPLETE", "post_merge": "NOT_RUN"},
+    "slides": {"published": 3, "scope": "PILOT_COMPLETE", "post_merge": "NOT_RUN"}
+  },
+  "total_published": 28,
+  "all_merged": true,
+  "all_post_merge_validated": false,
+  "sprint21_corrections": {
+    "pdf_frontier": "XmlProcessor removed from roadmap (does not exist). Security is actual next candidate. PdfToImage reclassification pending.",
+    "pdf_denominator": "workflow_root_types should be 23 (PdfToImage is abstract) — to be fixed in Sprint 22",
+    "email_slides_post_merge": "Status is MERGE_CONFIRMED (files verified on main) but not RUNTIME_VERIFIED (dotnet run not performed)"
+  }
+}

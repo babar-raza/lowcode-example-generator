@@ -1,0 +1,20 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "gh_auth_status": "AUTHENTICATED",
+  "active_account": "babar-raza",
+  "active_token_type": "CLASSIC_PAT (ghp_*)",
+  "active_token_scopes": ["repo", "workflow"],
+  "missing_scopes": ["read:org"],
+  "missing_scopes_impact": "NON_BLOCKING — read:org not needed for PR creation or git write",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "target_repo_permissions": {
+    "admin": true,
+    "push": true,
+    "pull": true
+  },
+  "write_access_ready": true,
+  "token_mapping_note": "GITHUB_TOKEN env var is currently a fine-grained PAT (insufficient for org repo git writes). Must map GH_TOKEN -> GITHUB_TOKEN before publish.",
+  "publication_readiness": "TOKEN_READY — only approval gate blocks publication",
+  "verdict": "GITHUB_TOKEN_READY_APPROVAL_ABSENT"
+}

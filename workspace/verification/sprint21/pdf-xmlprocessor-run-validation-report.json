@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "subject": "XmlProcessor/Security run validation",
+  "run_attempted": false,
+  "reason": "XmlProcessor does not exist. Security type requires harness verification of EncryptionOptions.AddInput/AddOutput API pattern before running generation pilot.",
+  "verdict": "RUN_NOT_ATTEMPTED_BLOCKED_BY_API_VERIFICATION_GAP"
+}

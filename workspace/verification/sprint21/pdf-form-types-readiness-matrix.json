@@ -1,0 +1,104 @@
+{
+  "sprint": "sprint21",
+  "date": "2026-05-16",
+  "subject": "PDF AcroForm and remaining WORKFLOW_ROOT types readiness matrix",
+  "types": [
+    {
+      "name": "Security",
+      "kind": "class",
+      "options": "EncryptionOptions / DecryptionOptions",
+      "fixture_needed": "plain PDF (already available)",
+      "external_deps": "DocumentPrivilege (Aspose.Pdf.Facades) — supporting dep",
+      "api_gap": "EncryptionOptions.AddInput/AddOutput verification needed",
+      "feasibility": "MEDIUM",
+      "blocker": "Standalone harness to verify EncryptionOptions API pattern",
+      "priority": 1
+    },
+    {
+      "name": "FormEditor (Add variant)",
+      "kind": "class",
+      "options": "FormEditorAddOptions",
+      "fixture_needed": "plain PDF (no existing form fields needed for Add)",
+      "external_deps": "Aspose.Pdf.Forms field classes for new field definition",
+      "api_gap": "FormEditorAddOptions.AddInput/AddOutput verification needed",
+      "feasibility": "MEDIUM",
+      "blocker": "Harness verification of FormEditorAddOptions + field creation pattern",
+      "priority": 2
+    },
+    {
+      "name": "FormFlattener (FlattenAll)",
+      "kind": "class",
+      "options": "FormFlattenAllFieldsOptions (no properties)",
+      "fixture_needed": "AcroForm PDF with interactive fields",
+      "external_deps": "Aspose.Pdf.Forms for fixture creation",
+      "api_gap": "AcroForm fixture PDF creation",
+      "feasibility": "MEDIUM",
+      "blocker": "AcroForm fixture harness must pass first",
+      "priority": 3
+    },
+    {
+      "name": "FormExporter",
+      "kind": "class",
+      "options": "FormExporterToJsonOptions",
+      "fixture_needed": "AcroForm PDF with field values",
+      "external_deps": "none beyond AcroForm fixture",
+      "api_gap": "AcroForm fixture PDF creation",
+      "feasibility": "MEDIUM",
+      "blocker": "AcroForm fixture harness",
+      "priority": 4
+    },
+    {
+      "name": "FormImporter",
+      "kind": "class",
+      "options": "FormImporterJsonOptions",
+      "fixture_needed": "AcroForm PDF + JSON data file with field values",
+      "external_deps": "JSON data source file",
+      "api_gap": "AcroForm fixture + JSON structure",
+      "feasibility": "MEDIUM-COMPLEX",
+      "blocker": "AcroForm fixture + JSON data format investigation",
+      "priority": 5
+    },
+    {
+      "name": "SelectField",
+      "kind": "class",
+      "options": "FormFieldOptions",
+      "fixture_needed": "AcroForm PDF with select/combo fields",
+      "external_deps": "Combo field creation",
+      "api_gap": "3 methods — semantics unclear",
+      "feasibility": "MEDIUM-COMPLEX",
+      "blocker": "API semantics investigation + AcroForm fixture",
+      "priority": 6
+    },
+    {
+      "name": "PdfToImage",
+      "kind": "abstract_class",
+      "verdict": "ABSTRACT_BASE — cannot instantiate. Base class for Jpeg/Png/Tiff.",
+      "feasibility": "PERMANENTLY_BLOCKED — abstract",
+      "priority": null
+    },
+    {
+      "name": "Ofd",
+      "kind": "class",
+      "feasibility": "LOW-EXTERNAL — OFD format fixture requires Chinese document tooling",
+      "blocker": "OFD format fixture",
+      "priority": null
+    },
+    {
+      "name": "Signature",
+      "kind": "class",
+      "feasibility": "COMPLEX — PKCS12 certificate fixture required",
+      "blocker": "Certificate infrastructure",
+      "priority": null
+    },
+    {
+      "name": "Timestamp",
+      "kind": "class",
+      "feasibility": "COMPLEX — TSA server or local certificate chain required",
+      "blocker": "TSA/certificate infrastructure",
+      "priority": null
+    }
+  ],
+  "recommended_sprint_22_focus": "Security harness verification + FormEditor(Add) harness verification",
+  "recommended_sprint_23_focus": "AcroForm fixture harness (enables FormFlattener + FormExporter)",
+  "permanently_blocked": ["PdfToImage (abstract)", "Signature", "Timestamp", "Ofd"]
+}

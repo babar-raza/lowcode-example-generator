@@ -2,7 +2,7 @@
   "sprint": "sprint21",
   "date": "2026-05-16",
   "test_runner": "pytest",
-  "full_suite": {"total": 1600, "passed": 1600, "failed": 0, "duration_seconds": 36.75},
+  "full_suite": {"total": 1600, "passed": 1600, "failed": 0, "duration_seconds": 31.14},
   "targeted_suite": {"total": 136, "passed": 136, "failed": 0, "files": ["test_denominator_model.py", "test_scenario_contracts.py", "test_completion_queue.py"]},
   "source_changes_this_sprint": "NONE — no source files modified in Sprint 21",
   "verdict": "ALL_PASS"

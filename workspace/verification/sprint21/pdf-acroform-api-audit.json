@@ -1,83 +1,79 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "subject": "AcroForm types API audit from Aspose.PDF.LowCode catalog",
-  "catalog_source": "workspace/runs/pilot-pdf-20260515-193905/catalog/pdf/api-catalog.json",
-  "acroform_types": [
+  "subject": "AcroForm type API audit",
+  "catalog_source": "workspace/verification/latest/pdf-type-role-classification.json + pdf-lowcode-catalog-inventory.json",
+  "package_version": "Aspose.PDF 26.5.0",
+  "form_types": [
     {
       "type": "FormFlattener",
-      "kind": "class",
-      "options_class": "FormFlattenAllFieldsOptions",
-      "options_kind": "class",
-      "options_ctor": "FormFlattenAllFieldsOptions() [no params]",
-      "options_properties": [],
-      "also_available": "FormFlattenSelectedFieldsOptions [class, no params]",
-      "api_pattern": "new FormFlattener().Process(new FormFlattenAllFieldsOptions())",
-      "fixture_requirement": "PDF with interactive AcroForm fields",
-      "feasibility": "MEDIUM — simplest AcroForm type. Options class has no properties. Only fixture creation is the challenge.",
-      "input_output_mechanism": "UNKNOWN — FormFlattenAllFieldsOptions shows no AddInput/AddOutput in catalog. Likely inherited from OrganizerBaseOptions."
-    },
-    {
-      "type": "FormExporter",
-      "kind": "class",
-      "options_class": "FormExporterToJsonOptions",
-      "options_kind": "class",
-      "options_ctor_count": 2,
-      "options_properties": ["ExportPasswordValue", "WriteIndented"],
-      "also_available": "FormExporterValuesToCsvOptions [class]",
-      "api_pattern": "new FormExporter().Process(new FormExporterToJsonOptions())",
-      "fixture_requirement": "PDF with AcroForm fields that have values",
-      "feasibility": "MEDIUM — exports form data to JSON. Output validation = JSON file with field values."
-    },
-    {
-      "type": "FormImporter",
-      "kind": "class",
-      "options_class": "FormImporterJsonOptions",
-      "options_kind": "class",
-      "options_ctor_count": 1,
-      "options_properties": ["Inputs", "Outputs"],
-      "options_methods": ["AddInput", "AddOutput"],
-      "api_pattern": "new FormImporter().Process(new FormImporterJsonOptions())",
-      "fixture_requirement": "PDF with AcroForm fields + JSON data file with field values",
-      "feasibility": "MEDIUM-COMPLEX — requires both AcroForm fixture and JSON data fixture"
+      "primary_role": "WORKFLOW_ROOT",
+      "method": "Process(FormFlattenerOptions)",
+      "options_class": "FormFlattenerOptions",
+      "options_variants": ["FormFlattenAllFieldsOptions", "FormFlattenSelectedFieldsOptions"],
+      "options_params": {
+        "FormFlattenAllFieldsOptions": "no constructor params — simplest variant",
+        "FormFlattenSelectedFieldsOptions": "field name list param"
+      },
+      "fixture_requirement": "AcroForm PDF with at least one interactive text field",
+      "fixture_feasibility": "FEASIBLE — Aspose.Pdf.Forms.Form + TextField API",
+      "simplest_code": "var opt = new FormFlattenAllFieldsOptions(); opt.AddInput(new FileDataSource(\"acroform.pdf\")); opt.AddOutput(new FileDataSource(\"flattened.pdf\")); new FormFlattener().Process(opt);",
+      "pilot_priority": 1
     },
     {
       "type": "FormEditor",
-      "kind": "class",
-      "options_class": "FormEditorAddOptions",
-      "options_kind": "class",
-      "options_ctor_count": 1,
-      "options_properties": [],
-      "also_available": "FormEditorSetOptions [class], FormEditorRemoveOptions [abstract_class]",
-      "api_pattern": "new FormEditor().Process(new FormEditorAddOptions())",
-      "fixture_requirement": "PDF for AddOptions (adds new field), AcroForm for SetOptions/RemoveOptions",
-      "feasibility": "MEDIUM — FormEditorAddOptions can work with plain PDF (no existing fields needed for Add). FormEditorSetOptions/RemoveOptions need existing fields.",
-      "note": "FormEditorAddOptions may be the most accessible — adds a NEW field to an existing (non-form) PDF"
+      "primary_role": "WORKFLOW_ROOT",
+      "method": "Process(FormEditorOptions)",
+      "options_class": "FormEditorOptions",
+      "options_params": "unclear — may accept field operations list",
+      "fixture_requirement": "AcroForm PDF with fields. FormEditorOptions 'Add' variant may work on plain PDF.",
+      "fixture_feasibility": "FEASIBLE with AcroForm fixture; POSSIBLY without for 'Add' operations",
+      "pilot_priority": 2
+    },
+    {
+      "type": "FormExporter",
+      "primary_role": "WORKFLOW_ROOT",
+      "method": "Process(FormExporterOptions)",
+      "options_class": "FormExporterOptions",
+      "fixture_requirement": "AcroForm PDF with filled fields + output format (JSON/XML/CSV)",
+      "fixture_feasibility": "FEASIBLE with AcroForm fixture",
+      "pilot_priority": 3
+    },
+    {
+      "type": "FormImporter",
+      "primary_role": "WORKFLOW_ROOT",
+      "method": "Process(FormImporterJsonOptions)",
+      "options_class": "FormImporterJsonOptions",
+      "fixture_requirement": "AcroForm PDF (empty fields) + JSON data file with field values",
+      "fixture_feasibility": "FEASIBLE with AcroForm fixture + JSON data",
+      "pilot_priority": 4
     },
     {
       "type": "SelectField",
-      "kind": "class",
-      "method_count": 3,
+      "primary_role": "WORKFLOW_ROOT",
+      "method": "Process(FormFieldOptions)",
       "options_class": "FormFieldOptions",
-      "api_pattern": "SelectField has 3 static-ish methods for field selection",
-      "fixture_requirement": "PDF with AcroForm fields",
-      "feasibility": "MEDIUM-COMPLEX — 3 methods, selection semantics unclear without docs"
+      "options_variants": ["FormFieldOptions", "FormFieldSetOptions"],
+      "fixture_requirement": "AcroForm PDF with named fields",
+      "fixture_feasibility": "FEASIBLE with AcroForm fixture",
+      "pilot_priority": 5
     }
   ],
-  "common_fixture_requirement": "All 5 types (except possibly FormEditor Add) require a PDF with AcroForm interactive form fields",
-  "acroform_fixture_creation_options": [
-    {
-      "method": "Aspose.Pdf.Forms API",
-      "code": "var doc = new Document(); var page = doc.Pages.Add(); var field = new Aspose.Pdf.Forms.TextBoxField(page, new Rectangle(100, 400, 300, 430)) { PartialName = \"name\", Value = \"John Doe\" }; doc.Form.Add(field); doc.Save(\"acroform.pdf\");",
-      "feasibility": "FEASIBLE — Aspose.Pdf.Forms is in the same package",
-      "required_using": "using Aspose.Pdf.Forms;"
-    }
+  "supporting_options_in_catalog": [
+    "FormFlattenAllFieldsOptions",
+    "FormFlattenSelectedFieldsOptions",
+    "FormFieldOptions",
+    "FormFieldSetOptions",
+    "FormImporterJsonOptions",
+    "FormOptions",
+    "FormRemoveAllFieldsOptions",
+    "FormRemoveSelectedFieldsOptions"
   ],
-  "priority_order": [
-    "1. FormEditor (Add variant) — may work on plain PDF, adds a new field",
-    "2. FormFlattener (FlattenAll) — simplest options class, just needs form fixture",
-    "3. FormExporter (ToJson) — exports field values, clear output validation",
-    "4. FormImporter (Json) — needs both fixture and JSON data",
-    "5. SelectField — 3 methods, most complex semantics"
-  ]
+  "acroform_fixture_apis": {
+    "primary": "Aspose.Pdf.Document + Aspose.Pdf.Forms.TextBoxField",
+    "pattern": "new Document(); var page = doc.Pages.Add(); var field = new TextBoxField(page, new Rectangle(50,700,200,750)); field.PartialName='Name'; doc.Form.Add(field,1); doc.Save('acroform.pdf');",
+    "namespace_required": "using Aspose.Pdf; using Aspose.Pdf.Forms;"
+  },
+  "blocker": "AcroForm fixture harness not built or run-tested. Standalone build required before adding form types to pilot.",
+  "verdict": "ACROFORM_API_AUDITED_FIXTURE_DESIGN_READY_HARNESS_DEFERRED"
 }

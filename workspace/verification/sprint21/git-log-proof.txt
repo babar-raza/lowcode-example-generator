@@ -1,3 +1,4 @@
+3119733 feat(sprint21-pdf-live-publish-or-xmlprocessor-frontier): SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED
 c1d9604 feat(sprint20-pdf-live-publication-and-state-repair): STATE_REPAIR_COMPLETE_PUBLICATION_DRY_RUN_READY_APPROVAL_BLOCKED
 b9d3662 feat(sprint19-pdf-controlled-publication-pr3-pr5-pr6): DRY_RUN_READY_APPROVAL_BLOCKED — all 9 new PDF examples packaged and dry-run verified
 bd71e09 feat(sprint18-toc-image-template-first): TocGenerator + ImageExtractor FIRST EVER PASS — all 14 PDF pilot types PR_DRY_RUN_READY
@@ -27,4 +28,3 @@ c38788b feat(healing): portfolio healing acceleration sprint — activate waves 
 ad541be feat(healing): establish deferred-to-healing governance for all 28 deferred runnable types
 6ce73da feat(sprint2): portfolio launch sprint 2 — readiness documentation and taskcard closure
 171969d fix(lowcode): close portfolio sprint1 evidence and words wave2 readiness
-0461c79 fix: report release status for all families

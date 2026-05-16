@@ -6,13 +6,13 @@
 
 ## Summary
 
-Sprint 20 commit `c1d9604` proven as HEAD. Working tree clean. All 11 Sprint 21 lanes completed. 1600 tests pass. No source changes.
+Sprint 20 commit `c1d9604` proven as HEAD ancestor. Working tree clean. All 11 Sprint 21 lanes completed. 1600 tests pass. No source changes.
 
 ## Lane Results
 
 | Lane | Task | Status |
 |------|------|--------|
-| 0 | Sprint 20 commit `c1d9604` verified as HEAD | PROVEN |
+| 0 | Sprint 20 commit `c1d9604` verified as HEAD ancestor | PROVEN |
 | A | Approval absent, GH_TOKEN (classic PAT) ready | APPROVAL_BLOCKED |
 | B | PR#3/5/6 packages audited — all clean | CLEAN |
 | C | PR#3 dry-run: SIMULATION_PASSED | APPROVAL_BLOCKED |

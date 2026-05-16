@@ -1,47 +1,29 @@
 sprint: sprint21
 date: 2026-05-16
-verdict: SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED
-
 branch: main
-head: c1d9604b5ac3ea4c9fed5a621c4db873cbe89503
-working_tree: clean (workspace/ files modified by dry-run and release-status; no source changes)
+head: "3119733"
+sprint20_commit: c1d9604
+sprint20_proven: true
+source_changes_this_sprint: NONE
+working_tree: CLEAN
 
-sprint20_reconciliation:
-  commit: c1d9604
-  is_head: true
-  files_confirmed: all 47 Sprint 20 files present in commit
-  source_state: CLEAN
+publish_mode: APPROVAL_BLOCKED
+approval_gate: ABSENT
+token_ready: true
 
-publication_mode: APPROVAL_BLOCKED
-approval_env: ABSENT
-token_gh_token: CLASSIC_PAT (repo+workflow scopes, write access confirmed)
-token_github_token: FINE_GRAINED_PAT (insufficient for org repo writes)
+pr3_status: DRY_RUN_READY_APPROVAL_BLOCKED
+pr5_status: DRY_RUN_READY_APPROVAL_BLOCKED
+pr6_status: DRY_RUN_READY_APPROVAL_BLOCKED
 
-pr3:
-  examples: [doc-converter, html, xls-converter]
-  dry_run: SIMULATION_PASSED
-  status: APPROVAL_BLOCKED
+xmlprocessor: DOES_NOT_EXIST_INVALIDATED
+pdftoimage_reclassification: PENDING_SPRINT22
+security_frontier: HARNESS_VERIFICATION_NEEDED
+acroform_frontier: FIXTURE_HARNESS_NEEDED
 
-pr5:
-  examples: [jpeg, png, tiff]
-  dry_run: SIMULATION_PASSED
-  png_quarantine: CLEARED
-  status: APPROVAL_BLOCKED
-
-pr6:
-  examples: [image-extractor, table-generator, toc-generator]
-  dry_run: SIMULATION_PASSED
-  status: APPROVAL_BLOCKED
-
-xmlprocessor_finding: DOES_NOT_EXIST in Aspose.PDF.LowCode namespace (101-type catalog confirmed)
-pdftoimage_finding: abstract_class — reclassify as ABSTRACT_BASE (pending Sprint 22)
-security_finding: class, feasible, harness verification needed for EncryptionOptions.AddInput/AddOutput
-acroform_finding: 5 types, harness needed for fixture creation
-
-email_post_merge: MERGE_CONFIRMED_RUNTIME_DEFERRED (files verified on main, runtime not run)
-slides_post_merge: MERGE_CONFIRMED_RUNTIME_DEFERRED (files verified on main, runtime not run)
+email_post_merge: MERGE_CONFIRMED_RUNTIME_DEFERRED
+slides_post_merge: MERGE_CONFIRMED_RUNTIME_DEFERRED
 
 total_published: 28
-tests: 1600 passed, 0 failed
-source_changes: NONE (evidence files only)
-bundle_contract: VALID
+tests: 1600 passed 0 failed
+
+verdict: SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED

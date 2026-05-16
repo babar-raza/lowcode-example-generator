@@ -1,36 +1,30 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "families_needing_work": [
+  "families_with_active_work": [
     {
       "family": "pdf",
-      "priority": "HIGH",
-      "reason": "9 examples awaiting APPROVE_LIVE_PR (PR#3/PR#5/PR#6 DRY_RUN_READY)",
-      "next_action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR and publish"
-    },
-    {
-      "family": "pdf",
-      "priority": "MEDIUM",
-      "reason": "Next wave: Security type (harness needed) + AcroForm types (fixture needed)",
-      "next_action": "Build Security harness, then add to allowed_types"
-    },
-    {
-      "family": "words",
-      "priority": "MEDIUM",
-      "reason": "Words Wave 3 types not yet published: Processor, MailMerger, Comparer, Merger",
-      "next_action": "Pair fixture strategy for Comparer+Merger; MailMerger template fixture"
+      "reason": "9 examples approval-blocked across 3 PR groups. Next frontier: Security + AcroForm types.",
+      "blockers": ["APPROVE_LIVE_PR absent", "Security harness not run", "AcroForm harness not run"],
+      "priority": "HIGH"
     },
     {
       "family": "email",
-      "priority": "LOW",
-      "reason": "Runtime post-merge validation not confirmed — only file presence checked",
-      "next_action": "Run dotnet restore+build+run on clean checkout of target repo"
+      "reason": "Runtime post-merge validation pending (file presence confirmed, dotnet run not verified)",
+      "blockers": ["Aspose.Email NuGet access needed for clean-checkout runtime test"],
+      "priority": "MEDIUM"
     },
     {
       "family": "slides",
-      "priority": "LOW",
-      "reason": "Runtime post-merge validation not confirmed — only file presence checked",
-      "next_action": "Run dotnet restore+build+run on clean checkout of target repo"
+      "reason": "Runtime post-merge validation pending (file presence confirmed, dotnet run not verified)",
+      "blockers": ["Aspose.Slides NuGet access needed for clean-checkout runtime test"],
+      "priority": "MEDIUM"
+    },
+    {
+      "family": "words",
+      "reason": "5 backlogged types need fixture strategies (Merger, Comparer, MailMerger, Splitter, ReportBuilder)",
+      "blockers": ["Pair fixture design not implemented", "SplitCriteria enum not enumerated"],
+      "priority": "MEDIUM"
     }
   ],
   "families_complete": ["cells", "diagram"]

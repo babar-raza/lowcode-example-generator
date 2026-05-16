@@ -1,19 +1,19 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "fail_condition_checks": {
-    "c1d9604_proven": {"pass": true, "evidence": "git rev-parse HEAD = c1d9604b5ac3ea4c9fed5a621c4db873cbe89503. sprint20-commit-proof.json."},
-    "sprint20_changes_committed": {"pass": true, "evidence": "git status --short shows only workspace/ files and plans/. All Sprint 20 source/test files are in c1d9604."},
-    "approval_absent_no_live_claim": {"pass": true, "evidence": "APPROVE_LIVE_PR absent. No live PR created. All publication results are approval-blocked."},
-    "no_live_pr_without_url": {"pass": true, "evidence": "No live PRs created this sprint."},
-    "pr_contents_match_intended": {"pass": true, "evidence": "All 3 packages audited: PR#3=[doc-converter,html,xls-converter], PR#5=[jpeg,png,tiff], PR#6=[image-extractor,table-generator,toc-generator]."},
-    "no_already_published": {"pass": true, "evidence": "Merger/TextExtractor/PdfAConverter/Splitter/Optimizer absent from all 3 packages."},
-    "png_quarantine_cleared": {"pass": true, "evidence": "Sprint 17 fix (ResultCollection.Count > 0) cleared Png quarantine. Evidence in pdf-pr5-final-package-audit.json."},
-    "no_tokens_in_evidence": {"pass": true, "evidence": "Token values never printed. Only token type (CLASSIC_PAT/FINE_GRAINED_PAT) and presence/absence reported."},
-    "email_slides_not_called_runtime_verified": {"pass": true, "evidence": "Both report MERGE_CONFIRMED_RUNTIME_DEFERRED. Runtime validation explicitly not claimed."},
-    "xmlprocessor_not_added_without_evidence": {"pass": true, "evidence": "XmlProcessor confirmed ABSENT from 101-type catalog. Not added to pdf.yml or contracts. Documented in pdf-xmlprocessor-api-audit.json."},
-    "final_git_and_test_logs_present": {"pass": true, "evidence": "git-status-final.txt, git-log-proof.txt, test-full.log, test-summary.json all present."}
+  "validation_result": "BUNDLE_CONTRACT_PASS",
+  "checks": {
+    "c1d9604_proven": {"result": "PASS", "evidence": "sprint20-commit-proof.json: commit_exists=true, commit_in_ancestry=true"},
+    "sprint20_source_clean": {"result": "PASS", "evidence": "uncommitted_source_changes=NONE"},
+    "no_false_live_publication": {"result": "PASS", "evidence": "publish_mode=APPROVAL_BLOCKED"},
+    "pr3_package_clean": {"result": "PASS", "evidence": "examples_match=true, overlap_with_published=false"},
+    "pr5_package_clean": {"result": "PASS", "evidence": "examples_match=true, overlap_with_published=false"},
+    "pr6_package_clean": {"result": "PASS", "evidence": "examples_match=true, overlap_with_published=false"},
+    "png_quarantine_cleared": {"result": "PASS", "evidence": "pdf-pr5-final-package-audit.json: png_quarantine_clearance.status=CLEARED"},
+    "no_real_tokens_in_evidence": {"result": "PASS", "evidence": "Pattern ghp_[20+chars] not found in any evidence file"},
+    "email_slides_not_falsely_verified": {"result": "PASS", "evidence": "runtime_validation.attempted=false in both reports"},
+    "final_files_present": {"result": "PASS", "evidence": "git-status-final.txt, git-log-proof.txt, test-summary.json, final-verdict.md all present"}
   },
-  "all_checks_pass": true,
-  "verdict": "BUNDLE_CONTRACT_VALID"
+  "fail_conditions_triggered": 0,
+  "verdict": "BUNDLE_CONTRACT_PASS"
 }

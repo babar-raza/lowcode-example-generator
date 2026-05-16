@@ -6,4 +6,36 @@
  M workspace/verification/latest/words-readme-backfill-simulation.json
  M workspace/verification/latest/words-root-readme-audit.json
  M workspace/verification/latest/words-root-readme-render-result.json
+ M workspace/verification/sprint21/all-family-launch-scoreboard.json
+ M workspace/verification/sprint21/all-family-launch-scoreboard.md
+ M workspace/verification/sprint21/email-runtime-post-merge-validation-report.json
+ M workspace/verification/sprint21/families-needing-launch-work.json
+ M workspace/verification/sprint21/git-log-proof.txt
+ M workspace/verification/sprint21/git-status-after-reconciliation.txt
+ M workspace/verification/sprint21/git-status-final.txt
+ M workspace/verification/sprint21/git-status-initial.txt
+ M workspace/verification/sprint21/github-token-readiness-report.json
+ M workspace/verification/sprint21/pdf-acroform-api-audit.json
+ M workspace/verification/sprint21/pdf-acroform-fixture-prototype-report.json
+ M workspace/verification/sprint21/pdf-final-package-integrity-proof.json
+ M workspace/verification/sprint21/pdf-form-types-readiness-matrix.json
+ M workspace/verification/sprint21/pdf-pr3-approval-blocked.md
+ M workspace/verification/sprint21/pdf-pr3-final-package-audit.json
+ M workspace/verification/sprint21/pdf-pr5-approval-blocked.md
+ M workspace/verification/sprint21/pdf-pr5-final-package-audit.json
+ M workspace/verification/sprint21/pdf-pr6-approval-blocked.md
+ M workspace/verification/sprint21/pdf-pr6-final-package-audit.json
+ M workspace/verification/sprint21/pdf-xmlprocessor-fixture-design.json
+ M workspace/verification/sprint21/pdf-xmlprocessor-implementation-report.json
+ M workspace/verification/sprint21/pdf-xmlprocessor-run-validation-report.json
+ M workspace/verification/sprint21/post-publication-not-run-approval-blocked.md
+ M workspace/verification/sprint21/publication-mode-decision.json
+ M workspace/verification/sprint21/release-state-reconciliation-report.json
+ M workspace/verification/sprint21/slides-runtime-post-merge-validation-report.json
+ M workspace/verification/sprint21/sprint20-commit-proof.json
+ M workspace/verification/sprint21/sprint20-source-state-reconciliation.md
+ M workspace/verification/sprint21/taskcard-reconciliation-report.json
+ M workspace/verification/sprint21/test-full.log
+ M workspace/verification/sprint21/test-summary.json
+ M workspace/verification/sprint21/test-targeted.log
 ?? plans/

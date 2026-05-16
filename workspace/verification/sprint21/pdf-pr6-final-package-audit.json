@@ -4,20 +4,21 @@
   "pr_group": "PR#6",
   "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6",
   "expected_examples": ["image-extractor", "table-generator", "toc-generator"],
-  "found_examples": ["image-extractor", "table-generator", "toc-generator"],
-  "example_count": 3,
-  "root_files_present": ["Directory.Build.props", "Directory.Packages.props", "README.md", "global.json"],
-  "per_example_checks": {
-    "image-extractor": {"Program.cs": true, "README.md": true, "example.manifest.json": true, "expected-output.json": true, "input.pdf": true, "pdf-image-extractor.csproj": true, "bin_obj_absent": true},
-    "table-generator": {"Program.cs": true, "README.md": true, "example.manifest.json": true, "expected-output.json": true, "input.pdf": true, "output.pdf": true, "pdf-table-generator.csproj": true, "bin_obj_absent": true},
-    "toc-generator": {"Program.cs": true, "README.md": true, "example.manifest.json": true, "expected-output.json": true, "input.pdf": true, "output.pdf": true, "pdf-toc-generator.csproj": true, "bin_obj_absent": true}
+  "actual_examples": ["image-extractor", "table-generator", "toc-generator"],
+  "examples_match": true,
+  "root_files": ["Directory.Build.props", "Directory.Packages.props", "README.md", "global.json"],
+  "bin_obj_present": false,
+  "secrets_present": false,
+  "manifests_present": true,
+  "expected_output_present": true,
+  "manifest_statuses": {
+    "image-extractor": "generated_template_first",
+    "table-generator": "generated_template_first",
+    "toc-generator": "generated_template_first"
   },
-  "template_first_verified": ["image-extractor", "table-generator", "toc-generator"],
-  "already_published_contamination": {"merger": false, "text-extractor": false, "pdfa-converter": false, "splitter": false, "optimizer": false, "doc-converter": false, "html": false, "xls-converter": false, "jpeg": false, "png": false, "tiff": false},
-  "stale_quarantined_examples": "NONE",
-  "secrets_check": "CLEAN",
-  "dry_run_result": "SIMULATION_PASSED",
-  "gate_verdict": "PR_DRY_RUN_READY",
-  "issues": [],
-  "verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH"
+  "already_published_examples_in_package": "NONE",
+  "overlap_with_published": false,
+  "audit_result": "CLEAN",
+  "publication_ready": true,
+  "blocker": "APPROVAL_ONLY — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set"
 }

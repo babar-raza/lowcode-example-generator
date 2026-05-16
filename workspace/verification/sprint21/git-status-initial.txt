@@ -1,2 +1,3 @@
-main
+ M workspace/verification/sprint21/git-log-proof.txt
+ M workspace/verification/sprint21/git-status-initial.txt
 ?? plans/

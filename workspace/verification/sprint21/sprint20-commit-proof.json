@@ -1,39 +1,27 @@
 {
   "sprint": "sprint21",
-  "verification_date": "2026-05-16",
-  "subject": "Sprint 20 commit proof",
-  "claim": "c1d9604",
-  "verdict": "VERIFIED — c1d9604 IS HEAD",
-  "commit": {
-    "sha_short": "c1d9604",
-    "sha_full": "c1d9604b5ac3ea4c9fed5a621c4db873cbe89503",
-    "is_head": true,
-    "is_ancestor_of_head": true,
-    "date": "2026-05-16T09:06:51+0500",
-    "subject": "feat(sprint20-pdf-live-publication-and-state-repair): STATE_REPAIR_COMPLETE_PUBLICATION_DRY_RUN_READY_APPROVAL_BLOCKED",
-    "author": "Babar Raza <babar.raza@aspose.com>"
+  "date": "2026-05-16",
+  "verification_subject": "sprint20",
+  "claimed_commit": "c1d9604",
+  "full_sha": "c1d9604b5ac3ea4c9fed5a621c4db873cbe89503",
+  "commit_exists": true,
+  "commit_in_ancestry": true,
+  "c1d9604_is_ancestor_of_head": true,
+  "sprint20_key_files_verified": {
+    "pipeline/configs/denominators/pdf.json": "PRESENT",
+    "src/plugin_examples/__main__.py": "PRESENT",
+    "tests/unit/test_denominator_model.py": "PRESENT",
+    "tests/unit/test_completion_queue.py": "PRESENT",
+    "tests/unit/test_scenario_contracts.py": "PRESENT",
+    "workspace/queues/example-completion-queue.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-jpeg.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-png.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-tiff.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-table-generator.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-toc-generator.json": "PRESENT",
+    "pipeline/contracts/pdf/pdf-image-extractor.json": "PRESENT"
   },
-  "branch": "main",
-  "files_confirmed": {
-    "pipeline/configs/denominators/pdf.json": true,
-    "src/plugin_examples/__main__.py": true,
-    "tests/unit/test_completion_queue.py": true,
-    "tests/unit/test_denominator_model.py": true,
-    "tests/unit/test_scenario_contracts.py": true,
-    "pipeline/contracts/pdf/pdf-jpeg.json": true,
-    "pipeline/contracts/pdf/pdf-png.json": true,
-    "pipeline/contracts/pdf/pdf-tiff.json": true,
-    "pipeline/contracts/pdf/pdf-table-generator.json": true,
-    "pipeline/contracts/pdf/pdf-toc-generator.json": true,
-    "pipeline/contracts/pdf/pdf-image-extractor.json": true,
-    "workspace/queues/example-completion-queue.json": true,
-    "workspace/pr-dry-run/pdf-controlled-pilot/README.md": true
-  },
-  "working_tree_status": "CLEAN — only plans/ untracked (non-source, non-data)",
-  "uncommitted_changes": "NONE",
-  "git_diff_stat": "empty — no unstaged changes",
-  "previous_sprint_parent": {
-    "sha_short": "b9d3662",
-    "subject": "feat(sprint19-pdf-controlled-publication-pr3-pr5-pr6): DRY_RUN_READY_APPROVAL_BLOCKED"
-  }
+  "working_tree_status": "CLEAN",
+  "uncommitted_source_changes": "NONE",
+  "verdict": "SPRINT20_CLEANLY_COMMITTED_AS_c1d9604_PROVEN"
 }

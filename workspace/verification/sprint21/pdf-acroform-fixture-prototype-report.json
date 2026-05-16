@@ -1,23 +1,22 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "subject": "AcroForm fixture prototype design",
-  "harness_built": false,
-  "harness_run": false,
-  "reason": "Harness build deferred — AcroForm fixture design requires standalone C# project to verify Aspose.Pdf.Forms programmatic field creation",
+  "subject": "AcroForm fixture prototype report",
+  "prototype_built": false,
+  "prototype_run": false,
+  "reason_deferred": "Building and running the AcroForm harness requires: cloning/creating a .NET 8 project, referencing Aspose.PDF NuGet, writing fixture code, running dotnet restore+build+run. This requires NuGet access and a clean checkout context.",
   "fixture_design": {
-    "target_file": "workspace/fixture-validation/pdf-acroform-harness/Program.cs",
-    "code_design": "using Aspose.Pdf;\nusing Aspose.Pdf.Forms;\n\n// Create a PDF with an AcroForm text field\nvar doc = new Document();\nvar page = doc.Pages.Add();\nvar page2 = doc.Pages.Add();\n\n// Add a text field\nvar textField = new TextBoxField(page, new Rectangle(100, 400, 300, 430))\n{\n    PartialName = \"name\",\n    Value = \"Test Value\"\n};\ndoc.Form.Add(textField);\n\n// Add a checkbox\nvar checkbox = new CheckboxField(page, new Rectangle(100, 350, 120, 370))\n{\n    Checked = true\n};\ndoc.Form.Add(checkbox);\n\ndoc.Save(\"acroform.pdf\");\nConsole.WriteLine($\"Created acroform.pdf — fields: {doc.Form.Count}\");",
-    "expected_output": "acroform.pdf with 2 AcroForm fields (text + checkbox)",
-    "validation": "File.Exists + PDF header + doc.Form.Count > 0"
+    "harness_path": "workspace/fixture-validation/pdf-acroform-harness/",
+    "project_type": "dotnet console net8.0",
+    "nuget_package": "Aspose.PDF 26.5.0",
+    "fixture_code": "// Step 1: Create AcroForm PDF\nvar doc = new Aspose.Pdf.Document();\nvar page = doc.Pages.Add();\nvar nameField = new Aspose.Pdf.Forms.TextBoxField(page, new Aspose.Pdf.Rectangle(50, 700, 200, 750));\nnameField.PartialName = \"Name\";\nnameField.Value = \"John Doe\";\ndoc.Form.Add(nameField, 1);\ndoc.Save(\"acroform.pdf\");\n\n// Step 2: Test FormFlattener\nvar opt = new Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions();\nopt.AddInput(new Aspose.Pdf.LowCode.FileDataSource(\"acroform.pdf\"));\nopt.AddOutput(new Aspose.Pdf.LowCode.FileDataSource(\"flattened.pdf\"));\nnew Aspose.Pdf.LowCode.FormFlattener().Process(opt);\nConsole.WriteLine(File.Exists(\"flattened.pdf\") ? \"PASS\" : \"FAIL\");",
+    "using_directives": [
+      "using Aspose.Pdf;",
+      "using Aspose.Pdf.Forms;",
+      "using Aspose.Pdf.LowCode;"
+    ],
+    "validation": "File.Exists(flattened.pdf) + PDF header check"
   },
-  "acroform_harness_path": "workspace/fixture-validation/pdf-acroform-harness/",
-  "next_steps": [
-    "Create pdf-acroform-harness/ project (standalone C# console app targeting net8.0)",
-    "Reference Aspose.PDF 26.5.0 via NuGet",
-    "Run harness to verify programmatic AcroForm creation works",
-    "If passes: design FormFlattener and FormEditor pilots",
-    "If fails: investigate using pre-built AcroForm PDF as binary fixture"
-  ],
-  "verdict": "FIXTURE_DESIGN_COMPLETE_HARNESS_BUILD_DEFERRED"
+  "upgrade_condition": "Status upgrades to PROTOTYPE_VERIFIED when harness builds and runs successfully",
+  "verdict": "FIXTURE_DESIGN_COMPLETE_BUILD_DEFERRED"
 }

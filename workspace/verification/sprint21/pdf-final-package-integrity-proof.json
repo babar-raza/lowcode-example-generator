@@ -1,15 +1,17 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "packages_audited": 3,
-  "all_clean": true,
-  "pr3": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["doc-converter", "html", "xls-converter"]},
-  "pr5": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["jpeg", "png", "tiff"], "png_quarantine_cleared": true},
-  "pr6": {"verdict": "PACKAGE_CLEAN_READY_TO_PUBLISH", "examples": ["image-extractor", "table-generator", "toc-generator"]},
-  "already_published_not_duplicated": true,
-  "published_5": ["merger", "text-extractor", "pdfa-converter", "splitter", "optimizer"],
+  "all_packages_clean": true,
+  "pr3_audit": "CLEAN",
+  "pr5_audit": "CLEAN",
+  "pr6_audit": "CLEAN",
+  "total_examples_ready": 9,
   "no_bin_obj": true,
-  "no_secrets_detected": true,
-  "all_dry_runs_passed": true,
-  "overall_verdict": "ALL_PACKAGES_CLEAN_PUBLICATION_SAFE"
+  "no_secrets": true,
+  "no_already_published": true,
+  "png_quarantine_cleared": true,
+  "manifests_all_present": true,
+  "expected_outputs_all_present": true,
+  "publication_safety": "SAFE_TO_PUBLISH_WHEN_APPROVED",
+  "sole_blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL absent"
 }

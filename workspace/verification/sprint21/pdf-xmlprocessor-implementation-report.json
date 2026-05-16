@@ -1,36 +1,12 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "subject": "XmlProcessor frontier — implementation report",
-  "xmlprocessor_status": "DOES_NOT_EXIST — no action taken, no code added",
-  "pdftoimage_status": "RECLASSIFICATION_RECOMMENDED — abstract class, cannot instantiate",
-  "security_status": "API_AUDIT_COMPLETE_HARNESS_PENDING",
-  "actions_taken": [
-    "Audited full 101-type catalog — XmlProcessor confirmed absent",
-    "PdfToImage identified as abstract_class — recommend ABSTRACT_BASE reclassification",
-    "Security API signature fully documented from catalog",
-    "EncryptionOptions constructor parameters extracted",
-    "Fixture design written for Security (encrypt + decrypt patterns)",
-    "Supporting deps identified (DocumentPrivilege, CryptoAlgorithm)"
-  ],
-  "actions_NOT_taken": [
-    "Did NOT add XmlProcessor to pdf.yml (type does not exist)",
-    "Did NOT create pdf-xmlprocessor contract (type does not exist)",
-    "Did NOT add Security to pdf.yml (harness verification pending)",
-    "Did NOT create pdf-security contract (harness verification pending)",
-    "Did NOT run generation for Security type"
-  ],
-  "denominator_correction_needed": {
-    "pdftoimage_reclassification": "workflow_root_types should be 23 (not 24) — PdfToImage is abstract",
-    "unclassified_count_correction": "9 unclassified WORKFLOW_ROOT (not 10) after PdfToImage -> ABSTRACT_BASE",
-    "note": "This is a discovery that emerges from Sprint 21 API audit. pdf.json and pdf-type-role-classification.json should be updated in Sprint 22 after harness confirms."
-  },
-  "next_sprint_actions": [
-    "Build Security harness: workspace/fixture-validation/pdf-security-harness/",
-    "Verify EncryptionOptions.AddInput/AddOutput pattern",
-    "If confirmed: add Security to pdf.yml allowed_types, create contract, run pilot",
-    "Reclassify PdfToImage as ABSTRACT_BASE in type classification file",
-    "Update pdf.json denominator: workflow_root_types 24->23"
-  ],
-  "verdict": "FRONTIER_AUDIT_COMPLETE_IMPLEMENTATION_DEFERRED_HARNESS_NEEDED"
+  "subject": "XmlProcessor implementation attempt",
+  "finding": "IMPLEMENTATION_NOT_ATTEMPTED",
+  "reason": "XmlProcessor does not exist in Aspose.PDF.LowCode namespace (101 types confirmed). There is no type to implement.",
+  "catalog_evidence": "workspace/verification/latest/pdf-type-role-classification.json — all 101 types classified; XmlProcessor absent from WORKFLOW_ROOT list and all taxonomy entries",
+  "prior_plan_correction": "Sprint 20 pdf-post-pilot-frontier-plan.json listed XmlProcessor as next candidate — this was incorrect. Closed as INVALIDATED.",
+  "taskcard_action": "TC-PDF-XMLPROCESSOR-NEXT closed as INVALIDATED",
+  "next_frontier": "Security (MEDIUM — harness verification needed) and FormFlattener (MEDIUM — AcroForm fixture needed)",
+  "verdict": "XMLPROCESSOR_INVALIDATED_NOT_IMPLEMENTED"
 }

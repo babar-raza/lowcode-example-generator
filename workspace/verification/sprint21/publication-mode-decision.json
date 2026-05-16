@@ -1,45 +1,13 @@
 {
   "sprint": "sprint21",
   "date": "2026-05-16",
-  "publish_mode": "APPROVAL_BLOCKED",
   "approval_gate": {
     "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
     "required_value": "APPROVE_LIVE_PR",
-    "current_value": "ABSENT",
-    "gate_open": false
+    "status": "ABSENT"
   },
-  "token_status": {
-    "GH_TOKEN": {
-      "type": "CLASSIC_PAT",
-      "prefix": "ghp_",
-      "scopes": ["repo", "workflow"],
-      "active_account": true,
-      "account": "babar-raza",
-      "sufficient_for_git_write": true,
-      "note": "Missing read:org scope — non-blocking for publication"
-    },
-    "GITHUB_TOKEN": {
-      "type": "FINE_GRAINED_PAT",
-      "prefix": "github_pat_ (inferred)",
-      "sufficient_for_git_write": false,
-      "note": "Fine-grained PATs cannot write to org repos via git blob API — do NOT use for publication"
-    }
-  },
-  "repo_permissions": {
-    "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
-    "admin": true,
-    "push": true,
-    "pull": true,
-    "write_access_confirmed": true,
-    "note": "Permissions verified via gh api. Token write access confirmed when GH_TOKEN is mapped."
-  },
-  "token_mapping_required": "Map GH_TOKEN -> GITHUB_TOKEN at publish time: $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
-  "publish_decision": "APPROVAL_BLOCKED — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set. Token infrastructure is ready. GH_TOKEN (classic PAT, repo+workflow scopes) will work once approval is granted.",
-  "action_if_approved": [
-    "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
-    "Map $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
-    "Run publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot",
-    "Then PR#5: --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5",
-    "Then PR#6: --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr6"
-  ]
+  "publish_mode": "APPROVAL_BLOCKED",
+  "publish_mode_reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is not set to APPROVE_LIVE_PR",
+  "consequence": "PR#3, PR#5, PR#6 will not be published this sprint. Dry-runs only.",
+  "frontier_work": "XmlProcessor audit and AcroForm fixture design proceed as primary sprint work."
 }

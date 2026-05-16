@@ -16,10 +16,10 @@
   "runtime_validation": {
     "attempted": false,
     "method": "NOT_ATTEMPTED",
-    "reason": "Runtime validation requires cloning the target repo and running dotnet restore + build + run. This requires NuGet access to Aspose.Email packages and a clean working directory outside the pipeline repo. Deferred to a dedicated validation sprint with proper environment setup.",
+    "reason": "Runtime validation requires cloning the target repo and running dotnet restore + build + run with NuGet access to Aspose.Email packages in a separate clean checkout context. Deferred.",
     "status": "MERGE_CONFIRMED_RUNTIME_DEFERRED"
   },
   "blocker": "dotnet restore requires Aspose.Email NuGet package access in a separate clean checkout context",
   "verdict": "MERGE_CONFIRMED_RUNTIME_DEFERRED",
-  "upgrade_condition": "Status can be upgraded to RUNTIME_VERIFIED when dotnet restore+build+run passes on a clean checkout of the target repo"
+  "upgrade_condition": "Status upgrades to RUNTIME_VERIFIED when dotnet restore+build+run passes on clean checkout"
 }

@@ -25,9 +25,9 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `doc-converter` | `DocConverter.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/doc-converter` |
-| `html` | `Html.Dispose` | `pdf` | `html` | `dotnet run --project examples/pdf/lowcode/html` |
-| `xls-converter` | `XlsConverter.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/xls-converter` |
+| `jpeg` | `Jpeg` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/jpeg` |
+| `png` | `Png` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/png` |
+| `tiff` | `Tiff` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/tiff` |
 
 
 ---
@@ -99,9 +99,9 @@ Aspose.PDF.LowCode-for-.NET-Examples/
 ├── examples/
 │   └── pdf/
 │       └── lowcode/
-│           ├── doc-converter/
-│           ├── html/
-│           ├── xls-converter/
+│           ├── jpeg/
+│           ├── png/
+│           ├── tiff/
 │               └── Program.cs
 ├── Directory.Build.props
 ├── Directory.Packages.props

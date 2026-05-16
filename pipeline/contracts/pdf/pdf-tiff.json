@@ -1,0 +1,38 @@
+{
+  "scenario_id": "pdf-tiff",
+  "family": "pdf",
+  "type_name": "Tiff",
+  "full_type_name": "Aspose.Pdf.LowCode.Tiff",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Tiff",
+    "Tiff.Process",
+    "TiffOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".tiff",
+    "validation_method": "result_collection_count",
+    "notes": "Template-first. Instance API: var options = new TiffOptions(); options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.tiff')); var result = new Tiff().Process(options); validate ResultCollection.Count > 0. Output is page-numbered: input_ImageP001.tiff inside output.tiff/ dir."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-15T00:00:00Z"
+}

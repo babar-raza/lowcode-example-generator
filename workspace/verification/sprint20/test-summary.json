@@ -1,0 +1,28 @@
+{
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "test_runner": "pytest",
+  "total_tests": 1600,
+  "passed": 1600,
+  "failed": 0,
+  "errors": 0,
+  "duration_seconds": 51.25,
+  "tests_added_this_sprint": 0,
+  "tests_updated_this_sprint": 7,
+  "updated_tests": [
+    "test_denominator_model.py::TestPdfDenominator::test_pdf_pilot_allowed_count_is_14 (was is_11)",
+    "test_denominator_model.py::TestPdfDenominator::test_pdf_allowed_pilot_types_present (len 11->14, added Wave D types)",
+    "test_denominator_model.py::TestPdfDenominator::test_pdf_excluded_count_is_87 (was is_90)",
+    "test_denominator_model.py::TestPdfDenominator::test_pdf_runnable_scenarios_is_14 (was is_11)",
+    "test_completion_queue.py::TestQueueCoversDenominator::test_total_queue_covers_active_plus_backlogged (backlogged >= 20 -> >= 14)",
+    "test_scenario_contracts.py::TestContractFilesExist::test_pdf_has_14_contracts (was 8)",
+    "test_scenario_contracts.py::TestContractFilesExist::test_total_contracts_is_31 (was 25)",
+    "test_scenario_contracts.py::TestPdfContracts::test_pdf_scenario_ids_present (added 6 Wave D ids)"
+  ],
+  "data_updated_this_sprint": [
+    "workspace/queues/example-completion-queue.json: 6 entries promoted BACKLOGGED->PR_READY (jpeg/png/tiff/table-gen/toc-gen/image-extractor)",
+    "workspace/queues/example-completion-queue.json: state_summary recomputed (PR_READY 3->9, BACKLOGGED 20->14)",
+    "pipeline/contracts/pdf/: 6 new contracts created (pdf-jpeg/png/tiff/table-generator/toc-generator/image-extractor)"
+  ],
+  "verdict": "ALL_PASS"
+}

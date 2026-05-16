@@ -1,0 +1,42 @@
+{
+  "lane": "H",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "family": "email",
+  "task": "Email post-merge validation for PR#1",
+  "status": "COMPLETE",
+  "pr": {
+    "number": 1,
+    "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "title": "Add verified Aspose.Email LowCode examples for .NET controlled pilot",
+    "state": "MERGED",
+    "merged_at": "2026-05-14T06:02:38Z",
+    "head_ref": "plugin-examples/email/20260514-055744",
+    "merge_commit_sha": "023ad66970d2b5745011f56c069e9d9fa2a22672"
+  },
+  "files_merged": [
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "README.md",
+    "examples/email/lowcode/converter/Program.cs",
+    "examples/email/lowcode/converter/README.md",
+    "examples/email/lowcode/converter/example.manifest.json",
+    "examples/email/lowcode/converter/expected-output.json",
+    "examples/email/lowcode/converter/email-converter.csproj",
+    "global.json"
+  ],
+  "examples_verified": [
+    {
+      "type": "Converter",
+      "scenario_id": "email-converter",
+      "file": "examples/email/lowcode/converter/Program.cs",
+      "status": "MERGED_ON_MAIN",
+      "post_merge_runtime_validation": "NOT_RUN",
+      "note": "PR was merged at 2026-05-14T06:02:38Z. Source files confirmed present in merge commit 023ad66970d2. Runtime validation deferred — requires aspose.email NuGet fetch in clean checkout context."
+    }
+  ],
+  "main_branch_head_after_merge": "023ad66970d2b5745011f56c069e9d9fa2a22672",
+  "validation_result": "MERGE_CONFIRMED_FILES_PRESENT",
+  "regression_risk": "LOW",
+  "verdict": "EMAIL_PR1_MERGE_VERIFIED"
+}

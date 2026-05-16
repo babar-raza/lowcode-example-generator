@@ -1,0 +1,68 @@
+{
+  "lane": "H",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "family": "slides",
+  "task": "Slides post-merge validation for PR#1",
+  "status": "COMPLETE",
+  "pr": {
+    "number": 1,
+    "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+    "title": "Add verified Aspose.Slides LowCode examples for .NET controlled pilot",
+    "state": "MERGED",
+    "merged_at": "2026-05-14T06:02:51Z",
+    "head_ref": "plugin-examples/slides/20260514-055744",
+    "merge_commit_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076"
+  },
+  "files_merged": [
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "README.md",
+    "examples/slides/lowcode/compress/Program.cs",
+    "examples/slides/lowcode/compress/README.md",
+    "examples/slides/lowcode/compress/example.manifest.json",
+    "examples/slides/lowcode/compress/expected-output.json",
+    "examples/slides/lowcode/compress/slides-compress.csproj",
+    "examples/slides/lowcode/convert/Program.cs",
+    "examples/slides/lowcode/convert/README.md",
+    "examples/slides/lowcode/convert/example.manifest.json",
+    "examples/slides/lowcode/convert/expected-output.json",
+    "examples/slides/lowcode/convert/slides-convert.csproj",
+    "examples/slides/lowcode/merger/Program.cs",
+    "examples/slides/lowcode/merger/README.md",
+    "examples/slides/lowcode/merger/example.manifest.json",
+    "examples/slides/lowcode/merger/expected-output.json",
+    "examples/slides/lowcode/merger/slides-merger.csproj",
+    "global.json"
+  ],
+  "examples_verified": [
+    {
+      "type": "Compress",
+      "scenario_id": "slides-compress",
+      "file": "examples/slides/lowcode/compress/Program.cs",
+      "status": "MERGED_ON_MAIN",
+      "post_merge_runtime_validation": "NOT_RUN",
+      "note": "Confirmed present in merge commit bf05fc43124f."
+    },
+    {
+      "type": "Convert",
+      "scenario_id": "slides-convert",
+      "file": "examples/slides/lowcode/convert/Program.cs",
+      "status": "MERGED_ON_MAIN",
+      "post_merge_runtime_validation": "NOT_RUN",
+      "note": "Confirmed present in merge commit bf05fc43124f."
+    },
+    {
+      "type": "Merger",
+      "scenario_id": "slides-merger",
+      "file": "examples/slides/lowcode/merger/Program.cs",
+      "status": "MERGED_ON_MAIN",
+      "post_merge_runtime_validation": "NOT_RUN",
+      "note": "Confirmed present in merge commit bf05fc43124f."
+    }
+  ],
+  "main_branch_head_after_merge": "bf05fc43124f1afed90a18e5b75e0d598e3c1076",
+  "validation_result": "MERGE_CONFIRMED_FILES_PRESENT",
+  "regression_risk": "LOW",
+  "verdict": "SLIDES_PR1_MERGE_VERIFIED"
+}

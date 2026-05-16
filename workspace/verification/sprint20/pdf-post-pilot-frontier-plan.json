@@ -1,0 +1,48 @@
+{
+  "lane": "I",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "context": "All 14 allowed pilot types are PR_DRY_RUN_READY. Next wave: 10 WORKFLOW_ROOT types not yet in allowed_pilot_types.",
+  "current_pilot_coverage": "14/24 workflow_root types (58.3% after PR#3/5/6 merge)",
+  "unclassified_workflow_root_types": {
+    "count": 10,
+    "types": [
+      {"name": "Security", "group": "BLOCKED", "reason": "External cert/key deps — not feasible without fixture infrastructure"},
+      {"name": "Signature", "group": "BLOCKED", "reason": "Requires PFX/PKCS12 certificate fixture"},
+      {"name": "Timestamp", "group": "BLOCKED", "reason": "Requires TSA server or cert chain fixture"},
+      {"name": "Ofd", "group": "BLOCKED", "reason": "OFD format is China-specific; limited tooling for programmatic input"},
+      {"name": "FormEditor", "group": "COMPLEX_ACROFORM", "reason": "Requires AcroForm fixture with interactive form fields"},
+      {"name": "FormExporter", "group": "COMPLEX_ACROFORM", "reason": "Requires AcroForm fixture"},
+      {"name": "FormFlattener", "group": "COMPLEX_ACROFORM", "reason": "Requires AcroForm fixture"},
+      {"name": "FormImporter", "group": "COMPLEX_ACROFORM", "reason": "Requires AcroForm fixture + XFDF/FDF data"},
+      {"name": "SelectField", "group": "COMPLEX_ACROFORM", "reason": "Requires AcroForm fixture with select/combo fields"},
+      {"name": "XmlProcessor", "group": "MEDIUM", "reason": "XFDF XML input; feasible with string literal or file fixture"}
+    ]
+  },
+  "next_candidate": {
+    "type": "XmlProcessor",
+    "assessment": "MEDIUM",
+    "rationale": "XFDF XML is a text-based format. Fixture can be a string literal or a small XML file created programmatically. No external cert/key deps. Primary LowCode API is XmlProcessor.Process(options) with FileDataSource input/output.",
+    "fixture_strategy": "Programmatic XFDF XML string written to file: var xml = \"<?xml version='1.0'?><xfdf><f href='input.pdf'/><fields/></xfdf>\"; File.WriteAllText(\"input.xfdf\", xml);",
+    "expected_options_class": "XmlProcessorOptions",
+    "expected_code_pattern": "var opts = new XmlProcessorOptions(); opts.AddInput(new FileDataSource(\"input.pdf\")); opts.AddInput(new FileDataSource(\"input.xfdf\")); opts.AddOutput(new FileDataSource(\"output.pdf\")); new XmlProcessor().Process(opts);",
+    "taskcard": "TC-PDF-XMLPROCESSOR-NEXT"
+  },
+  "acroform_strategy": {
+    "assessment": "COMPLEX",
+    "rationale": "5 AcroForm types (FormEditor/FormExporter/FormFlattener/FormImporter/SelectField) all require a PDF with interactive form fields (AcroForm fields). Programmatic creation possible via Aspose.Pdf.Forms namespace.",
+    "fixture_approach": "Create AcroForm PDF programmatically: new Document(); page.Paragraphs.Add(new TextBoxField(page, new Rectangle(100,100,200,130)) { PartialName=\"field1\", Value=\"test\" }); doc.Save(\"acroform.pdf\");",
+    "prerequisite": "Design and validate AcroForm fixture in standalone harness before generation",
+    "estimated_effort": "2-3 sprint days",
+    "taskcard": "TC-PDF-ACROFORM-FIXTURE"
+  },
+  "blocked_types_status": {
+    "Security_Signature_Timestamp_Ofd": "PERMANENTLY_BLOCKED until cert/TSA/OFD infra available. Not in current roadmap.",
+    "acroform_types": "DEFERRED — pending AcroForm fixture design sprint"
+  },
+  "sprint21_recommendation": {
+    "primary": "XmlProcessor pilot run — add to pdf.yml allowed_types, define per_type_constraints, run pilot",
+    "secondary": "AcroForm fixture design sprint — validate programmatic AcroForm creation in standalone harness",
+    "tertiary": "Publish PR#3/PR#5/PR#6 (blocked by approval gate only)"
+  }
+}

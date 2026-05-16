@@ -1,0 +1,59 @@
+{
+  "sprint": "sprint20",
+  "reconciliation_date": "2026-05-16",
+  "conflict_claim": "Uploaded Sprint 19 ZIP shows evidence HEAD as bd71e09; final Sprint 19 response claims main @ b9d3662",
+  "resolution": {
+    "verdict": "CONFLICT_RESOLVED_NO_INCONSISTENCY",
+    "explanation": "The Sprint 19 ZIP was created DURING Sprint 19 execution — specifically after evidence files were written but BEFORE the Sprint 19 git commit b9d3662 was made. The git-status-initial.txt and git-log-proof.txt in the ZIP correctly capture the state at the START of Sprint 19 (HEAD=bd71e09, the Sprint 18 commit). After the evidence files were written and the ZIP was created, the Sprint 19 commit b9d3662 was made, which included those exact evidence files. The ZIP is missing git-status-final.txt and git-diff-final.patch — those would have shown HEAD=b9d3662. That is the actual gap: the bundle contract did not enforce capture of post-commit final state.",
+    "root_cause": "Sprint 19 bundle contract did not require git-status-final.txt. The ZIP was created before git commit, so HEAD in ZIP = bd71e09 (correct at that moment). Final response stated HEAD = b9d3662 (correct after commit)."
+  },
+  "commits": {
+    "b9d3662": {
+      "sha_full": "b9d3662aa9acc8a54ece281c0c55b39595936485",
+      "date": "2026-05-15T20:24:38+0500",
+      "subject": "feat(sprint19-pdf-controlled-publication-pr3-pr5-pr6): DRY_RUN_READY_APPROVAL_BLOCKED",
+      "role": "Sprint 19 evidence commit (PR packages + evidence files + pdf-live-pr-simulation.json)",
+      "is_head": true,
+      "is_ancestor_of_head": true
+    },
+    "bd71e09": {
+      "sha_full": "bd71e09bd58c99e1176a15e3179a8d1c47e254dd",
+      "date": "2026-05-15T19:55:09+0500",
+      "subject": "feat(sprint18-toc-image-template-first): TocGenerator + ImageExtractor FIRST EVER PASS",
+      "role": "Sprint 18 source commit — parent of b9d3662",
+      "is_head": false,
+      "is_ancestor_of_head": true
+    }
+  },
+  "current_state": {
+    "branch": "main",
+    "head": "b9d3662aa9acc8a54ece281c0c55b39595936485",
+    "uncommitted_changes": [
+      "workspace/verification/latest/cells-readme-backfill-simulation.json (M unstaged)",
+      "workspace/verification/latest/cells-root-readme-audit.json (M unstaged)",
+      "workspace/verification/latest/cells-root-readme-render-result.json (M unstaged)",
+      "workspace/verification/latest/words-readme-backfill-simulation.json (M unstaged)",
+      "workspace/verification/latest/words-root-readme-audit.json (M unstaged)",
+      "workspace/verification/latest/words-root-readme-render-result.json (M unstaged)"
+    ],
+    "uncommitted_changes_note": "These are stale workspace evidence files from a previous release-status run. They contain audit timestamps only — no source changes. Will be included in Sprint 20 commit.",
+    "untracked": ["plans/"]
+  },
+  "source_integrity": {
+    "pdf_yml": "clean — no uncommitted changes",
+    "code_generator_py": "clean — no uncommitted changes",
+    "test_llm_generation_py": "clean — no uncommitted changes",
+    "sprint19_evidence_committed": true,
+    "pr_packages_committed": true
+  },
+  "gaps_to_fix_in_sprint20": [
+    "git-status-final.txt missing from Sprint 19 bundle",
+    "git-diff-final.patch missing from Sprint 19 bundle",
+    "changed-files.txt missing from Sprint 19 bundle",
+    "test-full.log missing from Sprint 19 bundle",
+    "test-summary.json missing from Sprint 19 bundle",
+    "pdf.json allowed_pilot_count = 11 (should be 14)",
+    "PR#5/PR#6 publication relies on manual package swap (no orchestration script)"
+  ],
+  "reconciliation_verdict": "RESOLVED — b9d3662 is HEAD, bd71e09 is Sprint 18 parent. No source inconsistency. Sprint 20 fixes evidence gaps."
+}

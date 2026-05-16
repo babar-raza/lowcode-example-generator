@@ -1,0 +1,38 @@
+{
+  "lane": "C",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "pr_group": "PR#5",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+  "examples": ["jpeg", "png", "tiff"],
+  "example_count": 3,
+  "file_inventory": {
+    "root_files": ["Directory.Build.props", "Directory.Packages.props", "README.md", "global.json"],
+    "jpeg": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "input.pdf", "pdf-jpeg.csproj", "output.jpg/input_ImageP001.jpeg"],
+    "png": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "input.pdf", "pdf-png.csproj", "output.png/input_ImageP001.png"],
+    "tiff": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "input.pdf", "pdf-tiff.csproj", "output.tiff/input_ImageP001.tiff"]
+  },
+  "output_artifacts_included": {
+    "note": "Image output artifacts (jpeg/png/tiff) are included in package as expected-output evidence. Target repo will receive them as fixture samples.",
+    "jpeg_output": "output.jpg/input_ImageP001.jpeg",
+    "png_output": "output.png/input_ImageP001.png",
+    "tiff_output": "output.tiff/input_ImageP001.tiff"
+  },
+  "input_pdfs_included": true,
+  "already_published_contamination": {
+    "merger": false,
+    "text-extractor": false,
+    "pdfa-converter": false,
+    "splitter": false,
+    "optimizer": false,
+    "doc-converter": false,
+    "html": false,
+    "xls-converter": false
+  },
+  "dry_run_result": "SIMULATION_PASSED",
+  "repo_access_ready": true,
+  "pr_permission_ready": true,
+  "approval_blocker": "APPROVE_LIVE_PR not set",
+  "publish_command": "publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+  "verdict": "PACKAGE_CLEAN_DRY_RUN_PASS"
+}

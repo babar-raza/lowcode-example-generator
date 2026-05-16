@@ -249,6 +249,13 @@ def main() -> int:
              "Required for --publish mode. Also readable from PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL.",
     )
     publish_pr_parser.add_argument(
+        "--package-path", metavar="PATH",
+        help="Override package path (default: workspace/pr-dry-run/{family}-controlled-pilot/). "
+             "Use to publish PR groups with separate packages without manual swapping, e.g. "
+             "pdf-controlled-pilot-pr5 for Jpeg/Tiff/Png or pdf-controlled-pilot-pr6 for "
+             "TableGenerator/TocGenerator/ImageExtractor.",
+    )
+    publish_pr_parser.add_argument(
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/",
     )
@@ -769,8 +776,12 @@ def main() -> int:
             except (OSError, _json.JSONDecodeError):
                 pass
 
-        # Locate dry-run package
-        package_path = repo_root / "workspace" / "pr-dry-run" / f"{family}-controlled-pilot"
+        # Locate dry-run package — honour explicit --package-path if provided
+        _explicit_pkg = getattr(args, "package_path", None)
+        if _explicit_pkg:
+            package_path = _Path(_explicit_pkg)
+        else:
+            package_path = repo_root / "workspace" / "pr-dry-run" / f"{family}-controlled-pilot"
         package_exists = package_path.exists()
         example_dirs = []
         if package_exists:

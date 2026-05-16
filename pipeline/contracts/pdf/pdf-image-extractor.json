@@ -1,0 +1,38 @@
+{
+  "scenario_id": "pdf-image-extractor",
+  "family": "pdf",
+  "type_name": "ImageExtractor",
+  "full_type_name": "Aspose.Pdf.LowCode.ImageExtractor",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "ImageExtractor",
+    "ImageExtractor.Process",
+    "ImageExtractorOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".jpg",
+    "validation_method": "result_collection_count",
+    "notes": "Template-first. Instance API: var options = new ImageExtractorOptions(); options.AddInput(new FileDataSource('input.pdf')); var result = new ImageExtractor().Process(options); ResultCollection.Count > 0. Output images are accessed via result.ResultCollection."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-15T00:00:00Z"
+}

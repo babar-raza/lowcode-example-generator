@@ -1,0 +1,31 @@
+{
+  "lane": "C",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "pr_group": "PR#3",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "examples": ["doc-converter", "html", "xls-converter"],
+  "example_count": 3,
+  "file_inventory": {
+    "root_files": ["Directory.Build.props", "Directory.Packages.props", "README.md", "global.json"],
+    "doc-converter": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "pdf-doc-converter.csproj"],
+    "html": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "pdf-html.csproj"],
+    "xls-converter": ["Program.cs", "README.md", "example.manifest.json", "expected-output.json", "pdf-xls-converter.csproj"]
+  },
+  "optimizer_excluded": {
+    "present": false,
+    "note": "optimizer/ was removed (already published in PR#4). Confirmed absent from package."
+  },
+  "already_published_contamination": {
+    "merger": false,
+    "text-extractor": false,
+    "pdfa-converter": false,
+    "splitter": false,
+    "optimizer": false
+  },
+  "dry_run_result": "SIMULATION_PASSED",
+  "repo_access_ready": true,
+  "pr_permission_ready": true,
+  "approval_blocker": "APPROVE_LIVE_PR not set",
+  "verdict": "PACKAGE_CLEAN_DRY_RUN_PASS"
+}

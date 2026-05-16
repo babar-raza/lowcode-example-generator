@@ -1,0 +1,16 @@
+{
+  "lane": "E",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "pr_group": "PR#5",
+  "examples": ["jpeg", "png", "tiff"],
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+  "publish_mode": "DRY_RUN",
+  "simulation_result": "SIMULATION_PASSED",
+  "repo_access_ready": true,
+  "pr_permission_ready": true,
+  "gate_verdict": "PR_DRY_RUN_READY",
+  "approval_gate_status": "BLOCKED — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+  "live_publish_status": "NOT_RUN",
+  "verdict": "DRY_RUN_READY_APPROVAL_BLOCKED"
+}

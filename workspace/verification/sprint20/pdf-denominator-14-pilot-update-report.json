@@ -1,0 +1,45 @@
+{
+  "lane": "A",
+  "sprint": "sprint20",
+  "date": "2026-05-16",
+  "task": "Update pdf.json denominator: allowed_pilot_count 11->14, add TocGenerator/TableGenerator/ImageExtractor",
+  "status": "COMPLETE",
+  "changes_made": {
+    "allowed_pilot_count": {"before": 11, "after": 14},
+    "runnable_scenarios": {"before": 11, "after": 14},
+    "allowed_pilot_types": {
+      "before": ["Merger","TextExtractor","Splitter","Optimizer","PdfAConverter","DocConverter","XlsConverter","Html","Jpeg","Png","Tiff"],
+      "after": ["Merger","TextExtractor","Splitter","Optimizer","PdfAConverter","DocConverter","XlsConverter","Html","Jpeg","Png","Tiff","TocGenerator","TableGenerator","ImageExtractor"],
+      "added": ["TocGenerator","TableGenerator","ImageExtractor"]
+    },
+    "runnable_scenario_ids": {
+      "added": ["pdf-toc-generator","pdf-table-generator","pdf-image-extractor"]
+    },
+    "published_count": {"value": 5, "note": "Corrected from implicit 4 — PR#4 (Optimizer) confirmed merged"},
+    "published_scenario_ids": {
+      "value": ["pdf-merger","pdf-text-extractor","pdf-pdfa-converter","pdf-splitter","pdf-optimizer"],
+      "note": "All 5 confirmed via gh pr view on aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (Sprint 19)"
+    },
+    "pr_dry_run_ready_count": {"before": 3, "after": 9},
+    "pr_dry_run_ready_ids": {
+      "after": ["pdf-doc-converter","pdf-xls-converter","pdf-html","pdf-jpeg","pdf-tiff","pdf-png","pdf-table-generator","pdf-toc-generator","pdf-image-extractor"]
+    },
+    "excluded_count": {"before": 90, "after": 87},
+    "unclassified_workflow_root_count": {"before": 13, "after": 10},
+    "coverage_pct_of_pilot_allowed": {"before": 45.45, "after": 35.71, "note": "5/14 published (was 5/11 = 45.45%)"},
+    "coverage_pct_of_workflow_root": {"before": 20.83, "note": "5/24, unchanged"},
+    "coverage_pct_of_total_types": {"before": 4.95, "note": "5/101, unchanged"}
+  },
+  "consistency_checks": {
+    "allowed_pilot_count_eq_len_allowed_pilot_types": {"expected": 14, "actual": 14, "pass": true},
+    "runnable_scenarios_eq_allowed_pilot_count": {"expected": 14, "actual": 14, "pass": true},
+    "runnable_scenario_ids_len_eq_runnable_scenarios": {"expected": 14, "actual": 14, "pass": true},
+    "published_count_eq_len_published_ids": {"expected": 5, "actual": 5, "pass": true},
+    "pr_dry_run_ready_count_eq_len_pr_dry_run_ready_ids": {"expected": 9, "actual": 9, "pass": true},
+    "published_plus_pr_ready_eq_14": {"expected": 14, "actual": 14, "pass": true},
+    "excluded_count_eq_101_minus_14": {"expected": 87, "actual": 87, "pass": true}
+  },
+  "evidence_file": "pipeline/configs/denominators/pdf.json",
+  "diff_captured": "workspace/verification/sprint20/pdf-denominator-diff-proof.txt",
+  "verdict": "DENOMINATOR_UPDATED_AND_CONSISTENT"
+}

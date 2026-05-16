@@ -1,0 +1,38 @@
+{
+  "scenario_id": "pdf-table-generator",
+  "family": "pdf",
+  "type_name": "TableGenerator",
+  "full_type_name": "Aspose.Pdf.LowCode.TableGenerator",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "TableGenerator",
+    "TableGenerator.Process",
+    "TableOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Template-first. Instance API with TableOptions builder: AddTable().AddRow().AddCell(). FileDataSource input/output. ResultCollection.Count > 0."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "evidence_sources": [
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-15T00:00:00Z"
+}

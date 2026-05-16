@@ -157,14 +157,15 @@ class TestQueueCoversDenominator:
         active = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
         permanently_blocked = [e for e in entries if e["state"] == "PERMANENTLY_BLOCKED"]
-        # At minimum: 31 active (cells 9 + words 8 + pdf 8 PR-ready/published + diagram 2 + email/slides)
-        # + 20 backlogged (19 PDF WR deferred + 3 Diagram OPTIONS; Wave B all moved to PR_READY)
+        # At minimum: 37 active (cells 9 + words 8 + pdf 14 PR-ready/published + diagram 2 + email 1 + slides 3)
+        # + 14 backlogged (PDF WR deferred — Wave D jpeg/png/tiff/table-gen/toc-gen/image-extractor promoted to PR_READY in Sprint 20)
         # + 3 permanently blocked (Processor: API_ACCESS_PARADOX, PdfExtractor: ABSTRACT_BASE,
         #   words-splitter-split-criteria: ENUM not runnable — Sprint 16 reclassification)
         # Sprint 7: DocConverter+XlsConverter+Html all moved BACKLOGGED->PR_READY; PdfExtractor PERMANENTLY_BLOCKED
         # Sprint 16: words-splitter-split reclassified BACKLOGGED->PERMANENTLY_BLOCKED (SplitCriteria is ENUM)
+        # Sprint 20: Jpeg/Png/Tiff/TableGenerator/TocGenerator/ImageExtractor moved BACKLOGGED->PR_READY (Wave D all pass)
         assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 20, f"Expected at least 20 backlogged entries, got {len(backlogged)}"
+        assert len(backlogged) >= 14, f"Expected at least 14 backlogged entries, got {len(backlogged)}"
         assert len(permanently_blocked) >= 3, "Expected at least 3 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 

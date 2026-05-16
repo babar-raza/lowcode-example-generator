@@ -6,8 +6,8 @@
   "total_entries": 54,
   "state_summary": {
     "POST_MERGE_VERIFIED": 28,
-    "PR_READY": 3,
-    "BACKLOGGED": 20,
+    "PR_READY": 9,
+    "BACKLOGGED": 14,
     "PERMANENTLY_BLOCKED": 3
   },
   "entries": [
@@ -361,31 +361,31 @@
       "scenario_id": "pdf-image-extractor",
       "family": "pdf",
       "type_name": "ImageExtractor",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: output validation for extracted images not yet defined",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-jpeg",
       "family": "pdf",
       "type_name": "Jpeg",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: JPEG output format-specific validation not yet implemented",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-ofd",
@@ -451,16 +451,16 @@
       "scenario_id": "pdf-png",
       "family": "pdf",
       "type_name": "Png",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: PNG output format-specific validation not yet implemented",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-security",
@@ -511,31 +511,31 @@
       "scenario_id": "pdf-table-generator",
       "family": "pdf",
       "type_name": "TableGenerator",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: table structure fixture and output validation not yet defined",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-tiff",
       "family": "pdf",
       "type_name": "Tiff",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: TIFF output format-specific validation not yet implemented",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-timestamp",
@@ -556,16 +556,16 @@
       "scenario_id": "pdf-toc-generator",
       "family": "pdf",
       "type_name": "TocGenerator",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: TOC generation output validation not yet defined",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PR_READY",
+      "blocking_reason": null,
+      "blocking_taskcard": null,
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-xls-converter",

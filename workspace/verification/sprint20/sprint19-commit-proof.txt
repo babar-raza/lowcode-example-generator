@@ -1,0 +1,5 @@
+commit b9d3662aa9acc8a54ece281c0c55b39595936485
+Author: Babar Raza <babar.raza@aspose.com>
+Date:   Fri May 15 20:24:38 2026 +0500
+
+    feat(sprint19-pdf-controlled-publication-pr3-pr5-pr6): DRY_RUN_READY_APPROVAL_BLOCKED — all 9 new PDF examples packaged and dry-run verified

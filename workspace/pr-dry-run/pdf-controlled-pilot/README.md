@@ -88,7 +88,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-15 15:16 UTC
+Generated on: 2026-05-16 03:51 UTC
 
 ---
 

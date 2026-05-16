@@ -1,0 +1,11 @@
+{
+  "lane": "lane-email-b",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "subject": "Email package drift guard",
+  "cached_version": "26.4.0",
+  "email_json_version": "26.4.0",
+  "drift": false,
+  "email_published_state": "1/1 POST_MERGE_VERIFIED",
+  "verdict": "NO_DRIFT — email.json source_version matches cached NuGet version"
+}

@@ -1,0 +1,9 @@
+{
+  "lane": "lane-words-b",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "subject": "Words pair fixture strategy (Comparer, Merger)",
+  "status": "N/A",
+  "reason": "words-comparer and words-merger are both POST_MERGE_VERIFIED. No pair fixture work needed. Confirmed by lane-words-a truth audit.",
+  "verdict": "LANE_NA_TARGET_ALREADY_PUBLISHED"
+}

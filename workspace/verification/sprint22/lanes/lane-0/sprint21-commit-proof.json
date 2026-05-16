@@ -1,0 +1,30 @@
+{
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "verification_subject": "sprint21",
+  "claimed_commits": ["a0319bb", "3119733"],
+  "sprint21_head_sha": "a0319bb",
+  "sprint21_first_sha": "3119733",
+  "sprint20_sha": "c1d9604",
+  "sprint21_is_ancestor_of_head": true,
+  "sprint21_key_files_verified": {
+    "workspace/verification/sprint21/sprint20-commit-proof.json": "PRESENT",
+    "workspace/verification/sprint21/publication-mode-decision.json": "PRESENT",
+    "workspace/verification/sprint21/github-token-readiness-report.json": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr3-approval-blocked.md": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr5-approval-blocked.md": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr6-approval-blocked.md": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr3-final-package-audit.json": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr5-final-package-audit.json": "PRESENT",
+    "workspace/verification/sprint21/pdf-pr6-final-package-audit.json": "PRESENT",
+    "workspace/verification/sprint21/pdf-xmlprocessor-run-validation-report.json": "PRESENT",
+    "workspace/verification/sprint21/pdf-acroform-api-audit.json": "PRESENT",
+    "workspace/verification/sprint21/all-family-launch-scoreboard.json": "PRESENT",
+    "workspace/verification/sprint21/final-verdict.md": "PRESENT",
+    "workspace/verification/sprint21/sprint21-pdf-live-publish-or-xmlprocessor-frontier-20260516-131201.zip": "PRESENT"
+  },
+  "sprint21_verdict": "SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED",
+  "working_tree_status": "6_DIRTY_EVIDENCE_FILES_ONLY",
+  "uncommitted_source_changes": "NONE",
+  "verdict": "SPRINT21_CLEANLY_COMMITTED_AS_a0319bb_PROVEN"
+}

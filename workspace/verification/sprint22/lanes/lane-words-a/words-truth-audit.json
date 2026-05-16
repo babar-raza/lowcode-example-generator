@@ -1,0 +1,39 @@
+{
+  "lane": "lane-words-a",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "subject": "Words family truth audit",
+  "sprint_brief_assumption": "Sprint 22 brief listed Comparer/Merger/MailMerger/ReportBuilder as backlogged",
+  "actual_state": {
+    "completion_queue_states": {
+      "words-comparer": "POST_MERGE_VERIFIED",
+      "words-converter": "POST_MERGE_VERIFIED",
+      "words-mail-merger": "POST_MERGE_VERIFIED",
+      "words-merger": "POST_MERGE_VERIFIED",
+      "words-replacer": "POST_MERGE_VERIFIED",
+      "words-report-builder": "POST_MERGE_VERIFIED",
+      "words-splitter": "POST_MERGE_VERIFIED",
+      "words-watermarker": "POST_MERGE_VERIFIED",
+      "words-processor": "PERMANENTLY_BLOCKED",
+      "words-splitter-split": "PERMANENTLY_BLOCKED"
+    },
+    "published_count": 8,
+    "pilot_scope": 8,
+    "denominator_basis": "PILOT_ALLOWED",
+    "workflow_root_types": 9,
+    "non_runnable_types": 16,
+    "Processor": "PERMANENTLY_BLOCKED — reclassified in Sprint 13. Cannot be standalone."
+  },
+  "denominator_state": {
+    "workflow_root_types": 9,
+    "non_runnable_types": 16,
+    "allowed_pilot_count": 8,
+    "published_count": 8,
+    "coverage_of_pilot": "100% (8/8)",
+    "coverage_of_workflow_root": "88.9% (8/9 — Processor PERMANENTLY_BLOCKED)",
+    "words-full-sot-type-classification.json": "EXISTS in workspace/verification/latest/"
+  },
+  "sprint_brief_correction": "Sprint 22 brief incorrectly listed Words types as backlogged. All 8 Words pilot types are POST_MERGE_VERIFIED. No Words healing needed this sprint.",
+  "words_b_c_d_lanes": "N/A — all target types already POST_MERGE_VERIFIED",
+  "verdict": "WORDS_PILOT_COMPLETE — 8/8 published, 1 PERMANENTLY_BLOCKED (Processor)"
+}

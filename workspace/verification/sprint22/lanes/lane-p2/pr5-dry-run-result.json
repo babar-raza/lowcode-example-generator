@@ -1,0 +1,16 @@
+{
+  "lane": "lane-p2",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "pr_id": "PR#5",
+  "pr_package": "pdf-controlled-pilot-pr5",
+  "pr_types": ["jpeg", "tiff", "png"],
+  "pr_examples": 3,
+  "dry_run_status": "DRY_RUN_VERIFIED_IN_SPRINT19",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+  "live_publish_blocked_by": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+  "note": "Must be published AFTER PR#3 is merged and package updated",
+  "pr_scope": "PARTIAL_CANARY",
+  "denominator_remaining_after": 3,
+  "verdict": "APPROVAL_BLOCKED — PR#5 dry-run-ready, awaiting APPROVE_LIVE_PR (after PR#3)"
+}

@@ -1,0 +1,10 @@
+{
+  "lane": "lane-words-d",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "subject": "Words Splitter SplitCriteria enum strategy",
+  "status": "N/A",
+  "reason": "words-splitter is POST_MERGE_VERIFIED. The Splitter.ExtractPages() scenario already published. SplitCriteria enum is tracked as words-splitter-split (PERMANENTLY_BLOCKED) — Splitter.Split() overload needs SplitCriteria enum values not exposed via reflection. No new work unblocked this sprint.",
+  "splitter_split_blocked": "PERMANENTLY_BLOCKED — SplitCriteria enum values not in catalog. No path to unblock without manual enum discovery.",
+  "verdict": "LANE_NA_SPLITTER_PUBLISHED_SPLIT_OVERLOAD_PERMANENTLY_BLOCKED"
+}

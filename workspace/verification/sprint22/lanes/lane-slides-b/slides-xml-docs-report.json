@@ -1,0 +1,11 @@
+{
+  "lane": "lane-slides-b",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "subject": "Slides XML documentation gap assessment",
+  "finding": "Aspose.Slides.NET.xml missing from NuGet package — DLL name mismatch (Aspose.Slides.dll vs Aspose.Slides.NET.dll)",
+  "impact": "MITIGATED — DLL fallback implemented in extractor. Reflection-based catalog generation works. LLM prompts have fewer method signature details but generation has succeeded (3 types published).",
+  "workaround": "DllReflector strips .NET suffix from assembly name. 3/3 pilot types (Convert/Compress/Merger) generated and published successfully.",
+  "action_required": "LOW PRIORITY — monitor if generation quality degrades. No immediate action needed.",
+  "verdict": "XML_DOCS_GAP_ACKNOWLEDGED_MITIGATED_LOW_PRIORITY"
+}

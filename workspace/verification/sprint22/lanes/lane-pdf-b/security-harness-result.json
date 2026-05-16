@@ -1,0 +1,29 @@
+{
+  "lane": "lane-pdf-b",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "harness": "workspace/fixture-validation/pdf-security-harness/",
+  "package_version": "Aspose.PDF 26.5.0",
+  "build_result": "BUILD_PASS",
+  "run_result": "RUNTIME_PASS",
+  "api_pattern": "new Security().Process(new EncryptionOptions(ownerPassword, userPassword, DocumentPrivilege))",
+  "tests_verified": {
+    "fixture_pdf_creation": "PASS",
+    "EncryptionOptions_3arg_constructor": "PASS — EncryptionOptions(owner, user, DocumentPrivilege) works",
+    "CryptoAlgorithm_optional": "PASS — 4th arg not required",
+    "AddInput_FileDataSource": "PASS — inherited from OrganizerBaseOptions",
+    "AddOutput_FileDataSource": "PASS — inherited from OrganizerBaseOptions",
+    "Security_Process_call": "PASS",
+    "ResultCollection_count": "PASS (count=1)",
+    "output_file_exists": "PASS (59193 bytes, PDF header)",
+    "encryption_confirmed": "PASS — InvalidPasswordException thrown on open-without-password"
+  },
+  "supporting_deps": {
+    "Aspose.Pdf.Facades.DocumentPrivilege": "REQUIRED_SUPPORTING_DEPENDENCY",
+    "Aspose.Pdf.CryptoAlgorithm": "OPTIONAL_SUPPORTING_DEPENDENCY"
+  },
+  "api_gap_resolved": "AddInput/AddOutput are inherited from OrganizerBaseOptions — not visible in reflection catalog but confirmed working",
+  "generation_feasibility": "HIGH — simple programmatic PDF fixture, standard LowCode pattern",
+  "recommended_action": "Add Security to pdf.yml allowed_pilot_types (Wave E) and generate example",
+  "verdict": "SECURITY_LOWCODE_API_VERIFIED — READY_FOR_PILOT_EXPANSION"
+}

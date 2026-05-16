@@ -1,0 +1,82 @@
+{
+  "lane": "lane-infra-d",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "taskcards_closed_this_sprint": [
+    {
+      "id": "TC-PDF-PDFTOIMAGE-RECLASSIFY",
+      "title": "Reclassify PdfToImage from WORKFLOW_ROOT to ABSTRACT_BASE",
+      "status": "CLOSED_VERIFIED",
+      "evidence": "workspace/verification/sprint22/lanes/lane-pdf-a/pdftoimage-reclassification-report.json"
+    },
+    {
+      "id": "TC-PDF-XMLPROCESSOR-REMOVE",
+      "title": "Remove XmlProcessor from PDF plans (confirmed does not exist in LowCode namespace)",
+      "status": "CLOSED_VERIFIED",
+      "evidence": "workspace/verification/sprint21/pdf-xmlprocessor-api-audit.json"
+    },
+    {
+      "id": "TC-PDF-SECURITY-HARNESS",
+      "title": "Build and run Security LowCode API harness",
+      "status": "CLOSED_VERIFIED",
+      "evidence": "workspace/verification/sprint22/lanes/lane-pdf-b/security-harness-result.json"
+    },
+    {
+      "id": "TC-PDF-FORMFLATTENER-HARNESS",
+      "title": "Build and run FormFlattener + AcroForm fixture harness",
+      "status": "CLOSED_VERIFIED",
+      "evidence": "workspace/verification/sprint22/lanes/lane-pdf-c/acroform-formflattener-harness-result.json"
+    },
+    {
+      "id": "TC-PDF-WAVE-E",
+      "title": "Enable Wave E (Security + FormFlattener) in pdf.yml and denominator",
+      "status": "CLOSED_VERIFIED",
+      "evidence": "workspace/verification/sprint22/lanes/lane-pdf-d/wave-e-enablement-report.json"
+    }
+  ],
+  "taskcards_open_next_sprint": [
+    {
+      "id": "TC-PDF-SECURITY-GENERATE",
+      "title": "Generate Security example in live run",
+      "priority": "HIGH",
+      "blocker": "Requires live run with GPT_OSS credentials"
+    },
+    {
+      "id": "TC-PDF-FORMFLATTENER-GENERATE",
+      "title": "Generate FormFlattener example in live run",
+      "priority": "HIGH",
+      "blocker": "Requires live run with GPT_OSS credentials"
+    },
+    {
+      "id": "TC-PDF-PR3-PUBLISH",
+      "title": "Publish PDF PR#3 (doc-converter+html+xls-converter)",
+      "priority": "CRITICAL",
+      "blocker": "APPROVE_LIVE_PR not set"
+    },
+    {
+      "id": "TC-PDF-PR5-PUBLISH",
+      "title": "Publish PDF PR#5 (jpeg+tiff+png) — after PR#3",
+      "priority": "CRITICAL",
+      "blocker": "APPROVE_LIVE_PR not set + depends on PR#3"
+    },
+    {
+      "id": "TC-PDF-PR6-PUBLISH",
+      "title": "Publish PDF PR#6 (table-generator+toc-generator+image-extractor) — after PR#5",
+      "priority": "CRITICAL",
+      "blocker": "APPROVE_LIVE_PR not set + depends on PR#5"
+    },
+    {
+      "id": "TC-PDF-FORMEDITOR-FRONTIER",
+      "title": "Investigate FormEditor options class name and generate harness",
+      "priority": "MEDIUM",
+      "blocker": "None — catalog audit needed"
+    },
+    {
+      "id": "TC-PDF-FORMEXPORTER-FRONTIER",
+      "title": "Investigate FormExporter API and generate harness",
+      "priority": "MEDIUM",
+      "blocker": "None — catalog audit needed"
+    }
+  ],
+  "verdict": "TASKCARD_RECONCILIATION_COMPLETE"
+}

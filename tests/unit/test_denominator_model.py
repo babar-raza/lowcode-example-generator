@@ -247,22 +247,24 @@ class TestPdfDenominator:
     def test_pdf_total_types_is_101(self):
         assert self.d["total_lowcode_types"] == 101
 
-    def test_pdf_workflow_root_types_is_24(self):
-        assert self.d["workflow_root_types"] == 24, (
-            "PdfExtractor reclassified ABSTRACT_BASE in Sprint 7 — workflow_root_types 25->24"
+    def test_pdf_workflow_root_types_is_23(self):
+        assert self.d["workflow_root_types"] == 23, (
+            "PdfExtractor reclassified ABSTRACT_BASE Sprint 7 (25->24); "
+            "PdfToImage reclassified ABSTRACT_BASE Sprint 22 (24->23) — abstract_class kind confirmed in catalog"
         )
 
-    def test_pdf_pilot_allowed_count_is_14(self):
-        assert self.d["allowed_pilot_count"] == 14, (
-            "PDF pilot expanded to 14 types in Sprint 18/20 (Wave D: TocGenerator/TableGenerator/ImageExtractor added to Wave A=5 + Wave B=3 + Wave C=3)"
+    def test_pdf_pilot_allowed_count_is_16(self):
+        assert self.d["allowed_pilot_count"] == 16, (
+            "PDF pilot expanded to 16 types in Sprint 22 (Wave E: Security/FormFlattener added to Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3)"
         )
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 14
+        assert isinstance(types, list) and len(types) == 16
         for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter",
                   "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff",
-                  "TocGenerator", "TableGenerator", "ImageExtractor"]:
+                  "TocGenerator", "TableGenerator", "ImageExtractor",
+                  "Security", "FormFlattener"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_4(self):
@@ -290,14 +292,14 @@ class TestPdfDenominator:
         sha = self.d["api_catalog_sha256"]
         assert len(sha) == 64
 
-    def test_pdf_excluded_count_is_87(self):
-        assert self.d["excluded_count"] == 87, (
-            "Wave D adds TocGenerator/TableGenerator/ImageExtractor to pilot (14 total) — excluded 101-14=87"
+    def test_pdf_excluded_count_is_85(self):
+        assert self.d["excluded_count"] == 85, (
+            "Wave E adds Security/FormFlattener to pilot (16 total) — excluded 101-16=85"
         )
 
-    def test_pdf_runnable_scenarios_is_14(self):
-        assert self.d["runnable_scenarios"] == 14, (
-            "PDF pilot expanded to 14 types in Sprint 18/20 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3)"
+    def test_pdf_runnable_scenarios_is_16(self):
+        assert self.d["runnable_scenarios"] == 16, (
+            "PDF pilot expanded to 16 types in Sprint 22 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2)"
         )
 
 

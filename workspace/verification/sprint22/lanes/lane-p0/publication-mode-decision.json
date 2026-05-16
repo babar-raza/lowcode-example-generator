@@ -1,0 +1,19 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "approval_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_value": "ABSENT",
+  "publish_mode": "APPROVAL_BLOCKED",
+  "gh_token_type": "CLASSIC_PAT",
+  "gh_token_prefix": "ghp_",
+  "github_token_type": "FINE_GRAINED",
+  "token_policy_status": "GH_TOKEN present (classic PAT) — needs mapping to GITHUB_TOKEN at publish time",
+  "pdf_prs_awaiting": ["PR#3 (doc-converter+html+xls-converter)", "PR#5 (jpeg+tiff+png)", "PR#6 (table-generator+toc-generator+image-extractor)"],
+  "pdf_prs_dry_run_ready": 3,
+  "pdf_examples_new": 9,
+  "cells_words_diagram_email_slides_published": "NO_NEW_PUBLISHES_NEEDED — all published families complete at their pilot scope",
+  "action_required_from_operator": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR and map GH_TOKEN to GITHUB_TOKEN",
+  "publish_command_pdf_pr3": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish",
+  "verdict": "APPROVAL_BLOCKED — no publication this sprint"
+}

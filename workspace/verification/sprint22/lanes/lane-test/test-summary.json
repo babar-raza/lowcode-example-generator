@@ -1,0 +1,21 @@
+{
+  "lane": "lane-test",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "test_runner": "pytest",
+  "test_path": "tests/unit/",
+  "total_tests": 1600,
+  "passed": 1600,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": 31.95,
+  "changes_tested": [
+    "test_denominator_model.py: test_pdf_workflow_root_types_is_23 (was _is_24)",
+    "test_denominator_model.py: test_pdf_pilot_allowed_count_is_16 (was _is_14)",
+    "test_denominator_model.py: test_pdf_allowed_pilot_types_present: 16 types including Security/FormFlattener",
+    "test_denominator_model.py: test_pdf_excluded_count_is_85 (was _is_87)",
+    "test_denominator_model.py: test_pdf_runnable_scenarios_is_16 (was _is_14)",
+    "test_completion_queue.py: backlogged >= 13 (was 14), permanently_blocked >= 4 (was 3)"
+  ],
+  "verdict": "ALL_1600_TESTS_PASS"
+}

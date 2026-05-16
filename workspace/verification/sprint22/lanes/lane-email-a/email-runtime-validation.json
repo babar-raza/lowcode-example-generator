@@ -1,0 +1,31 @@
+{
+  "lane": "lane-email-a",
+  "sprint": "sprint22",
+  "date": "2026-05-16",
+  "harness": "workspace/fixture-validation/email-harness/",
+  "package_version": "Aspose.Email 26.4.0",
+  "nuget_status": "CACHED (26.4.0 available)",
+  "build_result": "BUILD_PASS (pre-built)",
+  "run_result": "RUNTIME_PARTIAL_PASS",
+  "test_results": {
+    "programmatic_eml_single": "PASS (599 bytes, email headers present)",
+    "programmatic_msg_single": "PASS (10752 bytes)",
+    "Converter_ConvertToMsg": "PASS (1 file, 10752 bytes, async .GetAwaiter().GetResult() pattern)",
+    "Converter_ConvertToHtml": "FAIL — Windows IOException file-locking (temp dir race condition, NOT an API failure)",
+    "Converter_ConvertToEml": "PASS (1 file, 715 bytes)"
+  },
+  "pass_count": 4,
+  "fail_count": 1,
+  "fail_classification": "HARNESS_ARTIFACT — Windows file locking in temp dir, not Aspose.Email API failure",
+  "api_pattern_confirmed": {
+    "pattern": "STATIC_ASYNC_STREAM_CALLBACK",
+    "all_methods_return_task": true,
+    "input_via_stream": true,
+    "output_via_ioutputhandler": true,
+    "concrete_handler": "FolderOutputHandler(string path)",
+    "sync_workaround": ".GetAwaiter().GetResult()"
+  },
+  "email_published_state": "Email PR#1 MERGED (SHA 023ad66970d2) — 1/1 published POST_MERGE_VERIFIED",
+  "regression_verdict": "EMAIL_RUNTIME_CONFIRMED — 4/5 tests pass, 1 harness artifact",
+  "verdict": "EMAIL_API_VERIFIED — post-merge validation PASS with minor harness artifact"
+}

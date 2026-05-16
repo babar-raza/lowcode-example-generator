@@ -7,8 +7,8 @@
   "state_summary": {
     "POST_MERGE_VERIFIED": 28,
     "PR_READY": 9,
-    "BACKLOGGED": 14,
-    "PERMANENTLY_BLOCKED": 3
+    "BACKLOGGED": 13,
+    "PERMANENTLY_BLOCKED": 4
   },
   "entries": [
     {
@@ -370,7 +370,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-jpeg",
@@ -385,7 +385,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-ofd",
@@ -422,7 +422,7 @@
       "family": "pdf",
       "type_name": "PdfExtractor",
       "state": "PERMANENTLY_BLOCKED",
-      "blocking_reason": "ABSTRACT_BASE_CLASS: PdfExtractor and PdfExtractorOptions are both abstract \u2014 cannot instantiate. PdfExtractor is the abstract base for TextExtractor and ImageExtractor. Sprint 7 harness-confirmed (CS0144 error).",
+      "blocking_reason": "ABSTRACT_BASE_CLASS: PdfExtractor and PdfExtractorOptions are both abstract — cannot instantiate. PdfExtractor is the abstract base for TextExtractor and ImageExtractor. Sprint 7 harness-confirmed (CS0144 error).",
       "blocking_taskcard": "TC-PDF-WAVE-B-RECLASSIFY",
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
@@ -436,16 +436,16 @@
       "scenario_id": "pdf-pdf-to-image",
       "family": "pdf",
       "type_name": "PdfToImage",
-      "state": "BACKLOGGED",
-      "blocking_reason": "PILOT_SCOPE_DEFERRED: image output validation strategy not yet defined",
-      "blocking_taskcard": "followup-pdf-remaining-candidate-classification",
+      "state": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "ABSTRACT_BASE: PdfToImage is an abstract_class (confirmed Sprint 21 catalog audit). Cannot instantiate. Abstract base for Jpeg/Png/Tiff concrete implementations. Same pattern as PdfExtractor (reclassified Sprint 7). PdfToImageOptions also abstract_class.",
+      "blocking_taskcard": "pdf-pdf-to-image-reclassified-abstract-base-sprint22",
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": null,
       "merge_sha": null,
-      "last_state_change": "2026-05-09T00:00:00Z",
+      "last_state_change": "2026-05-16T12:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "notes": "Reclassified ABSTRACT_BASE in Sprint 22. Not a runnable WORKFLOW_ROOT. Cannot be used as standalone LowCode API. denominator: workflow_root_types 24->23."
     },
     {
       "scenario_id": "pdf-png",
@@ -460,7 +460,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-security",
@@ -520,7 +520,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-tiff",
@@ -535,7 +535,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-timestamp",
@@ -565,7 +565,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-09T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u2014 template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "notes": "WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY — template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-xls-converter",
@@ -628,7 +628,7 @@
       "merge_sha": "04eb94bba3d921d3a51fe8b546d0ef10abcbba6b",
       "last_state_change": "2026-05-13T00:00:00Z",
       "post_merge_validation": "ALL_PASS",
-      "notes": "Wave 3 Words expansion. PASSED run pilot-words-20260513-175418. MailMerger.Execute(template, output, fieldNames[], fieldValues[]) \u2014 static API. Template via DocumentBuilder.InsertField('MERGEFIELD'). InsertField constraint fix resolved generation failure. Awaiting PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL."
+      "notes": "Wave 3 Words expansion. PASSED run pilot-words-20260513-175418. MailMerger.Execute(template, output, fieldNames[], fieldValues[]) — static API. Template via DocumentBuilder.InsertField('MERGEFIELD'). InsertField constraint fix resolved generation failure. Awaiting PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL."
     },
     {
       "scenario_id": "words-processor",
@@ -643,7 +643,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-13T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "Wave 3 Words expansion. BLOCKED in run pilot-words-20260513-175418 with CS0120: 'Processor.From(string)' requires object reference. Processor has no public constructor \u2014 new Processor() fails with CS1729. Processor.From() is instance method but cannot be called statically. ProcessorContext (excluded from pilot) may be the factory. Investigation required: is ProcessorContext.Create() the entry point? Should ProcessorContext be added to allowed_types?"
+      "notes": "Wave 3 Words expansion. BLOCKED in run pilot-words-20260513-175418 with CS0120: 'Processor.From(string)' requires object reference. Processor has no public constructor — new Processor() fails with CS1729. Processor.From() is instance method but cannot be called statically. ProcessorContext (excluded from pilot) may be the factory. Investigation required: is ProcessorContext.Create() the entry point? Should ProcessorContext be added to allowed_types?"
     },
     {
       "scenario_id": "words-splitter-split",

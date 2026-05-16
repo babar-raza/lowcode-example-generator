@@ -72,6 +72,8 @@ generation:
     - TocGenerator
     - ImageExtractor
     - TableGenerator
+    - Security
+    - FormFlattener
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
@@ -87,6 +89,8 @@ generation:
     TocGenerator: Process
     ImageExtractor: Process
     TableGenerator: Process
+    Security: Process
+    FormFlattener: Process
 
 validation:
   require_restore: true
@@ -375,3 +379,33 @@ per_type_constraints:
       options.AddOutput(new FileDataSource("output.pdf"));
       var result = new TableGenerator().Process(options);
       Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");
+
+  Security:
+    required:
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Security, EncryptionOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.Facades; (for DocumentPrivilege — REQUIRED_SUPPORTING_DEPENDENCY)"
+      - "REQUIRED: new EncryptionOptions(ownerPassword, userPassword, DocumentPrivilege) — 3-arg constructor confirmed working (harness Sprint 22)"
+      - "REQUIRED: new Security().Process(encOptions) — use the LowCode Security plugin"
+      - "REQUIRED: encOptions.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: encOptions.AddOutput(new FileDataSource( — encrypted PDF output via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: DocumentPrivilege privilege = DocumentPrivilege.ForbidAll — use DocumentPrivilege to set allowed operations"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use EncryptionOptions instead"
+      - "FORBIDDEN: PdfFileSecurity — this is core Aspose.Pdf.Facades API; use LowCode Security instead"
+      - "FORBIDDEN: Document.Encrypt() — this is core API; use LowCode Security.Process() instead"
+  FormFlattener:
+    required:
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for FormFlattener, FormFlattenAllFieldsOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField — REQUIRED_SUPPORTING_DEPENDENCY for AcroForm fixture)"
+      - "REQUIRED: new FormFlattenAllFieldsOptions() — no-param constructor, confirmed working (harness Sprint 22)"
+      - "REQUIRED: new FormFlattener().Process(flattenOptions) — use the LowCode FormFlattener plugin"
+      - "REQUIRED: flattenOptions.AddInput(new FileDataSource( — AcroForm PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: flattenOptions.AddOutput(new FileDataSource( — flattened PDF output via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( — create AcroForm fixture with at least one TextBoxField"
+      - "REQUIRED: doc.Form.Add(textBox, 1) — add the TextBoxField to the document's form on page 1"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use FormFlattenAllFieldsOptions instead"
+      - "FORBIDDEN: Document.Form.Flatten() — this is core API; use LowCode FormFlattener.Process() instead"
+      - "FORBIDDEN: PdfFileEditor for form operations — use LowCode FormFlattener instead"

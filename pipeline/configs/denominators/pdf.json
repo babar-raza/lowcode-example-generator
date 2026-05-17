@@ -7,12 +7,12 @@
   "api_catalog_source": "workspace/runs/pilot-pdf-20260515-130700/catalog/pdf/api-catalog.json",
   "plugin_namespace": "Aspose.Pdf.LowCode",
   "total_lowcode_types": 101,
-  "workflow_root_types": 23,
-  "workflow_root_types_basis": "Classified in workspace/verification/latest/pdf-type-role-classification.json (2026-05-04). Originally 25 WORKFLOW_ROOT types. PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7 (2026-05-14). PdfToImage reclassified to ABSTRACT_BASE in Sprint 22 (2026-05-16) — abstract_class kind confirmed in catalog; abstract base for Jpeg/Png/Tiff. Cannot instantiate. PdfToImageOptions also abstract. Confirmed via Sprint 21 XmlProcessor API audit. workflow_root_types 25->24->23.",
-  "non_runnable_types": 78,
+  "workflow_root_types": 22,
+  "workflow_root_types_basis": "Classified in workspace/verification/latest/pdf-type-role-classification.json (2026-05-04). Originally 25 WORKFLOW_ROOT types. PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7 (2026-05-14). PdfToImage reclassified to ABSTRACT_BASE in Sprint 22 (2026-05-16) — abstract_class kind confirmed in catalog; abstract base for Jpeg/Png/Tiff. Cannot instantiate. PdfToImageOptions also abstract. Confirmed via Sprint 21 XmlProcessor API audit. SelectField reclassified to PROVIDER_CALLBACK in Sprint 24 (2026-05-17) — DELEGATE type (Invoke/BeginInvoke/EndInvoke only, no IPlugin interface, not instantiable as standalone plugin). workflow_root_types 25->24->23->22.",
+  "non_runnable_types": 79,
   "non_runnable_breakdown": {
     "OPTIONS": 51,
-    "PROVIDER_CALLBACK": 5,
+    "PROVIDER_CALLBACK": 6,
     "RESULT": 6,
     "DATA_SOURCE": 3,
     "SAVE_TARGET": 2,
@@ -37,12 +37,14 @@
     "TableGenerator",
     "ImageExtractor",
     "Security",
-    "FormFlattener"
+    "FormFlattener",
+    "FormEditor",
+    "FormExporter"
   ],
-  "allowed_pilot_count": 16,
+  "allowed_pilot_count": 18,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "PDF Wave E expansion (Sprint 22, 2026-05-16): 16 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener). PdfExtractor excluded — ABSTRACT_BASE. PdfToImage excluded — ABSTRACT_BASE (reclassified Sprint 22). Denominator for current coverage = 16. workflow_root denominator = 23. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace.",
-  "runnable_scenarios": 16,
+  "denominator_basis_note": "PDF Wave F expansion (Sprint 24, 2026-05-17): 18 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener) + Wave F (2: FormEditor/FormExporter). PdfExtractor excluded — ABSTRACT_BASE. PdfToImage excluded — ABSTRACT_BASE (reclassified Sprint 22). SelectField reclassified PROVIDER_CALLBACK (Sprint 24) — not a WORKFLOW_ROOT. Denominator for current coverage = 18. workflow_root denominator = 22. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace.",
+  "runnable_scenarios": 18,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
     "pdf-merger",
@@ -60,10 +62,12 @@
     "pdf-table-generator",
     "pdf-image-extractor",
     "pdf-security",
-    "pdf-form-flattener"
+    "pdf-form-flattener",
+    "pdf-form-editor",
+    "pdf-form-exporter"
   ],
-  "workflow_root_runnable_count": 23,
-  "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 23 WORKFLOW_ROOT type names (PdfExtractor reclassified ABSTRACT_BASE Sprint 7; PdfToImage reclassified ABSTRACT_BASE Sprint 22)",
+  "workflow_root_runnable_count": 22,
+  "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 22 WORKFLOW_ROOT type names (PdfExtractor reclassified ABSTRACT_BASE Sprint 7; PdfToImage reclassified ABSTRACT_BASE Sprint 22; SelectField reclassified PROVIDER_CALLBACK Sprint 24)",
   "published_count": 5,
   "published_scenario_ids": [
     "pdf-merger",
@@ -90,17 +94,17 @@
   "reviewer_passed_awaiting_pr_ids": [],
   "reviewer_passed_awaiting_pr_basis": "All reviewer-passed types are either already published or in pr_dry_run_ready_ids.",
   "blocked_count": 0,
-  "excluded_count": 85,
-  "excluded_count_basis": "85 types excluded: 16 pilot allowed + 85 others = 101. Excludes all non-WORKFLOW_ROOT types (78, including PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 7 WORKFLOW_ROOT types not in allowed_pilot_types.",
-  "unclassified_workflow_root_count": 7,
-  "unclassified_workflow_root_note": "7 WORKFLOW_ROOT types not in allowed_pilot_types after Wave E: Signature, Timestamp, Ofd (BLOCKED — external deps), FormEditor, FormExporter, FormImporter, SelectField (COMPLEX — AcroForm fixture needed). Security and FormFlattener added to pilot in Wave E (Sprint 22). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
-  "coverage_pct_of_pilot_allowed": 31.25,
-  "coverage_pct_of_workflow_root": 21.74,
+  "excluded_count": 83,
+  "excluded_count_basis": "83 types excluded: 18 pilot allowed + 83 others = 101. Excludes all non-WORKFLOW_ROOT types (79, including SelectField reclassified PROVIDER_CALLBACK Sprint 24, PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 4 WORKFLOW_ROOT types not in allowed_pilot_types.",
+  "unclassified_workflow_root_count": 4,
+  "unclassified_workflow_root_note": "4 WORKFLOW_ROOT types not in allowed_pilot_types after Wave F: Signature, Timestamp (BLOCKED — external deps/PKI), Ofd (BLOCKED — non-standard format), FormImporter (COMPLEX — JSON import fixture). FormEditor + FormExporter added to pilot in Wave F (Sprint 24). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
+  "coverage_pct_of_pilot_allowed": 27.78,
+  "coverage_pct_of_workflow_root": 22.73,
   "coverage_pct_of_total_types": 4.95,
   "coverage_pct_detail": {
-    "pilot_allowed": "5/16 published = 31.25% (5 merged; 9 dry-run ready pending APPROVE_LIVE_PR for PR#3+PR#5+PR#6; 2 new Wave E types pending generation)",
-    "workflow_root": "5/23 published = 21.74% (16/23 = 69.57% after PR#3+PR#5+PR#6 + Wave E merge)",
-    "full_sot": "5/101 published = 4.95% (16/101 = 15.84% after PR#3+PR#5+PR#6 + Wave E merge)"
+    "pilot_allowed": "5/18 published = 27.78% (5 merged; 9 dry-run ready pending APPROVE_LIVE_PR for PR#3+PR#5+PR#6; 2 Wave E types in PR#7 pending APPROVE_LIVE_PR; 2 Wave F types FormEditor/FormExporter pending generation)",
+    "workflow_root": "5/22 published = 22.73% (16/22 = 72.73% after PR#3+PR#5+PR#6+PR#7 + Wave F merge)",
+    "full_sot": "5/101 published = 4.95% (18/101 = 17.82% after PR#3+PR#5+PR#6+PR#7 + Wave F merge)"
   },
   "evidence_sources": [
     "workspace/verification/latest/pdf-source-of-truth-proof.json",
@@ -109,6 +113,6 @@
     "workspace/verification/latest/pdf-merge-result.json",
     "pipeline/configs/families/pdf.yml"
   ],
-  "last_verified_at": "2026-05-16T12:00:00Z",
-  "notes": "Updated Sprint 22 (2026-05-16): PdfToImage reclassified ABSTRACT_BASE (workflow_root_types 24->23). XmlProcessor confirmed does not exist in LowCode namespace — removed from plans. Security + FormFlattener identified as next frontier candidates (Sprint 22 harness verification). Updated Sprint 20 (2026-05-16): corrected allowed_pilot_count 11->14, added TocGenerator/TableGenerator/ImageExtractor (Wave D, Sprint 18). All 14 pilot types PR_DRY_RUN_READY from run pilot-pdf-20260515-193905. TocGenerator+ImageExtractor FIRST EVER PASS (Sprint 18, template_first). Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). PR#3/5/6 assembled, awaiting APPROVE_LIVE_PR."
+  "last_verified_at": "2026-05-17T00:00:00Z",
+  "notes": "Updated Sprint 24 (2026-05-17): SelectField reclassified PROVIDER_CALLBACK (workflow_root_types 23->22, non_runnable 78->79, PROVIDER_CALLBACK 5->6). FormEditor + FormExporter added to Wave F pilot (allowed_pilot_count 16->18, excluded 85->83). Denominator conservation verified: 22+79=101, 18+83=101. Updated Sprint 22 (2026-05-16): PdfToImage reclassified ABSTRACT_BASE (workflow_root_types 24->23). XmlProcessor confirmed does not exist in LowCode namespace. Security + FormFlattener Wave E. Updated Sprint 20 (2026-05-16): corrected allowed_pilot_count 11->14, added TocGenerator/TableGenerator/ImageExtractor (Wave D, Sprint 18). Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). PR#3/5/6 assembled, PR#7 assembled (Security/FormFlattener), awaiting APPROVE_LIVE_PR."
 }

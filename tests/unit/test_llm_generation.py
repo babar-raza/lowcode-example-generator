@@ -1621,6 +1621,49 @@ class TestPdfWave1ConstraintInjection:
             "new PluginOptions() must be a blocking validation error for PDF"
         )
 
+    def test_splitter_packet_does_not_require_using_aspose_pdf_text(self):
+        """Regression: Splitter must NOT carry 'using Aspose.Pdf.Text;' as a REQUIRED constraint.
+        Splitter does not use TextFragment — this constraint was a false-positive removed in Sprint 24."""
+        scenario = _make_pdf_scenario("Splitter", "splitter")
+        packet = build_packet(scenario, _make_pdf_splitter_catalog())
+        text_namespace_required = [
+            c for c in packet.constraints
+            if "Aspose.Pdf.Text" in c and "REQUIRED" in c
+        ]
+        assert not text_namespace_required, (
+            f"Splitter must NOT have REQUIRED: using Aspose.Pdf.Text; constraint "
+            f"(false-positive removed Sprint 24). Found: {text_namespace_required}"
+        )
+
+    def test_splitter_code_without_using_pdf_text_passes_from_constraints(self):
+        """Regression: Splitter code that lacks 'using Aspose.Pdf.Text;' must not be flagged
+        by _validate_code_from_constraints when the Splitter per_type_constraints are used."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+        splitter_constraints = {
+            "required": [
+                "REQUIRED: new Splitter().Process(options) — use the LowCode Splitter plugin, not PdfFileEditor",
+                "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+            ],
+            "forbidden": [
+                "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead",
+            ],
+        }
+        code = (
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'var doc = new Document();\n'
+            'doc.Pages.Add();\n'
+            'doc.Save("input.pdf");\n'
+            'var options = new SplitOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new Splitter().Process(options);\n'
+        )
+        issues = _validate_code_from_constraints(code, splitter_constraints)
+        assert len(issues) == 0, (
+            f"Splitter code without 'using Aspose.Pdf.Text;' must pass validation. Issues: {issues}"
+        )
+
 
 # ---------------------------------------------------------------------------
 # LLM timeout retry/backoff tests (Wave 1)
@@ -2666,6 +2709,47 @@ class TestTemplateFIrstGeneration:
         assert 'flattenOptions.AddOutput(new FileDataSource("output.pdf"))' in code
         assert "result.ResultCollection.Count > 0" in code
 
+    def test_formeditor_template_first_bypasses_llm(self):
+        """FormEditor template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("formeditor", "FormEditor")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_formeditor_template_contains_required_patterns(self):
+        """FormEditor template must use AcroForm fixture, FormRemoveAllFieldsOptions (NOT abstract FormEditorRemoveOptions)."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("formeditor", "FormEditor")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "FormRemoveAllFieldsOptions" in code, "Must use concrete FormRemoveAllFieldsOptions"
+        assert "FormEditorRemoveOptions" not in code, "Must NOT use abstract FormEditorRemoveOptions"
+        assert "TextBoxField" in code
+        assert "Aspose.Pdf.Forms" in code
+        assert "doc.Form.Add(textBox, 1)" in code
+        assert "new FormEditor().Process(removeOptions)" in code
+        assert 'removeOptions.AddInput(new FileDataSource("input.pdf"))' in code
+        assert 'removeOptions.AddOutput(new FileDataSource("output.pdf"))' in code
+        assert "result.ResultCollection.Count > 0" in code
+
+    def test_formexporter_template_first_bypasses_llm(self):
+        """FormExporter template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("formexporter", "FormExporter")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_formexporter_template_contains_required_patterns(self):
+        """FormExporter template must use AcroForm fixture, FormExporterToJsonOptions, JSON output."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("formexporter", "FormExporter")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "FormExporterToJsonOptions" in code
+        assert "TextBoxField" in code
+        assert "Aspose.Pdf.Forms" in code
+        assert "doc.Form.Add(textBox, 1)" in code
+        assert "new FormExporter().Process(exportOptions)" in code
+        assert 'exportOptions.AddInput(new FileDataSource("input.pdf"))' in code
+        assert 'exportOptions.AddOutput(new FileDataSource("output.json"))' in code
+        assert "result.ResultCollection.Count > 0" in code
+
     def test_all_template_first_types_pass_validation_with_utf8_config(self):
         """All template-first types must produce code that passes constraint validation."""
         from plugin_examples.generator.code_generator import (
@@ -2683,6 +2767,7 @@ class TestTemplateFIrstGeneration:
             "Jpeg", "Tiff", "Png", "TableGenerator",
             "TocGenerator", "ImageExtractor",
             "Security", "FormFlattener",
+            "FormEditor", "FormExporter",
         ]:
             packet = MagicMock()
             packet.target_type = f"Aspose.Pdf.LowCode.{type_name}"

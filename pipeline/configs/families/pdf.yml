@@ -74,6 +74,8 @@ generation:
     - TableGenerator
     - Security
     - FormFlattener
+    - FormEditor
+    - FormExporter
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
@@ -91,6 +93,8 @@ generation:
     TableGenerator: Process
     Security: Process
     FormFlattener: Process
+    FormEditor: Process
+    FormExporter: Process
 
 validation:
   require_restore: true
@@ -185,8 +189,8 @@ per_type_constraints:
     forbidden: []
   Splitter:
     required:
-      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — Splitter fixture may use TextFragment to add page content)"
       - "REQUIRED: new Splitter().Process(options) — use the LowCode Splitter plugin, not PdfFileEditor"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead"
   Optimizer:
@@ -411,3 +415,35 @@ per_type_constraints:
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use FormFlattenAllFieldsOptions instead"
       - "FORBIDDEN: Document.Form.Flatten() — this is core API; use LowCode FormFlattener.Process() instead"
       - "FORBIDDEN: PdfFileEditor for form operations — use LowCode FormFlattener instead"
+  FormEditor:
+    template_first: true
+    required:
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for FormEditor, FormRemoveAllFieldsOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)"
+      - "REQUIRED: new FormRemoveAllFieldsOptions() — no-param constructor; use FormRemoveAllFieldsOptions NOT FormEditorRemoveOptions (which is abstract)"
+      - "REQUIRED: new FormEditor().Process(removeOptions) — use the LowCode FormEditor plugin"
+      - "REQUIRED: removeOptions.AddInput(new FileDataSource( — AcroForm PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: removeOptions.AddOutput(new FileDataSource( — modified PDF output via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( — create AcroForm fixture with at least one TextBoxField"
+      - "REQUIRED: doc.Form.Add(textBox, 1) — add the TextBoxField to the document's form on page 1"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use FormRemoveAllFieldsOptions instead"
+      - "FORBIDDEN: new FormEditorRemoveOptions() — FormEditorRemoveOptions is abstract base class; use FormRemoveAllFieldsOptions instead"
+      - "FORBIDDEN: Document.Form.Remove() — this is core API; use LowCode FormEditor.Process() instead"
+  FormExporter:
+    template_first: true
+    required:
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for FormExporter, FormExporterToJsonOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)"
+      - "REQUIRED: new FormExporterToJsonOptions() — no-param constructor; exports form field data to JSON"
+      - "REQUIRED: new FormExporter().Process(exportOptions) — use the LowCode FormExporter plugin"
+      - "REQUIRED: exportOptions.AddInput(new FileDataSource( — AcroForm PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: exportOptions.AddOutput(new FileDataSource( — JSON output added via AddOutput(new FileDataSource(\"output.json\"))"
+      - "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( — create AcroForm fixture with at least one TextBoxField with a value"
+      - "REQUIRED: doc.Form.Add(textBox, 1) — add the TextBoxField to the document's form on page 1"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use FormExporterToJsonOptions instead"
+      - "FORBIDDEN: Document.Form.ExportXml() or Document.Form.ExportFdf() — core API; use LowCode FormExporter.Process() instead"
+      - "FORBIDDEN: SelectField as constructor argument to FormExporterToJsonOptions — use the no-param constructor"

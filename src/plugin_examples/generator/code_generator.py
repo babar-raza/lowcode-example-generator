@@ -725,6 +725,48 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'var result = new FormFlattener().Process(flattenOptions);\n'
             'Console.WriteLine(result.ResultCollection.Count > 0 ? "Form flattened" : "No output");\n'
         )
+    if t == "formeditor":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Forms;\n'
+            '\n'
+            'var doc = new Document();\n'
+            'var page = doc.Pages.Add();\n'
+            'var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle(100, 700, 300, 730));\n'
+            'textBox.PartialName = "TextField1";\n'
+            'textBox.Value = "Hello AcroForm";\n'
+            'doc.Form.Add(textBox, 1);\n'
+            'doc.Save("input.pdf");\n'
+            '\n'
+            'var removeOptions = new FormRemoveAllFieldsOptions();\n'
+            'removeOptions.AddInput(new FileDataSource("input.pdf"));\n'
+            'removeOptions.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new FormEditor().Process(removeOptions);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Form fields removed" : "No output");\n'
+        )
+    if t == "formexporter":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Forms;\n'
+            '\n'
+            'var doc = new Document();\n'
+            'var page = doc.Pages.Add();\n'
+            'var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle(100, 700, 300, 730));\n'
+            'textBox.PartialName = "TextField1";\n'
+            'textBox.Value = "ExportedValue";\n'
+            'doc.Form.Add(textBox, 1);\n'
+            'doc.Save("input.pdf");\n'
+            '\n'
+            'var exportOptions = new FormExporterToJsonOptions();\n'
+            'exportOptions.AddInput(new FileDataSource("input.pdf"));\n'
+            'exportOptions.AddOutput(new FileDataSource("output.json"));\n'
+            'var result = new FormExporter().Process(exportOptions);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Form exported to JSON" : "No output");\n'
+        )
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
 

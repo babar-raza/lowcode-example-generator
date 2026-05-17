@@ -1,0 +1,51 @@
+{
+  "lane": "lane-pdf-d",
+  "sprint": "sprint25",
+  "date": "2026-05-17",
+  "type": "Signature",
+  "wave": "Wave G (candidate)",
+  "harness_file": "workspace/fixture-validation/pdf-signature-harness/Program.cs",
+  "harness_result": "SIGNATURE_PASS",
+  "api_pattern": "new Signature().Process(new SignOptions(pfxPath, password))",
+  "fixture_strategy": "self-signed PFX via .NET CertificateRequest API (no external TSA required)",
+  "fixture_code": {
+    "pfx_creation": "RSA.Create(2048) + CertificateRequest + CreateSelfSigned + cert.Export(X509ContentType.Pfx)",
+    "pdf_creation": "new Document() + page.Paragraphs.Add(new TextFragment()) + doc.Save()",
+    "api_call": "new SignOptions(pfxPath, password); signOptions.PageNumber = 1; signOptions.Reason = reason; signOptions.AddInput/AddOutput; new Signature().Process(signOptions)"
+  },
+  "harness_output": {
+    "signature_result_count": 1,
+    "output_file_exists": true,
+    "verdict_line": "SIGNATURE_PASS"
+  },
+  "options_class": "SignOptions",
+  "options_class_ctors": "SignOptions(string pfxPath, string password) — confirmed working",
+  "no_external_dependency": true,
+  "no_tsa_server_required": true,
+  "supporting_deps": {
+    "System.Security.Cryptography": "REQUIRED for self-signed PFX creation (standard .NET)",
+    "System.Security.Cryptography.X509Certificates": "REQUIRED for X509ContentType.Pfx export",
+    "Aspose.Pdf.Text.TextFragment": "REQUIRED for PDF fixture creation"
+  },
+  "wave_g_readiness": {
+    "verdict": "READY_FOR_WAVE_G",
+    "confidence": "HIGH",
+    "template_first_candidate": true,
+    "harness_verified": true,
+    "blocker": "NONE",
+    "required_sprint25_actions": [
+      "Add Signature to pdf.yml allowed_types (Wave G)",
+      "Add per_type_constraints for Signature with REQUIRED: using System.Security.Cryptography;",
+      "Add REQUIRED: using System.Security.Cryptography.X509Certificates;",
+      "Add template to code_generator.py _generate_deterministic_template_for_scenario()",
+      "Add test_signature_template_contains_required_patterns",
+      "Update denominator allowed_pilot_count 18 -> 19"
+    ]
+  },
+  "denominator_impact": {
+    "current_allowed_pilot_count": 18,
+    "after_wave_g_signature": 19,
+    "excluded_count_change": "83 -> 82"
+  },
+  "verdict": "HARNESS_VERIFIED_WAVE_G_READY — Signature LowCode ALL_PASS using self-signed PFX. No TSA required. template_first candidate."
+}

@@ -1,9 +1,15 @@
 {
-  "total_build_repairs": 1,
+  "total_build_repairs": 2,
   "total_runtime_repairs": 0,
   "attempts": [
     {
       "scenario_id": "pdf-table-generator",
+      "repair_type": "build",
+      "attempt": 1,
+      "success": true
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
       "repair_type": "build",
       "attempt": 1,
       "success": true

@@ -18,7 +18,7 @@
       "json_response": true,
       "structured_response_parseable": true,
       "timeout_within_limit": true,
-      "latency_ms": 1615.9515380859375,
+      "latency_ms": 1628.455638885498,
       "error": null
     }
   ]

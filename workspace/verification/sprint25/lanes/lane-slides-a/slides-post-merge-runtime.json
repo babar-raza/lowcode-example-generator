@@ -1,0 +1,54 @@
+{
+  "lane": "lane-slides-a",
+  "sprint": "sprint25",
+  "date": "2026-05-17",
+  "family": "slides",
+  "harness_type": "post-merge runtime validation",
+  "harness_file": "workspace/fixture-validation/slides-harness/Program.cs",
+  "overall_result": "5/5 PASS (ALL_PASS)",
+  "results": {
+    "programmatic_pptx_single": {
+      "status": "PASS",
+      "bytes": 33931,
+      "strategy": "Presentation() + AddAutoShape(Rectangle) + TextFrame.Text + Save(Pptx)"
+    },
+    "programmatic_pptx_pair": {
+      "status": "PASS",
+      "bytes_a": 33931,
+      "bytes_b": 33928
+    },
+    "Convert.ToPdf": {
+      "status": "PASS",
+      "output_bytes": 66510,
+      "pdf_header_valid": true,
+      "api_pattern": "static Aspose.Slides.LowCode.Convert.ToPdf(string presPath, string outPath)"
+    },
+    "Convert.AutoByExtension": {
+      "status": "PASS",
+      "output_bytes": 66510,
+      "pdf_header_valid": true,
+      "api_pattern": "static Aspose.Slides.LowCode.Convert.AutoByExtension(string presPath, string outPath)"
+    },
+    "Merger.Process": {
+      "status": "PASS",
+      "output_bytes": 49237,
+      "slide_count": 2,
+      "expected_slides": 2,
+      "api_pattern": "static Aspose.Slides.LowCode.Merger.Process(string[] inputPaths, string outputPath)"
+    },
+    "Compress.CompressEmbeddedFonts": {
+      "status": "PASS",
+      "output_bytes": 35855,
+      "api_note": "Compress modifies Presentation in-place; requires manual pres.Save() after"
+    }
+  },
+  "api_pattern_confirmed": {
+    "Convert": "STATIC_FILE_PATH — Convert.ToPdf(string, string) and AutoByExtension(string, string)",
+    "Merger": "STATIC_FILE_PATH — Merger.Process(string[], string)",
+    "Compress": "IN_PLACE_OBJECT — Compress.*(Presentation pres); manual Save() required"
+  },
+  "xml_docs_status": "MISSING — Aspose.Slides.NET package does not include XML documentation (known gap from Sprint 14)",
+  "post_merge_verdict": "SLIDES_POST_MERGE_RUNTIME_ALL_PASS",
+  "already_published_pr": "Slides PR#1 MERGED (SHA: bf05fc43124f, sprint email/slides activation)",
+  "production_verdict": "PILOT_COMPLETE — Slides LowCode runtime confirmed ALL_PASS. 3 examples published. Convert, Compress, Merger all verified working with programmatic PPTX fixtures."
+}

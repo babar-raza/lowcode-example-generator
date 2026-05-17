@@ -2715,6 +2715,38 @@ class TestTemplateFIrstGeneration:
         example = generate_example(packet, llm_generate=lambda p, s: "")
         assert example.status == "generated_template_first"
 
+    def test_formeditor_template_first_works_without_llm(self):
+        """Template-first types must use deterministic template even when llm_generate=None.
+        Fix: template_first check is now ordered before the llm_generate is None fallback."""
+        packet = _make_template_first_packet("formeditor", "FormEditor")
+        example = generate_example(packet, llm_generate=None)
+        assert example.status == "generated_template_first", (
+            f"FormEditor with llm_generate=None must use template_first path, got: {example.status}"
+        )
+
+    def test_formexporter_template_first_works_without_llm(self):
+        """Template-first types must use deterministic template even when llm_generate=None."""
+        packet = _make_template_first_packet("formexporter", "FormExporter")
+        example = generate_example(packet, llm_generate=None)
+        assert example.status == "generated_template_first", (
+            f"FormExporter with llm_generate=None must use template_first path, got: {example.status}"
+        )
+
+    def test_all_template_first_types_work_without_llm(self):
+        """All 13 template_first PDF types must produce generated_template_first even when llm_generate=None."""
+        from unittest.mock import MagicMock
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        for type_name in [
+            "DocConverter", "XlsConverter", "Html", "Jpeg", "Tiff", "Png",
+            "TocGenerator", "TableGenerator", "ImageExtractor",
+            "Security", "FormFlattener", "FormEditor", "FormExporter",
+        ]:
+            packet = _make_template_first_packet(type_name.lower(), type_name)
+            example = generate_example(packet, llm_generate=None)
+            assert example.status == "generated_template_first", (
+                f"{type_name} with llm_generate=None must use template_first, got: {example.status}"
+            )
+
     def test_formeditor_template_contains_required_patterns(self):
         """FormEditor template must use AcroForm fixture, FormRemoveAllFieldsOptions (NOT abstract FormEditorRemoveOptions)."""
         from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario

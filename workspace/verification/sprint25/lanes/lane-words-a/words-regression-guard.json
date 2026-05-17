@@ -1,0 +1,40 @@
+{
+  "lane": "lane-words-a",
+  "sprint": "sprint25",
+  "date": "2026-05-17",
+  "family": "words",
+  "guard_type": "regression + version drift",
+  "current_state": {
+    "published_count": 8,
+    "pilot_allowed_count": 8,
+    "post_merge_verified": true,
+    "lifecycle_state": "PILOT_COMPLETE",
+    "published_types": [
+      "Converter", "Watermarker", "Splitter", "Replacer",
+      "Merger", "Comparer", "MailMerger", "ReportBuilder"
+    ],
+    "last_verified_sprint": "sprint22",
+    "package_version": "26.5.0"
+  },
+  "version_drift_check": {
+    "denominator_source_version": "26.5.0",
+    "nuget_latest_check": "Not fetched this sprint — no pipeline run for Words",
+    "drift_status": "ASSUMED_STABLE — no Words pipeline run in sprint25; version confirmed 26.5.0 in sprint22",
+    "drift_risk": "LOW — Words package version stable across sprints 14-25"
+  },
+  "regression_check": {
+    "method": "lifecycle records inspection — no pipeline rerun needed (no new Words types)",
+    "last_pipeline_run": "sprint22",
+    "all_8_types_post_merge_verified": true,
+    "regression_verdict": "REGRESSION_FREE — all 8 published examples confirmed POST_MERGE_VERIFIED in sprint22. No source changes affect Words in sprint25."
+  },
+  "source_changes_impact": {
+    "code_generator_template_first_fix": "NOT_APPLICABLE — Words types are not template_first",
+    "other_changes": "NONE affecting Words"
+  },
+  "backlog_unchanged": {
+    "processor": "PERMANENTLY_BLOCKED — reclassified in classic-token sprint",
+    "note": "All other Words types either published or in allowed_types"
+  },
+  "verdict": "WORDS_REGRESSION_GUARD_PASS — 8/8 published types POST_MERGE_VERIFIED. No regression introduced in sprint25. Drift check: ASSUMED_STABLE at 26.5.0."
+}

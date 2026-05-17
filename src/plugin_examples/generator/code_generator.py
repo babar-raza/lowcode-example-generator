@@ -48,17 +48,9 @@ def generate_example(
     _type_name = packet.target_type.split(".")[-1] if packet.target_type else ""
     _ptc = packet.per_type_constraints.get(_type_name, {}) if packet.per_type_constraints else {}
 
-    if llm_generate is None:
-        # Generate template without LLM
-        code = _generate_template(packet)
-        return GeneratedExample(
-            scenario_id=packet.scenario_id,
-            code=code,
-            claimed_symbols=packet.approved_symbols,
-            status="generated",
-        )
-
-    # Template-first: bypass LLM for known deterministic API patterns
+    # Template-first: bypass LLM for known deterministic API patterns.
+    # Checked BEFORE the llm_generate is None fallback so that deterministic
+    # templates are always preferred, regardless of LLM availability.
     if _ptc.get("template_first"):
         code = _generate_deterministic_template_for_scenario(packet)
         _family = "pdf" if packet.target_namespace.lower().startswith("aspose.pdf") else ""
@@ -83,6 +75,16 @@ def generate_example(
             code=code,
             claimed_symbols=packet.approved_symbols,
             status="generated_template_first",
+        )
+
+    if llm_generate is None:
+        # Non-template_first type with no LLM available — use generic catalog-driven template
+        code = _generate_template(packet)
+        return GeneratedExample(
+            scenario_id=packet.scenario_id,
+            code=code,
+            claimed_symbols=packet.approved_symbols,
+            status="generated",
         )
 
     try:

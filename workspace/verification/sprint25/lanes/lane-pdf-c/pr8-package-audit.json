@@ -1,0 +1,66 @@
+{
+  "lane": "lane-pdf-c",
+  "sprint": "sprint25",
+  "date": "2026-05-17",
+  "pr_number": 8,
+  "pr_package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+  "wave": "Wave F",
+  "types_included": ["FormEditor", "FormExporter"],
+  "generation_run_id": "pilot-pdf-20260517-150729",
+  "package_structure": {
+    "root_files": [
+      "Directory.Build.props",
+      "Directory.Packages.props",
+      "global.json"
+    ],
+    "examples": [
+      {
+        "type": "FormEditor",
+        "path": "examples/pdf/lowcode/form-editor/",
+        "files": ["Program.cs", "form-editor.csproj", "README.md"],
+        "api": "new FormEditor().Process(new FormRemoveAllFieldsOptions())",
+        "fixture": "AcroForm via TextBoxField + doc.Form.Add()",
+        "output": "output.pdf (form fields removed)",
+        "build_result": "SUCCESS",
+        "run_result": "SUCCESS",
+        "run_output": "Form fields removed",
+        "exit_code": 0,
+        "build_duration_ms": 1493,
+        "run_duration_ms": 2102
+      },
+      {
+        "type": "FormExporter",
+        "path": "examples/pdf/lowcode/form-exporter/",
+        "files": ["Program.cs", "form-exporter.csproj", "README.md"],
+        "api": "new FormExporter().Process(new FormExporterToJsonOptions())",
+        "fixture": "AcroForm via TextBoxField with Value = 'ExportedValue'",
+        "output": "output.json (form fields exported to JSON)",
+        "build_result": "SUCCESS",
+        "run_result": "SUCCESS",
+        "run_output": "Form exported to JSON",
+        "exit_code": 0,
+        "build_duration_ms": 1600,
+        "run_duration_ms": 2073
+      }
+    ]
+  },
+  "generation_method": "template_first",
+  "template_first_verified_by_tests": [
+    "test_formeditor_template_first_works_without_llm",
+    "test_formexporter_template_first_works_without_llm",
+    "test_all_template_first_types_work_without_llm"
+  ],
+  "source_fix_this_sprint": "template_first ordering bug fixed in code_generator.py — template_first check moved BEFORE llm_generate is None fallback",
+  "publication_status": "APPROVAL_BLOCKED",
+  "publication_blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL env var absent",
+  "approval_gate_required": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+  "target_repo": "aspose-pdf-net (org repo — requires classic PAT GH_TOKEN)",
+  "token_readiness": "GH_TOKEN (classic ghp_) available in Windows system env — READY",
+  "denominator_impact": {
+    "wave_f_types_complete": ["FormEditor", "FormExporter"],
+    "pilot_allowed_count_after_pr8": 18,
+    "published_after_pr8_approval": 7,
+    "remaining_pilot_after_pr8": 11
+  },
+  "verdict": "PR_DRY_RUN_READY — Both FormEditor and FormExporter examples verified BUILD_PASS + RUNTIME_PASS. Package assembled at workspace/pr-dry-run/pdf-controlled-pilot-pr8/. Awaiting APPROVE_LIVE_PR."
+}

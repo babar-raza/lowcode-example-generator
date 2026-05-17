@@ -1,9 +1,25 @@
 {
-  "total_patterns": 14,
+  "total_patterns": 17,
   "verified_passing": 0,
   "patterns": [
     {
       "scenario_id": "pdf-doc-converter",
+      "uses_basedir": false,
+      "validates_input": false,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "uses_basedir": false,
+      "validates_input": false,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
       "uses_basedir": false,
       "validates_input": false,
       "validates_output": true,
@@ -75,6 +91,14 @@
       "input_strategy": "programmatic_input"
     },
     {
+      "scenario_id": "pdf-splitter",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
       "scenario_id": "pdf-table-generator",
       "uses_basedir": false,
       "validates_input": false,
@@ -86,7 +110,7 @@
       "scenario_id": "pdf-text-extractor",
       "uses_basedir": false,
       "validates_input": true,
-      "validates_output": false,
+      "validates_output": true,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"
     },

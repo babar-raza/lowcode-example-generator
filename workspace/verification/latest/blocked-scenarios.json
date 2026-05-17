@@ -1,6 +1,6 @@
 {
   "family": "pdf",
-  "blocked_count": 85,
+  "blocked_count": 83,
   "blocked_scenarios": [
     {
       "scenario_id": "pdf-compress-options",
@@ -13,7 +13,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'CompressOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'CompressOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-conversion-mode",
@@ -52,7 +52,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'DecryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'DecryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-encryption-options",
@@ -65,7 +65,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'EncryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'EncryptionOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-file-data-source",
@@ -78,7 +78,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FileDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-file-result",
@@ -91,7 +91,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FileResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-file-save-target",
@@ -104,7 +104,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FileSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FileSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-check-box-field-create-options",
@@ -117,7 +117,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormCheckBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormCheckBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-check-box-field-set-options",
@@ -130,7 +130,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormCheckBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormCheckBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-create-options",
@@ -143,7 +143,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormComboBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormComboBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-combo-box-field-set-options",
@@ -156,20 +156,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormComboBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
-    },
-    {
-      "scenario_id": "pdf-form-editor",
-      "title": "Use FormEditor from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.FormEditor",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [],
-      "required_fixtures": [],
-      "output_plan": "",
-      "validation_plan": "",
-      "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormComboBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-editor-add-options",
@@ -182,7 +169,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorAddOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormEditorAddOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-editor-options",
@@ -195,7 +182,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormEditorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-editor-remove-options",
@@ -208,7 +195,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorRemoveOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormEditorRemoveOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-editor-set-options",
@@ -221,20 +208,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormEditorSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
-    },
-    {
-      "scenario_id": "pdf-form-exporter",
-      "title": "Use FormExporter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.FormExporter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [],
-      "required_fixtures": [],
-      "output_plan": "",
-      "validation_plan": "",
-      "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporter' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormEditorSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-exporter-options",
@@ -247,7 +221,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormExporterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-exporter-to-json-options",
@@ -260,7 +234,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterToJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormExporterToJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-exporter-values-to-csv-options",
@@ -273,7 +247,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormExporterValuesToCsvOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormExporterValuesToCsvOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-field-create-options",
@@ -286,7 +260,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-field-options",
@@ -299,7 +273,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFieldOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-field-set-options",
@@ -312,7 +286,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-flatten-all-fields-options",
@@ -325,7 +299,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFlattenAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-flattener-options",
@@ -338,7 +312,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenerOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFlattenerOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-flatten-selected-fields-options",
@@ -351,7 +325,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormFlattenSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormFlattenSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-importer",
@@ -364,7 +338,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormImporter' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormImporter' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-importer-json-options",
@@ -377,7 +351,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormImporterJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormImporterJsonOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-json-import-source",
@@ -390,7 +364,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormJsonImportSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormJsonImportSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-options",
@@ -403,7 +377,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-remove-all-fields-options",
@@ -416,7 +390,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormRemoveAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormRemoveAllFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-remove-selected-fields-options",
@@ -429,7 +403,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormRemoveSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormRemoveSelectedFieldsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-text-box-field-create-options",
@@ -442,7 +416,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormTextBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormTextBoxFieldCreateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-form-text-box-field-set-options",
@@ -455,7 +429,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'FormTextBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'FormTextBoxFieldSetOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-html-to-pdf-options",
@@ -468,7 +442,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'HtmlToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'HtmlToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-idata-source",
@@ -481,7 +455,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'IDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-image-extractor-options",
@@ -494,7 +468,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ImageExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'ImageExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-ioperation-result",
@@ -507,7 +481,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IOperationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'IOperationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-iplugin",
@@ -520,7 +494,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IPlugin' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'IPlugin' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-iplugin-options",
@@ -533,7 +507,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'IPluginOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'IPluginOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-isave-target",
@@ -546,7 +520,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ISaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'ISaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-jpeg-options",
@@ -559,7 +533,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'JpegOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'JpegOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-merge-options",
@@ -572,7 +546,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'MergeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'MergeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-object-result",
@@ -585,7 +559,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ObjectResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'ObjectResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-ofd",
@@ -598,7 +572,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Ofd' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'Ofd' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-ofd-to-pdf-options",
@@ -611,7 +585,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OfdToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'OfdToPdfOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-optimize-options",
@@ -624,7 +598,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OptimizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'OptimizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-organizer-base-options",
@@ -637,7 +611,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'OrganizerBaseOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'OrganizerBaseOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-aconvert-options",
@@ -650,7 +624,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAConvertOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfAConvertOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-aoptions-base",
@@ -663,7 +637,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAOptionsBase' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfAOptionsBase' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-astandard-version",
@@ -689,7 +663,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAValidateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfAValidateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-avalidation-result",
@@ -702,7 +676,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfAValidationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfAValidationResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-converter-options",
@@ -715,7 +689,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfConverterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfConverterOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-extractor",
@@ -728,7 +702,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfExtractor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfExtractor' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-extractor-options",
@@ -741,7 +715,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-generator-options",
@@ -754,7 +728,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfGeneratorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfGeneratorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-to-doc-options",
@@ -767,7 +741,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToDocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfToDocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-to-html-options",
@@ -780,7 +754,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToHtmlOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfToHtmlOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-to-image",
@@ -793,7 +767,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToImage' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfToImage' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-to-image-options",
@@ -806,7 +780,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToImageOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfToImageOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-pdf-to-xls-options",
@@ -819,7 +793,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PdfToXlsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PdfToXlsOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-png-options",
@@ -832,7 +806,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'PngOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'PngOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-resize-options",
@@ -845,7 +819,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ResizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'ResizeOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-result-container",
@@ -858,7 +832,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'ResultContainer' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'ResultContainer' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-rotate-options",
@@ -871,7 +845,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'RotateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'RotateOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-save-format",
@@ -897,7 +871,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SelectField' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'SelectField' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-signature",
@@ -910,7 +884,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Signature' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'Signature' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-sign-options",
@@ -923,7 +897,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SignOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'SignOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-split-options",
@@ -936,7 +910,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'SplitOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-stream-data-source",
@@ -949,7 +923,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'StreamDataSource' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-stream-result",
@@ -962,7 +936,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'StreamResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-stream-save-target",
@@ -975,7 +949,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StreamSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'StreamSaveTarget' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-string-result",
@@ -988,7 +962,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'StringResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'StringResult' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-table-builder",
@@ -1001,7 +975,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TableBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-table-cell-builder",
@@ -1014,7 +988,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableCellBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TableCellBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-table-options",
@@ -1027,7 +1001,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TableOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-table-row-builder",
@@ -1040,7 +1014,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TableRowBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TableRowBuilder' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-text-extractor-options",
@@ -1053,7 +1027,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TextExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TextExtractorOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-tiff-options",
@@ -1066,7 +1040,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TiffOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TiffOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-timestamp",
@@ -1079,7 +1053,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'Timestamp' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'Timestamp' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-timestamp-options",
@@ -1092,7 +1066,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TimestampOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TimestampOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     },
     {
       "scenario_id": "pdf-toc-options",
@@ -1105,7 +1079,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_pilot_not_in_scope",
-      "blocked_reason": "Type 'TocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
+      "blocked_reason": "Type 'TocOptions' is not in the controlled pilot allowlist. Allowed: ['DocConverter', 'FormEditor', 'FormExporter', 'FormFlattener', 'Html', 'ImageExtractor', 'Jpeg', 'Merger', 'Optimizer', 'PdfAConverter', 'Png', 'Security', 'Splitter', 'TableGenerator', 'TextExtractor', 'Tiff', 'TocGenerator', 'XlsConverter']"
     }
   ]
 }

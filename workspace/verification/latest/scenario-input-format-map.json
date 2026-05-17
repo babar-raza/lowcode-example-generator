@@ -11,6 +11,26 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-form-editor",
+      "workflow_type": "FormEditor",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name FormEditor",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "workflow_type": "FormExporter",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name FormExporter",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-form-flattener",
       "workflow_type": "FormFlattener",
       "selected_input_format": ".pdf",

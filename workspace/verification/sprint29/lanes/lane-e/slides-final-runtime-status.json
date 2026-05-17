@@ -1,0 +1,104 @@
+{
+  "lane": "lane-e",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "family": "slides",
+  "guard_type": "family_runtime_guard",
+  "source_run_id": "pilot-slides-20260513-221516",
+  "package_version": "26.5.0",
+  "pilot_scope": ["Compress", "Convert", "Merger"],
+  "denominator": {
+    "total_types": 5,
+    "workflow_root_count": 3,
+    "non_runnable_count": 2,
+    "pilot_allowed_count": 3
+  },
+  "pilot_results": {
+    "total_planned": 5,
+    "pilot_in_scope": 3,
+    "excluded_by_scope": 2,
+    "generation_passed": 3,
+    "build_passed": 3,
+    "build_repairs": 2,
+    "run_passed": 3,
+    "reviewer_passed": 3,
+    "pr_candidates": 3
+  },
+  "post_merge_status": {
+    "merged": true,
+    "merge_sha": "bf05fc43124f",
+    "merge_date": "2026-05-14",
+    "post_merge_verified": true,
+    "post_merge_pass_count": 3,
+    "post_merge_fail_count": 0
+  },
+  "per_type_status": [
+    {
+      "type": "Compress",
+      "scenario_id": "slides-compress",
+      "pipeline_stage": "reviewer_passed",
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "post_merge_state": "POST_MERGE_VERIFIED",
+      "generation": "passed",
+      "build": "passed",
+      "build_repairs": 0,
+      "run": "passed",
+      "run_repairs": 0,
+      "reviewer": "passed"
+    },
+    {
+      "type": "Convert",
+      "scenario_id": "slides-convert",
+      "pipeline_stage": "reviewer_passed",
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "post_merge_state": "POST_MERGE_VERIFIED",
+      "generation": "passed",
+      "build": "repaired",
+      "build_repairs": 1,
+      "run": "passed",
+      "run_repairs": 0,
+      "reviewer": "passed"
+    },
+    {
+      "type": "Merger",
+      "scenario_id": "slides-merger",
+      "pipeline_stage": "reviewer_passed",
+      "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+      "post_merge_state": "POST_MERGE_VERIFIED",
+      "generation": "passed",
+      "build": "repaired",
+      "build_repairs": 1,
+      "run": "passed",
+      "run_repairs": 0,
+      "reviewer": "passed"
+    },
+    {
+      "type": "Collect",
+      "scenario_id": "slides-collect",
+      "pipeline_stage": "excluded",
+      "final_verdict": "EXCLUDED_BY_SCOPE",
+      "post_merge_state": "NOT_ATTEMPTED",
+      "exclusion_reason": "UTILITY_HELPER — traversal helper, not standalone entrypoint"
+    },
+    {
+      "type": "ForEach",
+      "scenario_id": "slides-for-each",
+      "pipeline_stage": "excluded",
+      "final_verdict": "EXCLUDED_BY_SCOPE",
+      "post_merge_state": "NOT_ATTEMPTED",
+      "exclusion_reason": "UTILITY_HELPER — iterator helper, not standalone entrypoint"
+    }
+  ],
+  "regression_detected": false,
+  "regression_notes": "No regressions. Convert and Merger required 1 build repair each (expected — PPTX fixture complexity). Post-merge clean-checkout: 3/3 examples pass.",
+  "known_infrastructure_gap": "Aspose.Slides.NET.xml missing from package (DLL name mismatch). DLL fallback implemented in extractor. Non-blocking.",
+  "denominator_equation_check": {
+    "equation": "3 pilot + 2 excluded = 5 total",
+    "holds": true
+  },
+  "guard_verdict": "SLIDES_FAMILY_GUARD_PASS — 3/3 pilot types POST_MERGE_VERIFIED, 2 utility helpers correctly excluded. PILOT_COMPLETE.",
+  "publication_state": "PILOT_COMPLETE",
+  "published_count": 3,
+  "pilot_scope_count": 3,
+  "coverage_pct": 100.0
+}

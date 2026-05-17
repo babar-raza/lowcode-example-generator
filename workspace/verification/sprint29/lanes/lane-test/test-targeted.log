@@ -1,0 +1,59 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 46 items
+
+tests/unit/test_evidence_contract.py::TestThinBundleFailsSprint27::test_sprint27_17_file_bundle_fails PASSED [  2%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_git_status_final_fails PASSED [  4%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_git_diff_final_fails PASSED [  6%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_final_verdict_fails PASSED [  8%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_final_state_summary_fails PASSED [ 10%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr3_audit_fails PASSED [ 13%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr5_audit_fails PASSED [ 15%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr6_audit_fails PASSED [ 17%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr7_audit_fails PASSED [ 19%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr8_audit_fails PASSED [ 21%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_pr9_audit_fails PASSED [ 23%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_raw_test_log_fails PASSED [ 26%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_all_family_scoreboard_fails PASSED [ 28%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_taskcard_reconciliation_fails PASSED [ 30%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_git_status_initial_fails PASSED [ 32%]
+tests/unit/test_evidence_contract.py::TestMissingRequiredArtifacts::test_missing_bundle_contract_definition_fails PASSED [ 34%]
+tests/unit/test_evidence_contract.py::TestCompleteBundlePasses::test_complete_bundle_passes PASSED [ 36%]
+tests/unit/test_evidence_contract.py::TestCompleteBundlePasses::test_complete_bundle_with_publication_result_passes PASSED [ 39%]
+tests/unit/test_evidence_contract.py::TestCompleteBundlePasses::test_test_full_not_run_md_satisfies_test_log_category PASSED [ 41%]
+tests/unit/test_evidence_contract.py::TestCompleteBundlePasses::test_post_publication_verification_satisfies_post_pub_category PASSED [ 43%]
+tests/unit/test_evidence_contract.py::TestSecretScanning::test_raw_github_classic_pat_causes_failure PASSED [ 45%]
+tests/unit/test_evidence_contract.py::TestSecretScanning::test_clean_content_no_secret_violations PASSED [ 47%]
+tests/unit/test_evidence_contract.py::TestEdgeCases::test_nonexistent_zip_fails PASSED [ 50%]
+tests/unit/test_evidence_contract.py::TestEdgeCases::test_bad_zip_fails PASSED [ 52%]
+tests/unit/test_evidence_contract.py::TestEdgeCases::test_contract_definition_has_all_categories PASSED [ 54%]
+tests/unit/test_evidence_contract.py::TestEdgeCases::test_required_categories_count PASSED [ 56%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_bundle_missing_sprint28_commit_in_log PASSED [ 58%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_staged_source_files_in_final_status PASSED [ 60%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_staged_test_files_in_final_status PASSED [ 63%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_in_progress_verdict PASSED [ 65%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_unknown_verdict PASSED [ 67%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_failed_tests_in_summary PASSED [ 69%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_zero_passed_tests PASSED [ 71%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_bundle_contract_report_with_false_passed PASSED [ 73%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_missing_pr3_version_policy PASSED [ 76%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_missing_sprint28_commit_proof PASSED [ 78%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_requires_more_categories_than_v1 PASSED [ 80%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_min_categories_matches_combined PASSED [ 82%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_relative_zip_path PASSED [ 84%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Rejects::test_v2_rejects_sprint28_style_bundle_missing_new_categories PASSED [ 86%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_accepts_complete_approval_blocked_bundle PASSED [ 89%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_accepts_published_verdict PASSED [ 91%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_contract_definition_version PASSED [ 93%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_contract_definition_has_all_combined_categories PASSED [ 95%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_contract_definition_lists_allowed_verdicts PASSED [ 97%]
+tests/unit/test_evidence_contract.py::TestStrictEvidenceContractV2Accepts::test_v2_accepts_clean_git_status_with_only_untracked_and_binary PASSED [100%]
+
+============================= 46 passed in 4.81s ==============================

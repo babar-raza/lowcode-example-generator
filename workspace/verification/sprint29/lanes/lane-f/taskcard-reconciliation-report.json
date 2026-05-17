@@ -1,0 +1,66 @@
+{
+  "lane": "lane-f",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "Taskcard reconciliation Sprint 28 → Sprint 29",
+  "source_state": "workspace/verification/sprint28/lanes/lane-g/taskcard-state-after-sprint28.json",
+  "changes": [
+    {
+      "id": "TC-EVIDENCE-CONTRACT-V2",
+      "title": "Implement StrictEvidenceContractV2 with content-level validation",
+      "action": "NEW_AND_CLOSED",
+      "sprint_opened": "sprint29",
+      "sprint_closed": "sprint29",
+      "evidence": "workspace/verification/sprint29/lanes/lane-a/evidence-contract-v2-implementation-report.json",
+      "test_evidence": "workspace/verification/sprint29/lanes/lane-a/evidence-contract-v2-test-report.json",
+      "summary": "v2 has 45 categories (from 37), 5 content-level checks, 46/46 tests pass"
+    },
+    {
+      "id": "TC-SPRINT28-COMMIT-PROOF",
+      "title": "Prove Sprint 28 commit 20686d3 is HEAD and explain bundle bootstrap discrepancy",
+      "action": "NEW_AND_CLOSED",
+      "sprint_opened": "sprint29",
+      "sprint_closed": "sprint29",
+      "evidence": "workspace/verification/sprint29/lanes/lane-0/sprint28-commit-proof.json",
+      "evidence2": "workspace/verification/sprint29/lanes/lane-0/sprint28-bundle-vs-commit-reconciliation.md",
+      "summary": "20686d3 is HEAD. Bundle log stops at 774f516 because bundle is built before final commit — expected bootstrap pattern."
+    },
+    {
+      "id": "TC-PUBLICATION-01",
+      "title": "Publish PDF PR#3/#5/#6/#7/#8/#9 via APPROVE_LIVE_PR",
+      "action": "NO_CHANGE_STILL_OPEN",
+      "prior_status": "OPEN_APPROVAL_BLOCKED",
+      "current_status": "OPEN_APPROVAL_BLOCKED",
+      "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set in this sprint",
+      "pre_publication_actions_for_pr8_pr9": "Must clean bin/ and obj/ from form-editor/, form-exporter/, signature/ before live publication",
+      "evidence": "workspace/verification/sprint29/lanes/lane-p7/post-publication-not-run-approval-blocked.md"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter at Aspose.PDF > 26.5.0",
+      "action": "NO_CHANGE_STILL_OPEN",
+      "prior_status": "OPEN_WAITING_PACKAGE_VERSION",
+      "current_status": "OPEN_WAITING_PACKAGE_VERSION",
+      "notes": "Defect package re-verified in Sprint 29: repro ZIP clean, no secrets, upstream issue draft exists. Still blocked on package version > 26.5.0.",
+      "evidence": "workspace/verification/sprint29/lanes/lane-c/pdf-formimporter-defect-package-final-check.json"
+    }
+  ],
+  "no_change_items": [
+    {
+      "id": "TC-PDF-TIMESTAMP",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "External TSA required"
+    },
+    {
+      "id": "TC-PDF-OFD",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "OFD format fixture impossible"
+    }
+  ],
+  "summary": {
+    "taskcards_opened_this_sprint": 2,
+    "taskcards_closed_this_sprint": 2,
+    "taskcards_still_open": 2,
+    "taskcards_permanently_blocked": 2
+  }
+}

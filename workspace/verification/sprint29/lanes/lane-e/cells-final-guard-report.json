@@ -1,0 +1,62 @@
+{
+  "lane": "lane-e",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "family": "cells",
+  "guard_type": "family_completeness_guard",
+  "source_run_id": "pilot-cells-20260508-133932",
+  "package_version": "26.4.0",
+  "pilot_scope": "ALL_WORKFLOW_ROOT_TYPES",
+  "denominator": {
+    "total_types": 22,
+    "workflow_root_count": 9,
+    "non_runnable_count": 13,
+    "pilot_allowed_count": 9,
+    "denominator_basis": "FULL_SOT"
+  },
+  "pilot_results": {
+    "total_planned": 22,
+    "pilot_in_scope": 9,
+    "excluded_by_scope": 13,
+    "generation_passed": 9,
+    "build_passed": 9,
+    "run_passed": 9,
+    "reviewer_passed": 9,
+    "pr_candidates": 9
+  },
+  "post_merge_status": {
+    "merged": true,
+    "all_9_post_merge_verified": true,
+    "merge_sha": "f6e5515c070184e4b08a2cff647220bea1113b08",
+    "post_merge_pass_count": 9,
+    "post_merge_fail_count": 0
+  },
+  "per_type_summary": [
+    {"type": "HtmlConverter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "ImageConverter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "JsonConverter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "PdfConverter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "SpreadsheetConverter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "SpreadsheetLocker", "state": "POST_MERGE_VERIFIED"},
+    {"type": "SpreadsheetMerger", "state": "POST_MERGE_VERIFIED"},
+    {"type": "SpreadsheetSplitter", "state": "POST_MERGE_VERIFIED"},
+    {"type": "TextConverter", "state": "POST_MERGE_VERIFIED"}
+  ],
+  "excluded_types_by_category": {
+    "options_classes": ["LowCodeHtmlSaveOptions", "LowCodeImageSaveOptions", "LowCodeLoadOptions", "LowCodeMergeOptions", "LowCodePdfSaveOptions", "LowCodeSaveOptions", "LowCodeSplitOptions"],
+    "provider_callbacks": ["LowCodeSaveOptionsProviderOfAssembling", "LowCodeSaveOptionsProviderOfPlaceHolders"],
+    "abstract_base": ["AbstractLowCodeLoadOptionsProvider", "AbstractLowCodeProtectionProvider", "AbstractLowCodeSaveOptionsProvider"],
+    "result_model": ["SplitPartInfo"]
+  },
+  "regression_detected": false,
+  "regression_notes": "No regressions. FAMILY_COMPLETE — all 9 runnable types published and post-merge verified.",
+  "denominator_equation_check": {
+    "full_sot_equation": "9 workflow_root + 13 non_runnable = 22 total — HOLDS",
+    "basis": "FULL_SOT — equation verified"
+  },
+  "guard_verdict": "CELLS_FAMILY_GUARD_PASS — 9/9 runnable types POST_MERGE_VERIFIED. 13 non-runnable correctly excluded. FAMILY_COMPLETE. Full SOT equation holds.",
+  "publication_state": "FAMILY_COMPLETE",
+  "published_count": 9,
+  "pilot_scope_count": 9,
+  "coverage_pct": 100.0
+}

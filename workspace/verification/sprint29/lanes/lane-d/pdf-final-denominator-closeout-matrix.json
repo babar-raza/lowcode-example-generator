@@ -1,0 +1,58 @@
+{
+  "lane": "lane-d",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "PDF final denominator closeout matrix (Sprint 29)",
+  "denominator_equations": {
+    "workflow_root_plus_non_runnable": "22 + 79 = 101 HOLDS",
+    "pilot_allowed_plus_excluded": "19 + 82 = 101 HOLDS"
+  },
+  "pdf_state": {
+    "total_types": 101,
+    "workflow_root_count": 22,
+    "non_runnable_count": 79,
+    "pilot_allowed_count": 19,
+    "excluded_count": 82
+  },
+  "publication_state": {
+    "published": 5,
+    "pr_dry_run_ready": 14,
+    "approval_blocked": 14,
+    "library_defect_deferred": 1,
+    "permanently_blocked": 2
+  },
+  "published_types": [
+    "Merger",
+    "TextExtractor",
+    "PdfAConverter",
+    "Splitter",
+    "Optimizer"
+  ],
+  "pr_dry_run_ready_types": [
+    "DocConverter",
+    "Html",
+    "XlsConverter",
+    "Jpeg",
+    "Tiff",
+    "Png",
+    "TocGenerator",
+    "TableGenerator",
+    "ImageExtractor",
+    "Security",
+    "FormFlattener",
+    "FormEditor",
+    "FormExporter",
+    "Signature"
+  ],
+  "library_defect_deferred": {
+    "FormImporter": "WAVE_H_DEFERRED_LIBRARY_BUG \u2014 Aspose.PDF 26.5.0 NullReferenceException"
+  },
+  "permanently_blocked": {
+    "Signature_Timestamp": "External TSA required",
+    "Ofd": "OFD format fixture impossible"
+  },
+  "post_approval_expected_total": 19,
+  "maximum_achievable_coverage": "19/22 workflow_roots",
+  "sprint29_change_from_sprint28": "No change in state \u2014 APPROVAL_BLOCKED persists. bin/obj audit flags raised for PR8/PR9.",
+  "verdict": "PDF_DENOMINATOR_CLOSEOUT_HOLDS \u2014 22+79=101, 19+82=101, 5 published + 14 PR_DRY_RUN_READY"
+}

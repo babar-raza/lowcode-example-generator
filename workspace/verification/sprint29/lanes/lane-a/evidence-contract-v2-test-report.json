@@ -1,0 +1,27 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "Evidence contract v2 test results",
+  "test_file": "tests/unit/test_evidence_contract.py",
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_contract.py -v",
+  "result": {
+    "total": 46,
+    "passed": 46,
+    "failed": 0,
+    "duration_seconds": 4.42
+  },
+  "test_classes": {
+    "TestThinBundleFailsSprint27": {"tests": 1, "passed": 1},
+    "TestMissingRequiredArtifacts": {"tests": 15, "passed": 15},
+    "TestCompleteBundlePasses": {"tests": 4, "passed": 4},
+    "TestSecretScanning": {"tests": 2, "passed": 2},
+    "TestEdgeCases": {"tests": 4, "passed": 4},
+    "TestStrictEvidenceContractV2Rejects": {"tests": 13, "passed": 13},
+    "TestStrictEvidenceContractV2Accepts": {"tests": 6, "passed": 6}
+  },
+  "v2_new_tests": 19,
+  "v1_preserved_tests": 26,
+  "total_evidence_contract_tests": 46,
+  "verdict": "EVIDENCE_CONTRACT_V2_TEST_REPORT_SPRINT29 — 46/46 PASS. v2 rejects staged-source, missing commits, invalid verdicts, failed tests."
+}

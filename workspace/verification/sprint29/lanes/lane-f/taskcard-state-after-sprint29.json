@@ -1,0 +1,48 @@
+{
+  "lane": "lane-f",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "authority": "TASKCARD_STATE_AFTER_SPRINT29",
+  "open_taskcards": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "title": "Publish PDF PR#3/#5/#6/#7/#8/#9 via APPROVE_LIVE_PR",
+      "priority": "CRITICAL",
+      "status": "OPEN_APPROVAL_BLOCKED",
+      "sprint_assigned": "sprint28+",
+      "requires": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "pre_publication_actions": [
+        "Clean bin/ and obj/ from workspace/pr-dry-run/pdf-controlled-pilot-pr8/ (form-editor/, form-exporter/)",
+        "Clean bin/ and obj/ from workspace/pr-dry-run/pdf-controlled-pilot-pr9/ (signature/)"
+      ],
+      "affected_prs": ["PR#3 (26.4.0)", "PR#5 (26.4.0)", "PR#6 (26.4.0)", "PR#7 (26.5.0)", "PR#8 (26.5.0)", "PR#9 (26.5.0)"]
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter at Aspose.PDF > 26.5.0",
+      "priority": "MEDIUM",
+      "status": "OPEN_WAITING_PACKAGE_VERSION",
+      "sprint_assigned": "sprint29+",
+      "retest_trigger": "Aspose.PDF > 26.5.0",
+      "defect_zip": "workspace/defect-repros/pdf-formimporter-nullref/formimporter-nullref-repro.zip",
+      "upstream_issue_draft": "workspace/verification/sprint28/lanes/lane-c/pdf-formimporter-upstream-issue-final.md",
+      "confirmed_sprint_runs": ["sprint26", "sprint27", "sprint28", "sprint29"],
+      "notes": "Defect verified again in Sprint 29. Repro ZIP: Program.cs + .csproj, no binaries, no secrets."
+    }
+  ],
+  "closed_taskcards": [
+    {"id": "TC-EVIDENCE-01", "title": "Strict evidence contract v1", "status": "CLOSED", "sprint": "sprint28"},
+    {"id": "TC-EVIDENCE-CONTRACT-V2", "title": "StrictEvidenceContractV2 with content-level validation", "status": "CLOSED", "sprint": "sprint29"},
+    {"id": "TC-SPRINT28-COMMIT-PROOF", "title": "Prove Sprint 28 commit 20686d3 and bootstrap discrepancy", "status": "CLOSED", "sprint": "sprint29"},
+    {"id": "TC-SYS-SIGNATURE-TEMPLATE", "title": "Signature Wave G template_first", "status": "CLOSED", "sprint": "sprint26"},
+    {"id": "TC-EMAIL-FILELOCK", "title": "Email ConvertToHtml file-lock fix", "status": "CLOSED", "sprint": "sprint26"},
+    {"id": "TC-SLIDES-RECONCILE", "title": "Slides 5/5 vs 6/6 reconciliation", "status": "CLOSED", "sprint": "sprint26"}
+  ],
+  "permanently_blocked": [
+    {"id": "TC-PDF-TIMESTAMP", "status": "PERMANENTLY_BLOCKED", "reason": "External TSA required — cannot generate valid timestamp token without live TSA server"},
+    {"id": "TC-PDF-OFD", "status": "PERMANENTLY_BLOCKED", "reason": "OFD format fixture impossible — no open-source OFD fixture generator available"}
+  ],
+  "open_count": 2,
+  "closed_count": 6,
+  "permanently_blocked_count": 2
+}

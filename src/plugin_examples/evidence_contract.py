@@ -14,6 +14,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import re
 import zipfile
 from dataclasses import dataclass, field
@@ -263,6 +264,313 @@ def contract_definition() -> dict:
         "min_categories_required": MIN_CATEGORIES_REQUIRED,
         "secret_scanning_enabled": True,
         "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+    }
+
+
+# ---------------------------------------------------------------------------
+# Contract v2 — state-correctness, not just category presence (Sprint 29+)
+# ---------------------------------------------------------------------------
+
+#: Category overrides for v2 (updated patterns replacing v1 entries).
+_REQUIRED_CATEGORIES_V2_UPDATES: dict[str, list[str]] = {
+    # Updated: sprint29 taskcard state replaces sprint28
+    "taskcard_state": ["taskcard-state-after-sprint29.json"],
+    # Updated: formimporter check file replaces final-report
+    "formimporter_defect": [
+        "pdf-formimporter-defect-package-final-check.json",
+        "pdf-formimporter-defect-package-final-report.json",
+        "pdf-formimporter-upstream-issue-final.md",
+    ],
+}
+
+#: Categories removed from v1 (sprint28-specific; not required in Sprint 29).
+_REQUIRED_CATEGORIES_V2_REMOVED: frozenset[str] = frozenset({"pdf_max_coverage"})
+
+#: New categories required in Sprint 29 (not present in v1).
+_REQUIRED_CATEGORIES_V2_NEW: dict[str, list[str]] = {
+    "sprint28_commit_proof": ["sprint28-commit-proof.json"],
+    "sprint28_reconciliation": ["sprint28-bundle-vs-commit-reconciliation.md"],
+    "evidence_contract_v2_impl": ["evidence-contract-v2-implementation-report.json"],
+    "evidence_contract_v2_tests": ["evidence-contract-v2-test-report.json"],
+    "pr3_version_policy": ["pdf-pr3-version-policy-report.json"],
+    "pr5_version_policy": ["pdf-pr5-version-policy-report.json"],
+    "pr6_version_policy": ["pdf-pr6-version-policy-report.json"],
+    "formimporter_defect_check": ["pdf-formimporter-defect-package-final-check.json"],
+    "test_targeted_log": ["test-targeted.log"],
+}
+
+#: Combined v2 categories: v1 (minus removed, with updates) + new.
+COMBINED_CATEGORIES_V2: dict[str, list[str]] = {
+    **{
+        k: _REQUIRED_CATEGORIES_V2_UPDATES.get(k, v)
+        for k, v in REQUIRED_CATEGORIES.items()
+        if k not in _REQUIRED_CATEGORIES_V2_REMOVED
+    },
+    **_REQUIRED_CATEGORIES_V2_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V2: int = len(COMBINED_CATEGORIES_V2)
+
+#: Allowed final verdicts for Sprint 29 bundles.
+ALLOWED_VERDICTS_V2: frozenset[str] = frozenset({
+    "SPRINT29_PUBLISHED_AND_EVIDENCE_CONTRACT_V2_COMPLETE",
+    "SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE",
+    "SPRINT29_PUBLICATION_PARTIAL_CONTRACT_V2_COMPLETE",
+    "SPRINT29_BLOCKED_EVIDENCE_CONTRACT_V2_FAILED",
+    "SPRINT29_BLOCKED_SOURCE_STATE",
+    "SPRINT29_REJECTED_UNSAFE_TO_PUBLISH",
+})
+
+#: git status line prefixes indicating STAGED source/test/config files (must not appear post-commit).
+_STAGED_SOURCE_PATTERN = re.compile(
+    r"^[AMDRC][AMDRC?! ]\s+(src/|tests/|pipeline/)",
+    re.MULTILINE,
+)
+
+#: Sprint 28 commit SHA (short) — must appear in git-log-proof.txt.
+_SPRINT28_COMMIT = "20686d3"
+
+
+class StrictEvidenceContractV2(StrictEvidenceContract):
+    """
+    v2 of the strict evidence contract (Sprint 29+).
+
+    Extends v1 with:
+    - 45 required categories (vs 37 in v1).
+    - Absolute ZIP path required.
+    - Content-level checks on key artifacts:
+      * git-status-final.txt must not contain staged source/test/config files.
+      * git-log-proof.txt must contain Sprint 28 commit 20686d3.
+      * final-verdict.md must contain an allowed Sprint 29 verdict.
+      * test-summary.json must report failed==0 and passed>0.
+      * bundle-contract-validation-report.json must report passed=true.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v2: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v2 categories (45 total)
+                for category, patterns in COMBINED_CATEGORIES_V2.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of: {patterns}"
+                        )
+
+                # Secret scan (all text files)
+                for name in names:
+                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
+                        try:
+                            content = zf.read(name).decode("utf-8", errors="replace")
+                            for pattern in SECRET_PATTERNS:
+                                if pattern.search(content):
+                                    violation = (
+                                        f"v2: Possible secret in {name}: "
+                                        f"pattern {pattern.pattern}"
+                                    )
+                                    result.secret_violations.append(violation)
+                                    result.failures.append(violation)
+                        except Exception:
+                            pass
+
+                # v2 content-level checks
+                self._validate_content_v2(zf, names, result)
+
+        except zipfile.BadZipFile as e:
+            result.failures.append(f"ZIP is invalid/corrupt: {e}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        result.passed = not result.failures
+        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
+        return result
+
+    # ------------------------------------------------------------------
+    # Content-level validation helpers
+    # ------------------------------------------------------------------
+
+    def _validate_content_v2(
+        self,
+        zf: zipfile.ZipFile,
+        names: list[str],
+        result: ContractResult,
+    ) -> None:
+        name_map: dict[str, str] = {Path(n).name: n for n in names}
+        self._check_git_status_final(zf, name_map, result)
+        self._check_git_log_proof(zf, name_map, result)
+        self._check_final_verdict(zf, name_map, result)
+        self._check_test_summary(zf, name_map, result)
+        self._check_bundle_contract_report(zf, name_map, result)
+
+    def _read_text(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        basename: str,
+    ) -> str | None:
+        if basename not in name_map:
+            return None
+        try:
+            return zf.read(name_map[basename]).decode("utf-8", errors="replace")
+        except Exception:
+            return None
+
+    def _check_git_status_final(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        content = self._read_text(zf, name_map, "git-status-final.txt")
+        if content is None:
+            return  # Missing category already reported by presence check
+        staged = _STAGED_SOURCE_PATTERN.findall(content)
+        if staged:
+            result.failures.append(
+                f"v2: git-status-final.txt contains staged/dirty source-tree files: "
+                f"{staged[:5]}. Sprint work must be committed before the final status is captured."
+            )
+
+    def _check_git_log_proof(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        content = self._read_text(zf, name_map, "git-log-proof.txt")
+        if content is None:
+            return
+        if not content.strip():
+            result.failures.append("v2: git-log-proof.txt is empty — no commits recorded.")
+            return
+        if _SPRINT28_COMMIT not in content:
+            result.failures.append(
+                f"v2: git-log-proof.txt does not contain Sprint 28 commit {_SPRINT28_COMMIT}. "
+                "Sprint 28 must be committed before Sprint 29 bundle is created."
+            )
+
+    def _check_final_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        content = self._read_text(zf, name_map, "final-verdict.md")
+        if content is None:
+            return
+        if "IN_PROGRESS" in content.upper():
+            result.failures.append(
+                "v2: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
+            )
+            return
+        if not any(v in content for v in ALLOWED_VERDICTS_V2):
+            result.failures.append(
+                f"v2: final-verdict.md does not contain any allowed Sprint 29 verdict. "
+                f"Allowed: {sorted(ALLOWED_VERDICTS_V2)}"
+            )
+
+    def _check_test_summary(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        content = self._read_text(zf, name_map, "test-summary.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append("v2: test-summary.json is not valid JSON.")
+            return
+        if isinstance(data, dict):
+            failed = int(data.get("failed", data.get("errors", 0)))
+            passed = int(data.get("passed", data.get("total", 0)))
+            if failed > 0:
+                result.failures.append(
+                    f"v2: test-summary.json reports {failed} failed tests — must be 0."
+                )
+            if passed == 0:
+                result.failures.append(
+                    "v2: test-summary.json reports 0 passed tests — test suite did not run."
+                )
+
+    def _check_bundle_contract_report(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        content = self._read_text(zf, name_map, "bundle-contract-validation-report.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v2: bundle-contract-validation-report.json is not valid JSON."
+            )
+            return
+        if not data.get("passed", False):
+            result.failures.append(
+                "v2: bundle-contract-validation-report.json has passed=false — "
+                "bundle failed its own contract validation."
+            )
+        missing = data.get("categories_missing", [])
+        if missing:
+            result.failures.append(
+                f"v2: bundle-contract-validation-report.json reports categories_missing: {missing}"
+            )
+
+
+def contract_definition_v2() -> dict:
+    """Return the v2 bundle contract definition as a serialisable dict."""
+    return {
+        "contract_version": "2.0.0",
+        "sprint": "sprint29+",
+        "description": (
+            "Strict evidence contract v2 for LowCode sprint bundles. "
+            "Validates category presence AND state correctness. "
+            "Requires post-commit git status (no staged source files), "
+            "prior sprint commit in git log, and valid final verdict."
+        ),
+        "required_categories": {
+            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V2.items()
+        },
+        "min_categories_required": MIN_CATEGORIES_REQUIRED_V2,
+        "content_checks_enabled": True,
+        "content_checks": [
+            "git-status-final.txt: no staged source/test/config files",
+            f"git-log-proof.txt: must contain {_SPRINT28_COMMIT}",
+            "final-verdict.md: must contain an allowed Sprint 29 verdict",
+            "test-summary.json: failed==0 and passed>0",
+            "bundle-contract-validation-report.json: passed=true",
+        ],
+        "secret_scanning_enabled": True,
+        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V2),
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }

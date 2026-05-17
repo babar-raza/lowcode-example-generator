@@ -1,0 +1,22 @@
+{
+  "lane": "lane-p1",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "PDF PR3 final package audit",
+  "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "types": [
+    "doc-converter",
+    "html",
+    "xls-converter"
+  ],
+  "aspose_pdf_version": "26.4.0",
+  "no_binaries": true,
+  "no_secrets_scanned": true,
+  "no_conflict_with_published": true,
+  "already_published_types": [],
+  "audit_flags": [],
+  "structure_valid": true,
+  "examples_present": true,
+  "publication_authorized": false,
+  "verdict": "PACKAGE_AUDIT_PASS_APPROVAL_BLOCKED"
+}

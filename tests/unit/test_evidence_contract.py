@@ -20,9 +20,14 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.evidence_contract import (
+    ALLOWED_VERDICTS_V2,
+    COMBINED_CATEGORIES_V2,
+    MIN_CATEGORIES_REQUIRED_V2,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
+    StrictEvidenceContractV2,
     contract_definition,
+    contract_definition_v2,
 )
 
 
@@ -323,3 +328,305 @@ class TestEdgeCases:
         assert len(REQUIRED_CATEGORIES) >= 36, (
             f"Contract only has {len(REQUIRED_CATEGORIES)} categories — too few"
         )
+
+
+# ---------------------------------------------------------------------------
+# Helper for v2 complete bundle
+# ---------------------------------------------------------------------------
+
+def _minimal_v2_complete_files() -> dict[str, str]:
+    """Return files satisfying all 45 v2 required categories with valid content."""
+    return {
+        # v1 categories (updated/kept)
+        "git-status-initial.txt": "?? plans/\n M workspace/manifests/example-index.json",
+        "git-status-final.txt": "?? plans/\n M workspace/manifests/example-index.json",
+        "git-diff-initial.patch": "diff --git a/x b/x\nindex 000..111\n+added",
+        "git-diff-final.patch": "diff --git a/x b/x\nindex 000..111\n+added",
+        "git-log-proof.txt": "20686d3 feat(sprint28): SPRINT28_STRICT_EVIDENCE_CONTRACT\n774f516 feat(sprint27)\n",
+        "changed-files.txt": "src/plugin_examples/evidence_contract.py",
+        "source-state-classification.json": json.dumps({"source_dirty": False}),
+        "test-summary.json": json.dumps({"passed": 1650, "failed": 0, "total": 1650}),
+        "test-full.log": "1650 passed in 35s",
+        "test-targeted.log": "10 passed in 1s",
+        "final-verdict.md": "# SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE",
+        "final-state-summary.yaml": "sprint: sprint29\nverdict: APPROVAL_BLOCKED_V2\nhead: 20686d3",
+        "bundle-contract-definition.json": json.dumps({"contract_version": "2.0.0"}),
+        "bundle-contract-validation-report.json": json.dumps({
+            "passed": True, "categories_missing": [], "verdict": "BUNDLE_CONTRACT_PASSED"
+        }),
+        "publication-mode-decision.json": json.dumps({"mode": "APPROVAL_BLOCKED"}),
+        "github-token-readiness-report.json": json.dumps({"status": "TOKEN_VALID"}),
+        "pdf-pr3-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr3-version-policy-report.json": json.dumps({"version": "26.4.0", "policy": "PUBLISH_AS_IS"}),
+        "pdf-pr3-approval-blocked.md": "# PR#3 approval blocked",
+        "pdf-pr5-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr5-version-policy-report.json": json.dumps({"version": "26.4.0", "policy": "PUBLISH_AS_IS"}),
+        "pdf-pr5-approval-blocked.md": "# PR#5 approval blocked",
+        "pdf-pr6-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr6-version-policy-report.json": json.dumps({"version": "26.4.0", "policy": "PUBLISH_AS_IS"}),
+        "pdf-pr6-approval-blocked.md": "# PR#6 approval blocked",
+        "pdf-pr7-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr7-approval-blocked.md": "# PR#7 approval blocked",
+        "pdf-pr8-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr8-approval-blocked.md": "# PR#8 approval blocked",
+        "pdf-pr9-final-package-audit.json": json.dumps({"status": "PASS"}),
+        "pdf-pr9-approval-blocked.md": "# PR#9 approval blocked",
+        "post-publication-not-run-approval-blocked.md": "# Post-pub not run",
+        "pdf-formimporter-defect-package-final-report.json": json.dumps({"status": "WAVE_H_DEFERRED"}),
+        "pdf-formimporter-defect-package-final-check.json": json.dumps({"status": "CONFIRMED"}),
+        "pdf-formimporter-upstream-issue-final.md": "# FormImporter upstream issue",
+        "pdf-final-denominator-closeout-matrix.json": json.dumps({"total": 101}),
+        "email-final-runtime-status.json": json.dumps({"status": "5/5 PASS"}),
+        "slides-final-runtime-status.json": json.dumps({"status": "6/6 PASS"}),
+        "words-final-guard-report.json": json.dumps({"verdict": "REGRESSION_FREE"}),
+        "cells-final-guard-report.json": json.dumps({"verdict": "REGRESSION_FREE"}),
+        "diagram-final-guard-report.json": json.dumps({"verdict": "REGRESSION_FREE"}),
+        "all-family-launch-scoreboard.json": json.dumps({"families": 6}),
+        "all-family-launch-scoreboard.md": "# All-Family Scoreboard Sprint 29",
+        "families-needing-launch-work.json": json.dumps({"families": []}),
+        "release-state-reconciliation-report.json": json.dumps({"state": "OK"}),
+        "taskcard-reconciliation-report.json": json.dumps({"open": 2}),
+        "taskcard-state-after-sprint29.json": json.dumps({"sprint": "sprint29"}),
+        # New Sprint 29-only categories
+        "sprint28-commit-proof.json": json.dumps({"sprint28_commit_is_head": True, "head_short": "20686d3"}),
+        "sprint28-bundle-vs-commit-reconciliation.md": "# Sprint 28 reconciliation — VERIFIED",
+        "evidence-contract-v2-implementation-report.json": json.dumps({"version": "2.0.0"}),
+        "evidence-contract-v2-test-report.json": json.dumps({"passed": 15, "failed": 0}),
+    }
+
+
+# ---------------------------------------------------------------------------
+# v2 contract rejects invalid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV2Rejects:
+    """v2 contract must reject bundles that pass v1 but fail state-correctness checks."""
+
+    def test_v2_rejects_bundle_missing_sprint28_commit_in_log(self, tmp_path):
+        """git-log-proof.txt without Sprint 28 commit 20686d3 must fail v2."""
+        files = _minimal_v2_complete_files()
+        # Replace git log with one that does NOT contain 20686d3
+        files["git-log-proof.txt"] = "abc1234 feat(old): old sprint only\n"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert any("20686d3" in f for f in result.failures)
+
+    def test_v2_rejects_staged_source_files_in_final_status(self, tmp_path):
+        """git-status-final.txt with staged src/ files must fail v2."""
+        files = _minimal_v2_complete_files()
+        # Staged source file line: 'A  src/plugin_examples/foo.py'
+        files["git-status-final.txt"] = "A  src/plugin_examples/foo.py\n?? plans/"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert any("staged" in f.lower() or "src/" in f for f in result.failures)
+
+    def test_v2_rejects_staged_test_files_in_final_status(self, tmp_path):
+        """git-status-final.txt with staged tests/ files must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["git-status-final.txt"] = "M  tests/unit/test_evidence_contract.py\n"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+
+    def test_v2_rejects_in_progress_verdict(self, tmp_path):
+        """final-verdict.md containing IN_PROGRESS must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["final-verdict.md"] = "# SPRINT29_IN_PROGRESS — work not done"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert any("IN_PROGRESS" in f for f in result.failures)
+
+    def test_v2_rejects_unknown_verdict(self, tmp_path):
+        """final-verdict.md without any allowed Sprint 29 verdict must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["final-verdict.md"] = "# SOME_UNKNOWN_VERDICT_COMPLETELY_INVALID"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+
+    def test_v2_rejects_failed_tests_in_summary(self, tmp_path):
+        """test-summary.json with failed>0 must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["test-summary.json"] = json.dumps({"passed": 1640, "failed": 5})
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert any("failed" in f.lower() for f in result.failures)
+
+    def test_v2_rejects_zero_passed_tests(self, tmp_path):
+        """test-summary.json with passed==0 must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["test-summary.json"] = json.dumps({"passed": 0, "failed": 0})
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+
+    def test_v2_rejects_bundle_contract_report_with_false_passed(self, tmp_path):
+        """bundle-contract-validation-report.json with passed=false must fail v2."""
+        files = _minimal_v2_complete_files()
+        files["bundle-contract-validation-report.json"] = json.dumps({
+            "passed": False, "categories_missing": ["test_full_log"],
+            "verdict": "BUNDLE_CONTRACT_FAILED"
+        })
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+
+    def test_v2_rejects_missing_pr3_version_policy(self, tmp_path):
+        """Missing pdf-pr3-version-policy-report.json must fail v2."""
+        files = _minimal_v2_complete_files()
+        del files["pdf-pr3-version-policy-report.json"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert "pr3_version_policy" in result.categories_missing
+
+    def test_v2_rejects_missing_sprint28_commit_proof(self, tmp_path):
+        """Missing sprint28-commit-proof.json must fail v2."""
+        files = _minimal_v2_complete_files()
+        del files["sprint28-commit-proof.json"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        assert "sprint28_commit_proof" in result.categories_missing
+
+    def test_v2_requires_more_categories_than_v1(self):
+        """v2 must require more categories than v1 (stricter)."""
+        assert MIN_CATEGORIES_REQUIRED_V2 > len(REQUIRED_CATEGORIES), (
+            f"v2 ({MIN_CATEGORIES_REQUIRED_V2}) must have more categories than v1 ({len(REQUIRED_CATEGORIES)})"
+        )
+
+    def test_v2_min_categories_matches_combined(self):
+        """MIN_CATEGORIES_REQUIRED_V2 must equal len(COMBINED_CATEGORIES_V2)."""
+        assert MIN_CATEGORIES_REQUIRED_V2 == len(COMBINED_CATEGORIES_V2)
+
+    def test_v2_rejects_relative_zip_path(self, tmp_path):
+        """v2 validate_zip must fail if given a relative path."""
+        files = _minimal_v2_complete_files()
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        import os
+        rel_path = os.path.relpath(str(zip_path))
+        result = StrictEvidenceContractV2().validate_zip(rel_path)
+        # Relative path should produce a failure
+        assert not result.passed
+
+    def test_v2_rejects_sprint28_style_bundle_missing_new_categories(self, tmp_path):
+        """A Sprint 28-style bundle (v1 complete, v2 incomplete) must fail v2."""
+        files = _minimal_complete_files()  # v1 complete set
+        zip_path = tmp_path / "sprint28-style.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert not result.passed
+        # Must be missing at least the v2-only categories
+        missing = set(result.categories_missing)
+        assert "sprint28_commit_proof" in missing or "pr3_version_policy" in missing
+
+
+# ---------------------------------------------------------------------------
+# v2 contract accepts valid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV2Accepts:
+    """v2 contract must accept correctly formed approval-blocked and published bundles."""
+
+    def test_v2_accepts_complete_approval_blocked_bundle(self, tmp_path):
+        """A complete approval-blocked bundle satisfying all v2 checks must pass."""
+        files = _minimal_v2_complete_files()
+        zip_path = tmp_path / "sprint29-complete.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert result.passed, f"v2 should pass but failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert result.categories_missing == []
+
+    def test_v2_accepts_published_verdict(self, tmp_path):
+        """A bundle with a published verdict (PR URLs in final-verdict) must pass."""
+        files = _minimal_v2_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT29_PUBLISHED_AND_EVIDENCE_CONTRACT_V2_COMPLETE\n\n"
+            "PR#3: https://github.com/aspose-pdf-net/pull/10\n"
+            "PR#5: https://github.com/aspose-pdf-net/pull/11"
+        )
+        files["post-publication-not-run-approval-blocked.md"] = ""
+        # Add publication results
+        for pr in ["pr3", "pr5", "pr6", "pr7", "pr8", "pr9"]:
+            files[f"pdf-{pr}-approval-blocked.md"] = ""
+            files[f"pdf-{pr}-final-package-audit.json"] = json.dumps({"status": "PASS"})
+        zip_path = tmp_path / "sprint29-published.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        assert result.passed, f"v2 should pass but failed: {result.failures}"
+
+    def test_v2_contract_definition_version(self):
+        """contract_definition_v2 must return version 2.0.0."""
+        defn = contract_definition_v2()
+        assert defn["contract_version"] == "2.0.0"
+
+    def test_v2_contract_definition_has_all_combined_categories(self):
+        """contract_definition_v2 must include all COMBINED_CATEGORIES_V2 keys."""
+        defn = contract_definition_v2()
+        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V2.keys())
+
+    def test_v2_contract_definition_lists_allowed_verdicts(self):
+        """contract_definition_v2 must list all allowed Sprint 29 verdicts."""
+        defn = contract_definition_v2()
+        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V2)
+
+    def test_v2_accepts_clean_git_status_with_only_untracked_and_binary(self, tmp_path):
+        """git-status-final.txt with only untracked/binary lines must pass."""
+        files = _minimal_v2_complete_files()
+        files["git-status-final.txt"] = (
+            "?? plans/\n"
+            " M workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/harness.dll\n"
+            " M workspace/manifests/example-index.json\n"
+        )
+        zip_path = tmp_path / "clean-status.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV2().validate_zip(zip_path)
+        # Should not fail on git status check (no staged src/ tests/ pipeline/ files)
+        status_failures = [f for f in result.failures if "staged" in f.lower() and "src/" in f]
+        assert len(status_failures) == 0

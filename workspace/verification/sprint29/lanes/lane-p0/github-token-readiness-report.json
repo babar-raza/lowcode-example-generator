@@ -1,0 +1,18 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "GitHub token readiness for publication",
+  "gh_auth_status": "LOGGED_IN",
+  "account": "babar-raza",
+  "active_account": true,
+  "token_type": "classic_PAT_ghp",
+  "token_scopes_confirmed": ["repo", "workflow"],
+  "protocol": "https",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "write_access_expected": true,
+  "write_access_basis": "classic PAT with repo scope covers git push and Git Data API blob creation on org-owned repos",
+  "fine_grained_warning": "GITHUB_TOKEN (93 chars) appears to be fine-grained or app token — NOT suitable for org repo push. Use GH_TOKEN (classic PAT) only.",
+  "token_mapping_required": "Map GH_TOKEN to GITHUB_TOKEN before publish-pr: $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+  "verdict": "TOKEN_VALID_FOR_REPO_PUSH — GH_TOKEN confirmed classic PAT repo+workflow. Ready for publication once APPROVE_LIVE_PR is set."
+}

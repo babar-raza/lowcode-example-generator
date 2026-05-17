@@ -1,0 +1,19 @@
+{
+  "lane": "lane-p2",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "PDF PR5 version policy decision",
+  "package": "pdf-controlled-pilot-pr5",
+  "current_version": "26.4.0",
+  "latest_version": "26.5.0",
+  "decision": "PUBLISH_AS_IS",
+  "rationale": [
+    "Examples were generated and dry-run validated on 26.4.0",
+    "Refreshing to 26.5.0 would require regeneration and re-validation",
+    "FormImporter (26.5.0) has a known library bug \u2014 unrelated to this package",
+    "Version split is intentional: PR5 = 26.4.0 pilot types",
+    "No regression evidence for version upgrade available this sprint"
+  ],
+  "action_required": "None \u2014 publish as-is on approval",
+  "verdict": "VERSION_POLICY_PUBLISH_AS_IS_26.4.0"
+}

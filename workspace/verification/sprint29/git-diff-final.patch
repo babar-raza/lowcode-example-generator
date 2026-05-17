@@ -1,0 +1,25 @@
+ .gitignore                                         |   2 +
+ .../bin/Debug/net8.0/signature-harness.dll         | Bin 7680 -> 7680 bytes
+ .../bin/Debug/net8.0/signature-harness.exe         | Bin 151552 -> 151552 bytes
+ .../bin/Debug/net8.0/signature-harness.pdb         | Bin 14880 -> 14880 bytes
+ .../pdf-signature-harness/input.pdf                | Bin 29358 -> 29358 bytes
+ .../obj/Debug/net8.0/apphost.exe                   | Bin 151552 -> 151552 bytes
+ .../obj/Debug/net8.0/ref/signature-harness.dll     | Bin 5632 -> 5632 bytes
+ .../obj/Debug/net8.0/refint/signature-harness.dll  | Bin 5632 -> 5632 bytes
+ .../Debug/net8.0/signature-harness.AssemblyInfo.cs |   2 +-
+ .../signature-harness.AssemblyInfoInputs.cache     |   2 +-
+ .../obj/Debug/net8.0/signature-harness.dll         | Bin 7680 -> 7680 bytes
+ .../obj/Debug/net8.0/signature-harness.pdb         | Bin 14880 -> 14880 bytes
+ .../Debug/net8.0/signature-harness.sourcelink.json |   2 +-
+ .../pdf-signature-harness/output-signed.pdf        | Bin 616285 -> 616258 bytes
+ .../pdf-signature-harness/test.pfx                 | Bin 2374 -> 2374 bytes
+ workspace/manifests/example-index.json             | 285 +++++++++++++++++----
+ workspace/manifests/scenario-catalog.json          |  40 ++-
+ .../latest/cells-readme-backfill-simulation.json   |   4 +-
+ .../latest/cells-root-readme-audit.json            |   2 +-
+ .../latest/cells-root-readme-render-result.json    |   2 +-
+ workspace/verification/latest/release-status.json  |   2 +-
+ .../latest/words-readme-backfill-simulation.json   |   4 +-
+ .../latest/words-root-readme-audit.json            |   2 +-
+ .../latest/words-root-readme-render-result.json    |   2 +-
+ 24 files changed, 293 insertions(+), 58 deletions(-)

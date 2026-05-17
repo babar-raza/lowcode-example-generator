@@ -1,0 +1,27 @@
+{
+  "lane": "lane-test",
+  "sprint": "sprint27",
+  "date": "2026-05-17",
+  "subject": "Full test suite — Sprint 27",
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -x -q",
+  "result": {
+    "total": 1616,
+    "passed": 1616,
+    "failed": 0,
+    "errors": 0,
+    "duration_seconds": 30.36
+  },
+  "baseline_comparison": {
+    "sprint26": 1616,
+    "sprint27": 1616,
+    "delta": 0,
+    "note": "No new tests added in Sprint 27 (evidence and repro sprint, no source code changes)"
+  },
+  "coverage": [
+    "test_llm_generation.py — 289 tests (Signature template_first + 14-type loops)",
+    "test_denominator_model.py — denominator conservation (19 pilot, 82 excluded)",
+    "test_code_generator.py — TextFragment validator + all template patterns",
+    "All other existing test modules — unchanged, all PASS"
+  ],
+  "verdict": "TEST_SUITE_ALL_PASS — 1616/1616 in 30.36s."
+}

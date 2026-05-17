@@ -1,0 +1,76 @@
+{
+  "lane": "lane-pdf-b",
+  "sprint": "sprint27",
+  "date": "2026-05-17",
+  "subject": "PDF final denominator state and closeout matrix",
+  "package_version": "26.5.0",
+  "denominator_conservation": {
+    "workflow_root_count": 22,
+    "non_runnable_count": 79,
+    "total": 101,
+    "equation": "22+79=101 HOLDS",
+    "pilot_allowed": 19,
+    "excluded": 82,
+    "pilot_equation": "19+82=101 HOLDS"
+  },
+  "published": {
+    "count": 5,
+    "types": ["Merger", "TextExtractor", "PdfAConverter", "Splitter", "Optimizer"],
+    "pr_refs": ["PR#1 (Merger+TextExtractor)", "PR#2 (PdfAConverter+Splitter)", "PR#4 (Optimizer)"]
+  },
+  "pr_dry_run_ready": {
+    "count": 14,
+    "pr3": {"types": ["DocConverter", "XlsConverter", "Html"], "package": "pdf-controlled-pilot"},
+    "pr5": {"types": ["Jpeg", "Tiff", "Png"], "package": "pdf-controlled-pilot-pr5"},
+    "pr6": {"types": ["TocGenerator", "TableGenerator", "ImageExtractor"], "package": "pdf-controlled-pilot-pr6"},
+    "pr7": {"types": ["Security", "FormFlattener"], "package": "pdf-controlled-pilot-pr7"},
+    "pr8": {"types": ["FormEditor", "FormExporter"], "package": "pdf-controlled-pilot-pr8"},
+    "pr9": {"types": ["Signature"], "package": "pdf-controlled-pilot-pr9", "added_sprint": "sprint26"}
+  },
+  "remaining_pilot_scope": {
+    "count": 3,
+    "types_not_yet_in_pilot": [
+      {
+        "type": "Timestamp",
+        "classification": "PERMANENTLY_BLOCKED",
+        "reason": "External TSA ServerUrl required — no programmatic equivalent. Cannot self-sign.",
+        "sprint": "sprint25"
+      },
+      {
+        "type": "Ofd",
+        "classification": "PERMANENTLY_BLOCKED",
+        "reason": "OFD is a Chinese national standard format — no programmatic fixture creation API in Aspose.PDF",
+        "sprint": "sprint21"
+      },
+      {
+        "type": "FormImporter",
+        "classification": "WAVE_H_DEFERRED_LIBRARY_BUG",
+        "reason": "NullReferenceException in Aspose.PDF 26.5.0 Forms.Form.#=zZQILclhNTKUB on all test cases",
+        "taskcard": "TC-PDF-FORMIMPORTER-RETEST",
+        "sprint": "sprint26"
+      }
+    ]
+  },
+  "non_runnable_breakdown": {
+    "options_classes": 51,
+    "provider_callback": 6,
+    "result_classes": 6,
+    "data_source": 3,
+    "save_target": 2,
+    "builder": 4,
+    "enum_types": 4,
+    "abstract_base": 3,
+    "total": 79
+  },
+  "pilot_completion_pct": {
+    "of_pilot_allowed": "5/19 = 26.3% (14 PR_DRY_RUN_READY pending APPROVE_LIVE_PR)",
+    "of_workflow_root": "5/22 = 22.7% (pending: 14 PR_DRY_RUN_READY + 3 deferred/blocked)",
+    "post_approval_pct_of_pilot": "19/19 = 100% (when PR#3/5/6/7/8/9 published)"
+  },
+  "frontier_plan": {
+    "wave_h_candidate": "FormImporter — retest at next Aspose.PDF package version",
+    "permanently_blocked": ["Timestamp", "Ofd"],
+    "expansion_scope": "19/22 workflow_root types in pilot. 3 blocked/deferred. Pilot scope = MAXIMUM ACHIEVABLE with current library."
+  },
+  "verdict": "PDF_DENOMINATOR_CLOSEOUT_SPRINT27 — 5 published + 14 PR_DRY_RUN_READY = 19 pilot-scope types. Conservation 22+79=101 HOLDS. 19+82=101 HOLDS. Timestamp/Ofd PERMANENTLY_BLOCKED. FormImporter WAVE_H_DEFERRED_LIBRARY_BUG."
+}

@@ -1,0 +1,58 @@
+{
+  "lane": "lane-1",
+  "sprint": "sprint27",
+  "date": "2026-05-17",
+  "subject": "Sprint 26 commit verification",
+  "commit_sha": "e3f1ea94b9176bf2983454ebace8d179d0ee230f",
+  "commit_date": "2026-05-17T16:20:28+05:00",
+  "commit_author": "Babar Raza <babar.raza@aspose.com>",
+  "commit_message_verdict": "SPRINT26_WAVE_G_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED",
+  "parent_commit": "58047d5",
+  "files_changed": 23,
+  "insertions": 843,
+  "deletions": 25,
+  "source_files_changed": [
+    {"file": "src/plugin_examples/generator/code_generator.py", "change": "+38 -1", "purpose": "Signature template_first + TextFragment validator fix"},
+    {"file": "pipeline/configs/families/pdf.yml", "change": "+22 -0", "purpose": "Signature Wave G per_type_constraints + allowed_types"},
+    {"file": "pipeline/configs/denominators/pdf.json", "change": "+22 -10", "purpose": "allowed_pilot_count 18→19, excluded 83→82, unclassified 4→3"},
+    {"file": "tests/unit/test_llm_generation.py", "change": "+37 -1", "purpose": "3 Signature tests + loop tests 13→14"},
+    {"file": "tests/unit/test_denominator_model.py", "change": "+22 -10", "purpose": "denominator assertions updated"}
+  ],
+  "harness_files": [
+    "workspace/fixture-validation/pdf-formimporter-harness/Program.cs (+121)",
+    "workspace/fixture-validation/pdf-formimporter-harness/formimporter-harness.csproj (+11)"
+  ],
+  "pr_package_files": [
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/Directory.Build.props (+8)",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/Directory.Packages.props (+8)",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/Program.cs (+32)",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/README.md (+27)",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/signature.csproj (+14)",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/global.json (+6)"
+  ],
+  "lane_evidence_files": [
+    "workspace/verification/sprint26/lanes/lane-cells-a/cells-regression-guard.json (+35)",
+    "workspace/verification/sprint26/lanes/lane-diagram-a/diagram-regression-guard.json (+37)",
+    "workspace/verification/sprint26/lanes/lane-email-a/email-converttohtml-filelock-fix.json (+31)",
+    "workspace/verification/sprint26/lanes/lane-infra-a/template-first-registry-audit.json (+63)",
+    "workspace/verification/sprint26/lanes/lane-infra-b/all-family-scoreboard.json (+75)",
+    "workspace/verification/sprint26/lanes/lane-pdf-b/signature-wave-g-pr9-evidence.json (+58)",
+    "workspace/verification/sprint26/lanes/lane-pdf-c/formimporter-wave-h-assessment.json (+52)",
+    "workspace/verification/sprint26/lanes/lane-pdf-def/pdf-denominator-closeout-matrix.json (+72)",
+    "workspace/verification/sprint26/lanes/lane-slides-a/slides-6-6-reconciliation.json (+44)",
+    "workspace/verification/sprint26/lanes/lane-words-a/words-regression-guard.json (+33)"
+  ],
+  "test_count_sprint26": 1616,
+  "test_count_sprint25": 1600,
+  "new_tests": 16,
+  "conservation_check": {
+    "workflow_root": 22,
+    "non_runnable": 79,
+    "total": 101,
+    "equation": "22+79=101 HOLDS",
+    "pilot_allowed": 19,
+    "excluded": 82,
+    "pilot_equation": "19+82=101 HOLDS"
+  },
+  "verdict": "SPRINT26_COMMIT_VERIFIED — e3f1ea9 confirmed, 23 files, 843 insertions, all conservation equations hold."
+}

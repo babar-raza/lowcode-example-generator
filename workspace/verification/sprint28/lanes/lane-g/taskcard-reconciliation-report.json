@@ -1,0 +1,38 @@
+{
+  "lane": "lane-g",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "Taskcard reconciliation after Sprint 28",
+  "new_sprint28": [
+    {
+      "id": "TC-EVIDENCE-01",
+      "title": "Strict evidence contract implementation",
+      "status": "CLOSED_SPRINT28",
+      "deliverable": "src/plugin_examples/evidence_contract.py + 26 tests"
+    }
+  ],
+  "closed_this_sprint": [
+    "TC-EVIDENCE-01 (evidence contract)"
+  ],
+  "open_blockers": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "title": "Set APPROVE_LIVE_PR and publish PDF PR#3/#5/#6/#7/#8/#9",
+      "priority": "CRITICAL",
+      "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "prs": ["PR#3", "PR#5", "PR#6", "PR#7", "PR#8", "PR#9"]
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter when Aspose.PDF > 26.5.0",
+      "priority": "MEDIUM",
+      "blocker": "Library defect in 26.5.0",
+      "defect_zip": "workspace/defect-repros/pdf-formimporter-nullref/formimporter-nullref-repro.zip"
+    }
+  ],
+  "permanently_closed": [
+    {"id": "TC-PDF-TIMESTAMP", "title": "Timestamp", "status": "PERMANENTLY_BLOCKED"},
+    {"id": "TC-PDF-OFD", "title": "Ofd", "status": "PERMANENTLY_BLOCKED"}
+  ],
+  "verdict": "TASKCARD_RECONCILED_SPRINT28 — 1 closed (evidence contract), 1 critical open (publication approval), 1 medium open (FormImporter retest)."
+}

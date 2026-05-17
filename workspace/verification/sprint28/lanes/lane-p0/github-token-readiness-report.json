@@ -1,0 +1,22 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "GitHub token readiness for publication",
+  "gh_auth_check": {
+    "account": "babar-raza",
+    "logged_in": true,
+    "token_type": "classic PAT (ghp_****)",
+    "token_scopes": ["repo", "workflow"],
+    "missing_scopes": ["read:org"],
+    "read_org_required": false,
+    "repo_scope_sufficient_for_push": true
+  },
+  "token_policy": "Pipeline reads GITHUB_TOKEN. Map GH_TOKEN to GITHUB_TOKEN at command time. Classic PAT (ghp_, repo scope) required for org repos.",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "write_access_expected": true,
+  "write_access_note": "babar-raza is the repo owner/admin; repo scope grants push access to org repos owned by user",
+  "historical_proof": "Previous publication sprints (Sprint 14, Email/Slides Sprint) used same token pattern — MERGED successfully",
+  "readiness": "TOKEN_READY_FOR_PUBLICATION",
+  "verdict": "GITHUB_TOKEN_READY — classic PAT with repo scope, account babar-raza, verified via gh auth status. Publication blocked only by APPROVE_LIVE_PR gate."
+}

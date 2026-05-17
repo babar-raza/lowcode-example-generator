@@ -1,0 +1,94 @@
+774f516 feat(sprint27-evidence-gated-publication-pr3-pr9-and-final-pdf-closeout): SPRINT27_EVIDENCE_BUNDLE_VALIDATED_PUBLICATION_APPROVAL_BLOCKED
+e3f1ea9 feat(sprint26-pdf-wave-g-signature-formimporter-email-slides-all-family-closeout): SPRINT26_WAVE_G_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED
+58047d5 feat(sprint25-pdf-wave-f-pr8-signature-frontier-and-all-family-runtime): SPRINT25_WAVE_F_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED
+b332657 feat(sprint24-wave-f-formeditor-formexporter-selectfield-reclassification): SPRINT24_WAVE_F_ENABLED_PUBLICATION_APPROVAL_BLOCKED
+8dce137 feat(sprint23-pdf-wave-e-generation-pr7): SPRINT23_WAVE_E_ALL_PASS_PR7_READY_PUBLICATION_APPROVAL_BLOCKED
+94ec372 chore(sprint23-hygiene): remove stale workspace run records from 2026-04-28
+5b9e0a8 feat(sprint22-all-family-lowcode-swarm-publish-and-frontier-expansion): SPRINT22_WAVE_E_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED
+7e9a9b5 chore(sprint21-hygiene): close 6 dirty evidence files from release-status run
+a0319bb feat(sprint21-pdf-live-publish-or-xmlprocessor-frontier): SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED
+3119733 feat(sprint21-pdf-live-publish-or-xmlprocessor-frontier): SPRINT21_PDF_PR3_PR5_PR6_READY_APPROVAL_BLOCKED
+c1d9604 feat(sprint20-pdf-live-publication-and-state-repair): STATE_REPAIR_COMPLETE_PUBLICATION_DRY_RUN_READY_APPROVAL_BLOCKED
+b9d3662 feat(sprint19-pdf-controlled-publication-pr3-pr5-pr6): DRY_RUN_READY_APPROVAL_BLOCKED — all 9 new PDF examples packaged and dry-run verified
+bd71e09 feat(sprint18-toc-image-template-first): TocGenerator + ImageExtractor FIRST EVER PASS — all 14 PDF pilot types PR_DRY_RUN_READY
+7f34faf feat(sprint17-template-first-closure): PDF Wave B/C/TableGen all EXAMPLE_READY — encoding fix + SaveFormat fix
+20dae8a feat(sprint16-pdf-fresh-run-next-wave): PDF fresh run validated, TocGenerator/ImageExtractor wave started
+654573c fix(router): treat GPT_OSS_MODEL='' same as absent — use 'recommended' default
+63170d5 feat(runner): add version_drift_preflight stage after nuget_fetch
+0e5728e fix(gates+codegen): persisted quarantine propagation + 5 PDF reference examples
+6976af2 chore(pdf): update LowCode denominator for Aspose.PDF 26.5.0
+cc50580 feat(sprint11-candidate-integrity): demotion-aware manifest, degraded gate semantics, PDF Wave C stabilization
+48d4bd1 feat(sprint10-convergence-intelligence): literal-string constraint validator + Jpeg/Tiff extension fix
+357ac51 feat(sprint9-waveb-image-wave): PDF Wave B dry-run, image type expansion, manifest merge fix
+5480495 feat(sprint8-manifest-consolidation): Wave B package assembly + manifest merge fix
+a25e425 feat(sprint7-waveb-closure): Html PR_READY — all 3 Wave B types EXAMPLE_READY_FOR_PR_DRY_RUN
+2281ee8 feat(sprint7-pdf-waveb): PDF Wave B expansion + Html validator hardening
+afca831 feat(model-unblock-activation-sprint): all 6 families PILOT_COMPLETE+, 28 examples published
+7f88385 feat(replay-publication-sprint): email/slides activation, Words ReportBuilder, PDF Optimizer — Sprint 6 closure
+6cc4ca0 feat(replay-publication-sprint): replay-assisted publication coverage sprint closure
+e2a7d32 feat(sprint5-env-blocked): lane evidence, repo probes, portfolio sync
+d327164 feat(sprint4-pilot-closure): Words ReportBuilder config, Email/Slides readiness, queue sync
+b2bcf5d feat(publication-closure): publish Words PR#5 (7ex) and PDF PR#2 (3ex), close Sprint R3
+bec5362 feat(replay): add hardened stage replay pipeline
+008e6f7 feat(classic-token-publication-healing-activation): token hardening, healing intelligence activation, Processor governance
+cad4714 feat(healing-intelligence): establish persistent healing intelligence registry
+ec5fb0a feat(r5-verification): close Sprint R5 with all-family completeness enforcement
+c38788b feat(healing): portfolio healing acceleration sprint — activate waves 3+A and repair infrastructure
+ad541be feat(healing): establish deferred-to-healing governance for all 28 deferred runnable types
+6ce73da feat(sprint2): portfolio launch sprint 2 — readiness documentation and taskcard closure
+171969d fix(lowcode): close portfolio sprint1 evidence and words wave2 readiness
+0461c79 fix: report release status for all families
+998a60b fix: close r6 preflight blockers
+1491130 feat(r5-verification): close Sprint R5 with all-family completeness enforcement
+ed1f442 feat(foundation): implement all-family LowCode completeness foundation sprint (R5)
+4a72f84 docs(archive): preserve publishing history
+de5c5dd docs(archive): preserve planning history
+3cd29b9 docs(archive): preserve discovery history
+0389b59 docs(ia): add canonical documentation structure
+d32ebab docs(audit): record documentation IA plan
+79c8569 chore(gitignore): ignore workspace root
+16c9012 test(queue): cover diagram backlog entries
+2be2c94 chore(contracts): add diagram scenario contracts
+a637e88 docs(publishing): add release closure notes
+0c0af55 docs(publishing): add words publication notes
+b9d8bb8 docs(publishing): add pdf publication notes
+d7c4b2f docs(publishing): add cells publication notes
+375d2de docs(publishing): add operator runbooks
+a775aa3 docs(plans): add pdf retry results
+b13714a docs(plans): add new-family readiness plans
+80df1e6 docs(plans): add completion remediation plans
+885d8a5 docs(plans): add lowcode family roadmap
+b433569 docs(plans): add agent metrics tc14 gates
+e3ea713 docs(discovery): add publishing reviews
+7b31cc5 docs(discovery): add governance audits
+ec5e544 docs(discovery): add completion audits
+65f1a42 docs(discovery): add family evidence reviews
+c84ff76 docs(discovery): add pdf wave 1 analysis
+4c89d01 docs(discovery): add pdf fixture reviews
+facb2b1 docs(discovery): add words pilot reviews
+ffcbf8d docs(discovery): add cells tier 5 reviews
+ef51dfb chore(evidence): record diagram analysis outputs
+16516de chore(evidence): record diagram gate results
+2bde0c0 chore(manifests): record diagram pilot state
+aab966d chore(config): activate diagram family
+e8aea7d feat(generator): guide diagram fixtures
+633fe79 fix(nuget): retry package downloads
+839df05 chore(gitignore): ignore local runtime artifacts
+c7fa225 fix(B-013): make catalog hash enforcement blocking in generation pipeline (F-1 closure)
+16a74e3 feat(diagram): promote to experimental for controlled pilot
+d6e73f9 feat(fixtures): add family-scoped format maps and DOCX generator for new family pilots
+5f9e917 feat: add catalog hash enforcement, monthly build regression, 25-family discovery configs, and denominator governance
+79f19ae docs: add comprehensive README and investigation evidence bundle
+b501f67 feat(options-aware): fix 2 blocked Cells scenarios, achieve 9/9 PR_DRY_RUN_READY
+b3ecbc3 feat(automation): add publisher monthly runner and CI workflows
+aa97adc feat(validation): add local and reviewer validation gates
+4027b34 feat(generation): add LLM routing packets and example generator
+cbe48bd feat(scenarios): add catalog planner and blocked scenario reporting
+32acc3c feat(enrichment): add delta fixtures and example mining
+9af239e feat(plugin): add namespace detection and source-of-truth proof
+d67df7e feat(reflection): add metadata-only API catalog builder
+f90295f feat(nupkg): add extraction and framework selection
+f1e6b92 feat(nuget): add package fetch and dependency resolution
+ec05720 feat(foundation): add family config system
+3a7158b chore(structure): migrate repo layout and add concurrency baseline
+62879f4 Initial commit

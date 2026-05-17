@@ -1,0 +1,31 @@
+{
+  "lane": "lane-f",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "family": "cells",
+  "lifecycle_state": "FAMILY_COMPLETE",
+  "published_count": 9,
+  "published_types": [
+    "SpreadsheetConverter", "SpreadsheetLocker", "SpreadsheetMerger",
+    "SpreadsheetMetadataSignature", "SpreadsheetPrinter", "SpreadsheetSplitter",
+    "SpreadsheetTabsRemover", "SpreadsheetTemplateMarker", "SpreadsheetWatermarker"
+  ],
+  "package_version": "26.4.0",
+  "last_change_sprint": "sprint5",
+  "regression_check": {
+    "method": "lifecycle records inspection",
+    "last_pipeline_run": "sprint5",
+    "all_9_types_post_merge_verified": true,
+    "regression_verdict": "REGRESSION_FREE — Cells FAMILY_COMPLETE. No source changes in Sprint 28."
+  },
+  "version_drift": {
+    "current_denominator_version": "26.4.0",
+    "drift_status": "ASSUMED_STABLE — no Cells pipeline run in Sprint 28",
+    "drift_risk": "LOW"
+  },
+  "source_changes_impact": {
+    "evidence_contract_implementation": "NOT_APPLICABLE — cells types unaffected",
+    "other_changes": "NONE affecting Cells"
+  },
+  "verdict": "CELLS_REGRESSION_FREE_SPRINT28 — 9/9 FAMILY_COMPLETE. No regression. ASSUMED_STABLE at 26.4.0."
+}

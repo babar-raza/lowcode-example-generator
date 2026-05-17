@@ -1,0 +1,57 @@
+{
+  "lane": "lane-b",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "Sprint 27 missing closeout artifacts reconstruction",
+  "reconstruction_artifacts": {
+    "git-status-final.txt": {
+      "status": "RECONSTRUCTED",
+      "method": "current git status reflects Sprint 27 terminal state (no source changes since 774f516)",
+      "content_reference": "workspace/verification/sprint28/lanes/lane-0/git-status-initial.txt"
+    },
+    "git-diff-final.patch": {
+      "status": "RECONSTRUCTED",
+      "method": "git diff on Sprint 27 HEAD (774f516 vs e3f1ea9) captures all sprint27 changes",
+      "content_reference": "workspace/verification/sprint28/lanes/lane-0/git-diff-initial.patch"
+    },
+    "changed-files.txt": {
+      "status": "RECONSTRUCTED",
+      "method": "workspace modified files are all binary/generated, no source changes",
+      "content_reference": "workspace/verification/sprint28/lanes/lane-0/changed-files-initial.txt"
+    },
+    "final-state-summary.yaml": {
+      "status": "RECONSTRUCTED",
+      "file": "workspace/verification/sprint28/lanes/lane-b/sprint27-reconstructed-final-state-summary.yaml"
+    },
+    "final-verdict.md": {
+      "status": "RECONSTRUCTED",
+      "file": "workspace/verification/sprint28/lanes/lane-b/sprint27-reconstructed-final-verdict.md"
+    },
+    "bundle-contract-definition.json": {
+      "status": "UNAVAILABLE_IN_SPRINT27",
+      "reason": "Contract was never defined in Sprint 27. Sprint 28 implements it as src/plugin_examples/evidence_contract.py."
+    },
+    "bundle-contract-validation-report.json": {
+      "status": "RETROACTIVELY_COMPUTED",
+      "result": "BUNDLE_CONTRACT_FAILED",
+      "note": "Sprint 27 17-file bundle fails strict contract on ≥10 categories (test_sprint27_17_file_bundle_fails CONFIRMS)"
+    },
+    "pdf-pr3-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p1/pdf-pr3-approval-blocked.md"},
+    "pdf-pr5-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p2/pdf-pr5-approval-blocked.md"},
+    "pdf-pr6-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p3/pdf-pr6-approval-blocked.md"},
+    "pdf-pr7-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p4/pdf-pr7-approval-blocked.md"},
+    "pdf-pr8-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p5/pdf-pr8-approval-blocked.md"},
+    "pdf-pr9-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p6/pdf-pr9-approval-blocked.md"},
+    "post-publication-not-run-approval-blocked.md": {"status": "RECONSTRUCTED", "file": "workspace/verification/sprint28/lanes/lane-p7/post-publication-not-run-approval-blocked.md"},
+    "all-family-launch-scoreboard.json": {"status": "REGENERATED_SPRINT28", "file": "workspace/verification/sprint28/lanes/lane-g/all-family-launch-scoreboard.json"},
+    "taskcard-reconciliation-report.json": {"status": "RECONSTRUCTED_SPRINT28", "file": "workspace/verification/sprint28/lanes/lane-g/taskcard-reconciliation-report.json"},
+    "test-full.log": {"status": "UNAVAILABLE", "reason": "Sprint 27 test run output was not captured to file. Sprint 28 captures test-full.log."}
+  },
+  "reconstruction_summary": {
+    "total_missing": 17,
+    "reconstructed": 11,
+    "unavailable": 2,
+    "regenerated_sprint28": 4
+  },
+  "verdict": "SPRINT27_CLOSEOUT_RECONSTRUCTED — 11 artifacts reconstructed, 2 unavailable (bundle contract was never defined, test log not captured), 4 regenerated in Sprint 28."
+}

@@ -1,0 +1,68 @@
+{
+  "lane": "lane-d",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "PDF final denominator closeout matrix — Aspose.PDF 26.5.0",
+  "package_version": "26.5.0",
+  "denominator_conservation": {
+    "workflow_root_count": 22,
+    "non_runnable_count": 79,
+    "total": 101,
+    "equation_1": "22+79=101 HOLDS",
+    "pilot_allowed": 19,
+    "excluded": 82,
+    "equation_2": "19+82=101 HOLDS"
+  },
+  "state_matrix": {
+    "published": {
+      "count": 5,
+      "types": ["Merger", "TextExtractor", "PdfAConverter", "Splitter", "Optimizer"],
+      "pr_refs": ["PR#1 (Merger+TextExtractor)", "PR#2 (PdfAConverter+Splitter)", "PR#4 (Optimizer)"]
+    },
+    "pr_dry_run_ready": {
+      "count": 14,
+      "pr3": {"types": ["DocConverter", "XlsConverter", "Html"], "version": "26.4.0"},
+      "pr5": {"types": ["Jpeg", "Tiff", "Png"], "version": "26.4.0"},
+      "pr6": {"types": ["TocGenerator", "TableGenerator", "ImageExtractor"], "version": "26.4.0"},
+      "pr7": {"types": ["Security", "FormFlattener"], "version": "26.5.0"},
+      "pr8": {"types": ["FormEditor", "FormExporter"], "version": "26.5.0"},
+      "pr9": {"types": ["Signature"], "version": "26.5.0"}
+    },
+    "approval_blocked": {
+      "count": 14,
+      "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "same_as_pr_dry_run_ready": true
+    },
+    "library_defect_deferred": {
+      "count": 1,
+      "type": "FormImporter",
+      "defect": "NullReferenceException in Aspose.PDF 26.5.0 Forms.Form.#=zZQILclhNTKUB",
+      "retest_trigger": "Aspose.PDF > 26.5.0"
+    },
+    "permanently_blocked": {
+      "count": 2,
+      "types": [
+        {"type": "Timestamp", "reason": "External TSA ServerUrl required — no self-signed equivalent"},
+        {"type": "Ofd", "reason": "OFD is Chinese national format — no programmatic fixture creation in .NET"}
+      ]
+    },
+    "non_runnable": {
+      "count": 79,
+      "breakdown": {
+        "options_classes": 51,
+        "provider_callback": 6,
+        "result_classes": 6,
+        "data_source": 3,
+        "save_target": 2,
+        "builder": 4,
+        "enum_types": 4,
+        "abstract_base": 3
+      }
+    }
+  },
+  "coverage_with_current_approval": "5/19 pilot (26.3%) — 14 blocked by approval only",
+  "coverage_post_approval": "19/19 pilot (100%) — maximum pilot coverage upon APPROVE_LIVE_PR",
+  "coverage_of_workflow_roots_post_approval": "19/22 = 86.4% (Timestamp+Ofd permanently blocked, FormImporter library defect)",
+  "coverage_of_all_types_post_approval": "19/101 = 18.8% (82 non-runnable/excluded)",
+  "verdict": "PDF_DENOMINATOR_CLOSEOUT_SPRINT28 — all equations hold, state matrix complete. Post-approval: 19/22 workflow_root maximum achievable with Aspose.PDF 26.5.0."
+}

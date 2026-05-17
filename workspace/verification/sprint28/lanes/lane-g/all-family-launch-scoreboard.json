@@ -1,0 +1,83 @@
+{
+  "lane": "lane-g",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "scoreboard": {
+    "Cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": "N/A (full SOT)",
+      "package_version": "26.4.0",
+      "last_change_sprint": "sprint5"
+    },
+    "Words": {
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 8,
+      "package_version": "26.5.0",
+      "last_change_sprint": "sprint14"
+    },
+    "PDF": {
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pr_dry_run_ready": 14,
+      "pilot_allowed": 19,
+      "package_version": "26.5.0",
+      "pr_packages": {
+        "PR3": {"types": ["DocConverter", "XlsConverter", "Html"], "version": "26.4.0", "status": "PR_DRY_RUN_READY"},
+        "PR5": {"types": ["Jpeg", "Tiff", "Png"], "version": "26.4.0", "status": "PR_DRY_RUN_READY"},
+        "PR6": {"types": ["TocGenerator", "TableGenerator", "ImageExtractor"], "version": "26.4.0", "status": "PR_DRY_RUN_READY"},
+        "PR7": {"types": ["Security", "FormFlattener"], "version": "26.5.0", "status": "PR_DRY_RUN_READY"},
+        "PR8": {"types": ["FormEditor", "FormExporter"], "version": "26.5.0", "status": "PR_DRY_RUN_READY"},
+        "PR9": {"types": ["Signature"], "version": "26.5.0", "status": "PR_DRY_RUN_READY", "added_sprint": "sprint26"}
+      },
+      "blocked": {
+        "FormImporter": "WAVE_H_DEFERRED_LIBRARY_BUG (Aspose.PDF 26.5.0)",
+        "Timestamp": "PERMANENTLY_BLOCKED",
+        "Ofd": "PERMANENTLY_BLOCKED"
+      },
+      "last_change_sprint": "sprint28"
+    },
+    "Diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 2,
+      "package_version": "26.4.0",
+      "last_change_sprint": "sprint22"
+    },
+    "Email": {
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 1,
+      "package_version": "26.4.0",
+      "last_change_sprint": "email-slides-activation-sprint",
+      "harness_result_sprint28": "5/5 ALL_PASS"
+    },
+    "Slides": {
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "pr_dry_run_ready": 0,
+      "pilot_allowed": 3,
+      "package_version": "26.5.0",
+      "last_change_sprint": "email-slides-activation-sprint",
+      "harness_result_sprint28": "6/6 ALL_PASS"
+    }
+  },
+  "portfolio_totals": {
+    "total_published": 28,
+    "total_pr_dry_run_ready": 14,
+    "total_pending_approval": 14,
+    "total_permanently_blocked": 2,
+    "total_library_defect": 1,
+    "change_from_sprint27": "Evidence contract implemented, PR audits finalized, no new examples",
+    "families_complete_or_pilot_complete": 5,
+    "families_partial": 1
+  },
+  "evidence_contract_status": "IMPLEMENTED — src/plugin_examples/evidence_contract.py, 26 tests, all PASS",
+  "portfolio_state": "28 published + 14 PR_DRY_RUN_READY = 42 examples ready. Pending APPROVE_LIVE_PR for 14. All families PILOT_COMPLETE or higher except PDF (PARTIAL_CANARY, 5/19 published).",
+  "verdict": "ALL_FAMILY_SCOREBOARD_SPRINT28 — 28 published, 14 PR_DRY_RUN_READY. Evidence contract implemented. PDF maximum achievable post-approval: 19/22 workflow_roots."
+}

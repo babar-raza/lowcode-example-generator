@@ -1,0 +1,20 @@
+{
+  "lane": "lane-p6",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "pr": "PR9",
+  "package": "pdf-controlled-pilot-pr9",
+  "types": [
+    "Signature"
+  ],
+  "package_version": "26.5.0",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9",
+  "structure_ok": true,
+  "type_count": 1,
+  "no_previously_published": true,
+  "no_binary_artifacts": true,
+  "no_secrets": true,
+  "version_note": "Wave G. SignOptions(pfxPath, password). Self-signed PFX. /ByteRange confirmed.",
+  "approval_gate": "BLOCKED",
+  "verdict": "PACKAGE_AUDIT_PASS_APPROVAL_BLOCKED"
+}

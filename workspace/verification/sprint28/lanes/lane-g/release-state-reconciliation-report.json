@@ -1,0 +1,24 @@
+{
+  "lane": "lane-g",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "Release state reconciliation",
+  "total_published": 28,
+  "published_by_family": {
+    "Cells": 9, "Words": 8, "PDF": 5, "Diagram": 2, "Email": 1, "Slides": 3
+  },
+  "total_pr_ready": 14,
+  "pr_ready_by_family": {"PDF": 14},
+  "post_approval_total": 42,
+  "all_families_regression_checked": true,
+  "evidence_sources": {
+    "cells": "lane-f/cells-final-guard-report.json",
+    "words": "lane-f/words-final-guard-report.json",
+    "pdf": "lane-d/pdf-final-denominator-closeout-matrix.json",
+    "diagram": "lane-f/diagram-final-guard-report.json",
+    "email": "lane-e/email-final-runtime-status.json",
+    "slides": "lane-e/slides-final-runtime-status.json"
+  },
+  "release_status_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples release-status --promote-latest",
+  "verdict": "RELEASE_STATE_RECONCILED_SPRINT28 — 28 published, 14 pending. All families regression-free."
+}

@@ -1,0 +1,37 @@
+{
+  "lane": "lane-e",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "family": "slides",
+  "harness_path": "workspace/fixture-validation/slides-harness/",
+  "sprint28_run_timestamp": "2026-05-17T12:12:XX",
+  "result": {
+    "total_tests": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "test_details": [
+    {"name": "fixture_pptx_single", "status": "PASS", "bytes": 34183},
+    {"name": "fixture_pptx_pair", "status": "PASS", "bytes_a": 33928, "bytes_b": 33928},
+    {"name": "Convert.ToPdf", "status": "PASS", "bytes": 66510, "pdf_header": true},
+    {"name": "Convert.AutoByExtension", "status": "PASS", "bytes": 66510, "pdf_header": true},
+    {"name": "Merger.Process", "status": "PASS", "bytes": 49222, "slides": 2},
+    {"name": "Compress.CompressEmbeddedFonts", "status": "PASS", "bytes": 35849}
+  ],
+  "sprint25_reporting_error_resolved": {
+    "sprint25_claimed": "5/5",
+    "actual": "harness always had 6 tests (2 fixture + 4 LowCode)",
+    "sprint26_confirmed": "6/6 ALL_PASS",
+    "sprint27_confirmed": "6/6 ALL_PASS",
+    "sprint28_confirmed": "6/6 ALL_PASS"
+  },
+  "published_state": {
+    "status": "PILOT_COMPLETE",
+    "published": 3,
+    "types": ["Compress", "Convert", "Merger"],
+    "pr_ref": "PR#1 MERGED (sha: bf05fc43124f)"
+  },
+  "target_repo_runtime": "LOCAL_HARNESS_VERIFIED — target repo runtime deferred (requires full repo clone)",
+  "verdict": "SLIDES_6_6_ALL_PASS_SPRINT28 — PILOT_COMPLETE confirmed across Sprint 26/27/28 re-runs."
+}

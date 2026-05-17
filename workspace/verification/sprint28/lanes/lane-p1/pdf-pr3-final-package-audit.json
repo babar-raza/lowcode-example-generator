@@ -1,0 +1,22 @@
+{
+  "lane": "lane-p1",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "pr": "PR3",
+  "package": "pdf-controlled-pilot",
+  "types": [
+    "DocConverter",
+    "XlsConverter",
+    "Html"
+  ],
+  "package_version": "26.4.0",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "structure_ok": true,
+  "type_count": 3,
+  "no_previously_published": true,
+  "no_binary_artifacts": true,
+  "no_secrets": true,
+  "version_note": "Wave A. All 3 types harness-verified.",
+  "approval_gate": "BLOCKED",
+  "verdict": "PACKAGE_AUDIT_PASS_APPROVAL_BLOCKED"
+}

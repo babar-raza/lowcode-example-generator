@@ -1,0 +1,35 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint28",
+  "date": "2026-05-17",
+  "subject": "Publication gate decision",
+  "env_check": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "GH_TOKEN": "SET (classic PAT, repo+workflow scopes)",
+    "GITHUB_TOKEN": "SET"
+  },
+  "gh_auth_status": {
+    "account": "babar-raza",
+    "logged_in": true,
+    "token_scopes": ["repo", "workflow"],
+    "missing_scopes": ["read:org"],
+    "verdict": "TOKEN_VALID_FOR_REPO_PUSH"
+  },
+  "publication_gate": "APPROVAL_BLOCKED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is not set to APPROVE_LIVE_PR",
+  "mode": "APPROVAL_BLOCKED",
+  "all_pr_packages_ready": true,
+  "pr_packages": [
+    {"pr": "PR#3", "package": "pdf-controlled-pilot", "types": ["DocConverter", "XlsConverter", "Html"], "version": "26.4.0"},
+    {"pr": "PR#5", "package": "pdf-controlled-pilot-pr5", "types": ["Jpeg", "Tiff", "Png"], "version": "26.4.0"},
+    {"pr": "PR#6", "package": "pdf-controlled-pilot-pr6", "types": ["TocGenerator", "TableGenerator", "ImageExtractor"], "version": "26.4.0"},
+    {"pr": "PR#7", "package": "pdf-controlled-pilot-pr7", "types": ["Security", "FormFlattener"], "version": "26.5.0"},
+    {"pr": "PR#8", "package": "pdf-controlled-pilot-pr8", "types": ["FormEditor", "FormExporter"], "version": "26.5.0"},
+    {"pr": "PR#9", "package": "pdf-controlled-pilot-pr9", "types": ["Signature"], "version": "26.5.0"}
+  ],
+  "already_published_do_not_republish": ["Merger", "TextExtractor", "PdfAConverter", "Splitter", "Optimizer"],
+  "version_note": "PR#3/5/6 use Aspose.PDF 26.4.0 (assembled Sprint 19 when 26.4.0 was current); PR#7/8/9 use 26.5.0. Both versions are valid — LowCode types in 26.4.0 remain API-stable in 26.5.0.",
+  "action_required": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR then run publish-pr with --package-path for each PR",
+  "publish_command_template": "$env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL='APPROVE_LIVE_PR'; $env:GITHUB_TOKEN=[Environment]::GetEnvironmentVariable('GH_TOKEN','User'); .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/{PACKAGE_NAME} --promote-latest",
+  "verdict": "PUBLICATION_APPROVAL_BLOCKED — token ready (repo+workflow scopes), 6 PR packages verified, awaiting APPROVE_LIVE_PR."
+}

@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "GH_TOKEN": {"present": true, "type": "CLASSIC_PAT", "prefix": "ghp_", "org_write_capable": true, "status": "READY_FOR_PUBLICATION"},
+  "GITHUB_TOKEN": {"present": true, "type": "FINE_GRAINED", "org_write_capable": false, "status": "INSUFFICIENT_FOR_ORG_REPOS"},
+  "mapping_required": "export GITHUB_TOKEN=$GH_TOKEN before publish-pr call",
+  "verdict": "TOKEN_READY_PENDING_APPROVAL"
+}

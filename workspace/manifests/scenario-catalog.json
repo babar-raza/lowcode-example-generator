@@ -1,7 +1,7 @@
 {
   "family": "pdf",
-  "ready_count": 14,
-  "blocked_count": 87,
+  "ready_count": 16,
+  "blocked_count": 85,
   "scenarios": [
     {
       "scenario_id": "pdf-doc-converter",
@@ -19,6 +19,24 @@
       ],
       "required_fixtures": [],
       "output_plan": "Convert input.pdf to output.pdf using DocConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "title": "Use FormFlattener from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.FormFlattener",
+      "target_namespace": "Aspose.Pdf.LowCode",
+      "target_methods": [
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Pdf.LowCode.FormFlattener",
+        "Aspose.Pdf.LowCode.FormFlattener.Process"
+      ],
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using FormFlattener",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
@@ -138,6 +156,24 @@
       ],
       "required_fixtures": [],
       "output_plan": "Convert input.pdf to output.pdf using Png",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-security",
+      "title": "Use Security from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.Security",
+      "target_namespace": "Aspose.Pdf.LowCode",
+      "target_methods": [
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Pdf.LowCode.Security",
+        "Aspose.Pdf.LowCode.Security.Process"
+      ],
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using Security",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null

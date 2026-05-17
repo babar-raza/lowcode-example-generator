@@ -1,0 +1,16 @@
+{
+  "lane": "lane-words-a",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "family": "words",
+  "guard_type": "DRIFT_GUARD",
+  "source_changes": "none — words.yml and words.json unchanged since Sprint 22",
+  "test_coverage": "1604 tests pass — no words regression detected",
+  "accepted_state": {
+    "pilot_types": 8,
+    "published": 8,
+    "status": "PILOT_COMPLETE (8/8 POST_MERGE_VERIFIED per Sprint 22 truth audit)"
+  },
+  "package_version": "26.5.0 (unchanged since Sprint 22)",
+  "verdict": "NO_REGRESSION_DETECTED"
+}

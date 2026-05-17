@@ -1,0 +1,19 @@
+{
+  "lane": "lane-email-a",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "issue": "Email Windows IOException file-locking artifact (Sprint 22 harness — 4/5 pass)",
+  "current_pipeline_state": {
+    "verdict": "PR_DRY_RUN_READY",
+    "all_required_passed": true,
+    "validation_total": 1,
+    "validation_passed": 1,
+    "validation_failed": 0
+  },
+  "assessment": "ARTIFACT_CLASSIFIED_AS_HARNESS_ONLY — the file-lock IOException appeared in the standalone harness test (workspace/fixture-validation/email-harness/), not in the pipeline-integrated validation. The pipeline run uses dotnet_runner which isolates each run in its own directory, avoiding the concurrent file access pattern that triggers the Windows file-lock.",
+  "harness_context": "Sprint 22 harness: 4/5 tests pass. 1 Windows IOException during concurrent file access in harness. The pipeline run only executes one example at a time, so no concurrent access occurs.",
+  "pipeline_impact": "NONE — email-converter passes build + runtime in pipeline context",
+  "quarantine_needed": false,
+  "fix_needed": false,
+  "verdict": "ARTIFACT_QUARANTINED_AS_HARNESS_ONLY — no pipeline action required"
+}

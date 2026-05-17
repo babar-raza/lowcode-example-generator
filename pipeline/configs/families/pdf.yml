@@ -381,10 +381,11 @@ per_type_constraints:
       Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");
 
   Security:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Pdf.LowCode; (for Security, EncryptionOptions, FileDataSource)"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
-      - "REQUIRED: using Aspose.Pdf.Facades; (for DocumentPrivilege — REQUIRED_SUPPORTING_DEPENDENCY)"
+      - "REQUIRED: using Aspose.Pdf.Facades; (for DocumentPrivilege)"
       - "REQUIRED: new EncryptionOptions(ownerPassword, userPassword, DocumentPrivilege) — 3-arg constructor confirmed working (harness Sprint 22)"
       - "REQUIRED: new Security().Process(encOptions) — use the LowCode Security plugin"
       - "REQUIRED: encOptions.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
@@ -395,10 +396,11 @@ per_type_constraints:
       - "FORBIDDEN: PdfFileSecurity — this is core Aspose.Pdf.Facades API; use LowCode Security instead"
       - "FORBIDDEN: Document.Encrypt() — this is core API; use LowCode Security.Process() instead"
   FormFlattener:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Pdf.LowCode; (for FormFlattener, FormFlattenAllFieldsOptions, FileDataSource)"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
-      - "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField — REQUIRED_SUPPORTING_DEPENDENCY for AcroForm fixture)"
+      - "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)"
       - "REQUIRED: new FormFlattenAllFieldsOptions() — no-param constructor, confirmed working (harness Sprint 22)"
       - "REQUIRED: new FormFlattener().Process(flattenOptions) — use the LowCode FormFlattener plugin"
       - "REQUIRED: flattenOptions.AddInput(new FileDataSource( — AcroForm PDF input added via AddInput(new FileDataSource(path))"

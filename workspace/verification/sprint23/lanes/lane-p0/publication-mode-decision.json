@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "approval_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_value": "ABSENT",
+  "publish_mode": "APPROVAL_BLOCKED",
+  "gh_token": {"type": "CLASSIC_PAT", "prefix": "ghp_", "repo_scope": "ASSUMED", "org_write_capable": true},
+  "github_token": {"type": "FINE_GRAINED", "prefix": "github_pat_", "org_write_capable": false},
+  "token_mapping_required": "export GITHUB_TOKEN=$GH_TOKEN at publish time",
+  "pending_prs": ["PR#3 (doc-converter+html+xls-converter)", "PR#5 (jpeg+tiff+png)", "PR#6 (table-generator+toc-generator+image-extractor)"],
+  "pr7_candidate": "PR#7 (Security+FormFlattener) — pending Wave E generation this sprint",
+  "verdict": "APPROVAL_BLOCKED — continuing Wave E generation and frontier work regardless"
+}

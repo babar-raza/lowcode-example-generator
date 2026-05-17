@@ -1,0 +1,20 @@
+{
+  "lane": "lane-test",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "test_runner": "pytest",
+  "test_path": "tests/unit/",
+  "total_tests": 1604,
+  "passed": 1604,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": 33.35,
+  "changes_tested": [
+    "test_llm_generation.py: test_security_template_first_bypasses_llm (NEW)",
+    "test_llm_generation.py: test_formflattener_template_first_bypasses_llm (NEW)",
+    "test_llm_generation.py: test_security_template_contains_required_patterns (NEW — uses encOptions variable)",
+    "test_llm_generation.py: test_formflattener_template_contains_required_patterns (NEW — uses flattenOptions variable)",
+    "test_llm_generation.py: test_all_template_first_types_pass_validation_with_utf8_config: updated to include Security and FormFlattener"
+  ],
+  "verdict": "ALL_1604_TESTS_PASS"
+}

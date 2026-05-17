@@ -1,14 +1,14 @@
 {
-  "total_examples": 12,
+  "total_examples": 14,
   "generated": 0,
   "repaired": 3,
   "failed": 0,
   "examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-doc-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-doc-converter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -75,10 +75,81 @@
       }
     },
     {
+      "scenario_id": "pdf-form-flattener",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener\\pdf-form-flattener.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.PDF",
+      "claimed_symbols": [
+        "Aspose.Pdf.LowCode.FormFlattener",
+        "Aspose.Pdf.LowCode.FormFlattener.Process"
+      ],
+      "status": "generated_template_first",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
+        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
+        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
+        "REQUIRED: using Aspose.Pdf.LowCode; (for FormFlattener, FormFlattenAllFieldsOptions, FileDataSource)",
+        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+        "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
+        "REQUIRED: new FormFlattenAllFieldsOptions() \u2014 no-param constructor, confirmed working (harness Sprint 22)",
+        "REQUIRED: new FormFlattener().Process(flattenOptions) \u2014 use the LowCode FormFlattener plugin",
+        "REQUIRED: flattenOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: flattenOptions.AddOutput(new FileDataSource( \u2014 flattened PDF output via AddOutput(new FileDataSource(path))",
+        "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField",
+        "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormFlattenAllFieldsOptions instead",
+        "FORBIDDEN: Document.Form.Flatten() \u2014 this is core API; use LowCode FormFlattener.Process() instead",
+        "FORBIDDEN: PdfFileEditor for form operations \u2014 use LowCode FormFlattener instead"
+      ],
+      "family_name": "pdf",
+      "type_short": "formflattener",
+      "type_constraints": {
+        "template_first": true,
+        "required": [
+          "REQUIRED: using Aspose.Pdf.LowCode; (for FormFlattener, FormFlattenAllFieldsOptions, FileDataSource)",
+          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+          "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
+          "REQUIRED: new FormFlattenAllFieldsOptions() \u2014 no-param constructor, confirmed working (harness Sprint 22)",
+          "REQUIRED: new FormFlattener().Process(flattenOptions) \u2014 use the LowCode FormFlattener plugin",
+          "REQUIRED: flattenOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: flattenOptions.AddOutput(new FileDataSource( \u2014 flattened PDF output via AddOutput(new FileDataSource(path))",
+          "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField",
+          "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1"
+        ],
+        "forbidden": [
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormFlattenAllFieldsOptions instead",
+          "FORBIDDEN: Document.Form.Flatten() \u2014 this is core API; use LowCode FormFlattener.Process() instead",
+          "FORBIDDEN: PdfFileEditor for form operations \u2014 use LowCode FormFlattener instead"
+        ]
+      }
+    },
+    {
       "scenario_id": "pdf-html",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-html",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-html\\pdf-html.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-html\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html\\pdf-html.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -155,9 +226,9 @@
     },
     {
       "scenario_id": "pdf-image-extractor",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-image-extractor",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-image-extractor\\pdf-image-extractor.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-image-extractor\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor\\pdf-image-extractor.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -225,9 +296,9 @@
     },
     {
       "scenario_id": "pdf-jpeg",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-jpeg",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-jpeg\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -293,9 +364,9 @@
     },
     {
       "scenario_id": "pdf-optimizer",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-optimizer",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-optimizer\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -343,9 +414,9 @@
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-pdf-aconverter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -417,9 +488,9 @@
     },
     {
       "scenario_id": "pdf-png",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-png",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-png\\pdf-png.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-png\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png\\pdf-png.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -486,10 +557,79 @@
       }
     },
     {
+      "scenario_id": "pdf-security",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security\\pdf-security.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security\\Program.cs",
+      "target_framework": "net8.0",
+      "package_id": "Aspose.PDF",
+      "claimed_symbols": [
+        "Aspose.Pdf.LowCode.Security",
+        "Aspose.Pdf.LowCode.Security.Process"
+      ],
+      "status": "generated_template_first",
+      "input_strategy": "programmatic_input",
+      "input_files": [],
+      "placed_fixtures": [],
+      "pdf_constraints": [
+        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
+        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
+        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
+        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
+        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
+        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
+        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
+        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
+        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
+        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
+        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
+        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
+        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
+        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
+        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
+        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
+        "REQUIRED: using Aspose.Pdf.LowCode; (for Security, EncryptionOptions, FileDataSource)",
+        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+        "REQUIRED: using Aspose.Pdf.Facades; (for DocumentPrivilege)",
+        "REQUIRED: new EncryptionOptions(ownerPassword, userPassword, DocumentPrivilege) \u2014 3-arg constructor confirmed working (harness Sprint 22)",
+        "REQUIRED: new Security().Process(encOptions) \u2014 use the LowCode Security plugin",
+        "REQUIRED: encOptions.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+        "REQUIRED: encOptions.AddOutput(new FileDataSource( \u2014 encrypted PDF output via AddOutput(new FileDataSource(path))",
+        "REQUIRED: DocumentPrivilege privilege = DocumentPrivilege.ForbidAll \u2014 use DocumentPrivilege to set allowed operations",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use EncryptionOptions instead",
+        "FORBIDDEN: PdfFileSecurity \u2014 this is core Aspose.Pdf.Facades API; use LowCode Security instead",
+        "FORBIDDEN: Document.Encrypt() \u2014 this is core API; use LowCode Security.Process() instead"
+      ],
+      "family_name": "pdf",
+      "type_short": "security",
+      "type_constraints": {
+        "template_first": true,
+        "required": [
+          "REQUIRED: using Aspose.Pdf.LowCode; (for Security, EncryptionOptions, FileDataSource)",
+          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
+          "REQUIRED: using Aspose.Pdf.Facades; (for DocumentPrivilege)",
+          "REQUIRED: new EncryptionOptions(ownerPassword, userPassword, DocumentPrivilege) \u2014 3-arg constructor confirmed working (harness Sprint 22)",
+          "REQUIRED: new Security().Process(encOptions) \u2014 use the LowCode Security plugin",
+          "REQUIRED: encOptions.AddInput(new FileDataSource( \u2014 PDF input added via AddInput(new FileDataSource(path))",
+          "REQUIRED: encOptions.AddOutput(new FileDataSource( \u2014 encrypted PDF output via AddOutput(new FileDataSource(path))",
+          "REQUIRED: DocumentPrivilege privilege = DocumentPrivilege.ForbidAll \u2014 use DocumentPrivilege to set allowed operations"
+        ],
+        "forbidden": [
+          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use EncryptionOptions instead",
+          "FORBIDDEN: PdfFileSecurity \u2014 this is core Aspose.Pdf.Facades API; use LowCode Security instead",
+          "FORBIDDEN: Document.Encrypt() \u2014 this is core API; use LowCode Security.Process() instead"
+        ]
+      }
+    },
+    {
       "scenario_id": "pdf-table-generator",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-table-generator",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-table-generator\\pdf-table-generator.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-table-generator\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator\\pdf-table-generator.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -566,9 +706,9 @@
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-text-extractor",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-text-extractor\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -624,9 +764,9 @@
     },
     {
       "scenario_id": "pdf-tiff",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-tiff",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-tiff\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -692,9 +832,9 @@
     },
     {
       "scenario_id": "pdf-toc-generator",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-toc-generator",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-toc-generator\\pdf-toc-generator.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-toc-generator\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator\\pdf-toc-generator.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [
@@ -762,9 +902,9 @@
     },
     {
       "scenario_id": "pdf-xls-converter",
-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-xls-converter",
-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260515-193905\\generated\\pdf\\pdf-xls-converter\\Program.cs",
+      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter",
+      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
+      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter\\Program.cs",
       "target_framework": "net8.0",
       "package_id": "Aspose.PDF",
       "claimed_symbols": [

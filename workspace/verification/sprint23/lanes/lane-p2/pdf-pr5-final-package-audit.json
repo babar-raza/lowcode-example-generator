@@ -1,0 +1,9 @@
+{
+  "sprint": "sprint23", "date": "2026-05-17", "pr_id": "PR#5",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+  "examples_present": ["jpeg", "png", "tiff"],
+  "examples_expected": ["jpeg", "png", "tiff"],
+  "png_quarantine_status": "CLEARED — Png ResultCollection.Count>0 validation in Sprint 15",
+  "audit_result": "PASS — 3/3 expected examples present",
+  "verdict": "PACKAGE_INTEGRITY_VERIFIED"
+}

@@ -11,6 +11,16 @@
       "blocked_if_unclear": false
     },
     {
+      "scenario_id": "pdf-form-flattener",
+      "workflow_type": "FormFlattener",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name FormFlattener",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
       "scenario_id": "pdf-html",
       "workflow_type": "Html",
       "selected_input_format": ".pdf",
@@ -76,6 +86,16 @@
       "selected_input_format": ".pdf",
       "selected_output_format": ".out",
       "reason": "Inferred from type name Png",
+      "source": "input_format_map",
+      "confidence": "medium",
+      "blocked_if_unclear": false
+    },
+    {
+      "scenario_id": "pdf-security",
+      "workflow_type": "Security",
+      "selected_input_format": ".pdf",
+      "selected_output_format": ".out",
+      "reason": "Inferred from type name Security",
       "source": "input_format_map",
       "confidence": "medium",
       "blocked_if_unclear": false

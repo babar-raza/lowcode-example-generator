@@ -1,0 +1,15 @@
+{
+  "lane": "lane-diagram-a",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "family": "diagram",
+  "guard_type": "DRIFT_GUARD",
+  "source_changes": "none — diagram.yml and diagram.json unchanged since Sprint 22",
+  "test_coverage": "1604 tests pass — no diagram regression detected",
+  "accepted_state": {
+    "pilot_types": 2,
+    "published": 2,
+    "status": "PILOT_COMPLETE (2/2 POST_MERGE_VERIFIED)"
+  },
+  "verdict": "NO_REGRESSION_DETECTED"
+}

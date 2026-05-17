@@ -1,0 +1,464 @@
+diff --git a/workspace/runs/plan-v1.2.0-20260428/concurrency-report.json b/workspace/runs/plan-v1.2.0-20260428/concurrency-report.json
+deleted file mode 100644
+index 286bc74..0000000
+--- a/workspace/runs/plan-v1.2.0-20260428/concurrency-report.json
++++ /dev/null
+@@ -1,50 +0,0 @@
+-{
+-  "run_id": "plan-v1.2.0-20260428",
+-  "touched_files": [
+-    "docs/plans/plugin-example-generation-execution-plan.md",
+-    "runs/plan-v1.2.0-20260428/run-record.json",
+-    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+-  ],
+-  "moved_files": [],
+-  "deleted_files": [],
+-  "created_files": [
+-    "runs/plan-v1.2.0-20260428/run-record.json",
+-    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+-  ],
+-  "detected_overlaps": [
+-    "None. All files are untracked (no commits since initial README.md). No other branches, stashes, worktrees, or lock files detected."
+-  ],
+-  "ownership_decisions": [
+-    "All untracked files were created by the same planning agent lineage (v1.0.0 → v1.1.0 → v1.2.0). Ownership is clear.",
+-    "docs/plans/plugin-example-generation-execution-plan copy.md is a user backup — not touched by this run."
+-  ],
+-  "safety_decisions": [
+-    "Overlap classification: no_overlap. Safe to proceed with plan amendments.",
+-    "Only the plan file and run record files were modified. No source code, test code, or config files were touched.",
+-    "User backup preserved at docs/plans/plugin-example-generation-execution-plan copy.md."
+-  ],
+-  "remaining_risks": [
+-    "Structure migration (TC-00D) has not been executed yet. The v1 placeholder directories still exist at root level.",
+-    "Path references in AGENTS.md and docs/discovery/current-state.md still use old structure paths. Will be updated in TC-00E.",
+-    "No .gitignore exists yet. Will be created in TC-00D."
+-  ],
+-  "verification_commands_run": [
+-    "git status — confirmed: all files untracked, no staged changes, branch main up to date",
+-    "git diff --stat — confirmed: empty (nothing staged or modified in tracked files)",
+-    "git diff --name-status — confirmed: empty",
+-    "git stash list — confirmed: no stashes",
+-    "git branch -a — confirmed: only main branch",
+-    "git worktree list — confirmed: single worktree",
+-    "git log --oneline -10 — confirmed: single commit 62879f4",
+-    "grep -c 'Gate 0' plan — confirmed: 12 occurrences",
+-    "grep -c 'TC-00A' plan — confirmed: 12 occurrences",
+-    "grep -c 'TC-00B' plan — confirmed: 12 occurrences",
+-    "grep -c 'TC-00C' plan — confirmed: 8 occurrences",
+-    "grep -c 'Repository Structure v2' plan — confirmed: 3 occurrences",
+-    "grep -c 'Concurrency Safety Model' plan — confirmed: 2 occurrences",
+-    "grep -c 'TC-00D' plan — confirmed: 10 occurrences",
+-    "grep -c 'TC-00E' plan — confirmed: 7 occurrences",
+-    "grep -c 'gitignore' plan — confirmed: 24 occurrences"
+-  ],
+-  "final_git_status": "On branch main. Up to date with origin/main. Untracked files: AGENTS.md, configs/, docs/, manifests/, prompts/, runs/, schemas/, src/, tests/, verification/. Nothing staged."
+-}
+diff --git a/workspace/runs/plan-v1.2.0-20260428/run-record.json b/workspace/runs/plan-v1.2.0-20260428/run-record.json
+deleted file mode 100644
+index 8e017d4..0000000
+--- a/workspace/runs/plan-v1.2.0-20260428/run-record.json
++++ /dev/null
+@@ -1,38 +0,0 @@
+-{
+-  "run_id": "plan-v1.2.0-20260428",
+-  "owner": "planning-agent-claude",
+-  "task_name": "Plan v1.2.0 — Repository Structure Redesign + Concurrency Model",
+-  "start_time": "2026-04-28T00:00:00Z",
+-  "branch": "main",
+-  "worktree": "default (single worktree)",
+-  "purpose": "Amend the execution plan to add: (1) production-grade repository structure v2 replacing the cluttered v1.1.0 layout, (2) concurrency safety model with gates TC-00A/B/C, (3) migration and rollback taskcards, (4) gitignore policy.",
+-  "intended_files": [
+-    "docs/plans/plugin-example-generation-execution-plan.md",
+-    "runs/plan-v1.2.0-20260428/run-record.json",
+-    "runs/plan-v1.2.0-20260428/concurrency-report.json"
+-  ],
+-  "intended_directories": [
+-    "runs/plan-v1.2.0-20260428/"
+-  ],
+-  "expected_outputs": [
+-    "Amended plan at docs/plans/plugin-example-generation-execution-plan.md (v1.2.0)",
+-    "Run record at runs/plan-v1.2.0-20260428/run-record.json",
+-    "Concurrency report at runs/plan-v1.2.0-20260428/concurrency-report.json"
+-  ],
+-  "overlap_classification": "no_overlap",
+-  "overlap_evidence": "git status shows all files are untracked (owned by prior planning session, same agent). No staged changes, no stashes, no worktrees, no other branches. Only committed file is README.md. User backup at docs/plans/plugin-example-generation-execution-plan copy.md is read-only for this run.",
+-  "safety_decision": "PROCEED — no parallel work detected, all untracked files were created by this planning lineage.",
+-  "rollback_notes": "If plan amendment fails: the user has a backup at docs/plans/plugin-example-generation-execution-plan copy.md. Since nothing is committed, git checkout -- docs/plans/ would restore to empty. All changes are reversible by deleting untracked files.",
+-  "verification_commands": [
+-    "git status",
+-    "git diff --stat",
+-    "git diff --name-status",
+-    "grep -c 'Gate 0' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'TC-00A' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'TC-00B' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'TC-00C' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'Repository Structure v2' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'Concurrency Safety Model' docs/plans/plugin-example-generation-execution-plan.md",
+-    "grep -c 'run-record' docs/plans/plugin-example-generation-execution-plan.md"
+-  ]
+-}
+diff --git a/workspace/runs/wave0-exec-20260428/concurrency-report.json b/workspace/runs/wave0-exec-20260428/concurrency-report.json
+deleted file mode 100644
+index 0f8ca29..0000000
+--- a/workspace/runs/wave0-exec-20260428/concurrency-report.json
++++ /dev/null
+@@ -1,78 +0,0 @@
+-{
+-  "run_id": "wave0-exec-20260428",
+-  "task_name": "Wave 0A/0B/0C — Concurrency Preflight + Structure Migration + Path Compatibility",
+-  "taskcards_executed": ["TC-00A", "TC-00D", "TC-00E", "TC-00B (midflight)", "TC-00C"],
+-  "overlap_classification": "no_overlap",
+-  "final_verdict": "PASS — all Wave 0 taskcards completed successfully",
+-  "touched_files": [
+-    ".gitignore",
+-    "AGENTS.md",
+-    "docs/plans/plugin-example-generation-execution-plan.md",
+-    "docs/discovery/current-state.md",
+-    "workspace/runs/wave0-exec-20260428/run-record.json",
+-    "workspace/runs/wave0-exec-20260428/concurrency-report.json"
+-  ],
+-  "moved_files": [
+-    {"from": "configs/families/.gitkeep", "to": "pipeline/configs/families/.gitkeep"},
+-    {"from": "schemas/.gitkeep", "to": "pipeline/schemas/.gitkeep"},
+-    {"from": "prompts/.gitkeep", "to": "pipeline/prompts/.gitkeep"},
+-    {"from": "runs/.gitkeep", "to": "workspace/runs/.gitkeep"},
+-    {"from": "runs/plan-v1.2.0-20260428/concurrency-report.json", "to": "workspace/runs/plan-v1.2.0-20260428/concurrency-report.json"},
+-    {"from": "runs/plan-v1.2.0-20260428/run-record.json", "to": "workspace/runs/plan-v1.2.0-20260428/run-record.json"},
+-    {"from": "runs/wave0-exec-20260428/run-record.json", "to": "workspace/runs/wave0-exec-20260428/run-record.json"},
+-    {"from": "manifests/.gitkeep", "to": "workspace/manifests/.gitkeep"},
+-    {"from": "verification/latest/.gitkeep", "to": "workspace/verification/latest/.gitkeep"}
+-  ],
+-  "created_files": [
+-    ".gitignore",
+-    "pipeline/configs/families/disabled/.gitkeep",
+-    "workspace/runs/wave0-exec-20260428/run-record.json",
+-    "workspace/runs/wave0-exec-20260428/concurrency-report.json"
+-  ],
+-  "deleted_directories": [
+-    "configs/",
+-    "schemas/",
+-    "prompts/",
+-    "runs/",
+-    "manifests/",
+-    "verification/"
+-  ],
+-  "orphan_check": "PASS — all 6 old root-level directories removed, no orphans remain",
+-  "path_updates": [
+-    {"file": "AGENTS.md", "change": "configs/families/cells.yml → pipeline/configs/families/cells.yml"},
+-    {"file": "AGENTS.md", "change": "Gates 1-18 → Gates 0-18 (21 total), Sections 12 and 29"},
+-    {"file": "docs/discovery/current-state.md", "change": "schemas/family-config.schema.json → pipeline/schemas/family-config.schema.json"},
+-    {"file": "docs/discovery/current-state.md", "change": "configs/families/cells.yml → pipeline/configs/families/cells.yml"},
+-    {"file": "docs/plans/plugin-example-generation-execution-plan.md", "change": "Run Record path → workspace/runs/plan-v1.2.0-20260428/run-record.json"}
+-  ],
+-  "final_structure": {
+-    "root_entries": [".gitignore", "AGENTS.md", "README.md", "docs/", "pipeline/", "src/", "tests/", "workspace/"],
+-    "pipeline_files": [
+-      "pipeline/configs/families/.gitkeep",
+-      "pipeline/configs/families/disabled/.gitkeep",
+-      "pipeline/prompts/.gitkeep",
+-      "pipeline/schemas/.gitkeep"
+-    ],
+-    "workspace_files": [
+-      "workspace/manifests/.gitkeep",
+-      "workspace/runs/.gitkeep",
+-      "workspace/runs/plan-v1.2.0-20260428/concurrency-report.json",
+-      "workspace/runs/plan-v1.2.0-20260428/run-record.json",
+-      "workspace/runs/wave0-exec-20260428/run-record.json",
+-      "workspace/runs/wave0-exec-20260428/concurrency-report.json",
+-      "workspace/verification/latest/.gitkeep"
+-    ],
+-    "total_files": 20
+-  },
+-  "verification_commands_run": [
+-    "git status — branch main, up to date, untracked: .gitignore, AGENTS.md, docs/, pipeline/, src/, tests/, workspace/",
+-    "git stash list — empty",
+-    "git branch -a — main only",
+-    "git worktree list — single worktree",
+-    "git log --oneline -5 — 62879f4 Initial commit",
+-    "ls *.lock — no lock files",
+-    "find (orphan check) — all 6 old dirs confirmed removed",
+-    "find (file count) — 20 total files confirmed"
+-  ],
+-  "final_git_status": "On branch main. Up to date with origin/main. Untracked files: .gitignore, AGENTS.md, docs/, pipeline/, src/, tests/, workspace/. Nothing staged."
+-}
+diff --git a/workspace/runs/wave0-exec-20260428/run-record.json b/workspace/runs/wave0-exec-20260428/run-record.json
+deleted file mode 100644
+index cdee4d5..0000000
+--- a/workspace/runs/wave0-exec-20260428/run-record.json
++++ /dev/null
+@@ -1,54 +0,0 @@
+-{
+-  "run_id": "wave0-exec-20260428",
+-  "owner": "execution-agent-claude",
+-  "task_name": "Wave 0A/0B/0C — Concurrency Preflight + Structure Migration + Path Compatibility",
+-  "start_time": "2026-04-28T00:00:00Z",
+-  "branch": "main",
+-  "worktree": "default (single worktree)",
+-  "purpose": "Execute TC-00A (concurrency preflight), TC-00D (structure migration to pipeline/ + workspace/), TC-00E (path compatibility updates), TC-00B (midflight checks), TC-00C (pre-commit scope verification).",
+-  "intended_files": [
+-    "runs/wave0-exec-20260428/run-record.json",
+-    "runs/wave0-exec-20260428/concurrency-report.json",
+-    ".gitignore",
+-    "pipeline/configs/families/cells.yml",
+-    "pipeline/configs/families/disabled/.gitkeep",
+-    "pipeline/configs/llm-routing.yml",
+-    "pipeline/schemas/family-config.schema.json",
+-    "pipeline/prompts/.gitkeep",
+-    "workspace/runs/.gitkeep",
+-    "workspace/manifests/.gitkeep",
+-    "workspace/verification/latest/.gitkeep",
+-    "AGENTS.md",
+-    "docs/discovery/current-state.md"
+-  ],
+-  "intended_directories": [
+-    "runs/wave0-exec-20260428/",
+-    "pipeline/configs/families/",
+-    "pipeline/configs/families/disabled/",
+-    "pipeline/schemas/",
+-    "pipeline/prompts/",
+-    "workspace/runs/",
+-    "workspace/manifests/",
+-    "workspace/verification/latest/"
+-  ],
+-  "expected_outputs": [
+-    "Run record at runs/wave0-exec-20260428/run-record.json (moves to workspace/runs/wave0-exec-20260428/ after migration)",
+-    "Concurrency report at runs/wave0-exec-20260428/concurrency-report.json (moves to workspace/runs/wave0-exec-20260428/)",
+-    ".gitignore at repo root",
+-    "pipeline/ directory tree with migrated configs, schemas, prompts",
+-    "workspace/ directory tree with migrated runs, manifests, verification",
+-    "Updated path references in AGENTS.md and docs/discovery/current-state.md"
+-  ],
+-  "overlap_classification": "no_overlap",
+-  "overlap_evidence": "git status: all files untracked, branch main up to date with origin/main. Single commit 62879f4. No stashes, no other branches, no other worktrees, no lock files. All untracked files created by prior planning sessions in the same agent lineage.",
+-  "safety_decision": "PROCEED — no parallel work detected, all untracked files owned by this project lineage.",
+-  "rollback_notes": "All files are untracked. Rollback = delete new directories and restore old directory names. User backup exists at docs/plans/plugin-example-generation-execution-plan copy.md.",
+-  "verification_commands": [
+-    "git status",
+-    "git stash list",
+-    "git branch -a",
+-    "git worktree list",
+-    "git log --oneline -5",
+-    "ls *.lock (none found)"
+-  ]
+-}
+diff --git a/workspace/runs/wave1a-foundation-20260428/concurrency-report.json b/workspace/runs/wave1a-foundation-20260428/concurrency-report.json
+deleted file mode 100644
+index 2d0b2dd..0000000
+--- a/workspace/runs/wave1a-foundation-20260428/concurrency-report.json
++++ /dev/null
+@@ -1,42 +0,0 @@
+-{
+-  "run_id": "wave1a-foundation-20260428",
+-  "task_name": "Wave 1A — Project Foundation + Family Config System",
+-  "taskcards_executed": ["TC-00A", "TC-02 (Wave 1A scope)", "TC-00B (midflight)", "TC-00C"],
+-  "overlap_classification": "no_overlap",
+-  "final_verdict": "PASS — all tests passed, scope clean",
+-  "baseline_commit": "3a7158b",
+-  "test_results": {
+-    "total": 16,
+-    "passed": 16,
+-    "failed": 0,
+-    "test_file": "tests/unit/test_family_config.py"
+-  },
+-  "created_files": [
+-    "pyproject.toml",
+-    "src/plugin_examples/__init__.py",
+-    "src/plugin_examples/__main__.py",
+-    "src/plugin_examples/family_config/__init__.py",
+-    "src/plugin_examples/family_config/models.py",
+-    "src/plugin_examples/family_config/validator.py",
+-    "src/plugin_examples/family_config/loader.py",
+-    "pipeline/schemas/family-config.schema.json",
+-    "pipeline/configs/families/cells.yml",
+-    "pipeline/configs/families/disabled/words.yml",
+-    "pipeline/configs/families/disabled/pdf.yml",
+-    "pipeline/configs/families/_templates/family-template.yml",
+-    "pipeline/configs/plugin-namespace-patterns.yml",
+-    "pipeline/configs/llm-routing.yml",
+-    "pipeline/configs/verifier.yml",
+-    "pipeline/configs/github-publishing.yml",
+-    "tests/unit/test_family_config.py",
+-    "workspace/runs/wave1a-foundation-20260428/run-record.json",
+-    "workspace/runs/wave1a-foundation-20260428/concurrency-report.json"
+-  ],
+-  "modified_files": [],
+-  "scope_verification": "All files are within Wave 1A scope. No out-of-scope modules created.",
+-  "verification_commands_run": [
+-    "python -m pytest tests/unit/test_family_config.py -v — 16 passed",
+-    "python -m compileall src — success",
+-    "git status — only Wave 1A untracked files"
+-  ]
+-}
+diff --git a/workspace/runs/wave1a-foundation-20260428/run-record.json b/workspace/runs/wave1a-foundation-20260428/run-record.json
+deleted file mode 100644
+index 0220540..0000000
+--- a/workspace/runs/wave1a-foundation-20260428/run-record.json
++++ /dev/null
+@@ -1,34 +0,0 @@
+-{
+-  "run_id": "wave1a-foundation-20260428",
+-  "owner": "execution-agent-claude",
+-  "task_name": "Wave 1A — Project Foundation + Family Config System",
+-  "start_time": "2026-04-28T00:00:00Z",
+-  "branch": "main",
+-  "worktree": "default (single worktree)",
+-  "baseline_commit": "3a7158b",
+-  "purpose": "Implement TC-02 (family config system): pyproject.toml, family_config module, schema, configs, unit tests.",
+-  "overlap_classification": "no_overlap",
+-  "overlap_evidence": "git status: clean working tree. Branch main, 1 commit ahead of origin. No stashes, no other branches, no other worktrees.",
+-  "safety_decision": "PROCEED — clean baseline from Wave 0D commit 3a7158b.",
+-  "intended_files": [
+-    "pyproject.toml",
+-    "src/plugin_examples/__init__.py",
+-    "src/plugin_examples/__main__.py",
+-    "src/plugin_examples/family_config/__init__.py",
+-    "src/plugin_examples/family_config/models.py",
+-    "src/plugin_examples/family_config/validator.py",
+-    "src/plugin_examples/family_config/loader.py",
+-    "pipeline/schemas/family-config.schema.json",
+-    "pipeline/configs/families/cells.yml",
+-    "pipeline/configs/families/disabled/words.yml",
+-    "pipeline/configs/families/disabled/pdf.yml",
+-    "pipeline/configs/families/_templates/family-template.yml",
+-    "pipeline/configs/plugin-namespace-patterns.yml",
+-    "pipeline/configs/llm-routing.yml",
+-    "pipeline/configs/verifier.yml",
+-    "pipeline/configs/github-publishing.yml",
+-    "tests/unit/test_family_config.py",
+-    "workspace/runs/wave1a-foundation-20260428/run-record.json",
+-    "workspace/runs/wave1a-foundation-20260428/concurrency-report.json"
+-  ]
+-}
+diff --git a/workspace/runs/wave1b-nuget-source-truth-20260428/concurrency-report.json b/workspace/runs/wave1b-nuget-source-truth-20260428/concurrency-report.json
+deleted file mode 100644
+index 07c6f38..0000000
+--- a/workspace/runs/wave1b-nuget-source-truth-20260428/concurrency-report.json
++++ /dev/null
+@@ -1,35 +0,0 @@
+-{
+-  "run_id": "wave1b-nuget-source-truth-20260428",
+-  "task_name": "Wave 1B — NuGet Package Fetch + Dependency Resolution",
+-  "taskcards_executed": ["TC-00A", "TC-03 (Wave 1B scope)", "TC-00B (midflight)", "TC-00C"],
+-  "overlap_classification": "no_overlap",
+-  "final_verdict": "PASS — all tests passed, scope clean",
+-  "baseline_commit": "ec05720",
+-  "test_results": {
+-    "total": 46,
+-    "passed": 46,
+-    "failed": 0,
+-    "test_files": [
+-      "tests/unit/test_family_config.py (16 passed)",
+-      "tests/unit/test_nuget_fetcher.py (15 passed)",
+-      "tests/unit/test_dependency_resolver.py (15 passed)"
+-    ]
+-  },
+-  "created_files": [
+-    "src/plugin_examples/nuget_fetcher/__init__.py",
+-    "src/plugin_examples/nuget_fetcher/fetcher.py",
+-    "src/plugin_examples/nuget_fetcher/cache.py",
+-    "src/plugin_examples/nuget_fetcher/dependency_resolver.py",
+-    "tests/unit/test_nuget_fetcher.py",
+-    "tests/unit/test_dependency_resolver.py",
+-    "workspace/runs/wave1b-nuget-source-truth-20260428/run-record.json",
+-    "workspace/runs/wave1b-nuget-source-truth-20260428/concurrency-report.json"
+-  ],
+-  "modified_files": [],
+-  "scope_verification": "All files within Wave 1B scope. No out-of-scope modules created. No extractor, reflection, or detector code.",
+-  "verification_commands_run": [
+-    "python -m pytest tests/unit/ -v — 46 passed in 1.04s",
+-    "python -m compileall src — success",
+-    "git status — only Wave 1B untracked files"
+-  ]
+-}
+diff --git a/workspace/runs/wave1b-nuget-source-truth-20260428/run-record.json b/workspace/runs/wave1b-nuget-source-truth-20260428/run-record.json
+deleted file mode 100644
+index 2fd878f..0000000
+--- a/workspace/runs/wave1b-nuget-source-truth-20260428/run-record.json
++++ /dev/null
+@@ -1,23 +0,0 @@
+-{
+-  "run_id": "wave1b-nuget-source-truth-20260428",
+-  "owner": "execution-agent-claude",
+-  "task_name": "Wave 1B — NuGet Package Fetch + Dependency Resolution",
+-  "start_time": "2026-04-28T00:00:00Z",
+-  "branch": "main",
+-  "worktree": "default (single worktree)",
+-  "baseline_commit": "ec05720",
+-  "purpose": "Implement TC-03: NuGet fetcher with cache, dependency resolver, download/dependency manifests, package-lock.",
+-  "overlap_classification": "no_overlap",
+-  "overlap_evidence": "git status: clean working tree. Branch main, 2 commits ahead of origin. No stashes, no other branches, no other worktrees.",
+-  "safety_decision": "PROCEED — clean baseline from Wave 1A commit ec05720.",
+-  "intended_files": [
+-    "src/plugin_examples/nuget_fetcher/__init__.py",
+-    "src/plugin_examples/nuget_fetcher/fetcher.py",
+-    "src/plugin_examples/nuget_fetcher/cache.py",
+-    "src/plugin_examples/nuget_fetcher/dependency_resolver.py",
+-    "tests/unit/test_nuget_fetcher.py",
+-    "tests/unit/test_dependency_resolver.py",
+-    "workspace/runs/wave1b-nuget-source-truth-20260428/run-record.json",
+-    "workspace/runs/wave1b-nuget-source-truth-20260428/concurrency-report.json"
+-  ]
+-}
+diff --git a/workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json b/workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json
+deleted file mode 100644
+index 1e522e6..0000000
+--- a/workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json
++++ /dev/null
+@@ -1,29 +0,0 @@
+-{
+-  "run_id": "wave1c-nupkg-extraction-20260428",
+-  "task_name": "Wave 1C — NuGet Package Extraction + Framework Selection",
+-  "taskcards_executed": ["TC-00A", "TC-04 (Wave 1C scope)", "TC-00B (midflight)", "TC-00C"],
+-  "overlap_classification": "no_overlap",
+-  "final_verdict": "PASS — all tests passed, scope clean",
+-  "baseline_commit": "f1e6b92",
+-  "test_results": {
+-    "total": 68,
+-    "passed": 68,
+-    "failed": 0,
+-    "test_files": [
+-      "tests/unit/test_family_config.py (16 passed)",
+-      "tests/unit/test_nuget_fetcher.py (15 passed)",
+-      "tests/unit/test_dependency_resolver.py (15 passed)",
+-      "tests/unit/test_nupkg_extractor.py (22 passed)"
+-    ]
+-  },
+-  "created_files": [
+-    "src/plugin_examples/nupkg_extractor/__init__.py",
+-    "src/plugin_examples/nupkg_extractor/extractor.py",
+-    "src/plugin_examples/nupkg_extractor/framework_selector.py",
+-    "tests/unit/test_nupkg_extractor.py",
+-    "workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json",
+-    "workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json"
+-  ],
+-  "modified_files": [],
+-  "scope_verification": "All files within Wave 1C scope. No reflection, detector, or generation code."
+-}
+diff --git a/workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json b/workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json
+deleted file mode 100644
+index 90533cd..0000000
+--- a/workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json
++++ /dev/null
+@@ -1,21 +0,0 @@
+-{
+-  "run_id": "wave1c-nupkg-extraction-20260428",
+-  "owner": "execution-agent-claude",
+-  "task_name": "Wave 1C — NuGet Package Extraction + Framework Selection",
+-  "start_time": "2026-04-28T00:00:00Z",
+-  "branch": "main",
+-  "worktree": "default (single worktree)",
+-  "baseline_commit": "f1e6b92",
+-  "purpose": "Implement TC-04: nupkg extractor with framework selector, dependency extraction, and extraction manifest.",
+-  "overlap_classification": "no_overlap",
+-  "overlap_evidence": "git status: clean working tree. Branch main, 3 commits ahead of origin. No stashes, no other branches, no other worktrees.",
+-  "safety_decision": "PROCEED — clean baseline from Wave 1B commit f1e6b92.",
+-  "intended_files": [
+-    "src/plugin_examples/nupkg_extractor/__init__.py",
+-    "src/plugin_examples/nupkg_extractor/extractor.py",
+-    "src/plugin_examples/nupkg_extractor/framework_selector.py",
+-    "tests/unit/test_nupkg_extractor.py",
+-    "workspace/runs/wave1c-nupkg-extraction-20260428/run-record.json",
+-    "workspace/runs/wave1c-nupkg-extraction-20260428/concurrency-report.json"
+-  ]
+-}

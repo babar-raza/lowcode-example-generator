@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "pdf",
-  "run_id": "pilot-pdf-20260515-193905",
-  "promoted_at": "2026-05-15T14:52:29.531683+00:00",
-  "source_run_path": "workspace\\runs\\pilot-pdf-20260515-193905\\evidence\\latest",
+  "run_id": "pilot-pdf-20260517-130711",
+  "promoted_at": "2026-05-17T08:13:43.751821+00:00",
+  "source_run_path": "workspace\\runs\\pilot-pdf-20260517-130711\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",

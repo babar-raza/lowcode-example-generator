@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint23", "date": "2026-05-17", "pr_id": "PR#6",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+  "examples_present": ["image-extractor", "table-generator", "toc-generator"],
+  "examples_expected": ["image-extractor", "table-generator", "toc-generator"],
+  "audit_result": "PASS — 3/3 expected examples present",
+  "verdict": "PACKAGE_INTEGRITY_VERIFIED"
+}

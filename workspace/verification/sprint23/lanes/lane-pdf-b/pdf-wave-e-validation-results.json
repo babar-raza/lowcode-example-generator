@@ -1,0 +1,46 @@
+{
+  "lane": "lane-pdf-b",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "run_id": "pilot-pdf-20260517-130711",
+  "validation_summary": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "wave_e_validation": {
+    "pdf-security": {
+      "passed": true,
+      "failure_stage": null,
+      "restore_ms": 1175.5,
+      "build_ms": 1572.0,
+      "run_ms": 2511.9
+    },
+    "pdf-form-flattener": {
+      "passed": true,
+      "failure_stage": null,
+      "restore_ms": 1060.2,
+      "build_ms": 1303.1,
+      "run_ms": 1981.9
+    }
+  },
+  "gate_results": {
+    "verdict": "PR_DRY_RUN_READY",
+    "publishable": false,
+    "all_required_passed": true,
+    "gate_scenario_planning": "passed",
+    "gate_generation": "passed",
+    "gate_build": "passed",
+    "gate_runtime": "passed",
+    "gate_reviewer": "failed (required=false, reviewer unavailable — EXAMPLE_REVIEWER_PATH not set)"
+  },
+  "denominator_check": {
+    "completeness_gate": "PASS (PILOT_ALLOWED)",
+    "total_accounted": 101,
+    "expected": 16,
+    "workflow_root_types": 23,
+    "allowed_pilot": 16,
+    "excluded": 85
+  },
+  "verdict": "WAVE_E_BUILD_AND_RUNTIME_ALL_PASS"
+}

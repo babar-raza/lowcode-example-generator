@@ -2,7 +2,7 @@
   "deprecated_latest_alias": true,
   "notice": "Files in this directory are a backward-compat alias. Prefer workspace/verification/latest/families/{family}/ for family-specific evidence.",
   "last_promoted_by_family": "pdf",
-  "last_promoted_run_id": "pilot-pdf-20260515-193905",
-  "last_promoted_at": "2026-05-15T14:52:29.531683+00:00",
+  "last_promoted_run_id": "pilot-pdf-20260517-130711",
+  "last_promoted_at": "2026-05-17T08:13:43.751821+00:00",
   "warning": "Files here may be overwritten by ANY family run. Not reliable in multi-family environments. Use families/{family}/ paths for reliable evidence isolation."
 }

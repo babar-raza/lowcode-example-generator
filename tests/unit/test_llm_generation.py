@@ -2627,8 +2627,47 @@ class TestTemplateFIrstGeneration:
         token = stripped.split("\u2014")[0].strip()  # U+2014 em-dash
         assert token == "options.SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX"
 
+    def test_security_template_first_bypasses_llm(self):
+        """Security template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("security", "Security")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_formflattener_template_first_bypasses_llm(self):
+        """FormFlattener template-first returns generated_template_first status."""
+        packet = _make_template_first_packet("formflattener", "FormFlattener")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_security_template_contains_required_patterns(self):
+        """Security template must use EncryptionOptions, DocumentPrivilege, AddInput/AddOutput."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("security", "Security")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "EncryptionOptions" in code
+        assert "DocumentPrivilege" in code
+        assert "Aspose.Pdf.Facades" in code
+        assert "new Security().Process(encOptions)" in code
+        assert 'encOptions.AddInput(new FileDataSource("input.pdf"))' in code
+        assert 'encOptions.AddOutput(new FileDataSource("output.pdf"))' in code
+        assert "result.ResultCollection.Count > 0" in code
+
+    def test_formflattener_template_contains_required_patterns(self):
+        """FormFlattener template must use AcroForm fixture, FormFlattenAllFieldsOptions, AddInput/AddOutput."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("formflattener", "FormFlattener")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "FormFlattenAllFieldsOptions" in code
+        assert "TextBoxField" in code
+        assert "Aspose.Pdf.Forms" in code
+        assert "doc.Form.Add(textBox, 1)" in code
+        assert "new FormFlattener().Process(flattenOptions)" in code
+        assert 'flattenOptions.AddInput(new FileDataSource("input.pdf"))' in code
+        assert 'flattenOptions.AddOutput(new FileDataSource("output.pdf"))' in code
+        assert "result.ResultCollection.Count > 0" in code
+
     def test_all_template_first_types_pass_validation_with_utf8_config(self):
-        """All 7 template-first types must produce code that passes constraint validation."""
+        """All template-first types must produce code that passes constraint validation."""
         from plugin_examples.generator.code_generator import (
             _validate_code_from_constraints,
             _generate_deterministic_template_for_scenario,
@@ -2643,6 +2682,7 @@ class TestTemplateFIrstGeneration:
             "DocConverter", "XlsConverter", "Html",
             "Jpeg", "Tiff", "Png", "TableGenerator",
             "TocGenerator", "ImageExtractor",
+            "Security", "FormFlattener",
         ]:
             packet = MagicMock()
             packet.target_type = f"Aspose.Pdf.LowCode.{type_name}"

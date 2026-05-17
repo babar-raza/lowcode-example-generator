@@ -684,6 +684,47 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'var result = new ImageExtractor().Process(options);\n'
             'Console.WriteLine(result.ResultCollection.Count > 0 ? "Images extracted" : "No images found");\n'
         )
+    if t == "security":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Facades;\n'
+            '\n'
+            'var doc = new Document();\n'
+            'doc.Pages.Add();\n'
+            'doc.Save("input.pdf");\n'
+            '\n'
+            'DocumentPrivilege privilege = DocumentPrivilege.ForbidAll;\n'
+            'privilege.AllowPrint = true;\n'
+            '\n'
+            'var encOptions = new EncryptionOptions("owner123", "user123", privilege);\n'
+            'encOptions.AddInput(new FileDataSource("input.pdf"));\n'
+            'encOptions.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new Security().Process(encOptions);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "PDF encrypted" : "No output");\n'
+        )
+    if t == "formflattener":
+        return (
+            'using System;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Forms;\n'
+            '\n'
+            'var doc = new Document();\n'
+            'var page = doc.Pages.Add();\n'
+            'var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle(100, 700, 300, 730));\n'
+            'textBox.PartialName = "TextField1";\n'
+            'textBox.Value = "Hello AcroForm";\n'
+            'doc.Form.Add(textBox, 1);\n'
+            'doc.Save("input.pdf");\n'
+            '\n'
+            'var flattenOptions = new FormFlattenAllFieldsOptions();\n'
+            'flattenOptions.AddInput(new FileDataSource("input.pdf"));\n'
+            'flattenOptions.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new FormFlattener().Process(flattenOptions);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "Form flattened" : "No output");\n'
+        )
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
 

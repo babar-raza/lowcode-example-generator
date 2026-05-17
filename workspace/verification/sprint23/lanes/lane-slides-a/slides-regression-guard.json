@@ -1,0 +1,15 @@
+{
+  "lane": "lane-slides-a",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "family": "slides",
+  "guard_type": "DRIFT_GUARD",
+  "source_changes": "none — slides.yml and slides.json unchanged since Sprint 22",
+  "test_coverage": "1604 tests pass — no slides regression detected",
+  "accepted_state": {
+    "pilot_types": 3,
+    "published": 3,
+    "status": "PILOT_COMPLETE (3/3 POST_MERGE_VERIFIED per Sprint 22)"
+  },
+  "verdict": "NO_REGRESSION_DETECTED"
+}

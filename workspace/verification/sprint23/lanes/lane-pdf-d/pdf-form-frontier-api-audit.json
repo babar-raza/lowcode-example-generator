@@ -1,0 +1,112 @@
+{
+  "lane": "lane-pdf-d",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "source": "catalog from run pilot-pdf-20260517-130711 (Aspose.PDF 26.5.0)",
+  "frontier_types_audited": ["FormEditor", "FormExporter", "FormImporter", "SelectField"],
+  "type_assessments": {
+    "FormEditor": {
+      "kind": "class",
+      "constructors": 1,
+      "methods": 1,
+      "primary_method": "Process(IPluginOptions options)",
+      "pattern": "new FormEditor().Process(options)",
+      "options_classes": {
+        "FormEditorAddOptions": {
+          "ctor": "FormEditorAddOptions(List<FormFieldCreateOptions> fieldsCreateOptions)",
+          "complexity": "MEDIUM — requires field create options list"
+        },
+        "FormEditorSetOptions": {
+          "ctor": "FormEditorSetOptions(SelectField selectField, FormFieldSetOptions settedOptions)",
+          "complexity": "HIGH — requires SelectField delegate + field options"
+        },
+        "FormEditorRemoveOptions": {
+          "ctor": "no-param",
+          "complexity": "LOW — simplest entry point, removes all fields from AcroForm"
+        },
+        "FormEditorOptions": {
+          "ctor": "no-param (0 ctors shown)",
+          "complexity": "UNKNOWN — may be abstract base"
+        }
+      },
+      "simplest_entry_point": "FormEditorRemoveOptions() — no params, standard AddInput/AddOutput pattern expected",
+      "fixture_requirement": "AcroForm PDF with at least one field (same as FormFlattener fixture)",
+      "feasibility": "MEDIUM",
+      "proposed_example": "Create AcroForm PDF, call new FormEditor().Process(new FormEditorRemoveOptions() + AddInput + AddOutput), verify 0 fields in output",
+      "sprint_e_candidate": true
+    },
+    "FormExporter": {
+      "kind": "class",
+      "constructors": 1,
+      "methods": 1,
+      "primary_method": "Process(IPluginOptions options)",
+      "pattern": "new FormExporter().Process(options)",
+      "options_classes": {
+        "FormExporterToJsonOptions": {
+          "ctor_1": "no-param — exports all fields",
+          "ctor_2": "FormExporterToJsonOptions(SelectField selectField) — exports filtered fields",
+          "complexity": "LOW (no-param) — simplest entry point"
+        },
+        "FormExporterValuesToCsvOptions": {
+          "ctor": "FormExporterValuesToCsvOptions(SelectField selectField, char? delimeter)",
+          "complexity": "MEDIUM — requires SelectField delegate"
+        }
+      },
+      "simplest_entry_point": "new FormExporterToJsonOptions() — no-param, exports all fields to JSON",
+      "fixture_requirement": "AcroForm PDF with at least one field and a value set",
+      "output_type": "JSON string (likely StringResult in ResultCollection)",
+      "feasibility": "MEDIUM",
+      "proposed_example": "Create AcroForm PDF with field value, call new FormExporter().Process(new FormExporterToJsonOptions() + AddInput), read JSON from StringResult",
+      "note": "Output is JSON string, not a PDF — output validator needs StringResult check, not file existence check",
+      "sprint_e_candidate": true
+    },
+    "FormImporter": {
+      "kind": "class",
+      "constructors": 1,
+      "methods": 1,
+      "primary_method": "Process(IPluginOptions options)",
+      "pattern": "new FormImporter().Process(options)",
+      "options_classes": {
+        "FormImporterJsonOptions": {
+          "ctor": "no-param",
+          "methods": ["AddInput", "AddOutput"],
+          "complexity": "MEDIUM — requires JSON data file as one input, PDF as another"
+        }
+      },
+      "simplest_entry_point": "new FormImporterJsonOptions() + AddInput(json) + AddInput(pdf) + AddOutput(outputPdf)",
+      "fixture_requirement": "AcroForm PDF + JSON data file with field values",
+      "feasibility": "MEDIUM-COMPLEX",
+      "note": "JSON data file must be programmatically created — format must match FormExporter output",
+      "sprint_e_candidate": false,
+      "blocked_reason": "NEEDS_JSON_DATA_FIXTURE — depends on FormExporter output format; assess after FormExporter is generated"
+    },
+    "SelectField": {
+      "kind": "delegate",
+      "constructors": 1,
+      "methods": 3,
+      "method_signatures": [
+        "Invoke(Aspose.Pdf.Forms.Field field)",
+        "BeginInvoke(Aspose.Pdf.Forms.Field field, AsyncCallback callback, object object)",
+        "EndInvoke(IAsyncResult result)"
+      ],
+      "classification": "DELEGATE — NOT a standalone LowCode plugin",
+      "role": "PROVIDER_CALLBACK — used as filter predicate in FormEditorSetOptions, FormExporterToJsonOptions, FormExporterValuesToCsvOptions",
+      "runnable": false,
+      "reclassification_needed": "Should be classified as PROVIDER_CALLBACK or DELEGATE, not WORKFLOW_ROOT",
+      "sprint_e_candidate": false,
+      "action": "Update type-role classification to reflect DELEGATE status; remove from allowed_types consideration"
+    }
+  },
+  "denominator_impact": {
+    "SelectField_reclassification": "If SelectField is reclassified DELEGATE (non-runnable), workflow_root_types drops from 23 to 22; non_runnable increases from 78 to 79. Total 101 unchanged.",
+    "conservation_check": "22 + 79 = 101 ✓",
+    "action_required": "Update pdf.json denominator workflow_root_types and non_runnable after reclassification"
+  },
+  "pilot_expansion_recommendation": {
+    "wave_f_candidates": ["FormEditor", "FormExporter"],
+    "blocked": ["FormImporter", "SelectField"],
+    "rationale": "FormEditor (RemoveOptions) and FormExporter (ToJsonOptions) both have no-param option constructors and standard AcroForm fixtures. Same fixture pattern as FormFlattener (already in wave E). Low incremental risk.",
+    "prerequisite": "SelectField denominator reclassification must be committed before wave F expansion"
+  },
+  "verdict": "FRONTIER_AUDIT_COMPLETE — FormEditor+FormExporter: WAVE_F_CANDIDATES; FormImporter: DEFERRED; SelectField: RECLASSIFY_AS_DELEGATE"
+}

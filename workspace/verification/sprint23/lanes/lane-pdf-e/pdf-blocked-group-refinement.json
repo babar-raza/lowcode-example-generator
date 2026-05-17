@@ -1,0 +1,66 @@
+{
+  "lane": "lane-pdf-e",
+  "sprint": "sprint23",
+  "date": "2026-05-17",
+  "source": "catalog from run pilot-pdf-20260517-130711 (Aspose.PDF 26.5.0)",
+  "blocked_types_assessed": ["Signature", "Timestamp", "Ofd"],
+  "type_assessments": {
+    "Signature": {
+      "constructor": "no-param",
+      "primary_method": "Process(IPluginOptions options)",
+      "options_class": "SignOptions",
+      "sign_options_ctors": [
+        "SignOptions(string pfx, string password)",
+        "SignOptions(Stream pfx, string password)"
+      ],
+      "blocker": "REQUIRES_PFX_CERTIFICATE — pfx file required for SignOptions constructor",
+      "fixture_strategy": "COMPLEX — must create or embed a test certificate. Options: (1) use System.Security.Cryptography.X509Certificates.CertificateRequest to create a self-signed cert and export to PFX stream; (2) embed a pre-generated test .pfx as base64 literal in Program.cs",
+      "self_signed_feasibility": "POSSIBLE — .NET has built-in CertificateRequest API. Example: new CertificateRequest('cn=test', RSA.Create(), HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1).CreateSelfSigned(DateTimeOffset.Now, DateTimeOffset.Now.AddYears(1)) then ExportPfx(null, null)",
+      "previous_classification": "BLOCKED (Wave D, Sprint 22)",
+      "revised_classification": "MEDIUM-COMPLEX — self-signed cert creation is feasible in .NET",
+      "sprint_f_candidate": false,
+      "sprint_g_candidate": true,
+      "action": "Design self-signed PFX fixture; add SignOptions per_type_constraints before generation"
+    },
+    "Timestamp": {
+      "constructor": "no-param",
+      "primary_method": "Process(IPluginOptions options) + Dispose()",
+      "options_class": "TimestampOptions",
+      "timestamp_options_ctors": [
+        "TimestampOptions() — no-param, may use default TSA",
+        "TimestampOptions(string pfxPath, string password)",
+        "TimestampOptions(Stream pfxStream, string password)"
+      ],
+      "key_finding": "NO-PARAM CONSTRUCTOR EXISTS — TimestampOptions() may work without certificate if Aspose.PDF has a default timestamp authority embedded",
+      "blocker": "UNCERTAIN — no-param ctor may require network access to default TSA, or may fail without certificate",
+      "fixture_strategy": "LOW if no-param works; COMPLEX if requires TSA connection",
+      "previous_classification": "BLOCKED (Wave D, Sprint 23)",
+      "revised_classification": "LOW-UNCERTAIN — worth attempting with no-param ctor; if runtime fails with no-TSA error, reclassify as BLOCKED",
+      "sprint_f_candidate": true,
+      "action": "Attempt generation with TimestampOptions() no-param ctor; capture runtime error if any",
+      "note": "If network access to TSA is required, this remains BLOCKED in automated pipeline context"
+    },
+    "Ofd": {
+      "constructor": "no-param",
+      "primary_method": "Process(IPluginOptions options) + Dispose()",
+      "options_class": "OfdToPdfOptions",
+      "ofd_to_pdf_options_ctors": ["OfdToPdfOptions() — no-param"],
+      "blocker": "REQUIRES_OFD_INPUT_FILE — OFD is a Chinese open standard format; no .NET native creation API",
+      "fixture_strategy": "HARD — cannot create OFD programmatically via Aspose.PDF API (OFD is an input format, not output of any PDF operation)",
+      "alternative": "Embed a minimal pre-created OFD file as base64 in Program.cs (similar to test fixture strategy)",
+      "previous_classification": "BLOCKED (Wave D, Sprint 22)",
+      "revised_classification": "BLOCKED — no change. Input fixture creation remains the blocker.",
+      "sprint_f_candidate": false,
+      "action": "Defer indefinitely until a minimal test OFD fixture can be sourced or created outside the pipeline"
+    }
+  },
+  "summary": {
+    "Signature": "Upgraded from HARD-BLOCKED to MEDIUM-COMPLEX — self-signed PFX feasible via System.Security.Cryptography",
+    "Timestamp": "Upgraded to LOW-UNCERTAIN — no-param ctor may work; worth attempting in Sprint F",
+    "Ofd": "Remains BLOCKED — no OFD input creation path found"
+  },
+  "recommended_sprint_f_additions": ["Timestamp (no-param attempt)"],
+  "recommended_sprint_g_additions": ["Signature (after PFX fixture design)"],
+  "permanently_blocked": ["Ofd"],
+  "verdict": "BLOCKED_GROUP_PARTIALLY_UNBLOCKED — Timestamp upgraded to low-uncertain sprint F candidate; Signature requires PFX fixture design; Ofd remains permanently blocked"
+}

@@ -1,0 +1,110 @@
+{
+  "report_type": "constraint_effectiveness_governance",
+  "report_date": "2026-05-14",
+  "sprint": "Sprint 10: Convergence Intelligence and Adaptive Constraint Governance",
+  "lane": "LANE 2 \u2014 Constraint Effectiveness Governance",
+
+  "methodology": {
+    "evidence_base": "4 Sprint 9 PDF pilot runs analyzed (runs 20:46, 20:54, 21:03, 21:13)",
+    "constraint_source": "pipeline/configs/families/pdf.yml per_type_constraints + src/plugin_examples/generator/packet_builder.py hardcoded",
+    "classification_dimensions": ["effectiveness", "brittleness", "false_positive_risk", "value_classification"]
+  },
+
+  "constraint_audit": {
+    "HIGH_VALUE_CONSTRAINTS": [
+      {
+        "pattern": "FORBIDDEN: new PluginOptions()",
+        "applies_to": ["Jpeg", "Png", "Tiff", "PdfAConverter", "DocConverter", "XlsConverter", "Html"],
+        "effectiveness": "HIGH \u2014 prevents abstract base instantiation which is always a compiler error",
+        "false_positive_risk": "NONE \u2014 PluginOptions() constructor call is always wrong",
+        "observed_blocks": "Prevented in multiple repair cycles across all runs",
+        "recommendation": "KEEP"
+      },
+      {
+        "pattern": "FORBIDDEN: .OutputDataSources",
+        "applies_to": ["Jpeg", "Png", "Tiff"],
+        "effectiveness": "HIGH \u2014 IOperationResult has no OutputDataSources property; prevented CS1061 build failures",
+        "false_positive_risk": "NONE \u2014 property does not exist in the API",
+        "observed_blocks": "Prevented Png build failure in run 2 history",
+        "recommendation": "KEEP"
+      },
+      {
+        "pattern": "REQUIRED: new JpegOptions(/PngOptions(/TiffOptions(",
+        "applies_to": ["Jpeg", "Png", "Tiff"],
+        "effectiveness": "HIGH \u2014 enforces correct concrete options class",
+        "false_positive_risk": "LOW \u2014 these exact class names are what the API requires",
+        "generation_rate_impact": "Positive: repair correctly fixes abstract base usage",
+        "recommendation": "KEEP"
+      },
+      {
+        "pattern": "REQUIRED: using Aspose.Pdf.Text; (for TextFragment)",
+        "applies_to": ["Merger", "Splitter", "TextExtractor"],
+        "effectiveness": "HIGH \u2014 addresses the known Sprint 8 Merger regression root cause",
+        "false_positive_risk": "LOW",
+        "recommendation": "KEEP"
+      },
+      {
+        "pattern": "FORBIDDEN: PdfFileEditor",
+        "applies_to": ["Merger"],
+        "effectiveness": "HIGH \u2014 prevents core API substitution",
+        "false_positive_risk": "NONE",
+        "recommendation": "KEEP"
+      }
+    ],
+
+    "BRITTLE_CONSTRAINTS": [
+      {
+        "pattern": "REQUIRED: result validation pattern \u2014 check File.Exists(outputPath) and result?.ResultCollection?.Count > 0",
+        "applies_to": ["Jpeg", "Png", "Tiff"],
+        "status": "REMOVED in Sprint 9 (run 4)",
+        "reason_for_removal": "Over-constrained: checked for exact literal string in generated code. LLM wrote semantically equivalent validation using different variable names or whitespace. Caused generation failure for all 3 image types in run 3 (4/11 generated vs 10/11 after removal).",
+        "lesson": "REQUIRED constraints on implementation patterns (validation code, not API calls) are brittle. The pattern checked exact string 'File.Exists(outputPath) and result?.ResultCollection?.Count > 0' which LLM never wrote verbatim.",
+        "replacement": "No replacement needed \u2014 build+runtime exit code validates correctness. No REQUIRED constraint should enforce validation code style.",
+        "recommendation": "DO_NOT_RESTORE"
+      }
+    ],
+
+    "GAPS_ADDRESSED_IN_SPRINT10": [
+      {
+        "gap": "Output filename extension not validated",
+        "applies_to": ["Jpeg", "Tiff"],
+        "observed_failure": "Jpeg used output.pdf instead of output.jpg; Tiff used output.tif instead of output.tiff",
+        "sprint10_fix": "Added REQUIRED: \\\"output.jpg\\\" and REQUIRED: \\\"output.tiff\\\" literal-string constraints",
+        "validator_change": "code_generator.py _validate_code_from_constraints extended to check literal strings for REQUIRED patterns without parentheses",
+        "effectiveness_prediction": "HIGH \u2014 deterministic failures; literal string check is exact and unambiguous"
+      }
+    ],
+
+    "REDUNDANT_CONSTRAINTS": [
+      {
+        "pattern": "REQUIRED: options.AddOutput(new FileDataSource( AND REQUIRED: \\\"output.jpg\\\"",
+        "note": "After Sprint 10 fix, AddOutput constraint checks for method call presence; filename constraint checks for exact filename. Together they enforce both method pattern AND correct filename. Not redundant \u2014 complementary.",
+        "recommendation": "KEEP_BOTH"
+      }
+    ]
+  },
+
+  "constraint_effectiveness_scores": {
+    "Merger": {"required_count": 5, "forbidden_count": 1, "effectiveness": "HIGH", "brittleness": "LOW", "repair_convergence_rate": "3/4 runs (75%)"},
+    "TextExtractor": {"required_count": 2, "forbidden_count": 0, "effectiveness": "HIGH", "brittleness": "LOW", "repair_convergence_rate": "4/4 runs (100%)"},
+    "Splitter": {"required_count": 2, "forbidden_count": 1, "effectiveness": "HIGH", "brittleness": "LOW", "repair_convergence_rate": "4/4 runs (100%)"},
+    "Optimizer": {"required_count": 1, "forbidden_count": 0, "effectiveness": "MEDIUM", "brittleness": "MEDIUM", "repair_convergence_rate": "2/4 runs (50%) \u2014 probabilistic LLM non-determinism"},
+    "PdfAConverter": {"required_count": 6, "forbidden_count": 6, "effectiveness": "HIGH_WHEN_CONVERGES", "brittleness": "MEDIUM", "repair_convergence_rate": "2/4 runs (50%) \u2014 probabilistic"},
+    "DocConverter": {"required_count": 7, "forbidden_count": 3, "effectiveness": "HIGH_WHEN_CONVERGES", "brittleness": "MEDIUM", "repair_convergence_rate": "2/4 runs (50%) \u2014 probabilistic"},
+    "XlsConverter": {"required_count": 6, "forbidden_count": 4, "effectiveness": "HIGH_WHEN_CONVERGES", "brittleness": "MEDIUM", "repair_convergence_rate": "2/4 runs (50%) \u2014 probabilistic"},
+    "Html": {"required_count": 8, "forbidden_count": 5, "effectiveness": "HIGH_WHEN_CONVERGES", "brittleness": "HIGH", "repair_convergence_rate": "2/4 runs (50%) \u2014 Html fixture pattern is complex (HTML file vs PDF file)"},
+    "Jpeg": {"required_count": 7, "forbidden_count": 4, "effectiveness": "HIGH_after_sprint10_fix", "brittleness": "LOW_after_fix", "repair_convergence_rate": "PREDICTED: 100% after filename constraint"},
+    "Png": {"required_count": 6, "forbidden_count": 4, "effectiveness": "HIGH", "brittleness": "LOW", "repair_convergence_rate": "1/2 runtime attempts (50%) \u2014 probabilistic runtime"},
+    "Tiff": {"required_count": 7, "forbidden_count": 4, "effectiveness": "HIGH_after_sprint10_fix", "brittleness": "LOW_after_fix", "repair_convergence_rate": "PREDICTED: HIGH after filename constraint"}
+  },
+
+  "governance_rules": {
+    "rule_1": "REQUIRED constraints MUST check for API method calls or using directives \u2014 never for implementation patterns (validation code style, variable names, whitespace).",
+    "rule_2": "REQUIRED literal-string constraints (no parentheses) are permitted for filename/value enforcement where exact string must appear in generated code.",
+    "rule_3": "FORBIDDEN constraints are exempt when the required LowCode call is present \u2014 supporting/fixture code is not a violation.",
+    "rule_4": "A constraint that causes >25% generation failure rate across multiple runs must be reviewed as potentially over-constrained.",
+    "rule_5": "Constraint effectiveness must be re-evaluated after every 4 pilot runs."
+  },
+
+  "lane2_verdict": "CONSTRAINT_EFFECTIVENESS_GOVERNANCE_ESTABLISHED \u2014 11 types audited, 5 HIGH_VALUE, 1 BRITTLE (removed), 2 GAPS addressed in Sprint 10. Governance rules formalized. Literal-string check capability added."
+}

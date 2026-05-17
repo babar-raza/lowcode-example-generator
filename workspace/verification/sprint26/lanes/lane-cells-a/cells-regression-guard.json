@@ -1,0 +1,35 @@
+{
+  "lane": "lane-cells-a",
+  "sprint": "sprint26",
+  "date": "2026-05-17",
+  "family": "cells",
+  "guard_type": "regression + version drift",
+  "current_state": {
+    "published_count": 9,
+    "family_complete": true,
+    "lifecycle_state": "FAMILY_COMPLETE",
+    "published_types": [
+      "SpreadsheetConverter", "SpreadsheetLocker", "SpreadsheetMerger",
+      "SpreadsheetMetadataSignature", "SpreadsheetPrinter", "SpreadsheetSplitter",
+      "SpreadsheetTabsRemover", "SpreadsheetTemplateMarker", "SpreadsheetWatermarker"
+    ],
+    "last_verified_sprint": "sprint25",
+    "package_version": "26.4.0"
+  },
+  "version_drift_check": {
+    "denominator_source_version": "26.4.0",
+    "drift_status": "ASSUMED_STABLE — no Cells pipeline run in sprint26; version confirmed 26.4.0 in sprint25",
+    "drift_risk": "LOW"
+  },
+  "regression_check": {
+    "method": "lifecycle records inspection — no pipeline rerun needed",
+    "last_pipeline_run": "sprint22",
+    "all_9_types_post_merge_verified": true,
+    "regression_verdict": "REGRESSION_FREE — Cells FAMILY_COMPLETE. No source changes affect Cells in sprint26."
+  },
+  "source_changes_impact": {
+    "code_generator_template_first_fix": "NOT_APPLICABLE — Cells types are not template_first",
+    "other_changes": "NONE affecting Cells"
+  },
+  "verdict": "CELLS_REGRESSION_GUARD_PASS — 9/9 FAMILY_COMPLETE. No regression in sprint26."
+}

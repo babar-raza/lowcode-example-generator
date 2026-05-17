@@ -1,0 +1,58 @@
+{
+  "lane": "lane-pdf-b",
+  "sprint": "sprint26",
+  "date": "2026-05-17",
+  "type": "Signature",
+  "wave": "G",
+  "pr_package": "pdf-controlled-pilot-pr9",
+  "generation_method": "template_first",
+  "harness_run": {
+    "harness_path": "workspace/fixture-validation/pdf-signature-harness",
+    "build_result": "PASS",
+    "run_result": "PASS",
+    "output_file": "output-signed.pdf",
+    "output_size_bytes": 616258,
+    "pdf_header_valid": true,
+    "digital_signature_present": true,
+    "byte_range_marker": true,
+    "verdict": "SIGNATURE_PASS"
+  },
+  "pr9_package_run": {
+    "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature",
+    "build_result": "PASS",
+    "build_warnings": 0,
+    "build_errors": 0,
+    "run_output": "PDF signed successfully.",
+    "output_file": "output.pdf",
+    "output_size_bytes": 616498,
+    "pdf_header_valid": true,
+    "digital_signature_present": true,
+    "byte_range_marker": true
+  },
+  "template_first_validation": {
+    "test_file": "tests/unit/test_llm_generation.py",
+    "tests_added": [
+      "test_signature_template_first_works_without_llm",
+      "test_signature_template_first_bypasses_llm",
+      "test_signature_template_contains_required_patterns"
+    ],
+    "loop_tests_updated": [
+      "test_all_template_first_types_work_without_llm (13→14 types)",
+      "test_all_template_first_types_pass_validation_with_utf8_config (13→14 types)"
+    ],
+    "all_tests_pass": true,
+    "total_tests_in_files": 289
+  },
+  "validator_fix": {
+    "file": "src/plugin_examples/generator/code_generator.py",
+    "change": "TextFragment validator now accepts Aspose.Pdf.Text.TextFragment (fully-qualified) as equivalent to 'using Aspose.Pdf.Text;'",
+    "line": 1299
+  },
+  "denominator_update": {
+    "allowed_pilot_count": {"from": 18, "to": 19},
+    "excluded_count": {"from": 83, "to": 82},
+    "runnable_scenarios": {"from": 18, "to": 19},
+    "conservation_check": "23 workflow_root + 78 non_runnable = 101 ✓; 19 pilot + 82 excluded = 101 ✓"
+  },
+  "verdict": "SIGNATURE_PR9_READY — template_first generation confirmed. BUILD_PASS + RUN_PASS. Output PDF has valid digital signature (/ByteRange). PR#9 package assembled at workspace/pr-dry-run/pdf-controlled-pilot-pr9/. Awaiting APPROVE_LIVE_PR for publication."
+}

@@ -39,12 +39,13 @@
     "Security",
     "FormFlattener",
     "FormEditor",
-    "FormExporter"
+    "FormExporter",
+    "Signature"
   ],
-  "allowed_pilot_count": 18,
+  "allowed_pilot_count": 19,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "PDF Wave F expansion (Sprint 24, 2026-05-17): 18 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener) + Wave F (2: FormEditor/FormExporter). PdfExtractor excluded — ABSTRACT_BASE. PdfToImage excluded — ABSTRACT_BASE (reclassified Sprint 22). SelectField reclassified PROVIDER_CALLBACK (Sprint 24) — not a WORKFLOW_ROOT. Denominator for current coverage = 18. workflow_root denominator = 22. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace.",
-  "runnable_scenarios": 18,
+  "denominator_basis_note": "PDF Wave G expansion (Sprint 26, 2026-05-17): 19 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener) + Wave F (2: FormEditor/FormExporter) + Wave G (1: Signature). PdfExtractor excluded — ABSTRACT_BASE. PdfToImage excluded — ABSTRACT_BASE (reclassified Sprint 22). SelectField reclassified PROVIDER_CALLBACK (Sprint 24) — not a WORKFLOW_ROOT. Signature harness-verified Sprint 25 (self-signed PFX ALL_PASS). Denominator for current coverage = 19. workflow_root denominator = 22. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace. Conservation: 22+79=101, 19+82=101.",
+  "runnable_scenarios": 19,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
     "pdf-merger",
@@ -64,7 +65,8 @@
     "pdf-security",
     "pdf-form-flattener",
     "pdf-form-editor",
-    "pdf-form-exporter"
+    "pdf-form-exporter",
+    "pdf-signature"
   ],
   "workflow_root_runnable_count": 22,
   "workflow_root_scenario_ids_note": "See workspace/verification/latest/pdf-type-role-classification.json workflow_roots section for all 22 WORKFLOW_ROOT type names (PdfExtractor reclassified ABSTRACT_BASE Sprint 7; PdfToImage reclassified ABSTRACT_BASE Sprint 22; SelectField reclassified PROVIDER_CALLBACK Sprint 24)",
@@ -94,10 +96,10 @@
   "reviewer_passed_awaiting_pr_ids": [],
   "reviewer_passed_awaiting_pr_basis": "All reviewer-passed types are either already published or in pr_dry_run_ready_ids.",
   "blocked_count": 0,
-  "excluded_count": 83,
-  "excluded_count_basis": "83 types excluded: 18 pilot allowed + 83 others = 101. Excludes all non-WORKFLOW_ROOT types (79, including SelectField reclassified PROVIDER_CALLBACK Sprint 24, PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 4 WORKFLOW_ROOT types not in allowed_pilot_types.",
-  "unclassified_workflow_root_count": 4,
-  "unclassified_workflow_root_note": "4 WORKFLOW_ROOT types not in allowed_pilot_types after Wave F: Signature, Timestamp (BLOCKED — external deps/PKI), Ofd (BLOCKED — non-standard format), FormImporter (COMPLEX — JSON import fixture). FormEditor + FormExporter added to pilot in Wave F (Sprint 24). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
+  "excluded_count": 82,
+  "excluded_count_basis": "82 types excluded: 19 pilot allowed + 82 others = 101. Excludes all non-WORKFLOW_ROOT types (79, including SelectField reclassified PROVIDER_CALLBACK Sprint 24, PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 3 WORKFLOW_ROOT types not in allowed_pilot_types.",
+  "unclassified_workflow_root_count": 3,
+  "unclassified_workflow_root_note": "3 WORKFLOW_ROOT types not in allowed_pilot_types after Wave G: Timestamp (PERMANENTLY_BLOCKED — external TSA ServerUrl required), Ofd (PERMANENTLY_BLOCKED — OFD input format, no programmatic fixture), FormImporter (WAVE_H_CANDIDATE — FormImporterJsonOptions confirmed Sprint 26, harness under assessment). Signature added to Wave G pilot in Sprint 26 (harness-verified Sprint 25). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
   "coverage_pct_of_pilot_allowed": 27.78,
   "coverage_pct_of_workflow_root": 22.73,
   "coverage_pct_of_total_types": 4.95,
@@ -114,5 +116,5 @@
     "pipeline/configs/families/pdf.yml"
   ],
   "last_verified_at": "2026-05-17T00:00:00Z",
-  "notes": "Updated Sprint 24 (2026-05-17): SelectField reclassified PROVIDER_CALLBACK (workflow_root_types 23->22, non_runnable 78->79, PROVIDER_CALLBACK 5->6). FormEditor + FormExporter added to Wave F pilot (allowed_pilot_count 16->18, excluded 85->83). Denominator conservation verified: 22+79=101, 18+83=101. Updated Sprint 22 (2026-05-16): PdfToImage reclassified ABSTRACT_BASE (workflow_root_types 24->23). XmlProcessor confirmed does not exist in LowCode namespace. Security + FormFlattener Wave E. Updated Sprint 20 (2026-05-16): corrected allowed_pilot_count 11->14, added TocGenerator/TableGenerator/ImageExtractor (Wave D, Sprint 18). Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). PR#3/5/6 assembled, PR#7 assembled (Security/FormFlattener), awaiting APPROVE_LIVE_PR."
+  "notes": "Updated Sprint 26 (2026-05-17): Signature added to Wave G pilot (allowed_pilot_count 18->19, excluded 83->82). Harness ALL_PASS Sprint 25. Conservation: 22+79=101, 19+82=101. Updated Sprint 24 (2026-05-17): SelectField reclassified PROVIDER_CALLBACK (workflow_root_types 23->22, non_runnable 78->79, PROVIDER_CALLBACK 5->6). FormEditor + FormExporter added to Wave F pilot (allowed_pilot_count 16->18, excluded 85->83). Updated Sprint 22 (2026-05-16): PdfToImage reclassified ABSTRACT_BASE (workflow_root_types 24->23). XmlProcessor confirmed does not exist in LowCode namespace. Security + FormFlattener Wave E. Updated Sprint 20 (2026-05-16): corrected allowed_pilot_count 11->14, added TocGenerator/TableGenerator/ImageExtractor (Wave D, Sprint 18). Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). PR#3/5/6 assembled, PR#7/8 assembled (Security/FormFlattener/FormEditor/FormExporter), awaiting APPROVE_LIVE_PR."
 }

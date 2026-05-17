@@ -76,6 +76,7 @@ generation:
     - FormFlattener
     - FormEditor
     - FormExporter
+    - Signature
   preferred_methods_per_type:
     Merger: Process
     Splitter: Process
@@ -95,6 +96,7 @@ generation:
     FormFlattener: Process
     FormEditor: Process
     FormExporter: Process
+    Signature: Process
 
 validation:
   require_restore: true
@@ -447,3 +449,23 @@ per_type_constraints:
       - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use FormExporterToJsonOptions instead"
       - "FORBIDDEN: Document.Form.ExportXml() or Document.Form.ExportFdf() — core API; use LowCode FormExporter.Process() instead"
       - "FORBIDDEN: SelectField as constructor argument to FormExporterToJsonOptions — use the no-param constructor"
+  Signature:
+    template_first: true
+    required:
+      - "REQUIRED: using Aspose.Pdf.LowCode; (for Signature, SignOptions, FileDataSource)"
+      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture content)"
+      - "REQUIRED: using System.IO; (for File.WriteAllBytes PFX fixture)"
+      - "REQUIRED: using System.Security.Cryptography; (for RSA.Create and CertificateRequest)"
+      - "REQUIRED: using System.Security.Cryptography.X509Certificates; (for X509ContentType.Pfx)"
+      - "REQUIRED: new SignOptions(pfxPath, password) — 2-arg constructor (path to PFX file, password string)"
+      - "REQUIRED: new Signature().Process(signOptions) — use the LowCode Signature plugin"
+      - "REQUIRED: signOptions.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
+      - "REQUIRED: signOptions.AddOutput(new FileDataSource( — signed PDF output via AddOutput(new FileDataSource(path))"
+      - "REQUIRED: RSA.Create(2048) — create self-signed PFX via RSA + CertificateRequest (no external CA/TSA needed)"
+      - "REQUIRED: cert.Export(X509ContentType.Pfx, password) — export certificate as PFX bytes for SignOptions"
+    forbidden:
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use SignOptions instead"
+      - "FORBIDDEN: PdfFileSignature — this is core Aspose.Pdf.Facades API; use LowCode Signature.Process() instead"
+      - "FORBIDDEN: Document.Save() for signing — use LowCode Signature.Process() instead"
+      - "FORBIDDEN: external TSA server URL — not needed; self-signed PFX is sufficient for Signature (unlike Timestamp)"

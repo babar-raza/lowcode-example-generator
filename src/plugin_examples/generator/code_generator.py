@@ -769,6 +769,41 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'var result = new FormExporter().Process(exportOptions);\n'
             'Console.WriteLine(result.ResultCollection.Count > 0 ? "Form exported to JSON" : "No output");\n'
         )
+    if t == "signature":
+        return (
+            'using System;\n'
+            'using System.IO;\n'
+            'using System.Security.Cryptography;\n'
+            'using System.Security.Cryptography.X509Certificates;\n'
+            'using Aspose.Pdf;\n'
+            'using Aspose.Pdf.LowCode;\n'
+            'using Aspose.Pdf.Text;\n'
+            '\n'
+            '// Create self-signed PFX fixture (no TSA/CA server required)\n'
+            'using var rsa = RSA.Create(2048);\n'
+            'var req = new CertificateRequest("cn=TestSign", rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);\n'
+            'req.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, false));\n'
+            'var cert = req.CreateSelfSigned(DateTimeOffset.Now, DateTimeOffset.Now.AddYears(1));\n'
+            'var pfxBytes = cert.Export(X509ContentType.Pfx, "testpassword");\n'
+            'File.WriteAllBytes("test.pfx", pfxBytes);\n'
+            '\n'
+            '// Create PDF input fixture\n'
+            'var doc = new Document();\n'
+            'var page = doc.Pages.Add();\n'
+            'page.Paragraphs.Add(new TextFragment("Document for digital signing"));\n'
+            'doc.Save("input.pdf");\n'
+            '\n'
+            '// Apply digital signature using Signature LowCode plugin\n'
+            'var signOptions = new SignOptions("test.pfx", "testpassword");\n'
+            'signOptions.PageNumber = 1;\n'
+            'signOptions.Reason = "Authorized Signature";\n'
+            'signOptions.Contact = "signatory@example.com";\n'
+            'signOptions.Location = "Document Processing";\n'
+            'signOptions.AddInput(new FileDataSource("input.pdf"));\n'
+            'signOptions.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new Signature().Process(signOptions);\n'
+            'Console.WriteLine(result.ResultCollection.Count > 0 ? "PDF signed successfully." : "No output produced.");\n'
+        )
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
 
@@ -1262,7 +1297,8 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
                 "Cast and use .Text instead: ((StringResult)result.ResultCollection[0]).Text"
             )
         # Detect TextFragment usage without required 'using Aspose.Pdf.Text'
-        if "TextFragment" in code and "using Aspose.Pdf.Text" not in code:
+        # Allow the fully-qualified name Aspose.Pdf.Text.TextFragment as an alternative to the using directive
+        if "TextFragment" in code and "using Aspose.Pdf.Text" not in code and "Aspose.Pdf.Text.TextFragment" not in code:
             issues.append(
                 "PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. "
                 "Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment."

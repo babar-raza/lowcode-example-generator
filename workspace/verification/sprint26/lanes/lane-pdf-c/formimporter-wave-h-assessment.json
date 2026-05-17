@@ -1,0 +1,52 @@
+{
+  "lane": "lane-pdf-c",
+  "sprint": "sprint26",
+  "date": "2026-05-17",
+  "type": "FormImporter",
+  "wave_candidate": "H",
+  "assessment_status": "BLOCKED_LIBRARY_BUG",
+  "api_discovery": {
+    "type_role": "operation_facade",
+    "method_count": 1,
+    "has_constructors": true,
+    "options_class": "FormImporterJsonOptions",
+    "options_method_count": 2,
+    "options_key_method": "AddInput(IDataSource pdfSource, IDataSource jsonSource)",
+    "options_constructor": "new FormImporterJsonOptions() — no-arg",
+    "confirmed_call_pattern": "new FormImporterJsonOptions(); opt.AddInput(pdfSource, jsonSource); opt.AddOutput(outputSource); new FormImporter().Process(opt);"
+  },
+  "harness_tests": [
+    {
+      "test": "round-trip with FormExporter JSON",
+      "fixture": "programmatic AcroForm via TextBoxField",
+      "result": "FAIL",
+      "error": "NullReferenceException: Object reference not set to an instance of an object.",
+      "internal_frame": "Aspose.Pdf.Forms.Form.#=zZQILclhNTKUB(String, String&, String&)"
+    },
+    {
+      "test": "round-trip with FullName added to JSON",
+      "fixture": "programmatic AcroForm via TextBoxField",
+      "result": "FAIL",
+      "error": "NullReferenceException",
+      "internal_frame": "Aspose.Pdf.Forms.Form.#=zZQILclhNTKUB(String, String&, String&)"
+    },
+    {
+      "test": "known-good AcroForm from PR#8 form-exporter input",
+      "fixture": "PR#8 form-exporter/input.pdf (verified AcroForm)",
+      "result": "FAIL",
+      "error": "NullReferenceException",
+      "internal_frame": "Aspose.Pdf.Forms.Form.#=zZQILclhNTKUB(String, String&, String&)"
+    }
+  ],
+  "root_cause": "Aspose.PDF 26.5.0 library defect in FormImporter JSON import. The internal method Aspose.Pdf.Forms.Form.#=zZQILclhNTKUB (obfuscated, signature: String, out String, out String — likely a field-name-to-annotation-path resolver) throws NullReferenceException for all tested AcroForm inputs. This is NOT a fixture or code pattern issue — the API compiles correctly, the usage pattern is confirmed from the API signature, and the failure is inside Aspose.PDF library code.",
+  "wave_h_decision": "DEFERRED_LIBRARY_BUG",
+  "wave_h_rationale": "FormImporter cannot be enabled as Wave H at Aspose.PDF 26.5.0. Bug must be reported to Aspose support or retested at next package version. FormExporter (Wave F) works correctly. FormImporter is the symmetric partner but has a confirmed runtime defect.",
+  "taskcard": {
+    "id": "TC-PDF-FORMIMPORTER-RETEST",
+    "title": "followup-pdf-formimporter-retest-next-version",
+    "action": "Retest FormImporter harness when Aspose.PDF is updated past 26.5.0. Re-run: workspace/fixture-validation/pdf-formimporter-harness. If PASS, enable Wave H.",
+    "blocker": "Aspose.PDF 26.5.0 NullReferenceException in Forms.Form field lookup"
+  },
+  "denominator_impact": "NONE — FormImporter remains in unclassified_workflow_root (now 3: Timestamp/BLOCKED, Ofd/BLOCKED, FormImporter/WAVE_H_DEFERRED_LIBRARY_BUG)",
+  "verdict": "FORMIMPORTER_WAVE_H_DEFERRED — API pattern confirmed, builds correctly. Runtime BLOCKED by Aspose.PDF 26.5.0 library defect. Wave H deferred until library fix."
+}

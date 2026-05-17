@@ -254,18 +254,18 @@ class TestPdfDenominator:
             "SelectField reclassified PROVIDER_CALLBACK Sprint 24 (23->22)"
         )
 
-    def test_pdf_pilot_allowed_count_is_18(self):
-        assert self.d["allowed_pilot_count"] == 18, (
-            "PDF pilot expanded to 18 types in Sprint 24 (Wave F: FormEditor/FormExporter added to Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2)"
+    def test_pdf_pilot_allowed_count_is_19(self):
+        assert self.d["allowed_pilot_count"] == 19, (
+            "PDF pilot expanded to 19 types in Sprint 26 (Wave G: Signature added to Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2)"
         )
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
-        assert isinstance(types, list) and len(types) == 18
+        assert isinstance(types, list) and len(types) == 19
         for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter",
                   "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff",
                   "TocGenerator", "TableGenerator", "ImageExtractor",
-                  "Security", "FormFlattener", "FormEditor", "FormExporter"]:
+                  "Security", "FormFlattener", "FormEditor", "FormExporter", "Signature"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_4(self):
@@ -293,14 +293,14 @@ class TestPdfDenominator:
         sha = self.d["api_catalog_sha256"]
         assert len(sha) == 64
 
-    def test_pdf_excluded_count_is_83(self):
-        assert self.d["excluded_count"] == 83, (
-            "Wave F adds FormEditor/FormExporter to pilot (18 total) — excluded 101-18=83"
+    def test_pdf_excluded_count_is_82(self):
+        assert self.d["excluded_count"] == 82, (
+            "Wave G adds Signature to pilot (19 total) — excluded 101-19=82"
         )
 
-    def test_pdf_runnable_scenarios_is_18(self):
-        assert self.d["runnable_scenarios"] == 18, (
-            "PDF pilot expanded to 18 types in Sprint 24 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2)"
+    def test_pdf_runnable_scenarios_is_19(self):
+        assert self.d["runnable_scenarios"] == 19, (
+            "PDF pilot expanded to 19 types in Sprint 26 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2 + Wave G=1)"
         )
 
 

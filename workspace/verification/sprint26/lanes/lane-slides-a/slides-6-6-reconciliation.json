@@ -1,0 +1,44 @@
+{
+  "lane": "lane-slides-a",
+  "sprint": "sprint26",
+  "date": "2026-05-17",
+  "family": "slides",
+  "purpose": "Reconcile Sprint 25 '5/5' report error vs actual 6/6 result",
+
+  "discrepancy": {
+    "sprint25_reported": "5/5 PASS (ALL_PASS)",
+    "sprint25_actual": "6/6 PASS — 6 entries in results dict, all PASS",
+    "sprint22_reported": "6/6 ALL_PASS (correct)",
+    "root_cause": "Sprint 25 evidence file was written with '5/5' in the overall_result string, but the results dictionary contains 6 entries: 2 fixture tests + 4 LowCode tests. The count in the summary string was a transcription error."
+  },
+
+  "test_breakdown": {
+    "total": 6,
+    "fixture_tests": [
+      {"name": "programmatic_pptx_single", "type": "fixture"},
+      {"name": "programmatic_pptx_pair", "type": "fixture"}
+    ],
+    "lowcode_tests": [
+      {"name": "Convert.ToPdf", "type": "LowCode"},
+      {"name": "Convert.AutoByExtension", "type": "LowCode"},
+      {"name": "Merger.Process", "type": "LowCode"},
+      {"name": "Compress.CompressEmbeddedFonts", "type": "LowCode"}
+    ]
+  },
+
+  "sprint26_rerun": {
+    "overall_result": "6/6 ALL_PASS",
+    "results": {
+      "programmatic_pptx_single": {"status": "PASS", "bytes": 34183},
+      "programmatic_pptx_pair": {"status": "PASS", "bytes_a": 33923, "bytes_b": 33928},
+      "Convert.ToPdf": {"status": "PASS", "output_bytes": 66510, "pdf_header_valid": true},
+      "Convert.AutoByExtension": {"status": "PASS", "output_bytes": 66510, "pdf_header_valid": true},
+      "Merger.Process": {"status": "PASS", "output_bytes": 49237, "slide_count": 2},
+      "Compress.CompressEmbeddedFonts": {"status": "PASS", "output_bytes": 35850}
+    }
+  },
+
+  "regression_check": "No regression. All 4 LowCode types (Convert via ToPdf/AutoByExtension + Merger + Compress) continue to pass in Sprint 26.",
+  "version_drift": "Aspose.Slides 26.5.0 — no version change from Sprint 25.",
+  "verdict": "SLIDES_6_6_ALL_PASS_CONFIRMED — Sprint 25 '5/5' was a reporting error. Actual result was 6/6 in both Sprint 25 and Sprint 26. No regression. Family remains PILOT_COMPLETE."
+}

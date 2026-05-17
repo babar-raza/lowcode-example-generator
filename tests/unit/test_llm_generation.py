@@ -2733,13 +2733,13 @@ class TestTemplateFIrstGeneration:
         )
 
     def test_all_template_first_types_work_without_llm(self):
-        """All 13 template_first PDF types must produce generated_template_first even when llm_generate=None."""
+        """All 14 template_first PDF types must produce generated_template_first even when llm_generate=None."""
         from unittest.mock import MagicMock
         from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
         for type_name in [
             "DocConverter", "XlsConverter", "Html", "Jpeg", "Tiff", "Png",
             "TocGenerator", "TableGenerator", "ImageExtractor",
-            "Security", "FormFlattener", "FormEditor", "FormExporter",
+            "Security", "FormFlattener", "FormEditor", "FormExporter", "Signature",
         ]:
             packet = _make_template_first_packet(type_name.lower(), type_name)
             example = generate_example(packet, llm_generate=None)
@@ -2782,6 +2782,37 @@ class TestTemplateFIrstGeneration:
         assert 'exportOptions.AddOutput(new FileDataSource("output.json"))' in code
         assert "result.ResultCollection.Count > 0" in code
 
+    def test_signature_template_first_works_without_llm(self):
+        """Signature template-first must produce generated_template_first even when llm_generate=None."""
+        packet = _make_template_first_packet("signature", "Signature")
+        example = generate_example(packet, llm_generate=None)
+        assert example.status == "generated_template_first", (
+            f"Signature with llm_generate=None must use template_first path, got: {example.status}"
+        )
+
+    def test_signature_template_first_bypasses_llm(self):
+        """Signature template-first returns generated_template_first status even with stub LLM."""
+        packet = _make_template_first_packet("signature", "Signature")
+        example = generate_example(packet, llm_generate=lambda p, s: "")
+        assert example.status == "generated_template_first"
+
+    def test_signature_template_contains_required_patterns(self):
+        """Signature template must use self-signed PFX, SignOptions 2-arg ctor, LowCode Signature.Process()."""
+        from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
+        packet = _make_template_first_packet("signature", "Signature")
+        code = _generate_deterministic_template_for_scenario(packet)
+        assert "SignOptions" in code, "Must use SignOptions"
+        assert "RSA.Create" in code, "Must create self-signed cert via RSA.Create"
+        assert "CertificateRequest" in code, "Must create self-signed cert via CertificateRequest"
+        assert "new Signature().Process(signOptions)" in code, "Must call LowCode Signature.Process()"
+        assert "FileDataSource" in code, "Must use FileDataSource for input/output"
+        assert "System.Security.Cryptography" in code, "Must import System.Security.Cryptography"
+        assert "X509ContentType.Pfx" in code, "Must export cert as PFX"
+        assert "AddInput" in code, "Must call AddInput on SignOptions"
+        assert "AddOutput" in code, "Must call AddOutput on SignOptions"
+        assert "result.ResultCollection.Count > 0" in code, "Must check ResultCollection.Count"
+        assert "PdfFileSignature" not in code, "Must NOT use core PdfFileSignature"
+
     def test_all_template_first_types_pass_validation_with_utf8_config(self):
         """All template-first types must produce code that passes constraint validation."""
         from plugin_examples.generator.code_generator import (
@@ -2799,7 +2830,7 @@ class TestTemplateFIrstGeneration:
             "Jpeg", "Tiff", "Png", "TableGenerator",
             "TocGenerator", "ImageExtractor",
             "Security", "FormFlattener",
-            "FormEditor", "FormExporter",
+            "FormEditor", "FormExporter", "Signature",
         ]:
             packet = MagicMock()
             packet.target_type = f"Aspose.Pdf.LowCode.{type_name}"

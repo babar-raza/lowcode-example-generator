@@ -1,0 +1,1 @@
+{"lane": "lane-e", "sprint": "sprint30", "date": "2026-05-17", "family": "email", "scope": "PILOT_COMPLETE", "published": 1, "wf_roots": 1, "post_merge_status": "NOT_RUN", "note": "Email PR#1 merged SHA 023ad66970d2. Post-merge validation not run this sprint.", "regression_check": "CLEAN", "verdict": "EMAIL_PILOT_COMPLETE_POST_MERGE_NOT_RUN"}

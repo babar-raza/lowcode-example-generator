@@ -1,0 +1,80 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "Final audit of all 6 PR packages post-cleanup",
+  "pr_packages": [
+    {
+      "id": "PR#3",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot",
+      "aspose_pdf_version": "26.4.0",
+      "examples": ["doc-converter", "html", "xls-converter"],
+      "total_files": 19,
+      "bin_obj_files": 0,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    },
+    {
+      "id": "PR#5",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr5",
+      "aspose_pdf_version": "26.4.0",
+      "examples": ["jpeg", "png", "tiff"],
+      "total_files": 25,
+      "bin_obj_files": 0,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    },
+    {
+      "id": "PR#6",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr6",
+      "aspose_pdf_version": "26.4.0",
+      "examples": ["image-extractor", "table-generator", "toc-generator"],
+      "total_files": 24,
+      "bin_obj_files": 0,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    },
+    {
+      "id": "PR#7",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr7",
+      "aspose_pdf_version": "26.5.0",
+      "examples": ["form-flattener"],
+      "total_files": 9,
+      "bin_obj_files": 0,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    },
+    {
+      "id": "PR#8",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr8",
+      "aspose_pdf_version": "26.5.0",
+      "examples": ["form-editor", "form-exporter"],
+      "total_files": 13,
+      "bin_obj_files": 0,
+      "prior_blocking_flag": "BIN_OBJ_DIRS_PRESENT_IN_PACKAGE",
+      "files_removed_this_sprint": 166,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    },
+    {
+      "id": "PR#9",
+      "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr9",
+      "aspose_pdf_version": "26.5.0",
+      "examples": ["signature"],
+      "total_files": 9,
+      "bin_obj_files": 0,
+      "prior_blocking_flag": "BIN_OBJ_DIRS_PRESENT_IN_PACKAGE",
+      "files_removed_this_sprint": 83,
+      "blocking_flags": [],
+      "verdict": "PUBLISH_AS_IS"
+    }
+  ],
+  "summary": {
+    "total_pr_packages": 6,
+    "packages_with_blocking_flags": 0,
+    "packages_publication_safe": 6,
+    "total_bin_obj_files_removed": 249,
+    "all_clean": true
+  },
+  "lane_verdict": "LANE_A_COMPLETE_ALL_PACKAGES_PUBLICATION_SAFE"
+}

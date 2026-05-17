@@ -1,0 +1,56 @@
+{
+  "lane": "lane-b",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "StrictEvidenceContractV3 implementation report",
+  "implementation": {
+    "file": "src/plugin_examples/evidence_contract.py",
+    "class": "StrictEvidenceContractV3",
+    "inherits_from": "StrictEvidenceContractV2",
+    "version": "3.0.0"
+  },
+  "category_count_reconciliation": {
+    "v1_categories": 36,
+    "v2_categories": 44,
+    "v2_docstring_claimed": 45,
+    "v2_actual": 44,
+    "discrepancy_was": "v2 docstring said '45 required categories' but COMBINED_CATEGORIES_V2 had 44",
+    "v3_categories": 45,
+    "v3_actual": 45,
+    "delta_v2_to_v3": {
+      "removed": ["sprint28_commit_proof", "sprint28_reconciliation"],
+      "updated_pattern": ["taskcard_state -> taskcard-state-after-sprint30.json"],
+      "added": ["sprint29_commit_proof", "sprint29_reconciliation", "bin_obj_cleanup"],
+      "net_change": "+1 (44 - 2 + 3 = 45)"
+    }
+  },
+  "content_checks": {
+    "v2_inherited": [
+      "git-status-final.txt: no staged source/test/config files",
+      "git-log-proof.txt: must contain Sprint 28 commit 20686d3 (overridden in v3)",
+      "final-verdict.md: must contain allowed Sprint 29 verdict (overridden in v3)",
+      "test-summary.json: failed==0 and passed>0",
+      "bundle-contract-validation-report.json: passed=true"
+    ],
+    "v3_overrides": [
+      "git-log-proof.txt: must contain Sprint 29 HEAD ef74d9b (replaces Sprint 28 check)",
+      "final-verdict.md: must contain allowed Sprint 30 verdict (7 verdicts)"
+    ],
+    "v3_new": [
+      "source-state-classification.json: sprint30_start_state must be CLEAN_FOR_SPRINT_EXECUTION",
+      "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags must be 0"
+    ],
+    "total_v3_content_checks": 7
+  },
+  "allowed_verdicts_v3": [
+    "SPRINT30_ALL_PRS_PUBLISHED_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_PARTIAL_PUBLICATION_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_BLOCKED_PACKAGE_AUDIT_FAILURES",
+    "SPRINT30_BLOCKED_SOURCE_STATE",
+    "SPRINT30_BLOCKED_EVIDENCE_CONTRACT_V3_FAILED",
+    "SPRINT30_REJECTED_UNSAFE_TO_PUBLISH"
+  ],
+  "sprint29_head_commit_checked": "ef74d9b",
+  "verdict": "EVIDENCE_CONTRACT_V3_IMPLEMENTED"
+}

@@ -1,0 +1,59 @@
+sprint: sprint30
+sprint_name: SPRINT30-LIVE-PUBLICATION-PR3-PR9-PACKAGE-CLEANUP-AND-EVIDENCE-CONTRACT-V3
+date: "2026-05-17"
+verdict: SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE
+
+git:
+  branch: main
+  sprint29_head_commit: "ef74d9b"
+  sprint29_parent_commit: "4be32c1"
+  sprint29_verified: true
+  bootstrap_pattern_classified: true
+
+evidence_contract:
+  version: "3.0.0"
+  categories_required: 45
+  categories_found: 45
+  content_checks: 7
+  test_count: 66
+  all_pass: true
+  category_count_reconciliation: "v2 had 44 (docstring claimed 45). v3 has 45 (correct)."
+
+package_cleanup:
+  pr8_files_removed: 166
+  pr9_files_removed: 83
+  total_files_removed: 249
+  packages_with_blocking_flags_after: 0
+  all_packages_clean: true
+
+tests:
+  total: 1682
+  passed: 1682
+  failed: 0
+  new_this_sprint: 20
+
+publication:
+  mode: APPROVAL_BLOCKED
+  approval_env_var_set: false
+  token_type: classic_PAT
+  prs_ready: 6
+  examples_ready: 14
+  pre_publication_blockers: NONE
+
+portfolio:
+  cells: FAMILY_COMPLETE_9_OF_9
+  words: PILOT_COMPLETE_8_OF_8
+  pdf: PARTIAL_CANARY_5_PUBLISHED_14_PR_READY
+  diagram: PILOT_COMPLETE_2_OF_2
+  email: PILOT_COMPLETE_1_OF_1
+  slides: PILOT_COMPLETE_3_OF_3
+  total_published: 28
+  total_pr_dry_run_ready: 14
+
+open_taskcards:
+  - TC-PUBLICATION-01: OPEN_APPROVAL_BLOCKED
+  - TC-PDF-FORMIMPORTER-RETEST: OPEN_WAITING_PACKAGE_VERSION_GT_26_5_0
+
+permanently_blocked:
+  - TC-PDF-TIMESTAMP: PERMANENTLY_BLOCKED_EXTERNAL_TSA
+  - TC-PDF-OFD: PERMANENTLY_BLOCKED_NO_FIXTURE

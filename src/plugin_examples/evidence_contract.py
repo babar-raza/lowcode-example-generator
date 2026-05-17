@@ -574,3 +574,273 @@ def contract_definition_v2() -> dict:
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }
+
+
+# ---------------------------------------------------------------------------
+# Contract v3 — package-audit blocking flags, source-state classification,
+#               Sprint 30 verdicts, and 45-category reconciliation (Sprint 30+)
+# ---------------------------------------------------------------------------
+
+#: Categories removed from v2 (renamed to reflect sprint29 content).
+_REQUIRED_CATEGORIES_V3_REMOVED: frozenset[str] = frozenset({
+    "sprint28_commit_proof",
+    "sprint28_reconciliation",
+})
+
+#: Pattern updates for v3 (key kept, patterns updated).
+_REQUIRED_CATEGORIES_V3_UPDATES: dict[str, list[str]] = {
+    "taskcard_state": ["taskcard-state-after-sprint30.json"],
+}
+
+#: New categories in v3: Sprint 29 commit proof + bin/obj cleanup audit.
+_REQUIRED_CATEGORIES_V3_NEW: dict[str, list[str]] = {
+    "sprint29_commit_proof": ["sprint29-commit-proof.json"],
+    "sprint29_reconciliation": ["sprint29-bundle-vs-commit-reconciliation.md"],
+    "bin_obj_cleanup": ["all-pr-packages-audit-post-cleanup.json"],
+}
+
+#: Combined v3 categories: v2 (minus removed, with updates) + new.
+#: v2 had 44 categories; v3 removes 2 (renamed) and adds 3 → 45 total.
+COMBINED_CATEGORIES_V3: dict[str, list[str]] = {
+    **{
+        k: _REQUIRED_CATEGORIES_V3_UPDATES.get(k, v)
+        for k, v in COMBINED_CATEGORIES_V2.items()
+        if k not in _REQUIRED_CATEGORIES_V3_REMOVED
+    },
+    **_REQUIRED_CATEGORIES_V3_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V3: int = len(COMBINED_CATEGORIES_V3)
+
+#: Allowed final verdicts for Sprint 30 bundles.
+ALLOWED_VERDICTS_V3: frozenset[str] = frozenset({
+    "SPRINT30_ALL_PRS_PUBLISHED_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_PARTIAL_PUBLICATION_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE",
+    "SPRINT30_BLOCKED_PACKAGE_AUDIT_FAILURES",
+    "SPRINT30_BLOCKED_SOURCE_STATE",
+    "SPRINT30_BLOCKED_EVIDENCE_CONTRACT_V3_FAILED",
+    "SPRINT30_REJECTED_UNSAFE_TO_PUBLISH",
+})
+
+#: Sprint 29 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 30.
+_SPRINT29_HEAD_COMMIT = "ef74d9b"
+
+
+class StrictEvidenceContractV3(StrictEvidenceContractV2):
+    """
+    v3 of the strict evidence contract (Sprint 30+).
+
+    Extends v2 with:
+    - 45 required categories (vs 44 in v2; reconciles the 44-vs-45 discrepancy).
+    - Sprint 29 commit ef74d9b must appear in git-log-proof.txt (replaces Sprint 28 check).
+    - Sprint 30 verdicts required in final-verdict.md (replaces Sprint 29 set).
+    - source-state-classification.json sprint30_start_state must be CLEAN_FOR_SPRINT_EXECUTION.
+    - all-pr-packages-audit-post-cleanup.json packages_with_blocking_flags must be 0.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v3: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v3 categories (45 total)
+                for category, patterns in COMBINED_CATEGORIES_V3.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of: {patterns}"
+                        )
+
+                # Secret scan (all text files)
+                for name in names:
+                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
+                        try:
+                            content = zf.read(name).decode("utf-8", errors="replace")
+                            for pattern in SECRET_PATTERNS:
+                                if pattern.search(content):
+                                    violation = (
+                                        f"v3: Possible secret in {name}: "
+                                        f"pattern {pattern.pattern}"
+                                    )
+                                    result.secret_violations.append(violation)
+                                    result.failures.append(violation)
+                        except Exception:
+                            pass
+
+                # v3 content-level checks
+                self._validate_content_v3(zf, names, result)
+
+        except zipfile.BadZipFile as e:
+            result.failures.append(f"ZIP is invalid/corrupt: {e}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        result.passed = not result.failures
+        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
+        return result
+
+    # ------------------------------------------------------------------
+    # v3 content validation (calls overridden v2 helpers + new v3 checks)
+    # ------------------------------------------------------------------
+
+    def _validate_content_v3(
+        self,
+        zf: zipfile.ZipFile,
+        names: list[str],
+        result: ContractResult,
+    ) -> None:
+        name_map: dict[str, str] = {Path(n).name: n for n in names}
+        self._check_git_status_final(zf, name_map, result)      # from v2 (unchanged)
+        self._check_git_log_proof(zf, name_map, result)          # overridden below
+        self._check_final_verdict(zf, name_map, result)          # overridden below
+        self._check_test_summary(zf, name_map, result)           # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result) # from v2 (unchanged)
+        self._check_source_state_sprint30_clean(zf, name_map, result)
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)
+
+    def _check_git_log_proof(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v3 requires Sprint 29 HEAD commit ef74d9b in git-log-proof.txt."""
+        content = self._read_text(zf, name_map, "git-log-proof.txt")
+        if content is None:
+            return
+        if not content.strip():
+            result.failures.append("v3: git-log-proof.txt is empty — no commits recorded.")
+            return
+        if _SPRINT29_HEAD_COMMIT not in content:
+            result.failures.append(
+                f"v3: git-log-proof.txt does not contain Sprint 29 HEAD commit "
+                f"{_SPRINT29_HEAD_COMMIT}. "
+                "Sprint 29 must be committed before Sprint 30 bundle is created."
+            )
+
+    def _check_final_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v3 uses Sprint 30 allowed verdicts."""
+        content = self._read_text(zf, name_map, "final-verdict.md")
+        if content is None:
+            return
+        if "IN_PROGRESS" in content.upper():
+            result.failures.append(
+                "v3: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
+            )
+            return
+        if not any(v in content for v in ALLOWED_VERDICTS_V3):
+            result.failures.append(
+                f"v3: final-verdict.md does not contain any allowed Sprint 30 verdict. "
+                f"Allowed: {sorted(ALLOWED_VERDICTS_V3)}"
+            )
+
+    def _check_source_state_sprint30_clean(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v3: source-state-classification.json must confirm clean sprint start."""
+        content = self._read_text(zf, name_map, "source-state-classification.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append("v3: source-state-classification.json is not valid JSON.")
+            return
+        state = data.get("sprint30_start_state", "")
+        if state != "CLEAN_FOR_SPRINT_EXECUTION":
+            result.failures.append(
+                f"v3: source-state-classification.json sprint30_start_state is '{state}' — "
+                "must be 'CLEAN_FOR_SPRINT_EXECUTION' to confirm no source modifications at sprint start."
+            )
+
+    def _check_package_audit_no_blocking_flags(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v3: all-pr-packages-audit-post-cleanup.json must report 0 packages with blocking flags."""
+        content = self._read_text(zf, name_map, "all-pr-packages-audit-post-cleanup.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v3: all-pr-packages-audit-post-cleanup.json is not valid JSON."
+            )
+            return
+        blocking = data.get("summary", {}).get("packages_with_blocking_flags", -1)
+        if blocking != 0:
+            result.failures.append(
+                f"v3: all-pr-packages-audit-post-cleanup.json packages_with_blocking_flags={blocking} — "
+                "must be 0 before publication. Clean all bin/obj artifacts first."
+            )
+
+
+def contract_definition_v3() -> dict:
+    """Return the v3 bundle contract definition as a serialisable dict."""
+    return {
+        "contract_version": "3.0.0",
+        "sprint": "sprint30+",
+        "description": (
+            "Strict evidence contract v3 for LowCode sprint bundles. "
+            "Validates category presence, state correctness, package audit cleanliness, "
+            "and source-state classification. "
+            "45 categories (reconciles 44-vs-45 discrepancy from v2). "
+            "Sprint 30 verdicts required."
+        ),
+        "required_categories": {
+            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V3.items()
+        },
+        "min_categories_required": MIN_CATEGORIES_REQUIRED_V3,
+        "content_checks_enabled": True,
+        "content_checks": [
+            "git-status-final.txt: no staged source/test/config files",
+            f"git-log-proof.txt: must contain Sprint 29 HEAD {_SPRINT29_HEAD_COMMIT}",
+            "final-verdict.md: must contain an allowed Sprint 30 verdict",
+            "test-summary.json: failed==0 and passed>0",
+            "bundle-contract-validation-report.json: passed=true",
+            "source-state-classification.json: sprint30_start_state==CLEAN_FOR_SPRINT_EXECUTION",
+            "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
+        ],
+        "category_count_reconciliation": {
+            "v2_categories": MIN_CATEGORIES_REQUIRED_V2,
+            "v3_categories": MIN_CATEGORIES_REQUIRED_V3,
+            "categories_removed_from_v2": sorted(_REQUIRED_CATEGORIES_V3_REMOVED),
+            "categories_added_in_v3": sorted(_REQUIRED_CATEGORIES_V3_NEW.keys()),
+            "note": "v2 had 44 categories (docstring said 45 — that was wrong). v3 has 45.",
+        },
+        "secret_scanning_enabled": True,
+        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V3),
+        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+    }

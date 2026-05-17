@@ -21,13 +21,18 @@ import pytest
 
 from plugin_examples.evidence_contract import (
     ALLOWED_VERDICTS_V2,
+    ALLOWED_VERDICTS_V3,
     COMBINED_CATEGORIES_V2,
+    COMBINED_CATEGORIES_V3,
     MIN_CATEGORIES_REQUIRED_V2,
+    MIN_CATEGORIES_REQUIRED_V3,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
+    StrictEvidenceContractV3,
     contract_definition,
     contract_definition_v2,
+    contract_definition_v3,
 )
 
 
@@ -630,3 +635,274 @@ class TestStrictEvidenceContractV2Accepts:
         # Should not fail on git status check (no staged src/ tests/ pipeline/ files)
         status_failures = [f for f in result.failures if "staged" in f.lower() and "src/" in f]
         assert len(status_failures) == 0
+
+
+# ---------------------------------------------------------------------------
+# Helper for v3 complete bundle
+# ---------------------------------------------------------------------------
+
+def _minimal_v3_complete_files() -> dict[str, str]:
+    """Return files satisfying all 45 v3 required categories with valid content."""
+    files = dict(_minimal_v2_complete_files())
+    # Remove v2 sprint28 keys (renamed in v3)
+    files.pop("sprint28-commit-proof.json", None)
+    files.pop("sprint28-bundle-vs-commit-reconciliation.md", None)
+    # Update taskcard state to sprint30
+    files.pop("taskcard-state-after-sprint29.json", None)
+    files["taskcard-state-after-sprint30.json"] = json.dumps({"sprint": "sprint30"})
+    # v3 new categories
+    files["sprint29-commit-proof.json"] = json.dumps({
+        "head_commit": {"short": "ef74d9b"},
+        "ancestry_chain": ["ef74d9b", "4be32c1", "20686d3"],
+        "verdict": "SPRINT29_COMMITS_VERIFIED",
+    })
+    files["sprint29-bundle-vs-commit-reconciliation.md"] = (
+        "# Sprint 29 Bundle vs Commit Reconciliation\nBOOTSTRAP_PATTERN_EXPECTED"
+    )
+    files["all-pr-packages-audit-post-cleanup.json"] = json.dumps({
+        "summary": {
+            "packages_with_blocking_flags": 0,
+            "packages_publication_safe": 6,
+            "all_clean": True,
+        }
+    })
+    # v3 git log must contain ef74d9b (Sprint 29 HEAD)
+    files["git-log-proof.txt"] = (
+        "ef74d9b chore(sprint29-bundle): add v2-validated evidence bundle\n"
+        "4be32c1 feat(sprint29): SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE\n"
+        "20686d3 feat(sprint28): SPRINT28_STRICT_EVIDENCE_CONTRACT\n"
+    )
+    # v3 final verdict must be a Sprint 30 verdict
+    files["final-verdict.md"] = (
+        "# SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE\n\nAll packages clean."
+    )
+    # v3 source-state-classification.json must have sprint30_start_state
+    files["source-state-classification.json"] = json.dumps({
+        "sprint30_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+        "source_changes_check": {"src_modified": False},
+    })
+    return files
+
+
+# ---------------------------------------------------------------------------
+# v3 contract rejects invalid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV3Rejects:
+    """v3 contract must reject bundles missing v3-specific requirements."""
+
+    def test_v3_rejects_missing_sprint29_commit_proof(self, tmp_path):
+        """Missing sprint29-commit-proof.json must fail v3."""
+        files = _minimal_v3_complete_files()
+        del files["sprint29-commit-proof.json"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert "sprint29_commit_proof" in result.categories_missing
+
+    def test_v3_rejects_missing_sprint29_reconciliation(self, tmp_path):
+        """Missing sprint29-bundle-vs-commit-reconciliation.md must fail v3."""
+        files = _minimal_v3_complete_files()
+        del files["sprint29-bundle-vs-commit-reconciliation.md"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert "sprint29_reconciliation" in result.categories_missing
+
+    def test_v3_rejects_missing_bin_obj_cleanup_audit(self, tmp_path):
+        """Missing all-pr-packages-audit-post-cleanup.json must fail v3."""
+        files = _minimal_v3_complete_files()
+        del files["all-pr-packages-audit-post-cleanup.json"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert "bin_obj_cleanup" in result.categories_missing
+
+    def test_v3_rejects_missing_sprint30_taskcard_state(self, tmp_path):
+        """Missing taskcard-state-after-sprint30.json must fail v3."""
+        files = _minimal_v3_complete_files()
+        del files["taskcard-state-after-sprint30.json"]
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert "taskcard_state" in result.categories_missing
+
+    def test_v3_rejects_git_log_without_sprint29_commit(self, tmp_path):
+        """git-log-proof.txt without ef74d9b must fail v3."""
+        files = _minimal_v3_complete_files()
+        files["git-log-proof.txt"] = "20686d3 feat(sprint28): only sprint28 here\n"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert any("ef74d9b" in f for f in result.failures)
+
+    def test_v3_rejects_package_audit_with_blocking_flags(self, tmp_path):
+        """Package audit with packages_with_blocking_flags > 0 must fail v3."""
+        files = _minimal_v3_complete_files()
+        files["all-pr-packages-audit-post-cleanup.json"] = json.dumps({
+            "summary": {
+                "packages_with_blocking_flags": 2,
+                "packages_publication_safe": 4,
+            }
+        })
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert any("packages_with_blocking_flags" in f for f in result.failures)
+
+    def test_v3_rejects_dirty_source_state_classification(self, tmp_path):
+        """source-state-classification.json with wrong sprint30_start_state must fail v3."""
+        files = _minimal_v3_complete_files()
+        files["source-state-classification.json"] = json.dumps({
+            "sprint30_start_state": "DIRTY_SOURCE_MODIFICATIONS_PRESENT"
+        })
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert any("sprint30_start_state" in f for f in result.failures)
+
+    def test_v3_rejects_sprint29_verdict_in_final_verdict(self, tmp_path):
+        """final-verdict.md with a Sprint 29 verdict (not Sprint 30) must fail v3."""
+        files = _minimal_v3_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE"
+        )
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert any("Sprint 30" in f for f in result.failures)
+
+    def test_v3_rejects_in_progress_verdict(self, tmp_path):
+        """final-verdict.md with IN_PROGRESS must fail v3."""
+        files = _minimal_v3_complete_files()
+        files["final-verdict.md"] = "# SPRINT30_IN_PROGRESS — still running"
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        assert any("IN_PROGRESS" in f for f in result.failures)
+
+    def test_v3_rejects_sprint29_style_bundle(self, tmp_path):
+        """A Sprint 29 v2-complete bundle must fail v3 (missing sprint30 categories)."""
+        files = _minimal_v2_complete_files()
+        zip_path = tmp_path / "sprint29-style.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert not result.passed
+        missing = set(result.categories_missing)
+        assert "bin_obj_cleanup" in missing or "sprint29_commit_proof" in missing
+
+    def test_v3_requires_more_categories_than_v2(self):
+        """v3 must require more categories than v2."""
+        assert MIN_CATEGORIES_REQUIRED_V3 > MIN_CATEGORIES_REQUIRED_V2, (
+            f"v3 ({MIN_CATEGORIES_REQUIRED_V3}) must have more categories than v2 ({MIN_CATEGORIES_REQUIRED_V2})"
+        )
+
+    def test_v3_min_categories_matches_combined(self):
+        """MIN_CATEGORIES_REQUIRED_V3 must equal len(COMBINED_CATEGORIES_V3)."""
+        assert MIN_CATEGORIES_REQUIRED_V3 == len(COMBINED_CATEGORIES_V3)
+
+    def test_v3_has_exactly_45_categories(self):
+        """v3 must have exactly 45 categories (resolves 44-vs-45 discrepancy)."""
+        assert MIN_CATEGORIES_REQUIRED_V3 == 45, (
+            f"v3 must have 45 categories, got {MIN_CATEGORIES_REQUIRED_V3}"
+        )
+
+    def test_v3_rejects_relative_zip_path(self, tmp_path):
+        """v3 validate_zip must fail if given a relative path."""
+        files = _minimal_v3_complete_files()
+        zip_path = tmp_path / "bundle.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        import os
+        rel_path = os.path.relpath(str(zip_path))
+        result = StrictEvidenceContractV3().validate_zip(rel_path)
+        assert not result.passed
+
+
+# ---------------------------------------------------------------------------
+# v3 contract accepts valid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV3Accepts:
+    """v3 contract must accept correctly formed Sprint 30 bundles."""
+
+    def test_v3_accepts_complete_approval_blocked_bundle(self, tmp_path):
+        """A complete Sprint 30 approval-blocked bundle must pass v3."""
+        files = _minimal_v3_complete_files()
+        zip_path = tmp_path / "sprint30-complete.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert result.passed, f"v3 should pass but failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert result.categories_missing == []
+        assert len(result.categories_found) == MIN_CATEGORIES_REQUIRED_V3
+
+    def test_v3_accepts_published_verdict(self, tmp_path):
+        """A bundle with a Sprint 30 published verdict must pass v3."""
+        files = _minimal_v3_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT30_ALL_PRS_PUBLISHED_EVIDENCE_V3_COMPLETE\n\n"
+            "All 6 PRs published successfully."
+        )
+        zip_path = tmp_path / "sprint30-published.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV3().validate_zip(zip_path)
+        assert result.passed, f"v3 should pass but failed: {result.failures}"
+
+    def test_v3_contract_definition_version(self):
+        """contract_definition_v3 must return version 3.0.0."""
+        defn = contract_definition_v3()
+        assert defn["contract_version"] == "3.0.0"
+
+    def test_v3_contract_definition_has_all_combined_categories(self):
+        """contract_definition_v3 must include all COMBINED_CATEGORIES_V3 keys."""
+        defn = contract_definition_v3()
+        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V3.keys())
+
+    def test_v3_contract_definition_lists_allowed_verdicts(self):
+        """contract_definition_v3 must list all allowed Sprint 30 verdicts."""
+        defn = contract_definition_v3()
+        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V3)
+
+    def test_v3_contract_definition_documents_category_reconciliation(self):
+        """contract_definition_v3 must document the 44-vs-45 reconciliation."""
+        defn = contract_definition_v3()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v2_categories"] == 44
+        assert recon["v3_categories"] == 45
+        assert "sprint28_commit_proof" in recon["categories_removed_from_v2"]
+        assert "bin_obj_cleanup" in recon["categories_added_in_v3"]

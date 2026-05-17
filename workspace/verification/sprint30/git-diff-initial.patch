@@ -1,0 +1,167 @@
+ .gitignore                                         |    2 +
+ src/plugin_examples/evidence_contract.py           |  270 +++
+ tests/unit/test_evidence_contract.py               |  276 +++
+ .../bin/Debug/net8.0/signature-harness.dll         |  Bin 7680 -> 7680 bytes
+ .../bin/Debug/net8.0/signature-harness.exe         |  Bin 151552 -> 151552 bytes
+ .../bin/Debug/net8.0/signature-harness.pdb         |  Bin 14880 -> 14880 bytes
+ .../pdf-signature-harness/input.pdf                |  Bin 29358 -> 29358 bytes
+ .../obj/Debug/net8.0/apphost.exe                   |  Bin 151552 -> 151552 bytes
+ .../obj/Debug/net8.0/ref/signature-harness.dll     |  Bin 5632 -> 5632 bytes
+ .../obj/Debug/net8.0/refint/signature-harness.dll  |  Bin 5632 -> 5632 bytes
+ .../Debug/net8.0/signature-harness.AssemblyInfo.cs |    2 +-
+ .../signature-harness.AssemblyInfoInputs.cache     |    2 +-
+ .../obj/Debug/net8.0/signature-harness.dll         |  Bin 7680 -> 7680 bytes
+ .../obj/Debug/net8.0/signature-harness.pdb         |  Bin 14880 -> 14880 bytes
+ .../Debug/net8.0/signature-harness.sourcelink.json |    2 +-
+ .../pdf-signature-harness/output-signed.pdf        |  Bin 616285 -> 616258 bytes
+ .../pdf-signature-harness/test.pfx                 |  Bin 2374 -> 2374 bytes
+ workspace/manifests/example-index.json             |  285 ++-
+ workspace/manifests/scenario-catalog.json          |   40 +-
+ .../form-editor/bin/Debug/net8.0/Aspose.PDF.dll    |  Bin 60184432 -> 0 bytes
+ .../bin/Debug/net8.0/Google.Protobuf.dll           |  Bin 489568 -> 0 bytes
+ .../bin/Debug/net8.0/Markdig.Signed.dll            |  Bin 479232 -> 0 bytes
+ .../Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll |  Bin 18736 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Bcl.HashCode.dll    |  Bin 19752 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Bcl.Memory.dll      |  Bin 58152 -> 0 bytes
+ .../Microsoft.Extensions.AI.Abstractions.dll       |  Bin 671264 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Extensions.AI.dll   |  Bin 411720 -> 0 bytes
+ .../Microsoft.Extensions.Caching.Abstractions.dll  |  Bin 37128 -> 0 bytes
+ ...osoft.Extensions.DataIngestion.Abstractions.dll |  Bin 62024 -> 0 bytes
+ .../Microsoft.Extensions.DataIngestion.Markdig.dll |  Bin 32288 -> 0 bytes
+ .../net8.0/Microsoft.Extensions.DataIngestion.dll  |  Bin 99872 -> 0 bytes
+ ...Extensions.DependencyInjection.Abstractions.dll |  Bin 65336 -> 0 bytes
+ .../Microsoft.Extensions.DependencyModel.dll       |  Bin 79664 -> 0 bytes
+ .../Microsoft.Extensions.Logging.Abstractions.dll  |  Bin 66320 -> 0 bytes
+ .../net8.0/Microsoft.Extensions.Primitives.dll     |  Bin 44296 -> 0 bytes
+ ...icrosoft.Extensions.VectorData.Abstractions.dll |  Bin 98336 -> 0 bytes
+ .../Microsoft.ML.Tokenizers.Data.Cl100kBase.dll    |  Bin 538896 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.ML.Tokenizers.dll   |  Bin 325896 -> 0 bytes
+ .../Debug/net8.0/Microsoft.Win32.SystemEvents.dll  |  Bin 25880 -> 0 bytes
+ .../bin/Debug/net8.0/Newtonsoft.Json.dll           |  Bin 712464 -> 0 bytes
+ .../System.Configuration.ConfigurationManager.dll  |  Bin 442632 -> 0 bytes
+ .../net8.0/System.Diagnostics.DiagnosticSource.dll |  Bin 192312 -> 0 bytes
+ .../Debug/net8.0/System.Diagnostics.EventLog.dll   |  Bin 51872 -> 0 bytes
+ .../System.Diagnostics.PerformanceCounter.dll      |  Bin 51872 -> 0 bytes
+ .../bin/Debug/net8.0/System.Drawing.Common.dll     |  Bin 610992 -> 0 bytes
+ .../bin/Debug/net8.0/System.IO.Pipelines.dll       |  Bin 77616 -> 0 bytes
+ .../Debug/net8.0/System.Linq.AsyncEnumerable.dll   |  Bin 456976 -> 0 bytes
+ .../bin/Debug/net8.0/System.Numerics.Tensors.dll   |  Bin 546576 -> 0 bytes
+ .../net8.0/System.Security.Cryptography.Pkcs.dll   |  Bin 264864 -> 0 bytes
+ .../System.Security.Cryptography.ProtectedData.dll |  Bin 36616 -> 0 bytes
+ .../Debug/net8.0/System.Security.Permissions.dll   |  Bin 114448 -> 0 bytes
+ .../bin/Debug/net8.0/System.Text.Encodings.Web.dll |  Bin 66312 -> 0 bytes
+ .../bin/Debug/net8.0/System.Text.Json.dll          |  Bin 677136 -> 0 bytes
+ .../bin/Debug/net8.0/System.Threading.Channels.dll |  Bin 66824 -> 0 bytes
+ .../bin/Debug/net8.0/System.Windows.Extensions.dll |  Bin 27424 -> 0 bytes
+ .../bin/Debug/net8.0/form-editor.deps.json         |  703 -------
+ .../form-editor/bin/Debug/net8.0/form-editor.dll   |  Bin 5632 -> 0 bytes
+ .../form-editor/bin/Debug/net8.0/form-editor.exe   |  Bin 151552 -> 0 bytes
+ .../form-editor/bin/Debug/net8.0/form-editor.pdb   |  Bin 14164 -> 0 bytes
+ .../Debug/net8.0/form-editor.runtimeconfig.json    |   12 -
+ .../lib/net8.0/System.Text.Encodings.Web.dll       |  Bin 66320 -> 0 bytes
+ .../lib/net8.0/Microsoft.Win32.SystemEvents.dll    |  Bin 58632 -> 0 bytes
+ .../System.Diagnostics.EventLog.Messages.dll       |  Bin 801048 -> 0 bytes
+ .../win/lib/net8.0/System.Diagnostics.EventLog.dll |  Bin 171784 -> 0 bytes
+ .../System.Diagnostics.PerformanceCounter.dll      |  Bin 134920 -> 0 bytes
+ .../net8.0/System.Security.Cryptography.Pkcs.dll   |  Bin 319776 -> 0 bytes
+ .../win/lib/net8.0/System.Windows.Extensions.dll   |  Bin 72456 -> 0 bytes
+ .../.NETCoreApp,Version=v8.0.AssemblyAttributes.cs |    4 -
+ .../form-editor/obj/Debug/net8.0/apphost.exe       |  Bin 151552 -> 0 bytes
+ .../obj/Debug/net8.0/form-edi.4E83F4C2.Up2Date     |    0
+ .../obj/Debug/net8.0/form-editor.AssemblyInfo.cs   |   22 -
+ .../net8.0/form-editor.AssemblyInfoInputs.cache    |    1 -
+ ...ditor.GeneratedMSBuildEditorConfig.editorconfig |   17 -
+ .../obj/Debug/net8.0/form-editor.GlobalUsings.g.cs |    8 -
+ .../obj/Debug/net8.0/form-editor.assets.cache      |  Bin 26315 -> 0 bytes
+ .../form-editor.csproj.AssemblyReference.cache     |  Bin 18092 -> 0 bytes
+ .../form-editor.csproj.CoreCompileInputs.cache     |    1 -
+ .../net8.0/form-editor.csproj.FileListAbsolute.txt |   60 -
+ .../form-editor/obj/Debug/net8.0/form-editor.dll   |  Bin 5632 -> 0 bytes
+ .../net8.0/form-editor.genruntimeconfig.cache      |    1 -
+ .../form-editor/obj/Debug/net8.0/form-editor.pdb   |  Bin 14164 -> 0 bytes
+ .../obj/Debug/net8.0/form-editor.sourcelink.json   |    1 -
+ .../obj/Debug/net8.0/ref/form-editor.dll           |  Bin 5632 -> 0 bytes
+ .../obj/Debug/net8.0/refint/form-editor.dll        |  Bin 5632 -> 0 bytes
+ .../obj/form-editor.csproj.nuget.dgspec.json       |  102 -
+ .../obj/form-editor.csproj.nuget.g.props           |   16 -
+ .../obj/form-editor.csproj.nuget.g.targets         |    7 -
+ .../lowcode/form-editor/obj/project.assets.json    | 2131 --------------------
+ .../lowcode/form-editor/obj/project.nuget.cache    |   54 -
+ .../form-exporter/bin/Debug/net8.0/Aspose.PDF.dll  |  Bin 60184432 -> 0 bytes
+ .../bin/Debug/net8.0/Google.Protobuf.dll           |  Bin 489568 -> 0 bytes
+ .../bin/Debug/net8.0/Markdig.Signed.dll            |  Bin 479232 -> 0 bytes
+ .../Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll |  Bin 18736 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Bcl.HashCode.dll    |  Bin 19752 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Bcl.Memory.dll      |  Bin 58152 -> 0 bytes
+ .../Microsoft.Extensions.AI.Abstractions.dll       |  Bin 671264 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.Extensions.AI.dll   |  Bin 411720 -> 0 bytes
+ .../Microsoft.Extensions.Caching.Abstractions.dll  |  Bin 37128 -> 0 bytes
+ ...osoft.Extensions.DataIngestion.Abstractions.dll |  Bin 62024 -> 0 bytes
+ .../Microsoft.Extensions.DataIngestion.Markdig.dll |  Bin 32288 -> 0 bytes
+ .../net8.0/Microsoft.Extensions.DataIngestion.dll  |  Bin 99872 -> 0 bytes
+ ...Extensions.DependencyInjection.Abstractions.dll |  Bin 65336 -> 0 bytes
+ .../Microsoft.Extensions.DependencyModel.dll       |  Bin 79664 -> 0 bytes
+ .../Microsoft.Extensions.Logging.Abstractions.dll  |  Bin 66320 -> 0 bytes
+ .../net8.0/Microsoft.Extensions.Primitives.dll     |  Bin 44296 -> 0 bytes
+ ...icrosoft.Extensions.VectorData.Abstractions.dll |  Bin 98336 -> 0 bytes
+ .../Microsoft.ML.Tokenizers.Data.Cl100kBase.dll    |  Bin 538896 -> 0 bytes
+ .../bin/Debug/net8.0/Microsoft.ML.Tokenizers.dll   |  Bin 325896 -> 0 bytes
+ .../Debug/net8.0/Microsoft.Win32.SystemEvents.dll  |  Bin 25880 -> 0 bytes
+ .../bin/Debug/net8.0/Newtonsoft.Json.dll           |  Bin 712464 -> 0 bytes
+ .../System.Configuration.ConfigurationManager.dll  |  Bin 442632 -> 0 bytes
+ .../net8.0/System.Diagnostics.DiagnosticSource.dll |  Bin 192312 -> 0 bytes
+ .../Debug/net8.0/System.Diagnostics.EventLog.dll   |  Bin 51872 -> 0 bytes
+ .../System.Diagnostics.PerformanceCounter.dll      |  Bin 51872 -> 0 bytes
+ .../bin/Debug/net8.0/System.Drawing.Common.dll     |  Bin 610992 -> 0 bytes
+ .../bin/Debug/net8.0/System.IO.Pipelines.dll       |  Bin 77616 -> 0 bytes
+ .../Debug/net8.0/System.Linq.AsyncEnumerable.dll   |  Bin 456976 -> 0 bytes
+ .../bin/Debug/net8.0/System.Numerics.Tensors.dll   |  Bin 546576 -> 0 bytes
+ .../net8.0/System.Security.Cryptography.Pkcs.dll   |  Bin 264864 -> 0 bytes
+ .../System.Security.Cryptography.ProtectedData.dll |  Bin 36616 -> 0 bytes
+ .../Debug/net8.0/System.Security.Permissions.dll   |  Bin 114448 -> 0 bytes
+ .../bin/Debug/net8.0/System.Text.Encodings.Web.dll |  Bin 66312 -> 0 bytes
+ .../bin/Debug/net8.0/System.Text.Json.dll          |  Bin 677136 -> 0 bytes
+ .../bin/Debug/net8.0/System.Threading.Channels.dll |  Bin 66824 -> 0 bytes
+ .../bin/Debug/net8.0/System.Windows.Extensions.dll |  Bin 27424 -> 0 bytes
+ .../bin/Debug/net8.0/form-exporter.deps.json       |  703 -------
+ .../bin/Debug/net8.0/form-exporter.dll             |  Bin 5632 -> 0 bytes
+ .../bin/Debug/net8.0/form-exporter.exe             |  Bin 151552 -> 0 bytes
+ .../bin/Debug/net8.0/form-exporter.pdb             |  Bin 14172 -> 0 bytes
+ .../Debug/net8.0/form-exporter.runtimeconfig.json  |   12 -
+ .../lib/net8.0/System.Text.Encodings.Web.dll       |  Bin 66320 -> 0 bytes
+ .../lib/net8.0/Microsoft.Win32.SystemEvents.dll    |  Bin 58632 -> 0 bytes
+ .../System.Diagnostics.EventLog.Messages.dll       |  Bin 801048 -> 0 bytes
+ .../win/lib/net8.0/System.Diagnostics.EventLog.dll |  Bin 171784 -> 0 bytes
+ .../System.Diagnostics.PerformanceCounter.dll      |  Bin 134920 -> 0 bytes
+ .../net8.0/System.Security.Cryptography.Pkcs.dll   |  Bin 319776 -> 0 bytes
+ .../win/lib/net8.0/System.Windows.Extensions.dll   |  Bin 72456 -> 0 bytes
+ .../.NETCoreApp,Version=v8.0.AssemblyAttributes.cs |    4 -
+ .../form-exporter/obj/Debug/net8.0/apphost.exe     |  Bin 151552 -> 0 bytes
+ .../obj/Debug/net8.0/form-exp.19001848.Up2Date     |    0
+ .../obj/Debug/net8.0/form-exporter.AssemblyInfo.cs |   22 -
+ .../net8.0/form-exporter.AssemblyInfoInputs.cache  |    1 -
+ ...orter.GeneratedMSBuildEditorConfig.editorconfig |   17 -
+ .../Debug/net8.0/form-exporter.GlobalUsings.g.cs   |    8 -
+ .../obj/Debug/net8.0/form-exporter.assets.cache    |  Bin 26315 -> 0 bytes
+ .../form-exporter.csproj.AssemblyReference.cache   |  Bin 18092 -> 0 bytes
+ .../form-exporter.csproj.CoreCompileInputs.cache   |    1 -
+ .../form-exporter.csproj.FileListAbsolute.txt      |   60 -
+ .../obj/Debug/net8.0/form-exporter.dll             |  Bin 5632 -> 0 bytes
+ .../net8.0/form-exporter.genruntimeconfig.cache    |    1 -
+ .../obj/Debug/net8.0/form-exporter.pdb             |  Bin 14172 -> 0 bytes
+ .../obj/Debug/net8.0/form-exporter.sourcelink.json |    1 -
+ .../obj/Debug/net8.0/ref/form-exporter.dll         |  Bin 5632 -> 0 bytes
+ .../obj/Debug/net8.0/refint/form-exporter.dll      |  Bin 5632 -> 0 bytes
+ .../obj/form-exporter.csproj.nuget.dgspec.json     |  102 -
+ .../obj/form-exporter.csproj.nuget.g.props         |   16 -
+ .../obj/form-exporter.csproj.nuget.g.targets       |    7 -
+ .../lowcode/form-exporter/obj/project.assets.json  | 2131 --------------------
+ .../lowcode/form-exporter/obj/project.nuget.cache  |   54 -
+ .../latest/cells-readme-backfill-simulation.json   |    4 +-
+ .../latest/cells-root-readme-audit.json            |    2 +-
+ .../latest/cells-root-readme-render-result.json    |    2 +-
+ workspace/verification/latest/release-status.json  |    2 +-
+ .../latest/words-readme-backfill-simulation.json   |    4 +-
+ .../latest/words-root-readme-audit.json            |    2 +-
+ .../latest/words-root-readme-render-result.json    |    2 +-
+ 166 files changed, 839 insertions(+), 6338 deletions(-)

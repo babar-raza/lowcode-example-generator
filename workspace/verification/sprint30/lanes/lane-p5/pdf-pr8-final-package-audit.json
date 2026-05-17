@@ -1,0 +1,18 @@
+{
+  "lane": "lane-p5",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "pr_id": "PR#8",
+  "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr8",
+  "aspose_pdf_version": "26.5.0",
+  "examples": ["form-editor", "form-exporter"],
+  "total_files": 13,
+  "bin_obj_files": 0,
+  "prior_blocking_flag": "BIN_OBJ_DIRS_PRESENT_IN_PACKAGE",
+  "blocking_flag_resolved_in": "sprint30/lane-a",
+  "files_removed": 166,
+  "blocking_flags": [],
+  "version_policy": "PUBLISH_AS_IS",
+  "publication_mode": "APPROVAL_BLOCKED",
+  "verdict": "PACKAGE_CLEAN_APPROVAL_BLOCKED"
+}

@@ -1,0 +1,91 @@
+{
+  "lane": "lane-0",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "Classification of all dirty files at Sprint 30 start",
+  "total_dirty_files": 24,
+  "untracked_dirs": 1,
+  "classification_verdict": "NO_SOURCE_CHANGES — all dirty state is binary-build, runtime-output, or generated-manifest; no src/tests/pipeline modifications",
+  "categories": {
+    "binary_build_artifacts": {
+      "description": "Compiled binaries, PDB debug symbols, intermediate objects from dotnet build of pdf-signature-harness",
+      "files": [
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe",
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json"
+      ],
+      "count": 11,
+      "blocking": false,
+      "classification": "BINARY_BUILD_ARTIFACT_EXPECTED"
+    },
+    "runtime_output_files": {
+      "description": "Runtime test inputs/outputs generated during harness execution — PDF input, signed PDF output, PFX certificate fixture",
+      "files": [
+        "workspace/fixture-validation/pdf-signature-harness/input.pdf",
+        "workspace/fixture-validation/pdf-signature-harness/output-signed.pdf",
+        "workspace/fixture-validation/pdf-signature-harness/test.pfx"
+      ],
+      "count": 3,
+      "blocking": false,
+      "classification": "RUNTIME_ARTIFACT_EXPECTED"
+    },
+    "generated_manifests": {
+      "description": "Auto-generated pipeline manifests updated on each run — example index and scenario catalog",
+      "files": [
+        "workspace/manifests/example-index.json",
+        "workspace/manifests/scenario-catalog.json"
+      ],
+      "count": 2,
+      "blocking": false,
+      "classification": "GENERATED_MANIFEST_EXPECTED"
+    },
+    "generated_verification_snapshots": {
+      "description": "workspace/verification/latest/ JSON snapshots auto-written by release-status and readme backfill runs",
+      "files": [
+        "workspace/verification/latest/cells-readme-backfill-simulation.json",
+        "workspace/verification/latest/cells-root-readme-audit.json",
+        "workspace/verification/latest/cells-root-readme-render-result.json",
+        "workspace/verification/latest/release-status.json",
+        "workspace/verification/latest/words-readme-backfill-simulation.json",
+        "workspace/verification/latest/words-root-readme-audit.json",
+        "workspace/verification/latest/words-root-readme-render-result.json"
+      ],
+      "count": 7,
+      "blocking": false,
+      "classification": "GENERATED_VERIFICATION_SNAPSHOT_EXPECTED"
+    },
+    "config_files": {
+      "description": "Minor .gitignore modification — adds /workspace to ignore list (non-critical, no source overlap)",
+      "files": [
+        ".gitignore"
+      ],
+      "count": 1,
+      "blocking": false,
+      "classification": "CONFIG_NON_CRITICAL"
+    },
+    "untracked_directories": {
+      "description": "Untracked plans/ directory — contains Claude plan markdown files, not source/pipeline files",
+      "files": [
+        "plans/"
+      ],
+      "count": 1,
+      "blocking": false,
+      "classification": "UNTRACKED_PLANS_NON_CRITICAL"
+    }
+  },
+  "source_changes_check": {
+    "src_modified": false,
+    "tests_modified": false,
+    "pipeline_modified": false,
+    "verdict": "CLEAN — no src/, tests/, or pipeline/ files are modified or staged"
+  },
+  "sprint30_start_state": "CLEAN_FOR_SPRINT_EXECUTION"
+}

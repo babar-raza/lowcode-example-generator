@@ -1,0 +1,36 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "PR#9 bin/obj removal — signature",
+  "pr_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr9",
+  "prior_state": {
+    "blocking_flag": "BIN_OBJ_DIRS_PRESENT_IN_PACKAGE",
+    "bin_obj_file_count": 83,
+    "affected_subdirs": [
+      "examples/pdf/lowcode/signature/bin/",
+      "examples/pdf/lowcode/signature/obj/"
+    ]
+  },
+  "cleanup_action": {
+    "command": "rm -rf signature/bin signature/obj",
+    "files_removed": 83,
+    "bin_obj_remaining_after": 0
+  },
+  "post_cleanup_files": {
+    "count": 9,
+    "files": [
+      "Directory.Build.props",
+      "Directory.Packages.props",
+      "global.json",
+      "examples/pdf/lowcode/signature/Program.cs",
+      "examples/pdf/lowcode/signature/README.md",
+      "examples/pdf/lowcode/signature/input.pdf",
+      "examples/pdf/lowcode/signature/output.pdf",
+      "examples/pdf/lowcode/signature/signature.csproj",
+      "examples/pdf/lowcode/signature/test.pfx"
+    ]
+  },
+  "blocking_flags_remaining": [],
+  "verdict": "PR9_CLEAN_PUBLICATION_SAFE"
+}

@@ -1,0 +1,15 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "GitHub token readiness for live PR publication",
+  "token_source": "GH_TOKEN environment variable",
+  "token_type": "classic_PAT",
+  "token_prefix": "ghp_",
+  "token_length": 40,
+  "token_suitable_for_org_push": true,
+  "token_note": "Classic PAT (ghp_) with repo+workflow scopes required for org repo Git Data API writes. This token meets the requirement.",
+  "github_token_mapped": "GITHUB_TOKEN must be mapped from GH_TOKEN at command time: $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+  "prs_requiring_token": ["PR#3", "PR#5", "PR#6", "PR#7", "PR#8", "PR#9"],
+  "verdict": "TOKEN_READY_AWAITING_APPROVAL_ENV_VAR"
+}

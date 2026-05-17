@@ -1,0 +1,52 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint29",
+  "date": "2026-05-17",
+  "subject": "Evidence contract v2 hardening — state-correctness validation",
+  "contract_class": "StrictEvidenceContractV2",
+  "contract_version": "2.0.0",
+  "v1_categories": 37,
+  "v2_categories": 45,
+  "v2_removed_from_v1": ["pdf_max_coverage"],
+  "v2_updated_in_v1": ["taskcard_state (sprint28 -> sprint29)", "formimporter_defect (adds final-check filename)"],
+  "v2_new_categories": [
+    "sprint28_commit_proof",
+    "sprint28_reconciliation",
+    "evidence_contract_v2_impl",
+    "evidence_contract_v2_tests",
+    "pr3_version_policy",
+    "pr5_version_policy",
+    "pr6_version_policy",
+    "formimporter_defect_check",
+    "test_targeted_log"
+  ],
+  "v2_content_checks": [
+    "git-status-final.txt: staged src/tests/pipeline files cause failure",
+    "git-log-proof.txt: must contain Sprint 28 commit 20686d3",
+    "final-verdict.md: must contain an allowed Sprint 29 verdict (not IN_PROGRESS)",
+    "test-summary.json: failed==0 and passed>0",
+    "bundle-contract-validation-report.json: passed=true and categories_missing=[]"
+  ],
+  "v2_rejects_that_v1_accepted": [
+    "Sprint 28-style bundle with git log missing final commit",
+    "Final status showing staged source files while verdict says complete",
+    "Zero passed tests in test-summary.json",
+    "Failed tests in test-summary.json",
+    "bundle-contract-validation-report showing passed=false",
+    "IN_PROGRESS in final-verdict.md",
+    "Unknown/disallowed verdict in final-verdict.md",
+    "Missing PR version policy reports (pr3/pr5/pr6)",
+    "Missing sprint28-commit-proof.json",
+    "Relative ZIP path"
+  ],
+  "absolute_path_required": true,
+  "allowed_verdicts": [
+    "SPRINT29_PUBLISHED_AND_EVIDENCE_CONTRACT_V2_COMPLETE",
+    "SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE",
+    "SPRINT29_PUBLICATION_PARTIAL_CONTRACT_V2_COMPLETE",
+    "SPRINT29_BLOCKED_EVIDENCE_CONTRACT_V2_FAILED",
+    "SPRINT29_BLOCKED_SOURCE_STATE",
+    "SPRINT29_REJECTED_UNSAFE_TO_PUBLISH"
+  ],
+  "verdict": "EVIDENCE_CONTRACT_V2_IMPLEMENTED"
+}

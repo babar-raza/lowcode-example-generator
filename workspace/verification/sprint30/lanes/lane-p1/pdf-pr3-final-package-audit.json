@@ -1,0 +1,15 @@
+{
+  "lane": "lane-p1",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "pr_id": "PR#3",
+  "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "aspose_pdf_version": "26.4.0",
+  "examples": ["doc-converter", "html", "xls-converter"],
+  "total_files": 19,
+  "bin_obj_files": 0,
+  "blocking_flags": [],
+  "version_policy": "PUBLISH_AS_IS",
+  "publication_mode": "APPROVAL_BLOCKED",
+  "verdict": "PACKAGE_CLEAN_APPROVAL_BLOCKED"
+}

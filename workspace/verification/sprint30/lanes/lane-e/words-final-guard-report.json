@@ -1,0 +1,1 @@
+{"lane": "lane-e", "sprint": "sprint30", "date": "2026-05-17", "family": "words", "scope": "PILOT_COMPLETE", "published": 8, "pilot_types": 8, "wf_roots": 9, "post_merge_status": "POST_MERGE_VERIFIED", "regression_check": "CLEAN", "denominator_equation": "8 pilot + 17 excluded = 25 HOLDS", "verdict": "WORDS_REGRESSION_FREE"}

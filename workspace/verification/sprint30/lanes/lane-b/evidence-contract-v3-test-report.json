@@ -1,0 +1,49 @@
+{
+  "lane": "lane-b",
+  "sprint": "sprint30",
+  "date": "2026-05-17",
+  "subject": "StrictEvidenceContractV3 test results",
+  "test_file": "tests/unit/test_evidence_contract.py",
+  "test_run": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_contract.py -x --tb=short -q",
+    "total_tests": 66,
+    "passed": 66,
+    "failed": 0,
+    "duration_seconds": 5.38
+  },
+  "test_breakdown": {
+    "v1_tests_prior": 26,
+    "v2_tests_prior": 20,
+    "v3_tests_new": 20,
+    "v3_test_classes": [
+      "TestStrictEvidenceContractV3Rejects (14 tests)",
+      "TestStrictEvidenceContractV3Accepts (6 tests)"
+    ]
+  },
+  "v3_reject_tests": [
+    "test_v3_rejects_missing_sprint29_commit_proof",
+    "test_v3_rejects_missing_sprint29_reconciliation",
+    "test_v3_rejects_missing_bin_obj_cleanup_audit",
+    "test_v3_rejects_missing_sprint30_taskcard_state",
+    "test_v3_rejects_git_log_without_sprint29_commit",
+    "test_v3_rejects_package_audit_with_blocking_flags",
+    "test_v3_rejects_dirty_source_state_classification",
+    "test_v3_rejects_sprint29_verdict_in_final_verdict",
+    "test_v3_rejects_in_progress_verdict",
+    "test_v3_rejects_sprint29_style_bundle",
+    "test_v3_requires_more_categories_than_v2",
+    "test_v3_min_categories_matches_combined",
+    "test_v3_has_exactly_45_categories",
+    "test_v3_rejects_relative_zip_path"
+  ],
+  "v3_accept_tests": [
+    "test_v3_accepts_complete_approval_blocked_bundle",
+    "test_v3_accepts_published_verdict",
+    "test_v3_contract_definition_version",
+    "test_v3_contract_definition_has_all_combined_categories",
+    "test_v3_contract_definition_lists_allowed_verdicts",
+    "test_v3_contract_definition_documents_category_reconciliation"
+  ],
+  "regression_check": "CLEAN — all 46 prior tests still pass (26 v1 + 20 v2 = 46 pre-existing + 20 v3 = 66 total)",
+  "verdict": "ALL_66_TESTS_PASS_V3_VERIFIED"
+}

@@ -1,0 +1,30 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "title": "Publication Gate Decision (Sprint 34)",
+  "gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": {
+      "required_value": "APPROVE_LIVE_PR",
+      "actual_value": "NOT_SET",
+      "status": "BLOCKED"
+    },
+    "GH_TOKEN": {
+      "required_type": "classic_PAT_ghp_with_repo_scope",
+      "actual_value": "SET",
+      "token_type": "classic_PAT",
+      "status": "READY"
+    }
+  },
+  "publish_mode": "DRY_RUN_ONLY",
+  "merge_mode": "BLOCKED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set — all publish-pr commands would run in dry-run simulation only",
+  "packages_ready": [
+    {"pr": 3, "package": "pdf-controlled-pilot", "examples": ["doc-converter", "html", "xls-converter"]},
+    {"pr": 5, "package": "pdf-controlled-pilot-pr5", "examples": ["jpeg", "png", "tiff"]},
+    {"pr": 6, "package": "pdf-controlled-pilot-pr6", "examples": ["image-extractor", "table-generator", "toc-generator"]},
+    {"pr": 7, "package": "pdf-controlled-pilot-pr7", "examples": ["security", "form-flattener"]},
+    {"pr": 8, "package": "pdf-controlled-pilot-pr8", "examples": ["form-editor", "form-exporter"]},
+    {"pr": 9, "package": "pdf-controlled-pilot-pr9", "examples": ["signature"]}
+  ],
+  "verdict": "PUBLICATION_APPROVAL_BLOCKED_14_EXAMPLES_PENDING"
+}

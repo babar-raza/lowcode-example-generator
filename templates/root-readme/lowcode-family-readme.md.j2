@@ -29,6 +29,26 @@ Broader generation requires resolving open follow-up taskcards first.
 | `{{ ex.name }}` | `{{ ex.api_class }}` | `{{ ex.input_format }}` | `{{ ex.output_format }}` | `dotnet run --project examples/{{ family }}/lowcode/{{ ex.name }}` |
 {% endfor %}
 
+{% set has_snippets = examples | selectattr('source_snippet') | list | length > 0 %}
+{% if has_snippets %}
+---
+
+## Source Code
+
+{% for ex in examples %}
+{% if ex.source_snippet %}
+<details>
+<summary><code>{{ ex.name }}/Program.cs</code></summary>
+
+```csharp
+{{ ex.source_snippet }}
+```
+
+</details>
+
+{% endif %}
+{% endfor %}
+{% endif %}
 ---
 
 ## Requirements
@@ -54,7 +74,7 @@ dotnet run --project examples/{{ family }}/lowcode/<example-name>
 ```
 
 Each example is a self-contained .NET project. Running it produces an output file in the project
-directory (e.g., `output.pdf`, `output.xlsx`, `output.html`).
+directory (e.g., {{ typical_outputs }}).
 
 ---
 

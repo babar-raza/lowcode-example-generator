@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "bundle_file": "sprint34-mega-swarm-publish-merge-system-backlog-new-family-discovery-20260518.zip",
+  "bundle_bytes": 72896,
+  "passed": true,
+  "categories_required": 67,
+  "categories_found": 67,
+  "categories_missing": [],
+  "content_failures": [],
+  "verdict": "BUNDLE_CONTRACT_PASSED"
+}

@@ -1,0 +1,73 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "title": "Taskcard Reconciliation (Sprint 34)",
+  "taskcards_closed_this_sprint": [
+    {
+      "id": "NEW-22-followup-epub-reflection-blocker-investigation",
+      "title": "Investigate Aspose.Epub NuGet package availability",
+      "resolution": "CONFIRMED_NO_STANDALONE_NUGET_PACKAGE — Aspose.Epub returns HTTP 404. Package does not exist. epub.yml disabled, status=discovery_blocked.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-n1/epub-reflection-blocker-resolution.json"
+    },
+    {
+      "id": "TC-SYS-04-enum-tracking",
+      "title": "TC-SYS-04: ENUM silent-skip fix in planner.py",
+      "resolution": "ALREADY_COMPLETE — planner.py lines 139-146 have blocked_enum_not_runnable tracking. Confirmed in Sprint 33.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-0/tc-sys-backlog-status.json"
+    },
+    {
+      "id": "TC-SYS-05-all-family-release-status",
+      "title": "TC-SYS-05: Extend release_status to all families",
+      "resolution": "ALREADY_COMPLETE — release_status.py line 12 has ALL_RELEASE_FAMILIES=[cells,words,pdf,diagram,email,slides]. Confirmed in Sprint 34.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-0/tc-sys-backlog-status.json"
+    }
+  ],
+  "taskcards_closed_count": 3,
+  "new_taskcards_opened": [
+    {
+      "id": "TC-EPUB-01",
+      "title": "EPUB: No standalone NuGet package — monitor for future Aspose EPUB product release",
+      "priority": "LOW",
+      "status": "open",
+      "description": "Aspose.Epub does not exist on NuGet. Monitor aspose.com product releases for a dedicated EPUB LowCode package. Reactivate epub.yml if/when a package appears.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-n1/epub-reflection-blocker-resolution.json"
+    },
+    {
+      "id": "TC-OCR-01",
+      "title": "OCR: Re-attempt reflection with Aspose.OCR 26.5.0",
+      "priority": "MEDIUM",
+      "status": "open",
+      "description": "Aspose.OCR advanced to 26.5.0. Re-run discovery-sweep with extra_packages investigation to determine if Aspose.AI.LLM dependency is still missing. Update ocr.yml source_version to 26.5.0.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-n2/ocr-reflection-blocker-resolution.json"
+    },
+    {
+      "id": "TC-PSD-01",
+      "title": "PSD: Escalate Aspose.JavaAttributes to Aspose team",
+      "priority": "LOW",
+      "status": "open",
+      "description": "Aspose.PSD requires Aspose.JavaAttributes which is not on NuGet. Escalation needed: request Aspose PSD team to bundle Aspose.JavaAttributes in the NuGet package or publish it separately.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-n3/psd-reflection-blocker-resolution.json"
+    },
+    {
+      "id": "TC-BATCH-01",
+      "title": "Run publish-pr-batch for PDF when APPROVE_LIVE_PR is set",
+      "priority": "HIGH",
+      "status": "open",
+      "description": "All 6 PDF PR packages (14 examples) are clean and verified. Run: python -m plugin_examples publish-pr-batch --family pdf --publish --approval-token APPROVE_LIVE_PR when gate is approved.",
+      "evidence": "workspace/verification/sprint34/lanes/lane-o/"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "FormImporter retest when Aspose.PDF > 26.5.0",
+      "priority": "MEDIUM",
+      "status": "open",
+      "description": "Aspose.PDF latest is still 26.5.0. FormImporter NullReferenceException defect confirmed for all 26.5.0 input types. Monitor NuGet and run: python -m plugin_examples formimporter-watch --run-repro when new version appears.",
+      "evidence": "workspace/defect-repros/pdf-formimporter-nullref/"
+    }
+  ],
+  "new_taskcards_count": 5,
+  "open_taskcards_count_before_sprint": 52,
+  "open_taskcards_count_after_sprint": 54,
+  "net_change": "+2 (3 closed, 5 new)",
+  "summary": "Sprint 34 closed 3 taskcards (EPUB reclassified, TC-SYS-04 and TC-SYS-05 confirmed complete). Opened 5 new taskcards for OCR/PSD/EPUB follow-up, batch publication, and FormImporter retest."
+}

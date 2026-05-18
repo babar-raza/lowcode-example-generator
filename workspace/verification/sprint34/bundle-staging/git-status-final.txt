@@ -1,0 +1,32 @@
+On branch main
+Your branch is ahead of 'origin/main' by 12 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   pipeline/configs/families/diagram.yml
+	modified:   pipeline/configs/families/epub.yml
+	modified:   src/plugin_examples/__main__.py
+	modified:   src/plugin_examples/publisher/readme_auditor.py
+	modified:   src/plugin_examples/publisher/readme_renderer.py
+	modified:   templates/root-readme/lowcode-family-readme.md.j2
+	modified:   tests/unit/test_readme_renderer.py
+	modified:   workspace/verification/latest/cells-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/cells-root-readme-audit.json
+	modified:   workspace/verification/latest/cells-root-readme-render-result.json
+	modified:   workspace/verification/latest/release-status.json
+	modified:   workspace/verification/latest/words-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/words-root-readme-audit.json
+	modified:   workspace/verification/latest/words-root-readme-render-result.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	src/plugin_examples/package_watcher/formimporter_watch.py
+	src/plugin_examples/publisher/batch_publisher.py
+	src/plugin_examples/publisher/portfolio_dashboard.py
+	src/plugin_examples/publisher/post_publication_verifier.py
+	src/plugin_examples/publisher/readme_facts.py
+	tests/unit/test_sprint34_new_modules.py
+
+no changes added to commit (use "git add" and/or "git commit -a")

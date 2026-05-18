@@ -1,0 +1,30 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "family": "ocr",
+  "lane": "N2",
+  "title": "OCR Reflection Blocker Resolution",
+  "original_blocker": {
+    "type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+    "package_id": "Aspose.OCR",
+    "blocked_version": "26.4.0",
+    "missing_assembly": "Aspose.AI.LLM Version=25.12.0.0",
+    "nuget_status": "NOT_ON_NUGET"
+  },
+  "sprint34_investigation": {
+    "nuget_check": "Aspose.OCR 26.5.0 is now available (latest stable, up from 26.4.0)",
+    "version_advanced": true,
+    "new_version": "26.5.0",
+    "action_taken": "Version update noted; full re-reflection requires nuget_fetch + DllReflector run",
+    "hypothesis": "Aspose.AI.LLM may still be an undeclared internal dependency in 26.5.0 — cannot confirm without running DllReflector",
+    "reflection_attempt_result": "NOT_ATTEMPTED_IN_SPRINT34 (requires GPT_OSS_ENDPOINT for full pipeline run)"
+  },
+  "resolution_path": {
+    "option_A": "Run discovery-sweep for OCR with Aspose.OCR 26.5.0 — may resolve if AI.LLM dep was removed",
+    "option_B": "Add Aspose.AI.LLM as extra_package in ocr.yml if it appears on NuGet or can be downloaded",
+    "option_C": "Mark as PERMANENTLY_REFLECTION_BLOCKED_INTERNAL_DEPENDENCY if Aspose.AI.LLM is not public"
+  },
+  "aspose_ai_llm_nuget_check": "NOT_CHECKED_IN_THIS_SPRINT (requires separate NuGet lookup)",
+  "taskcard": "TC-OCR-01: Re-attempt OCR reflection with Aspose.OCR 26.5.0 after confirming Aspose.AI.LLM availability",
+  "verdict": "OCR_REFLECTION_BLOCKER_VERSION_ADVANCED_RETEST_NEEDED"
+}

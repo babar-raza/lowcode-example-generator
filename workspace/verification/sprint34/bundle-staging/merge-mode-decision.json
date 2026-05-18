@@ -1,0 +1,40 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "Publication and Merge Gate Detection",
+  "gate_checks": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": {
+      "value": "NOT_SET",
+      "required_value": "APPROVE_LIVE_PR",
+      "result": "BLOCKED"
+    },
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": {
+      "value": "NOT_SET",
+      "required_value": "APPROVE_MERGE_PR",
+      "result": "BLOCKED"
+    },
+    "GH_TOKEN": {
+      "value": "SET (classic PAT)",
+      "result": "READY"
+    }
+  },
+  "publication_verdict": "APPROVAL_BLOCKED",
+  "merge_verdict": "APPROVAL_BLOCKED",
+  "mode": "APPROVAL_BLOCKED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set — all PDF PR packages remain in DRY_RUN_READY state",
+  "to_unblock": {
+    "publish": "Set $env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = 'APPROVE_LIVE_PR' before running publish-pr commands",
+    "merge": "Set $env:PLUGIN_EXAMPLES_MERGE_PR_APPROVAL = 'APPROVE_MERGE_PR' after PRs are created"
+  },
+  "pr_packages_ready": [
+    "pdf-controlled-pilot (PR#3): doc-converter, html, xls-converter",
+    "pdf-controlled-pilot-pr5 (PR#5): jpeg, png, tiff",
+    "pdf-controlled-pilot-pr6 (PR#6): image-extractor, table-generator, toc-generator",
+    "pdf-controlled-pilot-pr7 (PR#7): security, form-flattener",
+    "pdf-controlled-pilot-pr8 (PR#8): form-editor, form-exporter",
+    "pdf-controlled-pilot-pr9 (PR#9): signature"
+  ],
+  "total_examples_ready": 14,
+  "verdict": "PUBLICATION_GATE_BLOCKED_MERGE_GATE_BLOCKED"
+}

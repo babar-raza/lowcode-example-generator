@@ -1,0 +1,51 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "head_commit": "9ab7fbb",
+  "head_commit_message": "chore(sprint33-bundle): add v6-validated evidence bundle and final git state artifacts",
+  "classification": "SPRINT34_IN_PROGRESS_CLEAN_START",
+  "dirty_files": [
+    {
+      "path": "pipeline/configs/families/diagram.yml",
+      "type": "modified",
+      "category": "CONFIG_IMPROVEMENT",
+      "description": "Added default_input_extension: .vsdx and default_output_extension: .vdx to template_hints for correct format inference",
+      "sprint34_lane": "Lane S2 (README source-truth)",
+      "safe_to_commit": true
+    },
+    {
+      "path": "src/plugin_examples/publisher/readme_auditor.py",
+      "type": "modified",
+      "category": "FEATURE_IMPROVEMENT",
+      "description": "Added format-claim validation (check #13), snippet presence check (#14), XLSX cross-family guard (#15) to audit_readme()",
+      "sprint34_lane": "Lane S3 (README audit hardening)",
+      "safe_to_commit": true
+    },
+    {
+      "path": "src/plugin_examples/publisher/readme_renderer.py",
+      "type": "modified",
+      "category": "FEATURE_IMPROVEMENT",
+      "description": "Added source_snippet/source_file_path/snippet_sha256 fields to ExampleEntry, typical_outputs to ReadmeContext, integrated readme_facts.py extraction",
+      "sprint34_lane": "Lane S2 (README source-truth)",
+      "safe_to_commit": true
+    },
+    {
+      "path": "templates/root-readme/lowcode-family-readme.md.j2",
+      "type": "modified",
+      "category": "TEMPLATE_IMPROVEMENT",
+      "description": "Updated Jinja2 template to render typical_outputs and source snippets when available",
+      "sprint34_lane": "Lane S2 (README source-truth)",
+      "safe_to_commit": true
+    },
+    {
+      "path": "src/plugin_examples/publisher/readme_facts.py",
+      "type": "untracked",
+      "category": "NEW_MODULE",
+      "description": "New module: source-truth README publication facts extracted from actual Program.cs source files. Replaces config-default format inference with verified file extension detection.",
+      "sprint34_lane": "Lane S1 (README facts extractor)",
+      "safe_to_commit": true
+    }
+  ],
+  "classification_verdict": "ALL_DIRTY_FILES_ARE_LEGITIMATE_SPRINT34_IN_PROGRESS_IMPROVEMENTS",
+  "sprint33_start_state": "CLEAN_FOR_SPRINT_EXECUTION"
+}

@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from plugin_examples.publisher.aspose_links import build_aspose_net_links
+from plugin_examples.publisher.readme_facts import extract_example_readme_facts
 
 logger = logging.getLogger(__name__)
 
@@ -95,6 +96,9 @@ class ExampleEntry:
     input_format: str           # e.g. "xlsx"
     output_format: str          # e.g. "html"
     description: str = ""       # optional human-readable description
+    source_snippet: str = ""    # Program.cs content (full or excerpt)
+    source_file_path: str = ""  # relative path to Program.cs
+    snippet_sha256: str = ""    # SHA256 of the snippet content
 
 
 @dataclass
@@ -126,6 +130,7 @@ class ReadmeContext:
     gate_verdict: str = "PR_DRY_RUN_READY"
     generation_date: str = ""
     validation_summary: dict = field(default_factory=dict)
+    typical_outputs: str = ""   # family-aware output examples for prose
 
 
 def _infer_api_class(example_name: str) -> str:
@@ -171,6 +176,7 @@ def build_readme_context(
     gate_verdict: str = "PR_DRY_RUN_READY",
     generation_date: str = "",
     package_path: Path | None = None,
+    strict_facts: bool = False,
 ) -> ReadmeContext:
     """Build a ReadmeContext from family config and runtime evidence.
 
@@ -264,46 +270,107 @@ def build_readme_context(
     temporary_license_url = _aspose_links.temporary_license_url
     contact_url = _aspose_links.contact_url
 
+    # --- Derive default output extension ---
+    default_output_ext = "out"
+    if template_hints is not None:
+        raw_out = getattr(template_hints, "default_output_extension", ".out")
+        default_output_ext = raw_out.lstrip(".")
+
+    # Warn if non-cells family will inherit xlsx default
+    if family != "cells" and default_ext == "xlsx":
+        logger.warning(
+            "Family '%s' inherits xlsx as default_input_extension — this is likely wrong. "
+            "Set template_hints.default_input_extension in %s.yml.",
+            family, family,
+        )
+
     # --- Build example entries ---
+    # When package_path is available, extract source-truth facts from Program.cs
+    facts = None
+    if package_path is not None:
+        facts = extract_example_readme_facts(
+            family=family,
+            package_path=Path(package_path),
+            examples=examples,
+            manifest_reader=read_manifest_api_symbol,
+        )
+        # Fail-closed: when strict_facts is True, all facts must be verified
+        for fact in facts.facts:
+            if fact.validation_status != "verified":
+                if strict_facts:
+                    raise ValueError(
+                        f"Example '{fact.example_name}': format claims unverified "
+                        f"(input='{fact.input_extension}', output='{fact.output_extension}'). "
+                        f"Cannot publish README with unverified format claims. "
+                        f"Ensure Program.cs contains 'input.EXT' and 'output.EXT' patterns."
+                    )
+                logger.warning(
+                    "Example '%s': format claims unverified — falling back to heuristic",
+                    fact.example_name,
+                )
+
+    # Build a lookup from facts if available
+    facts_by_name: dict[str, object] = {}
+    if facts is not None:
+        for fact in facts.facts:
+            facts_by_name[fact.example_name] = fact
+
     example_entries: list[ExampleEntry] = []
     for ex in examples:
         name: str = ex.get("name", "") or ex.get("scenario_id", "")
         if not name:
             continue
-        output_format: str = ex.get("output_format", "") or ex.get("run_output_format", "")
-        if not output_format:
-            # Infer from name
-            n = name.lower()
-            if "html" in n:
-                output_format = "html"
-            elif "image" in n or "img" in n:
-                output_format = "png"
-            elif "json" in n:
-                output_format = "json"
-            elif "pdf" in n:
-                output_format = "pdf"
-            elif "text" in n or "txt" in n:
-                output_format = "txt"
-            elif "lock" in n:
-                output_format = default_ext
-            else:
-                output_format = default_ext
 
-        input_fmt = _infer_input_format(name, family, default_ext)
-        api_class = _infer_api_class(name)
-        if package_path is not None:
-            manifest_path = (
-                Path(package_path) / "examples" / family / "lowcode" / name / "example.manifest.json"
-            )
-            sym = read_manifest_api_symbol(manifest_path)
-            if sym:
-                api_class = sym
+        fact = facts_by_name.get(name)
+        if fact is not None:
+            # Source-truth-driven: use facts from Program.cs
+            input_fmt = fact.input_extension
+            output_format = fact.output_extension
+            api_class = fact.api_symbol or _infer_api_class(name)
+            source_snippet = fact.snippet_content
+            source_file_path = fact.source_file_path
+            snippet_sha256 = fact.snippet_content_sha256
+        else:
+            # Legacy heuristic fallback (no package_path provided)
+            output_format = ex.get("output_format", "") or ex.get("run_output_format", "")
+            if not output_format:
+                n = name.lower()
+                if "html" in n:
+                    output_format = "html"
+                elif "image" in n or "img" in n:
+                    output_format = "png"
+                elif "json" in n:
+                    output_format = "json"
+                elif "pdf" in n:
+                    output_format = "pdf"
+                elif "text" in n or "txt" in n:
+                    output_format = "txt"
+                elif "lock" in n:
+                    output_format = default_output_ext
+                else:
+                    output_format = default_output_ext
+
+            input_fmt = _infer_input_format(name, family, default_ext)
+            api_class = _infer_api_class(name)
+            if package_path is not None:
+                manifest_path = (
+                    Path(package_path) / "examples" / family / "lowcode" / name / "example.manifest.json"
+                )
+                sym = read_manifest_api_symbol(manifest_path)
+                if sym:
+                    api_class = sym
+            source_snippet = ""
+            source_file_path = ""
+            snippet_sha256 = ""
 
         example_entries.append(ExampleEntry(
             name=name,
             api_class=api_class,
             input_format=input_fmt,
             output_format=output_format,
+            source_snippet=source_snippet,
+            source_file_path=source_file_path,
+            snippet_sha256=snippet_sha256,
         ))
 
     if not example_entries:
@@ -311,6 +378,13 @@ def build_readme_context(
             f"No examples provided for family '{family}'. "
             "At least one example is required to render a README."
         )
+
+    # Build typical_outputs from actual example output formats
+    output_exts = sorted({ex.output_format for ex in example_entries if ex.output_format})
+    if output_exts:
+        typical_outputs = ", ".join(f"`output.{ext}`" for ext in output_exts)
+    else:
+        typical_outputs = f"`output.{default_output_ext}`"
 
     return ReadmeContext(
         family=family,
@@ -338,6 +412,7 @@ def build_readme_context(
         allowed_types=allowed_types,
         gate_verdict=gate_verdict,
         generation_date=generation_date,
+        typical_outputs=typical_outputs,
     )
 
 
@@ -402,6 +477,9 @@ def render_readme(
                 "input_format": ex.input_format,
                 "output_format": ex.output_format,
                 "description": ex.description,
+                "source_snippet": ex.source_snippet,
+                "source_file_path": ex.source_file_path,
+                "snippet_sha256": ex.snippet_sha256,
             }
             for ex in context.examples
         ],
@@ -409,6 +487,7 @@ def render_readme(
         "allowed_types": context.allowed_types,
         "gate_verdict": context.gate_verdict,
         "generation_date": context.generation_date,
+        "typical_outputs": context.typical_outputs,
     }
 
     rendered = template.render(**ctx_dict)

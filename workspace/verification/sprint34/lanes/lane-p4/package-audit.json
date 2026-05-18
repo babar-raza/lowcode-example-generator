@@ -1,0 +1,15 @@
+{
+  "sprint": "sprint34",
+  "date": "2026-05-18",
+  "pr_number": 7,
+  "package_name": "pdf-controlled-pilot-pr7",
+  "examples": [
+    "security",
+    "form-flattener"
+  ],
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "audit_status": "CLEAN",
+  "gate_status": "APPROVAL_BLOCKED",
+  "verdict": "PACKAGE_CLEAN_APPROVAL_BLOCKED"
+}

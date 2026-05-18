@@ -739,15 +739,19 @@ class TestManifestApiSymbolExtraction:
         """When package_path is set, build_readme_context reads manifest for api_class."""
         from plugin_examples.publisher.readme_renderer import build_readme_context
         import json
-        # Create manifest at expected path: {package_path}/examples/cells/lowcode/html-converter/
-        manifest_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
-        manifest_dir.mkdir(parents=True)
-        (manifest_dir / "example.manifest.json").write_text(json.dumps({
+        # Create manifest + Program.cs at expected path
+        example_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
+        example_dir.mkdir(parents=True)
+        (example_dir / "example.manifest.json").write_text(json.dumps({
             "claimed_symbols": [
                 "Aspose.Cells.LowCode.HtmlConverter",
                 "Aspose.Cells.LowCode.HtmlConverter.Process",
             ]
         }), encoding="utf-8")
+        (example_dir / "Program.cs").write_text(
+            'class P { static void Main() { var i = "input.xlsx"; var o = "output.html"; } }',
+            encoding="utf-8",
+        )
 
         cfg = _make_family_config(
             family="cells",
@@ -767,6 +771,13 @@ class TestManifestApiSymbolExtraction:
     def test_build_readme_context_falls_back_when_no_manifest(self, tmp_path):
         """When package_path set but manifest absent, fall back to _infer_api_class."""
         from plugin_examples.publisher.readme_renderer import build_readme_context
+        # Create Program.cs but no manifest
+        example_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
+        example_dir.mkdir(parents=True)
+        (example_dir / "Program.cs").write_text(
+            'class P { static void Main() { var i = "input.xlsx"; var o = "output.html"; } }',
+            encoding="utf-8",
+        )
         cfg = _make_family_config(
             family="cells",
             display_name="Aspose.Cells for .NET",
@@ -957,3 +968,321 @@ class TestReadmeRendererAsposeNetUrls:
         rendered = render_readme(ctx)
         forbidden = find_forbidden_aspose_com_links(rendered)
         assert forbidden == [], f"Rendered Words README has forbidden links: {forbidden}"
+
+
+# ---------------------------------------------------------------------------
+# Diagram README healing regression tests
+# ---------------------------------------------------------------------------
+
+_DIAGRAM_CONVERTER_PROGRAM_CS = """\
+using System;
+using System.IO;
+using Aspose.Diagram;
+using Aspose.Diagram.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        string workDir = Path.Combine(Path.GetTempPath(), "Demo");
+        Directory.CreateDirectory(workDir);
+
+        string inputPath = Path.Combine(workDir, "input.vsdx");
+        string outputPath = Path.Combine(workDir, "output.vdx");
+
+        var diagram = new Diagram();
+        diagram.Save(inputPath, SaveFileFormat.Vsdx);
+
+        DiagramConverter.Process(inputPath, outputPath);
+
+        Console.WriteLine("Done");
+    }
+}
+"""
+
+_PDF_CONVERTER_PROGRAM_CS = """\
+using System;
+using System.IO;
+using Aspose.Diagram;
+using Aspose.Diagram.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        string workDir = Path.Combine(Path.GetTempPath(), "Demo");
+        Directory.CreateDirectory(workDir);
+
+        string inputPath = Path.Combine(workDir, "input.vsdx");
+        string outputPath = Path.Combine(workDir, "output.pdf");
+
+        var diagram = new Diagram();
+        diagram.Save(inputPath, SaveFileFormat.Vsdx);
+
+        PdfConverter.Process(inputPath, outputPath);
+
+        Console.WriteLine("Done");
+    }
+}
+"""
+
+
+def _make_diagram_config():
+    """Build a minimal Diagram FamilyConfig mock."""
+    return _make_family_config(
+        family="diagram",
+        display_name="Aspose.Diagram for .NET",
+        nuget_package_id="Aspose.Diagram",
+        owner="aspose-diagram-net",
+        repo="Aspose.Diagram.LowCode-for-.NET-Examples",
+        allowed_types=["DiagramConverter", "PdfConverter"],
+    )
+
+
+def _setup_diagram_package(tmp_path):
+    """Create a mock package directory with Program.cs files for diagram examples."""
+    for name, content in [
+        ("diagram-diagram-converter", _DIAGRAM_CONVERTER_PROGRAM_CS),
+        ("diagram-pdf-converter", _PDF_CONVERTER_PROGRAM_CS),
+    ]:
+        prog_dir = tmp_path / "examples" / "diagram" / "lowcode" / name
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(content, encoding="utf-8")
+    return tmp_path
+
+
+class TestDiagramReadmeFactsExtraction:
+    """TC-README-CLAIMS-001 regression tests: facts extraction from Program.cs."""
+
+    def test_diagram_facts_extraction_returns_vsdx_vdx_pdf(self, tmp_path):
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}, {"name": "diagram-pdf-converter"}]
+        facts = extract_example_readme_facts("diagram", pkg, examples)
+
+        assert len(facts.facts) == 2
+        dc = next(f for f in facts.facts if f.example_name == "diagram-diagram-converter")
+        pc = next(f for f in facts.facts if f.example_name == "diagram-pdf-converter")
+
+        assert dc.input_extension == "vsdx"
+        assert dc.output_extension == "vdx"
+        assert dc.validation_status == "verified"
+        assert dc.proof_source == "program_cs"
+
+        assert pc.input_extension == "vsdx"
+        assert pc.output_extension == "pdf"
+        assert pc.validation_status == "verified"
+
+    def test_facts_include_sha256_and_snippet(self, tmp_path):
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}]
+        facts = extract_example_readme_facts("diagram", pkg, examples)
+
+        fact = facts.facts[0]
+        assert fact.source_file_sha256, "SHA256 must be non-empty"
+        assert len(fact.source_file_sha256) == 64
+        assert fact.snippet_content, "Snippet must be non-empty"
+        assert "DiagramConverter.Process" in fact.snippet_content
+        assert fact.snippet_mode == "full_file"
+
+
+class TestDiagramReadmeNoXlsx:
+    """TC-README-XLSX-002 regression tests: no xlsx claims for diagram."""
+
+    def test_diagram_readme_no_xlsx_in_table(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}, {"name": "diagram-pdf-converter"}]
+
+        ctx = build_readme_context(
+            family="diagram", family_config=cfg, examples=examples,
+            package_version="26.1.0", package_path=pkg,
+        )
+        rendered = render_readme(ctx)
+
+        # Table must not contain xlsx
+        import re
+        table_match = re.search(r"## Included Examples\s*\n(.*?)(?=\n## |\Z)", rendered, re.DOTALL)
+        assert table_match, "Examples table not found"
+        table = table_match.group(1)
+        assert "xlsx" not in table.lower(), f"xlsx found in Diagram examples table: {table}"
+
+    def test_diagram_readme_correct_formats(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}, {"name": "diagram-pdf-converter"}]
+
+        ctx = build_readme_context(
+            family="diagram", family_config=cfg, examples=examples,
+            package_version="26.1.0", package_path=pkg,
+        )
+        rendered = render_readme(ctx)
+
+        assert "| `vsdx` | `vdx` |" in rendered
+        assert "| `vsdx` | `pdf` |" in rendered
+
+    def test_diagram_generic_output_no_xlsx(self, tmp_path):
+        """The generic output line should not mention xlsx for diagram."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}, {"name": "diagram-pdf-converter"}]
+
+        ctx = build_readme_context(
+            family="diagram", family_config=cfg, examples=examples,
+            package_version="26.1.0", package_path=pkg,
+        )
+        rendered = render_readme(ctx)
+
+        # Find the line with "output file in the project directory"
+        for line in rendered.splitlines():
+            if "output file in the project" in line:
+                assert "xlsx" not in line.lower(), f"xlsx in generic output line: {line}"
+                break
+
+
+class TestSnippetPresent:
+    """TC-README-SNIPPETS-003 regression tests."""
+
+    def test_snippet_present_from_program_cs(self, tmp_path):
+        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+        pkg = _setup_diagram_package(tmp_path)
+        examples = [{"name": "diagram-diagram-converter"}]
+
+        ctx = build_readme_context(
+            family="diagram", family_config=cfg, examples=examples,
+            package_version="26.1.0", package_path=pkg,
+        )
+        rendered = render_readme(ctx)
+
+        assert "## Source Code" in rendered
+        assert "DiagramConverter.Process" in rendered
+        assert "<details>" in rendered
+
+
+class TestAuditorFormatAndXlsxGuard:
+    """TC-README-AUDITOR-004 regression tests."""
+
+    def test_auditor_rejects_format_mismatch(self):
+        from plugin_examples.publisher.readme_auditor import audit_readme
+
+        readme = (
+            "## Overview\n\n## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Run |\n"
+            "|---------|-----------------|-------|--------|-----|\n"
+            "| `ex1` | `Converter.Process` | `xlsx` | `pdf` | cmd |\n\n"
+            "## Requirements\n## How to Run\n## Package Installation\n"
+            "## Validation Status\n## Useful Links\n"
+        )
+        context = {
+            "package_version": "",
+            "examples": [{"name": "ex1", "input_format": "vsdx", "output_format": "pdf"}],
+            "family": "diagram",
+        }
+        result = audit_readme(readme, context)
+        assert not result.passed
+        assert len(result.wrong_format_claims) > 0
+        assert "vsdx" in result.wrong_format_claims[0]
+
+    def test_auditor_rejects_xlsx_for_non_cells(self):
+        from plugin_examples.publisher.readme_auditor import audit_readme
+
+        readme = (
+            "## Overview\n\n## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Run |\n"
+            "|---------|-----------------|-------|--------|-----|\n"
+            "| `ex1` | `DiagramConverter.Process` | `xlsx` | `xlsx` | cmd |\n\n"
+            "## Requirements\n## How to Run\n## Package Installation\n"
+            "## Validation Status\n## Useful Links\n"
+        )
+        context = {
+            "package_version": "",
+            "examples": [{"name": "ex1"}],
+            "family": "diagram",
+        }
+        result = audit_readme(readme, context)
+        assert not result.passed
+        assert result.xlsx_cross_family_violation
+
+    def test_auditor_accepts_xlsx_for_cells(self):
+        from plugin_examples.publisher.readme_auditor import audit_readme
+
+        readme = (
+            "## Overview\n\n## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Run |\n"
+            "|---------|-----------------|-------|--------|-----|\n"
+            "| `ex1` | `HtmlConverter.Process` | `xlsx` | `html` | cmd |\n\n"
+            "## Requirements\n## How to Run\n## Package Installation\n"
+            "## Validation Status\n## Useful Links\n"
+        )
+        context = {
+            "package_version": "",
+            "examples": [{"name": "ex1"}],
+            "family": "cells",
+        }
+        result = audit_readme(readme, context)
+        assert not result.xlsx_cross_family_violation
+
+
+class TestFailClosedBehavior:
+    """Fail-closed regression tests."""
+
+    def test_output_cannot_fallback_to_input_extension(self, tmp_path):
+        """When facts are available, output comes from Program.cs, not config default."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+        pkg = _setup_diagram_package(tmp_path)
+
+        ctx = build_readme_context(
+            family="diagram", family_config=cfg,
+            examples=[{"name": "diagram-diagram-converter"}],
+            package_version="26.1.0", package_path=pkg,
+        )
+        # Output must be vdx (from Program.cs), not vsdx (input extension)
+        assert ctx.examples[0].output_format == "vdx"
+        assert ctx.examples[0].input_format == "vsdx"
+
+    def test_unknown_format_raises_valueerror(self, tmp_path):
+        """If Program.cs lacks output pattern, build_readme_context raises ValueError with strict_facts."""
+        from plugin_examples.publisher.readme_renderer import build_readme_context
+
+        cfg = _make_diagram_config()
+        cfg.template_hints.default_input_extension = ".vsdx"
+        cfg.template_hints.default_output_extension = ".vdx"
+
+        # Create a Program.cs without output pattern
+        prog_dir = tmp_path / "examples" / "diagram" / "lowcode" / "broken-example"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class Program { static void Main() { var x = "input.vsdx"; } }',
+            encoding="utf-8",
+        )
+
+        with pytest.raises(ValueError, match="unverified"):
+            build_readme_context(
+                family="diagram", family_config=cfg,
+                examples=[{"name": "broken-example"}],
+                package_version="26.1.0", package_path=tmp_path,
+                strict_facts=True,
+            )

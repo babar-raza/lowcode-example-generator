@@ -63,6 +63,9 @@ class ReadmeAuditResult:
     wrong_blog_links: list[str] = field(default_factory=list)
     wrong_contact_links: list[str] = field(default_factory=list)
     missing_required_links: list[str] = field(default_factory=list)
+    wrong_format_claims: list[str] = field(default_factory=list)
+    missing_source_snippets: list[str] = field(default_factory=list)
+    xlsx_cross_family_violation: bool = False
     warnings: list[str] = field(default_factory=list)
     expected_version: str | None = None
     found_version: str | None = None
@@ -257,6 +260,73 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
                 "Cells-specific content detected in Words README"
             )
             failures.append("Cells content found in Words README")
+
+    # --- 13. Format-claim validation (table columns vs context) ---
+    for ex in examples:
+        name = ex.get("name", "") if isinstance(ex, dict) else ex
+        if not name:
+            continue
+        expected_input = ex.get("input_format", "") if isinstance(ex, dict) else ""
+        expected_output = ex.get("output_format", "") if isinstance(ex, dict) else ""
+        if not expected_input and not expected_output:
+            continue
+        # Find the row in the table for this example
+        for line in examples_section.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("|") and f"`{name}`" in stripped:
+                cols = stripped.split("|")
+                if len(cols) >= 5:
+                    table_input = cols[3].strip().strip("`").strip()
+                    table_output = cols[4].strip().strip("`").strip()
+                    if expected_input and table_input != expected_input:
+                        result.wrong_format_claims.append(
+                            f"{name}: input expected '{expected_input}', found '{table_input}'"
+                        )
+                        failures.append(
+                            f"Format mismatch for '{name}': input expected '{expected_input}', found '{table_input}'"
+                        )
+                    if expected_output and table_output != expected_output:
+                        result.wrong_format_claims.append(
+                            f"{name}: output expected '{expected_output}', found '{table_output}'"
+                        )
+                        failures.append(
+                            f"Format mismatch for '{name}': output expected '{expected_output}', found '{table_output}'"
+                        )
+                break
+
+    # --- 14. Snippet presence check ---
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        name = ex.get("name", "")
+        snippet = ex.get("source_snippet", "")
+        if snippet and name:
+            # Check that some distinctive content from the snippet appears in the README
+            # Use the first non-empty non-comment line from the snippet
+            for sline in snippet.splitlines():
+                sline_stripped = sline.strip()
+                if sline_stripped and not sline_stripped.startswith("//") and len(sline_stripped) > 15:
+                    if sline_stripped not in readme_content:
+                        result.missing_source_snippets.append(name)
+                        failures.append(f"Source snippet for '{name}' not found in README")
+                    break
+
+    # --- 15. XLSX cross-family guard ---
+    if family and family != "cells":
+        # Check that xlsx does not appear as a format in the examples table
+        for line in examples_section.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("|") and not stripped.startswith("|---") and "Example" not in stripped:
+                cols = stripped.split("|")
+                if len(cols) >= 5:
+                    table_input = cols[3].strip().strip("`").strip().lower()
+                    table_output = cols[4].strip().strip("`").strip().lower()
+                    if "xlsx" in table_input or "xlsx" in table_output:
+                        result.xlsx_cross_family_violation = True
+                        failures.append(
+                            f"XLSX format found in {family} README table (xlsx is cells-specific)"
+                        )
+                        break
 
     # --- URL domain validation (aspose.net link policy) ---
     from plugin_examples.publisher.aspose_links import (

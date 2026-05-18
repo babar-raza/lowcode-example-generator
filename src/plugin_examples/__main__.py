@@ -362,6 +362,55 @@ def main() -> int:
     check_parser = subparsers.add_parser("check", help="Check for package updates")
     check_parser.add_argument("--family", help="Specific family to check")
 
+    # publish-pr-batch command — orchestrate all PR packages for a family in one command
+    batch_parser = subparsers.add_parser(
+        "publish-pr-batch",
+        help="Batch publish all PR packages for a family (dry-run or live)",
+    )
+    batch_parser.add_argument("--family", required=True, help="Family name (e.g., pdf)")
+    batch_publish_mode = batch_parser.add_mutually_exclusive_group()
+    batch_publish_mode.add_argument(
+        "--publish", action="store_true",
+        help="Perform live PR creation (requires APPROVE_LIVE_PR gate)",
+    )
+    batch_publish_mode.add_argument(
+        "--dry-run", action="store_true", default=True,
+        help="Simulate publication without creating live PRs (default)",
+    )
+    batch_parser.add_argument(
+        "--approval-token", metavar="TOKEN",
+        help="Approval token (must be APPROVE_LIVE_PR for live mode)",
+    )
+    batch_parser.add_argument(
+        "--promote-latest", action="store_true", default=True,
+        help="Promote results to verification/latest/ (default: True)",
+    )
+
+    # formimporter-watch command — check FormImporter defect status vs NuGet version
+    fi_watch_parser = subparsers.add_parser(
+        "formimporter-watch",
+        help="Check FormImporter defect status against latest NuGet version",
+    )
+    fi_watch_parser.add_argument(
+        "--run-repro", action="store_true",
+        help="Run repro harness if version has advanced beyond 26.5.0",
+    )
+    fi_watch_parser.add_argument(
+        "--output", metavar="PATH",
+        help="Write JSON report to this path",
+    )
+
+    # post-publication-verify command — verify published PR packages
+    ppv_parser = subparsers.add_parser(
+        "post-publication-verify",
+        help="Verify published examples in local PR dry-run packages",
+    )
+    ppv_parser.add_argument("--family", required=True, help="Family name (e.g., pdf)")
+    ppv_parser.add_argument(
+        "--output", metavar="PATH",
+        help="Write verification report to this path",
+    )
+
     args = parser.parse_args()
 
     if args.verbose:
@@ -1866,6 +1915,104 @@ def main() -> int:
         print("Package update check")
         print("Requires live NuGet access. All modules are implemented.")
         return 0
+
+    if args.command == "publish-pr-batch":
+        import json as _json
+        from pathlib import Path as _Path
+        from plugin_examples.publisher.batch_publisher import run_batch_publish, write_batch_report
+
+        repo_root = _Path(__file__).resolve().parents[2]
+        family = args.family
+        live_mode = getattr(args, "publish", False)
+        approval_token = getattr(args, "approval_token", None)
+
+        print(f"publish-pr-batch: family={family}, live_mode={live_mode}")
+
+        result = run_batch_publish(
+            family=family,
+            repo_root=repo_root,
+            live_mode=live_mode,
+            approval_token=approval_token,
+            promote_latest=True,
+        )
+
+        output_path = repo_root / "workspace" / "verification" / "latest" / f"{family}-batch-publish-report.json"
+        write_batch_report(result, output_path)
+
+        print(f"Batch result: {result.verdict}")
+        print(f"  Total packages: {result.total}")
+        print(f"  Succeeded: {result.succeeded}")
+        print(f"  Failed: {result.failed}")
+        print(f"  Blocked: {result.blocked}")
+        for r in result.results:
+            status = "PASS" if r.simulation_passed else ("ERROR" if r.error else "BLOCKED")
+            print(f"  PR#{r.pr_number} {r.package_name}: {status}")
+        print(f"Report: {output_path}")
+        return 0 if result.failed == 0 else 1
+
+    if args.command == "formimporter-watch":
+        from pathlib import Path as _Path
+        from plugin_examples.package_watcher.formimporter_watch import (
+            check_formimporter, write_watch_report,
+        )
+
+        repo_root = _Path(__file__).resolve().parents[2]
+        run_repro = getattr(args, "run_repro", False)
+        output = getattr(args, "output", None)
+        output_path = (
+            _Path(output)
+            if output
+            else repo_root / "workspace" / "verification" / "latest" / "formimporter-watch-report.json"
+        )
+
+        result = check_formimporter(repo_root, run_repro=run_repro)
+        write_watch_report(result, output_path)
+
+        print(f"FormImporter Watch — {result.checked_at}")
+        print(f"  Installed: {result.current_version or 'unknown'}")
+        print(f"  NuGet latest: {result.latest_nuget_version or 'unknown'}")
+        print(f"  Defect version: {result.defect_version}")
+        print(f"  Version advanced: {result.version_advanced}")
+        print(f"  Verdict: {result.verdict}")
+        for note in result.notes:
+            print(f"  NOTE: {note}")
+        print(f"Report: {output_path}")
+        return 0
+
+    if args.command == "post-publication-verify":
+        from pathlib import Path as _Path
+        from plugin_examples.publisher.batch_publisher import PDF_PR_PACKAGES
+        from plugin_examples.publisher.post_publication_verifier import (
+            run_post_publication_verification, write_verification_report,
+        )
+
+        repo_root = _Path(__file__).resolve().parents[2]
+        family = args.family
+        output = getattr(args, "output", None)
+        output_path = (
+            _Path(output)
+            if output
+            else repo_root / "workspace" / "verification" / "latest" / f"{family}-post-publication-verification.json"
+        )
+
+        # Resolve packages for family
+        if family == "pdf":
+            packages = PDF_PR_PACKAGES
+        else:
+            # Single-package family
+            packages = [(1, f"{family}-controlled-pilot")]
+
+        packages_base = repo_root / "workspace" / "pr-dry-run"
+        report = run_post_publication_verification(family, packages, packages_base)
+        write_verification_report(report, output_path)
+
+        print(f"Post-publication verification: {family}")
+        print(f"  Verdict: {report.verdict}")
+        print(f"  Packages: {report.total_packages}")
+        for p in report.packages:
+            print(f"  PR#{p.pr_number} {p.package_name}: {p.verdict} ({p.verified_examples}/{p.total_examples})")
+        print(f"Report: {output_path}")
+        return 0 if report.all_verified else 1
 
     return 0
 

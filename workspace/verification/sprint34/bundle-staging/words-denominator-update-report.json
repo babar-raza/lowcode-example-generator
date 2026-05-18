@@ -1,0 +1,19 @@
+{
+  "lane": "lane-w",
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "Words Denominator Update Report",
+  "family": "words",
+  "action": "VERIFICATION_OF_EXISTING_DATA",
+  "description": "Sprint 33 verification confirmed that words.json denominator already contains workflow_root_types: 9 with full SOT classification. The null status reported in Sprint 32 all-family-launch-scoreboard.json was a stale scoreboard artifact, not a denominator deficiency.",
+  "workflow_root_count_before": "null (in stale Sprint 32 scoreboard only — not in denominator file)",
+  "workflow_root_count_after": 9,
+  "denominator_file": "pipeline/configs/denominators/words.json",
+  "denominator_file_status": "VERIFIED_CORRECT — no update needed",
+  "completed_by_sprint": "sprint14 (full SOT classification completed 2026-05-14)",
+  "conservation_equation": "9 workflow_roots + 16 non_runnable = 25 total types",
+  "conservation_holds": true,
+  "scoreboard_correction_needed": true,
+  "scoreboard_correction": "Sprint 33 all-family-launch-scoreboard.json now shows workflow_root_types: 9 (not 'unknown')",
+  "verdict": "DENOMINATOR_VERIFIED_CORRECT_NO_UPDATE_REQUIRED"
+}

@@ -1,0 +1,51 @@
+{
+  "lane": "lane-n",
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "New LowCode Family/Namespace Discovery Report",
+  "scan_scope": "All pipeline/configs/families/*.yml files",
+  "current_active_families": [
+    "cells",
+    "diagram",
+    "email",
+    "pdf",
+    "slides",
+    "words"
+  ],
+  "discovery_only_families": [
+    {
+      "family": "epub",
+      "notes": "Reflection-blocked — Aspose.Epub package download failed in prior scans. No LowCode namespace confirmed.",
+      "status": "DISCOVERY_ONLY_REFLECTION_BLOCKED"
+    },
+    {
+      "family": "ocr",
+      "notes": "Reflection-blocked — Aspose.Drawing.Common dependency missing in prior scans. No LowCode namespace confirmed.",
+      "status": "DISCOVERY_ONLY_REFLECTION_BLOCKED"
+    },
+    {
+      "family": "psd",
+      "notes": "Reflection-blocked — Newtonsoft.Json dependency missing in prior scans. No LowCode namespace confirmed.",
+      "status": "DISCOVERY_ONLY_REFLECTION_BLOCKED"
+    }
+  ],
+  "confirmed_no_lowcode_families": {
+    "count": 15,
+    "note": "15 families confirmed CONFIRMED_NO_LOWCODE in Phase I discovery sprint. See workspace/verification/latest/confirmed-no-lowcode-family-registry.json",
+    "includes": ["barcode", "cad", "drawing", "finance", "font", "gis", "html", "imaging", "note", "omr", "page", "svg", "tasks", "tex", "threed", "zip"]
+  },
+  "new_lowcode_families_found_this_sprint": 0,
+  "new_lowcode_namespace_candidates": [],
+  "discovery_actions_taken": [
+    "Reviewed all 3 discovery_only families for new Aspose package version releases",
+    "Checked NuGet for Aspose.Epub, Aspose.OCR, Aspose.PSD package updates",
+    "No new LowCode namespaces discovered in any family"
+  ],
+  "recommendations": {
+    "next_candidate_for_activation": "None — all 6 active families are at PILOT_COMPLETE or higher. Expanding any of the 3 reflection-blocked families requires resolving dependency resolution issues.",
+    "epub_resolution": "Requires successful Aspose.Epub package download — retry NuGet restore with updated deps",
+    "ocr_resolution": "Add Aspose.Drawing.Common to resolved-libs before reflection scan",
+    "psd_resolution": "Add Newtonsoft.Json to resolved-libs before reflection scan"
+  },
+  "verdict": "NO_NEW_LOWCODE_FAMILIES_FOUND"
+}

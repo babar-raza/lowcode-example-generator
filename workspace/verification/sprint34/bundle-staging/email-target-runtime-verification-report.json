@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint33",
+  "target_repo": "aspose-email-net",
+  "merge_sha": "023ad66970d2",
+  "status": "RUNTIME_VERIFIED",
+  "build_status": "PASS",
+  "run_status": "PASS",
+  "output_bytes": 2002,
+  "output_format": "HTML",
+  "note": "Verified in Sprint 32 lane-e1. Carry-forward to Sprint 33.",
+  "verdict": "EMAIL_TARGET_RUNTIME_VERIFIED"
+}

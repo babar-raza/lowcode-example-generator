@@ -1,0 +1,20 @@
+{
+  "lane": "lane-p6",
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "PR#9 Package Audit (Sprint 33)",
+  "pr_number": 9,
+  "package_name": "pdf-controlled-pilot-pr9",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9",
+  "examples": ["signature"],
+  "example_count": 1,
+  "aspose_pdf_version": "26.5.0",
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "audit_status": "CLEAN",
+  "note": "Sprint 30 removed 83 bin/obj files from this package. Sprint 33 confirms 0 bin/obj.",
+  "dry_run_status": "SIMULATION_PASSED",
+  "pr_title": "Add verified Aspose.PDF LowCode examples: Signature",
+  "publication_status": "APPROVAL_BLOCKED",
+  "verdict": "PACKAGE_CLEAN_PUBLICATION_BLOCKED_APPROVAL_NOT_SET"
+}

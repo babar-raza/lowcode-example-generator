@@ -1,0 +1,11 @@
+{
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "gate": "APPROVAL_BLOCKED",
+  "gate_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "gate_value": "NOT_SET",
+  "required_value": "APPROVE_LIVE_PR",
+  "mode": "DRY_RUN_ONLY",
+  "reason": "Approval gate not set — all publish-pr commands would run in dry-run simulation only",
+  "verdict": "PUBLICATION_MODE_APPROVAL_BLOCKED"
+}

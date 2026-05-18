@@ -56,6 +56,8 @@ generation:
 
 template_hints:
   default_fixture_extension: .vsdx
+  default_input_extension: .vsdx
+  default_output_extension: .vdx
 
 per_type_constraints:
   DiagramConverter:

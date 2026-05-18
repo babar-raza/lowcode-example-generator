@@ -25,9 +25,204 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `doc-converter` | `DocConverter.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/doc-converter` |
-| `html` | `Html.Dispose` | `pdf` | `html` | `dotnet run --project examples/pdf/lowcode/html` |
-| `xls-converter` | `XlsConverter.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/xls-converter` |
+| `doc-converter` | `DocConverter.Dispose` | `pdf` | `docx` | `dotnet run --project examples/pdf/lowcode/doc-converter` |
+| `html` | `Html.Dispose` | `html` | `pdf` | `dotnet run --project examples/pdf/lowcode/html` |
+| `xls-converter` | `XlsConverter.Dispose` | `pdf` | `xlsx` | `dotnet run --project examples/pdf/lowcode/xls-converter` |
+
+
+
+
+---
+
+## Source Code
+
+
+
+<details>
+<summary><code>doc-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Pdf;
+using Aspose.Pdf.LowCode;
+using Aspose.Pdf.Text;
+
+class Program
+{
+    static void Main()
+    {
+        // 1. Create input PDF fixture
+        string inputPath = Path.Combine(Path.GetTempPath(), "input.pdf");
+        var doc = new Document();
+        doc.Pages.Add().Paragraphs.Add(new TextFragment("Hello, Aspose PDF LowCode!"));
+        doc.Save(inputPath);
+
+        // Validate input file
+        if (!File.Exists(inputPath) || new FileInfo(inputPath).Length == 0)
+        {
+            Console.Error.WriteLine("Input PDF was not created correctly.");
+            return;
+        }
+
+        // 2. Perform LowCode conversion (PDF to DOCX)
+        var converter = new DocConverter();
+
+        var options = new PdfToDocOptions
+        {
+            SaveFormat = Aspose.Pdf.LowCode.SaveFormat.DocX
+        };
+        options.AddInput(new FileDataSource(inputPath));
+
+        string outputPath = Path.Combine(Path.GetTempPath(), "output.docx");
+        options.AddOutput(new FileDataSource(outputPath));
+
+        var result = converter.Process(options);
+
+        // Verify processing result
+        if (result?.ResultCollection == null || result.ResultCollection.Count == 0)
+        {
+            Console.Error.WriteLine("LowCode processing did not produce any results.");
+            return;
+        }
+
+        // 3. Validate output file
+        if (File.Exists(outputPath) && new FileInfo(outputPath).Length > 0)
+        {
+            Console.WriteLine($"Conversion succeeded, output file size: {new FileInfo(outputPath).Length} bytes");
+        }
+        else
+        {
+            Console.Error.WriteLine("Output file was not created.");
+        }
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>html/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Pdf.LowCode;
+
+namespace HtmlConversionExample
+{
+    class Program
+    {
+        static void Main()
+        {
+            // Create HTML input file
+            string inputPath = Path.Combine(Path.GetTempPath(), "input.html");
+            File.WriteAllText(inputPath, "<html><body><h1>Hello, Aspose PDF LowCode!</h1></body></html>");
+
+            if (!File.Exists(inputPath) || new FileInfo(inputPath).Length == 0)
+                throw new InvalidOperationException("Failed to create the HTML input file.");
+
+            // Define output PDF path
+            string outputPath = Path.Combine(Path.GetTempPath(), "output.pdf");
+
+            // Initialize Html plugin and options
+            var plugin = new Html();
+            var options = new HtmlToPdfOptions();
+            options.AddInput(new FileDataSource(inputPath));
+            options.AddOutput(new FileDataSource(outputPath));
+
+            // Process conversion
+            var result = plugin.Process(options);
+
+            // Verify processing result
+            if (result?.ResultCollection == null || result.ResultCollection.Count == 0)
+                throw new InvalidOperationException("LowCode processing did not produce any results.");
+
+            // Validate output file
+            if (!File.Exists(outputPath) || new FileInfo(outputPath).Length == 0)
+                throw new InvalidOperationException("Output PDF was not created or is empty.");
+
+            Console.WriteLine("Success: output.pdf created.");
+
+            // Clean up
+            plugin.Dispose();
+        }
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>xls-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Pdf;
+using Aspose.Pdf.LowCode;
+using Aspose.Pdf.Text;
+
+namespace LowCodeXlsConverterDemo
+{
+    internal class Program
+    {
+        private static void Main()
+        {
+            // 1. Prepare working directory
+            string workDir = Path.Combine(Path.GetTempPath(), "LowCodeXlsDemo");
+            Directory.CreateDirectory(workDir);
+
+            string inputPdfPath = Path.Combine(workDir, "input.pdf");
+            string outputXlsPath = Path.Combine(workDir, "output.xlsx");
+
+            // 2. Create a simple PDF document
+            var pdfDoc = new Document();
+            var page = pdfDoc.Pages.Add();
+            var fragment = new TextFragment("Hello, PDF!");
+            page.Paragraphs.Add(fragment);
+            pdfDoc.Save(inputPdfPath);
+
+            // 3. Validate input file
+            if (!File.Exists(inputPdfPath) || new FileInfo(inputPdfPath).Length == 0)
+                throw new InvalidOperationException("Input PDF was not created correctly.");
+
+            // 4. Configure LowCode conversion options
+            var options = new PdfToXlsOptions
+            {
+                Format = PdfToXlsOptions.ExcelFormat.XLSX
+            };
+            options.AddInput(new FileDataSource(inputPdfPath));
+            options.AddOutput(new FileDataSource(outputXlsPath));
+
+            // 5. Execute conversion using the primary method
+            var converter = new XlsConverter();
+            var result = converter.Process(options);
+
+            // 6. Verify conversion result
+            if (result?.ResultCollection == null || result.ResultCollection.Count == 0)
+                throw new InvalidOperationException("Conversion did not produce any results.");
+
+            // 7. Validate output file
+            if (!File.Exists(outputXlsPath) || new FileInfo(outputXlsPath).Length == 0)
+                throw new InvalidOperationException("Output XLSX was not created or is empty.");
+
+            // 8. Deterministic success output
+            Console.WriteLine($"Conversion succeeded, output size: {new FileInfo(outputXlsPath).Length} bytes");
+        }
+    }
+}
+```
+
+</details>
+
+
 
 
 ---
@@ -55,7 +250,7 @@ dotnet run --project examples/pdf/lowcode/<example-name>
 ```
 
 Each example is a self-contained .NET project. Running it produces an output file in the project
-directory (e.g., `output.pdf`, `output.xlsx`, `output.html`).
+directory (e.g., `output.docx`, `output.pdf`, `output.xlsx`).
 
 ---
 
@@ -88,7 +283,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-18 08:16 UTC
+Generated on: 2026-05-18 10:01 UTC
 
 ---
 

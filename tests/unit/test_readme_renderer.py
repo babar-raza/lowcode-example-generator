@@ -1286,3 +1286,145 @@ class TestFailClosedBehavior:
                 package_version="26.1.0", package_path=tmp_path,
                 strict_facts=True,
             )
+
+
+# ---------------------------------------------------------------------------
+# Extended facts extraction tests (portfolio generalization)
+# ---------------------------------------------------------------------------
+
+class TestExtendedFactsExtraction:
+    """Lane D: Generalized facts extraction for non-Diagram families."""
+
+    def test_words_template_input_pattern(self, tmp_path):
+        """Words mail-merger uses template.docx, result.docx — extended patterns."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "words" / "lowcode" / "mail-merger"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string t = "template.docx"; string r = "result.docx"; } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("words", tmp_path, [{"name": "mail-merger"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "docx", f"Expected docx, got {fact.input_extension}"
+        assert fact.output_extension == "docx", f"Expected docx, got {fact.output_extension}"
+        assert fact.validation_status == "verified"
+
+    def test_words_comparer_input1_pattern(self, tmp_path):
+        """Words comparer uses input1.docx, output.docx — extended input pattern."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "words" / "lowcode" / "comparer"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string i = "input1.docx"; string o = "output.docx"; } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("words", tmp_path, [{"name": "comparer"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "docx"
+        assert fact.output_extension == "docx"
+        assert fact.validation_status == "verified"
+
+    def test_words_report_builder_report_output(self, tmp_path):
+        """Words report-builder uses template.docx, report.docx — extended patterns."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "words" / "lowcode" / "report-builder"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string t = "template.docx"; string r = "report.docx"; } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("words", tmp_path, [{"name": "report-builder"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "docx"
+        assert fact.output_extension == "docx"
+        assert fact.validation_status == "verified"
+
+    def test_pdf_json_output(self, tmp_path):
+        """PDF form-exporter uses input.pdf, output.json."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "pdf" / "lowcode" / "form-exporter"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string i = "input.pdf"; string o = "output.json"; } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("pdf", tmp_path, [{"name": "form-exporter"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "pdf"
+        assert fact.output_extension == "json"
+        assert fact.validation_status == "verified"
+
+    def test_cells_standard_patterns(self, tmp_path):
+        """Cells uses input.xlsx, output.html — standard patterns."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string i = "input.xlsx"; string o = "output.html"; } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("cells", tmp_path, [{"name": "html-converter"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "xlsx"
+        assert fact.output_extension == "html"
+        assert fact.validation_status == "verified"
+
+    def test_no_output_pattern_is_blocked(self, tmp_path):
+        """Examples with no recognizable output pattern are blocked_unverified."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        prog_dir = tmp_path / "examples" / "pdf" / "lowcode" / "image-extractor"
+        prog_dir.mkdir(parents=True, exist_ok=True)
+        (prog_dir / "Program.cs").write_text(
+            'class P { static void Main() { string i = "input.pdf"; var r = new ImageExtractor(); } }',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("pdf", tmp_path, [{"name": "image-extractor"}])
+        fact = facts.facts[0]
+        assert fact.input_extension == "pdf"
+        assert fact.output_extension == ""
+        assert fact.validation_status == "blocked_unverified"
+
+    def test_portfolio_audit_cells_no_false_xlsx(self, tmp_path):
+        """Cells xlsx claims are legitimate — auditor must NOT flag them."""
+        from plugin_examples.publisher.readme_auditor import audit_readme
+
+        readme = (
+            "## Overview\n\n## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Run |\n"
+            "|---------|-----------------|-------|--------|-----|\n"
+            "| `html-converter` | `HtmlConverter.Process` | `xlsx` | `html` | cmd |\n\n"
+            "## Requirements\n## How to Run\n## Package Installation\n"
+            "## Validation Status\n## Useful Links\n"
+        )
+        context = {"package_version": "", "examples": [{"name": "html-converter"}], "family": "cells"}
+        result = audit_readme(readme, context)
+        assert not result.xlsx_cross_family_violation
+
+    def test_portfolio_audit_words_xlsx_is_violation(self):
+        """Words xlsx claims are false — auditor must flag them."""
+        from plugin_examples.publisher.readme_auditor import audit_readme
+
+        readme = (
+            "## Overview\n\n## Included Examples\n\n"
+            "| Example | Demonstrated API | Input | Output | Run |\n"
+            "|---------|-----------------|-------|--------|-----|\n"
+            "| `converter` | `Converter.Convert` | `xlsx` | `pdf` | cmd |\n\n"
+            "## Requirements\n## How to Run\n## Package Installation\n"
+            "## Validation Status\n## Useful Links\n"
+        )
+        context = {"package_version": "", "examples": [{"name": "converter"}], "family": "words"}
+        result = audit_readme(readme, context)
+        assert result.xlsx_cross_family_violation

@@ -18,9 +18,23 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 # Regex patterns to extract file extensions from Program.cs path assignments
-# Matches: "input.vsdx", 'input.pdf', Path.Combine(workDir, "input.vsdx"), etc.
+# Primary: "input.vsdx", 'input.pdf', Path.Combine(workDir, "input.vsdx"), etc.
 _INPUT_PATTERN = re.compile(r'["\']input\.(\w+)["\']')
 _OUTPUT_PATTERN = re.compile(r'["\']output\.(\w+)["\']')
+
+# Extended input patterns: input1.ext, input2.ext, template.ext, source.ext
+_INPUT_EXTENDED_PATTERNS = [
+    re.compile(r'["\']input\d*\.(\w+)["\']'),
+    re.compile(r'["\']template\.(\w+)["\']'),
+    re.compile(r'["\']source\.(\w+)["\']'),
+]
+
+# Extended output patterns: result.ext, report.ext, output_signed.ext
+_OUTPUT_EXTENDED_PATTERNS = [
+    re.compile(r'["\']result\.(\w+)["\']'),
+    re.compile(r'["\']report\.(\w+)["\']'),
+    re.compile(r'["\']output[_-]\w+\.(\w+)["\']'),
+]
 
 
 @dataclass
@@ -126,9 +140,20 @@ def extract_example_readme_facts(
         source = program_cs.read_text(encoding="utf-8")
         file_hash = _sha256_file(program_cs)
 
-        # Extract extensions from source
+        # Extract extensions from source — try primary patterns first, then extended
         input_ext, input_src = _extract_extension(_INPUT_PATTERN, source)
+        if not input_ext:
+            for pat in _INPUT_EXTENDED_PATTERNS:
+                input_ext, input_src = _extract_extension(pat, source)
+                if input_ext:
+                    break
+
         output_ext, output_src = _extract_extension(_OUTPUT_PATTERN, source)
+        if not output_ext:
+            for pat in _OUTPUT_EXTENDED_PATTERNS:
+                output_ext, output_src = _extract_extension(pat, source)
+                if output_ext:
+                    break
 
         # Determine snippet mode
         line_count = len(source.splitlines())

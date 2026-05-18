@@ -313,18 +313,18 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
 
     # --- 15. XLSX cross-family guard ---
     if family and family != "cells":
-        # Check that xlsx does not appear as a format in the examples table
+        # Check that xlsx does not appear as INPUT format in the examples table.
+        # Output xlsx is allowed for converters that produce Excel output (e.g. PDF xls-converter).
         for line in examples_section.splitlines():
             stripped = line.strip()
             if stripped.startswith("|") and not stripped.startswith("|---") and "Example" not in stripped:
                 cols = stripped.split("|")
                 if len(cols) >= 5:
                     table_input = cols[3].strip().strip("`").strip().lower()
-                    table_output = cols[4].strip().strip("`").strip().lower()
-                    if "xlsx" in table_input or "xlsx" in table_output:
+                    if "xlsx" in table_input:
                         result.xlsx_cross_family_violation = True
                         failures.append(
-                            f"XLSX format found in {family} README table (xlsx is cells-specific)"
+                            f"XLSX input format found in {family} README table (xlsx input is cells-specific)"
                         )
                         break
 

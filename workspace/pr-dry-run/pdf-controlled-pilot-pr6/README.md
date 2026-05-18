@@ -25,9 +25,118 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `image-extractor` | `ImageExtractor` | `pdf` | `png` | `dotnet run --project examples/pdf/lowcode/image-extractor` |
+| `image-extractor` | `ImageExtractor` | `pdf` | `` | `dotnet run --project examples/pdf/lowcode/image-extractor` |
 | `table-generator` | `TableGenerator.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/table-generator` |
 | `toc-generator` | `TocGenerator.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/toc-generator` |
+
+
+
+
+---
+
+## Source Code
+
+
+
+<details>
+<summary><code>image-extractor/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Pdf;
+using Aspose.Pdf.LowCode;
+
+// Minimal 1x1 red pixel BMP (58 bytes) as fixture image
+var bmpBytes = new byte[] {
+    66, 77, 58, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0,
+    40, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0,
+    0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 255, 0
+};
+var document = new Document();
+var page = document.Pages.Add();
+page.Resources.Images.Add(new MemoryStream(bmpBytes));
+document.Save("input.pdf");
+
+var options = new ImageExtractorOptions();
+options.AddInput(new FileDataSource("input.pdf"));
+var result = new ImageExtractor().Process(options);
+Console.WriteLine(result.ResultCollection.Count > 0 ? "Images extracted" : "No images found");
+
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>table-generator/Program.cs</code></summary>
+
+```csharp
+using System;
+using Aspose.Pdf;
+using Aspose.Pdf.LowCode;
+using Aspose.Pdf.Text;
+
+var doc = new Document();
+doc.Pages.Add();
+doc.Save("input.pdf");
+
+var options = TableOptions.Create()
+    .InsertPageBefore(1);
+
+options.AddTable()
+    .AddRow()
+        .AddCell()
+            .AddParagraph(new TextFragment("Header 1"))
+        .AddCell()
+            .AddParagraph(new TextFragment("Header 2"))
+    .AddRow()
+        .AddCell()
+            .AddParagraph(new TextFragment("Cell 1"))
+        .AddCell()
+            .AddParagraph(new TextFragment("Cell 2"));
+
+options.AddInput(new FileDataSource("input.pdf"));
+options.AddOutput(new FileDataSource("output.pdf"));
+
+var plugin = new TableGenerator();
+var result = plugin.Process(options);
+
+Console.WriteLine(result.ResultCollection.Count > 0 ? "Table added" : "No output");
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>toc-generator/Program.cs</code></summary>
+
+```csharp
+using System;
+using Aspose.Pdf;
+using Aspose.Pdf.LowCode;
+
+var document = new Document();
+document.Pages.Add();
+document.Save("input.pdf");
+
+var options = new TocOptions();
+options.AddInput(new FileDataSource("input.pdf"));
+options.AddOutput(new FileDataSource("output.pdf"));
+var result = new TocGenerator().Process(options);
+Console.WriteLine(result.ResultCollection.Count > 0 ? "TOC added" : "No output");
+
+```
+
+</details>
+
+
 
 
 ---
@@ -55,7 +164,7 @@ dotnet run --project examples/pdf/lowcode/<example-name>
 ```
 
 Each example is a self-contained .NET project. Running it produces an output file in the project
-directory (e.g., `output.pdf`, `output.xlsx`, `output.html`).
+directory (e.g., `output.pdf`).
 
 ---
 
@@ -88,7 +197,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-18 08:16 UTC
+Generated on: 2026-05-18 10:01 UTC
 
 ---
 

@@ -1,9 +1,2 @@
- src/plugin_examples/evidence_contract.py                         | 9 +++++++++
- .../verification/latest/cells-readme-backfill-simulation.json    | 4 ++--
- workspace/verification/latest/cells-root-readme-audit.json       | 2 +-
- .../verification/latest/cells-root-readme-render-result.json     | 2 +-
- workspace/verification/latest/release-status.json                | 2 +-
- .../verification/latest/words-readme-backfill-simulation.json    | 4 ++--
- workspace/verification/latest/words-root-readme-audit.json       | 2 +-
- .../verification/latest/words-root-readme-render-result.json     | 2 +-
- 8 files changed, 18 insertions(+), 9 deletions(-)
+ .../verification/sprint35/bundle-staging/git-status-final.txt     | 8 --------
+ 1 file changed, 8 deletions(-)

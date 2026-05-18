@@ -46,7 +46,7 @@ class FamilyDriftResult:
     latest_nuget_version: str | None
     on_nuget: bool
     drift: bool
-    drift_severity: str  # NONE | PATCH | MINOR | MAJOR | UNKNOWN
+    drift_severity: str  # NONE | PATCH | MAJOR | UNKNOWN (MINOR not used: Aspose month-bumps are MAJOR)
     status: str  # CURRENT | DRIFT | NOT_ON_NUGET | ERROR | NO_DENOMINATOR
     error: str | None = None
 
@@ -129,7 +129,15 @@ def _compare_versions(a: str, b: str) -> int:
 
 
 def _drift_severity(old: str, new: str) -> str:
-    """Classify version change severity."""
+    """Classify version change severity.
+
+    Aspose packages use calendar versioning (Year.Month.Patch).
+    A Month-component change is a full monthly release and is treated as MAJOR —
+    not MINOR — because monthly releases may introduce API additions or changes.
+    Only patch-level increments within the same month are classified as PATCH.
+
+    Severity taxonomy: NONE | PATCH | MAJOR | UNKNOWN
+    """
     try:
         op = tuple(int(x) for x in old.split("."))
         np_ = tuple(int(x) for x in new.split("."))
@@ -138,7 +146,8 @@ def _drift_severity(old: str, new: str) -> str:
         if np_[0] != op[0]:
             return "MAJOR"
         if np_[1] != op[1]:
-            return "MINOR"
+            # Month-component change in Aspose calendar versioning = MAJOR release
+            return "MAJOR"
         if len(op) >= 3 and len(np_) >= 3 and np_[2] != op[2]:
             return "PATCH"
         return "NONE"

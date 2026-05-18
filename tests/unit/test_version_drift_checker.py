@@ -51,16 +51,17 @@ class TestDriftSeverity:
     def test_patch_drift(self):
         assert _drift_severity("26.4.0", "26.4.1") == "PATCH"
 
-    def test_minor_drift(self):
-        assert _drift_severity("26.4.0", "26.5.0") == "MINOR"
+    def test_month_bump_is_major(self):
+        # Aspose calendar versioning: Year.Month.Patch — month change = full monthly release = MAJOR
+        assert _drift_severity("26.4.0", "26.5.0") == "MAJOR"
 
-    def test_major_drift(self):
+    def test_year_bump_is_major(self):
         assert _drift_severity("25.0.0", "26.0.0") == "MAJOR"
 
     def test_cells_drift(self):
-        # Cells 26.4.0 → 26.5.1: minor drift (then patch, but minor takes precedence)
+        # Cells 26.4.0 -> 26.5.1: month component changed -> MAJOR (Aspose monthly release)
         result = _drift_severity("26.4.0", "26.5.1")
-        assert result == "MINOR"
+        assert result == "MAJOR"
 
     def test_invalid_input_returns_unknown(self):
         assert _drift_severity("abc", "xyz") == "UNKNOWN"
@@ -114,7 +115,7 @@ class TestRunVersionDriftCheck:
         assert report.drifted_count == 1
         assert report.families[0].latest_nuget_version == "26.5.1"
         assert report.families[0].drift is True
-        assert report.families[0].drift_severity == "MINOR"
+        assert report.families[0].drift_severity == "MAJOR"
 
     def test_not_on_nuget_returns_error(self, tmp_path):
         _write_denominator(tmp_path, "cells", "26.4.0")
@@ -155,7 +156,7 @@ class TestRunVersionDriftCheck:
         assert d["overall_verdict"] == "ALL_CURRENT"
 
     def test_drift_severity_cells_26_4_to_26_5_1(self, tmp_path):
-        """Sprint 36 discovery: Cells drifted from 26.4.0 → 26.5.1 (MINOR)."""
+        """Cells drifted from 26.4.0 -> 26.5.1: month component changed -> MAJOR."""
         _write_denominator(tmp_path, "cells", "26.4.0")
 
         with patch("urllib.request.urlopen") as mock_open:
@@ -166,10 +167,10 @@ class TestRunVersionDriftCheck:
         assert r.denominator_version == "26.4.0"
         assert r.latest_nuget_version == "26.5.1"
         assert r.drift is True
-        assert r.drift_severity == "MINOR"
+        assert r.drift_severity == "MAJOR"
 
     def test_drift_severity_diagram_26_4_to_26_5(self, tmp_path):
-        """Sprint 36 discovery: Diagram drifted from 26.4.0 → 26.5.0 (MINOR)."""
+        """Diagram drifted from 26.4.0 -> 26.5.0: month component changed -> MAJOR."""
         _write_denominator(tmp_path, "diagram", "26.4.0")
 
         with patch("urllib.request.urlopen") as mock_open:
@@ -178,7 +179,7 @@ class TestRunVersionDriftCheck:
 
         r = report.families[0]
         assert r.drift is True
-        assert r.drift_severity == "MINOR"
+        assert r.drift_severity == "MAJOR"
 
     def test_slides_uses_correct_package_id(self):
         """Slides must use 'Aspose.Slides.NET' not 'Aspose.Slides'."""

@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "family": "pdf",
+  "generated_at": "2026-05-18",
+  "package_id": "Aspose.PDF",
+  "denominator_version": "26.5.0",
+  "latest_nuget_version": "26.5.0",
+  "drift": false,
+  "drift_severity": "NONE",
+  "status": "CURRENT",
+  "verdict": "NO_DRIFT"
+}

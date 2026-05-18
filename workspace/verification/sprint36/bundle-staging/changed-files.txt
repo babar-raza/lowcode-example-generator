@@ -1,0 +1,7 @@
+src/plugin_examples/__main__.py
+src/plugin_examples/evidence_contract.py
+src/plugin_examples/publisher/target_repo_health.py
+src/plugin_examples/publisher/version_drift_checker.py
+tests/unit/test_target_repo_health.py
+tests/unit/test_version_drift_checker.py
+workspace/verification/sprint36/ (all lane artifacts)

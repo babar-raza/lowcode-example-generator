@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "family": "email",
+  "generated_at": "2026-05-18",
+  "runtime_verified_sprint": "sprint32",
+  "all_pass": true,
+  "examples_tested": 1,
+  "build_status": "PASS",
+  "run_status": "PASS",
+  "file_lock_workaround": "GC.Collect() after ConvertToHtml handler \u2014 verified sprint26",
+  "verdict": "RUNTIME_VERIFIED"
+}

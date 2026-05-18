@@ -1,0 +1,16 @@
+{
+  "sprint": "sprint36",
+  "family": "slides",
+  "generated_at": "2026-05-18",
+  "runtime_verified_sprint": "sprint32",
+  "all_pass": true,
+  "examples": [
+    "compress",
+    "convert",
+    "merger"
+  ],
+  "build_status": "PASS",
+  "run_status": "PASS",
+  "slides_count_note": "6/6 harness tests (3 LowCode examples x 2 steps each)",
+  "verdict": "RUNTIME_VERIFIED"
+}

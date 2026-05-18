@@ -1,0 +1,35 @@
+{
+  "sprint": "sprint36",
+  "lane": "lane-0",
+  "generated_at": "2026-05-18",
+  "sprint35_verification": {
+    "bundle_path": "workspace/verification/sprint35-all-lowcode-family-launch-mainline-mega-swarm-20260518.zip",
+    "bundle_exists": true,
+    "bundle_file_count": 114,
+    "bundle_contract": "V6_PASSED_67_67",
+    "head_commit_at_sprint35_close": "994992d8c4a6250fe389528a5942ff71ab9b35ad",
+    "sprint35_verdict": "SPRINT35_APPROVAL_BLOCKED_ALL_FAMILIES_RELEASE_READY",
+    "sprint35_commit_chain": [
+      "994992d - chore(sprint35-bundle): final git state artifacts",
+      "c2417b6 - feat(sprint35-bundle): evidence bundle and contract extension"
+    ]
+  },
+  "current_head": "994992d8c4a6250fe389528a5942ff71ab9b35ad",
+  "current_branch": "main",
+  "source_state": "CLEAN_NO_MODIFICATIONS",
+  "test_count_reconciliation": {
+    "authoritative_count": 1789,
+    "stale_count_in_sprint35_dashboard": 1744,
+    "root_cause": "Sprint 35 portfolio-release-dashboard was generated from carry-forward sprint33/sprint32 artifacts before test suite rerun. Final test-summary.json (1789) is authoritative.",
+    "stale_artifact": "workspace/verification/sprint35/bundle-staging/portfolio-release-dashboard.json",
+    "authoritative_artifact": "workspace/verification/sprint35/bundle-staging/test-summary.json",
+    "verdict": "RECONCILED_1789_IS_CORRECT"
+  },
+  "portfolio_state_confirmed": {
+    "published_examples": 28,
+    "pr_dry_run_ready": 14,
+    "total": 42,
+    "families": 6
+  },
+  "verdict": "SPRINT35_STATE_VERIFIED_CLEAN"
+}

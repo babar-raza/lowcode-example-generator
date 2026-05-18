@@ -1,0 +1,78 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "test_suite": "1789/1789 PASS",
+  "test_count_reconciled": true,
+  "stale_count_fixed": "Sprint 35 dashboard showed 1744 (carry-forward sprint33 artifact); correct is 1789",
+  "portfolio": {
+    "published_examples": 28,
+    "pr_dry_run_ready": 14,
+    "total_ready_or_published": 42
+  },
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_roots": 9,
+      "coverage": "100%",
+      "version_drift": "26.4.0->26.5.1 MINOR"
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "workflow_roots": 9,
+      "pilot_coverage": "100%",
+      "processor_blocked": true,
+      "version_drift": "NONE"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pending": 14,
+      "workflow_roots": 22,
+      "version_drift": "NONE",
+      "timestamp_blocked": true,
+      "ofd_blocked": true,
+      "formimporter_deferred": true
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "workflow_roots": 2,
+      "coverage": "100%",
+      "version_drift": "26.4.0->26.5.0 MINOR"
+    },
+    "email": {
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "workflow_roots": 1,
+      "coverage": "100%",
+      "version_drift": "NONE"
+    },
+    "slides": {
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "workflow_roots": 3,
+      "coverage": "100%",
+      "version_drift": "NONE"
+    }
+  },
+  "blocked_families": {
+    "ocr": "ESCALATION_PACKAGE_READY \u2014 Aspose.AI.LLM not on NuGet",
+    "psd": "ESCALATION_PACKAGE_READY \u2014 Aspose.JavaAttributes not on NuGet",
+    "epub": "NO_STANDALONE_PACKAGE"
+  },
+  "publication_gate": "APPROVAL_BLOCKED",
+  "merge_gate": "MERGE_BLOCKED",
+  "approvals_needed": {
+    "publish": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+    "merge": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR"
+  },
+  "new_commands_sprint36": [
+    "version-drift",
+    "target-repo-health"
+  ],
+  "version_drift_summary": "2 drifted (Cells 26.5.1, Diagram 26.5.0) \u2014 non-blocking",
+  "target_repo_health": "ALL_VERIFIED via GH CLI (6/6 healthy)",
+  "verdict": "SPRINT36_APPROVAL_BLOCKED_PORTFOLIO_HARDENED_AND_OPERATOR_READY"
+}

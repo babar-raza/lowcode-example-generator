@@ -1,0 +1,22 @@
+{
+  "family": "diagram",
+  "sprint": "sprint35",
+  "verified_at": "2026-05-18",
+  "status": "PILOT_COMPLETE",
+  "namespace": "Aspose.Diagram.LowCode",
+  "package_version": "26.4.0",
+  "denominator_basis": "PILOT_ALLOWED",
+  "total_types": 5,
+  "workflow_roots": 2,
+  "non_runnable": 3,
+  "published": 2,
+  "pr_ready": 0,
+  "blocked": 0,
+  "coverage_pct": 100.0,
+  "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "last_merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+  "post_merge_status": "ALL_PASS",
+  "readme_integrity": "VERIFIED",
+  "verdict": "PILOT_COMPLETE_NO_ACTION_NEEDED",
+  "notes": "2/2 workflow roots published and post-merge verified. DiagramConverter and PdfConverter both live."
+}

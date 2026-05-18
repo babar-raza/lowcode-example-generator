@@ -1,0 +1,16 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "live_publish_allowed": false,
+  "live_merge_allowed": false,
+  "approval_blocked": true,
+  "merge_blocked": true,
+  "publish_gate": "APPROVAL_BLOCKED",
+  "merge_gate": "MERGE_BLOCKED",
+  "github_token_type": "classic_ghp",
+  "gh_token_present": true,
+  "github_token_present": true,
+  "token_mapping_required": true,
+  "token_mapping_instruction": "Map GH_TOKEN to GITHUB_TOKEN before publish: export GITHUB_TOKEN=$GH_TOKEN",
+  "verdict": "APPROVAL_BLOCKED_DRY_RUN_ONLY"
+}

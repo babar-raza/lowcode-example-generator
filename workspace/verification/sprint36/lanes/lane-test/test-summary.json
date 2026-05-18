@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "total_tests": 1843,
+  "passed": 1843,
+  "failed": 0,
+  "errors": 0,
+  "prior_sprint_count": 1789,
+  "new_tests_this_sprint": 54,
+  "note": "1843 tests all pass. 54 new tests: 17 version_drift_checker + 18 target_repo_health + 19 evidence_contract_sprint36.",
+  "verdict": "ALL_TESTS_PASS"
+}

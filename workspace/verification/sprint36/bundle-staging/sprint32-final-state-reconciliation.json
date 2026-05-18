@@ -1,0 +1,17 @@
+sprint: sprint33
+date: 2026-05-18
+verdict: SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED
+evidence_contract: V6 (67 categories)
+test_suite:
+  passed: 1744
+  failed: 0
+  new_tests: 21
+published_examples: 28
+pr_ready_examples: 14
+active_families: 6
+families_complete_or_pilot_complete: 5
+families_partial_canary: 1
+approval_gate: NOT_SET
+words_workflow_root_count: 9
+taskcards_closed_this_sprint: 4
+taskcards_open: 9

@@ -1,0 +1,42 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "open_taskcards": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "priority": "HIGH",
+      "blocker": "APPROVE_LIVE_PR not set"
+    },
+    {
+      "id": "TC-MERGE-01",
+      "priority": "HIGH",
+      "blocker": "APPROVE_MERGE_PR not set"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "priority": "MEDIUM",
+      "blocker": "Aspose.PDF still 26.5.0"
+    },
+    {
+      "id": "TC-CELLS-DRIFT",
+      "priority": "LOW",
+      "action": "Update cells.json denominator to 26.5.1"
+    },
+    {
+      "id": "TC-DIAGRAM-DRIFT",
+      "priority": "LOW",
+      "action": "Update diagram.json denominator to 26.5.0"
+    },
+    {
+      "id": "TC-OCR-01",
+      "priority": "LOW",
+      "action": "Re-run OCR discovery when Aspose.AI.LLM on NuGet"
+    },
+    {
+      "id": "TC-PSD-01",
+      "priority": "LOW",
+      "action": "Re-run PSD discovery when Aspose.JavaAttributes on NuGet"
+    }
+  ],
+  "verdict": "AUTHORITATIVE_TASKCARD_STATE"
+}

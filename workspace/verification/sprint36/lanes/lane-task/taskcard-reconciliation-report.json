@@ -1,0 +1,65 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "cards_updated": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "status": "STILL_OPEN",
+      "reason": "APPROVE_LIVE_PR not set"
+    },
+    {
+      "id": "TC-MERGE-01",
+      "status": "STILL_OPEN",
+      "reason": "APPROVE_MERGE_PR not set"
+    },
+    {
+      "id": "TC-SYS-VD-01",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "version-drift command implemented, 17 tests pass"
+    },
+    {
+      "id": "TC-SYS-TRH-01",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "target-repo-health command implemented, 18 tests pass"
+    },
+    {
+      "id": "TC-OCR-ESCALATION",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "Escalation package ready: ocr-blocker-escalation-package.json + issue.md"
+    },
+    {
+      "id": "TC-PSD-ESCALATION",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "Escalation package ready: psd-blocker-escalation-package.json + issue.md"
+    },
+    {
+      "id": "TC-EPUB-VERIFY",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "EPUB confirmed no standalone NuGet package"
+    },
+    {
+      "id": "TC-DASH-TEST-COUNT",
+      "status": "CLOSED_VERIFIED",
+      "outcome": "Dashboard reconciled to 1789 (was 1744 stale)"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "status": "STILL_OPEN",
+      "reason": "Aspose.PDF still 26.5.0 \u2014 no new version"
+    },
+    {
+      "id": "TC-CELLS-DRIFT",
+      "status": "OPEN_NEW",
+      "reason": "Cells 26.4.0->26.5.1 drift noted; denominator update deferred"
+    },
+    {
+      "id": "TC-DIAGRAM-DRIFT",
+      "status": "OPEN_NEW",
+      "reason": "Diagram 26.4.0->26.5.0 drift noted; denominator update deferred"
+    }
+  ],
+  "total_updated": 11,
+  "closed_this_sprint": 7,
+  "still_open": 4,
+  "verdict": "TASKCARDS_CURRENT"
+}

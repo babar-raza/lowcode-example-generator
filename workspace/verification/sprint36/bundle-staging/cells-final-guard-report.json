@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint33",
+  "family": "cells",
+  "status": "REGRESSION_FREE",
+  "published": 9,
+  "workflow_roots": 9,
+  "verdict": "CELLS_FAMILY_COMPLETE_NO_REGRESSION"
+}

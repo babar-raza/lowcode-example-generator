@@ -1,0 +1,16 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "test_counts": {
+    "sprint35_test_summary_json": 1789,
+    "sprint35_final_verdict_md": 1789,
+    "sprint35_portfolio_dashboard_json": 1744,
+    "sprint35_portfolio_dashboard_md": 1744,
+    "sprint32_final_state_reconciliation": 1744
+  },
+  "root_cause": "portfolio_dashboard was generated from stale sprint33 carry-forward artifact before sprint35 test run. carry-forward artifacts from sprint34/33 showed 1744.",
+  "correct_count": 1789,
+  "evidence": "workspace/verification/sprint35/bundle-staging/test-summary.json says 1789/1789 PASS",
+  "action": "Sprint 36 dashboard regenerated with correct 1789 count",
+  "verdict": "RECONCILED"
+}

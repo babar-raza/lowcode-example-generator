@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "20260518-163801",
+  "passed": true,
+  "bundle_bytes": 90611,
+  "bundle_file": "sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip",
+  "categories_found": 67,
+  "categories_missing": [],
+  "file_count": 168,
+  "verdict": "BUNDLE_CONTRACT_PASSED",
+  "note": "Sprint 36 evidence bundle. V6 contract. 67/67 categories satisfied. All content checks passed."
+}

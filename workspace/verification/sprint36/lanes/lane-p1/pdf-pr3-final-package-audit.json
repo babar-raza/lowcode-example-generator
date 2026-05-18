@@ -1,0 +1,19 @@
+{
+  "sprint": "sprint36",
+  "pr_number": 3,
+  "package": "pdf-controlled-pilot",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+  "examples": [
+    "DocConverter",
+    "Html",
+    "XlsConverter"
+  ],
+  "example_count": 3,
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "dry_run_result": "SIMULATION_PASSED",
+  "approval_gate": "BLOCKED",
+  "security_present": false,
+  "formflattener_present": false,
+  "audit_verdict": "CLEAN"
+}

@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "rollback_conditions": [
+    "security_absent_from_pr7",
+    "bin_obj_present",
+    "wrong_target_repo",
+    "example_count_mismatch"
+  ],
+  "close_pr_command": "gh pr close <PR_URL>",
+  "delete_branch_command": "gh api repos/OWNER/REPO/git/refs/heads/BRANCH -X DELETE",
+  "verdict": "ROLLBACK_PACKET_READY"
+}

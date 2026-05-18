@@ -1,0 +1,9 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "regeneration_performed": true,
+  "regeneration_method": "publish-pr --dry-run re-renders README for each package",
+  "packages_regenerated": ["pdf-controlled-pilot", "pdf-controlled-pilot-pr5", "pdf-controlled-pilot-pr6", "pdf-controlled-pilot-pr7", "pdf-controlled-pilot-pr8", "pdf-controlled-pilot-pr9"],
+  "all_regenerated_pass": true,
+  "verdict": "READMES_CURRENT_AND_PASSING"
+}

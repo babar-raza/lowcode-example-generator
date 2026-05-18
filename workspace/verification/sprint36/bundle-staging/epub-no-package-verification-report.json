@@ -1,0 +1,16 @@
+{
+  "sprint": "sprint36",
+  "family": "epub",
+  "generated_at": "2026-05-18",
+  "package_id": "Aspose.Epub",
+  "nuget_url": "https://api.nuget.org/v3-flatcontainer/aspose.epub/index.json",
+  "nuget_response": "HTTP 404 Not Found",
+  "on_nuget": false,
+  "epub_yml_status": "disabled",
+  "epub_yml_note": "Reclassified Sprint 34: no standalone NuGet package exists",
+  "alternative_packages_checked": [
+    "aspose.epub",
+    "aspose.html"
+  ],
+  "verdict": "NO_STANDALONE_EPUB_PACKAGE_CONFIRMED"
+}

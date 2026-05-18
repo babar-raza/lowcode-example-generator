@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint36",
+  "family": "email",
+  "generated_at": "2026-05-18",
+  "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+  "examples_published": 1,
+  "expected": 1,
+  "coverage": "100%",
+  "merge_sha": "023ad66970d2",
+  "gh_cli_status": "HEALTHY",
+  "status": "PILOT_COMPLETE",
+  "verdict": "LAUNCH_VERIFIED"
+}

@@ -1,0 +1,10 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "family": "pdf",
+  "packages_dry_run": 6,
+  "packages_passed": 6,
+  "packages_failed": 0,
+  "approval_gate": "BLOCKED",
+  "verdict": "BATCH_APPROVAL_BLOCKED_DRY_RUN_ONLY"
+}

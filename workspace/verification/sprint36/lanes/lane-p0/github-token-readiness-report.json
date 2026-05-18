@@ -1,0 +1,11 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "gh_token_present": true,
+  "gh_token_is_classic": true,
+  "github_token_present": true,
+  "github_token_is_fine_grained": false,
+  "token_ready_for_publication": true,
+  "mapping_instruction": "export GITHUB_TOKEN=$GH_TOKEN (map classic PAT before publish)",
+  "verdict": "TOKEN_READY_REQUIRES_MAPPING"
+}

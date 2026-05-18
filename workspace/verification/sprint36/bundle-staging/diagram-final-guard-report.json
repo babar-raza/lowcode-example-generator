@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint33",
+  "family": "diagram",
+  "status": "REGRESSION_FREE",
+  "published": 2,
+  "workflow_roots": 2,
+  "verdict": "DIAGRAM_PILOT_COMPLETE_NO_REGRESSION"
+}

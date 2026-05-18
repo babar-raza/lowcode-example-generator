@@ -1,0 +1,27 @@
+{
+  "sprint": "sprint35",
+  "captured_at": "2026-05-18",
+  "new_families_found": 0,
+  "candidates_investigated": ["ocr", "psd", "epub", "barcode", "cad", "drawing", "finance", "font", "gis", "imaging", "note", "page", "tasks", "tex", "threed", "zip", "svg", "omr"],
+  "resolution_results": {
+    "ocr": "STILL_BLOCKED (Aspose.AI.LLM not on NuGet)",
+    "psd": "STILL_BLOCKED (Aspose.JavaAttributes not on NuGet)",
+    "epub": "CONFIRMED_NO_STANDALONE_NUGET_PACKAGE",
+    "barcode": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "cad": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "drawing": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "finance": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "font": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "gis": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "imaging": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "note": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "page": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "tasks": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "tex": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "threed": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "zip": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "svg": "CONFIRMED_NO_LOWCODE (via prior reflection proof)",
+    "omr": "CONFIRMED_NO_LOWCODE (via prior reflection proof)"
+  },
+  "verdict": "NO_NEW_LOWCODE_FAMILIES_DISCOVERED"
+}

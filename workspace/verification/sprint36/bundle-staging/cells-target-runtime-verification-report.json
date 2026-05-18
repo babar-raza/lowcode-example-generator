@@ -1,0 +1,9 @@
+{
+  "family": "cells",
+  "sprint": "sprint35",
+  "verified_at": "2026-05-18",
+  "merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+  "examples_in_target_repo": 9,
+  "runtime_verified": true,
+  "verdict": "POST_MERGE_VERIFIED"
+}

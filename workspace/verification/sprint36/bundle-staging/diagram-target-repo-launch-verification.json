@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint36",
+  "family": "diagram",
+  "generated_at": "2026-05-18",
+  "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "examples_published": 2,
+  "expected": 2,
+  "coverage": "100%",
+  "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+  "gh_cli_status": "HEALTHY",
+  "status": "PILOT_COMPLETE",
+  "verdict": "LAUNCH_VERIFIED"
+}

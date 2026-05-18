@@ -1,0 +1,18 @@
+{
+  "sprint": "sprint36",
+  "pr_number": 8,
+  "package": "pdf-controlled-pilot-pr8",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr8",
+  "examples": [
+    "FormEditor",
+    "FormExporter"
+  ],
+  "example_count": 2,
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "dry_run_result": "SIMULATION_PASSED",
+  "approval_gate": "BLOCKED",
+  "security_present": false,
+  "formflattener_present": false,
+  "audit_verdict": "CLEAN"
+}

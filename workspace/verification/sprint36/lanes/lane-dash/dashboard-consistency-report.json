@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "test_count_in_dashboard": 1789,
+  "test_count_in_test_summary": 1789,
+  "counts_match": true,
+  "sprint35_stale_count_fixed": true,
+  "stale_value": 1744,
+  "correct_value": 1789,
+  "root_cause": "Sprint 35 dashboard was carry-forward from sprint33 artifact before final test run",
+  "verdict": "DASHBOARD_CONSISTENT_WITH_TEST_SUMMARY"
+}

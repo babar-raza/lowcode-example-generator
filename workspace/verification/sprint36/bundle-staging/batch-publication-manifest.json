@@ -1,0 +1,58 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "family": "pdf",
+  "packages": [
+    {
+      "pr": 3,
+      "package": "pdf-controlled-pilot",
+      "examples": [
+        "DocConverter",
+        "Html",
+        "XlsConverter"
+      ]
+    },
+    {
+      "pr": 5,
+      "package": "pdf-controlled-pilot-pr5",
+      "examples": [
+        "Jpeg",
+        "Png",
+        "Tiff"
+      ]
+    },
+    {
+      "pr": 6,
+      "package": "pdf-controlled-pilot-pr6",
+      "examples": [
+        "ImageExtractor",
+        "TableGenerator",
+        "TocGenerator"
+      ]
+    },
+    {
+      "pr": 7,
+      "package": "pdf-controlled-pilot-pr7",
+      "examples": [
+        "Security",
+        "FormFlattener"
+      ]
+    },
+    {
+      "pr": 8,
+      "package": "pdf-controlled-pilot-pr8",
+      "examples": [
+        "FormEditor",
+        "FormExporter"
+      ]
+    },
+    {
+      "pr": 9,
+      "package": "pdf-controlled-pilot-pr9",
+      "examples": [
+        "Signature"
+      ]
+    }
+  ],
+  "approval_command": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr-batch --family pdf --publish --approval-token APPROVE_LIVE_PR"
+}

@@ -1,0 +1,75 @@
+{
+  "sprint": "sprint36",
+  "version": "v3",
+  "generated_at": "2026-05-18",
+  "approval_env_vars": {
+    "publish": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+    "merge": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR"
+  },
+  "token_mapping": "export GITHUB_TOKEN=$GH_TOKEN  # map classic PAT before publish",
+  "publish_all_command": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr-batch --family pdf --publish --approval-token APPROVE_LIVE_PR",
+  "per_package_commands": {
+    "PR3": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot --publish --approval-token APPROVE_LIVE_PR",
+    "PR5": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5 --publish --approval-token APPROVE_LIVE_PR",
+    "PR6": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr6 --publish --approval-token APPROVE_LIVE_PR",
+    "PR7": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr7 --publish --approval-token APPROVE_LIVE_PR",
+    "PR8": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr8 --publish --approval-token APPROVE_LIVE_PR",
+    "PR9": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr9 --publish --approval-token APPROVE_LIVE_PR"
+  },
+  "merge_commands": {
+    "note": "Merge requires PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+    "command": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples merge-pr --family pdf --pr-number <N> --approval-token APPROVE_MERGE_PR"
+  },
+  "rollback_commands": {
+    "close_pr": "gh pr close <PR_URL>",
+    "delete_branch": "gh api repos/OWNER/REPO/git/refs/heads/BRANCH -X DELETE"
+  },
+  "post_merge_verification": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples post-publication-verify --family pdf",
+  "version_drift_check": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples version-drift",
+  "target_repo_health": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples target-repo-health",
+  "expected_counts_after_approval": {
+    "pdf_published": 19,
+    "total_portfolio": 42
+  },
+  "family_status_table": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "target": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples"
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "target": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pending": 14,
+      "target": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples"
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "target": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples"
+    },
+    "email": {
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "target": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples"
+    },
+    "slides": {
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "target": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"
+    }
+  },
+  "version_drift_findings": {
+    "cells": "DRIFT: 26.4.0 -> 26.5.1 (MINOR) \u2014 non-blocking",
+    "diagram": "DRIFT: 26.4.0 -> 26.5.0 (MINOR) \u2014 non-blocking",
+    "words": "CURRENT: 26.5.0",
+    "pdf": "CURRENT: 26.5.0",
+    "email": "CURRENT: 26.4.0",
+    "slides": "CURRENT: 26.5.0 (package: Aspose.Slides.NET)"
+  }
+}

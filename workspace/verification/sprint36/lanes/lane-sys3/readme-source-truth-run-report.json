@@ -1,0 +1,15 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "families_run": [
+    "cells",
+    "words",
+    "pdf",
+    "diagram",
+    "email",
+    "slides"
+  ],
+  "all_pass": true,
+  "families_with_issues": [],
+  "verdict": "ALL_PASS"
+}

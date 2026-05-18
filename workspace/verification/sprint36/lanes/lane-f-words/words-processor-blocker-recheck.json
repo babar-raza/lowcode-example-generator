@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "family": "words",
+  "generated_at": "2026-05-18",
+  "type": "Processor",
+  "blocker": "PERMANENTLY_BLOCKED",
+  "root_cause": "operation_facade with needs_options_strategy \u2014 all method signatures require Options object not generatable without runtime reflection",
+  "recheck_result": "STILL_BLOCKED",
+  "latest_package_version": "26.5.0",
+  "api_changed": false,
+  "verdict": "PERMANENTLY_BLOCKED_CONFIRMED"
+}

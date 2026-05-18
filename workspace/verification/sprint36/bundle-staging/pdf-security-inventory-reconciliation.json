@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint33",
+  "family": "pdf",
+  "security_example_present": true,
+  "pr_number": 7,
+  "security_example_status": "PR_READY (in pdf-controlled-pilot-pr7)",
+  "verdict": "PDF_SECURITY_EXAMPLE_VERIFIED_IN_PR7"
+}

@@ -408,3 +408,56 @@ def audit_readme_file(readme_path: Path, context) -> ReadmeAuditResult:
         return result
     content = readme_path.read_text(encoding="utf-8")
     return audit_readme(content, context)
+
+
+# ---------------------------------------------------------------------------
+# Staleness detection for cumulative README inventory
+# ---------------------------------------------------------------------------
+
+@dataclass
+class ReadmeStalenessResult:
+    """Result of comparing README example table against expected inventory."""
+    is_stale: bool
+    missing_from_readme: list[str] = field(default_factory=list)
+    extra_in_readme: list[str] = field(default_factory=list)
+    inventory_count: int = 0
+    readme_count: int = 0
+    pending_not_in_branch: list[str] = field(default_factory=list)
+
+
+def audit_readme_staleness(
+    readme_content: str,
+    expected_examples: list[str],
+    pending_examples: list[str] | None = None,
+) -> ReadmeStalenessResult:
+    """Compare README example table against the expected inventory.
+
+    Args:
+        readme_content: Full text of the README.md.
+        expected_examples: Names of examples that MUST be in the README.
+        pending_examples: Names of examples that are package-ready but not
+            in the target branch. These are NOT failures — they are classified
+            as ``pending_not_in_branch``.
+
+    Returns:
+        ReadmeStalenessResult with is_stale=True if any expected examples
+        are missing from the README, or if the README contains extra examples
+        not in the expected set.
+    """
+    section = _extract_examples_section(readme_content)
+    readme_names = set(_find_example_names_in_table(section))
+    expected_set = set(expected_examples)
+    pending_set = set(pending_examples or [])
+
+    missing = sorted(expected_set - readme_names)
+    extra = sorted(readme_names - expected_set - pending_set)
+    pending_classified = sorted(pending_set - readme_names)
+
+    return ReadmeStalenessResult(
+        is_stale=bool(missing) or bool(extra),
+        missing_from_readme=missing,
+        extra_in_readme=extra,
+        inventory_count=len(expected_set),
+        readme_count=len(readme_names),
+        pending_not_in_branch=pending_classified,
+    )

@@ -887,6 +887,8 @@ def main() -> int:
                 pass
 
         # --- Render and write README.md into package root (both dry-run and live) ---
+        # Uses cumulative inventory: repo_actual (post-merge) + current package
+        # so the README lists all examples that will exist in the repo after merge.
         if package_exists and len(example_dirs) > 0:
             try:
                 from plugin_examples.publisher.readme_renderer import (
@@ -894,26 +896,27 @@ def main() -> int:
                     render_readme as _render_readme,
                     write_readme as _write_readme,
                 )
-                from plugin_examples.publisher.readme_auditor import audit_readme as _audit_readme
+                from plugin_examples.publisher.readme_auditor import (
+                    audit_readme as _audit_readme,
+                    audit_readme_staleness as _audit_staleness,
+                )
+                from plugin_examples.publisher.readme_inventory import (
+                    discover_family_inventory as _discover_inv,
+                    build_cumulative_examples_meta as _build_cum_meta,
+                    build_package_path_map as _build_pkg_map,
+                )
                 import json as _json_r
-                import re as _re_r
 
-                # Resolve output_formats from post-merge evidence for richer table
-                _pm_path = verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"
-                _output_formats: dict[str, str] = {}
-                if _pm_path.exists():
-                    try:
-                        _pm = _json_r.loads(_pm_path.read_text(encoding="utf-8"))
-                        for _ex in _pm.get("examples", []):
-                            if _ex.get("name") and _ex.get("output_format"):
-                                _output_formats[_ex["name"]] = _ex["output_format"]
-                    except (OSError, _json_r.JSONDecodeError):
-                        pass
+                # Discover cumulative inventory: repo base + this package
+                _inv_entries, _inv_trail = _discover_inv(
+                    family=family,
+                    repo_root=repo_root,
+                    inventory_mode="current_package_overlay",
+                    current_package_path=package_path,
+                )
+                _examples_meta = _build_cum_meta(_inv_entries)
+                _pkg_path_map = _build_pkg_map(_inv_entries)
 
-                _examples_meta = [
-                    {"name": d, "output_format": _output_formats.get(d, "")}
-                    for d in example_dirs
-                ]
                 _gen_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
                 _readme_ctx = _build_readme_ctx(
                     family=family,
@@ -922,6 +925,7 @@ def main() -> int:
                     package_version=pkg_version,
                     generation_date=_gen_date,
                     package_path=package_path,
+                    package_path_map=_pkg_path_map if len(_pkg_path_map) > 0 else None,
                 )
                 _readme_content = _render_readme(_readme_ctx)
                 _write_readme(_readme_content, package_path / "README.md")
@@ -935,7 +939,22 @@ def main() -> int:
                     else:
                         print(f"WARNING: README audit failed for {family} (non-blocking in dry-run): {_readme_audit.warnings}")
                 else:
-                    print(f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes)")
+                    print(f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes, {len(_inv_entries)} examples)")
+
+                # Staleness gate: fail closed if README is stale against intended branch content
+                _expected_names = [e.name for e in _inv_entries]
+                _staleness = _audit_staleness(_readme_content, _expected_names)
+                if _staleness.is_stale:
+                    _stale_msg = (
+                        f"README staleness FAILED for {family}: "
+                        f"missing={_staleness.missing_from_readme}, "
+                        f"extra={_staleness.extra_in_readme}"
+                    )
+                    if live_mode:
+                        print(f"ERROR: {_stale_msg}")
+                        return 1
+                    else:
+                        print(f"WARNING: {_stale_msg}")
             except Exception as _readme_exc:
                 # README rendering is non-blocking for dry-run; block for live publish
                 if live_mode:

@@ -177,6 +177,7 @@ def build_readme_context(
     generation_date: str = "",
     package_path: Path | None = None,
     strict_facts: bool = False,
+    package_path_map: dict[str, Path] | None = None,
 ) -> ReadmeContext:
     """Build a ReadmeContext from family config and runtime evidence.
 
@@ -285,15 +286,35 @@ def build_readme_context(
         )
 
     # --- Build example entries ---
-    # When package_path is available, extract source-truth facts from Program.cs
+    # When package_path or package_path_map is available, extract source-truth
+    # facts from Program.cs.  package_path_map allows multi-package fact
+    # extraction where each example may live in a different PR package.
     facts = None
-    if package_path is not None:
+    if package_path_map:
+        # Multi-package mode: extract facts per-example from their own packages
+        from plugin_examples.publisher.readme_facts import ExampleReadmeFacts
+        combined_facts = ExampleReadmeFacts(family=family, generated_at="", source_artifact="multi-package")
+        for ex in examples:
+            ex_name = ex.get("name", "") or ex.get("scenario_id", "")
+            if not ex_name or ex_name not in package_path_map:
+                continue
+            per_pkg = extract_example_readme_facts(
+                family=family,
+                package_path=package_path_map[ex_name],
+                examples=[ex],
+                manifest_reader=read_manifest_api_symbol,
+            )
+            combined_facts.facts.extend(per_pkg.facts)
+        facts = combined_facts
+    elif package_path is not None:
         facts = extract_example_readme_facts(
             family=family,
             package_path=Path(package_path),
             examples=examples,
             manifest_reader=read_manifest_api_symbol,
         )
+
+    if facts is not None:
         # Fail-closed: when strict_facts is True, all facts must be verified
         for fact in facts.facts:
             if fact.validation_status != "verified":

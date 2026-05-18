@@ -844,3 +844,310 @@ def contract_definition_v3() -> dict:
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }
+
+
+# ---------------------------------------------------------------------------
+# Contract v4 — PR count consistency, Security inventory, staged-package
+#               deletion check, Sprint 31 verdicts (Sprint 31+)
+# ---------------------------------------------------------------------------
+
+#: Categories removed from v3 (renamed to reflect sprint30 content).
+_REQUIRED_CATEGORIES_V4_REMOVED: frozenset[str] = frozenset({
+    "sprint29_commit_proof",
+    "sprint29_reconciliation",
+})
+
+#: Pattern updates for v4 (key kept, patterns updated).
+_REQUIRED_CATEGORIES_V4_UPDATES: dict[str, list[str]] = {
+    "taskcard_state": ["taskcard-state-after-sprint31.json"],
+}
+
+#: New categories in v4: Sprint 30 commit proof, Security inventory,
+#: PR package count reconciliation, PR#8/PR#9 clean audits.
+_REQUIRED_CATEGORIES_V4_NEW: dict[str, list[str]] = {
+    "sprint30_commit_proof": ["sprint30-commit-proof.json"],
+    "sprint30_reconciliation": ["sprint30-bundle-vs-commit-reconciliation.md"],
+    "security_inventory": ["pdf-security-inventory-reconciliation.json"],
+    "pr_package_count_reconciliation": ["pdf-pr-package-count-reconciliation.json"],
+    "pr8_clean_audit": ["pdf-pr8-clean-final-audit.json"],
+    "pr9_clean_audit": ["pdf-pr9-clean-final-audit.json"],
+}
+
+#: Combined v4 categories: v3 (minus removed, with updates) + new.
+#: v3 had 45 categories; v4 removes 2 (renamed) and adds 6 → 49 total.
+COMBINED_CATEGORIES_V4: dict[str, list[str]] = {
+    **{
+        k: _REQUIRED_CATEGORIES_V4_UPDATES.get(k, v)
+        for k, v in COMBINED_CATEGORIES_V3.items()
+        if k not in _REQUIRED_CATEGORIES_V4_REMOVED
+    },
+    **_REQUIRED_CATEGORIES_V4_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V4: int = len(COMBINED_CATEGORIES_V4)
+
+#: Allowed final verdicts for Sprint 31 bundles.
+ALLOWED_VERDICTS_V4: frozenset[str] = frozenset({
+    "SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE",
+    "SPRINT31_PARTIAL_PUBLICATION_EVIDENCE_V4_COMPLETE",
+    "SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE",
+    "SPRINT31_BLOCKED_PR_COUNT_INCONSISTENCY",
+    "SPRINT31_BLOCKED_SECURITY_INVENTORY_UNRESOLVED",
+    "SPRINT31_BLOCKED_EVIDENCE_CONTRACT_V4_FAILED",
+    "SPRINT31_REJECTED_UNSAFE_TO_PUBLISH",
+})
+
+#: Sprint 30 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 31.
+_SPRINT30_HEAD_COMMIT = "e379cdf"
+
+#: Pattern to detect staged workspace/pr-dry-run/ package deletions in git-status-final.txt.
+#: Matches lines like 'D  workspace/pr-dry-run/pdf-controlled-pilot-pr7/...'
+_STAGED_PACKAGE_DELETION_PATTERN = re.compile(
+    r"^[AMDRC][AMDRC?! ]\s+workspace/pr-dry-run/",
+    re.MULTILINE,
+)
+
+
+class StrictEvidenceContractV4(StrictEvidenceContractV3):
+    """
+    v4 of the strict evidence contract (Sprint 31+).
+
+    Extends v3 with:
+    - 49 required categories (vs 45 in v3; removes sprint29 entries, adds 6 sprint31 entries).
+    - Sprint 30 HEAD commit e379cdf must appear in git-log-proof.txt (replaces Sprint 29 check).
+    - Sprint 31 verdicts required in final-verdict.md (replaces Sprint 30 set).
+    - source-state-classification.json sprint31_start_state must be CLEAN_FOR_SPRINT_EXECUTION.
+    - pdf-pr-package-count-reconciliation.json total_pr_ready must equal 14.
+    - git-status-final.txt must not contain staged workspace/pr-dry-run/ deletions.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v4: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v4 categories (49 total)
+                for category, patterns in COMBINED_CATEGORIES_V4.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of: {patterns}"
+                        )
+
+                # Secret scan (all text files)
+                for name in names:
+                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
+                        try:
+                            content = zf.read(name).decode("utf-8", errors="replace")
+                            for pattern in SECRET_PATTERNS:
+                                if pattern.search(content):
+                                    violation = (
+                                        f"v4: Possible secret in {name}: "
+                                        f"pattern {pattern.pattern}"
+                                    )
+                                    result.secret_violations.append(violation)
+                                    result.failures.append(violation)
+                        except Exception:
+                            pass
+
+                # v4 content-level checks
+                self._validate_content_v4(zf, names, result)
+
+        except zipfile.BadZipFile as e:
+            result.failures.append(f"ZIP is invalid/corrupt: {e}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        result.passed = not result.failures
+        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
+        return result
+
+    # ------------------------------------------------------------------
+    # v4 content validation (calls overridden helpers + new v4 checks)
+    # ------------------------------------------------------------------
+
+    def _validate_content_v4(
+        self,
+        zf: zipfile.ZipFile,
+        names: list[str],
+        result: ContractResult,
+    ) -> None:
+        name_map: dict[str, str] = {Path(n).name: n for n in names}
+        self._check_git_status_final(zf, name_map, result)            # from v2 (unchanged)
+        self._check_staged_package_deletions(zf, name_map, result)    # new v4
+        self._check_git_log_proof(zf, name_map, result)                # overridden below
+        self._check_final_verdict(zf, name_map, result)                # overridden below
+        self._check_test_summary(zf, name_map, result)                 # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result)       # from v2 (unchanged)
+        self._check_source_state_sprint31_clean(zf, name_map, result)  # new v4
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3 (unchanged)
+        self._check_pr_package_count_consistency(zf, name_map, result)      # new v4
+
+    def _check_git_log_proof(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v4 requires Sprint 30 HEAD commit e379cdf in git-log-proof.txt."""
+        content = self._read_text(zf, name_map, "git-log-proof.txt")
+        if content is None:
+            return
+        if not content.strip():
+            result.failures.append("v4: git-log-proof.txt is empty — no commits recorded.")
+            return
+        if _SPRINT30_HEAD_COMMIT not in content:
+            result.failures.append(
+                f"v4: git-log-proof.txt does not contain Sprint 30 HEAD commit "
+                f"{_SPRINT30_HEAD_COMMIT}. "
+                "Sprint 30 must be committed before Sprint 31 bundle is created."
+            )
+
+    def _check_final_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v4 uses Sprint 31 allowed verdicts."""
+        content = self._read_text(zf, name_map, "final-verdict.md")
+        if content is None:
+            return
+        if "IN_PROGRESS" in content.upper():
+            result.failures.append(
+                "v4: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
+            )
+            return
+        if not any(v in content for v in ALLOWED_VERDICTS_V4):
+            result.failures.append(
+                f"v4: final-verdict.md does not contain any allowed Sprint 31 verdict. "
+                f"Allowed: {sorted(ALLOWED_VERDICTS_V4)}"
+            )
+
+    def _check_source_state_sprint31_clean(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v4: source-state-classification.json must confirm clean sprint 31 start."""
+        content = self._read_text(zf, name_map, "source-state-classification.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append("v4: source-state-classification.json is not valid JSON.")
+            return
+        state = data.get("sprint31_start_state", "")
+        if state != "CLEAN_FOR_SPRINT_EXECUTION":
+            result.failures.append(
+                f"v4: source-state-classification.json sprint31_start_state is '{state}' — "
+                "must be 'CLEAN_FOR_SPRINT_EXECUTION' to confirm no source modifications at sprint start."
+            )
+
+    def _check_pr_package_count_consistency(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v4: pdf-pr-package-count-reconciliation.json must confirm total_pr_ready==14."""
+        content = self._read_text(zf, name_map, "pdf-pr-package-count-reconciliation.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v4: pdf-pr-package-count-reconciliation.json is not valid JSON."
+            )
+            return
+        count = data.get(
+            "total_pr_ready",
+            data.get("pr_ready_count",
+            data.get("totals", {}).get("total_examples", -1))
+        )
+        if count != 14:
+            result.failures.append(
+                f"v4: pdf-pr-package-count-reconciliation.json total_pr_ready={count} — "
+                "must be 14 (PR#3:3 + PR#5:3 + PR#6:3 + PR#7:2 + PR#8:2 + PR#9:1). "
+                "PR count contradiction must be resolved before publication."
+            )
+
+    def _check_staged_package_deletions(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v4: git-status-final.txt must not contain staged workspace/pr-dry-run/ deletions."""
+        content = self._read_text(zf, name_map, "git-status-final.txt")
+        if content is None:
+            return
+        if _STAGED_PACKAGE_DELETION_PATTERN.search(content):
+            result.failures.append(
+                "v4: git-status-final.txt contains staged workspace/pr-dry-run/ deletions. "
+                "PR packages must not be deleted from workspace before publication."
+            )
+
+
+def contract_definition_v4() -> dict:
+    """Return the v4 bundle contract definition as a serialisable dict."""
+    return {
+        "contract_version": "4.0.0",
+        "sprint": "sprint31+",
+        "description": (
+            "Strict evidence contract v4 for LowCode sprint bundles. "
+            "Validates category presence, PR count consistency, Security inventory, "
+            "staged-package deletion check, and source-state classification. "
+            "49 categories (v3 had 45: removes 2 sprint29 entries, adds 6 sprint31 entries). "
+            "Sprint 31 verdicts required."
+        ),
+        "required_categories": {
+            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V4.items()
+        },
+        "min_categories_required": MIN_CATEGORIES_REQUIRED_V4,
+        "content_checks_enabled": True,
+        "content_checks": [
+            "git-status-final.txt: no staged source/test/config files",
+            "git-status-final.txt: no staged workspace/pr-dry-run/ deletions",
+            f"git-log-proof.txt: must contain Sprint 30 HEAD {_SPRINT30_HEAD_COMMIT}",
+            "final-verdict.md: must contain an allowed Sprint 31 verdict",
+            "test-summary.json: failed==0 and passed>0",
+            "bundle-contract-validation-report.json: passed=true",
+            "source-state-classification.json: sprint31_start_state==CLEAN_FOR_SPRINT_EXECUTION",
+            "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
+            "pdf-pr-package-count-reconciliation.json: total_pr_ready==14",
+        ],
+        "category_count_reconciliation": {
+            "v3_categories": MIN_CATEGORIES_REQUIRED_V3,
+            "v4_categories": MIN_CATEGORIES_REQUIRED_V4,
+            "categories_removed_from_v3": sorted(_REQUIRED_CATEGORIES_V4_REMOVED),
+            "categories_added_in_v4": sorted(_REQUIRED_CATEGORIES_V4_NEW.keys()),
+            "note": "v3 had 45 categories. v4 removes 2 (sprint29 entries) and adds 6 (sprint31 entries) → 49.",
+        },
+        "secret_scanning_enabled": True,
+        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V4),
+        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+    }

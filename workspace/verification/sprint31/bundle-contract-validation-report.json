@@ -1,0 +1,14 @@
+{
+  "sprint": "sprint31",
+  "date": "2026-05-18",
+  "contract_version": "4.0.0",
+  "categories_required": 49,
+  "categories_found": 49,
+  "categories_missing": [],
+  "content_checks_passed": 9,
+  "passed": true,
+  "bundle_file": "sprint31-pr-inventory-hotfix-security-recovery-and-evidence-contract-v4-20260518-123708.zip",
+  "bundle_files": 61,
+  "bundle_bytes": 49731,
+  "verdict": "BUNDLE_CONTRACT_PASSED"
+}

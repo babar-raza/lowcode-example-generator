@@ -1,0 +1,16 @@
+{
+  "lane": "lane-p4",
+  "sprint": "sprint31",
+  "date": "2026-05-18",
+  "package": "pdf-controlled-pilot-pr7",
+  "pr_label": "PR#7",
+  "aspose_pdf_version": "26.5.0",
+  "examples": ["security", "form-flattener"],
+  "example_count": 2,
+  "total_files": 9,
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "publication_status": "PUBLISH_AS_IS",
+  "sprint31_correction": "Sprint 30 audit incorrectly listed examples=[form-flattener] only. Corrected: security has been present since Sprint 23 commit 8dce137.",
+  "verdict": "STATIC_AUDIT_PASS"
+}

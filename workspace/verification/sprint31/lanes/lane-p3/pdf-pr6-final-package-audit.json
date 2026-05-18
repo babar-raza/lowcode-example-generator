@@ -1,0 +1,15 @@
+{
+  "lane": "lane-p3",
+  "sprint": "sprint31",
+  "date": "2026-05-18",
+  "package": "pdf-controlled-pilot-pr6",
+  "pr_label": "PR#6",
+  "aspose_pdf_version": "26.4.0",
+  "examples": ["image-extractor", "table-generator", "toc-generator"],
+  "example_count": 3,
+  "total_files": 24,
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "publication_status": "PUBLISH_AS_IS",
+  "verdict": "STATIC_AUDIT_PASS"
+}

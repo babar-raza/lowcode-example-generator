@@ -1,0 +1,76 @@
+{
+  "lane": "lane-0",
+  "sprint": "sprint31",
+  "date": "2026-05-17",
+  "subject": "Classification of all dirty files at Sprint 31 start",
+  "total_dirty_files": 24,
+  "untracked_dirs": 1,
+  "classification_verdict": "NO_SOURCE_CHANGES — identical to Sprint 30 start state. All dirty files are binary build artifacts, runtime outputs, or generated manifests.",
+  "categories": {
+    "binary_build_artifacts": {
+      "files": [
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe",
+        "workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb",
+        "workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json"
+      ],
+      "count": 11,
+      "classification": "BINARY_BUILD_ARTIFACT_EXPECTED"
+    },
+    "runtime_output_files": {
+      "files": [
+        "workspace/fixture-validation/pdf-signature-harness/input.pdf",
+        "workspace/fixture-validation/pdf-signature-harness/output-signed.pdf",
+        "workspace/fixture-validation/pdf-signature-harness/test.pfx"
+      ],
+      "count": 3,
+      "classification": "RUNTIME_ARTIFACT_EXPECTED"
+    },
+    "generated_manifests": {
+      "files": [
+        "workspace/manifests/example-index.json",
+        "workspace/manifests/scenario-catalog.json"
+      ],
+      "count": 2,
+      "classification": "GENERATED_MANIFEST_EXPECTED"
+    },
+    "generated_verification_snapshots": {
+      "files": [
+        "workspace/verification/latest/cells-readme-backfill-simulation.json",
+        "workspace/verification/latest/cells-root-readme-audit.json",
+        "workspace/verification/latest/cells-root-readme-render-result.json",
+        "workspace/verification/latest/release-status.json",
+        "workspace/verification/latest/words-readme-backfill-simulation.json",
+        "workspace/verification/latest/words-root-readme-audit.json",
+        "workspace/verification/latest/words-root-readme-render-result.json"
+      ],
+      "count": 7,
+      "classification": "GENERATED_VERIFICATION_SNAPSHOT_EXPECTED"
+    },
+    "config_files": {
+      "files": [".gitignore"],
+      "count": 1,
+      "classification": "CONFIG_NON_CRITICAL"
+    },
+    "untracked_directories": {
+      "files": ["plans/"],
+      "count": 1,
+      "classification": "UNTRACKED_PLANS_NON_CRITICAL"
+    }
+  },
+  "source_changes_check": {
+    "src_modified": false,
+    "tests_modified": false,
+    "pipeline_modified": false,
+    "package_deletions_pending": false,
+    "verdict": "CLEAN — no src/, tests/, pipeline/ files modified; no uncommitted package deletions"
+  },
+  "sprint31_start_state": "CLEAN_FOR_SPRINT_EXECUTION"
+}

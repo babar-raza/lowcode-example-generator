@@ -1,0 +1,1217 @@
+diff --git a/.gitignore b/.gitignore
+index 2c8b9f3..e4d94ef 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -40,3 +40,5 @@ workspace/verification/latest/*.zip
+ .DS_Store
+ Thumbs.db
+ /workspace
++/workspace
++/workspace
+diff --git a/src/plugin_examples/evidence_contract.py b/src/plugin_examples/evidence_contract.py
+index d220e9d..39feff3 100644
+--- a/src/plugin_examples/evidence_contract.py
++++ b/src/plugin_examples/evidence_contract.py
+@@ -844,3 +844,306 @@ def contract_definition_v3() -> dict:
+         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+     }
++
++
++# ---------------------------------------------------------------------------
++# Contract v4 — PR count consistency, Security inventory, staged-package
++#               deletion check, Sprint 31 verdicts (Sprint 31+)
++# ---------------------------------------------------------------------------
++
++#: Categories removed from v3 (renamed to reflect sprint30 content).
++_REQUIRED_CATEGORIES_V4_REMOVED: frozenset[str] = frozenset({
++    "sprint29_commit_proof",
++    "sprint29_reconciliation",
++})
++
++#: Pattern updates for v4 (key kept, patterns updated).
++_REQUIRED_CATEGORIES_V4_UPDATES: dict[str, list[str]] = {
++    "taskcard_state": ["taskcard-state-after-sprint31.json"],
++}
++
++#: New categories in v4: Sprint 30 commit proof, Security inventory,
++#: PR package count reconciliation, PR#8/PR#9 clean audits.
++_REQUIRED_CATEGORIES_V4_NEW: dict[str, list[str]] = {
++    "sprint30_commit_proof": ["sprint30-commit-proof.json"],
++    "sprint30_reconciliation": ["sprint30-bundle-vs-commit-reconciliation.md"],
++    "security_inventory": ["pdf-security-inventory-reconciliation.json"],
++    "pr_package_count_reconciliation": ["pdf-pr-package-count-reconciliation.json"],
++    "pr8_clean_audit": ["pdf-pr8-clean-final-audit.json"],
++    "pr9_clean_audit": ["pdf-pr9-clean-final-audit.json"],
++}
++
++#: Combined v4 categories: v3 (minus removed, with updates) + new.
++#: v3 had 45 categories; v4 removes 2 (renamed) and adds 6 → 49 total.
++COMBINED_CATEGORIES_V4: dict[str, list[str]] = {
++    **{
++        k: _REQUIRED_CATEGORIES_V4_UPDATES.get(k, v)
++        for k, v in COMBINED_CATEGORIES_V3.items()
++        if k not in _REQUIRED_CATEGORIES_V4_REMOVED
++    },
++    **_REQUIRED_CATEGORIES_V4_NEW,
++}
++
++MIN_CATEGORIES_REQUIRED_V4: int = len(COMBINED_CATEGORIES_V4)
++
++#: Allowed final verdicts for Sprint 31 bundles.
++ALLOWED_VERDICTS_V4: frozenset[str] = frozenset({
++    "SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE",
++    "SPRINT31_PARTIAL_PUBLICATION_EVIDENCE_V4_COMPLETE",
++    "SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE",
++    "SPRINT31_BLOCKED_PR_COUNT_INCONSISTENCY",
++    "SPRINT31_BLOCKED_SECURITY_INVENTORY_UNRESOLVED",
++    "SPRINT31_BLOCKED_EVIDENCE_CONTRACT_V4_FAILED",
++    "SPRINT31_REJECTED_UNSAFE_TO_PUBLISH",
++})
++
++#: Sprint 30 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 31.
++_SPRINT30_HEAD_COMMIT = "e379cdf"
++
++#: Pattern to detect staged workspace/pr-dry-run/ package deletions in git-status-final.txt.
++#: Matches lines like 'D  workspace/pr-dry-run/pdf-controlled-pilot-pr7/...'
++_STAGED_PACKAGE_DELETION_PATTERN = re.compile(
++    r"^[AMDRC][AMDRC?! ]\s+workspace/pr-dry-run/",
++    re.MULTILINE,
++)
++
++
++class StrictEvidenceContractV4(StrictEvidenceContractV3):
++    """
++    v4 of the strict evidence contract (Sprint 31+).
++
++    Extends v3 with:
++    - 49 required categories (vs 45 in v3; removes sprint29 entries, adds 6 sprint31 entries).
++    - Sprint 30 HEAD commit e379cdf must appear in git-log-proof.txt (replaces Sprint 29 check).
++    - Sprint 31 verdicts required in final-verdict.md (replaces Sprint 30 set).
++    - source-state-classification.json sprint31_start_state must be CLEAN_FOR_SPRINT_EXECUTION.
++    - pdf-pr-package-count-reconciliation.json total_pr_ready must equal 14.
++    - git-status-final.txt must not contain staged workspace/pr-dry-run/ deletions.
++    """
++
++    def validate_zip(self, zip_path: str | Path) -> ContractResult:
++        zip_path = Path(zip_path)
++        result = ContractResult(passed=False)
++
++        if not zip_path.exists():
++            result.failures.append(f"ZIP file not found: {zip_path}")
++            result.verdict = "BUNDLE_CONTRACT_FAILED"
++            return result
++
++        if not zip_path.is_absolute():
++            result.failures.append(
++                f"v4: ZIP path must be absolute for evidence completeness, got: {zip_path}"
++            )
++
++        try:
++            with zipfile.ZipFile(zip_path, "r") as zf:
++                names = zf.namelist()
++                result.file_count = len(names)
++                basenames = {Path(n).name for n in names}
++
++                # Presence checks — v4 categories (49 total)
++                for category, patterns in COMBINED_CATEGORIES_V4.items():
++                    if any(p in basenames for p in patterns):
++                        result.categories_found.append(category)
++                    else:
++                        result.categories_missing.append(category)
++                        result.failures.append(
++                            f"Missing category '{category}' — "
++                            f"expected one of: {patterns}"
++                        )
++
++                # Secret scan (all text files)
++                for name in names:
++                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
++                        try:
++                            content = zf.read(name).decode("utf-8", errors="replace")
++                            for pattern in SECRET_PATTERNS:
++                                if pattern.search(content):
++                                    violation = (
++                                        f"v4: Possible secret in {name}: "
++                                        f"pattern {pattern.pattern}"
++                                    )
++                                    result.secret_violations.append(violation)
++                                    result.failures.append(violation)
++                        except Exception:
++                            pass
++
++                # v4 content-level checks
++                self._validate_content_v4(zf, names, result)
++
++        except zipfile.BadZipFile as e:
++            result.failures.append(f"ZIP is invalid/corrupt: {e}")
++            result.verdict = "BUNDLE_CONTRACT_FAILED"
++            return result
++
++        result.passed = not result.failures
++        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
++        return result
++
++    # ------------------------------------------------------------------
++    # v4 content validation (calls overridden helpers + new v4 checks)
++    # ------------------------------------------------------------------
++
++    def _validate_content_v4(
++        self,
++        zf: zipfile.ZipFile,
++        names: list[str],
++        result: ContractResult,
++    ) -> None:
++        name_map: dict[str, str] = {Path(n).name: n for n in names}
++        self._check_git_status_final(zf, name_map, result)            # from v2 (unchanged)
++        self._check_staged_package_deletions(zf, name_map, result)    # new v4
++        self._check_git_log_proof(zf, name_map, result)                # overridden below
++        self._check_final_verdict(zf, name_map, result)                # overridden below
++        self._check_test_summary(zf, name_map, result)                 # from v2 (unchanged)
++        self._check_bundle_contract_report(zf, name_map, result)       # from v2 (unchanged)
++        self._check_source_state_sprint31_clean(zf, name_map, result)  # new v4
++        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3 (unchanged)
++        self._check_pr_package_count_consistency(zf, name_map, result)      # new v4
++
++    def _check_git_log_proof(
++        self,
++        zf: zipfile.ZipFile,
++        name_map: dict[str, str],
++        result: ContractResult,
++    ) -> None:
++        """Override: v4 requires Sprint 30 HEAD commit e379cdf in git-log-proof.txt."""
++        content = self._read_text(zf, name_map, "git-log-proof.txt")
++        if content is None:
++            return
++        if not content.strip():
++            result.failures.append("v4: git-log-proof.txt is empty — no commits recorded.")
++            return
++        if _SPRINT30_HEAD_COMMIT not in content:
++            result.failures.append(
++                f"v4: git-log-proof.txt does not contain Sprint 30 HEAD commit "
++                f"{_SPRINT30_HEAD_COMMIT}. "
++                "Sprint 30 must be committed before Sprint 31 bundle is created."
++            )
++
++    def _check_final_verdict(
++        self,
++        zf: zipfile.ZipFile,
++        name_map: dict[str, str],
++        result: ContractResult,
++    ) -> None:
++        """Override: v4 uses Sprint 31 allowed verdicts."""
++        content = self._read_text(zf, name_map, "final-verdict.md")
++        if content is None:
++            return
++        if "IN_PROGRESS" in content.upper():
++            result.failures.append(
++                "v4: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
++            )
++            return
++        if not any(v in content for v in ALLOWED_VERDICTS_V4):
++            result.failures.append(
++                f"v4: final-verdict.md does not contain any allowed Sprint 31 verdict. "
++                f"Allowed: {sorted(ALLOWED_VERDICTS_V4)}"
++            )
++
++    def _check_source_state_sprint31_clean(
++        self,
++        zf: zipfile.ZipFile,
++        name_map: dict[str, str],
++        result: ContractResult,
++    ) -> None:
++        """v4: source-state-classification.json must confirm clean sprint 31 start."""
++        content = self._read_text(zf, name_map, "source-state-classification.json")
++        if content is None:
++            return
++        try:
++            data = json.loads(content)
++        except Exception:
++            result.failures.append("v4: source-state-classification.json is not valid JSON.")
++            return
++        state = data.get("sprint31_start_state", "")
++        if state != "CLEAN_FOR_SPRINT_EXECUTION":
++            result.failures.append(
++                f"v4: source-state-classification.json sprint31_start_state is '{state}' — "
++                "must be 'CLEAN_FOR_SPRINT_EXECUTION' to confirm no source modifications at sprint start."
++            )
++
++    def _check_pr_package_count_consistency(
++        self,
++        zf: zipfile.ZipFile,
++        name_map: dict[str, str],
++        result: ContractResult,
++    ) -> None:
++        """v4: pdf-pr-package-count-reconciliation.json must confirm total_pr_ready==14."""
++        content = self._read_text(zf, name_map, "pdf-pr-package-count-reconciliation.json")
++        if content is None:
++            return
++        try:
++            data = json.loads(content)
++        except Exception:
++            result.failures.append(
++                "v4: pdf-pr-package-count-reconciliation.json is not valid JSON."
++            )
++            return
++        count = data.get("total_pr_ready", data.get("pr_ready_count", -1))
++        if count != 14:
++            result.failures.append(
++                f"v4: pdf-pr-package-count-reconciliation.json total_pr_ready={count} — "
++                "must be 14 (PR#3:3 + PR#5:3 + PR#6:3 + PR#7:2 + PR#8:2 + PR#9:1). "
++                "PR count contradiction must be resolved before publication."
++            )
++
++    def _check_staged_package_deletions(
++        self,
++        zf: zipfile.ZipFile,
++        name_map: dict[str, str],
++        result: ContractResult,
++    ) -> None:
++        """v4: git-status-final.txt must not contain staged workspace/pr-dry-run/ deletions."""
++        content = self._read_text(zf, name_map, "git-status-final.txt")
++        if content is None:
++            return
++        if _STAGED_PACKAGE_DELETION_PATTERN.search(content):
++            result.failures.append(
++                "v4: git-status-final.txt contains staged workspace/pr-dry-run/ deletions. "
++                "PR packages must not be deleted from workspace before publication."
++            )
++
++
++def contract_definition_v4() -> dict:
++    """Return the v4 bundle contract definition as a serialisable dict."""
++    return {
++        "contract_version": "4.0.0",
++        "sprint": "sprint31+",
++        "description": (
++            "Strict evidence contract v4 for LowCode sprint bundles. "
++            "Validates category presence, PR count consistency, Security inventory, "
++            "staged-package deletion check, and source-state classification. "
++            "49 categories (v3 had 45: removes 2 sprint29 entries, adds 6 sprint31 entries). "
++            "Sprint 31 verdicts required."
++        ),
++        "required_categories": {
++            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V4.items()
++        },
++        "min_categories_required": MIN_CATEGORIES_REQUIRED_V4,
++        "content_checks_enabled": True,
++        "content_checks": [
++            "git-status-final.txt: no staged source/test/config files",
++            "git-status-final.txt: no staged workspace/pr-dry-run/ deletions",
++            f"git-log-proof.txt: must contain Sprint 30 HEAD {_SPRINT30_HEAD_COMMIT}",
++            "final-verdict.md: must contain an allowed Sprint 31 verdict",
++            "test-summary.json: failed==0 and passed>0",
++            "bundle-contract-validation-report.json: passed=true",
++            "source-state-classification.json: sprint31_start_state==CLEAN_FOR_SPRINT_EXECUTION",
++            "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
++            "pdf-pr-package-count-reconciliation.json: total_pr_ready==14",
++        ],
++        "category_count_reconciliation": {
++            "v3_categories": MIN_CATEGORIES_REQUIRED_V3,
++            "v4_categories": MIN_CATEGORIES_REQUIRED_V4,
++            "categories_removed_from_v3": sorted(_REQUIRED_CATEGORIES_V4_REMOVED),
++            "categories_added_in_v4": sorted(_REQUIRED_CATEGORIES_V4_NEW.keys()),
++            "note": "v3 had 45 categories. v4 removes 2 (sprint29 entries) and adds 6 (sprint31 entries) → 49.",
++        },
++        "secret_scanning_enabled": True,
++        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
++        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V4),
++        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
++        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
++    }
+diff --git a/tests/unit/test_evidence_contract.py b/tests/unit/test_evidence_contract.py
+index 250b0a7..dbd9a8c 100644
+--- a/tests/unit/test_evidence_contract.py
++++ b/tests/unit/test_evidence_contract.py
+@@ -22,17 +22,22 @@ import pytest
+ from plugin_examples.evidence_contract import (
+     ALLOWED_VERDICTS_V2,
+     ALLOWED_VERDICTS_V3,
++    ALLOWED_VERDICTS_V4,
+     COMBINED_CATEGORIES_V2,
+     COMBINED_CATEGORIES_V3,
++    COMBINED_CATEGORIES_V4,
+     MIN_CATEGORIES_REQUIRED_V2,
+     MIN_CATEGORIES_REQUIRED_V3,
++    MIN_CATEGORIES_REQUIRED_V4,
+     REQUIRED_CATEGORIES,
+     StrictEvidenceContract,
+     StrictEvidenceContractV2,
+     StrictEvidenceContractV3,
++    StrictEvidenceContractV4,
+     contract_definition,
+     contract_definition_v2,
+     contract_definition_v3,
++    contract_definition_v4,
+ )
+ 
+ 
+@@ -906,3 +911,254 @@ class TestStrictEvidenceContractV3Accepts:
+         assert recon["v3_categories"] == 45
+         assert "sprint28_commit_proof" in recon["categories_removed_from_v2"]
+         assert "bin_obj_cleanup" in recon["categories_added_in_v3"]
++
++
++# ---------------------------------------------------------------------------
++# Helper for v4 complete bundle
++# ---------------------------------------------------------------------------
++
++def _minimal_v4_complete_files() -> dict[str, str]:
++    """Return files satisfying all 49 v4 required categories with valid content."""
++    files = dict(_minimal_v3_complete_files())
++    # Remove v3 sprint29 keys (replaced in v4)
++    files.pop("sprint29-commit-proof.json", None)
++    files.pop("sprint29-bundle-vs-commit-reconciliation.md", None)
++    # Update taskcard state to sprint31
++    files.pop("taskcard-state-after-sprint30.json", None)
++    files["taskcard-state-after-sprint31.json"] = json.dumps({"sprint": "sprint31"})
++    # v4 new categories
++    files["sprint30-commit-proof.json"] = json.dumps({
++        "head_commit": {"short": "e379cdf"},
++        "ancestry_chain": ["e379cdf", "8094a46", "ef74d9b"],
++        "verdict": "SPRINT30_COMMITS_VERIFIED",
++    })
++    files["sprint30-bundle-vs-commit-reconciliation.md"] = (
++        "# Sprint 30 Bundle vs Commit Reconciliation\nBOOTSTRAP_PATTERN_EXPECTED"
++    )
++    files["pdf-security-inventory-reconciliation.json"] = json.dumps({
++        "finding": "SECURITY_PRESENT_IN_PR7_NEVER_MISSING",
++        "security_in_pr7": True,
++        "root_cause": "audit_omission",
++    })
++    files["pdf-pr-package-count-reconciliation.json"] = json.dumps({
++        "total_pr_ready": 14,
++        "pr_breakdown": {"PR3": 3, "PR5": 3, "PR6": 3, "PR7": 2, "PR8": 2, "PR9": 1},
++        "verdict": "COUNT_CONSISTENT",
++    })
++    files["pdf-pr8-clean-final-audit.json"] = json.dumps({
++        "package": "pdf-controlled-pilot-pr8",
++        "bin_obj_count": 0,
++        "status": "CLEAN",
++    })
++    files["pdf-pr9-clean-final-audit.json"] = json.dumps({
++        "package": "pdf-controlled-pilot-pr9",
++        "bin_obj_count": 0,
++        "status": "CLEAN",
++    })
++    # v4 git log must contain e379cdf (Sprint 30 HEAD)
++    files["git-log-proof.txt"] = (
++        "e379cdf chore(sprint30-bundle): add v3-validated evidence bundle\n"
++        "8094a46 feat(sprint30): SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN\n"
++        "ef74d9b chore(sprint29-bundle): add v2-validated evidence bundle\n"
++    )
++    # v4 final verdict must be a Sprint 31 verdict
++    files["final-verdict.md"] = (
++        "# SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE\n\n"
++        "Security present in PR#7. PR count=14 confirmed."
++    )
++    # v4 source-state-classification.json must have sprint31_start_state
++    files["source-state-classification.json"] = json.dumps({
++        "sprint31_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
++        "source_changes_check": {"src_modified": False},
++    })
++    return files
++
++
++# ---------------------------------------------------------------------------
++# v4 contract rejects invalid bundles
++# ---------------------------------------------------------------------------
++
++class TestStrictEvidenceContractV4Rejects:
++    """v4 contract must reject bundles missing v4-specific requirements."""
++
++    def test_v4_rejects_missing_sprint30_commit_proof(self, tmp_path):
++        """Missing sprint30-commit-proof.json must fail v4."""
++        files = _minimal_v4_complete_files()
++        del files["sprint30-commit-proof.json"]
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert "sprint30_commit_proof" in result.categories_missing
++
++    def test_v4_rejects_missing_security_inventory(self, tmp_path):
++        """Missing pdf-security-inventory-reconciliation.json must fail v4."""
++        files = _minimal_v4_complete_files()
++        del files["pdf-security-inventory-reconciliation.json"]
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert "security_inventory" in result.categories_missing
++
++    def test_v4_rejects_missing_pr_package_count_reconciliation(self, tmp_path):
++        """Missing pdf-pr-package-count-reconciliation.json must fail v4."""
++        files = _minimal_v4_complete_files()
++        del files["pdf-pr-package-count-reconciliation.json"]
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert "pr_package_count_reconciliation" in result.categories_missing
++
++    def test_v4_rejects_pr_count_not_14(self, tmp_path):
++        """pdf-pr-package-count-reconciliation.json with total_pr_ready!=14 must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["pdf-pr-package-count-reconciliation.json"] = json.dumps({
++            "total_pr_ready": 13,
++            "pr_breakdown": {"PR3": 3, "PR5": 3, "PR6": 3, "PR7": 1, "PR8": 2, "PR9": 1},
++            "verdict": "COUNT_INCONSISTENT",
++        })
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("total_pr_ready" in f or "14" in f for f in result.failures)
++
++    def test_v4_rejects_git_log_without_sprint30_commit(self, tmp_path):
++        """git-log-proof.txt without e379cdf must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["git-log-proof.txt"] = "ef74d9b chore(sprint29-bundle): only sprint29 here\n"
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("e379cdf" in f for f in result.failures)
++
++    def test_v4_rejects_sprint30_verdict_in_final_verdict(self, tmp_path):
++        """final-verdict.md with a Sprint 30 verdict (not Sprint 31) must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["final-verdict.md"] = (
++            "# SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE"
++        )
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("Sprint 31" in f for f in result.failures)
++
++    def test_v4_rejects_staged_pr_package_deletion(self, tmp_path):
++        """git-status-final.txt with staged workspace/pr-dry-run/ deletion must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["git-status-final.txt"] = (
++            "D  workspace/pr-dry-run/pdf-controlled-pilot-pr7/security/Program.cs\n"
++            "?? plans/\n"
++        )
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("pr-dry-run" in f for f in result.failures)
++
++    def test_v4_rejects_dirty_sprint31_source_state(self, tmp_path):
++        """source-state-classification.json with wrong sprint31_start_state must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["source-state-classification.json"] = json.dumps({
++            "sprint31_start_state": "DIRTY_SOURCE_MODIFICATIONS_PRESENT"
++        })
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("sprint31_start_state" in f for f in result.failures)
++
++    def test_v4_rejects_sprint30_style_bundle(self, tmp_path):
++        """A Sprint 30 v3-complete bundle must fail v4 (missing sprint31 categories)."""
++        files = _minimal_v3_complete_files()
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        missing = set(result.categories_missing)
++        assert "sprint30_commit_proof" in missing or "security_inventory" in missing
++
++    def test_v4_requires_more_categories_than_v3(self):
++        """v4 must require more categories than v3 (stricter)."""
++        assert MIN_CATEGORIES_REQUIRED_V4 > MIN_CATEGORIES_REQUIRED_V3, (
++            f"v4 ({MIN_CATEGORIES_REQUIRED_V4}) must have more categories than v3 ({MIN_CATEGORIES_REQUIRED_V3})"
++        )
++
++    def test_v4_min_categories_matches_combined(self):
++        """MIN_CATEGORIES_REQUIRED_V4 must equal len(COMBINED_CATEGORIES_V4)."""
++        assert MIN_CATEGORIES_REQUIRED_V4 == len(COMBINED_CATEGORIES_V4)
++
++    def test_v4_has_exactly_49_categories(self):
++        """v4 must have exactly 49 categories (45 v3 - 2 removed + 6 added)."""
++        assert MIN_CATEGORIES_REQUIRED_V4 == 49, (
++            f"v4 must have 49 categories, got {MIN_CATEGORIES_REQUIRED_V4}"
++        )
++
++    def test_v4_rejects_missing_sprint31_taskcard_state(self, tmp_path):
++        """Missing taskcard-state-after-sprint31.json must fail v4."""
++        files = _minimal_v4_complete_files()
++        del files["taskcard-state-after-sprint31.json"]
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert "taskcard_state" in result.categories_missing
++
++    def test_v4_rejects_in_progress_verdict(self, tmp_path):
++        """final-verdict.md with IN_PROGRESS must fail v4."""
++        files = _minimal_v4_complete_files()
++        files["final-verdict.md"] = "# SPRINT31_IN_PROGRESS — still running"
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert not result.passed
++        assert any("IN_PROGRESS" in f for f in result.failures)
++
++
++# ---------------------------------------------------------------------------
++# v4 contract accepts valid bundles
++# ---------------------------------------------------------------------------
++
++class TestStrictEvidenceContractV4Accepts:
++    """v4 contract must accept correctly formed Sprint 31 bundles."""
++
++    def test_v4_accepts_complete_approval_blocked_bundle(self, tmp_path):
++        """A complete Sprint 31 approval-blocked bundle must pass v4."""
++        files = _minimal_v4_complete_files()
++        zip_path = tmp_path / "sprint31-complete.zip"
++        with zipfile.ZipFile(zip_path, "w") as zf:
++            for name, content in files.items():
++                zf.writestr(name, content)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert result.passed, f"v4 should pass but failed: {result.failures}"
++        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
++        assert result.categories_missing == []
++        assert len(result.categories_found) == MIN_CATEGORIES_REQUIRED_V4
++
++    def test_v4_accepts_published_verdict(self, tmp_path):
++        """A bundle with a Sprint 31 published verdict must pass v4."""
++        files = _minimal_v4_complete_files()
++        files["final-verdict.md"] = (
++            "# SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE\n\n"
++            "All 6 PRs published successfully."
++        )
++        zip_path = _make_zip(tmp_path, files)
++        result = StrictEvidenceContractV4().validate_zip(zip_path)
++        assert result.passed, f"v4 should pass but failed: {result.failures}"
++
++    def test_v4_contract_definition_version(self):
++        """contract_definition_v4 must return version 4.0.0."""
++        defn = contract_definition_v4()
++        assert defn["contract_version"] == "4.0.0"
++
++    def test_v4_contract_definition_has_all_combined_categories(self):
++        """contract_definition_v4 must include all COMBINED_CATEGORIES_V4 keys."""
++        defn = contract_definition_v4()
++        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V4.keys())
++
++    def test_v4_contract_definition_lists_allowed_verdicts(self):
++        """contract_definition_v4 must list all allowed Sprint 31 verdicts."""
++        defn = contract_definition_v4()
++        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V4)
++
++    def test_v4_contract_definition_documents_category_reconciliation(self):
++        """contract_definition_v4 must document the v3→v4 delta."""
++        defn = contract_definition_v4()
++        recon = defn["category_count_reconciliation"]
++        assert recon["v3_categories"] == 45
++        assert recon["v4_categories"] == 49
++        assert "sprint29_commit_proof" in recon["categories_removed_from_v3"]
++        assert "security_inventory" in recon["categories_added_in_v4"]
+diff --git a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll
+index ab153f2..d1e1bf6 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll and b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.dll differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe
+index 626636f..0a667c3 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe and b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.exe differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb
+index fd95608..8bcd0b1 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb and b/workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/signature-harness.pdb differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe
+index 626636f..0a667c3 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe and b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/apphost.exe differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll
+index 1c16907..f7d5319 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll and b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/ref/signature-harness.dll differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll
+index 1c16907..f7d5319 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll and b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/refint/signature-harness.dll differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs
+index d8d1e6b..60282a2 100644
+--- a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs
++++ b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfo.cs
+@@ -13,7 +13,7 @@ using System.Reflection;
+ [assembly: System.Reflection.AssemblyCompanyAttribute("signature-harness")]
+ [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+ [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3326570787a96d0d67ced17df8016c66c214fdb")]
++[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58047d5f3d53e203b448a9a76a68bd6657a61495")]
+ [assembly: System.Reflection.AssemblyProductAttribute("signature-harness")]
+ [assembly: System.Reflection.AssemblyTitleAttribute("signature-harness")]
+ [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache
+index ab315a4..93742fe 100644
+--- a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache
++++ b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.AssemblyInfoInputs.cache
+@@ -1 +1 @@
+-09336dc2eacddcbe013a92584cb5a1dbccbbcb6e5fbd90e86bceac793e7c2227
++1d80ee35b252b7345be31490db8ff4971e3edd605a0f48565cc3473df7e00351
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll
+index ab153f2..d1e1bf6 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll and b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.dll differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb
+index fd95608..8bcd0b1 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb and b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.pdb differ
+diff --git a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json
+index 89c92b1..e48ede1 100644
+--- a/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json
++++ b/workspace/fixture-validation/pdf-signature-harness/obj/Debug/net8.0/signature-harness.sourcelink.json
+@@ -1 +1 @@
+-{"documents":{"C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\*":"https://raw.githubusercontent.com/babar-raza/lowcode-example-generator/b3326570787a96d0d67ced17df8016c66c214fdb/*"}}
+\ No newline at end of file
++{"documents":{"C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\*":"https://raw.githubusercontent.com/babar-raza/lowcode-example-generator/58047d5f3d53e203b448a9a76a68bd6657a61495/*"}}
+\ No newline at end of file
+diff --git a/workspace/fixture-validation/pdf-signature-harness/output-signed.pdf b/workspace/fixture-validation/pdf-signature-harness/output-signed.pdf
+index 2f51252..b9c8579 100644
+--- a/workspace/fixture-validation/pdf-signature-harness/output-signed.pdf
++++ b/workspace/fixture-validation/pdf-signature-harness/output-signed.pdf
+@@ -3,7 +3,7 @@ Evaluation Only. Created with Aspose.PDF. Copyright 2002-2026 Aspose Pty Ltd.
+                         Document to sign
+ 
+ Digitally signed by 'CN=TestSign'
+-Date: 2026.05.17 15:19:13 +05:00
++Date: 2026.05.17 16:04:15 +05:00
+ Reason: Test Signature
+ Location: Test Location
+ Contact: test@example.com
+diff --git a/workspace/fixture-validation/pdf-signature-harness/test.pfx b/workspace/fixture-validation/pdf-signature-harness/test.pfx
+index 4c5d2b7..96a17b7 100644
+Binary files a/workspace/fixture-validation/pdf-signature-harness/test.pfx and b/workspace/fixture-validation/pdf-signature-harness/test.pfx differ
+diff --git a/workspace/manifests/example-index.json b/workspace/manifests/example-index.json
+index acda806..f1ca82e 100644
+--- a/workspace/manifests/example-index.json
++++ b/workspace/manifests/example-index.json
+@@ -1,14 +1,14 @@
+ {
+-  "total_examples": 14,
++  "total_examples": 17,
+   "generated": 0,
+-  "repaired": 3,
++  "repaired": 4,
+   "failed": 0,
+   "examples": [
+     {
+       "scenario_id": "pdf-doc-converter",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-doc-converter\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-doc-converter",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-doc-converter\\pdf-doc-converter.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-doc-converter\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -74,11 +74,153 @@
+         ]
+       }
+     },
++    {
++      "scenario_id": "pdf-form-editor",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-editor",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-editor\\pdf-form-editor.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-editor\\Program.cs",
++      "target_framework": "net8.0",
++      "package_id": "Aspose.PDF",
++      "claimed_symbols": [
++        "Aspose.Pdf.LowCode.FormEditor",
++        "Aspose.Pdf.LowCode.FormEditor.Process"
++      ],
++      "status": "generated_template_first",
++      "input_strategy": "programmatic_input",
++      "input_files": [],
++      "placed_fixtures": [],
++      "pdf_constraints": [
++        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
++        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
++        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
++        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
++        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
++        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
++        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
++        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
++        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
++        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
++        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
++        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
++        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
++        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
++        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
++        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
++        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
++        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
++        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
++        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
++        "REQUIRED: using Aspose.Pdf.LowCode; (for FormEditor, FormRemoveAllFieldsOptions, FileDataSource)",
++        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
++        "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
++        "REQUIRED: new FormRemoveAllFieldsOptions() \u2014 no-param constructor; use FormRemoveAllFieldsOptions NOT FormEditorRemoveOptions (which is abstract)",
++        "REQUIRED: new FormEditor().Process(removeOptions) \u2014 use the LowCode FormEditor plugin",
++        "REQUIRED: removeOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
++        "REQUIRED: removeOptions.AddOutput(new FileDataSource( \u2014 modified PDF output via AddOutput(new FileDataSource(path))",
++        "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField",
++        "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1",
++        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormRemoveAllFieldsOptions instead",
++        "FORBIDDEN: new FormEditorRemoveOptions() \u2014 FormEditorRemoveOptions is abstract base class; use FormRemoveAllFieldsOptions instead",
++        "FORBIDDEN: Document.Form.Remove() \u2014 this is core API; use LowCode FormEditor.Process() instead"
++      ],
++      "family_name": "pdf",
++      "type_short": "formeditor",
++      "type_constraints": {
++        "template_first": true,
++        "required": [
++          "REQUIRED: using Aspose.Pdf.LowCode; (for FormEditor, FormRemoveAllFieldsOptions, FileDataSource)",
++          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
++          "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
++          "REQUIRED: new FormRemoveAllFieldsOptions() \u2014 no-param constructor; use FormRemoveAllFieldsOptions NOT FormEditorRemoveOptions (which is abstract)",
++          "REQUIRED: new FormEditor().Process(removeOptions) \u2014 use the LowCode FormEditor plugin",
++          "REQUIRED: removeOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
++          "REQUIRED: removeOptions.AddOutput(new FileDataSource( \u2014 modified PDF output via AddOutput(new FileDataSource(path))",
++          "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField",
++          "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1"
++        ],
++        "forbidden": [
++          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormRemoveAllFieldsOptions instead",
++          "FORBIDDEN: new FormEditorRemoveOptions() \u2014 FormEditorRemoveOptions is abstract base class; use FormRemoveAllFieldsOptions instead",
++          "FORBIDDEN: Document.Form.Remove() \u2014 this is core API; use LowCode FormEditor.Process() instead"
++        ]
++      }
++    },
++    {
++      "scenario_id": "pdf-form-exporter",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-exporter",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-exporter\\pdf-form-exporter.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-exporter\\Program.cs",
++      "target_framework": "net8.0",
++      "package_id": "Aspose.PDF",
++      "claimed_symbols": [
++        "Aspose.Pdf.LowCode.FormExporter",
++        "Aspose.Pdf.LowCode.FormExporter.Process"
++      ],
++      "status": "generated_template_first",
++      "input_strategy": "programmatic_input",
++      "input_files": [],
++      "placed_fixtures": [],
++      "pdf_constraints": [
++        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
++        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
++        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
++        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
++        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
++        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
++        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
++        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
++        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
++        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
++        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
++        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
++        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
++        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
++        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
++        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
++        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
++        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
++        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
++        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
++        "REQUIRED: using Aspose.Pdf.LowCode; (for FormExporter, FormExporterToJsonOptions, FileDataSource)",
++        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
++        "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
++        "REQUIRED: new FormExporterToJsonOptions() \u2014 no-param constructor; exports form field data to JSON",
++        "REQUIRED: new FormExporter().Process(exportOptions) \u2014 use the LowCode FormExporter plugin",
++        "REQUIRED: exportOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
++        "REQUIRED: exportOptions.AddOutput(new FileDataSource( \u2014 JSON output added via AddOutput(new FileDataSource(\"output.json\"))",
++        "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField with a value",
++        "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1",
++        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormExporterToJsonOptions instead",
++        "FORBIDDEN: Document.Form.ExportXml() or Document.Form.ExportFdf() \u2014 core API; use LowCode FormExporter.Process() instead",
++        "FORBIDDEN: SelectField as constructor argument to FormExporterToJsonOptions \u2014 use the no-param constructor"
++      ],
++      "family_name": "pdf",
++      "type_short": "formexporter",
++      "type_constraints": {
++        "template_first": true,
++        "required": [
++          "REQUIRED: using Aspose.Pdf.LowCode; (for FormExporter, FormExporterToJsonOptions, FileDataSource)",
++          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
++          "REQUIRED: using Aspose.Pdf.Forms; (for TextBoxField)",
++          "REQUIRED: new FormExporterToJsonOptions() \u2014 no-param constructor; exports form field data to JSON",
++          "REQUIRED: new FormExporter().Process(exportOptions) \u2014 use the LowCode FormExporter plugin",
++          "REQUIRED: exportOptions.AddInput(new FileDataSource( \u2014 AcroForm PDF input added via AddInput(new FileDataSource(path))",
++          "REQUIRED: exportOptions.AddOutput(new FileDataSource( \u2014 JSON output added via AddOutput(new FileDataSource(\"output.json\"))",
++          "REQUIRED: var textBox = new TextBoxField(page, new Aspose.Pdf.Rectangle( \u2014 create AcroForm fixture with at least one TextBoxField with a value",
++          "REQUIRED: doc.Form.Add(textBox, 1) \u2014 add the TextBoxField to the document's form on page 1"
++        ],
++        "forbidden": [
++          "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use FormExporterToJsonOptions instead",
++          "FORBIDDEN: Document.Form.ExportXml() or Document.Form.ExportFdf() \u2014 core API; use LowCode FormExporter.Process() instead",
++          "FORBIDDEN: SelectField as constructor argument to FormExporterToJsonOptions \u2014 use the no-param constructor"
++        ]
++      }
++    },
+     {
+       "scenario_id": "pdf-form-flattener",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener\\pdf-form-flattener.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-form-flattener\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-flattener",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-flattener\\pdf-form-flattener.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-form-flattener\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -147,9 +289,9 @@
+     },
+     {
+       "scenario_id": "pdf-html",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html\\pdf-html.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-html\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-html",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-html\\pdf-html.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-html\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -226,9 +368,9 @@
+     },
+     {
+       "scenario_id": "pdf-image-extractor",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor\\pdf-image-extractor.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-image-extractor\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-image-extractor",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-image-extractor\\pdf-image-extractor.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-image-extractor\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -296,9 +438,9 @@
+     },
+     {
+       "scenario_id": "pdf-jpeg",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-jpeg\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-jpeg",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-jpeg\\pdf-jpeg.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-jpeg\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -364,9 +506,9 @@
+     },
+     {
+       "scenario_id": "pdf-optimizer",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-optimizer\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-optimizer",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-optimizer\\pdf-optimizer.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-optimizer\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -414,9 +556,9 @@
+     },
+     {
+       "scenario_id": "pdf-pdf-aconverter",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-pdf-aconverter",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-pdf-aconverter\\pdf-pdf-aconverter.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-pdf-aconverter\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -488,9 +630,9 @@
+     },
+     {
+       "scenario_id": "pdf-png",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png\\pdf-png.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-png\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-png",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-png\\pdf-png.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-png\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -558,9 +700,9 @@
+     },
+     {
+       "scenario_id": "pdf-security",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security\\pdf-security.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-security\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-security",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-security\\pdf-security.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-security\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -625,11 +767,66 @@
+         ]
+       }
+     },
++    {
++      "scenario_id": "pdf-splitter",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-splitter",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-splitter\\pdf-splitter.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-splitter\\Program.cs",
++      "target_framework": "net8.0",
++      "package_id": "Aspose.PDF",
++      "claimed_symbols": [
++        "Aspose.Pdf.LowCode.Splitter",
++        "Aspose.Pdf.LowCode.Splitter.Process"
++      ],
++      "status": "repaired",
++      "input_strategy": "programmatic_input",
++      "input_files": [],
++      "placed_fixtures": [],
++      "pdf_constraints": [
++        "FORBIDDEN: File.Copy() or System.IO.File.Copy() \u2014 this is NOT a LowCode operation. You MUST use the LowCode plugin class and its Process(options) method.",
++        "FORBIDDEN: new FileSaveTarget(path) \u2014 use new FileDataSource(path) for AddOutput()",
++        "FORBIDDEN: result.IsSuccess \u2014 use result.ResultCollection.Count > 0",
++        "FORBIDDEN: result.OperationResult \u2014 use result.ResultCollection",
++        "FORBIDDEN: format strings in output filename (e.g. 'output_{0}.pdf') \u2014 use plain 'output.pdf'",
++        "FORBIDDEN: InputPath or OutputPath properties on any options object \u2014 use AddInput() and AddOutput() methods",
++        "FORBIDDEN: defining your own class stubs or fake implementations \u2014 use only the real Aspose API",
++        "FORBIDDEN: defining a local class named Merger, Splitter, Optimizer, or TextExtractor \u2014 these are real Aspose.Pdf.LowCode classes; do NOT shadow them with local definitions",
++        "FORBIDDEN: input.docx \u2014 PDF LowCode always uses .pdf files, never .docx",
++        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is an abstract base; use the concrete options class for this type",
++        "FORBIDDEN: LowCodePluginOptions \u2014 this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
++        "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path \u2014 always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
++        "FORBIDDEN: string array overloads of Process() \u2014 always use the options object overload Process(IPluginOptions)",
++        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
++        "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
++        "REQUIRED: use instance-method pattern \u2014 create plugin instance first: 'var plugin = new XxxPlugin(); plugin.Process(options)'",
++        "REQUIRED: always include 'using Aspose.Pdf;' (for Document/TextFragment fixture creation)",
++        "REQUIRED: create input PDF programmatically in code before calling the API:\n    var doc = new Aspose.Pdf.Document();\n    doc.Pages.Add();\n    doc.Save(\"input.pdf\");",
++        "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
++        "REQUIRED: options class is 'SplitOptions' \u2014 do NOT use any other class name",
++        "REQUIRED: plugin class is 'Splitter' \u2014 do NOT use any other class name",
++        "REQUIRED: exact usage pattern:\n    var options = new SplitOptions();\n    options.AddInput(new FileDataSource(\"input.pdf\"));\n    options.AddOutput(new FileDataSource(\"output.pdf\"));\n    var result = new Splitter().Process(options);",
++        "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
++        "REQUIRED: new Splitter().Process(options) \u2014 use the LowCode Splitter plugin, not PdfFileEditor",
++        "REQUIRED: using Aspose.Pdf; (for Document fixture creation)",
++        "FORBIDDEN: PdfFileEditor \u2014 use Aspose.Pdf.LowCode.Splitter instead"
++      ],
++      "family_name": "pdf",
++      "type_short": "splitter",
++      "type_constraints": {
++        "required": [
++          "REQUIRED: new Splitter().Process(options) \u2014 use the LowCode Splitter plugin, not PdfFileEditor",
++          "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
++        ],
++        "forbidden": [
++          "FORBIDDEN: PdfFileEditor \u2014 use Aspose.Pdf.LowCode.Splitter instead"
++        ]
++      }
++    },
+     {
+       "scenario_id": "pdf-table-generator",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator\\pdf-table-generator.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-table-generator\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-table-generator",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-table-generator\\pdf-table-generator.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-table-generator\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -706,9 +903,9 @@
+     },
+     {
+       "scenario_id": "pdf-text-extractor",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-text-extractor\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-text-extractor",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-text-extractor\\pdf-text-extractor.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-text-extractor\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -764,9 +961,9 @@
+     },
+     {
+       "scenario_id": "pdf-tiff",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-tiff\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-tiff",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-tiff\\pdf-tiff.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-tiff\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -832,9 +1029,9 @@
+     },
+     {
+       "scenario_id": "pdf-toc-generator",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator\\pdf-toc-generator.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-toc-generator\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-toc-generator",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-toc-generator\\pdf-toc-generator.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-toc-generator\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+@@ -902,9 +1099,9 @@
+     },
+     {
+       "scenario_id": "pdf-xls-converter",
+-      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter",
+-      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
+-      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-130711\\generated\\pdf\\pdf-xls-converter\\Program.cs",
++      "project_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-xls-converter",
++      "csproj_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-xls-converter\\pdf-xls-converter.csproj",
++      "program_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260517-150729\\generated\\pdf\\pdf-xls-converter\\Program.cs",
+       "target_framework": "net8.0",
+       "package_id": "Aspose.PDF",
+       "claimed_symbols": [
+diff --git a/workspace/manifests/scenario-catalog.json b/workspace/manifests/scenario-catalog.json
+index 652dc4c..b703108 100644
+--- a/workspace/manifests/scenario-catalog.json
++++ b/workspace/manifests/scenario-catalog.json
+@@ -1,7 +1,7 @@
+ {
+   "family": "pdf",
+-  "ready_count": 16,
+-  "blocked_count": 85,
++  "ready_count": 18,
++  "blocked_count": 83,
+   "scenarios": [
+     {
+       "scenario_id": "pdf-doc-converter",
+@@ -23,6 +23,42 @@
+       "status": "ready",
+       "blocked_reason": null
+     },
++    {
++      "scenario_id": "pdf-form-editor",
++      "title": "Use FormEditor from Aspose.Pdf.LowCode",
++      "target_type": "Aspose.Pdf.LowCode.FormEditor",
++      "target_namespace": "Aspose.Pdf.LowCode",
++      "target_methods": [
++        "Process"
++      ],
++      "required_symbols": [
++        "Aspose.Pdf.LowCode.FormEditor",
++        "Aspose.Pdf.LowCode.FormEditor.Process"
++      ],
++      "required_fixtures": [],
++      "output_plan": "Convert input.pdf to output.pdf using FormEditor",
++      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
++      "status": "ready",
++      "blocked_reason": null
++    },
++    {
++      "scenario_id": "pdf-form-exporter",
++      "title": "Use FormExporter from Aspose.Pdf.LowCode",
++      "target_type": "Aspose.Pdf.LowCode.FormExporter",
++      "target_namespace": "Aspose.Pdf.LowCode",
++      "target_methods": [
++        "Process"
++      ],
++      "required_symbols": [
++        "Aspose.Pdf.LowCode.FormExporter",
++        "Aspose.Pdf.LowCode.FormExporter.Process"
++      ],
++      "required_fixtures": [],
++      "output_plan": "Convert input.pdf to output.pdf using FormExporter",
++      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
++      "status": "ready",
++      "blocked_reason": null
++    },
+     {
+       "scenario_id": "pdf-form-flattener",
+       "title": "Use FormFlattener from Aspose.Pdf.LowCode",
+diff --git a/workspace/verification/latest/cells-readme-backfill-simulation.json b/workspace/verification/latest/cells-readme-backfill-simulation.json
+index 6ed5509..5ea13e3 100644
+--- a/workspace/verification/latest/cells-readme-backfill-simulation.json
++++ b/workspace/verification/latest/cells-readme-backfill-simulation.json
+@@ -1,10 +1,10 @@
+ {
+   "result_type": "readme_backfill_simulation",
+-  "date": "2026-05-17 10:26 UTC",
++  "date": "2026-05-18 07:31 UTC",
+   "family": "cells",
+   "dry_run": true,
+   "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+-  "branch_name": "plugin-examples/cells/readme/20260517-102639",
++  "branch_name": "plugin-examples/cells/readme/20260518-073137",
+   "pr_title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples",
+   "readme_bytes": 5241,
+   "audit_passed": true,
+diff --git a/workspace/verification/latest/cells-root-readme-audit.json b/workspace/verification/latest/cells-root-readme-audit.json
+index ba1df35..80f5e08 100644
+--- a/workspace/verification/latest/cells-root-readme-audit.json
++++ b/workspace/verification/latest/cells-root-readme-audit.json
+@@ -1,6 +1,6 @@
+ {
+   "audit_type": "root_readme_audit",
+-  "audit_date": "2026-05-17 10:26 UTC",
++  "audit_date": "2026-05-18 07:31 UTC",
+   "family": "cells",
+   "package_path": "workspace\\pr-dry-run\\cells-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\cells-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/cells-root-readme-render-result.json b/workspace/verification/latest/cells-root-readme-render-result.json
+index cc93d86..7e7230e 100644
+--- a/workspace/verification/latest/cells-root-readme-render-result.json
++++ b/workspace/verification/latest/cells-root-readme-render-result.json
+@@ -1,6 +1,6 @@
+ {
+   "render_type": "root_readme_render_result",
+-  "render_date": "2026-05-17 10:26 UTC",
++  "render_date": "2026-05-18 07:31 UTC",
+   "family": "cells",
+   "package_path": "workspace\\pr-dry-run\\cells-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\cells-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/release-status.json b/workspace/verification/latest/release-status.json
+index cf793dc..efd0855 100644
+--- a/workspace/verification/latest/release-status.json
++++ b/workspace/verification/latest/release-status.json
+@@ -1,6 +1,6 @@
+ {
+   "report_type": "release_status",
+-  "generated_at": "2026-05-17T10:26:52.148605+00:00",
++  "generated_at": "2026-05-18T07:31:44.384547+00:00",
+   "families_checked": [
+     "cells",
+     "words"
+diff --git a/workspace/verification/latest/words-readme-backfill-simulation.json b/workspace/verification/latest/words-readme-backfill-simulation.json
+index 2069dbd..6d88c4c 100644
+--- a/workspace/verification/latest/words-readme-backfill-simulation.json
++++ b/workspace/verification/latest/words-readme-backfill-simulation.json
+@@ -1,10 +1,10 @@
+ {
+   "result_type": "readme_backfill_simulation",
+-  "date": "2026-05-17 10:26 UTC",
++  "date": "2026-05-18 07:31 UTC",
+   "family": "words",
+   "dry_run": true,
+   "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+-  "branch_name": "plugin-examples/words/readme/20260517-102643",
++  "branch_name": "plugin-examples/words/readme/20260518-073139",
+   "pr_title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples",
+   "readme_bytes": 5092,
+   "audit_passed": true,
+diff --git a/workspace/verification/latest/words-root-readme-audit.json b/workspace/verification/latest/words-root-readme-audit.json
+index 17bb29b..d0342cb 100644
+--- a/workspace/verification/latest/words-root-readme-audit.json
++++ b/workspace/verification/latest/words-root-readme-audit.json
+@@ -1,6 +1,6 @@
+ {
+   "audit_type": "root_readme_audit",
+-  "audit_date": "2026-05-17 10:26 UTC",
++  "audit_date": "2026-05-18 07:31 UTC",
+   "family": "words",
+   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/words-root-readme-render-result.json b/workspace/verification/latest/words-root-readme-render-result.json
+index 11d691c..afdfe92 100644
+--- a/workspace/verification/latest/words-root-readme-render-result.json
++++ b/workspace/verification/latest/words-root-readme-render-result.json
+@@ -1,6 +1,6 @@
+ {
+   "render_type": "root_readme_render_result",
+-  "render_date": "2026-05-17 10:26 UTC",
++  "render_date": "2026-05-18 07:31 UTC",
+   "family": "words",
+   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",

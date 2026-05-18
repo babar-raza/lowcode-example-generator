@@ -1,0 +1,12 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint31",
+  "date": "2026-05-18",
+  "token_env_var": "GH_TOKEN",
+  "token_type": "classic_PAT",
+  "token_prefix": "ghp_",
+  "token_length": 40,
+  "token_valid_for_publication": true,
+  "token_note": "Classic PAT (ghp_, 40 chars) — correct type for org repo publication via Git Data API",
+  "verdict": "TOKEN_READY"
+}

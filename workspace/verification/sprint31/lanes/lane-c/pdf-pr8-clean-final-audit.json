@@ -1,0 +1,32 @@
+{
+  "lane": "lane-c",
+  "sprint": "sprint31",
+  "date": "2026-05-17",
+  "pr_id": "PR#8",
+  "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot-pr8",
+  "aspose_pdf_version": "26.5.0",
+  "examples": ["form-editor", "form-exporter"],
+  "example_count": 2,
+  "total_files": 13,
+  "bin_obj_files": 0,
+  "blocking_flags": [],
+  "cleanup_committed_in": "8094a46",
+  "files_deleted_in_cleanup": 166,
+  "current_files": [
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "global.json",
+    "examples/pdf/lowcode/form-editor/Program.cs",
+    "examples/pdf/lowcode/form-editor/README.md",
+    "examples/pdf/lowcode/form-editor/form-editor.csproj",
+    "examples/pdf/lowcode/form-editor/input.pdf",
+    "examples/pdf/lowcode/form-editor/output.pdf",
+    "examples/pdf/lowcode/form-exporter/Program.cs",
+    "examples/pdf/lowcode/form-exporter/README.md",
+    "examples/pdf/lowcode/form-exporter/form-exporter.csproj",
+    "examples/pdf/lowcode/form-exporter/input.pdf",
+    "examples/pdf/lowcode/form-exporter/output.json"
+  ],
+  "git_status_clean": true,
+  "verdict": "PR8_CLEAN_COMMITTED_PUBLICATION_SAFE"
+}

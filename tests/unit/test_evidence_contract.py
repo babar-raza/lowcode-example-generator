@@ -22,17 +22,22 @@ import pytest
 from plugin_examples.evidence_contract import (
     ALLOWED_VERDICTS_V2,
     ALLOWED_VERDICTS_V3,
+    ALLOWED_VERDICTS_V4,
     COMBINED_CATEGORIES_V2,
     COMBINED_CATEGORIES_V3,
+    COMBINED_CATEGORIES_V4,
     MIN_CATEGORIES_REQUIRED_V2,
     MIN_CATEGORIES_REQUIRED_V3,
+    MIN_CATEGORIES_REQUIRED_V4,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
     StrictEvidenceContractV3,
+    StrictEvidenceContractV4,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
+    contract_definition_v4,
 )
 
 
@@ -906,3 +911,254 @@ class TestStrictEvidenceContractV3Accepts:
         assert recon["v3_categories"] == 45
         assert "sprint28_commit_proof" in recon["categories_removed_from_v2"]
         assert "bin_obj_cleanup" in recon["categories_added_in_v3"]
+
+
+# ---------------------------------------------------------------------------
+# Helper for v4 complete bundle
+# ---------------------------------------------------------------------------
+
+def _minimal_v4_complete_files() -> dict[str, str]:
+    """Return files satisfying all 49 v4 required categories with valid content."""
+    files = dict(_minimal_v3_complete_files())
+    # Remove v3 sprint29 keys (replaced in v4)
+    files.pop("sprint29-commit-proof.json", None)
+    files.pop("sprint29-bundle-vs-commit-reconciliation.md", None)
+    # Update taskcard state to sprint31
+    files.pop("taskcard-state-after-sprint30.json", None)
+    files["taskcard-state-after-sprint31.json"] = json.dumps({"sprint": "sprint31"})
+    # v4 new categories
+    files["sprint30-commit-proof.json"] = json.dumps({
+        "head_commit": {"short": "e379cdf"},
+        "ancestry_chain": ["e379cdf", "8094a46", "ef74d9b"],
+        "verdict": "SPRINT30_COMMITS_VERIFIED",
+    })
+    files["sprint30-bundle-vs-commit-reconciliation.md"] = (
+        "# Sprint 30 Bundle vs Commit Reconciliation\nBOOTSTRAP_PATTERN_EXPECTED"
+    )
+    files["pdf-security-inventory-reconciliation.json"] = json.dumps({
+        "finding": "SECURITY_PRESENT_IN_PR7_NEVER_MISSING",
+        "security_in_pr7": True,
+        "root_cause": "audit_omission",
+    })
+    files["pdf-pr-package-count-reconciliation.json"] = json.dumps({
+        "total_pr_ready": 14,
+        "pr_breakdown": {"PR3": 3, "PR5": 3, "PR6": 3, "PR7": 2, "PR8": 2, "PR9": 1},
+        "verdict": "COUNT_CONSISTENT",
+    })
+    files["pdf-pr8-clean-final-audit.json"] = json.dumps({
+        "package": "pdf-controlled-pilot-pr8",
+        "bin_obj_count": 0,
+        "status": "CLEAN",
+    })
+    files["pdf-pr9-clean-final-audit.json"] = json.dumps({
+        "package": "pdf-controlled-pilot-pr9",
+        "bin_obj_count": 0,
+        "status": "CLEAN",
+    })
+    # v4 git log must contain e379cdf (Sprint 30 HEAD)
+    files["git-log-proof.txt"] = (
+        "e379cdf chore(sprint30-bundle): add v3-validated evidence bundle\n"
+        "8094a46 feat(sprint30): SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN\n"
+        "ef74d9b chore(sprint29-bundle): add v2-validated evidence bundle\n"
+    )
+    # v4 final verdict must be a Sprint 31 verdict
+    files["final-verdict.md"] = (
+        "# SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE\n\n"
+        "Security present in PR#7. PR count=14 confirmed."
+    )
+    # v4 source-state-classification.json must have sprint31_start_state
+    files["source-state-classification.json"] = json.dumps({
+        "sprint31_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+        "source_changes_check": {"src_modified": False},
+    })
+    return files
+
+
+# ---------------------------------------------------------------------------
+# v4 contract rejects invalid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV4Rejects:
+    """v4 contract must reject bundles missing v4-specific requirements."""
+
+    def test_v4_rejects_missing_sprint30_commit_proof(self, tmp_path):
+        """Missing sprint30-commit-proof.json must fail v4."""
+        files = _minimal_v4_complete_files()
+        del files["sprint30-commit-proof.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert "sprint30_commit_proof" in result.categories_missing
+
+    def test_v4_rejects_missing_security_inventory(self, tmp_path):
+        """Missing pdf-security-inventory-reconciliation.json must fail v4."""
+        files = _minimal_v4_complete_files()
+        del files["pdf-security-inventory-reconciliation.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert "security_inventory" in result.categories_missing
+
+    def test_v4_rejects_missing_pr_package_count_reconciliation(self, tmp_path):
+        """Missing pdf-pr-package-count-reconciliation.json must fail v4."""
+        files = _minimal_v4_complete_files()
+        del files["pdf-pr-package-count-reconciliation.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert "pr_package_count_reconciliation" in result.categories_missing
+
+    def test_v4_rejects_pr_count_not_14(self, tmp_path):
+        """pdf-pr-package-count-reconciliation.json with total_pr_ready!=14 must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["pdf-pr-package-count-reconciliation.json"] = json.dumps({
+            "total_pr_ready": 13,
+            "pr_breakdown": {"PR3": 3, "PR5": 3, "PR6": 3, "PR7": 1, "PR8": 2, "PR9": 1},
+            "verdict": "COUNT_INCONSISTENT",
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("total_pr_ready" in f or "14" in f for f in result.failures)
+
+    def test_v4_rejects_git_log_without_sprint30_commit(self, tmp_path):
+        """git-log-proof.txt without e379cdf must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["git-log-proof.txt"] = "ef74d9b chore(sprint29-bundle): only sprint29 here\n"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("e379cdf" in f for f in result.failures)
+
+    def test_v4_rejects_sprint30_verdict_in_final_verdict(self, tmp_path):
+        """final-verdict.md with a Sprint 30 verdict (not Sprint 31) must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("Sprint 31" in f for f in result.failures)
+
+    def test_v4_rejects_staged_pr_package_deletion(self, tmp_path):
+        """git-status-final.txt with staged workspace/pr-dry-run/ deletion must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["git-status-final.txt"] = (
+            "D  workspace/pr-dry-run/pdf-controlled-pilot-pr7/security/Program.cs\n"
+            "?? plans/\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("pr-dry-run" in f for f in result.failures)
+
+    def test_v4_rejects_dirty_sprint31_source_state(self, tmp_path):
+        """source-state-classification.json with wrong sprint31_start_state must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["source-state-classification.json"] = json.dumps({
+            "sprint31_start_state": "DIRTY_SOURCE_MODIFICATIONS_PRESENT"
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("sprint31_start_state" in f for f in result.failures)
+
+    def test_v4_rejects_sprint30_style_bundle(self, tmp_path):
+        """A Sprint 30 v3-complete bundle must fail v4 (missing sprint31 categories)."""
+        files = _minimal_v3_complete_files()
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        missing = set(result.categories_missing)
+        assert "sprint30_commit_proof" in missing or "security_inventory" in missing
+
+    def test_v4_requires_more_categories_than_v3(self):
+        """v4 must require more categories than v3 (stricter)."""
+        assert MIN_CATEGORIES_REQUIRED_V4 > MIN_CATEGORIES_REQUIRED_V3, (
+            f"v4 ({MIN_CATEGORIES_REQUIRED_V4}) must have more categories than v3 ({MIN_CATEGORIES_REQUIRED_V3})"
+        )
+
+    def test_v4_min_categories_matches_combined(self):
+        """MIN_CATEGORIES_REQUIRED_V4 must equal len(COMBINED_CATEGORIES_V4)."""
+        assert MIN_CATEGORIES_REQUIRED_V4 == len(COMBINED_CATEGORIES_V4)
+
+    def test_v4_has_exactly_49_categories(self):
+        """v4 must have exactly 49 categories (45 v3 - 2 removed + 6 added)."""
+        assert MIN_CATEGORIES_REQUIRED_V4 == 49, (
+            f"v4 must have 49 categories, got {MIN_CATEGORIES_REQUIRED_V4}"
+        )
+
+    def test_v4_rejects_missing_sprint31_taskcard_state(self, tmp_path):
+        """Missing taskcard-state-after-sprint31.json must fail v4."""
+        files = _minimal_v4_complete_files()
+        del files["taskcard-state-after-sprint31.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert "taskcard_state" in result.categories_missing
+
+    def test_v4_rejects_in_progress_verdict(self, tmp_path):
+        """final-verdict.md with IN_PROGRESS must fail v4."""
+        files = _minimal_v4_complete_files()
+        files["final-verdict.md"] = "# SPRINT31_IN_PROGRESS — still running"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert not result.passed
+        assert any("IN_PROGRESS" in f for f in result.failures)
+
+
+# ---------------------------------------------------------------------------
+# v4 contract accepts valid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV4Accepts:
+    """v4 contract must accept correctly formed Sprint 31 bundles."""
+
+    def test_v4_accepts_complete_approval_blocked_bundle(self, tmp_path):
+        """A complete Sprint 31 approval-blocked bundle must pass v4."""
+        files = _minimal_v4_complete_files()
+        zip_path = tmp_path / "sprint31-complete.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert result.passed, f"v4 should pass but failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert result.categories_missing == []
+        assert len(result.categories_found) == MIN_CATEGORIES_REQUIRED_V4
+
+    def test_v4_accepts_published_verdict(self, tmp_path):
+        """A bundle with a Sprint 31 published verdict must pass v4."""
+        files = _minimal_v4_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE\n\n"
+            "All 6 PRs published successfully."
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV4().validate_zip(zip_path)
+        assert result.passed, f"v4 should pass but failed: {result.failures}"
+
+    def test_v4_contract_definition_version(self):
+        """contract_definition_v4 must return version 4.0.0."""
+        defn = contract_definition_v4()
+        assert defn["contract_version"] == "4.0.0"
+
+    def test_v4_contract_definition_has_all_combined_categories(self):
+        """contract_definition_v4 must include all COMBINED_CATEGORIES_V4 keys."""
+        defn = contract_definition_v4()
+        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V4.keys())
+
+    def test_v4_contract_definition_lists_allowed_verdicts(self):
+        """contract_definition_v4 must list all allowed Sprint 31 verdicts."""
+        defn = contract_definition_v4()
+        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V4)
+
+    def test_v4_contract_definition_documents_category_reconciliation(self):
+        """contract_definition_v4 must document the v3→v4 delta."""
+        defn = contract_definition_v4()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v3_categories"] == 45
+        assert recon["v4_categories"] == 49
+        assert "sprint29_commit_proof" in recon["categories_removed_from_v3"]
+        assert "security_inventory" in recon["categories_added_in_v4"]

@@ -1,0 +1,329 @@
+{
+  "barcode": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.BarCode.LowCode",
+      "Aspose.BarCode.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-barcode-net",
+    "target_repo_name": "Aspose.BarCode.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "cad": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.CAD.LowCode",
+      "Aspose.CAD.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-cad-net",
+    "target_repo_name": "Aspose.CAD.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "cells": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Cells.LowCode",
+      "Aspose.Cells.LowCode.*",
+      "Aspose.Cells.Plugins",
+      "Aspose.Cells.Plugins.*"
+    ],
+    "target_repo_owner": "aspose-cells-net",
+    "target_repo_name": "Aspose.Cells.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "diagram": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Diagram.LowCode",
+      "Aspose.Diagram.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-diagram-net",
+    "target_repo_name": "Aspose.Diagram.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "drawing": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Drawing.LowCode",
+      "Aspose.Drawing.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-drawing-net",
+    "target_repo_name": "Aspose.Drawing.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "email": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Email.LowCode",
+      "Aspose.Email.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-email-net",
+    "target_repo_name": "Aspose.Email.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "epub": {
+    "enabled": false,
+    "status": "discovery_blocked",
+    "namespace_patterns": [
+      "Aspose.Epub.LowCode",
+      "Aspose.Epub.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-epub-net",
+    "target_repo_name": "Aspose.Epub.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "finance": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Finance.LowCode",
+      "Aspose.Finance.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-finance-net",
+    "target_repo_name": "Aspose.Finance.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "font": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Font.LowCode",
+      "Aspose.Font.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-font-net",
+    "target_repo_name": "Aspose.Font.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "gis": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.GIS.LowCode",
+      "Aspose.GIS.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-gis-net",
+    "target_repo_name": "Aspose.GIS.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "html": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.HTML.LowCode",
+      "Aspose.HTML.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-html-net",
+    "target_repo_name": "Aspose.HTML.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "imaging": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Imaging.LowCode",
+      "Aspose.Imaging.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-imaging-net",
+    "target_repo_name": "Aspose.Imaging.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "note": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Note.LowCode",
+      "Aspose.Note.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-note-net",
+    "target_repo_name": "Aspose.Note.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "ocr": {
+    "enabled": true,
+    "status": "discovery_only",
+    "namespace_patterns": [
+      "Aspose.OCR.LowCode",
+      "Aspose.OCR.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-ocr-net",
+    "target_repo_name": "Aspose.OCR.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "omr": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.OMR.LowCode",
+      "Aspose.OMR.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-omr-net",
+    "target_repo_name": "Aspose.OMR.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "page": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Page.LowCode",
+      "Aspose.Page.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-page-net",
+    "target_repo_name": "Aspose.Page.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "pdf": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Pdf.LowCode",
+      "Aspose.Pdf.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-pdf-net",
+    "target_repo_name": "Aspose.PDF.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "psd": {
+    "enabled": true,
+    "status": "discovery_only",
+    "namespace_patterns": [
+      "Aspose.PSD.LowCode",
+      "Aspose.PSD.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-psd-net",
+    "target_repo_name": "Aspose.PSD.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "slides": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Slides.LowCode",
+      "Aspose.Slides.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-slides-net",
+    "target_repo_name": "Aspose.Slides.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "svg": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.SVG.LowCode",
+      "Aspose.SVG.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-svg-net",
+    "target_repo_name": "Aspose.SVG.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "tasks": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.Tasks.LowCode",
+      "Aspose.Tasks.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-tasks-net",
+    "target_repo_name": "Aspose.Tasks.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "tex": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.TeX.LowCode",
+      "Aspose.TeX.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-tex-net",
+    "target_repo_name": "Aspose.TeX.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "threed": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.ThreeD.LowCode",
+      "Aspose.ThreeD.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-threed-net",
+    "target_repo_name": "Aspose.3D.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "words": {
+    "enabled": true,
+    "status": "active",
+    "namespace_patterns": [
+      "Aspose.Words.LowCode",
+      "Aspose.Words.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-words-net",
+    "target_repo_name": "Aspose.Words.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  },
+  "zip": {
+    "enabled": false,
+    "status": "disabled",
+    "namespace_patterns": [
+      "Aspose.ZIP.LowCode",
+      "Aspose.ZIP.LowCode.*"
+    ],
+    "target_repo_owner": "aspose-zip-net",
+    "target_repo_name": "Aspose.ZIP.LowCode-for-.NET-Examples",
+    "target_repo_branch": "main",
+    "allowed_types": [],
+    "allowed_types_count": 0
+  }
+}

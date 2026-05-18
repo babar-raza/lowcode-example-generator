@@ -1,0 +1,301 @@
+diff --git a/src/plugin_examples/__main__.py b/src/plugin_examples/__main__.py
+index 7658b8e..f924720 100644
+--- a/src/plugin_examples/__main__.py
++++ b/src/plugin_examples/__main__.py
+@@ -887,6 +887,8 @@ def main() -> int:
+                 pass
+ 
+         # --- Render and write README.md into package root (both dry-run and live) ---
++        # Uses cumulative inventory: repo_actual (post-merge) + current package
++        # so the README lists all examples that will exist in the repo after merge.
+         if package_exists and len(example_dirs) > 0:
+             try:
+                 from plugin_examples.publisher.readme_renderer import (
+@@ -894,26 +896,27 @@ def main() -> int:
+                     render_readme as _render_readme,
+                     write_readme as _write_readme,
+                 )
+-                from plugin_examples.publisher.readme_auditor import audit_readme as _audit_readme
++                from plugin_examples.publisher.readme_auditor import (
++                    audit_readme as _audit_readme,
++                    audit_readme_staleness as _audit_staleness,
++                )
++                from plugin_examples.publisher.readme_inventory import (
++                    discover_family_inventory as _discover_inv,
++                    build_cumulative_examples_meta as _build_cum_meta,
++                    build_package_path_map as _build_pkg_map,
++                )
+                 import json as _json_r
+-                import re as _re_r
+-
+-                # Resolve output_formats from post-merge evidence for richer table
+-                _pm_path = verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"
+-                _output_formats: dict[str, str] = {}
+-                if _pm_path.exists():
+-                    try:
+-                        _pm = _json_r.loads(_pm_path.read_text(encoding="utf-8"))
+-                        for _ex in _pm.get("examples", []):
+-                            if _ex.get("name") and _ex.get("output_format"):
+-                                _output_formats[_ex["name"]] = _ex["output_format"]
+-                    except (OSError, _json_r.JSONDecodeError):
+-                        pass
+-
+-                _examples_meta = [
+-                    {"name": d, "output_format": _output_formats.get(d, "")}
+-                    for d in example_dirs
+-                ]
++
++                # Discover cumulative inventory: repo base + this package
++                _inv_entries, _inv_trail = _discover_inv(
++                    family=family,
++                    repo_root=repo_root,
++                    inventory_mode="current_package_overlay",
++                    current_package_path=package_path,
++                )
++                _examples_meta = _build_cum_meta(_inv_entries)
++                _pkg_path_map = _build_pkg_map(_inv_entries)
++
+                 _gen_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+                 _readme_ctx = _build_readme_ctx(
+                     family=family,
+@@ -922,6 +925,7 @@ def main() -> int:
+                     package_version=pkg_version,
+                     generation_date=_gen_date,
+                     package_path=package_path,
++                    package_path_map=_pkg_path_map if len(_pkg_path_map) > 0 else None,
+                 )
+                 _readme_content = _render_readme(_readme_ctx)
+                 _write_readme(_readme_content, package_path / "README.md")
+@@ -935,7 +939,22 @@ def main() -> int:
+                     else:
+                         print(f"WARNING: README audit failed for {family} (non-blocking in dry-run): {_readme_audit.warnings}")
+                 else:
+-                    print(f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes)")
++                    print(f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes, {len(_inv_entries)} examples)")
++
++                # Staleness gate: fail closed if README is stale against intended branch content
++                _expected_names = [e.name for e in _inv_entries]
++                _staleness = _audit_staleness(_readme_content, _expected_names)
++                if _staleness.is_stale:
++                    _stale_msg = (
++                        f"README staleness FAILED for {family}: "
++                        f"missing={_staleness.missing_from_readme}, "
++                        f"extra={_staleness.extra_in_readme}"
++                    )
++                    if live_mode:
++                        print(f"ERROR: {_stale_msg}")
++                        return 1
++                    else:
++                        print(f"WARNING: {_stale_msg}")
+             except Exception as _readme_exc:
+                 # README rendering is non-blocking for dry-run; block for live publish
+                 if live_mode:
+diff --git a/src/plugin_examples/publisher/readme_auditor.py b/src/plugin_examples/publisher/readme_auditor.py
+index dbbe6bd..5bfdc0e 100644
+--- a/src/plugin_examples/publisher/readme_auditor.py
++++ b/src/plugin_examples/publisher/readme_auditor.py
+@@ -408,3 +408,56 @@ def audit_readme_file(readme_path: Path, context) -> ReadmeAuditResult:
+         return result
+     content = readme_path.read_text(encoding="utf-8")
+     return audit_readme(content, context)
++
++
++# ---------------------------------------------------------------------------
++# Staleness detection for cumulative README inventory
++# ---------------------------------------------------------------------------
++
++@dataclass
++class ReadmeStalenessResult:
++    """Result of comparing README example table against expected inventory."""
++    is_stale: bool
++    missing_from_readme: list[str] = field(default_factory=list)
++    extra_in_readme: list[str] = field(default_factory=list)
++    inventory_count: int = 0
++    readme_count: int = 0
++    pending_not_in_branch: list[str] = field(default_factory=list)
++
++
++def audit_readme_staleness(
++    readme_content: str,
++    expected_examples: list[str],
++    pending_examples: list[str] | None = None,
++) -> ReadmeStalenessResult:
++    """Compare README example table against the expected inventory.
++
++    Args:
++        readme_content: Full text of the README.md.
++        expected_examples: Names of examples that MUST be in the README.
++        pending_examples: Names of examples that are package-ready but not
++            in the target branch. These are NOT failures — they are classified
++            as ``pending_not_in_branch``.
++
++    Returns:
++        ReadmeStalenessResult with is_stale=True if any expected examples
++        are missing from the README, or if the README contains extra examples
++        not in the expected set.
++    """
++    section = _extract_examples_section(readme_content)
++    readme_names = set(_find_example_names_in_table(section))
++    expected_set = set(expected_examples)
++    pending_set = set(pending_examples or [])
++
++    missing = sorted(expected_set - readme_names)
++    extra = sorted(readme_names - expected_set - pending_set)
++    pending_classified = sorted(pending_set - readme_names)
++
++    return ReadmeStalenessResult(
++        is_stale=bool(missing) or bool(extra),
++        missing_from_readme=missing,
++        extra_in_readme=extra,
++        inventory_count=len(expected_set),
++        readme_count=len(readme_names),
++        pending_not_in_branch=pending_classified,
++    )
+diff --git a/src/plugin_examples/publisher/readme_renderer.py b/src/plugin_examples/publisher/readme_renderer.py
+index 9ddf5d0..2b0b4a2 100644
+--- a/src/plugin_examples/publisher/readme_renderer.py
++++ b/src/plugin_examples/publisher/readme_renderer.py
+@@ -177,6 +177,7 @@ def build_readme_context(
+     generation_date: str = "",
+     package_path: Path | None = None,
+     strict_facts: bool = False,
++    package_path_map: dict[str, Path] | None = None,
+ ) -> ReadmeContext:
+     """Build a ReadmeContext from family config and runtime evidence.
+ 
+@@ -285,15 +286,35 @@ def build_readme_context(
+         )
+ 
+     # --- Build example entries ---
+-    # When package_path is available, extract source-truth facts from Program.cs
++    # When package_path or package_path_map is available, extract source-truth
++    # facts from Program.cs.  package_path_map allows multi-package fact
++    # extraction where each example may live in a different PR package.
+     facts = None
+-    if package_path is not None:
++    if package_path_map:
++        # Multi-package mode: extract facts per-example from their own packages
++        from plugin_examples.publisher.readme_facts import ExampleReadmeFacts
++        combined_facts = ExampleReadmeFacts(family=family, generated_at="", source_artifact="multi-package")
++        for ex in examples:
++            ex_name = ex.get("name", "") or ex.get("scenario_id", "")
++            if not ex_name or ex_name not in package_path_map:
++                continue
++            per_pkg = extract_example_readme_facts(
++                family=family,
++                package_path=package_path_map[ex_name],
++                examples=[ex],
++                manifest_reader=read_manifest_api_symbol,
++            )
++            combined_facts.facts.extend(per_pkg.facts)
++        facts = combined_facts
++    elif package_path is not None:
+         facts = extract_example_readme_facts(
+             family=family,
+             package_path=Path(package_path),
+             examples=examples,
+             manifest_reader=read_manifest_api_symbol,
+         )
++
++    if facts is not None:
+         # Fail-closed: when strict_facts is True, all facts must be verified
+         for fact in facts.facts:
+             if fact.validation_status != "verified":
+diff --git a/workspace/verification/latest/cells-readme-backfill-simulation.json b/workspace/verification/latest/cells-readme-backfill-simulation.json
+index 7776b12..935a86f 100644
+--- a/workspace/verification/latest/cells-readme-backfill-simulation.json
++++ b/workspace/verification/latest/cells-readme-backfill-simulation.json
+@@ -1,10 +1,10 @@
+ {
+   "result_type": "readme_backfill_simulation",
+-  "date": "2026-05-18 11:38 UTC",
++  "date": "2026-05-18 14:49 UTC",
+   "family": "cells",
+   "dry_run": true,
+   "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+-  "branch_name": "plugin-examples/cells/readme/20260518-113839",
++  "branch_name": "plugin-examples/cells/readme/20260518-144950",
+   "pr_title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples",
+   "readme_bytes": 14692,
+   "audit_passed": true,
+diff --git a/workspace/verification/latest/cells-root-readme-audit.json b/workspace/verification/latest/cells-root-readme-audit.json
+index 300082c..6a55ba5 100644
+--- a/workspace/verification/latest/cells-root-readme-audit.json
++++ b/workspace/verification/latest/cells-root-readme-audit.json
+@@ -1,6 +1,6 @@
+ {
+   "audit_type": "root_readme_audit",
+-  "audit_date": "2026-05-18 11:38 UTC",
++  "audit_date": "2026-05-18 14:49 UTC",
+   "family": "cells",
+   "package_path": "workspace\\pr-dry-run\\cells-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\cells-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/cells-root-readme-render-result.json b/workspace/verification/latest/cells-root-readme-render-result.json
+index cb5b40d..ffb1dde 100644
+--- a/workspace/verification/latest/cells-root-readme-render-result.json
++++ b/workspace/verification/latest/cells-root-readme-render-result.json
+@@ -1,6 +1,6 @@
+ {
+   "render_type": "root_readme_render_result",
+-  "render_date": "2026-05-18 11:38 UTC",
++  "render_date": "2026-05-18 14:49 UTC",
+   "family": "cells",
+   "package_path": "workspace\\pr-dry-run\\cells-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\cells-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/release-status.json b/workspace/verification/latest/release-status.json
+index d65f11f..ab8bc8a 100644
+--- a/workspace/verification/latest/release-status.json
++++ b/workspace/verification/latest/release-status.json
+@@ -1,6 +1,6 @@
+ {
+   "report_type": "release_status",
+-  "generated_at": "2026-05-18T11:38:46.585540+00:00",
++  "generated_at": "2026-05-18T14:50:02.797083+00:00",
+   "families_checked": [
+     "cells",
+     "words"
+diff --git a/workspace/verification/latest/words-readme-backfill-simulation.json b/workspace/verification/latest/words-readme-backfill-simulation.json
+index 6031e94..16c1259 100644
+--- a/workspace/verification/latest/words-readme-backfill-simulation.json
++++ b/workspace/verification/latest/words-readme-backfill-simulation.json
+@@ -1,10 +1,10 @@
+ {
+   "result_type": "readme_backfill_simulation",
+-  "date": "2026-05-18 11:38 UTC",
++  "date": "2026-05-18 14:49 UTC",
+   "family": "words",
+   "dry_run": true,
+   "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+-  "branch_name": "plugin-examples/words/readme/20260518-113840",
++  "branch_name": "plugin-examples/words/readme/20260518-144952",
+   "pr_title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples",
+   "readme_bytes": 17901,
+   "audit_passed": true,
+diff --git a/workspace/verification/latest/words-root-readme-audit.json b/workspace/verification/latest/words-root-readme-audit.json
+index 8172574..07de997 100644
+--- a/workspace/verification/latest/words-root-readme-audit.json
++++ b/workspace/verification/latest/words-root-readme-audit.json
+@@ -1,6 +1,6 @@
+ {
+   "audit_type": "root_readme_audit",
+-  "audit_date": "2026-05-18 11:38 UTC",
++  "audit_date": "2026-05-18 14:49 UTC",
+   "family": "words",
+   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
+diff --git a/workspace/verification/latest/words-root-readme-render-result.json b/workspace/verification/latest/words-root-readme-render-result.json
+index baab4f5..8341de8 100644
+--- a/workspace/verification/latest/words-root-readme-render-result.json
++++ b/workspace/verification/latest/words-root-readme-render-result.json
+@@ -1,6 +1,6 @@
+ {
+   "render_type": "root_readme_render_result",
+-  "render_date": "2026-05-18 11:38 UTC",
++  "render_date": "2026-05-18 14:49 UTC",
+   "family": "words",
+   "package_path": "workspace\\pr-dry-run\\words-controlled-pilot",
+   "readme_path": "workspace\\pr-dry-run\\words-controlled-pilot\\README.md",
+diff --git a/workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip b/workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip
+deleted file mode 100644
+index de57ab8..0000000
+Binary files a/workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip and /dev/null differ

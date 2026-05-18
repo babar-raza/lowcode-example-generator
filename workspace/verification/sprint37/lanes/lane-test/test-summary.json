@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-05-18T20:10:00Z",
+  "sprint": "sprint37",
+  "run_id": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241",
+  "tests_total": 1876,
+  "tests_passed": 1876,
+  "tests_failed": 0,
+  "passed": 1876,
+  "failed": 0,
+  "new_tests_this_sprint": 33,
+  "breakdown": {
+    "sprint37_readme_inventory": 14,
+    "sprint37_readme_staleness": 8,
+    "sprint37_evidence_contract_v7": 11
+  },
+  "prior_sprint_count": 1843,
+  "verdict": "ALL_1876_PASS"
+}

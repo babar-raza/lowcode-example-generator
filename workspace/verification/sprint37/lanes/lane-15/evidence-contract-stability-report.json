@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-05-18T20:10:00Z",
+  "previous_contract_version": "V6 (67 categories)",
+  "new_contract_version": "V7 (69 categories)",
+  "v7_required": true,
+  "v7_source": "Concurrent agent commit 75621df (feat sprint34-readme-healing)",
+  "v7_new_categories": [
+    "readme_sync_audit",
+    "readme_coverage_audit"
+  ],
+  "v7_total_categories": 69,
+  "v7_tests": "11 V7 contract tests + 8 readme_staleness tests = 19 new tests",
+  "reason": "V7 was implemented by concurrent agent sprint34-readme-healing commit. V7 adds 2 README integrity categories. Sprint 37 bundle will use V7.",
+  "verdict": "V7_FOUND_AND_ADOPTED"
+}

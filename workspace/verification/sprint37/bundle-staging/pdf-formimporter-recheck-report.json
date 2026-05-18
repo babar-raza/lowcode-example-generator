@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint36",
+  "family": "pdf",
+  "generated_at": "2026-05-18",
+  "package_version": "26.5.0",
+  "defect_version": "26.5.0",
+  "version_advanced": false,
+  "recheck_triggered": false,
+  "blocker": "WAVE_H_DEFERRED_LIBRARY_BUG",
+  "defect": "NullReferenceException in Forms.Form.#=zZQILclhNTKUB",
+  "verdict": "STILL_BLOCKED_SAME_VERSION"
+}

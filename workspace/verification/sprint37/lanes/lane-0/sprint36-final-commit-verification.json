@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-05-18T19:52:41Z",
+  "verification_target": "Sprint 36 reported commits",
+  "repo_head": "a7603ad62308970abb7ca95bf2be2dc5aaf8ed1f",
+  "branch": "main",
+  "commits_verified": [
+    {
+      "sha": "aee5d30",
+      "message": "feat(sprint36-sys1-sys2): add version-drift and target-repo-health CLI commands with tests",
+      "present": true,
+      "verification": "CONFIRMED"
+    },
+    {
+      "sha": "2a5264b",
+      "message": "feat(sprint36-bundle): add v6-validated evidence bundle and final git state artifacts",
+      "present": true,
+      "verification": "CONFIRMED"
+    },
+    {
+      "sha": "e92e596",
+      "message": "fix(version-drift): classify Aspose month-component changes as MAJOR not MINOR",
+      "present": true,
+      "verification": "CONFIRMED"
+    },
+    {
+      "sha": "a7603ad",
+      "message": "fix(sprint36-bundle): correct version-drift severity MINOR->MAJOR, rebuild bundle",
+      "present": true,
+      "verification": "CONFIRMED"
+    }
+  ],
+  "sprint36_bundle": "workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-193642.zip",
+  "sprint36_bundle_present": true,
+  "all_reported_commits_present": true,
+  "verdict": "SPRINT36_COMMITS_ALL_VERIFIED"
+}

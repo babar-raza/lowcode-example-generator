@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-05-18T19:52:41Z",
+  "method": "scan_highest_sprint_number_plus_one",
+  "highest_completed_sprint": 36,
+  "highest_sprint_evidence": "workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-193642.zip",
+  "next_sprint_number": 37,
+  "sprint_id": "sprint37",
+  "run_id": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241",
+  "sprint_dir": "workspace/verification/sprint37",
+  "bundle_name": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241.zip",
+  "scanned_sprint_dirs": ["sprint10","sprint11","sprint12","sprint13","sprint14","sprint15","sprint16","sprint17","sprint18","sprint19","sprint20","sprint21","sprint22","sprint23","sprint24","sprint25","sprint26","sprint27","sprint28","sprint29","sprint30","sprint31","sprint32","sprint33","sprint34","sprint35","sprint36"],
+  "allocation_safe": true,
+  "note": "No conflict detected. sprint37 directory did not previously exist."
+}

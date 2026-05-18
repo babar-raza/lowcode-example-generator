@@ -1,0 +1,10 @@
+75621df feat(sprint34-readme-healing): implement cumulative README sync with per-branch inventory modes and staleness gates
+b68e967 feat(sprint37-lane0): add readme-inventory module and source-truth enhancements
+a7603ad fix(sprint36-bundle): correct version-drift severity MINOR->MAJOR, rebuild bundle
+e92e596 fix(version-drift): classify Aspose month-component changes as MAJOR not MINOR
+2a5264b feat(sprint36-bundle): add v6-validated evidence bundle and final git state artifacts
+aee5d30 feat(sprint36-sys1-sys2): add version-drift and target-repo-health CLI commands with tests
+2500fc5 fix(readme): validate API claims from source code and regenerate portfolio READMEs
+994992d chore(sprint35-bundle): add v6-validated evidence bundle and final git state artifacts
+c2417b6 feat(sprint35-bundle): add v6-validated evidence bundle and final git state artifacts
+1c337ad fix(readme-portfolio): generalize source-truth facts extraction and portfolio-wide README healing

@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-05-18T20:10:00Z",
+  "run_id": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241",
+  "sprint": "sprint37",
+  "audit_phase": "before",
+  "description": "README coverage snapshot BEFORE sprint37 execution (baseline from Sprint 36 state)",
+  "families": {
+    "cells": {
+      "published_examples": 9,
+      "examples_with_readme": 9,
+      "coverage_pct": 100.0
+    },
+    "words": {
+      "published_examples": 8,
+      "examples_with_readme": 8,
+      "coverage_pct": 100.0
+    },
+    "pdf": {
+      "published_examples": 5,
+      "examples_with_readme": 5,
+      "pr_ready_packages": 6,
+      "pr_packages_with_readme": 6,
+      "coverage_pct": 100.0
+    },
+    "diagram": {
+      "published_examples": 2,
+      "examples_with_readme": 2,
+      "coverage_pct": 100.0
+    },
+    "email": {
+      "published_examples": 1,
+      "examples_with_readme": 1,
+      "coverage_pct": 100.0
+    },
+    "slides": {
+      "published_examples": 3,
+      "examples_with_readme": 3,
+      "coverage_pct": 100.0
+    }
+  },
+  "total_examples": 28,
+  "total_with_readme": 28,
+  "overall_coverage_pct": 100.0,
+  "verdict": "README_COVERAGE_BASELINE_COMPLETE",
+  "notes": [
+    "Baseline captured from Sprint 36 state before Sprint 37 execution",
+    "All 28 published examples have READMEs",
+    "All 6 PDF PR_DRY_RUN_READY packages (PR#3-#9) have READMEs",
+    "Sprint 37 introduces readme_inventory.py for automated tracking going forward"
+  ]
+}

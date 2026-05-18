@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-05-18T20:07:00Z",
+  "sprint36_test_count": 1843,
+  "sprint37_test_count": 1857,
+  "delta": 14,
+  "delta_reason": "14 new tests from readme_inventory module",
+  "portfolio_count_unchanged": true,
+  "published": 28,
+  "pending": 14,
+  "verdict": "RELEASE_STATE_RECONCILED"
+}

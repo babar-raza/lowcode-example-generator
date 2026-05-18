@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-05-18T19:58:00Z",
+  "total_pending_examples": 14,
+  "packages": {
+    "pr3": {
+      "types": [
+        "DocConverter",
+        "Html",
+        "XlsConverter"
+      ],
+      "count": 3,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    },
+    "pr5": {
+      "types": [
+        "Jpeg",
+        "Png",
+        "Tiff"
+      ],
+      "count": 3,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    },
+    "pr6": {
+      "types": [
+        "ImageExtractor",
+        "TableGenerator",
+        "TocGenerator"
+      ],
+      "count": 3,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    },
+    "pr7": {
+      "types": [
+        "Security",
+        "FormFlattener"
+      ],
+      "count": 2,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    },
+    "pr8": {
+      "types": [
+        "FormEditor",
+        "FormExporter"
+      ],
+      "count": 2,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    },
+    "pr9": {
+      "types": [
+        "Signature"
+      ],
+      "count": 1,
+      "clean": true,
+      "dry_run": "SIMULATION_PASSED"
+    }
+  },
+  "pr7_security_present": true,
+  "pr7_form_flattener_present": true,
+  "all_packages_clean": true,
+  "publication_mode": "APPROVAL_BLOCKED",
+  "verdict": "ALL_6_PACKAGES_READY_APPROVAL_BLOCKED"
+}

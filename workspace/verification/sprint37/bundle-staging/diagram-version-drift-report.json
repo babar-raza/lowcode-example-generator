@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint36",
+  "family": "diagram",
+  "generated_at": "2026-05-18",
+  "package_id": "Aspose.Diagram",
+  "denominator_version": "26.4.0",
+  "latest_nuget_version": "26.5.0",
+  "drift": true,
+  "drift_severity": "MAJOR",
+  "status": "DRIFT",
+  "action": "Denominator update deferred; 2/2 examples unaffected",
+  "verdict": "DRIFT_NOTED_NON_BLOCKING"
+}

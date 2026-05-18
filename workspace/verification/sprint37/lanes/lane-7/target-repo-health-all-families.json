@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-05-18T14:58:14.111295+00:00",
+  "healthy_count": 6,
+  "evidence_based_count": 0,
+  "inaccessible_count": 0,
+  "overall_verdict": "ALL_VERIFIED",
+  "families": [
+    {
+      "family": "cells",
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 9,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    },
+    {
+      "family": "words",
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 8,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    },
+    {
+      "family": "pdf",
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 5,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    },
+    {
+      "family": "diagram",
+      "owner": "aspose-diagram-net",
+      "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 2,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    },
+    {
+      "family": "email",
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 1,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    },
+    {
+      "family": "slides",
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "expected_examples": 3,
+      "repo_exists": true,
+      "branch_exists": true,
+      "readme_present": true,
+      "gh_api_accessible": true,
+      "verification_method": "GH_CLI",
+      "status": "HEALTHY",
+      "notes": [
+        "Repo accessible via gh CLI"
+      ]
+    }
+  ]
+}

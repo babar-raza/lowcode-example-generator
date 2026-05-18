@@ -1,0 +1,14 @@
+{
+  "sprint": "sprint37",
+  "run_id": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241",
+  "contract_version": "7.0.0",
+  "passed": true,
+  "bundle_bytes": 110676,
+  "bundle_file": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241.zip",
+  "categories_total": 69,
+  "categories_found": 69,
+  "categories_missing": [],
+  "zip_entries": 196,
+  "failures": [],
+  "note": "Two-pass build using StrictEvidenceContractV7."
+}

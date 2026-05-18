@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-05-18T19:58:00Z",
+  "pr": "pr9",
+  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9",
+  "expected_types": [
+    "Signature"
+  ],
+  "example_count": 1,
+  "bin_obj_count": 0,
+  "secret_detected": false,
+  "blocking_flags": [],
+  "dry_run_status": "SIMULATION_PASSED",
+  "live_push_performed": false,
+  "clean": true,
+  "verdict": "READY_FOR_LIVE_PR_PENDING_APPROVAL"
+}

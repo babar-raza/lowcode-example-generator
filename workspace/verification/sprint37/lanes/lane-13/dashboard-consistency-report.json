@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-05-18T20:07:00Z",
+  "test_count_dashboard": 1857,
+  "test_count_test_summary": 1857,
+  "counts_match": true,
+  "total_published_dashboard": 28,
+  "total_pr_ready": 14,
+  "scoreboard_matches_packages": true,
+  "verdict": "DASHBOARD_CONSISTENT"
+}

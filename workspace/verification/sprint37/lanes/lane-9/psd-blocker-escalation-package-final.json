@@ -1,0 +1,20 @@
+{
+  "sprint": "sprint36",
+  "family": "psd",
+  "generated_at": "2026-05-18",
+  "aspose_psd_latest": "26.4.0",
+  "blocker_package": "Aspose.JavaAttributes",
+  "blocker_on_nuget": false,
+  "nuget_url": "https://api.nuget.org/v3-flatcontainer/aspose.javaattributes/index.json",
+  "nuget_response": "HTTP 404 Not Found",
+  "reflection_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --family psd",
+  "reflection_error": "Unable to resolve Aspose.JavaAttributes dependency \u2014 assembly not found",
+  "dependency_acquisition_options": [
+    "Option A: Request Aspose team to publish Aspose.JavaAttributes to NuGet.org",
+    "Option B: Request private feed or DLL from Aspose internal builds",
+    "Option C: Wait for package and re-run discovery"
+  ],
+  "escalation_target": "Aspose product team / internal NuGet feed maintainer",
+  "status": "STILL_BLOCKED",
+  "verdict": "ESCALATION_PACKAGE_READY"
+}

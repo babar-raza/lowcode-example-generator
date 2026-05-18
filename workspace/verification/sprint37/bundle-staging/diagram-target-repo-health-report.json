@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-05-18T14:58:14.111295+00:00",
+  "family": "diagram",
+  "owner": "aspose-diagram-net",
+  "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+  "branch": "main",
+  "expected_examples": 2,
+  "repo_exists": true,
+  "branch_exists": true,
+  "readme_present": true,
+  "gh_api_accessible": true,
+  "verification_method": "GH_CLI",
+  "status": "HEALTHY",
+  "notes": [
+    "Repo accessible via gh CLI"
+  ]
+}

@@ -1,0 +1,13 @@
+ M src/plugin_examples/__main__.py
+ M src/plugin_examples/publisher/readme_auditor.py
+ M src/plugin_examples/publisher/readme_renderer.py
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+ D workspace/verification/sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip
+?? src/plugin_examples/publisher/readme_inventory.py
+?? tests/unit/test_readme_inventory.py

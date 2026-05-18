@@ -1,0 +1,30 @@
+{
+  "sprint": "sprint36",
+  "family": "pdf",
+  "generated_at": "2026-05-18",
+  "pending_examples": [
+    "DocConverter",
+    "Html",
+    "XlsConverter",
+    "Jpeg",
+    "Png",
+    "Tiff",
+    "ImageExtractor",
+    "TableGenerator",
+    "TocGenerator",
+    "Security",
+    "FormFlattener",
+    "FormEditor",
+    "FormExporter",
+    "Signature"
+  ],
+  "already_published": [
+    "Merger",
+    "TextExtractor",
+    "PdfAConverter",
+    "Splitter",
+    "Optimizer"
+  ],
+  "overlap_detected": false,
+  "verdict": "NO_ALREADY_PUBLISHED_IN_PENDING_PACKAGES"
+}

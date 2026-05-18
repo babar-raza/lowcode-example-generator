@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-05-18T19:55:24Z",
+  "taxonomy": {
+    "NONE": "denominator_version == latest_nuget_version",
+    "PATCH": "year and month components equal, patch component differs",
+    "MAJOR": "year OR month component differs (Aspose calendar versioning: year.month.patch)",
+    "UNKNOWN": "version string cannot be parsed"
+  },
+  "policy_note": "Aspose uses calendar versioning (Year.Month.Patch). A month-component change is a full monthly release that may include API additions or breaking changes. MINOR is eliminated from the taxonomy.",
+  "verified_cases": [
+    {"old": "26.4.0", "new": "26.5.1", "family": "cells", "expected": "MAJOR", "actual": "MAJOR", "pass": true},
+    {"old": "26.4.0", "new": "26.5.0", "family": "diagram", "expected": "MAJOR", "actual": "MAJOR", "pass": true},
+    {"old": "26.5.0", "new": "26.5.0", "family": "words", "expected": "NONE", "actual": "NONE", "pass": true},
+    {"old": "26.4.0", "new": "26.4.1", "family": "hypothetical", "expected": "PATCH", "actual": "PATCH", "pass": true}
+  ],
+  "tests_run": 22,
+  "tests_passed": 22,
+  "source_file": "src/plugin_examples/publisher/version_drift_checker.py",
+  "fix_commit": "e92e596",
+  "bundle_correction_commit": "a7603ad",
+  "verdict": "TAXONOMY_VERIFIED_ALL_CASES_MAJOR_CORRECT"
+}

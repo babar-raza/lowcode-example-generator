@@ -1,0 +1,21 @@
+{
+  "sprint": "sprint36",
+  "generated_at": "2026-05-18",
+  "audit_scope": "All 6 LowCode families \u2014 package dirs and target repos",
+  "families_audited": [
+    "cells",
+    "words",
+    "pdf",
+    "diagram",
+    "email",
+    "slides"
+  ],
+  "all_pass": true,
+  "false_claim_checks": [
+    "Non-Cells xlsx/xls/csv claims: NONE found",
+    "Program.cs without snippets: NONE found",
+    "Unsupported format claims: NONE found"
+  ],
+  "existing_infra": "src/plugin_examples/publisher/readme_auditor.py",
+  "verdict": "README_CI_PASS_ALL_FAMILIES"
+}

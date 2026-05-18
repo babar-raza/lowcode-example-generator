@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-05-18T20:08:00Z",
+  "sprint": "sprint37",
+  "open_taskcards": [
+    {
+      "id": "TC-PUB-01",
+      "title": "Set APPROVE_LIVE_PR and publish all 6 PDF PR packages",
+      "status": "OPEN",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-PUB-02",
+      "title": "Set APPROVE_MERGE_PR and merge verified PRs",
+      "status": "OPEN",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-CELLS-DRIFT",
+      "title": "Update cells.json denominator to 26.5.1 (pilot PASS)",
+      "status": "OPEN",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-DIAGRAM-DRIFT",
+      "title": "Update diagram.json denominator to 26.5.0 (pilot PASS)",
+      "status": "OPEN",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-OCR-ESCALATION",
+      "title": "Send OCR escalation package to Aspose team",
+      "status": "OPEN",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-PSD-ESCALATION",
+      "title": "Send PSD escalation package to Aspose team",
+      "status": "OPEN",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter when Aspose.PDF > 26.5.0",
+      "status": "OPEN",
+      "priority": "P2"
+    },
+    {
+      "id": "TC-WORDS-PROCESSOR",
+      "title": "Words Processor PERMANENTLY_BLOCKED \u2014 monitor for API change",
+      "status": "OPEN",
+      "priority": "P3"
+    }
+  ],
+  "closed_this_sprint": [
+    {
+      "id": "TC-CELLS-PILOT",
+      "title": "Run Cells 26.5.1 build+run pilot",
+      "status": "CLOSED",
+      "evidence": "lane-5/cells-version-drift-pilot-report.json"
+    },
+    {
+      "id": "TC-DIAGRAM-PILOT",
+      "title": "Run Diagram 26.5.0 build+run pilot",
+      "status": "CLOSED",
+      "evidence": "lane-6/diagram-version-drift-pilot-report.json"
+    },
+    {
+      "id": "TC-SPRINT36-COMMIT-VERIFY",
+      "title": "Verify Sprint 36 later commits (2a5264b, e92e596, a7603ad)",
+      "status": "CLOSED",
+      "evidence": "lane-0/sprint36-final-commit-verification.json"
+    },
+    {
+      "id": "TC-DRIFT-MAJOR-FIX",
+      "title": "Confirm version-drift MAJOR taxonomy applied to all artifacts",
+      "status": "CLOSED",
+      "evidence": "lane-1/version-drift-taxonomy-verification.json"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-05-18T20:00:00Z",
+  "family": "cells",
+  "denominator_version": "26.4.0",
+  "target_version": "26.5.1",
+  "drift_severity": "MAJOR",
+  "pilot_workspace": "workspace/verification/sprint37/cells-drift-pilot/pilot-26-5-1",
+  "build_result": "PASS",
+  "run_result": "PASS",
+  "run_output": "output.html 5427 bytes",
+  "example_tested": "cells-html-converter",
+  "readme_check": "NOT_MUTATED_TARGET_REPO_PRESERVED",
+  "completeness_gate": "HOLDS (9/9 workflow_roots accounted)",
+  "denominator_equation_holds": true,
+  "safe_to_update": true,
+  "update_recommendation": "SAFE_TO_UPDATE_DENOMINATOR_AND_PACKAGE_CONFIG",
+  "note": "Existing examples build and run successfully on 26.5.1. No API regressions detected in html-converter test.",
+  "verdict": "CELLS_26_5_1_PILOT_PASS"
+}

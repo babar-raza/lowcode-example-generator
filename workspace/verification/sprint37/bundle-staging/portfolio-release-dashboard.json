@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-05-18T20:07:00Z",
+  "test_count": 1857,
+  "sprint": "sprint37",
+  "families": {
+    "cells": {
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_roots": 9,
+      "coverage": "100%",
+      "version": "26.4.0",
+      "drift_to": "26.5.1",
+      "drift_severity": "MAJOR",
+      "pilot_result": "PASS"
+    },
+    "words": {
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "workflow_roots": 9,
+      "coverage": "88.9%",
+      "version": "26.5.0",
+      "drift": "NONE",
+      "processor_blocked": "PERMANENTLY_BLOCKED"
+    },
+    "pdf": {
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pr_pending": 14,
+      "workflow_roots": 25,
+      "version": "26.5.0",
+      "drift": "NONE",
+      "formimporter": "STILL_BLOCKED_26.5.0"
+    },
+    "diagram": {
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "workflow_roots": 2,
+      "coverage": "100%",
+      "version": "26.4.0",
+      "drift_to": "26.5.0",
+      "drift_severity": "MAJOR",
+      "pilot_result": "PASS"
+    },
+    "email": {
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "workflow_roots": 1,
+      "coverage": "100%",
+      "version": "26.4.0",
+      "drift": "NONE"
+    },
+    "slides": {
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "workflow_roots": 3,
+      "coverage": "100%",
+      "version": "26.5.0",
+      "drift": "NONE"
+    }
+  },
+  "approval_blocked": true,
+  "total_published": 28,
+  "pending": 14
+}

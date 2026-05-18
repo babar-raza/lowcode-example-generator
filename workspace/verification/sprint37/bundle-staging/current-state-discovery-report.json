@@ -1,0 +1,38 @@
+{
+  "sprint": "sprint35",
+  "captured_at": "2026-05-18",
+  "branch": "main",
+  "head_commit": "1a306be18355469cb7dae83affcb0584c4359888",
+  "prior_sprint": "sprint34",
+  "prior_sprint_verdict": "SPRINT34_APPROVAL_BLOCKED_MEGA_SWARM_SYSTEM_BACKLOG_RESOLVED_NEW_FAMILY_DISCOVERY_COMPLETE",
+  "confirmed_lowcode_families": ["cells", "words", "pdf", "diagram", "email", "slides"],
+  "reflection_blocked_families": ["ocr", "psd"],
+  "no_lowcode_families": ["epub", "barcode", "cad", "drawing", "finance", "font", "gis", "html", "imaging", "note", "omr", "page", "svg", "tasks", "tex", "threed", "zip"],
+  "portfolio_state": {
+    "published_count": 28,
+    "pr_dry_run_ready_count": 14,
+    "total_ready_or_published": 42,
+    "families_all_merged": true,
+    "all_post_merge_validated": false
+  },
+  "pdf_pending_packages": {
+    "pr3": {"package": "pdf-controlled-pilot", "examples": ["doc-converter", "html", "xls-converter"], "count": 3, "bin_obj": 0},
+    "pr5": {"package": "pdf-controlled-pilot-pr5", "examples": ["jpeg", "tiff", "png"], "count": 3, "bin_obj": 0},
+    "pr6": {"package": "pdf-controlled-pilot-pr6", "examples": ["image-extractor", "table-generator", "toc-generator"], "count": 3, "bin_obj": 0},
+    "pr7": {"package": "pdf-controlled-pilot-pr7", "examples": ["security", "form-flattener"], "count": 2, "bin_obj": 0},
+    "pr8": {"package": "pdf-controlled-pilot-pr8", "examples": ["form-editor", "form-exporter"], "count": 2, "bin_obj": 0},
+    "pr9": {"package": "pdf-controlled-pilot-pr9", "examples": ["signature"], "count": 1, "bin_obj": 0}
+  },
+  "pdf_pending_total_examples": 14,
+  "publication_approval": "NOT_SET",
+  "merge_approval": "NOT_SET",
+  "gh_token_classic": true,
+  "github_token_fine_grained": true,
+  "aspose_pdf_latest_version": "26.5.0",
+  "formimporter_defect_version": "26.5.0",
+  "formimporter_retest_possible": false,
+  "ocr_latest_version": "26.5.0",
+  "psd_latest_version": "26.4.0",
+  "source_state": "CLEAN",
+  "verdict": "DISCOVERY_COMPLETE_SAFE_TO_PROCEED"
+}

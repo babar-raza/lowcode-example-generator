@@ -1,0 +1,21 @@
+{
+  "sprint": "sprint36",
+  "family": "ocr",
+  "generated_at": "2026-05-18",
+  "aspose_ocr_latest": "26.5.0",
+  "blocker_package": "Aspose.AI.LLM",
+  "blocker_on_nuget": false,
+  "nuget_url": "https://api.nuget.org/v3-flatcontainer/aspose.ai.llm/index.json",
+  "nuget_response": "HTTP 404 Not Found",
+  "reflection_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --family ocr",
+  "reflection_error": "Unable to resolve Aspose.AI.LLM dependency \u2014 assembly not found in NuGet feed",
+  "dependency_acquisition_options": [
+    "Option A: Request Aspose team to publish Aspose.AI.LLM to NuGet.org",
+    "Option B: Request private feed URL/credentials for Aspose.AI.LLM",
+    "Option C: Obtain local DLL path from Aspose internal builds",
+    "Option D: Wait for package to appear on NuGet and re-run discovery"
+  ],
+  "escalation_target": "Aspose product team / internal NuGet feed maintainer",
+  "status": "STILL_BLOCKED",
+  "verdict": "ESCALATION_PACKAGE_READY"
+}

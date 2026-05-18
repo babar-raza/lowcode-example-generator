@@ -1,0 +1,9 @@
+{
+  "sprint": "sprint33",
+  "family": "words",
+  "status": "REGRESSION_FREE",
+  "published": 8,
+  "workflow_roots": 9,
+  "workflow_root_count_corrected": "Sprint 32 scoreboard stale (null) \u2014 confirmed 9 in sprint33",
+  "verdict": "WORDS_PILOT_COMPLETE_NO_REGRESSION"
+}

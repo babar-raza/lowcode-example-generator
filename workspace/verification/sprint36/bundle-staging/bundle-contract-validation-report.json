@@ -1,9 +1,9 @@
 {
   "sprint": "sprint36",
-  "generated_at": "20260518-163801",
+  "generated_at": "20260518-193642",
   "passed": true,
-  "bundle_bytes": 90611,
-  "bundle_file": "sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-163801.zip",
+  "bundle_bytes": 90547,
+  "bundle_file": "sprint36-all-lowcode-launch-execution-target-repo-hardening-blocker-escalation-and-release-automation-20260518-193642.zip",
   "categories_found": 67,
   "categories_missing": [],
   "file_count": 168,

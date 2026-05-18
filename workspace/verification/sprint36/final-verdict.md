@@ -51,8 +51,8 @@ are ready for upstream submission. Dashboard test count reconciled (1744→1789)
 
 ## Version Drift Findings
 
-- Cells: 26.4.0 -> 26.5.1 (MINOR) — non-blocking, existing examples unaffected
-- Diagram: 26.4.0 -> 26.5.0 (MINOR) — non-blocking
+- Cells: 26.4.0 -> 26.5.1 (MAJOR) — non-blocking, existing examples unaffected
+- Diagram: 26.4.0 -> 26.5.0 (MAJOR) — non-blocking
 - Words/PDF/Email/Slides: CURRENT
 
 ---

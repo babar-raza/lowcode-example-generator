@@ -21,10 +21,10 @@
 
 | Family | Status | Published | WRT | Drift | Target Repo |
 |--------|--------|-----------|-----|-------|-------------|
-| Cells | FAMILY_COMPLETE | 9/9 | 9 | 26.4.0->26.5.1 MINOR | aspose-cells-net |
+| Cells | FAMILY_COMPLETE | 9/9 | 9 | 26.4.0->26.5.1 MAJOR | aspose-cells-net |
 | Words | PILOT_COMPLETE | 8/8 | 9 | NONE | aspose-words-net |
 | PDF | PARTIAL_CANARY | 5+14 | 22 | NONE | aspose-pdf-net |
-| Diagram | PILOT_COMPLETE | 2/2 | 2 | 26.4.0->26.5.0 MINOR | aspose-diagram-net |
+| Diagram | PILOT_COMPLETE | 2/2 | 2 | 26.4.0->26.5.0 MAJOR | aspose-diagram-net |
 | Email | PILOT_COMPLETE | 1/1 | 1 | NONE | aspose-email-net |
 | Slides | PILOT_COMPLETE | 3/3 | 3 | NONE | aspose-slides-net |
 
@@ -60,5 +60,5 @@ python -m plugin_examples version-drift
 python -m plugin_examples target-repo-health
 ```
 
-**Drift:** Cells 26.4.0->26.5.1 (MINOR), Diagram 26.4.0->26.5.0 (MINOR) — non-blocking
+**Drift:** Cells 26.4.0->26.5.1 (MAJOR), Diagram 26.4.0->26.5.0 (MAJOR) — non-blocking
 **Target repos:** ALL 6 HEALTHY via gh CLI

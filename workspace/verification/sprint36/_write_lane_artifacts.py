@@ -29,7 +29,7 @@ write("lanes/lane-f-cells/cells-version-drift-report.json", {
     "sprint": SPRINT, "family": "cells", "generated_at": DATE,
     "package_id": "Aspose.Cells", "denominator_version": "26.4.0",
     "latest_nuget_version": "26.5.1", "drift": True,
-    "drift_severity": "MINOR", "status": "DRIFT",
+    "drift_severity": "MAJOR", "status": "DRIFT",
     "action": "Denominator update to 26.5.1 deferred; existing 9/9 examples unaffected",
     "verdict": "DRIFT_NOTED_NON_BLOCKING"
 })
@@ -122,7 +122,7 @@ write("lanes/lane-f-diagram/diagram-version-drift-report.json", {
     "sprint": SPRINT, "family": "diagram", "generated_at": DATE,
     "package_id": "Aspose.Diagram", "denominator_version": "26.4.0",
     "latest_nuget_version": "26.5.0", "drift": True,
-    "drift_severity": "MINOR", "status": "DRIFT",
+    "drift_severity": "MAJOR", "status": "DRIFT",
     "action": "Denominator update deferred; 2/2 examples unaffected",
     "verdict": "DRIFT_NOTED_NON_BLOCKING"
 })

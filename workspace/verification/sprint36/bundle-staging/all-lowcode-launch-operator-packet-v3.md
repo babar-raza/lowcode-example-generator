@@ -81,8 +81,8 @@ PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples version-drift
 ```
 
 **Current drift (Sprint 36):**
-- Cells: 26.4.0 -> 26.5.1 (MINOR — non-blocking)
-- Diagram: 26.4.0 -> 26.5.0 (MINOR — non-blocking)
+- Cells: 26.4.0 -> 26.5.1 (MAJOR — non-blocking)
+- Diagram: 26.4.0 -> 26.5.0 (MAJOR — non-blocking)
 
 ---
 

@@ -16,8 +16,8 @@ new_commands:
   - target-repo-health
 
 version_drift:
-  cells: "26.4.0 -> 26.5.1 (MINOR, non-blocking)"
-  diagram: "26.4.0 -> 26.5.0 (MINOR, non-blocking)"
+  cells: "26.4.0 -> 26.5.1 (MAJOR, non-blocking)"
+  diagram: "26.4.0 -> 26.5.0 (MAJOR, non-blocking)"
   words: CURRENT
   pdf: CURRENT
   email: CURRENT

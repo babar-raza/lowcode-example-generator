@@ -12,7 +12,7 @@
       "latest_nuget_version": "26.5.1",
       "on_nuget": true,
       "drift": true,
-      "drift_severity": "MINOR",
+      "drift_severity": "MAJOR",
       "status": "DRIFT",
       "error": null
     },
@@ -45,7 +45,7 @@
       "latest_nuget_version": "26.5.0",
       "on_nuget": true,
       "drift": true,
-      "drift_severity": "MINOR",
+      "drift_severity": "MAJOR",
       "status": "DRIFT",
       "error": null
     },

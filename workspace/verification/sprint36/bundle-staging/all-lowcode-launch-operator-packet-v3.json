@@ -65,8 +65,8 @@
     }
   },
   "version_drift_findings": {
-    "cells": "DRIFT: 26.4.0 -> 26.5.1 (MINOR) \u2014 non-blocking",
-    "diagram": "DRIFT: 26.4.0 -> 26.5.0 (MINOR) \u2014 non-blocking",
+    "cells": "DRIFT: 26.4.0 -> 26.5.1 (MAJOR) — non-blocking",
+    "diagram": "DRIFT: 26.4.0 -> 26.5.0 (MAJOR) — non-blocking",
     "words": "CURRENT: 26.5.0",
     "pdf": "CURRENT: 26.5.0",
     "email": "CURRENT: 26.4.0",

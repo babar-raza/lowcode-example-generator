@@ -6,7 +6,7 @@
   "denominator_version": "26.4.0",
   "latest_nuget_version": "26.5.1",
   "drift": true,
-  "drift_severity": "MINOR",
+  "drift_severity": "MAJOR",
   "status": "DRIFT",
   "action": "Denominator update to 26.5.1 deferred; existing 9/9 examples unaffected",
   "verdict": "DRIFT_NOTED_NON_BLOCKING"

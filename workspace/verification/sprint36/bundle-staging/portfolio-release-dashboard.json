@@ -15,7 +15,7 @@
       "published": 9,
       "workflow_roots": 9,
       "coverage": "100%",
-      "version_drift": "26.4.0->26.5.1 MINOR"
+      "version_drift": "26.4.0->26.5.1 MAJOR"
     },
     "words": {
       "status": "PILOT_COMPLETE",
@@ -40,7 +40,7 @@
       "published": 2,
       "workflow_roots": 2,
       "coverage": "100%",
-      "version_drift": "26.4.0->26.5.0 MINOR"
+      "version_drift": "26.4.0->26.5.0 MAJOR"
     },
     "email": {
       "status": "PILOT_COMPLETE",

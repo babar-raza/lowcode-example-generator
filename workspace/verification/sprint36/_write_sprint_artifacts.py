@@ -61,8 +61,8 @@ OPERATOR_PACKET = {
         "slides": {"status": "PILOT_COMPLETE", "published": 3, "target": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"}
     },
     "version_drift_findings": {
-        "cells": "DRIFT: 26.4.0 -> 26.5.1 (MINOR) — non-blocking",
-        "diagram": "DRIFT: 26.4.0 -> 26.5.0 (MINOR) — non-blocking",
+        "cells": "DRIFT: 26.4.0 -> 26.5.1 (MAJOR) — non-blocking",
+        "diagram": "DRIFT: 26.4.0 -> 26.5.0 (MAJOR) — non-blocking",
         "words": "CURRENT: 26.5.0",
         "pdf": "CURRENT: 26.5.0",
         "email": "CURRENT: 26.4.0",
@@ -155,8 +155,8 @@ PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples version-drift
 ```
 
 **Current drift (Sprint 36):**
-- Cells: 26.4.0 -> 26.5.1 (MINOR — non-blocking)
-- Diagram: 26.4.0 -> 26.5.0 (MINOR — non-blocking)
+- Cells: 26.4.0 -> 26.5.1 (MAJOR — non-blocking)
+- Diagram: 26.4.0 -> 26.5.0 (MAJOR — non-blocking)
 
 ---
 
@@ -212,10 +212,10 @@ DASHBOARD = {
         "total_ready_or_published": 42
     },
     "families": {
-        "cells": {"status": "FAMILY_COMPLETE", "published": 9, "workflow_roots": 9, "coverage": "100%", "version_drift": "26.4.0->26.5.1 MINOR"},
+        "cells": {"status": "FAMILY_COMPLETE", "published": 9, "workflow_roots": 9, "coverage": "100%", "version_drift": "26.4.0->26.5.1 MAJOR"},
         "words": {"status": "PILOT_COMPLETE", "published": 8, "workflow_roots": 9, "pilot_coverage": "100%", "processor_blocked": True, "version_drift": "NONE"},
         "pdf": {"status": "PARTIAL_CANARY", "published": 5, "pending": 14, "workflow_roots": 22, "version_drift": "NONE", "timestamp_blocked": True, "ofd_blocked": True, "formimporter_deferred": True},
-        "diagram": {"status": "PILOT_COMPLETE", "published": 2, "workflow_roots": 2, "coverage": "100%", "version_drift": "26.4.0->26.5.0 MINOR"},
+        "diagram": {"status": "PILOT_COMPLETE", "published": 2, "workflow_roots": 2, "coverage": "100%", "version_drift": "26.4.0->26.5.0 MAJOR"},
         "email": {"status": "PILOT_COMPLETE", "published": 1, "workflow_roots": 1, "coverage": "100%", "version_drift": "NONE"},
         "slides": {"status": "PILOT_COMPLETE", "published": 3, "workflow_roots": 3, "coverage": "100%", "version_drift": "NONE"}
     },
@@ -261,10 +261,10 @@ DASHBOARD_MD = """# Portfolio Release Dashboard — Sprint 36
 
 | Family | Status | Published | WRT | Drift | Target Repo |
 |--------|--------|-----------|-----|-------|-------------|
-| Cells | FAMILY_COMPLETE | 9/9 | 9 | 26.4.0->26.5.1 MINOR | aspose-cells-net |
+| Cells | FAMILY_COMPLETE | 9/9 | 9 | 26.4.0->26.5.1 MAJOR | aspose-cells-net |
 | Words | PILOT_COMPLETE | 8/8 | 9 | NONE | aspose-words-net |
 | PDF | PARTIAL_CANARY | 5+14 | 22 | NONE | aspose-pdf-net |
-| Diagram | PILOT_COMPLETE | 2/2 | 2 | 26.4.0->26.5.0 MINOR | aspose-diagram-net |
+| Diagram | PILOT_COMPLETE | 2/2 | 2 | 26.4.0->26.5.0 MAJOR | aspose-diagram-net |
 | Email | PILOT_COMPLETE | 1/1 | 1 | NONE | aspose-email-net |
 | Slides | PILOT_COMPLETE | 3/3 | 3 | NONE | aspose-slides-net |
 
@@ -300,7 +300,7 @@ python -m plugin_examples version-drift
 python -m plugin_examples target-repo-health
 ```
 
-**Drift:** Cells 26.4.0->26.5.1 (MINOR), Diagram 26.4.0->26.5.0 (MINOR) — non-blocking
+**Drift:** Cells 26.4.0->26.5.1 (MAJOR), Diagram 26.4.0->26.5.0 (MAJOR) — non-blocking
 **Target repos:** ALL 6 HEALTHY via gh CLI
 """
 
@@ -376,8 +376,8 @@ new_commands:
   - target-repo-health
 
 version_drift:
-  cells: "26.4.0 -> 26.5.1 (MINOR, non-blocking)"
-  diagram: "26.4.0 -> 26.5.0 (MINOR, non-blocking)"
+  cells: "26.4.0 -> 26.5.1 (MAJOR, non-blocking)"
+  diagram: "26.4.0 -> 26.5.0 (MAJOR, non-blocking)"
   words: CURRENT
   pdf: CURRENT
   email: CURRENT
@@ -453,8 +453,8 @@ are ready for upstream submission. Dashboard test count reconciled (1744→1789)
 
 ## Version Drift Findings
 
-- Cells: 26.4.0 -> 26.5.1 (MINOR) — non-blocking, existing examples unaffected
-- Diagram: 26.4.0 -> 26.5.0 (MINOR) — non-blocking
+- Cells: 26.4.0 -> 26.5.1 (MAJOR) — non-blocking, existing examples unaffected
+- Diagram: 26.4.0 -> 26.5.0 (MAJOR) — non-blocking
 - Words/PDF/Email/Slides: CURRENT
 
 ---

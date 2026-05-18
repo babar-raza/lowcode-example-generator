@@ -24,25 +24,30 @@ from plugin_examples.evidence_contract import (
     ALLOWED_VERDICTS_V3,
     ALLOWED_VERDICTS_V4,
     ALLOWED_VERDICTS_V5,
+    ALLOWED_VERDICTS_V6,
     COMBINED_CATEGORIES_V2,
     COMBINED_CATEGORIES_V3,
     COMBINED_CATEGORIES_V4,
     COMBINED_CATEGORIES_V5,
+    COMBINED_CATEGORIES_V6,
     MIN_CATEGORIES_REQUIRED_V2,
     MIN_CATEGORIES_REQUIRED_V3,
     MIN_CATEGORIES_REQUIRED_V4,
     MIN_CATEGORIES_REQUIRED_V5,
+    MIN_CATEGORIES_REQUIRED_V6,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
     StrictEvidenceContractV3,
     StrictEvidenceContractV4,
     StrictEvidenceContractV5,
+    StrictEvidenceContractV6,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
     contract_definition_v4,
     contract_definition_v5,
+    contract_definition_v6,
 )
 
 
@@ -1433,3 +1438,380 @@ class TestStrictEvidenceContractV5Accepts:
         assert recon["v5_categories"] == 53
         assert "sprint30_commit_proof" in recon["categories_removed_from_v4"]
         assert "sprint31_state_reconciliation" in recon["categories_added_in_v5"]
+
+
+# ---------------------------------------------------------------------------
+# V6 helpers
+# ---------------------------------------------------------------------------
+
+def _minimal_v6_complete_files() -> dict[str, str]:
+    """Return files satisfying all 67 v6 required categories with valid content."""
+    files = dict(_minimal_v5_complete_files())
+    # Remove v5 sprint31 key (replaced in v6)
+    files.pop("sprint31-final-state-reconciliation.json", None)
+    # Update taskcard state to sprint33
+    files.pop("taskcard-state-after-sprint32.json", None)
+    files["taskcard-state-after-sprint33.json"] = json.dumps({"sprint": "sprint33"})
+    # v6 new categories
+    files["sprint32-final-state-reconciliation.json"] = json.dumps({
+        "sprint32_head": "b7665d4",
+        "verdict": "SPRINT32_FINAL_STATE_CLEAN_SOURCE_COMMITTED",
+    })
+    files["dirty-artifact-policy-report.json"] = json.dumps({
+        "verdict": "DIRTY_ARTIFACT_POLICY_FORMALIZED",
+        "total_dirty_files": 26,
+    })
+    files["merge-mode-decision.json"] = json.dumps({
+        "mode": "APPROVAL_BLOCKED",
+        "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+    })
+    files["merge-mode-result.json"] = json.dumps({
+        "result": "NOT_EXECUTED",
+        "reason": "approval gate blocked",
+    })
+    files["words-full-sot-classification-report.json"] = json.dumps({
+        "workflow_root_count": 8,
+        "total_types": 25,
+        "classification_complete": True,
+    })
+    files["words-denominator-update-report.json"] = json.dumps({
+        "workflow_root_count_before": None,
+        "workflow_root_count_after": 8,
+        "verdict": "DENOMINATOR_UPDATED",
+    })
+    files["words-backlog-closeout-plan.md"] = (
+        "# Words Backlog Closeout Plan\n\nAll types classified."
+    )
+    files["email-scoreboard-cleanup-report.json"] = json.dumps({
+        "family": "email",
+        "status": "PILOT_COMPLETE",
+        "stale_entries_removed": True,
+    })
+    files["slides-scoreboard-cleanup-report.json"] = json.dumps({
+        "family": "slides",
+        "status": "PILOT_COMPLETE",
+        "stale_entries_removed": True,
+    })
+    files["pdf-formimporter-version-watch-report.json"] = json.dumps({
+        "current_version": "26.5.0",
+        "new_version_available": False,
+        "verdict": "NO_NEW_VERSION_AVAILABLE",
+    })
+    files["new-lowcode-family-discovery-report.json"] = json.dumps({
+        "families_scanned": 5,
+        "new_lowcode_families_found": 0,
+        "verdict": "NO_NEW_LOWCODE_FAMILIES",
+    })
+    files["next-family-launch-candidate-plan.md"] = (
+        "# Next Family Launch Candidate Plan\n\nAll 6 families active."
+    )
+    files["pdf-release-candidate-publication-packet-v2.md"] = (
+        "# PDF RC Publication Packet v2\n\n14 examples, 6 PR packages."
+    )
+    files["pdf-release-candidate-publication-packet-v2.json"] = json.dumps({
+        "pr_packages": [
+            {"pr_number": 3, "examples": ["doc-converter", "html", "xls-converter"]},
+            {"pr_number": 5, "examples": ["jpeg", "png", "tiff"]},
+            {"pr_number": 6, "examples": ["image-extractor", "table-generator", "toc-generator"]},
+            {"pr_number": 7, "examples": ["security", "form-flattener"]},
+            {"pr_number": 8, "examples": ["form-editor", "form-exporter"]},
+            {"pr_number": 9, "examples": ["signature"]},
+        ],
+        "total_new_examples": 14,
+    })
+    files["evidence-contract-v6-implementation-report.json"] = json.dumps({
+        "contract_version": "6.0.0",
+        "categories": 67,
+        "verdict": "V6_IMPLEMENTED",
+    })
+    # v6 git log must contain b7665d4 (Sprint 32 HEAD)
+    files["git-log-proof.txt"] = (
+        "b7665d4 chore(sprint32-bundle): add v5-validated evidence bundle\n"
+        "0f44886 chore(sprint31-bundle): add v4-validated evidence bundle\n"
+        "e379cdf chore(sprint30-bundle): add v3-validated evidence bundle\n"
+    )
+    # v6 final verdict must be a Sprint 33 verdict (md and yaml must agree)
+    files["final-verdict.md"] = (
+        "# SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED\n\n"
+        "All packages clean. Release candidate packet v2 complete."
+    )
+    files["final-state-summary.yaml"] = (
+        "sprint: sprint33\n"
+        "verdict: SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED\n"
+    )
+    # v6 source-state must have sprint33_start_state
+    files["source-state-classification.json"] = json.dumps({
+        "sprint32_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+        "sprint33_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+        "source_changes_check": {"src_modified": False},
+    })
+    # v6 bundle identity: report must reference the actual ZIP name
+    # (bundle-contract-validation-report.json set with bundle_bytes > 0)
+    files["bundle-contract-validation-report.json"] = json.dumps({
+        "verdict": "BUNDLE_CONTRACT_PASSED",
+        "passed": True,
+        "bundle_file": "bundle.zip",  # matches _make_zip's default name
+        "bundle_bytes": 12345,
+    })
+    # families-needing-launch-work.json must NOT list email/slides
+    files["families-needing-launch-work.json"] = json.dumps({
+        "families_needing_work": [],
+        "note": "Email and Slides are PILOT_COMPLETE as of Sprint 32.",
+    })
+    # scoreboard and release-state must agree on total_published
+    files["all-family-launch-scoreboard.json"] = json.dumps({
+        "portfolio_summary": {"total_published_examples": 28},
+    })
+    files["release-state-reconciliation-report.json"] = json.dumps({
+        "published_count_reconciliation": {"total": 28},
+    })
+    return files
+
+
+# ---------------------------------------------------------------------------
+# V6 category count test
+# ---------------------------------------------------------------------------
+
+class TestV6CategoryCount:
+    def test_v6_has_exactly_67_categories(self):
+        """v6 must have exactly 67 categories (53 v5 - 1 removed + 15 added)."""
+        assert MIN_CATEGORIES_REQUIRED_V6 == 67, (
+            f"v6 must have 67 categories, got {MIN_CATEGORIES_REQUIRED_V6}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# v6 contract rejects invalid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV6Rejects:
+    """v6 contract must reject bundles that violate v6-specific rules."""
+
+    def test_v6_rejects_wrong_final_verdict(self, tmp_path):
+        """final-verdict.md with Sprint 32 verdict (not Sprint 33) must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("Sprint 33" in f or "allowed" in f.lower() for f in result.failures)
+
+    def test_v6_rejects_wrong_sprint32_head_in_git_log(self, tmp_path):
+        """git-log-proof.txt missing Sprint 32 HEAD commit b7665d4 must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["git-log-proof.txt"] = (
+            "0f44886 chore(sprint31-bundle): Sprint 31 only\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("b7665d4" in f for f in result.failures)
+
+    def test_v6_rejects_bundle_bytes_zero(self, tmp_path):
+        """bundle-contract-validation-report.json with bundle_bytes=0 must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["bundle-contract-validation-report.json"] = json.dumps({
+            "verdict": "BUNDLE_CONTRACT_PASSED",
+            "passed": True,
+            "bundle_file": "bundle.zip",
+            "bundle_bytes": 0,
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("bundle_bytes" in f for f in result.failures)
+
+    def test_v6_rejects_bundle_file_mismatch(self, tmp_path):
+        """bundle-contract-validation-report.json with wrong bundle_file must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["bundle-contract-validation-report.json"] = json.dumps({
+            "verdict": "BUNDLE_CONTRACT_PASSED",
+            "passed": True,
+            "bundle_file": "sprint32-FINAL.zip",  # wrong — actual is bundle.zip
+            "bundle_bytes": 99999,
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("bundle_file" in f for f in result.failures)
+
+    def test_v6_rejects_cross_file_verdict_mismatch(self, tmp_path):
+        """final-verdict.md and final-state-summary.yaml must agree on verdict."""
+        files = _minimal_v6_complete_files()
+        # md says one verdict, yaml says another
+        files["final-verdict.md"] = (
+            "# SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED\n"
+        )
+        files["final-state-summary.yaml"] = (
+            "sprint: sprint33\nverdict: SPRINT33_PARTIAL_PUBLICATION_AND_PORTFOLIO_ADVANCED\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("verdict mismatch" in f.lower() or "cross-file" in f.lower() for f in result.failures)
+
+    def test_v6_rejects_stale_email_in_families_needing_work(self, tmp_path):
+        """families-needing-launch-work.json listing email must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["families-needing-launch-work.json"] = json.dumps({
+            "families_needing_work": ["email", "slides"],
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("stale" in f.lower() or "email" in f.lower() for f in result.failures)
+
+    def test_v6_rejects_words_workflow_root_count_null(self, tmp_path):
+        """words-full-sot-classification-report.json with null workflow_root_count must fail."""
+        files = _minimal_v6_complete_files()
+        files["words-full-sot-classification-report.json"] = json.dumps({
+            "workflow_root_count": None,
+            "total_types": 25,
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("workflow_root_count" in f for f in result.failures)
+
+    def test_v6_rejects_scoreboard_count_mismatch(self, tmp_path):
+        """Scoreboard total != release-state total must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["all-family-launch-scoreboard.json"] = json.dumps({
+            "portfolio_summary": {"total_published_examples": 30},
+        })
+        files["release-state-reconciliation-report.json"] = json.dumps({
+            "published_count_reconciliation": {"total": 28},
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("consistency" in f.lower() or "total_published" in f for f in result.failures)
+
+    def test_v6_rejects_pr7_missing_security(self, tmp_path):
+        """PR#7 without security example must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["pdf-release-candidate-publication-packet-v2.json"] = json.dumps({
+            "pr_packages": [
+                {"pr_number": 7, "examples": ["form-flattener"]},  # missing security
+            ],
+            "total_new_examples": 14,
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("security" in f.lower() for f in result.failures)
+
+    def test_v6_rejects_dirty_artifact_policy_bad_verdict(self, tmp_path):
+        """dirty-artifact-policy-report.json with unknown verdict must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["dirty-artifact-policy-report.json"] = json.dumps({
+            "verdict": "UNCLASSIFIED",
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("dirty-artifact-policy" in f.lower() or "UNCLASSIFIED" in f for f in result.failures)
+
+    def test_v6_rejects_sprint33_start_state_not_clean(self, tmp_path):
+        """source-state-classification.json sprint33_start_state != CLEAN must fail v6."""
+        files = _minimal_v6_complete_files()
+        files["source-state-classification.json"] = json.dumps({
+            "sprint32_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+            "sprint33_start_state": "DIRTY_SOURCE_MODIFIED",
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("sprint33_start_state" in f for f in result.failures)
+
+    def test_v6_rejects_missing_sprint33_categories(self, tmp_path):
+        """A bundle missing sprint33-specific categories must fail v6."""
+        files = _minimal_v6_complete_files()
+        files.pop("sprint32-final-state-reconciliation.json", None)
+        files.pop("dirty-artifact-policy-report.json", None)
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert not result.passed
+        assert any("sprint32_state_reconciliation" in f or "dirty_artifact_policy" in f
+                   for f in result.failures)
+
+
+# ---------------------------------------------------------------------------
+# v6 contract accepts valid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV6Accepts:
+    """v6 contract must accept correctly formed Sprint 33 bundles."""
+
+    def test_v6_accepts_complete_approval_blocked_bundle(self, tmp_path):
+        """A complete Sprint 33 approval-blocked bundle must pass v6."""
+        files = _minimal_v6_complete_files()
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert result.passed, f"v6 should pass but failed: {result.failures}"
+        assert result.file_count == len(files)
+        assert len(result.categories_found) == MIN_CATEGORIES_REQUIRED_V6
+
+    def test_v6_accepts_published_verdict(self, tmp_path):
+        """A bundle with Sprint 33 published verdict must pass v6."""
+        files = _minimal_v6_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE\n\n"
+            "All 14 PDF examples merged."
+        )
+        files["final-state-summary.yaml"] = (
+            "sprint: sprint33\n"
+            "verdict: SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert result.passed, f"v6 should pass but failed: {result.failures}"
+
+    def test_v6_accepts_clean_dirty_artifact_policy(self, tmp_path):
+        """dirty-artifact-policy-report.json with CLEAN verdict must pass v6."""
+        files = _minimal_v6_complete_files()
+        files["dirty-artifact-policy-report.json"] = json.dumps({
+            "verdict": "DIRTY_ARTIFACT_POLICY_CLEAN",
+            "total_dirty_files": 0,
+        })
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV6().validate_zip(zip_path)
+        assert result.passed, f"v6 should pass but failed: {result.failures}"
+
+    def test_v6_contract_definition_version(self):
+        """contract_definition_v6 must return version 6.0.0."""
+        defn = contract_definition_v6()
+        assert defn["contract_version"] == "6.0.0"
+
+    def test_v6_contract_definition_has_all_combined_categories(self):
+        """contract_definition_v6 must include all COMBINED_CATEGORIES_V6 keys."""
+        defn = contract_definition_v6()
+        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V6.keys())
+
+    def test_v6_contract_definition_lists_allowed_verdicts(self):
+        """contract_definition_v6 must list all allowed Sprint 33 verdicts."""
+        defn = contract_definition_v6()
+        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V6)
+
+    def test_v6_contract_definition_documents_category_reconciliation(self):
+        """contract_definition_v6 must document the v5→v6 delta."""
+        defn = contract_definition_v6()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v5_categories"] == 53
+        assert recon["v6_categories"] == 67
+        assert "sprint31_state_reconciliation" in recon["categories_removed_from_v5"]
+        assert "sprint32_state_reconciliation" in recon["categories_added_in_v6"]
+        assert "dirty_artifact_policy" in recon["categories_added_in_v6"]
+        assert "words_sot_classification" in recon["categories_added_in_v6"]
+
+    def test_v6_v5_v4_v3_v2_v1_categories_disjoint_from_each_other(self):
+        """Each version must have a unique total category count."""
+        counts = [
+            len(COMBINED_CATEGORIES_V5),
+            len(COMBINED_CATEGORIES_V6),
+        ]
+        assert counts[0] == 53
+        assert counts[1] == 67
+        assert counts[0] != counts[1]

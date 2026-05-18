@@ -1442,3 +1442,535 @@ def contract_definition_v5() -> dict:
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }
+
+
+# ---------------------------------------------------------------------------
+# Contract v6 — cross-file verdict consistency, bundle identity validation,
+#               families-needing-work accuracy, Words SOT classification,
+#               dirty-artifact policy formalization, scoreboard consistency
+#               (Sprint 33+)
+# ---------------------------------------------------------------------------
+
+#: Categories removed from v5 (sprint31 reconciliation replaced by sprint32 reconciliation).
+_REQUIRED_CATEGORIES_V6_REMOVED: frozenset[str] = frozenset({
+    "sprint31_state_reconciliation",
+})
+
+#: Pattern updates for v6 (key kept, patterns updated).
+_REQUIRED_CATEGORIES_V6_UPDATES: dict[str, list[str]] = {
+    "taskcard_state": ["taskcard-state-after-sprint33.json"],
+}
+
+#: New categories in v6: Sprint 32 state reconciliation, dirty-artifact policy,
+#: merge-mode decision/result, Words SOT, Email/Slides scoreboard cleanup,
+#: FormImporter version watch, new family discovery, RC packet v2, V6 impl report.
+_REQUIRED_CATEGORIES_V6_NEW: dict[str, list[str]] = {
+    "sprint32_state_reconciliation": ["sprint32-final-state-reconciliation.json"],
+    "dirty_artifact_policy": ["dirty-artifact-policy-report.json"],
+    "merge_mode_decision": ["merge-mode-decision.json"],
+    "merge_mode_result": ["merge-mode-result.json"],
+    "words_sot_classification": ["words-full-sot-classification-report.json"],
+    "words_denominator_update": ["words-denominator-update-report.json"],
+    "words_backlog_closeout": ["words-backlog-closeout-plan.md"],
+    "email_scoreboard_cleanup": ["email-scoreboard-cleanup-report.json"],
+    "slides_scoreboard_cleanup": ["slides-scoreboard-cleanup-report.json"],
+    "formimporter_version_watch": ["pdf-formimporter-version-watch-report.json"],
+    "new_family_discovery": ["new-lowcode-family-discovery-report.json"],
+    "next_family_plan": ["next-family-launch-candidate-plan.md"],
+    "release_candidate_packet_v2_md": ["pdf-release-candidate-publication-packet-v2.md"],
+    "release_candidate_packet_v2_json": ["pdf-release-candidate-publication-packet-v2.json"],
+    "evidence_contract_v6_impl": ["evidence-contract-v6-implementation-report.json"],
+}
+
+#: Combined v6 categories: v5 (minus removed, with updates) + new.
+#: v5 had 53 categories; v6 removes 1 (sprint31 entry) and adds 15 → 67 total.
+COMBINED_CATEGORIES_V6: dict[str, list[str]] = {
+    **{
+        k: _REQUIRED_CATEGORIES_V6_UPDATES.get(k, v)
+        for k, v in COMBINED_CATEGORIES_V5.items()
+        if k not in _REQUIRED_CATEGORIES_V6_REMOVED
+    },
+    **_REQUIRED_CATEGORIES_V6_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V6: int = len(COMBINED_CATEGORIES_V6)
+
+#: Allowed final verdicts for Sprint 33 bundles.
+ALLOWED_VERDICTS_V6: frozenset[str] = frozenset({
+    "SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
+    "SPRINT33_PUBLISHED_RELEASE_CANDIDATE_COMPLETE_MERGE_BLOCKED",
+    "SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED",
+    "SPRINT33_PARTIAL_PUBLICATION_AND_PORTFOLIO_ADVANCED",
+    "SPRINT33_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
+    "SPRINT33_BLOCKED_SOURCE_STATE",
+    "SPRINT33_REJECTED_UNSAFE_TO_PUBLISH",
+})
+
+#: Sprint 32 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 33.
+_SPRINT32_HEAD_COMMIT = "b7665d4"
+
+
+class StrictEvidenceContractV6(StrictEvidenceContractV5):
+    """
+    v6 of the strict evidence contract (Sprint 33+).
+
+    Extends v5 with:
+    - 67 required categories (vs 53 in v5; removes 1 sprint31 entry, adds 15 sprint33 entries).
+    - Sprint 32 HEAD commit b7665d4 must appear in git-log-proof.txt.
+    - Sprint 33 verdicts required in final-verdict.md.
+    - Cross-file verdict consistency: final-verdict.md must match final-state-summary.yaml.
+    - Bundle identity: bundle-contract-validation-report.json bundle_bytes > 0 and
+      bundle_file must match the actual ZIP filename.
+    - families-needing-launch-work.json must not list Email/Slides as needing work
+      (Sprint 32 verified them; stale entries are a contract violation).
+    - Words SOT: words-full-sot-classification-report.json must set workflow_root_count > 0.
+    - Scoreboard published total must be consistent across scoreboard and release-state.
+    - PR#7 package must declare Security and FormFlattener examples.
+    - dirty-artifact-policy-report.json verdict must be DIRTY_ARTIFACT_POLICY_FORMALIZED
+      or DIRTY_ARTIFACT_POLICY_CLEAN.
+    - source-state-classification.json sprint33_start_state must be
+      CLEAN_FOR_SPRINT_EXECUTION.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v6: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v6 categories (67 total)
+                for category, patterns in COMBINED_CATEGORIES_V6.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of: {patterns}"
+                        )
+
+                # Secret scan (all text files)
+                for name in names:
+                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
+                        try:
+                            content = zf.read(name).decode("utf-8", errors="replace")
+                            for pattern in SECRET_PATTERNS:
+                                if pattern.search(content):
+                                    violation = (
+                                        f"v6: Possible secret in {name}: "
+                                        f"pattern {pattern.pattern}"
+                                    )
+                                    result.secret_violations.append(violation)
+                                    result.failures.append(violation)
+                        except Exception:
+                            pass
+
+                # v6 content-level checks
+                self._validate_content_v6(zf, names, result, zip_path)
+
+        except zipfile.BadZipFile as e:
+            result.failures.append(f"ZIP is invalid/corrupt: {e}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        result.passed = not result.failures
+        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
+        return result
+
+    # ------------------------------------------------------------------
+    # v6 content validation
+    # ------------------------------------------------------------------
+
+    def _validate_content_v6(
+        self,
+        zf: zipfile.ZipFile,
+        names: list[str],
+        result: ContractResult,
+        zip_path: Path,
+    ) -> None:
+        name_map: dict[str, str] = {Path(n).name: n for n in names}
+        self._check_git_status_no_modified_source(zf, name_map, result)   # from v5
+        self._check_staged_package_deletions(zf, name_map, result)         # from v4
+        self._check_git_log_proof(zf, name_map, result)                     # overridden below
+        self._check_final_verdict(zf, name_map, result)                     # overridden below
+        self._check_test_summary(zf, name_map, result)                      # from v2
+        self._check_bundle_contract_report(zf, name_map, result)            # from v2
+        self._check_source_state_sprint33_clean(zf, name_map, result)       # new v6
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3
+        self._check_pr_package_count_consistency(zf, name_map, result)      # from v4
+        # V6 new checks
+        self._check_v6_bundle_identity(zf, name_map, result, zip_path)
+        self._check_v6_cross_file_verdict(zf, name_map, result)
+        self._check_v6_families_needing_work_accuracy(zf, name_map, result)
+        self._check_v6_words_sot(zf, name_map, result)
+        self._check_v6_scoreboard_consistency(zf, name_map, result)
+        self._check_v6_pr7_has_security(zf, name_map, result)
+        self._check_v6_dirty_artifact_policy(zf, name_map, result)
+
+    def _check_git_log_proof(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v6 requires Sprint 32 HEAD commit b7665d4 in git-log-proof.txt."""
+        content = self._read_text(zf, name_map, "git-log-proof.txt")
+        if content is None:
+            return
+        if not content.strip():
+            result.failures.append("v6: git-log-proof.txt is empty — no commits recorded.")
+            return
+        if _SPRINT32_HEAD_COMMIT not in content:
+            result.failures.append(
+                f"v6: git-log-proof.txt does not contain Sprint 32 HEAD commit "
+                f"{_SPRINT32_HEAD_COMMIT}. "
+                "Sprint 32 must be committed before Sprint 33 bundle is created."
+            )
+
+    def _check_final_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v6 uses Sprint 33 allowed verdicts."""
+        content = self._read_text(zf, name_map, "final-verdict.md")
+        if content is None:
+            return
+        if "IN_PROGRESS" in content.upper():
+            result.failures.append(
+                "v6: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
+            )
+            return
+        if not any(v in content for v in ALLOWED_VERDICTS_V6):
+            result.failures.append(
+                f"v6: final-verdict.md does not contain any allowed Sprint 33 verdict. "
+                f"Allowed: {sorted(ALLOWED_VERDICTS_V6)}"
+            )
+
+    def _check_source_state_sprint33_clean(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: source-state-classification.json must confirm clean sprint 33 start."""
+        content = self._read_text(zf, name_map, "source-state-classification.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append("v6: source-state-classification.json is not valid JSON.")
+            return
+        state = data.get("sprint33_start_state", "")
+        if state != "CLEAN_FOR_SPRINT_EXECUTION":
+            result.failures.append(
+                f"v6: source-state-classification.json sprint33_start_state is '{state}' — "
+                "must be 'CLEAN_FOR_SPRINT_EXECUTION'."
+            )
+
+    def _check_v6_bundle_identity(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+        zip_path: Path,
+    ) -> None:
+        """v6: bundle-contract-validation-report.json must have bundle_bytes > 0
+        and bundle_file must match the actual ZIP filename being validated."""
+        content = self._read_text(zf, name_map, "bundle-contract-validation-report.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v6: bundle-contract-validation-report.json is not valid JSON."
+            )
+            return
+        bundle_bytes = data.get("bundle_bytes", 0)
+        if not isinstance(bundle_bytes, (int, float)) or bundle_bytes <= 0:
+            result.failures.append(
+                f"v6: bundle-contract-validation-report.json bundle_bytes={bundle_bytes!r} — "
+                "must be > 0. Bootstrap report generated before bundle was built."
+            )
+        bundle_file = data.get("bundle_file", "")
+        actual_name = zip_path.name
+        if bundle_file and bundle_file != actual_name:
+            result.failures.append(
+                f"v6: bundle-contract-validation-report.json bundle_file='{bundle_file}' "
+                f"does not match actual ZIP filename '{actual_name}'. "
+                "Report must reference the bundle it describes."
+            )
+
+    def _check_v6_cross_file_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: final-verdict.md and final-state-summary.yaml must agree on the sprint verdict."""
+        md_content = self._read_text(zf, name_map, "final-verdict.md")
+        yaml_content = self._read_text(zf, name_map, "final-state-summary.yaml")
+        if md_content is None or yaml_content is None:
+            return
+        # Extract verdict from md: look for the first SPRINT33_ token
+        md_verdict = None
+        for v in ALLOWED_VERDICTS_V6:
+            if v in md_content:
+                md_verdict = v
+                break
+        # Extract verdict from yaml: look for verdict: field
+        yaml_verdict = None
+        for line in yaml_content.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("verdict:"):
+                yaml_verdict = stripped.split(":", 1)[1].strip().strip('"').strip("'")
+                break
+        if md_verdict is None or yaml_verdict is None:
+            return  # already caught by other checks
+        if md_verdict != yaml_verdict:
+            result.failures.append(
+                f"v6: Cross-file verdict mismatch — "
+                f"final-verdict.md='{md_verdict}' but "
+                f"final-state-summary.yaml verdict='{yaml_verdict}'. "
+                "Both files must record the same sprint verdict."
+            )
+
+    def _check_v6_families_needing_work_accuracy(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: families-needing-launch-work.json must not list Email or Slides
+        as needing work — Sprint 32 runtime-verified them as PILOT_COMPLETE."""
+        content = self._read_text(zf, name_map, "families-needing-launch-work.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v6: families-needing-launch-work.json is not valid JSON."
+            )
+            return
+        # Accept list or dict with families_needing_work key
+        if isinstance(data, list):
+            families = [str(f).lower() for f in data]
+        elif isinstance(data, dict):
+            families = [
+                str(f).lower()
+                for f in data.get("families_needing_work", data.get("families", []))
+            ]
+        else:
+            families = []
+        stale = [f for f in families if f in ("email", "slides")]
+        if stale:
+            result.failures.append(
+                f"v6: families-needing-launch-work.json stale — lists {stale} as needing work. "
+                "Sprint 32 runtime-verified Email (BUILD+RUN PASS, HTML 2002 bytes) and "
+                "Slides (all 3 examples BUILD+RUN PASS). Update to reflect PILOT_COMPLETE status."
+            )
+
+    def _check_v6_words_sot(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: words-full-sot-classification-report.json must have workflow_root_count > 0."""
+        content = self._read_text(zf, name_map, "words-full-sot-classification-report.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v6: words-full-sot-classification-report.json is not valid JSON."
+            )
+            return
+        wrc = data.get("workflow_root_count")
+        if wrc is None:
+            result.failures.append(
+                "v6: words-full-sot-classification-report.json workflow_root_count is null. "
+                "TC-WORDS-01 must complete: classify all 25 Words LowCode types and set "
+                "workflow_root_count to a positive integer."
+            )
+        elif not isinstance(wrc, int) or wrc <= 0:
+            result.failures.append(
+                f"v6: words-full-sot-classification-report.json workflow_root_count={wrc!r} — "
+                "must be a positive integer."
+            )
+
+    def _check_v6_scoreboard_consistency(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: all-family-launch-scoreboard.json total_published_examples must match
+        release-state-reconciliation-report.json published total."""
+        scoreboard_content = self._read_text(
+            zf, name_map, "all-family-launch-scoreboard.json"
+        )
+        release_content = self._read_text(
+            zf, name_map, "release-state-reconciliation-report.json"
+        )
+        if scoreboard_content is None or release_content is None:
+            return
+        try:
+            scoreboard = json.loads(scoreboard_content)
+            release = json.loads(release_content)
+        except Exception:
+            return
+        sb_total = (
+            scoreboard.get("portfolio_summary", {}).get("total_published_examples")
+        )
+        rc_total = (
+            release.get("published_count_reconciliation", {}).get("total")
+        )
+        if sb_total is None or rc_total is None:
+            return
+        if sb_total != rc_total:
+            result.failures.append(
+                f"v6: Scoreboard consistency failure — "
+                f"all-family-launch-scoreboard.json total_published_examples={sb_total} "
+                f"but release-state-reconciliation-report.json total={rc_total}. "
+                "Both files must report the same published count."
+            )
+
+    def _check_v6_pr7_has_security(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: pdf-release-candidate-publication-packet-v2.json PR#7 must declare
+        Security and FormFlattener examples."""
+        content = self._read_text(
+            zf, name_map, "pdf-release-candidate-publication-packet-v2.json"
+        )
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v6: pdf-release-candidate-publication-packet-v2.json is not valid JSON."
+            )
+            return
+        pr_packages = data.get("pr_packages", [])
+        pr7 = next((p for p in pr_packages if p.get("pr_number") == 7), None)
+        if pr7 is None:
+            result.failures.append(
+                "v6: pdf-release-candidate-publication-packet-v2.json has no PR#7 entry."
+            )
+            return
+        examples = [str(e).lower() for e in pr7.get("examples", [])]
+        missing = []
+        if not any("security" in e for e in examples):
+            missing.append("security")
+        if not any("formflattener" in e or "form-flattener" in e for e in examples):
+            missing.append("form-flattener")
+        if missing:
+            result.failures.append(
+                f"v6: PR#7 in pdf-release-candidate-publication-packet-v2.json is missing "
+                f"required examples: {missing}. PR#7 must include Security and FormFlattener."
+            )
+
+    def _check_v6_dirty_artifact_policy(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v6: dirty-artifact-policy-report.json verdict must be
+        DIRTY_ARTIFACT_POLICY_FORMALIZED or DIRTY_ARTIFACT_POLICY_CLEAN."""
+        content = self._read_text(zf, name_map, "dirty-artifact-policy-report.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append(
+                "v6: dirty-artifact-policy-report.json is not valid JSON."
+            )
+            return
+        verdict = data.get("verdict", "")
+        allowed = {"DIRTY_ARTIFACT_POLICY_FORMALIZED", "DIRTY_ARTIFACT_POLICY_CLEAN"}
+        if verdict not in allowed:
+            result.failures.append(
+                f"v6: dirty-artifact-policy-report.json verdict='{verdict}' — "
+                f"must be one of {sorted(allowed)}."
+            )
+
+
+def contract_definition_v6() -> dict:
+    """Return the v6 bundle contract definition as a serialisable dict."""
+    return {
+        "contract_version": "6.0.0",
+        "sprint": "sprint33+",
+        "description": (
+            "Strict evidence contract v6 for LowCode sprint bundles. "
+            "Closes Sprint 32 V5 weaknesses: cross-file verdict consistency, "
+            "bundle identity (bundle_bytes > 0, bundle_file matches ZIP), "
+            "families-needing-launch-work staleness detection, Words SOT null guard, "
+            "scoreboard count consistency, PR#7 content enforcement, "
+            "and dirty-artifact policy formalization. "
+            "67 categories (v5 had 53: removes 1 sprint31 entry, adds 15 sprint33 entries). "
+            "Sprint 33 verdicts required."
+        ),
+        "required_categories": {
+            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V6.items()
+        },
+        "min_categories_required": MIN_CATEGORIES_REQUIRED_V6,
+        "content_checks_enabled": True,
+        "content_checks": [
+            "git-status-final.txt: no modified (staged OR unstaged) src/tests/pipeline/.gitignore",
+            "git-status-final.txt: no staged workspace/pr-dry-run/ deletions",
+            f"git-log-proof.txt: must contain Sprint 32 HEAD {_SPRINT32_HEAD_COMMIT}",
+            "final-verdict.md: must contain an allowed Sprint 33 verdict",
+            "test-summary.json: failed==0 and passed>0",
+            "bundle-contract-validation-report.json: passed=true AND bundle_bytes > 0 (V6 new)",
+            "bundle-contract-validation-report.json: bundle_file matches actual ZIP (V6 new)",
+            "source-state-classification.json: sprint33_start_state==CLEAN_FOR_SPRINT_EXECUTION",
+            "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
+            "pdf-pr-package-count-reconciliation.json: total_pr_ready==14",
+            "final-verdict.md vs final-state-summary.yaml: verdict must match (V6 new)",
+            "families-needing-launch-work.json: Email/Slides not listed as needing work (V6 new)",
+            "words-full-sot-classification-report.json: workflow_root_count > 0 (V6 new)",
+            "scoreboard total_published == release-state total (V6 new)",
+            "PR#7 must contain Security + FormFlattener (V6 new)",
+            "dirty-artifact-policy-report.json: verdict FORMALIZED or CLEAN (V6 new)",
+            "dirty-artifact-policy-report.json: present in bundle (V6 new)",
+            "source-state-classification.json: sprint33_start_state present (V6 new)",
+        ],
+        "category_count_reconciliation": {
+            "v5_categories": MIN_CATEGORIES_REQUIRED_V5,
+            "v6_categories": MIN_CATEGORIES_REQUIRED_V6,
+            "categories_removed_from_v5": sorted(_REQUIRED_CATEGORIES_V6_REMOVED),
+            "categories_added_in_v6": sorted(_REQUIRED_CATEGORIES_V6_NEW.keys()),
+            "note": "v5 had 53. v6 removes 1 (sprint31 entry) and adds 15 (sprint33 entries) → 67.",
+        },
+        "secret_scanning_enabled": True,
+        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V6),
+        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+    }

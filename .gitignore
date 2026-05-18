@@ -27,6 +27,9 @@ workspace/queues/
 workspace/verification/*.zip
 workspace/verification/latest/*.zip
 
+# Local planning files
+/plans
+
 # Local agent settings
 .claude/
 

@@ -411,6 +411,42 @@ def main() -> int:
         help="Write verification report to this path",
     )
 
+    # version-drift command — check NuGet versions against denominators
+    vd_parser = subparsers.add_parser(
+        "version-drift",
+        help="Check NuGet version drift for all confirmed LowCode families",
+    )
+    vd_parser.add_argument(
+        "--family", metavar="FAMILY", default=None,
+        help="Limit check to one family (default: all confirmed LowCode families)",
+    )
+    vd_parser.add_argument(
+        "--output", metavar="PATH", default=None,
+        help="Write drift report JSON to this path",
+    )
+    vd_parser.add_argument(
+        "--json", dest="json_output", action="store_true",
+        help="Print report as JSON to stdout",
+    )
+
+    # target-repo-health command — verify target repos for all LowCode families
+    trh_parser = subparsers.add_parser(
+        "target-repo-health",
+        help="Verify target repos for all confirmed LowCode families",
+    )
+    trh_parser.add_argument(
+        "--family", metavar="FAMILY", default=None,
+        help="Limit check to one family",
+    )
+    trh_parser.add_argument(
+        "--output", metavar="PATH", default=None,
+        help="Write health report JSON to this path",
+    )
+    trh_parser.add_argument(
+        "--json", dest="json_output", action="store_true",
+        help="Print report as JSON to stdout",
+    )
+
     args = parser.parse_args()
 
     if args.verbose:
@@ -2013,6 +2049,55 @@ def main() -> int:
             print(f"  PR#{p.pr_number} {p.package_name}: {p.verdict} ({p.verified_examples}/{p.total_examples})")
         print(f"Report: {output_path}")
         return 0 if report.all_verified else 1
+
+    if args.command == "version-drift":
+        from pathlib import Path as _Path
+        from plugin_examples.publisher.version_drift_checker import run_version_drift_check, LOWCODE_FAMILIES
+        import json as _json
+
+        repo_root = _Path(__file__).resolve().parents[2]
+        families = [args.family] if args.family else None
+        report = run_version_drift_check(families=families, repo_root=repo_root)
+
+        output_path = getattr(args, "output", None)
+        if output_path:
+            _Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+            _Path(output_path).write_text(_json.dumps(report.to_dict(), indent=2), encoding="utf-8")
+
+        if getattr(args, "json_output", False):
+            print(_json.dumps(report.to_dict(), indent=2))
+        else:
+            print(f"version-drift: {report.overall_verdict}")
+            for r in report.families:
+                drift_info = f"{r.denominator_version} -> {r.latest_nuget_version}" if r.drift else f"{r.latest_nuget_version} (current)"
+                print(f"  {r.family}: {r.status} | {drift_info}")
+            print(f"Drifted: {report.drifted_count} | Current: {report.current_count} | Errors: {report.error_count}")
+
+        return 0 if report.overall_verdict in ("ALL_CURRENT", "DRIFT_DETECTED") else 1
+
+    if args.command == "target-repo-health":
+        from pathlib import Path as _Path
+        from plugin_examples.publisher.target_repo_health import run_target_repo_health_check
+        import json as _json
+
+        repo_root = _Path(__file__).resolve().parents[2]
+        families = [args.family] if args.family else None
+        report = run_target_repo_health_check(families=families, repo_root=repo_root)
+
+        output_path = getattr(args, "output", None)
+        if output_path:
+            _Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+            _Path(output_path).write_text(_json.dumps(report.to_dict(), indent=2), encoding="utf-8")
+
+        if getattr(args, "json_output", False):
+            print(_json.dumps(report.to_dict(), indent=2))
+        else:
+            print(f"target-repo-health: {report.overall_verdict}")
+            for r in report.families:
+                print(f"  {r.family}: {r.status} (method={r.verification_method}, expected={r.expected_examples})")
+            print(f"Healthy: {report.healthy_count} | Evidence-based: {report.evidence_based_count} | Inaccessible: {report.inaccessible_count}")
+
+        return 0 if report.overall_verdict in ("ALL_VERIFIED", "PARTIAL_VERIFICATION") else 1
 
     return 0
 

@@ -1,0 +1,15 @@
+3ef76c5 feat(sprint33-evidence-contract-v6): implement StrictEvidenceContractV6 with 67 categories and 21 new tests
+b7665d4 chore(sprint32-bundle): add v5-validated evidence bundle and final git state artifacts
+6b2a7b8 feat(sprint32-release-candidate-and-evidence-contract-v5): SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE
+7d54ee2 feat(sprint32-evidence-contract-v5): implement StrictEvidenceContractV5 closing V4 unstaged-source weakness
+0f44886 chore(sprint31-bundle): add v4-validated evidence bundle and final git state artifacts
+ef82c3b feat(sprint31-pr-inventory-hotfix-security-recovery-and-evidence-contract-v4): SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE
+e379cdf chore(sprint30-bundle): add v3-validated evidence bundle and final git state artifacts
+8094a46 feat(sprint30-package-cleanup-and-evidence-contract-v3): SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE
+ef74d9b chore(sprint29-bundle): add v2-validated evidence bundle and final git state artifacts
+4be32c1 feat(sprint29-evidence-contract-v2-and-publication-readiness): SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE
+20686d3 feat(sprint28-strict-evidence-contract-publication-readiness-and-final-lowcode-closeout): SPRINT28_STRICT_EVIDENCE_CONTRACT_IMPLEMENTED_PUBLICATION_BLOCKED
+774f516 feat(sprint27-evidence-gated-publication-pr3-pr9-and-final-pdf-closeout): SPRINT27_EVIDENCE_BUNDLE_VALIDATED_PUBLICATION_APPROVAL_BLOCKED
+e3f1ea9 feat(sprint26-pdf-wave-g-signature-formimporter-email-slides-all-family-closeout): SPRINT26_WAVE_G_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED
+58047d5 feat(sprint25-pdf-wave-f-pr8-signature-frontier-and-all-family-runtime): SPRINT25_WAVE_F_HARNESS_VERIFIED_PUBLICATION_APPROVAL_BLOCKED
+b332657 feat(sprint24-wave-f-formeditor-formexporter-selectfield-reclassification): SPRINT24_WAVE_F_ENABLED_PUBLICATION_APPROVAL_BLOCKED

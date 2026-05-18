@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint33",
+  "open": 9,
+  "closed_this_sprint": 4,
+  "permanently_blocked": 3,
+  "closed_this_sprint_ids": [
+    "TC-EVIDENCE-V6",
+    "TC-WORDS-01",
+    "TC-SCOREBOARD-CLEANUP",
+    "TC-DIRTY-ARTIFACT-POLICY"
+  ],
+  "verdict": "TASKCARD_RECONCILIATION_COMPLETE"
+}

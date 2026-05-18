@@ -1,0 +1,82 @@
+{
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "All PR Packages Audit Post Cleanup (Sprint 33)",
+  "packages": [
+    {
+      "pr_number": 3,
+      "package_name": "pdf-controlled-pilot",
+      "examples": [
+        "doc-converter",
+        "html",
+        "xls-converter"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    },
+    {
+      "pr_number": 5,
+      "package_name": "pdf-controlled-pilot-pr5",
+      "examples": [
+        "jpeg",
+        "png",
+        "tiff"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    },
+    {
+      "pr_number": 6,
+      "package_name": "pdf-controlled-pilot-pr6",
+      "examples": [
+        "image-extractor",
+        "table-generator",
+        "toc-generator"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    },
+    {
+      "pr_number": 7,
+      "package_name": "pdf-controlled-pilot-pr7",
+      "examples": [
+        "security",
+        "form-flattener"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    },
+    {
+      "pr_number": 8,
+      "package_name": "pdf-controlled-pilot-pr8",
+      "examples": [
+        "form-editor",
+        "form-exporter"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    },
+    {
+      "pr_number": 9,
+      "package_name": "pdf-controlled-pilot-pr9",
+      "examples": [
+        "signature"
+      ],
+      "bin_obj_files": 0,
+      "blocking_flags": 0,
+      "audit_status": "CLEAN"
+    }
+  ],
+  "summary": {
+    "total_packages": 6,
+    "total_examples": 14,
+    "packages_with_blocking_flags": 0,
+    "all_clean": true
+  },
+  "verdict": "ALL_PACKAGES_CLEAN_0_BLOCKING_FLAGS"
+}

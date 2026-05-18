@@ -15,7 +15,7 @@ pipeline, validated through dotnet build + runtime execution + output verificati
 here as a repeatable reference.
 
 
-**Controlled pilot scope:** This repository covers Merger, TextExtractor, Splitter, Optimizer, PdfAConverter, DocConverter, XlsConverter, Html, Jpeg, Png, Tiff, TocGenerator, ImageExtractor, TableGenerator operations.
+**Controlled pilot scope:** This repository covers Merger, TextExtractor, Splitter, Optimizer, PdfAConverter, DocConverter, XlsConverter, Html, Jpeg, Png, Tiff, TocGenerator, ImageExtractor, TableGenerator, Security, FormFlattener, FormEditor, FormExporter, Signature operations.
 Broader generation requires resolving open follow-up taskcards first.
 
 
@@ -88,7 +88,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-16 08:04 UTC
+Generated on: 2026-05-18 08:16 UTC
 
 ---
 

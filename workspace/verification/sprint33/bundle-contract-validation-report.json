@@ -1,0 +1,11 @@
+{
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "bundle_file": "sprint33-full-portfolio-publish-merge-verify-words-sot-and-contract-v6-swarm-20260518.zip",
+  "bundle_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\sprint33-full-portfolio-publish-merge-verify-words-sot-and-contract-v6-swarm-20260518.zip",
+  "bundle_bytes": 60815,
+  "file_count": 74,
+  "passed": true,
+  "verdict": "BUNDLE_CONTRACT_PASSED",
+  "note": "Final validation report included in bundle."
+}

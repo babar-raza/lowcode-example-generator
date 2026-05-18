@@ -1,0 +1,100 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "title": "StrictEvidenceContractV6 Implementation Report",
+  "contract_version": "6.0.0",
+  "previous_version": "5.0.0",
+  "implementation_location": "src/plugin_examples/evidence_contract.py",
+  "test_location": "tests/unit/test_evidence_contract.py",
+  "category_reconciliation": {
+    "v5_categories": 53,
+    "categories_removed": 1,
+    "categories_removed_list": ["sprint31_state_reconciliation"],
+    "categories_added": 15,
+    "categories_added_list": [
+      "sprint32_state_reconciliation",
+      "dirty_artifact_policy",
+      "merge_mode_decision",
+      "merge_mode_result",
+      "words_sot_classification",
+      "words_denominator_update",
+      "words_backlog_closeout",
+      "email_scoreboard_cleanup",
+      "slides_scoreboard_cleanup",
+      "formimporter_version_watch",
+      "new_family_discovery",
+      "next_family_plan",
+      "release_candidate_packet_v2_md",
+      "release_candidate_packet_v2_json",
+      "evidence_contract_v6_impl"
+    ],
+    "v6_categories": 67
+  },
+  "new_checks_implemented": [
+    {
+      "id": "v6-check-1",
+      "name": "_check_v6_bundle_identity",
+      "closes": "Sprint 32 weakness: bundle_bytes=0 and bundle_file mismatch in validation report",
+      "rule": "bundle_bytes > 0 AND bundle_file == actual ZIP filename"
+    },
+    {
+      "id": "v6-check-2",
+      "name": "_check_v6_cross_file_verdict",
+      "closes": "Sprint 32 weakness: final-verdict.md and final-state-summary.yaml used different verdict names",
+      "rule": "verdict extracted from both files must be identical"
+    },
+    {
+      "id": "v6-check-3",
+      "name": "_check_v6_families_needing_work_accuracy",
+      "closes": "Sprint 32 weakness: families-needing-launch-work.json listed Email/Slides as stale",
+      "rule": "email and slides must not appear in families_needing_work list"
+    },
+    {
+      "id": "v6-check-4",
+      "name": "_check_v6_words_sot",
+      "closes": "TC-WORDS-01: Words workflow_root_count is null in denominator",
+      "rule": "words-full-sot-classification-report.json workflow_root_count > 0"
+    },
+    {
+      "id": "v6-check-5",
+      "name": "_check_v6_scoreboard_consistency",
+      "closes": "Sprint 32 risk: scoreboard and release-state could disagree silently",
+      "rule": "scoreboard.portfolio_summary.total_published_examples == release-state.published_count_reconciliation.total"
+    },
+    {
+      "id": "v6-check-6",
+      "name": "_check_v6_pr7_has_security",
+      "closes": "Enforce PR#7 content: must contain Security and FormFlattener",
+      "rule": "pr_packages[pr_number=7].examples must contain security and form-flattener"
+    },
+    {
+      "id": "v6-check-7",
+      "name": "_check_v6_dirty_artifact_policy",
+      "closes": "Sprint 32 weakness: dirty build artifacts not formally classified",
+      "rule": "dirty-artifact-policy-report.json verdict in {DIRTY_ARTIFACT_POLICY_FORMALIZED, DIRTY_ARTIFACT_POLICY_CLEAN}"
+    }
+  ],
+  "overrides_from_v5": [
+    "_check_git_log_proof (now requires b7665d4 Sprint 32 HEAD)",
+    "_check_final_verdict (now uses ALLOWED_VERDICTS_V6 Sprint 33 verdicts)",
+    "_check_source_state_sprint32_clean (replaced by _check_source_state_sprint33_clean)"
+  ],
+  "tests_added": 21,
+  "test_suite_result": {
+    "total_tests": 1744,
+    "passed": 1744,
+    "failed": 0,
+    "verdict": "ALL_PASS"
+  },
+  "allowed_verdicts_v6": [
+    "SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
+    "SPRINT33_PUBLISHED_RELEASE_CANDIDATE_COMPLETE_MERGE_BLOCKED",
+    "SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED",
+    "SPRINT33_PARTIAL_PUBLICATION_AND_PORTFOLIO_ADVANCED",
+    "SPRINT33_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
+    "SPRINT33_BLOCKED_SOURCE_STATE",
+    "SPRINT33_REJECTED_UNSAFE_TO_PUBLISH"
+  ],
+  "verdict": "V6_IMPLEMENTED_21_TESTS_ALL_PASS_1744_TOTAL"
+}

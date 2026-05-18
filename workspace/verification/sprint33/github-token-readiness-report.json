@@ -1,0 +1,11 @@
+{
+  "sprint": "sprint33",
+  "date": "2026-05-18",
+  "gh_token": "SET",
+  "token_type": "classic_PAT",
+  "token_env_var": "GH_TOKEN",
+  "mapped_to": "GITHUB_TOKEN",
+  "scope": "repo (required for Contents:Write on org-owned repos)",
+  "notes": "Fine-grained PATs with personal resource_owner CANNOT write to org repos via Git Data API (HTTP 403). Classic PAT ghp_ with repo scope required.",
+  "verdict": "TOKEN_READY"
+}

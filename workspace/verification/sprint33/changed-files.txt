@@ -1,0 +1,3 @@
+.gitignore
+src/plugin_examples/evidence_contract.py
+tests/unit/test_evidence_contract.py

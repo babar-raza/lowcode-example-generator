@@ -1151,3 +1151,294 @@ def contract_definition_v4() -> dict:
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }
+
+
+# ---------------------------------------------------------------------------
+# Contract v5 — modified (not only staged) source/test/config enforcement,
+#               Sprint 32 release-candidate evidence, target runtime proofs
+#               (Sprint 32+)
+# ---------------------------------------------------------------------------
+
+#: Categories removed from v4 (renamed to reflect sprint31 content).
+_REQUIRED_CATEGORIES_V5_REMOVED: frozenset[str] = frozenset({
+    "sprint30_commit_proof",
+    "sprint30_reconciliation",
+})
+
+#: Pattern updates for v5 (key kept, patterns updated).
+_REQUIRED_CATEGORIES_V5_UPDATES: dict[str, list[str]] = {
+    "taskcard_state": ["taskcard-state-after-sprint32.json"],
+}
+
+#: New categories in v5: Sprint 31 state reconciliation, target runtime proofs,
+#: FormImporter version retest, release candidate packet.
+_REQUIRED_CATEGORIES_V5_NEW: dict[str, list[str]] = {
+    "sprint31_state_reconciliation": ["sprint31-final-state-reconciliation.json"],
+    "email_target_runtime_report": ["email-target-runtime-verification-report.json"],
+    "slides_target_runtime_report": ["slides-target-runtime-verification-report.json"],
+    "formimporter_version_retest": ["pdf-formimporter-latest-version-retest-report.json"],
+    "release_candidate_packet_json": ["pdf-release-candidate-publication-packet.json"],
+    "release_candidate_packet_md": ["pdf-release-candidate-publication-packet.md"],
+}
+
+#: Combined v5 categories: v4 (minus removed, with updates) + new.
+#: v4 had 49 categories; v5 removes 2 (sprint30 entries) and adds 6 → 53 total.
+COMBINED_CATEGORIES_V5: dict[str, list[str]] = {
+    **{
+        k: _REQUIRED_CATEGORIES_V5_UPDATES.get(k, v)
+        for k, v in COMBINED_CATEGORIES_V4.items()
+        if k not in _REQUIRED_CATEGORIES_V5_REMOVED
+    },
+    **_REQUIRED_CATEGORIES_V5_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V5: int = len(COMBINED_CATEGORIES_V5)
+
+#: Allowed final verdicts for Sprint 32 bundles.
+ALLOWED_VERDICTS_V5: frozenset[str] = frozenset({
+    "SPRINT32_PUBLISHED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+    "SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+    "SPRINT32_PARTIAL_PUBLICATION_RELEASE_CANDIDATE_COMPLETE",
+    "SPRINT32_BLOCKED_EVIDENCE_CONTRACT_V5_FAILED",
+    "SPRINT32_BLOCKED_SOURCE_STATE",
+    "SPRINT32_REJECTED_UNSAFE_TO_PUBLISH",
+})
+
+#: Sprint 31 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 32.
+_SPRINT31_HEAD_COMMIT = "0f44886"
+
+#: Pattern matching any modification (staged or unstaged) to source/test/config files.
+#: In `git status --short`, lines are:
+#:   'XY path' where X is index status, Y is worktree status.
+#:   ' M src/foo.py'  → unstaged modification (Y=M, X=space)
+#:   'M  src/foo.py'  → staged modification (X=M, Y=space)
+#: V5 rejects BOTH for complete verdicts.
+_MODIFIED_SOURCE_PATTERN_V5 = re.compile(
+    r"^..\s+(src/|tests/|pipeline/|\.gitignore)",
+    re.MULTILINE,
+)
+
+
+class StrictEvidenceContractV5(StrictEvidenceContractV4):
+    """
+    v5 of the strict evidence contract (Sprint 32+).
+
+    Extends v4 with:
+    - 53 required categories (vs 49 in v4; removes sprint30 entries, adds 6 sprint32 entries).
+    - Sprint 31 HEAD commit 0f44886 must appear in git-log-proof.txt.
+    - Sprint 32 verdicts required in final-verdict.md.
+    - source-state-classification.json sprint32_start_state must be CLEAN_FOR_SPRINT_EXECUTION.
+    - git-status-final.txt must have NO modified (staged OR unstaged) src/tests/pipeline/.gitignore.
+      This closes the Sprint 31 v4 weakness where unstaged source changes passed validation.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v5: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v5 categories (53 total)
+                for category, patterns in COMBINED_CATEGORIES_V5.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of: {patterns}"
+                        )
+
+                # Secret scan (all text files)
+                for name in names:
+                    if name.endswith((".json", ".md", ".txt", ".yaml", ".yml", ".patch", ".log")):
+                        try:
+                            content = zf.read(name).decode("utf-8", errors="replace")
+                            for pattern in SECRET_PATTERNS:
+                                if pattern.search(content):
+                                    violation = (
+                                        f"v5: Possible secret in {name}: "
+                                        f"pattern {pattern.pattern}"
+                                    )
+                                    result.secret_violations.append(violation)
+                                    result.failures.append(violation)
+                        except Exception:
+                            pass
+
+                # v5 content-level checks
+                self._validate_content_v5(zf, names, result)
+
+        except zipfile.BadZipFile as e:
+            result.failures.append(f"ZIP is invalid/corrupt: {e}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        result.passed = not result.failures
+        result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
+        return result
+
+    # ------------------------------------------------------------------
+    # v5 content validation
+    # ------------------------------------------------------------------
+
+    def _validate_content_v5(
+        self,
+        zf: zipfile.ZipFile,
+        names: list[str],
+        result: ContractResult,
+    ) -> None:
+        name_map: dict[str, str] = {Path(n).name: n for n in names}
+        self._check_git_status_no_modified_source(zf, name_map, result)   # new v5 (replaces v4 staged check)
+        self._check_staged_package_deletions(zf, name_map, result)         # from v4 (unchanged)
+        self._check_git_log_proof(zf, name_map, result)                     # overridden below
+        self._check_final_verdict(zf, name_map, result)                     # overridden below
+        self._check_test_summary(zf, name_map, result)                      # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result)            # from v2 (unchanged)
+        self._check_source_state_sprint32_clean(zf, name_map, result)       # new v5
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3 (unchanged)
+        self._check_pr_package_count_consistency(zf, name_map, result)      # from v4 (unchanged)
+
+    def _check_git_status_no_modified_source(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v5: git-status-final.txt must have NO modified src/tests/pipeline/.gitignore.
+
+        This closes the Sprint 31 V4 weakness: V4 only checked for STAGED source files
+        (first-column modification). V5 rejects any modification — staged or unstaged.
+        """
+        content = self._read_text(zf, name_map, "git-status-final.txt")
+        if content is None:
+            return
+        match = _MODIFIED_SOURCE_PATTERN_V5.search(content)
+        if match:
+            result.failures.append(
+                f"v5: git-status-final.txt contains modified source/test/config file: "
+                f"'{match.group(0).strip()}'. "
+                "Complete verdicts require all src/, tests/, pipeline/, and .gitignore "
+                "changes to be committed before bundle creation. "
+                "(Sprint 31 V4 weakness: V4 only blocked STAGED changes; "
+                "V5 blocks any modification.)"
+            )
+
+    def _check_git_log_proof(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v5 requires Sprint 31 HEAD commit 0f44886 in git-log-proof.txt."""
+        content = self._read_text(zf, name_map, "git-log-proof.txt")
+        if content is None:
+            return
+        if not content.strip():
+            result.failures.append("v5: git-log-proof.txt is empty — no commits recorded.")
+            return
+        if _SPRINT31_HEAD_COMMIT not in content:
+            result.failures.append(
+                f"v5: git-log-proof.txt does not contain Sprint 31 HEAD commit "
+                f"{_SPRINT31_HEAD_COMMIT}. "
+                "Sprint 31 must be committed before Sprint 32 bundle is created."
+            )
+
+    def _check_final_verdict(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """Override: v5 uses Sprint 32 allowed verdicts."""
+        content = self._read_text(zf, name_map, "final-verdict.md")
+        if content is None:
+            return
+        if "IN_PROGRESS" in content.upper():
+            result.failures.append(
+                "v5: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
+            )
+            return
+        if not any(v in content for v in ALLOWED_VERDICTS_V5):
+            result.failures.append(
+                f"v5: final-verdict.md does not contain any allowed Sprint 32 verdict. "
+                f"Allowed: {sorted(ALLOWED_VERDICTS_V5)}"
+            )
+
+    def _check_source_state_sprint32_clean(
+        self,
+        zf: zipfile.ZipFile,
+        name_map: dict[str, str],
+        result: ContractResult,
+    ) -> None:
+        """v5: source-state-classification.json must confirm clean sprint 32 start."""
+        content = self._read_text(zf, name_map, "source-state-classification.json")
+        if content is None:
+            return
+        try:
+            data = json.loads(content)
+        except Exception:
+            result.failures.append("v5: source-state-classification.json is not valid JSON.")
+            return
+        state = data.get("sprint32_start_state", "")
+        if state != "CLEAN_FOR_SPRINT_EXECUTION":
+            result.failures.append(
+                f"v5: source-state-classification.json sprint32_start_state is '{state}' — "
+                "must be 'CLEAN_FOR_SPRINT_EXECUTION'."
+            )
+
+
+def contract_definition_v5() -> dict:
+    """Return the v5 bundle contract definition as a serialisable dict."""
+    return {
+        "contract_version": "5.0.0",
+        "sprint": "sprint32+",
+        "description": (
+            "Strict evidence contract v5 for LowCode sprint bundles. "
+            "Closes Sprint 31 V4 weakness: rejects bundles where src/tests/pipeline/.gitignore "
+            "are modified (staged OR unstaged) in git-status-final.txt. "
+            "53 categories (v4 had 49: removes 2 sprint30 entries, adds 6 sprint32 entries). "
+            "Sprint 32 verdicts required."
+        ),
+        "required_categories": {
+            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V5.items()
+        },
+        "min_categories_required": MIN_CATEGORIES_REQUIRED_V5,
+        "content_checks_enabled": True,
+        "content_checks": [
+            "git-status-final.txt: no modified (staged OR unstaged) src/tests/pipeline/.gitignore (V5 new — closes V4 weakness)",
+            "git-status-final.txt: no staged workspace/pr-dry-run/ deletions",
+            f"git-log-proof.txt: must contain Sprint 31 HEAD {_SPRINT31_HEAD_COMMIT}",
+            "final-verdict.md: must contain an allowed Sprint 32 verdict",
+            "test-summary.json: failed==0 and passed>0",
+            "bundle-contract-validation-report.json: passed=true",
+            "source-state-classification.json: sprint32_start_state==CLEAN_FOR_SPRINT_EXECUTION",
+            "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
+            "pdf-pr-package-count-reconciliation.json: total_pr_ready==14",
+        ],
+        "category_count_reconciliation": {
+            "v4_categories": MIN_CATEGORIES_REQUIRED_V4,
+            "v5_categories": MIN_CATEGORIES_REQUIRED_V5,
+            "categories_removed_from_v4": sorted(_REQUIRED_CATEGORIES_V5_REMOVED),
+            "categories_added_in_v5": sorted(_REQUIRED_CATEGORIES_V5_NEW.keys()),
+            "note": "v4 had 49. v5 removes 2 (sprint30 entries) and adds 6 (sprint32 entries) → 53.",
+        },
+        "secret_scanning_enabled": True,
+        "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+        "allowed_verdicts": sorted(ALLOWED_VERDICTS_V5),
+        "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+        "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+    }

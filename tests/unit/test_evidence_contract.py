@@ -23,21 +23,26 @@ from plugin_examples.evidence_contract import (
     ALLOWED_VERDICTS_V2,
     ALLOWED_VERDICTS_V3,
     ALLOWED_VERDICTS_V4,
+    ALLOWED_VERDICTS_V5,
     COMBINED_CATEGORIES_V2,
     COMBINED_CATEGORIES_V3,
     COMBINED_CATEGORIES_V4,
+    COMBINED_CATEGORIES_V5,
     MIN_CATEGORIES_REQUIRED_V2,
     MIN_CATEGORIES_REQUIRED_V3,
     MIN_CATEGORIES_REQUIRED_V4,
+    MIN_CATEGORIES_REQUIRED_V5,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
     StrictEvidenceContractV3,
     StrictEvidenceContractV4,
+    StrictEvidenceContractV5,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
     contract_definition_v4,
+    contract_definition_v5,
 )
 
 
@@ -1162,3 +1167,269 @@ class TestStrictEvidenceContractV4Accepts:
         assert recon["v4_categories"] == 49
         assert "sprint29_commit_proof" in recon["categories_removed_from_v3"]
         assert "security_inventory" in recon["categories_added_in_v4"]
+
+
+# ---------------------------------------------------------------------------
+# Helper for v5 complete bundle
+# ---------------------------------------------------------------------------
+
+def _minimal_v5_complete_files() -> dict[str, str]:
+    """Return files satisfying all 53 v5 required categories with valid content."""
+    files = dict(_minimal_v4_complete_files())
+    # Remove v4 sprint30 keys (replaced in v5)
+    files.pop("sprint30-commit-proof.json", None)
+    files.pop("sprint30-bundle-vs-commit-reconciliation.md", None)
+    # Update taskcard state to sprint32
+    files.pop("taskcard-state-after-sprint31.json", None)
+    files["taskcard-state-after-sprint32.json"] = json.dumps({"sprint": "sprint32"})
+    # v5 new categories
+    files["sprint31-final-state-reconciliation.json"] = json.dumps({
+        "sprint31_head": "0f44886",
+        "source_test_config_modified": False,
+        "verdict": "SPRINT31_FINAL_STATE_CLEAN_SOURCE_COMMITTED",
+    })
+    files["email-target-runtime-verification-report.json"] = json.dumps({
+        "target_repo": "aspose-email-net",
+        "merge_sha": "023ad66970d2",
+        "status": "RUNTIME_VERIFIED",
+    })
+    files["slides-target-runtime-verification-report.json"] = json.dumps({
+        "target_repo": "aspose-slides-net",
+        "merge_sha": "bf05fc43124f",
+        "status": "RUNTIME_VERIFIED",
+    })
+    files["pdf-formimporter-latest-version-retest-report.json"] = json.dumps({
+        "latest_version_tested": "26.5.0",
+        "still_failing": True,
+        "verdict": "DEFECT_CONFIRMED_RETEST_AT_NEXT_VERSION",
+    })
+    files["pdf-release-candidate-publication-packet.json"] = json.dumps({
+        "total_pr_ready": 14,
+        "prs": ["PR3", "PR5", "PR6", "PR7", "PR8", "PR9"],
+    })
+    files["pdf-release-candidate-publication-packet.md"] = (
+        "# PDF Release Candidate Publication Packet\n\n14 examples ready."
+    )
+    # v5 git log must contain 0f44886 (Sprint 31 HEAD)
+    files["git-log-proof.txt"] = (
+        "0f44886 chore(sprint31-bundle): add v4-validated evidence bundle\n"
+        "ef82c3b feat(sprint31): SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED\n"
+        "e379cdf chore(sprint30-bundle): add v3-validated evidence bundle\n"
+    )
+    # v5 final verdict must be a Sprint 32 verdict
+    files["final-verdict.md"] = (
+        "# SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE\n\n"
+        "All packages clean. Release candidate packet complete."
+    )
+    # v5 source-state-classification.json must have sprint32_start_state
+    files["source-state-classification.json"] = json.dumps({
+        "sprint32_start_state": "CLEAN_FOR_SPRINT_EXECUTION",
+        "source_changes_check": {"src_modified": False},
+    })
+    # v5 git-status-final.txt must have NO modified src/tests/pipeline/.gitignore
+    files["git-status-final.txt"] = (
+        " M workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/harness.dll\n"
+        " M workspace/manifests/example-index.json\n"
+        "?? plans/\n"
+    )
+    return files
+
+
+# ---------------------------------------------------------------------------
+# v5 contract rejects invalid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV5Rejects:
+    """v5 contract must reject bundles with modified source/test/config files and missing v5 categories."""
+
+    def test_v5_rejects_unstaged_src_in_git_status(self, tmp_path):
+        """git-status-final.txt with unstaged src/ modification must fail v5 (closes V4 weakness)."""
+        files = _minimal_v5_complete_files()
+        # V4 weakness: unstaged (space M) was not caught by V4
+        files["git-status-final.txt"] = (
+            " M src/plugin_examples/evidence_contract.py\n"
+            "?? plans/\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert any("src/" in f or "modified" in f.lower() for f in result.failures)
+
+    def test_v5_rejects_staged_src_in_git_status(self, tmp_path):
+        """git-status-final.txt with staged src/ modification must also fail v5."""
+        files = _minimal_v5_complete_files()
+        files["git-status-final.txt"] = "M  src/plugin_examples/evidence_contract.py\n"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert any("src/" in f for f in result.failures)
+
+    def test_v5_rejects_modified_gitignore_in_git_status(self, tmp_path):
+        """git-status-final.txt with modified .gitignore must fail v5."""
+        files = _minimal_v5_complete_files()
+        files["git-status-final.txt"] = " M .gitignore\n?? plans/\n"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert any(".gitignore" in f for f in result.failures)
+
+    def test_v5_rejects_modified_tests_in_git_status(self, tmp_path):
+        """git-status-final.txt with modified tests/ file must fail v5."""
+        files = _minimal_v5_complete_files()
+        files["git-status-final.txt"] = " M tests/unit/test_evidence_contract.py\n"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+
+    def test_v5_rejects_sprint31_head_missing_from_log(self, tmp_path):
+        """git-log-proof.txt without Sprint 31 HEAD 0f44886 must fail v5."""
+        files = _minimal_v5_complete_files()
+        files["git-log-proof.txt"] = "e379cdf chore(sprint30): only sprint30 here\n"
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert any("0f44886" in f for f in result.failures)
+
+    def test_v5_rejects_sprint31_verdict_in_final_verdict(self, tmp_path):
+        """final-verdict.md with Sprint 31 verdict (not Sprint 32) must fail v5."""
+        files = _minimal_v5_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert any("Sprint 32" in f for f in result.failures)
+
+    def test_v5_rejects_missing_sprint31_state_reconciliation(self, tmp_path):
+        """Missing sprint31-final-state-reconciliation.json must fail v5."""
+        files = _minimal_v5_complete_files()
+        del files["sprint31-final-state-reconciliation.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert "sprint31_state_reconciliation" in result.categories_missing
+
+    def test_v5_rejects_missing_email_target_runtime_report(self, tmp_path):
+        """Missing email-target-runtime-verification-report.json must fail v5."""
+        files = _minimal_v5_complete_files()
+        del files["email-target-runtime-verification-report.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert "email_target_runtime_report" in result.categories_missing
+
+    def test_v5_rejects_missing_slides_target_runtime_report(self, tmp_path):
+        """Missing slides-target-runtime-verification-report.json must fail v5."""
+        files = _minimal_v5_complete_files()
+        del files["slides-target-runtime-verification-report.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert "slides_target_runtime_report" in result.categories_missing
+
+    def test_v5_rejects_missing_release_candidate_packet(self, tmp_path):
+        """Missing pdf-release-candidate-publication-packet.json must fail v5."""
+        files = _minimal_v5_complete_files()
+        del files["pdf-release-candidate-publication-packet.json"]
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        assert "release_candidate_packet_json" in result.categories_missing
+
+    def test_v5_rejects_sprint31_style_bundle(self, tmp_path):
+        """A Sprint 31 v4-complete bundle must fail v5 (missing sprint32 categories)."""
+        files = _minimal_v4_complete_files()
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert not result.passed
+        missing = set(result.categories_missing)
+        assert "sprint31_state_reconciliation" in missing or "release_candidate_packet_json" in missing
+
+    def test_v5_requires_more_categories_than_v4(self):
+        """v5 must require more categories than v4 (stricter)."""
+        assert MIN_CATEGORIES_REQUIRED_V5 > MIN_CATEGORIES_REQUIRED_V4, (
+            f"v5 ({MIN_CATEGORIES_REQUIRED_V5}) must exceed v4 ({MIN_CATEGORIES_REQUIRED_V4})"
+        )
+
+    def test_v5_min_categories_matches_combined(self):
+        """MIN_CATEGORIES_REQUIRED_V5 must equal len(COMBINED_CATEGORIES_V5)."""
+        assert MIN_CATEGORIES_REQUIRED_V5 == len(COMBINED_CATEGORIES_V5)
+
+    def test_v5_has_exactly_53_categories(self):
+        """v5 must have exactly 53 categories (49 v4 - 2 removed + 6 added)."""
+        assert MIN_CATEGORIES_REQUIRED_V5 == 53, (
+            f"v5 must have 53 categories, got {MIN_CATEGORIES_REQUIRED_V5}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# v5 contract accepts valid bundles
+# ---------------------------------------------------------------------------
+
+class TestStrictEvidenceContractV5Accepts:
+    """v5 contract must accept correctly formed Sprint 32 bundles."""
+
+    def test_v5_accepts_complete_approval_blocked_bundle(self, tmp_path):
+        """A complete Sprint 32 approval-blocked bundle must pass v5."""
+        files = _minimal_v5_complete_files()
+        zip_path = tmp_path / "sprint32-complete.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            for name, content in files.items():
+                zf.writestr(name, content)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert result.passed, f"v5 should pass but failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert result.categories_missing == []
+        assert len(result.categories_found) == MIN_CATEGORIES_REQUIRED_V5
+
+    def test_v5_accepts_clean_binary_artifacts_in_git_status(self, tmp_path):
+        """git-status-final.txt with only binary/workspace artifacts must pass v5 modified-source check."""
+        files = _minimal_v5_complete_files()
+        # Only binary/runtime/manifest artifacts — no src/tests/pipeline/.gitignore
+        files["git-status-final.txt"] = (
+            " M workspace/fixture-validation/pdf-signature-harness/bin/Debug/net8.0/harness.dll\n"
+            " M workspace/manifests/example-index.json\n"
+            " M workspace/verification/latest/release-status.json\n"
+            "?? plans/\n"
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        # Modified-source check should not fail for binary/workspace files
+        source_failures = [f for f in result.failures if "modified source" in f.lower()]
+        assert len(source_failures) == 0
+
+    def test_v5_accepts_published_verdict(self, tmp_path):
+        """A bundle with Sprint 32 published verdict must pass v5."""
+        files = _minimal_v5_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT32_PUBLISHED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE\n\n"
+            "All 6 PRs published."
+        )
+        zip_path = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV5().validate_zip(zip_path)
+        assert result.passed, f"v5 should pass but failed: {result.failures}"
+
+    def test_v5_contract_definition_version(self):
+        """contract_definition_v5 must return version 5.0.0."""
+        defn = contract_definition_v5()
+        assert defn["contract_version"] == "5.0.0"
+
+    def test_v5_contract_definition_has_all_combined_categories(self):
+        """contract_definition_v5 must include all COMBINED_CATEGORIES_V5 keys."""
+        defn = contract_definition_v5()
+        assert set(defn["required_categories"].keys()) == set(COMBINED_CATEGORIES_V5.keys())
+
+    def test_v5_contract_definition_lists_allowed_verdicts(self):
+        """contract_definition_v5 must list all allowed Sprint 32 verdicts."""
+        defn = contract_definition_v5()
+        assert set(defn["allowed_verdicts"]) == set(ALLOWED_VERDICTS_V5)
+
+    def test_v5_contract_definition_documents_category_reconciliation(self):
+        """contract_definition_v5 must document the v4→v5 delta."""
+        defn = contract_definition_v5()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v4_categories"] == 49
+        assert recon["v5_categories"] == 53
+        assert "sprint30_commit_proof" in recon["categories_removed_from_v4"]
+        assert "sprint31_state_reconciliation" in recon["categories_added_in_v5"]

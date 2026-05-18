@@ -25,9 +25,9 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `image-extractor` | `ImageExtractor` | `pdf` | `` | `dotnet run --project examples/pdf/lowcode/image-extractor` |
-| `table-generator` | `TableGenerator.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/table-generator` |
-| `toc-generator` | `TocGenerator.Dispose` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/toc-generator` |
+| `image-extractor` | `ImageExtractor.Process` | `pdf` | `` | `dotnet run --project examples/pdf/lowcode/image-extractor` |
+| `table-generator` | `TableGenerator.Process` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/table-generator` |
+| `toc-generator` | `TocGenerator.Process` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/toc-generator` |
 
 
 
@@ -197,7 +197,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-18 10:01 UTC
+Generated on: 2026-05-18 11:28 UTC
 
 ---
 

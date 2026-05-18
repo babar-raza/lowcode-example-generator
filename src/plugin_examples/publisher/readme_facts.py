@@ -53,6 +53,9 @@ class ExampleFact:
     output_extension_source: str
     proof_source: str  # "program_cs" | "config" | "blocked_unverified"
     validation_status: str  # "verified" | "blocked_unverified"
+    api_method_extracted: str = ""  # e.g. "DiagramConverter.Process"
+    api_method_source: str = ""  # e.g. "program_cs:line48"
+    api_method_validation: str = ""  # "verified" | "blocked_unverified"
 
 
 @dataclass
@@ -83,6 +86,115 @@ def _extract_extension(pattern: re.Pattern, source: str) -> tuple[str, str]:
             ext = m.group(1)
             raw = m.group(0).strip('"').strip("'")
             return ext, f"program_cs:line{i}:{raw}"
+    return "", ""
+
+
+# Patterns for API method extraction from Program.cs
+# Pattern 1: Static call — ClassName.MethodName(
+_STATIC_API_CALL = re.compile(
+    r'(?:await\s+)?'                      # optional await
+    r'(?:Aspose\.\w+\.LowCode\.)?'        # optional full namespace
+    r'([A-Z][A-Za-z]+)\.([A-Z][A-Za-z]+)\(',  # ClassName.MethodName(
+)
+# Pattern 2: Instance call — new ClassName().Process(
+_INSTANCE_API_CALL = re.compile(
+    r'new\s+([A-Z][A-Za-z]+)\(\)\s*\.\s*([A-Z][A-Za-z]+)\(',
+)
+# Pattern 3: Variable call — variable.Process( where variable = new ClassName()
+_VAR_DECL = re.compile(
+    r'(?:var|[A-Z]\w+)\s+(\w+)\s*=\s*new\s+([A-Z][A-Za-z]+)\(\)',
+)
+_VAR_CALL = re.compile(
+    r'(\w+)\.\s*([A-Z][A-Za-z]+)\(',
+)
+
+# Methods to ignore — these are not LowCode API operations
+_IGNORE_METHODS = {
+    "Dispose", "Save", "Add", "Exists", "Delete", "Combine", "GetTempPath",
+    "GetCurrentDirectory", "CreateDirectory", "WriteAllText", "ReadAllBytes",
+    "GetFileName", "WriteLine", "Write", "InsertField", "Writeln",
+    "AddAutoShape", "AddTextFrame", "GetBytes", "AddInput", "AddOutput",
+    "Create", "AddYears", "Rectangle", "Export",
+}
+
+# Classes to ignore — framework/fixture classes, not LowCode
+_IGNORE_CLASSES = {
+    "File", "Path", "Directory", "Console", "Document", "DocumentBuilder",
+    "Presentation", "FileInfo", "Environment", "Encoding", "MemoryStream",
+    "CertificateRequest", "RSA", "TextFragment", "Now",
+    "Aspose", "Int32", "Pdf", "Slides", "Words", "Cells",
+    "SaveFormat", "ShapeType", "GC",
+}
+
+# Classes that are Options, not operations — ignore when they appear as ClassName.Method
+_IGNORE_OPTION_CLASSES = {
+    "HtmlToPdfOptions", "PdfToDocOptions", "PdfToXlsOptions", "JpegOptions",
+    "PngOptions", "TiffOptions", "MergeOptions", "SplitOptions", "OptimizeOptions",
+    "TextExtractorOptions", "ImageExtractorOptions", "TableOptions", "TocOptions",
+    "FormFlattenAllFieldsOptions", "FormRemoveAllFieldsOptions",
+    "FormExporterToJsonOptions", "FormImporterJsonOptions",
+    "EncryptionOptions", "SignOptions", "PdfAConvertOptions",
+    "Options",
+}
+
+
+def _extract_api_method(source: str) -> tuple[str, str]:
+    """Extract the primary LowCode API method call from Program.cs.
+
+    Returns (api_symbol, source_location) e.g. ("DiagramConverter.Process", "program_cs:line48").
+    Returns ("", "") if no recognizable API call is found.
+    """
+    # First pass: build variable→class mapping for indirect calls
+    var_class_map: dict[str, str] = {}
+    for line in source.splitlines():
+        m = _VAR_DECL.search(line)
+        if m:
+            var_name, class_name = m.group(1), m.group(2)
+            if class_name not in _IGNORE_CLASSES:
+                var_class_map[var_name] = class_name
+
+    # Second pass: find actual API calls (prefer non-Dispose, non-framework calls)
+    candidates: list[tuple[str, str, int]] = []  # (class, method, line_num)
+
+    for i, line in enumerate(source.splitlines(), 1):
+        stripped = line.strip()
+        # Skip comments
+        if stripped.startswith("//") or stripped.startswith("*"):
+            continue
+
+        # Check Pattern 2: new ClassName().Method(
+        m = _INSTANCE_API_CALL.search(stripped)
+        if m:
+            cls, method = m.group(1), m.group(2)
+            if (cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES
+                    and method not in _IGNORE_METHODS):
+                candidates.append((cls, method, i))
+                continue
+
+        # Check Pattern 3: variable.Method( — check BEFORE static to catch plugin.Process
+        m = _VAR_CALL.search(stripped)
+        if m:
+            var_name, method = m.group(1), m.group(2)
+            if var_name in var_class_map and method not in _IGNORE_METHODS:
+                candidates.append((var_class_map[var_name], method, i))
+                continue
+
+        # Check Pattern 1: ClassName.Method( or await ClassName.Method(
+        m = _STATIC_API_CALL.search(stripped)
+        if m:
+            cls, method = m.group(1), m.group(2)
+            if (cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES
+                    and method not in _IGNORE_METHODS):
+                candidates.append((cls, method, i))
+                continue
+
+    if not candidates:
+        return "", ""
+
+    # Return the first non-Dispose candidate (there should be exactly one main API call)
+    for cls, method, line_num in candidates:
+        return f"{cls}.{method}", f"program_cs:line{line_num}"
+
     return "", ""
 
 
@@ -173,6 +285,16 @@ def extract_example_readme_facts(
             )
             api_symbol = manifest_reader(manifest_path) or ""
 
+        # Extract API method from source code — takes priority over manifest
+        api_method, api_method_src = _extract_api_method(source)
+        api_method_valid = "verified" if api_method else "blocked_unverified"
+        # Source-extracted API method always overrides manifest (manifest may list .Dispose)
+        if api_method:
+            api_symbol = api_method
+        # Fall back to manifest only if source extraction failed
+        elif not api_symbol and manifest_reader:
+            pass  # api_symbol already set from manifest above
+
         # Validation status
         if input_ext and output_ext:
             validation_status = "verified"
@@ -200,6 +322,9 @@ def extract_example_readme_facts(
             output_extension_source=output_src,
             proof_source=proof_source,
             validation_status=validation_status,
+            api_method_extracted=api_method,
+            api_method_source=api_method_src,
+            api_method_validation=api_method_valid,
         ))
 
     return facts

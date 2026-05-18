@@ -1,16 +1,16 @@
 {
   "render_type": "root_readme_render_result",
-  "render_date": "2026-05-18 10:01 UTC",
+  "render_date": "2026-05-18 11:27 UTC",
   "family": "pdf",
-  "package_path": "workspace\\pr-dry-run\\pdf-controlled-pilot",
-  "readme_path": "workspace\\pr-dry-run\\pdf-controlled-pilot\\README.md",
-  "readme_bytes": 10175,
+  "package_path": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr6",
+  "readme_path": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr6\\README.md",
+  "readme_bytes": 6741,
   "package_version": "26.4.0",
   "examples_count": 3,
   "example_names": [
-    "doc-converter",
-    "html",
-    "xls-converter"
+    "image-extractor",
+    "table-generator",
+    "toc-generator"
   ],
   "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
   "audit_passed": true,

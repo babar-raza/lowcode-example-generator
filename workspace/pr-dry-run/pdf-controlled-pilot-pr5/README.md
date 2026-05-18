@@ -25,9 +25,9 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `jpeg` | `Jpeg` | `pdf` | `jpg` | `dotnet run --project examples/pdf/lowcode/jpeg` |
-| `png` | `Png` | `pdf` | `png` | `dotnet run --project examples/pdf/lowcode/png` |
-| `tiff` | `Tiff` | `pdf` | `tiff` | `dotnet run --project examples/pdf/lowcode/tiff` |
+| `jpeg` | `Jpeg.Process` | `pdf` | `jpg` | `dotnet run --project examples/pdf/lowcode/jpeg` |
+| `png` | `Png.Process` | `pdf` | `png` | `dotnet run --project examples/pdf/lowcode/png` |
+| `tiff` | `Tiff.Process` | `pdf` | `tiff` | `dotnet run --project examples/pdf/lowcode/tiff` |
 
 
 
@@ -171,7 +171,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-18 10:01 UTC
+Generated on: 2026-05-18 11:28 UTC
 
 ---
 

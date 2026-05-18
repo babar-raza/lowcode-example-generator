@@ -210,8 +210,12 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
             break
 
     # --- 6. Catalog symbol noise check ---
+    # Strip fenced code blocks and <details> sections before checking —
+    # source code snippets legitimately contain fully-qualified namespace calls.
+    _prose_content = re.sub(r"```[\s\S]*?```", "", readme_content)
+    _prose_content = re.sub(r"<details>[\s\S]*?</details>", "", _prose_content)
     for pattern in _CATALOG_NOISE_PATTERNS:
-        if re.search(pattern, readme_content):
+        if re.search(pattern, _prose_content):
             result.catalog_symbol_noise_found = True
             failures.append(f"Catalog symbol noise detected (pattern: {pattern!r})")
             break

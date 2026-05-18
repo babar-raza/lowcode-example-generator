@@ -1428,3 +1428,144 @@ class TestExtendedFactsExtraction:
         context = {"package_version": "", "examples": [{"name": "converter"}], "family": "words"}
         result = audit_readme(readme, context)
         assert result.xlsx_cross_family_violation
+
+
+class TestApiMethodExtraction:
+    """Tests for API method extraction from Program.cs source code."""
+
+    def test_static_call_cells(self):
+        """Static Cells API call is extracted correctly."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'HtmlConverter.Process(inputPath, outputPath);'
+        api, src = _extract_api_method(source)
+        assert api == "HtmlConverter.Process"
+
+    def test_instance_call_pdf(self):
+        """Instance PDF API call (new Class().Process) is extracted."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'var result = new Jpeg().Process(options);'
+        api, src = _extract_api_method(source)
+        assert api == "Jpeg.Process"
+
+    def test_variable_call_pdf(self):
+        """Variable-based PDF API call (var x = new C(); x.Process()) is extracted."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = (
+            'var converter = new DocConverter();\n'
+            'var options = new PdfToDocOptions();\n'
+            'options.AddInput(new FileDataSource(inputPath));\n'
+            'var result = converter.Process(options);'
+        )
+        api, src = _extract_api_method(source)
+        assert api == "DocConverter.Process"
+
+    def test_async_call_email(self):
+        """Async Email API call is extracted."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'await Converter.ConvertToHtml(stream, fileName, outputHandler);'
+        api, src = _extract_api_method(source)
+        assert api == "Converter.ConvertToHtml"
+
+    def test_dispose_not_selected(self):
+        """Dispose is ignored — Process is preferred."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = (
+            'var plugin = new Html();\n'
+            'var result = plugin.Process(options);\n'
+            'plugin.Dispose();'
+        )
+        api, src = _extract_api_method(source)
+        assert api == "Html.Process"
+        assert "Dispose" not in api
+
+    def test_pdf_pr3_apis_resolve_to_process(self):
+        """PDF PR#3 html/doc-converter/xls-converter all resolve to .Process, not .Dispose."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+
+        # html example
+        html_src = (
+            'var plugin = new Html();\n'
+            'var options = new HtmlToPdfOptions();\n'
+            'options.AddInput(new FileDataSource(inputPath));\n'
+            'options.AddOutput(new FileDataSource(outputPath));\n'
+            'var result = plugin.Process(options);\n'
+            'plugin.Dispose();'
+        )
+        api, _ = _extract_api_method(html_src)
+        assert api == "Html.Process", f"Expected Html.Process, got {api}"
+
+        # doc-converter example
+        doc_src = (
+            'var converter = new DocConverter();\n'
+            'var options = new PdfToDocOptions();\n'
+            'options.AddInput(new FileDataSource(inputPath));\n'
+            'options.AddOutput(new FileDataSource(outputPath));\n'
+            'var result = converter.Process(options);'
+        )
+        api, _ = _extract_api_method(doc_src)
+        assert api == "DocConverter.Process", f"Expected DocConverter.Process, got {api}"
+
+    def test_slides_convert_resolves_to_topdf(self):
+        """Slides convert resolves to Convert.ToPdf, not AutoByExtension."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'Aspose.Slides.LowCode.Convert.ToPdf(inputPath, outputPath);'
+        api, _ = _extract_api_method(source)
+        assert api == "Convert.ToPdf"
+
+    def test_words_merger_resolves_to_merge(self):
+        """Words merger resolves to Merger.Merge, not Merger.Create."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'Merger.Merge(outputPath, new[] { inputPath1, inputPath2 });'
+        api, _ = _extract_api_method(source)
+        assert api == "Merger.Merge"
+
+    def test_words_mailmerger_resolves_to_execute(self):
+        """Words mail-merger resolves to MailMerger.Execute."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = 'MailMerger.Execute(templatePath, resultPath, fieldNames, fieldValues);'
+        api, _ = _extract_api_method(source)
+        assert api == "MailMerger.Execute"
+
+    def test_unknown_method_returns_empty(self):
+        """Source with no recognizable LowCode call returns empty."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = (
+            'Console.WriteLine("hello");\n'
+            'File.WriteAllText("output.txt", "data");'
+        )
+        api, _ = _extract_api_method(source)
+        assert api == ""
+
+    def test_options_class_not_selected(self):
+        """Options classes (HtmlToPdfOptions, JpegOptions) are not selected as API."""
+        from plugin_examples.publisher.readme_facts import _extract_api_method
+        source = (
+            'var options = new JpegOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.jpg"));\n'
+            'var result = new Jpeg().Process(options);'
+        )
+        api, _ = _extract_api_method(source)
+        assert api == "Jpeg.Process"
+        assert "Options" not in api
+
+    def test_full_facts_include_api_method(self, tmp_path):
+        """extract_example_readme_facts populates api_method_extracted."""
+        from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+
+        ex_dir = tmp_path / "examples" / "pdf" / "lowcode" / "merger"
+        ex_dir.mkdir(parents=True)
+        (ex_dir / "Program.cs").write_text(
+            'using Aspose.Pdf.LowCode;\n'
+            'var options = new MergeOptions();\n'
+            'options.AddInput(new FileDataSource("input.pdf"));\n'
+            'options.AddOutput(new FileDataSource("output.pdf"));\n'
+            'var result = new Merger().Process(options);\n',
+            encoding="utf-8",
+        )
+
+        facts = extract_example_readme_facts("pdf", tmp_path, [{"name": "merger"}])
+        fact = facts.facts[0]
+        assert fact.api_method_extracted == "Merger.Process"
+        assert fact.api_method_validation == "verified"
+        assert fact.api_symbol == "Merger.Process"

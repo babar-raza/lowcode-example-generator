@@ -1,0 +1,8 @@
+{
+  "sprint": "sprint33",
+  "defect_type": "NullReferenceException",
+  "aspose_pdf_version": "26.5.0",
+  "still_present": true,
+  "repro_path": "workspace/defect-repros/pdf-formimporter-nullref/",
+  "verdict": "DEFECT_STILL_PRESENT_IN_26_5_0"
+}

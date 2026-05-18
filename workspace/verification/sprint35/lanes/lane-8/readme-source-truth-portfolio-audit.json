@@ -1,0 +1,18 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "audit_method": "publish-pr --dry-run renders README then audits; dry-run results are authoritative",
+  "packages_audited": {
+    "pdf-controlled-pilot (PR#3)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 10175},
+    "pdf-controlled-pilot-pr5 (PR#5)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 5824},
+    "pdf-controlled-pilot-pr6 (PR#6)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 6733},
+    "pdf-controlled-pilot-pr7 (PR#7)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 5676},
+    "pdf-controlled-pilot-pr8 (PR#8)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 5798},
+    "pdf-controlled-pilot-pr9 (PR#9)": {"readme_rendered": true, "audit_pass": true, "size_bytes": 5621}
+  },
+  "image_extractor_note": "PR#6: image-extractor could not extract output extension — fallback to heuristic. Audit still PASS.",
+  "all_pass": true,
+  "false_claims_found": false,
+  "xlxs_cross_family_violations": false,
+  "verdict": "ALL_PACKAGE_READMES_PASS"
+}

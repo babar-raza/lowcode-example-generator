@@ -1,0 +1,9 @@
+{
+  "family": "pdf",
+  "sprint": "sprint35",
+  "verified_at": "2026-05-18",
+  "merge_sha": "671547a1027c",
+  "examples_in_target_repo": 5,
+  "runtime_verified": true,
+  "verdict": "POST_MERGE_VERIFIED"
+}

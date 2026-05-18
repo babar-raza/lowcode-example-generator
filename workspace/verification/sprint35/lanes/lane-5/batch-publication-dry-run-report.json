@@ -1,0 +1,68 @@
+{
+  "started_at": "2026-05-18T10:01:58.623864+00:00",
+  "finished_at": "2026-05-18T10:02:00.536946+00:00",
+  "family": "pdf",
+  "live_mode": false,
+  "approval_gate_set": false,
+  "total": 6,
+  "succeeded": 6,
+  "failed": 0,
+  "blocked": 0,
+  "verdict": "BATCH_APPROVAL_BLOCKED_DRY_RUN_ONLY",
+  "packages": [
+    {
+      "pr_number": 3,
+      "package_name": "pdf-controlled-pilot",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (10175 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot (exists)\n  Examples: 3\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspose.P"
+    },
+    {
+      "pr_number": 5,
+      "package_name": "pdf-controlled-pilot-pr5",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (5824 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot-pr5 (exists)\n  Examples: 3\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspos"
+    },
+    {
+      "pr_number": 6,
+      "package_name": "pdf-controlled-pilot-pr6",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (6733 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot-pr6 (exists)\n  Examples: 3\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspos"
+    },
+    {
+      "pr_number": 7,
+      "package_name": "pdf-controlled-pilot-pr7",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (5676 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot-pr7 (exists)\n  Examples: 2\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspos"
+    },
+    {
+      "pr_number": 8,
+      "package_name": "pdf-controlled-pilot-pr8",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (5798 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot-pr8 (exists)\n  Examples: 2\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspos"
+    },
+    {
+      "pr_number": 9,
+      "package_name": "pdf-controlled-pilot-pr9",
+      "exit_code": 0,
+      "simulation_passed": true,
+      "live_pr_url": null,
+      "error": null,
+      "stdout_excerpt": "  README.md rendered and audited: PASS (5621 bytes)\npublish-pr simulation: pdf \u2014 SIMULATION_PASSED\n  Package: C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\pdf-controlled-pilot-pr9 (exists)\n  Examples: 1\n  Target: aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (branch: main)\n  Gate verdict: PR_DRY_RUN_READY\n  repo_access_ready: True, pr_permission_ready: True\n  Approval gate: BLOCKED (blocked_live_pr_approval_required)\n  PR title: Add verified Aspos"
+    }
+  ]
+}

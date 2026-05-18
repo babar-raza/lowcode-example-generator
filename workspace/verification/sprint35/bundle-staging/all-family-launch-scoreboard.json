@@ -1,0 +1,92 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "portfolio_totals": {
+    "published_examples": 28,
+    "pr_dry_run_ready": 14,
+    "total_ready_or_published": 42,
+    "pending_approval_examples": 14
+  },
+  "families": [
+    {
+      "family": "cells",
+      "namespace": "Aspose.Cells.LowCode",
+      "status": "FAMILY_COMPLETE",
+      "published": 9,
+      "workflow_roots": 9,
+      "coverage_pct": 100.0,
+      "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "merge_sha": "6222d610293d1c94ed1a26117922b60187be61d7",
+      "post_merge_verified": true
+    },
+    {
+      "family": "words",
+      "namespace": "Aspose.Words.LowCode",
+      "status": "PILOT_COMPLETE",
+      "published": 8,
+      "workflow_roots": 9,
+      "pilot_scope": 8,
+      "coverage_pct_pilot": 100.0,
+      "coverage_pct_wrt": 88.9,
+      "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "merge_sha": "c22788ebda05",
+      "post_merge_verified": true,
+      "permanently_blocked": ["Processor"]
+    },
+    {
+      "family": "pdf",
+      "namespace": "Aspose.Pdf.LowCode",
+      "status": "PARTIAL_CANARY",
+      "published": 5,
+      "pr_dry_run_ready": 14,
+      "workflow_roots": 22,
+      "pilot_scope": 19,
+      "coverage_pct_pilot": 26.3,
+      "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "merge_sha": "671547a1027c",
+      "post_merge_verified": true,
+      "pending_packages": ["PR#3","PR#5","PR#6","PR#7","PR#8","PR#9"],
+      "permanently_blocked": ["Timestamp", "Ofd"],
+      "deferred": ["FormImporter (library bug 26.5.0)"]
+    },
+    {
+      "family": "diagram",
+      "namespace": "Aspose.Diagram.LowCode",
+      "status": "PILOT_COMPLETE",
+      "published": 2,
+      "workflow_roots": 2,
+      "coverage_pct": 100.0,
+      "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "post_merge_verified": true
+    },
+    {
+      "family": "email",
+      "namespace": "Aspose.Email.LowCode",
+      "status": "PILOT_COMPLETE",
+      "published": 1,
+      "workflow_roots": 1,
+      "coverage_pct": 100.0,
+      "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "merge_sha": "023ad66970d2",
+      "runtime_verified_sprint32": true
+    },
+    {
+      "family": "slides",
+      "namespace": "Aspose.Slides.LowCode",
+      "status": "PILOT_COMPLETE",
+      "published": 3,
+      "workflow_roots": 3,
+      "coverage_pct": 100.0,
+      "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "merge_sha": "bf05fc43124f",
+      "runtime_verified_sprint32": true
+    }
+  ],
+  "blocked_families": [
+    {"family": "ocr", "blocker": "Aspose.AI.LLM private assembly not on NuGet"},
+    {"family": "psd", "blocker": "Aspose.JavaAttributes private assembly not on NuGet"}
+  ],
+  "no_lowcode_families": ["barcode","cad","drawing","finance","font","gis","imaging","note","page","tasks","tex","threed","zip","html","svg","omr"],
+  "verdict": "PORTFOLIO_RELEASE_CANDIDATE_APPROVAL_BLOCKED"
+}

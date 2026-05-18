@@ -1,0 +1,57 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "work_items": {
+    "per_type_constraint_registry": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint14/sprint20",
+      "evidence": "per_type_constraints in family YAMLs → packet_builder.py → constraint injection",
+      "all_families_configured": true
+    },
+    "generalized_semantic_validation": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint14",
+      "evidence": "_validate_code_from_constraints() at code_generator.py — generic family-agnostic",
+      "all_families_active": true
+    },
+    "completeness_gate": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint18",
+      "evidence": "completeness_gate.py integrated in runner.py",
+      "all_families_covered": true
+    },
+    "enum_blocked_scenario_handling": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint18",
+      "evidence": "planner.py lines 139-146: blocked_enum_not_runnable appended to blocked_scenarios",
+      "all_families_covered": true
+    },
+    "all_family_release_status": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint18",
+      "evidence": "ALL_RELEASE_FAMILIES = ['cells','words','pdf','diagram','email','slides'] in release_status.py",
+      "all_6_families_included": true
+    },
+    "batch_publisher": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint34",
+      "evidence": "src/plugin_examples/publisher/batch_publisher.py — 5 tests passing",
+      "cli_available": true
+    },
+    "post_publication_verifier": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint34",
+      "evidence": "src/plugin_examples/publisher/post_publication_verifier.py — 5 tests passing",
+      "cli_available": true
+    },
+    "portfolio_dashboard": {
+      "status": "COMPLETE",
+      "implemented_sprint": "sprint34",
+      "evidence": "src/plugin_examples/publisher/portfolio_dashboard.py — 7 tests passing",
+      "cli_available": true
+    }
+  },
+  "all_items_complete": true,
+  "no_new_backlog_this_sprint": true,
+  "verdict": "ALL_SYSTEM_BACKLOG_ITEMS_COMPLETE"
+}

@@ -1,0 +1,7 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "merge_performed": false,
+  "reason": "No live PRs created (publication blocked). Merge approval also not set.",
+  "verdict": "MERGE_NOT_PERFORMED_APPROVAL_BLOCKED"
+}

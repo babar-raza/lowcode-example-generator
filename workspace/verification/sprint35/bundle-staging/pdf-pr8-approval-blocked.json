@@ -1,0 +1,12 @@
+{
+  "sprint": "sprint35",
+  "pr_number": 8,
+  "examples": [
+    "form-editor",
+    "form-exporter"
+  ],
+  "dry_run_result": "SIMULATION_PASSED",
+  "live_publish": "NOT_PERFORMED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+  "verdict": "APPROVAL_BLOCKED"
+}

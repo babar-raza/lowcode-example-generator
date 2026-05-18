@@ -1,0 +1,2 @@
+ M src/plugin_examples/publisher/readme_facts.py
+ M workspace/verification/latest/release-status.json

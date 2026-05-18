@@ -1,0 +1,23 @@
+{
+  "family": "slides",
+  "sprint": "sprint35",
+  "verified_at": "2026-05-18",
+  "status": "PILOT_COMPLETE",
+  "namespace": "Aspose.Slides.LowCode",
+  "package_version": "26.5.0",
+  "denominator_basis": "PILOT_ALLOWED",
+  "total_types": 5,
+  "workflow_roots": 3,
+  "non_runnable": 2,
+  "published": 3,
+  "pr_ready": 0,
+  "blocked": 0,
+  "coverage_pct": 100.0,
+  "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+  "last_merge_sha": "bf05fc43124f",
+  "post_merge_status": "NOT_RUN",
+  "post_merge_note": "Merge SHA recorded. Post-merge validation not run this sprint (no test env for slides target repo).",
+  "readme_integrity": "NOT_VERIFIED_THIS_SPRINT",
+  "verdict": "PILOT_COMPLETE_POST_MERGE_VALIDATION_PENDING",
+  "notes": "3/3 workflow roots published (Compress, Convert, Merger). Collect and ForEach are non-runnable utility helpers. XML docs missing (DLL name mismatch workaround in place)."
+}

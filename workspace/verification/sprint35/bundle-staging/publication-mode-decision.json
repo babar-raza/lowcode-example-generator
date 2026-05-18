@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint35",
+  "captured_at": "2026-05-18",
+  "approval_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_required_value": "APPROVE_LIVE_PR",
+  "approval_set": false,
+  "live_publish_allowed": false,
+  "verdict": "APPROVAL_BLOCKED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is not set. Publication requires explicit operator approval.",
+  "pending_packages": ["pdf-controlled-pilot (PR#3)", "pdf-controlled-pilot-pr5 (PR#5)", "pdf-controlled-pilot-pr6 (PR#6)", "pdf-controlled-pilot-pr7 (PR#7)", "pdf-controlled-pilot-pr8 (PR#8)", "pdf-controlled-pilot-pr9 (PR#9)"],
+  "pending_examples_count": 14,
+  "action_to_unblock": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR and GITHUB_TOKEN to classic PAT, then run: python -m plugin_examples publish-pr-batch --family pdf --publish --approval-token APPROVE_LIVE_PR"
+}

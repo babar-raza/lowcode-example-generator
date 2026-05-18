@@ -1,0 +1,13 @@
+{
+  "sprint": "sprint35",
+  "pr_number": 5,
+  "examples": [
+    "jpeg",
+    "tiff",
+    "png"
+  ],
+  "dry_run_result": "SIMULATION_PASSED",
+  "live_publish": "NOT_PERFORMED",
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+  "verdict": "APPROVAL_BLOCKED"
+}

@@ -1,0 +1,41 @@
+{
+  "families": {
+    "cells": {
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples"
+    },
+    "words": {
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples"
+    },
+    "pdf": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples"
+    },
+    "diagram": {
+      "owner": "aspose-diagram-net",
+      "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples"
+    },
+    "email": {
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples"
+    },
+    "slides": {
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "full_url": "https://github.com/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"
+    }
+  },
+  "verified_at": "2026-05-18"
+}

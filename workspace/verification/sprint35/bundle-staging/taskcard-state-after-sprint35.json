@@ -1,0 +1,42 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "open_taskcards": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "title": "Publish 14 pending PDF examples",
+      "priority": 1,
+      "blocker": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "packages": ["PR#3","PR#5","PR#6","PR#7","PR#8","PR#9"],
+      "examples_count": 14,
+      "action": "Set APPROVE_LIVE_PR + GITHUB_TOKEN (classic PAT)"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter when Aspose.PDF > 26.5.0",
+      "priority": 2,
+      "blocker": "Aspose.PDF 26.5.0 still latest",
+      "action": "python -m plugin_examples formimporter-watch --run-repro"
+    },
+    {
+      "id": "TC-OCR-01",
+      "title": "OCR LowCode discovery — retry when Aspose.AI.LLM available",
+      "priority": 3,
+      "blocker": "Aspose.AI.LLM private assembly not on NuGet"
+    },
+    {
+      "id": "TC-PSD-01",
+      "title": "PSD LowCode discovery — escalate Aspose.JavaAttributes dep",
+      "priority": 3,
+      "blocker": "Aspose.JavaAttributes not on NuGet"
+    },
+    {
+      "id": "TC-WORDS-PROCESSOR",
+      "title": "Words Processor API investigation (ProcessorContext factory)",
+      "priority": 4,
+      "blocker": "No public constructor, all methods instance-only — PERMANENTLY_BLOCKED until package update"
+    }
+  ],
+  "open_count": 5,
+  "critical_path_blocker": "TC-PUBLICATION-01"
+}

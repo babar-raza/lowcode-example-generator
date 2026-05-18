@@ -1,0 +1,29 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "verdict": "PORTFOLIO_RELEASE_CANDIDATE_APPROVAL_BLOCKED",
+  "total_published": 28,
+  "total_pending": 14,
+  "total_after_approval": 42,
+  "approval_gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+  "publish_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr-batch --family pdf --publish --approval-token APPROVE_LIVE_PR",
+  "merge_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples merge-pr --family pdf --approval-token APPROVE_MERGE_PR",
+  "verify_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples post-publication-verify --family pdf",
+  "token_setup": "$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable('GH_TOKEN', 'User')",
+  "packages": [
+    {"pr": 3, "package": "pdf-controlled-pilot", "examples": 3, "ready": true},
+    {"pr": 5, "package": "pdf-controlled-pilot-pr5", "examples": 3, "ready": true},
+    {"pr": 6, "package": "pdf-controlled-pilot-pr6", "examples": 3, "ready": true},
+    {"pr": 7, "package": "pdf-controlled-pilot-pr7", "examples": 2, "ready": true, "security_present": true},
+    {"pr": 8, "package": "pdf-controlled-pilot-pr8", "examples": 2, "ready": true},
+    {"pr": 9, "package": "pdf-controlled-pilot-pr9", "examples": 1, "ready": true}
+  ],
+  "remaining_blockers": [
+    "FormImporter: WAVE_H_DEFERRED — Aspose.PDF 26.5.0 NullReferenceException",
+    "Timestamp: PERMANENTLY_BLOCKED",
+    "Ofd: PERMANENTLY_BLOCKED",
+    "Words Processor: PERMANENTLY_BLOCKED",
+    "OCR: BLOCKED (Aspose.AI.LLM not on NuGet)",
+    "PSD: BLOCKED (Aspose.JavaAttributes not on NuGet)"
+  ]
+}

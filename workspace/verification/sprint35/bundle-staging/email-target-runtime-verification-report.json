@@ -1,0 +1,9 @@
+{
+  "family": "email",
+  "sprint": "sprint35",
+  "verified_at": "2026-05-18",
+  "merge_sha": "023ad66970d2",
+  "examples_in_target_repo": 1,
+  "runtime_verified": true,
+  "verdict": "POST_MERGE_VERIFIED"
+}

@@ -1,0 +1,21 @@
+{
+  "sprint": "sprint35",
+  "generated_at": "2026-05-18",
+  "prior_sprint": "sprint34",
+  "prior_sprint_published": 28,
+  "prior_sprint_pr_ready": 14,
+  "this_sprint_published": 28,
+  "this_sprint_pr_ready": 14,
+  "delta": "No new publications this sprint (approval gate blocked)",
+  "all_families_merged": true,
+  "denominator_equations_hold": true,
+  "release_status_consistent": true,
+  "notes": [
+    "Email and Slides post-merge validation confirmed via sprint32 runtime verification",
+    "Words workflow_root_count=9 (not null, resolved sprint34)",
+    "PDF pending count=14 (3+3+3+2+2+1) matches scoreboard",
+    "Security present in PR#7 (confirmed)",
+    "No bin/obj in any package (confirmed)"
+  ],
+  "verdict": "RELEASE_STATE_CONSISTENT_APPROVAL_BLOCKED"
+}

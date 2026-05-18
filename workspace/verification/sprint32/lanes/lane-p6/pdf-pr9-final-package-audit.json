@@ -1,0 +1,18 @@
+{
+  "lane": "lane-p6",
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "package": "pdf-controlled-pilot-pr9",
+  "pr_label": "PR9",
+  "aspose_pdf_version": "26.5.0",
+  "examples": [
+    "signature"
+  ],
+  "example_count": 1,
+  "total_files": 9,
+  "bin_obj_files": 0,
+  "blocking_flags": 0,
+  "dry_run_result": "SIMULATION_PASSED",
+  "publication_status": "PUBLISH_AS_IS",
+  "verdict": "STATIC_AUDIT_PASS"
+}

@@ -1,0 +1,43 @@
+{
+  "lane": "lane-test",
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "passed": 1723,
+  "failed": 0,
+  "errors": 0,
+  "total": 1723,
+  "test_run": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ --tb=short -q",
+    "total_tests": 1723,
+    "passed": 1723,
+    "failed": 0,
+    "errors": 0,
+    "duration_seconds": 41.13,
+    "result": "ALL_PASS"
+  },
+  "evidence_contract_targeted_run": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_contract.py -v --tb=short",
+    "total_tests": 107,
+    "passed": 107,
+    "failed": 0,
+    "result": "ALL_PASS",
+    "breakdown": {
+      "v1_tests": 26,
+      "v2_tests": 20,
+      "v3_tests": 20,
+      "v4_tests": 20,
+      "v5_tests": 21,
+      "total": 107
+    }
+  },
+  "test_count_progression": {
+    "sprint28": 1642,
+    "sprint29": 1662,
+    "sprint30": 1682,
+    "sprint31": 1702,
+    "sprint32": 1723,
+    "delta_sprint32": 21,
+    "delta_source": "21 new V5 evidence contract tests"
+  },
+  "verdict": "ALL_1723_TESTS_PASS"
+}

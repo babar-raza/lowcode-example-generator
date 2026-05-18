@@ -1,0 +1,20 @@
+{
+  "lane": "lane-p0",
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "approval_env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_value": "NOT_SET",
+  "approval_required": "APPROVE_LIVE_PR",
+  "approved": false,
+  "mode": "APPROVAL_BLOCKED",
+  "gh_token_source": "Windows user environment GH_TOKEN",
+  "gh_token_type": "classic_PAT",
+  "gh_token_prefix": "ghp_",
+  "gh_token_length": 40,
+  "gh_token_valid": true,
+  "pre_publication_blockers": "NONE",
+  "security_reconciled": true,
+  "pr_count_reconciled": true,
+  "all_packages_clean": true,
+  "verdict": "APPROVAL_BLOCKED — set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to publish all 6 packages"
+}

@@ -1,0 +1,140 @@
+{
+  "lane": "lane-h",
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "title": "Taskcard Authority State After Sprint 32",
+  "open_taskcards": [
+    {
+      "id": "TC-PUBLICATION-01",
+      "title": "Publish 14 PDF examples — 6 PR packages",
+      "family": "pdf",
+      "priority": 1,
+      "status": "OPEN",
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "action": "Set approval env var, run publish-pr commands from lane-f2 packet",
+      "sprint_eligible": "sprint32 or next"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "title": "Retest FormImporter against Aspose.PDF > 26.5.0",
+      "family": "pdf",
+      "priority": 2,
+      "status": "OPEN_WAITING",
+      "gate": "Aspose.PDF > 26.5.0 must be published to NuGet",
+      "current_latest": "26.5.0",
+      "defect_repro": "workspace/defect-repros/pdf-formimporter-nullref/",
+      "action": "Poll NuGet; when new version found, run FormImporter through full pipeline"
+    },
+    {
+      "id": "TC-WORDS-01",
+      "title": "Complete Words full SOT type classification",
+      "family": "words",
+      "priority": 3,
+      "status": "OPEN",
+      "gate": "none",
+      "description": "words.json has workflow_root_count: null. Need to classify all 25 types and update denominator.",
+      "action": "Run full-SOT classification for all 25 Aspose.Words.LowCode types; update words.json"
+    },
+    {
+      "id": "TC-SYS-01",
+      "title": "Implement per-type constraint registry (config-driven packet_builder)",
+      "family": "all",
+      "priority": 4,
+      "status": "OPEN",
+      "description": "Gap 1 from all-family plan: constraints hardcoded in packet_builder.py. Need per_type_constraints in family YAMLs.",
+      "action": "Add per_type_constraints to all 6 family YAMLs; update packet_builder.py to read them"
+    },
+    {
+      "id": "TC-SYS-02",
+      "title": "Generalize semantic validation to all families",
+      "family": "all",
+      "priority": 5,
+      "status": "OPEN",
+      "description": "code_generator.py _validate_code() only fires for PDF. Must be config-driven for all families.",
+      "action": "Extract _validate_code_from_constraints(); apply to all families with per_type_constraints"
+    },
+    {
+      "id": "TC-SYS-03",
+      "title": "Implement completeness gate",
+      "family": "all",
+      "priority": 6,
+      "status": "OPEN",
+      "description": "No automated check that ready + blocked == all types. Denominator equation must be enforced.",
+      "action": "Create completeness_gate.py; integrate into runner.py"
+    },
+    {
+      "id": "TC-SYS-04",
+      "title": "Fix ENUM silent-skip in planner.py",
+      "family": "all",
+      "priority": 7,
+      "status": "OPEN",
+      "description": "planner.py line 149: ENUM types silently skipped, not added to blocked_scenarios.",
+      "action": "Change continue to append blocked_scenario with reason blocked_enum_not_runnable"
+    },
+    {
+      "id": "TC-SYS-05",
+      "title": "Extend release_status.py to all families",
+      "family": "all",
+      "priority": 8,
+      "status": "OPEN",
+      "description": "release_status.py currently only aggregates Cells+Words. PDF/Diagram/Email/Slides absent.",
+      "action": "Make family-driven; read all denominators and evidence"
+    },
+    {
+      "id": "TC-WORDS-02",
+      "title": "Pair fixture strategy for Words Comparer+Merger re-verification",
+      "family": "words",
+      "priority": 9,
+      "status": "OPEN",
+      "description": "Comparer and Merger published but may need fixture review for full coverage confirmation."
+    },
+    {
+      "id": "TC-PDF-01",
+      "title": "Post-merge verification of PR#3-9 after publication",
+      "family": "pdf",
+      "priority": 10,
+      "status": "OPEN_WAITING",
+      "gate": "TC-PUBLICATION-01 must complete first",
+      "action": "After PR#3-9 are merged, run post-merge verification harness for all 14 examples"
+    }
+  ],
+  "closed_taskcards_this_sprint": [
+    {
+      "id": "TC-EVIDENCE-V5",
+      "title": "Implement StrictEvidenceContractV5",
+      "status": "CLOSED_VERIFIED",
+      "sprint_closed": "sprint32",
+      "outcome": "V5 implemented: 53 categories, unstaged-source detection, 21 new tests, 1723/1723 suite pass"
+    },
+    {
+      "id": "TC-EMAIL-RUNTIME-VERIFY",
+      "title": "Email target repo runtime verification (sprint32)",
+      "status": "CLOSED_VERIFIED",
+      "sprint_closed": "sprint32",
+      "outcome": "EMAIL_RUNTIME_PASS: build+run PASS, output HTML 2002 bytes, merge SHA confirmed"
+    },
+    {
+      "id": "TC-SLIDES-RUNTIME-VERIFY",
+      "title": "Slides target repo runtime verification (sprint32)",
+      "status": "CLOSED_VERIFIED",
+      "sprint_closed": "sprint32",
+      "outcome": "SLIDES_RUNTIME_PASS: all 3 examples (compress/convert/merger) build+run PASS"
+    }
+  ],
+  "permanently_closed_never_reopen": [
+    {
+      "id": "TC-PDF-TIMESTAMP",
+      "reason": "PERMANENTLY_BLOCKED — requires external TSA RFC 3161; no programmatic workaround"
+    },
+    {
+      "id": "TC-PDF-OFD",
+      "reason": "PERMANENTLY_BLOCKED — OFD direction is output-only in .NET; no programmatic OFD creation"
+    }
+  ],
+  "taskcard_counts": {
+    "open": 10,
+    "closed_this_sprint": 3,
+    "permanently_blocked": 2
+  },
+  "verdict": "TASKCARD_STATE_CURRENT"
+}

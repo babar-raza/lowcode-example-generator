@@ -1,0 +1,45 @@
+{
+  "lane": "lane-a",
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "subject": "StrictEvidenceContractV5 implementation and validation",
+  "contract_version": "5.0.0",
+  "categories_v4": 49,
+  "categories_v5": 53,
+  "categories_removed_from_v4": ["sprint30_commit_proof", "sprint30_reconciliation"],
+  "categories_added_in_v5": [
+    "sprint31_state_reconciliation",
+    "email_target_runtime_report",
+    "slides_target_runtime_report",
+    "formimporter_version_retest",
+    "release_candidate_packet_json",
+    "release_candidate_packet_md"
+  ],
+  "delta": "+6 added, -2 removed = +4 net",
+  "v4_weakness_closed": {
+    "description": "V4 only checked for STAGED source/test/config modifications (first-column AMDRC in git status). Unstaged modifications ( M src/foo.py) passed V4 validation. This allowed Sprint 31 to include modified evidence_contract.py and test files in git-status-final.txt.",
+    "v5_fix": "_MODIFIED_SOURCE_PATTERN_V5 matches ^.. \\s+(src/|tests/|pipeline/|\\.gitignore) — catches BOTH staged (M  src/...) and unstaged ( M src/...) modifications",
+    "pattern": "^..\\s+(src/|tests/|pipeline/|\\.gitignore)"
+  },
+  "content_checks": 9,
+  "content_checks_list": [
+    "git-status-final.txt: no modified (staged OR unstaged) src/tests/pipeline/.gitignore (NEW — closes V4 weakness)",
+    "git-status-final.txt: no staged workspace/pr-dry-run/ deletions",
+    "git-log-proof.txt: must contain Sprint 31 HEAD 0f44886",
+    "final-verdict.md: must contain an allowed Sprint 32 verdict",
+    "test-summary.json: failed==0 and passed>0",
+    "bundle-contract-validation-report.json: passed=true",
+    "source-state-classification.json: sprint32_start_state==CLEAN_FOR_SPRINT_EXECUTION",
+    "all-pr-packages-audit-post-cleanup.json: packages_with_blocking_flags==0",
+    "pdf-pr-package-count-reconciliation.json: total_pr_ready==14"
+  ],
+  "allowed_verdicts": [
+    "SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+    "SPRINT32_BLOCKED_EVIDENCE_CONTRACT_V5_FAILED",
+    "SPRINT32_BLOCKED_SOURCE_STATE",
+    "SPRINT32_PARTIAL_PUBLICATION_RELEASE_CANDIDATE_COMPLETE",
+    "SPRINT32_PUBLISHED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+    "SPRINT32_REJECTED_UNSAFE_TO_PUBLISH"
+  ],
+  "verdict": "EVIDENCE_CONTRACT_V5_IMPLEMENTED"
+}

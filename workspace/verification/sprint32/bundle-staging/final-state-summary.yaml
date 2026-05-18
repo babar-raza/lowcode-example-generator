@@ -1,0 +1,28 @@
+sprint: sprint32
+date: "2026-05-18"
+verdict: SPRINT32_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V5_COMPLETE
+head_commit: 7d54ee2
+head_commit_message: "feat(sprint32-evidence-contract-v5): implement StrictEvidenceContractV5 closing V4 unstaged-source weakness"
+previous_sprint_head: 0f44886
+tests_total: 1723
+tests_passed: 1723
+tests_failed: 0
+evidence_contract_version: "5.0.0"
+evidence_contract_categories: 53
+publication_status: APPROVAL_BLOCKED
+pdf_pr_packages_ready: 6
+pdf_examples_pr_ready: 14
+pdf_examples_published: 5
+total_examples_published: 28
+total_examples_after_pdf_publish: 42
+families_complete:
+  - cells (9/9)
+  - words (8/8 pilot)
+  - diagram (2/2)
+  - email (1/1)
+  - slides (3/3)
+families_partial_canary:
+  - pdf (5/19 published, 14 PR_READY)
+v4_weakness_closed: true
+v4_weakness_description: "V5 now detects unstaged src/tests/pipeline/.gitignore modifications (^..\s+ pattern)"
+source_clean_at_bundle_build: true

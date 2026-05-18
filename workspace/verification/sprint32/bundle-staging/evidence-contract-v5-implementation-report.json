@@ -1,0 +1,26 @@
+{
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "contract_version": "5.0.0",
+  "categories_v4": 49,
+  "categories_v5": 53,
+  "categories_added": 6,
+  "categories_removed": 2,
+  "v4_weakness_closed": true,
+  "v4_weakness_description": "V4 _STAGED_SOURCE_PATTERN matched ^[AMDRC][AMDRC?! ]\s+(src/|tests/|pipeline/) — only first-column AMDRC (staged). Unstaged ' M src/...' (space-M) bypassed the check.",
+  "v5_fix": "New _MODIFIED_SOURCE_PATTERN_V5 = re.compile(r'^..\s+(src/|tests/|pipeline/|\.gitignore)', re.MULTILINE) — ^.. matches any two-character status prefix including ' M' (unstaged).",
+  "new_categories": [
+    "sprint31_state_reconciliation",
+    "email_target_runtime_report",
+    "slides_target_runtime_report",
+    "formimporter_version_retest",
+    "release_candidate_packet_json",
+    "release_candidate_packet_md"
+  ],
+  "removed_categories": ["sprint30_commit_proof", "sprint30_reconciliation"],
+  "content_checks": 9,
+  "tests_added": 21,
+  "tests_total_evidence_contract": 107,
+  "tests_total_suite": 1723,
+  "verdict": "V5_IMPLEMENTATION_COMPLETE"
+}

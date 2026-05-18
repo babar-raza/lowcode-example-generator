@@ -1,0 +1,14 @@
+{
+  "sprint": "sprint32",
+  "date": "2026-05-18",
+  "contract_version": "5.0.0",
+  "categories_required": 53,
+  "categories_found": 53,
+  "categories_missing": [],
+  "content_checks_passed": 9,
+  "passed": true,
+  "bundle_file": "sprint32-lowcode-release-candidate-publication-postmerge-and-contract-v5-20260518-133634.zip",
+  "bundle_files": 66,
+  "bundle_bytes": 58215,
+  "verdict": "BUNDLE_CONTRACT_PASSED"
+}

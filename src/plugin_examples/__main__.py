@@ -322,6 +322,10 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write audit evidence to workspace/verification/latest/ (always on)",
     )
+    rrr_parser.add_argument(
+        "--cumulative", action="store_true",
+        help="Use cumulative inventory (all packages + post-merge evidence) instead of single package",
+    )
 
     _add_metrics_flags(rrr_parser)
 
@@ -1530,15 +1534,33 @@ def main() -> int:
             print(f"  Run 'publish-pr --family {family} --dry-run' first to create the package.")
             return 1
 
-        # --- Discover validated examples from package ---
-        examples_root = package_path / "examples" / family / "lowcode"
-        example_dirs = []
-        if examples_root.exists():
-            example_dirs = sorted(
-                [d.name for d in examples_root.iterdir() if d.is_dir()]
+        # --- Cumulative example discovery via readme_inventory ---
+        from plugin_examples.publisher.readme_inventory import (
+            discover_family_inventory as _discover_inv_rr,
+            build_cumulative_examples_meta as _build_cum_meta_rr,
+            build_package_path_map as _build_pkg_map_rr,
+        )
+
+        _cumulative = getattr(args, "cumulative", False)
+        if _cumulative:
+            _inv_entries_rr, _inv_trail_rr = _discover_inv_rr(
+                family=family,
+                repo_root=repo_root,
+                inventory_mode="repo_actual",
             )
+        else:
+            _inv_entries_rr, _inv_trail_rr = _discover_inv_rr(
+                family=family,
+                repo_root=repo_root,
+                inventory_mode="current_package_overlay",
+                current_package_path=package_path,
+            )
+        _examples_meta_rr = _build_cum_meta_rr(_inv_entries_rr)
+        _pkg_path_map_rr = _build_pkg_map_rr(_inv_entries_rr)
+        example_dirs = [e["name"] for e in _examples_meta_rr]
+
         if not example_dirs:
-            print(f"ERROR: No example directories found under {examples_root}")
+            print(f"ERROR: No examples discovered for family '{family}'")
             return 1
 
         # --- Resolve package version ---
@@ -1562,35 +1584,17 @@ def main() -> int:
                 except OSError:
                     pass
 
-        # --- Build example metadata from post-merge evidence ---
-        post_merge_path = verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"
-        output_formats: dict[str, str] = {}
-        if post_merge_path.exists():
-            try:
-                pm_data = _json.loads(post_merge_path.read_text(encoding="utf-8"))
-                for ex in pm_data.get("examples", []):
-                    name = ex.get("name", "")
-                    fmt = ex.get("output_format", "")
-                    if name and fmt:
-                        output_formats[name] = fmt
-            except (OSError, _json.JSONDecodeError):
-                pass
-
-        examples_meta = [
-            {"name": d, "output_format": output_formats.get(d, "")}
-            for d in example_dirs
-        ]
-
         # --- Build context ---
         generation_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
         try:
             ctx = build_readme_context(
                 family=family,
                 family_config=cfg,
-                examples=examples_meta,
+                examples=_examples_meta_rr,
                 package_version=pkg_version,
                 generation_date=generation_date,
                 package_path=package_path,
+                package_path_map=_pkg_path_map_rr if _pkg_path_map_rr else None,
             )
         except ValueError as exc:
             print(f"ERROR: Cannot build README context: {exc}")
@@ -1717,13 +1721,23 @@ def main() -> int:
             print(f"  Run 'render-root-readme --family {family}' first to create the package.")
             return 1
 
-        # --- Discover examples ---
-        examples_root = package_path / "examples" / family / "lowcode"
-        example_dirs: list[str] = []
-        if examples_root.exists():
-            example_dirs = sorted(d.name for d in examples_root.iterdir() if d.is_dir())
+        # --- Cumulative example discovery via readme_inventory ---
+        from plugin_examples.publisher.readme_inventory import (
+            discover_family_inventory as _discover_inv_pr,
+            build_cumulative_examples_meta as _build_cum_meta_pr,
+            build_package_path_map as _build_pkg_map_pr,
+        )
+        _inv_entries_pr, _inv_trail_pr = _discover_inv_pr(
+            family=family,
+            repo_root=repo_root,
+            inventory_mode="repo_actual",
+        )
+        _examples_meta_pr = _build_cum_meta_pr(_inv_entries_pr)
+        _pkg_path_map_pr = _build_pkg_map_pr(_inv_entries_pr)
+        example_dirs = [e["name"] for e in _examples_meta_pr]
+
         if not example_dirs:
-            print(f"ERROR: No example directories found under {examples_root}")
+            print(f"ERROR: No examples discovered for family '{family}'")
             return 1
 
         # --- Resolve package version ---
@@ -1745,28 +1759,16 @@ def main() -> int:
                 except OSError:
                     pass
 
-        # --- Build example metadata ---
-        pm_path = verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"
-        output_formats: dict[str, str] = {}
-        if pm_path.exists():
-            try:
-                _pm = _json.loads(pm_path.read_text(encoding="utf-8"))
-                for _ex in _pm.get("examples", []):
-                    if _ex.get("name") and _ex.get("output_format"):
-                        output_formats[_ex["name"]] = _ex["output_format"]
-            except (OSError, _json.JSONDecodeError):
-                pass
-        examples_meta = [{"name": d, "output_format": output_formats.get(d, "")} for d in example_dirs]
-
         # --- Render README ---
         try:
             ctx = build_readme_context(
                 family=family,
                 family_config=cfg,
-                examples=examples_meta,
+                examples=_examples_meta_pr,
                 package_version=pkg_version,
                 generation_date=generation_date,
                 package_path=package_path,
+                package_path_map=_pkg_path_map_pr if _pkg_path_map_pr else None,
             )
             readme_content = render_readme(ctx)
         except Exception as exc:

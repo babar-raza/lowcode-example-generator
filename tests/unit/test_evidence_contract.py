@@ -25,16 +25,19 @@ from plugin_examples.evidence_contract import (
     ALLOWED_VERDICTS_V4,
     ALLOWED_VERDICTS_V5,
     ALLOWED_VERDICTS_V6,
+    ALLOWED_VERDICTS_V7,
     COMBINED_CATEGORIES_V2,
     COMBINED_CATEGORIES_V3,
     COMBINED_CATEGORIES_V4,
     COMBINED_CATEGORIES_V5,
     COMBINED_CATEGORIES_V6,
+    COMBINED_CATEGORIES_V7,
     MIN_CATEGORIES_REQUIRED_V2,
     MIN_CATEGORIES_REQUIRED_V3,
     MIN_CATEGORIES_REQUIRED_V4,
     MIN_CATEGORIES_REQUIRED_V5,
     MIN_CATEGORIES_REQUIRED_V6,
+    MIN_CATEGORIES_REQUIRED_V7,
     REQUIRED_CATEGORIES,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
@@ -42,6 +45,7 @@ from plugin_examples.evidence_contract import (
     StrictEvidenceContractV4,
     StrictEvidenceContractV5,
     StrictEvidenceContractV6,
+    StrictEvidenceContractV7,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
@@ -1815,3 +1819,126 @@ class TestStrictEvidenceContractV6Accepts:
         assert counts[0] == 53
         assert counts[1] == 67
         assert counts[0] != counts[1]
+
+
+# ---------------------------------------------------------------------------
+# V7 Tests — Sprint 34 README Healing
+# ---------------------------------------------------------------------------
+
+def _minimal_v7_complete_files() -> dict[str, str]:
+    """Return files satisfying all 69 v7 required categories with valid content."""
+    files = dict(_minimal_v6_complete_files())
+    # v7 new categories
+    files["readme-sync-audit.json"] = json.dumps({
+        "audit_type": "readme_sync",
+        "family_audits": [
+            {"family": "pdf", "inventory_count": 17, "readme_count": 17, "is_stale": False}
+        ],
+        "all_families_in_sync": True,
+    })
+    files["readme-coverage-audit-before.json"] = json.dumps({
+        "audit_type": "readme_coverage_audit_before",
+        "family_audits": [
+            {"family": "pdf", "readme_count": 3, "is_stale": True}
+        ],
+    })
+    files["readme-coverage-audit-after.json"] = json.dumps({
+        "audit_type": "readme_coverage_audit_after",
+        "family_audits": [
+            {"family": "pdf", "readme_count": 17, "is_stale": False}
+        ],
+    })
+    # v7 final verdict must be Sprint 34
+    files["final-verdict.md"] = (
+        "# SPRINT34_README_HEALING_COMPLETE\n\n"
+        "All 6 families have cumulative READMEs. PDF healed from 3 to 17 examples."
+    )
+    files["final-state-summary.yaml"] = (
+        "sprint: sprint34\n"
+        "verdict: SPRINT34_README_HEALING_COMPLETE\n"
+    )
+    return files
+
+
+class TestStrictEvidenceContractV7Accepts:
+
+    def test_v7_accepts_complete_readme_healing_bundle(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV7().validate_zip(zp)
+        assert result.passed, f"V7 validation failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert len(result.categories_found) >= 69
+
+    def test_v7_contract_definition_version(self):
+        defn = StrictEvidenceContractV7.contract_definition()
+        assert defn["version"] == "v7"
+
+    def test_v7_contract_definition_has_69_categories(self):
+        defn = StrictEvidenceContractV7.contract_definition()
+        assert defn["min_categories_required"] == 69
+        assert len(defn["required_categories"]) == 69
+
+    def test_v7_contract_lists_readme_categories(self):
+        defn = StrictEvidenceContractV7.contract_definition()
+        cats = defn["required_categories"]
+        assert "readme_sync_audit" in cats
+        assert "readme_coverage_audit" in cats
+
+    def test_v7_category_reconciliation(self):
+        defn = StrictEvidenceContractV7.contract_definition()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v6_categories"] == 67
+        assert recon["v7_categories"] == 69
+        assert "readme_sync_audit" in recon["categories_added_in_v7"]
+        assert "readme_coverage_audit" in recon["categories_added_in_v7"]
+
+    def test_v7_v6_categories_superset(self):
+        """V7 must contain all V6 categories."""
+        for cat in COMBINED_CATEGORIES_V6:
+            assert cat in COMBINED_CATEGORIES_V7, f"V7 missing V6 category: {cat}"
+
+    def test_v7_unique_category_count(self):
+        """Each version has a unique count."""
+        assert MIN_CATEGORIES_REQUIRED_V6 == 67
+        assert MIN_CATEGORIES_REQUIRED_V7 == 69
+        assert MIN_CATEGORIES_REQUIRED_V6 != MIN_CATEGORIES_REQUIRED_V7
+
+
+class TestStrictEvidenceContractV7Rejects:
+
+    def test_v7_rejects_missing_readme_sync(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        del files["readme-sync-audit.json"]
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV7().validate_zip(zp)
+        assert not result.passed
+        assert "readme_sync_audit" in result.categories_missing
+
+    def test_v7_rejects_missing_coverage_audit(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        del files["readme-coverage-audit-before.json"]
+        del files["readme-coverage-audit-after.json"]
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV7().validate_zip(zp)
+        assert not result.passed
+        assert "readme_coverage_audit" in result.categories_missing
+
+    def test_v7_rejects_stale_sync_audit(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        files["readme-sync-audit.json"] = json.dumps({
+            "audit_type": "readme_sync",
+            "all_families_in_sync": False,
+        })
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV7().validate_zip(zp)
+        assert not result.passed
+        assert any("all_families_in_sync" in f for f in result.failures)
+
+    def test_v7_rejects_wrong_verdict(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        files["final-verdict.md"] = "# SPRINT33_SOME_OLD_VERDICT\n\nWrong sprint."
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV7().validate_zip(zp)
+        assert not result.passed
+        assert any("Sprint 34 verdict" in f for f in result.failures)

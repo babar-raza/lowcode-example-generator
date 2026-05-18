@@ -1998,3 +1998,157 @@ def contract_definition_v6() -> dict:
         "failure_verdict": "BUNDLE_CONTRACT_FAILED",
         "pass_verdict": "BUNDLE_CONTRACT_PASSED",
     }
+
+
+# ---------------------------------------------------------------------------
+# V7 — Sprint 34 README Healing Categories
+# ---------------------------------------------------------------------------
+
+_REQUIRED_CATEGORIES_V7_NEW: dict[str, list[str]] = {
+    "readme_sync_audit": ["readme-sync-audit.json", "readme-cumulative-inventory.json"],
+    "readme_coverage_audit": ["readme-coverage-audit-before.json", "readme-coverage-audit-after.json"],
+}
+
+COMBINED_CATEGORIES_V7: dict[str, list[str]] = {
+    **COMBINED_CATEGORIES_V6,
+    **_REQUIRED_CATEGORIES_V7_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V7: int = len(COMBINED_CATEGORIES_V7)
+
+#: Allowed final verdicts for Sprint 34 bundles.
+ALLOWED_VERDICTS_V7: frozenset[str] = frozenset({
+    "SPRINT34_README_HEALING_COMPLETE",
+    "SPRINT34_README_HEALING_BLOCKED_WITH_EVIDENCE",
+    "SPRINT34_PARTIAL_README_HEALING_WITH_EVIDENCE",
+})
+
+
+class StrictEvidenceContractV7(StrictEvidenceContractV6):
+    """
+    v7 of the strict evidence contract (Sprint 34+).
+
+    Extends v6 with:
+    - 69 required categories (67 from v6 + 2 new README categories).
+    - readme-sync-audit.json: per-family inventory audit with is_stale checks.
+    - readme-coverage-audit: before/after coverage audits.
+    - Sprint 34 verdicts required.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v7: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v7 categories (69 total)
+                for category, patterns in COMBINED_CATEGORIES_V7.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of {patterns}"
+                        )
+
+                # categories_expected not tracked in ContractResult — skip
+
+                # --- V7 Content Checks ---
+
+                # 1. readme-sync-audit.json: all_families_in_sync must be true
+                for n in names:
+                    if Path(n).name == "readme-sync-audit.json":
+                        try:
+                            data = json.loads(zf.read(n).decode("utf-8"))
+                            if not data.get("all_families_in_sync", False):
+                                result.failures.append(
+                                    "readme-sync-audit.json: all_families_in_sync is not true"
+                                )
+                            pass  # content check tracked via failures list
+                        except (json.JSONDecodeError, KeyError):
+                            result.failures.append(
+                                "readme-sync-audit.json: cannot parse JSON"
+                            )
+                        break
+
+                # 2. Final verdict check for Sprint 34
+                for n in names:
+                    if Path(n).name == "final-verdict.md":
+                        content = zf.read(n).decode("utf-8", errors="replace")
+                        if not any(v in content for v in ALLOWED_VERDICTS_V7):
+                            result.failures.append(
+                                "final-verdict.md: missing Sprint 34 verdict. "
+                                f"Allowed: {sorted(ALLOWED_VERDICTS_V7)}"
+                            )
+                        pass  # content check tracked via failures list
+                        break
+
+                # Inherit v6 secret scanning
+                for n in names:
+                    try:
+                        raw = zf.read(n).decode("utf-8", errors="replace")
+                    except Exception:
+                        continue
+                    for pat in SECRET_PATTERNS:
+                        if pat.search(raw):
+                            result.failures.append(
+                                f"Secret detected in {n}: pattern '{pat.pattern}'"
+                            )
+
+                # Determine result
+                if not result.failures:
+                    result.passed = True
+                    result.verdict = "BUNDLE_CONTRACT_PASSED"
+                else:
+                    result.verdict = "BUNDLE_CONTRACT_FAILED"
+
+        except zipfile.BadZipFile:
+            result.failures.append(f"Not a valid ZIP file: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+
+        return result
+
+    @staticmethod
+    def contract_definition() -> dict:
+        return {
+            "version": "v7",
+            "description": (
+                "Sprint 34 README Healing evidence contract. "
+                "69 categories (67 from v6 + 2 README). "
+                "Validates README sync audit + coverage audit."
+            ),
+            "required_categories": {
+                cat: patterns for cat, patterns in COMBINED_CATEGORIES_V7.items()
+            },
+            "min_categories_required": MIN_CATEGORIES_REQUIRED_V7,
+            "content_checks": [
+                "readme-sync-audit.json: all_families_in_sync must be true",
+                "final-verdict.md: must contain an allowed Sprint 34 verdict",
+            ],
+            "category_count_reconciliation": {
+                "v6_categories": MIN_CATEGORIES_REQUIRED_V6,
+                "v7_categories": MIN_CATEGORIES_REQUIRED_V7,
+                "categories_added_in_v7": sorted(_REQUIRED_CATEGORIES_V7_NEW.keys()),
+                "note": "v6 had 67. v7 adds 2 (readme_sync_audit, readme_coverage_audit) → 69.",
+            },
+            "secret_scanning_enabled": True,
+            "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+            "allowed_verdicts": sorted(ALLOWED_VERDICTS_V7),
+            "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+            "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+        }

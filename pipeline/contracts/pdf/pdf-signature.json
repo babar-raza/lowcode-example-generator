@@ -1,0 +1,41 @@
+{
+  "scenario_id": "pdf-signature",
+  "family": "pdf",
+  "type_name": "Signature",
+  "full_type_name": "Aspose.Pdf.LowCode.Signature",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Signature",
+    "Signature.Process",
+    "SignOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "using Aspose.Pdf.LowCode.DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var signOptions = new SignOptions(pfxPath, password); signOptions.AddInput(new FileDataSource(...)); signOptions.AddOutput(new FileDataSource(...)); new Signature().Process(signOptions). SUPPORT CODE EXCEPTION: Uses System.Security.Cryptography and X509Certificates to create self-signed PFX certificate fixture — this is deterministic fixture preparation, not the demonstrated LowCode workflow root."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "PR_DRY_RUN_READY_AWAITING_APPROVE_LIVE_PR",
+  "evidence_sources": [
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/Program.cs",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Wave G example. Support code uses .NET System.Security.Cryptography to create a self-signed PFX certificate for digital signing — this is deterministic fixture preparation (no TSA/CA server needed), not the demonstrated LowCode workflow root."
+}

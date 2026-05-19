@@ -1,7 +1,7 @@
 {
   "family": "cells",
   "source_package": "Aspose.Cells",
-  "source_version": "26.4.0",
+  "source_version": "26.5.1",
   "source_package_sha256": "68692b88f4b5c395ea00ad20b5a96a176fc1eb39085e0dffae4ac41e280e6ac6",
   "api_catalog_sha256": "780292cfb9d108e30b04256aa9ca8a189b0cb331597cdd046c5b0e8335342495",
   "api_catalog_source": "workspace/runs/pilot-cells-20260508-133932/catalog/cells/api-catalog.json",
@@ -59,6 +59,6 @@
     "workspace/verification/latest/cells-source-of-truth-proof.json",
     "workspace/verification/latest/families/cells/example-lifecycle-records.json"
   ],
-  "last_verified_at": "2026-05-08T00:00:00Z",
-  "notes": "Cells is the most complete family: all 9 runnable WORKFLOW_ROOT types have been published. 4 PRs merged (Cells PR #1, #2 README, #3 README aspose.net, #4 README API). Non-runnable types are: OPTIONS classes, abstract provider interfaces, SPLIT_PART_INFO result type — none of these are independently executable as a LowCode scenario."
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Cells is the most complete family: all 9 runnable WORKFLOW_ROOT types have been published. 4 PRs merged (Cells PR #1, #2 README, #3 README aspose.net, #4 README API). source_version updated 26.4.0->26.5.1 Sprint 39 (drift pilot PASS Sprint 37, BUILD+RUN verified). Non-runnable types are: OPTIONS classes, abstract provider interfaces, SPLIT_PART_INFO result type — none of these are independently executable as a LowCode scenario."
 }

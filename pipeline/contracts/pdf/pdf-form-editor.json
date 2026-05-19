@@ -1,0 +1,41 @@
+{
+  "scenario_id": "pdf-form-editor",
+  "family": "pdf",
+  "type_name": "FormEditor",
+  "full_type_name": "Aspose.Pdf.LowCode.FormEditor",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "FormEditor",
+    "FormEditor.Process",
+    "FormRemoveAllFieldsOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "using Aspose.Pdf.LowCode.DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var removeOptions = new FormRemoveAllFieldsOptions(); removeOptions.AddInput(new FileDataSource(...)); removeOptions.AddOutput(new FileDataSource(...)); new FormEditor().Process(removeOptions). Support code creates input PDF with AcroForm TextBoxField as fixture."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "PR_DRY_RUN_READY_AWAITING_APPROVE_LIVE_PR",
+  "evidence_sources": [
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-editor/Program.cs",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Wave F example. Support code uses Aspose.Pdf.Forms.TextBoxField to create a form-field fixture — this is input preparation, not the demonstrated LowCode workflow root."
+}

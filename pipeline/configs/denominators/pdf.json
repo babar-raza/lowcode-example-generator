@@ -79,7 +79,7 @@
     "pdf-optimizer"
   ],
   "published_basis": "PR#1 MERGED (Merger+TextExtractor), PR#2 MERGED (PdfAConverter+Splitter), PR#4 MERGED (Optimizer). Confirmed via gh pr view on aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples (Sprint 19, 2026-05-15).",
-  "pr_dry_run_ready_count": 9,
+  "pr_dry_run_ready_count": 14,
   "pr_dry_run_ready_ids": [
     "pdf-doc-converter",
     "pdf-xls-converter",
@@ -89,18 +89,14 @@
     "pdf-png",
     "pdf-table-generator",
     "pdf-toc-generator",
-    "pdf-image-extractor"
-  ],
-  "pr_dry_run_ready_basis": "9 examples with pipeline contracts across PR#5 (doc-converter/html/xls-converter), PR#6 (jpeg/png/tiff), PR#7 (image-extractor/table-generator/toc-generator). All build/runtime/reviewer PASS. Blocked by APPROVE_LIVE_PR.",
-  "pr_packages_without_contracts_count": 5,
-  "pr_packages_without_contracts_ids": [
+    "pdf-image-extractor",
     "pdf-security",
     "pdf-form-flattener",
     "pdf-form-editor",
     "pdf-form-exporter",
     "pdf-signature"
   ],
-  "pr_packages_without_contracts_basis": "5 additional examples in PR#8 (security/form-flattener), PR#9 (form-editor/form-exporter), PR#10 (signature). Examples exist in workspace/pr-dry-run/ packages but pipeline contracts not yet created in pipeline/contracts/pdf/. All build/runtime PASS.",
+  "pr_dry_run_ready_basis": "14 examples with pipeline contracts across PR#5 (doc-converter/html/xls-converter), PR#6 (jpeg/png/tiff), PR#7 (image-extractor/table-generator/toc-generator), PR#8 (security/form-flattener), PR#9 (form-editor/form-exporter), PR#10 (signature). All build/runtime/reviewer PASS. Blocked by APPROVE_LIVE_PR.",
   "reviewer_passed_awaiting_pr_count": 0,
   "reviewer_passed_awaiting_pr_ids": [],
   "reviewer_passed_awaiting_pr_basis": "All reviewer-passed types are either already published or in pr_dry_run_ready_ids.",
@@ -125,5 +121,5 @@
     "pipeline/configs/families/pdf.yml"
   ],
   "last_verified_at": "2026-05-19T00:00:00Z",
-  "notes": "Updated Sprint 38 (2026-05-19): pr_dry_run_ready_count corrected 9->14 to include PR#7-PR#10 examples (security/form-flattener/form-editor/form-exporter/signature). coverage_pct_of_pilot_allowed corrected to use 19 denominator. 6 open PRs (#5-#10) on target repo awaiting human merge. Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). FormImporter remains WAVE_H deferred (Aspose.PDF 26.5.0 bug). Timestamp and Ofd PERMANENTLY_BLOCKED."
+  "notes": "Updated Sprint 39 (2026-05-19): Pipeline contracts created for all 14 dry-run-ready examples. pr_dry_run_ready_count 9->14 (5 new contracts: security/form-flattener/form-editor/form-exporter/signature). pr_packages_without_contracts eliminated. 6 open PRs (#5-#10) on target repo awaiting human merge. Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). FormImporter remains WAVE_H deferred (Aspose.PDF 26.5.0 bug). Timestamp and Ofd PERMANENTLY_BLOCKED."
 }

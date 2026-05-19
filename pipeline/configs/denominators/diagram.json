@@ -1,7 +1,7 @@
 {
   "family": "diagram",
   "source_package": "Aspose.Diagram",
-  "source_version": "26.4.0",
+  "source_version": "26.5.0",
   "source_package_sha256": "6a490df157acc9fed2d4f834cf46eed4ca4f4704abd34741f260e6075cbc9646",
   "api_catalog_sha256": null,
   "api_catalog_source": "workspace/verification/latest/diagram-source-of-truth-proof.json",
@@ -49,6 +49,6 @@
     "workspace/runs/pilot-diagram-20260511-171233/evidence/latest/example-lifecycle-records.json",
     "pipeline/configs/families/diagram.yml"
   ],
-  "last_verified_at": "2026-05-11T00:00:00Z",
-  "notes": "Diagram pilot PASSED: 2/2 examples generated, built, runtime-passed. DiagramConverter outputs .vdx (Visio), PdfConverter outputs .pdf. Programmatic VSDX fixture via Aspose.Diagram.Diagram() API. PR dry-run ready \u00e2\u20ac\u201d awaiting APPROVE_LIVE_PR for live publication."
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Diagram pilot PASSED: 2/2 examples generated, built, runtime-passed. DiagramConverter outputs .vdx (Visio), PdfConverter outputs .pdf. Programmatic VSDX fixture via Aspose.Diagram.Diagram() API. source_version updated 26.4.0->26.5.0 Sprint 39 (drift pilot PASS Sprint 37, BUILD+RUN verified). Published to target repo."
 }

@@ -1,0 +1,41 @@
+{
+  "scenario_id": "pdf-security",
+  "family": "pdf",
+  "type_name": "Security",
+  "full_type_name": "Aspose.Pdf.LowCode.Security",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Security",
+    "Security.Process",
+    "EncryptionOptions",
+    "FileDataSource"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new PluginOptions()",
+    "PluginOptions()",
+    "DataSources",
+    "using Aspose.Pdf.LowCode.DataSources",
+    "FileSaveTarget",
+    "OperationResult",
+    "IsSuccess"
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "pdf_header_check",
+    "notes": "Instance API: var encOptions = new EncryptionOptions(ownerPassword, userPassword, privilege); encOptions.AddInput(new FileDataSource(...)); encOptions.AddOutput(new FileDataSource(...)); new Security().Process(encOptions). Support code uses DocumentPrivilege for permission setup. AddOutput takes FileDataSource."
+  },
+  "publication_status": "PR_DRY_RUN_READY",
+  "lifecycle_status": "PR_DRY_RUN_READY_AWAITING_APPROVE_LIVE_PR",
+  "evidence_sources": [
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode/security/Program.cs",
+    "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Wave E example. Support code uses Aspose.Pdf.Facades.DocumentPrivilege for permission configuration — this is fixture preparation, not the demonstrated LowCode workflow root."
+}

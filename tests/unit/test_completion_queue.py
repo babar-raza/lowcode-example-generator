@@ -157,16 +157,13 @@ class TestQueueCoversDenominator:
         active = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
         permanently_blocked = [e for e in entries if e["state"] == "PERMANENTLY_BLOCKED"]
-        # At minimum: 37 active (cells 9 + words 8 + pdf 14 PR-ready/published + diagram 2 + email 1 + slides 3)
-        # + 13 backlogged (PDF WR deferred — PdfToImage reclassified ABSTRACT_BASE->PERMANENTLY_BLOCKED in Sprint 22)
+        # At minimum: 42 active (cells 9 + words 8 + pdf 19 PR-ready/published + diagram 2 + email 1 + slides 3)
+        # + 8 backlogged (PDF WR deferred types minus 5 promoted to PR_READY in Sprint 39)
         # + 4 permanently blocked (Processor: API_ACCESS_PARADOX, PdfExtractor: ABSTRACT_BASE,
         #   words-splitter-split-criteria: ENUM, PdfToImage: ABSTRACT_BASE — Sprint 22 reclassification)
-        # Sprint 7: DocConverter+XlsConverter+Html all moved BACKLOGGED->PR_READY; PdfExtractor PERMANENTLY_BLOCKED
-        # Sprint 16: words-splitter-split reclassified BACKLOGGED->PERMANENTLY_BLOCKED (SplitCriteria is ENUM)
-        # Sprint 20: Jpeg/Png/Tiff/TableGenerator/TocGenerator/ImageExtractor moved BACKLOGGED->PR_READY (Wave D all pass)
-        # Sprint 22: PdfToImage reclassified BACKLOGGED->PERMANENTLY_BLOCKED (abstract_class kind confirmed in catalog)
-        assert len(active) >= 19, f"Expected at least 19 active entries, got {len(active)}"
-        assert len(backlogged) >= 13, f"Expected at least 13 backlogged entries, got {len(backlogged)}"
+        # Sprint 39: Security/FormFlattener/FormEditor/FormExporter/Signature moved BACKLOGGED->PR_READY (contracts created)
+        assert len(active) >= 42, f"Expected at least 42 active entries, got {len(active)}"
+        assert len(backlogged) >= 8, f"Expected at least 8 backlogged entries, got {len(backlogged)}"
         assert len(permanently_blocked) >= 4, "Expected at least 4 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 

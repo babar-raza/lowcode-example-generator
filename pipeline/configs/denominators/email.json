@@ -17,25 +17,27 @@
   "workflow_root_type_names": [
     "Converter"
   ],
-  "allowed_pilot_types": [],
+  "allowed_pilot_types": ["Converter"],
   "allowed_pilot_count": 1,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "Email is in discovery_only status. No pilot has been approved. allowed_types is empty. Current denominator = 0 published. FULL_SOT workflow_root_count = 1 (Converter). Controlled pilot requires: (1) fixture strategy for email files, (2) controlled_pilot_approved=true in email.yml, (3) APPROVE_LIVE_PR for publication.",
-  "runnable_scenarios": 0,
-  "runnable_scenarios_basis": "DISCOVERY_ONLY \u00e2\u20ac\u201d no scenarios planned until pilot approved",
-  "runnable_scenario_ids": [],
+  "denominator_basis_note": "Email promoted to active (Sprint 6, 2026-05-13). Controlled pilot approved with allowed_types=[Converter]. Converter published to target repo (aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples, pushed to main HEAD 6d10c59). FULL_SOT workflow_root_count = 1 (Converter). Denominator updated Sprint 38 to reflect actual published state.",
+  "runnable_scenarios": 1,
+  "runnable_scenarios_basis": "PILOT_ALLOWED — 1 workflow_root type approved and published: Converter",
+  "runnable_scenario_ids": ["email-converter"],
   "published_count": 1,
   "pr_ready_count": 0,
   "reviewer_passed_awaiting_pr_count": 0,
   "blocked_count": 0,
-  "excluded_count": 3,
-  "excluded_count_basis": "All 3 types excluded: no pilot approved. 1 workflow_root (Converter) is deferred pending pilot. 2 non-runnable types are OUTPUT_HANDLER and INTERFACE.",
-  "coverage_pct_of_workflow_root": 0.0,
-  "coverage_pct_of_total_types": 0.0,
+  "excluded_count": 2,
+  "excluded_count_basis": "2 non-runnable types excluded: FolderOutputHandler (OUTPUT_HANDLER), IOutputHandler (INTERFACE). Converter is published.",
+  "coverage_pct_of_workflow_root": 100.0,
+  "coverage_pct_of_total_types": 33.3,
+  "coverage_pct_note": "1/1 workflow_root types published (100%). 1/3 total LowCode types published (33.3%). 2 non-runnable types not independently executable.",
   "evidence_sources": [
     "workspace/verification/latest/email-source-of-truth-proof.json",
-    "pipeline/configs/families/email.yml"
+    "pipeline/configs/families/email.yml",
+    "workspace/verification/latest/families/email/_evidence_metadata.json"
   ],
-  "last_verified_at": "2026-05-09T00:00:00Z",
-  "notes": "Email LowCode namespace confirmed: Aspose.Email.LowCode, 3 types, 11 methods. Converter class has 7 static methods for email format conversion (EML, MSG, HTML, MHT, MHTML). FolderOutputHandler implements IOutputHandler for stream output routing. Controlled pilot requires fixture strategy (email files: .eml or .msg inputs). Phase H planned."
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Email LowCode namespace confirmed: Aspose.Email.LowCode, 3 types, 11 methods. Converter published to target repo (Sprint 35+). Pilot complete: 1/1 workflow_root types published. Denominator reconciled Sprint 38 — was stale from discovery-only era."
 }

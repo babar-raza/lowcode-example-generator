@@ -91,7 +91,16 @@
     "pdf-toc-generator",
     "pdf-image-extractor"
   ],
-  "pr_dry_run_ready_basis": "All 9 current-run from pilot-pdf-20260515-193905 (Sprint 18). All build/runtime/reviewer PASS. Packages assembled: PR#3=pdf-controlled-pilot (doc-converter/html/xls-converter), PR#5=pdf-controlled-pilot-pr5 (jpeg/tiff/png), PR#6=pdf-controlled-pilot-pr6 (table-generator/toc-generator/image-extractor). Blocked by APPROVE_LIVE_PR.",
+  "pr_dry_run_ready_basis": "9 examples with pipeline contracts across PR#5 (doc-converter/html/xls-converter), PR#6 (jpeg/png/tiff), PR#7 (image-extractor/table-generator/toc-generator). All build/runtime/reviewer PASS. Blocked by APPROVE_LIVE_PR.",
+  "pr_packages_without_contracts_count": 5,
+  "pr_packages_without_contracts_ids": [
+    "pdf-security",
+    "pdf-form-flattener",
+    "pdf-form-editor",
+    "pdf-form-exporter",
+    "pdf-signature"
+  ],
+  "pr_packages_without_contracts_basis": "5 additional examples in PR#8 (security/form-flattener), PR#9 (form-editor/form-exporter), PR#10 (signature). Examples exist in workspace/pr-dry-run/ packages but pipeline contracts not yet created in pipeline/contracts/pdf/. All build/runtime PASS.",
   "reviewer_passed_awaiting_pr_count": 0,
   "reviewer_passed_awaiting_pr_ids": [],
   "reviewer_passed_awaiting_pr_basis": "All reviewer-passed types are either already published or in pr_dry_run_ready_ids.",
@@ -100,13 +109,13 @@
   "excluded_count_basis": "82 types excluded: 19 pilot allowed + 82 others = 101. Excludes all non-WORKFLOW_ROOT types (79, including SelectField reclassified PROVIDER_CALLBACK Sprint 24, PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 3 WORKFLOW_ROOT types not in allowed_pilot_types.",
   "unclassified_workflow_root_count": 3,
   "unclassified_workflow_root_note": "3 WORKFLOW_ROOT types not in allowed_pilot_types after Wave G: Timestamp (PERMANENTLY_BLOCKED — external TSA ServerUrl required), Ofd (PERMANENTLY_BLOCKED — OFD input format, no programmatic fixture), FormImporter (WAVE_H_CANDIDATE — FormImporterJsonOptions confirmed Sprint 26, harness under assessment). Signature added to Wave G pilot in Sprint 26 (harness-verified Sprint 25). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
-  "coverage_pct_of_pilot_allowed": 27.78,
+  "coverage_pct_of_pilot_allowed": 26.32,
   "coverage_pct_of_workflow_root": 22.73,
   "coverage_pct_of_total_types": 4.95,
   "coverage_pct_detail": {
-    "pilot_allowed": "5/18 published = 27.78% (5 merged; 9 dry-run ready pending APPROVE_LIVE_PR for PR#3+PR#5+PR#6; 2 Wave E types in PR#7 pending APPROVE_LIVE_PR; 2 Wave F types FormEditor/FormExporter pending generation)",
-    "workflow_root": "5/22 published = 22.73% (16/22 = 72.73% after PR#3+PR#5+PR#6+PR#7 + Wave F merge)",
-    "full_sot": "5/101 published = 4.95% (18/101 = 17.82% after PR#3+PR#5+PR#6+PR#7 + Wave F merge)"
+    "pilot_allowed": "5/19 published = 26.32% (5 merged via PR#1+PR#2+PR#4; 14 dry-run ready pending APPROVE_LIVE_PR across PR#5-PR#10; after all PRs merge: 19/19 = 100%)",
+    "workflow_root": "5/22 published = 22.73% (19/22 = 86.36% after all PRs merge; remaining 3: Timestamp PERMANENTLY_BLOCKED, Ofd PERMANENTLY_BLOCKED, FormImporter WAVE_H deferred)",
+    "full_sot": "5/101 published = 4.95% (19/101 = 18.81% after all PRs merge)"
   },
   "evidence_sources": [
     "workspace/verification/latest/pdf-source-of-truth-proof.json",
@@ -115,6 +124,6 @@
     "workspace/verification/latest/pdf-merge-result.json",
     "pipeline/configs/families/pdf.yml"
   ],
-  "last_verified_at": "2026-05-17T00:00:00Z",
-  "notes": "Updated Sprint 26 (2026-05-17): Signature added to Wave G pilot (allowed_pilot_count 18->19, excluded 83->82). Harness ALL_PASS Sprint 25. Conservation: 22+79=101, 19+82=101. Updated Sprint 24 (2026-05-17): SelectField reclassified PROVIDER_CALLBACK (workflow_root_types 23->22, non_runnable 78->79, PROVIDER_CALLBACK 5->6). FormEditor + FormExporter added to Wave F pilot (allowed_pilot_count 16->18, excluded 85->83). Updated Sprint 22 (2026-05-16): PdfToImage reclassified ABSTRACT_BASE (workflow_root_types 24->23). XmlProcessor confirmed does not exist in LowCode namespace. Security + FormFlattener Wave E. Updated Sprint 20 (2026-05-16): corrected allowed_pilot_count 11->14, added TocGenerator/TableGenerator/ImageExtractor (Wave D, Sprint 18). Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). PR#3/5/6 assembled, PR#7/8 assembled (Security/FormFlattener/FormEditor/FormExporter), awaiting APPROVE_LIVE_PR."
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Updated Sprint 38 (2026-05-19): pr_dry_run_ready_count corrected 9->14 to include PR#7-PR#10 examples (security/form-flattener/form-editor/form-exporter/signature). coverage_pct_of_pilot_allowed corrected to use 19 denominator. 6 open PRs (#5-#10) on target repo awaiting human merge. Published: Merger+TextExtractor (PR#1), PdfAConverter+Splitter (PR#2), Optimizer (PR#4). FormImporter remains WAVE_H deferred (Aspose.PDF 26.5.0 bug). Timestamp and Ofd PERMANENTLY_BLOCKED."
 }

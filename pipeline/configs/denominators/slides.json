@@ -22,25 +22,27 @@
     "Collect",
     "ForEach"
   ],
-  "allowed_pilot_types": [],
+  "allowed_pilot_types": ["Compress", "Convert", "Merger"],
   "allowed_pilot_count": 3,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "Slides is in discovery_only status. No pilot has been approved. allowed_types is empty. FULL_SOT workflow_root_count = 3 (Compress, Convert, Merger). NOTE: Slides DLL uses filename Aspose.Slides.dll (not Aspose.Slides.NET.dll) \u00e2\u20ac\u201d DLL name fallback resolved in extractor. Slides has no XML documentation file (xml_warning in source-of-truth proof).",
-  "runnable_scenarios": 0,
-  "runnable_scenarios_basis": "DISCOVERY_ONLY \u00e2\u20ac\u201d no scenarios planned until pilot approved",
-  "runnable_scenario_ids": [],
+  "denominator_basis_note": "Slides promoted to active (Sprint 6, 2026-05-13). Controlled pilot approved with allowed_types=[Compress, Convert, Merger]. All 3 workflow_root types published to target repo (aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples, pushed to main HEAD bbe7e68). FULL_SOT workflow_root_count = 3. Denominator updated Sprint 38 to reflect actual published state.",
+  "runnable_scenarios": 3,
+  "runnable_scenarios_basis": "PILOT_ALLOWED — 3 workflow_root types approved and published: Compress, Convert, Merger",
+  "runnable_scenario_ids": ["slides-compress", "slides-convert", "slides-merger"],
   "published_count": 3,
   "pr_ready_count": 0,
   "reviewer_passed_awaiting_pr_count": 0,
   "blocked_count": 0,
-  "excluded_count": 5,
-  "excluded_count_basis": "All 5 types excluded: no pilot approved. 3 workflow_roots deferred pending pilot. 2 utility types (Collect, ForEach) are non-runnable standalone.",
-  "coverage_pct_of_workflow_root": 0.0,
-  "coverage_pct_of_total_types": 0.0,
+  "excluded_count": 2,
+  "excluded_count_basis": "2 utility types excluded as non-runnable: Collect, ForEach. All 3 workflow_root types are published.",
+  "coverage_pct_of_workflow_root": 100.0,
+  "coverage_pct_of_total_types": 60.0,
+  "coverage_pct_note": "3/3 workflow_root types published (100%). 3/5 total LowCode types published (60%). 2 utility types not independently executable.",
   "evidence_sources": [
     "workspace/verification/latest/slides-source-of-truth-proof.json",
-    "pipeline/configs/families/slides.yml"
+    "pipeline/configs/families/slides.yml",
+    "workspace/verification/latest/families/slides/_evidence_metadata.json"
   ],
-  "last_verified_at": "2026-05-09T00:00:00Z",
-  "notes": "Slides LowCode confirmed: 5 types, 36 methods. Compress: font compression and unused slide cleanup. Convert: format conversion to JPEG/PDF/PNG/SVG/TIFF. Merger: Process() method for merging presentations. Collect and ForEach are utility helpers for traversal. Fixture strategy requires PPTX input files. Phase H planned. XML docs missing (Aspose.Slides.NET.xml expected but only Aspose.Slides.xml present in package)."
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Slides LowCode confirmed: 5 types, 36 methods. All 3 workflow_root types (Compress, Convert, Merger) published. Pilot complete: 3/3 published. DLL name mismatch handled. Denominator reconciled Sprint 38 — was stale from discovery-only era."
 }

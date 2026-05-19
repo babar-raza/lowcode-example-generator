@@ -70,7 +70,8 @@
     "words-replacer",
     "words-merger",
     "words-comparer",
-    "words-mail-merger"
+    "words-mail-merger",
+    "words-report-builder"
   ],
   "pilot_allowed_count": 8,
   "full_sot_runnable_estimate": 9,

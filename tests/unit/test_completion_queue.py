@@ -164,7 +164,7 @@ class TestQueueCoversDenominator:
         # All 19 PDF active types now have contracts and are MERGED.
         assert len(active) >= 42, f"Expected at least 42 active entries, got {len(active)}"
         assert len(backlogged) >= 5, f"Expected at least 5 backlogged entries, got {len(backlogged)}"
-        assert len(permanently_blocked) >= 4, "Expected at least 4 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage)"
+        assert len(permanently_blocked) >= 7, "Expected at least 7 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage, 3 diagram OPTIONS)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 
 

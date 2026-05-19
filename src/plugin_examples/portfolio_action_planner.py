@@ -161,8 +161,12 @@ def _count_contracts(repo_root: Path) -> dict[str, int]:
     return counts
 
 
+_DIRTY_EXCLUDE_PREFIXES = ("workspace/", "output.", "output/", "input.")
+_DIRTY_EXCLUDE_EXACT = {"leg.zip", "test.pfx", "output.json"}
+
+
 def _check_dirty_state(repo_root: Path) -> list[str]:
-    """Return list of dirty source/config/test files (not workspace/evidence)."""
+    """Return list of dirty source/config/test files (not workspace/evidence/artifacts)."""
     try:
         result = subprocess.run(
             ["git", "status", "--porcelain"],
@@ -171,8 +175,9 @@ def _check_dirty_state(repo_root: Path) -> list[str]:
         dirty = []
         for line in result.stdout.strip().splitlines():
             path = line[3:].strip()
-            # Exclude workspace evidence and generated artifacts
-            if path.startswith("workspace/") or path == "leg.zip":
+            if any(path.startswith(p) for p in _DIRTY_EXCLUDE_PREFIXES):
+                continue
+            if path in _DIRTY_EXCLUDE_EXACT:
                 continue
             dirty.append(path)
         return dirty

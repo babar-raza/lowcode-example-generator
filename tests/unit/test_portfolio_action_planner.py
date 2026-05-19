@@ -10,6 +10,7 @@ from unittest import mock
 import pytest
 
 from plugin_examples.portfolio_action_planner import (
+    ACTION_TYPES,
     ACTIVE_FAMILIES,
     BLOCKED_FAMILIES,
     PERMANENTLY_BLOCKED,
@@ -216,3 +217,119 @@ class TestConstants:
     def test_email_and_slides_in_active(self):
         assert "email" in ACTIVE_FAMILIES
         assert "slides" in ACTIVE_FAMILIES
+
+    def test_conflict_recovery_in_action_types(self):
+        assert "PDF_PR_CONFLICT_RECOVERY" in ACTION_TYPES
+
+
+# ---------------------------------------------------------------------------
+# Test v2 freshness metadata
+# ---------------------------------------------------------------------------
+
+class TestFreshnessMetadata:
+    def test_board_has_generated_from_head(self):
+        board = compute_action_board(_REPO_ROOT)
+        assert board.generated_from_head != ""
+        assert len(board.generated_from_head) >= 7  # short SHA
+
+    def test_board_has_git_dirty_summary(self):
+        board = compute_action_board(_REPO_ROOT)
+        assert board.git_dirty_summary in ("clean",) or "dirty" in board.git_dirty_summary
+
+    def test_freshness_in_json_output(self):
+        board = compute_action_board(_REPO_ROOT)
+        parsed = json.loads(board.to_json())
+        assert "generated_from_head" in parsed
+        assert "git_dirty_summary" in parsed
+
+    def test_freshness_in_markdown(self):
+        board = compute_action_board(_REPO_ROOT)
+        md = render_markdown(board)
+        assert "HEAD:" in md
+        assert "Dirty:" in md
+
+
+# ---------------------------------------------------------------------------
+# Test v2 conflict recovery action
+# ---------------------------------------------------------------------------
+
+class TestConflictRecoveryAction:
+    def test_conflict_recovery_present_in_board(self):
+        board = compute_action_board(_REPO_ROOT)
+        ids = [a.id for a in board.actions]
+        assert "PDF_PR_CONFLICT_RECOVERY" in ids
+
+    def test_conflict_recovery_blocked_when_gate_absent(self):
+        with mock.patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", None)
+            board = compute_action_board(_REPO_ROOT)
+            cr = [a for a in board.actions if a.id == "PDF_PR_CONFLICT_RECOVERY"]
+            assert len(cr) == 1
+            assert cr[0].safe_to_execute_now is False
+            assert cr[0].taskcard_id == "TC-PDF-PR-CONFLICT-RESOLUTION"
+
+    def test_conflict_recovery_safe_when_gate_present(self):
+        with mock.patch.dict(os.environ, {"PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "APPROVE_LIVE_PR"}):
+            board = compute_action_board(_REPO_ROOT)
+            cr = [a for a in board.actions if a.id == "PDF_PR_CONFLICT_RECOVERY"]
+            assert len(cr) == 1
+            assert cr[0].safe_to_execute_now is True
+
+    def test_conflict_recovery_ranks_below_merge(self):
+        board = compute_action_board(_REPO_ROOT)
+        ids = [a.id for a in board.actions]
+        merge_idx = ids.index("PDF_MERGE_PRS")
+        cr_idx = ids.index("PDF_PR_CONFLICT_RECOVERY")
+        assert cr_idx > merge_idx  # merge (95) > conflict recovery (92)
+
+
+# ---------------------------------------------------------------------------
+# Test v2 taskcard IDs
+# ---------------------------------------------------------------------------
+
+class TestTaskcardIds:
+    def test_blocker_actions_have_taskcard_ids(self):
+        board = compute_action_board(_REPO_ROOT)
+        formimporter = [a for a in board.actions if a.id == "FORMIMPORTER_RETEST"][0]
+        assert formimporter.taskcard_id == "TC-PDF-FORMIMPORTER-RETEST"
+        ocr = [a for a in board.actions if a.id == "OCR_DEPENDENCY_RECHECK"][0]
+        assert ocr.taskcard_id == "TC-OCR-REFLECTION"
+        psd = [a for a in board.actions if a.id == "PSD_DEPENDENCY_RECHECK"][0]
+        assert psd.taskcard_id == "TC-PSD-REFLECTION"
+
+    def test_taskcard_id_omitted_from_dict_when_none(self):
+        a = Action(id="X", family="cells", type="BLOCKER_RETEST",
+                   current_state="x", desired_state="y")
+        d = a.to_dict()
+        assert "taskcard_id" not in d
+
+    def test_taskcard_id_present_in_dict_when_set(self):
+        a = Action(id="X", family="pdf", type="BLOCKER_RETEST",
+                   current_state="x", desired_state="y",
+                   taskcard_id="TC-TEST")
+        d = a.to_dict()
+        assert d["taskcard_id"] == "TC-TEST"
+
+
+# ---------------------------------------------------------------------------
+# Test v2 metrics summary
+# ---------------------------------------------------------------------------
+
+class TestMetricsSummary:
+    def test_metrics_summary_structure(self):
+        board = compute_action_board(_REPO_ROOT)
+        m = board.metrics_summary()
+        assert "generated_at" in m
+        assert "generated_from_head" in m
+        assert "total_actions" in m
+        assert "safe_count" in m
+        assert "blocked_count" in m
+        assert "action_ids" in m
+        assert "blocked_ids" in m
+        assert "max_impact" in m
+
+    def test_metrics_counts_consistent(self):
+        board = compute_action_board(_REPO_ROOT)
+        m = board.metrics_summary()
+        assert m["total_actions"] == m["safe_count"] + m["blocked_count"]
+        assert m["total_actions"] == len(m["action_ids"])

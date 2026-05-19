@@ -474,15 +474,27 @@ class TestDenominatorCrossFamily:
 
     @pytest.mark.parametrize("family", FAMILIES)
     def test_conservation_equation(self, family: str):
-        """published + pr_dry_run_ready + blocked = runnable_scenarios."""
+        """Sum of all terminal runnable buckets = runnable_scenarios.
+
+        Known terminal buckets:
+        - published_count: merged and verified in target repo
+        - pr_ready_count: open live PRs awaiting merge
+        - pr_dry_run_ready_count: validated dry-run awaiting APPROVE_LIVE_PR
+        - reviewer_passed_awaiting_pr_count: reviewer passed, no PR package yet
+        - blocked_count: blocked by technical issues
+        """
         d = _load_denominator(family)
-        published = d["published_count"]
-        pr_dry_run = d.get("pr_dry_run_ready_count", 0)
-        blocked = d.get("blocked_count", 0)
-        total = published + pr_dry_run + blocked
+        buckets = {
+            "published_count": d.get("published_count", 0),
+            "pr_ready_count": d.get("pr_ready_count", 0) or 0,
+            "pr_dry_run_ready_count": d.get("pr_dry_run_ready_count", 0) or 0,
+            "reviewer_passed_awaiting_pr_count": d.get("reviewer_passed_awaiting_pr_count", 0) or 0,
+            "blocked_count": d.get("blocked_count", 0) or 0,
+        }
+        total = sum(buckets.values())
         runnable = d["runnable_scenarios"]
+        bucket_str = " + ".join(f"{k}={v}" for k, v in buckets.items() if v > 0)
         assert total == runnable, (
             f"{family}: conservation equation failed: "
-            f"published ({published}) + pr_dry_run ({pr_dry_run}) + blocked ({blocked}) "
-            f"= {total} != runnable_scenarios ({runnable})"
+            f"{bucket_str} = {total} != runnable_scenarios ({runnable})"
         )

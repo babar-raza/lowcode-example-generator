@@ -76,6 +76,21 @@ class TestClassifyOperationKind:
     def test_pdfa_converter(self):
         assert classify_operation_kind("PdfAConverter") == "transform"
 
+    def test_html_exact(self):
+        assert classify_operation_kind("Html") == "converter"
+
+    def test_jpeg_exact(self):
+        assert classify_operation_kind("Jpeg") == "converter"
+
+    def test_png_exact(self):
+        assert classify_operation_kind("Png") == "converter"
+
+    def test_tiff_exact(self):
+        assert classify_operation_kind("Tiff") == "converter"
+
+    def test_mail_merger_is_generator(self):
+        assert classify_operation_kind("MailMerger") == "generator"
+
 
 # --- Populator tests ---
 

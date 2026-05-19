@@ -9,6 +9,7 @@ _PATTERNS: list[tuple[str, str]] = [
     ("formexporter", "form_exporter"),
     ("formeditor", "form_processor"),
     ("formflattener", "form_processor"),
+    ("mailmerger", "generator"),
     ("merger", "merger"),
     ("splitter", "splitter"),
     ("extractor", "extractor"),
@@ -25,7 +26,6 @@ _PATTERNS: list[tuple[str, str]] = [
     ("tocgenerator", "generator"),
     ("tablegenerator", "generator"),
     ("reportbuilder", "generator"),
-    ("mailmerger", "generator"),
     ("converter", "converter"),
     ("convert", "converter"),
 ]

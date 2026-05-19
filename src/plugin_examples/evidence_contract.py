@@ -2508,3 +2508,72 @@ class PlannerSprintEvidenceContract:
             "secret_scanning_enabled": True,
             "allowed_verdicts": sorted(ALLOWED_PLANNER_VERDICTS),
         }
+
+
+def generate_validation_proof(
+    zip_path: str | Path,
+    output_path: str | Path | None = None,
+) -> dict:
+    """Validate a sprint evidence ZIP and produce a structured proof.
+
+    The proof includes the exact ZIP path and SHA256 so it cannot be
+    confused with a different sprint's bundle.
+
+    Parameters
+    ----------
+    zip_path:
+        Path to the evidence bundle ZIP to validate.
+    output_path:
+        If provided, write the proof JSON to this path.
+
+    Returns
+    -------
+    dict with validation proof including zip_path, sha256, and result.
+    """
+    import hashlib as _hl
+    from datetime import datetime as _dt, timezone as _tz
+
+    zip_path = Path(zip_path)
+    if not zip_path.exists():
+        raise FileNotFoundError(f"ZIP not found: {zip_path}")
+
+    sha256 = _hl.sha256(zip_path.read_bytes()).hexdigest()
+
+    contract = PlannerSprintEvidenceContract()
+    result = contract.validate_zip(zip_path)
+
+    proof: dict = {
+        "contract": "PlannerSprintEvidenceContract",
+        "contract_version": "planner-v1",
+        "validated_bundle": str(zip_path),
+        "validated_bundle_sha256": sha256,
+        "validated_bundle_size_bytes": zip_path.stat().st_size,
+        "validation_timestamp": _dt.now(_tz.utc).isoformat(),
+        "result": {
+            "passed": result.passed,
+            "verdict": result.verdict,
+            "file_count": result.file_count,
+            "categories_found": result.categories_found,
+            "categories_found_count": len(result.categories_found),
+            "categories_missing": result.categories_missing,
+            "categories_missing_count": len(result.categories_missing),
+            "failures": result.failures,
+            "failure_count": len(result.failures),
+            "secret_violations": result.secret_violations,
+            "secret_violation_count": len(result.secret_violations),
+        },
+        "content_checks": [
+            "final-state-summary.json: 'head' field",
+            "final-next-actions.json: 'generated_from_head' field",
+            "bundle-manifest.json: all files have sha256",
+        ],
+    }
+
+    if output_path is not None:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(
+            json.dumps(proof, indent=2), encoding="utf-8",
+        )
+
+    return proof

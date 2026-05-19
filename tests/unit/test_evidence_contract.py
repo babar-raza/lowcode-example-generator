@@ -54,6 +54,7 @@ from plugin_examples.evidence_contract import (
     MIN_PLANNER_CATEGORIES_REQUIRED,
     ALLOWED_PLANNER_VERDICTS,
     PlannerSprintEvidenceContract,
+    generate_validation_proof,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
@@ -2187,3 +2188,63 @@ class TestPlannerSprintEvidenceContract:
 
     def test_allowed_planner_verdicts_defined(self):
         assert len(ALLOWED_PLANNER_VERDICTS) >= 5
+
+
+class TestGenerateValidationProof:
+    def test_proof_names_correct_zip_path(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        proof = generate_validation_proof(zp)
+        assert proof["validated_bundle"] == str(zp)
+        assert proof["result"]["passed"] is True
+
+    def test_proof_includes_sha256(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        proof = generate_validation_proof(zp)
+        assert len(proof["validated_bundle_sha256"]) == 64
+
+    def test_proof_writes_to_output_path(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        out = tmp_path / "proof.json"
+        proof = generate_validation_proof(zp, output_path=out)
+        assert out.exists()
+        import json
+        written = json.loads(out.read_text())
+        assert written["validated_bundle"] == str(zp)
+        assert written["result"]["verdict"] == "PLANNER_CONTRACT_PASSED"
+
+    def test_proof_fails_for_incomplete_bundle(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["test-full-log.txt"]
+        zp = _make_zip(tmp_path, files)
+        proof = generate_validation_proof(zp)
+        assert proof["result"]["passed"] is False
+        assert proof["result"]["failure_count"] > 0
+
+    def test_proof_rejects_nonexistent_zip(self, tmp_path):
+        import pytest
+        with pytest.raises(FileNotFoundError):
+            generate_validation_proof(tmp_path / "missing.zip")
+
+    def test_proof_has_contract_metadata(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        proof = generate_validation_proof(zp)
+        assert proof["contract"] == "PlannerSprintEvidenceContract"
+        assert proof["contract_version"] == "planner-v1"
+        assert "validation_timestamp" in proof
+
+    def test_proof_path_never_stale(self, tmp_path):
+        """Two different ZIPs produce proofs naming their own paths."""
+        files = _minimal_planner_complete_files()
+        (tmp_path / "a").mkdir()
+        (tmp_path / "b").mkdir()
+        zp1 = _make_zip(tmp_path / "a", files)
+        zp2 = _make_zip(tmp_path / "b", files)
+        proof1 = generate_validation_proof(zp1)
+        proof2 = generate_validation_proof(zp2)
+        assert proof1["validated_bundle"] != proof2["validated_bundle"]
+        assert str(zp1) in proof1["validated_bundle"]
+        assert str(zp2) in proof2["validated_bundle"]

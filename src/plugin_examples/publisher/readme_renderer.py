@@ -99,6 +99,9 @@ class ExampleEntry:
     source_snippet: str = ""    # Program.cs content (full or excerpt)
     source_file_path: str = ""  # relative path to Program.cs
     snippet_sha256: str = ""    # SHA256 of the snippet content
+    operation_kind: str = ""    # converter|transform|merger|splitter|extractor|...
+    input_format_display: str = ""   # e.g. "N × pdf", "pdf"
+    output_format_display: str = ""  # e.g. "docx", "pdf (1→N)", "text (stdout)"
 
 
 @dataclass
@@ -141,6 +144,64 @@ def _infer_api_class(example_name: str) -> str:
          "spreadsheet-locker" -> "SpreadsheetLocker"
     """
     return "".join(part.capitalize() for part in example_name.split("-"))
+
+
+def _classify_op_kind_from_name(name: str) -> str:
+    """Classify operation kind from example directory name."""
+    n = name.lower()
+    if "text-extractor" in n or "textextractor" in n:
+        return "extractor"
+    if "image-extractor" in n or "imageextractor" in n:
+        return "image_extractor"
+    if "form-exporter" in n or "formexporter" in n:
+        return "form_exporter"
+    if "form-flattener" in n or "formeditor" in n or "form-editor" in n:
+        return "form_processor"
+    if "merger" in n:
+        return "merger"
+    if "splitter" in n:
+        return "splitter"
+    if "extractor" in n:
+        return "extractor"
+    if "optimizer" in n or "security" in n or "signature" in n:
+        return "transform"
+    if "locker" in n or "compressor" in n or "compress" in n:
+        return "transform"
+    if "watermarker" in n or "replacer" in n or "pdfa" in n:
+        return "transform"
+    if "comparer" in n:
+        return "transform"
+    if "generator" in n or "builder" in n:
+        return "generator"
+    if "mail-merger" in n:
+        return "generator"
+    if "converter" in n or "convert" in n:
+        return "converter"
+    # Short PDF type names used as directory names
+    if n in ("html", "jpeg", "png", "tiff"):
+        return "converter"
+    return "unknown"
+
+
+def _compute_display_fields(
+    op_kind: str, input_fmt: str, output_fmt: str,
+) -> tuple[str, str]:
+    """Compute display-friendly format strings for README table.
+
+    Returns (input_display, output_display).
+    """
+    if op_kind == "merger":
+        return (input_fmt, output_fmt)  # input already has "2x" from _infer_input_format
+    if op_kind == "splitter":
+        return (input_fmt, f"{output_fmt} (1→N)" if output_fmt else output_fmt)
+    if op_kind == "extractor":
+        return (input_fmt, "text (stdout)" if not output_fmt else output_fmt)
+    if op_kind == "image_extractor":
+        return (input_fmt, f"{output_fmt} (N files)" if output_fmt else output_fmt)
+    if op_kind == "directory_output":
+        return (input_fmt, "directory")
+    # converter, transform, generator, form_processor, form_exporter, unknown
+    return (input_fmt, output_fmt)
 
 
 def _infer_input_format(example_name: str, family: str, default_extension: str = "xlsx") -> str:
@@ -384,6 +445,10 @@ def build_readme_context(
             source_file_path = ""
             snippet_sha256 = ""
 
+        op_kind = _classify_op_kind_from_name(name)
+        in_disp, out_disp = _compute_display_fields(
+            op_kind, input_fmt, output_format,
+        )
         example_entries.append(ExampleEntry(
             name=name,
             api_class=api_class,
@@ -392,6 +457,9 @@ def build_readme_context(
             source_snippet=source_snippet,
             source_file_path=source_file_path,
             snippet_sha256=snippet_sha256,
+            operation_kind=op_kind,
+            input_format_display=in_disp,
+            output_format_display=out_disp,
         ))
 
     if not example_entries:

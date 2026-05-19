@@ -26,7 +26,7 @@ Broader generation requires resolving open follow-up taskcards first.
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
 {% for ex in examples -%}
-| `{{ ex.name }}` | `{{ ex.api_class }}` | `{{ ex.input_format }}` | `{{ ex.output_format }}` | `dotnet run --project examples/{{ family }}/lowcode/{{ ex.name }}` |
+| `{{ ex.name }}` | `{{ ex.api_class }}` | `{{ ex.input_format_display | default('', true) or ex.input_format }}` | `{{ ex.output_format_display | default('', true) or ex.output_format }}` | `dotnet run --project examples/{{ family }}/lowcode/{{ ex.name }}` |
 {% endfor %}
 
 {% set has_snippets = examples | selectattr('source_snippet') | list | length > 0 %}

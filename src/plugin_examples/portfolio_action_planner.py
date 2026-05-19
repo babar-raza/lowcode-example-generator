@@ -173,6 +173,8 @@ class DirtyState:
     test: list[str] = field(default_factory=list)
     evidence: list[str] = field(default_factory=list)
     artifact: list[str] = field(default_factory=list)
+    package_artifact: list[str] = field(default_factory=list)
+    unknown: list[str] = field(default_factory=list)
 
     @property
     def actionable_count(self) -> int:
@@ -180,7 +182,9 @@ class DirtyState:
 
     @property
     def total_count(self) -> int:
-        return len(self.source) + len(self.config) + len(self.test) + len(self.evidence) + len(self.artifact)
+        return (len(self.source) + len(self.config) + len(self.test)
+                + len(self.evidence) + len(self.artifact)
+                + len(self.package_artifact) + len(self.unknown))
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -189,10 +193,14 @@ class DirtyState:
             "test_dirty_count": len(self.test),
             "evidence_dirty_count": len(self.evidence),
             "generated_artifact_count": len(self.artifact),
+            "package_artifact_count": len(self.package_artifact),
+            "unknown_dirty_count": len(self.unknown),
             "actionable_count": self.actionable_count,
             "source_files": self.source,
             "config_files": self.config,
             "test_files": self.test,
+            "package_artifact_files": self.package_artifact,
+            "unknown_files": self.unknown,
         }
 
     def summary(self) -> str:
@@ -209,11 +217,16 @@ class DirtyState:
             parts.append(f"{len(self.evidence)} evidence")
         if self.artifact:
             parts.append(f"{len(self.artifact)} artifact")
+        if self.package_artifact:
+            parts.append(f"{len(self.package_artifact)} package_artifact")
+        if self.unknown:
+            parts.append(f"{len(self.unknown)} unknown")
         return ", ".join(parts) if parts else "clean"
 
 
 _ARTIFACT_PREFIXES = ("output.", "output/", "input.")
 _ARTIFACT_EXACT = {"leg.zip", "test.pfx", "output.json"}
+_PACKAGE_ARTIFACT_PREFIXES = ("workspace/pr-dry-run/",)
 _CONFIG_PREFIXES = ("pipeline/configs/", "pipeline/contracts/", ".gitignore")
 _TEST_PREFIXES = ("tests/",)
 _EVIDENCE_PREFIXES = ("workspace/",)
@@ -224,6 +237,9 @@ def _classify_dirty_path(path: str) -> str:
     """Classify a dirty file path into a category."""
     if any(path.startswith(p) for p in _ARTIFACT_PREFIXES) or path in _ARTIFACT_EXACT:
         return "artifact"
+    # Package artifacts (PR dry-run outputs) before general workspace/evidence
+    if any(path.startswith(p) for p in _PACKAGE_ARTIFACT_PREFIXES):
+        return "package_artifact"
     if any(path.startswith(p) for p in _EVIDENCE_PREFIXES):
         return "evidence"
     if any(path.startswith(p) for p in _TEST_PREFIXES):
@@ -232,8 +248,7 @@ def _classify_dirty_path(path: str) -> str:
         return "config"
     if any(path.startswith(p) for p in _SOURCE_PREFIXES):
         return "source"
-    # Default: treat unknown paths as source (safest classification)
-    return "source"
+    return "unknown"
 
 
 def _parse_porcelain_path(line: str) -> str:

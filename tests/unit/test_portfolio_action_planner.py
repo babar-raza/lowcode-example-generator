@@ -369,8 +369,16 @@ class TestDirtyStateCategorization:
         assert _classify_dirty_path("test.pfx") == "artifact"
         assert _classify_dirty_path("output.json") == "artifact"
 
-    def test_unknown_file_defaults_to_source(self):
-        assert _classify_dirty_path("pyproject.toml") == "source"
+    def test_unknown_file_defaults_to_unknown(self):
+        assert _classify_dirty_path("pyproject.toml") == "unknown"
+
+    def test_package_artifact_classified(self):
+        assert _classify_dirty_path("workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/jpeg/input.pdf") == "package_artifact"
+        assert _classify_dirty_path("workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/test.pfx") == "package_artifact"
+
+    def test_package_artifact_does_not_create_close_dirty_state(self):
+        dirty = DirtyState(package_artifact=["workspace/pr-dry-run/foo/input.pdf"])
+        assert dirty.actionable_count == 0
 
     def test_artifacts_do_not_create_close_dirty_state(self):
         dirty = DirtyState(artifact=["output.pdf", "input.pdf", "leg.zip"])
@@ -405,14 +413,18 @@ class TestDirtyStateCategorization:
         assert dirty.actionable_count == 2
 
     def test_dirty_state_to_dict_has_all_counts(self):
-        dirty = DirtyState(source=["a.py"], test=["t.py"], artifact=["o.pdf"])
+        dirty = DirtyState(source=["a.py"], test=["t.py"], artifact=["o.pdf"],
+                           package_artifact=["workspace/pr-dry-run/x/input.pdf"])
         d = dirty.to_dict()
         assert d["source_dirty_count"] == 1
         assert d["config_dirty_count"] == 0
         assert d["test_dirty_count"] == 1
         assert d["evidence_dirty_count"] == 0
         assert d["generated_artifact_count"] == 1
+        assert d["package_artifact_count"] == 1
+        assert d["unknown_dirty_count"] == 0
         assert d["actionable_count"] == 2
+        assert d["package_artifact_files"] == ["workspace/pr-dry-run/x/input.pdf"]
 
     def test_board_includes_dirty_categories_in_json(self):
         board = compute_action_board(_REPO_ROOT)

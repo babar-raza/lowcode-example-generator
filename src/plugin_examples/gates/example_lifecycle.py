@@ -32,6 +32,7 @@ LIFECYCLE_STAGES = (
     "reviewer_attempted",
     "reviewer_passed",
     "reviewer_failed",
+    "reviewer_repaired",
     "pr_candidate",
     "excluded",
     "backlogged",
@@ -70,8 +71,9 @@ class ExampleLifecycleRecord:
     run_repair_attempts: int = 0
     run_failure_classification: str | None = None
 
-    reviewer_status: str = "pending"  # pending, passed, failed, skipped, unavailable
+    reviewer_status: str = "pending"  # pending, passed, failed, repaired, skipped, unavailable
     reviewer_failure_reason: str | None = None
+    reviewer_repair_attempts: int = 0
 
     # PR candidacy
     pr_candidate: bool = False
@@ -152,6 +154,13 @@ class ExampleLifecycleRecord:
         self.pr_candidate = False  # reviewer failure revokes PR candidacy
         self.update_stage("reviewer_failed")
         self.final_verdict = "EXAMPLE_BLOCKED_REVIEWER_FAILED"
+
+    def mark_reviewer_repaired(self, attempts: int) -> None:
+        self.reviewer_status = "repaired"
+        self.reviewer_repair_attempts = attempts
+        self.update_stage("reviewer_repaired")
+        self.final_verdict = "EXAMPLE_READY_FOR_PR_DRY_RUN"
+        self.pr_candidate = True
 
     def mark_reviewer_unavailable(self) -> None:
         self.reviewer_status = "unavailable"

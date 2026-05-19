@@ -260,9 +260,9 @@ class TestPdfContracts:
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
         assert contracts["pdf-text-extractor"]["publication_status"] == "MERGED"
 
-    def test_pdf_splitter_is_pr_dry_run_ready(self):
+    def test_pdf_splitter_is_merged(self):
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
-        assert contracts["pdf-splitter"]["publication_status"] == "PR_DRY_RUN_READY"
+        assert contracts["pdf-splitter"]["publication_status"] == "MERGED"
 
     def test_pdf_merger_forbids_plugin_options(self):
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}

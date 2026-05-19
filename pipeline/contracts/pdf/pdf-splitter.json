@@ -30,8 +30,8 @@
     "validation_method": "pdf_header_check",
     "notes": "Instance API: var options = new SplitOptions(); options.AddInput(new FileDataSource(...)); options.AddOutput(new FileDataSource('output.pdf')); new Splitter().Process(options). Output filename must be plain string, NOT format string like 'output_{0}.pdf' (not expanded)."
   },
-  "publication_status": "PR_DRY_RUN_READY",
-  "lifecycle_status": "REVIEWER_PASSED",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
     "workspace/verification/latest/pdf-pr-dry-run-summary.json"

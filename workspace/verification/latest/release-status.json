@@ -1,6 +1,6 @@
 {
   "report_type": "release_status",
-  "generated_at": "2026-05-18T15:21:00.520562+00:00",
+  "generated_at": "2026-05-19T09:02:31.560546+00:00",
   "families_checked": [
     "cells",
     "words"
@@ -10,7 +10,7 @@
   "families": [
     {
       "family": "cells",
-      "source_of_truth_version": "26.4.0",
+      "source_of_truth_version": "26.5.1",
       "latest_published_version": "26.4.0",
       "published_examples_count": 9,
       "release_scope_status": "FAMILY_COMPLETE",

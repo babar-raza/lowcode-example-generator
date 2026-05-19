@@ -26,7 +26,7 @@
     },
     "family": {
       "type": "string",
-      "enum": ["cells", "words", "pdf"],
+      "enum": ["cells", "words", "pdf", "diagram", "email", "slides"],
       "description": "Plugin family this scenario belongs to"
     },
     "type_name": {
@@ -54,6 +54,7 @@
         "programmatic_pdf_multi_page",
         "programmatic_pdf_pair",
         "programmatic_pdf_known_text",
+        "programmatic_vsdx_single",
         "existing_fixture",
         "none"
       ],

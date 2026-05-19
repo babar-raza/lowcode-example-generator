@@ -813,6 +813,9 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
 # ---------------------------------------------------------------------------
 
 _FORMAT_NAME_TO_EXT: dict[str, str] = {
+    # Type-specific overrides (must appear before generic entries)
+    "mailmerger": ".docx",
+    "diagramconverter": ".vdx",
     "html": ".html",
     "pdf": ".pdf",
     "json": ".json",
@@ -852,18 +855,19 @@ _FORMAT_NAME_TO_EXT: dict[str, str] = {
 
 def _infer_output_extension(type_name: str, hints: dict | None = None) -> str:
     """Infer output file extension from type name, then hints, then fallback."""
-    # Strip common suffixes to get a format token
     name_lower = type_name.lower()
+
+    # Try the full name first (handles type-specific overrides like mailmerger, diagramconverter)
+    if name_lower in _FORMAT_NAME_TO_EXT:
+        return _FORMAT_NAME_TO_EXT[name_lower]
+
+    # Strip common suffixes to get a format token
     for suffix in ("converter", "merger", "splitter", "locker", "compressor", "signer"):
         if name_lower.endswith(suffix):
             token = name_lower[: -len(suffix)]
             if token in _FORMAT_NAME_TO_EXT:
                 return _FORMAT_NAME_TO_EXT[token]
             break
-
-    # Try the full name as a format token
-    if name_lower in _FORMAT_NAME_TO_EXT:
-        return _FORMAT_NAME_TO_EXT[name_lower]
 
     # Hints fallback
     if hints:

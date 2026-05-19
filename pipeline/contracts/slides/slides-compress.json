@@ -1,0 +1,35 @@
+{
+  "scenario_id": "slides-compress",
+  "family": "slides",
+  "type_name": "Compress",
+  "full_type_name": "Aspose.Slides.LowCode.Compress",
+  "primary_method": "RemoveUnusedLayoutSlides",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Compress",
+    "Compress.RemoveUnusedLayoutSlides",
+    "Presentation"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new Compress("
+  ],
+  "output_expectations": {
+    "output_format": ".pptx",
+    "validation_method": "file_exists",
+    "notes": "Static API: Compress.RemoveUnusedLayoutSlides(pres). Modifies Presentation in-place, then saved via pres.Save()."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/compress/Program.cs",
+    "pipeline/configs/families/slides.yml",
+    "pipeline/configs/denominators/slides.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Compress methods are static. Operates on loaded Presentation object. Post-operation save required via pres.Save()."
+}

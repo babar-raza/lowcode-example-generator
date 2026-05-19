@@ -1,0 +1,37 @@
+{
+  "scenario_id": "email-converter",
+  "family": "email",
+  "type_name": "Converter",
+  "full_type_name": "Aspose.Email.LowCode.Converter",
+  "primary_method": "ConvertToHtml",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Converter",
+    "Converter.ConvertToHtml",
+    "FolderOutputHandler",
+    "MemoryStream"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new Converter(",
+    "MailMessage.Save("
+  ],
+  "output_expectations": {
+    "output_format": ".html",
+    "validation_method": "file_exists",
+    "notes": "Static async API: await Converter.ConvertToHtml(stream, fileName, outputHandler). Output via FolderOutputHandler to directory."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/converter/Program.cs",
+    "pipeline/configs/families/email.yml",
+    "pipeline/configs/denominators/email.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Email Converter is async (ConvertToHtml returns Task). Input via MemoryStream from .eml file. Output via FolderOutputHandler (IOutputHandler) to directory. Published to target repo main branch."
+}

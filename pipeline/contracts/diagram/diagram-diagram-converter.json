@@ -2,29 +2,35 @@
   "scenario_id": "diagram-diagram-converter",
   "family": "diagram",
   "type_name": "DiagramConverter",
+  "full_type_name": "Aspose.Diagram.LowCode.DiagramConverter",
   "primary_method": "Process",
   "contract_version": "1.0.0",
   "fixture_type": "programmatic_vsdx_single",
   "expected_symbols": [
-    "Aspose.Diagram.LowCode.DiagramConverter",
-    "Aspose.Diagram.LowCode.DiagramConverter.Process"
+    "DiagramConverter",
+    "DiagramConverter.Process"
   ],
   "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
     "File.WriteAllBytes",
     "new byte[]",
-    "ZipArchive",
-    "MemoryStream",
-    "new FileStream"
+    "ZipArchive"
   ],
   "output_expectations": {
     "output_format": ".vdx",
-    "validation_method": "file_exists_nonzero"
+    "validation_method": "file_exists_nonzero",
+    "notes": "Static API: DiagramConverter.Process(templateFile, resultStream). Converts VSDX to VDX format."
   },
-  "publication_status": "PR_READY",
-  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/runs/pilot-diagram-20260511-171233/evidence/latest/example-lifecycle-records.json",
-    "workspace/verification/latest/diagram-fewshot-generation-verdict.json"
+    "workspace/verification/latest/diagram-fewshot-generation-verdict.json",
+    "pipeline/configs/denominators/diagram.json"
   ],
-  "last_verified_at": "2026-05-11T00:00:00Z"
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Published to target repo main branch. Fixture: programmatic VSDX via Aspose.Diagram.Diagram() API."
 }

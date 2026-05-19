@@ -1,0 +1,36 @@
+{
+  "scenario_id": "slides-convert",
+  "family": "slides",
+  "type_name": "Convert",
+  "full_type_name": "Aspose.Slides.LowCode.Convert",
+  "primary_method": "ToPdf",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Convert",
+    "Convert.ToPdf",
+    "Presentation"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new Convert(",
+    "Presentation.Save("
+  ],
+  "output_expectations": {
+    "output_format": ".pdf",
+    "validation_method": "file_exists",
+    "notes": "Static API: Convert.ToPdf(inputPath, outputPath). File-path overload, no Presentation object needed for the LowCode call."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/convert/Program.cs",
+    "pipeline/configs/families/slides.yml",
+    "pipeline/configs/denominators/slides.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Convert methods are static. ToPdf uses file-path overload. Presentation fixture created programmatically for input, but Convert.ToPdf takes string paths."
+}

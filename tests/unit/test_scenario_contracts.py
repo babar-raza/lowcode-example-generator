@@ -36,9 +36,12 @@ def _load_contracts(family: str) -> list[dict]:
     return contracts
 
 
+_ALL_FAMILIES = ("cells", "words", "pdf", "diagram", "email", "slides")
+
+
 def _all_contracts() -> list[dict]:
     contracts = []
-    for family in ("cells", "words", "pdf"):
+    for family in _ALL_FAMILIES:
         contracts.extend(_load_contracts(family))
     return contracts
 
@@ -51,31 +54,32 @@ class TestContractFilesExist:
     def test_contracts_dir_exists(self):
         assert _CONTRACTS_DIR.exists(), f"pipeline/contracts/ directory missing"
 
-    def test_cells_contracts_dir_exists(self):
-        assert (_CONTRACTS_DIR / "cells").exists()
-
-    def test_words_contracts_dir_exists(self):
-        assert (_CONTRACTS_DIR / "words").exists()
-
-    def test_pdf_contracts_dir_exists(self):
-        assert (_CONTRACTS_DIR / "pdf").exists()
+    @pytest.mark.parametrize("family", _ALL_FAMILIES)
+    def test_contracts_dir_exists(self, family):
+        assert (_CONTRACTS_DIR / family).exists(), f"pipeline/contracts/{family}/ missing"
 
     def test_cells_has_9_contracts(self):
-        contracts = _load_contracts("cells")
-        assert len(contracts) == 9, f"Expected 9 cells contracts, got {len(contracts)}"
+        assert len(_load_contracts("cells")) == 9
 
-    def test_words_has_7_contracts(self):
-        contracts = _load_contracts("words")
-        assert len(contracts) == 8, f"Expected 8 words contracts, got {len(contracts)}"
+    def test_words_has_8_contracts(self):
+        assert len(_load_contracts("words")) == 8
 
     def test_pdf_has_19_contracts(self):
-        contracts = _load_contracts("pdf")
-        assert len(contracts) == 19, f"Expected 19 pdf contracts, got {len(contracts)}"
+        assert len(_load_contracts("pdf")) == 19
 
-    def test_total_contracts_is_36(self):
-        """Total = 9 cells + 8 words + 19 pdf = 36. Sprint 39: added 5 Wave E/F/G contracts (security/form-flattener/form-editor/form-exporter/signature)."""
+    def test_diagram_has_2_contracts(self):
+        assert len(_load_contracts("diagram")) == 2
+
+    def test_email_has_1_contract(self):
+        assert len(_load_contracts("email")) == 1
+
+    def test_slides_has_3_contracts(self):
+        assert len(_load_contracts("slides")) == 3
+
+    def test_total_contracts_is_42(self):
+        """Total = 9 cells + 8 words + 19 pdf + 2 diagram + 1 email + 3 slides = 42."""
         total = len(_all_contracts())
-        assert total == 36, f"Expected 36 total contracts, got {total}"
+        assert total == 42, f"Expected 42 total contracts, got {total}"
 
 
 # ---------------------------------------------------------------------------
@@ -88,14 +92,14 @@ class TestContractSchemaValidation:
         assert _SCHEMA_PATH.exists(), f"Schema missing: {_SCHEMA_PATH}"
         return json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
 
-    @pytest.mark.parametrize("family", ["cells", "words", "pdf"])
+    @pytest.mark.parametrize("family", _ALL_FAMILIES)
     def test_contracts_parse_as_valid_json(self, family):
         family_dir = _CONTRACTS_DIR / family
         for path in family_dir.glob("*.json"):
             data = json.loads(path.read_text(encoding="utf-8"))
             assert isinstance(data, dict), f"Contract {path.name} is not a dict"
 
-    @pytest.mark.parametrize("family", ["cells", "words", "pdf"])
+    @pytest.mark.parametrize("family", _ALL_FAMILIES)
     def test_contracts_have_required_fields(self, family, schema):
         required = schema.get("required", [])
         for contract in _load_contracts(family):
@@ -110,7 +114,7 @@ class TestContractSchemaValidation:
         assert len(ids) == len(set(ids)), f"Duplicate scenario IDs: {set(x for x in ids if ids.count(x)>1)}"
 
     def test_all_families_match_dir(self):
-        for family in ("cells", "words", "pdf"):
+        for family in _ALL_FAMILIES:
             for contract in _load_contracts(family):
                 assert contract["family"] == family, (
                     f"Contract {contract['scenario_id']} has family={contract['family']} "
@@ -141,7 +145,7 @@ class TestContractSchemaValidation:
         valid = {
             "generated_fixture_file", "programmatic_input", "programmatic_pdf_single",
             "programmatic_pdf_multi_page", "programmatic_pdf_pair", "programmatic_pdf_known_text",
-            "existing_fixture", "none"
+            "programmatic_vsdx_single", "existing_fixture", "none"
         }
         for contract in _all_contracts():
             ft = contract.get("fixture_type", "")
@@ -321,3 +325,83 @@ class TestContractConsistencyWithDenominator:
         contract_ids = {c["scenario_id"] for c in _load_contracts("cells")}
         missing = runnable - contract_ids
         assert len(missing) == 0, f"Cells runnable scenarios without contracts: {missing}"
+
+    def test_email_contract_count_matches_denominator(self):
+        denom = self._load_denominator("email")
+        contracts = _load_contracts("email")
+        assert len(contracts) >= denom["published_count"], (
+            f"Email: {len(contracts)} contracts < {denom['published_count']} published"
+        )
+
+    def test_slides_contract_count_matches_denominator(self):
+        denom = self._load_denominator("slides")
+        contracts = _load_contracts("slides")
+        assert len(contracts) >= denom["published_count"], (
+            f"Slides: {len(contracts)} contracts < {denom['published_count']} published"
+        )
+
+    def test_diagram_contract_count_matches_denominator(self):
+        denom = self._load_denominator("diagram")
+        contracts = _load_contracts("diagram")
+        assert len(contracts) >= denom["published_count"], (
+            f"Diagram: {len(contracts)} contracts < {denom['published_count']} published"
+        )
+
+
+# ---------------------------------------------------------------------------
+# TestEmailContracts
+# ---------------------------------------------------------------------------
+
+class TestEmailContracts:
+    def test_email_converter_scenario_id(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
+        assert "email-converter" in contracts
+
+    def test_email_converter_is_merged(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
+        assert contracts["email-converter"]["publication_status"] == "MERGED"
+
+    def test_email_converter_uses_async_method(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
+        assert contracts["email-converter"]["primary_method"] == "ConvertToHtml"
+
+    def test_email_converter_forbids_new_converter(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
+        assert "new Converter(" in contracts["email-converter"]["forbidden_patterns"]
+
+
+# ---------------------------------------------------------------------------
+# TestSlidesContracts
+# ---------------------------------------------------------------------------
+
+class TestSlidesContracts:
+    def test_slides_scenario_ids_present(self):
+        expected_ids = {"slides-compress", "slides-convert", "slides-merger"}
+        actual_ids = {c["scenario_id"] for c in _load_contracts("slides")}
+        assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
+
+    def test_all_slides_contracts_are_merged(self):
+        for contract in _load_contracts("slides"):
+            assert contract["publication_status"] == "MERGED", (
+                f"Slides contract {contract['scenario_id']} not MERGED"
+            )
+
+    def test_slides_convert_outputs_pdf(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("slides")}
+        assert contracts["slides-convert"]["output_expectations"]["output_format"] == ".pdf"
+
+    def test_slides_merger_outputs_pptx(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("slides")}
+        assert contracts["slides-merger"]["output_expectations"]["output_format"] == ".pptx"
+
+    def test_slides_compress_outputs_pptx(self):
+        contracts = {c["scenario_id"]: c for c in _load_contracts("slides")}
+        assert contracts["slides-compress"]["output_expectations"]["output_format"] == ".pptx"
+
+    def test_slides_contracts_forbid_new_constructor(self):
+        for contract in _load_contracts("slides"):
+            forbidden = contract.get("forbidden_patterns", [])
+            type_name = contract["type_name"]
+            assert f"new {type_name}(" in forbidden, (
+                f"Slides contract {contract['scenario_id']} missing 'new {type_name}(' forbidden pattern"
+            )

@@ -1,0 +1,35 @@
+{
+  "scenario_id": "slides-merger",
+  "family": "slides",
+  "type_name": "Merger",
+  "full_type_name": "Aspose.Slides.LowCode.Merger",
+  "primary_method": "Process",
+  "contract_version": "1.0.0",
+  "fixture_type": "programmatic_input",
+  "expected_symbols": [
+    "Merger",
+    "Merger.Process",
+    "Presentation"
+  ],
+  "forbidden_patterns": [
+    "TODO",
+    "NotImplementedException",
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "new Merger("
+  ],
+  "output_expectations": {
+    "output_format": ".pptx",
+    "validation_method": "file_exists",
+    "notes": "Static API: Merger.Process(new string[] { input1, input2 }, outputPath). Merges multiple presentations."
+  },
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
+  "evidence_sources": [
+    "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/merger/Program.cs",
+    "pipeline/configs/families/slides.yml",
+    "pipeline/configs/denominators/slides.json"
+  ],
+  "last_verified_at": "2026-05-19T00:00:00Z",
+  "notes": "Merger.Process is static. Takes string array of input paths and output path. Fixture created programmatically."
+}

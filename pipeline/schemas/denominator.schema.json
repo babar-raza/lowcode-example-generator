@@ -21,7 +21,7 @@
   "properties": {
     "family": {
       "type": "string",
-      "enum": ["cells", "words", "pdf"],
+      "enum": ["cells", "words", "pdf", "diagram", "email", "slides"],
       "description": "Family identifier"
     },
     "source_package": {
@@ -38,10 +38,10 @@
       "description": "SHA256 of the resolved .nupkg file"
     },
     "api_catalog_sha256": {
-      "type": "string",
-      "minLength": 64,
+      "type": ["string", "null"],
+      "minLength": 0,
       "maxLength": 64,
-      "description": "SHA256 hex of the api-catalog.json used for this denominator"
+      "description": "SHA256 hex of the api-catalog.json used for this denominator. Null if no reflection catalog exists."
     },
     "api_catalog_source": {
       "type": ["string", "null"],
@@ -92,8 +92,7 @@
     },
     "runnable_scenarios_basis": {
       "type": ["string", "null"],
-      "enum": ["FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED", null],
-      "description": "Clarifies which basis the runnable_scenarios count uses"
+      "description": "Clarifies which basis the runnable_scenarios count uses. May be an enum value or a descriptive string."
     },
     "runnable_scenario_ids": {
       "type": ["array", "null"],

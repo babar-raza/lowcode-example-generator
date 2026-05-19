@@ -16,7 +16,7 @@ DENOMINATOR_DIR = REPO_ROOT / "pipeline" / "configs" / "denominators"
 SCHEMA_PATH = REPO_ROOT / "pipeline" / "schemas" / "denominator.schema.json"
 FAMILIES_DIR = REPO_ROOT / "workspace" / "verification" / "latest" / "families"
 
-FAMILIES = ["cells", "words", "pdf"]
+FAMILIES = ["cells", "words", "pdf", "diagram", "email", "slides"]
 
 
 # ---------------------------------------------------------------------------
@@ -47,6 +47,15 @@ class TestDenominatorFilesExist:
 
     def test_pdf_denominator_exists(self):
         assert (DENOMINATOR_DIR / "pdf.json").exists()
+
+    def test_diagram_denominator_exists(self):
+        assert (DENOMINATOR_DIR / "diagram.json").exists()
+
+    def test_email_denominator_exists(self):
+        assert (DENOMINATOR_DIR / "email.json").exists()
+
+    def test_slides_denominator_exists(self):
+        assert (DENOMINATOR_DIR / "slides.json").exists()
 
     def test_denominator_schema_exists(self):
         assert SCHEMA_PATH.exists()
@@ -174,8 +183,7 @@ class TestWordsDenominator:
     def test_words_total_types_is_25(self):
         assert self.d["total_lowcode_types"] == 25
 
-    def test_words_pilot_allowed_count_is_7(self):
-        # Sprint 6: ReportBuilder added to pilot, count is now 8
+    def test_words_pilot_allowed_count_is_8(self):
         assert self.d["allowed_pilot_count"] == 8
 
     def test_words_allowed_pilot_types_present(self):
@@ -185,19 +193,17 @@ class TestWordsDenominator:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
         assert "Processor" not in types, "Processor must NOT be in allowed_pilot_types (API investigation required)"
 
-    def test_words_published_count_is_7(self):
+    def test_words_published_count_is_8(self):
         assert self.d["published_count"] == 8
 
     def test_words_workflow_root_types_is_classified(self):
         assert self.d["workflow_root_types"] == 9
         assert self.d["non_runnable_types"] == 16
 
-    def test_words_excluded_count_is_18(self):
-        # 16 non-standalone + Processor (API gap permanently blocked) = 17
+    def test_words_excluded_count_is_17(self):
         assert self.d["excluded_count"] == 17
 
-    def test_words_runnable_scenarios_is_7(self):
-        # Sprint 6: ReportBuilder added, now 8 active pilot types
+    def test_words_runnable_scenarios_is_8(self):
         assert self.d["runnable_scenarios"] == 8
 
     def test_words_denominator_basis_is_pilot_allowed(self):
@@ -205,8 +211,7 @@ class TestWordsDenominator:
             "Words is in pilot mode; denominator_basis must be PILOT_ALLOWED"
         )
 
-    def test_words_coverage_pct_of_pilot_runnable_is_57(self):
-        # Sprint 6: 8 published / 8 active-pilot types = 100%
+    def test_words_coverage_pct_of_pilot_runnable_is_100(self):
         pct = self.d.get("coverage_pct_of_pilot_runnable")
         assert pct is not None and abs(pct - 100.0) < 0.1
 
@@ -268,7 +273,7 @@ class TestPdfDenominator:
                   "Security", "FormFlattener", "FormEditor", "FormExporter", "Signature"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
-    def test_pdf_published_count_is_4(self):
+    def test_pdf_published_count_is_5(self):
         assert self.d["published_count"] == 5, (
             f"PDF published_count should be 5 (Merger+TextExtractor+Splitter+PdfAConverter+Optimizer), got {self.d['published_count']}"
         )
@@ -305,6 +310,131 @@ class TestPdfDenominator:
 
 
 # ---------------------------------------------------------------------------
+# Diagram-specific tests
+# ---------------------------------------------------------------------------
+
+class TestDiagramDenominator:
+    def setup_method(self):
+        self.d = _load_denominator("diagram")
+
+    def test_diagram_total_types_is_5(self):
+        assert self.d["total_lowcode_types"] == 5
+
+    def test_diagram_workflow_root_types_is_2(self):
+        assert self.d["workflow_root_types"] == 2
+
+    def test_diagram_published_count_is_2(self):
+        assert self.d["published_count"] == 2
+
+    def test_diagram_excluded_count_is_3(self):
+        assert self.d["excluded_count"] == 3
+
+    def test_diagram_runnable_scenarios_is_2(self):
+        assert self.d["runnable_scenarios"] == 2
+
+    def test_diagram_denominator_basis_is_pilot_allowed(self):
+        assert self.d["denominator_basis"] == "PILOT_ALLOWED"
+
+    def test_diagram_coverage_pct_of_workflow_root_is_100(self):
+        pct = self.d.get("coverage_pct_of_workflow_root")
+        assert pct is not None and abs(pct - 100.0) < 0.01
+
+    def test_diagram_total_equals_runnable_plus_excluded(self):
+        total = self.d["total_lowcode_types"]
+        runnable = self.d["runnable_scenarios"]
+        excluded = self.d["excluded_count"]
+        assert total == runnable + excluded
+
+    def test_diagram_runnable_scenario_ids_count_matches(self):
+        ids = self.d.get("runnable_scenario_ids")
+        assert ids is not None and len(ids) == self.d["runnable_scenarios"]
+
+
+# ---------------------------------------------------------------------------
+# Email-specific tests
+# ---------------------------------------------------------------------------
+
+class TestEmailDenominator:
+    def setup_method(self):
+        self.d = _load_denominator("email")
+
+    def test_email_total_types_is_3(self):
+        assert self.d["total_lowcode_types"] == 3
+
+    def test_email_workflow_root_types_is_1(self):
+        assert self.d["workflow_root_types"] == 1
+
+    def test_email_published_count_is_1(self):
+        assert self.d["published_count"] == 1
+
+    def test_email_excluded_count_is_2(self):
+        assert self.d["excluded_count"] == 2
+
+    def test_email_runnable_scenarios_is_1(self):
+        assert self.d["runnable_scenarios"] == 1
+
+    def test_email_denominator_basis_is_pilot_allowed(self):
+        assert self.d["denominator_basis"] == "PILOT_ALLOWED"
+
+    def test_email_coverage_pct_of_workflow_root_is_100(self):
+        pct = self.d.get("coverage_pct_of_workflow_root")
+        assert pct is not None and abs(pct - 100.0) < 0.01
+
+    def test_email_total_equals_runnable_plus_excluded(self):
+        total = self.d["total_lowcode_types"]
+        runnable = self.d["runnable_scenarios"]
+        excluded = self.d["excluded_count"]
+        assert total == runnable + excluded
+
+
+# ---------------------------------------------------------------------------
+# Slides-specific tests
+# ---------------------------------------------------------------------------
+
+class TestSlidesDenominator:
+    def setup_method(self):
+        self.d = _load_denominator("slides")
+
+    def test_slides_total_types_is_5(self):
+        assert self.d["total_lowcode_types"] == 5
+
+    def test_slides_workflow_root_types_is_3(self):
+        assert self.d["workflow_root_types"] == 3
+
+    def test_slides_published_count_is_3(self):
+        assert self.d["published_count"] == 3
+
+    def test_slides_excluded_count_is_2(self):
+        assert self.d["excluded_count"] == 2
+
+    def test_slides_runnable_scenarios_is_3(self):
+        assert self.d["runnable_scenarios"] == 3
+
+    def test_slides_denominator_basis_is_pilot_allowed(self):
+        assert self.d["denominator_basis"] == "PILOT_ALLOWED"
+
+    def test_slides_coverage_pct_of_workflow_root_is_100(self):
+        pct = self.d.get("coverage_pct_of_workflow_root")
+        assert pct is not None and abs(pct - 100.0) < 0.01
+
+    def test_slides_allowed_pilot_types_present(self):
+        types = self.d["allowed_pilot_types"]
+        assert isinstance(types, list) and len(types) == 3
+        for t in ["Compress", "Convert", "Merger"]:
+            assert t in types
+
+    def test_slides_total_equals_runnable_plus_excluded(self):
+        total = self.d["total_lowcode_types"]
+        runnable = self.d["runnable_scenarios"]
+        excluded = self.d["excluded_count"]
+        assert total == runnable + excluded
+
+    def test_slides_runnable_scenario_ids_count_matches(self):
+        ids = self.d.get("runnable_scenario_ids")
+        assert ids is not None and len(ids) == self.d["runnable_scenarios"]
+
+
+# ---------------------------------------------------------------------------
 # Cross-family consistency tests
 # ---------------------------------------------------------------------------
 
@@ -322,9 +452,11 @@ class TestDenominatorCrossFamily:
         assert len(d["evidence_sources"]) >= 1
 
     @pytest.mark.parametrize("family", FAMILIES)
-    def test_api_catalog_sha256_is_64_hex_chars(self, family: str):
+    def test_api_catalog_sha256_is_64_hex_chars_or_null(self, family: str):
         d = _load_denominator(family)
         sha = d["api_catalog_sha256"]
+        if sha is None:
+            pytest.skip(f"{family} has no reflection-generated catalog (sha256 is null)")
         assert len(sha) == 64 and all(c in "0123456789abcdefABCDEF" for c in sha)
 
     @pytest.mark.parametrize("family", FAMILIES)
@@ -332,9 +464,25 @@ class TestDenominatorCrossFamily:
         d = _load_denominator(family)
         assert d["denominator_basis"] in {"FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED"}
 
-    def test_total_published_across_families_is_22(self):
-        """Integration: total published examples across all families."""
+    def test_total_published_across_families_is_28(self):
+        """Integration: total published examples across all 6 families."""
         total = sum(_load_denominator(f)["published_count"] for f in FAMILIES)
-        assert total == 22, (
-            f"Total published count across cells+words+pdf should be 22 (Cells=9, Words=8, PDF=5), got {total}"
+        assert total == 28, (
+            f"Total published count across all 6 families should be 28 "
+            f"(Cells=9, Words=8, PDF=5, Diagram=2, Email=1, Slides=3), got {total}"
+        )
+
+    @pytest.mark.parametrize("family", FAMILIES)
+    def test_conservation_equation(self, family: str):
+        """published + pr_dry_run_ready + blocked = runnable_scenarios."""
+        d = _load_denominator(family)
+        published = d["published_count"]
+        pr_dry_run = d.get("pr_dry_run_ready_count", 0)
+        blocked = d.get("blocked_count", 0)
+        total = published + pr_dry_run + blocked
+        runnable = d["runnable_scenarios"]
+        assert total == runnable, (
+            f"{family}: conservation equation failed: "
+            f"published ({published}) + pr_dry_run ({pr_dry_run}) + blocked ({blocked}) "
+            f"= {total} != runnable_scenarios ({runnable})"
         )

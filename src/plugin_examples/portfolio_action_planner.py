@@ -94,17 +94,21 @@ class ActionBoard:
     generated_at: str = ""
     generated_from_head: str = ""
     git_dirty_summary: str = ""
+    dirty_categories: dict[str, Any] = field(default_factory=dict)
     actions: list[Action] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        d: dict[str, Any] = {
             "generated_at": self.generated_at,
             "generated_from_head": self.generated_from_head,
             "git_dirty_summary": self.git_dirty_summary,
             "actions": [a.to_dict() for a in self.actions],
             "notes": self.notes,
         }
+        if self.dirty_categories:
+            d["dirty_categories"] = self.dirty_categories
+        return d
 
     def to_json(self, indent: int = 2) -> str:
         return json.dumps(self.to_dict(), indent=indent)
@@ -161,44 +165,107 @@ def _count_contracts(repo_root: Path) -> dict[str, int]:
     return counts
 
 
-_DIRTY_EXCLUDE_PREFIXES = ("workspace/", "output.", "output/", "input.")
-_DIRTY_EXCLUDE_EXACT = {"leg.zip", "test.pfx", "output.json"}
+@dataclass
+class DirtyState:
+    """Categorized dirty file state from git status."""
+    source: list[str] = field(default_factory=list)
+    config: list[str] = field(default_factory=list)
+    test: list[str] = field(default_factory=list)
+    evidence: list[str] = field(default_factory=list)
+    artifact: list[str] = field(default_factory=list)
+
+    @property
+    def actionable_count(self) -> int:
+        return len(self.source) + len(self.config) + len(self.test)
+
+    @property
+    def total_count(self) -> int:
+        return len(self.source) + len(self.config) + len(self.test) + len(self.evidence) + len(self.artifact)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "source_dirty_count": len(self.source),
+            "config_dirty_count": len(self.config),
+            "test_dirty_count": len(self.test),
+            "evidence_dirty_count": len(self.evidence),
+            "generated_artifact_count": len(self.artifact),
+            "actionable_count": self.actionable_count,
+            "source_files": self.source,
+            "config_files": self.config,
+            "test_files": self.test,
+        }
+
+    def summary(self) -> str:
+        if self.actionable_count == 0 and self.total_count == 0:
+            return "clean"
+        parts = []
+        if self.source:
+            parts.append(f"{len(self.source)} source")
+        if self.config:
+            parts.append(f"{len(self.config)} config")
+        if self.test:
+            parts.append(f"{len(self.test)} test")
+        if self.evidence:
+            parts.append(f"{len(self.evidence)} evidence")
+        if self.artifact:
+            parts.append(f"{len(self.artifact)} artifact")
+        return ", ".join(parts) if parts else "clean"
 
 
-def _check_dirty_state(repo_root: Path) -> list[str]:
-    """Return list of dirty source/config/test files (not workspace/evidence/artifacts)."""
+_ARTIFACT_PREFIXES = ("output.", "output/", "input.")
+_ARTIFACT_EXACT = {"leg.zip", "test.pfx", "output.json"}
+_CONFIG_PREFIXES = ("pipeline/configs/", "pipeline/contracts/", ".gitignore")
+_TEST_PREFIXES = ("tests/",)
+_EVIDENCE_PREFIXES = ("workspace/",)
+_SOURCE_PREFIXES = ("src/",)
+
+
+def _classify_dirty_path(path: str) -> str:
+    """Classify a dirty file path into a category."""
+    if any(path.startswith(p) for p in _ARTIFACT_PREFIXES) or path in _ARTIFACT_EXACT:
+        return "artifact"
+    if any(path.startswith(p) for p in _EVIDENCE_PREFIXES):
+        return "evidence"
+    if any(path.startswith(p) for p in _TEST_PREFIXES):
+        return "test"
+    if any(path.startswith(p) for p in _CONFIG_PREFIXES) or path in _CONFIG_PREFIXES:
+        return "config"
+    if any(path.startswith(p) for p in _SOURCE_PREFIXES):
+        return "source"
+    # Default: treat unknown paths as source (safest classification)
+    return "source"
+
+
+def _parse_porcelain_path(line: str) -> str:
+    """Extract file path from a git status --porcelain line."""
+    if not line or len(line) < 4:
+        return ""
+    idx = 0
+    while idx < len(line) and line[idx] in " MADRCU?!":
+        idx += 1
+    path = line[idx:].strip()
+    if " -> " in path:
+        path = path.split(" -> ")[-1]
+    return path
+
+
+def _check_dirty_state(repo_root: Path) -> DirtyState:
+    """Return categorized dirty file state from git status."""
+    state = DirtyState()
     try:
         result = subprocess.run(
             ["git", "status", "--porcelain"],
             cwd=str(repo_root), capture_output=True, text=True, timeout=10,
         )
-        dirty = []
         for line in result.stdout.strip().splitlines():
-            if not line or len(line) < 4:
-                continue
-            # Porcelain format: XY PATH — but leading spaces may be stripped
-            # by text mode on Windows.  Find the first non-status character.
-            # Status chars are in positions 0-1, separator space at position 2.
-            # Robust approach: split on first space after status flags.
-            path = line.lstrip(" MADRCU?!")[0:0]  # fallback empty
-            # Simple: find first occurrence of a path-like char after status
-            idx = 0
-            while idx < len(line) and line[idx] in " MADRCU?!":
-                idx += 1
-            path = line[idx:].strip()
-            # Handle renames: "R  old -> new"
-            if " -> " in path:
-                path = path.split(" -> ")[-1]
+            path = _parse_porcelain_path(line)
             if not path:
                 continue
-            if any(path.startswith(p) for p in _DIRTY_EXCLUDE_PREFIXES):
-                continue
-            if path in _DIRTY_EXCLUDE_EXACT:
-                continue
-            dirty.append(path)
-        return dirty
+            category = _classify_dirty_path(path)
+            getattr(state, category).append(path)
+        return state
     except (subprocess.SubprocessError, FileNotFoundError):
-        return []
+        return state
 
 
 def _get_head_sha(repo_root: Path) -> str:
@@ -222,18 +289,18 @@ def _check_gate(env_var: str, expected_value: str) -> bool:
 # Action generators
 # ---------------------------------------------------------------------------
 
-def _gen_dirty_state_actions(dirty_files: list[str]) -> list[Action]:
-    if not dirty_files:
+def _gen_dirty_state_actions(dirty: DirtyState) -> list[Action]:
+    if dirty.actionable_count == 0:
         return []
     return [Action(
         id="CLOSE_DIRTY_STATE",
         family="cross-family",
         type="CLOSE_PREVIOUS_SPRINT",
-        current_state=f"{len(dirty_files)} dirty source/config/test files",
+        current_state=f"{dirty.actionable_count} dirty ({dirty.summary()})",
         desired_state="committed or classified",
         impact=100,
         safe_to_execute_now=True,
-        reason="Dirty source files must be resolved before any new work",
+        reason="Dirty source/config/test files must be resolved before any new work",
         evidence_required=["commit_sha", "git_status"],
     )]
 
@@ -418,13 +485,13 @@ def compute_action_board(repo_root: Path) -> ActionBoard:
 
     # Freshness metadata
     head_sha = _get_head_sha(repo_root)
-    dirty_files = _check_dirty_state(repo_root)
-    dirty_summary = f"{len(dirty_files)} dirty" if dirty_files else "clean"
+    dirty = _check_dirty_state(repo_root)
 
     board = ActionBoard(
         generated_at=datetime.now(timezone.utc).isoformat(),
         generated_from_head=head_sha,
-        git_dirty_summary=dirty_summary,
+        git_dirty_summary=dirty.summary(),
+        dirty_categories=dirty.to_dict(),
     )
 
     # Read state
@@ -433,7 +500,7 @@ def compute_action_board(repo_root: Path) -> ActionBoard:
 
     # Generate actions from all sources
     all_actions: list[Action] = []
-    all_actions.extend(_gen_dirty_state_actions(dirty_files))
+    all_actions.extend(_gen_dirty_state_actions(dirty))
     all_actions.extend(_gen_merge_actions(denoms))
     all_actions.extend(_gen_conflict_recovery_actions(denoms))
     all_actions.extend(_gen_portfolio_check_actions())

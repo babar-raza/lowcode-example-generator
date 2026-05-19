@@ -404,8 +404,9 @@ STATE_STRENGTH: dict[str, int] = {
     "run_passed": 13,
     "reviewer_attempted": 14,
     "reviewer_failed": 15,
-    "reviewer_passed": 16,
-    "pr_candidate": 17,
+    "reviewer_repaired": 16,
+    "reviewer_passed": 17,
+    "pr_candidate": 18,
 }
 
 

@@ -73,6 +73,11 @@ class ReadmeAuditResult:
     found_example_count: int = 0
     # Method-level symbol check: examples whose api_class lacks a method qualifier (advisory)
     unqualified_api_classes: list[str] = field(default_factory=list)
+    # Semantic checks (V8 format lifecycle, advisory only)
+    same_format_converter_warnings: list[str] = field(default_factory=list)
+    splitter_cardinality_warnings: list[str] = field(default_factory=list)
+    merger_cardinality_warnings: list[str] = field(default_factory=list)
+    extractor_output_warnings: list[str] = field(default_factory=list)
 
 
 def _extract_examples_section(content: str) -> str:
@@ -331,6 +336,67 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
                             f"XLSX input format found in {family} README table (xlsx input is cells-specific)"
                         )
                         break
+
+    # --- 16. Same-format converter warning (advisory, non-fatal) ---
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        op_kind = ex.get("operation_kind", "")
+        in_fmt = ex.get("input_format", "")
+        out_fmt = ex.get("output_format", "")
+        name = ex.get("name", "")
+        if op_kind == "converter" and in_fmt and out_fmt and in_fmt == out_fmt:
+            result.same_format_converter_warnings.append(
+                f"{name}: converter with same input/output format '{in_fmt}'"
+            )
+
+    # --- 17. Splitter cardinality warning (advisory, non-fatal) ---
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        op_kind = ex.get("operation_kind", "")
+        name = ex.get("name", "")
+        out_display = ex.get("output_format_display", "")
+        if op_kind == "splitter" and out_display and "1" not in out_display and "N" not in out_display.upper():
+            result.splitter_cardinality_warnings.append(
+                f"{name}: splitter output display '{out_display}' missing 1->N indicator"
+            )
+
+    # --- 18. Merger cardinality warning (advisory, non-fatal) ---
+    _MERGER_INDICATORS = re.compile(r"\d+\s*[×x]|[Nn]\s*[×x]|×", re.IGNORECASE)
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        op_kind = ex.get("operation_kind", "")
+        name = ex.get("name", "")
+        in_display = ex.get("input_format_display", "")
+        if op_kind == "merger" and in_display and not _MERGER_INDICATORS.search(in_display):
+            result.merger_cardinality_warnings.append(
+                f"{name}: merger input display '{in_display}' missing N× indicator"
+            )
+
+    # --- 19. Extractor output kind validation (advisory, non-fatal) ---
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        op_kind = ex.get("operation_kind", "")
+        name = ex.get("name", "")
+        out_display = ex.get("output_format_display", "")
+        if op_kind in ("extractor", "text_extractor") and out_display:
+            if "stdout" not in out_display.lower() and "text" not in out_display.lower():
+                result.extractor_output_warnings.append(
+                    f"{name}: extractor output display '{out_display}' missing stdout/text indicator"
+                )
+        elif op_kind == "image_extractor" and out_display:
+            if not re.search(r"\bN\b|\d+\s+files?|\bfiles?\b", out_display, re.IGNORECASE):
+                result.extractor_output_warnings.append(
+                    f"{name}: image extractor output display '{out_display}' missing N-files indicator"
+                )
+        elif op_kind == "directory_output" and out_display:
+            if "dir" not in out_display.lower():
+                result.extractor_output_warnings.append(
+                    f"{name}: directory output display '{out_display}' missing directory indicator"
+                )
 
     # --- URL domain validation (aspose.net link policy) ---
     from plugin_examples.publisher.aspose_links import (

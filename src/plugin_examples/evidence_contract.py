@@ -2168,3 +2168,178 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
             "failure_verdict": "BUNDLE_CONTRACT_FAILED",
             "pass_verdict": "BUNDLE_CONTRACT_PASSED",
         }
+
+
+# ---------------------------------------------------------------------------
+# V8 — Format Capability Manifest Category
+# ---------------------------------------------------------------------------
+
+_REQUIRED_CATEGORIES_V8_NEW: dict[str, list[str]] = {
+    "format_capability_manifest": [
+        "format-capability-manifest-cells.json",
+        "format-capability-manifest-words.json",
+        "format-capability-manifest-pdf.json",
+        "format-capability-manifest-diagram.json",
+        "format-capability-manifest-email.json",
+        "format-capability-manifest-slides.json",
+    ],
+}
+
+COMBINED_CATEGORIES_V8: dict[str, list[str]] = {
+    **COMBINED_CATEGORIES_V7,
+    **_REQUIRED_CATEGORIES_V8_NEW,
+}
+
+MIN_CATEGORIES_REQUIRED_V8: int = len(COMBINED_CATEGORIES_V8)
+
+#: Allowed final verdicts for V8 bundles.
+ALLOWED_VERDICTS_V8: frozenset[str] = frozenset({
+    "FORMAT_LIFECYCLE_V8_AUDITOR_VERIFIED",
+    "FORMAT_LIFECYCLE_V8_AUDITOR_PARTIAL_WITH_BLOCKERS",
+    "FORMAT_LIFECYCLE_V8_AUDITOR_BLOCKED",
+    # V7 verdicts remain valid for backward compatibility
+    *ALLOWED_VERDICTS_V7,
+})
+
+
+class StrictEvidenceContractV8(StrictEvidenceContractV7):
+    """
+    v8 of the strict evidence contract.
+
+    Extends v7 with:
+    - 70 required categories (69 from v7 + 1 format_capability_manifest).
+    - format-capability-manifest-{family}.json: at least one must be valid JSON.
+    - V8 verdicts required (V7 verdicts also accepted for compatibility).
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+            return result
+
+        if not zip_path.is_absolute():
+            result.failures.append(
+                f"v8: ZIP path must be absolute for evidence completeness, got: {zip_path}"
+            )
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                # Presence checks — v8 categories (70 total)
+                for category, patterns in COMBINED_CATEGORIES_V8.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of {patterns}"
+                        )
+
+                # --- V8 Content Checks ---
+
+                # 1. Inherit V7: readme-sync-audit.json all_families_in_sync
+                for n in names:
+                    if Path(n).name == "readme-sync-audit.json":
+                        try:
+                            data = json.loads(zf.read(n).decode("utf-8"))
+                            if not data.get("all_families_in_sync", False):
+                                result.failures.append(
+                                    "readme-sync-audit.json: all_families_in_sync is not true"
+                                )
+                        except (json.JSONDecodeError, KeyError):
+                            result.failures.append(
+                                "readme-sync-audit.json: cannot parse JSON"
+                            )
+                        break
+
+                # 2. Final verdict check (V8 verdicts)
+                for n in names:
+                    if Path(n).name == "final-verdict.md":
+                        content = zf.read(n).decode("utf-8", errors="replace")
+                        if not any(v in content for v in ALLOWED_VERDICTS_V8):
+                            result.failures.append(
+                                "final-verdict.md: missing allowed verdict. "
+                                f"Allowed: {sorted(ALLOWED_VERDICTS_V8)}"
+                            )
+                        break
+
+                # 3. V8-specific: at least one format-capability-manifest must be valid JSON
+                manifest_found = False
+                for n in names:
+                    bn = Path(n).name
+                    if bn.startswith("format-capability-manifest-") and bn.endswith(".json"):
+                        try:
+                            data = json.loads(zf.read(n).decode("utf-8"))
+                            if isinstance(data, dict) and data.get("family"):
+                                manifest_found = True
+                                break
+                        except (json.JSONDecodeError, KeyError):
+                            continue
+                if "format_capability_manifest" in result.categories_found and not manifest_found:
+                    result.failures.append(
+                        "format-capability-manifest: file(s) present but none contain valid JSON with 'family' key"
+                    )
+
+                # 4. Inherit V7: secret scanning
+                for n in names:
+                    try:
+                        raw = zf.read(n).decode("utf-8", errors="replace")
+                    except Exception:
+                        continue
+                    for pat in SECRET_PATTERNS:
+                        if pat.search(raw):
+                            result.failures.append(
+                                f"Secret detected in {n}: pattern '{pat.pattern}'"
+                            )
+
+                # Determine result
+                if not result.failures:
+                    result.passed = True
+                    result.verdict = "BUNDLE_CONTRACT_PASSED"
+                else:
+                    result.verdict = "BUNDLE_CONTRACT_FAILED"
+
+        except zipfile.BadZipFile:
+            result.failures.append(f"Not a valid ZIP file: {zip_path}")
+            result.verdict = "BUNDLE_CONTRACT_FAILED"
+
+        return result
+
+    @staticmethod
+    def contract_definition() -> dict:
+        return {
+            "version": "v8",
+            "description": (
+                "Format Lifecycle V8 evidence contract. "
+                "70 categories (69 from v7 + 1 format_capability_manifest). "
+                "Validates format-capability manifests contain valid JSON."
+            ),
+            "required_categories": {
+                cat: patterns for cat, patterns in COMBINED_CATEGORIES_V8.items()
+            },
+            "min_categories_required": MIN_CATEGORIES_REQUIRED_V8,
+            "content_checks": [
+                "readme-sync-audit.json: all_families_in_sync must be true",
+                "final-verdict.md: must contain an allowed V8 verdict",
+                "format-capability-manifest: at least one must be valid JSON with 'family' key",
+            ],
+            "category_count_reconciliation": {
+                "v7_categories": MIN_CATEGORIES_REQUIRED_V7,
+                "v8_categories": MIN_CATEGORIES_REQUIRED_V8,
+                "categories_added_in_v8": sorted(_REQUIRED_CATEGORIES_V8_NEW.keys()),
+                "note": "v7 had 69. v8 adds 1 (format_capability_manifest) → 70.",
+            },
+            "secret_scanning_enabled": True,
+            "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
+            "allowed_verdicts": sorted(ALLOWED_VERDICTS_V8),
+            "failure_verdict": "BUNDLE_CONTRACT_FAILED",
+            "pass_verdict": "BUNDLE_CONTRACT_PASSED",
+        }

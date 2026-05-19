@@ -46,6 +46,10 @@ from plugin_examples.evidence_contract import (
     StrictEvidenceContractV5,
     StrictEvidenceContractV6,
     StrictEvidenceContractV7,
+    ALLOWED_VERDICTS_V8,
+    COMBINED_CATEGORIES_V8,
+    MIN_CATEGORIES_REQUIRED_V8,
+    StrictEvidenceContractV8,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
@@ -1942,3 +1946,117 @@ class TestStrictEvidenceContractV7Rejects:
         result = StrictEvidenceContractV7().validate_zip(zp)
         assert not result.passed
         assert any("Sprint 34 verdict" in f for f in result.failures)
+
+
+# ---------------------------------------------------------------------------
+# V8 Tests — Format Capability Manifest Category
+# ---------------------------------------------------------------------------
+
+def _minimal_v8_complete_files() -> dict[str, str]:
+    """Return files satisfying all 70 v8 required categories with valid content."""
+    files = dict(_minimal_v7_complete_files())
+    # v8 new category: format-capability-manifest
+    files["format-capability-manifest-cells.json"] = json.dumps({
+        "family": "cells",
+        "generation_date": "2026-05-19T08:00:00+00:00",
+        "types": {"SpreadsheetConverter": {"operation_kind": "converter"}},
+    })
+    # Update verdict to V8
+    files["final-verdict.md"] = (
+        "# FORMAT_LIFECYCLE_V8_AUDITOR_VERIFIED\n\n"
+        "All format lifecycle gaps resolved."
+    )
+    return files
+
+
+class TestStrictEvidenceContractV8Accepts:
+
+    def test_v8_accepts_complete_bundle(self, tmp_path):
+        files = _minimal_v8_complete_files()
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert result.passed, f"V8 validation failed: {result.failures}"
+        assert result.verdict == "BUNDLE_CONTRACT_PASSED"
+        assert len(result.categories_found) >= 70
+
+    def test_v8_contract_definition_version(self):
+        defn = StrictEvidenceContractV8.contract_definition()
+        assert defn["version"] == "v8"
+
+    def test_v8_contract_definition_has_70_categories(self):
+        defn = StrictEvidenceContractV8.contract_definition()
+        assert defn["min_categories_required"] == 70
+        assert len(defn["required_categories"]) == 70
+
+    def test_v8_contract_lists_format_capability_manifest(self):
+        defn = StrictEvidenceContractV8.contract_definition()
+        cats = defn["required_categories"]
+        assert "format_capability_manifest" in cats
+
+    def test_v8_category_reconciliation(self):
+        defn = StrictEvidenceContractV8.contract_definition()
+        recon = defn["category_count_reconciliation"]
+        assert recon["v7_categories"] == 69
+        assert recon["v8_categories"] == 70
+        assert "format_capability_manifest" in recon["categories_added_in_v8"]
+
+    def test_v8_v7_categories_superset(self):
+        """V8 must contain all V7 categories."""
+        for cat in COMBINED_CATEGORIES_V7:
+            assert cat in COMBINED_CATEGORIES_V8, f"V8 missing V7 category: {cat}"
+
+    def test_v8_unique_category_count(self):
+        """Each version has a unique count."""
+        assert MIN_CATEGORIES_REQUIRED_V7 == 69
+        assert MIN_CATEGORIES_REQUIRED_V8 == 70
+        assert MIN_CATEGORIES_REQUIRED_V7 != MIN_CATEGORIES_REQUIRED_V8
+
+    def test_v8_accepts_v7_verdict_for_backward_compat(self, tmp_path):
+        """V8 contract should also accept V7 verdicts."""
+        files = _minimal_v8_complete_files()
+        files["final-verdict.md"] = (
+            "# SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED\n\n"
+            "V7 verdict in V8 bundle."
+        )
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert result.passed, f"V8 should accept V7 verdict: {result.failures}"
+
+
+class TestStrictEvidenceContractV8Rejects:
+
+    def test_v8_rejects_missing_format_capability_manifest(self, tmp_path):
+        files = _minimal_v7_complete_files()
+        # V7 files but no format-capability-manifest and V8 verdict
+        files["final-verdict.md"] = (
+            "# FORMAT_LIFECYCLE_V8_AUDITOR_VERIFIED\n\nMissing manifest."
+        )
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert not result.passed
+        assert "format_capability_manifest" in result.categories_missing
+
+    def test_v8_rejects_invalid_manifest_json(self, tmp_path):
+        files = _minimal_v8_complete_files()
+        # Replace manifest with invalid JSON
+        files["format-capability-manifest-cells.json"] = "not valid json"
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert not result.passed
+        assert any("valid JSON" in f for f in result.failures)
+
+    def test_v8_rejects_manifest_without_family_key(self, tmp_path):
+        files = _minimal_v8_complete_files()
+        files["format-capability-manifest-cells.json"] = json.dumps({"not_family": "cells"})
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert not result.passed
+        assert any("family" in f for f in result.failures)
+
+    def test_v8_rejects_wrong_verdict(self, tmp_path):
+        files = _minimal_v8_complete_files()
+        files["final-verdict.md"] = "# SOME_UNKNOWN_VERDICT\n\nWrong."
+        zp = _make_zip(tmp_path, files)
+        result = StrictEvidenceContractV8().validate_zip(zp)
+        assert not result.passed
+        assert any("verdict" in f.lower() for f in result.failures)

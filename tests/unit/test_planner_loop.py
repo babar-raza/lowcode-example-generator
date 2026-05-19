@@ -210,7 +210,7 @@ class TestIdempotencyStop:
             assert len(result.cycles) <= 3
 
     def test_handler_changed_false_contributes_to_stop(self):
-        """All current handlers return changed=False, contributing to stop condition."""
+        """Pre-execution idempotency: cycle 2 stops before running handlers."""
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
@@ -218,9 +218,10 @@ class TestIdempotencyStop:
             )
             if len(result.cycles) >= 2:
                 cycle2 = result.cycles[1]
-                # All actions in cycle 2 should be noop
+                # Cycle 2 should stop before executing any handlers
                 assert len(cycle2.changed_actions) == 0
-                assert len(cycle2.noop_actions) >= 1
+                assert len(cycle2.executed) == 0
+                assert cycle2.verdict == "IDEMPOTENT_NO_CHANGE"
 
     def test_approval_gated_actions_do_not_keep_loop_alive(self):
         """Blocked actions should not prevent loop from stopping on no-change."""

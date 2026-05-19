@@ -242,6 +242,17 @@ def run_execution_loop(
         cycle_md_path = evidence_dir / f"planner-cycle-{cycle_num:02d}.md"
         cycle_md_path.write_text(render_markdown(board), encoding="utf-8")
 
+        # Pre-execution idempotency stop: if fingerprint matches previous cycle
+        # and previous cycle had no changes, skip handler execution entirely
+        if prev_fingerprint is not None and fp == prev_fingerprint:
+            prev_cycle = result.cycles[-1] if result.cycles else None
+            if prev_cycle and not prev_cycle.changed_actions:
+                cycle.verdict = "IDEMPOTENT_NO_CHANGE"
+                cycle.duration_ms = int((time.monotonic() - t0) * 1000)
+                result.cycles.append(cycle)
+                result.stop_reason = "stopped_no_change"
+                break
+
         # Find executable actions (safe + has handler + not approval-gated)
         executed_this_cycle: list[str] = []
         changed_this_cycle: list[str] = []
@@ -303,13 +314,6 @@ def run_execution_loop(
             cycle.verdict = "NO_SAFE_EXECUTABLE_ACTIONS"
             result.cycles.append(cycle)
             result.stop_reason = "exhausted_safe_actions"
-            break
-
-        # 2. Board fingerprint unchanged AND no handlers changed state
-        if prev_fingerprint is not None and fp == prev_fingerprint and not changed_this_cycle:
-            cycle.verdict = "IDEMPOTENT_NO_CHANGE"
-            result.cycles.append(cycle)
-            result.stop_reason = "stopped_no_change"
             break
 
         cycle.verdict = f"EXECUTED_{len(executed_this_cycle)}_ACTIONS"

@@ -1,0 +1,260 @@
+{
+  "run_id": "lowcode-ai-operations-mega-train-20260519-140000",
+  "generated_at": "2026-05-19T14:00:00Z",
+  "total_aspose_net_families": 25,
+  "classification_summary": {
+    "ACTIVE_LOWCODE": 6,
+    "CONFIRMED_NO_LOWCODE": 15,
+    "REFLECTION_BLOCKED": 2,
+    "NO_STANDALONE_NUGET": 1,
+    "ALIAS_DUPLICATE": 1
+  },
+  "families": {
+    "cells": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.Cells",
+      "source_version": "26.5.1",
+      "published_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Cells.LowCode",
+      "workflow_root_types": 9,
+      "total_lowcode_types": 22,
+      "published_count": 9,
+      "coverage_status": "FAMILY_COMPLETE",
+      "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-05T07:05:27+00:00",
+      "post_merge_status": "POST_MERGE_VERIFIED"
+    },
+    "words": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.Words",
+      "source_version": "26.5.0",
+      "published_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Words.LowCode",
+      "workflow_root_types": 9,
+      "total_lowcode_types": 25,
+      "published_count": 8,
+      "coverage_status": "PILOT_COMPLETE",
+      "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-14T06:03:08+00:00",
+      "post_merge_status": "POST_MERGE_VERIFIED",
+      "blockers": ["words/Processor (no public constructor)", "words/SplitCriteria (enum, not runnable)"]
+    },
+    "pdf": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.PDF",
+      "source_version": "26.5.0",
+      "published_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Pdf.Plugins",
+      "workflow_root_types": 22,
+      "total_lowcode_types": 101,
+      "published_count": 5,
+      "pr_ready_count": 14,
+      "coverage_status": "PARTIAL_CANARY",
+      "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-14T06:00:36+00:00",
+      "post_merge_status": "ALL_PASS",
+      "blockers": ["pdf/PdfExtractor (abstract base)", "pdf/PdfToImage (abstract base)", "pdf/FormImporter (library bug)", "pdf/Timestamp (external TSA)", "pdf/Ofd (OFD format, no fixture)"],
+      "open_prs": [5, 6, 7, 8, 9, 10]
+    },
+    "diagram": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.Diagram",
+      "source_version": "26.5.0",
+      "published_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Diagram.LowCode",
+      "workflow_root_types": 2,
+      "total_lowcode_types": 5,
+      "published_count": 2,
+      "coverage_status": "FAMILY_COMPLETE",
+      "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-12T09:46:15+00:00",
+      "post_merge_status": "ALL_PASS"
+    },
+    "email": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.Email",
+      "source_version": "26.4.0",
+      "published_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Email.LowCode",
+      "workflow_root_types": 1,
+      "total_lowcode_types": 3,
+      "published_count": 1,
+      "coverage_status": "FAMILY_COMPLETE",
+      "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-14T06:02:38+00:00",
+      "post_merge_status": "NOT_RUN"
+    },
+    "slides": {
+      "status": "ACTIVE_LOWCODE",
+      "nuget_package": "Aspose.Slides.NET",
+      "source_version": "26.5.0",
+      "published_version": "26.5.0",
+      "lowcode_namespace": "Aspose.Slides.LowCode",
+      "workflow_root_types": 3,
+      "total_lowcode_types": 5,
+      "published_count": 3,
+      "coverage_status": "FAMILY_COMPLETE",
+      "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "last_merge_date": "2026-05-14T06:02:51+00:00",
+      "post_merge_status": "NOT_RUN"
+    },
+    "barcode": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.BarCode",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "cad": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.CAD",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "drawing": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Drawing",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "finance": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Finance",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "font": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Font",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "gis": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.GIS",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "html": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.HTML",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json",
+      "notes": "Reclassified 2026-05-09 from discovery_only to confirmed no LowCode"
+    },
+    "imaging": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Imaging",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "note": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Note",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "omr": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.OMR",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "page": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Page",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "svg": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.SVG",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json",
+      "notes": "Reclassified 2026-05-09 from discovery_only to confirmed no LowCode"
+    },
+    "tasks": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Tasks",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "tex": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.TeX",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "threed": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.3D",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "zip": {
+      "status": "CONFIRMED_NO_LOWCODE",
+      "nuget_package": "Aspose.Zip",
+      "discovery_method": "dll_reflection",
+      "lowcode_namespace_found": false,
+      "eligibility_status": "NO_LOWCODE_NAMESPACE",
+      "registry_source": "workspace/verification/latest/confirmed-no-lowcode-family-registry.json"
+    },
+    "ocr": {
+      "status": "REFLECTION_BLOCKED",
+      "nuget_package": "Aspose.OCR",
+      "discovery_method": "dll_reflection_attempted",
+      "lowcode_namespace_found": "UNKNOWN",
+      "eligibility_status": "DEPENDENCY_BLOCKED",
+      "blocker": "Aspose.AI.LLM assembly not on public NuGet",
+      "family_config": "pipeline/configs/families/ocr.yml",
+      "config_status": "enabled=true, discovery_only=true"
+    },
+    "psd": {
+      "status": "REFLECTION_BLOCKED",
+      "nuget_package": "Aspose.PSD",
+      "discovery_method": "dll_reflection_attempted",
+      "lowcode_namespace_found": "UNKNOWN",
+      "eligibility_status": "DEPENDENCY_BLOCKED",
+      "blocker": "Aspose.JavaAttributes assembly not on public NuGet",
+      "family_config": "pipeline/configs/families/psd.yml",
+      "config_status": "enabled=true, discovery_only=true"
+    },
+    "epub": {
+      "status": "NO_STANDALONE_NUGET",
+      "nuget_package": null,
+      "discovery_method": "nuget_search",
+      "lowcode_namespace_found": "N/A",
+      "eligibility_status": "NO_PACKAGE",
+      "notes": "No standalone Aspose.Epub NuGet package exists. EPUB support is in Aspose.HTML."
+    }
+  }
+}

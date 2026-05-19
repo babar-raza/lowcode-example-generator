@@ -1,0 +1,314 @@
+{
+  "run_id": "lowcode-ai-operations-mega-train-20260519-140000",
+  "report_timestamp": "2026-05-19T14:00:00Z",
+  "report_type": "ai-operational-wiring-report",
+  "modules": {
+    "llm_router": {
+      "file_path": "src/plugin_examples/llm_router/router.py",
+      "line_count": 483,
+      "key_functions": [
+        "LLMRouter.run_preflight",
+        "LLMRouter.get_provider",
+        "LLMRouter.generate",
+        "write_preflight_report",
+        "_check_provider",
+        "_call_provider",
+        "_call_ollama",
+        "_call_openai_compatible",
+        "_resolve_api_key",
+        "_get_endpoint",
+        "_get_provider_base_url",
+        "_get_provider_model",
+        "_route_label"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "runner.py:672 — LLMRouter imported and instantiated in _stage_llm_preflight",
+        "runner.py:674 — LLMRouter created with provider_order from ctx.config.llm.provider_order and metrics_collector from ctx.metrics_collector",
+        "runner.py:678 — run_preflight() called during pipeline execution",
+        "runner.py:680 — write_preflight_report() writes evidence to ctx.evidence_dir",
+        "runner.py:743 — llm_fn (router.generate) passed to generate_example in _stage_generation"
+      ]
+    },
+    "provider_policy": {
+      "file_path": "src/plugin_examples/llm_router/provider_policy.py",
+      "line_count": 180,
+      "key_functions": [
+        "get_policy_violations",
+        "filter_to_approved",
+        "classify_provider_hit",
+        "is_forbidden_model",
+        "classify_documentation_hit",
+        "is_direct_openai_construction",
+        "validate_provider_family",
+        "validate_model_for_provider",
+        "classify_llm_hit"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "router.py:247 — _APPROVED_PROVIDER_FAMILIES mirrors APPROVED_PROVIDERS from provider_policy",
+        "router.py:183 — _check_provider enforces approved-only at preflight (dual-layer with _call_provider:287)",
+        "router.py:287 — _call_provider enforces approved-only at call time",
+        "Policy constants APPROVED_PROVIDERS and UNAPPROVED_PROVIDERS are referenced by tests and safety governance checks",
+        "Dual enforcement: both preflight selection AND call-time generation reject unapproved providers"
+      ]
+    },
+    "healing_intelligence_loader": {
+      "file_path": "src/plugin_examples/healing_intelligence/loader.py",
+      "line_count": 242,
+      "key_functions": [
+        "HealingIntelligenceLoader.load",
+        "HealingIntelligenceLoader.is_loaded",
+        "HealingIntelligenceLoader.registries_present",
+        "HealingIntelligenceLoader.all_core_registries_present",
+        "HealingIntelligenceLoader.get_failure_patterns",
+        "HealingIntelligenceLoader.get_failure_pattern",
+        "HealingIntelligenceLoader.is_known_failure",
+        "HealingIntelligenceLoader.get_failures_for_type",
+        "HealingIntelligenceLoader.get_repair_pattern",
+        "HealingIntelligenceLoader.get_repair_for_failure",
+        "HealingIntelligenceLoader.get_steering_constraints",
+        "HealingIntelligenceLoader.get_global_steering",
+        "HealingIntelligenceLoader.get_validator_rules",
+        "HealingIntelligenceLoader.get_implemented_validator_rules",
+        "HealingIntelligenceLoader.summary"
+      ],
+      "operational_status": "NOT_WIRED",
+      "evidence": [
+        "No import of HealingIntelligenceLoader found in runner.py",
+        "No import of HealingIntelligenceLoader found in __main__.py or any non-test source file",
+        "Only referenced from tests: test_healing_intelligence_activation.py, test_healing_intelligence_loader.py",
+        "Module is fully implemented and tested (242 lines, 15 public methods) but not yet called during pipeline runs",
+        "Designed for generation, repair, semantic validation, and rerun planning per docstring — integration pending"
+      ]
+    },
+    "metrics_models": {
+      "file_path": "src/plugin_examples/metrics/models.py",
+      "line_count": 79,
+      "key_functions": [
+        "LLMCallRecord (dataclass)",
+        "MetricsCollector.record_call",
+        "MetricsCollector.token_usage (property)",
+        "MetricsCollector.api_calls_count (property)"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "runner.py:69 — PipelineContext.metrics_collector field holds MetricsCollector instance",
+        "runner.py:676 — metrics_collector passed to LLMRouter constructor",
+        "router.py:353-394 — _call_ollama calls metrics_collector.record_call on success/failure/retry",
+        "router.py:436-480 — _call_openai_compatible calls metrics_collector.record_call on success/failure/retry",
+        "__main__.py:606+ — MetricsCollector instantiated via _create_metrics_session for CLI commands"
+      ]
+    },
+    "metrics_session": {
+      "file_path": "src/plugin_examples/metrics/session.py",
+      "line_count": 209,
+      "key_functions": [
+        "MetricsSession.start",
+        "MetricsSession.finalize",
+        "MetricsSession.active (property)",
+        "MetricsSession.external_post_allowed (property)",
+        "MetricsSession.count_source_policy (property)"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "__main__.py:41 — MetricsSession imported in _create_metrics_session",
+        "__main__.py:60 — MetricsSession instantiated with command, family, config, collector, etc.",
+        "__main__.py:606,677,719,768,822 — _create_metrics_session called for run, publish-pr, merge-pr, release-status, and discover-lowcode commands",
+        "__main__.py:660,705,754,804,1116,1197,1310,1389 — _finalize_metrics_session called at end of each command",
+        "External POST gated: only 'run' command in EXTERNAL_POST_COMMANDS; all others LOCAL_ONLY_LLM_METRICS"
+      ]
+    },
+    "code_generator": {
+      "file_path": "src/plugin_examples/generator/code_generator.py",
+      "line_count": 1343,
+      "key_functions": [
+        "generate_example",
+        "GeneratedExample (dataclass)",
+        "GenerationError (exception)",
+        "_generate_template",
+        "_generate_deterministic_template_for_scenario",
+        "_extract_code",
+        "_validate_code",
+        "_validate_code_from_constraints",
+        "_select_simplest_overload",
+        "_infer_output_extension"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "runner.py:694 — generate_example imported in _stage_generation",
+        "runner.py:743 — generate_example(packet, llm_generate=llm_fn) called per scenario",
+        "runner.py:808 — _extract_code, _validate_code, _validate_code_from_constraints imported in repair stage",
+        "LLM integration: llm_generate callable parameter receives router.generate bound method",
+        "Template-first bypass: per_type_constraints.template_first skips LLM for deterministic API patterns",
+        "Constraint system: REQUIRED/FORBIDDEN patterns enforced via _validate_code_from_constraints"
+      ]
+    },
+    "evidence_contract": {
+      "file_path": "src/plugin_examples/evidence_contract.py",
+      "line_count": 2345,
+      "key_functions": [
+        "StrictEvidenceContract.validate_zip",
+        "StrictEvidenceContractV2 through V8",
+        "ContractResult (dataclass)"
+      ],
+      "operational_status": "WIRED",
+      "evidence": [
+        "V8 exists at line 2205: StrictEvidenceContractV8(StrictEvidenceContractV7)",
+        "V8 adds format_capability_manifest category (70 total, up from V7's 69)",
+        "V8 validates COMBINED_CATEGORIES_V8 and format-capability-manifest-{family}.json",
+        "Current production contract: V7 (per MEMORY.md sprint 37)",
+        "V8 is defined but not yet the active production contract"
+      ]
+    }
+  },
+  "provider_policy": {
+    "approved_providers": ["llm_professionalize", "ollama"],
+    "forbidden_providers": ["gpt_oss", "openai", "azure_openai"],
+    "forbidden_models": ["gpt-4o-mini"],
+    "enforcement_points": [
+      {
+        "location": "router.py:183-188",
+        "layer": "preflight",
+        "mechanism": "_check_provider rejects unapproved providers before selection"
+      },
+      {
+        "location": "router.py:287-291",
+        "layer": "call-time",
+        "mechanism": "_call_provider raises LLMProviderError for unapproved providers"
+      },
+      {
+        "location": "provider_policy.py:12-13",
+        "layer": "constants",
+        "mechanism": "APPROVED_PROVIDERS and UNAPPROVED_PROVIDERS frozensets define canonical policy"
+      },
+      {
+        "location": "provider_policy.py:82-99",
+        "layer": "audit",
+        "mechanism": "is_direct_openai_construction detects OpenAI SDK usage outside approved module"
+      }
+    ],
+    "dual_layer_enforcement": true,
+    "notes": "Both preflight and call-time enforce the same approved set. router.py has its own _APPROVED_PROVIDER_FAMILIES frozenset that mirrors provider_policy.APPROVED_PROVIDERS."
+  },
+  "healing_intelligence": {
+    "registry_files": {
+      "bootstrap": "healing-intelligence-bootstrap.json",
+      "failure_patterns": "failure-pattern-registry.json",
+      "repair_patterns": "repair-pattern-registry.json",
+      "semantic_steering": "semantic-steering-registry.json",
+      "validator_patterns": "validator-pattern-registry.json"
+    },
+    "registry_dir": "workspace/verification/latest/healing-intelligence",
+    "query_methods": [
+      "get_failure_patterns",
+      "get_failure_pattern",
+      "is_known_failure",
+      "get_failures_for_type",
+      "get_repair_pattern",
+      "get_repair_for_failure",
+      "get_steering_constraints",
+      "get_global_steering",
+      "get_validator_rules",
+      "get_implemented_validator_rules"
+    ],
+    "operational_status": "NOT_WIRED",
+    "notes": "Fully implemented loader with 5 registry files and 10 query methods. Tested extensively (2 test files). NOT imported or called by any production pipeline module (runner.py, __main__.py). Integration into generation/repair/validation stages is pending."
+  },
+  "metrics_pipeline": {
+    "recording_model": {
+      "class": "MetricsCollector",
+      "location": "src/plugin_examples/metrics/models.py",
+      "record_fields": ["call_index", "timestamp", "stage", "provider", "model", "success", "http_status", "prompt_tokens", "completion_tokens", "total_tokens", "token_usage_available", "duration_ms", "error_category"],
+      "instance_scoped": true,
+      "no_global_mutable_state": true
+    },
+    "session_model": {
+      "class": "MetricsSession",
+      "location": "src/plugin_examples/metrics/session.py",
+      "lifecycle": "start() -> finalize()",
+      "finalize_actions": ["write_llm_calls_jsonl", "write_run_summary", "build_payload", "write_payload", "validate_payload", "write_validation_result", "post_metrics or write_post_result"]
+    },
+    "external_post_policy": {
+      "external_post_commands": ["run"],
+      "excluded_commands": ["status", "check"],
+      "local_only_commands": "all other commands (publish-pr, merge-pr, release-status, discover-lowcode)",
+      "gating_mechanism": "EXTERNAL_POST_COMMANDS frozenset; non-run commands get post_blocked_reason=count_source_unverified_for_{command}"
+    }
+  },
+  "llm_router": {
+    "routing_strategy": {
+      "type": "ordered_failover",
+      "description": "Iterates provider_order list, selects first provider that passes preflight",
+      "default_providers": ["llm_professionalize", "ollama"],
+      "provider_order_source": "ctx.config.llm.provider_order"
+    },
+    "retry_policy": {
+      "max_retries": 2,
+      "backoff_seconds": [30, 60],
+      "retryable_errors": ["requests.exceptions.Timeout", "requests.exceptions.ConnectionError"],
+      "non_retryable": "all other exceptions (immediate raise)",
+      "testability": "_LLM_RETRY_BACKOFF_SECONDS list can be patched to [0,0] in tests"
+    },
+    "preflight_checks": {
+      "checks_per_provider": ["endpoint_reachable", "model_available", "json_response", "structured_response_parseable", "timeout_within_limit"],
+      "pass_criteria": "all 5 checks must be True",
+      "policy_enforcement": "unapproved providers rejected before HTTP check",
+      "evidence_output": "workspace/verification/latest/llm-preflight.json"
+    },
+    "supported_backends": {
+      "ollama": {
+        "endpoint": "http://localhost:11434/api/generate",
+        "model": "codellama",
+        "auth": "none"
+      },
+      "llm_professionalize": {
+        "endpoint": "${GPT_OSS_ENDPOINT}/chat/completions",
+        "model": "${GPT_OSS_MODEL} or 'recommended'",
+        "auth": "Bearer ${GPT_OSS_API_KEY}"
+      }
+    }
+  },
+  "code_generator": {
+    "llm_integration_method": {
+      "type": "callable_injection",
+      "description": "generate_example receives llm_generate callable parameter; runner.py binds LLMRouter.generate to this parameter",
+      "fallback": "If llm_generate is None, falls back to _generate_template (catalog-driven template)",
+      "template_first_bypass": "per_type_constraints.template_first=True skips LLM entirely for deterministic API patterns"
+    },
+    "constraint_system": {
+      "required_patterns": "Enforced via _validate_code_from_constraints — code must contain REQUIRED patterns",
+      "forbidden_patterns": "Enforced via _validate_code_from_constraints — code must NOT contain FORBIDDEN patterns",
+      "family_specific_validation": "_validate_code checks family-specific rules (e.g., PDF instance-method patterns)",
+      "repair_loop": "Up to max_repairs LLM re-generations when validation fails",
+      "sources": ["per_type_constraints from config", "healing_intelligence semantic_steering (NOT YET WIRED)"]
+    }
+  },
+  "wiring_summary": {
+    "total_modules": 7,
+    "wired_count": 6,
+    "not_wired_count": 1,
+    "partial_count": 0,
+    "verdict": "6_OF_7_MODULES_WIRED",
+    "details": {
+      "WIRED": [
+        "llm_router (router.py) — instantiated in runner._stage_llm_preflight, generate called per scenario",
+        "provider_policy — enforced at dual layers in router.py (preflight + call-time)",
+        "metrics_models (MetricsCollector) — instantiated in __main__.py, passed to LLMRouter, records every LLM call",
+        "metrics_session (MetricsSession) — created and finalized for every CLI command invocation",
+        "code_generator — generate_example called per scenario in runner._stage_generation",
+        "evidence_contract — V1-V8 chain; V7 active in production; V8 defined and tested"
+      ],
+      "NOT_WIRED": [
+        "healing_intelligence_loader — fully implemented and tested but NOT imported by any production module; integration into generation/repair/validation pending"
+      ]
+    },
+    "cross_module_wiring": {
+      "metrics_to_router": "MetricsCollector passed as LLMRouter.metrics_collector; every _call_ollama and _call_openai_compatible invocation records metrics",
+      "router_to_generator": "LLMRouter.generate bound as llm_fn and passed to generate_example",
+      "policy_to_router": "router._APPROVED_PROVIDER_FAMILIES mirrors provider_policy.APPROVED_PROVIDERS; dual enforcement at preflight and call-time",
+      "session_to_collector": "MetricsSession.collector holds MetricsCollector; finalize() reads collector.calls for evidence writing",
+      "healing_to_generator": "NOT YET CONNECTED — HealingIntelligenceLoader.get_steering_constraints designed to feed code_generator constraint system but not wired"
+    }
+  }
+}

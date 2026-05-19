@@ -1,0 +1,39 @@
+{
+  "run_id": "lowcode-ai-operations-mega-train-20260519-140000",
+  "gates": [
+    {
+      "gate": "Live PR creation",
+      "variable": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "value": "APPROVE_LIVE_PR",
+      "present": false,
+      "status": "NOT_SET"
+    },
+    {
+      "gate": "PR merge",
+      "variable": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+      "value": "APPROVE_MERGE_PR",
+      "present": false,
+      "status": "NOT_SET"
+    },
+    {
+      "gate": "README push",
+      "variable": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL",
+      "value": "APPROVE_README_PUSH",
+      "present": false,
+      "status": "NOT_SET"
+    },
+    {
+      "gate": "GitHub token",
+      "variable": "GH_TOKEN",
+      "present": false,
+      "status": "NOT_CHECKED"
+    },
+    {
+      "gate": "LLM endpoint",
+      "variable": "GPT_OSS_ENDPOINT",
+      "present": false,
+      "status": "NOT_NEEDED"
+    }
+  ],
+  "summary": "No approval-gated operations performed. All work is local (queue repair, module creation, evidence)."
+}

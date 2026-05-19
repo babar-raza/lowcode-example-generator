@@ -1,0 +1,61 @@
+{
+  "run_id": "lowcode-ai-operations-mega-train-20260519-140000",
+  "conservation_check": {
+    "cells": {
+      "published": 9,
+      "pr_dry_run_ready": 0,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 9,
+      "runnable_scenarios": 9,
+      "conservation_holds": true
+    },
+    "words": {
+      "published": 8,
+      "pr_dry_run_ready": 0,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 8,
+      "runnable_scenarios": 8,
+      "conservation_holds": true
+    },
+    "pdf": {
+      "published": 5,
+      "pr_dry_run_ready": 14,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 19,
+      "runnable_scenarios": 19,
+      "conservation_holds": true
+    },
+    "diagram": {
+      "published": 2,
+      "pr_dry_run_ready": 0,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 2,
+      "runnable_scenarios": 2,
+      "conservation_holds": true
+    },
+    "email": {
+      "published": 1,
+      "pr_dry_run_ready": 0,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 1,
+      "runnable_scenarios": 1,
+      "conservation_holds": true
+    },
+    "slides": {
+      "published": 3,
+      "pr_dry_run_ready": 0,
+      "pr_without_contracts": 0,
+      "blocked": 0,
+      "sum": 3,
+      "runnable_scenarios": 3,
+      "conservation_holds": true
+    }
+  },
+  "all_pass": true,
+  "total_published": 28
+}

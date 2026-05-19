@@ -1,0 +1,182 @@
+{
+  "run_id": "lowcode-ai-operations-mega-train-20260519-140000",
+  "generated_at": "2026-05-19T14:00:00Z",
+  "repair_loop": {
+    "description": "The build-repair cycle lives in _stage_validation() (runner.py lines 805-1134). After initial dotnet build+run via run_dotnet_validation(), the loop enters two sequential repair phases: (1) BUILD REPAIR: up to 2 LLM-driven attempts (max_build_repairs=2 when LLM available and not template_mode). Each attempt extracts compiler stdout/stderr, constructs a repair prompt with the failing code and re-injected REQUIRED/FORBIDDEN constraints (both PDF-specific and per-type), sends it to the LLM, runs semantic validation on the proposed fix (_validate_code + _validate_code_from_constraints), and only writes the fix to disk if it passes semantic checks. Then re-runs dotnet build+run. (2) RUNTIME REPAIR: up to 1 LLM-driven attempt (max_runtime_repairs=1). Classifies the runtime failure via classify_runtime_failure() and only attempts repair if the classification is in the repairable_classifications set (8 known failure types). The repair prompt includes the runtime classification, stdout/stderr, and re-injected constraints. Both loops write evidence to repair-attempts.json and update lifecycle records (mark_build_repaired / mark_run_repaired).",
+    "build_repair_max_attempts": 2,
+    "runtime_repair_max_attempts": 1,
+    "constraint_re_injection": "REQUIRED and FORBIDDEN constraints from the generation packet are stored on each project dict at generation time (runner.py line 759-768) and re-injected into repair prompts to prevent semantic regression during repair.",
+    "semantic_guard": "Before writing any repaired code to disk, _validate_code() and _validate_code_from_constraints() run semantic checks. If the repaired code introduces forbidden patterns or drops required patterns, the repair is rejected and the attempt is logged as failed (lines 883-896 for build, 1004-1016 for runtime).",
+    "repairable_runtime_classifications": [
+      "interactive_console_call",
+      "wrong_input_format",
+      "invalid_api_usage",
+      "blocked_invalid_operation",
+      "blocked_null_argument",
+      "missing_options_input",
+      "null_options_passed",
+      "blocked_runtime_context_required"
+    ]
+  },
+  "healing_registries": {
+    "loader_module": "src/plugin_examples/healing_intelligence/loader.py",
+    "registry_dir": "workspace/verification/latest/healing-intelligence/",
+    "core_registry_files": [
+      {
+        "key": "bootstrap",
+        "filename": "healing-intelligence-bootstrap.json",
+        "purpose": "Bootstrap metadata including version and supported families",
+        "exists_on_disk": true
+      },
+      {
+        "key": "failure_patterns",
+        "filename": "failure-pattern-registry.json",
+        "purpose": "Catalog of known failure patterns (FP-001 etc.) with affected families/types, enabling is_known_failure() lookups and get_failures_for_type() queries to avoid re-discovering known issues",
+        "exists_on_disk": true
+      },
+      {
+        "key": "repair_patterns",
+        "filename": "repair-pattern-registry.json",
+        "purpose": "Catalog of repair strategies (RP-001 etc.) linked to failure IDs via resolves_failure, providing get_repair_for_failure() lookups",
+        "exists_on_disk": true
+      },
+      {
+        "key": "semantic_steering",
+        "filename": "semantic-steering-registry.json",
+        "purpose": "Per-family and per-type REQUIRED/FORBIDDEN constraints for LLM prompt steering, served via get_steering_constraints(family, type_name)",
+        "exists_on_disk": true
+      },
+      {
+        "key": "validator_patterns",
+        "filename": "validator-pattern-registry.json",
+        "purpose": "Validator rules (VR-001 etc.) with applies_to scoping and IMPLEMENTED/NOT_IMPLEMENTED status, served via get_validator_rules(family, type_name)",
+        "exists_on_disk": true
+      }
+    ],
+    "additional_intelligence_files_on_disk": 31,
+    "integration_status": "The HealingIntelligenceLoader is fully implemented with lazy loading, graceful degradation, and query APIs. However, it is NOT directly imported or called from runner.py or code_generator.py. The constraint re-injection in the repair loop uses per_type_constraints from family config (not from the healing loader). The healing registries serve as a persistent knowledge layer for cross-session intelligence but are not wired into the live repair loop at runtime."
+  },
+  "gate_evaluation": {
+    "evaluator_module": "src/plugin_examples/gates/evaluator.py",
+    "description": "The gate evaluator (evaluate_gates) produces a GateVerdict by checking stage results against a set of gates. Hard-stop stages (load_config, nuget_fetch, dependency_resolution, extraction, reflection, plugin_detection) halt the pipeline on failure. Subsequent gates assess scenario planning, generation, build validation, runtime validation, and reviewer outcomes. Gates produce pass/fail/degraded/blocked/skipped statuses. The gate engine does NOT trigger repair directly -- repair is handled inline within _stage_validation(). Gates evaluate AFTER repair has already been attempted, so gate_build and gate_run reflect post-repair outcomes. A failed gate_build blocks downstream gate_run. The reviewer gate (gate_reviewer) marks examples as backlogged with recommended_fix='Address reviewer feedback and regenerate' but does NOT trigger an automatic re-generation loop.",
+    "hard_stop_stages": [
+      "load_config",
+      "nuget_fetch",
+      "dependency_resolution",
+      "extraction",
+      "reflection",
+      "plugin_detection"
+    ],
+    "gates_evaluated": [
+      "gate_source_of_truth",
+      "gate_scenarios",
+      "gate_generation",
+      "gate_build",
+      "gate_run",
+      "gate_reviewer",
+      "gate_publish"
+    ],
+    "repair_trigger_mechanism": "Repair is NOT gate-triggered. It runs unconditionally within _stage_validation() whenever build/run failures are detected and LLM is available (max_build_repairs > 0). Gates only evaluate the final post-repair state."
+  },
+  "test_coverage": {
+    "test_file": "tests/unit/test_healing_intelligence_loader.py",
+    "total_test_methods": 22,
+    "test_classes": [
+      {
+        "class": "TestLoaderInit",
+        "tests": 3,
+        "verifies": "Default registry dir path, custom dir override, not-loaded initial state"
+      },
+      {
+        "class": "TestLoaderLoad",
+        "tests": 3,
+        "verifies": "Full registry loading with chaining, idempotent load, graceful degradation with missing files"
+      },
+      {
+        "class": "TestRegistryPresence",
+        "tests": 3,
+        "verifies": "All-core-present check, missing-core detection, registries_present dict accuracy"
+      },
+      {
+        "class": "TestFailurePatternQueries",
+        "tests": 5,
+        "verifies": "Get all patterns, get by ID, not-found returns None, is_known_failure boolean, get_failures_for_type filtering"
+      },
+      {
+        "class": "TestRepairPatternQueries",
+        "tests": 3,
+        "verifies": "Get repair by ID, get repair for failure ID resolution, unknown failure returns None"
+      },
+      {
+        "class": "TestSemanticSteeringQueries",
+        "tests": 3,
+        "verifies": "Per-type REQUIRED/FORBIDDEN constraints, global steering, unknown family returns empty lists"
+      },
+      {
+        "class": "TestValidatorRuleQueries",
+        "tests": 3,
+        "verifies": "Rules for specific family/type, all-families wildcard matching, IMPLEMENTED-only filtering excluding NOT_IMPLEMENTED"
+      },
+      {
+        "class": "TestSummary",
+        "tests": 2,
+        "verifies": "Summary dict keys and counts accuracy"
+      }
+    ]
+  },
+  "operational_status": "FUNCTIONAL",
+  "operational_status_rationale": "The build-repair loop in _stage_validation() is fully implemented and operational: it performs up to 2 build repairs and 1 runtime repair per example, with semantic validation guards, constraint re-injection, evidence logging (repair-attempts.json), and lifecycle tracking. The HealingIntelligenceLoader is fully implemented with 22 passing tests and 5 core registries on disk, but serves as a knowledge-layer sidecar rather than being directly wired into the live repair loop. The repair loop uses per_type_constraints from family config instead. The gate evaluator evaluates post-repair results but does not trigger repair itself. Overall: the repair loop is FUNCTIONAL; the healing intelligence layer is FUNCTIONAL but operates as a reference/query system rather than driving the repair loop directly.",
+  "evidence": {
+    "repair_loop_function": {
+      "file": "src/plugin_examples/runner.py",
+      "function": "_stage_validation",
+      "line_start": 805,
+      "build_repair_while_loop": 838,
+      "runtime_repair_while_loop": 921,
+      "max_build_repairs_set": 813,
+      "max_runtime_repairs_set": 814,
+      "semantic_guard_build": 883,
+      "semantic_guard_runtime": 1004,
+      "repair_evidence_write": 1078,
+      "lifecycle_mark_build_repaired": 1050,
+      "lifecycle_mark_run_repaired": 1059
+    },
+    "constraint_persistence": {
+      "file": "src/plugin_examples/runner.py",
+      "function": "_stage_generation",
+      "line": 759,
+      "description": "pdf_constraints, family_name, type_short, type_constraints stored on project dict for later re-injection during repair"
+    },
+    "healing_loader": {
+      "file": "src/plugin_examples/healing_intelligence/loader.py",
+      "class": "HealingIntelligenceLoader",
+      "registry_files_constant": "_REGISTRY_FILES (line 29)",
+      "load_method": "load() (line 69)",
+      "query_methods": [
+        "is_known_failure (line 141)",
+        "get_steering_constraints (line 175)",
+        "get_repair_for_failure (line 164)",
+        "get_validator_rules (line 205)"
+      ]
+    },
+    "gate_evaluator": {
+      "file": "src/plugin_examples/gates/evaluator.py",
+      "function": "evaluate_gates",
+      "line_start": 15,
+      "hard_stop_stages_constant": "_HARD_STOP_STAGES (line 9)"
+    },
+    "code_generator_repair": {
+      "file": "src/plugin_examples/generator/code_generator.py",
+      "function": "generate_example",
+      "line_start": 30,
+      "inline_repair_loop": 112,
+      "description": "generate_example() has its own validation+repair pass (lines 106-150+) for LLM-generated code before it reaches _stage_validation, using _validate_code and constraint checks with max_repairs parameter"
+    },
+    "reviewer_stage": {
+      "file": "src/plugin_examples/runner.py",
+      "function": "_stage_reviewer",
+      "line_start": 1137,
+      "description": "Reviewer runs post-validation, marks failed examples as backlogged with recommended_fix but does NOT trigger automatic re-repair"
+    }
+  }
+}

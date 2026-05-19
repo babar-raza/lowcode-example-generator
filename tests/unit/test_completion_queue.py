@@ -157,13 +157,13 @@ class TestQueueCoversDenominator:
         active = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
         backlogged = [e for e in entries if e["state"] == "BACKLOGGED"]
         permanently_blocked = [e for e in entries if e["state"] == "PERMANENTLY_BLOCKED"]
-        # At minimum: 42 active (cells 9 + words 8 + pdf 19 PR-ready/published + diagram 2 + email 1 + slides 3)
-        # + 8 backlogged (PDF WR deferred types minus 5 promoted to PR_READY in Sprint 39)
+        # At minimum: 42 active (cells 9 + words 8 + pdf 19 merged + diagram 2 + email 1 + slides 3)
+        # + 5 backlogged (PDF deferred types: FormImporter, Ofd, PdfAValidator, FormFieldSelector, Timestamp)
         # + 4 permanently blocked (Processor: API_ACCESS_PARADOX, PdfExtractor: ABSTRACT_BASE,
-        #   words-splitter-split-criteria: ENUM, PdfToImage: ABSTRACT_BASE — Sprint 22 reclassification)
-        # Sprint 39: Security/FormFlattener/FormEditor/FormExporter/Signature moved BACKLOGGED->PR_READY (contracts created)
+        #   words-splitter-split-criteria: ENUM, PdfToImage: ABSTRACT_BASE)
+        # All 19 PDF active types now have contracts and are MERGED.
         assert len(active) >= 42, f"Expected at least 42 active entries, got {len(active)}"
-        assert len(backlogged) >= 8, f"Expected at least 8 backlogged entries, got {len(backlogged)}"
+        assert len(backlogged) >= 5, f"Expected at least 5 backlogged entries, got {len(backlogged)}"
         assert len(permanently_blocked) >= 4, "Expected at least 4 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 

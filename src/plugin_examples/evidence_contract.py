@@ -2343,3 +2343,168 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
             "failure_verdict": "BUNDLE_CONTRACT_FAILED",
             "pass_verdict": "BUNDLE_CONTRACT_PASSED",
         }
+
+
+# ---------------------------------------------------------------------------
+# Planner/Execution-Loop Sprint Evidence Contract
+# ---------------------------------------------------------------------------
+
+PLANNER_SPRINT_CATEGORIES: dict[str, list[str]] = {
+    "final_state_summary": ["final-state-summary.json", "final-state-summary.md"],
+    "final_next_actions": ["final-next-actions.json", "final-next-actions.md"],
+    "final_git_status": ["final-git-status.txt"],
+    "final_git_log": ["final-git-log.txt"],
+    "final_git_diff_stat": ["final-git-diff-stat.txt"],
+    "final_changed_files": ["final-changed-files.txt"],
+    "test_full_log": ["test-full-log.txt"],
+    "test_targeted_log": ["test-targeted-log.txt"],
+    "planner_cycle_ledger": ["planner-cycle-01.json"],
+    "planner_final_board": [
+        "final-planner-board.json",
+        "planner-loop-final-board.json",
+    ],
+    "planner_loop_ledger": ["planner-loop-ledger.json"],
+    "dirty_state_proof": ["final-dirty-state.json"],
+    "taskcard_state": ["taskcard-state.json", "taskcard-state.md"],
+    "local_metrics": ["local-metrics.json"],
+    "bundle_manifest": ["bundle-manifest.json"],
+    "no_secret_proof": ["no-secret-proof.txt"],
+    "execution_ledger": ["execution-ledger.md"],
+}
+
+MIN_PLANNER_CATEGORIES_REQUIRED: int = len(PLANNER_SPRINT_CATEGORIES)
+
+ALLOWED_PLANNER_VERDICTS: frozenset[str] = frozenset({
+    "SPRINT46_COMPLETE_LOOP_IDEMPOTENT_AND_RECOVERY_PACKET_READY",
+    "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_MERGE_APPROVAL_BLOCKED",
+    "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_AND_MERGED",
+    "SPRINT46_COMPLETE_EVIDENCE_CONTRACT_MODERNIZED",
+    "SPRINT46_PARTIAL_PDF_PACKAGE_MAP_BLOCKED",
+    "SPRINT46_PARTIAL_LOOP_IDEMPOTENCY_BLOCKED",
+    "SPRINT46_PARTIAL_EVIDENCE_CONTRACT_BLOCKED",
+    "SPRINT46_EVIDENCE_BUNDLE_BLOCKED",
+    "SPRINT46_FAILED_REQUIRES_OPERATOR_REVIEW",
+})
+
+
+class PlannerSprintEvidenceContract:
+    """Validates planner/execution-loop sprint evidence bundles.
+
+    Unlike generation/publication contracts (V1-V8), this contract covers
+    infrastructure sprints where the deliverables are planner improvements,
+    dirty-state fixes, recovery packets, and portfolio sweeps.
+    """
+
+    def validate_zip(self, zip_path: str | Path) -> ContractResult:
+        zip_path = Path(zip_path)
+        result = ContractResult(passed=False)
+
+        if not zip_path.exists():
+            result.failures.append(f"ZIP file not found: {zip_path}")
+            result.verdict = "PLANNER_CONTRACT_FAILED"
+            return result
+
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zf:
+                names = zf.namelist()
+                result.file_count = len(names)
+                basenames = {Path(n).name for n in names}
+
+                for category, patterns in PLANNER_SPRINT_CATEGORIES.items():
+                    if any(p in basenames for p in patterns):
+                        result.categories_found.append(category)
+                    else:
+                        result.categories_missing.append(category)
+                        result.failures.append(
+                            f"Missing category '{category}' — "
+                            f"expected one of {patterns}"
+                        )
+
+                # Content checks
+                for n in names:
+                    bn = Path(n).name
+                    if bn == "final-state-summary.json":
+                        try:
+                            data = json.loads(zf.read(n))
+                            head = data.get("head", "")
+                            if not head:
+                                result.failures.append(
+                                    "final-state-summary.json: missing 'head' field"
+                                )
+                        except (json.JSONDecodeError, KeyError):
+                            result.failures.append(
+                                "final-state-summary.json: invalid JSON"
+                            )
+                    if bn == "final-next-actions.json":
+                        try:
+                            data = json.loads(zf.read(n))
+                            head = data.get("generated_from_head", "")
+                            if not head:
+                                result.failures.append(
+                                    "final-next-actions.json: missing 'generated_from_head'"
+                                )
+                        except (json.JSONDecodeError, KeyError):
+                            result.failures.append(
+                                "final-next-actions.json: invalid JSON"
+                            )
+                    if bn == "bundle-manifest.json":
+                        try:
+                            data = json.loads(zf.read(n))
+                            files = data.get("files", [])
+                            if not all("sha256" in f for f in files):
+                                result.failures.append(
+                                    "bundle-manifest.json: not all files have sha256"
+                                )
+                        except (json.JSONDecodeError, KeyError):
+                            result.failures.append(
+                                "bundle-manifest.json: invalid JSON"
+                            )
+
+                # Secret scanning
+                for n in names:
+                    bn = Path(n).name
+                    if bn.endswith((".txt", ".md", ".json", ".yaml", ".log")):
+                        try:
+                            content = zf.read(n).decode("utf-8", errors="replace")
+                            for pat in SECRET_PATTERNS:
+                                if pat.search(content):
+                                    result.secret_violations.append(
+                                        f"Secret detected in {n}: pattern '{pat.pattern}'"
+                                    )
+                        except Exception:
+                            pass
+
+                if result.secret_violations:
+                    result.failures.extend(result.secret_violations)
+
+                if not result.failures:
+                    result.passed = True
+                    result.verdict = "PLANNER_CONTRACT_PASSED"
+                else:
+                    result.verdict = "PLANNER_CONTRACT_FAILED"
+
+        except zipfile.BadZipFile:
+            result.failures.append(f"Not a valid ZIP file: {zip_path}")
+            result.verdict = "PLANNER_CONTRACT_FAILED"
+
+        return result
+
+    @staticmethod
+    def contract_definition() -> dict:
+        return {
+            "version": "planner-v1",
+            "description": (
+                "Planner/execution-loop sprint evidence contract. "
+                f"{MIN_PLANNER_CATEGORIES_REQUIRED} required categories. "
+                "Validates planner cycles, dirty-state proof, git proof, raw logs."
+            ),
+            "required_categories": dict(PLANNER_SPRINT_CATEGORIES),
+            "min_categories_required": MIN_PLANNER_CATEGORIES_REQUIRED,
+            "content_checks": [
+                "final-state-summary.json: must have 'head' field",
+                "final-next-actions.json: must have 'generated_from_head' field",
+                "bundle-manifest.json: all files must have sha256",
+            ],
+            "secret_scanning_enabled": True,
+            "allowed_verdicts": sorted(ALLOWED_PLANNER_VERDICTS),
+        }

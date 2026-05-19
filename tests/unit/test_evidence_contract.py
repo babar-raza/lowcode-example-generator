@@ -50,6 +50,10 @@ from plugin_examples.evidence_contract import (
     COMBINED_CATEGORIES_V8,
     MIN_CATEGORIES_REQUIRED_V8,
     StrictEvidenceContractV8,
+    PLANNER_SPRINT_CATEGORIES,
+    MIN_PLANNER_CATEGORIES_REQUIRED,
+    ALLOWED_PLANNER_VERDICTS,
+    PlannerSprintEvidenceContract,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
@@ -2060,3 +2064,126 @@ class TestStrictEvidenceContractV8Rejects:
         result = StrictEvidenceContractV8().validate_zip(zp)
         assert not result.passed
         assert any("verdict" in f.lower() for f in result.failures)
+
+
+# ---------------------------------------------------------------------------
+# Planner Sprint Evidence Contract Tests
+# ---------------------------------------------------------------------------
+
+def _minimal_planner_complete_files() -> dict[str, str]:
+    """Return minimum files needed to pass the planner sprint evidence contract."""
+    return {
+        "final-state-summary.json": json.dumps({"head": "abc123", "verdict": "TEST"}),
+        "final-state-summary.md": "# Final State Summary\n",
+        "final-next-actions.json": json.dumps({"generated_from_head": "abc123"}),
+        "final-next-actions.md": "# Final Next Actions\n",
+        "final-git-status.txt": "nothing to commit\n",
+        "final-git-log.txt": "abc123 test commit\n",
+        "final-git-diff-stat.txt": "0 files changed\n",
+        "final-changed-files.txt": "",
+        "test-full-log.txt": "100 passed\n",
+        "test-targeted-log.txt": "50 passed\n",
+        "planner-cycle-01.json": json.dumps({"cycle": 1}),
+        "final-planner-board.json": json.dumps({"actions": []}),
+        "planner-loop-ledger.json": json.dumps({"cycles": []}),
+        "final-dirty-state.json": json.dumps({"actionable_count": 0}),
+        "taskcard-state.json": json.dumps({"open_taskcards": []}),
+        "taskcard-state.md": "# Taskcard State\n",
+        "local-metrics.json": json.dumps({"sprint": 46}),
+        "bundle-manifest.json": json.dumps({"files": [{"file": "x", "sha256": "abc"}]}),
+        "no-secret-proof.txt": "No secrets found.\n",
+        "execution-ledger.md": "# Execution Ledger\n",
+    }
+
+
+class TestPlannerSprintEvidenceContract:
+    def test_planner_categories_count(self):
+        assert MIN_PLANNER_CATEGORIES_REQUIRED == 17
+
+    def test_complete_planner_bundle_passes(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert result.passed
+        assert result.verdict == "PLANNER_CONTRACT_PASSED"
+
+    def test_missing_raw_logs_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["test-full-log.txt"]
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+        assert any("test_full_log" in f for f in result.failures)
+
+    def test_missing_final_git_proof_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["final-git-status.txt"]
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+        assert any("final_git_status" in f for f in result.failures)
+
+    def test_missing_planner_cycle_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["planner-cycle-01.json"]
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+
+    def test_missing_dirty_state_proof_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["final-dirty-state.json"]
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+
+    def test_missing_manifest_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["bundle-manifest.json"]
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+
+    def test_missing_head_in_summary_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        files["final-state-summary.json"] = json.dumps({"verdict": "X"})
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+        assert any("head" in f for f in result.failures)
+
+    def test_missing_generated_from_head_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        files["final-next-actions.json"] = json.dumps({"actions": []})
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+        assert any("generated_from_head" in f for f in result.failures)
+
+    def test_manifest_without_sha256_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        files["bundle-manifest.json"] = json.dumps({"files": [{"file": "x"}]})
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+
+    def test_secret_in_planner_bundle_fails(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        files["no-secret-proof.txt"] = "Found token: ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij"
+        zp = _make_zip(tmp_path, files)
+        result = PlannerSprintEvidenceContract().validate_zip(zp)
+        assert not result.passed
+        assert len(result.secret_violations) > 0
+
+    def test_nonexistent_zip_fails(self, tmp_path):
+        result = PlannerSprintEvidenceContract().validate_zip(tmp_path / "nope.zip")
+        assert not result.passed
+
+    def test_contract_definition_has_required_fields(self):
+        defn = PlannerSprintEvidenceContract.contract_definition()
+        assert defn["version"] == "planner-v1"
+        assert defn["min_categories_required"] == MIN_PLANNER_CATEGORIES_REQUIRED
+        assert "required_categories" in defn
+
+    def test_allowed_planner_verdicts_defined(self):
+        assert len(ALLOWED_PLANNER_VERDICTS) >= 5

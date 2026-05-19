@@ -7,6 +7,7 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 from dataclasses import dataclass, field
@@ -21,6 +22,26 @@ from plugin_examples.portfolio_action_planner import (
 )
 
 
+def board_fingerprint(board: ActionBoard) -> str:
+    """Compute a stable fingerprint of the board's action state.
+
+    Ignores volatile fields (generated_at, duration) so repeated boards
+    with identical action structure produce the same fingerprint.
+    """
+    stable = {
+        "head": board.generated_from_head,
+        "dirty_summary": board.git_dirty_summary,
+        "actions": sorted(
+            [
+                (a.id, a.type, a.current_state, a.safe_to_execute_now, a.gate_present)
+                for a in board.actions
+            ]
+        ),
+    }
+    raw = json.dumps(stable, sort_keys=True)
+    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
 # ---------------------------------------------------------------------------
 # Cycle ledger
 # ---------------------------------------------------------------------------
@@ -29,10 +50,13 @@ from plugin_examples.portfolio_action_planner import (
 class CycleResult:
     cycle: int
     generated_from_head: str = ""
+    board_fingerprint: str = ""
     action_count: int = 0
     safe_count: int = 0
     blocked_count: int = 0
     executed: list[str] = field(default_factory=list)
+    changed_actions: list[str] = field(default_factory=list)
+    noop_actions: list[str] = field(default_factory=list)
     deferred: list[dict[str, str]] = field(default_factory=list)
     commit_sha: str | None = None
     verdict: str = ""
@@ -42,10 +66,13 @@ class CycleResult:
         return {
             "cycle": self.cycle,
             "generated_from_head": self.generated_from_head,
+            "board_fingerprint": self.board_fingerprint,
             "action_count": self.action_count,
             "safe_count": self.safe_count,
             "blocked_count": self.blocked_count,
             "executed": self.executed,
+            "changed_actions": self.changed_actions,
+            "noop_actions": self.noop_actions,
             "deferred": self.deferred,
             "commit_sha": self.commit_sha,
             "verdict": self.verdict,
@@ -62,13 +89,16 @@ class LoopResult:
     stop_reason: str = ""
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        d: dict[str, Any] = {
             "total_cycles": len(self.cycles),
             "total_executed": self.total_executed,
             "total_deferred": self.total_deferred,
             "stop_reason": self.stop_reason,
             "cycles": [c.to_dict() for c in self.cycles],
         }
+        if self.final_board and self.final_board.dirty_categories:
+            d["final_dirty_state"] = self.final_board.dirty_categories
+        return d
 
 
 # ---------------------------------------------------------------------------
@@ -86,7 +116,7 @@ _APPROVAL_GATED_TYPES = {
 
 
 def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
-    """Execute portfolio conservation check."""
+    """Execute portfolio conservation check. Always read-only, never changes state."""
     from plugin_examples.portfolio_action_planner import _load_denominators, _count_contracts, ACTIVE_FAMILIES
     denoms = _load_denominators(repo_root)
     contracts = _count_contracts(repo_root)
@@ -100,20 +130,20 @@ def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) 
         results[f] = {"pilot": pilot, "contracts": c, "pass": ok}
         if not ok:
             all_pass = False
-    return {"conservation_all_pass": all_pass, "families": results}
+    return {"conservation_all_pass": all_pass, "families": results, "changed": False}
 
 
 def _handle_version_drift_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
-    """Execute version drift check."""
+    """Execute version drift check. Always read-only, never changes state."""
     from plugin_examples.portfolio_action_planner import _load_denominators, ACTIVE_FAMILIES
     denoms = _load_denominators(repo_root)
     versions = {f: denoms.get(f, {}).get("source_version", "?") for f in ACTIVE_FAMILIES}
-    return {"versions": versions, "status": "checked"}
+    return {"versions": versions, "status": "checked", "changed": False}
 
 
 def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str = "", **_kw: Any) -> dict:
-    """Execute blocker recheck (NuGet availability)."""
-    results: dict[str, Any] = {"action_id": action_id}
+    """Execute blocker recheck (NuGet availability). Read-only unless blocker is resolved."""
+    results: dict[str, Any] = {"action_id": action_id, "changed": False}
     if action_id == "FORMIMPORTER_RETEST":
         try:
             r = subprocess.run(
@@ -135,6 +165,8 @@ def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str 
             )
             results["http_status"] = r.stdout.strip()
             results["still_blocked"] = r.stdout.strip() != "200"
+            if not results["still_blocked"]:
+                results["changed"] = True
         except Exception:
             results["check_failed"] = True
     elif action_id == "PSD_DEPENDENCY_RECHECK":
@@ -146,6 +178,8 @@ def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str 
             )
             results["http_status"] = r.stdout.strip()
             results["still_blocked"] = r.stdout.strip() != "200"
+            if not results["still_blocked"]:
+                results["changed"] = True
         except Exception:
             results["check_failed"] = True
     elif action_id == "PERMANENTLY_BLOCKED_WATCH":
@@ -175,24 +209,28 @@ def run_execution_loop(
 ) -> LoopResult:
     """Run the planner-driven execution loop.
 
-    1. Run planner
+    1. Run planner and compute board fingerprint
     2. Execute all safe, non-approval-gated actions with handlers
-    3. Defer actions without handlers
+    3. Track which handlers report changed=True vs changed=False
     4. Save cycle evidence
-    5. Replan and continue until no safe actions remain or max_cycles reached
+    5. Stop when: no safe actions, board fingerprint unchanged and no handlers
+       changed state, or max_cycles reached
     """
     import time
 
     result = LoopResult()
     evidence_dir.mkdir(parents=True, exist_ok=True)
+    prev_fingerprint: str | None = None
 
     for cycle_num in range(1, max_cycles + 1):
         t0 = time.monotonic()
         board = compute_action_board(repo_root)
+        fp = board_fingerprint(board)
 
         cycle = CycleResult(
             cycle=cycle_num,
             generated_from_head=board.generated_from_head,
+            board_fingerprint=fp,
             action_count=len(board.actions),
             safe_count=len(board.safe_actions()),
             blocked_count=len(board.blocked_actions()),
@@ -205,8 +243,10 @@ def run_execution_loop(
         cycle_md_path.write_text(render_markdown(board), encoding="utf-8")
 
         # Find executable actions (safe + has handler + not approval-gated)
-        executed_this_cycle = []
-        deferred_this_cycle = []
+        executed_this_cycle: list[str] = []
+        changed_this_cycle: list[str] = []
+        noop_this_cycle: list[str] = []
+        deferred_this_cycle: list[dict[str, str]] = []
 
         for action in board.safe_actions():
             if action.type in _APPROVAL_GATED_TYPES:
@@ -225,6 +265,10 @@ def run_execution_loop(
                         repo_root, evidence_dir, action_id=action.id,
                     )
                     executed_this_cycle.append(action.id)
+                    if handler_result.get("changed", False):
+                        changed_this_cycle.append(action.id)
+                    else:
+                        noop_this_cycle.append(action.id)
                     # Save handler result
                     handler_path = evidence_dir / f"handler-{action.id.lower()}-cycle{cycle_num:02d}.json"
                     handler_path.write_text(
@@ -244,21 +288,33 @@ def run_execution_loop(
                 })
 
         cycle.executed = executed_this_cycle
+        cycle.changed_actions = changed_this_cycle
+        cycle.noop_actions = noop_this_cycle
         cycle.deferred = deferred_this_cycle
         cycle.duration_ms = int((time.monotonic() - t0) * 1000)
 
         result.total_executed += len(executed_this_cycle)
         result.total_deferred += len(deferred_this_cycle)
 
-        # Determine if we should continue
+        # --- Stop conditions ---
+
+        # 1. No safe executable actions
         if not executed_this_cycle:
             cycle.verdict = "NO_SAFE_EXECUTABLE_ACTIONS"
             result.cycles.append(cycle)
-            result.stop_reason = "no safe executable actions remain"
+            result.stop_reason = "exhausted_safe_actions"
+            break
+
+        # 2. Board fingerprint unchanged AND no handlers changed state
+        if prev_fingerprint is not None and fp == prev_fingerprint and not changed_this_cycle:
+            cycle.verdict = "IDEMPOTENT_NO_CHANGE"
+            result.cycles.append(cycle)
+            result.stop_reason = "stopped_no_change"
             break
 
         cycle.verdict = f"EXECUTED_{len(executed_this_cycle)}_ACTIONS"
         result.cycles.append(cycle)
+        prev_fingerprint = fp
 
         if cycle_num >= max_cycles:
             result.stop_reason = "max_cycles reached"

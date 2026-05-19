@@ -30,10 +30,10 @@
   "output_expectations": {
     "output_format": ".docx",
     "validation_method": "docx_zip_check",
-    "notes": "Instance API: var options = new PdfToDocOptions(); options.SaveFormat = SaveFormat.DocX; options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.docx')); new DocConverter().Process(options). CRITICAL: PdfConverterOptions is abstract — use PdfToDocOptions. SaveFormat.DocX (value=1) produces OOXML .docx (magic 50-4B-03-04). Default SaveFormat.Doc (value=0) produces OLE2 .doc. Harness-verified: ResultCollection.Count=1, DOCX magic 50-4B-03-04."
+    "notes": "Instance API: var options = new PdfToDocOptions(); options.SaveFormat = SaveFormat.DocX; options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.docx')); new DocConverter().Process(options). CRITICAL: PdfConverterOptions is abstract \u00e2\u20ac\u201d use PdfToDocOptions. SaveFormat.DocX (value=1) produces OOXML .docx (magic 50-4B-03-04). Default SaveFormat.Doc (value=0) produces OLE2 .doc. Harness-verified: ResultCollection.Count=1, DOCX magic 50-4B-03-04."
   },
-  "publication_status": "IN_GENERATION",
-  "lifecycle_status": "GENERATION_STARTED",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/pdf-waveb-api-constraint-report.json"
   ],

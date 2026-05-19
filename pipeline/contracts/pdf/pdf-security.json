@@ -30,12 +30,12 @@
     "validation_method": "pdf_header_check",
     "notes": "Instance API: var encOptions = new EncryptionOptions(ownerPassword, userPassword, privilege); encOptions.AddInput(new FileDataSource(...)); encOptions.AddOutput(new FileDataSource(...)); new Security().Process(encOptions). Support code uses DocumentPrivilege for permission setup. AddOutput takes FileDataSource."
   },
-  "publication_status": "PR_DRY_RUN_READY",
-  "lifecycle_status": "PR_DRY_RUN_READY_AWAITING_APPROVE_LIVE_PR",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode/security/Program.cs",
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
   ],
   "last_verified_at": "2026-05-19T00:00:00Z",
-  "notes": "Wave E example. Support code uses Aspose.Pdf.Facades.DocumentPrivilege for permission configuration — this is fixture preparation, not the demonstrated LowCode workflow root."
+  "notes": "Wave E example. Support code uses Aspose.Pdf.Facades.DocumentPrivilege for permission configuration \u00e2\u20ac\u201d this is fixture preparation, not the demonstrated LowCode workflow root."
 }

@@ -252,17 +252,13 @@ class TestPdfContracts:
         actual_ids = {c["scenario_id"] for c in _load_contracts("pdf")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
 
-    def test_pdf_merger_is_merged(self):
-        contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
-        assert contracts["pdf-merger"]["publication_status"] == "MERGED"
-
-    def test_pdf_text_extractor_is_merged(self):
-        contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
-        assert contracts["pdf-text-extractor"]["publication_status"] == "MERGED"
-
-    def test_pdf_splitter_is_merged(self):
-        contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
-        assert contracts["pdf-splitter"]["publication_status"] == "MERGED"
+    def test_all_pdf_contracts_are_merged(self):
+        """All 19 PDF types are published and merged in the target repo."""
+        contracts = _load_contracts("pdf")
+        for contract in contracts:
+            assert contract["publication_status"] == "MERGED", (
+                f"PDF contract {contract['scenario_id']} is not MERGED: {contract['publication_status']}"
+            )
 
     def test_pdf_merger_forbids_plugin_options(self):
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}

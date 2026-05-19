@@ -28,10 +28,10 @@
   "output_expectations": {
     "output_format": ".pdf",
     "validation_method": "pdf_header_check",
-    "notes": "Instance API: var options = new OptimizeOptions(); options.AddInput(new FileDataSource(...)); options.AddOutput(new FileDataSource(...)); new Optimizer().Process(options). CRITICAL: 'using Aspose.Pdf.LowCode.DataSources' is FORBIDDEN — this sub-namespace does not exist. Use Aspose.Pdf.Plugins namespace for FileDataSource."
+    "notes": "Instance API: var options = new OptimizeOptions(); options.AddInput(new FileDataSource(...)); options.AddOutput(new FileDataSource(...)); new Optimizer().Process(options). CRITICAL: 'using Aspose.Pdf.LowCode.DataSources' is FORBIDDEN \u00e2\u20ac\u201d this sub-namespace does not exist. Use Aspose.Pdf.Plugins namespace for FileDataSource."
   },
-  "publication_status": "REVIEWER_PASSED",
-  "lifecycle_status": "REVIEWER_PASSED_AWAITING_PR",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
     "workspace/verification/latest/pdf-optimizer-fix-final-verification.json"

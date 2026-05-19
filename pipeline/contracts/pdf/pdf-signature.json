@@ -28,14 +28,14 @@
   "output_expectations": {
     "output_format": ".pdf",
     "validation_method": "pdf_header_check",
-    "notes": "Instance API: var signOptions = new SignOptions(pfxPath, password); signOptions.AddInput(new FileDataSource(...)); signOptions.AddOutput(new FileDataSource(...)); new Signature().Process(signOptions). SUPPORT CODE EXCEPTION: Uses System.Security.Cryptography and X509Certificates to create self-signed PFX certificate fixture — this is deterministic fixture preparation, not the demonstrated LowCode workflow root."
+    "notes": "Instance API: var signOptions = new SignOptions(pfxPath, password); signOptions.AddInput(new FileDataSource(...)); signOptions.AddOutput(new FileDataSource(...)); new Signature().Process(signOptions). SUPPORT CODE EXCEPTION: Uses System.Security.Cryptography and X509Certificates to create self-signed PFX certificate fixture \u00e2\u20ac\u201d this is deterministic fixture preparation, not the demonstrated LowCode workflow root."
   },
-  "publication_status": "PR_DRY_RUN_READY",
-  "lifecycle_status": "PR_DRY_RUN_READY_AWAITING_APPROVE_LIVE_PR",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/Program.cs",
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
   ],
   "last_verified_at": "2026-05-19T00:00:00Z",
-  "notes": "Wave G example. Support code uses .NET System.Security.Cryptography to create a self-signed PFX certificate for digital signing — this is deterministic fixture preparation (no TSA/CA server needed), not the demonstrated LowCode workflow root."
+  "notes": "Wave G example. Support code uses .NET System.Security.Cryptography to create a self-signed PFX certificate for digital signing \u00e2\u20ac\u201d this is deterministic fixture preparation (no TSA/CA server needed), not the demonstrated LowCode workflow root."
 }

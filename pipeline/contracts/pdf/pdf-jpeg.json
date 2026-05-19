@@ -29,8 +29,8 @@
     "validation_method": "result_collection_count",
     "notes": "Template-first. Instance API: var options = new JpegOptions(); options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.jpg')); var result = new Jpeg().Process(options); validate ResultCollection.Count > 0. Output is page-numbered: input_ImageP001.jpeg inside output.jpg/ dir."
   },
-  "publication_status": "PR_DRY_RUN_READY",
-  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
   ],

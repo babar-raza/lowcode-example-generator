@@ -30,10 +30,10 @@
   "output_expectations": {
     "output_format": ".xlsx",
     "validation_method": "xlsx_zip_check",
-    "notes": "Instance API: var options = new PdfToXlsOptions(); options.Format = PdfToXlsOptions.ExcelFormat.XLSX; options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.xlsx')); new XlsConverter().Process(options). CRITICAL: PdfConverterOptions is abstract — use PdfToXlsOptions. ExcelFormat is a nested enum: PdfToXlsOptions.ExcelFormat.XLSX (value=1). ExcelFormat values: XMLSpreadSheet2003=0, XLSX=1, CSV=2, XLSM=3, ODS=4. Harness-verified: ResultCollection.Count=1, XLSX magic 50-4B-03-04."
+    "notes": "Instance API: var options = new PdfToXlsOptions(); options.Format = PdfToXlsOptions.ExcelFormat.XLSX; options.AddInput(new FileDataSource('input.pdf')); options.AddOutput(new FileDataSource('output.xlsx')); new XlsConverter().Process(options). CRITICAL: PdfConverterOptions is abstract \u00e2\u20ac\u201d use PdfToXlsOptions. ExcelFormat is a nested enum: PdfToXlsOptions.ExcelFormat.XLSX (value=1). ExcelFormat values: XMLSpreadSheet2003=0, XLSX=1, CSV=2, XLSM=3, ODS=4. Harness-verified: ResultCollection.Count=1, XLSX magic 50-4B-03-04."
   },
-  "publication_status": "IN_GENERATION",
-  "lifecycle_status": "GENERATION_STARTED",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/pdf-waveb-api-constraint-report.json"
   ],

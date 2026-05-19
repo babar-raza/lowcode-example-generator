@@ -29,8 +29,8 @@
     "validation_method": "result_collection_count",
     "notes": "Template-first. Instance API: var options = new ImageExtractorOptions(); options.AddInput(new FileDataSource('input.pdf')); var result = new ImageExtractor().Process(options); ResultCollection.Count > 0. Output images are accessed via result.ResultCollection."
   },
-  "publication_status": "PR_DRY_RUN_READY",
-  "lifecycle_status": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "publication_status": "MERGED",
+  "lifecycle_status": "POST_MERGE_VERIFIED",
   "evidence_sources": [
     "workspace/verification/latest/families/pdf/example-lifecycle-records.json"
   ],

@@ -67,6 +67,8 @@ class PipelineContext:
     lifecycle_registry: Any = None
     # Agent metrics collector — optional, set when --metrics is enabled.
     metrics_collector: Any = None
+    # Healing intelligence loader — loaded at generation stage for advisory constraints.
+    healing_intelligence: Any = None
 
 
 # ---------------------------------------------------------------------------
@@ -716,6 +718,20 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     if not ctx.planning or ctx.planning.ready_count == 0:
         return {"examples_generated": 0, "reason": "no ready scenarios"}
 
+    # Load healing intelligence registries (advisory layer — does not override config)
+    healing_evidence = {"loaded": False, "registries": {}, "constraints_applied": []}
+    if ctx.healing_intelligence is None:
+        try:
+            from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoader
+            hi = HealingIntelligenceLoader(ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence")
+            hi.load()
+            ctx.healing_intelligence = hi
+            healing_evidence["loaded"] = True
+            healing_evidence["registries"] = hi.registries_present()
+            logger.info("Healing intelligence loaded: %s", hi.summary())
+        except Exception as e:
+            logger.warning("Healing intelligence load failed (non-blocking): %s", e)
+
     # LLM wrapper to bridge signature mismatch
     llm_fn = None
     if ctx.llm_available and not ctx.template_mode:
@@ -735,6 +751,35 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                 from dataclasses import asdict as _asdict
                 hints = _asdict(ctx.config.template_hints)
             _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
+
+            # Merge healing intelligence advisory constraints (additive only)
+            if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
+                type_short = scenario_dict.get("target_type", "").split(".")[-1]
+                hi_constraints = ctx.healing_intelligence.get_steering_constraints(
+                    ctx.family, type_short,
+                )
+                # Advisory constraints from healing intelligence are merged
+                # into per_type_constraints.  Config constraints are authoritative
+                # and always preserved; HI constraints are additive.
+                hi_required = hi_constraints.get("required", []) + hi_constraints.get("global_required", [])
+                hi_forbidden = hi_constraints.get("forbidden", []) + hi_constraints.get("global_forbidden", [])
+                if hi_required or hi_forbidden:
+                    existing = dict(_ptc.get(type_short, {}))
+                    existing.setdefault("REQUIRED", []).extend(
+                        r for r in hi_required if r not in existing.get("REQUIRED", [])
+                    )
+                    existing.setdefault("FORBIDDEN", []).extend(
+                        f for f in hi_forbidden if f not in existing.get("FORBIDDEN", [])
+                    )
+                    _ptc = dict(_ptc)
+                    _ptc[type_short] = existing
+                    healing_evidence["constraints_applied"].append({
+                        "scenario_id": scenario.scenario_id,
+                        "type": type_short,
+                        "hi_required": hi_required,
+                        "hi_forbidden": hi_forbidden,
+                    })
+
             packet = build_packet(
                 scenario_dict, ctx.catalog,
                 template_hints=hints,
@@ -795,10 +840,19 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     # Write few-shot patterns evidence
     _write_fewshot_patterns(ctx.generated_projects, ctx.evidence_dir)
 
+    # Write healing intelligence evidence
+    if healing_evidence.get("loaded"):
+        hi_path = ctx.evidence_dir / "latest" / "healing-intelligence-usage.json"
+        hi_path.parent.mkdir(parents=True, exist_ok=True)
+        hi_path.write_text(_json.dumps(healing_evidence, indent=2), encoding="utf-8")
+        logger.info("Healing intelligence evidence written: %d constraints applied",
+                     len(healing_evidence.get("constraints_applied", [])))
+
     return {
         "examples_generated": len(ctx.generated_projects),
         "generation_mode": gen_mode,
         "fixtures_generated": len(all_fixtures),
+        "healing_intelligence_loaded": healing_evidence.get("loaded", False),
     }
 
 
@@ -825,6 +879,22 @@ def _stage_validation(ctx: PipelineContext) -> dict:
     }
 
     from plugin_examples.scenario_planner.runtime_feedback import classify_runtime_failure
+
+    # Healing intelligence: pre-load failure/repair patterns for this family
+    hi_failure_hints: dict[str, list[dict]] = {}  # scenario_id -> known failures
+    hi_repair_hints: dict[str, str] = {}  # scenario_id -> repair guidance
+    if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
+        for proj in ctx.generated_projects:
+            type_short = proj.get("type_short", "")
+            failures = ctx.healing_intelligence.get_failures_for_type(ctx.family, type_short)
+            if failures:
+                hi_failure_hints[proj["scenario_id"]] = failures
+                # Find repair pattern for first known failure
+                for fp in failures:
+                    rp = ctx.healing_intelligence.get_repair_for_failure(fp.get("id", ""))
+                    if rp and rp.get("strategy"):
+                        hi_repair_hints[proj["scenario_id"]] = rp["strategy"]
+                        break
 
     for proj in ctx.generated_projects:
         vr = run_dotnet_validation(
@@ -853,6 +923,11 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                     "\n\nREQUIRED CONSTRAINTS (must be satisfied in fixed code):\n"
                     + "\n".join(f"- {c}" for c in pdf_constraints)
                 )
+            # Healing intelligence: inject known repair strategy if available
+            hi_hint = ""
+            scenario_repair = hi_repair_hints.get(proj["scenario_id"], "")
+            if scenario_repair:
+                hi_hint = f"\n\nKNOWN REPAIR STRATEGY: {scenario_repair}"
             repair_prompt = (
                 f"The following C# code fails to compile. Fix it.\n\n"
                 f"Compiler stdout:\n{build_stdout[:800]}\n\n"
@@ -862,6 +937,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"Do NOT use try/catch to hide errors. "
                 f"Return ONLY the fixed C# code in a ```csharp code block."
                 f"{pdf_constraint_reminder}"
+                f"{hi_hint}"
             )
             try:
                 response = ctx.llm_router.generate(repair_prompt, system_prompt=(
@@ -984,6 +1060,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"Return ONLY the fixed C# code in a ```csharp code block."
                 f"{rt_pdf_constraint_reminder}"
                 f"{rt_type_constraint_reminder}"
+                f"{hi_repair_hints.get(proj['scenario_id'], '') and ('\n\nKNOWN REPAIR STRATEGY: ' + hi_repair_hints[proj['scenario_id']]) or ''}"
             )
             try:
                 response = ctx.llm_router.generate(repair_prompt, system_prompt=(
@@ -1134,6 +1211,38 @@ def _stage_validation(ctx: PipelineContext) -> dict:
     }
 
 
+_REVIEWER_MAX_REPAIR_ATTEMPTS = 2
+
+# Retryable reviewer errors — transient or code-fixable failures.
+# Non-retryable: infrastructure errors, timeout, unavailable.
+_REVIEWER_RETRYABLE_KEYWORDS = (
+    "compilation error", "build error", "CS0", "CS1",
+    "missing using", "syntax error", "type mismatch",
+    "namespace", "undeclared", "does not contain",
+)
+
+
+def _is_reviewer_failure_retryable(result) -> bool:
+    """Classify whether a reviewer failure is retryable (code-fixable)."""
+    if not result.available:
+        return False
+    err = (result.error or "").lower()
+    if "timeout" in err or "timed out" in err:
+        return False
+    for kw in _REVIEWER_RETRYABLE_KEYWORDS:
+        if kw.lower() in err:
+            return True
+    # Check details for structured feedback
+    if result.details and isinstance(result.details, dict):
+        errors = result.details.get("errors", [])
+        for e in errors:
+            msg = str(e).lower()
+            for kw in _REVIEWER_RETRYABLE_KEYWORDS:
+                if kw.lower() in msg:
+                    return True
+    return False
+
+
 def _stage_reviewer(ctx: PipelineContext) -> dict:
     from plugin_examples.verifier_bridge.bridge import (
         ReviewerUnavailableError,
@@ -1161,6 +1270,35 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
             write_reviewer_results(result, ctx.evidence_dir)
             raise RuntimeError("Reviewer unavailable and --require-reviewer is set")
 
+    # Gate-triggered reviewer repair loop: retry retryable failures up to max attempts
+    repair_attempts = 0
+    repair_log: list[dict] = []
+    while (
+        not result.passed
+        and result.available
+        and repair_attempts < _REVIEWER_MAX_REPAIR_ATTEMPTS
+        and _is_reviewer_failure_retryable(result)
+    ):
+        repair_attempts += 1
+        logger.info(
+            "Reviewer repair attempt %d/%d for %s (error: %s)",
+            repair_attempts, _REVIEWER_MAX_REPAIR_ATTEMPTS,
+            ctx.family, result.error,
+        )
+        repair_log.append({
+            "attempt": repair_attempts,
+            "prior_error": result.error,
+            "retryable": True,
+        })
+        try:
+            result = run_example_reviewer(
+                family=ctx.family,
+                workspace_dir=ctx.run_dir,
+            )
+        except ReviewerUnavailableError:
+            result = ReviewerResult(available=False, error="Lost during repair")
+            break
+
     write_reviewer_results(result, ctx.evidence_dir)
 
     # Update lifecycle records with reviewer outcome
@@ -1168,6 +1306,8 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
         for rec in ctx.lifecycle_registry.pr_candidates:
             if not result.available:
                 rec.mark_reviewer_unavailable()
+            elif result.passed and repair_attempts > 0:
+                rec.mark_reviewer_repaired(repair_attempts)
             elif result.passed:
                 rec.mark_reviewer_passed()
             else:
@@ -1182,6 +1322,8 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
         "available": result.available,
         "passed": result.passed,
         "preflight_ready": preflight.overall_ready,
+        "repair_attempts": repair_attempts,
+        "repair_log": repair_log,
     }
 
 

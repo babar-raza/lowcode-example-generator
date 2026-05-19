@@ -174,7 +174,23 @@ def _check_dirty_state(repo_root: Path) -> list[str]:
         )
         dirty = []
         for line in result.stdout.strip().splitlines():
-            path = line[3:].strip()
+            if not line or len(line) < 4:
+                continue
+            # Porcelain format: XY PATH — but leading spaces may be stripped
+            # by text mode on Windows.  Find the first non-status character.
+            # Status chars are in positions 0-1, separator space at position 2.
+            # Robust approach: split on first space after status flags.
+            path = line.lstrip(" MADRCU?!")[0:0]  # fallback empty
+            # Simple: find first occurrence of a path-like char after status
+            idx = 0
+            while idx < len(line) and line[idx] in " MADRCU?!":
+                idx += 1
+            path = line[idx:].strip()
+            # Handle renames: "R  old -> new"
+            if " -> " in path:
+                path = path.split(" -> ")[-1]
+            if not path:
+                continue
             if any(path.startswith(p) for p in _DIRTY_EXCLUDE_PREFIXES):
                 continue
             if path in _DIRTY_EXCLUDE_EXACT:

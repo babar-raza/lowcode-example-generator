@@ -510,6 +510,10 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
     "slides:compress": ".pptx",
     "slides:foreach": ".pptx",
     "slides:collect": ".pptx",
+    # PDF types — Html takes HTML input, not PDF
+    "pdf:html": ".html",
+    # Email types
+    "email:converter": ".eml",
 }
 
 
@@ -553,9 +557,8 @@ def _infer_output_format(type_name: str, family_default: str = ".out", family: s
         "spreadsheetmerger": ".xlsx",
         "spreadsheetsplitter": ".xlsx",
         "spreadsheetlocker": ".xlsx",
+        "spreadsheetcompressor": ".xlsx",
         # Words types — Converter outputs PDF as canonical cross-format demo.
-        # Email also has "Converter" but its output goes through FolderOutputHandler,
-        # so it falls through to family_default.
         "converter": ".pdf",
         "watermarker": ".docx",
         "replacer": ".docx",
@@ -564,16 +567,39 @@ def _infer_output_format(type_name: str, family_default: str = ".out", family: s
         "reportbuilder": ".docx",
         "processor": ".docx",
         "signer": ".docx",
-        # PDF types — TextExtractor has no file output (result in ResultCollection).
-        # Merger, Splitter, Optimizer fall through to family_default (".pdf").
+        "words:merger": ".docx",
+        "words:splitter": ".docx",
+        # PDF types — complete coverage for all 19 types
         "textextractor": "",
+        "docconverter": ".docx",
+        "xlsconverter": ".xlsx",
+        "pdf:html": ".pdf",
+        "jpeg": ".jpg",
+        "png": ".png",
+        "tiff": ".tiff",
+        "pdf:merger": ".pdf",
+        "pdf:splitter": ".pdf",
+        "optimizer": ".pdf",
+        "pdfaconverter": ".pdf",
+        "tocgenerator": ".pdf",
+        "tablegenerator": ".pdf",
+        "imageextractor": ".png",
+        "security": ".pdf",
+        "formflattener": ".pdf",
+        "formeditor": ".pdf",
+        "formexporter": ".xml",
+        "signature": ".pdf",
         # Diagram types
         "diagramconverter": ".vdx",
         "pdfconverter": ".pdf",  # Both Cells and Diagram PdfConverter output PDF
+        "diagram:pdfconverter": ".pdf",
+        "diagram:merger": ".vsdx",
         # Slides types — use scoped keys for shared names
         "slides:convert": ".pdf",
         "slides:merger": ".pptx",
         "slides:compress": ".pptx",
+        # Email types — Converter uses FolderOutputHandler
+        "email:converter": ".eml",
     }
     if family:
         scoped = f"{family}:{name_lower}"

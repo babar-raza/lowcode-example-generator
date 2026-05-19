@@ -10,6 +10,53 @@ from plugin_examples.generator.code_generator import GeneratedExample
 
 logger = logging.getLogger(__name__)
 
+import re as _re
+
+_OUTPUT_CODE_PATTERN = _re.compile(r'["\']output\.(\w+)["\']')
+
+_OP_KIND_PATTERNS = {
+    "merger": "merger", "splitter": "splitter", "extractor": "extractor",
+    "compressor": "transform", "compress": "transform", "locker": "transform",
+    "optimizer": "transform", "security": "transform", "signature": "transform",
+    "watermarker": "transform", "replacer": "transform", "pdfa": "transform",
+    "comparer": "transform",
+    "flattener": "form_processor", "formeditor": "form_processor",
+    "formexporter": "form_exporter", "generator": "generator",
+    "builder": "generator", "mailmerger": "generator", "mail-merger": "generator",
+    "converter": "converter", "convert": "converter",
+    "html": "converter", "jpeg": "converter", "png": "converter", "tiff": "converter",
+}
+
+
+def _infer_manifest_format(input_files: list[str] | None, kind: str) -> str | None:
+    """Infer format from input/output file list."""
+    if not input_files:
+        return None
+    first = input_files[0] if isinstance(input_files, list) else input_files
+    if "." in first:
+        return "." + first.rsplit(".", 1)[1]
+    return None
+
+
+def _infer_manifest_format_from_code(example) -> str | None:
+    """Infer output format from generated code."""
+    code = getattr(example, "code", "") or ""
+    if not code:
+        return None
+    m = _OUTPUT_CODE_PATTERN.search(code)
+    if m:
+        return "." + m.group(1)
+    return None
+
+
+def _infer_operation_kind(scenario_id: str) -> str:
+    """Infer operation kind from scenario_id."""
+    sid = scenario_id.lower()
+    for pattern, kind in _OP_KIND_PATTERNS.items():
+        if pattern in sid:
+            return kind
+    return "unknown"
+
 
 def generate_project(
     example: GeneratedExample,
@@ -72,6 +119,10 @@ def generate_project(
         "status": example.status,
         "input_strategy": input_strategy,
         "input_files": input_files,
+        "input_format": _infer_manifest_format(input_files, "input"),
+        "output_format": _infer_manifest_format_from_code(example),
+        "operation_kind": _infer_operation_kind(example.scenario_id),
+        "expected_output_extension": _infer_manifest_format_from_code(example),
     }
     manifest_path.write_text(json.dumps(manifest_data, indent=2))
 

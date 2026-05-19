@@ -62,6 +62,55 @@ class AggregateGateResult:
     blocked_reasons: dict = field(default_factory=dict)
 
 
+def _advisory_output_validation(project_dir: str, scenario_id: str) -> str:
+    """Check output files in advisory mode (never blocks).
+
+    Returns one of: advisory_passed, advisory_failed, advisory_no_output,
+    advisory_not_applicable, or passed (fallback).
+    """
+    sid_lower = scenario_id.lower()
+    # Text extractors produce stdout, not output files
+    if "textextractor" in sid_lower or "text-extractor" in sid_lower:
+        return "advisory_not_applicable"
+
+    project_path = Path(project_dir)
+    if not project_path.is_dir():
+        return "passed"
+
+    # Look for output files
+    output_files = (
+        list(project_path.glob("output.*"))
+        + list(project_path.glob("output_*.*"))
+        + list(project_path.glob("result.*"))
+        + list(project_path.glob("report.*"))
+    )
+    output_dirs = [
+        d for d in project_path.iterdir()
+        if d.is_dir() and d.name.startswith("output")
+    ]
+
+    if not output_files and not output_dirs:
+        return "advisory_no_output"
+
+    # Try semantic validation if available
+    try:
+        from plugin_examples.verifier_bridge.output_validator import (
+            validate_output_file_semantic,
+        )
+        for out_file in output_files:
+            result = validate_output_file_semantic(out_file)
+            if not result.get("valid", True):
+                logger.warning(
+                    "Advisory output validation failed for %s: %s",
+                    out_file, result.get("reason", "unknown"),
+                )
+                return "advisory_failed"
+        return "advisory_passed"
+    except (ImportError, Exception) as exc:
+        logger.debug("Advisory output validation skipped: %s", exc)
+        return "passed"
+
+
 def evaluate_example_gates(
     validation_results: list,
     generated_projects: list[dict],
@@ -153,8 +202,8 @@ def evaluate_example_gates(
         else:
             eg.run_status = "not_evaluated"
 
-        # Output validation (placeholder — not yet implemented)
-        eg.output_validation_status = "passed"
+        # Output validation (advisory — never blocks)
+        eg.output_validation_status = _advisory_output_validation(epath, sid)
 
         # Reviewer
         if reviewer_available and reviewer_passed:

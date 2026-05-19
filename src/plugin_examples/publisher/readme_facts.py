@@ -56,6 +56,25 @@ class ExampleFact:
     api_method_extracted: str = ""  # e.g. "DiagramConverter.Process"
     api_method_source: str = ""  # e.g. "program_cs:line48"
     api_method_validation: str = ""  # "verified" | "blocked_unverified"
+    all_input_extensions: list = field(default_factory=list)
+    all_output_extensions: list = field(default_factory=list)
+
+
+def _extract_all_extensions(patterns: list[re.Pattern], source: str) -> list[str]:
+    """Extract all unique file extensions matching any of the given patterns.
+
+    Returns extensions in order of first appearance, deduplicated.
+    """
+    seen: set[str] = set()
+    result: list[str] = []
+    for pattern in patterns:
+        for line in source.splitlines():
+            for m in pattern.finditer(line):
+                ext = m.group(1)
+                if ext not in seen:
+                    seen.add(ext)
+                    result.append(ext)
+    return result
 
 
 @dataclass

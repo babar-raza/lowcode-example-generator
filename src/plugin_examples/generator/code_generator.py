@@ -854,14 +854,28 @@ _FORMAT_NAME_TO_EXT: dict[str, str] = {
 
 
 def _infer_output_extension(type_name: str, hints: dict | None = None) -> str:
-    """Infer output file extension from type name, then hints, then fallback."""
-    name_lower = type_name.lower()
+    """Infer output file extension from type name.
 
-    # Try the full name first (handles type-specific overrides like mailmerger, diagramconverter)
+    Priority:
+    1. FormatContract (API-backed authority) — if family hint is available
+    2. Legacy _FORMAT_NAME_TO_EXT (deprecated compatibility)
+    3. hints fallback
+    """
+    # Priority 1: FormatContract authority
+    family = (hints or {}).get("family", "")
+    if family:
+        try:
+            from plugin_examples.format_authority.store import get_contract
+            contract = get_contract(family, type_name)
+            return contract.canonical_output_format
+        except (KeyError, ImportError):
+            pass
+
+    # Priority 2: Legacy map (DEPRECATED — compatibility only)
+    name_lower = type_name.lower()
     if name_lower in _FORMAT_NAME_TO_EXT:
         return _FORMAT_NAME_TO_EXT[name_lower]
 
-    # Strip common suffixes to get a format token
     for suffix in ("converter", "merger", "splitter", "locker", "compressor", "signer"):
         if name_lower.endswith(suffix):
             token = name_lower[: -len(suffix)]

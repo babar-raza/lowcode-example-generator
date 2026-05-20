@@ -45,6 +45,9 @@ class Scenario:
     input_strategy: str = "none"  # existing_fixture, generated_fixture_file, programmatic_input, hybrid, no_valid_input_strategy, none
     input_files: list[str] = field(default_factory=list)
     required_input_format: str = ""
+    required_output_contract: str = ""  # canonical output from FormatContract
+    format_contract_id: str = ""  # e.g. "cells/SpreadsheetConverter"
+    format_contract_hash: str = ""  # for traceability
 
 
 @dataclass
@@ -429,6 +432,19 @@ def _build_scenario(
     output_plan = f"Convert input{inferred_input_format} to output{inferred_output_format} using {name}"
     validation_plan = f"Build succeeds, runs without exception, produces output{inferred_output_format}"
 
+    # Attach FormatContract metadata if available
+    contract_output = ""
+    contract_id = ""
+    contract_hash = ""
+    try:
+        from plugin_examples.format_authority.store import get_contract
+        contract = get_contract(family, name)
+        contract_output = contract.canonical_output_format
+        contract_id = contract.contract_id
+        contract_hash = contract.contract_hash
+    except (KeyError, ImportError):
+        pass
+
     return Scenario(
         scenario_id=scenario_id,
         title=f"Use {name} from {namespace}",
@@ -444,6 +460,9 @@ def _build_scenario(
         input_strategy=input_strategy,
         input_files=input_files,
         required_input_format=required_input_format,
+        required_output_contract=contract_output,
+        format_contract_id=contract_id,
+        format_contract_hash=contract_hash,
     )
 
 
@@ -520,32 +539,52 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
 def _infer_input_format(type_name: str, family_default: str, family: str = "") -> str:
     """Infer the correct input format for a scenario based on type name.
 
-    Uses family-scoped lookup (``family:type``) first to resolve ambiguous type
-    names like ``Converter`` (Words vs Email) or ``PdfConverter`` (Cells vs Diagram),
-    then falls back to unscoped lookup, then to ``family_default``.
-
-    Args:
-        type_name: Simple type name (e.g., "TextConverter").
-        family_default: Default input extension for the family (e.g., ".xlsx").
-        family: Optional family name for disambiguation.
-
-    Returns:
-        The inferred input extension.
+    Priority:
+    1. FormatContract (API-backed authority) — if available
+    2. Legacy _INPUT_FORMAT_MAP (deprecated compatibility)
+    3. family_default fallback
     """
+    # Priority 1: FormatContract authority
+    if family:
+        try:
+            from plugin_examples.format_authority.store import get_contract
+            contract = get_contract(family, type_name)
+            return contract.input_format
+        except (KeyError, ImportError):
+            pass
+
+    # Priority 2: Legacy map (deprecated — compatibility only)
     key = type_name.lower()
     if family:
         scoped = f"{family}:{key}"
         if scoped in _INPUT_FORMAT_MAP:
+            logger.debug("DEPRECATED: _INPUT_FORMAT_MAP used for %s/%s input", family, type_name)
             return _INPUT_FORMAT_MAP[scoped]
-    return _INPUT_FORMAT_MAP.get(key, family_default)
+    result = _INPUT_FORMAT_MAP.get(key)
+    if result is not None:
+        logger.debug("DEPRECATED: _INPUT_FORMAT_MAP used for %s input", type_name)
+        return result
+    return family_default
 
 
 def _infer_output_format(type_name: str, family_default: str = ".out", family: str = "") -> str:
     """Infer the output format from the type name.
 
-    Uses family-scoped lookup (``family:type``) first to resolve ambiguous type
-    names, then falls back to unscoped lookup, then to ``family_default``.
+    Priority:
+    1. FormatContract (API-backed authority) — if available
+    2. Legacy _map (deprecated compatibility)
+    3. family_default fallback
     """
+    # Priority 1: FormatContract authority
+    if family:
+        try:
+            from plugin_examples.format_authority.store import get_contract
+            contract = get_contract(family, type_name)
+            return contract.canonical_output_format
+        except (KeyError, ImportError):
+            pass
+
+    # Priority 2: Legacy map (deprecated — compatibility only)
     name_lower = type_name.lower()
     _map = {
         # Cells types

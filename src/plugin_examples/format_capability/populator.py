@@ -83,7 +83,9 @@ def _infer_output_kind(op_kind: str) -> str:
 def populate_manifest(family: str) -> FormatCapabilityManifest:
     """Populate a FormatCapabilityManifest for a given family.
 
-    Uses planner maps as the authoritative source for input/output formats.
+    Uses FormatContract as the authoritative source for input/output formats
+    (via _infer_input_format / _infer_output_format which now consult the
+    FormatContract store first, falling back to legacy maps).
     """
     if family not in _ACTIVE_TYPES:
         raise ValueError(f"Unknown family: {family}")
@@ -92,11 +94,25 @@ def populate_manifest(family: str) -> FormatCapabilityManifest:
     types: dict[str, TypeFormatCapability] = {}
 
     for type_name in _ACTIVE_TYPES[family]:
-        op_kind = classify_operation_kind(type_name, family)
-        input_fmt = _infer_input_format(type_name, family_default, family)
-        output_fmt = _infer_output_format(type_name, family_default, family)
-        in_card, out_card = _infer_cardinality(op_kind)
-        out_kind = _infer_output_kind(op_kind)
+        # Try FormatContract first for all fields
+        try:
+            from plugin_examples.format_authority.store import get_contract
+            fc = get_contract(family, type_name)
+            op_kind = fc.operation_kind
+            input_fmt = fc.input_format
+            output_fmt = fc.canonical_output_format
+            in_card = fc.input_cardinality
+            out_card = fc.output_cardinality
+            out_kind = fc.output_kind
+            confidence = "api_verified"
+        except (KeyError, ImportError):
+            op_kind = classify_operation_kind(type_name, family)
+            input_fmt = _infer_input_format(type_name, family_default, family)
+            output_fmt = _infer_output_format(type_name, family_default, family)
+            in_card, out_card = _infer_cardinality(op_kind)
+            out_kind = _infer_output_kind(op_kind)
+            confidence = "inferred"
+
         is_template_first = (
             family == "pdf" and type_name in _TEMPLATE_FIRST_TYPES
         )
@@ -111,7 +127,7 @@ def populate_manifest(family: str) -> FormatCapabilityManifest:
             output_cardinality=out_card,
             output_kind=out_kind,
             template_first=is_template_first,
-            evidence_confidence="verified" if not is_template_first else "inferred",
+            evidence_confidence=confidence,
         )
 
     return FormatCapabilityManifest(

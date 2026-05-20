@@ -78,6 +78,8 @@ class ReadmeAuditResult:
     splitter_cardinality_warnings: list[str] = field(default_factory=list)
     merger_cardinality_warnings: list[str] = field(default_factory=list)
     extractor_output_warnings: list[str] = field(default_factory=list)
+    # FormatContract cross-check (V9)
+    contract_format_mismatches: list[str] = field(default_factory=list)
 
 
 def _extract_examples_section(content: str) -> str:

@@ -140,28 +140,40 @@ def _write_fixture_strategy_plan(planning, evidence_dir: Path) -> None:
 
 
 def _write_scenario_input_format_map(planning, evidence_dir: Path) -> None:
-    """Write scenario-input-format-map.json evidence."""
+    """Write scenario-input-format-map.json evidence using FormatContract authority."""
     import json as _json
-    from plugin_examples.scenario_planner.planner import (
-        _infer_input_format, _infer_output_format,
-    )
     entries = []
     for s in planning.ready_scenarios:
         type_name = s.target_type.split(".")[-1]
         input_fmt = getattr(s, "required_input_format", ".xlsx")
-        output_fmt = _infer_output_format(type_name)
+        output_fmt = getattr(s, "required_output_contract", "")
+        source = "format_contract"
+        contract_id = getattr(s, "format_contract_id", "")
+        contract_hash = getattr(s, "format_contract_hash", "")
+
+        if not output_fmt:
+            try:
+                from plugin_examples.format_authority.store import get_contract
+                _fam = s.scenario_id.split("-", 1)[0] if s.scenario_id else ""
+                if _fam:
+                    fc = get_contract(_fam, type_name)
+                    output_fmt = fc.canonical_output_format
+                    contract_id = fc.contract_id
+                    contract_hash = fc.contract_hash
+            except (KeyError, ImportError):
+                from plugin_examples.scenario_planner.planner import _infer_output_format
+                output_fmt = _infer_output_format(type_name)
+                source = "planner_map_deprecated"
+
         entries.append({
             "scenario_id": s.scenario_id,
             "workflow_type": type_name,
             "selected_input_format": input_fmt,
             "selected_output_format": output_fmt,
-            "reason": f"Inferred from type name {type_name}",
-            "source": "input_format_map",
-            "confidence": "high" if type_name.lower() in {
-                "textconverter", "jsonconverter", "htmlconverter",
-                "pdfconverter", "spreadsheetmerger", "spreadsheetsplitter",
-                "spreadsheetlocker", "spreadsheetconverter", "imageconverter",
-            } else "medium",
+            "source": source,
+            "contract_id": contract_id,
+            "contract_hash": contract_hash,
+            "confidence": "high" if source == "format_contract" else "medium",
             "blocked_if_unclear": False,
         })
     out = evidence_dir / "latest" / "scenario-input-format-map.json"
@@ -750,6 +762,8 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             if ctx.config and hasattr(ctx.config, "template_hints"):
                 from dataclasses import asdict as _asdict
                 hints = _asdict(ctx.config.template_hints)
+            # Inject family into hints for FormatContract lookup in codegen
+            hints["family"] = ctx.family
             _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
 
             # Merge healing intelligence advisory constraints (additive only)

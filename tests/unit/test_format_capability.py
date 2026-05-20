@@ -110,7 +110,7 @@ class TestPopulateManifest:
         cap = m.types["SpreadsheetConverter"]
         assert cap.operation_kind == "converter"
         assert cap.input_format == ".xlsx"
-        assert cap.primary_output_format == ".xlsx"
+        assert cap.primary_output_format == ".csv"
 
     def test_pdf_doc_converter(self):
         m = populate_manifest("pdf")
@@ -137,7 +137,7 @@ class TestPopulateManifest:
     def test_email_converter(self):
         m = populate_manifest("email")
         cap = m.types["Converter"]
-        assert cap.operation_kind == "directory_output"
+        assert cap.operation_kind == "converter"
         assert cap.output_kind == "directory"
 
     def test_no_dot_out_in_any_manifest(self):

@@ -108,7 +108,7 @@ def generate_project(
     readme_path = project_dir / "README.md"
     readme_path.write_text(_generate_readme(example, package_id, target_framework), encoding="utf-8")
 
-    # Write example.manifest.json
+    # Write example.manifest.json — with FormatContract snapshot if available
     manifest_path = project_dir / "example.manifest.json"
     manifest_data = {
         "scenario_id": example.scenario_id,
@@ -124,9 +124,36 @@ def generate_project(
         "operation_kind": _infer_operation_kind(example.scenario_id),
         "expected_output_extension": _infer_manifest_format_from_code(example),
     }
+
+    # Inject FormatContract metadata if available
+    _fc_dict = getattr(example, "format_contract", None)
+    if not _fc_dict:
+        # Try to look up contract from scenario_id
+        _sid = example.scenario_id
+        _parts = _sid.split("-", 1) if _sid else []
+        if len(_parts) >= 2:
+            _fam = _parts[0]
+            _slug = _parts[1]
+            _type_guess = "".join(p.capitalize() for p in _slug.split("-"))
+            try:
+                from plugin_examples.format_authority.store import get_contract
+                _fc = get_contract(_fam, _type_guess)
+                _fc_dict = _fc.to_dict()
+            except (KeyError, ImportError):
+                pass
+
+    if _fc_dict:
+        manifest_data["contract_input_format"] = _fc_dict.get("input_format", "")
+        manifest_data["contract_output_format"] = _fc_dict.get("canonical_output_format", "")
+        manifest_data["contract_operation_kind"] = _fc_dict.get("operation_kind", "")
+        manifest_data["contract_output_kind"] = _fc_dict.get("output_kind", "")
+        manifest_data["contract_output_cardinality"] = _fc_dict.get("output_cardinality", "")
+        manifest_data["contract_id"] = _fc_dict.get("contract_id", "")
+        manifest_data["contract_hash"] = _fc_dict.get("contract_hash", "")
+
     manifest_path.write_text(json.dumps(manifest_data, indent=2))
 
-    # Write expected-output.json with semantic validation rules
+    # Write expected-output.json with semantic validation rules + contract expectations
     expected_output_path = project_dir / "expected-output.json"
     expected_output = {
         "must_contain": [f"Example: {example.scenario_id}"],
@@ -139,6 +166,13 @@ def generate_project(
             "TODO", "NotImplementedException",
         ],
     }
+
+    # Add contract-derived output expectations
+    if _fc_dict:
+        expected_output["expected_output_extension"] = _fc_dict.get("canonical_output_format", "")
+        expected_output["expected_output_kind"] = _fc_dict.get("output_kind", "file")
+        expected_output["expected_output_cardinality"] = _fc_dict.get("output_cardinality", "single")
+
     expected_output_path.write_text(json.dumps(expected_output, indent=2))
 
     logger.info("Project generated: %s", project_dir)

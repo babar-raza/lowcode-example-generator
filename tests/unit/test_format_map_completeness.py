@@ -16,10 +16,10 @@ from plugin_examples.scenario_planner.planner import (
 # expected_output="" means stdout/no-file (valid for extractors).
 _ACTIVE_TYPES = [
     # Cells (9) — all workflow_root types from cells denominator
-    ("cells", "SpreadsheetConverter", ".xlsx", ".xlsx", ".xlsx"),
+    ("cells", "SpreadsheetConverter", ".xlsx", ".xlsx", ".csv"),
     ("cells", "JsonConverter", ".xlsx", ".xlsx", ".json"),
     ("cells", "HtmlConverter", ".xlsx", ".xlsx", ".html"),
-    ("cells", "TextConverter", ".xlsx", ".csv", ".txt"),
+    ("cells", "TextConverter", ".xlsx", ".xlsx", ".txt"),
     ("cells", "ImageConverter", ".xlsx", ".xlsx", ".png"),
     ("cells", "SpreadsheetMerger", ".xlsx", ".xlsx", ".xlsx"),
     ("cells", "SpreadsheetSplitter", ".xlsx", ".xlsx", ".xlsx"),
@@ -52,13 +52,13 @@ _ACTIVE_TYPES = [
     ("pdf", "Security", ".pdf", ".pdf", ".pdf"),
     ("pdf", "FormFlattener", ".pdf", ".pdf", ".pdf"),
     ("pdf", "FormEditor", ".pdf", ".pdf", ".pdf"),
-    ("pdf", "FormExporter", ".pdf", ".pdf", ".xml"),
+    ("pdf", "FormExporter", ".pdf", ".pdf", ".json"),
     ("pdf", "Signature", ".pdf", ".pdf", ".pdf"),
     # Diagram (2) — from diagram config allowed_types
     ("diagram", "DiagramConverter", ".vsdx", ".vsdx", ".vdx"),
     ("diagram", "PdfConverter", ".vsdx", ".vsdx", ".pdf"),
     # Email (1) — from email config allowed_types
-    ("email", "Converter", ".eml", ".eml", ".eml"),
+    ("email", "Converter", ".eml", ".eml", "directory"),
     # Slides (3) — from slides config allowed_types
     ("slides", "Convert", ".pptx", ".pptx", ".pdf"),
     ("slides", "Merger", ".pptx", ".pptx", ".pptx"),

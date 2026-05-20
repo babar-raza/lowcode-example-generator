@@ -30,6 +30,7 @@ class PromptPacket:
     input_strategy: str = "none"
     input_files: list[str] = field(default_factory=list)
     per_type_constraints: dict = field(default_factory=dict)
+    format_contract: dict = field(default_factory=dict)  # FormatContract as dict
 
 
 def build_packet(
@@ -229,8 +230,44 @@ def build_packet(
                 "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
             ]
 
-    # Inject config-driven per_type_constraints for the target type (all families)
+    # Inject FormatContract authority constraint if available
+    _format_contract_dict: dict = {}
     _type_name = target_type.split(".")[-1] if target_type else ""
+    _fc_family = scenario.get("format_contract_id", "").split("/")[0] if scenario.get("format_contract_id") else ""
+    if not _fc_family:
+        # Infer family from namespace
+        _ns = target_ns.lower()
+        for _fam in ("cells", "words", "pdf", "diagram", "email", "slides"):
+            if _fam in _ns:
+                _fc_family = _fam
+                break
+    if _fc_family and _type_name:
+        try:
+            from plugin_examples.format_authority.store import get_contract
+            _fc = get_contract(_fc_family, _type_name)
+            _format_contract_dict = _fc.to_dict()
+            _fc_out = _fc.canonical_output_format
+            _fc_in = _fc.input_format
+            _fc_kind = _fc.output_kind
+            constraints.append(
+                f"FORMAT CONTRACT (API-backed authority): "
+                f"input={_fc_in}, output={_fc_out}, output_kind={_fc_kind}. "
+                f"Your generated code MUST use output extension '{_fc_out}' — "
+                f"do NOT use any other output extension."
+            )
+            if _fc_kind == "stdout":
+                constraints.append(
+                    "FORMAT CONTRACT: This type produces stdout output, NOT a file. "
+                    "Do NOT use AddOutput() or create an output file."
+                )
+            elif _fc_kind == "directory":
+                constraints.append(
+                    "FORMAT CONTRACT: This type produces directory output via FolderOutputHandler."
+                )
+        except (KeyError, ImportError):
+            pass
+
+    # Inject config-driven per_type_constraints for the target type (all families)
     if per_type_constraints and _type_name in per_type_constraints:
         type_cfg = per_type_constraints[_type_name]
         for req in type_cfg.get("required", []):
@@ -298,6 +335,7 @@ def build_packet(
         input_strategy=input_strategy,
         input_files=input_files,
         per_type_constraints=per_type_constraints or {},
+        format_contract=_format_contract_dict,
     )
 
 

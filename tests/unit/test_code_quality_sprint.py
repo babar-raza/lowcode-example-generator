@@ -141,21 +141,21 @@ class TestCodeValidatorDetectsInteractive:
 # --- Test 4: Input format map for TextConverter ---
 
 class TestInputFormatMapTextConverterNotXlsx:
-    def test_input_format_map_text_converter_not_xlsx(self):
-        """TextConverter must use CSV, not XLSX."""
-        fmt = _infer_input_format("TextConverter", ".xlsx")
-        assert fmt == ".csv"
+    def test_input_format_map_text_converter(self):
+        """TextConverter input format per FormatContract is .xlsx."""
+        fmt = _infer_input_format("TextConverter", ".xlsx", family="cells")
+        assert fmt == ".xlsx"
 
     def test_input_format_map_html_converter(self):
-        fmt = _infer_input_format("HtmlConverter", ".xlsx")
+        fmt = _infer_input_format("HtmlConverter", ".xlsx", family="cells")
         assert fmt == ".xlsx"
 
     def test_input_format_map_unknown_uses_default(self):
         fmt = _infer_input_format("UnknownType", ".docx")
         assert fmt == ".docx"
 
-    def test_text_converter_scenario_uses_csv(self):
-        """Full scenario build for TextConverter must use .csv input."""
+    def test_text_converter_scenario_uses_xlsx(self):
+        """Full scenario build for TextConverter must use .xlsx input (per FormatContract)."""
         type_info = {
             "full_name": "Aspose.Cells.LowCode.TextConverter",
             "name": "TextConverter",
@@ -171,8 +171,8 @@ class TestInputFormatMapTextConverterNotXlsx:
             }],
         }
         scenario = _build_scenario("cells", type_info, "Aspose.Cells.LowCode", None, ".xlsx")
-        assert scenario.required_input_format == ".csv"
-        assert scenario.input_files == ["input.csv"]
+        assert scenario.required_input_format == ".xlsx"
+        assert scenario.input_files == ["input.xlsx"]
         assert scenario.status == "ready"
 
 

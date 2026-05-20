@@ -1,10 +1,10 @@
 {
   "result_type": "readme_backfill_simulation",
-  "date": "2026-05-19 09:02 UTC",
+  "date": "2026-05-20 02:18 UTC",
   "family": "cells",
   "dry_run": true,
   "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
-  "branch_name": "plugin-examples/cells/readme/20260519-090223",
+  "branch_name": "plugin-examples/cells/readme/20260520-021803",
   "pr_title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples",
   "readme_bytes": 14692,
   "audit_passed": true,

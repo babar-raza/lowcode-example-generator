@@ -856,6 +856,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 
     # Write healing intelligence evidence
     if healing_evidence.get("loaded"):
+        import json as _json
         hi_path = ctx.evidence_dir / "latest" / "healing-intelligence-usage.json"
         hi_path.parent.mkdir(parents=True, exist_ok=True)
         hi_path.write_text(_json.dumps(healing_evidence, indent=2), encoding="utf-8")

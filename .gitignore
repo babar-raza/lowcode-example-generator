@@ -47,6 +47,9 @@ workspace/verification/latest/*.zip
 /output.*
 /test.pfx
 
+# Generated pipeline snapshots
+/leg.zip
+
 # OS
 .DS_Store
 Thumbs.db

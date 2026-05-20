@@ -2391,3 +2391,40 @@ class TestBuildEvidenceBundle:
         result = build_evidence_bundle(edir, zp)
         count_in_validation = result["validation"]["bundle_entry_count_at_validation"]
         assert count_in_validation == result["entry_count"]
+
+    def test_companion_sha_matches_final_zip(self, tmp_path):
+        import hashlib
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        companion = zp.parent / "evidence-contract-validation.json"
+        data = json.loads(companion.read_text())
+        actual_sha = hashlib.sha256(zp.read_bytes()).hexdigest()
+        assert data["validated_bundle_sha256"] == actual_sha
+
+    def test_companion_not_inside_zip(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        with zipfile.ZipFile(zp) as zf:
+            names = zf.namelist()
+        assert "evidence-contract-validation.json" not in names
+
+    def test_manifest_self_hash_not_circular(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        with zipfile.ZipFile(zp) as zf:
+            manifest = zf.read("sha256-manifest.txt").decode("utf-8")
+        for line in manifest.strip().split("\n"):
+            parts = line.split("  ", 1)
+            if len(parts) == 2 and parts[1] == "sha256-manifest.txt":
+                assert parts[0] == "SELF", (
+                    "sha256-manifest.txt must use SELF marker, not a hash"
+                )

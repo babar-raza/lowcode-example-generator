@@ -2625,7 +2625,7 @@ def build_evidence_bundle(
         if f.is_file() and f.name not in (
             "sha256-manifest.txt",
             "evidence-contract-validation.json",
-        ):
+        ) and not f.name.endswith((".zip", ".zip.validation.json")):
             arcname = str(f.relative_to(evidence_dir)).replace("\\", "/")
             files_to_add.append((arcname, f.read_bytes()))
 

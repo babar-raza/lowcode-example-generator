@@ -41,6 +41,7 @@ class ExampleGateResult:
     build_status: str = "not_evaluated"
     run_status: str = "not_evaluated"
     output_validation_status: str = "not_evaluated"
+    code_contract_validation_status: str = "not_evaluated"  # advisory — never blocks
     reviewer_status: str = "not_evaluated"
     publish_candidate: bool = False
     blocked_reason: str | None = None
@@ -62,34 +63,62 @@ class AggregateGateResult:
     blocked_reasons: dict = field(default_factory=dict)
 
 
+def _get_contract_output_kind(project_dir: str, scenario_id: str) -> str:
+    """Get contract output_kind from manifest or store (returns 'file' as default)."""
+    import json as _json_inner
+    manifest_path = Path(project_dir) / "example.manifest.json"
+    if manifest_path.exists():
+        try:
+            manifest = _json_inner.loads(manifest_path.read_text(encoding="utf-8"))
+            kind = manifest.get("contract_output_kind", "")
+            if kind:
+                return kind
+        except Exception:
+            pass
+    # Fallback: infer from scenario_id
+    sid_lower = scenario_id.lower()
+    if "textextractor" in sid_lower or "text-extractor" in sid_lower:
+        return "stdout"
+    return "file"
+
+
 def _advisory_output_validation(project_dir: str, scenario_id: str) -> str:
     """Check output files in advisory mode (never blocks).
 
     Returns one of: advisory_passed, advisory_failed, advisory_no_output,
     advisory_not_applicable, or passed (fallback).
+    Uses FormatContract output_kind from manifest when available.
     """
-    sid_lower = scenario_id.lower()
-    # Text extractors produce stdout, not output files
-    if "textextractor" in sid_lower or "text-extractor" in sid_lower:
-        return "advisory_not_applicable"
-
     project_path = Path(project_dir)
     if not project_path.is_dir():
         return "passed"
 
-    # Look for output files
+    # Get contract output kind — contract-first, fallback to heuristic
+    output_kind = _get_contract_output_kind(project_dir, scenario_id)
+
+    # stdout types produce no output file
+    if output_kind == "stdout":
+        return "advisory_not_applicable"
+
+    # directory types produce an output directory
+    if output_kind == "directory":
+        output_dirs = [
+            d for d in project_path.iterdir()
+            if d.is_dir() and d.name.startswith("output")
+        ]
+        if output_dirs:
+            return "advisory_passed"
+        return "advisory_no_output"
+
+    # file, collection, generated_sequence types — look for output files
     output_files = (
         list(project_path.glob("output.*"))
         + list(project_path.glob("output_*.*"))
         + list(project_path.glob("result.*"))
         + list(project_path.glob("report.*"))
     )
-    output_dirs = [
-        d for d in project_path.iterdir()
-        if d.is_dir() and d.name.startswith("output")
-    ]
 
-    if not output_files and not output_dirs:
+    if not output_files:
         return "advisory_no_output"
 
     # Try semantic validation if available
@@ -109,6 +138,69 @@ def _advisory_output_validation(project_dir: str, scenario_id: str) -> str:
     except (ImportError, Exception) as exc:
         logger.debug("Advisory output validation skipped: %s", exc)
         return "passed"
+
+
+def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> str:
+    """Validate generated Program.cs against FormatContract in advisory mode (never blocks).
+
+    Returns one of: advisory_passed, advisory_failed, advisory_no_code,
+    advisory_no_contract, or not_evaluated.
+    """
+    from pathlib import Path as _Path
+    project_path = _Path(project_dir)
+    program_cs = project_path / "Program.cs"
+
+    if not program_cs.exists():
+        return "advisory_no_code"
+
+    # Load contract from manifest if available
+    manifest_path = project_path / "example.manifest.json"
+    contract_dict: dict = {}
+    if manifest_path.exists():
+        try:
+            import json as _json
+            manifest = _json.loads(manifest_path.read_text(encoding="utf-8"))
+            if manifest.get("contract_id"):
+                contract_dict = {
+                    "canonical_output_format": manifest.get("contract_output_format", ""),
+                    "input_format": manifest.get("contract_input_format", ""),
+                    "output_kind": manifest.get("contract_output_kind", "file"),
+                    "output_cardinality": manifest.get("contract_output_cardinality", "single"),
+                    "operation_kind": manifest.get("contract_operation_kind", ""),
+                    "contract_id": manifest.get("contract_id", ""),
+                }
+        except Exception:
+            pass
+
+    if not contract_dict:
+        # Fall back to store lookup by scenario_id
+        try:
+            parts = scenario_id.split("-", 1) if scenario_id else []
+            if len(parts) >= 2:
+                _fam = parts[0]
+                _slug = parts[1]
+                _type_guess = "".join(p.capitalize() for p in _slug.split("-"))
+                from plugin_examples.format_authority.store import get_contract
+                fc = get_contract(_fam, _type_guess)
+                contract_dict = fc.to_dict()
+        except Exception:
+            return "advisory_no_contract"
+
+    try:
+        code = program_cs.read_text(encoding="utf-8")
+        from plugin_examples.gates.code_contract_validator import validate_code_against_contract
+        result = validate_code_against_contract(code, contract_dict)
+        if result.valid:
+            return "advisory_passed"
+        failed = [c["check"] for c in result.checks if not c["passed"]]
+        logger.warning(
+            "Advisory contract validation failed for %s: %s",
+            scenario_id, failed,
+        )
+        return "advisory_failed"
+    except Exception as exc:
+        logger.debug("Advisory code contract validation skipped: %s", exc)
+        return "not_evaluated"
 
 
 def evaluate_example_gates(
@@ -204,6 +296,9 @@ def evaluate_example_gates(
 
         # Output validation (advisory — never blocks)
         eg.output_validation_status = _advisory_output_validation(epath, sid)
+
+        # Code contract validation (advisory — never blocks)
+        eg.code_contract_validation_status = _advisory_code_contract_validation(epath, sid)
 
         # Reviewer
         if reviewer_available and reviewer_passed:

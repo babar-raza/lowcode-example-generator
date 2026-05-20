@@ -125,3 +125,108 @@ class TestContractStoreCoversAllFamilies:
     def test_repo_local_authority_loaded(self):
         all_c = get_all_contracts()
         assert len(all_c) >= 42, f"Expected >= 42 contracts, got {len(all_c)}"
+
+
+# ---------------------------------------------------------------------------
+# TC-MEGA-G02: Stale-Map Guards
+# ---------------------------------------------------------------------------
+
+
+class TestPlannerProductionFailClosed:
+    """Guard: planner production mode never falls back to stale legacy maps."""
+
+    def test_spreadsheet_converter_not_xlsx_with_fail_closed(self):
+        """SpreadsheetConverter must return .csv (contract), not .xlsx (stale map)."""
+        result = _infer_output_format(
+            "SpreadsheetConverter", family_default=".xlsx", family="cells",
+            allow_legacy_format_inference=False
+        )
+        assert result != ".xlsx", (
+            "SpreadsheetConverter returned .xlsx — stale map is leaking into production"
+        )
+        assert result == ".csv", (
+            f"SpreadsheetConverter should return .csv from contract, got: {result}"
+        )
+
+    def test_form_exporter_not_xml_with_fail_closed(self):
+        """FormExporter must return .json (contract), not .xml (stale map)."""
+        result = _infer_output_format(
+            "FormExporter", family_default=".pdf", family="pdf",
+            allow_legacy_format_inference=False
+        )
+        assert result != ".xml", "FormExporter returned .xml — stale map is leaking"
+        assert result == ".json", f"Expected .json from contract, got: {result}"
+
+    def test_text_converter_input_not_csv_with_fail_closed(self):
+        """TextConverter input must return .xlsx (contract), not .csv (stale map)."""
+        result = _infer_input_format(
+            "TextConverter", family_default=".xlsx", family="cells",
+            allow_legacy_format_inference=False
+        )
+        assert result != ".csv", "TextConverter input returned .csv — stale map leaking"
+        assert result == ".xlsx", f"Expected .xlsx from contract, got: {result}"
+
+    def test_unknown_type_returns_family_default_not_out(self):
+        """Unknown type with fail_closed=True should return family_default, not .out from stale map."""
+        result = _infer_output_format(
+            "BogusType", family_default=".xlsx", family="cells",
+            allow_legacy_format_inference=False
+        )
+        # Should return family default, not stale-map .out
+        assert result != ".out", "Unknown type returned .out — stale map fallback is active"
+        assert result == ".xlsx", f"Expected family_default .xlsx, got: {result}"
+
+    @pytest.mark.parametrize(
+        "family,type_name", _ALL_ACTIVE,
+        ids=[f"{f}:{t}" for f, t in _ALL_ACTIVE],
+    )
+    def test_all_active_types_return_contract_value_not_out(self, family, type_name):
+        """With fail-closed enabled, every active type should return a non-.out value."""
+        family_defaults = {
+            "cells": ".xlsx", "words": ".docx", "pdf": ".pdf",
+            "diagram": ".vsdx", "email": ".eml", "slides": ".pptx",
+        }
+        result = _infer_output_format(
+            type_name, family_default=family_defaults.get(family, ".out"),
+            family=family, allow_legacy_format_inference=False
+        )
+        assert result != ".out", (
+            f"{family}:{type_name} returned .out — contract is missing or not loaded"
+        )
+
+
+class TestCodegenMapProductionGuard:
+    """Guard: codegen _infer_output_extension uses contract over stale _FORMAT_NAME_TO_EXT."""
+
+    def test_spreadsheet_converter_returns_csv_not_xlsx(self):
+        """With family hint, SpreadsheetConverter should return .csv, not .xlsx."""
+        from plugin_examples.generator.code_generator import _infer_output_extension
+        result = _infer_output_extension(
+            "SpreadsheetConverter", hints={"family": "cells"}
+        )
+        assert result != ".xlsx", (
+            "SpreadsheetConverter codegen returned .xlsx — 'spreadsheet' entry in "
+            "_FORMAT_NAME_TO_EXT is leaking (should be overridden by contract)"
+        )
+        assert result == ".csv", f"Expected .csv from contract, got: {result}"
+
+    def test_form_exporter_returns_json_not_xml(self):
+        """With family hint, FormExporter should return .json, not .xml."""
+        from plugin_examples.generator.code_generator import _infer_output_extension
+        result = _infer_output_extension(
+            "FormExporter", hints={"family": "pdf"}
+        )
+        assert result != ".xml", "FormExporter codegen returned .xml — stale map leak"
+        assert result == ".json", f"Expected .json from contract, got: {result}"
+
+    @pytest.mark.parametrize(
+        "family,type_name", _ALL_ACTIVE,
+        ids=[f"{f}:{t}" for f, t in _ALL_ACTIVE],
+    )
+    def test_codegen_no_dot_out_when_family_known(self, family, type_name):
+        """With family hint, codegen must never return .out for any active type."""
+        from plugin_examples.generator.code_generator import _infer_output_extension
+        result = _infer_output_extension(type_name, hints={"family": family})
+        assert result != ".out", (
+            f"codegen returned .out for {family}:{type_name} — contract not loaded or missing"
+        )

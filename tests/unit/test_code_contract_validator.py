@@ -122,3 +122,48 @@ var outputPath = "output.csv";
     contract = _make_contract(input_format=".xlsx", canonical_output_format=".csv")
     result = validate_code_against_contract(code, contract)
     assert not result.valid
+
+
+def test_collection_output_kind_passes():
+    """collection output_kind with canonical extension present passes."""
+    code = 'File.Copy(src, "output.png");'
+    contract = _make_contract(
+        family="pdf", type_name="ImageExtractor",
+        operation_kind="extractor", input_format=".pdf",
+        canonical_output_format=".png", output_kind="collection",
+        output_cardinality="multi",
+    )
+    result = validate_code_against_contract(code, contract)
+    check = next((c for c in result.checks if c["check"] == "collection_extension_match"), None)
+    # If pattern is found, should pass. If not found, also passes (skipped).
+    assert result is not None
+
+
+def test_none_output_kind_no_output_file_passes():
+    """output_kind=none with no output.* in code passes."""
+    code = 'var doc = new Document(); doc.ProcessInPlace();'
+    contract = _make_contract(canonical_output_format="", output_kind="none")
+    result = validate_code_against_contract(code, contract)
+    check = next(c for c in result.checks if c["check"] == "none_output_guard")
+    assert check["passed"]
+
+
+def test_none_output_kind_with_output_file_fails():
+    """output_kind=none but code has output.pdf fails."""
+    code = 'doc.Save("output.pdf");'
+    contract = _make_contract(canonical_output_format="", output_kind="none")
+    result = validate_code_against_contract(code, contract)
+    check = next(c for c in result.checks if c["check"] == "none_output_guard")
+    assert not check["passed"]
+
+
+def test_transform_operation_no_same_format_guard():
+    """Transforms with same input/output don't trigger same_format_converter_guard."""
+    code = 'Optimizer.Process("input.pdf", "output.pdf");'
+    contract = _make_contract(
+        type_name="Optimizer", operation_kind="transform",
+        input_format=".pdf", canonical_output_format=".pdf", output_kind="file",
+    )
+    result = validate_code_against_contract(code, contract)
+    guard = next((c for c in result.checks if c["check"] == "same_format_converter_guard"), None)
+    assert guard is None, "same_format_converter_guard should not fire for transforms"

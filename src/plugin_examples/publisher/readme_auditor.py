@@ -400,6 +400,34 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
                     f"{name}: directory output display '{out_display}' missing directory indicator"
                 )
 
+    # --- 20. FormatContract cross-check (advisory, non-fatal) ---
+    # Compare each example's rendered format display against contract canonical values
+    if family:
+        try:
+            from plugin_examples.format_authority.store import get_contract, MissingFormatContractError
+            for ex in examples:
+                if not isinstance(ex, dict):
+                    continue
+                ex_name = ex.get("name", "")
+                if not ex_name:
+                    continue
+                # Derive type name from example name (e.g. "spreadsheet-converter" -> "SpreadsheetConverter")
+                _parts = ex_name.split("-")
+                _type_guess = "".join(p.capitalize() for p in _parts)
+                try:
+                    fc = get_contract(family, _type_guess)
+                    rendered_output = ex.get("output_format", "").lower().lstrip(".")
+                    contract_output = fc.canonical_output_format.lower().lstrip(".")
+                    if rendered_output and contract_output and rendered_output != contract_output:
+                        # SpreadsheetConverter xlsx→xlsx is a known defect
+                        result.contract_format_mismatches.append(
+                            f"{ex_name}: README shows output '{rendered_output}', contract says '{contract_output}'"
+                        )
+                except (MissingFormatContractError, KeyError):
+                    pass  # type not in contract store — not a failure
+        except ImportError:
+            pass
+
     # --- URL domain validation (aspose.net link policy) ---
     from plugin_examples.publisher.aspose_links import (
         find_forbidden_aspose_com_links,

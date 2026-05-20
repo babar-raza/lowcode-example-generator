@@ -377,8 +377,11 @@ def _build_scenario(
         fixture_name = f"sample-{family}{default_fixture_extension}"
         required_fixtures = [fixture_name]
 
-    # Infer the correct input format for this specific scenario
-    inferred_input_format = _infer_input_format(name, default_fixture_extension, family=family)
+    # Infer the correct input format for this specific scenario.
+    # allow_legacy_format_inference=False: if contract not found, use family_default (not stale map)
+    inferred_input_format = _infer_input_format(
+        name, default_fixture_extension, family=family, allow_legacy_format_inference=False
+    )
 
     # Determine input strategy with proven input resolution
     status = "ready"
@@ -427,8 +430,11 @@ def _build_scenario(
         else:
             input_strategy = "none"
 
-    # Build output and validation plans
-    inferred_output_format = _infer_output_format(name, family_default=default_fixture_extension, family=family)
+    # Build output and validation plans.
+    # allow_legacy_format_inference=False: if contract not found, use family_default (not stale map)
+    inferred_output_format = _infer_output_format(
+        name, family_default=default_fixture_extension, family=family, allow_legacy_format_inference=False
+    )
     output_plan = f"Convert input{inferred_input_format} to output{inferred_output_format} using {name}"
     validation_plan = f"Build succeeds, runs without exception, produces output{inferred_output_format}"
 

@@ -76,6 +76,33 @@ def validate_code_against_contract(
     elif output_kind == "directory":
         result.add_check("directory_output", True, "Directory output type — format check skipped")
 
+    elif output_kind in ("collection", "generated_sequence"):
+        # Multi-file output — check canonical extension appears
+        if canonical_output:
+            output_matches = _OUTPUT_PATTERN.findall(code)
+            if output_matches:
+                expected_ext = canonical_output.lstrip(".")
+                found_correct = any(ext == expected_ext for ext in output_matches)
+                result.add_check(
+                    "collection_extension_match",
+                    found_correct,
+                    f"Expected canonical extension .{expected_ext} in multi-file output" if not found_correct
+                    else f"Found .{expected_ext} in multi-file output",
+                )
+            else:
+                result.add_check("collection_extension_match", True,
+                                 "No explicit output filename in collection type — skipped")
+        else:
+            result.add_check("collection_extension_match", True, "No canonical output for collection — skipped")
+
+    elif output_kind == "none":
+        # No output at all — code should not create any output file
+        if _OUTPUT_PATTERN.search(code):
+            result.add_check("none_output_guard", False,
+                             "output_kind=none but code contains output.* filename pattern")
+        else:
+            result.add_check("none_output_guard", True)
+
     # Check 3: Input extension matches contract
     if expected_input:
         input_matches = _INPUT_PATTERN.findall(code)

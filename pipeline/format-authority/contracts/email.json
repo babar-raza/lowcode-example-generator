@@ -1,0 +1,88 @@
+{
+  "family": "email",
+  "package_id": "Aspose.Email",
+  "authority_version": "1.0.0",
+  "generated_from": "api-backed-format-contracts.json + pipeline/contracts enrichment",
+  "types": [
+    {
+      "family": "email",
+      "package_id": "Aspose.Email",
+      "package_version": "latest",
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Email.LowCode.Converter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".eml",
+          "cardinality": "single",
+          "fixture_filename": "input.eml"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "directory",
+          "format": "html",
+          "cardinality": "multi",
+          "validation": "directory_exists"
+        }
+      ],
+      "output_kind": "directory",
+      "output_cardinality": "multi",
+      "canonical_output_format": "directory",
+      "variants": [
+        {
+          "variant_id": "converter-canonical",
+          "output_format": "directory",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        },
+        {
+          "variant_id": "converter-html",
+          "output_format": ".html",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-mht",
+          "output_format": ".mht",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-mhtml",
+          "output_format": ".mhtml",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-eml",
+          "output_format": ".eml",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-msg",
+          "output_format": ".msg",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        }
+      ],
+      "canonical_variant": "converter-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "directory_exists",
+      "readme_display_strategy": {
+        "input_format": "eml",
+        "output_format": "directory",
+        "operation_label": "converter"
+      },
+      "method_signature": "Converter.ConvertToHtml(string) or ConvertToMht/Mhtml/Eml/Msg",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "conflict_notes": "pipeline/contracts says .html output. API authority says directory output. Resolution: Converter.ConvertToHtml() produces multiple HTML files in directory via FolderOutputHandler. output_kind=directory, canonical_output_format=directory. Individual files are .html."
+    }
+  ]
+}

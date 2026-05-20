@@ -536,12 +536,18 @@ _INPUT_FORMAT_MAP: dict[str, str] = {
 }
 
 
-def _infer_input_format(type_name: str, family_default: str, family: str = "") -> str:
+def _infer_input_format(
+    type_name: str,
+    family_default: str,
+    family: str = "",
+    *,
+    allow_legacy_format_inference: bool = True,
+) -> str:
     """Infer the correct input format for a scenario based on type name.
 
     Priority:
     1. FormatContract (API-backed authority) — if available
-    2. Legacy _INPUT_FORMAT_MAP (deprecated compatibility)
+    2. Legacy _INPUT_FORMAT_MAP (deprecated; only if allow_legacy_format_inference=True)
     3. family_default fallback
     """
     # Priority 1: FormatContract authority
@@ -552,6 +558,9 @@ def _infer_input_format(type_name: str, family_default: str, family: str = "") -
             return contract.input_format
         except (KeyError, ImportError):
             pass
+
+    if not allow_legacy_format_inference:
+        return family_default
 
     # Priority 2: Legacy map (deprecated — compatibility only)
     key = type_name.lower()
@@ -567,12 +576,18 @@ def _infer_input_format(type_name: str, family_default: str, family: str = "") -
     return family_default
 
 
-def _infer_output_format(type_name: str, family_default: str = ".out", family: str = "") -> str:
+def _infer_output_format(
+    type_name: str,
+    family_default: str = ".out",
+    family: str = "",
+    *,
+    allow_legacy_format_inference: bool = True,
+) -> str:
     """Infer the output format from the type name.
 
     Priority:
     1. FormatContract (API-backed authority) — if available
-    2. Legacy _map (deprecated compatibility)
+    2. Legacy _map (deprecated; only if allow_legacy_format_inference=True)
     3. family_default fallback
     """
     # Priority 1: FormatContract authority
@@ -583,6 +598,9 @@ def _infer_output_format(type_name: str, family_default: str = ".out", family: s
             return contract.canonical_output_format
         except (KeyError, ImportError):
             pass
+
+    if not allow_legacy_format_inference:
+        return family_default
 
     # Priority 2: Legacy map (deprecated — compatibility only)
     name_lower = type_name.lower()

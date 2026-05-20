@@ -1,0 +1,40 @@
+{
+  "authority_version": "1.0.0",
+  "schema_version": "foundation-v1",
+  "total_types": 42,
+  "families": {
+    "cells": {
+      "file": "contracts/cells.json",
+      "type_count": 9,
+      "package_id": "Aspose.Cells"
+    },
+    "diagram": {
+      "file": "contracts/diagram.json",
+      "type_count": 2,
+      "package_id": "Aspose.Diagram"
+    },
+    "email": {
+      "file": "contracts/email.json",
+      "type_count": 1,
+      "package_id": "Aspose.Email"
+    },
+    "pdf": {
+      "file": "contracts/pdf.json",
+      "type_count": 19,
+      "package_id": "Aspose.PDF"
+    },
+    "slides": {
+      "file": "contracts/slides.json",
+      "type_count": 3,
+      "package_id": "Aspose.Slides.NET"
+    },
+    "words": {
+      "file": "contracts/words.json",
+      "type_count": 8,
+      "package_id": "Aspose.Words"
+    }
+  },
+  "generated_at": "2026-05-20T06:55:00Z",
+  "source": "DllReflector API catalogs + pipeline contracts enrichment",
+  "notes": "Repo-local format authority. This is the canonical source of truth for format decisions."
+}

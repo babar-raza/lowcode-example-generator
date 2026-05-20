@@ -15,11 +15,16 @@ from pathlib import Path
 
 from plugin_examples.format_authority.store import (
     get_contract,
+    get_all_contracts,
     MissingFormatContractError,
 )
 from plugin_examples.gates.code_contract_validator import validate_code_against_contract
 
 logger = logging.getLogger(__name__)
+
+# Repo-local manifest must exist for publication to proceed
+_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_LOCAL_MANIFEST = _REPO_ROOT / "pipeline" / "format-authority" / "manifest.json"
 
 
 @dataclass
@@ -44,6 +49,11 @@ class BatchPublicationGateResult:
     passed_count: int = 0
 
 
+def check_repo_local_authority_exists() -> bool:
+    """Check that repo-local format authority manifest exists."""
+    return _REPO_LOCAL_MANIFEST.exists()
+
+
 def evaluate_publication_gate(
     scenario_id: str,
     family: str,
@@ -60,6 +70,14 @@ def evaluate_publication_gate(
         family=family,
         type_name=type_name,
     )
+
+    # Check 0: Repo-local authority must exist
+    if not check_repo_local_authority_exists():
+        result.reasons.append(
+            f"Repo-local format authority missing: {_REPO_LOCAL_MANIFEST}. "
+            f"Publication is FROZEN until format authority is committed."
+        )
+        return result
 
     # Check 1: FormatContract exists
     try:

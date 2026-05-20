@@ -1,0 +1,458 @@
+{
+  "family": "words",
+  "package_id": "Aspose.Words",
+  "authority_version": "1.0.0",
+  "generated_from": "api-backed-format-contracts.json + pipeline/contracts enrichment",
+  "types": [
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Words.LowCode.Converter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".pdf",
+          "cardinality": "single",
+          "filename": "output.pdf",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".pdf",
+      "variants": [
+        {
+          "variant_id": "converter-canonical",
+          "output_format": ".pdf",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        },
+        {
+          "variant_id": "converter-html",
+          "output_format": ".html",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-epub",
+          "output_format": ".epub",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-rtf",
+          "output_format": ".rtf",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-odt",
+          "output_format": ".odt",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-txt",
+          "output_format": ".txt",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "converter-markdown",
+          "output_format": ".markdown",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        }
+      ],
+      "canonical_variant": "converter-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "pdf",
+        "operation_label": "converter"
+      },
+      "method_signature": "Converter.Convert(string, string, SaveFormat)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Merger",
+      "full_type_name": "Aspose.Words.LowCode.Merger",
+      "operation_kind": "merger",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "multi",
+          "fixture_filenames": [
+            "input1.docx",
+            "input2.docx"
+          ]
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "merger-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "merger-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "merger"
+      },
+      "method_signature": "Merger.Merge(string[], string, SaveFormat)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Splitter",
+      "full_type_name": "Aspose.Words.LowCode.Splitter",
+      "operation_kind": "splitter",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "multi",
+          "filename_pattern": "output_{n}.docx",
+          "validation": "result_collection_count"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "splitter-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "splitter-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "result_collection_count",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "splitter"
+      },
+      "method_signature": "Splitter.Split(string, string, SplitOptions)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Comparer",
+      "full_type_name": "Aspose.Words.LowCode.Comparer",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "multi",
+          "fixture_filenames": [
+            "input1.docx",
+            "input2.docx"
+          ]
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "comparer-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "comparer-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "converter"
+      },
+      "method_signature": "Comparer.Compare(string, string, string, string, SaveFormat)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "MailMerger",
+      "full_type_name": "Aspose.Words.LowCode.MailMerger",
+      "operation_kind": "processor",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "mailmerger-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "mailmerger-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "processor"
+      },
+      "method_signature": "MailMerger.Execute(string, string, SaveFormat, ...)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "ReportBuilder",
+      "full_type_name": "Aspose.Words.LowCode.ReportBuilder",
+      "operation_kind": "processor",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "reportbuilder-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "reportbuilder-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "processor"
+      },
+      "method_signature": "ReportBuilder.BuildReport(string, string, SaveFormat, ...)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Watermarker",
+      "full_type_name": "Aspose.Words.LowCode.Watermarker",
+      "operation_kind": "transform",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "watermarker-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "watermarker-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "transform"
+      },
+      "method_signature": "Watermarker.SetText(string, string, SaveFormat, ...)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "package_version": "latest",
+      "type_name": "Replacer",
+      "full_type_name": "Aspose.Words.LowCode.Replacer",
+      "operation_kind": "transform",
+      "input_artifacts": [
+        {
+          "format": ".docx",
+          "cardinality": "single",
+          "fixture_filename": "input.docx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".docx",
+          "cardinality": "single",
+          "filename": "output.docx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".docx",
+      "variants": [
+        {
+          "variant_id": "replacer-canonical",
+          "output_format": ".docx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "replacer-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "docx",
+        "output_format": "docx",
+        "operation_label": "transform"
+      },
+      "method_signature": "Replacer.Replace(string, string, SaveFormat, ...)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    }
+  ]
+}

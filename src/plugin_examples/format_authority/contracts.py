@@ -23,7 +23,7 @@ class FormatContract:
     input_cardinality: str
     canonical_output_format: str
     output_cardinality: str
-    output_kind: str  # "file" | "directory" | "stdout"
+    output_kind: str  # "file" | "directory" | "stdout" | "stream" | "collection" | "none"
     method_signature: str = ""
     options_class: str | None = None
     alternate_output_formats: tuple[str, ...] = ()
@@ -79,8 +79,9 @@ class FormatContract:
             errors.append("input_format is required")
         if not self.input_cardinality:
             errors.append("input_cardinality is required")
-        if self.output_kind not in ("file", "directory", "stdout"):
-            errors.append(f"output_kind must be file/directory/stdout, got {self.output_kind!r}")
+        valid_output_kinds = ("file", "directory", "stdout", "stream", "collection", "none")
+        if self.output_kind not in valid_output_kinds:
+            errors.append(f"output_kind must be one of {valid_output_kinds}, got {self.output_kind!r}")
         if self.canonical_output_format == ".out":
             errors.append("canonical_output_format must not be .out")
         if self.output_kind == "file" and not self.canonical_output_format:

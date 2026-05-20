@@ -1,0 +1,536 @@
+{
+  "family": "cells",
+  "package_id": "Aspose.Cells",
+  "authority_version": "1.0.0",
+  "generated_from": "api-backed-format-contracts.json + pipeline/contracts enrichment",
+  "types": [
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "SpreadsheetConverter",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".csv",
+          "cardinality": "single",
+          "filename": "output.csv",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".csv",
+      "variants": [
+        {
+          "variant_id": "spreadsheetconverter-canonical",
+          "output_format": ".csv",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        },
+        {
+          "variant_id": "spreadsheetconverter-ods",
+          "output_format": ".ods",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "spreadsheetconverter-xls",
+          "output_format": ".xls",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "spreadsheetconverter-xlsb",
+          "output_format": ".xlsb",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "spreadsheetconverter-tsv",
+          "output_format": ".tsv",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "spreadsheetconverter-dif",
+          "output_format": ".dif",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        }
+      ],
+      "canonical_variant": "spreadsheetconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "csv",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string) or Process(LowCodeLoadOptions, LowCodeSaveOptions)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "conflict_notes": "pipeline/contracts says .xlsx, API authority says .csv. Resolution: .csv is canonical (SaveFormat.CSV=6 is simplest cross-format demo). SpreadsheetConverter supports many formats via SaveFormat enum; .xlsx same-format is a no-op."
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "JsonConverter",
+      "full_type_name": "Aspose.Cells.LowCode.JsonConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".json",
+          "cardinality": "single",
+          "filename": "output.json",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".json",
+      "variants": [
+        {
+          "variant_id": "jsonconverter-canonical",
+          "output_format": ".json",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "jsonconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "json",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "HtmlConverter",
+      "full_type_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".html",
+          "cardinality": "single",
+          "filename": "output.html",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".html",
+      "variants": [
+        {
+          "variant_id": "htmlconverter-canonical",
+          "output_format": ".html",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "htmlconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "html",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "TextConverter",
+      "full_type_name": "Aspose.Cells.LowCode.TextConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".txt",
+          "cardinality": "single",
+          "filename": "output.txt",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".txt",
+      "variants": [
+        {
+          "variant_id": "textconverter-canonical",
+          "output_format": ".txt",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "textconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "txt",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "conflict_notes": "pipeline/contracts says input .csv and output .csv. API authority says input .xlsx, output .txt. Resolution: TextConverter.Process(inputPath, outputPath) takes any format Cells can load; .xlsx is the family default input. Output .txt is the canonical text extraction format."
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "ImageConverter",
+      "full_type_name": "Aspose.Cells.LowCode.ImageConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".png",
+          "cardinality": "single",
+          "filename": "output.png",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".png",
+      "variants": [
+        {
+          "variant_id": "imageconverter-canonical",
+          "output_format": ".png",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        },
+        {
+          "variant_id": "imageconverter-jpg",
+          "output_format": ".jpg",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "imageconverter-bmp",
+          "output_format": ".bmp",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "imageconverter-gif",
+          "output_format": ".gif",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "imageconverter-tiff",
+          "output_format": ".tiff",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "imageconverter-svg",
+          "output_format": ".svg",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        },
+        {
+          "variant_id": "imageconverter-emf",
+          "output_format": ".emf",
+          "is_canonical": false,
+          "reason": "Alternate format from API reflection"
+        }
+      ],
+      "canonical_variant": "imageconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "png",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string) or Process(LowCodeLoadOptions, LowCodeSaveOptions)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "PdfConverter",
+      "full_type_name": "Aspose.Cells.LowCode.PdfConverter",
+      "operation_kind": "converter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".pdf",
+          "cardinality": "single",
+          "filename": "output.pdf",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".pdf",
+      "variants": [
+        {
+          "variant_id": "pdfconverter-canonical",
+          "output_format": ".pdf",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "pdfconverter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "pdf",
+        "operation_label": "converter"
+      },
+      "method_signature": "Process(string, string)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "SpreadsheetMerger",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "operation_kind": "merger",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "multi",
+          "fixture_filenames": [
+            "input1.xlsx",
+            "input2.xlsx"
+          ]
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".xlsx",
+          "cardinality": "single",
+          "filename": "output.xlsx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".xlsx",
+      "variants": [
+        {
+          "variant_id": "spreadsheetmerger-canonical",
+          "output_format": ".xlsx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "spreadsheetmerger-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "xlsx",
+        "operation_label": "merger"
+      },
+      "method_signature": "Process(string[], string) or Process(LowCodeMergeOptions)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "SpreadsheetSplitter",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "operation_kind": "splitter",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".xlsx",
+          "cardinality": "multi",
+          "filename_pattern": "output_{n}.xlsx",
+          "validation": "result_collection_count"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "canonical_output_format": ".xlsx",
+      "variants": [
+        {
+          "variant_id": "spreadsheetsplitter-canonical",
+          "output_format": ".xlsx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "spreadsheetsplitter-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "result_collection_count",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "xlsx",
+        "operation_label": "splitter"
+      },
+      "method_signature": "Process(string, string) or Process(LowCodeSplitOptions)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "package_version": "latest",
+      "type_name": "SpreadsheetLocker",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "operation_kind": "transform",
+      "input_artifacts": [
+        {
+          "format": ".xlsx",
+          "cardinality": "single",
+          "fixture_filename": "input.xlsx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".xlsx",
+          "cardinality": "single",
+          "filename": "output.xlsx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".xlsx",
+      "variants": [
+        {
+          "variant_id": "spreadsheetlocker-canonical",
+          "output_format": ".xlsx",
+          "is_canonical": true,
+          "reason": "API-backed canonical from DllReflector evidence"
+        }
+      ],
+      "canonical_variant": "spreadsheetlocker-canonical",
+      "fixture_strategy": "generated_fixture_file",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "xlsx",
+        "output_format": "xlsx",
+        "operation_label": "transform"
+      },
+      "method_signature": "Process(string, string, string, string)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/verification/lowcode-api-format-authority-20260519-153439/reports/api-backed-format-contracts.json"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": ""
+    }
+  ]
+}

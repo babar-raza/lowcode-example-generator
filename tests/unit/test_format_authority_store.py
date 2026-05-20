@@ -1,4 +1,8 @@
-"""Tests for FormatContract model and store — Lane A foundation."""
+"""Tests for FormatContract model and store — repo-local authority.
+
+These tests use pipeline/format-authority/ (repo-local) as the authority source.
+No workspace run artifacts. No skips for missing files.
+"""
 
 import json
 import pytest
@@ -12,6 +16,9 @@ from plugin_examples.format_authority.store import (
     reset_store,
     MissingFormatContractError,
 )
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+MANIFEST_PATH = REPO_ROOT / "pipeline" / "format-authority" / "manifest.json"
 
 
 @pytest.fixture(autouse=True)
@@ -108,43 +115,39 @@ def test_contract_validation_valid():
     assert c.validate() == []
 
 
-# ── Store tests ──
+# ── Store tests — repo-local authority ──
+
+def test_repo_local_manifest_exists():
+    """The repo-local format authority manifest MUST exist."""
+    assert MANIFEST_PATH.exists(), (
+        f"Repo-local format authority missing: {MANIFEST_PATH}. "
+        f"This is required for all format authority tests."
+    )
+
 
 def test_missing_contract_raises():
+    """Missing contract must raise MissingFormatContractError."""
     with pytest.raises(MissingFormatContractError):
         get_contract("nonexistent", "NonexistentType")
 
 
-def test_load_from_api_authority():
-    """Load all 42 contracts from the prior API authority run."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
+def test_missing_manifest_fails_closed(tmp_path):
+    """Loading from a nonexistent path must raise FileNotFoundError."""
+    with pytest.raises(FileNotFoundError):
+        load_contracts_from_json(tmp_path / "nonexistent.json")
 
-    count = load_contracts_from_json(authority_path)
+
+def test_load_42_from_repo_local():
+    """Load all 42 contracts from repo-local authority."""
+    count = load_contracts_from_json(MANIFEST_PATH)
     assert count == 42, f"Expected 42 contracts, got {count}"
-
     all_c = get_all_contracts()
     assert len(all_c) == 42
 
 
 def test_spreadsheetconverter_canonical_is_csv():
     """SpreadsheetConverter canonical output MUST be .csv, not .xlsx."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    load_contracts_from_json(MANIFEST_PATH)
     c = get_contract("cells", "SpreadsheetConverter")
     assert c.canonical_output_format == ".csv", (
         f"SpreadsheetConverter canonical output must be .csv, got {c.canonical_output_format}"
@@ -153,16 +156,7 @@ def test_spreadsheetconverter_canonical_is_csv():
 
 def test_formexporter_canonical_is_json():
     """FormExporter canonical output MUST be .json, not .xml."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    load_contracts_from_json(MANIFEST_PATH)
     c = get_contract("pdf", "FormExporter")
     assert c.canonical_output_format == ".json", (
         f"FormExporter canonical output must be .json, got {c.canonical_output_format}"
@@ -171,50 +165,31 @@ def test_formexporter_canonical_is_json():
 
 def test_email_converter_output_kind_is_directory():
     """Email Converter output kind MUST be directory."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    load_contracts_from_json(MANIFEST_PATH)
     c = get_contract("email", "Converter")
     assert c.output_kind == "directory", (
         f"Email Converter output kind must be directory, got {c.output_kind}"
     )
 
 
+def test_text_extractor_stdout_no_output():
+    """TextExtractor must have stdout output_kind and empty canonical_output_format."""
+    load_contracts_from_json(MANIFEST_PATH)
+    c = get_contract("pdf", "TextExtractor")
+    assert c.output_kind == "stdout"
+    assert c.canonical_output_format == ""
+
+
 def test_diagram_converter_canonical_is_vdx():
     """DiagramConverter canonical output MUST be .vdx."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    load_contracts_from_json(MANIFEST_PATH)
     c = get_contract("diagram", "DiagramConverter")
     assert c.canonical_output_format == ".vdx"
 
 
 def test_no_contract_has_dot_out():
     """No contract in the store should have .out as canonical output."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    load_contracts_from_json(MANIFEST_PATH)
     for key, c in get_all_contracts().items():
         assert c.canonical_output_format != ".out", (
             f"{c.contract_id} has .out as canonical output"
@@ -222,17 +197,31 @@ def test_no_contract_has_dot_out():
 
 
 def test_all_contracts_validate():
-    """Every contract must pass validation."""
-    authority_path = (
-        Path(__file__).resolve().parents[2]
-        / "workspace" / "verification"
-        / "lowcode-api-format-authority-20260519-153439"
-        / "reports" / "api-backed-format-contracts.json"
-    )
-    if not authority_path.exists():
-        pytest.skip("API authority file not available")
-
-    load_contracts_from_json(authority_path)
+    """Every loaded contract must pass validation."""
+    load_contracts_from_json(MANIFEST_PATH)
     for key, c in get_all_contracts().items():
         errors = c.validate()
         assert errors == [], f"{c.contract_id} validation errors: {errors}"
+
+
+def test_auto_load_from_default_path():
+    """get_contract should auto-load from default repo-local path."""
+    # Don't call load_contracts_from_json — let auto-load work
+    c = get_contract("cells", "JsonConverter")
+    assert c.canonical_output_format == ".json"
+
+
+def test_text_converter_input_is_xlsx():
+    """TextConverter input MUST be .xlsx (family default), not .csv."""
+    load_contracts_from_json(MANIFEST_PATH)
+    c = get_contract("cells", "TextConverter")
+    assert c.input_format == ".xlsx", (
+        f"TextConverter input must be .xlsx, got {c.input_format}"
+    )
+
+
+def test_image_extractor_canonical_is_png():
+    """ImageExtractor canonical output MUST be .png, not .jpg."""
+    load_contracts_from_json(MANIFEST_PATH)
+    c = get_contract("pdf", "ImageExtractor")
+    assert c.canonical_output_format == ".png"

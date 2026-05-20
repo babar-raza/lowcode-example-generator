@@ -104,3 +104,9 @@ per_type_constraints:
       - "REQUIRED: using Aspose.Cells.LowCode;"
     forbidden:
       - "FORBIDDEN: Workbook.Save() replacing PdfConverter.Convert() — use LowCode PdfConverter"
+  TextConverter:
+    required:
+      - "output.txt"
+    forbidden:
+      - "output.csv"
+      - "output.xlsx"

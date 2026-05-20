@@ -1793,6 +1793,7 @@ def run_pipeline(
         reviewer_available=reviewer_avail,
         reviewer_passed=reviewer_pass,
         skip_run=skip_run,
+        contract_blocking_mode=True,
     )
     write_example_gate_results(example_gates, evidence_dir)
 

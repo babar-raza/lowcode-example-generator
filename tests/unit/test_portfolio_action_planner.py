@@ -92,9 +92,10 @@ class TestComputeActionBoard:
         assert "actions" in parsed
         assert "notes" in parsed
 
-    def test_pdf_merge_action_present(self, board):
+    def test_pdf_merge_action_absent_when_all_published(self, board):
+        """PDF_MERGE_PRS should not appear when pr_dry_run_ready_count is 0."""
         ids = [a.id for a in board.actions]
-        assert "PDF_MERGE_PRS" in ids
+        assert "PDF_MERGE_PRS" not in ids
 
     def test_formimporter_retest_present(self, board):
         ids = [a.id for a in board.actions]
@@ -133,22 +134,20 @@ class TestComputeActionBoard:
 # ---------------------------------------------------------------------------
 
 class TestGateBehavior:
-    def test_pdf_merge_blocked_when_gate_absent(self):
+    def test_pdf_merge_absent_when_no_pr_ready(self):
+        """With pr_dry_run_ready_count=0, PDF_MERGE_PRS is not generated regardless of gate."""
         with mock.patch.dict(os.environ, {}, clear=False):
             os.environ.pop("PLUGIN_EXAMPLES_MERGE_PR_APPROVAL", None)
             board = compute_action_board(_REPO_ROOT)
             pdf_merge = [a for a in board.actions if a.id == "PDF_MERGE_PRS"]
-            assert len(pdf_merge) == 1
-            assert pdf_merge[0].safe_to_execute_now is False
-            assert pdf_merge[0].gate_present is False
+            assert len(pdf_merge) == 0
 
-    def test_pdf_merge_safe_when_gate_present(self):
+    def test_pdf_merge_absent_even_with_gate_present(self):
+        """With pr_dry_run_ready_count=0, gate presence doesn't create merge action."""
         with mock.patch.dict(os.environ, {"PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "APPROVE_MERGE_PR"}):
             board = compute_action_board(_REPO_ROOT)
             pdf_merge = [a for a in board.actions if a.id == "PDF_MERGE_PRS"]
-            assert len(pdf_merge) == 1
-            assert pdf_merge[0].safe_to_execute_now is True
-            assert pdf_merge[0].gate_present is True
+            assert len(pdf_merge) == 0
 
 
 # ---------------------------------------------------------------------------
@@ -263,33 +262,18 @@ class TestFreshnessMetadata:
 # ---------------------------------------------------------------------------
 
 class TestConflictRecoveryAction:
-    def test_conflict_recovery_present_in_board(self):
+    def test_conflict_recovery_absent_when_all_published(self):
+        """PDF_PR_CONFLICT_RECOVERY should not appear when pr_dry_run_ready_count is 0."""
         board = compute_action_board(_REPO_ROOT)
         ids = [a.id for a in board.actions]
-        assert "PDF_PR_CONFLICT_RECOVERY" in ids
+        assert "PDF_PR_CONFLICT_RECOVERY" not in ids
 
-    def test_conflict_recovery_blocked_when_gate_absent(self):
-        with mock.patch.dict(os.environ, {}, clear=False):
-            os.environ.pop("PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", None)
-            board = compute_action_board(_REPO_ROOT)
-            cr = [a for a in board.actions if a.id == "PDF_PR_CONFLICT_RECOVERY"]
-            assert len(cr) == 1
-            assert cr[0].safe_to_execute_now is False
-            assert cr[0].taskcard_id == "TC-PDF-PR-CONFLICT-RESOLUTION"
-
-    def test_conflict_recovery_safe_when_gate_present(self):
+    def test_conflict_recovery_absent_regardless_of_gate(self):
+        """With pr_dry_run_ready_count=0, gate presence doesn't create conflict recovery."""
         with mock.patch.dict(os.environ, {"PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "APPROVE_LIVE_PR"}):
             board = compute_action_board(_REPO_ROOT)
             cr = [a for a in board.actions if a.id == "PDF_PR_CONFLICT_RECOVERY"]
-            assert len(cr) == 1
-            assert cr[0].safe_to_execute_now is True
-
-    def test_conflict_recovery_ranks_below_merge(self):
-        board = compute_action_board(_REPO_ROOT)
-        ids = [a.id for a in board.actions]
-        merge_idx = ids.index("PDF_MERGE_PRS")
-        cr_idx = ids.index("PDF_PR_CONFLICT_RECOVERY")
-        assert cr_idx > merge_idx  # merge (95) > conflict recovery (92)
+            assert len(cr) == 0
 
 
 # ---------------------------------------------------------------------------

@@ -210,6 +210,7 @@ def evaluate_example_gates(
     reviewer_available: bool = False,
     reviewer_passed: bool = False,
     skip_run: bool = False,
+    contract_blocking_mode: bool = True,
 ) -> list[ExampleGateResult]:
     """Evaluate gates for each individual example.
 
@@ -220,6 +221,8 @@ def evaluate_example_gates(
         reviewer_available: Whether reviewer is available.
         reviewer_passed: Whether reviewer passed.
         skip_run: Whether runtime was skipped.
+        contract_blocking_mode: When True (default), advisory_failed contract/output
+            validation blocks PR_DRY_RUN_READY. Set to False for legacy advisory mode.
 
     Returns:
         List of ExampleGateResult, one per generated example.
@@ -294,11 +297,24 @@ def evaluate_example_gates(
         else:
             eg.run_status = "not_evaluated"
 
-        # Output validation (advisory — never blocks)
+        # Output validation (advisory or blocking depending on mode)
         eg.output_validation_status = _advisory_output_validation(epath, sid)
 
-        # Code contract validation (advisory — never blocks)
+        # Code contract validation (advisory or blocking depending on mode)
         eg.code_contract_validation_status = _advisory_code_contract_validation(epath, sid)
+
+        # Contract blocking gate (promotes advisory → blocking when contract_blocking_mode=True)
+        if contract_blocking_mode:
+            if eg.code_contract_validation_status == "advisory_failed":
+                eg.final_example_verdict = "EXAMPLE_BLOCKED_CODE_CONTRACT_FAILED"
+                eg.blocked_reason = "Code contract validation failed (blocking mode)"
+                results.append(eg)
+                continue
+            if eg.output_validation_status == "advisory_failed":
+                eg.final_example_verdict = "EXAMPLE_BLOCKED_OUTPUT_CONTRACT_FAILED"
+                eg.blocked_reason = "Output contract validation failed (blocking mode)"
+                results.append(eg)
+                continue
 
         # Reviewer
         if reviewer_available and reviewer_passed:

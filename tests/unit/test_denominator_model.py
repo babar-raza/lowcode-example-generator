@@ -273,9 +273,9 @@ class TestPdfDenominator:
                   "Security", "FormFlattener", "FormEditor", "FormExporter", "Signature"]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
-    def test_pdf_published_count_is_5(self):
-        assert self.d["published_count"] == 5, (
-            f"PDF published_count should be 5 (Merger+TextExtractor+Splitter+PdfAConverter+Optimizer), got {self.d['published_count']}"
+    def test_pdf_published_count_is_19(self):
+        assert self.d["published_count"] == 19, (
+            f"PDF published_count should be 19 (all pilot-allowed types published via PRs #1,#2,#4,#11,#17-#21), got {self.d['published_count']}"
         )
 
     def test_pdf_denominator_basis_is_pilot_allowed(self):
@@ -464,12 +464,12 @@ class TestDenominatorCrossFamily:
         d = _load_denominator(family)
         assert d["denominator_basis"] in {"FULL_SOT", "WORKFLOW_ROOT", "PILOT_ALLOWED"}
 
-    def test_total_published_across_families_is_28(self):
+    def test_total_published_across_families_is_42(self):
         """Integration: total published examples across all 6 families."""
         total = sum(_load_denominator(f)["published_count"] for f in FAMILIES)
-        assert total == 28, (
-            f"Total published count across all 6 families should be 28 "
-            f"(Cells=9, Words=8, PDF=5, Diagram=2, Email=1, Slides=3), got {total}"
+        assert total == 42, (
+            f"Total published count across all 6 families should be 42 "
+            f"(Cells=9, Words=8, PDF=19, Diagram=2, Email=1, Slides=3), got {total}"
         )
 
     @pytest.mark.parametrize("family", FAMILIES)

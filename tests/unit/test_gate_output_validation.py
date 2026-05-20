@@ -14,14 +14,14 @@ from plugin_examples.gates.example_gates import (
 class TestAdvisoryOutputValidation:
     """Test the _advisory_output_validation helper."""
 
-    def test_text_extractor_not_applicable(self):
+    def test_text_extractor_not_applicable(self, tmp_path):
         """TextExtractor types should return advisory_not_applicable."""
-        result = _advisory_output_validation("/fake/path", "pdf-text-extractor")
+        result = _advisory_output_validation(str(tmp_path), "pdf-text-extractor")
         assert result == "advisory_not_applicable"
 
-    def test_text_extractor_by_scenario_id(self):
+    def test_text_extractor_by_scenario_id(self, tmp_path):
         """TextExtractor detected via scenario_id pattern."""
-        result = _advisory_output_validation("/fake/path", "slides-textextractor")
+        result = _advisory_output_validation(str(tmp_path), "slides-textextractor")
         assert result == "advisory_not_applicable"
 
     def test_nonexistent_dir_returns_passed(self):

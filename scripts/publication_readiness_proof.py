@@ -74,7 +74,7 @@ for family in FAMILIES:
 
     runnable = denom.get("runnable_scenarios", 0)
     published = denom.get("published_count", 0)
-    pr_ready = denom.get("pr_ready_count", 0)
+    pr_ready = denom.get("pr_dry_run_ready_count", denom.get("pr_ready_count", 0))
     blocked = denom.get("blocked_count", 0)
     source_version = denom.get("source_version", "?")
 

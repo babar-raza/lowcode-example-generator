@@ -64,6 +64,28 @@ PERMANENTLY_BLOCKED = {
 # Data model
 # ---------------------------------------------------------------------------
 
+EXECUTION_STATES = (
+    "safe_unexecuted",
+    "safe_executed_changed",
+    "safe_executed_noop",
+    "recurring_check_satisfied",
+    "blocked_by_approval",
+    "blocked_by_dependency",
+    "blocked_by_design_review",
+    "permanently_blocked",
+)
+
+# Action IDs that are recurring read-only checks (never produce state changes).
+RECURRING_CHECK_IDS = frozenset({
+    "PORTFOLIO_CONSERVATION_CHECK",
+    "VERSION_DRIFT_CHECK",
+    "FORMIMPORTER_RETEST",
+    "OCR_DEPENDENCY_RECHECK",
+    "PSD_DEPENDENCY_RECHECK",
+    "PERMANENTLY_BLOCKED_WATCH",
+})
+
+
 @dataclass
 class Action:
     id: str
@@ -81,11 +103,18 @@ class Action:
     evidence_required: list[str] = field(default_factory=list)
     tests_required: list[str] = field(default_factory=list)
     taskcard_id: str | None = None
+    execution_state: str = "safe_unexecuted"
+    executed_this_sprint: bool = False
+    last_execution_cycle: int | None = None
+    changed_state: bool = False
+    next_required: bool = True
 
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
         if d.get("taskcard_id") is None:
             del d["taskcard_id"]
+        if d.get("last_execution_cycle") is None:
+            del d["last_execution_cycle"]
         return d
 
 
@@ -131,6 +160,27 @@ class ActionBoard:
             "blocked_ids": [a.id for a in self.blocked_actions()],
             "max_impact": max((a.impact for a in self.actions), default=0),
         }
+
+    def next_required_actions(self) -> list[Action]:
+        """Return only actions that are truly next-required (not executed no-ops)."""
+        return [a for a in self.actions if a.next_required]
+
+    def mark_executed(self, action_id: str, *, changed: bool = False, cycle: int = 0) -> None:
+        """Mark an action as executed this sprint, updating its execution_state."""
+        for a in self.actions:
+            if a.id == action_id:
+                a.executed_this_sprint = True
+                a.last_execution_cycle = cycle
+                a.changed_state = changed
+                if changed:
+                    a.execution_state = "safe_executed_changed"
+                elif a.id in RECURRING_CHECK_IDS:
+                    a.execution_state = "recurring_check_satisfied"
+                    a.next_required = False
+                else:
+                    a.execution_state = "safe_executed_noop"
+                    a.next_required = False
+                break
 
 
 # ---------------------------------------------------------------------------
@@ -522,6 +572,18 @@ def compute_action_board(repo_root: Path) -> ActionBoard:
     all_actions.extend(_gen_conservation_actions(denoms, contract_counts))
     all_actions.extend(_gen_version_drift_actions(denoms))
     all_actions.extend(_gen_blocker_actions(denoms))
+
+    # Set execution_state for blocked actions
+    for a in all_actions:
+        if not a.safe_to_execute_now:
+            if a.approval_required:
+                a.execution_state = "blocked_by_approval"
+            elif a.blocker and "dependency" in a.blocker.lower():
+                a.execution_state = "blocked_by_dependency"
+            elif a.taskcard_id and "design" in (a.reason or "").lower():
+                a.execution_state = "blocked_by_design_review"
+            else:
+                a.execution_state = "blocked_by_approval"
 
     # Sort by impact descending
     all_actions.sort(key=lambda a: a.impact, reverse=True)

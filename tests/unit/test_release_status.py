@@ -372,7 +372,7 @@ class TestReleaseStatusAllFamilies:
         by_family = {r["family"]: r["release_scope_status"] for r in status["families"]}
         assert by_family["cells"] == "FAMILY_COMPLETE"
         assert by_family["words"] == "PILOT_COMPLETE"
-        assert by_family["pdf"] == "PARTIAL_CANARY"  # Wave B (3 types) added to pilot but not yet published
+        assert by_family["pdf"] == "PILOT_COMPLETE"  # All 19 pilot types published (PRs #1-#4, #11, #17-#21 merged)
         assert by_family["diagram"] == "PILOT_COMPLETE"
         assert by_family["email"] == "PILOT_COMPLETE"
         assert by_family["slides"] == "PILOT_COMPLETE"
@@ -408,3 +408,60 @@ class TestReleaseStatusAllFamilies:
         )
         assert "generated_at" in status, "release status must include generated_at timestamp"
         assert len(status["families"]) == 6
+
+
+class TestReleaseStatusTopLevelFields:
+    """Verify top-level fields do not imply all examples are published when some are PR-ready."""
+
+    def test_top_level_fields_exist(self):
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        assert "all_published" in status
+        assert "all_contracts_accounted_for" in status
+        assert "published_count" in status
+        assert "pr_ready_count" in status
+        assert "total_contracts" in status
+        assert "approval_blocked_count" in status
+        assert "families_complete_count" in status
+        assert "families_partial_count" in status
+
+    def test_all_contracts_accounted_for(self):
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        assert status["all_contracts_accounted_for"] is True
+        assert status["total_contracts"] == 42
+
+    def test_published_plus_pr_ready_equals_contracts(self):
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        assert status["published_count"] + status["pr_ready_count"] >= status["total_contracts"]
+
+    def test_no_top_level_field_implies_all_published_when_pr_ready_exists(self):
+        """If pr_ready_count > 0, all_published must be false."""
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        if status["pr_ready_count"] > 0:
+            assert status["all_published"] is False
+        else:
+            assert status["all_published"] is True
+
+    def test_release_status_and_portfolio_release_status_agree(self):
+        """release-status published_count must match portfolio matrix totals."""
+        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        repo_root = Path(__file__).resolve().parents[2]
+        status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
+        # Verify from denominator configs
+        import json
+        denom_dir = repo_root / "pipeline" / "configs" / "denominators"
+        denom_published = 0
+        denom_pr_ready = 0
+        for fam in ALL_RELEASE_FAMILIES:
+            d = json.loads((denom_dir / f"{fam}.json").read_text(encoding="utf-8"))
+            denom_published += d.get("published_count", 0)
+            denom_pr_ready += d.get("pr_dry_run_ready_count", 0)
+        assert status["published_count"] == denom_published
+        assert status["pr_ready_count"] == denom_pr_ready

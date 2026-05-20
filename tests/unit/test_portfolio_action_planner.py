@@ -13,7 +13,9 @@ from plugin_examples.portfolio_action_planner import (
     ACTION_TYPES,
     ACTIVE_FAMILIES,
     BLOCKED_FAMILIES,
+    EXECUTION_STATES,
     PERMANENTLY_BLOCKED,
+    RECURRING_CHECK_IDS,
     Action,
     ActionBoard,
     DirtyState,
@@ -459,3 +461,118 @@ class TestPorcelainPathParsing:
     def test_parse_short_line(self):
         assert _parse_porcelain_path("") == ""
         assert _parse_porcelain_path("M") == ""
+
+
+# ---------------------------------------------------------------------------
+# Test execution state semantics
+# ---------------------------------------------------------------------------
+
+class TestExecutionStateSemantics:
+    """Verify planner distinguishes executed no-op checks from required next actions."""
+
+    def test_recurring_check_ids_are_defined(self):
+        assert len(RECURRING_CHECK_IDS) >= 5
+
+    def test_execution_states_are_defined(self):
+        assert "safe_unexecuted" in EXECUTION_STATES
+        assert "recurring_check_satisfied" in EXECUTION_STATES
+        assert "blocked_by_approval" in EXECUTION_STATES
+
+    def test_mark_executed_noop_recurring_check(self):
+        board = ActionBoard()
+        board.actions = [
+            Action(
+                id="PORTFOLIO_CONSERVATION_CHECK",
+                family="cross-family",
+                type="DENOMINATOR_RECONCILIATION",
+                current_state="needs check",
+                desired_state="verified",
+                safe_to_execute_now=True,
+            ),
+        ]
+        board.mark_executed("PORTFOLIO_CONSERVATION_CHECK", changed=False, cycle=1)
+        a = board.actions[0]
+        assert a.execution_state == "recurring_check_satisfied"
+        assert a.next_required is False
+        assert a.executed_this_sprint is True
+
+    def test_mark_executed_with_change(self):
+        board = ActionBoard()
+        board.actions = [
+            Action(
+                id="PORTFOLIO_CONSERVATION_CHECK",
+                family="cross-family",
+                type="DENOMINATOR_RECONCILIATION",
+                current_state="needs check",
+                desired_state="verified",
+                safe_to_execute_now=True,
+            ),
+        ]
+        board.mark_executed("PORTFOLIO_CONSERVATION_CHECK", changed=True, cycle=1)
+        a = board.actions[0]
+        assert a.execution_state == "safe_executed_changed"
+        assert a.next_required is True  # changed state means re-check needed
+
+    def test_approval_blocked_remains_next_required(self):
+        a = Action(
+            id="PDF_MERGE_PRS",
+            family="pdf",
+            type="MERGE_READY_PR",
+            current_state="14 PR-ready",
+            desired_state="published",
+            safe_to_execute_now=False,
+            approval_required="APPROVE_MERGE_PR",
+            gate_present=False,
+            execution_state="blocked_by_approval",
+        )
+        assert a.next_required is True
+
+    def test_next_required_actions_excludes_executed_noops(self):
+        board = ActionBoard()
+        board.actions = [
+            Action(id="VERSION_DRIFT_CHECK", family="x", type="VERSION_DRIFT_RERUN",
+                   current_state="", desired_state="", safe_to_execute_now=True),
+            Action(id="PDF_MERGE_PRS", family="pdf", type="MERGE_READY_PR",
+                   current_state="", desired_state="", safe_to_execute_now=False,
+                   approval_required="APPROVE_MERGE_PR", execution_state="blocked_by_approval"),
+        ]
+        board.mark_executed("VERSION_DRIFT_CHECK", changed=False, cycle=1)
+        required = board.next_required_actions()
+        ids = [a.id for a in required]
+        assert "VERSION_DRIFT_CHECK" not in ids
+        assert "PDF_MERGE_PRS" in ids
+
+    def test_design_review_blocked_visible_not_safe(self):
+        a = Action(
+            id="CONTRACT_FIRST_CODEGEN",
+            family="cross-family",
+            type="GOVERNANCE_HARDENING",
+            current_state="not implemented",
+            desired_state="contract-first codegen",
+            safe_to_execute_now=False,
+            taskcard_id="TC-CONTRACT-FIRST-CODEGEN",
+            execution_state="blocked_by_design_review",
+        )
+        assert a.next_required is True
+        assert a.safe_to_execute_now is False
+
+    def test_action_to_dict_includes_execution_state(self):
+        a = Action(id="TEST", family="x", type="TEST",
+                   current_state="", desired_state="",
+                   execution_state="recurring_check_satisfied",
+                   executed_this_sprint=True, next_required=False)
+        d = a.to_dict()
+        assert d["execution_state"] == "recurring_check_satisfied"
+        assert d["executed_this_sprint"] is True
+        assert d["next_required"] is False
+
+    def test_board_blocked_actions_have_execution_state(self):
+        dirty = DirtyState()
+        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state",
+                        return_value=dirty), \
+             mock.patch("plugin_examples.portfolio_action_planner._get_head_sha",
+                        return_value="abc1234"):
+            board = compute_action_board(_REPO_ROOT)
+            for a in board.blocked_actions():
+                assert a.execution_state.startswith("blocked_by_"), \
+                    f"{a.id} has execution_state={a.execution_state}"

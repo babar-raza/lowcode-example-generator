@@ -266,12 +266,44 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         for r in results
     )
 
+    # Compute accurate top-level summary fields from denominator data
+    total_published = sum(r["published_examples_count"] for r in results)
+    total_contracts = sum(
+        (r["allowed_pilot_count"] or r["workflow_root_types"] or 0)
+        for r in results
+    )
+    # pr_ready comes from denominator pr_dry_run_ready_count
+    total_pr_ready = 0
+    for family in families:
+        d = _load_denominator(verification_dir, family)
+        total_pr_ready += d.get("pr_dry_run_ready_count", 0)
+
+    all_published = total_contracts > 0 and total_published >= total_contracts
+    all_contracts_accounted = total_contracts > 0 and (total_published + total_pr_ready) >= total_contracts
+    families_complete = sum(
+        1 for r in results
+        if r["release_scope_status"] in ("FAMILY_COMPLETE", "PILOT_COMPLETE")
+    )
+    families_partial = sum(
+        1 for r in results
+        if r["release_scope_status"] in ("PARTIAL_CANARY", "PARTIAL_FAMILY_COVERAGE")
+    )
+    approval_blocked = total_pr_ready  # PR-ready but not yet published
+
     return {
         "report_type": "release_status",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "families_checked": families,
         "all_merged": all_merged,
         "all_post_merge_validated": all_validated,
+        "all_published": all_published,
+        "all_contracts_accounted_for": all_contracts_accounted,
+        "published_count": total_published,
+        "pr_ready_count": total_pr_ready,
+        "total_contracts": total_contracts,
+        "approval_blocked_count": approval_blocked,
+        "families_complete_count": families_complete,
+        "families_partial_count": families_partial,
         "families": results,
     }
 

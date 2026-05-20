@@ -2595,6 +2595,84 @@ def generate_companion_proof(
     return generate_validation_proof(zip_path, output_path=companion_path)
 
 
+def build_evidence_bundle(
+    evidence_dir: str | Path,
+    zip_path: str | Path,
+    *,
+    extra_files: dict[str, str | bytes] | None = None,
+    contract: PlannerSprintEvidenceContract | None = None,
+) -> dict:
+    """Build an evidence ZIP with correct manifest/validation ordering.
+
+    Addresses evidence hygiene caveats:
+    - sha256-manifest.txt includes every file in the ZIP including itself
+      (self-hash is listed as ``SELF`` since the manifest cannot hash itself).
+    - evidence-contract-validation.json reports the actual final ZIP entry
+      count because validation runs against the completed ZIP.
+    - Companion validation proof is written next to the ZIP.
+
+    Returns dict with ``zip_path``, ``entry_count``, ``validation``,
+    ``manifest_entries``.
+    """
+    import hashlib as _hl
+
+    evidence_dir = Path(evidence_dir)
+    zip_path = Path(zip_path)
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
+
+    files_to_add: list[tuple[str, bytes]] = []
+    for f in sorted(evidence_dir.rglob("*")):
+        if f.is_file() and f.name not in (
+            "sha256-manifest.txt",
+            "evidence-contract-validation.json",
+        ):
+            arcname = str(f.relative_to(evidence_dir)).replace("\\", "/")
+            files_to_add.append((arcname, f.read_bytes()))
+
+    if extra_files:
+        for arcname, content in extra_files.items():
+            if isinstance(content, str):
+                content = content.encode("utf-8")
+            files_to_add.append((arcname, content))
+
+    manifest_lines: list[str] = []
+    for arcname, content in files_to_add:
+        h = _hl.sha256(content).hexdigest()
+        manifest_lines.append(f"{h}  {arcname}")
+    manifest_lines.append("SELF  sha256-manifest.txt")
+    manifest_content = "\n".join(manifest_lines) + "\n"
+    files_to_add.append(("sha256-manifest.txt", manifest_content.encode("utf-8")))
+
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for arcname, content in files_to_add:
+            zf.writestr(arcname, content)
+
+    entry_count = len(files_to_add)
+
+    if contract is None:
+        contract = PlannerSprintEvidenceContract()
+    contract.validate_zip(zip_path)
+
+    validation_proof = generate_validation_proof(zip_path)
+    validation_proof["bundle_entry_count_at_validation"] = entry_count
+    validation_proof["manifest_self_exclusion_note"] = (
+        "sha256-manifest.txt lists itself as SELF (cannot self-hash). "
+        "evidence-contract-validation.json is a companion file outside the ZIP."
+    )
+
+    companion_path = zip_path.parent / "evidence-contract-validation.json"
+    companion_path.write_text(
+        json.dumps(validation_proof, indent=2), encoding="utf-8",
+    )
+
+    return {
+        "zip_path": str(zip_path),
+        "entry_count": entry_count,
+        "validation": validation_proof,
+        "manifest_entries": len(manifest_lines),
+    }
+
+
 # Head-binding fields checked in final closeout artifacts
 _HEAD_BINDING_KEYS: dict[str, str] = {
     "final-state-summary.json": "head",

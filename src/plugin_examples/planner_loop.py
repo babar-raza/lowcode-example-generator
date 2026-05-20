@@ -332,3 +332,48 @@ def run_execution_loop(
     final_path.write_text(result.final_board.to_json(), encoding="utf-8")
 
     return result
+
+
+# ---------------------------------------------------------------------------
+# Blocked actions report (evidence hygiene: no vague labels)
+# ---------------------------------------------------------------------------
+
+_RETRY_CONDITIONS: dict[str, str] = {
+    "PORTFOLIO_CONSERVATION_CHECK": "always safe — read-only check",
+    "VERSION_DRIFT_CHECK": "always safe — read-only check",
+    "FORMIMPORTER_RETEST": "Aspose.PDF NuGet > 26.5.0 published",
+    "OCR_DEPENDENCY_RECHECK": "Aspose.AI.LLM NuGet package returns HTTP 200",
+    "PSD_DEPENDENCY_RECHECK": "Aspose.JavaAttributes NuGet package returns HTTP 200",
+    "PERMANENTLY_BLOCKED_WATCH": "NEVER — permanently blocked by design",
+    "MERGE_READY_PR": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR set",
+    "PDF_PR_CONFLICT_RECOVERY": "manual conflict resolution",
+    "LIVE_PUBLISH_READY_PACKAGE": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR set",
+}
+
+
+def generate_blocked_actions_report(board: ActionBoard) -> list[dict[str, Any]]:
+    """Generate structured blocked-actions report with no vague labels.
+
+    Every blocked or deferred action gets:
+    - action_id, action_type, family, safe, blocker,
+      approval_env, taskcard_id, retry_condition.
+    """
+    report: list[dict[str, Any]] = []
+    for action in board.actions:
+        if action.safe_to_execute_now:
+            continue
+        entry: dict[str, Any] = {
+            "action_id": action.id,
+            "action_type": action.type,
+            "family": action.family or "cross-family",
+            "safe": action.safe_to_execute_now,
+            "blocker": action.blocker or "approval gate absent",
+            "approval_env": action.approval_required or None,
+            "taskcard_id": action.taskcard_id or f"TC-{action.id.replace('_', '-')}",
+            "retry_condition": _RETRY_CONDITIONS.get(
+                action.id,
+                action.blocker or "unknown — requires taskcard creation",
+            ),
+        }
+        report.append(entry)
+    return report

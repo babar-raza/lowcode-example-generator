@@ -17,6 +17,8 @@ from plugin_examples.planner_loop import (
     run_execution_loop,
     _ACTION_HANDLERS,
     _APPROVAL_GATED_TYPES,
+    generate_blocked_actions_report,
+    _RETRY_CONDITIONS,
 )
 from plugin_examples.portfolio_action_planner import ActionBoard, Action
 
@@ -318,3 +320,60 @@ class TestDirtyStateConsistency:
         assert d["source_dirty_count"] == 1
         assert d["evidence_dirty_count"] == 1
         assert d["actionable_count"] == 1
+
+
+class TestBlockedActionsReport:
+    def test_report_excludes_safe_actions(self):
+        board = ActionBoard(actions=[
+            Action(id="SAFE_ONE", family="cells", type="PORTFOLIO_CONSERVATION_CHECK",
+                   current_state="pending", desired_state="done", safe_to_execute_now=True),
+            Action(id="BLOCKED_ONE", family="pdf", type="MERGE_READY_PR",
+                   current_state="pending", desired_state="done", safe_to_execute_now=False,
+                   blocker="merge approval gate absent", taskcard_id="TC-PDF-MERGE"),
+        ])
+        report = generate_blocked_actions_report(board)
+        assert len(report) == 1
+        assert report[0]["action_id"] == "BLOCKED_ONE"
+
+    def test_report_has_required_fields(self):
+        board = ActionBoard(actions=[
+            Action(id="FORMIMPORTER_RETEST", family="pdf", type="FORMIMPORTER_RETEST",
+                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
+                   blocker="requires Aspose.PDF > 26.5.0", taskcard_id="TC-PDF-FORMIMPORTER-RETEST"),
+        ])
+        report = generate_blocked_actions_report(board)
+        entry = report[0]
+        required_keys = {"action_id", "action_type", "family", "safe", "blocker",
+                         "approval_env", "taskcard_id", "retry_condition"}
+        assert required_keys <= set(entry.keys())
+
+    def test_report_no_unknown_labels(self):
+        board = ActionBoard(actions=[
+            Action(id="FORMIMPORTER_RETEST", family="pdf", type="FORMIMPORTER_RETEST",
+                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
+                   blocker="requires Aspose.PDF > 26.5.0", taskcard_id="TC-PDF-FORMIMPORTER-RETEST"),
+            Action(id="OCR_DEPENDENCY_RECHECK", family="ocr", type="OCR_DEPENDENCY_RECHECK",
+                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
+                   blocker="internal Aspose assembly", taskcard_id="TC-OCR-REFLECTION"),
+        ])
+        report = generate_blocked_actions_report(board)
+        for entry in report:
+            assert entry["blocker"] != "unknown"
+            assert entry["blocker"] != "needs-creation"
+            assert entry["retry_condition"] != "unknown"
+
+    def test_retry_conditions_cover_all_known_actions(self):
+        known_actions = set(_ACTION_HANDLERS.keys()) | _APPROVAL_GATED_TYPES
+        for action_id in known_actions:
+            assert action_id in _RETRY_CONDITIONS, (
+                f"Missing retry condition for {action_id}"
+            )
+
+    def test_report_generates_taskcard_id_if_missing(self):
+        board = ActionBoard(actions=[
+            Action(id="SOME_NEW_ACTION", family="test", type="UNKNOWN",
+                   current_state="blocked", desired_state="done", safe_to_execute_now=False,
+                   blocker="something"),
+        ])
+        report = generate_blocked_actions_report(board)
+        assert report[0]["taskcard_id"] == "TC-SOME-NEW-ACTION"

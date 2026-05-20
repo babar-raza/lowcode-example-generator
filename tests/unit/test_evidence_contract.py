@@ -56,6 +56,7 @@ from plugin_examples.evidence_contract import (
     PlannerSprintEvidenceContract,
     generate_validation_proof,
     generate_companion_proof,
+    build_evidence_bundle,
     check_head_consistency,
     contract_definition,
     contract_definition_v2,
@@ -2312,3 +2313,81 @@ class TestHeadConsistency:
         (tmp_path / "final-state-summary.json").write_text(json.dumps({"head": "xyz"}))
         result = check_head_consistency(tmp_path)
         assert result["consistent"] is True
+
+
+class TestBuildEvidenceBundle:
+    def _write_planner_evidence(self, evidence_dir: Path) -> None:
+        files = _minimal_planner_complete_files()
+        for name, content in files.items():
+            (evidence_dir / name).write_text(content, encoding="utf-8")
+
+    def test_bundle_passes_validation(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        result = build_evidence_bundle(edir, zp)
+        assert result["validation"]["result"]["passed"] is True
+
+    def test_manifest_includes_self_entry(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        with zipfile.ZipFile(zp) as zf:
+            manifest = zf.read("sha256-manifest.txt").decode("utf-8")
+        assert "SELF  sha256-manifest.txt" in manifest
+
+    def test_entry_count_matches_zip(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        result = build_evidence_bundle(edir, zp)
+        with zipfile.ZipFile(zp) as zf:
+            actual_count = len(zf.namelist())
+        assert result["entry_count"] == actual_count
+
+    def test_companion_validation_written(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        companion = zp.parent / "evidence-contract-validation.json"
+        assert companion.exists()
+        data = json.loads(companion.read_text())
+        assert "bundle_entry_count_at_validation" in data
+        assert "manifest_self_exclusion_note" in data
+
+    def test_extra_files_included(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp, extra_files={"extra.txt": "hello"})
+        with zipfile.ZipFile(zp) as zf:
+            assert "extra.txt" in zf.namelist()
+
+    def test_excludes_stale_manifest_and_validation(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        (edir / "sha256-manifest.txt").write_text("stale")
+        (edir / "evidence-contract-validation.json").write_text("stale")
+        zp = tmp_path / "bundles" / "test.zip"
+        build_evidence_bundle(edir, zp)
+        with zipfile.ZipFile(zp) as zf:
+            manifest = zf.read("sha256-manifest.txt").decode("utf-8")
+        assert "stale" not in manifest
+        assert "SELF" in manifest
+
+    def test_validation_entry_count_note(self, tmp_path):
+        edir = tmp_path / "evidence"
+        edir.mkdir()
+        self._write_planner_evidence(edir)
+        zp = tmp_path / "bundles" / "test.zip"
+        result = build_evidence_bundle(edir, zp)
+        count_in_validation = result["validation"]["bundle_entry_count_at_validation"]
+        assert count_in_validation == result["entry_count"]

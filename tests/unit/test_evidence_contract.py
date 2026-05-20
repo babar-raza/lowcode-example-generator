@@ -55,6 +55,8 @@ from plugin_examples.evidence_contract import (
     ALLOWED_PLANNER_VERDICTS,
     PlannerSprintEvidenceContract,
     generate_validation_proof,
+    generate_companion_proof,
+    check_head_consistency,
     contract_definition,
     contract_definition_v2,
     contract_definition_v3,
@@ -2248,3 +2250,65 @@ class TestGenerateValidationProof:
         assert proof1["validated_bundle"] != proof2["validated_bundle"]
         assert str(zp1) in proof1["validated_bundle"]
         assert str(zp2) in proof2["validated_bundle"]
+
+
+class TestCompanionProof:
+    def test_companion_proof_written_next_to_zip(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        proof = generate_companion_proof(zp)
+        companion = zp.parent / (zp.name + ".validation.json")
+        assert companion.exists()
+        assert proof["result"]["passed"] is True
+
+    def test_companion_proof_hash_matches_zip(self, tmp_path):
+        import hashlib
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        expected_sha = hashlib.sha256(zp.read_bytes()).hexdigest()
+        proof = generate_companion_proof(zp)
+        assert proof["validated_bundle_sha256"] == expected_sha
+
+    def test_companion_proof_names_zip_path(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        zp = _make_zip(tmp_path, files)
+        proof = generate_companion_proof(zp)
+        assert str(zp) in proof["validated_bundle"]
+
+    def test_companion_proof_fails_for_incomplete_bundle(self, tmp_path):
+        files = _minimal_planner_complete_files()
+        del files["test-full-log.txt"]
+        zp = _make_zip(tmp_path, files)
+        proof = generate_companion_proof(zp)
+        assert proof["result"]["passed"] is False
+        companion = zp.parent / (zp.name + ".validation.json")
+        assert companion.exists()
+
+
+class TestHeadConsistency:
+    def test_consistent_heads(self, tmp_path):
+        import json
+        for name in ["final-state-summary.json", "final-next-actions.json",
+                      "final-dirty-state.json", "local-metrics.json"]:
+            key = {"final-state-summary.json": "head",
+                   "final-next-actions.json": "generated_from_head",
+                   "final-dirty-state.json": "captured_at_head",
+                   "local-metrics.json": "head"}[name]
+            (tmp_path / name).write_text(json.dumps({key: "abc1234"}))
+        result = check_head_consistency(tmp_path)
+        assert result["consistent"] is True
+        assert result["heads_found"] == ["abc1234"]
+
+    def test_inconsistent_heads(self, tmp_path):
+        import json
+        (tmp_path / "final-state-summary.json").write_text(json.dumps({"head": "aaa"}))
+        (tmp_path / "final-next-actions.json").write_text(json.dumps({"generated_from_head": "bbb"}))
+        result = check_head_consistency(tmp_path)
+        assert result["consistent"] is False
+        assert len(result["heads_found"]) == 2
+
+    def test_missing_artifacts_tolerated(self, tmp_path):
+        import json
+        (tmp_path / "final-state-summary.json").write_text(json.dumps({"head": "xyz"}))
+        result = check_head_consistency(tmp_path)
+        assert result["consistent"] is True

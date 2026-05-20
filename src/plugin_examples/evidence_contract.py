@@ -2577,3 +2577,57 @@ def generate_validation_proof(
         )
 
     return proof
+
+
+def generate_companion_proof(
+    zip_path: str | Path,
+) -> dict:
+    """Validate a sprint ZIP and write a companion proof file next to it.
+
+    The companion proof is written to ``<zip_path>.validation.json`` so it
+    lives outside the ZIP and can reference the exact ZIP hash without
+    circular dependency.
+
+    Returns the proof dict.
+    """
+    zip_path = Path(zip_path)
+    companion_path = zip_path.parent / (zip_path.name + ".validation.json")
+    return generate_validation_proof(zip_path, output_path=companion_path)
+
+
+# Head-binding fields checked in final closeout artifacts
+_HEAD_BINDING_KEYS: dict[str, str] = {
+    "final-state-summary.json": "head",
+    "final-next-actions.json": "generated_from_head",
+    "final-dirty-state.json": "captured_at_head",
+    "local-metrics.json": "head",
+    "conservation-check-report.json": "head",
+    "portfolio-family-plugin-matrix.json": "head",
+    "release-status-raw.json": "head",
+}
+
+
+def check_head_consistency(evidence_dir: str | Path) -> dict:
+    """Check that all final artifacts in *evidence_dir* agree on HEAD.
+
+    Returns a dict with ``consistent`` (bool), ``heads_found`` (set),
+    and per-artifact details.
+    """
+    evidence_dir = Path(evidence_dir)
+    details: list[dict] = []
+    heads: set[str] = set()
+    for filename, key in _HEAD_BINDING_KEYS.items():
+        p = evidence_dir / filename
+        if not p.exists():
+            details.append({"artifact": filename, "exists": False})
+            continue
+        data = json.loads(p.read_text(encoding="utf-8"))
+        val = data.get(key, "MISSING")
+        heads.add(val)
+        details.append({"artifact": filename, "key": key, "head": val})
+
+    return {
+        "consistent": len(heads) <= 1,
+        "heads_found": sorted(heads),
+        "details": details,
+    }

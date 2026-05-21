@@ -1,5 +1,5 @@
 {
-  "total_patterns": 17,
+  "total_patterns": 19,
   "verified_passing": 0,
   "patterns": [
     {
@@ -59,6 +59,14 @@
       "input_strategy": "programmatic_input"
     },
     {
+      "scenario_id": "pdf-merger",
+      "uses_basedir": false,
+      "validates_input": true,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
       "scenario_id": "pdf-optimizer",
       "uses_basedir": false,
       "validates_input": true,
@@ -91,6 +99,14 @@
       "input_strategy": "programmatic_input"
     },
     {
+      "scenario_id": "pdf-signature",
+      "uses_basedir": false,
+      "validates_input": false,
+      "validates_output": true,
+      "no_interactive_input": true,
+      "input_strategy": "programmatic_input"
+    },
+    {
       "scenario_id": "pdf-splitter",
       "uses_basedir": false,
       "validates_input": true,
@@ -110,7 +126,7 @@
       "scenario_id": "pdf-text-extractor",
       "uses_basedir": false,
       "validates_input": true,
-      "validates_output": true,
+      "validates_output": false,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"
     },

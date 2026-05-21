@@ -81,7 +81,7 @@ per_type_constraints:
       - "REQUIRED: var stream = new MemoryStream(File.ReadAllBytes(\"input.eml\")); — wrap file bytes in MemoryStream"
       - "REQUIRED: var outputHandler = new FolderOutputHandler(outputDir); — IOutputHandler implementation for folder output"
       - "REQUIRED: Directory.CreateDirectory(outputDir); — create output directory before passing to FolderOutputHandler"
-      - "WriteAllText(\"input.eml\""
+      - "REQUIRED: File.WriteAllText — create the input.eml fixture file before reading it with MemoryStream"
     forbidden:
       - "FORBIDDEN: MailMessage.Save() as the primary operation — use LowCode Converter.ConvertToHtml()"
       - "FORBIDDEN: Converter.ConvertToHtml(inputFilePath, outputFilePath) — output is NOT a file path; use IOutputHandler (FolderOutputHandler)"

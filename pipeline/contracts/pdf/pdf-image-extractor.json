@@ -25,9 +25,9 @@
     "IsSuccess"
   ],
   "output_expectations": {
-    "output_format": ".jpg",
+    "output_format": ".png",
     "validation_method": "result_collection_count",
-    "notes": "Template-first. Instance API: var options = new ImageExtractorOptions(); options.AddInput(new FileDataSource('input.pdf')); var result = new ImageExtractor().Process(options); ResultCollection.Count > 0. Output images are accessed via result.ResultCollection."
+    "notes": "Template-first. Instance API: var options = new ImageExtractorOptions(); options.AddInput(new FileDataSource('input.pdf')); var result = new ImageExtractor().Process(options); ResultCollection.Count > 0. Output images are .png files via result.ResultCollection. FormatAuthority: canonical_output_format=.png."
   },
   "publication_status": "MERGED",
   "lifecycle_status": "POST_MERGE_VERIFIED",

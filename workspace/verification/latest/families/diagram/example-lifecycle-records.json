@@ -1,6 +1,6 @@
 {
   "family": "diagram",
-  "run_id": "pilot-diagram-20260511-172446",
+  "run_id": "pilot-diagram-20260521-112157",
   "summary": {
     "total_planned": 5,
     "generation_passed": 2,
@@ -18,7 +18,7 @@
     {
       "scenario_id": "diagram-low-code-load-options",
       "family": "diagram",
-      "run_id": "pilot-diagram-20260511-172446",
+      "run_id": "pilot-diagram-20260521-112157",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -32,6 +32,7 @@
       "run_failure_classification": null,
       "reviewer_status": "pending",
       "reviewer_failure_reason": null,
+      "reviewer_repair_attempts": 0,
       "pr_candidate": false,
       "excluded_reason": "Type 'LowCodeLoadOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']",
       "backlogged": false,
@@ -43,13 +44,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-11T12:25:20.534753+00:00",
-      "last_updated": "2026-05-11T12:25:20.534777+00:00"
+      "created_at": "2026-05-21T06:23:33.699859+00:00",
+      "last_updated": "2026-05-21T06:23:33.699872+00:00"
     },
     {
       "scenario_id": "diagram-low-code-pdf-save-options",
       "family": "diagram",
-      "run_id": "pilot-diagram-20260511-172446",
+      "run_id": "pilot-diagram-20260521-112157",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -63,6 +64,7 @@
       "run_failure_classification": null,
       "reviewer_status": "pending",
       "reviewer_failure_reason": null,
+      "reviewer_repair_attempts": 0,
       "pr_candidate": false,
       "excluded_reason": "Type 'LowCodePdfSaveOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']",
       "backlogged": false,
@@ -74,13 +76,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-11T12:25:20.534788+00:00",
-      "last_updated": "2026-05-11T12:25:20.534797+00:00"
+      "created_at": "2026-05-21T06:23:33.699877+00:00",
+      "last_updated": "2026-05-21T06:23:33.699882+00:00"
     },
     {
       "scenario_id": "diagram-low-code-save-options",
       "family": "diagram",
-      "run_id": "pilot-diagram-20260511-172446",
+      "run_id": "pilot-diagram-20260521-112157",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -94,6 +96,7 @@
       "run_failure_classification": null,
       "reviewer_status": "pending",
       "reviewer_failure_reason": null,
+      "reviewer_repair_attempts": 0,
       "pr_candidate": false,
       "excluded_reason": "Type 'LowCodeSaveOptions' is not in the controlled pilot allowlist. Allowed: ['DiagramConverter', 'PdfConverter']",
       "backlogged": false,
@@ -105,13 +108,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-11T12:25:20.534803+00:00",
-      "last_updated": "2026-05-11T12:25:20.534810+00:00"
+      "created_at": "2026-05-21T06:23:33.699892+00:00",
+      "last_updated": "2026-05-21T06:23:33.699895+00:00"
     },
     {
       "scenario_id": "diagram-diagram-converter",
       "family": "diagram",
-      "run_id": "pilot-diagram-20260511-172446",
+      "run_id": "pilot-diagram-20260521-112157",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -125,6 +128,7 @@
       "run_failure_classification": null,
       "reviewer_status": "unavailable",
       "reviewer_failure_reason": null,
+      "reviewer_repair_attempts": 0,
       "pr_candidate": true,
       "excluded_reason": null,
       "backlogged": false,
@@ -136,13 +140,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-11T12:25:20.534840+00:00",
-      "last_updated": "2026-05-11T12:26:19.540536+00:00"
+      "created_at": "2026-05-21T06:23:33.702638+00:00",
+      "last_updated": "2026-05-21T06:24:22.985641+00:00"
     },
     {
       "scenario_id": "diagram-pdf-converter",
       "family": "diagram",
-      "run_id": "pilot-diagram-20260511-172446",
+      "run_id": "pilot-diagram-20260521-112157",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -156,6 +160,7 @@
       "run_failure_classification": null,
       "reviewer_status": "unavailable",
       "reviewer_failure_reason": null,
+      "reviewer_repair_attempts": 0,
       "pr_candidate": true,
       "excluded_reason": null,
       "backlogged": false,
@@ -167,8 +172,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-11T12:25:45.015849+00:00",
-      "last_updated": "2026-05-11T12:26:19.540551+00:00"
+      "created_at": "2026-05-21T06:23:57.202751+00:00",
+      "last_updated": "2026-05-21T06:24:22.985650+00:00"
     }
   ]
 }

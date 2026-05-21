@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "diagram",
-  "run_id": "pilot-diagram-20260511-172446",
-  "promoted_at": "2026-05-11T12:26:19.813575+00:00",
-  "source_run_path": "workspace\\runs\\pilot-diagram-20260511-172446\\evidence\\latest",
+  "run_id": "pilot-diagram-20260521-112157",
+  "promoted_at": "2026-05-21T06:24:23.049709+00:00",
+  "source_run_path": "workspace\\runs\\pilot-diagram-20260521-112157\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -15,8 +15,10 @@
     "example-impact-report.json",
     "example-lifecycle-records.json",
     "example-reviewer-results.json",
+    "families/diagram/completeness-gate-result.json",
     "fixture-strategy-plan.json",
     "gate-results.json",
+    "healing-intelligence-usage.json",
     "llm-fewshot-patterns.json",
     "llm-preflight.json",
     "plugin-type-role-classification.json",

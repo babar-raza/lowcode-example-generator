@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "slides",
-  "run_id": "pilot-slides-20260513-221516",
-  "promoted_at": "2026-05-13T17:20:02.565807+00:00",
-  "source_run_path": "workspace\\runs\\pilot-slides-20260513-221516\\evidence\\latest",
+  "run_id": "pilot-slides-20260521-112159",
+  "promoted_at": "2026-05-21T06:27:04.359012+00:00",
+  "source_run_path": "workspace\\runs\\pilot-slides-20260521-112159\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -17,6 +17,7 @@
     "families/slides/completeness-gate-result.json",
     "fixture-strategy-plan.json",
     "gate-results.json",
+    "healing-intelligence-usage.json",
     "llm-fewshot-patterns.json",
     "llm-preflight.json",
     "plugin-type-role-classification.json",

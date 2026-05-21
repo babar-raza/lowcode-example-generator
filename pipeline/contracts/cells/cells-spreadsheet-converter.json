@@ -18,9 +18,9 @@
     "DataSources"
   ],
   "output_expectations": {
-    "output_format": ".xlsx",
+    "output_format": ".csv",
     "validation_method": "file_exists",
-    "notes": "Static API: SpreadsheetConverter.Process(inputPath, outputPath). Output format depends on extension."
+    "notes": "Static API: SpreadsheetConverter.Process(inputPath, outputPath). Canonical output is .csv (cross-format conversion). FormatAuthority: canonical_output_format=.csv."
   },
   "publication_status": "MERGED",
   "lifecycle_status": "POST_MERGE_VERIFIED",

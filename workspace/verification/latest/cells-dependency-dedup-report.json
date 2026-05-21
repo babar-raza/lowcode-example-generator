@@ -1,19 +1,28 @@
 {
   "family": "cells",
-  "total_input_paths": 8,
-  "kept_count": 8,
-  "excluded_count": 0,
+  "total_input_paths": 10,
+  "kept_count": 9,
+  "excluded_count": 1,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Text.Encoding.CodePages.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Drawing.Common.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Security.Cryptography.Pkcs.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Formats.Asn1.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Buffers.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Memory.dll",
-    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260509-121537\\extracted\\cells\\resolved-libs\\System.Security.Cryptography.Cng.dll"
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Text.Encoding.CodePages.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Runtime.CompilerServices.Unsafe.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Drawing.Common.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Security.Cryptography.Pkcs.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Formats.Asn1.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Buffers.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Memory.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Security.Cryptography.Cng.dll",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\SkiaSharp.dll"
   ],
-  "excluded": [],
+  "excluded": [
+    {
+      "assembly_name": "System.Memory",
+      "excluded_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Memory.dll",
+      "kept_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\discovery-cells-20260520-162744\\extracted\\cells\\resolved-libs\\System.Memory.dll",
+      "same_file": true,
+      "reason": "duplicate_assembly_name"
+    }
+  ],
   "conflicts": []
 }

@@ -5,11 +5,11 @@
   "examples": [
     {
       "scenario_id": "email-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260513-220337\\generated\\email\\email-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260521-113329\\generated\\email\\email-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
-      "output_validation_status": "passed",
+      "output_validation_status": "advisory_no_output",
       "reviewer_status": "passed",
       "publish_candidate": true,
       "blocked_reason": null,

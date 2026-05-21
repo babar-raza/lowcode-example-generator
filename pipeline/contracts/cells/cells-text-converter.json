@@ -18,9 +18,9 @@
     "DataSources"
   ],
   "output_expectations": {
-    "output_format": ".csv",
+    "output_format": ".txt",
     "validation_method": "file_exists",
-    "notes": "Static API: TextConverter.Process(inputPath, outputPath). Input is .csv; output can be .txt or .csv."
+    "notes": "Static API: TextConverter.Process(inputPath, outputPath). Input is .xlsx; canonical output is .txt. FormatAuthority: canonical_output_format=.txt."
   },
   "publication_status": "MERGED",
   "lifecycle_status": "POST_MERGE_VERIFIED",

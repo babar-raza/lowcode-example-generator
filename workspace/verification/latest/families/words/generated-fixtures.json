@@ -3,7 +3,7 @@
   "total_ready": 8,
   "fixtures": [
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-comparer\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-comparer\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -11,7 +11,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-converter\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-converter\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -19,7 +19,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-mail-merger\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-mail-merger\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -27,7 +27,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-merger\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-merger\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -35,7 +35,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-replacer\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-replacer\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -43,7 +43,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-report-builder\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-report-builder\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -51,7 +51,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-splitter\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-splitter\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",
@@ -59,7 +59,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260514-104648\\generated\\words\\words-watermarker\\input.docx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-113606\\generated\\words\\words-watermarker\\input.docx",
       "format": ".docx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_1408",

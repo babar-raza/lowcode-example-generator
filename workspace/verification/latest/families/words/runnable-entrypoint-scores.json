@@ -1,7 +1,7 @@
 {
   "total_scored": 25,
-  "runnable_count": 10,
-  "rejected_count": 15,
+  "runnable_count": 11,
+  "rejected_count": 14,
   "scores": [
     {
       "full_name": "Aspose.Words.LowCode.Comparer",
@@ -124,12 +124,17 @@
     {
       "full_name": "Aspose.Words.LowCode.ConverterContext",
       "name": "ConverterContext",
-      "role": "unknown",
-      "score": -1.5,
-      "max_score": 1.5,
-      "runnable": false,
-      "rejection_reason": "Role 'unknown' is not a standalone entrypoint",
+      "role": "operation_facade",
+      "score": 1.5,
+      "max_score": 4.5,
+      "runnable": true,
+      "rejection_reason": null,
       "signals": [
+        {
+          "signal": "standalone_role",
+          "weight": 3.0,
+          "detail": "Role: operation_facade"
+        },
         {
           "signal": "has_xml_summary",
           "weight": 0.5,

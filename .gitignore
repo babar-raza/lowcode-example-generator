@@ -21,7 +21,7 @@ workspace/runs/*/
 workspace/backlog/
 workspace/fixture-validation/
 workspace/pr-dry-run/
-workspace/queues/
+# workspace/queues/ is intentionally tracked (completion queue is authority)
 
 # Evidence bundles
 workspace/verification/*.zip

@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "words",
-  "run_id": "pilot-words-20260514-104648",
-  "promoted_at": "2026-05-14T05:51:56.675336+00:00",
-  "source_run_path": "workspace\\runs\\pilot-words-20260514-104648\\evidence\\latest",
+  "run_id": "pilot-words-20260521-113606",
+  "promoted_at": "2026-05-21T06:40:37.847337+00:00",
+  "source_run_path": "workspace\\runs\\pilot-words-20260521-113606\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -18,6 +18,7 @@
     "fixture-strategy-plan.json",
     "gate-results.json",
     "generated-fixtures.json",
+    "healing-intelligence-usage.json",
     "llm-fewshot-patterns.json",
     "llm-preflight.json",
     "plugin-type-role-classification.json",

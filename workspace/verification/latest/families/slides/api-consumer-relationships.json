@@ -4,9 +4,9 @@
   "types_without_consumers": 5,
   "relationships": {
     "Aspose.Slides.LowCode.Merger": [],
+    "Aspose.Slides.LowCode.Convert": [],
     "Aspose.Slides.LowCode.ForEach": [],
-    "Aspose.Slides.LowCode.Collect": [],
     "Aspose.Slides.LowCode.Compress": [],
-    "Aspose.Slides.LowCode.Convert": []
+    "Aspose.Slides.LowCode.Collect": []
   }
 }

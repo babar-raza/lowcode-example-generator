@@ -1,15 +1,15 @@
 {
   "family": "slides",
-  "status": "skip",
-  "denominator_basis": "DISCOVERY_ONLY",
-  "expected_count": null,
+  "status": "pass",
+  "denominator_basis": "PILOT_ALLOWED",
+  "expected_count": 3,
   "ready_count": 3,
   "blocked_count": 2,
   "accounted_count": 5,
-  "gap": 0,
-  "message": "Family 'slides' is DISCOVERY_ONLY \u2014 completeness gate skipped.",
+  "gap": 2,
+  "message": "Family 'slides' completeness check PASS (PILOT_ALLOWED): 5 accounted >= 3 expected.",
   "violations": [],
   "holds": true,
   "unknown_type_count": 0,
-  "full_wrt_count": null
+  "full_wrt_count": 3
 }

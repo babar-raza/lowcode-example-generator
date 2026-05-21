@@ -1,14 +1,22 @@
 {
-  "total_failures": 1,
+  "total_failures": 2,
   "classification_summary": {
-    "blocked_missing_fixture": 1
+    "blocked_missing_fixture": 2
   },
   "classifications": [
     {
-      "scenario_id": "pdf-png",
+      "scenario_id": "words-comparer",
       "exit_code": 3762504530,
       "classification": "blocked_missing_fixture",
-      "detail": "Unhandled exception. System.IO.FileNotFoundException: Output file was not created.",
+      "detail": "Unhandled exception. System.IO.FileNotFoundException: Second input file not found",
+      "actionable": true,
+      "recommendation": "Input file not found. Ensure fixture file is available."
+    },
+    {
+      "scenario_id": "words-merger",
+      "exit_code": 3762504530,
+      "classification": "blocked_missing_fixture",
+      "detail": "Unhandled exception. System.IO.FileNotFoundException: Second input file not found",
       "actionable": true,
       "recommendation": "Input file not found. Ensure fixture file is available."
     }

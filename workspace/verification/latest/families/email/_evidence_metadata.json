@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "email",
-  "run_id": "pilot-email-20260513-220337",
-  "promoted_at": "2026-05-13T17:07:48.648579+00:00",
-  "source_run_path": "workspace\\runs\\pilot-email-20260513-220337\\evidence\\latest",
+  "run_id": "pilot-email-20260521-113329",
+  "promoted_at": "2026-05-21T06:34:54.501901+00:00",
+  "source_run_path": "workspace\\runs\\pilot-email-20260521-113329\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",
@@ -18,6 +18,7 @@
     "families/email/completeness-gate-result.json",
     "fixture-strategy-plan.json",
     "gate-results.json",
+    "healing-intelligence-usage.json",
     "llm-fewshot-patterns.json",
     "llm-preflight.json",
     "plugin-type-role-classification.json",

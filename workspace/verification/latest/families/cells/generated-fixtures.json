@@ -3,7 +3,7 @@
   "total_ready": 9,
   "fixtures": [
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-html-converter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-html-converter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -11,7 +11,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-image-converter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-image-converter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -19,7 +19,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-json-converter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-json-converter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -27,7 +27,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-pdf-converter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-pdf-converter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -35,7 +35,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-spreadsheet-converter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-spreadsheet-converter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -43,7 +43,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-spreadsheet-locker\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-spreadsheet-locker\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -51,7 +51,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-spreadsheet-merger\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-spreadsheet-merger\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -59,7 +59,7 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-spreadsheet-splitter\\input.xlsx",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-spreadsheet-splitter\\input.xlsx",
       "format": ".xlsx",
       "created_by": "fixture_factory",
       "validity_check": "file_exists_and_size_3131",
@@ -67,11 +67,11 @@
       "ready": true
     },
     {
-      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260508-133932\\generated\\cells\\cells-text-converter\\input.csv",
-      "format": ".csv",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-cells-20260521-112202\\generated\\cells\\cells-text-converter\\input.xlsx",
+      "format": ".xlsx",
       "created_by": "fixture_factory",
-      "validity_check": "file_exists_and_size_73",
-      "size_bytes": 73,
+      "validity_check": "file_exists_and_size_3131",
+      "size_bytes": 3131,
       "ready": true
     }
   ]

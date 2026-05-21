@@ -109,11 +109,11 @@
     {
       "scenario_id": "cells-text-converter",
       "required_input_formats": [
-        ".csv"
+        ".xlsx"
       ],
       "input_strategy": "generated_fixture_file",
       "input_files": [
-        "input.csv"
+        "input.xlsx"
       ],
       "strategy_status": "ready",
       "blocked_reason": null

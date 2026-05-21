@@ -3,11 +3,10 @@
   "role_summary": {
     "workflow_root": 9,
     "settings_model": 6,
-    "unknown": 1,
+    "operation_facade": 2,
     "options": 3,
     "utility": 2,
     "enum": 2,
-    "operation_facade": 1,
     "abstract_base": 1
   },
   "types": [
@@ -47,9 +46,9 @@
     {
       "full_name": "Aspose.Words.LowCode.ConverterContext",
       "name": "ConverterContext",
-      "role": "unknown",
-      "confidence": 0.3,
-      "reason": "No methods, no properties: ConverterContext",
+      "role": "operation_facade",
+      "confidence": 0.5,
+      "reason": "No methods, no properties, has constructors \u2014 IPlugin implementor (inherited Process()): ConverterContext",
       "has_static_methods": false,
       "has_instance_methods": false,
       "has_constructors": true,

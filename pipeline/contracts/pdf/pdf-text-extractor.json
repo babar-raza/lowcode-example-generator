@@ -26,9 +26,10 @@
     ".Value"
   ],
   "output_expectations": {
-    "output_format": "text_string",
+    "output_format": "stdout",
+    "output_kind": "stdout",
     "validation_method": "string_result_check",
-    "notes": "Instance API: TextExtractor has no AddOutput — read StringResult from result.ResultCollection[0]. Access text via cast ((StringResult)r).Text or reflection. TextAbsorber is BANNED. Unlicensed PDFs include evaluation watermark text; use Contains() not Equals()."
+    "notes": "Instance API: TextExtractor has no AddOutput — read StringResult from result.ResultCollection[0]. Access text via cast ((StringResult)r).Text or reflection. TextAbsorber is BANNED. Unlicensed PDFs include evaluation watermark text; use Contains() not Equals(). FormatAuthority: output_kind=stdout, canonical_output_format=stdout."
   },
   "publication_status": "MERGED",
   "lifecycle_status": "POST_MERGE_VERIFIED",

@@ -1,10 +1,11 @@
 {
-  "total_build_repairs": 1,
-  "total_runtime_repairs": 0,
+  "total_build_repairs": 0,
+  "total_runtime_repairs": 1,
   "attempts": [
     {
-      "scenario_id": "cells-spreadsheet-merger",
-      "repair_type": "build",
+      "scenario_id": "cells-text-converter",
+      "repair_type": "runtime",
+      "classification": "wrong_input_format",
       "attempt": 1,
       "success": true
     }

@@ -177,7 +177,6 @@ template_hints:
 per_type_constraints:
   Merger:
     required:
-      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation — TextFragment lives in Aspose.Pdf.Text namespace)"
       - "REQUIRED: new MergeOptions( — use MergeOptions as the concrete options class for Merger"
       - "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin, not PdfFileEditor"
       - "REQUIRED: options.AddInput(new FileDataSource( — each input PDF must be added via AddInput(new FileDataSource(path))"
@@ -186,7 +185,6 @@ per_type_constraints:
       - "FORBIDDEN: PdfFileEditor — this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
   TextExtractor:
     required:
-      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)"
       - "REQUIRED: new TextExtractor().Process(options) — use the LowCode TextExtractor plugin"
     forbidden: []
   Splitter:

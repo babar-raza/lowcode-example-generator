@@ -3,7 +3,6 @@
   "types_with_consumers": 1,
   "types_without_consumers": 2,
   "relationships": {
-    "Aspose.Email.LowCode.Converter": [],
     "Aspose.Email.LowCode.IOutputHandler": [
       {
         "consumer_type": "Aspose.Email.LowCode.Converter",
@@ -48,6 +47,7 @@
         "is_static": true
       }
     ],
+    "Aspose.Email.LowCode.Converter": [],
     "Aspose.Email.LowCode.FolderOutputHandler": []
   }
 }

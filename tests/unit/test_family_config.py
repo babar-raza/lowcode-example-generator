@@ -404,13 +404,17 @@ class TestPerTypeConstraints:
         assert isinstance(config.per_type_constraints, dict)
         assert "Merger" in config.per_type_constraints
 
-    def test_pdf_merger_required_includes_text_fragment(self):
-        """Critical fix: Merger must carry the using Aspose.Pdf.Text constraint."""
+    def test_pdf_merger_required_includes_merge_options(self):
+        """Merger must carry the MergeOptions LowCode API requirement (Aspose.Pdf.Text
+        using directive was removed as over-strict fixture dependency — sprint56)."""
         config = load_family_config(self.PDF_CONFIG)
         merger = config.per_type_constraints["Merger"]
         required = merger.get("required", [])
-        assert any("Aspose.Pdf.Text" in r for r in required), (
-            "Merger per_type_constraints must include REQUIRED: using Aspose.Pdf.Text;"
+        assert any("MergeOptions" in r for r in required), (
+            "Merger per_type_constraints must include REQUIRED: new MergeOptions("
+        )
+        assert any("Merger().Process" in r for r in required), (
+            "Merger per_type_constraints must include REQUIRED: new Merger().Process(options)"
         )
 
     def test_pdf_merger_forbidden_includes_pdffileeditor(self):

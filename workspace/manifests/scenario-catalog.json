@@ -1,7 +1,7 @@
 {
   "family": "pdf",
-  "ready_count": 18,
-  "blocked_count": 83,
+  "ready_count": 19,
+  "blocked_count": 82,
   "scenarios": [
     {
       "scenario_id": "pdf-doc-converter",
@@ -18,8 +18,8 @@
         "Aspose.Pdf.LowCode.DocConverter.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using DocConverter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.docx using DocConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
       "status": "ready",
       "blocked_reason": null
     },
@@ -54,8 +54,8 @@
         "Aspose.Pdf.LowCode.FormExporter.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using FormExporter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.json using FormExporter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.json",
       "status": "ready",
       "blocked_reason": null
     },
@@ -92,7 +92,7 @@
         "Aspose.Pdf.LowCode.Html.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Html",
+      "output_plan": "Convert input.html to output.pdf using Html",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
@@ -107,8 +107,8 @@
         "Aspose.Pdf.LowCode.ImageExtractor"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using ImageExtractor",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.png using ImageExtractor",
+      "validation_plan": "Build succeeds, runs without exception, produces output.png",
       "status": "ready",
       "blocked_reason": null
     },
@@ -122,8 +122,8 @@
         "Aspose.Pdf.LowCode.Jpeg"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Jpeg",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.jpg using Jpeg",
+      "validation_plan": "Build succeeds, runs without exception, produces output.jpg",
       "status": "ready",
       "blocked_reason": null
     },
@@ -191,8 +191,8 @@
         "Aspose.Pdf.LowCode.Png"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Png",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.png using Png",
+      "validation_plan": "Build succeeds, runs without exception, produces output.png",
       "status": "ready",
       "blocked_reason": null
     },
@@ -210,6 +210,24 @@
       ],
       "required_fixtures": [],
       "output_plan": "Convert input.pdf to output.pdf using Security",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "title": "Use Signature from Aspose.Pdf.LowCode",
+      "target_type": "Aspose.Pdf.LowCode.Signature",
+      "target_namespace": "Aspose.Pdf.LowCode",
+      "target_methods": [
+        "Process"
+      ],
+      "required_symbols": [
+        "Aspose.Pdf.LowCode.Signature",
+        "Aspose.Pdf.LowCode.Signature.Process"
+      ],
+      "required_fixtures": [],
+      "output_plan": "Convert input.pdf to output.pdf using Signature",
       "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
       "status": "ready",
       "blocked_reason": null
@@ -277,8 +295,8 @@
         "Aspose.Pdf.LowCode.Tiff"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Tiff",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.tiff using Tiff",
+      "validation_plan": "Build succeeds, runs without exception, produces output.tiff",
       "status": "ready",
       "blocked_reason": null
     },
@@ -317,8 +335,8 @@
         "Aspose.Pdf.LowCode.XlsConverter.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using XlsConverter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "output_plan": "Convert input.pdf to output.xlsx using XlsConverter",
+      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
       "status": "ready",
       "blocked_reason": null
     }

@@ -21,9 +21,10 @@
     "MailMessage.Save("
   ],
   "output_expectations": {
-    "output_format": ".html",
-    "validation_method": "file_exists",
-    "notes": "Static async API: await Converter.ConvertToHtml(stream, fileName, outputHandler). Output via FolderOutputHandler to directory."
+    "output_format": "directory",
+    "output_kind": "directory",
+    "validation_method": "directory_exists",
+    "notes": "Static async API: await Converter.ConvertToHtml(stream, fileName, outputHandler). Output via FolderOutputHandler to directory. FormatAuthority: output_kind=directory, canonical_output_format=directory."
   },
   "publication_status": "MERGED",
   "lifecycle_status": "POST_MERGE_VERIFIED",

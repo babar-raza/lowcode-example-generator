@@ -401,3 +401,74 @@ class TestSlidesContracts:
             assert f"new {type_name}(" in forbidden, (
                 f"Slides contract {contract['scenario_id']} missing 'new {type_name}(' forbidden pattern"
             )
+
+
+# ---------------------------------------------------------------------------
+# TestFormatAuthorityContractDrift — Sprint56-LaneB regression tests
+#
+# These tests pin the 5 known FormatAuthority/contract mismatches that were
+# fixed in Sprint 56 LaneB.  They prevent future drift between
+# pipeline/contracts and pipeline/format-authority.
+# ---------------------------------------------------------------------------
+
+class TestFormatAuthorityContractDrift:
+    """Sprint56-LaneB: contracts must agree with FormatAuthority canonical formats."""
+
+    def test_cells_spreadsheet_converter_output_is_csv_not_xlsx(self):
+        """SpreadsheetConverter cross-converts TO .csv — not same-format .xlsx.
+        FormatAuthority canonical_output_format=.csv.  Contract was .xlsx (wrong).
+        """
+        contracts = {c["scenario_id"]: c for c in _load_contracts("cells")}
+        c = contracts["cells-spreadsheet-converter"]
+        assert c["output_expectations"]["output_format"] == ".csv", (
+            "cells-spreadsheet-converter output_format must be .csv (FormatAuthority canonical)"
+        )
+
+    def test_cells_text_converter_output_is_txt_not_csv(self):
+        """TextConverter outputs plain text (.txt) — not .csv.
+        FormatAuthority canonical_output_format=.txt.  Contract was .csv (wrong).
+        """
+        contracts = {c["scenario_id"]: c for c in _load_contracts("cells")}
+        c = contracts["cells-text-converter"]
+        assert c["output_expectations"]["output_format"] == ".txt", (
+            "cells-text-converter output_format must be .txt (FormatAuthority canonical)"
+        )
+
+    def test_email_converter_output_is_directory_not_html(self):
+        """Email Converter outputs a directory (FolderOutputHandler) — not a single .html file.
+        FormatAuthority canonical_output_format=directory.  Contract was .html (wrong).
+        """
+        contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
+        c = contracts["email-converter"]
+        assert c["output_expectations"]["output_format"] == "directory", (
+            "email-converter output_format must be 'directory' (FolderOutputHandler output)"
+        )
+        assert c["output_expectations"].get("output_kind") == "directory", (
+            "email-converter output_kind must be 'directory'"
+        )
+        assert c["output_expectations"]["validation_method"] == "directory_exists", (
+            "email-converter validation_method must be 'directory_exists'"
+        )
+
+    def test_pdf_image_extractor_output_is_png_not_jpg(self):
+        """ImageExtractor produces .png images — not .jpg.
+        FormatAuthority canonical_output_format=.png.  Contract was .jpg (wrong).
+        """
+        contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
+        c = contracts["pdf-image-extractor"]
+        assert c["output_expectations"]["output_format"] == ".png", (
+            "pdf-image-extractor output_format must be .png (FormatAuthority canonical)"
+        )
+
+    def test_pdf_text_extractor_output_is_stdout_not_text_string(self):
+        """TextExtractor writes to stdout — not a text_string return value.
+        FormatAuthority canonical_output_format=stdout.  Contract was text_string (wrong).
+        """
+        contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
+        c = contracts["pdf-text-extractor"]
+        assert c["output_expectations"]["output_format"] == "stdout", (
+            "pdf-text-extractor output_format must be 'stdout' (FormatAuthority canonical)"
+        )
+        assert c["output_expectations"].get("output_kind") == "stdout", (
+            "pdf-text-extractor output_kind must be 'stdout'"
+        )

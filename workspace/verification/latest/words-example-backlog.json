@@ -1,9 +1,9 @@
 {
   "family": "words",
-  "updated_at": "2026-05-14T05:51:56.546411+00:00",
-  "total_entries": 3,
+  "updated_at": "2026-05-21T06:40:37.780073+00:00",
+  "total_entries": 5,
   "open_entries": 1,
-  "resolved_entries": 2,
+  "resolved_entries": 4,
   "entries": [
     {
       "scenario_id": "words-mail-merger",
@@ -46,6 +46,34 @@
       "last_seen": "2026-05-14T05:51:56.545944+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-words-20260514-104648"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "last_run_id": "pilot-words-20260521-112156",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['Missing required LowCode API call: doc2.Save(']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 6,
+      "first_seen": "2026-05-20T13:29:07.772698+00:00",
+      "last_seen": "2026-05-21T06:40:37.779891+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-words-20260521-113606"
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "last_run_id": "pilot-words-20260521-112156",
+      "last_failure_stage": "backlogged",
+      "root_cause": "Post-repair validation failed: ['Missing required LowCode API call: doc2.Save(']",
+      "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
+      "priority": "high",
+      "attempt_count": 6,
+      "first_seen": "2026-05-20T13:29:07.772722+00:00",
+      "last_seen": "2026-05-21T06:40:37.779901+00:00",
+      "resolved": true,
+      "resolved_in_run": "pilot-words-20260521-113606"
     }
   ]
 }

@@ -5,9 +5,10 @@
       "workflow_type": "Comparer",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
-      "reason": "Inferred from type name Comparer",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/Comparer",
+      "contract_hash": "1d13a2bd37061d2c",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
@@ -15,9 +16,10 @@
       "workflow_type": "Converter",
       "selected_input_format": ".docx",
       "selected_output_format": ".pdf",
-      "reason": "Inferred from type name Converter",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/Converter",
+      "contract_hash": "d7530e4c1462dcab",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
@@ -25,19 +27,21 @@
       "workflow_type": "MailMerger",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
-      "reason": "Inferred from type name MailMerger",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/MailMerger",
+      "contract_hash": "c0178e50f08f113a",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
       "scenario_id": "words-merger",
       "workflow_type": "Merger",
       "selected_input_format": ".docx",
-      "selected_output_format": ".out",
-      "reason": "Inferred from type name Merger",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "selected_output_format": ".docx",
+      "source": "format_contract",
+      "contract_id": "words/Merger",
+      "contract_hash": "553c68cc0a1c2905",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
@@ -45,9 +49,10 @@
       "workflow_type": "Replacer",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
-      "reason": "Inferred from type name Replacer",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/Replacer",
+      "contract_hash": "ae0c9c8412f16bcf",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
@@ -55,19 +60,21 @@
       "workflow_type": "ReportBuilder",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
-      "reason": "Inferred from type name ReportBuilder",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/ReportBuilder",
+      "contract_hash": "718f9294f723820b",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
       "scenario_id": "words-splitter",
       "workflow_type": "Splitter",
       "selected_input_format": ".docx",
-      "selected_output_format": ".out",
-      "reason": "Inferred from type name Splitter",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "selected_output_format": ".docx",
+      "source": "format_contract",
+      "contract_id": "words/Splitter",
+      "contract_hash": "940e74f0fd777b45",
+      "confidence": "high",
       "blocked_if_unclear": false
     },
     {
@@ -75,9 +82,10 @@
       "workflow_type": "Watermarker",
       "selected_input_format": ".docx",
       "selected_output_format": ".docx",
-      "reason": "Inferred from type name Watermarker",
-      "source": "input_format_map",
-      "confidence": "medium",
+      "source": "format_contract",
+      "contract_id": "words/Watermarker",
+      "contract_hash": "cf0fa842e9078fba",
+      "confidence": "high",
       "blocked_if_unclear": false
     }
   ]

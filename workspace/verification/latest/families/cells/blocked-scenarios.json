@@ -1,6 +1,5 @@
 {
   "family": "cells",
-  "generated_at": "2026-05-12T10:38:15+00:00",
   "blocked_count": 13,
   "blocked_scenarios": [
     {
@@ -14,10 +13,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_abstract_base",
-      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-abstract-low-code-protection-provider",
@@ -30,10 +26,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_abstract_base",
-      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-abstract-low-code-save-options-provider",
@@ -46,10 +39,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_abstract_base",
-      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'abstract_base' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-html-save-options",
@@ -62,10 +52,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-image-save-options",
@@ -78,10 +65,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-load-options",
@@ -94,10 +78,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-merge-options",
@@ -110,10 +91,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-pdf-save-options",
@@ -126,10 +104,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-save-options",
@@ -142,10 +117,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-save-options-provider-of-assembling",
@@ -158,10 +130,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_provider_callback",
-      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-save-options-provider-of-place-holders",
@@ -174,10 +143,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_provider_callback",
-      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'provider_callback' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-low-code-split-options",
@@ -190,10 +156,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_options",
-      "blocked_reason": "Role 'options' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'options' is not a standalone entrypoint"
     },
     {
       "scenario_id": "cells-split-part-info",
@@ -206,10 +169,7 @@
       "output_plan": "",
       "validation_plan": "",
       "status": "blocked_result_model",
-      "blocked_reason": "Role 'result_model' is not a standalone entrypoint",
-      "input_strategy": "none",
-      "input_files": [],
-      "required_input_format": ""
+      "blocked_reason": "Role 'result_model' is not a standalone entrypoint"
     }
   ]
 }

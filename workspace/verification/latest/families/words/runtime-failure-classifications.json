@@ -1,16 +1,24 @@
 {
-  "total_failures": 1,
+  "total_failures": 2,
   "classification_summary": {
-    "unknown_runtime_failure": 1
+    "blocked_missing_fixture": 2
   },
   "classifications": [
     {
-      "scenario_id": "words-report-builder",
+      "scenario_id": "words-comparer",
       "exit_code": 3762504530,
-      "classification": "unknown_runtime_failure",
-      "detail": "Unhandled exception. System.ArgumentException: A data source object must be of a visible type or implement 'System.Collections.IEnumerable'. (Parameter 'dataSource')\n   at zp.d(Object d)\n   at Kv.d(Ob",
-      "actionable": false,
-      "recommendation": "Investigate runtime output manually."
+      "classification": "blocked_missing_fixture",
+      "detail": "Unhandled exception. System.IO.FileNotFoundException: Second input file not found",
+      "actionable": true,
+      "recommendation": "Input file not found. Ensure fixture file is available."
+    },
+    {
+      "scenario_id": "words-merger",
+      "exit_code": 3762504530,
+      "classification": "blocked_missing_fixture",
+      "detail": "Unhandled exception. System.IO.FileNotFoundException: Second input file not found",
+      "actionable": true,
+      "recommendation": "Input file not found. Ensure fixture file is available."
     }
   ]
 }

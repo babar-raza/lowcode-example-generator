@@ -1,0 +1,56 @@
+{
+  "cells": {
+    "status": "OK",
+    "path": "examples/cells/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  },
+  "words": {
+    "status": "OK",
+    "path": "examples/words/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  },
+  "pdf": {
+    "status": "OK",
+    "path": "examples/pdf/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  },
+  "diagram": {
+    "status": "OK",
+    "path": "examples/diagram/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  },
+  "email": {
+    "status": "OK",
+    "path": "examples/email/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  },
+  "slides": {
+    "status": "OK",
+    "path": "examples/slides/",
+    "subdirs": [
+      "lowcode"
+    ],
+    "files": [],
+    "example_count": 1
+  }
+}

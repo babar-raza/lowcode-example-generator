@@ -352,27 +352,61 @@ class TestFixtureExtension:
                 assert f.endswith(".xlsx"), f"Expected .xlsx fixture, got {f}"
 
     def test_words_fixture_uses_docx(self, tmp_path):
+        """Words/Converter contract specifies .docx input — fixtures should use .docx."""
         proof = _make_proof(tmp_path)
+        words_catalog = {
+            "assembly_name": "Aspose.Words",
+            "assembly_version": "26.4.0",
+            "namespaces": [{
+                "namespace": "Aspose.Words.LowCode",
+                "types": [{
+                    "name": "Converter",
+                    "full_name": "Aspose.Words.LowCode.Converter",
+                    "kind": "class",
+                    "is_obsolete": False,
+                    "methods": [{"name": "Convert", "return_type": "void", "is_static": True,
+                                  "is_obsolete": False, "parameters": []}],
+                    "properties": [],
+                    "constructors": [],
+                }],
+            }],
+        }
         result = plan_scenarios(
             family="words",
-            catalog=_make_catalog(),
-            plugin_namespaces=["Aspose.Cells.LowCode"],
+            catalog=words_catalog,
+            plugin_namespaces=["Aspose.Words.LowCode"],
             source_of_truth_proof_path=proof,
-            default_fixture_extension=".docx",
         )
         for s in result.ready_scenarios:
             for f in s.required_fixtures:
-                assert f.endswith(".docx"), f"Expected .docx fixture, got {f}"
+                assert f.endswith(".docx"), f"Expected .docx fixture from contract, got {f}"
 
     def test_pdf_fixture_uses_pdf(self, tmp_path):
+        """PDF/Optimizer contract specifies .pdf input — fixtures should use .pdf."""
         proof = _make_proof(tmp_path)
+        pdf_catalog = {
+            "assembly_name": "Aspose.PDF",
+            "assembly_version": "26.5.0",
+            "namespaces": [{
+                "namespace": "Aspose.Pdf.LowCode",
+                "types": [{
+                    "name": "Optimizer",
+                    "full_name": "Aspose.Pdf.LowCode.Optimizer",
+                    "kind": "class",
+                    "is_obsolete": False,
+                    "methods": [{"name": "Process", "return_type": "void", "is_static": False,
+                                  "is_obsolete": False, "parameters": []}],
+                    "properties": [],
+                    "constructors": [],
+                }],
+            }],
+        }
         result = plan_scenarios(
             family="pdf",
-            catalog=_make_catalog(),
-            plugin_namespaces=["Aspose.Cells.LowCode"],
+            catalog=pdf_catalog,
+            plugin_namespaces=["Aspose.Pdf.LowCode"],
             source_of_truth_proof_path=proof,
-            default_fixture_extension=".pdf",
         )
         for s in result.ready_scenarios:
             for f in s.required_fixtures:
-                assert f.endswith(".pdf"), f"Expected .pdf fixture, got {f}"
+                assert f.endswith(".pdf"), f"Expected .pdf fixture from contract, got {f}"

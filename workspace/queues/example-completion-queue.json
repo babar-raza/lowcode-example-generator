@@ -2,11 +2,10 @@
   "generated_at": "2026-05-21T11:30:00Z",
   "plan_id": "lowcode-ai-operations-mega-train-20260519-140000",
   "sprint": "mega-train-001",
-  "description": "Machine-readable completion queue covering all runnable scenarios across 6 active families. State machine: DISCOVERED -> CONTRACTED -> FIXTURE_READY -> GENERATION_READY -> GENERATED -> BUILT -> RAN -> REVIEWED -> PR_READY -> PR_OPEN -> MERGED -> POST_MERGE_VERIFIED | BACKLOGGED | PERMANENTLY_BLOCKED. Updated 2026-05-19: reclassified 3 diagram OPTIONS entries, synced metadata. Sprint56-LaneA: upgraded 14 PR_READY\u2192POST_MERGE_VERIFIED via contract authority reconciliation (2026-05-21).",
+  "description": "Machine-readable completion queue covering all runnable scenarios across 6 active families. State machine: DISCOVERED -> CONTRACTED -> FIXTURE_READY -> GENERATION_READY -> GENERATED -> BUILT -> RAN -> REVIEWED -> PR_READY -> PR_OPEN -> MERGED -> POST_MERGE_VERIFIED | BACKLOGGED | PERMANENTLY_BLOCKED. Updated 2026-05-19: reclassified 3 diagram OPTIONS entries, synced metadata. Sprint56-LaneA: upgraded 14 PR_READY→POST_MERGE_VERIFIED via contract authority reconciliation (2026-05-21).",
   "total_entries": 54,
   "state_summary": {
     "POST_MERGE_VERIFIED": 42,
-    "PR_READY": 0,
     "BACKLOGGED": 5,
     "PERMANENTLY_BLOCKED": 7
   },
@@ -277,10 +276,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-doc-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 11,
-      "merge_sha": null,
+      "merge_sha": "20b858958d1df2965893eb305cb9ac418c3ea285",
       "last_state_change": "2026-05-14T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-doc-converter.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: DocConverter generated build=repaired run=passed reviewer=unavailable. Options: PdfToDocOptions + SaveFormat.DocX (OOXML). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/doc-converter/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#11 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-doc-converter.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: DocConverter generated build=repaired run=passed reviewer=unavailable. Options: PdfToDocOptions + SaveFormat.DocX (OOXML). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
     },
     {
       "scenario_id": "pdf-form-editor",
@@ -292,10 +291,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-form-editor.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 20,
-      "merge_sha": null,
+      "merge_sha": "3e6cf39a74345e200904cc56681ede1cf8d3631a",
       "last_state_change": "2026-05-19T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-editor.json, last_verified=2026-05-19). Wave F PDF example, PR#20. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/form-editor/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#20 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-editor.json, last_verified=2026-05-19). Wave F PDF example, PR#20. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
     },
     {
       "scenario_id": "pdf-form-exporter",
@@ -307,10 +306,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-form-exporter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 20,
-      "merge_sha": null,
+      "merge_sha": "3e6cf39a74345e200904cc56681ede1cf8d3631a",
       "last_state_change": "2026-05-19T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-exporter.json, last_verified=2026-05-19). Wave F PDF example, PR#20. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/form-exporter/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#20 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-exporter.json, last_verified=2026-05-19). Wave F PDF example, PR#20. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
     },
     {
       "scenario_id": "pdf-form-flattener",
@@ -322,10 +321,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-form-flattener.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 19,
-      "merge_sha": null,
+      "merge_sha": "c354f633dec3b39133f813f150956bbbb0304b8c",
       "last_state_change": "2026-05-19T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-flattener.json, last_verified=2026-05-19). Wave E PDF example, PR#19. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/form-flattener/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#19 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-form-flattener.json, last_verified=2026-05-19). Wave E PDF example, PR#19. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
     },
     {
       "scenario_id": "pdf-form-importer",
@@ -352,10 +351,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-html-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 11,
-      "merge_sha": null,
+      "merge_sha": "20b858958d1df2965893eb305cb9ac418c3ea285",
       "last_state_change": "2026-05-14T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-html.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: EXAMPLE_READY_FOR_PR_DRY_RUN in run pilot-pdf-20260514-190422. HtmlToPdfOptions + File.WriteAllText fixture + AddInput(new FileDataSource('input.html')). Build repaired (1 attempt). Reviewer unavailable (EXAMPLE_REVIEWER_PATH not set)."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/html/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#11 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-html.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: EXAMPLE_READY_FOR_PR_DRY_RUN in run pilot-pdf-20260514-190422. HtmlToPdfOptions + File.WriteAllText fixture + AddInput(new FileDataSource('input.html')). Build repaired (1 attempt). Reviewer unavailable (EXAMPLE_REVIEWER_PATH not set)."
     },
     {
       "scenario_id": "pdf-image-extractor",
@@ -367,10 +366,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-image-extractor.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 18,
-      "merge_sha": null,
+      "merge_sha": "a26a302ba43204309de52def7b4229bf932bd2c3",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-image-extractor.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/image-extractor/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#18 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-image-extractor.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-jpeg",
@@ -382,10 +381,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-jpeg.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 17,
-      "merge_sha": null,
+      "merge_sha": "d793cbec89e2ed7d0a7a868551f9e5824dd332d7",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-jpeg.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/jpeg/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#17 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-jpeg.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-ofd",
@@ -422,7 +421,7 @@
       "family": "pdf",
       "type_name": "PdfExtractor",
       "state": "PERMANENTLY_BLOCKED",
-      "blocking_reason": "ABSTRACT_BASE_CLASS: PdfExtractor and PdfExtractorOptions are both abstract \u00e2\u20ac\u201d cannot instantiate. PdfExtractor is the abstract base for TextExtractor and ImageExtractor. Sprint 7 harness-confirmed (CS0144 error).",
+      "blocking_reason": "ABSTRACT_BASE_CLASS: PdfExtractor and PdfExtractorOptions are both abstract â€” cannot instantiate. PdfExtractor is the abstract base for TextExtractor and ImageExtractor. Sprint 7 harness-confirmed (CS0144 error).",
       "blocking_taskcard": "TC-PDF-WAVE-B-RECLASSIFY",
       "contract_path": null,
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
@@ -457,10 +456,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-png.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 17,
-      "merge_sha": null,
+      "merge_sha": "d793cbec89e2ed7d0a7a868551f9e5824dd332d7",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-png.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/png/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#17 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-png.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-security",
@@ -472,10 +471,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-security.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 19,
-      "merge_sha": null,
+      "merge_sha": "c354f633dec3b39133f813f150956bbbb0304b8c",
       "last_state_change": "2026-05-19T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-security.json, last_verified=2026-05-19). Wave E PDF example, PR#19. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/security/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#19 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-security.json, last_verified=2026-05-19). Wave E PDF example, PR#19. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
     },
     {
       "scenario_id": "pdf-select-field",
@@ -504,8 +503,8 @@
       "pr_number": 21,
       "merge_sha": "5aa0fa6f485be405f4c23e85162b68f31ec2a9cb",
       "last_state_change": "2026-05-19T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-signature.json, last_verified=2026-05-19). Wave G PDF example, PR#21. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/signature/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#21 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-signature.json, last_verified=2026-05-19). Wave G PDF example, PR#21. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor."
     },
     {
       "scenario_id": "pdf-table-generator",
@@ -517,10 +516,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-table-generator.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 18,
-      "merge_sha": null,
+      "merge_sha": "a26a302ba43204309de52def7b4229bf932bd2c3",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-table-generator.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/table-generator/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#18 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-table-generator.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-tiff",
@@ -532,10 +531,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-tiff.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 17,
-      "merge_sha": null,
+      "merge_sha": "d793cbec89e2ed7d0a7a868551f9e5824dd332d7",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-tiff.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/tiff/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#17 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-tiff.json, last_verified=2026-05-15). Wave C PDF example, PR#17. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-timestamp",
@@ -562,10 +561,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-toc-generator.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 18,
-      "merge_sha": null,
+      "merge_sha": "a26a302ba43204309de52def7b4229bf932bd2c3",
       "last_state_change": "2026-05-15T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-toc-generator.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY \u00e2\u20ac\u201d template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/toc-generator/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#18 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-toc-generator.json, last_verified=2026-05-15). Wave D PDF example, PR#18. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: WORKFLOW_ROOT type deferred from pilot scope. Classification source: pdf-type-role-classification.json. Pilot scope covers only Merger, Splitter, Optimizer, TextExtractor. Sprint 20: promoted from BACKLOGGED to PR_READY â€” template-first example passed, package in pr-dry-run/pdf-controlled-pilot-pr5 or pr6."
     },
     {
       "scenario_id": "pdf-xls-converter",
@@ -577,10 +576,10 @@
       "contract_path": "pipeline/contracts/pdf/pdf-xls-converter.json",
       "lifecycle_record_path": "workspace/verification/latest/families/pdf/example-lifecycle-records.json",
       "pr_number": 11,
-      "merge_sha": null,
+      "merge_sha": "20b858958d1df2965893eb305cb9ac418c3ea285",
       "last_state_change": "2026-05-14T00:00:00Z",
-      "post_merge_validation": "CONTRACT_AUTHORITY",
-      "notes": "Sprint56-LaneA: Promoted PR_READY\u2192POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-xls-converter.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: XlsConverter generated build=repaired(2) run=passed reviewer=unavailable. Options: PdfToXlsOptions + PdfToXlsOptions.ExcelFormat.XLSX (nested enum). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
+      "post_merge_validation": "CONTENT_VERIFIED",
+      "notes": "Sprint57-LaneG: Upgraded MERGED->POST_MERGE_VERIFIED. Destination repo content verified 2026-05-21: examples/pdf/lowcode/xls-converter/ present. Sprint57-LaneA: Downgraded POST_MERGE_VERIFIED(CONTRACT_AUTHORITY)->MERGED. merge_sha confirmed via GitHub API 2026-05-21. PR#11 merged_at=2026-05-19. Sprint56-LaneA: Promoted PR_READY→POST_MERGE_VERIFIED via contract authority (publication_status=MERGED in pipeline/contracts/pdf/pdf-xls-converter.json, last_verified=2026-05-14). Wave B PDF example, PR#11. merge_sha not locally recorded for PRs#11,#17-#20; verified via GitHub API in sprint54. Original note: Sprint 7 Wave B: XlsConverter generated build=repaired(2) run=passed reviewer=unavailable. Options: PdfToXlsOptions + PdfToXlsOptions.ExcelFormat.XLSX (nested enum). Harness-verified. Awaiting APPROVE_LIVE_PR for PR."
     },
     {
       "scenario_id": "words-comparer",
@@ -628,7 +627,7 @@
       "merge_sha": "04eb94bba3d921d3a51fe8b546d0ef10abcbba6b",
       "last_state_change": "2026-05-13T00:00:00Z",
       "post_merge_validation": "ALL_PASS",
-      "notes": "Wave 3 Words expansion. PASSED run pilot-words-20260513-175418. MailMerger.Execute(template, output, fieldNames[], fieldValues[]) \u00e2\u20ac\u201d static API. Template via DocumentBuilder.InsertField('MERGEFIELD'). InsertField constraint fix resolved generation failure. Awaiting PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL."
+      "notes": "Wave 3 Words expansion. PASSED run pilot-words-20260513-175418. MailMerger.Execute(template, output, fieldNames[], fieldValues[]) â€” static API. Template via DocumentBuilder.InsertField('MERGEFIELD'). InsertField constraint fix resolved generation failure. Awaiting PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL."
     },
     {
       "scenario_id": "words-processor",
@@ -643,7 +642,7 @@
       "merge_sha": null,
       "last_state_change": "2026-05-13T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "Wave 3 Words expansion. BLOCKED in run pilot-words-20260513-175418 with CS0120: 'Processor.From(string)' requires object reference. Processor has no public constructor \u00e2\u20ac\u201d new Processor() fails with CS1729. Processor.From() is instance method but cannot be called statically. ProcessorContext (excluded from pilot) may be the factory. Investigation required: is ProcessorContext.Create() the entry point? Should ProcessorContext be added to allowed_types?"
+      "notes": "Wave 3 Words expansion. BLOCKED in run pilot-words-20260513-175418 with CS0120: 'Processor.From(string)' requires object reference. Processor has no public constructor â€” new Processor() fails with CS1729. Processor.From() is instance method but cannot be called statically. ProcessorContext (excluded from pilot) may be the factory. Investigation required: is ProcessorContext.Create() the entry point? Should ProcessorContext be added to allowed_types?"
     },
     {
       "scenario_id": "words-splitter-split",

@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 from unittest.mock import patch, MagicMock
 from plugin_examples.scenario_planner.planner import _infer_input_format, _infer_output_format
+from plugin_examples.format_authority.store import MissingFormatContractError
 
 
 class TestPlannerContractFirstNoLegacyFallback:
@@ -42,17 +43,18 @@ class TestPlannerContractFirstNoLegacyFallback:
         assert result == "directory", f"Expected 'directory' from contract, got: {result!r}"
 
     def test_infer_input_no_fallback_to_wrong_map(self):
-        """With allow_legacy_format_inference=False, missing contract uses family_default not stale map."""
-        # Use a non-existent type that won't be in contract store
-        result = _infer_input_format("NonExistentType", ".xlsx", family="cells",
-                                     allow_legacy_format_inference=False)
-        assert result == ".xlsx"  # family default, NOT a stale map entry
+        """With allow_legacy_format_inference=False, missing contract raises MissingFormatContractError.
+        Sprint 57: fail-closed — unknown types raise instead of returning stale map values."""
+        with pytest.raises(MissingFormatContractError):
+            _infer_input_format("NonExistentType", ".xlsx", family="cells",
+                                allow_legacy_format_inference=False)
 
     def test_infer_output_no_fallback_to_dot_out(self):
-        """With allow_legacy_format_inference=False, missing contract uses family_default not .out."""
-        result = _infer_output_format("NonExistentType", family_default=".xlsx", family="cells",
-                                      allow_legacy_format_inference=False)
-        assert result == ".xlsx"  # family default, NOT .out from legacy fallback
+        """With allow_legacy_format_inference=False, missing contract raises MissingFormatContractError.
+        Sprint 57: fail-closed — unknown types raise instead of returning .out from stale map."""
+        with pytest.raises(MissingFormatContractError):
+            _infer_output_format("NonExistentType", family_default=".xlsx", family="cells",
+                                 allow_legacy_format_inference=False)
 
     def test_textconverter_input_is_xlsx(self):
         """TextConverter input is .xlsx from contract."""

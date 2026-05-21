@@ -1,0 +1,262 @@
+{
+  "scan_at": "2026-05-21",
+  "total": 42,
+  "clean": 42,
+  "drift": 0,
+  "no_fa_match": 0,
+  "verdict": "ZERO_DRIFT",
+  "details": [
+    {
+      "scenario_id": "cells-html-converter",
+      "status": "CLEAN",
+      "pc_format": ".html",
+      "fa_format": ".html"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "status": "CLEAN",
+      "pc_format": ".png",
+      "fa_format": ".png"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "status": "CLEAN",
+      "pc_format": ".json",
+      "fa_format": ".json"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "status": "CLEAN",
+      "pc_format": ".csv",
+      "fa_format": ".csv"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "status": "CLEAN",
+      "pc_format": ".xlsx",
+      "fa_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "status": "CLEAN",
+      "pc_format": ".xlsx",
+      "fa_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "status": "CLEAN",
+      "pc_format": ".xlsx",
+      "fa_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "status": "CLEAN",
+      "pc_format": ".txt",
+      "fa_format": ".txt"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "status": "CLEAN",
+      "pc_format": ".vdx",
+      "fa_format": ".vdx"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "email-converter",
+      "status": "CLEAN",
+      "pc_format": "directory",
+      "fa_format": "directory"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "status": "CLEAN",
+      "pc_format": ".json",
+      "fa_format": ".json"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-html-converter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "status": "CLEAN",
+      "pc_format": ".png",
+      "fa_format": ".png"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "status": "CLEAN",
+      "pc_format": ".jpg",
+      "fa_format": ".jpg"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-pdfa-converter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "status": "CLEAN",
+      "pc_format": ".png",
+      "fa_format": ".png"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "status": "CLEAN",
+      "pc_format": "stdout",
+      "fa_format": "stdout"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "status": "CLEAN",
+      "pc_format": ".tiff",
+      "fa_format": ".tiff"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "status": "CLEAN",
+      "pc_format": ".xlsx",
+      "fa_format": ".xlsx"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "status": "CLEAN",
+      "pc_format": ".pptx",
+      "fa_format": ".pptx"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "status": "CLEAN",
+      "pc_format": ".pptx",
+      "fa_format": ".pptx"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-converter",
+      "status": "CLEAN",
+      "pc_format": ".pdf",
+      "fa_format": ".pdf"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-merger",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "status": "CLEAN",
+      "pc_format": ".docx",
+      "fa_format": ".docx"
+    }
+  ]
+}

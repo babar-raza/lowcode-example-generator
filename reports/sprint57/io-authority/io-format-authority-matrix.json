@@ -1,0 +1,806 @@
+{
+  "generated_at": "2026-05-21",
+  "sprint": "sprint57",
+  "total_types": 42,
+  "evidence_source": "pipeline/format-authority/contracts/*.json (api_verified)",
+  "types": [
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetConverter",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".csv"
+      ],
+      "canonical_output_format": ".csv",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "Process(string, string) or Process(LowCodeLoadOptions, LowCodeSaveOptions)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "JsonConverter",
+      "full_type_name": "Aspose.Cells.LowCode.JsonConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".json"
+      ],
+      "canonical_output_format": ".json",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "HtmlConverter",
+      "full_type_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".html"
+      ],
+      "canonical_output_format": ".html",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "TextConverter",
+      "full_type_name": "Aspose.Cells.LowCode.TextConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".txt"
+      ],
+      "canonical_output_format": ".txt",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "ImageConverter",
+      "full_type_name": "Aspose.Cells.LowCode.ImageConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".png"
+      ],
+      "canonical_output_format": ".png",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string) or Process(LowCodeLoadOptions, LowCodeSaveOptions)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "PdfConverter",
+      "full_type_name": "Aspose.Cells.LowCode.PdfConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetMerger",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "operation_kind": "merger",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".xlsx"
+      ],
+      "canonical_output_format": ".xlsx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string[], string) or Process(LowCodeMergeOptions)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetSplitter",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "operation_kind": "splitter",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".xlsx"
+      ],
+      "canonical_output_format": ".xlsx",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string) or Process(LowCodeSplitOptions)",
+      "options_class": null
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetLocker",
+      "full_type_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".xlsx"
+      ],
+      "output_formats": [
+        ".xlsx"
+      ],
+      "canonical_output_format": ".xlsx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Process(string, string, string, string)",
+      "options_class": null
+    },
+    {
+      "family": "diagram",
+      "type_name": "DiagramConverter",
+      "full_type_name": "Aspose.Diagram.LowCode.DiagramConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".vsdx"
+      ],
+      "output_formats": [
+        ".vdx"
+      ],
+      "canonical_output_format": ".vdx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "DiagramConverter.Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "diagram",
+      "type_name": "PdfConverter",
+      "full_type_name": "Aspose.Diagram.LowCode.PdfConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".vsdx"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "PdfConverter.Process(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "email",
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Email.LowCode.Converter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".eml"
+      ],
+      "output_formats": [
+        "html"
+      ],
+      "canonical_output_format": "directory",
+      "output_kind": "directory",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "Converter.ConvertToHtml(string) or ConvertToMht/Mhtml/Eml/Msg",
+      "options_class": null
+    },
+    {
+      "family": "pdf",
+      "type_name": "DocConverter",
+      "full_type_name": "Aspose.Pdf.LowCode.DocConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "DocConverter.Process(PdfToDocOptions)",
+      "options_class": "PdfToDocOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "XlsConverter",
+      "full_type_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".xlsx"
+      ],
+      "canonical_output_format": ".xlsx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "XlsConverter.Process(PdfToXlsOptions)",
+      "options_class": "PdfToXlsOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Html",
+      "full_type_name": "Aspose.Pdf.LowCode.Html",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".html"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Html.Process(HtmlToPdfOptions)",
+      "options_class": "HtmlToPdfOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Jpeg",
+      "full_type_name": "Aspose.Pdf.LowCode.Jpeg",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".jpg"
+      ],
+      "canonical_output_format": ".jpg",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "PdfToImage.Process(JpegOptions)",
+      "options_class": "JpegOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Png",
+      "full_type_name": "Aspose.Pdf.LowCode.Png",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".png"
+      ],
+      "canonical_output_format": ".png",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "PdfToImage.Process(PngOptions)",
+      "options_class": "PngOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Tiff",
+      "full_type_name": "Aspose.Pdf.LowCode.Tiff",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".tiff"
+      ],
+      "canonical_output_format": ".tiff",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "PdfToImage.Process(TiffOptions)",
+      "options_class": "TiffOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "TextExtractor",
+      "full_type_name": "Aspose.Pdf.LowCode.TextExtractor",
+      "operation_kind": "extractor",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        "text"
+      ],
+      "canonical_output_format": "stdout",
+      "output_kind": "stdout",
+      "output_cardinality": "none",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "PdfExtractor.Process(TextExtractorOptions)",
+      "options_class": "TextExtractorOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Merger",
+      "full_type_name": "Aspose.Pdf.LowCode.Merger",
+      "operation_kind": "merger",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Merger.Process(MergeOptions)",
+      "options_class": "MergeOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Splitter",
+      "full_type_name": "Aspose.Pdf.LowCode.Splitter",
+      "operation_kind": "splitter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Splitter.Process(SplitOptions)",
+      "options_class": "SplitOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Optimizer",
+      "full_type_name": "Aspose.Pdf.LowCode.Optimizer",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Optimizer.Process(OptimizeOptions)",
+      "options_class": "OptimizeOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "PdfAConverter",
+      "full_type_name": "Aspose.Pdf.LowCode.PdfAConverter",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "PdfAConverter.Process(PdfAConvertOptions)",
+      "options_class": "PdfAConvertOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "TocGenerator",
+      "full_type_name": "Aspose.Pdf.LowCode.TocGenerator",
+      "operation_kind": "processor",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "TocGenerator.Process(TocOptions)",
+      "options_class": "TocOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "TableGenerator",
+      "full_type_name": "Aspose.Pdf.LowCode.TableGenerator",
+      "operation_kind": "processor",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "TableGenerator.Process(TableOptions)",
+      "options_class": "TableOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "ImageExtractor",
+      "full_type_name": "Aspose.Pdf.LowCode.ImageExtractor",
+      "operation_kind": "extractor",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".png"
+      ],
+      "canonical_output_format": ".png",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "PdfExtractor.Process(ImageExtractorOptions)",
+      "options_class": "ImageExtractorOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Security",
+      "full_type_name": "Aspose.Pdf.LowCode.Security",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Security.Process(EncryptionOptions or DecryptionOptions)",
+      "options_class": "EncryptionOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormFlattener",
+      "full_type_name": "Aspose.Pdf.LowCode.FormFlattener",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "FormFlattener.Process(FormFlattenAllFieldsOptions or FormFlattenSelectedFieldsOptions)",
+      "options_class": "FormFlattenAllFieldsOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormEditor",
+      "full_type_name": "Aspose.Pdf.LowCode.FormEditor",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "FormEditor.Process(FormEditorAddOptions or FormEditorSetOptions or FormRemoveSelectedFieldsOptions)",
+      "options_class": "FormEditorSetOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormExporter",
+      "full_type_name": "Aspose.Pdf.LowCode.FormExporter",
+      "operation_kind": "exporter",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".json"
+      ],
+      "canonical_output_format": ".json",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "resolved",
+      "method_signature": "FormExporter.Process(FormExporterToJsonOptions)",
+      "options_class": "FormExporterToJsonOptions"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Signature",
+      "full_type_name": "Aspose.Pdf.LowCode.Signature",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pdf"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Signature.Process(SignOptions)",
+      "options_class": "SignOptions"
+    },
+    {
+      "family": "slides",
+      "type_name": "Convert",
+      "full_type_name": "Aspose.Slides.LowCode.Convert",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".pptx"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Convert.ToPdf(string, string)",
+      "options_class": null
+    },
+    {
+      "family": "slides",
+      "type_name": "Merger",
+      "full_type_name": "Aspose.Slides.LowCode.Merger",
+      "operation_kind": "merger",
+      "input_formats": [
+        ".pptx"
+      ],
+      "output_formats": [
+        ".pptx"
+      ],
+      "canonical_output_format": ".pptx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Merger.Process(string[], string)",
+      "options_class": null
+    },
+    {
+      "family": "slides",
+      "type_name": "Compress",
+      "full_type_name": "Aspose.Slides.LowCode.Compress",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".pptx"
+      ],
+      "output_formats": [
+        ".pptx"
+      ],
+      "canonical_output_format": ".pptx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Compress.CompressEmbeddedFonts / RemoveUnusedLayoutSlides / RemoveUnusedMasterSlides",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Words.LowCode.Converter",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".pdf"
+      ],
+      "canonical_output_format": ".pdf",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Converter.Convert(string, string, SaveFormat)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Merger",
+      "full_type_name": "Aspose.Words.LowCode.Merger",
+      "operation_kind": "merger",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Merger.Merge(string[], string, SaveFormat)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Splitter",
+      "full_type_name": "Aspose.Words.LowCode.Splitter",
+      "operation_kind": "splitter",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "multi",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Splitter.Split(string, string, SplitOptions)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Comparer",
+      "full_type_name": "Aspose.Words.LowCode.Comparer",
+      "operation_kind": "converter",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Comparer.Compare(string, string, string, string, SaveFormat)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "MailMerger",
+      "full_type_name": "Aspose.Words.LowCode.MailMerger",
+      "operation_kind": "processor",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "MailMerger.Execute(string, string, SaveFormat, ...)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "ReportBuilder",
+      "full_type_name": "Aspose.Words.LowCode.ReportBuilder",
+      "operation_kind": "processor",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "ReportBuilder.BuildReport(string, string, SaveFormat, ...)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Watermarker",
+      "full_type_name": "Aspose.Words.LowCode.Watermarker",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Watermarker.SetText(string, string, SaveFormat, ...)",
+      "options_class": null
+    },
+    {
+      "family": "words",
+      "type_name": "Replacer",
+      "full_type_name": "Aspose.Words.LowCode.Replacer",
+      "operation_kind": "transform",
+      "input_formats": [
+        ".docx"
+      ],
+      "output_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "method_signature": "Replacer.Replace(string, string, SaveFormat, ...)",
+      "options_class": null
+    }
+  ]
+}

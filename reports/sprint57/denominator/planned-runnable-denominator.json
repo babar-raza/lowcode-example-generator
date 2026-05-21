@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-05-21",
+  "sprint": "sprint57",
+  "denominator_determination_method": "active_family_config_audit + completion_queue_active_entries + package_reflection",
+  "confirmed_runnable_total": 42,
+  "confirmed_100_percent_target": 42,
+  "confirmed_90_percent_threshold": 38,
+  "note": "42 is confirmed from 6 active families with LowCode namespaces. OCR and PSD are blocked pending dependency resolution and excluded from denominator until their reflection can complete.",
+  "family_breakdown": [
+    {
+      "family": "cells",
+      "runnable_types": 9,
+      "evidence": "DllReflector discovery-cells-20260520-162744, 22 types found, 9 active after dedup/scope",
+      "types": [
+        "HtmlConverter", "ImageConverter", "JsonConverter", "PdfConverter",
+        "SpreadsheetConverter", "SpreadsheetLocker", "SpreadsheetMerger",
+        "SpreadsheetSplitter", "TextConverter"
+      ]
+    },
+    {
+      "family": "words",
+      "runnable_types": 8,
+      "evidence": "Prior sprint discovery, API catalog confirmed",
+      "types": [
+        "Comparer", "Converter", "MailMerger", "Merger",
+        "ReportBuilder", "Replacer", "Splitter", "Watermarker"
+      ]
+    },
+    {
+      "family": "pdf",
+      "runnable_types": 19,
+      "evidence": "Prior sprint discovery, type-role-classification confirmed, abstract types excluded",
+      "types": [
+        "DocConverter", "FormEditor", "FormExporter", "FormFlattener",
+        "Html", "ImageExtractor", "Jpeg", "Merger", "Optimizer",
+        "PdfAConverter", "Png", "Security", "Signature", "Splitter",
+        "TableGenerator", "TextExtractor", "Tiff", "TocGenerator", "XlsConverter"
+      ],
+      "excluded": [
+        {"type": "PdfExtractor", "reason": "ABSTRACT_BASE_CLASS: CS0144 confirmed Sprint 7"},
+        {"type": "PdfToImage", "reason": "ABSTRACT_BASE: reclassified Sprint 22"},
+        {"type": "FormImporter", "reason": "BACKLOGGED: requires pair input fixture strategy"},
+        {"type": "Ofd", "reason": "BACKLOGGED: OFD format fixture not available"},
+        {"type": "SelectField", "reason": "BACKLOGGED: requires PDF with select form fields fixture"},
+        {"type": "Timestamp", "reason": "BACKLOGGED: timestamp authority fixture not yet implemented"}
+      ]
+    },
+    {
+      "family": "diagram",
+      "runnable_types": 2,
+      "evidence": "Prior sprint discovery",
+      "types": ["Converter", "Merger"]
+    },
+    {
+      "family": "email",
+      "runnable_types": 1,
+      "evidence": "Prior sprint discovery",
+      "types": ["Converter"]
+    },
+    {
+      "family": "slides",
+      "runnable_types": 3,
+      "evidence": "Prior sprint discovery",
+      "types": ["Compress", "Convert", "Merge"]
+    }
+  ],
+  "excluded_families": [
+    {
+      "family": "ocr",
+      "reason": "DISCOVERY_BLOCKED: Aspose.AI.LLM internal dependency not on NuGet. Cannot confirm/deny LowCode namespace.",
+      "retest_trigger": "Monthly NuGet check for Aspose.AI.LLM"
+    },
+    {
+      "family": "psd",
+      "reason": "DISCOVERY_BLOCKED: Aspose.JavaAttributes internal dependency not on NuGet. Cannot confirm/deny LowCode namespace.",
+      "retest_trigger": "Monthly NuGet check for Aspose.JavaAttributes"
+    }
+  ],
+  "old_denominator": 42,
+  "new_denominator": 42,
+  "denominator_status": "CONFIRMED_UNCHANGED"
+}

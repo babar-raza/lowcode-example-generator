@@ -30,6 +30,8 @@ from plugin_examples.scenario_planner.planner import (
     _build_scenario,
     _needs_fixture,
 )
+from plugin_examples.format_authority.store import MissingFormatContractError
+from plugin_examples.format_authority.contracts import FormatContract
 from plugin_examples.generator.packet_builder import (
     PromptPacket,
     build_packet,
@@ -61,7 +63,9 @@ class TestExampleReviewerFixtureSystemDiscovered:
 
 class TestFixtureStrategyBlocksWithoutInput:
     def test_fixture_strategy_blocks_without_input(self):
-        """A scenario needing an unsupported fixture format must be blocked."""
+        """A type with no format contract raises MissingFormatContractError (fail-closed).
+        Sprint 57: imaging/PsdProcessor has no FA contract — planner raises instead of
+        returning blocked_no_fixture. This enforces contract-first fail-closed behavior."""
         type_info = {
             "full_name": "Aspose.Imaging.LowCode.PsdProcessor",
             "name": "PsdProcessor",
@@ -78,9 +82,8 @@ class TestFixtureStrategyBlocksWithoutInput:
                 }
             ],
         }
-        scenario = _build_scenario("imaging", type_info, "Aspose.Imaging.LowCode", None, ".psd")
-        assert scenario.status == "blocked_no_fixture"
-        assert scenario.input_strategy == "no_valid_input_strategy"
+        with pytest.raises(MissingFormatContractError):
+            _build_scenario("imaging", type_info, "Aspose.Imaging.LowCode", None, ".psd")
 
     def test_supported_format_uses_generated_fixture(self):
         """A scenario needing .xlsx should use generated_fixture_file strategy."""
@@ -401,9 +404,11 @@ class TestCellsConverterScenarioHasValidInputStrategy:
         assert scenario.status == "ready"
 
     def test_all_supported_formats_produce_valid_strategy(self):
-        """Every format in SUPPORTED_FORMATS must produce a ready scenario."""
+        """Every format in SUPPORTED_FORMATS must produce a ready scenario.
+        Uses mock contract so fixture factory layer is tested independently of FA store."""
+        from unittest.mock import patch
         type_info = {
-            "full_name": "Aspose.Test.LowCode.SpreadsheetConverter",
+            "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
             "name": "SpreadsheetConverter",
             "kind": "class",
             "methods": [
@@ -419,7 +424,18 @@ class TestCellsConverterScenarioHasValidInputStrategy:
             ],
         }
         for fmt in SUPPORTED_FORMATS:
-            scenario = _build_scenario("test", type_info, "Aspose.Test.LowCode", None, fmt)
+            mock_contract = FormatContract(
+                family="cells",
+                type_name="SpreadsheetConverter",
+                operation_kind="convert",
+                input_format=fmt,
+                input_cardinality="single",
+                canonical_output_format=".out",
+                output_cardinality="single",
+                output_kind="file",
+            )
+            with patch("plugin_examples.format_authority.store.get_contract", return_value=mock_contract):
+                scenario = _build_scenario("cells", type_info, "Aspose.Cells.LowCode", None, fmt)
             assert scenario.status == "ready", f"Format {fmt} should produce ready scenario"
             assert scenario.input_strategy == "generated_fixture_file"
 

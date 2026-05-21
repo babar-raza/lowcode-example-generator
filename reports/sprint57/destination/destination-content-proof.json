@@ -1,0 +1,44 @@
+{
+  "cells": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "cells"
+    ]
+  },
+  "words": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "words"
+    ]
+  },
+  "pdf": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "pdf"
+    ]
+  },
+  "diagram": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "diagram"
+    ]
+  },
+  "email": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "email"
+    ]
+  },
+  "slides": {
+    "status": "OK",
+    "example_count": 1,
+    "example_dirs": [
+      "slides"
+    ]
+  }
+}

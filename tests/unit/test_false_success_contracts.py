@@ -224,8 +224,11 @@ class TestPublisherRejectsFailedBuild:
 
 class TestScenarioMissingFixtureIsBlocked:
     def test_scenario_missing_fixture_unsupported_format_is_blocked(self):
-        """A type needing a fixture in an unsupported format must be blocked."""
+        """A type with no format contract raises MissingFormatContractError (fail-closed).
+        Sprint 57: types without contracts cannot proceed — they propagate a typed error
+        rather than silently returning blocked_no_fixture."""
         from plugin_examples.scenario_planner.planner import _build_scenario
+        from plugin_examples.format_authority.store import MissingFormatContractError
 
         type_info = {
             "full_name": "Aspose.Cells.LowCode.CustomProcessor",
@@ -244,11 +247,9 @@ class TestScenarioMissingFixtureIsBlocked:
             ],
         }
         fixture_registry = {"fixtures": [{"filename": "other.docx", "available": True}]}
-        # .psd is not supported by the fixture factory and not in registry
-        scenario = _build_scenario("cells", type_info, "Aspose.Cells.LowCode", fixture_registry, ".psd")
-        assert scenario.status == "blocked_no_fixture"
-        assert scenario.blocked_reason is not None
-        assert scenario.input_strategy == "no_valid_input_strategy"
+        # CustomProcessor has no format contract — planner raises MissingFormatContractError
+        with pytest.raises(MissingFormatContractError):
+            _build_scenario("cells", type_info, "Aspose.Cells.LowCode", fixture_registry, ".psd")
 
     def test_supported_format_uses_generated_fixture_file(self):
         """A type needing .xlsx fixture should use generated_fixture_file strategy."""

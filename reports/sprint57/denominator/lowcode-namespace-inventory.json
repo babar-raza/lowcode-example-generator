@@ -1,0 +1,246 @@
+{
+  "generated_at": "2026-05-21",
+  "sprint": "sprint57",
+  "discovery_method": "config_audit + package_reflection + all-family-lowcode-discovery",
+  "total_families_in_scope": 25,
+  "active_families": 6,
+  "blocked_pending_dependency": 2,
+  "confirmed_no_lowcode": 17,
+  "families": [
+    {
+      "family": "cells",
+      "display_name": "Aspose.Cells for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.Cells",
+      "package_version": "26.5.1",
+      "lowcode_namespace": "Aspose.Cells.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": 22,
+      "plugin_method_count": 33,
+      "active_runnable_count": 9,
+      "discovery_run": "discovery-cells-20260520-162744",
+      "notes": "9 active runnable types (dedup: 1 excluded). All 9 POST_MERGE_VERIFIED."
+    },
+    {
+      "family": "words",
+      "display_name": "Aspose.Words for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.Words",
+      "package_version": "26.5.0",
+      "lowcode_namespace": "Aspose.Words.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 8,
+      "discovery_run": "prior sprints",
+      "notes": "8 active runnable types. All 8 POST_MERGE_VERIFIED."
+    },
+    {
+      "family": "pdf",
+      "display_name": "Aspose.PDF for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.PDF",
+      "package_version": "26.5.0",
+      "lowcode_namespace": "Aspose.Pdf.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 19,
+      "discovery_run": "prior sprints",
+      "notes": "19 active runnable types. 5 POST_MERGE_VERIFIED (wave A), 14 MERGED (waves B-G, GitHub API confirmed). 2 PERMANENTLY_BLOCKED (PdfExtractor, PdfToImage: abstract). 5 BACKLOGGED (FormImporter, Ofd, SelectField, Timestamp, PdfAConverter-legacy)."
+    },
+    {
+      "family": "diagram",
+      "display_name": "Aspose.Diagram for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.Diagram",
+      "package_version": "26.5.0",
+      "lowcode_namespace": "Aspose.Diagram.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 2,
+      "discovery_run": "prior sprints",
+      "notes": "2 active runnable types. All POST_MERGE_VERIFIED."
+    },
+    {
+      "family": "email",
+      "display_name": "Aspose.Email for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.Email",
+      "package_version": "26.4.0",
+      "lowcode_namespace": "Aspose.Email.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 1,
+      "discovery_run": "prior sprints",
+      "notes": "1 active runnable type. POST_MERGE_VERIFIED."
+    },
+    {
+      "family": "slides",
+      "display_name": "Aspose.Slides for .NET",
+      "enabled": true,
+      "status": "ACTIVE",
+      "package_id": "Aspose.Slides.NET",
+      "package_version": "26.5.0",
+      "lowcode_namespace": "Aspose.Slides.LowCode",
+      "lowcode_confirmed": true,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 3,
+      "discovery_run": "prior sprints",
+      "notes": "3 active runnable types. All POST_MERGE_VERIFIED."
+    },
+    {
+      "family": "ocr",
+      "display_name": "Aspose.OCR for .NET",
+      "enabled": true,
+      "status": "DISCOVERY_BLOCKED",
+      "package_id": "Aspose.OCR",
+      "package_version": null,
+      "lowcode_namespace": "UNKNOWN",
+      "lowcode_confirmed": false,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 0,
+      "discovery_run": null,
+      "blocker": "Aspose.AI.LLM Version=25.12.0.0 is an internal Aspose assembly NOT available on NuGet.org. Reflection cannot complete until this dependency is downloadable.",
+      "retest_trigger": "Check if Aspose.AI.LLM is published to NuGet.org monthly",
+      "notes": "Do NOT mark CONFIRMED_NO_LOWCODE — reflection has not completed."
+    },
+    {
+      "family": "psd",
+      "display_name": "Aspose.PSD for .NET",
+      "enabled": true,
+      "status": "DISCOVERY_BLOCKED",
+      "package_id": "Aspose.PSD",
+      "package_version": null,
+      "lowcode_namespace": "UNKNOWN",
+      "lowcode_confirmed": false,
+      "plugin_type_count": null,
+      "plugin_method_count": null,
+      "active_runnable_count": 0,
+      "discovery_run": null,
+      "blocker": "Aspose.JavaAttributes Version=1.0.0.0 is an internal Aspose assembly NOT available on NuGet.org. Reflection cannot complete.",
+      "retest_trigger": "Check if Aspose.JavaAttributes is published to NuGet.org monthly",
+      "notes": "Do NOT mark CONFIRMED_NO_LOWCODE — reflection has not completed."
+    },
+    {
+      "family": "barcode",
+      "display_name": "Aspose.BarCode for .NET",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "package_id": "Aspose.BarCode",
+      "lowcode_confirmed": false,
+      "discovery_run": "all-family-lowcode-discovery 2026-05-09",
+      "notes": "DllReflector found 0 plugin types."
+    },
+    {
+      "family": "imaging",
+      "display_name": "Aspose.Imaging for .NET",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "package_id": "Aspose.Imaging",
+      "lowcode_confirmed": false,
+      "discovery_run": "all-family-lowcode-discovery 2026-05-09",
+      "notes": "DllReflector found 0 plugin types."
+    },
+    {
+      "family": "cad",
+      "display_name": "Aspose.CAD for .NET",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "drawing",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "finance",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "font",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "gis",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "html",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "note",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "omr",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "page",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "svg",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "tasks",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "tex",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "threed",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "zip",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    },
+    {
+      "family": "epub",
+      "enabled": false,
+      "status": "CONFIRMED_NO_LOWCODE",
+      "notes": "Disabled family, no LowCode namespace."
+    }
+  ]
+}

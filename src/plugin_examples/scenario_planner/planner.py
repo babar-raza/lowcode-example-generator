@@ -448,8 +448,10 @@ def _build_scenario(
         contract_output = contract.canonical_output_format
         contract_id = contract.contract_id
         contract_hash = contract.contract_hash
-    except (KeyError, ImportError):
+    except ImportError:
         pass
+    # NOTE: MissingFormatContractError (subclass of KeyError) is intentionally NOT caught here.
+    # A missing contract must propagate so the caller can handle it explicitly.
 
     return Scenario(
         scenario_id=scenario_id,
@@ -562,8 +564,9 @@ def _infer_input_format(
             from plugin_examples.format_authority.store import get_contract
             contract = get_contract(family, type_name)
             return contract.input_format
-        except (KeyError, ImportError):
+        except ImportError:
             pass
+        # NOTE: MissingFormatContractError (KeyError subclass) is NOT caught here — fail closed.
 
     if not allow_legacy_format_inference:
         return family_default
@@ -602,8 +605,9 @@ def _infer_output_format(
             from plugin_examples.format_authority.store import get_contract
             contract = get_contract(family, type_name)
             return contract.canonical_output_format
-        except (KeyError, ImportError):
+        except ImportError:
             pass
+        # NOTE: MissingFormatContractError (KeyError subclass) is NOT caught here — fail closed.
 
     if not allow_legacy_format_inference:
         return family_default

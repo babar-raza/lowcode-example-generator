@@ -170,22 +170,21 @@ class TestQueueCoversDenominator:
 
 class TestQueueStateConsistency:
     def test_merged_entries_have_merge_sha(self, entries):
-        # Sprint56-LaneA: entries reconciled via contract authority may have merge_sha=null
-        # when the exact GitHub SHA was not locally recorded. CONTRACT_AUTHORITY is a valid
-        # post_merge_validation value for such entries; merge_sha requirement is waived.
+        # Sprint57-LaneA: all MERGED/POST_MERGE_VERIFIED entries must have a real merge_sha.
+        # CONTRACT_AUTHORITY was retired in Sprint 57 — real GitHub merge SHAs are now recorded.
         for entry in entries:
             if entry["state"] in ("MERGED", "POST_MERGE_VERIFIED"):
-                is_contract_authority = entry.get("post_merge_validation") == "CONTRACT_AUTHORITY"
-                if not is_contract_authority:
-                    assert entry.get("merge_sha") is not None, (
-                        f"Entry {entry['scenario_id']} is {entry['state']} but has no merge_sha"
-                    )
+                assert entry.get("merge_sha") is not None, (
+                    f"Entry {entry['scenario_id']} is {entry['state']} but has no merge_sha. "
+                    f"All merged entries require a real GitHub merge commit SHA."
+                )
 
     def test_post_merge_verified_entries_have_post_merge_validation(self, entries):
         # Valid post_merge_validation values:
-        #   ALL_PASS              — pipeline-verified (build+run+output all pass)
-        #   CONTRACT_AUTHORITY    — sprint56-LaneA: publication confirmed via pipeline/contracts
-        valid_validations = {"ALL_PASS", "CONTRACT_AUTHORITY"}
+        #   ALL_PASS         — pipeline-verified (build+run+output all pass)
+        #   CONTENT_VERIFIED — destination repo content verified via GitHub API (Sprint 57 LaneG)
+        # CONTRACT_AUTHORITY was retired in Sprint 57.
+        valid_validations = {"ALL_PASS", "CONTENT_VERIFIED"}
         for entry in entries:
             if entry["state"] == "POST_MERGE_VERIFIED":
                 assert entry.get("post_merge_validation") in valid_validations, (
@@ -217,6 +216,32 @@ class TestQueueStateConsistency:
             assert sid in queue_dict, f"Words pilot entry {sid} missing from queue"
             assert queue_dict[sid]["state"] == "POST_MERGE_VERIFIED", (
                 f"Words Wave 1 entry {sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
+            )
+
+    def test_pdf_wave_b_g_entries_are_post_merge_verified(self, entries):
+        # Sprint57-LaneA+LaneG: 14 PDF entries (Waves B-G) were downgraded to MERGED
+        # (with real GitHub merge SHAs), then upgraded to POST_MERGE_VERIFIED after
+        # destination repo content verification confirmed all 14 examples are present.
+        wave_b_g_ids = {
+            "pdf-doc-converter", "pdf-html", "pdf-xls-converter",  # Wave B (PR#11)
+            "pdf-jpeg", "pdf-png", "pdf-tiff",                     # Wave C (PR#17)
+            "pdf-image-extractor", "pdf-table-generator", "pdf-toc-generator",  # Wave D (PR#18)
+            "pdf-form-flattener", "pdf-security",                  # Wave E (PR#19)
+            "pdf-form-editor", "pdf-form-exporter",                # Wave F (PR#20)
+            "pdf-signature",                                        # Wave G (PR#21)
+        }
+        queue_dict = {e["scenario_id"]: e for e in entries}
+        for sid in wave_b_g_ids:
+            assert queue_dict[sid]["state"] == "POST_MERGE_VERIFIED", (
+                f"{sid} expected POST_MERGE_VERIFIED (merge SHA confirmed + content verified), "
+                f"got {queue_dict[sid]['state']}"
+            )
+            assert queue_dict[sid].get("merge_sha") is not None, (
+                f"{sid} is POST_MERGE_VERIFIED but has no merge_sha"
+            )
+            assert queue_dict[sid].get("post_merge_validation") == "CONTENT_VERIFIED", (
+                f"{sid} expected post_merge_validation=CONTENT_VERIFIED, "
+                f"got {queue_dict[sid].get('post_merge_validation')}"
             )
 
     def test_pdf_merger_and_text_extractor_are_post_merge_verified(self, entries):

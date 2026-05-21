@@ -167,14 +167,13 @@ class TestPlannerProductionFailClosed:
         assert result == ".xlsx", f"Expected .xlsx from contract, got: {result}"
 
     def test_unknown_type_returns_family_default_not_out(self):
-        """Unknown type with fail_closed=True should return family_default, not .out from stale map."""
-        result = _infer_output_format(
-            "BogusType", family_default=".xlsx", family="cells",
-            allow_legacy_format_inference=False
-        )
-        # Should return family default, not stale-map .out
-        assert result != ".out", "Unknown type returned .out — stale map fallback is active"
-        assert result == ".xlsx", f"Expected family_default .xlsx, got: {result}"
+        """Unknown type with fail_closed=True raises MissingFormatContractError — not .out stale map.
+        Sprint 57: fail-closed means unknown types propagate a typed error, never fall back."""
+        with pytest.raises(MissingFormatContractError):
+            _infer_output_format(
+                "BogusType", family_default=".xlsx", family="cells",
+                allow_legacy_format_inference=False
+            )
 
     @pytest.mark.parametrize(
         "family,type_name", _ALL_ACTIVE,

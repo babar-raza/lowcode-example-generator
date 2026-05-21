@@ -868,8 +868,9 @@ def _infer_output_extension(type_name: str, hints: dict | None = None) -> str:
             from plugin_examples.format_authority.store import get_contract
             contract = get_contract(family, type_name)
             return contract.canonical_output_format
-        except (KeyError, ImportError):
+        except ImportError:
             pass
+        # NOTE: MissingFormatContractError (KeyError subclass) is NOT caught here — fail closed.
 
     # Priority 2: Legacy map (DEPRECATED — compatibility only)
     name_lower = type_name.lower()

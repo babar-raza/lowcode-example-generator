@@ -1,6 +1,6 @@
 {
   "family": "cells",
-  "run_id": "pilot-cells-20260521-112202",
+  "run_id": "pilot-cells-20260521-141739",
   "summary": {
     "total_planned": 22,
     "generation_passed": 9,
@@ -18,7 +18,7 @@
     {
       "scenario_id": "cells-abstract-low-code-load-options-provider",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -44,13 +44,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.210962+00:00",
-      "last_updated": "2026-05-21T06:24:47.210974+00:00"
+      "created_at": "2026-05-21T09:19:09.704100+00:00",
+      "last_updated": "2026-05-21T09:19:09.704112+00:00"
     },
     {
       "scenario_id": "cells-abstract-low-code-protection-provider",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -76,13 +76,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.210977+00:00",
-      "last_updated": "2026-05-21T06:24:47.210982+00:00"
+      "created_at": "2026-05-21T09:19:09.704116+00:00",
+      "last_updated": "2026-05-21T09:19:09.704120+00:00"
     },
     {
       "scenario_id": "cells-abstract-low-code-save-options-provider",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -108,13 +108,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.210990+00:00",
-      "last_updated": "2026-05-21T06:24:47.210992+00:00"
+      "created_at": "2026-05-21T09:19:09.704128+00:00",
+      "last_updated": "2026-05-21T09:19:09.704131+00:00"
     },
     {
       "scenario_id": "cells-low-code-html-save-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -140,13 +140,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.210994+00:00",
-      "last_updated": "2026-05-21T06:24:47.210996+00:00"
+      "created_at": "2026-05-21T09:19:09.704133+00:00",
+      "last_updated": "2026-05-21T09:19:09.704135+00:00"
     },
     {
       "scenario_id": "cells-low-code-image-save-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -172,13 +172,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.210998+00:00",
-      "last_updated": "2026-05-21T06:24:47.211001+00:00"
+      "created_at": "2026-05-21T09:19:09.704137+00:00",
+      "last_updated": "2026-05-21T09:19:09.704140+00:00"
     },
     {
       "scenario_id": "cells-low-code-load-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -204,13 +204,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211003+00:00",
-      "last_updated": "2026-05-21T06:24:47.211005+00:00"
+      "created_at": "2026-05-21T09:19:09.704142+00:00",
+      "last_updated": "2026-05-21T09:19:09.704144+00:00"
     },
     {
       "scenario_id": "cells-low-code-merge-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -236,13 +236,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211007+00:00",
-      "last_updated": "2026-05-21T06:24:47.211009+00:00"
+      "created_at": "2026-05-21T09:19:09.704146+00:00",
+      "last_updated": "2026-05-21T09:19:09.704148+00:00"
     },
     {
       "scenario_id": "cells-low-code-pdf-save-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -268,13 +268,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211011+00:00",
-      "last_updated": "2026-05-21T06:24:47.211013+00:00"
+      "created_at": "2026-05-21T09:19:09.704150+00:00",
+      "last_updated": "2026-05-21T09:19:09.704153+00:00"
     },
     {
       "scenario_id": "cells-low-code-save-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -300,13 +300,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211014+00:00",
-      "last_updated": "2026-05-21T06:24:47.211016+00:00"
+      "created_at": "2026-05-21T09:19:09.704154+00:00",
+      "last_updated": "2026-05-21T09:19:09.704157+00:00"
     },
     {
       "scenario_id": "cells-low-code-save-options-provider-of-assembling",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -332,13 +332,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211018+00:00",
-      "last_updated": "2026-05-21T06:24:47.211020+00:00"
+      "created_at": "2026-05-21T09:19:09.704159+00:00",
+      "last_updated": "2026-05-21T09:19:09.704161+00:00"
     },
     {
       "scenario_id": "cells-low-code-save-options-provider-of-place-holders",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -364,13 +364,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211022+00:00",
-      "last_updated": "2026-05-21T06:24:47.211024+00:00"
+      "created_at": "2026-05-21T09:19:09.704163+00:00",
+      "last_updated": "2026-05-21T09:19:09.704165+00:00"
     },
     {
       "scenario_id": "cells-low-code-split-options",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -396,13 +396,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211026+00:00",
-      "last_updated": "2026-05-21T06:24:47.211028+00:00"
+      "created_at": "2026-05-21T09:19:09.704167+00:00",
+      "last_updated": "2026-05-21T09:19:09.704170+00:00"
     },
     {
       "scenario_id": "cells-split-part-info",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -428,13 +428,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.211030+00:00",
-      "last_updated": "2026-05-21T06:24:47.211032+00:00"
+      "created_at": "2026-05-21T09:19:09.704172+00:00",
+      "last_updated": "2026-05-21T09:19:09.704174+00:00"
     },
     {
       "scenario_id": "cells-html-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -460,13 +460,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:47.214008+00:00",
-      "last_updated": "2026-05-21T06:27:15.039631+00:00"
+      "created_at": "2026-05-21T09:19:09.707036+00:00",
+      "last_updated": "2026-05-21T09:21:57.058771+00:00"
     },
     {
       "scenario_id": "cells-image-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -492,13 +492,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:03.572804+00:00",
-      "last_updated": "2026-05-21T06:27:15.039639+00:00"
+      "created_at": "2026-05-21T09:19:25.147247+00:00",
+      "last_updated": "2026-05-21T09:21:57.058780+00:00"
     },
     {
       "scenario_id": "cells-json-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -524,13 +524,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:20.957604+00:00",
-      "last_updated": "2026-05-21T06:27:15.039640+00:00"
+      "created_at": "2026-05-21T09:19:42.981870+00:00",
+      "last_updated": "2026-05-21T09:21:57.058782+00:00"
     },
     {
       "scenario_id": "cells-pdf-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -556,13 +556,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:27.736097+00:00",
-      "last_updated": "2026-05-21T06:27:15.039642+00:00"
+      "created_at": "2026-05-21T09:20:00.426070+00:00",
+      "last_updated": "2026-05-21T09:21:57.058784+00:00"
     },
     {
       "scenario_id": "cells-spreadsheet-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -588,13 +588,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:46.456380+00:00",
-      "last_updated": "2026-05-21T06:27:15.039643+00:00"
+      "created_at": "2026-05-21T09:20:17.906542+00:00",
+      "last_updated": "2026-05-21T09:21:57.058785+00:00"
     },
     {
       "scenario_id": "cells-spreadsheet-locker",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -620,13 +620,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:51.591239+00:00",
-      "last_updated": "2026-05-21T06:27:15.039644+00:00"
+      "created_at": "2026-05-21T09:20:32.199442+00:00",
+      "last_updated": "2026-05-21T09:21:57.058786+00:00"
     },
     {
       "scenario_id": "cells-spreadsheet-merger",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -652,13 +652,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:26:01.928206+00:00",
-      "last_updated": "2026-05-21T06:27:15.039645+00:00"
+      "created_at": "2026-05-21T09:20:44.026579+00:00",
+      "last_updated": "2026-05-21T09:21:57.058787+00:00"
     },
     {
       "scenario_id": "cells-spreadsheet-splitter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -684,13 +684,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:26:14.934806+00:00",
-      "last_updated": "2026-05-21T06:27:15.039647+00:00"
+      "created_at": "2026-05-21T09:21:01.100918+00:00",
+      "last_updated": "2026-05-21T09:21:57.058789+00:00"
     },
     {
       "scenario_id": "cells-text-converter",
       "family": "cells",
-      "run_id": "pilot-cells-20260521-112202",
+      "run_id": "pilot-cells-20260521-141739",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -716,8 +716,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:26:33.845469+00:00",
-      "last_updated": "2026-05-21T06:27:15.039648+00:00"
+      "created_at": "2026-05-21T09:21:16.982226+00:00",
+      "last_updated": "2026-05-21T09:21:57.058790+00:00"
     }
   ]
 }

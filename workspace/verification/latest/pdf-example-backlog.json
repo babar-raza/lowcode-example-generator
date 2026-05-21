@@ -1,6 +1,6 @@
 {
   "family": "pdf",
-  "updated_at": "2026-05-21T06:43:52.365306+00:00",
+  "updated_at": "2026-05-21T09:17:33.908721+00:00",
   "total_entries": 14,
   "open_entries": 0,
   "resolved_entries": 14,
@@ -50,14 +50,14 @@
     {
       "scenario_id": "pdf-pdf-aconverter",
       "family": "pdf",
-      "last_run_id": "pilot-pdf-20260515-131450",
+      "last_run_id": "pilot-pdf-20260521-130044",
       "last_failure_stage": "backlogged",
-      "root_cause": "Post-repair validation failed: ['PDF: missing AddInput() call \u2014 options must have AddInput(new FileDataSource(\"input.pdf\")) before calling Process().', 'Missing required LowCode API call: REQUIRED: new PdfAConvertOptions( \u00e2\u20ac\u201d use PdfAConvertOptions as the concrete options class (NOT PluginOptions)', 'Missing required LowCode API call: REQUIRED: options.AddInput(new FileDataSource( \u00e2\u20ac\u201d input must be added via AddInput(new FileDataSource(path))', 'Missing required LowCode API call: REQUIRED: options.AddOutput(new FileDataSource( \u00e2\u20ac\u201d output must be added via AddOutput(new FileDataSource(path))']",
+      "root_cause": "Post-repair validation failed: [\"PDF: uses TextFragment but is missing 'using Aspose.Pdf.Text;' directive. Add 'using Aspose.Pdf.Text;' at the top of the file, or use the fully-qualified name Aspose.Pdf.Text.TextFragment.\"]",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 8,
+      "attempt_count": 9,
       "first_seen": "2026-05-13T12:56:52.553487+00:00",
-      "last_seen": "2026-05-15T08:29:04.236739+00:00",
+      "last_seen": "2026-05-21T08:12:05.671899+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-pdf-20260513-181803"
     },

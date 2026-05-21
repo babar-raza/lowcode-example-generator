@@ -1,65 +1,17 @@
 {
-  "total_patterns": 19,
+  "total_patterns": 3,
   "verified_passing": 0,
   "patterns": [
     {
-      "scenario_id": "pdf-doc-converter",
+      "scenario_id": "slides-compress",
       "uses_basedir": false,
-      "validates_input": false,
+      "validates_input": true,
       "validates_output": true,
       "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
+      "input_strategy": "none"
     },
     {
-      "scenario_id": "pdf-form-editor",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-form-exporter",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-form-flattener",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-html",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-image-extractor",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": false,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-jpeg",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-merger",
+      "scenario_id": "slides-convert",
       "uses_basedir": false,
       "validates_input": true,
       "validates_output": true,
@@ -67,89 +19,9 @@
       "input_strategy": "programmatic_input"
     },
     {
-      "scenario_id": "pdf-optimizer",
+      "scenario_id": "slides-merger",
       "uses_basedir": false,
       "validates_input": true,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-pdf-aconverter",
-      "uses_basedir": false,
-      "validates_input": true,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-png",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-security",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-signature",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-splitter",
-      "uses_basedir": false,
-      "validates_input": true,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-table-generator",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-text-extractor",
-      "uses_basedir": false,
-      "validates_input": true,
-      "validates_output": false,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-tiff",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-toc-generator",
-      "uses_basedir": false,
-      "validates_input": false,
-      "validates_output": true,
-      "no_interactive_input": true,
-      "input_strategy": "programmatic_input"
-    },
-    {
-      "scenario_id": "pdf-xls-converter",
-      "uses_basedir": false,
-      "validates_input": false,
       "validates_output": true,
       "no_interactive_input": true,
       "input_strategy": "programmatic_input"

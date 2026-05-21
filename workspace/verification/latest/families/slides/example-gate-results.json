@@ -5,7 +5,7 @@
   "examples": [
     {
       "scenario_id": "slides-compress",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-112159\\generated\\slides\\slides-compress",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-142107\\generated\\slides\\slides-compress",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -17,7 +17,7 @@
     },
     {
       "scenario_id": "slides-convert",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-112159\\generated\\slides\\slides-convert",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-142107\\generated\\slides\\slides-convert",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -29,11 +29,11 @@
     },
     {
       "scenario_id": "slides-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-112159\\generated\\slides\\slides-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-slides-20260521-142107\\generated\\slides\\slides-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
-      "output_validation_status": "advisory_passed",
+      "output_validation_status": "advisory_no_output",
       "reviewer_status": "passed",
       "publish_candidate": true,
       "blocked_reason": null,

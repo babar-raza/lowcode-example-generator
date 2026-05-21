@@ -1,6 +1,6 @@
 {
   "family": "slides",
-  "run_id": "pilot-slides-20260521-112159",
+  "run_id": "pilot-slides-20260521-142107",
   "summary": {
     "total_planned": 5,
     "generation_passed": 3,
@@ -18,7 +18,7 @@
     {
       "scenario_id": "slides-collect",
       "family": "slides",
-      "run_id": "pilot-slides-20260521-112159",
+      "run_id": "pilot-slides-20260521-142107",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -44,13 +44,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:27.561446+00:00",
-      "last_updated": "2026-05-21T06:24:27.561458+00:00"
+      "created_at": "2026-05-21T09:21:41.480615+00:00",
+      "last_updated": "2026-05-21T09:21:41.480626+00:00"
     },
     {
       "scenario_id": "slides-for-each",
       "family": "slides",
-      "run_id": "pilot-slides-20260521-112159",
+      "run_id": "pilot-slides-20260521-142107",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -76,13 +76,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:27.561463+00:00",
-      "last_updated": "2026-05-21T06:24:27.561467+00:00"
+      "created_at": "2026-05-21T09:21:41.480631+00:00",
+      "last_updated": "2026-05-21T09:21:41.480635+00:00"
     },
     {
       "scenario_id": "slides-compress",
       "family": "slides",
-      "run_id": "pilot-slides-20260521-112159",
+      "run_id": "pilot-slides-20260521-142107",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -108,13 +108,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:24:27.564237+00:00",
-      "last_updated": "2026-05-21T06:27:04.232886+00:00"
+      "created_at": "2026-05-21T09:21:41.483371+00:00",
+      "last_updated": "2026-05-21T09:24:10.659978+00:00"
     },
     {
       "scenario_id": "slides-convert",
       "family": "slides",
-      "run_id": "pilot-slides-20260521-112159",
+      "run_id": "pilot-slides-20260521-142107",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -140,13 +140,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:25:13.787325+00:00",
-      "last_updated": "2026-05-21T06:27:04.232894+00:00"
+      "created_at": "2026-05-21T09:22:19.757958+00:00",
+      "last_updated": "2026-05-21T09:24:10.659987+00:00"
     },
     {
       "scenario_id": "slides-merger",
       "family": "slides",
-      "run_id": "pilot-slides-20260521-112159",
+      "run_id": "pilot-slides-20260521-142107",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -172,8 +172,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:26:05.687232+00:00",
-      "last_updated": "2026-05-21T06:27:04.232896+00:00"
+      "created_at": "2026-05-21T09:23:10.103245+00:00",
+      "last_updated": "2026-05-21T09:24:10.659989+00:00"
     }
   ]
 }

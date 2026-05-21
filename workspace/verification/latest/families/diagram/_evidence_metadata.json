@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "diagram",
-  "run_id": "pilot-diagram-20260521-112157",
-  "promoted_at": "2026-05-21T06:24:23.049709+00:00",
-  "source_run_path": "workspace\\runs\\pilot-diagram-20260521-112157\\evidence\\latest",
+  "run_id": "pilot-diagram-20260521-141747",
+  "promoted_at": "2026-05-21T09:19:38.771941+00:00",
+  "source_run_path": "workspace\\runs\\pilot-diagram-20260521-141747\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",

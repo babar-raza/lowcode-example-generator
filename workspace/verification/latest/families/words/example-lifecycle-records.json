@@ -1,6 +1,6 @@
 {
   "family": "words",
-  "run_id": "pilot-words-20260521-113606",
+  "run_id": "pilot-words-20260521-141743",
   "summary": {
     "total_planned": 25,
     "generation_passed": 8,
@@ -18,7 +18,7 @@
     {
       "scenario_id": "words-comparer-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -44,13 +44,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388419+00:00",
-      "last_updated": "2026-05-21T06:37:50.388430+00:00"
+      "created_at": "2026-05-21T09:19:27.476637+00:00",
+      "last_updated": "2026-05-21T09:19:27.476648+00:00"
     },
     {
       "scenario_id": "words-converter-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -76,13 +76,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388435+00:00",
-      "last_updated": "2026-05-21T06:37:50.388439+00:00"
+      "created_at": "2026-05-21T09:19:27.476652+00:00",
+      "last_updated": "2026-05-21T09:19:27.476656+00:00"
     },
     {
       "scenario_id": "words-mail-merge-data-source",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -108,13 +108,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388446+00:00",
-      "last_updated": "2026-05-21T06:37:50.388449+00:00"
+      "created_at": "2026-05-21T09:19:27.476663+00:00",
+      "last_updated": "2026-05-21T09:19:27.476665+00:00"
     },
     {
       "scenario_id": "words-mail-merge-options",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -140,13 +140,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388452+00:00",
-      "last_updated": "2026-05-21T06:37:50.388454+00:00"
+      "created_at": "2026-05-21T09:19:27.476667+00:00",
+      "last_updated": "2026-05-21T09:19:27.476670+00:00"
     },
     {
       "scenario_id": "words-mail-merger-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -172,13 +172,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388456+00:00",
-      "last_updated": "2026-05-21T06:37:50.388459+00:00"
+      "created_at": "2026-05-21T09:19:27.476672+00:00",
+      "last_updated": "2026-05-21T09:19:27.476674+00:00"
     },
     {
       "scenario_id": "words-merge-format-mode",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -204,13 +204,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388461+00:00",
-      "last_updated": "2026-05-21T06:37:50.388475+00:00"
+      "created_at": "2026-05-21T09:19:27.476676+00:00",
+      "last_updated": "2026-05-21T09:19:27.476678+00:00"
     },
     {
       "scenario_id": "words-merger-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -236,13 +236,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388476+00:00",
-      "last_updated": "2026-05-21T06:37:50.388479+00:00"
+      "created_at": "2026-05-21T09:19:27.476680+00:00",
+      "last_updated": "2026-05-21T09:19:27.476682+00:00"
     },
     {
       "scenario_id": "words-processor",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -268,13 +268,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388481+00:00",
-      "last_updated": "2026-05-21T06:37:50.388483+00:00"
+      "created_at": "2026-05-21T09:19:27.476683+00:00",
+      "last_updated": "2026-05-21T09:19:27.476685+00:00"
     },
     {
       "scenario_id": "words-processor-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -300,13 +300,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388485+00:00",
-      "last_updated": "2026-05-21T06:37:50.388487+00:00"
+      "created_at": "2026-05-21T09:19:27.476686+00:00",
+      "last_updated": "2026-05-21T09:19:27.476689+00:00"
     },
     {
       "scenario_id": "words-replacer-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -332,13 +332,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388489+00:00",
-      "last_updated": "2026-05-21T06:37:50.388492+00:00"
+      "created_at": "2026-05-21T09:19:27.476690+00:00",
+      "last_updated": "2026-05-21T09:19:27.476692+00:00"
     },
     {
       "scenario_id": "words-report-builder-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -364,13 +364,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388493+00:00",
-      "last_updated": "2026-05-21T06:37:50.388496+00:00"
+      "created_at": "2026-05-21T09:19:27.476694+00:00",
+      "last_updated": "2026-05-21T09:19:27.476696+00:00"
     },
     {
       "scenario_id": "words-report-builder-options",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -396,13 +396,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388498+00:00",
-      "last_updated": "2026-05-21T06:37:50.388500+00:00"
+      "created_at": "2026-05-21T09:19:27.476698+00:00",
+      "last_updated": "2026-05-21T09:19:27.476700+00:00"
     },
     {
       "scenario_id": "words-signer-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -428,13 +428,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388502+00:00",
-      "last_updated": "2026-05-21T06:37:50.388504+00:00"
+      "created_at": "2026-05-21T09:19:27.476702+00:00",
+      "last_updated": "2026-05-21T09:19:27.476704+00:00"
     },
     {
       "scenario_id": "words-split-criteria",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -460,13 +460,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388506+00:00",
-      "last_updated": "2026-05-21T06:37:50.388508+00:00"
+      "created_at": "2026-05-21T09:19:27.476706+00:00",
+      "last_updated": "2026-05-21T09:19:27.476707+00:00"
     },
     {
       "scenario_id": "words-split-options",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -492,13 +492,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388510+00:00",
-      "last_updated": "2026-05-21T06:37:50.388512+00:00"
+      "created_at": "2026-05-21T09:19:27.476709+00:00",
+      "last_updated": "2026-05-21T09:19:27.476711+00:00"
     },
     {
       "scenario_id": "words-splitter-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -524,13 +524,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388514+00:00",
-      "last_updated": "2026-05-21T06:37:50.388516+00:00"
+      "created_at": "2026-05-21T09:19:27.476712+00:00",
+      "last_updated": "2026-05-21T09:19:27.476715+00:00"
     },
     {
       "scenario_id": "words-watermarker-context",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -556,13 +556,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.388518+00:00",
-      "last_updated": "2026-05-21T06:37:50.388520+00:00"
+      "created_at": "2026-05-21T09:19:27.476716+00:00",
+      "last_updated": "2026-05-21T09:19:27.476718+00:00"
     },
     {
       "scenario_id": "words-comparer",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -588,13 +588,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:37:50.391377+00:00",
-      "last_updated": "2026-05-21T06:40:37.695324+00:00"
+      "created_at": "2026-05-21T09:19:27.479251+00:00",
+      "last_updated": "2026-05-21T09:23:30.271407+00:00"
     },
     {
       "scenario_id": "words-converter",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -620,13 +620,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:38:11.350512+00:00",
-      "last_updated": "2026-05-21T06:40:37.695332+00:00"
+      "created_at": "2026-05-21T09:20:06.039751+00:00",
+      "last_updated": "2026-05-21T09:23:30.271417+00:00"
     },
     {
       "scenario_id": "words-mail-merger",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -652,13 +652,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:38:20.672166+00:00",
-      "last_updated": "2026-05-21T06:40:37.695338+00:00"
+      "created_at": "2026-05-21T09:20:20.465322+00:00",
+      "last_updated": "2026-05-21T09:23:30.271419+00:00"
     },
     {
       "scenario_id": "words-merger",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -684,13 +684,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:38:45.355642+00:00",
-      "last_updated": "2026-05-21T06:40:37.695339+00:00"
+      "created_at": "2026-05-21T09:21:05.458331+00:00",
+      "last_updated": "2026-05-21T09:23:30.271420+00:00"
     },
     {
       "scenario_id": "words-replacer",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -716,13 +716,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:39:06.985178+00:00",
-      "last_updated": "2026-05-21T06:40:37.695341+00:00"
+      "created_at": "2026-05-21T09:21:41.887978+00:00",
+      "last_updated": "2026-05-21T09:23:30.271422+00:00"
     },
     {
       "scenario_id": "words-report-builder",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -748,13 +748,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:39:18.098960+00:00",
-      "last_updated": "2026-05-21T06:40:37.695343+00:00"
+      "created_at": "2026-05-21T09:21:56.386455+00:00",
+      "last_updated": "2026-05-21T09:23:30.271423+00:00"
     },
     {
       "scenario_id": "words-splitter",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -780,13 +780,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:39:45.815421+00:00",
-      "last_updated": "2026-05-21T06:40:37.695344+00:00"
+      "created_at": "2026-05-21T09:22:34.980521+00:00",
+      "last_updated": "2026-05-21T09:23:30.271425+00:00"
     },
     {
       "scenario_id": "words-watermarker",
       "family": "words",
-      "run_id": "pilot-words-20260521-113606",
+      "run_id": "pilot-words-20260521-141743",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -812,8 +812,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:39:52.466032+00:00",
-      "last_updated": "2026-05-21T06:40:37.695345+00:00"
+      "created_at": "2026-05-21T09:22:47.159817+00:00",
+      "last_updated": "2026-05-21T09:23:30.271426+00:00"
     }
   ]
 }

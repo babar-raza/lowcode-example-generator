@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "cells",
-  "run_id": "pilot-cells-20260521-112202",
-  "promoted_at": "2026-05-21T06:27:15.178158+00:00",
-  "source_run_path": "workspace\\runs\\pilot-cells-20260521-112202\\evidence\\latest",
+  "run_id": "pilot-cells-20260521-141739",
+  "promoted_at": "2026-05-21T09:21:57.208221+00:00",
+  "source_run_path": "workspace\\runs\\pilot-cells-20260521-141739\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",

@@ -1,6 +1,6 @@
 {
   "family": "email",
-  "run_id": "pilot-email-20260521-113329",
+  "run_id": "pilot-email-20260521-141939",
   "summary": {
     "total_planned": 3,
     "generation_passed": 1,
@@ -18,7 +18,7 @@
     {
       "scenario_id": "email-folder-output-handler",
       "family": "email",
-      "run_id": "pilot-email-20260521-113329",
+      "run_id": "pilot-email-20260521-141939",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -44,13 +44,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:34:01.141236+00:00",
-      "last_updated": "2026-05-21T06:34:01.141248+00:00"
+      "created_at": "2026-05-21T09:20:11.254017+00:00",
+      "last_updated": "2026-05-21T09:20:11.254028+00:00"
     },
     {
       "scenario_id": "email-ioutput-handler",
       "family": "email",
-      "run_id": "pilot-email-20260521-113329",
+      "run_id": "pilot-email-20260521-141939",
       "current_stage": "excluded",
       "final_verdict": "EXCLUDED_BY_SCOPE",
       "generation_status": "pending",
@@ -76,13 +76,13 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:34:01.141252+00:00",
-      "last_updated": "2026-05-21T06:34:01.141257+00:00"
+      "created_at": "2026-05-21T09:20:11.254032+00:00",
+      "last_updated": "2026-05-21T09:20:11.254037+00:00"
     },
     {
       "scenario_id": "email-converter",
       "family": "email",
-      "run_id": "pilot-email-20260521-113329",
+      "run_id": "pilot-email-20260521-141939",
       "current_stage": "reviewer_attempted",
       "final_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
       "generation_status": "passed",
@@ -108,8 +108,8 @@
       "prior_run_result": null,
       "regression_detected": false,
       "regression_reason": null,
-      "created_at": "2026-05-21T06:34:01.144020+00:00",
-      "last_updated": "2026-05-21T06:34:54.456232+00:00"
+      "created_at": "2026-05-21T09:20:11.256603+00:00",
+      "last_updated": "2026-05-21T09:21:06.857044+00:00"
     }
   ]
 }

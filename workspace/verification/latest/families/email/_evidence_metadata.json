@@ -1,9 +1,9 @@
 {
   "scope": "family",
   "family": "email",
-  "run_id": "pilot-email-20260521-113329",
-  "promoted_at": "2026-05-21T06:34:54.501901+00:00",
-  "source_run_path": "workspace\\runs\\pilot-email-20260521-113329\\evidence\\latest",
+  "run_id": "pilot-email-20260521-141939",
+  "promoted_at": "2026-05-21T09:21:06.930583+00:00",
+  "source_run_path": "workspace\\runs\\pilot-email-20260521-141939\\evidence\\latest",
   "files": [
     "aggregate-gate-results.json",
     "api-consumer-relationships.json",

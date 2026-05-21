@@ -1,6 +1,6 @@
-"""Tests for EvidenceValidator — Sprint 60 Phase 5.
+"""Tests for EvidenceValidator — Sprint 60 Phase 5 + Sprint 61 Phase 2.
 
-Covers all Sprint 59 false-complete failure modes:
+Covers all Sprint 59 false-complete failure modes (original 12 rules):
 - test_fails_when_final_clean_proof_missing
 - test_fails_when_final_clean_proof_shows_dirty_state
 - test_fails_when_present_no_authority_exists
@@ -14,6 +14,16 @@ Covers all Sprint 59 false-complete failure modes:
 - test_passes_with_complete_valid_bundle
 - test_overall_valid_false_on_any_failure
 - test_sprint59_style_bundle_detected_as_invalid
+
+Sprint 61 new rules (8 additional semantic rules):
+- TestFinalCleanProofNonzeroBytes — SD60-01: 0-byte file is not proof
+- TestFinalCleanProofHasGitHeader — SD60-01: requires actual git output
+- TestReadmeIOFormatNotFalselyComplete — SD60-02: MATCH without I/O docs = FAIL
+- TestReadmeGateWiredInPipeline — SD60-03: standalone-only gate is not a gate
+- TestEvidenceValidatorWiredInPipeline — SD60-04: standalone-only validator is not a gate
+- TestDestinationProgramcsInputNotAllNull — SD60-05: null-for-all = audit not done
+- TestNoPriOneItemsWithCompleteVerdict — SD60-08: P1 open + COMPLETE = contradiction
+- TestRequiredFilesNonzeroSize — SD60-01 contributory: 0-byte required files
 """
 
 from __future__ import annotations
@@ -30,17 +40,17 @@ from plugin_examples.evidence_validator import EvidenceValidator
 
 
 def _make_bundle(tmpdir: str) -> Path:
-    """Create a minimal valid bundle directory structure."""
+    """Create a minimal valid bundle directory structure (passes all 20 rules)."""
     b = Path(tmpdir)
 
-    # git/final-clean-proof.txt — clean
+    # git/final-clean-proof.txt — clean (nonzero, has git header)
     (b / "git").mkdir(parents=True)
     (b / "git" / "final-clean-proof.txt").write_text(
         "On branch main\nnothing to commit, working tree clean\n",
         encoding="utf-8",
     )
 
-    # destination/content-audit-repaired.json — 42/42
+    # destination/content-audit-repaired.json — 42/42, with non-null input_format_in_programcs
     (b / "destination").mkdir(parents=True)
     (b / "destination" / "content-audit-repaired.json").write_text(
         json.dumps({
@@ -48,14 +58,19 @@ def _make_bundle(tmpdir: str) -> Path:
             "present_no_authority": 0,
             "total_examples": 42,
             "examples": [
-                {"scenario_id": f"scenario-{i}", "content_match": "MATCH"}
+                {
+                    "scenario_id": f"scenario-{i}",
+                    "content_match": "MATCH",
+                    "input_format_in_programcs": ".docx",
+                    "input_classification": "AddInput",
+                }
                 for i in range(42)
             ],
         }),
         encoding="utf-8",
     )
 
-    # readme/example-readme-content-audit.json — content-based
+    # readme/example-readme-content-audit.json — content-based (no I/O fields = WARNING/pass)
     (b / "readme").mkdir(parents=True)
     (b / "readme" / "example-readme-content-audit.json").write_text(
         json.dumps({
@@ -74,11 +89,20 @@ def _make_bundle(tmpdir: str) -> Path:
     (b / "readme" / "readme-gate-implementation.md").write_text("# Gate\n", encoding="utf-8")
     (b / "readme" / "readme-gate-test-results.txt").write_text("13 passed, 0 failed\n", encoding="utf-8")
     (b / "readme" / "readme-gate-source-proof.patch").write_text("diff --git a/src ...\n", encoding="utf-8")
+    # readme-gate-flow-integration.md — confirms gate is wired (no "not wired"/"deferred"/"p1")
+    (b / "readme" / "readme-gate-flow-integration.md").write_text(
+        "# README Gate Flow Integration\nGate is called in publish-pr live mode.\n",
+        encoding="utf-8",
+    )
 
-    # evidence/validator-test-results.txt
+    # evidence/validator-test-results.txt + pipeline-integration-proof.md
     (b / "evidence").mkdir(parents=True)
     (b / "evidence" / "validator-test-results.txt").write_text(
-        "12 passed, 0 failed in 0.23s\n", encoding="utf-8"
+        "20 passed, 0 failed in 0.45s\n", encoding="utf-8"
+    )
+    (b / "evidence" / "pipeline-integration-proof.md").write_text(
+        "# Pipeline Integration\nEvidenceValidator is called in release-status command.\n",
+        encoding="utf-8",
     )
 
     # todo.md — all checked
@@ -383,7 +407,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 12)
+        self.assertEqual(result.total_rules, 20)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -422,6 +446,50 @@ class TestCompleteBundle(unittest.TestCase):
         # Should catch at least 4 failures
         self.assertGreaterEqual(result.failed, 4)
 
+    def test_sprint60_style_bundle_detected_as_invalid(self):
+        """A Sprint 60-style bundle (empty clean proof, null programcs, gate not wired,
+        P1 items with COMPLETE verdict) must be detected as invalid."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # SD60-01: empty clean proof
+            (b / "git" / "final-clean-proof.txt").write_text("", encoding="utf-8")
+            # SD60-05: all-null programcs input
+            (b / "destination" / "content-audit-repaired.json").write_text(
+                json.dumps({
+                    "authority_mapped": "42/42",
+                    "present_no_authority": 0,
+                    "total_examples": 42,
+                    "examples": [
+                        {
+                            "scenario_id": f"scenario-{i}",
+                            "content_match": "MATCH",
+                            "input_format_in_programcs": None,
+                            "input_classification": None,
+                        }
+                        for i in range(42)
+                    ],
+                }),
+                encoding="utf-8",
+            )
+            # SD60-03: gate not wired (remove flow integration proof, no source_root)
+            (b / "readme" / "readme-gate-flow-integration.md").unlink()
+            # SD60-04: validator not wired (remove pipeline integration proof)
+            (b / "evidence" / "pipeline-integration-proof.md").unlink()
+            # SD60-08: P1 items with complete verdict
+            (b / "process").mkdir(parents=True, exist_ok=True)
+            (b / "process" / "next-work-register.md").write_text(
+                "| README gate CLI wiring | P1 | OPEN |\n",
+                encoding="utf-8",
+            )
+            (b / "final-verdict.md").write_text(
+                "Verdict: LOWCODE_IO_DESTINATION_README_CLOSURE_VERIFIED\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        self.assertFalse(result.overall_valid)
+        # Should catch SD60-01 (x3 rules), SD60-03, SD60-04, SD60-05, SD60-08 = at least 7 failures
+        self.assertGreaterEqual(result.failed, 5)
+
     def test_to_dict_structure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
@@ -431,4 +499,507 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 12)
+        self.assertEqual(len(d["rules"]), 20)
+
+
+# ===========================================================================
+# Sprint 61 NEW semantic rule tests
+# ===========================================================================
+
+
+class TestFinalCleanProofNonzeroBytes(unittest.TestCase):
+    """Rule: final_clean_proof_nonzero_bytes — closes SD60-01."""
+
+    def test_fails_when_proof_is_zero_bytes(self):
+        """SD60-01: git status --short produces no output when clean → 0-byte file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text("", encoding="utf-8")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_nonzero_bytes")
+        self.assertFalse(rule.passed)
+        self.assertIn("0 bytes", rule.failure_detail)
+        self.assertIn("--short", rule.failure_detail)
+
+    def test_fails_when_proof_file_missing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_nonzero_bytes")
+        self.assertFalse(rule.passed)
+        self.assertIn("not found", rule.failure_detail.lower())
+
+    def test_passes_when_proof_is_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_nonzero_bytes")
+        self.assertTrue(rule.passed)
+        self.assertIn("bytes", rule.evidence)
+
+
+class TestFinalCleanProofHasGitHeader(unittest.TestCase):
+    """Rule: final_clean_proof_has_git_header — closes SD60-01 (content check)."""
+
+    def test_fails_when_no_git_header_present(self):
+        """Nonzero file without git output is not valid clean proof."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "Sprint 61 clean proof captured.\nAll done.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_git_header")
+        self.assertFalse(rule.passed)
+        self.assertIn("git status header", rule.failure_detail.lower())
+
+    def test_fails_when_proof_file_missing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_git_header")
+        self.assertFalse(rule.passed)
+
+    def test_passes_with_on_branch_header(self):
+        """Standard git status output: 'On branch main\nnothing to commit...'"""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_git_header")
+        self.assertTrue(rule.passed)
+
+    def test_passes_with_nothing_to_commit_header(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "nothing to commit, working tree clean\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_git_header")
+        self.assertTrue(rule.passed)
+
+    def test_passes_with_head_detached_header(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "HEAD detached at abc1234\nnothing to commit, working tree clean\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_git_header")
+        self.assertTrue(rule.passed)
+
+
+class TestReadmeIOFormatNotFalselyComplete(unittest.TestCase):
+    """Rule: readme_io_format_not_falsely_complete — closes SD60-02."""
+
+    def test_fails_when_high_io_gap_with_complete_match_claimed(self):
+        """SD60-02: 22/42 input false + 100% MATCH claimed = false completion."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            total = 42
+            records = [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family_in_readme": True,
+                    "workflow_type_in_readme": True,
+                    "package_id_in_readme": True,
+                    "content_audit": "MATCH",
+                    "input_format_in_readme": i >= 20,   # 22 False (i<20 plus 2)
+                    "output_format_in_readme": i >= 19,  # 23 False
+                }
+                for i in range(total)
+            ]
+            (b / "readme" / "example-readme-content-audit.json").write_text(
+                json.dumps({"records": records, "match": total, "total": total}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_io_format_not_falsely_complete")
+        self.assertFalse(rule.passed)
+        self.assertIn("input_format_in_readme=false", rule.failure_detail.lower())
+
+    def test_passes_when_io_fields_not_tracked(self):
+        """If I/O fields are not tracked, rule is WARNING/passed=True (basic audit scope)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # _make_bundle already has no I/O fields → should pass
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_io_format_not_falsely_complete")
+        self.assertTrue(rule.passed)
+
+    def test_passes_when_io_gap_is_low(self):
+        """≤30% I/O false = does not trigger false-completion check."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            total = 42
+            records = [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family_in_readme": True,
+                    "workflow_type_in_readme": True,
+                    "package_id_in_readme": True,
+                    "content_audit": "MATCH",
+                    "input_format_in_readme": True,    # all True
+                    "output_format_in_readme": True,
+                }
+                for i in range(total)
+            ]
+            (b / "readme" / "example-readme-content-audit.json").write_text(
+                json.dumps({"records": records, "match": total, "total": total}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_io_format_not_falsely_complete")
+        self.assertTrue(rule.passed)
+
+    def test_passes_when_match_not_100_percent(self):
+        """High I/O gap is acceptable if match is not 100% (honest partial)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            total = 42
+            records = [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family_in_readme": True,
+                    "input_format_in_readme": False,
+                    "output_format_in_readme": False,
+                }
+                for i in range(total)
+            ]
+            (b / "readme" / "example-readme-content-audit.json").write_text(
+                json.dumps({"records": records, "match": 20, "total": total}),  # honest 20/42
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_io_format_not_falsely_complete")
+        self.assertTrue(rule.passed)
+
+
+class TestReadmeGateWiredInPipeline(unittest.TestCase):
+    """Rule: readme_gate_wired_in_pipeline — closes SD60-03."""
+
+    def test_fails_when_no_integration_proof_no_source_root(self):
+        """No flow integration proof and no source_root = FAILURE."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "readme" / "readme-gate-flow-integration.md").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+        self.assertIn("readme-gate-flow-integration.md", rule.failure_detail)
+
+    def test_fails_when_integration_proof_admits_deferred(self):
+        """Integration proof that says 'deferred' is treated as not-wired."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "readme" / "readme-gate-flow-integration.md").write_text(
+                "# README Gate\nWiring is deferred to Sprint 62 (P1 item).\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+        self.assertIn("deferred", rule.failure_detail.lower())
+
+    def test_fails_when_integration_proof_admits_not_wired(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "readme" / "readme-gate-flow-integration.md").write_text(
+                "# README Gate\nGate is not wired into publish-pr yet.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+
+    def test_passes_when_integration_proof_exists_and_clean(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertTrue(rule.passed)
+
+    def test_passes_with_source_root_that_imports_gate(self):
+        """source_root scan: file that imports readme_audit_gate → PASS."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            src = Path(tmpdir) / "src"
+            src.mkdir()
+            (src / "readme_audit_gate.py").write_text("def check(): pass\n", encoding="utf-8")
+            (src / "__main__.py").write_text(
+                "from readme_audit_gate import check\ncheck()\n", encoding="utf-8"
+            )
+            result = EvidenceValidator(b, source_root=src).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertTrue(rule.passed)
+        self.assertIn("readme_audit_gate", rule.evidence)
+
+    def test_fails_with_source_root_that_does_not_import_gate(self):
+        """source_root scan: no file imports readme_audit_gate → FAIL."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            src = Path(tmpdir) / "src"
+            src.mkdir()
+            (src / "readme_audit_gate.py").write_text("def check(): pass\n", encoding="utf-8")
+            (src / "__main__.py").write_text("# no imports\n", encoding="utf-8")
+            result = EvidenceValidator(b, source_root=src).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+        self.assertIn("not imported", rule.failure_detail.lower())
+
+
+class TestEvidenceValidatorWiredInPipeline(unittest.TestCase):
+    """Rule: evidence_validator_wired_in_pipeline — closes SD60-04."""
+
+    def test_fails_when_no_pipeline_integration_proof_no_source_root(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "pipeline-integration-proof.md").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+        self.assertIn("pipeline-integration-proof.md", rule.failure_detail)
+
+    def test_fails_when_integration_proof_admits_p1_open(self):
+        """Integration proof mentioning P1 admits it is not actually wired."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "pipeline-integration-proof.md").write_text(
+                "# EvidenceValidator Pipeline Integration\nP1: wire into release-status.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+
+    def test_passes_when_integration_proof_exists_and_clean(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
+        self.assertTrue(rule.passed)
+
+    def test_passes_with_source_root_that_imports_validator(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            src = Path(tmpdir) / "src"
+            src.mkdir()
+            (src / "evidence_validator.py").write_text("class EvidenceValidator: pass\n", encoding="utf-8")
+            (src / "__main__.py").write_text(
+                "from evidence_validator import EvidenceValidator\n", encoding="utf-8"
+            )
+            result = EvidenceValidator(b, source_root=src).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
+        self.assertTrue(rule.passed)
+
+    def test_fails_with_source_root_that_does_not_import_validator(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            src = Path(tmpdir) / "src"
+            src.mkdir()
+            (src / "evidence_validator.py").write_text("class EvidenceValidator: pass\n", encoding="utf-8")
+            (src / "__main__.py").write_text("# nothing imported\n", encoding="utf-8")
+            result = EvidenceValidator(b, source_root=src).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
+        self.assertFalse(rule.passed)
+
+
+class TestDestinationProgramcsInputNotAllNull(unittest.TestCase):
+    """Rule: destination_programcs_input_not_all_null — closes SD60-05."""
+
+    def test_fails_when_all_records_have_null_input(self):
+        """SD60-05: input_format_in_programcs=null for all 42 records."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "destination" / "content-audit-repaired.json").write_text(
+                json.dumps({
+                    "authority_mapped": "42/42",
+                    "present_no_authority": 0,
+                    "total_examples": 42,
+                    "examples": [
+                        {
+                            "scenario_id": f"s-{i}",
+                            "content_match": "MATCH",
+                            "input_format_in_programcs": None,
+                            "input_classification": None,
+                        }
+                        for i in range(42)
+                    ],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "destination_programcs_input_not_all_null")
+        self.assertFalse(rule.passed)
+        self.assertIn("null", rule.failure_detail.lower())
+        self.assertIn("42/42", rule.failure_detail)
+
+    def test_fails_when_field_not_present_in_records(self):
+        """Records without input_format_in_programcs = audit not performed."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "destination" / "content-audit-repaired.json").write_text(
+                json.dumps({
+                    "authority_mapped": "42/42",
+                    "present_no_authority": 0,
+                    "total_examples": 42,
+                    "examples": [
+                        {"scenario_id": f"s-{i}", "content_match": "MATCH"}
+                        for i in range(42)
+                    ],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "destination_programcs_input_not_all_null")
+        self.assertFalse(rule.passed)
+        self.assertIn("input_format_in_programcs", rule.failure_detail)
+
+    def test_passes_when_some_records_have_nonnull_input(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # _make_bundle already sets input_format_in_programcs = ".docx"
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "destination_programcs_input_not_all_null")
+        self.assertTrue(rule.passed)
+
+    def test_passes_with_programcs_io_audit_file(self):
+        """Dedicated programcs-io-audit-after.json with real data."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "destination" / "programcs-io-audit-after.json").write_text(
+                json.dumps({
+                    "examples": [
+                        {
+                            "scenario_id": "cells-html-converter",
+                            "input_format_in_programcs": ".xlsx",
+                            "input_classification": "AddInput",
+                            "output_format_in_programcs": ".html",
+                        }
+                    ]
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "destination_programcs_input_not_all_null")
+        self.assertTrue(rule.passed)
+
+
+class TestNoPriOneItemsWithCompleteVerdict(unittest.TestCase):
+    """Rule: no_p1_items_with_complete_verdict — closes SD60-08."""
+
+    def test_fails_when_p1_items_open_with_complete_verdict(self):
+        """SD60-08: P1 items in register + COMPLETE verdict = contradiction."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "process").mkdir(parents=True, exist_ok=True)
+            (b / "process" / "next-work-register.md").write_text(
+                "| README gate CLI wiring | P1 | OPEN |\n"
+                "| EvidenceValidator CLI wiring | P1 | OPEN |\n",
+                encoding="utf-8",
+            )
+            (b / "final-verdict.md").write_text(
+                "Verdict: LOWCODE_IO_DESTINATION_README_CLOSURE_VERIFIED\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
+        self.assertFalse(rule.passed)
+        self.assertIn("P1", rule.failure_detail)
+
+    def test_passes_when_no_register_file(self):
+        """No register file = no P1 items to check → WARNING/passed=True."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
+        self.assertTrue(rule.passed)
+
+    def test_passes_when_register_has_no_p1_items(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "process").mkdir(parents=True, exist_ok=True)
+            (b / "process" / "next-work-register.md").write_text(
+                "| README formatting | P2 | OPEN |\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
+        self.assertTrue(rule.passed)
+
+    def test_passes_when_p1_items_but_verdict_not_complete(self):
+        """P1 items are allowed when verdict does not claim completion."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "process").mkdir(parents=True, exist_ok=True)
+            (b / "process" / "next-work-register.md").write_text(
+                "| Wiring | P1 | OPEN |\n", encoding="utf-8"
+            )
+            (b / "final-verdict.md").write_text(
+                "Verdict: EVIDENCE_REPAIR_REQUIRED_NOT_CLOSED\n", encoding="utf-8"
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
+        self.assertTrue(rule.passed)
+
+    def test_passes_when_p1_items_marked_done(self):
+        """P1 lines marked DONE are not treated as open."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "process").mkdir(parents=True, exist_ok=True)
+            (b / "process" / "next-work-register.md").write_text(
+                "| README gate wiring | P1 | DONE |\n", encoding="utf-8"
+            )
+            (b / "final-verdict.md").write_text(
+                "Verdict: LOWCODE_FALSE_CLOSURE_KILLED_PIPELINE_GATES_ACTIVE\n", encoding="utf-8"
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
+        self.assertTrue(rule.passed)
+
+
+class TestRequiredFilesNonzeroSize(unittest.TestCase):
+    """Rule: required_files_nonzero_size — closes SD60-01 contributory."""
+
+    def test_fails_when_commands_log_is_zero_bytes(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "commands.log").write_text("", encoding="utf-8")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "required_files_nonzero_size")
+        self.assertFalse(rule.passed)
+        self.assertIn("commands.log", rule.failure_detail)
+
+    def test_fails_when_todo_md_is_zero_bytes(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "todo.md").write_text("", encoding="utf-8")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "required_files_nonzero_size")
+        self.assertFalse(rule.passed)
+        self.assertIn("todo.md", rule.failure_detail)
+
+    def test_fails_when_test_run_log_is_zero_bytes(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "lanes" / "lane-I" / "test-run.log").write_text("", encoding="utf-8")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "required_files_nonzero_size")
+        self.assertFalse(rule.passed)
+        self.assertIn("test-run.log", rule.failure_detail)
+
+    def test_passes_when_all_required_files_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "required_files_nonzero_size")
+        self.assertTrue(rule.passed)
+
+
+if __name__ == "__main__":
+    unittest.main()

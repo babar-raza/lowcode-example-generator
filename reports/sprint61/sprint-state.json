@@ -1,0 +1,50 @@
+{
+  "sprint_id": "sprint61-sprint60-false-closure-kill-switch-20260521",
+  "sprint": "61",
+  "date": "2026-05-21",
+  "verdict": "LOWCODE_FALSE_CLOSURE_KILLED_PIPELINE_GATES_ACTIVE",
+  "summary": "Sprint 61 kills Sprint 60 false closure. EvidenceValidator hardened to 20 rules (8 new semantic rules). EvidenceValidator wired into release-status --validate-bundle. README audit gate wired into publish-pr live mode. All 8 SD60 defects closed by evidence.",
+  "defects_closed": [
+    "SD60-01: final-clean-proof.txt was 0 bytes — now requires nonzero with branch header",
+    "SD60-02: README MATCH falsely claimed from API symbol names — strict prose-context rule added",
+    "SD60-03: readme_audit_gate.py never imported by pipeline — now wired into publish-pr live mode",
+    "SD60-04: EvidenceValidator never imported by pipeline — now wired into release-status --validate-bundle",
+    "SD60-05: input_format_in_programcs=null for all 42 — Program.cs parsing implemented (37/42 BOTH_KNOWN)",
+    "SD60-06: required files nonzero size rule added to EvidenceValidator",
+    "SD60-07: Sprint 60 bundle validated as INVALID (13 PASS, 7 FAIL) — proof in sprint60-bundle-validation-result.json",
+    "SD60-08: P1 open items allowed with COMPLETE verdict — new rule blocks this"
+  ],
+  "key_metrics": {
+    "tests_passing": 2945,
+    "tests_skipped": 3,
+    "tests_failed": 0,
+    "evidence_validator_rules": 20,
+    "sprint60_bundle_rules_failed": 7,
+    "readme_io_doc_before": "0/42",
+    "readme_io_doc_after_target": "38/42",
+    "programcs_io_both_known": "37/42",
+    "package_authority_dual_source": "41/42"
+  },
+  "phases_complete": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "phases_pending": [],
+  "source_changes": [
+    "src/plugin_examples/evidence_validator.py — 12→20 rules",
+    "src/plugin_examples/__main__.py — --validate-bundle flag + check_readme_audit_gate wiring",
+    "tests/unit/test_evidence_validator.py — 27→64 tests",
+    "tests/unit/test_pipeline_evidence_gate.py — 5 new tests",
+    "tests/unit/test_publish_pr_readme_gate.py — 14 new tests"
+  ],
+  "publication_status": {
+    "cells":   "PUBLISHED_CURRENT (26.5.1)",
+    "words":   "PUBLISHED_VERSION_DRIFT (26.4.0, drift from 26.5.0)",
+    "pdf":     "PUBLISHED_CURRENT (26.5.0)",
+    "diagram": "PUBLISHED_VERSION_DRIFT (26.4.0, drift from 26.5.0)",
+    "email":   "PUBLISHED_CURRENT (26.4.0)",
+    "slides":  "PUBLISHED_CURRENT (26.5.0)"
+  },
+  "deferred_to_sprint62": [
+    "README I/O format documentation push to target repos (41 corrections ready)",
+    "Version drift fix for words and diagram families",
+    "Manual README authoring for 4 special cases"
+  ]
+}

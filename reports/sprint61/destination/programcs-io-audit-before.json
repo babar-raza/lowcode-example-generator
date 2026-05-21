@@ -1,0 +1,350 @@
+{
+  "audit_type": "programcs_io_audit_before",
+  "sprint": "sprint61",
+  "defect": "SD60-05",
+  "description": "Sprint 60 state: input_format_in_programcs=null for all 42 examples (Program.cs never parsed)",
+  "total": 42,
+  "null_input_count": 42,
+  "null_output_count": 42,
+  "io_classification_summary": {
+    "NULL_NOT_PARSED": 42
+  },
+  "records": [
+    {
+      "scenario_id": "cells-html-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "email-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-html",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-converter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-merger",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "input_format_in_programcs": null,
+      "output_format_in_programcs": null,
+      "programcs_found": true,
+      "io_classification": "NULL_NOT_PARSED",
+      "note": "Sprint 60 defect SD60-05: Program.cs never parsed"
+    }
+  ]
+}

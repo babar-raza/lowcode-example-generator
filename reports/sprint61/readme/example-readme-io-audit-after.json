@@ -1,0 +1,395 @@
+{
+  "audit_type": "readme_io_documentation_after",
+  "sprint": "sprint61",
+  "policy": "After applying corrections: I/O formats derived from Program.cs and contracts",
+  "total": 42,
+  "io_doc_match": 38,
+  "input_doc_missing": 4,
+  "output_doc_missing": 1,
+  "both_doc_missing": 1,
+  "status_summary": {
+    "IO_DOC_MATCH": 38,
+    "INPUT_DOC_MISSING": 3,
+    "BOTH_DOC_MISSING": 1
+  },
+  "records": [
+    {
+      "scenario_id": "cells-html-converter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".html",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".png",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".json",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".csv",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".xlsx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".xlsx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "input_format_from_programcs": ".xlsx",
+      "output_format_from_contract": ".xlsx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "input_format_from_programcs": ".csv",
+      "output_format_from_contract": ".txt",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-comparer",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-converter",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "input_format_from_programcs": null,
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": false,
+      "output_format_in_readme": true,
+      "io_doc_status": "INPUT_DOC_MISSING",
+      "correction_required": true
+    },
+    {
+      "scenario_id": "words-merger",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-replacer",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "input_format_from_programcs": null,
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": false,
+      "output_format_in_readme": true,
+      "io_doc_status": "INPUT_DOC_MISSING",
+      "correction_required": true
+    },
+    {
+      "scenario_id": "words-splitter",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "input_format_from_programcs": ".docx",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".docx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".json",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-html",
+      "input_format_from_programcs": ".html",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".png",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".jpg",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "input_format_from_programcs": null,
+      "output_format_from_contract": null,
+      "input_format_in_readme": false,
+      "output_format_in_readme": false,
+      "io_doc_status": "BOTH_DOC_MISSING",
+      "correction_required": true
+    },
+    {
+      "scenario_id": "pdf-png",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".png",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-security",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "input_format_from_programcs": null,
+      "output_format_from_contract": "stdout",
+      "input_format_in_readme": false,
+      "output_format_in_readme": true,
+      "io_doc_status": "INPUT_DOC_MISSING",
+      "correction_required": true
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".tiff",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "input_format_from_programcs": ".pdf",
+      "output_format_from_contract": ".xlsx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "input_format_from_programcs": ".vsdx",
+      "output_format_from_contract": ".vdx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "input_format_from_programcs": ".vsdx",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "email-converter",
+      "input_format_from_programcs": ".eml",
+      "output_format_from_contract": "directory",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "slides-compress",
+      "input_format_from_programcs": ".pptx",
+      "output_format_from_contract": ".pptx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "slides-convert",
+      "input_format_from_programcs": ".pptx",
+      "output_format_from_contract": ".pdf",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    },
+    {
+      "scenario_id": "slides-merger",
+      "input_format_from_programcs": ".pptx",
+      "output_format_from_contract": ".pptx",
+      "input_format_in_readme": true,
+      "output_format_in_readme": true,
+      "io_doc_status": "IO_DOC_MATCH",
+      "correction_required": false
+    }
+  ]
+}

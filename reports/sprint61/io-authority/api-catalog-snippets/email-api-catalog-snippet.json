@@ -1,0 +1,17 @@
+{
+  "family": "email",
+  "package_id": "Aspose.Email",
+  "total_types": 1,
+  "types": [
+    {
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Email.LowCode.Converter",
+      "canonical_input_formats": [
+        ".eml"
+      ],
+      "canonical_output_format": "directory",
+      "variant_count": 6,
+      "api_verified": false
+    }
+  ]
+}

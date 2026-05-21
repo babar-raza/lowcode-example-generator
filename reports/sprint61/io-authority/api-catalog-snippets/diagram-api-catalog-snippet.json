@@ -1,0 +1,27 @@
+{
+  "family": "diagram",
+  "package_id": "Aspose.Diagram",
+  "total_types": 2,
+  "types": [
+    {
+      "type_name": "DiagramConverter",
+      "full_type_name": "Aspose.Diagram.LowCode.DiagramConverter",
+      "canonical_input_formats": [
+        ".vsdx"
+      ],
+      "canonical_output_format": ".vdx",
+      "variant_count": 5,
+      "api_verified": false
+    },
+    {
+      "type_name": "PdfConverter",
+      "full_type_name": "Aspose.Diagram.LowCode.PdfConverter",
+      "canonical_input_formats": [
+        ".vsdx"
+      ],
+      "canonical_output_format": ".pdf",
+      "variant_count": 1,
+      "api_verified": false
+    }
+  ]
+}

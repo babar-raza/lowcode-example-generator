@@ -1,0 +1,21 @@
+{
+  "sprint": "sprint61",
+  "audit_type": "readme_update_package_summary",
+  "total_examples": 42,
+  "io_doc_match_before": 0,
+  "io_doc_match_after_correction": 38,
+  "input_doc_missing_after": 3,
+  "both_doc_missing_after": 1,
+  "correction_plan_file": "../readme/readme-io-correction-plan.json",
+  "corrections_with_known_io": 41,
+  "publication_gate": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL=APPROVE_README_PUSH",
+  "status": "AUDIT_COMPLETE_PUSH_DEFERRED_TO_SPRINT62",
+  "families_covered": [
+    "cells",
+    "diagram",
+    "email",
+    "pdf",
+    "slides",
+    "words"
+  ]
+}

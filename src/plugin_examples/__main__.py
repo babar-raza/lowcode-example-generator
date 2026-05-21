@@ -305,6 +305,13 @@ def main() -> int:
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
+    rs_parser.add_argument(
+        "--validate-bundle", metavar="BUNDLE_DIR", default=None,
+        help=(
+            "Run EvidenceValidator on a sprint bundle directory after computing release status. "
+            "Prints a validation summary; exits 1 if the bundle fails any FAILURE-severity rule."
+        ),
+    )
 
     _add_metrics_flags(rs_parser)
 
@@ -1061,6 +1068,24 @@ def main() -> int:
                 print(f"ERROR: No publish target configured for family '{family}'")
                 return 1
 
+            # README audit gate — must have a content-based, passing audit before live publish
+            from plugin_examples.publisher.readme_audit_gate import (
+                check_readme_audit_gate as _check_readme_gate,
+                README_AUDIT_ENV_VAR as _README_ENV,
+                README_AUDIT_EXPECTED_VALUE as _README_EXPECTED,
+            )
+            _readme_push_approval = os.environ.get(_README_ENV, getattr(args, "approval_token", None))
+            _gate_result = _check_readme_gate(
+                family=family,
+                verification_dir=verification_dir,
+                run_id=run_id,
+                readme_push_approval=_readme_push_approval,
+            )
+            if not _gate_result.get("gate_passed"):
+                print(f"ERROR: README audit gate blocked live publish: {_gate_result.get('blocked_reason')}")
+                print(f"  Set {_README_ENV}={_README_EXPECTED} to override if audit is valid")
+                return 1
+
             from plugin_examples.publisher.github_pr_publisher import (
                 create_github_pr,
                 PublishingError as _GHError,
@@ -1446,6 +1471,23 @@ def main() -> int:
         print(f"  all_merged: {status['all_merged']}")
         print(f"  all_post_merge_validated: {status['all_post_merge_validated']}")
         print(f"Report: {report_path}")
+
+        # Optional: validate sprint evidence bundle
+        if getattr(args, "validate_bundle", None):
+            from plugin_examples.evidence_validator import EvidenceValidator as _EV
+            _bundle_dir = _Path(args.validate_bundle)
+            _source_root = _Path(__file__).resolve().parent
+            print(f"\nValidating bundle: {_bundle_dir}")
+            _ev_result = _EV(bundle_dir=_bundle_dir, source_root=_source_root).validate()
+            print(f"  Rules: {_ev_result.passed} passed, {_ev_result.failed} failed / {_ev_result.total_rules} total")
+            for _r in _ev_result.rule_results:
+                if not _r.passed:
+                    print(f"  [FAIL] {_r.rule_id}: {_r.failure_detail[:100]}")
+            if not _ev_result.overall_valid:
+                print(f"  Bundle INVALID — {_ev_result.failed} rule(s) failed")
+                return 1
+            print(f"  Bundle VALID — all {_ev_result.total_rules} rules pass")
+
         _finalize_metrics_session(
             msession,
             items_discovered=len(families),

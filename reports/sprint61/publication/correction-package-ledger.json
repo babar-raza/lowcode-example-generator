@@ -1,0 +1,652 @@
+{
+  "sprint": "sprint61",
+  "audit_type": "correction_package_ledger",
+  "total": 42,
+  "readme_corrections_needed": 41,
+  "ready_to_push": 30,
+  "blocked": 42,
+  "entries": [
+    {
+      "scenario_id": "cells-html-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.html` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.png` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.json` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.csv` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.xlsx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.xlsx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.xlsx` file\n**Output:** `.xlsx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "family": "cells",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.1",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.csv` file\n**Output:** `.txt` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-converter",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Output:** `.docx` file\n",
+      "programcs_io_known": false,
+      "manual_classification_needed": true,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "input_format_unknown: Input uses data source (no input.EXT literal in Program.cs)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-replacer",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Output:** `.docx` file\n",
+      "programcs_io_known": false,
+      "manual_classification_needed": true,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "input_format_unknown: Input uses data source + template (no input.EXT literal)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-splitter",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "family": "words",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.docx` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family words is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.docx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.json` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-html",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.html` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.png` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.jpg` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": false,
+      "readme_correction_text": null,
+      "programcs_io_known": false,
+      "manual_classification_needed": true,
+      "correction_blockers": [
+        "no_local_package: No local package \u2014 deferred to next sprint"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "pdf-png",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.png` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-security",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Output:** Text extracted to stdout\n",
+      "programcs_io_known": false,
+      "manual_classification_needed": true,
+      "correction_blockers": [
+        "no_local_package: Output is stdout (no output file) \u2014 manual README needed",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.tiff` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "family": "pdf",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pdf` file\n**Output:** `.xlsx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.vsdx` file\n**Output:** `.vdx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family diagram is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "publication_status": "PUBLISHED_VERSION_DRIFT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.vsdx` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "version_drift: family diagram is at 26.4.0 (not latest NuGet)",
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": false
+    },
+    {
+      "scenario_id": "email-converter",
+      "family": "email",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.4.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.eml` file\n**Output:** Directory of output files\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "slides-compress",
+      "family": "slides",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pptx` file\n**Output:** `.pptx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "slides-convert",
+      "family": "slides",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pptx` file\n**Output:** `.pdf` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    },
+    {
+      "scenario_id": "slides-merger",
+      "family": "slides",
+      "publication_status": "PUBLISHED_CURRENT",
+      "published_version": "26.5.0",
+      "readme_io_correction_needed": true,
+      "readme_correction_text": "## I/O Formats\n\n**Input:** `.pptx` file\n**Output:** `.pptx` file\n",
+      "programcs_io_known": true,
+      "manual_classification_needed": false,
+      "correction_blockers": [
+        "readme_update_required: I/O section must be added",
+        "requires_APPROVE_README_PUSH: live push needs approval gate"
+      ],
+      "correction_ready_to_push": true
+    }
+  ]
+}

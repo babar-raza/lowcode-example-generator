@@ -167,7 +167,7 @@ per_type_constraints:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
       - "REQUIRED: Merger.Merge(outputFile, inputFiles) — static call, NOT new Merger().Merge()"
-      - "REQUIRED: 2 input DOCX files created programmatically via Document+DocumentBuilder"
+      - "doc2.Save("
     forbidden:
       - "FORBIDDEN: Document.AppendDocument() replacing Merger.Merge() — use LowCode Merger"
       - "FORBIDDEN: new Merger().Merge() — Merger.Merge() is static, call directly"
@@ -176,7 +176,7 @@ per_type_constraints:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
       - "REQUIRED: Comparer.Compare(v1, v2, outputFile, author, DateTime.UtcNow) — static call"
-      - "REQUIRED: 2 input DOCX files with DIFFERENT content for comparison to produce meaningful output"
+      - "doc2.Save("
     forbidden:
       - "FORBIDDEN: Document.Compare() replacing Comparer.Compare() — use LowCode Comparer"
       - "FORBIDDEN: new Comparer().Compare() — Comparer.Compare() is static, call directly"

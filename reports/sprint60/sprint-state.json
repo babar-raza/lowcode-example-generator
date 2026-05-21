@@ -1,0 +1,166 @@
+{
+  "sprint_id": "sprint60-sprint59-false-complete-repair-destination-readme-gate-20260521",
+  "created_at": "2026-05-21T21:30:00Z",
+  "closed_at": "2026-05-21T23:00:00Z",
+  "phase": "CLOSED",
+  "overall_status": "COMPLETE",
+  "lanes": {
+    "phase0_sprint59_audit": {
+      "status": "COMPLETE",
+      "description": "Sprint 59 evidence audit — 7 defects classified SD59-01 through SD59-07",
+      "files_produced": [
+        "reports/sprint60/00-sprint59-evidence-audit.md",
+        "reports/sprint60/01-sprint59-claim-vs-proof-matrix.md",
+        "reports/sprint60/02-corrected-sprint59-state.md"
+      ]
+    },
+    "phase1_git_reconciliation": {
+      "status": "COMPLETE",
+      "description": "Dirty state classified; .gitignore updated (b0444ef); source files committed (32c5b2b, ccd3b69)",
+      "commits": ["b0444ef", "32c5b2b", "ccd3b69"],
+      "files_produced": [
+        "reports/sprint60/git/dirty-state-before.txt",
+        "reports/sprint60/git/dirty-file-classification.md",
+        "reports/sprint60/git/staging-plan.md",
+        "reports/sprint60/git/dirty-state-after.txt"
+      ]
+    },
+    "phase2_destination_gaps": {
+      "status": "COMPLETE",
+      "description": "4 PRESENT_NO_AUTHORITY/PARTIAL gaps closed via DestinationIdMapper",
+      "gaps_closed": 4,
+      "present_no_authority_after": 0,
+      "authority_match_rate": "42/42",
+      "defects_closed": ["SD59-02"],
+      "files_produced": [
+        "reports/sprint60/destination/gap-closure.md",
+        "reports/sprint60/destination/scenario-id-to-repo-path-map.json",
+        "reports/sprint60/destination/content-audit-repaired.json",
+        "reports/sprint60/destination/programcs-vs-authority-repaired.json",
+        "reports/sprint60/destination/readme-vs-authority-repaired.json",
+        "src/plugin_examples/publisher/destination_id_mapper.py",
+        "tests/unit/test_destination_id_mapper.py"
+      ]
+    },
+    "phase3_readme_content_audit": {
+      "status": "COMPLETE",
+      "description": "Content-based README audit 42/42 examples + 6/6 root READMEs; version policy documented",
+      "example_readmes_audited": 42,
+      "root_readmes_audited": 6,
+      "defects_closed": ["SD59-03", "SD59-05"],
+      "files_produced": [
+        "reports/sprint60/readme/example-readme-content-audit.json",
+        "reports/sprint60/readme/root-readme-content-audit.json",
+        "reports/sprint60/readme/readme-validator-policy.md",
+        "reports/sprint60/readme/readme-correction-plan.md"
+      ]
+    },
+    "phase4_readme_gate": {
+      "status": "COMPLETE",
+      "description": "README audit gate implemented (readme_audit_gate.py) + 13 tests passing",
+      "tests_passed": 13,
+      "source_diff_lines": 417,
+      "defects_closed": ["SD59-04"],
+      "files_produced": [
+        "src/plugin_examples/publisher/readme_audit_gate.py",
+        "tests/unit/test_readme_audit_gate.py",
+        "reports/sprint60/readme/readme-gate-implementation.md",
+        "reports/sprint60/readme/readme-gate-test-results.txt",
+        "reports/sprint60/readme/readme-gate-source-proof.patch"
+      ]
+    },
+    "phase5_evidence_validator": {
+      "status": "COMPLETE",
+      "description": "EvidenceValidator with 12 rules + 27 tests; catches all Sprint 59 false-complete cases",
+      "rules_implemented": 12,
+      "tests_passed": 27,
+      "source_diff_lines": 1030,
+      "defects_closed": ["SD59-07"],
+      "files_produced": [
+        "src/plugin_examples/evidence_validator.py",
+        "tests/unit/test_evidence_validator.py",
+        "reports/sprint60/evidence/validator-gap-analysis.md",
+        "reports/sprint60/evidence/validator-hardening-source-proof.patch",
+        "reports/sprint60/evidence/validator-test-results.txt"
+      ]
+    },
+    "phase6_package_authority": {
+      "status": "COMPLETE",
+      "description": "Format authority 42/42 confirmed (inherited Sprint 59); destination ID authority 42/42 via DestinationIdMapper",
+      "files_produced": [
+        "reports/sprint60/io-authority/package-authority-depth-matrix.json",
+        "reports/sprint60/io-authority/package-authority-depth-summary.md"
+      ]
+    },
+    "phase7_branch_autodelete": {
+      "status": "COMPLETE",
+      "description": "Branch auto-delete integration confirmed: 7/7 TestBranchAutoDelete tests pass, no regression",
+      "tests_passed": 7,
+      "files_produced": [
+        "reports/sprint60/branch-delete/integration-proof.md",
+        "reports/sprint60/branch-delete/test-results.txt"
+      ]
+    },
+    "phase8_todo_process": {
+      "status": "COMPLETE",
+      "description": "todo.md fully updated; process closeout and next-work register created",
+      "files_produced": [
+        "reports/sprint60/process/todo-closeout.md",
+        "reports/sprint60/process/next-work-register.md"
+      ]
+    },
+    "phase9_tests_git_status": {
+      "status": "COMPLETE",
+      "description": "Full pytest suite: 2889 passed, 0 failed, 3 skipped in 94.05s",
+      "tests_passed": 2889,
+      "tests_failed": 0,
+      "tests_skipped": 3,
+      "files_produced": [
+        "reports/sprint60/lanes/lane-I/test-run.log",
+        "reports/sprint60/lanes/lane-I/git-status.txt"
+      ]
+    },
+    "phase10_final_bundle": {
+      "status": "COMPLETE",
+      "description": "Final bundle committed; sprint-state, bundle-manifest, final-verdict, final-clean-proof",
+      "bundle_files": ">=38",
+      "files_produced": [
+        "reports/sprint60/sprint-state.json",
+        "reports/sprint60/bundle-manifest.json",
+        "reports/sprint60/final-verdict.md",
+        "reports/sprint60/git/final-clean-proof.txt"
+      ]
+    }
+  },
+  "defects_closed": {
+    "SD59-01": "RESOLVED — dirty git proof gap: final-clean-proof.txt now captured AFTER final bundle commit; EvidenceValidator enforces this",
+    "SD59-02": "RESOLVED — 4 destination content gaps closed via DestinationIdMapper; content-audit-repaired.json 42/42",
+    "SD59-03": "RESOLVED — README audit now content-based (family/workflow/package_id fields); shallow detection enforced",
+    "SD59-04": "RESOLVED — README gate implemented in readme_audit_gate.py (13 tests), not just documented",
+    "SD59-05": "RESOLVED — Words/Diagram root README version gaps classified as version_intentionally_omitted policy",
+    "SD59-06": "RESOLVED — todo.md fully checked at close; EvidenceValidator blocks COMPLETE on unchecked items",
+    "SD59-07": "RESOLVED — EvidenceValidator actually runs 12 rules; requires pytest-style test output (not hardcoded list)"
+  },
+  "sprint59_reclassification": {
+    "original_verdict": "IO_AUTHORITY_COMPLETE_DESTINATION_CONTENT_VERIFIED",
+    "corrected_status": "EVIDENCE_REPAIR_REQUIRED_NOT_CLOSED",
+    "reason": "7 blocking defects SD59-01 through SD59-07 found by Sprint 60 independent review"
+  },
+  "denominator": {
+    "canonical": 42,
+    "families": {
+      "cells": 9,
+      "words": 8,
+      "pdf": 19,
+      "diagram": 2,
+      "email": 1,
+      "slides": 3
+    }
+  },
+  "commits_made": [
+    {"sha": "b0444ef", "description": "fix(dirty-state): add reports/**/*.zip to .gitignore"},
+    {"sha": "32c5b2b", "description": "feat(sprint60): add DestinationIdMapper, README audit gate, and EvidenceValidator modules"},
+    {"sha": "ccd3b69", "description": "chore(workspace): update verification artifacts from Sprint 60 evidence run"},
+    {"sha": "(sprint60-bundle)", "description": "docs(sprint60): Sprint 60 closure bundle — all 7 SD59 defects resolved, LOWCODE_IO_DESTINATION_README_CLOSURE_VERIFIED"}
+  ]
+}

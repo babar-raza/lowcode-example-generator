@@ -1,0 +1,40 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 27 items
+
+tests/unit/test_evidence_validator.py::TestFinalCleanProof::test_fails_when_final_clean_proof_missing PASSED [  3%]
+tests/unit/test_evidence_validator.py::TestFinalCleanProof::test_fails_when_final_clean_proof_shows_dirty_state PASSED [  7%]
+tests/unit/test_evidence_validator.py::TestFinalCleanProof::test_passes_when_clean_proof_is_clean PASSED [ 11%]
+tests/unit/test_evidence_validator.py::TestPresentNoAuthority::test_fails_when_present_no_authority_exists PASSED [ 14%]
+tests/unit/test_evidence_validator.py::TestPresentNoAuthority::test_passes_when_no_present_no_authority PASSED [ 18%]
+tests/unit/test_evidence_validator.py::TestReadmeAuditContentBased::test_fails_when_readme_audit_is_shallow PASSED [ 22%]
+tests/unit/test_evidence_validator.py::TestReadmeAuditContentBased::test_fails_when_readme_audit_missing PASSED [ 25%]
+tests/unit/test_evidence_validator.py::TestReadmeAuditContentBased::test_passes_when_content_audit_has_content_fields PASSED [ 29%]
+tests/unit/test_evidence_validator.py::TestReadmeGateImplemented::test_fails_when_gate_test_results_show_failures PASSED [ 33%]
+tests/unit/test_evidence_validator.py::TestReadmeGateImplemented::test_fails_when_readme_gate_evidence_missing PASSED [ 37%]
+tests/unit/test_evidence_validator.py::TestReadmeGateImplemented::test_passes_when_all_gate_evidence_present PASSED [ 40%]
+tests/unit/test_evidence_validator.py::TestTodoAllChecked::test_fails_when_todo_has_unchecked_items PASSED [ 44%]
+tests/unit/test_evidence_validator.py::TestTodoAllChecked::test_fails_when_todo_missing PASSED [ 48%]
+tests/unit/test_evidence_validator.py::TestTodoAllChecked::test_passes_when_all_items_checked PASSED [ 51%]
+tests/unit/test_evidence_validator.py::TestEvidenceValidatorActuallyRan::test_fails_when_output_not_test_output PASSED [ 55%]
+tests/unit/test_evidence_validator.py::TestEvidenceValidatorActuallyRan::test_fails_when_validator_output_missing PASSED [ 59%]
+tests/unit/test_evidence_validator.py::TestEvidenceValidatorActuallyRan::test_passes_when_real_test_output_present PASSED [ 62%]
+tests/unit/test_evidence_validator.py::TestCommandsLog::test_fails_when_commands_log_in_progress PASSED [ 66%]
+tests/unit/test_evidence_validator.py::TestCommandsLog::test_fails_when_commands_log_missing PASSED [ 70%]
+tests/unit/test_evidence_validator.py::TestTestLog::test_fails_when_test_log_missing PASSED [ 74%]
+tests/unit/test_evidence_validator.py::TestTestLog::test_fails_when_test_log_shows_failures PASSED [ 77%]
+tests/unit/test_evidence_validator.py::TestUnknownInputFormats::test_fails_when_unknown_input_formats_nonzero PASSED [ 81%]
+tests/unit/test_evidence_validator.py::TestUnknownInputFormats::test_passes_when_all_formats_known PASSED [ 85%]
+tests/unit/test_evidence_validator.py::TestCompleteBundle::test_overall_valid_false_on_any_failure PASSED [ 88%]
+tests/unit/test_evidence_validator.py::TestCompleteBundle::test_passes_with_complete_valid_bundle PASSED [ 92%]
+tests/unit/test_evidence_validator.py::TestCompleteBundle::test_sprint59_style_bundle_detected_as_invalid PASSED [ 96%]
+tests/unit/test_evidence_validator.py::TestCompleteBundle::test_to_dict_structure PASSED [100%]
+
+============================= 27 passed in 3.62s ==============================

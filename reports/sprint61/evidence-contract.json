@@ -73,7 +73,7 @@
       "name": "final_clean_proof_nonzero",
       "file": "reports/sprint61/git/final-clean-proof.txt",
       "blocking": true,
-      "status": "PENDING",
+      "status": "PRESENT",
       "note": "MUST be nonzero bytes with branch+status output"
     },
     {

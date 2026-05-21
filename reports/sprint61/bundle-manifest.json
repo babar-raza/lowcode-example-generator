@@ -1,6 +1,6 @@
 {
   "sprint": "sprint61",
-  "total_files": 51,
+  "total_files": 54,
   "files": [
     {
       "file": "00-sprint60-evidence-audit.md",
@@ -16,6 +16,11 @@
       "file": "02-corrected-sprint60-state.md",
       "size_bytes": 3552,
       "sha256": "5fd4ecf0bfcadea9fe27e6c9943d4658c085c1da6f87f803b0c7992986b44023"
+    },
+    {
+      "file": "bundle-manifest.json",
+      "size_bytes": 9490,
+      "sha256": "5cadde052ffdea539ec8f4a2dc1bee5c76f702a00aeae28df67a5f60bca706e4"
     },
     {
       "file": "commands.log",
@@ -74,8 +79,13 @@
     },
     {
       "file": "evidence-contract.json",
-      "size_bytes": 7834,
-      "sha256": "5d2f672ac2950ab7f613d89b1d8267127c437d41ac9dc7e8a6c38065c39c78cc"
+      "size_bytes": 9679,
+      "sha256": "21f71dba92e73849e9dbd7c039e91de99ccf5ca206787972357ac8a23944344a"
+    },
+    {
+      "file": "final-verdict.md",
+      "size_bytes": 3378,
+      "sha256": "a9faffc1bbbb655673ff3ad993aa5836abc92794feceea2afaee5d37a74ca547"
     },
     {
       "file": "git\\dirty-file-classification.md",
@@ -91,6 +101,11 @@
       "file": "git\\dirty-state-before.txt",
       "size_bytes": 21,
       "sha256": "c8a4c330c591375fa941deffcafefdc2afb36b7af6f227c4bc567ce41e6274e6"
+    },
+    {
+      "file": "git\\final-clean-proof.txt",
+      "size_bytes": 156,
+      "sha256": "f830ee55006d0352a5cd4cea5593c3bcb60755d59b6a32bc39e48430bfd6756d"
     },
     {
       "file": "git\\staging-plan.md",

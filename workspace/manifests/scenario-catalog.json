@@ -1,342 +1,88 @@
 {
-  "family": "pdf",
-  "ready_count": 19,
-  "blocked_count": 82,
+  "family": "slides",
+  "ready_count": 3,
+  "blocked_count": 2,
   "scenarios": [
     {
-      "scenario_id": "pdf-doc-converter",
-      "title": "Use DocConverter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.DocConverter",
-      "target_namespace": "Aspose.Pdf.LowCode",
+      "scenario_id": "slides-compress",
+      "title": "Use Compress from Aspose.Slides.LowCode",
+      "target_type": "Aspose.Slides.LowCode.Compress",
+      "target_namespace": "Aspose.Slides.LowCode",
       "target_methods": [
-        "Process",
-        "Dispose"
+        "CompressEmbeddedFonts",
+        "RemoveUnusedLayoutSlides",
+        "RemoveUnusedMasterSlides"
       ],
       "required_symbols": [
-        "Aspose.Pdf.LowCode.DocConverter",
-        "Aspose.Pdf.LowCode.DocConverter.Dispose",
-        "Aspose.Pdf.LowCode.DocConverter.Process"
+        "Aspose.Slides.LowCode.Compress",
+        "Aspose.Slides.LowCode.Compress.CompressEmbeddedFonts",
+        "Aspose.Slides.LowCode.Compress.RemoveUnusedLayoutSlides",
+        "Aspose.Slides.LowCode.Compress.RemoveUnusedMasterSlides"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.docx using DocConverter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.docx",
+      "output_plan": "Convert input.pptx to output.pptx using Compress",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pptx",
       "status": "ready",
       "blocked_reason": null
     },
     {
-      "scenario_id": "pdf-form-editor",
-      "title": "Use FormEditor from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.FormEditor",
-      "target_namespace": "Aspose.Pdf.LowCode",
+      "scenario_id": "slides-convert",
+      "title": "Use Convert from Aspose.Slides.LowCode",
+      "target_type": "Aspose.Slides.LowCode.Convert",
+      "target_namespace": "Aspose.Slides.LowCode",
+      "target_methods": [
+        "AutoByExtension",
+        "ToJpeg",
+        "ToPdf",
+        "ToPng",
+        "ToSvg",
+        "ToTiff"
+      ],
+      "required_symbols": [
+        "Aspose.Slides.LowCode.Convert",
+        "Aspose.Slides.LowCode.Convert.AutoByExtension",
+        "Aspose.Slides.LowCode.Convert.ToJpeg",
+        "Aspose.Slides.LowCode.Convert.ToJpeg",
+        "Aspose.Slides.LowCode.Convert.ToJpeg",
+        "Aspose.Slides.LowCode.Convert.ToPdf",
+        "Aspose.Slides.LowCode.Convert.ToPdf",
+        "Aspose.Slides.LowCode.Convert.ToPdf",
+        "Aspose.Slides.LowCode.Convert.ToPdf",
+        "Aspose.Slides.LowCode.Convert.ToPng",
+        "Aspose.Slides.LowCode.Convert.ToPng",
+        "Aspose.Slides.LowCode.Convert.ToPng",
+        "Aspose.Slides.LowCode.Convert.ToSvg",
+        "Aspose.Slides.LowCode.Convert.ToSvg",
+        "Aspose.Slides.LowCode.Convert.ToSvg",
+        "Aspose.Slides.LowCode.Convert.ToSvg",
+        "Aspose.Slides.LowCode.Convert.ToSvg",
+        "Aspose.Slides.LowCode.Convert.ToTiff",
+        "Aspose.Slides.LowCode.Convert.ToTiff"
+      ],
+      "required_fixtures": [],
+      "output_plan": "Convert input.pptx to output.pdf using Convert",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
+      "status": "ready",
+      "blocked_reason": null
+    },
+    {
+      "scenario_id": "slides-merger",
+      "title": "Use Merger from Aspose.Slides.LowCode",
+      "target_type": "Aspose.Slides.LowCode.Merger",
+      "target_namespace": "Aspose.Slides.LowCode",
       "target_methods": [
         "Process"
       ],
       "required_symbols": [
-        "Aspose.Pdf.LowCode.FormEditor",
-        "Aspose.Pdf.LowCode.FormEditor.Process"
+        "Aspose.Slides.LowCode.Merger",
+        "Aspose.Slides.LowCode.Merger.Process",
+        "Aspose.Slides.LowCode.Merger.Process",
+        "Aspose.Slides.LowCode.Merger.Process",
+        "Aspose.Slides.LowCode.Merger.Process"
       ],
       "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using FormEditor",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-form-exporter",
-      "title": "Use FormExporter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.FormExporter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.FormExporter",
-        "Aspose.Pdf.LowCode.FormExporter.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.json using FormExporter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.json",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-form-flattener",
-      "title": "Use FormFlattener from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.FormFlattener",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.FormFlattener",
-        "Aspose.Pdf.LowCode.FormFlattener.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using FormFlattener",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-html",
-      "title": "Use Html from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Html",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process",
-        "Dispose"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Html",
-        "Aspose.Pdf.LowCode.Html.Dispose",
-        "Aspose.Pdf.LowCode.Html.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.html to output.pdf using Html",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-image-extractor",
-      "title": "Use ImageExtractor from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.ImageExtractor",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.ImageExtractor"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.png using ImageExtractor",
-      "validation_plan": "Build succeeds, runs without exception, produces output.png",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-jpeg",
-      "title": "Use Jpeg from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Jpeg",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Jpeg"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.jpg using Jpeg",
-      "validation_plan": "Build succeeds, runs without exception, produces output.jpg",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-merger",
-      "title": "Use Merger from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Merger",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Merger",
-        "Aspose.Pdf.LowCode.Merger.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Merger",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-optimizer",
-      "title": "Use Optimizer from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Optimizer",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Optimizer",
-        "Aspose.Pdf.LowCode.Optimizer.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Optimizer",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-pdf-aconverter",
-      "title": "Use PdfAConverter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.PdfAConverter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.PdfAConverter",
-        "Aspose.Pdf.LowCode.PdfAConverter.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using PdfAConverter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-png",
-      "title": "Use Png from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Png",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Png"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.png using Png",
-      "validation_plan": "Build succeeds, runs without exception, produces output.png",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-security",
-      "title": "Use Security from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Security",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Security",
-        "Aspose.Pdf.LowCode.Security.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Security",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-signature",
-      "title": "Use Signature from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Signature",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Signature",
-        "Aspose.Pdf.LowCode.Signature.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Signature",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-splitter",
-      "title": "Use Splitter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Splitter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Splitter",
-        "Aspose.Pdf.LowCode.Splitter.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using Splitter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-table-generator",
-      "title": "Use TableGenerator from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.TableGenerator",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process",
-        "Dispose"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.TableGenerator",
-        "Aspose.Pdf.LowCode.TableGenerator.Dispose",
-        "Aspose.Pdf.LowCode.TableGenerator.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using TableGenerator",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-text-extractor",
-      "title": "Use TextExtractor from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.TextExtractor",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.TextExtractor"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output using TextExtractor",
-      "validation_plan": "Build succeeds, runs without exception, produces output",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-tiff",
-      "title": "Use Tiff from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.Tiff",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.Tiff"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.tiff using Tiff",
-      "validation_plan": "Build succeeds, runs without exception, produces output.tiff",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-toc-generator",
-      "title": "Use TocGenerator from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.TocGenerator",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process",
-        "Dispose"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.TocGenerator",
-        "Aspose.Pdf.LowCode.TocGenerator.Dispose",
-        "Aspose.Pdf.LowCode.TocGenerator.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.pdf using TocGenerator",
-      "validation_plan": "Build succeeds, runs without exception, produces output.pdf",
-      "status": "ready",
-      "blocked_reason": null
-    },
-    {
-      "scenario_id": "pdf-xls-converter",
-      "title": "Use XlsConverter from Aspose.Pdf.LowCode",
-      "target_type": "Aspose.Pdf.LowCode.XlsConverter",
-      "target_namespace": "Aspose.Pdf.LowCode",
-      "target_methods": [
-        "Process",
-        "Dispose"
-      ],
-      "required_symbols": [
-        "Aspose.Pdf.LowCode.XlsConverter",
-        "Aspose.Pdf.LowCode.XlsConverter.Dispose",
-        "Aspose.Pdf.LowCode.XlsConverter.Process"
-      ],
-      "required_fixtures": [],
-      "output_plan": "Convert input.pdf to output.xlsx using XlsConverter",
-      "validation_plan": "Build succeeds, runs without exception, produces output.xlsx",
+      "output_plan": "Convert input.pptx to output.pptx using Merger",
+      "validation_plan": "Build succeeds, runs without exception, produces output.pptx",
       "status": "ready",
       "blocked_reason": null
     }

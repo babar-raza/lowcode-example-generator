@@ -1,0 +1,42 @@
+{
+  "result_type": "live_publication_result",
+  "sprint": "sprint62",
+  "generated_at": "2026-05-21T23:59:00Z",
+  "status": "BLOCKED_BY_APPROVAL",
+  "approval_check": {
+    "readme_push": {
+      "env_var": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL",
+      "required_value": "APPROVE_README_PUSH",
+      "present": false
+    },
+    "live_pr_publish": {
+      "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "required_value": "APPROVE_LIVE_PR",
+      "present": false
+    },
+    "pr_merge": {
+      "env_var": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+      "required_value": "APPROVE_MERGE_PR",
+      "present": false
+    },
+    "readme_audit_override": {
+      "env_var": "PLUGIN_EXAMPLES_README_AUDIT_APPROVAL",
+      "required_value": "APPROVE_README_AUDIT_OVERRIDE",
+      "present": false
+    }
+  },
+  "dry_run_packages_ready": true,
+  "dry_run_families": [
+    {"family": "cells", "examples": 9, "package": "workspace/pr-dry-run/cells-controlled-pilot", "status": "DRY_RUN_READY"},
+    {"family": "words", "examples": 8, "package": "workspace/pr-dry-run/words-controlled-pilot", "status": "DRY_RUN_READY_WITH_VERSION_DRIFT", "version_bump": "26.4.0->26.5.0"},
+    {"family": "pdf", "examples": 19, "package": "workspace/pr-dry-run/pdf-controlled-pilot", "status": "DRY_RUN_READY"},
+    {"family": "diagram", "examples": 2, "package": "workspace/pr-dry-run/diagram-controlled-pilot", "status": "DRY_RUN_READY_WITH_VERSION_DRIFT", "version_bump": "26.4.0->26.5.0"},
+    {"family": "email", "examples": 1, "package": "workspace/pr-dry-run/email-controlled-pilot", "status": "DRY_RUN_READY"},
+    {"family": "slides", "examples": 3, "package": "workspace/pr-dry-run/slides-controlled-pilot", "status": "DRY_RUN_READY"}
+  ],
+  "total_examples_ready": 42,
+  "no_remote_mutation_attempted": true,
+  "no_secrets_printed": true,
+  "blocked_reason": "No approval tokens are set. Set PLUGIN_EXAMPLES_README_PUSH_APPROVAL=APPROVE_README_PUSH and PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to authorize publication.",
+  "summary": "Phase 9 publication check complete. 42/42 examples across 6 families staged in dry-run packages. All publication blocked pending approval token injection. No unauthorized remote mutation attempted."
+}

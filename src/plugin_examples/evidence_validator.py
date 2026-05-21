@@ -144,6 +144,9 @@ class EvidenceValidator:
         results.append(self._rule_no_p1_items_with_complete_verdict())
         results.append(self._rule_required_files_nonzero_size())
 
+        # --- Sprint 62 NEW rule: mandatory EV execution for final closure ---
+        results.append(self._rule_bundle_validation_result_present_and_valid())
+
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
 
@@ -1039,6 +1042,86 @@ class EvidenceValidator:
             description="Required evidence files must not be 0 bytes",
             severity="FAILURE", passed=True,
             evidence=f"{len(present)}/{len(_REQUIRED_NONZERO_FILES)} required files present and nonzero",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 62 NEW rules
+    # ------------------------------------------------------------------
+
+    def _rule_bundle_validation_result_present_and_valid(self) -> RuleResult:
+        """Sprint bundle validation result must exist and show overall_valid=true.
+
+        Sprint 62 requirement: EvidenceValidator execution is mandatory for final
+        closure. A sprint cannot be marked COMPLETE without running EV on the bundle
+        and storing the result in evidence/sprint{N}-bundle-validation-result.json.
+
+        Missing/stale validation = BLOCKED.
+        """
+        rule_id = "bundle_validation_result_present_and_valid"
+        evidence_dir = self.bundle_dir / "evidence"
+
+        # Look for any sprint*-bundle-validation-result.json file
+        candidates: list[Path] = []
+        if evidence_dir.exists():
+            candidates = sorted(evidence_dir.glob("*-bundle-validation-result.json"))
+
+        if not candidates:
+            return RuleResult(
+                rule_id=rule_id,
+                description=(
+                    "Sprint bundle validation result must exist in evidence/ "
+                    "(EV execution is mandatory for final closure)"
+                ),
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    "No evidence/*-bundle-validation-result.json found. "
+                    "Run: python -m plugin_examples release-status --validate-bundle "
+                    "and save result to evidence/sprint{N}-bundle-validation-result.json. "
+                    "Sprint 62 requirement: EV execution is mandatory."
+                ),
+            )
+
+        validation_path = candidates[-1]  # most recent alphabetically
+        try:
+            data = json.loads(validation_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Bundle validation result must be readable",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=f"Cannot read {validation_path.name}: {exc}",
+            )
+
+        overall_valid = data.get("overall_valid", False)
+        sprint_id = data.get("sprint_id", "unknown")
+        rules_passed = data.get("passed", 0)
+        rules_failed = data.get("failed", 0)
+
+        if not overall_valid:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Bundle validation result must show overall_valid=true",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    f"{validation_path.name}: overall_valid=false "
+                    f"({rules_failed} rules FAILED, {rules_passed} passed). "
+                    "Fix all FAILURE-severity rule failures before closing sprint."
+                ),
+                evidence=f"sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed}",
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="Bundle validation result must show overall_valid=true",
+            severity="FAILURE",
+            passed=True,
+            evidence=(
+                f"{validation_path.name}: overall_valid=true "
+                f"(sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed})"
+            ),
         )
 
     # ------------------------------------------------------------------

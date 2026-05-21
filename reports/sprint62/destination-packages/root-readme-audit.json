@@ -1,0 +1,78 @@
+{
+  "audit_type": "destination_root_readme_audit",
+  "sprint": "sprint62",
+  "generated_at": "2026-05-21T23:58:00Z",
+  "description": "Audit of root README state in 6 destination repos. Checks for I/O formats table presence.",
+  "total_repos": 6,
+  "repos_with_io_table": 0,
+  "repos_missing_io_table": 6,
+  "entries": [
+    {
+      "family": "cells",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true
+    },
+    {
+      "family": "words",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true,
+      "additional_note": "Version drift 26.4.0→26.5.0 also needs correction (Phase 5)"
+    },
+    {
+      "family": "pdf",
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true
+    },
+    {
+      "family": "diagram",
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true,
+      "additional_note": "Version drift 26.4.0→26.5.0 also needs correction (Phase 5)"
+    },
+    {
+      "family": "email",
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true
+    },
+    {
+      "family": "slides",
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "root_readme_exists": true,
+      "has_io_formats_table": false,
+      "has_examples_list": true,
+      "audit_status": "IO_TABLE_MISSING",
+      "correction_action": "ADD_IO_FORMATS_TABLE",
+      "sprint62_correction_included": true
+    }
+  ],
+  "summary": {
+    "all_repos_need_io_table": true,
+    "all_corrections_planned_in_sprint62": true,
+    "blocked_by_approval": true
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "contract_version": "sprint62-v1",
+  "sprint_id": "sprint62-readme-io-publication-42-42-closure",
+  "created_at": "2026-05-21T23:45:00Z",
+  "description": "Evidence contract for Sprint 62. All categories must be PRESENT for closure. PENDING = INVALID_CLOSURE.",
+  "bundle_min_files": 40,
+  "required_evidence_categories": [
+    {
+      "id": "EC01",
+      "name": "sprint61_audit_report",
+      "file": "reports/sprint62/00-sprint61-evidence-audit.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC02",
+      "name": "sprint61_claim_vs_proof_matrix",
+      "file": "reports/sprint62/01-sprint61-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC03",
+      "name": "sprint62_baseline_state",
+      "file": "reports/sprint62/02-sprint62-baseline-state.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC04",
+      "name": "commands_log",
+      "file": "reports/sprint62/commands.log",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC05",
+      "name": "sprint62_todo",
+      "file": "reports/sprint62/todo.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC06",
+      "name": "evidence_contract",
+      "file": "reports/sprint62/evidence-contract.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC07",
+      "name": "special_case_authority",
+      "file": "reports/sprint62/io-special/special-case-authority.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC08",
+      "name": "special_case_authority_md",
+      "file": "reports/sprint62/io-special/special-case-authority.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC09",
+      "name": "programcs_special_case_repair",
+      "file": "reports/sprint62/io-special/programcs-special-case-repair.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC10",
+      "name": "readme_special_case_text",
+      "file": "reports/sprint62/io-special/readme-special-case-text.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC11",
+      "name": "example_readme_update_ledger",
+      "file": "reports/sprint62/readme-corrections/example-readme-update-ledger.json",
+      "blocking": true,
+      "status": "PENDING",
+      "note": "Must contain 42 entries"
+    },
+    {
+      "id": "EC12",
+      "name": "root_readme_update_ledger",
+      "file": "reports/sprint62/readme-corrections/root-readme-update-ledger.json",
+      "blocking": true,
+      "status": "PENDING",
+      "note": "Must contain 6 repo entries"
+    },
+    {
+      "id": "EC13",
+      "name": "readme_correction_preview",
+      "file": "reports/sprint62/readme-corrections/readme-correction-preview.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC14",
+      "name": "readme_correction_package_manifest",
+      "file": "reports/sprint62/readme-corrections/readme-correction-package-manifest.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC15",
+      "name": "destination_package_ledger",
+      "file": "reports/sprint62/destination-packages/package-ledger.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC16",
+      "name": "destination_pr_dry_run_ledger",
+      "file": "reports/sprint62/destination-packages/pr-dry-run-ledger.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC17",
+      "name": "destination_root_readme_audit",
+      "file": "reports/sprint62/destination-packages/root-readme-audit.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC18",
+      "name": "words_version_drift",
+      "file": "reports/sprint62/version-drift/words-version-drift.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC19",
+      "name": "diagram_version_drift",
+      "file": "reports/sprint62/version-drift/diagram-version-drift.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC20",
+      "name": "version_update_ledger",
+      "file": "reports/sprint62/version-drift/version-update-ledger.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC21",
+      "name": "readme_gate_approval_semantics",
+      "file": "reports/sprint62/gates/readme-gate-approval-semantics.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC22",
+      "name": "readme_gate_source_proof",
+      "file": "reports/sprint62/gates/readme-gate-source-proof.patch",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC23",
+      "name": "readme_gate_test_results",
+      "file": "reports/sprint62/gates/readme-gate-test-results.txt",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC24",
+      "name": "sprint62_bundle_validation_result",
+      "file": "reports/sprint62/evidence/sprint62-bundle-validation-result.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC25",
+      "name": "final_validation_gate",
+      "file": "reports/sprint62/evidence/final-validation-gate.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC26",
+      "name": "final_validation_source_proof",
+      "file": "reports/sprint62/evidence/final-validation-source-proof.patch",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC27",
+      "name": "final_validation_test_results",
+      "file": "reports/sprint62/evidence/final-validation-test-results.txt",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC28",
+      "name": "api_verification_ledger",
+      "file": "reports/sprint62/package-authority/api-verification-ledger.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC29",
+      "name": "package_authority_summary",
+      "file": "reports/sprint62/package-authority/package-authority-summary.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC30",
+      "name": "live_approval_check",
+      "file": "reports/sprint62/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC31",
+      "name": "live_publication_result",
+      "file": "reports/sprint62/publication/live-publication-result.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC32",
+      "name": "test_run_log",
+      "file": "reports/sprint62/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC33",
+      "name": "git_status_end",
+      "file": "reports/sprint62/lanes/lane-I/git-status.txt",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC34",
+      "name": "bundle_manifest",
+      "file": "reports/sprint62/bundle-manifest.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC35",
+      "name": "final_verdict",
+      "file": "reports/sprint62/final-verdict.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC36",
+      "name": "sprint62_state",
+      "file": "reports/sprint62/sprint-state.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC37",
+      "name": "final_clean_proof",
+      "file": "reports/sprint62/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PENDING",
+      "note": "MUST be nonzero bytes with branch+status output, captured AFTER final bundle commit"
+    }
+  ],
+  "bundle_validation_rules": [
+    {
+      "rule": "final_clean_proof_nonzero_bytes",
+      "description": "final-clean-proof.txt must be nonzero bytes",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "final_clean_proof_has_git_header",
+      "description": "final-clean-proof.txt must contain On branch or HEAD line",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "sprint61_bundle_fails_validator",
+      "description": "Sprint 61 bundle must fail improved EvidenceValidator (12 PASS, 8 FAIL confirmed)",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "no_pending_blocking_categories",
+      "description": "Any blocking EC with PENDING = INVALID_CLOSURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "readme_io_42_of_42_corrections",
+      "description": "example-readme-update-ledger.json must contain exactly 42 entries",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "special_cases_closed",
+      "description": "All 5 Program.cs special cases and 4 README special cases must have explicit authority",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "readme_gate_hardened",
+      "description": "APPROVE_README_PUSH cannot bypass failed audit; emergency override required",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "evidence_validator_mandatory",
+      "description": "sprint62-bundle-validation-result.json must exist and show overall_valid=true",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "required_files_nonzero_size",
+      "description": "All required evidence files must be nonzero bytes",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "test_log_zero_failed",
+      "description": "Test log must show 0 failed",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "commands_log_complete",
+      "description": "commands.log must not contain IN_PROGRESS at closure",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "version_drift_addressed",
+      "description": "Words and Diagram version drift must have dry-run packages or explicit blocker",
+      "severity": "FAILURE"
+    }
+  ]
+}

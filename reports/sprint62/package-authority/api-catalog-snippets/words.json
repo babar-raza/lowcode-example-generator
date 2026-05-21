@@ -1,0 +1,87 @@
+{
+  "family": "words",
+  "package_id": "Aspose.Words",
+  "total_types": 8,
+  "types": [
+    {
+      "type_name": "Converter",
+      "full_type_name": "Aspose.Words.LowCode.Converter",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".pdf",
+      "variant_count": 7,
+      "api_verified": false
+    },
+    {
+      "type_name": "Merger",
+      "full_type_name": "Aspose.Words.LowCode.Merger",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "Splitter",
+      "full_type_name": "Aspose.Words.LowCode.Splitter",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "Comparer",
+      "full_type_name": "Aspose.Words.LowCode.Comparer",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "MailMerger",
+      "full_type_name": "Aspose.Words.LowCode.MailMerger",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "ReportBuilder",
+      "full_type_name": "Aspose.Words.LowCode.ReportBuilder",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "Watermarker",
+      "full_type_name": "Aspose.Words.LowCode.Watermarker",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    },
+    {
+      "type_name": "Replacer",
+      "full_type_name": "Aspose.Words.LowCode.Replacer",
+      "canonical_input_formats": [
+        ".docx"
+      ],
+      "canonical_output_format": ".docx",
+      "variant_count": 1,
+      "api_verified": false
+    }
+  ]
+}

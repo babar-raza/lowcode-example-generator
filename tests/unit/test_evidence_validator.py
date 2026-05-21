@@ -95,13 +95,25 @@ def _make_bundle(tmpdir: str) -> Path:
         encoding="utf-8",
     )
 
-    # evidence/validator-test-results.txt + pipeline-integration-proof.md
+    # evidence/validator-test-results.txt + pipeline-integration-proof.md + bundle-validation-result.json
     (b / "evidence").mkdir(parents=True)
     (b / "evidence" / "validator-test-results.txt").write_text(
         "20 passed, 0 failed in 0.45s\n", encoding="utf-8"
     )
     (b / "evidence" / "pipeline-integration-proof.md").write_text(
         "# Pipeline Integration\nEvidenceValidator is called in release-status command.\n",
+        encoding="utf-8",
+    )
+    (b / "evidence" / "sprint60-bundle-validation-result.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint60-test",
+            "overall_valid": True,
+            "passed": 21,
+            "failed": 0,
+            "warnings": 0,
+            "total_rules": 21,
+            "rules": [],
+        }),
         encoding="utf-8",
     )
 
@@ -407,7 +419,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 20)
+        self.assertEqual(result.total_rules, 21)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -499,7 +511,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 20)
+        self.assertEqual(len(d["rules"]), 21)
 
 
 # ===========================================================================
@@ -999,6 +1011,94 @@ class TestRequiredFilesNonzeroSize(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "required_files_nonzero_size")
         self.assertTrue(rule.passed)
+
+
+class TestBundleValidationResultPresentAndValid(unittest.TestCase):
+    """Rule: bundle_validation_result_present_and_valid — Sprint 62 mandatory EV execution."""
+
+    def test_fails_when_no_bundle_validation_result(self):
+        """Missing evidence/*-bundle-validation-result.json = FAIL."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Remove the bundle-validation-result.json that _make_bundle creates
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "bundle_validation_result_present_and_valid"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("bundle-validation-result.json", rule.failure_detail)
+
+    def test_fails_when_bundle_validation_result_shows_failures(self):
+        """overall_valid=false in bundle-validation-result.json = FAIL."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint60-bundle-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint60-test",
+                    "overall_valid": False,
+                    "passed": 15,
+                    "failed": 5,
+                    "warnings": 0,
+                    "total_rules": 20,
+                    "rules": [],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "bundle_validation_result_present_and_valid"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("overall_valid=false", rule.failure_detail)
+        self.assertIn("5", rule.failure_detail)  # failed count
+
+    def test_passes_when_bundle_validation_result_is_valid(self):
+        """overall_valid=true in bundle-validation-result.json = PASS."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "bundle_validation_result_present_and_valid"
+        )
+        self.assertTrue(rule.passed)
+        self.assertIn("overall_valid=true", rule.evidence)
+
+    def test_uses_most_recent_file_when_multiple_exist(self):
+        """When multiple *-bundle-validation-result.json exist, uses the most recent (alphabetically last)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Add a second, newer result file that passes
+            (b / "evidence" / "sprint62-bundle-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint62-test",
+                    "overall_valid": True,
+                    "passed": 21,
+                    "failed": 0,
+                    "warnings": 0,
+                    "total_rules": 21,
+                    "rules": [],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "bundle_validation_result_present_and_valid"
+        )
+        self.assertTrue(rule.passed)
+        self.assertIn("sprint62", rule.evidence)
+
+    def test_overall_valid_false_when_bundle_validation_missing(self):
+        """overall_valid=False when bundle-validation-result.json is missing from evidence/."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            result = EvidenceValidator(b).validate()
+        self.assertFalse(result.overall_valid)
 
 
 if __name__ == "__main__":

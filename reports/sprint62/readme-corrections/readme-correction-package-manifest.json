@@ -1,0 +1,53 @@
+{
+  "manifest_type": "readme_correction_package_manifest",
+  "sprint": "sprint62",
+  "generated_at": "2026-05-21T23:55:00Z",
+  "description": "Manifest for all 42/42 README I/O correction packages and 6 root README update packages.",
+  "package_files": [
+    {
+      "file": "reports/sprint62/readme-corrections/example-readme-update-ledger.json",
+      "type": "example_readme_update_ledger",
+      "entries": 42,
+      "all_resolved": true
+    },
+    {
+      "file": "reports/sprint62/readme-corrections/root-readme-update-ledger.json",
+      "type": "root_readme_update_ledger",
+      "entries": 6,
+      "all_need_update": true
+    },
+    {
+      "file": "reports/sprint62/readme-corrections/readme-correction-preview.md",
+      "type": "correction_preview",
+      "special_cases_documented": 4
+    },
+    {
+      "file": "reports/sprint62/io-special/special-case-authority.json",
+      "type": "special_case_authority",
+      "cases": 9,
+      "all_resolved": true
+    },
+    {
+      "file": "reports/sprint62/io-special/readme-special-case-text.md",
+      "type": "readme_special_case_text",
+      "cases": 4
+    }
+  ],
+  "coverage": {
+    "total_scenarios": 42,
+    "with_correction_package": 42,
+    "special_cases": 4,
+    "standard_cases": 38,
+    "all_42_covered": true
+  },
+  "approval_gates": {
+    "required_token": "APPROVE_README_PUSH",
+    "env_var": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL",
+    "readme_audit_gate_required": true
+  },
+  "blockers": [
+    "APPROVE_README_PUSH token required for any live push",
+    "Words and Diagram version drift must be resolved before push (Phase 5)",
+    "README audit gate must pass before publish-pr can proceed"
+  ]
+}

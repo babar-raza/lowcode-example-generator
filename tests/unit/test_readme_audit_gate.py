@@ -37,6 +37,8 @@ from plugin_examples.publisher.readme_audit_gate import (
     BLOCKED_README_AUDIT_SHALLOW,
     README_AUDIT_ENV_VAR,
     README_AUDIT_EXPECTED_VALUE,
+    README_AUDIT_OVERRIDE_ENV_VAR,
+    README_AUDIT_OVERRIDE_VALUE,
     _is_content_based_audit,
     check_readme_audit_gate,
 )
@@ -169,8 +171,8 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
         self.assertTrue(result["gate_passed"])
         self.assertEqual(result["audit_record_count"], 2)
 
-    def test_gate_passes_with_partial_content_audit_and_approval(self):
-        """Gate passes for NEEDS_REVIEW records if explicit approval provided."""
+    def test_normal_approval_does_not_bypass_failed_audit(self):
+        """APPROVE_README_PUSH does NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
             self._write_audit(vdir, "pdf", [
@@ -180,10 +182,11 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
                 "pdf", vdir,
                 readme_push_approval=README_AUDIT_EXPECTED_VALUE,
             )
-        self.assertTrue(result["gate_passed"])
+        self.assertFalse(result["gate_passed"])
+        self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
 
-    def test_approval_token_from_env_var(self):
-        """Gate reads approval token from env var as fallback."""
+    def test_env_var_approval_does_not_bypass_failed_audit(self):
+        """APPROVE_README_PUSH from env var also does NOT bypass a failed audit."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
             audit_dir = vdir / "latest" / "families" / "slides"
@@ -194,7 +197,20 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
             )
             with patch.dict(os.environ, {README_AUDIT_ENV_VAR: README_AUDIT_EXPECTED_VALUE}):
                 result = check_readme_audit_gate("slides", vdir)
+        self.assertFalse(result["gate_passed"])
+        self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
+
+    def test_emergency_override_bypasses_failed_audit(self):
+        """APPROVE_README_AUDIT_OVERRIDE bypasses a failed audit (emergency only)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vdir = Path(tmpdir)
+            self._write_audit(vdir, "pdf", [
+                _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
+            ])
+            with patch.dict(os.environ, {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
+                result = check_readme_audit_gate("pdf", vdir)
         self.assertTrue(result["gate_passed"])
+        self.assertTrue(result["audit_override_used"])
 
 
 class TestShallowAuditDetection(unittest.TestCase):

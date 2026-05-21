@@ -1,0 +1,41 @@
+{
+  "ledger_type": "version_update_ledger",
+  "sprint": "sprint62",
+  "generated_at": "2026-05-21T23:58:00Z",
+  "description": "Version drift repair ledger for Words and Diagram families.",
+  "entries": [
+    {
+      "family": "words",
+      "package": "Aspose.Words",
+      "destination_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "repo_version": "26.4.0",
+      "target_version": "26.5.0",
+      "dry_run_props_path": "workspace/pr-dry-run/words-controlled-pilot/Directory.Packages.props",
+      "dry_run_version": "26.5.0",
+      "dry_run_already_correct": true,
+      "validation_evidence": "Sprint 55 + Sprint 61: 2945 tests passing under 26.5.0",
+      "status": "DRY_RUN_READY",
+      "blocked_by": "APPROVE_README_PUSH"
+    },
+    {
+      "family": "diagram",
+      "package": "Aspose.Diagram",
+      "destination_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "repo_version": "26.4.0",
+      "target_version": "26.5.0",
+      "dry_run_props_path": "workspace/pr-dry-run/diagram-controlled-pilot/Directory.Packages.props",
+      "dry_run_version": "26.5.0",
+      "dry_run_already_correct": true,
+      "validation_evidence": "Sprint 55 diagram validation results: all scenarios pass under 26.5.0",
+      "status": "DRY_RUN_READY",
+      "blocked_by": "APPROVE_README_PUSH"
+    }
+  ],
+  "families_not_drifted": ["cells", "pdf", "email", "slides"],
+  "summary": {
+    "drift_families": 2,
+    "both_dry_run_ready": true,
+    "both_blocked_by_approval": true,
+    "fix_type": "Directory.Packages.props version bump in same PR as README update"
+  }
+}

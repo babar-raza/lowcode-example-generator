@@ -22,7 +22,7 @@ from plugin_examples.evidence_validator import EvidenceValidator
 
 
 def _make_valid_bundle(tmpdir: str) -> Path:
-    """Create a minimal valid bundle (passes all 20 rules)."""
+    """Create a minimal valid bundle (passes all 21 rules)."""
     b = Path(tmpdir)
 
     (b / "git").mkdir(parents=True)
@@ -63,6 +63,10 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     (b / "evidence").mkdir(parents=True)
     (b / "evidence" / "validator-test-results.txt").write_text("20 passed, 0 failed in 0.45s\n", encoding="utf-8")
+    (b / "evidence" / "sprint61-bundle-validation-result.json").write_text(
+        json.dumps({"sprint_id": "sprint61-test", "overall_valid": True, "passed": 21, "failed": 0, "warnings": 0, "total_rules": 21, "rules": []}),
+        encoding="utf-8",
+    )
     (b / "evidence" / "pipeline-integration-proof.md").write_text(
         "# Pipeline Integration\nEvidenceValidator is called in release-status command.\n", encoding="utf-8"
     )

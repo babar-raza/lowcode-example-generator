@@ -9,8 +9,16 @@ This gate blocks PR package creation if:
 The gate integrates into PR package readiness. See publish_readiness.py
 for the 4-tier readiness model.
 
-Environment variable for bypass:
+Environment variable for normal push approval:
     PLUGIN_EXAMPLES_README_PUSH_APPROVAL=APPROVE_README_PUSH
+
+NOTE: APPROVE_README_PUSH does NOT bypass a failed audit.
+It is only the live-push authorization token. A failed audit requires
+the emergency override token:
+    PLUGIN_EXAMPLES_README_AUDIT_APPROVAL=APPROVE_README_AUDIT_OVERRIDE
+
+Emergency override records evidence and logs a warning. Use only when
+the audit has been manually reviewed and the failure is known-acceptable.
 
 This gate does NOT replace the live-PR approval gate. Both must be satisfied
 for a live publish to proceed.
@@ -27,6 +35,10 @@ logger = logging.getLogger(__name__)
 # Approval constant — matches the pattern from approval_gate.py
 README_AUDIT_ENV_VAR = "PLUGIN_EXAMPLES_README_PUSH_APPROVAL"
 README_AUDIT_EXPECTED_VALUE = "APPROVE_README_PUSH"
+
+# Emergency override — bypasses failed audit only (not missing/shallow)
+README_AUDIT_OVERRIDE_ENV_VAR = "PLUGIN_EXAMPLES_README_AUDIT_APPROVAL"
+README_AUDIT_OVERRIDE_VALUE = "APPROVE_README_AUDIT_OVERRIDE"
 
 # Blocked reason constants
 BLOCKED_README_AUDIT_MISSING = "blocked_readme_audit_missing"
@@ -62,6 +74,8 @@ def check_readme_audit_gate(
         verification_dir: Base verification directory (workspace/verification).
         run_id: Current run ID for staleness check. If None, staleness check is skipped.
         readme_push_approval: Explicit approval token, or None to read from env var.
+            NOTE: APPROVE_README_PUSH does NOT bypass a failed audit. Only
+            APPROVE_README_AUDIT_OVERRIDE (emergency override) can do that.
 
     Returns:
         Dict with keys:
@@ -71,6 +85,7 @@ def check_readme_audit_gate(
             - audit_path: str | None
             - audit_is_content_based: bool
             - audit_record_count: int
+            - audit_override_used: bool (True only when emergency override was applied)
     """
     result: dict = {
         "family": family,
@@ -79,11 +94,13 @@ def check_readme_audit_gate(
         "audit_path": None,
         "audit_is_content_based": False,
         "audit_record_count": 0,
+        "audit_override_used": False,
     }
 
-    # Check for explicit approval bypass
-    token = readme_push_approval or os.environ.get(README_AUDIT_ENV_VAR, "")
-    approval_bypass = token == README_AUDIT_EXPECTED_VALUE
+    # Check for emergency override token (separate from normal push approval)
+    # APPROVE_README_PUSH does NOT bypass a failed audit — only the emergency token does
+    override_token = os.environ.get(README_AUDIT_OVERRIDE_ENV_VAR, "")
+    audit_override = override_token == README_AUDIT_OVERRIDE_VALUE
 
     # Locate the README audit artifact
     audit_path = _find_readme_audit(family, verification_dir)
@@ -119,17 +136,30 @@ def check_readme_audit_gate(
         return result
 
     # Check for audit failures
+    # IMPORTANT: APPROVE_README_PUSH does NOT bypass this check.
+    # Only APPROVE_README_AUDIT_OVERRIDE (emergency override) can bypass a failed audit.
     failed_records = [
         r for r in records
         if r.get("content_audit") in ("FAIL", "NEEDS_REVIEW")
     ]
-    if failed_records and not approval_bypass:
-        result["blocked_reason"] = BLOCKED_README_AUDIT_FAILED
+    if failed_records:
+        if not audit_override:
+            result["blocked_reason"] = BLOCKED_README_AUDIT_FAILED
+            logger.warning(
+                "README audit gate BLOCKED for %s: %d records failed content checks. "
+                "Set %s=%s to emergency-override (records evidence).",
+                family, len(failed_records),
+                README_AUDIT_OVERRIDE_ENV_VAR, README_AUDIT_OVERRIDE_VALUE,
+            )
+            return result
+        # Emergency override applied — record evidence and allow through
+        result["audit_override_used"] = True
         logger.warning(
-            "README audit gate BLOCKED for %s: %d records failed content checks",
+            "README audit gate: EMERGENCY OVERRIDE applied for %s "
+            "(%d failed records bypassed via %s=%s)",
             family, len(failed_records),
+            README_AUDIT_OVERRIDE_ENV_VAR, README_AUDIT_OVERRIDE_VALUE,
         )
-        return result
 
     # All checks pass
     result["gate_passed"] = True

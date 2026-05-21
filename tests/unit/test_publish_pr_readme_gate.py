@@ -1,11 +1,12 @@
-"""Tests for README audit gate wiring in publish-pr live mode — Sprint 61 Phase 5.
+"""Tests for README audit gate wiring in publish-pr live mode — Sprint 61 Phase 5 / Sprint 62 Phase 6.
 
 Verifies that:
 1. publish-pr --publish is blocked when no README audit artifact exists
 2. publish-pr --publish is blocked when audit is shallow (size/presence only)
 3. publish-pr --publish passes when audit is content-based and gate_passed=True
-4. README audit gate is bypassed when APPROVE_README_PUSH env var is set
-5. check_readme_audit_gate is called exactly once with the correct arguments during live publish
+4. APPROVE_README_PUSH does NOT bypass a failed audit (Sprint 62 hardening)
+5. APPROVE_README_AUDIT_OVERRIDE emergency token bypasses failed audit and records evidence
+6. check_readme_audit_gate is called exactly once with the correct arguments during live publish
 """
 
 from __future__ import annotations
@@ -25,6 +26,8 @@ from plugin_examples.publisher.readme_audit_gate import (
     BLOCKED_README_AUDIT_SHALLOW,
     README_AUDIT_ENV_VAR,
     README_AUDIT_EXPECTED_VALUE,
+    README_AUDIT_OVERRIDE_ENV_VAR,
+    README_AUDIT_OVERRIDE_VALUE,
     check_readme_audit_gate,
 )
 
@@ -84,7 +87,6 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
             _write_content_audit(vdir, "cells", [_shallow_record("cells-html-converter")])
-            # Patch _is_content_based_audit to return False (shallow)
             result = check_readme_audit_gate("cells", vdir)
         # Shallow record has no content fields → blocked_readme_audit_shallow
         self.assertFalse(result["gate_passed"])
@@ -113,7 +115,8 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         self.assertFalse(result["gate_passed"])
         self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
 
-    def test_approval_bypass_overrides_failed_audit(self):
+    def test_normal_approval_does_not_bypass_failed_audit(self):
+        """APPROVE_README_PUSH must NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
             _write_content_audit(vdir, "cells", [
@@ -123,9 +126,12 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
                 "cells", vdir,
                 readme_push_approval=README_AUDIT_EXPECTED_VALUE,
             )
-        self.assertTrue(result["gate_passed"])
+        self.assertFalse(result["gate_passed"])
+        self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
+        self.assertFalse(result["audit_override_used"])
 
-    def test_env_var_approval_bypass(self):
+    def test_env_var_approval_does_not_bypass_failed_audit(self):
+        """APPROVE_README_PUSH from env var must NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
             _write_content_audit(vdir, "cells", [
@@ -133,7 +139,34 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
             ])
             with patch.dict("os.environ", {README_AUDIT_ENV_VAR: README_AUDIT_EXPECTED_VALUE}):
                 result = check_readme_audit_gate("cells", vdir)
+        self.assertFalse(result["gate_passed"])
+        self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
+
+    def test_emergency_override_bypasses_failed_audit(self):
+        """APPROVE_README_AUDIT_OVERRIDE emergency token must bypass a failed audit."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vdir = Path(tmpdir) / "verification"
+            _write_content_audit(vdir, "cells", [
+                _content_record("cells-html-converter", passed=False),
+            ])
+            with patch.dict("os.environ", {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
+                result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
+        self.assertTrue(result["audit_override_used"])
+
+    def test_emergency_override_records_evidence(self):
+        """Emergency override must set audit_override_used=True to record evidence."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vdir = Path(tmpdir) / "verification"
+            _write_content_audit(vdir, "cells", [
+                _content_record("cells-pdf-converter", passed=False),
+                _content_record("cells-json-converter", passed=False),
+            ])
+            with patch.dict("os.environ", {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
+                result = check_readme_audit_gate("cells", vdir)
+        self.assertTrue(result["gate_passed"])
+        self.assertTrue(result["audit_override_used"])
+        self.assertIsNone(result["blocked_reason"])
 
     def test_wrong_approval_token_does_not_bypass(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -148,6 +181,17 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         self.assertFalse(result["gate_passed"])
         self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
 
+    def test_override_not_used_when_audit_passes(self):
+        """audit_override_used must be False when audit passes without override."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vdir = Path(tmpdir) / "verification"
+            _write_content_audit(vdir, "cells", [
+                _content_record("cells-html-converter", passed=True),
+            ])
+            result = check_readme_audit_gate("cells", vdir)
+        self.assertTrue(result["gate_passed"])
+        self.assertFalse(result["audit_override_used"])
+
 
 # ---------------------------------------------------------------------------
 # Integration tests: publish-pr --publish README gate wiring
@@ -155,73 +199,6 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
 
 class TestPublishPrReadmeGateWiring(unittest.TestCase):
     """Verify that check_readme_audit_gate is wired into publish-pr --publish."""
-
-    def _run_publish_pr(
-        self,
-        verification_dir: Path,
-        extra_env: dict | None = None,
-    ) -> int:
-        """Invoke publish-pr --publish for family=cells, mocking heavy dependencies."""
-        from plugin_examples.__main__ import main
-
-        argv_backup = sys.argv[:]
-        env_patch = {
-            "GITHUB_TOKEN": "ghp_fake_token_for_test",
-            "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "APPROVE_LIVE_PR",
-        }
-        if extra_env:
-            env_patch.update(extra_env)
-
-        try:
-            sys.argv = [
-                "plugin_examples",
-                "publish-pr",
-                "--family", "cells",
-                "--publish",
-                "--approval-token", "APPROVE_LIVE_PR",
-            ]
-
-            # Build a minimal fake PR content
-            fake_pr_content = MagicMock()
-            fake_pr_content.branch = "plugin-examples/cells/20260101-000000"
-            fake_pr_content.title = "Test PR"
-            fake_pr_content.files = []
-
-            with patch.dict("os.environ", env_patch, clear=False), \
-                 patch("plugin_examples.__main__._Path") as mock_path_cls, \
-                 patch("plugin_examples.publisher.publish_readiness.compute_pr_readiness") as mock_readiness, \
-                 patch("plugin_examples.__main__.check_readme_audit_gate_in_main", create=True), \
-                 patch("plugin_examples.publisher.github_pr_publisher.create_github_pr") as mock_create_pr:
-
-                # Mock repo_root path resolution
-                mock_path_cls.return_value.__truediv__ = lambda self, other: Path(str(verification_dir).rstrip("/latest")) / other
-                mock_path_cls.return_value.resolve = lambda: mock_path_cls.return_value
-                mock_path_cls.return_value.parents = {2: Path(str(verification_dir)).parent}
-
-                mock_readiness.return_value = {
-                    "gate_verdict_ok": True,
-                    "gate_verdict_name": "PUBLISHABLE",
-                    "package_exists": True,
-                    "example_dirs": [Path("/fake/example1")],
-                    "repo_access_ready": True,
-                    "pr_permission_ready": True,
-                    "target_owner": "aspose-cells-net",
-                    "target_repo_name": "Aspose.Cells.LowCode-for-.NET-Examples",
-                    "target_branch": "main",
-                    "pr_content": fake_pr_content,
-                    "approved": True,
-                    "approval_blocked": None,
-                }
-                mock_create_pr.return_value = {
-                    "pr_number": 99,
-                    "pr_url": "https://github.com/fake/pr/99",
-                    "branch": fake_pr_content.branch,
-                    "files_count": 3,
-                }
-
-                return main()
-        finally:
-            sys.argv = argv_backup
 
     def test_readme_gate_called_with_correct_family(self):
         """Gate is called with the correct family during live publish."""
@@ -240,8 +217,8 @@ class TestPublishPrReadmeGateWiring(unittest.TestCase):
                     "audit_is_content_based": True,
                     "audit_record_count": 9,
                     "family": "cells",
+                    "audit_override_used": False,
                 }
-                # The gate is imported inside __main__ — patch the import target
                 with patch(
                     "plugin_examples.__main__.check_readme_audit_gate",
                     mock_gate,
@@ -290,6 +267,20 @@ class TestPublishPrReadmeGateWiring(unittest.TestCase):
         self.assertTrue(result["audit_is_content_based"])
         self.assertEqual(result["audit_record_count"], 3)
 
+    def test_normal_approval_plus_failed_audit_is_blocked(self):
+        """APPROVE_README_PUSH + failed audit = BLOCKED (Sprint 62 hardened semantics)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vdir = Path(tmpdir) / "verification"
+            _write_content_audit(vdir, "words", [
+                _content_record("words-converter", passed=True),
+                _content_record("words-merger", passed=False),  # failed
+            ])
+            with patch.dict("os.environ", {README_AUDIT_ENV_VAR: README_AUDIT_EXPECTED_VALUE}):
+                result = check_readme_audit_gate("words", vdir)
+        # Must be blocked — APPROVE_README_PUSH cannot bypass a failed audit
+        self.assertFalse(result["gate_passed"])
+        self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
+
 
 # ---------------------------------------------------------------------------
 # Source scan: verify check_readme_audit_gate is imported in __main__.py
@@ -328,6 +319,11 @@ class TestReadmeGateWiredInMainPy(unittest.TestCase):
             source,
             "__main__.py does not check gate_passed — gate result is ignored",
         )
+
+    def test_emergency_override_token_defined_in_gate(self):
+        """readme_audit_gate.py must define the emergency override token constant."""
+        self.assertEqual(README_AUDIT_OVERRIDE_VALUE, "APPROVE_README_AUDIT_OVERRIDE")
+        self.assertEqual(README_AUDIT_OVERRIDE_ENV_VAR, "PLUGIN_EXAMPLES_README_AUDIT_APPROVAL")
 
 
 if __name__ == "__main__":

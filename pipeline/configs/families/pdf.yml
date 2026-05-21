@@ -206,6 +206,7 @@ per_type_constraints:
       - "REQUIRED: options.AddInput(new FileDataSource( — input must be added via AddInput(new FileDataSource(path))"
       - "REQUIRED: options.AddOutput(new FileDataSource( — output must be added via AddOutput(new FileDataSource(path))"
       - "REQUIRED: new Document( — programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()"
+      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment in fixture creation)"
     forbidden:
       - "FORBIDDEN: PdfFormatConversionOptions — use LowCode PdfAConverter with its own options class"
       - "FORBIDDEN: Document.Convert() — use LowCode PdfAConverter.Process() instead"

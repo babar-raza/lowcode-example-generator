@@ -1407,6 +1407,98 @@ class TestPdfConstraintUpdates:
         )
 
 
+class TestPdfAConverterConstraint:
+    """Sprint 58 regression: PdfAConverter must require 'using Aspose.Pdf.Text;'.
+
+    Root cause of pdf-pdf-aconverter Sprint 57 failure: LLM generated code using
+    TextFragment without the required using directive, causing CS0246 compile error.
+    Fix: 'using Aspose.Pdf.Text;' added to per_type_constraints.PdfAConverter.REQUIRED in pdf.yml.
+    """
+
+    def _load_pdf_per_type_constraints(self) -> dict:
+        """Load per_type_constraints from pipeline/configs/families/pdf.yml."""
+        import yaml
+        from pathlib import Path
+        config_path = (
+            Path(__file__).resolve().parents[2]
+            / "pipeline" / "configs" / "families" / "pdf.yml"
+        )
+        with open(config_path, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        return data.get("per_type_constraints", {})
+
+    def test_pdfaconverter_config_requires_using_aspose_pdf_text(self):
+        """Sprint 58 regression: pdf.yml PdfAConverter.required must contain 'using Aspose.Pdf.Text;'.
+
+        This was the root cause of the pdf-pdf-aconverter Sprint 57 failure.
+        The LLM omitted the using directive for TextFragment, causing CS0246.
+        """
+        ptc = self._load_pdf_per_type_constraints()
+        pdfaconverter_required = ptc.get("PdfAConverter", {}).get("required", [])
+        text_ns_entries = [e for e in pdfaconverter_required if "Aspose.Pdf.Text" in e]
+        assert text_ns_entries, (
+            "pdf.yml PdfAConverter.required must include 'using Aspose.Pdf.Text;' "
+            "(missing directive caused Sprint 57 pdf-pdf-aconverter build failure). "
+            f"Current required entries: {pdfaconverter_required}"
+        )
+
+    def test_pdfaconverter_code_missing_using_pdf_text_fails_validation(self):
+        """Sprint 58 regression: Code with TextFragment but no using Aspose.Pdf.Text; must fail.
+
+        Validates that _validate_code_from_constraints correctly catches the
+        missing directive when PdfAConverter per_type_constraints are applied.
+        """
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+
+        ptc = self._load_pdf_per_type_constraints()
+        pdfaconverter_constraints = ptc.get("PdfAConverter", {})
+        # Code that omits using Aspose.Pdf.Text; — valid C# pattern but missing using
+        code_missing_using = (
+            "using System;\n"
+            "using Aspose.Pdf;\n"
+            "using Aspose.Pdf.LowCode;\n"
+            "var doc = new Document();\n"
+            "var page = doc.Pages.Add();\n"
+            "page.Paragraphs.Add(new TextFragment(\"Hello PDF/A\"));\n"
+            "doc.Save(\"input.pdf\");\n"
+            "var options = new PdfAConvertOptions();\n"
+            "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+            "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+            "var result = new PdfAConverter().Process(options);\n"
+        )
+        issues = _validate_code_from_constraints(code_missing_using, pdfaconverter_constraints)
+        assert any("Aspose.Pdf.Text" in i for i in issues), (
+            "PdfAConverter validation must flag missing 'using Aspose.Pdf.Text;' directive. "
+            f"Issues found: {issues}"
+        )
+
+    def test_pdfaconverter_code_with_using_pdf_text_passes_validation(self):
+        """Sprint 58 regression: Code with TextFragment AND using Aspose.Pdf.Text; must pass."""
+        from plugin_examples.generator.code_generator import _validate_code_from_constraints
+
+        ptc = self._load_pdf_per_type_constraints()
+        pdfaconverter_constraints = ptc.get("PdfAConverter", {})
+        code_with_using = (
+            "using System;\n"
+            "using Aspose.Pdf;\n"
+            "using Aspose.Pdf.LowCode;\n"
+            "using Aspose.Pdf.Text;\n"
+            "var doc = new Document();\n"
+            "var page = doc.Pages.Add();\n"
+            "page.Paragraphs.Add(new TextFragment(\"Hello PDF/A\"));\n"
+            "doc.Save(\"input.pdf\");\n"
+            "var options = new PdfAConvertOptions();\n"
+            "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+            "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+            "var result = new PdfAConverter().Process(options);\n"
+        )
+        issues = _validate_code_from_constraints(code_with_using, pdfaconverter_constraints)
+        assert len(issues) == 0, (
+            f"PdfAConverter code with all required using directives must pass validation. "
+            f"Unexpected issues: {issues}"
+        )
+
+
 class TestPdfValidatorNewChecks:
     """Tests for new _validate_code PDF checks added in Phase 4."""
 

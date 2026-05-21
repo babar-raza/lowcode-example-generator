@@ -80,6 +80,16 @@ def _api_get(url: str, headers: dict) -> dict:
         raise MergeError(f"GET {url} failed: HTTP {exc.code} {exc.reason}") from exc
 
 
+def _api_delete(url: str, headers: dict) -> None:
+    """Send a DELETE request. Raises MergeError on HTTP error."""
+    req = urllib.request.Request(url, headers=headers, method="DELETE")
+    try:
+        with urllib.request.urlopen(req):
+            pass  # 204 No Content on success
+    except urllib.error.HTTPError as exc:
+        raise MergeError(f"DELETE {url} failed: HTTP {exc.code} {exc.reason}") from exc
+
+
 def check_merge_preconditions(
     owner: str,
     repo: str,
@@ -338,7 +348,7 @@ def merge_pr(
     if not merge_commit_sha:
         raise MergeError("Merge succeeded but no merge_commit_sha returned")
 
-    return {
+    result = {
         "merged": True,
         "merge_commit_sha": merge_commit_sha,
         "pr_number": pr_number,
@@ -348,3 +358,99 @@ def merge_pr(
         "message": merge_response.get("message", ""),
         "preconditions": preconditions["checks"],
     }
+
+    # Step 3: Auto-delete source branch if enabled
+    head_ref = pr_data.get("head", {}).get("ref", "")
+    if head_ref:
+        delete_result = delete_branch_after_merge(
+            owner=owner,
+            repo=repo,
+            branch_ref=head_ref,
+            github_token=github_token,
+            allow_branch_auto_delete=False,  # dry-run by default; caller must opt in
+            dry_run=True,
+        )
+        result["branch_delete"] = delete_result
+
+    return result
+
+
+_LOWCODE_BRANCH_PREFIXES = ("lowcode-pilot-", "lowcode-wave-")
+
+
+def delete_branch_after_merge(
+    owner: str,
+    repo: str,
+    branch_ref: str,
+    github_token: str,
+    allow_branch_auto_delete: bool = False,
+    dry_run: bool = True,
+) -> dict:
+    """Delete a source branch after merge verification.
+
+    Safety contract:
+        - Only deletes branches with recognized prefixes (lowcode-pilot- or lowcode-wave-).
+        - Requires ``allow_branch_auto_delete=True`` AND ``dry_run=False`` to perform
+          a real deletion.
+        - Dry-run mode (default) returns what WOULD be deleted without any API call.
+        - Token is NEVER logged or serialized.
+
+    Args:
+        owner: GitHub repo owner.
+        repo: GitHub repo name.
+        branch_ref: Branch name (e.g. ``"lowcode-pilot-cells-sprint58"``).
+        github_token: GitHub token for API calls (never logged).
+        allow_branch_auto_delete: Flag that must be ``True`` to permit deletion.
+        dry_run: When ``True`` (default), performs no remote mutation.
+
+    Returns:
+        Dict describing the delete action (or dry-run preview).
+    """
+    is_lowcode_branch = any(branch_ref.startswith(p) for p in _LOWCODE_BRANCH_PREFIXES)
+
+    if not is_lowcode_branch:
+        return {
+            "action": "skipped",
+            "reason": f"Branch '{branch_ref}' does not match lowcode-pilot- or lowcode-wave- prefix",
+            "branch_ref": branch_ref,
+            "dry_run": dry_run,
+        }
+
+    if not allow_branch_auto_delete:
+        return {
+            "action": "skipped",
+            "reason": "allow_branch_auto_delete=False (default). Set allow_branch_auto_delete=True to enable.",
+            "branch_ref": branch_ref,
+            "dry_run": dry_run,
+        }
+
+    if dry_run:
+        return {
+            "action": "dry_run_would_delete",
+            "branch_ref": branch_ref,
+            "api_endpoint": f"DELETE /repos/{owner}/{repo}/git/refs/heads/{branch_ref}",
+            "dry_run": True,
+        }
+
+    # Live delete
+    headers = _get_headers(github_token)
+    delete_url = f"{GITHUB_API_BASE}/repos/{owner}/{repo}/git/refs/heads/{branch_ref}"
+    logger.info(
+        "Deleting branch '%s' in %s/%s after merge — token not logged",
+        branch_ref, owner, repo,
+    )
+    try:
+        _api_delete(delete_url, headers)
+        return {
+            "action": "deleted",
+            "branch_ref": branch_ref,
+            "dry_run": False,
+        }
+    except Exception as exc:
+        logger.warning("Branch delete failed for %s: %s", branch_ref, exc)
+        return {
+            "action": "delete_failed",
+            "branch_ref": branch_ref,
+            "error": str(exc),
+            "dry_run": False,
+        }

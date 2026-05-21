@@ -383,3 +383,116 @@ class TestPostMergePlanWritten(unittest.TestCase):
         self.assertIn("APPROVE_MERGE_PR", content)
         self.assertIn("merge_commit_sha", content)
         self.assertIn("rollback", content.lower())
+
+
+class TestBranchAutoDelete(unittest.TestCase):
+    """Sprint 58 Lane G: branch auto-delete implementation tests.
+
+    The delete_branch_after_merge function:
+    - Is DRY-RUN by default (no remote mutation without allow_branch_auto_delete=True AND dry_run=False)
+    - Only acts on lowcode-pilot- and lowcode-wave- prefixed branches
+    - Skips non-lowcode branches
+    - Skips when allow_branch_auto_delete=False
+    """
+
+    def _import_delete_fn(self):
+        from plugin_examples.publisher.github_pr_merger import delete_branch_after_merge
+        return delete_branch_after_merge
+
+    def test_dry_run_by_default(self):
+        """delete_branch_after_merge must be dry-run when called with defaults."""
+        delete_branch_after_merge = self._import_delete_fn()
+        result = delete_branch_after_merge(
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+            branch_ref="lowcode-pilot-cells-sprint58",
+            github_token="fake-token",
+            allow_branch_auto_delete=True,
+            dry_run=True,
+        )
+        self.assertEqual(result["action"], "dry_run_would_delete")
+        self.assertIn("api_endpoint", result)
+        self.assertTrue(result["dry_run"])
+
+    def test_skips_non_lowcode_branch(self):
+        """Branches without lowcode-pilot- or lowcode-wave- prefix must be skipped."""
+        delete_branch_after_merge = self._import_delete_fn()
+        result = delete_branch_after_merge(
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+            branch_ref="main",
+            github_token="fake-token",
+            allow_branch_auto_delete=True,
+            dry_run=False,
+        )
+        self.assertEqual(result["action"], "skipped")
+        self.assertIn("does not match", result["reason"])
+
+    def test_skips_feature_branch_without_prefix(self):
+        """Feature branches without recognized prefix must be skipped."""
+        delete_branch_after_merge = self._import_delete_fn()
+        result = delete_branch_after_merge(
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+            branch_ref="feature/add-example",
+            github_token="fake-token",
+            allow_branch_auto_delete=True,
+            dry_run=False,
+        )
+        self.assertEqual(result["action"], "skipped")
+
+    def test_skips_when_flag_disabled(self):
+        """When allow_branch_auto_delete=False, even lowcode branches must be skipped."""
+        delete_branch_after_merge = self._import_delete_fn()
+        result = delete_branch_after_merge(
+            owner="aspose-cells-net",
+            repo="Aspose.Cells.LowCode-for-.NET-Examples",
+            branch_ref="lowcode-pilot-cells-sprint58",
+            github_token="fake-token",
+            allow_branch_auto_delete=False,
+            dry_run=False,
+        )
+        self.assertEqual(result["action"], "skipped")
+        self.assertIn("allow_branch_auto_delete=False", result["reason"])
+
+    def test_lowcode_wave_prefix_recognized(self):
+        """lowcode-wave- prefix is also recognized for auto-delete."""
+        delete_branch_after_merge = self._import_delete_fn()
+        result = delete_branch_after_merge(
+            owner="aspose-pdf-net",
+            repo="Aspose.PDF.LowCode-for-.NET-Examples",
+            branch_ref="lowcode-wave-pdf-sprint58-wave-g",
+            github_token="fake-token",
+            allow_branch_auto_delete=True,
+            dry_run=True,
+        )
+        self.assertEqual(result["action"], "dry_run_would_delete")
+        self.assertIn("lowcode-wave-pdf-sprint58-wave-g", result["api_endpoint"])
+
+    def test_dry_run_does_not_call_api(self):
+        """Dry-run must never invoke _api_delete."""
+        delete_branch_after_merge = self._import_delete_fn()
+        with patch("plugin_examples.publisher.github_pr_merger._api_delete") as mock_delete:
+            delete_branch_after_merge(
+                owner="aspose-cells-net",
+                repo="test-repo",
+                branch_ref="lowcode-pilot-cells-sprint58",
+                github_token="fake-token",
+                allow_branch_auto_delete=True,
+                dry_run=True,
+            )
+            mock_delete.assert_not_called()
+
+    def test_no_api_call_when_flag_disabled(self):
+        """_api_delete must never be called when allow_branch_auto_delete=False."""
+        delete_branch_after_merge = self._import_delete_fn()
+        with patch("plugin_examples.publisher.github_pr_merger._api_delete") as mock_delete:
+            delete_branch_after_merge(
+                owner="aspose-cells-net",
+                repo="test-repo",
+                branch_ref="lowcode-pilot-cells-sprint58",
+                github_token="fake-token",
+                allow_branch_auto_delete=False,
+                dry_run=False,
+            )
+            mock_delete.assert_not_called()

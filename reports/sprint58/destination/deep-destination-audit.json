@@ -1,0 +1,144 @@
+{
+  "generated": "2026-05-21",
+  "sprint": "Sprint 58",
+  "families": {
+    "cells": {
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "expected_version": "26.5.1",
+      "expected_count": 9,
+      "package_id": "Aspose.Cells",
+      "examples_found": [
+        "html-converter",
+        "image-converter",
+        "json-converter",
+        "pdf-converter",
+        "spreadsheet-converter",
+        "spreadsheet-locker",
+        "spreadsheet-merger",
+        "spreadsheet-splitter",
+        "text-converter"
+      ],
+      "example_count": 9,
+      "count_match": true,
+      "package_version_in_repo": "26.5.1",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    },
+    "words": {
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "expected_version": "26.5.0",
+      "expected_count": 8,
+      "package_id": "Aspose.Words",
+      "examples_found": [
+        "comparer",
+        "converter",
+        "mail-merger",
+        "merger",
+        "replacer",
+        "report-builder",
+        "splitter",
+        "watermarker"
+      ],
+      "example_count": 8,
+      "count_match": true,
+      "package_version_in_repo": "26.5.0",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    },
+    "pdf": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "expected_version": "26.5.0",
+      "expected_count": 19,
+      "package_id": "Aspose.PDF",
+      "examples_found": [
+        "doc-converter",
+        "form-editor",
+        "form-exporter",
+        "form-flattener",
+        "html",
+        "image-extractor",
+        "jpeg",
+        "merger",
+        "optimizer",
+        "pdfa-converter",
+        "png",
+        "security",
+        "signature",
+        "splitter",
+        "table-generator",
+        "text-extractor",
+        "tiff",
+        "toc-generator",
+        "xls-converter"
+      ],
+      "example_count": 19,
+      "count_match": true,
+      "package_version_in_repo": "26.5.0",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    },
+    "diagram": {
+      "owner": "aspose-diagram-net",
+      "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+      "expected_version": "26.5.0",
+      "expected_count": 2,
+      "package_id": "Aspose.Diagram",
+      "examples_found": [
+        "diagram-diagram-converter",
+        "diagram-pdf-converter"
+      ],
+      "example_count": 2,
+      "count_match": true,
+      "package_version_in_repo": "26.5.0",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    },
+    "email": {
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+      "expected_version": "26.4.0",
+      "expected_count": 1,
+      "package_id": "Aspose.Email",
+      "examples_found": [
+        "converter"
+      ],
+      "example_count": 1,
+      "count_match": true,
+      "package_version_in_repo": "26.4.0",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    },
+    "slides": {
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+      "expected_version": "26.5.0",
+      "expected_count": 3,
+      "package_id": "Aspose.Slides",
+      "examples_found": [
+        "compress",
+        "convert",
+        "merger"
+      ],
+      "example_count": 3,
+      "count_match": true,
+      "package_version_in_repo": "26.5.0",
+      "version_match": true,
+      "version_drift": false,
+      "status": "COUNT_OK+VERSION_CURRENT"
+    }
+  },
+  "summary": {
+    "total_families": 6,
+    "all_counts_verified": true,
+    "version_drifts": [],
+    "verdict": "FULLY_VERIFIED"
+  }
+}

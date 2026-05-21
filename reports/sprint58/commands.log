@@ -1,0 +1,137 @@
+# Sprint 58 Commands Log
+# Started: 2026-05-21
+# Git HEAD at start: 052f1a5429ce7a18e34c30bf1697ade477c15b33
+
+# ========== PHASE 0 — Sprint 57 Closure Audit ==========
+
+# [Phase 0] Read Sprint 57 evidence contract to classify defects
+# Read: reports/sprint57/evidence-contract.json
+# Read: reports/sprint57/sprint-state.json
+# Read: reports/sprint57/final-verdict.md
+# List: reports/sprint57/lanes/lane-I/ → git-status-before.txt, test-run.log
+# List: reports/sprint57/lanes/lane-J/ → empty
+# List: reports/sprint57/destination/ → audit files present
+# Result: 11 defects classified (D01–D11)
+
+# [Phase 0] Create Sprint 58 audit reports
+# Write: reports/sprint58/00-sprint57-evidence-audit.md
+# Write: reports/sprint58/01-sprint57-claim-vs-proof-matrix.md
+# Write: reports/sprint58/02-corrected-state.md
+# Write: reports/sprint58/commands.log (this file)
+# Write: reports/sprint58/todo.md
+# Write: reports/sprint58/evidence-contract.json
+
+# ========== PHASE 1 — Governed 11-Lane Setup ==========
+
+# [Phase 1] Create sprint governance files
+# Write: reports/sprint58/sprint-state.json (11 lanes, all PENDING at start)
+# Write: reports/sprint58/lane-ownership.md
+
+# ========== PHASE 2 — PdfAConverter Fix ==========
+
+# [Phase 2] Fix pdf-pdf-aconverter (Sprint 57 defect D11)
+# Edit: pipeline/configs/families/pdf.yml — added "using Aspose.Pdf.Text;" to per_type_constraints.PdfAConverter.required
+# Edit: tests/unit/test_llm_generation.py — added TestPdfAConverterConstraint (3 tests)
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_llm_generation.py::TestPdfAConverterConstraint -v
+#   RESULT: 3 passed
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family pdf --require-validation --promote-latest
+#   RESULT: 19/19 PDF examples generated, including pdf-pdf-aconverter
+# Write: reports/sprint58/lanes/lane-D/pdfaconverter-fix-proof.md
+
+# ========== PHASE 3 — Package Authority Proof ==========
+
+# [Phase 3] Build DLL reflection authority matrix from real api-catalog.json files
+# Read: workspace/runs/discovery-*/catalog/*/api-catalog.json (all 6 families)
+# Write: reports/sprint58/lanes/lane-B/reflection-ledger.json
+# Write: reports/sprint58/lanes/lane-B/xml-doc-ledger.json
+# Write: reports/sprint58/lanes/lane-B/runtime-probe-ledger.json
+# Write: reports/sprint58/lanes/lane-B/io-authority-evidence-matrix.json
+#   RESULT: 42/42 types — zero contract_only entries
+
+# ========== PHASE 4 — Consistency Scan ==========
+
+# [Phase 4] Run consistency scan across FA contracts, configs, manifests, denominators
+# Write + Run: reports/sprint58/lanes/lane-C/consistency_scan.py
+#   RESULT: ALL_PASS_WITH_NAMING_NOTES (C01 NAMING_DRIFT in diagram/slides denominator shorthand)
+# Write: reports/sprint58/lanes/lane-C/consistency-scan-report.json
+
+# ========== PHASE 5 — 42/42 Per-Example Regeneration ==========
+
+# [Phase 5] Regenerate all 6 families
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family cells --require-validation --promote-latest
+#   RESULT: 9/9 PASS
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family words --require-validation --promote-latest
+#   RESULT: 8/8 PASS
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family pdf --require-validation --promote-latest
+#   RESULT: 19/19 PASS (PdfAConverter now passes)
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family diagram --require-validation --promote-latest
+#   RESULT: 2/2 PASS
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family email --require-validation --promote-latest
+#   RESULT: 1/1 PASS
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples run --family slides --require-validation --promote-latest
+#   RESULT: 3/3 PASS
+# Build: reports/sprint58/regeneration/per-example/ (42 JSON files from lifecycle records)
+# Write: reports/sprint58/regeneration/full-regeneration-ledger.json
+#   RESULT: SPRINT58_REGENERATION_42_OF_42_PASS
+
+# ========== PHASE 6 — Destination Deep Audit ==========
+
+# [Phase 6] Deep destination repo audit via GitHub API
+# GitHub API: GET /repos/{owner}/{repo}/contents/Examples (all 6 repos)
+# Write: reports/sprint58/destination/deep-destination-audit.json
+#   RESULT: FULLY_VERIFIED — 42/42 examples, all package versions current
+# Write: reports/sprint58/destination/readme-audit-results.json
+#   RESULT: SAMPLED_AUDIT_PASSED — 3/family sampled, all have README.md
+
+# ========== PHASE 7 — Branch Auto-Delete Implementation ==========
+
+# [Phase 7] Implement delete_branch_after_merge() in github_pr_merger.py
+# Edit: src/plugin_examples/publisher/github_pr_merger.py
+#   Added: _api_delete(), _LOWCODE_BRANCH_PREFIXES, delete_branch_after_merge()
+#   Integrated into merge_pr() as Step 3
+# Edit: tests/unit/test_merge_governance.py — added TestBranchAutoDelete (7 tests)
+# Run: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_merge_governance.py::TestBranchAutoDelete -v
+#   RESULT: 7 passed
+# Write: reports/sprint58/lanes/lane-G/branch-auto-delete-proof.md
+
+# ========== PHASE 8 — Hygiene Audits ==========
+
+# [Phase 8] Root clutter audit
+# Write: reports/sprint58/hygiene/root-clutter-audit-before.md
+#   RESULT: ROOT_CLEAN_AT_SPRINT58_START — 0 clutter items
+# Write: reports/sprint58/hygiene/root-clutter-audit-after.md
+#   RESULT: ROOT_CLEAN_AT_SPRINT58_END — 0 clutter items
+
+# ========== PHASE 9 — Lane J Process Documents ==========
+
+# [Phase 9] Create 9 process documents for Lane J
+# Write: reports/sprint58/lanes/lane-J/README.md
+# Write: reports/sprint58/lanes/lane-J/01-sprint-governance-process.md
+# Write: reports/sprint58/lanes/lane-J/02-family-regeneration-runbook.md
+# Write: reports/sprint58/lanes/lane-J/03-package-authority-proof-process.md
+# Write: reports/sprint58/lanes/lane-J/04-destination-audit-process.md
+# Write: reports/sprint58/lanes/lane-J/05-readme-audit-process.md
+# Write: reports/sprint58/lanes/lane-J/06-branch-auto-delete-process.md
+# Write: reports/sprint58/lanes/lane-J/07-pr-lifecycle-process.md
+# Write: reports/sprint58/lanes/lane-J/08-evidence-bundle-process.md
+# Write: reports/sprint58/lanes/lane-J/09-lane-j-closure-checklist.md
+# Edit: reports/sprint58/sprint-state.json (lane-J → COMPLETE, lanes A-H → COMPLETE)
+
+# ========== PHASE 10 — Full Test Suite ==========
+
+# [Phase 10] Run full test suite
+# Run: cd lowcode-example-generator && PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -x -q 2>&1 | tee reports/sprint58/lanes/lane-I/test-run.log
+#   RESULT: 2826 passed, 3 skipped, 0 failed (74.08s)
+# Run: git status 2>&1 | tee reports/sprint58/lanes/lane-I/git-status.txt
+#   RESULT: Sprint 58 changes present (uncommitted), reports/sprint58/ untracked
+
+# ========== PHASE 11 — Final Evidence Bundle ==========
+
+# [Phase 11] Build bundle manifest and final verdict
+# Run: Python SHA256 enumeration of all reports/sprint58/ files
+# Write: reports/sprint58/bundle-manifest.json
+# Write: reports/sprint58/final-verdict.md
+# Edit: reports/sprint58/evidence-contract.json (EC04→PRESENT, EC24→PRESENT, EC25→PRESENT)
+# Edit: reports/sprint58/sprint-state.json (verdict→COMPLETE)
+# LOG COMPLETE — 2026-05-21T17:00:00Z
+

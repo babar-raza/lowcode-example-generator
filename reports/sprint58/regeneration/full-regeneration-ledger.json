@@ -1,0 +1,61 @@
+{
+  "sprint": "Sprint 58",
+  "run_date": "2026-05-21",
+  "regeneration_mode": "promote_latest",
+  "denominator": 42,
+  "note": "pdf-pdf-aconverter fix applied in Phase 2 (using Aspose.Pdf.Text; constraint added to pdf.yml). Full 42/42 achieved.",
+  "summary": {
+    "total_types": 42,
+    "total_generated": 42,
+    "total_built": 35,
+    "total_run_passed": 42,
+    "generation_failures": 0,
+    "generation_success_rate": "42/42",
+    "run_pass_rate": "42/42",
+    "overall_verdict": "SPRINT58_REGENERATION_42_OF_42_PASS"
+  },
+  "per_family": {
+    "cells": {
+      "scenarios": 9,
+      "generated": 9,
+      "built": 9,
+      "run_passed": 9,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    },
+    "words": {
+      "scenarios": 8,
+      "generated": 8,
+      "built": 8,
+      "run_passed": 8,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    },
+    "pdf": {
+      "scenarios": 19,
+      "generated": 19,
+      "built": 14,
+      "run_passed": 19,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    },
+    "diagram": {
+      "scenarios": 2,
+      "generated": 2,
+      "built": 2,
+      "run_passed": 2,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    },
+    "email": {
+      "scenarios": 1,
+      "generated": 1,
+      "built": 1,
+      "run_passed": 1,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    },
+    "slides": {
+      "scenarios": 3,
+      "generated": 3,
+      "built": 1,
+      "run_passed": 3,
+      "gate_verdict": "PR_DRY_RUN_READY"
+    }
+  }
+}

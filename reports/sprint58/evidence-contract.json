@@ -1,0 +1,256 @@
+{
+  "contract_version": "sprint58-v1",
+  "sprint_id": "sprint58-closure-repair-42-42-regeneration-20260521",
+  "created_at": "2026-05-21T14:45:00Z",
+  "description": "Evidence contract for Sprint 58. All blocking categories must be PRESENT before closure verdict is issued. Any PENDING blocking category = INVALID_CLOSURE.",
+  "bundle_min_files": 25,
+  "required_evidence_categories": [
+    {
+      "id": "EC01",
+      "name": "sprint57_audit_report",
+      "description": "Sprint 57 claim-vs-proof audit classifying all 11 defects",
+      "file": "reports/sprint58/00-sprint57-evidence-audit.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC02",
+      "name": "sprint57_claim_vs_proof_matrix",
+      "description": "Tabular matrix of 20 Sprint 57 claims with VERIFIED/UNVERIFIED/CONTRADICTED",
+      "file": "reports/sprint58/01-sprint57-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC03",
+      "name": "corrected_state",
+      "description": "Sprint 57 corrected state — what was actually proven vs claimed",
+      "file": "reports/sprint58/02-corrected-state.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC04",
+      "name": "commands_log",
+      "description": "All commands run during Sprint 58 with context",
+      "file": "reports/sprint58/commands.log",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC05",
+      "name": "sprint58_todo",
+      "description": "Sprint 58 phase checklist with per-phase acceptance criteria",
+      "file": "reports/sprint58/todo.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC06",
+      "name": "sprint58_state",
+      "description": "Sprint 58 governance state machine with 11 lanes",
+      "file": "reports/sprint58/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC07",
+      "name": "lane_ownership",
+      "description": "Lane ownership document for all 11 lanes",
+      "file": "reports/sprint58/lane-ownership.md",
+      "blocking": false,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC08",
+      "name": "pdfaconverter_fix_proof",
+      "description": "Proof that pdf-pdf-aconverter fix was applied and example now generates/builds",
+      "file": "reports/sprint58/lanes/lane-D/pdfaconverter-fix-proof.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC09",
+      "name": "reflection_ledger",
+      "description": "DLL reflection output per package — external API surface proof",
+      "file": "reports/sprint58/lanes/lane-B/reflection-ledger.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC10",
+      "name": "xml_doc_ledger",
+      "description": "XML documentation parse output per package",
+      "file": "reports/sprint58/lanes/lane-B/xml-doc-ledger.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC11",
+      "name": "runtime_probe_ledger",
+      "description": "Runtime assembly probe per package — type enumeration",
+      "file": "reports/sprint58/lanes/lane-B/runtime-probe-ledger.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC12",
+      "name": "io_authority_evidence_matrix",
+      "description": "42-type I/O authority matrix with external proof source per type — zero contract_only entries",
+      "file": "reports/sprint58/lanes/lane-B/io-authority-evidence-matrix.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC13",
+      "name": "consistency_scan_report",
+      "description": "Full consistency scan across package authority, FA contracts, configs, manifests — ALL_PASS_WITH_NAMING_NOTES",
+      "file": "reports/sprint58/lanes/lane-C/consistency-scan-report.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC14",
+      "name": "per_example_regeneration_dir",
+      "description": "Per-example regeneration records (42 JSON files in per-example/ directory)",
+      "file": "reports/sprint58/regeneration/per-example/",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC15",
+      "name": "full_regeneration_ledger",
+      "description": "Full regeneration ledger: 42/42 generated, run_passed — SPRINT58_REGENERATION_42_OF_42_PASS",
+      "file": "reports/sprint58/regeneration/full-regeneration-ledger.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC16",
+      "name": "deep_destination_audit",
+      "description": "Deep destination repo audit: counts 42/42, versions all current — FULLY_VERIFIED",
+      "file": "reports/sprint58/destination/deep-destination-audit.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC17",
+      "name": "readme_audit_results",
+      "description": "README audit: sampled examples all have README.md — SAMPLED_AUDIT_PASSED",
+      "file": "reports/sprint58/destination/readme-audit-results.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC18",
+      "name": "branch_auto_delete_implementation",
+      "description": "Branch auto-delete: implemented in github_pr_merger.py, 7 dry-run tests pass",
+      "file": "reports/sprint58/lanes/lane-G/branch-auto-delete-proof.md",
+      "blocking": false,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC19",
+      "name": "hygiene_audit_before",
+      "description": "Root clutter before audit (Sprint 58 start state)",
+      "file": "reports/sprint58/hygiene/root-clutter-audit-before.md",
+      "blocking": false,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC20",
+      "name": "hygiene_audit_after",
+      "description": "Root clutter after audit (Sprint 58 end state)",
+      "file": "reports/sprint58/hygiene/root-clutter-audit-after.md",
+      "blocking": false,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC21",
+      "name": "lane_j_process_docs",
+      "description": "9 process documents in lane-J/ closing Lane J PENDING defect",
+      "file": "reports/sprint58/lanes/lane-J/",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC22",
+      "name": "test_run_log",
+      "description": "Full test suite output: 0 failed",
+      "file": "reports/sprint58/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC23",
+      "name": "git_status_end",
+      "description": "git status at Sprint 58 close — proves committed clean state",
+      "file": "reports/sprint58/lanes/lane-I/git-status.txt",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC24",
+      "name": "bundle_manifest",
+      "description": "Bundle manifest with SHA256 per file, total file count, overall bundle SHA256",
+      "file": "reports/sprint58/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC25",
+      "name": "final_verdict",
+      "description": "Final Sprint 58 verdict with scorecard and all evidence references",
+      "file": "reports/sprint58/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT"
+    }
+  ],
+  "bundle_validation_rules": [
+    {
+      "rule": "bundle_has_min_25_files",
+      "description": "Bundle must contain at least 25 meaningful files",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "no_pending_blocking_categories",
+      "description": "Any blocking EC category with status PENDING = INVALID_CLOSURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "no_metadata_only_bundle",
+      "description": "Bundle cannot contain only sprint-state.json and bundle-manifest.json",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "test_log_required",
+      "description": "Test counts claimed without log file is FAILURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "regeneration_ledger_per_example",
+      "description": "Regeneration count must be backed by per-example directory",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "package_authority_no_contract_only",
+      "description": "io-authority-evidence-matrix.json cannot have authority_source=contract_only",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "lane_j_not_pending",
+      "description": "Lane J PENDING while claiming COMPLETE is FAILURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "git_status_end_required",
+      "description": "End-of-sprint git status required to prove committed clean state",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "commands_log_complete",
+      "description": "commands.log must not be IN_PROGRESS at closure",
+      "severity": "FAILURE"
+    }
+  ]
+}

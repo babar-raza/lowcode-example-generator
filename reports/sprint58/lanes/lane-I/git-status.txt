@@ -1,0 +1,124 @@
+On branch main
+Your branch is ahead of 'origin/main' by 44 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   pipeline/configs/families/pdf.yml
+	modified:   src/plugin_examples/publisher/github_pr_merger.py
+	modified:   tests/unit/test_llm_generation.py
+	modified:   tests/unit/test_merge_governance.py
+	modified:   workspace/manifests/example-index.json
+	modified:   workspace/manifests/existing-examples-index.json
+	modified:   workspace/manifests/fixture-registry.json
+	modified:   workspace/manifests/package-lock.json
+	modified:   workspace/manifests/scenario-catalog.json
+	modified:   workspace/verification/latest/_last_promoted_by.json
+	modified:   workspace/verification/latest/aggregate-gate-results.json
+	modified:   workspace/verification/latest/api-consumer-relationships.json
+	modified:   workspace/verification/latest/api-delta-report.json
+	modified:   workspace/verification/latest/blocked-scenarios.json
+	modified:   workspace/verification/latest/catalog-hash-validation.json
+	modified:   workspace/verification/latest/cells-example-backlog.json
+	modified:   workspace/verification/latest/cells-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/cells-root-readme-audit.json
+	modified:   workspace/verification/latest/cells-root-readme-render-result.json
+	modified:   workspace/verification/latest/cells-source-of-truth-proof.json
+	modified:   workspace/verification/latest/diagram-example-backlog.json
+	modified:   workspace/verification/latest/diagram-source-of-truth-proof.json
+	modified:   workspace/verification/latest/email-example-backlog.json
+	modified:   workspace/verification/latest/email-source-of-truth-proof.json
+	modified:   workspace/verification/latest/example-gate-results.json
+	modified:   workspace/verification/latest/example-impact-report.json
+	modified:   workspace/verification/latest/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/cells/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/cells/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/cells/cells-source-of-truth-proof.json
+	modified:   workspace/verification/latest/families/cells/example-gate-results.json
+	modified:   workspace/verification/latest/families/cells/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/cells/generated-fixtures.json
+	modified:   workspace/verification/latest/families/cells/llm-preflight.json
+	modified:   workspace/verification/latest/families/cells/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/cells/publishing-report.json
+	modified:   workspace/verification/latest/families/cells/validation-results.json
+	modified:   workspace/verification/latest/families/diagram/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/diagram/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/diagram/catalog-hash-validation.json
+	modified:   workspace/verification/latest/families/diagram/diagram-source-of-truth-proof.json
+	modified:   workspace/verification/latest/families/diagram/example-gate-results.json
+	modified:   workspace/verification/latest/families/diagram/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/diagram/llm-preflight.json
+	modified:   workspace/verification/latest/families/diagram/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/diagram/publishing-report.json
+	modified:   workspace/verification/latest/families/diagram/validation-results.json
+	modified:   workspace/verification/latest/families/email/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/email/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/email/catalog-hash-validation.json
+	modified:   workspace/verification/latest/families/email/email-source-of-truth-proof.json
+	modified:   workspace/verification/latest/families/email/example-gate-results.json
+	modified:   workspace/verification/latest/families/email/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/email/llm-preflight.json
+	modified:   workspace/verification/latest/families/email/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/email/publishing-report.json
+	modified:   workspace/verification/latest/families/email/validation-results.json
+	modified:   workspace/verification/latest/families/pdf/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/pdf/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/pdf/catalog-hash-validation.json
+	modified:   workspace/verification/latest/families/pdf/example-gate-results.json
+	modified:   workspace/verification/latest/families/pdf/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/pdf/llm-preflight.json
+	modified:   workspace/verification/latest/families/pdf/pdf-source-of-truth-proof.json
+	modified:   workspace/verification/latest/families/pdf/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/pdf/publishing-report.json
+	modified:   workspace/verification/latest/families/pdf/validation-results.json
+	modified:   workspace/verification/latest/families/slides/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/slides/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/slides/catalog-hash-validation.json
+	modified:   workspace/verification/latest/families/slides/example-gate-results.json
+	modified:   workspace/verification/latest/families/slides/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/slides/llm-preflight.json
+	modified:   workspace/verification/latest/families/slides/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/slides/publishing-report.json
+	modified:   workspace/verification/latest/families/slides/slides-source-of-truth-proof.json
+	modified:   workspace/verification/latest/families/slides/validation-results.json
+	modified:   workspace/verification/latest/families/words/_evidence_metadata.json
+	modified:   workspace/verification/latest/families/words/api-consumer-relationships.json
+	modified:   workspace/verification/latest/families/words/catalog-hash-validation.json
+	modified:   workspace/verification/latest/families/words/example-gate-results.json
+	modified:   workspace/verification/latest/families/words/example-lifecycle-records.json
+	modified:   workspace/verification/latest/families/words/generated-fixtures.json
+	modified:   workspace/verification/latest/families/words/llm-preflight.json
+	modified:   workspace/verification/latest/families/words/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/families/words/publishing-report.json
+	modified:   workspace/verification/latest/families/words/scenario-feedback-updates.json
+	modified:   workspace/verification/latest/families/words/validation-results.json
+	modified:   workspace/verification/latest/families/words/words-source-of-truth-proof.json
+	modified:   workspace/verification/latest/fixture-strategy-plan.json
+	modified:   workspace/verification/latest/generated-fixtures.json
+	modified:   workspace/verification/latest/llm-fewshot-patterns.json
+	modified:   workspace/verification/latest/llm-preflight.json
+	modified:   workspace/verification/latest/pdf-example-backlog.json
+	modified:   workspace/verification/latest/pdf-source-of-truth-proof.json
+	modified:   workspace/verification/latest/plugin-type-role-classification.json
+	modified:   workspace/verification/latest/pr-candidate-manifest.json
+	modified:   workspace/verification/latest/publishing-report.json
+	modified:   workspace/verification/latest/release-status.json
+	modified:   workspace/verification/latest/repair-attempts.json
+	modified:   workspace/verification/latest/runnable-entrypoint-scores.json
+	modified:   workspace/verification/latest/scenario-input-format-map.json
+	modified:   workspace/verification/latest/slides-example-backlog.json
+	modified:   workspace/verification/latest/slides-source-of-truth-proof.json
+	modified:   workspace/verification/latest/stale-existing-examples.json
+	modified:   workspace/verification/latest/validation-results.json
+	modified:   workspace/verification/latest/words-example-backlog.json
+	modified:   workspace/verification/latest/words-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/words-root-readme-audit.json
+	modified:   workspace/verification/latest/words-root-readme-render-result.json
+	modified:   workspace/verification/latest/words-source-of-truth-proof.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	reports/sprint58/
+
+no changes added to commit (use "git add" and/or "git commit -a")

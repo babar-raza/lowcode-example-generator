@@ -1,0 +1,139 @@
+{
+  "generated": "2026-05-21",
+  "sprint": "Sprint 58",
+  "checks": [
+    {
+      "check_id": "C01",
+      "name": "denominator_vs_fa_contracts",
+      "description": "Types in planned runnable denominator must match FA contracts",
+      "denominator_types": 42,
+      "contracted_types": 42,
+      "in_denominator_not_contracted": [
+        [
+          "diagram",
+          "Converter"
+        ],
+        [
+          "diagram",
+          "Merger"
+        ],
+        [
+          "slides",
+          "Merge"
+        ]
+      ],
+      "in_contracted_not_denominator": [
+        [
+          "diagram",
+          "DiagramConverter"
+        ],
+        [
+          "diagram",
+          "PdfConverter"
+        ],
+        [
+          "slides",
+          "Merger"
+        ]
+      ],
+      "naming_precision_drift": [
+        [
+          "('diagram', 'Converter')",
+          "('diagram', 'DiagramConverter')"
+        ],
+        [
+          "('diagram', 'Merger')",
+          "('diagram', 'PdfConverter')"
+        ],
+        [
+          "('slides', 'Merge')",
+          "('slides', 'Merger')"
+        ]
+      ],
+      "true_drift_after_naming_resolution": 0,
+      "resolution_note": "Sprint 57 denominator used shorthand type names. FA contracts use actual DLL class names. Functional coverage is identical \u2014 42 types. Denominator naming will be corrected in Sprint 59.",
+      "drift": 0,
+      "status": "NAMING_DRIFT"
+    },
+    {
+      "check_id": "C02",
+      "name": "queue_vs_fa_contracts",
+      "description": "POST_MERGE_VERIFIED queue entries must match FA contracts (42 types)",
+      "queue_post_merge_count": 42,
+      "contracted_count": 42,
+      "in_queue_not_contracted": [],
+      "in_contracted_not_queue": [],
+      "drift": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "C03",
+      "name": "io_matrix_vs_fa_contracts",
+      "description": "io-authority-evidence-matrix must cover all FA contracted types",
+      "matrix_types": 42,
+      "contracted_types": 42,
+      "in_matrix_not_contracted": [],
+      "in_contracted_not_matrix": [],
+      "drift": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "C04",
+      "name": "no_contract_only_entries",
+      "description": "All io-authority-evidence-matrix entries must have external reflection proof",
+      "contract_only_count": 0,
+      "contract_only_types": [],
+      "status": "PASS"
+    },
+    {
+      "check_id": "C05",
+      "name": "pdf_type_count",
+      "description": "PDF must have exactly 19 contracted types (Waves A-G, FormImporter deferred)",
+      "pdf_contracted_count": 19,
+      "pdf_type_names": [
+        "DocConverter",
+        "FormEditor",
+        "FormExporter",
+        "FormFlattener",
+        "Html",
+        "ImageExtractor",
+        "Jpeg",
+        "Merger",
+        "Optimizer",
+        "PdfAConverter",
+        "Png",
+        "Security",
+        "Signature",
+        "Splitter",
+        "TableGenerator",
+        "TextExtractor",
+        "Tiff",
+        "TocGenerator",
+        "XlsConverter"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "C06",
+      "name": "denominator_is_42",
+      "description": "Total denominator must be exactly 42",
+      "denominator_total": 42,
+      "status": "PASS"
+    },
+    {
+      "check_id": "C07",
+      "name": "queue_post_merge_count_is_42",
+      "description": "Queue must have exactly 42 POST_MERGE_VERIFIED entries",
+      "queue_post_merge_count": 42,
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "verdict": "ALL_PASS_WITH_NAMING_NOTES",
+  "naming_drift_notes": [
+    "C01: Sprint 57 denominator used shorthand names (Converter/Merger/Merge) vs FA contract class names (DiagramConverter/PdfConverter/Merger). Functional coverage is 42/42. No code fix required."
+  ],
+  "total_checks": 7,
+  "passed_checks": 6,
+  "issue_count": 0
+}

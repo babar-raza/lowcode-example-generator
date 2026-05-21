@@ -1,0 +1,18 @@
+{
+  "scenario_id": "pdf-merger",
+  "family": "pdf",
+  "type_name": "merger",
+  "generation_status": "passed",
+  "build_status": "passed",
+  "run_status": "passed",
+  "gate_results": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "generation_failure_reason": null,
+  "build_failure_reason": null,
+  "run_failure_reason": null,
+  "build_repair_attempts": 0,
+  "run_repair_attempts": 0,
+  "run_id": "pilot-pdf-20260521-140902",
+  "generated_at": "2026-05-21T09:17:33.782660+00:00",
+  "gate_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN",
+  "notes": "Sprint 58 regeneration."
+}

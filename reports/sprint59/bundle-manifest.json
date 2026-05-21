@@ -1,0 +1,421 @@
+{
+  "bundle_id": "sprint59-sprint58-closure-repair-io-authority-destination-content-20260521",
+  "sprint_id": "sprint59-sprint58-closure-repair-io-authority-destination-content-20260521",
+  "created_at": "2026-05-21T21:00:00Z",
+  "description": "Sprint 59 evidence bundle manifest. Covers all 79 evidence files (bundle-manifest.json and final-verdict.md computed after). Bundle total on commit: 81 files.",
+  "file_count": 79,
+  "min_required": 35,
+  "bundle_valid": true,
+  "overall_sha256": "29d3ff9bd837bfc7316566306c40c12bb82c367633097d81d2f4959a4ffb58e1",
+  "validation_rules_passed": [
+    "bundle_has_min_35_files",
+    "no_pending_blocking_categories",
+    "zero_unknown_input_formats",
+    "source_diffs_required",
+    "per_example_full_fields",
+    "build_counts_match_per_example",
+    "destination_content_not_count_only",
+    "readme_audit_complete_or_blocked",
+    "git_status_end_clean_or_classified",
+    "test_log_zero_failed",
+    "commands_log_complete",
+    "no_contract_only_authority"
+  ],
+  "files": [
+    {
+      "path": "reports/sprint59/00-sprint58-evidence-audit.md",
+      "sha256": "2fed432ce49a32a9e437ca9170a80effa57f8d21d9e9acb7491ae79a5de76e5e",
+      "size_bytes": 8482
+    },
+    {
+      "path": "reports/sprint59/01-sprint58-claim-vs-proof-matrix.md",
+      "sha256": "796a541efe7b6dbeded9d16e027e27685fc9d2e6e90ea77ac1a0f20fb440b9e8",
+      "size_bytes": 3925
+    },
+    {
+      "path": "reports/sprint59/02-corrected-sprint58-state.md",
+      "sha256": "fd063e1ab56e835e772574f2dadecf61deb3b5a7410d4aff0e40ec7dc7876cb6",
+      "size_bytes": 4385
+    },
+    {
+      "path": "reports/sprint59/commands.log",
+      "sha256": "b087cdc4f3930aef4b07a45b67393ee7d0746bbeed662516cd7e2301292e8802",
+      "size_bytes": 8502
+    },
+    {
+      "path": "reports/sprint59/destination/content-audit.json",
+      "sha256": "400f732676dc8074ef16b7c7494a9e2cab18220c6734c07249e95d00985a1594",
+      "size_bytes": 23176
+    },
+    {
+      "path": "reports/sprint59/destination/correction-plan.md",
+      "sha256": "d695b017e7a31187515cd3ffe8fde82043d5c0e401d2d0267214bf5f036cd87a",
+      "size_bytes": 367
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/cells.md",
+      "sha256": "9317e41b79c114f84a528d3d47686b5a562159622d9c96500232bb31f5a3cab1",
+      "size_bytes": 700
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/diagram.md",
+      "sha256": "e19d6dae9910f210402ca51e4684cb1d191f1e2e2341dfe93e175afa1577ec46",
+      "size_bytes": 333
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/email.md",
+      "sha256": "c6bfd47befaf5e16aba83283bc5f14afde6e1bbf74a65c467f4d35d102b2b226",
+      "size_bytes": 233
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/pdf.md",
+      "sha256": "f931f632f0b61e25a39d421a9e81d061d1a506af2e780180b8e0fcaf3ad0bf9d",
+      "size_bytes": 1143
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/slides.md",
+      "sha256": "06492e80120fb8ac772b23e599c5d1557b63463dc21fe903915264c86efedf93",
+      "size_bytes": 326
+    },
+    {
+      "path": "reports/sprint59/destination/per-family/words.md",
+      "sha256": "6244bc6d4f6792c27d2069fa146c7d57d8e1992ceaf0d8d232dc3d41b142ad0c",
+      "size_bytes": 589
+    },
+    {
+      "path": "reports/sprint59/destination/programcs-vs-authority.json",
+      "sha256": "6d606c38d60d1ff8d89931976b94530b1d13e0d4e6c63658a01d13343162bb93",
+      "size_bytes": 9235
+    },
+    {
+      "path": "reports/sprint59/destination/readme-vs-authority.json",
+      "sha256": "c9486e5faf439cb383877bf43d5de92800d9d4dd9a1108df60b87c34fcf0ad9f",
+      "size_bytes": 5954
+    },
+    {
+      "path": "reports/sprint59/destination/root-readme-audit.json",
+      "sha256": "917c1a02ddb6cdadc84ce22a546a74068be2737ffe5bea7f600ff9a456befca5",
+      "size_bytes": 1738
+    },
+    {
+      "path": "reports/sprint59/evidence-contract.json",
+      "sha256": "140100457ae2492b2308b6bec1448b36c8d61cb7e78eea3b96d8a65b1059423a",
+      "size_bytes": 9972
+    },
+    {
+      "path": "reports/sprint59/git/commit-plan.md",
+      "sha256": "5ad6d970b176582e9c91cedb5da2b2f1e85373de0f26fc4e07fc1a62a2c517c4",
+      "size_bytes": 1003
+    },
+    {
+      "path": "reports/sprint59/git/dirty-file-classification.md",
+      "sha256": "d4d577b3c8cf58af5b74ececf8b951e76b1fd31c59c7999e59ef363663a09459",
+      "size_bytes": 4009
+    },
+    {
+      "path": "reports/sprint59/git/dirty-state-after.txt",
+      "sha256": "4c6b74013d2ff5ee18b33a807c9128bd9319d7957354d51f620313dcb10a0e18",
+      "size_bytes": 297
+    },
+    {
+      "path": "reports/sprint59/git/dirty-state-before.txt",
+      "sha256": "975c9d753b336407cd4a21f85f9f60b33afe8b52ee0797247ec42530473597b7",
+      "size_bytes": 9087
+    },
+    {
+      "path": "reports/sprint59/git/staging-plan.md",
+      "sha256": "08042969cb64b3fbcc8c7bc085eb67207c840fd3fe1d74b53cd5817d944215fd",
+      "size_bytes": 2270
+    },
+    {
+      "path": "reports/sprint59/io-authority/input-format-authority-matrix.json",
+      "sha256": "dcb9b6717fabc47717b8eeaa92de5afe1a61d637d2f02193c7d83fc8ef84ea9f",
+      "size_bytes": 12437
+    },
+    {
+      "path": "reports/sprint59/io-authority/input-output-authority-matrix.json",
+      "sha256": "971a7c904394030bc38ace4bb78226a1ced2dd7321d67d2aadcd688e1ed2bd30",
+      "size_bytes": 33412
+    },
+    {
+      "path": "reports/sprint59/io-authority/package-evidence-bundle-index.json",
+      "sha256": "9f2c77a0f790f03b2a8ce9bb6aaeaa242ea879c99cdeff26f953b0065b8e734b",
+      "size_bytes": 3032
+    },
+    {
+      "path": "reports/sprint59/io-authority/runtime-io-probe-ledger.json",
+      "sha256": "4410e94f105ecb4ed7cdf42333ec5872cabdc5eb12660ae6d92a3e266fbe7379",
+      "size_bytes": 8596
+    },
+    {
+      "path": "reports/sprint59/io-authority/unresolved-io-authority.md",
+      "sha256": "451345cc23f3f322285717fe632d1c611544e14b08e7997045ff3a09334680e5",
+      "size_bytes": 537
+    },
+    {
+      "path": "reports/sprint59/lanes/lane-G/branch-auto-delete-source-proof.md",
+      "sha256": "ee31e4c3a80b22b1fdba152cf6bef3978388c84fda670d796be319e57f4b7178",
+      "size_bytes": 4694
+    },
+    {
+      "path": "reports/sprint59/lanes/lane-G/readme-gate-proof.md",
+      "sha256": "66a1cb757183e8b7c922e07d124059f5aba5b3f4d13af273c941a94ab347e8ae",
+      "size_bytes": 2622
+    },
+    {
+      "path": "reports/sprint59/lanes/lane-I/git-status.txt",
+      "sha256": "f8a4e10ff4e9bd152381cde1c32d18d172fa3b9f8522a3034a64ed53dc05540a",
+      "size_bytes": 980
+    },
+    {
+      "path": "reports/sprint59/lanes/lane-I/test-run.log",
+      "sha256": "cc4dbfb223b4bb362afdfb8fa20f958c5d12902ca0e5b33299d101d993c2e171",
+      "size_bytes": 3284
+    },
+    {
+      "path": "reports/sprint59/regeneration/full-regeneration-ledger-repaired.json",
+      "sha256": "1dfefb3fe2472be3c4277510a00046e852e37f1dc01c21e89ecc4236c0b417fb",
+      "size_bytes": 2347
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-html-converter.json",
+      "sha256": "546ebea7868f598da1a54548de6e99d8a1878f4f5c4753ddb3febc041e9fee0f",
+      "size_bytes": 2281
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-image-converter.json",
+      "sha256": "9b080351354933e14c42a36efcee548103eec92e1825152be56fcea9901e2baa",
+      "size_bytes": 2291
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-json-converter.json",
+      "sha256": "91a5204b69eed88bbea7b2dd152454053179f9d05c79e206a857aa5d63609616",
+      "size_bytes": 2281
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-pdf-converter.json",
+      "sha256": "f9e397562a20fae7e8d34bb2660cd4896a39e31933bed4bf3123eeaef0d34894",
+      "size_bytes": 2269
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-spreadsheet-converter.json",
+      "sha256": "6e9d6924ef334ba122653a0b3b8ce0a6fbe4581a362365eac30de833ef8b9843",
+      "size_bytes": 2357
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-spreadsheet-locker.json",
+      "sha256": "58574fd954b8f8c7edd13fb33397c3cd4685827e257ce3719e35d56b13eabc83",
+      "size_bytes": 2325
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-spreadsheet-merger.json",
+      "sha256": "5a7b79fb43995972e0e5518d6553b63ff12a3a0856819bed300efb83f757f400",
+      "size_bytes": 2325
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-spreadsheet-splitter.json",
+      "sha256": "ddbc90d331c8fd461a24aec842e03ae5e8dab19e6b0c93d0185811ba680b0eb0",
+      "size_bytes": 2347
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/cells-text-converter.json",
+      "sha256": "9224cf671f6f71f5b628a46a0ff461b42e4877b36b79e72522778130efbeeb26",
+      "size_bytes": 2280
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/diagram-diagram-converter.json",
+      "sha256": "c5c9207378b3c8aabf7bb69ea5d99847fa1e899ec38a2c0837251a18dfabb512",
+      "size_bytes": 2363
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/diagram-pdf-converter.json",
+      "sha256": "a0d770f562545f41c5ad1b1d72060141090a0988df9b75aa218a9163f55c1923",
+      "size_bytes": 2319
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/email-converter.json",
+      "sha256": "6d8c8afa1e232a4ea3a577e7944407bffe481e0cfb9da9ac355b8fe7829b9671",
+      "size_bytes": 2229
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-doc-converter.json",
+      "sha256": "a3c66f48b9dd7d17cd0ff4b9be63b1e026b1ab0db3a352d27ee2f0fec735b508",
+      "size_bytes": 2218
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-form-editor.json",
+      "sha256": "862e74ce1ea79c33303de671fdc6ebb503a9f508f2b82ba560cbb85606c4986f",
+      "size_bytes": 2195
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-form-exporter.json",
+      "sha256": "b46affd707a1ede9e3afca978335855e0c98397726749a6067b888c6406ca581",
+      "size_bytes": 2218
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-form-flattener.json",
+      "sha256": "478c931ad9d3d7bb01e22237d27c223bf9b60c5d5e44e16f2945d401a88429b1",
+      "size_bytes": 2228
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-html.json",
+      "sha256": "ff41d64f68604e2f4ed529c29178c3ac580256683bf4083efc6800ce08dff993",
+      "size_bytes": 2121
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-image-extractor.json",
+      "sha256": "4dfcc22115338b970c97b39781639d5dd9a2c5f681db01454a32f408b7ff0e26",
+      "size_bytes": 2239
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-jpeg.json",
+      "sha256": "a6f95943603702b2bcb343f514fb4a5cf1bd1d3ec85fcc972cb0a11cf4a4397e",
+      "size_bytes": 2119
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-merger.json",
+      "sha256": "4ca5059236385c68759c46e7ade1801aa0e0dd853396b2a225774c5cdc9f1e7a",
+      "size_bytes": 2141
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-optimizer.json",
+      "sha256": "51476e9e3bdd855bc37120fd14943f671c357dbfac65e8834922e41b68ffdd9f",
+      "size_bytes": 2174
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-pdf-aconverter.json",
+      "sha256": "4c9b266fbecb4c83c339c7c7ba8102484188b1eb5b881786b49132f16be5926a",
+      "size_bytes": 2228
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-png.json",
+      "sha256": "98d39fca47f6a8ad500210c199af4233fcb363342b6950ec5817595e0003fd68",
+      "size_bytes": 2108
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-security.json",
+      "sha256": "350ea73a47af59dfbd74bd3ffeffcc61ae577f3ed7608958790a3c6a640c8928",
+      "size_bytes": 2163
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-signature.json",
+      "sha256": "fe82bdb08465b9cee65c42a25c36eec0b86a35f4d690d87d8c499d5c597b304e",
+      "size_bytes": 2174
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-splitter.json",
+      "sha256": "e295046de0edaa363550194e6037975be9f1a8c4bd3574f831fb3dc10926068e",
+      "size_bytes": 2163
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-table-generator.json",
+      "sha256": "29ffaa71303133b0148a21fce296f8e7e90cc79722e2d2518cd5dd2963b2b126",
+      "size_bytes": 2278
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-text-extractor.json",
+      "sha256": "e22a1df3cbbfdf4cd32ab2da64e93f3a8048415ade288ac897137c4047856c6b",
+      "size_bytes": 2272
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-tiff.json",
+      "sha256": "d317e38b925267f852a17275c1c6179fa4f7cbe910b573cd49b931b0e462019e",
+      "size_bytes": 2159
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-toc-generator.json",
+      "sha256": "e5e26727ad6424c3cb2747e4485e7ae05b154418254e9d755fbdcfdc106de86a",
+      "size_bytes": 2256
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/pdf-xls-converter.json",
+      "sha256": "074780aefd4d50b67cd637418e10d3c00f8268cc7cef122ad19f29e264ebd2cc",
+      "size_bytes": 2257
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/slides-compress.json",
+      "sha256": "292a0d3693cba8312c52051128f9aedc83508f830d07d58641405b0a5ad3c673",
+      "size_bytes": 2241
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/slides-convert.json",
+      "sha256": "8b478580a11c72242e206b8c71aa48e91af913b17e85970862efabca5544ea35",
+      "size_bytes": 2268
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/slides-merger.json",
+      "sha256": "f2a93efd5daa50f7da7d6e2797b11f27a02fd42b168e7f3a5d5c5897c4707f2b",
+      "size_bytes": 2258
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-comparer.json",
+      "sha256": "f590bdac3bec1065a221161653662242e0b3d50791f0f208085385c50389eaf9",
+      "size_bytes": 2216
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-converter.json",
+      "sha256": "27af493c77d035f8662458b672b138b737fd3989ab8c3519abad4cdf038c78ed",
+      "size_bytes": 2226
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-mail-merger.json",
+      "sha256": "b3167f9ecd3d17c4aec24ea090ec9930f13318fb7184c154e88c7796bec4e508",
+      "size_bytes": 2248
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-merger.json",
+      "sha256": "51db5fbec0e25f86d12139816174418a7cc1a86e1df16c03cebf8d5e01ae290c",
+      "size_bytes": 2194
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-replacer.json",
+      "sha256": "ff8804dbf84b3e49fc4b6b6231beefaa54e3be979fbd5c25adeed011f65b5c18",
+      "size_bytes": 2216
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-report-builder.json",
+      "sha256": "843418b01735ebe89ee147fe95636437dd4cf9587caae3938aab1a7c1f8846ce",
+      "size_bytes": 2281
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-splitter.json",
+      "sha256": "5aab3ac4e6728d5cb02bd40b73ea00d889f9f24eb2162ef8c66c69647d17f6cc",
+      "size_bytes": 2216
+    },
+    {
+      "path": "reports/sprint59/regeneration/per-example/words-watermarker.json",
+      "sha256": "9688ca708c602d5f3236df28d6a2916f52dab26375b71078725f48b61d8ebf83",
+      "size_bytes": 2249
+    },
+    {
+      "path": "reports/sprint59/source/changed-files.txt",
+      "sha256": "f66710a37788a4b8749ec703b2a12bc570d3665fe250db1fb6612eae4abecba8",
+      "size_bytes": 154
+    },
+    {
+      "path": "reports/sprint59/source/source-diff.patch",
+      "sha256": "43855ddc237f2b8f92257208199bb3c703aeac7697c3953fcd558b1b1c93487e",
+      "size_bytes": 16549
+    },
+    {
+      "path": "reports/sprint59/source/source-hashes.json",
+      "sha256": "1bb782c13505c42eee814ad9fd2df22a331ca4e3471dfd9e081c60d97ceef3ea",
+      "size_bytes": 776
+    },
+    {
+      "path": "reports/sprint59/source/source-proof.md",
+      "sha256": "62b5bb2664cf5c6e29880977be96884e15524c1955283cc2aa654a7339d14597",
+      "size_bytes": 2702
+    },
+    {
+      "path": "reports/sprint59/sprint-state.json",
+      "sha256": "057545aa4a71680ea2f7cd9927269883ac23f012f062c6b2bdd784c30e104ade",
+      "size_bytes": 5926
+    },
+    {
+      "path": "reports/sprint59/todo.md",
+      "sha256": "98d501be3bd687588bdf2a6cf136a1fed9f98b6de57c10459c984ebf2d7992a3",
+      "size_bytes": 6264
+    }
+  ]
+}

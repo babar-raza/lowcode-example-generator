@@ -1,0 +1,279 @@
+{
+  "contract_version": "sprint59-v1",
+  "sprint_id": "sprint59-sprint58-closure-repair-io-authority-destination-content-20260521",
+  "created_at": "2026-05-21T17:30:00Z",
+  "description": "Evidence contract for Sprint 59. All blocking categories must be PRESENT before closure verdict is issued. Any PENDING blocking category = INVALID_CLOSURE.",
+  "bundle_min_files": 35,
+  "required_evidence_categories": [
+    {
+      "id": "EC01",
+      "name": "sprint58_audit_report",
+      "description": "Sprint 58 claim-vs-proof audit classifying all 8 defects (SD01–SD08)",
+      "file": "reports/sprint59/00-sprint58-evidence-audit.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC02",
+      "name": "sprint58_claim_vs_proof_matrix",
+      "description": "Tabular matrix of 27 Sprint 58 claims with VERIFIED/CONTRADICTED/INVALID_CLOSURE",
+      "file": "reports/sprint59/01-sprint58-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC03",
+      "name": "corrected_sprint58_state",
+      "description": "Sprint 58 corrected state — what was actually proven vs claimed",
+      "file": "reports/sprint59/02-corrected-sprint58-state.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC04",
+      "name": "commands_log",
+      "description": "All commands run during Sprint 59 with context, exit codes, output paths",
+      "file": "reports/sprint59/commands.log",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC05",
+      "name": "sprint59_todo",
+      "description": "Sprint 59 phase checklist with per-phase acceptance criteria",
+      "file": "reports/sprint59/todo.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC06",
+      "name": "sprint59_state",
+      "description": "Sprint 59 governance state machine",
+      "file": "reports/sprint59/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC07",
+      "name": "dirty_state_before",
+      "description": "git status at Sprint 59 start — full dirty-tree classification",
+      "file": "reports/sprint59/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC08",
+      "name": "dirty_file_classification",
+      "description": "Classification of every dirty file: source/test/generated/workspace/must-not-commit",
+      "file": "reports/sprint59/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC09",
+      "name": "staging_and_commit_plan",
+      "description": "Exact-path staging plan and commit plan for all source changes",
+      "file": "reports/sprint59/git/staging-plan.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC10",
+      "name": "source_diff_patch",
+      "description": "git diff patch for all 4+ changed source files",
+      "file": "reports/sprint59/source/source-diff.patch",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC11",
+      "name": "source_hashes",
+      "description": "SHA256 per changed source file after commit",
+      "file": "reports/sprint59/source/source-hashes.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC12",
+      "name": "source_proof",
+      "description": "Source proof summary: commit SHAs, changed file list, implementation claims backed",
+      "file": "reports/sprint59/source/source-proof.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC13",
+      "name": "input_format_authority_matrix",
+      "description": "42/42 input formats resolved — zero 'unknown' entries",
+      "file": "reports/sprint59/io-authority/input-format-authority-matrix.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC14",
+      "name": "input_output_authority_matrix",
+      "description": "Full I/O authority matrix: 42 types with input/output/kind/fixture/API pattern",
+      "file": "reports/sprint59/io-authority/input-output-authority-matrix.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC15",
+      "name": "package_evidence_bundle_index",
+      "description": "Index of api-catalog.json and extracted evidence per family",
+      "file": "reports/sprint59/io-authority/package-evidence-bundle-index.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC16",
+      "name": "repaired_regeneration_ledger",
+      "description": "Repaired full-regeneration-ledger.json with accurate build counts (35 clean + 7 repaired = 42 total)",
+      "file": "reports/sprint59/regeneration/full-regeneration-ledger-repaired.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC17",
+      "name": "repaired_per_example_dir",
+      "description": "Per-example directory: 42 records with full field set (30+ fields per record)",
+      "file": "reports/sprint59/regeneration/per-example/",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC18",
+      "name": "destination_content_audit",
+      "description": "Content audit: 42/42 destination Program.cs fetched and compared vs authority",
+      "file": "reports/sprint59/destination/content-audit.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC19",
+      "name": "destination_readme_vs_authority",
+      "description": "42/42 destination README.md content vs authority",
+      "file": "reports/sprint59/destination/readme-vs-authority.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC20",
+      "name": "root_readme_audit",
+      "description": "6/6 destination root README.md audited",
+      "file": "reports/sprint59/destination/root-readme-audit.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC21",
+      "name": "readme_gate_proof",
+      "description": "README gate implemented and tested — publication cannot skip README audit",
+      "file": "reports/sprint59/lanes/lane-G/readme-gate-proof.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC22",
+      "name": "branch_auto_delete_source_proof",
+      "description": "Source diff for github_pr_merger.py + merge-flow integration test",
+      "file": "reports/sprint59/lanes/lane-G/branch-auto-delete-source-proof.md",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC23",
+      "name": "test_run_log",
+      "description": "Full test suite output: 0 failed",
+      "file": "reports/sprint59/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC24",
+      "name": "git_status_end",
+      "description": "git status at Sprint 59 close — clean or every dirty file classified",
+      "file": "reports/sprint59/lanes/lane-I/git-status.txt",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC25",
+      "name": "bundle_manifest",
+      "description": "Bundle manifest: ≥35 files, SHA256 per file, overall SHA256",
+      "file": "reports/sprint59/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC26",
+      "name": "final_verdict",
+      "description": "Final Sprint 59 verdict — truth-first, allowed verdicts listed in directive",
+      "file": "reports/sprint59/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT"
+    }
+  ],
+  "bundle_validation_rules": [
+    {
+      "rule": "bundle_has_min_35_files",
+      "description": "Bundle must contain at least 35 meaningful files",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "no_pending_blocking_categories",
+      "description": "Any blocking EC with status PENDING = INVALID_CLOSURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "zero_unknown_input_formats",
+      "description": "Any active runnable type with input_format=unknown = FAILURE",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "source_diffs_required",
+      "description": "source-diff.patch must be present and non-empty",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "per_example_full_fields",
+      "description": "Per-example records must have all required fields (project path, build log, etc.)",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "build_counts_match_per_example",
+      "description": "total_built in summary must equal count of records with build_status=passed or passed_after_repair",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "destination_content_not_count_only",
+      "description": "Destination audit must verify Program.cs content, not just count/version",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "readme_audit_complete_or_blocked",
+      "description": "README audit must cover 42/42 or explicitly block closure for non-audited examples",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "git_status_end_clean_or_classified",
+      "description": "Final git status must be clean OR every dirty file must have classification",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "test_log_zero_failed",
+      "description": "Test log must exist and show 0 failed",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "commands_log_complete",
+      "description": "commands.log must not be IN_PROGRESS at closure",
+      "severity": "FAILURE"
+    },
+    {
+      "rule": "no_contract_only_authority",
+      "description": "No authority_source=contract_only in io-authority matrix",
+      "severity": "FAILURE"
+    }
+  ]
+}

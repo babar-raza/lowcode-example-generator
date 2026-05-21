@@ -1,0 +1,346 @@
+{
+  "generated": "2026-05-21",
+  "sprint": "Sprint 59",
+  "total_types": 42,
+  "unknown_input_formats": 0,
+  "authority_source": "format_contract+reflection",
+  "note": "Input formats resolved from per-family scenario-input-format-map.json (source: format_contract). Zero unknown entries.",
+  "types": [
+    {
+      "scenario_id": "cells-html-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "1a769812d77bb129",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "53dcb06dc9c4a053",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "b6cd17bb8bef75b1",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "4e2d26bb52d95072",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "dfccda6f5a4b48a6",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "5401668de6cf7d30",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "21cd9d070e2a5c1f",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "8c0a404bae68abe7",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "family": "cells",
+      "input_format": ".xlsx",
+      "confidence": "high",
+      "contract_hash": "39b60d10bf9a7902",
+      "evidence_file": "workspace/verification/latest/families/cells/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "1d13a2bd37061d2c",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-converter",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "d7530e4c1462dcab",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "c0178e50f08f113a",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "553c68cc0a1c2905",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "ae0c9c8412f16bcf",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "718f9294f723820b",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "940e74f0fd777b45",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "family": "words",
+      "input_format": ".docx",
+      "confidence": "high",
+      "contract_hash": "cf0fa842e9078fba",
+      "evidence_file": "workspace/verification/latest/families/words/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "b21bb2ce0f37e27b",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "9a2497da5acf9197",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "5dddd1e42b286531",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "36ccdb4ad1ca17d4",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-html",
+      "family": "pdf",
+      "input_format": ".html",
+      "confidence": "high",
+      "contract_hash": "bf731a152ce4a3e4",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "c57169cf5ebbe28d",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "6c991d57201ca285",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "7860ad603e9ce27d",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "d89104739e1c87a6",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "ea0a39eec427238f",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "b3d7f619d480f482",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "0c3d9888e5be0bb3",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "af6bc8b1db8f003e",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "f461c1b2b3abd982",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "a194e5a931afa806",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "943579c5cd406053",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "c68ec74ca3b84aa3",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "11b6f60e2120317e",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "family": "pdf",
+      "input_format": ".pdf",
+      "confidence": "high",
+      "contract_hash": "1fbce0551dec2dd0",
+      "evidence_file": "workspace/verification/latest/families/pdf/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "input_format": ".vsdx",
+      "confidence": "high",
+      "contract_hash": "614d59c4b7ed47fd",
+      "evidence_file": "workspace/verification/latest/families/diagram/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "input_format": ".vsdx",
+      "confidence": "high",
+      "contract_hash": "836b4a1a4e4880ca",
+      "evidence_file": "workspace/verification/latest/families/diagram/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "email-converter",
+      "family": "email",
+      "input_format": ".eml",
+      "confidence": "high",
+      "contract_hash": "a2010a2cbed99ae3",
+      "evidence_file": "workspace/verification/latest/families/email/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "family": "slides",
+      "input_format": ".pptx",
+      "confidence": "high",
+      "contract_hash": "3dc8f46966102400",
+      "evidence_file": "workspace/verification/latest/families/slides/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "family": "slides",
+      "input_format": ".pptx",
+      "confidence": "high",
+      "contract_hash": "d59da7be1a842937",
+      "evidence_file": "workspace/verification/latest/families/slides/scenario-input-format-map.json"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "family": "slides",
+      "input_format": ".pptx",
+      "confidence": "high",
+      "contract_hash": "aea611f7bc97ef31",
+      "evidence_file": "workspace/verification/latest/families/slides/scenario-input-format-map.json"
+    }
+  ]
+}

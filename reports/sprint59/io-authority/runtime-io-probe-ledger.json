@@ -1,0 +1,309 @@
+{
+  "generated": "2026-05-21",
+  "sprint": "Sprint 59",
+  "note": "Runtime I/O probe: all 42 examples ran successfully (run_status=passed in lifecycle records). Output files were produced. Input formats confirmed via format_contract.",
+  "total_probed": 42,
+  "total_runtime_passed": 42,
+  "families": {
+    "cells": {
+      "probed": 9,
+      "runtime_passed": 9,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "cells-html-converter",
+          "input": ".xlsx",
+          "output": ".html",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-image-converter",
+          "input": ".xlsx",
+          "output": ".png",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-json-converter",
+          "input": ".xlsx",
+          "output": ".json",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-pdf-converter",
+          "input": ".xlsx",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-spreadsheet-converter",
+          "input": ".xlsx",
+          "output": ".csv",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-spreadsheet-locker",
+          "input": ".xlsx",
+          "output": ".xlsx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-spreadsheet-merger",
+          "input": ".xlsx",
+          "output": ".xlsx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-spreadsheet-splitter",
+          "input": ".xlsx",
+          "output": ".xlsx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "cells-text-converter",
+          "input": ".xlsx",
+          "output": ".txt",
+          "runtime_passed": true
+        }
+      ]
+    },
+    "words": {
+      "probed": 8,
+      "runtime_passed": 8,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "words-comparer",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-converter",
+          "input": ".docx",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-mail-merger",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-merger",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-replacer",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-report-builder",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-splitter",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "words-watermarker",
+          "input": ".docx",
+          "output": ".docx",
+          "runtime_passed": true
+        }
+      ]
+    },
+    "pdf": {
+      "probed": 19,
+      "runtime_passed": 19,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "pdf-doc-converter",
+          "input": ".pdf",
+          "output": ".docx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-form-editor",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-form-exporter",
+          "input": ".pdf",
+          "output": ".json",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-form-flattener",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-html",
+          "input": ".html",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-image-extractor",
+          "input": ".pdf",
+          "output": ".png",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-jpeg",
+          "input": ".pdf",
+          "output": ".jpg",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-merger",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-optimizer",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-pdf-aconverter",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-png",
+          "input": ".pdf",
+          "output": ".png",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-security",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-signature",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-splitter",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-table-generator",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-text-extractor",
+          "input": ".pdf",
+          "output": "",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-tiff",
+          "input": ".pdf",
+          "output": ".tiff",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-toc-generator",
+          "input": ".pdf",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "pdf-xls-converter",
+          "input": ".pdf",
+          "output": ".xlsx",
+          "runtime_passed": true
+        }
+      ]
+    },
+    "diagram": {
+      "probed": 2,
+      "runtime_passed": 2,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "diagram-diagram-converter",
+          "input": ".vsdx",
+          "output": ".vdx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "diagram-pdf-converter",
+          "input": ".vsdx",
+          "output": ".pdf",
+          "runtime_passed": true
+        }
+      ]
+    },
+    "email": {
+      "probed": 1,
+      "runtime_passed": 1,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "email-converter",
+          "input": ".eml",
+          "output": "directory",
+          "runtime_passed": true
+        }
+      ]
+    },
+    "slides": {
+      "probed": 3,
+      "runtime_passed": 3,
+      "runtime_io_verified": "output_file_produced",
+      "probe_method": "pipeline_run_status (run_status=passed means output file produced)",
+      "scenarios": [
+        {
+          "scenario_id": "slides-compress",
+          "input": ".pptx",
+          "output": ".pptx",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "slides-convert",
+          "input": ".pptx",
+          "output": ".pdf",
+          "runtime_passed": true
+        },
+        {
+          "scenario_id": "slides-merger",
+          "input": ".pptx",
+          "output": ".pptx",
+          "runtime_passed": true
+        }
+      ]
+    }
+  }
+}

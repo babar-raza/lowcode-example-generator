@@ -1,0 +1,370 @@
+warning: in the working copy of 'pipeline/configs/families/pdf.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/plugin_examples/publisher/github_pr_merger.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/test_llm_generation.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/unit/test_merge_governance.py', LF will be replaced by CRLF the next time Git touches it
+diff --git a/pipeline/configs/families/pdf.yml b/pipeline/configs/families/pdf.yml
+index d4952b8..cc46317 100644
+--- a/pipeline/configs/families/pdf.yml
++++ b/pipeline/configs/families/pdf.yml
+@@ -206,6 +206,7 @@ per_type_constraints:
+       - "REQUIRED: options.AddInput(new FileDataSource( — input must be added via AddInput(new FileDataSource(path))"
+       - "REQUIRED: options.AddOutput(new FileDataSource( — output must be added via AddOutput(new FileDataSource(path))"
+       - "REQUIRED: new Document( — programmatic PDF input via new Document() + doc.Pages.Add() + doc.Save()"
++      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment in fixture creation)"
+     forbidden:
+       - "FORBIDDEN: PdfFormatConversionOptions — use LowCode PdfAConverter with its own options class"
+       - "FORBIDDEN: Document.Convert() — use LowCode PdfAConverter.Process() instead"
+diff --git a/src/plugin_examples/publisher/github_pr_merger.py b/src/plugin_examples/publisher/github_pr_merger.py
+index d19df50..c178e8e 100644
+--- a/src/plugin_examples/publisher/github_pr_merger.py
++++ b/src/plugin_examples/publisher/github_pr_merger.py
+@@ -80,6 +80,16 @@ def _api_get(url: str, headers: dict) -> dict:
+         raise MergeError(f"GET {url} failed: HTTP {exc.code} {exc.reason}") from exc
+ 
+ 
++def _api_delete(url: str, headers: dict) -> None:
++    """Send a DELETE request. Raises MergeError on HTTP error."""
++    req = urllib.request.Request(url, headers=headers, method="DELETE")
++    try:
++        with urllib.request.urlopen(req):
++            pass  # 204 No Content on success
++    except urllib.error.HTTPError as exc:
++        raise MergeError(f"DELETE {url} failed: HTTP {exc.code} {exc.reason}") from exc
++
++
+ def check_merge_preconditions(
+     owner: str,
+     repo: str,
+@@ -338,7 +348,7 @@ def merge_pr(
+     if not merge_commit_sha:
+         raise MergeError("Merge succeeded but no merge_commit_sha returned")
+ 
+-    return {
++    result = {
+         "merged": True,
+         "merge_commit_sha": merge_commit_sha,
+         "pr_number": pr_number,
+@@ -348,3 +358,99 @@ def merge_pr(
+         "message": merge_response.get("message", ""),
+         "preconditions": preconditions["checks"],
+     }
++
++    # Step 3: Auto-delete source branch if enabled
++    head_ref = pr_data.get("head", {}).get("ref", "")
++    if head_ref:
++        delete_result = delete_branch_after_merge(
++            owner=owner,
++            repo=repo,
++            branch_ref=head_ref,
++            github_token=github_token,
++            allow_branch_auto_delete=False,  # dry-run by default; caller must opt in
++            dry_run=True,
++        )
++        result["branch_delete"] = delete_result
++
++    return result
++
++
++_LOWCODE_BRANCH_PREFIXES = ("lowcode-pilot-", "lowcode-wave-")
++
++
++def delete_branch_after_merge(
++    owner: str,
++    repo: str,
++    branch_ref: str,
++    github_token: str,
++    allow_branch_auto_delete: bool = False,
++    dry_run: bool = True,
++) -> dict:
++    """Delete a source branch after merge verification.
++
++    Safety contract:
++        - Only deletes branches with recognized prefixes (lowcode-pilot- or lowcode-wave-).
++        - Requires ``allow_branch_auto_delete=True`` AND ``dry_run=False`` to perform
++          a real deletion.
++        - Dry-run mode (default) returns what WOULD be deleted without any API call.
++        - Token is NEVER logged or serialized.
++
++    Args:
++        owner: GitHub repo owner.
++        repo: GitHub repo name.
++        branch_ref: Branch name (e.g. ``"lowcode-pilot-cells-sprint58"``).
++        github_token: GitHub token for API calls (never logged).
++        allow_branch_auto_delete: Flag that must be ``True`` to permit deletion.
++        dry_run: When ``True`` (default), performs no remote mutation.
++
++    Returns:
++        Dict describing the delete action (or dry-run preview).
++    """
++    is_lowcode_branch = any(branch_ref.startswith(p) for p in _LOWCODE_BRANCH_PREFIXES)
++
++    if not is_lowcode_branch:
++        return {
++            "action": "skipped",
++            "reason": f"Branch '{branch_ref}' does not match lowcode-pilot- or lowcode-wave- prefix",
++            "branch_ref": branch_ref,
++            "dry_run": dry_run,
++        }
++
++    if not allow_branch_auto_delete:
++        return {
++            "action": "skipped",
++            "reason": "allow_branch_auto_delete=False (default). Set allow_branch_auto_delete=True to enable.",
++            "branch_ref": branch_ref,
++            "dry_run": dry_run,
++        }
++
++    if dry_run:
++        return {
++            "action": "dry_run_would_delete",
++            "branch_ref": branch_ref,
++            "api_endpoint": f"DELETE /repos/{owner}/{repo}/git/refs/heads/{branch_ref}",
++            "dry_run": True,
++        }
++
++    # Live delete
++    headers = _get_headers(github_token)
++    delete_url = f"{GITHUB_API_BASE}/repos/{owner}/{repo}/git/refs/heads/{branch_ref}"
++    logger.info(
++        "Deleting branch '%s' in %s/%s after merge — token not logged",
++        branch_ref, owner, repo,
++    )
++    try:
++        _api_delete(delete_url, headers)
++        return {
++            "action": "deleted",
++            "branch_ref": branch_ref,
++            "dry_run": False,
++        }
++    except Exception as exc:
++        logger.warning("Branch delete failed for %s: %s", branch_ref, exc)
++        return {
++            "action": "delete_failed",
++            "branch_ref": branch_ref,
++            "error": str(exc),
++            "dry_run": False,
++        }
+diff --git a/tests/unit/test_llm_generation.py b/tests/unit/test_llm_generation.py
+index 232346c..8d68375 100644
+--- a/tests/unit/test_llm_generation.py
++++ b/tests/unit/test_llm_generation.py
+@@ -1407,6 +1407,98 @@ class TestPdfConstraintUpdates:
+         )
+ 
+ 
++class TestPdfAConverterConstraint:
++    """Sprint 58 regression: PdfAConverter must require 'using Aspose.Pdf.Text;'.
++
++    Root cause of pdf-pdf-aconverter Sprint 57 failure: LLM generated code using
++    TextFragment without the required using directive, causing CS0246 compile error.
++    Fix: 'using Aspose.Pdf.Text;' added to per_type_constraints.PdfAConverter.REQUIRED in pdf.yml.
++    """
++
++    def _load_pdf_per_type_constraints(self) -> dict:
++        """Load per_type_constraints from pipeline/configs/families/pdf.yml."""
++        import yaml
++        from pathlib import Path
++        config_path = (
++            Path(__file__).resolve().parents[2]
++            / "pipeline" / "configs" / "families" / "pdf.yml"
++        )
++        with open(config_path, encoding="utf-8") as f:
++            data = yaml.safe_load(f)
++        return data.get("per_type_constraints", {})
++
++    def test_pdfaconverter_config_requires_using_aspose_pdf_text(self):
++        """Sprint 58 regression: pdf.yml PdfAConverter.required must contain 'using Aspose.Pdf.Text;'.
++
++        This was the root cause of the pdf-pdf-aconverter Sprint 57 failure.
++        The LLM omitted the using directive for TextFragment, causing CS0246.
++        """
++        ptc = self._load_pdf_per_type_constraints()
++        pdfaconverter_required = ptc.get("PdfAConverter", {}).get("required", [])
++        text_ns_entries = [e for e in pdfaconverter_required if "Aspose.Pdf.Text" in e]
++        assert text_ns_entries, (
++            "pdf.yml PdfAConverter.required must include 'using Aspose.Pdf.Text;' "
++            "(missing directive caused Sprint 57 pdf-pdf-aconverter build failure). "
++            f"Current required entries: {pdfaconverter_required}"
++        )
++
++    def test_pdfaconverter_code_missing_using_pdf_text_fails_validation(self):
++        """Sprint 58 regression: Code with TextFragment but no using Aspose.Pdf.Text; must fail.
++
++        Validates that _validate_code_from_constraints correctly catches the
++        missing directive when PdfAConverter per_type_constraints are applied.
++        """
++        from plugin_examples.generator.code_generator import _validate_code_from_constraints
++
++        ptc = self._load_pdf_per_type_constraints()
++        pdfaconverter_constraints = ptc.get("PdfAConverter", {})
++        # Code that omits using Aspose.Pdf.Text; — valid C# pattern but missing using
++        code_missing_using = (
++            "using System;\n"
++            "using Aspose.Pdf;\n"
++            "using Aspose.Pdf.LowCode;\n"
++            "var doc = new Document();\n"
++            "var page = doc.Pages.Add();\n"
++            "page.Paragraphs.Add(new TextFragment(\"Hello PDF/A\"));\n"
++            "doc.Save(\"input.pdf\");\n"
++            "var options = new PdfAConvertOptions();\n"
++            "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
++            "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
++            "var result = new PdfAConverter().Process(options);\n"
++        )
++        issues = _validate_code_from_constraints(code_missing_using, pdfaconverter_constraints)
++        assert any("Aspose.Pdf.Text" in i for i in issues), (
++            "PdfAConverter validation must flag missing 'using Aspose.Pdf.Text;' directive. "
++            f"Issues found: {issues}"
++        )
++
++    def test_pdfaconverter_code_with_using_pdf_text_passes_validation(self):
++        """Sprint 58 regression: Code with TextFragment AND using Aspose.Pdf.Text; must pass."""
++        from plugin_examples.generator.code_generator import _validate_code_from_constraints
++
++        ptc = self._load_pdf_per_type_constraints()
++        pdfaconverter_constraints = ptc.get("PdfAConverter", {})
++        code_with_using = (
++            "using System;\n"
++            "using Aspose.Pdf;\n"
++            "using Aspose.Pdf.LowCode;\n"
++            "using Aspose.Pdf.Text;\n"
++            "var doc = new Document();\n"
++            "var page = doc.Pages.Add();\n"
++            "page.Paragraphs.Add(new TextFragment(\"Hello PDF/A\"));\n"
++            "doc.Save(\"input.pdf\");\n"
++            "var options = new PdfAConvertOptions();\n"
++            "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
++            "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
++            "var result = new PdfAConverter().Process(options);\n"
++        )
++        issues = _validate_code_from_constraints(code_with_using, pdfaconverter_constraints)
++        assert len(issues) == 0, (
++            f"PdfAConverter code with all required using directives must pass validation. "
++            f"Unexpected issues: {issues}"
++        )
++
++
+ class TestPdfValidatorNewChecks:
+     """Tests for new _validate_code PDF checks added in Phase 4."""
+ 
+diff --git a/tests/unit/test_merge_governance.py b/tests/unit/test_merge_governance.py
+index c0048cc..8ed8097 100644
+--- a/tests/unit/test_merge_governance.py
++++ b/tests/unit/test_merge_governance.py
+@@ -383,3 +383,116 @@ class TestPostMergePlanWritten(unittest.TestCase):
+         self.assertIn("APPROVE_MERGE_PR", content)
+         self.assertIn("merge_commit_sha", content)
+         self.assertIn("rollback", content.lower())
++
++
++class TestBranchAutoDelete(unittest.TestCase):
++    """Sprint 58 Lane G: branch auto-delete implementation tests.
++
++    The delete_branch_after_merge function:
++    - Is DRY-RUN by default (no remote mutation without allow_branch_auto_delete=True AND dry_run=False)
++    - Only acts on lowcode-pilot- and lowcode-wave- prefixed branches
++    - Skips non-lowcode branches
++    - Skips when allow_branch_auto_delete=False
++    """
++
++    def _import_delete_fn(self):
++        from plugin_examples.publisher.github_pr_merger import delete_branch_after_merge
++        return delete_branch_after_merge
++
++    def test_dry_run_by_default(self):
++        """delete_branch_after_merge must be dry-run when called with defaults."""
++        delete_branch_after_merge = self._import_delete_fn()
++        result = delete_branch_after_merge(
++            owner="aspose-cells-net",
++            repo="Aspose.Cells.LowCode-for-.NET-Examples",
++            branch_ref="lowcode-pilot-cells-sprint58",
++            github_token="fake-token",
++            allow_branch_auto_delete=True,
++            dry_run=True,
++        )
++        self.assertEqual(result["action"], "dry_run_would_delete")
++        self.assertIn("api_endpoint", result)
++        self.assertTrue(result["dry_run"])
++
++    def test_skips_non_lowcode_branch(self):
++        """Branches without lowcode-pilot- or lowcode-wave- prefix must be skipped."""
++        delete_branch_after_merge = self._import_delete_fn()
++        result = delete_branch_after_merge(
++            owner="aspose-cells-net",
++            repo="Aspose.Cells.LowCode-for-.NET-Examples",
++            branch_ref="main",
++            github_token="fake-token",
++            allow_branch_auto_delete=True,
++            dry_run=False,
++        )
++        self.assertEqual(result["action"], "skipped")
++        self.assertIn("does not match", result["reason"])
++
++    def test_skips_feature_branch_without_prefix(self):
++        """Feature branches without recognized prefix must be skipped."""
++        delete_branch_after_merge = self._import_delete_fn()
++        result = delete_branch_after_merge(
++            owner="aspose-cells-net",
++            repo="Aspose.Cells.LowCode-for-.NET-Examples",
++            branch_ref="feature/add-example",
++            github_token="fake-token",
++            allow_branch_auto_delete=True,
++            dry_run=False,
++        )
++        self.assertEqual(result["action"], "skipped")
++
++    def test_skips_when_flag_disabled(self):
++        """When allow_branch_auto_delete=False, even lowcode branches must be skipped."""
++        delete_branch_after_merge = self._import_delete_fn()
++        result = delete_branch_after_merge(
++            owner="aspose-cells-net",
++            repo="Aspose.Cells.LowCode-for-.NET-Examples",
++            branch_ref="lowcode-pilot-cells-sprint58",
++            github_token="fake-token",
++            allow_branch_auto_delete=False,
++            dry_run=False,
++        )
++        self.assertEqual(result["action"], "skipped")
++        self.assertIn("allow_branch_auto_delete=False", result["reason"])
++
++    def test_lowcode_wave_prefix_recognized(self):
++        """lowcode-wave- prefix is also recognized for auto-delete."""
++        delete_branch_after_merge = self._import_delete_fn()
++        result = delete_branch_after_merge(
++            owner="aspose-pdf-net",
++            repo="Aspose.PDF.LowCode-for-.NET-Examples",
++            branch_ref="lowcode-wave-pdf-sprint58-wave-g",
++            github_token="fake-token",
++            allow_branch_auto_delete=True,
++            dry_run=True,
++        )
++        self.assertEqual(result["action"], "dry_run_would_delete")
++        self.assertIn("lowcode-wave-pdf-sprint58-wave-g", result["api_endpoint"])
++
++    def test_dry_run_does_not_call_api(self):
++        """Dry-run must never invoke _api_delete."""
++        delete_branch_after_merge = self._import_delete_fn()
++        with patch("plugin_examples.publisher.github_pr_merger._api_delete") as mock_delete:
++            delete_branch_after_merge(
++                owner="aspose-cells-net",
++                repo="test-repo",
++                branch_ref="lowcode-pilot-cells-sprint58",
++                github_token="fake-token",
++                allow_branch_auto_delete=True,
++                dry_run=True,
++            )
++            mock_delete.assert_not_called()
++
++    def test_no_api_call_when_flag_disabled(self):
++        """_api_delete must never be called when allow_branch_auto_delete=False."""
++        delete_branch_after_merge = self._import_delete_fn()
++        with patch("plugin_examples.publisher.github_pr_merger._api_delete") as mock_delete:
++            delete_branch_after_merge(
++                owner="aspose-cells-net",
++                repo="test-repo",
++                branch_ref="lowcode-pilot-cells-sprint58",
++                github_token="fake-token",
++                allow_branch_auto_delete=False,
++                dry_run=False,
++            )
++            mock_delete.assert_not_called()

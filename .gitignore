@@ -26,6 +26,7 @@ workspace/pr-dry-run/
 # Evidence bundles
 workspace/verification/*.zip
 workspace/verification/latest/*.zip
+reports/**/*.zip
 
 # Local planning files
 /plans

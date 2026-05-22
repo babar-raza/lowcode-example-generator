@@ -1,0 +1,9 @@
+Sprint 65 — EvidenceValidator Test Results
+Generated: 2026-05-22
+
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -q --tb=short
+
+Result: 84 passed in ~20s
+Failures: 0
+
+Acceptance criteria: 0 failed -- MET.

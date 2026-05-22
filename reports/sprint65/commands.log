@@ -1,0 +1,113 @@
+# Sprint 65 Commands Log
+# Started: 2026-05-22
+# Sprint: sprint65-publication-truth-repair-root-readme-strict-audit-handoff
+# Purpose: Repair Sprint 64 overclaims, add remote proof, strict destination audit,
+#          root README artifacts, special-case placement, harden EV/ECC, handoff bundle
+
+# ========== PHASE 0 -- Reopen Sprint 64 and Correct the Verdict ==========
+# Audited Sprint 64 evidence bundle (reports/sprint64/)
+# Found 8 blocking defects (S64-D1 through S64-D8)
+#   S64-D1: Final verdict overclaims publication (no remote proof in bundle)
+#   S64-D2: dry_run_present=37 in JSON vs 40/42 in summary (contradiction)
+#   S64-D3: content-audit-deep.json missing package_version, output_format, readme_status, root_readme_status
+#   S64-D4: Family root README artifacts missing from destination package folders
+#   S64-D5: Root README audit stale for PDF (shows 26.4.0, policy says 26.5.0)
+#   S64-D6: Special cases lack destination repo path/placement proof
+#   S64-D7: EV/ECC semantic rules too weak (accepted contradictions)
+#   S64-D8: PDF deferred without NOT_REGENERATED labeling in all files
+# Sprint 64 corrected verdict: LOWCODE_DRY_RUN_PACKAGES_STRONG_PROGRESS_PUBLICATION_PROOF_MISSING
+# Created: 00-sprint64-evidence-audit.md, 01-sprint64-claim-vs-proof-matrix.md
+# Created: 02-corrected-sprint64-state.md, commands.log, todo.md, evidence-contract.json
+# Created: scripts/build_sprint65_contract.py
+# STATUS: COMPLETE
+
+# ========== PHASE 1 -- Root README Artifacts ==========
+# Captured root READMEs from workspace/pr-dry-run/{family}-controlled-pilot/README.md
+# words: v26.4.0 -> v26.5.0 corrected (Directory.Packages.props is 26.5.0)
+# diagram: v26.4.0 -> v26.5.0 corrected
+# pdf: HTML comment added (POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED)
+# Created: root-readme/per-family/{cells,words,pdf,diagram,email,slides}-root-readme.md (6 files)
+# Created: root-readme/root-readme-artifact-index.json
+# Created: root-readme/root-readme-vs-authority-final.json
+# Created: root-readme/root-readme-diff-summary.md
+# STATUS: COMPLETE
+
+# ========== PHASE 2 -- Strict Destination Content Audit ==========
+# Rebuilt content audit from scratch with correct path resolution
+# Fixed: diagram uses full scenario_id dir name (e.g., diagram-diagram-converter)
+# Fixed: pdf-html-converter maps to 'html' dir
+# Fixed: special_cases set uses scenario_id (pdf-pdfa-converter), not dir name
+# Fixed: ambiguous 'merger' key resolved by family-prefixed keys
+# Created: scripts/build_content_audit_final.py
+# Result: 40 standard + 2 special = 42/42 READY, all required fields present
+# Created: destination/content-audit-final.json (42 records)
+# Created: destination/programcs-vs-authority-final.json
+# Created: destination/readme-vs-authority-final.json
+# Created: destination/package-version-vs-authority-final.json
+# Created: destination/deep-audit-final-summary.md
+# STATUS: COMPLETE
+
+# ========== PHASE 3 -- Special-Case Publication Placement Proof ==========
+# Documented pdf-pdfa-converter: destination=examples/pdf/lowcode/pdfa-converter
+# Documented pdf-text-extractor: destination=examples/pdf/lowcode/text-extractor
+# Verified via DestinationIdMapper.scenario_id_to_dir_name()
+# Tests: 20 passed, 0 failed
+# Created: special-cases/special-case-publication-map.json (2 cases)
+# Created: special-cases/special-case-placement-proof.md
+# Created: special-cases/special-case-validator-test-results.txt
+# STATUS: COMPLETE
+
+# ========== PHASE 4 -- PDF Version Drift Final Decision ==========
+# Decision: PATH B -- POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED
+# All 19 PDF scenarios labeled POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED
+# Triggers for full regeneration: 26.6.0 release or API surface change
+# Created: version/pdf-version-final-decision.md
+# Created: version/pdf-version-audit-final.json (19 PDF scenarios)
+# Created: version/version-policy-final.json
+# STATUS: COMPLETE
+
+# ========== PHASE 5 -- Harden EV/ECC Semantic Rules ==========
+# Added 10 new rules to EvidenceValidator (rules 23-32)
+# Sprint 64 revalidation under new rules: overall_valid=false (6 failures)
+# 84 EV tests passed, 0 failed
+# Updated _make_bundle() in both test files with Sprint 65 required artifacts
+# Rule count updated: 22->32 (validate), 21->31 (validate_for_storage)
+# Created: evidence/semantic-rule-gap-analysis.md
+# Created: evidence/semantic-rule-source-proof.patch (+539 lines)
+# Created: evidence/semantic-rule-test-results.txt (84 passed, 0 failed)
+# Created: evidence/sprint64-revalidation-result.json (overall_valid=false)
+# STATUS: COMPLETE
+
+# ========== PHASE 6 -- Publication Truth Status ==========
+# Extracted remote proof from workspace/verification/latest/ for all 6 families
+# All 6 families merged=True, merge SHAs captured
+# Publication approval status: BLOCKED_BY_APPROVAL (42/42 already published, no new pub)
+# Created: publication/remote-proof-index.json (6 families, all merged)
+# Created: publication/publication-truth-matrix.json (42 scenarios)
+# Created: publication/live-approval-check.md
+# Created: publication/publication-readiness-final.json
+# STATUS: COMPLETE
+
+# ========== PHASE 7 -- Package Handoff Bundle ==========
+# Created handoff index with all 42 entries (paths, hashes, PR details)
+# Created reviewer summary and rollback plan
+# Created: handoff/publication-handoff-index.json (42 entries)
+# Created: handoff/reviewer-summary.md
+# Created: handoff/rollback-plan.md
+# STATUS: COMPLETE
+
+# ========== PHASE 8 -- Full Test Suite + Command Logs ==========
+# Full unit test suite: 2993 passed, 3 skipped, 10 subtests, 0 failed
+# Fix applied: test_pipeline_evidence_gate.py _make_valid_bundle() updated with Sprint 65 artifacts
+# Created: lanes/lane-I/test-run.log
+# Created: lanes/lane-I/git-status.txt
+# STATUS: COMPLETE
+
+# ========== PHASE 9 -- Final Evidence Bundle ==========
+# ECC run on Sprint 65 bundle -> evidence/evidence-contract-computed.json
+# EV Phase A -> evidence/sprint65-bundle-validation-result.json
+# EV Phase B (all 32 rules) -> overall_valid=true
+# bundle-manifest.json, final-verdict.md, sprint-state.json created
+# Final git commit
+# final-clean-proof.txt captured AFTER commit
+# STATUS: COMPLETE

@@ -1,0 +1,130 @@
+{
+  "sprint": 65,
+  "generated_at": "2026-05-22",
+  "description": "PDF version audit final. All 19 PDF scenarios classified as POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED.",
+  "family": "pdf",
+  "dry_run_version": "26.4.0",
+  "nuget_latest": "26.5.0",
+  "drift_detected": true,
+  "policy": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+  "policy_classification": "CALENDAR_VERSION_BUMP",
+  "regeneration_required": false,
+  "csproj_target_version": "26.5.0",
+  "scenarios_count": 19,
+  "scenarios": [
+    {
+      "scenario_id": "pdf-doc-converter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-html-converter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-pdfa-converter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": true
+    },
+    {
+      "scenario_id": "pdf-png",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-security",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": true
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED",
+      "special_case": false
+    }
+  ]
+}

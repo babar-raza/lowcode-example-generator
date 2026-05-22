@@ -1,0 +1,260 @@
+{
+  "sprint": 65,
+  "total": 42,
+  "match_count": 23,
+  "policy_classified_count": 19,
+  "records": [
+    {
+      "scenario_id": "cells-html-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "family": "cells",
+      "package_version": "26.5.1",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "email-converter",
+      "family": "email",
+      "package_version": "26.4.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-html-converter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-pdfa-converter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "family": "pdf",
+      "package_version": "26.4.0",
+      "package_version_status": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "family": "slides",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "family": "slides",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "family": "slides",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-converter",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "family": "words",
+      "package_version": "26.5.0",
+      "package_version_status": "MATCH"
+    }
+  ]
+}

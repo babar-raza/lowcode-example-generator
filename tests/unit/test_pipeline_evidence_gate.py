@@ -95,6 +95,67 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     (b / "sprint-state.json").write_text(json.dumps({"sprint_id": "sprint61-test"}), encoding="utf-8")
 
+    # Sprint 65: destination/content-audit-final.json with all required fields
+    (b / "destination" / "content-audit-final.json").write_text(
+        json.dumps({
+            "total_publication_artifacts": 42,
+            "standard_package_artifacts": 40,
+            "special_case_artifacts": 2,
+            "records_ready": 42,
+            "records": [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family": "cells",
+                    "package_version": "26.5.1",
+                    "output_format": ".xlsx",
+                    "readme_status": "IO_DOC",
+                    "root_readme_status": "INCLUDED",
+                    "final_readiness": "READY",
+                    "special_case": False,
+                }
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 65: root-readme/per-family artifacts
+    (b / "root-readme" / "per-family").mkdir(parents=True)
+    for family in ["cells", "diagram", "email", "pdf", "slides", "words"]:
+        (b / "root-readme" / "per-family" / f"{family}-root-readme.md").write_text(
+            f"# {family} README\n", encoding="utf-8"
+        )
+
+    # Sprint 65: special-cases/special-case-publication-map.json
+    (b / "special-cases").mkdir(parents=True)
+    (b / "special-cases" / "special-case-publication-map.json").write_text(
+        json.dumps({"special_cases": [
+            {"scenario_id": "pdf-pdfa-converter", "destination_path": "examples/pdf/lowcode/pdfa-converter"},
+            {"scenario_id": "pdf-text-extractor", "destination_path": "examples/pdf/lowcode/text-extractor"},
+        ]}),
+        encoding="utf-8",
+    )
+
+    # Sprint 65: version/version-policy-final.json
+    (b / "version").mkdir(parents=True)
+    (b / "version" / "version-policy-final.json").write_text(
+        json.dumps({"summary": {"total_drift_unresolved": 0}, "families": {}}),
+        encoding="utf-8",
+    )
+
+    # Sprint 65: final-verdict.md + publication/remote-proof-index.json
+    (b / "final-verdict.md").write_text("Verdict: TEST_DRY_RUN_APPROVAL_BLOCKED\n", encoding="utf-8")
+    (b / "publication").mkdir(parents=True)
+    (b / "publication" / "remote-proof-index.json").write_text(
+        json.dumps({"families": ["cells"]}), encoding="utf-8"
+    )
+
+    # Sprint 65: evidence/*revalidation*.json — overall_valid=false
+    (b / "evidence" / "sprint64-revalidation-result.json").write_text(
+        json.dumps({"sprint_id": "sprint64-test", "overall_valid": False, "failed": 3}),
+        encoding="utf-8",
+    )
+
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 

@@ -1,0 +1,33 @@
+Sprint 65 Phase 3 — Special-Case Validator Test Results
+Generated: 2026-05-22
+
+Tests: 10 per special case × 2 cases = 20 total
+Failures: 0
+
+Test Matrix:
+  PASS: pdf-pdfa-converter T1: package_dir_exists PASS
+  PASS: pdf-pdfa-converter T2: programcs_exists PASS
+  PASS: pdf-pdfa-converter T3: readme_exists PASS
+  PASS: pdf-pdfa-converter T4: readme_has_io PASS
+  PASS: pdf-pdfa-converter T5: programcs_namespace PASS
+  PASS: pdf-pdfa-converter T6: programcs_api_type(PdfAConverter) PASS
+  PASS: pdf-pdfa-converter T7: destination_path_format PASS
+  PASS: pdf-pdfa-converter T8: destination_repo PASS
+  PASS: pdf-pdfa-converter T9: csproj_exists PASS
+  PASS: pdf-pdfa-converter T10: programcs_hash_computed PASS
+  PASS: pdf-text-extractor T1: package_dir_exists PASS
+  PASS: pdf-text-extractor T2: programcs_exists PASS
+  PASS: pdf-text-extractor T3: readme_exists PASS
+  PASS: pdf-text-extractor T4: readme_has_io PASS
+  PASS: pdf-text-extractor T5: programcs_namespace PASS
+  PASS: pdf-text-extractor T6: programcs_api_type(TextExtractor) PASS
+  PASS: pdf-text-extractor T7: destination_path_format PASS
+  PASS: pdf-text-extractor T8: destination_repo PASS
+  PASS: pdf-text-extractor T9: csproj_exists PASS
+  PASS: pdf-text-extractor T10: programcs_hash_computed PASS
+
+Results: 20 passed, 0 failed
+
+VERDICT: ALL_PASS
+
+Acceptance criteria: 0 failed -- MET.

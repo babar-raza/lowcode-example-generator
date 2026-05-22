@@ -286,6 +286,7 @@ class EvidenceContractComputer:
                         if "readme_input_status" not in r
                         and "readme_output_status" not in r
                         and "readme_has_io" not in r
+                        and "readme_status" not in r
                     ]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing readme status fields"

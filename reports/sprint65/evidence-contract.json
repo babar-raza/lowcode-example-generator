@@ -1,0 +1,341 @@
+{
+  "contract_version": "sprint65-v1",
+  "sprint_id": "sprint65-publication-truth-repair-root-readme-strict-audit-handoff",
+  "created_at": "2026-05-22T00:00:00Z",
+  "description": "Sprint 65 evidence contract. Repairs Sprint 64 overclaims: remote proof, root README artifacts, strict destination audit, special-case placement, hardened EV/ECC, publication handoff.",
+  "bundle_min_files": 46,
+  "required_evidence_categories": [
+    {
+      "id": "EC01",
+      "name": "sprint64_audit_report",
+      "file": "reports/sprint65/00-sprint64-evidence-audit.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC02",
+      "name": "sprint64_claim_vs_proof_matrix",
+      "file": "reports/sprint65/01-sprint64-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC03",
+      "name": "corrected_sprint64_state",
+      "file": "reports/sprint65/02-corrected-sprint64-state.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC04",
+      "name": "commands_log",
+      "file": "reports/sprint65/commands.log",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must not contain IN_PROGRESS at closure"
+    },
+    {
+      "id": "EC05",
+      "name": "sprint65_todo",
+      "file": "reports/sprint65/todo.md",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must have no unchecked [ ] items"
+    },
+    {
+      "id": "EC06",
+      "name": "root_readme_artifact_index",
+      "file": "reports/sprint65/root-readme/root-readme-artifact-index.json",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must list 6 families"
+    },
+    {
+      "id": "EC07",
+      "name": "root_readme_vs_authority_final",
+      "file": "reports/sprint65/root-readme/root-readme-vs-authority-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC08",
+      "name": "root_readme_diff_summary",
+      "file": "reports/sprint65/root-readme/root-readme-diff-summary.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC09",
+      "name": "root_readme_cells",
+      "file": "reports/sprint65/root-readme/per-family/cells-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC10",
+      "name": "root_readme_words",
+      "file": "reports/sprint65/root-readme/per-family/words-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC11",
+      "name": "root_readme_pdf",
+      "file": "reports/sprint65/root-readme/per-family/pdf-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC12",
+      "name": "root_readme_diagram",
+      "file": "reports/sprint65/root-readme/per-family/diagram-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC13",
+      "name": "root_readme_email",
+      "file": "reports/sprint65/root-readme/per-family/email-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC14",
+      "name": "root_readme_slides",
+      "file": "reports/sprint65/root-readme/per-family/slides-root-readme.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC15",
+      "name": "content_audit_final",
+      "file": "reports/sprint65/destination/content-audit-final.json",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must have 42 entries with output_format, api_type, readme_status"
+    },
+    {
+      "id": "EC16",
+      "name": "programcs_vs_authority_final",
+      "file": "reports/sprint65/destination/programcs-vs-authority-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC17",
+      "name": "readme_vs_authority_final",
+      "file": "reports/sprint65/destination/readme-vs-authority-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC18",
+      "name": "package_version_vs_authority",
+      "file": "reports/sprint65/destination/package-version-vs-authority-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC19",
+      "name": "deep_audit_final_summary",
+      "file": "reports/sprint65/destination/deep-audit-final-summary.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC20",
+      "name": "special_case_publication_map",
+      "file": "reports/sprint65/special-cases/special-case-publication-map.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC21",
+      "name": "special_case_placement_proof",
+      "file": "reports/sprint65/special-cases/special-case-placement-proof.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC22",
+      "name": "special_case_validator_tests",
+      "file": "reports/sprint65/special-cases/special-case-validator-test-results.txt",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must show 0 failed"
+    },
+    {
+      "id": "EC23",
+      "name": "pdf_version_final_decision",
+      "file": "reports/sprint65/version/pdf-version-final-decision.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC24",
+      "name": "pdf_version_audit_final",
+      "file": "reports/sprint65/version/pdf-version-audit-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC25",
+      "name": "version_policy_final",
+      "file": "reports/sprint65/version/version-policy-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC26",
+      "name": "semantic_rule_gap_analysis",
+      "file": "reports/sprint65/evidence/semantic-rule-gap-analysis.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC27",
+      "name": "semantic_rule_source_proof",
+      "file": "reports/sprint65/evidence/semantic-rule-source-proof.patch",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC28",
+      "name": "semantic_rule_test_results",
+      "file": "reports/sprint65/evidence/semantic-rule-test-results.txt",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must show 0 failed"
+    },
+    {
+      "id": "EC29",
+      "name": "sprint64_revalidation_result",
+      "file": "reports/sprint65/evidence/sprint64-revalidation-result.json",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must show overall_valid=false"
+    },
+    {
+      "id": "EC30",
+      "name": "sprint65_final_validation_result",
+      "file": "reports/sprint65/evidence/sprint65-final-validation-result.json",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must show overall_valid=true, no internal contradiction"
+    },
+    {
+      "id": "EC31",
+      "name": "evidence_contract_computed",
+      "file": "reports/sprint65/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC32",
+      "name": "publication_truth_matrix",
+      "file": "reports/sprint65/publication/publication-truth-matrix.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC33",
+      "name": "remote_proof_index",
+      "file": "reports/sprint65/publication/remote-proof-index.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC34",
+      "name": "live_approval_check",
+      "file": "reports/sprint65/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC35",
+      "name": "publication_readiness_final",
+      "file": "reports/sprint65/publication/publication-readiness-final.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC36",
+      "name": "handoff_index",
+      "file": "reports/sprint65/handoff/publication-handoff-index.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC37",
+      "name": "reviewer_summary",
+      "file": "reports/sprint65/handoff/reviewer-summary.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC38",
+      "name": "rollback_plan",
+      "file": "reports/sprint65/handoff/rollback-plan.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC39",
+      "name": "test_run_log",
+      "file": "reports/sprint65/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "must show 0 failed"
+    },
+    {
+      "id": "EC40",
+      "name": "git_status_end",
+      "file": "reports/sprint65/lanes/lane-I/git-status.txt",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC41",
+      "name": "bundle_manifest",
+      "file": "reports/sprint65/bundle-manifest.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC42",
+      "name": "final_verdict",
+      "file": "reports/sprint65/final-verdict.md",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC43",
+      "name": "sprint_state",
+      "file": "reports/sprint65/sprint-state.json",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC44",
+      "name": "final_clean_proof",
+      "file": "reports/sprint65/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PENDING",
+      "semantic": "nonzero, git header present, captured AFTER final commit"
+    },
+    {
+      "id": "EC45",
+      "name": "validator_test_results",
+      "file": "reports/sprint65/evidence/validator-test-results.txt",
+      "blocking": true,
+      "status": "PENDING"
+    },
+    {
+      "id": "EC46",
+      "name": "sprint65_bundle_validation",
+      "file": "reports/sprint65/evidence/sprint65-bundle-validation-result.json",
+      "blocking": true,
+      "status": "PENDING"
+    }
+  ]
+}

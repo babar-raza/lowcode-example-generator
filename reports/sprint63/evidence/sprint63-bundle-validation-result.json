@@ -1,8 +1,8 @@
 {
   "bundle_dir": "reports\\sprint63",
   "sprint_id": "sprint63-sprint62-closure-repair-validator-package-evidence-publication-handoff",
-  "total_rules": 20,
-  "passed": 20,
+  "total_rules": 21,
+  "passed": 21,
   "failed": 0,
   "warnings": 0,
   "overall_valid": true,
@@ -100,7 +100,7 @@
       "description": "Bundle must contain at least 35 files",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "Bundle has 416 files",
+      "evidence": "Bundle has 417 files",
       "failure_detail": ""
     },
     {
@@ -108,7 +108,7 @@
       "description": "final-clean-proof.txt must be nonzero bytes",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "final-clean-proof.txt is 473 bytes",
+      "evidence": "final-clean-proof.txt is 317 bytes",
       "failure_detail": ""
     },
     {
@@ -116,7 +116,7 @@
       "description": "final-clean-proof.txt must contain git status header",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "Git header found in final-clean-proof.txt: On branch main\nYour branch is ahead of 'origin/main' by 60 commits.\n  (use \"git",
+      "evidence": "Git header found in final-clean-proof.txt: On branch main\nYour branch is ahead of 'origin/main' by 61 commits.\n  (use \"git",
       "failure_detail": ""
     },
     {
@@ -166,7 +166,14 @@
       "passed": true,
       "evidence": "4/4 required files present and nonzero",
       "failure_detail": ""
+    },
+    {
+      "rule_id": "bundle_validation_result_present_and_valid",
+      "description": "Bundle validation result must show overall_valid=true",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "sprint63-bundle-validation-result.json: overall_valid=true (sprint_id=sprint63-sprint62-closure-repair-validator-package-evidence-publication-handoff, passed=20, failed=0)",
+      "failure_detail": ""
     }
-  ],
-  "note": "Phase A (20/20 rules). Phase B run after storing this result."
+  ]
 }

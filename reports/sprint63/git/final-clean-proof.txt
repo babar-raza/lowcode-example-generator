@@ -1,0 +1,13 @@
+On branch main
+Your branch is ahead of 'origin/main' by 60 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	reports/sprint63/git/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+8659feb feat(sprint63): EV two-phase fix, package artifacts, deep audit, authority correction
+--- Captured: 2026-05-22T07:20:24Z ---
+--- Sprint 63 interim clean proof ---

@@ -1,0 +1,144 @@
+{
+  "cells": {
+    "package_dir": "workspace/pr-dry-run/cells-controlled-pilot",
+    "total_files": 690,
+    "program_cs_count": 9,
+    "readme_count": 9,
+    "package_versions": {
+      "Aspose.Cells": "26.5.1"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/cells/lowcode/html-converter/Program.cs",
+        "examples/cells/lowcode/image-converter/Program.cs",
+        "examples/cells/lowcode/json-converter/Program.cs",
+        "examples/cells/lowcode/pdf-converter/Program.cs",
+        "examples/cells/lowcode/spreadsheet-converter/Program.cs",
+        "examples/cells/lowcode/spreadsheet-locker/Program.cs",
+        "examples/cells/lowcode/spreadsheet-merger/Program.cs",
+        "examples/cells/lowcode/spreadsheet-splitter/Program.cs",
+        "examples/cells/lowcode/text-converter/Program.cs"
+      ],
+      "readmes": [
+        "examples/cells/lowcode/html-converter/README.md",
+        "examples/cells/lowcode/image-converter/README.md",
+        "examples/cells/lowcode/json-converter/README.md",
+        "examples/cells/lowcode/pdf-converter/README.md",
+        "examples/cells/lowcode/spreadsheet-converter/README.md",
+        "examples/cells/lowcode/spreadsheet-locker/README.md",
+        "examples/cells/lowcode/spreadsheet-merger/README.md",
+        "examples/cells/lowcode/spreadsheet-splitter/README.md",
+        "examples/cells/lowcode/text-converter/README.md"
+      ]
+    }
+  },
+  "diagram": {
+    "package_dir": "workspace/pr-dry-run/diagram-controlled-pilot",
+    "total_files": 122,
+    "program_cs_count": 2,
+    "readme_count": 2,
+    "package_versions": {
+      "Aspose.Diagram": "26.5.0"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/diagram/lowcode/diagram-diagram-converter/Program.cs",
+        "examples/diagram/lowcode/diagram-pdf-converter/Program.cs"
+      ],
+      "readmes": [
+        "examples/diagram/lowcode/diagram-diagram-converter/README.md",
+        "examples/diagram/lowcode/diagram-pdf-converter/README.md"
+      ]
+    }
+  },
+  "email": {
+    "package_dir": "workspace/pr-dry-run/email-controlled-pilot",
+    "total_files": 64,
+    "program_cs_count": 1,
+    "readme_count": 1,
+    "package_versions": {
+      "Aspose.Email": "26.4.0"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/email/lowcode/converter/Program.cs"
+      ],
+      "readmes": [
+        "examples/email/lowcode/converter/README.md"
+      ]
+    }
+  },
+  "pdf": {
+    "package_dir": "workspace/pr-dry-run/pdf-controlled-pilot",
+    "total_files": 286,
+    "program_cs_count": 3,
+    "readme_count": 3,
+    "package_versions": {
+      "Aspose.PDF": "26.4.0"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/pdf/lowcode/doc-converter/Program.cs",
+        "examples/pdf/lowcode/html/Program.cs",
+        "examples/pdf/lowcode/xls-converter/Program.cs"
+      ],
+      "readmes": [
+        "examples/pdf/lowcode/doc-converter/README.md",
+        "examples/pdf/lowcode/html/README.md",
+        "examples/pdf/lowcode/xls-converter/README.md"
+      ]
+    }
+  },
+  "slides": {
+    "package_dir": "workspace/pr-dry-run/slides-controlled-pilot",
+    "total_files": 209,
+    "program_cs_count": 3,
+    "readme_count": 3,
+    "package_versions": {
+      "Aspose.Slides.NET": "26.5.0"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/slides/lowcode/compress/Program.cs",
+        "examples/slides/lowcode/convert/Program.cs",
+        "examples/slides/lowcode/merger/Program.cs"
+      ],
+      "readmes": [
+        "examples/slides/lowcode/compress/README.md",
+        "examples/slides/lowcode/convert/README.md",
+        "examples/slides/lowcode/merger/README.md"
+      ]
+    }
+  },
+  "words": {
+    "package_dir": "workspace/pr-dry-run/words-controlled-pilot",
+    "total_files": 586,
+    "program_cs_count": 8,
+    "readme_count": 8,
+    "package_versions": {
+      "Aspose.Words": "26.5.0"
+    },
+    "source_files": {
+      "program_cs": [
+        "examples/words/lowcode/comparer/Program.cs",
+        "examples/words/lowcode/converter/Program.cs",
+        "examples/words/lowcode/mail-merger/Program.cs",
+        "examples/words/lowcode/merger/Program.cs",
+        "examples/words/lowcode/replacer/Program.cs",
+        "examples/words/lowcode/report-builder/Program.cs",
+        "examples/words/lowcode/splitter/Program.cs",
+        "examples/words/lowcode/watermarker/Program.cs"
+      ],
+      "readmes": [
+        "examples/words/lowcode/comparer/README.md",
+        "examples/words/lowcode/converter/README.md",
+        "examples/words/lowcode/mail-merger/README.md",
+        "examples/words/lowcode/merger/README.md",
+        "examples/words/lowcode/replacer/README.md",
+        "examples/words/lowcode/report-builder/README.md",
+        "examples/words/lowcode/splitter/README.md",
+        "examples/words/lowcode/watermarker/README.md"
+      ]
+    }
+  }
+}

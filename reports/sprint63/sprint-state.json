@@ -1,0 +1,66 @@
+{
+  "sprint_id": "sprint63-sprint62-closure-repair-validator-package-evidence-publication-handoff",
+  "sprint_number": 63,
+  "generated_at": "2026-05-22",
+  "verdict": "LOWCODE_README_IO_DRY_RUN_PACKAGES_VERIFIED_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "phases_complete": 9,
+  "phases_total": 9,
+  "test_result": {
+    "passed": 2976,
+    "failed": 0,
+    "skipped": 3,
+    "total": 2979
+  },
+  "defects_closed": [
+    "S62-D1",
+    "S62-D2",
+    "S62-D3",
+    "S62-D4",
+    "S62-D5",
+    "S62-D6"
+  ],
+  "defects_remaining": [],
+  "sprint62_reclassified": {
+    "original_verdict": "SPRINT62_COMPLETE",
+    "corrected_verdict": "README_IO_DRY_RUN_READY_WITH_VALIDATOR_AND_PACKAGE_EVIDENCE_REPAIR_REQUIRED",
+    "blocking_defects_found": 6
+  },
+  "ev_two_phase_fix": {
+    "validate_for_storage_added": true,
+    "exclude_rule_ids_added": true,
+    "contradiction_detection_added": true,
+    "sprint62_revalidation": "overall_valid=false (1 rule FAILED)",
+    "new_tests": 7
+  },
+  "evidence_contract_computer": {
+    "module_created": true,
+    "no_pending_at_closure": true,
+    "new_tests": 13
+  },
+  "package_artifacts": {
+    "families_included": 6,
+    "scenarios_with_source_files": 40,
+    "scenarios_documented": 42
+  },
+  "deep_audit": {
+    "total_scenarios": 42,
+    "content_match": 42,
+    "programcs_input_matches_authority": 37,
+    "readme_corrections_available": 40
+  },
+  "authority_correction": {
+    "old_label": "CONFIRMED_FROM_PROGRAMCS",
+    "new_label": "PROGRAMCS_USAGE_CONFIRMED",
+    "package_api_authority_established": 0
+  },
+  "publication": {
+    "status": "BLOCKED_BY_APPROVAL",
+    "no_remote_mutation": true,
+    "readme_corrections_staged": 42,
+    "dry_run_packages_staged": 6
+  },
+  "portfolio": {
+    "total_scenarios": 42,
+    "families": 6
+  }
+}

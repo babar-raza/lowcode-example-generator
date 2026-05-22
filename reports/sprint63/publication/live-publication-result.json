@@ -1,0 +1,30 @@
+{
+  "sprint": 63,
+  "generated_at": "2026-05-22",
+  "status": "BLOCKED_BY_APPROVAL",
+  "reason": "No approval gates set. Sprint 63 is a repair sprint — no publication intended.",
+  "gates": {
+    "readme_push": {
+      "token": "APPROVE_README_PUSH",
+      "env_var": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL",
+      "set": false,
+      "result": "BLOCKED"
+    },
+    "live_pr": {
+      "token": "APPROVE_LIVE_PR",
+      "env_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "set": false,
+      "result": "BLOCKED"
+    }
+  },
+  "remote_mutations": 0,
+  "no_unauthorized_push": true,
+  "staged_packages": {
+    "cells": "workspace/pr-dry-run/cells-controlled-pilot",
+    "diagram": "workspace/pr-dry-run/diagram-controlled-pilot",
+    "email": "workspace/pr-dry-run/email-controlled-pilot",
+    "pdf": "workspace/pr-dry-run/pdf-controlled-pilot",
+    "slides": "workspace/pr-dry-run/slides-controlled-pilot",
+    "words": "workspace/pr-dry-run/words-controlled-pilot"
+  }
+}

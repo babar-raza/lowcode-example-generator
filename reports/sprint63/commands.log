@@ -1,0 +1,104 @@
+# Sprint 63 Commands Log
+# Started: 2026-05-22
+# Sprint: sprint63-sprint62-closure-repair-validator-package-evidence-publication-handoff
+# Purpose: Repair Sprint 62 blocking defects; correct validator, evidence contract, package evidence
+
+# ========== PHASE 0 — Reopen Sprint 62 and Correct the State ==========
+# Audited Sprint 62 evidence bundle (reports/sprint62/)
+# Found 6 blocking defects:
+#   1. Evidence contract: 31/37 PENDING (INVALID_CLOSURE per contract)
+#   2. Validator self-contradiction: overall_valid=true with passed=false rule inside
+#   3. Dry-run packages not in evidence bundle (workspace gitignored)
+#   4. Destination audit too thin (synthetic, missing output/API/README fields)
+#   5. Package authority overstated (CONFIRMED_FROM_PROGRAMCS != package API authority)
+#   6. Verdict SPRINT62_COMPLETE overclaims (31/37 PENDING, no publication)
+# Sprint 62 downgraded to: README_IO_DRY_RUN_READY_WITH_VALIDATOR_AND_PACKAGE_EVIDENCE_REPAIR_REQUIRED
+# Created: 00-sprint62-evidence-audit.md
+# Created: 01-sprint62-claim-vs-proof-matrix.md
+# Created: 02-corrected-sprint62-state.md
+# Created: commands.log (this file)
+# Created: todo.md
+# Created: evidence-contract.json
+# STATUS: COMPLETE
+
+# ========== PHASE 1 — Fix Evidence Contract Status Generation ==========
+# Built EvidenceContractComputer module: src/plugin_examples/evidence_contract_computer.py
+# Computes PRESENT/MISSING/ZERO_BYTES/SEMANTIC_FAILED for each contract category
+# No more PENDING status at closure
+# Tests: 13 new tests (TestPendingBlocksClosure, TestMissingFileBlocksClosure,
+#         TestZeroBytesBlocksClosure, TestSemanticValidation, TestAllPresentPasses)
+# All 13 PASS
+# Created: reports/sprint63/evidence/evidence-contract-repair.md
+# Created: reports/sprint63/evidence/evidence-contract-source-proof.patch
+# Created: reports/sprint63/evidence/evidence-contract-test-results.txt
+# STATUS: COMPLETE
+
+# ========== PHASE 2 — Fix EvidenceValidator Self-Contradiction ==========
+# Added validate_for_storage() and exclude_rule_ids to EvidenceValidator.validate()
+# Added internal contradiction detection to rule bundle_validation_result_present_and_valid
+# Sprint 62 revalidation: overall_valid=false (1 rule FAILED — contradiction detected)
+# 7 new tests in TestTwoPhaseValidation: all 7 PASS
+# Full EV test suite: 76 tests, 0 failed
+# Created: reports/sprint63/evidence/validator-self-consistency.md
+# Created: reports/sprint63/evidence/validator-source-proof.patch
+# Created: reports/sprint63/evidence/validator-test-results.txt
+# Created: reports/sprint63/evidence/sprint62-revalidation-result.json
+# STATUS: COMPLETE
+
+# ========== PHASE 3 — Include Actual Destination PR Package Artifacts ==========
+# Enumerated 6/6 family dry-run packages from workspace/pr-dry-run/
+# PDF: 8 packages (pr5-pr9, wave1-wave2) covering 17/19 scenarios
+# Copied Program.cs, README.md, .csproj to reports/sprint63/destination-packages/per-family/
+# 40/42 scenarios with source files (2 PDF special cases documented)
+# Created: destination-packages/package-artifact-index.json
+# Created: destination-packages/package-source-manifest.json
+# Created: destination-packages/package-hashes.json
+# Created: destination-packages/package-artifact-validation.md
+# Created: destination-packages/per-family/{cells,diagram,email,pdf,slides,words}/
+# STATUS: COMPLETE
+
+# ========== PHASE 4 — Deep Destination Content Audit ==========
+# Built content-audit-deep.json with 42 records: versions, API classes, README status
+# Built programcs-vs-authority-deep.json: 37/42 match, 3 mismatch, 2 no authority
+# Built readme-vs-authority-deep.json: 40/42 corrections available (0 applied)
+# Created: destination/content-audit-repaired.json (enriched from sprint62)
+# Created: destination/content-audit-deep.json
+# Created: destination/programcs-vs-authority-deep.json
+# Created: destination/readme-vs-authority-deep.json
+# Created: destination/deep-audit-summary.md
+# STATUS: COMPLETE
+
+# ========== PHASE 5 — Correct Package Authority Labeling ==========
+# Renamed api_verified=CONFIRMED_FROM_PROGRAMCS to PROGRAMCS_USAGE_CONFIRMED
+# Added programcs_api_usage_verified (bool) and package_api_authority (bool) fields
+# All 42 scenarios: programcs_api_usage_verified=True, package_api_authority=False
+# Created: package-authority/authority-label-correction.md
+# Created: package-authority/package-authority-matrix-corrected.json
+# STATUS: COMPLETE
+
+# ========== PHASE 6 — Final Verdict Semantics ==========
+# Verdict: LOWCODE_README_IO_DRY_RUN_PACKAGES_VERIFIED_PUBLICATION_BLOCKED_BY_APPROVAL
+# Created: final-verdict-semantics.md
+# STATUS: COMPLETE
+
+# ========== PHASE 7 — Live Publication Check ==========
+# No approval gates set — no remote mutation
+# Created: publication/live-approval-check.md
+# Created: publication/live-publication-result.json
+# STATUS: COMPLETE
+
+# ========== PHASE 8 — Tests and Command Logs ==========
+# Full test suite: 2976 passed, 3 skipped, 0 failed (96.19s)
+# +20 new tests from Sprint 63 (7 EV two-phase + 13 EvidenceContractComputer)
+# Captured: lanes/lane-I/test-run.log
+# Captured: lanes/lane-I/git-status.txt
+# STATUS: COMPLETE
+
+# ========== PHASE 9 — Final Evidence Bundle ==========
+# sprint63-bundle-validation-result.json (EV 21/21 PASS via two-phase)
+# bundle-manifest.json
+# final-verdict.md
+# sprint-state.json
+# git/final-clean-proof.txt (AFTER commit)
+# evidence-contract.json (computed — PRESENT/MISSING/ZERO_BYTES per category)
+# STATUS: COMPLETE

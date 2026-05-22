@@ -1,0 +1,389 @@
+{
+  "audit_type": "destination_content_audit_sprint63",
+  "sprint": 63,
+  "generated_at": "2026-05-22",
+  "authority_mapped": "42/42",
+  "present_no_authority": 0,
+  "total_examples": 42,
+  "authority_source": "programcs_api_usage_confirmed",
+  "examples": [
+    {
+      "scenario_id": "cells-html-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.1"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".vsdx",
+      "input_classification": "AddInput",
+      "dry_run_present": false,
+      "pkg_version": "NOT_IN_DRY_RUN"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".vsdx",
+      "input_classification": "AddInput",
+      "dry_run_present": false,
+      "pkg_version": "NOT_IN_DRY_RUN"
+    },
+    {
+      "scenario_id": "email-converter",
+      "family": "email",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".eml",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "pdf-html",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": false,
+      "pkg_version": "unknown"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": false,
+      "pkg_version": "unknown"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": false,
+      "pkg_version": "NOT_IN_DRY_RUN"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.4.0"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "family": "slides",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "family": "slides",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "family": "slides",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-converter",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "TEMPLATE_INPUT",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "TEMPLATE_INPUT",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "family": "words",
+      "content_match": "MATCH",
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "dry_run_present": true,
+      "pkg_version": "26.5.0"
+    }
+  ]
+}

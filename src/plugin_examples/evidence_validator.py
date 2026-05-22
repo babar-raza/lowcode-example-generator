@@ -116,36 +116,55 @@ class EvidenceValidator:
         # If None, wiring rules use evidence-based fallback (integration-proof.md).
         self.source_root = source_root
 
-    def validate(self) -> ValidationReport:
-        """Run all validation rules and return a report."""
+    def validate(self, exclude_rule_ids: "set[str] | None" = None) -> ValidationReport:
+        """Run all validation rules and return a report.
+
+        Args:
+            exclude_rule_ids: Optional set of rule_id strings to skip.
+                Used for two-phase validation: phase A excludes
+                ``bundle_validation_result_present_and_valid`` so the result
+                can be written without self-referential failure; phase B
+                runs all rules to confirm the stored result is present and valid.
+
+                A bundle validation result MUST be produced by phase A (where
+                all 20 non-self-referential FAILURE rules pass) and then
+                verified by phase B (all 21 rules).  Storing a result from
+                a phase-B run that still has ``passed=false`` for rule 21
+                is a self-contradiction and is detected by semantic validation.
+        """
+        exclude = exclude_rule_ids or set()
         results: list[RuleResult] = []
 
+        def _maybe(rule_result: RuleResult) -> None:
+            if rule_result.rule_id not in exclude:
+                results.append(rule_result)
+
         # --- Original Sprint 60 rules (hardened) ---
-        results.append(self._rule_final_clean_proof_after_final_commit())
-        results.append(self._rule_destination_42_42_authority_mapped())
-        results.append(self._rule_no_present_no_authority())
-        results.append(self._rule_no_partial_without_partial_verdict())
-        results.append(self._rule_readme_audit_content_based())
-        results.append(self._rule_readme_gate_implemented())
-        results.append(self._rule_evidence_validator_actually_ran())
-        results.append(self._rule_todo_all_items_checked_or_carried())
-        results.append(self._rule_zero_unknown_input_formats())
-        results.append(self._rule_test_log_zero_failed())
-        results.append(self._rule_commands_log_complete())
-        results.append(self._rule_bundle_min_files())
+        _maybe(self._rule_final_clean_proof_after_final_commit())
+        _maybe(self._rule_destination_42_42_authority_mapped())
+        _maybe(self._rule_no_present_no_authority())
+        _maybe(self._rule_no_partial_without_partial_verdict())
+        _maybe(self._rule_readme_audit_content_based())
+        _maybe(self._rule_readme_gate_implemented())
+        _maybe(self._rule_evidence_validator_actually_ran())
+        _maybe(self._rule_todo_all_items_checked_or_carried())
+        _maybe(self._rule_zero_unknown_input_formats())
+        _maybe(self._rule_test_log_zero_failed())
+        _maybe(self._rule_commands_log_complete())
+        _maybe(self._rule_bundle_min_files())
 
         # --- Sprint 61 NEW semantic rules ---
-        results.append(self._rule_final_clean_proof_nonzero_bytes())
-        results.append(self._rule_final_clean_proof_has_git_header())
-        results.append(self._rule_readme_io_format_not_falsely_complete())
-        results.append(self._rule_readme_gate_wired_in_pipeline())
-        results.append(self._rule_evidence_validator_wired_in_pipeline())
-        results.append(self._rule_destination_programcs_input_not_all_null())
-        results.append(self._rule_no_p1_items_with_complete_verdict())
-        results.append(self._rule_required_files_nonzero_size())
+        _maybe(self._rule_final_clean_proof_nonzero_bytes())
+        _maybe(self._rule_final_clean_proof_has_git_header())
+        _maybe(self._rule_readme_io_format_not_falsely_complete())
+        _maybe(self._rule_readme_gate_wired_in_pipeline())
+        _maybe(self._rule_evidence_validator_wired_in_pipeline())
+        _maybe(self._rule_destination_programcs_input_not_all_null())
+        _maybe(self._rule_no_p1_items_with_complete_verdict())
+        _maybe(self._rule_required_files_nonzero_size())
 
         # --- Sprint 62 NEW rule: mandatory EV execution for final closure ---
-        results.append(self._rule_bundle_validation_result_present_and_valid())
+        _maybe(self._rule_bundle_validation_result_present_and_valid())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -161,6 +180,20 @@ class EvidenceValidator:
             overall_valid=len(failures) == 0,
             rule_results=results,
         )
+
+    SELF_REFERENCE_RULE_ID = "bundle_validation_result_present_and_valid"
+
+    def validate_for_storage(self) -> ValidationReport:
+        """Phase-A validation: run all rules EXCEPT the self-referential rule 21.
+
+        Use this to produce the bundle validation result JSON.  The result
+        is free of self-referential paradoxes: if all 20 FAILURE rules pass,
+        ``overall_valid=True`` and ``failed=0`` are truthful.
+
+        After writing the result, call ``validate()`` (phase B, all 21 rules)
+        to confirm rule 21 also passes.
+        """
+        return self.validate(exclude_rule_ids={self.SELF_REFERENCE_RULE_ID})
 
     # ------------------------------------------------------------------
     # Sprint 60 rules (hardened)
@@ -1109,6 +1142,26 @@ class EvidenceValidator:
                     f"{validation_path.name}: overall_valid=false "
                     f"({rules_failed} rules FAILED, {rules_passed} passed). "
                     "Fix all FAILURE-severity rule failures before closing sprint."
+                ),
+                evidence=f"sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed}",
+            )
+
+        # Detect internal contradiction: overall_valid=true but an embedded rule has passed=false.
+        # This was the Sprint 62 bootstrap defect: the result was manually created with
+        # overall_valid=true/failed=0 while embedded rules from a 20/21 run had passed=false.
+        embedded_rules = data.get("rules", [])
+        contradicting_rules = [r for r in embedded_rules if r.get("passed") is False]
+        if contradicting_rules:
+            bad_ids = ", ".join(r.get("rule_id", "unknown") for r in contradicting_rules[:5])
+            return RuleResult(
+                rule_id=rule_id,
+                description="Bundle validation result must show overall_valid=true",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    f"{validation_path.name}: overall_valid=true is contradicted by "
+                    f"{len(contradicting_rules)} embedded rule(s) with passed=false: {bad_ids}. "
+                    "Use two-phase validation (validate_for_storage) to avoid bootstrap contradiction."
                 ),
                 evidence=f"sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed}",
             )

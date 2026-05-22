@@ -1,0 +1,26 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 13 items
+
+tests/unit/test_evidence_contract_computer.py::TestPendingBlocksClosure::test_non_blocking_pending_does_not_block_closure PASSED [  7%]
+tests/unit/test_evidence_contract_computer.py::TestPendingBlocksClosure::test_pending_category_is_blocking_failure PASSED [ 15%]
+tests/unit/test_evidence_contract_computer.py::TestMissingFileBlocksClosure::test_missing_file_is_missing_status PASSED [ 23%]
+tests/unit/test_evidence_contract_computer.py::TestZeroBytesBlocksClosure::test_zero_byte_file_fails PASSED [ 30%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_in_progress_marker_fails PASSED [ 38%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_internal_contradiction_detected PASSED [ 46%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_no_contradiction_when_all_rules_pass PASSED [ 53%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_overall_valid_false_required_passes PASSED [ 61%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_overall_valid_true_required_fails_when_false PASSED [ 69%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_test_log_with_failures_fails PASSED [ 76%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_test_log_zero_failed_passes PASSED [ 84%]
+tests/unit/test_evidence_contract_computer.py::TestSemanticValidation::test_unchecked_todo_fails PASSED [ 92%]
+tests/unit/test_evidence_contract_computer.py::TestAllPresentPasses::test_all_present_passes PASSED [100%]
+
+============================= 13 passed, 0 failed in 0.49s ==============================

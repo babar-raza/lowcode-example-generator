@@ -1,0 +1,302 @@
+{
+  "contract_id": "sprint63-sprint62-closure-repair-validator-package-evidence-publication-handoff",
+  "computed_at": "2026-05-22T07:18:19Z",
+  "total_categories": 36,
+  "present": 25,
+  "missing": 7,
+  "zero_bytes": 0,
+  "semantic_failed": 4,
+  "pending": 0,
+  "blocking_failures": 11,
+  "closure_valid": false,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "sprint62_audit_report",
+      "file": "reports/sprint63/00-sprint62-evidence-audit.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "sprint62_claim_vs_proof_matrix",
+      "file": "reports/sprint63/01-sprint62-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "corrected_sprint62_state",
+      "file": "reports/sprint63/02-corrected-sprint62-state.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "commands_log",
+      "file": "reports/sprint63/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "sprint63_todo",
+      "file": "reports/sprint63/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "evidence_contract",
+      "file": "reports/sprint63/evidence-contract.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "evidence_contract_repair",
+      "file": "reports/sprint63/evidence/evidence-contract-repair.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "evidence_contract_source_proof",
+      "file": "reports/sprint63/evidence/evidence-contract-source-proof.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "evidence_contract_test_results",
+      "file": "reports/sprint63/evidence/evidence-contract-test-results.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "evidence_contract_computed",
+      "file": "reports/sprint63/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/evidence/evidence-contract-computed.json"
+    },
+    {
+      "id": "EC11",
+      "name": "validator_self_consistency",
+      "file": "reports/sprint63/evidence/validator-self-consistency.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "validator_source_proof",
+      "file": "reports/sprint63/evidence/validator-source-proof.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "validator_test_results",
+      "file": "reports/sprint63/evidence/validator-test-results.txt",
+      "blocking": true,
+      "status": "SEMANTIC_FAILED",
+      "detail": "File does not contain '0 failed' test result indicator"
+    },
+    {
+      "id": "EC14",
+      "name": "sprint62_revalidation_result",
+      "file": "reports/sprint63/evidence/sprint62-revalidation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "sprint63_bundle_validation_result",
+      "file": "reports/sprint63/evidence/sprint63-bundle-validation-result.json",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/evidence/sprint63-bundle-validation-result.json"
+    },
+    {
+      "id": "EC16",
+      "name": "package_artifact_index",
+      "file": "reports/sprint63/destination-packages/package-artifact-index.json",
+      "blocking": true,
+      "status": "SEMANTIC_FAILED",
+      "detail": "Only 0 families listed (expected 6)"
+    },
+    {
+      "id": "EC17",
+      "name": "package_hashes",
+      "file": "reports/sprint63/destination-packages/package-hashes.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "package_artifact_validation",
+      "file": "reports/sprint63/destination-packages/package-artifact-validation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "destination_content_audit_deep",
+      "file": "reports/sprint63/destination/content-audit-deep.json",
+      "blocking": true,
+      "status": "SEMANTIC_FAILED",
+      "detail": "42 records missing output_format"
+    },
+    {
+      "id": "EC20",
+      "name": "programcs_vs_authority_deep",
+      "file": "reports/sprint63/destination/programcs-vs-authority-deep.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "readme_vs_authority_deep",
+      "file": "reports/sprint63/destination/readme-vs-authority-deep.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "root_readme_vs_package_deep",
+      "file": "reports/sprint63/destination/root-readme-vs-package-deep.json",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/destination/root-readme-vs-package-deep.json"
+    },
+    {
+      "id": "EC23",
+      "name": "deep_audit_summary",
+      "file": "reports/sprint63/destination/deep-audit-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "authority_label_correction",
+      "file": "reports/sprint63/package-authority/authority-label-correction.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "package_authority_matrix_corrected",
+      "file": "reports/sprint63/package-authority/package-authority-matrix-corrected.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "package_authority_taskcards",
+      "file": "reports/sprint63/package-authority/package-authority-taskcards.md",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/package-authority/package-authority-taskcards.md"
+    },
+    {
+      "id": "EC27",
+      "name": "final_verdict_semantics",
+      "file": "reports/sprint63/final-verdict-semantics.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "live_approval_check",
+      "file": "reports/sprint63/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "live_publication_result",
+      "file": "reports/sprint63/publication/live-publication-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "branch_delete_result",
+      "file": "reports/sprint63/publication/branch-delete-result.json",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/publication/branch-delete-result.json"
+    },
+    {
+      "id": "EC31",
+      "name": "test_run_log",
+      "file": "reports/sprint63/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "SEMANTIC_FAILED",
+      "detail": "File does not contain '0 failed' test result indicator"
+    },
+    {
+      "id": "EC32",
+      "name": "git_status_end",
+      "file": "reports/sprint63/lanes/lane-I/git-status.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC33",
+      "name": "bundle_manifest",
+      "file": "reports/sprint63/bundle-manifest.json",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/bundle-manifest.json"
+    },
+    {
+      "id": "EC34",
+      "name": "final_verdict",
+      "file": "reports/sprint63/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC35",
+      "name": "sprint_state",
+      "file": "reports/sprint63/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC36",
+      "name": "final_clean_proof",
+      "file": "reports/sprint63/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "MISSING",
+      "detail": "File not found: reports/sprint63/git/final-clean-proof.txt"
+    }
+  ]
+}

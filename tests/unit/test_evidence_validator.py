@@ -1101,5 +1101,132 @@ class TestBundleValidationResultPresentAndValid(unittest.TestCase):
         self.assertFalse(result.overall_valid)
 
 
+class TestTwoPhaseValidation(unittest.TestCase):
+    """Sprint 63 Phase 2: Two-phase validation eliminates self-referential bootstrap contradiction."""
+
+    def test_validate_for_storage_excludes_self_reference_rule(self):
+        """validate_for_storage() runs 20 rules (excludes rule 21 bundle_validation_result_present_and_valid)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Remove the validation result so rule 21 would fail if evaluated
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            result = EvidenceValidator(b).validate_for_storage()
+        # Rule 21 must not appear in results
+        rule_ids = {r.rule_id for r in result.rule_results}
+        self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
+        # Should have exactly 20 rules evaluated
+        self.assertEqual(len(result.rule_results), 20)
+
+    def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
+        """validate_for_storage() overall_valid=True means all 20 non-self-referential rules pass."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Remove the validation result so rule 21 would fail if included
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            result = EvidenceValidator(b).validate_for_storage()
+        # overall_valid should be True because rule 21 was excluded
+        self.assertTrue(result.overall_valid)
+        self.assertEqual(result.failed, 0)
+
+    def test_full_validate_passes_after_storing_phase_a_result(self):
+        """After storing phase A result, phase B (all 21 rules) passes."""
+        import json
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Remove old result
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            # Phase A: run without rule 21
+            phase_a = EvidenceValidator(b).validate_for_storage()
+            # Store the phase A result (simulating actual storage)
+            result_data = {
+                "sprint_id": "sprint63-test",
+                "overall_valid": phase_a.overall_valid,
+                "passed": phase_a.passed,
+                "failed": phase_a.failed,
+                "warnings": phase_a.warnings,
+                "total_rules": len(phase_a.rule_results),
+                "rules": [
+                    {"rule_id": r.rule_id, "passed": r.passed}
+                    for r in phase_a.rule_results
+                ],
+            }
+            (b / "evidence" / "sprint63-bundle-validation-result.json").write_text(
+                json.dumps(result_data), encoding="utf-8"
+            )
+            # Phase B: run all 21 rules — rule 21 should now pass
+            phase_b = EvidenceValidator(b).validate()
+        self.assertTrue(phase_b.overall_valid)
+        self.assertEqual(phase_b.failed, 0)
+        self.assertEqual(len(phase_b.rule_results), 21)
+
+    def test_sprint62_style_contradiction_detected_by_rule_21(self):
+        """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
+        import json
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Write a contradictory result file: claims overall_valid=true but one rule is failed
+            contradictory_result = {
+                "sprint_id": "sprint62-test",
+                "overall_valid": True,
+                "passed": 21,
+                "failed": 0,
+                "warnings": 0,
+                "total_rules": 21,
+                "rules": [
+                    {"rule_id": "bundle_validation_result_present_and_valid", "passed": False},
+                ],
+            }
+            (b / "evidence" / "sprint62-bundle-validation-result.json").write_text(
+                json.dumps(contradictory_result), encoding="utf-8"
+            )
+            # Remove the old result so only the contradictory one is used
+            (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "bundle_validation_result_present_and_valid"
+        )
+        # The contradiction (overall_valid=true but a rule has passed=false) must be detected
+        self.assertFalse(rule.passed)
+        detail_lower = rule.failure_detail.lower()
+        self.assertTrue(
+            "contradict" in detail_lower or "inconsistent" in detail_lower or "false" in detail_lower,
+            f"Expected contradiction language in failure_detail, got: {rule.failure_detail}",
+        )
+
+    def test_validate_exclude_rule_ids_removes_specified_rule(self):
+        """validate(exclude_rule_ids={'some_rule'}) removes that rule from results."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate(
+                exclude_rule_ids={"required_files_nonzero_size"}
+            )
+        rule_ids = {r.rule_id for r in result.rule_results}
+        self.assertNotIn("required_files_nonzero_size", rule_ids)
+        # All other rules still present
+        self.assertIn("bundle_validation_result_present_and_valid", rule_ids)
+
+    def test_validate_exclude_empty_set_runs_all_rules(self):
+        """validate(exclude_rule_ids=set()) is identical to validate()."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result_default = EvidenceValidator(b).validate()
+            result_empty_exclude = EvidenceValidator(b).validate(exclude_rule_ids=set())
+        self.assertEqual(len(result_default.rule_results), len(result_empty_exclude.rule_results))
+        self.assertEqual(result_default.overall_valid, result_empty_exclude.overall_valid)
+
+    def test_self_reference_rule_id_constant_matches_actual_rule(self):
+        """SELF_REFERENCE_RULE_ID must match the actual rule ID used in validate()."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule_ids = {r.rule_id for r in result.rule_results}
+        self.assertIn(
+            EvidenceValidator.SELF_REFERENCE_RULE_ID,
+            rule_ids,
+            "SELF_REFERENCE_RULE_ID must match an actual rule in the validator",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

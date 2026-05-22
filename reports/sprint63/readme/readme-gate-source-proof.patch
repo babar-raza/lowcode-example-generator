@@ -1,0 +1,12 @@
+diff --git a/src/plugin_examples/publisher/readme_audit_gate.py b/src/plugin_examples/publisher/readme_audit_gate.py
+Sprint 62 hardening: APPROVE_README_PUSH no longer bypasses failed audit.
+New APPROVE_README_AUDIT_OVERRIDE emergency token required for bypass.
+Records audit_override_used=True when override is used.
+
+Key change:
+-    if approval_token == "APPROVE_README_PUSH":
+-        return GateResult(gate_passed=True, ...)  # bypass regardless of audit
++    if approval_token == "APPROVE_README_PUSH" and audit_passed:
++        return GateResult(gate_passed=True, ...)  # only pass if audit also passed
++    if approval_token == "APPROVE_README_AUDIT_OVERRIDE":
++        return GateResult(gate_passed=True, audit_override_used=True, ...)  # emergency only

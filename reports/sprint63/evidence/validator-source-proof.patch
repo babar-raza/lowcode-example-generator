@@ -1,0 +1,71 @@
+diff --git a/src/plugin_examples/evidence_validator.py b/src/plugin_examples/evidence_validator.py
+--- a/src/plugin_examples/evidence_validator.py
++++ b/src/plugin_examples/evidence_validator.py
+@@ validate() signature
+-    def validate(self) -> ValidationReport:
++    def validate(self, exclude_rule_ids: "set[str] | None" = None) -> ValidationReport:
+         """Run all validation rules and return a report.
++
++        Args:
++            exclude_rule_ids: Optional set of rule_id strings to skip.
++                Used for two-phase validation: phase A excludes
++                ``bundle_validation_result_present_and_valid`` so the result
++                can be written without self-referential failure; phase B
++                runs all rules to confirm the stored result is present and valid.
+         """
++        exclude = exclude_rule_ids or set()
++        results: list[RuleResult] = []
++
++        def _maybe(rule_result: RuleResult) -> None:
++            if rule_result.rule_id not in exclude:
++                results.append(rule_result)
++
+         # All rules called via _maybe() instead of direct append
+
+@@ After all rule evaluations, before ValidationReport construction:
++    SELF_REFERENCE_RULE_ID = "bundle_validation_result_present_and_valid"
++
++    def validate_for_storage(self) -> ValidationReport:
++        """Phase-A validation: exclude self-referential rule 21.
++
++        Run this before storing the result. The stored result will have
++        overall_valid reflecting 20 actual rules. Then run full validate()
++        (phase B) to confirm the stored result is present and valid.
++        """
++        return self.validate(exclude_rule_ids={self.SELF_REFERENCE_RULE_ID})
+
+@@ _rule_bundle_validation_result_present_and_valid() — after overall_valid check:
++        # Detect internal contradiction: overall_valid=true but an embedded rule has passed=false.
++        # This was the Sprint 62 bootstrap defect.
++        embedded_rules = data.get("rules", [])
++        contradicting_rules = [r for r in embedded_rules if r.get("passed") is False]
++        if contradicting_rules:
++            bad_ids = ", ".join(r.get("rule_id", "unknown") for r in contradicting_rules[:5])
++            return RuleResult(
++                rule_id=rule_id,
++                description="Bundle validation result must show overall_valid=true",
++                severity="FAILURE",
++                passed=False,
++                failure_detail=(
++                    f"{validation_path.name}: overall_valid=true is contradicted by "
++                    f"{len(contradicting_rules)} embedded rule(s) with passed=false: {bad_ids}. "
++                    "Use two-phase validation (validate_for_storage) to avoid bootstrap contradiction."
++                ),
++                evidence=f"sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed}",
++            )
+
+diff --git a/tests/unit/test_evidence_validator.py b/tests/unit/test_evidence_validator.py
+--- a/tests/unit/test_evidence_validator.py
++++ b/tests/unit/test_evidence_validator.py
+@@ End of file, before if __name__ == "__main__":
++class TestTwoPhaseValidation(unittest.TestCase):
++    """Sprint 63 Phase 2: Two-phase validation eliminates self-referential bootstrap contradiction."""
++
++    7 tests covering:
++    - validate_for_storage() excludes SELF_REFERENCE_RULE_ID
++    - Phase A overall_valid=True with missing result file
++    - Phase B passes after storing phase A result
++    - Sprint 62 contradiction detected by rule 21
++    - exclude_rule_ids removes specified rule
++    - exclude_rule_ids=set() is identical to validate()
++    - SELF_REFERENCE_RULE_ID constant matches actual rule ID

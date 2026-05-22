@@ -243,6 +243,48 @@ def _make_valid_bundle(tmpdir: str) -> Path:
         encoding="utf-8",
     )
 
+    # Sprint 67: cardinality audit artifacts (rules 43-44)
+    (b / "root-readme" / "cardinality-audit.json").write_text(
+        json.dumps({"families": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "email": {}, "slides": {}}}),
+        encoding="utf-8",
+    )
+
+    # Sprint 67: version decision artifacts (rules 45-46)
+    (b / "version" / "pdf-version-decision.md").write_text(
+        "# PDF Version Decision\nDecision: 26.5.0 is canonical.\n", encoding="utf-8"
+    )
+    (b / "version" / "version-truth-matrix.json").write_text(
+        json.dumps({"families": {"pdf": {"canonical": "26.5.0"}}}),
+        encoding="utf-8",
+    )
+
+    # Sprint 67: legacy plan reconciliation (rule 48)
+    (b / "legacy-plan-reconciliation").mkdir(parents=True)
+    (b / "legacy-plan-reconciliation" / "reconciliation-index.md").write_text(
+        "# Legacy Plan Reconciliation\nAll plans reconciled.\n", encoding="utf-8"
+    )
+
+    # Sprint 67: per-family handoff-index.json (rule 50)
+    for fam in ["cells", "words", "pdf", "diagram", "email", "slides"]:
+        fam_dir = b / "handoff" / "per-family" / fam
+        fam_dir.mkdir(parents=True, exist_ok=True)
+        (fam_dir / "handoff-index.json").write_text(
+            json.dumps({"family": fam, "examples": [], "sprint": "sprint67"}),
+            encoding="utf-8",
+        )
+
+    # Sprint 67: readme-sync/sync-state.json (rule 51)
+    (b / "readme-sync").mkdir(parents=True)
+    (b / "readme-sync" / "sync-state.json").write_text(
+        json.dumps({"architecture_version": "IV", "components_active": {}}),
+        encoding="utf-8",
+    )
+
+    # Sprint 67: remote/remote-proof-summary.md (rule 52)
+    (b / "remote" / "remote-proof-summary.md").write_text(
+        "# Remote Proof Summary\nAll 42 examples confirmed.\n", encoding="utf-8"
+    )
+
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 

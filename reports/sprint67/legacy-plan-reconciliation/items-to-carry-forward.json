@@ -1,0 +1,57 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint67",
+  "description": "Legacy plan items that are not yet closed and must be addressed or explicitly deferred in Sprint 67",
+  "items": [
+    {
+      "id": "CF-S62-2",
+      "plan": "sprint62",
+      "item": "Live README I/O publication — push corrected packages to destination repos",
+      "original_status": "BLOCKED_BY_APPROVAL in Sprint 62",
+      "current_status": "BLOCKED_BY_APPROVAL — still 0 PRs created as of Sprint 66",
+      "sprint67_phase": "Phase 8",
+      "sprint67_action": "Activate approval token if present, or document explicit BLOCKED state with next-step plan",
+      "acceptance_criterion": "Either PRs created + merged, or BLOCKED state documented with publication-state-model.md"
+    },
+    {
+      "id": "CF-S62-1",
+      "plan": "sprint62",
+      "item": "Words/Diagram version drift — publish corrected 26.5.0 packages to destination repos",
+      "original_status": "Dry-run ready in Sprint 62; not published",
+      "current_status": "Sprint 66 handoff has 26.5.0 for words/diagram; remote repos still at 26.4.0",
+      "sprint67_phase": "Phase 3 + Phase 8",
+      "sprint67_action": "Confirm version authority in version-truth-matrix.json; include in publication batch when approved",
+      "acceptance_criterion": "version-policy-final.json shows total_drift_unresolved=0"
+    },
+    {
+      "id": "CF-S66-D1",
+      "plan": "sprint66",
+      "item": "Root README cardinality — merger (N→1) and splitter (1→N) markers",
+      "original_status": "Missing — root READMEs show xlsx→xlsx without cardinality",
+      "current_status": "6 root README files present but cardinality not annotated",
+      "sprint67_phase": "Phase 2",
+      "sprint67_action": "Update all 6 root READMEs with operation-aware cardinality display",
+      "acceptance_criterion": "All 6 root READMEs have N-to-1 or 1-to-N markers for merger/splitter types"
+    },
+    {
+      "id": "CF-S66-D2",
+      "plan": "sprint66",
+      "item": "PDF version contradiction — content-audit=26.4.0 vs handoff=26.5.0",
+      "original_status": "Contradiction found in Sprint 67 audit",
+      "current_status": "No decision record; version-policy-final.json exists but doesn't resolve this",
+      "sprint67_phase": "Phase 3",
+      "sprint67_action": "Issue formal version decision record (Path A: 26.5.0 canonical for handoff)",
+      "acceptance_criterion": "version/pdf-version-decision.md present; version-truth-matrix.json resolves contradiction"
+    },
+    {
+      "id": "CF-S66-D3",
+      "plan": "sprint66",
+      "item": "Sprint 64 path leakage — local_package_path refs sprint64/ in 42 records",
+      "original_status": "All 42 content-audit records point to reports/sprint64/",
+      "current_status": "Sprint 67 handoff not yet created; sprint64 refs still present",
+      "sprint67_phase": "Phase 4",
+      "sprint67_action": "Create sprint67 handoff; update content-audit-sprint67.json with sprint67 paths",
+      "acceptance_criterion": "content-audit-sprint67.json has no sprint64 or sprint66 path refs"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+diff --git a/src/plugin_examples/publisher/readme_audit_gate.py b/src/plugin_examples/publisher/readme_audit_gate.py
+index abcdef1..1234567 100644
+--- a/src/plugin_examples/publisher/readme_audit_gate.py
++++ b/src/plugin_examples/publisher/readme_audit_gate.py
+@@ -1,4 +1,4 @@
+-"""README audit gate — Sprint 61."""
++"""README audit gate — Sprint 61, active in Sprint 66."""
+
+ from pathlib import Path
+
+diff --git a/src/plugin_examples/__main__.py b/src/plugin_examples/__main__.py
+index fedcba9..9876543 100644
+--- a/src/plugin_examples/__main__.py
++++ b/src/plugin_examples/__main__.py
+@@ -1,3 +1,4 @@
++from plugin_examples.publisher.readme_audit_gate import check_readme_audit_gate
+ from plugin_examples.evidence_validator import EvidenceValidator
+
+ # Gate wired in publish-pr --publish path (Sprint 61/62, active Sprint 66)

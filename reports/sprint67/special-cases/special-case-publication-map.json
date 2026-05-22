@@ -1,0 +1,21 @@
+{
+  "generated": "2026-05-22T00:00:00Z",
+  "special_cases": [
+    {
+      "scenario_id": "pdf-pdfa-converter",
+      "destination_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "destination_path": "examples/pdf/lowcode/pdfa-converter",
+      "remote_path_note": "Remote dir is 'pdfa-converter' not 'pdf-pdfa-converter'",
+      "remote_confirmed": true,
+      "handoff_path": "reports/sprint67/handoff/per-family/pdf/pdfa-converter"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "destination_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "destination_path": "examples/pdf/lowcode/text-extractor",
+      "remote_path_note": "Remote dir is 'text-extractor' not 'pdf-text-extractor'",
+      "remote_confirmed": true,
+      "handoff_path": "reports/sprint67/handoff/per-family/pdf/text-extractor"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Sprint 67 Commands Log
+
+Sprint: sprint67-final-pre-publication-repair-legacy-plan-reconciliation-readme-io-live-pr-readiness
+Started: 2026-05-22
+
+## Phase 0
+
+[2026-05-22] mkdir -p reports/sprint67
+[2026-05-22] Created 00-sprint66-evidence-audit.md
+[2026-05-22] Created 01-sprint66-claim-vs-proof-matrix.md
+[2026-05-22] Created 02-corrected-sprint66-state.md
+[2026-05-22] Created todo.md
+[2026-05-22] Created commands.log (this file)
+[2026-05-22] Created evidence-contract.json

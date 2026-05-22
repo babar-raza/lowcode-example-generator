@@ -1,0 +1,111 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint67",
+  "description": "Legacy plan items that are fully proven and closed — no further action needed in Sprint 67",
+  "items": [
+    {
+      "id": "S62-P1",
+      "plan": "sprint62",
+      "item": "Special-case I/O authority (9 cases: 5 Program.cs + 4 README)",
+      "closed_in": "sprint62",
+      "proof": "reports/sprint62/io-special/special-case-authority.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S62-P2",
+      "plan": "sprint62",
+      "item": "42/42 README I/O correction text packages",
+      "closed_in": "sprint62",
+      "proof": "reports/sprint62/readme-corrections/",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S62-P3",
+      "plan": "sprint62",
+      "item": "README gate hardening — APPROVE_README_PUSH cannot bypass failed audit",
+      "closed_in": "sprint62",
+      "proof": "reports/sprint62/gates/readme-gate-approval-semantics.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S62-P4",
+      "plan": "sprint62",
+      "item": "EV execution mandatory (SD61-05) — bundle_validation_result_present_and_valid rule",
+      "closed_in": "sprint62",
+      "proof": "reports/sprint62/evidence/pipeline-integration-proof.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S62-P5",
+      "plan": "sprint62",
+      "item": "Package authority API backfill — api_verified=CONFIRMED_FROM_PROGRAMCS for 42/42",
+      "closed_in": "sprint62",
+      "proof": "reports/sprint62/package-authority/package-authority-summary.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S61-P1",
+      "plan": "sprint61",
+      "item": "readme_facts.py + readme_auditor.py — README sync architecture active",
+      "closed_in": "sprint61",
+      "proof": "src/plugin_examples/publisher/readme_facts.py",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S61-P2",
+      "plan": "sprint61",
+      "item": "readme_audit_gate.py wired into publish-pr --publish",
+      "closed_in": "sprint61",
+      "proof": "reports/sprint61/readme/readme-gate-flow-integration.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S61-P3",
+      "plan": "sprint61",
+      "item": "EvidenceValidator 20 rules wired into release-status --validate-bundle",
+      "closed_in": "sprint61",
+      "proof": "reports/sprint61/evidence/pipeline-integration-proof.md",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S66-P1",
+      "plan": "sprint66",
+      "item": "S65-D1: Per-PR per-example remote publication coverage map",
+      "closed_in": "sprint66",
+      "proof": "reports/sprint66/remote/remote-pr-proof-index.json",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S66-P2",
+      "plan": "sprint66",
+      "item": "S65-D2: Remote README I/O audit — 0/42 have I/O sections",
+      "closed_in": "sprint66",
+      "proof": "reports/sprint66/remote/remote-readme-io-audit.json",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S66-P3",
+      "plan": "sprint66",
+      "item": "S65-D3: Self-contained handoff bundle — 42 packages",
+      "closed_in": "sprint66",
+      "proof": "reports/sprint66/handoff/per-family/",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S66-P4",
+      "plan": "sprint66",
+      "item": "S65-D4: output_kind repaired for pdf-html-converter, pdf-pdfa-converter, pdf-text-extractor",
+      "closed_in": "sprint66",
+      "proof": "reports/sprint66/destination/content-audit-final.json",
+      "status": "PROVEN_CLOSED"
+    },
+    {
+      "id": "S66-P5",
+      "plan": "sprint66",
+      "item": "S65-D5: Per-field publication state model (11 fields per example)",
+      "closed_in": "sprint66",
+      "proof": "reports/sprint66/publication/publication-truth-matrix-final.json",
+      "status": "PROVEN_CLOSED"
+    }
+  ]
+}

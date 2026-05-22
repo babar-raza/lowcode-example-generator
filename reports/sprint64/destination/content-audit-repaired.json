@@ -1,0 +1,387 @@
+{
+  "sprint": 64,
+  "generated_at": "2026-05-22",
+  "authority_mapped": "42/42",
+  "present_no_authority": 0,
+  "total_examples": 42,
+  "examples": [
+    {
+      "scenario_id": "cells-html-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".html"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".png"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".json"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".csv"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".xlsx"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "family": "cells",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".xlsx",
+      "input_classification": "AddInput",
+      "output_format": ".txt"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".vsdx",
+      "input_classification": "AddInput",
+      "output_format": ".vdx"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".vsdx",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "email-converter",
+      "family": "email",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".eml",
+      "input_classification": "AddInput",
+      "output_format": "directory"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".json"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-html-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".html",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".png"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".jpg"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-pdfa-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".png"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": "stdout"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".tiff"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "family": "pdf",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pdf",
+      "input_classification": "AddInput",
+      "output_format": ".xlsx"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "family": "slides",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "output_format": ".pptx"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "family": "slides",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "family": "slides",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".pptx",
+      "input_classification": "AddInput",
+      "output_format": ".pptx"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-converter",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": "template.docx+data",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-merger",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": "template.docx+data",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "family": "words",
+      "content_match": "MATCH",
+      "authority_mapped": true,
+      "input_format_in_programcs": ".docx",
+      "input_classification": "AddInput",
+      "output_format": ".docx"
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "ledger_type": "readme_correction_application",
+  "sprint": 64,
+  "generated_at": "2026-05-22",
+  "total": 42,
+  "applied": 42,
+  "not_found": 0,
+  "entries": [
+    {
+      "scenario_id": "cells-html-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\html-converter\\README.md"
+    },
+    {
+      "scenario_id": "cells-image-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\image-converter\\README.md"
+    },
+    {
+      "scenario_id": "cells-json-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\json-converter\\README.md"
+    },
+    {
+      "scenario_id": "cells-pdf-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\pdf-converter\\README.md"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\spreadsheet-converter\\README.md"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-locker",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\spreadsheet-locker\\README.md"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-merger",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\spreadsheet-merger\\README.md"
+    },
+    {
+      "scenario_id": "cells-spreadsheet-splitter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\spreadsheet-splitter\\README.md"
+    },
+    {
+      "scenario_id": "cells-text-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\cells\\text-converter\\README.md"
+    },
+    {
+      "scenario_id": "words-comparer",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\comparer\\README.md",
+      "input_format": ".docx",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-converter",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\converter\\README.md",
+      "input_format": ".docx",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\mail-merger\\README.md"
+    },
+    {
+      "scenario_id": "words-merger",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\merger\\README.md",
+      "input_format": ".docx",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\replacer\\README.md",
+      "input_format": ".docx",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\report-builder\\README.md"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\splitter\\README.md",
+      "input_format": ".docx",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\words\\watermarker\\README.md",
+      "input_format": ".docx",
+      "output_format": ".docx"
+    },
+    {
+      "scenario_id": "pdf-doc-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\doc-converter\\README.md"
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\form-editor\\README.md"
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\form-exporter\\README.md"
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\form-flattener\\README.md"
+    },
+    {
+      "scenario_id": "pdf-html",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\html\\README.md",
+      "input_format": ".html",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\image-extractor\\README.md"
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\jpeg\\README.md"
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\merger\\README.md"
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\optimizer\\README.md"
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "status": "APPLIED",
+      "note": "No README found for pdf-pdf-aconverter",
+      "readme": "reports/sprint64/destination-packages/special-cases/pdf-pdf-aconverter/README.md"
+    },
+    {
+      "scenario_id": "pdf-png",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\png\\README.md"
+    },
+    {
+      "scenario_id": "pdf-security",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\security\\README.md"
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\signature\\README.md"
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\splitter\\README.md"
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\table-generator\\README.md"
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "status": "ALREADY_HAS_IO",
+      "note": "No README found for pdf-text-extractor",
+      "readme": "reports/sprint64/destination-packages/special-cases/pdf-text-extractor/README.md"
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\tiff\\README.md"
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\toc-generator\\README.md"
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\pdf\\xls-converter\\README.md"
+    },
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\diagram\\diagram-diagram-converter\\README.md",
+      "input_format": ".vsdx",
+      "output_format": ".vdx"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\diagram\\diagram-pdf-converter\\README.md",
+      "input_format": ".vsdx",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "email-converter",
+      "status": "ALREADY_HAS_IO",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\email\\converter\\README.md"
+    },
+    {
+      "scenario_id": "slides-compress",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\slides\\compress\\README.md",
+      "input_format": ".pptx",
+      "output_format": ".pptx"
+    },
+    {
+      "scenario_id": "slides-convert",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\slides\\convert\\README.md",
+      "input_format": ".pptx",
+      "output_format": ".pdf"
+    },
+    {
+      "scenario_id": "slides-merger",
+      "status": "APPLIED",
+      "readme": "reports\\sprint64\\destination-packages\\per-family\\slides\\merger\\README.md",
+      "input_format": ".pptx",
+      "output_format": ".pptx"
+    }
+  ]
+}

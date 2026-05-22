@@ -1,0 +1,15 @@
+Sprint 64 Phase 8 — Full Unit Test Suite
+Generated: 2026-05-22
+Platform: Windows 11, Python 3.13.2, .venv/Scripts/python.exe
+
+Command: .venv/Scripts/python.exe -m pytest tests/unit/ -q --tb=short
+
+Result: 2993 passed, 3 skipped, 10 subtests passed in ~93s
+Failures: 0
+
+Fix applied in this run:
+- tests/unit/test_pipeline_evidence_gate.py::_make_valid_bundle() updated to include
+  evidence/evidence-contract-computed.json (required by new EV rule 22).
+  Previously 1 failure: TestReleaseStatusValidateBundleFlag::test_returns_0_on_valid_bundle
+
+Acceptance criteria: 0 failed -- MET.

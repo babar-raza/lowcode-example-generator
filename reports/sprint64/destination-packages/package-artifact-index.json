@@ -1,0 +1,192 @@
+{
+  "cells": {
+    "total_scenarios": 9,
+    "scenarios": {
+      "html-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "image-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "json-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "pdf-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "spreadsheet-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "spreadsheet-locker": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "spreadsheet-merger": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "spreadsheet-splitter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      },
+      "text-converter": {
+        "source": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+        "file_count": 3
+      }
+    }
+  },
+  "diagram": {
+    "total_scenarios": 2,
+    "scenarios": {
+      "diagram-diagram-converter": {
+        "source": "workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode",
+        "file_count": 3
+      },
+      "diagram-pdf-converter": {
+        "source": "workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode",
+        "file_count": 3
+      }
+    }
+  },
+  "email": {
+    "total_scenarios": 1,
+    "scenarios": {
+      "converter": {
+        "source": "workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode",
+        "file_count": 3
+      }
+    }
+  },
+  "pdf": {
+    "total_scenarios": 17,
+    "scenarios": {
+      "doc-converter": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "html": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "xls-converter": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "jpeg": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "png": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "tiff": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "image-extractor": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "table-generator": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "toc-generator": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "form-flattener": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "security": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "form-editor": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "form-exporter": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "signature": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "merger": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "splitter": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/examples/pdf/lowcode",
+        "file_count": 3
+      },
+      "optimizer": {
+        "source": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/examples/pdf/lowcode",
+        "file_count": 3
+      }
+    }
+  },
+  "slides": {
+    "total_scenarios": 3,
+    "scenarios": {
+      "compress": {
+        "source": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode",
+        "file_count": 3
+      },
+      "convert": {
+        "source": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode",
+        "file_count": 3
+      },
+      "merger": {
+        "source": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode",
+        "file_count": 3
+      }
+    }
+  },
+  "words": {
+    "total_scenarios": 8,
+    "scenarios": {
+      "comparer": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "converter": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "mail-merger": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "merger": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "replacer": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "report-builder": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "splitter": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      },
+      "watermarker": {
+        "source": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+        "file_count": 3
+      }
+    }
+  }
+}

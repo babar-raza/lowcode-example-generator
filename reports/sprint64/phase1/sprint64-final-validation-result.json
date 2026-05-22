@@ -1,0 +1,21 @@
+{
+  "sprint_id": "sprint64-ev-ecc-alignment-42-42-packages-pdf-drift-readme-publication-readiness",
+  "generated_at": "2026-05-22T09:30:00Z",
+  "validator_version": "22-rules",
+  "note": "Preliminary result. Final result captured after git commit + ECC re-run.",
+  "pre_commit_status": {
+    "phase_a_passed": 17,
+    "phase_a_failed": 4,
+    "failing_rules": [
+      "final_clean_proof_after_final_commit",
+      "final_clean_proof_nonzero_bytes",
+      "final_clean_proof_has_git_header",
+      "ecc_contract_computed_and_valid"
+    ],
+    "note": "All 4 failures are expected pre-commit. Will resolve after: (1) final commit, (2) ECC re-run, (3) EV re-run."
+  },
+  "overall_valid": false,
+  "passed": 17,
+  "failed": 4,
+  "total_rules": 22
+}

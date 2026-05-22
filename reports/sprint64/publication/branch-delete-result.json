@@ -1,0 +1,9 @@
+{
+  "sprint": 64,
+  "generated_at": "2026-05-22",
+  "status": "NOT_APPLICABLE",
+  "reason": "No PR branches were created in Sprint 64. No publication performed. Branch auto-delete not triggered.",
+  "branches_created": 0,
+  "branches_deleted": 0,
+  "no_remote_mutation": true
+}

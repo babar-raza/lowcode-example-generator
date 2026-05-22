@@ -1,0 +1,54 @@
+{
+  "cells": {
+    "html-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "image-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "json-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "pdf-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "spreadsheet-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "spreadsheet-locker": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "spreadsheet-merger": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "spreadsheet-splitter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode",
+    "text-converter": "workspace/pr-dry-run/cells-controlled-pilot/examples/cells/lowcode"
+  },
+  "diagram": {
+    "diagram-diagram-converter": "workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode",
+    "diagram-pdf-converter": "workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode"
+  },
+  "email": {
+    "converter": "workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode"
+  },
+  "pdf": {
+    "doc-converter": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+    "html": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+    "xls-converter": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode",
+    "jpeg": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+    "png": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+    "tiff": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode",
+    "image-extractor": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+    "table-generator": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+    "toc-generator": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode",
+    "form-flattener": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode",
+    "security": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode",
+    "form-editor": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode",
+    "form-exporter": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode",
+    "signature": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode",
+    "merger": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/examples/pdf/lowcode",
+    "splitter": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/examples/pdf/lowcode",
+    "optimizer": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/examples/pdf/lowcode"
+  },
+  "slides": {
+    "compress": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode",
+    "convert": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode",
+    "merger": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode"
+  },
+  "words": {
+    "comparer": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "converter": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "mail-merger": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "merger": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "replacer": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "report-builder": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "splitter": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode",
+    "watermarker": "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode"
+  }
+}

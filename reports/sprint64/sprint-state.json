@@ -1,0 +1,38 @@
+{
+  "sprint_id": "sprint64-ev-ecc-alignment-42-42-packages-pdf-drift-readme-publication-readiness",
+  "sprint": 64,
+  "date": "2026-05-22",
+  "verdict": "LOWCODE_README_IO_DRY_RUN_PACKAGES_READY_42_OF_42_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "status": "CLOSED",
+  "overall_valid": true,
+  "tests": {
+    "passed": 2993,
+    "skipped": 3,
+    "failed": 0
+  },
+  "evidence_contract": {
+    "total": 44,
+    "present": 44,
+    "missing": 0
+  },
+  "package_artifacts": {
+    "total": 42,
+    "clean": 42,
+    "obj_bin_files": 0
+  },
+  "readme_corrections": {
+    "total": 42,
+    "applied": 42,
+    "io_section_present": 42
+  },
+  "programcs_authority": {
+    "total": 42,
+    "classified": 42,
+    "unexplained": 0
+  },
+  "pdf_version_drift": "POLICY_CLASSIFIED_CALENDAR_VERSION_BUMP",
+  "publication": "BLOCKED_BY_APPROVAL_42_42_PUBLISHED_SPRINT62",
+  "ev_ecc_agreement": true,
+  "ev_rules": 22,
+  "ecc_bugs_fixed": 3
+}

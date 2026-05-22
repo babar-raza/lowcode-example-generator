@@ -1,0 +1,41 @@
+{
+  "sprint": 64,
+  "generated_at": "2026-05-22",
+  "verdict": "LOWCODE_README_IO_DRY_RUN_PACKAGES_READY_42_OF_42_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "total_bundle_files": 181,
+  "evidence_contract_categories": 44,
+  "categories_present": 40,
+  "categories_missing": 4,
+  "missing_categories": [
+    {
+      "id": "EC41",
+      "name": "bundle_manifest"
+    },
+    {
+      "id": "EC42",
+      "name": "final_verdict"
+    },
+    {
+      "id": "EC43",
+      "name": "sprint_state"
+    },
+    {
+      "id": "EC44",
+      "name": "final_clean_proof"
+    }
+  ],
+  "blocking_pending_categories": 4,
+  "note": "bundle-manifest.json is itself one of the 44 categories. After commit + ECC re-run, all 44 will be PRESENT.",
+  "phases_complete": [
+    "Phase 0: Sprint 63 audit and corrected state",
+    "Phase 1: EV+ECC final gate alignment (rule 22 added)",
+    "Phase 2: ECC semantic rule repair (3 bugs fixed)",
+    "Phase 3: 42/42 clean package artifacts (0 obj/bin)",
+    "Phase 4: Program.cs authority gaps (42/42 classified)",
+    "Phase 5: README I/O corrections (42/42 applied)",
+    "Phase 6: PDF version drift (26.4.0 -> 26.5.0, POLICY_CLASSIFIED)",
+    "Phase 7: Publication readiness (BLOCKED_BY_APPROVAL, no remote mutation)",
+    "Phase 8: Full test suite (2993 passed, 0 failed)",
+    "Phase 9: Final evidence bundle (this file)"
+  ]
+}

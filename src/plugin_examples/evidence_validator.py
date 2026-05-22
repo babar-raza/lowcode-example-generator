@@ -29,6 +29,11 @@ Sprint 61 additions over Sprint 60:
 - Rule: destination_programcs_input_not_all_null (null-for-all = audit not done)
 - Rule: no_p1_items_with_complete_verdict (P1 open + COMPLETE verdict = contradiction)
 - Rule: required_files_nonzero_size (0-byte evidence files are not evidence)
+
+Sprint 64 additions:
+- Rule: ecc_contract_computed_and_valid (ECC must agree with EV — closure_valid=true required)
+  Catches the Sprint 63 defect where ECC (closure_valid=false) and EV (overall_valid=true)
+  silently disagreed. ECC must be run AFTER all bundle files are committed.
 """
 
 from __future__ import annotations
@@ -165,6 +170,9 @@ class EvidenceValidator:
 
         # --- Sprint 62 NEW rule: mandatory EV execution for final closure ---
         _maybe(self._rule_bundle_validation_result_present_and_valid())
+
+        # --- Sprint 64 NEW rule: ECC must pass (closure_valid=true, no blocking failures) ---
+        _maybe(self._rule_ecc_contract_computed_and_valid())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -1174,6 +1182,94 @@ class EvidenceValidator:
             evidence=(
                 f"{validation_path.name}: overall_valid=true "
                 f"(sprint_id={sprint_id}, passed={rules_passed}, failed={rules_failed})"
+            ),
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 64 NEW rules
+    # ------------------------------------------------------------------
+
+    def _rule_ecc_contract_computed_and_valid(self) -> RuleResult:
+        """Evidence contract must be computed by ECC and show closure_valid=true.
+
+        Sprint 64 defect S63-D1: ECC (closure_valid=false) and EV (overall_valid=true)
+        disagreed silently.  Root causes:
+        1. ECC was computed BEFORE final commits — stale MISSING entries.
+        2. ECC pytest "0 failed" regex didn't match pytest's "N passed" format.
+        3. ECC "6 families" check used wrong dict key.
+
+        This rule requires that the ECC computed result:
+        - Exists at ``evidence/evidence-contract-computed.json``
+        - Has ``closure_valid=true``
+        - Has ``blocking_failures=0``
+
+        ECC must be run AFTER all bundle files are committed.  If ECC was run
+        early (stale), it will have MISSING entries and this rule will fail,
+        forcing a re-run.
+        """
+        rule_id = "ecc_contract_computed_and_valid"
+        computed_path = self.bundle_dir / "evidence" / "evidence-contract-computed.json"
+
+        if not computed_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description=(
+                    "ECC must be run on the final bundle and result stored in "
+                    "evidence/evidence-contract-computed.json"
+                ),
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    "evidence/evidence-contract-computed.json not found. "
+                    "Run EvidenceContractComputer.compute() AFTER all bundle files are committed "
+                    "and save the result to this path. "
+                    "Sprint 64 requirement: ECC must agree with EV at closure."
+                ),
+            )
+
+        try:
+            data = json.loads(computed_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            return RuleResult(
+                rule_id=rule_id,
+                description="ECC computed result must be readable",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=f"Cannot read evidence-contract-computed.json: {exc}",
+            )
+
+        closure_valid = data.get("closure_valid", False)
+        blocking_failures = data.get("blocking_failures", -1)
+        computed_at = data.get("computed_at", "unknown")
+
+        if not closure_valid:
+            missing_cats = [
+                c.get("id", "?")
+                for c in data.get("categories", [])
+                if c.get("blocking") and c.get("status") != "PRESENT"
+            ]
+            return RuleResult(
+                rule_id=rule_id,
+                description="ECC must show closure_valid=true (no blocking failures)",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    f"evidence-contract-computed.json: closure_valid=false, "
+                    f"blocking_failures={blocking_failures} (computed_at={computed_at}). "
+                    f"Failing categories: {missing_cats[:5]}. "
+                    "Ensure ECC is run AFTER all bundle files are committed."
+                ),
+                evidence=f"blocking_failures={blocking_failures}, computed_at={computed_at}",
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="ECC must show closure_valid=true (no blocking failures)",
+            severity="FAILURE",
+            passed=True,
+            evidence=(
+                f"evidence-contract-computed.json: closure_valid=true, "
+                f"blocking_failures=0 (computed_at={computed_at})"
             ),
         )
 

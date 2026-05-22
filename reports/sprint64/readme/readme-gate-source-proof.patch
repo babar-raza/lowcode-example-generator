@@ -1,0 +1,5 @@
+Sprint 64 source proof for README gate: no changes to gate logic.
+Gate implemented in Sprint 61. Hardened in Sprint 62.
+Sprint 64 confirms source unchanged:
+  src/plugin_examples/publisher/readme_audit_gate.py (unmodified)
+See reports/sprint62/readme/readme-gate-source-proof.patch for original diff.

@@ -1,0 +1,16 @@
+{
+  "sprint": 64,
+  "generated_at": "2026-05-22",
+  "publication_scope": "EVIDENCE_REPAIR_ONLY",
+  "new_prs_created": 0,
+  "live_publication_attempted": false,
+  "all_families_already_published": true,
+  "publication_status": "BLOCKED_BY_APPROVAL",
+  "reason": "Sprint 64 scope is evidence repair and gate alignment. No new publication requested. All 42 examples already published in prior sprints.",
+  "approval_gates_checked": {
+    "APPROVE_LIVE_PR": "NOT_SET",
+    "APPROVE_README_PUSH": "NOT_SET",
+    "APPROVE_MERGE_PR": "NOT_SET"
+  },
+  "remote_mutation": false
+}

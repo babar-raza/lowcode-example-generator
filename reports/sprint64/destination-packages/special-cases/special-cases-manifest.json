@@ -1,0 +1,48 @@
+{
+  "pdf-pdf-aconverter": {
+    "source": "workspace/runs/pilot-pdf-20260514-211320/generated/pdf/pdf-pdf-aconverter",
+    "classification": "SPECIAL_CASE_NO_DRY_RUN",
+    "reason": "Generated during PDF pilot runs; excluded from standard dry-run pipeline (Sprint 57 special case)",
+    "file_count": 3,
+    "files": [
+      {
+        "file": "pdf-pdf-aconverter.csproj",
+        "sha256": "c5c97f3bfc9e29840caf875e4b95c4f90eca575efbe825d55e437493e7538f24",
+        "size": 329
+      },
+      {
+        "file": "Program.cs",
+        "sha256": "516ba44c470ff8ff26c70361b9ce498574ed23dee18ed304d0fdcd952cca4989",
+        "size": 1639
+      },
+      {
+        "file": "README.md",
+        "sha256": "34a0eb77bab4ab516ed65f4b2c7ba54f41acb539096e5c464a5b0b4880cf8baa",
+        "size": 250
+      }
+    ]
+  },
+  "pdf-text-extractor": {
+    "source": "workspace/runs/pilot-pdf-20260514-211320/generated/pdf/pdf-text-extractor",
+    "classification": "SPECIAL_CASE_NO_DRY_RUN",
+    "reason": "Generated during PDF pilot runs; excluded from standard dry-run pipeline (Sprint 57 special case)",
+    "file_count": 3,
+    "files": [
+      {
+        "file": "pdf-text-extractor.csproj",
+        "sha256": "c5c97f3bfc9e29840caf875e4b95c4f90eca575efbe825d55e437493e7538f24",
+        "size": 329
+      },
+      {
+        "file": "Program.cs",
+        "sha256": "c3164aad41c1bad17ceac497cd4f290f4d5c3e8f3dd8b9163db58c4157ab4225",
+        "size": 1205
+      },
+      {
+        "file": "README.md",
+        "sha256": "551813bcf0f41a808f32715e50901835f8bdc6ed4a3972ade8cde8e5e4eed6dc",
+        "size": 206
+      }
+    ]
+  }
+}

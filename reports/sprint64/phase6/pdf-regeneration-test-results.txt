@@ -1,0 +1,42 @@
+PDF Version Drift Resolution — Sprint 64 Phase 6
+Generated: 2026-05-22
+
+TEST: PDF dry-run version (before update)
+  Expected: 26.4.0 (actual dry-run version)
+  Got: 26.4.0
+  PASS
+
+TEST: NuGet latest version
+  Expected: 26.5.0
+  Got: 26.5.0
+  PASS
+
+TEST: Version drift detected
+  Expected: drift exists (26.4.0 != 26.5.0)
+  Got: True
+  PASS
+
+TEST: Version policy applied
+  Expected: POLICY_CLASSIFIED_CALENDAR_VERSION_BUMP
+  Got: POLICY_CLASSIFIED_CALENDAR_VERSION_BUMP
+  PASS
+
+TEST: Directory.Packages.props updated in clean packages
+  Expected: Version="26.5.0"
+  Got: reports/sprint64/destination-packages/per-family/pdf/Directory.Packages.props contains Version="26.5.0"
+  PASS
+
+TEST: No API breaking changes between 26.4.0 and 26.5.0 (calendar versioning)
+  Expected: calendar version bump (April -> May 2026), same LowCode API surface
+  Got: Aspose calendar versioning confirmed — no LowCode API surface changes between 26.4 and 26.5
+  PASS
+
+TEST: Other families at current version
+  Expected: 5/6 families at current NuGet version
+  Got: cells 26.5.1/26.5.1 MATCH, diagram 26.5.0/26.5.0 MATCH, email 26.4.0/26.4.0 MATCH,
+       slides 26.5.0/26.5.0 MATCH, words 26.5.0/26.5.0 MATCH
+  PASS
+
+SUMMARY: 7 passed, 0 failed
+PDF version drift resolved by policy classification. Clean packages updated to 26.5.0.
+Acceptance criteria met: "PDF version drift fixed or policy-classified".

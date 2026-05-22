@@ -1,4 +1,4 @@
-"""Evidence Contract Computer — Sprint 63.
+"""Evidence Contract Computer — Sprint 64.
 
 Computes the status of each category in an evidence-contract.json file by
 inspecting actual bundle files. Replaces manual/hardcoded PENDING statuses.
@@ -14,11 +14,19 @@ Usage::
 
     from plugin_examples.evidence_contract_computer import EvidenceContractComputer
     computer = EvidenceContractComputer(
-        contract_path=Path("reports/sprint63/evidence-contract.json"),
+        contract_path=Path("reports/sprint64/evidence-contract.json"),
         repo_root=Path("."),
     )
     result = computer.compute()
     print(result.to_dict())
+
+Sprint 64 semantic rule fixes:
+- pytest "0 failed" detection: also accepts "N passed" with no "failed" count
+  (pytest omits "0 failed" entirely when there are no failures)
+- "6 families" check: supports dict-keyed index ({"cells": {...}, "diagram": {...}, ...})
+  in addition to the legacy "families": [...] format
+- contract field names: supports both "sprint_id"/"required_evidence_categories"
+  and "contract_id"/"categories" formats
 """
 
 from __future__ import annotations
@@ -32,8 +40,15 @@ from pathlib import Path
 # Semantic validators keyed by partial string match on the semantic field
 _SEMANTIC_IN_PROGRESS_PATTERN = re.compile(r"IN_PROGRESS")
 _UNCHECKED_TODO_PATTERN = re.compile(r"^- \[ \]", re.MULTILINE)
-_TEST_ZERO_FAILED_PATTERN = re.compile(r"\b0 failed\b|\b0\s+fail", re.IGNORECASE)
+# Matches "0 failed" or "0 fail" — classic format
+_TEST_ZERO_FAILED_LITERAL_PATTERN = re.compile(r"\b0 failed\b|\b0\s+fail", re.IGNORECASE)
+# Matches "N passed" — pytest output when there are no failures at all
+_TEST_PASSED_PATTERN = re.compile(r"\b\d+ passed\b", re.IGNORECASE)
+# Matches any "N failed" — presence means failures exist
+_TEST_FAILED_COUNT_PATTERN = re.compile(r"\b\d+ failed\b", re.IGNORECASE)
 _GIT_HEADER_PATTERNS = ["On branch", "HEAD detached at", "nothing to commit"]
+# Known family names for dict-keyed package-artifact-index.json
+_KNOWN_FAMILY_NAMES = {"cells", "diagram", "email", "pdf", "slides", "words"}
 
 
 @dataclass
@@ -96,15 +111,24 @@ class EvidenceContractComputer:
         self.repo_root = repo_root
 
     def compute(self) -> ContractComputeResult:
-        """Read the contract and compute status for every category."""
+        """Read the contract and compute status for every category.
+
+        Supports two contract formats:
+        - Legacy (sprint63): uses ``sprint_id`` and ``required_evidence_categories``
+        - New (sprint64+): uses ``contract_id`` and ``categories``
+        """
         contract = json.loads(self.contract_path.read_text(encoding="utf-8"))
-        contract_id = contract.get("sprint_id", "unknown")
+        # Support both "sprint_id" (legacy) and "contract_id" (new format)
+        contract_id = contract.get("sprint_id") or contract.get("contract_id", "unknown")
 
         from datetime import datetime, timezone
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+        # Support both "required_evidence_categories" (legacy) and "categories" (new format)
+        cat_list = contract.get("required_evidence_categories") or contract.get("categories", [])
+
         categories: list[CategoryResult] = []
-        for cat in contract.get("required_evidence_categories", []):
+        for cat in cat_list:
             result = self._check_category(cat)
             categories.append(result)
 
@@ -190,10 +214,18 @@ class EvidenceContractComputer:
             if unchecked:
                 return f"{len(unchecked)} unchecked [ ] items remain"
 
-        # "must show 0 failed"
-        if "0 failed" in semantic.lower():
-            if not _TEST_ZERO_FAILED_PATTERN.search(text):
-                return "File does not contain '0 failed' test result indicator"
+        # "must show 0 failed" — accept either:
+        # 1. Literal "0 failed" (some CI formats print this explicitly)
+        # 2. "N passed" with NO "N failed" count (pytest omits "0 failed" entirely
+        #    when all tests pass — e.g. "76 passed in 12.07s" with no "failed" line)
+        if "0 failed" in semantic.lower() or "passed" in semantic.lower():
+            has_literal_zero_failed = bool(_TEST_ZERO_FAILED_LITERAL_PATTERN.search(text))
+            has_passed_no_failures = (
+                bool(_TEST_PASSED_PATTERN.search(text))
+                and not bool(_TEST_FAILED_COUNT_PATTERN.search(text))
+            )
+            if not has_literal_zero_failed and not has_passed_no_failures:
+                return "File does not contain passing test result indicator (no '0 failed' or 'N passed')"
 
         # "must show overall_valid=false"
         if "overall_valid=false" in semantic.lower():
@@ -251,7 +283,9 @@ class EvidenceContractComputer:
                 if "readme_status" in semantic.lower():
                     missing_fields = [
                         r.get("scenario_id", "?") for r in records
-                        if "readme_input_status" not in r and "readme_output_status" not in r
+                        if "readme_input_status" not in r
+                        and "readme_output_status" not in r
+                        and "readme_has_io" not in r
                     ]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing readme status fields"
@@ -259,12 +293,21 @@ class EvidenceContractComputer:
                 return "File is not valid JSON"
 
         # "must list 6 families with file counts"
+        # Supports two JSON layouts:
+        # - Legacy: {"families": ["cells", "diagram", ...]}  (list or dict under "families" key)
+        # - New (sprint64+): {"cells": {...}, "diagram": {...}, ...}  (family names as top-level keys)
         if "6 families" in semantic.lower():
             try:
                 data = json.loads(text)
-                families = data.get("families", [])
-                if len(families) < 6:
-                    return f"Only {len(families)} families listed (expected 6)"
+                families_val = data.get("families", None)
+                if families_val is not None:
+                    # Legacy format: "families" key holds list or dict
+                    count = len(families_val) if isinstance(families_val, (list, dict)) else 0
+                else:
+                    # New format: top-level string keys are family names
+                    count = sum(1 for k in data if isinstance(k, str) and k in _KNOWN_FAMILY_NAMES)
+                if count < 6:
+                    return f"Only {count} families listed (expected 6)"
             except (json.JSONDecodeError, ValueError):
                 return "File is not valid JSON"
 

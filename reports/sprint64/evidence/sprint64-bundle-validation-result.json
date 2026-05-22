@@ -1,0 +1,179 @@
+{
+  "bundle_dir": "reports\\sprint64",
+  "sprint_id": "sprint64-ev-ecc-alignment-42-42-packages-pdf-drift-readme-publication-readiness",
+  "total_rules": 21,
+  "passed": 9,
+  "failed": 12,
+  "warnings": 0,
+  "overall_valid": false,
+  "rules": [
+    {
+      "rule_id": "final_clean_proof_after_final_commit",
+      "description": "final-clean-proof.txt must exist (captured AFTER final bundle commit)",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "File not found: git/final-clean-proof.txt"
+    },
+    {
+      "rule_id": "destination_42_42_authority_mapped",
+      "description": "Destination content audit must show 42/42 authority-mapped",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "no_present_no_authority",
+      "description": "No PRESENT_NO_AUTHORITY entries allowed",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "no_partial_without_partial_verdict",
+      "description": "PARTIAL entries must be acknowledged in final verdict",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "readme_audit_content_based",
+      "description": "README audit must be content-based",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme/example-readme-content-audit.json not found"
+    },
+    {
+      "rule_id": "readme_gate_implemented_and_tested",
+      "description": "README gate must be implemented, tested, and have source proof",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing evidence: ['readme-gate-implementation.md', 'readme-gate-test-results.txt', 'readme-gate-source-proof.patch']"
+    },
+    {
+      "rule_id": "evidence_validator_actually_ran",
+      "description": "Evidence validator must have actually run",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "evidence/validator-test-results.txt not found"
+    },
+    {
+      "rule_id": "todo_all_items_checked_or_carried",
+      "description": "todo.md must have no unchecked active items",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No unchecked [ ] items found in todo.md",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "zero_unknown_input_formats",
+      "description": "Zero unknown input formats",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "No io-authority matrix in this bundle (may be in prior sprint evidence)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "test_log_zero_failed",
+      "description": "Test log must exist and show 0 failed",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Test log exists with no failed tests",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "commands_log_complete",
+      "description": "commands.log must not be IN_PROGRESS",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "commands.log present and complete",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "bundle_min_files",
+      "description": "Bundle must contain at least 35 files",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Bundle has 173 files",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_clean_proof_nonzero_bytes",
+      "description": "final-clean-proof.txt must be nonzero bytes",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "File not found: git/final-clean-proof.txt"
+    },
+    {
+      "rule_id": "final_clean_proof_has_git_header",
+      "description": "final-clean-proof.txt must contain git status header",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "File not found: git/final-clean-proof.txt"
+    },
+    {
+      "rule_id": "readme_io_format_not_falsely_complete",
+      "description": "README audit must not falsely claim I/O documentation complete",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme/example-readme-content-audit.json not found"
+    },
+    {
+      "rule_id": "readme_gate_wired_in_pipeline",
+      "description": "README gate must be imported by pipeline source",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "readme_audit_gate imported in: ['evidence_validator.py', '__main__.py']",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "evidence_validator_wired_in_pipeline",
+      "description": "EvidenceValidator must be imported by pipeline source",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "evidence_validator imported in: ['__main__.py']",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "destination_programcs_input_not_all_null",
+      "description": "Destination Program.cs input classification must not be all-null",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination audit file found with input_format_in_programcs data"
+    },
+    {
+      "rule_id": "no_p1_items_with_complete_verdict",
+      "description": "No P1 open items while claiming COMPLETE verdict",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "process/next-work-register.md not found (no P1 items to check)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "required_files_nonzero_size",
+      "description": "Required evidence files must not be 0 bytes",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "3/4 required files present and nonzero",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "ecc_contract_computed_and_valid",
+      "description": "ECC must show closure_valid=true (no blocking failures)",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "blocking_failures=5, computed_at=2026-05-22T09:17:46Z",
+      "failure_detail": "evidence-contract-computed.json: closure_valid=false, blocking_failures=5 (computed_at=2026-05-22T09:17:46Z). Failing categories: ['EC11', 'EC41', 'EC42', 'EC43', 'EC44']. Ensure ECC is run AFTER all bundle files are committed."
+    }
+  ]
+}

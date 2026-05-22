@@ -116,6 +116,23 @@ def _make_bundle(tmpdir: str) -> Path:
         }),
         encoding="utf-8",
     )
+    # evidence/evidence-contract-computed.json — ECC result (Sprint 64 rule 22)
+    (b / "evidence" / "evidence-contract-computed.json").write_text(
+        json.dumps({
+            "contract_id": "sprint60-test",
+            "computed_at": "2026-05-22T07:30:00Z",
+            "total_categories": 36,
+            "present": 36,
+            "missing": 0,
+            "zero_bytes": 0,
+            "semantic_failed": 0,
+            "pending": 0,
+            "blocking_failures": 0,
+            "closure_valid": True,
+            "categories": [],
+        }),
+        encoding="utf-8",
+    )
 
     # todo.md — all checked
     (b / "todo.md").write_text(
@@ -419,7 +436,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 21)
+        self.assertEqual(result.total_rules, 22)  # Sprint 64: added rule 22 (ECC gate)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -511,7 +528,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 21)
+        self.assertEqual(len(d["rules"]), 22)  # Sprint 64: 22 rules total
 
 
 # ===========================================================================
@@ -1114,11 +1131,16 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 20 rules evaluated
-        self.assertEqual(len(result.rule_results), 20)
+        # Should have exactly 21 rules evaluated (22 total - 1 self-reference rule 21)
+        # Sprint 64: total is now 22 (added rule 22 ECC gate), so excluding rule 21 = 21
+        self.assertEqual(len(result.rule_results), 21)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
-        """validate_for_storage() overall_valid=True means all 20 non-self-referential rules pass."""
+        """validate_for_storage() overall_valid=True means all 21 non-self-referential rules pass.
+
+        Sprint 64: 22 total rules; validate_for_storage excludes rule 21 (self-ref), runs 21.
+        Rule 22 (ECC gate) IS included in validate_for_storage.
+        """
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             # Remove the validation result so rule 21 would fail if included
@@ -1153,11 +1175,11 @@ class TestTwoPhaseValidation(unittest.TestCase):
             (b / "evidence" / "sprint63-bundle-validation-result.json").write_text(
                 json.dumps(result_data), encoding="utf-8"
             )
-            # Phase B: run all 21 rules — rule 21 should now pass
+            # Phase B: run all 22 rules — rule 21 should now pass
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 21)
+        self.assertEqual(len(phase_b.rule_results), 22)  # Sprint 64: 22 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1226,6 +1248,174 @@ class TestTwoPhaseValidation(unittest.TestCase):
             rule_ids,
             "SELF_REFERENCE_RULE_ID must match an actual rule in the validator",
         )
+
+
+class TestECCContractComputedAndValid(unittest.TestCase):
+    """Sprint 64: EV rule 22 — ECC must be computed and show closure_valid=true.
+
+    Catches Sprint 63 defect S63-D1: ECC (closure_valid=false) and EV
+    (overall_valid=true) silently disagreed. Combined gate now requires ECC pass.
+    """
+
+    def test_passes_when_ecc_result_shows_closure_valid_true(self):
+        """Rule passes when evidence-contract-computed.json has closure_valid=true."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertTrue(rule.passed, f"Expected pass, got: {rule.failure_detail}")
+
+    def test_fails_when_ecc_result_missing(self):
+        """Rule fails when evidence-contract-computed.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "evidence-contract-computed.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("not found", rule.failure_detail.lower())
+
+    def test_fails_when_ecc_result_shows_blocking_failures(self):
+        """Rule fails when ECC shows closure_valid=false with blocking failures."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "evidence-contract-computed.json").write_text(
+                json.dumps({
+                    "contract_id": "sprint-test",
+                    "computed_at": "2026-05-22T07:18:19Z",
+                    "total_categories": 36,
+                    "present": 25,
+                    "missing": 7,
+                    "zero_bytes": 0,
+                    "semantic_failed": 4,
+                    "pending": 0,
+                    "blocking_failures": 11,
+                    "closure_valid": False,
+                    "categories": [
+                        {"id": "EC10", "name": "ec_computed", "file": "evidence/evidence-contract-computed.json",
+                         "blocking": True, "status": "MISSING", "detail": "File not found"},
+                    ],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("blocking_failures=11", rule.failure_detail)
+
+    def test_fails_when_ecc_result_stale_shows_missing_files(self):
+        """Rule fails when ECC was run before final commit — MISSING files found."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Simulate ECC run BEFORE final commit: 7 blocking MISSING entries
+            stale_categories = [
+                {"id": f"EC{i:02d}", "name": f"file_{i}", "file": f"evidence/file_{i}.json",
+                 "blocking": True, "status": "MISSING", "detail": f"File not found: evidence/file_{i}.json"}
+                for i in range(7)
+            ]
+            (b / "evidence" / "evidence-contract-computed.json").write_text(
+                json.dumps({
+                    "contract_id": "sprint-stale",
+                    "computed_at": "2026-05-22T07:18:19Z",  # Before final commit at 07:19+
+                    "total_categories": 36,
+                    "present": 29,
+                    "missing": 7,
+                    "zero_bytes": 0,
+                    "semantic_failed": 0,
+                    "pending": 0,
+                    "blocking_failures": 7,
+                    "closure_valid": False,
+                    "categories": stale_categories,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("closure_valid=false", rule.failure_detail.lower())
+
+    def test_validator_pass_contract_fail_produces_overall_fail(self):
+        """If EV passes 21 rules but ECC fails, combined result is FAIL.
+
+        This is the Sprint 63 defect scenario: EV said overall_valid=true but
+        ECC said closure_valid=false. Under the repaired gate, the ECC failure
+        is caught by rule 22, making overall_valid=false.
+        """
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # ECC shows failure (stale — computed before final commit)
+            (b / "evidence" / "evidence-contract-computed.json").write_text(
+                json.dumps({
+                    "contract_id": "sprint-test",
+                    "computed_at": "2026-05-22T07:18:00Z",
+                    "blocking_failures": 5,
+                    "closure_valid": False,
+                    "categories": [],
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        self.assertFalse(result.overall_valid,
+                         "Combined gate must fail when ECC shows closure_valid=false")
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertFalse(rule.passed)
+
+    def test_both_pass_produces_overall_pass(self):
+        """When EV and ECC both pass, overall_valid=true."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        ecc_rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "ecc_contract_computed_and_valid"
+        )
+        self.assertTrue(ecc_rule.passed)
+        # The bundle should pass overall (assuming other rules pass too)
+        # We only assert ECC rule passes; overall depends on other rules too
+        # but ecc_rule must not be the cause of failure
+        if not result.overall_valid:
+            failing = [r.rule_id for r in result.rule_results if not r.passed and r.severity == "FAILURE"]
+            self.assertNotIn("ecc_contract_computed_and_valid", failing,
+                             f"ECC rule should not be failing when ECC shows closure_valid=true. "
+                             f"Failing rules: {failing}")
+
+    def test_ecc_rule_total_is_22(self):
+        """validate() must return 22 rules total (21 existing + 1 new ECC rule)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        self.assertEqual(result.total_rules, 22,
+                         f"Expected 22 rules, got {result.total_rules}: "
+                         f"{[r.rule_id for r in result.rule_results]}")
+
+    def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rule 22 (ECC)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate_for_storage()
+        rule_ids = {r.rule_id for r in result.rule_results}
+        self.assertNotIn("bundle_validation_result_present_and_valid", rule_ids,
+                         "validate_for_storage must exclude rule 21 (self-reference)")
+        self.assertIn("ecc_contract_computed_and_valid", rule_ids,
+                      "validate_for_storage must include rule 22 (ECC gate)")
+        self.assertEqual(result.total_rules, 21,
+                         f"validate_for_storage must have 21 rules (22 - 1 self-ref), "
+                         f"got {result.total_rules}")
 
 
 if __name__ == "__main__":

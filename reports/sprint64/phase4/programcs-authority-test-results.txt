@@ -1,0 +1,49 @@
+Program.cs vs Authority Gap Analysis — Sprint 64 Phase 4
+Generated: 2026-05-22
+
+TEST: cells-text-converter authority_input correction
+  Expected: .xlsx (format-authority contract truth)
+  Got: .xlsx (corrected from stale .csv in pipeline/contracts)
+  PASS
+
+TEST: pdf-html-converter Program.cs found
+  Expected: .html input, .pdf output
+  Got: workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/html/Program.cs
+        Input: .html (HtmlToPdfOptions.AddInput)
+        Output: .pdf (HtmlToPdfOptions.AddOutput)
+  PASS
+
+TEST: pdf-pdfa-converter Program.cs found (special case)
+  Expected: .pdf input, .pdf output (PdfAConverter)
+  Got: workspace/runs/pilot-pdf-20260514-211320/generated/pdf/pdf-pdf-aconverter/Program.cs
+        Input: .pdf (PdfAConvertOptions.AddInput)
+        Output: .pdf (PdfAConvertOptions.AddOutput)
+  PASS
+
+TEST: words-mail-merger classified as KNOWN_SPECIAL_CASE
+  Expected: classified (not unexplained mismatch)
+  Got: KNOWN_SPECIAL_CASE_MULTI_FILE_INPUT
+  PASS
+
+TEST: words-report-builder classified as KNOWN_SPECIAL_CASE
+  Expected: classified (not unexplained mismatch)
+  Got: KNOWN_SPECIAL_CASE_MULTI_FILE_INPUT
+  PASS
+
+TEST: total_classified == 42
+  Expected: 42
+  Got: 42 (40 direct MATCH + 2 KNOWN_SPECIAL_CASE)
+  PASS
+
+TEST: unexplained_mismatches == 0
+  Expected: 0
+  Got: 0
+  PASS
+
+TEST: authority_unknown == 0
+  Expected: 0
+  Got: 0
+  PASS
+
+SUMMARY: 8 passed, 0 failed
+All 42 records classified. Acceptance criteria met.

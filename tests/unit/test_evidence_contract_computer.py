@@ -1,4 +1,4 @@
-"""Tests for EvidenceContractComputer — Sprint 63 Phase 1.
+"""Tests for EvidenceContractComputer — Sprint 63 Phase 1 + Sprint 64 fixes.
 
 Verifies that:
 - PENDING blocking category fails closure
@@ -11,6 +11,11 @@ Verifies that:
 - Semantic: 0 failed test output required
 - Semantic: overall_valid=false required
 - Semantic: overall_valid=true + no internal contradiction required
+
+Sprint 64 additions:
+- Semantic "0 failed": accepts "N passed" with no failures (pytest format)
+- Semantic "6 families": accepts dict-keyed index (family names as top-level keys)
+- Contract format: supports both "contract_id"/"categories" and "sprint_id"/"required_evidence_categories"
 """
 
 from __future__ import annotations
@@ -298,3 +303,216 @@ class TestAllPresentPasses(unittest.TestCase):
         self.assertEqual(result.blocking_failures, 0)
         self.assertEqual(result.present_count, 2)
         self.assertEqual(result.missing_count, 0)
+
+
+def _make_contract_new_format(tmpdir: str, categories: list[dict]) -> Path:
+    """Write a contract using the new sprint64 format (contract_id/categories)."""
+    contract = {
+        "contract_id": "test-sprint64",
+        "sprint_id": "test-sprint64",
+        "categories": categories,
+    }
+    p = Path(tmpdir) / "reports" / "test64" / "evidence-contract.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(contract), encoding="utf-8")
+    return p
+
+
+class TestSprint64PytestZeroFailedFix(unittest.TestCase):
+    """Sprint 64: 'must show 0 failed' should accept pytest 'N passed' format.
+
+    Pytest omits '0 failed' entirely when all tests pass — it outputs
+    e.g. '2976 passed, 3 skipped in 96.19s'. The old regex only matched
+    literal '0 failed', causing false SEMANTIC_FAILED for valid test logs.
+    """
+
+    def _make_file(self, tmpdir: str, rel_path: str, content: str) -> str:
+        p = Path(tmpdir) / rel_path
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(content, encoding="utf-8")
+        return rel_path
+
+    def test_pytest_passed_no_failed_line_is_passing(self):
+        """'2976 passed, 3 skipped in 96.19s' with no 'failed' = passing test run."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/test.log",
+                                  "2976 passed, 3 skipped in 96.19s\n")
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "test_log", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must show 0 failed",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "PRESENT",
+                         f"Expected PRESENT, got SEMANTIC_FAILED: {result.categories[0].detail}")
+
+    def test_pytest_n_passed_in_Xs_passes(self):
+        """'76 passed in 12.07s' (no skipped line) is a valid pass."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/test.log",
+                                  "76 passed in 12.07s\n")
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "test_log", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must show 0 failed",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "PRESENT",
+                         f"Expected PRESENT, got: {result.categories[0].detail}")
+
+    def test_log_with_failures_still_fails(self):
+        """'10 passed, 3 failed in 5s' must still fail semantic validation."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/test.log",
+                                  "10 passed, 3 failed in 5s\n")
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "test_log", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must show 0 failed",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "SEMANTIC_FAILED")
+
+    def test_empty_log_no_passed_no_failed_fails(self):
+        """A test log with neither 'passed' nor 'failed' fails semantic."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/test.log",
+                                  "Running tests...\nDone.\n")
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "test_log", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must show 0 failed",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "SEMANTIC_FAILED")
+
+
+class TestSprint64FamiliesDictKeyFix(unittest.TestCase):
+    """Sprint 64: '6 families' check should work with dict-keyed package-artifact-index.json.
+
+    Sprint 63 defect: data.get('families', []) returned [] because the JSON used
+    family names as top-level keys, not a list under 'families'. The fix counts
+    known family names as top-level keys.
+    """
+
+    def _make_file(self, tmpdir: str, rel_path: str, content: str) -> str:
+        p = Path(tmpdir) / rel_path
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(content, encoding="utf-8")
+        return rel_path
+
+    def test_dict_keyed_6_families_passes(self):
+        """package-artifact-index.json with 6 top-level family keys passes."""
+        pkg_index = {
+            "cells": {"total_files": 9, "program_cs_count": 9},
+            "diagram": {"total_files": 2, "program_cs_count": 2},
+            "email": {"total_files": 1, "program_cs_count": 1},
+            "pdf": {"total_files": 19, "program_cs_count": 17},
+            "slides": {"total_files": 3, "program_cs_count": 3},
+            "words": {"total_files": 8, "program_cs_count": 8},
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/pkg-index.json", json.dumps(pkg_index))
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "pkg_index", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must list 6 families with file counts",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "PRESENT",
+                         f"Expected PRESENT, got: {result.categories[0].detail}")
+
+    def test_dict_keyed_only_4_families_fails(self):
+        """Only 4 family keys fails the 6 families check."""
+        pkg_index = {
+            "cells": {"total_files": 9},
+            "diagram": {"total_files": 2},
+            "email": {"total_files": 1},
+            "pdf": {"total_files": 19},
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/pkg-index.json", json.dumps(pkg_index))
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "pkg_index", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must list 6 families with file counts",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "SEMANTIC_FAILED")
+
+    def test_legacy_families_list_key_still_works(self):
+        """Legacy format with 'families' key (list of 6) still passes."""
+        pkg_index = {
+            "families": ["cells", "diagram", "email", "pdf", "slides", "words"],
+            "total_files": 42,
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rel = self._make_file(tmpdir, "reports/pkg-index.json", json.dumps(pkg_index))
+            contract_path = _make_contract(tmpdir, [
+                {
+                    "id": "EC01", "name": "pkg_index", "blocking": True,
+                    "file": rel, "status": "PENDING",
+                    "semantic": "must list 6 families with file counts",
+                },
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.categories[0].status, "PRESENT",
+                         f"Expected PRESENT, got: {result.categories[0].detail}")
+
+
+class TestSprint64ContractFormatFix(unittest.TestCase):
+    """Sprint 64: ECC should support both contract formats.
+
+    - Legacy: "sprint_id" + "required_evidence_categories"
+    - New: "contract_id" + "categories"
+    """
+
+    def test_new_format_contract_id_and_categories(self):
+        """contract_id + categories format is read correctly."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            p = Path(tmpdir) / "reports" / "file.md"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("# content\n", encoding="utf-8")
+            contract_path = _make_contract_new_format(tmpdir, [
+                {"id": "EC01", "name": "file", "blocking": True,
+                 "file": "reports/file.md", "status": "PENDING"},
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.contract_id, "test-sprint64")
+        self.assertTrue(result.closure_valid)
+        self.assertEqual(result.total_categories, 1)
+
+    def test_legacy_format_still_works(self):
+        """sprint_id + required_evidence_categories format still works."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            p = Path(tmpdir) / "reports" / "file.md"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("# content\n", encoding="utf-8")
+            contract_path = _make_contract(tmpdir, [
+                {"id": "EC01", "name": "file", "blocking": True,
+                 "file": "reports/file.md", "status": "PENDING"},
+            ])
+            computer = EvidenceContractComputer(contract_path, Path(tmpdir))
+            result = computer.compute()
+        self.assertEqual(result.contract_id, "test-sprint")
+        self.assertTrue(result.closure_valid)

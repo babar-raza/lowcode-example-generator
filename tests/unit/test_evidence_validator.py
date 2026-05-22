@@ -155,9 +155,10 @@ def _make_bundle(tmpdir: str) -> Path:
     )
 
     # Sprint 65: destination/content-audit-final.json — all required fields, all READY
+    # Sprint 66: includes output_kind and api_type fields (rules 37, ECC output_kind check)
     (b / "destination" / "content-audit-final.json").write_text(
         json.dumps({
-            "sprint": 65,
+            "sprint": 66,
             "total_publication_artifacts": 42,
             "standard_package_artifacts": 40,
             "special_case_artifacts": 2,
@@ -168,9 +169,12 @@ def _make_bundle(tmpdir: str) -> Path:
                     "family": "cells",
                     "package_version": "26.5.1",
                     "output_format": ".xlsx",
+                    "output_kind": "converter",
+                    "api_type": "Converter",
                     "readme_status": "IO_DOC",
                     "root_readme_status": "INCLUDED",
                     "final_readiness": "READY",
+                    "final_status": "READY",
                     "special_case": False,
                 }
                 for i in range(42)
@@ -224,6 +228,97 @@ def _make_bundle(tmpdir: str) -> Path:
     # Sprint 65: evidence/*revalidation*.json — prior sprint must fail (overall_valid=false)
     (b / "evidence" / "sprint64-revalidation-result.json").write_text(
         json.dumps({"sprint_id": "sprint64-test", "overall_valid": False, "failed": 3, "passed": 19}),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-pr-proof-index.json — per-PR per-example coverage (rule 33)
+    (b / "remote").mkdir(parents=True)
+    (b / "remote" / "remote-pr-proof-index.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "families": {
+                "cells": [{"pr_number": 1, "examples_count": 9, "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)]}],
+                "words": [{"pr_number": 1, "examples_count": 8, "scenario_ids_covered": [f"words-ex-{i}" for i in range(8)]}],
+            },
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-example-inventory.json — content hashes per example (rule 34)
+    (b / "remote" / "remote-example-inventory.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "records": [
+                {
+                    "scenario_id": f"scenario-{i}",
+                    "family": "cells",
+                    "readme_sha": f"abc{i:04x}",
+                    "readme_content_sha256": f"sha256-{i:04x}",
+                    "programcs_sha": f"def{i:04x}",
+                    "programcs_content_sha256": f"psha-{i:04x}",
+                }
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-readme-io-audit.json — I/O status per example (rule 35)
+    (b / "remote" / "remote-readme-io-audit.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "io_doc_count": 0,
+            "old_format_count": 42,
+            "records": [
+                {
+                    "scenario_id": f"scenario-{i}",
+                    "family": "cells",
+                    "has_io_section": False,
+                    "io_status": "OLD_FORMAT",
+                }
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: handoff/per-family/ — package artifacts (rules 36, 40, 42)
+    for family in ["cells", "words", "pdf", "diagram", "email", "slides"]:
+        family_dir = b / "handoff" / "per-family" / family / "example-1"
+        family_dir.mkdir(parents=True)
+        (family_dir / "Program.cs").write_text(
+            "using Aspose; class Program { static void Main() {} }", encoding="utf-8"
+        )
+        (family_dir / "README.md").write_text(
+            f"# {family} example\n\n## Input and Output\n\nInput: file.xlsx\nOutput: result.pdf\n",
+            encoding="utf-8",
+        )
+        (family_dir / f"{family}-example.csproj").write_text(
+            "<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8"
+        )
+    (b / "handoff" / "publication-handoff-index.json").write_text(
+        json.dumps({"total_examples": 42, "ok_count": 42}), encoding="utf-8"
+    )
+
+    # Sprint 66: publication/publication-truth-matrix-final.json — separate state fields (rule 38)
+    (b / "publication" / "publication-truth-matrix-final.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "records": [
+                {
+                    "scenario_id": f"scenario-{i}",
+                    "family": "cells",
+                    "remote_example_present": True,
+                    "remote_readme_has_io_docs": False,
+                    "approval_blocked": True,
+                    "publication_status": "REMOTE_PUBLISHED_STALE_IO",
+                }
+                for i in range(42)
+            ],
+        }),
         encoding="utf-8",
     )
 
@@ -509,7 +604,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 32)  # Sprint 65: added 10 new rules (23-32)
+        self.assertEqual(result.total_rules, 42)  # Sprint 66: added 10 new rules (33-42)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -601,7 +696,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 32)  # Sprint 65: 32 rules total
+        self.assertEqual(len(d["rules"]), 42)  # Sprint 66: 42 rules total
 
 
 # ===========================================================================
@@ -1204,15 +1299,15 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 31 rules evaluated (32 total - 1 self-reference rule 21)
-        # Sprint 65: total is now 32 (added 10 new rules), so excluding rule 21 = 31
-        self.assertEqual(len(result.rule_results), 31)
+        # Should have exactly 41 rules evaluated (42 total - 1 self-reference rule 21)
+        # Sprint 66: total is now 42 (added 10 new rules), so excluding rule 21 = 41
+        self.assertEqual(len(result.rule_results), 41)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
-        """validate_for_storage() overall_valid=True means all 31 non-self-referential rules pass.
+        """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
 
-        Sprint 65: 32 total rules; validate_for_storage excludes rule 21 (self-ref), runs 31.
-        Rule 22 (ECC gate) and rules 23-32 (Sprint 65) ARE included in validate_for_storage.
+        Sprint 66: 42 total rules; validate_for_storage excludes rule 21 (self-ref), runs 41.
+        Rule 22 (ECC gate) and rules 23-42 (Sprint 65+66) ARE included in validate_for_storage.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
@@ -1252,7 +1347,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 32)  # Sprint 65: 32 rules total
+        self.assertEqual(len(phase_b.rule_results), 42)  # Sprint 66: 42 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1468,16 +1563,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 32 rules total (22 existing + 10 new Sprint 65 rules)."""
+        """validate() must return 42 rules total (32 existing + 10 new Sprint 66 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 32,
-                         f"Expected 32 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 42,
+                         f"Expected 42 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-32."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-42."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -1486,8 +1581,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 31,
-                         f"validate_for_storage must have 31 rules (32 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 41,
+                         f"validate_for_storage must have 41 rules (42 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 

@@ -95,7 +95,8 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     (b / "sprint-state.json").write_text(json.dumps({"sprint_id": "sprint61-test"}), encoding="utf-8")
 
-    # Sprint 65: destination/content-audit-final.json with all required fields
+    # Sprint 65+66: destination/content-audit-final.json with all required fields
+    # Sprint 66: includes output_kind and api_type (rules 37, ECC check)
     (b / "destination" / "content-audit-final.json").write_text(
         json.dumps({
             "total_publication_artifacts": 42,
@@ -108,9 +109,12 @@ def _make_valid_bundle(tmpdir: str) -> Path:
                     "family": "cells",
                     "package_version": "26.5.1",
                     "output_format": ".xlsx",
+                    "output_kind": "converter",
+                    "api_type": "Converter",
                     "readme_status": "IO_DOC",
                     "root_readme_status": "INCLUDED",
                     "final_readiness": "READY",
+                    "final_status": "READY",
                     "special_case": False,
                 }
                 for i in range(42)
@@ -153,6 +157,89 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 65: evidence/*revalidation*.json — overall_valid=false
     (b / "evidence" / "sprint64-revalidation-result.json").write_text(
         json.dumps({"sprint_id": "sprint64-test", "overall_valid": False, "failed": 3}),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-pr-proof-index.json — per-example PR coverage (rule 33)
+    (b / "remote").mkdir(parents=True)
+    (b / "remote" / "remote-pr-proof-index.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "families": {
+                "cells": [{"pr_number": 1, "examples_count": 9, "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)]}],
+            },
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-example-inventory.json — content hashes (rule 34)
+    (b / "remote" / "remote-example-inventory.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "records": [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family": "cells",
+                    "readme_sha": f"abc{i:04x}",
+                    "readme_content_sha256": f"sha256-{i:04x}",
+                    "programcs_sha": f"def{i:04x}",
+                }
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: remote/remote-readme-io-audit.json — I/O status per example (rule 35)
+    (b / "remote" / "remote-readme-io-audit.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "io_doc_count": 0,
+            "records": [
+                {"scenario_id": f"s-{i}", "family": "cells", "has_io_section": False, "io_status": "OLD_FORMAT"}
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 66: handoff/per-family/ — package artifacts (rules 36, 40, 42)
+    for family in ["cells", "words", "pdf", "diagram", "email", "slides"]:
+        family_dir = b / "handoff" / "per-family" / family / "example-1"
+        family_dir.mkdir(parents=True)
+        (family_dir / "Program.cs").write_text(
+            "using Aspose; class Program { static void Main() {} }", encoding="utf-8"
+        )
+        (family_dir / "README.md").write_text(
+            f"# {family}\n\n## Input and Output\n\nInput: file\nOutput: result\n",
+            encoding="utf-8",
+        )
+        (family_dir / f"{family}-example.csproj").write_text(
+            "<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8"
+        )
+    (b / "handoff" / "publication-handoff-index.json").write_text(
+        json.dumps({"total_examples": 42, "ok_count": 42}), encoding="utf-8"
+    )
+
+    # Sprint 66: publication/publication-truth-matrix-final.json — separate state fields (rule 38)
+    (b / "publication" / "publication-truth-matrix-final.json").write_text(
+        json.dumps({
+            "generated": "2026-05-22T00:00:00Z",
+            "total": 42,
+            "records": [
+                {
+                    "scenario_id": f"s-{i}",
+                    "family": "cells",
+                    "remote_example_present": True,
+                    "remote_readme_has_io_docs": False,
+                    "approval_blocked": True,
+                    "publication_status": "REMOTE_PUBLISHED_STALE_IO",
+                }
+                for i in range(42)
+            ],
+        }),
         encoding="utf-8",
     )
 

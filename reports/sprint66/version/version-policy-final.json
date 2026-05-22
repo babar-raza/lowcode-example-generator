@@ -1,0 +1,17 @@
+{
+  "generated": "2026-05-22T00:00:00Z",
+  "sprint_id": "sprint66",
+  "summary": {
+    "total_drift_unresolved": 0,
+    "families_checked": 6,
+    "families_at_policy": 6
+  },
+  "families": {
+    "cells": {"nuget_version": "26.5.1", "package_version": "26.5.1", "policy": "MATCH"},
+    "words": {"nuget_version": "26.5.0", "package_version": "26.5.0", "policy": "POLICY_CLASSIFIED_CALENDAR_VERSION_BUMP"},
+    "pdf": {"nuget_version": "26.5.0", "package_version": "26.5.0", "policy": "MATCH"},
+    "diagram": {"nuget_version": "26.5.0", "package_version": "26.5.0", "policy": "POLICY_CLASSIFIED_CALENDAR_VERSION_BUMP"},
+    "email": {"nuget_version": "26.4.0", "package_version": "26.4.0", "policy": "MATCH"},
+    "slides": {"nuget_version": "26.5.0", "package_version": "26.5.0", "policy": "MATCH"}
+  }
+}

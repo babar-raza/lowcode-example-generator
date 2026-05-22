@@ -280,6 +280,13 @@ class EvidenceContractComputer:
                     ]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing api_type"
+                if "output_kind" in semantic.lower():
+                    missing_fields = [
+                        r.get("scenario_id", "?") for r in records
+                        if not r.get("output_kind")
+                    ]
+                    if missing_fields:
+                        return f"{len(missing_fields)} records missing output_kind"
                 if "readme_status" in semantic.lower():
                     missing_fields = [
                         r.get("scenario_id", "?") for r in records

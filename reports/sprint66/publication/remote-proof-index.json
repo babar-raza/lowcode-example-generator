@@ -1,0 +1,49 @@
+{
+  "generated": "2026-05-22T00:00:00Z",
+  "sprint_id": "sprint66",
+  "note": "Remote examples confirmed present via GitHub API. 0/42 have I/O sections. Live PR publication BLOCKED_BY_APPROVAL.",
+  "families": {
+    "cells": {
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "examples_confirmed": 9,
+      "prs_merged": ["PR#1 (9 examples)", "PR#6 (1 example)"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    },
+    "words": {
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "examples_confirmed": 8,
+      "prs_merged": ["PR#1 (4 examples)", "PR#5 (3 examples)", "PR#6 (1 example)"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    },
+    "pdf": {
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "examples_confirmed": 19,
+      "prs_merged": ["PR#1", "PR#2", "PR#4", "PR#11", "PR#17", "PR#18", "PR#19", "PR#20", "PR#21"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    },
+    "diagram": {
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "examples_confirmed": 2,
+      "prs_merged": ["PR#1 (2 examples)"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    },
+    "email": {
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "examples_confirmed": 1,
+      "prs_merged": ["PR#1 (1 example)"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    },
+    "slides": {
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "examples_confirmed": 3,
+      "prs_merged": ["PR#1 (3 examples)"],
+      "remote_io_doc_count": 0,
+      "approval_blocked": true
+    }
+  }
+}

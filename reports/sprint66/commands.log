@@ -1,0 +1,67 @@
+# Sprint 66 Commands Log
+Sprint: sprint66-remote-truth-repair-self-contained-artifacts-readme-io-publication-proof
+Date: 2026-05-22
+
+## Phase 0 — Reopen Sprint 65 / State Audit
+
+### CMD-0-01
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/contents/examples/cells/lowcode" --jq '.[].name'
+- exit: 0
+- result: 9 examples found (html-converter, image-converter, json-converter, pdf-converter, spreadsheet-converter, spreadsheet-locker, spreadsheet-merger, spreadsheet-splitter, text-converter)
+
+### CMD-0-02
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/contents/examples/words/lowcode" --jq '.[].name'
+- exit: 0
+- result: 8 examples found (comparer, converter, mail-merger, merger, replacer, report-builder, splitter, watermarker)
+
+### CMD-0-03
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/contents/examples/pdf/lowcode" --jq '.[].name'
+- exit: 0
+- result: 19 examples found
+
+### CMD-0-04
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/contents/examples/diagram/lowcode" --jq '.[].name'
+- exit: 0
+- result: 2 examples found (diagram-diagram-converter, diagram-pdf-converter)
+
+### CMD-0-05
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/contents/examples/email/lowcode" --jq '.[].name'
+- exit: 0
+- result: 1 example found (converter)
+
+### CMD-0-06
+- dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+- cmd: gh api "repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/contents/examples/slides/lowcode" --jq '.[].name'
+- exit: 0
+- result: 3 examples found (compress, convert, merger)
+
+### CMD-0-07
+- cmd: gh api .../words/lowcode/report-builder/README.md → decoded content
+- result: README has "## API Symbols Used" + "## Run" but NO "## Input and Output" section
+- confirmed: remote READMEs are old-style, no I/O section
+
+### CMD-0-08
+- cmd: gh pr list --repo aspose-words-net/... --state merged
+- result: 6 PRs merged; PR #6 had examples_count=1 (report-builder), PR #1 had 4 examples
+- confirmed: Words PR #6 ≠ 8 examples — Sprint 65 remote-proof-index.json overclaims
+
+### CMD-0-09
+- cmd: gh pr list --repo aspose-pdf-net/... --state merged
+- result: 9 PRs merged; PR #4 had examples_count=1 (optimizer), PR #1 had 2 examples
+- confirmed: PDF PR #4 ≠ 19 examples — Sprint 65 remote-proof-index.json overclaims
+
+### CMD-0-10
+- cmd: cat reports/sprint65/destination/content-audit-final.json | python (output_kind check)
+- result: 3 records missing output_kind: pdf-html-converter, pdf-pdfa-converter, pdf-text-extractor
+
+### CMD-0-11
+- cmd: ls reports/sprint65/handoff/per-family/
+- result: EMPTY — no package artifacts in handoff/per-family/
+
+# Phase 1 — Remote Truth Discovery (Phase 1 entries below)
+

@@ -1,0 +1,22 @@
+{
+  "sprint_id": "sprint70",
+  "sprint_name": "sprint70-root-readme-path-repair-ev-hardening-final-closure",
+  "status": "COMPLETE",
+  "verdict": "LOWCODE_PREPUBLICATION_HANDOFF_READY_APPROVAL_BLOCKED",
+  "closed_at": "2026-05-22T00:00:00Z",
+  "overall_valid": true,
+  "ev_rules_passed": 72,
+  "ev_rules_total": 72,
+  "ecc_categories_present": 43,
+  "ecc_categories_total": 43,
+  "tests_passed": 3025,
+  "tests_failed": 0,
+  "tests_skipped": 3,
+  "defects_closed": [
+    "S69-D1",
+    "S69-D2"
+  ],
+  "publication_status": "BLOCKED_BY_APPROVAL",
+  "examples_ready": 42,
+  "root_readmes_indexed": 6
+}

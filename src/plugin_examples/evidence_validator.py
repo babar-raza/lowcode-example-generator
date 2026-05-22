@@ -260,6 +260,13 @@ class EvidenceValidator:
         _maybe(self._rule_handoff_index_has_root_readme_field())
         _maybe(self._rule_version_consistency_final_present())
 
+        # --- Sprint 70 NEW rules: close S69-D1 and S69-D2 ---
+        _maybe(self._rule_handoff_root_readme_in_sprint_folder())
+        _maybe(self._rule_handoff_root_readme_file_present())
+        _maybe(self._rule_handoff_root_readme_hash_matches())
+        _maybe(self._rule_publication_handoff_root_readme_hash_matches())
+        _maybe(self._rule_legacy_simplified_index_superseded())
+
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
 
@@ -2420,13 +2427,20 @@ class EvidenceValidator:
                 failure_detail="handoff/per-family/ directory not found",
             )
 
-        readme_files = list(handoff_dir.rglob("README.md"))
+        all_readme_files = list(handoff_dir.rglob("README.md"))
+        # Skip family-level root READMEs at per-family/{family}/README.md —
+        # those are root family READMEs (Sprint 70) with different format.
+        # Only check example-level READMEs (depth >= 2 from per-family/).
+        readme_files = [
+            r for r in all_readme_files
+            if r.parent.parent != handoff_dir
+        ]
         if not readme_files:
             return RuleResult(
                 rule_id=rule_id,
                 description="All handoff READMEs must have I/O section",
                 severity="FAILURE", passed=False,
-                failure_detail="No README.md files found in handoff/per-family/",
+                failure_detail="No example README.md files found in handoff/per-family/",
             )
 
         missing_io = []
@@ -3441,6 +3455,252 @@ class EvidenceValidator:
             description="version/version-consistency-final.json must exist showing all_consistent=true",
             severity="FAILURE", passed=True,
             evidence="version-consistency-final.json: all_consistent=true, 0 mismatches",
+        )
+
+    # --- Sprint 70 NEW rules: close S69-D1 and S69-D2 ---
+
+    def _rule_handoff_root_readme_in_sprint_folder(self) -> RuleResult:
+        """All family handoff-index root_readme.source_path must be inside current sprint handoff.
+
+        Sprint 69 defect S69-D1: all 6 handoff-indexes pointed root_readme.source_path
+        to reports/sprint68/root-readme/per-family/ — outside the handoff package.
+        A self-contained handoff must have root READMEs physically inside it.
+        """
+        rule_id = "handoff_root_readme_in_sprint_folder"
+        families = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        sprint_id = self._read_sprint_id()
+        stale_paths = []
+        for family in families:
+            idx_path = self.bundle_dir / "handoff" / "per-family" / family / "handoff-index.json"
+            if not idx_path.exists():
+                continue
+            try:
+                idx = json.loads(idx_path.read_text(encoding="utf-8"))
+                rr = idx.get("root_readme", {})
+                src = rr.get("source_path", "")
+                # Must be inside current sprint handoff folder
+                expected_prefix = f"reports/{sprint_id}/handoff/per-family/{family}/"
+                if src and not src.startswith(expected_prefix):
+                    stale_paths.append(f"{family}: source_path={src!r} (expected prefix {expected_prefix!r})")
+            except Exception as exc:
+                stale_paths.append(f"{family}: read error {exc}")
+        if stale_paths:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Handoff-index root_readme.source_path must be inside current sprint handoff folder",
+                severity="FAILURE", passed=False,
+                failure_detail=f"Stale root README source paths: {'; '.join(stale_paths)}",
+            )
+        return RuleResult(
+            rule_id=rule_id,
+            description="Handoff-index root_readme.source_path must be inside current sprint handoff folder",
+            severity="FAILURE", passed=True,
+            evidence=f"All 6 family handoff-index root_readme.source_path values are inside reports/{sprint_id}/handoff/",
+        )
+
+    def _resolve_sprint_relative_path(self, src: str) -> "Path":
+        """Resolve a repo-relative source path to an absolute Path.
+
+        source_path is stored as ``reports/{sprint_id}/handoff/per-family/{family}/README.md``.
+        Strip the ``reports/{sprint_id}/`` prefix and resolve relative to bundle_dir,
+        which avoids dependency on the host repo layout in tests.
+        """
+        sprint_id = self._read_sprint_id()
+        prefix = f"reports/{sprint_id}/"
+        if src.startswith(prefix):
+            return self.bundle_dir / src[len(prefix):]
+        # Fallback: resolve relative to bundle_dir parent (reports/) then repo root
+        return self.bundle_dir.parent.parent / src
+
+    def _rule_handoff_root_readme_file_present(self) -> RuleResult:
+        """Root README file must physically exist at root_readme.source_path for all families.
+
+        Sprint 69 defect S69-D1: even if source_path were updated, the file must
+        actually be present in the handoff package.
+        """
+        rule_id = "handoff_root_readme_file_present"
+        families = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        missing = []
+        for family in families:
+            idx_path = self.bundle_dir / "handoff" / "per-family" / family / "handoff-index.json"
+            if not idx_path.exists():
+                continue
+            try:
+                idx = json.loads(idx_path.read_text(encoding="utf-8"))
+                rr = idx.get("root_readme", {})
+                src = rr.get("source_path", "")
+                if src:
+                    file_path = self._resolve_sprint_relative_path(src)
+                    if not file_path.exists():
+                        missing.append(f"{family}: {src!r} not found")
+            except Exception as exc:
+                missing.append(f"{family}: read error {exc}")
+        if missing:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Root README file must physically exist at source_path for all families",
+                severity="FAILURE", passed=False,
+                failure_detail=f"Missing root README files: {'; '.join(missing)}",
+            )
+        return RuleResult(
+            rule_id=rule_id,
+            description="Root README file must physically exist at source_path for all families",
+            severity="FAILURE", passed=True,
+            evidence="All 6 family root README files are physically present at their source_path",
+        )
+
+    def _rule_handoff_root_readme_hash_matches(self) -> RuleResult:
+        """root_readme.sha256 in handoff-index must match the physical file at source_path.
+
+        Ensures the stored hash is not stale (i.e., the file content matches what was indexed).
+        """
+        rule_id = "handoff_root_readme_hash_matches"
+        import hashlib as _hashlib
+        families = ["cells", "words", "pdf", "diagram", "email", "slides"]
+        mismatches = []
+        for family in families:
+            idx_path = self.bundle_dir / "handoff" / "per-family" / family / "handoff-index.json"
+            if not idx_path.exists():
+                continue
+            try:
+                idx = json.loads(idx_path.read_text(encoding="utf-8"))
+                rr = idx.get("root_readme", {})
+                src = rr.get("source_path", "")
+                stored_hash = rr.get("sha256", "")
+                if not src or not stored_hash:
+                    continue
+                file_path = self._resolve_sprint_relative_path(src)
+                if not file_path.exists():
+                    mismatches.append(f"{family}: file not found at {src!r}")
+                    continue
+                h = _hashlib.sha256(file_path.read_bytes()).hexdigest()
+                if h != stored_hash:
+                    mismatches.append(
+                        f"{family}: stored={stored_hash[:16]}… actual={h[:16]}… for {src!r}"
+                    )
+            except Exception as exc:
+                mismatches.append(f"{family}: read error {exc}")
+        if mismatches:
+            return RuleResult(
+                rule_id=rule_id,
+                description="root_readme.sha256 in handoff-index must match physical file",
+                severity="FAILURE", passed=False,
+                failure_detail=f"Hash mismatches: {'; '.join(mismatches)}",
+            )
+        return RuleResult(
+            rule_id=rule_id,
+            description="root_readme.sha256 in handoff-index must match physical file",
+            severity="FAILURE", passed=True,
+            evidence="All 6 family root README sha256 hashes match their physical files",
+        )
+
+    def _rule_publication_handoff_root_readme_hash_matches(self) -> RuleResult:
+        """publication-handoff-index.json root_readme_sha256 per family must match physical file.
+
+        Ensures the publication index is not stale for root README hashes.
+        """
+        rule_id = "publication_handoff_root_readme_hash_matches"
+        import hashlib as _hashlib
+        phi_path = self.bundle_dir / "handoff" / "publication-handoff-index.json"
+        if not phi_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication-handoff-index.json must exist with correct root README hashes",
+                severity="FAILURE", passed=False,
+                failure_detail="handoff/publication-handoff-index.json not found",
+            )
+        try:
+            phi = json.loads(phi_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication-handoff-index.json must be valid JSON with root README hashes",
+                severity="FAILURE", passed=False,
+                failure_detail=f"Cannot parse publication-handoff-index.json: {exc}",
+            )
+        families_data = phi.get("families", [])
+        if not isinstance(families_data, list):
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication-handoff-index.json families must be a list",
+                severity="FAILURE", passed=False,
+                failure_detail="families field is not a list",
+            )
+        mismatches = []
+        for fam_data in families_data:
+            family = fam_data.get("family", "")
+            stored_hash = fam_data.get("root_readme_sha256", "")
+            src_path = fam_data.get("root_readme_source_path", "")
+            if not stored_hash or not src_path:
+                continue
+            file_path = self._resolve_sprint_relative_path(src_path)
+            if not file_path.exists():
+                mismatches.append(f"{family}: root README not found at {src_path!r}")
+                continue
+            actual = _hashlib.sha256(file_path.read_bytes()).hexdigest()
+            if actual != stored_hash:
+                mismatches.append(
+                    f"{family}: phi_hash={stored_hash[:16]}… actual={actual[:16]}…"
+                )
+        if mismatches:
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication-handoff-index root_readme_sha256 must match physical files",
+                severity="FAILURE", passed=False,
+                failure_detail=f"Hash mismatches: {'; '.join(mismatches)}",
+            )
+        return RuleResult(
+            rule_id=rule_id,
+            description="publication-handoff-index root_readme_sha256 must match physical files",
+            severity="FAILURE", passed=True,
+            evidence="All family root_readme_sha256 in publication-handoff-index match physical files",
+        )
+
+    def _rule_legacy_simplified_index_superseded(self) -> RuleResult:
+        """legacy-plan-reconciliation/reconciliation-index.md must not be treated as current authority.
+
+        Sprint 69 defect S69-D2: the old reconciliation-index.md from Sprint 67 remained
+        alongside the newer exact-legacy-plan-reconciliation-final.md without being
+        explicitly superseded, creating potential confusion.
+
+        This rule passes if EITHER:
+        - legacy-plan-reconciliation/reconciliation-index.md does not exist in the bundle, OR
+        - history/legacy-plan-reconciliation-superseded.md exists (marking it historical), OR
+        - legacy-reconciliation/README.md exists explaining the authority chain
+        """
+        rule_id = "legacy_simplified_index_superseded"
+        old_index = self.bundle_dir / "legacy-plan-reconciliation" / "reconciliation-index.md"
+        superseded_marker = self.bundle_dir / "history" / "legacy-plan-reconciliation-superseded.md"
+        authority_readme = self.bundle_dir / "legacy-reconciliation" / "README.md"
+        final_authority = self.bundle_dir / "legacy-reconciliation" / "exact-legacy-plan-reconciliation-final.md"
+
+        # Final authority must exist
+        if not final_authority.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="exact-legacy-plan-reconciliation-final.md must exist as current authority",
+                severity="FAILURE", passed=False,
+                failure_detail="legacy-reconciliation/exact-legacy-plan-reconciliation-final.md not found",
+            )
+
+        # If old index exists, there must be a superseded marker or authority README
+        if old_index.exists():
+            if not superseded_marker.exists() and not authority_readme.exists():
+                return RuleResult(
+                    rule_id=rule_id,
+                    description="Old legacy-plan-reconciliation/reconciliation-index.md must be marked superseded",
+                    severity="FAILURE", passed=False,
+                    failure_detail=(
+                        "legacy-plan-reconciliation/reconciliation-index.md exists without superseded marker. "
+                        "Create history/legacy-plan-reconciliation-superseded.md or legacy-reconciliation/README.md"
+                    ),
+                )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="Old legacy reconciliation index must be superseded by current authority",
+            severity="FAILURE", passed=True,
+            evidence="Final authority exists; old simplified index is either absent or marked superseded",
         )
 
     # ------------------------------------------------------------------

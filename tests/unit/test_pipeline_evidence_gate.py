@@ -336,15 +336,27 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # ---- Sprint 69: artifacts for rules 58-67 ----
 
     # Rule 58: handoff_index_version_matches_dpp
+    # Also satisfies Sprint 70 rules 68-71: source_path inside sprint handoff,
+    # README.md physically present, hash matches.
+    # sprint_id="sprint61-test" => source_path must start with
+    # reports/sprint61-test/handoff/per-family/{family}/
+    import hashlib as _hashlib_fixture_gate
+    _gate_fam_readme_hashes = {}
     for family, ver in [("cells", "26.5.1"), ("words", "26.5.0"), ("pdf", "26.5.0"),
                         ("diagram", "26.5.0"), ("email", "26.4.0"), ("slides", "26.5.0")]:
         fam_dir = b / "handoff" / "per-family" / family
         fam_dir.mkdir(parents=True, exist_ok=True)
+        readme_content = f"# {family.capitalize()} Root README\n\nInput and Output examples.\n"
+        readme_bytes = readme_content.encode("utf-8")
+        (fam_dir / "README.md").write_bytes(readme_bytes)
+        _gate_fam_readme_hashes[family] = _hashlib_fixture_gate.sha256(readme_bytes).hexdigest()
         (fam_dir / "handoff-index.json").write_text(
             json.dumps({"family": family, "nuget_version": ver, "examples": [],
-                        "root_readme": {"source_path": f"root-readme/per-family/{family}-root-readme.md",
-                                        "sha256": "abc123", "destination_path": "README.md",
-                                        "destination_repo": f"aspose-{family}-net/repo"}}),
+                        "root_readme": {
+                            "source_path": f"reports/sprint61-test/handoff/per-family/{family}/README.md",
+                            "sha256": _gate_fam_readme_hashes[family],
+                            "destination_path": "README.md",
+                            "destination_repo": f"aspose-{family}-net/repo"}}),
             encoding="utf-8",
         )
         (fam_dir / "Directory.Packages.props").write_text(
@@ -420,12 +432,24 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     )
 
     # Rule 66: handoff_index_has_root_readme_field
+    # Rule 71: publication_handoff_root_readme_hash_matches — also needs root_readme_source_path
     handoff_dir = b / "handoff"
     (handoff_dir / "publication-handoff-index.json").write_text(
         json.dumps({"sprint_id": "sprint61-test", "families": [
-            {"family": f, "root_readme_sha256": "abc123", "example_count": 1}
+            {
+                "family": f,
+                "root_readme_sha256": _gate_fam_readme_hashes[f],
+                "root_readme_source_path": f"reports/sprint61-test/handoff/per-family/{f}/README.md",
+                "example_count": 1,
+            }
             for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
         ]}),
+        encoding="utf-8",
+    )
+
+    # Rule 72: legacy_simplified_index_superseded
+    (leg_dir / "README.md").write_text(
+        "# Legacy Reconciliation — Final Authority\nCurrent: exact-legacy-plan-reconciliation-final.md\n",
         encoding="utf-8",
     )
 

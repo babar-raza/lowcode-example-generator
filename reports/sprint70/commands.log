@@ -1,0 +1,67 @@
+# Sprint 70 Commands Log
+
+Sprint: sprint70-root-readme-path-repair-ev-hardening-final-closure
+Date: 2026-05-22
+
+## Phase 0
+
+[2026-05-22 Phase0] cwd=reports/sprint70 cmd=mkdir -p reports/sprint70/{destination,evidence,git,handoff/per-family/{cells,words,pdf,diagram,email,slides},history,legacy-reconciliation,logs,publication,remote,root-readme/per-family,version} exit=0 result=directory structure created
+
+[2026-05-22 Phase0] cwd=root cmd=write 00-sprint69-evidence-audit.md exit=0 result=created
+
+[2026-05-22 Phase0] cwd=root cmd=write 01-sprint69-claim-vs-proof-matrix.md exit=0 result=created
+
+[2026-05-22 Phase0] cwd=root cmd=write 02-corrected-sprint69-state.md exit=0 result=created
+
+[2026-05-22 Phase0] cwd=root cmd=write todo.md exit=0 result=created
+
+[2026-05-22 Phase0] cwd=root cmd=write evidence-contract.json exit=0 result=created 43 categories EC01-EC43
+
+## Phase 1
+
+[2026-05-22 Phase1] cwd=root cmd=shutil.copytree sprint69 handoff to sprint70 exit=0 result=6 families copied
+[2026-05-22 Phase1] cwd=root cmd=copy root README files into handoff/per-family/<family>/README.md exit=0 result=6 files created
+[2026-05-22 Phase1] cwd=root cmd=update handoff-index.json root_readme.source_path for 6 families exit=0 result=all point to sprint70 handoff
+[2026-05-22 Phase1] cwd=root cmd=build publication-handoff-index.json exit=0 result=42 examples 6 root READMEs
+[2026-05-22 Phase1] cwd=root cmd=build root-readme-path-audit.json exit=0 result=all_paths_current=true
+[2026-05-22 Phase1] cwd=root cmd=build package-artifact-hashes.json exit=0 result=146 files
+
+## Phase 2
+
+[2026-05-22 Phase2] cwd=root cmd=verify root README hashes exit=0 result=all_hashes_consistent=true 6/6
+[2026-05-22 Phase2] cwd=root cmd=build root-readme-final-audit.json exit=0 result=6/6 OK
+[2026-05-22 Phase2] cwd=root cmd=build root-readme-hash-check.json exit=0 result=6/6 match
+[2026-05-22 Phase2] cwd=root cmd=build root-readme-cardinality-final.json exit=0 result=42 total all counts match
+
+## Phase 3
+
+[2026-05-22 Phase3] cwd=root cmd=copy legacy-reconciliation to sprint70 exit=0 result=copied
+[2026-05-22 Phase3] cwd=root cmd=write legacy-reconciliation/README.md exit=0 result=created
+[2026-05-22 Phase3] cwd=root cmd=write history/legacy-plan-reconciliation-superseded.md exit=0 result=created
+
+## Phase 4
+
+[2026-05-22 Phase4] cwd=src cmd=edit evidence_validator.py add sprint70 rules 68-72 exit=0 result=added 5 new rules
+[2026-05-22 Phase4] cwd=tests cmd=update test_evidence_validator.py 67->72 assertions exit=0 result=updated
+[2026-05-22 Phase4] cwd=tests cmd=update test_pipeline_evidence_gate.py sprint70 fixtures exit=0 result=updated
+[2026-05-22 Phase4] cwd=root cmd=pytest tests/unit/test_evidence_validator.py tests/unit/test_pipeline_evidence_gate.py exit=0 result=89 passed
+[2026-05-22 Phase4] cwd=root cmd=run sprint69 revalidation exit=0 result=overall_valid=false 2 expected failures
+
+## Phase 5
+
+[2026-05-22 Phase5] cwd=root cmd=carry forward remote truth from sprint69 exit=0 result=3 files created
+
+## Phase 6
+
+[2026-05-22 Phase6] cwd=root cmd=check PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL exit=0 result=NOT_SET BLOCKED_BY_APPROVAL
+
+## Phase 7
+
+[2026-05-22 Phase7] cwd=root cmd=pytest tests/ -q --tb=no exit=0 result=3025 passed 3 skipped 0 failed
+
+## Phase 8
+
+[2026-05-22 Phase8] cwd=root cmd=EV Phase A (71 rules) exit=0 result=overall_valid=true 71/71
+[2026-05-22 Phase8] cwd=root cmd=ECC run exit=0 result=closure_valid=true 43/43
+[2026-05-22 Phase8] cwd=root cmd=EV Phase B (72 rules) exit=0 result=overall_valid=true 72/72
+[2026-05-22 Phase8] cwd=root cmd=bundle-manifest.json exit=0 result=218 files

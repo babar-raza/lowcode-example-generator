@@ -1,0 +1,11 @@
+{
+  "sprint": 52,
+  "generated_from_head": "007edb2",
+  "next_actions": [
+    {"id": "PDF_PR_RECOVERY", "gate": "APPROVE_LIVE_PR", "detail": "Create replacement PRs for 14 PDF types", "safe_to_execute_now": false},
+    {"id": "PDF_PR_MERGE", "gate": "APPROVE_MERGE_PR", "detail": "Merge PDF PRs after creation", "safe_to_execute_now": false},
+    {"id": "VERSION_DRIFT_PUSH", "gate": "APPROVE_README_PUSH", "detail": "Push updated packages for Cells/Words/Diagram", "safe_to_execute_now": false},
+    {"id": "CONTRACT_FIRST_CODEGEN", "gate": "design_review", "detail": "Multi-file design initiative for contract-first code generation", "safe_to_execute_now": false, "taskcard": "TC-CONTRACT-FIRST-CODEGEN"},
+    {"id": "FORMIMPORTER_WATCH", "gate": "library_fix", "detail": "Monitor Aspose.PDF for FormImporter fix", "safe_to_execute_now": false}
+  ]
+}

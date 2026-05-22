@@ -1,0 +1,24 @@
+{
+  "sprint": 49,
+  "head": "a66dd75",
+  "families": {
+    "cells": {
+      "version": "26.5.1"
+    },
+    "words": {
+      "version": "26.5.0"
+    },
+    "pdf": {
+      "version": "26.5.0"
+    },
+    "diagram": {
+      "version": "26.5.0"
+    },
+    "email": {
+      "version": "26.4.0"
+    },
+    "slides": {
+      "version": "26.5.0"
+    }
+  }
+}

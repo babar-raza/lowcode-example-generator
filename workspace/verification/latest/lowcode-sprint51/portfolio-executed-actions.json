@@ -1,0 +1,27 @@
+{
+  "sprint": 51,
+  "head": "33beb18",
+  "blocked_actions": [
+    {
+      "action_id": "PDF_MERGE_PRS",
+      "action_type": "MERGE_READY_PR",
+      "family": "pdf",
+      "safe": false,
+      "blocker": "merge approval gate absent",
+      "approval_env": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+      "taskcard_id": "TC-PDF-MERGE-PRS",
+      "retry_condition": "merge approval gate absent"
+    },
+    {
+      "action_id": "PDF_PR_CONFLICT_RECOVERY",
+      "action_type": "PDF_PR_CONFLICT_RECOVERY",
+      "family": "pdf",
+      "safe": false,
+      "blocker": "live publish approval gate absent",
+      "approval_env": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "taskcard_id": "TC-PDF-PR-CONFLICT-RESOLUTION",
+      "retry_condition": "manual conflict resolution"
+    }
+  ],
+  "blocked_count": 2
+}

@@ -1,0 +1,33 @@
+{
+  "sprint": 44,
+  "lane": "E+F",
+  "blockers": [
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "status": "BLOCKED",
+      "latest_version": "26.5.0",
+      "required": "> 26.5.0",
+      "changed": false
+    },
+    {
+      "id": "TC-OCR-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "package": "Aspose.AI.LLM",
+      "nuget_check": "404_NOT_FOUND",
+      "changed": false
+    },
+    {
+      "id": "TC-PSD-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "package": "Aspose.JavaAttributes",
+      "nuget_check": "404_NOT_FOUND",
+      "changed": false
+    }
+  ],
+  "permanently_blocked": [
+    {"root": "pdf/Timestamp", "reason": "External TSA ServerUrl required"},
+    {"root": "pdf/Ofd", "reason": "OFD input format, no programmatic fixture"},
+    {"root": "words/Processor", "reason": "No public constructor (CS1729+CS0120)"}
+  ],
+  "verdict": "ALL_BLOCKERS_UNCHANGED"
+}

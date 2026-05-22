@@ -1,0 +1,5 @@
+cc806a5 fix(cells): update denominator hash for 26.5.1 catalog and fix _json NameError in generation stage
+33beb18 test(format-authority): add contract-first adoption test suite (TC-MEGA-B through G)
+b9e6ed5 fix(tests): use tmp_path in gate output validation tests for real directory
+43ff580 fix(format-authority): commit contract-first gates, validators, and planner inference
+5623e2a fix(evidence): exclude ZIP artifacts from bundle collection and add companion integrity tests

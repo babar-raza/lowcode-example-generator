@@ -1,0 +1,17 @@
+{
+  "sprint": 43,
+  "lane": "C",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "family": "pdf",
+  "published": 5,
+  "pr_dry_run_ready": 14,
+  "blocked": 0,
+  "deferred": 1,
+  "deferred_ids": ["pdf-form-importer"],
+  "permanently_blocked": 2,
+  "permanently_blocked_ids": ["pdf-timestamp", "pdf-ofd"],
+  "total_pilot_allowed": 19,
+  "total_workflow_root": 22,
+  "coverage_of_pilot": "26.32%",
+  "coverage_after_merge": "100%"
+}

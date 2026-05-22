@@ -1,0 +1,15 @@
+{
+  "sprint": 48,
+  "lane": "D",
+  "published_on_main": 5,
+  "pr_ready_local": 14,
+  "total_contracts": 19,
+  "total_pilot": 19,
+  "conservation": "19 = 5 published + 14 pr_ready",
+  "prs_open_conflicting": [5, 6, 7, 8, 9, 10],
+  "prs_merged_since_creation": [17, 18, 19, 20, 21],
+  "local_packages_verified": 6,
+  "formimporter_status": "DEFERRED (Aspose.PDF 26.5.0 bug)",
+  "reconciliation_pass": true,
+  "note": "All 14 PR-ready examples are mapped to local packages. No orphan packages."
+}

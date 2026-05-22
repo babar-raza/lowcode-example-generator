@@ -1,0 +1,7 @@
+{
+  "sprint": 46,
+  "status": "BLOCKED",
+  "reason": "APPROVE_MERGE_PR gate absent and PRs still CONFLICTING",
+  "prs_merged": 0,
+  "merge_shas": []
+}

@@ -1,0 +1,81 @@
+{
+  "sprint": 45,
+  "total_contracts": 42,
+  "total_pilot": 42,
+  "families": {
+    "cells": {
+      "contracts": 9,
+      "pilot": 9,
+      "published": 9,
+      "pr_ready": 0,
+      "plugins": [
+        "HtmlConverter", "ImageConverter", "JsonConverter", "PdfConverter",
+        "SpreadsheetConverter", "SpreadsheetLocker", "SpreadsheetMerger",
+        "SpreadsheetSplitter", "TextConverter"
+      ],
+      "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "readme_pushed": true,
+      "nuget_version": "26.5.1"
+    },
+    "words": {
+      "contracts": 8,
+      "pilot": 8,
+      "published": 8,
+      "pr_ready": 0,
+      "plugins": [
+        "Comparer", "Converter", "MailMerger", "Merger",
+        "Replacer", "ReportBuilder", "Splitter", "Watermarker"
+      ],
+      "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "readme_pushed": true,
+      "nuget_version": "26.5.0"
+    },
+    "pdf": {
+      "contracts": 19,
+      "pilot": 19,
+      "published": 5,
+      "pr_ready": 14,
+      "plugins": [
+        "DocConverter", "FormEditor", "FormExporter", "FormFlattener",
+        "HtmlConverter", "ImageExtractor", "Jpeg", "Merger", "Optimizer",
+        "PdfAConverter", "Png", "Security", "Signature", "Splitter",
+        "TableGenerator", "TextExtractor", "Tiff", "TocGenerator", "XlsConverter"
+      ],
+      "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "readme_pushed": false,
+      "prs_open": [5, 6, 7, 8, 9, 10],
+      "prs_conflicting": true,
+      "nuget_version": "26.5.0"
+    },
+    "diagram": {
+      "contracts": 2,
+      "pilot": 2,
+      "published": 2,
+      "pr_ready": 0,
+      "plugins": ["DiagramConverter", "PdfConverter"],
+      "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "readme_pushed": true,
+      "nuget_version": "26.5.0"
+    },
+    "email": {
+      "contracts": 1,
+      "pilot": 1,
+      "published": 1,
+      "pr_ready": 0,
+      "plugins": ["Converter"],
+      "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "readme_pushed": true,
+      "nuget_version": "26.4.0"
+    },
+    "slides": {
+      "contracts": 3,
+      "pilot": 3,
+      "published": 3,
+      "pr_ready": 0,
+      "plugins": ["Compress", "Convert", "Merger"],
+      "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "readme_pushed": true,
+      "nuget_version": "26.5.0"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 40 items
+
+tests/unit/test_portfolio_action_planner.py::TestActionModel::test_action_to_dict_has_required_fields PASSED [  2%]
+tests/unit/test_portfolio_action_planner.py::TestActionModel::test_action_board_to_json_is_valid PASSED [  5%]
+tests/unit/test_portfolio_action_planner.py::TestActionModel::test_safe_actions_filters_correctly PASSED [  7%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_board_has_actions PASSED [ 10%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_actions_sorted_by_impact_descending PASSED [ 12%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_board_has_notes PASSED [ 15%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_board_to_json_roundtrips PASSED [ 17%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_pdf_merge_action_present PASSED [ 20%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_formimporter_retest_present PASSED [ 22%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_ocr_dependency_recheck_present PASSED [ 25%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_psd_dependency_recheck_present PASSED [ 27%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_permanently_blocked_watch_present PASSED [ 30%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_version_drift_check_present PASSED [ 32%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_portfolio_conservation_check_present PASSED [ 35%]
+tests/unit/test_portfolio_action_planner.py::TestComputeActionBoard::test_no_silent_drop PASSED [ 37%]
+tests/unit/test_portfolio_action_planner.py::TestGateBehavior::test_pdf_merge_blocked_when_gate_absent PASSED [ 40%]
+tests/unit/test_portfolio_action_planner.py::TestGateBehavior::test_pdf_merge_safe_when_gate_present PASSED [ 42%]
+tests/unit/test_portfolio_action_planner.py::TestDirtyStateRanking::test_dirty_state_ranks_first PASSED [ 45%]
+tests/unit/test_portfolio_action_planner.py::TestDirtyStateRanking::test_no_dirty_action_when_clean PASSED [ 47%]
+tests/unit/test_portfolio_action_planner.py::TestContractConservation::test_no_backfill_when_contracts_match_pilot PASSED [ 50%]
+tests/unit/test_portfolio_action_planner.py::TestRenderMarkdown::test_render_produces_markdown_table PASSED [ 52%]
+tests/unit/test_portfolio_action_planner.py::TestRenderMarkdown::test_render_includes_notes PASSED [ 55%]
+tests/unit/test_portfolio_action_planner.py::TestConstants::test_active_families_count PASSED [ 57%]
+tests/unit/test_portfolio_action_planner.py::TestConstants::test_blocked_families_count PASSED [ 60%]
+tests/unit/test_portfolio_action_planner.py::TestConstants::test_permanently_blocked_contains_known_roots PASSED [ 62%]
+tests/unit/test_portfolio_action_planner.py::TestConstants::test_email_and_slides_in_active PASSED [ 65%]
+tests/unit/test_portfolio_action_planner.py::TestConstants::test_conflict_recovery_in_action_types PASSED [ 67%]
+tests/unit/test_portfolio_action_planner.py::TestFreshnessMetadata::test_board_has_generated_from_head PASSED [ 70%]
+tests/unit/test_portfolio_action_planner.py::TestFreshnessMetadata::test_board_has_git_dirty_summary PASSED [ 72%]
+tests/unit/test_portfolio_action_planner.py::TestFreshnessMetadata::test_freshness_in_json_output PASSED [ 75%]
+tests/unit/test_portfolio_action_planner.py::TestFreshnessMetadata::test_freshness_in_markdown PASSED [ 77%]
+tests/unit/test_portfolio_action_planner.py::TestConflictRecoveryAction::test_conflict_recovery_present_in_board PASSED [ 80%]
+tests/unit/test_portfolio_action_planner.py::TestConflictRecoveryAction::test_conflict_recovery_blocked_when_gate_absent PASSED [ 82%]
+tests/unit/test_portfolio_action_planner.py::TestConflictRecoveryAction::test_conflict_recovery_safe_when_gate_present PASSED [ 85%]
+tests/unit/test_portfolio_action_planner.py::TestConflictRecoveryAction::test_conflict_recovery_ranks_below_merge PASSED [ 87%]
+tests/unit/test_portfolio_action_planner.py::TestTaskcardIds::test_blocker_actions_have_taskcard_ids PASSED [ 90%]
+tests/unit/test_portfolio_action_planner.py::TestTaskcardIds::test_taskcard_id_omitted_from_dict_when_none PASSED [ 92%]
+tests/unit/test_portfolio_action_planner.py::TestTaskcardIds::test_taskcard_id_present_in_dict_when_set PASSED [ 95%]
+tests/unit/test_portfolio_action_planner.py::TestMetricsSummary::test_metrics_summary_structure PASSED [ 97%]
+tests/unit/test_portfolio_action_planner.py::TestMetricsSummary::test_metrics_counts_consistent PASSED [100%]
+
+============================= 40 passed in 1.88s ==============================

@@ -1,0 +1,21 @@
+{
+  "sprint": 49,
+  "head": "a66dd75",
+  "title": "Companion proof model, head-consistency checker, closure-grade evidence",
+  "defects_targeted": 5,
+  "defects_fixed": 5,
+  "lanes_completed": ["0-baseline", "A-iv-report", "B-code-fixes", "C-planner-loop", "D-portfolio", "E-pdf-reconciliation", "F-tests-bundle-closeout"],
+  "lanes_remaining": 0,
+  "commits_in_sprint": 1,
+  "commit_list": ["a66dd75 feat(evidence): add companion proof and head-consistency checker"],
+  "code_changes": {
+    "evidence_contract.py": "Added generate_companion_proof(), check_head_consistency(), _HEAD_BINDING_KEYS",
+    "test_evidence_contract.py": "Added 7 tests: TestCompanionProof (4), TestHeadConsistency (3)"
+  },
+  "tests": {
+    "full_suite": "2526 passed, 6 failed (pre-existing), 3 skipped",
+    "targeted": "486 passed",
+    "pre_existing_failures": ["test_format_map_completeness (4 tests) - format_authority WIP"]
+  },
+  "status": "COMPLETE"
+}

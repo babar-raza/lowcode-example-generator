@@ -1,0 +1,17 @@
+{
+  "sprint": 48,
+  "head": "57d1fe3",
+  "executed_actions": [
+    {"id": "PORTFOLIO_CONSERVATION_CHECK", "result": "ALL_PASS", "changed": false},
+    {"id": "VERSION_DRIFT_CHECK", "result": "checked", "changed": false},
+    {"id": "FORMIMPORTER_RETEST", "result": "still_blocked", "changed": false},
+    {"id": "OCR_DEPENDENCY_RECHECK", "result": "still_blocked", "changed": false},
+    {"id": "PSD_DEPENDENCY_RECHECK", "result": "still_blocked", "changed": false},
+    {"id": "PERMANENTLY_BLOCKED_WATCH", "result": "confirmed_unchanged", "changed": false}
+  ],
+  "blocked_actions": [
+    {"id": "PDF_MERGE_PRS", "reason": "APPROVE_MERGE_PR absent"},
+    {"id": "PDF_PR_CONFLICT_RECOVERY", "reason": "APPROVE_LIVE_PR absent"}
+  ],
+  "remaining_only_approval_gated_or_blocked": true
+}

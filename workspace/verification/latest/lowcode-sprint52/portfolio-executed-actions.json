@@ -1,0 +1,46 @@
+{
+  "sprint": 52,
+  "head": "007edb2",
+  "executed_actions": [
+    {
+      "id": "PORTFOLIO_CONSERVATION_CHECK",
+      "result": "PASS",
+      "detail": "42 contracts, all pass"
+    },
+    {
+      "id": "VERSION_DRIFT_CHECK",
+      "result": "PASS",
+      "detail": "0 drift across 6 families"
+    },
+    {
+      "id": "FORMIMPORTER_RETEST",
+      "result": "STILL_BLOCKED",
+      "detail": "Aspose.PDF 26.5.0 \u2014 no newer version available"
+    },
+    {
+      "id": "OCR_DEPENDENCY_RECHECK",
+      "result": "STILL_BLOCKED",
+      "detail": "Aspose.AI.LLM not on NuGet"
+    },
+    {
+      "id": "PSD_DEPENDENCY_RECHECK",
+      "result": "STILL_BLOCKED",
+      "detail": "Aspose.JavaAttributes not on NuGet"
+    },
+    {
+      "id": "PERMANENTLY_BLOCKED_WATCH",
+      "result": "CONFIRMED",
+      "detail": "3 permanently blocked roots unchanged"
+    }
+  ],
+  "not_executed": [
+    {
+      "id": "PDF_MERGE_PRS",
+      "reason": "APPROVE_MERGE_PR absent"
+    },
+    {
+      "id": "PDF_PR_CONFLICT_RECOVERY",
+      "reason": "APPROVE_LIVE_PR absent"
+    }
+  ]
+}

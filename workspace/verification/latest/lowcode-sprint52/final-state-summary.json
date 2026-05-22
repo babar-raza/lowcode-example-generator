@@ -1,0 +1,41 @@
+{
+  "sprint": 52,
+  "head": "007edb2",
+  "timestamp": "2026-05-20T13:10:00Z",
+  "verdict": "SPRINT52_COMPLETE_SPRINT51_VALIDATED_AND_STATE_AUTHORITY_REPAIRED",
+  "sprint51_verified": true,
+  "sprint51_closeout_gaps_closed": 5,
+  "tests": {
+    "full": "2795 passed, 0 failed, 3 skipped",
+    "targeted": "489 passed"
+  },
+  "portfolio": {
+    "contract_parity": "42/42",
+    "published": 28,
+    "pr_ready": 14,
+    "summary": "42/42 contract parity, 28 published, 14 PR-ready"
+  },
+  "conservation": "42 = 42",
+  "dirty_state": {
+    "source": 0,
+    "test": 0,
+    "evidence": 53,
+    "generated_artifact": 5,
+    "unknown": 0,
+    "actionable": 0
+  },
+  "pdf_state": {
+    "published": 5,
+    "pr_ready": 14,
+    "open_prs": 0,
+    "approval_gates": "BOTH_ABSENT"
+  },
+  "gaps_closed": [
+    "GAP-1: Sprint 51 external companion proof — produced and validated",
+    "GAP-2: Dirty-state untracked items — classified and committed/gitignored",
+    "GAP-3: release-status contradiction — regenerated with correct denominator data",
+    "GAP-4: CONTRACT_FIRST_CODEGEN — reclassified as not-safe-now with taskcard",
+    "GAP-5: Lane artifacts at stale HEAD — all final artifacts generated at 007edb2"
+  ],
+  "next_action": "PDF PR Recovery when APPROVE_LIVE_PR is set"
+}

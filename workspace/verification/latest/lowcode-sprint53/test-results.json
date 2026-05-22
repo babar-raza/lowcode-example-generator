@@ -1,0 +1,11 @@
+{
+  "report_type": "test-results",
+  "generated_at": "2026-05-20T13:54:05.425579+00:00",
+  "sprint": 53,
+  "head": "f216bd7",
+  "total_passed": 2807,
+  "total_skipped": 3,
+  "total_failed": 0,
+  "duration_seconds": 146.79,
+  "verdict": "ALL_TESTS_PASS"
+}

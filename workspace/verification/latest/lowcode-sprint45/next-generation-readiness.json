@@ -1,0 +1,18 @@
+{
+  "sprint": 45,
+  "readiness": {
+    "cells": {"ready": false, "reason": "all 9 plugins covered"},
+    "words": {"ready": false, "reason": "all 8 plugins covered"},
+    "pdf": {"ready": false, "reason": "19/20 covered, FormImporter blocked by library bug"},
+    "diagram": {"ready": false, "reason": "all 2 plugins covered"},
+    "email": {"ready": false, "reason": "all 1 plugin covered"},
+    "slides": {"ready": false, "reason": "all 3 plugins covered"}
+  },
+  "blocked_families": ["ocr", "psd"],
+  "deferred_examples": ["pdf-formimporter"],
+  "next_actions": [
+    "Retest FormImporter when Aspose.PDF > 26.5.0",
+    "Recheck OCR/PSD NuGet availability",
+    "Resolve PDF PR conflicts when APPROVE_LIVE_PR set"
+  ]
+}

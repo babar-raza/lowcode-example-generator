@@ -1,0 +1,18 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-18 14:58 UTC",
+  "family": "slides",
+  "package_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\slides-controlled-pilot",
+  "readme_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\slides-controlled-pilot\\README.md",
+  "readme_bytes": 8328,
+  "package_version": "26.5.0",
+  "examples_count": 3,
+  "example_names": [
+    "compress",
+    "convert",
+    "merger"
+  ],
+  "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

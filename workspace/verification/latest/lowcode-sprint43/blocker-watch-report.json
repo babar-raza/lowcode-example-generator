@@ -1,0 +1,66 @@
+{
+  "sprint": 43,
+  "lane": "E",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "blockers": [
+    {
+      "id": "BLOCKER-PDF-PR-MERGE",
+      "family": "pdf",
+      "severity": "HIGH",
+      "description": "6 PDF PRs (#5-#10) OPEN but CONFLICTING, plus approval gate absent",
+      "gate_set": false,
+      "prs_conflicting": true,
+      "impact": "14 examples stuck at PR_DRY_RUN_READY",
+      "resolution": "Rebase/recreate PRs, then set APPROVE_MERGE_PR",
+      "since": "2026-05-17T00:00:00Z",
+      "new_this_sprint": "CONFLICTING state discovered"
+    },
+    {
+      "id": "BLOCKER-PDF-FORMIMPORTER",
+      "family": "pdf",
+      "severity": "MEDIUM",
+      "description": "FormImporter blocked by Aspose.PDF 26.5.0 bug",
+      "nuget_latest": "26.5.0",
+      "newer_available": false,
+      "impact": "1 Wave H scenario deferred",
+      "since": "2026-05-17T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-OCR-DEPENDENCY",
+      "family": "ocr",
+      "severity": "MEDIUM",
+      "description": "Aspose.AI.LLM not on NuGet (confirmed 404)",
+      "verified": "2026-05-19",
+      "since": "2026-05-09T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PSD-DEPENDENCY",
+      "family": "psd",
+      "severity": "MEDIUM",
+      "description": "Aspose.JavaAttributes not on NuGet (confirmed 404)",
+      "verified": "2026-05-19",
+      "since": "2026-05-09T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PDF-TIMESTAMP",
+      "family": "pdf",
+      "severity": "LOW",
+      "description": "External TSA ServerUrl required",
+      "status": "PERMANENTLY_BLOCKED"
+    },
+    {
+      "id": "BLOCKER-PDF-OFD",
+      "family": "pdf",
+      "severity": "LOW",
+      "description": "No OFD programmatic fixture",
+      "status": "PERMANENTLY_BLOCKED"
+    },
+    {
+      "id": "BLOCKER-WORDS-PROCESSOR",
+      "family": "words",
+      "severity": "LOW",
+      "description": "No public constructor (CS1729+CS0120)",
+      "status": "PERMANENTLY_BLOCKED"
+    }
+  ]
+}

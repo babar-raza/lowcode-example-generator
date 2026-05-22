@@ -1,0 +1,18 @@
+{
+  "lanes": {
+    "A": {"role": "Coordinator", "owned_files": ["evidence bundle ZIP", "final verdict JSON"], "shared": ["all taskcard JSONs", "plan file"]},
+    "B": {"role": "Repo Inventory", "owned_files": ["readme-affected-repo-inventory.json", "readme-coverage-audit-*.json"]},
+    "C": {"role": "Forensic Review", "owned_files": ["readme-manual-edit-forensic.json"]},
+    "D": {"role": "Root Cause", "owned_files": ["readme-root-cause-verification.json"]},
+    "E": {"role": "Design", "owned_files": ["design docs in evidence"]},
+    "F": {"role": "Implementation", "owned_files": ["readme_inventory.py", "readme_renderer.py mods", "readme_facts.py mods", "__main__.py CLI mods"]},
+    "G": {"role": "Gating", "owned_files": ["readme_auditor.py mods", "__main__.py staleness gate"], "overlap": "__main__.py shared with Lane F — F first, G second"},
+    "H": {"role": "Backfill", "owned_files": ["workspace/pr-dry-run/*/README.md", "snapshot evidence"]},
+    "I": {"role": "Tests", "owned_files": ["test_readme_inventory.py", "test_readme_auditor.py additions", "test logs"]}
+  },
+  "overlap_rules": [
+    "__main__.py shared between Lane F and Lane G. Lane F modifies first. Lane G modifies second. Coordinator verifies no conflicts.",
+    "No lane may edit another lane's owned files without coordinator approval.",
+    "Evidence JSONs in workspace/verification/latest/ follow readme-{topic}.json naming."
+  ]
+}

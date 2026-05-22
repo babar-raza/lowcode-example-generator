@@ -1,0 +1,17 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-19 14:31 UTC",
+  "family": "diagram",
+  "package_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\diagram-controlled-pilot",
+  "readme_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\diagram-controlled-pilot\\README.md",
+  "readme_bytes": 8514,
+  "package_version": "26.4.0",
+  "examples_count": 2,
+  "example_names": [
+    "diagram-diagram-converter",
+    "diagram-pdf-converter"
+  ],
+  "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

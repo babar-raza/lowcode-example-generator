@@ -1,0 +1,21 @@
+{
+  "sprint_under_review": 46,
+  "reviewing_sprint": 47,
+  "head_verified": "fe5fb4e2e3fc509ad55e007eec47b3346bbe7bb6",
+  "head_short": "fe5fb4e",
+  "head_is_current": true,
+  "branch": "main",
+  "tests": {
+    "full_suite": {"passed": 2497, "skipped": 3, "failed": 0, "verified": true},
+    "targeted": {"passed": 712, "verified_in_bundle": true}
+  },
+  "sprint46_commit_verified": true,
+  "sprint46_verdict": "SPRINT46_COMPLETE_LOOP_IDEMPOTENT_AND_RECOVERY_PACKET_READY",
+  "bundle_file_count": 79,
+  "final_next_actions_head_matches": true,
+  "final_state_summary_head_matches": true,
+  "dirty_file_count_actual": 21,
+  "dirty_file_count_reported": 21,
+  "dirty_count_matches": true,
+  "iv_verdict": "SPRINT46_IV_PASSED_WITH_5_CAVEATS"
+}

@@ -1,0 +1,43 @@
+{
+  "sprint": 50,
+  "reviewing_sprint": 49,
+  "total_blockers": 7,
+  "resolved": 2,
+  "open": 5,
+  "blockers": {
+    "B1_dirty_source": {
+      "status": "RESOLVED",
+      "resolved_by": ["e59d090", "5e66c8b"],
+      "files_committed": [
+        "src/plugin_examples/evidence_contract.py",
+        "src/plugin_examples/generator/code_generator.py",
+        "src/plugin_examples/generator/packet_builder.py",
+        "src/plugin_examples/generator/project_generator.py",
+        "src/plugin_examples/planner_loop.py",
+        "src/plugin_examples/runner.py",
+        "src/plugin_examples/scenario_planner/planner.py",
+        "tests/unit/test_evidence_contract.py",
+        "tests/unit/test_planner_loop.py",
+        "src/plugin_examples/format_authority/",
+        "tests/unit/test_format_authority_store.py"
+      ]
+    },
+    "B2_test_failures": {
+      "status": "RESOLVED",
+      "resolved_by": "5e66c8b feat(format-authority): make LowCode format contracts repo-local and fail-closed",
+      "tests_now_passing": [
+        "test_text_converter_scenario_uses_csv",
+        "test_cells_spreadsheet_converter",
+        "test_output_format_correct[cells:SpreadsheetConverter]",
+        "test_output_format_correct[pdf:FormExporter]",
+        "test_output_format_correct[email:Converter]",
+        "test_input_format_correct[cells:TextConverter]"
+      ]
+    },
+    "B3_companion_proof_sha": {"status": "OPEN", "lane": "C"},
+    "B4_manifest_self_hash": {"status": "OPEN", "lane": "C"},
+    "B5_portfolio_wording": {"status": "OPEN", "lane": "D"},
+    "B6_stale_planner_board": {"status": "OPEN", "lane": "D"},
+    "B7_pdf_pr_runbook": {"status": "OPEN", "lane": "E"}
+  }
+}

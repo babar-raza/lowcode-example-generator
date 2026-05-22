@@ -1,0 +1,23 @@
+{
+  "lane": "C",
+  "date": "2026-05-19",
+  "status": "APPROVAL_GATES_SET_BUT_PRS_CLOSED",
+  "approval_gates": {
+    "github_token": "AVAILABLE",
+    "approve_merge_pr": "SET",
+    "approve_live_pr": "SET"
+  },
+  "prs": [
+    {"number": 5, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:19Z"},
+    {"number": 6, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:22Z"},
+    {"number": 7, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:24Z"},
+    {"number": 8, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:27Z"},
+    {"number": 9, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:31Z"},
+    {"number": 10, "state": "CLOSED", "merged": false, "closed_at": "2026-05-19T05:53:34Z"}
+  ],
+  "published_count": 5,
+  "pending_count": 14,
+  "target_repo_healthy": true,
+  "action_taken": "NONE_PRS_CLOSED",
+  "recommendation": "RECREATE_PRS_OR_BATCH_PUBLISH"
+}

@@ -1,0 +1,38 @@
+{
+  "sprint": 38,
+  "date": "2026-05-19",
+  "previous_sprint": 37,
+  "bundle_path": "workspace/verification/sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241.zip",
+  "bundle_bytes": 110673,
+  "bundle_entries": 196,
+  "run_id": "sprint37-all-lowcode-launch-execution-and-version-drift-20260518-195241",
+  "verdict": "SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED",
+  "contract_version": "V7",
+  "categories_total": 69,
+  "categories_found": 69,
+  "categories_missing": 0,
+  "contract_result": "BUNDLE_CONTRACT_PASSED",
+  "tests_at_bundle_time": 1876,
+  "tests_failed_at_bundle_time": 0,
+  "tests_at_sprint_start": 1876,
+  "tests_failed_at_sprint_start": 0,
+  "head_at_bundle_time": "75621df",
+  "head_at_sprint_start": "a474b97",
+  "cross_file_verdict_consistent": true,
+  "families_needing_work_accuracy": {
+    "email_listed": false,
+    "slides_listed": false,
+    "verdict": "CORRECT"
+  },
+  "secret_scan": "CLEAN",
+  "source_state": "RESOLVED",
+  "scoreboard_consistent": true,
+  "readme_healing_evidence_present": true,
+  "intake_verdict": "COMPLETE_NO_BLOCKERS",
+  "denominator_issues_detected": [
+    "email: published_count=1 but coverage_pct=0%, allowed_pilot_types=[], runnable_scenarios=0 — STALE",
+    "slides: published_count=3 but coverage_pct=0%, allowed_pilot_types=[], runnable_scenarios=0 — STALE",
+    "pdf: coverage_pct_detail uses denominator 18 but allowed_pilot_count=19 — STALE",
+    "words: runnable_scenario_ids has 7 entries but runnable_scenarios=8 — ReportBuilder MISSING from list"
+  ]
+}

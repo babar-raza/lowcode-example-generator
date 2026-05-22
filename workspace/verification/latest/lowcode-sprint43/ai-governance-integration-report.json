@@ -1,0 +1,54 @@
+{
+  "sprint": 43,
+  "lane": "F",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "governance_test_suites": [
+    {
+      "file": "tests/unit/test_provider_policy.py",
+      "source_module": "plugin_examples.llm_router.provider_policy",
+      "decorative": false,
+      "purpose": "Enforces LLM provider policy — approved providers, forbidden models, validation",
+      "key_assertions": ["professionalize in APPROVED_PROVIDERS", "ollama in APPROVED_PROVIDERS", "forbidden model detection"]
+    },
+    {
+      "file": "tests/unit/test_llm_router_preflight.py",
+      "source_module": "plugin_examples.llm_router",
+      "decorative": false,
+      "purpose": "Verifies LLM router preflight checks before generation"
+    },
+    {
+      "file": "tests/unit/test_healing_intelligence_loader.py",
+      "source_module": "plugin_examples.healing_intelligence.loader",
+      "decorative": false,
+      "purpose": "Verifies healing intelligence module loads and classifies correctly"
+    },
+    {
+      "file": "tests/unit/test_metrics_collector.py",
+      "source_module": "plugin_examples.metrics.models",
+      "decorative": false,
+      "purpose": "Verifies metrics collection, evidence ledger, and pipeline hooks"
+    },
+    {
+      "file": "tests/unit/test_safety_governance.py",
+      "source_module": "codebase-wide",
+      "decorative": false,
+      "purpose": "Enforces AGENTS.md governance rules against actual codebase — no secrets in code, endpoint compliance, etc."
+    }
+  ],
+  "connections_to_execution": {
+    "llm_router": "provider_policy gates which LLM providers are used in code generation",
+    "healing_intelligence": "loader feeds failure patterns into retry/repair decisions",
+    "metrics": "MetricsSession tracks pipeline execution for observability",
+    "safety_governance": "codebase-wide enforcement of security and governance rules"
+  },
+  "new_planner_connection": "portfolio_action_planner.py added this sprint provides durable action ranking from state",
+  "gaps": [
+    "No direct connection between action planner output and metrics collector yet",
+    "No automated sprint-to-sprint evidence chain (each sprint manually re-verifies)"
+  ],
+  "llm_governance": {
+    "approved_endpoint": "https://llm.professionalize.com/v1/",
+    "no_secrets_in_logs": true,
+    "token_accounting": "via MetricsSession when AGENT_METRICS_ENABLED=true"
+  }
+}

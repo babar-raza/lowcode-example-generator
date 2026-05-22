@@ -1,0 +1,77 @@
+{
+  "total_cycles": 2,
+  "total_executed": 12,
+  "total_deferred": 0,
+  "stop_reason": "stopped_no_change",
+  "cycles": [
+    {
+      "cycle": 1,
+      "generated_from_head": "fe5fb4e",
+      "board_fingerprint": "2b48ebb385cd5bca",
+      "action_count": 8,
+      "safe_count": 6,
+      "blocked_count": 2,
+      "executed": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "changed_actions": [],
+      "noop_actions": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "deferred": [],
+      "commit_sha": null,
+      "verdict": "EXECUTED_6_ACTIONS",
+      "duration_ms": 1441
+    },
+    {
+      "cycle": 2,
+      "generated_from_head": "fe5fb4e",
+      "board_fingerprint": "2b48ebb385cd5bca",
+      "action_count": 8,
+      "safe_count": 6,
+      "blocked_count": 2,
+      "executed": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "changed_actions": [],
+      "noop_actions": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "deferred": [],
+      "commit_sha": null,
+      "verdict": "IDEMPOTENT_NO_CHANGE",
+      "duration_ms": 860
+    }
+  ],
+  "final_dirty_state": {
+    "source_dirty_count": 0,
+    "config_dirty_count": 0,
+    "test_dirty_count": 0,
+    "evidence_dirty_count": 21,
+    "generated_artifact_count": 0,
+    "actionable_count": 0,
+    "source_files": [],
+    "config_files": [],
+    "test_files": []
+  }
+}

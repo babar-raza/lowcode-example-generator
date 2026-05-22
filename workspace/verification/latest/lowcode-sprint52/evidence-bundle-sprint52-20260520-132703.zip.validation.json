@@ -1,0 +1,47 @@
+{
+  "contract": "PlannerSprintEvidenceContract",
+  "contract_version": "planner-v1",
+  "validated_bundle": "workspace\\verification\\latest\\lowcode-sprint52\\evidence-bundle-sprint52-20260520-132703.zip",
+  "validated_bundle_sha256": "39fe6c0eb1f128b2cce370407c27b9d45fc30f54f04762b2a269133372a31a9d",
+  "validated_bundle_size_bytes": 44381,
+  "validation_timestamp": "2026-05-20T13:27:03.580540+00:00",
+  "result": {
+    "passed": false,
+    "verdict": "PLANNER_CONTRACT_FAILED",
+    "file_count": 68,
+    "categories_found": [
+      "final_state_summary",
+      "final_next_actions",
+      "final_git_status",
+      "final_git_log",
+      "final_git_diff_stat",
+      "final_changed_files",
+      "test_full_log",
+      "test_targeted_log",
+      "planner_final_board",
+      "planner_loop_ledger",
+      "dirty_state_proof",
+      "taskcard_state",
+      "local_metrics",
+      "bundle_manifest",
+      "no_secret_proof",
+      "execution_ledger"
+    ],
+    "categories_found_count": 16,
+    "categories_missing": [
+      "planner_cycle_ledger"
+    ],
+    "categories_missing_count": 1,
+    "failures": [
+      "Missing category 'planner_cycle_ledger' \u2014 expected one of ['planner-cycle-01.json']"
+    ],
+    "failure_count": 1,
+    "secret_violations": [],
+    "secret_violation_count": 0
+  },
+  "content_checks": [
+    "final-state-summary.json: 'head' field",
+    "final-next-actions.json: 'generated_from_head' field",
+    "bundle-manifest.json: all files have sha256"
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  "loaded": true,
+  "registries": {
+    "bootstrap": true,
+    "failure_patterns": true,
+    "repair_patterns": true,
+    "semantic_steering": true,
+    "validator_patterns": true
+  },
+  "constraints_applied": [
+    {
+      "scenario_id": "pdf-doc-converter",
+      "type": "DocConverter",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-form-editor",
+      "type": "FormEditor",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-form-exporter",
+      "type": "FormExporter",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-form-flattener",
+      "type": "FormFlattener",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-html",
+      "type": "Html",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-image-extractor",
+      "type": "ImageExtractor",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-jpeg",
+      "type": "Jpeg",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-merger",
+      "type": "Merger",
+      "hi_required": [
+        "REQUIRED: new MergeOptions() \u2014 use MergeOptions as the concrete options class",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 add all input files via AddInput",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 set output file via AddOutput",
+        "REQUIRED: new Merger().Process(options) \u2014 call Process on instance",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-optimizer",
+      "type": "Optimizer",
+      "hi_required": [
+        "REQUIRED: new OptimizeOptions() \u2014 use OptimizeOptions as the concrete options class",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 add input file via AddInput",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 set output file via AddOutput",
+        "REQUIRED: new Optimizer().Process(options) \u2014 call Process on instance",
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-pdf-aconverter",
+      "type": "PdfAConverter",
+      "hi_required": [
+        "REQUIRED: new PdfAConvertOptions( \u2014 use PdfAConvertOptions as the concrete options class (NOT PluginOptions)",
+        "REQUIRED: using Aspose.Pdf; (for PdfAStandard enum)",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 add input file via AddInput",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 set output file via AddOutput",
+        "REQUIRED: new PdfAConverter().Process(options) \u2014 call Process on instance",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract, use PdfAConvertOptions",
+        "FORBIDDEN: LowCodeLoadOptions \u2014 wrong options class for PdfAConverter",
+        "FORBIDDEN: LowCodeSaveOptions \u2014 wrong options class for PdfAConverter",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-png",
+      "type": "Png",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-security",
+      "type": "Security",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-signature",
+      "type": "Signature",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-splitter",
+      "type": "Splitter",
+      "hi_required": [
+        "REQUIRED: new SplitOptions() \u2014 use SplitOptions as the concrete options class",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 add input file via AddInput",
+        "REQUIRED: options.AddOutput(new FileDataSource( \u2014 set output file via AddOutput",
+        "REQUIRED: new Splitter().Process(options) \u2014 call Process on instance",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-table-generator",
+      "type": "TableGenerator",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-text-extractor",
+      "type": "TextExtractor",
+      "hi_required": [
+        "REQUIRED: new TextExtractorOptions() \u2014 use TextExtractorOptions as the concrete options class",
+        "REQUIRED: options.AddInput(new FileDataSource( \u2014 add input file via AddInput",
+        "REQUIRED: new TextExtractor().Process(options) \u2014 call Process on instance",
+        "REQUIRED: StringResult \u2014 read text from result via cast to StringResult",
+        "REQUIRED: using Aspose.Pdf.Text; (for TextFragment fixture creation)",
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: options.AddOutput( \u2014 TextExtractor has NO AddOutput; read StringResult from result.ResultCollection",
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-tiff",
+      "type": "Tiff",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-toc-generator",
+      "type": "TocGenerator",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    },
+    {
+      "scenario_id": "pdf-xls-converter",
+      "type": "XlsConverter",
+      "hi_required": [
+        "using Aspose.Pdf.LowCode;",
+        "using Aspose.Pdf;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources \u2014 sub-namespace does not exist",
+        "FORBIDDEN: TextAbsorber \u2014 use TextExtractor (LowCode API), not TextAbsorber (core API)",
+        "FORBIDDEN: PdfFileEditor \u2014 use Merger/Splitter (LowCode API), not PdfFileEditor (Facades API)",
+        "FORBIDDEN: new PluginOptions() \u2014 PluginOptions is abstract; use the concrete options class"
+      ]
+    }
+  ]
+}

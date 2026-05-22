@@ -1,0 +1,9 @@
+{
+  "sprint": 49,
+  "status": "APPROVAL_BLOCKED",
+  "reason": "APPROVE_LIVE_PR absent",
+  "prs_closed": [5, 6, 7, 8, 9, 10],
+  "prs_to_create": 6,
+  "examples_affected": 14,
+  "runbook": "pdf-approval-runbook.json"
+}

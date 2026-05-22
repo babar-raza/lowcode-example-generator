@@ -1,0 +1,38 @@
+{
+  "report_type": "final-next-actions",
+  "generated_at": "2026-05-20T13:54:51.711418+00:00",
+  "generated_from_head": "f216bd7",
+  "next_required_actions": [
+    {
+      "id": "CLOSE_DIRTY_STATE",
+      "family": "cross-family",
+      "type": "CLOSE_PREVIOUS_SPRINT",
+      "current_state": "2 dirty (2 test, 80 evidence)",
+      "desired_state": "committed or classified",
+      "blocker": null,
+      "approval_required": null,
+      "gate_present": true,
+      "risk": "low",
+      "impact": 100,
+      "safe_to_execute_now": true,
+      "reason": "Dirty source/config/test files must be resolved before any new work",
+      "evidence_required": [
+        "commit_sha",
+        "git_status"
+      ],
+      "tests_required": [],
+      "execution_state": "safe_unexecuted",
+      "executed_this_sprint": false,
+      "changed_state": false,
+      "next_required": true
+    }
+  ],
+  "blocked_actions": [],
+  "remaining_open_items": [
+    "Version drift publication (requires APPROVE_README_PUSH)",
+    "Close superseded PRs #5-#10 in PDF repo",
+    "report-builder fixture",
+    "FormImporter (Aspose.PDF library bug)",
+    "OCR/PSD (NuGet 404)"
+  ]
+}

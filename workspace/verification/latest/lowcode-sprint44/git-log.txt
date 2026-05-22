@@ -1,0 +1,5 @@
+3be5714 fix(planner): exclude pipeline artifacts from dirty state detection
+019d60d feat(planner-v2): add freshness metadata, conflict-aware actions, taskcard IDs, and metrics hooks
+bb24af9 feat(mega-train): add 19-file evidence bundle for operations mega train sprint
+3d0e231 fix(queue): reclassify 3 diagram OPTIONS entries and sync queue metadata
+0f07faa fix(tests): update backlogged count and consolidate PDF merged assertions

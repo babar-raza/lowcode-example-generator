@@ -1,0 +1,23 @@
+{
+  "sprint": 38,
+  "date": "2026-05-19",
+  "family": "pdf",
+  "status": "DRY_RUN_READY",
+  "live_publication_blocked": true,
+  "blocker": "APPROVE_LIVE_PR not set",
+  "packages": [
+    {"pr": "PR#5", "dir": "pdf-controlled-pilot", "examples": ["doc-converter", "html", "xls-converter"], "has_contracts": true},
+    {"pr": "PR#6", "dir": "pdf-controlled-pilot-pr5", "examples": ["jpeg", "png", "tiff"], "has_contracts": true},
+    {"pr": "PR#7", "dir": "pdf-controlled-pilot-pr6", "examples": ["image-extractor", "table-generator", "toc-generator"], "has_contracts": true},
+    {"pr": "PR#8", "dir": "pdf-controlled-pilot-pr7", "examples": ["security", "form-flattener"], "has_contracts": false},
+    {"pr": "PR#9", "dir": "pdf-controlled-pilot-pr8", "examples": ["form-editor", "form-exporter"], "has_contracts": false},
+    {"pr": "PR#10", "dir": "pdf-controlled-pilot-pr9", "examples": ["signature"], "has_contracts": false}
+  ],
+  "total_examples_in_packages": 14,
+  "examples_with_contracts": 9,
+  "examples_without_contracts": 5,
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "target_repo_status": "HEALTHY",
+  "github_token": "AVAILABLE",
+  "approval_token": "NOT_SET"
+}

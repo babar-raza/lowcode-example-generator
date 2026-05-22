@@ -1,0 +1,33 @@
+{
+  "design": "README Inventory Modes",
+  "modes": {
+    "repo_actual_inventory": {
+      "description": "Examples physically present in target repo main branch",
+      "sources": ["GitHub API contents listing", "post-merge validation JSON", "publication ledgers"],
+      "use_case": "Standalone README backfill (publish-readme)"
+    },
+    "current_package_overlay_inventory": {
+      "description": "repo_actual UNION current_package_examples",
+      "sources": ["repo_actual + single PR package on disk"],
+      "use_case": "Single-package PR (publish-pr)"
+    },
+    "batch_overlay_inventory": {
+      "description": "repo_actual UNION ALL batch_package_examples",
+      "sources": ["repo_actual + multiple PR packages on disk"],
+      "use_case": "Multi-package batch PR or cumulative backfill"
+    },
+    "pending_evidence_only_inventory": {
+      "description": "Examples PR-ready/package-ready but NOT in target branch",
+      "sources": ["PR dry-run packages not yet merged"],
+      "use_case": "Evidence reporting only — MUST NOT appear in README present-tense sections"
+    }
+  },
+  "source_priority": [
+    "1. Target repo actual checkout (GitHub API / local clone) — highest",
+    "2. Post-merge validation JSON — second (verified after merge)",
+    "3. PR dry-run package on disk — third (verified locally)",
+    "4. Publication ledgers / evidence bundles — fourth (claims)",
+    "5. Memory / config files — lowest (hypotheses)"
+  ],
+  "hard_rule": "README 'Included Examples' MUST list ONLY examples present in the target branch after PR merge"
+}

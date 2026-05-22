@@ -1,0 +1,10 @@
+994992d chore(sprint35-bundle): add v6-validated evidence bundle and final git state artifacts
+c2417b6 feat(sprint35-bundle): add v6-validated evidence bundle and final git state artifacts
+1c337ad fix(readme-portfolio): generalize source-truth facts extraction and portfolio-wide README healing
+1a306be feat(sprint34-mega-swarm-publish-merge-system-backlog-new-family-discovery-and-portfolio-closeout): SPRINT34_APPROVAL_BLOCKED_MEGA_SWARM_SYSTEM_BACKLOG_RESOLVED_NEW_FAMILY_DISCOVERY_COMPLETE
+9ab7fbb chore(sprint33-bundle): add v6-validated evidence bundle and final git state artifacts
+3ef76c5 feat(sprint33-evidence-contract-v6): implement StrictEvidenceContractV6 with 67 categories and 21 new tests
+b7665d4 chore(sprint32-bundle): add v5-validated evidence bundle and final git state artifacts
+6b2a7b8 feat(sprint32-release-candidate-and-evidence-contract-v5): SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE
+7d54ee2 feat(sprint32-evidence-contract-v5): implement StrictEvidenceContractV5 closing V4 unstaged-source weakness
+0f44886 chore(sprint31-bundle): add v4-validated evidence bundle and final git state artifacts

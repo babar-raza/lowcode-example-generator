@@ -1,0 +1,36 @@
+{
+  "sprint": 45,
+  "generated_from_head": "13f4e93",
+  "next_actions": [
+    {
+      "priority": 1,
+      "action": "Set APPROVE_LIVE_PR and recreate PDF PRs #5-#10",
+      "reason": "All 6 PRs CONFLICTING on README.md. Local packages ready.",
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR"
+    },
+    {
+      "priority": 2,
+      "action": "Set APPROVE_MERGE_PR and merge conflict-free PDF PRs",
+      "reason": "14 examples awaiting publication",
+      "gate": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR"
+    },
+    {
+      "priority": 3,
+      "action": "Retest FormImporter when Aspose.PDF > 26.5.0 released",
+      "reason": "Library bug blocks FormImporter example (TC-PDF-FORMIMPORTER-RETEST)",
+      "gate": null
+    },
+    {
+      "priority": 4,
+      "action": "Recheck OCR/PSD NuGet dependencies",
+      "reason": "Both still 404 — periodic recheck",
+      "gate": null
+    },
+    {
+      "priority": 5,
+      "action": "Add loop idempotency detection to planner_loop.py",
+      "reason": "Loop repeats same actions 3x without detecting no-change state",
+      "gate": null
+    }
+  ]
+}

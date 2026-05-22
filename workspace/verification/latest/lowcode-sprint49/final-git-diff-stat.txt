@@ -1,0 +1,17 @@
+ src/plugin_examples/evidence_contract.py           | 78 +++++++++++++++++++++
+ src/plugin_examples/generator/code_generator.py    | 22 ++++--
+ src/plugin_examples/generator/packet_builder.py    | 40 ++++++++++-
+ src/plugin_examples/generator/project_generator.py | 38 ++++++++++-
+ src/plugin_examples/planner_loop.py                | 45 ++++++++++++
+ src/plugin_examples/runner.py                      | 38 +++++++----
+ src/plugin_examples/scenario_planner/planner.py    | 67 ++++++++++++++----
+ tests/unit/test_evidence_contract.py               | 79 ++++++++++++++++++++++
+ tests/unit/test_planner_loop.py                    | 59 ++++++++++++++++
+ .../latest/cells-readme-backfill-simulation.json   |  4 +-
+ .../latest/cells-root-readme-audit.json            |  2 +-
+ .../latest/cells-root-readme-render-result.json    |  2 +-
+ workspace/verification/latest/release-status.json  |  2 +-
+ .../latest/words-readme-backfill-simulation.json   |  4 +-
+ .../latest/words-root-readme-audit.json            |  2 +-
+ .../latest/words-root-readme-render-result.json    |  2 +-
+ 16 files changed, 442 insertions(+), 42 deletions(-)

@@ -1,0 +1,21 @@
+{
+  "sprint": 50,
+  "head": "5e66c8b",
+  "blocker_addressed": "B5_portfolio_wording",
+  "incorrect_wording": "42/42 published (100%)",
+  "correct_wording": {
+    "contract_parity": "42/42",
+    "published": 28,
+    "pr_ready": 14,
+    "summary": "42/42 contract parity, 28 published, 14 PR-ready"
+  },
+  "breakdown": {
+    "cells": {"published": 9, "pr_ready": 0},
+    "words": {"published": 8, "pr_ready": 0},
+    "pdf": {"published": 5, "pr_ready": 14},
+    "diagram": {"published": 2, "pr_ready": 0},
+    "email": {"published": 1, "pr_ready": 0},
+    "slides": {"published": 3, "pr_ready": 0}
+  },
+  "source": "portfolio-family-plugin-matrix.json from Sprint 49"
+}

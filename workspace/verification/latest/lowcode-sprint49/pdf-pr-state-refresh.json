@@ -1,0 +1,16 @@
+{
+  "sprint": 49,
+  "head": "a66dd75",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "prs_of_interest": {
+    "5": "CLOSED", "6": "CLOSED", "7": "CLOSED",
+    "8": "CLOSED", "9": "CLOSED", "10": "CLOSED"
+  },
+  "open_prs": 0,
+  "change_from_sprint48": "PRs #5-#10 were OPEN+CONFLICTING in Sprint 48, now CLOSED",
+  "merged_prs": [1, 2, 4, 11, 17, 18, 19, 20, 21],
+  "approval_gates": {"APPROVE_LIVE_PR": "ABSENT", "APPROVE_MERGE_PR": "ABSENT"},
+  "strategy_change": "Phase 2 (close PRs) is no longer needed. Strategy is now CREATE_NEW (skip close phase).",
+  "local_packages_exist": true,
+  "action": "APPROVAL_BLOCKED — runbook updated to skip close phase"
+}

@@ -1,0 +1,15 @@
+{
+  "sprint": 48,
+  "head": "57d1fe3",
+  "published": 28,
+  "pr_ready": 14,
+  "total": 42,
+  "families": {
+    "cells": {"published": 9, "pr_ready": 0},
+    "words": {"published": 8, "pr_ready": 0},
+    "pdf": {"published": 5, "pr_ready": 14},
+    "diagram": {"published": 2, "pr_ready": 0},
+    "email": {"published": 1, "pr_ready": 0},
+    "slides": {"published": 3, "pr_ready": 0}
+  }
+}

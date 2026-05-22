@@ -1,0 +1,14 @@
+{
+  "sprint": 51,
+  "head": "33beb18",
+  "sprint49_blockers": {
+    "B1_dirty_source": {"closed": true, "proof": "0 tracked source/test files dirty at HEAD 33beb18"},
+    "B2_test_failures": {"closed": true, "proof": "All 6 Sprint 49 failing tests pass (179/179 in rerun)"},
+    "B3_companion_proof": {"closed": true, "proof": "External companion proof SHA matches ZIP, verdict PASSED"},
+    "B4_manifest_self_hash": {"closed": true, "proof": "sha256-manifest.txt uses SELF marker; bundle-manifest.json excludes itself"},
+    "B5_portfolio_wording": {"closed": true, "proof": "Sprint 50 says 42/42 parity, 28 published, 14 PR-ready"},
+    "B6_planner_board": {"closed": true, "proof": "final-dirty-state shows 0 actionable; planner board mid-sprint snapshot is cosmetic"},
+    "B7_pdf_runbook": {"closed": true, "proof": "Sprint 50 runbook reflects CLOSED PRs and 4-phase recovery"}
+  },
+  "all_closed": true
+}

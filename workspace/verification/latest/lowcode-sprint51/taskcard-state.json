@@ -1,0 +1,17 @@
+{
+  "sprint": 51,
+  "head": "cc806a5",
+  "title": "Sprint 50 verification, Sprint 49 blocker closure, portfolio sweep",
+  "sprint50_verified": true,
+  "sprint49_blockers_closed": true,
+  "commits_in_scope": 2,
+  "commit_list": [
+    "33beb18 test(format-authority): add contract-first adoption test suite",
+    "cc806a5 fix(cells): update denominator hash for 26.5.1 catalog and fix _json NameError"
+  ],
+  "tests": {
+    "full": "2795 passed, 0 failed, 3 skipped",
+    "targeted": "489 passed"
+  },
+  "status": "COMPLETE"
+}

@@ -1,0 +1,30 @@
+{
+  "sprint": 48,
+  "lane": "A",
+  "title": "Evidence Contract Final-ZIP Validation Repair",
+  "problem": "Sprint 47 proof validated Sprint 46 bundle instead of Sprint 47 bundle",
+  "fix": "Added generate_validation_proof() function to evidence_contract.py",
+  "function_signature": "generate_validation_proof(zip_path, output_path=None) -> dict",
+  "guarantees": [
+    "Proof always names the exact ZIP path provided as input",
+    "Proof includes ZIP SHA256 for tamper detection",
+    "Proof includes validation timestamp",
+    "Proof records all contract metadata (name, version)",
+    "FileNotFoundError if ZIP does not exist"
+  ],
+  "regression_tests_added": 7,
+  "test_names": [
+    "test_proof_names_correct_zip_path",
+    "test_proof_includes_sha256",
+    "test_proof_writes_to_output_path",
+    "test_proof_fails_for_incomplete_bundle",
+    "test_proof_rejects_nonexistent_zip",
+    "test_proof_has_contract_metadata",
+    "test_proof_path_never_stale"
+  ],
+  "sprint47_retroactive_validation": {
+    "zip": "evidence-bundle-sprint47-20260519-134043.zip",
+    "sha256": "e4fd0c4ec9ca6e9dd18b248a6f5ec343cbe9a74abdd08b216b44f8dda485e38c",
+    "result": "PLANNER_CONTRACT_PASSED 17/17"
+  }
+}

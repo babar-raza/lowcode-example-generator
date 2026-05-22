@@ -1,0 +1,18 @@
+{
+  "sprint": 50,
+  "head": "5e66c8b",
+  "blocker_addressed": "B6_stale_planner_board",
+  "issue": "Sprint 49 final-planner-board captured before source/test commits, shows CLOSE_DIRTY_STATE",
+  "current_state": {
+    "source_dirty": 0,
+    "test_dirty": 0,
+    "evidence_dirty": 7,
+    "untracked": 2,
+    "actionable_dirty": 0
+  },
+  "planner_board_action": "CLOSE_DIRTY_STATE no longer applicable — no actionable source/test dirty state remains",
+  "head_consistency": {
+    "note": "All Sprint 50 final artifacts will be generated from actual final HEAD after commits",
+    "method": "check_head_consistency() verifies agreement"
+  }
+}

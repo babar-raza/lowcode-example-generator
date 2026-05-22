@@ -1,0 +1,19 @@
+{
+  "sprint": 45,
+  "lane": "0",
+  "sprint_under_review": 44,
+  "verdict": "SPRINT44_IV_PASSED",
+  "commits_verified": [
+    {"sha": "019d60d", "present": true},
+    {"sha": "3be5714", "present": true}
+  ],
+  "head_match": true,
+  "inter_session_dirty": [
+    {"file": ".gitignore", "classification": "SAFE_HYGIENE"},
+    {"file": "src/plugin_examples/portfolio_action_planner.py", "classification": "BUG_FIX"},
+    {"file": "src/plugin_examples/runner.py", "classification": "NEW_FUNCTIONALITY"},
+    {"file": "tests/unit/test_healing_intelligence_wiring.py", "classification": "NEW_TESTS"}
+  ],
+  "hygiene_caveats_count": 12,
+  "approval_gates": {"live_publish": "ABSENT", "merge_pr": "ABSENT"}
+}

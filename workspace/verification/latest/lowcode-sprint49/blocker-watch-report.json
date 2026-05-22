@@ -1,0 +1,11 @@
+{
+  "sprint": 49,
+  "head": "a66dd75",
+  "blockers": [
+    "FormImporter",
+    "OCR",
+    "PSD",
+    "Permanent(Timestamp,Ofd)"
+  ],
+  "resolved": []
+}

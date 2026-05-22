@@ -1,0 +1,18 @@
+{
+  "sprint": 47,
+  "captured_at_head": "cad1447",
+  "source_dirty_count": 0,
+  "config_dirty_count": 0,
+  "test_dirty_count": 0,
+  "evidence_dirty_count": 7,
+  "generated_artifact_count": 0,
+  "package_artifact_count": 0,
+  "unknown_dirty_count": 0,
+  "actionable_count": 0,
+  "source_files": [],
+  "config_files": [],
+  "test_files": [],
+  "package_artifact_files": [],
+  "unknown_files": [],
+  "note": "7 evidence"
+}

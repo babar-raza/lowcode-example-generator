@@ -1,0 +1,17 @@
+{
+  "sprint": 53,
+  "subject": "pdf-pr-state-refresh",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "open_prs": 0,
+  "merged_prs": [1, 2, 4, 11, 17, 18, 19, 20, 21],
+  "merged_pr_count": 9,
+  "closed_superseded_prs": [3, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16],
+  "published_examples": 19,
+  "pr_ready_local_examples": 0,
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  },
+  "note": "All 19 PDF pilot examples are now published via PRs #1,#2,#4,#11,#17-#21 (all merged). No further PR recovery needed.",
+  "pdf_pilot_complete": true
+}

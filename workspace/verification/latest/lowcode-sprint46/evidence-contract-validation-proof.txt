@@ -1,0 +1,27 @@
+Evidence Contract Validation Proof — Sprint 46
+================================================
+
+Contract: PlannerSprintEvidenceContract (planner-v1)
+Categories: 17 (PLANNER_SPRINT_CATEGORIES)
+
+This sprint produces a bundle validated by PlannerSprintEvidenceContract.
+Unlike Sprint 45 which claimed bundles were outside V7, Sprint 46
+introduces a proper planner sprint contract with 17 required categories.
+
+Required categories:
+  final_state_summary, final_next_actions, final_git_status,
+  final_git_log, final_git_diff_stat, final_changed_files,
+  test_full_log, test_targeted_log, planner_cycle_ledger,
+  planner_final_board, planner_loop_ledger, dirty_state_proof,
+  taskcard_state, local_metrics, bundle_manifest,
+  no_secret_proof, execution_ledger
+
+Content checks:
+  - final-state-summary.json: must have 'head' field
+  - final-next-actions.json: must have 'generated_from_head' field
+  - bundle-manifest.json: all files must have sha256
+
+Tests: 14 planner contract tests, all PASS
+Existing V1-V8 contracts: UNCHANGED
+
+Validation will be run against the final bundle.

@@ -1,0 +1,54 @@
+=== Final Git State ===
+HEAD: 22385f7
+Branch: main
+
+=== git status ===
+ M src/plugin_examples/evidence_contract.py
+ M src/plugin_examples/publisher/readme_auditor.py
+ M tests/unit/test_evidence_contract.py
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? leg.zip
+?? tests/unit/test_readme_auditor_semantic.py
+
+=== git log -10 ===
+22385f7 feat(format-lifecycle): finalize format display and classifier refinements
+90b247d fix(closure-repair): MailMerger classifier ordering, conservation equation completeness
+1add673 test(denominator): expand to all 6 families, add conservation equation, fix schema
+0a4e695 feat(format-lifecycle): add format capability module, advisory output validation, and 5 test suites
+bd20048 feat(sprint39): add PDF contracts, reconcile Cells/Diagram version drift
+fe716de chore(state): close sprint38 family denominator reconciliation
+a474b97 feat(sprint37-bundle): add v7-validated evidence bundle and final git state artifacts
+3f5db16 chore(hygiene): sync verification/latest with cumulative 6-family discovery output
+eec05f6 chore(post-publication-hygiene): sync pipeline outputs, add Sprint 37 verdicts, remove superseded bundle
+75621df feat(sprint34-readme-healing): implement cumulative README sync with per-branch inventory modes and staleness gates
+
+=== git diff --stat ===
+ src/plugin_examples/evidence_contract.py           | 175 +++++++++++++++++++++
+ src/plugin_examples/publisher/readme_auditor.py    |  66 ++++++++
+ tests/unit/test_evidence_contract.py               | 118 ++++++++++++++
+ .../latest/cells-readme-backfill-simulation.json   |   4 +-
+ .../latest/cells-root-readme-audit.json            |   2 +-
+ .../latest/cells-root-readme-render-result.json    |   2 +-
+ workspace/verification/latest/release-status.json  |   4 +-
+ .../latest/words-readme-backfill-simulation.json   |   4 +-
+ .../latest/words-root-readme-audit.json            |   2 +-
+ .../latest/words-root-readme-render-result.json    |   2 +-
+ 10 files changed, 369 insertions(+), 10 deletions(-)
+
+=== git diff --name-only ===
+src/plugin_examples/evidence_contract.py
+src/plugin_examples/publisher/readme_auditor.py
+tests/unit/test_evidence_contract.py
+workspace/verification/latest/cells-readme-backfill-simulation.json
+workspace/verification/latest/cells-root-readme-audit.json
+workspace/verification/latest/cells-root-readme-render-result.json
+workspace/verification/latest/release-status.json
+workspace/verification/latest/words-readme-backfill-simulation.json
+workspace/verification/latest/words-root-readme-audit.json
+workspace/verification/latest/words-root-readme-render-result.json

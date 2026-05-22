@@ -1,0 +1,19 @@
+{
+  "sprint": 43,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "equations": {
+    "cells": {"roots_plus_nonrunnable_eq_total": "9+13=22 PASS", "published_plus_pending_eq_pilot": "9+0=9 PASS", "contracts_eq_pilot": "9=9 PASS"},
+    "words": {"roots_plus_nonrunnable_eq_total": "9+16=25 PASS", "published_plus_pending_eq_pilot": "8+0=8 PASS", "contracts_eq_pilot": "8=8 PASS"},
+    "pdf": {"roots_plus_nonrunnable_eq_total": "22+79=101 PASS", "published_plus_pr_ready_eq_pilot": "5+14=19 PASS", "contracts_eq_pilot": "19=19 PASS"},
+    "diagram": {"roots_plus_nonrunnable_eq_total": "2+3=5 PASS", "published_plus_pending_eq_pilot": "2+0=2 PASS", "contracts_eq_pilot": "2=2 PASS"},
+    "email": {"roots_plus_nonrunnable_eq_total": "1+2=3 PASS", "published_plus_pending_eq_pilot": "1+0=1 PASS", "contracts_eq_pilot": "1=1 PASS"},
+    "slides": {"roots_plus_nonrunnable_eq_total": "3+2=5 PASS", "published_plus_pending_eq_pilot": "3+0=3 PASS", "contracts_eq_pilot": "3=3 PASS"}
+  },
+  "cross_family": {
+    "total_contracts": 42, "total_pilot": 42, "total_published": 28, "total_pr_ready": 14,
+    "contracts_eq_pilot": "42=42 PASS",
+    "published_plus_pr_ready_eq_contracts": "28+14=42 PASS"
+  },
+  "silent_drop_check": "PASS — no planned runnable example silently dropped",
+  "all_pass": true
+}

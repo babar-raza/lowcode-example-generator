@@ -1,0 +1,15 @@
+{
+  "sprint": 53,
+  "subject": "planner-action-state-semantics-repair",
+  "commit": "f216bd7",
+  "changes": [
+    "Added execution_state field to Action (safe_unexecuted, safe_executed_changed, safe_executed_noop, recurring_check_satisfied, blocked_by_approval, blocked_by_dependency, blocked_by_design_review, permanently_blocked)",
+    "Added RECURRING_CHECK_IDS frozenset for read-only recurring checks",
+    "Added mark_executed() to ActionBoard to update execution_state after planner loop",
+    "Added next_required_actions() that excludes executed no-ops",
+    "Blocked actions now get proper blocked_by_* execution_state on creation"
+  ],
+  "tests_added": 10,
+  "tests_pass": 71,
+  "gap_status": "CLOSED"
+}

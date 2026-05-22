@@ -1,0 +1,40 @@
+{
+  "report_type": "sprint53-iv-report",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "verifying_sprint": 53,
+  "s53_zip_sha256_claimed": "a6c89038453a2e1adc5d52d5099bd0f3b18e1cc3f05984914aa7fbbb4783be0a",
+  "s53_zip_sha256_actual": "a6c89038453a2e1adc5d52d5099bd0f3b18e1cc3f05984914aa7fbbb4783be0a",
+  "s53_zip_sha256_match": true,
+  "s53_companion_verdict": "PLANNER_CONTRACT_PASSED",
+  "s53_head_claimed": "f216bd7",
+  "current_head": "ccb45a9",
+  "s53_tests_claimed": {
+    "passed": 2807,
+    "skipped": 3,
+    "failed": 0
+  },
+  "s53_portfolio_claimed": {
+    "published": 42,
+    "pr_ready": 0,
+    "contracts": 42
+  },
+  "portfolio_now": {
+    "published": 42,
+    "pr_ready": 0,
+    "contracts": 42,
+    "all_published": true
+  },
+  "pdf_denominator": {
+    "published_count": 19,
+    "pr_dry_run_ready_count": 0
+  },
+  "dirty_state": {
+    "total_dirty": 82,
+    "source_dirty": 0,
+    "workspace_dirty": 82,
+    "classification": "ALL_WORKSPACE_EVIDENCE"
+  },
+  "blockers": [],
+  "verdict": "SPRINT53_VERIFIED"
+}

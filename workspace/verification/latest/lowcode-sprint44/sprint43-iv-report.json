@@ -1,0 +1,32 @@
+{
+  "sprint": 44,
+  "lane": "0",
+  "sprint_under_review": 43,
+  "verdict": "SPRINT43_IV_PASSED",
+  "commits_verified": [
+    {"sha": "98f019b", "present": true},
+    {"sha": "f6a9376", "present": true}
+  ],
+  "inter_session_commits": [
+    {"sha": "0f07faa", "subject": "fix(tests): update backlogged count and consolidate PDF merged assertions"},
+    {"sha": "3d0e231", "subject": "fix(queue): reclassify 3 diagram OPTIONS entries and sync queue metadata"},
+    {"sha": "bb24af9", "subject": "feat(mega-train): add 19-file evidence bundle for operations mega train sprint"}
+  ],
+  "hygiene_caveats": [
+    {
+      "id": "MISSING_GIT_PROOF_FILES",
+      "severity": "MEDIUM",
+      "repair_lane": "H"
+    },
+    {
+      "id": "STALE_CLOSE_DIRTY_STATE",
+      "severity": "LOW",
+      "repair_lane": "A"
+    },
+    {
+      "id": "NO_CONFLICT_RECOVERY_ACTION",
+      "severity": "MEDIUM",
+      "repair_lane": "A"
+    }
+  ]
+}

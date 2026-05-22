@@ -1,0 +1,40 @@
+{
+  "sprint": 45,
+  "blockers": {
+    "formimporter": {
+      "taskcard": "TC-PDF-FORMIMPORTER-RETEST",
+      "family": "pdf",
+      "blocked_by": "Aspose.PDF 26.5.0 bug — FormImporter crashes",
+      "latest_version": "26.5.0",
+      "still_blocked": true,
+      "action": "retest when Aspose.PDF > 26.5.0 available"
+    },
+    "ocr": {
+      "taskcard": "TC-OCR-REFLECTION",
+      "family": "ocr",
+      "blocked_by": "Aspose.AI.LLM not published on NuGet (404)",
+      "http_status": 404,
+      "still_blocked": true,
+      "action": "periodic NuGet recheck"
+    },
+    "psd": {
+      "taskcard": "TC-PSD-REFLECTION",
+      "family": "psd",
+      "blocked_by": "Aspose.JavaAttributes not published on NuGet (404)",
+      "http_status": 404,
+      "still_blocked": true,
+      "action": "periodic NuGet recheck"
+    },
+    "permanently_blocked": {
+      "roots": ["Timestamp", "Ofd"],
+      "reason": "API surface incompatible with LowCode plugin pattern",
+      "status": "confirmed_unchanged"
+    }
+  },
+  "pdf_pr_conflict": {
+    "prs": [5, 6, 7, 8, 9, 10],
+    "all_conflicting": true,
+    "conflict_file": "README.md",
+    "recovery_blocked_by": "APPROVE_LIVE_PR gate absent"
+  }
+}

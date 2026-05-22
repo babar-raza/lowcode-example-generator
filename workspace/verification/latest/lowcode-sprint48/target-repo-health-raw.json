@@ -1,0 +1,12 @@
+{
+  "sprint": 48,
+  "repos": {
+    "cells": {"repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true},
+    "words": {"repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true},
+    "pdf": {"repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true},
+    "diagram": {"repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true},
+    "email": {"repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true},
+    "slides": {"repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples", "default_branch": "main", "accessible": true}
+  },
+  "all_healthy": true
+}

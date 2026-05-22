@@ -1,0 +1,22 @@
+{
+  "sprint": 51,
+  "head": "33beb18",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "prs_queried": [5, 6, 7, 8, 9, 10],
+  "all_closed_not_merged": true,
+  "open_prs": 0,
+  "replacement_prs_exist": false,
+  "local_packages_verified": 6,
+  "local_package_paths": [
+    "workspace/pr-dry-run/pdf-controlled-pilot/",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/"
+  ],
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  }
+}

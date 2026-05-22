@@ -1,0 +1,12 @@
+{
+  "sprint": 53,
+  "subject": "pdf-approval-runbook",
+  "status": "NOT_APPLICABLE",
+  "reason": "All 19 PDF pilot examples are published. No PR recovery needed.",
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  },
+  "ready_to_execute": false,
+  "note": "Runbook retained for future version-drift updates only."
+}

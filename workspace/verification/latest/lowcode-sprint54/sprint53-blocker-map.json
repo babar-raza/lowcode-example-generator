@@ -1,0 +1,46 @@
+{
+  "report_type": "sprint53-blocker-map",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint_source": 53,
+  "blockers": [
+    {
+      "id": "B1",
+      "desc": "Dirty test files committed at sprint54/ccb45a9 \u2014 RESOLVED"
+    },
+    {
+      "id": "B2",
+      "desc": "CLOSE_DIRTY_STATE after test commit \u2014 RESOLVED (workspace files are evidence/artifacts)"
+    },
+    {
+      "id": "B3",
+      "desc": "Bundle manifest stale (50 vs 53 entries) \u2014 MUST FIX"
+    },
+    {
+      "id": "B4",
+      "desc": "Sprint 53 no external companion validation proof \u2014 RESOLVED (validation.json present, verdict PLANNER_CONTRACT_PASSED)"
+    },
+    {
+      "id": "B5",
+      "desc": "PDF publication jump 5\u219219 \u2014 MUST VERIFY via target repo"
+    },
+    {
+      "id": "B6",
+      "desc": "release-status PDF last_pr_url references PR #4 \u2014 MUST REPAIR"
+    },
+    {
+      "id": "B7",
+      "desc": "portfolio-release-status family verdicts UNKNOWN \u2014 MUST REPAIR"
+    }
+  ],
+  "resolved": [
+    "B1",
+    "B2",
+    "B4"
+  ],
+  "pending": [
+    "B3",
+    "B5",
+    "B6",
+    "B7"
+  ]
+}

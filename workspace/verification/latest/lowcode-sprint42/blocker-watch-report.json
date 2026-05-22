@@ -1,0 +1,80 @@
+{
+  "sprint": 42,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "blockers": [
+    {
+      "id": "BLOCKER-PDF-PR-MERGE",
+      "family": "pdf",
+      "severity": "HIGH",
+      "description": "6 PDF PRs (#5-#10) awaiting human merge",
+      "gate": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+      "gate_set": false,
+      "impact": "14 examples stuck at PR_DRY_RUN_READY",
+      "resolution": "Set approval gate and run merge-pr command",
+      "since": "2026-05-17T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PDF-FORMIMPORTER",
+      "family": "pdf",
+      "severity": "MEDIUM",
+      "description": "FormImporter blocked by Aspose.PDF 26.5.0 bug",
+      "taskcard": "TC-PDF-FORMIMPORTER-RETEST",
+      "impact": "1 Wave H scenario deferred",
+      "resolution": "Await Aspose.PDF 26.6.0 or newer with fix",
+      "since": "2026-05-17T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PDF-TIMESTAMP",
+      "family": "pdf",
+      "severity": "LOW",
+      "description": "Timestamp requires external TSA ServerUrl",
+      "impact": "PERMANENTLY_BLOCKED — cannot programmatically test",
+      "resolution": "N/A (external dependency)",
+      "since": "2026-05-16T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PDF-OFD",
+      "family": "pdf",
+      "severity": "LOW",
+      "description": "Ofd requires OFD input format with no programmatic fixture",
+      "impact": "PERMANENTLY_BLOCKED",
+      "resolution": "N/A (no fixture strategy)",
+      "since": "2026-05-16T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-WORDS-PROCESSOR",
+      "family": "words",
+      "severity": "LOW",
+      "description": "Processor has no public constructor and no static entrypoint",
+      "impact": "PERMANENTLY_BLOCKED — 1 runnable root unreachable",
+      "resolution": "Requires Aspose.Words upgrade with public constructor or factory",
+      "since": "2026-05-13T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-OCR-DEPENDENCY",
+      "family": "ocr",
+      "severity": "MEDIUM",
+      "description": "Aspose.AI.LLM internal assembly not available on NuGet",
+      "impact": "Cannot complete reflection — LowCode namespace existence UNKNOWN",
+      "resolution": "Await Aspose.AI.LLM package availability",
+      "since": "2026-05-09T00:00:00Z"
+    },
+    {
+      "id": "BLOCKER-PSD-DEPENDENCY",
+      "family": "psd",
+      "severity": "MEDIUM",
+      "description": "Aspose.JavaAttributes internal assembly not available on NuGet",
+      "impact": "Cannot complete reflection — LowCode namespace existence UNKNOWN",
+      "resolution": "Await Aspose.JavaAttributes package availability",
+      "since": "2026-05-09T00:00:00Z"
+    }
+  ],
+  "new_untracked_concurrent_work": [
+    "tests/unit/test_healing_intelligence_loader.py",
+    "tests/unit/test_llm_router_preflight.py",
+    "tests/unit/test_metrics_collector.py",
+    "tests/unit/test_provider_policy.py",
+    "tests/unit/test_safety_governance.py"
+  ],
+  "concurrent_work_note": "5 new untracked test files from inter-session commit b0fee12. Classified as CONCURRENT_WORK, not touched."
+}

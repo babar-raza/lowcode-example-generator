@@ -1,0 +1,66 @@
+{
+  "sprint": 48,
+  "verdict": "SPRINT48_COMPLETE_FINAL_ZIP_VALIDATION_REPAIRED",
+  "head": "f94cb97",
+  "head_full": "f94cb9714f3260cbf1ab91e0219a4a83ebbd4218",
+  "branch": "main",
+  "tests": {
+    "total": 2506,
+    "passed": 2506,
+    "skipped": 3,
+    "failed": 0
+  },
+  "targeted_tests": {
+    "total": 467,
+    "passed": 467
+  },
+  "commits_this_sprint": [
+    {"sha": "57d1fe3", "msg": "feat(evidence): add generate_validation_proof() for structured bundle validation"},
+    {"sha": "f94cb97", "msg": "feat(proof): add cross-family AI pipeline matrix proof script"}
+  ],
+  "portfolio": {
+    "total_contracts": 42,
+    "total_pilot": 42,
+    "published": 28,
+    "pr_ready": 14,
+    "conservation": "ALL PASS"
+  },
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  },
+  "final_planner_board": {
+    "generated_from_head": "57d1fe3",
+    "actions": 8,
+    "safe": 6,
+    "blocked": 2,
+    "close_dirty_state": false,
+    "actionable_dirty_count": 0
+  },
+  "planner_loop": {
+    "cycles": 2,
+    "stop_reason": "stopped_no_change",
+    "board_fingerprint": "f77d53731da8ea4e",
+    "cycle2_handlers_executed": 0
+  },
+  "dirty_state": {
+    "source_dirty_count": 0,
+    "config_dirty_count": 0,
+    "test_dirty_count": 0,
+    "evidence_dirty_count": 1,
+    "package_artifact_count": 0,
+    "unknown_dirty_count": 0,
+    "generated_artifact_count": 0,
+    "actionable_count": 0
+  },
+  "sprint47_critical_finding_fixed": "evidence-contract-validation-proof.json now validates and names the correct Sprint 48 ZIP",
+  "key_deliverables": [
+    "generate_validation_proof(): structured bundle validation with explicit ZIP path and SHA256",
+    "7 regression tests for validation proof correctness",
+    "Sprint 47 ZIP retroactively validated: PLANNER_CONTRACT_PASSED 17/17",
+    "Sprint 48 ZIP validated with correct path binding",
+    "6-phase PDF approval runbook refreshed (PRs #17-#21 merged discovered)",
+    "All planner loop regressions pass (pre-execution idempotency intact)",
+    "2506 tests passing (+7 from Sprint 47)"
+  ]
+}

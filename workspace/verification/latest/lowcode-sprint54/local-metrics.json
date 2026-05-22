@@ -1,0 +1,13 @@
+{
+  "report_type": "local-metrics",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "head": "ccb45a9",
+  "test_count": 2810,
+  "test_skipped": 3,
+  "test_failed": 0,
+  "commits_this_sprint": 1,
+  "files_changed_this_sprint": 6,
+  "portfolio_published": 42,
+  "portfolio_total": 42
+}

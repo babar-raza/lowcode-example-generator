@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-05-19T06:05:29Z",
+  "overall_verdict": "DRIFT_DETECTED",
+  "drifted_count": 2,
+  "current_count": 4,
+  "error_count": 0,
+  "families": [
+    {"family": "cells", "denominator": "26.4.0", "latest": "26.5.1", "drift": true, "severity": "MAJOR", "pilot": "PASS"},
+    {"family": "words", "denominator": "26.5.0", "latest": "26.5.0", "drift": false, "severity": "NONE"},
+    {"family": "pdf", "denominator": "26.5.0", "latest": "26.5.0", "drift": false, "severity": "NONE"},
+    {"family": "diagram", "denominator": "26.4.0", "latest": "26.5.0", "drift": true, "severity": "MAJOR", "pilot": "PASS"},
+    {"family": "email", "denominator": "26.4.0", "latest": "26.4.0", "drift": false, "severity": "NONE"},
+    {"family": "slides", "denominator": "26.5.0", "latest": "26.5.0", "drift": false, "severity": "NONE"}
+  ]
+}

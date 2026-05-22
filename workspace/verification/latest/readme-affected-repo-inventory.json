@@ -1,0 +1,118 @@
+{
+  "audit_type": "readme_affected_repo_inventory",
+  "created_at": "2026-05-18T16:00:00Z",
+  "sprint": "Sprint 34 — README Production Gap Healing",
+  "families": {
+    "cells": {
+      "owner": "aspose-cells-net",
+      "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": [
+        "html-converter", "image-converter", "json-converter", "pdf-converter",
+        "spreadsheet-converter", "spreadsheet-locker", "spreadsheet-merger",
+        "spreadsheet-splitter", "text-converter"
+      ],
+      "repo_actual_count": 9,
+      "source": "post-merge-clean-checkout-validation",
+      "pr_package_examples": [
+        "html-converter", "image-converter", "json-converter", "pdf-converter",
+        "spreadsheet-converter", "spreadsheet-locker", "spreadsheet-merger",
+        "spreadsheet-splitter", "text-converter"
+      ],
+      "pr_package_count": 9,
+      "pr_packages": ["cells-controlled-pilot"],
+      "status": "FAMILY_COMPLETE"
+    },
+    "words": {
+      "owner": "aspose-words-net",
+      "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": [
+        "converter", "watermarker", "splitter", "replacer",
+        "merger", "comparer", "mail-merger", "report-builder"
+      ],
+      "repo_actual_count": 8,
+      "source": "post-merge-clean-checkout-validation (4) + subsequent merge results (4 more via PR#5, PR#6)",
+      "source_notes": "Post-merge JSON shows 4 (converter, watermarker, splitter, replacer). Words has 8 total published from merged PRs.",
+      "pr_package_examples": [
+        "comparer", "converter", "mail-merger", "merger",
+        "replacer", "report-builder", "splitter", "watermarker"
+      ],
+      "pr_package_count": 8,
+      "pr_packages": ["words-controlled-pilot", "words-report-builder"],
+      "status": "PILOT_COMPLETE"
+    },
+    "pdf": {
+      "owner": "aspose-pdf-net",
+      "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": [
+        "merger", "text-extractor", "pdfa-converter", "splitter", "optimizer"
+      ],
+      "repo_actual_count": 5,
+      "source": "post-merge-clean-checkout-validation (merger, text-extractor from PR#1) + PR#4 merge (pdfa-converter, splitter, optimizer)",
+      "pr_package_examples": [
+        "doc-converter", "form-editor", "form-exporter", "form-flattener",
+        "html", "image-extractor", "jpeg", "merger", "optimizer", "png",
+        "security", "signature", "splitter", "table-generator", "tiff",
+        "toc-generator", "xls-converter"
+      ],
+      "pr_package_count": 17,
+      "pr_packages": [
+        "pdf-controlled-pilot", "pdf-controlled-pilot-wave1",
+        "pdf-controlled-pilot-pr5", "pdf-controlled-pilot-pr6",
+        "pdf-controlled-pilot-pr7", "pdf-controlled-pilot-pr8",
+        "pdf-controlled-pilot-pr9"
+      ],
+      "pending_pr_examples": [
+        "doc-converter", "form-editor", "form-exporter", "form-flattener",
+        "html", "image-extractor", "jpeg", "png", "security", "signature",
+        "table-generator", "tiff", "toc-generator", "xls-converter"
+      ],
+      "pending_pr_count": 14,
+      "status": "PARTIAL_CANARY"
+    },
+    "diagram": {
+      "owner": "aspose-diagram-net",
+      "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": ["diagram-diagram-converter", "diagram-pdf-converter"],
+      "repo_actual_count": 2,
+      "source": "post-merge-clean-checkout-validation",
+      "pr_package_examples": ["diagram-diagram-converter", "diagram-pdf-converter"],
+      "pr_package_count": 2,
+      "pr_packages": ["diagram-controlled-pilot"],
+      "status": "PILOT_COMPLETE"
+    },
+    "email": {
+      "owner": "aspose-email-net",
+      "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": ["converter"],
+      "repo_actual_count": 1,
+      "source": "email-merge-result (SHA: 023ad66970d2)",
+      "pr_package_examples": ["converter"],
+      "pr_package_count": 1,
+      "pr_packages": ["email-controlled-pilot"],
+      "status": "PILOT_COMPLETE"
+    },
+    "slides": {
+      "owner": "aspose-slides-net",
+      "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "main",
+      "repo_actual_examples": ["compress", "convert", "merger"],
+      "repo_actual_count": 3,
+      "source": "slides-merge-result (SHA: bf05fc43124f)",
+      "pr_package_examples": ["compress", "convert", "merger"],
+      "pr_package_count": 3,
+      "pr_packages": ["slides-controlled-pilot"],
+      "status": "PILOT_COMPLETE"
+    }
+  },
+  "totals": {
+    "total_published": 28,
+    "total_in_pr_packages": 42,
+    "total_pending_pr": 14,
+    "families_audited": 6
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "loaded": true,
+  "registries": {
+    "bootstrap": true,
+    "failure_patterns": true,
+    "repair_patterns": true,
+    "semantic_steering": true,
+    "validator_patterns": true
+  },
+  "constraints_applied": [
+    {
+      "scenario_id": "email-converter",
+      "type": "Converter",
+      "hi_required": [
+        "REQUIRED: Converter.Convert( \u2014 primary LowCode call (static)",
+        "using Aspose.Email.LowCode;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: MailMessage.Save() replacing Converter.Convert()",
+        "FORBIDDEN: MailMessage.Save() as primary conversion \u2014 use LowCode Converter.Convert()"
+      ]
+    }
+  ]
+}

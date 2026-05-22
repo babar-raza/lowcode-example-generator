@@ -1,0 +1,11 @@
+{
+  "report_type": "pdf-state-reconciliation",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "published": 19,
+  "pr_ready": 0,
+  "total_contracts": 19,
+  "conservation": "19 + 0 = 19",
+  "sources_consistent": true,
+  "verdict": "CONSISTENT_ALL_PUBLISHED"
+}

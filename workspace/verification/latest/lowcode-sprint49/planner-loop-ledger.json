@@ -1,0 +1,79 @@
+{
+  "total_cycles": 2,
+  "total_executed": 6,
+  "total_deferred": 1,
+  "stop_reason": "stopped_no_change",
+  "cycles": [
+    {
+      "cycle": 1,
+      "generated_from_head": "a66dd75",
+      "board_fingerprint": "43ea34bcc9f1d2a1",
+      "action_count": 9,
+      "safe_count": 7,
+      "blocked_count": 2,
+      "executed": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "changed_actions": [],
+      "noop_actions": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "deferred": [
+        {
+          "id": "CLOSE_DIRTY_STATE",
+          "reason": "no handler implemented",
+          "taskcard_id": ""
+        }
+      ],
+      "commit_sha": null,
+      "verdict": "EXECUTED_6_ACTIONS",
+      "duration_ms": 2035
+    },
+    {
+      "cycle": 2,
+      "generated_from_head": "a66dd75",
+      "board_fingerprint": "43ea34bcc9f1d2a1",
+      "action_count": 9,
+      "safe_count": 7,
+      "blocked_count": 2,
+      "executed": [],
+      "changed_actions": [],
+      "noop_actions": [],
+      "deferred": [],
+      "commit_sha": null,
+      "verdict": "IDEMPOTENT_NO_CHANGE",
+      "duration_ms": 97
+    }
+  ],
+  "final_dirty_state": {
+    "source_dirty_count": 2,
+    "config_dirty_count": 0,
+    "test_dirty_count": 2,
+    "evidence_dirty_count": 7,
+    "generated_artifact_count": 0,
+    "package_artifact_count": 0,
+    "unknown_dirty_count": 0,
+    "actionable_count": 4,
+    "source_files": [
+      "src/plugin_examples/evidence_contract.py",
+      "src/plugin_examples/format_authority/"
+    ],
+    "config_files": [],
+    "test_files": [
+      "tests/unit/test_evidence_contract.py",
+      "tests/unit/test_format_authority_store.py"
+    ],
+    "package_artifact_files": [],
+    "unknown_files": []
+  }
+}

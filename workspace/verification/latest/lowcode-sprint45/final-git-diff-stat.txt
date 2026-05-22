@@ -1,0 +1,22 @@
+ .../examples/pdf/lowcode/jpeg/input.pdf            | Bin 28837 -> 28837 bytes
+ .../examples/pdf/lowcode/png/input.pdf             | Bin 28837 -> 28837 bytes
+ .../examples/pdf/lowcode/tiff/input.pdf            | Bin 28837 -> 28837 bytes
+ .../examples/pdf/lowcode/image-extractor/input.pdf | Bin 29677 -> 29677 bytes
+ .../examples/pdf/lowcode/table-generator/input.pdf | Bin 28837 -> 28837 bytes
+ .../pdf/lowcode/table-generator/output.pdf         | Bin 57535 -> 57535 bytes
+ .../examples/pdf/lowcode/toc-generator/input.pdf   | Bin 28837 -> 28837 bytes
+ .../examples/pdf/lowcode/toc-generator/output.pdf  | Bin 56988 -> 56988 bytes
+ .../examples/pdf/lowcode/form-editor/input.pdf     | Bin 29532 -> 29532 bytes
+ .../examples/pdf/lowcode/form-editor/output.pdf    | Bin 56996 -> 56996 bytes
+ .../examples/pdf/lowcode/form-exporter/input.pdf   | Bin 29531 -> 29531 bytes
+ .../examples/pdf/lowcode/signature/input.pdf       | Bin 29367 -> 29367 bytes
+ .../examples/pdf/lowcode/signature/output.pdf      | Bin 616498 -> 616462 bytes
+ .../examples/pdf/lowcode/signature/test.pfx        | Bin 2374 -> 2374 bytes
+ .../latest/cells-readme-backfill-simulation.json   |   4 ++--
+ .../latest/cells-root-readme-audit.json            |   2 +-
+ .../latest/cells-root-readme-render-result.json    |   2 +-
+ workspace/verification/latest/release-status.json  |   2 +-
+ .../latest/words-readme-backfill-simulation.json   |   4 ++--
+ .../latest/words-root-readme-audit.json            |   2 +-
+ .../latest/words-root-readme-render-result.json    |   2 +-
+ 21 files changed, 9 insertions(+), 9 deletions(-)

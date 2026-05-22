@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-05-19T06:45:53.045755+00:00",
+  "current_installed_version": null,
+  "latest_nuget_version": "26.5.0",
+  "defect_version": "26.5.0",
+  "version_advanced_beyond_defect": false,
+  "retest_triggered": false,
+  "retest_passed": null,
+  "retest_exit_code": null,
+  "retest_output_excerpt": null,
+  "verdict": "STILL_BLOCKED",
+  "notes": [
+    "Could not determine installed Aspose.PDF version from Directory.Packages.props",
+    "NuGet latest 26.5.0 <= defect version 26.5.0 \u2014 still blocked"
+  ],
+  "taskcard": "TC-PDF-FORMIMPORTER-RETEST",
+  "defect_repro_path": "workspace/defect-repros/pdf-formimporter-nullref"
+}

@@ -1,0 +1,11 @@
+{
+  "report_type": "planner-regression",
+  "generated_at": "2026-05-20T13:48:54.282366+00:00",
+  "sprint": 53,
+  "planner_cycles_run": 2,
+  "cycle1_next_required": 0,
+  "cycle2_next_required": 0,
+  "all_safe_exhausted": true,
+  "blocked_remain": 0,
+  "verdict": "PLANNER_EXHAUSTED"
+}

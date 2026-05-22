@@ -1,0 +1,12 @@
+{
+  "sprint": 43,
+  "lane": "B",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "status": "BLOCKED_DUAL",
+  "blockers": ["approval_gate_absent", "all_prs_conflicting"],
+  "prs_attempted": 0,
+  "prs_merged": 0,
+  "prs_remaining": [5, 6, 7, 8, 9, 10],
+  "new_finding": "All 6 PRs changed from MERGEABLE to CONFLICTING since Sprint 42. PR conflict resolution required before merge can proceed.",
+  "taskcard": "TC-PDF-PR-CONFLICT-RESOLUTION"
+}

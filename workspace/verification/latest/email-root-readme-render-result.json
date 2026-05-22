@@ -1,0 +1,16 @@
+{
+  "render_type": "root_readme_render_result",
+  "render_date": "2026-05-18 14:58 UTC",
+  "family": "email",
+  "package_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\email-controlled-pilot",
+  "readme_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\pr-dry-run\\email-controlled-pilot\\README.md",
+  "readme_bytes": 5935,
+  "package_version": "26.4.0",
+  "examples_count": 1,
+  "example_names": [
+    "converter"
+  ],
+  "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+  "audit_passed": true,
+  "no_remote_write_performed": true
+}

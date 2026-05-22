@@ -1,0 +1,10 @@
+{
+  "sprint": 46,
+  "status": "BLOCKED",
+  "reason": "APPROVE_LIVE_PR gate absent",
+  "prs_updated": 0,
+  "prs_created": 0,
+  "prs_closed": 0,
+  "local_packages_ready": 6,
+  "recovery_packet_ready": true
+}

@@ -1,0 +1,99 @@
+{
+  "audit_type": "readme_manual_edit_forensic",
+  "created_at": "2026-05-18T17:30:00Z",
+  "sprint": "Sprint 34 — README Production Gap Healing (CLOSURE REPAIR)",
+  "method": "GitHub API commit history: gh api repos/{owner}/{repo}/commits?path=README.md",
+  "gh_authenticated": true,
+  "prior_version_error": "Original forensic record (created_at 2026-05-18T16:00:00Z) used local evidence only and reported 'No manual README edits detected.' This was incorrect. GitHub API reveals manual edits on Words and PDF repos.",
+  "per_repo_analysis": {
+    "words": {
+      "readme_commits": [
+        {"sha": "1b9f4e7", "date": "2026-05-18T11:30:40Z", "author": "Babar Raza", "message": "fix(readme): regenerate with verified API method claims and source snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "6a5f20a", "date": "2026-05-18T10:01:30Z", "author": "Babar Raza", "message": "fix(readme): regenerate with source-truth format claims and code snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "14e3eb8", "date": "2026-05-18T08:06:27Z", "author": "Babar Raza", "message": "Update README.md", "classification": "MANUAL_EDIT"},
+        {"sha": "a290858", "date": "2026-05-14T06:00:16Z", "author": "Babar Raza", "message": "Add verified Aspose.Words LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "37817bb", "date": "2026-05-13T15:29:58Z", "author": "Babar Raza", "message": "Add verified Aspose.Words LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "3d4c4b7", "date": "2026-05-05T06:39:19Z", "author": "Babar Raza", "message": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "55251ec", "date": "2026-05-04T09:23:28Z", "author": "Babar Raza", "message": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "62cfca5", "date": "2026-05-04T06:08:44Z", "author": "Babar Raza", "message": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "fe697a4", "date": "2026-05-01T11:32:41Z", "author": "Babar Raza", "message": "Initial commit", "classification": "GITHUB_AUTO_INIT"}
+      ],
+      "manual_edits_found": true,
+      "manual_edit_details": {
+        "commit": "14e3eb8",
+        "date": "2026-05-18T08:06:27Z",
+        "what_changed": "Added 7 missing example rows to the Included Examples table (comparer, converter, mail-merger, merger, replacer, splitter, watermarker) and their corresponding directory tree entries. Only report-builder was already listed. +21 lines, -0 lines.",
+        "intent": "The maintainer manually expanded the README example table to include all 8 published examples, fixing the same per-package gap that Sprint 34 addresses programmatically.",
+        "content_preserved_by_subsequent_pipeline": "YES — commit 6a5f20a (pipeline, 2 hours later) and 1b9f4e7 (pipeline, 3.5 hours later) fully regenerated the README with source-truth facts and code snippets. The manual edit was superseded."
+      },
+      "current_remote_state": "README at HEAD (1b9f4e7) is pipeline-generated, not the manual edit. The manual edit is buried under two subsequent pipeline commits.",
+      "preservation_action": "Full replacement safe — manual edit content is a strict subset of what the pipeline generates. The pipeline version includes verified source code snippets that the manual version lacked."
+    },
+    "pdf": {
+      "readme_commits": [
+        {"sha": "e49ea8a", "date": "2026-05-18T07:50:07Z", "author": "Babar Raza", "message": "Update README.md", "classification": "MANUAL_EDIT"},
+        {"sha": "a325ede", "date": "2026-05-14T05:54:34Z", "author": "Babar Raza", "message": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "e332aa8", "date": "2026-05-13T15:30:32Z", "author": "Babar Raza", "message": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "1f1f8e8", "date": "2026-05-06T08:32:03Z", "author": "Babar Raza", "message": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "3fa1cf1", "date": "2026-05-05T08:43:51Z", "author": "Babar Raza", "message": "Initial commit", "classification": "GITHUB_AUTO_INIT"}
+      ],
+      "manual_edits_found": true,
+      "manual_edit_details": {
+        "commit": "e49ea8a",
+        "date": "2026-05-18T07:50:07Z",
+        "what_changed": "Added 4 missing example rows to the Included Examples table (merger, pdfa-converter, splitter, text-extractor) and their directory tree entries. Only optimizer was already listed. +12 lines, -0 lines.",
+        "intent": "The maintainer manually expanded the README example table to list all 5 published examples, fixing the same per-package gap that Sprint 34 addresses programmatically.",
+        "content_preserved_by_subsequent_pipeline": "NO — this manual edit is currently HEAD on the PDF repo. No pipeline commit has overwritten it yet."
+      },
+      "current_remote_state": "README at HEAD (e49ea8a) IS the manual edit. It lists 5 examples without source code snippets. The pipeline's cumulative README (17 examples with code) has not been pushed.",
+      "preservation_action": "Full replacement safe — the manual edit lists only 5 published examples. The pipeline cumulative README lists 17 examples (all PR-package examples) with full source code. The manual edit content is a strict subset."
+    },
+    "cells": {
+      "readme_commits": [
+        {"sha": "e43c921", "date": "2026-05-18T15:06:10Z", "author": "Babar Raza", "message": "fix(readme): regenerate with verified API method claims and source snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "2048abe", "date": "2026-05-05T06:39:00Z", "author": "Babar Raza", "message": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples", "classification": "PIPELINE_AUTOMATED"}
+      ],
+      "manual_edits_found": false,
+      "preservation_action": "Full replacement safe — all commits are pipeline-automated."
+    },
+    "diagram": {
+      "readme_commits": [
+        {"sha": "469c50d", "date": "2026-05-18T11:30:45Z", "author": "Babar Raza", "message": "fix(readme): regenerate with verified API method claims and source snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "6417ecd", "date": "2026-05-18T09:56:41Z", "author": "Babar Raza", "message": "fix(readme): regenerate with source-truth format claims and code snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "4120268", "date": "2026-05-12T09:14:46Z", "author": "Babar Raza", "message": "Add verified Aspose.Diagram LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"}
+      ],
+      "manual_edits_found": false,
+      "preservation_action": "Full replacement safe — all commits are pipeline-automated."
+    },
+    "email": {
+      "readme_commits": [
+        {"sha": "6d10c59", "date": "2026-05-18T15:06:08Z", "author": "Babar Raza", "message": "fix(readme): regenerate with verified API method claims and source snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "b555f41", "date": "2026-05-14T05:57:35Z", "author": "Babar Raza", "message": "Add verified Aspose.Email LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"}
+      ],
+      "manual_edits_found": false,
+      "preservation_action": "Full replacement safe — all commits are pipeline-automated."
+    },
+    "slides": {
+      "readme_commits": [
+        {"sha": "bbe7e68", "date": "2026-05-18T15:06:09Z", "author": "Babar Raza", "message": "fix(readme): regenerate with verified API method claims and source snippets", "classification": "PIPELINE_AUTOMATED"},
+        {"sha": "6615bd0", "date": "2026-05-14T05:58:01Z", "author": "Babar Raza", "message": "Add verified Aspose.Slides LowCode examples for .NET controlled pilot", "classification": "PIPELINE_AUTOMATED"}
+      ],
+      "manual_edits_found": false,
+      "preservation_action": "Full replacement safe — all commits are pipeline-automated."
+    }
+  },
+  "overwrite_safety_analysis": {
+    "question": "Is it safe for the pipeline to overwrite manual README edits with full-replacement renders?",
+    "answer": "YES, for the following reasons:",
+    "evidence": [
+      "1. Both manual edits (Words 14e3eb8, PDF e49ea8a) added example table rows and directory tree entries — the same data the pipeline generates programmatically.",
+      "2. The pipeline README includes all examples the manual edits added, PLUS additional examples from PR packages not yet merged, PLUS full source code snippets in collapsible sections.",
+      "3. The manual edits contain no unique prose, disclaimers, licensing text, or maintainer notes that would be lost.",
+      "4. For Words: the manual edit was already superseded by two subsequent pipeline commits (6a5f20a, 1b9f4e7).",
+      "5. For PDF: the manual edit is still HEAD but lists only 5 examples. The cumulative pipeline README lists 17 examples. Overwrite strictly improves coverage.",
+      "6. The final README policy is full-replacement (no managed section markers in place). The plan-healing design documents this explicitly and defers marker introduction to a future sprint."
+    ],
+    "readme_policy": "FULL_REPLACEMENT — the pipeline owns the entire README.md content. No managed-section markers are currently in use. This was a conscious design decision documented in manual-readme-preservation-design.json."
+  },
+  "conclusion": "Manual README edits detected in 2 of 6 repos (Words: 14e3eb8, PDF: e49ea8a). Both edits added missing example entries to the table — the same gap Sprint 34 fixes programmatically. Full replacement is safe because: (a) manual content is a strict subset of pipeline output, (b) Words manual edit already superseded by pipeline, (c) PDF manual edit will be superseded on next publish-readme --publish."
+}

@@ -1,0 +1,65 @@
+{
+  "sprint": 43,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "taskcards": [
+    {
+      "id": "TC-PDF-PR-MERGE",
+      "status": "BLOCKED_DUAL",
+      "blockers": ["approval gate absent", "all 6 PRs CONFLICTING"],
+      "prs": [5, 6, 7, 8, 9, 10],
+      "impact": "14 PDF examples stuck at PR_DRY_RUN_READY",
+      "new_this_sprint": "CONFLICTING state discovered"
+    },
+    {
+      "id": "TC-PDF-PR-CONFLICT-RESOLUTION",
+      "status": "NEW",
+      "description": "All 6 PDF PRs have merge conflicts on README.md (and build configs for #8-#10). Must rebase or recreate PRs.",
+      "created": "2026-05-19",
+      "priority": "HIGH"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "status": "BLOCKED",
+      "blocker": "Aspose.PDF latest=26.5.0, no newer version",
+      "verified": "2026-05-19"
+    },
+    {
+      "id": "TC-OCR-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "blocker": "Aspose.AI.LLM not on NuGet (404 confirmed 2026-05-19)"
+    },
+    {
+      "id": "TC-PSD-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "blocker": "Aspose.JavaAttributes not on NuGet (404 confirmed 2026-05-19)"
+    },
+    {
+      "id": "TC-WORDS-PROCESSOR",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "No public constructor (CS1729+CS0120)"
+    },
+    {
+      "id": "TC-PDF-TIMESTAMP",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "External TSA ServerUrl required"
+    },
+    {
+      "id": "TC-PDF-OFD",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "No OFD programmatic fixture"
+    },
+    {
+      "id": "TC-PLANNER-IMPLEMENTATION",
+      "status": "COMPLETE",
+      "completed": "2026-05-19",
+      "commit": "f6a9376",
+      "description": "portfolio_action_planner.py + 26 tests + CLI"
+    },
+    {
+      "id": "TC-SPRINT42-CLOSURE",
+      "status": "COMPLETE",
+      "completed": "2026-05-19",
+      "commit": "98f019b"
+    }
+  ]
+}

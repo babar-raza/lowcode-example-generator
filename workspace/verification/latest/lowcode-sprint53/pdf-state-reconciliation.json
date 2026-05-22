@@ -1,0 +1,12 @@
+{
+  "sprint": 53,
+  "subject": "pdf-state-reconciliation",
+  "published": 19,
+  "pr_ready": 0,
+  "open_prs": 0,
+  "total_contracts": 19,
+  "conservation": "19 + 0 = 19",
+  "approval_gates": "BOTH_ABSENT_BUT_NOT_NEEDED",
+  "sources_consistent": true,
+  "verdict": "CONSISTENT_ALL_PUBLISHED"
+}

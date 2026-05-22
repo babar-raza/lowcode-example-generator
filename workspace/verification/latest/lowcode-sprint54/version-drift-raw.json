@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-05-20T14:24:32.610206+00:00",
+  "drifted_count": 0,
+  "current_count": 6,
+  "error_count": 0,
+  "overall_verdict": "ALL_CURRENT",
+  "families": [
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "denominator_version": "26.5.1",
+      "latest_nuget_version": "26.5.1",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "denominator_version": "26.5.0",
+      "latest_nuget_version": "26.5.0",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    },
+    {
+      "family": "pdf",
+      "package_id": "Aspose.PDF",
+      "denominator_version": "26.5.0",
+      "latest_nuget_version": "26.5.0",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    },
+    {
+      "family": "diagram",
+      "package_id": "Aspose.Diagram",
+      "denominator_version": "26.5.0",
+      "latest_nuget_version": "26.5.0",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    },
+    {
+      "family": "email",
+      "package_id": "Aspose.Email",
+      "denominator_version": "26.4.0",
+      "latest_nuget_version": "26.4.0",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    },
+    {
+      "family": "slides",
+      "package_id": "Aspose.Slides.NET",
+      "denominator_version": "26.5.0",
+      "latest_nuget_version": "26.5.0",
+      "on_nuget": true,
+      "drift": false,
+      "drift_severity": "NONE",
+      "status": "CURRENT",
+      "error": null
+    }
+  ]
+}

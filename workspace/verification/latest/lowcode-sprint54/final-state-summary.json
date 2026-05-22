@@ -1,0 +1,16 @@
+{
+  "report_type": "final-state-summary",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "head": "ccb45a9",
+  "portfolio": {
+    "published": 42,
+    "pr_ready": 0,
+    "total_contracts": 42,
+    "parity": true
+  },
+  "planner_verdict": "PLANNER_EXHAUSTED",
+  "close_dirty_state": false,
+  "conservation_holds": true,
+  "verdict": "SPRINT54_COMPLETE_SPRINT53_CLOSURE_REPAIRED_AND_PDF_PUBLICATION_PROVEN"
+}

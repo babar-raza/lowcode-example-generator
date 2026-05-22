@@ -1,0 +1,23 @@
+{
+  "sprint": 43,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "executed_actions": [
+    {"id": "CLOSE_SPRINT42_PENDING", "result": "committed as 98f019b", "outcome": "SUCCESS"},
+    {"id": "IMPLEMENT_ACTION_PLANNER", "result": "portfolio_action_planner.py + 26 tests + CLI command", "outcome": "SUCCESS"},
+    {"id": "PORTFOLIO_CONSERVATION_CHECK", "result": "all equations PASS", "outcome": "SUCCESS"},
+    {"id": "VERSION_DRIFT_CHECK", "result": "Cells 26.5.1, others 26.5.0/26.4.0, PDF latest=26.5.0", "outcome": "NO_DRIFT"},
+    {"id": "FORMIMPORTER_RETEST", "result": "Aspose.PDF latest=26.5.0, no newer version", "outcome": "STILL_BLOCKED"},
+    {"id": "OCR_DEPENDENCY_RECHECK", "result": "Aspose.AI.LLM still 404 on NuGet", "outcome": "STILL_BLOCKED"},
+    {"id": "PSD_DEPENDENCY_RECHECK", "result": "Aspose.JavaAttributes still 404 on NuGet", "outcome": "STILL_BLOCKED"},
+    {"id": "PERMANENTLY_BLOCKED_WATCH", "result": "Timestamp/Ofd/Processor — no new evidence", "outcome": "STILL_BLOCKED"},
+    {"id": "PDF_PR_CONFLICT_DISCOVERY", "result": "all 6 PRs CONFLICTING — new finding", "outcome": "NEW_BLOCKER_DOCUMENTED"}
+  ],
+  "blocked_actions": [
+    {"id": "PDF_MERGE_PRS_5_10", "blocker": "approval gate absent + all PRs conflicting"}
+  ],
+  "not_applicable": [
+    {"id": "CONTRACT_BACKFILL", "reason": "all 42 contracts present"},
+    {"id": "README_RECONCILIATION", "reason": "no merge performed"},
+    {"id": "TARGET_REPO_HEALTH_REPAIR", "reason": "no changes to target repos"}
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "sprint": 43,
+  "lane": "A",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "module_path": "src/plugin_examples/portfolio_action_planner.py",
+  "test_path": "tests/unit/test_portfolio_action_planner.py",
+  "cli_command": "python -m plugin_examples next-actions",
+  "cli_flags": ["--output PATH", "--markdown PATH", "--json"],
+  "commit": "f6a9376",
+  "test_count": 26,
+  "test_result": "26/26 PASS",
+  "features": [
+    "Reads denominators, contracts, configs, dirty state, approval gates",
+    "Produces ranked JSON action board sorted by impact",
+    "Renders human-readable markdown",
+    "Identifies dirty state as highest priority",
+    "PDF merge ranks first when gate present, blocked when absent",
+    "OCR/PSD/FormImporter visible as blocker retests",
+    "Permanently blocked roots visible as watch items",
+    "Conservation check and version drift as recurring actions",
+    "No silent-drop: all families represented"
+  ],
+  "test_coverage": [
+    "Action model serialization",
+    "Board sorting by impact",
+    "Safe/blocked filtering",
+    "Gate-dependent behavior (mock)",
+    "Dirty state ranking (mock)",
+    "Contract conservation feed",
+    "Markdown rendering",
+    "Constants verification"
+  ]
+}

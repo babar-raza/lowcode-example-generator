@@ -1,0 +1,34 @@
+{
+  "description": "Sources the execution agent MUST inspect and reconcile for each affected repo",
+  "affected_families": ["cells", "words", "pdf", "diagram", "email", "slides"],
+  "required_sources": [
+    "pipeline/configs/families/{family}.yml — github.published_plugin_examples_repo",
+    "workspace/pr-dry-run/{family}-* — all PR dry-run packages",
+    "workspace/verification/latest/{family}-post-merge-clean-checkout-validation.json",
+    "workspace/verification/latest/{family}-live-pr-result.json (if exists)",
+    "workspace/verification/latest/{family}-readme-backfill-*.json (if exists)",
+    "workspace/queues/example-completion-queue.json",
+    "GitHub API: gh api repos/{owner}/{repo}/contents/examples/{family}/lowcode (if authenticated)",
+    "GitHub API: gh api repos/{owner}/{repo}/commits?path=README.md (if authenticated)",
+    "GitHub API: gh api repos/{owner}/{repo}/pulls?state=open (if authenticated)",
+    "git log -- README.md (local repo only, not target repos)"
+  ],
+  "conflict_resolution": "Higher-priority source wins. See inventory-mode-design.json source_priority.",
+  "verified_package_counts_from_plan_healing": {
+    "cells-controlled-pilot": 9,
+    "words-controlled-pilot": 8,
+    "words-report-builder": 1,
+    "pdf-controlled-pilot": 3,
+    "pdf-controlled-pilot-wave1": 2,
+    "pdf-controlled-pilot-wave2": 1,
+    "pdf-controlled-pilot-pr5": 3,
+    "pdf-controlled-pilot-pr6": 3,
+    "pdf-controlled-pilot-pr7": 2,
+    "pdf-controlled-pilot-pr8": 2,
+    "pdf-controlled-pilot-pr9": 1,
+    "diagram-controlled-pilot": 2,
+    "email-controlled-pilot": 1,
+    "slides-controlled-pilot": 3
+  },
+  "note": "These counts are verified from disk during plan-healing. Execution agent should re-verify."
+}

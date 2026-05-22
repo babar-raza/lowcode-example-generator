@@ -1,0 +1,17 @@
+{
+  "lane": "E",
+  "date": "2026-05-19",
+  "status": "CONSISTENT",
+  "release_status": {
+    "cells": {"scope": "FAMILY_COMPLETE", "post_merge": "POST_MERGE_VERIFIED", "examples": 9},
+    "words": {"scope": "PILOT_COMPLETE", "post_merge": "POST_MERGE_VERIFIED", "examples": 8},
+    "pdf": {"scope": "PARTIAL_CANARY", "post_merge": "ALL_PASS", "examples": 5, "pending": 14},
+    "diagram": {"scope": "PILOT_COMPLETE", "post_merge": "ALL_PASS", "examples": 2},
+    "email": {"scope": "PILOT_COMPLETE", "post_merge": "NOT_RUN", "examples": 1},
+    "slides": {"scope": "PILOT_COMPLETE", "post_merge": "NOT_RUN", "examples": 3}
+  },
+  "integrity_checks_pass": true,
+  "target_repos_healthy": 6,
+  "version_drift": "ALL_CURRENT",
+  "evidence_contract": "V7_69_CATEGORIES"
+}

@@ -1,0 +1,53 @@
+{
+  "loaded": true,
+  "registries": {
+    "bootstrap": true,
+    "failure_patterns": true,
+    "repair_patterns": true,
+    "semantic_steering": true,
+    "validator_patterns": true
+  },
+  "constraints_applied": [
+    {
+      "scenario_id": "slides-compress",
+      "type": "Compress",
+      "hi_required": [
+        "REQUIRED: Compress.RemoveUnusedLayoutSlides( or Compress.CompressEmbeddedFonts( \u2014 primary LowCode call (static)",
+        "using Aspose.Slides.LowCode;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: manual slide/layout removal replacing Compress.*",
+        "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() or similar LowCode method",
+        "FORBIDDEN: manual slide manipulation replacing Compress.* methods"
+      ]
+    },
+    {
+      "scenario_id": "slides-convert",
+      "type": "Convert",
+      "hi_required": [
+        "REQUIRED: Convert.ToPdf( or Convert.ToJpeg( or Convert.AutoByExtension( \u2014 primary LowCode call (static)",
+        "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)",
+        "using Aspose.Slides.LowCode;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Presentation.Save() as primary conversion",
+        "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() or similar LowCode method",
+        "FORBIDDEN: manual slide manipulation replacing Compress.* methods"
+      ]
+    },
+    {
+      "scenario_id": "slides-merger",
+      "type": "Merger",
+      "hi_required": [
+        "REQUIRED: Merger.Process( \u2014 primary LowCode call",
+        "REQUIRED: using Aspose.Slides; (for Presentation fixture creation)",
+        "using Aspose.Slides.LowCode;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: manual slide copy replacing Merger.Process()",
+        "FORBIDDEN: Presentation.Save() replacing Convert.ToPdf() or similar LowCode method",
+        "FORBIDDEN: manual slide manipulation replacing Compress.* methods"
+      ]
+    }
+  ]
+}

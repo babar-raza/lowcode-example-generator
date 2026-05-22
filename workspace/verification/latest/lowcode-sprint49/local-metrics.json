@@ -1,0 +1,16 @@
+{
+  "sprint": 49,
+  "head": "a66dd75",
+  "commits": 1,
+  "files_changed_in_commit": 2,
+  "lines_added": 157,
+  "lines_removed": 0,
+  "test_pass": 2526,
+  "test_fail": 6,
+  "test_skip": 3,
+  "test_fail_note": "All 6 failures are pre-existing test_format_map_completeness (format_authority WIP)",
+  "evidence_files_produced": 61,
+  "code_files_modified": ["src/plugin_examples/evidence_contract.py", "tests/unit/test_evidence_contract.py"],
+  "new_functions": ["generate_companion_proof", "check_head_consistency"],
+  "new_tests": 7
+}

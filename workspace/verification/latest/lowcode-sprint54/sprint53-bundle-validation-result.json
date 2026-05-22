@@ -1,0 +1,30 @@
+{
+  "report_type": "sprint53-bundle-validation-result",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "validated_zip": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\latest\\lowcode-sprint53\\lowcode-sprint53-evidence.zip",
+  "zip_sha256": "a6c89038453a2e1adc5d52d5099bd0f3b18e1cc3f05984914aa7fbbb4783be0a",
+  "zip_entries": 53,
+  "companion_verdict": "PLANNER_CONTRACT_PASSED",
+  "categories_found": [
+    "final_state_summary",
+    "final_next_actions",
+    "final_git_status",
+    "final_git_log",
+    "final_git_diff_stat",
+    "final_changed_files",
+    "test_full_log",
+    "test_targeted_log",
+    "planner_cycle_ledger",
+    "planner_final_board",
+    "planner_loop_ledger",
+    "dirty_state_proof",
+    "taskcard_state",
+    "local_metrics",
+    "bundle_manifest",
+    "no_secret_proof",
+    "execution_ledger"
+  ],
+  "categories_missing": [],
+  "failures": [],
+  "verdict": "PLANNER_CONTRACT_PASSED"
+}

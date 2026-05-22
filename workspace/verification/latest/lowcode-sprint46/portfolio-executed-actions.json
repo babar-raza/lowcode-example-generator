@@ -1,0 +1,34 @@
+{
+  "sprint": 46,
+  "execution_loop": {
+    "cycles": 2,
+    "stop_reason": "stopped_no_change",
+    "board_fingerprint": "2b48ebb385cd5bca",
+    "total_actions_executed": 12,
+    "unique_actions_executed": [
+      "PORTFOLIO_CONSERVATION_CHECK",
+      "VERSION_DRIFT_CHECK",
+      "FORMIMPORTER_RETEST",
+      "OCR_DEPENDENCY_RECHECK",
+      "PSD_DEPENDENCY_RECHECK",
+      "PERMANENTLY_BLOCKED_WATCH"
+    ],
+    "all_handlers_noop": true,
+    "blocked_actions": [
+      "PDF_MERGE_PRS",
+      "PDF_PR_CONFLICT_RECOVERY"
+    ]
+  },
+  "handler_results": {
+    "conservation": {"all_pass": true, "total": 42, "changed": false},
+    "version_drift": {
+      "cells": "26.5.1", "words": "26.5.0", "pdf": "26.5.0",
+      "diagram": "26.5.0", "email": "26.4.0", "slides": "26.5.0",
+      "changed": false
+    },
+    "formimporter": {"still_blocked": true, "changed": false},
+    "ocr": {"still_blocked": true, "changed": false},
+    "psd": {"still_blocked": true, "changed": false},
+    "permanently_blocked": {"status": "confirmed_unchanged", "changed": false}
+  }
+}

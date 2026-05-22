@@ -1,0 +1,16 @@
+{
+  "report_type": "portfolio-release-status-repair",
+  "generated_at": "2026-05-20T14:25:21.815443+00:00",
+  "sprint": 54,
+  "unknown_verdicts_found": [],
+  "family_verdicts": {
+    "cells": "FAMILY_COMPLETE",
+    "words": "PILOT_COMPLETE",
+    "pdf": "PILOT_COMPLETE",
+    "diagram": "PILOT_COMPLETE",
+    "email": "PILOT_COMPLETE",
+    "slides": "PILOT_COMPLETE"
+  },
+  "repair_action": "Fixed key lookup: release_scope_status (not scope_status); regenerated from live compute",
+  "verdict": "REPAIRED"
+}

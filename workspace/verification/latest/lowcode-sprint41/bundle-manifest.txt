@@ -1,0 +1,45 @@
+Sprint 41 Evidence Bundle Manifest
+Date: 2026-05-19T13:30:17.164802
+Files: 41
+
+conservation-check-report.json                                   1323  sha256:d8987a923f60521f
+conservation-check-report.md                                     2273  sha256:220bd46ecd970eb2
+dirty-state-classification.json                                   871  sha256:0e4f02a0a6441127
+dirty-state-classification.md                                    1926  sha256:1534f49ccc5b8c84
+evidence-contract-validation-proof.txt                          18760  sha256:99361950c5f46d96
+evidence-repair-report.json                                       685  sha256:0a64daef8697b391
+evidence-repair-report.md                                        2230  sha256:cf4d813046d2e7fc
+execution-ledger.md                                              1139  sha256:90ac85a2ed3138c7
+final-git-status.txt                                             3015  sha256:4ab753e3d246ce05
+final-state-summary.json                                         1962  sha256:2426066adfe7d223
+final-state-summary.md                                           3953  sha256:2502409d1d14c84f
+format-capability-decision.json                                   649  sha256:2dd11616c2a9190f
+format-capability-decision.md                                    1766  sha256:fc1220a6f446381d
+head-mismatch-report.json                                         560  sha256:bab2d97a298966db
+head-mismatch-report.md                                          1399  sha256:63f8878a53f28d20
+lane-ownership.md                                                 689  sha256:cd26a104ec6a4e4b
+no-secret-proof.txt                                              2323  sha256:f45cb086e45d41c5
+overlap-control.md                                                634  sha256:f57047e7d823b779
+pdf-contract-iv-report.json                                       732  sha256:253be446abfdaeca
+pdf-contract-iv-report.md                                        2788  sha256:087143cc853443a0
+pdf-next-expansion-report.json                                   1076  sha256:06f516916f7b37b9
+pdf-next-expansion-report.md                                     2486  sha256:44ec2d5310a0734d
+pdf-post-merge-reconciliation.json                                 98  sha256:63ecca8a6aca4a66
+pdf-post-merge-reconciliation.md                                  237  sha256:0455ef9d8d4a69b1
+pdf-pr-merge-preflight.json                                       999  sha256:c36763ca814000a4
+pdf-pr-merge-preflight.md                                        1307  sha256:be1df7f6a96a47ce
+pdf-pr-merge-report.json                                          187  sha256:a22db2695ca43a2f
+pdf-pr-merge-report.md                                            247  sha256:30124a7e7b152110
+pdf-readme-audit.json                                              97  sha256:62650ec2f709d736
+pdf-readme-audit.md                                               279  sha256:0e46c3bcbadd3a47
+pdf-release-status.json                                           552  sha256:afbd8fc0d0c7f930
+portfolio-family-plugin-matrix.json                              2221  sha256:25cae7e75232c6ef
+portfolio-family-plugin-matrix.md                                3237  sha256:f81c14fd64b359e9
+raw-full-test-log.txt                                          260646  sha256:6c05552226c17856
+raw-targeted-test-log.txt                                       50210  sha256:06dbc07c67600b42
+sprint40-iv-repair-report.json                                    454  sha256:2d757e2745ab6ab8
+sprint40-iv-repair-report.md                                     1669  sha256:a3bcffd6b65cceb8
+target-repo-health-raw.txt                                        836  sha256:8806c8ca96c91998
+taskcard-state.json                                              1578  sha256:cd60765884581c2a
+taskcard-state.md                                                2248  sha256:62338083cc9a90fd
+version-drift-raw.txt                                            6224  sha256:b0e85490b3202cce

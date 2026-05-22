@@ -1,0 +1,8 @@
+{
+  "sprint": 45,
+  "family": "pdf",
+  "readme_state": "STALE — PR branches conflict on README.md",
+  "target_repo_readme_current": true,
+  "pr_branch_readmes_stale": true,
+  "action": "README will be regenerated during PR recreation"
+}

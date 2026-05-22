@@ -1,0 +1,98 @@
+{
+  "report_type": "pdf-publication-proof",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "pdf_denominator_published_count": 19,
+  "pdf_denominator_pr_ready_count": 0,
+  "pr_history": {
+    "1": {
+      "number": 1,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-06T11:01:12Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "2": {
+      "number": 2,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-13T15:30:59Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "4": {
+      "number": 4,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-14T06:00:36Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "11": {
+      "number": 11,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:49:11Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "17": {
+      "number": 17,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:50:36Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "18": {
+      "number": 18,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:51:49Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "19": {
+      "number": 19,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:52:09Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "20": {
+      "number": 20,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:52:32Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    },
+    "21": {
+      "number": 21,
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-05-19T05:52:52Z",
+      "title": "Add verified Aspose.Pdf LowCode examples for .NET controlled pilot",
+      "error": null
+    }
+  },
+  "merged_pr_count": 9,
+  "merged_prs": [
+    1,
+    2,
+    4,
+    11,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "all_target_prs_merged": true,
+  "target_repo_dir_count": 1,
+  "target_repo_dirs": [
+    "examples"
+  ],
+  "verdict": "PDF_ALL_19_PUBLISHED"
+}

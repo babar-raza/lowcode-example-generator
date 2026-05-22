@@ -1,0 +1,14 @@
+{
+  "report_type": "final-next-actions",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "generated_from_head": "ccb45a9",
+  "next_required_actions": [],
+  "blocked_actions": [],
+  "remaining_open_items": [
+    "Version drift publication (Cells/Words/Diagram \u2014 requires APPROVE_README_PUSH)",
+    "Close superseded PRs #5-#10 in PDF repo",
+    "report-builder fixture (missing input.docx)",
+    "FormImporter (Aspose.PDF library bug)",
+    "OCR/PSD (NuGet 404)"
+  ]
+}

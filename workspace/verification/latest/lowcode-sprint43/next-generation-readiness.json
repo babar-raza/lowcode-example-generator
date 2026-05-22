@@ -1,0 +1,37 @@
+{
+  "sprint": 43,
+  "lane": "E",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "formimporter": {
+    "status": "BLOCKED",
+    "current_pdf_version": "26.5.0",
+    "nuget_latest": "26.5.0",
+    "newer_available": false,
+    "retest_ready": false,
+    "action": "Wait for Aspose.PDF >= 26.6.0"
+  },
+  "pdf_workflow_root_gaps": {
+    "total_roots": 22,
+    "in_pilot": 19,
+    "gaps": [
+      {"type": "FormImporter", "status": "DEFERRED_WAVE_H", "retest_when": "Aspose.PDF >= 26.6.0"},
+      {"type": "Timestamp", "status": "PERMANENTLY_BLOCKED", "reason": "external TSA"},
+      {"type": "Ofd", "status": "PERMANENTLY_BLOCKED", "reason": "no fixture"}
+    ],
+    "safe_candidates_for_expansion": 0
+  },
+  "ocr": {
+    "status": "DEPENDENCY_BLOCKED",
+    "dependency": "Aspose.AI.LLM",
+    "available": false,
+    "discovery_ready": false
+  },
+  "psd": {
+    "status": "DEPENDENCY_BLOCKED",
+    "dependency": "Aspose.JavaAttributes",
+    "available": false,
+    "discovery_ready": false
+  },
+  "next_generation_candidates": [],
+  "conclusion": "No new generation candidates available this sprint. All gaps are blocked by external dependencies or permanent constraints."
+}

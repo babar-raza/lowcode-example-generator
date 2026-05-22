@@ -1,0 +1,90 @@
+{
+  "sprint": 46,
+  "mapping": [
+    {
+      "github_pr": 5,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot/",
+      "branch": "plugin-examples/pdf/20260518-150226",
+      "examples": ["doc-converter", "html", "xls-converter"],
+      "contracts": ["pdf-doc-converter", "pdf-html-converter", "pdf-xls-converter"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    },
+    {
+      "github_pr": 6,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+      "branch": "plugin-examples/pdf/20260518-150254",
+      "examples": ["jpeg", "png", "tiff"],
+      "contracts": ["pdf-jpeg", "pdf-png", "pdf-tiff"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    },
+    {
+      "github_pr": 7,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+      "branch": "plugin-examples/pdf/20260518-150331",
+      "examples": ["image-extractor", "table-generator", "toc-generator"],
+      "contracts": ["pdf-image-extractor", "pdf-table-generator", "pdf-toc-generator"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    },
+    {
+      "github_pr": 8,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+      "branch": "plugin-examples/pdf/20260518-150408",
+      "examples": ["form-flattener", "security"],
+      "contracts": ["pdf-form-flattener", "pdf-security"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    },
+    {
+      "github_pr": 9,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+      "branch": "plugin-examples/pdf/20260518-150429",
+      "examples": ["form-editor", "form-exporter"],
+      "contracts": ["pdf-form-editor", "pdf-form-exporter"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    },
+    {
+      "github_pr": 10,
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/",
+      "branch": "plugin-examples/pdf/20260518-150454",
+      "examples": ["signature"],
+      "contracts": ["pdf-signature"],
+      "remote_state": "OPEN",
+      "mergeable": "CONFLICTING",
+      "conflict_file": "README.md",
+      "local_package_exists": true,
+      "action": "recreate"
+    }
+  ],
+  "already_published": [
+    {"example": "merger", "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/", "state": "on target main"},
+    {"example": "splitter", "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave1/", "state": "on target main"},
+    {"example": "optimizer", "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-wave2/", "state": "on target main"},
+    {"example": "pdfa-converter", "state": "on target main"},
+    {"example": "text-extractor", "state": "on target main"}
+  ],
+  "directory_to_pr_mapping_note": "Local directory names are offset: pdf-controlled-pilot (unnumbered)=PR#5, pr5=PR#6, pr6=PR#7, pr7=PR#8, pr8=PR#9, pr9=PR#10",
+  "total_pending_examples": 14,
+  "total_prs": 6,
+  "all_14_covered": true,
+  "no_duplicates": true,
+  "splitter_excluded": true
+}

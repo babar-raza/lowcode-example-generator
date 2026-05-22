@@ -1,0 +1,53 @@
+{
+  "sprint": 42,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "equations": {
+    "cells": {
+      "workflow_roots_plus_non_runnable_eq_total": "9 + 13 = 22 PASS",
+      "published_plus_pending_plus_blocked_eq_pilot": "9 + 0 + 0 = 9 PASS",
+      "contracts_eq_pilot_allowed": "9 = 9 PASS"
+    },
+    "words": {
+      "workflow_roots_plus_non_runnable_eq_total": "9 + 16 = 25 PASS",
+      "published_plus_pending_plus_blocked_eq_pilot": "8 + 0 + 0 = 8 PASS",
+      "contracts_eq_pilot_allowed": "8 = 8 PASS",
+      "note": "Processor (1 root) permanently blocked, not in pilot"
+    },
+    "pdf": {
+      "workflow_roots_plus_non_runnable_eq_total": "22 + 79 = 101 PASS",
+      "published_plus_pr_ready_eq_pilot": "5 + 14 = 19 PASS",
+      "contracts_eq_pilot_allowed": "19 = 19 PASS",
+      "note": "3 roots outside pilot: Timestamp (BLOCKED), Ofd (BLOCKED), FormImporter (DEFERRED)"
+    },
+    "diagram": {
+      "workflow_roots_plus_non_runnable_eq_total": "2 + 3 = 5 PASS",
+      "published_plus_pending_plus_blocked_eq_pilot": "2 + 0 + 0 = 2 PASS",
+      "contracts_eq_pilot_allowed": "2 = 2 PASS"
+    },
+    "email": {
+      "workflow_roots_plus_non_runnable_eq_total": "1 + 2 = 3 PASS",
+      "published_plus_pending_plus_blocked_eq_pilot": "1 + 0 + 0 = 1 PASS",
+      "contracts_eq_pilot_allowed": "1 = 1 PASS"
+    },
+    "slides": {
+      "workflow_roots_plus_non_runnable_eq_total": "3 + 2 = 5 PASS",
+      "published_plus_pending_plus_blocked_eq_pilot": "3 + 0 + 0 = 3 PASS",
+      "contracts_eq_pilot_allowed": "3 = 3 PASS"
+    }
+  },
+  "cross_family": {
+    "total_pilot_allowed": 42,
+    "total_contracts": 42,
+    "total_published": 28,
+    "total_pr_ready": 14,
+    "published_plus_pr_ready": 42,
+    "contracts_eq_pilot_allowed": "42 = 42 PASS",
+    "published_plus_pr_ready_eq_contracts": "28 + 14 = 42 PASS"
+  },
+  "silent_drop_check": {
+    "result": "PASS",
+    "dropped_scenarios": [],
+    "note": "No planned runnable example silently dropped. All 42 pilot-allowed scenarios have pipeline contracts."
+  },
+  "all_pass": true
+}

@@ -1,0 +1,35 @@
+{
+  "sprint_reviewed": 50,
+  "sprint_reviewing": 51,
+  "head_at_review": "33beb18",
+  "sprint50_head": "b9e6ed5",
+  "sprint50_bundle_path": "workspace/verification/latest/lowcode-sprint50/evidence-bundle-sprint50-20260520-161629.zip",
+  "sprint50_bundle_sha256": "8495023be0a31194c23bc225f6ee9d4a27224af3dc8dae17253c95786cdda6b6",
+  "sha256_match": true,
+  "companion_proof": {
+    "path": "workspace/verification/latest/lowcode-sprint50/evidence-contract-validation.json",
+    "external": true,
+    "verdict": "PLANNER_CONTRACT_PASSED",
+    "categories": "17/17",
+    "failures": 0,
+    "secrets": 0,
+    "sha_matches_zip": true
+  },
+  "bundle_contents_verified": {
+    "final_state_summary": {"head": "b9e6ed5", "verdict": "SPRINT50_COMPLETE_FAILURES_CLASSIFIED_AND_PROOF_REPAIRED"},
+    "portfolio": {"contract_parity": "42/42", "published": 28, "pr_ready": 14},
+    "tests": "2746 passed, 0 failed, 3 skipped",
+    "dirty_state": {"source": 0, "test": 0, "actionable": 0},
+    "conservation": {"pass": true, "total": 42},
+    "pdf_state": {"published": 5, "pr_ready": 14, "open_prs": 0}
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "INFO",
+      "detail": "Planner board captured mid-sprint shows CLOSE_DIRTY_STATE but final-dirty-state correctly shows 0 actionable"
+    }
+  ],
+  "closure_accepted": true,
+  "commits_since_sprint50": ["33beb18 test(format-authority): add contract-first adoption test suite"]
+}

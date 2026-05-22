@@ -1,0 +1,36 @@
+{
+  "sprint": 42,
+  "lane": "0",
+  "subject": "Sprint 41 IV/Repair Review",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "sprint41_summary": {
+    "verdict": "SPRINT41_IV_REPAIR_COMPLETE",
+    "head_at_close": "22385f7",
+    "test_count_at_close": 2217,
+    "raw_log_test_count": 2187,
+    "test_count_mismatch_root_cause": "Raw log captured BEFORE commit 22385f7; final count captured AFTER with dirty V8 test files loaded. Delta = 30 (12 V8 contract + 18 auditor semantic tests from uncommitted files).",
+    "bundle": "evidence-bundle-sprint41-20260519-133017.zip",
+    "bundle_entries": 42,
+    "bundle_bytes": 66661,
+    "inter_session_commits_since_sprint41": [
+      {
+        "sha": "90b247d",
+        "subject": "fix(closure-repair): MailMerger classifier ordering, conservation equation completeness"
+      },
+      {
+        "sha": "8f36449",
+        "subject": "feat(evidence): add V8 format capability manifest contract and README semantic audits",
+        "absorbed": "V8 evidence_contract.py, readme_auditor.py, test_evidence_contract.py, test_readme_auditor_semantic.py"
+      },
+      {
+        "sha": "06bb5a3",
+        "subject": "fix(codegen): resolve MailMerger and DiagramConverter format drift",
+        "absorbed": "email/slides contract backfill, diagram contract fixes, schema expansion, test updates"
+      },
+      {
+        "sha": "b0fee12",
+        "subject": "feat(ai-governance): add 5 AI test suites for provider policy, router, healing, metrics, and safety"
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "sprint": 42,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "taskcards": [
+    {
+      "id": "TC-PDF-PR-MERGE",
+      "status": "BLOCKED",
+      "blocker": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL not set",
+      "prs": [5, 6, 7, 8, 9, 10],
+      "impact": "14 PDF examples stuck at PR_DRY_RUN_READY"
+    },
+    {
+      "id": "TC-PDF-FORMIMPORTER-RETEST",
+      "status": "BLOCKED",
+      "blocker": "Aspose.PDF 26.5.0 bug",
+      "next_action": "Retest on 26.6.0 when available"
+    },
+    {
+      "id": "TC-EMAIL-SLIDES-CONTRACT-BACKFILL",
+      "status": "COMPLETE",
+      "completed_at": "2026-05-19T00:00:00Z",
+      "committed_by": "06bb5a3"
+    },
+    {
+      "id": "TC-SPRINT41-IV-REPAIR",
+      "status": "COMPLETE",
+      "completed_at": "2026-05-19T00:00:00Z"
+    },
+    {
+      "id": "TC-TEST-COUNT-NORMALIZATION",
+      "status": "COMPLETE",
+      "root_cause": "Raw log vs summary timing mismatch with uncommitted test files"
+    },
+    {
+      "id": "TC-PDF-SPLITTER-STATUS-FIX",
+      "status": "COMPLETE",
+      "description": "Fixed stale test asserting PR_DRY_RUN_READY when contract says MERGED",
+      "file": "tests/unit/test_scenario_contracts.py"
+    },
+    {
+      "id": "TC-WORDS-PROCESSOR-INVESTIGATION",
+      "status": "PERMANENTLY_BLOCKED",
+      "reason": "No public constructor, no static entrypoint"
+    },
+    {
+      "id": "TC-OCR-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "reason": "Aspose.AI.LLM not on NuGet"
+    },
+    {
+      "id": "TC-PSD-REFLECTION",
+      "status": "DEPENDENCY_BLOCKED",
+      "reason": "Aspose.JavaAttributes not on NuGet"
+    }
+  ]
+}

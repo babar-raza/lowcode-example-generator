@@ -1,0 +1,15 @@
+{
+  "sprint": 45,
+  "lane": "D",
+  "pdf_state": {
+    "published": 5,
+    "pr_ready": 14,
+    "total_pilot": 19,
+    "contracts": 19,
+    "conservation": "PASS",
+    "prs_conflicting": 6,
+    "merge_blocked": true
+  },
+  "no_remote_action": true,
+  "reason": "Both approval gates absent"
+}

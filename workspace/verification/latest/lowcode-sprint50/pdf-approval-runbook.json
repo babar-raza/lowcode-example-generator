@@ -1,0 +1,43 @@
+{
+  "sprint": 50,
+  "head": "5e66c8b",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Create replacement PRs",
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "status": "GATE_ABSENT",
+      "packages": [
+        "workspace/pr-dry-run/pdf-controlled-pilot/",
+        "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+        "workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+        "workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+        "workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+        "workspace/pr-dry-run/pdf-controlled-pilot-pr9/"
+      ],
+      "detail": "Create new PRs from local packages (old PRs are CLOSED)"
+    },
+    {
+      "phase": 2,
+      "name": "Verify conflict-free",
+      "gate": "none",
+      "status": "BLOCKED_BY_PHASE_1",
+      "detail": "Check new PRs are mergeable without conflicts"
+    },
+    {
+      "phase": 3,
+      "name": "Merge PRs",
+      "gate": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+      "status": "GATE_ABSENT",
+      "detail": "Merge through governed path"
+    },
+    {
+      "phase": 4,
+      "name": "Verify published state",
+      "gate": "none",
+      "status": "BLOCKED_BY_PHASE_3",
+      "detail": "Confirm all 19 PDF types published"
+    }
+  ],
+  "note": "No close phase needed — PRs #5-#10 already CLOSED"
+}

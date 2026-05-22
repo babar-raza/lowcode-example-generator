@@ -1,0 +1,26 @@
+{
+  "sprint": 43,
+  "lane": "0",
+  "subject": "Sprint 42 IV Report",
+  "generated_at": "2026-05-19T00:00:00Z",
+  "sprint42_claims": {
+    "total_contracts": {"claimed": 42, "verified": true},
+    "active_families_with_contracts": {"claimed": 6, "verified": true},
+    "test_passed": {"claimed": 2365, "verified": true},
+    "test_skipped": {"claimed": 3, "verified": true},
+    "pdf_published": {"claimed": 5, "verified": true},
+    "pdf_pr_ready": {"claimed": 14, "verified": true},
+    "pending_files": {
+      "claimed": ["pipeline/contracts/pdf/pdf-splitter.json", "tests/unit/test_scenario_contracts.py"],
+      "verified": true,
+      "resolved": "committed as 98f019b"
+    }
+  },
+  "head_at_sprint42_close": "b0fee12",
+  "head_after_sprint42_closure_commit": "98f019b",
+  "new_finding": {
+    "pdf_prs_conflicting": true,
+    "description": "All 6 PDF PRs (#5-#10) show mergeable=CONFLICTING. Likely README.md conflict between sequential PRs. Even with merge gate, automated merge would fail without conflict resolution.",
+    "impact": "PDF merge requires branch rebasing or conflict resolution before merge"
+  }
+}

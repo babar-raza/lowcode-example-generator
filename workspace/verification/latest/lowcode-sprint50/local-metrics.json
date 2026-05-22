@@ -1,0 +1,15 @@
+{
+  "sprint": 50,
+  "head": "b9e6ed5",
+  "commits": 2,
+  "files_changed_in_commits": 7,
+  "lines_added": 325,
+  "lines_removed": 19,
+  "test_pass": 2746,
+  "test_fail": 0,
+  "test_skip": 3,
+  "untracked_wip_tests_excluded": 8,
+  "evidence_files_produced": 70,
+  "sprint49_blockers_resolved": 7,
+  "new_tests_added": 3
+}

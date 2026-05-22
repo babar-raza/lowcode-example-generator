@@ -1,0 +1,31 @@
+{
+  "sprint": 51,
+  "head": "cc806a5",
+  "timestamp": "2026-05-20T17:38:20Z",
+  "verdict": "SPRINT51_COMPLETE_SPRINT50_VERIFIED_AND_PORTFOLIO_ADVANCED",
+  "sprint50_verified": true,
+  "sprint49_blockers_closed": true,
+  "tests": {
+    "full": "2795 passed, 0 failed, 3 skipped",
+    "targeted": "489 passed"
+  },
+  "portfolio": {
+    "contract_parity": "42/42",
+    "published": 28,
+    "pr_ready": 14,
+    "summary": "42/42 contract parity, 28 published, 14 PR-ready"
+  },
+  "conservation": "42 = 42",
+  "dirty_state": {
+    "source": 0,
+    "test": 0,
+    "actionable": 0
+  },
+  "pdf_state": {
+    "published": 5,
+    "pr_ready": 14,
+    "open_prs": 0,
+    "approval_gates": "BOTH_ABSENT"
+  },
+  "next_action": "PDF PR Recovery when APPROVE_LIVE_PR is set"
+}

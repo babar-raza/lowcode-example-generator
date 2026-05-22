@@ -1,0 +1,143 @@
+{
+  "bundle_name": "sprint57-evidence-bundle-20260521-132021",
+  "created_at": "2026-05-21T13:20:21.407810",
+  "sprint": "Sprint 57",
+  "verdict": "LOWCODE_SPRINT57_EVIDENCE_REPAIR_IO_AUTHORITY_REGENERATION_COMPLETE",
+  "total_files": 33,
+  "sha256": "1995bfffba5f682480d34f1f431abad6dc4d2e1f4aab66885e2700866fd60d37",
+  "zip_path": "workspace\\verification\\latest\\sprint57-evidence-bundle-20260521-132021.zip",
+  "files": [
+    {
+      "file": "sprint57/00-sprint56-evidence-audit.md",
+      "size": 9047
+    },
+    {
+      "file": "sprint57/01-sprint56-claim-vs-proof-matrix.md",
+      "size": 6266
+    },
+    {
+      "file": "sprint57/02-corrected-state-downgrade.md",
+      "size": 4822
+    },
+    {
+      "file": "sprint57/denominator\\coverage-summary.md",
+      "size": 1623
+    },
+    {
+      "file": "sprint57/denominator\\lowcode-namespace-inventory.json",
+      "size": 8333
+    },
+    {
+      "file": "sprint57/denominator\\planned-runnable-denominator.json",
+      "size": 3386
+    },
+    {
+      "file": "sprint57/destination\\branch-deletion-policy.md",
+      "size": 1992
+    },
+    {
+      "file": "sprint57/destination\\content_check.py",
+      "size": 1560
+    },
+    {
+      "file": "sprint57/destination\\content_check2.py",
+      "size": 1844
+    },
+    {
+      "file": "sprint57/destination\\content_check3.py",
+      "size": 1684
+    },
+    {
+      "file": "sprint57/destination\\destination-content-proof.json",
+      "size": 671
+    },
+    {
+      "file": "sprint57/destination\\destination-content-proof2.json",
+      "size": 953
+    },
+    {
+      "file": "sprint57/destination\\destination-lowcode-content.json",
+      "size": 1826
+    },
+    {
+      "file": "sprint57/destination\\destination-repo-audit.json",
+      "size": 3876
+    },
+    {
+      "file": "sprint57/destination\\readme-update-matrix.md",
+      "size": 2249
+    },
+    {
+      "file": "sprint57/destination\\repo_audit.py",
+      "size": 2049
+    },
+    {
+      "file": "sprint57/destination\\upgrade_queue.py",
+      "size": 2941
+    },
+    {
+      "file": "sprint57/evidence-contract.json",
+      "size": 5862
+    },
+    {
+      "file": "sprint57/final-verdict.md",
+      "size": 4486
+    },
+    {
+      "file": "sprint57/hygiene\\root-clutter-audit.md",
+      "size": 2831
+    },
+    {
+      "file": "sprint57/io-authority\\io-format-authority-matrix.json",
+      "size": 24641
+    },
+    {
+      "file": "sprint57/io-authority\\io-format-authority-matrix.md",
+      "size": 4518
+    },
+    {
+      "file": "sprint57/io-authority\\package-evidence-ledger.json",
+      "size": 2728
+    },
+    {
+      "file": "sprint57/io-authority\\unresolved-format-questions.md",
+      "size": 2850
+    },
+    {
+      "file": "sprint57/lane-ownership.md",
+      "size": 2426
+    },
+    {
+      "file": "sprint57/lanes\\lane-D\\contract-drift-scan.json",
+      "size": 6025
+    },
+    {
+      "file": "sprint57/lanes\\lane-D\\fail-closed-fix.md",
+      "size": 2338
+    },
+    {
+      "file": "sprint57/lanes\\lane-I\\git-status-before.txt",
+      "size": 1679
+    },
+    {
+      "file": "sprint57/lanes\\lane-I\\test-run.log",
+      "size": 773
+    },
+    {
+      "file": "sprint57/regeneration\\failures-and-blockers.md",
+      "size": 2702
+    },
+    {
+      "file": "sprint57/regeneration\\full-regeneration-ledger.json",
+      "size": 2278
+    },
+    {
+      "file": "sprint57/regeneration\\full-regeneration-summary.md",
+      "size": 1770
+    },
+    {
+      "file": "sprint57/sprint-state.json",
+      "size": 5414
+    }
+  ]
+}

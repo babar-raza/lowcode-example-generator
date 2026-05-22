@@ -1,0 +1,29 @@
+{
+  "sprint": 40,
+  "date": "2026-05-19",
+  "branch": "main",
+  "head": "0a4e695",
+  "verdict": "SPRINT40_IV_PASS_PRS_RECOVERED_DIRTY_STATE_CLASSIFIED",
+  "commits": [],
+  "tests": {"total": 2130, "passed": 2130, "failed": 0},
+  "families": {
+    "cells": {"version": "26.5.1", "published": 9, "pending": 0, "contracts": 9, "status": "FAMILY_COMPLETE", "drift": "CURRENT"},
+    "words": {"version": "26.5.0", "published": 8, "pending": 0, "contracts": 8, "status": "PILOT_COMPLETE", "drift": "CURRENT"},
+    "pdf": {"version": "26.5.0", "published": 5, "pending": 14, "contracts": 19, "status": "PARTIAL_CANARY", "drift": "CURRENT"},
+    "diagram": {"version": "26.5.0", "published": 2, "pending": 0, "contracts": 2, "status": "PILOT_COMPLETE", "drift": "CURRENT"},
+    "email": {"version": "26.4.0", "published": 1, "pending": 0, "contracts": 0, "status": "PILOT_COMPLETE", "drift": "CURRENT"},
+    "slides": {"version": "26.5.0", "published": 3, "pending": 0, "contracts": 0, "status": "PILOT_COMPLETE", "drift": "CURRENT"}
+  },
+  "totals": {"published": 28, "pending": 14, "contracts": 38, "target_repos_healthy": 6},
+  "version_drift": "ALL_CURRENT",
+  "pdf_prs": {"status": "OPEN", "prs": [5, 6, 7, 8, 9, 10], "merge_gate": "NOT_SET"},
+  "blockers": {
+    "pdf_merge_gate": "APPROVAL_TOKEN_NOT_SET",
+    "formimporter": "STILL_BLOCKED",
+    "ocr": "DEPENDENCY_BLOCKED",
+    "psd": "DEPENDENCY_BLOCKED",
+    "words_processor": "PERMANENTLY_BLOCKED",
+    "pdf_timestamp": "PERMANENTLY_BLOCKED",
+    "pdf_ofd": "PERMANENTLY_BLOCKED"
+  }
+}

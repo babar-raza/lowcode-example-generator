@@ -1,0 +1,41 @@
+{
+  "sprint": 50,
+  "head": "5e66c8b",
+  "sprint49_failures": 6,
+  "current_failures": 0,
+  "resolution": "All 6 failures fixed by commit 5e66c8b (format-authority)",
+  "classification": [
+    {
+      "test": "test_output_format_correct[cells:SpreadsheetConverter]",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b"
+    },
+    {
+      "test": "test_output_format_correct[pdf:FormExporter]",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b"
+    },
+    {
+      "test": "test_output_format_correct[email:Converter]",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b"
+    },
+    {
+      "test": "test_input_format_correct[cells:TextConverter]",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b"
+    },
+    {
+      "test": "test_cells_spreadsheet_converter",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b"
+    },
+    {
+      "test": "test_text_converter_scenario_uses_csv",
+      "classification": "pre_existing_fixed_by_subsequent_commit",
+      "fixed_in": "5e66c8b",
+      "note": "Test renamed/replaced in format-authority commit"
+    }
+  ],
+  "proof": "All 85 format-related tests pass at HEAD 5e66c8b (see failing-tests-rerun-log.txt)"
+}

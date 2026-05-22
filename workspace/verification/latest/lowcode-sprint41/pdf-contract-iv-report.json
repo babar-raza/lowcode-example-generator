@@ -1,0 +1,13 @@
+{
+  "lane": "A",
+  "status": "ALL_19_VERIFIED",
+  "new_contracts_verified": [
+    {"id": "pdf-security", "type": "Security", "options": "EncryptionOptions", "result": "PASS"},
+    {"id": "pdf-form-flattener", "type": "FormFlattener", "options": "FormFlattenAllFieldsOptions", "result": "PASS"},
+    {"id": "pdf-form-editor", "type": "FormEditor", "options": "FormRemoveAllFieldsOptions", "result": "PASS"},
+    {"id": "pdf-form-exporter", "type": "FormExporter", "options": "FormExporterToJsonOptions", "result": "PASS"},
+    {"id": "pdf-signature", "type": "Signature", "options": "SignOptions", "result": "PASS"}
+  ],
+  "total_pdf_contracts": 19,
+  "waves": {"A": 5, "B": 3, "C": 3, "D": 3, "E": 2, "F": 2, "G": 1}
+}

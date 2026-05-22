@@ -1,0 +1,23 @@
+{
+  "report_type": "final-state-summary",
+  "generated_at": "2026-05-20T13:54:51.711418+00:00",
+  "sprint": 53,
+  "head": "f216bd7",
+  "tests": {
+    "passed": 2807,
+    "skipped": 3,
+    "failed": 0
+  },
+  "portfolio": {
+    "published": 42,
+    "pr_ready": 0,
+    "total_contracts": 42,
+    "parity": true
+  },
+  "planner": {
+    "total_actions": 7,
+    "next_required": 1,
+    "verdict": "PLANNER_EXHAUSTED"
+  },
+  "verdict": "SPRINT53_COMPLETE"
+}

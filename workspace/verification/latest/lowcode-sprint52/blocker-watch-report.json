@@ -1,0 +1,58 @@
+{
+  "sprint": 52,
+  "head": "007edb2",
+  "permanent_blockers": [
+    {
+      "family": "pdf",
+      "type": "Timestamp",
+      "reason": "PERMANENTLY_BLOCKED"
+    },
+    {
+      "family": "pdf",
+      "type": "Ofd",
+      "reason": "PERMANENTLY_BLOCKED"
+    },
+    {
+      "family": "words",
+      "type": "Processor",
+      "reason": "PERMANENTLY_BLOCKED"
+    }
+  ],
+  "library_blockers": [
+    {
+      "family": "pdf",
+      "type": "FormImporter",
+      "reason": "Aspose.PDF 26.5.0 bug"
+    }
+  ],
+  "dependency_blockers": [
+    {
+      "family": "ocr",
+      "reason": "Aspose.AI.LLM not on NuGet"
+    },
+    {
+      "family": "psd",
+      "reason": "Aspose.JavaAttributes not on NuGet"
+    }
+  ],
+  "approval_blockers": [
+    {
+      "action": "PDF_PR_RECOVERY",
+      "gate": "APPROVE_LIVE_PR"
+    },
+    {
+      "action": "PDF_PR_MERGE",
+      "gate": "APPROVE_MERGE_PR"
+    },
+    {
+      "action": "VERSION_DRIFT_PUSH",
+      "gate": "APPROVE_README_PUSH"
+    }
+  ],
+  "design_blockers": [
+    {
+      "action": "CONTRACT_FIRST_CODEGEN",
+      "taskcard": "TC-CONTRACT-FIRST-CODEGEN"
+    }
+  ]
+}

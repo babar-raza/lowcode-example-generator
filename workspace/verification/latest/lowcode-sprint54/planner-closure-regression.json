@@ -1,0 +1,12 @@
+{
+  "report_type": "planner-closure-regression",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "head": "ccb45a9",
+  "total_actions": 6,
+  "next_required_count": 0,
+  "next_required_ids": [],
+  "close_dirty_state_present": false,
+  "recurring_checks_satisfied": 6,
+  "verdict": "PLANNER_EXHAUSTED"
+}

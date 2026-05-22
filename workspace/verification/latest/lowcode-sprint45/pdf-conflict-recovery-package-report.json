@@ -1,0 +1,12 @@
+{
+  "sprint": 45,
+  "packages_verified": 5,
+  "packages": [
+    {"id": "pr5", "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/", "examples": ["DocConverter", "Html", "XlsConverter"], "exists": true},
+    {"id": "pr6", "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/", "examples": ["Jpeg", "Png", "Tiff"], "exists": true},
+    {"id": "pr7", "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/", "examples": ["ImageExtractor", "TableGenerator", "TocGenerator"], "exists": true},
+    {"id": "pr8", "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/", "examples": ["Security", "FormFlattener"], "exists": true},
+    {"id": "pr9", "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/", "examples": ["FormEditor", "FormExporter"], "exists": true}
+  ],
+  "remote_action": "NONE — APPROVE_LIVE_PR absent"
+}

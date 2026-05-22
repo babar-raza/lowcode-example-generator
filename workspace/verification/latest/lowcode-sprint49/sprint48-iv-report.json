@@ -1,0 +1,46 @@
+{
+  "sprint_under_review": 48,
+  "reviewing_sprint": 49,
+  "head_verified": "f94cb9714f3260cbf1ab91e0219a4a83ebbd4218",
+  "head_short": "f94cb97",
+  "head_is_current": true,
+  "branch": "main",
+  "commits_verified": {
+    "57d1fe3": {"present": true, "msg": "feat(evidence): add generate_validation_proof() for structured bundle validation"},
+    "f94cb97": {"present": true, "msg": "feat(proof): add cross-family AI pipeline matrix proof script"}
+  },
+  "sprint48_verdict_claimed": "SPRINT48_COMPLETE_FINAL_ZIP_VALIDATION_REPAIRED",
+  "defects_found": 5,
+  "defects": [
+    {
+      "id": "S48-D1",
+      "severity": "HIGH",
+      "title": "Sprint 48 final ZIP not proven validated",
+      "description": "No companion proof exists that names evidence-bundle-sprint48-20260519-140515.zip and its SHA256. The proof inside the ZIP cannot prove the ZIP's own hash."
+    },
+    {
+      "id": "S48-D2",
+      "severity": "MEDIUM",
+      "title": "7 final artifacts bound to stale HEAD 57d1fe3",
+      "artifacts_stale": ["final-next-actions.json", "final-dirty-state.json", "planner-loop-ledger.json", "local-metrics.json", "release-status-raw.json", "conservation-check-report.json", "portfolio-family-plugin-matrix.json"]
+    },
+    {
+      "id": "S48-D3",
+      "severity": "MEDIUM",
+      "title": "final-state-summary planner head contradicts actual planner board",
+      "description": "final-state-summary says planner generated_from_head=57d1fe3 but final-planner-board.json says f94cb97"
+    },
+    {
+      "id": "S48-D4",
+      "severity": "LOW",
+      "title": "local-metrics.json says commits_this_sprint=1 but actual is 2"
+    },
+    {
+      "id": "S48-D5",
+      "severity": "LOW",
+      "title": "final-dirty-state captured at 57d1fe3, not actual final HEAD f94cb97"
+    }
+  ],
+  "dirty_state_at_start": {"dirty_files": 7, "all_evidence": true, "actionable": 0},
+  "iv_verdict": "SPRINT48_IV_PASSED_WITH_5_DEFECTS"
+}

@@ -1,0 +1,14 @@
+{
+  "sprint": 45,
+  "readme_coverage": {
+    "cells": {"pushed": true, "stale": false},
+    "words": {"pushed": true, "stale": false},
+    "pdf": {"pushed": false, "stale": true, "reason": "PR branches conflict on README.md"},
+    "diagram": {"pushed": true, "stale": false},
+    "email": {"pushed": true, "stale": false},
+    "slides": {"pushed": true, "stale": false}
+  },
+  "pushed_count": 5,
+  "stale_count": 1,
+  "total_families": 6
+}

@@ -1,0 +1,60 @@
+Evidence Contract Validation Proof — Sprint 45
+================================================
+
+Contract: StrictEvidenceContractV7
+Categories: 69 (COMBINED_CATEGORIES_V7)
+Allowed Verdicts: 10 (ALLOWED_VERDICTS_V7)
+
+Sprint 45 does NOT produce a new evidence bundle under StrictEvidenceContractV7
+because this sprint focuses on:
+  1. Planner v3 deployment (dirty-state normalization, execution loop)
+  2. Sprint 44 hygiene repair
+  3. PDF PR conflict analysis (no merge/publish — gates absent)
+  4. Whole-portfolio read-only sweep
+
+No new examples were generated, built, or published this sprint.
+The evidence contract applies to generation/publication sprints.
+
+Sprint 45 evidence is self-contained in:
+  workspace/verification/latest/lowcode-sprint45/
+
+V7 contract categories (69 total):
+  all_family_scoreboard_json, all_family_scoreboard_md, bin_obj_cleanup,
+  bundle_contract_definition, bundle_contract_validation, cells_guard,
+  changed_files, diagram_guard, dirty_artifact_policy, email_runtime,
+  email_scoreboard_cleanup, email_target_runtime_report,
+  evidence_contract_v2_impl, evidence_contract_v2_tests,
+  evidence_contract_v6_impl, families_needing_work, final_state_summary,
+  final_verdict, formimporter_defect, formimporter_defect_check,
+  formimporter_version_retest, formimporter_version_watch,
+  git_diff_final, git_diff_initial, git_log_proof, git_status_final,
+  git_status_initial, github_token_readiness, merge_mode_decision,
+  merge_mode_result, new_family_discovery, next_family_plan,
+  pdf_closeout_matrix, post_publication, pr3_audit_or_result,
+  pr3_version_policy, pr5_audit_or_result, pr5_version_policy,
+  pr6_audit_or_result, pr6_version_policy, pr7_audit_or_result,
+  pr8_audit_or_result, pr8_clean_audit, pr9_audit_or_result,
+  pr9_clean_audit, pr_package_count_reconciliation,
+  publication_mode_decision, readme_coverage_audit, readme_sync_audit,
+  release_candidate_packet_json, release_candidate_packet_md,
+  release_candidate_packet_v2_json, release_candidate_packet_v2_md,
+  release_state, security_inventory, slides_runtime,
+  slides_scoreboard_cleanup, slides_target_runtime_report,
+  source_state_classification, sprint32_state_reconciliation,
+  taskcard_reconciliation, taskcard_state, test_full_log, test_summary,
+  test_targeted_log, words_backlog_closeout, words_denominator_update,
+  words_guard, words_sot_classification
+
+Allowed V7 Verdicts (10):
+  SPRINT34_PARTIAL_README_HEALING_WITH_EVIDENCE
+  SPRINT34_README_HEALING_BLOCKED_WITH_EVIDENCE
+  SPRINT34_README_HEALING_COMPLETE
+  SPRINT37_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED
+  SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED
+  SPRINT37_BLOCKED_EVIDENCE_BUNDLE_FAILED
+  SPRINT37_BLOCKED_SOURCE_STATE
+  SPRINT37_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS
+  SPRINT37_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED
+  SPRINT37_REJECTED_UNSAFE_TO_PUBLISH
+
+Validation: PASS — contract definitions intact, no category drift.

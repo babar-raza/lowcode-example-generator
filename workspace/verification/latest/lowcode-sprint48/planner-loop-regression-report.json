@@ -1,0 +1,31 @@
+{
+  "sprint": 48,
+  "lane": "C",
+  "head": "57d1fe3",
+  "planner_loop": {
+    "cycles": 2,
+    "cycle1_handlers_executed": 6,
+    "cycle2_handlers_executed": 0,
+    "stop_reason": "stopped_no_change",
+    "board_fingerprint": "f77d53731da8ea4e",
+    "pre_execution_idempotency": true
+  },
+  "dirty_state_consistency": {
+    "git_status_dirty_count": 7,
+    "dirty_state_total": 7,
+    "evidence_count": 7,
+    "package_artifact_count": 0,
+    "unknown_count": 0,
+    "actionable_count": 0,
+    "all_dirty_are_evidence": true,
+    "git_status_matches_dirty_state": true
+  },
+  "regression_checks": {
+    "cycle2_zero_handlers": "PASS",
+    "dirty_state_matches_git": "PASS",
+    "package_artifacts_not_evidence": "PASS",
+    "generated_from_head_correct": "PASS",
+    "conservation_pass": "PASS"
+  },
+  "verdict": "ALL_REGRESSION_CHECKS_PASS"
+}

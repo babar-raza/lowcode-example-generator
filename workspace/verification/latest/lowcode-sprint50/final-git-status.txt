@@ -1,0 +1,44 @@
+ M tests/unit/test_gate_output_validation.py
+ M workspace/manifests/existing-examples-index.json
+ M workspace/manifests/fixture-registry.json
+ M workspace/manifests/package-lock.json
+ M workspace/verification/latest/_last_promoted_by.json
+ M workspace/verification/latest/aggregate-gate-results.json
+ M workspace/verification/latest/api-consumer-relationships.json
+ M workspace/verification/latest/api-delta-report.json
+ M workspace/verification/latest/catalog-hash-validation.json
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/cells-source-of-truth-proof.json
+ M workspace/verification/latest/example-gate-results.json
+ M workspace/verification/latest/example-impact-report.json
+ M workspace/verification/latest/families/cells/_evidence_metadata.json
+ M workspace/verification/latest/families/cells/aggregate-gate-results.json
+ M workspace/verification/latest/families/cells/api-consumer-relationships.json
+ M workspace/verification/latest/families/cells/api-delta-report.json
+ M workspace/verification/latest/families/cells/cells-source-of-truth-proof.json
+ M workspace/verification/latest/families/cells/example-gate-results.json
+ M workspace/verification/latest/families/cells/example-impact-report.json
+ M workspace/verification/latest/families/cells/gate-results.json
+ M workspace/verification/latest/families/cells/pr-candidate-manifest.json
+ M workspace/verification/latest/gate-results.json
+ M workspace/verification/latest/plugin-type-role-classification.json
+ M workspace/verification/latest/pr-candidate-manifest.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/runnable-entrypoint-scores.json
+ M workspace/verification/latest/stale-existing-examples.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? leg.zip
+?? scripts/build_closure_repair_bundle.py
+?? scripts/build_mt005_bundle.py
+?? tests/unit/test_codegen_contract_consumption.py
+?? tests/unit/test_format_capability_populator_contract.py
+?? tests/unit/test_gate_contract_validation.py
+?? tests/unit/test_manifest_contract_fields.py
+?? tests/unit/test_packet_contract_injection.py
+?? tests/unit/test_planner_contract_consumption.py
+?? tests/unit/test_readme_contract_rendering.py
+?? tests/unit/test_runner_contract_evidence.py

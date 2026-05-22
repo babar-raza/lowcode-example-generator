@@ -1,0 +1,17 @@
+{
+  "report_type": "contract-parity-report",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "all_published": true,
+  "families_complete": 6,
+  "families_partial": 0,
+  "family_verdicts": {
+    "cells": "UNKNOWN",
+    "words": "UNKNOWN",
+    "pdf": "UNKNOWN",
+    "diagram": "UNKNOWN",
+    "email": "UNKNOWN",
+    "slides": "UNKNOWN"
+  },
+  "verdict": "FULL_PARITY"
+}

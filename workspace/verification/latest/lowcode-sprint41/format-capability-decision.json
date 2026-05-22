@@ -1,0 +1,14 @@
+{
+  "lane": "F",
+  "status": "COMMIT_APPROVED",
+  "files": [
+    {"path": "src/plugin_examples/format_capability/classifier.py", "delta": "+1/-1", "coherent": true},
+    {"path": "src/plugin_examples/publisher/readme_renderer.py", "delta": "+68", "coherent": true},
+    {"path": "templates/root-readme/lowcode-family-readme.md.j2", "delta": "+1/-1", "coherent": true},
+    {"path": "tests/unit/test_format_capability.py", "delta": "+15", "coherent": true}
+  ],
+  "test_evidence": "254/254 format-capability tests PASS, 2187/2187 full suite PASS",
+  "decision": "COMMIT",
+  "overlap_with_merge": false,
+  "backwards_compatible": true
+}

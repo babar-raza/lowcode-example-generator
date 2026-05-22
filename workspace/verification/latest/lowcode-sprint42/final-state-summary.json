@@ -1,0 +1,49 @@
+{
+  "sprint": 42,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "verdict": "SPRINT42_CONTRACT_PARITY_ACHIEVED_MERGE_BLOCKED",
+  "head_before": "b0fee12",
+  "head_after": null,
+  "committed_this_sprint": false,
+  "commit_note": "Test fix (pdf-splitter status assertion) and pdf-splitter contract fix pending stage/commit",
+  "staged_changes": [
+    "tests/unit/test_scenario_contracts.py — test_pdf_splitter_is_pr_dry_run_ready renamed to test_pdf_splitter_is_merged",
+    "pipeline/contracts/pdf/pdf-splitter.json — publication_status PR_DRY_RUN_READY->MERGED (matches denominator)"
+  ],
+  "test_results": {
+    "full_suite_passed": 2365,
+    "full_suite_skipped": 3,
+    "full_suite_failed": 0,
+    "raw_log": "workspace/verification/latest/lowcode-sprint42/raw-full-test-log.txt"
+  },
+  "portfolio": {
+    "active_families": 6,
+    "blocked_families": 2,
+    "total_pipeline_contracts": 42,
+    "total_published": 28,
+    "total_pr_dry_run_ready": 14,
+    "conservation_check": "ALL PASS"
+  },
+  "lanes_completed": {
+    "lane_0_sprint41_iv": "COMPLETE — root-caused test-count mismatch, documented inter-session commits",
+    "lane_a_protected_work": "COMPLETE — all protected files absorbed by inter-session commits",
+    "lane_b_pdf_merge": "BLOCKED — gate not set",
+    "lane_c_post_merge": "SKIPPED — no merge performed",
+    "lane_d_contract_backfill": "COMPLETE — 4 contracts created, 2 fixed, schema expanded (absorbed by 06bb5a3)",
+    "lane_e_conservation": "COMPLETE — all equations PASS, no silent drops",
+    "lane_f_bundle": "COMPLETE"
+  },
+  "blockers": {
+    "pdf_pr_merge": "6 PRs (#5-#10) require APPROVE_MERGE_PR",
+    "pdf_formimporter": "Aspose.PDF 26.5.0 bug",
+    "ocr": "Aspose.AI.LLM not on NuGet",
+    "psd": "Aspose.JavaAttributes not on NuGet"
+  },
+  "key_findings": [
+    "Contract parity achieved: all 6 active families have pipeline contracts (42 total)",
+    "Sprint 41 test-count mismatch root-caused: raw log timing vs uncommitted V8 tests",
+    "pdf-splitter contract was stale (PR_DRY_RUN_READY) — it was merged in PR#2, fixed to MERGED",
+    "4 inter-session commits between Sprint 41 and Sprint 42 absorbed significant concurrent work",
+    "All conservation equations pass across all 6 active families"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "sprint_under_review": 46,
+  "reviewing_sprint": 47,
+  "head": "fe5fb4e",
+  "contradictions": [
+    {
+      "id": "CAVEAT-01",
+      "category": "dirty_state_classification",
+      "severity": "MEDIUM",
+      "title": "14 package artifacts misclassified as evidence",
+      "description": "final-dirty-state.json reports evidence_dirty_count=21, but git status shows 14 workspace/pr-dry-run PDF/PFX files + 7 workspace/verification/latest JSON files. The 14 pr-dry-run files are package artifacts (input PDFs, output PDFs, test.pfx), not evidence. They should be classified separately.",
+      "actual_breakdown": {
+        "workspace_verification_latest_json": 7,
+        "workspace_pr_dry_run_pdf": 12,
+        "workspace_pr_dry_run_pfx": 1,
+        "workspace_pr_dry_run_output_pdf": 1,
+        "total": 21
+      },
+      "correct_classification": {
+        "evidence_files": 7,
+        "package_artifact_files": 14
+      },
+      "fix_lane": "A"
+    },
+    {
+      "id": "CAVEAT-02",
+      "category": "planner_loop_cycle2",
+      "severity": "LOW",
+      "title": "Cycle 2 executes 6 no-op handlers before detecting idempotency",
+      "description": "planner-loop-ledger.json shows cycle 2 executed all 6 handlers (total_executed=12 across 2 cycles) with 0 changes, then stopped. The fingerprint match was known before execution. Cycle 2 handlers are wasted work.",
+      "cycle2_executed": ["PORTFOLIO_CONSERVATION_CHECK", "VERSION_DRIFT_CHECK", "FORMIMPORTER_RETEST", "OCR_DEPENDENCY_RECHECK", "PSD_DEPENDENCY_RECHECK", "PERMANENTLY_BLOCKED_WATCH"],
+      "cycle2_changed": [],
+      "fix_lane": "C"
+    },
+    {
+      "id": "CAVEAT-03",
+      "category": "evidence_contract_proof",
+      "severity": "MEDIUM",
+      "title": "Evidence contract proof is aspirational, not actual",
+      "description": "evidence-contract-validation-proof.txt says 'Validation will be run against the final bundle' (future tense). No actual PASS/FAIL result against the ZIP is recorded. The proof describes what the contract checks, not whether the bundle passed.",
+      "proof_file": "evidence-contract-validation-proof.txt",
+      "fix_lane": "D"
+    },
+    {
+      "id": "CAVEAT-04",
+      "category": "pdf_recovery_packet",
+      "severity": "LOW",
+      "title": "PDF recovery packet lacks execution phases and rollback plan",
+      "description": "pdf-conflict-free-recovery-packet.md has exact commands but no phased execution plan, no validation gates between phases, no rollback instructions if a step fails.",
+      "fix_lane": "E"
+    },
+    {
+      "id": "CAVEAT-05",
+      "category": "pr_dry_run_artifact_provenance",
+      "severity": "LOW",
+      "title": "14 dirty workspace/pr-dry-run binary files have unknown provenance",
+      "description": "git diff --stat shows 14 modified binary files in workspace/pr-dry-run/ but byte sizes are identical (Bin X -> X bytes) for 13 of 14. Only signature/output.pdf changed size (616498 -> 616462). These may be metadata-only changes from PDF library regeneration. Provenance not investigated in Sprint 46.",
+      "files_same_size": 13,
+      "files_size_changed": 1,
+      "size_changed_file": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/output.pdf",
+      "fix_lane": "B"
+    }
+  ],
+  "contradiction_count": 5,
+  "blocking_contradictions": 0,
+  "note": "All contradictions are caveats to fix in Sprint 47. None block Sprint 46 verdict."
+}

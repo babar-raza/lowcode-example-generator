@@ -1,0 +1,44 @@
+{
+  "contract": "PlannerSprintEvidenceContract",
+  "contract_version": "planner-v1",
+  "validated_bundle": "workspace\\verification\\latest\\lowcode-sprint47\\evidence-bundle-sprint47-20260519-134043.zip",
+  "validated_bundle_sha256": "e4fd0c4ec9ca6e9dd18b248a6f5ec343cbe9a74abdd08b216b44f8dda485e38c",
+  "validated_bundle_size_bytes": 29578,
+  "validation_timestamp": "2026-05-19T13:55:12.586857+00:00",
+  "result": {
+    "passed": true,
+    "verdict": "PLANNER_CONTRACT_PASSED",
+    "file_count": 36,
+    "categories_found": [
+      "final_state_summary",
+      "final_next_actions",
+      "final_git_status",
+      "final_git_log",
+      "final_git_diff_stat",
+      "final_changed_files",
+      "test_full_log",
+      "test_targeted_log",
+      "planner_cycle_ledger",
+      "planner_final_board",
+      "planner_loop_ledger",
+      "dirty_state_proof",
+      "taskcard_state",
+      "local_metrics",
+      "bundle_manifest",
+      "no_secret_proof",
+      "execution_ledger"
+    ],
+    "categories_found_count": 17,
+    "categories_missing": [],
+    "categories_missing_count": 0,
+    "failures": [],
+    "failure_count": 0,
+    "secret_violations": [],
+    "secret_violation_count": 0
+  },
+  "content_checks": [
+    "final-state-summary.json: 'head' field",
+    "final-next-actions.json: 'generated_from_head' field",
+    "bundle-manifest.json: all files have sha256"
+  ]
+}

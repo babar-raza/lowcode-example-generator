@@ -1,0 +1,46 @@
+{
+  "contract": "PlannerSprintEvidenceContract",
+  "contract_version": "planner-v1",
+  "subject": "Sprint 51 bundle external validation",
+  "validated_bundle": "workspace\\verification\\latest\\lowcode-sprint51\\evidence-bundle-sprint51-20260520-124301.zip",
+  "validated_bundle_sha256": "056c3b97c1cef1936bd1fcae44b634d36bc96b58ccb85c6e00548ccd5687f1af",
+  "validated_bundle_size_bytes": 37274,
+  "validation_timestamp": "2026-05-20T13:09:36.390783+00:00",
+  "result": {
+    "passed": true,
+    "verdict": "PLANNER_CONTRACT_PASSED",
+    "file_count": 73,
+    "categories_found": [
+      "final_state_summary",
+      "final_next_actions",
+      "final_git_status",
+      "final_git_log",
+      "final_git_diff_stat",
+      "final_changed_files",
+      "test_full_log",
+      "test_targeted_log",
+      "planner_cycle_ledger",
+      "planner_final_board",
+      "planner_loop_ledger",
+      "dirty_state_proof",
+      "taskcard_state",
+      "local_metrics",
+      "bundle_manifest",
+      "no_secret_proof",
+      "execution_ledger"
+    ],
+    "categories_found_count": 17,
+    "categories_missing": [],
+    "categories_missing_count": 0,
+    "failures": [],
+    "failure_count": 0,
+    "secret_violations": [],
+    "secret_violation_count": 0
+  },
+  "additional_secret_scan": {
+    "patterns_checked": 3,
+    "violations": [],
+    "verdict": "CLEAN"
+  },
+  "overall_verdict": "SPRINT51_BUNDLE_EXTERNALLY_VALIDATED"
+}

@@ -1,0 +1,12 @@
+{
+  "sprint": 52,
+  "subject": "pdf-approval-runbook",
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  },
+  "ready_to_execute": false,
+  "pr_types_count": 14,
+  "pr_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR",
+  "merge_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples merge-pr --family pdf --pr-number <N> --merge --approval-token APPROVE_MERGE_PR"
+}

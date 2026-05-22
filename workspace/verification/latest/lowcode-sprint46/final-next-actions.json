@@ -1,0 +1,31 @@
+{
+  "sprint": 46,
+  "generated_from_head": "fe5fb4e",
+  "next_actions": [
+    {
+      "priority": 1,
+      "action": "Set APPROVE_LIVE_PR and recreate PDF PRs #5-#10",
+      "reason": "All 6 PRs CONFLICTING. Recovery packet ready with exact commands.",
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "commands": "See pdf-conflict-free-recovery-packet.md for exact steps"
+    },
+    {
+      "priority": 2,
+      "action": "Set APPROVE_MERGE_PR and merge conflict-free PDF PRs",
+      "reason": "14 examples awaiting publication",
+      "gate": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR"
+    },
+    {
+      "priority": 3,
+      "action": "Retest FormImporter when Aspose.PDF > 26.5.0 released",
+      "reason": "Library bug blocks FormImporter example",
+      "gate": null
+    },
+    {
+      "priority": 4,
+      "action": "Recheck OCR/PSD NuGet dependencies",
+      "reason": "Both still 404",
+      "gate": null
+    }
+  ]
+}

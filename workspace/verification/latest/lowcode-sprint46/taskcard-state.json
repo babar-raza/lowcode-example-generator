@@ -1,0 +1,9 @@
+{
+  "sprint": 46,
+  "open_taskcards": [
+    {"id": "TC-PDF-FORMIMPORTER-RETEST", "family": "pdf", "status": "BLOCKED", "blocked_by": "Aspose.PDF 26.5.0 bug"},
+    {"id": "TC-OCR-REFLECTION", "family": "ocr", "status": "DEPENDENCY_BLOCKED", "blocked_by": "NuGet 404"},
+    {"id": "TC-PSD-REFLECTION", "family": "psd", "status": "DEPENDENCY_BLOCKED", "blocked_by": "NuGet 404"},
+    {"id": "TC-PDF-PR-CONFLICT-RESOLUTION", "family": "pdf", "status": "APPROVAL_BLOCKED", "blocked_by": "APPROVE_LIVE_PR absent"}
+  ]
+}

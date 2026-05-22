@@ -1,0 +1,24 @@
+{
+  "sprint": 49,
+  "generated_from_head": "a66dd75",
+  "next_actions": [
+    {
+      "priority": 1,
+      "action": "Set APPROVE_LIVE_PR and recreate PDF PRs #5-#10",
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR"
+    },
+    {
+      "priority": 2,
+      "action": "Set APPROVE_MERGE_PR and merge recreated PRs",
+      "gate": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR"
+    },
+    {
+      "priority": 3,
+      "action": "Retest FormImporter when Aspose.PDF > 26.5.0"
+    },
+    {
+      "priority": 4,
+      "action": "Recheck OCR/PSD NuGet dependencies"
+    }
+  ]
+}

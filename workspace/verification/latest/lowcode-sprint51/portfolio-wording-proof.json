@@ -1,0 +1,11 @@
+{
+  "sprint": 51,
+  "sprint50_portfolio": {
+    "contract_parity": "42/42",
+    "published": 28,
+    "pr_ready": 14,
+    "summary": "42/42 contract parity, 28 published, 14 PR-ready"
+  },
+  "correct": true,
+  "does_not_say_42_published": true
+}

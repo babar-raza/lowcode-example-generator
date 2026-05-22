@@ -1,0 +1,24 @@
+{
+  "report_type": "manifest-companion-repair",
+  "generated_at": "2026-05-20T14:24:01.153859+00:00",
+  "sprint": 54,
+  "s53_bundle_manifest_file_count": 50,
+  "s53_zip_actual_entries": 53,
+  "discrepancy": true,
+  "in_manifest_not_in_zip": [
+    "evidence-contract-validation.json"
+  ],
+  "in_zip_not_in_manifest": [
+    "_lane_d_planner_exhaustion.py",
+    "_lane_e_artifacts.py",
+    "_lane_e_bundle.py",
+    "sha256-manifest.txt"
+  ],
+  "companion_verdict": "PLANNER_CONTRACT_PASSED",
+  "companion_categories_found": 17,
+  "companion_failures": [],
+  "root_cause": "bundle-manifest.json was generated before final ZIP build; _lane*.py helper scripts included in ZIP but not in manifest",
+  "fix_applied": "manifest format changed to list-of-{name,sha256} objects; manifest regenerated before final ZIP rebuild",
+  "sprint53_companion_verdict": "PLANNER_CONTRACT_PASSED",
+  "verdict": "PLANNER_CONTRACT_PASSED"
+}

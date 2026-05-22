@@ -1,0 +1,56 @@
+{
+  "total_cycles": 2,
+  "total_executed": 6,
+  "total_deferred": 0,
+  "stop_reason": "stopped_no_change",
+  "cycles": [
+    {
+      "cycle": 1,
+      "generated_from_head": "57d1fe3",
+      "board_fingerprint": "f77d53731da8ea4e",
+      "action_count": 8,
+      "safe_count": 6,
+      "blocked_count": 2,
+      "executed": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "changed_actions": [],
+      "noop_actions": [
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH"
+      ],
+      "verdict": "EXECUTED_6_ACTIONS"
+    },
+    {
+      "cycle": 2,
+      "generated_from_head": "57d1fe3",
+      "board_fingerprint": "f77d53731da8ea4e",
+      "action_count": 8,
+      "safe_count": 6,
+      "blocked_count": 2,
+      "executed": [],
+      "changed_actions": [],
+      "noop_actions": [],
+      "verdict": "IDEMPOTENT_NO_CHANGE"
+    }
+  ],
+  "final_dirty_state": {
+    "source_dirty_count": 0,
+    "config_dirty_count": 0,
+    "test_dirty_count": 0,
+    "evidence_dirty_count": 1,
+    "generated_artifact_count": 0,
+    "package_artifact_count": 0,
+    "unknown_dirty_count": 0,
+    "actionable_count": 0
+  }
+}

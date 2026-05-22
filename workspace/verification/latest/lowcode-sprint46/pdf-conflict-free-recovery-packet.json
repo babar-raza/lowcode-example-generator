@@ -1,0 +1,73 @@
+{
+  "sprint": 46,
+  "strategy": "recreate_all_six_prs",
+  "reason": "All 6 PRs conflict on README.md. Recreation from fresh branches against current main resolves all conflicts.",
+  "approval_gates": {
+    "APPROVE_LIVE_PR": "ABSENT",
+    "APPROVE_MERGE_PR": "ABSENT"
+  },
+  "execution_status": "DRY_RUN — gates absent",
+  "prs_to_close": [5, 6, 7, 8, 9, 10],
+  "prs_to_recreate": [
+    {
+      "target_pr": "new (replaces #5)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot/",
+      "examples": ["doc-converter", "html", "xls-converter"],
+      "title": "Add doc-converter, html, xls-converter LowCode examples"
+    },
+    {
+      "target_pr": "new (replaces #6)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+      "examples": ["jpeg", "png", "tiff"],
+      "title": "Add jpeg, png, tiff LowCode examples"
+    },
+    {
+      "target_pr": "new (replaces #7)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+      "examples": ["image-extractor", "table-generator", "toc-generator"],
+      "title": "Add image-extractor, table-generator, toc-generator LowCode examples"
+    },
+    {
+      "target_pr": "new (replaces #8)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+      "examples": ["form-flattener", "security"],
+      "title": "Add form-flattener, security LowCode examples"
+    },
+    {
+      "target_pr": "new (replaces #9)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+      "examples": ["form-editor", "form-exporter"],
+      "title": "Add form-editor, form-exporter LowCode examples"
+    },
+    {
+      "target_pr": "new (replaces #10)",
+      "local_package": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/",
+      "examples": ["signature"],
+      "title": "Add signature LowCode example"
+    }
+  ],
+  "recovery_commands": [
+    "# Step 1: Set approval gates",
+    "export PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+    "export PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+    "",
+    "# Step 2: Close existing PRs",
+    "for pr in 5 6 7 8 9 10; do gh pr close $pr --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples; done",
+    "",
+    "# Step 3: Recreate PRs via pipeline",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot/",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr9/",
+    "",
+    "# Step 4: Verify PRs are conflict-free",
+    "for pr in $(gh pr list --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json number -q '.[].number'); do gh pr view $pr --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json mergeable -q '.mergeable'; done",
+    "",
+    "# Step 5: Merge PRs (after verification)",
+    "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples merge-pr --family pdf --pr-number <NEW_PR_NUMBER> --merge --approval-token APPROVE_MERGE_PR"
+  ],
+  "rollback": "If any recreated PR fails, close it. The original local package is preserved. Re-run publish-pr.",
+  "validation": "After merge, verify: target repo main has all 19 examples, README is current, conservation still passes."
+}

@@ -1,0 +1,133 @@
+{
+  "sprint": 47,
+  "lane": "E",
+  "title": "PDF Approval-Run Runbook",
+  "head": "cad1447",
+  "target_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+  "current_state": {
+    "published_examples": 5,
+    "pr_ready_examples": 14,
+    "total_target": 19,
+    "existing_prs": [5, 6, 7, 8, 9, 10],
+    "existing_pr_status": "ALL CONFLICTING on README.md",
+    "formimporter_status": "DEFERRED (Aspose.PDF 26.5.0 bug)"
+  },
+  "phases": [
+    {
+      "phase": 1,
+      "name": "PREREQUISITE_CHECK",
+      "description": "Verify environment, token, and local packages before any remote operations",
+      "commands": [
+        "# Verify GH_TOKEN is set and has repo scope",
+        "gh auth status",
+        "# Verify target repo access",
+        "gh repo view aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json name",
+        "# Verify local packages exist",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot/",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+        "ls workspace/pr-dry-run/pdf-controlled-pilot-pr9/",
+        "# Verify all tests pass",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -q --tb=no"
+      ],
+      "validation_gate": "ALL commands succeed. GH_TOKEN has repo scope. 6 local package directories present. Tests pass.",
+      "rollback": "None needed — read-only checks only"
+    },
+    {
+      "phase": 2,
+      "name": "CLOSE_EXISTING_PRS",
+      "description": "Close all 6 conflicting PRs (#5-#10)",
+      "commands": [
+        "export GITHUB_TOKEN=\"$GH_TOKEN\"",
+        "for pr in 5 6 7 8 9 10; do",
+        "  echo \"Closing PR#$pr...\"",
+        "  gh pr close $pr --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --comment 'Closing: will recreate with conflict-free branch against current main'",
+        "done"
+      ],
+      "validation_gate": "All 6 PRs show state=CLOSED. Verify: gh pr list --state closed --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json number,state",
+      "rollback": "Reopen PRs: gh pr reopen <N> --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples"
+    },
+    {
+      "phase": 3,
+      "name": "RECREATE_PRS",
+      "description": "Create 6 new PRs from local packages via pipeline publish-pr command",
+      "commands": [
+        "export GITHUB_TOKEN=\"$GH_TOKEN\"",
+        "export PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+        "",
+        "# PR batch 1: doc-converter, html, xls-converter",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot/",
+        "",
+        "# PR batch 2: jpeg, png, tiff",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr5/",
+        "",
+        "# PR batch 3: image-extractor, table-generator, toc-generator",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr6/",
+        "",
+        "# PR batch 4: form-flattener, security",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr7/",
+        "",
+        "# PR batch 5: form-editor, form-exporter",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr8/",
+        "",
+        "# PR batch 6: signature",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples publish-pr --family pdf --publish --approval-token APPROVE_LIVE_PR --package-path workspace/pr-dry-run/pdf-controlled-pilot-pr9/"
+      ],
+      "validation_gate": "6 new PRs created. Each PR must show mergeable=MERGEABLE. Run: gh pr list --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json number,title,mergeable",
+      "rollback": "Close any failing new PRs: gh pr close <N> --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples. Local packages are preserved. Re-run failed publish-pr command.",
+      "capture_output": "Record new PR numbers for Phase 4"
+    },
+    {
+      "phase": 4,
+      "name": "VERIFY_CONFLICT_FREE",
+      "description": "Verify all new PRs are conflict-free before merging",
+      "commands": [
+        "export GITHUB_TOKEN=\"$GH_TOKEN\"",
+        "# List all open PRs and check mergeable status",
+        "gh pr list --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json number,title,mergeable",
+        "# Each PR should show mergeable: MERGEABLE"
+      ],
+      "validation_gate": "ALL 6 new PRs show mergeable=MERGEABLE. If any show CONFLICTING, do NOT proceed to Phase 5.",
+      "rollback": "If any PR is CONFLICTING: close it, investigate the conflict source, and recreate from Phase 3 for that specific package only."
+    },
+    {
+      "phase": 5,
+      "name": "MERGE_PRS",
+      "description": "Merge all 6 conflict-free PRs sequentially",
+      "commands": [
+        "export GITHUB_TOKEN=\"$GH_TOKEN\"",
+        "export PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+        "# Merge each PR (replace <N> with actual PR numbers from Phase 3)",
+        "for pr_num in <PR1> <PR2> <PR3> <PR4> <PR5> <PR6>; do",
+        "  echo \"Merging PR#$pr_num...\"",
+        "  PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples merge-pr --family pdf --pr-number $pr_num --merge --approval-token APPROVE_MERGE_PR",
+        "done"
+      ],
+      "validation_gate": "All 6 PRs show state=MERGED. Verify: gh pr list --state merged --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json number,state",
+      "rollback": "If merge fails mid-sequence: remaining unmerged PRs stay open and conflict-free. Resume from the failed PR. Already-merged PRs cannot be unmerged — open a revert PR if needed."
+    },
+    {
+      "phase": 6,
+      "name": "POST_MERGE_VALIDATION",
+      "description": "Verify target repo state after all merges",
+      "commands": [
+        "# Verify example count in target repo",
+        "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/contents/examples/pdf/lowcode --jq '.[].name' | wc -l",
+        "# Expected: 19 directories (5 published + 14 newly merged)",
+        "",
+        "# Run conservation check locally",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples release-status --promote-latest",
+        "",
+        "# Run full test suite",
+        "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -q --tb=no"
+      ],
+      "validation_gate": "19 PDF examples in target repo. Conservation equation passes. All tests pass.",
+      "rollback": "If conservation fails: investigate which examples are missing. The pipeline tracks contracts — check pipeline/contracts/pdf/ for expected list."
+    }
+  ],
+  "total_phases": 6,
+  "estimated_new_pr_numbers": "Will be assigned by GitHub during Phase 3",
+  "sprint46_caveat_resolved": "CAVEAT-04: Runbook now has phased execution, validation gates, and rollback for each phase"
+}

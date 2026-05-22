@@ -1,0 +1,131 @@
+{
+  "loaded": true,
+  "registries": {
+    "bootstrap": true,
+    "failure_patterns": true,
+    "repair_patterns": true,
+    "semantic_steering": true,
+    "validator_patterns": true
+  },
+  "constraints_applied": [
+    {
+      "scenario_id": "words-comparer",
+      "type": "Comparer",
+      "hi_required": [
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-converter",
+      "type": "Converter",
+      "hi_required": [
+        "REQUIRED: Converter.Convert(inputFile, outputFile \u2014 static entry, two-argument form",
+        "REQUIRED: using Aspose.Words; (for Document fixture creation)",
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Document.Save() as primary conversion \u2014 must use LowCode Converter.Convert()",
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "type": "MailMerger",
+      "hi_required": [
+        "REQUIRED: MailMerger.Execute( \u2014 static entry, execute mail merge",
+        "REQUIRED: InsertField(\"MERGEFIELD \u2014 create MERGEFIELD fields in template via DocumentBuilder.InsertField",
+        "REQUIRED: using Aspose.Words; (for Document+DocumentBuilder fixture creation)",
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: manual string replacement instead of MailMerger.Execute()",
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-merger",
+      "type": "Merger",
+      "hi_required": [
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-replacer",
+      "type": "Replacer",
+      "hi_required": [
+        "REQUIRED: Replacer.Replace(inputFile, outputFile \u2014 static entry",
+        "REQUIRED: using Aspose.Words; (for Document fixture creation)",
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: manual regex loops replacing Replacer.Replace()",
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "type": "ReportBuilder",
+      "hi_required": [
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-splitter",
+      "type": "Splitter",
+      "hi_required": [
+        "REQUIRED: Splitter.ExtractPages(inputFile, outputFile \u2014 static entry",
+        "REQUIRED: using Aspose.Words; (for Document fixture creation)",
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "type": "Watermarker",
+      "hi_required": [
+        "REQUIRED: Watermarker.SetText(inputFile, outputFile, \u2014 static entry",
+        "REQUIRED: using Aspose.Words; (for Document fixture creation)",
+        "using Aspose.Words.LowCode;",
+        "using Aspose.Words;"
+      ],
+      "hi_forbidden": [
+        "FORBIDDEN: manual shape/header insertion replacing Watermarker.SetText()",
+        "FORBIDDEN: Document.Save() replacing Converter.Convert() \u2014 use LowCode API",
+        "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() \u2014 use LowCode API",
+        "FORBIDDEN: manual watermark shapes replacing Watermarker.SetText() \u2014 use LowCode API"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "lane": "A",
+  "date": "2026-05-19",
+  "status": "COMPLETE",
+  "contracts_created": 5,
+  "new_contracts": [
+    {"scenario_id": "pdf-security", "type_name": "Security", "options_class": "EncryptionOptions", "output_format": ".pdf", "wave": "E"},
+    {"scenario_id": "pdf-form-flattener", "type_name": "FormFlattener", "options_class": "FormFlattenAllFieldsOptions", "output_format": ".pdf", "wave": "E"},
+    {"scenario_id": "pdf-form-editor", "type_name": "FormEditor", "options_class": "FormRemoveAllFieldsOptions", "output_format": ".pdf", "wave": "F"},
+    {"scenario_id": "pdf-form-exporter", "type_name": "FormExporter", "options_class": "FormExporterToJsonOptions", "output_format": ".json", "wave": "F"},
+    {"scenario_id": "pdf-signature", "type_name": "Signature", "options_class": "SignOptions", "output_format": ".pdf", "wave": "G"}
+  ],
+  "total_pdf_contracts": 19,
+  "denominator_published_plus_pipeline": 19,
+  "match": true,
+  "tests_pass": true,
+  "baseline_tests": "1876/1876 PASS"
+}

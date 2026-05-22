@@ -1,0 +1,63 @@
+{
+  "head": "007edb2",
+  "generated_at": "2026-05-20T13:11:41.582605+00:00",
+  "authority": "denominator_configs_plus_release_status",
+  "totals": {
+    "contracts": 42,
+    "published": 28,
+    "pr_ready": 14,
+    "parity": "42/42"
+  },
+  "families": {
+    "cells": {
+      "published": 9,
+      "pr_ready": 0,
+      "contracts": 9,
+      "scope_status": "FAMILY_COMPLETE",
+      "workflow_root_types": 9,
+      "denominator_basis": "FULL_SOT"
+    },
+    "words": {
+      "published": 8,
+      "pr_ready": 0,
+      "contracts": 8,
+      "scope_status": "PILOT_COMPLETE",
+      "workflow_root_types": 9,
+      "denominator_basis": "PILOT_ALLOWED"
+    },
+    "pdf": {
+      "published": 5,
+      "pr_ready": 14,
+      "contracts": 19,
+      "scope_status": "PARTIAL_CANARY",
+      "workflow_root_types": 22,
+      "denominator_basis": "PILOT_ALLOWED"
+    },
+    "diagram": {
+      "published": 2,
+      "pr_ready": 0,
+      "contracts": 2,
+      "scope_status": "PILOT_COMPLETE",
+      "workflow_root_types": 2,
+      "denominator_basis": "PILOT_ALLOWED"
+    },
+    "email": {
+      "published": 1,
+      "pr_ready": 0,
+      "contracts": 1,
+      "scope_status": "PILOT_COMPLETE",
+      "workflow_root_types": 1,
+      "denominator_basis": "PILOT_ALLOWED"
+    },
+    "slides": {
+      "published": 3,
+      "pr_ready": 0,
+      "contracts": 3,
+      "scope_status": "PILOT_COMPLETE",
+      "workflow_root_types": 3,
+      "denominator_basis": "PILOT_ALLOWED"
+    }
+  },
+  "release_status_agreement": true,
+  "note": "This replaces the contradictory Sprint 51 release-status-raw.json which had null denominators."
+}

@@ -1,0 +1,18 @@
+{
+  "sprint_id": "sprint68",
+  "validated_under": "sprint69_rules",
+  "overall_valid": false,
+  "total_rules": 67,
+  "passed": 59,
+  "failed": 8,
+  "expected_failures": [
+    "handoff_index_version_matches_dpp",
+    "only_one_canonical_final_audit",
+    "publication_truth_matrix_no_stale_paths",
+    "root_readme_indexed_in_handoff",
+    "exact_legacy_reconciliation_present",
+    "final_verdict_is_precise",
+    "handoff_index_has_root_readme_field",
+    "version_consistency_final_present"
+  ]
+}

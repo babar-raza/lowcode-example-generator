@@ -333,6 +333,110 @@ def _make_valid_bundle(tmpdir: str) -> Path:
         encoding="utf-8",
     )
 
+    # ---- Sprint 69: artifacts for rules 58-67 ----
+
+    # Rule 58: handoff_index_version_matches_dpp
+    for family, ver in [("cells", "26.5.1"), ("words", "26.5.0"), ("pdf", "26.5.0"),
+                        ("diagram", "26.5.0"), ("email", "26.4.0"), ("slides", "26.5.0")]:
+        fam_dir = b / "handoff" / "per-family" / family
+        fam_dir.mkdir(parents=True, exist_ok=True)
+        (fam_dir / "handoff-index.json").write_text(
+            json.dumps({"family": family, "nuget_version": ver, "examples": [],
+                        "root_readme": {"source_path": f"root-readme/per-family/{family}-root-readme.md",
+                                        "sha256": "abc123", "destination_path": "README.md",
+                                        "destination_repo": f"aspose-{family}-net/repo"}}),
+            encoding="utf-8",
+        )
+        (fam_dir / "Directory.Packages.props").write_text(
+            f'<Project><ItemGroup><PackageVersion Include="Aspose.Test" Version="{ver}" /></ItemGroup></Project>',
+            encoding="utf-8",
+        )
+
+    # Rule 59: only_one_canonical_final_audit — content-audit-final.json with sprint69 paths
+    dst_dir = b / "destination"
+    dst_dir.mkdir(exist_ok=True)
+    audit_records = [
+        {
+            "scenario_id": f"cells-html-converter-{i:02d}",
+            "family": "cells",
+            "handoff_path": f"reports/sprint61-test/handoff/cells/type{i}",
+            "local_package_path": f"reports/sprint61-test/handoff/cells/type{i}",
+            "package_version": "26.5.1",
+            "output_format": ".html",
+            "output_kind": "converter",
+            "readme_status": "IO_DOC",
+            "root_readme_status": "INCLUDED",
+            "final_status": "READY",
+            "final_readiness": "READY",
+            "remote_readme_has_io_docs": False,
+            "readme_io_post_merge_verified": False,
+            "approval_blocked": True,
+            "publication_status": "REMOTE_EXAMPLE_PRESENT_README_IO_STALE_APPROVAL_BLOCKED",
+        }
+        for i in range(42)
+    ]
+    (dst_dir / "content-audit-final.json").write_text(
+        json.dumps({"sprint_id": "sprint61-test", "total": 42, "records": audit_records}),
+        encoding="utf-8",
+    )
+
+    # Rule 60: publication_truth_matrix_no_stale_paths
+    pub_dir = b / "publication"
+    pub_dir.mkdir(exist_ok=True)
+    pub_records = [
+        {
+            "scenario_id": f"cells-html-converter-{i:02d}",
+            "family": "cells",
+            "handoff_package_path": f"reports/sprint61-test/handoff/cells/type{i}",
+            "remote_example_present": True,
+            "remote_readme_has_io_docs": False,
+            "remote_example_readme_has_io_docs": False,
+            "readme_io_post_merge_verified": False,
+            "approval_blocked": True,
+        }
+        for i in range(42)
+    ]
+    (pub_dir / "publication-truth-matrix-final.json").write_text(
+        json.dumps({"sprint_id": "sprint61-test", "records": pub_records}),
+        encoding="utf-8",
+    )
+
+    # Rule 63: exact_legacy_reconciliation_present
+    leg_dir = b / "legacy-reconciliation"
+    leg_dir.mkdir(exist_ok=True)
+    (leg_dir / "exact-legacy-plan-reconciliation-final.md").write_text(
+        "# Exact Legacy Plan Reconciliation Final\nAll items reconciled.\n",
+        encoding="utf-8",
+    )
+    (leg_dir / "exact-items-final.json").write_text(
+        json.dumps({"items": [{"id": "SPL-01", "status": "CLOSED"}]}),
+        encoding="utf-8",
+    )
+
+    # Rule 64: final_verdict_is_precise
+    (b / "final-verdict.md").write_text(
+        "# Final Verdict\n\n`LOWCODE_PREPUBLICATION_HANDOFF_READY_APPROVAL_BLOCKED`\n",
+        encoding="utf-8",
+    )
+
+    # Rule 66: handoff_index_has_root_readme_field
+    handoff_dir = b / "handoff"
+    (handoff_dir / "publication-handoff-index.json").write_text(
+        json.dumps({"sprint_id": "sprint61-test", "families": [
+            {"family": f, "root_readme_sha256": "abc123", "example_count": 1}
+            for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+        ]}),
+        encoding="utf-8",
+    )
+
+    # Rule 67: version_consistency_final_present
+    ver_dir = b / "version"
+    ver_dir.mkdir(exist_ok=True)
+    (ver_dir / "version-consistency-final.json").write_text(
+        json.dumps({"all_consistent": True, "sprint69_mismatches": 0}),
+        encoding="utf-8",
+    )
+
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 

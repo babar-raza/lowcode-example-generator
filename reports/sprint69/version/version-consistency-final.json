@@ -1,0 +1,57 @@
+{
+  "generated": "2026-05-22T15:51:07Z",
+  "sprint_id": "sprint69",
+  "defect_closed": "S68-D5",
+  "sprint68_mismatches": 3,
+  "sprint69_mismatches": 0,
+  "all_consistent": true,
+  "fixed": [
+    "words",
+    "pdf",
+    "diagram"
+  ],
+  "families": [
+    {
+      "family": "cells",
+      "handoff_index_version": "26.5.1",
+      "dpp_version": "26.5.1",
+      "match": true,
+      "defect": false
+    },
+    {
+      "family": "words",
+      "handoff_index_version": "26.5.0",
+      "dpp_version": "26.5.0",
+      "match": true,
+      "defect": false
+    },
+    {
+      "family": "pdf",
+      "handoff_index_version": "26.5.0",
+      "dpp_version": "26.5.0",
+      "match": true,
+      "defect": false
+    },
+    {
+      "family": "diagram",
+      "handoff_index_version": "26.5.0",
+      "dpp_version": "26.5.0",
+      "match": true,
+      "defect": false
+    },
+    {
+      "family": "email",
+      "handoff_index_version": "26.4.0",
+      "dpp_version": "26.4.0",
+      "match": true,
+      "defect": false
+    },
+    {
+      "family": "slides",
+      "handoff_index_version": "26.5.0",
+      "dpp_version": "26.5.0",
+      "match": true,
+      "defect": false
+    }
+  ]
+}

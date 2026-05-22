@@ -1,0 +1,296 @@
+{
+  "contract_id": "sprint69-final-state-consistency-repair-canonical-audit-publication-truth-live-pr-readiness",
+  "computed_at": "2026-05-22T16:15:18Z",
+  "total_categories": 47,
+  "present": 47,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 68 Evidence Audit",
+      "file": "reports/sprint69/00-sprint68-evidence-audit.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC02",
+      "name": "Sprint 68 Claim vs Proof Matrix",
+      "file": "reports/sprint69/01-sprint68-claim-vs-proof-matrix.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC03",
+      "name": "Corrected Sprint 68 State",
+      "file": "reports/sprint69/02-corrected-sprint68-state.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC04",
+      "name": "Commands Log",
+      "file": "reports/sprint69/commands.log",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC05",
+      "name": "Todo",
+      "file": "reports/sprint69/todo.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC06",
+      "name": "Evidence Contract",
+      "file": "reports/sprint69/evidence-contract.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC07",
+      "name": "Canonical Final Destination Audit",
+      "file": "reports/sprint69/destination/content-audit-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC08",
+      "name": "Audit Conflict Resolution",
+      "file": "reports/sprint69/destination/audit-conflict-resolution.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC09",
+      "name": "Canonical Audit Source Map",
+      "file": "reports/sprint69/destination/canonical-audit-source-map.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC10",
+      "name": "History (stale audits)",
+      "file": "reports/sprint69/history/content-audit-stale-sprint67.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC11",
+      "name": "Sprint 69 Handoff Publication Index",
+      "file": "reports/sprint69/handoff/publication-handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC12",
+      "name": "Handoff Package Artifact Hashes",
+      "file": "reports/sprint69/handoff/package-artifact-hashes.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC13",
+      "name": "Self-Contained Artifact Validation",
+      "file": "reports/sprint69/handoff/self-contained-artifact-validation.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC14",
+      "name": "Handoff per-family cells index",
+      "file": "reports/sprint69/handoff/per-family/cells/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC15",
+      "name": "Handoff per-family words index",
+      "file": "reports/sprint69/handoff/per-family/words/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC16",
+      "name": "Handoff per-family pdf index",
+      "file": "reports/sprint69/handoff/per-family/pdf/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC17",
+      "name": "Handoff per-family diagram index",
+      "file": "reports/sprint69/handoff/per-family/diagram/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC18",
+      "name": "Handoff per-family email index",
+      "file": "reports/sprint69/handoff/per-family/email/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC19",
+      "name": "Handoff per-family slides index",
+      "file": "reports/sprint69/handoff/per-family/slides/handoff-index.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC20",
+      "name": "Handoff Version Audit Before",
+      "file": "reports/sprint69/version/handoff-index-version-audit-before.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC21",
+      "name": "Handoff Version Audit After",
+      "file": "reports/sprint69/version/handoff-index-version-audit-after.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC22",
+      "name": "Version Consistency Final",
+      "file": "reports/sprint69/version/version-consistency-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC23",
+      "name": "Publication State Model",
+      "file": "reports/sprint69/publication/publication-state-model.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC24",
+      "name": "Publication Truth Matrix Final",
+      "file": "reports/sprint69/publication/publication-truth-matrix-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC25",
+      "name": "Publication Summary",
+      "file": "reports/sprint69/publication/publication-summary.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC26",
+      "name": "Exact Legacy Plan Reconciliation Final",
+      "file": "reports/sprint69/legacy-reconciliation/exact-legacy-plan-reconciliation-final.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC27",
+      "name": "Exact Legacy Items Final",
+      "file": "reports/sprint69/legacy-reconciliation/exact-items-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC28",
+      "name": "Remote Repo State Final",
+      "file": "reports/sprint69/remote/remote-repo-state-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC29",
+      "name": "Remote README IO Audit Final",
+      "file": "reports/sprint69/remote/remote-readme-io-audit-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC30",
+      "name": "Remote vs Handoff Final",
+      "file": "reports/sprint69/remote/remote-vs-handoff-final.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC31",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint69/evidence/validator-gap-analysis.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC32",
+      "name": "Validator Source Proof Patch",
+      "file": "reports/sprint69/evidence/validator-source-proof.patch",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC33",
+      "name": "Validator Test Results",
+      "file": "reports/sprint69/evidence/validator-test-results.txt",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC34",
+      "name": "Sprint 68 Revalidation Result",
+      "file": "reports/sprint69/evidence/sprint68-revalidation-result.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC35",
+      "name": "Live Approval Check",
+      "file": "reports/sprint69/publication/live-approval-check.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC36",
+      "name": "PR Package Ledger",
+      "file": "reports/sprint69/publication/pr-package-ledger.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC37",
+      "name": "Live Publication Result",
+      "file": "reports/sprint69/publication/live-publication-result.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC38",
+      "name": "Post Merge Verification",
+      "file": "reports/sprint69/publication/post-merge-verification.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC39",
+      "name": "Branch Delete Result",
+      "file": "reports/sprint69/publication/branch-delete-result.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC40",
+      "name": "Test Run Log",
+      "file": "reports/sprint69/logs/test-run.log",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC41",
+      "name": "Sprint 69 Bundle Validation Result",
+      "file": "reports/sprint69/evidence/sprint69-bundle-validation-result.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC42",
+      "name": "Sprint 69 Final Validation Result",
+      "file": "reports/sprint69/evidence/sprint69-final-validation-result.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC43",
+      "name": "Final Verdict",
+      "file": "reports/sprint69/final-verdict.md",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC44",
+      "name": "Sprint State",
+      "file": "reports/sprint69/sprint-state.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC45",
+      "name": "Bundle Manifest",
+      "file": "reports/sprint69/bundle-manifest.json",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC46",
+      "name": "Final Clean Proof",
+      "file": "reports/sprint69/git/final-clean-proof.txt",
+      "status": "PRESENT"
+    },
+    {
+      "id": "EC47",
+      "name": "Evidence Contract Computed",
+      "file": "reports/sprint69/evidence/evidence-contract-computed.json",
+      "status": "PRESENT"
+    }
+  ]
+}

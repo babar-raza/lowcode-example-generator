@@ -1,0 +1,61 @@
+{
+  "generated": "2026-05-22T16:03:05Z",
+  "sprint_id": "sprint69",
+  "approval_status": "BLOCKED_BY_APPROVAL",
+  "prs": [
+    {
+      "family": "cells",
+      "pr_title": "Update README I/O documentation for Aspose.Cells LowCode examples",
+      "branch_name": "plugin-examples/cells/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/cells",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    },
+    {
+      "family": "words",
+      "pr_title": "Update README I/O documentation for Aspose.Words LowCode examples",
+      "branch_name": "plugin-examples/words/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/words",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    },
+    {
+      "family": "pdf",
+      "pr_title": "Update README I/O documentation for Aspose.Pdf LowCode examples",
+      "branch_name": "plugin-examples/pdf/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/pdf",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    },
+    {
+      "family": "diagram",
+      "pr_title": "Update README I/O documentation for Aspose.Diagram LowCode examples",
+      "branch_name": "plugin-examples/diagram/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/diagram",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    },
+    {
+      "family": "email",
+      "pr_title": "Update README I/O documentation for Aspose.Email LowCode examples",
+      "branch_name": "plugin-examples/email/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/email",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    },
+    {
+      "family": "slides",
+      "pr_title": "Update README I/O documentation for Aspose.Slides LowCode examples",
+      "branch_name": "plugin-examples/slides/readme-io/sprint69",
+      "handoff_path": "reports/sprint69/handoff/per-family/slides",
+      "pr_created": false,
+      "pr_number": null,
+      "pr_url": null
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint68",
+  "family": "pdf",
+  "total_types": 19,
+  "source": "pipeline/format-authority/contracts/pdf.json",
+  "entries": [
+    {
+      "example_dir": "doc-converter",
+      "api_class": "DocConverter",
+      "api_method": "DocConverter.Process(PdfToDocOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "docx",
+      "output_cardinality": "single",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/doc-converter"
+    },
+    {
+      "example_dir": "xls-converter",
+      "api_class": "XlsConverter",
+      "api_method": "XlsConverter.Process(PdfToXlsOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "xlsx",
+      "output_cardinality": "single",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/xls-converter"
+    },
+    {
+      "example_dir": "html",
+      "api_class": "Html",
+      "api_method": "Html.Process(HtmlToPdfOptions)",
+      "input_format": "html",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/html"
+    },
+    {
+      "example_dir": "jpeg",
+      "api_class": "Jpeg",
+      "api_method": "Jpeg.Process(JpegOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "jpg",
+      "output_cardinality": "multi",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/jpeg"
+    },
+    {
+      "example_dir": "png",
+      "api_class": "Png",
+      "api_method": "Png.Process(PngOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "png",
+      "output_cardinality": "multi",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/png"
+    },
+    {
+      "example_dir": "tiff",
+      "api_class": "Tiff",
+      "api_method": "Tiff.Process(TiffOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "tiff",
+      "output_cardinality": "single",
+      "operation_kind": "converter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/tiff"
+    },
+    {
+      "example_dir": "text-extractor",
+      "api_class": "TextExtractor",
+      "api_method": "new TextExtractor().Process(TextExtractorOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "string (stdout)",
+      "output_cardinality": "none",
+      "operation_kind": "extractor",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/text-extractor"
+    },
+    {
+      "example_dir": "merger",
+      "api_class": "Merger",
+      "api_method": "new Merger().Process(MergeOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "multi",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "merger",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/merger"
+    },
+    {
+      "example_dir": "splitter",
+      "api_class": "Splitter",
+      "api_method": "new Splitter().Process(SplitOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "multi",
+      "operation_kind": "splitter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/splitter"
+    },
+    {
+      "example_dir": "optimizer",
+      "api_class": "Optimizer",
+      "api_method": "new Optimizer().Process(OptimizeOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/optimizer"
+    },
+    {
+      "example_dir": "pdfa-converter",
+      "api_class": "PdfAConverter",
+      "api_method": "PdfAConverter.Process(PdfToDocOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/pdfa-converter"
+    },
+    {
+      "example_dir": "toc-generator",
+      "api_class": "TocGenerator",
+      "api_method": "TocGenerator.Process(TocOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "processor",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/toc-generator"
+    },
+    {
+      "example_dir": "table-generator",
+      "api_class": "TableGenerator",
+      "api_method": "TableGenerator.Process(TableOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "processor",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/table-generator"
+    },
+    {
+      "example_dir": "image-extractor",
+      "api_class": "ImageExtractor",
+      "api_method": "new ImageExtractor().Process(ImageExtractorOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "png",
+      "output_cardinality": "multi",
+      "operation_kind": "extractor",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/image-extractor"
+    },
+    {
+      "example_dir": "security",
+      "api_class": "Security",
+      "api_method": "Security.Process(SecurityOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/security"
+    },
+    {
+      "example_dir": "form-flattener",
+      "api_class": "FormFlattener",
+      "api_method": "new FormFlattener().Process(FormFlattenOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/form-flattener"
+    },
+    {
+      "example_dir": "form-editor",
+      "api_class": "FormEditor",
+      "api_method": "new FormEditor().Process(FormEditorOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/form-editor"
+    },
+    {
+      "example_dir": "form-exporter",
+      "api_class": "FormExporter",
+      "api_method": "new FormExporter().Process(FormExporterOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "json",
+      "output_cardinality": "single",
+      "operation_kind": "exporter",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/form-exporter"
+    },
+    {
+      "example_dir": "signature",
+      "api_class": "Signature",
+      "api_method": "Signature.Process(SignOptions)",
+      "input_format": "pdf",
+      "input_cardinality": "single",
+      "output_format": "pdf",
+      "output_cardinality": "single",
+      "operation_kind": "transform",
+      "run_cmd": "dotnet run --project examples/pdf/lowcode/signature"
+    }
+  ]
+}

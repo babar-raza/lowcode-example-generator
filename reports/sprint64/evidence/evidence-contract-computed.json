@@ -1,14 +1,14 @@
 {
   "contract_id": "sprint64-ev-ecc-alignment-42-42-packages-pdf-drift-readme-publication-readiness",
-  "computed_at": "2026-05-22T09:19:29Z",
+  "computed_at": "2026-05-22T09:24:27Z",
   "total_categories": 44,
-  "present": 39,
-  "missing": 5,
+  "present": 44,
+  "missing": 0,
   "zero_bytes": 0,
   "semantic_failed": 0,
   "pending": 0,
-  "blocking_failures": 5,
-  "closure_valid": false,
+  "blocking_failures": 0,
+  "closure_valid": true,
   "categories": [
     {
       "id": "EC01",
@@ -95,8 +95,8 @@
       "name": "sprint64_final_validation_result",
       "file": "reports/sprint64/phase1/sprint64-final-validation-result.json",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint64/phase1/sprint64-final-validation-result.json"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC12",
@@ -335,32 +335,32 @@
       "name": "bundle_manifest",
       "file": "reports/sprint64/bundle-manifest.json",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint64/bundle-manifest.json"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC42",
       "name": "final_verdict",
       "file": "reports/sprint64/final-verdict.md",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint64/final-verdict.md"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC43",
       "name": "sprint_state",
       "file": "reports/sprint64/sprint-state.json",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint64/sprint-state.json"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC44",
       "name": "final_clean_proof",
       "file": "reports/sprint64/git/final-clean-proof.txt",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint64/git/final-clean-proof.txt"
+      "status": "PRESENT",
+      "detail": ""
     }
   ]
 }

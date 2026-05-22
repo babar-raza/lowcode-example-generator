@@ -285,6 +285,54 @@ def _make_valid_bundle(tmpdir: str) -> Path:
         "# Remote Proof Summary\nAll 42 examples confirmed.\n", encoding="utf-8"
     )
 
+    # Sprint 68: PDF root README with 19 rows (rule 53)
+    pdf_rows_68 = "\n".join(
+        f"| `example-{i}` | `Plugin.Process` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/example-{i}` |"
+        for i in range(19)
+    )
+    (b / "root-readme" / "per-family" / "pdf-root-readme.md").write_text(
+        f"# Aspose.PDF LowCode Examples\n\n## Included Examples\n\n"
+        f"| Example | Demonstrated API | Input | Output | Run |\n"
+        f"|---------|-----------------|-------|--------|-----|\n"
+        f"{pdf_rows_68}\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: splitter cardinality reconciliation (rule 54)
+    (b / "legacy-reconciliation").mkdir(parents=True, exist_ok=True)
+    (b / "legacy-reconciliation" / "splitter-resolution.md").write_text(
+        "# Splitter Cardinality Resolution\nAll splitters: SINGLE_OUTPUT_VALID.\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: sprint-specific content audit with no stale PDF 26.4.0 (rule 55)
+    # sprint_id="sprint61-test" → look for content-audit-sprint61-test.json
+    (b / "destination" / "content-audit-sprint61-test.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint61-test",
+            "total": 42,
+            "records": [
+                {"scenario_id": f"s-{i}", "family": "cells", "package_version": "26.5.1"}
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Sprint 68: PDF version proof chain (rule 56)
+    (b / "version" / "pdf-version-proof-chain.md").write_text(
+        "# PDF Version Proof Chain\nHandoff Directory.Packages.props: Aspose.PDF 26.5.0.\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: words README with cardinality markers (rule 57)
+    (b / "root-readme" / "per-family" / "words-root-readme.md").write_text(
+        "# Aspose.Words LowCode Examples\n\n## Included Examples\n\n"
+        "| `merger` | `Merger.Process` | `docx (×N)` | `docx` | `dotnet run ...` |\n"
+        "| `splitter` | `Splitter.ExtractPages` | `docx` | `docx (×N)` | `dotnet run ...` |\n",
+        encoding="utf-8",
+    )
+
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 

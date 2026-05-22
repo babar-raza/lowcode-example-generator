@@ -1,0 +1,88 @@
+# Sprint 68 Commands Log
+
+Sprint: sprint68-pdf-readme-splitter-cardinality-content-audit-repair
+Date: 2026-05-22
+
+## Phase 0: Sprint 67 Audit and Reopen
+
+```
+# Read sprint67 final artifacts
+Read reports/sprint67/root-readme/per-family/pdf-root-readme.md
+Read reports/sprint67/legacy-plan-reconciliation/reconciliation-index.md
+Read reports/sprint67/destination/content-audit-final.json
+Read reports/sprint67/destination/content-audit-sprint67.json
+Read pipeline/format-authority/contracts/cells.json
+Read pipeline/format-authority/contracts/words.json
+Read pipeline/format-authority/contracts/pdf.json
+Read reports/sprint67/handoff/per-family/cells/spreadsheet-splitter/Program.cs
+Read reports/sprint67/handoff/per-family/words/splitter/Program.cs
+Read reports/sprint67/handoff/per-family/pdf/splitter/Program.cs
+
+# Create Phase 0 files
+Write reports/sprint68/00-sprint67-evidence-audit.md
+Write reports/sprint68/01-sprint67-claim-vs-proof-matrix.md
+Write reports/sprint68/02-corrected-sprint67-state.md
+Write reports/sprint68/todo.md
+Write reports/sprint68/commands.log
+Write reports/sprint68/evidence-contract.json
+```
+
+## Phase 1: Legacy Reconciliation
+
+```
+# To be populated
+```
+
+## Phase 2: PDF Root README
+
+```
+# To be populated
+```
+
+## Phase 3: Canonical Content Audit
+
+```
+# To be populated
+```
+
+## Phase 4: PDF Version Proof
+
+```
+# To be populated
+```
+
+## Phase 5: EV/ECC Hardening
+
+```
+# To be populated
+```
+
+## Phase 6: Sprint 68 Handoff
+
+```
+# To be populated
+```
+
+## Phase 7: Remote Truth Refresh
+
+```
+# To be populated
+```
+
+## Phase 8: Live Publication Check
+
+```
+# To be populated
+```
+
+## Phase 9: Full Test Run
+
+```
+# To be populated
+```
+
+## Phase 10: Final Evidence Bundle
+
+```
+# To be populated
+```

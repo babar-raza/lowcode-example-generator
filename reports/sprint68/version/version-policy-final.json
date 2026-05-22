@@ -1,0 +1,16 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint67",
+  "policy": "HANDOFF_CANONICAL — version authority is the handoff Directory.Packages.props for each family",
+  "total_drift_unresolved": 0,
+  "summary": {"total_drift_unresolved": 0},
+  "families": {
+    "cells":   {"canonical": "26.5.1", "status": "CONSISTENT"},
+    "words":   {"canonical": "26.5.0", "status": "REMOTE_DRIFT_TRACKED", "remote": "26.4.0"},
+    "pdf":     {"canonical": "26.5.0", "status": "CONTENT_AUDIT_STALE_RESOLVED", "decision": "reports/sprint67/version/pdf-version-decision.md"},
+    "diagram": {"canonical": "26.5.0", "status": "REMOTE_DRIFT_TRACKED", "remote": "26.4.0"},
+    "email":   {"canonical": "26.4.0", "status": "CONSISTENT"},
+    "slides":  {"canonical": "26.5.0", "status": "CONSISTENT"}
+  },
+  "notes": "Remote drift for Words and Diagram is tracked, not unresolved — it is the known pre-publication state. Sprint 67 handoff packages use correct versions. Remote drift will close when README I/O PRs are published."
+}

@@ -1,0 +1,23 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint67",
+  "description": "Legacy plan items whose claims are contradicted by later evidence",
+  "items": [
+    {
+      "id": "CON-S61-1",
+      "plan": "sprint61",
+      "item": "Sprint 61 claimed '38/42 IO_DOC_MATCH achievable after corrections'",
+      "contradiction": "Sprint 66 full remote README audit confirmed ALL 42 remote READMEs are old-format (0/42 have I/O sections). Sprint 61 was counting local corrected packages, not remote state.",
+      "corrected_claim": "0/42 remote READMEs have I/O sections (Sprint 66 confirmed). 42/42 corrected packages are ready locally but none have been pushed.",
+      "status": "CORRECTED_BY_SPRINT66_REMOTE_AUDIT"
+    },
+    {
+      "id": "CON-S62-1",
+      "plan": "sprint62",
+      "item": "Sprint 62 live publication check said 'all correction packages ready, 1 APPROVE_LIVE_PR away from publication'",
+      "contradiction": "Sprint 63-66 showed that root READMEs have cardinality defects and PDF version is contradictory. Publishing the Sprint 62 dry-run packages would publish incomplete root README display.",
+      "corrected_claim": "Correction packages are ready but root README display layer has defects (S66-D1). Sprint 67 must repair root READMEs before publication.",
+      "status": "CORRECTED_BY_SPRINT67_ROOT_README_AUDIT"
+    }
+  ]
+}

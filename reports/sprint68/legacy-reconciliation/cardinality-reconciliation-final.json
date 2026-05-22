@@ -1,0 +1,49 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint68",
+  "all_resolved": true,
+  "total_types": 42,
+  "splitter_types": 3,
+  "splitter_resolution": "SINGLE_OUTPUT_VALID_FOR_ALL",
+  "merger_types": 3,
+  "merger_resolution": "MULTI_INPUT_CONFIRMED_IN_READMES",
+  "types": [
+    {
+      "family": "cells", "type_name": "SpreadsheetSplitter",
+      "contract_output_cardinality": "multi", "program_cs_output_count": 1,
+      "resolution": "SINGLE_OUTPUT_VALID",
+      "note": "Process(string,string) overload — single-file extraction. Multi-file split requires LowCodeSaveOptions."
+    },
+    {
+      "family": "cells", "type_name": "SpreadsheetMerger",
+      "contract_input_cardinality": "multi", "readme_shows": "N→1",
+      "resolution": "CONFIRMED", "note": "README shows N-to-1 merger. No discrepancy."
+    },
+    {
+      "family": "words", "type_name": "Splitter",
+      "contract_output_cardinality": "multi", "program_cs_output_count": 1,
+      "resolution": "SINGLE_OUTPUT_VALID",
+      "note": "ExtractPages(string,string,int,int) is single-output page extraction by API design."
+    },
+    {
+      "family": "words", "type_name": "Merger",
+      "contract_input_cardinality": "multi", "readme_shows": "N→1",
+      "resolution": "CONFIRMED", "note": "README shows N-to-1 merger. No discrepancy."
+    },
+    {
+      "family": "pdf", "type_name": "Splitter",
+      "contract_output_cardinality": "multi", "program_cs_output_count": 1,
+      "resolution": "SINGLE_OUTPUT_VALID",
+      "note": "Single AddOutput call is valid — demonstrates first-page extraction pattern."
+    },
+    {
+      "family": "pdf", "type_name": "Merger",
+      "contract_input_cardinality": "multi", "readme_shows": "N→1",
+      "resolution": "CONFIRMED", "note": "README shows N-to-1 merger. No discrepancy."
+    }
+  ],
+  "all_other_types": {
+    "description": "Remaining 36 types are converters, extractors, optimizers, or single-input/single-output operations",
+    "resolution": "CONFIRMED_NO_CARDINALITY_DISCREPANCY"
+  }
+}

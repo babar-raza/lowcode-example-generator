@@ -403,6 +403,48 @@ def _make_bundle(tmpdir: str) -> Path:
         "# Remote Proof Summary\nAll 42 examples confirmed.\n", encoding="utf-8"
     )
 
+    # Sprint 68: PDF root README with 19 rows (rule 53)
+    # root-readme/per-family dir already created in Sprint 67 section above
+    pdf_readme_dir = b / "root-readme" / "per-family"
+    pdf_rows = "\n".join(
+        f"| `example-{i}` | `Plugin.Process` | `pdf` | `pdf` | `dotnet run --project examples/pdf/lowcode/example-{i}` |"
+        for i in range(19)
+    )
+    (pdf_readme_dir / "pdf-root-readme.md").write_text(
+        f"# Aspose.PDF LowCode Examples\n\n## Included Examples\n\n"
+        f"| Example | Demonstrated API | Input | Output | Run |\n"
+        f"|---------|-----------------|-------|--------|-----|\n"
+        f"{pdf_rows}\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: splitter cardinality reconciliation (rule 54)
+    leg_rec_dir = b / "legacy-reconciliation"
+    leg_rec_dir.mkdir(parents=True, exist_ok=True)
+    (leg_rec_dir / "splitter-resolution.md").write_text(
+        "# Splitter Cardinality Resolution\nAll splitters: SINGLE_OUTPUT_VALID.\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: canonical content audit — rule 55 is satisfied by the sprint67
+    # content-audit-sprint67.json already written above (cells family, no PDF 26.4.0 records)
+
+    # Sprint 68: PDF version proof chain (rule 56)
+    # version/ dir already created in Sprint 67 section above
+    (b / "version" / "pdf-version-proof-chain.md").write_text(
+        "# PDF Version Proof Chain\nHandoff Directory.Packages.props: Aspose.PDF 26.5.0.\n",
+        encoding="utf-8",
+    )
+
+    # Sprint 68: words README with cardinality markers (rule 57)
+    # root-readme/per-family dir already created in Sprint 67 section above
+    (pdf_readme_dir / "words-root-readme.md").write_text(
+        "# Aspose.Words LowCode Examples\n\n## Included Examples\n\n"
+        "| `merger` | `Merger.Process` | `docx (×N)` | `docx` | `dotnet run ...` |\n"
+        "| `splitter` | `Splitter.ExtractPages` | `docx` | `docx (×N)` | `dotnet run ...` |\n",
+        encoding="utf-8",
+    )
+
     # Pad to >=35 files
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
@@ -685,7 +727,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 52)  # Sprint 67: added 10 new rules (43-52)
+        self.assertEqual(result.total_rules, 57)  # Sprint 68: added 5 new rules (53-57)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -777,7 +819,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 52)  # Sprint 67: 52 rules total
+        self.assertEqual(len(d["rules"]), 57)  # Sprint 68: 57 rules total
 
 
 # ===========================================================================
@@ -1380,9 +1422,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 51 rules evaluated (52 total - 1 self-reference rule 21)
-        # Sprint 67: total is now 52 (added 10 new rules), so excluding rule 21 = 51
-        self.assertEqual(len(result.rule_results), 51)
+        # Should have exactly 56 rules evaluated (57 total - 1 self-reference rule 21)
+        # Sprint 68: total is now 57 (added 5 new rules), so excluding rule 21 = 56
+        self.assertEqual(len(result.rule_results), 56)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1428,7 +1470,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 52)  # Sprint 67: 52 rules total
+        self.assertEqual(len(phase_b.rule_results), 57)  # Sprint 68: 57 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1644,12 +1686,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 42 rules total (32 existing + 10 new Sprint 66 rules)."""
+        """validate() must return 57 rules total (52 Sprint 67 + 5 new Sprint 68 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 52,
-                         f"Expected 52 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 57,
+                         f"Expected 57 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
@@ -1662,8 +1704,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 51,
-                         f"validate_for_storage must have 51 rules (52 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 56,
+                         f"validate_for_storage must have 56 rules (57 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 

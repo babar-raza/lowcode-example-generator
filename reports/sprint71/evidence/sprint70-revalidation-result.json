@@ -1,0 +1,19 @@
+{
+  "sprint_id": "sprint70",
+  "validated_under": "sprint71_rules",
+  "overall_valid": false,
+  "total_rules": 78,
+  "passed": 75,
+  "failed": 3,
+  "expected_failures": [
+    "content_audit_final_no_stale_paths",
+    "publication_matrix_no_stale_paths",
+    "remote_vs_handoff_no_stale_paths"
+  ],
+  "failure_details": {
+    "content_audit_final_no_stale_paths": "Stale sprint paths found in content-audit-final.json: ['reports/sprint69/']",
+    "publication_matrix_no_stale_paths": "Stale sprint paths found in publication-truth-matrix-final.json: ['reports/sprint69/']",
+    "remote_vs_handoff_no_stale_paths": "Stale sprint paths found in remote-vs-handoff-final.json: ['reports/sprint69/']"
+  },
+  "note": "3 failures map to sprint70 defects S70-D1 (content-audit stale paths), S70-D2 (publication matrix stale paths), and S70-D3 (remote-vs-handoff stale paths). Sprint 71 repairs all three."
+}

@@ -364,15 +364,18 @@ def _make_valid_bundle(tmpdir: str) -> Path:
             encoding="utf-8",
         )
 
-    # Rule 59: only_one_canonical_final_audit — content-audit-final.json with sprint69 paths
+    # Rule 59: only_one_canonical_final_audit — content-audit-final.json with current sprint paths
+    # Sprint 71 rules 73-74: handoff_path must use current sprint (sprint61-test) and paths must exist.
     dst_dir = b / "destination"
     dst_dir.mkdir(exist_ok=True)
+    audit_example_dir = b / "handoff" / "per-family" / "cells" / "example"
+    audit_example_dir.mkdir(parents=True, exist_ok=True)
     audit_records = [
         {
             "scenario_id": f"cells-html-converter-{i:02d}",
             "family": "cells",
-            "handoff_path": f"reports/sprint61-test/handoff/cells/type{i}",
-            "local_package_path": f"reports/sprint61-test/handoff/cells/type{i}",
+            "handoff_path": "reports/sprint61-test/handoff/per-family/cells/example",
+            "local_package_path": "reports/sprint61-test/handoff/per-family/cells/example",
             "package_version": "26.5.1",
             "output_format": ".html",
             "output_kind": "converter",
@@ -392,14 +395,15 @@ def _make_valid_bundle(tmpdir: str) -> Path:
         encoding="utf-8",
     )
 
-    # Rule 60: publication_truth_matrix_no_stale_paths
+    # Rule 60: publication_truth_matrix_no_stale_paths — current sprint paths only
+    # Sprint 71 rules 74, 76: handoff_package_path must use current sprint and paths must exist.
     pub_dir = b / "publication"
     pub_dir.mkdir(exist_ok=True)
     pub_records = [
         {
             "scenario_id": f"cells-html-converter-{i:02d}",
             "family": "cells",
-            "handoff_package_path": f"reports/sprint61-test/handoff/cells/type{i}",
+            "handoff_package_path": "reports/sprint61-test/handoff/per-family/cells/example",
             "remote_example_present": True,
             "remote_readme_has_io_docs": False,
             "remote_example_readme_has_io_docs": False,
@@ -458,6 +462,21 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     ver_dir.mkdir(exist_ok=True)
     (ver_dir / "version-consistency-final.json").write_text(
         json.dumps({"all_consistent": True, "sprint69_mismatches": 0}),
+        encoding="utf-8",
+    )
+
+    # Sprint 71 rules 73-78: stale-path scanner — add remote/remote-vs-handoff-final.json
+    remote_dir = b / "remote"
+    remote_dir.mkdir(exist_ok=True)
+    (remote_dir / "remote-vs-handoff-final.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint61-test",
+            "comparison": "current",
+            "families": [
+                {"family": f, "handoff_path": f"reports/sprint61-test/handoff/per-family/{f}/", "status": "OK"}
+                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+            ],
+        }),
         encoding="utf-8",
     )
 

@@ -1,0 +1,14 @@
+{
+  "sprint_id": "sprint71",
+  "status": "COMPLETE",
+  "verdict": "LOWCODE_PREPUBLICATION_HANDOFF_READY_APPROVAL_BLOCKED",
+  "ev_rules_passed": 78,
+  "ev_rules_total": 78,
+  "ecc_categories_present": 47,
+  "ecc_categories_total": 47,
+  "test_passed": 3025,
+  "test_failed": 0,
+  "test_skipped": 3,
+  "defects_closed": ["S70-D1", "S70-D2", "S70-D3"],
+  "date": "2026-05-23"
+}

@@ -479,16 +479,20 @@ def _make_bundle(tmpdir: str) -> Path:
             encoding="utf-8",
         )
 
-    # Rule 59: only_one_canonical_final_audit — content-audit-final.json with sprint69 paths
+    # Rule 59: only_one_canonical_final_audit — content-audit-final.json with current sprint paths
     # Must also satisfy existing rules: required_fields, all_records_ready, readme_io_coverage, output_kind
+    # Sprint 71 rules 73-74: handoff_path must use current sprint (sprint67) and paths must exist.
     dst_dir = b / "destination"
     dst_dir.mkdir(exist_ok=True)
+    # Create a shared example dir in the handoff for all 42 audit records to reference
+    audit_example_dir = b / "handoff" / "per-family" / "cells" / "example"
+    audit_example_dir.mkdir(parents=True, exist_ok=True)
     audit_records = [
         {
             "scenario_id": f"cells-html-converter-{i:02d}",
             "family": "cells",
-            "handoff_path": f"reports/sprint69-test/handoff/cells/type{i}",
-            "local_package_path": f"reports/sprint69-test/handoff/cells/type{i}",
+            "handoff_path": "reports/sprint67/handoff/per-family/cells/example",
+            "local_package_path": "reports/sprint67/handoff/per-family/cells/example",
             "package_version": "26.5.1",
             "output_format": ".html",
             "output_kind": "converter",
@@ -504,19 +508,20 @@ def _make_bundle(tmpdir: str) -> Path:
         for i in range(42)
     ]
     (dst_dir / "content-audit-final.json").write_text(
-        json.dumps({"sprint_id": "sprint69-test", "total": 42, "records": audit_records}),
+        json.dumps({"sprint_id": "sprint67", "total": 42, "records": audit_records}),
         encoding="utf-8",
     )
 
-    # Rule 60: publication_truth_matrix_no_stale_paths — sprint69 paths only
+    # Rule 60: publication_truth_matrix_no_stale_paths — current sprint paths only
     # Must also satisfy existing publication_state_not_mixed rule (needs remote_example_present, remote_readme_has_io_docs)
+    # Sprint 71 rules 74, 76: handoff_package_path must use current sprint and paths must exist.
     pub_dir = b / "publication"
     pub_dir.mkdir(exist_ok=True)
     pub_records = [
         {
             "scenario_id": f"cells-html-converter-{i:02d}",
             "family": "cells",
-            "handoff_package_path": f"reports/sprint69-test/handoff/cells/type{i}",
+            "handoff_package_path": "reports/sprint67/handoff/per-family/cells/example",
             "remote_example_present": True,
             "remote_readme_has_io_docs": False,
             "remote_example_readme_has_io_docs": False,
@@ -526,7 +531,7 @@ def _make_bundle(tmpdir: str) -> Path:
         for i in range(42)
     ]
     (pub_dir / "publication-truth-matrix-final.json").write_text(
-        json.dumps({"sprint_id": "sprint69-test", "records": pub_records}),
+        json.dumps({"sprint_id": "sprint67", "records": pub_records}),
         encoding="utf-8",
     )
 
@@ -559,9 +564,10 @@ def _make_bundle(tmpdir: str) -> Path:
     # Rule 66: handoff_index_has_root_readme_field — publication-handoff-index.json
     # Also satisfies Sprint 70 rule 71: root_readme_sha256 and root_readme_source_path
     # must match the physical README.md files written above.
+    # Sprint 71 rules: publication-handoff-index.json must use current sprint paths only.
     handoff_dir = b / "handoff"
     (handoff_dir / "publication-handoff-index.json").write_text(
-        json.dumps({"sprint_id": "sprint69-test", "families": [
+        json.dumps({"sprint_id": "sprint67", "families": [
             {
                 "family": f,
                 "root_readme_sha256": fam_readme_hashes[f],
@@ -598,6 +604,27 @@ def _make_bundle(tmpdir: str) -> Path:
         "# Legacy Reconciliation — Final Authority\n"
         "Current authority: exact-legacy-plan-reconciliation-final.md\n"
         "Old reconciliation-index.md is SUPERSEDED.\n",
+        encoding="utf-8",
+    )
+
+    # ---- Sprint 71: artifacts for rules 73-78 ----
+
+    # Rules 73-78: stale-path scanner — content-audit, publication-matrix, handoff-index,
+    # remote-vs-handoff, content-audit-files-exist, publication-matrix-files-exist.
+    # content-audit-final.json and publication-truth-matrix-final.json already updated above
+    # to use current sprint (sprint67) paths. handoff-index.json already uses sprint67 paths.
+    # Now add remote/remote-vs-handoff-final.json with current sprint paths only.
+    remote_dir = b / "remote"
+    remote_dir.mkdir(exist_ok=True)
+    (remote_dir / "remote-vs-handoff-final.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint67",
+            "comparison": "current",
+            "families": [
+                {"family": f, "handoff_path": f"reports/sprint67/handoff/per-family/{f}/", "status": "OK"}
+                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+            ],
+        }),
         encoding="utf-8",
     )
 
@@ -883,7 +910,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 72)  # Sprint 70: added 5 new rules (68-72)
+        self.assertEqual(result.total_rules, 78)  # Sprint 70: added 5 new rules (68-72)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -975,7 +1002,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 72)  # Sprint 70: 72 rules total
+        self.assertEqual(len(d["rules"]), 78)  # Sprint 70: 72 rules total
 
 
 # ===========================================================================
@@ -1579,8 +1606,8 @@ class TestTwoPhaseValidation(unittest.TestCase):
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
         # Should have exactly 66 rules evaluated (67 total - 1 self-reference rule 21)
-        # Sprint 70: total is now 72 (added 5 new rules), so excluding rule 21 = 71
-        self.assertEqual(len(result.rule_results), 71)
+        # Sprint 71: total is now 78 (added 6 new rules), so excluding rule 21 = 77
+        self.assertEqual(len(result.rule_results), 77)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1626,7 +1653,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 72)  # Sprint 70: 72 rules total
+        self.assertEqual(len(phase_b.rule_results), 78)  # Sprint 70: 72 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1846,8 +1873,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 72,
-                         f"Expected 72 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 78,
+                         f"Expected 78 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
@@ -1860,8 +1887,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 71,
-                         f"validate_for_storage must have 71 rules (72 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 77,
+                         f"validate_for_storage must have 77 rules (78 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 

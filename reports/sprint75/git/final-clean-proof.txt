@@ -1,7 +1,8 @@
 On branch main
-Sprint 75 bundle committed: [PENDING — post-commit SHA]
-reports/sprint75/ -- 251 files added, all sprint75 artifacts present
+Sprint 75 bundle committed: b2a2748
+reports/sprint75/ -- 257 files added, all sprint75 artifacts present
 src/plugin_examples/evidence_validator.py -- 8 new EV rules (86-93), 3 new allowed verdicts
 tests/unit/test_evidence_validator.py -- 17 new tests (TestSprint75WeeklyReviewRules), count updates
+tests/unit/test_pipeline_evidence_gate.py -- Sprint 75 rule fixtures added to _make_valid_bundle
 workspace/verification/latest/ -- pre-existing runtime files, not sprint75 bundle artifacts
 Sprint 75 bundle scope: clean

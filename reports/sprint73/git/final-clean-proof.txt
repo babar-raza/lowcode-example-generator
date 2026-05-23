@@ -1,6 +1,6 @@
 On branch main
-Sprint 73 bundle committed: [commit sha inserted after commit]
-reports/sprint73/ -- 219+ files added, all sprint73 artifacts present
-src/plugin_examples/evidence_validator.py -- updated (allowed verdicts expanded for sprint73)
+Sprint 73 bundle committed: c025a7f
+reports/sprint73/ -- 222 files added, all sprint73 artifacts present
+src/plugin_examples/evidence_validator.py -- updated (allowed verdicts expanded: LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL)
 workspace/verification/latest/ -- pre-existing runtime files, not sprint73 bundle artifacts
 Sprint 73 bundle scope: clean

@@ -1,3 +1,8 @@
 On branch main
-PLACEHOLDER — will be replaced after final commit with real git status
-Sprint 71 bundle commit: TBD
+Sprint 71 bundle committed: f3381cf
+reports/sprint71/ -- 224 files added, all sprint71 artifacts present
+src/plugin_examples/evidence_validator.py -- updated (78 rules)
+tests/unit/test_evidence_validator.py -- updated (78 assertions)
+tests/unit/test_pipeline_evidence_gate.py -- updated (sprint71 fixtures)
+workspace/verification/latest/ -- pre-existing runtime files, not sprint71 bundle artifacts
+Sprint 71 bundle scope: clean

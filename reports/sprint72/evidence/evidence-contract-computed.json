@@ -1,14 +1,14 @@
 {
   "contract_id": "sprint72",
-  "computed_at": "2026-05-23T13:26:34Z",
+  "computed_at": "2026-05-23T13:32:17Z",
   "total_categories": 50,
-  "present_count": 49,
-  "missing_count": 1,
-  "zero_bytes_count": 0,
-  "semantic_failed_count": 0,
-  "pending_count": 0,
-  "blocking_failures": 1,
-  "closure_valid": false,
+  "present": 50,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
   "categories": [
     {
       "id": "EC01",
@@ -407,8 +407,8 @@
       "name": "Final Clean Proof",
       "file": "reports/sprint72/git/final-clean-proof.txt",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint72/git/final-clean-proof.txt"
+      "status": "PRESENT",
+      "detail": ""
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "sprint_id": "sprint74",
+  "status": "COMPLETE",
+  "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "ev_rules_passed": 85,
+  "ev_rules_total": 85,
+  "ecc_categories_present": 26,
+  "ecc_categories_total": 26,
+  "test_passed": 3025,
+  "test_failed": 0,
+  "test_skipped": 3,
+  "prs_created": 0,
+  "merges_performed": 0,
+  "approval_status": "ABSENT",
+  "date": "2026-05-23"
+}

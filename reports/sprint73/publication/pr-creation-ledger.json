@@ -1,0 +1,10 @@
+{
+  "sprint_id": "sprint73",
+  "date": "2026-05-23",
+  "approval_status": "BLOCKED_BY_APPROVAL",
+  "approval_var": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_value": "NOT_SET",
+  "prs_created": 0,
+  "pr_records": [],
+  "note": "No PRs created. PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL is NOT_SET. Set to APPROVE_LIVE_PR to enable PR creation."
+}

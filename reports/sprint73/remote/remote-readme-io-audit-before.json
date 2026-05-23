@@ -1,0 +1,345 @@
+{
+  "sprint_id": "sprint73",
+  "fetch_date": "2026-05-23",
+  "total": 42,
+  "io_doc_count": 0,
+  "no_io_count": 42,
+  "records": [
+    {
+      "family": "cells",
+      "example": "html-converter",
+      "remote_path": "examples/cells/lowcode/html-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "ce3668f6782f0e26fce0c527519048cb95fca4340f4907a19d305e0404173031"
+    },
+    {
+      "family": "cells",
+      "example": "image-converter",
+      "remote_path": "examples/cells/lowcode/image-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "1ed1bed49a5e40dc5123084047028ffea12e25f7ac05f560b6d5588d2e01426b"
+    },
+    {
+      "family": "cells",
+      "example": "json-converter",
+      "remote_path": "examples/cells/lowcode/json-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "aa534d180f91b7569c68250e690ad05d94b7e39d3a9c6b89139e90939564a6d5"
+    },
+    {
+      "family": "cells",
+      "example": "pdf-converter",
+      "remote_path": "examples/cells/lowcode/pdf-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "799ad4891495663886ba736ab2939c82a387c29c75e55da77ab4d89818998ad6"
+    },
+    {
+      "family": "cells",
+      "example": "spreadsheet-converter",
+      "remote_path": "examples/cells/lowcode/spreadsheet-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "8cd0cedbb94107534cfccc10daffb43827098335596157168d8de8264463d56c"
+    },
+    {
+      "family": "cells",
+      "example": "spreadsheet-locker",
+      "remote_path": "examples/cells/lowcode/spreadsheet-locker/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "5785581e42a02bd77dddcbb81ed575f51e1f72088d040ed38192f7f3a1dca19a"
+    },
+    {
+      "family": "cells",
+      "example": "spreadsheet-merger",
+      "remote_path": "examples/cells/lowcode/spreadsheet-merger/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "be9424576d83c1c916a8737f7b201ad5a65a07280a0774d411d177cb3eadbbeb"
+    },
+    {
+      "family": "cells",
+      "example": "spreadsheet-splitter",
+      "remote_path": "examples/cells/lowcode/spreadsheet-splitter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "98375e06e9f64a4ea7cc9e31e2cc776db6ce7ec73a2872b257ee6cc81a1460ef"
+    },
+    {
+      "family": "cells",
+      "example": "text-converter",
+      "remote_path": "examples/cells/lowcode/text-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "05d9ac38c1c6c0dfc411ac8b4ad1764451c790f16acc6df5b37cd1053479e90d"
+    },
+    {
+      "family": "words",
+      "example": "comparer",
+      "remote_path": "examples/words/lowcode/comparer/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "cb26d6098188ebb3bd6420c15658a0b3ebb41a3f0b00fc83b08f6c768c7f60e0"
+    },
+    {
+      "family": "words",
+      "example": "converter",
+      "remote_path": "examples/words/lowcode/converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "76076c0f15dc54ed40efbfd4f25ecfc732d27a27f9847eea59ffb707a0b0197d"
+    },
+    {
+      "family": "words",
+      "example": "mail-merger",
+      "remote_path": "examples/words/lowcode/mail-merger/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "4d14370315a4a2d7a527da8b9ed2d8157beeb488a2234d7b1593de29b16ff74d"
+    },
+    {
+      "family": "words",
+      "example": "merger",
+      "remote_path": "examples/words/lowcode/merger/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "2344fcb5f9279c7994aaf15fc1203484f55a70fc386e08a72eed288ba3f60aa3"
+    },
+    {
+      "family": "words",
+      "example": "replacer",
+      "remote_path": "examples/words/lowcode/replacer/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "ab61f565e2f992775f0c6cc2a91557144c947fdbd4a8d45076b19f33068bd814"
+    },
+    {
+      "family": "words",
+      "example": "report-builder",
+      "remote_path": "examples/words/lowcode/report-builder/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "d810b131644f41380fb01175ccaa36663fd8130f0ef0d0dfba4302aacfaf7c9b"
+    },
+    {
+      "family": "words",
+      "example": "splitter",
+      "remote_path": "examples/words/lowcode/splitter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "63a21632fddf41ba97eb735c02e360ed10eadd4637eaa378b4fd86486088b536"
+    },
+    {
+      "family": "words",
+      "example": "watermarker",
+      "remote_path": "examples/words/lowcode/watermarker/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "4e93bc93c24297aa23a54256bde9f3659270c0cf45d31174723f7d24058a3e6a"
+    },
+    {
+      "family": "pdf",
+      "example": "doc-converter",
+      "remote_path": "examples/pdf/lowcode/doc-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "ee0c089bc7062bb7a24282fcb195dcdeb1b8c703b1d6d1c22f7fe0b80013dd17"
+    },
+    {
+      "family": "pdf",
+      "example": "form-editor",
+      "remote_path": "examples/pdf/lowcode/form-editor/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "30fec8f9f53980eb4e0884cb573aeca8fac4ce1c6d06e8eee242e6118c0aa502"
+    },
+    {
+      "family": "pdf",
+      "example": "form-exporter",
+      "remote_path": "examples/pdf/lowcode/form-exporter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "dbcdcff1b48b4ee201445cd349fadf7bbc783a5fef2ed318d21c427b1d458dcf"
+    },
+    {
+      "family": "pdf",
+      "example": "form-flattener",
+      "remote_path": "examples/pdf/lowcode/form-flattener/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "ea9913a2e5f02204ad3d134534740d96ae0278ab9f08530278a0422cbf451973"
+    },
+    {
+      "family": "pdf",
+      "example": "html",
+      "remote_path": "examples/pdf/lowcode/html/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "fd3d7196a0cbcad3694b38c17d41952397d19fdc960f20af9eea53e527f0d8cf"
+    },
+    {
+      "family": "pdf",
+      "example": "image-extractor",
+      "remote_path": "examples/pdf/lowcode/image-extractor/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "fe3a2091950fb4ad11851de84de622c648c3abc2b1d075089f754a8784a21045"
+    },
+    {
+      "family": "pdf",
+      "example": "jpeg",
+      "remote_path": "examples/pdf/lowcode/jpeg/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "0e298011cfeeb06bbd204bbbf691b5af766481621e99340631cc33931976fe46"
+    },
+    {
+      "family": "pdf",
+      "example": "merger",
+      "remote_path": "examples/pdf/lowcode/merger/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "1bab1bd8a9e288eb06f5bc6de6cb0e92af8457f7a0ec14d9f0e8c8835148e0e9"
+    },
+    {
+      "family": "pdf",
+      "example": "optimizer",
+      "remote_path": "examples/pdf/lowcode/optimizer/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "1a05cedb9794e1b0bce26e65517a85011465cd0a5c8126718d59929b9d06e4be"
+    },
+    {
+      "family": "pdf",
+      "example": "pdfa-converter",
+      "remote_path": "examples/pdf/lowcode/pdfa-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "34a0eb77bab4ab516ed65f4b2c7ba54f41acb539096e5c464a5b0b4880cf8baa"
+    },
+    {
+      "family": "pdf",
+      "example": "png",
+      "remote_path": "examples/pdf/lowcode/png/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "aefb75c1569f09b6786f458ac9aead7b12dc09853e77497dfaa256e4a48cec69"
+    },
+    {
+      "family": "pdf",
+      "example": "security",
+      "remote_path": "examples/pdf/lowcode/security/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "6dc9e923571d88dc6b71052572f302cfcc0d8a5495a878ff56e0b8b215b80040"
+    },
+    {
+      "family": "pdf",
+      "example": "signature",
+      "remote_path": "examples/pdf/lowcode/signature/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "8369eb53d53d36a7f69810f5fb8e7835af9b84db9e6a1580a688342751a69e09"
+    },
+    {
+      "family": "pdf",
+      "example": "splitter",
+      "remote_path": "examples/pdf/lowcode/splitter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "fb73fdb972ccb116bac81bc383bd162e31d5b3418cbffc441db3a42bb359aa20"
+    },
+    {
+      "family": "pdf",
+      "example": "table-generator",
+      "remote_path": "examples/pdf/lowcode/table-generator/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "9cef3cf5223b4fb5fd2187943753a7d9fa32dfc6cb5315b76d2ae76f580b5027"
+    },
+    {
+      "family": "pdf",
+      "example": "text-extractor",
+      "remote_path": "examples/pdf/lowcode/text-extractor/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "551813bcf0f41a808f32715e50901835f8bdc6ed4a3972ade8cde8e5e4eed6dc"
+    },
+    {
+      "family": "pdf",
+      "example": "tiff",
+      "remote_path": "examples/pdf/lowcode/tiff/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "b9c7fb6fccb14e1771cba62b6ae90d7ce2ec5e8219d37318f4b089d0ac129821"
+    },
+    {
+      "family": "pdf",
+      "example": "toc-generator",
+      "remote_path": "examples/pdf/lowcode/toc-generator/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "b2c7bdba5ef9eeccf74d6209b80eaf663be4f6840d48d4137005b61aecdccba7"
+    },
+    {
+      "family": "pdf",
+      "example": "xls-converter",
+      "remote_path": "examples/pdf/lowcode/xls-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "bcfc8ba788a9e9de5a63ae97c87a984efcdb057424faa67100a16b8d372ed58d"
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-diagram-converter",
+      "remote_path": "examples/diagram/lowcode/diagram-diagram-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "6b32f8269cf6c5c8991e1053ac404b1dbdd373be31b14303a2a702181ba1ad11"
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-pdf-converter",
+      "remote_path": "examples/diagram/lowcode/diagram-pdf-converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "fefb08f5d79c32eff0993753b13d8a18acb3f86ecc57bad6832c2ad96faa9e6d"
+    },
+    {
+      "family": "email",
+      "example": "converter",
+      "remote_path": "examples/email/lowcode/converter/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "89d4852b67c5a6a2625c95aa6b2f5de54bce275faf237aa8df68141249ab43e1"
+    },
+    {
+      "family": "slides",
+      "example": "compress",
+      "remote_path": "examples/slides/lowcode/compress/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "18d4ea20d4a19a6d3d7ae971b3f668a04a0390f09b53853fb3e9bd58218a0e81"
+    },
+    {
+      "family": "slides",
+      "example": "convert",
+      "remote_path": "examples/slides/lowcode/convert/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "f54c62af4f0faa5622a6ac8f960647509ed40b90ef509b98d5f31b0459744492"
+    },
+    {
+      "family": "slides",
+      "example": "merger",
+      "remote_path": "examples/slides/lowcode/merger/README.md",
+      "readme_status": "NO_IO",
+      "has_io": false,
+      "content_hash": "5a9e1db357945076f95f6a011cf4fc1794c7f638abe573c1d6610cec1e04aea4"
+    }
+  ]
+}

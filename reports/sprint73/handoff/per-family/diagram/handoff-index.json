@@ -1,0 +1,48 @@
+{
+  "family": "diagram",
+  "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "examples_base": "examples/diagram/lowcode",
+  "nuget_version": "26.5.0",
+  "examples": [
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "family": "diagram",
+      "dest_dir": "diagram-diagram-converter",
+      "handoff_path": "reports/sprint73/handoff/per-family/diagram/diagram-diagram-converter",
+      "readme_hash_local": "430efd2351e807b2c59758216795adbb683cc9e603e4781a28a6a7761724b4ef",
+      "readme_hash_remote": "6b32f8269cf6c5c8991e1053ac404b1dbdd373be31b14303a2a702181ba1ad11",
+      "programcs_hash_local": "347d9a052a5ef471072b25040d156bf12e66713ff9e40594921814d5e1759d60",
+      "programcs_hash_remote": "347d9a052a5ef471072b25040d156bf12e66713ff9e40594921814d5e1759d60",
+      "csproj_hash": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "readme_has_io": true,
+      "has_obj_bin": false,
+      "status": "OK"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "family": "diagram",
+      "dest_dir": "diagram-pdf-converter",
+      "handoff_path": "reports/sprint73/handoff/per-family/diagram/diagram-pdf-converter",
+      "readme_hash_local": "151b528aa03f206bf07c336610ed0241fbce59d618475f4a3332fcee4f22563c",
+      "readme_hash_remote": "fefb08f5d79c32eff0993753b13d8a18acb3f86ecc57bad6832c2ad96faa9e6d",
+      "programcs_hash_local": "c5ba58e0a1cb39f3b6f33713e3b7ed83833aeb1af816d9c14ed826c678c064c3",
+      "programcs_hash_remote": "c5ba58e0a1cb39f3b6f33713e3b7ed83833aeb1af816d9c14ed826c678c064c3",
+      "csproj_hash": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "readme_has_io": true,
+      "has_obj_bin": false,
+      "status": "OK"
+    }
+  ],
+  "pr_title": "Update README I/O documentation for Aspose.Diagram LowCode examples",
+  "pr_body": "Adds '## Input and Output' sections to all 2 diagram LowCode examples.\n\nThis provides clear documentation of input formats, output formats, and API semantics for each example.",
+  "branch_name": "plugin-examples/diagram/readme-io/sprint73",
+  "rollback": "git revert --no-edit HEAD  # reverts README I/O updates for diagram",
+  "sprint": "sprint73",
+  "root_readme": {
+    "source_path": "reports/sprint73/handoff/per-family/diagram/README.md",
+    "sha256": "516345a920b916214b7579665898e2521d056edf9d54282d28b555887dbd6c7a",
+    "destination_path": "README.md",
+    "destination_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+    "note": "Root family README \u2014 physically present in sprint73 handoff package"
+  }
+}

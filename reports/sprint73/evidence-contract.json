@@ -1,0 +1,30 @@
+{
+  "sprint_id": "sprint73",
+  "description": "Sprint 73 Evidence Contract — live README I/O publication (approval-blocked)",
+  "categories": [
+    {"id": "EC01", "name": "Sprint 72 Acceptance Baseline", "file": "reports/sprint73/00-sprint72-acceptance-baseline.md", "blocking": true, "semantic": "must document accepted sprint72 state"},
+    {"id": "EC02", "name": "Live Publication Preflight", "file": "reports/sprint73/01-live-publication-preflight.md", "blocking": true, "semantic": "must document approval check and preflight result"},
+    {"id": "EC03", "name": "Commands Log", "file": "reports/sprint73/commands.log", "blocking": true, "semantic": "must not be empty"},
+    {"id": "EC04", "name": "Todo", "file": "reports/sprint73/todo.md", "blocking": true, "semantic": "must have no unchecked items"},
+    {"id": "EC05", "name": "Evidence Contract", "file": "reports/sprint73/evidence-contract.json", "blocking": true, "semantic": "must be valid JSON"},
+    {"id": "EC06", "name": "Remote Repo State Before", "file": "reports/sprint73/remote/remote-repo-state-before.json", "blocking": true, "semantic": "must be valid JSON with 6 repos"},
+    {"id": "EC07", "name": "Remote README IO Audit Before", "file": "reports/sprint73/remote/remote-readme-io-audit-before.json", "blocking": true, "semantic": "must be valid JSON with 42 records"},
+    {"id": "EC08", "name": "Remote Conflict Check", "file": "reports/sprint73/remote/remote-conflict-check.md", "blocking": true, "semantic": "must document conflict status per family"},
+    {"id": "EC09", "name": "Handoff Prepublish Validation", "file": "reports/sprint73/handoff/handoff-prepublish-validation.json", "blocking": true, "semantic": "must be valid JSON with handoff_valid=true"},
+    {"id": "EC10", "name": "Handoff Diff Summary", "file": "reports/sprint73/handoff/handoff-diff-summary.md", "blocking": true, "semantic": "must document local vs remote delta"},
+    {"id": "EC11", "name": "Live Approval Check", "file": "reports/sprint73/publication/live-approval-check.md", "blocking": true, "semantic": "must document approval status"},
+    {"id": "EC12", "name": "PR Creation Ledger", "file": "reports/sprint73/publication/pr-creation-ledger.json", "blocking": true, "semantic": "must be valid JSON with prs_created count"},
+    {"id": "EC13", "name": "Merge Result", "file": "reports/sprint73/publication/merge-result.json", "blocking": true, "semantic": "must be valid JSON"},
+    {"id": "EC14", "name": "Post-Merge Verification", "file": "reports/sprint73/publication/post-merge-verification.json", "blocking": true, "semantic": "must be valid JSON"},
+    {"id": "EC15", "name": "Branch Delete Result", "file": "reports/sprint73/publication/branch-delete-result.json", "blocking": true, "semantic": "must be valid JSON"},
+    {"id": "EC16", "name": "Publication Truth Matrix Final", "file": "reports/sprint73/publication/publication-truth-matrix-final.json", "blocking": true, "semantic": "must be valid JSON with 42 records"},
+    {"id": "EC17", "name": "Publication Summary", "file": "reports/sprint73/publication/publication-summary.md", "blocking": true, "semantic": "must document final publication status"},
+    {"id": "EC18", "name": "Test Run Log", "file": "reports/sprint73/logs/test-run.log", "blocking": true, "semantic": "must not be empty"},
+    {"id": "EC19", "name": "Sprint 73 Final Validation Result", "file": "reports/sprint73/evidence/sprint73-final-validation-result.json", "blocking": true, "semantic": "must be valid JSON with overall_valid"},
+    {"id": "EC20", "name": "Evidence Contract Computed", "file": "reports/sprint73/evidence/evidence-contract-computed.json", "blocking": true, "semantic": "must not contain IN_PROGRESS at closure"},
+    {"id": "EC21", "name": "Final Verdict", "file": "reports/sprint73/final-verdict.md", "blocking": true, "semantic": "must contain allowed verdict string"},
+    {"id": "EC22", "name": "Sprint State", "file": "reports/sprint73/sprint-state.json", "blocking": true, "semantic": "must be valid JSON with status and verdict"},
+    {"id": "EC23", "name": "Bundle Manifest", "file": "reports/sprint73/bundle-manifest.json", "blocking": true, "semantic": "must be valid JSON"},
+    {"id": "EC24", "name": "Final Clean Proof", "file": "reports/sprint73/git/final-clean-proof.txt", "blocking": true, "semantic": "must be non-empty"}
+  ]
+}

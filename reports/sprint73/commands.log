@@ -1,0 +1,55 @@
+# Sprint 73 Commands Log
+
+## Phase 0 — Preflight and Approval Check
+# Created: 00-sprint72-acceptance-baseline.md
+# Created: 01-live-publication-preflight.md
+# Created: todo.md, commands.log, evidence-contract.json
+# Checked env vars: GH_TOKEN=SET, GITHUB_TOKEN=SET, PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET, PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=NOT_SET
+# Result: BLOCKED_BY_APPROVAL — no live PR creation proceeds
+
+## Phase 1 — Remote Truth Fetch
+# Fetched remote state: all 6 repos via GitHub API
+# Created: remote/remote-repo-state-before.json (6 repos, branch SHAs, open PRs)
+# Created: remote/remote-readme-io-audit-before.json (42 records, 0 IO found)
+# Created: remote/remote-readme-io-audit.json (42 records with has_io_section field)
+# Created: remote/remote-conflict-check.md (cells #5, words #7, diagram #2 open PRs noted)
+# Result: FRESH — 42/42 examples, 0/42 IO present (matches Sprint 72)
+
+## Phase 2 — Handoff Verification
+# Verified sprint72 handoff: 42/42 examples, 6/6 root READMEs, 42/42 IO present, all clean
+# Created: handoff/handoff-prepublish-validation.json (handoff_valid=true)
+# Created: handoff/handoff-diff-summary.md
+
+## Phase 3 — Live PR Creation (SKIPPED — NO APPROVAL)
+# PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET → no PRs created
+# Created: publication/live-approval-check.md (BLOCKED_BY_APPROVAL)
+# Created: publication/pr-creation-ledger.json (prs_created=0)
+
+## Phase 4 — Merge (SKIPPED — NO MERGE APPROVAL)
+# Created: publication/merge-result.json (merges_performed=0)
+# Created: publication/post-merge-verification.json
+
+## Phase 5 — Branch Delete (SKIPPED — NO MERGE)
+# Created: publication/branch-delete-result.json (branches_deleted=0)
+
+## Phase 6 — Publication Truth Matrix
+# Created: publication/publication-truth-matrix-final.json (42 records, all APPROVAL_BLOCKED)
+# Created: publication/publication-summary.md
+
+## Phase 7 — Testing
+# python -m pytest --tb=short -q > reports/sprint73/logs/test-run.log
+# Result: 3025 passed, 3 skipped, 10 subtests passed, 0 failed
+# python -m pytest tests/unit/test_evidence_validator.py -v > reports/sprint73/evidence/validator-test-results.txt
+# Result: 84 passed
+
+## Phase 8 — Final Bundle
+# Copied sprint72 artifacts to sprint73 (handoff, destination, root-readme, version, etc.)
+# Added LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL to EV allowed verdicts
+# ECC bootstrap: seeded evidence-contract-computed.json → EV Phase A → ECC → EV Phase B
+# EV Phase A: 84/84, overall_valid=True
+# ECC: 24/24 categories PRESENT, closure_valid=True
+# EV Phase B: 85/85, overall_valid=True
+# Created: bundle-manifest.json
+# Created: final-verdict.md, sprint-state.json
+# Created: git/final-clean-proof.txt
+# [NEXT] git commit → update final-clean-proof.txt with commit SHA → second commit

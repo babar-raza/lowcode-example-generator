@@ -108,7 +108,7 @@
       "description": "final-clean-proof.txt must be nonzero bytes",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "final-clean-proof.txt is 274 bytes",
+      "evidence": "final-clean-proof.txt is 247 bytes",
       "failure_detail": ""
     },
     {
@@ -116,7 +116,7 @@
       "description": "final-clean-proof.txt must contain git status header",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "Git header found in final-clean-proof.txt: On branch main\nSprint 74 bundle committed: [commit sha inserted after commit]\nre",
+      "evidence": "Git header found in final-clean-proof.txt: On branch main\nSprint 74 bundle committed: 364ebe2\nreports/sprint74/ -- 224 file",
       "failure_detail": ""
     },
     {
@@ -172,7 +172,7 @@
       "description": "ECC must show closure_valid=true (no blocking failures)",
       "severity": "FAILURE",
       "passed": true,
-      "evidence": "evidence-contract-computed.json: closure_valid=true, blocking_failures=0 (computed_at=2026-05-23T15:47:59Z)",
+      "evidence": "evidence-contract-computed.json: closure_valid=true, blocking_failures=0 (computed_at=2026-05-23T15:48:32Z)",
       "failure_detail": ""
     },
     {

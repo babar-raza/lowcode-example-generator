@@ -1,0 +1,240 @@
+{
+  "sprint_id": "sprint75",
+  "handoff_source": "reports/sprint72/handoff",
+  "families": {
+    "cells": {
+      "examples": [
+        {
+          "scenario_id": "cells-html-converter",
+          "dest_dir": "html-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/html-converter"
+        },
+        {
+          "scenario_id": "cells-image-converter",
+          "dest_dir": "image-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/image-converter"
+        },
+        {
+          "scenario_id": "cells-json-converter",
+          "dest_dir": "json-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/json-converter"
+        },
+        {
+          "scenario_id": "cells-pdf-converter",
+          "dest_dir": "pdf-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/pdf-converter"
+        },
+        {
+          "scenario_id": "cells-spreadsheet-converter",
+          "dest_dir": "spreadsheet-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/spreadsheet-converter"
+        },
+        {
+          "scenario_id": "cells-spreadsheet-locker",
+          "dest_dir": "spreadsheet-locker",
+          "source_path": "reports/sprint72/handoff/per-family/cells/spreadsheet-locker"
+        },
+        {
+          "scenario_id": "cells-spreadsheet-merger",
+          "dest_dir": "spreadsheet-merger",
+          "source_path": "reports/sprint72/handoff/per-family/cells/spreadsheet-merger"
+        },
+        {
+          "scenario_id": "cells-spreadsheet-splitter",
+          "dest_dir": "spreadsheet-splitter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/spreadsheet-splitter"
+        },
+        {
+          "scenario_id": "cells-text-converter",
+          "dest_dir": "text-converter",
+          "source_path": "reports/sprint72/handoff/per-family/cells/text-converter"
+        }
+      ]
+    },
+    "words": {
+      "examples": [
+        {
+          "scenario_id": "words-comparer",
+          "dest_dir": "comparer",
+          "source_path": "reports/sprint72/handoff/per-family/words/comparer"
+        },
+        {
+          "scenario_id": "words-converter",
+          "dest_dir": "converter",
+          "source_path": "reports/sprint72/handoff/per-family/words/converter"
+        },
+        {
+          "scenario_id": "words-mail-merger",
+          "dest_dir": "mail-merger",
+          "source_path": "reports/sprint72/handoff/per-family/words/mail-merger"
+        },
+        {
+          "scenario_id": "words-merger",
+          "dest_dir": "merger",
+          "source_path": "reports/sprint72/handoff/per-family/words/merger"
+        },
+        {
+          "scenario_id": "words-replacer",
+          "dest_dir": "replacer",
+          "source_path": "reports/sprint72/handoff/per-family/words/replacer"
+        },
+        {
+          "scenario_id": "words-report-builder",
+          "dest_dir": "report-builder",
+          "source_path": "reports/sprint72/handoff/per-family/words/report-builder"
+        },
+        {
+          "scenario_id": "words-splitter",
+          "dest_dir": "splitter",
+          "source_path": "reports/sprint72/handoff/per-family/words/splitter"
+        },
+        {
+          "scenario_id": "words-watermarker",
+          "dest_dir": "watermarker",
+          "source_path": "reports/sprint72/handoff/per-family/words/watermarker"
+        }
+      ]
+    },
+    "pdf": {
+      "examples": [
+        {
+          "scenario_id": "pdf-doc-converter",
+          "dest_dir": "doc-converter",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/doc-converter"
+        },
+        {
+          "scenario_id": "pdf-form-editor",
+          "dest_dir": "form-editor",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/form-editor"
+        },
+        {
+          "scenario_id": "pdf-form-exporter",
+          "dest_dir": "form-exporter",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/form-exporter"
+        },
+        {
+          "scenario_id": "pdf-form-flattener",
+          "dest_dir": "form-flattener",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/form-flattener"
+        },
+        {
+          "scenario_id": "pdf-html-converter",
+          "dest_dir": "html",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/html"
+        },
+        {
+          "scenario_id": "pdf-image-extractor",
+          "dest_dir": "image-extractor",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/image-extractor"
+        },
+        {
+          "scenario_id": "pdf-jpeg",
+          "dest_dir": "jpeg",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/jpeg"
+        },
+        {
+          "scenario_id": "pdf-merger",
+          "dest_dir": "merger",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/merger"
+        },
+        {
+          "scenario_id": "pdf-optimizer",
+          "dest_dir": "optimizer",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/optimizer"
+        },
+        {
+          "scenario_id": "pdf-pdfa-converter",
+          "dest_dir": "pdfa-converter",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/pdfa-converter"
+        },
+        {
+          "scenario_id": "pdf-png",
+          "dest_dir": "png",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/png"
+        },
+        {
+          "scenario_id": "pdf-security",
+          "dest_dir": "security",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/security"
+        },
+        {
+          "scenario_id": "pdf-signature",
+          "dest_dir": "signature",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/signature"
+        },
+        {
+          "scenario_id": "pdf-splitter",
+          "dest_dir": "splitter",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/splitter"
+        },
+        {
+          "scenario_id": "pdf-table-generator",
+          "dest_dir": "table-generator",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/table-generator"
+        },
+        {
+          "scenario_id": "pdf-text-extractor",
+          "dest_dir": "text-extractor",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/text-extractor"
+        },
+        {
+          "scenario_id": "pdf-tiff",
+          "dest_dir": "tiff",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/tiff"
+        },
+        {
+          "scenario_id": "pdf-toc-generator",
+          "dest_dir": "toc-generator",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/toc-generator"
+        },
+        {
+          "scenario_id": "pdf-xls-converter",
+          "dest_dir": "xls-converter",
+          "source_path": "reports/sprint72/handoff/per-family/pdf/xls-converter"
+        }
+      ]
+    },
+    "diagram": {
+      "examples": [
+        {
+          "scenario_id": "diagram-diagram-converter",
+          "dest_dir": "diagram-diagram-converter",
+          "source_path": "reports/sprint72/handoff/per-family/diagram/diagram-diagram-converter"
+        },
+        {
+          "scenario_id": "diagram-pdf-converter",
+          "dest_dir": "diagram-pdf-converter",
+          "source_path": "reports/sprint72/handoff/per-family/diagram/diagram-pdf-converter"
+        }
+      ]
+    },
+    "email": {
+      "examples": [
+        {
+          "scenario_id": "email-converter",
+          "dest_dir": "converter",
+          "source_path": "reports/sprint72/handoff/per-family/email/converter"
+        }
+      ]
+    },
+    "slides": {
+      "examples": [
+        {
+          "scenario_id": "slides-compress",
+          "dest_dir": "compress",
+          "source_path": "reports/sprint72/handoff/per-family/slides/compress"
+        },
+        {
+          "scenario_id": "slides-convert",
+          "dest_dir": "convert",
+          "source_path": "reports/sprint72/handoff/per-family/slides/convert"
+        },
+        {
+          "scenario_id": "slides-merger",
+          "dest_dir": "merger",
+          "source_path": "reports/sprint72/handoff/per-family/slides/merger"
+        }
+      ]
+    }
+  }
+}

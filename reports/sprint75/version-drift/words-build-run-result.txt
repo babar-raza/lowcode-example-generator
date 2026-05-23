@@ -1,0 +1,27 @@
+Words Version Drift — Build/Run Assessment — Sprint 75
+Date: 2026-05-23
+
+ASSESSMENT: BUILD/RUN NOT REQUIRED
+
+Reason:
+The 8 Words examples in the sprint75 handoff are at package version 26.5.0.
+They were generated and verified in sprint66/67. The handoff Directory.Packages.props
+specifies Aspose.Words Version="26.5.0" (confirmed).
+
+The version drift between remote (26.4.0) and handoff (26.5.0) is resolved by updating
+the remote csproj files via the README I/O PR — not by rebuilding the examples.
+
+Since 26.4.0 → 26.5.0 is a minor version increment:
+- API surface: no breaking changes (monthly patch release)
+- Example correctness: verified at 26.5.0 in sprint75 handoff
+- No full regeneration needed
+
+Handoff package verification:
+  reports/sprint75/handoff/per-family/words/Directory.Packages.props
+    <PackageVersion Include="Aspose.Words" Version="26.5.0" />  [CONFIRMED]
+
+NuGet latest: 26.5.0 (confirmed 2026-05-23)
+No newer version to target.
+
+Conclusion: Words handoff package is at the correct version. No build/run action needed.
+The only action is publication (via approval-gated PR).

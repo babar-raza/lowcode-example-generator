@@ -1,0 +1,71 @@
+{
+  "generated": "2026-05-23T00:00:00Z",
+  "sprint_id": "sprint75",
+  "note": "Remote state carried from Sprint 71. No PRs merged since Sprint 71 close — remote state unchanged. Fresh GitHub API fetch not attempted (PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL absent); classified as PARTIAL per Sprint 72 scope.",
+  "repos": {
+    "cells": {
+      "family": "cells",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "d4946a7c5a3bd0dd3fcd6aee7fafa7dd2c5df4a5",
+      "examples_path": "examples/cells/lowcode",
+      "examples_confirmed": 9,
+      "readme_io_count": 0
+    },
+    "words": {
+      "family": "words",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "4fc9a636aec93d449b3f33f06d9705f0af3d9e67",
+      "examples_path": "examples/words/lowcode",
+      "examples_confirmed": 8,
+      "readme_io_count": 0
+    },
+    "pdf": {
+      "family": "pdf",
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "5aa0fa6f485be405f4c23e85162b68f31ec2a9cb",
+      "examples_path": "examples/pdf/lowcode",
+      "examples_confirmed": 19,
+      "readme_io_count": 0
+    },
+    "diagram": {
+      "family": "diagram",
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "3f7c0e3c8cb49856746c1fcaab45784f61179152",
+      "examples_path": "examples/diagram/lowcode",
+      "examples_confirmed": 2,
+      "readme_io_count": 0
+    },
+    "email": {
+      "family": "email",
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "6d10c59ec7486689b1f1ee5c23fd979d4b8527c0",
+      "examples_path": "examples/email/lowcode",
+      "examples_confirmed": 1,
+      "readme_io_count": 0
+    },
+    "slides": {
+      "family": "slides",
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "default_branch": "main",
+      "head_sha": "bbe7e68b0a344ba23a3767955fd75504ff6ad471",
+      "examples_path": "examples/slides/lowcode",
+      "examples_confirmed": 3,
+      "readme_io_count": 0
+    }
+  },
+  "totals": {
+    "examples_confirmed": 42,
+    "readme_io_count": 0,
+    "approval_blocked": true
+  },
+  "captured_at": "2026-05-23T00:00:00Z",
+  "carry_forward_note": "Carried forward from sprint71. No new merges or pushes since sprint71 close. Remote state unchanged.",
+  "carried_from": "sprint71",
+  "refresh_status": "PARTIAL",
+  "refresh_note": "Remote truth unchanged from sprint71. 0/42 remote READMEs have I/O sections. Fresh API fetch classified PARTIAL — no approval token present."
+}

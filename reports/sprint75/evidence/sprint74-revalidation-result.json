@@ -1,0 +1,27 @@
+{
+  "sprint_id": "sprint75",
+  "revalidated_by": "sprint75",
+  "date": "2026-05-23",
+  "total_rules": 93,
+  "passed": 86,
+  "failed": 7,
+  "overall_valid": false,
+  "sprint75_rules_failing": [
+    "weekly_review_claim_matrix_present",
+    "pdf_publication_truth_reconciled",
+    "formimporter_taskcard_durable",
+    "words_version_drift_documented",
+    "email_slides_runtime_validated",
+    "dirty_tree_classified",
+    "sprint27_governance_classified"
+  ],
+  "all_failing": [
+    "weekly_review_claim_matrix_present",
+    "pdf_publication_truth_reconciled",
+    "formimporter_taskcard_durable",
+    "words_version_drift_documented",
+    "email_slides_runtime_validated",
+    "dirty_tree_classified",
+    "sprint27_governance_classified"
+  ]
+}

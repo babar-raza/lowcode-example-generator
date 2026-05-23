@@ -1,0 +1,382 @@
+{
+  "contract_id": "sprint75",
+  "computed_at": "2026-05-23T17:32:59Z",
+  "total_categories": 46,
+  "present": 46,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 75 Acceptance Baseline",
+      "file": "reports/sprint75/00-sprint75-acceptance-baseline.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "Weekly Review Intake",
+      "file": "reports/sprint75/01-weekly-review-intake.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "Weekly Review Claim vs Proof Matrix",
+      "file": "reports/sprint75/02-weekly-review-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "Commands Log",
+      "file": "reports/sprint75/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "Todo",
+      "file": "reports/sprint75/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "Evidence Contract",
+      "file": "reports/sprint75/evidence-contract.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "Dirty State Before",
+      "file": "reports/sprint75/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "Dirty File Classification",
+      "file": "reports/sprint75/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "Staging Plan",
+      "file": "reports/sprint75/git/staging-plan.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "Dirty State After",
+      "file": "reports/sprint75/git/dirty-state-after.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "Final Clean Proof",
+      "file": "reports/sprint75/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "PDF PR Reconciliation",
+      "file": "reports/sprint75/pdf-publication/pdf-pr-reconciliation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "PDF Scenario Publication Map",
+      "file": "reports/sprint75/pdf-publication/pdf-scenario-publication-map.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "PDF Remote vs Handoff",
+      "file": "reports/sprint75/pdf-publication/pdf-remote-vs-handoff.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "PDF Publication Truth Summary",
+      "file": "reports/sprint75/pdf-publication/pdf-publication-truth-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "FormImporter Defect Status",
+      "file": "reports/sprint75/formimporter/formimporter-defect-status.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "FormImporter Repro Inventory",
+      "file": "reports/sprint75/formimporter/formimporter-repro-inventory.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "FormImporter Retest Result",
+      "file": "reports/sprint75/formimporter/formimporter-retest-result.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "FormImporter Taskcard Update Proof",
+      "file": "reports/sprint75/formimporter/taskcard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "Words Version Drift Current",
+      "file": "reports/sprint75/version-drift/words-version-drift-current.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "Words Version Drift Plan",
+      "file": "reports/sprint75/version-drift/words-version-drift-plan.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "Words Build Run Result",
+      "file": "reports/sprint75/version-drift/words-build-run-result.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "Words Publication Package Status",
+      "file": "reports/sprint75/version-drift/words-publication-package-status.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "Email Runtime Validation",
+      "file": "reports/sprint75/post-merge-runtime/email-runtime-validation.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "Slides Runtime Validation",
+      "file": "reports/sprint75/post-merge-runtime/slides-runtime-validation.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "Post-Merge Validation Matrix",
+      "file": "reports/sprint75/post-merge-runtime/post-merge-validation-matrix.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "Post-Merge Runtime Summary",
+      "file": "reports/sprint75/post-merge-runtime/post-merge-runtime-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "Sprint 27 Strict Contract Revalidation",
+      "file": "reports/sprint75/governance/sprint27-strict-contract-revalidation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "Sprint 27 Missing Categories",
+      "file": "reports/sprint75/governance/sprint27-missing-categories.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "Sprint 28-30 Downstream Compliance Check",
+      "file": "reports/sprint75/governance/sprint28-30-downstream-compliance-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC31",
+      "name": "Historical Evidence Exception Policy",
+      "file": "reports/sprint75/governance/historical-evidence-exception-policy.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC32",
+      "name": "Live Approval Check",
+      "file": "reports/sprint75/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC33",
+      "name": "PR Creation Ledger",
+      "file": "reports/sprint75/publication/pr-creation-ledger.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC34",
+      "name": "Weekly Review Taskcard Updates",
+      "file": "reports/sprint75/tracking/weekly-review-taskcard-updates.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC35",
+      "name": "Scoreboard Update Proof",
+      "file": "reports/sprint75/tracking/scoreboard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC36",
+      "name": "Retest Trigger Register",
+      "file": "reports/sprint75/tracking/retest-trigger-register.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC37",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint75/evidence/validator-gap-analysis.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC38",
+      "name": "Validator Source Proof",
+      "file": "reports/sprint75/evidence/validator-source-proof.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC39",
+      "name": "Validator Test Results",
+      "file": "reports/sprint75/evidence/validator-test-results.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC40",
+      "name": "Sprint 74 Revalidation Result",
+      "file": "reports/sprint75/evidence/sprint74-revalidation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC41",
+      "name": "Sprint 75 Final Validation Result",
+      "file": "reports/sprint75/evidence/sprint75-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC42",
+      "name": "Evidence Contract Computed",
+      "file": "reports/sprint75/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC43",
+      "name": "Test Run Log",
+      "file": "reports/sprint75/logs/test-run.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC44",
+      "name": "Bundle Manifest",
+      "file": "reports/sprint75/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC45",
+      "name": "Final Verdict",
+      "file": "reports/sprint75/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC46",
+      "name": "Sprint State",
+      "file": "reports/sprint75/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

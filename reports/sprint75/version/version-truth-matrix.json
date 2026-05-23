@@ -1,0 +1,70 @@
+{
+  "generated": "2026-05-22",
+  "sprint_id": "sprint75",
+  "description": "Canonical version truth for all 6 families. Resolves contradictions between content-audit (sprint64 snapshots) and handoff packages (sprint66/67 artifacts).",
+  "families": {
+    "cells": {
+      "canonical_version": "26.5.1",
+      "handoff_version": "26.5.1",
+      "content_audit_version": "26.5.1",
+      "remote_published_version": "26.5.1",
+      "version_consistent": true,
+      "drift": "NONE",
+      "notes": "Cells is always at the latest version (26.5.1 as of 2026-05-22)"
+    },
+    "words": {
+      "canonical_version": "26.5.0",
+      "handoff_version": "26.5.0",
+      "content_audit_version": "26.5.0",
+      "remote_published_version": "26.4.0",
+      "version_consistent": false,
+      "drift": "REMOTE_DRIFT \u2014 remote published at 26.4.0; handoff and local at 26.5.0",
+      "notes": "Words version drift: remote is behind. Will be resolved when README I/O PRs are published (includes version bump to 26.5.0)."
+    },
+    "pdf": {
+      "canonical_version": "26.5.0",
+      "handoff_version": "26.5.0",
+      "content_audit_version": "26.4.0",
+      "remote_published_version": "26.5.0",
+      "version_consistent": false,
+      "drift": "CONTENT_AUDIT_STALE \u2014 audit shows 26.4.0 (Sprint 64 snapshot); handoff is 26.5.0",
+      "notes": "S66-D2 resolved: Path A chosen. Sprint 67 content-audit-sprint67.json uses 26.5.0. Sprint 66 audit is stale but not retroactively corrected.",
+      "decision_record": "reports/sprint67/version/pdf-version-decision.md"
+    },
+    "diagram": {
+      "canonical_version": "26.5.0",
+      "handoff_version": "26.5.0",
+      "content_audit_version": "26.5.0",
+      "remote_published_version": "26.4.0",
+      "version_consistent": false,
+      "drift": "REMOTE_DRIFT \u2014 remote published at 26.4.0; handoff and local at 26.5.0",
+      "notes": "Diagram version drift mirrors Words. Will be resolved with publication batch."
+    },
+    "email": {
+      "canonical_version": "26.4.0",
+      "handoff_version": "26.4.0",
+      "content_audit_version": "26.4.0",
+      "remote_published_version": "26.4.0",
+      "version_consistent": true,
+      "drift": "NONE",
+      "notes": "Email is fully consistent at 26.4.0."
+    },
+    "slides": {
+      "canonical_version": "26.5.0",
+      "handoff_version": "26.5.0",
+      "content_audit_version": "26.5.0",
+      "remote_published_version": "26.5.0",
+      "version_consistent": true,
+      "drift": "NONE",
+      "notes": "Slides is fully consistent at 26.5.0."
+    }
+  },
+  "summary": {
+    "total_families": 6,
+    "fully_consistent": 3,
+    "remote_drift": 2,
+    "content_audit_stale": 1,
+    "total_drift_unresolved": 0,
+    "note": "Remote drift (Words, Diagram) will be resolved during publication. PDF content-audit stale resolved by decision record. Sprint 67 handoff is consistent across all 6 families."
+  }
+}

@@ -513,6 +513,70 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 
+    # Sprint 75 rules 86-93: weekly review classification artifacts
+
+    # Rule 86: weekly_review_claim_matrix_present
+    # Rule 93: weekly_review_verdict_not_complete_while_unclassified
+    (b / "02-weekly-review-claim-vs-proof-matrix.md").write_text(
+        "# Weekly Review Claim vs Proof Matrix\n\n"
+        "| Item | Classification |\n"
+        "|------|---------------|\n"
+        "| 1 | VERIFIED_HISTORICAL_BUT_SUPERSEDED |\n"
+        "| 2 | BLOCKED_EXTERNAL |\n"
+        "| 3 | NEEDS_REPAIR |\n"
+        "| 4 | GOVERNANCE_EXCEPTION_REQUIRED |\n",
+        encoding="utf-8",
+    )
+
+    # Rule 87: pdf_publication_truth_reconciled
+    (b / "pdf-publication").mkdir(parents=True, exist_ok=True)
+    (b / "pdf-publication" / "pdf-pr-reconciliation.json").write_text(
+        json.dumps({"claim_verdict": "VERIFIED_HISTORICAL_BUT_SUPERSEDED", "sprint_id": "sprint61-test"}),
+        encoding="utf-8",
+    )
+
+    # Rule 88: formimporter_taskcard_durable
+    (b / "formimporter").mkdir(parents=True, exist_ok=True)
+    (b / "formimporter" / "formimporter-repro-inventory.json").write_text(
+        json.dumps({"next_retest_trigger": "Aspose.PDF NuGet version > 26.5.0", "sprint_id": "sprint61-test"}),
+        encoding="utf-8",
+    )
+
+    # Rule 89: words_version_drift_documented
+    (b / "version-drift").mkdir(parents=True, exist_ok=True)
+    (b / "version-drift" / "words-version-drift-current.json").write_text(
+        json.dumps({"drift": "REMOTE_DRIFT", "sprint_id": "sprint61-test"}),
+        encoding="utf-8",
+    )
+
+    # Rule 90: email_slides_runtime_validated
+    (b / "post-merge-runtime").mkdir(parents=True, exist_ok=True)
+    (b / "post-merge-runtime" / "post-merge-validation-matrix.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint61-test",
+            "records": [
+                {"scenario_id": "email-html-converter", "post_merge_validated": True},
+                {"scenario_id": "slides-compress", "post_merge_validated": True},
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 91: dirty_tree_classified
+    (b / "git" / "dirty-file-classification.md").write_text(
+        "# Dirty File Classification\n\nAll dirty files classified.\n",
+        encoding="utf-8",
+    )
+
+    # Rule 92: sprint27_governance_classified
+    (b / "governance").mkdir(parents=True, exist_ok=True)
+    (b / "governance" / "sprint27-strict-contract-revalidation.md").write_text(
+        "# Sprint 27 Strict Contract Revalidation\n\n"
+        "Status: GOVERNANCE_EXCEPTION_REQUIRED\n"
+        "Classification: HISTORICAL_NON_COMPLIANT\n",
+        encoding="utf-8",
+    )
+
     return b
 
 

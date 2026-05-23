@@ -1,0 +1,37 @@
+Sprint 75 — EvidenceValidator Test Results
+==========================================
+
+Date: 2026-05-23
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -v
+
+Result: 100 passed in 65.89s (0:01:05)
+Skipped: 0
+Failed: 0
+
+--- Summary ---
+Test file: tests/unit/test_evidence_validator.py
+Total rules in validator: 93 (Phase A: 92 excluding self-reference rule)
+New Sprint 75 rules tested: 8 (rules 86-93, TestSprint75WeeklyReviewRules class)
+New Sprint 75 allowed verdicts tested: 3
+
+--- New Test Class: TestSprint75WeeklyReviewRules (17 tests) ---
+PASSED test_rule86_weekly_review_matrix_missing
+PASSED test_rule86_weekly_review_matrix_present_passes
+PASSED test_rule87_pdf_pr_reconciliation_missing
+PASSED test_rule87_pdf_pr_reconciliation_present_passes
+PASSED test_rule88_formimporter_taskcard_missing
+PASSED test_rule88_formimporter_taskcard_present_passes
+PASSED test_rule89_words_version_drift_missing
+PASSED test_rule89_words_version_drift_present_passes
+PASSED test_rule90_post_merge_matrix_missing
+PASSED test_rule90_post_merge_matrix_present_passes
+PASSED test_rule91_dirty_tree_classification_missing
+PASSED test_rule91_dirty_tree_classification_present_passes
+PASSED test_rule92_sprint27_governance_missing
+PASSED test_rule92_sprint27_governance_present_passes
+PASSED test_rule93_verdict_ok_when_matrix_present
+PASSED test_sprint74_bundle_fails_rule86
+PASSED test_validate_for_storage_excludes_self_reference_but_not_ecc_rule (updated: 92)
+
+--- Full suite excerpt ---
+100 passed in 65.89s (0:01:05)

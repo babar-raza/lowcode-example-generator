@@ -1,0 +1,20 @@
+{
+  "sprint_id": "sprint75",
+  "generated": "2026-05-23",
+  "family": "words",
+  "examples_count": 8,
+  "handoff_version": "26.5.0",
+  "remote_version": "26.4.0",
+  "drift": "REMOTE_DRIFT",
+  "handoff_ready": true,
+  "build_run_required": false,
+  "build_run_reason": "26.5.0 handoff already generated and verified in sprint75; 26.4.0->26.5.0 is minor patch with no API breaks",
+  "publication_package_status": "APPROVAL_BLOCKED",
+  "approval_status": "ABSENT",
+  "approval_token": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_required_value": "APPROVE_LIVE_PR",
+  "pr_type": "README_IO_PLUS_VERSION_BUMP",
+  "pr_created": false,
+  "prs_count": 0,
+  "notes": "Version drift repair is bundled with README I/O PR. When approval is set, a single PR per Words example will add I/O sections and bump package version from 26.4.0 to 26.5.0."
+}

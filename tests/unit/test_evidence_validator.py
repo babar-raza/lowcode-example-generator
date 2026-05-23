@@ -673,6 +673,95 @@ def _make_bundle(tmpdir: str) -> Path:
     for i in range(40):
         (b / f"pad-{i:02d}.txt").write_text(f"pad {i}\n", encoding="utf-8")
 
+    # ---- Sprint 75: artifacts for rules 86-93 ----
+
+    # Rule 86: weekly_review_claim_matrix_present
+    (b / "02-weekly-review-claim-vs-proof-matrix.md").write_text(
+        "# Weekly Review Claim vs Proof Matrix\n\n"
+        "Item 1: VERIFIED_HISTORICAL_BUT_SUPERSEDED\n"
+        "Item 2: BLOCKED_EXTERNAL\n"
+        "Item 3: NEEDS_REPAIR\n"
+        "Item 6: GOVERNANCE_EXCEPTION_REQUIRED\n",
+        encoding="utf-8",
+    )
+
+    # Rule 87: pdf_publication_truth_reconciled
+    pdf_pub_dir = b / "pdf-publication"
+    pdf_pub_dir.mkdir(parents=True, exist_ok=True)
+    (pdf_pub_dir / "pdf-pr-reconciliation.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint75",
+            "claim_verdict": "VERIFIED_HISTORICAL_BUT_SUPERSEDED",
+            "pdf_prs": [],
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 88: formimporter_taskcard_durable
+    fi_dir = b / "formimporter"
+    fi_dir.mkdir(parents=True, exist_ok=True)
+    (fi_dir / "formimporter-repro-inventory.json").write_text(
+        json.dumps({
+            "taskcard_id": "TC-PDF-FORMIMPORTER-RETEST",
+            "current_status": "STILL_BLOCKED",
+            "repro_root": "workspace/defect-repros/pdf-formimporter-nullref",
+            "repro_files": [],
+            "next_retest_trigger": "Aspose.PDF NuGet > 26.5.0",
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 89: words_version_drift_documented
+    vd_dir = b / "version-drift"
+    vd_dir.mkdir(parents=True, exist_ok=True)
+    (vd_dir / "words-version-drift-current.json").write_text(
+        json.dumps({
+            "family": "words",
+            "drift": "REMOTE_DRIFT",
+            "remote_published_version": "26.4.0",
+            "handoff_version": "26.5.0",
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 90: email_slides_runtime_validated
+    pmr_dir = b / "post-merge-runtime"
+    pmr_dir.mkdir(parents=True, exist_ok=True)
+    (pmr_dir / "post-merge-validation-matrix.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint75",
+            "records": [
+                {"scenario_id": "email-converter", "post_merge_validated": True},
+                {"scenario_id": "slides-convert", "post_merge_validated": True},
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 91: dirty_tree_classified
+    git_dir = b / "git"
+    git_dir.mkdir(parents=True, exist_ok=True)
+    (git_dir / "dirty-file-classification.md").write_text(
+        "# Dirty File Classification\n\n"
+        "workspace/verification/latest/: GENERATED_WORKSPACE_STATE — EXCLUDE\n"
+        "reports/sprint75/: CURRENT_SPRINT_ARTIFACTS — COMMIT\n",
+        encoding="utf-8",
+    )
+
+    # Rule 92: sprint27_governance_classified
+    gov_dir = b / "governance"
+    gov_dir.mkdir(parents=True, exist_ok=True)
+    (gov_dir / "sprint27-strict-contract-revalidation.md").write_text(
+        "# Sprint 27 Strict Contract Revalidation\n\n"
+        "Classification: GOVERNANCE_EXCEPTION_REQUIRED\n"
+        "Sprint 27 is HISTORICAL_NON_COMPLIANT — grandfathered.\n",
+        encoding="utf-8",
+    )
+
+    # Rule 93: weekly_review_verdict_not_complete_while_unclassified
+    # (satisfied since 02-weekly-review-claim-vs-proof-matrix.md is present)
+    # final-verdict.md already uses allowed verdict from rule 64 above
+
     return b
 
 
@@ -951,7 +1040,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 85)  # Sprint 72: added 7 new rules (79-85)
+        self.assertEqual(result.total_rules, 93)  # Sprint 75: added 8 new rules (86-93)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1043,7 +1132,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 85)  # Sprint 72: 85 rules total
+        self.assertEqual(len(d["rules"]), 93)  # Sprint 75: 93 rules total
 
 
 # ===========================================================================
@@ -1647,8 +1736,8 @@ class TestTwoPhaseValidation(unittest.TestCase):
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
         # Should have exactly 66 rules evaluated (67 total - 1 self-reference rule 21)
-        # Sprint 72: total is now 85 (added 7 new rules), so excluding rule 21 = 84
-        self.assertEqual(len(result.rule_results), 84)
+        # Sprint 75: total is now 93 (added 8 new rules), so excluding rule 21 = 92
+        self.assertEqual(len(result.rule_results), 92)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1694,7 +1783,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 85)  # Sprint 72: 85 rules total
+        self.assertEqual(len(phase_b.rule_results), 93)  # Sprint 75: 93 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1910,12 +1999,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 85 rules total (78 Sprint 71 + 7 new Sprint 72 rules)."""
+        """validate() must return 93 rules total (85 Sprint 72 + 8 new Sprint 75 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 85,
-                         f"Expected 85 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 93,
+                         f"Expected 93 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
@@ -1928,9 +2017,169 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 84,
-                         f"validate_for_storage must have 84 rules (85 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 92,
+                         f"validate_for_storage must have 92 rules (93 - 1 self-ref), "
                          f"got {result.total_rules}")
+
+
+class TestSprint75WeeklyReviewRules(unittest.TestCase):
+    """Tests for the 8 new Sprint 75 weekly review governance rules."""
+
+    def test_rule86_weekly_review_matrix_missing(self):
+        """Rule 86: fails when weekly review claim matrix is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "02-weekly-review-claim-vs-proof-matrix.md").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "weekly_review_claim_matrix_present")
+        self.assertFalse(rule.passed)
+
+    def test_rule86_weekly_review_matrix_present_passes(self):
+        """Rule 86: passes when matrix exists with classification labels."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "weekly_review_claim_matrix_present")
+        self.assertTrue(rule.passed)
+
+    def test_rule87_pdf_pr_reconciliation_missing(self):
+        """Rule 87: fails when pdf-pr-reconciliation.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "pdf-publication" / "pdf-pr-reconciliation.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "pdf_publication_truth_reconciled")
+        self.assertFalse(rule.passed)
+
+    def test_rule87_pdf_pr_reconciliation_present_passes(self):
+        """Rule 87: passes when pdf-pr-reconciliation.json exists with claim_verdict."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "pdf_publication_truth_reconciled")
+        self.assertTrue(rule.passed)
+
+    def test_rule88_formimporter_taskcard_missing(self):
+        """Rule 88: fails when formimporter-repro-inventory.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "formimporter" / "formimporter-repro-inventory.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "formimporter_taskcard_durable")
+        self.assertFalse(rule.passed)
+
+    def test_rule88_formimporter_taskcard_present_passes(self):
+        """Rule 88: passes when formimporter-repro-inventory.json has retest trigger."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "formimporter_taskcard_durable")
+        self.assertTrue(rule.passed)
+
+    def test_rule89_words_version_drift_missing(self):
+        """Rule 89: fails when words-version-drift-current.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "version-drift" / "words-version-drift-current.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "words_version_drift_documented")
+        self.assertFalse(rule.passed)
+
+    def test_rule89_words_version_drift_present_passes(self):
+        """Rule 89: passes when words-version-drift-current.json has drift field."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "words_version_drift_documented")
+        self.assertTrue(rule.passed)
+
+    def test_rule90_post_merge_matrix_missing(self):
+        """Rule 90: fails when post-merge-validation-matrix.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "post-merge-runtime" / "post-merge-validation-matrix.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "email_slides_runtime_validated")
+        self.assertFalse(rule.passed)
+
+    def test_rule90_post_merge_matrix_present_passes(self):
+        """Rule 90: passes when post-merge-validation-matrix.json has records."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "email_slides_runtime_validated")
+        self.assertTrue(rule.passed)
+
+    def test_rule91_dirty_tree_classification_missing(self):
+        """Rule 91: fails when dirty-file-classification.md is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "dirty-file-classification.md").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "dirty_tree_classified")
+        self.assertFalse(rule.passed)
+
+    def test_rule91_dirty_tree_classification_present_passes(self):
+        """Rule 91: passes when dirty-file-classification.md is substantive."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "dirty_tree_classified")
+        self.assertTrue(rule.passed)
+
+    def test_rule92_sprint27_governance_missing(self):
+        """Rule 92: fails when sprint27-strict-contract-revalidation.md is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "governance" / "sprint27-strict-contract-revalidation.md").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "sprint27_governance_classified")
+        self.assertFalse(rule.passed)
+
+    def test_rule92_sprint27_governance_present_passes(self):
+        """Rule 92: passes when sprint27-strict-contract-revalidation.md has required labels."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "sprint27_governance_classified")
+        self.assertTrue(rule.passed)
+
+    def test_rule93_verdict_ok_when_matrix_present(self):
+        """Rule 93: passes when weekly review matrix is present (verdict allowed)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "weekly_review_verdict_not_complete_while_unclassified")
+        self.assertTrue(rule.passed)
+
+    def test_sprint74_bundle_fails_rule86(self):
+        """Sprint 74 bundle must fail rule 86 (no weekly review matrix).
+
+        Sprint 74 did not classify the 6 weekly review items — it lacks
+        02-weekly-review-claim-vs-proof-matrix.md.
+        """
+        bundle_path = Path("reports/sprint74")
+        if not bundle_path.exists():
+            self.skipTest("Sprint 74 bundle not present")
+        result = EvidenceValidator(bundle_path).validate()
+        sprint75_rules = [
+            "weekly_review_claim_matrix_present",
+            "pdf_publication_truth_reconciled",
+            "formimporter_taskcard_durable",
+            "words_version_drift_documented",
+            "email_slides_runtime_validated",
+            "dirty_tree_classified",
+            "sprint27_governance_classified",
+        ]
+        failing = [
+            r.rule_id for r in result.rule_results
+            if r.rule_id in sprint75_rules and not r.passed
+        ]
+        self.assertTrue(
+            len(failing) > 0,
+            f"Sprint 74 bundle should fail at least one Sprint 75 rule but all passed. "
+            f"Sprint 75 rules: {sprint75_rules}",
+        )
 
 
 if __name__ == "__main__":

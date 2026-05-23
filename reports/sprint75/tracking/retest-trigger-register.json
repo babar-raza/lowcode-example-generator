@@ -1,0 +1,56 @@
+{
+  "sprint_id": "sprint75",
+  "generated": "2026-05-23",
+  "description": "Register of retest/action triggers — conditions that activate deferred or blocked work items",
+  "triggers": [
+    {
+      "trigger_id": "TRG-01",
+      "name": "FormImporter NuGet Version Advance",
+      "condition": "Aspose.PDF NuGet latestVersion > 26.5.0",
+      "action": "Run formimporter_watch.py --run-repro; if PASS move FormImporter to candidate generation lane",
+      "taskcard": "TC-PDF-FORMIMPORTER-RETEST",
+      "watch_script": "src/plugin_examples/package_watcher/formimporter_watch.py",
+      "repro_path": "workspace/defect-repros/pdf-formimporter-nullref/",
+      "current_state": "NOT_TRIGGERED (26.5.0 is latest)",
+      "last_checked": "2026-05-23",
+      "priority": "HIGH"
+    },
+    {
+      "trigger_id": "TRG-02",
+      "name": "Live PR Creation Approval",
+      "condition": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "action": "Create README I/O PRs for all 6 families (42 examples + 6 root READMEs + Words version bump 26.4.0→26.5.0)",
+      "taskcard": "TC-SPRINT75-ITEM3 (Words drift); general publication",
+      "current_state": "NOT_SET",
+      "priority": "HIGH"
+    },
+    {
+      "trigger_id": "TRG-03",
+      "name": "Merge PR Approval",
+      "condition": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR (requires TRG-02 first)",
+      "action": "Merge all README I/O PRs; perform post-merge verification",
+      "taskcard": "General publication",
+      "current_state": "NOT_SET",
+      "priority": "HIGH (blocked behind TRG-02)"
+    },
+    {
+      "trigger_id": "TRG-04",
+      "name": "Remote Repo Drift Detected",
+      "condition": "remote-example-inventory.json hash mismatch vs sprint75 baseline on next remote refresh",
+      "action": "Run full remote truth reconciliation; classify drift and update publication truth matrix",
+      "taskcard": "General evidence hygiene",
+      "current_state": "MONITORING (baseline captured in sprint75)",
+      "priority": "MEDIUM"
+    },
+    {
+      "trigger_id": "TRG-05",
+      "name": "Aspose.Words NuGet Advance (beyond 26.5.0)",
+      "condition": "Aspose.Words NuGet latestVersion > 26.5.0",
+      "action": "Update handoff packages to new version; regenerate Words examples; verify at new version",
+      "taskcard": "TC-SPRINT75-ITEM3 (new version would replace drift resolution)",
+      "current_state": "NOT_TRIGGERED (26.5.0 is latest)",
+      "last_checked": "2026-05-23",
+      "priority": "MEDIUM"
+    }
+  ]
+}

@@ -400,7 +400,7 @@ def _make_bundle(tmpdir: str) -> Path:
     remote_dir = b / "remote"
     remote_dir.mkdir(parents=True, exist_ok=True)
     (remote_dir / "remote-proof-summary.md").write_text(
-        "# Remote Proof Summary\nAll 42 examples confirmed.\n", encoding="utf-8"
+        "# Remote Proof Summary\nAll 42 examples confirmed.\n0/42 remote READMEs have I/O sections.\n", encoding="utf-8"
     )
 
     # Sprint 68: PDF root README with 19 rows (rule 53)
@@ -627,6 +627,47 @@ def _make_bundle(tmpdir: str) -> Path:
         }),
         encoding="utf-8",
     )
+
+    # ---- Sprint 72: artifacts for rules 79-85 ----
+
+    # Rule 79: remote_proof_consistency_audit_present
+    # Rule 80: remote_proof_consistency_audit_consistent
+    (remote_dir / "remote-proof-consistency-audit.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint67",
+            "consistent": True,
+            "checks": [{"check_id": "RPC01", "consistent": True}],
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 81: remote_proof_summary_states_zero_io — already updated above to include "0/42"
+    # Rule 82: remote_proof_summary_not_contradicted — needs remote-readme-io-audit-final.json
+    (remote_dir / "remote-readme-io-audit-final.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint67",
+            "total": 42,
+            "io_doc_count": 0,
+            "old_format_count": 42,
+            "records": [
+                {"scenario_id": f"cells-example-{i}", "family": "cells",
+                 "has_io_section": False, "io_status": "OLD_FORMAT"}
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 83: remote_proof_summary_superseded_archived
+    history_dir = b / "history"
+    history_dir.mkdir(exist_ok=True)
+    (history_dir / "remote-proof-summary-superseded.md").write_text(
+        "# SUPERSEDED: Remote Truth Refresh — Sprint 68\n\nStatus: SUPERSEDED\nOriginal incorrect claim: 42/42 examples have README I/O sections.\n",
+        encoding="utf-8",
+    )
+
+    # Rule 84: remote_readme_io_audit_count_consistent — satisfied by remote-readme-io-audit-final.json above
+    # Rule 85: remote_vs_handoff_uses_current_sprint — satisfied by remote-vs-handoff-final.json written above
 
     # Pad to >=35 files
     for i in range(40):
@@ -910,7 +951,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 78)  # Sprint 70: added 5 new rules (68-72)
+        self.assertEqual(result.total_rules, 85)  # Sprint 72: added 7 new rules (79-85)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1002,7 +1043,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 78)  # Sprint 70: 72 rules total
+        self.assertEqual(len(d["rules"]), 85)  # Sprint 72: 85 rules total
 
 
 # ===========================================================================
@@ -1606,8 +1647,8 @@ class TestTwoPhaseValidation(unittest.TestCase):
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
         # Should have exactly 66 rules evaluated (67 total - 1 self-reference rule 21)
-        # Sprint 71: total is now 78 (added 6 new rules), so excluding rule 21 = 77
-        self.assertEqual(len(result.rule_results), 77)
+        # Sprint 72: total is now 85 (added 7 new rules), so excluding rule 21 = 84
+        self.assertEqual(len(result.rule_results), 84)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1653,7 +1694,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 78)  # Sprint 70: 72 rules total
+        self.assertEqual(len(phase_b.rule_results), 85)  # Sprint 72: 85 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -1869,12 +1910,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 72 rules total (67 Sprint 69 + 5 new Sprint 70 rules)."""
+        """validate() must return 85 rules total (78 Sprint 71 + 7 new Sprint 72 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 78,
-                         f"Expected 78 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 85,
+                         f"Expected 85 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
@@ -1887,8 +1928,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 77,
-                         f"validate_for_storage must have 77 rules (78 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 84,
+                         f"validate_for_storage must have 84 rules (85 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 

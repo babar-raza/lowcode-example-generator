@@ -1,0 +1,443 @@
+{
+  "sprint_id": "sprint71",
+  "overall_valid": false,
+  "passed": 80,
+  "failed": 5,
+  "warnings": 0,
+  "total_rules": 85,
+  "revalidated_under": "sprint72",
+  "expected_failures": [
+    "remote_proof_summary_states_zero_io",
+    "remote_proof_summary_not_contradicted",
+    "remote_proof_consistency_audit_present",
+    "remote_proof_consistency_audit_consistent",
+    "remote_proof_summary_superseded_archived"
+  ],
+  "rules": [
+    {
+      "rule_id": "final_clean_proof_after_final_commit",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "destination_42_42_authority_mapped",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "no_present_no_authority",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "no_partial_without_partial_verdict",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "readme_audit_content_based",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "readme_gate_implemented_and_tested",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "evidence_validator_actually_ran",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "todo_all_items_checked_or_carried",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "zero_unknown_input_formats",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "test_log_zero_failed",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "commands_log_complete",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "bundle_min_files",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "final_clean_proof_nonzero_bytes",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "final_clean_proof_has_git_header",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "readme_io_format_not_falsely_complete",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "readme_gate_wired_in_pipeline",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "evidence_validator_wired_in_pipeline",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "destination_programcs_input_not_all_null",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "no_p1_items_with_complete_verdict",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "required_files_nonzero_size",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "bundle_validation_result_present_and_valid",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "ecc_contract_computed_and_valid",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_final_has_required_fields",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_count_not_contradictory",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_all_records_ready",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "root_readme_artifacts_present_for_all_families",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "special_case_placement_proof_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "version_policy_no_unresolved_drift",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "final_verdict_no_publication_overclaim",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_proof_index_present_if_published",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_readme_io_coverage",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "revalidation_shows_prior_sprint_invalid",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_proof_per_example_not_overclaimed",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_proof_has_content_hashes",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_readme_io_audit_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_bundle_not_empty",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_output_kind_not_blank",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_state_not_mixed",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_proof_not_workspace_only",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "root_readme_and_package_both_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_readme_io_not_overclaimed",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_all_examples_have_io_section",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "cardinality_audit_json_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "root_readme_cardinality_annotated",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "pdf_version_decision_record_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "version_truth_matrix_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "no_cross_sprint_path_leakage",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "legacy_plans_reconciliation_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_sprint_specific_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_index_per_family_complete",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "readme_sync_state_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_truth_refresh_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "pdf_root_readme_complete",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "splitter_cardinality_reconciled",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "canonical_content_audit_no_stale_pdf_version",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "pdf_version_proof_chain_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "all_family_cardinality_display_validated",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_index_version_matches_dpp",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "only_one_canonical_final_audit",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_truth_matrix_no_stale_paths",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_truth_matrix_no_mixed_state",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "root_readme_indexed_in_handoff",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "exact_legacy_reconciliation_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "final_verdict_is_precise",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "final_verdict_not_complete_while_blocked",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_index_has_root_readme_field",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "version_consistency_final_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_root_readme_in_sprint_folder",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_root_readme_file_present",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_root_readme_hash_matches",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_handoff_root_readme_hash_matches",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "legacy_simplified_index_superseded",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_final_no_stale_paths",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_matrix_no_stale_paths",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "handoff_index_no_stale_paths",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_vs_handoff_no_stale_paths",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "content_audit_final_files_exist",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "publication_matrix_files_exist",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_proof_consistency_audit_present",
+      "passed": false,
+      "failure_detail": "remote/remote-proof-consistency-audit.json not found"
+    },
+    {
+      "rule_id": "remote_proof_consistency_audit_consistent",
+      "passed": false,
+      "failure_detail": "remote/remote-proof-consistency-audit.json not found"
+    },
+    {
+      "rule_id": "remote_proof_summary_states_zero_io",
+      "passed": false,
+      "failure_detail": "remote-proof-summary.md still contains the incorrect '42/42 examples have README I/O sections' claim"
+    },
+    {
+      "rule_id": "remote_proof_summary_not_contradicted",
+      "passed": false,
+      "failure_detail": "Audit io_doc_count=0 but summary claims '42/42 examples have README I/O sections'"
+    },
+    {
+      "rule_id": "remote_proof_summary_superseded_archived",
+      "passed": false,
+      "failure_detail": "history/remote-proof-summary-superseded.md not found \u2014 incorrect Sprint 68 artifact not archived"
+    },
+    {
+      "rule_id": "remote_readme_io_audit_count_consistent",
+      "passed": true,
+      "failure_detail": null
+    },
+    {
+      "rule_id": "remote_vs_handoff_uses_current_sprint",
+      "passed": true,
+      "failure_detail": null
+    }
+  ]
+}

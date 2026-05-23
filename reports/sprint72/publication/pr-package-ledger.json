@@ -1,0 +1,17 @@
+{
+  "sprint_id": "sprint72",
+  "date": "2026-05-23",
+  "approval_status": "BLOCKED_BY_APPROVAL",
+  "approval_token": "NOT_SET",
+  "prs_created": 0,
+  "prs_planned": 6,
+  "planned_prs": [
+    {"family": "cells", "branch": "plugin-examples/cells/readme-io/sprint72", "examples": 9, "status": "PENDING_APPROVAL"},
+    {"family": "words", "branch": "plugin-examples/words/readme-io/sprint72", "examples": 8, "status": "PENDING_APPROVAL"},
+    {"family": "pdf", "branch": "plugin-examples/pdf/readme-io/sprint72", "examples": 19, "status": "PENDING_APPROVAL"},
+    {"family": "diagram", "branch": "plugin-examples/diagram/readme-io/sprint72", "examples": 2, "status": "PENDING_APPROVAL"},
+    {"family": "email", "branch": "plugin-examples/email/readme-io/sprint72", "examples": 1, "status": "PENDING_APPROVAL"},
+    {"family": "slides", "branch": "plugin-examples/slides/readme-io/sprint72", "examples": 3, "status": "PENDING_APPROVAL"}
+  ],
+  "note": "Sprint 72 is defect repair only. No new PRs created. Remote proof summary contradiction S71-D1 resolved."
+}

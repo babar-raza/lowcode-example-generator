@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint72",
+  "date": "2026-05-23",
+  "status": "BLOCKED_BY_APPROVAL",
+  "prs_created": 0,
+  "prs_merged": 0,
+  "approval_token": "NOT_SET",
+  "note": "Live publication skipped — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set. Sprint 72 is defect repair only."
+}

@@ -282,7 +282,7 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     # Sprint 67: remote/remote-proof-summary.md (rule 52)
     (b / "remote" / "remote-proof-summary.md").write_text(
-        "# Remote Proof Summary\nAll 42 examples confirmed.\n", encoding="utf-8"
+        "# Remote Proof Summary\nAll 42 examples confirmed.\n0/42 remote READMEs have I/O sections.\n", encoding="utf-8"
     )
 
     # Sprint 68: PDF root README with 19 rows (rule 53)
@@ -477,6 +477,36 @@ def _make_valid_bundle(tmpdir: str) -> Path:
                 for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
             ],
         }),
+        encoding="utf-8",
+    )
+
+    # Sprint 72 rules 79-85: remote proof consistency
+    (remote_dir / "remote-proof-consistency-audit.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint61-test",
+            "consistent": True,
+            "checks": [{"check_id": "RPC01", "consistent": True}],
+        }),
+        encoding="utf-8",
+    )
+    (remote_dir / "remote-readme-io-audit-final.json").write_text(
+        json.dumps({
+            "sprint_id": "sprint61-test",
+            "total": 42,
+            "io_doc_count": 0,
+            "old_format_count": 42,
+            "records": [
+                {"scenario_id": f"cells-example-{i}", "family": "cells",
+                 "has_io_section": False, "io_status": "OLD_FORMAT"}
+                for i in range(42)
+            ],
+        }),
+        encoding="utf-8",
+    )
+    history_dir = b / "history"
+    history_dir.mkdir(exist_ok=True)
+    (history_dir / "remote-proof-summary-superseded.md").write_text(
+        "# SUPERSEDED: Remote Truth Refresh\n\nStatus: SUPERSEDED\nOriginal incorrect claim: 42/42 examples have README I/O sections.\n",
         encoding="utf-8",
     )
 

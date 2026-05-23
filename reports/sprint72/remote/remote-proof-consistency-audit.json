@@ -1,0 +1,41 @@
+{
+  "sprint_id": "sprint72",
+  "audit_date": "2026-05-23",
+  "consistent": true,
+  "defect_repaired": "S71-D1",
+  "summary": "Remote proof summary now consistent with remote-readme-io-audit-final.json",
+  "checks": [
+    {
+      "check_id": "RPC01",
+      "description": "remote-proof-summary.md io_count matches remote-readme-io-audit-final.json io_doc_count",
+      "proof_summary_claim": "0/42 remote READMEs currently have I/O sections",
+      "audit_io_doc_count": 0,
+      "audit_total": 42,
+      "consistent": true
+    },
+    {
+      "check_id": "RPC02",
+      "description": "remote-proof-summary.md does not claim 42/42 README I/O sections",
+      "old_claim": "42/42 examples have README I/O sections in remote repos",
+      "new_claim": "0/42 remote READMEs currently have I/O sections",
+      "consistent": true
+    },
+    {
+      "check_id": "RPC03",
+      "description": "remote-readme-io-audit-final.json all records have has_io_section=false",
+      "records_with_io_section_true": 0,
+      "records_with_io_section_false": 42,
+      "total": 42,
+      "consistent": true
+    },
+    {
+      "check_id": "RPC04",
+      "description": "superseded document archived in history/",
+      "superseded_file": "reports/sprint72/history/remote-proof-summary-superseded.md",
+      "consistent": true
+    }
+  ],
+  "contradiction_found_in": "reports/sprint71/remote/remote-proof-summary.md",
+  "contradiction_description": "Sprint 68 artifact carried forward through sprint69/70/71 without correction. Claimed 42/42 README I/O sections when audit confirms 0/42.",
+  "repair_action": "Created truthful remote-proof-summary.md stating 0/42. Archived incorrect version as superseded."
+}

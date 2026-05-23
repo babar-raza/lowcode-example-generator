@@ -1,0 +1,16 @@
+{
+  "sprint_id": "sprint72",
+  "status": "COMPLETE",
+  "verdict": "LOWCODE_PREPUBLICATION_HANDOFF_READY_REMOTE_REFRESH_PARTIAL",
+  "ev_rules_passed": 85,
+  "ev_rules_total": 85,
+  "ecc_categories_present": 50,
+  "ecc_categories_total": 50,
+  "test_passed": 3025,
+  "test_failed": 0,
+  "test_skipped": 3,
+  "defects_closed": [
+    "S71-D1"
+  ],
+  "date": "2026-05-23"
+}

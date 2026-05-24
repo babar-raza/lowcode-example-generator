@@ -1,4 +1,4 @@
---- git status --short (post-sprint77-commit) ---
+--- git status --short (post-sprint77-commit d69ffdc) ---
  M workspace/verification/latest/cells-readme-backfill-simulation.json
  M workspace/verification/latest/cells-root-readme-audit.json
  M workspace/verification/latest/cells-root-readme-render-result.json
@@ -9,7 +9,7 @@
 
 --- git status ---
 On branch main
-Your branch is ahead of 'origin/main' by 99 commits.
+Your branch is ahead of 'origin/main' by 100 commits.
   (use "git push" to publish your local commits)
 
 Changes not staged for commit:
@@ -27,7 +27,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 --- CLASSIFICATION ---
 workspace/verification/latest/ -- 7 files modified -- GENERATED_WORKSPACE_STATE governance exception (Sprint 66+)
-src/ -- CLEAN
+src/ -- CLEAN (evidence_validator.py committed in d69ffdc)
 tests/ -- CLEAN
-reports/sprint77/ -- COMMITTED (sprint77 bundle)
+reports/sprint77/ -- COMMITTED (d69ffdc)
 No untracked files remain (output.pptx moved to sprint77 artifacts via Option B)

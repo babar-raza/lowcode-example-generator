@@ -1,0 +1,21 @@
+{
+  "publication_truth_type": "publication_truth_matrix_final",
+  "sprint": "sprint79",
+  "sprint_type": "REPAIR_SPRINT",
+  "checked_at": "2026-05-24",
+  "all_published": true,
+  "all_merged": true,
+  "all_post_merge_validated": false,
+  "readme_io_published": false,
+  "readme_io_approval": "NOT_SET",
+  "total_examples": 42,
+  "families": {
+    "cells": {"examples": 7, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED"},
+    "words": {"examples": 8, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED", "version_drift": "REMOTE_DRIFT_26.4.0_vs_26.5.0"},
+    "pdf": {"examples": 8, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED"},
+    "diagram": {"examples": 7, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED"},
+    "email": {"examples": 6, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED"},
+    "slides": {"examples": 6, "status": "PUBLISHED", "readme_io": "APPROVAL_BLOCKED"}
+  },
+  "verdict": "LOWCODE_FINISH_LINE_EVIDENCE_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED"
+}

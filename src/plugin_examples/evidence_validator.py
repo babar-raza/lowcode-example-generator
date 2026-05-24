@@ -105,6 +105,10 @@ Sprint 78 additions (3 new rules, closes S77-D1 through S77-D3):
 - Rule: publication_truth_no_stale_remote_claimed (if all_published=true in truth matrix, no family status may contain REMOTE_STALE — S77-D1)
 - Rule: handoff_validation_result_has_valid_flag (handoff/handoff-prepublish-validation.json must exist and have overall_handoff_valid: true — S77-D2)
 - Rule: remote_repo_state_all_accessible (remote/remote-repo-state-before.json must exist and accessible == total_checked — S77-D3)
+
+Sprint 79 additions (2 new rules, closes S78-E1 and S78-E2):
+- Rule: ecc_closure_valid_only_if_no_blocking_failures (evidence-contract-computed.json closure_valid=true is a lie if blocking_failures>0 — S78-E1)
+- Rule: diagnostic_bundle_file_has_nonblocking_label (any *-bundle-validation-result.json with overall_valid=false must have diagnostic_rules_are_non_blocking=true — S78-E2)
 """
 
 from __future__ import annotations
@@ -354,6 +358,10 @@ class EvidenceValidator:
         _maybe(self._rule_publication_truth_no_stale_remote_claimed())
         _maybe(self._rule_handoff_validation_result_has_valid_flag())
         _maybe(self._rule_remote_repo_state_all_accessible())
+
+        # --- Sprint 79 NEW rules: close S78-E1 and S78-E2 ---
+        _maybe(self._rule_ecc_closure_valid_only_if_no_blocking_failures())
+        _maybe(self._rule_diagnostic_bundle_file_has_nonblocking_label())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -3408,6 +3416,9 @@ class EvidenceValidator:
             # Sprint 78 verdicts
             "LOWCODE_LIVE_PUBLICATION_ALL_PUBLISHED_README_BACKFILL_APPROVAL_BLOCKED",
             "LOWCODE_FINISH_LINE_README_IO_APPROVAL_BLOCKED",
+            # Sprint 79 verdicts
+            "LOWCODE_FINISH_LINE_EVIDENCE_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+            "LOWCODE_FINISH_LINE_PARTIAL_WITH_EXPLICIT_BLOCKERS",
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
@@ -5471,6 +5482,132 @@ class EvidenceValidator:
             description="remote-repo-state-before.json must exist and show all repos accessible",
             severity="FAILURE", passed=True,
             evidence=f"All {accessible}/{total_checked} repos accessible",
+        )
+
+    # Sprint 79 NEW rules: close S78-E1 and S78-E2
+
+    def _rule_ecc_closure_valid_only_if_no_blocking_failures(self) -> RuleResult:
+        """evidence-contract-computed.json closure_valid=true is a lie if blocking_failures>0 (S78-E1).
+
+        Sprint 78 defect: the bootstrapped ECC had closure_valid=true AND blocking_failures=1.
+        These two fields are contradictory — the real ECC computer sets
+        closure_valid = (blocking_failures == 0). Any hand-crafted override is invalid.
+        """
+        rule_id = "ecc_closure_valid_only_if_no_blocking_failures"
+        ecc_path = self.bundle_dir / "evidence" / "evidence-contract-computed.json"
+
+        if not ecc_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="ECC closure_valid=true is invalid when blocking_failures>0",
+                severity="FAILURE", passed=True,
+                evidence="evidence-contract-computed.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(ecc_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id,
+                description="ECC closure_valid=true is invalid when blocking_failures>0",
+                severity="FAILURE", passed=False,
+                failure_detail="evidence-contract-computed.json exists but is not valid JSON",
+            )
+
+        closure_valid = data.get("closure_valid", False)
+        blocking_failures = data.get("blocking_failures", 0)
+
+        if closure_valid and blocking_failures > 0:
+            return RuleResult(
+                rule_id=rule_id,
+                description="ECC closure_valid=true is invalid when blocking_failures>0",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"evidence-contract-computed.json has closure_valid=true "
+                    f"but blocking_failures={blocking_failures}. "
+                    "These are contradictory — closure_valid must be false when any blocking "
+                    "category is MISSING/ZERO_BYTES/SEMANTIC_FAILED. "
+                    "S78-E1: do not hand-craft closure_valid=true over a non-zero blocking count."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="ECC closure_valid=true is invalid when blocking_failures>0",
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"ECC consistent: closure_valid={closure_valid}, "
+                f"blocking_failures={blocking_failures}"
+            ),
+        )
+
+    def _rule_diagnostic_bundle_file_has_nonblocking_label(self) -> RuleResult:
+        """Any *-bundle-validation-result.json with overall_valid=false must have
+        diagnostic_rules_are_non_blocking=true (S78-E2).
+
+        Sprint 78 defect: sprint78-bundle-validation-result.json showed overall_valid=false
+        with 55 failing rules, confusing independent reviewers who could not distinguish
+        diagnostic/non-applicable failures from real blocking failures.
+
+        Every bundle-validation-result file that is diagnostic (FINISH_LINE_SPRINT,
+        REPAIR_BUNDLE, etc.) must explicitly declare diagnostic_rules_are_non_blocking=true
+        so future agents cannot confuse non-applicable failures with real closure blockers.
+        """
+        rule_id = "diagnostic_bundle_file_has_nonblocking_label"
+        evidence_dir = self.bundle_dir / "evidence"
+
+        if not evidence_dir.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
+                severity="FAILURE", passed=True,
+                evidence="evidence/ directory not found — rule not applicable",
+            )
+
+        bundle_files = list(evidence_dir.glob("*-bundle-validation-result.json"))
+        if not bundle_files:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
+                severity="FAILURE", passed=True,
+                evidence="No *-bundle-validation-result.json files found — rule not applicable",
+            )
+
+        offenders = []
+        for bf in bundle_files:
+            try:
+                data = json.loads(bf.read_text(encoding="utf-8", errors="replace"))
+            except (OSError, ValueError):
+                offenders.append(f"{bf.name}: not valid JSON")
+                continue
+            overall_valid = data.get("overall_valid", True)
+            if not overall_valid:
+                has_label = data.get("diagnostic_rules_are_non_blocking", False)
+                if not has_label:
+                    offenders.append(
+                        f"{bf.name}: overall_valid=false but diagnostic_rules_are_non_blocking "
+                        "is missing or false"
+                    )
+
+        if offenders:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S78-E2: bundle-validation-result file(s) with overall_valid=false are "
+                    f"missing the diagnostic label: {'; '.join(offenders)}"
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"All {len(bundle_files)} bundle-validation-result file(s) are correctly "
+                "labeled (overall_valid=true or diagnostic_rules_are_non_blocking=true)"
+            ),
         )
 
     # ------------------------------------------------------------------

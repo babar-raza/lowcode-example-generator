@@ -1,0 +1,30 @@
+{
+  "pipeline_integration_source_map_type": "sprint79_pipeline_proof",
+  "checked_at": "2026-05-24",
+  "entry_point": {
+    "file": "src/plugin_examples/__main__.py",
+    "line": 1477,
+    "import_statement": "from plugin_examples.evidence_validator import EvidenceValidator as _EV",
+    "sha256": "b4658d354049c191c56ba6a10f3af80de5d17ab2cb34c4a8b048d374146e49fe",
+    "size_bytes": 103418
+  },
+  "validator_source": {
+    "file": "src/plugin_examples/evidence_validator.py",
+    "total_rules": 110,
+    "sha256": "520633bfabbc653760d3dd08ae66d4204f8d0d0d37142308e54c2eac69ea84cd",
+    "size_bytes": 270734
+  },
+  "test_file": {
+    "file": "tests/unit/test_evidence_validator.py",
+    "total_tests": 142,
+    "sha256": "f4922a8aea4a24d6ed4b37fefa281fb8b9d31d07ceb2d8ed6ce032c7c641b54f",
+    "size_bytes": 135597
+  },
+  "cli_argument": "--validate-bundle",
+  "cli_argument_lines": "309-313",
+  "execution_path_lines": "1475-1489",
+  "source_root_passed_to_validator": "src/plugin_examples/ (resolved from __main__.py parent)",
+  "exit_code_on_failure": 1,
+  "advisory_mode": false,
+  "integration_unchanged_since": "sprint77"
+}

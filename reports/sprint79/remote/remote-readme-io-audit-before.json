@@ -1,0 +1,62 @@
+{
+  "audit_type": "remote_readme_io_audit_before",
+  "audit_date": "2026-05-24",
+  "sprint": "sprint79",
+  "families": [
+    {
+      "family": "cells",
+      "audit_status": "BACKFILL_NEEDED_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "SIMULATION_READY",
+      "note": "Approval gate NOT_SET — no action taken"
+    },
+    {
+      "family": "words",
+      "audit_status": "BACKFILL_NEEDED_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "SIMULATION_READY",
+      "note": "Approval gate NOT_SET — no action taken"
+    },
+    {
+      "family": "pdf",
+      "audit_status": "SIMULATION_PENDING_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "PENDING",
+      "note": "Approval gate NOT_SET — no action taken"
+    },
+    {
+      "family": "diagram",
+      "audit_status": "SIMULATION_PENDING_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "PENDING",
+      "note": "Approval gate NOT_SET — no action taken"
+    },
+    {
+      "family": "email",
+      "audit_status": "SIMULATION_PENDING_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "PENDING",
+      "note": "Approval gate NOT_SET — no action taken"
+    },
+    {
+      "family": "slides",
+      "audit_status": "SIMULATION_PENDING_APPROVAL_BLOCKED",
+      "local_audit_passed": true,
+      "remote_readme_io_docs_present": false,
+      "simulation_verdict": "PENDING",
+      "note": "Approval gate NOT_SET — no action taken"
+    }
+  ],
+  "summary": {
+    "total_families": 6,
+    "local_audits_passed": 6,
+    "remote_io_docs_present": 0,
+    "readme_io_approval": "NOT_SET",
+    "overall_verdict": "APPROVAL_BLOCKED"
+  }
+}

@@ -1,0 +1,25 @@
+Sprint 79 Pipeline Integration Test Results
+============================================
+Date: 2026-05-24
+
+Command: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -k "pipeline_integration or wired_in_pipeline" -v --tb=short
+Working dir: c:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+Exit: 0
+
+Output
+------
+platform win32 -- Python 3.13.2, pytest-9.0.3
+1 selected
+
+tests/unit/test_evidence_validator.py::TestEvidenceValidatorWiredInPipeline::test_fails_when_no_pipeline_integration_proof_no_source_root PASSED
+
+1 passed, 141 deselected in 1.30s
+
+Source Scan Verification
+------------------------
+When source_root is provided to EvidenceValidator, it scans src/plugin_examples/
+for files importing evidence_validator. Found in:
+  - __main__.py (line 1477)
+
+The `evidence_validator_wired_in_pipeline` rule (Rule 16) passes when source_root
+is provided and the import is found.

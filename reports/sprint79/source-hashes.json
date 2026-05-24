@@ -1,0 +1,27 @@
+{
+  "source_hashes_type": "sprint79_source_integrity",
+  "computed_at": "2026-05-24",
+  "sprint": "sprint79",
+  "files": {
+    "src/plugin_examples/evidence_validator.py": {
+      "sha256": "520633bfabbc653760d3dd08ae66d4204f8d0d0d37142308e54c2eac69ea84cd",
+      "size_bytes": 270734,
+      "note": "Sprint 79: added rules 109-110, 2 new allowed verdicts"
+    },
+    "src/plugin_examples/__main__.py": {
+      "sha256": "b4658d354049c191c56ba6a10f3af80de5d17ab2cb34c4a8b048d374146e49fe",
+      "size_bytes": 103418,
+      "note": "Unchanged from Sprint 78 — pipeline integration wiring at line 1477"
+    },
+    "tests/unit/test_evidence_validator.py": {
+      "sha256": "f4922a8aea4a24d6ed4b37fefa281fb8b9d31d07ceb2d8ed6ce032c7c641b54f",
+      "size_bytes": 135597,
+      "note": "Sprint 79: added TestSprint79EvidenceRepairRules (8 tests), updated rule count assertions to 110"
+    },
+    "src/plugin_examples/evidence_contract_computer.py": {
+      "sha256": "786246d8543bd579eaadf5b26e7354adb67b1ee3f6bd176d358f720b9b44e109",
+      "size_bytes": 15407,
+      "note": "Unchanged — closure_valid = (blocking_failures == 0) verified at line 155"
+    }
+  }
+}

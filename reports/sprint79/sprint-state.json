@@ -1,0 +1,15 @@
+{
+  "sprint_id": "sprint79",
+  "sprint_number": 79,
+  "sprint_type": "REPAIR_SPRINT",
+  "status": "CLOSED",
+  "date": "2026-05-24",
+  "tests_passing": 3083,
+  "ev_rules": 110,
+  "ecc_categories": 32,
+  "new_ev_rules_added": 2,
+  "examples_published": 42,
+  "readme_prs_created": 0,
+  "verdict": "LOWCODE_FINISH_LINE_EVIDENCE_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+  "sprint78_defects_repaired": ["S78-E1", "S78-E2", "S78-E3", "S78-E4", "S78-E5"]
+}

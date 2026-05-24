@@ -1,10 +1,9 @@
-Sprint 84 -- Dirty State After (Pre-Commit)
-===========================================
+Sprint 84 -- Dirty State After (Post-Commit)
+============================================
 Date: 2026-05-24
+Captured after: commit 1844c49
 
-git status --short:
- M src/plugin_examples/evidence_validator.py
- M tests/unit/test_evidence_validator.py
+git status --short (post-commit):
  M workspace/verification/latest/cells-readme-backfill-simulation.json
  M workspace/verification/latest/cells-root-readme-audit.json
  M workspace/verification/latest/cells-root-readme-render-result.json
@@ -12,13 +11,9 @@ git status --short:
  M workspace/verification/latest/words-readme-backfill-simulation.json
  M workspace/verification/latest/words-root-readme-audit.json
  M workspace/verification/latest/words-root-readme-render-result.json
-?? reports/sprint84/
 
-SOURCE FILES MODIFIED (2):
-- src/plugin_examples/evidence_validator.py: 4 new rules 116-119, docstring updated
-- tests/unit/test_evidence_validator.py: 8 new tests, 6 count assertions updated
-
-GENERATED_WORKSPACE_STATE (7, all expected):
+SOURCE FILES MODIFIED: 0 (all committed in 1844c49)
+GENERATED_WORKSPACE_STATE (7, all expected — WORKSPACE_EXCEPTION applies):
 - workspace/verification/latest/cells-readme-backfill-simulation.json
 - workspace/verification/latest/cells-root-readme-audit.json
 - workspace/verification/latest/cells-root-readme-render-result.json
@@ -27,7 +22,9 @@ GENERATED_WORKSPACE_STATE (7, all expected):
 - workspace/verification/latest/words-root-readme-audit.json
 - workspace/verification/latest/words-root-readme-render-result.json
 
-UNTRACKED:
-- reports/sprint84/ (new sprint directory — will be committed with bundle)
+UNTRACKED: none
 
-Status: READY FOR BUNDLE COMMIT
+workspace/verification/latest/ — GENERATED_WORKSPACE_STATE governance exception
+These files are gitignored, pipeline-managed. Not uncommitted source changes.
+
+Status: CLEAN (source tree clean after bundle commit 1844c49)

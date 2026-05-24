@@ -1,6 +1,9 @@
 On branch main
-Sprint 76 bundle committed: 0000000 [PENDING — SHA will be updated after commit]
+Sprint 76 bundle committed: 47c584d
+reports/sprint76/ -- 39 files added, all sprint76 repair artifacts present
+src/plugin_examples/evidence_validator.py -- 8 new EV rules (94-101), 1 new allowed verdict
+tests/unit/test_evidence_validator.py -- 11 new tests (TestSprint76ClosureRepairRules), count updates
+tests/unit/test_pipeline_evidence_gate.py -- Sprint 76 rule fixtures added
+reports/sprint75/handoff/per-family/slides/compress/input.pptx -- real fixture for slides-compress validation
 workspace/verification/latest/ -- 7 files modified (GENERATED_WORKSPACE_STATE governance exception)
-These 7 files are pre-existing runtime artifacts, not sprint76 bundle artifacts.
-No source/test file modifications remain uncommitted.
 Sprint 76 bundle scope: clean (source/test committed, workspace/latest governance-excepted)

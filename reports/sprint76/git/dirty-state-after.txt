@@ -1,1 +1,24 @@
-[PENDING — will be captured after sprint76 bundle commit]
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   workspace/verification/latest/cells-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/cells-root-readme-audit.json
+	modified:   workspace/verification/latest/cells-root-readme-render-result.json
+	modified:   workspace/verification/latest/release-status.json
+	modified:   workspace/verification/latest/words-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/words-root-readme-audit.json
+	modified:   workspace/verification/latest/words-root-readme-render-result.json
+
+Untracked files:
+  (use "git add <file>..." to update what will be committed)
+	reports/sprint75/handoff/per-family/slides/compress/output.pptx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+--- CLASSIFICATION ---
+workspace/verification/latest/ -- 7 files modified -- GENERATED_WORKSPACE_STATE governance exception (pre-existing runtime artifacts, established Sprint 66)
+reports/sprint75/handoff/per-family/slides/compress/output.pptx -- untracked runtime output from slides-compress validation -- NOT a bundle artifact
+src/ -- CLEAN (0 uncommitted source files)
+tests/ -- CLEAN (0 uncommitted test files)
+Sprint 76 bundle scope: CLEAN

@@ -1,14 +1,14 @@
 {
   "contract_id": "sprint76",
-  "computed_at": "2026-05-24T04:39:26Z",
+  "computed_at": "2026-05-24T04:49:33Z",
   "total_categories": 31,
-  "present": 28,
-  "missing": 3,
+  "present": 31,
+  "missing": 0,
   "zero_bytes": 0,
   "semantic_failed": 0,
   "pending": 0,
-  "blocking_failures": 3,
-  "closure_valid": false,
+  "blocking_failures": 0,
+  "closure_valid": true,
   "categories": [
     {
       "id": "EC01",
@@ -191,8 +191,8 @@
       "name": "Sprint 76 Final Validation Result",
       "file": "reports/sprint76/evidence/sprint76-final-validation-result.json",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint76/evidence/sprint76-final-validation-result.json"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC24",
@@ -207,16 +207,16 @@
       "name": "Dirty State After",
       "file": "reports/sprint76/git/dirty-state-after.txt",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint76/git/dirty-state-after.txt"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC26",
       "name": "Final Clean Proof",
       "file": "reports/sprint76/git/final-clean-proof.txt",
       "blocking": true,
-      "status": "MISSING",
-      "detail": "File not found: reports/sprint76/git/final-clean-proof.txt"
+      "status": "PRESENT",
+      "detail": ""
     },
     {
       "id": "EC27",

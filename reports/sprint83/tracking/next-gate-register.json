@@ -1,0 +1,35 @@
+{
+  "sprint": "sprint83",
+  "date": "2026-05-24",
+  "next_gates": [
+    {
+      "gate_id": "G1",
+      "gate_name": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "required_value": "APPROVE_LIVE_PR",
+      "current_value": "NOT_SET",
+      "blocks": "PR creation for all 42 examples across 6 families",
+      "unblocks": "Lane A publication — create 42 README I/O PRs",
+      "priority": "CRITICAL_PATH"
+    },
+    {
+      "gate_id": "G2",
+      "gate_name": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+      "required_value": "APPROVE_MERGE_PR",
+      "current_value": "NOT_SET",
+      "blocks": "Merging of any PR",
+      "unblocks": "Post-merge verification, branch cleanup",
+      "priority": "DEPENDS_ON_G1",
+      "note": "Must set G1 first and create PRs before G2 is relevant"
+    },
+    {
+      "gate_id": "G3",
+      "gate_name": "FormImporter upstream fix",
+      "required_value": "Aspose.PDF NullRef bug fixed in upstream package",
+      "current_value": "BUG_ACTIVE (>= 26.5.0)",
+      "blocks": "FormImporter PDF wave H example generation",
+      "unblocks": "1 additional PDF example",
+      "priority": "EXTERNAL_DEPENDENCY"
+    }
+  ],
+  "sprint84_recommendation": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to proceed with PR creation for all 42 examples."
+}

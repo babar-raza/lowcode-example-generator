@@ -1,0 +1,103 @@
+{
+  "audit_date": "2026-05-24",
+  "sprint": "sprint83",
+  "basis": "Sprint 82 remote state carried forward (no merges since Sprint 82 close)",
+  "summary": {
+    "total_examples": 42,
+    "with_full_io": 0,
+    "with_partial_io": 1,
+    "no_io_section": 41
+  },
+  "families": {
+    "cells": {
+      "total": 9,
+      "full_io": 0,
+      "partial_io": 0,
+      "no_io": 9,
+      "examples": [
+        {"example": "html-converter", "classification": "NO_IO_SECTION"},
+        {"example": "image-converter", "classification": "NO_IO_SECTION"},
+        {"example": "json-converter", "classification": "NO_IO_SECTION"},
+        {"example": "pdf-converter", "classification": "NO_IO_SECTION"},
+        {"example": "spreadsheet-converter", "classification": "NO_IO_SECTION"},
+        {"example": "spreadsheet-locker", "classification": "NO_IO_SECTION"},
+        {"example": "spreadsheet-merger", "classification": "NO_IO_SECTION"},
+        {"example": "spreadsheet-splitter", "classification": "NO_IO_SECTION"},
+        {"example": "text-converter", "classification": "NO_IO_SECTION"}
+      ]
+    },
+    "words": {
+      "total": 8,
+      "full_io": 0,
+      "partial_io": 1,
+      "no_io": 7,
+      "examples": [
+        {"example": "comparer", "classification": "NO_IO_SECTION"},
+        {"example": "converter", "classification": "PARTIAL_IO"},
+        {"example": "mail-merger", "classification": "NO_IO_SECTION"},
+        {"example": "merger", "classification": "NO_IO_SECTION"},
+        {"example": "replacer", "classification": "NO_IO_SECTION"},
+        {"example": "report-builder", "classification": "NO_IO_SECTION"},
+        {"example": "splitter", "classification": "NO_IO_SECTION"},
+        {"example": "watermarker", "classification": "NO_IO_SECTION"}
+      ]
+    },
+    "pdf": {
+      "total": 19,
+      "full_io": 0,
+      "partial_io": 0,
+      "no_io": 19,
+      "examples": [
+        {"example": "doc-converter", "classification": "NO_IO_SECTION"},
+        {"example": "form-editor", "classification": "NO_IO_SECTION"},
+        {"example": "form-exporter", "classification": "NO_IO_SECTION"},
+        {"example": "form-flattener", "classification": "NO_IO_SECTION"},
+        {"example": "html", "classification": "NO_IO_SECTION"},
+        {"example": "image-extractor", "classification": "NO_IO_SECTION"},
+        {"example": "jpeg", "classification": "NO_IO_SECTION"},
+        {"example": "merger", "classification": "NO_IO_SECTION"},
+        {"example": "optimizer", "classification": "NO_IO_SECTION"},
+        {"example": "pdfa-converter", "classification": "NO_IO_SECTION"},
+        {"example": "png", "classification": "NO_IO_SECTION"},
+        {"example": "security", "classification": "NO_IO_SECTION"},
+        {"example": "signature", "classification": "NO_IO_SECTION"},
+        {"example": "splitter", "classification": "NO_IO_SECTION"},
+        {"example": "table-generator", "classification": "NO_IO_SECTION"},
+        {"example": "text-extractor", "classification": "NO_IO_SECTION"},
+        {"example": "tiff", "classification": "NO_IO_SECTION"},
+        {"example": "toc-generator", "classification": "NO_IO_SECTION"},
+        {"example": "xls-converter", "classification": "NO_IO_SECTION"}
+      ]
+    },
+    "diagram": {
+      "total": 2,
+      "full_io": 0,
+      "partial_io": 0,
+      "no_io": 2,
+      "examples": [
+        {"example": "diagram-diagram-converter", "classification": "NO_IO_SECTION"},
+        {"example": "diagram-pdf-converter", "classification": "NO_IO_SECTION"}
+      ]
+    },
+    "email": {
+      "total": 1,
+      "full_io": 0,
+      "partial_io": 0,
+      "no_io": 1,
+      "examples": [
+        {"example": "converter", "classification": "NO_IO_SECTION"}
+      ]
+    },
+    "slides": {
+      "total": 3,
+      "full_io": 0,
+      "partial_io": 0,
+      "no_io": 3,
+      "examples": [
+        {"example": "compress", "classification": "NO_IO_SECTION"},
+        {"example": "convert", "classification": "NO_IO_SECTION"},
+        {"example": "merger", "classification": "NO_IO_SECTION"}
+      ]
+    }
+  }
+}

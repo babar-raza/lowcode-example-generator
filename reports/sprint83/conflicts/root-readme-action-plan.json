@@ -1,0 +1,35 @@
+{
+  "sprint": "sprint83",
+  "date": "2026-05-24",
+  "conflict_strategy": "EXCLUDE_ROOT_README_FROM_SPRINT83_PRS",
+  "actions": [
+    {
+      "action_id": "A1",
+      "description": "Exclude root README from all Sprint 83 PR file plans",
+      "status": "APPLIED",
+      "applies_to": ["cells", "words", "diagram"]
+    },
+    {
+      "action_id": "A2",
+      "description": "Document conflict strategy in Lane B evidence files",
+      "status": "APPLIED",
+      "applies_to": ["all"]
+    },
+    {
+      "action_id": "A3",
+      "description": "Keep cells#5, words#7, diagram#2 open — do not close or abandon",
+      "status": "APPLIED",
+      "applies_to": ["cells", "words", "diagram"]
+    },
+    {
+      "action_id": "A4",
+      "description": "Merge root README PRs in dedicated root-README sprint after all I/O PRs merged",
+      "status": "PENDING_FUTURE_SPRINT",
+      "applies_to": ["cells", "words", "diagram"]
+    }
+  ],
+  "new_pr_creation_this_sprint": false,
+  "approval_gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "approval_gate_value": "NOT_SET",
+  "publication_verdict": "BLOCKED_BY_APPROVAL"
+}

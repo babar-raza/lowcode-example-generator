@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 111)  # Sprint 80: added 1 new rule (111)
+        self.assertEqual(result.total_rules, 115)  # Sprint 83: added 4 new rules (112-115)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 111)  # Sprint 80: 111 rules total
+        self.assertEqual(len(d["rules"]), 115)  # Sprint 83: 115 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 110 rules evaluated (111 total - 1 self-reference rule 21)
-        # Sprint 80: total is now 111 (added 1 new rule), so excluding rule 21 = 110
-        self.assertEqual(len(result.rule_results), 110)
+        # Should have exactly 114 rules evaluated (115 total - 1 self-reference rule 21)
+        # Sprint 83: total is now 115 (added 4 new rules), so excluding rule 21 = 114
+        self.assertEqual(len(result.rule_results), 114)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 111)  # Sprint 80: 111 rules total
+        self.assertEqual(len(phase_b.rule_results), 115)  # Sprint 83: 115 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 110 rules total (108 Sprint 78 + 2 new Sprint 79 rules)."""
+        """validate() must return 115 rules total (111 Sprint 80 + 4 new Sprint 83 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 111,
-                         f"Expected 111 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 115,
+                         f"Expected 115 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-111."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-115."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 110,
-                         f"validate_for_storage must have 110 rules (111 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 114,
+                         f"validate_for_storage must have 114 rules (115 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -2960,6 +2960,304 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         rule = next(
             r for r in result.rule_results
             if r.rule_id == "no_active_validation_file_with_ambiguous_false"
+        )
+        self.assertTrue(rule.passed)
+
+
+class TestSprint83ValidatorHardeningRules(unittest.TestCase):
+    """Tests for Sprint 83 rules 112-115 (S82-F1 through S82-F4): validator hardening."""
+
+    # Rule 112: publication_truth_matrix_has_expected_count
+
+    def _make_pub_record(self, family, example):
+        """Minimal flat-array publication truth matrix record compatible with all rules."""
+        return {
+            "family": family,
+            "example": example,
+            "remote_example_present": True,
+            "remote_readme_io_classification": "NO_IO_SECTION",
+            "approval_blocked": True,
+            "pr_url": None,
+        }
+
+    def test_rule112_fails_when_matrix_has_wrong_total_count(self):
+        """Rule 112: publication-truth-matrix-final.json with != 42 records fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            records = [self._make_pub_record("cells", f"ex-{i}") for i in range(10)]
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_truth_matrix_has_expected_count"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("42", rule.failure_detail)
+
+    def test_rule112_fails_when_family_counts_wrong(self):
+        """Rule 112: 42 records but wrong family distribution fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            # 42 records but all cells (should be cells=9)
+            records = [self._make_pub_record("cells", f"ex-{i}") for i in range(42)]
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_truth_matrix_has_expected_count"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("cells", rule.failure_detail)
+
+    def test_rule112_passes_with_correct_42_records(self):
+        """Rule 112: 42 records with correct family distribution passes."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            records = (
+                [self._make_pub_record("cells", f"c{i}") for i in range(9)] +
+                [self._make_pub_record("words", f"w{i}") for i in range(8)] +
+                [self._make_pub_record("pdf", f"p{i}") for i in range(19)] +
+                [self._make_pub_record("diagram", f"d{i}") for i in range(2)] +
+                [self._make_pub_record("email", "converter")] +
+                [self._make_pub_record("slides", f"s{i}") for i in range(3)]
+            )
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_truth_matrix_has_expected_count"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule112_passes_trivially_when_no_matrix_file(self):
+        """Rule 112: passes trivially when publication-truth-matrix-final.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_truth_matrix_has_expected_count"
+        )
+        self.assertTrue(rule.passed)
+
+    # Rule 113: root_readme_conflict_strategy_documented
+
+    def test_rule113_fails_when_open_prs_and_no_conflict_doc(self):
+        """Rule 113: open PRs detected but no conflict strategy document fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote").mkdir(parents=True, exist_ok=True)
+            (b / "remote" / "remote-repo-state-before.json").write_text(
+                json.dumps({
+                    "cells": {"open_prs": [{"number": 5, "title": "Add README"}]},
+                    "words": {"open_prs": []},
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "root_readme_conflict_strategy_documented"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("cells", rule.failure_detail)
+
+    def test_rule113_passes_when_open_prs_and_conflict_check_present(self):
+        """Rule 113: open PRs detected and remote-conflict-check.md present passes."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote").mkdir(parents=True, exist_ok=True)
+            (b / "remote" / "remote-repo-state-before.json").write_text(
+                json.dumps({"cells": {"open_prs": [{"number": 5}]}}),
+                encoding="utf-8",
+            )
+            (b / "remote" / "remote-conflict-check.md").write_text(
+                "# Conflict Check\nNo conflict with per-example READMEs.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "root_readme_conflict_strategy_documented"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule113_passes_trivially_when_no_open_prs(self):
+        """Rule 113: passes trivially when no open PRs in any family."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote").mkdir(parents=True, exist_ok=True)
+            (b / "remote" / "remote-repo-state-before.json").write_text(
+                json.dumps({"cells": {"open_prs": []}, "words": {"open_prs": []}}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "root_readme_conflict_strategy_documented"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule113_passes_trivially_when_no_remote_state(self):
+        """Rule 113: passes trivially when remote-repo-state-before.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "root_readme_conflict_strategy_documented"
+        )
+        self.assertTrue(rule.passed)
+
+    # Rule 114: final_consistency_check_not_stale_after_commit
+
+    def test_rule114_fails_when_pending_commit_label_with_real_sha(self):
+        """Rule 114: PASS_PENDING_COMMIT in consistency check with real SHA in proof fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "review").mkdir(parents=True, exist_ok=True)
+            (b / "review" / "final-consistency-check.json").write_text(
+                json.dumps({"sprint_id": "sprint82", "overall": "PASS_PENDING_COMMIT"}),
+                encoding="utf-8",
+            )
+            # proof already has the real SHA from _make_bundle
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\nSprint bundle committed: 886ce857405aa9dc3e25a75d3ff6d541f784dec2\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "final_consistency_check_not_stale_after_commit"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("PASS_PENDING_COMMIT", rule.failure_detail)
+
+    def test_rule114_passes_when_pending_commit_label_but_no_real_sha(self):
+        """Rule 114: PASS_PENDING_COMMIT is OK if proof has no 40-char SHA yet."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "review").mkdir(parents=True, exist_ok=True)
+            (b / "review" / "final-consistency-check.json").write_text(
+                json.dumps({"sprint_id": "sprint82", "overall": "PASS_PENDING_COMMIT"}),
+                encoding="utf-8",
+            )
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\nHEAD: PLACEHOLDER\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "final_consistency_check_not_stale_after_commit"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule114_passes_when_consistency_check_says_pass(self):
+        """Rule 114: passes when final-consistency-check.json says PASS (not PENDING_COMMIT)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "review").mkdir(parents=True, exist_ok=True)
+            (b / "review" / "final-consistency-check.json").write_text(
+                json.dumps({"sprint_id": "sprint83", "overall": "PASS"}),
+                encoding="utf-8",
+            )
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\nSprint bundle committed: 886ce857405aa9dc3e25a75d3ff6d541f784dec2\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "final_consistency_check_not_stale_after_commit"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule114_passes_trivially_when_no_consistency_check_file(self):
+        """Rule 114: passes trivially when final-consistency-check.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "final_consistency_check_not_stale_after_commit"
+        )
+        self.assertTrue(rule.passed)
+
+    # Rule 115: publication_file_plan_present_if_pr_creation_claimed
+
+    def test_rule115_fails_when_pr_url_set_but_no_file_plan(self):
+        """Rule 115: pr_url non-null in matrix but publication-file-plan.json missing fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            records = [dict(self._make_pub_record("cells", "html-converter"),
+                            pr_url="https://github.com/org/repo/pull/10")]
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("publication-file-plan.json", rule.failure_detail)
+
+    def test_rule115_passes_when_pr_url_set_and_file_plan_present(self):
+        """Rule 115: pr_url non-null and publication-file-plan.json present passes."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            records = [dict(self._make_pub_record("cells", "html-converter"),
+                            pr_url="https://github.com/org/repo/pull/10")]
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            (b / "publication" / "publication-file-plan.json").write_text(
+                json.dumps({"sprint_id": "sprint83", "families": {}}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule115_passes_trivially_when_all_pr_urls_null(self):
+        """Rule 115: passes trivially when all pr_url values are null."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication").mkdir(parents=True, exist_ok=True)
+            records = [self._make_pub_record("cells", "html-converter")]
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps(records), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule115_passes_trivially_when_no_matrix_file(self):
+        """Rule 115: passes trivially when publication-truth-matrix-final.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
         )
         self.assertTrue(rule.passed)
 

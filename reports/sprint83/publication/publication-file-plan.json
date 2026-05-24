@@ -1,0 +1,20 @@
+{
+  "sprint": "sprint83",
+  "date": "2026-05-24",
+  "status": "APPROVAL_BLOCKED",
+  "total_examples_planned": 42,
+  "root_readmes_excluded": ["cells", "words", "diagram"],
+  "root_readme_exclusion_reason": "Deconflict with open root README PRs: cells#5, words#7, diagram#2",
+  "dir_packages_props_changes": 0,
+  "per_family": {
+    "cells":   {"examples": 9, "root_readme": false, "status": "BLOCKED"},
+    "words":   {"examples": 8, "root_readme": false, "status": "BLOCKED"},
+    "pdf":     {"examples": 19, "root_readme": false, "status": "BLOCKED"},
+    "diagram": {"examples": 2, "root_readme": false, "status": "BLOCKED"},
+    "email":   {"examples": 1, "root_readme": false, "status": "BLOCKED"},
+    "slides":  {"examples": 3, "root_readme": false, "status": "BLOCKED"}
+  },
+  "prs_that_would_be_created": 42,
+  "prs_actually_created": 0,
+  "gate_blocking": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET"
+}

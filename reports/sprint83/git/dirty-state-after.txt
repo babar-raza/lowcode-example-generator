@@ -1,0 +1,26 @@
+Sprint 83 -- Git State After Bundle Commit
+==========================================
+Date: 2026-05-24
+Status: Captured after bundle commit (pre-final-clean-proof)
+
+Expected state after bundle commit:
+- All sprint83/ files staged and committed
+- src/plugin_examples/evidence_validator.py: staged and committed
+- tests/unit/test_evidence_validator.py: staged and committed
+- workspace/verification/latest/: 8 files staged and committed
+
+Post-commit expected clean state:
+- No modified tracked files
+- No untracked sprint83/ directory (now committed)
+
+GENERATED_WORKSPACE_STATE files committed as part of bundle:
+- workspace/verification/latest/cells-readme-backfill-simulation.json
+- workspace/verification/latest/cells-root-readme-audit.json
+- workspace/verification/latest/cells-root-readme-render-result.json
+- workspace/verification/latest/family-repo-access-resolution.json
+- workspace/verification/latest/release-status.json
+- workspace/verification/latest/words-readme-backfill-simulation.json
+- workspace/verification/latest/words-root-readme-audit.json
+- workspace/verification/latest/words-root-readme-render-result.json
+
+Note: final-clean-proof.txt will be created in a second commit capturing the clean HEAD SHA.

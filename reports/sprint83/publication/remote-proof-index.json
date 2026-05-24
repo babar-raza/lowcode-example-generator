@@ -1,0 +1,9 @@
+{
+  "sprint": "sprint83",
+  "date": "2026-05-24",
+  "status": "APPROVAL_BLOCKED",
+  "total_pr_proofs": 0,
+  "total_merge_proofs": 0,
+  "families": {},
+  "note": "No remote proof records — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET. No PRs created this sprint."
+}

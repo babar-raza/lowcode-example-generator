@@ -1,0 +1,414 @@
+{
+  "contract_id": "sprint83",
+  "computed_at": "2026-05-24T16:35:26Z",
+  "total_categories": 50,
+  "present": 50,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 82 Acceptance Baseline",
+      "file": "reports/sprint83/00-sprint82-acceptance-baseline.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "Todo",
+      "file": "reports/sprint83/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "Commands Log",
+      "file": "reports/sprint83/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "Git Dirty State Before",
+      "file": "reports/sprint83/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "Coordinator Plan",
+      "file": "reports/sprint83/01-sprint83-coordinator-plan.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "Overlap Check",
+      "file": "reports/sprint83/02-overlap-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "Root README PR Inventory",
+      "file": "reports/sprint83/conflicts/root-readme-pr-inventory.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "Root README PR Conflict Strategy",
+      "file": "reports/sprint83/conflicts/root-readme-pr-conflict-strategy.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "Root README Action Plan",
+      "file": "reports/sprint83/conflicts/root-readme-action-plan.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "Remote Repo State Before",
+      "file": "reports/sprint83/remote/remote-repo-state-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "Remote README IO Audit Before",
+      "file": "reports/sprint83/remote/remote-readme-io-audit-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "Remote vs Handoff Before",
+      "file": "reports/sprint83/remote/remote-vs-handoff-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "Handoff Source Authority",
+      "file": "reports/sprint83/handoff/handoff-source-authority.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "Handoff Prepublish Validation",
+      "file": "reports/sprint83/handoff/handoff-prepublish-validation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "Handoff Source Map",
+      "file": "reports/sprint83/handoff/handoff-source-map.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "Handoff Diff Summary",
+      "file": "reports/sprint83/handoff/handoff-diff-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "Words Version Status",
+      "file": "reports/sprint83/version-drift/words-version-status.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "FormImporter Status",
+      "file": "reports/sprint83/formimporter/formimporter-status.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "Email Slides Runtime Carry-Forward",
+      "file": "reports/sprint83/post-merge-runtime/email-slides-runtime-carry-forward.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "Live Publication Operator Checklist",
+      "file": "reports/sprint83/readiness/live-publication-operator-checklist.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "Product Advancement Summary",
+      "file": "reports/sprint83/product/product-advancement-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint83/evidence/validator-gap-analysis.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "Validator Source Proof Patch",
+      "file": "reports/sprint83/evidence/validator-source-proof.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "Validator Test Results",
+      "file": "reports/sprint83/evidence/validator-test-results.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "Sprint 82 Stale Label Cleanup",
+      "file": "reports/sprint83/evidence-consistency/sprint82-stale-label-cleanup.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "Dirty File Classification",
+      "file": "reports/sprint83/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "Taskcard Update Proof",
+      "file": "reports/sprint83/tracking/taskcard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "Scoreboard Update Proof",
+      "file": "reports/sprint83/tracking/scoreboard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "Next Gate Register",
+      "file": "reports/sprint83/tracking/next-gate-register.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "Live Approval Check",
+      "file": "reports/sprint83/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC31",
+      "name": "PR Creation Ledger",
+      "file": "reports/sprint83/publication/pr-creation-ledger.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC32",
+      "name": "PR Diff Verification",
+      "file": "reports/sprint83/publication/pr-diff-verification.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC33",
+      "name": "Publication Truth Matrix Final",
+      "file": "reports/sprint83/publication/publication-truth-matrix-final.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC34",
+      "name": "Publication File Plan",
+      "file": "reports/sprint83/publication/publication-file-plan.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC35",
+      "name": "Publication Summary",
+      "file": "reports/sprint83/publication/publication-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC36",
+      "name": "Merge Result",
+      "file": "reports/sprint83/publication/merge-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC37",
+      "name": "Post-Merge Verification",
+      "file": "reports/sprint83/publication/post-merge-verification.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC38",
+      "name": "Branch Delete Result",
+      "file": "reports/sprint83/publication/branch-delete-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC39",
+      "name": "IV Independent Verification Report",
+      "file": "reports/sprint83/iv/independent-verification-report.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC40",
+      "name": "IV Lane Output Checklist",
+      "file": "reports/sprint83/iv/lane-output-checklist.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC41",
+      "name": "IV Blocker Register",
+      "file": "reports/sprint83/iv/blocker-register.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC42",
+      "name": "IV Findings",
+      "file": "reports/sprint83/review/iv-findings.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC43",
+      "name": "Adversarial Review",
+      "file": "reports/sprint83/review/adversarial-review.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC44",
+      "name": "Self-Repair Actions",
+      "file": "reports/sprint83/review/self-repair-actions.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC45",
+      "name": "Final Consistency Check",
+      "file": "reports/sprint83/review/final-consistency-check.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC46",
+      "name": "Sprint 83 Final Validation Result",
+      "file": "reports/sprint83/evidence/sprint83-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC47",
+      "name": "ECC Computed (self-referential)",
+      "file": "reports/sprint83/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC48",
+      "name": "Final Verdict",
+      "file": "reports/sprint83/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC49",
+      "name": "Sprint State",
+      "file": "reports/sprint83/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC50",
+      "name": "Bundle Manifest",
+      "file": "reports/sprint83/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

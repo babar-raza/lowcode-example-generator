@@ -1,0 +1,42 @@
+Sprint 83 — EV Hardening Patch Summary
+=======================================
+Date: 2026-05-24
+Files modified:
+  - src/plugin_examples/evidence_validator.py
+  - tests/unit/test_evidence_validator.py
+
+evidence_validator.py changes:
+  1. Module docstring — added Sprint 83 section (4 new rules documented)
+  2. validate() method — added Sprint 83 rule block after Sprint 80 block:
+       # --- Sprint 83 NEW rules: close S82-F1 through S82-F4 ---
+       _maybe(self._rule_publication_truth_matrix_has_expected_count())
+       _maybe(self._rule_root_readme_conflict_strategy_documented())
+       _maybe(self._rule_final_consistency_check_not_stale_after_commit())
+       _maybe(self._rule_publication_file_plan_present_if_pr_creation_claimed())
+  3. Added _rule_publication_truth_matrix_has_expected_count() — ~70 lines
+     Validates flat-array publication-truth-matrix-final.json has exactly 42 records
+     with counts: cells=9, words=8, pdf=19, diagram=2, email=1, slides=3
+  4. Added _rule_root_readme_conflict_strategy_documented() — ~55 lines
+     When remote-repo-state-before.json shows open PRs, requires conflict doc
+  5. Added _rule_final_consistency_check_not_stale_after_commit() — ~60 lines
+     Detects PASS_PENDING_COMMIT label when real SHA exists in final-clean-proof.txt
+  6. Added _rule_publication_file_plan_present_if_pr_creation_claimed() — ~50 lines
+     Requires publication-file-plan.json when any flat-array record has non-null pr_url
+  7. Fixed _rule_publication_state_not_mixed():
+     - Added isinstance(data, list) guard → records = data
+     - Accept remote_readme_io_classification OR remote_readme_has_io_docs
+  8. Fixed _rule_publication_truth_no_stale_remote_claimed():
+     - Added isinstance(data, list) early return → passed=True (not applicable)
+  9. Fixed _rule_publication_truth_matrix_no_mixed_state():
+     - Added isinstance(ptm, list) guard → records = ptm (flat-array compat)
+     - Changed r["scenario_id"] to r.get("scenario_id", r.get("example", "unknown"))
+
+test_evidence_validator.py changes:
+  1. Updated 5 count assertions: 111→115, 110→114
+     Lines: 1111, 1203, 1808, 1854, 2074-2075, 2088-2089
+  2. Added TestSprint83ValidatorHardeningRules class (16 test methods)
+     - _make_pub_record() helper for flat-array records
+     - test_rule112_*: 4 tests (wrong total, wrong family counts, correct 42, no file)
+     - test_rule113_*: 4 tests (open PRs no doc, open PRs with doc, no PRs, no file)
+     - test_rule114_*: 4 tests (PENDING+real SHA, PENDING+no SHA, PASS, no file)
+     - test_rule115_*: 4 tests (pr_url set no plan, pr_url set with plan, all null, no matrix)

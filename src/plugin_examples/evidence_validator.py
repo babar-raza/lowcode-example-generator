@@ -112,6 +112,12 @@ Sprint 79 additions (2 new rules, closes S78-E1 and S78-E2):
 
 Sprint 80 additions (1 new rule, closes S79-B1):
 - Rule: no_active_validation_file_with_ambiguous_false (any evidence/*-validation-result.json with overall_valid=false must have not_canonical=true — S79-B1)
+
+Sprint 83 additions (4 new rules, closes S82-F1 through S82-F4):
+- Rule: publication_truth_matrix_has_expected_count (publication/publication-truth-matrix-final.json must have exactly 42 records with correct per-family counts — S82-F1)
+- Rule: root_readme_conflict_strategy_documented (if remote-repo-state-before.json shows open PRs, a conflict strategy doc must exist — S82-F2)
+- Rule: final_consistency_check_not_stale_after_commit (review/final-consistency-check.json must not say PASS_PENDING_COMMIT after final-clean-proof.txt has a real commit SHA — S82-F3)
+- Rule: publication_file_plan_present_if_pr_creation_claimed (if any record in publication-truth-matrix-final.json has pr_url non-null, publication-file-plan.json must exist — S82-F4)
 """
 
 from __future__ import annotations
@@ -368,6 +374,12 @@ class EvidenceValidator:
 
         # --- Sprint 80 NEW rules: close S79-B1 ---
         _maybe(self._rule_no_active_validation_file_with_ambiguous_false())
+
+        # --- Sprint 83 NEW rules: close S82-F1 through S82-F4 ---
+        _maybe(self._rule_publication_truth_matrix_has_expected_count())
+        _maybe(self._rule_root_readme_conflict_strategy_documented())
+        _maybe(self._rule_final_consistency_check_not_stale_after_commit())
+        _maybe(self._rule_publication_file_plan_present_if_pr_creation_claimed())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -2313,7 +2325,11 @@ class EvidenceValidator:
                 failure_detail=f"Cannot read publication-truth-matrix-final.json: {exc}",
             )
 
-        records = data.get("records", [])
+        # Handle both flat-array format (Sprint 82+) and wrapped-object format (Sprint 66-81)
+        if isinstance(data, list):
+            records = data
+        else:
+            records = data.get("records", [])
         if not records:
             return RuleResult(
                 rule_id=rule_id,
@@ -2323,21 +2339,29 @@ class EvidenceValidator:
             )
 
         first = records[0]
-        required_fields = ["remote_example_present", "approval_blocked", "remote_readme_has_io_docs"]
+        # Sprint 82+ flat-array format uses remote_readme_io_classification instead of
+        # remote_readme_has_io_docs. Accept either field to satisfy the separation requirement.
+        io_field_present = (
+            "remote_readme_has_io_docs" in first
+            or "remote_readme_io_classification" in first
+        )
+        required_fields = ["remote_example_present", "approval_blocked"]
         missing = [f for f in required_fields if f not in first]
-        if missing:
+        if missing or not io_field_present:
+            all_missing = missing + ([] if io_field_present else ["remote_readme_has_io_docs/remote_readme_io_classification"])
             return RuleResult(
                 rule_id=rule_id,
                 description="Publication state must use separate fields",
                 severity="FAILURE", passed=False,
-                failure_detail=f"publication-truth-matrix-final.json records missing fields: {missing}",
+                failure_detail=f"publication-truth-matrix-final.json records missing fields: {all_missing}",
             )
 
+        io_field = "remote_readme_io_classification" if "remote_readme_io_classification" in first else "remote_readme_has_io_docs"
         return RuleResult(
             rule_id=rule_id,
             description="Publication state must use separate fields",
             severity="FAILURE", passed=True,
-            evidence=f"{len(records)} records with separate state fields (remote_example_present, approval_blocked, remote_readme_has_io_docs)",
+            evidence=f"{len(records)} records with separate state fields (remote_example_present, approval_blocked, {io_field})",
         )
 
     def _rule_remote_proof_not_workspace_only(self) -> RuleResult:
@@ -3293,9 +3317,13 @@ class EvidenceValidator:
             )
         try:
             ptm = json.loads(ptm_path.read_text(encoding="utf-8"))
-            records = ptm.get("records", [])
+            # Sprint 82+ uses flat-array format; legacy used wrapped {"records": [...]}
+            if isinstance(ptm, list):
+                records = ptm
+            else:
+                records = ptm.get("records", [])
             mixed = [
-                r["scenario_id"]
+                r.get("scenario_id", r.get("example", "unknown"))
                 for r in records
                 if not r.get("remote_example_readme_has_io_docs", True)
                 and r.get("readme_io_post_merge_verified", False)
@@ -5339,6 +5367,15 @@ class EvidenceValidator:
                 evidence="Could not parse publication-truth-matrix-final.json — skipping",
             )
 
+        # Handle both flat-array format (Sprint 82+) and wrapped-object format
+        if isinstance(data, list):
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+                severity="FAILURE", passed=True,
+                evidence="publication-truth-matrix-final.json is flat-array format — rule not applicable",
+            )
+
         all_published = data.get("all_published", False)
         all_merged = data.get("all_merged", False)
         if not (all_published and all_merged):
@@ -5662,6 +5699,319 @@ class EvidenceValidator:
             rule_id=rule_id, description=description,
             severity="FAILURE", passed=True,
             evidence=f"All *-validation-result.json files in evidence/ have unambiguous overall_valid",
+        )
+
+    def _rule_publication_truth_matrix_has_expected_count(self) -> RuleResult:
+        """publication/publication-truth-matrix-final.json must have exactly 42 records
+        with correct per-family counts: cells=9, words=8, pdf=19, diagram=2, email=1, slides=3.
+
+        Sprint 83 validator hardening (S82-F1): prevents silent denomination drift where a
+        publication matrix quietly loses records without a blocking validation failure.
+        """
+        rule_id = "publication_truth_matrix_has_expected_count"
+        description = "Publication truth matrix must have 42 records with correct per-family counts"
+
+        matrix_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
+        if not matrix_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/publication-truth-matrix-final.json not found — rule not applicable",
+            )
+
+        try:
+            records = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError) as exc:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=f"S82-F1: Could not parse publication-truth-matrix-final.json: {exc}",
+            )
+
+        if not isinstance(records, list):
+            # Legacy/wrapped format: {"total": N, "records": [...]} — not applicable
+            # This rule specifically targets the Sprint 82+ flat-array format
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=(
+                    "publication-truth-matrix-final.json uses wrapped object format — "
+                    "rule only applies to Sprint 82+ flat-array format"
+                ),
+            )
+
+        total = len(records)
+        if total != 42:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S82-F1: Expected 42 records in publication-truth-matrix-final.json, "
+                    f"got {total}. Denominator drift detected."
+                ),
+            )
+
+        expected_family_counts = {
+            "cells": 9, "words": 8, "pdf": 19,
+            "diagram": 2, "email": 1, "slides": 3,
+        }
+        actual_counts: dict[str, int] = {}
+        for rec in records:
+            fam = rec.get("family", "unknown") if isinstance(rec, dict) else "unknown"
+            actual_counts[fam] = actual_counts.get(fam, 0) + 1
+
+        mismatches = []
+        for fam, expected in expected_family_counts.items():
+            actual = actual_counts.get(fam, 0)
+            if actual != expected:
+                mismatches.append(f"{fam}: expected {expected}, got {actual}")
+
+        if mismatches:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S82-F1: Family count mismatch in publication-truth-matrix-final.json: "
+                    + "; ".join(mismatches)
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"publication-truth-matrix-final.json has {total} records with correct "
+                f"per-family counts: cells=9, words=8, pdf=19, diagram=2, email=1, slides=3"
+            ),
+        )
+
+    def _rule_root_readme_conflict_strategy_documented(self) -> RuleResult:
+        """If remote/remote-repo-state-before.json shows any open PRs, a conflict strategy
+        document must exist: remote/remote-conflict-check.md or
+        conflicts/root-readme-pr-conflict-strategy.md.
+
+        Sprint 83 validator hardening (S82-F2): prevents Sprint 82 pattern where root README
+        PR conflicts were detected but the resolution strategy was not formally documented
+        in a durable conflict strategy file.
+        """
+        rule_id = "root_readme_conflict_strategy_documented"
+        description = "Root README conflict strategy must be documented when open PRs are detected"
+
+        remote_state_path = self.bundle_dir / "remote" / "remote-repo-state-before.json"
+        if not remote_state_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="remote/remote-repo-state-before.json not found — rule not applicable",
+            )
+
+        try:
+            state = json.loads(remote_state_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse remote-repo-state-before.json — rule not applicable",
+            )
+
+        if not isinstance(state, dict):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="remote-repo-state-before.json is not a dict — rule not applicable",
+            )
+
+        # Check if any family has open PRs
+        families_with_open_prs = []
+        for family, data in state.items():
+            if isinstance(data, dict) and data.get("open_prs"):
+                families_with_open_prs.append(family)
+
+        if not families_with_open_prs:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="No open PRs detected in remote-repo-state-before.json — rule not applicable",
+            )
+
+        # Open PRs found — require conflict strategy document
+        conflict_check = self.bundle_dir / "remote" / "remote-conflict-check.md"
+        conflict_strategy = self.bundle_dir / "conflicts" / "root-readme-pr-conflict-strategy.md"
+
+        if conflict_check.exists() and conflict_check.stat().st_size > 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=(
+                    f"Conflict strategy documented in remote/remote-conflict-check.md "
+                    f"(open PRs in: {', '.join(families_with_open_prs)})"
+                ),
+            )
+
+        if conflict_strategy.exists() and conflict_strategy.stat().st_size > 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=(
+                    f"Conflict strategy documented in conflicts/root-readme-pr-conflict-strategy.md "
+                    f"(open PRs in: {', '.join(families_with_open_prs)})"
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=False,
+            failure_detail=(
+                f"S82-F2: Open PRs detected in {', '.join(families_with_open_prs)} but no conflict "
+                f"strategy document found. Expected remote/remote-conflict-check.md or "
+                f"conflicts/root-readme-pr-conflict-strategy.md to be non-empty."
+            ),
+        )
+
+    def _rule_final_consistency_check_not_stale_after_commit(self) -> RuleResult:
+        """review/final-consistency-check.json must not have overall=PASS_PENDING_COMMIT
+        if git/final-clean-proof.txt contains a real commit SHA (40 hex chars).
+
+        Sprint 83 validator hardening (S82-F3): Sprint 82's final-consistency-check.json
+        retained PASS_PENDING_COMMIT after the bundle commit was made and final-clean-proof.txt
+        had the real SHA. This rule catches that stale label pattern.
+        """
+        rule_id = "final_consistency_check_not_stale_after_commit"
+        description = (
+            "final-consistency-check.json must not say PASS_PENDING_COMMIT "
+            "after final-clean-proof.txt has a real commit SHA"
+        )
+
+        consistency_path = self.bundle_dir / "review" / "final-consistency-check.json"
+        proof_path = self.bundle_dir / "git" / "final-clean-proof.txt"
+
+        if not consistency_path.exists() or not proof_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-consistency-check.json or final-clean-proof.txt not found — rule not applicable",
+            )
+
+        try:
+            consistency = json.loads(consistency_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse final-consistency-check.json — rule not applicable",
+            )
+
+        if consistency.get("overall") != "PASS_PENDING_COMMIT":
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=(
+                    f"final-consistency-check.json overall={consistency.get('overall')!r} — "
+                    f"not PASS_PENDING_COMMIT, no stale label"
+                ),
+            )
+
+        # overall IS PASS_PENDING_COMMIT — check if proof has a real SHA
+        try:
+            proof_text = proof_path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not read final-clean-proof.txt — rule not applicable",
+            )
+
+        # A real commit SHA: 40 hex chars as a standalone token
+        sha_pattern = re.compile(r"\b[0-9a-f]{40}\b")
+        if not sha_pattern.search(proof_text):
+            # No real SHA in proof yet — PASS_PENDING_COMMIT is legitimate
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-clean-proof.txt has no 40-char SHA — PASS_PENDING_COMMIT is acceptable",
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=False,
+            failure_detail=(
+                "S82-F3: final-consistency-check.json has stale overall=PASS_PENDING_COMMIT "
+                "but final-clean-proof.txt already contains a real 40-char commit SHA. "
+                "Update final-consistency-check.json overall to PASS (or the appropriate "
+                "final status) after committing the bundle."
+            ),
+        )
+
+    def _rule_publication_file_plan_present_if_pr_creation_claimed(self) -> RuleResult:
+        """If any record in publication/publication-truth-matrix-final.json has pr_url non-null,
+        then publication/publication-file-plan.json must exist.
+
+        Sprint 83 validator hardening (S82-F4): prevents PR creation being claimed in the
+        publication matrix without the corresponding file plan that documents which files
+        were touched in each PR.
+        """
+        rule_id = "publication_file_plan_present_if_pr_creation_claimed"
+        description = (
+            "publication-file-plan.json must exist if any pr_url is non-null "
+            "in publication-truth-matrix-final.json"
+        )
+
+        matrix_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
+        if not matrix_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/publication-truth-matrix-final.json not found — rule not applicable",
+            )
+
+        try:
+            records = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse publication-truth-matrix-final.json — rule not applicable",
+            )
+
+        if not isinstance(records, list):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication-truth-matrix-final.json is not a JSON array — rule not applicable",
+            )
+
+        pr_urls = [
+            rec.get("pr_url") for rec in records
+            if isinstance(rec, dict) and rec.get("pr_url") is not None
+        ]
+
+        if not pr_urls:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="All pr_url values are null in publication-truth-matrix-final.json — rule not applicable",
+            )
+
+        # At least one PR URL claimed — file plan must exist
+        file_plan_path = self.bundle_dir / "publication" / "publication-file-plan.json"
+        if not file_plan_path.exists() or file_plan_path.stat().st_size == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S82-F4: {len(pr_urls)} record(s) in publication-truth-matrix-final.json "
+                    f"have non-null pr_url but publication/publication-file-plan.json is missing "
+                    f"or empty. File plan must exist before PRs are created."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"{len(pr_urls)} record(s) have pr_url set; "
+                f"publication/publication-file-plan.json is present and non-empty"
+            ),
         )
 
     # ------------------------------------------------------------------

@@ -1,7 +1,7 @@
-Sprint 79 — Dirty State After Commit
+Sprint 79 -- Dirty State After Commit
 =====================================
 Date: 2026-05-24
-Sprint bundle committed: [PENDING_SHA]
+Sprint bundle committed: 0fb509d070879a765a41bf75414b043fe79c658f
 
  M workspace/verification/latest/cells-readme-backfill-simulation.json
  M workspace/verification/latest/cells-root-readme-audit.json

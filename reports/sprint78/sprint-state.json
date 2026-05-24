@@ -1,0 +1,14 @@
+{
+  "sprint_id": "sprint78",
+  "sprint_number": 78,
+  "sprint_type": "FINISH_LINE_SPRINT",
+  "status": "CLOSED",
+  "date": "2026-05-24",
+  "tests_passing": 3075,
+  "ev_rules": 108,
+  "ecc_categories": 32,
+  "new_ev_rules_added": 3,
+  "examples_published": 42,
+  "readme_prs_created": 0,
+  "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"
+}

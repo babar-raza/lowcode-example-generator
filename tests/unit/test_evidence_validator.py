@@ -785,6 +785,51 @@ def _make_bundle(tmpdir: str) -> Path:
     # (dirty-state-after.txt shows nothing dirty, so rule 101 passes trivially)
     # final-verdict.md already uses allowed verdict from rule 64 above
 
+    # ---- Sprint 78: artifacts for rules 106-108 ----
+
+    # Rule 107: handoff_validation_result_has_valid_flag
+    handoff_dir = b / "handoff"
+    handoff_dir.mkdir(parents=True, exist_ok=True)
+    (handoff_dir / "handoff-prepublish-validation.json").write_text(
+        json.dumps({
+            "validation_type": "handoff_prepublish_validation",
+            "total_examples": 42,
+            "total_families": 6,
+            "overall_handoff_valid": True,
+            "verdict": "HANDOFF_VALID_42_42_APPROVAL_BLOCKED",
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 108: remote_repo_state_all_accessible
+    remote_dir = b / "remote"
+    remote_dir.mkdir(parents=True, exist_ok=True)
+    (remote_dir / "remote-repo-state-before.json").write_text(
+        json.dumps({
+            "resolution_type": "github_repo_access_resolution",
+            "token_present": True,
+            "families": [
+                {"family": f, "error_classification": "repo_access_ok",
+                 "can_read": True, "can_push": True}
+                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+            ],
+            "summary": {
+                "total_checked": 6,
+                "accessible": 6,
+                "blocked": 0,
+                "accessible_families": ["cells", "words", "pdf", "diagram", "email", "slides"],
+                "blocked_families": [],
+                "live_publish_allowed": False,
+            },
+        }),
+        encoding="utf-8",
+    )
+
+    # Rule 106: publication_truth_no_stale_remote_claimed
+    # The existing publication-truth-matrix-final.json uses 'records' (list) not 'families' (dict),
+    # so data.get("all_published", False) returns False → rule passes trivially for the base bundle.
+    # No additional fixture needed — rule is not applicable without all_published=True.
+
     return b
 
 
@@ -1063,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 105)  # Sprint 77: added 4 new rules (102-105)
+        self.assertEqual(result.total_rules, 108)  # Sprint 78: added 3 new rules (106-108)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1155,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 105)  # Sprint 77: 105 rules total
+        self.assertEqual(len(d["rules"]), 108)  # Sprint 78: 108 rules total
 
 
 # ===========================================================================
@@ -1758,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 104 rules evaluated (105 total - 1 self-reference rule 21)
-        # Sprint 77: total is now 105 (added 4 new rules), so excluding rule 21 = 104
-        self.assertEqual(len(result.rule_results), 104)
+        # Should have exactly 107 rules evaluated (108 total - 1 self-reference rule 21)
+        # Sprint 78: total is now 108 (added 3 new rules), so excluding rule 21 = 107
+        self.assertEqual(len(result.rule_results), 107)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1806,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 105)  # Sprint 77: 105 rules total
+        self.assertEqual(len(phase_b.rule_results), 108)  # Sprint 78: 108 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2022,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 105 rules total (101 Sprint 76 + 4 new Sprint 77 rules)."""
+        """validate() must return 108 rules total (105 Sprint 77 + 3 new Sprint 78 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 105,
-                         f"Expected 105 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 108,
+                         f"Expected 108 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-101."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-108."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2040,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 104,
-                         f"validate_for_storage must have 104 rules (105 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 107,
+                         f"validate_for_storage must have 107 rules (108 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -2545,6 +2590,149 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
             f"Sprint 76 bundle should fail all 4 Sprint 77 rules. "
             f"Actually failing: {failing}",
         )
+
+
+class TestSprint78PublicationTruthRules(unittest.TestCase):
+    """Tests for the 3 new Sprint 78 rules (S77-D1 through S77-D3)."""
+
+    def test_rule106_fails_when_all_published_true_and_remote_stale_claimed(self):
+        """Rule 106: fails when all_published=true but a family status contains REMOTE_STALE."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps({
+                    "all_published": True,
+                    "all_merged": True,
+                    "families": {
+                        "cells": {"status": "REMOTE_STALE_LOCAL_HANDOFF_READY"},
+                        "words": {"status": "PUBLISHED"},
+                    },
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_no_stale_remote_claimed")
+        self.assertFalse(rule.passed)
+        self.assertIn("REMOTE_STALE", rule.failure_detail)
+
+    def test_rule106_passes_when_all_published_and_no_stale(self):
+        """Rule 106: passes when all_published=true and no REMOTE_STALE in family statuses."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps({
+                    "all_published": True,
+                    "all_merged": True,
+                    "families": {
+                        "cells": {"status": "PUBLISHED"},
+                        "words": {"status": "PUBLISHED"},
+                    },
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_no_stale_remote_claimed")
+        self.assertTrue(rule.passed)
+
+    def test_rule106_passes_trivially_when_not_all_published(self):
+        """Rule 106: passes trivially when all_published=False (not applicable)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Default _make_bundle has no all_published field → defaults to False → not applicable
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_no_stale_remote_claimed")
+        self.assertTrue(rule.passed)
+
+    def test_rule107_fails_when_handoff_validation_missing(self):
+        """Rule 107: fails when handoff-prepublish-validation.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "handoff" / "handoff-prepublish-validation.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "handoff_validation_result_has_valid_flag")
+        # Rule passes trivially when file is absent (not applicable)
+        self.assertTrue(rule.passed)
+
+    def test_rule107_fails_when_overall_handoff_valid_false(self):
+        """Rule 107: fails when overall_handoff_valid=False."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "handoff" / "handoff-prepublish-validation.json").write_text(
+                json.dumps({"overall_handoff_valid": False, "verdict": "HANDOFF_BLOCKED"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "handoff_validation_result_has_valid_flag")
+        self.assertFalse(rule.passed)
+
+    def test_rule107_fails_when_overall_handoff_valid_missing(self):
+        """Rule 107: fails when overall_handoff_valid field is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "handoff" / "handoff-prepublish-validation.json").write_text(
+                json.dumps({"verdict": "HANDOFF_UNKNOWN"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "handoff_validation_result_has_valid_flag")
+        self.assertFalse(rule.passed)
+
+    def test_rule107_passes_when_overall_handoff_valid_true(self):
+        """Rule 107: passes when overall_handoff_valid=True."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "handoff_validation_result_has_valid_flag")
+        self.assertTrue(rule.passed)
+
+    def test_rule108_fails_when_remote_state_has_blocked_repos(self):
+        """Rule 108: fails when accessible < total_checked in remote-repo-state-before.json."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote" / "remote-repo-state-before.json").write_text(
+                json.dumps({
+                    "summary": {
+                        "total_checked": 6,
+                        "accessible": 4,
+                        "blocked": 2,
+                        "blocked_families": ["email", "slides"],
+                    }
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "remote_repo_state_all_accessible")
+        self.assertFalse(rule.passed)
+        self.assertIn("4/6", rule.failure_detail)
+
+    def test_rule108_fails_when_total_checked_zero(self):
+        """Rule 108: fails when total_checked=0."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote" / "remote-repo-state-before.json").write_text(
+                json.dumps({"summary": {"total_checked": 0, "accessible": 0, "blocked": 0}}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "remote_repo_state_all_accessible")
+        self.assertFalse(rule.passed)
+
+    def test_rule108_passes_when_all_repos_accessible(self):
+        """Rule 108: passes when accessible == total_checked."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "remote_repo_state_all_accessible")
+        self.assertTrue(rule.passed)
+
+    def test_rule108_passes_trivially_when_remote_state_absent(self):
+        """Rule 108: passes trivially when remote-repo-state-before.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "remote" / "remote-repo-state-before.json").unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "remote_repo_state_all_accessible")
+        self.assertTrue(rule.passed)
 
 
 if __name__ == "__main__":

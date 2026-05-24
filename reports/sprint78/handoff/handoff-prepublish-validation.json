@@ -1,0 +1,107 @@
+{
+  "validation_type": "handoff_prepublish_validation",
+  "date": "2026-05-24",
+  "sprint": "sprint78",
+  "source": "release-status --promote-latest",
+  "total_examples": 42,
+  "total_families": 6,
+  "all_merged": true,
+  "all_published": true,
+  "all_post_merge_validated": false,
+  "families": {
+    "cells": {
+      "examples": 9,
+      "scope": "FAMILY_COMPLETE",
+      "version": "26.5.1",
+      "last_merge_sha": "d4946a7c5a3bd0dd3fcd6aee7fafa7dd2c5df4a5",
+      "last_merge_date": "2026-05-20",
+      "post_merge": "POST_MERGE_VERIFIED",
+      "local_readme_audit": "PASS",
+      "handoff_valid": true
+    },
+    "words": {
+      "examples": 8,
+      "scope": "PILOT_COMPLETE",
+      "version_source": "26.5.0",
+      "version_published": "26.4.0",
+      "last_merge_sha": "c22788ebda0514910c6daedfde0e29b435a72ff1",
+      "last_merge_date": "2026-05-14",
+      "post_merge": "POST_MERGE_VERIFIED",
+      "local_readme_audit": "PASS",
+      "version_drift": true,
+      "drift_documented": "sprint77-weekly-review/words-version-drift-current.json",
+      "handoff_valid": true
+    },
+    "pdf": {
+      "examples": 19,
+      "scope": "PILOT_COMPLETE",
+      "version": "26.4.0",
+      "last_merge_sha": "671547a1027cd84e31c7e4e6972e091b1fc2b3a9",
+      "last_merge_date": "2026-05-14",
+      "post_merge": "ALL_PASS",
+      "local_readme_audit": "PASS",
+      "handoff_valid": true
+    },
+    "diagram": {
+      "examples": 2,
+      "scope": "PILOT_COMPLETE",
+      "version": "26.4.0",
+      "last_merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
+      "last_merge_date": "2026-05-12",
+      "post_merge": "ALL_PASS",
+      "local_readme_audit": "PASS",
+      "handoff_valid": true
+    },
+    "email": {
+      "examples": 1,
+      "scope": "PILOT_COMPLETE",
+      "version": "26.4.0",
+      "last_merge_sha": "023ad66970d2b5745011f56c069e9d9fa2a22672",
+      "last_merge_date": "2026-05-14",
+      "post_merge": "NOT_RUN",
+      "local_readme_audit": "PASS",
+      "post_merge_gap": "ACKNOWLEDGED_SPRINT77",
+      "handoff_valid": true
+    },
+    "slides": {
+      "examples": 3,
+      "scope": "PILOT_COMPLETE",
+      "version": "26.5.0",
+      "last_merge_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076",
+      "last_merge_date": "2026-05-14",
+      "post_merge": "NOT_RUN",
+      "local_readme_audit": "PASS",
+      "post_merge_gap": "ACKNOWLEDGED_SPRINT77",
+      "handoff_valid": true
+    }
+  },
+  "readme_backfill": {
+    "cells": "SIMULATION_READY",
+    "words": "SIMULATION_READY",
+    "pdf": "PENDING",
+    "diagram": "PENDING",
+    "email": "PENDING",
+    "slides": "PENDING"
+  },
+  "blockers": [
+    {
+      "type": "APPROVAL_GATE",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET — README backfill PRs cannot be created",
+      "blocking": true
+    }
+  ],
+  "non_blocking_items": [
+    {
+      "type": "VERSION_DRIFT",
+      "family": "words",
+      "description": "source=26.5.0 vs published=26.4.0 — documented Sprint 77, repair requires new PR"
+    },
+    {
+      "type": "POST_MERGE_NOT_RUN",
+      "families": ["email", "slides"],
+      "description": "Post-merge validation not run for email and slides — acknowledged Sprint 77"
+    }
+  ],
+  "overall_handoff_valid": true,
+  "verdict": "HANDOFF_VALID_42_42_README_APPROVAL_BLOCKED"
+}

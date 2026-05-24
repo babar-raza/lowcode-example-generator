@@ -1,0 +1,868 @@
+{
+  "bundle_dir": "reports\\sprint78",
+  "sprint_id": "sprint78",
+  "total_rules": 107,
+  "passed": 52,
+  "failed": 55,
+  "warnings": 0,
+  "overall_valid": false,
+  "rules": [
+    {
+      "rule_id": "final_clean_proof_after_final_commit",
+      "description": "final-clean-proof.txt must exist without dirty indicators",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "git/final-clean-proof.txt exists with no dirty indicators",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "destination_42_42_authority_mapped",
+      "description": "Destination content audit must show 42/42 authority-mapped",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "no_present_no_authority",
+      "description": "No PRESENT_NO_AUTHORITY entries allowed",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "no_partial_without_partial_verdict",
+      "description": "PARTIAL entries must be acknowledged in final verdict",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "readme_audit_content_based",
+      "description": "README audit must be content-based",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme/example-readme-content-audit.json not found"
+    },
+    {
+      "rule_id": "readme_gate_implemented_and_tested",
+      "description": "README gate must be implemented, tested, and have source proof",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing evidence: ['readme-gate-implementation.md', 'readme-gate-test-results.txt', 'readme-gate-source-proof.patch']"
+    },
+    {
+      "rule_id": "evidence_validator_actually_ran",
+      "description": "Evidence validator must have actually run",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "validator-test-results.txt contains test output",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "todo_all_items_checked_or_carried",
+      "description": "todo.md must have no unchecked active items",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No unchecked [ ] items found in todo.md",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "zero_unknown_input_formats",
+      "description": "Zero unknown input formats",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "No io-authority matrix in this bundle (may be in prior sprint evidence)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "test_log_zero_failed",
+      "description": "Test log must exist and show 0 failed",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Test log exists with no failed tests",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "commands_log_complete",
+      "description": "commands.log must not be IN_PROGRESS",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "commands.log present and complete",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "bundle_min_files",
+      "description": "Bundle must contain at least 35 files",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Bundle has 40 files",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_clean_proof_nonzero_bytes",
+      "description": "final-clean-proof.txt must be nonzero bytes",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "final-clean-proof.txt is 808 bytes",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_clean_proof_has_git_header",
+      "description": "final-clean-proof.txt must contain git status header",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Git header found in final-clean-proof.txt: Sprint 78 Final Clean Proof\n============================\n[PLACEHOLDER \u2014 will be",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "readme_io_format_not_falsely_complete",
+      "description": "README audit must not falsely claim I/O documentation complete",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme/example-readme-content-audit.json not found"
+    },
+    {
+      "rule_id": "readme_gate_wired_in_pipeline",
+      "description": "README gate must be wired into publication flow",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme/readme-gate-flow-integration.md not found. Either provide source_root for direct scanning, or create flow integration evidence."
+    },
+    {
+      "rule_id": "evidence_validator_wired_in_pipeline",
+      "description": "EvidenceValidator must be wired into pipeline",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "pipeline-integration-proof.md exists and does not indicate deferred status",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "destination_programcs_input_not_all_null",
+      "description": "Destination Program.cs input classification must not be all-null",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination audit file found with input_format_in_programcs data"
+    },
+    {
+      "rule_id": "no_p1_items_with_complete_verdict",
+      "description": "No P1 open items while claiming COMPLETE verdict",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "process/next-work-register.md not found (no P1 items to check)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "required_files_nonzero_size",
+      "description": "Required evidence files must not be 0 bytes",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "4/4 required files present and nonzero",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "ecc_contract_computed_and_valid",
+      "description": "ECC must be run on the final bundle and result stored in evidence/evidence-contract-computed.json",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "evidence/evidence-contract-computed.json not found. Run EvidenceContractComputer.compute() AFTER all bundle files are committed and save the result to this path. Sprint 64 requirement: ECC must agree with EV at closure."
+    },
+    {
+      "rule_id": "content_audit_final_has_required_fields",
+      "description": "Content audit final must have required fields per record",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination/content-audit-final.json or content-audit-deep.json found"
+    },
+    {
+      "rule_id": "content_audit_count_not_contradictory",
+      "description": "Content audit count fields must not contradict each other",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No destination content audit file found"
+    },
+    {
+      "rule_id": "content_audit_all_records_ready",
+      "description": "Content audit final must show all 42 records READY",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "destination/content-audit-final.json not found (older sprint format)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "root_readme_artifacts_present_for_all_families",
+      "description": "Root README artifacts must exist for all 6 families",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "root-readme/per-family/ directory not found"
+    },
+    {
+      "rule_id": "special_case_placement_proof_present",
+      "description": "Special-case publication map must exist (placement proof)",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "special-cases/special-case-publication-map.json not found. Must prove destination path for pdf-pdfa-converter and pdf-text-extractor."
+    },
+    {
+      "rule_id": "version_policy_no_unresolved_drift",
+      "description": "Version policy must show 0 unresolved drift families",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "No version policy file found (not required for older sprints)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_verdict_no_publication_overclaim",
+      "description": "Final verdict must not overclaim publication without proof",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Verdict does not contain strong publication completion keywords",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "remote_proof_index_present_if_published",
+      "description": "Remote proof index must exist if publication is mentioned",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "final-verdict.md mentions publication/PR activity but publication/remote-proof-index.json is absent. S64-D1: publication evidence must be bundled."
+    },
+    {
+      "rule_id": "content_audit_readme_io_coverage",
+      "description": "Content audit must show >=40/42 README I/O coverage",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "destination/content-audit-final.json not found (older sprint format)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "revalidation_shows_prior_sprint_invalid",
+      "description": "Prior sprint revalidation must show overall_valid=false",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "No *revalidation*.json found (not required for older sprints)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "remote_proof_per_example_not_overclaimed",
+      "description": "Remote proof must not overclaim PR coverage",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-pr-proof-index.json not found. Sprint 65 had only publication/remote-proof-index.json which overclaimed PR coverage."
+    },
+    {
+      "rule_id": "remote_proof_has_content_hashes",
+      "description": "Remote proof must include per-example content hashes",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-example-inventory.json not found. Only PR-number proof is insufficient."
+    },
+    {
+      "rule_id": "remote_readme_io_audit_present",
+      "description": "Remote README I/O audit must be based on fetched content",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-readme-io-audit.json not found. Remote README I/O status was not independently verified."
+    },
+    {
+      "rule_id": "handoff_bundle_not_empty",
+      "description": "handoff/per-family/ must not be empty",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "handoff/per-family/ directory does not exist"
+    },
+    {
+      "rule_id": "content_audit_output_kind_not_blank",
+      "description": "Content audit output_kind must not be blank for any record",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "destination/content-audit-final.json not found (older sprint format)",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "publication_state_not_mixed",
+      "description": "Publication state must use separate fields",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "publication-truth-matrix-final.json has no records"
+    },
+    {
+      "rule_id": "remote_proof_not_workspace_only",
+      "description": "Remote proof must not rely solely on workspace/ files",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Neither remote/remote-pr-proof-index.json nor bundled remote proof found"
+    },
+    {
+      "rule_id": "root_readme_and_package_both_present",
+      "description": "Root README artifact presence requires package artifacts",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "root_readme_present=False, handoff_present=False",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "remote_readme_io_not_overclaimed",
+      "description": "Final verdict must not overclaim remote README I/O",
+      "severity": "WARNING",
+      "passed": true,
+      "evidence": "No remote README audit; no overclaim detected in verdict",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_all_examples_have_io_section",
+      "description": "All handoff READMEs must have I/O section",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "handoff/per-family/ directory not found"
+    },
+    {
+      "rule_id": "cardinality_audit_json_present",
+      "description": "root-readme/cardinality-audit.json must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "root-readme/cardinality-audit.json not found"
+    },
+    {
+      "rule_id": "root_readme_cardinality_annotated",
+      "description": "Root READMEs must have cardinality markers for merger/splitter",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "root-readme/per-family/ directory not found"
+    },
+    {
+      "rule_id": "pdf_version_decision_record_present",
+      "description": "version/pdf-version-decision.md must be present (S66-D2)",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "version/pdf-version-decision.md not found"
+    },
+    {
+      "rule_id": "version_truth_matrix_present",
+      "description": "version/version-truth-matrix.json must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "version/version-truth-matrix.json not found"
+    },
+    {
+      "rule_id": "no_cross_sprint_path_leakage",
+      "description": "Content audit must have no cross-sprint path leakage",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Neither content-audit-sprint67.json nor content-audit-final.json found"
+    },
+    {
+      "rule_id": "legacy_plans_reconciliation_present",
+      "description": "legacy-plan-reconciliation/reconciliation-index.md must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "legacy-plan-reconciliation/reconciliation-index.md not found"
+    },
+    {
+      "rule_id": "content_audit_sprint_specific_present",
+      "description": "Sprint-specific content audit must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "destination/content-audit-sprint78.json not found"
+    },
+    {
+      "rule_id": "handoff_index_per_family_complete",
+      "description": "All 6 family handoff-index.json files must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing handoff-index.json for: ['cells', 'words', 'pdf', 'diagram', 'email', 'slides']"
+    },
+    {
+      "rule_id": "readme_sync_state_present",
+      "description": "readme-sync/sync-state.json must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "readme-sync/sync-state.json not found"
+    },
+    {
+      "rule_id": "remote_truth_refresh_present",
+      "description": "remote/remote-proof-summary.md must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-proof-summary.md not found"
+    },
+    {
+      "rule_id": "pdf_root_readme_complete",
+      "description": "PDF root README must have >=19 example rows",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "root-readme/per-family/pdf-root-readme.md not found"
+    },
+    {
+      "rule_id": "splitter_cardinality_reconciled",
+      "description": "Splitter cardinality reconciliation document must be complete",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No splitter-resolution.md found in legacy-reconciliation/ or legacy-plan-reconciliation/. Sprint 67 defect S67-D2."
+    },
+    {
+      "rule_id": "canonical_content_audit_no_stale_pdf_version",
+      "description": "Sprint content audit must have no stale PDF 26.4.0 version records",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "destination/ directory not found"
+    },
+    {
+      "rule_id": "pdf_version_proof_chain_present",
+      "description": "version/pdf-version-proof-chain.md must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "version/pdf-version-proof-chain.md not found. Sprint 67 defect S67-D4."
+    },
+    {
+      "rule_id": "all_family_cardinality_display_validated",
+      "description": "Words root README must have cardinality markers for multi-I/O types",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "root-readme/per-family/words-root-readme.md not found"
+    },
+    {
+      "rule_id": "handoff_index_version_matches_dpp",
+      "description": "Handoff-index nuget_version must match Directory.Packages.props for all families",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All family handoff-index versions match Directory.Packages.props",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "only_one_canonical_final_audit",
+      "description": "destination/content-audit-final.json must exist as the one canonical audit",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "destination/content-audit-final.json not found"
+    },
+    {
+      "rule_id": "publication_truth_matrix_no_stale_paths",
+      "description": "publication-truth-matrix-final.json must exist without stale sprint paths",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "publication-truth-matrix-final.json contains no stale sprint paths",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "publication_truth_matrix_no_mixed_state",
+      "description": "publication-truth-matrix-final.json must not mix README I/O states",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No mixed readme_io_post_merge_verified / remote_example_readme_has_io_docs state",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "root_readme_indexed_in_handoff",
+      "description": "All 6 family handoff-indexes must include root_readme field",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing root_readme: cells: handoff-index.json not found; words: handoff-index.json not found; pdf: handoff-index.json not found; diagram: handoff-index.json not found; email: handoff-index.json not found; slides: handoff-index.json not found"
+    },
+    {
+      "rule_id": "exact_legacy_reconciliation_present",
+      "description": "Consolidated exact legacy reconciliation must exist",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing: legacy-reconciliation/exact-legacy-plan-reconciliation-final.md; legacy-reconciliation/exact-items-final.json"
+    },
+    {
+      "rule_id": "final_verdict_is_precise",
+      "description": "final-verdict.md must use an allowed precise verdict",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "final-verdict.md contains an allowed precise verdict",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_verdict_not_complete_while_blocked",
+      "description": "final-verdict.md must not claim complete while publication is blocked",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Verdict does not overclaim publication while blocked",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_index_has_root_readme_field",
+      "description": "handoff/publication-handoff-index.json must exist with root_readme entries",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "handoff/publication-handoff-index.json not found"
+    },
+    {
+      "rule_id": "version_consistency_final_present",
+      "description": "version/version-consistency-final.json must exist showing all_consistent=true",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "version/version-consistency-final.json not found"
+    },
+    {
+      "rule_id": "handoff_root_readme_in_sprint_folder",
+      "description": "Handoff-index root_readme.source_path must be inside current sprint handoff folder",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All 6 family handoff-index root_readme.source_path values are inside reports/sprint78/handoff/",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_root_readme_file_present",
+      "description": "Root README file must physically exist at source_path for all families",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All 6 family root README files are physically present at their source_path",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_root_readme_hash_matches",
+      "description": "root_readme.sha256 in handoff-index must match physical file",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All 6 family root README sha256 hashes match their physical files",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "publication_handoff_root_readme_hash_matches",
+      "description": "publication-handoff-index.json must exist with correct root README hashes",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "handoff/publication-handoff-index.json not found"
+    },
+    {
+      "rule_id": "legacy_simplified_index_superseded",
+      "description": "exact-legacy-plan-reconciliation-final.md must exist as current authority",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "legacy-reconciliation/exact-legacy-plan-reconciliation-final.md not found"
+    },
+    {
+      "rule_id": "content_audit_final_no_stale_paths",
+      "description": "destination/content-audit-final.json must exist with no stale sprint paths",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "destination/content-audit-final.json not found"
+    },
+    {
+      "rule_id": "publication_matrix_no_stale_paths",
+      "description": "publication/publication-truth-matrix-final.json contains no stale sprint paths",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "publication/publication-truth-matrix-final.json scanned \u2014 no stale sprint paths found",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_index_no_stale_paths",
+      "description": "handoff/per-family/ must exist",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "handoff/per-family/ not found"
+    },
+    {
+      "rule_id": "remote_vs_handoff_no_stale_paths",
+      "description": "remote/remote-vs-handoff-final.json must exist with no stale sprint paths",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-vs-handoff-final.json not found"
+    },
+    {
+      "rule_id": "content_audit_final_files_exist",
+      "description": "destination/content-audit-final.json must exist",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "destination/content-audit-final.json not found"
+    },
+    {
+      "rule_id": "publication_matrix_files_exist",
+      "description": "All handoff_package_path references in publication-truth-matrix-final.json exist physically",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All 0 handoff_package_path(s) verified to exist",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "remote_proof_consistency_audit_present",
+      "description": "remote/remote-proof-consistency-audit.json must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-proof-consistency-audit.json not found"
+    },
+    {
+      "rule_id": "remote_proof_consistency_audit_consistent",
+      "description": "remote/remote-proof-consistency-audit.json must exist with consistent=true",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-proof-consistency-audit.json not found"
+    },
+    {
+      "rule_id": "remote_proof_summary_states_zero_io",
+      "description": "remote/remote-proof-summary.md must exist and state 0/42 README I/O",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-proof-summary.md not found"
+    },
+    {
+      "rule_id": "remote_proof_summary_not_contradicted",
+      "description": "Both remote-proof-summary.md and remote-readme-io-audit-final.json must exist",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "Missing: remote-proof-summary.md"
+    },
+    {
+      "rule_id": "remote_proof_summary_superseded_archived",
+      "description": "history/remote-proof-summary-superseded.md must be present",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "history/remote-proof-summary-superseded.md not found \u2014 incorrect Sprint 68 artifact not archived"
+    },
+    {
+      "rule_id": "remote_readme_io_audit_count_consistent",
+      "description": "remote/remote-readme-io-audit-final.json must exist",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-readme-io-audit-final.json not found"
+    },
+    {
+      "rule_id": "remote_vs_handoff_uses_current_sprint",
+      "description": "remote/remote-vs-handoff-final.json must exist with current sprint paths",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "remote/remote-vs-handoff-final.json not found"
+    },
+    {
+      "rule_id": "weekly_review_claim_matrix_present",
+      "description": "Weekly review claim matrix present and contains classification labels",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "02-weekly-review-claim-vs-proof-matrix.md found with required classifications",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "pdf_publication_truth_reconciled",
+      "description": "PDF publication truth reconciled with current remote evidence",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "pdf-pr-reconciliation.json present, claim_verdict=VERIFIED_HISTORICAL_BUT_SUPERSEDED",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "formimporter_taskcard_durable",
+      "description": "FormImporter taskcard is durable with retest trigger",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "formimporter-repro-inventory.json present, trigger=Aspose.PDF NuGet version > 26.5.0",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "words_version_drift_documented",
+      "description": "Words version drift documented with drift classification",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "words-version-drift-current.json present, drift=REMOTE_DRIFT",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "email_slides_runtime_validated",
+      "description": "Post-merge runtime validation matrix present with records",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "post-merge-validation-matrix.json present, 4 records",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "dirty_tree_classified",
+      "description": "Dirty tree classification document present and substantive",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "git/dirty-file-classification.md found with content",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "sprint27_governance_classified",
+      "description": "Sprint 27 governance classification document present with required labels",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "sprint27-strict-contract-revalidation.md found with GOVERNANCE_EXCEPTION_REQUIRED and HISTORICAL_NON_COMPLIANT",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "weekly_review_verdict_not_complete_while_unclassified",
+      "description": "Weekly review matrix present \u2014 verdict COMPLETE is allowed",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "02-weekly-review-claim-vs-proof-matrix.md present; weekly review items classified",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "runtime_matrix_output_confirmed_for_validated",
+      "description": "All post_merge_validated=true records also have output_confirmed=true",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "Checked 4 records \u2014 all validated records confirmed output",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "runtime_matrix_no_graceful_exit_labelled_validated",
+      "description": "No post-merge record combines post_merge_validated=true with NO_INPUT_FIXTURE",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All validated records use real end-to-end execution",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "dirty_classification_must_match_after_snapshot",
+      "description": "dirty-state-after.txt shows no src/tests modifications \u2014 consistent",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No src/ or tests/ files shown as modified in dirty-state-after.txt",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_clean_proof_contains_commit_sha",
+      "description": "final-clean-proof.txt must contain a commit SHA",
+      "severity": "FAILURE",
+      "passed": false,
+      "evidence": "",
+      "failure_detail": "No commit SHA (7+ hex chars) found in final-clean-proof.txt. Must include the commit hash so the final state can be independently verified."
+    },
+    {
+      "rule_id": "final_clean_proof_documents_remaining_dirty",
+      "description": "final-clean-proof.txt documents workspace/verification/latest/ governance exception",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "proof mentions workspace/verification/latest or governance exception",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "weekly_review_no_repaired_while_output_unconfirmed",
+      "description": "All post-merge examples have output_confirmed=true \u2014 REPAIRED claim valid",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No unconfirmed output records",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "dirty_after_no_uncommitted_source_test",
+      "description": "dirty-state-after.txt shows no uncommitted src/ or tests/ files",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No src/ or tests/ modifications in dirty-state-after.txt",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_verdict_workspace_exception_explicit",
+      "description": "Final verdict explicitly acknowledges workspace/verification/latest/ governance exception",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "verdict contains workspace exception qualifier",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "commands_log_no_pending",
+      "description": "commands.log must not contain PENDING entries",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "commands.log present with no PENDING entries",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "final_clean_proof_has_raw_git_lines",
+      "description": "final-clean-proof.txt must contain raw git status output",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "final-clean-proof.txt contains embedded raw git status output",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "dirty_state_untracked_acknowledged",
+      "description": "dirty-state-after.txt must show no untracked files after final commit",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "No untracked files in dirty-state-after.txt \u2014 clean state confirmed",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "validation_authority_unambiguous",
+      "description": "Validation result files must not be ambiguously false",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All validation result files in evidence/ are unambiguous",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "publication_truth_no_stale_remote_claimed",
+      "description": "publication truth matrix must not claim REMOTE_STALE when all_published=true",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "all_published=False or all_merged=False \u2014 rule not applicable",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "handoff_validation_result_has_valid_flag",
+      "description": "handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "overall_handoff_valid=true confirmed",
+      "failure_detail": ""
+    },
+    {
+      "rule_id": "remote_repo_state_all_accessible",
+      "description": "remote-repo-state-before.json must exist and show all repos accessible",
+      "severity": "FAILURE",
+      "passed": true,
+      "evidence": "All 6/6 repos accessible",
+      "failure_detail": ""
+    }
+  ],
+  "bundle_type": "FINISH_LINE_SPRINT"
+}

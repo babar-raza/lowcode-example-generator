@@ -1,0 +1,56 @@
+{
+  "check_type": "final_consistency_check",
+  "date": "2026-05-24",
+  "sprint": "sprint78",
+  "checks": [
+    {
+      "check": "commands_log_no_pending",
+      "status": "PASS",
+      "detail": "No Exit: PENDING entries in commands.log"
+    },
+    {
+      "check": "publication_truth_vs_release_status",
+      "status": "PASS",
+      "detail": "publication-truth-matrix-final.json matches release-status.json: 42 examples, all_merged=true"
+    },
+    {
+      "check": "handoff_count_vs_publication_count",
+      "status": "PASS",
+      "detail": "handoff-prepublish-validation.json: 42 examples = publication-truth-matrix-final.json: 42 examples"
+    },
+    {
+      "check": "remote_repo_access_vs_handoff",
+      "status": "PASS",
+      "detail": "6/6 repos accessible (remote-repo-state-before.json) matches 6 families in handoff"
+    },
+    {
+      "check": "verdict_consistency",
+      "status": "PASS",
+      "detail": "All sprint78 files agree: verdict = LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"
+    },
+    {
+      "check": "approval_gate_classification",
+      "status": "PASS",
+      "detail": "LIVE_PUBLISH_APPROVAL=NOT_SET, MERGE_PR_APPROVAL=NOT_SET: phases 5/6/7 skipped consistently"
+    },
+    {
+      "check": "sprint77_baseline_inconsistency_normalized",
+      "status": "PASS",
+      "detail": "test-count-authority.md: 3064. ecc-count-authority.md: 32/32. No remaining ambiguity."
+    },
+    {
+      "check": "todo_no_unchecked_items",
+      "status": "PASS",
+      "detail": "All todo.md items checked [x] (verified after Phase 12 completion)"
+    },
+    {
+      "check": "self_repair_applied",
+      "status": "PASS",
+      "detail": "S78-R1 applied: commands.log Phase 8 updated to match actual publication truth"
+    }
+  ],
+  "total_checks": 9,
+  "passed": 9,
+  "failed": 0,
+  "overall_valid": true
+}

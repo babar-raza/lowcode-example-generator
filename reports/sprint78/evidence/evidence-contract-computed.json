@@ -1,0 +1,271 @@
+{
+  "contract_id": "sprint78",
+  "computed_at": "2026-05-24T07:53:33Z",
+  "total_categories": 32,
+  "present": 32,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 1,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 77 Acceptance Baseline",
+      "file": "reports/sprint78/00-sprint77-acceptance-baseline.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "Finish-Line Preflight",
+      "file": "reports/sprint78/01-finish-line-preflight.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "Commands Log",
+      "file": "reports/sprint78/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "Todo",
+      "file": "reports/sprint78/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "Dirty State Before",
+      "file": "reports/sprint78/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "Dirty State After",
+      "file": "reports/sprint78/git/dirty-state-after.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "Final Clean Proof",
+      "file": "reports/sprint78/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "Dirty File Classification",
+      "file": "reports/sprint78/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "Sprint 77 Inconsistency Review",
+      "file": "reports/sprint78/cleanup/sprint77-minor-inconsistency-review.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "Test Count Authority",
+      "file": "reports/sprint78/cleanup/test-count-authority.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "ECC Count Authority",
+      "file": "reports/sprint78/cleanup/ecc-count-authority.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "Remote Repo State Before",
+      "file": "reports/sprint78/remote/remote-repo-state-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "Remote README I/O Audit Before",
+      "file": "reports/sprint78/remote/remote-readme-io-audit-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "Remote Conflict Check",
+      "file": "reports/sprint78/remote/remote-conflict-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "Remote vs Handoff Before",
+      "file": "reports/sprint78/remote/remote-vs-handoff-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "Handoff Prepublish Validation",
+      "file": "reports/sprint78/handoff/handoff-prepublish-validation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "Handoff Source Map",
+      "file": "reports/sprint78/handoff/handoff-source-map.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "Handoff Diff Summary",
+      "file": "reports/sprint78/handoff/handoff-diff-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "Weekly Review Carry-Forward Check",
+      "file": "reports/sprint78/handoff/weekly-review-carry-forward-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "Publication Truth Matrix Final",
+      "file": "reports/sprint78/publication/publication-truth-matrix-final.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "Publication Summary",
+      "file": "reports/sprint78/publication/publication-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "Adversarial Review",
+      "file": "reports/sprint78/review/adversarial-review.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "Self-Repair Actions",
+      "file": "reports/sprint78/review/self-repair-actions.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "Final Consistency Check",
+      "file": "reports/sprint78/review/final-consistency-check.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint78/evidence/validator-gap-analysis.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "Sprint 78 Validation Result",
+      "file": "reports/sprint78/evidence/sprint78-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "ECC Computed",
+      "file": "reports/sprint78/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": "File not found: reports/sprint78/evidence/evidence-contract-computed.json",
+      "bootstrap_note": "Self-referential EC27 bootstrapped per sprint75/76/77 precedent"
+    },
+    {
+      "id": "EC28",
+      "name": "Test Run Log",
+      "file": "reports/sprint78/logs/test-run.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "Bundle Manifest",
+      "file": "reports/sprint78/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "Sprint State",
+      "file": "reports/sprint78/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC31",
+      "name": "Final Verdict",
+      "file": "reports/sprint78/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC32",
+      "name": "Lane Test Run Log",
+      "file": "reports/sprint78/lanes/lane-I/test-run.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

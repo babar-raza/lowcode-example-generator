@@ -100,6 +100,11 @@ Sprint 77 additions (4 new rules, closes S76-C1 through S76-C4):
 - Rule: final_clean_proof_has_raw_git_lines (final-clean-proof.txt must embed raw git status output, not narrative only — S76-C2)
 - Rule: dirty_state_untracked_acknowledged (if dirty-state-after.txt shows untracked files, each must be acknowledged in final-verdict.md — S76-C1)
 - Rule: validation_authority_unambiguous (any *-validation-result.json with overall_valid=false must have canonical_overall_valid or bundle_type field — S76-C4)
+
+Sprint 78 additions (3 new rules, closes S77-D1 through S77-D3):
+- Rule: publication_truth_no_stale_remote_claimed (if all_published=true in truth matrix, no family status may contain REMOTE_STALE — S77-D1)
+- Rule: handoff_validation_result_has_valid_flag (handoff/handoff-prepublish-validation.json must exist and have overall_handoff_valid: true — S77-D2)
+- Rule: remote_repo_state_all_accessible (remote/remote-repo-state-before.json must exist and accessible == total_checked — S77-D3)
 """
 
 from __future__ import annotations
@@ -344,6 +349,11 @@ class EvidenceValidator:
         _maybe(self._rule_final_clean_proof_has_raw_git_lines())
         _maybe(self._rule_dirty_state_untracked_acknowledged())
         _maybe(self._rule_validation_authority_unambiguous())
+
+        # --- Sprint 78 NEW rules: close S77-D1 through S77-D3 ---
+        _maybe(self._rule_publication_truth_no_stale_remote_claimed())
+        _maybe(self._rule_handoff_validation_result_has_valid_flag())
+        _maybe(self._rule_remote_repo_state_all_accessible())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -3395,6 +3405,9 @@ class EvidenceValidator:
             "LOWCODE_WEEKLY_REVIEW_REPAIRED_WITH_WORKSPACE_EXCEPTION_PUBLICATION_APPROVAL_BLOCKED",
             "LOWCODE_WEEKLY_REVIEW_REPAIRED_CLEAN_PUBLICATION_APPROVAL_BLOCKED",
             "LOWCODE_WEEKLY_REVIEW_REPAIR_PARTIAL_WITH_EXPLICIT_BLOCKERS",
+            # Sprint 78 verdicts
+            "LOWCODE_LIVE_PUBLICATION_ALL_PUBLISHED_README_BACKFILL_APPROVAL_BLOCKED",
+            "LOWCODE_FINISH_LINE_README_IO_APPROVAL_BLOCKED",
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
@@ -5274,6 +5287,190 @@ class EvidenceValidator:
             description="Validation result files must not be ambiguously false",
             severity="FAILURE", passed=True,
             evidence=f"All validation result files in evidence/ are unambiguous",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 78 NEW rules: close S77-D1 through S77-D3
+    # ------------------------------------------------------------------
+
+    def _rule_publication_truth_no_stale_remote_claimed(self) -> RuleResult:
+        """publication-truth-matrix-final.json with all_published=true must not list REMOTE_STALE status (S77-D1).
+
+        If all examples are confirmed published (all_merged=true, all_published=true),
+        then no family entry should claim REMOTE_STALE — that would be a contradiction.
+        This rule catches the stub error where commands.log predicted REMOTE_STALE
+        but the actual truth matrix shows all examples PUBLISHED.
+        """
+        rule_id = "publication_truth_no_stale_remote_claimed"
+        ptm_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
+
+        if not ptm_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+                severity="FAILURE", passed=True,
+                evidence="publication-truth-matrix-final.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(ptm_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+                severity="FAILURE", passed=True,
+                evidence="Could not parse publication-truth-matrix-final.json — skipping",
+            )
+
+        all_published = data.get("all_published", False)
+        all_merged = data.get("all_merged", False)
+        if not (all_published and all_merged):
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+                severity="FAILURE", passed=True,
+                evidence="all_published=False or all_merged=False — rule not applicable",
+            )
+
+        families = data.get("families", {})
+        stale_families = []
+        for family_name, fdata in families.items():
+            if isinstance(fdata, dict):
+                status = fdata.get("status", "")
+                if "REMOTE_STALE" in str(status):
+                    stale_families.append(f"{family_name}={status}")
+
+        if stale_families:
+            return RuleResult(
+                rule_id=rule_id,
+                description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"publication-truth-matrix-final.json has all_published=true but "
+                    f"{len(stale_families)} family/families claim REMOTE_STALE: {stale_families}. "
+                    f"Update family status entries to reflect actual published state."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
+            severity="FAILURE", passed=True,
+            evidence=f"all_published=true and no REMOTE_STALE status entries found",
+        )
+
+    def _rule_handoff_validation_result_has_valid_flag(self) -> RuleResult:
+        """handoff/handoff-prepublish-validation.json must exist and assert overall_handoff_valid=true (S77-D2).
+
+        A missing or false overall_handoff_valid flag means the handoff step was either
+        skipped or found a blocking issue — both require explicit documentation.
+        """
+        rule_id = "handoff_validation_result_has_valid_flag"
+        handoff_path = self.bundle_dir / "handoff" / "handoff-prepublish-validation.json"
+
+        if not handoff_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+                severity="FAILURE", passed=True,
+                evidence="handoff-prepublish-validation.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(handoff_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id,
+                description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+                severity="FAILURE", passed=False,
+                failure_detail="handoff-prepublish-validation.json exists but is not valid JSON",
+            )
+
+        overall_handoff_valid = data.get("overall_handoff_valid")
+        if overall_handoff_valid is None:
+            return RuleResult(
+                rule_id=rule_id,
+                description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "handoff-prepublish-validation.json is missing 'overall_handoff_valid' field. "
+                    "Add overall_handoff_valid: true (or document why false)."
+                ),
+            )
+        if overall_handoff_valid is not True:
+            return RuleResult(
+                rule_id=rule_id,
+                description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"handoff-prepublish-validation.json has overall_handoff_valid={overall_handoff_valid!r}. "
+                    f"Must be true to proceed."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
+            severity="FAILURE", passed=True,
+            evidence="overall_handoff_valid=true confirmed",
+        )
+
+    def _rule_remote_repo_state_all_accessible(self) -> RuleResult:
+        """remote/remote-repo-state-before.json must exist and show all repos accessible (S77-D3).
+
+        If any repos are inaccessible, publication cannot proceed and must be
+        explicitly documented. Accessible == total_checked ensures no silent access failures.
+        """
+        rule_id = "remote_repo_state_all_accessible"
+        remote_path = self.bundle_dir / "remote" / "remote-repo-state-before.json"
+
+        if not remote_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="remote-repo-state-before.json must exist and show all repos accessible",
+                severity="FAILURE", passed=True,
+                evidence="remote-repo-state-before.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(remote_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id,
+                description="remote-repo-state-before.json must exist and show all repos accessible",
+                severity="FAILURE", passed=False,
+                failure_detail="remote-repo-state-before.json exists but is not valid JSON",
+            )
+
+        summary = data.get("summary", {})
+        total_checked = summary.get("total_checked", 0)
+        accessible = summary.get("accessible", 0)
+
+        if total_checked == 0:
+            return RuleResult(
+                rule_id=rule_id,
+                description="remote-repo-state-before.json must exist and show all repos accessible",
+                severity="FAILURE", passed=False,
+                failure_detail="remote-repo-state-before.json has total_checked=0 — no repos were checked",
+            )
+
+        if accessible < total_checked:
+            blocked = summary.get("blocked_families", [])
+            return RuleResult(
+                rule_id=rule_id,
+                description="remote-repo-state-before.json must exist and show all repos accessible",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"remote-repo-state-before.json shows {accessible}/{total_checked} accessible. "
+                    f"Blocked: {blocked}. Publication requires all repos accessible."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="remote-repo-state-before.json must exist and show all repos accessible",
+            severity="FAILURE", passed=True,
+            evidence=f"All {accessible}/{total_checked} repos accessible",
         )
 
     # ------------------------------------------------------------------

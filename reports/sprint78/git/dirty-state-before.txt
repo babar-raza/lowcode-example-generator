@@ -1,0 +1,32 @@
+Sprint 78 — Dirty State Before
+==============================
+Date: 2026-05-24
+Command: git status --short
+
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? reports/sprint78/
+
+---
+git diff --stat:
+ workspace/verification/latest/cells-readme-backfill-simulation.json |   4 +-
+ workspace/verification/latest/cells-root-readme-audit.json          |   2 +-
+ workspace/verification/latest/cells-root-readme-render-result.json  |   2 +-
+ workspace/verification/latest/release-status.json                   | 119 +++++++++++++++++++--
+ workspace/verification/latest/words-readme-backfill-simulation.json |   4 +-
+ workspace/verification/latest/words-root-readme-audit.json          |   2 +-
+ workspace/verification/latest/words-root-readme-render-result.json  |   2 +-
+ 7 files changed, 121 insertions(+), 14 deletions(-)
+
+---
+git log --oneline -5:
+9138e41 feat(sprint77): capture final-clean-proof.txt — SHA d69ffdc confirmed, ECC 32/32 closure_valid
+d69ffdc feat(sprint77): EV 105/105, ECC 32/32, 3064 tests — S76 evidence repair, 4 new EV rules, WORKSPACE_EXCEPTION
+6a4f1f9 feat(sprint76): capture final-clean-proof.txt — SHA 47c584d confirmed, ECC 31/31 closure_valid
+47c584d feat(sprint76): EV 101/101, ECC 31/31, 3052 tests — S75 closure repair, slides-compress real runtime, dirty-state proof
+278c528 feat(sprint75): capture final-clean-proof.txt — clean state confirmed

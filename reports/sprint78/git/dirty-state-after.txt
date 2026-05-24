@@ -1,0 +1,12 @@
+Sprint 78 — Dirty State After Commit
+======================================
+Date: 2026-05-24
+[PLACEHOLDER — will be updated post-commit with actual SHA]
+
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json

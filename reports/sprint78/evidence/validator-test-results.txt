@@ -1,0 +1,42 @@
+Sprint 77 Evidence Validator Test Results
+==========================================
+Date: 2026-05-24
+Sprint: 77
+
+Command: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -v --tb=short
+Exit: 0
+
+Summary
+-------
+123 passed in 84.87s (0:01:24)
+0 failed
+0 errors
+
+Sprint 77 New Tests (TestSprint77EvidenceConsistencyRules)
+----------------------------------------------------------
+PASSED  test_rule102_fails_when_commands_log_has_pending
+PASSED  test_rule102_passes_when_no_pending
+PASSED  test_rule103_fails_when_proof_is_narrative_only
+PASSED  test_rule103_passes_with_nothing_to_commit
+PASSED  test_rule103_passes_with_raw_status_lines
+PASSED  test_rule104_fails_when_untracked_short_format
+PASSED  test_rule104_fails_when_untracked_verbose_format
+PASSED  test_rule104_passes_when_no_untracked
+PASSED  test_rule105_fails_when_validation_result_ambiguous
+PASSED  test_rule105_passes_when_canonical_overall_valid_present
+PASSED  test_rule105_passes_when_repair_bundle_type_present
+PASSED  test_sprint76_bundle_fails_sprint77_rules
+
+Sprint 76 Revalidation Confirmation
+-------------------------------------
+test_sprint76_bundle_fails_sprint77_rules: PASSED
+  Sprint 76 bundle fails all 4 new Sprint 77 rules:
+  - commands_log_no_pending: FAIL (Exit: PENDING in commands.log)
+  - final_clean_proof_has_raw_git_lines: FAIL (narrative-only proof)
+  - dirty_state_untracked_acknowledged: FAIL (output.pptx untracked)
+  - validation_authority_unambiguous: FAIL (sprint76-bundle-validation-result.json)
+
+Rule Count Assertions
+---------------------
+validate() returns 105 total rules (was 101 before sprint77)
+validate_for_storage() returns 104 total rules (was 100 before sprint77)

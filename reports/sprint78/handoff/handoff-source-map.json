@@ -1,0 +1,15 @@
+{
+  "map_type": "handoff_source_map",
+  "date": "2026-05-24",
+  "sprint": "sprint78",
+  "entries": [
+    {"family": "cells", "source": "workspace/pr-dry-run/cells-controlled-pilot/", "examples": 9, "readme_bytes": 14831, "last_generation_sprint": "sprint74"},
+    {"family": "words", "source": "workspace/pr-dry-run/words-controlled-pilot/", "examples": 8, "readme_bytes": 17901, "last_generation_sprint": "sprint74"},
+    {"family": "pdf", "source": "workspace/pr-dry-run/pdf-controlled-pilot/", "examples": 19, "readme_bytes": null, "last_generation_sprint": "sprint70"},
+    {"family": "diagram", "source": "workspace/pr-dry-run/diagram-controlled-pilot/", "examples": 2, "readme_bytes": null, "last_generation_sprint": "sprint64"},
+    {"family": "email", "source": "workspace/pr-dry-run/email-controlled-pilot/", "examples": 1, "readme_bytes": null, "last_generation_sprint": "sprint68"},
+    {"family": "slides", "source": "workspace/pr-dry-run/slides-controlled-pilot/", "examples": 3, "readme_bytes": null, "last_generation_sprint": "sprint68"}
+  ],
+  "total_examples": 42,
+  "total_families": 6
+}

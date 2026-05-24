@@ -2,7 +2,7 @@ Sprint 84 -- Final Clean Proof
 ================================
 Date: 2026-05-24
 Branch: main
-HEAD: 1844c49feat(sprint84): EV 119/119, ECC 59/59, 171 tests — PR batching + root README governance, publication approval blocked
+HEAD: 71ff43fc6e2538404872704dae7475d2fbf28b56
 
 On branch main
  M workspace/verification/latest/cells-readme-backfill-simulation.json

@@ -1,0 +1,18 @@
+Sprint 82 -- Git State Before
+==============================
+Date: 2026-05-24
+HEAD: a8a5563 feat(sprint81): capture final-clean-proof.txt — clean state confirmed
+
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/family-repo-access-resolution.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? reports/sprint82/
+
+---
+All dirty files are workspace/verification/latest/ (GENERATED_WORKSPACE_STATE) plus new sprint82/ directory.
+No source or test files modified.

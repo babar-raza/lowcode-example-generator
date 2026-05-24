@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint82",
+  "phase": "Phase 6 -- PR Merge",
+  "status": "SKIP",
+  "reason": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=NOT_SET",
+  "merges": [],
+  "merges_count": 0,
+  "note": "No merges performed. Set PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR to enable."
+}

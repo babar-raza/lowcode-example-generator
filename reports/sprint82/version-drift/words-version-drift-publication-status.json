@@ -1,0 +1,10 @@
+{
+  "sprint_id": "sprint82",
+  "family": "words",
+  "drift": false,
+  "drift_type": "NONE",
+  "remote_version": "26.5.0",
+  "handoff_version": "26.5.0",
+  "decision": "WORDS_VERSION_DRIFT_RESOLVED",
+  "note": "Remote and handoff both at 26.5.0. No version bump needed. Carry-forward from Sprint 81."
+}

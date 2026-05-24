@@ -1,0 +1,175 @@
+{
+  "cells": {
+    "org": "aspose-cells-net",
+    "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-20T12:26:46Z main",
+    "open_prs": [
+      {
+        "body_head": "## README Backfill \u00e2\u20ac\u201d Aspose.Cells for .NET LowCode Examples\n\nThis PR adds the pipeline-generated `README.md` to the repo",
+        "head": "plugin-examples/cells/readme/20260519-143139",
+        "number": 5,
+        "title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples"
+      }
+    ],
+    "sprint_branches": [
+      "plugin-examples/cells/readme/20260504-060819",
+      "plugin-examples/cells/readme/20260504-092305",
+      "plugin-examples/cells/readme/20260505-063855",
+      "plugin-examples/cells/readme/20260519-143139",
+      "plugin-examples/cells/20260502-153727",
+      "plugin-examples/cells/20260520-115104"
+    ],
+    "examples": [
+      "html-converter",
+      "image-converter",
+      "json-converter",
+      "pdf-converter",
+      "spreadsheet-converter",
+      "spreadsheet-locker",
+      "spreadsheet-merger",
+      "spreadsheet-splitter",
+      "text-converter"
+    ],
+    "root_readme_sha": "55e18fbfa2c33f310316b96ac593a6f70940b12f",
+    "dir_packages_version": "26.5.1"
+  },
+  "words": {
+    "org": "aspose-words-net",
+    "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T14:32:00Z main",
+    "open_prs": [
+      {
+        "body_head": "## README Backfill \u00e2\u20ac\u201d Aspose.Words for .NET LowCode Examples\n\nThis PR adds the pipeline-generated `README.md` to the repo",
+        "head": "plugin-examples/words/readme/20260519-143151",
+        "number": 7,
+        "title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples"
+      }
+    ],
+    "sprint_branches": [
+      "plugin-examples/words/readme/20260504-060834",
+      "plugin-examples/words/readme/20260504-092317",
+      "plugin-examples/words/readme/20260505-063914",
+      "plugin-examples/words/readme/20260519-143151",
+      "plugin-examples/words/20260502-135703",
+      "plugin-examples/words/20260513-152910",
+      "plugin-examples/words/20260514-060006"
+    ],
+    "examples": [
+      "comparer",
+      "converter",
+      "mail-merger",
+      "merger",
+      "replacer",
+      "report-builder",
+      "splitter",
+      "watermarker"
+    ],
+    "root_readme_sha": "cd8fc5289b35111833a953db9a6c8824a93a11b8",
+    "dir_packages_version": "26.5.0"
+  },
+  "pdf": {
+    "org": "aspose-pdf-net",
+    "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T05:52:52Z main",
+    "open_prs": [],
+    "sprint_branches": [
+      "plugin-examples/pdf/20260506-083146",
+      "plugin-examples/pdf/20260513-152958",
+      "plugin-examples/pdf/20260514-055248",
+      "plugin-examples/pdf/20260514-055423",
+      "plugin-examples/pdf/20260518-150226",
+      "plugin-examples/pdf/20260518-150254",
+      "plugin-examples/pdf/20260518-150331",
+      "plugin-examples/pdf/20260518-150408",
+      "plugin-examples/pdf/20260518-150429",
+      "plugin-examples/pdf/20260518-150454",
+      "plugin-examples/pdf/20260519-054414",
+      "plugin-examples/pdf/20260519-054439",
+      "plugin-examples/pdf/20260519-054510",
+      "plugin-examples/pdf/20260519-054539",
+      "plugin-examples/pdf/20260519-054558",
+      "plugin-examples/pdf/20260519-054621",
+      "plugin-examples/pdf/20260519-054957",
+      "plugin-examples/pdf/20260519-055116",
+      "plugin-examples/pdf/20260519-055147",
+      "plugin-examples/pdf/20260519-055207",
+      "plugin-examples/pdf/20260519-055230"
+    ],
+    "examples": [
+      "doc-converter",
+      "form-editor",
+      "form-exporter",
+      "form-flattener",
+      "html",
+      "image-extractor",
+      "jpeg",
+      "merger",
+      "optimizer",
+      "pdfa-converter",
+      "png",
+      "security",
+      "signature",
+      "splitter",
+      "table-generator",
+      "text-extractor",
+      "tiff",
+      "toc-generator",
+      "xls-converter"
+    ],
+    "root_readme_sha": "74796d76acf8090ac0bc560790bab04a57adf926",
+    "dir_packages_version": "26.5.0"
+  },
+  "diagram": {
+    "org": "aspose-diagram-net",
+    "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T14:32:11Z main",
+    "open_prs": [
+      {
+        "body_head": "## README Backfill \u00e2\u20ac\u201d Aspose.Diagram for .NET LowCode Examples\n\nThis PR adds the pipeline-generated `README.md` to the re",
+        "head": "plugin-examples/diagram/readme/20260519-143201",
+        "number": 2,
+        "title": "Add pipeline-generated README for Aspose.Diagram for .NET LowCode Examples"
+      }
+    ],
+    "sprint_branches": [
+      "plugin-examples/diagram/readme/20260519-143201",
+      "plugin-examples/diagram/20260512-091424"
+    ],
+    "examples": [
+      "diagram-diagram-converter",
+      "diagram-pdf-converter"
+    ],
+    "root_readme_sha": "ebada15a2d45ecc5d1e1da1e51137ed5a172b753",
+    "dir_packages_version": "26.5.0"
+  },
+  "email": {
+    "org": "aspose-email-net",
+    "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-18T15:06:18Z main",
+    "open_prs": [],
+    "sprint_branches": [
+      "plugin-examples/email/20260514-055725"
+    ],
+    "examples": [
+      "converter"
+    ],
+    "root_readme_sha": "dd41141acaa0ac13e6d677768716cff77948c2fb",
+    "dir_packages_version": "26.4.0"
+  },
+  "slides": {
+    "org": "aspose-slides-net",
+    "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-18T15:06:20Z main",
+    "open_prs": [],
+    "sprint_branches": [
+      "plugin-examples/slides/20260514-055744"
+    ],
+    "examples": [
+      "compress",
+      "convert",
+      "merger"
+    ],
+    "root_readme_sha": "26be934831f82575e85bec0273154e3027fb383a",
+    "dir_packages_version": null
+  }
+}

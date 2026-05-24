@@ -1,0 +1,62 @@
+{
+  "sprint_id": "sprint84",
+  "sprint_type": "MULTI_MEGA_TRAIN",
+  "date": "2026-05-24",
+  "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "approval_gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "remote_state": {
+    "families_accessible": 6,
+    "total_examples": 42,
+    "examples_with_full_io": 0,
+    "examples_with_partial_io": 1,
+    "examples_no_io": 41
+  },
+  "local_handoff": {
+    "sprint": "sprint72",
+    "total_examples": 42,
+    "readme_io_verified": 42,
+    "root_readmes": 6,
+    "overall_valid": true
+  },
+  "publication_state": {
+    "prs_created": 0,
+    "prs_merged": 0,
+    "branches_deleted": 0,
+    "post_merge_verified": 0
+  },
+  "pr_batching": {
+    "strategy": "FAMILY_BATCH_PR",
+    "planned_prs": 6,
+    "prs_created": 0,
+    "approval_blocked": true
+  },
+  "root_readme_strategy": {
+    "cells": "EXCLUDE_ROOT_README",
+    "words": "EXCLUDE_ROOT_README",
+    "diagram": "EXCLUDE_ROOT_README",
+    "pdf": "INCLUDE_IF_CHANGED",
+    "email": "INCLUDE_IF_CHANGED",
+    "slides": "INCLUDE_IF_CHANGED"
+  },
+  "words_version_drift": "NEEDS_REPAIR_APPROVAL_BLOCKED",
+  "source_changes": [
+    "src/plugin_examples/evidence_validator.py: 4 new rules 116-119, docstring updated",
+    "tests/unit/test_evidence_validator.py: 8 new tests, 6 count assertions updated"
+  ],
+  "carry_forward": {
+    "formimporter": "BLOCKED_EXTERNAL (Aspose.PDF 26.5.0 bug)",
+    "sprint27_governance": "PRE_CONTRACT_ERA_BUNDLE"
+  },
+  "ev_rule_count": 119,
+  "test_count": 171,
+  "open_root_readme_prs": {
+    "cells": 5,
+    "words": 7,
+    "diagram": 2
+  },
+  "ecc_categories": 59,
+  "consecutive_approval_blocked_sprints": 12
+}

@@ -1,0 +1,20 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "summary": {
+    "total_examples": 42,
+    "examples_with_full_io": 0,
+    "examples_with_partial_io": 1,
+    "examples_no_io": 41,
+    "families_with_any_io": 1
+  },
+  "notes": "Remote state unchanged since Sprint 83 — no merges occurred. pdf/html has partial IO from pre-pipeline commit.",
+  "families": {
+    "cells": {"examples": 9, "with_full_io": 0, "with_partial_io": 0, "no_io": 9},
+    "words": {"examples": 8, "with_full_io": 0, "with_partial_io": 0, "no_io": 8},
+    "pdf":   {"examples": 19, "with_full_io": 0, "with_partial_io": 1, "no_io": 18, "partial_io_example": "html"},
+    "diagram": {"examples": 2, "with_full_io": 0, "with_partial_io": 0, "no_io": 2},
+    "email": {"examples": 1, "with_full_io": 0, "with_partial_io": 0, "no_io": 1},
+    "slides": {"examples": 3, "with_full_io": 0, "with_partial_io": 0, "no_io": 3}
+  }
+}

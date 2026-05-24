@@ -1,0 +1,20 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "lanes": [
+    {"lane": "A", "topic": "Publication gate check", "status": "PASS", "files_created": 5, "key_finding": "Both gates NOT_SET, prs_created=0"},
+    {"lane": "B", "topic": "PR batching strategy", "status": "PASS", "files_created": 3, "key_finding": "1 PR/family default formalized"},
+    {"lane": "C", "topic": "Root README conflict", "status": "PASS", "files_created": 4, "key_finding": "Per-family strategy for all 6 families"},
+    {"lane": "D", "topic": "Handoff/remote truth", "status": "PASS", "files_created": 7, "key_finding": "In sync, handoff stable since sprint72"},
+    {"lane": "E", "topic": "Merge/post-merge readiness", "status": "PASS", "files_created": 7, "key_finding": "Plans ready, execution approval-blocked"},
+    {"lane": "F", "topic": "Product/system", "status": "PASS", "files_created": 6, "key_finding": "All carry-forwards documented, sprint85 target = live publish"},
+    {"lane": "G", "topic": "Validator hardening", "status": "PASS", "files_created": 3, "key_finding": "4 new rules 116-119, 171 tests"},
+    {"lane": "H", "topic": "Evidence consistency", "status": "PASS", "files_created": 3, "key_finding": "Sprint83 stale labels documented"},
+    {"lane": "I", "topic": "Taskcard sync", "status": "PASS", "files_created": 3, "key_finding": "All labels normalized"},
+    {"lane": "J", "topic": "IV", "status": "PASS", "files_created": 4, "key_finding": "All lanes verified"}
+  ],
+  "total_lanes": 10,
+  "lanes_passed": 10,
+  "lanes_failed": 0,
+  "overall": "PASS"
+}

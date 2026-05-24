@@ -1,0 +1,36 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "carry_forward": true,
+  "source": "sprint73",
+  "records": [
+    {
+      "family": "email",
+      "example": "converter",
+      "post_merge_validated": false,
+      "status": "REPAIRED",
+      "notes": "Runtime repaired Sprint 73. Post-merge validation deferred pending approval."
+    },
+    {
+      "family": "slides",
+      "example": "compress",
+      "post_merge_validated": false,
+      "status": "REPAIRED",
+      "notes": "Runtime repaired Sprint 73. Post-merge validation deferred pending approval."
+    },
+    {
+      "family": "slides",
+      "example": "convert",
+      "post_merge_validated": false,
+      "status": "REPAIRED",
+      "notes": "Runtime repaired Sprint 73. Post-merge validation deferred pending approval."
+    },
+    {
+      "family": "slides",
+      "example": "merger",
+      "post_merge_validated": false,
+      "status": "REPAIRED",
+      "notes": "Runtime repaired Sprint 73. Post-merge validation deferred pending approval."
+    }
+  ]
+}

@@ -118,6 +118,12 @@ Sprint 83 additions (4 new rules, closes S82-F1 through S82-F4):
 - Rule: root_readme_conflict_strategy_documented (if remote-repo-state-before.json shows open PRs, a conflict strategy doc must exist — S82-F2)
 - Rule: final_consistency_check_not_stale_after_commit (review/final-consistency-check.json must not say PASS_PENDING_COMMIT after final-clean-proof.txt has a real commit SHA — S82-F3)
 - Rule: publication_file_plan_present_if_pr_creation_claimed (if any record in publication-truth-matrix-final.json has pr_url non-null, publication-file-plan.json must exist — S82-F4)
+
+Sprint 84 additions (4 new rules, closes S83-C1 and S83-C2 governance gaps):
+- Rule: pr_batching_strategy_present_if_pr_creation_attempted (if pr-creation-ledger.json shows prs_created>0, publication/pr-batching-strategy.md must exist — S83-G1)
+- Rule: pr_batching_plan_present_if_pr_creation_attempted (if pr-creation-ledger.json shows prs_created>0, publication/pr-batching-plan.json must exist — S83-G2)
+- Rule: root_readme_file_plan_present_before_pr_creation (if pr-creation-ledger.json shows prs_created>0, conflicts/root-readme-file-plan.json must exist — S83-G3)
+- Rule: no_bulk_42pr_plan_without_justification (if pr-batching-plan.json exists with planned_prs count==42, a bulk_justification field must be present — S83-G4)
 """
 
 from __future__ import annotations
@@ -380,6 +386,12 @@ class EvidenceValidator:
         _maybe(self._rule_root_readme_conflict_strategy_documented())
         _maybe(self._rule_final_consistency_check_not_stale_after_commit())
         _maybe(self._rule_publication_file_plan_present_if_pr_creation_claimed())
+
+        # --- Sprint 84 NEW rules: close S83-G1 through S83-G4 ---
+        _maybe(self._rule_pr_batching_strategy_present_if_pr_creation_attempted())
+        _maybe(self._rule_pr_batching_plan_present_if_pr_creation_attempted())
+        _maybe(self._rule_root_readme_file_plan_present_before_pr_creation())
+        _maybe(self._rule_no_bulk_42pr_plan_without_justification())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -6012,6 +6024,236 @@ class EvidenceValidator:
                 f"{len(pr_urls)} record(s) have pr_url set; "
                 f"publication/publication-file-plan.json is present and non-empty"
             ),
+        )
+
+    def _rule_pr_batching_strategy_present_if_pr_creation_attempted(self) -> RuleResult:
+        """If pr-creation-ledger.json shows prs_created > 0, publication/pr-batching-strategy.md must exist.
+
+        Sprint 84 validator hardening (S83-G1): prevents creating PRs without a documented
+        batching strategy. Closes Sprint 83 caveat C1 (42-PR plan too noisy).
+        """
+        rule_id = "pr_batching_strategy_present_if_pr_creation_attempted"
+        description = (
+            "publication/pr-batching-strategy.md must exist if pr-creation-ledger.json "
+            "shows prs_created > 0"
+        )
+
+        ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
+        if not ledger_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/pr-creation-ledger.json not found — rule not applicable",
+            )
+
+        try:
+            ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse pr-creation-ledger.json — rule not applicable",
+            )
+
+        prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
+        if prs_created == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
+            )
+
+        strategy_path = self.bundle_dir / "publication" / "pr-batching-strategy.md"
+        if not strategy_path.exists() or strategy_path.stat().st_size == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S83-G1: pr-creation-ledger.json shows prs_created={prs_created} but "
+                    f"publication/pr-batching-strategy.md is missing or empty. "
+                    f"Document the PR batching strategy before creating PRs."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"prs_created={prs_created}; publication/pr-batching-strategy.md is present",
+        )
+
+    def _rule_pr_batching_plan_present_if_pr_creation_attempted(self) -> RuleResult:
+        """If pr-creation-ledger.json shows prs_created > 0, publication/pr-batching-plan.json must exist.
+
+        Sprint 84 validator hardening (S83-G2): pairs with S83-G1 to require both the
+        strategy narrative and the structured plan JSON before PRs are created.
+        """
+        rule_id = "pr_batching_plan_present_if_pr_creation_attempted"
+        description = (
+            "publication/pr-batching-plan.json must exist if pr-creation-ledger.json "
+            "shows prs_created > 0"
+        )
+
+        ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
+        if not ledger_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/pr-creation-ledger.json not found — rule not applicable",
+            )
+
+        try:
+            ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse pr-creation-ledger.json — rule not applicable",
+            )
+
+        prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
+        if prs_created == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
+            )
+
+        plan_path = self.bundle_dir / "publication" / "pr-batching-plan.json"
+        if not plan_path.exists() or plan_path.stat().st_size == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S83-G2: pr-creation-ledger.json shows prs_created={prs_created} but "
+                    f"publication/pr-batching-plan.json is missing or empty. "
+                    f"Document the structured PR batching plan before creating PRs."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"prs_created={prs_created}; publication/pr-batching-plan.json is present",
+        )
+
+    def _rule_root_readme_file_plan_present_before_pr_creation(self) -> RuleResult:
+        """If pr-creation-ledger.json shows prs_created > 0, conflicts/root-readme-file-plan.json must exist.
+
+        Sprint 84 validator hardening (S83-G3): ensures that the per-family root README
+        decision (include/exclude) is documented before any PRs are created.
+        Closes Sprint 83 caveat C2 (root README ambiguity).
+        """
+        rule_id = "root_readme_file_plan_present_before_pr_creation"
+        description = (
+            "conflicts/root-readme-file-plan.json must exist if pr-creation-ledger.json "
+            "shows prs_created > 0"
+        )
+
+        ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
+        if not ledger_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/pr-creation-ledger.json not found — rule not applicable",
+            )
+
+        try:
+            ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse pr-creation-ledger.json — rule not applicable",
+            )
+
+        prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
+        if prs_created == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
+            )
+
+        file_plan_path = self.bundle_dir / "conflicts" / "root-readme-file-plan.json"
+        if not file_plan_path.exists() or file_plan_path.stat().st_size == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S83-G3: pr-creation-ledger.json shows prs_created={prs_created} but "
+                    f"conflicts/root-readme-file-plan.json is missing or empty. "
+                    f"Document per-family root README include/exclude decision before creating PRs."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"prs_created={prs_created}; conflicts/root-readme-file-plan.json is present",
+        )
+
+    def _rule_no_bulk_42pr_plan_without_justification(self) -> RuleResult:
+        """If pr-batching-plan.json exists and planned_prs has 42 entries, bulk_justification must be present.
+
+        Sprint 84 validator hardening (S83-G4): prevents the Sprint 83 S83-C1 pattern
+        where 42 PRs were planned (one per example) without explicit justification.
+        The default is 1 PR per family (6 PRs); creating 42 requires documented justification.
+        """
+        rule_id = "no_bulk_42pr_plan_without_justification"
+        description = (
+            "If pr-batching-plan.json has 42 planned_prs, "
+            "bulk_justification field must be present"
+        )
+
+        plan_path = self.bundle_dir / "publication" / "pr-batching-plan.json"
+        if not plan_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="publication/pr-batching-plan.json not found — rule not applicable",
+            )
+
+        try:
+            plan = json.loads(plan_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse pr-batching-plan.json — rule not applicable",
+            )
+
+        if not isinstance(plan, dict):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="pr-batching-plan.json is not a JSON object — rule not applicable",
+            )
+
+        planned_prs = plan.get("planned_prs", [])
+        if not isinstance(planned_prs, list) or len(planned_prs) != 42:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=f"planned_prs count={len(planned_prs) if isinstance(planned_prs, list) else 'N/A'} (not 42) — rule not applicable",
+            )
+
+        # 42-PR plan detected — justification required
+        justification = plan.get("bulk_justification")
+        if not justification:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S83-G4: pr-batching-plan.json has 42 planned_prs (one per example) but "
+                    "no bulk_justification field. The default is 1 PR per family (6 PRs). "
+                    "Add bulk_justification to explain why 42 PRs are required."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"planned_prs=42; bulk_justification present: {str(justification)[:80]}",
         )
 
     # ------------------------------------------------------------------

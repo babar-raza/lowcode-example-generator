@@ -1,0 +1,20 @@
+Sprint 84 -- Dirty State Before
+================================
+Date: 2026-05-24
+HEAD: 824173e feat(sprint83): capture final-clean-proof.txt — clean state confirmed
+
+git status --short:
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+
+Source files modified: 0
+GENERATED_WORKSPACE_STATE files: 7 (all in workspace/verification/latest/ — gitignored category)
+Untracked: reports/sprint84/ (new sprint directory — expected)
+
+Classification: ALL 7 dirty files are GENERATED_WORKSPACE_STATE (expected, gitignored).
+Source tree is CLEAN relative to HEAD 824173e.

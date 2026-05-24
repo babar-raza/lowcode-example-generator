@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 115)  # Sprint 83: added 4 new rules (112-115)
+        self.assertEqual(result.total_rules, 119)  # Sprint 84: added 4 new rules (116-119)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 115)  # Sprint 83: 115 rules total
+        self.assertEqual(len(d["rules"]), 119)  # Sprint 84: 119 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 114 rules evaluated (115 total - 1 self-reference rule 21)
-        # Sprint 83: total is now 115 (added 4 new rules), so excluding rule 21 = 114
-        self.assertEqual(len(result.rule_results), 114)
+        # Should have exactly 118 rules evaluated (119 total - 1 self-reference rule 21)
+        # Sprint 84: total is now 119 (added 4 new rules), so excluding rule 21 = 118
+        self.assertEqual(len(result.rule_results), 118)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 115)  # Sprint 83: 115 rules total
+        self.assertEqual(len(phase_b.rule_results), 119)  # Sprint 84: 119 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 115 rules total (111 Sprint 80 + 4 new Sprint 83 rules)."""
+        """validate() must return 119 rules total (115 Sprint 83 + 4 new Sprint 84 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 115,
-                         f"Expected 115 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 119,
+                         f"Expected 119 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-115."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-119."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 114,
-                         f"validate_for_storage must have 114 rules (115 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 118,
+                         f"validate_for_storage must have 118 rules (119 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -3258,6 +3258,144 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         rule = next(
             r for r in result.rule_results
             if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+        )
+        self.assertTrue(rule.passed)
+
+
+class TestSprint84ValidatorHardeningRules(unittest.TestCase):
+    """Tests for Sprint 84 rules 116-119 (S83-G1 through S83-G4): PR lifecycle governance."""
+
+    # ------------------------------------------------------------------ helpers
+
+    def _make_ledger(self, bundle: Path, prs_created: int = 1) -> None:
+        (bundle / "publication").mkdir(parents=True, exist_ok=True)
+        (bundle / "publication" / "pr-creation-ledger.json").write_text(
+            json.dumps({"prs_created": prs_created, "prs": []}),
+            encoding="utf-8",
+        )
+
+    def _make_batching_strategy(self, bundle: Path) -> None:
+        (bundle / "publication").mkdir(parents=True, exist_ok=True)
+        (bundle / "publication" / "pr-batching-strategy.md").write_text(
+            "# PR Batching Strategy\n1 PR per family.\n", encoding="utf-8"
+        )
+
+    def _make_batching_plan(self, bundle: Path, planned_count: int = 6, bulk_justification: str | None = None) -> None:
+        (bundle / "publication").mkdir(parents=True, exist_ok=True)
+        plan: dict = {
+            "strategy": "FAMILY_BATCH_PR",
+            "planned_prs": [{"family": f"f{i}"} for i in range(planned_count)],
+        }
+        if bulk_justification is not None:
+            plan["bulk_justification"] = bulk_justification
+        (bundle / "publication" / "pr-batching-plan.json").write_text(
+            json.dumps(plan), encoding="utf-8"
+        )
+
+    def _make_root_readme_file_plan(self, bundle: Path) -> None:
+        (bundle / "conflicts").mkdir(parents=True, exist_ok=True)
+        (bundle / "conflicts" / "root-readme-file-plan.json").write_text(
+            json.dumps({"grand_total_files": 42}), encoding="utf-8"
+        )
+
+    # ------------------------------------------------------------------ Rule 116
+
+    def test_rule116_passes_trivially_when_no_ledger(self):
+        """Rule 116: passes trivially when pr-creation-ledger.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule116_passes_trivially_when_prs_created_zero(self):
+        """Rule 116: passes trivially when prs_created=0 in ledger."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_ledger(b, prs_created=0)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule116_fails_when_prs_created_but_no_strategy(self):
+        """Rule 116: fails when prs_created>0 but pr-batching-strategy.md absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_ledger(b, prs_created=6)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("S83-G1", rule.failure_detail)
+
+    def test_rule116_passes_when_prs_created_and_strategy_present(self):
+        """Rule 116: passes when prs_created>0 and pr-batching-strategy.md present."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_ledger(b, prs_created=6)
+            self._make_batching_strategy(b)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+        )
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 119
+
+    def test_rule119_passes_trivially_when_no_plan(self):
+        """Rule 119: passes trivially when pr-batching-plan.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_bulk_42pr_plan_without_justification"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule119_passes_when_plan_has_6_prs(self):
+        """Rule 119: passes when planned_prs has 6 entries (1 per family default)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_batching_plan(b, planned_count=6)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_bulk_42pr_plan_without_justification"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule119_fails_when_plan_has_42_prs_without_justification(self):
+        """Rule 119: fails when planned_prs has 42 entries without bulk_justification."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_batching_plan(b, planned_count=42, bulk_justification=None)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_bulk_42pr_plan_without_justification"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("S83-G4", rule.failure_detail)
+
+    def test_rule119_passes_when_plan_has_42_prs_with_justification(self):
+        """Rule 119: passes when planned_prs has 42 entries WITH bulk_justification."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_batching_plan(b, planned_count=42, bulk_justification="Required for atomic per-example CI gating")
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_bulk_42pr_plan_without_justification"
         )
         self.assertTrue(rule.passed)
 

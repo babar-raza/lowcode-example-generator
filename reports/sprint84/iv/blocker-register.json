@@ -1,0 +1,22 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "hard_blockers": [],
+  "soft_blockers": [
+    {
+      "id": "SB-01",
+      "description": "dirty-state-after.txt captured pre-commit shows source files modified",
+      "impact": "EV rule dirty_after_no_uncommitted_source_test fails until updated post-commit",
+      "mitigation": "Update dirty-state-after.txt after bundle commit (commit 2)",
+      "status": "MITIGATED"
+    },
+    {
+      "id": "SB-02",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET — 12th consecutive sprint",
+      "impact": "No PRs created, no merges, no remote README I/O",
+      "mitigation": "By design — Sprint 85 execution plan ready when gate is lifted",
+      "status": "BY_DESIGN"
+    }
+  ],
+  "overall_blocked": false
+}

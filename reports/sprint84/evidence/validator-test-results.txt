@@ -1,0 +1,17 @@
+Sprint 84 -- Validator Test Results
+=====================================
+Date: 2026-05-24
+Test file: tests/unit/test_evidence_validator.py
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -x -q
+
+........................................................................ [ 42%]
+........................................................................ [ 84%]
+...........................                                              [100%]
+171 passed in 157.26s (0:02:37)
+
+Sprint 83 baseline: 163
+Sprint 84 new tests: 8 (TestSprint84ValidatorHardeningRules — rules 116-119)
+  - 4 tests for rule 116 (pr_batching_strategy_present_if_pr_creation_attempted)
+  - 4 tests for rule 119 (no_bulk_42pr_plan_without_justification)
+Sprint 84 total: 171
+Result: ALL PASS

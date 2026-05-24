@@ -1,0 +1,17 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "handoff_source": "sprint72",
+  "overall_valid": true,
+  "overall_handoff_valid": true,
+  "publication_readiness": "READY_PENDING_APPROVAL",
+  "checks": {
+    "handoff_examples_count": {"expected": 42, "actual": 42, "pass": true},
+    "readme_io_verified": {"expected": 42, "actual": 42, "pass": true},
+    "remote_examples_count": {"expected": 42, "actual": 42, "pass": true},
+    "remote_vs_handoff_in_sync": {"pass": true},
+    "root_readmes_excluded_where_conflict": {"pass": true, "excluded": ["cells", "words", "diagram"]},
+    "approval_gate": {"env": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", "value": "NOT_SET", "pass": false, "blocking": true}
+  },
+  "blocker": "APPROVAL_GATE_NOT_SET"
+}

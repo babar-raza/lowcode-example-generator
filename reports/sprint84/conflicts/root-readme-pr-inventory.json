@@ -1,0 +1,33 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "open_root_readme_prs": [
+    {
+      "family": "cells",
+      "pr_number": 5,
+      "status": "OPEN",
+      "content": "Root README with IO section for Cells LowCode examples",
+      "conflict_with_sprint84": true,
+      "conflict_reason": "Sprint 84 batch PR would touch same root README file"
+    },
+    {
+      "family": "words",
+      "pr_number": 7,
+      "status": "OPEN",
+      "content": "Root README with IO section + Words version drift fix",
+      "conflict_with_sprint84": true,
+      "conflict_reason": "Sprint 84 batch PR would touch same root README file; also carries version bump"
+    },
+    {
+      "family": "diagram",
+      "pr_number": 2,
+      "status": "OPEN",
+      "content": "Root README with IO section for Diagram LowCode examples",
+      "conflict_with_sprint84": true,
+      "conflict_reason": "Sprint 84 batch PR would touch same root README file"
+    }
+  ],
+  "families_with_no_open_root_readme_pr": ["pdf", "email", "slides"],
+  "total_open": 3,
+  "resolution": "EXCLUDE_ROOT_README_FROM_SPRINT84_BATCH_PRS"
+}

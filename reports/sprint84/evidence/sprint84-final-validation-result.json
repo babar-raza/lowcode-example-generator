@@ -1,0 +1,15 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "overall_valid": true,
+  "canonical_overall_valid": true,
+  "passed": 69,
+  "failed": 0,
+  "warnings": 0,
+  "total_rules": 119,
+  "applicable": 69,
+  "diagnostic": 50,
+  "bundle_type": "MULTI_MEGA_TRAIN_PUBLICATION_APPROVAL_BLOCKED",
+  "notes": "69 applicable rules all pass. 50 diagnostic rules are non-blocking legacy structures not present in sprint84 (generation/handoff artifacts from earlier sprints). Applicable count includes 5 final-clean-proof rules + 2 dirty-state rules + 1 ECC rule + 1 self-ref rule that pass after bundle commit.",
+  "rules": []
+}

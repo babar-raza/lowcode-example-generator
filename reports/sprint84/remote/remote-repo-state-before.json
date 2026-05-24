@@ -1,0 +1,85 @@
+{
+  "sprint_id": "sprint84",
+  "date": "2026-05-24",
+  "note": "Sprint 84 carries Sprint 83 remote state forward — no merges occurred since Sprint 83 closed. Open PRs: cells#5, words#7, diagram#2 (root README only).",
+  "summary": {
+    "total_checked": 6,
+    "accessible": 6,
+    "blocked_families": []
+  },
+  "cells": {
+    "org": "aspose-cells-net",
+    "repo": "Aspose.Cells.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-20T12:26:46Z main",
+    "open_prs": [
+      {
+        "number": 5,
+        "title": "Add pipeline-generated README for Aspose.Cells for .NET LowCode Examples",
+        "head": "plugin-examples/cells/readme/20260519-143139",
+        "body_head": "## README Backfill — Aspose.Cells for .NET LowCode Examples"
+      }
+    ],
+    "examples": ["html-converter","image-converter","json-converter","pdf-converter","spreadsheet-converter","spreadsheet-locker","spreadsheet-merger","spreadsheet-splitter","text-converter"],
+    "root_readme_sha": "55e18fbfa2c33f310316b96ac593a6f70940b12f",
+    "dir_packages_version": "26.5.1"
+  },
+  "words": {
+    "org": "aspose-words-net",
+    "repo": "Aspose.Words.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T14:32:00Z main",
+    "open_prs": [
+      {
+        "number": 7,
+        "title": "Add pipeline-generated README for Aspose.Words for .NET LowCode Examples",
+        "head": "plugin-examples/words/readme/20260519-143151",
+        "body_head": "## README Backfill — Aspose.Words for .NET LowCode Examples"
+      }
+    ],
+    "examples": ["comparer","converter","mail-merger","merger","replacer","report-builder","splitter","watermarker"],
+    "root_readme_sha": "cd8fc5289b35111833a953db9a6c8824a93a11b8",
+    "dir_packages_version": "26.5.0"
+  },
+  "pdf": {
+    "org": "aspose-pdf-net",
+    "repo": "Aspose.PDF.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T05:52:52Z main",
+    "open_prs": [],
+    "examples": ["doc-converter","form-editor","form-exporter","form-flattener","html","image-extractor","jpeg","merger","optimizer","pdfa-converter","png","security","signature","splitter","table-generator","text-extractor","tiff","toc-generator","xls-converter"],
+    "root_readme_sha": "74796d76acf8090ac0bc560790bab04a57adf926",
+    "dir_packages_version": "26.5.0"
+  },
+  "diagram": {
+    "org": "aspose-diagram-net",
+    "repo": "Aspose.Diagram.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-19T14:32:11Z main",
+    "open_prs": [
+      {
+        "number": 2,
+        "title": "Add pipeline-generated README for Aspose.Diagram for .NET LowCode Examples",
+        "head": "plugin-examples/diagram/readme/20260519-143201",
+        "body_head": "## README Backfill — Aspose.Diagram for .NET LowCode Examples"
+      }
+    ],
+    "examples": ["diagram-diagram-converter","diagram-pdf-converter"],
+    "root_readme_sha": "ebada15a2d45ecc5d1e1da1e51137ed5a172b753",
+    "dir_packages_version": "26.5.0"
+  },
+  "email": {
+    "org": "aspose-email-net",
+    "repo": "Aspose.Email.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-18T15:06:18Z main",
+    "open_prs": [],
+    "examples": ["converter"],
+    "root_readme_sha": "dd41141acaa0ac13e6d677768716cff77948c2fb",
+    "dir_packages_version": "26.4.0"
+  },
+  "slides": {
+    "org": "aspose-slides-net",
+    "repo": "Aspose.Slides.LowCode-for-.NET-Examples",
+    "pushed_at": "2026-05-18T15:06:20Z main",
+    "open_prs": [],
+    "examples": ["compress","convert","merger"],
+    "root_readme_sha": "26be934831f82575e85bec0273154e3027fb383a",
+    "dir_packages_version": null
+  }
+}

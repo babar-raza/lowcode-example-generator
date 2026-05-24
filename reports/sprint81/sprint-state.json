@@ -1,0 +1,37 @@
+{
+  "sprint_id": "sprint81",
+  "sprint_type": "PUBLICATION_MEGA_SPRINT",
+  "date": "2026-05-24",
+  "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL",
+  "approval_gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "remote_state": {
+    "families_accessible": 6,
+    "total_examples": 42,
+    "examples_with_full_io": 0,
+    "examples_with_partial_io": 1,
+    "examples_no_io": 41
+  },
+  "local_handoff": {
+    "sprint": "sprint72",
+    "total_examples": 42,
+    "readme_io_verified": 42,
+    "root_readmes": 6,
+    "dir_packages_props": 6,
+    "overall_valid": true
+  },
+  "publication_state": {
+    "prs_created": 0,
+    "prs_merged": 0,
+    "branches_deleted": 0,
+    "post_merge_verified": 0
+  },
+  "words_version_drift": "RESOLVED",
+  "source_changes": [],
+  "carry_forward": {
+    "formimporter": "BLOCKED_EXTERNAL (Aspose.PDF 26.5.0 bug)",
+    "sprint27_governance": "PRE_CONTRACT_ERA_BUNDLE"
+  }
+}

@@ -1,0 +1,54 @@
+Sprint 81 -- Commands Log
+=========================
+Sprint: sprint81
+Date: 2026-05-24
+
+[Phase 0] Approval gate check
+  Dir: c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator
+  Cmd: python -c "check GH_TOKEN, GITHUB_TOKEN, PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL, PLUGIN_EXAMPLES_MERGE_PR_APPROVAL"
+  Result: GH_TOKEN=SET(40), GITHUB_TOKEN=SET(93), LIVE_PUBLISH=NOT_SET, MERGE_PR=NOT_SET
+  Decision: LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL -- no PR creation, no merge, no branch deletion
+
+[Phase 0] Repo access resolution
+  Cmd: PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples resolve-repo-access --families cells words pdf diagram email slides --promote-latest
+  Result: 6/6 accessible, can_push=True for all, live_publish_allowed=False
+  Output: workspace/verification/latest/family-repo-access-resolution.json
+
+[Phase 1] Git state capture
+  Cmd: git status && git diff --stat && git log --oneline -20
+  Result: 8 workspace/verification/latest/ files modified (GENERATED_WORKSPACE_STATE), reports/sprint81/ untracked
+  Output: reports/sprint81/git/dirty-state-before.txt, dirty-file-classification.md
+
+[Phase 2] Remote repo state
+  Cmd: gh api repos/{org}/{repo}/contents/examples/{family}/lowcode (x6 families)
+  Result: cells=9, words=8, pdf=19, diagram=2, email=1, slides=3 = 42 total
+  Cmd: gh api repos/{org}/{repo}/pulls?state=open (x6 families)
+  Result: cells=#5(root README), words=#7(root README), diagram=#2(root README)
+  Output: reports/sprint81/remote/remote-repo-state-before.json
+
+[Phase 2] Per-example remote README I/O audit
+  Cmd: gh api repos/{org}/{repo}/contents/examples/{family}/lowcode/{example}/README.md (x42)
+  Result: 41 NO_IO_SECTION, 1 OUTPUT_ONLY_PARTIAL (pdf-signature)
+  Output: reports/sprint81/remote/remote-readme-io-audit-before.json
+
+[Phase 3] Handoff validation
+  Cmd: python -- scan reports/sprint72/handoff/per-family/ for README I/O
+  Result: 42/42 README files have ## Input and Output section, 6/6 root READMEs, 6/6 Directory.Packages.props
+  Output: reports/sprint81/handoff/handoff-prepublish-validation.json
+
+[Phase 4] Words version drift check
+  Cmd: gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/contents/Directory.Packages.props
+  Result: <PackageVersion Include="Aspose.Words" Version="26.5.0" /> (remote = handoff = 26.5.0)
+  Decision: WORDS_VERSION_DRIFT_RESOLVED -- no version bump needed
+
+[Phase 5-7] PR creation / Merge / Branch delete
+  Decision: SKIP -- PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET
+
+[Phase 8] Publication truth matrix
+  Result: 41 CODE_PUBLISHED_README_IO_PENDING_APPROVAL, 1 CODE_PUBLISHED_README_PARTIAL_IO_PENDING_BACKFILL
+  Output: reports/sprint81/publication/publication-truth-matrix-final.json
+
+[Phase 9] Adversarial review
+  Result: 2 issues found and repaired (local I/O source correction, Words drift resolution)
+  Output: reports/sprint81/review/adversarial-review.md, self-repair-actions.json
+

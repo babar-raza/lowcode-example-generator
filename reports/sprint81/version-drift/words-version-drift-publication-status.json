@@ -1,0 +1,11 @@
+{
+  "sprint_id": "sprint81",
+  "check_date": "2026-05-24",
+  "words_remote_version": "26.5.0",
+  "words_handoff_version": "26.5.0",
+  "drift": false,
+  "drift_type": "NONE",
+  "decision": "WORDS_VERSION_DRIFT_RESOLVED",
+  "action_required": false,
+  "note": "Remote Words repo already at 26.5.0 = handoff target. Sprint 75 carry-forward drift was stale."
+}

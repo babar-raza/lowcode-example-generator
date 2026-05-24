@@ -1,0 +1,23 @@
+{
+  "sprint_id": "sprint81",
+  "date": "2026-05-24",
+  "approval_check": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET",
+    "live_approved": false,
+    "merge_approved": false
+  },
+  "phase5_status": "SKIP",
+  "phase5_reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set to APPROVE_LIVE_PR",
+  "prs_created": [],
+  "prs_skipped_reason": "Approval gate not set",
+  "branch_plan": {
+    "cells": "plugin-examples/cells/readme-io/sprint81",
+    "words": "plugin-examples/words/readme-io/sprint81",
+    "pdf": "plugin-examples/pdf/readme-io/sprint81",
+    "diagram": "plugin-examples/diagram/readme-io/sprint81",
+    "email": "plugin-examples/email/readme-io/sprint81",
+    "slides": "plugin-examples/slides/readme-io/sprint81"
+  },
+  "final_verdict_contribution": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"
+}

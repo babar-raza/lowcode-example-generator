@@ -1,0 +1,254 @@
+{
+  "contract_id": "sprint81",
+  "computed_at": "2026-05-24T12:17:09Z",
+  "total_categories": 30,
+  "present": 30,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 80 Acceptance Baseline",
+      "file": "reports/sprint81/00-sprint80-acceptance-baseline.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "Todo",
+      "file": "reports/sprint81/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "Commands Log",
+      "file": "reports/sprint81/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "Git Dirty State Before",
+      "file": "reports/sprint81/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "Git Dirty File Classification",
+      "file": "reports/sprint81/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "Remote Repo State Before",
+      "file": "reports/sprint81/remote/remote-repo-state-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "Remote README IO Audit Before",
+      "file": "reports/sprint81/remote/remote-readme-io-audit-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "Remote Conflict Check",
+      "file": "reports/sprint81/remote/remote-conflict-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "Remote vs Handoff Before",
+      "file": "reports/sprint81/remote/remote-vs-handoff-before.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "Handoff Source Authority",
+      "file": "reports/sprint81/handoff/handoff-source-authority.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "Handoff Prepublish Validation",
+      "file": "reports/sprint81/handoff/handoff-prepublish-validation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "Handoff Source Map",
+      "file": "reports/sprint81/handoff/handoff-source-map.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "Handoff Diff Summary",
+      "file": "reports/sprint81/handoff/handoff-diff-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "Words Version Drift Decision",
+      "file": "reports/sprint81/version-drift/words-version-drift-decision.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "Words Version Drift Publication Status",
+      "file": "reports/sprint81/version-drift/words-version-drift-publication-status.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "PR Creation Ledger",
+      "file": "reports/sprint81/publication/pr-creation-ledger.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "Publication Truth Matrix Final",
+      "file": "reports/sprint81/publication/publication-truth-matrix-final.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "Publication Summary",
+      "file": "reports/sprint81/publication/publication-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "Merge Result",
+      "file": "reports/sprint81/publication/merge-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "Post-Merge Verification",
+      "file": "reports/sprint81/publication/post-merge-verification.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "Branch Delete Result",
+      "file": "reports/sprint81/publication/branch-delete-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "Adversarial Review",
+      "file": "reports/sprint81/review/adversarial-review.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "Self-Repair Actions",
+      "file": "reports/sprint81/review/self-repair-actions.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "Final Consistency Check",
+      "file": "reports/sprint81/review/final-consistency-check.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint81/evidence/validator-gap-analysis.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "Sprint 81 Final Validation Result",
+      "file": "reports/sprint81/evidence/sprint81-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "ECC Computed (self-referential)",
+      "file": "reports/sprint81/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "Final Verdict",
+      "file": "reports/sprint81/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "Sprint State",
+      "file": "reports/sprint81/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "Publication Preflight",
+      "file": "reports/sprint81/01-publication-preflight.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+Sprint 81 -- Dirty State Before Commit
+======================================
+Date: 2026-05-24
+HEAD: cf32648 (feat(sprint80): capture final-clean-proof.txt)
+
+On branch main
+Your branch is ahead of 'origin/main' by 106 commits.
+
+Changes not staged for commit:
+	modified:   workspace/verification/latest/cells-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/cells-root-readme-audit.json
+	modified:   workspace/verification/latest/cells-root-readme-render-result.json
+	modified:   workspace/verification/latest/family-repo-access-resolution.json
+	modified:   workspace/verification/latest/release-status.json
+	modified:   workspace/verification/latest/words-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/words-root-readme-audit.json
+	modified:   workspace/verification/latest/words-root-readme-render-result.json
+
+Untracked files:
+	reports/sprint81/
+
+---
+Summary: 0 source/test files dirty. 8 workspace/verification/latest/ files
+(GENERATED_WORKSPACE_STATE governance exceptions). 1 new sprint report directory untracked.

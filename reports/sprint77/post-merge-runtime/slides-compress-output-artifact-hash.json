@@ -1,0 +1,18 @@
+{
+  "artifact": "slides-compress-output.pptx",
+  "decision": "OPTION_B_COPY_TO_SPRINT77_ARTIFACTS",
+  "original_path": "reports/sprint75/handoff/per-family/slides/compress/output.pptx",
+  "original_status_in_sprint76": "untracked (not committed, not deleted)",
+  "committed_path": "reports/sprint77/post-merge-runtime/artifacts/slides-compress-output.pptx",
+  "original_removed": true,
+  "size_bytes": 19807,
+  "sha256": "b104b1c59880ad40e0362195060e9269e247a6e0095a73091cd8e61ce6b2a800",
+  "matches_sprint76_proof": true,
+  "sprint76_proof_file": "reports/sprint76/post-merge-runtime/slides-compress-output-proof.json",
+  "sprint76_recorded_sha256": "b104b1c59880ad40e0362195060e9269e247a6e0095a73091cd8e61ce6b2a800",
+  "sprint76_recorded_size": 19807,
+  "produced_by": "dotnet run reports/sprint75/handoff/per-family/slides/compress/ (Sprint 76 Phase 2)",
+  "input_sha256": "b14bd40bf4e338a238c86c5491aa08ead44b799f1af444de24750d4635bbf427",
+  "compression_ratio": 0.578,
+  "compression_pct": 42.2
+}

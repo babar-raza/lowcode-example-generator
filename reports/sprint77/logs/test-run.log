@@ -1,0 +1,22 @@
+Sprint 77 Full Test Suite — Lane I
+====================================
+Date: 2026-05-24
+Command: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -q --tb=no
+Exit: 0
+
+3064 passed, 3 skipped, 10 subtests passed in 166.06s (0:02:46)
+0 failed
+
+Test files covered:
+  tests/unit/test_evidence_validator.py — 123 passed (includes TestSprint77EvidenceConsistencyRules 12 new tests)
+  tests/unit/test_pipeline_evidence_gate.py — 5 passed
+  tests/unit/ — all other unit tests
+  tests/integration/ — integration tests
+
+Sprint 77 additions verified:
+  - TestSprint77EvidenceConsistencyRules (12 tests, all PASSED)
+  - Rule 102 (commands_log_no_pending): PASSED
+  - Rule 103 (final_clean_proof_has_raw_git_lines): PASSED
+  - Rule 104 (dirty_state_untracked_acknowledged): PASSED
+  - Rule 105 (validation_authority_unambiguous): PASSED
+  - test_sprint76_bundle_fails_sprint77_rules: PASSED

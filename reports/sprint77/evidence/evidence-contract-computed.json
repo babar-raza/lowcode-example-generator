@@ -1,0 +1,271 @@
+{
+  "contract_id": "sprint77",
+  "computed_at": "2026-05-24T06:25:55Z",
+  "total_categories": 32,
+  "present": 32,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "Sprint 76 Evidence Audit",
+      "file": "reports/sprint77/00-sprint76-evidence-audit.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "Sprint 76 Claim vs Proof Matrix",
+      "file": "reports/sprint77/01-sprint76-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "Corrected Sprint 76 State",
+      "file": "reports/sprint77/02-corrected-sprint76-state.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "Commands Log",
+      "file": "reports/sprint77/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "Todo",
+      "file": "reports/sprint77/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "Bundle Manifest",
+      "file": "reports/sprint77/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "Sprint State",
+      "file": "reports/sprint77/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "Final Verdict",
+      "file": "reports/sprint77/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "Dirty State Before",
+      "file": "reports/sprint77/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "Dirty State After",
+      "file": "reports/sprint77/git/dirty-state-after.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "Final Clean Proof",
+      "file": "reports/sprint77/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "Dirty File Classification",
+      "file": "reports/sprint77/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "Slides Compress Output Artifact",
+      "file": "reports/sprint77/post-merge-runtime/artifacts/slides-compress-output.pptx",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "Artifact Decision",
+      "file": "reports/sprint77/post-merge-runtime/slides-compress-output-artifact-decision.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "Artifact Hash Proof",
+      "file": "reports/sprint77/post-merge-runtime/slides-compress-output-artifact-hash.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "Slides Compress Runtime Validation",
+      "file": "reports/sprint77/post-merge-runtime/slides-compress-runtime-validation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "Post-Merge Validation Matrix",
+      "file": "reports/sprint77/post-merge-runtime/post-merge-validation-matrix.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "Weekly Review Final Classifications",
+      "file": "reports/sprint77/weekly-review/weekly-review-claim-vs-proof-final.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "Publication Approval Gate",
+      "file": "reports/sprint77/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "Sprint 76 Revalidation Result",
+      "file": "reports/sprint77/evidence/sprint76-revalidation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "Sprint 77 Final Validation Result",
+      "file": "reports/sprint77/evidence/sprint77-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "Diagnostic Full Rules",
+      "file": "reports/sprint77/evidence/diagnostic-full-rules-non-applicable.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "ECC Computed",
+      "file": "reports/sprint77/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "Validator Gap Analysis",
+      "file": "reports/sprint77/evidence/validator-gap-analysis.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "Validator Test Results",
+      "file": "reports/sprint77/evidence/validator-test-results.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "Validator Source Proof",
+      "file": "reports/sprint77/evidence/validator-source-proof.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "Test Run Log",
+      "file": "reports/sprint77/logs/test-run.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "PDF PR Reconciliation",
+      "file": "reports/sprint77/pdf-publication/pdf-pr-reconciliation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "FormImporter Repro Inventory",
+      "file": "reports/sprint77/formimporter/formimporter-repro-inventory.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "Words Version Drift",
+      "file": "reports/sprint77/version-drift/words-version-drift-current.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC31",
+      "name": "Sprint 27 Governance",
+      "file": "reports/sprint77/governance/sprint27-strict-contract-revalidation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC32",
+      "name": "Weekly Review Claim Matrix",
+      "file": "reports/sprint77/02-weekly-review-claim-vs-proof-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ],
+  "bootstrap_note": "EC23 (evidence-contract-computed.json) self-referential \u2014 bootstrapped as PRESENT per Sprint 75/76 precedent"
+}

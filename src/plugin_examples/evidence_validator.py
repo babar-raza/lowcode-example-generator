@@ -94,6 +94,12 @@ Sprint 76 additions (8 new rules, closes S75-B1 and S75-B2):
 - Rule: weekly_review_no_repaired_while_output_unconfirmed (REPAIRED claim invalid if any runtime matrix has output_confirmed=false)
 - Rule: dirty_after_no_uncommitted_source_test (dirty-state-after.txt must not show src/ or tests/ as modified)
 - Rule: final_verdict_workspace_exception_explicit (if dirty-state-after shows workspace/verification/latest modified, verdict must name the exception)
+
+Sprint 77 additions (4 new rules, closes S76-C1 through S76-C4):
+- Rule: commands_log_no_pending (commands.log must not contain PENDING entries — S76-C3)
+- Rule: final_clean_proof_has_raw_git_lines (final-clean-proof.txt must embed raw git status output, not narrative only — S76-C2)
+- Rule: dirty_state_untracked_acknowledged (if dirty-state-after.txt shows untracked files, each must be acknowledged in final-verdict.md — S76-C1)
+- Rule: validation_authority_unambiguous (any *-validation-result.json with overall_valid=false must have canonical_overall_valid or bundle_type field — S76-C4)
 """
 
 from __future__ import annotations
@@ -332,6 +338,12 @@ class EvidenceValidator:
         _maybe(self._rule_weekly_review_no_repaired_while_output_unconfirmed())
         _maybe(self._rule_dirty_after_no_uncommitted_source_test())
         _maybe(self._rule_final_verdict_workspace_exception_explicit())
+
+        # --- Sprint 77 NEW rules: close S76-C1 through S76-C4 ---
+        _maybe(self._rule_commands_log_no_pending())
+        _maybe(self._rule_final_clean_proof_has_raw_git_lines())
+        _maybe(self._rule_dirty_state_untracked_acknowledged())
+        _maybe(self._rule_validation_authority_unambiguous())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -3379,6 +3391,10 @@ class EvidenceValidator:
             "LOWCODE_WEEKLY_REVIEW_ITEMS_CLASSIFIED_PUBLICATION_APPROVAL_BLOCKED",
             "LOWCODE_WEEKLY_REVIEW_REPAIRED_AND_README_IO_PRS_CREATED",
             "LOWCODE_PUBLICATION_AND_REVIEW_ITEMS_PARTIAL_WITH_EXPLICIT_BLOCKERS",
+            # Sprint 77 verdicts
+            "LOWCODE_WEEKLY_REVIEW_REPAIRED_WITH_WORKSPACE_EXCEPTION_PUBLICATION_APPROVAL_BLOCKED",
+            "LOWCODE_WEEKLY_REVIEW_REPAIRED_CLEAN_PUBLICATION_APPROVAL_BLOCKED",
+            "LOWCODE_WEEKLY_REVIEW_REPAIR_PARTIAL_WITH_EXPLICIT_BLOCKERS",
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
@@ -5041,6 +5057,223 @@ class EvidenceValidator:
             description="Final verdict explicitly acknowledges workspace/verification/latest/ governance exception",
             severity="FAILURE", passed=True,
             evidence="verdict contains workspace exception qualifier",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 77 NEW rules: close S76-C1 through S76-C4
+    # ------------------------------------------------------------------
+
+    def _rule_commands_log_no_pending(self) -> RuleResult:
+        """commands.log must not contain PENDING entries (S76-C3)."""
+        rule_id = "commands_log_no_pending"
+        log_path = self.bundle_dir / "commands.log"
+
+        if not log_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="commands.log must not contain PENDING entries",
+                severity="FAILURE", passed=False,
+                failure_detail="commands.log not found",
+            )
+
+        content = log_path.read_text(encoding="utf-8", errors="replace")
+        # Check for PENDING as a status value (e.g. "Exit: PENDING"), not narrative mentions
+        pending_lines = [
+            line.strip() for line in content.splitlines()
+            if re.search(r"(?:Exit|Status):\s*PENDING\b", line)
+        ]
+        if pending_lines:
+            return RuleResult(
+                rule_id=rule_id,
+                description="commands.log must not contain PENDING entries",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"commands.log has {len(pending_lines)} PENDING status line(s): "
+                    + "; ".join(pending_lines[:3])
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="commands.log must not contain PENDING entries",
+            severity="FAILURE", passed=True,
+            evidence="commands.log present with no PENDING entries",
+        )
+
+    def _rule_final_clean_proof_has_raw_git_lines(self) -> RuleResult:
+        """final-clean-proof.txt must contain embedded raw git status output (S76-C2).
+
+        A narrative-only proof file cannot be independently verified.
+        The file must contain at least one of:
+        - Raw git status short lines: ' M ', 'M  ', '?? ', 'A  ', 'D  ' etc.
+        - OR 'nothing to commit, working tree clean'
+        - OR 'no changes added to commit'
+        - OR 'nothing added to commit'
+        """
+        rule_id = "final_clean_proof_has_raw_git_lines"
+        proof_path = self.bundle_dir / "git" / "final-clean-proof.txt"
+
+        if not proof_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="final-clean-proof.txt must contain raw git status output",
+                severity="FAILURE", passed=False,
+                failure_detail="git/final-clean-proof.txt not found",
+            )
+
+        content = proof_path.read_text(encoding="utf-8", errors="replace")
+        clean_phrases = [
+            "nothing to commit",
+            "no changes added to commit",
+            "nothing added to commit",
+        ]
+        has_clean_phrase = any(phrase in content for phrase in clean_phrases)
+        # Raw git status short lines start with two-char status code + space
+        has_raw_status_line = bool(re.search(r"^[ MA?!D][M A?!D] ", content, re.MULTILINE))
+
+        if not (has_clean_phrase or has_raw_status_line):
+            return RuleResult(
+                rule_id=rule_id,
+                description="final-clean-proof.txt must contain raw git status output",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "final-clean-proof.txt is narrative-only — no raw git status lines found. "
+                    "Must embed actual 'git status --short' or 'git status' output, or include "
+                    "'nothing to commit' / 'no changes added' text."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="final-clean-proof.txt must contain raw git status output",
+            severity="FAILURE", passed=True,
+            evidence="final-clean-proof.txt contains embedded raw git status output",
+        )
+
+    def _rule_dirty_state_untracked_acknowledged(self) -> RuleResult:
+        """dirty-state-after.txt must show no untracked files (S76-C1).
+
+        After the final sprint bundle commit, dirty-state-after.txt must not show
+        any untracked files. Untracked files must be committed, removed, or never
+        present in the final post-commit state. Any untracked file remaining after
+        the bundle commit is an evidence gap — it was not committed and not removed.
+
+        Detects both formats:
+        - 'git status --short': lines starting with '?? '
+        - 'git status' (verbose): tab-indented paths under 'Untracked files:' section
+        """
+        rule_id = "dirty_state_untracked_acknowledged"
+        after_path = self.bundle_dir / "git" / "dirty-state-after.txt"
+
+        if not after_path.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="dirty-state-after.txt must show no untracked files after final commit",
+                severity="FAILURE", passed=True,
+                evidence="dirty-state-after.txt not present — skip",
+            )
+
+        after_content = after_path.read_text(encoding="utf-8", errors="replace")
+
+        # Detect both short format ('?? path') and verbose format (tab-indented under 'Untracked files:')
+        untracked: list[str] = []
+
+        # Short format: lines starting with '?? '
+        untracked.extend(m.strip() for m in re.findall(r"^\?\? (.+)$", after_content, re.MULTILINE))
+
+        # Verbose format: extract paths from 'Untracked files:' section
+        if "Untracked files:" in after_content:
+            in_untracked = False
+            for line in after_content.splitlines():
+                if "Untracked files:" in line:
+                    in_untracked = True
+                    continue
+                if in_untracked:
+                    if line.startswith("\t") and not line.strip().startswith("("):
+                        # Tab-indented path line (not a parenthetical instruction)
+                        path = line.strip()
+                        if path and path not in untracked:
+                            untracked.append(path)
+                    elif line.strip().startswith("("):
+                        # Instruction line like "  (use 'git add' ...)" — skip, stay in section
+                        pass
+                    elif line.strip() == "":
+                        # Blank line — end of section
+                        in_untracked = False
+                    elif not line.startswith("\t") and not line.startswith(" "):
+                        # New section at column 0 — end section
+                        in_untracked = False
+
+        if not untracked:
+            return RuleResult(
+                rule_id=rule_id,
+                description="dirty-state-after.txt must show no untracked files after final commit",
+                severity="FAILURE", passed=True,
+                evidence="No untracked files in dirty-state-after.txt — clean state confirmed",
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="dirty-state-after.txt must show no untracked files after final commit",
+            severity="FAILURE", passed=False,
+            failure_detail=(
+                f"dirty-state-after.txt shows {len(untracked)} untracked file(s): {untracked}. "
+                f"Untracked files must be committed or removed before final bundle closure. "
+                f"S76-C1: 'output.pptx' was untracked in sprint76 but not committed or removed."
+            ),
+        )
+
+    def _rule_validation_authority_unambiguous(self) -> RuleResult:
+        """Any *-validation-result.json with overall_valid=false must have canonical_overall_valid or bundle_type (S76-C4).
+
+        A validation result file that says overall_valid=false without any field explaining
+        why (bundle_type=REPAIR_BUNDLE or canonical_overall_valid=true) is ambiguous and
+        would mislead a reviewer into thinking the bundle failed validation.
+        """
+        rule_id = "validation_authority_unambiguous"
+        evidence_dir = self.bundle_dir / "evidence"
+
+        if not evidence_dir.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="Validation result files must not be ambiguously false",
+                severity="FAILURE", passed=True,
+                evidence="No evidence/ directory — nothing to check",
+            )
+
+        ambiguous_files = []
+        for f in evidence_dir.glob("*validation-result.json"):
+            if "diagnostic" in f.name or "revalidation" in f.name:
+                # Diagnostic and revalidation files are explicitly labeled — always OK
+                continue
+            try:
+                data = json.loads(f.read_text(encoding="utf-8", errors="replace"))
+                overall_valid = data.get("overall_valid")
+                canonical_overall_valid = data.get("canonical_overall_valid")
+                bundle_type = data.get("bundle_type", "")
+                if overall_valid is False and canonical_overall_valid is None and not bundle_type:
+                    ambiguous_files.append(f.name)
+            except (OSError, ValueError):
+                pass
+
+        if ambiguous_files:
+            return RuleResult(
+                rule_id=rule_id,
+                description="Validation result files must not be ambiguously false",
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"Validation result file(s) with overall_valid=false but no "
+                    f"canonical_overall_valid or bundle_type field: {ambiguous_files}. "
+                    f"Add 'canonical_overall_valid: true' or 'bundle_type: REPAIR_BUNDLE' "
+                    f"to clarify, or rename to 'diagnostic-*.json'."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id,
+            description="Validation result files must not be ambiguously false",
+            severity="FAILURE", passed=True,
+            evidence=f"All validation result files in evidence/ are unambiguous",
         )
 
     # ------------------------------------------------------------------

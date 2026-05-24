@@ -48,7 +48,8 @@ def _make_bundle(tmpdir: str) -> Path:
     (b / "git" / "final-clean-proof.txt").write_text(
         "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
         "workspace/verification/latest/ -- GENERATED_WORKSPACE_STATE governance exception\n"
-        "nothing else to commit, working tree clean\n",
+        " M workspace/verification/latest/release-status.json\n"
+        "nothing to commit (working tree has governed exceptions)\n",
         encoding="utf-8",
     )
 
@@ -1062,7 +1063,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 101)  # Sprint 76: added 8 new rules (94-101)
+        self.assertEqual(result.total_rules, 105)  # Sprint 77: added 4 new rules (102-105)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1154,7 +1155,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 101)  # Sprint 76: 101 rules total
+        self.assertEqual(len(d["rules"]), 105)  # Sprint 77: 105 rules total
 
 
 # ===========================================================================
@@ -1757,9 +1758,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 100 rules evaluated (101 total - 1 self-reference rule 21)
-        # Sprint 76: total is now 101 (added 8 new rules), so excluding rule 21 = 100
-        self.assertEqual(len(result.rule_results), 100)
+        # Should have exactly 104 rules evaluated (105 total - 1 self-reference rule 21)
+        # Sprint 77: total is now 105 (added 4 new rules), so excluding rule 21 = 104
+        self.assertEqual(len(result.rule_results), 104)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1805,7 +1806,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 101)  # Sprint 76: 101 rules total
+        self.assertEqual(len(phase_b.rule_results), 105)  # Sprint 77: 105 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2021,12 +2022,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 101 rules total (93 Sprint 75 + 8 new Sprint 76 rules)."""
+        """validate() must return 105 rules total (101 Sprint 76 + 4 new Sprint 77 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 101,
-                         f"Expected 101 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 105,
+                         f"Expected 105 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
@@ -2039,8 +2040,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 100,
-                         f"validate_for_storage must have 100 rules (101 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 104,
+                         f"validate_for_storage must have 104 rules (105 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -2359,6 +2360,189 @@ class TestSprint76ClosureRepairRules(unittest.TestCase):
         self.assertTrue(
             len(failing) >= 2,
             f"Sprint 75 bundle should fail at least 2 Sprint 76 rules (S75-B1 and S75-B2). "
+            f"Actually failing: {failing}",
+        )
+
+
+class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
+    """Tests for the 4 new Sprint 77 evidence consistency rules (102-105).
+
+    These rules close S76-C1 through S76-C4:
+    - S76-C1: untracked output.pptx not acknowledged in final verdict
+    - S76-C2: final-clean-proof.txt is narrative-only
+    - S76-C3: commands.log has PENDING entries
+    - S76-C4: validation authority is ambiguous
+    """
+
+    def test_rule102_fails_when_commands_log_has_pending(self):
+        """Rule 102: fails when commands.log contains PENDING."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "commands.log").write_text(
+                "phase0: done\nphase4: Exit: PENDING\n", encoding="utf-8"
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_pending")
+        self.assertFalse(rule.passed)
+        self.assertIn("PENDING", rule.failure_detail)
+
+    def test_rule102_passes_when_no_pending(self):
+        """Rule 102: passes when commands.log has no PENDING entries."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_pending")
+        self.assertTrue(rule.passed)
+
+    def test_rule103_fails_when_proof_is_narrative_only(self):
+        """Rule 103: fails when final-clean-proof.txt has no raw git lines."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
+                "workspace/verification/latest/ -- GENERATED_WORKSPACE_STATE governance exception\n"
+                "Sprint 76 bundle scope: clean (source/test committed)\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_raw_git_lines")
+        self.assertFalse(rule.passed)
+        self.assertIn("narrative-only", rule.failure_detail)
+
+    def test_rule103_passes_with_raw_status_lines(self):
+        """Rule 103: passes when final-clean-proof.txt includes raw git status lines."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # _make_bundle already includes ' M workspace/...' line
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_raw_git_lines")
+        self.assertTrue(rule.passed)
+
+    def test_rule103_passes_with_nothing_to_commit(self):
+        """Rule 103: passes when final-clean-proof.txt contains 'nothing to commit'."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
+                "nothing to commit, working tree clean\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_raw_git_lines")
+        self.assertTrue(rule.passed)
+
+    def test_rule104_fails_when_untracked_short_format(self):
+        """Rule 104: fails when dirty-state-after.txt shows ?? untracked files (short format)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "dirty-state-after.txt").write_text(
+                "On branch main\n"
+                " M workspace/verification/latest/release-status.json\n"
+                "?? reports/sprint75/handoff/compress/output.pptx\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "dirty_state_untracked_acknowledged")
+        self.assertFalse(rule.passed)
+        self.assertIn("untracked", rule.failure_detail.lower())
+
+    def test_rule104_fails_when_untracked_verbose_format(self):
+        """Rule 104: fails when dirty-state-after.txt shows untracked files (verbose format)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "dirty-state-after.txt").write_text(
+                "On branch main\nUntracked files:\n"
+                "  (use \"git add <file>...\" to include in what will be committed)\n"
+                "\treports/sprint75/handoff/compress/output.pptx\n\n"
+                "nothing added to commit but untracked files present\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "dirty_state_untracked_acknowledged")
+        self.assertFalse(rule.passed)
+
+    def test_rule104_passes_when_no_untracked(self):
+        """Rule 104: passes when dirty-state-after.txt shows no untracked files."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "dirty_state_untracked_acknowledged")
+        self.assertTrue(rule.passed)
+
+    def test_rule105_fails_when_validation_result_ambiguous(self):
+        """Rule 105: fails when *-validation-result.json has overall_valid=false without explanation."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Add an ambiguous validation result (no bundle_type, no canonical_overall_valid)
+            (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint77-test",
+                    "overall_valid": False,
+                    "passed": 39,
+                    "failed": 61,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_authority_unambiguous")
+        self.assertFalse(rule.passed)
+        self.assertIn("overall_valid=false", rule.failure_detail)
+
+    def test_rule105_passes_when_repair_bundle_type_present(self):
+        """Rule 105: passes when overall_valid=false file has bundle_type=REPAIR_BUNDLE."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint77-test",
+                    "bundle_type": "REPAIR_BUNDLE",
+                    "overall_valid": False,
+                    "passed": 39,
+                    "failed": 61,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_authority_unambiguous")
+        self.assertTrue(rule.passed)
+
+    def test_rule105_passes_when_canonical_overall_valid_present(self):
+        """Rule 105: passes when overall_valid=false file has canonical_overall_valid=true."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint77-test",
+                    "canonical_overall_valid": True,
+                    "overall_valid": False,
+                    "passed": 39,
+                    "failed": 61,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_authority_unambiguous")
+        self.assertTrue(rule.passed)
+
+    def test_sprint76_bundle_fails_sprint77_rules(self):
+        """Sprint 76 bundle must fail all 4 Sprint 77 rules (S76-C1 through S76-C4)."""
+        bundle_path = Path("reports/sprint76")
+        if not bundle_path.exists():
+            self.skipTest("Sprint 76 bundle not present")
+        result = EvidenceValidator(bundle_path).validate()
+        sprint77_rules = [
+            "commands_log_no_pending",
+            "final_clean_proof_has_raw_git_lines",
+            "dirty_state_untracked_acknowledged",
+            "validation_authority_unambiguous",
+        ]
+        failing = [
+            r.rule_id for r in result.rule_results
+            if r.rule_id in sprint77_rules and not r.passed
+        ]
+        self.assertEqual(
+            len(failing), 4,
+            f"Sprint 76 bundle should fail all 4 Sprint 77 rules. "
             f"Actually failing: {failing}",
         )
 

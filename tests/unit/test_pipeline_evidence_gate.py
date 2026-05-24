@@ -22,14 +22,15 @@ from plugin_examples.evidence_validator import EvidenceValidator
 
 
 def _make_valid_bundle(tmpdir: str) -> Path:
-    """Create a minimal valid bundle (passes all 101 rules)."""
+    """Create a minimal valid bundle (passes all 105 rules)."""
     b = Path(tmpdir)
 
     (b / "git").mkdir(parents=True)
     (b / "git" / "final-clean-proof.txt").write_text(
         "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
         "workspace/verification/latest/ -- pre-existing runtime files, GENERATED_WORKSPACE_STATE governance exception\n"
-        "nothing else to commit, working tree clean\n",
+        " M workspace/verification/latest/release-status.json\n"
+        "nothing to commit (working tree has governed exceptions)\n",
         encoding="utf-8",
     )
 

@@ -1,0 +1,20 @@
+{
+  "sprint_id": "sprint77",
+  "date": "2026-05-24",
+  "bundle_type": "REPAIR_SPRINT",
+  "parent_sprint": "sprint76",
+  "defects_repaired": ["S76-C1", "S76-C2", "S76-C3", "S76-C4"],
+  "tests_passing": 3064,
+  "ev_rules": 105,
+  "new_ev_rules": 4,
+  "ecc_categories": 32,
+  "slides_compress_output_pptx_committed": true,
+  "slides_compress_output_bytes": 19807,
+  "final_clean_proof_has_raw_git": true,
+  "commands_log_no_pending": true,
+  "validation_authority_unambiguous": true,
+  "dirty_state_consistent": true,
+  "workspace_dirty_exception": "workspace/verification/latest/ -- 7 files (GENERATED_WORKSPACE_STATE governance exception)",
+  "publication_status": "APPROVAL_BLOCKED",
+  "verdict": "LOWCODE_WEEKLY_REVIEW_REPAIRED_WITH_WORKSPACE_EXCEPTION_PUBLICATION_APPROVAL_BLOCKED"
+}

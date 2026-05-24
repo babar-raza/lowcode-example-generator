@@ -1,0 +1,33 @@
+--- git status --short (post-sprint77-commit) ---
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+
+--- git status ---
+On branch main
+Your branch is ahead of 'origin/main' by 99 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   workspace/verification/latest/cells-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/cells-root-readme-audit.json
+	modified:   workspace/verification/latest/cells-root-readme-render-result.json
+	modified:   workspace/verification/latest/release-status.json
+	modified:   workspace/verification/latest/words-readme-backfill-simulation.json
+	modified:   workspace/verification/latest/words-root-readme-audit.json
+	modified:   workspace/verification/latest/words-root-readme-render-result.json
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+--- CLASSIFICATION ---
+workspace/verification/latest/ -- 7 files modified -- GENERATED_WORKSPACE_STATE governance exception (Sprint 66+)
+src/ -- CLEAN
+tests/ -- CLEAN
+reports/sprint77/ -- COMMITTED (sprint77 bundle)
+No untracked files remain (output.pptx moved to sprint77 artifacts via Option B)

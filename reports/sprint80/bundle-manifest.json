@@ -1,0 +1,68 @@
+{
+  "bundle_id": "sprint80",
+  "bundle_type": "REPAIR_SPRINT",
+  "created": "2026-05-24",
+  "sprint_id": "sprint80",
+  "repairs_for": "sprint79",
+  "verdict": "SPRINT80_REPAIR_COMPLETE_S79_DEFECTS_RESOLVED",
+  "ecc_categories": 34,
+  "ev_rules": 111,
+  "ev_applicable_passed": 56,
+  "ev_non_applicable_diagnostic": 55,
+  "test_count": 3088,
+  "new_source_files": [],
+  "modified_source_files": [
+    "src/plugin_examples/evidence_validator.py",
+    "tests/unit/test_evidence_validator.py"
+  ],
+  "evidence_files": [
+    "reports/sprint80/evidence/sprint80-final-validation-result.json",
+    "reports/sprint80/evidence/diagnostic-full-rules-non-applicable.json",
+    "reports/sprint80/evidence/validation-authority-map.md",
+    "reports/sprint80/evidence/validation-authority-consistency.json",
+    "reports/sprint80/evidence/ecc-self-reference-policy.md",
+    "reports/sprint80/evidence/ecc-final-proof.md",
+    "reports/sprint80/evidence/validator-test-results.txt",
+    "reports/sprint80/evidence/validator-test-count-authority.md",
+    "reports/sprint80/evidence/validator-source-proof.patch",
+    "reports/sprint80/evidence/pipeline-integration-proof.md",
+    "reports/sprint80/evidence/pipeline-integration-test-results.txt",
+    "reports/sprint80/evidence/pipeline-integration-source-map.json",
+    "reports/sprint80/evidence/evidence-contract-computed.json"
+  ],
+  "publication_files": [
+    "reports/sprint80/publication/publication-truth-matrix-final.json",
+    "reports/sprint80/publication/denominator-reconciliation.json",
+    "reports/sprint80/publication/denominator-authority.md",
+    "reports/sprint80/publication/publication-summary.md",
+    "reports/sprint80/publication/live-approval-check.md"
+  ],
+  "remote_files": [
+    "reports/sprint80/remote/remote-repo-state-before.json",
+    "reports/sprint80/remote/remote-readme-io-audit-before.json",
+    "reports/sprint80/remote/remote-conflict-check.md",
+    "reports/sprint80/remote/remote-vs-handoff-before.json"
+  ],
+  "review_files": [
+    "reports/sprint80/review/adversarial-review.md",
+    "reports/sprint80/review/self-repair-actions.json",
+    "reports/sprint80/review/final-consistency-check.json"
+  ],
+  "log_files": [
+    "reports/sprint80/logs/test-run-raw.log",
+    "reports/sprint80/logs/test-run.log"
+  ],
+  "git_files": [
+    "reports/sprint80/git/dirty-state-before.txt",
+    "reports/sprint80/git/dirty-file-classification.md",
+    "reports/sprint80/git/dirty-state-after.txt",
+    "reports/sprint80/git/final-clean-proof.txt"
+  ],
+  "carry_forward_files": [
+    "reports/sprint80/formimporter/formimporter-repro-inventory.json",
+    "reports/sprint80/version-drift/words-version-drift-current.json",
+    "reports/sprint80/post-merge-runtime/post-merge-validation-matrix.json",
+    "reports/sprint80/governance/sprint27-strict-contract-revalidation.md",
+    "reports/sprint80/pdf-publication/pdf-pr-reconciliation.json"
+  ]
+}

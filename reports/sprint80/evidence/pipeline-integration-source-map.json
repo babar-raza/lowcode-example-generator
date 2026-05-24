@@ -1,0 +1,10 @@
+{
+  "sprint_id": "sprint80",
+  "ev_source": "src/plugin_examples/evidence_validator.py",
+  "ev_sha256": "4aff7de73856d595d6d283084aa110675a458f8e0c3eda44e8b773e4924dc2f2",
+  "main_sha256": "b4658d354049c191c56ba6a10f3af80de5d17ab2cb34c4a8b048d374146e49fe",
+  "ev_rule_count": 111,
+  "new_rules_sprint80": [
+    "rule_111_no_active_validation_file_with_ambiguous_false"
+  ]
+}

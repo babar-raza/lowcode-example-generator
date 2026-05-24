@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 110)  # Sprint 79: added 2 new rules (109-110)
+        self.assertEqual(result.total_rules, 111)  # Sprint 80: added 1 new rule (111)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 110)  # Sprint 79: 110 rules total
+        self.assertEqual(len(d["rules"]), 111)  # Sprint 80: 111 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 109 rules evaluated (110 total - 1 self-reference rule 21)
-        # Sprint 79: total is now 110 (added 2 new rules), so excluding rule 21 = 109
-        self.assertEqual(len(result.rule_results), 109)
+        # Should have exactly 110 rules evaluated (111 total - 1 self-reference rule 21)
+        # Sprint 80: total is now 111 (added 1 new rule), so excluding rule 21 = 110
+        self.assertEqual(len(result.rule_results), 110)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 110)  # Sprint 79: 110 rules total
+        self.assertEqual(len(phase_b.rule_results), 111)  # Sprint 80: 111 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2071,12 +2071,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 110,
-                         f"Expected 110 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 111,
+                         f"Expected 111 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-110."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-111."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 109,
-                         f"validate_for_storage must have 109 rules (110 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 110,
+                         f"validate_for_storage must have 110 rules (111 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -2870,6 +2870,96 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         rule = next(
             r for r in result.rule_results
             if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label"
+        )
+        self.assertTrue(rule.passed)
+
+
+class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
+    """Tests for Sprint 80 rule 111 (S79-B1): no active validation file with ambiguous overall_valid=false."""
+
+    # Rule 111: no_active_validation_file_with_ambiguous_false
+
+    def test_rule111_fails_when_validation_result_has_overall_valid_false_no_not_canonical(self):
+        """Rule 111: *-validation-result.json with overall_valid=false but no not_canonical=true."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint80-final-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint80",
+                    "overall_valid": False,
+                    "canonical_overall_valid": True,
+                    "applicable_rules_failed": 0,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
+        )
+        self.assertFalse(rule.passed)
+        self.assertIn("sprint80-final-validation-result.json", rule.failure_detail)
+
+    def test_rule111_passes_when_validation_result_has_not_canonical_true(self):
+        """Rule 111: passes when overall_valid=false but not_canonical=true is set."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "diagnostic-full-rules-non-applicable.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint80",
+                    "overall_valid": False,
+                    "not_canonical": True,
+                    "diagnostic_rules_are_non_blocking": True,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule111_passes_when_validation_result_has_no_overall_valid_false(self):
+        """Rule 111: passes when canonical_overall_valid=true and no overall_valid=false field."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence" / "sprint80-final-validation-result.json").write_text(
+                json.dumps({
+                    "sprint_id": "sprint80",
+                    "canonical_overall_valid": True,
+                    "applicable_rules_failed": 0,
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule111_passes_trivially_when_no_validation_result_files(self):
+        """Rule 111: passes trivially when no *-validation-result.json files in evidence/."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
+        )
+        self.assertTrue(rule.passed)
+
+    def test_rule111_passes_trivially_when_evidence_dir_absent(self):
+        """Rule 111: passes trivially when evidence/ directory is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            import shutil
+            shutil.rmtree(str(b / "evidence"))
+            result = EvidenceValidator(b).validate()
+        rule = next(
+            r for r in result.rule_results
+            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
         )
         self.assertTrue(rule.passed)
 

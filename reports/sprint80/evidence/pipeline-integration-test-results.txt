@@ -1,0 +1,14 @@
+Sprint 80 Rule 111 tests:
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collected 147 items / 142 deselected / 5 selected
+
+tests\unit\test_evidence_validator.py .....                              [100%]
+
+====================== 5 passed, 142 deselected in 5.69s ======================

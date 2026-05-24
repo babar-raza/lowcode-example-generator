@@ -1,0 +1,33 @@
+{
+  "sprint_id": "sprint80",
+  "checked_at": "2026-05-24",
+  "checks": [
+    {
+      "id": "VA-1",
+      "check": "sprint80-final-validation-result.json has canonical_overall_valid=true",
+      "result": "PASS"
+    },
+    {
+      "id": "VA-2",
+      "check": "sprint80-final-validation-result.json does not have overall_valid=false",
+      "result": "PASS"
+    },
+    {
+      "id": "VA-3",
+      "check": "diagnostic-full-rules-non-applicable.json has not_canonical=true",
+      "result": "PASS"
+    },
+    {
+      "id": "VA-4",
+      "check": "EV Rule 111 enforces no ambiguous overall_valid=false in evidence/",
+      "result": "PASS"
+    },
+    {
+      "id": "VA-5",
+      "check": "sprint79-final-validation-result.json would fail Rule 111 (expected \u2014 S79-B1 retroactively detected)",
+      "result": "PASS"
+    }
+  ],
+  "all_pass": true,
+  "verdict": "VALIDATION_AUTHORITY_UNAMBIGUOUS"
+}

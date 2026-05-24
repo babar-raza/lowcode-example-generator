@@ -109,6 +109,9 @@ Sprint 78 additions (3 new rules, closes S77-D1 through S77-D3):
 Sprint 79 additions (2 new rules, closes S78-E1 and S78-E2):
 - Rule: ecc_closure_valid_only_if_no_blocking_failures (evidence-contract-computed.json closure_valid=true is a lie if blocking_failures>0 — S78-E1)
 - Rule: diagnostic_bundle_file_has_nonblocking_label (any *-bundle-validation-result.json with overall_valid=false must have diagnostic_rules_are_non_blocking=true — S78-E2)
+
+Sprint 80 additions (1 new rule, closes S79-B1):
+- Rule: no_active_validation_file_with_ambiguous_false (any evidence/*-validation-result.json with overall_valid=false must have not_canonical=true — S79-B1)
 """
 
 from __future__ import annotations
@@ -362,6 +365,9 @@ class EvidenceValidator:
         # --- Sprint 79 NEW rules: close S78-E1 and S78-E2 ---
         _maybe(self._rule_ecc_closure_valid_only_if_no_blocking_failures())
         _maybe(self._rule_diagnostic_bundle_file_has_nonblocking_label())
+
+        # --- Sprint 80 NEW rules: close S79-B1 ---
+        _maybe(self._rule_no_active_validation_file_with_ambiguous_false())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -5608,6 +5614,54 @@ class EvidenceValidator:
                 f"All {len(bundle_files)} bundle-validation-result file(s) are correctly "
                 "labeled (overall_valid=true or diagnostic_rules_are_non_blocking=true)"
             ),
+        )
+
+    def _rule_no_active_validation_file_with_ambiguous_false(self) -> RuleResult:
+        """evidence/*-validation-result.json files must not have overall_valid=false
+        without not_canonical=true (S79-B1).
+
+        Sprint 79 defect: sprint79-final-validation-result.json had overall_valid=false
+        while claiming canonical_overall_valid=true. Future agents cannot reliably
+        distinguish this from a genuine validation failure.
+        Any final-looking validation result with overall_valid=false must declare
+        not_canonical=true to prevent misinterpretation.
+        """
+        rule_id = "no_active_validation_file_with_ambiguous_false"
+        description = "No active validation file may have overall_valid=false without not_canonical=true"
+        evidence_dir = self.bundle_dir / "evidence"
+
+        if not evidence_dir.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="evidence/ directory not found — rule not applicable",
+            )
+
+        offenders = []
+        for f in sorted(evidence_dir.glob("*-validation-result.json")):
+            try:
+                data = json.loads(f.read_text(encoding="utf-8", errors="replace"))
+            except (OSError, ValueError):
+                continue
+            if data.get("overall_valid") is False and not data.get("not_canonical"):
+                offenders.append(f.name)
+
+        if offenders:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S79-B1: *-validation-result.json file(s) with overall_valid=false "
+                    f"lack not_canonical=true: {'; '.join(offenders)}. "
+                    "Either remove overall_valid=false (if applicable rules all pass) "
+                    "or add not_canonical=true to mark as diagnostic-only."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"All *-validation-result.json files in evidence/ have unambiguous overall_valid",
         )
 
     # ------------------------------------------------------------------

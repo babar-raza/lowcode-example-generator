@@ -1,0 +1,32 @@
+{
+  "sprint_id": "sprint80",
+  "checked_at": "2026-05-24",
+  "in_sync_count": 5,
+  "drift_count": 1,
+  "drift_families": [
+    "words"
+  ],
+  "families": {
+    "cells": {
+      "status": "IN_SYNC"
+    },
+    "words": {
+      "status": "REMOTE_DRIFT",
+      "remote_version": "26.4.0",
+      "handoff_version": "26.5.0"
+    },
+    "pdf": {
+      "status": "IN_SYNC"
+    },
+    "diagram": {
+      "status": "IN_SYNC"
+    },
+    "email": {
+      "status": "IN_SYNC"
+    },
+    "slides": {
+      "status": "IN_SYNC"
+    }
+  },
+  "verdict": "REMOTE_VS_HANDOFF_MOSTLY_SYNCED"
+}

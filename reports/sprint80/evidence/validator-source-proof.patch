@@ -1,0 +1,224 @@
+diff --git a/src/plugin_examples/evidence_validator.py b/src/plugin_examples/evidence_validator.py
+index 48cd418..3f0a51d 100644
+--- a/src/plugin_examples/evidence_validator.py
++++ b/src/plugin_examples/evidence_validator.py
+@@ -109,6 +109,9 @@ Sprint 78 additions (3 new rules, closes S77-D1 through S77-D3):
+ Sprint 79 additions (2 new rules, closes S78-E1 and S78-E2):
+ - Rule: ecc_closure_valid_only_if_no_blocking_failures (evidence-contract-computed.json closure_valid=true is a lie if blocking_failures>0 â€” S78-E1)
+ - Rule: diagnostic_bundle_file_has_nonblocking_label (any *-bundle-validation-result.json with overall_valid=false must have diagnostic_rules_are_non_blocking=true â€” S78-E2)
++
++Sprint 80 additions (1 new rule, closes S79-B1):
++- Rule: no_active_validation_file_with_ambiguous_false (any evidence/*-validation-result.json with overall_valid=false must have not_canonical=true â€” S79-B1)
+ """
+ 
+ from __future__ import annotations
+@@ -363,6 +366,9 @@ class EvidenceValidator:
+         _maybe(self._rule_ecc_closure_valid_only_if_no_blocking_failures())
+         _maybe(self._rule_diagnostic_bundle_file_has_nonblocking_label())
+ 
++        # --- Sprint 80 NEW rules: close S79-B1 ---
++        _maybe(self._rule_no_active_validation_file_with_ambiguous_false())
++
+         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
+         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
+ 
+@@ -5610,6 +5616,54 @@ class EvidenceValidator:
+             ),
+         )
+ 
++    def _rule_no_active_validation_file_with_ambiguous_false(self) -> RuleResult:
++        """evidence/*-validation-result.json files must not have overall_valid=false
++        without not_canonical=true (S79-B1).
++
++        Sprint 79 defect: sprint79-final-validation-result.json had overall_valid=false
++        while claiming canonical_overall_valid=true. Future agents cannot reliably
++        distinguish this from a genuine validation failure.
++        Any final-looking validation result with overall_valid=false must declare
++        not_canonical=true to prevent misinterpretation.
++        """
++        rule_id = "no_active_validation_file_with_ambiguous_false"
++        description = "No active validation file may have overall_valid=false without not_canonical=true"
++        evidence_dir = self.bundle_dir / "evidence"
++
++        if not evidence_dir.exists():
++            return RuleResult(
++                rule_id=rule_id, description=description,
++                severity="FAILURE", passed=True,
++                evidence="evidence/ directory not found â€” rule not applicable",
++            )
++
++        offenders = []
++        for f in sorted(evidence_dir.glob("*-validation-result.json")):
++            try:
++                data = json.loads(f.read_text(encoding="utf-8", errors="replace"))
++            except (OSError, ValueError):
++                continue
++            if data.get("overall_valid") is False and not data.get("not_canonical"):
++                offenders.append(f.name)
++
++        if offenders:
++            return RuleResult(
++                rule_id=rule_id, description=description,
++                severity="FAILURE", passed=False,
++                failure_detail=(
++                    f"S79-B1: *-validation-result.json file(s) with overall_valid=false "
++                    f"lack not_canonical=true: {'; '.join(offenders)}. "
++                    "Either remove overall_valid=false (if applicable rules all pass) "
++                    "or add not_canonical=true to mark as diagnostic-only."
++                ),
++            )
++
++        return RuleResult(
++            rule_id=rule_id, description=description,
++            severity="FAILURE", passed=True,
++            evidence=f"All *-validation-result.json files in evidence/ have unambiguous overall_valid",
++        )
++
+     # ------------------------------------------------------------------
+     # Helpers
+     # ------------------------------------------------------------------
+diff --git a/tests/unit/test_evidence_validator.py b/tests/unit/test_evidence_validator.py
+index c5a9a17..9480e13 100644
+--- a/tests/unit/test_evidence_validator.py
++++ b/tests/unit/test_evidence_validator.py
+@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
+             result = EvidenceValidator(b).validate()
+         self.assertTrue(result.overall_valid)
+         self.assertEqual(result.failed, 0)
+-        self.assertEqual(result.total_rules, 110)  # Sprint 79: added 2 new rules (109-110)
++        self.assertEqual(result.total_rules, 111)  # Sprint 80: added 1 new rule (111)
+ 
+     def test_overall_valid_false_on_any_failure(self):
+         with tempfile.TemporaryDirectory() as tmpdir:
+@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
+         self.assertIn("sprint_id", d)
+         self.assertIn("overall_valid", d)
+         self.assertIn("rules", d)
+-        self.assertEqual(len(d["rules"]), 110)  # Sprint 79: 110 rules total
++        self.assertEqual(len(d["rules"]), 111)  # Sprint 80: 111 rules total
+ 
+ 
+ # ===========================================================================
+@@ -2071,12 +2071,12 @@ class TestECCContractComputedAndValid(unittest.TestCase):
+         with tempfile.TemporaryDirectory() as tmpdir:
+             b = _make_bundle(tmpdir)
+             result = EvidenceValidator(b).validate()
+-        self.assertEqual(result.total_rules, 110,
+-                         f"Expected 110 rules, got {result.total_rules}: "
++        self.assertEqual(result.total_rules, 111,
++                         f"Expected 111 rules, got {result.total_rules}: "
+                          f"{[r.rule_id for r in result.rule_results]}")
+ 
+     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
+-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-110."""
++        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-111."""
+         with tempfile.TemporaryDirectory() as tmpdir:
+             b = _make_bundle(tmpdir)
+             result = EvidenceValidator(b).validate_for_storage()
+@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
+                          "validate_for_storage must exclude rule 21 (self-reference)")
+         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
+                       "validate_for_storage must include rule 22 (ECC gate)")
+-        self.assertEqual(result.total_rules, 109,
+-                         f"validate_for_storage must have 109 rules (110 - 1 self-ref), "
++        self.assertEqual(result.total_rules, 110,
++                         f"validate_for_storage must have 110 rules (111 - 1 self-ref), "
+                          f"got {result.total_rules}")
+ 
+ 
+@@ -2874,5 +2874,95 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
+         self.assertTrue(rule.passed)
+ 
+ 
++class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
++    """Tests for Sprint 80 rule 111 (S79-B1): no active validation file with ambiguous overall_valid=false."""
++
++    # Rule 111: no_active_validation_file_with_ambiguous_false
++
++    def test_rule111_fails_when_validation_result_has_overall_valid_false_no_not_canonical(self):
++        """Rule 111: *-validation-result.json with overall_valid=false but no not_canonical=true."""
++        with tempfile.TemporaryDirectory() as tmpdir:
++            b = _make_bundle(tmpdir)
++            (b / "evidence" / "sprint80-final-validation-result.json").write_text(
++                json.dumps({
++                    "sprint_id": "sprint80",
++                    "overall_valid": False,
++                    "canonical_overall_valid": True,
++                    "applicable_rules_failed": 0,
++                }),
++                encoding="utf-8",
++            )
++            result = EvidenceValidator(b).validate()
++        rule = next(
++            r for r in result.rule_results
++            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
++        )
++        self.assertFalse(rule.passed)
++        self.assertIn("sprint80-final-validation-result.json", rule.failure_detail)
++
++    def test_rule111_passes_when_validation_result_has_not_canonical_true(self):
++        """Rule 111: passes when overall_valid=false but not_canonical=true is set."""
++        with tempfile.TemporaryDirectory() as tmpdir:
++            b = _make_bundle(tmpdir)
++            (b / "evidence" / "diagnostic-full-rules-non-applicable.json").write_text(
++                json.dumps({
++                    "sprint_id": "sprint80",
++                    "overall_valid": False,
++                    "not_canonical": True,
++                    "diagnostic_rules_are_non_blocking": True,
++                }),
++                encoding="utf-8",
++            )
++            result = EvidenceValidator(b).validate()
++        rule = next(
++            r for r in result.rule_results
++            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
++        )
++        self.assertTrue(rule.passed)
++
++    def test_rule111_passes_when_validation_result_has_no_overall_valid_false(self):
++        """Rule 111: passes when canonical_overall_valid=true and no overall_valid=false field."""
++        with tempfile.TemporaryDirectory() as tmpdir:
++            b = _make_bundle(tmpdir)
++            (b / "evidence" / "sprint80-final-validation-result.json").write_text(
++                json.dumps({
++                    "sprint_id": "sprint80",
++                    "canonical_overall_valid": True,
++                    "applicable_rules_failed": 0,
++                }),
++                encoding="utf-8",
++            )
++            result = EvidenceValidator(b).validate()
++        rule = next(
++            r for r in result.rule_results
++            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
++        )
++        self.assertTrue(rule.passed)
++
++    def test_rule111_passes_trivially_when_no_validation_result_files(self):
++        """Rule 111: passes trivially when no *-validation-result.json files in evidence/."""
++        with tempfile.TemporaryDirectory() as tmpdir:
++            b = _make_bundle(tmpdir)
++            result = EvidenceValidator(b).validate()
++        rule = next(
++            r for r in result.rule_results
++            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
++        )
++        self.assertTrue(rule.passed)
++
++    def test_rule111_passes_trivially_when_evidence_dir_absent(self):
++        """Rule 111: passes trivially when evidence/ directory is absent."""
++        with tempfile.TemporaryDirectory() as tmpdir:
++            b = _make_bundle(tmpdir)
++            import shutil
++            shutil.rmtree(str(b / "evidence"))
++            result = EvidenceValidator(b).validate()
++        rule = next(
++            r for r in result.rule_results
++            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
++        )
++        self.assertTrue(rule.passed)
++
++
+ if __name__ == "__main__":
+     unittest.main()

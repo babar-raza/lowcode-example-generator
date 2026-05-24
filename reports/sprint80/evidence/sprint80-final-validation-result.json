@@ -1,0 +1,28 @@
+{
+  "sprint_id": "sprint80",
+  "bundle_type": "REPAIR_SPRINT",
+  "canonical_overall_valid": true,
+  "applicable_rules_total": 56,
+  "applicable_rules_passed": 56,
+  "applicable_rules_failed": 0,
+  "non_applicable_rules_total": 55,
+  "diagnostic_rules_failed": 55,
+  "diagnostic_rules_are_non_blocking": true,
+  "reason_non_applicable": "REPAIR_SPRINT does not regenerate examples, run remote publication, or backfill README I/O \u2014 generation, remote-proof, handoff, root-readme, version, and legacy-reconciliation rules are non-applicable diagnostic checks",
+  "phase": "B_FINAL",
+  "ev_total_rules": 111,
+  "ev_passed": 56,
+  "ev_failed": 55,
+  "ev_sprint80_new_rules_passed": [
+    "rule_111_no_active_validation_file_with_ambiguous_false"
+  ],
+  "sprint79_defects_repaired": [
+    "S79-B1",
+    "S79-B2",
+    "S79-B3",
+    "S79-B4",
+    "S79-B5"
+  ],
+  "authority": "EV Phase B full validation \u2014 2026-05-24",
+  "note": "No overall_valid field \u2014 canonical_overall_valid is the sole authority per S79-B1 fix"
+}

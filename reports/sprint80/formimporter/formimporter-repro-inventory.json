@@ -1,0 +1,48 @@
+{
+  "sprint_id": "sprint75",
+  "generated": "2026-05-23",
+  "taskcard_id": "TC-PDF-FORMIMPORTER-RETEST",
+  "defect_version": "26.5.0",
+  "latest_nuget_version": "26.5.0",
+  "version_advanced": false,
+  "current_status": "STILL_BLOCKED",
+  "repro_root": "workspace/defect-repros/pdf-formimporter-nullref",
+  "repro_files": [
+    {
+      "path": "workspace/defect-repros/pdf-formimporter-nullref/Program.cs",
+      "description": "Minimal repro harness — creates AcroForm PDF, exports JSON via FormExporter, then calls FormImporter which triggers NullReferenceException",
+      "present": true
+    },
+    {
+      "path": "workspace/defect-repros/pdf-formimporter-nullref/formimporter-repro.csproj",
+      "description": "Project file referencing Aspose.PDF 26.5.0",
+      "present": true,
+      "package_version": "26.5.0"
+    },
+    {
+      "path": "workspace/defect-repros/pdf-formimporter-nullref/minimal-form.pdf",
+      "description": "Generated minimal AcroForm fixture",
+      "present": true
+    },
+    {
+      "path": "workspace/defect-repros/pdf-formimporter-nullref/minimal-form-data.json",
+      "description": "FormExporter output JSON for FormImporter input",
+      "present": true
+    },
+    {
+      "path": "workspace/defect-repros/pdf-formimporter-nullref/formimporter-nullref-repro.zip",
+      "description": "Archive of repro package",
+      "present": true
+    }
+  ],
+  "watch_automation": {
+    "path": "src/plugin_examples/package_watcher/formimporter_watch.py",
+    "present": true,
+    "trigger_condition": "Aspose.PDF NuGet latestVersion > 26.5.0"
+  },
+  "retest_history": [
+    {"sprint": "mega-train-005", "date": "2026-05-20", "result": "STILL_BLOCKED", "version_tested": "26.5.0"},
+    {"sprint": "sprint75", "date": "2026-05-23", "result": "STILL_BLOCKED", "version_tested": "26.5.0", "note": "No new NuGet version; retest not triggered"}
+  ],
+  "next_retest_trigger": "Aspose.PDF NuGet version > 26.5.0"
+}

@@ -22,12 +22,15 @@ from plugin_examples.evidence_validator import EvidenceValidator
 
 
 def _make_valid_bundle(tmpdir: str) -> Path:
-    """Create a minimal valid bundle (passes all 22 rules)."""
+    """Create a minimal valid bundle (passes all 101 rules)."""
     b = Path(tmpdir)
 
     (b / "git").mkdir(parents=True)
     (b / "git" / "final-clean-proof.txt").write_text(
-        "On branch main\nnothing to commit, working tree clean\n", encoding="utf-8"
+        "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
+        "workspace/verification/latest/ -- pre-existing runtime files, GENERATED_WORKSPACE_STATE governance exception\n"
+        "nothing else to commit, working tree clean\n",
+        encoding="utf-8",
     )
 
     (b / "destination").mkdir(parents=True)
@@ -550,21 +553,40 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     )
 
     # Rule 90: email_slides_runtime_validated
+    # Rules 94+95: output_confirmed=true, no NO_INPUT_FIXTURE runtime_result
     (b / "post-merge-runtime").mkdir(parents=True, exist_ok=True)
     (b / "post-merge-runtime" / "post-merge-validation-matrix.json").write_text(
         json.dumps({
             "sprint_id": "sprint61-test",
             "records": [
-                {"scenario_id": "email-html-converter", "post_merge_validated": True},
-                {"scenario_id": "slides-compress", "post_merge_validated": True},
+                {
+                    "scenario_id": "email-html-converter",
+                    "post_merge_validated": True,
+                    "output_confirmed": True,
+                    "runtime_result": "RUNTIME_VALIDATED",
+                },
+                {
+                    "scenario_id": "slides-compress",
+                    "post_merge_validated": True,
+                    "output_confirmed": True,
+                    "runtime_result": "RUNTIME_VALIDATED",
+                },
             ],
         }),
         encoding="utf-8",
     )
 
     # Rule 91: dirty_tree_classified
+    # Rule 96: dirty_classification_must_match_after_snapshot — no src/tests in classification
     (b / "git" / "dirty-file-classification.md").write_text(
-        "# Dirty File Classification\n\nAll dirty files classified.\n",
+        "# Dirty File Classification\n\nAll dirty files classified.\n"
+        "workspace/verification/latest/: GENERATED_WORKSPACE_STATE — EXCLUDE\n",
+        encoding="utf-8",
+    )
+
+    # Rules 96, 100: dirty-state-after.txt — no src/tests modified
+    (b / "git" / "dirty-state-after.txt").write_text(
+        "On branch main\nnothing to commit, working tree clean\n",
         encoding="utf-8",
     )
 

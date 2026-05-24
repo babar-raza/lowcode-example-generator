@@ -1,0 +1,51 @@
+Slides Compress — End-to-End Runtime Validation — Sprint 76
+Date: 2026-05-24
+
+VERDICT: RUNTIME_VALIDATED — Full end-to-end compression confirmed
+
+Context:
+  Sprint 75 partial: "RUNTIME_VALIDATED_NO_INPUT_FIXTURE" (graceful-exit only)
+  Sprint 76 repair: Real .pptx fixture placed, full compression executed
+
+Fixture:
+  source: workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/compress/input.pptx
+  size: 34242 bytes
+  sha256: b14bd40bf4e338a238c86c5491aa08ead44b799f1af444de24750d4635bbf427
+  placed at: reports/sprint75/handoff/per-family/slides/compress/input.pptx
+
+Package: Aspose.Slides.NET 26.5.0
+Working dir: reports/sprint75/handoff/per-family/slides/compress/
+
+== dotnet restore ==
+  exit: 0
+  result: Restored in 2.51 sec (Aspose.Slides.NET 26.5.0)
+
+== dotnet build --no-restore -c Release ==
+  exit: 0
+  result: Build succeeded. 0 Warning(s), 0 Error(s). Time: 3.49s
+
+== dotnet run --project . --no-build -c Release ==
+  exit: 0
+  stdout: "Compression completed successfully."
+  stderr: (none)
+
+== Output Verification ==
+  output.pptx exists: YES
+  output.pptx size: 19807 bytes
+  output.pptx sha256: b104b1c59880ad40e0362195060e9269e247a6e0095a73091cd8e61ce6b2a800
+  compression ratio: 19807/34242 = 0.578 (42.2% reduction)
+  output > 0 bytes: YES
+  output < input (compression occurred): YES
+
+== API Verification ==
+  Compress.RemoveUnusedLayoutSlides(pres) was called (output produced)
+  pres.Save(outputPath, SaveFormat.Pptx) succeeded (file exists)
+  No exceptions thrown
+
+== Conclusion ==
+  slides-compress: RUNTIME_VALIDATED
+  post_merge_validated: true
+  output_confirmed: true
+  Full end-to-end compression confirmed.
+  Unused layout slides removed, PPTX re-saved, output 19807 bytes.
+  Sprint 75 RUNTIME_VALIDATED_NO_INPUT_FIXTURE classification UPGRADED to RUNTIME_VALIDATED.

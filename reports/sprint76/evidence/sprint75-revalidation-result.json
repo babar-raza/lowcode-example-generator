@@ -1,0 +1,17 @@
+{
+  "sprint_id": "sprint75",
+  "validated_by": "sprint76-rules",
+  "validation_date": "2026-05-24",
+  "total_sprint76_rules_checked": 8,
+  "passed": 4,
+  "failed": 4,
+  "overall_valid": false,
+  "rules_checked": ["runtime_matrix_output_confirmed_for_validated","runtime_matrix_no_graceful_exit_labelled_validated","dirty_classification_must_match_after_snapshot","final_clean_proof_contains_commit_sha","final_clean_proof_documents_remaining_dirty","weekly_review_no_repaired_while_output_unconfirmed","dirty_after_no_uncommitted_source_test","final_verdict_workspace_exception_explicit"],
+  "failures": [
+    {"rule_id": "runtime_matrix_output_confirmed_for_validated","detail": "slides-compress: post_merge_validated=true but output_confirmed=false"},
+    {"rule_id": "runtime_matrix_no_graceful_exit_labelled_validated","detail": "slides-compress: runtime_result=RUNTIME_VALIDATED_NO_INPUT_FIXTURE while post_merge_validated=true"},
+    {"rule_id": "dirty_classification_must_match_after_snapshot","detail": "dirty-state-after.txt shows src/ modified; dirty-file-classification.md says No Source or Test Files Are Dirty"},
+    {"rule_id": "dirty_after_no_uncommitted_source_test","detail": "dirty-state-after.txt shows modified: src/plugin_examples/evidence_validator.py and tests/unit/test_evidence_validator.py"}
+  ],
+  "conclusion": "Sprint 75 fails Sprint 76 validation — S75-B1 (slides-compress) and S75-B2 (dirty-state) defects confirmed by 4 rule failures"
+}

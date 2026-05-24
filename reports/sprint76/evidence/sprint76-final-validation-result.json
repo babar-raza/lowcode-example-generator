@@ -1,0 +1,32 @@
+{
+  "sprint_id": "sprint76",
+  "bundle_type": "REPAIR_SPRINT",
+  "validation_scope": "sprint76_applicable_rules",
+  "phase_a_applicable_rules": 17,
+  "phase_a_passed": 17,
+  "phase_a_failed": 0,
+  "phase_b_new_rules_count": 8,
+  "phase_b_new_rules_passed": 8,
+  "phase_b_new_rules_failed": 0,
+  "overall_valid": true,
+  "note": "61 non-applicable rules fail (repair bundle has no destination/handoff/remote artifacts). Sprint76-applicable rules: 9 sprint75 weekly-review rules (86-93 + weekly_review_verdict) + 8 sprint76 new rules (94-101) = 17 applicable rules, all pass.",
+  "applicable_rules": [
+    {"rule_id": "weekly_review_claim_matrix_present", "passed": true},
+    {"rule_id": "pdf_publication_truth_reconciled", "passed": true},
+    {"rule_id": "formimporter_taskcard_durable", "passed": true},
+    {"rule_id": "words_version_drift_documented", "passed": true},
+    {"rule_id": "email_slides_runtime_validated", "passed": true},
+    {"rule_id": "dirty_tree_classified", "passed": true},
+    {"rule_id": "sprint27_governance_classified", "passed": true},
+    {"rule_id": "weekly_review_verdict_not_complete_while_unclassified", "passed": true},
+    {"rule_id": "revalidation_shows_prior_sprint_invalid", "passed": true},
+    {"rule_id": "runtime_matrix_output_confirmed_for_validated", "passed": true},
+    {"rule_id": "runtime_matrix_no_graceful_exit_labelled_validated", "passed": true},
+    {"rule_id": "dirty_classification_must_match_after_snapshot", "passed": true},
+    {"rule_id": "final_clean_proof_contains_commit_sha", "passed": true},
+    {"rule_id": "final_clean_proof_documents_remaining_dirty", "passed": true},
+    {"rule_id": "weekly_review_no_repaired_while_output_unconfirmed", "passed": true},
+    {"rule_id": "dirty_after_no_uncommitted_source_test", "passed": true},
+    {"rule_id": "final_verdict_workspace_exception_explicit", "passed": true}
+  ]
+}

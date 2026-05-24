@@ -1,0 +1,26 @@
+Sprint 76 — Full Test Suite
+Date: 2026-05-24
+Working directory: c:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator
+
+Command: PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/ -q --tb=short
+Exit code: 0
+
+Result: 3052 passed, 3 skipped, 10 subtests passed in 160.25s
+
+Breakdown of new Sprint 76 tests (11 added):
+  TestSprint76ClosureRepairRules:
+    - test_rule94_fails_when_output_not_confirmed
+    - test_rule94_passes_when_all_output_confirmed
+    - test_rule95_fails_when_no_input_fixture_label_present
+    - test_rule95_passes_when_runtime_validated
+    - test_rule96_fails_when_classification_contradicts_after_snapshot
+    - test_rule96_passes_when_no_src_test_in_after
+    - test_rule97_fails_when_no_sha_in_proof
+    - test_rule97_passes_when_sha_present
+    - test_rule100_fails_when_src_modified_in_after
+    - test_rule100_passes_when_no_src_test_in_after
+    - test_sprint75_bundle_fails_sprint76_rules
+
+Sprint 75 baseline: 3041 passed, 3 skipped
+Sprint 76 additions: +11 tests (rules 94-101 test class)
+Total: 3052 passed, 3 skipped

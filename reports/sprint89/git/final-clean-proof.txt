@@ -1,0 +1,54 @@
+Sprint 89 Final Clean Proof
+== git status --short ==
+ M AGENTS.md
+ M docs/README.md
+ M docs/_audit/README_IA_PROPOSAL.md
+ M docs/_audit/docs_inventory.md
+ M docs/_audit/docs_migration_plan.md
+ M docs/_audit/root_orphans.md
+ M docs/_audit/style_guide.md
+ M docs/_audit/system_audit.md
+ M docs/_audit/traceability.md
+ D docs/ci/environment-variables.md
+ M docs/development/taskcards.md
+ D docs/discovery/example-reviewer-fixture-system.md
+ D docs/discovery/open-taskcard-closure-matrix.md
+ M docs/guides/generate-and-validate-examples.md
+ M docs/guides/run-family-pipeline.md
+ M docs/operations/live-publishing.md
+ M docs/operations/post-merge-verification.md
+ D docs/publishing/agent-operated-live-pr-runbook.md
+ D docs/publishing/post-merge-verification-runbook.md
+ M docs/reference/cli.md
+ M docs/reference/config.md
+ M docs/reference/environment-variables.md
+ M docs/reference/file-contracts.md
+ M docs/reference/publishing-and-github.md
+ M docs/reference/validation-and-reviewer.md
+ M reports/sprint89/bundle-manifest.json
+ M scripts/sync_taskcards.py
+ M src/plugin_examples/__main__.py
+ M tests/unit/test_ci_runbook_hardening.py
+ M tests/unit/test_fixture_strategy.py
+ M tests/unit/test_sync_taskcard_docs.py
+ M tests/unit/test_token_policy.py
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? docs/_archive/merged/agent-operated-live-pr-runbook-20260525.md
+?? docs/_archive/merged/ci-environment-variables-20260525.md
+?? docs/_archive/merged/example-reviewer-fixture-system-20260525.md
+?? docs/_archive/merged/post-merge-verification-runbook-20260525.md
+?? docs/development/open-taskcard-closure-matrix.md
+?? reports/sprint89/git/dirty-state-after.txt
+?? reports/sprint89/git/final-clean-proof.txt
+
+== git log -1 --oneline ==
+052db36 feat(sprint89): EV 145/145, HTML/SVG NO_LOWCODE_CONFIRMED, 3189 tests — implementation advancement
+
+HEAD: 052db369a005c1a67cd8b00d914086ba21cb8c1e
+workspace/verification/latest/ -- GENERATED_WORKSPACE_STATE governance exception

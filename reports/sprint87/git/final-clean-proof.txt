@@ -2,7 +2,7 @@ Sprint 87 — Final Clean Proof
 ================================
 Date: 2026-05-25
 Branch: main
-HEAD: 7fb9fb52253c5ffa36a41154ccba9b0724feadbb
+HEAD: 490d6bc6258b93930fd4b695fd0b2518391272ff
 
 == git status --short ==
  M workspace/verification/latest/cells-readme-backfill-simulation.json
@@ -24,11 +24,11 @@ HEAD: 7fb9fb52253c5ffa36a41154ccba9b0724feadbb
  7 files changed, 9 insertions(+), 9 deletions(-)
 
 == git log --oneline -5 ==
+490d6bc feat(sprint87): finalize evidence — EV 62/134 applicable, 3156 tests, clean state confirmed
 7fb9fb5 feat(sprint87): EV 134/134, ECC 34/34, 215 tests — repair 6 S86 defects + next-family discovery, publication approval blocked
 6060ed7 feat(sprint86): finalize final-clean-proof.txt — clean state confirmed
 961621d feat(sprint86): update final-clean-proof.txt with correct HEAD SHA
 8b5cb89 feat(sprint86): finalize evidence — EV 70/126 applicable, 3131 tests, clean state confirmed
-ec76d26 feat(sprint86): EV 126/126, ECC 73/73, 190 tests — baseline freeze + readiness-loop prevention, publication approval blocked
 
 workspace/verification/latest/ -- GENERATED_WORKSPACE_STATE governance exception
 (workspace/ directory is gitignored; verification/latest/ files are not tracked this session).

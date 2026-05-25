@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "source_sha": "TBD_AFTER_COMMIT",
+  "head_sha": "TBD_AFTER_COMMIT",
+  "bundle_type": "FINISH_LINE_ADVANCEMENT",
+  "file_count": "TBD",
+  "notes": "Sprint 88 FINISH_LINE_ADVANCEMENT bundle. 6 new EV rules, 18 new tests, 7 S87 defects repaired, next-family discovery."
+}

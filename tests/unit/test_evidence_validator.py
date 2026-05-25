@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 134)  # Sprint 87: added 8 new rules (127-134)
+        self.assertEqual(result.total_rules, 140)  # Sprint 88: added 6 new rules (135-140)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 134)  # Sprint 87: 134 rules total
+        self.assertEqual(len(d["rules"]), 140)  # Sprint 88: 140 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 133 rules evaluated (134 total - 1 self-reference rule 21)
-        # Sprint 87: total is now 134 (added 8 new rules), so excluding rule 21 = 133
-        self.assertEqual(len(result.rule_results), 133)
+        # Should have exactly 139 rules evaluated (140 total - 1 self-reference rule 21)
+        # Sprint 88: total is now 140 (added 6 new rules), so excluding rule 21 = 139
+        self.assertEqual(len(result.rule_results), 139)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 134)  # Sprint 87: 134 rules total
+        self.assertEqual(len(phase_b.rule_results), 140)  # Sprint 88: 140 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 134 rules total (126 Sprint 86 + 8 new Sprint 87 rules)."""
+        """validate() must return 140 rules total (134 Sprint 87 + 6 new Sprint 88 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 134,
-                         f"Expected 134 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 140,
+                         f"Expected 140 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-134."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-140."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 133,
-                         f"validate_for_storage must have 133 rules (134 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 139,
+                         f"validate_for_storage must have 139 rules (140 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -3952,6 +3952,267 @@ class TestSprint87DefectInvariantRules(unittest.TestCase):
             (b / "advancement" / "fixture-readiness.md").write_text("fixtures", encoding="utf-8")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_not_avoiding_advancement")
+        self.assertTrue(rule.passed)
+
+
+class TestSprint88DefectInvariantRules(unittest.TestCase):
+    """Tests for Sprint 88 rules 135-140: S87 defect invariants."""
+
+    # ------------------------------------------------------------------ Rule 135
+
+    def test_rule135_not_applicable_when_no_manifest(self):
+        """Rule 135: passes (not applicable) when bundle-manifest.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_has_head_sha")
+        self.assertTrue(rule.passed)
+
+    def test_rule135_fails_when_head_sha_missing(self):
+        """Rule 135: fails when source_sha present but head_sha missing."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "bundle-manifest.json").write_text(
+                json.dumps({"source_sha": "abc1234"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_has_head_sha")
+        self.assertFalse(rule.passed)
+
+    def test_rule135_passes_with_both_shas(self):
+        """Rule 135: passes when both source_sha and head_sha are valid."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "bundle-manifest.json").write_text(
+                json.dumps({"source_sha": "abc1234", "head_sha": "def5678"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_has_head_sha")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 136
+
+    def test_rule136_not_applicable_when_no_verdict(self):
+        """Rule 136: passes when final-verdict.md is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        self.assertTrue(rule.passed)
+
+    def test_rule136_fails_when_publication_mentioned_but_no_matrix(self):
+        """Rule 136: fails when verdict mentions publication but truth matrix missing."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "final-verdict.md").write_text(
+                "Publication is approval-blocked.\n"
+                "Verdict: LOWCODE_FINISH_LINE_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED\n",
+                encoding="utf-8",
+            )
+            # Remove any publication dir
+            pub_dir = b / "publication"
+            if pub_dir.exists():
+                import shutil
+                shutil.rmtree(pub_dir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        self.assertFalse(rule.passed)
+
+    def test_rule136_passes_with_truth_matrix(self):
+        """Rule 136: passes when verdict mentions publication and truth matrix exists."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "final-verdict.md").write_text(
+                "Publication is approval-blocked.\n"
+                "Verdict: LOWCODE_FINISH_LINE_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED\n",
+                encoding="utf-8",
+            )
+            (b / "publication").mkdir(exist_ok=True)
+            (b / "publication" / "publication-truth-matrix-final.json").write_text(
+                json.dumps([{"family": "cells", "example": "html-converter"}]),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 137
+
+    def test_rule137_not_applicable_when_no_matrix(self):
+        """Rule 137: passes when next-family-candidate-matrix.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_candidate_matrix_has_real_checks")
+        self.assertTrue(rule.passed)
+
+    def test_rule137_fails_when_missing_api_fields(self):
+        """Rule 137: fails when candidates lack classification or nuget_exists."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "next-family").mkdir(exist_ok=True)
+            (b / "next-family" / "next-family-candidate-matrix.json").write_text(
+                json.dumps({
+                    "discovery_method": "manual",
+                    "candidates": [{"family": "ocr"}]
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_candidate_matrix_has_real_checks")
+        self.assertFalse(rule.passed)
+
+    def test_rule137_passes_with_real_checks(self):
+        """Rule 137: passes when candidates have proper API check fields."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "next-family").mkdir(exist_ok=True)
+            (b / "next-family" / "next-family-candidate-matrix.json").write_text(
+                json.dumps({
+                    "discovery_method": "NuGet API v3",
+                    "candidates": [
+                        {"family": "ocr", "classification": "BLOCKED", "nuget_exists": True}
+                    ]
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_candidate_matrix_has_real_checks")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 138
+
+    def test_rule138_not_applicable_when_no_advancement(self):
+        """Rule 138: passes when advancement/ is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "implementation_summary_present_if_advancement")
+        self.assertTrue(rule.passed)
+
+    def test_rule138_fails_when_discovery_but_no_summary(self):
+        """Rule 138: fails when advancement has discovery but no implementation summary."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "advancement").mkdir(exist_ok=True)
+            (b / "advancement" / "next-family-discovery.md").write_text(
+                "OCR discovery from pipeline/configs/families/",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "implementation_summary_present_if_advancement")
+        self.assertFalse(rule.passed)
+
+    def test_rule138_passes_with_both(self):
+        """Rule 138: passes when both discovery and implementation summary exist."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "advancement").mkdir(exist_ok=True)
+            (b / "advancement" / "next-family-discovery.md").write_text(
+                "OCR discovery from pipeline/configs/families/",
+                encoding="utf-8",
+            )
+            (b / "implementation").mkdir(exist_ok=True)
+            (b / "implementation" / "implementation-summary.md").write_text(
+                "Implementation summary for Sprint 88",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "implementation_summary_present_if_advancement")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 139
+
+    def test_rule139_not_applicable_when_no_matrix(self):
+        """Rule 139: passes when next-family-candidate-matrix.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "discovery_blocked_candidates_have_blocker_detail")
+        self.assertTrue(rule.passed)
+
+    def test_rule139_fails_when_blocked_without_detail(self):
+        """Rule 139: fails when BLOCKED candidate has no blocker detail."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "next-family").mkdir(exist_ok=True)
+            (b / "next-family" / "next-family-candidate-matrix.json").write_text(
+                json.dumps({
+                    "discovery_method": "NuGet API",
+                    "candidates": [
+                        {"family": "ocr", "classification": "DISCOVERY_BLOCKED", "nuget_exists": True, "blocker": ""}
+                    ]
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "discovery_blocked_candidates_have_blocker_detail")
+        self.assertFalse(rule.passed)
+
+    def test_rule139_passes_with_detailed_blocker(self):
+        """Rule 139: passes when BLOCKED candidates have specific blocker detail."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "next-family").mkdir(exist_ok=True)
+            (b / "next-family" / "next-family-candidate-matrix.json").write_text(
+                json.dumps({
+                    "discovery_method": "NuGet API",
+                    "candidates": [
+                        {
+                            "family": "ocr",
+                            "classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
+                            "nuget_exists": True,
+                            "blocker": "Aspose.AI.LLM transitive dep not on NuGet (HTTP 404)"
+                        }
+                    ]
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "discovery_blocked_candidates_have_blocker_detail")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 140
+
+    def test_rule140_not_applicable_when_no_drift(self):
+        """Rule 140: passes when no words drift file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
+        self.assertTrue(rule.passed)
+
+    def test_rule140_fails_when_drift_active_no_reconciliation(self):
+        """Rule 140: fails when drift active but no reconciliation file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "version-drift").mkdir(exist_ok=True)
+            (b / "version-drift" / "words-version-drift-current.json").write_text(
+                json.dumps({"drift": True, "drift_type": "NEEDS_REPAIR_APPROVAL_BLOCKED"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
+        self.assertFalse(rule.passed)
+
+    def test_rule140_passes_with_reconciliation(self):
+        """Rule 140: passes when drift active and reconciliation exists."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "version-drift").mkdir(exist_ok=True)
+            (b / "version-drift" / "words-version-drift-current.json").write_text(
+                json.dumps({"drift": True, "drift_type": "NEEDS_REPAIR_APPROVAL_BLOCKED"}),
+                encoding="utf-8",
+            )
+            (b / "closure-repair").mkdir(exist_ok=True)
+            (b / "closure-repair" / "words-version-drift-reconciliation.json").write_text(
+                json.dumps({"checked": True, "nuget_latest": "26.5.0", "remote": "26.4.0"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
         self.assertTrue(rule.passed)
 
 

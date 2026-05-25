@@ -1,0 +1,14 @@
+{
+  "sprint_id": "sprint88",
+  "overall_valid": false,
+  "canonical_overall_valid": true,
+  "bundle_type": "FINISH_LINE_ADVANCEMENT",
+  "applicable": 71,
+  "diagnostic": 69,
+  "total_rules": 140,
+  "passed": 71,
+  "failed": 69,
+  "warnings": 0,
+  "diagnostic_rules_are_non_blocking": true,
+  "not_canonical": true
+}

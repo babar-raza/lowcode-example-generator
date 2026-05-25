@@ -1,0 +1,29 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "bundle_type": "FINISH_LINE_ADVANCEMENT",
+  "ev_rules": 140,
+  "ev_applicable": 71,
+  "ev_diagnostic": 69,
+  "ecc_categories": 37,
+  "test_count_validator": 233,
+  "test_count_full": 3174,
+  "sprints_approval_blocked": 16,
+  "baseline_frozen": true,
+  "baseline_frozen_since": "sprint86",
+  "active_families": 6,
+  "total_examples": 42,
+  "per_family": {"cells": 9, "words": 8, "pdf": 19, "diagram": 2, "email": 1, "slides": 3},
+  "next_family_candidates": 4,
+  "next_family_all_blocked": true,
+  "words_drift_active": true,
+  "formimporter_blocked": true,
+  "new_ev_rules_this_sprint": 6,
+  "new_allowed_verdicts_this_sprint": 2,
+  "new_tests_this_sprint": 18,
+  "defects_repaired_from_s87": 7,
+  "approval_gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  }
+}

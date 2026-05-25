@@ -1,0 +1,310 @@
+{
+  "contract_id": "sprint88",
+  "computed_at": "2026-05-25T16:33:12Z",
+  "total_categories": 37,
+  "present": 37,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "EC01",
+      "name": "final-verdict",
+      "file": "reports/sprint88/final-verdict.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC02",
+      "name": "sprint-state",
+      "file": "reports/sprint88/sprint-state.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC03",
+      "name": "bundle-manifest",
+      "file": "reports/sprint88/bundle-manifest.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC04",
+      "name": "evidence-contract",
+      "file": "reports/sprint88/evidence-contract.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC05",
+      "name": "final-clean-proof",
+      "file": "reports/sprint88/git/final-clean-proof.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC06",
+      "name": "dirty-state-after",
+      "file": "reports/sprint88/git/dirty-state-after.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC07",
+      "name": "final-validation-result",
+      "file": "reports/sprint88/evidence/sprint88-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC08",
+      "name": "bundle-validation-result",
+      "file": "reports/sprint88/evidence/sprint88-bundle-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC09",
+      "name": "evidence-contract-computed",
+      "file": "reports/sprint88/evidence/evidence-contract-computed.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC10",
+      "name": "publication-truth-matrix",
+      "file": "reports/sprint88/publication/publication-truth-matrix-final.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC11",
+      "name": "publication-summary",
+      "file": "reports/sprint88/publication/publication-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC12",
+      "name": "publication-file-plan",
+      "file": "reports/sprint88/publication/publication-file-plan.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC13",
+      "name": "pr-creation-ledger",
+      "file": "reports/sprint88/publication/pr-creation-ledger.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC14",
+      "name": "live-approval-check",
+      "file": "reports/sprint88/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC15",
+      "name": "operator-approval-packet",
+      "file": "reports/sprint88/publication/operator-approval-packet.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC16",
+      "name": "package-readiness-summary",
+      "file": "reports/sprint88/publication/package-readiness-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC17",
+      "name": "baseline-freeze",
+      "file": "reports/sprint88/baseline-freeze/publication-baseline-freeze.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC18",
+      "name": "next-family-discovery",
+      "file": "reports/sprint88/advancement/next-family-discovery.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC19",
+      "name": "next-family-candidate-matrix",
+      "file": "reports/sprint88/next-family/next-family-candidate-matrix.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC20",
+      "name": "ocr-discovery-result",
+      "file": "reports/sprint88/next-family/ocr-discovery-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC21",
+      "name": "psd-discovery-result",
+      "file": "reports/sprint88/next-family/psd-discovery-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC22",
+      "name": "implementation-summary",
+      "file": "reports/sprint88/implementation/implementation-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC23",
+      "name": "fixture-readiness-plan",
+      "file": "reports/sprint88/implementation/fixture-readiness-plan.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC24",
+      "name": "denominator-draft",
+      "file": "reports/sprint88/implementation/denominator-draft.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC25",
+      "name": "operation-cardinality-rules",
+      "file": "reports/sprint88/contracts/operation-cardinality-rules.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC26",
+      "name": "readme-io-contract-template",
+      "file": "reports/sprint88/contracts/readme-io-contract-template-v2.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC27",
+      "name": "words-version-drift-current",
+      "file": "reports/sprint88/version-drift/words-version-drift-current.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC28",
+      "name": "formimporter-repro-inventory",
+      "file": "reports/sprint88/formimporter/formimporter-repro-inventory.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC29",
+      "name": "sprint87-defect-repair-matrix",
+      "file": "reports/sprint88/closure-repair/sprint87-defect-repair-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC30",
+      "name": "sha-chain-reconciliation",
+      "file": "reports/sprint88/closure-repair/sha-chain-reconciliation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC31",
+      "name": "validation-count-reconciliation",
+      "file": "reports/sprint88/closure-repair/validation-count-reconciliation.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC32",
+      "name": "words-drift-reconciliation",
+      "file": "reports/sprint88/closure-repair/words-version-drift-reconciliation.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC33",
+      "name": "independent-verification-report",
+      "file": "reports/sprint88/iv/independent-verification-report.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC34",
+      "name": "lane-status-table",
+      "file": "reports/sprint88/iv/lane-status-table.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC35",
+      "name": "blocker-register",
+      "file": "reports/sprint88/iv/blocker-register.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC36",
+      "name": "evidence-consistency-report",
+      "file": "reports/sprint88/evidence-consistency/evidence-consistency-report.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "EC37",
+      "name": "test-run-log",
+      "file": "reports/sprint88/logs/test-run-raw.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

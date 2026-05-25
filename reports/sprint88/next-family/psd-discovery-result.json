@@ -1,0 +1,23 @@
+{
+  "sprint_id": "sprint88",
+  "family": "psd",
+  "display_name": "Aspose.PSD for .NET",
+  "nuget_package_id": "Aspose.PSD",
+  "nuget_latest_stable": "26.5.0",
+  "nuget_total_versions": 92,
+  "nuget_package_exists": true,
+  "blocker": {
+    "assembly": "Aspose.JavaAttributes",
+    "version": "1.0.0.0",
+    "nuget_status": "HTTP_404_NOT_FOUND",
+    "nuget_check_date": "2026-05-25",
+    "classification": "INTERNAL_ASPOSE_ASSEMBLY_NOT_ON_NUGET"
+  },
+  "lowcode_namespace_status": "UNKNOWN",
+  "discovery_classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
+  "reflection_completed": false,
+  "action": "Monitor for Aspose.JavaAttributes NuGet publication. Cannot determine LowCode namespace existence until dependency is resolved.",
+  "config_path": "pipeline/configs/families/psd.yml",
+  "config_enabled": true,
+  "config_status": "discovery_only"
+}

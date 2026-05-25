@@ -1,0 +1,14 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "prs_created": 0,
+  "prs_merged": 0,
+  "prs_planned": 6,
+  "approval_status": "NOT_SET",
+  "reason": "Both PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL and PLUGIN_EXAMPLES_MERGE_PR_APPROVAL are NOT_SET",
+  "existing_open_prs": [
+    {"pr_number": 5, "family": "cells", "type": "root_readme_backfill"},
+    {"pr_number": 7, "family": "words", "type": "root_readme_backfill"},
+    {"pr_number": 2, "family": "diagram", "type": "root_readme_backfill"}
+  ]
+}

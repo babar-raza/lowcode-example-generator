@@ -1,0 +1,12 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "frozen": true,
+  "frozen_since": "sprint86",
+  "sprints_frozen": 3,
+  "sprints_approval_blocked": 16,
+  "reason": "Publication approval NOT_SET for 16 consecutive sprints. Baseline frozen since Sprint 86.",
+  "42_examples_accessible": true,
+  "0_readme_io": true,
+  "freeze_does_not_block_advancement": true
+}

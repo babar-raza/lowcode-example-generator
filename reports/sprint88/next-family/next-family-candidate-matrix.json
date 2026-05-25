@@ -1,0 +1,45 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "discovery_method": "NuGet API v3 + pipeline/configs/families/*.yml inspection",
+  "candidates": [
+    {
+      "family": "ocr",
+      "classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
+      "blocker": "Aspose.AI.LLM not on NuGet (HTTP 404)",
+      "priority": "HIGH",
+      "nuget_exists": true,
+      "latest_version": "26.5.0"
+    },
+    {
+      "family": "psd",
+      "classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
+      "blocker": "Aspose.JavaAttributes not on NuGet (HTTP 404)",
+      "priority": "HIGH",
+      "nuget_exists": true,
+      "latest_version": "26.5.0"
+    },
+    {
+      "family": "html",
+      "classification": "REFLECTION_BLOCKED_ASSEMBLY_RESOLUTION",
+      "blocker": "DllReflector assembly resolution failure",
+      "priority": "MEDIUM",
+      "nuget_exists": true,
+      "latest_version": "26.4.0"
+    },
+    {
+      "family": "svg",
+      "classification": "REFLECTION_BLOCKED_ASSEMBLY_RESOLUTION",
+      "blocker": "DllReflector assembly resolution failure",
+      "priority": "MEDIUM",
+      "nuget_exists": true,
+      "latest_version": "26.4.0"
+    }
+  ],
+  "confirmed_no_lowcode": [
+    "barcode", "cad", "drawing", "finance", "font", "gis",
+    "imaging", "note", "omr", "page", "tasks", "tex", "threed", "zip"
+  ],
+  "confirmed_no_package": ["epub"],
+  "summary": "4 candidates investigated with real NuGet API checks. All 4 blocked by external dependencies. 14 confirmed no LowCode. 1 confirmed no NuGet package."
+}

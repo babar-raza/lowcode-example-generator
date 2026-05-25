@@ -1,0 +1,22 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "plan_type": "FAMILY_BATCH_PR",
+  "approval_status": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "planned_prs": [
+    {"family": "cells", "pr_type": "readme_io_backfill", "example_count": 9, "status": "APPROVAL_BLOCKED"},
+    {"family": "words", "pr_type": "readme_io_backfill", "example_count": 8, "status": "APPROVAL_BLOCKED", "includes_version_bump": true},
+    {"family": "pdf", "pr_type": "readme_io_backfill", "example_count": 19, "status": "APPROVAL_BLOCKED"},
+    {"family": "diagram", "pr_type": "readme_io_backfill", "example_count": 2, "status": "APPROVAL_BLOCKED"},
+    {"family": "email", "pr_type": "readme_io_backfill", "example_count": 1, "status": "APPROVAL_BLOCKED"},
+    {"family": "slides", "pr_type": "readme_io_backfill", "example_count": 3, "status": "APPROVAL_BLOCKED"}
+  ],
+  "total_planned_prs": 6,
+  "total_examples_covered": 42,
+  "root_readme_exclusion": ["cells", "words", "diagram"],
+  "root_readme_exclusion_reason": "Open PRs #5, #7, #2 already cover root README backfill",
+  "execution": "SKIP — both approval gates NOT_SET"
+}

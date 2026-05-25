@@ -1,0 +1,50 @@
+{
+  "sprint_id": "sprint88",
+  "date": "2026-05-25",
+  "blockers": [
+    {
+      "id": "BLK-01",
+      "type": "APPROVAL_GATE",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET",
+      "impact": "Cannot create README I/O backfill PRs",
+      "sprints_blocked": 16,
+      "resolution": "Operator sets APPROVE_LIVE_PR"
+    },
+    {
+      "id": "BLK-02",
+      "type": "APPROVAL_GATE",
+      "description": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=NOT_SET",
+      "impact": "Cannot merge created PRs",
+      "sprints_blocked": 16,
+      "resolution": "Operator sets APPROVE_MERGE_PR"
+    },
+    {
+      "id": "BLK-03",
+      "type": "VERSION_DRIFT",
+      "description": "Words remote=26.4.0, NuGet latest=26.5.0",
+      "impact": "Version mismatch in published examples",
+      "resolution": "Bundled with README I/O PR (approval blocked)"
+    },
+    {
+      "id": "BLK-04",
+      "type": "EXTERNAL_BUG",
+      "description": "Aspose.PDF 26.5.0 FormImporter NullRef",
+      "impact": "1 example (form-importer) cannot be generated",
+      "resolution": "Wait for Aspose.PDF > 26.5.0 (TRG-01)"
+    },
+    {
+      "id": "BLK-05",
+      "type": "EXTERNAL_DEPENDENCY",
+      "description": "Aspose.AI.LLM not on NuGet (OCR blocker)",
+      "impact": "Cannot discover OCR LowCode APIs",
+      "resolution": "Monitor NuGet for package availability"
+    },
+    {
+      "id": "BLK-06",
+      "type": "EXTERNAL_DEPENDENCY",
+      "description": "Aspose.JavaAttributes not on NuGet (PSD blocker)",
+      "impact": "Cannot discover PSD LowCode APIs",
+      "resolution": "Monitor NuGet for package availability"
+    }
+  ]
+}

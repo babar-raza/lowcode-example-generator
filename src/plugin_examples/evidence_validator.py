@@ -145,6 +145,14 @@ Sprint 87 additions (8 new rules, closes Sprint 86 defect invariants):
 - Rule: final_clean_proof_has_diff_and_log (final-clean-proof.txt must include diff and log sections — S86-D6)
 - Rule: next_family_discovery_not_just_relisting (advancement/next-family-discovery.md must reference pipeline configs — S86-A1)
 - Rule: baseline_freeze_not_avoiding_advancement (if baseline frozen, advancement/ dir must have real content — S86-A2)
+
+Sprint 88 additions (6 new rules, closes Sprint 87 defect invariants):
+- Rule: bundle_manifest_has_head_sha (bundle-manifest.json must have head_sha field when source_sha present — S87-D1)
+- Rule: publication_truth_matrix_present_when_publication_claimed (if final-verdict mentions publication, truth matrix must exist — S87-D3)
+- Rule: next_family_candidate_matrix_has_real_checks (next-family-candidate-matrix.json must have real API check evidence — S87-D6)
+- Rule: implementation_summary_present_if_advancement (if advancement/ has discovery, implementation/ must have summary — S87-D7)
+- Rule: discovery_blocked_candidates_have_blocker_detail (each BLOCKED candidate must have a specific blocker field — S87-D6b)
+- Rule: version_drift_reconciliation_present_if_drift_active (if words drift active, closure-repair must have reconciliation — S87-D5b)
 """
 
 from __future__ import annotations
@@ -434,6 +442,14 @@ class EvidenceValidator:
         _maybe(self._rule_final_clean_proof_has_diff_and_log())
         _maybe(self._rule_next_family_discovery_not_just_relisting())
         _maybe(self._rule_baseline_freeze_not_avoiding_advancement())
+
+        # --- Sprint 88 NEW rules: S87 defect invariants ---
+        _maybe(self._rule_bundle_manifest_has_head_sha())
+        _maybe(self._rule_publication_truth_matrix_present_when_publication_claimed())
+        _maybe(self._rule_next_family_candidate_matrix_has_real_checks())
+        _maybe(self._rule_implementation_summary_present_if_advancement())
+        _maybe(self._rule_discovery_blocked_candidates_have_blocker_detail())
+        _maybe(self._rule_version_drift_reconciliation_present_if_drift_active())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -3515,6 +3531,9 @@ class EvidenceValidator:
             "LOWCODE_REPAIR_AND_ADVANCEMENT_PARTIAL_WITH_EXPLICIT_BLOCKERS",
             "LOWCODE_BASELINE_FROZEN_REPAIR_COMPLETE_ADVANCEMENT_PARTIAL",
             "LOWCODE_BASELINE_FROZEN_ALL_LANES_COMPLETE",
+            # Sprint 88 verdicts
+            "LOWCODE_FINISH_LINE_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+            "LOWCODE_NEXT_FAMILY_DISCOVERY_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
@@ -7014,6 +7033,324 @@ class EvidenceValidator:
             rule_id=rule_id, description=description,
             severity="FAILURE", passed=True,
             evidence=f"advancement/ has {len(adv_files)} files — real advancement present",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 88 rules (S87 defect invariants)
+    # ------------------------------------------------------------------
+
+    def _rule_bundle_manifest_has_head_sha(self) -> RuleResult:
+        """bundle-manifest.json must have head_sha when source_sha is present.
+
+        Sprint 88 (S87-D1): Sprint 87 bundle-manifest.json had source_sha
+        but no head_sha field, making SHA chain verification incomplete.
+        """
+        rule_id = "bundle_manifest_has_head_sha"
+        description = "bundle-manifest.json must have head_sha field when source_sha present"
+
+        manifest_path = self.bundle_dir / "bundle-manifest.json"
+        if not manifest_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="bundle-manifest.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse bundle-manifest.json — rule not applicable",
+            )
+
+        source_sha = data.get("source_sha", "")
+        if not source_sha or source_sha in ("TBD", "TBD_AFTER_COMMIT", "PLACEHOLDER"):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="source_sha not set — head_sha rule not applicable",
+            )
+
+        head_sha = data.get("head_sha", "")
+        if not head_sha or not re.match(r"^[0-9a-f]{7,40}$", head_sha):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S87-D1: bundle-manifest.json has source_sha='{source_sha}' "
+                    f"but head_sha='{head_sha}' is missing or invalid. "
+                    f"Both fields are required for SHA chain verification."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"head_sha='{head_sha}' present alongside source_sha='{source_sha}'",
+        )
+
+    def _rule_publication_truth_matrix_present_when_publication_claimed(self) -> RuleResult:
+        """If final-verdict mentions publication, truth matrix must exist.
+
+        Sprint 88 (S87-D3): Sprint 87 final verdict mentioned publication
+        but publication-truth-matrix-final.json was initially missing.
+        """
+        rule_id = "publication_truth_matrix_present_when_publication_claimed"
+        description = "publication truth matrix must exist when verdict mentions publication"
+
+        verdict_path = self.bundle_dir / "final-verdict.md"
+        if not verdict_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-verdict.md not found — rule not applicable",
+            )
+
+        content = verdict_path.read_text(encoding="utf-8", errors="replace").lower()
+        mentions_publication = "publication" in content or "publish" in content
+
+        if not mentions_publication:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-verdict.md does not mention publication — rule not applicable",
+            )
+
+        ptm_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
+        if not ptm_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S87-D3: final-verdict.md mentions publication but "
+                    "publication/publication-truth-matrix-final.json is missing."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="publication truth matrix present alongside publication verdict",
+        )
+
+    def _rule_next_family_candidate_matrix_has_real_checks(self) -> RuleResult:
+        """next-family-candidate-matrix.json must have real API check evidence.
+
+        Sprint 88 (S87-D6): Sprint 87 next-family discovery was documentation-only;
+        Sprint 88 requires actual NuGet API checks with HTTP status codes.
+        """
+        rule_id = "next_family_candidate_matrix_has_real_checks"
+        description = "next-family-candidate-matrix.json must have real API check evidence"
+
+        matrix_path = self.bundle_dir / "next-family" / "next-family-candidate-matrix.json"
+        if not matrix_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="next-family-candidate-matrix.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse candidate matrix — rule not applicable",
+            )
+
+        candidates = data.get("candidates", [])
+        if not candidates:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="No candidates in matrix — rule not applicable",
+            )
+
+        # Each candidate must have classification and nuget_exists fields
+        for c in candidates:
+            if "classification" not in c or "nuget_exists" not in c:
+                return RuleResult(
+                    rule_id=rule_id, description=description,
+                    severity="FAILURE", passed=False,
+                    failure_detail=(
+                        f"S87-D6: candidate '{c.get('family', '?')}' missing "
+                        f"classification or nuget_exists field. Real API checks required."
+                    ),
+                )
+
+        # Must have discovery_method field
+        if "discovery_method" not in data:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S87-D6: next-family-candidate-matrix.json missing "
+                    "discovery_method field. Must document how discovery was performed."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"Candidate matrix has {len(candidates)} candidates with real API check fields",
+        )
+
+    def _rule_implementation_summary_present_if_advancement(self) -> RuleResult:
+        """If advancement/ has discovery, implementation/ must have summary.
+
+        Sprint 88 (S87-D7): Sprint 87 had next-family discovery but no
+        implementation summary documenting what was actually executed.
+        """
+        rule_id = "implementation_summary_present_if_advancement"
+        description = "implementation/ must have summary when advancement/ has discovery"
+
+        adv_dir = self.bundle_dir / "advancement"
+        if not adv_dir.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="advancement/ not found — rule not applicable",
+            )
+
+        discovery_path = adv_dir / "next-family-discovery.md"
+        if not discovery_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="No next-family-discovery.md in advancement/ — rule not applicable",
+            )
+
+        impl_dir = self.bundle_dir / "implementation"
+        summary_path = impl_dir / "implementation-summary.md"
+        if not impl_dir.exists() or not summary_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S87-D7: advancement/next-family-discovery.md exists but "
+                    "implementation/implementation-summary.md is missing. "
+                    "Discovery must be paired with implementation documentation."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="implementation-summary.md present alongside next-family discovery",
+        )
+
+    def _rule_discovery_blocked_candidates_have_blocker_detail(self) -> RuleResult:
+        """Each BLOCKED candidate must have a specific blocker field.
+
+        Sprint 88 (S87-D6b): Blocked candidates must document the exact
+        external dependency that blocks them, not just a generic label.
+        """
+        rule_id = "discovery_blocked_candidates_have_blocker_detail"
+        description = "BLOCKED candidates in candidate matrix must have blocker detail"
+
+        matrix_path = self.bundle_dir / "next-family" / "next-family-candidate-matrix.json"
+        if not matrix_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="next-family-candidate-matrix.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse candidate matrix — rule not applicable",
+            )
+
+        candidates = data.get("candidates", [])
+        for c in candidates:
+            classification = c.get("classification", "")
+            if "BLOCKED" in classification.upper():
+                blocker = c.get("blocker", "")
+                if not blocker or len(blocker) < 10:
+                    return RuleResult(
+                        rule_id=rule_id, description=description,
+                        severity="FAILURE", passed=False,
+                        failure_detail=(
+                            f"S87-D6b: candidate '{c.get('family', '?')}' has "
+                            f"classification={classification} but blocker='{blocker}' "
+                            f"is missing or too vague. Must have specific blocker detail."
+                        ),
+                    )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="All BLOCKED candidates have detailed blocker fields",
+        )
+
+    def _rule_version_drift_reconciliation_present_if_drift_active(self) -> RuleResult:
+        """If words drift is active, closure-repair must have reconciliation.
+
+        Sprint 88 (S87-D5b): When words version drift is documented as active,
+        the sprint must include a reconciliation artifact showing what was checked.
+        """
+        rule_id = "version_drift_reconciliation_present_if_drift_active"
+        description = "closure-repair must have drift reconciliation when words drift is active"
+
+        drift_path = self.bundle_dir / "version-drift" / "words-version-drift-current.json"
+        if not drift_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="words-version-drift-current.json not found — rule not applicable",
+            )
+
+        try:
+            drift_data = json.loads(drift_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse words drift file — rule not applicable",
+            )
+
+        drift_val = drift_data.get("drift", False)
+        drift_type = drift_data.get("drift_type", "")
+
+        # Only enforce when drift is boolean True with a non-resolved drift_type
+        # (consistent with Rule 131 which also gates on isinstance(drift_val, bool))
+        if not isinstance(drift_val, bool) or not drift_val:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=f"drift={drift_val!r} — rule applies only to boolean true drift",
+            )
+
+        if isinstance(drift_type, str) and drift_type.upper() == "RESOLVED":
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=f"drift_type={drift_type!r} — drift resolved, no reconciliation needed",
+            )
+
+        recon_path = self.bundle_dir / "closure-repair" / "words-version-drift-reconciliation.json"
+        if not recon_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S87-D5b: words drift is active (drift={drift_val}, "
+                    f"drift_type={drift_type}) but closure-repair/"
+                    f"words-version-drift-reconciliation.json is missing."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="Version drift reconciliation present for active Words drift",
         )
 
     # ------------------------------------------------------------------

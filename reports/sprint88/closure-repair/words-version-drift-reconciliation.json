@@ -1,0 +1,12 @@
+{
+  "sprint_id": "sprint88",
+  "family": "words",
+  "nuget_latest_stable": "26.5.0",
+  "remote_published_version": "26.4.0",
+  "handoff_version": "26.5.0",
+  "drift": true,
+  "drift_classification": "ACTIVE_DRIFT",
+  "source": "NuGet API v3 flatcontainer (live check 2026-05-25)",
+  "resolution": "Version bump bundled with README I/O PR (approval-blocked)",
+  "note": "NuGet confirms 26.5.0 is latest stable. Remote repo still publishes 26.4.0 in project files. Handoff uses 26.5.0. Drift is real and active."
+}

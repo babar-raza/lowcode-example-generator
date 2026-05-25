@@ -1,0 +1,8 @@
+{
+  "sprint_id": "sprint87",
+  "canonical_overall_valid": true,
+  "applicable": 62,
+  "diagnostic": 72,
+  "total_rules": 134,
+  "notes": "Phase B (validate): 62 applicable pass (REPAIR_AND_ADVANCEMENT). 72 diagnostic rules fail for legacy structures not present in this sprint type. applicable + diagnostic = 134. canonical_overall_valid=true is authoritative."
+}

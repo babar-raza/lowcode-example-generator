@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint87",
+  "status": "BLOCKED_EXTERNAL",
+  "bug": "Aspose.PDF 26.5.0 FormImporter NullReferenceException",
+  "repro_location": "workspace/defect-repros/pdf-formimporter-nullref/",
+  "first_observed": "sprint75",
+  "carry_forward_from": "sprint86",
+  "retest_trigger": "TRG-01 fires when NuGet > 26.5.0"
+}

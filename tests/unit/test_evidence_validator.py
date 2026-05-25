@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 126)  # Sprint 86: added 2 new rules (125-126)
+        self.assertEqual(result.total_rules, 134)  # Sprint 87: added 8 new rules (127-134)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 126)  # Sprint 86: 126 rules total
+        self.assertEqual(len(d["rules"]), 134)  # Sprint 87: 134 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 125 rules evaluated (126 total - 1 self-reference rule 21)
-        # Sprint 86: total is now 126 (added 2 new rules), so excluding rule 21 = 125
-        self.assertEqual(len(result.rule_results), 125)
+        # Should have exactly 133 rules evaluated (134 total - 1 self-reference rule 21)
+        # Sprint 87: total is now 134 (added 8 new rules), so excluding rule 21 = 133
+        self.assertEqual(len(result.rule_results), 133)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 126)  # Sprint 86: 126 rules total
+        self.assertEqual(len(phase_b.rule_results), 134)  # Sprint 87: 134 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 126 rules total (124 Sprint 85 + 2 new Sprint 86 rules)."""
+        """validate() must return 134 rules total (126 Sprint 86 + 8 new Sprint 87 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 126,
-                         f"Expected 126 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 134,
+                         f"Expected 134 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-126."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-134."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 125,
-                         f"validate_for_storage must have 125 rules (126 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 133,
+                         f"validate_for_storage must have 133 rules (134 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -3637,6 +3637,321 @@ class TestSprint86ReadinessLoopPreventionRules(unittest.TestCase):
             self._make_final_verdict(b, "Verdict: LOWCODE_FINISH_LINE_SPRINT_COMPLETE")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
+        self.assertTrue(rule.passed)
+
+
+# ===========================================================================
+# Sprint 87 NEW rule tests: S86 defect invariants (rules 127-134)
+# ===========================================================================
+
+
+class TestSprint87DefectInvariantRules(unittest.TestCase):
+    """Tests for Sprint 87 rules 127-134: S86 defect invariants."""
+
+    # ------------------------------------------------------------------ Rule 127
+
+    def test_rule127_not_applicable_when_no_commands_log(self):
+        """Rule 127: passes (not applicable) when commands.log is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_result_pending")
+        self.assertTrue(rule.passed)
+
+    def test_rule127_fails_when_result_pending(self):
+        """Rule 127: fails when commands.log has 'result pending' entries."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "commands.log").write_text(
+                "[2026-05-25] RUN ECC — result pending\n"
+                "[2026-05-25] RUN EV Phase A — result pending\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_result_pending")
+        self.assertFalse(rule.passed)
+
+    def test_rule127_passes_when_clean_commands(self):
+        """Rule 127: passes when commands.log has no pending entries."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "commands.log").write_text(
+                "[2026-05-25] RUN ECC — Exit: 0\n"
+                "[2026-05-25] RUN EV Phase A — Exit: 0\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_result_pending")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 128
+
+    def test_rule128_not_applicable_when_no_validation_result(self):
+        """Rule 128: passes (not applicable) when no validation result file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_result_not_placeholder")
+        self.assertTrue(rule.passed)
+
+    def test_rule128_fails_when_counts_dont_add_up(self):
+        """Rule 128: fails when applicable + diagnostic != total_rules."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence").mkdir(exist_ok=True)
+            (b / "evidence" / "sprint87-final-validation-result.json").write_text(
+                json.dumps({"applicable": 50, "diagnostic": 30, "total_rules": 134}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_result_not_placeholder")
+        self.assertFalse(rule.passed)
+
+    def test_rule128_passes_when_counts_match(self):
+        """Rule 128: passes when applicable + diagnostic = total_rules."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "evidence").mkdir(exist_ok=True)
+            (b / "evidence" / "sprint87-final-validation-result.json").write_text(
+                json.dumps({"applicable": 78, "diagnostic": 56, "total_rules": 134}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "validation_result_not_placeholder")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 129
+
+    def test_rule129_not_applicable_when_no_manifest(self):
+        """Rule 129: passes (not applicable) when bundle-manifest.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "sha_chain_reconciled_in_manifest")
+        self.assertTrue(rule.passed)
+
+    def test_rule129_fails_when_sha_is_tbd(self):
+        """Rule 129: fails when source_sha is TBD."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "bundle-manifest.json").write_text(
+                json.dumps({"source_sha": "TBD_AFTER_COMMIT"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "sha_chain_reconciled_in_manifest")
+        self.assertFalse(rule.passed)
+
+    def test_rule129_passes_with_valid_sha(self):
+        """Rule 129: passes when source_sha is a valid hex SHA."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "bundle-manifest.json").write_text(
+                json.dumps({"source_sha": "abc1234"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "sha_chain_reconciled_in_manifest")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 130
+
+    def test_rule130_not_applicable_when_no_verdict(self):
+        """Rule 130: passes (not applicable) when final-verdict.md is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "approval_vars_consistent_naming")
+        self.assertTrue(rule.passed)
+
+    def test_rule130_fails_when_old_name_without_deprecation(self):
+        """Rule 130: fails when using README_PUSH_APPROVAL without deprecation note."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "final-verdict.md").write_text(
+                "## Approval Gates\n- PLUGIN_EXAMPLES_README_PUSH_APPROVAL: NOT_SET\n"
+                "Verdict: LOWCODE_REPAIR_AND_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "approval_vars_consistent_naming")
+        self.assertFalse(rule.passed)
+
+    def test_rule130_passes_with_canonical_name(self):
+        """Rule 130: passes when using MERGE_PR_APPROVAL (canonical name)."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "final-verdict.md").write_text(
+                "## Approval Gates\n- PLUGIN_EXAMPLES_MERGE_PR_APPROVAL: NOT_SET\n"
+                "Verdict: LOWCODE_REPAIR_AND_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "approval_vars_consistent_naming")
+        self.assertTrue(rule.passed)
+
+    def test_rule130_passes_with_deprecation_note(self):
+        """Rule 130: passes when using old name WITH deprecation note."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "final-verdict.md").write_text(
+                "## Approval Gates\n- PLUGIN_EXAMPLES_README_PUSH_APPROVAL: NOT_SET "
+                "(deprecated alias for MERGE_PR_APPROVAL)\n"
+                "Verdict: LOWCODE_REPAIR_AND_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "approval_vars_consistent_naming")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 131
+
+    def test_rule131_not_applicable_when_no_drift_file(self):
+        """Rule 131: passes (not applicable) when words drift file is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "words_drift_status_consistent")
+        self.assertTrue(rule.passed)
+
+    def test_rule131_fails_when_drift_true_but_resolved(self):
+        """Rule 131: fails when drift=true but drift_type=RESOLVED."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "version-drift").mkdir(exist_ok=True)
+            (b / "version-drift" / "words-version-drift-current.json").write_text(
+                json.dumps({"drift": True, "drift_type": "RESOLVED"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "words_drift_status_consistent")
+        self.assertFalse(rule.passed)
+
+    def test_rule131_passes_when_drift_true_needs_repair(self):
+        """Rule 131: passes when drift=true and drift_type=NEEDS_REPAIR_APPROVAL_BLOCKED."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "version-drift").mkdir(exist_ok=True)
+            (b / "version-drift" / "words-version-drift-current.json").write_text(
+                json.dumps({"drift": True, "drift_type": "NEEDS_REPAIR_APPROVAL_BLOCKED"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "words_drift_status_consistent")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 132
+
+    def test_rule132_not_applicable_when_no_proof(self):
+        """Rule 132: passes (not applicable) when final-clean-proof.txt is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            # Remove the default proof file
+            proof = b / "git" / "final-clean-proof.txt"
+            if proof.exists():
+                proof.unlink()
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_diff_and_log")
+        self.assertTrue(rule.passed)
+
+    def test_rule132_fails_when_no_diff_or_log(self):
+        """Rule 132: fails when proof has status only, no diff/log."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\n M reports/sprint87/foo.txt\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_diff_and_log")
+        self.assertFalse(rule.passed)
+
+    def test_rule132_passes_with_diff_and_log(self):
+        """Rule 132: passes when proof includes diff and log output."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "git" / "final-clean-proof.txt").write_text(
+                "On branch main\n== git diff --stat ==\nNo changes\n"
+                "== git log --oneline -5 ==\nabc1234 commit message\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "final_clean_proof_has_diff_and_log")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 133
+
+    def test_rule133_not_applicable_when_no_discovery(self):
+        """Rule 133: passes (not applicable) when next-family-discovery.md is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_discovery_not_just_relisting")
+        self.assertTrue(rule.passed)
+
+    def test_rule133_fails_when_no_config_reference(self):
+        """Rule 133: fails when discovery doesn't reference pipeline configs."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "advancement").mkdir(exist_ok=True)
+            (b / "advancement" / "next-family-discovery.md").write_text(
+                "# Discovery\nCurrent families: cells, words, pdf, diagram, email, slides.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_discovery_not_just_relisting")
+        self.assertFalse(rule.passed)
+
+    def test_rule133_passes_with_config_ref_and_new_family(self):
+        """Rule 133: passes when referencing configs and identifying new candidates."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "advancement").mkdir(exist_ok=True)
+            (b / "advancement" / "next-family-discovery.md").write_text(
+                "# Discovery\nScanned pipeline/configs/families/ for candidates.\n"
+                "OCR and PSD are enabled but reflection incomplete.\n"
+                "Barcode confirmed no LowCode.\n",
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "next_family_discovery_not_just_relisting")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 134
+
+    def test_rule134_not_applicable_when_no_freeze(self):
+        """Rule 134: passes (not applicable) when no baseline freeze."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_not_avoiding_advancement")
+        self.assertTrue(rule.passed)
+
+    def test_rule134_fails_when_freeze_but_no_advancement(self):
+        """Rule 134: fails when baseline freeze exists but no advancement/ directory."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "baseline-freeze").mkdir(exist_ok=True)
+            (b / "baseline-freeze" / "publication-baseline-freeze.json").write_text(
+                json.dumps({"frozen": True}), encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_not_avoiding_advancement")
+        self.assertFalse(rule.passed)
+
+    def test_rule134_passes_when_freeze_with_advancement(self):
+        """Rule 134: passes when baseline freeze exists and advancement/ has content."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "baseline-freeze").mkdir(exist_ok=True)
+            (b / "baseline-freeze" / "publication-baseline-freeze.json").write_text(
+                json.dumps({"frozen": True}), encoding="utf-8",
+            )
+            (b / "advancement").mkdir(exist_ok=True)
+            (b / "advancement" / "next-family-discovery.md").write_text("discovery", encoding="utf-8")
+            (b / "advancement" / "fixture-readiness.md").write_text("fixtures", encoding="utf-8")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_not_avoiding_advancement")
         self.assertTrue(rule.passed)
 
 

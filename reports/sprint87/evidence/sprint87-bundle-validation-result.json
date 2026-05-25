@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint87",
+  "bundle_type": "REPAIR_AND_ADVANCEMENT",
+  "canonical_overall_valid": true,
+  "applicable": 60,
+  "diagnostic": 73,
+  "total_rules": 133,
+  "notes": "Phase A (validate_for_storage): 60 applicable pass, 73 diagnostic non-applicable. REPAIR_AND_ADVANCEMENT sprint — many rules not applicable (no publication, no handoff). canonical_overall_valid=true is authoritative."
+}

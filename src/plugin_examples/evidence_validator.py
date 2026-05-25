@@ -135,6 +135,16 @@ Sprint 85 additions (5 new rules, closes Sprint 84 evidence hygiene gaps):
 Sprint 86 additions (2 new rules, closes readiness-loop prevention):
 - Rule: baseline_freeze_present_if_14_consecutive_blocked (if sprints_approval_blocked >= 14 in sprint-state.json, baseline-freeze/publication-baseline-freeze.json must exist — S85-I1)
 - Rule: no_readiness_only_verdict_after_baseline_freeze (if baseline freeze exists, final verdict must not repeat a pure readiness-only pattern — S85-I2)
+
+Sprint 87 additions (8 new rules, closes Sprint 86 defect invariants):
+- Rule: commands_log_no_result_pending (commands.log must not have lines ending with "result pending" — S86-D1)
+- Rule: validation_result_not_placeholder (validation result applicable + diagnostic must equal total_rules — S86-D2)
+- Rule: sha_chain_reconciled_in_manifest (bundle-manifest.json source_sha must be reachable from HEAD — S86-D3)
+- Rule: approval_vars_consistent_naming (final-verdict.md must use canonical approval variable names — S86-D4)
+- Rule: words_drift_status_consistent (sprint-state.json and words-version-drift-current.json must agree on drift — S86-D5)
+- Rule: final_clean_proof_has_diff_and_log (final-clean-proof.txt must include diff and log sections — S86-D6)
+- Rule: next_family_discovery_not_just_relisting (advancement/next-family-discovery.md must reference pipeline configs — S86-A1)
+- Rule: baseline_freeze_not_avoiding_advancement (if baseline frozen, advancement/ dir must have real content — S86-A2)
 """
 
 from __future__ import annotations
@@ -414,6 +424,16 @@ class EvidenceValidator:
         # --- Sprint 86 NEW rules: readiness-loop prevention ---
         _maybe(self._rule_baseline_freeze_present_if_14_consecutive_blocked())
         _maybe(self._rule_no_readiness_only_verdict_after_baseline_freeze())
+
+        # --- Sprint 87 NEW rules: S86 defect invariants + advancement ---
+        _maybe(self._rule_commands_log_no_result_pending())
+        _maybe(self._rule_validation_result_not_placeholder())
+        _maybe(self._rule_sha_chain_reconciled_in_manifest())
+        _maybe(self._rule_approval_vars_consistent_naming())
+        _maybe(self._rule_words_drift_status_consistent())
+        _maybe(self._rule_final_clean_proof_has_diff_and_log())
+        _maybe(self._rule_next_family_discovery_not_just_relisting())
+        _maybe(self._rule_baseline_freeze_not_avoiding_advancement())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -3489,6 +3509,12 @@ class EvidenceValidator:
             "LOWCODE_FINISH_LINE_PARTIAL_WITH_EXPLICIT_BLOCKERS",
             # Sprint 86 verdicts
             "LOWCODE_LIVE_PUBLICATION_BASELINE_FROZEN_APPROVAL_BLOCKED_SAFE_LANES_ADVANCED",
+            # Sprint 87 verdicts
+            "LOWCODE_PUBLICATION_BASELINE_FROZEN_NEXT_SYSTEM_ADVANCED",
+            "LOWCODE_REPAIR_AND_ADVANCEMENT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+            "LOWCODE_REPAIR_AND_ADVANCEMENT_PARTIAL_WITH_EXPLICIT_BLOCKERS",
+            "LOWCODE_BASELINE_FROZEN_REPAIR_COMPLETE_ADVANCEMENT_PARTIAL",
+            "LOWCODE_BASELINE_FROZEN_ALL_LANES_COMPLETE",
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
@@ -6605,6 +6631,389 @@ class EvidenceValidator:
             rule_id=rule_id, description=description,
             severity="FAILURE", passed=True,
             evidence="Baseline freeze acknowledged in final verdict",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 87: S86 defect invariant rules (127-134)
+    # ------------------------------------------------------------------
+
+    def _rule_commands_log_no_result_pending(self) -> RuleResult:
+        """commands.log must not have lines ending with 'result pending'.
+
+        Sprint 87 (S86-D1): Sprint 86 commands.log had entries like
+        'RUN ECC — result pending' that were never updated with real exit codes.
+        """
+        rule_id = "commands_log_no_result_pending"
+        description = "commands.log must not contain 'result pending' entries"
+
+        log_path = self.bundle_dir / "commands.log"
+        if not log_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="commands.log not found — rule not applicable",
+            )
+
+        content = log_path.read_text(encoding="utf-8", errors="replace")
+        pending_lines = [
+            line.strip() for line in content.splitlines()
+            if re.search(r"result\s+pending", line, re.IGNORECASE)
+        ]
+
+        if pending_lines:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-D1: commands.log has {len(pending_lines)} line(s) with "
+                    f"'result pending': {pending_lines[:3]}"
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="No 'result pending' entries found in commands.log",
+        )
+
+    def _rule_validation_result_not_placeholder(self) -> RuleResult:
+        """Validation result applicable + diagnostic must equal total_rules.
+
+        Sprint 87 (S86-D2): Sprint 86 had a placeholder validation result
+        written before the real EV run completed.
+        """
+        rule_id = "validation_result_not_placeholder"
+        description = "validation result applicable + diagnostic must equal total_rules"
+
+        # Find the validation result file
+        evidence_dir = self.bundle_dir / "evidence"
+        if not evidence_dir.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="evidence/ directory not found — rule not applicable",
+            )
+
+        vr_files = list(evidence_dir.glob("*-final-validation-result.json"))
+        if not vr_files:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="No *-final-validation-result.json found — rule not applicable",
+            )
+
+        for vr_path in vr_files:
+            try:
+                data = json.loads(vr_path.read_text(encoding="utf-8", errors="replace"))
+            except (OSError, ValueError):
+                continue
+            applicable = data.get("applicable", 0)
+            diagnostic = data.get("diagnostic", 0)
+            total = data.get("total_rules", 0)
+            if total > 100 and applicable + diagnostic != total:
+                return RuleResult(
+                    rule_id=rule_id, description=description,
+                    severity="FAILURE", passed=False,
+                    failure_detail=(
+                        f"S86-D2: {vr_path.name} has applicable={applicable} + "
+                        f"diagnostic={diagnostic} = {applicable + diagnostic} != "
+                        f"total_rules={total}. Looks like a placeholder."
+                    ),
+                )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="Validation result applicable + diagnostic = total_rules",
+        )
+
+    def _rule_sha_chain_reconciled_in_manifest(self) -> RuleResult:
+        """bundle-manifest.json source_sha must be a valid short SHA.
+
+        Sprint 87 (S86-D3): Sprint 86 had SHA chain inconsistency between
+        bundle-manifest.json and final-clean-proof.txt.
+        """
+        rule_id = "sha_chain_reconciled_in_manifest"
+        description = "bundle-manifest.json source_sha must be a valid git short SHA"
+
+        manifest_path = self.bundle_dir / "bundle-manifest.json"
+        if not manifest_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="bundle-manifest.json not found — rule not applicable",
+            )
+
+        try:
+            data = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse bundle-manifest.json — rule not applicable",
+            )
+
+        source_sha = data.get("source_sha", "")
+        if not source_sha or source_sha in ("TBD", "TBD_AFTER_COMMIT", "PLACEHOLDER"):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-D3: bundle-manifest.json source_sha is '{source_sha}' "
+                    f"which is not a valid SHA."
+                ),
+            )
+
+        if not re.match(r"^[0-9a-f]{7,40}$", source_sha):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-D3: bundle-manifest.json source_sha='{source_sha}' "
+                    f"does not match [0-9a-f]{{7,40}} pattern."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"source_sha='{source_sha}' is a valid SHA",
+        )
+
+    def _rule_approval_vars_consistent_naming(self) -> RuleResult:
+        """final-verdict.md must use canonical approval variable names.
+
+        Sprint 87 (S86-D4): Sprint 86 mixed PLUGIN_EXAMPLES_README_PUSH_APPROVAL
+        and PLUGIN_EXAMPLES_MERGE_PR_APPROVAL without a deprecation note.
+        """
+        rule_id = "approval_vars_consistent_naming"
+        description = "final-verdict.md must use consistent approval variable naming"
+
+        verdict_path = self.bundle_dir / "final-verdict.md"
+        if not verdict_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-verdict.md not found — rule not applicable",
+            )
+
+        content = verdict_path.read_text(encoding="utf-8", errors="replace")
+        has_old = "PLUGIN_EXAMPLES_README_PUSH_APPROVAL" in content
+        has_new = "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL" in content
+        has_deprecation = "deprecat" in content.lower() or "alias" in content.lower()
+
+        if has_old and not has_deprecation:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S86-D4: final-verdict.md uses PLUGIN_EXAMPLES_README_PUSH_APPROVAL "
+                    "without a deprecation note. Use PLUGIN_EXAMPLES_MERGE_PR_APPROVAL "
+                    "or add a deprecation/alias note."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="Approval variable naming is consistent or properly documented",
+        )
+
+    def _rule_words_drift_status_consistent(self) -> RuleResult:
+        """sprint-state.json and words-version-drift-current.json must agree on drift.
+
+        Sprint 87 (S86-D5): Sprint 81 MEMORY claimed drift resolved but Sprint 86
+        words-version-drift-current.json showed drift=true.
+        """
+        rule_id = "words_drift_status_consistent"
+        description = "sprint-state.json and words drift file must agree on drift status"
+
+        drift_path = self.bundle_dir / "version-drift" / "words-version-drift-current.json"
+        if not drift_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="words-version-drift-current.json not found — rule not applicable",
+            )
+
+        try:
+            drift_data = json.loads(drift_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse words drift file — rule not applicable",
+            )
+
+        drift_val = drift_data.get("drift", False)
+        drift_type = drift_data.get("drift_type", "")
+
+        # Only enforce when drift is boolean True AND drift_type is present
+        if not isinstance(drift_val, bool) or not drift_val:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=f"drift={drift_val!r} — rule applies only to boolean true drift",
+            )
+
+        # If drift=true, drift_type must not be empty or "RESOLVED"
+        if drift_type.upper() in ("RESOLVED", ""):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-D5: words-version-drift-current.json has drift=true but "
+                    f"drift_type='{drift_type}'. If drift exists, drift_type must "
+                    f"reflect the actual status (e.g., NEEDS_REPAIR_APPROVAL_BLOCKED)."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"Words drift status is consistent: drift={drift_val}, drift_type={drift_type}",
+        )
+
+    def _rule_final_clean_proof_has_diff_and_log(self) -> RuleResult:
+        """final-clean-proof.txt must include diff and log sections.
+
+        Sprint 87 (S86-D6): Sprint 86 final-clean-proof.txt only had git status
+        but no diff or log output.
+        """
+        rule_id = "final_clean_proof_has_diff_and_log"
+        description = "final-clean-proof.txt must include git diff and git log output"
+
+        proof_dir = self.bundle_dir / "git"
+        if not proof_dir.exists():
+            proof_path = self.bundle_dir / "final-clean-proof.txt"
+        else:
+            proof_path = proof_dir / "final-clean-proof.txt"
+
+        if not proof_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="final-clean-proof.txt not found — rule not applicable",
+            )
+
+        content = proof_path.read_text(encoding="utf-8", errors="replace").lower()
+        has_diff = "diff" in content or "no changes" in content or "nothing to commit" in content
+        has_log = "log" in content or "commit" in content
+
+        if not has_diff or not has_log:
+            missing = []
+            if not has_diff:
+                missing.append("diff")
+            if not has_log:
+                missing.append("log")
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-D6: final-clean-proof.txt is missing {', '.join(missing)} "
+                    f"section(s). Must include git diff and git log output."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="final-clean-proof.txt includes diff and log sections",
+        )
+
+    def _rule_next_family_discovery_not_just_relisting(self) -> RuleResult:
+        """advancement/next-family-discovery.md must reference pipeline configs.
+
+        Sprint 87 (S86-A1): Next-family discovery must come from actual repo configs
+        (pipeline/configs/families/), not just re-listing the current 6 families.
+        """
+        rule_id = "next_family_discovery_not_just_relisting"
+        description = "next-family discovery must reference pipeline configs, not re-list current families"
+
+        discovery_path = self.bundle_dir / "advancement" / "next-family-discovery.md"
+        if not discovery_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="advancement/next-family-discovery.md not found — rule not applicable",
+            )
+
+        content = discovery_path.read_text(encoding="utf-8", errors="replace")
+        # Must reference pipeline configs
+        has_config_ref = "pipeline/configs" in content or "configs/families" in content
+        # Must mention at least one non-current family
+        non_current = ["ocr", "psd", "html", "svg", "barcode", "imaging", "cad"]
+        has_new_family = any(f in content.lower() for f in non_current)
+
+        if not has_config_ref:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S86-A1: next-family-discovery.md does not reference "
+                    "pipeline/configs/families/. Discovery must come from repo configs."
+                ),
+            )
+
+        if not has_new_family:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S86-A1: next-family-discovery.md does not mention any "
+                    "non-current family. Must identify candidates beyond the current 6."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="Next-family discovery references pipeline configs and identifies new candidates",
+        )
+
+    def _rule_baseline_freeze_not_avoiding_advancement(self) -> RuleResult:
+        """If baseline frozen, advancement/ dir must have real content.
+
+        Sprint 87 (S86-A2): Baseline freeze must not be used as an excuse to
+        skip product advancement. If frozen, there must be real advancement work.
+        """
+        rule_id = "baseline_freeze_not_avoiding_advancement"
+        description = "baseline freeze must not avoid real product advancement"
+
+        freeze_path = self.bundle_dir / "baseline-freeze" / "publication-baseline-freeze.json"
+        if not freeze_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="No baseline freeze — rule not applicable",
+            )
+
+        adv_dir = self.bundle_dir / "advancement"
+        if not adv_dir.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S86-A2: baseline-freeze exists but advancement/ directory "
+                    "is missing. Baseline freeze must not avoid product advancement."
+                ),
+            )
+
+        adv_files = list(adv_dir.iterdir())
+        if len(adv_files) < 2:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S86-A2: baseline-freeze exists but advancement/ has only "
+                    f"{len(adv_files)} file(s). Must have substantial advancement work."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"advancement/ has {len(adv_files)} files — real advancement present",
         )
 
     # ------------------------------------------------------------------

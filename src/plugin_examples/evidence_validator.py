@@ -124,6 +124,13 @@ Sprint 84 additions (4 new rules, closes S83-C1 and S83-C2 governance gaps):
 - Rule: pr_batching_plan_present_if_pr_creation_attempted (if pr-creation-ledger.json shows prs_created>0, publication/pr-batching-plan.json must exist — S83-G2)
 - Rule: root_readme_file_plan_present_before_pr_creation (if pr-creation-ledger.json shows prs_created>0, conflicts/root-readme-file-plan.json must exist — S83-G3)
 - Rule: no_bulk_42pr_plan_without_justification (if pr-batching-plan.json exists with planned_prs count==42, a bulk_justification field must be present — S83-G4)
+
+Sprint 85 additions (5 new rules, closes Sprint 84 evidence hygiene gaps):
+- Rule: bundle_manifest_source_sha_not_tbd (bundle-manifest.json source_sha must not be TBD_AFTER_COMMIT — S84-H1)
+- Rule: no_stale_will_capture_text_in_final_consistency (final-consistency-check.json notes must not contain "will be captured" — S84-H2)
+- Rule: no_stale_pending_lane_label_in_tracking (taskcard-update-proof.md must not have lanes marked PENDING — S84-H3)
+- Rule: scoreboard_ev_applicable_not_tbd (scoreboard-update-proof.md must not have TBD for EV applicable — S84-H4)
+- Rule: bundle_manifest_source_sha_in_final_clean_proof (bundle-manifest.json source_sha must appear in final-clean-proof.txt — S84-H5)
 """
 
 from __future__ import annotations
@@ -392,6 +399,13 @@ class EvidenceValidator:
         _maybe(self._rule_pr_batching_plan_present_if_pr_creation_attempted())
         _maybe(self._rule_root_readme_file_plan_present_before_pr_creation())
         _maybe(self._rule_no_bulk_42pr_plan_without_justification())
+
+        # --- Sprint 85 NEW rules: close S84-H1 through S84-H5 ---
+        _maybe(self._rule_bundle_manifest_source_sha_not_tbd())
+        _maybe(self._rule_no_stale_will_capture_text_in_final_consistency())
+        _maybe(self._rule_no_stale_pending_lane_label_in_tracking())
+        _maybe(self._rule_scoreboard_ev_applicable_not_tbd())
+        _maybe(self._rule_bundle_manifest_source_sha_in_final_clean_proof())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -6254,6 +6268,223 @@ class EvidenceValidator:
             rule_id=rule_id, description=description,
             severity="FAILURE", passed=True,
             evidence=f"planned_prs=42; bulk_justification present: {str(justification)[:80]}",
+        )
+
+    # ------------------------------------------------------------------
+    # Sprint 85: evidence hygiene rules (120-124)
+    # ------------------------------------------------------------------
+
+    def _rule_bundle_manifest_source_sha_not_tbd(self) -> RuleResult:
+        """bundle-manifest.json source_sha must not be TBD_AFTER_COMMIT.
+
+        Sprint 85 evidence hygiene (S84-H1): prevents the Sprint 84 pattern
+        where source_sha was left as TBD_AFTER_COMMIT after the commit sequence.
+        """
+        rule_id = "bundle_manifest_source_sha_not_tbd"
+        description = "bundle-manifest.json source_sha must not be TBD_AFTER_COMMIT"
+
+        manifest_path = self.bundle_dir / "bundle-manifest.json"
+        if not manifest_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="bundle-manifest.json not found — rule not applicable",
+            )
+
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse bundle-manifest.json — rule not applicable",
+            )
+
+        source_sha = manifest.get("source_sha", "")
+        if source_sha == "TBD_AFTER_COMMIT":
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S84-H1: bundle-manifest.json has source_sha=TBD_AFTER_COMMIT. "
+                    "The source_sha must be updated to the actual commit SHA after committing."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"source_sha={source_sha!r} (not TBD)",
+        )
+
+    def _rule_no_stale_will_capture_text_in_final_consistency(self) -> RuleResult:
+        """final-consistency-check.json notes must not contain 'will be captured'.
+
+        Sprint 85 evidence hygiene (S84-H2): prevents the Sprint 84 pattern
+        where the consistency check notes referenced future captures that had already occurred.
+        """
+        rule_id = "no_stale_will_capture_text_in_final_consistency"
+        description = "final-consistency-check.json notes must not contain 'will be captured'"
+
+        check_path = self.bundle_dir / "review" / "final-consistency-check.json"
+        if not check_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="review/final-consistency-check.json not found — rule not applicable",
+            )
+
+        try:
+            check = json.loads(check_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse final-consistency-check.json — rule not applicable",
+            )
+
+        notes = check.get("notes", "")
+        if "will be captured" in notes.lower():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S84-H2: final-consistency-check.json notes contain 'will be captured'. "
+                    "Update the notes after all captures are complete."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"notes do not contain 'will be captured'",
+        )
+
+    def _rule_no_stale_pending_lane_label_in_tracking(self) -> RuleResult:
+        """taskcard-update-proof.md must not have lanes marked PENDING in lane status table.
+
+        Sprint 85 evidence hygiene (S84-H3): prevents the Sprint 84 pattern
+        where Lane J was left as PENDING after IV had completed.
+        """
+        rule_id = "no_stale_pending_lane_label_in_tracking"
+        description = "taskcard-update-proof.md must not have lanes marked PENDING"
+
+        taskcard_path = self.bundle_dir / "tracking" / "taskcard-update-proof.md"
+        if not taskcard_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="tracking/taskcard-update-proof.md not found — rule not applicable",
+            )
+
+        content = taskcard_path.read_text(encoding="utf-8", errors="replace")
+        import re
+        # Match table rows like "| J | IV | PENDING ... |"
+        pending_lines = re.findall(r"\|[^|]+\|[^|]+\|\s*PENDING\b[^|]*\|", content)
+        if pending_lines:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S84-H3: taskcard-update-proof.md has {len(pending_lines)} lane(s) "
+                    f"marked PENDING: {pending_lines[0].strip()!r}. Update to final status."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="No PENDING lane labels found in taskcard-update-proof.md",
+        )
+
+    def _rule_scoreboard_ev_applicable_not_tbd(self) -> RuleResult:
+        """scoreboard-update-proof.md must not have TBD for EV applicable.
+
+        Sprint 85 evidence hygiene (S84-H4): prevents the Sprint 84 pattern
+        where the scoreboard was written before the EV run and left with TBD.
+        """
+        rule_id = "scoreboard_ev_applicable_not_tbd"
+        description = "scoreboard-update-proof.md must not have TBD for EV applicable"
+
+        scoreboard_path = self.bundle_dir / "tracking" / "scoreboard-update-proof.md"
+        if not scoreboard_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="tracking/scoreboard-update-proof.md not found — rule not applicable",
+            )
+
+        content = scoreboard_path.read_text(encoding="utf-8", errors="replace")
+        import re
+        # Match rows with "EV applicable" and "TBD"
+        if re.search(r"EV applicable[^|]*\|[^|]*\|\s*TBD", content, re.IGNORECASE):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    "S84-H4: scoreboard-update-proof.md has TBD for EV applicable. "
+                    "Update with actual EV applicable count after running the validator."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence="EV applicable is not TBD in scoreboard",
+        )
+
+    def _rule_bundle_manifest_source_sha_in_final_clean_proof(self) -> RuleResult:
+        """When bundle-manifest.json source_sha is not TBD, it must appear in final-clean-proof.txt.
+
+        Sprint 85 evidence hygiene (S84-H5): ensures SHA consistency between the
+        bundle manifest and the git proof. Rule 120 catches TBD; this rule catches
+        a non-TBD SHA that doesn't appear in the final clean proof.
+        """
+        rule_id = "bundle_manifest_source_sha_in_final_clean_proof"
+        description = "bundle-manifest.json source_sha must appear in final-clean-proof.txt"
+
+        manifest_path = self.bundle_dir / "bundle-manifest.json"
+        proof_path = self.bundle_dir / "git" / "final-clean-proof.txt"
+
+        if not manifest_path.exists() or not proof_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="bundle-manifest.json or final-clean-proof.txt not found — rule not applicable",
+            )
+
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse bundle-manifest.json — rule not applicable",
+            )
+
+        source_sha = manifest.get("source_sha", "")
+        if not source_sha or source_sha == "TBD_AFTER_COMMIT":
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence=f"source_sha={source_sha!r} — rule 120 handles TBD, this rule not applicable",
+            )
+
+        proof_content = proof_path.read_text(encoding="utf-8", errors="replace")
+        if source_sha not in proof_content:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"S84-H5: bundle-manifest.json source_sha={source_sha!r} does not appear "
+                    f"in final-clean-proof.txt. The proof must reference the bundle's commit SHA."
+                ),
+            )
+
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=f"source_sha={source_sha!r} found in final-clean-proof.txt",
         )
 
     # ------------------------------------------------------------------

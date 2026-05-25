@@ -1,0 +1,17 @@
+{
+  "sprint_id": "sprint85",
+  "date": "2026-05-24",
+  "total_example_readmes": 42,
+  "total_root_readmes_included": 0,
+  "total_dir_packages_props_included": 0,
+  "grand_total_files": 42,
+  "source": "reports/sprint72/handoff/per-family",
+  "families": {
+    "cells": {"example_readmes": 9, "root_readme": false, "dir_packages_props": false, "total": 9},
+    "words": {"example_readmes": 8, "root_readme": false, "dir_packages_props": false, "total": 8},
+    "pdf": {"example_readmes": 19, "root_readme": false, "dir_packages_props": false, "total": 19},
+    "diagram": {"example_readmes": 2, "root_readme": false, "dir_packages_props": false, "total": 2},
+    "email": {"example_readmes": 1, "root_readme": false, "dir_packages_props": false, "total": 1},
+    "slides": {"example_readmes": 3, "root_readme": false, "dir_packages_props": false, "total": 3}
+  }
+}

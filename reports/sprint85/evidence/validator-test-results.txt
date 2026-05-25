@@ -1,0 +1,23 @@
+Sprint 85 — Validator Test Results
+====================================
+Date: 2026-05-24
+
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -q
+Result: 182 passed in 169.43s (0:02:49)
+
+Breakdown:
+- Existing tests (Sprint 84): 171
+- New tests (Sprint 85): 11
+  - TestSprint85EvidenceHygieneRules: 11 methods
+    - test_rule120_passes_trivially_when_no_manifest
+    - test_rule120_passes_with_valid_sha
+    - test_rule120_fails_with_tbd
+    - test_rule121_passes_when_no_stale_text
+    - test_rule121_fails_with_stale_text
+    - test_rule122_passes_when_no_pending
+    - test_rule122_fails_when_lane_pending
+    - test_rule123_passes_when_ev_applicable_has_value
+    - test_rule123_fails_when_ev_applicable_is_tbd
+    - test_rule124_passes_when_sha_in_proof
+    - test_rule124_fails_when_sha_not_in_proof
+- Total: 182 PASS, 0 FAIL

@@ -1,0 +1,17 @@
+{
+  "sprint_id": "sprint85",
+  "date": "2026-05-24",
+  "lanes": {
+    "A": {"status": "COMPLETED", "outputs": ["live-approval-check.md", "pr-creation-ledger.json", "pr-diff-verification.json"], "verified": true},
+    "B": {"status": "COMPLETED", "outputs": ["pr-batching-strategy.md", "pr-batching-plan.json", "pr-batching-risk-matrix.md", "publication-file-plan.json", "per-family-file-plan.md"], "verified": true},
+    "C": {"status": "COMPLETED", "outputs": ["root-readme-pr-inventory.json", "root-readme-pr-conflict-strategy.md", "root-readme-action-plan.json", "root-readme-file-plan.json"], "verified": true},
+    "D": {"status": "COMPLETED", "outputs": ["handoff-source-authority.md", "handoff-prepublish-validation.json", "handoff-source-map.json", "handoff-diff-summary.md", "remote-repo-state-before.json", "remote-readme-io-audit-before.json", "remote-vs-handoff-before.json", "remote-conflict-check.md"], "verified": true},
+    "E": {"status": "COMPLETED", "outputs": ["merge-readiness-summary.md", "merge-plan.md", "post-merge-verification-plan.md", "branch-delete-plan.md", "merge-result.json", "post-merge-verification.json", "branch-delete-result.json"], "verified": true},
+    "F": {"status": "COMPLETED", "outputs": ["product-advancement-summary.md", "words-version-status.md", "words-version-drift-current.json", "formimporter-status.md", "formimporter-repro-inventory.json", "email-slides-runtime-carry-forward.md", "live-publication-operator-checklist.md", "next-family-readiness.md"], "verified": true},
+    "G": {"status": "COMPLETED", "outputs": ["validator-gap-analysis.md", "validator-source-proof.patch", "validator-test-results.txt", "pipeline-integration-proof.md"], "verified": true},
+    "H": {"status": "COMPLETED", "outputs": ["sprint84-evidence-hygiene-cleanup.md", "dirty-state-before.txt", "dirty-file-classification.md"], "verified": true},
+    "I": {"status": "COMPLETED", "outputs": ["taskcard-update-proof.md", "scoreboard-update-proof.md", "next-gate-register.json"], "verified": true},
+    "J": {"status": "COMPLETED", "outputs": ["independent-verification-report.md", "lane-output-checklist.json", "blocker-register.json"], "verified": true}
+  },
+  "all_verified": true
+}

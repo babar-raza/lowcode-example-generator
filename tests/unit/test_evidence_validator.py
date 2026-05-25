@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 119)  # Sprint 84: added 4 new rules (116-119)
+        self.assertEqual(result.total_rules, 124)  # Sprint 85: added 5 new rules (120-124)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 119)  # Sprint 84: 119 rules total
+        self.assertEqual(len(d["rules"]), 124)  # Sprint 85: 124 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 118 rules evaluated (119 total - 1 self-reference rule 21)
-        # Sprint 84: total is now 119 (added 4 new rules), so excluding rule 21 = 118
-        self.assertEqual(len(result.rule_results), 118)
+        # Should have exactly 123 rules evaluated (124 total - 1 self-reference rule 21)
+        # Sprint 85: total is now 124 (added 5 new rules), so excluding rule 21 = 123
+        self.assertEqual(len(result.rule_results), 123)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 119)  # Sprint 84: 119 rules total
+        self.assertEqual(len(phase_b.rule_results), 124)  # Sprint 85: 124 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 119 rules total (115 Sprint 83 + 4 new Sprint 84 rules)."""
+        """validate() must return 124 rules total (119 Sprint 84 + 5 new Sprint 85 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 119,
-                         f"Expected 119 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 124,
+                         f"Expected 124 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-119."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-124."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 118,
-                         f"validate_for_storage must have 118 rules (119 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 123,
+                         f"validate_for_storage must have 123 rules (124 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -3398,6 +3398,146 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             if r.rule_id == "no_bulk_42pr_plan_without_justification"
         )
         self.assertTrue(rule.passed)
+
+
+class TestSprint85EvidenceHygieneRules(unittest.TestCase):
+    """Tests for Sprint 85 rules 120-124 (S84-H1 through S84-H5): evidence hygiene."""
+
+    # ------------------------------------------------------------------ helpers
+
+    def _make_manifest(self, bundle_dir: Path, source_sha: str = "abc1234"):
+        (bundle_dir / "bundle-manifest.json").write_text(
+            json.dumps({"source_sha": source_sha}),
+            encoding="utf-8",
+        )
+
+    def _make_consistency_check(self, bundle_dir: Path, notes: str = "All captured."):
+        (bundle_dir / "review").mkdir(parents=True, exist_ok=True)
+        (bundle_dir / "review" / "final-consistency-check.json").write_text(
+            json.dumps({"overall": "PASS", "notes": notes}),
+            encoding="utf-8",
+        )
+
+    def _make_taskcard(self, bundle_dir: Path, content: str = "| A | Topic | COMPLETED |\n"):
+        (bundle_dir / "tracking").mkdir(parents=True, exist_ok=True)
+        (bundle_dir / "tracking" / "taskcard-update-proof.md").write_text(
+            content, encoding="utf-8",
+        )
+
+    def _make_scoreboard(self, bundle_dir: Path, content: str = "| EV applicable | 56 | 69 | +13 |\n"):
+        (bundle_dir / "tracking").mkdir(parents=True, exist_ok=True)
+        (bundle_dir / "tracking" / "scoreboard-update-proof.md").write_text(
+            content, encoding="utf-8",
+        )
+
+    # ------------------------------------------------------------------ Rule 120
+
+    def test_rule120_passes_trivially_when_no_manifest(self):
+        """Rule 120: passes trivially when bundle-manifest.json absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_not_tbd")
+        self.assertTrue(rule.passed)
+
+    def test_rule120_passes_with_valid_sha(self):
+        """Rule 120: passes when source_sha is a real commit SHA."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_manifest(b, source_sha="8bb4513")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_not_tbd")
+        self.assertTrue(rule.passed)
+
+    def test_rule120_fails_with_tbd(self):
+        """Rule 120: fails when source_sha is TBD_AFTER_COMMIT."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_manifest(b, source_sha="TBD_AFTER_COMMIT")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_not_tbd")
+        self.assertFalse(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 121
+
+    def test_rule121_passes_when_no_stale_text(self):
+        """Rule 121: passes when notes don't contain 'will be captured'."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_consistency_check(b, notes="All files captured and verified.")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_stale_will_capture_text_in_final_consistency")
+        self.assertTrue(rule.passed)
+
+    def test_rule121_fails_with_stale_text(self):
+        """Rule 121: fails when notes contain 'will be captured'."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_consistency_check(b, notes="final-clean-proof.txt will be captured in commit 2.")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_stale_will_capture_text_in_final_consistency")
+        self.assertFalse(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 122
+
+    def test_rule122_passes_when_no_pending(self):
+        """Rule 122: passes when no lanes are PENDING."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_taskcard(b, "| A | Topic | COMPLETED |\n| J | IV | COMPLETED |\n")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_stale_pending_lane_label_in_tracking")
+        self.assertTrue(rule.passed)
+
+    def test_rule122_fails_when_lane_pending(self):
+        """Rule 122: fails when a lane has PENDING status."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_taskcard(b, "| A | Topic | COMPLETED |\n| J | IV | PENDING — runs after all lanes |\n")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_stale_pending_lane_label_in_tracking")
+        self.assertFalse(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 123
+
+    def test_rule123_passes_when_ev_applicable_has_value(self):
+        """Rule 123: passes when EV applicable has a numeric value."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_scoreboard(b, "| EV applicable | 56 | 69 | +13 |\n")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "scoreboard_ev_applicable_not_tbd")
+        self.assertTrue(rule.passed)
+
+    def test_rule123_fails_when_ev_applicable_is_tbd(self):
+        """Rule 123: fails when EV applicable has TBD."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_scoreboard(b, "| EV applicable | 56 | TBD (post-EV run) | - |\n")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "scoreboard_ev_applicable_not_tbd")
+        self.assertFalse(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 124
+
+    def test_rule124_passes_when_sha_in_proof(self):
+        """Rule 124: passes when source_sha appears in final-clean-proof.txt."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_manifest(b, source_sha="a1b2c3d4e5f")
+            # _make_bundle already creates final-clean-proof.txt with "a1b2c3d4e5f"
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_in_final_clean_proof")
+        self.assertTrue(rule.passed)
+
+    def test_rule124_fails_when_sha_not_in_proof(self):
+        """Rule 124: fails when source_sha doesn't appear in final-clean-proof.txt."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_manifest(b, source_sha="deadbeef999")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_in_final_clean_proof")
+        self.assertFalse(rule.passed)
 
 
 if __name__ == "__main__":

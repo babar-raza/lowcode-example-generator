@@ -1,0 +1,13 @@
+{
+  "sprint_id": "sprint85",
+  "date": "2026-05-24",
+  "family": "pdf",
+  "plugin": "FormImporter",
+  "bug": "NullReferenceException in Aspose.PDF 26.5.0 FormImporter",
+  "repro_path": "workspace/defect-repros/pdf-formimporter-nullref/",
+  "repro_valid": true,
+  "next_retest_trigger": "TRG-01",
+  "trigger_condition": "Aspose.PDF NuGet > 26.5.0",
+  "status": "BLOCKED_EXTERNAL",
+  "excluded_from_denominator": true
+}

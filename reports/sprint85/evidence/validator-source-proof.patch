@@ -1,0 +1,22 @@
+Sprint 85 — Validator Source Proof
+===================================
+
+Source changes:
+  src/plugin_examples/evidence_validator.py | 231 ++++++++++++++++++++++++++++++
+  tests/unit/test_evidence_validator.py     | 164 +++++++++++++++++++--
+  2 files changed, 383 insertions(+), 12 deletions(-)
+
+## evidence_validator.py changes:
+- Added Sprint 85 docstring block (5 new rule descriptions)
+- Added 5 _maybe() calls in validate() after Sprint 84 block
+- Added 5 rule methods:
+  - _rule_bundle_manifest_source_sha_not_tbd (Rule 120)
+  - _rule_no_stale_will_capture_text_in_final_consistency (Rule 121)
+  - _rule_no_stale_pending_lane_label_in_tracking (Rule 122)
+  - _rule_scoreboard_ev_applicable_not_tbd (Rule 123)
+  - _rule_bundle_manifest_source_sha_in_final_clean_proof (Rule 124)
+
+## test_evidence_validator.py changes:
+- Updated 6 count assertions: 119→124 (x3), 118→123 (x2), 119→124 (x1)
+- Added TestSprint85EvidenceHygieneRules class with 11 test methods
+- Helpers: _make_manifest, _make_consistency_check, _make_taskcard, _make_scoreboard

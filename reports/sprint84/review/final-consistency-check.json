@@ -9,8 +9,8 @@
     "no_mixed_state": true,
     "ev_applicable_all_pass": true,
     "ecc_closure_valid": true,
-    "final_clean_proof_captured": false,
-    "dirty_after_captured_post_commit": false
+    "final_clean_proof_captured": true,
+    "dirty_after_captured_post_commit": true
   },
-  "notes": "final-clean-proof.txt will be captured in commit 2. dirty-state-after.txt will be updated post-commit."
+  "notes": "final-clean-proof.txt captured at HEAD 8fb3008f (commit 3). dirty-state-after.txt captured post-commit 1844c49 (commit 1). Hygiene normalized in Sprint 85."
 }

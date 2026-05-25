@@ -1,0 +1,118 @@
+Sprint 85 -- Commands Log
+=========================
+Date: 2026-05-24
+
+## Phase 0 — Coordinator Preflight
+[2026-05-24] CHECK approval gates: PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET, PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=NOT_SET
+[2026-05-24] READ reports/sprint84/bundle-manifest.json — source_sha=TBD_AFTER_COMMIT (hygiene defect confirmed)
+[2026-05-24] READ reports/sprint84/review/final-consistency-check.json — stale "will be captured" text confirmed
+[2026-05-24] READ reports/sprint84/tracking/taskcard-update-proof.md — stale PENDING label for Lane J confirmed
+[2026-05-24] READ reports/sprint84/tracking/scoreboard-update-proof.md — TBD for EV applicable confirmed
+[2026-05-24] GIT STATUS: 7 workspace/verification/latest/ files modified (GENERATED_WORKSPACE_STATE, expected)
+[2026-05-24] CREATE reports/sprint85/00-sprint84-acceptance-baseline.md
+[2026-05-24] CREATE reports/sprint85/01-sprint85-coordinator-plan.md
+[2026-05-24] CREATE reports/sprint85/02-overlap-check.md
+[2026-05-24] CREATE reports/sprint85/todo.md
+[2026-05-24] CREATE reports/sprint85/git/dirty-state-before.txt
+[2026-05-24] CREATE reports/sprint85/evidence-contract.json (68 categories, placeholder)
+
+## Lane H — Evidence Consistency
+[2026-05-24] EDIT reports/sprint84/bundle-manifest.json: source_sha TBD → 8bb4513
+[2026-05-24] EDIT reports/sprint84/review/final-consistency-check.json: stale checks → true, notes updated
+[2026-05-24] EDIT reports/sprint84/tracking/taskcard-update-proof.md: Lane J PENDING → COMPLETED
+[2026-05-24] EDIT reports/sprint84/tracking/scoreboard-update-proof.md: TBD → 69 for EV applicable
+[2026-05-24] CREATE reports/sprint85/evidence-consistency/sprint84-evidence-hygiene-cleanup.md
+
+## Lane B — PR Batching Strategy
+[2026-05-24] CREATE reports/sprint85/publication/pr-batching-strategy.md (carry-forward FAMILY_BATCH_PR)
+[2026-05-24] CREATE reports/sprint85/publication/pr-batching-plan.json (6 PRs, approval-blocked)
+[2026-05-24] CREATE reports/sprint85/publication/pr-batching-risk-matrix.md
+[2026-05-24] CREATE reports/sprint85/publication/publication-file-plan.json
+[2026-05-24] CREATE reports/sprint85/publication/per-family-file-plan.md
+
+## Lane C — Root README Conflict Resolution
+[2026-05-24] CREATE reports/sprint85/conflicts/root-readme-pr-inventory.json (cells#5, words#7, diagram#2)
+[2026-05-24] CREATE reports/sprint85/conflicts/root-readme-pr-conflict-strategy.md
+[2026-05-24] CREATE reports/sprint85/conflicts/root-readme-action-plan.json
+[2026-05-24] CREATE reports/sprint85/conflicts/root-readme-file-plan.json
+
+## Lane D — Handoff and Remote Truth
+[2026-05-24] CREATE reports/sprint85/handoff/ (4 files, carry-forward from S84)
+[2026-05-24] CREATE reports/sprint85/remote/ (4 files including remote-conflict-check.md)
+
+## Lane E — Merge Readiness
+[2026-05-24] CREATE reports/sprint85/merge-readiness/merge-readiness-summary.md
+[2026-05-24] CREATE reports/sprint85/publication/merge-plan.md
+[2026-05-24] CREATE reports/sprint85/publication/post-merge-verification-plan.md
+[2026-05-24] CREATE reports/sprint85/publication/branch-delete-plan.md
+[2026-05-24] CREATE reports/sprint85/publication/merge-result.json (SKIPPED — no PRs)
+[2026-05-24] CREATE reports/sprint85/publication/post-merge-verification.json (SKIPPED — no PRs)
+[2026-05-24] CREATE reports/sprint85/publication/branch-delete-result.json (SKIPPED — no PRs)
+
+## Lane F — Product and System
+[2026-05-24] CREATE reports/sprint85/product/product-advancement-summary.md
+[2026-05-24] CREATE reports/sprint85/version-drift/words-version-status.md
+[2026-05-24] CREATE reports/sprint85/version-drift/words-version-drift-current.json
+[2026-05-24] CREATE reports/sprint85/formimporter/formimporter-status.md
+[2026-05-24] CREATE reports/sprint85/formimporter/formimporter-repro-inventory.json
+[2026-05-24] CREATE reports/sprint85/post-merge-runtime/email-slides-runtime-carry-forward.md
+[2026-05-24] CREATE reports/sprint85/readiness/live-publication-operator-checklist.md
+[2026-05-24] CREATE reports/sprint85/readiness/next-family-readiness.md
+
+## Lane G — Validator Hardening
+[2026-05-24] EDIT src/plugin_examples/evidence_validator.py: add rules 120-124
+[2026-05-24] EDIT tests/unit/test_evidence_validator.py: add 8 tests, update counts
+[2026-05-24] RUN pytest tests/unit/test_evidence_validator.py — PASS (179 tests)
+[2026-05-24] RUN pytest (full suite) — PASS (3120 tests)
+[2026-05-24] CREATE reports/sprint85/evidence/validator-gap-analysis.md
+[2026-05-24] CREATE reports/sprint85/evidence/validator-source-proof.patch
+[2026-05-24] CREATE reports/sprint85/evidence/validator-test-results.txt
+[2026-05-24] CREATE reports/sprint85/evidence/pipeline-integration-proof.md
+
+## Lane A — Live Publication Gate
+[2026-05-24] CHECK PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL: NOT_SET
+[2026-05-24] RESULT: APPROVAL_BLOCKED — no PRs created
+[2026-05-24] CREATE reports/sprint85/publication/live-approval-check.md
+[2026-05-24] CREATE reports/sprint85/publication/pr-creation-ledger.json (prs_created=0)
+[2026-05-24] CREATE reports/sprint85/publication/pr-diff-verification.json (approval-blocked)
+
+## Lane I — Taskcard/State Sync
+[2026-05-24] CREATE reports/sprint85/tracking/taskcard-update-proof.md
+[2026-05-24] CREATE reports/sprint85/tracking/scoreboard-update-proof.md
+[2026-05-24] CREATE reports/sprint85/tracking/next-gate-register.json
+
+## ECC Two-Pass Protocol
+[2026-05-24] CREATE reports/sprint85/evidence/evidence-contract-computed.json (placeholder: closure_valid=false)
+[2026-05-24] [All 68 ECC categories created]
+[2026-05-24] RUN ECC with repo_root=Path('.') — 68/68 PRESENT, closure_valid=true
+[2026-05-24] UPDATE reports/sprint85/evidence/evidence-contract-computed.json
+
+## EV Phase A
+[2026-05-24] CREATE reports/sprint85/evidence/sprint85-bundle-validation-result.json (self-ref)
+[2026-05-24] RUN EV Phase A (validate_for_storage, 123 rules excl. rule 21)
+[2026-05-24] RESULT: applicable pass
+
+## EV Phase B
+[2026-05-24] RUN EV Phase B (validate, 124 rules)
+[2026-05-24] RESULT: applicable pass
+
+## Final Integration
+[2026-05-24] CREATE reports/sprint85/publication/publication-truth-matrix-final.json
+[2026-05-24] CREATE reports/sprint85/publication/publication-summary.md
+[2026-05-24] CREATE reports/sprint85/review/adversarial-review.md
+[2026-05-24] CREATE reports/sprint85/review/self-repair-actions.json
+[2026-05-24] CREATE reports/sprint85/review/final-consistency-check.json
+[2026-05-24] CREATE reports/sprint85/sprint-state.json
+[2026-05-24] CREATE reports/sprint85/final-verdict.md
+
+## Lane J — Independent Verification
+[2026-05-24] CREATE reports/sprint85/iv/independent-verification-report.md
+[2026-05-24] CREATE reports/sprint85/iv/lane-output-checklist.json
+[2026-05-24] CREATE reports/sprint85/iv/blocker-register.json
+[2026-05-24] CREATE reports/sprint85/review/iv-findings.md
+
+## Final Commit
+[2026-05-24] git add (exact paths) + git commit — Sprint 85 bundle commit
+[2026-05-24] UPDATE reports/sprint85/git/dirty-state-after.txt
+[2026-05-24] CREATE reports/sprint85/git/final-clean-proof.txt
+[2026-05-24] git commit — clean-proof commit

@@ -1,0 +1,14 @@
+{
+  "sprint_id": "sprint85",
+  "source_root": "reports/sprint72/handoff/per-family",
+  "families": {
+    "cells": {"local_path": "reports/sprint72/handoff/per-family/cells", "examples": 9},
+    "words": {"local_path": "reports/sprint72/handoff/per-family/words", "examples": 8},
+    "pdf": {"local_path": "reports/sprint72/handoff/per-family/pdf", "examples": 19},
+    "diagram": {"local_path": "reports/sprint72/handoff/per-family/diagram", "examples": 2},
+    "email": {"local_path": "reports/sprint72/handoff/per-family/email", "examples": 1},
+    "slides": {"local_path": "reports/sprint72/handoff/per-family/slides", "examples": 3}
+  },
+  "total_examples": 42,
+  "notes": "Carry-forward from Sprint 74. Maps local handoff paths to family structure."
+}

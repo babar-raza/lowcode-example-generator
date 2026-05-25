@@ -1,0 +1,64 @@
+{
+  "sprint_id": "sprint85",
+  "date": "2026-05-24",
+  "strategy": "FAMILY_BATCH_PR",
+  "default_prs_per_sprint": 6,
+  "approval_status": "NOT_SET",
+  "prs_created": 0,
+  "planned_prs": [
+    {
+      "family": "email",
+      "branch": "lowcode-examples-email-sprint85",
+      "example_count": 1,
+      "includes_root_readme": false,
+      "root_readme_open_pr": null,
+      "merge_order": 1,
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "family": "slides",
+      "branch": "lowcode-examples-slides-sprint85",
+      "example_count": 3,
+      "includes_root_readme": false,
+      "root_readme_open_pr": null,
+      "merge_order": 2,
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "family": "diagram",
+      "branch": "lowcode-examples-diagram-sprint85",
+      "example_count": 2,
+      "includes_root_readme": false,
+      "root_readme_open_pr": 2,
+      "merge_order": 3,
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "family": "cells",
+      "branch": "lowcode-examples-cells-sprint85",
+      "example_count": 9,
+      "includes_root_readme": false,
+      "root_readme_open_pr": 5,
+      "merge_order": 4,
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "family": "words",
+      "branch": "lowcode-examples-words-sprint85",
+      "example_count": 8,
+      "includes_root_readme": false,
+      "root_readme_open_pr": 7,
+      "merge_order": 5,
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "family": "pdf",
+      "branch": "lowcode-examples-pdf-sprint85",
+      "example_count": 19,
+      "includes_root_readme": false,
+      "root_readme_open_pr": null,
+      "merge_order": 6,
+      "status": "APPROVAL_BLOCKED"
+    }
+  ]
+}

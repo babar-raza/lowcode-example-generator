@@ -1,0 +1,11 @@
+Sprint 85 — Test Run Log
+=========================
+Date: 2026-05-24
+
+== Validator Tests ==
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -q
+Result: 182 passed in 169.43s (0:02:49)
+
+== Full Suite ==
+Command: .venv/Scripts/python.exe -m pytest -x -q
+Result: pending (running in background)

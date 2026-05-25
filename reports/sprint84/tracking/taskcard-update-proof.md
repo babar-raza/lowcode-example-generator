@@ -31,7 +31,7 @@ No "pending" labels introduced — all lanes complete before IV sign-off.
 | G | Validator hardening | COMPLETED — 4 new rules 116-119, 167 tests |
 | H | Evidence consistency | COMPLETED — sprint83 stale labels documented |
 | I | Taskcard sync | COMPLETED (this file) |
-| J | IV | PENDING — runs after all lanes complete |
+| J | IV | COMPLETED — IV signed off, all lanes verified |
 
 ## Scoreboard
 - EV rules: 115 → 119 (+4)

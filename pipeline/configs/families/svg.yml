@@ -2,12 +2,9 @@ family: svg
 display_name: Aspose.SVG for .NET
 enabled: false
 status: disabled
-# REFLECTION_BLOCKED: All-family discovery run 2026-05-09 encountered DllReflector assembly resolution failure.
-# LowCode namespace existence is UNKNOWN. Do not mark as CONFIRMED_NO_LOWCODE without re-investigation.
-# Next step: add missing assembly dependencies to discovery config and re-run.
-# NOTE: package_id below uses standard Aspose naming convention.
-# Verify exact NuGet package ID at nuget.org before enabling generation.
-# Discovery run will fail gracefully if package does not exist.
+# NO_LOWCODE_CONFIRMED (Sprint 89): Binary string scan of Aspose.SVG.dll 26.4.0
+# found ZERO LowCode namespace references (UTF-8/UTF-16). DllReflector failure was
+# masking absence, not blocking discovery. Evidence: reports/sprint89/next-family/svg-reflection-result.json
 
 nuget:
   package_id: Aspose.SVG

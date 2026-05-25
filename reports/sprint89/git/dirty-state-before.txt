@@ -1,0 +1,43 @@
+ M AGENTS.md
+ M docs/README.md
+RM docs/publishing/agent-operated-live-pr-runbook.md -> docs/_archive/merged/agent-operated-live-pr-runbook-20260525.md
+RM docs/ci/environment-variables.md -> docs/_archive/merged/ci-environment-variables-20260525.md
+RM docs/discovery/example-reviewer-fixture-system.md -> docs/_archive/merged/example-reviewer-fixture-system-20260525.md
+RM docs/publishing/post-merge-verification-runbook.md -> docs/_archive/merged/post-merge-verification-runbook-20260525.md
+ M docs/_audit/README_IA_PROPOSAL.md
+ M docs/_audit/docs_inventory.md
+ M docs/_audit/docs_migration_plan.md
+ M docs/_audit/root_orphans.md
+ M docs/_audit/style_guide.md
+ M docs/_audit/system_audit.md
+ M docs/_audit/traceability.md
+R  docs/discovery/open-taskcard-closure-matrix.md -> docs/development/open-taskcard-closure-matrix.md
+ M docs/development/taskcards.md
+ M docs/guides/generate-and-validate-examples.md
+ M docs/guides/run-family-pipeline.md
+ M docs/operations/live-publishing.md
+ M docs/operations/post-merge-verification.md
+ M docs/reference/cli.md
+ M docs/reference/config.md
+ M docs/reference/environment-variables.md
+ M docs/reference/file-contracts.md
+ M docs/reference/publishing-and-github.md
+ M docs/reference/validation-and-reviewer.md
+ M pipeline/configs/families/html.yml
+ M pipeline/configs/families/svg.yml
+ M scripts/sync_taskcards.py
+ M src/plugin_examples/__main__.py
+ M src/plugin_examples/evidence_validator.py
+ M tests/unit/test_ci_runbook_hardening.py
+ M tests/unit/test_evidence_validator.py
+ M tests/unit/test_fixture_strategy.py
+ M tests/unit/test_sync_taskcard_docs.py
+ M tests/unit/test_token_policy.py
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? reports/sprint89/

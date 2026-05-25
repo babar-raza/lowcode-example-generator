@@ -1,0 +1,17 @@
+{
+  "sprint": 89,
+  "date": "2026-05-25",
+  "status": "PASS",
+  "checks": [
+    {"check": "ev_phase_a_total_rules", "expected": 144, "actual": 144, "status": "PASS"},
+    {"check": "ev_phase_b_total_rules", "expected": 145, "actual": 145, "status": "PASS"},
+    {"check": "ev_phase_b_applicable_pass", "expected": 70, "actual": 70, "status": "PASS"},
+    {"check": "ev_tests_pass", "expected": 248, "actual": 248, "status": "PASS"},
+    {"check": "ecc_total_categories", "expected": 34, "actual": 34, "status": "PASS"},
+    {"check": "publication_truth_matrix_count", "expected": 42, "actual": 42, "status": "PASS"},
+    {"check": "confirmed_no_lowcode_families", "expected": 16, "actual": 16, "status": "PASS"},
+    {"check": "source_diff_present", "expected": true, "actual": true, "status": "PASS"},
+    {"check": "no_not_canonical_in_final_validation", "expected": true, "actual": true, "status": "PASS"},
+    {"check": "approval_gates_not_set", "expected": true, "actual": true, "status": "PASS"}
+  ]
+}

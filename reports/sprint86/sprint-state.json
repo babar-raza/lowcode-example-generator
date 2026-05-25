@@ -5,13 +5,13 @@
   "approval_live": "NOT_SET",
   "approval_merge": "NOT_SET",
   "ev_rules": 126,
-  "ev_applicable": 0,
-  "ev_diagnostic": 0,
-  "ecc_categories": 0,
-  "ecc_present": 0,
-  "ecc_closure_valid": false,
+  "ev_applicable": 70,
+  "ev_diagnostic": 56,
+  "ecc_categories": 73,
+  "ecc_present": 73,
+  "ecc_closure_valid": true,
   "test_count_validator": 190,
-  "test_count_full": 0,
+  "test_count_full": 3131,
   "prs_created": 0,
   "prs_merged": 0,
   "branches_deleted": 0,
@@ -19,5 +19,5 @@
   "handoff_examples": 42,
   "sprints_approval_blocked": 14,
   "baseline_frozen": true,
-  "notes": "Placeholder — EV/ECC/test values will be updated after runs."
+  "notes": "All values finalized. EV 70 applicable + 56 diagnostic = 126 total. ECC 73/73. Full suite 3131 pass."
 }

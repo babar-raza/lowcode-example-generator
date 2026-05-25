@@ -17,7 +17,7 @@ The EvidenceContractComputer is used to validate ECC categories:
 
 ## Test Integration
 - tests/unit/test_evidence_validator.py: 190 tests (8 new this sprint)
-- Full test suite: TBD (runs after bundle commit)
+- Full test suite: 3131 tests (all pass)
 - Validator tests run as part of standard pytest suite
 
 ## Pipeline Wiring

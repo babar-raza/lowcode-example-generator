@@ -1,7 +1,8 @@
 {
   "sprint_id": "sprint86",
   "canonical_overall_valid": true,
-  "applicable": 0,
-  "diagnostic": 0,
-  "notes": "Placeholder — will be updated after EV Phase B run."
+  "applicable": 70,
+  "diagnostic": 56,
+  "total_rules": 126,
+  "notes": "70 applicable pass (FINISH_LINE_SPRINT). 56 diagnostic rules fail for legacy structures not present in this sprint type. canonical_overall_valid=true is authoritative."
 }

@@ -1,8 +1,8 @@
 {
   "sprint_id": "sprint86",
   "date": "2026-05-25",
-  "source_sha": "TBD_AFTER_COMMIT",
+  "source_sha": "ec76d26",
   "bundle_type": "FINISH_LINE_SPRINT",
-  "file_count": 0,
-  "notes": "Placeholder — source_sha and file_count will be updated after commit."
+  "file_count": 76,
+  "notes": "Sprint 86 FINISH_LINE_SPRINT bundle. Baseline frozen, 2 new EV rules, 8 new tests."
 }

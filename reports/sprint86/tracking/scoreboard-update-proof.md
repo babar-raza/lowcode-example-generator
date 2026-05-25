@@ -8,7 +8,7 @@ Author: Lane I
 | Metric | Sprint 85 | Sprint 86 | Delta |
 |--------|-----------|-----------|-------|
 | EV rules | 124 | 126 | +2 |
-| EV applicable | 67 | 59 | -8 |
+| EV applicable | 67 | 70 | +3 |
 | ECC categories | 67 | 73 | +6 |
 | Test count (validator) | 182 | 190 | +8 |
 | Remote examples | 42 | 42 | 0 |

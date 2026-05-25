@@ -30,4 +30,8 @@ FINISH_LINE_SPRINT
 ## Workspace State
 workspace/verification/latest/ — GENERATED_WORKSPACE_STATE governance exception
 (workspace/ directory is gitignored; verification/latest/ files are not tracked this session).
+
+## Untracked Files
+reports/sprint86/git/dirty-state-after.txt — captured post-commit, committed in evidence finalization commit.
+
 Sprint 86 bundle is clean.

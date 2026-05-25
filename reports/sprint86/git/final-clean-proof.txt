@@ -2,7 +2,7 @@ Sprint 86 -- Final Clean Proof
 ================================
 Date: 2026-05-25
 Branch: main
-HEAD: 8b5cb89495af0a008ca0e6d326ea2e82d76bc266
+HEAD: 961621dd4c886101eac3ff880ae05aaaee91e076
 
 On branch main
  M workspace/verification/latest/cells-readme-backfill-simulation.json

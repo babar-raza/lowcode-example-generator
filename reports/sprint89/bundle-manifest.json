@@ -3,7 +3,7 @@
   "date": "2026-05-25",
   "bundle_type": "IMPLEMENTATION_ADVANCEMENT",
   "source_sha": "052db369a005c1a67cd8b00d914086ba21cb8c1e",
-  "head_sha": "052db369a005c1a67cd8b00d914086ba21cb8c1e",
+  "head_sha": "70f2abb390297337cd93a7ea9b6956f5bbcfb5e7",
   "verdict": "LOWCODE_NEXT_FAMILY_DRY_RUN_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
   "ev_rules_total": 145,
   "ev_applicable_pass": 70,

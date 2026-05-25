@@ -7,7 +7,7 @@
   "ev_rules": 124,
   "test_count": 182,
   "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL",
-  "source_sha": "TBD_WILL_SET_AFTER_COMMIT",
+  "source_sha": "9deeaf6",
   "files": [
     "reports/sprint85/00-sprint84-acceptance-baseline.md",
     "reports/sprint85/01-sprint85-coordinator-plan.md",

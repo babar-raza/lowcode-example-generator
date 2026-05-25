@@ -1,0 +1,9 @@
+{
+  "sprint_id": "sprint86",
+  "family": "pdf",
+  "total_examples": 19,
+  "prs_created": 0,
+  "claim_verdict": "VERIFIED_HISTORICAL_BUT_SUPERSEDED",
+  "formimporter_excluded": true,
+  "carry_forward": "Sprint 85 — baseline frozen"
+}

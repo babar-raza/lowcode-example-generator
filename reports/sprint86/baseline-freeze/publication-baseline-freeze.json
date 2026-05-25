@@ -1,0 +1,25 @@
+{
+  "freeze_id": "sprint86-baseline-freeze",
+  "date": "2026-05-25",
+  "frozen_at_sprint": "sprint85",
+  "frozen_at_commit": "f06fc97",
+  "reason": "14 consecutive sprints with PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET. No further readiness-only loops will be executed.",
+  "baseline_state": {
+    "remote_examples": 42,
+    "handoff_examples": 42,
+    "readme_io_published": 0,
+    "open_prs": {
+      "cells_root_readme": "#5",
+      "words_root_readme": "#7",
+      "diagram_root_readme": "#2"
+    },
+    "ev_rules": 124,
+    "ecc_categories": 67,
+    "test_count_validator": 182,
+    "test_count_full": 3123,
+    "formimporter_status": "BLOCKED_EXTERNAL",
+    "words_version_drift": "NEEDS_REPAIR_APPROVAL_BLOCKED"
+  },
+  "next_action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to unfreeze and create README I/O PRs",
+  "policy": "No readiness-only sprints after this freeze. Safe work-ahead lanes (validator hardening, next-family prep, policy) may continue."
+}

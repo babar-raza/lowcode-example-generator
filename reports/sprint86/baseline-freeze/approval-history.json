@@ -1,0 +1,21 @@
+{
+  "approval_gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "history": [
+    {"sprint": "sprint73", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint74", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint75", "status": "NOT_SET", "verdict": "LOWCODE_WEEKLY_REVIEW_ITEMS_CLASSIFIED_PUBLICATION_APPROVAL_BLOCKED"},
+    {"sprint": "sprint76", "status": "NOT_SET", "verdict": "LOWCODE_WEEKLY_REVIEW_REPAIRED_WITH_DIRTY_WORKSPACE_EXCEPTION_PUBLICATION_APPROVAL_BLOCKED"},
+    {"sprint": "sprint77", "status": "NOT_SET", "verdict": "LOWCODE_WEEKLY_REVIEW_REPAIRED_WITH_WORKSPACE_EXCEPTION_PUBLICATION_APPROVAL_BLOCKED"},
+    {"sprint": "sprint78", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint79", "status": "NOT_SET", "verdict": "LOWCODE_FINISH_LINE_EVIDENCE_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED"},
+    {"sprint": "sprint80", "status": "NOT_SET", "verdict": "SPRINT80_REPAIR_COMPLETE_S79_DEFECTS_RESOLVED"},
+    {"sprint": "sprint81", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint82", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint83", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint84", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint85", "status": "NOT_SET", "verdict": "LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL"},
+    {"sprint": "sprint86", "status": "NOT_SET", "verdict": "BASELINE_FROZEN"}
+  ],
+  "consecutive_blocked": 14,
+  "freeze_triggered": true
+}

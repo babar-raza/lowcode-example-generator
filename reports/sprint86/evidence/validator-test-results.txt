@@ -1,0 +1,18 @@
+Sprint 86 — Validator Test Results
+====================================
+Date: 2026-05-25
+
+Command: .venv/Scripts/python.exe -m pytest tests/unit/test_evidence_validator.py -q
+Result: 190 passed in 206.50s (0:03:26)
+
+New tests (8):
+- TestSprint86ReadinessLoopPreventionRules::test_rule125_not_applicable_when_no_sprint_state
+- TestSprint86ReadinessLoopPreventionRules::test_rule125_not_applicable_when_blocked_count_below_14
+- TestSprint86ReadinessLoopPreventionRules::test_rule125_fails_when_14_blocked_no_freeze
+- TestSprint86ReadinessLoopPreventionRules::test_rule125_passes_when_14_blocked_with_freeze
+- TestSprint86ReadinessLoopPreventionRules::test_rule126_not_applicable_when_no_freeze
+- TestSprint86ReadinessLoopPreventionRules::test_rule126_fails_when_freeze_but_no_freeze_acknowledgment
+- TestSprint86ReadinessLoopPreventionRules::test_rule126_passes_when_freeze_with_baseline_frozen_verdict
+- TestSprint86ReadinessLoopPreventionRules::test_rule126_passes_when_freeze_with_finish_line_verdict
+
+Updated count assertions: 124→126 (×3), 123→125 (×2), 124→126 in docstring

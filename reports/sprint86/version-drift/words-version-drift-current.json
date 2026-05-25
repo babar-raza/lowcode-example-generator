@@ -1,0 +1,10 @@
+{
+  "sprint_id": "sprint86",
+  "family": "words",
+  "remote_version": "26.4.0",
+  "handoff_version": "26.5.0",
+  "drift": true,
+  "drift_type": "NEEDS_REPAIR_APPROVAL_BLOCKED",
+  "resolution": "Version bump in README I/O PR",
+  "carry_forward": "Sprint 85"
+}

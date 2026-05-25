@@ -1,0 +1,8 @@
+{
+  "sprint_id": "sprint86",
+  "strategy": "FAMILY_BATCH_PR",
+  "planned_prs": 6,
+  "status": "FROZEN",
+  "families": ["cells", "words", "pdf", "diagram", "email", "slides"],
+  "carry_forward": "Sprint 85 — baseline frozen"
+}

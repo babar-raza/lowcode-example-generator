@@ -1,0 +1,19 @@
+{
+  "sprint_id": "sprint86",
+  "blockers": [
+    {
+      "id": "B1",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET",
+      "severity": "BLOCKING",
+      "status": "BASELINE_FROZEN",
+      "resolution": "Set approval gate per operator-command-sheet.md"
+    },
+    {
+      "id": "B2",
+      "description": "FormImporter Aspose.PDF 26.5.0 NullRef",
+      "severity": "NON_BLOCKING",
+      "status": "BLOCKED_EXTERNAL",
+      "resolution": "Wait for Aspose.PDF > 26.5.0"
+    }
+  ]
+}

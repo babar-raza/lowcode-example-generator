@@ -1,0 +1,23 @@
+{
+  "sprint_id": "sprint86",
+  "date": "2026-05-25",
+  "verdict": "LOWCODE_LIVE_PUBLICATION_BASELINE_FROZEN_APPROVAL_BLOCKED_SAFE_LANES_ADVANCED",
+  "approval_live": "NOT_SET",
+  "approval_merge": "NOT_SET",
+  "ev_rules": 126,
+  "ev_applicable": 0,
+  "ev_diagnostic": 0,
+  "ecc_categories": 0,
+  "ecc_present": 0,
+  "ecc_closure_valid": false,
+  "test_count_validator": 190,
+  "test_count_full": 0,
+  "prs_created": 0,
+  "prs_merged": 0,
+  "branches_deleted": 0,
+  "remote_examples": 42,
+  "handoff_examples": 42,
+  "sprints_approval_blocked": 14,
+  "baseline_frozen": true,
+  "notes": "Placeholder — EV/ECC/test values will be updated after runs."
+}

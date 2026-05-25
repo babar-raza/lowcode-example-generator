@@ -1,0 +1,19 @@
+{
+  "sprint_id": "sprint86",
+  "gates": [
+    {
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "current": "NOT_SET",
+      "required": "APPROVE_LIVE_PR",
+      "action": "Creates 6 README I/O PRs"
+    },
+    {
+      "gate": "PLUGIN_EXAMPLES_README_PUSH_APPROVAL",
+      "current": "NOT_SET",
+      "required": "APPROVE_README_PUSH",
+      "action": "Merges README I/O PRs"
+    }
+  ],
+  "baseline_frozen": true,
+  "next_action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR"
+}

@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 124)  # Sprint 85: added 5 new rules (120-124)
+        self.assertEqual(result.total_rules, 126)  # Sprint 86: added 2 new rules (125-126)
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 124)  # Sprint 85: 124 rules total
+        self.assertEqual(len(d["rules"]), 126)  # Sprint 86: 126 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 123 rules evaluated (124 total - 1 self-reference rule 21)
-        # Sprint 85: total is now 124 (added 5 new rules), so excluding rule 21 = 123
-        self.assertEqual(len(result.rule_results), 123)
+        # Should have exactly 125 rules evaluated (126 total - 1 self-reference rule 21)
+        # Sprint 86: total is now 126 (added 2 new rules), so excluding rule 21 = 125
+        self.assertEqual(len(result.rule_results), 125)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 124)  # Sprint 85: 124 rules total
+        self.assertEqual(len(phase_b.rule_results), 126)  # Sprint 86: 126 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 124 rules total (119 Sprint 84 + 5 new Sprint 85 rules)."""
+        """validate() must return 126 rules total (124 Sprint 85 + 2 new Sprint 86 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 124,
-                         f"Expected 124 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 126,
+                         f"Expected 126 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-124."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-126."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 123,
-                         f"validate_for_storage must have 123 rules (124 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 125,
+                         f"validate_for_storage must have 125 rules (126 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -3538,6 +3538,106 @@ class TestSprint85EvidenceHygieneRules(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "bundle_manifest_source_sha_in_final_clean_proof")
         self.assertFalse(rule.passed)
+
+
+class TestSprint86ReadinessLoopPreventionRules(unittest.TestCase):
+    """Tests for Sprint 86 rules 125-126: readiness-loop prevention."""
+
+    # ------------------------------------------------------------------ helpers
+
+    def _make_sprint_state(self, bundle_dir: Path, blocked_count: int = 14):
+        (bundle_dir / "sprint-state.json").write_text(
+            json.dumps({"sprint_id": "sprint86", "sprints_approval_blocked": blocked_count}),
+            encoding="utf-8",
+        )
+
+    def _make_baseline_freeze(self, bundle_dir: Path):
+        (bundle_dir / "baseline-freeze").mkdir(parents=True, exist_ok=True)
+        (bundle_dir / "baseline-freeze" / "publication-baseline-freeze.json").write_text(
+            json.dumps({"freeze_id": "sprint86-baseline-freeze", "frozen_at_sprint": "sprint85"}),
+            encoding="utf-8",
+        )
+
+    def _make_final_verdict(self, bundle_dir: Path, content: str):
+        (bundle_dir / "final-verdict.md").write_text(content, encoding="utf-8")
+
+    # ------------------------------------------------------------------ Rule 125
+
+    def test_rule125_not_applicable_when_no_sprint_state(self):
+        """Rule 125: passes (not applicable) when sprint-state.json is absent."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_present_if_14_consecutive_blocked")
+        self.assertTrue(rule.passed)
+
+    def test_rule125_not_applicable_when_blocked_count_below_14(self):
+        """Rule 125: passes when sprints_approval_blocked < 14."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_sprint_state(b, blocked_count=13)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_present_if_14_consecutive_blocked")
+        self.assertTrue(rule.passed)
+
+    def test_rule125_fails_when_14_blocked_no_freeze(self):
+        """Rule 125: fails when sprints_approval_blocked >= 14 but no baseline freeze."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_sprint_state(b, blocked_count=14)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_present_if_14_consecutive_blocked")
+        self.assertFalse(rule.passed)
+
+    def test_rule125_passes_when_14_blocked_with_freeze(self):
+        """Rule 125: passes when sprints_approval_blocked >= 14 and baseline freeze exists."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_sprint_state(b, blocked_count=14)
+            self._make_baseline_freeze(b)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_present_if_14_consecutive_blocked")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 126
+
+    def test_rule126_not_applicable_when_no_freeze(self):
+        """Rule 126: passes (not applicable) when no baseline freeze file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
+        self.assertTrue(rule.passed)
+
+    def test_rule126_fails_when_freeze_but_no_freeze_acknowledgment(self):
+        """Rule 126: fails when baseline freeze exists but verdict doesn't acknowledge it."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_baseline_freeze(b)
+            self._make_final_verdict(b, "Verdict: LOWCODE_LIVE_PUBLICATION_BLOCKED_BY_APPROVAL")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
+        self.assertFalse(rule.passed)
+
+    def test_rule126_passes_when_freeze_with_baseline_frozen_verdict(self):
+        """Rule 126: passes when baseline freeze exists and verdict contains BASELINE_FROZEN."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_baseline_freeze(b)
+            self._make_final_verdict(b, "Verdict: LOWCODE_LIVE_PUBLICATION_BASELINE_FROZEN_APPROVAL_BLOCKED_SAFE_LANES_ADVANCED")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
+        self.assertTrue(rule.passed)
+
+    def test_rule126_passes_when_freeze_with_finish_line_verdict(self):
+        """Rule 126: passes when baseline freeze exists and verdict contains FINISH_LINE."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            self._make_baseline_freeze(b)
+            self._make_final_verdict(b, "Verdict: LOWCODE_FINISH_LINE_SPRINT_COMPLETE")
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
+        self.assertTrue(rule.passed)
 
 
 if __name__ == "__main__":

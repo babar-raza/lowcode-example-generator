@@ -1,0 +1,6 @@
+{
+  "sprint_id": "sprint86",
+  "plan": "FROZEN",
+  "reason": "Baseline frozen at Sprint 85. No root README file operations this sprint.",
+  "families_with_open_prs": ["cells", "words", "diagram"]
+}

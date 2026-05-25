@@ -1,7 +1,7 @@
 {
   "sprint_id": "sprint87",
   "date": "2026-05-25",
-  "source_sha": "TBD_WILL_UPDATE",
+  "source_sha": "7fb9fb5",
   "bundle_type": "REPAIR_AND_ADVANCEMENT",
   "file_count": 34,
   "notes": "Sprint 87 REPAIR_AND_ADVANCEMENT bundle. 8 new EV rules, 25 new tests, 6 defects repaired, next-family discovery."

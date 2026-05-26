@@ -1,7 +1,10 @@
-﻿# CLI Reference
+# CLI Reference
 
 Audience: Operator, Contributor
+
 Source of truth: `pyproject.toml`, `src/plugin_examples/__main__.py`
+
+Last verified from audit: 2026-05-25
 
 The package exposes the `plugin-examples` console script and can also be run as a module:
 
@@ -10,44 +13,55 @@ plugin-examples --help
 python -m plugin_examples --help
 ```
 
-Global flag:
+## Global Flags
 
 | Flag | Purpose |
 |---|---|
 | `--verbose`, `-v` | Enable debug logging. |
 
-Shared metrics flags on most commands:
+## Shared Metrics Flags
+
+Most command parsers receive these flags from `_add_metrics_flags()`.
 
 | Flag | Purpose |
 |---|---|
-| `--metrics` | Enable metrics collection in dry-run mode by default. |
-| `--metrics-post` | POST metrics to the configured endpoint. Requires token. |
-| `--metrics-job-type TYPE` | Override metrics job type. |
+| `--metrics` | Enable metrics collection. Metrics are dry-run by default. |
+| `--metrics-post` | POST metrics to the configured endpoint. Requires `AGENT_METRICS_TOKEN`. |
+| `--metrics-job-type TYPE` | Override metrics `job_type`. |
 | `--metrics-strict` | Fail the command on metrics errors. |
-| `--metrics-force-repost` | Bypass metrics duplicate ledger check. |
-| `--metrics-config PATH` | Override metrics config path. |
+| `--metrics-force-repost` | Bypass metrics duplicate ledger checks. |
+| `--metrics-config PATH` | Override metrics config path. Default is `pipeline/configs/metrics.yml`. |
+
+See [Metrics](metrics.md) and [Environment Variables](environment-variables.md).
 
 ## Commands
 
-| Command | Purpose | Flags |
+| Command | Purpose | Flags/options |
 |---|---|---|
-| `status` | Print implemented module list. | none |
-| `run` | Run the full or tiered pipeline for one family. | `--family`, `--dry-run`, `--template-mode`, `--skip-run`, `--require-llm`, `--require-validation`, `--require-reviewer`, `--publish`, `--approval-token`, `--tier`, `--promote-latest`, `--allow-experimental`, `--compare-run` |
-| `discover-lowcode` | Run source-of-truth discovery without generation. | `--all-families`, `--family`, `--families`, `--dry-run`, `--promote-latest`, `--allow-experimental`, `--rank` |
-| `validate-publish-targets` | Check publish readiness for family configs. | `--families`, `--promote-latest` |
-| `resolve-repo-access` | Read-only GitHub API access probe for publish targets. | `--families`, `--promote-latest` |
-| `probe-publish-permissions` | Read-only push-permission probe for publish targets. | `--families`, `--dry-run`, `--promote-latest` |
-| `publish-pr` | Simulate or create a live PR for a verified package. | `--family`, mutually exclusive `--dry-run` / `--publish`, `--approval-token`, `--promote-latest` |
-| `merge-pr` | Simulate or perform a PR merge. | `--family`, `--pr-number`, mutually exclusive `--dry-run` / `--merge`, `--approval-token`, `--promote-latest` |
-| `release-status` | Report family release state from evidence files. | `--families`, `--promote-latest` |
-| `render-root-readme` | Render and audit a package README locally. | `--family`, `--package-path`, `--promote-latest` |
-| `publish-readme` | Simulate or create a README-only PR. | `--family`, `--publish`, `--approval-token`, `--promote-latest` |
-| `sync-taskcard-docs` | Generate the taskcard markdown matrix from JSON evidence. | `--promote-latest` compatibility flag |
+| `status` | Show pipeline status. | none |
+| `run` | Run the full or tiered pipeline for one family. | `--family`, `--dry-run`, `--template-mode`, `--skip-run`, `--require-llm`, `--require-validation`, `--require-reviewer`, `--publish`, `--approval-token`, `--tier`, `--promote-latest`, `--allow-experimental`, `--compare-run`, `--replay-from`, `--reuse-run`, shared metrics flags |
+| `discover-lowcode` | Run discovery-only source-of-truth sweep. | `--all-families`, `--family`, `--families`, `--dry-run`, `--promote-latest`, `--allow-experimental`, `--rank`, shared metrics flags |
+| `validate-publish-targets` | Check publish readiness for family configs. | `--families`, `--promote-latest`, shared metrics flags |
+| `resolve-repo-access` | Probe GitHub API access for publish targets. | `--families`, `--promote-latest`, shared metrics flags |
+| `probe-publish-permissions` | Read-only push-permission probe for publish targets. | `--families`, `--dry-run`, `--promote-latest`, shared metrics flags |
+| `publish-pr` | Simulate or create a live PR for a verified dry-run package. | `--family`, mutually exclusive `--dry-run` / `--publish`, `--approval-token`, `--package-path`, `--promote-latest`, shared metrics flags |
+| `merge-pr` | Verify preconditions and simulate or execute PR merge. | `--family`, `--pr-number`, mutually exclusive `--dry-run` / `--merge`, `--approval-token`, `--promote-latest`, shared metrics flags |
+| `release-status` | Report per-family release state from evidence files. | `--families`, `--promote-latest`, `--validate-bundle`, shared metrics flags |
+| `render-root-readme` | Render and audit root README for a package. | `--family`, `--package-path`, `--promote-latest`, `--cumulative`, shared metrics flags |
+| `publish-readme` | Create or simulate a README-only PR in a target repo. | `--family`, `--publish`, `--approval-token`, `--promote-latest`, shared metrics flags |
+| `sync-taskcard-docs` | Generate the taskcard markdown matrix from JSON evidence. | `--promote-latest` compatibility flag, shared metrics flags |
 | `check` | Package update check placeholder. | `--family` |
+| `publish-pr-batch` | Batch publish all PR packages for a family. | `--family`, mutually exclusive `--publish` / `--dry-run`, `--approval-token`, `--promote-latest` |
+| `formimporter-watch` | Check FormImporter defect status against latest NuGet version. | `--run-repro`, `--output` |
+| `post-publication-verify` | Verify published examples in local PR dry-run packages. | `--family`, `--output` |
+| `version-drift` | Check NuGet version drift for confirmed LowCode families. | `--family`, `--output`, `--json` |
+| `target-repo-health` | Verify target repos for confirmed LowCode families. | `--family`, `--output`, `--json` |
+| `next-actions` | Compute the portfolio action board. | `--output`, `--markdown`, `--json` |
+| `execute-next-actions` | Execute safe next actions through the planner loop. | `--evidence-dir`, `--max-cycles`, `--dry-run-remote`, `--json` |
 
-## Run Tiers
+## `run` Tiers
 
-The `run --tier` flag accepts `0` through `5`.
+`run --tier` accepts `0` through `5`.
 
 | Tier | Max stage |
 |---|---|
@@ -58,10 +72,21 @@ The `run --tier` flag accepts `0` through `5`.
 | `4` | Reviewer |
 | `5` | Publisher |
 
+## Replay Options
+
+`run --replay-from` accepts:
+
+- `generation`
+- `validation`
+- `reviewer`
+- `publisher`
+
+`--reuse-run RUN_ID` selects the prior run. If omitted with `--replay-from`, the runner auto-detects the most recent prior `pilot-{family}-*` run.
+
 ## Live Operation Safety
 
-`run --publish` and `publish-pr --publish` require `GITHUB_TOKEN` and approval token `APPROVE_LIVE_PR`.
+`run --publish`, `publish-pr --publish`, and `publish-readme --publish` require `GITHUB_TOKEN` and approval token `APPROVE_LIVE_PR`.
 
-`merge-pr --merge` requires a separate approval token `APPROVE_MERGE_PR`. The PR approval token is explicitly rejected for merge.
+`merge-pr --merge` requires approval token `APPROVE_MERGE_PR`. The live PR approval token is rejected for merge.
 
 See [Publishing and GitHub](publishing-and-github.md).

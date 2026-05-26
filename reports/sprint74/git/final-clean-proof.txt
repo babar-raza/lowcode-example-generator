@@ -1,5 +1,0 @@
-On branch main
-Sprint 74 bundle committed: 364ebe2
-reports/sprint74/ -- 224 files added, all sprint74 artifacts present
-workspace/verification/latest/ -- pre-existing runtime files, not sprint74 bundle artifacts
-Sprint 74 bundle scope: clean

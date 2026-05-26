@@ -1,9 +1,0 @@
-{
-  "sprint_id": "sprint85",
-  "date": "2026-05-24",
-  "canonical_overall_valid": true,
-  "total_rules": 124,
-  "applicable": 67,
-  "diagnostic": 57,
-  "notes": "67 applicable pass, 57 diagnostic non-applicable (expected for approval-blocked sprint)."
-}

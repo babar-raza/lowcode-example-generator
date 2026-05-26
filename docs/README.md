@@ -1,39 +1,37 @@
-﻿# Documentation
+# Documentation
 
 This is the documentation home for the Aspose .NET Plugin Example Generation Pipeline.
 
-The codebase is the source of truth. Canonical reference pages in `docs/reference/` are derived from `src/plugin_examples/`, `pipeline/schemas/`, `pipeline/configs/`, `.github/workflows/`, and the system audit.
+Code and schemas are the source of truth. Reference pages in `docs/reference/` are the canonical documentation for commands, config keys, environment variables, file contracts, gates, validation, publishing, metrics, and schemas.
 
-## Start Here
+## Start By Persona
 
-| Persona | Start page | Common tasks |
+| Persona | Start here | Common work |
 |---|---|---|
-| User | [Product Overview](overview/product.md) | Understand what the pipeline does and what it does not do. |
-| Operator | [Operator Quickstart](getting-started/operator-quickstart.md) | Run a family, inspect evidence, publish PRs, perform monthly maintenance. |
+| User | [Product Overview](overview/product.md) | Understand what the pipeline does and what it does not publish directly. |
+| Operator | [Operator Quickstart](getting-started/operator-quickstart.md) | Run families, inspect evidence, publish PRs, verify releases. |
 | Contributor | [Contributor Quickstart](getting-started/contributor-quickstart.md) | Change code, configs, schemas, tests, or docs. |
 
-## Scenario Guides
+## Common Scenarios
 
-- [Run a Family Pipeline](guides/run-family-pipeline.md)
-- [Run a Discovery Sweep](guides/discovery-sweep.md)
-- [Add or Update a Family](guides/add-or-update-family.md)
-- [Generate and Validate Examples](guides/generate-and-validate-examples.md)
-
-## Operations
-
-- [Monthly Maintenance](operations/monthly-maintenance.md)
-- [Live Publishing](operations/live-publishing.md)
-- [README Publishing](operations/readme-publishing.md)
-- [Post-Merge Verification](operations/post-merge-verification.md)
-- [Troubleshooting](operations/troubleshooting.md)
-- [Telemetry](operations/telemetry.md)
+| Scenario | Guide or runbook | Canonical references |
+|---|---|---|
+| Run a family pipeline | [Run a Family Pipeline](guides/run-family-pipeline.md) | [CLI](reference/cli.md), [File Contracts](reference/file-contracts.md), [Gates and Verdicts](reference/gates-and-verdicts.md) |
+| Run source-of-truth discovery | [Discovery Sweep](guides/discovery-sweep.md) | [CLI](reference/cli.md), [File Contracts](reference/file-contracts.md) |
+| Add or update a family | [Add or Update a Family](guides/add-or-update-family.md) | [Config](reference/config.md), [Schemas and Contracts](reference/schemas-and-contracts.md) |
+| Generate and validate examples | [Generate and Validate Examples](guides/generate-and-validate-examples.md) | [Validation and Reviewer](reference/validation-and-reviewer.md), [File Contracts](reference/file-contracts.md) |
+| Publish live PRs | [Live Publishing](operations/live-publishing.md) | [Publishing and GitHub](reference/publishing-and-github.md), [Environment Variables](reference/environment-variables.md) |
+| Publish README updates | [README Publishing](operations/readme-publishing.md) | [Publishing and GitHub](reference/publishing-and-github.md), [File Contracts](reference/file-contracts.md) |
+| Verify after merge | [Post-Merge Verification](operations/post-merge-verification.md) | [Publishing and GitHub](reference/publishing-and-github.md), [File Contracts](reference/file-contracts.md) |
+| Monthly maintenance | [Monthly Maintenance](operations/monthly-maintenance.md) | [CLI](reference/cli.md), [Config](reference/config.md), [File Contracts](reference/file-contracts.md) |
+| Troubleshoot a run | [Troubleshooting](operations/troubleshooting.md) | [CLI](reference/cli.md), [Gates and Verdicts](reference/gates-and-verdicts.md) |
 
 ## Canonical References
 
 - [CLI Reference](reference/cli.md)
 - [Configuration Reference](reference/config.md)
 - [Environment Variables](reference/environment-variables.md)
-- [File Contracts](reference/file-contracts.md)
+- [File and Evidence Contracts](reference/file-contracts.md)
 - [Gates and Verdicts](reference/gates-and-verdicts.md)
 - [Validation and Reviewer](reference/validation-and-reviewer.md)
 - [Publishing and GitHub](reference/publishing-and-github.md)
@@ -50,10 +48,13 @@ The codebase is the source of truth. Canonical reference pages in `docs/referenc
 - [Repository Structure](development/repo-structure.md)
 - [Taskcards](development/taskcards.md)
 
-## Archive
+## Archive and Audits
 
-Historical preflight reviews, dated reports, old plans, and merged source docs live under [`_archive/`](_archive/). Archived docs are not canonical instructions and may be stale.
+- [Audit Artifacts](_audit/)
+- [Archive](_archive/)
 
-## Root Hygiene
+Archived docs are historical evidence, not current operating procedure.
 
-Do not add markdown files directly under `docs/` except this `README.md`. New docs must go in the appropriate folder above, or in `_audit/` / `_archive/` for audit and historical material.
+## Docs Root Hygiene
+
+Do not add files directly under `docs/` except this `README.md`. New docs must go in one of the folders above, or in `_audit/` / `_archive/` for audit and historical material.

@@ -1,4 +1,0 @@
-pipeline/configs/families/pdf.yml
-src/plugin_examples/publisher/github_pr_merger.py
-tests/unit/test_llm_generation.py
-tests/unit/test_merge_governance.py

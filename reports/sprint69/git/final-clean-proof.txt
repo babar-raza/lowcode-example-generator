@@ -1,4 +1,0 @@
-On branch main
-nothing to commit, working tree clean
-Sprint 69 bundle commit: 0d1d38feec53dfd0037085c763510d725cbdb0b7
-feat(sprint69): EV 67/67, ECC 47/47, 3025 tests — final state consistency repair, canonical audit, publication truth

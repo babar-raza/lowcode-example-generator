@@ -1,8 +1,0 @@
-On branch main
-Sprint 72 bundle committed: 86eff2b
-reports/sprint72/ -- 225 files added, all sprint72 artifacts present
-src/plugin_examples/evidence_validator.py -- updated (85 rules)
-tests/unit/test_evidence_validator.py -- updated (85 assertions)
-tests/unit/test_pipeline_evidence_gate.py -- updated (sprint72 fixtures)
-workspace/verification/latest/ -- pre-existing runtime files, not sprint72 bundle artifacts
-Sprint 72 bundle scope: clean

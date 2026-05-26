@@ -22,4 +22,10 @@ The source JSON is expected at:
 workspace/verification/latest/open-taskcard-closure-matrix.json
 ```
 
-The previous generated matrix was archived or replaced during docs consolidation. Regenerate it from evidence when needed.
+The generated markdown view is:
+
+```text
+docs/development/open-taskcard-closure-matrix.md
+```
+
+Do not edit the generated markdown directly. Edit the JSON evidence and rerun the sync command.

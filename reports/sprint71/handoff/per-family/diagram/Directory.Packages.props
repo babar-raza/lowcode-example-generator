@@ -1,8 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="Aspose.Diagram" Version="26.5.0" />
-  </ItemGroup>
-</Project>

@@ -360,11 +360,11 @@ def main() -> int:
     # Sync-taskcard-docs command
     std_parser = subparsers.add_parser(
         "sync-taskcard-docs",
-        help="Generate docs/discovery/open-taskcard-closure-matrix.md from JSON matrix (read-only)",
+        help="Generate docs/development/open-taskcard-closure-matrix.md from JSON matrix (read-only)",
     )
     std_parser.add_argument(
         "--promote-latest", action="store_true",
-        help="No-op (included for CLI consistency; output always written to docs/discovery/)",
+        help="No-op (included for CLI consistency; output always written to docs/development/)",
     )
 
     _add_metrics_flags(std_parser)
@@ -1505,7 +1505,7 @@ def main() -> int:
             args, command="sync-taskcard-docs", repo_root=repo_root,
         )
         matrix_path = repo_root / "workspace" / "verification" / "latest" / "open-taskcard-closure-matrix.json"
-        output_path = repo_root / "docs" / "discovery" / "open-taskcard-closure-matrix.md"
+        output_path = repo_root / "docs" / "development" / "open-taskcard-closure-matrix.md"
 
         if not matrix_path.exists():
             print(f"ERROR: Taskcard matrix not found: {matrix_path}")

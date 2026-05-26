@@ -86,7 +86,7 @@ class TestRunbookDoesNotRequireGhToken:
     def test_runbook_documents_github_token_as_pipeline_variable(self):
         """The pipeline reads GITHUB_TOKEN. If the runbook mentions GH_TOKEN as operator storage,
         it must also clearly identify GITHUB_TOKEN as what the pipeline actually reads."""
-        runbook_path = Path("docs/publishing/agent-operated-live-pr-runbook.md")
+        runbook_path = Path("docs/operations/live-publishing.md")
         assert runbook_path.exists(), f"Runbook not found: {runbook_path}"
         content = runbook_path.read_text(encoding="utf-8")
         # The pipeline variable GITHUB_TOKEN must always be documented
@@ -103,13 +103,13 @@ class TestRunbookDoesNotRequireGhToken:
 
     def test_runbook_references_github_token(self):
         """The runbook must explicitly mention GITHUB_TOKEN."""
-        runbook_path = Path("docs/publishing/agent-operated-live-pr-runbook.md")
+        runbook_path = Path("docs/operations/live-publishing.md")
         content = runbook_path.read_text(encoding="utf-8")
         assert "GITHUB_TOKEN" in content, "Runbook must reference GITHUB_TOKEN"
 
     def test_runbook_mentions_token_type_requirement(self):
         """Runbook should mention classic PAT or repo scope requirement."""
-        runbook_path = Path("docs/publishing/agent-operated-live-pr-runbook.md")
+        runbook_path = Path("docs/operations/live-publishing.md")
         content = runbook_path.read_text(encoding="utf-8")
         has_classic_pat = "classic PAT" in content or "classic" in content
         has_repo_scope = "repo scope" in content or "repo` scope" in content

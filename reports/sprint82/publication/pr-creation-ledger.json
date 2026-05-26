@@ -1,9 +1,0 @@
-{
-  "sprint_id": "sprint82",
-  "phase": "Phase 5 -- PR Creation",
-  "status": "SKIP",
-  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=NOT_SET",
-  "prs_created": [],
-  "prs_created_count": 0,
-  "note": "No PRs created. Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to enable."
-}

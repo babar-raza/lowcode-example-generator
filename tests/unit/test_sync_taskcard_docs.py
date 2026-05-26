@@ -40,8 +40,8 @@ def _run_sync_command(matrix: dict | None = None, *, extra_args: list[str] | Non
         (latest / "open-taskcard-closure-matrix.json").write_text(
             json.dumps(matrix_data), encoding="utf-8"
         )
-        # Create docs/discovery/ target
-        docs_dir = tmp_path / "docs" / "discovery"
+        # Create docs/development/ target
+        docs_dir = tmp_path / "docs" / "development"
         docs_dir.mkdir(parents=True)
 
         # Patch __main__.py to use tmp_path as repo_root is not straightforward;
@@ -56,7 +56,7 @@ def _run_sync_command(matrix: dict | None = None, *, extra_args: list[str] | Non
             env={**__import__("os").environ, "PYTHONPATH": "src"},
             cwd=str(_REPO_ROOT),
         )
-        md_path = _REPO_ROOT / "docs" / "discovery" / "open-taskcard-closure-matrix.md"
+        md_path = _REPO_ROOT / "docs" / "development" / "open-taskcard-closure-matrix.md"
         return result.returncode, result.stdout, result.stderr, md_path
 
 

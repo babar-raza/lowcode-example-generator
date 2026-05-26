@@ -1,6 +1,13 @@
 # Documentation IA Proposal
 
-Status: design only. Do not move or edit existing docs as part of this proposal.
+Source inputs:
+
+- `docs/_audit/system_audit.md`
+- `docs/_audit/docs_inventory.md`
+- `docs/_audit/traceability.md`
+- `docs/_audit/root_orphans.md`
+
+Design goal: fewer, stronger documents with centralized references and scenario guides that link to references instead of repeating long tables.
 
 ## Proposed Tree
 
@@ -15,30 +22,30 @@ docs/
     contributor-quickstart.md
   guides/
     run-family-pipeline.md
-    add-or-update-family.md
     discovery-sweep.md
+    add-or-update-family.md
     generate-and-validate-examples.md
   reference/
     cli.md
-    configuration.md
+    config.md
     environment-variables.md
-    evidence-and-file-contracts.md
+    file-contracts.md
     gates-and-verdicts.md
     validation-and-reviewer.md
     publishing-and-github.md
     metrics.md
     schemas-and-contracts.md
   architecture/
+    decisions.md
     system-design.md
     pipeline-stages.md
-    decisions.md
   operations/
     monthly-maintenance.md
     live-publishing.md
     readme-publishing.md
     post-merge-verification.md
-    troubleshooting.md
     telemetry.md
+    troubleshooting.md
   development/
     contributing.md
     testing.md
@@ -54,193 +61,179 @@ docs/
     style_guide.md
   _archive/
     README.md
-    discovery/
-    plans/
-    publishing/
+    ...
 ```
 
-## Docs Root Allowed Items
+## Navigation Model
 
-`docs/` root may contain only:
+`docs/README.md` is the only navigation front door. It should expose:
 
-- `docs/README.md`
-- Meta folders: `docs/_audit/`, `docs/_archive/`
-- The approved top-level IA folders listed above
-
-No other markdown files may be created directly under `docs/`. Any future direct root file other than `README.md` is a ROOT ORPHAN and must be triaged before merge.
+- Start paths by persona.
+- Task paths by scenario.
+- Canonical reference pages.
+- Architecture/development links.
+- Archive warning: archived docs are historical evidence, not current procedure.
 
 ## Personas
 
-### User
+| Persona | Needs | Primary docs |
+|---|---|---|
+| User | Understand what this system does, what it produces, and what it does not contain | `overview/product.md`, `overview/concepts.md` |
+| Operator | Run families, inspect evidence, publish PRs, troubleshoot, maintain monthly/delta runs | `getting-started/operator-quickstart.md`, `guides/run-family-pipeline.md`, `operations/*`, `reference/cli.md`, `reference/file-contracts.md` |
+| Contributor | Change code, configs, schemas, tests, docs, or pipeline behavior safely | `getting-started/contributor-quickstart.md`, `development/*`, `architecture/*`, `reference/config.md`, `reference/schemas-and-contracts.md` |
 
-Definition: someone trying to understand what the system does and whether it fits their need.
-
-Needs:
-
-- Product purpose and boundaries.
-- Core concepts: NuGet source of truth, reflected API catalog, scenarios, gates, evidence, PR-based publishing.
-- A short path to the right operator or contributor quickstart.
-
-Primary docs:
-
-- `docs/README.md`
-- `docs/overview/product.md`
-- `docs/overview/concepts.md`
-
-### Operator
-
-Definition: someone running the pipeline, interpreting evidence, publishing PRs, or maintaining monthly runs.
-
-Needs:
-
-- Fast run commands.
-- Required credentials and environment variables.
-- Monthly workflow.
-- Live PR and merge procedures.
-- Evidence locations and gate interpretation.
-- Troubleshooting and telemetry.
-
-Primary docs:
-
-- `docs/getting-started/operator-quickstart.md`
-- `docs/operations/monthly-maintenance.md`
-- `docs/operations/live-publishing.md`
-- `docs/operations/post-merge-verification.md`
-- `docs/operations/troubleshooting.md`
-- References under `docs/reference/`
-
-### Contributor
-
-Definition: someone changing code, tests, schemas, family configs, or docs.
-
-Needs:
-
-- Repository layout.
-- How to run tests and CI-equivalent checks.
-- How to add/update family configs.
-- How schemas/contracts fit together.
-- Architecture and component responsibilities.
-- Documentation rules.
-
-Primary docs:
-
-- `docs/getting-started/contributor-quickstart.md`
-- `docs/development/contributing.md`
-- `docs/development/testing.md`
-- `docs/development/repo-structure.md`
-- `docs/architecture/system-design.md`
-- `docs/reference/configuration.md`
-- `docs/reference/schemas-and-contracts.md`
-
-## Where Does This Go?
+## Category Rules
 
 ### `overview/`
 
-Use for stable conceptual explanation:
+Use for stable conceptual pages:
 
 - What the pipeline is.
-- What it does not do.
-- Source-of-truth model.
-- Definitions of common terms.
+- What it is not.
+- Main concepts: family, scenario, contract, catalog, gate, evidence, publish package.
 
-Do not put command tables, config key matrices, or runbook steps here. Link to references and guides.
+Do not put CLI flags, full config tables, or runbook steps here. Link to references and guides.
 
 ### `getting-started/`
 
-Use for short first-run paths by persona:
+Use for shortest successful path by persona:
 
-- Minimal setup.
-- One happy-path command.
-- How to verify success.
-- Where to go next.
+- Operator quickstart: run one family, find evidence, know what pass/fail means.
+- Contributor quickstart: setup, tests, code map, where to read decisions.
 
-Do not duplicate exhaustive CLI flags or environment variable tables. Link to `reference/cli.md` and `reference/environment-variables.md`.
+Do not duplicate full CLI/config/env tables. Link to `reference/cli.md`, `reference/config.md`, and `reference/environment-variables.md`.
 
 ### `guides/`
 
-Use for scenario-driven procedures that have a beginning and an end:
+Use for scenario-driven, step-by-step tasks:
 
-- Run one family pipeline.
-- Add a new family config.
-- Run a discovery sweep.
+- Run a family pipeline.
+- Run discovery.
+- Add or update a family.
 - Generate and validate examples.
 
-Guides may show a small command snippet, but all option details must link to canonical reference pages.
+Guides should include only the flags needed for the scenario. For exhaustive flags, link to `reference/cli.md`.
 
 ### `reference/`
 
-Use for exhaustive, canonical source-of-truth documentation:
+Use for canonical, exhaustive material:
 
-- CLI commands and flags.
-- Config keys and defaults.
+- CLI commands, flags, defaults.
+- Config keys, defaults, schema boundaries.
 - Environment variables.
-- Evidence files and workspace contracts.
-- Gate verdicts.
-- Validation/reviewer behavior.
-- Publishing and GitHub API requirements.
-- Metrics config and payloads.
-- Schemas and contracts.
+- File/evidence contracts.
+- Gates/verdicts.
+- Validation and reviewer behavior.
+- Publishing/GitHub behavior.
+- Metrics.
+- Schemas/contracts.
 
-References should be generated or refreshed from code/schemas whenever possible. Other docs must link here instead of copying tables.
+References are the single source for long tables. Guides and runbooks link here instead of copying.
 
 ### `architecture/`
 
-Use for system design, component maps, data flow, and architecture decisions:
+Use for design and durable technical decisions:
 
-- End-to-end pipeline design.
-- Stage ordering.
-- Module responsibilities.
-- Integration boundaries.
-- Architecture decisions and constraints.
+- System design.
+- Pipeline stage architecture.
+- Architecture decisions.
 
-Do not store runbooks or historical sprint reports here.
+Architecture pages should explain why the system is shaped this way. They should not become operational runbooks.
 
 ### `operations/`
 
-Use for recurring operational procedures:
+Use for operator runbooks:
 
 - Monthly maintenance.
 - Live publishing.
 - README publishing.
 - Post-merge verification.
+- Telemetry operations.
 - Troubleshooting.
-- Telemetry/metrics operation.
 
-Operations docs should be step-by-step and should link to reference pages for exhaustive command/config detail.
+Runbooks may include commands, but only the path-specific commands needed to complete the procedure. Link to reference pages for exhaustive CLI/env/config material.
 
 ### `development/`
 
-Use for contributor workflow:
+Use for contributor workflows:
 
+- Contributing rules.
+- Testing and CI.
 - Repository structure.
-- Local setup.
-- Testing.
-- CI-equivalent checks.
-- Taskcard/doc generation.
-- How to update docs without duplication.
+- Taskcards.
+
+Development docs should point to code-owned references where possible.
 
 ### `_audit/`
 
-Use only for audit outputs and planning artifacts. These are not end-user docs.
+Use only for audit outputs and planning artifacts:
+
+- System audit.
+- Docs inventory.
+- Traceability.
+- Root orphan sweep.
+- IA proposal.
+- Migration plan.
+- Style guide.
+
+Do not treat `_audit/` as user/operator documentation.
 
 ### `_archive/`
 
-Use for historical, timestamped, duplicate, or superseded documents. Archived docs must not be linked as canonical instructions. `docs/_archive/README.md` should explain that archived files are historical and may be stale.
+Use for historical docs, old plans, previous reviews, sprint evidence summaries, and duplicate docs after consolidation.
+
+Archived docs must not be linked as canonical procedure from `docs/README.md`, except from an archive index with clear historical labeling.
+
+## Where Does This Go?
+
+| Content type | Destination | Rule |
+|---|---|---|
+| “What is this?” | `overview/` | Explain concepts, no exhaustive tables. |
+| “I am new, what do I run first?” | `getting-started/` | Short path only. |
+| “How do I complete this task?” | `guides/` or `operations/` | Use `guides/` for normal scenarios, `operations/` for runbooks with checks/rollback/troubleshooting. |
+| “What flags exist?” | `reference/cli.md` | Exhaustive CLI source of truth. |
+| “What config keys exist?” | `reference/config.md` | Exhaustive config source of truth. |
+| “What files are read/written?” | `reference/file-contracts.md` | Exhaustive file/evidence contracts. |
+| “What does this gate/verdict mean?” | `reference/gates-and-verdicts.md` | Centralize gate semantics. |
+| “Why is the system designed this way?” | `architecture/` | Design and decisions. |
+| “How do I test/change the repo?” | `development/` | Contributor workflow. |
+| “This was true for sprint N” | `_archive/` | Historical only. |
+| “This is an audit/planning artifact” | `_audit/` | Not canonical runtime docs. |
+
+## Docs Root Allowed Items
+
+The `docs/` root may contain:
+
+- `docs/README.md`
+- Folders listed in the proposed tree
+- Meta folders: `docs/_audit/`, `docs/_archive/`
+
+The `docs/` root must not contain any other files. Any new direct file under `docs/` is a ROOT ORPHAN and must be moved, merged, archived, or deleted in the same change that creates it.
+
+## Deduplication Principles
+
+1. One canonical page per reference surface.
+2. Guides link to references for full tables.
+3. Runbooks link to references for full flag/env/config detail.
+4. Archive old duplicate pages after their unique content is merged.
+5. Keep generated/historical evidence out of canonical docs navigation.
 
 ## Top 15 Pages We Must End Up With
 
-1. Product Overview — `docs/overview/product.md`
-2. Core Concepts — `docs/overview/concepts.md`
-3. Operator Quickstart — `docs/getting-started/operator-quickstart.md`
-4. Contributor Quickstart — `docs/getting-started/contributor-quickstart.md`
-5. Run a Family Pipeline — `docs/guides/run-family-pipeline.md`
-6. Add or Update a Family — `docs/guides/add-or-update-family.md`
-7. CLI Reference — `docs/reference/cli.md`
-8. Configuration Reference — `docs/reference/configuration.md`
-9. Evidence and File Contracts — `docs/reference/evidence-and-file-contracts.md`
-10. Gates and Verdicts — `docs/reference/gates-and-verdicts.md`
-11. Validation and Reviewer Reference — `docs/reference/validation-and-reviewer.md`
-12. System Design — `docs/architecture/system-design.md`
-13. Monthly Maintenance Runbook — `docs/operations/monthly-maintenance.md`
-14. Live Publishing Runbook — `docs/operations/live-publishing.md`
-15. Testing and CI — `docs/development/testing.md`
+| Title | Target path |
+|---|---|
+| Documentation Home | `docs/README.md` |
+| Product Overview | `docs/overview/product.md` |
+| Core Concepts | `docs/overview/concepts.md` |
+| Operator Quickstart | `docs/getting-started/operator-quickstart.md` |
+| Contributor Quickstart | `docs/getting-started/contributor-quickstart.md` |
+| Run a Family Pipeline | `docs/guides/run-family-pipeline.md` |
+| Add or Update a Family | `docs/guides/add-or-update-family.md` |
+| CLI Reference | `docs/reference/cli.md` |
+| Configuration Reference | `docs/reference/config.md` |
+| Environment Variables | `docs/reference/environment-variables.md` |
+| File and Evidence Contracts | `docs/reference/file-contracts.md` |
+| Gates and Verdicts | `docs/reference/gates-and-verdicts.md` |
+| Validation and Reviewer Reference | `docs/reference/validation-and-reviewer.md` |
+| Publishing and GitHub Reference | `docs/reference/publishing-and-github.md` |
+| Live Publishing Runbook | `docs/operations/live-publishing.md` |

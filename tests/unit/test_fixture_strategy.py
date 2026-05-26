@@ -49,7 +49,7 @@ from plugin_examples.generator.code_generator import GeneratedExample
 class TestExampleReviewerFixtureSystemDiscovered:
     def test_example_reviewer_fixture_system_discovered(self):
         """Discovery doc and JSON must exist after Step 1."""
-        discovery_doc = Path("docs/discovery/example-reviewer-fixture-system.md")
+        discovery_doc = Path("docs/reference/validation-and-reviewer.md")
         discovery_json = Path("workspace/verification/latest/example-reviewer-fixture-system.json")
         assert discovery_doc.exists(), "Discovery doc not found"
         assert discovery_json.exists(), "Discovery JSON not found"

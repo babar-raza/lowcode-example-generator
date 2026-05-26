@@ -1,145 +1,86 @@
-# Docs Inventory
+# Documentation Inventory
 
-Generated: 2026-05-11. Status values are documentation alignment scores against code evidence where inspected. Many sprint/preflight/result reports are historically useful but should not be treated as canonical current behavior unless refreshed from code.
+Audit mode: docs are inventory input only. Accuracy status is based on comparison against code surfaces found during this audit.
 
-## Summary
+Last refreshed: 2026-05-26.
 
-- `docs/README.md` is missing.
-- Root orphans: `docs/monthly-runbook.md`, `docs/verifier-integration.md`.
-- Major duplicate/scatter clusters: monthly operations, verifier integration, live PR/publishing, README backfill/root README, PDF fixture/pilot reports, LowCode roadmap/current-state plans, agent metrics TC14 notes, execution plan duplicate.
+Root sweep result: no ROOT ORPHAN files. `docs/README.md` is the only direct file under `docs/`.
 
-## Inventory Table
+Status legend:
+
+- Accurate: no material drift found in this audit.
+- Partial: useful, but missing some current code surfaces or detail.
+- Outdated: conflicts with current code or omits major behavior.
+- Duplicate: overlaps substantially with another active doc.
+- Unknown: not deeply verified against code in this pass.
 
 | path | intended audience | purpose | status | action | notes |
 |---|---|---|---|---|---|
-| `docs/monthly-runbook.md` | operator | Monthly runbook | Duplicate | merge | ROOT ORPHAN; merge into `docs/publishing/monthly-maintenance-runbook.md` after code refresh. |
-| `docs/verifier-integration.md` | developer/operator | Verifier integration note | Duplicate | merge | ROOT ORPHAN; merge with reviewer integration docs and code-backed verifier bridge reference. |
-| `docs/ci/environment-variables.md` | operator/contributor | Env vars | Partial | keep | Refresh against env vars in `__main__.py`, `llm_router`, `metrics`, publisher, verifier bridge. |
-| `docs/discovery/current-state.md` | contributor | Original current-state discovery | Outdated | archive | Plan cites greenfield/no tests; codebase now has modules/tests/CI. |
-| `docs/discovery/pipeline-module-integration-surface.md` | developer | Module integration review | Partial | merge | Useful but should merge into canonical architecture/system audit. |
-| `docs/discovery/implementation-gap-report.md` | contributor | Gap report | Partial | archive | Historical unless refreshed from current code. |
-| `docs/discovery/example-reviewer-integration-surface.md` | developer/operator | Reviewer integration | Partial | merge | Candidate target for `docs/verifier-integration.md`; refresh from `verifier_bridge/`. |
-| `docs/discovery/example-reviewer-fixture-system.md` | developer | Reviewer fixture system | Partial | merge | Merge into verifier/validation reference. |
-| `docs/discovery/example-reviewer-feedback-loop-gap-analysis.md` | developer | Reviewer feedback gap | Partial | archive | Historical gap report. |
-| `docs/discovery/llm-provider-policy-audit.md` | developer/operator | LLM policy audit | Partial | keep | Refresh from `llm_router/router.py`, `provider_policy.py`, `llm-routing.yml`. |
-| `docs/discovery/family-scoped-evidence-layout-plan.md` | developer/operator | Evidence layout plan | Partial | merge | Merge into evidence/storage reference; code in `evidence_layout.py`. |
-| `docs/discovery/family-scoped-evidence-preflight-review.md` | contributor | Evidence layout preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/family-scoped-evidence-promotion-result.md` | contributor | Evidence promotion result | Partial | archive | Historical result. |
-| `docs/discovery/governance-closure-claim-audit.md` | contributor | Governance claim audit | Unknown | archive | Historical audit. |
-| `docs/discovery/governance-closure-manual-review.md` | contributor | Governance manual review | Unknown | archive | Historical review. |
-| `docs/discovery/live-pr-approval-implementation-review.md` | developer/operator | Live PR approval implementation | Partial | merge | Merge into live publish runbook; refresh approval gate code. |
-| `docs/discovery/live-pr-approval-preflight-review.md` | contributor | Live PR approval preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/real-pr-publisher-preflight-review.md` | contributor | PR publisher preflight | Partial | archive | Superseded by publisher code/runbook. |
-| `docs/discovery/repo-access-resolution-preflight-review.md` | operator | Repo access preflight | Partial | merge | Merge into publish readiness/reference. |
-| `docs/discovery/repo-access-self-service-preflight.md` | operator | Repo access self-service | Partial | merge | Merge into publish readiness/reference. |
-| `docs/discovery/family-repo-mapping-preflight-review.md` | operator | Family repo mapping | Partial | merge | Merge into family config/publishing reference. |
-| `docs/discovery/multi-family-discovery-claim-audit.md` | contributor | Multi-family discovery audit | Partial | archive | Historical audit; current code in `discovery_sweep.py`. |
-| `docs/discovery/open-taskcard-closure-matrix.md` | contributor | Generated taskcard matrix | Accurate | keep | Generated by `scripts/sync_taskcards.py`; keep as generated artifact or move to reports. |
-| `docs/discovery/cross-family-example-lifecycle-audit.md` | contributor | Lifecycle audit | Partial | merge | Merge into lifecycle/backlog reference. |
-| `docs/discovery/cross-family-planned-completion-gap-analysis.md` | contributor | Completion gap analysis | Partial | archive | Historical analysis. |
-| `docs/discovery/example-drop-prevention-capability-audit.md` | developer | Drop prevention audit | Partial | merge | Merge into lifecycle/gates docs. |
-| `docs/discovery/example-lifecycle-backlog-hardening-preflight.md` | contributor | Lifecycle backlog preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/full-planned-example-completion-feasibility.md` | contributor | Completion feasibility | Unknown | archive | Historical analysis. |
-| `docs/discovery/planned-example-completion-gap-preflight.md` | contributor | Completion gap preflight | Unknown | archive | Historical preflight. |
-| `docs/discovery/planned-example-completion-model.md` | contributor | Planned completion model | Partial | merge | Merge only if code-backed by lifecycle/backlog modules. |
-| `docs/discovery/cells-pilot-proof-report.md` | operator/contributor | Cells pilot proof | Partial | archive | Historical family report. |
-| `docs/discovery/cells-tier5-e2e-evidence-review.md` | operator/contributor | Cells E2E evidence | Partial | archive | Historical evidence review. |
-| `docs/discovery/cells-tier5-monthly-rerun-proof.md` | operator | Cells monthly rerun proof | Partial | archive | Merge durable lessons into monthly ops if still current. |
-| `docs/discovery/cells-excluded-scenarios-root-cause-deep-dive.md` | contributor | Cells excluded scenarios | Partial | archive | Historical family analysis. |
-| `docs/discovery/words-catalog-review.md` | contributor | Words readiness/catalog | Partial | archive | Historical family review. |
-| `docs/discovery/words-excluded-scenarios-root-cause-deep-dive.md` | contributor | Words excluded scenarios | Partial | archive | Historical family analysis. |
-| `docs/discovery/words-fixture-registry-reprobe.md` | contributor | Words fixture reprobe | Partial | archive | Historical result. |
-| `docs/discovery/words-pilot-verification-review.md` | contributor/operator | Words pilot verification | Partial | archive | Historical family review. |
-| `docs/discovery/pdf-backlog-backfill-result.md` | contributor | PDF backlog result | Partial | archive | Historical result. |
-| `docs/discovery/pdf-excluded-examples-root-cause-review.md` | contributor | PDF excluded examples | Partial | archive | Historical analysis. |
-| `docs/discovery/pdf-fixture-strategy-preflight-review.md` | contributor | PDF fixture preflight | Partial | archive | Duplicate with other PDF fixture docs. |
-| `docs/discovery/pdf-fixture-strategy-review.md` | contributor | PDF fixture strategy | Partial | merge | Merge durable findings into fixture reference if code-backed. |
-| `docs/discovery/pdf-options-aware-review.md` | developer | PDF options-aware review | Partial | archive | Historical family-specific review. |
-| `docs/discovery/pdf-pilot-fixture-requirements.md` | developer/operator | PDF fixture requirements | Partial | merge | Merge into family-specific fixture notes if needed. |
-| `docs/discovery/pdf-programmatic-fixture-validation.md` | developer | PDF programmatic fixture validation | Partial | archive | Historical validation note. |
-| `docs/discovery/pdf-role-options-sprint-preflight-review.md` | contributor | PDF sprint preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/pdf-splitter-optimizer-root-cause-deep-dive.md` | contributor | PDF root cause | Partial | archive | Historical family analysis. |
-| `docs/discovery/pdf-type-role-classification.md` | developer | PDF type roles | Partial | merge | Merge only code-backed classification behavior into planner reference. |
-| `docs/discovery/pdf-wave1-preflight-review.md` | contributor | PDF wave preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/pdf-wave1-splitter-optimizer-result-analysis.md` | contributor | PDF result analysis | Partial | archive | Historical result. |
-| `docs/discovery/pdf-wave1-tier5-preflight-review.md` | contributor | PDF tier5 preflight | Partial | archive | Historical preflight. |
-| `docs/discovery/root-readme-template-preflight-review.md` | developer/operator | Root README template preflight | Partial | merge | Merge into README renderer/auditor reference. |
-| `docs/discovery/root-readme-workflow-manual-review.md` | operator | Root README workflow manual review | Partial | merge | Merge into README workflow reference. |
-| `docs/discovery/sprint-a2-preflight-review.md` | contributor | Sprint preflight | Unknown | archive | Historical sprint note. |
-| `docs/plans/plugin-example-generation-execution-plan.md` | contributor/LLM | Execution plan/governance | Partial | keep | Required by AGENTS; mark as governance/historical, not current code truth. |
-| `docs/plans/plugin-example-generation-execution-plan copy.md` | contributor | Duplicate execution plan | Duplicate | delete | Exact duplicate-like root of confusion; delete after confirming no unique changes. |
-| `docs/plans/stream-a-plan-correction-review.md` | contributor | Plan correction review | Unknown | archive | Historical. |
-| `docs/plans/r1-pdf-optimizer-rerun-result.md` | contributor | R1 result | Unknown | archive | Historical. |
-| `docs/plans/r1-preflight-truth-verification.md` | contributor | R1 preflight truth | Unknown | archive | Historical. |
-| `docs/plans/r2-final-verification.md` | contributor | R2 final verification | Unknown | archive | Historical. |
-| `docs/plans/r2-pdf-lifecycle-readiness-update.md` | contributor | R2 lifecycle update | Unknown | archive | Historical. |
-| `docs/plans/r3-final-verification.md` | contributor | R3 final verification | Unknown | archive | Historical. |
-| `docs/plans/r3-pdf-pr3-live-pr-result.md` | contributor | R3 PDF PR result | Unknown | archive | Historical. |
-| `docs/plans/r3-resume-final-verification.md` | contributor | R3 resume verification | Unknown | archive | Historical. |
-| `docs/plans/agent-metrics-tc14-gate-checklist.md` | operator | Metrics checklist | Partial | merge | Merge into `docs/publishing/agent-metrics-runbook.md`. |
-| `docs/plans/agent-metrics-tc14-independent-verification-preflight.md` | contributor | Metrics preflight | Partial | archive | Historical preflight. |
-| `docs/plans/agent-metrics-tc14-production-shaped-dry-run.md` | operator | Metrics dry run | Partial | merge | Merge durable steps into metrics runbook. |
-| `docs/plans/agent-metrics-tc14-sheet-confirmation.md` | operator | Metrics sheet confirmation | Unknown | archive | Historical confirmation. |
-| `docs/plans/agent-metrics-tc14-source-gate-preflight.md` | contributor | Metrics source gate preflight | Partial | archive | Historical. |
-| `docs/plans/example-failure-recovery-system-limitation-plan.md` | contributor | Failure recovery plan | Partial | merge | Merge if backed by lifecycle/repair code. |
-| `docs/plans/full-completion-remediation-architecture.md` | contributor | Remediation architecture | Partial | archive | Historical architecture plan. |
-| `docs/plans/full-completion-roadmap.md` | contributor | Roadmap | Unknown | archive | Historical roadmap. |
-| `docs/plans/lowcode-all-family-candidate-inventory.md` | contributor | Candidate inventory | Partial | archive | Historical inventory; current family configs are source. |
-| `docs/plans/lowcode-all-family-current-state-board.md` | contributor | Current state board | Partial | archive | Historical board. |
-| `docs/plans/lowcode-all-family-denominator-model.md` | developer | Denominator model | Partial | merge | Merge into denominator/contracts reference. |
-| `docs/plans/lowcode-all-family-roadmap.md` | contributor | Roadmap | Unknown | archive | Historical roadmap. |
-| `docs/plans/lowcode-dropped-planned-example-healing-model.md` | developer | Healing model | Partial | merge | Merge with lifecycle/gates if code-backed. |
-| `docs/plans/lowcode-example-relaunch-governance.md` | contributor | Relaunch governance | Unknown | archive | Historical governance. |
-| `docs/plans/lowcode-execution-handoff.md` | contributor/LLM | Execution handoff | Unknown | archive | Historical handoff. |
-| `docs/plans/lowcode-failed-verification-root-cause-register.md` | contributor | Root cause register | Unknown | archive | Historical register. |
-| `docs/plans/lowcode-final-investigation-verdict.md` | contributor | Investigation verdict | Unknown | archive | Historical verdict. |
-| `docs/plans/lowcode-risk-and-contradiction-register.md` | contributor | Risk register | Unknown | archive | Historical register. |
-| `docs/plans/lowcode-scope-correction-verdict.md` | contributor | Scope correction | Unknown | archive | Historical verdict. |
-| `docs/plans/new-family-controlled-pilot-readiness-20260511-105914.md` | operator/contributor | New family readiness | Partial | archive | Timestamped report. |
-| `docs/plans/new-family-fixture-harness-verdict.md` | contributor | Fixture harness verdict | Partial | archive | Historical verdict. |
-| `docs/plans/new-family-type-role-classification-summary-20260511-105914.md` | developer | Type role summary | Partial | archive | Timestamped report; planner code is source. |
-| `docs/plans/pdf-fixture-generator-change-plan.md` | developer | PDF fixture generator plan | Partial | archive | Historical plan. |
-| `docs/publishing/monthly-maintenance-runbook.md` | operator | Monthly maintenance | Partial | keep | Canonical target for root monthly runbook; refresh from workflow and CLI. |
-| `docs/publishing/agent-metrics-runbook.md` | operator | Metrics runbook | Partial | keep | Refresh from metrics config/code; merge TC14 docs here. |
-| `docs/publishing/agent-operated-live-pr-runbook.md` | operator | Live PR runbook | Partial | keep | Refresh from publish-pr code and approval gates. |
-| `docs/publishing/post-merge-verification-runbook.md` | operator | Post-merge verification | Partial | keep | Refresh from merge/published build scripts. |
-| `docs/publishing/live-pr-review-preflight.md` | operator | Live PR review preflight | Partial | merge | Merge into live PR runbook or archive. |
-| `docs/publishing/repository-launch-consistency-preflight.md` | operator | Repo launch preflight | Partial | merge | Merge into publishing/reference. |
-| `docs/publishing/remote-root-readme-status.md` | operator | Remote README status | Partial | archive | Historical audit. |
-| `docs/publishing/release-closure-review.md` | operator/contributor | Release closure review | Unknown | archive | Historical release review. |
-| `docs/publishing/release-inventory-cells-words.md` | operator | Release inventory | Partial | archive | Historical inventory; release status code/evidence is source. |
-| `docs/publishing/sprint-a1-concurrency-state-review.md` | contributor | Concurrency state review | Unknown | archive | Historical sprint review. |
-| `docs/publishing/stream-a-closure-verification.md` | contributor | Stream A closure | Unknown | archive | Historical verification. |
-| `docs/publishing/cells-live-pr-result.md` | operator/contributor | Cells PR result | Partial | archive | Historical result. |
-| `docs/publishing/cells-merge-preflight-review.md` | operator | Cells merge preflight | Partial | archive | Historical result. |
-| `docs/publishing/cells-merge-result.md` | operator | Cells merge result | Partial | archive | Historical result. |
-| `docs/publishing/cells-post-merge-validation.md` | operator | Cells post-merge validation | Partial | archive | Historical result. |
-| `docs/publishing/cells-readme-backfill-pr-result.md` | operator | Cells README backfill | Partial | archive | Historical result. |
-| `docs/publishing/words-live-pr-result.md` | operator/contributor | Words PR result | Partial | archive | Historical result. |
-| `docs/publishing/words-live-pr-post-creation-review.md` | operator | Words PR review | Partial | archive | Historical result. |
-| `docs/publishing/words-merge-result.md` | operator | Words merge result | Partial | archive | Historical result. |
-| `docs/publishing/words-readme-backfill-pr-result.md` | operator | Words README backfill | Partial | archive | Historical result. |
-| `docs/publishing/pdf-live-pr-post-creation-full-review.md` | operator | PDF live PR review | Partial | archive | Historical result. |
-| `docs/publishing/pdf-pr-packaging-preflight-review.md` | operator | PDF packaging preflight | Partial | archive | Historical preflight. |
-| `docs/publishing/pdf-pr1-and-cross-family-audit-preflight.md` | operator | PDF/cross-family preflight | Partial | archive | Historical preflight. |
-| `docs/publishing/pdf-pr1-merge-result.md` | operator | PDF merge result | Partial | archive | Historical result. |
-| `docs/publishing/pdf-pr1-post-merge-verification.md` | operator | PDF post-merge verification | Partial | archive | Historical result. |
-| `docs/publishing/pdf-pr1-pre-merge-clean-checkout-validation.md` | operator | PDF clean checkout validation | Partial | archive | Historical result. |
-| `docs/publishing/readme-backfill-pr-review-preflight.md` | operator | README PR review preflight | Partial | merge | Merge into README workflow reference. |
-| `docs/publishing/readme-backfill-token-recheck-preflight.md` | operator | README token recheck | Partial | archive | Historical preflight. |
-| `docs/publishing/readme-backfill-post-merge-verification.md` | operator | README post-merge verification | Partial | archive | Historical result. |
+| `README.md` | Operator, contributor | Repo overview and entry to docs | Accurate | Keep | Points to docs home and key workflows. |
+| `AGENTS.md` | Agent, contributor | Governance/rules | Partial | Keep | LLM endpoint governance is stricter than current router code. |
+| `docs/README.md` | All | Docs landing page by persona/scenario | Accurate | Keep | Root hygiene rule is present. |
+| `docs/overview/product.md` | User, operator | Product overview | Partial | Keep | Should remain concept-level and link to references. |
+| `docs/overview/concepts.md` | User, contributor | Concepts | Partial | Keep | Useful conceptual map; avoid reference-table duplication. |
+| `docs/getting-started/operator-quickstart.md` | Operator | Short operator path | Partial | Keep | Should link to current CLI/env/file references. |
+| `docs/getting-started/contributor-quickstart.md` | Contributor | Short contributor path | Partial | Keep | Should link to testing, decisions, config/schema references. |
+| `docs/guides/run-family-pipeline.md` | Operator | Run one family pipeline | Accurate | Keep | Scenario guide now links to references. |
+| `docs/guides/discovery-sweep.md` | Operator, contributor | Run discovery sweep | Partial | Keep | Needs periodic check against discovery CLI behavior. |
+| `docs/guides/add-or-update-family.md` | Contributor | Family config workflow | Partial | Keep | Link to config/schema references; do not duplicate key tables. |
+| `docs/guides/generate-and-validate-examples.md` | Operator, contributor | Generation/validation workflow | Accurate | Keep | Notes governed LLM endpoint and validation references. |
+| `docs/operations/monthly-maintenance.md` | Operator | Monthly/delta runbook | Partial | Keep | Should be checked against version-drift/replay command surfaces. |
+| `docs/operations/live-publishing.md` | Operator | Live PR publishing runbook | Accurate | Keep | Canonical runbook after duplicate publishing docs were archived. |
+| `docs/operations/readme-publishing.md` | Operator | README publishing | Partial | Keep | Should periodically verify `render-root-readme`/`publish-readme` flags. |
+| `docs/operations/post-merge-verification.md` | Operator | Post-merge verification | Accurate | Keep | Canonical post-merge runbook after duplicate docs were archived. |
+| `docs/operations/telemetry.md` | Operator | Metrics operations | Partial | Keep | Should link to metrics reference for exhaustive config. |
+| `docs/operations/troubleshooting.md` | Operator | Troubleshooting | Partial | Keep | Should include LLM/router governance gap and common gate failures. |
+| `docs/architecture/decisions.md` | Contributor | Active architecture decisions | Accurate | Keep | Required pre-implementation doc. |
+| `docs/architecture/pipeline-stages.md` | Contributor, operator | Stage architecture | Partial | Keep | Must stay aligned with `STAGE_DEFINITIONS`. |
+| `docs/architecture/system-design.md` | Contributor | System design | Partial | Keep | Should stay code-derived. |
+| `docs/development/contributing.md` | Contributor | Contribution rules | Partial | Keep | Should include docs root hygiene and canonical-reference rules. |
+| `docs/development/repo-structure.md` | Contributor | Repo layout | Partial | Keep | Should reflect active docs folders and `pipeline/` contracts. |
+| `docs/development/taskcards.md` | Contributor, operator | Taskcard workflow | Accurate | Keep | Documents JSON source and generated markdown location. |
+| `docs/development/open-taskcard-closure-matrix.md` | Contributor, operator | Generated taskcard matrix | Accurate | Keep generated | Generated from `workspace/verification/latest/open-taskcard-closure-matrix.json`; do not edit manually. |
+| `docs/development/testing.md` | Contributor | Testing and CI | Partial | Keep | Test command exists; keep CI workflow references current. |
+| `docs/reference/cli.md` | Operator, contributor | Canonical CLI reference | Accurate | Keep | Covers current commands/flags from `__main__.py`. |
+| `docs/reference/config.md` | Operator, contributor | Canonical config reference | Accurate | Keep | Covers family config model/defaults and config files. |
+| `docs/reference/environment-variables.md` | Operator, contributor | Canonical env var reference | Accurate | Keep | Correctly marks non-governed LLM fallbacks as code-visible but not approved. |
+| `docs/reference/file-contracts.md` | Operator, contributor | Canonical file/evidence contracts | Accurate | Keep | Covers run-local, promoted, taskcard, and evidence paths. |
+| `docs/reference/gates-and-verdicts.md` | Operator, contributor | Gate/verdict semantics | Partial | Keep | Should be periodically regenerated from gates code. |
+| `docs/reference/validation-and-reviewer.md` | Operator, contributor | Validation/reviewer reference | Accurate | Keep | Includes semantic output types and reviewer boundary. |
+| `docs/reference/publishing-and-github.md` | Operator, contributor | Publishing/GitHub reference | Accurate | Keep | Canonical publishing behavior and approval tokens. |
+| `docs/reference/metrics.md` | Operator, contributor | Metrics reference | Partial | Keep | Should include ledger and command-session details. |
+| `docs/reference/schemas-and-contracts.md` | Contributor | Schema/contract reference | Partial | Keep | Should include generated schema/contract inventory. |
+| `docs/_audit/system_audit.md` | Future LLM, contributor | Code-derived audit | Accurate | Keep | Refreshed by this audit. |
+| `docs/_audit/docs_inventory.md` | Future LLM, contributor | Docs inventory | Accurate | Keep | Refreshed by this audit. |
+| `docs/_audit/traceability.md` | Future LLM, contributor | Feature-to-doc traceability | Accurate | Keep | Refreshed by this audit. |
+| `docs/_audit/root_orphans.md` | Future LLM, contributor | Root hygiene audit | Accurate | Keep | No root orphans. |
+| `docs/_audit/README_IA_PROPOSAL.md` | Contributor | IA proposal | Accurate | Keep | Planning artifact, not operator docs. |
+| `docs/_audit/docs_migration_plan.md` | Contributor | Migration plan | Accurate | Keep | Planning artifact, reflects completed taskcard move. |
+| `docs/_audit/style_guide.md` | Contributor | Docs style guide | Accurate | Keep | Planning artifact; can be promoted into contributing later. |
+| `docs/_archive/README.md` | Contributor | Archive index | Accurate | Keep | Archive boundary. |
+| `docs/_archive/discovery/*.md` | Historical reviewer | Historical discovery/preflight reports | Unknown | Archive | Not canonical. |
+| `docs/_archive/merged/*.md` | Historical reviewer | Docs merged into active docs | Duplicate | Archive | Historical only. |
+| `docs/_archive/plans/*.md` | Historical reviewer | Historical plans | Outdated | Archive | Active decisions live in `architecture/decisions.md`. |
+| `docs/_archive/publishing/*.md` | Historical reviewer | Historical publishing evidence/reviews | Unknown | Archive | Not canonical. |
+| `docs/_archive/root-orphans/*.md` | Contributor | Previously triaged root orphans | Accurate | Archive | Historical root-cleanup evidence. |
+| `reports/docs_refactor.md` | Contributor, reviewer | Docs refactor execution report | Accurate | Keep in reports | Useful evidence of last docs reorg. |
+| `reports/` | Reviewer/operator | Sprint/generated evidence | Unknown | Keep outside docs | Not canonical docs. |
+| `plans/` | Contributor | Planning notes outside docs IA | Unknown | Review later | Decide whether historical plans should move under archive. |
+| `pipeline/format-authority/README.md` | Contributor | Local README for format authority data | Partial | Keep and link | Local data README can remain near data; canonical docs should summarize. |
 
-## Proposed Canonical Targets
+## Root Orphan Entries
 
-Future reorganization should create or refresh a small canonical set:
+No root orphan files were found. There are no direct `docs/*.md` files except `docs/README.md`.
 
-- `docs/README.md`: index and doc map.
-- `docs/architecture/system.md`: component map and workflows, refreshed from `docs/_audit/system_audit.md`.
-- `docs/reference/cli.md`: CLI generated from `src/plugin_examples/__main__.py`.
-- `docs/reference/config.md`: schema-backed family/config/env reference.
-- `docs/reference/evidence.md`: workspace/evidence layout and file contracts.
-- `docs/reference/gates.md`: verdict and lifecycle matrix from gate code.
-- `docs/reference/validation.md`: dotnet/output/example-reviewer reference.
-- `docs/guides/monthly-maintenance.md`: merge root orphan plus publishing monthly runbook.
-- `docs/guides/live-publishing.md`: publish/merge/readme operator workflow.
-- `docs/_archive/`: timestamped sprint reports, preflights, and family result reports.
+## Top Documentation Problems
+
+1. LLM governance remains a code/docs tension: docs correctly state the policy, while router code still exposes non-governed fallbacks.
+2. Historical `_archive/` docs contain stale paths and old procedures; this is expected but can confuse search-driven readers.
+3. Some active architecture/reference pages are Partial and should be regenerated from code periodically.
+4. Metrics content is split between operations and reference; current split is acceptable but needs periodic consistency checks.
+5. Schema/contract reference should be kept machine-inventory driven to avoid drift.
+6. `plans/` remains outside the docs IA and needs ownership/retention decision.
+7. `reports/` is large and doc-like; it should stay evidence-only and not become canonical docs.
+8. The generated taskcard markdown is active docs but must not be manually edited.
+9. Root hygiene currently passes, but it should remain a required postflight check.
+10. The `check` CLI command remains a placeholder and should be documented as such until implemented or removed.

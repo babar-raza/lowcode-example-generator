@@ -1,9 +1,12 @@
-﻿# Configuration Reference
+# Configuration Reference
 
 Audience: Operator, Contributor
+
 Source of truth: `src/plugin_examples/family_config/`, `pipeline/schemas/family-config.schema.json`, `pipeline/configs/`
 
-## Family Configs
+Last verified from audit: 2026-05-25
+
+## Family Config Files
 
 Family configs live under:
 
@@ -11,44 +14,47 @@ Family configs live under:
 - `pipeline/configs/families/disabled/*.yml`
 - `pipeline/configs/families/_templates/family-template.yml`
 
-Configs are loaded by `load_family_config()` and validated against `pipeline/schemas/family-config.schema.json`.
+The runner loads `pipeline/configs/families/{family}.yml`. If it finds a disabled fallback path, the loader rejects it because configs under `disabled/` are not processable.
+
+Configs are schema-validated by `validate_family_config()` against `pipeline/schemas/family-config.schema.json`, then converted into dataclasses in `src/plugin_examples/family_config/models.py`.
 
 ## Top-Level Keys
 
 | Key | Required | Type/default | Notes |
 |---|---:|---|---|
-| `family` | yes | string | Family slug such as `cells`. |
+| `family` | yes | string | Family slug, for example `cells`. |
 | `display_name` | yes | string | Human-readable product name. |
-| `enabled` | yes | boolean | `false` configs are rejected by the loader. |
-| `status` | yes | `active`, `disabled`, `experimental`, `discovery_only` | `experimental` requires `--allow-experimental`; `discovery_only` cannot run generation. |
-| `nuget` | yes | object | Package resolution. |
-| `plugin_detection` | yes | object | Namespace patterns used for source-of-truth proof. |
-| `github` | yes | object | Official examples repo and publish target. |
+| `enabled` | yes | boolean | `false` configs are rejected before full schema validation. |
+| `status` | yes | string | `disabled` is rejected; `experimental` requires `--allow-experimental`; `discovery_only` cannot run generation. |
+| `nuget` | yes | object | Package resolution and dependency behavior. |
+| `plugin_detection` | yes | object | Namespace patterns for plugin source-of-truth detection. |
+| `github` | yes | object | Official examples repo and publish target repo. |
 | `fixtures` | yes | object | Fixture discovery sources. |
 | `existing_examples` | yes | object | Existing example mining sources. |
-| `generation` | yes | object | Scenario generation limits and controls. |
+| `generation` | yes | object | Scenario generation limits and constraints. |
 | `validation` | yes | object | Restore/build/run/output/reviewer requirements. |
 | `llm` | yes | object | Provider order. |
-| `template_hints` | no | object | Defaults for template generation. |
+| `template_hints` | no | object | Template generation defaults. |
+| `per_type_constraints` | no | object, default `{}` | Required/forbidden generation constraints by type. |
 
 ## `nuget`
 
 | Key | Required | Type/default | Notes |
 |---|---:|---|---|
 | `package_id` | yes | string | Official NuGet package ID. |
-| `version_policy` | yes | `latest-stable` or `pinned` | Controls version resolution. |
-| `pinned_version` | no | string or null | Used with `pinned`. |
-| `allow_prerelease` | no | false | Excludes prerelease versions by default. |
-| `target_framework_preference` | yes | non-empty string array | First matching `lib/` folder wins. |
-| `dependency_resolution.enabled` | no | true | Enables `.nuspec` dependency resolution. |
-| `dependency_resolution.max_depth` | no | 2 | Maximum transitive dependency depth. |
-| `dependency_resolution.extra_packages` | no | string array | Extra packages for reflection dependency resolution. |
+| `version_policy` | yes | string | Code supports `latest-stable` and pinned-version flows. |
+| `pinned_version` | no | string or null | Used when a pinned package version is required. |
+| `allow_prerelease` | no | boolean, default `false` | Excludes prerelease versions by default. |
+| `target_framework_preference` | no | list, default `["netstandard2.0"]` | Framework preference order for extraction. |
+| `dependency_resolution.enabled` | no | boolean, default `true` | Enables `.nuspec` dependency resolution. |
+| `dependency_resolution.max_depth` | no | integer, default `2` | Maximum transitive dependency depth. |
+| `dependency_resolution.extra_packages` | no | list, default `[]` | Extra packages for reflection dependency resolution. |
 
 ## `plugin_detection`
 
 | Key | Required | Type/default | Notes |
 |---|---:|---|---|
-| `namespace_patterns` | yes | non-empty array | Examples: `Aspose.Cells.LowCode`, `Aspose.Cells.LowCode.*`. |
+| `namespace_patterns` | yes | non-empty list | Pattern list used against the reflected API catalog. Examples include `Aspose.Cells.LowCode` and `Aspose.Cells.LowCode.*`. |
 
 ## `github`
 
@@ -57,59 +63,80 @@ Configs are loaded by `load_family_config()` and validated against `pipeline/sch
 | `official_examples_repo.owner` | yes | string | Source repo owner for fixture/example mining. |
 | `official_examples_repo.repo` | yes | string | Source repo name. |
 | `official_examples_repo.branch` | yes | string | Source branch. |
-| `published_plugin_examples_repo.owner` | yes | string | Publish target owner. |
-| `published_plugin_examples_repo.repo` | yes | string | Publish target repo. |
-| `published_plugin_examples_repo.branch` | yes | string | Publish target base branch. |
-| `central_repo_allowed` | no | false | Allows shared central target only with explicit approval. |
+| `published_plugin_examples_repo.owner` | yes | string | Target repo owner for publication. |
+| `published_plugin_examples_repo.repo` | yes | string | Target repo name for publication. |
+| `published_plugin_examples_repo.branch` | yes | string | Target base branch. |
+| `central_repo_allowed` | no | boolean, default `false` | Allows shared central target only when explicitly configured. |
 
 ## `fixtures` and `existing_examples`
 
-Both use a `sources` array. Source entries commonly include:
+Both sections use a `sources` array.
 
-| Key | Notes |
-|---|---|
-| `type` | Source type, such as `github`. |
-| `owner` | GitHub owner. |
-| `repo` | GitHub repo. |
-| `branch` | Git branch. |
-| `paths` | Paths searched for fixtures or examples. |
+| Key | Required | Notes |
+|---|---:|---|
+| `type` | yes | Source type, commonly `github`. |
+| `owner` | yes | GitHub owner. |
+| `repo` | yes | GitHub repo. |
+| `branch` | yes | Git branch. |
+| `paths` | no | Paths searched for fixtures or examples. Defaults to `[]` in the dataclass. |
 
 ## `generation`
 
 | Key | Required | Type/default | Notes |
 |---|---:|---|---|
-| `min_examples_per_family` | yes | integer >= 1 | Lower bound for planned examples. |
-| `max_examples_per_monthly_run` | yes | integer >= 1 | Upper bound per run. |
-| `allow_new_fixtures` | no | boolean | Allows new fixture use. |
-| `allow_generated_input_files` | no | true in model | Allows generated input fixtures. |
-| `allowed_types` | no | string array | Optional short-name allowlist. |
-| `preferred_methods_per_type` | no | object | Optional short-name to method map. |
+| `min_examples_per_family` | yes | integer | Lower bound for planned examples. |
+| `max_examples_per_monthly_run` | yes | integer | Upper bound per run. |
+| `allow_new_fixtures` | no | boolean, default `true` | Allows new fixture use. |
+| `allow_generated_input_files` | no | boolean, default `true` | Allows generated input fixtures. |
+| `allowed_types` | no | list, default `[]` | Optional short-name allowlist. |
+| `preferred_methods_per_type` | no | object, default `{}` | Optional short-name to method map. |
 
 ## `validation`
 
-| Key | Type/default | Notes |
-|---|---|---|
-| `require_restore` | boolean | Requires `dotnet restore`. |
-| `require_build` | boolean | Requires `dotnet build`. |
-| `require_run` | boolean | Requires `dotnet run`. |
-| `require_output_validation` | boolean | Requires semantic output validation. |
-| `require_example_reviewer` | boolean | Requires external reviewer when available/required. |
-| `runtime_runner` | `linux`, `windows`, or `auto`; default `auto` | `auto` selects platform based on assembly/runtime constraints. |
+| Key | Required | Type/default | Notes |
+|---|---:|---|---|
+| `require_restore` | no | boolean, default `true` | Requires `dotnet restore`. |
+| `require_build` | no | boolean, default `true` | Requires `dotnet build`. |
+| `require_run` | no | boolean, default `true` | Requires `dotnet run`. |
+| `require_output_validation` | no | boolean, default `true` | Requires output validation. |
+| `require_example_reviewer` | no | boolean, default `true` | Requires external reviewer when available/required. |
+| `runtime_runner` | no | string, default `auto` | Runtime runner selection. |
 
 ## `llm`
 
 | Key | Required | Type/default | Notes |
 |---|---:|---|---|
-| `provider_order` | yes | non-empty array | Examples: `llm_professionalize`, `ollama`. |
+| `provider_order` | yes | non-empty list | Provider order used by the router preflight. Governance requires the professionalize endpoint; see [Environment Variables](environment-variables.md). |
 
-## Other Config Files
+## `template_hints`
 
-| File | Purpose |
+| Key | Required | Type/default | Notes |
+|---|---:|---|---|
+| `default_input_extension` | no | `.xlsx` | Default generated input extension. |
+| `default_input_filename` | no | `input.xlsx` | Default generated input filename. |
+| `array_input_filenames` | no | `["input1.xlsx", "input2.xlsx"]` | Default multiple-input filenames. |
+| `input_creation_lines` | no | `[]` | C# lines used by template generation to create default input. |
+| `merger_input_creation_lines` | no | `[]` | C# lines used to create merger inputs. |
+| `additional_usings` | no | `[]` | Extra C# `using` statements for generated examples. |
+| `default_output_extension` | no | `.out` | Default output extension. |
+| `default_fixture_extension` | no | `.xlsx` | Default fixture extension. |
+
+## Other Config and Data Inputs
+
+| Path | Purpose |
 |---|---|
-| `pipeline/configs/llm-routing.yml` | Provider definitions, preflight prompt, env var names, retry/timeout values. |
-| `pipeline/configs/metrics.yml` | Metrics defaults, mapping, allowed statuses/job types, env vars, ledger path. |
+| `pipeline/configs/denominators/*.json` | Family denominator models, source versions, and catalog hash checks. |
+| `pipeline/contracts/**/*.json` | Scenario contracts consumed by planner/generator. |
+| `pipeline/format-authority/manifest.json` | Format authority manifest. |
+| `pipeline/format-authority/contracts/*.json` | Format authority contracts by family. |
+| `pipeline/configs/metrics.yml` | Metrics defaults, environment variable names, and post ledger path. |
+| `pipeline/configs/llm-routing.yml` | LLM routing config file. Current router code also contains defaults and policy checks. |
 | `pipeline/configs/plugin-namespace-patterns.yml` | Global namespace pattern config. |
-| `pipeline/configs/verifier.yml` | Verifier config. Runtime bridge also uses `EXAMPLE_REVIEWER_PATH`. |
+| `pipeline/configs/verifier.yml` | Verifier configuration. The runtime bridge also uses `EXAMPLE_REVIEWER_PATH`. |
 | `pipeline/configs/github-publishing.yml` | Publishing config. Family configs still carry target repos used by publisher. |
-| `pipeline/configs/denominators/*.json` | Family denominator models. |
-| `pipeline/contracts/**/*.json` | Scenario contracts. |
+
+## Related Guides
+
+- [Add or Update a Family](../guides/add-or-update-family.md)
+- [Run a Family Pipeline](../guides/run-family-pipeline.md)
+- [Schemas and Contracts](schemas-and-contracts.md)

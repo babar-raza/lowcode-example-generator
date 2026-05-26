@@ -7,7 +7,7 @@ import pytest
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _RUNBOOK_PATH = _REPO_ROOT / "workspace" / "verification" / "latest" / "monthly-maintenance-runbook.json"
-_CI_DOCS_PATH = _REPO_ROOT / "docs" / "ci" / "environment-variables.md"
+_CI_DOCS_PATH = _REPO_ROOT / "docs" / "reference" / "environment-variables.md"
 
 
 class TestMonthlyRunbook:
@@ -66,10 +66,10 @@ class TestMonthlyRunbook:
 
 
 class TestCIEnvDocs:
-    """Validate docs/ci/environment-variables.md exists and documents required vars."""
+    """Validate canonical environment variable docs exist and document required vars."""
 
     def test_ci_docs_file_exists(self):
-        """docs/ci/environment-variables.md must exist."""
+        """docs/reference/environment-variables.md must exist."""
         assert _CI_DOCS_PATH.exists(), f"CI env docs not found: {_CI_DOCS_PATH}"
 
     def test_ci_docs_include_required_env_vars(self):

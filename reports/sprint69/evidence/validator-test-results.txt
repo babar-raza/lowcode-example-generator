@@ -1,5 +1,0 @@
-tests/unit/test_pipeline_evidence_gate.py::TestReleaseStatusValidateBundleFlag::test_returns_0_on_valid_bundle PASSED [ 97%]
-tests/unit/test_pipeline_evidence_gate.py::TestReleaseStatusValidateBundleFlag::test_returns_1_on_invalid_bundle PASSED [ 98%]
-tests/unit/test_pipeline_evidence_gate.py::TestReleaseStatusValidateBundleFlag::test_validate_bundle_not_called_without_flag PASSED [100%]
-
-============================= 89 passed in 57.31s =============================

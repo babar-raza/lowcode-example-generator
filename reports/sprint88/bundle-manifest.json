@@ -1,9 +1,0 @@
-{
-  "sprint_id": "sprint88",
-  "date": "2026-05-25",
-  "source_sha": "c392885",
-  "head_sha": "c39288594489bd69483963411fd987c9354019e6",
-  "bundle_type": "FINISH_LINE_ADVANCEMENT",
-  "file_count": 40,
-  "notes": "Sprint 88 FINISH_LINE_ADVANCEMENT bundle. 6 new EV rules, 18 new tests, 7 S87 defects repaired, next-family discovery."
-}

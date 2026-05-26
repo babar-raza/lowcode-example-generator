@@ -2,66 +2,62 @@
 
 Audience: Operator
 
-Live publishing creates GitHub pull requests. It does not push directly to `main`.
+Purpose: create GitHub pull requests for verified generated examples without pushing directly to `main`.
+
+Canonical references: [CLI](../reference/cli.md), [Environment Variables](../reference/environment-variables.md), [Publishing and GitHub](../reference/publishing-and-github.md), [File and Evidence Contracts](../reference/file-contracts.md)
 
 ## Preconditions
 
-- Family run has a publishable gate verdict.
-- Dry-run package exists under `workspace/pr-dry-run/`.
+- The family has a publishable gate verdict.
+- A dry-run package exists under `workspace/pr-dry-run/`.
 - Repo access and publish permission probes are ready.
-- `GH_TOKEN` is set as a Windows system environment variable (classic PAT, `repo` scope).
-- Human supplies `APPROVE_LIVE_PR`.
+- `GH_TOKEN` exists as a Windows user or machine environment variable and stores a classic PAT with `repo` scope.
+- A human operator is ready to provide `APPROVE_LIVE_PR`.
 
-## Token Setup (once per session)
+## Map Token
 
 ```powershell
-$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
+$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "Machine")
+if (-not $env:GITHUB_TOKEN) {
+    $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
+}
 $env:PYTHONPATH = "src"
 ```
 
 ## Probe First
 
 ```powershell
-.venv\Scripts\python.exe -m plugin_examples validate-publish-targets --families <family> --promote-latest
-.venv\Scripts\python.exe -m plugin_examples resolve-repo-access --families <family> --promote-latest
-.venv\Scripts\python.exe -m plugin_examples probe-publish-permissions --families <family> --promote-latest
+python -m plugin_examples validate-publish-targets --families <family> --promote-latest
+python -m plugin_examples resolve-repo-access --families <family> --promote-latest
+python -m plugin_examples probe-publish-permissions --families <family> --promote-latest
 ```
 
-## Simulate PR
+## Simulate PR Creation
 
 ```powershell
-.venv\Scripts\python.exe -m plugin_examples publish-pr --family <family> --dry-run --promote-latest
+python -m plugin_examples publish-pr --family <family> --dry-run --promote-latest
 ```
+
+Stop if the simulation reports blocked reasons.
 
 ## Create Live PR
 
 ```powershell
-$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
 $env:PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL = "APPROVE_LIVE_PR"
-$env:PYTHONPATH = "src"
 
-.venv\Scripts\python.exe -m plugin_examples publish-pr `
+python -m plugin_examples publish-pr `
     --family <family> `
     --publish `
     --approval-token APPROVE_LIVE_PR `
     --promote-latest
 ```
 
-## Merge
+## Verify Evidence
 
-Merge requires a separate approval token:
+Check the relevant publishing evidence under `workspace/verification/latest/` and `workspace/verification/latest/families/{family}/`.
 
-```powershell
-$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
-$env:PLUGIN_EXAMPLES_MERGE_PR_APPROVAL = "APPROVE_MERGE_PR"
-$env:PYTHONPATH = "src"
+Expected evidence includes PR result data and updated release status where applicable. See [File and Evidence Contracts](../reference/file-contracts.md).
 
-.venv\Scripts\python.exe -m plugin_examples merge-pr `
-    --family <family> `
-    --pr-number <number> `
-    --merge `
-    --approval-token APPROVE_MERGE_PR `
-    --promote-latest
-```
+## Merge Is Separate
 
-See [Publishing and GitHub](../reference/publishing-and-github.md) and [Agent-Operated Live PR Runbook](../publishing/agent-operated-live-pr-runbook.md).
+Merge requires `APPROVE_MERGE_PR`, not `APPROVE_LIVE_PR`. Use [Post-Merge Verification](post-merge-verification.md) after merge.

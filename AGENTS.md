@@ -91,4 +91,4 @@ Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
 
 ## Discovery
 
-Current-state findings: `docs/discovery/current-state.md`
+Current-state findings: `docs/_archive/discovery/current-state.md`

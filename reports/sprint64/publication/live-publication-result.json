@@ -1,9 +1,0 @@
-{
-  "sprint": 64,
-  "generated_at": "2026-05-22",
-  "status": "BLOCKED_BY_APPROVAL",
-  "reason": "Sprint 64 scope is evidence repair only. No new publication requested. All 42 examples were published in prior sprints (54-63).",
-  "families_published_this_sprint": 0,
-  "total_families_published_lifetime": 6,
-  "no_remote_mutation": true
-}

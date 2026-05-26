@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync open-taskcard-closure-matrix.json to docs/discovery/open-taskcard-closure-matrix.md.
+"""Sync open-taskcard-closure-matrix.json to docs/development/open-taskcard-closure-matrix.md.
 
 Reads the authoritative JSON matrix and regenerates the markdown table.
 Run this after any taskcard update to keep JSON and MD in sync.
@@ -19,7 +19,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 MATRIX_JSON = REPO_ROOT / "workspace" / "verification" / "latest" / "open-taskcard-closure-matrix.json"
-MATRIX_MD = REPO_ROOT / "docs" / "discovery" / "open-taskcard-closure-matrix.md"
+MATRIX_MD = REPO_ROOT / "docs" / "development" / "open-taskcard-closure-matrix.md"
 
 
 def _load_matrix() -> dict:

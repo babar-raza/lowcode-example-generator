@@ -1,0 +1,48 @@
+# Healing Sprint 1C — Commands Log
+
+## Bootstrap
+created: reports/healing-sprint-1c/00-healing-sprint-1b-authority-audit.md  exit=0
+created: reports/healing-sprint-1c/todo.md  exit=0
+created: reports/healing-sprint-1c/commands.log  exit=0
+
+## Lane A — Patch final-consistency-check.json
+created: reports/healing-sprint-1c/review/final-consistency-check.json  exit=0
+
+## Lane B — Patch sha-authority.md
+created: reports/healing-sprint-1c/final-proof/sha-authority.md  exit=0
+
+## Lane C — Patch taskcard-state-audit-final.md
+created: reports/healing-sprint-1c/tracking/taskcard-state-audit-final.md  exit=0
+
+## Lane D — Patch IV report
+created: reports/healing-sprint-1c/iv/independent-verification-report.md  exit=0
+
+## Lane E — Patch self-repair-actions.json
+created: reports/healing-sprint-1c/review/self-repair-actions.json  exit=0
+
+## Lane F — Patch state-sync-final.md
+created: reports/healing-sprint-1c/state-sync/state-sync-final.md  exit=0
+
+## Lane G — Evidence
+created: reports/healing-sprint-1c/evidence/evidence-contract.json  exit=0
+created: reports/healing-sprint-1c/evidence/prohibited-wording-scan.json  exit=0
+created: reports/healing-sprint-1c/evidence/healing-validation-result.json  exit=0
+created: reports/healing-sprint-1c/evidence/evidence-contract-computed.json  exit=0
+
+## Final verdict + state
+created: reports/healing-sprint-1c/final-verdict.md  exit=0
+created: reports/healing-sprint-1c/sprint-state.json  exit=0
+
+## Git commit sequence
+git add (specific paths)  exit=0
+git commit -m "feat(healing-sprint-1c): authority patch -- ECC 25/25, no PENDING language, 6 files patched"  [SHA=TBD_STEP1]
+created: reports/healing-sprint-1c/git/final-clean-proof.txt  exit=0
+git add reports/healing-sprint-1c/git/final-clean-proof.txt  exit=0
+git commit -m "feat(healing-sprint-1c): finalize final-clean-proof.txt -- clean state confirmed"  [SHA=TBD_STEP2]
+git add reports/healing-sprint-1c/git/final-clean-proof.txt  exit=0
+git commit -m "feat(healing-sprint-1c): update final-clean-proof.txt with correct HEAD SHA"  [SHA=TBD_STEP3]
+
+## ZIP bundle
+C:/Python313/python.exe scripts/build_healing_sprint_1c_bundle.py  exit=0
+created: reports/healing-sprint-1c/bundles/healing-sprint-1c-evidence-20260527.zip
+created: reports/healing-sprint-1c/bundle-manifest.json  exit=0

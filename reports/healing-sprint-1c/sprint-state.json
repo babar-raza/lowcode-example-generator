@@ -1,0 +1,35 @@
+{
+  "schema_version": "healing-sprint-1c-v1",
+  "sprint_id": "healing-sprint-1c",
+  "sprint_type": "machinery_healing_authority_patch",
+  "date": "2026-05-27",
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "status": "ACCEPTED",
+  "healing_sprint_2_recommended": false,
+  "sprint_1b_classification": "PARTIAL_SUPERSEDED_BY_1C",
+  "sprint_1_classification": "PARTIAL_SUPERSEDED_BY_1C",
+  "patches_applied": 6,
+  "patches": [
+    {"id": "PATCH-A", "file": "reports/healing-sprint-1c/review/final-consistency-check.json",        "defect": "PENDING_ECC / FINAL_CONSISTENCY_PASS_PENDING_ECC",         "status": "COMPLETE"},
+    {"id": "PATCH-B", "file": "reports/healing-sprint-1c/final-proof/sha-authority.md",               "defect": "[captured in step 3] | PENDING / head_sha will be set",    "status": "COMPLETE"},
+    {"id": "PATCH-C", "file": "reports/healing-sprint-1c/tracking/taskcard-state-audit-final.md",     "defect": "IN PROGRESS and PENDING task statuses",                    "status": "COMPLETE"},
+    {"id": "PATCH-D", "file": "reports/healing-sprint-1c/iv/independent-verification-report.md",     "defect": "proof in-progress / ECC deferred / will confirm",           "status": "COMPLETE"},
+    {"id": "PATCH-E", "file": "reports/healing-sprint-1c/review/self-repair-actions.json",            "defect": "IN_PROGRESS (post-commit) / all_will_complete: true",       "status": "COMPLETE"},
+    {"id": "PATCH-F", "file": "reports/healing-sprint-1c/state-sync/state-sync-final.md",             "defect": "Sprint 1B status = IN PROGRESS / future wording",           "status": "COMPLETE"}
+  ],
+  "inherited_sprint_1b": {
+    "ecc": {"total_categories": 25, "present": 25, "blocking_failures": 0, "closure_valid": true},
+    "validation": {"canonical_overall_valid": true, "applicable_rules_failed": 0},
+    "replay": {"passed": 7, "failed": 0, "skipped": 2},
+    "gate_simulation": {"prs_created": 0, "merges_executed": 0, "remote_mutations": 0},
+    "dry_run": {"pr_candidates": 41, "truth_records": 42, "families": 6},
+    "bundle": {"file_count": 43, "source_sha": "bb69553d0bf0b48d6c5fe3a5711e75046d814081", "head_sha": "ccd2c174b60900c5d276ce7c686056a971f67361"}
+  },
+  "sprint_1c_ecc": {"total_categories": 17, "present": 17, "blocking_failures": 0, "closure_valid": true},
+  "prohibited_wording_scan": {"active_status_violations": 0, "verdict": "CLEAN"},
+  "publication_gate": {
+    "live_publish": "NOT_SET",
+    "merge_pr": "NOT_SET",
+    "status": "APPROVAL_BLOCKED"
+  }
+}

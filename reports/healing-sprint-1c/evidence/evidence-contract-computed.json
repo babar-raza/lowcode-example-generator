@@ -1,0 +1,32 @@
+{
+  "schema_version": "healing-sprint-1c-v1",
+  "sprint_id": "healing-sprint-1c",
+  "computed_at": "2026-05-27T00:00:00Z",
+  "contract_file": "reports/healing-sprint-1c/evidence/evidence-contract.json",
+  "total_categories": 17,
+  "present": 17,
+  "missing": 0,
+  "zero_bytes": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {"id": "CAT-01", "name": "authority_audit",            "file": "reports/healing-sprint-1c/00-healing-sprint-1b-authority-audit.md", "status": "PRESENT"},
+    {"id": "CAT-02", "name": "todo",                       "file": "reports/healing-sprint-1c/todo.md", "status": "PRESENT"},
+    {"id": "CAT-03", "name": "commands_log",               "file": "reports/healing-sprint-1c/commands.log", "status": "PRESENT"},
+    {"id": "CAT-04", "name": "patch_consistency_check",    "file": "reports/healing-sprint-1c/review/final-consistency-check.json", "status": "PRESENT"},
+    {"id": "CAT-05", "name": "patch_sha_authority",        "file": "reports/healing-sprint-1c/final-proof/sha-authority.md", "status": "PRESENT"},
+    {"id": "CAT-06", "name": "patch_taskcard",             "file": "reports/healing-sprint-1c/tracking/taskcard-state-audit-final.md", "status": "PRESENT"},
+    {"id": "CAT-07", "name": "patch_iv_report",            "file": "reports/healing-sprint-1c/iv/independent-verification-report.md", "status": "PRESENT"},
+    {"id": "CAT-08", "name": "patch_self_repair",          "file": "reports/healing-sprint-1c/review/self-repair-actions.json", "status": "PRESENT"},
+    {"id": "CAT-09", "name": "patch_state_sync",           "file": "reports/healing-sprint-1c/state-sync/state-sync-final.md", "status": "PRESENT"},
+    {"id": "CAT-10", "name": "evidence_contract",          "file": "reports/healing-sprint-1c/evidence/evidence-contract.json", "status": "PRESENT"},
+    {"id": "CAT-11", "name": "prohibited_wording_scan",    "file": "reports/healing-sprint-1c/evidence/prohibited-wording-scan.json", "status": "PRESENT"},
+    {"id": "CAT-12", "name": "healing_validation_result",  "file": "reports/healing-sprint-1c/evidence/healing-validation-result.json", "status": "PRESENT"},
+    {"id": "CAT-13", "name": "evidence_contract_computed", "file": "reports/healing-sprint-1c/evidence/evidence-contract-computed.json", "status": "PRESENT"},
+    {"id": "CAT-14", "name": "final_verdict",              "file": "reports/healing-sprint-1c/final-verdict.md", "status": "PRESENT"},
+    {"id": "CAT-15", "name": "sprint_state",               "file": "reports/healing-sprint-1c/sprint-state.json", "status": "PRESENT"},
+    {"id": "CAT-16", "name": "git_proof",                  "file": "reports/healing-sprint-1c/git/final-clean-proof.txt", "status": "PRESENT"},
+    {"id": "CAT-17", "name": "bundle_manifest",            "file": "reports/healing-sprint-1c/bundle-manifest.json", "status": "PRESENT"}
+  ],
+  "note": "Sprint 1B ECC (25/25, closure_valid=true) is inherited and preserved. This Sprint 1C ECC confirms all 17 Sprint 1C required files are present."
+}

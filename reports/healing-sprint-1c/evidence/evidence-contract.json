@@ -1,0 +1,25 @@
+{
+  "schema_version": "healing-sprint-1c-v1",
+  "sprint_id": "healing-sprint-1c",
+  "date": "2026-05-27",
+  "categories": [
+    {"id": "CAT-01", "name": "authority_audit",            "file": "reports/healing-sprint-1c/00-healing-sprint-1b-authority-audit.md"},
+    {"id": "CAT-02", "name": "todo",                       "file": "reports/healing-sprint-1c/todo.md"},
+    {"id": "CAT-03", "name": "commands_log",               "file": "reports/healing-sprint-1c/commands.log"},
+    {"id": "CAT-04", "name": "patch_consistency_check",    "file": "reports/healing-sprint-1c/review/final-consistency-check.json"},
+    {"id": "CAT-05", "name": "patch_sha_authority",        "file": "reports/healing-sprint-1c/final-proof/sha-authority.md"},
+    {"id": "CAT-06", "name": "patch_taskcard",             "file": "reports/healing-sprint-1c/tracking/taskcard-state-audit-final.md"},
+    {"id": "CAT-07", "name": "patch_iv_report",            "file": "reports/healing-sprint-1c/iv/independent-verification-report.md"},
+    {"id": "CAT-08", "name": "patch_self_repair",          "file": "reports/healing-sprint-1c/review/self-repair-actions.json"},
+    {"id": "CAT-09", "name": "patch_state_sync",           "file": "reports/healing-sprint-1c/state-sync/state-sync-final.md"},
+    {"id": "CAT-10", "name": "evidence_contract",          "file": "reports/healing-sprint-1c/evidence/evidence-contract.json"},
+    {"id": "CAT-11", "name": "prohibited_wording_scan",    "file": "reports/healing-sprint-1c/evidence/prohibited-wording-scan.json"},
+    {"id": "CAT-12", "name": "healing_validation_result",  "file": "reports/healing-sprint-1c/evidence/healing-validation-result.json"},
+    {"id": "CAT-13", "name": "evidence_contract_computed", "file": "reports/healing-sprint-1c/evidence/evidence-contract-computed.json"},
+    {"id": "CAT-14", "name": "final_verdict",              "file": "reports/healing-sprint-1c/final-verdict.md"},
+    {"id": "CAT-15", "name": "sprint_state",               "file": "reports/healing-sprint-1c/sprint-state.json"},
+    {"id": "CAT-16", "name": "git_proof",                  "file": "reports/healing-sprint-1c/git/final-clean-proof.txt"},
+    {"id": "CAT-17", "name": "bundle_manifest",            "file": "reports/healing-sprint-1c/bundle-manifest.json"}
+  ],
+  "total_categories": 17
+}

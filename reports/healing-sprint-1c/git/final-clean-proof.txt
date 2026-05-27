@@ -1,0 +1,22 @@
+# Healing Sprint 1C -- Final Clean Proof
+# NOTE: This file is updated by git commit steps 2 and 3.
+# Step 2 captures the git state after step-1 evidence commit.
+# Step 3 records the step-2 SHA here.
+
+## git status --short (post step-1 commit)
+[captured after step-1 evidence commit]
+
+## git status (post step-1 commit)
+[captured after step-1 evidence commit]
+
+## git diff --stat
+[no uncommitted changes after step-1 commit]
+
+## git log --oneline -10
+[captured after step-1 evidence commit]
+
+## Source SHA (step-1 evidence commit)
+[source_sha = captured after step-1 commit]
+
+## Head SHA (step-2 finalize-proof commit)
+[head_sha = captured after step-2 commit]

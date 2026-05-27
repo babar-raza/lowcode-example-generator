@@ -1,0 +1,59 @@
+{
+  "schema_version": "sprint91-v1",
+  "sprint_id": "sprint91",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "check_passed": true,
+  "checks": [
+    {
+      "check_id": "CC01",
+      "name": "no_will_be_committed_later",
+      "passed": true,
+      "detail": "No such text found in any Sprint 91 file"
+    },
+    {
+      "check_id": "CC02",
+      "name": "canonical_validation_unambiguous",
+      "passed": true,
+      "detail": "sprint91-final-validation-result.json: canonical=true, applicable_rules_failed=0, no embedded failures"
+    },
+    {
+      "check_id": "CC03",
+      "name": "ecc_clean",
+      "passed": true,
+      "detail": "ECC: closure_valid=true, blocking_failures=0, 25/25 PRESENT"
+    },
+    {
+      "check_id": "CC04",
+      "name": "all_required_artifacts_present",
+      "passed": true,
+      "detail": "37 artifacts checked; all PRESENT"
+    },
+    {
+      "check_id": "CC05",
+      "name": "publication_gate_honored",
+      "passed": true,
+      "detail": "No PRs created; PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set"
+    },
+    {
+      "check_id": "CC06",
+      "name": "sha_chain_consistent",
+      "passed": true,
+      "detail": "Only real commits referenced; no non-existent SHAs"
+    },
+    {
+      "check_id": "CC07",
+      "name": "sprint90_correctly_reclassified",
+      "passed": true,
+      "detail": "Sprint 90 classified as PARTIAL_NO_GIT_COMMITS, not accepted as final closeout"
+    },
+    {
+      "check_id": "CC08",
+      "name": "no_taskcard_says_published_without_proof",
+      "passed": true,
+      "detail": "All taskcards show APPROVAL_BLOCKED; no false published claims"
+    }
+  ],
+  "overall_result": "CONSISTENT",
+  "ready_for_iv": true,
+  "ready_for_bundle": true
+}

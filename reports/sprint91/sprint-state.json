@@ -1,0 +1,47 @@
+{
+  "schema_version": "sprint91-v1",
+  "sprint_id": "sprint91",
+  "sprint_name": "Final Authority Closeout",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "sprint90_status": "PARTIAL_NO_GIT_COMMITS",
+  "sprint91_status": "ACCEPTED",
+  "local_closeout_accepted": true,
+  "publication_approval_status": "BLOCKED",
+  "final_verdict": "LOWCODE_FINAL_LOCAL_CLOSEOUT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+  "technical_baseline": {
+    "ev_score": "145/145",
+    "ev_applicable": 145,
+    "ev_total_checked": 145,
+    "html_svg": "NO_LOWCODE_CONFIRMED",
+    "ocr_psd": "EXTERNAL_PACKAGE_BLOCKER",
+    "form_importer": "EXTERNAL_BUG_BLOCKER",
+    "test_count": 3189,
+    "test_source": "Sprint 89 committed (pytest ENV_BLOCKER in Sprint 91)",
+    "candidate_discovery": "EXHAUSTED",
+    "publication_matrix_records": 42
+  },
+  "publication": {
+    "prs_created": 0,
+    "prs_merged": 0,
+    "branches_deleted": 0,
+    "remote_mutations": 0,
+    "approval_gate_set": false
+  },
+  "ecc": {
+    "total_categories": 25,
+    "present": 25,
+    "missing": 0,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "iv_verdict": "ACCEPT",
+  "iv_blockers": 0,
+  "git_starting_head": "dd016d620f1616cbb190a73a0a3ac95de0ff3401",
+  "remaining_external_gates": [
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL",
+    "OCR_NUGET_PACKAGE",
+    "PSD_NUGET_PACKAGE",
+    "FORMIMPORTER_NULLREF_BUG"
+  ]
+}

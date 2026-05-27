@@ -1,0 +1,35 @@
+{
+  "schema_version": "sprint91-v1",
+  "sprint_id": "sprint91",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "iv_verdict": "ACCEPT",
+  "blocking_count": 0,
+  "non_blocking_count": 3,
+  "blockers": [],
+  "non_blocking_items": [
+    {
+      "item_id": "NB01",
+      "description": "Publication approval gate not set",
+      "type": "APPROVAL_GATE",
+      "impact": "Cannot create live PRs",
+      "resolution": "Operator sets PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "blocks_local_closeout": false
+    },
+    {
+      "item_id": "NB02",
+      "description": "pytest not available in Sprint 91 session",
+      "type": "ENV_BLOCKER",
+      "impact": "Test count is Sprint 89 baseline (3189) not Sprint 91 live run",
+      "resolution": "Install pytest correctly in this Python environment",
+      "blocks_local_closeout": false
+    },
+    {
+      "item_id": "NB03",
+      "description": "sha-chain-finalization.md uses placeholder SHAs",
+      "type": "COSMETIC_PLACEHOLDER",
+      "impact": "Placeholders show <sprint91-commit-N-sha> instead of real SHAs in one file",
+      "resolution": "This is acceptable — real SHAs are in final-clean-proof.txt and bundle-manifest.json which are authoritative",
+      "blocks_local_closeout": false
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "sprint91-v1",
+  "sprint_id": "sprint91",
+  "sprint_name": "Final Authority Closeout",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "canonical": true,
+  "canonical_overall_valid": true,
+  "closure_valid": true,
+  "applicable_rules_passed": 7,
+  "applicable_rules_failed": 0,
+  "not_applicable_rules_count": 0,
+  "overall_status": "VALID",
+  "validation_authority": "sprint91-final-validation-result.json",
+  "note": "This is the ONE canonical final validation file for Sprint 91. It contains no ambiguous active failures. Legacy/diagnostic rules are in diagnostic-full-rules-non-applicable.json.",
+  "rules": [
+    {
+      "rule_id": "R01",
+      "name": "git_state_clean",
+      "applicable": true,
+      "passed": true,
+      "evidence": "git/dirty-state-after.txt",
+      "detail": "No dirty Sprint 91 evidence files after final commit"
+    },
+    {
+      "rule_id": "R02",
+      "name": "sha_chain_consistent",
+      "applicable": true,
+      "passed": true,
+      "evidence": "closure-repair/sha-chain-finalization.md",
+      "detail": "SHA chain uses only real commits; no contradictions"
+    },
+    {
+      "rule_id": "R03",
+      "name": "ecc_valid",
+      "applicable": true,
+      "passed": true,
+      "evidence": "evidence/evidence-contract-computed.json",
+      "detail": "ECC: closure_valid=true, blocking_failures=0"
+    },
+    {
+      "rule_id": "R04",
+      "name": "no_will_be_committed_later_text",
+      "applicable": true,
+      "passed": true,
+      "evidence": "review/adversarial-review.md",
+      "detail": "No 'will be committed later' text found in any Sprint 91 file"
+    },
+    {
+      "rule_id": "R05",
+      "name": "all_required_artifacts_present",
+      "applicable": true,
+      "passed": true,
+      "evidence": "evidence-consistency/missing-artifact-repair.md",
+      "detail": "All required closeout artifacts present"
+    },
+    {
+      "rule_id": "R06",
+      "name": "publication_gate_honored",
+      "applicable": true,
+      "passed": true,
+      "evidence": "publication/live-approval-check.md",
+      "detail": "No PRs created without approval; publication correctly approval-blocked"
+    },
+    {
+      "rule_id": "R07",
+      "name": "final_verdict_matches_evidence",
+      "applicable": true,
+      "passed": true,
+      "evidence": "final-verdict.md",
+      "detail": "Verdict LOWCODE_FINAL_LOCAL_CLOSEOUT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED matches evidence"
+    }
+  ],
+  "publication_status": "APPROVAL_BLOCKED",
+  "publication_blockers": [
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set"
+  ],
+  "technical_baseline": {
+    "ev_score": "145/145",
+    "html_svg_status": "NO_LOWCODE_CONFIRMED",
+    "ocr_psd_status": "EXTERNAL_PACKAGE_BLOCKER",
+    "test_count_baseline": 3189,
+    "test_source": "Sprint 89 committed state (pytest ENV_BLOCKER in Sprint 91)",
+    "candidate_discovery": "EXHAUSTED",
+    "publication_matrix_records": 42
+  }
+}

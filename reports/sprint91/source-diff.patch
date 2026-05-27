@@ -1,0 +1,256 @@
+diff --git a/README.md b/README.md
+index 6643f4e..e60a8f1 100644
+--- a/README.md
++++ b/README.md
+@@ -1,9 +1,30 @@
+-﻿# lowcode-example-generator
++# lowcode-example-generator
+ 
+ Pipeline repository for generating, validating, and publishing SDK-style C# examples for Aspose .NET plugin APIs, including LowCode and Plugins namespaces.
+ 
+ Published examples live in separate family-specific example repositories. This repository contains the pipeline, configuration, schemas, tests, prompts, and operational tooling.
+ 
++## Project Status
++
++The pipeline is fully implemented and operational. Six product families have live published examples in their target repositories on GitHub. Additional family configs exist in `pipeline/configs/families/` (barcode, cad, drawing, epub, finance, font, gis, html, imaging, note, ocr, omr, page, psd, svg, tasks, tex, threed, zip) but have not yet been run to evidence.
++
++## Published Examples
++
++Examples are published to separate family-specific repositories. The table below reflects the current state of each target repository, verified directly from GitHub.
++
++| Family | NuGet Package | Published Examples | Example Types | Target Repository |
++|---|---|---|---|---|
++| Cells | `Aspose.Cells` | 9 | html-converter, image-converter, json-converter, pdf-converter, spreadsheet-converter, spreadsheet-locker, spreadsheet-merger, spreadsheet-splitter, text-converter | [Aspose.Cells.LowCode-for-.NET-Examples](https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples) |
++| PDF | `Aspose.PDF` | 19 | doc-converter, form-editor, form-exporter, form-flattener, html, image-extractor, jpeg, merger, optimizer, pdfa-converter, png, security, signature, splitter, table-generator, text-extractor, tiff, toc-generator, xls-converter | [Aspose.PDF.LowCode-for-.NET-Examples](https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples) |
++| Words | `Aspose.Words` | 8 | comparer, converter, mail-merger, merger, replacer, report-builder, splitter, watermarker | [Aspose.Words.LowCode-for-.NET-Examples](https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples) |
++| Slides | `Aspose.Slides.NET` | 3 | compress, convert, merger | [Aspose.Slides.LowCode-for-.NET-Examples](https://github.com/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples) |
++| Email | `Aspose.Email` | 1 | converter | [Aspose.Email.LowCode-for-.NET-Examples](https://github.com/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples) |
++| Diagram | `Aspose.Diagram` | 2 | diagram-diagram-converter, diagram-pdf-converter | [Aspose.Diagram.LowCode-for-.NET-Examples](https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples) |
++
++**Total published: 42 examples across 6 families.**
++
++Each example is a self-contained C# console project under `examples/{family}/lowcode/{type}/` in the target repository. All examples passed dotnet restore, build, run, and output validation gates before publication.
++
+ ## Documentation
+ 
+ Start with the docs landing page:
+@@ -13,21 +34,98 @@ Start with the docs landing page:
+ - [Operator Quickstart](docs/getting-started/operator-quickstart.md)
+ - [Contributor Quickstart](docs/getting-started/contributor-quickstart.md)
+ 
++## External Dependencies
++
++### example-reviewer
++
++The pipeline integrates with [example-reviewer](https://github.com/babar-raza/example-reviewer) as an optional post-generation gate. The reviewer validates generated C# examples before they are allowed to proceed to PR publishing.
++
++Integration is via subprocess (`python -m src.cli.main`). The bridge code resolves the reviewer location in priority order:
++
++1. `EXAMPLE_REVIEWER_PATH` environment variable.
++2. Sibling directory convention — a checkout named `example-reviewer` in the parent of this repo.
++
++The reviewer is optional unless `--require-reviewer` is passed or the family config sets `validation.require_example_reviewer: true`. If the reviewer is unavailable and not required, the pipeline marks the reviewer stage as degraded rather than failing the run.
++
++To wire it in:
++
++```powershell
++# Clone the reviewer alongside this repo
++git clone https://github.com/babar-raza/example-reviewer ../example-reviewer
++cd ../example-reviewer && pip install -e .
++
++# Or point to an existing checkout
++$env:EXAMPLE_REVIEWER_PATH = "C:\path\to\example-reviewer"
++```
++
++See `src/plugin_examples/verifier_bridge/` and [Validation and Reviewer](docs/reference/validation-and-reviewer.md).
++
++---
++
++**Note:** The repository code references `https://github.com/babar-raza/example-reviewer`. No other reviewer URL appears in the codebase. If you are using a different host for the reviewer, set `EXAMPLE_REVIEWER_PATH` to point to your local checkout.
++
++## Setup
++
++**Prerequisites:**
++
++- Python 3.12 or newer.
++- .NET SDK 8.0 (for DllReflector and generated project validation).
++
++**Install:**
++
++```powershell
++python -m pip install --upgrade pip
++pip install -e ".[dev]"
++```
++
++**GitHub token** (live operations only):
++
++```powershell
++# Store once (Windows system env)
++[Environment]::SetEnvironmentVariable("GH_TOKEN", "ghp_YOUR_TOKEN", "User")
++
++# Map before each live command
++$env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
++```
++
++**LLM endpoint** (generation only):
++
++```powershell
++$env:GPT_OSS_ENDPOINT = "https://llm.professionalize.com/v1/"
++$env:GPT_OSS_MODEL    = "<model-name>"
++$env:GPT_OSS_API_KEY  = "<api-key>"
++```
++
++The pipeline aborts before generation if `GPT_OSS_ENDPOINT` is unset or does not point to `https://llm.professionalize.com/v1/`. No other LLM provider is permitted.
++
+ ## Common Workflows
+ 
+-Run a dry-run pipeline:
++**Check pipeline status:**
++
++```powershell
++python -m plugin_examples status
++```
++
++**Run a dry-run pipeline:**
++
++```powershell
++$env:PYTHONPATH = "src"
++python -m plugin_examples run --family cells --dry-run --template-mode --promote-latest
++```
++
++**Run source-of-truth discovery:**
+ 
+ ```powershell
+ python -m plugin_examples run --family cells --dry-run --promote-latest
+ ```
+ 
+-Run source-of-truth discovery:
++**Run with LLM generation:**
+ 
+ ```powershell
+-python -m plugin_examples discover-lowcode --family cells --promote-latest
++python -m plugin_examples run --family cells --promote-latest
+ ```
+ 
+-Run local tests:
++**Run local tests:**
+ 
+ ```powershell
+ $env:PYTHONPATH = "src"
+@@ -36,14 +134,103 @@ python -m compileall src
+ dotnet build tools/DllReflector/DllReflector.csproj -c Release
+ ```
+ 
++## Architecture
++
++The pipeline is a gate-driven Python orchestrator with a .NET reflection helper.
++
++```
++NuGet package
++  -> dependency resolution
++  -> extraction (DLL/XML assets)
++  -> reflection catalog (API symbols)
++  -> plugin detection (LowCode/Plugins namespace proof)
++  -> API delta and impact mapping
++  -> fixture discovery and example mining
++  -> scenario planning
++  -> LLM preflight
++  -> LLM/template generation (C# console projects)
++  -> dotnet restore / build / run / output validation
++  -> external example-reviewer (optional)
++  -> gates and verdicts
++  -> PR publishing
++```
++
++**Deterministic stages:** NuGet fetch, extraction, reflection, plugin detection, API delta, fixture registry, scenario planning, dotnet validation, gates, evidence writing, PR publish/merge.
++
++**LLM-driven stage:** generation (`llm_router` calls `https://llm.professionalize.com/v1/`). LLM output is constrained to reflected API symbols and validated by compiler, runtime, output validator, and optional external reviewer before a PR is created.
++
++**Safeguards against bad LLM output:**
++- Generated code may only use API symbols from the reflected NuGet catalog.
++- All examples undergo dotnet restore/build/run before they are gated as publishable.
++- Output validators check stdout/stderr and semantic file content.
++- An external example-reviewer can be wired in as an additional gate.
++- Blocked examples are preserved with explicit reasons; they are never silently dropped.
++
++**Pipeline stages** (defined in `src/plugin_examples/runner.py`):
++
++| Stage | Output |
++|---|---|
++| `nuget_fetch` | Download manifest |
++| `dependency_resolution` | Package lock |
++| `extraction` | DLL/XML assets |
++| `reflection` | API catalog |
++| `plugin_detection` | Source-of-truth proof |
++| `api_delta` / `impact_mapping` | Delta and impact reports |
++| `fixture_registry` / `example_mining` | Fixture registry, existing examples index |
++| `scenario_planning` | Scenario catalog, blocked scenarios |
++| `llm_preflight` | Provider readiness result |
++| `generation` | Generated C# projects and example index |
++| `validation` | restore/build/run/output validation results |
++| `reviewer` | External reviewer results |
++| `publisher` | Publishing report |
++
++Hard-stop stages: `load_config`, `nuget_fetch`, `dependency_resolution`, `extraction`, `reflection`, `plugin_detection`, `scenario_planning`.
++
++See [Pipeline Stages](docs/architecture/pipeline-stages.md) and [Gates and Verdicts](docs/reference/gates-and-verdicts.md).
++
++## Repository Structure
++
++| Path | Purpose |
++|---|---|
++| `src/plugin_examples/` | Python package (CLI, runner, all pipeline modules) |
++| `pipeline/configs/families/` | Active family YAML configs (one per product) |
++| `pipeline/configs/families/disabled/` | Disabled family configs (loader rejects these) |
++| `pipeline/schemas/` | JSON schemas for configs, catalogs, scenarios, packets, and manifests |
++| `pipeline/contracts/` | Per-family scenario contracts |
++| `pipeline/prompts/` | LLM prompt templates |
++| `pipeline/format-authority/` | Format authority manifest and contracts |
++| `templates/root-readme/` | Jinja2 README rendering templates |
++| `tools/DllReflector/` | .NET 8 reflection helper (called from `reflection_catalog`) |
++| `tests/unit/` | Unit tests (100+ test files) |
++| `tests/integration/` | Integration tests |
++| `tests/fixtures/` | Test fixture data |
++| `scripts/` | Operational helper scripts |
++| `workspace/` | Runtime output directory (gitignored). Holds per-run artifacts, evidence, manifests, and dry-run packages. |
++| `docs/` | Documentation |
++
++## CI
++
++`.github/workflows/build-and-test.yml` runs on every push and PR to `main`:
++- Python 3.12 and 3.13 unit tests.
++- `python -m compileall src`.
++- DllReflector build with .NET 8.0.
++
++`.github/workflows/monthly-package-refresh.yml` runs on the 1st of each month:
++- Full or tier-based pipeline run (default family: `cells`).
++- Evidence integrity checks.
++- Published example build regression.
++
+ ## Canonical References
+ 
+ - [CLI Reference](docs/reference/cli.md)
+ - [Configuration Reference](docs/reference/config.md)
++- [Environment Variables](docs/reference/environment-variables.md)
+ - [File Contracts](docs/reference/file-contracts.md)
+ - [Gates and Verdicts](docs/reference/gates-and-verdicts.md)
+ - [Validation and Reviewer](docs/reference/validation-and-reviewer.md)
+ - [Publishing and GitHub](docs/reference/publishing-and-github.md)
++- [Schemas and Contracts](docs/reference/schemas-and-contracts.md)
++- [Metrics](docs/reference/metrics.md)
+ 
+ ## Governance
+ 
+@@ -55,3 +242,12 @@ dotnet build tools/DllReflector/DllReflector.csproj -c Release
+ - Evidence must be recorded for successful, partial, and failed runs.
+ 
+ See [Architecture Decisions](docs/architecture/decisions.md).
++
++## Known Gaps and Risks
++
++- The LLM router code retains legacy branches for generic/OpenAI/Ollama-style providers. Only `https://llm.professionalize.com/v1/` is governance-approved; the legacy branches should be treated as inactive.
++- One code path in target-repo health has a fallback read of `GH_TOKEN` directly; operators should always map it to `GITHUB_TOKEN` before live commands regardless.
++- Fine-grained GitHub PATs owned by personal accounts can fail against org-owned repos via the Git Data API. Use a classic PAT with `repo` scope stored in `GH_TOKEN`.
++- The `words` family has fewer published examples than other families; some scenarios are blocked and preserved with explicit reasons in the run evidence under `workspace/` (gitignored).
++
++See [docs/_audit/](docs/_audit/) for the current system audit and traceability records.

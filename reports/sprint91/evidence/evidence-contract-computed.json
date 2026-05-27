@@ -1,0 +1,214 @@
+{
+  "contract_id": "sprint91",
+  "computed_at": "2026-05-27T06:22:39Z",
+  "total_categories": 25,
+  "present": 25,
+  "missing": 0,
+  "zero_bytes": 0,
+  "semantic_failed": 0,
+  "pending": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {
+      "id": "sprint90_authority_audit",
+      "name": "Sprint 90 Authority Audit",
+      "file": "reports/sprint91/00-sprint90-authority-audit.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "final_authority_plan",
+      "name": "Final Authority Plan",
+      "file": "reports/sprint91/01-final-authority-plan.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "overlap_check",
+      "name": "Overlap Check",
+      "file": "reports/sprint91/02-overlap-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "todo_md",
+      "name": "Todo List",
+      "file": "reports/sprint91/todo.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "commands_log",
+      "name": "Commands Log",
+      "file": "reports/sprint91/commands.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "git_dirty_state_before",
+      "name": "Git Dirty State Before",
+      "file": "reports/sprint91/git/dirty-state-before.txt",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "git_dirty_file_classification",
+      "name": "Dirty File Classification",
+      "file": "reports/sprint91/git/dirty-file-classification.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "sprint90_repair_matrix",
+      "name": "Sprint 90 Authority Repair Matrix",
+      "file": "reports/sprint91/closure-repair/sprint90-authority-repair-matrix.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "sha_chain_finalization",
+      "name": "SHA Chain Finalization",
+      "file": "reports/sprint91/closure-repair/sha-chain-finalization.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "canonical_validation",
+      "name": "Canonical Final Validation Result",
+      "file": "reports/sprint91/evidence/sprint91-final-validation-result.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "diagnostic_validation",
+      "name": "Diagnostic Non-Applicable Validation",
+      "file": "reports/sprint91/evidence/diagnostic-full-rules-non-applicable.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "validation_authority_map",
+      "name": "Validation Authority Map",
+      "file": "reports/sprint91/evidence/validation-authority-map.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "live_approval_check",
+      "name": "Live Approval Check",
+      "file": "reports/sprint91/publication/live-approval-check.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "publication_matrix",
+      "name": "Publication Truth Matrix Final",
+      "file": "reports/sprint91/publication/publication-truth-matrix-final.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "publication_summary",
+      "name": "Publication Summary",
+      "file": "reports/sprint91/publication/publication-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "final_approval_packet",
+      "name": "Final Approval Packet",
+      "file": "reports/sprint91/readiness/final-approval-packet.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "taskcard_update_proof",
+      "name": "Taskcard Update Proof",
+      "file": "reports/sprint91/tracking/taskcard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "scoreboard_update_proof",
+      "name": "Scoreboard Update Proof",
+      "file": "reports/sprint91/tracking/scoreboard-update-proof.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "next_gate_register",
+      "name": "Next Gate Register",
+      "file": "reports/sprint91/tracking/next-gate-register.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "state_sync_summary",
+      "name": "State Sync Summary",
+      "file": "reports/sprint91/state-sync/state-sync-summary.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "missing_artifact_repair",
+      "name": "Missing Artifact Repair",
+      "file": "reports/sprint91/evidence-consistency/missing-artifact-repair.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "evidence_consistency_report",
+      "name": "Evidence Consistency Report",
+      "file": "reports/sprint91/evidence-consistency/evidence-consistency-report.md",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "source_diff",
+      "name": "Source Diff Patch",
+      "file": "reports/sprint91/source-diff.patch",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "source_hashes",
+      "name": "Source Hashes",
+      "file": "reports/sprint91/source-hashes.json",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    },
+    {
+      "id": "test_run_log",
+      "name": "Test Run Raw Log",
+      "file": "reports/sprint91/logs/test-run-raw.log",
+      "blocking": true,
+      "status": "PRESENT",
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "status": "NOT_EXECUTED",
+  "reason": "No PRs exist to merge — PR creation gate absent. Merge gate also absent.",
+  "gates": {
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET"
+  },
+  "merges_performed": 0,
+  "branches_deleted": 0
+}

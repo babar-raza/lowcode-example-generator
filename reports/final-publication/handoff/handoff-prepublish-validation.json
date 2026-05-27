@@ -1,0 +1,71 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "validation_status": "PARTIAL_APPROVAL_BLOCKED",
+  "note": "Full per-file I/O validation deferred to PR creation phase (approval gate absent). Family-level validation confirmed from aggregate-gate-results.json.",
+  "family_validation": [
+    {
+      "family": "cells",
+      "examples_generated": 9,
+      "examples_built": 9,
+      "pr_candidates": 9,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true
+    },
+    {
+      "family": "words",
+      "examples_generated": 8,
+      "examples_built": 8,
+      "pr_candidates": 7,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true,
+      "notes": "1 example excluded from PR (partial family — known from Sprint 91)"
+    },
+    {
+      "family": "pdf",
+      "examples_generated": 19,
+      "examples_built": 19,
+      "pr_candidates": 19,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true
+    },
+    {
+      "family": "diagram",
+      "examples_generated": 2,
+      "examples_built": 2,
+      "pr_candidates": 2,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true
+    },
+    {
+      "family": "email",
+      "examples_generated": 1,
+      "examples_built": 1,
+      "pr_candidates": 1,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true
+    },
+    {
+      "family": "slides",
+      "examples_generated": 3,
+      "examples_built": 3,
+      "pr_candidates": 3,
+      "build_status": "passed_all",
+      "run_status": "passed_all",
+      "family_valid": true
+    }
+  ],
+  "totals": {
+    "families": 6,
+    "total_generated": 42,
+    "total_pr_candidates": 41,
+    "all_families_build_passed": true,
+    "all_families_run_passed": true
+  },
+  "source": "workspace/verification/latest/families/*/aggregate-gate-results.json"
+}

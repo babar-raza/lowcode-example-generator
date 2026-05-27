@@ -1,0 +1,11 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "status": "NOT_EXECUTED_APPROVAL_BLOCKED",
+  "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "gate_set": false,
+  "prs_created": 0,
+  "prs": [],
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set. Per governance: do not create PRs without this gate.",
+  "operator_action": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to enable PR creation."
+}

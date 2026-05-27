@@ -1,0 +1,19 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "audit_status": "NOT_PERFORMED",
+  "reason": "Remote README I/O audit not performed — PR creation gate absent.",
+  "baseline_from_sprint91": {
+    "total_records": 42,
+    "families": {
+      "cells": {"examples": 9, "pr_candidates": 9},
+      "words": {"examples": 8, "pr_candidates": 7},
+      "pdf": {"examples": 19, "pr_candidates": 19},
+      "diagram": {"examples": 2, "pr_candidates": 2},
+      "email": {"examples": 1, "pr_candidates": 1},
+      "slides": {"examples": 3, "pr_candidates": 3}
+    },
+    "source": "workspace/verification/latest/families/*/aggregate-gate-results.json",
+    "confirmed_at": "2026-05-27"
+  }
+}

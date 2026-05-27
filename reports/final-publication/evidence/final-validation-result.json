@@ -1,0 +1,64 @@
+{
+  "schema_version": "final-publication-v1",
+  "sprint_id": "final-publication",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "canonical": true,
+  "canonical_overall_valid": true,
+  "closure_valid": true,
+  "applicable_rules_passed": 6,
+  "applicable_rules_failed": 0,
+  "overall_status": "VALID",
+  "rules": [
+    {
+      "rule_id": "R01",
+      "name": "approval_gate_honored",
+      "applicable": true,
+      "passed": true,
+      "detail": "No PRs created without PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL. Gate correctly absent."
+    },
+    {
+      "rule_id": "R02",
+      "name": "no_unauthorized_remote_mutation",
+      "applicable": true,
+      "passed": true,
+      "detail": "Zero remote mutations. Zero API calls to destination repos."
+    },
+    {
+      "rule_id": "R03",
+      "name": "handoff_validated",
+      "applicable": true,
+      "passed": true,
+      "detail": "42 examples confirmed across 6 families. All families build_status=passed_all."
+    },
+    {
+      "rule_id": "R04",
+      "name": "publication_truth_matrix_consistent",
+      "applicable": true,
+      "passed": true,
+      "detail": "42 records. All show PUBLICATION_APPROVAL_BLOCKED. No overclaimed states."
+    },
+    {
+      "rule_id": "R05",
+      "name": "git_state_clean",
+      "applicable": true,
+      "passed": true,
+      "detail": "Only untracked reports/final-publication/ before commit; clean after commit."
+    },
+    {
+      "rule_id": "R06",
+      "name": "final_verdict_matches_evidence",
+      "applicable": true,
+      "passed": true,
+      "detail": "Verdict LOWCODE_PUBLICATION_APPROVAL_BLOCKED_NO_ACTION_TAKEN matches all evidence."
+    }
+  ],
+  "publication_status": "PUBLICATION_APPROVAL_BLOCKED",
+  "publication_blockers": [
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set"
+  ],
+  "token_status": {
+    "GH_TOKEN": "AVAILABLE",
+    "GITHUB_TOKEN": "AVAILABLE",
+    "note": "Tokens available but not used — publication gate absent"
+  }
+}

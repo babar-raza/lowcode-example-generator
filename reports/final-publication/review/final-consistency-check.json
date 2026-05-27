@@ -1,0 +1,15 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "check_passed": true,
+  "checks": [
+    {"check_id": "C01", "name": "no_prs_without_approval", "passed": true},
+    {"check_id": "C02", "name": "no_merges_without_approval", "passed": true},
+    {"check_id": "C03", "name": "no_branch_delete_before_verified_merge", "passed": true},
+    {"check_id": "C04", "name": "ecc_valid", "passed": true, "detail": "25/25, blocking_failures=0"},
+    {"check_id": "C05", "name": "truth_matrix_consistent", "passed": true, "detail": "42 records, all PUBLICATION_APPROVAL_BLOCKED"},
+    {"check_id": "C06", "name": "verdict_matches_evidence", "passed": true},
+    {"check_id": "C07", "name": "no_will_be_committed_later", "passed": true},
+    {"check_id": "C08", "name": "source_diff_nonzero", "passed": true, "detail": "304 chars after repair"}
+  ]
+}

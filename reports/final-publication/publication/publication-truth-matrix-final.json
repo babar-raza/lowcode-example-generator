@@ -1,0 +1,98 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "sprint": "final-publication",
+  "total_records": 42,
+  "publication_status": "PUBLICATION_APPROVAL_BLOCKED",
+  "gate_set": false,
+  "prs_created": 0,
+  "prs_merged": 0,
+  "branches_deleted": 0,
+  "families": [
+    {
+      "family": "cells",
+      "examples": 9,
+      "pr_candidates": 9,
+      "destination_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-cells-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED"
+    },
+    {
+      "family": "words",
+      "examples": 8,
+      "pr_candidates": 7,
+      "destination_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-words-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED",
+      "notes": "7 of 8 examples are PR candidates; 1 excluded (partial family)"
+    },
+    {
+      "family": "pdf",
+      "examples": 19,
+      "pr_candidates": 19,
+      "destination_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-pdf-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED"
+    },
+    {
+      "family": "diagram",
+      "examples": 2,
+      "pr_candidates": 2,
+      "destination_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-diagram-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED"
+    },
+    {
+      "family": "email",
+      "examples": 1,
+      "pr_candidates": 1,
+      "destination_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-email-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED"
+    },
+    {
+      "family": "slides",
+      "examples": 3,
+      "pr_candidates": 3,
+      "destination_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "pr_branch": "lowcode-examples-slides-readme-io-final",
+      "pr_url": null,
+      "pr_state": null,
+      "merge_sha": null,
+      "post_merge_verified": false,
+      "branch_deleted": false,
+      "per_example_status": "PUBLICATION_APPROVAL_BLOCKED"
+    }
+  ],
+  "excluded_families": [
+    {"family": "html", "reason": "NO_LOWCODE_CONFIRMED"},
+    {"family": "svg", "reason": "NO_LOWCODE_CONFIRMED"},
+    {"family": "ocr", "reason": "EXTERNAL_PACKAGE_BLOCKER"},
+    {"family": "psd", "reason": "EXTERNAL_PACKAGE_BLOCKER"}
+  ]
+}

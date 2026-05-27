@@ -1,0 +1,19 @@
+{
+  "schema_version": "final-publication-v1",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "iv_verdict": "ACCEPT",
+  "blocking_count": 0,
+  "non_blocking_count": 1,
+  "blockers": [],
+  "non_blocking_items": [
+    {
+      "item_id": "NB01",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "type": "APPROVAL_GATE",
+      "impact": "Cannot create live PRs — 0 PRs created this sprint",
+      "resolution": "Operator: export PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "blocks_local_closeout": false,
+      "blocks_publication": true
+    }
+  ]
+}

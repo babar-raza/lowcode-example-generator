@@ -1,0 +1,21 @@
+
+=== FINAL PUBLICATION SPRINT — LIVE PR COMMAND LOG ===
+Date: 2026-05-27
+Sprint: Final Publication Closure
+
+STATUS: NOT_EXECUTED — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set.
+
+No commands were executed. No remote mutations were performed.
+No branches were created. No PRs were opened.
+
+When approval is granted, the following commands will be executed per family:
+  git clone <destination_repo> /tmp/<family>-repo
+  git checkout -b lowcode-examples-<family>-readme-io-final
+  # copy example README.md files from workspace/verification/latest/families/<family>/
+  git add <exact-paths>
+  git commit -m "Update LowCode example README Input/Output documentation for <Family>"
+  gh pr create --title "Update LowCode example README Input/Output documentation for <Family>" --body "..."
+
+OPERATOR ACTION REQUIRED:
+  export PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR
+  # Then rerun this sprint

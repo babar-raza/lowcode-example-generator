@@ -4,7 +4,7 @@
   "bundle_name": "healing-sprint-1b-evidence-20260527.zip",
   "generated_at": "2026-05-27T00:00:00Z",
   "source_sha": "bb69553d0bf0b48d6c5fe3a5711e75046d814081",
-  "head_sha": "see git/final-clean-proof.txt",
+  "head_sha": "ccd2c174b60900c5d276ce7c686056a971f67361",
   "file_count": 43,
   "bundle_path": "reports/healing-sprint-1b/bundles/healing-sprint-1b-evidence-20260527.zip",
   "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",

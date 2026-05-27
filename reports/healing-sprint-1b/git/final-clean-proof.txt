@@ -7,6 +7,7 @@ Sprint: Healing Sprint 1B -- Machinery Healing Finalization
 bb69553d0bf0b48d6c5fe3a5711e75046d814081
 
 --- git log --oneline -10 ---
+ccd2c17 feat(healing-sprint-1b): finalize final-clean-proof.txt -- clean state confirmed
 bb69553 feat(healing-sprint-1b): finalize machinery healing -- ECC 25/25, replay automated, README committed
 a20d875 docs: commit operator README documentation additions
 580e8eb feat(healing-sprint-1): update final-clean-proof.txt with correct HEAD SHA
@@ -16,7 +17,6 @@ adcf3dc feat(final-publication): update final-clean-proof.txt with correct HEAD 
 0f5b09c feat(final-publication): finalize final-clean-proof.txt -- clean state confirmed
 3f85332 feat(final-publication): APPROVAL_BLOCKED_NO_ACTION_TAKEN -- 42 examples ready, ECC 25/25
 9d1962d feat(sprint91): update final-clean-proof.txt with correct HEAD SHA
-c22d452 feat(sprint91): finalize final-clean-proof.txt -- clean state confirmed
 
 --- git status --short ---
 (clean -- no dirty tracked files, no untracked reports)
@@ -28,14 +28,14 @@ All Sprint 1B evidence committed in bb69553.
 --- Sprint Evidence Files ---
 All reports/healing-sprint-1b/ files committed in:
   - bb69553 (main evidence)
-  - [this proof commit -- to be updated in step 3]
+  - ccd2c17 (proof commit)
 
 --- SHA CHAIN (AUTHORITATIVE) ---
 readme_sha  (README commit)   = a20d875
 source_sha  (evidence commit) = bb69553d0bf0b48d6c5fe3a5711e75046d814081
-head_sha    (proof commit)    = [to be captured in step 3]
+head_sha    (proof commit)    = ccd2c174b60900c5d276ce7c686056a971f67361
 
-source_sha exists in git history (verified).
+Both source_sha and head_sha exist in git history.
 
 --- ACCEPTANCE ---
 Working tree clean. All sprint evidence committed. No placeholder text in final authority files.

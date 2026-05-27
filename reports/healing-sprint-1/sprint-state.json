@@ -1,0 +1,56 @@
+{
+  "schema_version": "healing-sprint-1-v1",
+  "sprint_id": "healing-sprint-1",
+  "sprint_type": "machinery_healing",
+  "date": "2026-05-27",
+  "verdict": "LOWCODE_HEALING_SPRINT_1_COMPLETE_PUBLICATION_APPROVAL_BLOCKED",
+  "ecc": {
+    "total_categories": 25,
+    "present": 25,
+    "missing": 0,
+    "zero_bytes": 0,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "lanes": {
+    "lane_0_coordinator": "PASS",
+    "lane_1_final_authority": "PASS",
+    "lane_2_bad_bundle_replay": "PASS",
+    "lane_3_gate_simulation": "PASS",
+    "lane_4_validator_hardening": "PASS",
+    "lane_5_evidence_contract": "PASS",
+    "lane_6_dry_run": "PASS",
+    "lane_7_state_sync": "PASS",
+    "lane_8_iv": "INDEPENDENT_VERIFICATION_PASS"
+  },
+  "healing_targets": {
+    "stale_placeholder": "ADDRESSED",
+    "bad_bundle_patterns": "DOCUMENTED (6)",
+    "gate_simulation": "COMPLETE",
+    "validator_audit": "COMPLETE (145 rules)",
+    "bundle_structure": "VERIFIED",
+    "dry_run": "COMPLETE",
+    "state_sync": "VERIFIED"
+  },
+  "prior_sprint_chain": {
+    "sprint89": "COMMITTED_BASELINE_EV_145",
+    "sprint90": "PARTIAL_NO_GIT_COMMITS",
+    "sprint91": "LOWCODE_FINAL_LOCAL_CLOSEOUT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
+    "final_publication": "LOWCODE_PUBLICATION_APPROVAL_BLOCKED_NO_ACTION_TAKEN"
+  },
+  "publication": {
+    "gate_live_publish": "NOT_SET",
+    "gate_merge_pr": "NOT_SET",
+    "gh_token_set": true,
+    "examples_ready": 42,
+    "pr_candidates": 41,
+    "families": 6,
+    "status": "APPROVAL_BLOCKED"
+  },
+  "technical_baseline": {
+    "ev": "145/145",
+    "html_svg": "NO_LOWCODE_CONFIRMED",
+    "tests": "3189 (baseline, ENV_BLOCKER)",
+    "validator_rules": 145
+  }
+}

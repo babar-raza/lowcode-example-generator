@@ -1,0 +1,44 @@
+{
+  "schema_version": "healing-sprint-1-v1",
+  "lane": 3,
+  "date": "2026-05-27",
+  "description": "Dry-run merge plan — what would execute if both gates were set",
+  "execution_status": "DRY_RUN_ONLY",
+  "gate_required": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+  "prerequisite": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL must be set first",
+  "merge_actions": [
+    {
+      "family": "cells",
+      "command": "gh pr merge lowcode-examples-cells-readme-io-final --merge --repo aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "would_execute": false
+    },
+    {
+      "family": "words",
+      "command": "gh pr merge lowcode-examples-words-readme-io-final --merge --repo aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "would_execute": false
+    },
+    {
+      "family": "pdf",
+      "command": "gh pr merge lowcode-examples-pdf-readme-io-final --merge --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "would_execute": false
+    },
+    {
+      "family": "diagram",
+      "command": "gh pr merge lowcode-examples-diagram-readme-io-final --merge --repo aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "would_execute": false
+    },
+    {
+      "family": "email",
+      "command": "gh pr merge lowcode-examples-email-readme-io-final --merge --repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "would_execute": false
+    },
+    {
+      "family": "slides",
+      "command": "gh pr merge lowcode-examples-slides-readme-io-final --merge --repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "would_execute": false
+    }
+  ],
+  "total_merges_would_execute": 6,
+  "executed": false,
+  "reason": "Neither approval gate is set"
+}

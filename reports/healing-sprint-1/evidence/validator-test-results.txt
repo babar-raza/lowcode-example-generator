@@ -1,0 +1,58 @@
+HEALING SPRINT 1 — LANE 4: VALIDATOR TEST RESULTS
+Date: 2026-05-27
+
+=== VALIDATOR AUDIT RESULTS ===
+
+File: src/plugin_examples/evidence_validator.py
+Lines: 7706
+Rule count (def _rule_*): 145
+
+=== RULE COUNT VERIFICATION ===
+$ grep -c "def _rule_" src/plugin_examples/evidence_validator.py
+145
+EXIT CODE: 0
+
+=== SPRINT ANNOTATIONS FOUND ===
+Line 498:  # Sprint 60 rules (hardened)
+Line 912:  # Sprint 61 NEW semantic rules
+Line 1380: # Sprint 62 NEW rules
+Line 1480: # Sprint 64 NEW rules
+Line 1568: # Sprint 65 NEW rules
+Line 2083: # Sprint 66 rules
+Line 2686: # Sprint 67 NEW rules
+Line 3049: # Sprint 68 rules
+Line 3264: # Sprint 69 rules
+Line 3952: # Sprint 71 NEW rules
+Line 4207: # Sprint 72 NEW rules
+Line 4465: # Sprint 75 — Weekly review integration rules
+Line 4767: # Sprint 76 rules
+Line 5219: # Sprint 77 NEW rules
+Line 5436: # Sprint 78 NEW rules
+Line 5628: # Sprint 79 NEW rules
+Line 6346: # Sprint 85: evidence hygiene rules (120-124)
+Line 6563: # Sprint 86: readiness-loop prevention rules (125-126)
+Line 6673: # Sprint 87: S86 defect invariant rules (127-134)
+Line 7056: # Sprint 88 rules (S87 defect invariants)
+Line 7374: # Sprint 89 rules (S88 defect invariants)
+
+=== LAST 5 RULES ===
+Line 7377: def _rule_head_sha_matches_final_proof
+Line 7439: def _rule_active_validation_not_not_canonical
+Line 7491: def _rule_source_proof_present_if_source_changed
+Line 7549: def _rule_no_lowcode_confirmed_has_evidence
+Line 7601: def _rule_candidate_classification_not_stale_after_scan
+
+=== CANONICAL VALIDATION (Sprint 91) ===
+Source: reports/sprint91/evidence/sprint91-final-validation-result.json
+  canonical: true
+  canonical_overall_valid: true
+  applicable_rules_failed: 0
+  Sprint 91 validator output confirmed clean.
+
+=== PRIOR VALIDATOR INVOCATION (ENV_BLOCKER) ===
+pytest not available (broken user-installed pytest).
+Validator invoked via custom ECC runner, not pytest.
+Sprint 89 baseline: 3189 tests (ENV_BLOCKER — cannot re-run).
+
+=== RESULT ===
+LANE_4_PASS — 145 rules confirmed. No modifications. Canonical validation clean.

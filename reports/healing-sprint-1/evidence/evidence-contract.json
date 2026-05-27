@@ -1,0 +1,158 @@
+{
+  "contract_id": "healing-sprint-1",
+  "sprint_id": "healing-sprint-1",
+  "description": "Healing Sprint 1 — Machinery Audit, Bad-Bundle Replay, Gate Simulation, Final-Proof Hardening",
+  "created_at": "2026-05-27T00:00:00Z",
+  "categories": [
+    {
+      "id": "baseline",
+      "name": "Final Publication Baseline",
+      "file": "reports/healing-sprint-1/00-final-publication-baseline.md",
+      "blocking": true
+    },
+    {
+      "id": "healing_plan",
+      "name": "Healing Plan",
+      "file": "reports/healing-sprint-1/01-healing-plan.md",
+      "blocking": true
+    },
+    {
+      "id": "overlap_check",
+      "name": "Overlap Check",
+      "file": "reports/healing-sprint-1/02-overlap-check.md",
+      "blocking": true
+    },
+    {
+      "id": "final_authority_audit",
+      "name": "Final Authority Audit (Lane 1)",
+      "file": "reports/healing-sprint-1/final-proof/final-authority-audit.md",
+      "blocking": true
+    },
+    {
+      "id": "proof_wording_check",
+      "name": "Proof Wording Check (Lane 1)",
+      "file": "reports/healing-sprint-1/final-proof/final-proof-wording-check.json",
+      "blocking": true
+    },
+    {
+      "id": "proof_template_rule",
+      "name": "Proof Template Rule (Lane 1)",
+      "file": "reports/healing-sprint-1/final-proof/final-proof-template-rule.md",
+      "blocking": true
+    },
+    {
+      "id": "git_proof",
+      "name": "Git Final Clean Proof (Lane 1)",
+      "file": "reports/healing-sprint-1/git/final-clean-proof.txt",
+      "blocking": true
+    },
+    {
+      "id": "authority_healing_report",
+      "name": "Final Authority Healing Report (Lane 1)",
+      "file": "reports/healing-sprint-1/evidence-consistency/final-authority-healing-report.md",
+      "blocking": true
+    },
+    {
+      "id": "replay_matrix",
+      "name": "Bad-Bundle Replay Matrix (Lane 2)",
+      "file": "reports/healing-sprint-1/replay/replay-matrix.json",
+      "blocking": true
+    },
+    {
+      "id": "regression_results",
+      "name": "Bad-Bundle Regression Results (Lane 2)",
+      "file": "reports/healing-sprint-1/replay/bad-bundle-regression-results.md",
+      "blocking": true
+    },
+    {
+      "id": "fixture_manifest",
+      "name": "Synthetic Fixture Manifest (Lane 2)",
+      "file": "reports/healing-sprint-1/replay/synthetic-fixture-manifest.json",
+      "blocking": true
+    },
+    {
+      "id": "gate_simulation",
+      "name": "Approval Gate Simulation (Lane 3)",
+      "file": "reports/healing-sprint-1/gates/approval-gate-simulation.md",
+      "blocking": true
+    },
+    {
+      "id": "no_op_proof",
+      "name": "No-Op Publication Proof (Lane 3)",
+      "file": "reports/healing-sprint-1/gates/no-op-publication-proof.json",
+      "blocking": true
+    },
+    {
+      "id": "secret_redaction_check",
+      "name": "Secret Redaction Check (Lane 3)",
+      "file": "reports/healing-sprint-1/gates/secret-redaction-check.md",
+      "blocking": true
+    },
+    {
+      "id": "validator_gap_analysis",
+      "name": "Validator Gap Analysis (Lane 4)",
+      "file": "reports/healing-sprint-1/evidence/validator-gap-analysis.md",
+      "blocking": true
+    },
+    {
+      "id": "validator_source_proof",
+      "name": "Validator Source Proof (Lane 4)",
+      "file": "reports/healing-sprint-1/evidence/validator-source-proof.patch",
+      "blocking": true
+    },
+    {
+      "id": "validator_test_results",
+      "name": "Validator Test Results (Lane 4)",
+      "file": "reports/healing-sprint-1/evidence/validator-test-results.txt",
+      "blocking": true
+    },
+    {
+      "id": "closeout_contract",
+      "name": "Final Closeout Contract (Lane 5)",
+      "file": "reports/healing-sprint-1/evidence-contract/final-closeout-contract.md",
+      "blocking": true
+    },
+    {
+      "id": "bundle_audit",
+      "name": "Final Publication Bundle Audit (Lane 5)",
+      "file": "reports/healing-sprint-1/bundle-audit/final-publication-bundle-audit.md",
+      "blocking": true
+    },
+    {
+      "id": "dry_run_result",
+      "name": "Local Dry-Run Result (Lane 6)",
+      "file": "reports/healing-sprint-1/dry-run/local-machinery-dry-run-result.json",
+      "blocking": true
+    },
+    {
+      "id": "dry_run_summary",
+      "name": "Local Dry-Run Summary (Lane 6)",
+      "file": "reports/healing-sprint-1/dry-run/local-machinery-dry-run-summary.md",
+      "blocking": true
+    },
+    {
+      "id": "state_sync_audit",
+      "name": "State Sync Audit (Lane 7)",
+      "file": "reports/healing-sprint-1/state-sync/state-sync-audit.md",
+      "blocking": true
+    },
+    {
+      "id": "next_gate_register",
+      "name": "Next Gate Register (Lane 7)",
+      "file": "reports/healing-sprint-1/tracking/next-gate-register.json",
+      "blocking": true
+    },
+    {
+      "id": "iv_report",
+      "name": "Independent Verification Report (Lane 8)",
+      "file": "reports/healing-sprint-1/iv/independent-verification-report.md",
+      "blocking": true
+    },
+    {
+      "id": "adversarial_review",
+      "name": "Adversarial Review",
+      "file": "reports/healing-sprint-1/review/adversarial-review.md",
+      "blocking": true
+    }
+  ]
+}

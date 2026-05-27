@@ -1,0 +1,42 @@
+{
+  "schema_version": "healing-sprint-1-v1",
+  "date": "2026-05-27",
+  "description": "Self-repair actions taken during Healing Sprint 1",
+  "actions": [
+    {
+      "action_id": "SR-001",
+      "type": "rule_creation",
+      "description": "Created template rule PROOF-TEMPLATE-001 to prevent stale placeholder text in proof files",
+      "lane": 1,
+      "artifact": "reports/healing-sprint-1/final-proof/final-proof-template-rule.md",
+      "status": "COMPLETE"
+    },
+    {
+      "action_id": "SR-002",
+      "type": "documentation",
+      "description": "Documented 6 bad-bundle patterns with reproduction steps and fixes",
+      "lane": 2,
+      "artifact": "reports/healing-sprint-1/replay/bad-bundle-regression-results.md",
+      "status": "COMPLETE"
+    },
+    {
+      "action_id": "SR-003",
+      "type": "documentation",
+      "description": "Documented approval gate no-op protocol with secret redaction compliance",
+      "lane": 3,
+      "artifact": "reports/healing-sprint-1/gates/secret-redaction-check.md",
+      "status": "COMPLETE"
+    },
+    {
+      "action_id": "SR-004",
+      "type": "audit",
+      "description": "Audited validator 145-rule source; identified 3 gaps with procedural mitigations",
+      "lane": 4,
+      "artifact": "reports/healing-sprint-1/evidence/validator-gap-analysis.md",
+      "status": "COMPLETE"
+    }
+  ],
+  "total_actions": 4,
+  "blocking_actions": 0,
+  "all_complete": true
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "healing-sprint-1-v1",
+  "lane": 1,
+  "check_type": "stale_wording_scan",
+  "date": "2026-05-27",
+  "patterns_searched": [
+    "will be updated",
+    "TODO",
+    "PLACEHOLDER",
+    "TBD",
+    "This file will be updated"
+  ],
+  "files_scanned": [
+    "reports/final-publication/git/final-clean-proof.txt",
+    "reports/sprint91/git/final-clean-proof.txt",
+    "reports/final-publication/bundle-manifest.json",
+    "reports/sprint91/bundle-manifest.json",
+    "reports/final-publication/final-verdict.md",
+    "reports/sprint91/final-verdict.md",
+    "reports/final-publication/sprint-state.json",
+    "reports/sprint91/sprint-state.json"
+  ],
+  "findings": [],
+  "archival_note": {
+    "file": "reports/final-publication/git/final-clean-proof.txt",
+    "commit": "0f5b09c2b6ae207361a8072fefce52aedd9b135b",
+    "stale_text": "This file will be updated with final HEAD after the proof commit.",
+    "present_in_current_tree": false,
+    "resolved_in_commit": "adcf3dc",
+    "classification": "HISTORICAL_ONLY"
+  },
+  "result": "CLEAN",
+  "stale_wording_found_in_current_tree": false,
+  "total_files_scanned": 8,
+  "total_findings": 0
+}

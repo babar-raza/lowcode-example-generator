@@ -1,0 +1,47 @@
+{
+  "schema_version": "healing-sprint-1-v1",
+  "lane": 6,
+  "date": "2026-05-27",
+  "description": "Artifact manifest for local dry-run machinery test",
+  "artifacts_verified": [
+    {
+      "family": "cells",
+      "file": "workspace/verification/latest/families/cells/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 9
+    },
+    {
+      "family": "words",
+      "file": "workspace/verification/latest/families/words/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 7
+    },
+    {
+      "family": "pdf",
+      "file": "workspace/verification/latest/families/pdf/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 19
+    },
+    {
+      "family": "diagram",
+      "file": "workspace/verification/latest/families/diagram/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 2
+    },
+    {
+      "family": "email",
+      "file": "workspace/verification/latest/families/email/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 1
+    },
+    {
+      "family": "slides",
+      "file": "workspace/verification/latest/families/slides/aggregate-gate-results.json",
+      "exists": true,
+      "pr_candidates": 3
+    }
+  ],
+  "total_artifacts": 6,
+  "total_pr_candidates": 41,
+  "all_exist": true
+}

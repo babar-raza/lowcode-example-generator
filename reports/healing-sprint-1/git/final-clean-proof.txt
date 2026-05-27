@@ -1,0 +1,46 @@
+
+=== HEALING SPRINT 1 — FINAL CLEAN PROOF ===
+Captured: 2026-05-27
+Sprint: Healing Sprint 1 — Machinery Audit
+
+--- BASELINE HEAD (pre-healing-sprint commits) ---
+adcf3dcf37c52e7b46c4d4d32fec4c83488b5aee
+
+--- git log --oneline -10 ---
+adcf3dc feat(final-publication): update final-clean-proof.txt with correct HEAD SHA
+0f5b09c feat(final-publication): finalize final-clean-proof.txt — clean state confirmed
+3f85332 feat(final-publication): APPROVAL_BLOCKED_NO_ACTION_TAKEN — 42 examples ready, ECC 25/25
+9d1962d feat(sprint91): update final-clean-proof.txt with correct HEAD SHA
+c22d452 feat(sprint91): finalize final-clean-proof.txt — clean state confirmed
+d17d889 feat(sprint91): final authority closeout — EV 145/145, ECC 25/25, publication approval-blocked
+dd016d6 Remove /reports/ directory from remote tracking
+f069697 feat(sprint89): update final-clean-proof.txt with full 40-char SHA
+70f2abb feat(sprint89): finalize final-clean-proof.txt — clean state confirmed
+052db36 feat(sprint89): EV 145/145, HTML/SVG NO_LOWCODE_CONFIRMED, 3189 tests — implementation advancement
+
+--- git status --short ---
+ M README.md
+?? reports/healing-sprint-1/
+
+--- DIRTY FILE CLASSIFICATION ---
+README.md: Modified (not staged) — ongoing documentation additions by operator
+  Classification: UNCOMMITTED_README_DOCUMENTATION (non-sprint file)
+  Does not affect healing sprint evidence validity.
+
+reports/healing-sprint-1/: Untracked — healing sprint evidence (to be committed)
+  Classification: HEALING_SPRINT_EVIDENCE (in-progress, will be committed)
+
+--- Sprint Evidence Files ---
+No dirty sprint evidence files from prior sprints.
+Healing sprint files are new (untracked) — will be committed in this sprint.
+
+--- SHA CHAIN (HEALING SPRINT 1) ---
+baseline_sha (pre-sprint HEAD) = adcf3dcf37c52e7b46c4d4d32fec4c83488b5aee
+
+Note: source_sha and head_sha will be set after commit.
+This file will be updated after the healing sprint evidence commit.
+
+--- ACCEPTANCE ---
+Baseline is clean. Prior sprint evidence files unmodified.
+README.md modification is a pre-existing, non-sprint documentation change.
+ACCEPTED.

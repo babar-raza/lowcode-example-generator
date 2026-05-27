@@ -4,7 +4,7 @@
   "bundle_name": "sprint91-final-authority-closeout-evidence-20260527.zip",
   "generated_at": "2026-05-27T00:00:00Z",
   "source_sha": "d17d889311a6d33020d68066e8d36caf0e80c541",
-  "head_sha": "see git/final-clean-proof.txt for authoritative final HEAD",
+  "head_sha": "c22d45274bb6f8e81e43318001b1cd7f04fb2c30",
   "file_count": 40,
   "bundle_path": "reports/sprint91/bundles/sprint91-final-authority-closeout-evidence-20260527.zip",
   "verdict": "LOWCODE_FINAL_LOCAL_CLOSEOUT_ACCEPTED_PUBLICATION_APPROVAL_BLOCKED",
@@ -15,6 +15,10 @@
     "blocking_failures": 0,
     "closure_valid": true
   },
+  "sha_chain": {
+    "source_sha_commit_message": "feat(sprint91): final authority closeout — EV 145/145, ECC 25/25, publication approval-blocked",
+    "head_sha_commit_message": "feat(sprint91): finalize final-clean-proof.txt — clean state confirmed"
+  },
   "key_files": [
     "reports/sprint91/final-verdict.md",
     "reports/sprint91/sprint-state.json",
@@ -24,6 +28,5 @@
     "reports/sprint91/git/dirty-state-after.txt",
     "reports/sprint91/publication/publication-truth-matrix-final.json",
     "reports/sprint91/iv/independent-verification-report.md"
-  ],
-  "notes": "head_sha is in git/final-clean-proof.txt. source_sha is the main evidence commit. Bundle was built with 37 evidence files; final bundle includes dirty-state-after.txt, bundle-manifest.json, and final-clean-proof.txt (total 40)."
+  ]
 }

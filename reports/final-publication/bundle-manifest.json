@@ -1,0 +1,26 @@
+{
+  "schema_version": "final-publication-v1",
+  "sprint_id": "final-publication",
+  "bundle_name": "final-publication-closure-evidence-20260527.zip",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "source_sha": "3f853329771c98f09ae6b74f94367aab7e560042",
+  "head_sha": "see git/final-clean-proof.txt",
+  "file_count": 42,
+  "bundle_path": "reports/final-publication/bundles/final-publication-closure-evidence-20260527.zip",
+  "verdict": "LOWCODE_PUBLICATION_APPROVAL_BLOCKED_NO_ACTION_TAKEN",
+  "ecc": {
+    "total_categories": 25,
+    "present": 25,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "key_files": [
+    "reports/final-publication/final-verdict.md",
+    "reports/final-publication/sprint-state.json",
+    "reports/final-publication/evidence/final-validation-result.json",
+    "reports/final-publication/evidence/evidence-contract-computed.json",
+    "reports/final-publication/publication/publication-truth-matrix-final.json",
+    "reports/final-publication/preflight/approval-check.md",
+    "reports/final-publication/iv/independent-verification-report.md"
+  ]
+}

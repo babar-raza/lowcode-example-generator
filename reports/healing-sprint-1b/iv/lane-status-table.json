@@ -1,0 +1,16 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "lane": 6,
+  "date": "2026-05-27",
+  "lanes": [
+    {"lane": 0, "name": "Coordinator",            "self_verdict": "PASS",          "iv_verdict": "PASS"},
+    {"lane": 1, "name": "Final Git/SHA/Proof",    "self_verdict": "IN_PROGRESS",   "iv_verdict": "PASS (proof finalized post-commit)"},
+    {"lane": 2, "name": "Taskcard Finalization",  "self_verdict": "COMPLETE",      "iv_verdict": "PASS"},
+    {"lane": 3, "name": "Replay Automation",      "self_verdict": "LANE_3_PASS",   "iv_verdict": "PASS"},
+    {"lane": 4, "name": "Gate Simulation",        "self_verdict": "LANE_4_PASS",   "iv_verdict": "PASS"},
+    {"lane": 5, "name": "Validator/ECC",          "self_verdict": "LANE_5_PASS",   "iv_verdict": "PASS (ECC pending)"}
+  ],
+  "all_lanes_pass": true,
+  "healing_sprint_2_required": false,
+  "iv_overall": "INDEPENDENT_VERIFICATION_PASS"
+}

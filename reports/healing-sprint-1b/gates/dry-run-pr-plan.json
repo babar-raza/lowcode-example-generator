@@ -1,0 +1,22 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "lane": 4,
+  "date": "2026-05-27",
+  "execution_status": "DRY_RUN_ONLY",
+  "gate_required": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+  "prs": [
+    {"family": "cells",   "pr_candidates": 9,  "destination_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",   "branch": "lowcode-examples-cells-readme-io-final",   "would_execute": false},
+    {"family": "words",   "pr_candidates": 7,  "destination_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",   "branch": "lowcode-examples-words-readme-io-final",   "would_execute": false},
+    {"family": "pdf",     "pr_candidates": 19, "destination_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",       "branch": "lowcode-examples-pdf-readme-io-final",     "would_execute": false},
+    {"family": "diagram", "pr_candidates": 2,  "destination_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples","branch": "lowcode-examples-diagram-readme-io-final", "would_execute": false},
+    {"family": "email",   "pr_candidates": 1,  "destination_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",   "branch": "lowcode-examples-email-readme-io-final",   "would_execute": false},
+    {"family": "slides",  "pr_candidates": 3,  "destination_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples", "branch": "lowcode-examples-slides-readme-io-final",  "would_execute": false}
+  ],
+  "total_families": 6,
+  "total_pr_candidates": 41,
+  "total_truth_records": 42,
+  "excluded_words_candidate": 1,
+  "note": "truth_records(42) = pr_candidates(41) + excluded(1). Both counts are correct.",
+  "executed": false,
+  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set"
+}

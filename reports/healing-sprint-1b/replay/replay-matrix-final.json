@@ -1,0 +1,68 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "lane": 3,
+  "date": "2026-05-27",
+  "description": "Final replay matrix — 6 patterns with automation status",
+  "patterns": [
+    {
+      "id": "BAD-001",
+      "name": "zero_bytes_source_diff",
+      "description": "source-diff.patch is 0 bytes",
+      "automated": true,
+      "check_id": "BAD-001",
+      "result": "PASS",
+      "evidence": "source-diff.patch size=304 bytes in final-publication"
+    },
+    {
+      "id": "BAD-002",
+      "name": "missing_evidence_category",
+      "description": "required ECC category file does not exist",
+      "automated": true,
+      "check_id": "BAD-002",
+      "result": "PASS",
+      "evidence": "all 25 final-publication categories present"
+    },
+    {
+      "id": "BAD-003",
+      "name": "phantom_sha_in_manifest",
+      "description": "bundle-manifest.json SHA not in git history",
+      "automated": true,
+      "check_id": "BAD-003-*",
+      "result": "PASS",
+      "evidence": "all SHA fields verified via git cat-file -t"
+    },
+    {
+      "id": "BAD-004",
+      "name": "stale_placeholder_in_proof",
+      "description": "final-clean-proof.txt contains prohibited future-wording",
+      "automated": true,
+      "check_id": "BAD-004",
+      "result": "PASS",
+      "evidence": "3 committed proof files scanned -- clean"
+    },
+    {
+      "id": "BAD-005",
+      "name": "ecc_key_mismatch",
+      "description": "ECC output uses wrong key name",
+      "automated": true,
+      "check_id": "BAD-005",
+      "result": "PASS",
+      "evidence": "3 ECC files scanned -- all use 'present' not 'present_count'"
+    },
+    {
+      "id": "BAD-006",
+      "name": "write_without_read",
+      "description": "Write tool called without prior Read on existing file",
+      "automated": false,
+      "automation_classification": "TOOL_PROTOCOL_ONLY",
+      "automation_reason": "Requires tool-level hook; no Python equivalent",
+      "result": "SKIP",
+      "evidence": "Procedural control enforced via agent instructions"
+    }
+  ],
+  "total": 6,
+  "automated": 5,
+  "not_automated": 1,
+  "all_automated_pass": true,
+  "script": "scripts/run_bad_bundle_checks.py"
+}

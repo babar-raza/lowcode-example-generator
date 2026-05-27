@@ -1,0 +1,67 @@
+HEALING SPRINT 1B -- COMMANDS LOG
+Date: 2026-05-27
+
+=== GIT STATE (START) ===
+$ git log --oneline -3
+580e8eb feat(healing-sprint-1): update final-clean-proof.txt with correct HEAD SHA
+f62f196 feat(healing-sprint-1): finalize final-clean-proof.txt -- clean state confirmed
+47ff25f feat(healing-sprint-1): machinery audit, bad-bundle replay, gate simulation, proof hardening -- ECC 25/25
+EXIT: 0
+
+$ git status --short
+ M README.md
+?? reports/healing-sprint-1b/
+EXIT: 0
+
+$ git diff --stat HEAD
+ README.md | 101 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 101 insertions(+)
+EXIT: 0
+
+=== README.md COMMIT ===
+$ git add README.md
+EXIT: 0
+
+$ git commit -m "docs: commit operator README documentation additions..."
+[main a20d875] docs: commit operator README documentation additions
+ 1 file changed, 101 insertions(+)
+EXIT: 0
+
+$ git status --short
+?? reports/healing-sprint-1b/
+EXIT: 0
+
+=== APPROVAL GATE CHECKS ===
+$ printenv PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL | wc -c
+0
+$ printenv PLUGIN_EXAMPLES_MERGE_PR_APPROVAL | wc -c
+0
+$ printenv GH_TOKEN | wc -c
+41
+EXIT: 0
+
+=== FAMILY DRY-RUN ===
+cells: 9  words: 7  pdf: 19  diagram: 2  email: 1  slides: 3
+Total PR candidates: 41
+EXIT: 0
+
+=== VALIDATOR AUDIT ===
+$ grep -c "def _rule_" src/plugin_examples/evidence_validator.py
+145
+EXIT: 0
+
+=== BAD-BUNDLE REGRESSION CHECKS ===
+$ C:/Python313/python.exe scripts/run_bad_bundle_checks.py
+Total: 9  Passed: 7  Failed: 0  Skipped: 2
+all_executable_pass: True
+EXIT: 0
+
+=== ECC RUN ===
+$ C:/Python313/python.exe scripts/run_ecc_healing_sprint_1b.py
+ECC: 25/25 PRESENT  blocking_failures=0  closure_valid=True
+EXIT: 0
+
+=== BUNDLE BUILD ===
+$ C:/Python313/python.exe scripts/build_healing_sprint_1b_bundle.py
+(see bundle-manifest.json)
+EXIT: 0

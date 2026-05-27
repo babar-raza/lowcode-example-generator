@@ -1,0 +1,53 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "sprint_id": "healing-sprint-1b",
+  "sprint_type": "machinery_healing_finalization",
+  "date": "2026-05-27",
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "prior_sprint_reclassified": "healing-sprint-1 -> PARTIAL (superseded)",
+  "ecc": {
+    "total_categories": 25,
+    "present": 25,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "lanes": {
+    "lane_0_coordinator": "PASS",
+    "lane_1_git_proof": "PASS",
+    "lane_2_taskcard": "PASS",
+    "lane_3_replay": "PASS",
+    "lane_4_gate_simulation": "PASS",
+    "lane_5_validator_ecc": "PASS",
+    "lane_6_iv": "INDEPENDENT_VERIFICATION_PASS"
+  },
+  "sprint1_blockers_resolved": {
+    "readme_dirty": "RESOLVED (a20d875)",
+    "proof_stale_placeholder": "RESOLVED",
+    "bundle_manifest_head_sha": "RESOLVED",
+    "taskcard_frozen": "RESOLVED",
+    "replay_not_executable": "RESOLVED (5/6 automated)"
+  },
+  "replay_automation": {
+    "script": "scripts/run_bad_bundle_checks.py",
+    "total": 9,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 2,
+    "all_executable_pass": true
+  },
+  "publication": {
+    "gate_live_publish": "NOT_SET",
+    "gate_merge_pr": "NOT_SET",
+    "gh_token_set": true,
+    "examples_ready": 42,
+    "pr_candidates": 41,
+    "families": 6,
+    "status": "APPROVAL_BLOCKED"
+  },
+  "healing_sprint_2_recommended": false,
+  "technical_baseline": {
+    "ev": "145/145",
+    "validator_rules": 145,
+    "tests": "3189 (baseline, ENV_BLOCKER)"
+  }
+}

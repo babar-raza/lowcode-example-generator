@@ -1,0 +1,24 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "date": "2026-05-27",
+  "checks": [
+    {"check": "All Sprint 1 blockers resolved",                      "result": "PASS"},
+    {"check": "README.md committed (a20d875)",                       "result": "PASS"},
+    {"check": "Working tree clean of dirty tracked files",           "result": "PASS"},
+    {"check": "Replay automation: 5/6 executable, all pass",         "result": "PASS"},
+    {"check": "BAD-006 non-automatable classification honest",        "result": "PASS"},
+    {"check": "Gate simulation: both gates NOT SET, no-op confirmed", "result": "PASS"},
+    {"check": "Dry-run: 41 candidates, 42 records, 6 families",      "result": "PASS"},
+    {"check": "Validator 145 rules confirmed",                        "result": "PASS"},
+    {"check": "No stale text in committed proof files",              "result": "PASS"},
+    {"check": "Adversarial review passed",                           "result": "PASS"},
+    {"check": "IV: all 6 lanes pass",                                "result": "PASS"},
+    {"check": "Healing Sprint 2 not needed",                         "result": "PASS"},
+    {"check": "ECC 25/25 PRESENT (to be confirmed post-run)",        "result": "PENDING_ECC"}
+  ],
+  "total_checks": 13,
+  "passed": 12,
+  "pending": 1,
+  "failed": 0,
+  "consistency_verdict": "FINAL_CONSISTENCY_PASS_PENDING_ECC"
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "lane": 3,
+  "date": "2026-05-27",
+  "script": "scripts/run_bad_bundle_checks.py",
+  "total": 9,
+  "passed": 7,
+  "failed": 0,
+  "skipped": 2,
+  "all_executable_pass": true,
+  "checks": [
+    {
+      "id": "BAD-001",
+      "description": "source-diff.patch must be non-zero bytes",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "source-diff.patch size=304 bytes"
+    },
+    {
+      "id": "BAD-002",
+      "description": "all evidence contract category files must exist",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "all files present"
+    },
+    {
+      "id": "BAD-003-final-publication-source_sha",
+      "description": "final-publication source_sha must exist in git history",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "git cat-file -t 3f85332 -> 'commit'"
+    },
+    {
+      "id": "BAD-003-final-publication-head_sha",
+      "description": "final-publication head_sha (non-SHA reference field)",
+      "automatable": true,
+      "status": "SKIP",
+      "classification": "NON_SHA_FIELD",
+      "detail": "intentional reference string 'see git/final-clean-proof.txt'"
+    },
+    {
+      "id": "BAD-003-healing-sprint-1-source_sha",
+      "description": "healing-sprint-1 source_sha must exist in git history",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "git cat-file -t 47ff25f -> 'commit'"
+    },
+    {
+      "id": "BAD-003-healing-sprint-1-head_sha",
+      "description": "healing-sprint-1 head_sha must exist in git history",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "git cat-file -t f62f196 -> 'commit'"
+    },
+    {
+      "id": "BAD-004",
+      "description": "no committed proof files contain prohibited future-wording",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "scanned 3 committed proof files -- clean"
+    },
+    {
+      "id": "BAD-005",
+      "description": "ECC output uses 'present' not 'present_count'",
+      "automatable": true,
+      "status": "PASS",
+      "detail": "scanned 3 ECC files -- clean"
+    },
+    {
+      "id": "BAD-006",
+      "description": "write-without-read protocol",
+      "automatable": false,
+      "status": "SKIP",
+      "classification": "TOOL_PROTOCOL_ONLY",
+      "detail": "tool protocol only -- cannot be automated"
+    }
+  ]
+}

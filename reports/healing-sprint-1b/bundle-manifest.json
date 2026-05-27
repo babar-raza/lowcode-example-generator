@@ -1,0 +1,26 @@
+{
+  "schema_version": "healing-sprint-1b-v1",
+  "sprint_id": "healing-sprint-1b",
+  "bundle_name": "healing-sprint-1b-evidence-20260527.zip",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "source_sha": "[to be set after evidence commit]",
+  "head_sha": "[to be set after proof commit]",
+  "file_count": 43,
+  "bundle_path": "reports/healing-sprint-1b/bundles/healing-sprint-1b-evidence-20260527.zip",
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "ecc": {
+    "total_categories": 25,
+    "present": 25,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "key_files": [
+    "reports/healing-sprint-1b/final-verdict.md",
+    "reports/healing-sprint-1b/sprint-state.json",
+    "reports/healing-sprint-1b/evidence/healing-validation-result.json",
+    "reports/healing-sprint-1b/evidence/evidence-contract-computed.json",
+    "reports/healing-sprint-1b/iv/independent-verification-report.md",
+    "reports/healing-sprint-1b/replay/automation-coverage.json",
+    "reports/healing-sprint-1b/gates/approval-gate-simulation-final.md"
+  ]
+}

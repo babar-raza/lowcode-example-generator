@@ -1,0 +1,25 @@
+HEALING SPRINT 1B -- LANE 5: VALIDATOR TEST RESULTS
+Date: 2026-05-27
+
+=== VALIDATOR AUDIT ===
+File: src/plugin_examples/evidence_validator.py
+Lines: 7706
+
+$ grep -c "def _rule_" src/plugin_examples/evidence_validator.py
+145
+EXIT: 0
+
+=== REGRESSION CHECKS ===
+$ C:/Python313/python.exe scripts/run_bad_bundle_checks.py
+Total: 9  Passed: 7  Failed: 0  Skipped/Non-automatable: 2
+all_executable_pass: True
+EXIT: 0
+
+=== PRIOR CANONICAL VALIDATION ===
+Source: reports/sprint91/evidence/sprint91-final-validation-result.json
+  canonical: true
+  canonical_overall_valid: true
+  applicable_rules_failed: 0
+
+=== RESULT ===
+LANE_5_PASS -- 145 rules confirmed. Regression checks pass. Canonical validation clean.

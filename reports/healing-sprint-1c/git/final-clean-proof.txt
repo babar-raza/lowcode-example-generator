@@ -31,4 +31,4 @@ adcf3dc feat(final-publication): update final-clean-proof.txt with correct HEAD 
 e1084a6feat(healing-sprint-1c): authority patch -- 6 PENDING/IN_PROGRESS files patched, ECC 17/17, wording scan CLEAN
 
 ## Head SHA (step-2 finalize-proof commit)
-[head_sha = this file's commit SHA -- captured after step-2 commit and recorded in step-3]
+75f974b feat(healing-sprint-1c): finalize final-clean-proof.txt -- clean state confirmed

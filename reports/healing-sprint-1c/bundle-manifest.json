@@ -3,7 +3,7 @@
   "sprint_id": "healing-sprint-1c",
   "bundle_name": "healing-sprint-1c-evidence-20260527.zip",
   "generated_at": "2026-05-27T00:00:00Z",
-  "source_sha": "[captured after step-1 commit]",
+  "source_sha": "e1084a6",
   "head_sha": "[captured after step-2 commit]",
   "file_count": 0,
   "bundle_path": "reports/healing-sprint-1c/bundles/healing-sprint-1c-evidence-20260527.zip",

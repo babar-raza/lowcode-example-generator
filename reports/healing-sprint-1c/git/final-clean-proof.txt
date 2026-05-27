@@ -1,22 +1,34 @@
 # Healing Sprint 1C -- Final Clean Proof
-# NOTE: This file is updated by git commit steps 2 and 3.
-# Step 2 captures the git state after step-1 evidence commit.
-# Step 3 records the step-2 SHA here.
+# Source SHA (step-1 evidence commit): e1084a6
+# Head SHA (step-2 finalize-proof commit): captured below after step-2 commit
 
 ## git status --short (post step-1 commit)
-[captured after step-1 evidence commit]
+(nothing -- working tree clean)
 
 ## git status (post step-1 commit)
-[captured after step-1 evidence commit]
+On branch main
+Your branch is ahead of 'origin/main' by 11 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
 
 ## git diff --stat
-[no uncommitted changes after step-1 commit]
+(no uncommitted changes)
 
 ## git log --oneline -10
-[captured after step-1 evidence commit]
+e1084a6 feat(healing-sprint-1c): authority patch -- 6 PENDING/IN_PROGRESS files patched, ECC 17/17, wording scan CLEAN
+b8fd55d feat(healing-sprint-1b): update final-clean-proof.txt with correct HEAD SHA
+ccd2c17 feat(healing-sprint-1b): finalize final-clean-proof.txt -- clean state confirmed
+bb69553 feat(healing-sprint-1b): finalize machinery healing -- ECC 25/25, replay automated, README committed
+a20d875 docs: commit operator README documentation additions
+580e8eb feat(healing-sprint-1): update final-clean-proof.txt with correct HEAD SHA
+f62f196 feat(healing-sprint-1): finalize final-clean-proof.txt -- clean state confirmed
+47ff25f feat(healing-sprint-1): machinery audit, bad-bundle replay, gate simulation, proof hardening -- ECC 25/25
+adcf3dc feat(final-publication): update final-clean-proof.txt with correct HEAD SHA
+0f5b09c feat(final-publication): finalize final-clean-proof.txt -- clean state confirmed
 
 ## Source SHA (step-1 evidence commit)
-[source_sha = captured after step-1 commit]
+e1084a6feat(healing-sprint-1c): authority patch -- 6 PENDING/IN_PROGRESS files patched, ECC 17/17, wording scan CLEAN
 
 ## Head SHA (step-2 finalize-proof commit)
-[head_sha = captured after step-2 commit]
+[head_sha = this file's commit SHA -- captured after step-2 commit and recorded in step-3]

@@ -1,0 +1,21 @@
+{
+  "schema_version": "healing-sprint-1d-v1",
+  "sprint_id": "healing-sprint-1d",
+  "bundle_name": "healing-sprint-1d-final-archive-evidence-20260527.zip",
+  "generated_at": "2026-05-27T00:00:00Z",
+  "source_sha": "[step-1 evidence commit SHA -- captured post-commit]",
+  "proof_head_sha": "[step-2 finalize-proof SHA -- captured post-commit]",
+  "zip_build_sha": "[step-3 SHA at ZIP build time -- captured post-commit]",
+  "bundle_manifest_commit_sha": "[post-ZIP commit SHA -- final repo HEAD]",
+  "final_repo_head_sha": "[final repo HEAD -- captured post-ZIP commit]",
+  "file_count": 0,
+  "bundle_path": "reports/healing-sprint-1d/bundles/healing-sprint-1d-final-archive-evidence-20260527.zip",
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "supersedes": "reports/healing-sprint-1c/bundles/healing-sprint-1c-evidence-20260527.zip",
+  "ecc": {
+    "total_categories": 12,
+    "present": 12,
+    "blocking_failures": 0,
+    "closure_valid": true
+  }
+}

@@ -1,0 +1,4 @@
+# Healing Sprint 1D -- Final Clean Proof
+# PLACEHOLDER: Updated after step-1 evidence commit.
+
+[to be replaced with actual git state post step-1 commit]

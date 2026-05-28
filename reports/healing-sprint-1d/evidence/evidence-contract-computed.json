@@ -1,0 +1,27 @@
+{
+  "schema_version": "healing-sprint-1d-v1",
+  "sprint_id": "healing-sprint-1d",
+  "computed_at": "2026-05-27T00:00:00Z",
+  "contract_file": "reports/healing-sprint-1d/evidence/evidence-contract.json",
+  "total_categories": 12,
+  "present": 12,
+  "missing": 0,
+  "zero_bytes": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "categories": [
+    {"id": "CAT-01", "name": "archive_audit",             "status": "PRESENT"},
+    {"id": "CAT-02", "name": "todo",                      "status": "PRESENT"},
+    {"id": "CAT-03", "name": "commands_log",              "status": "PRESENT"},
+    {"id": "CAT-04", "name": "git_proof",                 "status": "PRESENT"},
+    {"id": "CAT-05", "name": "bundle_manifest",           "status": "PRESENT"},
+    {"id": "CAT-06", "name": "consistency_check",         "status": "PRESENT"},
+    {"id": "CAT-07", "name": "iv_report",                 "status": "PRESENT"},
+    {"id": "CAT-08", "name": "evidence_contract",         "status": "PRESENT"},
+    {"id": "CAT-09", "name": "evidence_contract_computed","status": "PRESENT"},
+    {"id": "CAT-10", "name": "healing_validation",        "status": "PRESENT"},
+    {"id": "CAT-11", "name": "final_verdict",             "status": "PRESENT"},
+    {"id": "CAT-12", "name": "sprint_state",              "status": "PRESENT"}
+  ],
+  "note": "Sprint 1D ECC confirms all 12 required archive-rebuild files are present."
+}

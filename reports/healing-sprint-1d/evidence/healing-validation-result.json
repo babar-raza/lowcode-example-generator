@@ -1,0 +1,27 @@
+{
+  "schema_version": "healing-sprint-1d-v1",
+  "sprint_id": "healing-sprint-1d",
+  "date": "2026-05-27",
+  "sprint_type": "archive_rebuild_only",
+  "canonical_overall_valid": true,
+  "applicable_rules_failed": 0,
+  "inherited_sprint_1c_verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "sprint_1d_checks": [
+    {"rule": "Uploaded 1C ZIP defects documented (4 confirmed)",                 "result": "PASS"},
+    {"rule": "Actual repo HEAD abeea0e captured in proof",                       "result": "PASS"},
+    {"rule": "No placeholder SHAs in proof or manifest",                         "result": "PASS"},
+    {"rule": "No TBD_STEP entries in commands.log",                              "result": "PASS"},
+    {"rule": "No stale wording in final-clean-proof.txt",                        "result": "PASS"},
+    {"rule": "manifest file_count equals actual ZIP entry count",                "result": "PASS"},
+    {"rule": "ECC 12/12 present, closure_valid=true",                            "result": "PASS"},
+    {"rule": "Finalization sequence documented in manifest",                     "result": "PASS"},
+    {"rule": "Sprint 1C machinery results carried forward unchanged",            "result": "PASS"},
+    {"rule": "Publication gates APPROVAL_BLOCKED",                               "result": "APPROVAL_BLOCKED"},
+    {"rule": "Healing Sprint 2 not required",                                    "result": "PASS"}
+  ],
+  "applicable_rules_count": 11,
+  "applicable_rules_passed": 10,
+  "applicable_rules_approval_blocked": 1,
+  "applicable_rules_failed": 0,
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED"
+}

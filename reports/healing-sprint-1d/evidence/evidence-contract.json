@@ -1,0 +1,20 @@
+{
+  "schema_version": "healing-sprint-1d-v1",
+  "sprint_id": "healing-sprint-1d",
+  "date": "2026-05-27",
+  "categories": [
+    {"id": "CAT-01", "name": "archive_audit",             "file": "reports/healing-sprint-1d/00-uploaded-1c-archive-audit.md"},
+    {"id": "CAT-02", "name": "todo",                      "file": "reports/healing-sprint-1d/todo.md"},
+    {"id": "CAT-03", "name": "commands_log",              "file": "reports/healing-sprint-1d/commands.log"},
+    {"id": "CAT-04", "name": "git_proof",                 "file": "reports/healing-sprint-1d/git/final-clean-proof.txt"},
+    {"id": "CAT-05", "name": "bundle_manifest",           "file": "reports/healing-sprint-1d/bundle-manifest.json"},
+    {"id": "CAT-06", "name": "consistency_check",         "file": "reports/healing-sprint-1d/review/final-consistency-check.json"},
+    {"id": "CAT-07", "name": "iv_report",                 "file": "reports/healing-sprint-1d/iv/independent-verification-report.md"},
+    {"id": "CAT-08", "name": "evidence_contract",         "file": "reports/healing-sprint-1d/evidence/evidence-contract.json"},
+    {"id": "CAT-09", "name": "evidence_contract_computed","file": "reports/healing-sprint-1d/evidence/evidence-contract-computed.json"},
+    {"id": "CAT-10", "name": "healing_validation",        "file": "reports/healing-sprint-1d/evidence/healing-validation-result.json"},
+    {"id": "CAT-11", "name": "final_verdict",             "file": "reports/healing-sprint-1d/final-verdict.md"},
+    {"id": "CAT-12", "name": "sprint_state",              "file": "reports/healing-sprint-1d/sprint-state.json"}
+  ],
+  "total_categories": 12
+}

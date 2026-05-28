@@ -1,0 +1,24 @@
+{
+  "schema_version": "healing-sprint-1f-v1",
+  "sprint_id": "healing-sprint-1f",
+  "status": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "recorded_at": "2026-05-28T00:00:00Z",
+  "source_sha": "3978659b18ba83404fb371ee8608c96142d7a068",
+  "note_on_final_commit_sha": "final_tracked_commit_sha is NOT embedded here -- see artifact-metadata/bundle-manifest.json inside ZIP",
+  "convention": "MANDATORY_ARTIFACT_STAGING_CONVENTION",
+  "convention_satisfied": true,
+  "tracked_repo_clean_before_artifact_build": true,
+  "no_tracked_files_modified_after_final_commit": true,
+  "no_post_zip_commit": true,
+  "artifact_loop_resolved": true,
+  "ecc": "10/10",
+  "healing_sprint_next_recommended": false,
+  "publication_gate": "APPROVAL_BLOCKED",
+  "supersedes": [
+    "healing-sprint-1e",
+    "healing-sprint-1d",
+    "healing-sprint-1c",
+    "healing-sprint-1b",
+    "healing-sprint-1"
+  ]
+}

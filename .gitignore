@@ -62,6 +62,9 @@ reports/**/*.zip
 # Generated pipeline snapshots
 /leg.zip
 
+# Local artifact staging (evidence bundles, not committed)
+.local/
+
 # OS
 .DS_Store
 Thumbs.db

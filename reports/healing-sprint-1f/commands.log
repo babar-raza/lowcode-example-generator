@@ -1,0 +1,51 @@
+# Healing Sprint 1F -- Commands Log
+
+## Pre-Sprint State Capture
+git status --short  -> 5 dirty Sprint 1E tracked files (SHA1_PLACEHOLDER replacements from 1E convention)
+git rev-parse HEAD  -> 3978659b18ba83404fb371ee8608c96142d7a068  exit=0
+
+## Sprint 1E Cleanup (restore dirty tracked files to committed state)
+git checkout reports/healing-sprint-1e/bundle-manifest.json
+  reports/healing-sprint-1e/commands.log
+  reports/healing-sprint-1e/final-verdict.md
+  reports/healing-sprint-1e/git/final-clean-proof.txt
+  reports/healing-sprint-1e/sprint-state.json  -> Updated 5 paths from the index  exit=0
+git status --short  -> (clean -- no output)  exit=0
+
+## Sprint 1F Tracked Evidence Files Created
+created: reports/healing-sprint-1f/00-1e-rejection.md  exit=0
+created: reports/healing-sprint-1f/todo.md  exit=0
+created: reports/healing-sprint-1f/commands.log (this file)  exit=0
+created: reports/healing-sprint-1f/final-verdict.md  exit=0
+created: reports/healing-sprint-1f/sprint-state.json  exit=0
+created: reports/healing-sprint-1f/evidence/evidence-contract.json  exit=0
+created: reports/healing-sprint-1f/evidence/evidence-contract-computed.json  exit=0
+created: reports/healing-sprint-1f/evidence/healing-validation-result.json  exit=0
+created: reports/healing-sprint-1f/review/final-consistency-check.json  exit=0
+created: reports/healing-sprint-1f/iv/independent-verification-report.md  exit=0
+updated: .gitignore (added .local/ gitignore entry)  exit=0
+created: scripts/build_healing_sprint_1f_bundle.py  exit=0
+
+## Git Commit (final tracked commit -- no tracked file changes after this)
+git add [exact paths: 10 sprint files + .gitignore + build script]  exit=0
+git commit -m "feat(healing-sprint-1f): adopt artifact-staging convention for final archives"
+  -> see artifact-metadata/bundle-manifest.json for final_tracked_commit_sha  exit=0
+
+## Post-Commit Clean Verification
+git status --short  -> (clean -- no output)  exit=0
+git status          -> nothing to commit, working tree clean  exit=0
+git diff --stat     -> (no changes)  exit=0
+
+## Artifact Build (final action -- no commit after)
+C:/Python313/python.exe scripts/build_healing_sprint_1f_bundle.py  exit=0
+  -> artifact_build_head_sha captured from git rev-parse HEAD
+  -> tracked repo CLEAN verified (git status --short empty)
+  -> artifact-metadata generated outside tracked files
+  -> ZIP built to .local/evidence-bundles/
+
+## Convention Compliance
+tracked_repo_clean_before_artifact_build: TRUE
+no_tracked_files_modified_after_final_commit: TRUE
+no_post_zip_commit: TRUE
+final_commit_sha embedded in tracked files: FALSE (artifact-metadata only)
+artifact-metadata generated outside tracked repo: TRUE

@@ -1,0 +1,70 @@
+{
+  "schema_version": "healing-sprint-1f-v1",
+  "sprint_id": "healing-sprint-1f",
+  "sprint_purpose": "Adopt MANDATORY ARTIFACT-STAGING CONVENTION -- no tracked file changes after final commit",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "note": "ECC covers tracked repo evidence files only. Artifact-only metadata (bundle-manifest, final-clean-proof, artifact-verification, zip-file-list) is generated outside tracked files and lives in artifact-metadata/ inside ZIP.",
+  "categories": [
+    {
+      "id": "REJECTION_AUDIT",
+      "description": "Documents Sprint 1E rejection: dirty tracked files, uncommitted SHA updates, self-reference loop",
+      "file": "reports/healing-sprint-1f/00-1e-rejection.md",
+      "required": true
+    },
+    {
+      "id": "TODO_LOG",
+      "description": "Sprint 1F task list with all tasks DONE or APPROVAL_BLOCKED",
+      "file": "reports/healing-sprint-1f/todo.md",
+      "required": true
+    },
+    {
+      "id": "COMMANDS_LOG",
+      "description": "Commands log documenting Sprint 1F actions; final_commit_sha referenced in artifact-metadata",
+      "file": "reports/healing-sprint-1f/commands.log",
+      "required": true
+    },
+    {
+      "id": "FINAL_VERDICT",
+      "description": "Sprint verdict: LOWCODE_MACHINERY_HEALING_ACCEPTED",
+      "file": "reports/healing-sprint-1f/final-verdict.md",
+      "required": true
+    },
+    {
+      "id": "SPRINT_STATE",
+      "description": "Machine-readable sprint state; final_commit_sha intentionally absent (artifact-only convention)",
+      "file": "reports/healing-sprint-1f/sprint-state.json",
+      "required": true
+    },
+    {
+      "id": "EVIDENCE_CONTRACT",
+      "description": "This file -- defines 10 tracked evidence categories",
+      "file": "reports/healing-sprint-1f/evidence/evidence-contract.json",
+      "required": true
+    },
+    {
+      "id": "EVIDENCE_CONTRACT_COMPUTED",
+      "description": "Computed verification: 10/10 PRESENT, closure_valid=true",
+      "file": "reports/healing-sprint-1f/evidence/evidence-contract-computed.json",
+      "required": true
+    },
+    {
+      "id": "HEALING_VALIDATION",
+      "description": "Healing validation result: all rules satisfied including CLEAN tracked repo rule",
+      "file": "reports/healing-sprint-1f/evidence/healing-validation-result.json",
+      "required": true
+    },
+    {
+      "id": "CONSISTENCY_CHECK",
+      "description": "Final consistency check across all Sprint 1F deliverables",
+      "file": "reports/healing-sprint-1f/review/final-consistency-check.json",
+      "required": true
+    },
+    {
+      "id": "INDEPENDENT_VERIFICATION",
+      "description": "Independent verification confirming artifact-staging convention compliance",
+      "file": "reports/healing-sprint-1f/iv/independent-verification-report.md",
+      "required": true
+    }
+  ],
+  "total_required": 10
+}

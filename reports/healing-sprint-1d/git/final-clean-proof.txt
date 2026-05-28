@@ -1,6 +1,6 @@
 # Healing Sprint 1D -- Final Clean Proof
 # Source SHA (step-1 evidence commit): e342a34e8484d79f713596005bf572ae0199c9ed
-# Head SHA (step-2 finalize-proof commit): captured after step-2 commit -- see line below
+# Head SHA (step-2 finalize-proof commit): 0bea82447bdc2af1a2cc7b6b5ebcc30f51c12c7e
 
 ## git status --short (post step-1 commit)
 (nothing -- working tree clean)
@@ -31,4 +31,4 @@ a20d875 docs: commit operator README documentation additions
 e342a34 feat(healing-sprint-1d): archive rebuild -- fix uploaded 1C ZIP defects, ECC 12/12, clean proof
 
 ## Head SHA (step-2 finalize-proof commit)
-[step-2 SHA recorded here after step-2 commit]
+0bea82447bdc2af1a2cc7b6b5ebcc30f51c12c7e feat(healing-sprint-1d): finalize final-clean-proof.txt -- clean state confirmed

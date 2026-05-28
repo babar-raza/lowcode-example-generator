@@ -4,7 +4,7 @@
   "bundle_name": "healing-sprint-1d-final-archive-evidence-20260527.zip",
   "generated_at": "2026-05-27T00:00:00Z",
   "source_sha": "e342a34e8484d79f713596005bf572ae0199c9ed",
-  "proof_head_sha": "[step-2 finalize-proof SHA -- captured post-commit]",
+  "proof_head_sha": "0bea82447bdc2af1a2cc7b6b5ebcc30f51c12c7e",
   "zip_build_sha": "[step-3 SHA at ZIP build time -- captured post-commit]",
   "bundle_manifest_commit_sha": "[post-ZIP commit SHA -- final repo HEAD]",
   "final_repo_head_sha": "[final repo HEAD -- captured post-ZIP commit]",

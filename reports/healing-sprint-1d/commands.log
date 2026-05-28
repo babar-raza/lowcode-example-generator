@@ -74,4 +74,10 @@ git commit -m "feat(healing-sprint-1d): update bundle-manifest file_count=12 and
 ## Final SHA Patch Commit (bundle-manifest + commands.log with real post-ZIP SHA)
 git add reports/healing-sprint-1d/bundle-manifest.json reports/healing-sprint-1d/commands.log  exit=0
 git commit -m "feat(healing-sprint-1d): update final-clean-proof.txt with correct HEAD SHA"
-  -> [SHA captured after this commit]
+  -> [main 53705c3] -- SHA=53705c3483384daaf061cdd1bbb257937603a599  exit=0
+  -> 2 files changed, 10 insertions(+), 4 deletions(-)
+
+## ZIP Final Rebuild (after all SHA patches complete)
+C:/Python313/python.exe scripts/build_healing_sprint_1d_bundle.py  exit=0
+  -> bundle rebuilt with finalized commands.log and manifest
+  -> final ZIP entry count verified == manifest file_count

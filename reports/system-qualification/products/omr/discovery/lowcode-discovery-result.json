@@ -1,0 +1,19 @@
+{
+  "product_key": "omr",
+  "package_id": "Aspose.OMR",
+  "package_version": "26.1.0",
+  "classification": "NO_LOWCODE_CONFIRMED",
+  "scan_method": "dll_reflection_via_dllreflector",
+  "evidence_source": "workspace/verification/latest/omr-source-of-truth-proof.json",
+  "namespace_count": 2,
+  "lowcode_namespace_found": false,
+  "matched_namespaces": [],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "discovery_verdict": "NO_LOWCODE_CONFIRMED",
+  "e2e_required": false,
+  "scan_timestamp": "2026-05-09T00:00:00Z",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z"
+}

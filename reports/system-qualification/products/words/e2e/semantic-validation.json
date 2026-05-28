@@ -1,0 +1,110 @@
+{
+  "schema_version": "semantic-validation-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "words",
+  "source": "workspace/verification/latest/families/words/example-gate-results.json",
+  "validation_status": "PASSED_FROM_PRODUCTION_EVIDENCE",
+  "evidence": {
+    "total_examples": 8,
+    "publish_candidates": 7,
+    "blocked_examples": 1,
+    "examples": [
+      {
+        "scenario_id": "words-comparer",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-comparer",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "not_evaluated",
+        "publish_candidate": false,
+        "blocked_reason": "Code contract validation failed (blocking mode)",
+        "final_example_verdict": "EXAMPLE_BLOCKED_CODE_CONTRACT_FAILED"
+      },
+      {
+        "scenario_id": "words-converter",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-converter",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-mail-merger",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-mail-merger",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-merger",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-merger",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-replacer",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-replacer",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-report-builder",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-report-builder",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-splitter",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-splitter",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      },
+      {
+        "scenario_id": "words-watermarker",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-watermarker",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      }
+    ]
+  }
+}

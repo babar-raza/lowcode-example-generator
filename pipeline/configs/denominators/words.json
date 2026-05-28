@@ -4,7 +4,7 @@
   "source_version": "26.5.0",
   "source_package_sha256": "40c9793ca2dd238fea533e6e3a66301dc9ccf56c7a19a6ba9688e9eb3fccc495",
   "api_catalog_sha256": "db3ec3dda66504d98f3a0cac9b03397c723470afe528d06f712b2e2cf3bf7d03",
-  "api_catalog_source": "workspace/runs/pilot-words-20260513-114221/catalog/words/api-catalog.json",
+  "api_catalog_source": "workspace/runs/pilot-words-heal-20260528/catalog/words/api-catalog.json",
   "plugin_namespace": "Aspose.Words.LowCode",
   "total_lowcode_types": 25,
   "workflow_root_types": 9,

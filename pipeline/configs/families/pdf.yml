@@ -17,6 +17,7 @@ nuget:
   dependency_resolution:
     enabled: true
     max_depth: 2
+    include_all_tfm_groups: true
 
 plugin_detection:
   namespace_patterns:

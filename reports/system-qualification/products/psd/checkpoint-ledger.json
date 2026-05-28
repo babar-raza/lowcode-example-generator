@@ -1,0 +1,84 @@
+{
+  "schema_version": "checkpoint-ledger-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "psd",
+  "family_status": "discovery_only",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "checkpoints": {
+    "PRODUCT_REGISTERED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Package registered and identified"
+    },
+    "PACKAGE_DISCOVERED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Package registered and identified"
+    },
+    "PACKAGE_RESTORED_OR_BLOCKED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Package registered and identified"
+    },
+    "ASSEMBLY_DISCOVERED": {
+      "status": "BLOCKED",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Reflection blocked by missing dependency"
+    },
+    "LOWCODE_SCAN_COMPLETE": {
+      "status": "BLOCKED",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Cannot scan - assembly not loadable"
+    },
+    "CLASSIFICATION_DECIDED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "DENOMINATOR_READY_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "FIXTURES_READY_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "GENERATION_RUN_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "BUILD_RUN_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "SEMANTIC_VALIDATION_RUN_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "README_IO_VALIDATION_RUN_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "PACKAGE_DRY_RUN_OR_NOT_REQUIRED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "PRODUCT_E2E_COMPLETE_OR_BLOCKED": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    },
+    "PRODUCT_IV_COMPLETE": {
+      "status": "BLOCKED_PENDING_HEALING",
+      "timestamp": null,
+      "note": "Cannot proceed until package dependency resolved"
+    }
+  }
+}

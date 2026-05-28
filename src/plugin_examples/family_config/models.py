@@ -17,6 +17,7 @@ class DependencyResolution:
     enabled: bool = True
     max_depth: int = 2
     extra_packages: list[str] = field(default_factory=list)
+    include_all_tfm_groups: bool = False
 
 
 @dataclass(frozen=True)

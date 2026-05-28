@@ -81,6 +81,7 @@ def _build_model(data: dict) -> FamilyConfig:
             enabled=dep_res.get("enabled", True),
             max_depth=dep_res.get("max_depth", 2),
             extra_packages=dep_res.get("extra_packages", []),
+            include_all_tfm_groups=dep_res.get("include_all_tfm_groups", False),
         ),
     )
 

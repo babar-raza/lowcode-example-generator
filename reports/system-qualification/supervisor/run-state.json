@@ -1,0 +1,119 @@
+{
+  "schema_version": "run-state-v1",
+  "run_id": "sysqual-20260528-001",
+  "sprint": "LOWCODE_SYSTEM_QUALIFICATION_SPRINT",
+  "started_at": "2026-05-28T00:00:00Z",
+  "current_phase": "COMPLETE",
+  "current_product": null,
+  "current_checkpoint": null,
+  "product_queue": [
+    "barcode",
+    "cad",
+    "cells",
+    "diagram",
+    "drawing",
+    "email",
+    "epub",
+    "finance",
+    "font",
+    "gis",
+    "html",
+    "imaging",
+    "note",
+    "ocr",
+    "omr",
+    "page",
+    "pdf",
+    "psd",
+    "slides",
+    "svg",
+    "tasks",
+    "tex",
+    "threed",
+    "words",
+    "zip"
+  ],
+  "active_workers": [],
+  "halted_workers": [],
+  "failed_checks": [],
+  "healing_attempts": [
+    {
+      "failure_id": "HEAL-001",
+      "product": "pdf",
+      "status": "HEALED"
+    },
+    {
+      "failure_id": "HEAL-002",
+      "product": "words",
+      "status": "HEALED"
+    }
+  ],
+  "resumed_checkpoints": [],
+  "completed_products": [
+    "barcode",
+    "cad",
+    "cells",
+    "diagram",
+    "drawing",
+    "email",
+    "epub",
+    "finance",
+    "font",
+    "gis",
+    "html",
+    "imaging",
+    "note",
+    "ocr",
+    "omr",
+    "page",
+    "pdf",
+    "psd",
+    "slides",
+    "svg",
+    "tasks",
+    "tex",
+    "threed",
+    "words",
+    "zip"
+  ],
+  "unresolved_blockers": [
+    {
+      "product": "epub",
+      "type": "EXTERNAL_PACKAGE_NOT_FOUND"
+    },
+    {
+      "product": "ocr",
+      "type": "EXTERNAL_DEPENDENCY_NOT_ON_NUGET"
+    },
+    {
+      "product": "psd",
+      "type": "EXTERNAL_DEPENDENCY_NOT_ON_NUGET"
+    },
+    {
+      "product": "ALL_LOWCODE",
+      "type": "PUBLICATION_APPROVAL_BLOCKED"
+    }
+  ],
+  "final_verdict_candidate": "LOWCODE_SYSTEM_QUALIFICATION_ACCEPTED_WITH_EXTERNAL_BLOCKERS",
+  "universe_reconciliation": {
+    "expected": 26,
+    "found": 25,
+    "verdict": "EVIDENCED_UNIVERSE_IS_25",
+    "reconciliation_file": "reports/system-qualification/product-universe/product-universe-reconciliation.md",
+    "proceeded": true
+  },
+  "phase_status": {
+    "PRODUCT_UNIVERSE_DISCOVERY": "COMPLETE",
+    "ENVIRONMENT_PREFLIGHT": "COMPLETE",
+    "LOWCODE_DISCOVERY": "COMPLETE",
+    "DENOMINATOR_PREP": "COMPLETE",
+    "FIXTURE_READINESS": "COMPLETE",
+    "E2E_RUNS": "COMPLETE",
+    "MONITORING_HEALING": "COMPLETE",
+    "VALIDATOR_HARDENING": "COMPLETE",
+    "PUBLICATION_DRY_RUN": "COMPLETE",
+    "STATE_SYNC": "COMPLETE",
+    "INDEPENDENT_VERIFICATION": "COMPLETE",
+    "FINAL_ARTIFACT": "COMPLETE"
+  }
+}

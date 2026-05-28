@@ -1,0 +1,32 @@
+{
+  "schema_version": "healing-execution-ledger-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "executions": [
+    {
+      "failure_id": "HEAL-001",
+      "product": "pdf",
+      "files_modified": [
+        "src/plugin_examples/family_config/models.py",
+        "src/plugin_examples/family_config/loader.py",
+        "src/plugin_examples/runner.py",
+        "pipeline/schemas/family-config.schema.json",
+        "pipeline/configs/families/pdf.yml"
+      ],
+      "verification_run": "pilot-pdf-heal-20260528",
+      "verification_result": "PASS \u2014 14 stages passed",
+      "status": "HEALED"
+    },
+    {
+      "failure_id": "HEAL-002",
+      "product": "words",
+      "files_modified": [
+        "pipeline/configs/denominators/words.json"
+      ],
+      "note": "First heal attempt was incorrect (HEAL-002a), reverted in HEAL-002b",
+      "verification_run": "pilot-words-heal2-20260528",
+      "verification_result": "PASS \u2014 14 stages passed",
+      "status": "HEALED"
+    }
+  ]
+}

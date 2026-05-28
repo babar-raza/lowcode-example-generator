@@ -1,0 +1,39 @@
+{
+  "schema_version": "blocker-register-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "blockers": [
+    {
+      "product": "epub",
+      "type": "EXTERNAL_PACKAGE_NOT_FOUND",
+      "evidence": "workspace/verification/latest/epub-reflection-blocker.json",
+      "description": "Aspose.Epub NuGet package does not exist (HTTP 404)",
+      "resolution": "EXTERNAL \u2014 package must be published by Aspose",
+      "blocks_e2e": true
+    },
+    {
+      "product": "ocr",
+      "type": "EXTERNAL_DEPENDENCY_NOT_ON_NUGET",
+      "evidence": "workspace/verification/latest/ocr-reflection-blocker.json",
+      "description": "Aspose.AI.LLM Version=25.12.0.0 not available on NuGet.org",
+      "resolution": "EXTERNAL \u2014 internal Aspose assembly must be published",
+      "blocks_e2e": true
+    },
+    {
+      "product": "psd",
+      "type": "EXTERNAL_DEPENDENCY_NOT_ON_NUGET",
+      "evidence": "workspace/verification/latest/psd-reflection-blocker.json",
+      "description": "Aspose.JavaAttributes Version=1.0.0.0 not available on NuGet.org",
+      "resolution": "EXTERNAL \u2014 internal Aspose assembly must be published",
+      "blocks_e2e": true
+    },
+    {
+      "product": "ALL_6_LOWCODE",
+      "type": "PUBLICATION_APPROVAL",
+      "evidence": "reports/system-qualification/publication-dry-run/approval-gate-proof.md",
+      "description": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
+      "resolution": "Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "blocks_e2e": false
+    }
+  ]
+}

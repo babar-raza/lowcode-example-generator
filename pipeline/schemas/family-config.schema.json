@@ -91,6 +91,11 @@
                 "type": "string"
               },
               "description": "Additional NuGet package IDs to download for DllReflector dependency resolution. Use when a required assembly is not declared in any nuspec TFM group for the primary package (e.g. Aspose.Drawing.Common for Aspose.OCR)."
+            },
+            "include_all_tfm_groups": {
+              "type": "boolean",
+              "default": false,
+              "description": "When true, collects dependencies from ALL TFM groups in the primary nuspec (not just the best-matching group). Required for packages where the netstandard2.0 nuspec group omits dependencies that the DLL actually references (e.g. Aspose.PDF VectorData deps in net9.0/net10.0 groups)."
             }
           }
         }

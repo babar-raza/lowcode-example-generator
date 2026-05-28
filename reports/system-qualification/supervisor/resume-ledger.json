@@ -1,0 +1,19 @@
+{
+  "schema_version": "resume-ledger-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "resumes": [
+    {
+      "product": "pdf",
+      "failure_id": "HEAL-001",
+      "resume_run_id": "pilot-pdf-heal-20260528",
+      "result": "DATA_FLOW_PROTOTYPE_ONLY \u2014 14/17 PASS"
+    },
+    {
+      "product": "words",
+      "failure_id": "HEAL-002",
+      "resume_run_id": "pilot-words-heal2-20260528",
+      "result": "DATA_FLOW_PROTOTYPE_ONLY \u2014 14/17 PASS"
+    }
+  ]
+}

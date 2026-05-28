@@ -1,0 +1,26 @@
+{
+  "schema_version": "semantic-validation-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "email",
+  "source": "workspace/verification/latest/families/email/example-gate-results.json",
+  "validation_status": "PASSED_FROM_PRODUCTION_EVIDENCE",
+  "evidence": {
+    "total_examples": 1,
+    "publish_candidates": 1,
+    "blocked_examples": 0,
+    "examples": [
+      {
+        "scenario_id": "email-converter",
+        "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-email-20260521-141939\\generated\\email\\email-converter",
+        "restore_status": "passed",
+        "build_status": "passed",
+        "run_status": "passed",
+        "output_validation_status": "advisory_no_output",
+        "reviewer_status": "passed",
+        "publish_candidate": true,
+        "blocked_reason": null,
+        "final_example_verdict": "EXAMPLE_READY_FOR_PR_DRY_RUN"
+      }
+    ]
+  }
+}

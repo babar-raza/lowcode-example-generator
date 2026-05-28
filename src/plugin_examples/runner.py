@@ -417,6 +417,7 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
         target_frameworks=cfg.target_framework_preference,
         max_depth=cfg.dependency_resolution.max_depth,
         run_dir=ctx.run_dir, family=ctx.family,
+        include_all_tfm_groups=cfg.dependency_resolution.include_all_tfm_groups,
     )
     write_dependency_manifest(ctx.deps, ctx.run_dir, ctx.family)
     update_package_lock(ctx.download_manifest, ctx.deps, ctx.evidence_dir)

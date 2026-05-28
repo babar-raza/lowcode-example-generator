@@ -1,0 +1,61 @@
+{
+  "schema_version": "denominator-matrix-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "products": [
+    {
+      "product_key": "cells",
+      "denominator_status": "READY",
+      "source_version": "26.5.1",
+      "total_lowcode_types": 22,
+      "workflow_root_types": 9,
+      "allowed_pilot_count": null,
+      "denominator_file": "pipeline\\configs\\denominators\\cells.json"
+    },
+    {
+      "product_key": "diagram",
+      "denominator_status": "READY",
+      "source_version": "26.5.0",
+      "total_lowcode_types": 5,
+      "workflow_root_types": 2,
+      "allowed_pilot_count": 2,
+      "denominator_file": "pipeline\\configs\\denominators\\diagram.json"
+    },
+    {
+      "product_key": "email",
+      "denominator_status": "READY",
+      "source_version": "26.4.0",
+      "total_lowcode_types": 3,
+      "workflow_root_types": 1,
+      "allowed_pilot_count": 1,
+      "denominator_file": "pipeline\\configs\\denominators\\email.json"
+    },
+    {
+      "product_key": "pdf",
+      "denominator_status": "READY",
+      "source_version": "26.5.0",
+      "total_lowcode_types": 101,
+      "workflow_root_types": 22,
+      "allowed_pilot_count": 19,
+      "denominator_file": "pipeline\\configs\\denominators\\pdf.json"
+    },
+    {
+      "product_key": "slides",
+      "denominator_status": "READY",
+      "source_version": "26.5.0",
+      "total_lowcode_types": 5,
+      "workflow_root_types": 3,
+      "allowed_pilot_count": 3,
+      "denominator_file": "pipeline\\configs\\denominators\\slides.json"
+    },
+    {
+      "product_key": "words",
+      "denominator_status": "READY",
+      "source_version": "26.5.0",
+      "total_lowcode_types": 25,
+      "workflow_root_types": 9,
+      "allowed_pilot_count": 8,
+      "denominator_file": "pipeline\\configs\\denominators\\words.json"
+    }
+  ]
+}

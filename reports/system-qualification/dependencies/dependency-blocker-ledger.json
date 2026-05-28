@@ -1,0 +1,48 @@
+{
+  "schema_version": "dependency-blocker-ledger-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "total_blockers": 5,
+  "blockers": [
+    {
+      "product_key": "epub",
+      "package_id": "Aspose.Epub",
+      "resolved_version": null,
+      "restore_status": "BLOCKED_PACKAGE_NOT_FOUND",
+      "blocker_reason": "NuGet HTTP 404 - Aspose.Epub package does not exist",
+      "family_status": "discovery_blocked"
+    },
+    {
+      "product_key": "html",
+      "package_id": "Aspose.HTML",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "ocr",
+      "package_id": "Aspose.OCR",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "discovery_only"
+    },
+    {
+      "product_key": "psd",
+      "package_id": "Aspose.PSD",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "discovery_only"
+    },
+    {
+      "product_key": "svg",
+      "package_id": "Aspose.SVG",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "disabled"
+    }
+  ]
+}

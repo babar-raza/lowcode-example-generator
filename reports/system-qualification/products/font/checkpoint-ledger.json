@@ -1,0 +1,84 @@
+{
+  "schema_version": "checkpoint-ledger-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "font",
+  "family_status": "disabled",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "checkpoints": {
+    "PRODUCT_REGISTERED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "PACKAGE_DISCOVERED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "PACKAGE_RESTORED_OR_BLOCKED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "ASSEMBLY_DISCOVERED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "LOWCODE_SCAN_COMPLETE": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "CLASSIFICATION_DECIDED": {
+      "status": "COMPLETE",
+      "timestamp": "2026-05-09T00:00:00Z",
+      "note": "Pre-validated from prior discovery run"
+    },
+    "DENOMINATOR_READY_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "FIXTURES_READY_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "GENERATION_RUN_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "BUILD_RUN_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "SEMANTIC_VALIDATION_RUN_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "README_IO_VALIDATION_RUN_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "PACKAGE_DRY_RUN_OR_NOT_REQUIRED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "PRODUCT_E2E_COMPLETE_OR_BLOCKED": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    },
+    "PRODUCT_IV_COMPLETE": {
+      "status": "NOT_REQUIRED",
+      "timestamp": "2026-05-28T00:00:00Z",
+      "note": "No LowCode namespace - E2E not required"
+    }
+  }
+}

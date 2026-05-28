@@ -1,0 +1,67 @@
+{
+  "schema_version": "readme-io-validation-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "slides",
+  "source": "workspace/verification/latest/families/slides/gate-results.json",
+  "validation_status": "PASSED_FROM_PRODUCTION_EVIDENCE",
+  "evidence": {
+    "verdict": "PR_DRY_RUN_READY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": [
+      {
+        "gate_id": "gate_scenarios",
+        "name": "Scenario Planning",
+        "status": "passed",
+        "required": true,
+        "evidence_files": [],
+        "failure_reason": null,
+        "downstream_blocked": [],
+        "stage_name": "scenario_planning"
+      },
+      {
+        "gate_id": "gate_generation",
+        "name": "Example Generation",
+        "status": "passed",
+        "required": true,
+        "evidence_files": [],
+        "failure_reason": null,
+        "downstream_blocked": [],
+        "stage_name": "generation"
+      },
+      {
+        "gate_id": "gate_build",
+        "name": "Build Validation",
+        "status": "passed",
+        "required": true,
+        "evidence_files": [
+          "validation-results.json"
+        ],
+        "failure_reason": null,
+        "downstream_blocked": [],
+        "stage_name": "validation"
+      },
+      {
+        "gate_id": "gate_run",
+        "name": "Runtime Validation",
+        "status": "passed",
+        "required": true,
+        "evidence_files": [],
+        "failure_reason": null,
+        "downstream_blocked": [],
+        "stage_name": "validation"
+      },
+      {
+        "gate_id": "gate_reviewer",
+        "name": "Example Reviewer",
+        "status": "failed",
+        "required": false,
+        "evidence_files": [],
+        "failure_reason": "Reviewer unavailable",
+        "downstream_blocked": [],
+        "stage_name": "reviewer"
+      }
+    ]
+  }
+}

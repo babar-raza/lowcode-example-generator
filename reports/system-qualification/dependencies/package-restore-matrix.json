@@ -1,0 +1,211 @@
+{
+  "schema_version": "package-restore-matrix-v1",
+  "run_id": "sysqual-20260528-001",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "total_products": 25,
+  "restored": 20,
+  "blocked": 5,
+  "unknown": 0,
+  "matrix": [
+    {
+      "product_key": "barcode",
+      "package_id": "Aspose.BarCode",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "cad",
+      "package_id": "Aspose.CAD",
+      "resolved_version": "26.1.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "cells",
+      "package_id": "Aspose.Cells",
+      "resolved_version": "26.5.1",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "diagram",
+      "package_id": "Aspose.Diagram",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "drawing",
+      "package_id": "Aspose.Drawing",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "email",
+      "package_id": "Aspose.Email",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "epub",
+      "package_id": "Aspose.Epub",
+      "resolved_version": null,
+      "restore_status": "BLOCKED_PACKAGE_NOT_FOUND",
+      "blocker_reason": "NuGet HTTP 404 - Aspose.Epub package does not exist",
+      "family_status": "discovery_blocked"
+    },
+    {
+      "product_key": "finance",
+      "package_id": "Aspose.Finance",
+      "resolved_version": "26.4.4",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "font",
+      "package_id": "Aspose.Font",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "gis",
+      "package_id": "Aspose.GIS",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "html",
+      "package_id": "Aspose.HTML",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "imaging",
+      "package_id": "Aspose.Imaging",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "note",
+      "package_id": "Aspose.Note",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "ocr",
+      "package_id": "Aspose.OCR",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "discovery_only"
+    },
+    {
+      "product_key": "omr",
+      "package_id": "Aspose.OMR",
+      "resolved_version": "26.1.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "page",
+      "package_id": "Aspose.Page",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "pdf",
+      "package_id": "Aspose.PDF",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "psd",
+      "package_id": "Aspose.PSD",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "discovery_only"
+    },
+    {
+      "product_key": "slides",
+      "package_id": "Aspose.Slides.NET",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "svg",
+      "package_id": "Aspose.SVG",
+      "resolved_version": "26.4.0",
+      "restore_status": "BLOCKED_DEPENDENCY",
+      "blocker_reason": "Missing transitive dependency",
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "tasks",
+      "package_id": "Aspose.Tasks",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "tex",
+      "package_id": "Aspose.TeX",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "threed",
+      "package_id": "Aspose.3D",
+      "resolved_version": "26.4.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    },
+    {
+      "product_key": "words",
+      "package_id": "Aspose.Words",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "active"
+    },
+    {
+      "product_key": "zip",
+      "package_id": "Aspose.ZIP",
+      "resolved_version": "26.5.0",
+      "restore_status": "RESTORED_IN_PRIOR_RUN",
+      "blocker_reason": null,
+      "family_status": "disabled"
+    }
+  ]
+}

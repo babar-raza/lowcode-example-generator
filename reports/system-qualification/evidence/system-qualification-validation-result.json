@@ -1,0 +1,23 @@
+{
+  "schema_version": "system-qualification-validation-result-v1",
+  "run_id": "sysqual-20260528-001",
+  "validated_at": "2026-05-28T00:00:00Z",
+  "ecc": "116/116",
+  "all_files_present": true,
+  "universe_count": 25,
+  "lowcode_confirmed": 6,
+  "no_lowcode": 16,
+  "blocked": 3,
+  "e2e_passed": 6,
+  "halted": 2,
+  "healed": 2,
+  "unresolved_halts": 0,
+  "external_blockers": 3,
+  "publication_mutations": 0,
+  "iv_verdict": "ACCEPT",
+  "adversarial_review": "PASS",
+  "final_verdict": "LOWCODE_SYSTEM_QUALIFICATION_ACCEPTED_WITH_EXTERNAL_BLOCKERS",
+  "convention": "MANDATORY_ARTIFACT_STAGING_CONVENTION",
+  "convention_satisfied": true,
+  "healing_sprint_required": false
+}

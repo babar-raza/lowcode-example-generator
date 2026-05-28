@@ -1,0 +1,9 @@
+{
+  "schema_version": "package-dry-run-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "email",
+  "dry_run_status": "SKIPPED_APPROVAL_BLOCKED",
+  "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+  "gate_value": "NOT_SET",
+  "note": "Publication dry-run not executed \u2014 approval gate not set. See publication-dry-run lane."
+}

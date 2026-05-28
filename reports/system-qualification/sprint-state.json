@@ -1,0 +1,32 @@
+{
+  "schema_version": "system-qualification-sprint-state-v1",
+  "sprint_id": "system-qualification",
+  "run_id": "sysqual-20260528-001",
+  "status": "LOWCODE_SYSTEM_QUALIFICATION_ACCEPTED_WITH_EXTERNAL_BLOCKERS",
+  "recorded_at": "2026-05-28T00:00:00Z",
+  "universe": {
+    "expected": 26,
+    "actual": 25,
+    "reconciled": true,
+    "reconciliation_verdict": "EVIDENCED_UNIVERSE_IS_25"
+  },
+  "classification_counts": {
+    "LOWCODE_CONFIRMED": 6,
+    "NO_LOWCODE_CONFIRMED": 16,
+    "DISCOVERY_BLOCKED_EXTERNAL_PACKAGE": 3
+  },
+  "e2e_results": {
+    "required": 6,
+    "first_run_pass": 4,
+    "healed_and_passed": 2,
+    "failed_blocked": 0
+  },
+  "machinery_defects_found": 2,
+  "machinery_defects_healed": 2,
+  "external_blockers": 3,
+  "publication_gate": "APPROVAL_BLOCKED",
+  "convention": "MANDATORY_ARTIFACT_STAGING_CONVENTION",
+  "healing_sprint_next_required": false,
+  "iv_verdict": "ACCEPT",
+  "final_verdict": "LOWCODE_SYSTEM_QUALIFICATION_ACCEPTED_WITH_EXTERNAL_BLOCKERS"
+}

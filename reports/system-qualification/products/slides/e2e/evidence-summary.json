@@ -1,0 +1,12 @@
+{
+  "schema_version": "evidence-summary-v1",
+  "run_id": "sysqual-20260528-001",
+  "product_key": "slides",
+  "pilot_run_id": "pilot-slides-final-20260528",
+  "pilot_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+  "stages_passed": 14,
+  "stages_failed": 0,
+  "machinery_verdict": "PASS",
+  "production_evidence_path": "workspace/verification/latest/families/slides/",
+  "healing_applied": false
+}

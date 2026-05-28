@@ -1,0 +1,77 @@
+# System Qualification Sprint — Commands Log
+# Run ID: sysqual-20260528-001
+# Date: 2026-05-28T00:00:00Z
+
+## Phase 0: Environment Setup
+
+dotnet build tools/DllReflector/DllReflector.csproj -c Release
+# Result: SUCCESS (0W, 0E)
+
+C:/Python313/python.exe -m venv .venv
+.venv/Scripts/python.exe -m pip install -e ".[dev]"
+# Result: SUCCESS
+
+## Phase 1: Product Universe Discovery
+
+.venv/Scripts/python.exe scripts/sysqual_discovery.py
+# Result: 25 products discovered, 6 LOWCODE_CONFIRMED, 16 NO_LOWCODE, 3 BLOCKED
+
+## Phase 2: Environment Preflight
+
+# .NET SDK check
+dotnet --version  # 10.0.204
+dotnet nuget list source  # nuget.org enabled
+
+## Phase 3: E2E Runs — First Attempt
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family cells --dry-run --skip-run --template-mode --tier 3
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family diagram --dry-run --skip-run --template-mode --tier 3
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family email --dry-run --skip-run --template-mode --tier 3
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family pdf --dry-run --skip-run --template-mode --tier 3
+# FAIL: BLOCKED_SOURCE_OF_TRUTH — DllReflector exit 3762504530 (VectorData.Abstractions missing from resolved-libs)
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family slides --dry-run --skip-run --template-mode --tier 3
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family words --dry-run --skip-run --template-mode --tier 3
+# FAIL: BLOCKED_SCENARIO_PLANNING — catalog hash mismatch (stale cache)
+
+## Phase 4: Healing
+
+# HEAL-001: PDF — Added include_all_tfm_groups to models/loader/runner/schema/pdf.yml
+# Files modified:
+#   src/plugin_examples/family_config/models.py
+#   src/plugin_examples/family_config/loader.py
+#   src/plugin_examples/runner.py
+#   pipeline/schemas/family-config.schema.json
+#   pipeline/configs/families/pdf.yml
+
+# HEAL-002: Words — Reverted denominator hash to canonical value
+# Files modified:
+#   pipeline/configs/denominators/words.json
+
+## Phase 5: Resume After Healing
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family pdf --dry-run --skip-run --template-mode --tier 3 --clean-run-dir --run-id pilot-pdf-heal-20260528
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+.venv/Scripts/python.exe scripts/pilot_run.py --family words --dry-run --skip-run --template-mode --tier 3 --clean-run-dir --run-id pilot-words-heal2-20260528
+# PASS: DATA_FLOW_PROTOTYPE_ONLY, 14 passed
+
+## Phase 6: Final Verification
+
+# All 6 LowCode families: cells, diagram, email, pdf, slides, words
+# All pass: 14/17 stages (validation/reviewer/publisher skipped — template-mode qualification)
+
+## Phase 7: Report Generation
+
+.venv/Scripts/python.exe scripts/sysqual_discovery.py
+.venv/Scripts/python.exe scripts/sysqual_reports.py
+.venv/Scripts/python.exe scripts/sysqual_support_reports.py
+.venv/Scripts/python.exe scripts/sysqual_iv_and_verdict.py

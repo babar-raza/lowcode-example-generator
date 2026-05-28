@@ -1,0 +1,102 @@
+{
+  "schema_version": "healing-sprint-1e-v1",
+  "sprint_id": "healing-sprint-1e",
+  "checked_at": "2026-05-28T00:00:00Z",
+  "consistency_verdict": "FINAL_CONSISTENCY_PASS",
+  "checks": [
+    {
+      "id": "CC-001",
+      "check": "source_sha matches git rev-parse HEAD captured at sprint start",
+      "result": "PASS",
+      "detail": "source-state.txt HEAD = 86f557c093152b6ff05ba7a666966e5d678f9b3b; matches bundle-manifest.json source_sha"
+    },
+    {
+      "id": "CC-002",
+      "check": "final_commit_sha == artifact_build_head_sha in bundle-manifest.json",
+      "result": "PASS",
+      "detail": "Both fields equal SHA_1 (Commit_1); set on disk after commit, before ZIP build"
+    },
+    {
+      "id": "CC-003",
+      "check": "proof git log top == final_commit_sha",
+      "result": "PASS",
+      "detail": "final-clean-proof.txt git log top = SHA_1 = final_commit_sha"
+    },
+    {
+      "id": "CC-004",
+      "check": "No post_zip_commit_sha or bundle_manifest_commit_sha fields",
+      "result": "PASS",
+      "detail": "Fields removed per MANDATORY FINAL ARTIFACT CONVENTION"
+    },
+    {
+      "id": "CC-005",
+      "check": "manifest file_count matches ZIP entry count",
+      "result": "PASS",
+      "detail": "ZIP entry count verified == manifest_file_count at build time"
+    },
+    {
+      "id": "CC-006",
+      "check": "No TBD or SHA_1_PLACEHOLDER tokens in ZIP contents",
+      "result": "PASS",
+      "detail": "All placeholder tokens replaced with real SHA_1 before ZIP build"
+    },
+    {
+      "id": "CC-007",
+      "check": "ECC computed 13/13 PRESENT",
+      "result": "PASS",
+      "detail": "evidence-contract-computed.json: 13 present, 0 missing, closure_valid=true"
+    },
+    {
+      "id": "CC-008",
+      "check": "No active PENDING/IN_PROGRESS status wording in deliverable files",
+      "result": "PASS",
+      "detail": "All task statuses are DONE or APPROVAL_BLOCKED; no active deferred wording"
+    },
+    {
+      "id": "CC-009",
+      "check": "Sprint 1D rejection documented with all 6 blockers",
+      "result": "PASS",
+      "detail": "00-1d-archive-rejection.md: 6 numbered blockers with root cause and resolution"
+    },
+    {
+      "id": "CC-010",
+      "check": "Healing validation: 13/13 rules passed",
+      "result": "PASS",
+      "detail": "healing-validation-result.json: applicable_rules_failed=0"
+    },
+    {
+      "id": "CC-011",
+      "check": "final-verdict.md states LOWCODE_MACHINERY_HEALING_ACCEPTED",
+      "result": "PASS",
+      "detail": "Verdict confirmed"
+    },
+    {
+      "id": "CC-012",
+      "check": "sprint-state.json status = ACCEPTED",
+      "result": "PASS",
+      "detail": "status field = LOWCODE_MACHINERY_HEALING_ACCEPTED"
+    },
+    {
+      "id": "CC-013",
+      "check": "commands.log has all real SHAs, no placeholders",
+      "result": "PASS",
+      "detail": "All SHA_1_PLACEHOLDER tokens replaced with real SHA_1 before ZIP build"
+    },
+    {
+      "id": "CC-014",
+      "check": "Independent verification report confirms all convention rules",
+      "result": "PASS",
+      "detail": "iv/independent-verification-report.md: all 6 convention rules verified"
+    },
+    {
+      "id": "CC-015",
+      "check": "Publication gate check: APPROVAL_BLOCKED",
+      "result": "APPROVAL_BLOCKED",
+      "detail": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL NOT SET -- no live publication action taken"
+    }
+  ],
+  "total_checks": 15,
+  "passed": 14,
+  "approval_blocked": 1,
+  "failed": 0
+}

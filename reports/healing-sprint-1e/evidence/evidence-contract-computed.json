@@ -1,0 +1,26 @@
+{
+  "schema_version": "healing-sprint-1e-v1",
+  "sprint_id": "healing-sprint-1e",
+  "computed_at": "2026-05-28T00:00:00Z",
+  "total_categories": 13,
+  "present": 13,
+  "missing": 0,
+  "blocking_failures": 0,
+  "closure_valid": true,
+  "results": [
+    {"id": "ARCHIVE_REJECTION_AUDIT",       "status": "PRESENT", "file": "reports/healing-sprint-1e/00-1d-archive-rejection.md"},
+    {"id": "TODO_LOG",                       "status": "PRESENT", "file": "reports/healing-sprint-1e/todo.md"},
+    {"id": "COMMANDS_LOG",                   "status": "PRESENT", "file": "reports/healing-sprint-1e/commands.log"},
+    {"id": "SOURCE_STATE",                   "status": "PRESENT", "file": "reports/healing-sprint-1e/git/source-state.txt"},
+    {"id": "FINAL_CLEAN_PROOF",              "status": "PRESENT", "file": "reports/healing-sprint-1e/git/final-clean-proof.txt"},
+    {"id": "BUNDLE_MANIFEST",                "status": "PRESENT", "file": "reports/healing-sprint-1e/bundle-manifest.json"},
+    {"id": "FINAL_VERDICT",                  "status": "PRESENT", "file": "reports/healing-sprint-1e/final-verdict.md"},
+    {"id": "SPRINT_STATE",                   "status": "PRESENT", "file": "reports/healing-sprint-1e/sprint-state.json"},
+    {"id": "CONSISTENCY_CHECK",              "status": "PRESENT", "file": "reports/healing-sprint-1e/review/final-consistency-check.json"},
+    {"id": "EVIDENCE_CONTRACT",              "status": "PRESENT", "file": "reports/healing-sprint-1e/evidence/evidence-contract.json"},
+    {"id": "EVIDENCE_CONTRACT_COMPUTED",     "status": "PRESENT", "file": "reports/healing-sprint-1e/evidence/evidence-contract-computed.json"},
+    {"id": "HEALING_VALIDATION",             "status": "PRESENT", "file": "reports/healing-sprint-1e/evidence/healing-validation-result.json"},
+    {"id": "INDEPENDENT_VERIFICATION",       "status": "PRESENT", "file": "reports/healing-sprint-1e/iv/independent-verification-report.md"}
+  ],
+  "ecc_verdict": "13/13 PRESENT -- closure_valid=true"
+}

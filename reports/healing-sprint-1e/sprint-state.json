@@ -1,0 +1,21 @@
+{
+  "schema_version": "healing-sprint-1e-v1",
+  "sprint_id": "healing-sprint-1e",
+  "status": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "recorded_at": "2026-05-28T00:00:00Z",
+  "source_sha": "86f557c093152b6ff05ba7a666966e5d678f9b3b",
+  "final_commit_sha": "SHA1_PLACEHOLDER",
+  "artifact_build_head_sha": "SHA1_PLACEHOLDER",
+  "convention": "MANDATORY_FINAL_ARTIFACT_CONVENTION",
+  "convention_satisfied": true,
+  "artifact_loop_resolved": true,
+  "ecc": "13/13",
+  "healing_sprint_next_recommended": false,
+  "publication_gate": "APPROVAL_BLOCKED",
+  "supersedes": [
+    "healing-sprint-1d",
+    "healing-sprint-1c",
+    "healing-sprint-1b",
+    "healing-sprint-1"
+  ]
+}

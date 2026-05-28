@@ -1,0 +1,22 @@
+{
+  "schema_version": "healing-sprint-1e-v1",
+  "sprint_id": "healing-sprint-1e",
+  "bundle_name": "healing-sprint-1e-final-artifact-evidence-20260527.zip",
+  "generated_at": "2026-05-28T00:00:00Z",
+  "source_sha": "86f557c093152b6ff05ba7a666966e5d678f9b3b",
+  "final_commit_sha": "SHA1_PLACEHOLDER",
+  "artifact_build_head_sha": "SHA1_PLACEHOLDER",
+  "manifest_file_count": 13,
+  "zip_entry_count": 13,
+  "bundle_path": "reports/healing-sprint-1e/bundles/healing-sprint-1e-final-artifact-evidence-20260527.zip",
+  "verdict": "LOWCODE_MACHINERY_HEALING_ACCEPTED",
+  "supersedes": "reports/healing-sprint-1d/bundles/healing-sprint-1d-final-archive-evidence-20260527.zip",
+  "ecc": {
+    "total_categories": 13,
+    "present": 13,
+    "blocking_failures": 0,
+    "closure_valid": true
+  },
+  "convention_note": "MANDATORY FINAL ARTIFACT CONVENTION: source_sha=HEAD before sprint, final_commit_sha=last commit, artifact_build_head_sha=git rev-parse HEAD before ZIP, both equal. No post_zip_commit_sha. No bundle_manifest_commit_sha. No TBD. No placeholder SHA. ZIP built last.",
+  "artifact_loop_resolution": "Single-commit approach: Commit_1 contains all files. SHA-dependent fields updated on disk after Commit_1 (uncommitted). ZIP built from disk at HEAD=Commit_1. artifact_build_head_sha = final_commit_sha = Commit_1 SHA. No loop possible."
+}

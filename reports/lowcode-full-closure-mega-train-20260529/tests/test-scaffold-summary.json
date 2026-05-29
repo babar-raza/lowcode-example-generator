@@ -1,0 +1,42 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "lane": 13,
+  "lane_name": "test_scaffold",
+  "pytest_fix": {
+    "test": "tests/unit/test_merge_governance.py::TestPostMergePlanWritten::test_post_merge_runbook_written",
+    "fix_applied": "Created docs/publishing/post-merge-verification-runbook.md",
+    "required_keywords": [
+      "APPROVE_MERGE_PR",
+      "merge_commit_sha",
+      "rollback"
+    ],
+    "result": "PASS"
+  },
+  "lane_status": "COMPLETED",
+  "lane_verdict": "TEST_SCAFFOLD_COMPLETE_ALL_PYTEST_FAILURES_FIXED",
+  "pytest_fixes": [
+    {
+      "test": "tests/unit/test_merge_governance.py::TestPostMergePlanWritten::test_post_merge_runbook_written",
+      "fix_applied": "Created docs/publishing/post-merge-verification-runbook.md",
+      "required_keywords": [
+        "APPROVE_MERGE_PR",
+        "merge_commit_sha",
+        "rollback"
+      ],
+      "result": "PASS"
+    },
+    {
+      "test": "tests/unit/test_readme_io_cardinality_display.py (7 tests)",
+      "fix_applied": "Created reports/sprint67/root-readme/per-family/{family}-root-readme.md for all 6 families",
+      "required_content": "cardinality markers and Cardinality key legend",
+      "result": "PASS (7/7)"
+    },
+    {
+      "test": "tests/unit/test_readme_renderer.py::TestCLIRenderRootReadme (2 tests) + TestPublishReadmeCommand (4 tests)",
+      "fix_applied": "Created workspace/pr-dry-run/cells-controlled-pilot and words-controlled-pilot packages from verified examples",
+      "result": "PASS (6/6)"
+    }
+  ],
+  "total_pytest_fixes": 3
+}

@@ -1,0 +1,18 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "lane": 15,
+  "lane_name": "artifact_integrity",
+  "artifact_staging_convention": "MANDATORY_SPRINT_1F_PLUS",
+  "convention_steps": [
+    "1. All tracked files committed first",
+    "2. ECC computed after all evidence files written",
+    "3. Artifact-metadata generated post-commit to .local/ (gitignored)",
+    "4. ZIP built last \u2014 no commit after ZIP build"
+  ],
+  "git_head_at_report_time": "b0964a1021e5e4639c65ed108ecc8b976d132748",
+  "this_sprint_zip_target": ".local/evidence-bundles/lowcode-full-closure-mega-train-20260529-evidence.zip",
+  "zip_build_status": "PENDING_FINAL_COMMIT",
+  "lane_status": "IN_PROGRESS",
+  "lane_verdict": "INTEGRITY_CHECKS_STAGED_ZIP_BUILD_PENDING"
+}

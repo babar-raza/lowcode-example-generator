@@ -1,0 +1,17 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "lane": 12,
+  "lane_name": "fixture_inventory",
+  "strategy": "Programmatic fixture creation in Program.cs (no external fixture files needed)",
+  "families": {
+    "cells": "input.xlsx auto-created; copies to input1/input2.xlsx for SpreadsheetMerger",
+    "words": "input.docx auto-created; copies to input1/input2.docx; BMP created for watermarker",
+    "pdf": "input.pdf created via new Document().Save()",
+    "diagram": "input.vsdx created via new Diagram() + DrawEllipse + Save",
+    "email": "input.eml auto-created by pipeline",
+    "slides": "input.pptx auto-created by pipeline"
+  },
+  "lane_status": "COMPLETED",
+  "lane_verdict": "FIXTURES_CONFIRMED_ALL_SELF_CONTAINED"
+}

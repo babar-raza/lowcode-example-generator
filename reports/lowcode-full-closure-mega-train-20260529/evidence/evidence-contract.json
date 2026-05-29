@@ -1,0 +1,272 @@
+{
+  "contract_id": "ecc-lowcode-full-closure-mega-train-20260529",
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:42:26Z",
+  "total_files": 44,
+  "categories": [
+    {
+      "id": "ECC-001",
+      "name": "post-merge-verification-runbook.md",
+      "file": "docs/publishing/post-merge-verification-runbook.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-002",
+      "name": "ai-accounting.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/ai/ai-accounting.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-003",
+      "name": "contradiction-resolution.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/audit/contradiction-resolution.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-004",
+      "name": "prior-sprint-reclassification.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/audit/prior-sprint-reclassification.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-005",
+      "name": "external-blocker-recheck.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/blockers/external-blocker-recheck.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-006",
+      "name": "commands.log",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/commands/commands.log",
+      "blocking": true
+    },
+    {
+      "id": "ECC-007",
+      "name": "count-consistency.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/consistency/count-consistency.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-008",
+      "name": "documentation-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/docs/documentation-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-009",
+      "name": "artifact-integrity.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/artifact-integrity.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-010",
+      "name": "e2e-run-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/e2e-run-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-011",
+      "name": "evidence-contract-computed.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/evidence-contract-computed.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-012",
+      "name": "evidence-contract.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/evidence-contract.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-013",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/cells/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-014",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/cells/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-015",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/diagram/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-016",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/diagram/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-017",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/email/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-018",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/email/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-019",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/pdf/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-020",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/pdf/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-021",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/slides/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-022",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/slides/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-023",
+      "name": "gate-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/words/gate-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-024",
+      "name": "validation-results.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/families/words/validation-results.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-025",
+      "name": "fixture-inventory.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/fixture-inventory.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-026",
+      "name": "sprint-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/evidence/sprint-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-027",
+      "name": "source-healing-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/healing/source-healing-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-028",
+      "name": "iv-adversarial-review.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/iv/iv-adversarial-review.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-029",
+      "name": "preflight-report.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/preflight/preflight-report.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-030",
+      "name": "product-classification.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/products/product-classification.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-031",
+      "name": "publication-status.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/publication/publication-status.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-032",
+      "name": "reviewer-publisher-semantics.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/semantics/reviewer-publisher-semantics.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-033",
+      "name": "pytest-run-result.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/tests/pytest-run-result.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-034",
+      "name": "test-scaffold-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/tests/test-scaffold-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-035",
+      "name": "validators-summary.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/validators/validators-summary.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-036",
+      "name": "work-ahead-discovery.json",
+      "file": "reports/lowcode-full-closure-mega-train-20260529/workahead/work-ahead-discovery.json",
+      "blocking": true
+    },
+    {
+      "id": "ECC-037",
+      "name": "cells-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/cells-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-038",
+      "name": "diagram-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/diagram-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-039",
+      "name": "email-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/email-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-040",
+      "name": "pdf-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/pdf-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-041",
+      "name": "slides-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/slides-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-042",
+      "name": "words-root-readme.md",
+      "file": "reports/sprint67/root-readme/per-family/words-root-readme.md",
+      "blocking": true
+    },
+    {
+      "id": "ECC-043",
+      "name": "build_mega_train_evidence.py",
+      "file": "scripts/build_mega_train_evidence.py",
+      "blocking": true
+    },
+    {
+      "id": "ECC-044",
+      "name": "run_ecc_mega_train.py",
+      "file": "scripts/run_ecc_mega_train.py",
+      "blocking": true
+    }
+  ]
+}

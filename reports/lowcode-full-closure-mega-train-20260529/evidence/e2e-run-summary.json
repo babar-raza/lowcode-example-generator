@@ -1,0 +1,107 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "lane": 6,
+  "lane_name": "e2e_pipeline_reruns",
+  "total_families": 6,
+  "total_examples": 42,
+  "total_passed": 42,
+  "total_failed": 0,
+  "all_pass": true,
+  "families": {
+    "cells": {
+      "run_id": "pilot-cells-20260529-135932",
+      "source_run_id": "pilot-cells-final-20260528",
+      "replay_from": "validation",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "9/9"
+    },
+    "words": {
+      "run_id": "pilot-words-20260529-140039",
+      "source_run_id": "pilot-words-heal2-20260528",
+      "replay_from": "validation",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "gate_verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "8/8"
+    },
+    "pdf": {
+      "run_id": "pilot-pdf-20260529-140036",
+      "source_run_id": "pilot-pdf-heal-20260528",
+      "replay_from": "validation",
+      "total": 19,
+      "passed": 19,
+      "failed": 0,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "19/19"
+    },
+    "diagram": {
+      "run_id": "pilot-diagram-20260529-140044",
+      "source_run_id": "pilot-diagram-final-20260528",
+      "replay_from": "validation",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "2/2"
+    },
+    "email": {
+      "run_id": "pilot-email-20260529-140029",
+      "source_run_id": "pilot-email-final-20260528",
+      "replay_from": "validation",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "1/1"
+    },
+    "slides": {
+      "run_id": "pilot-slides-20260529-140032",
+      "source_run_id": "pilot-slides-final-20260528",
+      "replay_from": "validation",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "pipeline_stages": 17,
+      "succeeded": 12,
+      "skipped": 5,
+      "failed_stages": 0,
+      "validation_pass_rate": "3/3"
+    }
+  },
+  "known_partial": {
+    "words": "PARTIAL_PR_DRY_RUN_READY \u2014 words-comparer advisory failure (pre-existing exclusion)"
+  },
+  "external_blockers_unchanged": [
+    "epub",
+    "ocr",
+    "psd"
+  ],
+  "lane_status": "COMPLETED",
+  "lane_verdict": "ALL_42_OF_42_EXAMPLES_PASS_VALIDATION"
+}

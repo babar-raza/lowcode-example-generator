@@ -1,0 +1,56 @@
+# lowcode-full-closure-mega-train-20260529 command log
+# Sprint commands executed.
+
+# === Lane 3-5: Source healing ===
+dotnet build workspace/runs/pilot-cells-final-20260528/generated/cells/cells-spreadsheet-merger -v q
+# Build succeeded. 0 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-cells-final-20260528/generated/cells/cells-spreadsheet-merger
+# Example: cells-spreadsheet-merger
+# Done.
+
+dotnet build workspace/runs/pilot-words-heal2-20260528/generated/words/words-merger -v q
+# Build succeeded. 0 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-words-heal2-20260528/generated/words/words-merger
+# Example: words-merger
+# Done.
+
+dotnet build workspace/runs/pilot-words-heal2-20260528/generated/words/words-watermarker -v q
+# Build succeeded. 0 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-words-heal2-20260528/generated/words/words-watermarker
+# Example: words-watermarker
+# Done.
+
+dotnet build workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-diagram-converter -v q
+# Build succeeded. 1 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-diagram-converter
+# Conversion succeeded, output file created at 'output.vdx'.
+
+dotnet build workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-pdf-converter -v q
+# Build succeeded. 1 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-pdf-converter
+# PDF generated successfully: output.pdf
+
+dotnet build workspace/runs/pilot-pdf-heal-20260528/generated/pdf/pdf-table-generator -v q
+# Build succeeded. 0 Warning(s) 0 Error(s)
+dotnet run --project workspace/runs/pilot-pdf-heal-20260528/generated/pdf/pdf-table-generator
+# Table added
+
+# === Lane 6: E2E reruns ===
+.venv/Scripts/python.exe -m plugin_examples run --family cells --replay-from validation --reuse-run pilot-cells-final-20260528 --promote-latest
+# Verdict: PR_DRY_RUN_READY
+
+.venv/Scripts/python.exe -m plugin_examples run --family email --replay-from validation --reuse-run pilot-email-final-20260528 --promote-latest
+# Verdict: PR_DRY_RUN_READY
+
+.venv/Scripts/python.exe -m plugin_examples run --family slides --replay-from validation --reuse-run pilot-slides-final-20260528 --promote-latest
+# Verdict: PR_DRY_RUN_READY
+
+.venv/Scripts/python.exe -m plugin_examples run --family diagram --replay-from validation --reuse-run pilot-diagram-final-20260528 --promote-latest
+# Verdict: PR_DRY_RUN_READY
+
+.venv/Scripts/python.exe -m plugin_examples run --family pdf --replay-from validation --reuse-run pilot-pdf-heal-20260528 --promote-latest
+# Verdict: PR_DRY_RUN_READY
+
+.venv/Scripts/python.exe -m plugin_examples run --family words --replay-from validation --reuse-run pilot-words-heal2-20260528 --promote-latest
+# Verdict: PARTIAL_PR_DRY_RUN_READY (words-comparer advisory — known exclusion)
+

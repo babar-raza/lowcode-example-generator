@@ -1,0 +1,76 @@
+{
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "results": [
+    {
+      "scenario_id": "slides-compress",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1028.9690494537354
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1502.3818016052246
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1163.9800071716309
+      }
+    },
+    {
+      "scenario_id": "slides-convert",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1117.431640625
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1549.9722957611084
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 2721.485137939453
+      }
+    },
+    {
+      "scenario_id": "slides-merger",
+      "passed": true,
+      "failure_stage": null,
+      "restore": {
+        "operation": "restore",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1125.6368160247803
+      },
+      "build": {
+        "operation": "build",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1549.307107925415
+      },
+      "run": {
+        "operation": "run",
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 3096.139669418335
+      }
+    }
+  ]
+}

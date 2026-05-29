@@ -1,0 +1,16 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:42:21Z",
+  "pytest_command": ".venv/Scripts/python.exe -m pytest tests/ --tb=no -q",
+  "total_passed": 3174,
+  "total_failed": 0,
+  "total_skipped": 18,
+  "subtests_passed": 10,
+  "rc": 0,
+  "result": "ALL_PASS",
+  "fixes_applied": [
+    "Created docs/publishing/post-merge-verification-runbook.md (APPROVE_MERGE_PR, merge_commit_sha, rollback)",
+    "Created reports/sprint67/root-readme/per-family/ files for all 6 families (cardinality markers)",
+    "Created workspace/pr-dry-run/cells-controlled-pilot and words-controlled-pilot packages"
+  ]
+}

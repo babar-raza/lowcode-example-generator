@@ -1,0 +1,36 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "confirmed_lowcode_families": {
+    "cells": {
+      "examples": 9,
+      "status": "LOWCODE_CONFIRMED"
+    },
+    "words": {
+      "examples": 8,
+      "status": "LOWCODE_CONFIRMED",
+      "pr_candidates": 7
+    },
+    "pdf": {
+      "examples": 19,
+      "status": "LOWCODE_CONFIRMED"
+    },
+    "diagram": {
+      "examples": 2,
+      "status": "LOWCODE_CONFIRMED",
+      "note": "Reclassified from EXTERNAL_BLOCKER in this sprint"
+    },
+    "email": {
+      "examples": 1,
+      "status": "LOWCODE_CONFIRMED"
+    },
+    "slides": {
+      "examples": 3,
+      "status": "LOWCODE_CONFIRMED"
+    }
+  },
+  "total_confirmed_lowcode": 6,
+  "total_no_lowcode": 16,
+  "total_external_blocker": 3,
+  "total_products_surveyed": 25
+}

@@ -1,0 +1,22 @@
+{
+  "sprint_id": "lowcode-full-closure-mega-train-20260529",
+  "generated_at": "2026-05-29T09:08:56Z",
+  "lane": 1,
+  "contradictions_in_prior_sprint": [
+    {
+      "id": "CONTRA-001",
+      "description": "diagram classified as EXTERNAL_BLOCKER; actual root cause was GENERATOR_API_MISMATCH",
+      "resolution": "Diagram defects resolved; diagram reclassified LOWCODE_CONFIRMED"
+    },
+    {
+      "id": "CONTRA-002",
+      "description": "reviewer/publisher logged success while examples had build/runtime failures",
+      "resolution": "Re-run confirms publisher skips correctly when gate verdict is non-publishable"
+    },
+    {
+      "id": "CONTRA-003",
+      "description": "count contradictions: 35/42 vs per-family totals",
+      "resolution": "All 42/42 examples now pass; denominator confirmed in Lane 7"
+    }
+  ]
+}

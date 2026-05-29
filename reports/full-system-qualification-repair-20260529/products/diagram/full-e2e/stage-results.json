@@ -1,0 +1,159 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "diagram",
+  "stages": [
+    {
+      "name": "load_config",
+      "status": "success",
+      "artifacts_summary": {
+        "family": "diagram",
+        "package_id": "Aspose.Diagram",
+        "config_hash": "4c8d892702497cbb61052eaac67cdc6889318ec3f1b8b0e3281f26adedc87769",
+        "constraints_hash": "6adcc98190ae718c5c60fd88aa0e1c2367e680662f5db12f32443a7dd8048fa8"
+      }
+    },
+    {
+      "name": "nuget_fetch",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-diagram-final-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "version_drift_preflight",
+      "status": "success",
+      "artifacts_summary": {
+        "fetched_version": "26.5.0",
+        "denominator_version": "26.5.0",
+        "drift_detected": "False",
+        "action_required": "none"
+      }
+    },
+    {
+      "name": "dependency_resolution",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-diagram-final-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "extraction",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-diagram-final-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "reflection",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-diagram-final-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "plugin_detection",
+      "status": "success",
+      "artifacts_summary": {
+        "eligible": "True",
+        "matched_namespaces": "['Aspose.Diagram.LowCode']",
+        "plugin_type_count": "5",
+        "plugin_method_count": "4"
+      }
+    },
+    {
+      "name": "api_delta",
+      "status": "success",
+      "artifacts_summary": {
+        "initial_run": "True",
+        "total_changes": "5"
+      }
+    },
+    {
+      "name": "impact_mapping",
+      "status": "success",
+      "artifacts_summary": {
+        "new_api_needed": "5"
+      }
+    },
+    {
+      "name": "fixture_registry",
+      "status": "success",
+      "artifacts_summary": {
+        "fixture_count": "0"
+      }
+    },
+    {
+      "name": "example_mining",
+      "status": "success",
+      "artifacts_summary": {
+        "mined_total": "0",
+        "stale_count": "0"
+      }
+    },
+    {
+      "name": "scenario_planning",
+      "status": "success",
+      "artifacts_summary": {
+        "ready_count": "2",
+        "blocked_count": "3",
+        "total_types_classified": "5",
+        "standalone_types": "2",
+        "completeness_gate_status": "pass"
+      }
+    },
+    {
+      "name": "llm_preflight",
+      "status": "success",
+      "artifacts_summary": {
+        "selected_provider": "llm_professionalize",
+        "llm_available": "True"
+      }
+    },
+    {
+      "name": "generation",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-diagram-final-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "validation",
+      "status": "success",
+      "artifacts_summary": {
+        "total": "2",
+        "passed": "0",
+        "failed": "2",
+        "build_passed": "0",
+        "run_passed": "0",
+        "build_repairs": "4",
+        "runtime_repairs": "0",
+        "runtime_failures_classified": "0"
+      }
+    },
+    {
+      "name": "reviewer",
+      "status": "success",
+      "artifacts_summary": {
+        "available": "False",
+        "passed": "False",
+        "preflight_ready": "False",
+        "repair_attempts": "0",
+        "repair_log": "[]"
+      }
+    },
+    {
+      "name": "publisher",
+      "status": "success",
+      "artifacts_summary": {
+        "status": "blocked",
+        "evidence_verified": "False",
+        "files_included": "0"
+      }
+    }
+  ]
+}

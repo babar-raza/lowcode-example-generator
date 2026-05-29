@@ -1,0 +1,15 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "halts": [
+    {
+      "id": "HALT-001",
+      "family": "diagram",
+      "halt_trigger": "BUILD_FAILED",
+      "halt_time": "2026-05-29T00:00:00Z",
+      "diagnosis": "GENERATOR_API_MISMATCH: generated fixture code uses non-existent Aspose.Diagram API types",
+      "heal_verdict": "NO_HEAL_IN_SCOPE",
+      "resume_action": "Classified as BLOCKED; lane continued without diagram"
+    }
+  ]
+}

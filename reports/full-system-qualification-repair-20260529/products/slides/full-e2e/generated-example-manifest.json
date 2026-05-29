@@ -1,0 +1,14 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "slides",
+  "prior_run_id": "pilot-slides-final-20260528",
+  "denominator_expected": 3,
+  "examples_found": 3,
+  "examples": [
+    "slides-compress",
+    "slides-convert",
+    "slides-merger"
+  ],
+  "generation_mode": "template",
+  "note": "Template-mode generation (no LLM). Code verified compilable and runnable."
+}

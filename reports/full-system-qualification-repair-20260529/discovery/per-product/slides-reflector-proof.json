@@ -1,0 +1,19 @@
+{
+  "family": "slides",
+  "package_id": "Aspose.Slides",
+  "timestamp": "2026-05-29T00:00:00Z",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-slide",
+  "dep_count": 10,
+  "reflection_status": "SUCCESS",
+  "lowcode_found": true,
+  "lowcode_namespaces": [
+    "Aspose.Slides.LowCode"
+  ],
+  "classification": "LOWCODE_CONFIRMED",
+  "reflect_result_summary": {
+    "namespace_count": 21,
+    "lowcode_namespace_count": 1
+  },
+  "evidence_source": "FRESH_DISCOVERY",
+  "raw_output_file": "per-product/slides-raw-reflection.json"
+}

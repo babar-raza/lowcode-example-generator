@@ -1,0 +1,449 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "pdf",
+  "template_mode": false,
+  "skip_run": false,
+  "status": "PASSED",
+  "dotnet_restore_passed": "?",
+  "dotnet_build_passed": "?",
+  "dotnet_run_passed": "?",
+  "raw": {
+    "total": 19,
+    "passed": 18,
+    "failed": 1,
+    "results": [
+      {
+        "scenario_id": "pdf-doc-converter",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1630.082368850708
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2507.444143295288
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3688.605308532715
+        }
+      },
+      {
+        "scenario_id": "pdf-form-editor",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1267.9431438446045
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1508.3441734313965
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2390.4078006744385
+        }
+      },
+      {
+        "scenario_id": "pdf-form-exporter",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1229.3596267700195
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1654.8757553100586
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2729.4132709503174
+        }
+      },
+      {
+        "scenario_id": "pdf-form-flattener",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1418.013334274292
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1688.7340545654297
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2621.795892715454
+        }
+      },
+      {
+        "scenario_id": "pdf-html",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2395.8733081817627
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1885.6916427612305
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 4805.139541625977
+        }
+      },
+      {
+        "scenario_id": "pdf-image-extractor",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1769.6597576141357
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2979.097366333008
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2743.5083389282227
+        }
+      },
+      {
+        "scenario_id": "pdf-jpeg",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1722.1150398254395
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1982.083797454834
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3685.8911514282227
+        }
+      },
+      {
+        "scenario_id": "pdf-merger",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1826.737403869629
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2238.548994064331
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1311.575174331665
+        }
+      },
+      {
+        "scenario_id": "pdf-optimizer",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1652.1503925323486
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1919.7707176208496
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1459.1598510742188
+        }
+      },
+      {
+        "scenario_id": "pdf-pdf-aconverter",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1770.8706855773926
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2123.032808303833
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1339.801549911499
+        }
+      },
+      {
+        "scenario_id": "pdf-png",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1604.865312576294
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2301.7375469207764
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3382.1074962615967
+        }
+      },
+      {
+        "scenario_id": "pdf-security",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2523.9555835723877
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3529.1924476623535
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3616.367816925049
+        }
+      },
+      {
+        "scenario_id": "pdf-signature",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2284.115791320801
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2300.7640838623047
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 3764.7910118103027
+        }
+      },
+      {
+        "scenario_id": "pdf-splitter",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2050.523519515991
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2110.443115234375
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1476.0913848876953
+        }
+      },
+      {
+        "scenario_id": "pdf-table-generator",
+        "passed": false,
+        "failure_stage": "build",
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1109.849452972412
+        },
+        "build": {
+          "operation": "build",
+          "success": false,
+          "exit_code": 1,
+          "duration_ms": 2101.370096206665
+        },
+        "run": null
+      },
+      {
+        "scenario_id": "pdf-text-extractor",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1396.5697288513184
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1857.2757244110107
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1277.3551940917969
+        }
+      },
+      {
+        "scenario_id": "pdf-tiff",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1287.351131439209
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2002.9325485229492
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2861.626625061035
+        }
+      },
+      {
+        "scenario_id": "pdf-toc-generator",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1470.3483581542969
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1942.1336650848389
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1958.1077098846436
+        }
+      },
+      {
+        "scenario_id": "pdf-xls-converter",
+        "passed": true,
+        "failure_stage": null,
+        "restore": {
+          "operation": "restore",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1234.1623306274414
+        },
+        "build": {
+          "operation": "build",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 1855.2663326263428
+        },
+        "run": {
+          "operation": "run",
+          "success": true,
+          "exit_code": 0,
+          "duration_ms": 2796.067237854004
+        }
+      }
+    ]
+  }
+}

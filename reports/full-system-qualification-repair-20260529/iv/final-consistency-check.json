@@ -1,0 +1,58 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "checks": [
+    {
+      "check": "prior_sprint_reclassified",
+      "result": "PASS"
+    },
+    {
+      "check": "fresh_discovery_ran",
+      "result": "PASS"
+    },
+    {
+      "check": "real_e2e_ran_for_all_lowcode_families",
+      "result": "PASS"
+    },
+    {
+      "check": "template_mode_false_for_all_runs",
+      "result": "PASS"
+    },
+    {
+      "check": "skip_run_false_for_all_runs",
+      "result": "PASS"
+    },
+    {
+      "check": "build_logs_present",
+      "result": "PASS"
+    },
+    {
+      "check": "reviewer_fallback_documented",
+      "result": "PASS"
+    },
+    {
+      "check": "publication_dry_run_documented",
+      "result": "PASS"
+    },
+    {
+      "check": "pytest_run",
+      "result": "PASS"
+    },
+    {
+      "check": "external_blockers_rechecked",
+      "result": "PASS"
+    },
+    {
+      "check": "diagram_failure_root_cause_documented",
+      "result": "PASS"
+    },
+    {
+      "check": "product_queue_tracked",
+      "result": "PASS"
+    },
+    {
+      "check": "no_remote_mutations",
+      "result": "PASS"
+    }
+  ]
+}

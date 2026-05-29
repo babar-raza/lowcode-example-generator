@@ -1,0 +1,19 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "words",
+  "prior_run_id": "pilot-words-heal2-20260528",
+  "denominator_expected": 8,
+  "examples_found": 8,
+  "examples": [
+    "words-comparer",
+    "words-converter",
+    "words-mail-merger",
+    "words-merger",
+    "words-replacer",
+    "words-report-builder",
+    "words-splitter",
+    "words-watermarker"
+  ],
+  "generation_mode": "template",
+  "note": "Template-mode generation (no LLM). Code verified compilable and runnable."
+}

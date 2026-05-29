@@ -1,0 +1,8 @@
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-comparer
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-converter
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-mail-merger
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-merger
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-replacer
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-report-builder
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-splitter
+workspace/runs/pilot-words-heal2-20260528/generated/words/words-watermarker

@@ -1,0 +1,6 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "heals": [],
+  "note": "No in-scope heals were possible. diagram GENERATOR_API_MISMATCH requires LLM re-generation which is out of scope for this sprint."
+}

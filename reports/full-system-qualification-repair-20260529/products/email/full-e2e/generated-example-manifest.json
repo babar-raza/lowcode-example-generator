@@ -1,0 +1,12 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "email",
+  "prior_run_id": "pilot-email-final-20260528",
+  "denominator_expected": 1,
+  "examples_found": 1,
+  "examples": [
+    "email-converter"
+  ],
+  "generation_mode": "template",
+  "note": "Template-mode generation (no LLM). Code verified compilable and runnable."
+}

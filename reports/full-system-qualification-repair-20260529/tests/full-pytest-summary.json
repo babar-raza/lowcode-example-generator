@@ -1,0 +1,11 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "return_code": 1,
+  "status": "FAIL",
+  "passed": 2004,
+  "failed": 1,
+  "errors": 0,
+  "skipped": 18,
+  "summary_line": "=========== 1 failed, 2004 passed, 18 skipped in 250.07s (0:04:10) ============"
+}

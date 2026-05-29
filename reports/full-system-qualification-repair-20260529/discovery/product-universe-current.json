@@ -1,0 +1,513 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "total_products": 25,
+  "source": "pipeline/configs/families/*.yml (excluding _templates/ and disabled/)",
+  "products": [
+    {
+      "family": "barcode",
+      "package_id": "Aspose.BarCode",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "cad",
+      "package_id": "Aspose.CAD",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "cells",
+      "package_id": "Aspose.Cells",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Cells.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-cells",
+      "dep_count": 8,
+      "reflect_result_summary": {
+        "namespace_count": 33,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "diagram",
+      "package_id": "Aspose.Diagram",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Diagram.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-diagr",
+      "dep_count": 2,
+      "reflect_result_summary": {
+        "namespace_count": 9,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "drawing",
+      "package_id": "Aspose.Drawing",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "email",
+      "package_id": "Aspose.Email",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Email.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email",
+      "dep_count": 7,
+      "reflect_result_summary": {
+        "namespace_count": 51,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "epub",
+      "package_id": "Aspose.Epub",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "BLOCKED",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "DISCOVERY_BLOCKED_EXTERNAL_PACKAGE",
+      "blocker": "EXTERNAL_PACKAGE_BLOCKER: Aspose.Epub",
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": false,
+      "blocker_detail": {
+        "family": "epub",
+        "package_id": "Aspose.Epub",
+        "blocker_type": "PACKAGE_DOWNLOAD_FAILED",
+        "blocker_severity": "HIGH",
+        "discovery_status": "BLOCKED_DOWNLOAD_FAILED",
+        "verified_at": "2026-05-09",
+        "run_dir": "workspace/runs/discovery-epub-20260509-113640",
+        "run_dir_empty": true,
+        "root_cause": "The Aspose.Epub NuGet package (package_id='Aspose.Epub') does not appear to be publicly available on NuGet.org. The discovery run directory was created but left empty \u00e2\u20ac\u201d no extraction manifest, no downloaded .nupkg, and no DLL extracted. This is distinct from the reflection-failure pattern seen in html/ocr/omr/psd/svg where the DLL was successfully extracted.",
+        "root_cause_category": "PACKAGE_NOT_PUBLICLY_AVAILABLE",
+        "evidence": {
+          "run_dir_contents": "empty",
+          "extraction_manifest_present": false,
+          "dll_present": false,
+          "catalog_present": false
+        },
+        "resolution_options": [
+          {
+            "option": "VERIFY_PACKAGE_ID",
+            "description": "Verify the exact NuGet package ID. Aspose.Epub may be published under a different ID (e.g. 'Aspose.Epub for .NET' or not available as a NuGet package).",
+            "action": "Search NuGet.org for 'Aspose.Epub' and verify correct package ID"
+          },
+          {
+            "option": "CHECK_PRIVATE_FEED",
+            "description": "Aspose.Epub may only be available on Aspose's private NuGet feed, not the public NuGet.org feed.",
+            "action": "Investigate if epub package is on releases.aspose.com/net/epub/ or similar"
+          },
+          {
+            "option": "MARK_OUT_OF_SCOPE",
+            "description": "If no public NuGet package exists, mark epub as OUT_OF_SCOPE with evidence.",
+            "action": "Update epub.yml to disabled=true with out_of_scope_reason='no_public_nuget_package'"
+          }
+        ],
+        "taskcard": "NEW-22-followup-epub-reflection-blocker-investigation",
+        "relaunch_allowed": false,
+        "relaunch_prerequisite": "Verify NuGet package existence and correct package ID before any relaunch"
+      }
+    },
+    {
+      "family": "finance",
+      "package_id": "Aspose.Finance",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "font",
+      "package_id": "Aspose.Font",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "gis",
+      "package_id": "Aspose.GIS",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "html",
+      "package_id": "Aspose.HTML",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_RESOLVED_VIA_PRIOR_EVIDENCE",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_EVIDENCE_BLOCKER_RESOLVED",
+      "e2e_required": false
+    },
+    {
+      "family": "imaging",
+      "package_id": "Aspose.Imaging",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "note",
+      "package_id": "Aspose.Note",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "ocr",
+      "package_id": "Aspose.OCR",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "BLOCKED",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "DISCOVERY_BLOCKED_EXTERNAL_PACKAGE",
+      "blocker": "EXTERNAL_PACKAGE_BLOCKER: Aspose.OCR",
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": false,
+      "blocker_detail": {
+        "family": "ocr",
+        "package_id": "Aspose.OCR",
+        "package_version": "26.4.0",
+        "package_sha256": "36715da4e1a19eb38091dded55cbb3ae69013a44c56f5c6057dca7357697d72e",
+        "blocker_type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+        "blocker_severity": "HIGH",
+        "discovery_status": "BLOCKED_REFLECTION_FAILED",
+        "verified_at": "2026-05-09",
+        "run_dir": "workspace/runs/discovery-ocr-20260509-113943",
+        "dll_extracted": true,
+        "dll_path": "workspace/runs/discovery-ocr-20260509-113943/extracted/ocr/primary/lib/netstandard2.0/Aspose.OCR.dll",
+        "root_cause": "DllReflector crashed with FileNotFoundException when attempting to load Aspose.OCR.dll. After resolving Aspose.Drawing.Common via extra_packages, a new undeclared internal dependency was discovered: Aspose.AI.LLM Version=25.12.0.0. This is an internal Aspose assembly NOT available on NuGet.org and cannot be downloaded via the extra_packages mechanism.",
+        "root_cause_category": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+        "missing_assembly": "Aspose.AI.LLM",
+        "missing_version": "25.12.0.0",
+        "dllreflector_error": "System.IO.FileNotFoundException: Could not find assembly 'Aspose.AI.LLM, Version=25.12.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56'",
+        "lowcode_namespace_existence": "UNKNOWN \u00e2\u20ac\u201d reflection failed before namespace scan could complete",
+        "max_depth_3_rerun_result": {
+          "rerun_date": "2026-05-09",
+          "result": "blocked_reflection_failed",
+          "conclusion": "max_depth=3 was set in ocr.yml and rerun was executed. Still blocked. Root cause confirmed: resolved-libs population in extractor.py includes only packages from dep_nupkg_paths (directly downloaded), NOT all packages in deps/ directory. Even if Aspose.Drawing.Common is downloaded transitively at depth=3, it is not passed to DllReflector via --deps."
+        },
+        "resolution_options": [
+          {
+            "option": "WAIT_FOR_ASPOSE_TO_PUBLISH",
+            "description": "Wait for Aspose to publish Aspose.AI.LLM on NuGet.org.",
+            "priority": "LOW"
+          },
+          {
+            "option": "EXTRACT_FROM_OFFICIAL_ASPOSE_INSTALLER",
+            "description": "Obtain Aspose.AI.LLM.dll from the official Aspose.OCR installer or release package and add as a local file dependency.",
+            "priority": "MEDIUM"
+          }
+        ],
+        "taskcard": "NEW-24-followup-ocr-reflection-blocker-investigation",
+        "relaunch_allowed": true,
+        "relaunch_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --family ocr --promote-latest",
+        "relaunch_prerequisite": "Aspose.AI.LLM must become available (NuGet or local file) before OCR discovery can complete",
+        "original_blocker": {
+          "assembly": "Aspose.Drawing.Common",
+          "status": "RESOLVED",
+          "resolution": "Added extra_packages: [Aspose.Drawing.Common] to ocr.yml. Aspose.Drawing.Common downloaded successfully.",
+          "resolved_date": "2026-05-09"
+        },
+        "nuget_availability": "NOT_ON_NUGET - api.nuget.org returns BlobNotFound for Aspose.AI.LLM"
+      }
+    },
+    {
+      "family": "omr",
+      "package_id": "Aspose.OMR",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_RESOLVED_VIA_PRIOR_EVIDENCE",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_EVIDENCE_BLOCKER_RESOLVED",
+      "e2e_required": false
+    },
+    {
+      "family": "page",
+      "package_id": "Aspose.Page",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "pdf",
+      "package_id": "Aspose.PDF",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Pdf.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-h",
+      "dep_count": 55,
+      "reflect_result_summary": {
+        "namespace_count": 29,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "psd",
+      "package_id": "Aspose.PSD",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "BLOCKED",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "DISCOVERY_BLOCKED_EXTERNAL_PACKAGE",
+      "blocker": "EXTERNAL_PACKAGE_BLOCKER: Aspose.PSD",
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": false,
+      "blocker_detail": {
+        "family": "psd",
+        "package_id": "Aspose.PSD",
+        "package_version": "26.4.0",
+        "package_sha256": "a2026452437aec510e44aa46fc41b6a9051af5648bc8058779082facfffd8357",
+        "blocker_type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+        "blocker_severity": "HIGH",
+        "discovery_status": "BLOCKED_REFLECTION_FAILED",
+        "verified_at": "2026-05-09",
+        "run_dir": "workspace/runs/discovery-psd-20260509-114549",
+        "dll_extracted": true,
+        "dll_path": "workspace/runs/discovery-psd-20260509-114549/extracted/psd/primary/lib/netstandard2.0/Aspose.PSD.dll",
+        "root_cause": "DllReflector crashed with FileNotFoundException when attempting to load Aspose.PSD.dll. After resolving Newtonsoft.Json via all-TFM group collection, a new undeclared internal dependency was discovered: Aspose.JavaAttributes Version=1.0.0.0. This is an internal Aspose assembly NOT available on NuGet.org.",
+        "root_cause_category": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+        "missing_assembly": "Aspose.JavaAttributes",
+        "missing_version": "1.0.0.0",
+        "dllreflector_error": "System.IO.FileNotFoundException: Could not find assembly 'Aspose.JavaAttributes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56'",
+        "lowcode_namespace_existence": "UNKNOWN \u00e2\u20ac\u201d reflection failed before namespace scan could complete",
+        "max_depth_3_rerun_result": {
+          "rerun_date": "2026-05-09",
+          "result": "blocked_reflection_failed",
+          "conclusion": "max_depth=3 was set in psd.yml and rerun was executed. Still blocked. Root cause confirmed: same as omr \u00e2\u20ac\u201d resolved-libs population gap in extractor.py. Newtonsoft.Json may be downloaded at depth=3 but is not passed to DllReflector via --deps."
+        },
+        "resolution_options": [
+          {
+            "option": "WAIT_FOR_ASPOSE_TO_PUBLISH",
+            "description": "Wait for Aspose to publish Aspose.JavaAttributes on NuGet.org.",
+            "priority": "LOW"
+          },
+          {
+            "option": "EXTRACT_FROM_OFFICIAL_ASPOSE_INSTALLER",
+            "description": "Obtain Aspose.JavaAttributes.dll from the official Aspose.PSD installer or release package.",
+            "priority": "MEDIUM"
+          }
+        ],
+        "taskcard": "NEW-26-followup-psd-reflection-blocker-investigation",
+        "relaunch_allowed": true,
+        "relaunch_command": "PYTHONPATH=src .venv/Scripts/python.exe -m plugin_examples discover-lowcode --family psd --promote-latest",
+        "relaunch_prerequisite": "Aspose.JavaAttributes must become available (NuGet or local file) before PSD discovery can complete",
+        "original_blocker": {
+          "assembly": "Newtonsoft.Json",
+          "status": "RESOLVED",
+          "resolution": "include_all_tfm_groups=True in resolve_dependencies() now collects Newtonsoft.Json from PSD net5.0+ nuspec groups. DllReflector now receives Newtonsoft.Json.dll.",
+          "resolved_date": "2026-05-09"
+        },
+        "nuget_availability": "NOT_ON_NUGET - api.nuget.org returns BlobNotFound for Aspose.JavaAttributes"
+      }
+    },
+    {
+      "family": "slides",
+      "package_id": "Aspose.Slides",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Slides.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-slide",
+      "dep_count": 10,
+      "reflect_result_summary": {
+        "namespace_count": 21,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "svg",
+      "package_id": "Aspose.SVG",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_RESOLVED_VIA_PRIOR_EVIDENCE",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_EVIDENCE_BLOCKER_RESOLVED",
+      "e2e_required": false
+    },
+    {
+      "family": "tasks",
+      "package_id": "Aspose.Tasks",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "tex",
+      "package_id": "Aspose.TeX",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "threed",
+      "package_id": "Aspose.3D",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    },
+    {
+      "family": "words",
+      "package_id": "Aspose.Words",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": true,
+      "reflection_status": "SUCCESS",
+      "lowcode_found": true,
+      "lowcode_namespaces": [
+        "Aspose.Words.LowCode"
+      ],
+      "classification": "LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "FRESH_DISCOVERY",
+      "e2e_required": true,
+      "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-words",
+      "dep_count": 14,
+      "reflect_result_summary": {
+        "namespace_count": 33,
+        "lowcode_namespace_count": 1
+      }
+    },
+    {
+      "family": "zip",
+      "package_id": "Aspose.ZIP",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "extracted_dlls_found": false,
+      "reflection_status": "NO_MANIFEST_USING_PRIOR_PROOF",
+      "lowcode_found": false,
+      "lowcode_namespaces": [],
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "blocker": null,
+      "evidence_source": "PRIOR_SOURCE_OF_TRUTH_PROOF",
+      "e2e_required": false
+    }
+  ]
+}

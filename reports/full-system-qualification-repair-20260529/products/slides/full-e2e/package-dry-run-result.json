@@ -1,0 +1,11 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "slides",
+  "dry_run": true,
+  "status": "blocked",
+  "branch_name": "lowcode-examples-slides-readme-io-final",
+  "pr_url": null,
+  "files_included": 0,
+  "evidence_verified": false,
+  "live_mutation": false
+}

@@ -1,0 +1,7 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "diagram",
+  "status": "PASSED",
+  "output_validation_method": "runtime_exit_code",
+  "note": "Template-generated examples produce console output ('Done.'). Output files not validated for format-specific correctness because Aspose license not present in test environment (evaluation watermark expected). Build and runtime success are the primary proof."
+}

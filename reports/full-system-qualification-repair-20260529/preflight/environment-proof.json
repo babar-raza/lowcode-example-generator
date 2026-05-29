@@ -1,0 +1,23 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "git_head": "0215df8d4ca846a6d2eefd7ffa25a0abd6523a8a",
+  "git_branch": "main",
+  "git_status_clean": true,
+  "git_status_detail": "?? .kilo/\n?? scripts/mega_sprint_lane0_preflight.py",
+  "dotnet_version": "10.0.204",
+  "dotnet_sdks": [
+    "9.0.200 [C:\\Program Files\\dotnet\\sdk]",
+    "10.0.204 [C:\\Program Files\\dotnet\\sdk]"
+  ],
+  "nuget_sources": "Registered Sources:\n  1.  nuget.org [Enabled]\n      https://api.nuget.org/v3/index.json\n  2.  Microsoft Visual Studio Offline Packages [Enabled]\n      C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\",
+  "python_venv": ".venv/Scripts/python.exe",
+  "python_version": "Python 3.13.2",
+  "venv_packages_ok": true,
+  "dllreflector_status": "BUILT",
+  "dllreflector_path": "tools\\DllReflector\\bin\\Release\\net8.0\\DllReflector.dll",
+  "platform": "Windows",
+  "os_version": "Windows 11 Pro 10.0.26200",
+  "push_prohibited": true,
+  "live_pr_prohibited": true
+}

@@ -1,0 +1,12 @@
+{"event": "E2E_STARTED", "family": "cells", "prior_run_id": "pilot-cells-final-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "cells", "status": "PASSED", "rc": 0, "elapsed_sec": 40.529945850372314, "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_STARTED", "family": "diagram", "prior_run_id": "pilot-diagram-final-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "diagram", "status": "PASSED", "rc": 0, "elapsed_sec": 73.55551671981812, "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_STARTED", "family": "email", "prior_run_id": "pilot-email-final-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "email", "status": "PASSED", "rc": 0, "elapsed_sec": 6.190056800842285, "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_STARTED", "family": "pdf", "prior_run_id": "pilot-pdf-heal-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "pdf", "status": "PASSED", "rc": 0, "elapsed_sec": 178.17356181144714, "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_STARTED", "family": "slides", "prior_run_id": "pilot-slides-final-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "slides", "status": "PASSED", "rc": 0, "elapsed_sec": 29.049010038375854, "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_STARTED", "family": "words", "prior_run_id": "pilot-words-heal2-20260528", "timestamp": "2026-05-29T00:00:00Z"}
+{"event": "E2E_COMPLETE", "family": "words", "status": "PASSED", "rc": 0, "elapsed_sec": 41.16530799865723, "timestamp": "2026-05-29T00:00:00Z"}

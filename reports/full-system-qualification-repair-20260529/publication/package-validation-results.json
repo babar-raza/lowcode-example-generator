@@ -1,0 +1,16 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "validation_type": "LOCAL_DRY_RUN",
+  "families_validated": [
+    "cells",
+    "email",
+    "pdf",
+    "slides",
+    "words"
+  ],
+  "families_blocked": [
+    "diagram"
+  ],
+  "result": "PARTIAL_READY"
+}

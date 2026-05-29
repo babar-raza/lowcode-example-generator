@@ -1,0 +1,28 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "gates": [
+    {
+      "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+      "status": "NOT_SET",
+      "required_for": "Live PR creation for 5 passing families",
+      "families_ready": [
+        "cells",
+        "email",
+        "pdf",
+        "slides",
+        "words"
+      ]
+    },
+    {
+      "gate": "DIAGRAM_LLM_REGEN",
+      "status": "BLOCKED_OUT_OF_SCOPE",
+      "required_for": "diagram examples to pass build"
+    },
+    {
+      "gate": "NUGET_PACKAGE_AVAILABILITY",
+      "status": "BLOCKED_EXTERNAL",
+      "required_for": "epub/ocr/psd discovery and E2E"
+    }
+  ]
+}

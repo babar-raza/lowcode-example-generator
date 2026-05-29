@@ -1,0 +1,5 @@
+SPRINT: full-system-qualification-repair-20260529
+FAMILY: pdf
+template_mode: False
+skip_run: False
+dotnet_build_passed: ?

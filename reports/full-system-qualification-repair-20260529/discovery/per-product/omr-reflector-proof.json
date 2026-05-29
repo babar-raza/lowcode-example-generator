@@ -1,0 +1,11 @@
+{
+  "family": "omr",
+  "package_id": "Aspose.OMR",
+  "timestamp": "2026-05-29T00:00:00Z",
+  "dll_path": "NOT_FOUND",
+  "reflection_status": "NO_MANIFEST_RESOLVED_VIA_PRIOR_EVIDENCE",
+  "lowcode_found": false,
+  "classification": "NO_LOWCODE_CONFIRMED",
+  "evidence_source": "PRIOR_EVIDENCE_BLOCKER_RESOLVED",
+  "prior_blocker": "{'family': 'omr', 'package_id': 'Aspose.OMR', 'package_version': '26.1.0', 'package_sha256': '94784f0c9289869f8af4704f61e435b19431fd86d9c341e7ea9a3d053191130c', 'blocker_type': None, 'blocker_severity': None, 'discovery_status': 'CONFIRMED_NO_LOWCODE', 'verified_at': '2026-05-09', 'run_dir': 'worksp"
+}

@@ -1,0 +1,12 @@
+run_pipeline(
+  family='words',
+  dry_run=True,
+  skip_run=False,
+  template_mode=False,
+  max_tier=5,
+  replay_from='validation',
+  reuse_run_id='pilot-words-heal2-20260528',
+)
+# run_id: full-e2e-words-20260529
+# status: PASSED
+# elapsed: 41.2s

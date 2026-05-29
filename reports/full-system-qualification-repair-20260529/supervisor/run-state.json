@@ -1,0 +1,49 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "families": {
+    "cells": {
+      "state": "COMPLETE",
+      "verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "passed": 7,
+      "failed": 2,
+      "total": 9
+    },
+    "diagram": {
+      "state": "BLOCKED",
+      "verdict": "BLOCKED_BUILD_FAILED",
+      "passed": 0,
+      "failed": 2,
+      "total": 2
+    },
+    "email": {
+      "state": "COMPLETE",
+      "verdict": "PR_DRY_RUN_READY",
+      "passed": 1,
+      "failed": 0,
+      "total": 1
+    },
+    "pdf": {
+      "state": "COMPLETE",
+      "verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "passed": 17,
+      "failed": 2,
+      "total": 19
+    },
+    "slides": {
+      "state": "COMPLETE",
+      "verdict": "PR_DRY_RUN_READY",
+      "passed": 3,
+      "failed": 0,
+      "total": 3
+    },
+    "words": {
+      "state": "COMPLETE",
+      "verdict": "PARTIAL_PR_DRY_RUN_READY",
+      "passed": 7,
+      "failed": 1,
+      "total": 8
+    }
+  },
+  "overall_state": "COMPLETE_WITH_ONE_BLOCKER"
+}

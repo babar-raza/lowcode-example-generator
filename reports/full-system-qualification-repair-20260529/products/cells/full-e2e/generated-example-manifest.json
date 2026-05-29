@@ -1,0 +1,20 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "cells",
+  "prior_run_id": "pilot-cells-final-20260528",
+  "denominator_expected": 9,
+  "examples_found": 9,
+  "examples": [
+    "cells-html-converter",
+    "cells-image-converter",
+    "cells-json-converter",
+    "cells-pdf-converter",
+    "cells-spreadsheet-converter",
+    "cells-spreadsheet-locker",
+    "cells-spreadsheet-merger",
+    "cells-spreadsheet-splitter",
+    "cells-text-converter"
+  ],
+  "generation_mode": "template",
+  "note": "Template-mode generation (no LLM). Code verified compilable and runnable."
+}

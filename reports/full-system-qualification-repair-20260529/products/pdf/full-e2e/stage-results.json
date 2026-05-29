@@ -1,0 +1,159 @@
+{
+  "sprint_id": "full-system-qualification-repair-20260529",
+  "family": "pdf",
+  "stages": [
+    {
+      "name": "load_config",
+      "status": "success",
+      "artifacts_summary": {
+        "family": "pdf",
+        "package_id": "Aspose.PDF",
+        "config_hash": "0d911813373c8a3df99ddf5df110691216e3285231a7d3c905df1ac5fac9e30f",
+        "constraints_hash": "3206de0977eebb1d97987b0bec3f902b1002bee62a042cbd878e5d2c8e6e52de"
+      }
+    },
+    {
+      "name": "nuget_fetch",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-pdf-heal-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "version_drift_preflight",
+      "status": "success",
+      "artifacts_summary": {
+        "fetched_version": "26.5.0",
+        "denominator_version": "26.5.0",
+        "drift_detected": "False",
+        "action_required": "none"
+      }
+    },
+    {
+      "name": "dependency_resolution",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-pdf-heal-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "extraction",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-pdf-heal-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "reflection",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-pdf-heal-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "plugin_detection",
+      "status": "success",
+      "artifacts_summary": {
+        "eligible": "True",
+        "matched_namespaces": "['Aspose.Pdf.LowCode']",
+        "plugin_type_count": "101",
+        "plugin_method_count": "71"
+      }
+    },
+    {
+      "name": "api_delta",
+      "status": "success",
+      "artifacts_summary": {
+        "initial_run": "True",
+        "total_changes": "101"
+      }
+    },
+    {
+      "name": "impact_mapping",
+      "status": "success",
+      "artifacts_summary": {
+        "new_api_needed": "101"
+      }
+    },
+    {
+      "name": "fixture_registry",
+      "status": "success",
+      "artifacts_summary": {
+        "fixture_count": "0"
+      }
+    },
+    {
+      "name": "example_mining",
+      "status": "success",
+      "artifacts_summary": {
+        "mined_total": "1",
+        "stale_count": "0"
+      }
+    },
+    {
+      "name": "scenario_planning",
+      "status": "success",
+      "artifacts_summary": {
+        "ready_count": "19",
+        "blocked_count": "82",
+        "total_types_classified": "101",
+        "standalone_types": "22",
+        "completeness_gate_status": "pass"
+      }
+    },
+    {
+      "name": "llm_preflight",
+      "status": "success",
+      "artifacts_summary": {
+        "selected_provider": "llm_professionalize",
+        "llm_available": "True"
+      }
+    },
+    {
+      "name": "generation",
+      "status": "skipped_replayed",
+      "artifacts_summary": {
+        "reuse_run_id": "pilot-pdf-heal-20260528",
+        "replay_from": "validation"
+      }
+    },
+    {
+      "name": "validation",
+      "status": "success",
+      "artifacts_summary": {
+        "total": "19",
+        "passed": "18",
+        "failed": "1",
+        "build_passed": "18",
+        "run_passed": "18",
+        "build_repairs": "2",
+        "runtime_repairs": "0",
+        "runtime_failures_classified": "0"
+      }
+    },
+    {
+      "name": "reviewer",
+      "status": "success",
+      "artifacts_summary": {
+        "available": "False",
+        "passed": "False",
+        "preflight_ready": "False",
+        "repair_attempts": "0",
+        "repair_log": "[]"
+      }
+    },
+    {
+      "name": "publisher",
+      "status": "success",
+      "artifacts_summary": {
+        "status": "blocked",
+        "evidence_verified": "False",
+        "files_included": "0"
+      }
+    }
+  ]
+}

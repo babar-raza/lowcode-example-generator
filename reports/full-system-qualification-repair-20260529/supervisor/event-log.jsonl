@@ -1,0 +1,18 @@
+{"ts": "2026-05-29T00:00:00Z", "lane": 0, "event": "SPRINT_START", "detail": "Full system qualification repair sprint started"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 0, "event": "PREFLIGHT_OK", "detail": "Environment, venv, DllReflector verified"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 1, "event": "AUDIT_COMPLETE", "detail": "Prior sprint reclassified as PARTIAL_MACHINERY_QUALIFICATION"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 2, "event": "DISCOVERY_COMPLETE", "detail": "25 products re-classified: 6 LOWCODE_CONFIRMED, 16 NO_LOWCODE, 3 BLOCKED"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_START", "detail": "Real E2E replay_from=validation for 6 families"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_PASS", "detail": "cells: PARTIAL_PR_DRY_RUN_READY (7/9 passed)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_HALT", "detail": "diagram: HALTED \u2014 BLOCKED_BUILD_FAILED (GENERATOR_API_MISMATCH)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_PASS", "detail": "email: PR_DRY_RUN_READY (1/1 passed)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_PASS", "detail": "pdf: PARTIAL_PR_DRY_RUN_READY (17/19 passed)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_PASS", "detail": "slides: PR_DRY_RUN_READY (3/3 passed)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_FAMILY_PASS", "detail": "words: PARTIAL_PR_DRY_RUN_READY (7/8 passed)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 3, "event": "E2E_COMPLETE", "detail": "5 families PASS (partial or full), 1 family BLOCKED_BUILD_FAILED (diagram)"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 4, "event": "SUPERVISOR_HALT", "detail": "diagram HALTED: GENERATOR_API_MISMATCH \u2014 no heal possible without LLM re-generation"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 4, "event": "SUPERVISOR_RESUME", "detail": "Remaining 5 families resumed; diagram documented as BLOCKED"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 5, "event": "TESTS_RUN", "detail": "pytest suite executed; validator hardening rules added"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 6, "event": "PUBLICATION_DRY_RUN", "detail": "Local package dry-run for 5 passing families documented"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 7, "event": "BLOCKERS_RECHECKED", "detail": "epub/ocr/psd external blockers rechecked \u2014 all still blocked"}
+{"ts": "2026-05-29T00:00:00Z", "lane": 10, "event": "IV_COMPLETE", "detail": "Independent verification and adversarial review complete"}

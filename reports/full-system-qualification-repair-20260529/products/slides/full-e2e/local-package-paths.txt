@@ -1,0 +1,3 @@
+workspace/runs/pilot-slides-final-20260528/generated/slides/slides-compress
+workspace/runs/pilot-slides-final-20260528/generated/slides/slides-convert
+workspace/runs/pilot-slides-final-20260528/generated/slides/slides-merger

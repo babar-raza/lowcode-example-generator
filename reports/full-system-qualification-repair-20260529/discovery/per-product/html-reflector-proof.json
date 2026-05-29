@@ -1,0 +1,11 @@
+{
+  "family": "html",
+  "package_id": "Aspose.HTML",
+  "timestamp": "2026-05-29T00:00:00Z",
+  "dll_path": "NOT_FOUND",
+  "reflection_status": "NO_MANIFEST_RESOLVED_VIA_PRIOR_EVIDENCE",
+  "lowcode_found": false,
+  "classification": "NO_LOWCODE_CONFIRMED",
+  "evidence_source": "PRIOR_EVIDENCE_BLOCKER_RESOLVED",
+  "prior_blocker": "{'family': 'html', 'package_id': 'Aspose.HTML', 'package_version': '26.4.0', 'package_sha256': '67ad61460489e7f835b78bfd5e9b46186455245e3d84ed39c26f199e5584484b', 'blocker_type': 'MISSING_TRANSITIVE_DEPENDENCY', 'blocker_severity': 'RESOLVED', 'discovery_status': 'CONFIRMED_NO_LOWCODE', 'verified_at"
+}

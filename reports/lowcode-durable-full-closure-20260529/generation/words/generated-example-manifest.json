@@ -1,0 +1,55 @@
+{
+  "run_id": "pilot-words-20260529-221024",
+  "family": "words",
+  "total_examples": 8,
+  "examples": [
+    {
+      "scenario_id": "words-comparer",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-converter",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-mail-merger",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-merger",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated_template_first"
+    },
+    {
+      "scenario_id": "words-replacer",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-report-builder",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-splitter",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated"
+    },
+    {
+      "scenario_id": "words-watermarker",
+      "target_framework": "net8.0",
+      "input_strategy": "generated_fixture_file",
+      "status": "generated_template_first"
+    }
+  ]
+}

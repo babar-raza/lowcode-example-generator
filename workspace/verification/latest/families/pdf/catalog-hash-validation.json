@@ -3,6 +3,6 @@
   "match": true,
   "current_hash": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
   "denominator_hash": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
-  "denominator_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\pipeline\\configs\\denominators\\pdf.json",
-  "validated_at": "2026-05-21T09:11:49.307498+00:00"
+  "denominator_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\pipeline\\configs\\denominators\\pdf.json",
+  "validated_at": "2026-05-29T09:00:40.404236+00:00"
 }

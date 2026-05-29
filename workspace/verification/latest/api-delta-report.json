@@ -3,92 +3,1240 @@
   "old_version": null,
   "new_version": "26.5.0.0",
   "summary": {
-    "added_types": 5,
+    "added_types": 101,
     "removed_types": 0,
     "modified_types": 0,
-    "total_changes": 5
+    "total_changes": 101
   },
   "added_types": [
     {
-      "full_name": "Aspose.Slides.LowCode.Collect",
-      "namespace": "Aspose.Slides.LowCode",
+      "full_name": "Aspose.Pdf.LowCode.CompressOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ConversionMode",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DataType",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DecryptionOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OwnerPassword"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.DocConverter",
+      "namespace": "Aspose.Pdf.LowCode",
       "change_type": "added",
       "added_methods": [
-        "Shapes"
+        "Dispose",
+        "Process"
       ],
       "removed_methods": [],
       "added_properties": [],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Slides.LowCode.Compress",
-      "namespace": "Aspose.Slides.LowCode",
+      "full_name": "Aspose.Pdf.LowCode.EncryptionOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "CryptoAlgorithm",
+        "DocumentPrivilege",
+        "OwnerPassword",
+        "UserPassword"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "DataType",
+        "Path"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileResult",
+      "namespace": "Aspose.Pdf.LowCode",
       "change_type": "added",
       "added_methods": [
-        "CompressEmbeddedFonts",
-        "RemoveUnusedLayoutSlides",
-        "RemoveUnusedMasterSlides"
+        "ToFile",
+        "ToStream"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "IsFile",
+        "IsStream",
+        "IsString"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FileSaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Path",
+        "SaveTarget"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Checked",
+        "Style"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Checked",
+        "Style"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Editable",
+        "Options",
+        "Selected"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Editable",
+        "Options",
+        "Selected"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
       ],
       "removed_methods": [],
       "added_properties": [],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Slides.LowCode.Convert",
-      "namespace": "Aspose.Slides.LowCode",
+      "full_name": "Aspose.Pdf.LowCode.FormEditorAddOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorRemoveOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormEditorSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporter",
+      "namespace": "Aspose.Pdf.LowCode",
       "change_type": "added",
       "added_methods": [
-        "AutoByExtension",
-        "ToJpeg",
-        "ToJpeg",
-        "ToJpeg",
-        "ToPdf",
-        "ToPdf",
-        "ToPdf",
-        "ToPdf",
-        "ToPng",
-        "ToPng",
-        "ToPng",
-        "ToSvg",
-        "ToSvg",
-        "ToSvg",
-        "ToSvg",
-        "ToSvg",
-        "ToTiff",
-        "ToTiff"
+        "Process"
       ],
       "removed_methods": [],
       "added_properties": [],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Slides.LowCode.ForEach",
-      "namespace": "Aspose.Slides.LowCode",
+      "full_name": "Aspose.Pdf.LowCode.FormExporterOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporterToJsonOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ExportPasswordValue",
+        "WriteIndented"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "AlternateName",
+        "Color",
+        "Contents",
+        "DefaultAppearance",
+        "Exportable",
+        "FitIntoRectangle",
+        "Flags",
+        "IsSharedField",
+        "MappingName",
+        "MaxFontSize",
+        "MinFontSize",
+        "Name",
+        "PartialName",
+        "ReadOnly",
+        "Required",
+        "TextHorizontalAlignment",
+        "UpdateAppearanceOnConvert",
+        "UseFontSubset",
+        "Value"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Rect"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattener",
+      "namespace": "Aspose.Pdf.LowCode",
       "change_type": "added",
       "added_methods": [
-        "LayoutSlide",
-        "MasterSlide",
-        "Paragraph",
-        "Paragraph",
-        "Portion",
-        "Portion",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenerOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormImporter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Inputs",
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormJsonImportSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "JsonSource",
+        "PdfSource"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Inputs",
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ForceCombs",
+        "MaxLen",
+        "Multiline",
+        "SpellCheck"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ForceCombs",
+        "MaxLen",
+        "Multiline",
+        "SpellCheck"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Html",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.HtmlToPdfOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "BasePath",
+        "HtmlMediaType",
+        "IsRenderToSinglePage",
+        "OperationName",
+        "PageInfo",
+        "PageLayoutOption"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "DataType"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ImageExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IOperationResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "ToFile",
+        "ToStream"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "IsFile",
+        "IsStream",
+        "IsString"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IPlugin",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.IPluginOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ISaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "SaveTarget"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Jpeg",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.JpegOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OperationName",
+        "Quality"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.MergeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Merger",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ObjectResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "IsFile",
+        "IsObject",
+        "IsStream",
+        "IsString",
+        "Text"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Ofd",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OfdToPdfOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OfdLoadOptions",
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OptimizeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Optimizer",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "CloseInputStreams",
+        "CloseOutputStreams",
+        "Inputs",
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAConverter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAConvertOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAOptionsBase",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "AlignText",
+        "ErrorAction",
+        "ExcludeFontsStrategy",
+        "FontEmbeddingOptions",
+        "IccProfileFileName",
+        "Inputs",
+        "IsLowMemoryMode",
+        "LogOutputSource",
+        "NonSpecificationFlags",
+        "OptimizeFileSize",
+        "PdfAVersion",
+        "PuaSymbolsProcessingStrategy",
+        "SoftMaskAction",
+        "SymbolicFontEncodingStrategy",
+        "UnicodeProcessingRules"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAStandardVersion",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfAValidationResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfConverterOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Inputs",
+        "OperationName",
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Inputs",
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Inputs",
+        "Outputs"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToDocOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ConversionMode",
+        "OperationName",
+        "SaveFormat"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToHtmlOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OperationName",
+        "OutputDataType"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToImage",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToImageOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddInput",
+        "AddOutput"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "ConversionMode",
+        "Inputs",
+        "OperationName",
+        "OutputResolution",
+        "Outputs",
+        "PageList"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PdfToXlsOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Format",
+        "InsertBlankColumnAtFirst",
+        "MinimizeTheNumberOfWorksheets",
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Png",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.PngOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ResizeOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "PageSize"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.ResultContainer",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "ResultCollection"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.RotateOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Rotation"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.SaveFormat",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Security",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.SelectField",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "BeginInvoke",
+        "EndInvoke",
+        "Invoke"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Signature",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.SignOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Contact",
+        "Location",
+        "Name",
+        "PageNumber",
+        "Reason",
+        "Rectangle",
+        "Visible"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.SplitOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Splitter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.StreamDataSource",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "DataType"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.StreamResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "ToFile",
+        "ToStream"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "IsFile",
+        "IsStream",
+        "IsString"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.StreamSaveTarget",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "SaveTarget"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.StringResult",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ],
+      "removed_methods": [],
+      "added_properties": [
+        "Data",
+        "IsFile",
+        "IsStream",
+        "IsString",
+        "Text"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddRow",
+        "AddTable",
+        "InsertPageAfter",
+        "InsertPageBefore"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableCellBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddCell",
+        "AddParagraph"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableGenerator",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddTable",
+        "Create",
+        "InsertPageAfter",
+        "InsertPageBefore"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TableRowBuilder",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "AddCell",
+        "AddRow"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TextExtractorOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "FormattingMode",
+        "OperationName"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Tiff",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TiffOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "Brightness",
+        "Compression",
+        "CoordinateType",
+        "Depth",
+        "OperationName",
+        "SaveAsMultiPageTiff",
         "Shape",
-        "Shape",
-        "Shape",
-        "Slide"
+        "SkipBlankPages"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.Timestamp",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
+        "Process"
       ],
       "removed_methods": [],
       "added_properties": [],
       "removed_properties": []
     },
     {
-      "full_name": "Aspose.Slides.LowCode.Merger",
-      "namespace": "Aspose.Slides.LowCode",
+      "full_name": "Aspose.Pdf.LowCode.TimestampOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [
+        "BasicAuthCredentials",
+        "DigestHashAlgorithm",
+        "OperationName",
+        "PageNumber",
+        "Rectangle",
+        "ServerUrl",
+        "SigContact",
+        "SigLocation",
+        "SigReason",
+        "Visible"
+      ],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TocGenerator",
+      "namespace": "Aspose.Pdf.LowCode",
       "change_type": "added",
       "added_methods": [
-        "Process",
-        "Process",
-        "Process",
+        "Dispose",
+        "Process"
+      ],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.TocOptions",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [],
+      "removed_methods": [],
+      "added_properties": [],
+      "removed_properties": []
+    },
+    {
+      "full_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "namespace": "Aspose.Pdf.LowCode",
+      "change_type": "added",
+      "added_methods": [
+        "Dispose",
         "Process"
       ],
       "removed_methods": [],

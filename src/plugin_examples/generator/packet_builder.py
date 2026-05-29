@@ -436,20 +436,20 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
     "diagram": {
         "fixture_code": (
             "// Create a valid VSDX input file using Aspose.Diagram (core API — allowed for fixture setup only)\n"
+            "// DURABLE FIX: use page.DrawEllipse() which returns long shapeId — do NOT use new Shape() or TypeValue\n"
             "var diagram = new Aspose.Diagram.Diagram();\n"
             "var page = diagram.Pages[0];\n"
-            "page.Name = \"TestPage\";\n"
-            "\n"
-            "var shape = new Aspose.Diagram.Shape();\n"
-            "shape.ID = 1;\n"
-            "shape.Name = \"SampleRect\";\n"
-            "shape.Type = Aspose.Diagram.TypeValue.Shape;\n"
-            "shape.XForm.PinX.Value = 4.0;\n"
-            "shape.XForm.PinY.Value = 5.0;\n"
-            "shape.XForm.Width.Value = 2.0;\n"
-            "shape.XForm.Height.Value = 1.5;\n"
-            "page.Shapes.Add(shape);\n"
-            "\n"
+            "long shapeId = page.DrawEllipse(1.0, 1.0, 2.0, 2.0);\n"
+            "var shape = page.Shapes.GetShape(shapeId);\n"
+            "if (shape != null)\n"
+            "{\n"
+            "    shape.Name = \"SampleShape\";\n"
+            "    // XForm properties are DoubleValue objects — set via .Value, not direct assignment\n"
+            "    shape.XForm.PinX.Value = 2.0;\n"
+            "    shape.XForm.PinY.Value = 2.0;\n"
+            "    shape.XForm.Width.Value = 1.0;\n"
+            "    shape.XForm.Height.Value = 1.0;\n"
+            "}\n"
             "diagram.Save(inputPath, Aspose.Diagram.SaveFileFormat.Vsdx);"
         ),
         "operation_examples": {
@@ -471,10 +471,12 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
             "FORBIDDEN: fake or dummy binary content for input files.",
             "FORBIDDEN: using DiagramConverter for PDF output — DiagramConverter only supports Visio formats (VDX, VSDX, VSD). Use PdfConverter for PDF output.",
             "FORBIDDEN: using core Aspose.Diagram API for the conversion operation — the conversion MUST use the LowCode API (Aspose.Diagram.LowCode namespace).",
+            "FORBIDDEN: new Aspose.Diagram.Shape() with .Type = TypeValue.Shape — TypeValue.Shape does not exist; use page.DrawEllipse() instead.",
+            "FORBIDDEN: shape.XForm.PinX = 2.0 — PinX is DoubleValue, not double; use shape.XForm.PinX.Value = 2.0.",
         ],
         "required_patterns": [
-            "REQUIRED: create input VSDX using Aspose.Diagram.Diagram() with at least one Page and one Shape.",
-            "REQUIRED: set Shape.ID, Shape.Name, Shape.Type, and Shape.XForm properties (PinX, PinY, Width, Height).",
+            "REQUIRED: create input VSDX using page.DrawEllipse(x,y,w,h) which returns long shapeId.",
+            "REQUIRED: retrieve shape via page.Shapes.GetShape(shapeId) and set XForm.PinX.Value, PinY.Value, Width.Value, Height.Value.",
             "REQUIRED: save input as VSDX using diagram.Save(path, Aspose.Diagram.SaveFileFormat.Vsdx).",
             "REQUIRED: include 'using Aspose.Diagram;' for fixture creation and 'using Aspose.Diagram.LowCode;' for the LowCode operation.",
             "REQUIRED: structure code in three sections: (1) INPUT FIXTURE CREATION using core API, (2) LOWCODE OPERATION using LowCode namespace, (3) OUTPUT VALIDATION.",

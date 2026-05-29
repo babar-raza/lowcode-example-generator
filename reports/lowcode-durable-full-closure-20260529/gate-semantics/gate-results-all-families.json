@@ -1,0 +1,86 @@
+{
+  "cells": {
+    "run_id": "pilot-cells-20260529-221017",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  },
+  "diagram": {
+    "run_id": "pilot-diagram-20260529-221021",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  },
+  "words": {
+    "run_id": "pilot-words-20260529-221024",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  },
+  "pdf": {
+    "run_id": "pilot-pdf-20260529-222233",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  },
+  "email": {
+    "run_id": "pilot-email-20260529-220716",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  },
+  "slides": {
+    "run_id": "pilot-slides-20260529-221814",
+    "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+    "publishable": false,
+    "all_required_passed": true,
+    "blocking_gates": [],
+    "gates": {
+      "gate_scenarios": "passed",
+      "gate_generation": "passed",
+      "gate_build": "passed",
+      "gate_run": "passed",
+      "gate_reviewer": "failed"
+    }
+  }
+}

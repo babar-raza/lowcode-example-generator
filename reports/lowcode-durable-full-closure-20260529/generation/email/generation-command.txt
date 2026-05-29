@@ -1,0 +1,9 @@
+# email clean regeneration command (Lane 3)
+# Sprint: lowcode-durable-full-closure-20260529
+# Date: 2026-05-29
+# Replay justification: --replay-from generation reuses NuGet catalog from pilot-email-20260528-142456
+# to avoid re-downloading packages while ensuring fresh generation with durable fixes applied.
+
+.venv/Scripts/python.exe -m plugin_examples run --family email --dry-run --template-mode --replay-from generation --reuse-run pilot-email-20260528-142456
+
+# Produced run ID: pilot-email-20260529-220716

@@ -1,6 +1,6 @@
 {
   "report_type": "release_status",
-  "generated_at": "2026-05-25T17:21:22.274964+00:00",
+  "generated_at": "2026-05-29T09:41:49.337694+00:00",
   "families_checked": [
     "cells",
     "words"
@@ -39,7 +39,7 @@
       "open_followups": [
         "followup-cells-coverage-denominator-audit"
       ],
-      "taskcard_evidence_source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\latest\\open-taskcard-closure-matrix.json",
+      "taskcard_evidence_source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\verification\\latest\\open-taskcard-closure-matrix.json",
       "next_required_action": "monitor_for_package_updates \u2014 all examples published",
       "cumulative_pr_count": 2
     },
@@ -69,7 +69,7 @@
         "followup-words-docx-semantic-validation",
         "followup-words-full-coverage-expansion"
       ],
-      "taskcard_evidence_source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\verification\\latest\\open-taskcard-closure-matrix.json",
+      "taskcard_evidence_source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\verification\\latest\\open-taskcard-closure-matrix.json",
       "next_required_action": "resolve_open_taskcards_for_broader_generation (followup-words-* series)",
       "cumulative_pr_count": 2
     }

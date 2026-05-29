@@ -7,7 +7,7 @@
       "previous_status": "ready",
       "new_status": "blocked_unknown",
       "reason": "Code contract validation failed (blocking mode)",
-      "evidence_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-words-20260521-141743\\generated\\words\\words-comparer",
+      "evidence_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-words-heal2-20260528\\generated\\words\\words-comparer",
       "preserve_failed_attempt": true
     }
   ]

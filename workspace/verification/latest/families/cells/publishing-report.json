@@ -1,20 +1,10 @@
 {
   "dry_run": true,
-  "branch_name": "plugin-examples/cells/20260521-092157",
+  "branch_name": null,
   "pr_url": null,
   "pr_number": null,
-  "files_included": [
-    "cells-html-converter",
-    "cells-image-converter",
-    "cells-json-converter",
-    "cells-pdf-converter",
-    "cells-spreadsheet-converter",
-    "cells-spreadsheet-locker",
-    "cells-spreadsheet-merger",
-    "cells-spreadsheet-splitter",
-    "cells-text-converter"
-  ],
-  "evidence_verified": true,
-  "status": "dry_run",
-  "blocked_reason": null
+  "files_included": [],
+  "evidence_verified": false,
+  "status": "blocked",
+  "blocked_reason": "Missing evidence: ['gate verdict not publishable: BLOCKED_GENERATION']"
 }

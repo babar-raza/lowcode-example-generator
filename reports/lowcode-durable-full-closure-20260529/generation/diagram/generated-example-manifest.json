@@ -1,0 +1,19 @@
+{
+  "run_id": "pilot-diagram-20260529-221021",
+  "family": "diagram",
+  "total_examples": 2,
+  "examples": [
+    {
+      "scenario_id": "diagram-diagram-converter",
+      "target_framework": "net8.0",
+      "input_strategy": "programmatic_input",
+      "status": "generated_template_first"
+    },
+    {
+      "scenario_id": "diagram-pdf-converter",
+      "target_framework": "net8.0",
+      "input_strategy": "programmatic_input",
+      "status": "generated_template_first"
+    }
+  ]
+}

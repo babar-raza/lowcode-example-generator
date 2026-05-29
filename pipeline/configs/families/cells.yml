@@ -110,3 +110,13 @@ per_type_constraints:
     forbidden:
       - "output.csv"
       - "output.xlsx"
+  SpreadsheetMerger:
+    template_first: true
+    required:
+      - "REQUIRED: using Aspose.Cells.LowCode;"
+      - "REQUIRED: using System.IO;"
+      - "REQUIRED: SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, outputPath)"
+      - "REQUIRED: File.Copy(inputPath, input1Path, overwrite: true) to create input1/input2 from fixture"
+    forbidden:
+      - "FORBIDDEN: SpreadsheetMerger.Create() — no such factory method; use static Process()"
+      - "FORBIDDEN: new Workbook() for merger inputs when fixture file is available — use File.Copy"

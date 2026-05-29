@@ -1,0 +1,49 @@
+{
+  "run_id": "pilot-words-20260529-221024",
+  "family": "words",
+  "generation_stage": {
+    "name": "generation",
+    "order": 14,
+    "status": "success",
+    "duration_ms": 387.7537250518799,
+    "error": null,
+    "artifacts": {
+      "examples_generated": 8,
+      "generation_mode": "template",
+      "fixtures_generated": 8,
+      "healing_intelligence_loaded": true
+    }
+  },
+  "validation_stage": {
+    "name": "validation",
+    "order": 15,
+    "status": "success",
+    "duration_ms": 73045.01605033875,
+    "error": null,
+    "artifacts": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "build_passed": 8,
+      "run_passed": 8,
+      "build_repairs": 0,
+      "runtime_repairs": 0,
+      "runtime_failures_classified": 0
+    }
+  },
+  "gate_summary": {
+    "total_stages": 17,
+    "passed": 13,
+    "degraded": 0,
+    "failed": 0,
+    "skipped": 4,
+    "hard_stopped": false
+  },
+  "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+  "durable_fix_types_applied": [
+    "Merger",
+    "Watermarker"
+  ],
+  "replay_mode": "replay-from-generation",
+  "base_run": "pilot-words-heal2-20260528"
+}

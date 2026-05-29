@@ -1,0 +1,8 @@
+{
+  "run_id": "pilot-diagram-20260529-221021",
+  "family": "diagram",
+  "hashes": {
+    "diagram-diagram-converter/Program.cs": "46e43f916572f5f4b02ebdc47a959d36ea7e0f87b23ad3a5015907e44fb83680",
+    "diagram-pdf-converter/Program.cs": "93731194dd440d9c29cb90026dab683753e2f2b5679a162678f61c229ca0c912"
+  }
+}

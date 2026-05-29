@@ -1,0 +1,13 @@
+{
+  "run_id": "pilot-email-20260529-220716",
+  "family": "email",
+  "total_examples": 1,
+  "examples": [
+    {
+      "scenario_id": "email-converter",
+      "target_framework": "net8.0",
+      "input_strategy": "programmatic_input",
+      "status": "generated"
+    }
+  ]
+}

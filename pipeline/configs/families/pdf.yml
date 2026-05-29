@@ -342,20 +342,20 @@ per_type_constraints:
   TableGenerator:
     template_first: true
     required:
-      - "REQUIRED: TableOptions.Create() — use the static factory method to create options (NOT new TableOptions())"
+      - "REQUIRED: new TableOptions()"
       - "REQUIRED: new TableGenerator().Process(options) — use the LowCode TableGenerator plugin"
-      - "REQUIRED: .AddTable() — call AddTable() on TableOptions to get a TableBuilder"
-      - "REQUIRED: .AddRow() — call AddRow() on TableBuilder to get a TableRowBuilder"
-      - "REQUIRED: .AddCell() — call AddCell() on TableRowBuilder to get a TableCellBuilder"
-      - "REQUIRED: options.AddInput(new FileDataSource( — PDF input added via AddInput(new FileDataSource(path))"
-      - "REQUIRED: options.AddOutput(new FileDataSource( — PDF output added via AddOutput(new FileDataSource(path))"
-      - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
-      - "REQUIRED: using Aspose.Pdf.LowCode; (for TableGenerator, TableOptions, FileDataSource)"
-      - "REQUIRED: using Aspose.Pdf.Text; (for TextFragment paragraph content)"
-      - "REQUIRED: result.ResultCollection.Count > 0 — validate that TableGenerator produced output"
+      - "REQUIRED: .AddTable()"
+      - "REQUIRED: .AddRow()"
+      - "REQUIRED: .AddCell()"
+      - "REQUIRED: options.AddInput(new FileDataSource("
+      - "REQUIRED: options.AddOutput(new FileDataSource("
+      - "REQUIRED: using Aspose.Pdf;"
+      - "REQUIRED: using Aspose.Pdf.LowCode;"
+      - "REQUIRED: using Aspose.Pdf.Text;"
+      - "REQUIRED: result.ResultCollection.Count > 0"
     forbidden:
-      - "FORBIDDEN: new TableOptions() without .Create() — use TableOptions.Create() factory method"
-      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use TableOptions.Create()"
+      - "FORBIDDEN: TableOptions.Create() fluent chain assigned to options var — chain ends at TableCellBuilder, not TableOptions; CS1061 on AddInput/AddOutput. Use new TableOptions() instead."
+      - "FORBIDDEN: new PluginOptions() — PluginOptions is abstract; use new TableOptions()"
       - "FORBIDDEN: Document.Pages[1].Paragraphs.Add() — use LowCode TableGenerator, not manual table insertion"
       - "FORBIDDEN: Aspose.Pdf.Table — use the LowCode fluent builder (TableOptions/TableBuilder/TableRowBuilder/TableCellBuilder)"
     mandatory_reference_example: |
@@ -368,19 +368,14 @@ per_type_constraints:
       document.Pages.Add();
       document.Save("input.pdf");
 
-      var options = TableOptions.Create()
-          .InsertPageBefore(1)
-          .AddTable()
-              .AddRow()
-                  .AddCell()
-                      .AddParagraph(new TextFragment("Header 1"))
-                  .AddCell()
-                      .AddParagraph(new TextFragment("Header 2"))
-              .AddRow()
-                  .AddCell()
-                      .AddParagraph(new TextFragment("Cell 1"))
-                  .AddCell()
-                      .AddParagraph(new TextFragment("Cell 2"));
+      // DURABLE FIX: use new TableOptions() and call chain methods without reassigning.
+      // TableOptions.Create()...chain... ends at TableCellBuilder, causing CS1061 on AddInput/AddOutput.
+      var options = new TableOptions();
+      options.InsertPageBefore(1);
+      options.AddTable()
+          .AddRow()
+              .AddCell().AddParagraph(new TextFragment("Header 1"))
+              .AddCell().AddParagraph(new TextFragment("Header 2"));
       options.AddInput(new FileDataSource("input.pdf"));
       options.AddOutput(new FileDataSource("output.pdf"));
       var result = new TableGenerator().Process(options);

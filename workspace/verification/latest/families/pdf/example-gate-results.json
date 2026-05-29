@@ -5,7 +5,7 @@
   "examples": [
     {
       "scenario_id": "pdf-doc-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-doc-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-doc-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -17,7 +17,7 @@
     },
     {
       "scenario_id": "pdf-form-editor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-form-editor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-form-editor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -29,7 +29,7 @@
     },
     {
       "scenario_id": "pdf-form-exporter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-form-exporter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-form-exporter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -41,7 +41,7 @@
     },
     {
       "scenario_id": "pdf-form-flattener",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-form-flattener",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-form-flattener",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -53,7 +53,7 @@
     },
     {
       "scenario_id": "pdf-html",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-html",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-html",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -65,7 +65,7 @@
     },
     {
       "scenario_id": "pdf-image-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-image-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-image-extractor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -77,7 +77,7 @@
     },
     {
       "scenario_id": "pdf-jpeg",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-jpeg",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-jpeg",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -89,11 +89,11 @@
     },
     {
       "scenario_id": "pdf-merger",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-merger",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-merger",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
-      "output_validation_status": "advisory_passed",
+      "output_validation_status": "advisory_no_output",
       "reviewer_status": "passed",
       "publish_candidate": true,
       "blocked_reason": null,
@@ -101,11 +101,11 @@
     },
     {
       "scenario_id": "pdf-optimizer",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-optimizer",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-optimizer",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
-      "output_validation_status": "advisory_passed",
+      "output_validation_status": "advisory_no_output",
       "reviewer_status": "passed",
       "publish_candidate": true,
       "blocked_reason": null,
@@ -113,11 +113,11 @@
     },
     {
       "scenario_id": "pdf-pdf-aconverter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-pdf-aconverter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-pdf-aconverter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
-      "output_validation_status": "advisory_passed",
+      "output_validation_status": "advisory_no_output",
       "reviewer_status": "passed",
       "publish_candidate": true,
       "blocked_reason": null,
@@ -125,7 +125,7 @@
     },
     {
       "scenario_id": "pdf-png",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-png",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-png",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -137,7 +137,7 @@
     },
     {
       "scenario_id": "pdf-security",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-security",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-security",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -149,7 +149,7 @@
     },
     {
       "scenario_id": "pdf-signature",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-signature",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-signature",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -161,7 +161,7 @@
     },
     {
       "scenario_id": "pdf-splitter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-splitter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-splitter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -173,7 +173,7 @@
     },
     {
       "scenario_id": "pdf-table-generator",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-table-generator",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-table-generator",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -185,7 +185,7 @@
     },
     {
       "scenario_id": "pdf-text-extractor",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-text-extractor",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-text-extractor",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -197,7 +197,7 @@
     },
     {
       "scenario_id": "pdf-tiff",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-tiff",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-tiff",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -209,7 +209,7 @@
     },
     {
       "scenario_id": "pdf-toc-generator",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-toc-generator",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-toc-generator",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",
@@ -221,7 +221,7 @@
     },
     {
       "scenario_id": "pdf-xls-converter",
-      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator\\workspace\\runs\\pilot-pdf-20260521-140902\\generated\\pdf\\pdf-xls-converter",
+      "example_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-pdf-heal-20260528\\generated\\pdf\\pdf-xls-converter",
       "restore_status": "passed",
       "build_status": "passed",
       "run_status": "passed",

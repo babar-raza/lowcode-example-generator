@@ -1,0 +1,20 @@
+{
+  "reuse_run_id": "pilot-diagram-final-20260528",
+  "family": "diagram",
+  "replay_from": "validation",
+  "created_at": "2026-05-29T09:00:54.639520+00:00",
+  "restored_artifacts": [
+    {
+      "stage": "generation",
+      "artifact": "example-index.json",
+      "status": "restored",
+      "source": "pilot-diagram-final-20260528"
+    },
+    {
+      "stage": "reflection",
+      "artifact": "api-catalog.json",
+      "status": "restored",
+      "source": "pilot-diagram-final-20260528"
+    }
+  ]
+}

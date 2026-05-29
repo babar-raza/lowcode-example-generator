@@ -1,0 +1,27 @@
+{
+  "api_proof_id": "pdf-table-api-proof",
+  "generated_at": "2026-05-29",
+  "source": "DllReflector + build/run validation from prior sprint (pilot-pdf-heal-20260528)",
+  "apis": [
+    {
+      "api": "Aspose.Pdf.LowCode.TableOptions.Create()",
+      "return_type": "Aspose.Pdf.LowCode.TableOptions",
+      "proof": "Build SUCCESS + runtime output 'Table added' in prior sprint"
+    },
+    {
+      "api": "TableOptions.InsertPageBefore(int pageIndex)",
+      "return_type": "TableOptions (fluent)",
+      "proof": "Build SUCCESS in prior sprint"
+    },
+    {
+      "api": "TableOptions.AddTable().AddRow().AddCell().AddParagraph(TextFragment)",
+      "return_type": "fluent chain",
+      "proof": "Build SUCCESS in prior sprint"
+    }
+  ],
+  "invalid_apis_confirmed": [
+    "options.AddTable(lambda) — no lambda overload for AddTable",
+    "var options = new TableOptions() — options variable type reassignment breaks fluent chain"
+  ],
+  "fix_status": "ALREADY_DURABLY_FIXED — tablegenerator template existed in code_generator.py before this sprint; template_first: true already in pdf.yml"
+}

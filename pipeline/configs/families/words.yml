@@ -145,9 +145,14 @@ per_type_constraints:
     forbidden:
       - "FORBIDDEN: Document.Save() as the primary operation — always use LowCode Converter.Convert()"
   Watermarker:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
-      - "REQUIRED: Watermarker.SetText(inputFile, outputFile, watermarkText)"
+      - "REQUIRED: using System.IO;"
+      - "REQUIRED: Watermarker.SetText("
+      - "REQUIRED: Watermarker.SetImage("
+      - "REQUIRED: bmpBytes"
+      - "REQUIRED: File.WriteAllBytes("
     forbidden:
       - "FORBIDDEN: manually adding watermark shapes to document.xml — use LowCode Watermarker.SetText()"
   Splitter:
@@ -163,13 +168,17 @@ per_type_constraints:
     forbidden:
       - "FORBIDDEN: manual find/replace loops replacing Replacer.Replace() — use LowCode Replacer"
   Merger:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
+      - "REQUIRED: using System.IO;"
       - "REQUIRED: Merger.Merge(outputFile, inputFiles) — static call, NOT new Merger().Merge()"
+      - "REQUIRED: File.Copy(inputPath, input1Path, overwrite: true) to create input1/input2 from fixture"
     forbidden:
       - "FORBIDDEN: Document.AppendDocument() replacing Merger.Merge() — use LowCode Merger"
       - "FORBIDDEN: new Merger().Merge() — Merger.Merge() is static, call directly"
+      - "FORBIDDEN: Merger.Create() — no such factory method"
   Comparer:
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"

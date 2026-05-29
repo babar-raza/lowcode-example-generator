@@ -1,0 +1,7 @@
+{
+  "run_id": "pilot-email-20260529-220716",
+  "family": "email",
+  "hashes": {
+    "email-converter/Program.cs": "3b3c4860373bd9581d33f52014feee59405f4db5f705feef747debe4e59f7aac"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "family": "pdf",
-  "updated_at": "2026-05-28T09:44:25.032683+00:00",
+  "updated_at": "2026-05-29T17:25:52.001440+00:00",
   "total_entries": 14,
   "open_entries": 0,
   "resolved_entries": 14,
@@ -190,14 +190,14 @@
     {
       "scenario_id": "pdf-table-generator",
       "family": "pdf",
-      "last_run_id": "pilot-pdf-20260515-181913",
+      "last_run_id": "pilot-pdf-20260529-221817",
       "last_failure_stage": "backlogged",
-      "root_cause": "Template-first validation failed: ['Missing required LowCode API call: REQUIRED: result.ResultCollection.Count > 0 \u00e2\u20ac\u201d validate that TableGenerator produced output']",
+      "root_cause": "Template-first validation failed: ['Missing required LowCode API call: REQUIRED: TableOptions.Create() \u2014 use the static factory method to create options (NOT new TableOptions())']",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 1,
+      "attempt_count": 3,
       "first_seen": "2026-05-15T13:30:14.248070+00:00",
-      "last_seen": "2026-05-15T13:52:01.657452+00:00",
+      "last_seen": "2026-05-29T17:21:31.585029+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-pdf-20260515-183807"
     }

@@ -1,0 +1,9 @@
+# slides clean regeneration command (Lane 3)
+# Sprint: lowcode-durable-full-closure-20260529
+# Date: 2026-05-29
+# Replay justification: --replay-from generation reuses NuGet catalog from pilot-slides-20260528-143001
+# to avoid re-downloading packages while ensuring fresh generation with durable fixes applied.
+
+.venv/Scripts/python.exe -m plugin_examples run --family slides --dry-run --template-mode --replay-from generation --reuse-run pilot-slides-20260528-143001
+
+# Produced run ID: pilot-slides-20260529-221814

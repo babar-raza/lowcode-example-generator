@@ -1,0 +1,25 @@
+{
+  "run_id": "pilot-pdf-20260529-222233",
+  "family": "pdf",
+  "hashes": {
+    "pdf-doc-converter/Program.cs": "2e8d6a4a7095d111ccbc6d64cd4220c956ddd2c1788b608c08f122267b4509bd",
+    "pdf-form-editor/Program.cs": "84b42bfd26a56d83d848b9a0d307bbf48fcfde942b7b8dd04f76d3ea3663a6ca",
+    "pdf-form-exporter/Program.cs": "85d8b3a7c0a2192c1100e929900d2184e11973d5ff220ffd5402289771bbd80b",
+    "pdf-form-flattener/Program.cs": "dd02a166a02c1dfbd6da0d8df4c28fa33700ca3738ff86f31f2544a79e90c836",
+    "pdf-html/Program.cs": "7ee81e1fcb0880fd83f72df3296628f36864bed2dde808459ce03c0bb49686ca",
+    "pdf-image-extractor/Program.cs": "f22370749b1da56d84326ef1e4024f807aa29fde28aa4ffd0e0a38f8e879aed3",
+    "pdf-jpeg/Program.cs": "dcd8660c436958f67d1d06813a418e42057e5c2332b6904b675932c3a67fc827",
+    "pdf-merger/Program.cs": "dde7cbba17412dfa895e9142155df5c6a3d7421489944c8d3ca61cc2047c33a1",
+    "pdf-optimizer/Program.cs": "42cbf30933995d031f6462420c20f18ec59dc272748bc4c947322b9ea03e68f1",
+    "pdf-pdf-aconverter/Program.cs": "11f71b17e1d464a34ff677ff9d56093599191f4325870e42124b93d04bb6a76e",
+    "pdf-png/Program.cs": "42ece612db74bff310b3bb7b3ce44f37c9be2f252e3f3f890de0ad4333de92d8",
+    "pdf-security/Program.cs": "c125fd464571ce0f69c5ec02ad8723a33a3a3f8500bd81c860a7a7e94ad2ec59",
+    "pdf-signature/Program.cs": "2efa6c5e5f67fe2e332729ed5d4046d2e7143c99ff4971e010109cae6c3f518a",
+    "pdf-splitter/Program.cs": "a36c10cdb5f686961f486be11f2f22c9e1f83a7f80be4abac509b42aa0f3e1cd",
+    "pdf-table-generator/Program.cs": "b88cd1724a103497257e38443dff74b373a7cf976a2d9ab87dcdea1ee748c41e",
+    "pdf-text-extractor/Program.cs": "14fb3fd804086d340a0ca7bd3735b55e56eab950ba94d39ce834882b2e11e5db",
+    "pdf-tiff/Program.cs": "3b46c9f633839062dd399bf7813d357479ef16001385163071e9496da6527d63",
+    "pdf-toc-generator/Program.cs": "772391b8d7fd6787e3bf0e6927899dd7ce15e3a7ec087b3989b771be61202f93",
+    "pdf-xls-converter/Program.cs": "5b51a12f75d107baa357c4089faf4e68f208b918afcf51c3ce7fce5d09f411c7"
+  }
+}

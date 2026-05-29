@@ -1,0 +1,30 @@
+# Generated source tree for slides (run_id=pilot-slides-20260529-221814)
+slides-compress/
+  Program.cs
+  README.md
+  bin
+  example.manifest.json
+  expected-output.json
+  obj
+  slides-compress.csproj
+slides-convert/
+  Program.cs
+  README.md
+  bin
+  example.manifest.json
+  expected-output.json
+  input.pptx
+  obj
+  output.pdf
+  slides-convert.csproj
+slides-merger/
+  Program.cs
+  README.md
+  bin
+  example.manifest.json
+  expected-output.json
+  input1.pptx
+  input2.pptx
+  obj
+  output.pptx
+  slides-merger.csproj

@@ -1,0 +1,9 @@
+# Generated source tree for email (run_id=pilot-email-20260529-220716)
+email-converter/
+  Program.cs
+  README.md
+  bin
+  email-converter.csproj
+  example.manifest.json
+  expected-output.json
+  obj

@@ -1,0 +1,48 @@
+{
+  "run_id": "pilot-cells-20260529-221017",
+  "family": "cells",
+  "generation_stage": {
+    "name": "generation",
+    "order": 14,
+    "status": "success",
+    "duration_ms": 427.16097831726074,
+    "error": null,
+    "artifacts": {
+      "examples_generated": 9,
+      "generation_mode": "template",
+      "fixtures_generated": 9,
+      "healing_intelligence_loaded": true
+    }
+  },
+  "validation_stage": {
+    "name": "validation",
+    "order": 15,
+    "status": "success",
+    "duration_ms": 75883.65626335144,
+    "error": null,
+    "artifacts": {
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "build_passed": 9,
+      "run_passed": 9,
+      "build_repairs": 0,
+      "runtime_repairs": 0,
+      "runtime_failures_classified": 0
+    }
+  },
+  "gate_summary": {
+    "total_stages": 17,
+    "passed": 13,
+    "degraded": 0,
+    "failed": 0,
+    "skipped": 4,
+    "hard_stopped": false
+  },
+  "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+  "durable_fix_types_applied": [
+    "SpreadsheetMerger"
+  ],
+  "replay_mode": "replay-from-generation",
+  "base_run": "pilot-cells-20260528-142253"
+}

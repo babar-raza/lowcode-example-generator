@@ -1,8 +1,10 @@
 {
   "verdict": "PR_DRY_RUN_READY",
   "publishable": false,
-  "all_required_passed": true,
-  "blocking_gates": [],
+  "all_required_passed": false,
+  "blocking_gates": [
+    "gate_generation"
+  ],
   "gates": [
     {
       "gate_id": "gate_scenarios",
@@ -17,10 +19,10 @@
     {
       "gate_id": "gate_generation",
       "name": "Example Generation",
-      "status": "passed",
+      "status": "blocked",
       "required": true,
       "evidence_files": [],
-      "failure_reason": null,
+      "failure_reason": "No examples generated",
       "downstream_blocked": [],
       "stage_name": "generation"
     },

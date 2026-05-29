@@ -627,19 +627,14 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'document.Pages.Add();\n'
             'document.Save("input.pdf");\n'
             '\n'
-            'var options = TableOptions.Create()\n'
-            '    .InsertPageBefore(1)\n'
-            '    .AddTable()\n'
-            '        .AddRow()\n'
-            '            .AddCell()\n'
-            '                .AddParagraph(new TextFragment("Header 1"))\n'
-            '            .AddCell()\n'
-            '                .AddParagraph(new TextFragment("Header 2"))\n'
-            '        .AddRow()\n'
-            '            .AddCell()\n'
-            '                .AddParagraph(new TextFragment("Cell 1"))\n'
-            '            .AddCell()\n'
-            '                .AddParagraph(new TextFragment("Cell 2"));\n'
+            '// Build TableOptions separately so AddInput/AddOutput are called on the\n'
+            '// TableOptions instance, not on the TableCellBuilder chain end.\n'
+            'var options = new TableOptions();\n'
+            'options.InsertPageBefore(1);\n'
+            'options.AddTable()\n'
+            '    .AddRow()\n'
+            '        .AddCell().AddParagraph(new TextFragment("Header 1"))\n'
+            '        .AddCell().AddParagraph(new TextFragment("Header 2"));\n'
             'options.AddInput(new FileDataSource("input.pdf"));\n'
             'options.AddOutput(new FileDataSource("output.pdf"));\n'
             'var result = new TableGenerator().Process(options);\n'
@@ -804,6 +799,215 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
             'var result = new Signature().Process(signOptions);\n'
             'Console.WriteLine(result.ResultCollection.Count > 0 ? "PDF signed successfully." : "No output produced.");\n'
         )
+    # ---------------------------------------------------------------------------
+    # Diagram family deterministic templates
+    # Distinguish from PDF family using target_namespace.
+    # ---------------------------------------------------------------------------
+    _ns = (packet.target_namespace or "").lower()
+    if "aspose.diagram" in _ns:
+        if t == "diagramconverter":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Diagram;\n'
+                'using Aspose.Diagram.LowCode;\n'
+                '\n'
+                'var inputPath = "input.vsdx";\n'
+                'var diagram = new Diagram();\n'
+                'var page = diagram.Pages[0];\n'
+                'long shapeId = page.DrawEllipse(1.0, 1.0, 2.0, 2.0);\n'
+                'var shape = page.Shapes.GetShape(shapeId);\n'
+                'if (shape != null)\n'
+                '{\n'
+                '    shape.Name = "SampleShape";\n'
+                '    shape.XForm.PinX.Value = 2.0;\n'
+                '    shape.XForm.PinY.Value = 2.0;\n'
+                '    shape.XForm.Width.Value = 1.0;\n'
+                '    shape.XForm.Height.Value = 1.0;\n'
+                '}\n'
+                'diagram.Save(inputPath, SaveFileFormat.Vsdx);\n'
+                '\n'
+                'var outputPath = "output.vdx";\n'
+                'DiagramConverter.Process(inputPath, outputPath);\n'
+                '\n'
+                'Console.WriteLine(File.Exists(outputPath)\n'
+                '    ? $"Conversion succeeded, output file created at \'{outputPath}\'."\n'
+                '    : $"Conversion failed, output file not found at \'{outputPath}\'.");\n'
+            )
+        if t == "pdfconverter":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Diagram;\n'
+                'using Aspose.Diagram.LowCode;\n'
+                '\n'
+                'var inputPath = "input.vsdx";\n'
+                'var diagram = new Diagram();\n'
+                'var page = diagram.Pages[0];\n'
+                'long shapeId = page.DrawEllipse(1.0, 1.0, 2.0, 2.0);\n'
+                'var shape = page.Shapes.GetShape(shapeId);\n'
+                'if (shape != null)\n'
+                '{\n'
+                '    shape.Name = "SampleShape";\n'
+                '    shape.XForm.PinX.Value = 2.0;\n'
+                '    shape.XForm.PinY.Value = 2.0;\n'
+                '    shape.XForm.Width.Value = 1.0;\n'
+                '    shape.XForm.Height.Value = 1.0;\n'
+                '}\n'
+                'diagram.Save(inputPath, SaveFileFormat.Vsdx);\n'
+                '\n'
+                'var outputPath = "output.pdf";\n'
+                'PdfConverter.Process(inputPath, outputPath);\n'
+                '\n'
+                'Console.WriteLine(File.Exists(outputPath)\n'
+                '    ? $"PDF generated successfully: {outputPath}"\n'
+                '    : $"PDF conversion failed, output not found at \'{outputPath}\'.");\n'
+            )
+
+    # ---------------------------------------------------------------------------
+    # Cells family deterministic templates
+    # ---------------------------------------------------------------------------
+    if "aspose.cells" in _ns:
+        if t == "spreadsheetmerger":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Cells.LowCode;\n'
+                '\n'
+                'namespace PluginExample\n'
+                '{\n'
+                '    class Program\n'
+                '    {\n'
+                '        static void Main(string[] args)\n'
+                '        {\n'
+                '            Console.WriteLine("Example: cells-spreadsheet-merger");\n'
+                '\n'
+                '            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");\n'
+                '            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");\n'
+                '            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");\n'
+                '            File.Copy(inputPath, input1Path, overwrite: true);\n'
+                '            File.Copy(inputPath, input2Path, overwrite: true);\n'
+                '\n'
+                '            SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");\n'
+                '\n'
+                '            Console.WriteLine("Done.");\n'
+                '        }\n'
+                '    }\n'
+                '}\n'
+            )
+
+    # ---------------------------------------------------------------------------
+    # Words family deterministic templates
+    # ---------------------------------------------------------------------------
+    if "aspose.words" in _ns:
+        if t == "merger":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Words;\n'
+                'using Aspose.Words.LowCode;\n'
+                '\n'
+                'namespace PluginExample\n'
+                '{\n'
+                '    class Program\n'
+                '    {\n'
+                '        static void Main(string[] args)\n'
+                '        {\n'
+                '            Console.WriteLine("Example: words-merger");\n'
+                '\n'
+                '            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");\n'
+                '            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.docx");\n'
+                '            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.docx");\n'
+                '            File.Copy(inputPath, input1Path, overwrite: true);\n'
+                '            File.Copy(inputPath, input2Path, overwrite: true);\n'
+                '\n'
+                '            Merger.Merge("output.docx", new string[] { input1Path, input2Path });\n'
+                '\n'
+                '            Console.WriteLine("Done.");\n'
+                '        }\n'
+                '    }\n'
+                '}\n'
+            )
+        if t == "watermarker":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Words.LowCode;\n'
+                '\n'
+                'namespace PluginExample\n'
+                '{\n'
+                '    class Program\n'
+                '    {\n'
+                '        static void Main(string[] args)\n'
+                '        {\n'
+                '            Console.WriteLine("Example: words-watermarker");\n'
+                '\n'
+                '            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");\n'
+                '\n'
+                '            Watermarker.SetText(inputPath, "output_text_watermark.docx", "Confidential");\n'
+                '\n'
+                '            string imagePath = Path.Combine(AppContext.BaseDirectory, "watermark.bmp");\n'
+                '            byte[] bmpBytes = new byte[] {\n'
+                '                0x42, 0x4D, 0x3A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x00,\n'
+                '                0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00,\n'
+                '                0x00, 0x00, 0x01, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00,\n'
+                '                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\n'
+                '                0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\n'
+                '                0xFF, 0x00, 0x00, 0x00\n'
+                '            };\n'
+                '            File.WriteAllBytes(imagePath, bmpBytes);\n'
+                '            Watermarker.SetImage(inputPath, "output_image_watermark.docx", imagePath);\n'
+                '\n'
+                '            Console.WriteLine("Done.");\n'
+                '        }\n'
+                '    }\n'
+                '}\n'
+            )
+
+    # ---------------------------------------------------------------------------
+    # Slides family deterministic templates
+    # Aspose.Slides.LowCode.Convert conflicts with System.Convert — must
+    # use fully-qualified type name Aspose.Slides.LowCode.Convert.ToPdf().
+    # ---------------------------------------------------------------------------
+    if "aspose.slides" in _ns:
+        if t == "convert":
+            return (
+                'using System;\n'
+                'using System.IO;\n'
+                'using Aspose.Slides;\n'
+                'using Aspose.Slides.Export;\n'
+                'using Aspose.Slides.LowCode;\n'
+                '\n'
+                'namespace PluginExample\n'
+                '{\n'
+                '    class Program\n'
+                '    {\n'
+                '        static void Main(string[] args)\n'
+                '        {\n'
+                '            Console.WriteLine("Example: slides-convert");\n'
+                '\n'
+                '            // Create input PPTX programmatically\n'
+                '            string inputPath = "input.pptx";\n'
+                '            using (var pres = new Presentation())\n'
+                '            {\n'
+                '                pres.Slides[0].Shapes.AddAutoShape(\n'
+                '                    Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 50);\n'
+                '                pres.Save(inputPath, SaveFormat.Pptx);\n'
+                '            }\n'
+                '\n'
+                '            // Convert PPTX to PDF using LowCode Convert\n'
+                '            // Use fully-qualified name to avoid ambiguity with System.Convert\n'
+                '            string outputPath = "output.pdf";\n'
+                '            Aspose.Slides.LowCode.Convert.ToPdf(inputPath, outputPath);\n'
+                '\n'
+                '            Console.WriteLine(File.Exists(outputPath)\n'
+                '                ? $"Conversion succeeded: {outputPath}"\n'
+                '                : "Conversion failed: output file not found.");\n'
+                '        }\n'
+                '    }\n'
+                '}\n'
+            )
+
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
 

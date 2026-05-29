@@ -61,20 +61,30 @@ template_hints:
 
 per_type_constraints:
   DiagramConverter:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Diagram.LowCode;"
-      - "REQUIRED: DiagramConverter.Process(inputPath, outputPath) for Visio-to-Visio conversion"
+      - "REQUIRED: DiagramConverter.Process("
+      - "REQUIRED: DrawEllipse("
+      - "REQUIRED: .Value = "
     forbidden:
       - "FORBIDDEN: IDiagramPlugin — use LowCode DiagramConverter, not the core plugin interface"
       - "FORBIDDEN: Manual Visio file manipulation replacing DiagramConverter.Process()"
       - "FORBIDDEN: PDF output with DiagramConverter — use PdfConverter for PDF output"
+      - "FORBIDDEN: TypeValue"
+      - "FORBIDDEN: new Shape()"
   PdfConverter:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Diagram.LowCode;"
-      - "REQUIRED: PdfConverter.Process(inputPath, outputPath) for Visio-to-PDF conversion"
+      - "REQUIRED: PdfConverter.Process("
+      - "REQUIRED: DrawEllipse("
+      - "REQUIRED: .Value = "
     forbidden:
       - "FORBIDDEN: IDiagramPlugin — use LowCode PdfConverter, not the core plugin interface"
       - "FORBIDDEN: Manual diagram-to-PDF conversion replacing PdfConverter.Process()"
+      - "FORBIDDEN: TypeValue"
+      - "FORBIDDEN: new Shape()"
 
 validation:
   require_restore: true

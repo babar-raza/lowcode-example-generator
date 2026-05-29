@@ -3,10 +3,10 @@
   "types_with_consumers": 0,
   "types_without_consumers": 5,
   "relationships": {
+    "Aspose.Slides.LowCode.Compress": [],
     "Aspose.Slides.LowCode.Collect": [],
     "Aspose.Slides.LowCode.Convert": [],
-    "Aspose.Slides.LowCode.Merger": [],
-    "Aspose.Slides.LowCode.Compress": [],
-    "Aspose.Slides.LowCode.ForEach": []
+    "Aspose.Slides.LowCode.ForEach": [],
+    "Aspose.Slides.LowCode.Merger": []
   }
 }

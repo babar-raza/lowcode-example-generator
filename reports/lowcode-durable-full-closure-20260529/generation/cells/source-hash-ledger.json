@@ -1,0 +1,15 @@
+{
+  "run_id": "pilot-cells-20260529-221017",
+  "family": "cells",
+  "hashes": {
+    "cells-html-converter/Program.cs": "8880c345608ab28d86724b3bff8ca3855f39752818df5e9a8a1e8fb76b8ca1a3",
+    "cells-image-converter/Program.cs": "df552d7638d4eacbd27726a50153fe9d6911e4d075c72b5e2bf70eb077f79b46",
+    "cells-json-converter/Program.cs": "11a412efbd3c44040e3f4187e024b584b53197b06fc855397f429b17b994c6c7",
+    "cells-pdf-converter/Program.cs": "c9cac41390536c55197a7f6a1761b6e99cc7f2e9b314de31f8a03c02df59734f",
+    "cells-spreadsheet-converter/Program.cs": "f6350f8f4b8251149b2df12c0daa9994f4ab4cedddd08f171682e801700d10ec",
+    "cells-spreadsheet-locker/Program.cs": "562dfb3afda5a9730da9133dfabef76a06215ddf3c004960abcacfcc19530e26",
+    "cells-spreadsheet-merger/Program.cs": "4dd2e5c15ff1ff338bac4b89295003b37f7262f86fba12d03b5a4aa35a476edf",
+    "cells-spreadsheet-splitter/Program.cs": "778725ea5038a7762fdf3f7fc845970468f0ebf421736f824c0ddf2230bb17e1",
+    "cells-text-converter/Program.cs": "cb8ca8f32112bc6efde7c43aa97b913e6a4263bc9eec258d10956e41604e2d7b"
+  }
+}

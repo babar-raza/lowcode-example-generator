@@ -42,19 +42,28 @@ def sha256_file(path: Path) -> str:
 
 
 def check_clean_working_tree():
-    status = git("status", "--short")
+    # Use subprocess directly (not git() helper) to avoid strip() eating leading spaces
+    result = subprocess.run(
+        ["git", "status", "--short"], capture_output=True, text=True, cwd=REPO_ROOT
+    )
     # Filter out: untracked (??) and known pre-existing binary build artifacts in workspace/pr-dry-run
-    # These binaries are tracked from prior sprints but are rebuilt each run and cannot be meaningfully committed
+    # These binaries are tracked from prior sprints but are rebuilt each run and cannot be committed
     KNOWN_BINARY_PREFIXES = [
         "workspace/pr-dry-run/",  # bin/Debug and obj/Debug build artifacts
     ]
     modified = []
-    for line in status.splitlines():
-        if not line.strip():
+    for line in result.stdout.splitlines():
+        line = line.rstrip()
+        if not line:
             continue
-        if line.startswith("??"):
+        # git status --short: exactly 2 status chars + 1 space + path
+        # Extract path by finding the space after the 2-char status code
+        stripped = line.lstrip()
+        if stripped.startswith("??"):
             continue
-        path_part = line[3:].strip()
+        # Path is after the first 3 chars (XY<space>) or 2 chars if leading space was eaten
+        # Use split to find the path robustly
+        path_part = line.strip()[2:].lstrip()
         if any(path_part.startswith(p) for p in KNOWN_BINARY_PREFIXES):
             continue  # Skip known pre-existing binary build artifacts
         modified.append(line)

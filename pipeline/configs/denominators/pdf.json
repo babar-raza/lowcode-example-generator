@@ -3,12 +3,12 @@
   "source_package": "Aspose.PDF",
   "source_version": "26.5.0",
   "source_package_sha256": "f3f7220cf969241c0a608dfa239de3cd2d36e7a6b6c77cee45af2582290238cb",
-  "api_catalog_sha256": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
+  "api_catalog_sha256": "ba96d2759cfb92280fe88390cb541168b4c3a821bf834883f576d4abf300ff48",
   "api_catalog_source": "workspace/runs/pilot-pdf-20260515-130700/catalog/pdf/api-catalog.json",
   "plugin_namespace": "Aspose.Pdf.LowCode",
   "total_lowcode_types": 101,
   "workflow_root_types": 22,
-  "workflow_root_types_basis": "Classified in workspace/verification/latest/pdf-type-role-classification.json (2026-05-04). Originally 25 WORKFLOW_ROOT types. PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7 (2026-05-14). PdfToImage reclassified to ABSTRACT_BASE in Sprint 22 (2026-05-16) — abstract_class kind confirmed in catalog; abstract base for Jpeg/Png/Tiff. Cannot instantiate. PdfToImageOptions also abstract. Confirmed via Sprint 21 XmlProcessor API audit. SelectField reclassified to PROVIDER_CALLBACK in Sprint 24 (2026-05-17) — DELEGATE type (Invoke/BeginInvoke/EndInvoke only, no IPlugin interface, not instantiable as standalone plugin). workflow_root_types 25->24->23->22.",
+  "workflow_root_types_basis": "Classified in workspace/verification/latest/pdf-type-role-classification.json (2026-05-04). Originally 25 WORKFLOW_ROOT types. PdfExtractor reclassified to ABSTRACT_BASE in Sprint 7 (2026-05-14). PdfToImage reclassified to ABSTRACT_BASE in Sprint 22 (2026-05-16) \u2014 abstract_class kind confirmed in catalog; abstract base for Jpeg/Png/Tiff. Cannot instantiate. PdfToImageOptions also abstract. Confirmed via Sprint 21 XmlProcessor API audit. SelectField reclassified to PROVIDER_CALLBACK in Sprint 24 (2026-05-17) \u2014 DELEGATE type (Invoke/BeginInvoke/EndInvoke only, no IPlugin interface, not instantiable as standalone plugin). workflow_root_types 25->24->23->22.",
   "non_runnable_types": 79,
   "non_runnable_breakdown": {
     "OPTIONS": 51,
@@ -44,7 +44,7 @@
   ],
   "allowed_pilot_count": 19,
   "denominator_basis": "PILOT_ALLOWED",
-  "denominator_basis_note": "PDF Wave G expansion (Sprint 26, 2026-05-17): 19 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener) + Wave F (2: FormEditor/FormExporter) + Wave G (1: Signature). PdfExtractor excluded — ABSTRACT_BASE. PdfToImage excluded — ABSTRACT_BASE (reclassified Sprint 22). SelectField reclassified PROVIDER_CALLBACK (Sprint 24) — not a WORKFLOW_ROOT. Signature harness-verified Sprint 25 (self-signed PFX ALL_PASS). Denominator for current coverage = 19. workflow_root denominator = 22. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace. Conservation: 22+79=101, 19+82=101.",
+  "denominator_basis_note": "PDF Wave G expansion (Sprint 26, 2026-05-17): 19 allowed_types now in scope per pdf.yml. Wave A (5) + Wave B (3) + Wave C (3) + Wave D (3: TocGenerator/TableGenerator/ImageExtractor) + Wave E (2: Security/FormFlattener) + Wave F (2: FormEditor/FormExporter) + Wave G (1: Signature). PdfExtractor excluded \u2014 ABSTRACT_BASE. PdfToImage excluded \u2014 ABSTRACT_BASE (reclassified Sprint 22). SelectField reclassified PROVIDER_CALLBACK (Sprint 24) \u2014 not a WORKFLOW_ROOT. Signature harness-verified Sprint 25 (self-signed PFX ALL_PASS). Denominator for current coverage = 19. workflow_root denominator = 22. full_sot denominator = 101. XmlProcessor does not exist in LowCode namespace. Conservation: 22+79=101, 19+82=101.",
   "runnable_scenarios": 19,
   "runnable_scenarios_basis": "PILOT_ALLOWED",
   "runnable_scenario_ids": [
@@ -103,7 +103,7 @@
   "excluded_count": 82,
   "excluded_count_basis": "82 types excluded: 19 pilot allowed + 82 others = 101. Excludes all non-WORKFLOW_ROOT types (79, including SelectField reclassified PROVIDER_CALLBACK Sprint 24, PdfExtractor + PdfToImage reclassified ABSTRACT_BASE) plus 3 WORKFLOW_ROOT types not in allowed_pilot_types.",
   "unclassified_workflow_root_count": 3,
-  "unclassified_workflow_root_note": "3 WORKFLOW_ROOT types not in allowed_pilot_types after Wave G: Timestamp (PERMANENTLY_BLOCKED — external TSA ServerUrl required), Ofd (PERMANENTLY_BLOCKED — OFD input format, no programmatic fixture), FormImporter (WAVE_H_CANDIDATE — FormImporterJsonOptions confirmed Sprint 26, harness under assessment). Signature added to Wave G pilot in Sprint 26 (harness-verified Sprint 25). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
+  "unclassified_workflow_root_note": "3 WORKFLOW_ROOT types not in allowed_pilot_types after Wave G: Timestamp (PERMANENTLY_BLOCKED \u2014 external TSA ServerUrl required), Ofd (PERMANENTLY_BLOCKED \u2014 OFD input format, no programmatic fixture), FormImporter (WAVE_H_CANDIDATE \u2014 FormImporterJsonOptions confirmed Sprint 26, harness under assessment). Signature added to Wave G pilot in Sprint 26 (harness-verified Sprint 25). SelectField reclassified PROVIDER_CALLBACK (Sprint 24). XmlProcessor does not exist. PdfToImage reclassified ABSTRACT_BASE.",
   "coverage_pct_of_pilot_allowed": 100.0,
   "coverage_pct_of_workflow_root": 86.36,
   "coverage_pct_of_total_types": 18.81,
@@ -120,5 +120,7 @@
     "pipeline/configs/families/pdf.yml"
   ],
   "last_verified_at": "2026-05-19T00:00:00Z",
-  "notes": "Updated MT007 Sprint (2026-05-20): All 19 pilot-allowed types confirmed published via GitHub API. PRs #1,#2,#4 merged earlier. PRs #11,#17-#21 merged 2026-05-19 (14 remaining examples). PRs #5-#10 CLOSED (superseded). published_count 5->19, pr_dry_run_ready_count 14->0, coverage 26.32%->100%. FormImporter remains WAVE_H deferred (Aspose.PDF 26.5.0 bug). Timestamp and Ofd PERMANENTLY_BLOCKED."
+  "notes": "Updated MT007 Sprint (2026-05-20): All 19 pilot-allowed types confirmed published via GitHub API. PRs #1,#2,#4 merged earlier. PRs #11,#17-#21 merged 2026-05-19 (14 remaining examples). PRs #5-#10 CLOSED (superseded). published_count 5->19, pr_dry_run_ready_count 14->0, coverage 26.32%->100%. FormImporter remains WAVE_H deferred (Aspose.PDF 26.5.0 bug). Timestamp and Ofd PERMANENTLY_BLOCKED.",
+  "api_catalog_updated_at": "2026-05-30",
+  "api_catalog_update_reason": "pass4 B1: updated from 710adaea... to ba96d275..."
 }

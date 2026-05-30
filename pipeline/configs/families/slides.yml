@@ -91,6 +91,7 @@ per_type_constraints:
       - "FORBIDDEN: new Convert() — Convert methods are static, call Convert.ToPdf() directly"
       - "FORBIDDEN: Convert.ToPdf( without fully-qualified Aspose.Slides.LowCode.Convert namespace — CS0104 ambiguity"
   Compress:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Slides.LowCode;"
       - "REQUIRED: using Aspose.Slides; (for loading Presentation)"

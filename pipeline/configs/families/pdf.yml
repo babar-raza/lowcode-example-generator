@@ -177,6 +177,7 @@ template_hints:
 
 per_type_constraints:
   Merger:
+    template_first: true
     required:
       - "REQUIRED: new MergeOptions( — use MergeOptions as the concrete options class for Merger"
       - "REQUIRED: new Merger().Process(options) — use the LowCode Merger plugin, not PdfFileEditor"
@@ -185,20 +186,24 @@ per_type_constraints:
     forbidden:
       - "FORBIDDEN: PdfFileEditor — this is the core Aspose.Pdf.Facades API; use Aspose.Pdf.LowCode.Merger instead"
   TextExtractor:
+    template_first: true
     required:
       - "REQUIRED: new TextExtractor().Process(options) — use the LowCode TextExtractor plugin"
     forbidden: []
   Splitter:
+    template_first: true
     required:
       - "REQUIRED: new Splitter().Process(options) — use the LowCode Splitter plugin, not PdfFileEditor"
       - "REQUIRED: using Aspose.Pdf; (for Document fixture creation)"
     forbidden:
       - "FORBIDDEN: PdfFileEditor — use Aspose.Pdf.LowCode.Splitter instead"
   Optimizer:
+    template_first: true
     required:
       - "REQUIRED: new Optimizer().Process(options) — use the LowCode Optimizer plugin"
     forbidden: []
   PdfAConverter:
+    template_first: true
     required:
       - "REQUIRED: new PdfAConverter().Process(options) — use the LowCode PdfAConverter plugin"
       - "REQUIRED: using Aspose.Pdf.LowCode; (for PdfAConverter and FileDataSource)"

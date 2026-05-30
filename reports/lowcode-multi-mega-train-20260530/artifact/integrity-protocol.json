@@ -1,0 +1,45 @@
+{
+  "sprint_id": "lowcode-multi-mega-train-20260530",
+  "lane": "I",
+  "date": "2026-05-30",
+  "title": "Artifact Integrity and ZIP Protocol Documentation",
+
+  "prior_issue": {
+    "complaint": "Pass 3 bundle had artifact metadata mismatch (reviewer saw 549 vs 547 entries)",
+    "root_cause": "build_pass3_zip.py creates zip-file-list.txt AFTER the ZIP; zip-file-list.txt itself is NOT included in the ZIP because it's created post-build",
+    "protocol_violation": "Bundle was built, then build_pass3_zip.py was committed, creating a post-ZIP commit",
+    "status": "DOCUMENTED"
+  },
+
+  "artifact_staging_convention": {
+    "rule_1": "Tracked files committed first — NO tracked file modified after final commit",
+    "rule_2": "final_commit_sha NOT embedded in tracked files (self-reference impossible)",
+    "rule_3": "Artifact-metadata generated POST-COMMIT outside tracked repo (to .local/ gitignored)",
+    "rule_4": "ZIP includes tracked files + artifact-metadata/ (bundle-manifest, final-clean-proof, artifact-verification, zip-file-list)",
+    "rule_5": "git status --short MUST be clean before ZIP build",
+    "rule_6": "ZIP built last, no commit after ZIP build",
+    "source": "Healing Sprint 1F convention — confirmed and maintained in all subsequent sprints"
+  },
+
+  "sha256_sidecar_protocol": {
+    "current_state": "No per-file SHA256 sidecar; zip-file-list.txt contains paths only",
+    "improvement": "Future sprint: add sha256-manifest.json alongside zip with SHA256 of every entry",
+    "implementation": "Use hashlib.sha256 on each file before adding to ZIP; write separate manifest",
+    "blocking": false,
+    "status": "DOCUMENTED_FUTURE_WORK"
+  },
+
+  "pass3_entry_count_reconciliation": {
+    "claimed_in_manifest": 549,
+    "actual_zip_entries": 549,
+    "prior_reviewer_complaint": "549 vs 547 — reviewer may have read an earlier intermediate state",
+    "final_verified_count": 549,
+    "resolution": "549 is correct (545 tracked + 4 metadata); 547 would have been before zip-file-list.txt was added to metadata"
+  },
+
+  "this_sprint_zip_protocol": {
+    "plan": "Build ZIP after ALL commits; artifact-metadata generated post-commit; entries will be counted accurately",
+    "zip_name": "lowcode-multi-mega-train-20260530-evidence.zip",
+    "zip_location": ".local/evidence-bundles/"
+  }
+}

@@ -2,13 +2,21 @@
   "package_id": "Aspose.Email",
   "resolved_version": "26.4.0",
   "nupkg_sha256": "87f227c5ebf7f471c702b85e2a65018fccf8a2852fbf1c62da67d4aa827c8c9f",
-  "selected_target_framework": "",
-  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-final-20260528\\extracted\\email\\primary",
-  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-final-20260528\\extracted\\email\\primary",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\extracted\\email\\primary\\lib\\netstandard2.0\\Aspose.Email.dll",
+  "xml_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\extracted\\email\\primary\\lib\\netstandard2.0\\Aspose.Email.xml",
   "xml_warning": null,
-  "dependency_count": 0,
-  "dependency_paths": [],
-  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-final-20260528\\catalog\\email\\api-catalog.json",
+  "dependency_count": 7,
+  "dependency_paths": [
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Security.Cryptography.Pkcs.7.0.3.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Formats.Asn1.7.0.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Buffers.4.5.1.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Memory.4.5.5.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Security.Cryptography.Cng.5.0.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Text.Encoding.CodePages.5.0.0.nupkg",
+    "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\packages\\email\\deps\\System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg"
+  ],
+  "api_catalog_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pilot-email-repair-20260530\\catalog\\email\\api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [
     {

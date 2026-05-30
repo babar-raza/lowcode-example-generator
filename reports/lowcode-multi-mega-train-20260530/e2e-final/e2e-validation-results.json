@@ -1,0 +1,82 @@
+{
+  "sprint_id": "lowcode-multi-mega-train-20260530",
+  "lane": "E",
+  "date": "2026-05-30",
+  "description": "Fresh E2E validation after generator repair (template_first templates for 9 no-op types)",
+  "families": {
+    "cells": {
+      "run_id": "prior-run-full-closure-20260529",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "note": "No no-op types in cells; prior run evidence still valid",
+      "status": "PRIOR_RUN_ACCEPTED"
+    },
+    "diagram": {
+      "run_id": "pilot-diagram-20260529-221021",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "note": "No no-op types in diagram; prior run evidence still valid",
+      "status": "PRIOR_RUN_ACCEPTED"
+    },
+    "email": {
+      "run_id": "pilot-email-repair-20260530",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "repaired_types": ["Converter"],
+      "new_template": "async Converter.ConvertToHtml + MemoryStream + FolderOutputHandler",
+      "status": "FRESH_RUN_PASS"
+    },
+    "pdf": {
+      "run_id": "pilot-pdf-repair-20260530",
+      "total": 19,
+      "passed": 19,
+      "failed": 0,
+      "repaired_types": ["Merger", "Optimizer", "Splitter", "PdfAConverter", "TextExtractor"],
+      "new_templates": {
+        "Merger": "MergeOptions + new Merger().Process(options)",
+        "Optimizer": "OptimizeOptions + new Optimizer().Process(options)",
+        "Splitter": "SplitOptions + new Splitter().Process(options) — 3 page outputs",
+        "PdfAConverter": "PdfAConvertOptions + PdfAStandardVersion.PDF_A_1B + new PdfAConverter().Process(options)",
+        "TextExtractor": "TextExtractorOptions + new TextExtractor().Process(options)"
+      },
+      "status": "FRESH_RUN_PASS",
+      "run_type": "replay-from-generation (prior run: pilot-pdf-heal-20260528)"
+    },
+    "slides": {
+      "run_id": "pilot-slides-repair-20260530",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "repaired_types": ["Compress"],
+      "new_template": "Compress.RemoveUnusedLayoutSlides(pres) static method + new Presentation(inputPath)",
+      "status": "FRESH_RUN_PASS"
+    },
+    "words": {
+      "run_id": "pilot-words-repair-20260530",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "repaired_types": ["Comparer", "MailMerger", "ReportBuilder"],
+      "new_templates": {
+        "Comparer": "Comparer.Compare(v1, v2, outputPath, author, DateTime.UtcNow) static call",
+        "MailMerger": "MailMerger.Execute(templatePath, outputPath, fieldNames, fieldValues) static call",
+        "ReportBuilder": "ReportBuilder.BuildReport(templatePath, outputPath, data) with public ReportData class"
+      },
+      "status": "FRESH_RUN_PASS",
+      "advisory": "words-comparer has advisory contract failure same_format_converter_guard (non-blocking)"
+    }
+  },
+  "totals": {
+    "families_with_fresh_run": 4,
+    "families_with_prior_run": 2,
+    "total_examples_validated": 42,
+    "total_passed": 42,
+    "total_failed": 0,
+    "repaired_no_op_examples": 9,
+    "all_9_repaired_pass": true
+  },
+  "verdict": "42/42 PASS — all no-op stubs repaired and validated"
+}

@@ -1,0 +1,14 @@
+{
+  "products": {
+    "words": {
+      "package_id": "Aspose.Words",
+      "resolved_version": "26.5.0",
+      "eligibility_status": "eligible",
+      "matched_plugin_namespaces": [
+        "Aspose.Words.LowCode"
+      ],
+      "public_plugin_type_count": 25,
+      "public_plugin_method_count": 230
+    }
+  }
+}

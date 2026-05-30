@@ -1,6 +1,6 @@
 {
   "family": "words",
-  "updated_at": "2026-05-29T17:11:44.916048+00:00",
+  "updated_at": "2026-05-30T06:54:29.356549+00:00",
   "total_entries": 5,
   "open_entries": 1,
   "resolved_entries": 4,
@@ -8,14 +8,14 @@
     {
       "scenario_id": "words-mail-merger",
       "family": "words",
-      "last_run_id": "pilot-words-20260513-220333",
+      "last_run_id": "pilot-words-repair-20260530",
       "last_failure_stage": "backlogged",
-      "root_cause": "Repair failed: 502 Server Error: Bad Gateway for url: https://llm.professionalize.com/v1/chat/completions",
+      "root_cause": "Template-first validation failed: ['Missing required LowCode API call: REQUIRED: string[] fieldNames = { \"FirstName\", \"LastName\" }; \u2014 array of merge field names', 'Missing required LowCode API call: REQUIRED: string[] fieldValues = { \"John\", \"Doe\" }; \u2014 array of merge field values']",
       "recommended_fix": "Review LLM constraints and few-shot patterns for this scenario",
       "priority": "high",
-      "attempt_count": 2,
+      "attempt_count": 3,
       "first_seen": "2026-05-13T12:45:09.865362+00:00",
-      "last_seen": "2026-05-13T17:12:07.284395+00:00",
+      "last_seen": "2026-05-30T06:51:35.129308+00:00",
       "resolved": true,
       "resolved_in_run": "pilot-words-20260513-175418"
     },

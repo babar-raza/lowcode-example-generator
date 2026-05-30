@@ -1,0 +1,41 @@
+{
+  "scenario_id": "words-converter",
+  "package_id": "Aspose.Words",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Words.LowCode.Converter",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.Convert",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.ConvertToImages",
+    "Aspose.Words.LowCode.Converter.Create",
+    "Aspose.Words.LowCode.Converter.Create"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.docx"
+  ],
+  "input_format": ".docx",
+  "output_format": ".pdf",
+  "operation_kind": "converter",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".docx",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "words/Converter",
+  "contract_hash": "d7530e4c1462dcab"
+}

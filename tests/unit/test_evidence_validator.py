@@ -1108,7 +1108,7 @@ class TestCompleteBundle(unittest.TestCase):
             result = EvidenceValidator(b).validate()
         self.assertTrue(result.overall_valid)
         self.assertEqual(result.failed, 0)
-        self.assertEqual(result.total_rules, 145)  # Sprint 89: added 5 new rules (141-145)
+        self.assertEqual(result.total_rules, 147)  # Multi-Mega-Train 20260530: added rules 146-147
 
     def test_overall_valid_false_on_any_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1200,7 +1200,7 @@ class TestCompleteBundle(unittest.TestCase):
         self.assertIn("sprint_id", d)
         self.assertIn("overall_valid", d)
         self.assertIn("rules", d)
-        self.assertEqual(len(d["rules"]), 145)  # Sprint 89: 145 rules total
+        self.assertEqual(len(d["rules"]), 147)  # Multi-Mega-Train 20260530: 147 rules total
 
 
 # ===========================================================================
@@ -1803,9 +1803,9 @@ class TestTwoPhaseValidation(unittest.TestCase):
         # Rule 21 must not appear in results
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn(EvidenceValidator.SELF_REFERENCE_RULE_ID, rule_ids)
-        # Should have exactly 144 rules evaluated (145 total - 1 self-reference rule 21)
-        # Sprint 89: total is now 145 (added 5 new rules), so excluding rule 21 = 144
-        self.assertEqual(len(result.rule_results), 144)
+        # Should have exactly 146 rules evaluated (147 total - 1 self-reference rule 21)
+        # Multi-Mega-Train 20260530: total is now 147 (added rules 146-147), so excluding rule 21 = 146
+        self.assertEqual(len(result.rule_results), 146)
 
     def test_validate_for_storage_overall_valid_reflects_20_rules_only(self):
         """validate_for_storage() overall_valid=True means all 41 non-self-referential rules pass.
@@ -1851,7 +1851,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             phase_b = EvidenceValidator(b).validate()
         self.assertTrue(phase_b.overall_valid)
         self.assertEqual(phase_b.failed, 0)
-        self.assertEqual(len(phase_b.rule_results), 145)  # Sprint 89: 145 rules total
+        self.assertEqual(len(phase_b.rule_results), 147)  # Multi-Mega-Train 20260530: 147 rules total
 
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
@@ -2067,16 +2067,16 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                              f"Failing rules: {failing}")
 
     def test_ecc_rule_total_is_22(self):
-        """validate() must return 145 rules total (140 Sprint 88 + 5 new Sprint 89 rules)."""
+        """validate() must return 147 rules total (145 Sprint 89 + 2 new Multi-Mega-Train 20260530 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 145,
-                         f"Expected 145 rules, got {result.total_rules}: "
+        self.assertEqual(result.total_rules, 147,
+                         f"Expected 147 rules, got {result.total_rules}: "
                          f"{[r.rule_id for r in result.rule_results]}")
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
-        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-140."""
+        """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-147."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
@@ -2085,8 +2085,8 @@ class TestECCContractComputedAndValid(unittest.TestCase):
                          "validate_for_storage must exclude rule 21 (self-reference)")
         self.assertIn("ecc_contract_computed_and_valid", rule_ids,
                       "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 144,
-                         f"validate_for_storage must have 144 rules (145 - 1 self-ref), "
+        self.assertEqual(result.total_rules, 146,
+                         f"validate_for_storage must have 146 rules (147 - 1 self-ref), "
                          f"got {result.total_rules}")
 
 
@@ -4402,6 +4402,130 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
             )
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "candidate_classification_not_stale_after_scan")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 146
+
+    def test_rule146_not_applicable_when_no_detector_report(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_op_examples_eliminated")
+        self.assertTrue(rule.passed)
+
+    def test_rule146_not_applicable_when_total_repaired_zero(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "semantic").mkdir(exist_ok=True)
+            (b / "semantic" / "no-op-detector-report.json").write_text(
+                json.dumps({"total_repaired": 0, "status": "CLEAN"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_op_examples_eliminated")
+        self.assertTrue(rule.passed)
+
+    def test_rule146_fails_when_repaired_but_proof_missing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "semantic").mkdir(exist_ok=True)
+            (b / "semantic" / "no-op-detector-report.json").write_text(
+                json.dumps({"total_repaired": 9, "status": "REPAIR_PLAN_COMPLETE"}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_op_examples_eliminated")
+        self.assertFalse(rule.passed)
+
+    def test_rule146_fails_when_still_no_op_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "semantic").mkdir(exist_ok=True)
+            (b / "semantic" / "no-op-detector-report.json").write_text(
+                json.dumps({"total_repaired": 9, "status": "REPAIR_PLAN_COMPLETE"}),
+                encoding="utf-8",
+            )
+            (b / "output-validation").mkdir(exist_ok=True)
+            (b / "output-validation" / "per-example-output-proof.json").write_text(
+                json.dumps({"summary": {"total_repaired": 9, "real_output_confirmed": 7, "still_no_op": 2}}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_op_examples_eliminated")
+        self.assertFalse(rule.passed)
+
+    def test_rule146_passes_when_still_no_op_zero(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "semantic").mkdir(exist_ok=True)
+            (b / "semantic" / "no-op-detector-report.json").write_text(
+                json.dumps({"total_repaired": 9, "status": "REPAIR_PLAN_COMPLETE"}),
+                encoding="utf-8",
+            )
+            (b / "output-validation").mkdir(exist_ok=True)
+            (b / "output-validation" / "per-example-output-proof.json").write_text(
+                json.dumps({"summary": {"total_repaired": 9, "real_output_confirmed": 9, "still_no_op": 0}}),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "no_op_examples_eliminated")
+        self.assertTrue(rule.passed)
+
+    # ------------------------------------------------------------------ Rule 147
+
+    def test_rule147_not_applicable_when_no_package_report(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "all_six_family_packages_present")
+        self.assertTrue(rule.passed)
+
+    def test_rule147_fails_when_family_missing_from_packages(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
+            (b / "publication" / "packages" / "package-completion-report.json").write_text(
+                json.dumps({
+                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}},
+                    "totals": {"total_packaged_examples": 38},
+                    "verdict": "PUBLICATION_PACKAGES_COMPLETE",
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "all_six_family_packages_present")
+        self.assertFalse(rule.passed)
+
+    def test_rule147_fails_when_verdict_not_complete(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
+            (b / "publication" / "packages" / "package-completion-report.json").write_text(
+                json.dumps({
+                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
+                    "totals": {"total_packaged_examples": 41},
+                    "verdict": "PUBLICATION_PACKAGES_INCOMPLETE",
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "all_six_family_packages_present")
+        self.assertFalse(rule.passed)
+
+    def test_rule147_passes_when_all_six_present_and_complete(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            b = _make_bundle(tmpdir)
+            (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
+            (b / "publication" / "packages" / "package-completion-report.json").write_text(
+                json.dumps({
+                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
+                    "totals": {"total_packaged_examples": 41},
+                    "verdict": "PUBLICATION_PACKAGES_COMPLETE_FOR_ALL_6_FAMILIES",
+                }),
+                encoding="utf-8",
+            )
+            result = EvidenceValidator(b).validate()
+        rule = next(r for r in result.rule_results if r.rule_id == "all_six_family_packages_present")
         self.assertTrue(rule.passed)
 
 

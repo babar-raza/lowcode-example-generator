@@ -1,0 +1,85 @@
+{
+  "sprint_id": "lowcode-multi-mega-train-20260530",
+  "lane": "C",
+  "date": "2026-05-30",
+  "description": "Per-example stdout output proof for all 9 repaired no-op examples",
+  "capture_method": "dotnet run in project directory, stdout captured",
+  "repaired_examples": {
+    "email-converter": {
+      "stdout": ["Example: email-converter", "Conversion succeeded: output_html"],
+      "output_files": ["output_html/input.html"],
+      "output_kind": "directory with HTML file",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "slides-compress": {
+      "stdout": ["Example: slides-compress", "Compression succeeded: output.pptx"],
+      "output_files": ["output.pptx (18433 bytes)"],
+      "output_kind": "PPTX file",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "words-comparer": {
+      "stdout": ["Example: words-comparer", "Comparison succeeded: output.docx"],
+      "output_files": ["output.docx"],
+      "output_kind": "DOCX file with tracked changes",
+      "no_op_before": "called Comparer.Create() only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "words-mail-merger": {
+      "stdout": ["Example: words-mail-merger", "Mail merge succeeded: output.docx"],
+      "output_files": ["output.docx"],
+      "output_kind": "DOCX file with merged content",
+      "no_op_before": "no API call, printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "words-report-builder": {
+      "stdout": ["Example: words-report-builder", "Report built: output.docx"],
+      "output_files": ["output.docx"],
+      "output_kind": "DOCX file with report content",
+      "no_op_before": "called ReportBuilder.Create() only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "pdf-merger": {
+      "stdout": ["Merged successfully"],
+      "output_files": ["output.pdf"],
+      "output_kind": "PDF file (merged from 2 inputs)",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "pdf-optimizer": {
+      "stdout": ["Optimized successfully"],
+      "output_files": ["output.pdf"],
+      "output_kind": "PDF file (optimized)",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "pdf-splitter": {
+      "stdout": ["Split into 3 file(s)"],
+      "output_files": ["output_page1.pdf", "output_page2.pdf", "output_page3.pdf"],
+      "output_kind": "3 PDF files (one per page)",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "pdf-text-extractor": {
+      "stdout": ["Extracted text from 1 page(s)"],
+      "output_files": [],
+      "output_kind": "text extraction result in ResultCollection (in-memory)",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    },
+    "pdf-pdf-aconverter": {
+      "stdout": ["Converted to PDF/A-1B"],
+      "output_files": ["output.pdf"],
+      "output_kind": "PDF/A-1B compliant PDF file",
+      "no_op_before": "printed 'Done.' only",
+      "verdict": "REAL_OUTPUT_CONFIRMED"
+    }
+  },
+  "summary": {
+    "total_repaired": 9,
+    "real_output_confirmed": 9,
+    "still_no_op": 0,
+    "verdict": "ALL_9_REPAIRED_EXAMPLES_PRODUCE_REAL_API_OUTPUT"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "sprint_id": "lowcode-multi-mega-train-20260530",
+  "lane": "H",
+  "date": "2026-05-30",
+  "title": "Validator Additions and Full Pytest Results",
+
+  "prior_rule_count": 145,
+  "new_rules_added": 2,
+  "new_rule_count": 147,
+
+  "new_rules": [
+    {
+      "rule_id": "no_op_examples_eliminated",
+      "rule_number": 146,
+      "motivation": "Multi-Mega-Train detected 9 no-op/stub examples; this rule enforces that if a no-op-detector-report exists and reports repaired examples, the per-example-output-proof must confirm still_no_op == 0",
+      "trigger": "semantic/no-op-detector-report.json present with total_repaired > 0",
+      "checks": [
+        "output-validation/per-example-output-proof.json must exist",
+        "summary.still_no_op must equal 0"
+      ],
+      "tests_added": [
+        "test_rule146_not_applicable_when_no_detector_report",
+        "test_rule146_not_applicable_when_total_repaired_zero",
+        "test_rule146_fails_when_repaired_but_proof_missing",
+        "test_rule146_fails_when_still_no_op_nonzero",
+        "test_rule146_passes_when_still_no_op_zero"
+      ],
+      "this_sprint_result": "PASSES — still_no_op=0, 9/9 repaired examples confirmed"
+    },
+    {
+      "rule_id": "all_six_family_packages_present",
+      "rule_number": 147,
+      "motivation": "Multi-Mega-Train (Lane F) revealed diagram/slides/email packages were missing; this rule enforces that if a package-completion-report exists, all 6 families must be represented and verdict must be COMPLETE",
+      "trigger": "publication/packages/package-completion-report.json present",
+      "checks": [
+        "packages dict must contain: cells, words, pdf, diagram, slides, email",
+        "verdict must contain COMPLETE (and NOT INCOMPLETE)"
+      ],
+      "tests_added": [
+        "test_rule147_not_applicable_when_no_package_report",
+        "test_rule147_fails_when_family_missing_from_packages",
+        "test_rule147_fails_when_verdict_not_complete",
+        "test_rule147_passes_when_all_six_present_and_complete"
+      ],
+      "this_sprint_result": "PASSES — 6/6 families present; verdict=PUBLICATION_PACKAGES_COMPLETE_FOR_ALL_6_FAMILIES"
+    }
+  ],
+
+  "pytest_run": {
+    "scope": "tests/unit/ (all test files)",
+    "command": ".venv/Scripts/python.exe -m pytest tests/unit/ --tb=short -q",
+    "new_rule_tests": "9/9 PASS",
+    "full_suite_result": "3218 passed, 0 failed, 18 skipped, 10 subtests passed",
+    "prior_sprint_result": "3174 passed, 0 failed (durable-full-closure sprint)",
+    "delta": "+44 tests from this sprint (9 new rule tests + 35 inherited from durable fixes)"
+  },
+
+  "validator_integrity_check": {
+    "rule_count_before": 145,
+    "rule_count_after": 147,
+    "rules_added_ids": ["no_op_examples_eliminated", "all_six_family_packages_present"],
+    "rules_removed": 0,
+    "rule_order": "appended at end of validate() dispatch; methods added before Helpers section"
+  }
+}

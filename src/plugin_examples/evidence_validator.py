@@ -464,6 +464,8 @@ class EvidenceValidator:
         _maybe(self._rule_source_proof_present_if_source_changed())
         _maybe(self._rule_no_lowcode_confirmed_has_evidence())
         _maybe(self._rule_candidate_classification_not_stale_after_scan())
+        _maybe(self._rule_no_op_examples_eliminated())
+        _maybe(self._rule_all_six_family_packages_present())
 
         failures = [r for r in results if not r.passed and r.severity == "FAILURE"]
         warnings = [r for r in results if not r.passed and r.severity == "WARNING"]
@@ -7669,6 +7671,158 @@ class EvidenceValidator:
             rule_id=rule_id, description=description,
             severity="FAILURE", passed=True,
             evidence="No stale REFLECTION_BLOCKED classifications after scan",
+        )
+
+    def _rule_no_op_examples_eliminated(self) -> RuleResult:
+        """If a no-op-detector-report exists and lists repaired examples,
+        the per-example-output-proof must confirm still_no_op == 0.
+
+        Multi-Mega-Train 20260530: 9 examples were repaired via template_first.
+        This rule verifies the repair is complete (no remaining no-ops).
+        """
+        rule_id = "no_op_examples_eliminated"
+        description = "no-op examples must be eliminated if detector report exists"
+
+        semantic_dir = self.bundle_dir / "semantic"
+        detector_path = semantic_dir / "no-op-detector-report.json"
+        if not detector_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="no-op-detector-report.json not present — rule not applicable",
+            )
+
+        try:
+            detector = json.loads(detector_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse no-op-detector-report.json — rule not applicable",
+            )
+
+        total_repaired = detector.get("total_repaired", 0)
+        if total_repaired == 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Detector reports 0 repairs needed — no validation required",
+            )
+
+        # Repairs were needed; check the output-validation proof
+        output_proof_path = self.bundle_dir / "output-validation" / "per-example-output-proof.json"
+        if not output_proof_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"Detector reports {total_repaired} repaired examples but "
+                    f"output-validation/per-example-output-proof.json is missing. "
+                    f"Output proof is required to confirm no-ops are eliminated."
+                ),
+            )
+
+        try:
+            proof = json.loads(output_proof_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail="Could not parse per-example-output-proof.json",
+            )
+
+        summary = proof.get("summary", {})
+        still_no_op = summary.get("still_no_op", None)
+        if still_no_op is None:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail="per-example-output-proof.json summary missing 'still_no_op' field",
+            )
+
+        if still_no_op != 0:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"still_no_op={still_no_op} in output proof — "
+                    f"{still_no_op} no-op examples remain after repair attempt. "
+                    f"All repaired examples must produce real API output."
+                ),
+            )
+
+        real_output = summary.get("real_output_confirmed", 0)
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"still_no_op=0; {real_output}/{total_repaired} repaired examples "
+                f"confirmed to produce real API output"
+            ),
+        )
+
+    def _rule_all_six_family_packages_present(self) -> RuleResult:
+        """All 6 publication families must have pr-dry-run packages.
+
+        Multi-Mega-Train 20260530 (Lane F): diagram, slides, and email packages
+        were missing and have been created. All 6 families are now required.
+        """
+        rule_id = "all_six_family_packages_present"
+        description = "all 6 families must have pr-dry-run publication packages"
+
+        # Check if publication package report exists
+        pkg_report_path = self.bundle_dir / "publication" / "packages" / "package-completion-report.json"
+        if not pkg_report_path.exists():
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="package-completion-report.json not present — rule not applicable",
+            )
+
+        try:
+            report = json.loads(pkg_report_path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, ValueError):
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=True,
+                evidence="Could not parse package-completion-report.json — rule not applicable",
+            )
+
+        packages = report.get("packages", {})
+        required_families = {"cells", "words", "pdf", "diagram", "slides", "email"}
+        missing = required_families - set(packages.keys())
+        if missing:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"Package report missing families: {sorted(missing)}. "
+                    f"All 6 families (cells, words, pdf, diagram, slides, email) "
+                    f"must have publication packages."
+                ),
+            )
+
+        # Check verdict field — must contain COMPLETE but not INCOMPLETE
+        verdict = report.get("verdict", "")
+        verdict_up = verdict.upper()
+        if "COMPLETE" not in verdict_up or "INCOMPLETE" in verdict_up:
+            return RuleResult(
+                rule_id=rule_id, description=description,
+                severity="FAILURE", passed=False,
+                failure_detail=(
+                    f"Package completion verdict is '{verdict}' — "
+                    f"expected COMPLETE status. All families must have packages."
+                ),
+            )
+
+        total = report.get("totals", {}).get("total_packaged_examples", 0)
+        return RuleResult(
+            rule_id=rule_id, description=description,
+            severity="FAILURE", passed=True,
+            evidence=(
+                f"All 6 families present in package report; "
+                f"{total} total packaged examples; verdict={verdict}"
+            ),
         )
 
     # ------------------------------------------------------------------

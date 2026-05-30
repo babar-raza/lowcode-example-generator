@@ -1,0 +1,24 @@
+{
+  "must_contain": [
+    "Example: cells-spreadsheet-locker"
+  ],
+  "must_not_contain": [
+    "Unhandled exception",
+    "System.Exception",
+    "Console.ReadKey",
+    "Console.ReadLine"
+  ],
+  "has_output": true,
+  "input_dependencies": [
+    "input.xlsx"
+  ],
+  "forbidden_code_patterns": [
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "TODO",
+    "NotImplementedException"
+  ],
+  "expected_output_extension": ".xlsx",
+  "expected_output_kind": "file",
+  "expected_output_cardinality": "single"
+}

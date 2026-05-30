@@ -73,6 +73,7 @@ template_hints:
 
 per_type_constraints:
   Converter:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Email.LowCode;"
       - "REQUIRED: using System.IO; (for File.ReadAllBytes, MemoryStream, Directory.CreateDirectory)"

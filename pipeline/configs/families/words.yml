@@ -180,6 +180,7 @@ per_type_constraints:
       - "FORBIDDEN: new Merger().Merge() — Merger.Merge() is static, call directly"
       - "FORBIDDEN: Merger.Create() — no such factory method"
   Comparer:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
@@ -199,6 +200,7 @@ per_type_constraints:
       - "FORBIDDEN: Processor.Convert() — does not exist; use Processor.From().To().Execute()"
       - "FORBIDDEN: new Processor() — Processor has no public constructor; entry point is static Processor.From(inputPath)"
   MailMerger:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"
@@ -212,6 +214,7 @@ per_type_constraints:
       - "FORBIDDEN: MailMergeDataSource class — use string[] fieldNames + string[] fieldValues instead"
       - "FORBIDDEN: new MailMerger() — MailMerger.Execute() is static, call directly"
   ReportBuilder:
+    template_first: true
     required:
       - "REQUIRED: using Aspose.Words.LowCode;"
       - "REQUIRED: using Aspose.Words;"

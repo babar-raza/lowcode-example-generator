@@ -1,13 +1,12 @@
 {
-  "replay_from": "validation",
+  "replay_from": "generation",
   "reuse_run_id": "pilot-pdf-heal-20260528",
-  "new_run_id": "pilot-pdf-20260529-140036",
+  "new_run_id": "pilot-pdf-repair-20260530",
   "family": "pdf",
-  "created_at": "2026-05-29T09:02:19.883325+00:00",
+  "created_at": "2026-05-30T07:14:37.897712+00:00",
   "skipped_stages": [
     "dependency_resolution",
     "extraction",
-    "generation",
     "nuget_fetch",
     "reflection"
   ],
@@ -24,6 +23,7 @@
     "llm_preflight"
   ],
   "executed_stages": [
+    "generation",
     "validation",
     "reviewer",
     "publisher"
@@ -50,20 +50,12 @@
       "message": "No stored 'denominator_hash' in prior run's scenario_planning stage"
     },
     "constraints_hash": {
-      "status": "pass",
-      "message": ""
+      "status": "warn",
+      "message": "per_type_constraints have changed. Generated code may violate new constraints. Consider running from generation instead."
     },
     "scenario_contract_family": {
       "status": "skipped",
       "message": "No scenario-catalog.json in prior run"
-    },
-    "generated_projects_index": {
-      "status": "pass",
-      "message": "19 example(s) in index"
-    },
-    "generated_projects_all_present": {
-      "status": "pass",
-      "message": "All 19 project dirs and Program.cs files verified"
     }
   },
   "overall_integrity": "warn"

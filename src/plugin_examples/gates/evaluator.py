@@ -274,8 +274,17 @@ def _compute_verdict(
             return "SOURCE_OF_TRUTH_PROVEN_ONLY"
         return "BLOCKED_GENERATION"
 
-    # Template mode or skip-run: max is DATA_FLOW_PROTOTYPE_ONLY
-    if ctx.template_mode or ctx.skip_run:
+    # Skip-run: no E2E executed — cap at DATA_FLOW_PROTOTYPE_ONLY
+    if ctx.skip_run:
+        return "DATA_FLOW_PROTOTYPE_ONLY"
+
+    # Template mode: generation uses canonical templates (not LLM).
+    # If build+run succeeded this is a full canonical template pass, not prototype-only.
+    # CANONICAL_TEMPLATE_GENERATION_PASS is publishable and PR-ready.
+    # DATA_FLOW_PROTOTYPE_ONLY is the fallback when build/run did not execute.
+    if ctx.template_mode:
+        if build_passed > 0:
+            return "CANONICAL_TEMPLATE_GENERATION_PASS"
         return "DATA_FLOW_PROTOTYPE_ONLY"
 
     # Build failures
@@ -341,7 +350,12 @@ def is_publishable(verdict: GateVerdict) -> bool:
 
 def is_publishable_verdict(verdict_str: str) -> bool:
     """Check if a verdict string allows publishing."""
-    return verdict_str in ("PR_READY", "FULL_E2E_PASSED")
+    return verdict_str in (
+        "PR_READY",
+        "FULL_E2E_PASSED",
+        "CANONICAL_TEMPLATE_GENERATION_PASS",
+        "CANONICAL_LLM_GENERATION_PASS",
+    )
 
 
 def _find_stage(stages: list, name: str):

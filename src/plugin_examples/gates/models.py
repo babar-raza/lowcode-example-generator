@@ -25,6 +25,10 @@ VERDICTS = frozenset({
     "PR_DRY_RUN_READY",
     "PR_READY",
     "FULL_E2E_PASSED",
+    "CANONICAL_TEMPLATE_GENERATION_PASS",
+    "CANONICAL_LLM_GENERATION_PASS",
+    "VALIDATION_BLOCKED",
+    "GENERATION_BLOCKED",
 })
 
 # Canonical status values for gate results.

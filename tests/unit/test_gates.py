@@ -176,6 +176,48 @@ class TestEvaluateGates:
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "BLOCKED_GENERATION"
 
+    def test_template_mode_with_build_pass_produces_canonical_template_pass(self):
+        # B1: template_mode + skip_run=False + build passed → CANONICAL_TEMPLATE_GENERATION_PASS
+        ctx = _FakeCtx(template_mode=True, skip_run=False)
+        stages = _make_stages({
+            "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
+            "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
+            "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
+        })
+        verdict = evaluate_gates(stages, ctx)
+        assert verdict.verdict == "CANONICAL_TEMPLATE_GENERATION_PASS"
+        assert verdict.publishable
+
+    def test_template_mode_skip_run_true_stays_data_flow_prototype(self):
+        # B1: template_mode + skip_run=True must remain DATA_FLOW_PROTOTYPE_ONLY
+        ctx = _FakeCtx(template_mode=True, skip_run=True)
+        stages = _make_stages({
+            "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
+            "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
+            "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
+        })
+        verdict = evaluate_gates(stages, ctx)
+        assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
+        assert not verdict.publishable
+
+    def test_template_mode_with_build_fail_stays_data_flow_prototype(self):
+        # B1: template_mode + skip_run=False + build failed → DATA_FLOW_PROTOTYPE_ONLY
+        ctx = _FakeCtx(template_mode=True, skip_run=False)
+        stages = _make_stages({
+            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
+            "validation": {"artifacts": {"build_passed": 0, "passed": 0, "failed": 3, "total": 3}},
+        })
+        verdict = evaluate_gates(stages, ctx)
+        assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
+        assert not verdict.publishable
+
+    def test_canonical_template_pass_is_publishable(self):
+        from plugin_examples.gates.evaluator import is_publishable_verdict
+        assert is_publishable_verdict("CANONICAL_TEMPLATE_GENERATION_PASS")
+        assert is_publishable_verdict("CANONICAL_LLM_GENERATION_PASS")
+        assert not is_publishable_verdict("DATA_FLOW_PROTOTYPE_ONLY")
+
 
 # ---------------------------------------------------------------------------
 # TestDetermineVerdict

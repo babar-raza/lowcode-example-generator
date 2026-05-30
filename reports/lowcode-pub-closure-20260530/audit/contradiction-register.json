@@ -1,0 +1,47 @@
+{
+  "contradictions": [
+    {
+      "id": "CR-001",
+      "claim": "final-clean-proof: CLEAN",
+      "reality": "89 bin/obj + 15 text files dirty",
+      "resolution": "committed 31e2069 — tracked dirty = 0"
+    },
+    {
+      "id": "CR-002",
+      "claim": "raw-commands.log populated",
+      "reality": "header only, no entries",
+      "resolution": "pub-closure adds real command entries with timestamps/exit codes"
+    },
+    {
+      "id": "CR-003",
+      "claim": "ZIP self-contained",
+      "reality": "missing Program.cs, .csproj, package artifacts, output proof",
+      "resolution": "pub-closure ZIP includes generated-source/, package-artifacts/, e2e/, output-validation/"
+    },
+    {
+      "id": "CR-004",
+      "claim": "idempotency proven",
+      "reality": "deterministic claim only, no physical A/B run",
+      "resolution": "pub-closure runs physical Run-B for all 6 families, compares hashes"
+    },
+    {
+      "id": "CR-005",
+      "claim": "DATA_FLOW_PROTOTYPE_ONLY is evaluator ceiling",
+      "reality": "misleading label; builds/runs all passed",
+      "resolution": "evaluator fixed: template_mode+build_passed → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    {
+      "id": "CR-006",
+      "claim": "per_family.words.pr_candidates=8",
+      "reality": "words-mail-merge excluded → should be 7",
+      "resolution": "E1 denominator model: words pr_candidates=7, package_included=8, total pr=41, package=42"
+    },
+    {
+      "id": "CR-007",
+      "claim": "publication candidates: 41",
+      "reality": "inconsistent with per_family sum=42",
+      "resolution": "E1 fix: per_family.words.pr_candidates corrected to 7, sum=41 consistent"
+    }
+  ],
+  "generated_at": "2026-05-30T21:56:53"
+}

@@ -1,0 +1,9 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "excluded_from_pr": [
+    "words-mail-merge",
+    "pdf-timestamp"
+  ],
+  "confirmed_not_in_pr_packages": true,
+  "package_contents_match_pr_candidates": true
+}

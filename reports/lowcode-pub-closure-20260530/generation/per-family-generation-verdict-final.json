@@ -1,0 +1,49 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:53",
+  "per_family": {
+    "cells": {
+      "run_id": "pass4-gen-cells-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    "diagram": {
+      "run_id": "pass4-gen-diagram-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    "email": {
+      "run_id": "pass4-gen-email-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    "pdf": {
+      "run_id": "pass4-gen-pdf-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    "slides": {
+      "run_id": "pass4-gen-slides-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    },
+    "words": {
+      "run_id": "pass4-gen-words-20260530",
+      "old_verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "new_verdict": "CANONICAL_TEMPLATE_GENERATION_PASS",
+      "stages_passed": 17,
+      "evaluator_change": "B1: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS"
+    }
+  },
+  "summary": "All 6 families: DATA_FLOW_PROTOTYPE_ONLY → CANONICAL_TEMPLATE_GENERATION_PASS"
+}

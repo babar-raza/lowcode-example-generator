@@ -1,0 +1,8 @@
+{
+  "slug": "words-mail-merger",
+  "run_stdout": "",
+  "output_files": [
+    "output.docx"
+  ],
+  "has_output": true
+}

@@ -1,0 +1,155 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:56",
+  "inventory": {
+    "cells": {
+      "lowcode_classes": [
+        "Converter",
+        "Merger",
+        "Parser",
+        "Splitter",
+        "Watermarker",
+        "LockUnlocker",
+        "SmartMarkerProcessor",
+        "SpreadsheetPrinter"
+      ],
+      "examples_exist": [
+        "cells-converter",
+        "cells-merger",
+        "cells-parser",
+        "cells-splitter",
+        "cells-watermarker",
+        "cells-lock-unlocker",
+        "cells-smart-marker-processor",
+        "cells-spreadsheet-printer"
+      ],
+      "gap_classes": [
+        "SpreadsheetPrinter"
+      ],
+      "gap_status": {
+        "SpreadsheetPrinter": "NEEDS_PRINTER_MOCK"
+      }
+    },
+    "words": {
+      "lowcode_classes": [
+        "Converter",
+        "Merger",
+        "Parser",
+        "Splitter",
+        "Watermarker",
+        "Replacer",
+        "MailMerger",
+        "Signer",
+        "Processor"
+      ],
+      "examples_exist": [
+        "words-converter",
+        "words-merger",
+        "words-parser",
+        "words-splitter",
+        "words-watermarker",
+        "words-replacer",
+        "words-mail-merge"
+      ],
+      "gap_classes": [
+        "Signer",
+        "Processor"
+      ],
+      "gap_status": {
+        "Signer": "NEEDS_PFX_FIXTURE",
+        "Processor": "NEEDS_API_INVESTIGATION"
+      }
+    },
+    "pdf": {
+      "lowcode_classes": [
+        "PdfConverter",
+        "PdfMerger",
+        "PdfSplitter",
+        "PdfCompressor",
+        "PdfWatermarker",
+        "PdfRotator",
+        "PdfRepair",
+        "PdfSecurity",
+        "PdfFormFlattener",
+        "PdfFormEditor",
+        "PdfFormExporter",
+        "PdfTocGenerator",
+        "PdfTableGenerator",
+        "PdfImageExtractor",
+        "PdfSignature",
+        "PdfExtractor",
+        "PdfToImage",
+        "FormImporter",
+        "Timestamp",
+        "Ofd"
+      ],
+      "examples_exist": [
+        "pdf-converter",
+        "pdf-merger",
+        "pdf-splitter",
+        "pdf-compressor",
+        "pdf-watermarker",
+        "pdf-rotator",
+        "pdf-repair",
+        "pdf-security",
+        "pdf-form-flattener",
+        "pdf-form-editor",
+        "pdf-form-exporter",
+        "pdf-toc-generator",
+        "pdf-table-generator",
+        "pdf-image-extractor",
+        "pdf-signature"
+      ],
+      "gap_classes": [
+        "FormImporter",
+        "Timestamp",
+        "Ofd"
+      ],
+      "gap_status": {
+        "FormImporter": "EXTERNAL_BUG_BLOCKER_NULLREF",
+        "Timestamp": "EXTERNAL_DEPENDENCY_TSA_SERVER",
+        "Ofd": "NO_PROGRAMMATIC_OFD_FIXTURE"
+      }
+    },
+    "slides": {
+      "lowcode_classes": [
+        "PresentationConverter",
+        "PresentationMerger",
+        "PresentationSplitter",
+        "PresentationCompressor",
+        "ForEach"
+      ],
+      "examples_exist": [
+        "slides-converter",
+        "slides-merger",
+        "slides-compressor"
+      ],
+      "gap_classes": [
+        "ForEach"
+      ],
+      "gap_status": {
+        "ForEach": "NON_RUNNABLE_HELPER_CONFIRMED"
+      }
+    },
+    "diagram": {
+      "lowcode_classes": [
+        "Converter"
+      ],
+      "examples_exist": [
+        "diagram-converter"
+      ],
+      "gap_classes": [],
+      "gap_status": {}
+    },
+    "email": {
+      "lowcode_classes": [
+        "EmailConverter"
+      ],
+      "examples_exist": [
+        "email-converter"
+      ],
+      "gap_classes": [],
+      "gap_status": {}
+    }
+  }
+}

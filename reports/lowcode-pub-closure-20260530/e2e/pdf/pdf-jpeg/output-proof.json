@@ -1,0 +1,8 @@
+{
+  "slug": "pdf-jpeg",
+  "run_stdout": "",
+  "output_files": [
+    "output.jpg"
+  ],
+  "has_output": true
+}

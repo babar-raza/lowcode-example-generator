@@ -1,0 +1,8 @@
+{
+  "slug": "cells-spreadsheet-merger",
+  "run_stdout": "",
+  "output_files": [
+    "output.xlsx"
+  ],
+  "has_output": true
+}

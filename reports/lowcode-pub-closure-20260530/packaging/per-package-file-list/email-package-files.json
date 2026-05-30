@@ -1,0 +1,57 @@
+{
+  "family": "email",
+  "package_root": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-email-20260530\\packages\\email",
+  "files": [
+    {
+      "path": "Aspose.Email.26.4.0.nupkg",
+      "size": 40618960,
+      "sha256": "87f227c5ebf7f471"
+    },
+    {
+      "path": "dependency-manifest.json",
+      "size": 3972,
+      "sha256": "b8942620a449bdd7"
+    },
+    {
+      "path": "deps\\System.Buffers.4.5.1.nupkg",
+      "size": 93737,
+      "sha256": "c30b3dd2c7e2f4ce"
+    },
+    {
+      "path": "deps\\System.Formats.Asn1.7.0.0.nupkg",
+      "size": 245861,
+      "sha256": "78c17e483ff27ac9"
+    },
+    {
+      "path": "deps\\System.Memory.4.5.5.nupkg",
+      "size": 208978,
+      "sha256": "10f43da352a29fb2"
+    },
+    {
+      "path": "deps\\System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg",
+      "size": 130329,
+      "sha256": "9de0114a92cf5333"
+    },
+    {
+      "path": "deps\\System.Security.Cryptography.Cng.5.0.0.nupkg",
+      "size": 957764,
+      "sha256": "9ce24fdef76641a6"
+    },
+    {
+      "path": "deps\\System.Security.Cryptography.Pkcs.7.0.3.nupkg",
+      "size": 837210,
+      "sha256": "9a77352743680f97"
+    },
+    {
+      "path": "deps\\System.Text.Encoding.CodePages.5.0.0.nupkg",
+      "size": 4244436,
+      "sha256": "609e6326a9153e9f"
+    },
+    {
+      "path": "download-manifest.json",
+      "size": 434,
+      "sha256": "3ccf16e6f68eed0c"
+    }
+  ],
+  "count": 10
+}

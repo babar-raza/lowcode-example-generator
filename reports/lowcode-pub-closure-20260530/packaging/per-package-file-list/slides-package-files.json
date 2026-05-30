@@ -1,0 +1,72 @@
+{
+  "family": "slides",
+  "package_root": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides",
+  "files": [
+    {
+      "path": "Aspose.Slides.NET.26.5.0.nupkg",
+      "size": 41566865,
+      "sha256": "f872e91f4383990c"
+    },
+    {
+      "path": "dependency-manifest.json",
+      "size": 5631,
+      "sha256": "a2cde61605658e82"
+    },
+    {
+      "path": "deps\\Microsoft.Bcl.AsyncInterfaces.6.0.0.nupkg",
+      "size": 76354,
+      "sha256": "e3df87fe2170a7e0"
+    },
+    {
+      "path": "deps\\System.Buffers.4.5.1.nupkg",
+      "size": 93737,
+      "sha256": "c30b3dd2c7e2f4ce"
+    },
+    {
+      "path": "deps\\System.Drawing.Common.5.0.3.nupkg",
+      "size": 1408003,
+      "sha256": "9ebd5b489a0603de"
+    },
+    {
+      "path": "deps\\System.Memory.4.5.4.nupkg",
+      "size": 205467,
+      "sha256": "dec0847f33b8823e"
+    },
+    {
+      "path": "deps\\System.Numerics.Vectors.4.5.0.nupkg",
+      "size": 382792,
+      "sha256": "a9d49320581fda1b"
+    },
+    {
+      "path": "deps\\System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+      "size": 84343,
+      "sha256": "6c41b53e70e9eee2"
+    },
+    {
+      "path": "deps\\System.Text.Encoding.CodePages.4.4.0.nupkg",
+      "size": 4257267,
+      "sha256": "cc3db86e51bcc610"
+    },
+    {
+      "path": "deps\\System.Text.Encodings.Web.6.0.1.nupkg",
+      "size": 271143,
+      "sha256": "977a0ac194ad8dec"
+    },
+    {
+      "path": "deps\\System.Text.Json.6.0.11.nupkg",
+      "size": 1401254,
+      "sha256": "2ac80e53746f48df"
+    },
+    {
+      "path": "deps\\System.Threading.Tasks.Extensions.4.5.4.nupkg",
+      "size": 89582,
+      "sha256": "a304a963cc0796c5"
+    },
+    {
+      "path": "download-manifest.json",
+      "size": 456,
+      "sha256": "fc6e9b4ea798af6a"
+    }
+  ],
+  "count": 13
+}

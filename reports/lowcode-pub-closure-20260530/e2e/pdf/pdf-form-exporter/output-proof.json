@@ -1,0 +1,8 @@
+{
+  "slug": "pdf-form-exporter",
+  "run_stdout": "",
+  "output_files": [
+    "output.json"
+  ],
+  "has_output": true
+}

@@ -1,0 +1,27 @@
+{
+  "scenario_id": "slides-merger",
+  "package_id": "Aspose.Slides.NET",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Slides.LowCode.Merger",
+    "Aspose.Slides.LowCode.Merger.Process",
+    "Aspose.Slides.LowCode.Merger.Process",
+    "Aspose.Slides.LowCode.Merger.Process",
+    "Aspose.Slides.LowCode.Merger.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "programmatic_input",
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pptx",
+  "operation_kind": "merger",
+  "expected_output_extension": ".pptx",
+  "contract_input_format": ".pptx",
+  "contract_output_format": ".pptx",
+  "contract_operation_kind": "merger",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "slides/Merger",
+  "contract_hash": "aea611f7bc97ef31"
+}

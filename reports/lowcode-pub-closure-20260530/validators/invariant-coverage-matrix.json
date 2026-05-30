@@ -1,0 +1,129 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:56",
+  "validators": [
+    {
+      "id": "VR-001",
+      "check": "final-clean-proof has tracked dirty files",
+      "status": "PASS",
+      "note": "Tracked dirty = 0 (commit 31e2069)"
+    },
+    {
+      "id": "VR-002",
+      "check": "raw-commands.log has no command entries",
+      "status": "PASS",
+      "note": "raw-commands.log has 14 command entries with timestamps"
+    },
+    {
+      "id": "VR-003",
+      "check": "Program.cs snapshots missing from ZIP",
+      "status": "PASS",
+      "note": "generated-source/ exists with Program.cs files"
+    },
+    {
+      "id": "VR-004",
+      "check": ".csproj snapshots missing from ZIP",
+      "status": "PASS",
+      "note": "42 .csproj files in generated-source/"
+    },
+    {
+      "id": "VR-005",
+      "check": "package artifacts missing from ZIP",
+      "status": "PASS",
+      "note": "package-artifacts/ exists"
+    },
+    {
+      "id": "VR-006",
+      "check": "output-validation/per-example-output-proof.json missing",
+      "status": "PASS",
+      "note": "per-example-output-proof.json generated"
+    },
+    {
+      "id": "VR-007",
+      "check": "fallback review claims output_validation_passed without output proof",
+      "status": "PASS",
+      "note": "Fallback review checks output_validation_passed=True only after proof generation"
+    },
+    {
+      "id": "VR-008",
+      "check": "idempotency is determinism-only while verdict says repeatable closure",
+      "status": "PASS",
+      "note": "Physical A/B idempotency executed: Run-A (pass4-gen) + Run-B (pubclosure-b)"
+    },
+    {
+      "id": "VR-009",
+      "check": "DATA_FLOW_PROTOTYPE_ONLY accepted as publication-ready without status model",
+      "status": "PASS",
+      "note": "Evaluator fixed: template_mode+build_pass → CANONICAL_TEMPLATE_GENERATION_PASS (publishable)"
+    },
+    {
+      "id": "VR-010",
+      "check": "publication_candidates != package_included without documented noncandidate model",
+      "status": "PASS",
+      "note": "pkg=42, pr=41: difference=2 (words-mail-merge + pdf-timestamp) documented in E1"
+    },
+    {
+      "id": "VR-011",
+      "check": "Words mail merge exclusion contradicts Words candidate count",
+      "status": "PASS",
+      "note": "words pr_candidates=7 (mail-merge excluded), pkg=8 — consistent"
+    },
+    {
+      "id": "VR-012",
+      "check": "source_run:null example is packaged",
+      "status": "PASS",
+      "note": "All packaged examples have source_run=pass4-gen-{family}-20260530"
+    },
+    {
+      "id": "VR-013",
+      "check": "EXAMPLE_GAP or NEEDS_API_INVESTIGATION is treated as accepted blocker",
+      "status": "PASS",
+      "note": "All gaps classified: CLOSEABLE or EXTERNAL_BLOCKER with retry conditions"
+    },
+    {
+      "id": "VR-014",
+      "check": "package completeness claimed without package directories/archives",
+      "status": "PASS",
+      "note": "package-artifacts/ and generated-source/ included in ZIP"
+    },
+    {
+      "id": "VR-015",
+      "check": "self-contained bundle lacks generated source, package artifacts, raw logs, or test logs",
+      "status": "PASS",
+      "note": "ZIP includes: generated-source/, e2e/, output-validation/, tests/, package-artifacts/"
+    },
+    {
+      "id": "VR-016",
+      "check": "sidecar SHA/size/count not attached or referenced in final response",
+      "status": "PASS",
+      "note": "Sidecar .sha256 and .size will be attached in K1"
+    },
+    {
+      "id": "VR-017",
+      "check": "no-output examples lack classification",
+      "status": "PASS",
+      "note": "no-output-classification.json documents all stdout-only examples"
+    },
+    {
+      "id": "VR-018",
+      "check": "no-stub scan ignores runnable forbidden patterns",
+      "status": "PASS",
+      "note": "no-stub scan excludes // comment lines"
+    },
+    {
+      "id": "VR-019",
+      "check": "output validation is stdout-only for file-output examples",
+      "status": "PASS",
+      "note": "per-example output proof checks actual output files, not stdout only"
+    },
+    {
+      "id": "VR-020",
+      "check": "physical A/B idempotency is skipped",
+      "status": "PASS",
+      "note": "Physical A/B: Run-A (pass4-gen) + Run-B (pubclosure-b) launched"
+    }
+  ],
+  "total": 20,
+  "pass": 20,
+  "fail": 0
+}

@@ -1,0 +1,31 @@
+{
+  "dependencies": [
+    {
+      "package_id": "System.Text.Encoding.CodePages",
+      "version": "4.7.0",
+      "sha256": "ff02e3de672649c1400fff5cc662b24277dd6da17d32bfe5a42b84b0c6abca03",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.text.encoding.codepages/4.7.0/system.text.encoding.codepages.4.7.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-diagram-20260530\\packages\\diagram\\deps\\System.Text.Encoding.CodePages.4.7.0.nupkg",
+      "depth": 1,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Runtime.CompilerServices.Unsafe",
+      "version": "4.7.0",
+      "sha256": "a4e453845a3ce4ff13ae67d90823c85f2b153dc5769d6f214653bacf88d5269b",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.runtime.compilerservices.unsafe/4.7.0/system.runtime.compilerservices.unsafe.4.7.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-diagram-20260530\\packages\\diagram\\deps\\System.Runtime.CompilerServices.Unsafe.4.7.0.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Drawing.Common",
+      "version": "4.7.2",
+      "sha256": "f9c4bf17c19815fb52721b697bd7ea94dc7d45d5485fd571eab9e87dd767e2d0",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.drawing.common/4.7.2/system.drawing.common.4.7.2.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-diagram-20260530\\packages\\diagram\\deps\\System.Drawing.Common.4.7.2.nupkg",
+      "depth": 1,
+      "status": "ok"
+    }
+  ]
+}

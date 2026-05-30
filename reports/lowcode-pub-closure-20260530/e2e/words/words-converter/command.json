@@ -1,0 +1,18 @@
+{
+  "slug": "words-converter",
+  "family": "words",
+  "run_id": "pass4-gen-words-20260530",
+  "restore": {
+    "success": true,
+    "exit_code": 0
+  },
+  "build": {
+    "success": true,
+    "exit_code": 0
+  },
+  "run": {
+    "success": true,
+    "exit_code": 0
+  },
+  "overall_passed": true
+}

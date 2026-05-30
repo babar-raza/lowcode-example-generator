@@ -1,0 +1,107 @@
+{
+  "family": "words",
+  "package_root": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-words-20260530\\packages\\words",
+  "files": [
+    {
+      "path": "Aspose.Words.26.5.0.nupkg",
+      "size": 65043261,
+      "sha256": "40c9793ca2dd238f"
+    },
+    {
+      "path": "dependency-manifest.json",
+      "size": 9774,
+      "sha256": "7931ccb12816d869"
+    },
+    {
+      "path": "deps\\Microsoft.Bcl.AsyncInterfaces.6.0.0.nupkg",
+      "size": 76354,
+      "sha256": "e3df87fe2170a7e0"
+    },
+    {
+      "path": "deps\\Microsoft.Extensions.DependencyInjection.6.0.2.nupkg",
+      "size": 208637,
+      "sha256": "72f790dd039838c8"
+    },
+    {
+      "path": "deps\\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0.nupkg",
+      "size": 149541,
+      "sha256": "49991ed2334a22a2"
+    },
+    {
+      "path": "deps\\Microsoft.Win32.Registry.5.0.0.nupkg",
+      "size": 354731,
+      "sha256": "f64ca53c67ca65ce"
+    },
+    {
+      "path": "deps\\SkiaSharp.3.119.0.nupkg",
+      "size": 4649758,
+      "sha256": "1ba4f41385a5f4d5"
+    },
+    {
+      "path": "deps\\SkiaSharp.NativeAssets.macOS.3.119.0.nupkg",
+      "size": 7099595,
+      "sha256": "04f910e614832b83"
+    },
+    {
+      "path": "deps\\SkiaSharp.NativeAssets.Win32.3.119.0.nupkg",
+      "size": 13149088,
+      "sha256": "625b6c05100357b6"
+    },
+    {
+      "path": "deps\\System.Buffers.4.5.1.nupkg",
+      "size": 93737,
+      "sha256": "c30b3dd2c7e2f4ce"
+    },
+    {
+      "path": "deps\\System.Memory.4.5.4.nupkg",
+      "size": 205467,
+      "sha256": "dec0847f33b8823e"
+    },
+    {
+      "path": "deps\\System.Memory.4.5.5.nupkg",
+      "size": 208978,
+      "sha256": "10f43da352a29fb2"
+    },
+    {
+      "path": "deps\\System.Reflection.Emit.4.7.0.nupkg",
+      "size": 406832,
+      "sha256": "170fc24910fec1a8"
+    },
+    {
+      "path": "deps\\System.Reflection.Emit.ILGeneration.4.7.0.nupkg",
+      "size": 204011,
+      "sha256": "1949d0786a3f0edb"
+    },
+    {
+      "path": "deps\\System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+      "size": 84343,
+      "sha256": "6c41b53e70e9eee2"
+    },
+    {
+      "path": "deps\\System.Security.AccessControl.5.0.0.nupkg",
+      "size": 621573,
+      "sha256": "b9e486f989fcd9eb"
+    },
+    {
+      "path": "deps\\System.Security.Principal.Windows.5.0.0.nupkg",
+      "size": 535022,
+      "sha256": "081390c25f6f7859"
+    },
+    {
+      "path": "deps\\System.Text.Encoding.CodePages.7.0.0.nupkg",
+      "size": 3198933,
+      "sha256": "782293570ba60f4e"
+    },
+    {
+      "path": "deps\\System.Threading.Tasks.Extensions.4.5.4.nupkg",
+      "size": 89582,
+      "sha256": "a304a963cc0796c5"
+    },
+    {
+      "path": "download-manifest.json",
+      "size": 434,
+      "sha256": "06b5e3039f910be6"
+    }
+  ],
+  "count": 20
+}

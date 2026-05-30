@@ -1,0 +1,8 @@
+{
+  "slug": "pdf-toc-generator",
+  "run_stdout": "",
+  "output_files": [
+    "output.pdf"
+  ],
+  "has_output": true
+}

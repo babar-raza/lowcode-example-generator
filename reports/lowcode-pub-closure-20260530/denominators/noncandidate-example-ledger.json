@@ -1,0 +1,17 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "noncandidates": [
+    {
+      "example": "words-mail-merge",
+      "package_included": true,
+      "pr_candidate": false,
+      "reason": "DEFERRED_FIXTURE_COMPLETE_WHEN_READY"
+    },
+    {
+      "example": "pdf-timestamp",
+      "package_included": true,
+      "pr_candidate": false,
+      "reason": "EXTERNAL_TSA_DEPENDENCY"
+    }
+  ]
+}

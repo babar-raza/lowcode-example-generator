@@ -1,0 +1,60 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:55",
+  "generated_examples": 42,
+  "build_run_valid": 42,
+  "semantic_valid": 42,
+  "package_included": 42,
+  "publication_candidates": 41,
+  "live_pr_candidates": 41,
+  "timestamp_excluded": 1,
+  "per_family": {
+    "cells": {
+      "generated": 9,
+      "build_run_valid": 9,
+      "semantic_valid": 9,
+      "package_included": 9,
+      "pr_candidates": 9
+    },
+    "diagram": {
+      "generated": 2,
+      "build_run_valid": 2,
+      "semantic_valid": 2,
+      "package_included": 2,
+      "pr_candidates": 2
+    },
+    "email": {
+      "generated": 1,
+      "build_run_valid": 1,
+      "semantic_valid": 1,
+      "package_included": 1,
+      "pr_candidates": 1
+    },
+    "pdf": {
+      "generated": 19,
+      "build_run_valid": 19,
+      "semantic_valid": 19,
+      "package_included": 19,
+      "pr_candidates": 19
+    },
+    "slides": {
+      "generated": 3,
+      "build_run_valid": 3,
+      "semantic_valid": 3,
+      "package_included": 3,
+      "pr_candidates": 3
+    },
+    "words": {
+      "generated": 8,
+      "build_run_valid": 8,
+      "semantic_valid": 8,
+      "package_included": 8,
+      "pr_candidates": 7
+    }
+  },
+  "notes": {
+    "words_mail_merge": "words-mail-merge: package_included=True, pr_candidate=False (DEFERRED_FIXTURE_COMPLETE_WHEN_READY)",
+    "pdf_timestamp": "pdf-timestamp: excluded from PR (external TSA dependency)",
+    "denominator_consistency": "package_included(42) = generated(42) — all examples build and run"
+  }
+}

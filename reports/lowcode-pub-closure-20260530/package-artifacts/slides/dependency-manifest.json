@@ -1,0 +1,94 @@
+{
+  "dependencies": [
+    {
+      "package_id": "System.Text.Encoding.CodePages",
+      "version": "4.4.0",
+      "sha256": "cc3db86e51bcc6101c2fd802e144c629eb5df1cdcb3b49efdb69ca4e9d957f1d",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.text.encoding.codepages/4.4.0/system.text.encoding.codepages.4.4.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Text.Encoding.CodePages.4.4.0.nupkg",
+      "depth": 1,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Drawing.Common",
+      "version": "5.0.3",
+      "sha256": "9ebd5b489a0603dec87eb4104f26a4548c77af46e9a197eceb1b6b0e0bc4dbe6",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.drawing.common/5.0.3/system.drawing.common.5.0.3.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Drawing.Common.5.0.3.nupkg",
+      "depth": 1,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Text.Json",
+      "version": "6.0.11",
+      "sha256": "2ac80e53746f48dfca73e9b2e392b47ae6b8a3040f65aafcd4b545d8aceea5fd",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.text.json/6.0.11/system.text.json.6.0.11.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Text.Json.6.0.11.nupkg",
+      "depth": 1,
+      "status": "ok"
+    },
+    {
+      "package_id": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "6.0.0",
+      "sha256": "e3df87fe2170a7e01f0880af59caa8f6eb380b3c40a4f282dfb43912aaf0f895",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\Microsoft.Bcl.AsyncInterfaces.6.0.0.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Runtime.CompilerServices.Unsafe",
+      "version": "6.0.0",
+      "sha256": "6c41b53e70e9eee298cff3a02ce5acdd15b04125589be0273f0566026720a762",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Text.Encodings.Web",
+      "version": "6.0.1",
+      "sha256": "977a0ac194ad8dec3f0a54ab0da54bc870c0131a0fe88c26eaea8949d23d609a",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.text.encodings.web/6.0.1/system.text.encodings.web.6.0.1.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Text.Encodings.Web.6.0.1.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Buffers",
+      "version": "4.5.1",
+      "sha256": "c30b3dd2c7e2f4cee4b823d692fd42118309b42ab1f5007f923d329a5b0d6b12",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.buffers/4.5.1/system.buffers.4.5.1.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Buffers.4.5.1.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Memory",
+      "version": "4.5.4",
+      "sha256": "dec0847f33b8823e4260672d97d657411461c00ada3107ec7bbcb32a845eeb91",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.memory/4.5.4/system.memory.4.5.4.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Memory.4.5.4.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Numerics.Vectors",
+      "version": "4.5.0",
+      "sha256": "a9d49320581fda1b4f4be6212c68c01a22cdf228026099c20a8eabefcf90f9cf",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Numerics.Vectors.4.5.0.nupkg",
+      "depth": 2,
+      "status": "ok"
+    },
+    {
+      "package_id": "System.Threading.Tasks.Extensions",
+      "version": "4.5.4",
+      "sha256": "a304a963cc0796c5179f9c6b7d8022bbce3b2fa7c029eb6196f631f7b462d678",
+      "source_url": "https://api.nuget.org/v3-flatcontainer/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg",
+      "cached_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\runs\\pass4-gen-slides-20260530\\packages\\slides\\deps\\System.Threading.Tasks.Extensions.4.5.4.nupkg",
+      "depth": 2,
+      "status": "ok"
+    }
+  ]
+}

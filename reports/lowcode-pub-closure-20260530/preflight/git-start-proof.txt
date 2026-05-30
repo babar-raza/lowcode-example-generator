@@ -1,0 +1,14 @@
+Sprint: lowcode-pub-closure-20260530
+HEAD: 8d2a335083d29bfca1a00f7868b158a86221d117
+Branch: main
+Generated: 2026-05-30T21:56:53
+
+Recent commits:
+8d2a335 feat(pub-closure-b1): evaluator status model fix + workspace state refresh
+31e2069 chore(pub-closure-a1): resolve tracked dirty state for clean final proof
+b4e1312 feat(pass4): full canonical generation + E2E proof -- 42/42 examples, 3218 pytest pass
+c625add chore(pass3): add ZIP build script for artifact-staging convention
+9e84e8a feat(pass3): lowcode-systemization-pass3-20260530 â€” 26/27-family authority, 42/42 examples, 17/17 validators pass
+
+Git status (tracked dirty files):
+['M workspace/pr-dry-run/cells-controlled-pilot/README.md', ' M workspace/pr-dry-run/words-controlled-pilot/README.md', ' M workspace/verification/latest/cells-readme-backfill-simulation.json', ' M workspace/verification/latest/cells-root-readme-audit.json', ' M workspace/verification/latest/cells-root-readme-render-result.json', ' M workspace/verification/latest/release-status.json', ' M workspace/verification/latest/words-readme-backfill-simulation.json', ' M workspace/verification/latest/words-root-readme-audit.json', ' M workspace/verification/latest/words-root-readme-render-result.json']

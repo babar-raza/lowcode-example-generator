@@ -1,0 +1,81 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:56",
+  "cells": {
+    "covered": [
+      "cells-html-converter",
+      "cells-image-converter",
+      "cells-json-converter",
+      "cells-pdf-converter",
+      "cells-spreadsheet-converter",
+      "cells-merger",
+      "cells-watermarker",
+      "cells-splitter",
+      "cells-lock-unlocker"
+    ],
+    "gap": [
+      "cells-spreadsheet-printer"
+    ]
+  },
+  "words": {
+    "covered": [
+      "words-converter",
+      "words-merger",
+      "words-splitter",
+      "words-watermarker",
+      "words-replacer",
+      "words-mail-merge",
+      "words-parser"
+    ],
+    "gap": [
+      "words-signer",
+      "words-processor"
+    ]
+  },
+  "pdf": {
+    "covered": [
+      "pdf-converter",
+      "pdf-merger",
+      "pdf-splitter",
+      "pdf-compressor",
+      "pdf-watermarker",
+      "pdf-rotator",
+      "pdf-repair",
+      "pdf-security",
+      "pdf-form-flattener",
+      "pdf-form-editor",
+      "pdf-form-exporter",
+      "pdf-toc-generator",
+      "pdf-table-generator",
+      "pdf-image-extractor",
+      "pdf-signature"
+    ],
+    "gap": [
+      "pdf-form-importer",
+      "pdf-timestamp",
+      "pdf-ofd"
+    ]
+  },
+  "slides": {
+    "covered": [
+      "slides-converter",
+      "slides-merger",
+      "slides-compressor"
+    ],
+    "gap": [
+      "slides-foreach (NON_RUNNABLE_HELPER)"
+    ]
+  },
+  "diagram": {
+    "covered": [
+      "diagram-converter"
+    ],
+    "gap": []
+  },
+  "email": {
+    "covered": [
+      "email-converter"
+    ],
+    "gap": []
+  }
+}

@@ -1,0 +1,43 @@
+Sprint: lowcode-systemization-pass4-20260530
+HEAD: c625addd82627dc57417aade06d6a42612a6a74c
+Branch: main
+Generated: 2026-05-30T19:45:25.884907
+
+--- git log --oneline -5 ---
+c625add chore(pass3): add ZIP build script for artifact-staging convention
+9e84e8a feat(pass3): lowcode-systemization-pass3-20260530 â€” 26/27-family authority, 42/42 examples, 17/17 validators pass
+8607bcb chore(universe-correction): remove epub (NOT_A_PRODUCT), add Aspose.Medical (26.3.0)
+a354ecf feat(systemization-pass2): repeatable system closure pass 2 â€” all 6 defects resolved
+2693151 fix(build-zip): fix clean-tree check to handle git status leading space parsing
+
+--- git status --short (tracked only) ---
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/bin/Debug/net8.0/diagram-converter.dll
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/bin/Debug/net8.0/diagram-converter.exe
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/bin/Debug/net8.0/diagram-converter.pdb
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/apphost.exe
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/diagram-converter.AssemblyInfo.cs
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/diagram-converter.AssemblyInfoInputs.cache
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/diagram-converter.dll
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/diagram-converter.pdb
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/ref/diagram-converter.dll
+ M workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/diagram-converter/obj/Debug/net8.0/refint/diagram-converter.dll
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/bin/Debug/net8.0/email-converter.dll
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/bin/Debug/net8.0/email-converter.exe
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/bin/Debug/net8.0/email-converter.pdb
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/apphost.exe
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/email-converter.AssemblyInfo.cs
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/email-converter.AssemblyInfoInputs.cache
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/email-converter.dll
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/email-converter.pdb
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/ref/email-converter.dll
+ M workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/email-converter/obj/Debug/net8.0/refint/email-converter.dll
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/bin/Debug/net8.0/slides-compress.dll
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/bin/Debug/net8.0/slides-compress.exe
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/bin/Debug/net8.0/slides-compress.pdb
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/apphost.exe
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/ref/slides-compress.dll
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/refint/slides-compress.dll
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/slides-compress.AssemblyInfo.cs
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/slides-compress.AssemblyInfoInputs.cache
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/slides-compress.dll
+ M workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/slides-compress/obj/Debug/net8.0/slides-compress.pdb

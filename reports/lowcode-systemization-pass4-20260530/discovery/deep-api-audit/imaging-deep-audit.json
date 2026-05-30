@@ -1,0 +1,7 @@
+{
+  "family": "imaging",
+  "has_reflection": true,
+  "lowcode_namespace_found": false,
+  "workflow_namespace_found": false,
+  "verdict": "NO_LOWCODE_NAMESPACE"
+}

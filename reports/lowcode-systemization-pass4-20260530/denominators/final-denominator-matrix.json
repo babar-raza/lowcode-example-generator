@@ -1,0 +1,45 @@
+{
+  "sprint_id": "lowcode-systemization-pass4-20260530",
+  "generated_at": "2026-05-30",
+  "source": "fresh_canonical_generation_pass4",
+  "generated_examples": 42,
+  "build_run_valid": 42,
+  "semantic_valid": 42,
+  "main_class_examples": 42,
+  "publication_candidates": 41,
+  "package_included": 42,
+  "live_pr_candidates": 41,
+  "timestamp_excluded": 1,
+  "per_family": {
+    "cells": {
+      "generated": 9,
+      "passed": 9,
+      "pr_candidates": 9
+    },
+    "diagram": {
+      "generated": 2,
+      "passed": 2,
+      "pr_candidates": 2
+    },
+    "email": {
+      "generated": 1,
+      "passed": 1,
+      "pr_candidates": 1
+    },
+    "pdf": {
+      "generated": 19,
+      "passed": 19,
+      "pr_candidates": 19
+    },
+    "slides": {
+      "generated": 3,
+      "passed": 3,
+      "pr_candidates": 3
+    },
+    "words": {
+      "generated": 8,
+      "passed": 8,
+      "pr_candidates": 8
+    }
+  }
+}

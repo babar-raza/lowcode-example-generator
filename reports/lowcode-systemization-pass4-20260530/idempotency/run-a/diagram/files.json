@@ -1,0 +1,10 @@
+{
+  "family": "diagram",
+  "file_count": 4,
+  "files": {
+    "diagram-diagram-converter\\Program.cs": "46e43f91...",
+    "diagram-pdf-converter\\Program.cs": "93731194...",
+    "diagram-diagram-converter\\diagram-diagram-converter.csproj": "583366a0...",
+    "diagram-pdf-converter\\diagram-pdf-converter.csproj": "583366a0..."
+  }
+}

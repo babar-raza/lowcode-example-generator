@@ -1,0 +1,66 @@
+{
+  "sprint_id": "lowcode-systemization-pass4-20260530",
+  "total_blockers": 7,
+  "accepted_blockers": 4,
+  "reclassified": 3,
+  "blockers": [
+    {
+      "id": "BLK-001",
+      "family": "pdf",
+      "class": "FormImporter",
+      "category": "EXTERNAL_BUG_BLOCKER",
+      "proof": "NullReferenceException in Aspose.PDF.LowCode.FormImporter.Process(). Minimal repro: any call to Process() throws before user code executes. Filed with Aspose support.",
+      "verdict": "ACCEPTED_BLOCKER"
+    },
+    {
+      "id": "BLK-002",
+      "family": "pdf",
+      "class": "OfdConverter",
+      "category": "FIXTURE_UNAVAILABLE",
+      "proof": "OFD (Open Fixed-layout Document) is a Chinese national standard. No freely distributable test fixtures. Legal acquisition path documented in workahead/ofd-fixture-acquisition.md.",
+      "verdict": "ACCEPTED_BLOCKER"
+    },
+    {
+      "id": "BLK-003",
+      "family": "pdf",
+      "class": "Timestamp",
+      "category": "NETWORK_DEPENDENCY_BLOCKER",
+      "proof": "Timestamp requires live TSA (Time Stamping Authority) server. Not feasible in offline/CI. Example excluded from publication candidates. Offline fallback documented.",
+      "verdict": "ACCEPTED_BLOCKER"
+    },
+    {
+      "id": "BLK-004",
+      "family": "words",
+      "class": "Processor",
+      "category": "NEEDS_API_INVESTIGATION",
+      "proof": "INVESTIGATION COMPLETED: Aspose.Words.LowCode.Processor processes mail merge template. Investigation shows it requires MailMergeDataTable which IS supported. Reclassified as EXAMPLE_GAP_CLOSEABLE.",
+      "verdict": "RECLASSIFIED_CLOSEABLE",
+      "action": "Create Processor example in next sprint"
+    },
+    {
+      "id": "BLK-005",
+      "family": "words",
+      "class": "Signer",
+      "category": "EXAMPLE_GAP",
+      "proof": "Signer requires PFX digital certificate fixture. Self-signed PFX IS feasible (used in Signature example). Reclassified as EXAMPLE_GAP_CLOSEABLE.",
+      "verdict": "RECLASSIFIED_CLOSEABLE",
+      "action": "Create Signer example with self-signed PFX in next sprint"
+    },
+    {
+      "id": "BLK-006",
+      "family": "cells",
+      "class": "SpreadsheetPrinter",
+      "category": "PRINT_DRIVER_BLOCKER",
+      "proof": "SpreadsheetPrinter.Process() requires a system print driver. No virtual printer available in standard CI. Virtual printer feasibility documented in workahead/spreadsheet-printer-plan.md.",
+      "verdict": "ACCEPTED_BLOCKER"
+    },
+    {
+      "id": "BLK-007",
+      "family": "slides",
+      "class": "ForEach",
+      "category": "EXAMPLE_GAP",
+      "proof": "Investigation: ForEach is an enumeration helper, not a standalone workflow. No independent Process() method. Reclassified as NON_RUNNABLE_HELPER.",
+      "verdict": "RECLASSIFIED_NON_RUNNABLE"
+    }
+  ]
+}

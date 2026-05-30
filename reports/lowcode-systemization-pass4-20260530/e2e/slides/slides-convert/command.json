@@ -1,0 +1,18 @@
+{
+  "slug": "slides-convert",
+  "family": "slides",
+  "run_id": "pass4-gen-slides-20260530",
+  "restore": {
+    "success": true,
+    "exit_code": 0
+  },
+  "build": {
+    "success": true,
+    "exit_code": 0
+  },
+  "run": {
+    "success": true,
+    "exit_code": 0
+  },
+  "overall_passed": true
+}

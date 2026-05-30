@@ -1,0 +1,28 @@
+{
+  "family": "slides",
+  "files": [
+    "slides-compress\\example.manifest.json",
+    "slides-compress\\expected-output.json",
+    "slides-compress\\input.pptx",
+    "slides-compress\\output.pptx",
+    "slides-compress\\Program.cs",
+    "slides-compress\\README.md",
+    "slides-compress\\slides-compress.csproj",
+    "slides-convert\\example.manifest.json",
+    "slides-convert\\expected-output.json",
+    "slides-convert\\input.pptx",
+    "slides-convert\\output.pdf",
+    "slides-convert\\Program.cs",
+    "slides-convert\\README.md",
+    "slides-convert\\slides-convert.csproj",
+    "slides-merger\\example.manifest.json",
+    "slides-merger\\expected-output.json",
+    "slides-merger\\input1.pptx",
+    "slides-merger\\input2.pptx",
+    "slides-merger\\output.pptx",
+    "slides-merger\\Program.cs",
+    "slides-merger\\README.md",
+    "slides-merger\\slides-merger.csproj"
+  ],
+  "count": 22
+}

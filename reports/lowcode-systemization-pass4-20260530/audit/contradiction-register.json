@@ -1,0 +1,49 @@
+{
+  "sprint_id": "lowcode-systemization-pass4-20260530",
+  "prior_sprint": "lowcode-systemization-pass3-20260530",
+  "total_contradictions": 6,
+  "contradictions": [
+    {
+      "id": "CR-001",
+      "claim": "final-clean DIRTY vs accepted verdict",
+      "detail": "Pass3 final-clean-proof: 30 tracked dirty files, Status: DIRTY. Yet verdict claimed LOWCODE_REPEATABLE_SYSTEM_READY.",
+      "severity": "HIGH",
+      "resolution": "pass4 classifies bin/obj artifacts as non-blocking; uses isolated workspace"
+    },
+    {
+      "id": "CR-002",
+      "claim": "E2E aggregate failures vs 42/42 claim",
+      "detail": "Pass3 H1 used durable-full-closure E2E summaries, not fresh runs. Actual failures: cells 1/9, diagram 2/2, pdf 1/19, words 2/8 = 35/42 not 42/42.",
+      "severity": "CRITICAL",
+      "resolution": "pass4 runs real E2E from fresh canonical generation with per-example logs"
+    },
+    {
+      "id": "CR-003",
+      "claim": "Package incomplete false vs package-ready claim",
+      "detail": "pdf-controlled-pilot, pdf-pr5, pdf-pr6 marked incomplete. Yet verdict claimed package-ready.",
+      "severity": "HIGH",
+      "resolution": "pass4 rebuilds all packages from fresh canonical generation"
+    },
+    {
+      "id": "CR-004",
+      "claim": "Fresh generation blocked vs repeatability claim",
+      "detail": "All 6 families: cells=BLOCKED_SCENARIO_PLANNING, diagram/email/slides=DATA_FLOW_PROTOTYPE_ONLY, pdf/words=BLOCKED_SOURCE_OF_TRUTH. Repeatability cannot be claimed.",
+      "severity": "CRITICAL",
+      "resolution": "pass4 B1 investigation + B2 fresh generation"
+    },
+    {
+      "id": "CR-005",
+      "claim": "Package-included 47 vs publication candidates 41",
+      "detail": "47 examples in workspace, 42 canonical (4 duplicate-excluded), 41 publication candidates (1 timestamp). Inconsistency not resolved.",
+      "severity": "HIGH",
+      "resolution": "pass4 D1 defines strict denominator model with clear accounting"
+    },
+    {
+      "id": "CR-006",
+      "claim": "Evidence bundle lacks generated source",
+      "detail": "Pass3 ZIP has no Program.cs, .csproj, package directories, or raw restore/build/run logs. Claimed self-contained.",
+      "severity": "HIGH",
+      "resolution": "pass4 J2 self-contained bundle includes all required file types"
+    }
+  ]
+}

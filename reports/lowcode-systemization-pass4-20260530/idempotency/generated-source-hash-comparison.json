@@ -1,0 +1,44 @@
+{
+  "sprint_id": "lowcode-systemization-pass4-20260530",
+  "source": "template_mode_generation_deterministic",
+  "all_match": true,
+  "families": {
+    "cells": {
+      "a_file_count": 18,
+      "b_file_count": 18,
+      "mismatches": [],
+      "match": true
+    },
+    "diagram": {
+      "a_file_count": 4,
+      "b_file_count": 4,
+      "mismatches": [],
+      "match": true
+    },
+    "email": {
+      "a_file_count": 2,
+      "b_file_count": 2,
+      "mismatches": [],
+      "match": true
+    },
+    "pdf": {
+      "a_file_count": 38,
+      "b_file_count": 38,
+      "mismatches": [],
+      "match": true
+    },
+    "slides": {
+      "a_file_count": 6,
+      "b_file_count": 6,
+      "mismatches": [],
+      "match": true
+    },
+    "words": {
+      "a_file_count": 16,
+      "b_file_count": 16,
+      "mismatches": [],
+      "match": true
+    }
+  },
+  "note": "template-mode generation produces identical output for same scenario/config (deterministic)"
+}

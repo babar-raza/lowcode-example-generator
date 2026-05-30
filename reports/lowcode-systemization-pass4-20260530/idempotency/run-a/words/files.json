@@ -1,0 +1,22 @@
+{
+  "family": "words",
+  "file_count": 16,
+  "files": {
+    "words-comparer\\Program.cs": "4e8e620f...",
+    "words-converter\\Program.cs": "0c7e82ab...",
+    "words-mail-merger\\Program.cs": "0ea86117...",
+    "words-merger\\Program.cs": "048fec5c...",
+    "words-replacer\\Program.cs": "203b1fb5...",
+    "words-report-builder\\Program.cs": "24c2e8b6...",
+    "words-splitter\\Program.cs": "f166bd4a...",
+    "words-watermarker\\Program.cs": "4325c56f...",
+    "words-comparer\\words-comparer.csproj": "e89a5b04...",
+    "words-converter\\words-converter.csproj": "e89a5b04...",
+    "words-mail-merger\\words-mail-merger.csproj": "e89a5b04...",
+    "words-merger\\words-merger.csproj": "e89a5b04...",
+    "words-replacer\\words-replacer.csproj": "e89a5b04...",
+    "words-report-builder\\words-report-builder.csproj": "e89a5b04...",
+    "words-splitter\\words-splitter.csproj": "e89a5b04...",
+    "words-watermarker\\words-watermarker.csproj": "e89a5b04..."
+  }
+}

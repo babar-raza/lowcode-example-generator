@@ -1,0 +1,13 @@
+{
+  "family": "email",
+  "files": [
+    "email-converter\\email-converter.csproj",
+    "email-converter\\example.manifest.json",
+    "email-converter\\expected-output.json",
+    "email-converter\\input.eml",
+    "email-converter\\output_html\\input.html",
+    "email-converter\\Program.cs",
+    "email-converter\\README.md"
+  ],
+  "count": 7
+}

@@ -1,0 +1,12 @@
+{
+  "family": "slides",
+  "file_count": 6,
+  "files": {
+    "slides-compress\\Program.cs": "e20359fd...",
+    "slides-convert\\Program.cs": "1e8df0c2...",
+    "slides-merger\\Program.cs": "06723281...",
+    "slides-compress\\slides-compress.csproj": "422a4279...",
+    "slides-convert\\slides-convert.csproj": "422a4279...",
+    "slides-merger\\slides-merger.csproj": "422a4279..."
+  }
+}

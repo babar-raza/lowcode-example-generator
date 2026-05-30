@@ -1,0 +1,5 @@
+{
+  "sprint_id": "lowcode-systemization-pass4-20260530",
+  "note": "template-mode generation deterministic; package manifests are identical A==B",
+  "all_match": true
+}

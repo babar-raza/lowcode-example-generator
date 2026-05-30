@@ -1,0 +1,21 @@
+{
+  "sprint_id": "lowcode-pass4-multi-mega-train-20260530",
+  "generated_at": "2026-05-30T00:00:00Z",
+  "verdict": "42/42 PASS — ALL EXAMPLES BUILD AND RUN SUCCESSFULLY",
+  "total_examples": 42,
+  "pass": 42,
+  "fail": 0,
+  "by_family": {
+    "cells": {"pass": 9, "fail": 0, "source": "workspace/runs/pilot-cells-20260529-214911/generated/cells/"},
+    "words": {"pass": 8, "fail": 0, "source": "workspace/runs/pilot-words-20260529-220000/generated/words/"},
+    "pdf": {"pass": 19, "fail": 0, "source": "workspace/pr-dry-run/pdf-controlled-pilot*/examples/pdf/lowcode/"},
+    "diagram": {"pass": 2, "fail": 0, "source": "workspace/pr-dry-run/diagram-controlled-pilot/examples/diagram/lowcode/"},
+    "slides": {"pass": 3, "fail": 0, "source": "workspace/pr-dry-run/slides-controlled-pilot/examples/slides/lowcode/"},
+    "email": {"pass": 1, "fail": 0, "source": "workspace/pr-dry-run/email-controlled-pilot/examples/email/lowcode/"}
+  },
+  "e2e_method": "dotnet restore + dotnet build --no-restore + dotnet run --no-build",
+  "raw_log_location": "reports/lowcode-pass4-multi-mega-train-20260530/e2e-raw/<family>/<example>/{restore.log,build.log,run.log,command.json,output-proof.json}",
+  "note_cells_words": "cells and words run from pilot directories (input files required by .csproj are present there). PDF/diagram/slides/email run from pr-dry-run directories.",
+  "note_pdf_pr10": "pdf-controlled-pilot-pr10 (5 examples) assembled via scripts/assemble_pdf_pr10_pilot.py from pilot-pdf-repair-20260530. All 5 build and run from pr-dry-run.",
+  "note_mail_merger": "words-mail-merger runs successfully (exit 0) but has no LowCode API call (known stub — MailMerge API has no suitable LowCode overload). Documented in no-op-scan-results.json."
+}

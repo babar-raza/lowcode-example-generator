@@ -1,0 +1,14 @@
+{
+  "sprint_id": "lowcode-pass4-multi-mega-train-20260530",
+  "run_date": "2026-05-30",
+  "command": ".venv/Scripts/python.exe -m pytest tests/ -q --tb=no",
+  "result": {
+    "passed": 3218,
+    "failed": 0,
+    "skipped": 18,
+    "subtests_passed": 10,
+    "duration_seconds": 361.69,
+    "exit_code": 0
+  },
+  "verdict": "PYTEST_CLEAN — 3218 passed, 0 failed"
+}

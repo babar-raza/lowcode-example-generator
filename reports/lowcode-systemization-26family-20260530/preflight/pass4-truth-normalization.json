@@ -1,0 +1,102 @@
+{
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "lane": "A1 — Pass 4 truth normalization",
+  "date": "2026-05-30",
+  "pass4_sprint_id": "lowcode-pass4-multi-mega-train-20260530",
+  "pass4_verdict_received": "RAW_E2E_PROGRESS_ACCEPTED_REPEATABLE_SYSTEM_CLOSURE_REJECTED",
+  "what_pass4_proved": {
+    "e2e_builds_run": true,
+    "examples_pass_e2e": 42,
+    "pytest_clean": "3218 passed, 0 failed",
+    "ocr_psd_reclassified": "NO_LOWCODE (confirmed via reflection)",
+    "mail_merger_e2e": "PASS (Program.cs repaired in this sprint for words-controlled-pilot)",
+    "evidence_bundle_entries": 243
+  },
+  "what_pass4_did_not_prove": [
+    {
+      "claim": "Repeatability",
+      "gap": "assemble_pdf_pr10_pilot.py was hardcoded for one specific family/run/package. Could not reproduce other packages via same mechanism.",
+      "resolution_this_sprint": "Replaced with scripts/canonical_packager.py + 6 assembly manifests in pipeline/configs/assembly-manifests/"
+    },
+    {
+      "claim": "Generated Program.cs source snapshots in bundle",
+      "gap": "Bundle contained no source code snapshots — could not verify example content without accessing workspace.",
+      "resolution_this_sprint": "K1 self-contained bundle will include source snapshots"
+    },
+    {
+      "claim": "Package folders/archives in bundle",
+      "gap": "Bundle contained no package artifacts — reviewer cannot inspect packages without running assembly.",
+      "resolution_this_sprint": "K1 will include assembly manifests + build logs"
+    },
+    {
+      "claim": "Raw pytest log (not just summary JSON)",
+      "gap": "Only pytest-results.json (summary) was included. Full test output log not bundled.",
+      "resolution_this_sprint": "J2 will capture full pytest output to reports/"
+    },
+    {
+      "claim": "words-mail-merger not a stub",
+      "gap": "words-mail-merger was a stub in Pass 4 — Program.cs said 'no suitable overload found'.",
+      "resolution_this_sprint": "FIXED: Real MailMerger.Execute(template, output, string[], object[]) confirmed working. output_merged.docx = 18109 bytes."
+    },
+    {
+      "claim": "Product universe = 25 (all investigated)",
+      "gap": "Aspose.PUB not investigated. Claim of 25 asserted but not reflected.",
+      "resolution_this_sprint": "26-family universe investigated: PUB confirmed as 26th family (25.12.0, 2320 types, 0 LowCode). Total: 6 LOWCODE, 19 NO_LOWCODE, 1 EXTERNAL_PACKAGE_BLOCKER (epub)."
+    },
+    {
+      "claim": "Disabled families classified by evidence",
+      "gap": "16 disabled families were classified NOT_APPLICABLE by assertion, not by reflection evidence.",
+      "resolution_this_sprint": "B2 complete: all 26 families have reflection evidence (reflection-raw/ JSON files)"
+    },
+    {
+      "claim": "Reviewer state reviewed",
+      "gap": "Reviewer state was NOT_REVIEWED for all examples.",
+      "resolution_this_sprint": "I1 fallback reviewer to run in this sprint"
+    },
+    {
+      "claim": "Artifact metadata contains ZIP SHA/size/entry-count",
+      "gap": "artifact-verification.json did not contain the ZIP's own SHA256 or entry count.",
+      "resolution_this_sprint": "K1 build script will embed SHA256 + size + entry count in artifact-verification.json post-build"
+    },
+    {
+      "claim": "Slides package correct (Aspose.Slides.NET)",
+      "gap": "Slides was reflected against Aspose.Slides (wrong/old, 5.9.0, 0 LowCode types). Correct is Aspose.Slides.NET (26.5.0, 17 LowCode types).",
+      "resolution_this_sprint": "FIXED: Slides inventory updated. Package corrected in assembly manifest to Aspose.Slides.NET."
+    }
+  ],
+  "open_taskcards": [
+    {
+      "id": "tc-001",
+      "title": "PDF gap examples: Ofd, PdfToImage, Timestamp",
+      "status": "IN_PROGRESS",
+      "lane": "E2+E3",
+      "detail": "3 new main classes discovered via reflection. PdfToImage and Timestamp are unblocked. Ofd needs OFD fixture (fixture-blocker until OFD sample file sourced)."
+    },
+    {
+      "id": "tc-002",
+      "title": "PDF PdfExtractor investigation",
+      "status": "OPEN",
+      "lane": "E3",
+      "detail": "PdfExtractorOptions has AddInput only (no AddOutput). Output format/destination unclear. Needs API investigation before example can be generated."
+    },
+    {
+      "id": "tc-003",
+      "title": "pdf-form-importer EXTERNAL_BUG_BLOCKER",
+      "status": "BLOCKED",
+      "lane": "N/A",
+      "detail": "NullReferenceException in Aspose.PDF when using FormImporter.Process(). Reproduced in multiple sprints. Awaiting library fix."
+    }
+  ],
+  "truth_model_corrections": {
+    "total_families": 26,
+    "lowcode_families": 6,
+    "no_lowcode_families": 19,
+    "external_package_blocker_families": 1,
+    "total_main_classes_across_6_families": 47,
+    "total_examples_covered": 42,
+    "new_gaps_discovered_this_sprint": 4,
+    "blocked_external": 1,
+    "words_processor_status": "PERMANENTLY_BLOCKED (no public constructor, From() is instance method)",
+    "slides_package_corrected_to": "Aspose.Slides.NET 26.5.0"
+  }
+}

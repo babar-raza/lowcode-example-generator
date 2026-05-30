@@ -8,7 +8,7 @@
     "Aspose.Cells.LowCode.SpreadsheetMerger.Process",
     "Aspose.Cells.LowCode.SpreadsheetMerger.Process"
   ],
-  "status": "generated",
+  "status": "generated_template_first",
   "input_strategy": "generated_fixture_file",
   "input_files": [
     "input.xlsx"

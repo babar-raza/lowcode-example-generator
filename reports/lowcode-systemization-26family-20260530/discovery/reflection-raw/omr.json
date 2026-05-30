@@ -1,0 +1,11 @@
+{
+  "family": "omr",
+  "package_id": "Aspose.OMR",
+  "restore_exit": 0,
+  "total_types": 154,
+  "lowcode_count": 0,
+  "namespaces": ["Aspose.OMR", "Aspose.OMR.Api", "Aspose.OMR.Generation", "Aspose.OMR.Recognition"],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED",
+  "note": "Build-based reflection (output dir). 154 types, 0 LowCode."
+}

@@ -1,0 +1,1119 @@
+{
+  "family": "pdf",
+  "package_id": "Aspose.PDF",
+  "lowcode_types": [
+    {
+      "type_name": "Aspose.Pdf.LowCode.CompressOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ConversionMode",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.DataType",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.DecryptionOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.DocConverter",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.EncryptionOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FileDataSource",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FileResult",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FileSaveTarget",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldCreateOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormCheckBoxFieldSetOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormComboBoxFieldCreateOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormComboBoxFieldSetOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormEditor",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormEditorAddOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormEditorOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormEditorRemoveOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormEditorSetOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormExporter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormExporter+#=zcMcZ$V$gNBoHIIkYHw==",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormExporterOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormExporterToJsonOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormExporterValuesToCsvOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFieldCreateOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFieldOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFieldSetOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFlattenAllFieldsOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFlattenSelectedFieldsOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFlattener",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormFlattenerOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormImporter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormImporterJsonOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormJsonImportSource",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormRemoveAllFieldsOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormRemoveSelectedFieldsOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormTextBoxFieldCreateOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.FormTextBoxFieldSetOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Html",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.HtmlToPdfOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.IDataSource",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.IOperationResult",
+      "methods": [
+        "ToFile",
+        "ToStream"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.IPlugin",
+      "methods": [
+        "Process"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.IPluginOptions",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ISaveTarget",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ImageExtractor",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ImageExtractorOptions",
+      "methods": [
+        "AddInput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Jpeg",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.JpegOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.MergeOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Merger",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ObjectResult",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Ofd",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.OfdToPdfOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.OptimizeOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Optimizer",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.OrganizerBaseOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAConvertOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAOptionsBase",
+      "methods": [
+        "AddInput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAStandardVersion",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAValidateOptions",
+      "methods": [
+        "AddInput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfAValidationResult",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfConverterOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfExtractor",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfExtractorOptions",
+      "methods": [
+        "AddInput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfGeneratorOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToDocOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToHtmlOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToHtmlOptions+SaveDataType",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToImage",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToImageOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToImageOptions+ImageConversionMode",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToXlsOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PdfToXlsOptions+ExcelFormat",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Png",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.PngOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ResizeOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.ResultContainer",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.RotateOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.SaveFormat",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Security",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.SelectField",
+      "methods": [
+        "BeginInvoke",
+        "Clone",
+        "DynamicInvoke",
+        "EndInvoke",
+        "Equals",
+        "GetHashCode",
+        "GetInvocationList",
+        "GetObjectData",
+        "GetType",
+        "Invoke",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.SignOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Signature",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.SplitOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Splitter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.StreamDataSource",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.StreamResult",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.StreamSaveTarget",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.StringResult",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToFile",
+        "ToStream",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TableBuilder",
+      "methods": [
+        "AddRow",
+        "AddTable",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "InsertPageAfter",
+        "InsertPageBefore",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TableCellBuilder",
+      "methods": [
+        "AddCell",
+        "AddParagraph",
+        "AddRow",
+        "AddTable",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "InsertPageAfter",
+        "InsertPageBefore",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TableGenerator",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TableOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "AddTable",
+        "Create",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "InsertPageAfter",
+        "InsertPageBefore",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TableRowBuilder",
+      "methods": [
+        "AddCell",
+        "AddRow",
+        "AddTable",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "InsertPageAfter",
+        "InsertPageBefore",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TextExtractor",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TextExtractorOptions",
+      "methods": [
+        "AddInput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TextExtractorOptions+TextFormattingMode",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Tiff",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TiffOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.Timestamp",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TimestampOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TocGenerator",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.TocOptions",
+      "methods": [
+        "AddInput",
+        "AddOutput",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Pdf.LowCode.XlsConverter",
+      "methods": [
+        "Dispose",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    }
+  ]
+}

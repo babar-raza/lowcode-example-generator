@@ -1,0 +1,11 @@
+{
+  "family": "imaging",
+  "package_id": "Aspose.Imaging",
+  "restore_exit": 0,
+  "total_types": 1341,
+  "lowcode_count": 0,
+  "namespaces": ["Aspose.Imaging", "Aspose.Imaging.FileFormats", "Aspose.Imaging.ImageOptions"],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED",
+  "note": "Requires Aspose.Drawing as extra_package for reflection. 1341 types, 0 LowCode."
+}

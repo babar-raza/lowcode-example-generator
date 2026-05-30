@@ -1,0 +1,78 @@
+{
+  "family": "slides",
+  "package_id": "Aspose.Slides.NET",
+  "package_version": "26.5.0",
+  "note": "Corrected from Aspose.Slides (wrong, old package) to Aspose.Slides.NET (correct, 17 LowCode types)",
+  "reflection_method": "dotnet probe — csproj with Aspose.Slides.NET 26.5.0, AppContext.BaseDirectory DLL enumeration",
+  "total_lowcode_types": 17,
+  "lowcode_types": [
+    {
+      "type_name": "Aspose.Slides.LowCode.Collect",
+      "methods": ["Shapes"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Collect+",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Compress",
+      "methods": ["CompressEmbeddedFonts", "RemoveUnusedLayoutSlides", "RemoveUnusedMasterSlides"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Convert",
+      "methods": ["AutoByExtension", "ToJpeg", "ToPdf", "ToPng", "ToSvg", "ToTiff"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Convert+",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Convert+GetOutPathCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach",
+      "methods": ["LayoutSlide", "MasterSlide", "Paragraph", "Portion", "Shape", "Slide"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ (2)",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ (3)",
+      "methods": []
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachLayoutSlideCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachMasterSlideCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachParagraphCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachPortionCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachShapeCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.ForEach+ForEachSlideCallback",
+      "methods": ["BeginInvoke", "EndInvoke", "Invoke"]
+    },
+    {
+      "type_name": "Aspose.Slides.LowCode.Merger",
+      "methods": ["Process"]
+    }
+  ]
+}

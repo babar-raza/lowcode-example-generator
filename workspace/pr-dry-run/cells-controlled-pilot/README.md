@@ -257,7 +257,6 @@ namespace PluginExample
 ```csharp
 using System;
 using System.IO;
-using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
 namespace PluginExample
@@ -268,17 +267,12 @@ namespace PluginExample
         {
             Console.WriteLine("Example: cells-spreadsheet-merger");
 
-            // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-
-            // SpreadsheetMerger requires multiple input files.
-            // Create input1.xlsx and input2.xlsx from the available fixture.
             string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");
             string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");
             File.Copy(inputPath, input1Path, overwrite: true);
             File.Copy(inputPath, input2Path, overwrite: true);
 
-            // Demonstrate SpreadsheetMerger.Process
             SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");
 
             Console.WriteLine("Done.");
@@ -421,7 +415,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-30 07:47 UTC
+Generated on: 2026-05-30 10:46 UTC
 
 ---
 

@@ -1,0 +1,10 @@
+{
+  "family": "words",
+  "package_name": "words-controlled-pilot",
+  "package_id": "Aspose.Words",
+  "package_version": "25.5.0",
+  "source_run": "workspace/runs/pilot-words-repair-20260530/generated/words",
+  "family_prefix": "words",
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-words-repair-20260530. 8 examples including fixed words-mail-merger. All E2E PASS (verified in durable-full-closure sprint)."
+}

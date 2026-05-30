@@ -1,0 +1,50 @@
+{
+  "family": "email",
+  "package_id": "Aspose.Email",
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "analysis_date": "2026-05-30",
+  "classification_method": "Static methods on named class = main entry point; obfuscated nested types = compiler-generated internal",
+  "main_operation_classes": [
+    {
+      "class": "Aspose.Email.LowCode.Converter",
+      "static_entry_points": [
+        "Convert", "ConvertEmlOrMsg", "ConvertToEml", "ConvertToHtml",
+        "ConvertToMht", "ConvertToMhtml", "ConvertToMsg"
+      ],
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "email-converter",
+      "example_status": "COVERED"
+    }
+  ],
+  "supporting_types": [
+    {
+      "class": "Aspose.Email.LowCode.FolderOutputHandler",
+      "classification": "OUTPUT_HANDLER",
+      "note": "Implements IOutputHandler; handles multi-file output to a folder directory"
+    },
+    {
+      "class": "Aspose.Email.LowCode.IOutputHandler",
+      "classification": "INTERFACE"
+    }
+  ],
+  "compiler_generated_types": [
+    "Aspose.Email.LowCode.Converter+B",
+    "Aspose.Email.LowCode.Converter+b",
+    "Aspose.Email.LowCode.Converter+c",
+    "Aspose.Email.LowCode.Converter+d",
+    "Aspose.Email.LowCode.Converter+m",
+    "Aspose.Email.LowCode.Converter+n",
+    "Aspose.Email.LowCode.Converter+t",
+    "Aspose.Email.LowCode.Converter+v",
+    "Aspose.Email.LowCode.FolderOutputHandler+d"
+  ],
+  "summary": {
+    "total_lowcode_types": 12,
+    "main_operation_classes": 1,
+    "supporting_types": 2,
+    "compiler_generated_types": 9,
+    "examples_covered": 1,
+    "examples_missing": 0,
+    "coverage_status": "COMPLETE"
+  }
+}

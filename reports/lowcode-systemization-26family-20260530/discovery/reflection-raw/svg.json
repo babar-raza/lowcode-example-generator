@@ -1,0 +1,30 @@
+{
+  "family": "svg",
+  "package_id": "Aspose.SVG",
+  "restore_exit": 0,
+  "total_types": 6941,
+  "lowcode_count": 0,
+  "namespaces": [
+    "Aspose.Svg",
+    "Aspose.Svg.Builder",
+    "Aspose.Svg.Collections",
+    "Aspose.Svg.Converters",
+    "Aspose.Svg.DataTypes",
+    "Aspose.Svg.Diagnostics",
+    "Aspose.Svg.Dom",
+    "Aspose.Svg.Drawing",
+    "Aspose.Svg.Events",
+    "Aspose.Svg.Filters",
+    "Aspose.Svg.ImageVectorization",
+    "Aspose.Svg.IO",
+    "Aspose.Svg.Net",
+    "Aspose.Svg.Paths",
+    "Aspose.Svg.Rendering",
+    "Aspose.Svg.Saving",
+    "Aspose.Svg.Services",
+    "Aspose.Svg.Toolkit",
+    "Aspose.Svg.Window"
+  ],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED"
+}

@@ -1,0 +1,14 @@
+{
+  "family": "finance",
+  "package_id": "Aspose.Finance",
+  "restore_exit": 0,
+  "total_types": 2039,
+  "lowcode_count": 0,
+  "namespaces": [
+    "Aspose.Finance",
+    "Aspose.Finance.Ofx",
+    "Aspose.Finance.Xbrl"
+  ],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED"
+}

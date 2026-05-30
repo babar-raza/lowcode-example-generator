@@ -1,25 +1,31 @@
-# Root Orphans
+# Root Orphans Audit
 
-Audit mode: docs root hygiene.
+Audit date: 2026-05-30
 
-Last refreshed: 2026-05-26.
+Root-orphan contract: the `docs/` root is reserved for `docs/README.md` only, plus folders such as `docs/_audit/` and `docs/_archive/`. Any other file directly under `docs/` is a root orphan and must be triaged.
 
-Contract: `docs/` root is reserved for `docs/README.md` only, plus folders such as `docs/_audit/` and `docs/_archive/`. Any other direct file under `docs/` is a ROOT ORPHAN and must be triaged.
+## Sweep Method
 
-Root sweep command used:
+Command used:
 
 ```powershell
-Get-ChildItem docs -File | Select-Object -ExpandProperty Name
+Get-ChildItem docs -File | Select-Object -ExpandProperty FullName
 ```
 
 Result:
 
 ```text
-README.md
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\docs\README.md
 ```
 
-No root orphans were found.
+## Root Orphans
 
-| orphan_path | brief content summary | likely target area | action | canonical merge target | risks/notes |
+No root orphan files were found.
+
+| orphan_path | brief content summary | likely target area (overview/guides/reference/ops/dev/arch) | action (move/merge/archive/delete) | canonical merge target (if merge) | risks/notes |
 |---|---|---|---|---|---|
-| None | No direct files under `docs/` besides `docs/README.md` | N/A | N/A | N/A | Root hygiene currently passes. |
+| None | No files directly under `docs/` other than `docs/README.md`. | N/A | keep | N/A | Root currently satisfies the root-orphan contract. |
+
+## Standing Recommendation
+
+Add a lightweight docs hygiene check that fails when `docs/` maxdepth 1 contains any file other than `README.md`. This recommendation is not a current code claim; it is a proposed action because no enforcement code was found during the audit.

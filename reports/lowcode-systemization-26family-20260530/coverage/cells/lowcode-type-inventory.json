@@ -1,0 +1,227 @@
+{
+  "family": "cells",
+  "package_id": "Aspose.Cells",
+  "lowcode_types": [
+    {
+      "type_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+      "methods": [
+        "Equals",
+        "Finish",
+        "GetHashCode",
+        "GetType",
+        "MoveNext",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.AbstractLowCodeProtectionProvider",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetOpenPassword",
+        "GetType",
+        "GetWorkbookPassword",
+        "GetWorkbookProtectionType",
+        "GetWorksheetPassword",
+        "GetWorksheetProtectionType",
+        "GetWritePassword",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.AbstractLowCodeSaveOptionsProvider",
+      "methods": [
+        "Equals",
+        "Finish",
+        "GetHashCode",
+        "GetSaveOptions",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.HtmlConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.ImageConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.JsonConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeHtmlSaveOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeImageSaveOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeLoadOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeMergeOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodePdfSaveOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeSaveOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfAssembling",
+      "methods": [
+        "Equals",
+        "Finish",
+        "GetHashCode",
+        "GetSaveOptions",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeSaveOptionsProviderOfPlaceHolders",
+      "methods": [
+        "Equals",
+        "Finish",
+        "GetHashCode",
+        "GetSaveOptions",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.LowCodeSplitOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.PdfConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.SplitPartInfo",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Cells.LowCode.TextConverter",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "Process",
+        "ToString"
+      ]
+    }
+  ]
+}

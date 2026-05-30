@@ -22,7 +22,7 @@
     "Aspose.Words.LowCode.Merger.MergeToImages",
     "Aspose.Words.LowCode.Merger.MergeToImages"
   ],
-  "status": "generated",
+  "status": "generated_template_first",
   "input_strategy": "generated_fixture_file",
   "input_files": [
     "input.docx"

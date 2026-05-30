@@ -1,0 +1,17 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr10",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf",
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-merger",
+    "pdf-optimizer",
+    "pdf-splitter",
+    "pdf-pdf-aconverter",
+    "pdf-text-extractor"
+  ],
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-pdf-repair-20260530. 5 template-repaired PDF examples. Replaces hardcoded assemble_pdf_pr10_pilot.py."
+}

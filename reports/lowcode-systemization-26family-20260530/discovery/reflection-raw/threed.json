@@ -1,0 +1,21 @@
+{
+  "family": "threed",
+  "package_id": "Aspose.3D",
+  "restore_exit": 0,
+  "total_types": 2328,
+  "lowcode_count": 0,
+  "namespaces": [
+    "Aspose.ThreeD",
+    "Aspose.ThreeD.Animation",
+    "Aspose.ThreeD.Constraints",
+    "Aspose.ThreeD.Deformers",
+    "Aspose.ThreeD.Entities",
+    "Aspose.ThreeD.Formats",
+    "Aspose.ThreeD.Profiles",
+    "Aspose.ThreeD.Render",
+    "Aspose.ThreeD.Shading",
+    "Aspose.ThreeD.Utilities"
+  ],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED"
+}

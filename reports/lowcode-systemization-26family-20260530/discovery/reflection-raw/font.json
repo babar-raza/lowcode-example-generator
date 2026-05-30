@@ -1,0 +1,32 @@
+{
+  "family": "font",
+  "package_id": "Aspose.Font",
+  "restore_exit": 0,
+  "total_types": 1313,
+  "lowcode_count": 0,
+  "namespaces": [
+    "Aspose.Font",
+    "Aspose.Font.Cff",
+    "Aspose.Font.CffDataProviders",
+    "Aspose.Font.CffExceptions",
+    "Aspose.Font.Common_FontMerger",
+    "Aspose.Font.Exceptions",
+    "Aspose.Font.Factories",
+    "Aspose.Font.Glyphs",
+    "Aspose.Font.Renderers",
+    "Aspose.Font.Rendering",
+    "Aspose.Font.RenderingPath",
+    "Aspose.Font.Sources",
+    "Aspose.Font.TextUtils",
+    "Aspose.Font.Ttf",
+    "Aspose.Font.TtfCMapFormats",
+    "Aspose.Font.TtfCommon",
+    "Aspose.Font.TtfHelpers",
+    "Aspose.Font.TtfTables",
+    "Aspose.Font.Type1",
+    "Aspose.Font.Utils",
+    "Aspose.Font.WoffExceptions"
+  ],
+  "lowcode_types": [],
+  "classification": "NO_LOWCODE_CONFIRMED"
+}

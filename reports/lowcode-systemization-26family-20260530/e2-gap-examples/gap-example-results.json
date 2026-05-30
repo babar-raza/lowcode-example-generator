@@ -1,0 +1,48 @@
+{
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "lane": "E2-E3 — Gap example generation",
+  "date": "2026-05-30",
+  "summary": "2 new PDF gaps discovered via fresh reflection. Corrected 2 false gaps (abstract base classes). Generated 1 new example (timestamp). Documented 1 fixture-blocked gap (ofd).",
+  "false_gaps_corrected": [
+    {
+      "class": "Aspose.Pdf.LowCode.PdfToImage",
+      "correction": "IsAbstract=True (confirmed via reflection). Abstract base for Jpeg, Png, Tiff. NOT a standalone operation class. Already covered by existing jpeg/png/tiff examples.",
+      "prior_claim": "NEW_GAP (from initial type inventory)"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.PdfExtractor",
+      "correction": "IsAbstract=True (confirmed via reflection). Abstract base for ImageExtractor, TextExtractor. NOT a standalone operation class. Already covered by existing image-extractor/text-extractor examples.",
+      "prior_claim": "INVESTIGATION_NEEDED (from initial type inventory)"
+    }
+  ],
+  "new_examples_generated": [
+    {
+      "slug": "timestamp",
+      "class": "Aspose.Pdf.LowCode.Timestamp",
+      "path": "workspace/pr-dry-run/pdf-controlled-pilot-pr11/examples/pdf/lowcode/timestamp",
+      "build_result": "PASS",
+      "run_result": "PASS",
+      "output": "output_timestamped.pdf (exists=True, size=681189 bytes)",
+      "tsa_server": "http://timestamp.digicert.com",
+      "network_dependency": "NETWORK_DEPENDENT — requires TSA server. Example wraps in try/catch for graceful offline failure.",
+      "options_used": {
+        "ServerUrl": "http://timestamp.digicert.com",
+        "PageNumber": 1
+      }
+    }
+  ],
+  "fixture_blocked_gaps": [
+    {
+      "slug": "ofd",
+      "class": "Aspose.Pdf.LowCode.Ofd",
+      "options_class": "OfdToPdfOptions",
+      "status": "FIXTURE_BLOCKER",
+      "reason": "OFD (Open Fixed-size Document, Chinese national standard ISO/IEC 26300) requires an OFD input file. No OFD sample file is available in the current fixture library. The Aspose.PDF LowCode Ofd class converts OFD to PDF.",
+      "resolution": "Obtain or generate an OFD sample file. Free OFD sample files may be available from Chinese government document repositories."
+    }
+  ],
+  "total_pdf_concrete_main_classes": 22,
+  "total_pdf_examples_covered": 19,
+  "total_pdf_gaps_remaining": 2,
+  "pdf_coverage_status": "19/22 concrete main classes covered (86.4%). Ofd=FIXTURE_BLOCKER, Timestamp=COVERED in this sprint, FormImporter=EXTERNAL_BUG_BLOCKER."
+}

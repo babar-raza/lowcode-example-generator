@@ -1,0 +1,264 @@
+{
+  "family": "pdf",
+  "package_id": "Aspose.PDF",
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "analysis_date": "2026-05-30",
+  "classification_method": "IPlugin.Process() implementors = main operation classes; Options/Result/DataSource types = supporting; enums/delegates/interfaces = helpers",
+  "main_operation_classes": [
+    {
+      "class": "Aspose.Pdf.LowCode.DocConverter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "doc-converter",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/doc-converter"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.FormEditor",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "form-editor",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-editor"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.FormExporter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "form-exporter",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-exporter"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.FormFlattener",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "form-flattener",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode/form-flattener"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.FormImporter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "form-importer",
+      "example_status": "EXTERNAL_BUG_BLOCKER",
+      "blocker_detail": "NullReferenceException inside Aspose.PDF when using FormImporter.Process(). Reproduced in prior sprints. Awaiting library fix from Aspose."
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Html",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "html",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/html"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.ImageExtractor",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "image-extractor",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/image-extractor"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Jpeg",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "jpeg",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/jpeg"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Merger",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "merger",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr10/examples/pdf/lowcode/merger"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Ofd",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "ofd",
+      "example_status": "NEW_GAP",
+      "gap_detail": "OFD (Open Fixed-size Document format, Chinese national standard) to PDF conversion. Discovered in this sprint via fresh reflection. No example exists. Requires OFD input fixture.",
+      "options_class": "OfdToPdfOptions"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Optimizer",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "optimizer",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr10/examples/pdf/lowcode/optimizer"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.PdfAConverter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "pdf-aconverter",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr10/examples/pdf/lowcode/pdf-aconverter"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.PdfExtractor",
+      "primary_method": "Process",
+      "classification": "ABSTRACT_BASE",
+      "abstract_confirmed": true,
+      "note": "PdfExtractor is abstract (IsAbstract=True). Concrete subclasses: ImageExtractor (extends PdfExtractor) and TextExtractor (extends PdfExtractor). Covered by image-extractor and text-extractor examples. NOT a separate coverage gap.",
+      "concrete_subclasses": ["ImageExtractor", "TextExtractor"]
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.PdfToImage",
+      "primary_method": "Process",
+      "classification": "ABSTRACT_BASE",
+      "abstract_confirmed": true,
+      "note": "PdfToImage is abstract (IsAbstract=True). Concrete subclasses: Jpeg, Png, Tiff (all extend PdfToImage). Covered by jpeg/png/tiff examples. NOT a separate coverage gap.",
+      "concrete_subclasses": ["Jpeg", "Png", "Tiff"]
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Png",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "png",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/png"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Security",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "security",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr7/examples/pdf/lowcode/security"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Signature",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "signature",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Splitter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "splitter",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr10/examples/pdf/lowcode/splitter"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.TableGenerator",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "table-generator",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/table-generator"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.TextExtractor",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "text-extractor",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr10/examples/pdf/lowcode/text-extractor"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Tiff",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "tiff",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/tiff"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.Timestamp",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "timestamp",
+      "example_status": "NEW_GAP",
+      "gap_detail": "PDF timestamp stamping operation. Adds a trusted timestamp to a PDF document. Distinct from Signature (which adds a digital signature). No example exists.",
+      "options_class": "TimestampOptions"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.TocGenerator",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "toc-generator",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/toc-generator"
+    },
+    {
+      "class": "Aspose.Pdf.LowCode.XlsConverter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "xls-converter",
+      "example_status": "COVERED",
+      "example_path": "workspace/pr-dry-run/pdf-controlled-pilot/examples/pdf/lowcode/xls-converter"
+    }
+  ],
+  "supporting_types": {
+    "interfaces": ["IDataSource", "IOperationResult", "IPlugin", "IPluginOptions", "ISaveTarget"],
+    "options_classes": [
+      "CompressOptions", "DecryptionOptions", "EncryptionOptions", "FormEditorAddOptions",
+      "FormEditorOptions", "FormEditorRemoveOptions", "FormEditorSetOptions", "FormExporterOptions",
+      "FormExporterToJsonOptions", "FormExporterValuesToCsvOptions", "FormFlattenAllFieldsOptions",
+      "FormFlattenSelectedFieldsOptions", "FormFlattenerOptions", "FormImporterJsonOptions",
+      "FormOptions", "FormRemoveAllFieldsOptions", "FormRemoveSelectedFieldsOptions",
+      "HtmlToPdfOptions", "ImageExtractorOptions", "JpegOptions", "MergeOptions",
+      "OfdToPdfOptions", "OptimizeOptions", "PdfAConvertOptions", "PdfAOptionsBase",
+      "PdfAValidateOptions", "PdfConverterOptions", "PdfExtractorOptions", "PdfGeneratorOptions",
+      "PdfToDocOptions", "PdfToHtmlOptions", "PdfToImageOptions", "PdfToXlsOptions",
+      "PngOptions", "ResizeOptions", "RotateOptions", "SignOptions", "SplitOptions",
+      "TextExtractorOptions", "TiffOptions", "TimestampOptions", "TocOptions"
+    ],
+    "field_options": [
+      "FormCheckBoxFieldCreateOptions", "FormCheckBoxFieldSetOptions",
+      "FormComboBoxFieldCreateOptions", "FormComboBoxFieldSetOptions",
+      "FormFieldCreateOptions", "FormFieldOptions", "FormFieldSetOptions",
+      "FormTextBoxFieldCreateOptions", "FormTextBoxFieldSetOptions"
+    ],
+    "result_types": [
+      "FileResult", "ObjectResult", "ResultContainer", "StreamResult", "StringResult"
+    ],
+    "data_source_types": [
+      "FileDataSource", "FormJsonImportSource", "StreamDataSource"
+    ],
+    "save_targets": ["FileSaveTarget", "StreamSaveTarget"],
+    "builder_helpers": [
+      "TableBuilder", "TableCellBuilder", "TableRowBuilder"
+    ],
+    "enums": [
+      "ConversionMode", "DataType", "PdfAStandardVersion", "SaveFormat",
+      "PdfToHtmlOptions+SaveDataType", "PdfToImageOptions+ImageConversionMode",
+      "PdfToXlsOptions+ExcelFormat", "TextExtractorOptions+TextFormattingMode"
+    ],
+    "delegates": ["SelectField"],
+    "compiler_generated": ["FormExporter+#=zcMcZ$V$gNBoHIIkYHw=="]
+  },
+  "abstract_base_classes": {
+    "PdfToImage": "Abstract base for Jpeg, Png, Tiff concrete converters. IsAbstract=True confirmed via reflection. NOT instantiable directly.",
+    "PdfToImageOptions": "Abstract base for JpegOptions, PngOptions, TiffOptions. IsAbstract=True confirmed.",
+    "PdfExtractor": "Abstract base for ImageExtractor, TextExtractor. IsAbstract=True confirmed via reflection.",
+    "PdfExtractorOptions": "Abstract base for ImageExtractorOptions, TextExtractorOptions. IsAbstract=True confirmed."
+  },
+  "summary": {
+    "total_lowcode_types": 106,
+    "concrete_main_operation_classes": 22,
+    "abstract_base_classes": 4,
+    "examples_covered": 19,
+    "new_gaps_after_abstract_correction": 2,
+    "examples_blocked": 1,
+    "coverage_status": "INCOMPLETE — 2 gaps (Ofd=FIXTURE_BLOCKER, Timestamp=NETWORK_DEPENDENT) + 1 external bug blocker",
+    "new_gaps": ["ofd", "timestamp"],
+    "false_gaps_corrected": ["pdf-extractor (abstract base, covered by ImageExtractor+TextExtractor)", "pdf-to-image (abstract base, covered by Jpeg+Png+Tiff)"],
+    "blocked": ["form-importer (EXTERNAL_BUG_BLOCKER — NullReferenceException in library)"],
+    "prior_sprint_claim": "19 PDF examples = complete (for the concrete main operation classes that were known)",
+    "corrected_claim": "19 of 22 concrete main classes covered. 2 new gaps (Ofd=FIXTURE_BLOCKER, Timestamp=NETWORK_DEPENDENT). PdfToImage+PdfExtractor are abstract bases (not gaps).",
+    "ofd_gap_detail": "OFD (Open Fixed-size Document, Chinese national standard) requires OFD format input fixture. Aspose.PDF can convert OFD->PDF but requires an OFD source file.",
+    "timestamp_gap_detail": "Timestamp requires a TSA (Timestamp Authority) server URL. Network-dependent. Example can be written using DigiCert TSA but will fail in offline environments."
+  }
+}

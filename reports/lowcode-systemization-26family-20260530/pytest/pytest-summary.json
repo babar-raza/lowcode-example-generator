@@ -1,0 +1,17 @@
+{
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "lane": "J2 — Full pytest run",
+  "date": "2026-05-30",
+  "verdict": "PYTEST_CLEAN",
+  "total_tests": 3236,
+  "passed": 3218,
+  "skipped": 18,
+  "failed": 0,
+  "subtests_passed": 10,
+  "duration_s": 344.31,
+  "pytest_version": "9.0.3",
+  "python_version": "3.13.2",
+  "platform": "win32",
+  "full_output_file": "reports/lowcode-systemization-26family-20260530/pytest/pytest-full-output.txt",
+  "note": "Full raw pytest -v --tb=short output captured. 0 failures. 18 skipped (expected — LLM-dependent/network-dependent tests). Prior sprint: 3174 passed (mega-train), 3218 passed (this sprint — 44 new tests added in healing sprint)."
+}

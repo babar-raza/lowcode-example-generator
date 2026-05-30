@@ -1,0 +1,10 @@
+{
+  "family": "email",
+  "package_name": "email-controlled-pilot",
+  "package_id": "Aspose.Email",
+  "package_version": "26.4.0",
+  "source_run": "workspace/runs/pilot-email-repair-20260530/generated/email",
+  "family_prefix": "email",
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-email-repair-20260530. 1 example (email-converter). E2E PASS."
+}

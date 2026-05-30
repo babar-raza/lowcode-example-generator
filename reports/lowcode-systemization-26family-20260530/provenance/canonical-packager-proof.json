@@ -1,0 +1,66 @@
+{
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "lane": "C2 — Canonical packager",
+  "analysis_date": "2026-05-30",
+  "verdict": "CANONICAL_PACKAGER_IMPLEMENTED_AND_VERIFIED",
+  "prior_rejection_reason": "Pass 4 rejected: assemble_pdf_pr10_pilot.py was hardcoded for one family/run/package. Repeatability not proven.",
+  "resolution": {
+    "script": "scripts/canonical_packager.py",
+    "manifests_dir": "pipeline/configs/assembly-manifests/",
+    "replaces": "scripts/assemble_pdf_pr10_pilot.py"
+  },
+  "canonical_packager_features": [
+    "Accepts any family, package name, package ID, package version",
+    "Source run directory configurable (relative to repo root)",
+    "Auto-discovers example directories OR accepts explicit list",
+    "Generates Directory.Build.props, Directory.Packages.props, global.json",
+    "Copies Program.cs, README.md, expected-output.json, example.manifest.json, *.csproj",
+    "Copies fixture files (.docx, .xlsx, .pdf etc.) automatically",
+    "Verifies build by running dotnet build on each example csproj individually",
+    "Driven by JSON manifest in pipeline/configs/assembly-manifests/"
+  ],
+  "manifests_created": [
+    "cells-controlled-pilot.json",
+    "diagram-controlled-pilot.json",
+    "email-controlled-pilot.json",
+    "slides-controlled-pilot.json",
+    "words-controlled-pilot.json",
+    "pdf-controlled-pilot-pr10.json"
+  ],
+  "assembly_results": {
+    "cells-controlled-pilot": {
+      "examples_assembled": 9,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-cells-20260529-214911/generated/cells"
+    },
+    "words-controlled-pilot": {
+      "examples_assembled": 8,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-words-repair-20260530/generated/words"
+    },
+    "diagram-controlled-pilot": {
+      "examples_assembled": 2,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-diagram-20260529-221021/generated/diagram"
+    },
+    "email-controlled-pilot": {
+      "examples_assembled": 1,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-email-repair-20260530/generated/email"
+    },
+    "slides-controlled-pilot": {
+      "examples_assembled": 3,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-slides-repair-20260530/generated/slides"
+    },
+    "pdf-controlled-pilot-pr10": {
+      "examples_assembled": 5,
+      "build_pass": true,
+      "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf"
+    }
+  },
+  "total_examples_assembled_and_built": 28,
+  "total_build_failures": 0,
+  "repeatability_proof": "Each package can be reproduced by running: C:/Python313/python.exe scripts/canonical_packager.py --manifest pipeline/configs/assembly-manifests/<package>.json",
+  "note_on_pdf_other_pilots": "pdf-controlled-pilot (pr1-4), pdf-controlled-pilot-pr5 through pr9 contain 14 additional examples. Their source runs are in workspace/runs/pilot-pdf-* directories. Manifests for these can be added following the same pattern."
+}

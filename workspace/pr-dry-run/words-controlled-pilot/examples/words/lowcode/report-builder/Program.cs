@@ -11,15 +11,26 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-report-builder");
 
-            // Input file provided by pipeline fixture factory
-            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
+            string templatePath = "template.docx";
+            var doc = new Document();
+            var builder = new DocumentBuilder(doc);
+            builder.Writeln("Report: <<[Name]>>");
+            builder.Writeln("Value: <<[Value]>>");
+            doc.Save(templatePath);
 
-            // BuildReport — no suitable overload found in catalog
-            // BuildReportToImages — no suitable overload found in catalog
-            // Demonstrate ReportBuilder.Create
-            ReportBuilder.Create();
+            string outputPath = "output.docx";
+            var data = new ReportData { Name = "LowCode Report", Value = 42 };
+            ReportBuilder.BuildReport(templatePath, outputPath, data);
 
-            Console.WriteLine("Done.");
+            Console.WriteLine(File.Exists(outputPath)
+                ? $"Report built: {outputPath}"
+                : "Report build failed: output not found.");
         }
+    }
+
+    public class ReportData
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

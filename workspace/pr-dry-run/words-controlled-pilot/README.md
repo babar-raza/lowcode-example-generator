@@ -25,12 +25,12 @@ Broader generation requires resolving open follow-up taskcards first.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `comparer` | `Comparer.Compare` | `` | `` | `dotnet run --project examples/words/lowcode/comparer` |
+| `comparer` | `Comparer.Compare` | `` | `docx` | `dotnet run --project examples/words/lowcode/comparer` |
 | `converter` | `Converter.Convert` | `docx` | `pdf` | `dotnet run --project examples/words/lowcode/converter` |
-| `mail-merger` | `MailMerger.Create` | `docx` | `` | `dotnet run --project examples/words/lowcode/mail-merger` |
+| `mail-merger` | `MailMerger.Execute` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/mail-merger` |
 | `merger` | `Merger.Merge` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/merger` |
 | `replacer` | `Replacer.Replace` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/replacer` |
-| `report-builder` | `ReportBuilder.BuildReport` | `docx` | `` | `dotnet run --project examples/words/lowcode/report-builder` |
+| `report-builder` | `ReportBuilder.BuildReport` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/report-builder` |
 | `splitter` | `Splitter.RemoveBlankPages` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/splitter` |
 | `watermarker` | `Watermarker.SetText` | `docx` | `docx` | `dotnet run --project examples/words/lowcode/watermarker` |
 
@@ -60,12 +60,25 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-comparer");
 
-            // Compare — no suitable overload found in catalog
-            // CompareToImages — no suitable overload found in catalog
-            // Demonstrate Comparer.Create
-            Comparer.Create();
+            string v1Path = "input_v1.docx";
+            string v2Path = "input_v2.docx";
 
-            Console.WriteLine("Done.");
+            var doc1 = new Document();
+            var builder1 = new DocumentBuilder(doc1);
+            builder1.Writeln("This is version 1 of the document.");
+            doc1.Save(v1Path);
+
+            var doc2 = new Document();
+            var builder2 = new DocumentBuilder(doc2);
+            builder2.Writeln("This is version 2 of the document with changes.");
+            doc2.Save(v2Path);
+
+            string outputPath = "output.docx";
+            Comparer.Compare(v1Path, v2Path, outputPath, "Author", DateTime.UtcNow);
+
+            Console.WriteLine(File.Exists(outputPath)
+                ? $"Comparison succeeded: {outputPath}"
+                : "Comparison failed: output not found.");
         }
     }
 }
@@ -132,14 +145,24 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-mail-merger");
 
-            // Input file provided by pipeline fixture factory
-            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
+            string templatePath = "template.docx";
+            var doc = new Document();
+            var builder = new DocumentBuilder(doc);
+            builder.Write("Hello, ");
+            builder.InsertField("MERGEFIELD FirstName");
+            builder.Write(" ");
+            builder.InsertField("MERGEFIELD LastName");
+            builder.Writeln("! Welcome to the LowCode example.");
+            doc.Save(templatePath);
 
-            // Execute — no suitable overload found in catalog
-            // ExecuteToImages — no suitable overload found in catalog
-            // ExecuteWithRegions — no suitable overload found in catalog
+            string outputPath = "output.docx";
+            string[] fieldNames = { "FirstName", "LastName" };
+            string[] fieldValues = { "John", "Doe" };
+            MailMerger.Execute(templatePath, outputPath, fieldNames, fieldValues);
 
-            Console.WriteLine("Done.");
+            Console.WriteLine(File.Exists(outputPath)
+                ? $"Mail merge succeeded: {outputPath}"
+                : "Mail merge failed: output not found.");
         }
     }
 }
@@ -168,17 +191,12 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-merger");
 
-            // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
-
-            // Merger.Merge requires multiple input files.
-            // Create input1.docx and input2.docx from the available fixture.
             string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.docx");
             string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.docx");
             File.Copy(inputPath, input1Path, overwrite: true);
             File.Copy(inputPath, input2Path, overwrite: true);
 
-            // Demonstrate Merger.Merge
             Merger.Merge("output.docx", new string[] { input1Path, input2Path });
 
             Console.WriteLine("Done.");
@@ -247,16 +265,27 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-report-builder");
 
-            // Input file provided by pipeline fixture factory
-            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
+            string templatePath = "template.docx";
+            var doc = new Document();
+            var builder = new DocumentBuilder(doc);
+            builder.Writeln("Report: <<[Name]>>");
+            builder.Writeln("Value: <<[Value]>>");
+            doc.Save(templatePath);
 
-            // BuildReport — no suitable overload found in catalog
-            // BuildReportToImages — no suitable overload found in catalog
-            // Demonstrate ReportBuilder.Create
-            ReportBuilder.Create();
+            string outputPath = "output.docx";
+            var data = new ReportData { Name = "LowCode Report", Value = 42 };
+            ReportBuilder.BuildReport(templatePath, outputPath, data);
 
-            Console.WriteLine("Done.");
+            Console.WriteLine(File.Exists(outputPath)
+                ? $"Report built: {outputPath}"
+                : "Report build failed: output not found.");
         }
+    }
+
+    public class ReportData
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }
 
@@ -310,7 +339,6 @@ namespace PluginExample
 ```csharp
 using System;
 using System.IO;
-using Aspose.Words;
 using Aspose.Words.LowCode;
 
 namespace PluginExample
@@ -321,23 +349,18 @@ namespace PluginExample
         {
             Console.WriteLine("Example: words-watermarker");
 
-            // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
 
-            // Demonstrate Watermarker.SetText — applies a text watermark
             Watermarker.SetText(inputPath, "output_text_watermark.docx", "Confidential");
 
-            // Demonstrate Watermarker.SetImage — requires a valid image file path.
-            // Create a minimal 1x1 BMP image to use as the watermark source.
             string imagePath = Path.Combine(AppContext.BaseDirectory, "watermark.bmp");
-            // Minimal valid BMP: 54-byte header + 4 bytes pixel (1x1, 24bpp, padded to 4 bytes)
             byte[] bmpBytes = new byte[] {
                 0x42, 0x4D, 0x3A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x00,
                 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00,
                 0x00, 0x00, 0x01, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0xFF, 0x00, 0x00, 0x00  // 1 pixel (blue) + 1 padding byte
+                0xFF, 0x00, 0x00, 0x00
             };
             File.WriteAllBytes(imagePath, bmpBytes);
             Watermarker.SetImage(inputPath, "output_image_watermark.docx", imagePath);
@@ -412,7 +435,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-30 07:47 UTC
+Generated on: 2026-05-30 10:46 UTC
 
 ---
 

@@ -1,0 +1,44 @@
+{
+  "family": "diagram",
+  "package_id": "Aspose.Diagram",
+  "sprint_id": "lowcode-systemization-26family-20260530",
+  "analysis_date": "2026-05-30",
+  "main_operation_classes": [
+    {
+      "class": "Aspose.Diagram.LowCode.DiagramConverter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "diagram-converter",
+      "example_status": "COVERED"
+    },
+    {
+      "class": "Aspose.Diagram.LowCode.PdfConverter",
+      "primary_method": "Process",
+      "classification": "MAIN_OPERATION_CLASS",
+      "example_slug": "pdf-converter",
+      "example_status": "COVERED"
+    }
+  ],
+  "supporting_types": [
+    {
+      "class": "Aspose.Diagram.LowCode.LowCodeLoadOptions",
+      "classification": "OPTIONS_OBJECT"
+    },
+    {
+      "class": "Aspose.Diagram.LowCode.LowCodePdfSaveOptions",
+      "classification": "OPTIONS_OBJECT"
+    },
+    {
+      "class": "Aspose.Diagram.LowCode.LowCodeSaveOptions",
+      "classification": "OPTIONS_OBJECT"
+    }
+  ],
+  "summary": {
+    "total_lowcode_types": 5,
+    "main_operation_classes": 2,
+    "supporting_types": 3,
+    "examples_covered": 2,
+    "examples_missing": 0,
+    "coverage_status": "COMPLETE"
+  }
+}

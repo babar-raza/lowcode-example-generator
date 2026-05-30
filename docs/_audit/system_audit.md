@@ -1,280 +1,381 @@
 # System Audit
 
-Audit mode: codebase is the source of truth. Documentation was used only for inventory and coverage checks.
+Audit date: 2026-05-30
 
-Last refreshed: 2026-05-26.
+Mode: code-first documentation alignment. The codebase is the source of truth for this audit. Documentation files were used only for inventory and coverage checks.
 
 ## Product/System Purpose
 
-The repository implements a Python package named `plugin-examples` that generates, validates, reviews, and prepares PR publication for Aspose .NET plugin/LowCode example projects.
+This repository implements the `plugin-examples` Python package and CLI for generating, validating, reviewing, and publishing SDK-style C# examples for Aspose .NET plugin/LowCode APIs.
 
-Evidence:
+Code evidence:
 
-- Console script: `pyproject.toml` defines `plugin-examples = "plugin_examples.__main__:main"`.
-- CLI parser entry: `src/plugin_examples/__main__.py:93-98`.
-- Pipeline orchestrator: `src/plugin_examples/runner.py:1537`.
-- Run directories and evidence are local `workspace/` outputs: `src/plugin_examples/runner.py:1570-1576`.
-- Publishing code is PR-based and guarded by publisher modules: `src/plugin_examples/publisher/publisher.py`, `src/plugin_examples/publisher/github_pr_publisher.py`, `src/plugin_examples/publisher/github_pr_merger.py`.
+- `pyproject.toml` defines package `plugin-examples`, Python `>=3.12`, dependencies `jsonschema`, `Jinja2`, `pyyaml`, `requests`, and console script `plugin-examples = plugin_examples.__main__:main`.
+- `src/plugin_examples/__main__.py` defines the CLI description as `Aspose .NET Plugin Example Generation Pipeline`.
+- `src/plugin_examples/runner.py` defines `run_pipeline(...)` and a stage chain from config load through publisher.
+- `tools/DllReflector/Program.cs` and `tools/DllReflector/DllReflector.csproj` are the .NET reflection utility used by `src/plugin_examples/reflection_catalog/reflector.py`.
+
+Unverified or conflicting with governance:
+
+- The repo governance requires all LLM calls to use only `https://llm.professionalize.com/v1/`. Current code does not fully enforce that contract: `src/plugin_examples/llm_router/router.py` approves provider families `{"llm_professionalize", "ollama"}`, returns an Ollama base URL for `ollama`, and contains OpenAI/gpt_oss call branches and defaults. This is an evidenced policy/code mismatch.
 
 ## Component Map
 
 | Component | Responsibility | Code evidence |
 |---|---|---|
-| `src/plugin_examples/__main__.py` | CLI entry point, command parsing, command dispatch, command-scoped metrics setup | `src/plugin_examples/__main__.py:93-98`, `src/plugin_examples/__main__.py:103-496` |
-| `src/plugin_examples/runner.py` | Gate-driven pipeline orchestration, stage execution, run report, evidence promotion | `src/plugin_examples/runner.py:1510-1537`, `src/plugin_examples/runner.py:1570-1900` |
-| `family_config` | YAML family config loading, JSON-schema validation, dataclass model construction | `src/plugin_examples/family_config/loader.py`, `src/plugin_examples/family_config/models.py`, `src/plugin_examples/family_config/validator.py` |
-| `nuget_fetcher` | NuGet service access, package download/cache, dependency resolution, lock/manifest writing | `src/plugin_examples/nuget_fetcher/fetcher.py`, `src/plugin_examples/nuget_fetcher/dependency_resolver.py` |
-| `nupkg_extractor` | Extracts assemblies/XML from NuGet packages and dependencies | Used by `src/plugin_examples/runner.py:426-444` |
-| `reflection_catalog` | Builds reflected API catalog from selected assemblies | Used by `src/plugin_examples/runner.py:448-465` |
-| `plugin_detector` | Detects plugin namespaces and writes source-of-truth/product inventory evidence | Used by `src/plugin_examples/runner.py:468-515` |
-| `api_delta` | Computes API deltas and impact mapping | Used by `src/plugin_examples/runner.py:517-534` |
-| `fixture_registry` | Discovers configured fixtures and writes registry evidence | Used by `src/plugin_examples/runner.py:536-546` |
-| `example_miner` | Mines existing example repos for style/fixture signals | Used by `src/plugin_examples/runner.py:548-556` |
-| `scenario_planner` | Builds ready/blocked scenarios from catalog, contracts, fixtures, constraints, and feedback | Used by `src/plugin_examples/runner.py:558-683` |
-| `llm_router` | Provider preflight, approved-provider checks, LLM calls, retries, metrics hooks | `src/plugin_examples/llm_router/router.py:18`, `src/plugin_examples/llm_router/router.py:173-175`, `src/plugin_examples/llm_router/router.py:229-320`, `src/plugin_examples/llm_router/router.py:362`, `src/plugin_examples/llm_router/router.py:445` |
-| `generator` | Builds packets, code, projects, manifests, expected-output files, and generated fixtures | Used by `src/plugin_examples/runner.py:705-872` |
-| `verifier_bridge` | Runs dotnet restore/build/run, validates stdout/files, runs external reviewer | Used by `src/plugin_examples/runner.py:874-1261`; modules under `src/plugin_examples/verifier_bridge/` |
-| `gates` | Per-example gates, aggregate gates, lifecycle, publication gate, evidence writers | Used by `src/plugin_examples/runner.py:1780-1837`; modules under `src/plugin_examples/gates/` |
-| `publisher` | Publish readiness, repo access, permission probes, PR creation, merge, README publishing, release status | `src/plugin_examples/__main__.py:180-456`, modules under `src/plugin_examples/publisher/` |
-| `metrics` | Metrics config, command/pipeline sessions, payload validation, evidence, POST ledger | `src/plugin_examples/__main__.py:10-90`, `src/plugin_examples/metrics/config.py:13-167`, `src/plugin_examples/metrics/poster.py:60-152` |
-| `package_watcher` | FormImporter package/defect watch command | `src/plugin_examples/__main__.py:401-410`, `src/plugin_examples/package_watcher/formimporter_watch.py` |
-| `tools/DllReflector` | .NET reflection helper executable project | `tools/DllReflector/Program.cs`, `tools/DllReflector/DllReflector.csproj` |
-| `scripts/sync_taskcards.py` | Regenerates taskcard markdown from JSON evidence | `scripts/sync_taskcards.py:2`, `scripts/sync_taskcards.py:21-22` |
+| CLI | Defines top-level command parser, command flags, env checks, and command dispatch. | `src/plugin_examples/__main__.py`, `pyproject.toml` |
+| Pipeline orchestrator | Runs ordered stages, manages run/evidence dirs, hard stops, replay, gate evaluation, promotion. | `src/plugin_examples/runner.py` (`PipelineContext`, `StageResult`, `STAGE_DEFINITIONS`, `run_pipeline`) |
+| Family config | Loads YAML configs into typed dataclasses and validates against JSON schema. | `src/plugin_examples/family_config/models.py`, `src/plugin_examples/family_config/loader.py`, `src/plugin_examples/family_config/validator.py`, `pipeline/schemas/family-config.schema.json` |
+| NuGet fetch/dependency resolution | Resolves packages, caches packages, writes package-lock/dependency manifests. | `src/plugin_examples/nuget_fetcher/fetcher.py`, `src/plugin_examples/nuget_fetcher/cache.py`, `src/plugin_examples/nuget_fetcher/dependency_resolver.py` |
+| Nupkg extraction | Selects framework DLLs and extracts primary/dependency assemblies. | `src/plugin_examples/nupkg_extractor/extractor.py`, `src/plugin_examples/nupkg_extractor/framework_selector.py` |
+| Reflection catalog | Builds API catalog from NuGet DLL and XML docs. | `src/plugin_examples/reflection_catalog/catalog_builder.py`, `src/plugin_examples/reflection_catalog/reflector.py`, `pipeline/schemas/api-catalog.schema.json`, `tools/DllReflector/Program.cs` |
+| Plugin detector | Detects namespaces/types matching configured plugin namespace patterns and writes source-of-truth proof. | `src/plugin_examples/plugin_detector/detector.py`, `src/plugin_examples/plugin_detector/proof_reporter.py` |
+| API delta and impact | Computes catalog deltas and impacted examples. | `src/plugin_examples/api_delta/delta_engine.py`, `src/plugin_examples/api_delta/impact_mapper.py` |
+| Fixture registry | Discovers/creates input fixtures and writes fixture evidence. | `src/plugin_examples/fixture_registry/registry.py`, `src/plugin_examples/fixture_registry/fixture_factory.py` |
+| Existing example miner | Mines official examples for style hints and stale reports. | `src/plugin_examples/example_miner/miner.py`, `src/plugin_examples/example_miner/symbol_validator.py` |
+| Scenario planner | Classifies API types, builds scenarios, applies denominator/completeness rules. | `src/plugin_examples/scenario_planner/planner.py`, `scenario_catalog.py`, `type_classifier.py`, `entrypoint_scorer.py`, `consumer_mapper.py` |
+| LLM router | Runs provider preflight and generation calls, writes LLM preflight evidence. | `src/plugin_examples/llm_router/router.py`, `pipeline/configs/llm-routing.yml` |
+| Generator | Builds prompt packets and produces C# `Program.cs` examples through LLM or deterministic templates. | `src/plugin_examples/generator/packet_builder.py`, `src/plugin_examples/generator/code_generator.py` |
+| Verification bridge | Runs `dotnet restore`, `dotnet build`, optional `dotnet run`, output validation, reviewer preflight/results. | `src/plugin_examples/verifier_bridge/dotnet_runner.py`, `output_validator.py`, `reviewer_preflight.py`, `bridge.py` |
+| Gates | Evaluates stage, example, completeness, lifecycle, and publication gates. | `src/plugin_examples/gates/evaluator.py`, `example_gates.py`, `example_lifecycle.py`, `completeness_gate.py`, `publication_gate.py` |
+| Publisher | Builds package/PR metadata, checks approvals/tokens/repo access, creates PRs and merges. | `src/plugin_examples/publisher/publisher.py`, `github_pr_publisher.py`, `github_pr_merger.py`, `approval_gate.py`, `merge_approval_gate.py`, `batch_publisher.py` |
+| README tooling | Renders and audits generated root README files for target repos. | `src/plugin_examples/publisher/readme_renderer.py`, `readme_inventory.py`, `readme_auditor.py`, `readme_audit_gate.py` |
+| Metrics | Collects and optionally posts agent metrics with ledger dedupe. | `src/plugin_examples/metrics/config.py`, `session.py`, `poster.py`, `models.py`, `pipeline/configs/metrics.yml` |
+| Planner loop/portfolio actions | Computes next actions and runs safe action loops. | `src/plugin_examples/portfolio_action_planner.py`, `src/plugin_examples/planner_loop.py` |
+| Package watcher | Watches versions and FormImporter defect status. | `src/plugin_examples/package_watcher/watcher.py`, `formimporter_watch.py` |
+| Evidence validation | Validates sprint/report bundles and evidence contracts. | `src/plugin_examples/evidence_validator.py`, `evidence_contract.py`, `evidence_contract_computer.py` |
 
 ## Key Workflows
 
-### Family Pipeline: `plugin-examples run`
+### Main Family Pipeline
 
-1. CLI parses `run` flags: `src/plugin_examples/__main__.py:106-159`.
-2. `run_pipeline()` creates `workspace/runs/{run_id}` and `workspace/runs/{run_id}/evidence`: `src/plugin_examples/runner.py:1570-1576`.
-3. Config is loaded from `pipeline/configs/families/{family}.yml`, with disabled fallback and status gates: `src/plugin_examples/runner.py:299-333`.
-4. NuGet package is fetched and cached in the run directory: `src/plugin_examples/runner.py:335-349`.
-5. Version drift compares fetched version with denominator source version: `src/plugin_examples/runner.py:351-400`.
-6. Dependencies are resolved when enabled: `src/plugin_examples/runner.py:402-424`.
-7. Package assemblies/XML are extracted and reflected to `api-catalog.json`: `src/plugin_examples/runner.py:426-465`.
-8. Plugin namespaces are detected and source-of-truth evidence is written: `src/plugin_examples/runner.py:468-515`.
-9. API delta, impact mapping, fixture registry, example mining, and scenario planning run before generation: `src/plugin_examples/runner.py:517-683`.
-10. LLM preflight runs before generation: `src/plugin_examples/runner.py:685-703`.
-11. Generation writes projects under `workspace/runs/{run_id}/generated/{family}`: `src/plugin_examples/runner.py:705-872`.
-12. Validation restores/builds/runs projects and writes validation evidence: `src/plugin_examples/runner.py:874-1259`.
-13. Reviewer and publisher stages run after validation: `src/plugin_examples/runner.py:1261-1420`.
-14. Per-example gates, aggregate gates, lifecycle evidence, and `pilot-report.json` are written: `src/plugin_examples/runner.py:1780-1889`.
-15. `--promote-latest` copies evidence to `workspace/verification/latest/` and family-scoped locations: `src/plugin_examples/runner.py:1892-1900`.
+Entry point: `plugin-examples run --family FAMILY`.
 
-Stage order is defined in `STAGE_DEFINITIONS`: `src/plugin_examples/runner.py:1510-1529`. Hard-stop stages are `load_config`, `nuget_fetch`, `dependency_resolution`, `extraction`, `reflection`, `plugin_detection`, and `scenario_planning`: `src/plugin_examples/runner.py:1532-1534`.
+Code path:
 
-### Discovery Sweep
+1. CLI parses `run` flags in `src/plugin_examples/__main__.py`.
+2. CLI calls `plugin_examples.runner.run_pipeline(...)`.
+3. `run_pipeline` creates `workspace/runs/{run_id}/` and `workspace/runs/{run_id}/evidence/`.
+4. `STAGE_DEFINITIONS` in `src/plugin_examples/runner.py` runs these stages in order: `load_config`, `nuget_fetch`, `version_drift_preflight`, `dependency_resolution`, `extraction`, `reflection`, `plugin_detection`, `api_delta`, `impact_mapping`, `fixture_registry`, `example_mining`, `scenario_planning`, `llm_preflight`, `generation`, `validation`, `reviewer`, `publisher`.
+5. Hard-stop stages are defined in `HARD_STOP_STAGES`: `load_config`, `nuget_fetch`, `dependency_resolution`, `extraction`, `reflection`, `plugin_detection`, `scenario_planning`.
+6. Gate evaluation writes example gates, aggregate gates, scenario feedback, lifecycle evidence, and gate results under the run evidence directory.
+7. The run report is written to `workspace/runs/{run_id}/pilot-report.json`.
+8. If `--promote-latest` is set, family evidence is promoted via `src/plugin_examples/evidence_layout.py` to `workspace/verification/latest/families/{family}/` and legacy `workspace/verification/latest/`.
 
-The `discover-lowcode` command is declared at `src/plugin_examples/__main__.py:162-176`. Discovery writes all-family evidence to `workspace/verification/latest/all-family-lowcode-discovery.json` and uses per-family discovery run directories under `workspace/runs/`.
+### Discovery-Only Sweep
 
-### Publishing and Merge
+Entry point: `plugin-examples discover-lowcode`.
 
-Publishing and merge command surfaces:
+Code evidence:
 
-- `validate-publish-targets`: `src/plugin_examples/__main__.py:180-191`
-- `resolve-repo-access`: `src/plugin_examples/__main__.py:196-207`
-- `probe-publish-permissions`: `src/plugin_examples/__main__.py:212-227`
-- `publish-pr`: `src/plugin_examples/__main__.py:232-260`
-- `merge-pr`: `src/plugin_examples/__main__.py:266-291`
-- `release-status`: `src/plugin_examples/__main__.py:296-311`
-- `render-root-readme`: `src/plugin_examples/__main__.py:319-334`
-- `publish-readme`: `src/plugin_examples/__main__.py:340-355`
-- `publish-pr-batch`: `src/plugin_examples/__main__.py:377-396`
-- `post-publication-verify`: `src/plugin_examples/__main__.py:415-422`
-- `version-drift`: `src/plugin_examples/__main__.py:426-440`
-- `target-repo-health`: `src/plugin_examples/__main__.py:444-456`
+- CLI command and flags are in `src/plugin_examples/__main__.py`.
+- Implementation is in `src/plugin_examples/discovery_sweep.py`.
+- It writes discovery evidence under `workspace/verification/latest/` and discovery run dirs under `workspace/runs/discovery-{family}-{timestamp}`.
 
-Live PR creation requires `GITHUB_TOKEN` and approval token `APPROVE_LIVE_PR`. Merge requires separate token `APPROVE_MERGE_PR` and rejects the live-publish token. Evidence: `src/plugin_examples/publisher/approval_gate.py`, `src/plugin_examples/publisher/merge_approval_gate.py`, `src/plugin_examples/__main__.py:1049-1055`, `src/plugin_examples/__main__.py:1275-1315`.
+### Publishing
 
-### Taskcard Docs Sync
+Entry points:
 
-Taskcard JSON is read from `workspace/verification/latest/open-taskcard-closure-matrix.json` and rendered to `docs/development/open-taskcard-closure-matrix.md`.
+- `plugin-examples publish-pr`
+- `plugin-examples publish-pr-batch`
+- `plugin-examples publish-readme`
+- `plugin-examples merge-pr`
 
-Evidence:
+Code evidence:
 
-- `scripts/sync_taskcards.py:2`
-- `scripts/sync_taskcards.py:21-22`
-- CLI help path: `src/plugin_examples/__main__.py:363`
-- CLI output path: `src/plugin_examples/__main__.py:1507-1508`
+- CLI command definitions are in `src/plugin_examples/__main__.py`.
+- Live publish approval is enforced by `src/plugin_examples/publisher/approval_gate.py`, using token `APPROVE_LIVE_PR` and env fallback `PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL`.
+- Merge approval is enforced by `src/plugin_examples/publisher/merge_approval_gate.py`, using token `APPROVE_MERGE_PR` and env fallback `PLUGIN_EXAMPLES_MERGE_PR_APPROVAL`.
+- GitHub PR creation uses `GITHUB_TOKEN` in `src/plugin_examples/publisher/github_pr_publisher.py`.
+- GitHub merge uses `GITHUB_TOKEN` in `src/plugin_examples/publisher/github_pr_merger.py`.
+- The publisher blocks live publishing when evidence or target config is missing in `src/plugin_examples/publisher/publisher.py`.
+
+### README Rendering/Publishing
+
+Entry points:
+
+- `plugin-examples render-root-readme`
+- `plugin-examples publish-readme`
+
+Code evidence:
+
+- Rendering context and template output are in `src/plugin_examples/publisher/readme_renderer.py`.
+- Inventory extraction is in `src/plugin_examples/publisher/readme_inventory.py`.
+- Audit rules are in `src/plugin_examples/publisher/readme_auditor.py`.
+- README publish/audit approvals are in `src/plugin_examples/publisher/readme_audit_gate.py`.
 
 ### Metrics
 
-Shared metrics flags are added by `_add_metrics_flags()`: `src/plugin_examples/__main__.py:10-23`. Metrics can be enabled by `--metrics` or `AGENT_METRICS_ENABLED=true`: `src/plugin_examples/__main__.py:34-42`.
+Entry surface:
 
-Metrics evidence files:
+- Shared CLI flags: `--metrics`, `--metrics-post`, `--metrics-job-type`, `--metrics-strict`, `--metrics-force-repost`, `--metrics-config`.
 
-- `agent-metrics-llm-calls.jsonl`: `src/plugin_examples/metrics/evidence.py:31`
-- `agent-metrics-run-summary.json`: `src/plugin_examples/metrics/evidence.py:41`
-- `agent-metrics-payload.json`: `src/plugin_examples/metrics/evidence.py:47`
-- `agent-metrics-validation.json`: `src/plugin_examples/metrics/evidence.py:53`
-- `agent-metrics-post-result.json`: `src/plugin_examples/metrics/evidence.py:59`
+Code evidence:
 
-Metrics POST ledger path defaults to `workspace/verification/agent-metrics-post-ledger.jsonl`: `pipeline/configs/metrics.yml:94`, `src/plugin_examples/metrics/config.py:41`.
+- Shared flag helper `_add_metrics_flags` and `_create_metrics_session` are in `src/plugin_examples/__main__.py`.
+- Config loader and env overrides are in `src/plugin_examples/metrics/config.py`.
+- Metrics config is `pipeline/configs/metrics.yml`.
+- Post ledger default is `workspace/verification/agent-metrics-post-ledger.jsonl`.
 
 ## Config Reference
 
-### Family Configs
+### Family Config Files
 
-Loaded path:
+Location: `pipeline/configs/families/*.yml`.
 
-- `pipeline/configs/families/{family}.yml`: `src/plugin_examples/runner.py:302`
-- Disabled fallback path checked by runner: `src/plugin_examples/runner.py:304-307`
-- Disabled path/field/status rejected by loader: `src/plugin_examples/family_config/loader.py`
-- JSON schema: `pipeline/schemas/family-config.schema.json`
-- Schema validation call: `src/plugin_examples/family_config/validator.py`
+Current family config files found:
 
-Typed model keys/defaults:
+`barcode.yml`, `cad.yml`, `cells.yml`, `diagram.yml`, `drawing.yml`, `email.yml`, `epub.yml`, `finance.yml`, `font.yml`, `gis.yml`, `html.yml`, `imaging.yml`, `note.yml`, `ocr.yml`, `omr.yml`, `page.yml`, `pdf.yml`, `psd.yml`, `slides.yml`, `svg.yml`, `tasks.yml`, `tex.yml`, `threed.yml`, `words.yml`, `zip.yml`.
 
-| Config surface | Evidence |
-|---|---|
-| `nuget.package_id`, `version_policy`, `pinned_version`, `allow_prerelease`, `target_framework_preference` default `["netstandard2.0"]` | `src/plugin_examples/family_config/models.py:23-33` |
-| `nuget.dependency_resolution.enabled` default `true`, `max_depth` default `2`, `extra_packages` default `[]` | `src/plugin_examples/family_config/models.py:15-19` |
-| `plugin_detection.namespace_patterns` | `src/plugin_examples/family_config/models.py:36-38` |
-| `github.official_examples_repo`, `published_plugin_examples_repo`, `central_repo_allowed` default `false` | `src/plugin_examples/family_config/models.py:41-45` |
-| `fixtures.sources`, `existing_examples.sources` | `src/plugin_examples/family_config/models.py:48-65` |
-| `generation.min_examples_per_family`, `max_examples_per_monthly_run`, `allow_new_fixtures`, `allow_generated_input_files`, `allowed_types`, `preferred_methods_per_type` | `src/plugin_examples/family_config/models.py:68-75` |
-| `validation.require_restore`, `require_build`, `require_run`, `require_output_validation`, `require_example_reviewer`, `runtime_runner` default `auto` | `src/plugin_examples/family_config/models.py:78-85` |
-| `llm.provider_order` | `src/plugin_examples/family_config/models.py:88-90` |
-| `template_hints` defaults | `src/plugin_examples/family_config/models.py:93-104` |
-| `per_type_constraints` default `{}` | `src/plugin_examples/family_config/models.py:116` |
+Validation:
 
-Other config/data inputs:
+- Schema: `pipeline/schemas/family-config.schema.json`.
+- Loader: `src/plugin_examples/family_config/loader.py`.
+- Dataclasses/defaults: `src/plugin_examples/family_config/models.py`.
+- Disabled families are rejected if the path includes `disabled`, if `enabled` is false, or if `status == disabled`.
+- `run_pipeline` blocks `status == experimental` unless `--allow-experimental` is passed.
+- `run_pipeline` blocks `status == discovery_only` for generation and tells operators to use `discover-lowcode`.
 
-- `pipeline/configs/denominators/*.json`
-- `pipeline/contracts/**/*.json`
-- `pipeline/format-authority/manifest.json`
-- `pipeline/format-authority/contracts/*.json`
-- `pipeline/configs/metrics.yml`
-- `pipeline/configs/llm-routing.yml`
-- `pipeline/configs/plugin-namespace-patterns.yml`
-- `pipeline/configs/verifier.yml`
-- `pipeline/configs/github-publishing.yml`
+Core keys and defaults from code/schema:
+
+| Key | Required | Default/behavior | Evidence |
+|---|---:|---|---|
+| `family` | yes | no default | `FamilyConfig`, schema |
+| `display_name` | yes | no default | `FamilyConfig`, schema |
+| `enabled` | yes | disabled if false | `load_family_config`, schema |
+| `status` | yes | enum `active`, `disabled`, `experimental`, `discovery_only` | schema, `run_pipeline` |
+| `nuget.package_id` | yes | no default | `NuGetConfig`, schema |
+| `nuget.version_policy` | yes | enum `latest-stable`, `pinned` | schema |
+| `nuget.pinned_version` | no | `None` | `NuGetConfig` |
+| `nuget.allow_prerelease` | no | `False` | `NuGetConfig`, schema |
+| `nuget.target_framework_preference` | no | `["netstandard2.0"]` | `NuGetConfig`, loader |
+| `nuget.dependency_resolution.enabled` | no | `True` | `DependencyResolution`, loader |
+| `nuget.dependency_resolution.max_depth` | no | `2` | `DependencyResolution`, loader |
+| `nuget.dependency_resolution.extra_packages` | no | `[]` | `DependencyResolution`, loader |
+| `nuget.dependency_resolution.include_all_tfm_groups` | no | `False` | `DependencyResolution`, loader |
+| `plugin_detection.namespace_patterns` | yes | min 1 | schema |
+| `github.official_examples_repo` | yes | `owner`, `repo`, `branch` required | schema |
+| `github.published_plugin_examples_repo` | yes | `owner`, `repo`, `branch` required | schema |
+| `github.central_repo_allowed` | no | `False` | `GitHubConfig`, schema |
+| `fixtures.sources` | yes | list | schema, `FixturesConfig` |
+| `existing_examples.sources` | yes | list | schema, `ExistingExamplesConfig` |
+| `generation.min_examples_per_family` | yes | integer >= 1 | schema |
+| `generation.max_examples_per_monthly_run` | yes | integer >= 1 | schema |
+| `generation.allow_new_fixtures` | no | `True` | `GenerationConfig` |
+| `generation.allow_generated_input_files` | no | `True` | `GenerationConfig` |
+| `generation.allowed_types` | no | `[]` | `GenerationConfig`, schema |
+| `generation.preferred_methods_per_type` | no | `{}` | `GenerationConfig`, schema |
+| `validation.require_restore` | no | `True` | `ValidationConfig` |
+| `validation.require_build` | no | `True` | `ValidationConfig` |
+| `validation.require_run` | no | `True` | `ValidationConfig` |
+| `validation.require_output_validation` | no | `True` | `ValidationConfig` |
+| `validation.require_example_reviewer` | no | `True` | `ValidationConfig` |
+| `validation.runtime_runner` | no | `auto`, enum `linux/windows/auto` | schema |
+| `llm.provider_order` | yes | min 1 | schema |
+| `template_hints.*` | no | default filenames/extensions/usings | `TemplateHints`, loader |
+| `per_type_constraints` | no | `{}` | `FamilyConfig`, loader |
+
+### Other Configs
+
+| File | Purpose from code | Evidence |
+|---|---|---|
+| `pipeline/configs/metrics.yml` | Metrics mapping, allowed statuses/job types, env var names, ledger path. | `src/plugin_examples/metrics/config.py` |
+| `pipeline/configs/llm-routing.yml` | Optional LLM provider config passed into router preflight. | `src/plugin_examples/runner.py`, `src/plugin_examples/llm_router/router.py` |
+| `pipeline/configs/denominators/*.json` | Source version, catalog hash, denominator/completeness authority used during planning and status. | `src/plugin_examples/runner.py`, `src/plugin_examples/gates/completeness_gate.py`, `src/plugin_examples/publisher/release_status.py` |
+| `pipeline/format-authority/contracts/*.json` | Format contracts consumed by planner/codegen/evidence. | `src/plugin_examples/format_authority/contracts.py`, `src/plugin_examples/runner.py` |
+| `pipeline/prompts/example-generator.md` and `example-repair.md` | Prompt text used by generator packet/revision flow. | `src/plugin_examples/generator/packet_builder.py`, `code_generator.py` |
 
 ### Environment Variables
 
-| Variable | Code usage |
-|---|---|
-| `GITHUB_TOKEN` | PR creation/merge/probes and fixture/example repo access: `src/plugin_examples/__main__.py`, publisher modules, fixture/example modules |
-| `GH_TOKEN` | Governance storage convention; code gap: `src/plugin_examples/publisher/target_repo_health.py` falls back to `GH_TOKEN` |
-| `PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL` | Live publish approval fallback: `src/plugin_examples/publisher/approval_gate.py` |
-| `PLUGIN_EXAMPLES_MERGE_PR_APPROVAL` | Merge approval fallback: `src/plugin_examples/publisher/merge_approval_gate.py` |
-| `GPT_OSS_API_KEY` | LLM auth for professionalize/gpt_oss paths: `src/plugin_examples/llm_router/router.py:173` |
-| `GPT_OSS_ENDPOINT` | LLM base URL; code still has non-governed defaults in some branches: `src/plugin_examples/llm_router/router.py:237`, `src/plugin_examples/llm_router/router.py:297`, `src/plugin_examples/llm_router/router.py:319` |
-| `GPT_OSS_MODEL` | Model selection: `src/plugin_examples/llm_router/router.py:267`, `src/plugin_examples/llm_router/router.py:299`, `src/plugin_examples/llm_router/router.py:320` |
-| `LLM_API_KEY`, `OPENAI_API_KEY`, `OPENAI_MODEL`, `OLLAMA_HOST` | Still visible in router code; not approved by repo governance for live inference |
-| `EXAMPLE_REVIEWER_PATH` | External reviewer path: verifier bridge modules |
-| `AGENT_METRICS_*` | Metrics config/env overrides: `src/plugin_examples/metrics/config.py:120-167` |
+| Env var | Code behavior | Evidence |
+|---|---|---|
+| `GITHUB_TOKEN` | Required for live PR creation/merge and used by repo probes/fixture discovery. | `src/plugin_examples/__main__.py`, `publisher/github_pr_publisher.py`, `publisher/github_pr_merger.py`, `fixture_registry/registry.py` |
+| `GH_TOKEN` | Fallback used by target repo health check; governance says operators map this to `GITHUB_TOKEN` before live commands. | `src/plugin_examples/publisher/target_repo_health.py` |
+| `PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL` | Fallback approval token for live publish; must be `APPROVE_LIVE_PR`. | `publisher/approval_gate.py`, `publisher/batch_publisher.py`, `__main__.py` |
+| `PLUGIN_EXAMPLES_MERGE_PR_APPROVAL` | Fallback approval token for merge; must be `APPROVE_MERGE_PR`. | `publisher/merge_approval_gate.py`, `__main__.py` |
+| `PLUGIN_EXAMPLES_README_PUSH_APPROVAL` | README audit/push approval env var. | `publisher/readme_audit_gate.py` |
+| `PLUGIN_EXAMPLES_README_AUDIT_APPROVAL` | README audit override token. | `publisher/readme_audit_gate.py` |
+| `GPT_OSS_ENDPOINT` | Used by LLM router for `llm_professionalize` and `gpt_oss`; defaults vary in code. | `llm_router/router.py` |
+| `GPT_OSS_MODEL` | Model name for `llm_professionalize`/`gpt_oss`, default `recommended`. | `llm_router/router.py` |
+| `GPT_OSS_API_KEY` | API key for `llm_professionalize`/`gpt_oss`. | `llm_router/router.py` |
+| `LLM_API_KEY`, `OPENAI_API_KEY`, `OPENAI_MODEL`, `OLLAMA_HOST` | Still referenced in router code. | `llm_router/router.py` |
+| `EXAMPLE_REVIEWER_PATH` | Optional reviewer executable/path discovery. | `verifier_bridge/reviewer_preflight.py`, `verifier_bridge/bridge.py` |
+| `AGENT_METRICS_ENABLED` | Enables metrics without CLI flag when `true`. | `__main__.py`, `metrics/config.py` |
+| `AGENT_METRICS_TOKEN` | Default metrics post token env var. | `metrics/config.py`, `metrics/poster.py`, `pipeline/configs/metrics.yml` |
+| `AGENT_METRICS_ENDPOINT` | Overrides metrics API endpoint. | `metrics/config.py`, `pipeline/configs/metrics.yml` |
+| `AGENT_METRICS_DRY_RUN` | If `false`, metrics dry-run is disabled. | `metrics/config.py` |
+| `AGENT_METRICS_STRICT` | Enables strict metrics failure handling. | `metrics/config.py` |
+| `AGENT_METRICS_PRODUCTION_ENABLED` | Single production metrics gate, true only when exactly `true`. | `metrics/config.py` |
 
 ## CLI/API Reference Extracted From Code
 
-Package/module entry:
+Top-level:
 
-- `plugin-examples`: `pyproject.toml`
-- `python -m plugin_examples`: `src/plugin_examples/__main__.py`
-
-Global flag:
-
-- `--verbose`, `-v`: `src/plugin_examples/__main__.py:98`
-
-Shared metrics flags:
-
-- `--metrics`, `--metrics-post`, `--metrics-job-type`, `--metrics-strict`, `--metrics-force-repost`, `--metrics-config`: `src/plugin_examples/__main__.py:10-23`
+- `plugin-examples --verbose|-v`
+- `plugin-examples status`
 
 Commands:
 
-| Command | Main flags/options | Evidence |
+| Command | Primary flags/options | Evidence |
 |---|---|---|
-| `status` | none | `src/plugin_examples/__main__.py:103` |
-| `run` | `--family`, `--dry-run`, `--template-mode`, `--skip-run`, `--require-llm`, `--require-validation`, `--require-reviewer`, `--publish`, `--approval-token`, `--tier`, `--promote-latest`, `--allow-experimental`, `--compare-run`, `--replay-from`, `--reuse-run` | `src/plugin_examples/__main__.py:106-159` |
-| `discover-lowcode` | `--all-families`, `--family`, `--families`, `--dry-run`, `--promote-latest`, `--allow-experimental`, `--rank` | `src/plugin_examples/__main__.py:162-176` |
-| `validate-publish-targets` | `--families`, `--promote-latest` | `src/plugin_examples/__main__.py:180-191` |
-| `resolve-repo-access` | `--families`, `--promote-latest` | `src/plugin_examples/__main__.py:196-207` |
-| `probe-publish-permissions` | `--families`, `--dry-run`, `--promote-latest` | `src/plugin_examples/__main__.py:212-227` |
-| `publish-pr` | `--family`, `--dry-run`, `--publish`, `--approval-token`, `--package-path`, `--promote-latest` | `src/plugin_examples/__main__.py:232-260` |
-| `merge-pr` | `--family`, `--pr-number`, `--dry-run`, `--merge`, `--approval-token`, `--promote-latest` | `src/plugin_examples/__main__.py:266-291` |
-| `release-status` | `--families`, `--promote-latest`, `--validate-bundle` | `src/plugin_examples/__main__.py:296-311` |
-| `render-root-readme` | `--family`, `--package-path`, `--promote-latest`, `--cumulative` | `src/plugin_examples/__main__.py:319-334` |
-| `publish-readme` | `--family`, `--publish`, `--approval-token`, `--promote-latest` | `src/plugin_examples/__main__.py:340-355` |
-| `sync-taskcard-docs` | `--promote-latest` compatibility flag | `src/plugin_examples/__main__.py:361-367` |
-| `check` | `--family` | `src/plugin_examples/__main__.py:373-374` |
-| `publish-pr-batch` | `--family`, `--publish`, `--dry-run`, `--approval-token`, `--promote-latest` | `src/plugin_examples/__main__.py:377-396` |
-| `formimporter-watch` | `--run-repro`, `--output` | `src/plugin_examples/__main__.py:401-410` |
-| `post-publication-verify` | `--family`, `--output` | `src/plugin_examples/__main__.py:415-422` |
-| `version-drift` | `--family`, `--output`, `--json` | `src/plugin_examples/__main__.py:426-440` |
-| `target-repo-health` | `--family`, `--output`, `--json` | `src/plugin_examples/__main__.py:444-456` |
-| `next-actions` | `--output`, `--markdown`, `--json` | `src/plugin_examples/__main__.py:462-476` |
-| `execute-next-actions` | `--evidence-dir`, `--max-cycles`, `--dry-run-remote`, `--json` | `src/plugin_examples/__main__.py:480-496` |
+| `run` | `--family`, `--dry-run`, `--template-mode`, `--skip-run`, `--require-llm`, `--require-validation`, `--require-reviewer`, `--publish`, `--approval-token`, `--tier 0..5`, `--promote-latest`, `--allow-experimental`, `--compare-run`, `--replay-from generation|validation|reviewer|publisher`, `--reuse-run`, metrics flags | `src/plugin_examples/__main__.py` |
+| `discover-lowcode` | `--all-families`, `--family`, `--families`, `--dry-run`, `--promote-latest`, `--allow-experimental`, `--rank`, metrics flags | `__main__.py`, `discovery_sweep.py` |
+| `validate-publish-targets` | `--families`, `--promote-latest`, metrics flags | `__main__.py`, `publisher/publish_readiness.py` |
+| `resolve-repo-access` | `--families`, `--promote-latest`, metrics flags | `__main__.py`, `publisher/repo_access_resolver.py` |
+| `probe-publish-permissions` | `--families`, `--dry-run`, `--promote-latest`, metrics flags | `__main__.py`, `publisher/publish_permission_probe.py` |
+| `publish-pr` | `--family`, mutually exclusive `--dry-run`/`--publish`, `--approval-token`, `--package-path`, `--promote-latest`, metrics flags | `__main__.py`, `publisher/github_pr_publisher.py` |
+| `merge-pr` | `--family`, `--pr-number`, mutually exclusive `--dry-run`/`--merge`, `--approval-token`, `--promote-latest`, metrics flags | `__main__.py`, `publisher/github_pr_merger.py` |
+| `release-status` | `--families`, `--promote-latest`, `--validate-bundle`, metrics flags | `__main__.py`, `publisher/release_status.py` |
+| `render-root-readme` | `--family`, `--package-path`, `--promote-latest`, `--cumulative`, metrics flags | `__main__.py`, `publisher/readme_renderer.py` |
+| `publish-readme` | `--family`, `--publish`, `--approval-token`, `--promote-latest`, metrics flags | `__main__.py`, README publisher block in `__main__.py` |
+| `sync-taskcard-docs` | `--promote-latest`, metrics flags | `__main__.py`, `scripts/sync_taskcards.py`, `scripts/write_taskcard_sync.py` |
+| `check` | `--family` | `__main__.py` |
+| `publish-pr-batch` | `--family`, mutually exclusive `--publish`/`--dry-run`, `--approval-token`, `--promote-latest` | `__main__.py`, `publisher/batch_publisher.py` |
+| `formimporter-watch` | `--run-repro`, `--output` | `__main__.py`, `package_watcher/formimporter_watch.py` |
+| `post-publication-verify` | `--family`, `--output` | `__main__.py`, `publisher/post_publication_verifier.py` |
+| `version-drift` | `--family`, `--output`, `--json` | `__main__.py`, `publisher/version_drift_checker.py` |
+| `target-repo-health` | `--family`, `--output`, `--json` | `__main__.py`, `publisher/target_repo_health.py` |
+| `next-actions` | `--output`, `--markdown`, `--json` | `__main__.py`, `portfolio_action_planner.py` |
+| `execute-next-actions` | `--max-cycles`, `--evidence-dir`, `--dry-run-remote`, `--json` | `__main__.py`, `planner_loop.py` |
 
-Legacy/direct script entry points:
+Public Python surface:
 
-- `scripts/pilot_run.py`
-- `scripts/sync_taskcards.py`
-- `scripts/validate_published_examples_build.py`
-- `src/plugin_examples/package_watcher/formimporter_watch.py`
+- `plugin_examples.runner.run_pipeline(...)` is the main programmatic API.
+- `plugin_examples.family_config.load_family_config(...)` loads and validates family configs.
+- `plugin_examples.verifier_bridge.dotnet_runner.run_dotnet_validation(...)` runs restore/build/run.
+- `plugin_examples.gates.evaluator.evaluate_gates(...)` produces `GateVerdict`.
+- `plugin_examples.llm_router.router.LLMRouter` handles provider preflight and generation.
 
 ## Data Directories and File Contracts
 
-| Path | Contract/evidence |
-|---|---|
-| `workspace/runs/{run_id}/` | Per-run root: `src/plugin_examples/runner.py:1570-1572` |
-| `workspace/runs/{run_id}/evidence/latest/` | Run-scoped evidence directory |
-| `workspace/runs/{run_id}/packages/{family}/` | Primary NuGet package cache/download target |
-| `workspace/runs/{run_id}/packages/{family}/deps/` | Dependency package cache/download target |
-| `workspace/runs/{run_id}/catalog/{family}/api-catalog.json` | Reflected API catalog |
-| `workspace/runs/{run_id}/generated/{family}/` | Generated projects |
-| `workspace/manifests/` | Promoted package lock/fixture registry/example indexes/scenario catalog |
-| `workspace/verification/latest/` | Global aggregate evidence and compatibility aliases |
-| `workspace/verification/latest/families/{family}/` | Family-scoped promoted evidence |
-| `workspace/pr-dry-run/` | Dry-run PR packages |
-| `workspace/verification/agent-metrics-post-ledger.jsonl` | Metrics post ledger |
-| `workspace/verification/latest/open-taskcard-closure-matrix.json` | Authoritative taskcard matrix JSON |
-| `docs/development/open-taskcard-closure-matrix.md` | Generated taskcard markdown view |
-| `pipeline/schemas/*.schema.json` | JSON schemas |
-| `pipeline/contracts/**/*.json` | Scenario contracts |
-| `reports/` | Generated/historical evidence and reports, not canonical operating docs |
+| Path | Role | Code evidence |
+|---|---|---|
+| `pipeline/configs/families/*.yml` | Family input configs. | `family_config/loader.py`, schema |
+| `pipeline/configs/denominators/*.json` | Denominator and catalog hash authority. | `runner.py`, `gates/completeness_gate.py`, `publisher/release_status.py` |
+| `pipeline/schemas/*.schema.json` | JSON schemas for family config, catalog, scenario, scenario packet, manifest, denominator, validation result. | `pipeline/schemas/`, validators |
+| `pipeline/format-authority/contracts/*.json` | Format contracts for products/families. | `format_authority/contracts.py` |
+| `pipeline/prompts/*.md` | Prompt templates. | `generator/packet_builder.py`, `generator/code_generator.py` |
+| `workspace/runs/{run_id}/` | Canonical run workspace. | `runner.py` |
+| `workspace/runs/{run_id}/evidence/latest/` | Canonical run-scoped evidence files. | `runner.py`, stage writers |
+| `workspace/runs/{run_id}/pilot-report.json` | Structured run report. | `runner.py` |
+| `workspace/manifests/` | Promoted manifests such as `package-lock.json`, `fixture-registry.json`, `existing-examples-index.json`, `scenario-catalog.json`, `example-index.json`. | `runner.py`, `nuget_fetcher/dependency_resolver.py`, `fixture_registry/registry.py`, `example_miner/miner.py`, `scenario_planner/scenario_catalog.py` |
+| `workspace/verification/latest/families/{family}/` | Family-scoped promoted evidence, preferred path. | `evidence_layout.py` |
+| `workspace/verification/latest/` | Global and legacy compatibility evidence path. | `runner.py`, `evidence_layout.py` |
+| `workspace/pr-dry-run/` | Dry-run publication package area. | `publisher/batch_publisher.py`, `publisher/readme_inventory.py`, `evidence_contract.py` |
+| `reports/` | Sprint/system qualification/report bundles and generated-source artifacts. | `scripts/build_*`, `evidence_validator.py`, `reports/*` |
+
+Important evidence filenames written by code include:
+
+- `api-delta.json`
+- `impact-report.json`
+- `fixture-registry.json`
+- `existing-examples-index.json`
+- `stale-examples-report.json`
+- `scenario-catalog.json`
+- `blocked-scenarios.json`
+- `catalog-hash-validation.json`
+- `fixture-strategy-plan.json`
+- `scenario-input-format-map.json`
+- `llm-preflight.json`
+- `example-index.json`
+- `generated-fixtures.json`
+- `validation-results.json`
+- `output-validation.json`
+- `reviewer-preflight.json`
+- `reviewer-results.json`
+- `publishing-report.json`
+- `example-gate-results.json`
+- `aggregate-gate-results.json`
+- `scenario-feedback.json`
+- `pr-candidate-manifest.json`
+- `gate-results.json`
+- `example-lifecycle.json`
 
 ## Observability
 
 Logging:
 
-- Modules use `logging.getLogger(__name__)`, including `runner`, config loader, and LLM router.
-- CLI global `--verbose` exists at `src/plugin_examples/__main__.py:98`.
+- Modules create loggers with `logging.getLogger(__name__)`.
+- CLI configures logging with `logging.basicConfig(level=logging.DEBUG)` when `--verbose` is passed, otherwise INFO.
+- Stage failures are logged in `_run_stage` in `src/plugin_examples/runner.py`.
 
-Structured evidence:
+Metrics:
 
-- Run reports and evidence are written by `runner.py`.
-- Gate files are written by `src/plugin_examples/gates/`.
-- Metrics evidence files are written by `src/plugin_examples/metrics/evidence.py`.
-- Metrics duplicate POST ledger is managed by `src/plugin_examples/metrics/poster.py`.
+- Metrics are opt-in by CLI flags or `AGENT_METRICS_ENABLED=true`.
+- Metrics evidence dir is created at `workspace/runs/metrics-{command}-{family|global}-{timestamp}/evidence` for non-run command sessions.
+- Metrics posting uses `src/plugin_examples/metrics/poster.py`; ledger path defaults to `workspace/verification/agent-metrics-post-ledger.jsonl`.
 
-Retry/backoff:
+Evidence:
 
-- LLM retry delays are `[30, 60]` seconds: `src/plugin_examples/llm_router/router.py:18`.
-- LLM transient failures use backoff in provider call paths: `src/plugin_examples/llm_router/router.py:362`, `src/plugin_examples/llm_router/router.py:445`.
+- Most operational observability is file-based evidence under `workspace/runs/{run_id}/evidence/latest/` and promoted `workspace/verification/latest/`.
+- Output validation and runtime failure classification are written by `verifier_bridge/output_validator.py` and `scenario_planner/runtime_feedback.py`.
+
+## Error Handling and Retry/Backoff
+
+Pipeline stage errors:
+
+- `_run_stage` catches exceptions, records `StageResult(status="failed", error=str(e))`, and logs the failure.
+- `run_pipeline` hard-stops only stages listed in `HARD_STOP_STAGES`; optional LLM/validation/reviewer failures can degrade depending on flags.
+
+LLM retries:
+
+- `_LLM_RETRY_BACKOFF_SECONDS = [30, 60]`.
+- `_LLM_MAX_RETRIES = 2`.
+- `_call_ollama` and `_call_openai_compatible` retry on timeout/connection errors and record metrics when a collector is present.
+
+Dotnet runner:
+
+- `run_dotnet_validation` stops after restore failure, then build failure, then run failure.
+- `_run_dotnet` handles `subprocess.TimeoutExpired` and `FileNotFoundError`.
+
+Publishing:
+
+- Live publishing requires both `GITHUB_TOKEN` and approval token.
+- Dry-run paths are used when live publish is not requested or blocked.
+- Central/shared repo publishing is blocked unless `central_repo_allowed` is explicit.
 
 ## Testing Strategy
 
 Test runner:
 
-- `pyproject.toml` configures `testpaths = ["tests"]` and timeout `30`.
-- CI workflow runs unit tests with `PYTHONPATH=src python -m pytest tests/unit -v --timeout=60`.
+- `pyproject.toml` configures pytest with `testpaths = ["tests"]` and timeout 30.
+- There are 101 unit test files under `tests/unit/`.
 
-Test coverage areas visible from test filenames:
+Command:
 
-- CLI and runner: `test_cli_defaults.py`, `test_runner.py`, `test_runner_contract_evidence.py`
-- Config and denominators: `test_family_config.py`, `test_denominator_model.py`
-- NuGet/extraction/reflection: `test_nuget_fetcher.py`, `test_dependency_resolver.py`, `test_nupkg_extractor.py`, `test_reflection_catalog.py`
-- Scenario planning/contracts: `test_scenario_planner.py`, `test_scenario_contracts.py`, `test_planner_contract_consumption.py`
-- Generation/validation/reviewer: `test_llm_generation.py`, `test_codegen_contract_consumption.py`, `test_validation.py`, `test_gate_output_validation.py`, `test_reviewer_repair_loop.py`
-- Publishing/GitHub/merge: `test_publishing.py`, `test_publishing_approval_gate.py`, `test_real_github_publisher.py`, `test_merge_governance.py`
-- README publishing: `test_readme_renderer.py`, `test_readme_audit_gate.py`, `test_publish_pr_readme_gate.py`
-- Metrics: `test_agent_metrics_*.py`, `test_metrics_collector.py`
-- Docs path governance: `test_sync_taskcard_docs.py`, `test_ci_runbook_hardening.py`, `test_token_policy.py`, `test_fixture_strategy.py`
+```powershell
+python -m pytest
+```
+
+Focused test surfaces:
+
+| Area | Evidence tests |
+|---|---|
+| CLI defaults and publish flag semantics | `tests/unit/test_cli_defaults.py` |
+| Pipeline stage hard stops, tier limits, report fields, replay/drift | `tests/unit/test_runner.py`, `test_runner_contract_evidence.py`, `test_replay.py`, `test_run_to_run_comparison.py` |
+| Family config schema/defaults | `tests/unit/test_family_config.py` |
+| LLM router/provider policy/preflight | `tests/unit/test_llm_router_preflight.py`, `test_provider_policy.py`, `test_llm_generation.py` |
+| NuGet/extraction/reflection | `test_nuget_fetcher.py`, `test_nupkg_extractor.py`, `test_nupkg_extractor_dll_fallback.py`, `test_reflection_catalog.py` |
+| Planner/scenario contracts | `test_scenario_planner.py`, `test_scenario_contracts.py`, `test_planner_contract_consumption.py` |
+| Gates/verdicts/lifecycle | `test_gates.py`, `test_gate_contract_validation.py`, `test_example_lifecycle.py`, `test_partial_success_partitioning.py` |
+| Validation/output reviewer | `test_validation.py`, `test_gate_output_validation.py`, `test_reviewer_repair_loop.py`, `test_words_readiness_review.py` |
+| Publishing/GitHub/readme | `test_publishing.py`, `test_real_github_publisher.py`, `test_publish_pr_readme_gate.py`, `test_readme_*`, `test_merge_governance.py` |
+| Metrics | `test_agent_metrics_*.py`, `test_metrics_collector.py` |
+| Evidence/contracts | `test_evidence_validator.py`, `test_evidence_contract.py`, `test_evidence_completeness.py` |
+
+No tests were run during this audit; this artifact is an analysis deliverable only.
 
 ## Known Gaps/Risks
 
-1. LLM endpoint governance is not enforced fail-closed in code. Router defaults still include OpenAI/local URLs and `ollama` remains in `_APPROVED_PROVIDER_FAMILIES`: `src/plugin_examples/llm_router/router.py:237`, `src/plugin_examples/llm_router/router.py:247`, `src/plugin_examples/llm_router/router.py:297`, `src/plugin_examples/llm_router/router.py:319`.
-2. OpenAI/generic LLM fallbacks remain in code: `src/plugin_examples/llm_router/router.py:173-175`, `src/plugin_examples/llm_router/router.py:309-320`.
-3. GitHub token governance says `GH_TOKEN` is operator storage, but one target-repo health path falls back to `GH_TOKEN`: `src/plugin_examples/publisher/target_repo_health.py` (identified in prior audit and still relevant).
-4. Historical `_archive/` docs intentionally contain stale paths and prior procedures. They are not canonical, but search results can surface them unless operators start from `docs/README.md`.
-5. `check` is still a placeholder command surface: `src/plugin_examples/__main__.py:373-374`.
+Each item below is backed by code evidence.
+
+1. **LLM endpoint governance mismatch.** Governance requires only `https://llm.professionalize.com/v1/`; `src/plugin_examples/llm_router/router.py` still permits `ollama`, contains OpenAI/gpt_oss call branches, and has defaults to OpenAI or localhost URLs. Action: align router code, config, tests, and docs with the non-negotiable endpoint contract.
+2. **Docs root currently clean, but root-orphan policy needs a standing check.** `Get-ChildItem docs -File` found only `docs/README.md`. There is no code gate found that enforces this root hygiene contract. Action: add a docs hygiene check if policy should be enforced continuously.
+3. **CLI docs are at risk of drift.** CLI has many commands/flags in a single `__main__.py`; docs must be generated or checked against argparse definitions to stay current.
+4. **Evidence path compatibility can confuse operators.** `src/plugin_examples/evidence_layout.py` writes both family-scoped primary evidence and legacy top-level aliases. Docs need to steer humans and LLMs to `workspace/verification/latest/families/{family}/`.
+5. **Many report bundles exist under `reports/` and archived docs.** These are evidence/history, not active docs, but they can be mistaken for current guidance. Docs inventory should classify them as archive/report artifacts.
+6. **Main CLI module is large.** `src/plugin_examples/__main__.py` contains argparse setup and substantial command implementation logic; documentation extraction must target code symbols rather than prose summaries.
+7. **Generated code validation is partly rule-heavy and family-specific.** `src/plugin_examples/generator/code_generator.py` has extensive hardcoded PDF and constraints validation rules. Docs should avoid claiming generic behavior where code has family-specific checks.
+8. **Live publish token handling relies on environment setup.** Code reads `GITHUB_TOKEN`; repo governance says map `GH_TOKEN` to `GITHUB_TOKEN` before live commands. Docs should keep that operational distinction explicit.
+9. **Metrics config maps only some families.** `pipeline/configs/metrics.yml` maps `cells`, `words`, and `pdf`; many family configs exist. Docs should not imply all families are metrics-mapped unless code/config is expanded.
+10. **Reports and workspace outputs are extensive.** Evidence validators reference many report bundle contracts. Docs need a concise active path guide to prevent operators from using stale sprint artifacts as source of truth.

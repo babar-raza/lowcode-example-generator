@@ -1,0 +1,10 @@
+{
+  "family": "slides",
+  "package_name": "slides-controlled-pilot",
+  "package_id": "Aspose.Slides.NET",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-slides-repair-20260530/generated/slides",
+  "family_prefix": "slides",
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-slides-repair-20260530. 3 examples (slides-compress, slides-convert, slides-merger). E2E PASS."
+}

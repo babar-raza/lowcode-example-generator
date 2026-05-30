@@ -1,0 +1,10 @@
+{
+  "family": "cells",
+  "package_name": "cells-controlled-pilot",
+  "package_id": "Aspose.Cells",
+  "package_version": "25.5.0",
+  "source_run": "workspace/runs/pilot-cells-20260529-214911/generated/cells",
+  "family_prefix": "cells",
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-cells-20260529-214911. 9 examples, all E2E PASS (verified in durable-full-closure sprint)."
+}

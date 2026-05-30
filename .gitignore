@@ -69,3 +69,4 @@ reports/**/*.zip
 .DS_Store
 Thumbs.db
 /workspace
+*output*

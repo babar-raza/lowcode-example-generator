@@ -1,0 +1,295 @@
+{
+  "family": "words",
+  "package_id": "Aspose.Words",
+  "lowcode_types": [
+    {
+      "type_name": "Aspose.Words.LowCode.Comparer",
+      "methods": [
+        "Compare",
+        "CompareToImages",
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ComparerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Converter",
+      "methods": [
+        "Convert",
+        "ConvertToImages",
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ConverterContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MailMergeDataSource",
+      "methods": [
+        "Create",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MailMergeOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MailMerger",
+      "methods": [
+        "Create",
+        "Equals",
+        "Execute",
+        "ExecuteToImages",
+        "ExecuteWithRegions",
+        "ExecuteWithRegionsToImages",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MailMergerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "SetRegionsDataSource",
+        "SetSimpleDataSource",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MergeFormatMode",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Merger",
+      "methods": [
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "Merge",
+        "MergeToImages",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.MergerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Processor",
+      "methods": [
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ProcessorContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Replacer",
+      "methods": [
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "Replace",
+        "ReplaceToImages",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ReplacerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "SetReplacement",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ReportBuilder",
+      "methods": [
+        "BuildReport",
+        "BuildReportToImages",
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ReportBuilderContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.SignerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.SplitCriteria",
+      "methods": [
+        "CompareTo",
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "GetTypeCode",
+        "HasFlag",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.SplitOptions",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Splitter",
+      "methods": [
+        "Create",
+        "Equals",
+        "Execute",
+        "ExtractPages",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "RemoveBlankPages",
+        "Split",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.SplitterContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.Watermarker",
+      "methods": [
+        "Create",
+        "Equals",
+        "Execute",
+        "From",
+        "GetHashCode",
+        "GetType",
+        "SetImage",
+        "SetText",
+        "SetWatermarkToImages",
+        "To",
+        "ToString"
+      ]
+    },
+    {
+      "type_name": "Aspose.Words.LowCode.WatermarkerContext",
+      "methods": [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+        "ToString"
+      ]
+    }
+  ]
+}

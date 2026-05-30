@@ -1,0 +1,10 @@
+{
+  "family": "diagram",
+  "package_name": "diagram-controlled-pilot",
+  "package_id": "Aspose.Diagram",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-diagram-20260529-221021/generated/diagram",
+  "family_prefix": "diagram",
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-diagram-20260529-221021. 2 examples (diagram-converter, pdf-converter). E2E PASS."
+}

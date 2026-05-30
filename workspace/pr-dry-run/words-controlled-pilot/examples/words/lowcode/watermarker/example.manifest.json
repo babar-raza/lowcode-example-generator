@@ -39,15 +39,15 @@
     "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages",
     "Aspose.Words.LowCode.Watermarker.SetWatermarkToImages"
   ],
-  "status": "generated",
+  "status": "generated_template_first",
   "input_strategy": "generated_fixture_file",
   "input_files": [
     "input.docx"
   ],
   "input_format": ".docx",
-  "output_format": ".docx",
+  "output_format": null,
   "operation_kind": "transform",
-  "expected_output_extension": ".docx",
+  "expected_output_extension": null,
   "contract_input_format": ".docx",
   "contract_output_format": ".docx",
   "contract_operation_kind": "transform",

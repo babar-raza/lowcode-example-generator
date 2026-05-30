@@ -16,8 +16,6 @@ namespace PluginExample
 
             // Demonstrate Replacer.Replace
             Replacer.Replace(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.docx", "sample", "sample");
-            // ReplaceToImages — no suitable overload found in catalog
-            // Create — no suitable overload found in catalog
 
             Console.WriteLine("Done.");
         }

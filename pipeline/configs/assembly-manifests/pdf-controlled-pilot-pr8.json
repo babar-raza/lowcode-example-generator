@@ -1,0 +1,14 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr8",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf",
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-form-editor",
+    "pdf-form-exporter"
+  ],
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-pdf-repair-20260530. 2 form editing examples."
+}

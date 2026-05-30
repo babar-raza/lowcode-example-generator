@@ -1,0 +1,14 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr7",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf",
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-form-flattener",
+    "pdf-security"
+  ],
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-pdf-repair-20260530. 2 form/security examples."
+}

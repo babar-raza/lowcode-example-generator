@@ -1,0 +1,47 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "lane": "D1+D2 — Packaging completion summary",
+  "generated_at": "2026-05-30",
+  "prior_sprint_manifests": 6,
+  "this_sprint_manifests_added": 7,
+  "total_manifests": 13,
+  "manifest_files": [
+    "pipeline/configs/assembly-manifests/cells-controlled-pilot.json",
+    "pipeline/configs/assembly-manifests/diagram-controlled-pilot.json",
+    "pipeline/configs/assembly-manifests/email-controlled-pilot.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr5.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr6.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr7.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr8.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr9.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr10.json",
+    "pipeline/configs/assembly-manifests/pdf-controlled-pilot-pr11.json",
+    "pipeline/configs/assembly-manifests/slides-controlled-pilot.json",
+    "pipeline/configs/assembly-manifests/words-controlled-pilot.json"
+  ],
+  "canonical_packager": "scripts/canonical_packager.py",
+  "canonical_coverage": {
+    "packages_with_valid_source_run": 12,
+    "packages_with_null_source_run": 1,
+    "null_source_run_package": "pdf-controlled-pilot-pr11 (timestamp — WORKSPACE_RUN_COPY)"
+  },
+  "idempotency_verified": {
+    "packages_tested": 6,
+    "packages_pass": 6,
+    "verdict": "IDEMPOTENCY_PROVEN",
+    "total_files_verified": 246,
+    "note": "246 source files across 6 packages all SHA-identical across A/B runs"
+  },
+  "duplicate_resolution": {
+    "raw_csproj_count": 47,
+    "duplicates_identified": 4,
+    "canonical_count": 42,
+    "duplicate_slugs_dropped": ["email-converter", "slides-compress", "slides-convert", "slides-merger"]
+  },
+  "defect_fixed": {
+    "SD-002": "7 missing PDF manifests: RESOLVED — all 13 packages now have manifests",
+    "SD-003": "Duplicate examples: DOCUMENTED — canonical count = 42, 4 duplicate slugs identified",
+    "SD-006": "Idempotency: EXTENDED — all 6 LOWCODE families proven SHA-identical"
+  }
+}

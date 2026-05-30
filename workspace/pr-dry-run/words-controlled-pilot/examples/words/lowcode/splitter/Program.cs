@@ -14,10 +14,8 @@ namespace PluginExample
             // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
 
-            // ExtractPages — no suitable overload found in catalog
             // Demonstrate Splitter.RemoveBlankPages
             Splitter.RemoveBlankPages(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.docx");
-            // Split — no suitable overload found in catalog
 
             Console.WriteLine("Done.");
         }

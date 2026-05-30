@@ -1,0 +1,134 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "prior_sprint_id": "lowcode-systemization-26family-20260530",
+  "prior_verdict": "PARTIAL_SYSTEMIZATION_PROGRESS_ACCEPTED_REPEATABLE_SYSTEM_CLOSURE_REJECTED",
+  "generated_at": "2026-05-30",
+  "accepted_claims": [
+    {
+      "id": "AC-001",
+      "claim": "26-family universe correctly classified (6 LOWCODE, 19 NO_LOWCODE, 1 EXTERNAL_PACKAGE_BLOCKER)",
+      "evidence": "reports/lowcode-systemization-26family-20260530/universe/family-authority-26.json",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-002",
+      "claim": "G1 semantic output validation: 47/47 PASS (all examples produce non-empty output files)",
+      "evidence": "reports/lowcode-systemization-26family-20260530/g1-semantic-output/run-results.json",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-003",
+      "claim": "I1 fallback reviewer: 47/47 PASS (deterministic, no LLM dependency)",
+      "evidence": "reports/lowcode-systemization-26family-20260530/reviewer/fallback-reviewer-results.json",
+      "carry_forward": false,
+      "note": "Re-run with upgraded reviewer in this sprint"
+    },
+    {
+      "id": "AC-004",
+      "claim": "J2 pytest: 3218 passed, 18 skipped, 0 failed (3236 collected)",
+      "evidence": "reports/lowcode-systemization-26family-20260530/pytest/pytest-summary.json",
+      "carry_forward": false,
+      "note": "Re-run in this sprint to confirm baseline holds"
+    },
+    {
+      "id": "AC-005",
+      "claim": "Canonical packager script created (scripts/canonical_packager.py) driven by JSON manifests",
+      "evidence": "scripts/canonical_packager.py",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-006",
+      "claim": "6 assembly manifests created for 6 LOWCODE families",
+      "evidence": "pipeline/configs/assembly-manifests/ (cells, diagram, email, pdf-controlled-pilot-pr10, slides, words)",
+      "carry_forward": true,
+      "note": "Extended with 7 missing PDF manifests in this sprint"
+    },
+    {
+      "id": "AC-007",
+      "claim": "Words MailMerger stub repaired (DEF-005): real Execute() produces 18109-byte output",
+      "evidence": "reports/lowcode-systemization-26family-20260530/g1-semantic-output/run-results.json",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-008",
+      "claim": "Processor (Words) PERMANENTLY_BLOCKED: From() is instance method, no public constructor",
+      "evidence": "reports/lowcode-systemization-26family-20260530/coverage/words-main-class-coverage.json",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-009",
+      "claim": "FormImporter EXTERNAL_BUG_BLOCKER: NullReferenceException in Aspose.PDF library",
+      "evidence": "reports/lowcode-systemization-26family-20260530/coverage/pdf-main-class-coverage.json",
+      "carry_forward": true
+    },
+    {
+      "id": "AC-010",
+      "claim": "Slides package corrected: Aspose.Slides.NET (not Aspose.Slides)",
+      "evidence": "pipeline/configs/assembly-manifests/slides-controlled-pilot.json",
+      "carry_forward": true
+    }
+  ],
+  "rejected_claims": [
+    {
+      "id": "RC-001",
+      "claim": "Canonical packaging covers all 47 examples",
+      "rejection_reason": "Assembly manifests only exist for 6 of 13 packages. 7 PDF subpackages (pr5, pr6, pr7, pr8, pr9, pr11, plus pdf-controlled-pilot) have no manifest.",
+      "fix_lane": "D1",
+      "fix_action": "Create 7 missing PDF assembly manifests"
+    },
+    {
+      "id": "RC-002",
+      "claim": "Assembly manifests reflect actual source run paths",
+      "rejection_reason": "Manifests hardcode run paths from a specific prior run. Paths not verified against current workspace state.",
+      "fix_lane": "D1",
+      "fix_action": "Verify and update all manifest source paths against current workspace"
+    },
+    {
+      "id": "RC-003",
+      "claim": "Idempotency proven across multiple families",
+      "rejection_reason": "Prior idempotency proof covered only Words family from a fixed source run. Not multi-family.",
+      "fix_lane": "E1/E2",
+      "fix_action": "Run A/B idempotency for all 6 LOWCODE families"
+    },
+    {
+      "id": "RC-004",
+      "claim": "26-family universe evidence is complete with real restore data",
+      "rejection_reason": "16 restore logs are zero bytes. Reflection raw missing for 9 families (cells, words, pdf, diagram, slides, email, epub, ocr, psd).",
+      "fix_lane": "B1",
+      "fix_action": "Run real dotnet restore for all 26 families; generate reflection raw for missing families"
+    },
+    {
+      "id": "RC-005",
+      "claim": "Publication counts match package contents",
+      "rejection_reason": "Email readiness says 1 example but package has 2 (converter + email-converter duplicate). Slides readiness says 3 but package has 6 (3 duplicates: slides-compress/convert/merger).",
+      "fix_lane": "D2",
+      "fix_action": "Resolve duplicates; establish canonical count = 43"
+    },
+    {
+      "id": "RC-006",
+      "claim": "Main-class coverage is complete",
+      "rejection_reason": "PDF gaps remain. Not all main classes accounted for.",
+      "fix_lane": "F1/F2",
+      "fix_action": "Complete per-class verification for all 6 families; document all gaps with rationale"
+    },
+    {
+      "id": "RC-007",
+      "claim": "No forbidden comments in publication candidates",
+      "rejection_reason": "'no suitable overload found' comments may remain in workspace/pr-dry-run Program.cs files. Not scanned in prior sprint.",
+      "fix_lane": "G1/G2",
+      "fix_action": "Scan all Program.cs files; fix any found instances"
+    },
+    {
+      "id": "RC-008",
+      "claim": "Artifact metadata (SHA/size/entries) matches actual ZIP",
+      "rejection_reason": "Build script writes tmp ZIP SHA to metadata, then builds final ZIP with metadata included — SHA changes. Recorded: 892577.../207,051 bytes/247 entries. Actual: b0aaca17.../212,091 bytes/251 entries.",
+      "fix_lane": "K1",
+      "fix_action": "Fix build script to compute final SHA after all files are included"
+    }
+  ],
+  "summary": {
+    "accepted_count": 10,
+    "rejected_count": 8,
+    "fix_lanes": ["B1", "C1", "D1", "D2", "E1", "E2", "F1", "F2", "G1", "G2", "K1"]
+  }
+}

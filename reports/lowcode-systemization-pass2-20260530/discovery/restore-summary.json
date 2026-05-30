@@ -1,0 +1,192 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "lane": "B1 \u2014 Universe evidence repair: real dotnet restore",
+  "total_families": 26,
+  "success": 25,
+  "external_package_blocker": 1,
+  "failed": 0,
+  "families": {
+    "barcode": {
+      "package": "Aspose.BarCode",
+      "status": "success",
+      "log_bytes": 2684,
+      "expected": "success",
+      "match": true
+    },
+    "cad": {
+      "package": "Aspose.CAD",
+      "status": "success",
+      "log_bytes": 2316,
+      "expected": "success",
+      "match": true
+    },
+    "cells": {
+      "package": "Aspose.Cells",
+      "status": "success",
+      "log_bytes": 2349,
+      "expected": "success",
+      "match": true
+    },
+    "diagram": {
+      "package": "Aspose.Diagram",
+      "status": "success",
+      "log_bytes": 2382,
+      "expected": "success",
+      "match": true
+    },
+    "drawing": {
+      "package": "Aspose.Drawing",
+      "status": "success",
+      "log_bytes": 2383,
+      "expected": "success",
+      "match": true
+    },
+    "email": {
+      "package": "Aspose.Email",
+      "status": "success",
+      "log_bytes": 2349,
+      "expected": "success",
+      "match": true
+    },
+    "epub": {
+      "package": null,
+      "status": "EXTERNAL_PACKAGE_BLOCKER",
+      "log_bytes": 2971,
+      "expected": "external_package_blocker",
+      "match": true
+    },
+    "finance": {
+      "package": "Aspose.Finance",
+      "status": "success",
+      "log_bytes": 2383,
+      "expected": "success",
+      "match": true
+    },
+    "font": {
+      "package": "Aspose.Font",
+      "status": "success",
+      "log_bytes": 2332,
+      "expected": "success",
+      "match": true
+    },
+    "gis": {
+      "package": "Aspose.GIS",
+      "status": "success",
+      "log_bytes": 2316,
+      "expected": "success",
+      "match": true
+    },
+    "html": {
+      "package": "Aspose.HTML",
+      "status": "success",
+      "log_bytes": 2332,
+      "expected": "success",
+      "match": true
+    },
+    "imaging": {
+      "package": "Aspose.Imaging",
+      "status": "success",
+      "log_bytes": 2383,
+      "expected": "success",
+      "match": true
+    },
+    "note": {
+      "package": "Aspose.Note",
+      "status": "success",
+      "log_bytes": 2332,
+      "expected": "success",
+      "match": true
+    },
+    "ocr": {
+      "package": "Aspose.OCR",
+      "status": "success",
+      "log_bytes": 2316,
+      "expected": "success",
+      "match": true
+    },
+    "omr": {
+      "package": "Aspose.OMR",
+      "status": "success",
+      "log_bytes": 2315,
+      "expected": "success",
+      "match": true
+    },
+    "page": {
+      "package": "Aspose.Page",
+      "status": "success",
+      "log_bytes": 2331,
+      "expected": "success",
+      "match": true
+    },
+    "pdf": {
+      "package": "Aspose.PDF",
+      "status": "success",
+      "log_bytes": 2315,
+      "expected": "success",
+      "match": true
+    },
+    "psd": {
+      "package": "Aspose.PSD",
+      "status": "success",
+      "log_bytes": 2315,
+      "expected": "success",
+      "match": true
+    },
+    "pub": {
+      "package": "Aspose.PUB",
+      "status": "success",
+      "log_bytes": 2314,
+      "expected": "success",
+      "match": true
+    },
+    "slides": {
+      "package": "Aspose.Slides.NET",
+      "status": "success",
+      "log_bytes": 2378,
+      "expected": "success",
+      "match": true
+    },
+    "svg": {
+      "package": "Aspose.SVG",
+      "status": "success",
+      "log_bytes": 2315,
+      "expected": "success",
+      "match": true
+    },
+    "tasks": {
+      "package": "Aspose.Tasks",
+      "status": "success",
+      "log_bytes": 2348,
+      "expected": "success",
+      "match": true
+    },
+    "tex": {
+      "package": "Aspose.TeX",
+      "status": "success",
+      "log_bytes": 2313,
+      "expected": "success",
+      "match": true
+    },
+    "threed": {
+      "package": "Aspose.3D",
+      "status": "success",
+      "log_bytes": 2352,
+      "expected": "success",
+      "match": true
+    },
+    "words": {
+      "package": "Aspose.Words",
+      "status": "success",
+      "log_bytes": 2349,
+      "expected": "success",
+      "match": true
+    },
+    "zip": {
+      "package": "Aspose.Zip",
+      "status": "success",
+      "log_bytes": 2315,
+      "expected": "success",
+      "match": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+Git state at sprint start — lowcode-systemization-pass2-20260530
+Generated: 2026-05-30
+
+== HEAD ==
+2693151 fix(build-zip): fix clean-tree check to handle git status leading space parsing
+
+== git log --oneline -10 ==
+2693151 fix(build-zip): fix clean-tree check to handle git status leading space parsing
+c28f6a8 fix(build-zip): exclude pre-existing binary build artifacts from clean-tree check
+69778c5 feat(systemization-26family): repeatable systemization sprint — 12 lanes complete
+7f4e274 chore(pass4-multi-mega-train): add ZIP build script for artifact-staging convention
+b264c38 feat(pass4-multi-mega-train): 42/42 E2E pass, 25-product universe, full evidence bundle
+0340ed5 chore(multi-mega-train): add ZIP build script for artifact-staging convention
+1503cf8 feat(multi-mega-train): 12-lane sprint — 42/42 no-op free, 147 validators, 3218 pytest, all 6 families packaged
+29ef7a4 chore(pass3): add ZIP build script for artifact-staging convention
+e4b9b51 feat(pass3): LOWCODE FINAL CLOSURE PASS 3 — raw evidence, full pytest, strict replay, diagram promotion
+35005a6 chore(durable-full-closure): add ZIP build script for artifact-staging convention
+
+== git branch ==
+* main
+
+== Dirty state summary ==
+Modified tracked files: 30 (all workspace/pr-dry-run binary build artifacts — bin/Debug and obj/Debug)
+Untracked: 3 items (.kilo/, docs/development/open-taskcard-closure-matrix.md, reports/lowcode-systemization-pass2-20260530/)
+
+No modified tracked SOURCE files at sprint start.
+Binary artifacts are excluded per policy (tracked from prior sprints, rebuilt each run, not re-staged).

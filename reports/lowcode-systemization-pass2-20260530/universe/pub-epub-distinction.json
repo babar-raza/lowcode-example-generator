@@ -1,0 +1,36 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "lane": "B2 — PUB/EPUB distinction",
+  "generated_at": "2026-05-30",
+  "products": {
+    "Aspose.PUB": {
+      "nuget_package": "Aspose.PUB",
+      "description": "Microsoft Publisher (.pub) file format processing",
+      "nuget_available": true,
+      "restore_status": "success",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "version_tested": "25.12.0",
+      "lowcode_namespace": false,
+      "note": "Aspose.PUB is a real NuGet package for MS Publisher files. Added to 26-family universe in this sprint."
+    },
+    "Aspose.Epub": {
+      "nuget_package": "N/A",
+      "description": "EPUB e-book format (rumored product)",
+      "nuget_available": false,
+      "restore_status": "EXTERNAL_PACKAGE_BLOCKER",
+      "classification": "EXTERNAL_PACKAGE_BLOCKER",
+      "version_tested": null,
+      "lowcode_namespace": false,
+      "note": "No standalone 'Aspose.Epub' NuGet package exists on nuget.org. Attempting restore gives NU1101: Unable to find package Aspose.Epub. EPUB functionality may be part of another Aspose product (e.g. Aspose.Words or Aspose.HTML) but is not a standalone SDK."
+    }
+  },
+  "distinction": {
+    "Aspose.PUB": "REAL_PRODUCT — restores successfully, 2320 types, NO_LOWCODE_CONFIRMED",
+    "Aspose.Epub": "EXTERNAL_PACKAGE_BLOCKER — no NuGet package, NU1101 error on restore attempt"
+  },
+  "impact_on_universe": {
+    "pub_included_in_26_family": true,
+    "epub_included_in_26_family": true,
+    "epub_classification": "EXTERNAL_PACKAGE_BLOCKER — excluded from example generation"
+  }
+}

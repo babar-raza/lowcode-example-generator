@@ -1,0 +1,14 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr11",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": null,
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-timestamp"
+  ],
+  "verify_build": true,
+  "provenance_note": "PROVENANCE_NOTE: timestamp example has no workspace/runs source. Assembled directly into pr-dry-run. Source is workspace/pr-dry-run/pdf-controlled-pilot-pr11/examples/pdf/lowcode/timestamp/. Classification: WORKSPACE_RUN_COPY. Note: canonical_packager cannot drive this manifest from source_run (null) — requires manual assembly or source run generation.",
+  "provenance_classification": "WORKSPACE_RUN_COPY"
+}

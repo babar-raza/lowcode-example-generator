@@ -1,0 +1,13 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "generated_at": "2026-05-30",
+  "note": "Index of all commands run in this sprint. Detailed output in raw-commands.log.",
+  "lanes": {
+    "A0": ["git log", "git status", "dotnet --version", "python --version"],
+    "B1": ["dotnet restore (probe csproj per family, 25 families)"],
+    "E1": ["canonical_packager.py (A run)", "canonical_packager.py (B run)", "sha256sum comparison"],
+    "G1": ["grep for 'no suitable overload found' across workspace/pr-dry-run Program.cs files"],
+    "J2": [".venv/Scripts/python.exe -m pytest tests/ -v --tb=short"],
+    "K1": ["scripts/build_systemization_pass2_zip.py"]
+  }
+}

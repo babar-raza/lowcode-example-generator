@@ -1,0 +1,50 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "lane": "L1-L4 — Work-ahead lanes",
+  "generated_at": "2026-05-30",
+  "lanes": {
+    "L1_ofd_fixture": {
+      "status": "DOCUMENTED",
+      "blocker": "OFD format (Open Fixed-layout Document) requires a real .ofd input file. No open-source OFD fixture file available.",
+      "example": "pdf-controlled-pilot-pr11 timestamp / ofd reader (if ever created)",
+      "resolution_path": "Acquire OFD fixture file from a Chinese government source or generate one programmatically. Blocked on fixture availability.",
+      "verdict": "FIXTURE_BLOCKER_DOCUMENTED"
+    },
+    "L2_formimporter_bug_packet": {
+      "status": "DOCUMENTED",
+      "blocker": "Aspose.PDF.LowCode.FormImporter throws NullReferenceException when called with any input. This is a library defect.",
+      "api": "Aspose.Pdf.LowCode.FormImporter",
+      "repro": "FormImporter.Import(inputPath, outputPath) → System.NullReferenceException at Aspose.Pdf.LowCode.FormImporter.Import()",
+      "resolution_path": "Report bug to Aspose.PDF team with repro case. Monitor fix in future package versions.",
+      "verdict": "EXTERNAL_BUG_BLOCKER_DOCUMENTED"
+    },
+    "L3_timestamp_policy": {
+      "status": "DOCUMENTED",
+      "issue": "pdf-controlled-pilot-pr11/timestamp requires a live TSA (Timestamp Authority) server URL (http://timestamp.digicert.com). This is a network dependency that may fail in isolated environments.",
+      "resolution_path": "For CI/CD: mock the TSA call or use a local TSA server. For publication: document the network requirement in README.",
+      "verdict": "NETWORK_DEPENDENCY_DOCUMENTED"
+    },
+    "L4_pr_prep": {
+      "status": "READY_PENDING_APPROVAL",
+      "pr_branches": [
+        "lowcode-examples-cells-readme-io-final",
+        "lowcode-examples-words-readme-io-final",
+        "lowcode-examples-pdf-readme-io-final",
+        "lowcode-examples-diagram-readme-io-final",
+        "lowcode-examples-email-readme-io-final",
+        "lowcode-examples-slides-readme-io-final"
+      ],
+      "destination_repos": [
+        "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+        "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+        "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+        "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+        "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+        "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"
+      ],
+      "gate_required": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+      "gh_token_status": "PRESENT (41 chars)",
+      "verdict": "READY_PENDING_APPROVAL_GATE"
+    }
+  }
+}

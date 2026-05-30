@@ -1,0 +1,15 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr5",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf",
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-jpeg",
+    "pdf-png",
+    "pdf-tiff"
+  ],
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-pdf-repair-20260530. 3 image conversion examples."
+}

@@ -16,7 +16,6 @@ namespace PluginExample
 
             // Demonstrate Converter.Convert
             Converter.Convert(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.pdf");
-            // ConvertToImages — no suitable overload found in catalog
             // Demonstrate Converter.Create
             Converter.Create();
 

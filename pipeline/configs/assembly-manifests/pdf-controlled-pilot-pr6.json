@@ -1,0 +1,15 @@
+{
+  "family": "pdf",
+  "package_name": "pdf-controlled-pilot-pr6",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "source_run": "workspace/runs/pilot-pdf-repair-20260530/generated/pdf",
+  "family_prefix": "pdf",
+  "examples": [
+    "pdf-image-extractor",
+    "pdf-table-generator",
+    "pdf-toc-generator"
+  ],
+  "verify_build": true,
+  "provenance_note": "Source run: pilot-pdf-repair-20260530. 3 extraction/generation examples."
+}

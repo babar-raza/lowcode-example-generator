@@ -1,0 +1,78 @@
+{
+  "sprint_id": "lowcode-systemization-pass2-20260530",
+  "lane": "E1/E2 \u2014 A/B idempotency proof across 6 LOWCODE families",
+  "generated_at": "2026-05-30",
+  "packages_tested": 6,
+  "pass": 6,
+  "skip": 0,
+  "fail": 0,
+  "verdict": "IDEMPOTENCY_PROVEN",
+  "results": {
+    "cells-controlled-pilot": {
+      "status": "PASS",
+      "total_source_files": 61,
+      "sha_identical": 61,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    },
+    "diagram-controlled-pilot": {
+      "status": "PASS",
+      "total_source_files": 18,
+      "sha_identical": 18,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    },
+    "email-controlled-pilot": {
+      "status": "PASS",
+      "total_source_files": 16,
+      "sha_identical": 16,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    },
+    "slides-controlled-pilot": {
+      "status": "PASS",
+      "total_source_files": 45,
+      "sha_identical": 45,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    },
+    "words-controlled-pilot": {
+      "status": "PASS",
+      "total_source_files": 66,
+      "sha_identical": 66,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    },
+    "pdf-controlled-pilot-pr10": {
+      "status": "PASS",
+      "total_source_files": 40,
+      "sha_identical": 40,
+      "sha_mismatches": 0,
+      "only_in_a": [],
+      "only_in_b": [],
+      "mismatch_files": [],
+      "run_a_rc": 0,
+      "run_b_rc": 0
+    }
+  }
+}

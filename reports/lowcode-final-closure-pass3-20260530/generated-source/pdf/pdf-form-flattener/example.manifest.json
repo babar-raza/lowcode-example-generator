@@ -1,0 +1,24 @@
+{
+  "scenario_id": "pdf-form-flattener",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.FormFlattener",
+    "Aspose.Pdf.LowCode.FormFlattener.Process"
+  ],
+  "status": "generated_template_first",
+  "input_strategy": "programmatic_input",
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pdf",
+  "operation_kind": "form_processor",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "transform",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/FormFlattener",
+  "contract_hash": "36ccdb4ad1ca17d4"
+}

@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-words-20260529-221024\generated\words\words-replacer
+EXIT_CODE: 0
+DURATION_MS: 1720.7
+SUCCESS: True
+---STDOUT---
+  words-replacer -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-words-20260529-221024\generated\words\words-replacer\bin\Release\net8.0\words-replacer.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.32
+---STDERR---
+(empty)

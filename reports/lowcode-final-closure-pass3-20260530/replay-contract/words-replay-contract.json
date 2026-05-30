@@ -1,0 +1,39 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "family": "words",
+  "run_id": "pilot-words-20260529-221024",
+  "replay_mode": "--replay-from generation",
+  "contract_type": "STRICT_REPLAY_CONTRACT",
+  "claims": {
+    "catalog_hash": {
+      "hash": "db3ec3dda66504d98f3a0cac9b03397c723470afe528d06f712b2e2cf3bf7d03",
+      "denominator_match": true,
+      "note": "hash verified against denominator"
+    },
+    "generator_source": {
+      "file": "src/plugin_examples/generator/code_generator.py",
+      "sha256": "c9794cfba4c8304c40f88322c2464f64ac9641859ad8bba36a9b6d3f57e079eb",
+      "commit": "35005a6fec84cfc7578222d99414e6c7a02f2bc2",
+      "durable_fixes": [
+        "DEF-001",
+        "DEF-002",
+        "DEF-003",
+        "DEF-004",
+        "DEF-005",
+        "DEF-008",
+        "DEF-009"
+      ]
+    },
+    "generated_output": {
+      "examples": 8,
+      "hashes_match_ledger": true,
+      "mismatch": 0
+    },
+    "validation": {
+      "examples_pass": 8,
+      "examples_total": 8,
+      "method": "fresh dotnet restore/build/run via verifier_bridge"
+    }
+  },
+  "contract_verdict": "STRICT_REPLAY_CONTRACT_SATISFIED"
+}

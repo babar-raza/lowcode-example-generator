@@ -1,0 +1,23 @@
+{
+  "example_id": "cells-spreadsheet-locker",
+  "family": "cells",
+  "run_id": "pilot-cells-20260529-221017",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 989.4
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1526.9
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 2138.9
+  }
+}

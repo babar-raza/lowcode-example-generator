@@ -1,0 +1,27 @@
+{
+  "scenario_id": "cells-spreadsheet-converter",
+  "package_id": "Aspose.Cells",
+  "package_version": "26.5.1",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Cells.LowCode.SpreadsheetConverter",
+    "Aspose.Cells.LowCode.SpreadsheetConverter.Process",
+    "Aspose.Cells.LowCode.SpreadsheetConverter.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "input_format": ".xlsx",
+  "output_format": ".csv",
+  "operation_kind": "converter",
+  "expected_output_extension": ".csv",
+  "contract_input_format": ".xlsx",
+  "contract_output_format": ".csv",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "cells/SpreadsheetConverter",
+  "contract_hash": "dfccda6f5a4b48a6"
+}

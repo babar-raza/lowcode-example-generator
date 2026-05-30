@@ -1,0 +1,48 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "lane": "LANE 10",
+  "check_date": "2026-05-30",
+  "nuget_source": "https://api.nuget.org/v3/index.json",
+  "check_command": "dotnet package search '<package>' --source https://api.nuget.org/v3/index.json",
+
+  "blockers": [
+    {
+      "family": "epub",
+      "blocker_type": "PACKAGE_NOT_PUBLICLY_AVAILABLE",
+      "missing_package": "Aspose.Epub",
+      "nuget_search_query": "Aspose.Epub",
+      "nuget_result": "No 'Aspose.Epub' in results — only unrelated packages returned (Aspose.PDF, Aspose.HTML, etc.)",
+      "raw_log": "blockers/epub-raw-check.log",
+      "status": "EXTERNAL_BLOCKER_CONFIRMED",
+      "resolution": "Package not available on NuGet.org. Cannot be resolved with current pipeline capabilities.",
+      "changed_since_prior_sprint": false
+    },
+    {
+      "family": "ocr",
+      "blocker_type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+      "missing_package": "Aspose.AI.LLM",
+      "nuget_search_query": "Aspose.AI.LLM",
+      "nuget_result": "No 'Aspose.AI.LLM' in results — only Aspose.Cells.AI, Aspose.LLM, GroupDocs.Markdown returned",
+      "raw_log": "blockers/ocr-raw-check.log",
+      "status": "EXTERNAL_BLOCKER_CONFIRMED",
+      "resolution": "Internal Aspose assembly not on NuGet.org. Cannot be resolved with current pipeline capabilities.",
+      "changed_since_prior_sprint": false,
+      "note": "OCR runtime requires Aspose.AI.LLM as a dependency. Aspose.Drawing.Common downloaded successfully via extra_packages fix, but Aspose.AI.LLM blocks further resolution."
+    },
+    {
+      "family": "psd",
+      "blocker_type": "MISSING_INTERNAL_ASSEMBLY_NOT_ON_NUGET",
+      "missing_package": "Aspose.JavaAttributes",
+      "nuget_search_query": "Aspose.JavaAttributes",
+      "nuget_result": "No results found.",
+      "raw_log": "blockers/psd-raw-check.log",
+      "status": "EXTERNAL_BLOCKER_CONFIRMED",
+      "resolution": "Internal Aspose assembly not on NuGet.org. Cannot be resolved with current pipeline capabilities.",
+      "changed_since_prior_sprint": false,
+      "note": "PSD runtime requires Aspose.JavaAttributes 1.0.0.0 as a dependency. Newtonsoft.Json downloaded via all_tfm_groups fix, but Aspose.JavaAttributes blocks further resolution."
+    }
+  ],
+
+  "overall_status": "ALL_3_EXTERNAL_BLOCKERS_CONFIRMED_UNCHANGED",
+  "conclusion": "epub/ocr/psd remain blocked by external NuGet package availability issues. These are true external blockers — not resolvable within the current pipeline. No change from prior sprints. The 42/42 validated examples and 41 PR candidates do NOT include any epub/ocr/psd examples (these families are excluded from scope)."
+}

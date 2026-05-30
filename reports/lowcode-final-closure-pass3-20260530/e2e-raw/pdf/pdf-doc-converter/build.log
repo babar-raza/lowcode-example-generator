@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-doc-converter
+EXIT_CODE: 0
+DURATION_MS: 2065.3
+SUCCESS: True
+---STDOUT---
+  pdf-doc-converter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-doc-converter\bin\Release\net8.0\pdf-doc-converter.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.60
+---STDERR---
+(empty)

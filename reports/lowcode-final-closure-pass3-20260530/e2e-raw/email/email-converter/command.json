@@ -1,0 +1,23 @@
+{
+  "example_id": "email-converter",
+  "family": "email",
+  "run_id": "pilot-email-20260529-220716",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 902.5
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1436.7
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1075.1
+  }
+}

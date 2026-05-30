@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-image-extractor
+EXIT_CODE: 0
+DURATION_MS: 2052.3
+SUCCESS: True
+---STDOUT---
+  pdf-image-extractor -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-image-extractor\bin\Release\net8.0\pdf-image-extractor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.66
+---STDERR---
+(empty)

@@ -1,0 +1,23 @@
+{
+  "example_id": "pdf-table-generator",
+  "family": "pdf",
+  "run_id": "pilot-pdf-20260529-222233",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1118.1
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 2084.1
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 2770.8
+  }
+}

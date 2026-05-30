@@ -1,0 +1,19 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "generated_at": "2026-05-30",
+  "test_command": ".venv/Scripts/python.exe -m pytest tests/ -v --tb=short --timeout=120",
+  "total_collected": 3227,
+  "passed": 3209,
+  "failed": 0,
+  "skipped": 18,
+  "subtests_passed": 10,
+  "duration_seconds": 302.69,
+  "exit_code": 0,
+  "verdict": "ALL_PASS",
+  "fix_applied": {
+    "test_file": "tests/unit/test_programmatic_fixture_fewshots.py",
+    "test_name": "TestProgrammaticFixtureGuidanceRegistry::test_diagram_required_patterns",
+    "issue": "Test asserted 'Aspose.Diagram.Diagram()' which is the OLD broken API pattern. DEF-004 replaced it with page.DrawEllipse(). Test updated to assert 'DrawEllipse' instead.",
+    "classification": "system_owned_test_defect_from_durable_fix_sprint"
+  }
+}

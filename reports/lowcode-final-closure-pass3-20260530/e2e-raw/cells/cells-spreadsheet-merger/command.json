@@ -1,0 +1,23 @@
+{
+  "example_id": "cells-spreadsheet-merger",
+  "family": "cells",
+  "run_id": "pilot-cells-20260529-221017",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1135.4
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1683.4
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 2167.6
+  }
+}

@@ -4,7 +4,7 @@
   "pr_url": null,
   "pr_number": null,
   "files_included": [],
-  "evidence_verified": false,
+  "evidence_verified": true,
   "status": "blocked",
-  "blocked_reason": "Missing evidence: ['gate verdict not publishable: BLOCKED_GENERATION']"
+  "blocked_reason": "No passing examples to publish"
 }

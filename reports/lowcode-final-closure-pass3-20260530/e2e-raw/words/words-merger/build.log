@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-words-20260529-221024\generated\words\words-merger
+EXIT_CODE: 0
+DURATION_MS: 1567.4
+SUCCESS: True
+---STDOUT---
+  words-merger -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-words-20260529-221024\generated\words\words-merger\bin\Release\net8.0\words-merger.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.20
+---STDERR---
+(empty)

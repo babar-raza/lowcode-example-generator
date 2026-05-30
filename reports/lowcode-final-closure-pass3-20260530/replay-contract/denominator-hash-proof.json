@@ -1,0 +1,46 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "note": "Denominator hashes verified from family config files. catalog_sha field is present in cells/words/pdf denominators but absent in diagram/email/slides (intentional — those families don't pin catalog SHA).",
+  "per_family": {
+    "cells": {
+      "denominator_path": "pipeline/configs/denominators/cells.json",
+      "catalog_sha_in_denominator": true,
+      "catalog_sha": "b4fa821ff14a13af0d075886238ac32643ad55735551625e624f6b5591afb067",
+      "match": true
+    },
+    "words": {
+      "denominator_path": "pipeline/configs/denominators/words.json",
+      "catalog_sha_in_denominator": true,
+      "catalog_sha": "db3ec3dda66504d98f3a0cac9b03397c723470afe528d06f712b2e2cf3bf7d03",
+      "match": true
+    },
+    "pdf": {
+      "denominator_path": "pipeline/configs/denominators/pdf.json",
+      "catalog_sha_in_denominator": true,
+      "catalog_sha": "710adaea73ac92e988e6bf08ba8ba4414925b0fd44d90f9a53760f590a0f3149",
+      "match": true
+    },
+    "diagram": {
+      "denominator_path": "pipeline/configs/denominators/diagram.json",
+      "catalog_sha_in_denominator": false,
+      "catalog_sha": null,
+      "match": null,
+      "note": "diagram denominator has no catalog_sha field — intentional per denominator setup"
+    },
+    "email": {
+      "denominator_path": "pipeline/configs/denominators/email.json",
+      "catalog_sha_in_denominator": false,
+      "catalog_sha": null,
+      "match": null,
+      "note": "email denominator has no catalog_sha field — intentional per denominator setup"
+    },
+    "slides": {
+      "denominator_path": "pipeline/configs/denominators/slides.json",
+      "catalog_sha_in_denominator": false,
+      "catalog_sha": null,
+      "match": null,
+      "note": "slides denominator has no catalog_sha field — intentional per denominator setup"
+    }
+  },
+  "summary": "3/3 families with catalog_sha in denominator: all match (cells, words, pdf). 3/3 families without catalog_sha: match is not applicable (diagram, email, slides)."
+}

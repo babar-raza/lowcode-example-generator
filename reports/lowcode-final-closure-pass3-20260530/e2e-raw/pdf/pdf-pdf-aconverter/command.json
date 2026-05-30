@@ -1,0 +1,23 @@
+{
+  "example_id": "pdf-pdf-aconverter",
+  "family": "pdf",
+  "run_id": "pilot-pdf-20260529-222233",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1189.2
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1983.5
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1153.6
+  }
+}

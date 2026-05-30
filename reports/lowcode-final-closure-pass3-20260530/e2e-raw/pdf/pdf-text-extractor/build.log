@@ -1,0 +1,18 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor
+EXIT_CODE: 0
+DURATION_MS: 1709.1
+SUCCESS: True
+---STDOUT---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Pdf.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor\pdf-text-extractor.csproj]
+  pdf-text-extractor -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor\bin\Release\net8.0\pdf-text-extractor.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Pdf.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-text-extractor\pdf-text-extractor.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.35
+---STDERR---
+(empty)

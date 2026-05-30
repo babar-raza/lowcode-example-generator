@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-tiff
+EXIT_CODE: 0
+DURATION_MS: 1929.2
+SUCCESS: True
+---STDOUT---
+  pdf-tiff -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-tiff\bin\Release\net8.0\pdf-tiff.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.58
+---STDERR---
+(empty)

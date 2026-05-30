@@ -1,0 +1,10 @@
+COMMAND: dotnet run --nologo --no-build -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter
+EXIT_CODE: 0
+DURATION_MS: 1075.1
+SUCCESS: True
+---STDOUT---
+Example: email-converter
+Done.
+---STDERR---
+(empty)

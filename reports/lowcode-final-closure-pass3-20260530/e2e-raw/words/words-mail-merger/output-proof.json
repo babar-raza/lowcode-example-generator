@@ -1,0 +1,8 @@
+{
+  "example_id": "words-mail-merger",
+  "all_passed": true,
+  "restore_passed": true,
+  "build_passed": true,
+  "run_passed": true,
+  "run_stdout_snippet": "Example: words-mail-merger\nDone.\n"
+}

@@ -1,0 +1,18 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter
+EXIT_CODE: 0
+DURATION_MS: 1755.8
+SUCCESS: True
+---STDOUT---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter\diagram-diagram-converter.csproj]
+  diagram-diagram-converter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter\bin\Release\net8.0\diagram-diagram-converter.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter\diagram-diagram-converter.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.41
+---STDERR---
+(empty)

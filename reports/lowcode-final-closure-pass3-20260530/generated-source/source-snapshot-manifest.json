@@ -1,0 +1,663 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "entries": [
+    {
+      "family": "cells",
+      "example_id": "cells-html-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-html-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-html-converter",
+      "files_copied": [
+        "cells-html-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.html",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-image-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-image-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-image-converter",
+      "files_copied": [
+        "cells-image-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.png",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-json-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-json-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-json-converter",
+      "files_copied": [
+        "cells-json-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.json",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-pdf-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-pdf-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-pdf-converter",
+      "files_copied": [
+        "cells-pdf-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.pdf",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-spreadsheet-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-spreadsheet-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-spreadsheet-converter",
+      "files_copied": [
+        "cells-spreadsheet-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.csv",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-spreadsheet-locker",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-spreadsheet-locker",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-spreadsheet-locker",
+      "files_copied": [
+        "cells-spreadsheet-locker.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.xlsx",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-spreadsheet-merger",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-spreadsheet-merger",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-spreadsheet-merger",
+      "files_copied": [
+        "cells-spreadsheet-merger.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.xlsx",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-spreadsheet-splitter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-spreadsheet-splitter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-spreadsheet-splitter",
+      "files_copied": [
+        "cells-spreadsheet-splitter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.xlsx",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "cells",
+      "example_id": "cells-text-converter",
+      "run_id": "pilot-cells-20260529-221017",
+      "source_dir": "workspace\\runs\\pilot-cells-20260529-221017\\generated\\cells\\cells-text-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\cells\\cells-text-converter",
+      "files_copied": [
+        "cells-text-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.xlsx",
+        "output.txt",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "diagram",
+      "example_id": "diagram-diagram-converter",
+      "run_id": "pilot-diagram-20260529-221021",
+      "source_dir": "workspace\\runs\\pilot-diagram-20260529-221021\\generated\\diagram\\diagram-diagram-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\diagram\\diagram-diagram-converter",
+      "files_copied": [
+        "diagram-diagram-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.vsdx",
+        "output.vdx",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "diagram",
+      "example_id": "diagram-pdf-converter",
+      "run_id": "pilot-diagram-20260529-221021",
+      "source_dir": "workspace\\runs\\pilot-diagram-20260529-221021\\generated\\diagram\\diagram-pdf-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\diagram\\diagram-pdf-converter",
+      "files_copied": [
+        "diagram-pdf-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "input.vsdx",
+        "output.pdf",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "email",
+      "example_id": "email-converter",
+      "run_id": "pilot-email-20260529-220716",
+      "source_dir": "workspace\\runs\\pilot-email-20260529-220716\\generated\\email\\email-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\email\\email-converter",
+      "files_copied": [
+        "email-converter.csproj",
+        "example.manifest.json",
+        "expected-output.json",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-doc-converter",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-doc-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-doc-converter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.docx",
+        "pdf-doc-converter.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-form-editor",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-form-editor",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-form-editor",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-form-editor.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-form-exporter",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-form-exporter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-form-exporter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.json",
+        "pdf-form-exporter.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-form-flattener",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-form-flattener",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-form-flattener",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-form-flattener.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-html",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-html",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-html",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.html",
+        "output.pdf",
+        "pdf-html.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-image-extractor",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-image-extractor",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-image-extractor",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "pdf-image-extractor.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-jpeg",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-jpeg",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-jpeg",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "pdf-jpeg.csproj",
+        "Program.cs",
+        "README.md",
+        "output.jpg\\input_ImageP001.jpeg"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-merger",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-merger",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-merger",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "pdf-merger.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-optimizer",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-optimizer",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-optimizer",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "pdf-optimizer.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-pdf-aconverter",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-pdf-aconverter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-pdf-aconverter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "pdf-pdf-aconverter.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-png",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-png",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-png",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "pdf-png.csproj",
+        "Program.cs",
+        "README.md",
+        "output.png\\input_ImageP001.png"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-security",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-security",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-security",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-security.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-signature",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-signature",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-signature",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-signature.csproj",
+        "Program.cs",
+        "README.md",
+        "test.pfx"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-splitter",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-splitter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-splitter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "pdf-splitter.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-table-generator",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-table-generator",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-table-generator",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-table-generator.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-text-extractor",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-text-extractor",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-text-extractor",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "pdf-text-extractor.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-tiff",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-tiff",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-tiff",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "pdf-tiff.csproj",
+        "Program.cs",
+        "README.md",
+        "output.tiff\\input_ImageP001.tiff"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-toc-generator",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-toc-generator",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-toc-generator",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.pdf",
+        "pdf-toc-generator.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example_id": "pdf-xls-converter",
+      "run_id": "pilot-pdf-20260529-222233",
+      "source_dir": "workspace\\runs\\pilot-pdf-20260529-222233\\generated\\pdf\\pdf-xls-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\pdf\\pdf-xls-converter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pdf",
+        "output.xlsx",
+        "pdf-xls-converter.csproj",
+        "Program.cs",
+        "README.md"
+      ]
+    },
+    {
+      "family": "slides",
+      "example_id": "slides-compress",
+      "run_id": "pilot-slides-20260529-221814",
+      "source_dir": "workspace\\runs\\pilot-slides-20260529-221814\\generated\\slides\\slides-compress",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\slides\\slides-compress",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "Program.cs",
+        "README.md",
+        "slides-compress.csproj"
+      ]
+    },
+    {
+      "family": "slides",
+      "example_id": "slides-convert",
+      "run_id": "pilot-slides-20260529-221814",
+      "source_dir": "workspace\\runs\\pilot-slides-20260529-221814\\generated\\slides\\slides-convert",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\slides\\slides-convert",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.pptx",
+        "output.pdf",
+        "Program.cs",
+        "README.md",
+        "slides-convert.csproj"
+      ]
+    },
+    {
+      "family": "slides",
+      "example_id": "slides-merger",
+      "run_id": "pilot-slides-20260529-221814",
+      "source_dir": "workspace\\runs\\pilot-slides-20260529-221814\\generated\\slides\\slides-merger",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\slides\\slides-merger",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input1.pptx",
+        "input2.pptx",
+        "output.pptx",
+        "Program.cs",
+        "README.md",
+        "slides-merger.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-comparer",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-comparer",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-comparer",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "Program.cs",
+        "README.md",
+        "words-comparer.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-converter",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-converter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-converter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "output.pdf",
+        "Program.cs",
+        "README.md",
+        "words-converter.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-mail-merger",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-mail-merger",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-mail-merger",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "Program.cs",
+        "README.md",
+        "words-mail-merger.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-merger",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-merger",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-merger",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "output.docx",
+        "Program.cs",
+        "README.md",
+        "words-merger.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-replacer",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-replacer",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-replacer",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "output.docx",
+        "Program.cs",
+        "README.md",
+        "words-replacer.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-report-builder",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-report-builder",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-report-builder",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "Program.cs",
+        "README.md",
+        "words-report-builder.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-splitter",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-splitter",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-splitter",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "output.docx",
+        "Program.cs",
+        "README.md",
+        "words-splitter.csproj"
+      ]
+    },
+    {
+      "family": "words",
+      "example_id": "words-watermarker",
+      "run_id": "pilot-words-20260529-221024",
+      "source_dir": "workspace\\runs\\pilot-words-20260529-221024\\generated\\words\\words-watermarker",
+      "snapshot_dir": "reports\\lowcode-final-closure-pass3-20260530\\generated-source\\words\\words-watermarker",
+      "files_copied": [
+        "example.manifest.json",
+        "expected-output.json",
+        "input.docx",
+        "output_image_watermark.docx",
+        "output_text_watermark.docx",
+        "Program.cs",
+        "README.md",
+        "words-watermarker.csproj"
+      ]
+    }
+  ],
+  "total_examples": 42
+}

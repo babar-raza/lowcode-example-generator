@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-cells-20260529-221017\generated\cells\cells-spreadsheet-merger
+EXIT_CODE: 0
+DURATION_MS: 1683.4
+SUCCESS: True
+---STDOUT---
+  cells-spreadsheet-merger -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-cells-20260529-221017\generated\cells\cells-spreadsheet-merger\bin\Release\net8.0\cells-spreadsheet-merger.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.30
+---STDERR---
+(empty)

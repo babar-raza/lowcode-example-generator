@@ -1,0 +1,18 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer
+EXIT_CODE: 0
+DURATION_MS: 1613.7
+SUCCESS: True
+---STDOUT---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Pdf.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer\pdf-optimizer.csproj]
+  pdf-optimizer -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer\bin\Release\net8.0\pdf-optimizer.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Pdf.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-optimizer\pdf-optimizer.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.29
+---STDERR---
+(empty)

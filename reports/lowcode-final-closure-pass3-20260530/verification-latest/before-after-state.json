@@ -1,0 +1,66 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "lane": "LANE 6",
+  "family": "diagram",
+  "promotion_run": "pilot-diagram-20260529-221021",
+
+  "before": {
+    "source": "workspace/verification/latest/families/diagram/ (stale — from pilot-diagram-final-20260528 run, pre-durable-fix)",
+    "gate_results": {
+      "verdict": "PR_DRY_RUN_READY",
+      "publishable": false,
+      "all_required_passed": false,
+      "blocking_gates": ["gate_generation"],
+      "gate_generation_status": "blocked",
+      "gate_generation_failure_reason": "No examples generated"
+    },
+    "publishing_report": {
+      "status": "blocked",
+      "evidence_verified": false,
+      "blocked_reason": "Missing evidence: ['gate verdict not publishable: BLOCKED_GENERATION']"
+    },
+    "pr_candidate_manifest": {
+      "diagram_example_paths_run": "pilot-diagram-final-20260528",
+      "included_manifest_candidate_count": 41
+    }
+  },
+
+  "after": {
+    "source": "workspace/verification/latest/families/diagram/ (promoted from pilot-diagram-20260529-221021 canonical durable-fix run)",
+    "gate_results": {
+      "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
+      "publishable": false,
+      "all_required_passed": true,
+      "blocking_gates": [],
+      "gate_generation_status": "passed",
+      "gate_build_status": "passed",
+      "gate_run_status": "passed",
+      "gate_reviewer_status": "failed (non-required)"
+    },
+    "publishing_report": {
+      "status": "blocked",
+      "evidence_verified": true,
+      "blocked_reason": "No passing examples to publish (approval gate not set)"
+    },
+    "validation_results": {
+      "total": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    "pr_candidate_manifest": {
+      "diagram_example_paths_run": "pilot-diagram-20260529-221021",
+      "included_manifest_candidate_count": 41
+    }
+  },
+
+  "root_cause": "The workspace/verification/latest/families/diagram/ directory retained evidence from a pre-durable-fix run (pilot-diagram-final-20260528) where gate_generation was BLOCKED due to the broken new Shape() / XForm.PinX.Value pattern. DEF-004 and DEF-005 fixed these in the generator source. The canonical durable-fix run (pilot-diagram-20260529-221021) has gate_generation: passed and 2/2 validation PASS. The stale workspace was never promoted to the latest family directory after the durable-fix run.",
+
+  "fix": "Promoted canonical run evidence files (gate-results.json, validation-results.json, publishing-report.json, pr-candidate-manifest.json) from workspace/runs/pilot-diagram-20260529-221021/evidence/latest/ to workspace/verification/latest/families/diagram/.",
+
+  "post_fix_verification": {
+    "gate_generation": "passed",
+    "validation": "2/2 passed",
+    "publishing_blocked_reason": "approval gate (expected — PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set)",
+    "stale_BLOCKED_GENERATION": "RESOLVED"
+  }
+}

@@ -1,0 +1,9 @@
+COMMAND: dotnet run --nologo --no-build -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-tiff
+EXIT_CODE: 0
+DURATION_MS: 2862.0
+SUCCESS: True
+---STDOUT---
+TIFF created
+---STDERR---
+(empty)

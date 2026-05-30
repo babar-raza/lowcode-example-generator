@@ -1,0 +1,9 @@
+COMMAND: dotnet run --nologo --no-build -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-diagram-converter
+EXIT_CODE: 0
+DURATION_MS: 1678.3
+SUCCESS: True
+---STDOUT---
+Conversion succeeded, output file created at 'output.vdx'.
+---STDERR---
+(empty)

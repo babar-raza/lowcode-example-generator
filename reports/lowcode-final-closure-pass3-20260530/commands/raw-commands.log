@@ -1,0 +1,26 @@
+# Raw Commands Log — lowcode-final-closure-pass3-20260530
+# Started: 2026-05-30T04:39:45Z
+# All significant commands executed in this sprint are recorded here.
+
+[04:39:45Z] git log --oneline -3
+[04:39:45Z] git status --short
+[04:39:45Z] git rev-parse HEAD
+[04:39:45Z] C:/Python313/python.exe --version
+[04:39:45Z] dotnet --version
+[04:39:45Z] git check-ignore -v .kilo/ docs/development/open-taskcard-closure-matrix.md
+[04:39:45Z] echo "APPROVAL_GATES: ..." (env var check)
+[04:39:45Z] dotnet nuget list source
+[04:39:45Z] mkdir -p reports/lowcode-final-closure-pass3-20260530/{all lanes}
+# LANE 0 preflight complete
+
+# LANE 5 — Full pytest
+# [to be updated as commands are run]
+
+# LANE 6 — Verification/latest promotion
+# [to be updated as commands are run]
+
+# LANE 9 — Publication dry-run
+# [to be updated as commands are run]
+
+# LANE 10 — External blocker NuGet checks
+# [to be updated as commands are run]

@@ -1,0 +1,18 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter
+EXIT_CODE: 0
+DURATION_MS: 1436.7
+SUCCESS: True
+---STDOUT---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Email.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter\email-converter.csproj]
+  email-converter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter\bin\Release\net8.0\email-converter.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter\Program.cs(4,7): warning CS0105: The using directive for 'Aspose.Email.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-email-20260529-220716\generated\email\email-converter\email-converter.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.09
+---STDERR---
+(empty)

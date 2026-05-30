@@ -159,8 +159,10 @@ class TestProgrammaticFixtureGuidanceRegistry:
         g = _PROGRAMMATIC_FIXTURE_GUIDANCE["diagram"]
         required = g["required_patterns"]
         texts = " ".join(required)
-        assert "Aspose.Diagram.Diagram()" in texts
-        assert "Shape" in texts
+        # DEF-004 fix: diagram fixture now uses page.DrawEllipse() instead of
+        # new Shape() / Aspose.Diagram.Diagram() (which was the broken API).
+        # The DrawEllipse approach is the only correct way to create shapes.
+        assert "DrawEllipse" in texts
         assert "XForm" in texts
 
 

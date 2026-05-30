@@ -1,0 +1,23 @@
+{
+  "example_id": "cells-spreadsheet-splitter",
+  "family": "cells",
+  "run_id": "pilot-cells-20260529-221017",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1214.7
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1805.3
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1958.5
+  }
+}

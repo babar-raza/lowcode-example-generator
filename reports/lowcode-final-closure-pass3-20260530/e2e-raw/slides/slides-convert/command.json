@@ -1,0 +1,23 @@
+{
+  "example_id": "slides-convert",
+  "family": "slides",
+  "run_id": "pilot-slides-20260529-221814",
+  "restore": {
+    "command": "dotnet restore --nologo",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1084.3
+  },
+  "build": {
+    "command": "dotnet build --nologo --no-restore -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 1545.6
+  },
+  "run": {
+    "command": "dotnet run --nologo --no-build -c Release",
+    "exit_code": 0,
+    "success": true,
+    "duration_ms": 2675.4
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "prior_bundle": "lowcode-durable-full-closure-20260529-evidence.zip",
+  "reviewer_verdict": "DURABLE_GENERATOR_REPAIR_PROGRESS_ACCEPTED_FULL_CLOSURE_NOT_YET_ACCEPTED",
+  "accepted": [
+    "durable_generator_fixes_committed",
+    "template_first_for_7_types",
+    "DEF-001_cells_spreadsheet_merger",
+    "DEF-002_words_merger",
+    "DEF-003_words_watermarker",
+    "DEF-004_diagram_diagram_converter",
+    "DEF-005_diagram_pdf_converter",
+    "DEF-008_pdf_table_generator",
+    "DEF-009_slides_convert",
+    "35_35_durable_fix_unit_tests",
+    "gate_generation_passed_all_6_families",
+    "workspace_patches_promoted_to_generator"
+  ],
+  "not_accepted": [
+    {
+      "gap": "no_raw_command_logs",
+      "lane": "LANE 0",
+      "evidence_required": "commands/raw-commands.log"
+    },
+    {
+      "gap": "no_raw_dotnet_restore_build_run_logs",
+      "lane": "LANE 4",
+      "evidence_required": "e2e-raw/<family>/<example>/{restore,build,run}.log"
+    },
+    {
+      "gap": "no_actual_program_cs_snapshots",
+      "lane": "LANE 2",
+      "evidence_required": "generated-source/<family>/<example>/Program.cs"
+    },
+    {
+      "gap": "full_pytest_not_run",
+      "lane": "LANE 5",
+      "evidence_required": "tests/full-pytest.log"
+    },
+    {
+      "gap": "no_strict_replay_contract",
+      "lane": "LANE 3",
+      "evidence_required": "replay-contract/<family>-replay-contract.json"
+    },
+    {
+      "gap": "diagram_publisher_stale_blocked",
+      "lane": "LANE 6",
+      "evidence_required": "verification-latest/before-after-state.json"
+    },
+    {
+      "gap": "41_pr_candidates_vs_42_validated",
+      "lane": "LANE 8",
+      "evidence_required": "denominators/validation-vs-publication-denominator.md"
+    },
+    {
+      "gap": "reviewer_failed_no_fallback_semantics",
+      "lane": "LANE 7",
+      "evidence_required": "reviewer/reviewer-state-model.md"
+    },
+    {
+      "gap": "external_blocker_summary_only_no_raw_nuget",
+      "lane": "LANE 10",
+      "evidence_required": "blockers/{epub,ocr,psd}-raw-check.log"
+    },
+    {
+      "gap": "kilo_unresolved_in_clean_proof",
+      "lane": "LANE 0+11",
+      "evidence_required": "preflight/dirty-state-classification.md (gitignored — resolved)"
+    },
+    {
+      "gap": "open_taskcard_closure_matrix_untracked",
+      "lane": "LANE 0+11",
+      "evidence_required": "committed in this sprint"
+    }
+  ]
+}

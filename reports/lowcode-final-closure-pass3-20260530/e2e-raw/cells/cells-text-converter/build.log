@@ -1,0 +1,15 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-cells-20260529-221017\generated\cells\cells-text-converter
+EXIT_CODE: 0
+DURATION_MS: 2062.4
+SUCCESS: True
+---STDOUT---
+  cells-text-converter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-cells-20260529-221017\generated\cells\cells-text-converter\bin\Release\net8.0\cells-text-converter.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.67
+---STDERR---
+(empty)

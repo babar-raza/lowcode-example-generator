@@ -1,0 +1,18 @@
+COMMAND: dotnet build --nologo --no-restore -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress
+EXIT_CODE: 0
+DURATION_MS: 1731.0
+SUCCESS: True
+---STDOUT---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress\slides-compress.csproj]
+  slides-compress -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress\bin\Release\net8.0\slides-compress.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-slides-20260529-221814\generated\slides\slides-compress\slides-compress.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.36
+---STDERR---
+(empty)

@@ -1,0 +1,10 @@
+COMMAND: dotnet run --nologo --no-build -c Release
+CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-splitter
+EXIT_CODE: 0
+DURATION_MS: 1286.2
+SUCCESS: True
+---STDOUT---
+Example: pdf-splitter
+Done.
+---STDERR---
+(empty)

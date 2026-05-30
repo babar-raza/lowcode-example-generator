@@ -1,0 +1,230 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "total_match": 42,
+  "total_mismatch": 0,
+  "all_match": true,
+  "per_family": {
+    "cells": {
+      "cells-html-converter/Program.cs": {
+        "stored": "8880c345608ab28d",
+        "actual": "8880c345608ab28d",
+        "match": true
+      },
+      "cells-image-converter/Program.cs": {
+        "stored": "df552d7638d4eacb",
+        "actual": "df552d7638d4eacb",
+        "match": true
+      },
+      "cells-json-converter/Program.cs": {
+        "stored": "11a412efbd3c4404",
+        "actual": "11a412efbd3c4404",
+        "match": true
+      },
+      "cells-pdf-converter/Program.cs": {
+        "stored": "c9cac41390536c55",
+        "actual": "c9cac41390536c55",
+        "match": true
+      },
+      "cells-spreadsheet-converter/Program.cs": {
+        "stored": "f6350f8f4b825114",
+        "actual": "f6350f8f4b825114",
+        "match": true
+      },
+      "cells-spreadsheet-locker/Program.cs": {
+        "stored": "562dfb3afda5a973",
+        "actual": "562dfb3afda5a973",
+        "match": true
+      },
+      "cells-spreadsheet-merger/Program.cs": {
+        "stored": "4dd2e5c15ff1ff33",
+        "actual": "4dd2e5c15ff1ff33",
+        "match": true
+      },
+      "cells-spreadsheet-splitter/Program.cs": {
+        "stored": "778725ea5038a776",
+        "actual": "778725ea5038a776",
+        "match": true
+      },
+      "cells-text-converter/Program.cs": {
+        "stored": "cb8ca8f32112bc6e",
+        "actual": "cb8ca8f32112bc6e",
+        "match": true
+      }
+    },
+    "diagram": {
+      "diagram-diagram-converter/Program.cs": {
+        "stored": "46e43f916572f5f4",
+        "actual": "46e43f916572f5f4",
+        "match": true
+      },
+      "diagram-pdf-converter/Program.cs": {
+        "stored": "93731194dd440d9c",
+        "actual": "93731194dd440d9c",
+        "match": true
+      }
+    },
+    "email": {
+      "email-converter/Program.cs": {
+        "stored": "3b3c4860373bd958",
+        "actual": "3b3c4860373bd958",
+        "match": true
+      }
+    },
+    "pdf": {
+      "pdf-doc-converter/Program.cs": {
+        "stored": "2e8d6a4a7095d111",
+        "actual": "2e8d6a4a7095d111",
+        "match": true
+      },
+      "pdf-form-editor/Program.cs": {
+        "stored": "84b42bfd26a56d83",
+        "actual": "84b42bfd26a56d83",
+        "match": true
+      },
+      "pdf-form-exporter/Program.cs": {
+        "stored": "85d8b3a7c0a2192c",
+        "actual": "85d8b3a7c0a2192c",
+        "match": true
+      },
+      "pdf-form-flattener/Program.cs": {
+        "stored": "dd02a166a02c1dfb",
+        "actual": "dd02a166a02c1dfb",
+        "match": true
+      },
+      "pdf-html/Program.cs": {
+        "stored": "7ee81e1fcb0880fd",
+        "actual": "7ee81e1fcb0880fd",
+        "match": true
+      },
+      "pdf-image-extractor/Program.cs": {
+        "stored": "f22370749b1da56d",
+        "actual": "f22370749b1da56d",
+        "match": true
+      },
+      "pdf-jpeg/Program.cs": {
+        "stored": "dcd8660c436958f6",
+        "actual": "dcd8660c436958f6",
+        "match": true
+      },
+      "pdf-merger/Program.cs": {
+        "stored": "dde7cbba17412dfa",
+        "actual": "dde7cbba17412dfa",
+        "match": true
+      },
+      "pdf-optimizer/Program.cs": {
+        "stored": "42cbf30933995d03",
+        "actual": "42cbf30933995d03",
+        "match": true
+      },
+      "pdf-pdf-aconverter/Program.cs": {
+        "stored": "11f71b17e1d464a3",
+        "actual": "11f71b17e1d464a3",
+        "match": true
+      },
+      "pdf-png/Program.cs": {
+        "stored": "42ece612db74bff3",
+        "actual": "42ece612db74bff3",
+        "match": true
+      },
+      "pdf-security/Program.cs": {
+        "stored": "c125fd464571ce0f",
+        "actual": "c125fd464571ce0f",
+        "match": true
+      },
+      "pdf-signature/Program.cs": {
+        "stored": "2efa6c5e5f67fe2e",
+        "actual": "2efa6c5e5f67fe2e",
+        "match": true
+      },
+      "pdf-splitter/Program.cs": {
+        "stored": "a36c10cdb5f68696",
+        "actual": "a36c10cdb5f68696",
+        "match": true
+      },
+      "pdf-table-generator/Program.cs": {
+        "stored": "b88cd1724a103497",
+        "actual": "b88cd1724a103497",
+        "match": true
+      },
+      "pdf-text-extractor/Program.cs": {
+        "stored": "14fb3fd804086d34",
+        "actual": "14fb3fd804086d34",
+        "match": true
+      },
+      "pdf-tiff/Program.cs": {
+        "stored": "3b46c9f633839062",
+        "actual": "3b46c9f633839062",
+        "match": true
+      },
+      "pdf-toc-generator/Program.cs": {
+        "stored": "772391b8d7fd6787",
+        "actual": "772391b8d7fd6787",
+        "match": true
+      },
+      "pdf-xls-converter/Program.cs": {
+        "stored": "5b51a12f75d107ba",
+        "actual": "5b51a12f75d107ba",
+        "match": true
+      }
+    },
+    "slides": {
+      "slides-compress/Program.cs": {
+        "stored": "00bf6fd19d62e175",
+        "actual": "00bf6fd19d62e175",
+        "match": true
+      },
+      "slides-convert/Program.cs": {
+        "stored": "1e8df0c230e4ef5a",
+        "actual": "1e8df0c230e4ef5a",
+        "match": true
+      },
+      "slides-merger/Program.cs": {
+        "stored": "06723281d8d77bab",
+        "actual": "06723281d8d77bab",
+        "match": true
+      }
+    },
+    "words": {
+      "words-comparer/Program.cs": {
+        "stored": "f33b6a461e34520a",
+        "actual": "f33b6a461e34520a",
+        "match": true
+      },
+      "words-converter/Program.cs": {
+        "stored": "0c7e82ab9335ecc8",
+        "actual": "0c7e82ab9335ecc8",
+        "match": true
+      },
+      "words-mail-merger/Program.cs": {
+        "stored": "45c9a804bb29d120",
+        "actual": "45c9a804bb29d120",
+        "match": true
+      },
+      "words-merger/Program.cs": {
+        "stored": "048fec5ccaf53473",
+        "actual": "048fec5ccaf53473",
+        "match": true
+      },
+      "words-replacer/Program.cs": {
+        "stored": "203b1fb58947366b",
+        "actual": "203b1fb58947366b",
+        "match": true
+      },
+      "words-report-builder/Program.cs": {
+        "stored": "9222c1b88c47ba4d",
+        "actual": "9222c1b88c47ba4d",
+        "match": true
+      },
+      "words-splitter/Program.cs": {
+        "stored": "f166bd4ab7cf91fc",
+        "actual": "f166bd4ab7cf91fc",
+        "match": true
+      },
+      "words-watermarker/Program.cs": {
+        "stored": "4325c56fa956f40a",
+        "actual": "4325c56fa956f40a",
+        "match": true
+      }
+    }
+  }
+}

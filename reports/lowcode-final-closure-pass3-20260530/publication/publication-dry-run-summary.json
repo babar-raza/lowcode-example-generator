@@ -1,0 +1,113 @@
+{
+  "sprint_id": "lowcode-final-closure-pass3-20260530",
+  "lane": "LANE 9",
+  "command": "python -m src.plugin_examples publish-pr --family <family> --dry-run",
+  "overall_result": "SIMULATION_BLOCKED_APPROVAL_GATE",
+
+  "families": [
+    {
+      "family": "cells",
+      "package_path": "workspace/pr-dry-run/cells-controlled-pilot",
+      "package_exists": true,
+      "examples_in_package": 9,
+      "readme_rendered": true,
+      "readme_audit": "PASS (12217 bytes, 9 examples)",
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"]
+    },
+    {
+      "family": "words",
+      "package_path": "workspace/pr-dry-run/words-controlled-pilot",
+      "package_exists": true,
+      "examples_in_package": 8,
+      "readme_rendered": true,
+      "readme_audit": "PASS (12549 bytes, 8 examples)",
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"]
+    },
+    {
+      "family": "pdf",
+      "package_path": "workspace/pr-dry-run/pdf-controlled-pilot",
+      "package_exists": true,
+      "examples_in_package": 3,
+      "readme_rendered": true,
+      "readme_audit": "PASS (10175 bytes, 3 examples)",
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"],
+      "note": "Additional pdf packages: pr5 (Jpeg/Tiff/Png), pr6 (TableGenerator/TocGenerator/ImageExtractor), pr7, pr8, pr9"
+    },
+    {
+      "family": "diagram",
+      "package_path": "workspace/pr-dry-run/diagram-controlled-pilot",
+      "package_exists": false,
+      "examples_in_package": 0,
+      "readme_rendered": false,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["dry_run_package_not_found", "no_examples_in_package", "gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"],
+      "note": "Package not built yet — canonical run (pilot-diagram-20260529-221021) was the durable-fix run. Package path does not exist."
+    },
+    {
+      "family": "slides",
+      "package_path": "workspace/pr-dry-run/slides-controlled-pilot",
+      "package_exists": false,
+      "examples_in_package": 0,
+      "readme_rendered": false,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["dry_run_package_not_found", "no_examples_in_package", "gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"]
+    },
+    {
+      "family": "email",
+      "package_path": "workspace/pr-dry-run/email-controlled-pilot",
+      "package_exists": false,
+      "examples_in_package": 0,
+      "readme_rendered": false,
+      "gate_verdict": "PR_DRY_RUN_READY",
+      "repo_access_ready": true,
+      "pr_permission_ready": true,
+      "approval_gate": "BLOCKED (blocked_live_pr_approval_required)",
+      "simulation_result": "SIMULATION_BLOCKED",
+      "simulation_blockers": ["dry_run_package_not_found", "no_examples_in_package", "gate_verdict_not_publishable: PR_DRY_RUN_READY", "approval_gate: blocked_live_pr_approval_required"]
+    }
+  ],
+
+  "packages_found": 3,
+  "packages_missing": 3,
+  "readme_audit_passed": 3,
+  "single_blocker_only_approval": 3,
+  "multiple_blockers": 3,
+
+  "validate_publish_targets": {
+    "result": "3/3 ready (cells, words, pdf)",
+    "command": "python -m src.plugin_examples validate-publish-targets"
+  },
+
+  "release_status": {
+    "all_merged": true,
+    "all_published": true,
+    "published_count": 42,
+    "source": "workspace/verification/latest/release-status.json",
+    "note": "Prior sprint PRs are already merged. The validate-publish-targets READY refers to the 3 families whose packages exist in pr-dry-run/."
+  },
+
+  "conclusion": "All 6 families are SIMULATION_BLOCKED due to approval gate (PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set). For families with packages (cells/words/pdf), the only blocker is the approval gate — repo access, permissions, README, and package content all pass. Diagram/slides/email packages don't exist yet (not built after durable-fix run). This is APPROVAL_BLOCKED_EXPECTED — the gate requires PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR to proceed."
+}

@@ -15,5 +15,8 @@
     "Console.ReadLine(",
     "TODO",
     "NotImplementedException"
-  ]
+  ],
+  "expected_output_extension": ".pdf",
+  "expected_output_kind": "file",
+  "expected_output_cardinality": "single"
 }

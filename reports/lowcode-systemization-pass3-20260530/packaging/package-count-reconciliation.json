@@ -1,0 +1,11 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "generated_examples": 47,
+  "build_run_valid_examples": 41,
+  "semantic_valid_examples": 41,
+  "main_class_examples": 40,
+  "publication_candidates": 41,
+  "package_included_examples": 47,
+  "live_pr_candidates": 41,
+  "note": "timestamp excluded (NETWORK_DEPENDENCY_BLOCKER); 41 publication candidates"
+}

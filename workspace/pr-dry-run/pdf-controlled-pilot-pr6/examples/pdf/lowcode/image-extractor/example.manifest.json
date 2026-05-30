@@ -8,5 +8,16 @@
   ],
   "status": "generated_template_first",
   "input_strategy": "programmatic_input",
-  "input_files": []
+  "input_files": [],
+  "input_format": null,
+  "output_format": null,
+  "operation_kind": "extractor",
+  "expected_output_extension": null,
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".png",
+  "contract_operation_kind": "extractor",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "multi",
+  "contract_id": "pdf/ImageExtractor",
+  "contract_hash": "c57169cf5ebbe28d"
 }

@@ -1,0 +1,93 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "validators": [
+    {
+      "id": "V-001",
+      "rule": "Bundle has raw reflection evidence (reflection-raw/ non-empty)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-002",
+      "rule": "Family universe not silently swapped (epub tracked, not silently removed)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-003",
+      "rule": "Medical has scope decision (medical-scope-decision.md exists)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-004",
+      "rule": "EPUB has product-vs-format decision (epub-product-vs-format-decision.md exists)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-005",
+      "rule": "Restore success + reflection present for every LOWCODE_CONFIRMED family",
+      "status": "PASS"
+    },
+    {
+      "id": "V-006",
+      "rule": "No assembly manifest uses old hardcoded repair run as final authority (source-authority-map.json present)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-007",
+      "rule": "No source_run: null manifest is publication-ready (pr11 excluded)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-008",
+      "rule": "Idempotency tests cover all manifests except source_run: null",
+      "status": "PASS"
+    },
+    {
+      "id": "V-009",
+      "rule": "Every package snapshot has .csproj files",
+      "status": "PASS"
+    },
+    {
+      "id": "V-010",
+      "rule": "Every example has example.manifest.json (including pdf-pr7/8/9)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-011",
+      "rule": "raw-commands.log contains no PENDING or 'to be run after' entries at close",
+      "status": "PASS"
+    },
+    {
+      "id": "V-012",
+      "rule": "Full pytest raw log exists (tests/full-pytest.log)",
+      "status": "PASS"
+    },
+    {
+      "id": "V-013",
+      "rule": "Artifact sidecar SHA/size matches actual ZIP",
+      "status": "PASS"
+    },
+    {
+      "id": "V-014",
+      "rule": "repeatability-gap-register has no OPEN items while summary claims resolved",
+      "status": "PASS"
+    },
+    {
+      "id": "V-015",
+      "rule": "systemization-defect-ledger resolved count > 0 when summary claims closure",
+      "status": "PASS"
+    },
+    {
+      "id": "V-016",
+      "rule": "Main-class coverage gaps all have accepted blocker packets",
+      "status": "PASS"
+    },
+    {
+      "id": "V-017",
+      "rule": "Restore-only evidence is NOT used as sole basis for LOWCODE_CONFIRMED classification",
+      "status": "PASS"
+    }
+  ],
+  "pass": 17,
+  "deferred": 0,
+  "fail": 0
+}

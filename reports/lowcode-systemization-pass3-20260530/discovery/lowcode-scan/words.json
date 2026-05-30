@@ -1,0 +1,18 @@
+{
+  "family": "words",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "lowcode_namespace": "Aspose.Words.LowCode",
+  "lowcode_confirmed": true,
+  "main_classes": [
+    "Converter",
+    "Comparer",
+    "MailMerger",
+    "Replacer",
+    "Splitter",
+    "Watermarker",
+    "Merger",
+    "Signer",
+    "Processor"
+  ],
+  "total_types": 25
+}

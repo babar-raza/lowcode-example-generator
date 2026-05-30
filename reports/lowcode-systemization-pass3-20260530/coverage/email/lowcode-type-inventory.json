@@ -1,0 +1,12 @@
+{
+  "family": "email",
+  "namespace": "Aspose.Email.LowCode",
+  "types": [
+    {
+      "name": "Converter",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "email-converter",
+      "status": "HAS_EXAMPLE"
+    }
+  ]
+}

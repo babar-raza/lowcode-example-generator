@@ -1,0 +1,18 @@
+{
+  "family": "cells",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "lowcode_namespace": "Aspose.Cells.LowCode",
+  "lowcode_confirmed": true,
+  "main_classes": [
+    "SpreadsheetConverter",
+    "SpreadsheetLocker",
+    "SpreadsheetMerger",
+    "SpreadsheetSplitter",
+    "SpreadsheetSigner",
+    "SpreadsheetPrinter",
+    "SpreadsheetProtector",
+    "SpreadsheetWatermarker",
+    "SpreadsheetTemplater"
+  ],
+  "total_types": 22
+}

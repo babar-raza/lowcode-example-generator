@@ -1,0 +1,6 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "template_dir": "pipeline/configs/families/_templates/",
+  "template_schema": "pipeline/schemas/",
+  "note": "Templates are canonical when placed in the _templates dir and pass validation"
+}

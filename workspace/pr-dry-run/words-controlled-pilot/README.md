@@ -112,7 +112,6 @@ namespace PluginExample
 
             // Demonstrate Converter.Convert
             Converter.Convert(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.pdf");
-            // ConvertToImages — no suitable overload found in catalog
             // Demonstrate Converter.Create
             Converter.Create();
 
@@ -233,8 +232,6 @@ namespace PluginExample
 
             // Demonstrate Replacer.Replace
             Replacer.Replace(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.docx", "sample", "sample");
-            // ReplaceToImages — no suitable overload found in catalog
-            // Create — no suitable overload found in catalog
 
             Console.WriteLine("Done.");
         }
@@ -316,10 +313,8 @@ namespace PluginExample
             // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.docx");
 
-            // ExtractPages — no suitable overload found in catalog
             // Demonstrate Splitter.RemoveBlankPages
             Splitter.RemoveBlankPages(Path.Combine(AppContext.BaseDirectory, "input.docx"), "output.docx");
-            // Split — no suitable overload found in catalog
 
             Console.WriteLine("Done.");
         }
@@ -435,7 +430,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-30 10:46 UTC
+Generated on: 2026-05-30 13:40 UTC
 
 ---
 

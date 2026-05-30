@@ -1,0 +1,11 @@
+{
+  "family": "diagram",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "lowcode_namespace": "Aspose.Diagram.LowCode",
+  "lowcode_confirmed": true,
+  "main_classes": [
+    "DiagramConverter",
+    "DiagramSaver"
+  ],
+  "total_types": 5
+}

@@ -1,0 +1,18 @@
+{
+  "family": "diagram",
+  "namespace": "Aspose.Diagram.LowCode",
+  "types": [
+    {
+      "name": "DiagramConverter",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "diagram-converter",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "DiagramSaver",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "diagram-saver",
+      "status": "HAS_EXAMPLE"
+    }
+  ]
+}

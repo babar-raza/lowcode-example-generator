@@ -1,0 +1,11 @@
+{
+  "family": "tex",
+  "package": "Aspose.TeX",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "restore_status": "success",
+  "reflection_status": "NOT_REQUIRED",
+  "lowcode_types": [],
+  "classification_basis": "restore_success_plus_namespace_scan",
+  "lowcode_namespace_found": false,
+  "note": "TeX/LaTeX"
+}

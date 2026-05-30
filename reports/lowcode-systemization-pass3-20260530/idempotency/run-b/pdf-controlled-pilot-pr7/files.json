@@ -1,0 +1,19 @@
+{
+  "Directory.Build.props": "c466b42097ce7bf42b26d40688cf7171c6805f8abdb289d0f2b50fa192463e09",
+  "Directory.Packages.props": "b402fe410d0be6c32976b1c2060c52d04b24dfc085be8dfb922f75957d4fd35f",
+  "examples/pdf/lowcode/form-flattener/example.manifest.json": "2403a5936b0711c47bfd17a9aa1be34625e451f8296b8fe0316e5f94ca796e1b",
+  "examples/pdf/lowcode/form-flattener/expected-output.json": "c868d64d3daf84de6481e23c7232c73df2acba00aadc08a2f185fd774b80d043",
+  "examples/pdf/lowcode/form-flattener/form-flattener.csproj": "c5c97f3bfc9e29840caf875e4b95c4f90eca575efbe825d55e437493e7538f24",
+  "examples/pdf/lowcode/form-flattener/input.pdf": "91662145396a64ac9564da4dbb75df1da3468788e0a11acfffaf2d745fdd3d3b",
+  "examples/pdf/lowcode/form-flattener/output.pdf": "707dd739d11d716034cedcf3de6038922e52f96d766fc8c5874c0d5caa55d097",
+  "examples/pdf/lowcode/form-flattener/Program.cs": "dd02a166a02c1dfbd6da0d8df4c28fa33700ca3738ff86f31f2544a79e90c836",
+  "examples/pdf/lowcode/form-flattener/README.md": "ea9913a2e5f02204ad3d134534740d96ae0278ab9f08530278a0422cbf451973",
+  "examples/pdf/lowcode/security/example.manifest.json": "6d5476f09f56997ca8efa4d5e562b0960da37893bc620537d8a707a7b0304a0f",
+  "examples/pdf/lowcode/security/expected-output.json": "209327c77a97808503d6e400bd5df24a19aa1d103e0337f1ba9f32d75072670e",
+  "examples/pdf/lowcode/security/input.pdf": "ad51eee9b21b61e8d47f8c16c8d13972dfb73349a49bad706b962d59ab72f651",
+  "examples/pdf/lowcode/security/output.pdf": "c5525224be5226bb17f414b48ee62d1905d427f6baa591ef47d0f6793208fbde",
+  "examples/pdf/lowcode/security/Program.cs": "c125fd464571ce0f69c5ec02ad8723a33a3a3f8500bd81c860a7a7e94ad2ec59",
+  "examples/pdf/lowcode/security/README.md": "6dc9e923571d88dc6b71052572f302cfcc0d8a5495a878ff56e0b8b215b80040",
+  "examples/pdf/lowcode/security/security.csproj": "c5c97f3bfc9e29840caf875e4b95c4f90eca575efbe825d55e437493e7538f24",
+  "global.json": "24d529fb57efc6a92ec3e2a61e45c70a26f7304848fc3fcdb3447266d6319a19"
+}

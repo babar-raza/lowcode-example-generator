@@ -1,0 +1,19 @@
+{
+  "family": "diagram",
+  "package": "Aspose.Diagram",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "restore_status": "success",
+  "reflection_status": "EVIDENCE_FROM_DURABLE_CLOSURE_SPRINT",
+  "reflection_source": "reports/lowcode-durable-full-closure-20260529/",
+  "lowcode_namespace": "Aspose.Diagram.LowCode",
+  "lowcode_types": [
+    "DiagramConverter",
+    "DiagramSaver"
+  ],
+  "total_lowcode_types": 5,
+  "main_workflow_classes": [
+    "DiagramConverter",
+    "DiagramSaver"
+  ],
+  "note": "2 main operation classes"
+}

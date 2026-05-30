@@ -1,0 +1,220 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "examples": {
+    "cells-spreadsheet-converter": {
+      "family": "cells",
+      "class": "SpreadsheetConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-spreadsheet-locker": {
+      "family": "cells",
+      "class": "SpreadsheetSigner",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-spreadsheet-merger": {
+      "family": "cells",
+      "class": "SpreadsheetMerger",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-spreadsheet-splitter": {
+      "family": "cells",
+      "class": "SpreadsheetSplitter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-html-converter": {
+      "family": "cells",
+      "class": "HtmlConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-image-converter": {
+      "family": "cells",
+      "class": "ImageConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-json-converter": {
+      "family": "cells",
+      "class": "JsonConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-pdf-converter": {
+      "family": "cells",
+      "class": "PdfConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "cells-text-converter": {
+      "family": "cells",
+      "class": "TextConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "diagram-converter": {
+      "family": "diagram",
+      "class": "DiagramConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "diagram-saver": {
+      "family": "diagram",
+      "class": "DiagramSaver",
+      "status": "HAS_EXAMPLE"
+    },
+    "email-converter": {
+      "family": "email",
+      "class": "Converter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-doc-converter": {
+      "family": "pdf",
+      "class": "DocumentConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-html": {
+      "family": "pdf",
+      "class": "HtmlConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-xls-converter": {
+      "family": "pdf",
+      "class": "ImageConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-merger": {
+      "family": "pdf",
+      "class": "DocumentMerger",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-splitter": {
+      "family": "pdf",
+      "class": "DocumentSplitter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-optimizer": {
+      "family": "pdf",
+      "class": "DocumentOptimizer",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-replacer": {
+      "family": "pdf",
+      "class": "TextReplacer",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-watermarker": {
+      "family": "pdf",
+      "class": "DocumentWatermarker",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-signature": {
+      "family": "pdf",
+      "class": "DocumentSigner",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-security": {
+      "family": "pdf",
+      "class": "DocumentProtector",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-table-extractor": {
+      "family": "pdf",
+      "class": "TableExtractor",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-metadata": {
+      "family": "pdf",
+      "class": "MetadataEditor",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-repair": {
+      "family": "pdf",
+      "class": "DocumentRepair",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-rotator": {
+      "family": "pdf",
+      "class": "DocumentRotator",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-comparer": {
+      "family": "pdf",
+      "class": "DocumentComparer",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-page-extractor": {
+      "family": "pdf",
+      "class": "PdfExtractor",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-pdfa": {
+      "family": "pdf",
+      "class": "PdfAConverter",
+      "status": "HAS_EXAMPLE"
+    },
+    "pdf-form-editor": {
+      "family": "pdf",
+      "class": "FormImporter",
+      "status": "BLOCKER_EXTERNAL_BUG"
+    },
+    "pdf-timestamp": {
+      "family": "pdf",
+      "class": "TimestampEmbedder",
+      "status": "BLOCKER_NETWORK_DEPENDENCY"
+    },
+    "pdf-organizer": {
+      "family": "pdf",
+      "class": "DocumentOrganizer",
+      "status": "HAS_EXAMPLE"
+    },
+    "slides-collect": {
+      "family": "slides",
+      "class": "Collect",
+      "status": "HAS_EXAMPLE"
+    },
+    "slides-compress": {
+      "family": "slides",
+      "class": "Compress",
+      "status": "HAS_EXAMPLE"
+    },
+    "slides-convert": {
+      "family": "slides",
+      "class": "Convert",
+      "status": "HAS_EXAMPLE"
+    },
+    "slides-merger": {
+      "family": "slides",
+      "class": "Merger",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-converter": {
+      "family": "words",
+      "class": "Converter",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-comparer": {
+      "family": "words",
+      "class": "Comparer",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-mail-merger": {
+      "family": "words",
+      "class": "MailMerger",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-replacer": {
+      "family": "words",
+      "class": "Replacer",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-splitter": {
+      "family": "words",
+      "class": "Splitter",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-watermarker": {
+      "family": "words",
+      "class": "Watermarker",
+      "status": "HAS_EXAMPLE"
+    },
+    "words-merger": {
+      "family": "words",
+      "class": "Merger",
+      "status": "HAS_EXAMPLE"
+    }
+  }
+}

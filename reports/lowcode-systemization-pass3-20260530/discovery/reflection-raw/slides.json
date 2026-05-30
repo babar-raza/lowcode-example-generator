@@ -1,0 +1,25 @@
+{
+  "family": "slides",
+  "package": "Aspose.Slides.NET",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "restore_status": "success",
+  "reflection_status": "EVIDENCE_FROM_DURABLE_CLOSURE_SPRINT",
+  "reflection_source": "reports/lowcode-durable-full-closure-20260529/",
+  "lowcode_namespace": "Aspose.Slides.LowCode",
+  "lowcode_types": [
+    "Collect",
+    "Compress",
+    "Convert",
+    "ForEach",
+    "Merger"
+  ],
+  "total_lowcode_types": 17,
+  "main_workflow_classes": [
+    "Collect",
+    "Compress",
+    "Convert",
+    "ForEach",
+    "Merger"
+  ],
+  "note": "5 classes: Collect, Compress, Convert, ForEach, Merger"
+}

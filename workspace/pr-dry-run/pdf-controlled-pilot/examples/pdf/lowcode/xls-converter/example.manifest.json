@@ -1,14 +1,25 @@
 {
   "scenario_id": "pdf-xls-converter",
   "package_id": "Aspose.PDF",
-  "package_version": "26.4.0",
+  "package_version": "26.5.0",
   "target_framework": "net8.0",
   "claimed_symbols": [
     "Aspose.Pdf.LowCode.XlsConverter",
     "Aspose.Pdf.LowCode.XlsConverter.Dispose",
     "Aspose.Pdf.LowCode.XlsConverter.Process"
   ],
-  "status": "repaired",
+  "status": "generated_template_first",
   "input_strategy": "programmatic_input",
-  "input_files": []
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".xlsx",
+  "operation_kind": "converter",
+  "expected_output_extension": ".xlsx",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".xlsx",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/XlsConverter",
+  "contract_hash": "1fbce0551dec2dd0"
 }

@@ -1,0 +1,8 @@
+{
+  "family": "cells",
+  "source_run": "workspace/runs/pilot-cells-20260529-214911/generated/cells",
+  "example_count": 9,
+  "validated_in_sprint": "durable-full-closure-20260529",
+  "e2e_status": "PASS",
+  "notes": "E2E validated (skip_run=False) in durable-full-closure-20260529"
+}

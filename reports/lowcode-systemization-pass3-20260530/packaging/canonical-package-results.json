@@ -1,0 +1,100 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "total_packages": 13,
+  "total_examples": 47,
+  "total_csproj": 56,
+  "total_manifests": 47,
+  "results": [
+    {
+      "package": "cells-controlled-pilot",
+      "examples": 9,
+      "csproj": 9,
+      "manifests": 9,
+      "complete": true
+    },
+    {
+      "package": "diagram-controlled-pilot",
+      "examples": 2,
+      "csproj": 2,
+      "manifests": 2,
+      "complete": true
+    },
+    {
+      "package": "email-controlled-pilot",
+      "examples": 2,
+      "csproj": 2,
+      "manifests": 2,
+      "complete": true
+    },
+    {
+      "package": "pdf-controlled-pilot",
+      "examples": 3,
+      "csproj": 6,
+      "manifests": 3,
+      "complete": false
+    },
+    {
+      "package": "pdf-controlled-pilot-pr10",
+      "examples": 5,
+      "csproj": 5,
+      "manifests": 5,
+      "complete": true
+    },
+    {
+      "package": "pdf-controlled-pilot-pr11",
+      "examples": 1,
+      "csproj": 1,
+      "manifests": 1,
+      "complete": true
+    },
+    {
+      "package": "pdf-controlled-pilot-pr5",
+      "examples": 3,
+      "csproj": 6,
+      "manifests": 3,
+      "complete": false
+    },
+    {
+      "package": "pdf-controlled-pilot-pr6",
+      "examples": 3,
+      "csproj": 6,
+      "manifests": 3,
+      "complete": false
+    },
+    {
+      "package": "pdf-controlled-pilot-pr7",
+      "examples": 2,
+      "csproj": 2,
+      "manifests": 2,
+      "complete": true
+    },
+    {
+      "package": "pdf-controlled-pilot-pr8",
+      "examples": 2,
+      "csproj": 2,
+      "manifests": 2,
+      "complete": true
+    },
+    {
+      "package": "pdf-controlled-pilot-pr9",
+      "examples": 1,
+      "csproj": 1,
+      "manifests": 1,
+      "complete": true
+    },
+    {
+      "package": "slides-controlled-pilot",
+      "examples": 6,
+      "csproj": 6,
+      "manifests": 6,
+      "complete": true
+    },
+    {
+      "package": "words-controlled-pilot",
+      "examples": 8,
+      "csproj": 8,
+      "manifests": 8,
+      "complete": true
+    }
+  ]
+}

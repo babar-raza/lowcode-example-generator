@@ -1,0 +1,38 @@
+# page — dotnet restore probe
+# Package: Aspose.Page
+# Status: success
+# Sprint: lowcode-systemization-pass3-20260530
+
+Build started 30/05/2026 6:01:22 pm.
+     1>Project "C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\probe-page.csproj" on node 1 (Restore target(s)).
+     1>_GetAllRestoreProjectPathItems:
+         Determining projects to restore...
+       Restore:
+         X.509 certificate chain validation will use the default trust store selected by .NET for code signing.
+         X.509 certificate chain validation will use the default trust store selected by .NET for timestamping.
+         Restoring packages for C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\probe-page.csproj...
+           GET https://api.nuget.org/v3-flatcontainer/aspose.page/index.json
+           OK https://api.nuget.org/v3-flatcontainer/aspose.page/index.json 950ms
+           CACHE https://api.nuget.org/v3/vulnerabilities/index.json
+           CACHE https://api.nuget.org/v3-vulnerabilities/2026.05.30.05.46.15/vulnerability.base.json
+           CACHE https://api.nuget.org/v3-vulnerabilities/2026.05.30.05.46.15/2026.05.30.05.46.15/vulnerability.update.json
+         Generating MSBuild file C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\obj\probe-page.csproj.nuget.g.props.
+         Generating MSBuild file C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\obj\probe-page.csproj.nuget.g.targets.
+         Writing assets file to disk. Path: C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\obj\project.assets.json
+         Restored C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\probe-page.csproj (in 1.68 sec).
+         
+         NuGet Config files used:
+             C:\Users\prora\AppData\Roaming\NuGet\NuGet.Config
+             C:\Program Files (x86)\NuGet\Config\Microsoft.VisualStudio.FallbackLocation.config
+             C:\Program Files (x86)\NuGet\Config\Microsoft.VisualStudio.Offline.config
+         
+         Feeds used:
+             https://api.nuget.org/v3/index.json
+             C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\
+     1>Done Building Project "C:\Users\prora\AppData\Local\Temp\tmpphgo12a1\probe-page\probe-page.csproj" (Restore target(s)).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.06

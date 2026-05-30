@@ -1,0 +1,6 @@
+# Template Regeneration Tests
+Date: 2026-05-30
+
+Template-mode runs blocked by catalog hash gate in pass3.
+Resolution: update denominator hash in pipeline/configs/denominators/{family}.json
+STATUS: CATALOG_HASH_GATE_BLOCKER (not a generation failure)

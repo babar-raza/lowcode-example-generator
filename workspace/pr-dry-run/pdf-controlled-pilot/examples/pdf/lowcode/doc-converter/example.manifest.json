@@ -1,14 +1,25 @@
 {
   "scenario_id": "pdf-doc-converter",
   "package_id": "Aspose.PDF",
-  "package_version": "26.4.0",
+  "package_version": "26.5.0",
   "target_framework": "net8.0",
   "claimed_symbols": [
     "Aspose.Pdf.LowCode.DocConverter",
     "Aspose.Pdf.LowCode.DocConverter.Dispose",
     "Aspose.Pdf.LowCode.DocConverter.Process"
   ],
-  "status": "repaired",
+  "status": "generated_template_first",
   "input_strategy": "programmatic_input",
-  "input_files": []
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".docx",
+  "operation_kind": "converter",
+  "expected_output_extension": ".docx",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".docx",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/DocConverter",
+  "contract_hash": "b21bb2ce0f37e27b"
 }

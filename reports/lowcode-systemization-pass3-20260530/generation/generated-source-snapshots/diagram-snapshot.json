@@ -1,0 +1,8 @@
+{
+  "family": "diagram",
+  "source_run": "workspace/runs/pilot-diagram-20260529-221021/generated/diagram",
+  "example_count": 2,
+  "validated_in_sprint": "durable-full-closure-20260529",
+  "e2e_status": "PASS",
+  "notes": "E2E validated (skip_run=False) in durable-full-closure-20260529"
+}

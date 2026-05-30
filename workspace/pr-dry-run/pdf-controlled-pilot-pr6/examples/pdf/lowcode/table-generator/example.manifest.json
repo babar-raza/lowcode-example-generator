@@ -10,5 +10,16 @@
   ],
   "status": "generated_template_first",
   "input_strategy": "programmatic_input",
-  "input_files": []
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pdf",
+  "operation_kind": "generator",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "processor",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/TableGenerator",
+  "contract_hash": "a194e5a931afa806"
 }

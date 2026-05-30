@@ -3,6 +3,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspose.PDF" Version="26.4.0" />
+    <PackageVersion Include="Aspose.PDF" Version="26.5.0" />
   </ItemGroup>
 </Project>

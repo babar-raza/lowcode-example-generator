@@ -1,0 +1,60 @@
+{
+  "family": "words",
+  "namespace": "Aspose.Words.LowCode",
+  "types": [
+    {
+      "name": "Converter",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-converter",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Comparer",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-comparer",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "MailMerger",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-mail-merger",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Replacer",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-replacer",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Splitter",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-splitter",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Watermarker",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-watermarker",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Merger",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": "words-merger",
+      "status": "HAS_EXAMPLE"
+    },
+    {
+      "name": "Signer",
+      "category": "MAIN_WORKFLOW_CLASS",
+      "example": null,
+      "status": "NEEDS_EXAMPLE"
+    },
+    {
+      "name": "Processor",
+      "category": "NEEDS_API_INVESTIGATION",
+      "example": null,
+      "status": "NEEDS_API_INVESTIGATION"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "family": "email",
+  "package": "Aspose.Email",
+  "sprint": "lowcode-systemization-pass3-20260530",
+  "restore_status": "success",
+  "reflection_status": "EVIDENCE_FROM_DURABLE_CLOSURE_SPRINT",
+  "reflection_source": "reports/lowcode-durable-full-closure-20260529/",
+  "lowcode_namespace": "Aspose.Email.LowCode",
+  "lowcode_types": [
+    "Converter"
+  ],
+  "total_lowcode_types": 12,
+  "main_workflow_classes": [
+    "Converter"
+  ],
+  "note": "Converter class"
+}

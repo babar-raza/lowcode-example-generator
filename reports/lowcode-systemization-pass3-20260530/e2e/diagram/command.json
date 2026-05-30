@@ -1,0 +1,6 @@
+{
+  "family": "diagram",
+  "run_id": "full-e2e-diagram-20260529",
+  "command": ".venv/Scripts/python.exe scripts/pilot_run.py --family diagram --no-skip-run --run-id full-e2e-diagram-20260529",
+  "evidence_source": "durable-full-closure-20260529"
+}

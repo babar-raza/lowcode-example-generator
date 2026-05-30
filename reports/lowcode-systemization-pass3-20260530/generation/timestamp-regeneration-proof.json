@@ -1,0 +1,10 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "generated_at": "2026-05-30",
+  "example": "pdf-timestamp",
+  "source_run": null,
+  "status": "NETWORK_DEPENDENCY_BLOCKER",
+  "decision": "EXCLUDED_FROM_PUBLICATION_CANDIDATES",
+  "reason": "Requires live TSA endpoint for network-dependent timestamp embedding",
+  "retry_condition": "Valid TSA endpoint credential available"
+}

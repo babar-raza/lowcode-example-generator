@@ -1,0 +1,18 @@
+{
+  "Directory.Build.props": "c466b42097ce7bf42b26d40688cf7171c6805f8abdb289d0f2b50fa192463e09",
+  "Directory.Packages.props": "c78b2e1dec639b68afdb44b66d3f723160fa9dd1e67d5ec5f374fafd6cfba7b1",
+  "examples/email/lowcode/converter/converter.csproj": "9c0a20efca2327cbfafa2d71f91ea959449ef438c61cf92dbf7b27252dc3e431",
+  "examples/email/lowcode/converter/example.manifest.json": "48b51e37ae0813a197b0818932b57d06bcdf0c7d783ca9872c45589e0f76d45e",
+  "examples/email/lowcode/converter/expected-output.json": "6cd03780fd3fdd39585ea14b49a5f0262399564fb094f1c27e119eeb0d9b3553",
+  "examples/email/lowcode/converter/input.eml": "edde18a8662f88e7f0cac99f2957d0c0a341dbd6c9a942341a38e5adcb4b62bd",
+  "examples/email/lowcode/converter/Program.cs": "762f4899caa690221b6b7348d697101b7220b6b714586cbd24b1173b6e17ed45",
+  "examples/email/lowcode/converter/README.md": "89d4852b67c5a6a2625c95aa6b2f5de54bce275faf237aa8df68141249ab43e1",
+  "examples/email/lowcode/email-converter/email-converter.csproj": "b96b2b8efde0d54d1f5c816948ddd8da26b24d77e07403fa40c97cc083f80b56",
+  "examples/email/lowcode/email-converter/example.manifest.json": "48b51e37ae0813a197b0818932b57d06bcdf0c7d783ca9872c45589e0f76d45e",
+  "examples/email/lowcode/email-converter/expected-output.json": "6cd03780fd3fdd39585ea14b49a5f0262399564fb094f1c27e119eeb0d9b3553",
+  "examples/email/lowcode/email-converter/input.eml": "edde18a8662f88e7f0cac99f2957d0c0a341dbd6c9a942341a38e5adcb4b62bd",
+  "examples/email/lowcode/email-converter/output_html/input.html": "6260226d75b035174bb9548dd7678d4abf4ab54069cf59c79be1643e42c14adf",
+  "examples/email/lowcode/email-converter/Program.cs": "762f4899caa690221b6b7348d697101b7220b6b714586cbd24b1173b6e17ed45",
+  "global.json": "24d529fb57efc6a92ec3e2a61e45c70a26f7304848fc3fcdb3447266d6319a19",
+  "README.md": "7e44d48c29be6c222a512ab557da82d682ebc868d104820463e0299e1b5983de"
+}

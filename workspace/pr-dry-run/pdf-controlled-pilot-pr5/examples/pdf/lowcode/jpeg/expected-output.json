@@ -15,5 +15,8 @@
     "Console.ReadLine(",
     "TODO",
     "NotImplementedException"
-  ]
+  ],
+  "expected_output_extension": ".jpg",
+  "expected_output_kind": "file",
+  "expected_output_cardinality": "multi"
 }

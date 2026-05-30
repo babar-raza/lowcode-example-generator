@@ -1,0 +1,235 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "results": [
+    {
+      "example": "html-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "image-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "json-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "pdf-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "spreadsheet-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "spreadsheet-locker",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "spreadsheet-merger",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "spreadsheet-splitter",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "text-converter",
+      "package": "cells-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "diagram-converter",
+      "package": "diagram-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "pdf-converter",
+      "package": "diagram-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "converter",
+      "package": "email-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "email-converter",
+      "package": "email-controlled-pilot",
+      "has_output": false
+    },
+    {
+      "example": "doc-converter",
+      "package": "pdf-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "html",
+      "package": "pdf-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "xls-converter",
+      "package": "pdf-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "merger",
+      "package": "pdf-controlled-pilot-pr10",
+      "has_output": true
+    },
+    {
+      "example": "optimizer",
+      "package": "pdf-controlled-pilot-pr10",
+      "has_output": true
+    },
+    {
+      "example": "pdf-aconverter",
+      "package": "pdf-controlled-pilot-pr10",
+      "has_output": true
+    },
+    {
+      "example": "splitter",
+      "package": "pdf-controlled-pilot-pr10",
+      "has_output": true
+    },
+    {
+      "example": "text-extractor",
+      "package": "pdf-controlled-pilot-pr10",
+      "has_output": false
+    },
+    {
+      "example": "jpeg",
+      "package": "pdf-controlled-pilot-pr5",
+      "has_output": false
+    },
+    {
+      "example": "png",
+      "package": "pdf-controlled-pilot-pr5",
+      "has_output": false
+    },
+    {
+      "example": "tiff",
+      "package": "pdf-controlled-pilot-pr5",
+      "has_output": false
+    },
+    {
+      "example": "image-extractor",
+      "package": "pdf-controlled-pilot-pr6",
+      "has_output": false
+    },
+    {
+      "example": "table-generator",
+      "package": "pdf-controlled-pilot-pr6",
+      "has_output": true
+    },
+    {
+      "example": "toc-generator",
+      "package": "pdf-controlled-pilot-pr6",
+      "has_output": true
+    },
+    {
+      "example": "form-flattener",
+      "package": "pdf-controlled-pilot-pr7",
+      "has_output": true
+    },
+    {
+      "example": "security",
+      "package": "pdf-controlled-pilot-pr7",
+      "has_output": true
+    },
+    {
+      "example": "form-editor",
+      "package": "pdf-controlled-pilot-pr8",
+      "has_output": true
+    },
+    {
+      "example": "form-exporter",
+      "package": "pdf-controlled-pilot-pr8",
+      "has_output": true
+    },
+    {
+      "example": "signature",
+      "package": "pdf-controlled-pilot-pr9",
+      "has_output": true
+    },
+    {
+      "example": "compress",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "convert",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "merger",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "slides-compress",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "slides-convert",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "slides-merger",
+      "package": "slides-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "comparer",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "converter",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "mail-merger",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "merger",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "replacer",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "report-builder",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "splitter",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    },
+    {
+      "example": "watermarker",
+      "package": "words-controlled-pilot",
+      "has_output": true
+    }
+  ]
+}

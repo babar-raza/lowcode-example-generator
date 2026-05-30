@@ -1,0 +1,31 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "total": 42,
+  "passed": 42,
+  "failed": 0,
+  "duplicate_excluded": 4,
+  "verdict": "REVIEW_PASSED",
+  "results": [],
+  "duplicate_excluded_list": [
+    {
+      "example": "email-converter",
+      "package": "email-controlled-pilot",
+      "reason": "DUPLICATE_SLUG_EXCLUDED"
+    },
+    {
+      "example": "slides-compress",
+      "package": "slides-controlled-pilot",
+      "reason": "DUPLICATE_SLUG_EXCLUDED"
+    },
+    {
+      "example": "slides-convert",
+      "package": "slides-controlled-pilot",
+      "reason": "DUPLICATE_SLUG_EXCLUDED"
+    },
+    {
+      "example": "slides-merger",
+      "package": "slides-controlled-pilot",
+      "reason": "DUPLICATE_SLUG_EXCLUDED"
+    }
+  ]
+}

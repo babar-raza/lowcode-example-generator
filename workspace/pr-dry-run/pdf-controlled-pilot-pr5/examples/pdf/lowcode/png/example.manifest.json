@@ -8,5 +8,16 @@
   ],
   "status": "generated_template_first",
   "input_strategy": "programmatic_input",
-  "input_files": []
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".png",
+  "operation_kind": "converter",
+  "expected_output_extension": ".png",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".png",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "multi",
+  "contract_id": "pdf/Png",
+  "contract_hash": "b3d7f619d480f482"
 }

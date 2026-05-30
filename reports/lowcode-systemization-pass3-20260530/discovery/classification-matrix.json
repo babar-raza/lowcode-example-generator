@@ -1,0 +1,232 @@
+{
+  "sprint_id": "lowcode-systemization-pass3-20260530",
+  "generated_at": "2026-05-30",
+  "total_families": 27,
+  "LOWCODE_CONFIRMED": 6,
+  "NO_LOWCODE_CONFIRMED": 20,
+  "FORMAT_CAPABILITY_OF_OTHER_PRODUCT": 1,
+  "families": {
+    "barcode": {
+      "package": "Aspose.BarCode",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "barcode generation; no LowCode namespace"
+    },
+    "cad": {
+      "package": "Aspose.CAD",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "CAD file processing"
+    },
+    "cells": {
+      "package": "Aspose.Cells",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Cells.LowCode",
+      "lowcode_types_count": 22,
+      "notes": "9 main operation classes"
+    },
+    "diagram": {
+      "package": "Aspose.Diagram",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Diagram.LowCode",
+      "lowcode_types_count": 5,
+      "notes": "2 main operation classes"
+    },
+    "drawing": {
+      "package": "Aspose.Drawing",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "drawing primitives"
+    },
+    "email": {
+      "package": "Aspose.Email",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Email.LowCode",
+      "lowcode_types_count": 12,
+      "notes": "Converter class"
+    },
+    "epub": {
+      "package": "N/A",
+      "classification": "FORMAT_CAPABILITY_OF_OTHER_PRODUCT",
+      "restore": "NO_STANDALONE_PACKAGE",
+      "reflection": "NOT_APPLICABLE",
+      "lowcode_types_count": 0,
+      "notes": "no standalone package; EPUB in Words/HTML"
+    },
+    "finance": {
+      "package": "Aspose.Finance",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "financial formats"
+    },
+    "font": {
+      "package": "Aspose.Font",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "font management"
+    },
+    "gis": {
+      "package": "Aspose.GIS",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "geospatial data"
+    },
+    "html": {
+      "package": "Aspose.HTML",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "HTML processing"
+    },
+    "imaging": {
+      "package": "Aspose.Imaging",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "image processing"
+    },
+    "medical": {
+      "package": "Aspose.Medical",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "DICOM; reflection blocked: System.IO.Pipelines"
+    },
+    "note": {
+      "package": "Aspose.Note",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "OneNote files"
+    },
+    "ocr": {
+      "package": "Aspose.OCR",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "OCR; reflection via direct DLL"
+    },
+    "omr": {
+      "package": "Aspose.OMR",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "optical mark recognition"
+    },
+    "page": {
+      "package": "Aspose.Page",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "EPS/XPS/PS"
+    },
+    "pdf": {
+      "package": "Aspose.PDF",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Pdf.LowCode",
+      "lowcode_types_count": 106,
+      "notes": "~22 main operation classes"
+    },
+    "psd": {
+      "package": "Aspose.PSD",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "PSD files; reflection via direct DLL"
+    },
+    "pub": {
+      "package": "Aspose.PUB",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "MS Publisher files"
+    },
+    "slides": {
+      "package": "Aspose.Slides.NET",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Slides.LowCode",
+      "lowcode_types_count": 17,
+      "notes": "5 classes: Collect, Compress, Convert, ForEach, Merger"
+    },
+    "svg": {
+      "package": "Aspose.SVG",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "SVG processing"
+    },
+    "tasks": {
+      "package": "Aspose.Tasks",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "project management"
+    },
+    "tex": {
+      "package": "Aspose.TeX",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "TeX/LaTeX"
+    },
+    "threed": {
+      "package": "Aspose.3D",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "3D file formats"
+    },
+    "words": {
+      "package": "Aspose.Words",
+      "classification": "LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "EVIDENCE_CONFIRMED",
+      "lowcode_namespace": "Aspose.Words.LowCode",
+      "lowcode_types_count": 25,
+      "notes": "9 main classes"
+    },
+    "zip": {
+      "package": "Aspose.Zip",
+      "classification": "NO_LOWCODE_CONFIRMED",
+      "restore": "success",
+      "reflection": "NO_LOWCODE_NAMESPACE",
+      "lowcode_types_count": 0,
+      "notes": "compression formats"
+    }
+  }
+}

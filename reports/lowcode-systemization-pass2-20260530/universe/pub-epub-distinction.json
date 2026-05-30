@@ -15,22 +15,22 @@
     },
     "Aspose.Epub": {
       "nuget_package": "N/A",
-      "description": "EPUB e-book format (rumored product)",
+      "description": "EPUB e-book format — NOT a standalone Aspose product",
       "nuget_available": false,
-      "restore_status": "EXTERNAL_PACKAGE_BLOCKER",
-      "classification": "EXTERNAL_PACKAGE_BLOCKER",
+      "restore_status": "NOT_A_PRODUCT",
+      "classification": "NOT_A_PRODUCT",
       "version_tested": null,
       "lowcode_namespace": false,
-      "note": "No standalone 'Aspose.Epub' NuGet package exists on nuget.org. Attempting restore gives NU1101: Unable to find package Aspose.Epub. EPUB functionality may be part of another Aspose product (e.g. Aspose.Words or Aspose.HTML) but is not a standalone SDK."
+      "note": "No standalone 'Aspose.Epub' NuGet package exists on nuget.org. EPUB support is part of Aspose.Words. Removed from the 26-family universe in pass2 correction. Replaced by Aspose.Medical."
     }
   },
   "distinction": {
     "Aspose.PUB": "REAL_PRODUCT — restores successfully, 2320 types, NO_LOWCODE_CONFIRMED",
-    "Aspose.Epub": "EXTERNAL_PACKAGE_BLOCKER — no NuGet package, NU1101 error on restore attempt"
+    "Aspose.Epub": "NOT_A_PRODUCT — no NuGet package exists; EPUB is part of Aspose.Words; removed from universe"
   },
   "impact_on_universe": {
     "pub_included_in_26_family": true,
-    "epub_included_in_26_family": true,
-    "epub_classification": "EXTERNAL_PACKAGE_BLOCKER — excluded from example generation"
+    "epub_included_in_26_family": false,
+    "epub_classification": "NOT_A_PRODUCT — removed from universe; Aspose.Medical added in its place"
   }
 }

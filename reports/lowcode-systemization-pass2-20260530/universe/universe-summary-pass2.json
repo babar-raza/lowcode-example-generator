@@ -5,20 +5,20 @@
   "total_families": 26,
   "classifications": {
     "LOWCODE_CONFIRMED": 6,
-    "NO_LOWCODE_CONFIRMED": 19,
-    "EXTERNAL_PACKAGE_BLOCKER": 1
+    "NO_LOWCODE_CONFIRMED": 20,
+    "EXTERNAL_PACKAGE_BLOCKER": 0
   },
   "restore_evidence": {
     "restore_logs_dir": "reports/lowcode-systemization-pass2-20260530/discovery/restore-logs/",
     "total_logs": 26,
     "non_empty_logs": 26,
-    "success_logs": 25,
-    "expected_blocker_logs": 1,
+    "success_logs": 26,
+    "expected_blocker_logs": 0,
     "zero_byte_logs": 0,
-    "note": "All 26 families have real non-empty dotnet restore output. Prior sprint had 16 zero-byte logs and 9 missing logs — all fixed in this sprint."
+    "note": "All 26 families have real non-empty dotnet restore output. Prior sprint had 16 zero-byte logs and 9 missing logs — all fixed in this sprint. epub removed (NOT_A_PRODUCT); Aspose.Medical added (success, 26.3.0)."
   },
   "restore_summary_file": "reports/lowcode-systemization-pass2-20260530/discovery/restore-summary.json",
-  "defect_fixed": "SD-001 — Zero-byte restore logs: RESOLVED. All 26 families now have real NuGet restore evidence.",
+  "defect_fixed": "SD-001 — Zero-byte restore logs: RESOLVED. All 26 families now have real NuGet restore evidence. epub removed (NOT_A_PRODUCT), Aspose.Medical added (success).",
   "families": [
     {"family": "barcode", "package": "Aspose.BarCode", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
     {"family": "cad", "package": "Aspose.CAD", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
@@ -26,7 +26,7 @@
     {"family": "diagram", "package": "Aspose.Diagram", "status": "success", "classification": "LOWCODE_CONFIRMED"},
     {"family": "drawing", "package": "Aspose.Drawing", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
     {"family": "email", "package": "Aspose.Email", "status": "success", "classification": "LOWCODE_CONFIRMED"},
-    {"family": "epub", "package": "N/A", "status": "EXTERNAL_PACKAGE_BLOCKER", "classification": "EXTERNAL_PACKAGE_BLOCKER"},
+    {"family": "medical", "package": "Aspose.Medical", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
     {"family": "finance", "package": "Aspose.Finance", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
     {"family": "font", "package": "Aspose.Font", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},
     {"family": "gis", "package": "Aspose.GIS", "status": "success", "classification": "NO_LOWCODE_CONFIRMED"},

@@ -4,8 +4,10 @@
   "total_families": 26,
   "summary": {
     "LOWCODE_CONFIRMED": 6,
-    "NO_LOWCODE_CONFIRMED": 19,
-    "EXTERNAL_PACKAGE_BLOCKER": 1
+    "NO_LOWCODE_CONFIRMED": 20
+  },
+  "removed": {
+    "epub": "NOT_A_PRODUCT — no standalone Aspose.Epub NuGet package exists. EPUB support is part of Aspose.Words. Removed from universe."
   },
   "families": [
     {
@@ -225,13 +227,13 @@
       "note": "OCR; reflection via direct DLL"
     },
     {
-      "family": "epub",
-      "package": "N/A",
-      "restore": "failed",
-      "classification": "EXTERNAL_PACKAGE_BLOCKER",
+      "family": "medical",
+      "package": "Aspose.Medical",
+      "restore": "success",
+      "classification": "NO_LOWCODE_CONFIRMED",
       "total_types": null,
       "lowcode_count": 0,
-      "note": "NU1101: no standalone Aspose.Epub NuGet package"
+      "note": "DICOM and medical file formats. Restore success (26.3.0). Reflection probe failed (System.IO.Pipelines dependency — same pattern as psd/ocr). No LowCode namespace found. Added in pass2 correction — epub (NOT_A_PRODUCT) removed, Medical added."
     },
     {
       "family": "zip",

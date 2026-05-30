@@ -3,6 +3,9 @@
 Creates a minimal .csproj probe for each family, runs `dotnet restore`,
 captures non-empty stdout/stderr to restore logs.
 
+Universe (pass2): epub removed (NOT_A_PRODUCT), Aspose.Medical added.
+All 26 families restore successfully (success=26, external_package_blocker=0).
+
 Output: reports/lowcode-systemization-pass2-20260530/discovery/restore-logs/<family>.log
 """
 
@@ -27,7 +30,7 @@ FAMILIES = [
     ("diagram", "Aspose.Diagram", "success"),
     ("drawing", "Aspose.Drawing", "success"),
     ("email", "Aspose.Email", "success"),
-    ("epub", None, "external_package_blocker"),   # no NuGet package
+    ("medical", "Aspose.Medical", "success"),      # DICOM/medical — added pass2 (epub removed: NOT_A_PRODUCT)
     ("finance", "Aspose.Finance", "success"),
     ("font", "Aspose.Font", "success"),
     ("gis", "Aspose.GIS", "success"),
@@ -66,8 +69,8 @@ PROBE_CSPROJ_TEMPLATE = """\
 def run_restore(family: str, package: str | None, tmpdir: Path) -> tuple[str, bool]:
     """Run dotnet restore for a family. Returns (log_content, success)."""
     if package is None:
-        # EXTERNAL_PACKAGE_BLOCKER — create a csproj that will fail with NU1101
-        fake_package = "Aspose.Epub"
+        # EXTERNAL_PACKAGE_BLOCKER — create a csproj that will fail with NU1101 (no families in this state after pass2)
+        fake_package = "Aspose.Unknown"
         csproj_content = PROBE_CSPROJ_TEMPLATE.format(package=fake_package)
     else:
         csproj_content = PROBE_CSPROJ_TEMPLATE.format(package=package)
@@ -105,7 +108,7 @@ def main():
             print(f"  [{family}] Restoring {package or 'N/A (EXTERNAL_PACKAGE_BLOCKER)'}...", end=" ", flush=True)
 
             if package is None:
-                # epub — attempt restore, document failure
+                # EXTERNAL_PACKAGE_BLOCKER — attempt restore, document failure
                 log_content, success = run_restore(family, None, tmp)
                 status = "EXTERNAL_PACKAGE_BLOCKER"
                 print(f"EXTERNAL_BLOCKER (expected)")
@@ -155,9 +158,10 @@ def main():
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(f"\n=== Restore probe complete ===")
-    print(f"Success: {success_count}/26")
-    print(f"External blocker: {blocker_count}/26")
-    print(f"Failed: {failed_count}/26")
+    total = len(FAMILIES)
+    print(f"Success: {success_count}/{total}")
+    print(f"External blocker: {blocker_count}/{total}")
+    print(f"Failed: {failed_count}/{total}")
     print(f"Summary: {summary_path}")
 
     if failed_count > 0:

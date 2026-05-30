@@ -2,8 +2,8 @@
   "sprint_id": "lowcode-systemization-pass2-20260530",
   "lane": "B1 \u2014 Universe evidence repair: real dotnet restore",
   "total_families": 26,
-  "success": 25,
-  "external_package_blocker": 1,
+  "success": 26,
+  "external_package_blocker": 0,
   "failed": 0,
   "families": {
     "barcode": {
@@ -48,11 +48,11 @@
       "expected": "success",
       "match": true
     },
-    "epub": {
-      "package": null,
-      "status": "EXTERNAL_PACKAGE_BLOCKER",
-      "log_bytes": 2971,
-      "expected": "external_package_blocker",
+    "medical": {
+      "package": "Aspose.Medical",
+      "status": "success",
+      "log_bytes": 2183,
+      "expected": "success",
       "match": true
     },
     "finance": {

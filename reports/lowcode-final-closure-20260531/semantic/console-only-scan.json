@@ -1,0 +1,291 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "total": 39,
+  "console_only_count": 1,
+  "console_only_examples": [
+    {
+      "family": "words",
+      "example": "words-report-builder",
+      "has_lowcode_call": false,
+      "console_only": true,
+      "lowcode_call_count": 0
+    }
+  ],
+  "verdict": "FAIL \u2014 1 console-only",
+  "results": [
+    {
+      "family": "cells",
+      "example": "cells-html-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-image-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-json-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-pdf-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-locker",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-merger",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-splitter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "cells",
+      "example": "cells-text-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-diagram-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-pdf-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "email",
+      "example": "email-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-doc-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-editor",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-exporter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 2
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-flattener",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-html",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-image-extractor",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 2
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-jpeg",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-merger",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-optimizer",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-pdf-aconverter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-png",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-security",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-signature",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-splitter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-table-generator",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-text-extractor",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 3
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-tiff",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-toc-generator",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-xls-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-comparer",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-converter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 2
+    },
+    {
+      "family": "words",
+      "example": "words-mail-merger",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-merger",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-replacer",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-report-builder",
+      "has_lowcode_call": false,
+      "console_only": true,
+      "lowcode_call_count": 0
+    },
+    {
+      "family": "words",
+      "example": "words-splitter",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 1
+    },
+    {
+      "family": "words",
+      "example": "words-watermarker",
+      "has_lowcode_call": true,
+      "console_only": false,
+      "lowcode_call_count": 2
+    }
+  ]
+}

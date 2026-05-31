@@ -1,0 +1,32 @@
+{
+  "pdf-image-extractor": {
+    "kind": "result_object_stdout",
+    "class": "ImageExtractor",
+    "result_type": "ResultCollection",
+    "expected_stdout_contains": [
+      "Images extracted",
+      "No images found"
+    ],
+    "classification": "in_memory_result_with_stdout_confirmation",
+    "run_stdout": "Images extracted",
+    "exit_code": 0,
+    "stdout_matches_expected": true,
+    "has_output": true,
+    "validation_status": "PASS"
+  },
+  "pdf-text-extractor": {
+    "kind": "result_object_stdout",
+    "class": "TextExtractor",
+    "result_type": "ResultCollection",
+    "expected_stdout_contains": [
+      "Extracted text from",
+      "No text extracted"
+    ],
+    "classification": "result_object_stdout_only",
+    "run_stdout": "Extracted text from 1 page(s)",
+    "exit_code": 0,
+    "stdout_matches_expected": true,
+    "has_output": true,
+    "validation_status": "PASS"
+  }
+}

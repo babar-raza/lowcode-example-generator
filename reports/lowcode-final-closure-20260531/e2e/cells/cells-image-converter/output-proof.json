@@ -1,0 +1,8 @@
+{
+  "slug": "cells-image-converter",
+  "run_stdout": "",
+  "output_files": [
+    "output.png"
+  ],
+  "has_output": true
+}

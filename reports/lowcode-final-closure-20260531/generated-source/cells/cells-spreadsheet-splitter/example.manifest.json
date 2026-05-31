@@ -1,0 +1,27 @@
+{
+  "scenario_id": "cells-spreadsheet-splitter",
+  "package_id": "Aspose.Cells",
+  "package_version": "26.5.1",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Cells.LowCode.SpreadsheetSplitter",
+    "Aspose.Cells.LowCode.SpreadsheetSplitter.Process",
+    "Aspose.Cells.LowCode.SpreadsheetSplitter.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "input_format": ".xlsx",
+  "output_format": ".xlsx",
+  "operation_kind": "splitter",
+  "expected_output_extension": ".xlsx",
+  "contract_input_format": ".xlsx",
+  "contract_output_format": ".xlsx",
+  "contract_operation_kind": "splitter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "multi",
+  "contract_id": "cells/SpreadsheetSplitter",
+  "contract_hash": "8c0a404bae68abe7"
+}

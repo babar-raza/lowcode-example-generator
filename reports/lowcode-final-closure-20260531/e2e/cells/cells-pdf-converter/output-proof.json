@@ -1,0 +1,8 @@
+{
+  "slug": "cells-pdf-converter",
+  "run_stdout": "",
+  "output_files": [
+    "output.pdf"
+  ],
+  "has_output": true
+}

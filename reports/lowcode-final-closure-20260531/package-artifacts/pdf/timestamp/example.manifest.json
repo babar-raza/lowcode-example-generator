@@ -1,0 +1,26 @@
+{
+  "scenario_id": "pdf-timestamp",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.TimestampEmbedder"
+  ],
+  "status": "NETWORK_DEPENDENCY_BLOCKER",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.pdf"
+  ],
+  "input_format": ".pdf",
+  "output_format": ".pdf",
+  "operation_kind": "timestamp",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "timestamp",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/Timestamp",
+  "contract_hash": "timestamp-pass3",
+  "pass3_note": "EXCLUDED from publication candidates \u2014 NETWORK_DEPENDENCY_BLOCKER (requires live TSA endpoint)"
+}

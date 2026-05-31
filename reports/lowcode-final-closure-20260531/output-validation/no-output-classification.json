@@ -1,0 +1,22 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "classified_examples": [
+    {
+      "example": "pdf-image-extractor",
+      "classification": "in_memory_result_with_stdout_confirmation",
+      "output_kind": "result_object_stdout",
+      "has_physical_file_output": false,
+      "has_stdout_output": true,
+      "has_result_object": true
+    },
+    {
+      "example": "pdf-text-extractor",
+      "classification": "result_object_stdout_only",
+      "output_kind": "result_object_stdout",
+      "has_physical_file_output": false,
+      "has_stdout_output": true,
+      "has_result_object": true
+    }
+  ]
+}

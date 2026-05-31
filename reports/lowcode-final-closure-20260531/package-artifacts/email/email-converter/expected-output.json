@@ -1,0 +1,22 @@
+{
+  "must_contain": [
+    "Example: email-converter"
+  ],
+  "must_not_contain": [
+    "Unhandled exception",
+    "System.Exception",
+    "Console.ReadKey",
+    "Console.ReadLine"
+  ],
+  "has_output": true,
+  "input_dependencies": [],
+  "forbidden_code_patterns": [
+    "Console.ReadKey(",
+    "Console.ReadLine(",
+    "TODO",
+    "NotImplementedException"
+  ],
+  "expected_output_extension": "directory",
+  "expected_output_kind": "directory",
+  "expected_output_cardinality": "multi"
+}

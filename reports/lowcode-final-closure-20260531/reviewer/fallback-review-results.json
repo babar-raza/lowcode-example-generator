@@ -1,0 +1,304 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:35:41",
+  "total": 42,
+  "passed": 42,
+  "failed": 0,
+  "pass_rate": "42/42",
+  "results": [
+    {
+      "family": "cells",
+      "example": "cells-html-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-image-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-json-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-pdf-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-locker",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-merger",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-splitter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "cells",
+      "example": "cells-text-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-diagram-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-pdf-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "email",
+      "example": "email-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-doc-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-editor",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-exporter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-flattener",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-html",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-image-extractor",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-jpeg",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-merger",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-optimizer",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-pdf-aconverter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-png",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-security",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-signature",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-splitter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-table-generator",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-text-extractor",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-tiff",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-toc-generator",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-xls-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "slides",
+      "example": "slides-compress",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "slides",
+      "example": "slides-convert",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "slides",
+      "example": "slides-merger",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-comparer",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-converter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-mail-merger",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-merger",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-replacer",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-report-builder",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-splitter",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    },
+    {
+      "family": "words",
+      "example": "words-watermarker",
+      "passed": true,
+      "issues": [],
+      "review_score": 100
+    }
+  ]
+}

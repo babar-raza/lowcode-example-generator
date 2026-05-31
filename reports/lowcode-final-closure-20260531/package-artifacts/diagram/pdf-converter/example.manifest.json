@@ -1,0 +1,25 @@
+{
+  "scenario_id": "diagram-pdf-converter",
+  "package_id": "Aspose.Diagram",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Diagram.LowCode.PdfConverter",
+    "Aspose.Diagram.LowCode.PdfConverter.Process",
+    "Aspose.Diagram.LowCode.PdfConverter.Process"
+  ],
+  "status": "generated_template_first",
+  "input_strategy": "programmatic_input",
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pdf",
+  "operation_kind": "converter",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".vsdx",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "converter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "diagram/PdfConverter",
+  "contract_hash": "836b4a1a4e4880ca"
+}

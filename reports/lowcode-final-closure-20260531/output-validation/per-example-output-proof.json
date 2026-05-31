@@ -1,0 +1,505 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "source": "run_final_closure_evidence.py",
+  "total": 42,
+  "proofs": [
+    {
+      "family": "cells",
+      "example": "cells-html-converter",
+      "slug": "cells-html-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.html"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-image-converter",
+      "slug": "cells-image-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.png"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-json-converter",
+      "slug": "cells-json-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.json"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-pdf-converter",
+      "slug": "cells-pdf-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-converter",
+      "slug": "cells-spreadsheet-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.csv"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-locker",
+      "slug": "cells-spreadsheet-locker",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.xlsx"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-merger",
+      "slug": "cells-spreadsheet-merger",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.xlsx"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-spreadsheet-splitter",
+      "slug": "cells-spreadsheet-splitter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.xlsx"
+      ]
+    },
+    {
+      "family": "cells",
+      "example": "cells-text-converter",
+      "slug": "cells-text-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.txt"
+      ]
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-diagram-converter",
+      "slug": "diagram-diagram-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.vdx"
+      ]
+    },
+    {
+      "family": "diagram",
+      "example": "diagram-pdf-converter",
+      "slug": "diagram-pdf-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "email",
+      "example": "email-converter",
+      "slug": "email-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output_html"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-doc-converter",
+      "slug": "pdf-doc-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-editor",
+      "slug": "pdf-form-editor",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-exporter",
+      "slug": "pdf-form-exporter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.json"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-form-flattener",
+      "slug": "pdf-form-flattener",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-html",
+      "slug": "pdf-html",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-image-extractor",
+      "slug": "pdf-image-extractor",
+      "has_output": true,
+      "run_stdout": "Images extracted",
+      "expected_has_output": true,
+      "is_result_object_example": true,
+      "output_files": []
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-jpeg",
+      "slug": "pdf-jpeg",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.jpg"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-merger",
+      "slug": "pdf-merger",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-optimizer",
+      "slug": "pdf-optimizer",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-pdf-aconverter",
+      "slug": "pdf-pdf-aconverter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-png",
+      "slug": "pdf-png",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.png"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-security",
+      "slug": "pdf-security",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-signature",
+      "slug": "pdf-signature",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-splitter",
+      "slug": "pdf-splitter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output_page1.pdf",
+        "output_page2.pdf",
+        "output_page3.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-table-generator",
+      "slug": "pdf-table-generator",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-text-extractor",
+      "slug": "pdf-text-extractor",
+      "has_output": true,
+      "run_stdout": "Extracted text from 1 page(s)",
+      "expected_has_output": true,
+      "is_result_object_example": true,
+      "output_files": []
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-tiff",
+      "slug": "pdf-tiff",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.tiff"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-toc-generator",
+      "slug": "pdf-toc-generator",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "pdf",
+      "example": "pdf-xls-converter",
+      "slug": "pdf-xls-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.xlsx"
+      ]
+    },
+    {
+      "family": "slides",
+      "example": "slides-slides-compress",
+      "slug": "slides-slides-compress",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": []
+    },
+    {
+      "family": "slides",
+      "example": "slides-slides-convert",
+      "slug": "slides-slides-convert",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": []
+    },
+    {
+      "family": "slides",
+      "example": "slides-slides-merger",
+      "slug": "slides-slides-merger",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": []
+    },
+    {
+      "family": "words",
+      "example": "words-comparer",
+      "slug": "words-comparer",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-converter",
+      "slug": "words-converter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.pdf"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-mail-merger",
+      "slug": "words-mail-merger",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-merger",
+      "slug": "words-merger",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-replacer",
+      "slug": "words-replacer",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-report-builder",
+      "slug": "words-report-builder",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-splitter",
+      "slug": "words-splitter",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output.docx"
+      ]
+    },
+    {
+      "family": "words",
+      "example": "words-watermarker",
+      "slug": "words-watermarker",
+      "has_output": true,
+      "run_stdout": "",
+      "expected_has_output": true,
+      "is_result_object_example": false,
+      "output_files": [
+        "output_image_watermark.docx",
+        "output_text_watermark.docx"
+      ]
+    }
+  ]
+}

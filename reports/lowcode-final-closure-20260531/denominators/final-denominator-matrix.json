@@ -1,0 +1,29 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "denominators": {
+    "generated": 42,
+    "build_valid": 42,
+    "run_valid": 42,
+    "semantic_valid": 42,
+    "package_included": 42,
+    "publication_candidates": 42,
+    "live_pr_candidates": 42
+  },
+  "per_family": {
+    "cells": 9,
+    "diagram": 2,
+    "email": 1,
+    "pdf": 19,
+    "slides": 3,
+    "words": 8
+  },
+  "corrections_from_prev_sprint": {
+    "email_count": "1 (was incorrectly stated as 7)",
+    "diagram_count": "2 (was incorrectly stated as 7)",
+    "slides_count": "3 (was incorrectly stated as 5)",
+    "pdf_count": "19 (was incorrectly stated as 9)",
+    "words_count": "8 (was 7, mail-merger confirmed working)",
+    "pr_candidates": "42 (was 41, mail-merger confirmed self-contained)"
+  }
+}

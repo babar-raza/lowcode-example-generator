@@ -257,15 +257,20 @@ class TestProductionConfig:
         non_endpoint_errors = [e for e in errors if "api_endpoint" not in e]
         assert non_endpoint_errors == [], f"Production config has non-endpoint errors: {non_endpoint_errors}"
 
-    def test_production_config_has_all_18_verdicts(self):
+    def test_production_config_has_all_verdicts(self):
         from plugin_examples.metrics.config import load_metrics_config
+        from plugin_examples.gates.models import VERDICTS
 
         repo_root = Path(__file__).resolve().parents[2]
         cfg_path = repo_root / "pipeline" / "configs" / "metrics.yml"
         if not cfg_path.exists():
             pytest.skip("metrics.yml not found")
         cfg = load_metrics_config(config_path=cfg_path)
-        assert len(cfg.verdict_to_status) == 18
+        # Config must cover every verdict in the canonical taxonomy
+        assert len(cfg.verdict_to_status) == len(VERDICTS), (
+            f"metrics.yml has {len(cfg.verdict_to_status)} verdicts mapped but "
+            f"models.py defines {len(VERDICTS)}. Add missing verdicts to metrics.yml."
+        )
         # No verdict maps to success that shouldn't
         for v, s in cfg.verdict_to_status.items():
             if "BLOCKED" in v:

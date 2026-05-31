@@ -1,0 +1,26 @@
+{
+  "cells": {
+    "ready": true,
+    "example_count": 9
+  },
+  "diagram": {
+    "ready": true,
+    "example_count": 2
+  },
+  "email": {
+    "ready": true,
+    "example_count": 1
+  },
+  "pdf": {
+    "ready": true,
+    "example_count": 19
+  },
+  "slides": {
+    "ready": true,
+    "example_count": 3
+  },
+  "words": {
+    "ready": true,
+    "example_count": 8
+  }
+}

@@ -47,11 +47,13 @@ metrics:
     probe-publish-permissions: "Permission Probes"
     sync-taskcard-docs: "Taskcard Documents"
 
-  # All 18 verdicts from src/plugin_examples/gates/models.py
+  # All 22 verdicts from src/plugin_examples/gates/models.py
   verdict_to_status:
     FULL_E2E_PASSED: "success"
     PR_READY: "success"
     PR_DRY_RUN_READY: "success"
+    CANONICAL_TEMPLATE_GENERATION_PASS: "success"
+    CANONICAL_LLM_GENERATION_PASS: "success"
     PARTIAL_PR_READY: "partial_success"
     PARTIAL_PR_DRY_RUN_READY: "partial_success"
     SOURCE_OF_TRUTH_PROVEN_ONLY: "partial_success"
@@ -67,6 +69,8 @@ metrics:
     BLOCKED_REVIEWER_UNAVAILABLE: "failure"
     BLOCKED_REVIEWER_FAILED: "failure"
     BLOCKED_NO_PUBLISHABLE_EXAMPLES: "failure"
+    VALIDATION_BLOCKED: "failure"
+    GENERATION_BLOCKED: "failure"
 
   allowed_statuses:
     - "success"

@@ -1,0 +1,10 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:37:12",
+  "head_sha": "ec182580aef95a2409ee60d1be22425819002f65",
+  "tracked_dirty_at_evidence_collection": 15,
+  "tracked_dirty_at_zip_build": "PENDING_COMMIT",
+  "is_clean_for_zip": false,
+  "note": "Evidence collected during tracked-dirty state. Commit then ZIP build verifies 0 dirty.",
+  "verdict": "PENDING_COMMIT"
+}

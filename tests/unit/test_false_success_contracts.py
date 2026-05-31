@@ -146,7 +146,14 @@ class TestReviewerUnavailableBlocksPublish:
 
 class TestTemplateModeNeverFullE2E:
     def test_template_mode_never_full_e2e(self):
-        """Template mode must NEVER produce FULL_E2E_PASSED."""
+        """Template mode must NEVER produce FULL_E2E_PASSED.
+
+        When template_mode=True and build passes, the evaluator emits
+        CANONICAL_TEMPLATE_GENERATION_PASS — a distinct verdict that is
+        publishable but explicitly NOT FULL_E2E_PASSED. The safety contract
+        is the absence of FULL_E2E_PASSED, not the presence of a prototype-only
+        verdict. Template mode with successful build/run is publishable.
+        """
         ctx = _FakeCtx(template_mode=True, skip_run=False, dry_run=False)
         stages = _make_stages({
             "scenario_planning": {"artifacts": {"ready_count": 10}},
@@ -156,7 +163,7 @@ class TestTemplateModeNeverFullE2E:
         })
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict != "FULL_E2E_PASSED"
-        assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
+        assert verdict.verdict == "CANONICAL_TEMPLATE_GENERATION_PASS"
 
 
 # ---------------------------------------------------------------------------

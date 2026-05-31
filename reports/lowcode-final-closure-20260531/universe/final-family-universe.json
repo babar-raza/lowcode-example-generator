@@ -1,0 +1,80 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "total_families": 27,
+  "user_required": 26,
+  "additional_candidate": 1,
+  "lowcode_confirmed": 6,
+  "no_lowcode_confirmed": 20,
+  "excluded": 1,
+  "families": {
+    "cells": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 9
+    },
+    "diagram": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 2
+    },
+    "email": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 1
+    },
+    "pdf": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 19
+    },
+    "slides": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 3
+    },
+    "words": {
+      "status": "LOWCODE_CONFIRMED",
+      "canonical_examples": 8
+    },
+    "epub": {
+      "status": "FORMAT_CAPABILITY_OF_OTHER_PRODUCT",
+      "notes": "Not a standalone product"
+    },
+    "medical": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "27th candidate, Aspose.Medical 26.3.0"
+    },
+    "html": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "pub": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "ocr": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "psd": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "imaging": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "page": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "svg": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "tex": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    },
+    "barcode": {
+      "status": "NO_LOWCODE_CONFIRMED",
+      "notes": "Pending API investigation"
+    }
+  }
+}

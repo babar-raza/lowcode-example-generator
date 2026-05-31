@@ -1,0 +1,26 @@
+{
+  "cells": {
+    "branch": "lowcode-examples-cells-readme-io-final",
+    "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples"
+  },
+  "diagram": {
+    "branch": "lowcode-examples-diagram-readme-io-final",
+    "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples"
+  },
+  "email": {
+    "branch": "lowcode-examples-email-readme-io-final",
+    "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples"
+  },
+  "pdf": {
+    "branch": "lowcode-examples-pdf-readme-io-final",
+    "repo": "aspose-pdf-net/Aspose.Pdf.LowCode-for-.NET-Examples"
+  },
+  "slides": {
+    "branch": "lowcode-examples-slides-readme-io-final",
+    "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples"
+  },
+  "words": {
+    "branch": "lowcode-examples-words-readme-io-final",
+    "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples"
+  }
+}

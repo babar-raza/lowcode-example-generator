@@ -1,0 +1,7 @@
+{
+  "package_included": 42,
+  "publication_candidates": 42,
+  "difference": 0,
+  "package_only_examples": [],
+  "note": "All 42 canonical examples are both package-included and publication candidates"
+}

@@ -1,0 +1,81 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "total_blockers": 7,
+  "closed_this_sprint": 1,
+  "remaining_blockers": 7,
+  "none_in_canonical_42": true,
+  "blockers": [
+    {
+      "id": "BLK-001",
+      "example": "words-signer",
+      "category": "EXTERNAL_CERTIFICATE",
+      "description": "Requires code signing certificate (PFX/X.509)",
+      "resolvable_without_external": "PARTIAL",
+      "resolution_path": "Generate self-signed PFX using X509Certificate2Builder",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    },
+    {
+      "id": "BLK-002",
+      "example": "words-processor",
+      "category": "API_NOT_CONFIRMED",
+      "description": "WordsProcessor not found in Aspose.Words.LowCode namespace",
+      "resolvable_without_external": "NO",
+      "resolution_path": "Confirm API in newer package version or document as NOT_A_PRODUCT",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    },
+    {
+      "id": "BLK-003",
+      "example": "pdf-form-importer",
+      "category": "EXTERNAL_BUG_NULLREF",
+      "description": "FormImporter.ImportFields throws NullReferenceException",
+      "resolvable_without_external": "NO",
+      "resolution_path": "Wait for Aspose.PDF upstream fix",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    },
+    {
+      "id": "BLK-004",
+      "example": "words-ofd-converter",
+      "category": "NO_PROGRAMMATIC_OFD_FIXTURE",
+      "description": "OFD is a proprietary Chinese format; no programmatic generator available",
+      "resolvable_without_external": "NO",
+      "resolution_path": "Obtain OFD sample file or OFD generator",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    },
+    {
+      "id": "BLK-005",
+      "example": "pdf-timestamp",
+      "category": "EXTERNAL_TSA_SERVER",
+      "description": "Requires live TSA server for timestamping",
+      "resolvable_without_external": "PARTIAL",
+      "resolution_path": "Configure TSA endpoint in CI or implement TSA mock",
+      "pr_candidate": false,
+      "in_canonical_42": false,
+      "note": "Not in canonical 42; legacy from prior sprint"
+    },
+    {
+      "id": "BLK-006",
+      "example": "cells-spreadsheet-printer",
+      "category": "ENVIRONMENT_DEPENDENT",
+      "description": "Requires virtual printer; environment-specific",
+      "resolvable_without_external": "PARTIAL",
+      "resolution_path": "Windows virtual printer setup in CI",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    },
+    {
+      "id": "BLK-007",
+      "example": "slides-for-each",
+      "category": "NON_RUNNABLE_HELPER",
+      "description": "ForEach is a helper iterator, not a standalone runnable example",
+      "resolvable_without_external": "N/A",
+      "resolution_path": "Confirmed via reflection analysis \u2014 no action required",
+      "pr_candidate": false,
+      "in_canonical_42": false
+    }
+  ]
+}

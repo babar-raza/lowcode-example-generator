@@ -1,0 +1,8 @@
+{
+  "slug": "diagram-diagram-converter",
+  "run_stdout": "",
+  "output_files": [
+    "output.vdx"
+  ],
+  "has_output": true
+}

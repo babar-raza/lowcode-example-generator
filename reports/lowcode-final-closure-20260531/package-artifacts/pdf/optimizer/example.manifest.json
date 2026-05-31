@@ -1,0 +1,24 @@
+{
+  "scenario_id": "pdf-optimizer",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.Optimizer",
+    "Aspose.Pdf.LowCode.Optimizer.Process"
+  ],
+  "status": "generated_template_first",
+  "input_strategy": "programmatic_input",
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pdf",
+  "operation_kind": "transform",
+  "expected_output_extension": ".pdf",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".pdf",
+  "contract_operation_kind": "transform",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/Optimizer",
+  "contract_hash": "d89104739e1c87a6"
+}

@@ -1,0 +1,179 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "source": "run-a from pass4 source runs, run-b from pubclosure-b runs",
+  "total_files": 24,
+  "matched": 24,
+  "mismatched": 0,
+  "idempotency_verdict": "IDEMPOTENCY_CONFIRMED",
+  "comparison": [
+    {
+      "example": "cells-html-converter",
+      "file": "Program.cs",
+      "sha_a": "8880c345608ab28d86724b3bff8ca3855f39752818df5e9a8a1e8fb76b8ca1a3",
+      "sha_b": "8880c345608ab28d86724b3bff8ca3855f39752818df5e9a8a1e8fb76b8ca1a3",
+      "match": true
+    },
+    {
+      "example": "cells-html-converter",
+      "file": "cells-html-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-image-converter",
+      "file": "Program.cs",
+      "sha_a": "df552d7638d4eacbd27726a50153fe9d6911e4d075c72b5e2bf70eb077f79b46",
+      "sha_b": "df552d7638d4eacbd27726a50153fe9d6911e4d075c72b5e2bf70eb077f79b46",
+      "match": true
+    },
+    {
+      "example": "cells-image-converter",
+      "file": "cells-image-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-json-converter",
+      "file": "Program.cs",
+      "sha_a": "11a412efbd3c44040e3f4187e024b584b53197b06fc855397f429b17b994c6c7",
+      "sha_b": "11a412efbd3c44040e3f4187e024b584b53197b06fc855397f429b17b994c6c7",
+      "match": true
+    },
+    {
+      "example": "cells-json-converter",
+      "file": "cells-json-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-pdf-converter",
+      "file": "Program.cs",
+      "sha_a": "c9cac41390536c55197a7f6a1761b6e99cc7f2e9b314de31f8a03c02df59734f",
+      "sha_b": "c9cac41390536c55197a7f6a1761b6e99cc7f2e9b314de31f8a03c02df59734f",
+      "match": true
+    },
+    {
+      "example": "cells-pdf-converter",
+      "file": "cells-pdf-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-converter",
+      "file": "Program.cs",
+      "sha_a": "f6350f8f4b8251149b2df12c0daa9994f4ab4cedddd08f171682e801700d10ec",
+      "sha_b": "f6350f8f4b8251149b2df12c0daa9994f4ab4cedddd08f171682e801700d10ec",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-converter",
+      "file": "cells-spreadsheet-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-locker",
+      "file": "Program.cs",
+      "sha_a": "562dfb3afda5a9730da9133dfabef76a06215ddf3c004960abcacfcc19530e26",
+      "sha_b": "562dfb3afda5a9730da9133dfabef76a06215ddf3c004960abcacfcc19530e26",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-locker",
+      "file": "cells-spreadsheet-locker.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-merger",
+      "file": "Program.cs",
+      "sha_a": "4dd2e5c15ff1ff338bac4b89295003b37f7262f86fba12d03b5a4aa35a476edf",
+      "sha_b": "4dd2e5c15ff1ff338bac4b89295003b37f7262f86fba12d03b5a4aa35a476edf",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-merger",
+      "file": "cells-spreadsheet-merger.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-splitter",
+      "file": "Program.cs",
+      "sha_a": "778725ea5038a7762fdf3f7fc845970468f0ebf421736f824c0ddf2230bb17e1",
+      "sha_b": "778725ea5038a7762fdf3f7fc845970468f0ebf421736f824c0ddf2230bb17e1",
+      "match": true
+    },
+    {
+      "example": "cells-spreadsheet-splitter",
+      "file": "cells-spreadsheet-splitter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "cells-text-converter",
+      "file": "Program.cs",
+      "sha_a": "cb8ca8f32112bc6efde7c43aa97b913e6a4263bc9eec258d10956e41604e2d7b",
+      "sha_b": "cb8ca8f32112bc6efde7c43aa97b913e6a4263bc9eec258d10956e41604e2d7b",
+      "match": true
+    },
+    {
+      "example": "cells-text-converter",
+      "file": "cells-text-converter.csproj",
+      "sha_a": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "sha_b": "aa302a690f8ffaf4771ea44a175dd515d8d990768eb3d8ef30ee0c61a30bce1e",
+      "match": true
+    },
+    {
+      "example": "diagram-diagram-converter",
+      "file": "Program.cs",
+      "sha_a": "46e43f916572f5f4b02ebdc47a959d36ea7e0f87b23ad3a5015907e44fb83680",
+      "sha_b": "46e43f916572f5f4b02ebdc47a959d36ea7e0f87b23ad3a5015907e44fb83680",
+      "match": true
+    },
+    {
+      "example": "diagram-diagram-converter",
+      "file": "diagram-diagram-converter.csproj",
+      "sha_a": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "sha_b": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "match": true
+    },
+    {
+      "example": "diagram-pdf-converter",
+      "file": "Program.cs",
+      "sha_a": "93731194dd440d9c29cb90026dab683753e2f2b5679a162678f61c229ca0c912",
+      "sha_b": "93731194dd440d9c29cb90026dab683753e2f2b5679a162678f61c229ca0c912",
+      "match": true
+    },
+    {
+      "example": "diagram-pdf-converter",
+      "file": "diagram-pdf-converter.csproj",
+      "sha_a": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "sha_b": "583366a061e1d572c0e3d18691fbe4c4d0ff788315ac902a0584787dee8bf0e2",
+      "match": true
+    },
+    {
+      "example": "email-converter",
+      "file": "Program.cs",
+      "sha_a": "762f4899caa690221b6b7348d697101b7220b6b714586cbd24b1173b6e17ed45",
+      "sha_b": "762f4899caa690221b6b7348d697101b7220b6b714586cbd24b1173b6e17ed45",
+      "match": true
+    },
+    {
+      "example": "email-converter",
+      "file": "email-converter.csproj",
+      "sha_a": "9c0a20efca2327cbfafa2d71f91ea959449ef438c61cf92dbf7b27252dc3e431",
+      "sha_b": "9c0a20efca2327cbfafa2d71f91ea959449ef438c61cf92dbf7b27252dc3e431",
+      "match": true
+    }
+  ]
+}

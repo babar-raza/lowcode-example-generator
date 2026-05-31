@@ -1,0 +1,618 @@
+[
+  {
+    "family": "cells",
+    "slug": "html-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\html-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "html-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "image-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\image-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "image-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "json-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\json-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "json-converter.csproj",
+      "output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "pdf-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\pdf-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "spreadsheet-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\spreadsheet-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "spreadsheet-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "spreadsheet-locker",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\spreadsheet-locker",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "spreadsheet-locker.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "spreadsheet-merger",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\spreadsheet-merger",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "spreadsheet-merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "spreadsheet-splitter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\spreadsheet-splitter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "spreadsheet-splitter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "cells",
+    "slug": "text-converter",
+    "source": "workspace\\pr-dry-run\\cells-controlled-pilot\\examples\\cells\\lowcode\\text-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "text-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "diagram",
+    "slug": "diagram-converter",
+    "source": "workspace\\pr-dry-run\\diagram-controlled-pilot\\examples\\diagram\\lowcode\\diagram-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "diagram-converter.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "diagram",
+    "slug": "pdf-converter",
+    "source": "workspace\\pr-dry-run\\diagram-controlled-pilot\\examples\\diagram\\lowcode\\pdf-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "email",
+    "slug": "converter",
+    "source": "workspace\\pr-dry-run\\email-controlled-pilot\\examples\\email\\lowcode\\converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "converter.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "email",
+    "slug": "email-converter",
+    "source": "workspace\\pr-dry-run\\email-controlled-pilot\\examples\\email\\lowcode\\email-converter",
+    "files_copied": [
+      "Program.cs",
+      "email-converter.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "doc-converter",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot\\examples\\pdf\\lowcode\\doc-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "doc-converter.csproj",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-doc-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "html",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot\\examples\\pdf\\lowcode\\html",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "html.csproj",
+      "pdf-html.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "xls-converter",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot\\examples\\pdf\\lowcode\\xls-converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-xls-converter.csproj",
+      "xls-converter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "merger",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr10\\examples\\pdf\\lowcode\\merger",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "optimizer",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr10\\examples\\pdf\\lowcode\\optimizer",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "optimizer.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "pdf-aconverter",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr10\\examples\\pdf\\lowcode\\pdf-aconverter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-aconverter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "splitter",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr10\\examples\\pdf\\lowcode\\splitter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "splitter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "text-extractor",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr10\\examples\\pdf\\lowcode\\text-extractor",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "text-extractor.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "timestamp",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr11\\examples\\pdf\\lowcode\\timestamp",
+    "files_copied": [
+      "Program.cs",
+      "example.manifest.json",
+      "timestamp.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "jpeg",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr5\\examples\\pdf\\lowcode\\jpeg",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "jpeg.csproj",
+      "pdf-jpeg.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "png",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr5\\examples\\pdf\\lowcode\\png",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-png.csproj",
+      "png.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "tiff",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr5\\examples\\pdf\\lowcode\\tiff",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-tiff.csproj",
+      "tiff.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "image-extractor",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr6\\examples\\pdf\\lowcode\\image-extractor",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "image-extractor.csproj",
+      "pdf-image-extractor.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "table-generator",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr6\\examples\\pdf\\lowcode\\table-generator",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-table-generator.csproj",
+      "table-generator.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "toc-generator",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr6\\examples\\pdf\\lowcode\\toc-generator",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "pdf-toc-generator.csproj",
+      "toc-generator.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "form-flattener",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr7\\examples\\pdf\\lowcode\\form-flattener",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "form-flattener.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "security",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr7\\examples\\pdf\\lowcode\\security",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "security.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "form-editor",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr8\\examples\\pdf\\lowcode\\form-editor",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "form-editor.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "form-exporter",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr8\\examples\\pdf\\lowcode\\form-exporter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "form-exporter.csproj",
+      "output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "pdf",
+    "slug": "signature",
+    "source": "workspace\\pr-dry-run\\pdf-controlled-pilot-pr9\\examples\\pdf\\lowcode\\signature",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "signature.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "compress",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\compress",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "compress.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "convert",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\convert",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "convert.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "merger",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\merger",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "slides-compress",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\slides-compress",
+    "files_copied": [
+      "Program.cs",
+      "example.manifest.json",
+      "expected-output.json",
+      "slides-compress.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "slides-convert",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\slides-convert",
+    "files_copied": [
+      "Program.cs",
+      "example.manifest.json",
+      "expected-output.json",
+      "slides-convert.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "slides",
+    "slug": "slides-merger",
+    "source": "workspace\\pr-dry-run\\slides-controlled-pilot\\examples\\slides\\lowcode\\slides-merger",
+    "files_copied": [
+      "Program.cs",
+      "example.manifest.json",
+      "expected-output.json",
+      "slides-merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "comparer",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\comparer",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "comparer.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "converter",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\converter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "converter.csproj",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "mail-merger",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\mail-merger",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "mail-merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "merger",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\merger",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "merger.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "replacer",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\replacer",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "replacer.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "report-builder",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\report-builder",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "report-builder.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "splitter",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\splitter",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "splitter.csproj"
+    ],
+    "complete": true
+  },
+  {
+    "family": "words",
+    "slug": "watermarker",
+    "source": "workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\watermarker",
+    "files_copied": [
+      "Program.cs",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json",
+      "watermarker.csproj"
+    ],
+    "complete": true
+  }
+]

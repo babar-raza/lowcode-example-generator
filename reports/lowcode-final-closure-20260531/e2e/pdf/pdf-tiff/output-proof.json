@@ -1,0 +1,8 @@
+{
+  "slug": "pdf-tiff",
+  "run_stdout": "",
+  "output_files": [
+    "output.tiff"
+  ],
+  "has_output": true
+}

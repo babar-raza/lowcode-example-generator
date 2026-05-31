@@ -1,0 +1,57 @@
+{
+  "sprint_id": "lowcode-final-closure-20260531",
+  "generated_at": "2026-05-31T13:33:10",
+  "total_families": 6,
+  "total_examples": 42,
+  "all_local_ready": true,
+  "families": [
+    {
+      "family": "cells",
+      "example_count": 9,
+      "branch": "lowcode-examples-cells-readme-io-final",
+      "target_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    },
+    {
+      "family": "diagram",
+      "example_count": 2,
+      "branch": "lowcode-examples-diagram-readme-io-final",
+      "target_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    },
+    {
+      "family": "email",
+      "example_count": 1,
+      "branch": "lowcode-examples-email-readme-io-final",
+      "target_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    },
+    {
+      "family": "pdf",
+      "example_count": 19,
+      "branch": "lowcode-examples-pdf-readme-io-final",
+      "target_repo": "aspose-pdf-net/Aspose.Pdf.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    },
+    {
+      "family": "slides",
+      "example_count": 3,
+      "branch": "lowcode-examples-slides-readme-io-final",
+      "target_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    },
+    {
+      "family": "words",
+      "example_count": 8,
+      "branch": "lowcode-examples-words-readme-io-final",
+      "target_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "local_ready": true,
+      "approval_gated": true
+    }
+  ]
+}

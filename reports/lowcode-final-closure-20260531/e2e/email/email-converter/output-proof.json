@@ -1,0 +1,8 @@
+{
+  "slug": "email-converter",
+  "run_stdout": "",
+  "output_files": [
+    "output_html"
+  ],
+  "has_output": true
+}

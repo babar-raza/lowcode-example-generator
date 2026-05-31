@@ -1,0 +1,26 @@
+{
+  "scenario_id": "pdf-form-exporter",
+  "package_id": "Aspose.PDF",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Pdf.LowCode.FormImporter"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.pdf"
+  ],
+  "input_format": ".pdf",
+  "output_format": ".json",
+  "operation_kind": "form_exporter",
+  "expected_output_extension": ".json",
+  "contract_input_format": ".pdf",
+  "contract_output_format": ".json",
+  "contract_operation_kind": "form_exporter",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "pdf/FormExporter",
+  "contract_hash": "form-exporter-pass3",
+  "pass3_note": "example.manifest.json added in pass3 (D1 repair)"
+}

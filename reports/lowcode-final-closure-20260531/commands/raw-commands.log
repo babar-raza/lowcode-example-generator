@@ -1,0 +1,24 @@
+[2026-05-31T13:27:01] seq=1 exit=0 purpose=full pytest suite
+  cwd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+  cmd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe -m pytest tests/ -q --tb=short
+  stdout: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0001.out
+  stderr: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0001.err
+
+[2026-05-31T13:32:57] seq=2 exit=0 purpose=targeted pytest for repaired failures
+  cwd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+  cmd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe -m pytest tests/unit/test_agent_metrics_payload.py::TestPayloadBuilder::test_all_production_verdicts_mapped tests/unit/test_false_success_contracts.py::TestTemplateModeNeverFullE2E::test_template_mode_never_full_e2e tests/unit/test_agent_metrics_config.py::TestProductionConfig::test_production_config_has_all_verdicts -v
+  stdout: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0002.out
+  stderr: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0002.err
+
+[2026-05-31T13:33:01] seq=3 exit=0 purpose=run pdf-image-extractor for stdout capture
+  cwd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pass4-gen-pdf-20260530\generated\pdf\pdf-image-extractor
+  cmd: dotnet run --no-build
+  stdout: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0003.out
+  stderr: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0003.err
+
+[2026-05-31T13:33:05] seq=4 exit=0 purpose=run pdf-text-extractor for stdout capture
+  cwd: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pass4-gen-pdf-20260530\generated\pdf\pdf-text-extractor
+  cmd: dotnet run --no-build
+  stdout: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0004.out
+  stderr: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-final-closure-20260531\commands\stdout-stderr\cmd-0004.err
+

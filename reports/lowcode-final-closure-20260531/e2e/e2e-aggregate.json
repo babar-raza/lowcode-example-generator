@@ -1,0 +1,40 @@
+{
+  "sprint_id": "lowcode-pub-closure-20260530",
+  "generated_at": "2026-05-30T21:56:55",
+  "total": 42,
+  "pass": 42,
+  "fail": 0,
+  "per_family": {
+    "cells": {
+      "total": 9,
+      "pass": 9,
+      "fail": 0
+    },
+    "diagram": {
+      "total": 2,
+      "pass": 2,
+      "fail": 0
+    },
+    "email": {
+      "total": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "pdf": {
+      "total": 19,
+      "pass": 19,
+      "fail": 0
+    },
+    "slides": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "words": {
+      "total": 8,
+      "pass": 8,
+      "fail": 0
+    }
+  },
+  "source_run": "pass4-gen-{family}-20260530"
+}

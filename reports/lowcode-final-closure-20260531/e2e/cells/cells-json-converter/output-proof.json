@@ -1,0 +1,8 @@
+{
+  "slug": "cells-json-converter",
+  "run_stdout": "",
+  "output_files": [
+    "output.json"
+  ],
+  "has_output": true
+}

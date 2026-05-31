@@ -1,0 +1,24 @@
+{
+  "scenario_id": "slides-for-each",
+  "package_id": "Aspose.Slides.NET",
+  "package_version": "26.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Slides.LowCode.ForEach",
+    "Aspose.Slides.LowCode.ForEach.Slide"
+  ],
+  "status": "generated_template_first",
+  "input_strategy": "none",
+  "input_files": [],
+  "input_format": null,
+  "output_format": ".pptx",
+  "operation_kind": "transform",
+  "expected_output_extension": ".pptx",
+  "contract_input_format": ".pptx",
+  "contract_output_format": ".pptx",
+  "contract_operation_kind": "transform",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "slides/ForEach",
+  "contract_hash": "4413542e51cf13a2"
+}

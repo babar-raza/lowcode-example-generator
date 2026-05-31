@@ -481,7 +481,7 @@ class TestCLIRenderRootReadme:
         render = _REPO_ROOT / "workspace" / "verification" / "latest" / "words-root-readme-render-result.json"
         assert render.exists()
         data = json.loads(render.read_text(encoding="utf-8"))
-        assert data["examples_count"] == 8
+        assert data["examples_count"] == 9  # +1 words-signer added in blocker-closure-20260531
         assert data["no_remote_write_performed"] is True
 
 

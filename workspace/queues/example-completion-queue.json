@@ -3,10 +3,10 @@
   "plan_id": "lowcode-ai-operations-mega-train-20260519-140000",
   "sprint": "mega-train-001",
   "description": "Machine-readable completion queue covering all runnable scenarios across 6 active families. State machine: DISCOVERED -> CONTRACTED -> FIXTURE_READY -> GENERATION_READY -> GENERATED -> BUILT -> RAN -> REVIEWED -> PR_READY -> PR_OPEN -> MERGED -> POST_MERGE_VERIFIED | BACKLOGGED | PERMANENTLY_BLOCKED. Updated 2026-05-19: reclassified 3 diagram OPTIONS entries, synced metadata. Sprint56-LaneA: upgraded 14 PR_READY→POST_MERGE_VERIFIED via contract authority reconciliation (2026-05-21).",
-  "total_entries": 54,
+  "total_entries": 56,
   "state_summary": {
     "POST_MERGE_VERIFIED": 42,
-    "BACKLOGGED": 5,
+    "BACKLOGGED": 7,
     "PERMANENTLY_BLOCKED": 7
   },
   "entries": [
@@ -804,6 +804,36 @@
       "merge_sha": "bf05fc43124f1afed90a18e5b75e0d598e3c1076",
       "last_state_change": "2026-05-14T06:03:39+00:00",
       "post_merge_validation": "ALL_PASS"
+    },
+    {
+      "scenario_id": "words-signer",
+      "family": "words",
+      "type_name": "Signer",
+      "state": "BACKLOGGED",
+      "blocking_reason": "BLOCKER_CLOSURE_SPRINT: words-signer probe proven (DigitalSignatureUtil.Sign + SignerContext). E2E PASS. Denominator update pending next sprint activation.",
+      "blocking_taskcard": "lowcode-blocker-closure-20260531",
+      "contract_path": "pipeline/format-authority/contracts/words.json",
+      "lifecycle_record_path": null,
+      "pr_number": null,
+      "merge_sha": null,
+      "last_state_change": "2026-05-31T00:00:00Z",
+      "post_merge_validation": null,
+      "notes": "New scenario discovered in blocker-closure-20260531 sprint. SignerContext IS usable via DigitalSignatureUtil.Sign. Self-signed PFX + CertificateHolder + SignOptions = working signature. words-signer example built and run successfully. Ready for denominator promotion in next sprint."
+    },
+    {
+      "scenario_id": "slides-for-each",
+      "family": "slides",
+      "type_name": "ForEach",
+      "state": "BACKLOGGED",
+      "blocking_reason": "BLOCKER_CLOSURE_SPRINT: slides-for-each probe proven (ForEach.Slide callback). E2E PASS. Denominator update pending next sprint activation.",
+      "blocking_taskcard": "lowcode-blocker-closure-20260531",
+      "contract_path": "pipeline/format-authority/contracts/slides.json",
+      "lifecycle_record_path": null,
+      "pr_number": null,
+      "merge_sha": null,
+      "last_state_change": "2026-05-31T00:00:00Z",
+      "post_merge_validation": null,
+      "notes": "New scenario discovered in blocker-closure-20260531 sprint. ForEach.Slide callback iterates slides in-memory. ForEach.Slide(pres, (Slide slide, int index) => {}) works with Aspose.Slides.NET 26.5.0. slides-for-each example built and run successfully. Ready for denominator promotion in next sprint."
     }
   ]
 }

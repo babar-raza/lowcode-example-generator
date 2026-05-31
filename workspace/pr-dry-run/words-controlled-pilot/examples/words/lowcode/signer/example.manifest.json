@@ -1,0 +1,31 @@
+{
+  "scenario_id": "words-signer",
+  "package_id": "Aspose.Words",
+  "package_version": "25.5.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Words.LowCode.SignerContext",
+    "Aspose.Words.LowCode.SignerContext.CertificateHolder",
+    "Aspose.Words.LowCode.SignerContext.SignOptions",
+    "Aspose.Words.DigitalSignatures.DigitalSignatureUtil.Sign",
+    "Aspose.Words.DigitalSignatures.DigitalSignatureUtil.LoadSignatures",
+    "Aspose.Words.DigitalSignatures.CertificateHolder.Create",
+    "Aspose.Words.DigitalSignatures.SignOptions"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.docx"
+  ],
+  "input_format": ".docx",
+  "output_format": ".docx",
+  "operation_kind": "transform",
+  "expected_output_extension": ".docx",
+  "contract_input_format": ".docx",
+  "contract_output_format": ".docx",
+  "contract_operation_kind": "transform",
+  "contract_output_kind": "file",
+  "contract_output_cardinality": "single",
+  "contract_id": "words/Signer",
+  "contract_hash": "37ed82780f1cf2d5"
+}

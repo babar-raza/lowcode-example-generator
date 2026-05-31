@@ -137,12 +137,17 @@ def test_missing_manifest_fails_closed(tmp_path):
         load_contracts_from_json(tmp_path / "nonexistent.json")
 
 
-def test_load_42_from_repo_local():
-    """Load all 42 contracts from repo-local authority."""
+def test_load_44_from_repo_local():
+    """Load all 44 contracts from repo-local authority.
+
+    Count updated from 42 to 44 in blocker-closure-20260531 sprint:
+    +1 words/Signer (DigitalSignatureUtil.Sign via SignerContext — probe proven)
+    +1 slides/ForEach (ForEach.Slide callback — probe proven)
+    """
     count = load_contracts_from_json(MANIFEST_PATH)
-    assert count == 42, f"Expected 42 contracts, got {count}"
+    assert count == 44, f"Expected 44 contracts, got {count}"
     all_c = get_all_contracts()
-    assert len(all_c) == 42
+    assert len(all_c) == 44
 
 
 def test_spreadsheetconverter_canonical_is_csv():

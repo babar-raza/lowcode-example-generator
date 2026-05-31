@@ -184,5 +184,57 @@
       "conflict_status": "clean",
       "conflict_notes": ""
     }
+    ,
+    {
+      "family": "slides",
+      "package_id": "Aspose.Slides.NET",
+      "package_version": "latest",
+      "type_name": "ForEach",
+      "full_type_name": "Aspose.Slides.LowCode.ForEach",
+      "operation_kind": "transform",
+      "input_artifacts": [
+        {
+          "format": ".pptx",
+          "cardinality": "single",
+          "fixture_filename": "input.pptx"
+        }
+      ],
+      "output_artifacts": [
+        {
+          "kind": "file",
+          "format": ".pptx",
+          "cardinality": "single",
+          "filename": "output.pptx",
+          "validation": "file_exists"
+        }
+      ],
+      "output_kind": "file",
+      "output_cardinality": "single",
+      "canonical_output_format": ".pptx",
+      "variants": [
+        {
+          "variant_id": "foreach-canonical",
+          "output_format": ".pptx",
+          "is_canonical": true,
+          "reason": "Probe-verified: ForEach.Slide callback iterates over slides in a Presentation"
+        }
+      ],
+      "canonical_variant": "foreach-canonical",
+      "fixture_strategy": "programmatic_input",
+      "runtime_validation_strategy": "file_exists",
+      "readme_display_strategy": {
+        "input_format": "pptx",
+        "output_format": "pptx",
+        "operation_label": "transform"
+      },
+      "method_signature": "ForEach.Slide(Presentation, ForEachSlideCallback)",
+      "options_class": null,
+      "evidence_refs": [
+        "workspace/runs/blocker-closure-20260531/probes/slides-for-each"
+      ],
+      "evidence_confidence": "api_verified",
+      "conflict_status": "clean",
+      "conflict_notes": "Utility iterator class: ForEach.Slide/Shape/Paragraph/Portion/LayoutSlide/MasterSlide. Takes Presentation object and callback delegate, not file paths."
+    }
   ]
 }

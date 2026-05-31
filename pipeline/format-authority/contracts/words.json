@@ -407,57 +407,6 @@
       "family": "words",
       "package_id": "Aspose.Words",
       "package_version": "latest",
-      "type_name": "Signer",
-      "full_type_name": "Aspose.Words.LowCode.SignerContext",
-      "operation_kind": "transform",
-      "input_artifacts": [
-        {
-          "format": ".docx",
-          "cardinality": "single",
-          "fixture_filename": "input.docx"
-        }
-      ],
-      "output_artifacts": [
-        {
-          "kind": "file",
-          "format": ".docx",
-          "cardinality": "single",
-          "filename": "output.docx",
-          "validation": "file_exists"
-        }
-      ],
-      "output_kind": "file",
-      "output_cardinality": "single",
-      "canonical_output_format": ".docx",
-      "variants": [
-        {
-          "variant_id": "signer-canonical",
-          "output_format": ".docx",
-          "is_canonical": true,
-          "reason": "Probe-verified: DigitalSignatureUtil.Sign with self-signed PFX produces signed docx"
-        }
-      ],
-      "canonical_variant": "signer-canonical",
-      "fixture_strategy": "programmatic_input",
-      "runtime_validation_strategy": "file_exists",
-      "readme_display_strategy": {
-        "input_format": "docx",
-        "output_format": "docx",
-        "operation_label": "transform"
-      },
-      "method_signature": "DigitalSignatureUtil.Sign(string, string, CertificateHolder, SignOptions)",
-      "options_class": "Aspose.Words.LowCode.SignerContext",
-      "evidence_refs": [
-        "workspace/runs/blocker-closure-20260531/probes/words-signer"
-      ],
-      "evidence_confidence": "api_verified",
-      "conflict_status": "clean",
-      "conflict_notes": "No static Signer class. Signing is done via DigitalSignatureUtil. SignerContext is the LowCode context class providing CertificateHolder and SignOptions."
-    },
-    {
-      "family": "words",
-      "package_id": "Aspose.Words",
-      "package_version": "latest",
       "type_name": "Replacer",
       "full_type_name": "Aspose.Words.LowCode.Replacer",
       "operation_kind": "transform",

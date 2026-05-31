@@ -6,8 +6,8 @@
   "total_entries": 56,
   "state_summary": {
     "POST_MERGE_VERIFIED": 42,
-    "BACKLOGGED": 7,
-    "PERMANENTLY_BLOCKED": 7
+    "BACKLOGGED": 5,
+    "PERMANENTLY_BLOCKED": 9
   },
   "entries": [
     {
@@ -809,31 +809,31 @@
       "scenario_id": "words-signer",
       "family": "words",
       "type_name": "Signer",
-      "state": "BACKLOGGED",
-      "blocking_reason": "BLOCKER_CLOSURE_SPRINT: words-signer probe proven (DigitalSignatureUtil.Sign + SignerContext). E2E PASS. Denominator update pending next sprint activation.",
-      "blocking_taskcard": "lowcode-blocker-closure-20260531",
-      "contract_path": "pipeline/format-authority/contracts/words.json",
+      "state": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "NOT_A_LOWCODE_MAIN_CLASS: No Aspose.Words.LowCode.Signer class exists. SignerContext is CONTEXT_MODEL. DigitalSignatureUtil.Sign is in Aspose.Words.DigitalSignatures namespace, not Aspose.Words.LowCode. Companion example retained in package.",
+      "blocking_taskcard": "lowcode-true-closure-20260531",
+      "contract_path": null,
       "lifecycle_record_path": null,
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-31T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "New scenario discovered in blocker-closure-20260531 sprint. SignerContext IS usable via DigitalSignatureUtil.Sign. Self-signed PFX + CertificateHolder + SignOptions = working signature. words-signer example built and run successfully. Ready for denominator promotion in next sprint."
+      "notes": "TRUE_CLOSURE_RECLASSIFICATION (2026-05-31): words-signer is COMPANION_HELPER, not a LowCode main-class. Reflection proof: no Aspose.Words.LowCode.Signer type. DigitalSignatureUtil.Sign is in Aspose.Words.DigitalSignatures. Companion example retained in package. Removed from format-authority/contracts/words.json and README main-class table."
     },
     {
       "scenario_id": "slides-for-each",
       "family": "slides",
       "type_name": "ForEach",
-      "state": "BACKLOGGED",
-      "blocking_reason": "BLOCKER_CLOSURE_SPRINT: slides-for-each probe proven (ForEach.Slide callback). E2E PASS. Denominator update pending next sprint activation.",
-      "blocking_taskcard": "lowcode-blocker-closure-20260531",
-      "contract_path": "pipeline/format-authority/contracts/slides.json",
+      "state": "PERMANENTLY_BLOCKED",
+      "blocking_reason": "NOT_A_MAIN_CLASS_NON_RUNNABLE_HELPER: Aspose.Slides.LowCode.ForEach is a utility iterator class. Takes Presentation object + callback delegate, not file paths. No standalone workflow — cannot be an independent example. Companion ForEach usage patterns should be embedded in main examples.",
+      "blocking_taskcard": "lowcode-true-closure-20260531",
+      "contract_path": null,
       "lifecycle_record_path": null,
       "pr_number": null,
       "merge_sha": null,
       "last_state_change": "2026-05-31T00:00:00Z",
       "post_merge_validation": null,
-      "notes": "New scenario discovered in blocker-closure-20260531 sprint. ForEach.Slide callback iterates slides in-memory. ForEach.Slide(pres, (Slide slide, int index) => {}) works with Aspose.Slides.NET 26.5.0. slides-for-each example built and run successfully. Ready for denominator promotion in next sprint."
+      "notes": "TRUE_CLOSURE_RECLASSIFICATION (2026-05-31): slides-for-each is NON_RUNNABLE_HELPER, not a main-class workflow. Reflection proof: ForEach class is utility iterator only. Denominator already excludes ForEach (non_runnable_types list). Removed from format-authority/contracts/slides.json. Companion example in workspace/pr-dry-run/slides-controlled-pilot kept as reference."
     }
   ]
 }

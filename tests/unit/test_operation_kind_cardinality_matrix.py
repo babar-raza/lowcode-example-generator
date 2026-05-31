@@ -129,14 +129,14 @@ class TestContractCardinality:
             assert out_card == "multi", \
                 f"{fam}/{type_name}: expected multi output, got '{out_card}'"
 
-    def test_total_type_count_is_44(self):
-        """Total types across all contracts must be 44.
+    def test_total_type_count_is_42(self):
+        """Total types across all contracts must be 42 (canonical main-class workflow types only).
 
-        Updated from 42 to 44 in blocker-closure-20260531 sprint:
-        +1 words/Signer (DigitalSignatureUtil.Sign via SignerContext — probe proven)
-        +1 slides/ForEach (ForEach.Slide callback — probe proven)
+        words/Signer excluded: no Aspose.Words.LowCode.Signer class; SignerContext is CONTEXT_MODEL;
+          DigitalSignatureUtil.Sign is in Aspose.Words.DigitalSignatures, not LowCode namespace.
+        slides/ForEach excluded: ForEach is NON_RUNNABLE_HELPER (utility iterator), not main workflow.
         """
         total = sum(
             len(load_contract(fam)["types"]) for fam in FAMILIES
         )
-        assert total == 44, f"Expected 44 total types, got {total}"
+        assert total == 42, f"Expected 42 total types, got {total}"

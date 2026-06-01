@@ -1,0 +1,15 @@
+{
+  "family": "pdf",
+  "name": "timestamp",
+  "decision": "PUBLISH_ENVIRONMENT_DEPENDENT_EXAMPLE",
+  "type": "Timestamp",
+  "csproj": "timestamp.csproj",
+  "has_readme": false,
+  "has_expected_output": false,
+  "result_classification": "ENVIRONMENT_DEPENDENT",
+  "readme_ref": "../../README.md",
+  "files": [
+    "Program.cs",
+    "timestamp.csproj"
+  ]
+}

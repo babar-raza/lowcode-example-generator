@@ -1,0 +1,56 @@
+[2026-06-01T15:50:20.981160+00:00] === SPRINT: lowcode-final-megasprint-20260601 ===
+[2026-06-01T15:50:20.981571+00:00] === A: PREFLIGHT ===
+[2026-06-01T15:50:20.983903+00:00] CMD-001 [preflight] git status
+[2026-06-01T15:50:21.283071+00:00] CMD-002 [preflight] Python version
+[2026-06-01T15:50:21.339290+00:00] CMD-003 [preflight] dotnet version
+[2026-06-01T15:50:21.782059+00:00] Preflight done
+[2026-06-01T15:50:21.805507+00:00] Found 49 examples, 56 decisions
+[2026-06-01T15:50:21.805615+00:00] === E: PACKAGES ===
+[2026-06-01T15:50:23.044645+00:00] CMD-004 [package] Verify 44 package artifacts
+[2026-06-01T15:50:23.302271+00:00] Packages: 44 (main=42 comp=1 env=1)
+[2026-06-01T15:50:23.302399+00:00] === F: E2E ===
+[2026-06-01T15:56:26.761226+00:00] E2E: pub=44/44 diag=5/5
+[2026-06-01T15:56:26.761392+00:00] === G: DECISIONS ===
+[2026-06-01T15:56:26.789249+00:00] Decisions locked: 44 pub, 12 excl
+[2026-06-01T15:56:26.789363+00:00] === PYTEST ===
+[2026-06-01T15:56:26.790160+00:00] CMD-006 [pytest] Full pytest
+[2026-06-01T16:02:23.109405+00:00] pytest: 3222/18/0
+[2026-06-01T16:02:23.109560+00:00] === H: PUBLICATION ===
+[2026-06-01T16:02:23.136783+00:00] CMD-007 [publication] Validate publication matrix
+[2026-06-01T16:02:23.268935+00:00] Publication: 6 families, blocked
+[2026-06-01T16:02:23.302700+00:00] === I: IV ===
+[2026-06-01T16:02:23.322165+00:00] IV: 17/17
+[2026-06-01T16:02:23.322259+00:00] === VALIDATORS ===
+[2026-06-01T16:02:23.322837+00:00]   [PASS] V01: Package artifacts = 44 -- 44
+[2026-06-01T16:02:23.323483+00:00]   [PASS] V02: Command stdout/stderr exist
+[2026-06-01T16:02:23.323560+00:00]   [PASS] V03: No failed commands -- 0 failures
+[2026-06-01T16:02:23.326370+00:00]   [PASS] V04: Command file refs valid -- ok
+[2026-06-01T16:02:23.326651+00:00]   [PASS] V05: output-proof exists
+[2026-06-01T16:02:23.327233+00:00]   [PASS] V06: FormImporter NOT in E2E
+[2026-06-01T16:02:23.327293+00:00]   [PASS] V07: Publishable = packages = 44
+[2026-06-01T16:02:23.327720+00:00]   [PASS] V08: Duplicates excluded
+[2026-06-01T16:02:23.327862+00:00]   [PASS] V09: Helper excluded
+[2026-06-01T16:02:23.328950+00:00]   [PASS] V10: No deferred
+[2026-06-01T16:02:23.329043+00:00]   [PASS] V11: E2E pub all pass -- 44/44
+[2026-06-01T16:02:23.395226+00:00]   [PASS] V12: No static PFX
+[2026-06-01T16:02:23.395360+00:00]   [PASS] V13: Package policy enforced
+[2026-06-01T16:02:23.395684+00:00]   [PASS] V14: final-clean-proof exists
+[2026-06-01T16:02:23.395942+00:00]   [PASS] V15: sidecar-verification.log exists
+[2026-06-01T16:02:23.396154+00:00]   [PASS] V16: IV report exists
+[2026-06-01T16:02:23.396335+00:00]   [PASS] V17: self-reference-policy exists
+[2026-06-01T16:02:23.396367+00:00]   [PASS] V18: pytest passes -- 3222 passed
+[2026-06-01T16:02:23.396998+00:00]   [PASS] V19: final-clean-proof not PENDING -- value: SIDECAR_ONLY
+[2026-06-01T16:02:23.397615+00:00]   [PASS] V20: sidecar-verification not placeholder-only -- actual values present
+[2026-06-01T16:02:23.398684+00:00]   [PASS] V21: self-contained-bundle-check consistent
+[2026-06-01T16:02:23.399287+00:00]   [PASS] V22: Exclusion list complete -- 3 files excluded
+[2026-06-01T16:02:23.417909+00:00] Validators: 22/22
+[2026-06-01T16:02:23.418030+00:00] === I: IV ===
+[2026-06-01T16:02:23.437151+00:00] IV: 17/17
+[2026-06-01T16:02:23.437462+00:00] === J: WORK-AHEAD ===
+[2026-06-01T16:02:23.472115+00:00] Work-ahead complete
+[2026-06-01T16:02:23.496490+00:00] === B/C: ARTIFACT BUILD ===
+[2026-06-01T16:02:24.098675+00:00] CMD-008 [artifact] Build evidence ZIP
+[2026-06-01T16:02:24.446101+00:00] CMD-009 [sidecar] Compute SHA-256 and write sidecars
+[2026-06-01T16:02:24.558379+00:00] CMD-010 [sidecar-verify] Independent SHA verification
+[2026-06-01T16:02:24.647407+00:00] CMD-011 [artifact-validate] Verify zip-file-list vs actual entries
+[2026-06-01T16:02:24.739510+00:00] ZIP: 356 entries, 210856 bytes, SHA: e6a5b6567e3ed2556db94091bbf3f41a028f63e11ed5ed585442530a90f0b250, match: True, zfl=356

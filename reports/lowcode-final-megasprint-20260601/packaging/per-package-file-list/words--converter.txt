@@ -1,0 +1,5 @@
+Program.cs
+README.md
+converter.csproj
+example.manifest.json
+expected-output.json

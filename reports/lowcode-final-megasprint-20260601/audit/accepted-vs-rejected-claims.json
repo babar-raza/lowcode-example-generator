@@ -1,0 +1,19 @@
+{
+  "sprint": "lowcode-final-megasprint-20260601",
+  "previous": "lowcode-pub-proof-pass3-20260601",
+  "accepted": [
+    "decisions",
+    "E2E 49/49",
+    "packages 44",
+    "pytest 3222/0/18",
+    "no PFX",
+    "command structure"
+  ],
+  "rejected": [
+    "final-clean-proof PENDING",
+    "sidecar-verification placeholder",
+    "zip-file-list 348 vs 349",
+    "per-file-sha exclusion incomplete",
+    "command ledger artifact gaps"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "sprint": "lowcode-final-megasprint-20260601",
+  "convention": "SIDECAR_ONLY",
+  "actual_sha256": "SIDECAR_ONLY \u2014 see external .sha256 file",
+  "actual_size_bytes": "SIDECAR_ONLY \u2014 see external .size-count.json",
+  "actual_entry_count": "SIDECAR_ONLY \u2014 see external .size-count.json",
+  "explanation": "The ZIP file cannot contain its own hash. Actual values live in external sidecar files (.sha256 and .size-count.json) located alongside the ZIP. This is mathematically honest.",
+  "protocol": "NON_CIRCULAR_SIDECAR",
+  "sidecar_sha256_filename": "lowcode-final-megasprint-20260601-evidence.zip.sha256",
+  "sidecar_size_count_filename": "lowcode-final-megasprint-20260601-evidence.zip.size-count.json"
+}

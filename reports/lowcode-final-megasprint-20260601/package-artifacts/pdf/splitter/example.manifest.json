@@ -1,0 +1,17 @@
+{
+  "family": "pdf",
+  "name": "splitter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Splitter",
+  "csproj": "splitter.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "expected-output.json",
+    "splitter.csproj"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "sprint": "lowcode-final-megasprint-20260601",
+  "total": 56,
+  "publish": 44,
+  "exclude": 12,
+  "main": 42,
+  "companion": 1,
+  "env_dep": 1,
+  "consistent": true
+}

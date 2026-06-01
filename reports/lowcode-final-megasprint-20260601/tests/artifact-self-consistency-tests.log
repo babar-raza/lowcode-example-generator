@@ -1,0 +1,5 @@
+[PASS] zip-file-list entries: 356
+[PASS] ZIP entries: 356
+[PASS] Match: True
+[PASS] self-contained-bundle-check consistent
+[PASS] 3 files excluded per policy

@@ -1,0 +1,19 @@
+{
+  "sprint": "lowcode-final-megasprint-20260601",
+  "convention": "DOCUMENTED_EXCLUSION",
+  "excluded_from_per_file_sha": [
+    {
+      "file": "reports/artifact/per-file-sha256.json",
+      "reason": "Cannot hash itself"
+    },
+    {
+      "file": "reports/artifact/zip-file-list.txt",
+      "reason": "Written after per-file-sha256"
+    },
+    {
+      "file": "reports/artifact/self-contained-bundle-check.json",
+      "reason": "Written after per-file-sha256"
+    }
+  ],
+  "note": "All other files including final-clean-proof.json and sidecar-verification.log ARE hashed"
+}

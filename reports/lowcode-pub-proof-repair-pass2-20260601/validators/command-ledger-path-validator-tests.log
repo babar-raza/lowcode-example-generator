@@ -1,0 +1,5 @@
+Command ledger path convention: relative to report root
+stdout/stderr directory: commands/stdout-stderr/
+Files found: 6
+All referenced files exist: True
+Verdict: PASS

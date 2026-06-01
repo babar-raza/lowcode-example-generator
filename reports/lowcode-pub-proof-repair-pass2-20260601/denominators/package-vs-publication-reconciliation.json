@@ -1,0 +1,56 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "publication_decisions": 44,
+  "package_artifacts_built": 44,
+  "match": true,
+  "excluded_from_packages": [
+    {
+      "key": "email/email-converter",
+      "decision": "EXCLUDE_DUPLICATE"
+    },
+    {
+      "key": "pdf/form-importer",
+      "decision": "EXTERNAL_UPSTREAM_BUG"
+    },
+    {
+      "key": "slides/for-each",
+      "decision": "EXCLUDE_NON_RUNNABLE_HELPER"
+    },
+    {
+      "key": "slides/slides-compress",
+      "decision": "EXCLUDE_DUPLICATE"
+    },
+    {
+      "key": "slides/slides-convert",
+      "decision": "EXCLUDE_DUPLICATE"
+    },
+    {
+      "key": "slides/slides-merger",
+      "decision": "EXCLUDE_DUPLICATE"
+    },
+    {
+      "key": "words/processor",
+      "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+    },
+    {
+      "key": "words/ofd",
+      "decision": "EXCLUDE_UNSUPPORTED_FORMAT"
+    },
+    {
+      "key": "cells/spreadsheet-printer",
+      "decision": "EXCLUDE_NOT_IN_API_CATALOG"
+    },
+    {
+      "key": "pdf/pdf-extractor",
+      "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+    },
+    {
+      "key": "pdf/pdf-to-image",
+      "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+    },
+    {
+      "key": "pdf/ofd",
+      "decision": "EXCLUDE_UNSUPPORTED_FORMAT"
+    }
+  ]
+}

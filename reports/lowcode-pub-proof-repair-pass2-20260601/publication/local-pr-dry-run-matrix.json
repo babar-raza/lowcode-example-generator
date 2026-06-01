@@ -1,0 +1,295 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "total_publishable": 44,
+  "families": [
+    {
+      "family": "cells",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-cells-readme-io-final",
+      "publishable_count": 9,
+      "examples": [
+        {
+          "key": "cells/html-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/image-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/json-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/pdf-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/spreadsheet-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/spreadsheet-locker",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/spreadsheet-merger",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/spreadsheet-splitter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "cells/text-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "excluded_items": [
+        {
+          "key": "cells/spreadsheet-printer",
+          "decision": "EXCLUDE_NOT_IN_API_CATALOG"
+        }
+      ],
+      "excluded_leak_check": true
+    },
+    {
+      "family": "diagram",
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-diagram-readme-io-final",
+      "publishable_count": 2,
+      "examples": [
+        {
+          "key": "diagram/diagram-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "diagram/pdf-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "excluded_items": [],
+      "excluded_leak_check": true
+    },
+    {
+      "family": "email",
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-email-readme-io-final",
+      "publishable_count": 1,
+      "examples": [
+        {
+          "key": "email/converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "excluded_items": [
+        {
+          "key": "email/email-converter",
+          "decision": "EXCLUDE_DUPLICATE"
+        }
+      ],
+      "excluded_leak_check": true
+    },
+    {
+      "family": "pdf",
+      "repo": "aspose-pdf-net/Aspose.Pdf.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-pdf-readme-io-final",
+      "publishable_count": 20,
+      "examples": [
+        {
+          "key": "pdf/doc-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/html",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/xls-converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/jpeg",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/png",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/tiff",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/text-extractor",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/merger",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/splitter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/optimizer",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/pdf-aconverter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/toc-generator",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/table-generator",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/image-extractor",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/security",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/form-flattener",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/form-editor",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/form-exporter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/signature",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "pdf/timestamp",
+          "decision": "PUBLISH_ENVIRONMENT_DEPENDENT_EXAMPLE"
+        }
+      ],
+      "excluded_items": [
+        {
+          "key": "pdf/form-importer",
+          "decision": "EXTERNAL_UPSTREAM_BUG"
+        },
+        {
+          "key": "pdf/pdf-extractor",
+          "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+        },
+        {
+          "key": "pdf/pdf-to-image",
+          "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+        },
+        {
+          "key": "pdf/ofd",
+          "decision": "EXCLUDE_UNSUPPORTED_FORMAT"
+        }
+      ],
+      "excluded_leak_check": true
+    },
+    {
+      "family": "slides",
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-slides-readme-io-final",
+      "publishable_count": 3,
+      "examples": [
+        {
+          "key": "slides/compress",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "slides/convert",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "slides/merger",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "excluded_items": [
+        {
+          "key": "slides/for-each",
+          "decision": "EXCLUDE_NON_RUNNABLE_HELPER"
+        },
+        {
+          "key": "slides/slides-compress",
+          "decision": "EXCLUDE_DUPLICATE"
+        },
+        {
+          "key": "slides/slides-convert",
+          "decision": "EXCLUDE_DUPLICATE"
+        },
+        {
+          "key": "slides/slides-merger",
+          "decision": "EXCLUDE_DUPLICATE"
+        }
+      ],
+      "excluded_leak_check": true
+    },
+    {
+      "family": "words",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-words-readme-io-final",
+      "publishable_count": 9,
+      "examples": [
+        {
+          "key": "words/converter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/merger",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/splitter",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/comparer",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/mail-merger",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/report-builder",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/watermarker",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/replacer",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "key": "words/signer",
+          "decision": "PUBLISH_COMPANION_EXAMPLE"
+        }
+      ],
+      "excluded_items": [
+        {
+          "key": "words/processor",
+          "decision": "EXCLUDE_NOT_A_MAIN_CLASS"
+        },
+        {
+          "key": "words/ofd",
+          "decision": "EXCLUDE_UNSUPPORTED_FORMAT"
+        }
+      ],
+      "excluded_leak_check": true
+    }
+  ]
+}

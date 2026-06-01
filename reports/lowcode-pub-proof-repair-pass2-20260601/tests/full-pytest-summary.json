@@ -1,0 +1,8 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "framework": "pytest",
+  "passed": 3222,
+  "skipped": 18,
+  "failed": 0,
+  "verdict": "ALL_PASS"
+}

@@ -1,0 +1,4 @@
+[PASS] Sidecar SHA matches ZIP: cd88844851f08d7865101cb0d0845ace51e1b98b8e5ce7224ee699eb772b4c4c
+[PASS] Sidecar size matches: 219159
+[PASS] Sidecar entries matches: 340
+[PASS] Non-circular protocol verified

@@ -1,0 +1,9 @@
+Sidecar Verification Log
+Sprint: lowcode-pub-proof-repair-pass2-20260601
+ZIP: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\evidence-bundles\lowcode-pub-proof-repair-pass2-20260601-evidence.zip
+Sidecar SHA-256: cd88844851f08d7865101cb0d0845ace51e1b98b8e5ce7224ee699eb772b4c4c
+Recomputed SHA-256: cd88844851f08d7865101cb0d0845ace51e1b98b8e5ce7224ee699eb772b4c4c
+Match: True
+Size: 219159 bytes
+Entries: 340
+Protocol: NON_CIRCULAR_SIDECAR

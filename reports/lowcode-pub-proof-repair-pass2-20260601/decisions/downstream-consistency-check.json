@@ -1,0 +1,10 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "total_decisions": 56,
+  "publish_count": 44,
+  "exclude_count": 12,
+  "publish_main": 42,
+  "publish_companion": 1,
+  "publish_env_dep": 1,
+  "consistent": true
+}

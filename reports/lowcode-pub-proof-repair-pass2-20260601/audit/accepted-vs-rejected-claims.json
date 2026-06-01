@@ -1,0 +1,23 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "previous_sprint": "lowcode-pub-proof-repair-20260601",
+  "accepted": [
+    "ZIP identity (c9c97cdf..., 196948 bytes, 260 entries)",
+    "56/56 decision board",
+    "Decision model (42+1+1=44 pub, 12 excl)",
+    "E2E model (44/44 pub, 5/5 diag, FormImporter excluded)",
+    "per-example-output-proof.json exists",
+    "44 package artifact directories",
+    "No static PFX",
+    "pytest 3222/18/0",
+    "Publication matrix 44 candidates"
+  ],
+  "rejected": [
+    "Sidecar/final-clean-proof mismatch",
+    "V03 command ledger FAIL (0 stdout/stderr)",
+    "IV claims all pass despite V03 FAIL",
+    "Command stdout/stderr are snippets not raw output",
+    "Package artifacts missing README.md and expected-output.json",
+    "Artifact possibly changed after sidecar computation"
+  ]
+}

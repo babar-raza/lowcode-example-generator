@@ -1,0 +1,5 @@
+Program.cs
+README.md
+comparer.csproj
+example.manifest.json
+expected-output.json

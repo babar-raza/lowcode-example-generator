@@ -1,0 +1,5 @@
+Program.cs
+README.md
+example.manifest.json
+expected-output.json
+report-builder.csproj

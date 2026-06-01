@@ -1,0 +1,18 @@
+{
+  "family": "slides",
+  "name": "compress",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Compress",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "compress.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "compress.csproj",
+    "expected-output.json"
+  ]
+}

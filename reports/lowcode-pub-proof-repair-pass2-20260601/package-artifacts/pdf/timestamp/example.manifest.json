@@ -1,0 +1,16 @@
+{
+  "family": "pdf",
+  "name": "timestamp",
+  "decision": "PUBLISH_ENVIRONMENT_DEPENDENT_EXAMPLE",
+  "type": "Timestamp",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "timestamp.csproj",
+  "has_readme": false,
+  "has_expected_output": false,
+  "result_classification": "ENVIRONMENT_DEPENDENT",
+  "readme_ref": "N/A",
+  "files": [
+    "Program.cs",
+    "timestamp.csproj"
+  ]
+}

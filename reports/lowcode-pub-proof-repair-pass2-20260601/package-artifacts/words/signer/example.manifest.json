@@ -1,0 +1,18 @@
+{
+  "family": "words",
+  "name": "signer",
+  "decision": "PUBLISH_COMPANION_EXAMPLE",
+  "type": "SignerContext",
+  "role": "CONTEXT_MODEL",
+  "csproj": "signer.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "expected-output.json",
+    "signer.csproj"
+  ]
+}

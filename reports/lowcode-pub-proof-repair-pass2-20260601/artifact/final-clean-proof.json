@@ -1,0 +1,14 @@
+{
+  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+  "zip_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-pass2-20260601-evidence.zip",
+  "zip_name": "lowcode-pub-proof-repair-pass2-20260601-evidence.zip",
+  "actual_sha256": "cd88844851f08d7865101cb0d0845ace51e1b98b8e5ce7224ee699eb772b4c4c",
+  "actual_size_bytes": 219159,
+  "actual_entry_count": 340,
+  "sidecar_sha256_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-pass2-20260601-evidence.zip.sha256",
+  "sidecar_size_count_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-pass2-20260601-evidence.zip.size-count.json",
+  "sidecar_verified": true,
+  "internal_manifest_contains_zip_hash": false,
+  "protocol": "NON_CIRCULAR_SIDECAR",
+  "note": "These values match the actual ZIP file. Sidecar files outside ZIP also match."
+}

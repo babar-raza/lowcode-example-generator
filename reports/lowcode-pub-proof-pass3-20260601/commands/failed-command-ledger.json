@@ -1,0 +1,16 @@
+{
+  "sprint": "lowcode-pub-proof-pass3-20260601",
+  "policy": "All commands with exit_code != 0 must be superseded or classified",
+  "previous_sprint_failures": [
+    {
+      "id": "CMD-004 (pass2)",
+      "sprint": "lowcode-pub-proof-repair-pass2-20260601",
+      "exit_code": 1,
+      "purpose": "Replay package artifact verification",
+      "failure_reason": "Python command quoting/syntax error in inline -c argument",
+      "classification": "SUPERSEDED",
+      "superseded_by": "Package verification command in this sprint (pass3) with exit_code 0"
+    }
+  ],
+  "current_sprint_failures": []
+}

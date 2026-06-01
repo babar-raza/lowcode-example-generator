@@ -1,0 +1,18 @@
+{
+  "family": "words",
+  "name": "comparer",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Comparer",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "comparer.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "comparer.csproj",
+    "expected-output.json"
+  ]
+}

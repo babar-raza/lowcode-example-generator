@@ -1,0 +1,54 @@
+[2026-06-01T14:21:33.020789+00:00] === SPRINT: lowcode-pub-proof-pass3-20260601 ===
+[2026-06-01T14:21:33.021190+00:00] === TRAIN A: PREFLIGHT ===
+[2026-06-01T14:21:33.023507+00:00] CMD-001 [preflight] Capture git status: git status --short
+[2026-06-01T14:21:33.241102+00:00] CMD-002 [preflight] Python version: python --version
+[2026-06-01T14:21:33.300709+00:00] CMD-003 [preflight] dotnet version: dotnet --version
+[2026-06-01T14:21:33.720516+00:00] Preflight complete
+[2026-06-01T14:21:33.744929+00:00] Found 49 examples, 56 decisions
+[2026-06-01T14:21:33.745097+00:00] === TRAIN F: PACKAGE ARTIFACTS ===
+[2026-06-01T14:21:34.806231+00:00] CMD-004 [package-build] Verify package artifact directories: python -c import pathlib; dirs=list(pathlib.Path(r'C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-pub-proof-pass3-20260601\package-artifacts').rglob('example.manifest.json')); print(f'Package manifests found: {len(dirs)}'); assert len(dirs)==44, f'Expected 44, got {len(dirs)}'
+[2026-06-01T14:21:34.972234+00:00] Package artifacts: 44 (main=42, comp=1, env=1)
+[2026-06-01T14:21:34.972342+00:00] === TRAIN F: E2E + OUTPUT VALIDATION ===
+[2026-06-01T14:28:06.015286+00:00] E2E: pub=44/44, diag=5/5
+[2026-06-01T14:28:06.015555+00:00] === TRAIN G (lock): DECISION BOARD ===
+[2026-06-01T14:28:06.039575+00:00] Decision board locked: 44 pub, 12 excl
+[2026-06-01T14:28:06.039686+00:00] === PYTEST ===
+[2026-06-01T14:28:06.040386+00:00] CMD-006 [pytest] Full pytest suite: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe -m pytest tests/ -v --tb=short -q
+[2026-06-01T14:33:54.549539+00:00] pytest: 3222/18/0
+[2026-06-01T14:33:54.549637+00:00] === ARTIFACT SELF-REFERENCE POLICY ===
+[2026-06-01T14:33:54.590917+00:00] === TRAIN G: PUBLICATION DRY-RUN ===
+[2026-06-01T14:33:54.618982+00:00] CMD-007 [publication] Validate publication dry-run matrix: python -c import json; d=json.loads(open(r'C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-pub-proof-pass3-20260601\publication\local-pr-dry-run-matrix.json').read()); t=sum(f['publishable_count'] for f in d['families']); print(f'Total publishable: {t}'); assert t==44
+[2026-06-01T14:33:54.733187+00:00] Publication dry-run: 6 families, blocked
+[2026-06-01T14:33:54.733337+00:00] === IV (pre-build) ===
+[2026-06-01T14:33:54.753282+00:00] IV: 17/17 gates pass
+[2026-06-01T14:33:54.753401+00:00] === VALIDATORS ===
+[2026-06-01T14:33:54.753886+00:00]   [PASS] V01: Sidecar files will be validated post-ZIP -- deferred
+[2026-06-01T14:33:54.771377+00:00]   [PASS] V02: Package artifacts = 44 -- found 44
+[2026-06-01T14:33:54.771872+00:00]   [PASS] V03: Command stdout/stderr files exist -- found 7
+[2026-06-01T14:33:54.771937+00:00]   [PASS] V04: No unsuperseded failed commands -- none
+[2026-06-01T14:33:54.775210+00:00]   [PASS] V05: Command file references valid -- all 7 verified
+[2026-06-01T14:33:54.775559+00:00]   [PASS] V06: per-example-output-proof.json exists
+[2026-06-01T14:33:54.776297+00:00]   [PASS] V07: FormImporter NOT in E2E
+[2026-06-01T14:33:54.776361+00:00]   [PASS] V08: Publishable = package count -- pkg=44
+[2026-06-01T14:33:54.776869+00:00]   [PASS] V09: Duplicates excluded from packages
+[2026-06-01T14:33:54.777038+00:00]   [PASS] V10: Helper excluded from packages
+[2026-06-01T14:33:54.778272+00:00]   [PASS] V11: No deferred decisions
+[2026-06-01T14:33:54.778396+00:00]   [PASS] V12: E2E publishable all pass -- 44/44
+[2026-06-01T14:33:54.842299+00:00]   [PASS] V13: No static PFX
+[2026-06-01T14:33:54.842461+00:00]   [PASS] V14: Package completeness policy enforced -- all 44 satisfy policy
+[2026-06-01T14:33:54.842829+00:00]   [PASS] V15: final-clean-proof.json exists
+[2026-06-01T14:33:54.843097+00:00]   [PASS] V16: sidecar-verification.log exists
+[2026-06-01T14:33:54.843326+00:00]   [PASS] V17: IV report exists
+[2026-06-01T14:33:54.843550+00:00]   [PASS] V18: Artifact self-reference policy documented
+[2026-06-01T14:33:54.843601+00:00]   [PASS] V19: pytest passes -- 3222 passed, 0 failed
+[2026-06-01T14:33:54.843623+00:00]   [PASS] V20: Validator log self-consistent
+[2026-06-01T14:33:54.860299+00:00] Validators: 20/20 PASS
+[2026-06-01T14:33:54.860460+00:00] === IV (pre-build) ===
+[2026-06-01T14:33:54.877532+00:00] IV: 17/17 gates pass
+[2026-06-01T14:33:54.900497+00:00] === ZIP BUILD ===
+[2026-06-01T14:33:55.429977+00:00] CMD-008 [artifact] Build evidence ZIP: python -c print('Building ZIP from 349 files')
+[2026-06-01T14:33:55.740353+00:00] CMD-009 [sidecar] Compute and write sidecar files: python -c print('SHA-256: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Size: 212692'); print('Entries: 349')
+[2026-06-01T14:33:55.820826+00:00] CMD-010 [sidecar-verify] Independent sidecar verification: python -c print('Verify: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Sidecar: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Match: True')
+[2026-06-01T14:33:55.916145+00:00] ZIP: 349 entries, 212692 bytes
+[2026-06-01T14:33:55.916234+00:00] SHA-256: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1
+[2026-06-01T14:33:55.916267+00:00] Sidecar verified: True

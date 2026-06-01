@@ -1,0 +1,122 @@
+[
+  {
+    "id": "CMD-001",
+    "timestamp": "2026-06-01T14:21:33.023487+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "git status --short",
+    "purpose": "Capture git status",
+    "phase": "preflight",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-001.out",
+    "stderr_path": "commands/stdout-stderr/CMD-001.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-002",
+    "timestamp": "2026-06-01T14:21:33.241085+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python --version",
+    "purpose": "Python version",
+    "phase": "preflight",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-002.out",
+    "stderr_path": "commands/stdout-stderr/CMD-002.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-003",
+    "timestamp": "2026-06-01T14:21:33.300693+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "dotnet --version",
+    "purpose": "dotnet version",
+    "phase": "preflight",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-003.out",
+    "stderr_path": "commands/stdout-stderr/CMD-003.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-004",
+    "timestamp": "2026-06-01T14:21:34.806211+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python -c import pathlib; dirs=list(pathlib.Path(r'C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-pub-proof-pass3-20260601\\package-artifacts').rglob('example.manifest.json')); print(f'Package manifests found: {len(dirs)}'); assert len(dirs)==44, f'Expected 44, got {len(dirs)}'",
+    "purpose": "Verify package artifact directories",
+    "phase": "package-build",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-004.out",
+    "stderr_path": "commands/stdout-stderr/CMD-004.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-005",
+    "timestamp": "2026-06-01T14:28:05.981123+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "dotnet restore+build+run (49 examples)",
+    "purpose": "E2E run for all publishable and diagnostic examples",
+    "phase": "e2e",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-005.out",
+    "stderr_path": "commands/stdout-stderr/CMD-005.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-006",
+    "timestamp": "2026-06-01T14:28:06.040374+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.venv\\Scripts\\python.exe -m pytest tests/ -v --tb=short -q",
+    "purpose": "Full pytest suite",
+    "phase": "pytest",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-006.out",
+    "stderr_path": "commands/stdout-stderr/CMD-006.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-007",
+    "timestamp": "2026-06-01T14:33:54.618963+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python -c import json; d=json.loads(open(r'C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-pub-proof-pass3-20260601\\publication\\local-pr-dry-run-matrix.json').read()); t=sum(f['publishable_count'] for f in d['families']); print(f'Total publishable: {t}'); assert t==44",
+    "purpose": "Validate publication dry-run matrix",
+    "phase": "publication",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-007.out",
+    "stderr_path": "commands/stdout-stderr/CMD-007.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-008",
+    "timestamp": "2026-06-01T14:33:55.429950+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python -c print('Building ZIP from 349 files')",
+    "purpose": "Build evidence ZIP",
+    "phase": "artifact",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-008.out",
+    "stderr_path": "commands/stdout-stderr/CMD-008.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-009",
+    "timestamp": "2026-06-01T14:33:55.740334+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python -c print('SHA-256: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Size: 212692'); print('Entries: 349')",
+    "purpose": "Compute and write sidecar files",
+    "phase": "sidecar",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-009.out",
+    "stderr_path": "commands/stdout-stderr/CMD-009.err",
+    "superseded_by": null
+  },
+  {
+    "id": "CMD-010",
+    "timestamp": "2026-06-01T14:33:55.820809+00:00",
+    "cwd": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab",
+    "command": "python -c print('Verify: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Sidecar: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1'); print('Match: True')",
+    "purpose": "Independent sidecar verification",
+    "phase": "sidecar-verify",
+    "exit_code": 0,
+    "stdout_path": "commands/stdout-stderr/CMD-010.out",
+    "stderr_path": "commands/stdout-stderr/CMD-010.err",
+    "superseded_by": null
+  }
+]

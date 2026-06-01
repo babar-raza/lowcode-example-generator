@@ -1,0 +1,18 @@
+{
+  "family": "pdf",
+  "name": "form-exporter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "FormExporter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "form-exporter.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "expected-output.json",
+    "form-exporter.csproj"
+  ]
+}

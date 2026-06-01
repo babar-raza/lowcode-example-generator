@@ -1,0 +1,15 @@
+{
+  "sprint": "lowcode-pub-proof-pass3-20260601",
+  "zip_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-pass3-20260601-evidence.zip",
+  "zip_name": "lowcode-pub-proof-pass3-20260601-evidence.zip",
+  "actual_sha256": "d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1",
+  "actual_size_bytes": 212692,
+  "actual_entry_count": 349,
+  "sidecar_sha256_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-pass3-20260601-evidence.zip.sha256",
+  "sidecar_size_count_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-pass3-20260601-evidence.zip.size-count.json",
+  "sidecar_verified": true,
+  "protocol": "NON_CIRCULAR_SIDECAR",
+  "self_reference_policy": "DOCUMENTED_EXCLUSION",
+  "pre_build_placeholder_in_zip": true,
+  "post_build_actual_values_here": true
+}

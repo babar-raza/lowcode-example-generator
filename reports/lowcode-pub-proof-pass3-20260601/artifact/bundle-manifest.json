@@ -1,0 +1,7 @@
+{
+  "sprint": "lowcode-pub-proof-pass3-20260601",
+  "built_at": "2026-06-01T14:33:54.908113+00:00",
+  "note": "This manifest does not contain the final ZIP hash. See external sidecar files.",
+  "protocol": "NON_CIRCULAR_SIDECAR",
+  "self_reference_policy": "DOCUMENTED_EXCLUSION"
+}

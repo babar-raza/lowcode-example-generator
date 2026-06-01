@@ -1,0 +1,6 @@
+[PASS] ZIP SHA-256: d3c994c783fa56cc8d174ef32a9636d89d256b10b70c3837fe81691bd7e1c4a1
+[PASS] ZIP size: 212692
+[PASS] ZIP entries: 349
+[PASS] Sidecar match: True
+[PASS] final-clean-proof.json exists
+[PASS] sidecar-verification.log exists

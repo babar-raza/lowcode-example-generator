@@ -1,0 +1,3 @@
+[PASS] 44/44 package artifacts
+[PASS] All contain Program.cs + .csproj + manifest
+[PASS] Completeness policy enforced

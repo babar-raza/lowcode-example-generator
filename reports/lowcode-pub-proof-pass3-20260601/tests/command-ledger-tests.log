@@ -1,0 +1,4 @@
+[PASS] Command index has 10 entries
+[PASS] All stdout/stderr files exist
+[PASS] No unsuperseded failed commands
+[PASS] CMD-004 from pass2 superseded

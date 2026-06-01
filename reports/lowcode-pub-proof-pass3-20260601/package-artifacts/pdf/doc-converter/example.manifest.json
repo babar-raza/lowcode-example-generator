@@ -1,0 +1,18 @@
+{
+  "family": "pdf",
+  "name": "doc-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "DocConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-doc-converter.csproj",
+  "has_readme": true,
+  "has_expected_output": true,
+  "result_classification": "FILE_OUTPUT",
+  "readme_ref": "README.md",
+  "files": [
+    "Program.cs",
+    "README.md",
+    "expected-output.json",
+    "pdf-doc-converter.csproj"
+  ]
+}

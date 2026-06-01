@@ -1,0 +1,31 @@
+ M .gitignore
+ M workspace/pr-dry-run/cells-controlled-pilot/README.md
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/jpeg/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/png/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/tiff/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/image-extractor/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/table-generator/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/table-generator/output.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/toc-generator/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr6/examples/pdf/lowcode/toc-generator/output.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-editor/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-editor/output.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr8/examples/pdf/lowcode/form-exporter/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/input.pdf
+ M workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/output.pdf
+ M workspace/pr-dry-run/words-controlled-pilot/README.md
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? .kilo/
+?? scripts/build_blocker_closure_zip.py
+?? scripts/build_final_publication_zip.py
+?? scripts/run_final_publication_e2e.py
+?? scripts/run_final_publication_validators.py
+?? scripts/run_live_publication.py
+?? scripts/run_pub_proof_repair.py
+?? scripts/run_true_closure_evidence.py

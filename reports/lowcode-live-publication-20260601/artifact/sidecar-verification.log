@@ -1,0 +1,17 @@
+Sidecar Verification Log
+Sprint: lowcode-live-publication-20260601
+Accepted ZIP: lowcode-final-megasprint-20260601-evidence.zip
+
+ZIP SHA-256: e6a5b6567e3ed2556db94091bbf3f41a028f63e11ed5ed585442530a90f0b250
+Sidecar SHA-256: e6a5b6567e3ed2556db94091bbf3f41a028f63e11ed5ed585442530a90f0b250
+SHA match: True
+
+ZIP size: 210856
+Sidecar size: 210856
+Size match: True
+
+ZIP entries: 356
+Sidecar entries: 356
+Count match: True
+
+Sidecars regenerated: False

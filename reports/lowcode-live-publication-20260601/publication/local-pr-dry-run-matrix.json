@@ -1,0 +1,275 @@
+{
+  "sprint": "lowcode-live-publication-20260601",
+  "families": 6,
+  "total_examples": 44,
+  "matrix": [
+    {
+      "family": "cells",
+      "branch": "lowcode-examples-cells-readme-io-final",
+      "dest_repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "html-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "image-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "json-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "pdf-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "spreadsheet-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "spreadsheet-locker",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "spreadsheet-merger",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "spreadsheet-splitter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "text-converter",
+          "pilot": "cells-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "example_count": 9
+    },
+    {
+      "family": "diagram",
+      "branch": "lowcode-examples-diagram-readme-io-final",
+      "dest_repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "diagram-converter",
+          "pilot": "diagram-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "pdf-converter",
+          "pilot": "diagram-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "example_count": 2
+    },
+    {
+      "family": "email",
+      "branch": "lowcode-examples-email-readme-io-final",
+      "dest_repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "converter",
+          "pilot": "email-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "example_count": 1
+    },
+    {
+      "family": "pdf",
+      "branch": "lowcode-examples-pdf-readme-io-final",
+      "dest_repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "doc-converter",
+          "pilot": "pdf-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "html",
+          "pilot": "pdf-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "xls-converter",
+          "pilot": "pdf-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "jpeg",
+          "pilot": "pdf-controlled-pilot-pr5",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "png",
+          "pilot": "pdf-controlled-pilot-pr5",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "tiff",
+          "pilot": "pdf-controlled-pilot-pr5",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "image-extractor",
+          "pilot": "pdf-controlled-pilot-pr6",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "table-generator",
+          "pilot": "pdf-controlled-pilot-pr6",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "toc-generator",
+          "pilot": "pdf-controlled-pilot-pr6",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "form-flattener",
+          "pilot": "pdf-controlled-pilot-pr7",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "security",
+          "pilot": "pdf-controlled-pilot-pr7",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "form-editor",
+          "pilot": "pdf-controlled-pilot-pr8",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "form-exporter",
+          "pilot": "pdf-controlled-pilot-pr8",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "signature",
+          "pilot": "pdf-controlled-pilot-pr9",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "merger",
+          "pilot": "pdf-controlled-pilot-pr10",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "optimizer",
+          "pilot": "pdf-controlled-pilot-pr10",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "pdf-aconverter",
+          "pilot": "pdf-controlled-pilot-pr10",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "splitter",
+          "pilot": "pdf-controlled-pilot-pr10",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "text-extractor",
+          "pilot": "pdf-controlled-pilot-pr10",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "timestamp",
+          "pilot": "pdf-controlled-pilot-pr11",
+          "decision": "PUBLISH_ENVIRONMENT_DEPENDENT_EXAMPLE"
+        }
+      ],
+      "example_count": 20
+    },
+    {
+      "family": "slides",
+      "branch": "lowcode-examples-slides-readme-io-final",
+      "dest_repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "compress",
+          "pilot": "slides-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "convert",
+          "pilot": "slides-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "merger",
+          "pilot": "slides-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "example_count": 3
+    },
+    {
+      "family": "words",
+      "branch": "lowcode-examples-words-readme-io-final",
+      "dest_repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "examples": [
+        {
+          "name": "comparer",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "converter",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "mail-merger",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "merger",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "replacer",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "report-builder",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "signer",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_COMPANION_EXAMPLE"
+        },
+        {
+          "name": "splitter",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        },
+        {
+          "name": "watermarker",
+          "pilot": "words-controlled-pilot",
+          "decision": "PUBLISH_MAIN_CLASS_EXAMPLE"
+        }
+      ],
+      "example_count": 9
+    }
+  ]
+}

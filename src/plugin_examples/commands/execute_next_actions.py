@@ -36,7 +36,7 @@ def handle(args) -> int:
     from plugin_examples.planner_loop import run_execution_loop
     import json as _json
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     evidence_dir = _Path(args.evidence_dir) if args.evidence_dir else repo_root / "workspace" / "verification" / "latest"
     evidence_dir.mkdir(parents=True, exist_ok=True)
 

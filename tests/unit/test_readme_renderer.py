@@ -499,8 +499,8 @@ class TestPublishPrLiveBlocksOnAuditFailure:
         correct. It guards against future refactors that silently remove the live-publish block.
         """
         import re
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_pr.py"
+        source = cmd_path.read_text(encoding="utf-8")
         # Must have: if not _readme_audit.passed: if live_mode: return 1
         # Check the pattern exists as a block in the publish-pr README integration section
         assert "_readme_audit.passed" in source, \
@@ -549,16 +549,16 @@ class TestPublishReadmeCommand:
     """Tests for the publish-readme CLI command."""
 
     def test_publish_readme_subparser_exists(self):
-        """publish-readme must be a registered subcommand in __main__.py."""
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        """publish-readme must be a registered subcommand."""
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_readme.py"
+        source = cmd_path.read_text(encoding="utf-8")
         assert '"publish-readme"' in source or "'publish-readme'" in source, \
             "publish-readme subparser must be registered"
 
     def test_publish_readme_requires_approval_for_live(self):
         """publish-readme must check approval_token before any live remote write."""
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_readme.py"
+        source = cmd_path.read_text(encoding="utf-8")
         # The publish-readme handler must call check_approval
         assert "check_approval" in source, "publish-readme must call check_approval()"
         # Must have live mode guard: if not approved: return 1
@@ -568,15 +568,15 @@ class TestPublishReadmeCommand:
 
     def test_publish_readme_uses_tempdir_for_readme_only(self):
         """publish-readme must create a temp dir with only README.md (not full package)."""
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_readme.py"
+        source = cmd_path.read_text(encoding="utf-8")
         assert "TemporaryDirectory" in source, \
             "publish-readme must use tempfile.TemporaryDirectory for README-only commit"
 
     def test_publish_readme_no_change_detection_present(self):
         """publish-readme must detect when remote README already matches pipeline output."""
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_readme.py"
+        source = cmd_path.read_text(encoding="utf-8")
         assert "NO_CHANGE" in source, \
             "publish-readme must have NO_CHANGE detection"
         assert "remote_readme_content.strip() == readme_content.strip()" in source or \

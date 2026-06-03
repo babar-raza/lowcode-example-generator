@@ -291,7 +291,7 @@ class TestReadmeGateWiredInMainPy(unittest.TestCase):
 
     def test_readme_audit_gate_imported_in_main(self):
         """__main__.py must contain readme_audit_gate import."""
-        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "__main__.py"
+        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "commands" / "publish_pr.py"
         self.assertTrue(main_py.exists(), f"__main__.py not found at {main_py}")
         source = main_py.read_text(encoding="utf-8")
         self.assertIn(
@@ -302,7 +302,7 @@ class TestReadmeGateWiredInMainPy(unittest.TestCase):
 
     def test_check_readme_audit_gate_called_in_main(self):
         """__main__.py must call check_readme_audit_gate (not just import it)."""
-        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "__main__.py"
+        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "commands" / "publish_pr.py"
         source = main_py.read_text(encoding="utf-8")
         self.assertIn(
             "check_readme_audit_gate",
@@ -312,7 +312,7 @@ class TestReadmeGateWiredInMainPy(unittest.TestCase):
 
     def test_gate_passed_check_in_main(self):
         """__main__.py must check gate_passed result and return 1 on failure."""
-        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "__main__.py"
+        main_py = Path(__file__).resolve().parents[2] / "src" / "plugin_examples" / "commands" / "publish_pr.py"
         source = main_py.read_text(encoding="utf-8")
         self.assertIn(
             "gate_passed",

@@ -32,7 +32,7 @@ def handle(args) -> int:
     from plugin_examples.portfolio_action_planner import compute_action_board, render_markdown
     import json as _json
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     board = compute_action_board(repo_root)
 
     output_path = getattr(args, "output", None)

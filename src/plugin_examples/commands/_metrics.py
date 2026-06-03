@@ -47,7 +47,7 @@ def _create_metrics_session(args, *, command: str, family: str = "",
     config = load_metrics_config(config_path=config_path)
 
     if repo_root is None:
-        repo_root = Path(__file__).resolve().parents[2]
+        repo_root = Path(__file__).resolve().parents[3]
 
     from datetime import datetime, timezone
     ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")

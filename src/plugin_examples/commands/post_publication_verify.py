@@ -27,7 +27,7 @@ def handle(args) -> int:
         run_post_publication_verification, write_verification_report,
     )
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     family = args.family
     output = getattr(args, "output", None)
     output_path = (

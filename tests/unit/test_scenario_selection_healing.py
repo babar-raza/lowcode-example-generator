@@ -354,10 +354,9 @@ class TestReportingLanguage:
     """Test 6: Reporting uses 'stages executed' not 'stages passed'."""
 
     def test_main_output_says_executed(self):
-        # Verify the __main__.py template uses correct language
-        import importlib.util
-        spec = importlib.util.find_spec("plugin_examples.__main__")
-        source = Path(spec.origin).read_text(encoding="utf-8")
+        # Verify the run command handler uses correct language
+        cmd_path = Path("src/plugin_examples/commands/run.py")
+        source = cmd_path.read_text(encoding="utf-8")
         assert "stages executed" in source
         assert '"stages passed"' not in source and "stages passed" not in source.split("stages executed")[0]
 

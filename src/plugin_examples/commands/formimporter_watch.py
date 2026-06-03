@@ -29,7 +29,7 @@ def handle(args) -> int:
         check_formimporter, write_watch_report,
     )
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     run_repro = getattr(args, "run_repro", False)
     output = getattr(args, "output", None)
     output_path = (

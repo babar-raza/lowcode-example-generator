@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
 
@@ -20,7 +22,7 @@ def add_parser(subparsers):
         "--promote-latest", action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
-    
+
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -35,7 +37,7 @@ def handle(args) -> int:
     )
     from pathlib import Path as _Path
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
         args, command="validate-publish-targets", repo_root=repo_root,
     )

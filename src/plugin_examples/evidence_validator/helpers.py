@@ -33,7 +33,6 @@ class ValidatorHelpers:
         A path is stale if it matches reports/sprintN/ where N is not the current sprint,
         or workspace/pr-dry-run.
         """
-        import re as _re
         sprint_id = self._read_sprint_id()
         current_prefix = f"reports/{sprint_id}/"
         found_prefixes = set(_re.findall(r"reports/sprint[^/\"']+/|workspace/pr-dry-run", content))

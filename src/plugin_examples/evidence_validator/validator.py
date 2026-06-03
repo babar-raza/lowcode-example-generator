@@ -318,8 +318,4 @@ class EvidenceValidator(
         """
         return self.validate(exclude_rule_ids={self.SELF_REFERENCE_RULE_ID})
 
-    SELF_REFERENCE_RULE_ID = "bundle_validation_result_present_and_valid"
 
-    def validate_for_storage(self) -> ValidationReport:
-        """Phase-A validation: run all rules EXCEPT the self-referential rule 21."""
-        return self.validate(exclude_rule_ids={self.SELF_REFERENCE_RULE_ID})

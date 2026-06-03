@@ -62,7 +62,7 @@ def add_parser(subparsers):
             "Must be a pilot run; discovery- and multi-family- prefixed runs are rejected."
         ),
     )
-    
+
     # Agent metrics flags (shared across commands)
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)

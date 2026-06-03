@@ -32,7 +32,7 @@ def handle(args) -> int:
     from plugin_examples.publisher.version_drift_checker import run_version_drift_check, LOWCODE_FAMILIES
     import json as _json
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     families = [args.family] if args.family else None
     report = run_version_drift_check(families=families, repo_root=repo_root)
 

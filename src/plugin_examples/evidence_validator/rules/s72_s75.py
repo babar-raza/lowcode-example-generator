@@ -557,7 +557,6 @@ class Sprint72to75Rules:
             )
 
         # Matrix absent — verdict must not claim complete
-        import re
         if re.search(r"COMPLETE|ALL_ITEMS_CLOSED|WEEKLY_REVIEW_ITEMS_CLASSIFIED", verdict_content):
             return RuleResult(
                 rule_id=rule_id,

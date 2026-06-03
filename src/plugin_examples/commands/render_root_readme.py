@@ -25,7 +25,7 @@ def add_parser(subparsers):
         "--cumulative", action="store_true",
         help="Use cumulative inventory (all packages + post-merge evidence) instead of single package",
     )
-    
+
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -41,7 +41,7 @@ def handle(args) -> int:
     from datetime import datetime, timezone
     from pathlib import Path as _Path
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     verification_dir = repo_root / "workspace" / "verification"
     family = args.family
     msession, mcollector = _create_metrics_session(

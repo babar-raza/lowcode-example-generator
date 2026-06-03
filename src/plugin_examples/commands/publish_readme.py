@@ -27,7 +27,7 @@ def add_parser(subparsers):
         "--promote-latest", action="store_true",
         help="Write evidence to workspace/verification/latest/ (always on)",
     )
-    
+
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -45,7 +45,7 @@ def handle(args) -> int:
     from datetime import datetime, timezone
     from pathlib import Path as _Path
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     verification_dir = repo_root / "workspace" / "verification"
     family = args.family
     msession, mcollector = _create_metrics_session(

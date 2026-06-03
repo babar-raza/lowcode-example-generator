@@ -16,7 +16,7 @@ def add_parser(subparsers):
         "--promote-latest", action="store_true",
         help="No-op (included for CLI consistency; output always written to docs/development/)",
     )
-    
+
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -27,7 +27,7 @@ def handle(args) -> int:
     import json as _json
     from pathlib import Path as _Path
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
         args, command="sync-taskcard-docs", repo_root=repo_root,
     )

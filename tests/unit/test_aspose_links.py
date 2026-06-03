@@ -590,8 +590,8 @@ gate
         after adding URL validation to audit_readme(), the publish path automatically
         blocks READMEs with forbidden aspose.com links.
         """
-        main_path = _REPO_ROOT / "src" / "plugin_examples" / "__main__.py"
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = _REPO_ROOT / "src" / "plugin_examples" / "commands" / "publish_readme.py"
+        source = cmd_path.read_text(encoding="utf-8")
         # The publish-readme handler must call audit_readme and block on failure
         assert "readme_audit = audit_readme(" in source or "audit_readme(" in source, \
             "publish-readme must call audit_readme()"

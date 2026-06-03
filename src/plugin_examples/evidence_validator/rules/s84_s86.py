@@ -354,7 +354,6 @@ class Sprint84to86Rules:
             )
 
         content = taskcard_path.read_text(encoding="utf-8", errors="replace")
-        import re
         # Match table rows like "| J | IV | PENDING ... |"
         pending_lines = re.findall(r"\|[^|]+\|[^|]+\|\s*PENDING\b[^|]*\|", content)
         if pending_lines:
@@ -391,7 +390,6 @@ class Sprint84to86Rules:
             )
 
         content = scoreboard_path.read_text(encoding="utf-8", errors="replace")
-        import re
         # Match rows with "EV applicable" and "TBD"
         if re.search(r"EV applicable[^|]*\|[^|]*\|\s*TBD", content, re.IGNORECASE):
             return RuleResult(

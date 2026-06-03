@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
 
@@ -40,7 +42,7 @@ def handle(args) -> int:
     elif args.family:
         families = [args.family]
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
 
     msession, mcollector = _create_metrics_session(
         args, command="discover-lowcode",

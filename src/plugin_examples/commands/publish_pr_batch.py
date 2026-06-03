@@ -38,7 +38,7 @@ def handle(args) -> int:
     from pathlib import Path as _Path
     from plugin_examples.publisher.batch_publisher import run_batch_publish, write_batch_report
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     family = args.family
     live_mode = getattr(args, "publish", False)
     approval_token = getattr(args, "approval_token", None)

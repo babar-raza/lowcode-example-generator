@@ -51,16 +51,16 @@ class TestPipelineUsesOnlyGithubTokenEnv:
         assert "test-classic-token" in headers["Authorization"]
 
     def test_publisher_reads_github_token_from_main(self):
-        """__main__.py publish-pr handler reads GITHUB_TOKEN env var."""
+        """publish-pr command handler reads GITHUB_TOKEN env var."""
         import ast
         import textwrap
-        main_path = Path("src/plugin_examples/__main__.py")
-        source = main_path.read_text(encoding="utf-8")
+        cmd_path = Path("src/plugin_examples/commands/publish_pr.py")
+        source = cmd_path.read_text(encoding="utf-8")
         # Confirm GITHUB_TOKEN is referenced in the publish-pr handler
-        assert "GITHUB_TOKEN" in source, "__main__.py must reference GITHUB_TOKEN"
+        assert "GITHUB_TOKEN" in source, "publish_pr.py must reference GITHUB_TOKEN"
         # GH_TOKEN must NOT be directly referenced in source code
         assert "GH_TOKEN" not in source, (
-            "__main__.py must not reference GH_TOKEN directly — "
+            "publish_pr.py must not reference GH_TOKEN directly — "
             "the operator sets GITHUB_TOKEN; the pipeline reads GITHUB_TOKEN only"
         )
 

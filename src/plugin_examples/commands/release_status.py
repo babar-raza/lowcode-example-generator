@@ -27,7 +27,7 @@ def add_parser(subparsers):
             "Prints a validation summary; exits 1 if the bundle fails any FAILURE-severity rule."
         ),
     )
-    
+
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -42,7 +42,7 @@ def handle(args) -> int:
     )
     from pathlib import Path as _Path
 
-    repo_root = _Path(__file__).resolve().parents[2]
+    repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
         args, command="release-status", repo_root=repo_root,
     )

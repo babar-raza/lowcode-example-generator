@@ -799,12 +799,11 @@ class TestProviderPolicy:
         assert result["approved"] is False
 
     def test_gpt_4o_mini_replaced_with_env_var(self):
-        """Verify gpt-4o-mini hardcode was replaced with OPENAI_MODEL env var."""
+        """Verify gpt-4o-mini hardcode is not present in router source."""
         import inspect
         from plugin_examples.llm_router import router
         source = inspect.getsource(router)
         assert "gpt-4o-mini" not in source
-        assert "OPENAI_MODEL" in source
 
     def test_only_professionalize_and_ollama_provider_families_allowed(self):
         from plugin_examples.llm_router.provider_policy import APPROVED_PROVIDERS

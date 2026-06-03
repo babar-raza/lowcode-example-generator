@@ -146,7 +146,7 @@ These scripts are actively used for pipeline operations:
 |---|---|
 | OPERATIONAL | 11 |
 | UTILITY | 30 |
-| SPRINT-HISTORICAL | 58 |
-| **Total** | **99** |
+| SPRINT-HISTORICAL | 65 |
+| **Total** | **106** |
 
 SPRINT-HISTORICAL scripts are preserved for audit trail and evidence reproducibility. They are not part of current pipeline operations.

@@ -1,0 +1,20 @@
+{
+  "sprint": "shareability-audit-20260603",
+  "date": "2026-06-03",
+  "scope": "Stage 0 + Stage 1",
+  "taskcards": [
+    {"id": "TC-01", "title": "MIT LICENSE", "status": "DONE", "files": ["LICENSE"]},
+    {"id": "TC-02", "title": "LLM access docs", "status": "DONE", "files": ["docs/getting-started/operator-quickstart.md"]},
+    {"id": "TC-03", "title": ".env.example + .gitignore", "status": "DONE", "files": [".env.example", ".gitignore"]},
+    {"id": "TC-04", "title": "Cross-platform docs", "status": "DONE", "files": ["README.md", "docs/getting-started/operator-quickstart.md", "docs/getting-started/contributor-quickstart.md", "docs/development/testing.md"]},
+    {"id": "TC-05", "title": "Scripts index", "status": "DONE", "files": ["scripts/README.md"]},
+    {"id": "TC-06", "title": "Lock file", "status": "DONE", "files": ["requirements-lock.txt"]},
+    {"id": "TC-07", "title": "GitHub org access docs", "status": "DONE", "files": ["docs/getting-started/operator-quickstart.md"]},
+    {"id": "TC-10", "title": ".kilo gitignore", "status": "DONE", "files": [".gitignore"]}
+  ],
+  "deferred": ["TC-08", "TC-09", "TC-11", "TC-12"],
+  "verification": {"pytest": "PASS", "compileall": "PASS"},
+  "pytest_summary": "3222 passed, 18 skipped, 0 failures in 341.84s",
+  "pre_score": 72,
+  "post_score_estimate": 85
+}

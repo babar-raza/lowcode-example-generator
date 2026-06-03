@@ -1,0 +1,97 @@
+{
+  "description": "Mapping of every environment variable found in src/ to its .env.example entry",
+  "generated": "2026-06-03",
+  "coverage": "COMPLETE",
+  "variables": {
+    "GITHUB_TOKEN": {
+      "env_example_group": "GitHub Tokens",
+      "required": true,
+      "source_files": ["src/plugin_examples/publisher/", "src/plugin_examples/__main__.py"]
+    },
+    "GH_TOKEN": {
+      "env_example_group": "GitHub Tokens",
+      "required": true,
+      "source_files": ["src/plugin_examples/__main__.py"]
+    },
+    "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": {
+      "env_example_group": "Approval Gates",
+      "required": true,
+      "source_files": ["src/plugin_examples/gates/"]
+    },
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": {
+      "env_example_group": "Approval Gates",
+      "required": true,
+      "source_files": ["src/plugin_examples/gates/"]
+    },
+    "GPT_OSS_ENDPOINT": {
+      "env_example_group": "LLM Endpoint",
+      "required": true,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "GPT_OSS_MODEL": {
+      "env_example_group": "LLM Endpoint",
+      "required": true,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "GPT_OSS_API_KEY": {
+      "env_example_group": "LLM Endpoint",
+      "required": true,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "LLM_API_KEY": {
+      "env_example_group": "Legacy LLM (commented out)",
+      "required": false,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "OPENAI_API_KEY": {
+      "env_example_group": "Legacy LLM (commented out)",
+      "required": false,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "OPENAI_MODEL": {
+      "env_example_group": "Legacy LLM (commented out)",
+      "required": false,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "OLLAMA_HOST": {
+      "env_example_group": "Legacy LLM (commented out)",
+      "required": false,
+      "source_files": ["src/plugin_examples/llm_router/router.py"]
+    },
+    "EXAMPLE_REVIEWER_PATH": {
+      "env_example_group": "Reviewer",
+      "required": false,
+      "source_files": ["src/plugin_examples/verifier_bridge/"]
+    },
+    "AGENT_METRICS_ENABLED": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    },
+    "AGENT_METRICS_DRY_RUN": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    },
+    "AGENT_METRICS_STRICT": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    },
+    "AGENT_METRICS_PRODUCTION_ENABLED": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    },
+    "AGENT_METRICS_ENDPOINT": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    },
+    "AGENT_METRICS_TOKEN": {
+      "env_example_group": "Metrics",
+      "required": false,
+      "source_files": ["src/plugin_examples/metrics/config.py"]
+    }
+  }
+}

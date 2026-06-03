@@ -159,6 +159,15 @@ cd ../example-reviewer && pip install -e .
 $env:EXAMPLE_REVIEWER_PATH = "C:\path\to\example-reviewer"
 ```
 
+```bash
+# bash / Linux / macOS
+git clone https://github.com/babar-raza/example-reviewer ../example-reviewer
+cd ../example-reviewer && pip install -e .
+
+# Or point to an existing checkout
+export EXAMPLE_REVIEWER_PATH="/path/to/example-reviewer"
+```
+
 See `src/plugin_examples/verifier_bridge/` and [Validation and Reviewer](docs/reference/validation-and-reviewer.md).
 
 ---
@@ -179,6 +188,12 @@ python -m pip install --upgrade pip
 pip install -e ".[dev]"
 ```
 
+```bash
+# bash / Linux / macOS
+python3 -m pip install --upgrade pip
+pip install -e ".[dev]"
+```
+
 **GitHub token** (live operations only):
 
 ```powershell
@@ -189,12 +204,28 @@ pip install -e ".[dev]"
 $env:GITHUB_TOKEN = [Environment]::GetEnvironmentVariable("GH_TOKEN", "User")
 ```
 
+```bash
+# bash / Linux / macOS
+# Store once (add to ~/.bashrc or ~/.zshrc)
+export GH_TOKEN="ghp_YOUR_TOKEN"
+
+# Map before each live command
+export GITHUB_TOKEN="$GH_TOKEN"
+```
+
 **LLM endpoint** (generation only):
 
 ```powershell
 $env:GPT_OSS_ENDPOINT = "https://llm.professionalize.com/v1/"
 $env:GPT_OSS_MODEL    = "<model-name>"
 $env:GPT_OSS_API_KEY  = "<api-key>"
+```
+
+```bash
+# bash / Linux / macOS
+export GPT_OSS_ENDPOINT="https://llm.professionalize.com/v1/"
+export GPT_OSS_MODEL="<model-name>"
+export GPT_OSS_API_KEY="<api-key>"
 ```
 
 The pipeline aborts before generation if `GPT_OSS_ENDPOINT` is unset or does not point to `https://llm.professionalize.com/v1/`. No other LLM provider is permitted.
@@ -207,11 +238,21 @@ The pipeline aborts before generation if `GPT_OSS_ENDPOINT` is unset or does not
 python -m plugin_examples status
 ```
 
+```bash
+# bash / Linux / macOS
+python3 -m plugin_examples status
+```
+
 **Run a dry-run pipeline:**
 
 ```powershell
 $env:PYTHONPATH = "src"
 python -m plugin_examples run --family cells --dry-run --template-mode --promote-latest
+```
+
+```bash
+# bash / Linux / macOS
+PYTHONPATH=src python3 -m plugin_examples run --family cells --dry-run --template-mode --promote-latest
 ```
 
 **Run source-of-truth discovery:**
@@ -220,10 +261,20 @@ python -m plugin_examples run --family cells --dry-run --template-mode --promote
 python -m plugin_examples run --family cells --dry-run --promote-latest
 ```
 
+```bash
+# bash / Linux / macOS
+python3 -m plugin_examples run --family cells --dry-run --promote-latest
+```
+
 **Run with LLM generation:**
 
 ```powershell
 python -m plugin_examples run --family cells --promote-latest
+```
+
+```bash
+# bash / Linux / macOS
+python3 -m plugin_examples run --family cells --promote-latest
 ```
 
 **Run local tests:**
@@ -232,6 +283,13 @@ python -m plugin_examples run --family cells --promote-latest
 $env:PYTHONPATH = "src"
 python -m pytest tests/unit -v --timeout=60
 python -m compileall src
+dotnet build tools/DllReflector/DllReflector.csproj -c Release
+```
+
+```bash
+# bash / Linux / macOS
+PYTHONPATH=src python3 -m pytest tests/unit -v --timeout=60
+python3 -m compileall src
 dotnet build tools/DllReflector/DllReflector.csproj -c Release
 ```
 

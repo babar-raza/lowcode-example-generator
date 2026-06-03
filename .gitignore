@@ -33,6 +33,8 @@ reports/**/*.zip
 
 # Local agent settings
 .claude/
+.env
+.kilo/
 
 # IDE
 .idea/

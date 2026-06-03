@@ -11,6 +11,13 @@ python -m compileall src
 dotnet build tools/DllReflector/DllReflector.csproj -c Release
 ```
 
+```bash
+# bash / Linux / macOS
+PYTHONPATH=src python3 -m pytest tests/unit -v --timeout=60
+python3 -m compileall src
+dotnet build tools/DllReflector/DllReflector.csproj -c Release
+```
+
 ## CI
 
 `.github/workflows/build-and-test.yml` runs:

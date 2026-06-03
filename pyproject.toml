@@ -17,6 +17,7 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "pytest-timeout>=2.3",
+    "ruff>=0.4",
 ]
 
 [project.scripts]
@@ -24,6 +25,23 @@ plugin-examples = "plugin_examples.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = [
+    "E501",  # line too long — existing code exceeds 120 chars in many places
+    "E701",  # multiple statements on one line (colon) — intentional in binary parsing
+    "E702",  # multiple statements on one line (semicolon) — intentional in binary parsing
+    "E402",  # module import not at top — intentional deferred imports
+    "E731",  # lambda assignment — cosmetic, 1 instance
+    "F401",  # unused import — many are re-exports from __init__.py
+    "F541",  # f-string without placeholders — intentional template patterns
+    "F841",  # unused variable — some intentional (struct offset parsing)
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

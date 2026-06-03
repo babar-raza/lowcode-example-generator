@@ -169,10 +169,9 @@ def write_preflight_report(
 
 def _resolve_api_key(provider: str) -> str:
     """Resolve API key from environment for a provider."""
-    if provider in ("gpt_oss", "llm_professionalize"):
-        return os.environ.get("GPT_OSS_API_KEY") or os.environ.get("LLM_API_KEY", "")
-    # openai or generic
-    return os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+    if provider == "llm_professionalize":
+        return os.environ.get("GPT_OSS_API_KEY", "")
+    return ""
 
 
 def _check_provider(provider: str, *, timeout: int = 30, config: dict | None = None) -> PreflightResult:
@@ -191,7 +190,7 @@ def _check_provider(provider: str, *, timeout: int = 30, config: dict | None = N
         endpoint = _get_endpoint(provider, config)
 
         # API-key providers: check key presence + models endpoint
-        if provider in ("openai", "gpt_oss", "llm_professionalize"):
+        if provider == "llm_professionalize":
             api_key = _resolve_api_key(provider)
             if not api_key:
                 result.error = f"No API key for {provider}"
@@ -238,8 +237,6 @@ def _get_endpoint(provider: str, config: dict | None) -> str:
     defaults = {
         "ollama": "http://localhost:11434/api/tags",
         "llm_professionalize": f"{gpt_oss_base}/models",
-        "openai": "https://api.openai.com/v1/models",
-        "gpt_oss": f"{gpt_oss_base}/models",
     }
     return defaults.get(provider, f"http://localhost:8080/{provider}")
 
@@ -296,27 +293,6 @@ def _call_provider(
         api_key = _resolve_api_key("llm_professionalize")
         base = os.environ.get("GPT_OSS_ENDPOINT", "http://localhost:8080/v1/").rstrip("/")
         # Treat empty-string GPT_OSS_MODEL (e.g. from "$GPT_OSS_MODEL" shell expansion) as absent.
-        model = (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
-        return _call_openai_compatible(
-            f"{base}/chat/completions",
-            prompt, system_prompt=system_prompt, timeout=timeout,
-            api_key=api_key, model=model,
-            metrics_collector=metrics_collector, metrics_provider=provider,
-            metrics_model=model,
-        )
-    elif provider == "openai":
-        api_key = _resolve_api_key("openai")
-        model = os.environ.get("OPENAI_MODEL", "gpt-4o")
-        return _call_openai_compatible(
-            "https://api.openai.com/v1/chat/completions",
-            prompt, system_prompt=system_prompt, timeout=timeout,
-            api_key=api_key, model=model,
-            metrics_collector=metrics_collector, metrics_provider=provider,
-            metrics_model=model,
-        )
-    elif provider == "gpt_oss":
-        api_key = _resolve_api_key("gpt_oss")
-        base = os.environ.get("GPT_OSS_ENDPOINT", "https://api.openai.com/v1/").rstrip("/")
         model = (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
         return _call_openai_compatible(
             f"{base}/chat/completions",

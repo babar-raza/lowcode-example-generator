@@ -1,0 +1,62 @@
+{
+  "sprint": "shareability-stage2-20260603",
+  "stage": 2,
+  "date": "2026-06-03",
+  "baseline_commit": "a6f7fef",
+  "final_commit": "edfc813",
+  "taskcards": [
+    {
+      "id": "TC-13",
+      "title": "Update scripts/README.md with 6 untracked scripts",
+      "status": "DONE",
+      "commit": "065ac46",
+      "risk": "TRIVIAL",
+      "summary": "Fixed summary counts (SPRINT-HISTORICAL 58→65, total 99→106). All 6 scripts were already indexed; only counts were wrong."
+    },
+    {
+      "id": "TC-09",
+      "title": "Remove legacy LLM provider dead code (openai, gpt_oss)",
+      "status": "DONE",
+      "commit": "38417e2",
+      "risk": "LOW",
+      "summary": "Removed ~28 lines of dead code from router.py: openai/gpt_oss branches in _resolve_api_key, _get_endpoint, _call_provider, _check_provider. 82 LLM tests pass unchanged."
+    },
+    {
+      "id": "TC-08",
+      "title": "Add ruff linting configuration",
+      "status": "DONE",
+      "commit": "c1e80ad",
+      "risk": "LOW",
+      "summary": "Added [tool.ruff] to pyproject.toml with conservative ruleset (E, F, W; 8 ignored rules). ruff check src/ exits 0 with no code changes needed."
+    },
+    {
+      "id": "TC-12",
+      "title": "Decompose evidence_validator.py into package",
+      "status": "DONE",
+      "commit": "b3d5bef",
+      "risk": "MEDIUM",
+      "summary": "Replaced 7,860-line monolith with 17-module package using mixin pattern. 147 rules preserved across 13 sprint-grouped rule files. Max file: 718 lines. 259 validator tests pass."
+    },
+    {
+      "id": "TC-11",
+      "title": "Decompose __main__.py into commands/ package",
+      "status": "DONE",
+      "commit": "88a9407",
+      "risk": "HIGH",
+      "summary": "Replaced 2,270-line CLI with 35-line dispatcher + 22-module commands/ package. 20 subcommands extracted. All 3222 tests pass."
+    },
+    {
+      "id": "VERIFY",
+      "title": "Post-decomposition verification fixes",
+      "status": "DONE",
+      "commit": "edfc813",
+      "risk": "LOW",
+      "summary": "Fixed repo_root path depth (parents[2]→parents[3]) in 18 commands, added missing imports (logging, os) in 8 modules, updated 6 test files for new module paths, removed duplicate code, fixed ruff violations."
+    }
+  ],
+  "verification": {
+    "pytest": "3222 passed, 0 failed, 18 skipped",
+    "compileall": "exit 0",
+    "ruff": "All checks passed"
+  }
+}

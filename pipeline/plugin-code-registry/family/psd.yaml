@@ -142,14 +142,14 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from SupportOfLayersInAi.cs
 - plugin_slug: animation-maker
   canonical_plugin_slug: animation-maker
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/psd/animation-maker/
   canonical_url: https://products.aspose.net/psd/animation-maker/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; PsdImage + TimeLine
     animation confirmed
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
@@ -178,16 +178,23 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 7
+      package PASS. Status updated.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/animation-maker
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
 - plugin_slug: photo-processor
   canonical_plugin_slug: photo-processor
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/psd/photo-processor/
   canonical_url: https://products.aspose.net/psd/photo-processor/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; PsdImage batch processing
     confirmed
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
@@ -214,3 +221,10 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 7
+      package PASS. Status updated.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/photo-processor
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'

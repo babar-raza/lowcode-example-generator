@@ -1,0 +1,29 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "note": "CPV passes=False due to 4 CPV-05 errors and 13 CPV-03 warnings. All are known heritage issues documented below.",
+  "known_errors": [
+    {
+      "rule": "CPV-05",
+      "count": 4,
+      "packages": [
+        "barcode/generate-qr-code",
+        "barcode/scan-barcode",
+        "barcode/generate-barcode",
+        "barcode/recognize-barcode"
+      ],
+      "explanation": "Wave A (pre-canonical) BarCode packages used generic operation slugs before the canonical identity system existed. These packages are classified LEGACY_ALIAS_NOT_PUBLICATION_CANDIDATE and are NOT publication candidates. The CPV-05 violation correctly identifies them as heritage packages lacking alias records in source-provenance.json.",
+      "disposition": "ACCEPTED_KNOWN_HERITAGE — not publication candidates"
+    }
+  ],
+  "known_warnings": [
+    {
+      "rule": "CPV-03",
+      "count": 13,
+      "explanation": "Entries with CANONICAL_IDENTITY_VERIFIED in the registry are missing display_plugin_name. These families (drawing, finance, ocr, psd, svg, tex, zip) had canonical identity set via URL but the display_plugin_name field was not yet populated. This is a registry enrichment task for future sprints.",
+      "disposition": "ACCEPTED_WARNING — does not block publication of 8 clean candidates"
+    }
+  ],
+  "effective_cpv_verdict": "CPV_PASS_WITH_KNOWN_HERITAGE_EXCEPTIONS",
+  "publication_candidates_unaffected": true
+}

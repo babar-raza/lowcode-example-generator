@@ -1,0 +1,39 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "canonical_candidates": [
+    "barcode/1d-barcode-reader",
+    "barcode/1d-barcode-writer",
+    "barcode/2d-barcode-reader",
+    "barcode/2d-barcode-writer",
+    "ocr/photo-to-text",
+    "ocr/table-to-text",
+    "psd/animation-maker",
+    "psd/photo-processor"
+  ],
+  "legacy_aliases": [],
+  "identity_review_required": [
+    "drawing/convert-drawing",
+    "drawing/create-drawing",
+    "finance/convert-xbrl",
+    "gis/read-gis-data",
+    "note/convert-one-to-pdf",
+    "ocr/scan-document",
+    "page/convert-ps-to-pdf",
+    "zip/compress-files",
+    "html/convert-html-to-image",
+    "html/convert-html-to-word",
+    "note/convert-one-to-image",
+    "note/convert-one-to-word",
+    "ocr/image-text-finder",
+    "ocr/invoice-to-text",
+    "page/convert-eps-to-pdf",
+    "psd/convert-psd-to-pdf",
+    "psd/psd-image-converter",
+    "svg/vectorizer",
+    "tasks/convert-mpp-to-excel",
+    "tasks/convert-mpp-to-html",
+    "tasks/convert-mpp-to-image",
+    "tex/convert-latex-to-pdf"
+  ]
+}

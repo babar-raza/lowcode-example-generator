@@ -1,0 +1,20 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "note": "Cumulative dryrun packages across all sprints. Wave 8 adds 4 canonical packages. Prior 52 remain at their sprint locations.",
+  "cumulative_total": 56,
+  "breakdown": {
+    "wave_a_lowcode-plugin-example-factory-wave-20260605": 12,
+    "wave_4_lowcode-plugin-example-factory-parallel-wave-20260605": 10,
+    "wave_5_lowcode-plugin-example-factory-closeout-wave5-20260605": 8,
+    "wave_6_lowcode-plugin-example-factory-wave6-20260605": 14,
+    "wave_7_lowcode-plugin-canonical-identity-wave7-20260605": 8,
+    "wave_8_lowcode-plugin-canonical-primary-wave8-20260605": 4
+  },
+  "publication_classification": {
+    "PUBLICATION_CANDIDATE_LOCAL_CLEAN": 12,
+    "LEGACY_ALIAS_NOT_PUBLICATION_CANDIDATE": 4,
+    "IDENTITY_REVIEW_REQUIRED": 40
+  },
+  "note_on_identity_review": "40 IDENTITY_REVIEW_REQUIRED packages are prior-wave generic-slug packages. They produced correct output but do not have canonical identity. They are superseded by canonical packages where available."
+}

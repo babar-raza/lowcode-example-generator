@@ -1,0 +1,410 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "total": 80,
+  "passed": 80,
+  "failed": 0,
+  "verdict": "IV_PASS",
+  "checks": [
+    {
+      "check": "1.1 non-protected families loaded",
+      "status": "PASS",
+      "detail": "18 families"
+    },
+    {
+      "check": "1.2 total non-protected entries == 72",
+      "status": "PASS",
+      "detail": "got 72"
+    },
+    {
+      "check": "1.3 barcode/1d-barcode-writer is canonical primary",
+      "status": "PASS",
+      "detail": "['1d-barcode-writer', '1d-barcode-reader', '2d-barcode-writer', 'read-barcode', '2d-barcode-reader']"
+    },
+    {
+      "check": "1.3 barcode/1d-barcode-reader is canonical primary",
+      "status": "PASS",
+      "detail": "['1d-barcode-writer', '1d-barcode-reader', '2d-barcode-writer', 'read-barcode', '2d-barcode-reader']"
+    },
+    {
+      "check": "1.3 barcode/2d-barcode-writer is canonical primary",
+      "status": "PASS",
+      "detail": "['1d-barcode-writer', '1d-barcode-reader', '2d-barcode-writer', 'read-barcode', '2d-barcode-reader']"
+    },
+    {
+      "check": "1.3 barcode/2d-barcode-reader is canonical primary",
+      "status": "PASS",
+      "detail": "['1d-barcode-writer', '1d-barcode-reader', '2d-barcode-writer', 'read-barcode', '2d-barcode-reader']"
+    },
+    {
+      "check": "1.4 no generic barcode slug as primary",
+      "status": "PASS",
+      "detail": "overlap=set()"
+    },
+    {
+      "check": "1.5 canonical_primary_entries == 21",
+      "status": "PASS",
+      "detail": "got 21"
+    },
+    {
+      "check": "1.6 lookup_by_alias(barcode, generate-barcode) -> 1d-barcode-writer",
+      "status": "PASS",
+      "detail": "1d-barcode-writer"
+    },
+    {
+      "check": "1.7 imaging/image-converter has CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "1.7 imaging/image-resizer has CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "1.8 html/html-to-pdf-converter in registry",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "1.9 note/convert-onenote-to-pdf in registry",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "2.1 imaging/image-converter directory exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "2.2 imaging/image-converter PIV validators PASS",
+      "status": "PASS",
+      "detail": "errors=0 warnings=0"
+    },
+    {
+      "check": "2.3 imaging/image-converter identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "2.4 imaging/image-converter output-validation package_key correct",
+      "status": "PASS",
+      "detail": "imaging/image-converter"
+    },
+    {
+      "check": "2.1 imaging/image-resizer directory exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "2.2 imaging/image-resizer PIV validators PASS",
+      "status": "PASS",
+      "detail": "errors=0 warnings=0"
+    },
+    {
+      "check": "2.3 imaging/image-resizer identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "2.4 imaging/image-resizer output-validation package_key correct",
+      "status": "PASS",
+      "detail": "imaging/image-resizer"
+    },
+    {
+      "check": "2.1 html/html-to-pdf-converter directory exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "2.2 html/html-to-pdf-converter PIV validators PASS",
+      "status": "PASS",
+      "detail": "errors=0 warnings=0"
+    },
+    {
+      "check": "2.3 html/html-to-pdf-converter identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "2.4 html/html-to-pdf-converter output-validation package_key correct",
+      "status": "PASS",
+      "detail": "html/html-to-pdf-converter"
+    },
+    {
+      "check": "2.1 note/convert-onenote-to-pdf directory exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "2.2 note/convert-onenote-to-pdf PIV validators PASS",
+      "status": "PASS",
+      "detail": "errors=0 warnings=0"
+    },
+    {
+      "check": "2.3 note/convert-onenote-to-pdf identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "check": "2.4 note/convert-onenote-to-pdf output-validation package_key correct",
+      "status": "PASS",
+      "detail": "note/convert-onenote-to-pdf"
+    },
+    {
+      "check": "3.1 unified-publication-matrix.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "3.2 total packages == 52",
+      "status": "PASS",
+      "detail": "got 52"
+    },
+    {
+      "check": "3.3 PUBLICATION_CANDIDATE >= 8",
+      "status": "PASS",
+      "detail": "got 8"
+    },
+    {
+      "check": "3.4 LEGACY_ALIAS == 4",
+      "status": "PASS",
+      "detail": "got 4"
+    },
+    {
+      "check": "3.5 buckets sum to total",
+      "status": "PASS",
+      "detail": "8+4+40=52 vs 52"
+    },
+    {
+      "check": "3.6 no LEGACY_ALIAS in canonical_candidates",
+      "status": "PASS",
+      "detail": "overlap check"
+    },
+    {
+      "check": "3.7 no IDENTITY_REVIEW in canonical_candidates",
+      "status": "PASS",
+      "detail": "overlap check"
+    },
+    {
+      "check": "3.8 CPV result in matrix",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "4.x pipeline/configs/families/cells.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=28c51b79f8dac9e7 got=28c51b79f8dac9e7"
+    },
+    {
+      "check": "4.x pipeline/configs/families/words.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=ef21e9e514386a7e got=ef21e9e514386a7e"
+    },
+    {
+      "check": "4.x pipeline/configs/families/pdf.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=de889ed24b3bc3a0 got=de889ed24b3bc3a0"
+    },
+    {
+      "check": "4.x pipeline/configs/families/slides.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=4eec3d74e7c9cca5 got=4eec3d74e7c9cca5"
+    },
+    {
+      "check": "4.x pipeline/configs/families/email.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=3e872e96519168ba got=3e872e96519168ba"
+    },
+    {
+      "check": "4.x pipeline/configs/families/diagram.yml hash unchanged",
+      "status": "PASS",
+      "detail": "expected=306c16e4acdf4802 got=306c16e4acdf4802"
+    },
+    {
+      "check": "4.x pipeline/format-authority/manifest.json hash unchanged",
+      "status": "PASS",
+      "detail": "expected=3e96754355d7124f got=3e96754355d7124f"
+    },
+    {
+      "check": "5.x Lane 0: lane-ledger.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane 0 taskcards: taskcards.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane A: wave7-imported-state.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane B: registry-before-after.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane C: example-identity-audit.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane D: canonical-first-generator-design.md exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane E: cpv-results.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane F: unified-publication-matrix.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane G: wave8-build-results.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane H: canonical-primary-ledger.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane H: cumulative-dryrun-ledger.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "5.x Lane H: wave9-next-queue.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "6.1 no committed .pfx files in non-workspace dirs",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.2 no generic barcode slugs in publication candidates",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "6.3 imaging/image-converter has legacy_alias=convert-image",
+      "status": "PASS",
+      "detail": "['convert-image']"
+    },
+    {
+      "check": "6.3 imaging/image-resizer has legacy_alias=resize-image",
+      "status": "PASS",
+      "detail": "['resize-image']"
+    },
+    {
+      "check": "6.3 html/html-to-pdf-converter has legacy_alias=convert-html-to-pdf",
+      "status": "PASS",
+      "detail": "['convert-html-to-pdf']"
+    },
+    {
+      "check": "6.3 note/convert-onenote-to-pdf has legacy_alias=convert-one-to-pdf",
+      "status": "PASS",
+      "detail": "['convert-one-to-pdf']"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in barcode",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in cad",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in drawing",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in finance",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in font",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in gis",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in html",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in imaging",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in note",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in ocr",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in omr",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in page",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in psd",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in svg",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in tasks",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in tex",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in threed",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "check": "6.4 no duplicate plugin_slug in zip",
+      "status": "PASS",
+      "detail": "OK"
+    }
+  ]
+}

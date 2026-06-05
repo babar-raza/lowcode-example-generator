@@ -3,9 +3,9 @@ package_id: Aspose.Note
 github_repo: https://github.com/aspose-note/Aspose.Note-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
-- plugin_slug: convert-one-to-pdf
+- plugin_slug: convert-onenote-to-pdf
   canonical_plugin_slug: convert-onenote-to-pdf
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-pdf
   page_hash: 5d310ca97989c769
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -32,7 +32,17 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
+      canonical advancement: ''convert-one-to-pdf'' -> ''convert-onenote-to-pdf''.'
   canonical_url: https://products.aspose.net/note/convert-onenote-to-pdf/
+  legacy_aliases:
+  - convert-one-to-pdf
+  display_plugin_name: OneNote to PDF Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-one-to-pdf
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/note/convert-onenote-to-pdf
 - plugin_slug: convert-one-to-word
   canonical_plugin_slug: convert-onenote-to-word
   identity_status: SLUG_ALIAS_REQUIRED

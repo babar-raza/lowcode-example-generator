@@ -1,0 +1,18 @@
+{
+  "package": "imaging/convert-image",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\converted.png",
+      "size": 1828
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05",
+  "package_key": "imaging/image-converter",
+  "canonical_plugin_slug": "image-converter",
+  "migrated_from": "convert-image",
+  "migration_sprint": "lowcode-plugin-canonical-primary-wave8-20260605"
+}

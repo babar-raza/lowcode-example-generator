@@ -1,0 +1,17 @@
+{
+  "family": "html",
+  "plugin_slug": "html-to-pdf-converter",
+  "nuget_package": "Aspose.HTML",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/html/html-to-pdf-converter/",
+  "canonical_plugin_slug": "html-to-pdf-converter",
+  "display_plugin_name": "HTML to PDF Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "migrated_from": "convert-html-to-pdf",
+  "legacy_example_slug": "convert-html-to-pdf",
+  "generation_sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "migrated_at": "2026-06-05"
+}

@@ -58,6 +58,10 @@ class PluginCodeRegistryLoader:
                 publication_candidate_status=raw.get("publication_candidate_status"),
                 canonical_plugin_slug=raw.get("canonical_plugin_slug"),
                 identity_status=raw.get("identity_status"),
+                legacy_aliases=raw.get("legacy_aliases") or [],
+                display_plugin_name=raw.get("display_plugin_name"),
+                migration_status=raw.get("migration_status"),
+                migrated_from=raw.get("migrated_from"),
             )
             plugins.append(entry)
         return FamilyRegistry(
@@ -91,7 +95,24 @@ class PluginCodeRegistryLoader:
             entries.extend([p for p in fam.plugins if p.registry_status in active_statuses])
         return sorted(entries, key=lambda e: -e.readiness_score())
 
-    def select_wave(self, exclude_slugs: Optional[set] = None, limit: int = 15) -> List[PluginEntry]:
+    def lookup_by_alias(self, family: str, alias_slug: str) -> Optional["PluginEntry"]:
+        """Find a canonical entry that has alias_slug in its legacy_aliases."""
+        fam = self.all_families().get(family)
+        if not fam:
+            return None
+        for entry in fam.plugins:
+            if entry.is_alias_for(alias_slug):
+                return entry
+        return None
+
+    def canonical_primary_entries(self) -> List["PluginEntry"]:
+        """Return entries that are canonical-primary (migration_status=CANONICAL_PRIMARY_MIGRATED)."""
+        entries = []
+        for fam in self.non_protected_families().values():
+            entries.extend([p for p in fam.plugins if p.is_canonical_primary])
+        return entries
+
+    def select_wave(self, exclude_slugs: Optional[set] = None, limit: int = 15) -> List["PluginEntry"]:
         """Select top candidates for the next transformation wave."""
         exclude = exclude_slugs or set()
         candidates = [

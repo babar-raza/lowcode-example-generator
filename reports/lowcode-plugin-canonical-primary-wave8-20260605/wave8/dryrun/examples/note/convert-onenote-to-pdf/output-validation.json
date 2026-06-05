@@ -1,0 +1,15 @@
+{
+  "package_key": "note/convert-onenote-to-pdf",
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/output.pdf",
+      "size": 17790
+    }
+  ],
+  "canonical_plugin_slug": "convert-onenote-to-pdf",
+  "migrated_from": "convert-one-to-pdf",
+  "migration_sprint": "lowcode-plugin-canonical-primary-wave8-20260605"
+}

@@ -1,0 +1,105 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "taskcards": [
+    {
+      "id": "TC-00", "lane": "0", "owner": "coordinator", "status": "IN_PROGRESS",
+      "objective": "Coordinator preflight + governance setup",
+      "scope": "Lane ledger, taskcards, preflight snapshot, protected file baseline",
+      "owned_paths": ["reports/.../coordinator/", "reports/.../taskcards/"],
+      "forbidden_paths": ["pipeline/configs/families/cells.yml", "pipeline/configs/families/words.yml", "pipeline/configs/families/pdf.yml", "pipeline/configs/families/slides.yml", "pipeline/configs/families/email.yml", "pipeline/configs/families/diagram.yml", "pipeline/format-authority/"],
+      "acceptance_checks": ["Lane ledger written", "Taskcards written", "Protected file hashes recorded", "Registry status counts recorded"],
+      "evidence": ["coordinator/lane-ledger.json", "coordinator/preflight-git-status.txt", "coordinator/protected-file-baseline.json", "taskcards/taskcards.json"]
+    },
+    {
+      "id": "TC-0A", "lane": "A", "owner": "wave7-closeout", "status": "PENDING",
+      "objective": "Verify Wave 7 is truly closed with commit + test evidence",
+      "scope": "Read-only inspection of Wave 7 artifacts",
+      "owned_paths": ["reports/.../wave7-closeout/"],
+      "forbidden_paths": ["protected files", "format-authority", "external repos"],
+      "acceptance_checks": ["Wave 7 commit exists", "PIV tests pass", "IV was 59/59", "State = SPRINT_COMPLETE"],
+      "evidence": ["wave7-closeout/wave7-imported-state.json", "wave7-closeout/wave7-state-verification.md"]
+    },
+    {
+      "id": "TC-0B", "lane": "B", "owner": "registry-migration", "status": "PENDING",
+      "objective": "Migrate BarCode registry entries to canonical-primary; fix Wave 7 status; add legacy_aliases",
+      "scope": "pipeline/plugin-code-registry/family/*.yaml — BarCode + Wave7 status updates",
+      "owned_paths": ["pipeline/plugin-code-registry/family/barcode.yaml", "reports/.../registry-migration/"],
+      "forbidden_paths": ["protected files", "format-authority"],
+      "acceptance_checks": ["barcode.yaml has canonical primary entries", "legacy_aliases field present", "Wave7 4 entries updated to TRANSFORMED", "Schema validates"],
+      "evidence": ["registry-migration/registry-before-after.json", "registry-migration/barcode-canonical-primary-migration.md"]
+    },
+    {
+      "id": "TC-0C", "lane": "C", "owner": "example-migration", "status": "PENDING",
+      "objective": "Classify generic-slug packages as LEGACY_ALIAS; confirm canonical packages clean",
+      "scope": "Publication classification of 52 dryrun packages",
+      "owned_paths": ["reports/.../example-migration/"],
+      "forbidden_paths": ["protected files", "external repos", "existing 44 LowCode examples"],
+      "acceptance_checks": ["Generic BarCode packages classified as LEGACY_ALIAS", "8 canonical packages clean", "Audit written"],
+      "evidence": ["example-migration/example-identity-audit.json", "example-migration/migrated-package-ledger.json"]
+    },
+    {
+      "id": "TC-0D", "lane": "D", "owner": "tooling", "status": "PENDING",
+      "objective": "Update registry loader/model to support canonical-primary + legacy_aliases",
+      "scope": "src/plugin_examples/plugin_code_registry/models.py + loader.py",
+      "owned_paths": ["src/plugin_examples/plugin_code_registry/", "reports/.../tooling/"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["PluginEntry has legacy_aliases field", "loader passes legacy_aliases", "Tests pass"],
+      "evidence": ["tooling/canonical-first-generator-design.md"]
+    },
+    {
+      "id": "TC-0E", "lane": "E", "owner": "validators", "status": "PENDING",
+      "objective": "Add CPV rules (canonical-primary validators) extending PIV framework",
+      "scope": "src/plugin_examples/fixture_factory/plugin_identity_validators.py + new tests",
+      "owned_paths": ["src/plugin_examples/fixture_factory/plugin_identity_validators.py", "tests/unit/test_plugin_identity_validators.py"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["5+ new CPV rules", "Tests added", "All tests pass"],
+      "evidence": ["validators/canonical-primary-validator-rules.md", "validators/canonical-primary-validator-results.json"]
+    },
+    {
+      "id": "TC-0F", "lane": "F", "owner": "publication-readiness", "status": "PENDING",
+      "objective": "Build unified publication readiness matrix combining all 52 dryrun packages",
+      "scope": "All 52 packages classified into one matrix",
+      "owned_paths": ["reports/.../publication-readiness/"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["All 52 packages classified", "No double-counting", "Clean count = canonical identity verified only"],
+      "evidence": ["publication-readiness/unified-candidate-matrix.json"]
+    },
+    {
+      "id": "TC-0G", "lane": "G", "owner": "wave8", "status": "PENDING",
+      "objective": "Build 4-6 canonical Wave 8 packages from SLUG_ALIAS_REQUIRED+TRANSFORMED families",
+      "scope": "html, tasks, zip families — canonical-path packages",
+      "owned_paths": ["reports/.../dryrun/wave8/", "reports/.../dryrun/examples/"],
+      "forbidden_paths": ["protected files", "external repos"],
+      "acceptance_checks": ["4+ canonical packages PASS", "All PIV verified", "Registry updated"],
+      "evidence": ["dryrun/wave8/wave8-build-results.json", "dryrun/wave8/wave8-selection.json"]
+    },
+    {
+      "id": "TC-0H", "lane": "H", "owner": "state-docs-skills", "status": "PENDING",
+      "objective": "Update state ledger, skills, cumulative dryrun ledger",
+      "scope": "State files + skills",
+      "owned_paths": ["reports/.../state/", "skills/"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["Cumulative ledger updated", "Skills updated", "Wave 9 queue written"],
+      "evidence": ["state/canonical-primary-ledger.json", "state/cumulative-dryrun-ledger.json"]
+    },
+    {
+      "id": "TC-0I", "lane": "I", "owner": "iv", "status": "PENDING",
+      "objective": "59+ IV checks: protected files, canonical packages, adversarial challenges",
+      "scope": "All sprint deliverables",
+      "owned_paths": ["reports/.../iv/", "reports/.../adversarial-review/"],
+      "forbidden_paths": ["protected files (read-only check)"],
+      "acceptance_checks": ["IV_PASS", "0 critical failures", "Adversarial challenges pass"],
+      "evidence": ["iv/independent-verification-report.json", "adversarial-review/adversarial-review.md"]
+    },
+    {
+      "id": "TC-0J", "lane": "J", "owner": "final", "status": "PENDING",
+      "objective": "Tests pass, git commit, evidence bundle + SHA-256",
+      "scope": "Full pytest + exact-path commit + ZIP bundle",
+      "owned_paths": ["reports/.../final/", ".local/evidence-bundles/"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["pytest 0 failures", "Commit created", "Bundle SHA-256 written"],
+      "evidence": ["final/sprint-closeout.json", ".local/evidence-bundles/...zip"]
+    }
+  ]
+}

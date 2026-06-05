@@ -26,6 +26,11 @@ class PluginEntry:
     # Canonical identity fields (added Sprint lowcode-plugin-canonical-identity-wave7-20260605)
     canonical_plugin_slug: Optional[str] = None
     identity_status: Optional[str] = None
+    # Canonical-primary fields (added Sprint lowcode-plugin-canonical-primary-wave8-20260605)
+    legacy_aliases: list = field(default_factory=list)
+    display_plugin_name: Optional[str] = None
+    migration_status: Optional[str] = None
+    migrated_from: Optional[str] = None
 
     @property
     def effective_canonical_slug(self) -> str:
@@ -40,6 +45,22 @@ class PluginEntry:
     def is_identity_verified(self) -> bool:
         """True only when canonical_plugin_slug is confirmed and matches canonical_url."""
         return self.identity_status == "CANONICAL_IDENTITY_VERIFIED"
+
+    @property
+    def is_canonical_primary(self) -> bool:
+        """True when this entry uses canonical slug as primary key (not a legacy alias)."""
+        return self.migration_status == "CANONICAL_PRIMARY_MIGRATED" or (
+            self.is_identity_verified and not self.migrated_from
+        )
+
+    @property
+    def canonical_key(self) -> str:
+        """The canonical family/slug key for this plugin."""
+        return f"{self.family}/{self.effective_canonical_slug}"
+
+    def is_alias_for(self, slug: str) -> bool:
+        """True if slug is in this entry's legacy aliases."""
+        return slug in self.legacy_aliases
 
     @property
     def is_ready(self) -> bool:

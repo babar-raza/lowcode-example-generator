@@ -209,7 +209,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -226,6 +226,13 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 7
+      package PASS. Status updated.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/photo-to-text
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
 - plugin_slug: table-to-text
   canonical_plugin_slug: table-to-text
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -235,7 +242,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -252,3 +259,10 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 7
+      package PASS. Status updated.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/table-to-text
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'

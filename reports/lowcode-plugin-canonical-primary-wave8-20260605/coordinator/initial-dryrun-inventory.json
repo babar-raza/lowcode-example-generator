@@ -1,0 +1,190 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "total": 30,
+  "with_canonical_identity": 8,
+  "without_canonical_identity": 22,
+  "pass_count": 30,
+  "packages": {
+    "drawing/convert-drawing": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "drawing/create-drawing": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "finance/convert-xbrl": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "gis/read-gis-data": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "note/convert-one-to-pdf": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "ocr/scan-document": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "page/convert-ps-to-pdf": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "zip/compress-files": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+      "has_canonical_identity": false
+    },
+    "html/convert-html-to-image": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "html/convert-html-to-word": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "note/convert-one-to-image": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "note/convert-one-to-word": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "ocr/image-text-finder": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "ocr/invoice-to-text": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "page/convert-eps-to-pdf": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "psd/convert-psd-to-pdf": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "psd/psd-image-converter": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "svg/vectorizer": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "tasks/convert-mpp-to-excel": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "tasks/convert-mpp-to-html": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "tasks/convert-mpp-to-image": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "tex/convert-latex-to-pdf": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": null,
+      "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+      "has_canonical_identity": false
+    },
+    "barcode/1d-barcode-reader": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "1d-barcode-reader",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "barcode/1d-barcode-writer": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "1d-barcode-writer",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "barcode/2d-barcode-reader": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "2d-barcode-reader",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "barcode/2d-barcode-writer": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "2d-barcode-writer",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "ocr/photo-to-text": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "photo-to-text",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "ocr/table-to-text": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "table-to-text",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "psd/animation-maker": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "animation-maker",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    },
+    "psd/photo-processor": {
+      "verdict": "PASS",
+      "canonical_plugin_slug": "photo-processor",
+      "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+      "has_canonical_identity": true
+    }
+  }
+}

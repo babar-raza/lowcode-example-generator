@@ -1,0 +1,98 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "next_sprint": "wave9-canonical-slug-migration",
+  "objective": "Advance remaining SLUG_ALIAS_REQUIRED entries to CANONICAL_IDENTITY_VERIFIED + canonical-primary. Build Wave 9 canonical dryrun packages for the 6 imaging variants and task entries.",
+  "ready_candidates": [
+    {
+      "family": "imaging",
+      "canonical_slug": "image-compressor",
+      "legacy_slug": "compress-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-compressor/"
+    },
+    {
+      "family": "imaging",
+      "canonical_slug": "image-cropper",
+      "legacy_slug": "crop-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-cropper/"
+    },
+    {
+      "family": "imaging",
+      "canonical_slug": "image-filters",
+      "legacy_slug": "filter-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-filters/"
+    },
+    {
+      "family": "imaging",
+      "canonical_slug": "image-merger",
+      "legacy_slug": "merge-images",
+      "canonical_url": "https://products.aspose.net/imaging/image-merger/"
+    },
+    {
+      "family": "imaging",
+      "canonical_slug": "add-watermark",
+      "legacy_slug": "watermark-image",
+      "canonical_url": "https://products.aspose.net/imaging/add-watermark/"
+    },
+    {
+      "family": "imaging",
+      "canonical_slug": "image-rotator",
+      "legacy_slug": "rotate-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-rotator/"
+    },
+    {
+      "family": "tasks",
+      "canonical_slug": "project-to-pdf-converter",
+      "legacy_slug": "convert-mpp-to-pdf",
+      "canonical_url": "https://products.aspose.net/tasks/project-to-pdf-converter/"
+    },
+    {
+      "family": "tasks",
+      "canonical_slug": "mpp-to-excel",
+      "legacy_slug": "convert-mpp-to-excel",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-excel/"
+    },
+    {
+      "family": "html",
+      "canonical_slug": "html-to-docx-converter",
+      "legacy_slug": "convert-html-to-word",
+      "canonical_url": "https://products.aspose.net/html/html-to-docx-converter/"
+    },
+    {
+      "family": "html",
+      "canonical_slug": "html-to-image-converter",
+      "legacy_slug": "convert-html-to-image",
+      "canonical_url": "https://products.aspose.net/html/html-to-image-converter/"
+    },
+    {
+      "family": "note",
+      "canonical_slug": "convert-onenote-to-word",
+      "legacy_slug": "convert-one-to-word",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-word/"
+    },
+    {
+      "family": "note",
+      "canonical_slug": "convert-onenote-to-image",
+      "legacy_slug": "convert-one-to-image",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-image/"
+    }
+  ],
+  "registry_enrichment_needed": [
+    {
+      "family": "cad",
+      "note": "All 4 CODE_HARVESTED CAD entries are MISSING_CANONICAL_URL — need products.aspose.net URL research"
+    },
+    {
+      "family": "font",
+      "note": "font/render-text-with-font is CODE_HARVESTED + MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "gis",
+      "note": "gis/read-gis-data is TRANSFORMED but MISSING_CANONICAL_URL — need canonical URL"
+    },
+    {
+      "family": "zip",
+      "note": "zip/extract-files is NEEDS_MANUAL_MAPPING + SLUG_ALIAS_REQUIRED for universal-extractor — needs to be advanced to READY"
+    }
+  ]
+}

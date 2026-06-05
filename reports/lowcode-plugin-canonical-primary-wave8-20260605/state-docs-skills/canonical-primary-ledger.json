@@ -1,0 +1,49 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "registry_state_after_sprint": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 48,
+    "CODE_HARVESTED": 8,
+    "NEEDS_MANUAL_MAPPING": 16,
+    "TOTAL": 72
+  },
+  "identity_counts_after_sprint": {
+    "CANONICAL_IDENTITY_VERIFIED": 21,
+    "SLUG_ALIAS_REQUIRED": 29,
+    "MISSING_CANONICAL_URL": 22,
+    "TOTAL": 72
+  },
+  "canonical_primary_entries": 21,
+  "canonical_primary_list": [
+    "barcode/1d-barcode-writer",
+    "barcode/1d-barcode-reader",
+    "barcode/2d-barcode-writer",
+    "barcode/2d-barcode-reader",
+    "drawing/convert-drawing",
+    "drawing/create-drawing",
+    "finance/convert-xbrl",
+    "html/html-to-pdf-converter",
+    "imaging/image-converter",
+    "imaging/image-resizer",
+    "note/convert-onenote-to-pdf",
+    "ocr/scan-document",
+    "ocr/image-text-finder",
+    "ocr/invoice-to-text",
+    "ocr/photo-to-text",
+    "ocr/table-to-text",
+    "psd/animation-maker",
+    "psd/photo-processor",
+    "svg/svg-to-image-converter",
+    "tex/latex-figure-renderer",
+    "zip/compress-files"
+  ],
+  "changes_this_sprint": {
+    "lane_b_barcode_migration": 4,
+    "lane_b_ocr_status_update": 2,
+    "lane_b_psd_status_update": 2,
+    "lane_g_wave8_imaging": 2,
+    "lane_g_wave8_html": 1,
+    "lane_g_wave8_note": 1,
+    "total_registry_changes": 12
+  }
+}

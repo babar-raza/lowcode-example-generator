@@ -3,9 +3,9 @@ package_id: Aspose.HTML
 github_repo: https://github.com/aspose-html/Aspose.Html-for-.NET
 implementation_model: STATIC_CONVERTER_CLASS
 plugins:
-- plugin_slug: convert-html-to-pdf
+- plugin_slug: html-to-pdf-converter
   canonical_plugin_slug: html-to-pdf-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-pdf
   canonical_url: https://products.aspose.net/html/html-to-pdf-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -52,9 +52,18 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/html/convert-html-to-pdf
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/html/convert-html-to-pdf
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
+      canonical advancement: ''convert-html-to-pdf'' -> ''html-to-pdf-converter''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/html/html-to-pdf-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  legacy_aliases:
+  - convert-html-to-pdf
+  display_plugin_name: HTML to PDF Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-html-to-pdf
 - plugin_slug: convert-html-to-word
   canonical_plugin_slug: html-to-docx-converter
   identity_status: SLUG_ALIAS_REQUIRED

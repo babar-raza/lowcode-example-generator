@@ -1,0 +1,59 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-canonical-primary-wave8-20260605",
+  "prior_sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "prior_commit": "699dcc0",
+  "objective": "Canonical-primary plugin registry closure + Wave 8 advancement",
+  "preflight": {
+    "git_head": "699dcc069a20a3c1854bec29aed75f30961fdd35",
+    "branch": "main",
+    "registry_status_counts": {
+      "TRANSFORMED_TO_EXAMPLE_DRYRUN": 44,
+      "READY_FOR_TRANSFORMATION": 4,
+      "CODE_HARVESTED": 8,
+      "NEEDS_MANUAL_MAPPING": 16,
+      "TOTAL": 72
+    },
+    "identity_counts": {
+      "CANONICAL_IDENTITY_VERIFIED": 11,
+      "SLUG_ALIAS_REQUIRED": 37,
+      "MISSING_CANONICAL_URL": 24
+    },
+    "dryrun_packages": {
+      "total": 52,
+      "with_canonical_identity": 8,
+      "without_canonical_identity": 44
+    },
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "28c51b79f8dac9e7",
+      "pipeline/configs/families/words.yml": "ef21e9e514386a7e",
+      "pipeline/configs/families/pdf.yml": "de889ed24b3bc3a0",
+      "pipeline/configs/families/slides.yml": "4eec3d74e7c9cca5",
+      "pipeline/configs/families/email.yml": "3e872e96519168ba",
+      "pipeline/configs/families/diagram.yml": "306c16e4acdf4802",
+      "pipeline/format-authority/manifest.json": "3e96754355d7124f"
+    }
+  },
+  "lanes": [
+    {"lane": "0", "owner": "coordinator", "status": "IN_PROGRESS", "purpose": "Coordinator preflight + governance"},
+    {"lane": "A", "owner": "wave7-closeout", "status": "PENDING", "purpose": "Wave 7 closeout repair + verification"},
+    {"lane": "B", "owner": "registry-migration", "status": "PENDING", "purpose": "Canonical-primary registry migration"},
+    {"lane": "C", "owner": "example-migration", "status": "PENDING", "purpose": "Example path migration + alias compatibility"},
+    {"lane": "D", "owner": "tooling", "status": "PENDING", "purpose": "Factory tooling — canonical-first generation"},
+    {"lane": "E", "owner": "validators", "status": "PENDING", "purpose": "Validators — canonical-primary invariants"},
+    {"lane": "F", "owner": "publication-readiness", "status": "PENDING", "purpose": "Publication readiness — unified matrix"},
+    {"lane": "G", "owner": "wave8", "status": "PENDING", "purpose": "Wave 8 advancement — verified canonical only"},
+    {"lane": "H", "owner": "state-docs-skills", "status": "PENDING", "purpose": "State/docs/skills/taskcard sync"},
+    {"lane": "I", "owner": "iv", "status": "PENDING", "purpose": "Independent verification + adversarial review"},
+    {"lane": "J", "owner": "final", "status": "PENDING", "purpose": "Tests + commit + evidence bundle + closeout"}
+  ],
+  "shared_file_delegation": {
+    "pipeline/plugin-code-registry/**": "Lane B owns; all other lanes read-only",
+    "unified-publication-matrix": "Lane F owns",
+    "cumulative-dryrun-ledger": "Lane H owns",
+    "wave8-build-results": "Lane G owns"
+  },
+  "lane_outcomes": {},
+  "verdict": "PENDING"
+}

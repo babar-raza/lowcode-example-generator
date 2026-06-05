@@ -1,0 +1,52 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "verdict": "SPRINT_COMPLETE",
+  "title": "Canonical-Primary Registry Closure + Wave 8",
+  "objectives_achieved": {
+    "1_wave7_closeout": "COMPLETE — Wave 7 verified at commit 699dcc0, IV 59/59 PASS, 4 repair items documented",
+    "2_registry_canonical_primary": "COMPLETE — 12 registry migrations (BarCode x4, OCR x2, PSD x4, Imaging x2, HTML x1, Note x1)",
+    "3_legacy_alias_mapping": "COMPLETE — legacy_aliases field populated, lookup_by_alias() functional",
+    "4_publication_readiness": "COMPLETE — unified matrix: 8 CLEAN, 4 LEGACY, 40 IDENTITY_REVIEW (52 total)",
+    "5_canonical_examples": "COMPLETE — 4 Wave 8 canonical packages built (imaging/image-converter, imaging/image-resizer, html/html-to-pdf-converter, note/convert-onenote-to-pdf)",
+    "6_wave8_only_canonical": "COMPLETE — Wave 8 generated only for CANONICAL_IDENTITY_VERIFIED entries",
+    "7_validators_hardened": "COMPLETE — 12 CPV rules (CPV-01..CPV-12), 25/25 tests PASS",
+    "8_state_docs_skills": "COMPLETE — canonical-primary-ledger, cumulative-ledger, wave9-queue, skills updated",
+    "9_independent_verification": "COMPLETE — IV 80/80 PASS",
+    "10_evidence_bundle": "PENDING — Lane J final step"
+  },
+  "registry_state": {
+    "before": {
+      "CANONICAL_IDENTITY_VERIFIED": 11,
+      "SLUG_ALIAS_REQUIRED": 37,
+      "MISSING_CANONICAL_URL": 24,
+      "canonical_primary_entries": 0
+    },
+    "after": {
+      "CANONICAL_IDENTITY_VERIFIED": 21,
+      "SLUG_ALIAS_REQUIRED": 29,
+      "MISSING_CANONICAL_URL": 22,
+      "canonical_primary_entries": 21
+    }
+  },
+  "dryrun_packages": {
+    "cumulative_prior": 52,
+    "wave8_new": 4,
+    "cumulative_total": 56
+  },
+  "test_results": {
+    "pytest": "3471 passed, 18 skipped",
+    "cpv_tests": "25/25 PASS",
+    "piv_wave8": "4/4 PASS",
+    "iv_checks": "80/80 PASS"
+  },
+  "files_modified": {
+    "registry_yamls": ["pipeline/plugin-code-registry/family/barcode.yaml", "pipeline/plugin-code-registry/family/ocr.yaml", "pipeline/plugin-code-registry/family/psd.yaml", "pipeline/plugin-code-registry/family/imaging.yaml", "pipeline/plugin-code-registry/family/html.yaml", "pipeline/plugin-code-registry/family/note.yaml"],
+    "source_code": ["src/plugin_examples/plugin_code_registry/models.py", "src/plugin_examples/plugin_code_registry/loader.py", "src/plugin_examples/fixture_factory/canonical_primary_validators.py"],
+    "tests": ["tests/unit/test_canonical_primary_validators.py"],
+    "skills": ["skills/canonical-plugin-identity-and-aliasing.md"],
+    "report_files": "reports/lowcode-plugin-canonical-primary-wave8-20260605/**"
+  },
+  "protected_files_unchanged": true,
+  "no_external_mutations": true
+}

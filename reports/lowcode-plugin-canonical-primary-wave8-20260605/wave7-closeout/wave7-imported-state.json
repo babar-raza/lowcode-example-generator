@@ -1,0 +1,46 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "wave7_sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "wave7_commit": "699dcc0",
+  "wave7_verdict": "SPRINT_COMPLETE",
+  "iv_verdict": "IV_PASS",
+  "iv_checks": "59/59",
+  "piv_tests": "13/13",
+  "pytest": "3446/0/18",
+  "packages_built": 8,
+  "checks": [
+    {
+      "check": "wave7_commit_exists",
+      "result": "PASS",
+      "detail": "699dcc0 feat(canonical-identity): Wave 7 sprint \u00e2\u20ac\u201d canonical plugin identity + PIV validators\ndf667d8 feat(plugin-factory): Wave 6 examples + fixture factory + AOC validators\n754452c feat(plugin-factory): Wave 5 examples + fixture factory Wave 5 generators + closeout repair\n7fd7663 feat(plugin-factory): Wave 4 examples + fixture factory + validator hardening\nf807896 feat(shareability): Stage 2 evidence bundle"
+    },
+    {
+      "check": "wave7_verdict_sprint_complete",
+      "result": "PASS",
+      "detail": "SPRINT_COMPLETE"
+    },
+    {
+      "check": "wave7_iv_pass",
+      "result": "PASS",
+      "detail": "59/59 IV_PASS"
+    },
+    {
+      "check": "wave7_piv_validators_pass",
+      "result": "PASS",
+      "detail": "4"
+    },
+    {
+      "check": "wave7_evidence_bundle_exists",
+      "result": "PASS",
+      "detail": "size=95578"
+    }
+  ],
+  "known_repair_items": [
+    "Registry Wave7 packages (ocr/photo-to-text etc.) still READY_FOR_TRANSFORMATION \u2014 should be TRANSFORMED_TO_EXAMPLE_DRYRUN",
+    "psd/animation-maker and psd/photo-processor have MISSING_CANONICAL_URL in registry despite having canonical_url set",
+    "44 prior packages lack canonical_plugin_slug in source-provenance.json \u2014 IDENTITY_REVIEW_REQUIRED",
+    "family-plugin-list.json was not produced"
+  ],
+  "wave7_closeout_verdict": "WAVE7_CLOSED_WITH_CAVEATS"
+}

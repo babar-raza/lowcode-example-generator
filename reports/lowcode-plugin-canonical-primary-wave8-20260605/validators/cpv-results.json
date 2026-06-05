@@ -1,0 +1,26 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "lane": "E",
+  "validator_set": "CPV-01..CPV-12",
+  "source_file": "src/plugin_examples/fixture_factory/canonical_primary_validators.py",
+  "test_file": "tests/unit/test_canonical_primary_validators.py",
+  "tests_run": 25,
+  "tests_passed": 25,
+  "tests_failed": 0,
+  "rules": [
+    {"rule": "CPV-01", "description": "Publication candidate must not use legacy slug as primary", "severity": "ERROR"},
+    {"rule": "CPV-02", "description": "Canonical registry entry must have canonical_plugin_slug", "severity": "ERROR"},
+    {"rule": "CPV-03", "description": "Canonical registry entry must have display_plugin_name", "severity": "WARNING"},
+    {"rule": "CPV-04", "description": "Legacy alias must not be counted as separate canonical example", "severity": "ERROR"},
+    {"rule": "CPV-05", "description": "Dryrun path must use canonical slug, not generic slug without alias record", "severity": "ERROR"},
+    {"rule": "CPV-06", "description": "source-provenance canonical_url must match registry canonical_url", "severity": "WARNING"},
+    {"rule": "CPV-07", "description": "README title must not use generic operation name", "severity": "WARNING"},
+    {"rule": "CPV-08", "description": "BarCode generic names must not appear in publication candidate list", "severity": "ERROR"},
+    {"rule": "CPV-09", "description": "Publication matrix must not include identity_review_required as clean", "severity": "ERROR"},
+    {"rule": "CPV-10", "description": "Family-level probe must not be counted as plugin-level coverage", "severity": "WARNING"},
+    {"rule": "CPV-11", "description": "Canonical identity map must include family plugin list", "severity": "WARNING"},
+    {"rule": "CPV-12", "description": "Final summary must not count canonical and legacy aliases together", "severity": "WARNING"}
+  ],
+  "verdict": "LANE_E_COMPLETE"
+}

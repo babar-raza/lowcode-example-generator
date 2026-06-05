@@ -3,9 +3,9 @@ package_id: Aspose.Imaging
 github_repo: https://github.com/aspose-imaging/Aspose.Imaging-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
-- plugin_slug: convert-image
+- plugin_slug: image-converter
   canonical_plugin_slug: image-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/convert-image
   canonical_url: https://products.aspose.net/imaging/image-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -48,12 +48,21 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/convert-image
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/convert-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
+      canonical advancement: ''convert-image'' -> ''image-converter''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/imaging/image-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
-- plugin_slug: resize-image
+  legacy_aliases:
+  - convert-image
+  display_plugin_name: Image Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-image
+- plugin_slug: image-resizer
   canonical_plugin_slug: image-resizer
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/resize-image
   canonical_url: https://products.aspose.net/imaging/image-resizer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -61,7 +70,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-resizer
   page_hash: decbb2536acebb5c
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/resize-image
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/imaging/image-resizer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -89,6 +98,15 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed: /imaging/image-resizer/.'
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
+      canonical advancement: ''resize-image'' -> ''image-resizer''.'
+  legacy_aliases:
+  - resize-image
+  display_plugin_name: Image Resizer for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: resize-image
 - plugin_slug: compress-image
   canonical_plugin_slug: image-compressor
   identity_status: SLUG_ALIAS_REQUIRED

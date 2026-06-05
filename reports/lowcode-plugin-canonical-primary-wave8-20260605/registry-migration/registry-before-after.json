@@ -1,0 +1,69 @@
+{
+  "sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "date": "2026-06-05",
+  "changes": [
+    "barcode: generate-barcode -> 1d-barcode-writer",
+    "barcode: recognize-barcode -> 1d-barcode-reader",
+    "barcode: generate-qr-code -> 2d-barcode-writer",
+    "barcode: scan-barcode -> 2d-barcode-reader",
+    "ocr: photo-to-text -> TRANSFORMED_TO_EXAMPLE_DRYRUN",
+    "ocr: table-to-text -> TRANSFORMED_TO_EXAMPLE_DRYRUN",
+    "psd: animation-maker -> TRANSFORMED_TO_EXAMPLE_DRYRUN",
+    "psd: animation-maker identity_status -> CANONICAL_IDENTITY_VERIFIED",
+    "psd: photo-processor -> TRANSFORMED_TO_EXAMPLE_DRYRUN",
+    "psd: photo-processor identity_status -> CANONICAL_IDENTITY_VERIFIED"
+  ],
+  "families_modified": [
+    "barcode",
+    "ocr",
+    "psd"
+  ],
+  "barcode_before": [
+    "generate-barcode",
+    "recognize-barcode",
+    "generate-qr-code",
+    "read-barcode",
+    "scan-barcode"
+  ],
+  "barcode_after": [
+    "1d-barcode-writer",
+    "1d-barcode-reader",
+    "2d-barcode-writer",
+    "read-barcode",
+    "2d-barcode-reader"
+  ],
+  "ocr_before": [
+    "recognize-text",
+    "extract-text",
+    "scan-document",
+    "image-text-finder",
+    "invoice-to-text",
+    "photo-to-text",
+    "table-to-text"
+  ],
+  "ocr_after": [
+    "recognize-text",
+    "extract-text",
+    "scan-document",
+    "image-text-finder",
+    "invoice-to-text",
+    "photo-to-text",
+    "table-to-text"
+  ],
+  "psd_before": [
+    "convert-psd-to-pdf",
+    "convert-psd-to-png",
+    "psd-image-converter",
+    "edit-psd-layers",
+    "animation-maker",
+    "photo-processor"
+  ],
+  "psd_after": [
+    "convert-psd-to-pdf",
+    "convert-psd-to-png",
+    "psd-image-converter",
+    "edit-psd-layers",
+    "animation-maker",
+    "photo-processor"
+  ]
+}

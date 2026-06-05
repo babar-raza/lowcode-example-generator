@@ -1,0 +1,24 @@
+{
+  "family": "imaging",
+  "plugin_slug": "image-resizer",
+  "canonical_url": "https://products.aspose.net/imaging/image-resizer/",
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "nuget_package": "Aspose.Imaging",
+  "nuget_version": "24.12.0",
+  "github_links": [
+    "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Plugins/Aspose.UmbracoImageResizer/AfterSaveHandler.cs"
+  ],
+  "code_hashes": [
+    "56fc7b5e7c6cc66afecebbe676839751"
+  ],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_plugin_slug": "image-resizer",
+  "display_plugin_name": "Image Resizer for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "migrated_from": "resize-image",
+  "legacy_example_slug": "resize-image",
+  "generation_sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "migrated_at": "2026-06-05"
+}

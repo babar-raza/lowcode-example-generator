@@ -104,6 +104,45 @@ entry.effective_canonical_slug # computed: canonical_plugin_slug → URL last se
 entry.is_identity_verified     # bool — True iff identity_status == CANONICAL_IDENTITY_VERIFIED
 ```
 
+## Canonical-Primary Registry Model (Sprint Wave 8)
+
+When a registry entry is canonical-primary, `plugin_slug` IS the canonical slug. Legacy generic slugs are in `legacy_aliases` only.
+
+```yaml
+- plugin_slug: 1d-barcode-writer          # IS the canonical slug
+  canonical_plugin_slug: 1d-barcode-writer
+  display_plugin_name: 1D Barcode Writer for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: generate-barcode
+  legacy_aliases:
+    - generate-barcode
+```
+
+Use `loader.lookup_by_alias(family, old_slug)` to resolve legacy slugs to canonical entries.
+Use `loader.canonical_primary_entries()` to get all 21 canonical-primary entries.
+
+## CPV Validator Rules (CPV-01..CPV-12)
+
+System-level validators. Run with: `run_canonical_primary_validators(packages, registry_entries, publication_matrix, family_plugin_lists)`
+
+| Rule | Severity | Check |
+|------|----------|-------|
+| CPV-01 | ERROR | Publication candidate must not use legacy slug as primary |
+| CPV-02 | ERROR | Canonical registry entry must have canonical_plugin_slug |
+| CPV-03 | WARNING | Canonical registry entry must have display_plugin_name |
+| CPV-04 | ERROR | Legacy alias must not be counted as separate canonical example |
+| CPV-05 | ERROR | Dryrun path must use canonical slug, not generic slug without alias record |
+| CPV-06 | WARNING | source-provenance canonical_url must match registry |
+| CPV-07 | WARNING | README title must not use generic operation name |
+| CPV-08 | ERROR | BarCode generic names must not appear in publication candidate list |
+| CPV-09 | ERROR | publication matrix must not include identity_review_required as clean |
+| CPV-10 | WARNING | Family-level probe must not count as plugin-level coverage |
+| CPV-11 | WARNING | Canonical identity map must include family plugin list |
+| CPV-12 | WARNING | Final summary must not count canonical and legacy aliases together |
+
+CPV module: `src/plugin_examples/fixture_factory/canonical_primary_validators.py`
+
 ## Validator Module Path
 
 `src/plugin_examples/fixture_factory/plugin_identity_validators.py`

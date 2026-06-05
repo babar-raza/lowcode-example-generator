@@ -3,9 +3,9 @@ package_id: Aspose.BarCode
 github_repo: https://github.com/aspose-barcode/Aspose.Barcode-for-.NET
 implementation_model: STATIC_CONVERTER_CLASS
 plugins:
-- plugin_slug: generate-barcode
+- plugin_slug: 1d-barcode-writer
   canonical_plugin_slug: 1d-barcode-writer
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/barcode/net/generate-barcode
   canonical_url: https://products.aspose.net/barcode/1d-barcode-writer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -47,12 +47,21 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/generate-barcode
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/generate-barcode
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
+      from legacy alias 'generate-barcode' to canonical primary '1d-barcode-writer'.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/1d-barcode-writer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
-- plugin_slug: recognize-barcode
+  legacy_aliases:
+  - generate-barcode
+  display_plugin_name: 1D Barcode Writer for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: generate-barcode
+- plugin_slug: 1d-barcode-reader
   canonical_plugin_slug: 1d-barcode-reader
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/barcode/net/recognize-barcode
   canonical_url: https://products.aspose.net/barcode/1d-barcode-reader/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -93,12 +102,21 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/recognize-barcode
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/recognize-barcode
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
+      from legacy alias 'recognize-barcode' to canonical primary '1d-barcode-reader'.
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/1d-barcode-reader
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
-- plugin_slug: generate-qr-code
+  legacy_aliases:
+  - recognize-barcode
+  display_plugin_name: 1D Barcode Reader for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: recognize-barcode
+- plugin_slug: 2d-barcode-writer
   canonical_plugin_slug: 2d-barcode-writer
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/barcode/net/generate-qr-code
   canonical_url: https://products.aspose.net/barcode/2d-barcode-writer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -107,7 +125,7 @@ plugins:
     ComplexBarcodeGenerator class available
   page_hash: de4a52c3c2c2ae3d
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/generate-qr-code
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/2d-barcode-writer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -139,6 +157,15 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed: /barcode/2d-barcode-writer/.'
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
+      from legacy alias 'generate-qr-code' to canonical primary '2d-barcode-writer'.
+  legacy_aliases:
+  - generate-qr-code
+  display_plugin_name: 2D Barcode Writer for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: generate-qr-code
 - plugin_slug: read-barcode
   canonical_plugin_slug: read-barcode
   identity_status: MISSING_CANONICAL_URL
@@ -171,9 +198,9 @@ plugins:
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Status
       NEEDS_MANUAL_MAPPING: slug maps ambiguously.'
-- plugin_slug: scan-barcode
+- plugin_slug: 2d-barcode-reader
   canonical_plugin_slug: 2d-barcode-reader
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/barcode/net/scan-barcode
   canonical_url: https://products.aspose.net/barcode/2d-barcode-reader/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -181,7 +208,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 2d-barcode-reader
   page_hash: 279944f48eb8859c
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/scan-barcode
+  dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/2d-barcode-reader
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -214,3 +241,12 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package built
       and ran DRYRUN_PASS.
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
+      from legacy alias 'scan-barcode' to canonical primary '2d-barcode-reader'.
+  legacy_aliases:
+  - scan-barcode
+  display_plugin_name: 2D Barcode Reader for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: scan-barcode

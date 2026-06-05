@@ -1,0 +1,17 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "taskcards": [
+    {"id": "TC-00-A", "lane": "0", "owner": "coordinator", "status": "COMPLETE", "objective": "Coordinator preflight", "evidence": "coordinator/lane-ledger.json"},
+    {"id": "TC-0A-A", "lane": "A", "owner": "state-verification", "status": "COMPLETE", "objective": "Verify Wave 5 state", "evidence": "state-verification/wave5-state-verification.md", "result": "7/7 PASS"},
+    {"id": "TC-0B-A", "lane": "B", "owner": "wave6-examples", "status": "COMPLETE", "objective": "Build Wave 6 dry-run packages", "evidence": "dryrun/wave6/wave6-build-results.json", "result": "14/14 PASS"},
+    {"id": "TC-0C-A", "lane": "C", "owner": "factory-tooling", "status": "COMPLETE", "objective": "Factory automation design", "evidence": "tooling/factory-automation-design.md"},
+    {"id": "TC-0D-A", "lane": "D", "owner": "fixture-factory", "status": "COMPLETE", "objective": "Fixture factory expansion", "result": "4 new generators: eps, psd, rich_geojson, latex"},
+    {"id": "TC-0E-A", "lane": "E", "owner": "registry", "status": "COMPLETE", "objective": "Registry advancement 14 entries", "evidence": "registry/wave6-status-advancement-ledger.json", "result": "44/72 TRANSFORMED"},
+    {"id": "TC-0F-A", "lane": "F", "owner": "validators", "status": "COMPLETE", "objective": "16 anti-overclaiming rules", "result": "AOC-01..AOC-16 implemented, 23 tests"},
+    {"id": "TC-0G-A", "lane": "G", "owner": "state-docs", "status": "COMPLETE", "objective": "Cumulative ledger + skills update", "evidence": "state/cumulative-dryrun-ledger.json"},
+    {"id": "TC-0H-A", "lane": "H", "owner": "work-ahead", "status": "COMPLETE", "objective": "Wave 7 candidate matrix", "evidence": "work-ahead/wave7-candidate-matrix.json", "result": "11 Wave 7 candidates"},
+    {"id": "TC-0I-A", "lane": "I", "owner": "iv", "status": "COMPLETE", "objective": "Independent verification 5+ packages", "evidence": "iv/independent-verification-report.md", "result": "7 packages inspected, 5 AC challenges answered, IV_PASS"},
+    {"id": "TC-0J-A", "lane": "J", "owner": "final", "status": "COMPLETE", "objective": "Run full tests, commit, bundle", "evidence": "final/evidence-bundle-manifest.json", "result": "3433 passed, 18 skipped, SHA-256: cd0ef40a5ed9e374ccd49158553f9434aaf6f364288d6daa11c957ff6b8f79af"}
+  ]
+}

@@ -134,7 +134,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same OcrInput pattern
     as scanned-image-to-text
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -152,6 +152,13 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page. Pattern shared with scanned-image-to-text.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/image-text-finder
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
 - plugin_slug: invoice-to-text
   plugin_url: https://products.aspose.net/ocr/invoice-to-text/
   canonical_url: https://products.aspose.net/ocr/invoice-to-text/
@@ -159,7 +166,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -176,6 +183,13 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/invoice-to-text
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
 - plugin_slug: photo-to-text
   plugin_url: https://products.aspose.net/ocr/photo-to-text/
   canonical_url: https://products.aspose.net/ocr/photo-to-text/

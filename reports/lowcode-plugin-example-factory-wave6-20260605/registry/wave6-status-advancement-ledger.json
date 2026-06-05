@@ -1,0 +1,44 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "baseline": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 30,
+    "READY_FOR_TRANSFORMATION": 8,
+    "CODE_HARVESTED": 18,
+    "NEEDS_MANUAL_MAPPING": 16,
+    "TOTAL": 72
+  },
+  "wave6_advances": [
+    {"key": "ocr/image-text-finder", "from": "READY_FOR_TRANSFORMATION", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "ocr/invoice-to-text", "from": "READY_FOR_TRANSFORMATION", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "note/convert-one-to-word", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "note/convert-one-to-image", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "tasks/convert-mpp-to-excel", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "tasks/convert-mpp-to-html", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "tasks/convert-mpp-to-image", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "html/convert-html-to-word", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "html/convert-html-to-image", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "page/convert-eps-to-pdf", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "psd/psd-image-converter", "from": "READY_FOR_TRANSFORMATION", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "psd/convert-psd-to-pdf", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "svg/vectorizer", "from": "READY_FOR_TRANSFORMATION", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    {"key": "tex/convert-latex-to-pdf", "from": "CODE_HARVESTED", "to": "TRANSFORMED_TO_EXAMPLE_DRYRUN"}
+  ],
+  "post_wave6": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 44,
+    "READY_FOR_TRANSFORMATION": 4,
+    "CODE_HARVESTED": 8,
+    "NEEDS_MANUAL_MAPPING": 16,
+    "TOTAL": 72
+  },
+  "advances_this_wave": 14,
+  "net_gain_transformed": 14,
+  "api_discoveries": [
+    "Aspose.PSD 24.12.0 requires Aspose.Drawing 24.12.0 as explicit runtime dep (nuspec bug: lists 23.7.0)",
+    "Aspose.Note SaveFormat has no Word/Docx variant — convert-one-to-word uses HTML (best match)",
+    "Aspose.Tasks SaveFileFormat.Png (PascalCase, not PNG)",
+    "Aspose.TeX PdfDevice throws XpsSaveOptions cast in 24.12.0 — use XpsDevice instead",
+    "EPS fixtures must use string array + string.Join to avoid C# newline-in-constant errors",
+    "Aspose.SVG ImageVectorizerConfiguration.LineWidth requires float (1.0f not 1.0)"
+  ]
+}

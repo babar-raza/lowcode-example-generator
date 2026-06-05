@@ -1,0 +1,11 @@
+{
+  "package_key": "html/convert-html-to-word",
+  "nuget_package": "Aspose.HTML",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/html/html-to-docx-converter/",
+  "output_files": [
+    "output/output.docx"
+  ]
+}

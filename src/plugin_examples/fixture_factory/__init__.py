@@ -12,6 +12,10 @@ from .generators import (
     generate_ps_fixture,
     generate_note_xml_fixture,
     generate_drawing_xml_fixture,
+    generate_eps_fixture,
+    generate_psd_fixture,
+    generate_rich_geojson_fixture,
+    generate_latex_fixture,
     FixtureResult,
 )
 from .validators import (
@@ -34,6 +38,10 @@ __all__ = [
     "generate_ps_fixture",
     "generate_note_xml_fixture",
     "generate_drawing_xml_fixture",
+    "generate_eps_fixture",
+    "generate_psd_fixture",
+    "generate_rich_geojson_fixture",
+    "generate_latex_fixture",
     "FixtureResult",
     "validate_output_file",
     "validate_package_outputs",

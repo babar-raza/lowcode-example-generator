@@ -56,7 +56,7 @@ plugins:
 - plugin_slug: convert-html-to-word
   plugin_url: https://products.aspose.net/html/net/convert-html-to-word
   page_hash: 04566ec714400b34
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -88,10 +88,18 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from HTMLtoDOCXExample.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-word
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/html/html-to-docx-converter/
 - plugin_slug: convert-html-to-image
   plugin_url: https://products.aspose.net/html/net/convert-html-to-image
   page_hash: a9b3cc7d51950bbe
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -117,6 +125,14 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from DownloadImagesExample.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/html/html-to-image-converter/
 - plugin_slug: convert-html-to-xps
   plugin_url: https://products.aspose.net/html/net/convert-html-to-xps
   page_hash: e9c75fd94a2b21c6

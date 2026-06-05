@@ -1,0 +1,20 @@
+{
+  "package_key": "tasks/convert-mpp-to-image",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/project.png",
+      "size": 30602
+    },
+    {
+      "path": "output/project_2.png",
+      "size": 30828
+    },
+    {
+      "path": "output/project_3.png",
+      "size": 30818
+    }
+  ]
+}

@@ -135,7 +135,7 @@ plugins:
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; Converter.ConvertImageToSVG()
     confirmed on product page
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
@@ -152,3 +152,10 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'

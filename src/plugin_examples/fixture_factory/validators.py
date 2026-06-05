@@ -77,6 +77,9 @@ INTERMEDIATE_OPTIONAL_PATTERNS = [
     "source-watermark.bmp", # imaging/watermark-image: source before watermark
     "src1.bmp",             # imaging/merge-images: source 1
     "src2.bmp",             # imaging/merge-images: source 2
+    "fixture.psd",          # psd/: intermediate PSD fixture before conversion
+    "fixture.eps",          # page/convert-eps-to-pdf: EPS before conversion
+    "fixture.svg",          # svg/vectorizer: SVG intermediate
 ]
 
 
@@ -91,12 +94,20 @@ def detect_format(data: bytes) -> str:
         return "JPEG"
     if data[:2] == BMP_SIGNATURE:
         return "BMP"
+    if data[:4] == b"8BPS":
+        return "PSD"
+    if data[:4] == b"RIFF":
+        return "RIFF"
+    if data[:4] == b"\xD0\xCF\x11\xE0":
+        return "OLE2"  # .doc, .xls, .ppt legacy
     if data[:5].lower() == b"<svg ":
         return "SVG"
     if data[:9].lower() == b"<!doctype" or data[:5].lower() == b"<html":
         return "HTML"
     if data[:1] == b"{":
         return "JSON"
+    if data[:5].lower() == b"<?xml":
+        return "XML"
     # Try UTF-8 text
     try:
         data[:200].decode("utf-8")

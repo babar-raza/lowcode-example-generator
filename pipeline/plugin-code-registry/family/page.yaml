@@ -44,7 +44,7 @@ plugins:
 - plugin_slug: convert-eps-to-pdf
   plugin_url: https://products.aspose.net/page/net/convert-eps-to-pdf
   page_hash: ac05ee2c3f67b341
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: DEDICATED_PLUGIN_CLASS
   code_hashes:
@@ -69,6 +69,14 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CropEPS.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/page/convert-eps-to-pdf
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/page/eps-to-pdf/
 - plugin_slug: convert-ps-to-pdf
   plugin_url: https://products.aspose.net/page/net/convert-ps-to-pdf
   canonical_url: https://products.aspose.net/page/ps-converter/

@@ -48,6 +48,17 @@ Key patterns by family:
 - **Barcode gen**: `new BarcodeGenerator(EncodeTypes.Code128, value) -> Save(path, BarCodeImageFormat.Png)`
 - **Barcode read**: Generate first, then `new BarCodeReader(path, DecodeType.Code128) -> ReadBarCodes()`
 - **Tasks (MPP)**: `new Project() -> task.Set(Tsk.Name, ...) -> Save(path, SaveFileFormat.Pdf)`
+- **Tasks Excel**: `new Project() -> Save(path, new XlsxOptions())`
+- **Tasks HTML**: `new Project() -> Save(path, new HtmlSaveOptions())`
+- **Tasks PNG**: `new Project() -> Save(path, new ImageSaveOptions(SaveFileFormat.Png))` (PascalCase `Png`)
+- **HTML→Word**: `Converter.ConvertHTML(content, ".", new DocSaveOptions(), path)`
+- **HTML→Image**: `Converter.ConvertHTML(content, ".", new ImageSaveOptions(ImageFormat.Jpeg), path)`
+- **Page EPS→PDF**: Same as PS — `new PsDocument(epsStream) -> SaveAsPdf(pdfStream, PdfSaveOptions)`
+- **PSD create**: `new PsdImage(w,h) -> graphics.Clear(Color.X) -> Save(path)` + explicit `Aspose.Drawing 24.12.0` dep
+- **PSD→JPEG**: `(PsdImage)Image.Load(psdPath) -> Save(outPath, new JpegOptions { Quality = 90 })`
+- **PSD→PDF**: `Image.Load(psdPath) -> Save(outPath, new PdfOptions())`
+- **SVG vectorizer**: `new ImageVectorizer { Configuration = new ImageVectorizerConfiguration { ColorsLimit=4, LineWidth=1.0f } } -> Vectorize(pngPath) -> Save(svgPath)`
+- **TeX→XPS**: `TeXOptions.ConsoleAppOptions(TeXConfig.ObjectLaTeX) + TeXJob("job", new XpsDevice(), opts).Run()` — PdfDevice throws XpsSaveOptions cast in 24.12.0
 - **Imaging**: `new BmpImage(w, h) -> Draw(shapes) -> Save(path, PngOptions)`
 
 ### 4. Required Package Files
@@ -88,6 +99,12 @@ pub_result = validate_package_outputs(pkg_dir, key)
 | source-provenance.json has `{{` and `}}` | Use `.replace()` properly; `{{` in Python f-strings = literal `{` |
 | `INV-08/09/10` logs missing | Logs must be in package ROOT, not `logs/` subdirectory |
 | JPEG signature check fails | Check 3 bytes `b"\xff\xd8\xff"` not 2 bytes |
+| `SaveFormat.Docx` CS0117 in Aspose.Note | Note has no Word format; use `SaveFormat.Html` (Word-compatible) |
+| `SaveFileFormat.PNG` CS0117 in Aspose.Tasks | Use `SaveFileFormat.Png` (PascalCase, not acronym) |
+| Aspose.PSD `Could not load Aspose.Drawing` | Add `<PackageReference Include="Aspose.Drawing" Version="24.12.0" />` explicitly |
+| Aspose.TeX PdfDevice `InvalidCastException XpsSaveOptions→PdfSaveOptions` | Use `new XpsDevice()` instead of `new PdfDevice()` (bug in 24.12.0) |
+| EPS string `CS1010 Newline in constant` | Use `string[] epsLines = {...}; string.Join("\\n", epsLines)` |
+| SVG `LineWidth = 1.0` CS0664 | Use `LineWidth = 1.0f` (float literal) |
 
 ### 7. Advance Registry Entry
 ```python
@@ -110,6 +127,11 @@ from plugin_examples.fixture_factory.generators import (
     generate_ps_fixture,       # PostScript document
     generate_note_xml_fixture, # OneNote XML
     generate_drawing_xml_fixture,  # Visio XML
+    # Wave 6 additions:
+    generate_eps_fixture,          # EPS (Encapsulated PostScript)
+    generate_psd_fixture,          # PSD binary (Photoshop, minimal)
+    generate_rich_geojson_fixture, # GeoJSON with 5 features, mixed geometry
+    generate_latex_fixture,        # LaTeX source (.tex file)
 )
 ```
 

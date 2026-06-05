@@ -1,0 +1,72 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "prior_sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "cumulative_dryrun_packages": 44,
+  "wave_breakdown": {
+    "wave-a": 12,
+    "wave-4": 10,
+    "wave-5": 8,
+    "wave-6": 14
+  },
+  "wave6_packages": [
+    "html/convert-html-to-image",
+    "html/convert-html-to-word",
+    "note/convert-one-to-image",
+    "note/convert-one-to-word",
+    "ocr/image-text-finder",
+    "ocr/invoice-to-text",
+    "page/convert-eps-to-pdf",
+    "psd/convert-psd-to-pdf",
+    "psd/psd-image-converter",
+    "svg/vectorizer",
+    "tasks/convert-mpp-to-excel",
+    "tasks/convert-mpp-to-html",
+    "tasks/convert-mpp-to-image",
+    "tex/convert-latex-to-pdf"
+  ],
+  "wave6_verdicts": {
+    "html/convert-html-to-image": "PASS",
+    "html/convert-html-to-word": "PASS",
+    "note/convert-one-to-image": "PASS",
+    "note/convert-one-to-word": "PASS (HTML output — SaveFormat.Docx not in API)",
+    "ocr/image-text-finder": "PASS",
+    "ocr/invoice-to-text": "PASS",
+    "page/convert-eps-to-pdf": "PASS",
+    "psd/convert-psd-to-pdf": "PASS",
+    "psd/psd-image-converter": "PASS",
+    "svg/vectorizer": "PASS",
+    "tasks/convert-mpp-to-excel": "PASS",
+    "tasks/convert-mpp-to-html": "PASS",
+    "tasks/convert-mpp-to-image": "PASS",
+    "tex/convert-latex-to-pdf": "PASS (XPS output — PdfDevice bug in 24.12.0)"
+  },
+  "registry_status": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 44,
+    "READY_FOR_TRANSFORMATION": 4,
+    "CODE_HARVESTED": 8,
+    "NEEDS_MANUAL_MAPPING": 16,
+    "TOTAL": 72
+  },
+  "publication_classification": "44/44 PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "wave6_pass_rate": "14/14",
+  "new_modules": [
+    "src/plugin_examples/fixture_factory/anti_overclaiming_validators.py (16 rules)",
+    "tests/unit/test_anti_overclaiming_validators.py (23 tests)",
+    "tests/unit/test_fixture_factory.py (4 new Wave 6 generator tests)"
+  ],
+  "fixture_factory_additions": [
+    "generate_eps_fixture()",
+    "generate_psd_fixture()",
+    "generate_rich_geojson_fixture()",
+    "generate_latex_fixture()"
+  ],
+  "api_discoveries": {
+    "Aspose.PSD 24.12.0": "Requires Aspose.Drawing 24.12.0 as explicit dep (nuspec says 23.7.0 — packaging bug)",
+    "Aspose.Note SaveFormat": "No Word/Docx variant; SaveFormat enum: Bmp,Gif,Html,Jpeg,One,Pdf,Png,Tiff only",
+    "Aspose.Tasks SaveFileFormat.Png": "PascalCase, not PNG (CS0117 error with uppercase)",
+    "Aspose.TeX PdfDevice": "InvalidCastException (XpsSaveOptions to PdfSaveOptions) in 24.12.0; use XpsDevice",
+    "EPS C# string": "Use string[] + string.Join to avoid CS1010 newline-in-constant errors",
+    "Aspose.SVG ImageVectorizerConfiguration.LineWidth": "Must be float (1.0f not 1.0 — CS0664)"
+  }
+}

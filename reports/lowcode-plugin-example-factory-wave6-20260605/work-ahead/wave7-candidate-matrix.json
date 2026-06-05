@@ -1,0 +1,118 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "purpose": "Wave 7 candidate matrix and publication packet outline",
+  "wave7_candidates": [
+    {
+      "key": "ocr/photo-to-text",
+      "status": "READY_FOR_TRANSFORMATION",
+      "confidence": "HIGH",
+      "pattern": "ocr_template — same AsposeOcr + OcrInput pattern",
+      "blocker": null
+    },
+    {
+      "key": "ocr/table-to-text",
+      "status": "READY_FOR_TRANSFORMATION",
+      "confidence": "HIGH",
+      "pattern": "ocr_template — same pattern, table recognition context",
+      "blocker": null
+    },
+    {
+      "key": "psd/animation-maker",
+      "status": "READY_FOR_TRANSFORMATION",
+      "confidence": "LOW",
+      "pattern": "psd_template — PsdImage + TimeLine manipulation",
+      "blocker": "Requires Aspose.Drawing resolved (see Wave 6 PSD dependency fix)"
+    },
+    {
+      "key": "psd/photo-processor",
+      "status": "READY_FOR_TRANSFORMATION",
+      "confidence": "MEDIUM",
+      "pattern": "psd_template — batch PsdImage processing",
+      "blocker": "Requires Aspose.Drawing resolved"
+    },
+    {
+      "key": "gis/convert-gis-data",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "confidence": "MEDIUM",
+      "pattern": "VectorLayer.Convert() — GeoJSON to Shapefile conversion",
+      "blocker": null,
+      "unblock_strategy": "VectorLayer.Convert(inputLayer, Drivers.Shapefile, outputPath)"
+    },
+    {
+      "key": "font/render-text-with-font",
+      "status": "CODE_HARVESTED",
+      "confidence": "MEDIUM",
+      "pattern": "FontDefinition + Aspose.Font programmatic font loading",
+      "blocker": "Requires font fixture (programmatic TTF creation is complex)"
+    },
+    {
+      "key": "threed/convert-3d-model",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "confidence": "MEDIUM",
+      "pattern": "Scene.Open(objPath) + Scene.Save(fbxPath)",
+      "blocker": null,
+      "unblock_strategy": "generate_obj_fixture() already available"
+    },
+    {
+      "key": "svg/convert-svg-to-png",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "confidence": "HIGH",
+      "pattern": "svg_template — Converter.ConvertSVG + ImageSaveOptions(PNG)",
+      "blocker": null
+    },
+    {
+      "key": "svg/convert-svg-to-jpg",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "confidence": "HIGH",
+      "pattern": "svg_template — Converter.ConvertSVG + ImageSaveOptions(JPEG)",
+      "blocker": null
+    },
+    {
+      "key": "html/convert-html-to-xps",
+      "status": "CODE_HARVESTED",
+      "confidence": "HIGH",
+      "pattern": "html_template — Converter.ConvertHTML + XpsSaveOptions",
+      "blocker": null
+    },
+    {
+      "key": "finance/parse-xbrl",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "confidence": "LOW",
+      "pattern": "Unknown — requires XBRL parsing API research",
+      "blocker": "API not confirmed"
+    }
+  ],
+  "blocked_forever": [
+    {
+      "key": "omr/recognize-omr",
+      "reason": "Requires real .omr template file that cannot be generated programmatically"
+    },
+    {
+      "key": "cad (all 5)",
+      "reason": "DWG/DXF cannot be generated from first principles; Aspose.CAD programmatic creation not confirmed"
+    }
+  ],
+  "publication_packet_outline": {
+    "title": "Aspose Non-LowCode Plugin Examples — Publication Packet",
+    "wave_coverage": "Wave 1-6: 30+ packages across 15+ families",
+    "approval_gate": "PLUGIN_EXAMPLES_WAVE6_PUBLISH_APPROVAL",
+    "target_families": [
+      "ocr", "note", "tasks", "html", "page", "svg", "tex",
+      "drawing", "gis", "finance", "zip", "psd"
+    ],
+    "publication_criteria": [
+      "Package status = TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "0 real invariant violations",
+      "output-validation.json verdict = PASS",
+      "source-provenance.json valid",
+      "AOC checks pass (0 ERROR violations)"
+    ],
+    "wave6_publication_ready": 11,
+    "wave6_not_ready": 3,
+    "cumulative_publication_ready_estimate": 38
+  },
+  "wave7_target_count": 11,
+  "high_confidence_count": 4,
+  "requires_approval_before_publish": true
+}

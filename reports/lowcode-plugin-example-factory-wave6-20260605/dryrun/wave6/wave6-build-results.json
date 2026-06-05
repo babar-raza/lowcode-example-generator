@@ -1,0 +1,204 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "total": 14,
+  "pass": 14,
+  "fail": 0,
+  "verdict": "WAVE6_PASS",
+  "results": [
+    {
+      "package_key": "html/convert-html-to-image",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\html\\convert-html-to-image",
+      "output_files": [
+        {
+          "path": "output/output.jpg",
+          "size": 223704
+        }
+      ]
+    },
+    {
+      "package_key": "html/convert-html-to-word",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\html\\convert-html-to-word",
+      "output_files": [
+        {
+          "path": "output/output.docx",
+          "size": 4466
+        }
+      ]
+    },
+    {
+      "package_key": "note/convert-one-to-image",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\note\\convert-one-to-image",
+      "output_files": [
+        {
+          "path": "output/output.png",
+          "size": 6334
+        }
+      ]
+    },
+    {
+      "package_key": "note/convert-one-to-word",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\note\\convert-one-to-word",
+      "output_files": [
+        {
+          "path": "output/output.html",
+          "size": 920
+        }
+      ]
+    },
+    {
+      "package_key": "ocr/image-text-finder",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\ocr\\image-text-finder",
+      "output_files": [
+        {
+          "path": "output/found-text.txt",
+          "size": 110
+        }
+      ]
+    },
+    {
+      "package_key": "ocr/invoice-to-text",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\ocr\\invoice-to-text",
+      "output_files": [
+        {
+          "path": "output/invoice-data.txt",
+          "size": 112
+        }
+      ]
+    },
+    {
+      "package_key": "page/convert-eps-to-pdf",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\page\\convert-eps-to-pdf",
+      "output_files": [
+        {
+          "path": "output/output.pdf",
+          "size": 7002
+        }
+      ]
+    },
+    {
+      "package_key": "psd/convert-psd-to-pdf",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\psd\\convert-psd-to-pdf",
+      "output_files": [
+        {
+          "path": "output/output.pdf",
+          "size": 2215
+        }
+      ]
+    },
+    {
+      "package_key": "psd/psd-image-converter",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\psd\\psd-image-converter",
+      "output_files": [
+        {
+          "path": "output/output.jpg",
+          "size": 7180
+        }
+      ]
+    },
+    {
+      "package_key": "svg/vectorizer",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\svg\\vectorizer",
+      "output_files": [
+        {
+          "path": "output/output.svg",
+          "size": 438
+        }
+      ]
+    },
+    {
+      "package_key": "tasks/convert-mpp-to-excel",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\tasks\\convert-mpp-to-excel",
+      "output_files": [
+        {
+          "path": "output/project.xlsx",
+          "size": 5250
+        }
+      ]
+    },
+    {
+      "package_key": "tasks/convert-mpp-to-html",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\tasks\\convert-mpp-to-html",
+      "output_files": [
+        {
+          "path": "output/project_1.html",
+          "size": 4966315
+        },
+        {
+          "path": "output/project_2.html",
+          "size": 3565598
+        },
+        {
+          "path": "output/project_3.html",
+          "size": 3565827
+        },
+        {
+          "path": "output/project_4.html",
+          "size": 3565676
+        },
+        {
+          "path": "output/project_5.html",
+          "size": 3565265
+        },
+        {
+          "path": "output/project_6.html",
+          "size": 3565264
+        }
+      ]
+    },
+    {
+      "package_key": "tasks/convert-mpp-to-image",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\tasks\\convert-mpp-to-image",
+      "output_files": [
+        {
+          "path": "output/project.png",
+          "size": 30602
+        },
+        {
+          "path": "output/project_2.png",
+          "size": 30828
+        },
+        {
+          "path": "output/project_3.png",
+          "size": 30818
+        }
+      ]
+    },
+    {
+      "package_key": "tex/convert-latex-to-pdf",
+      "status": "PASS",
+      "pkg_dir": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\tex\\convert-latex-to-pdf",
+      "output_files": [
+        {
+          "path": "output/job.aux",
+          "size": 34
+        },
+        {
+          "path": "output/job.log",
+          "size": 1746
+        },
+        {
+          "path": "output/job.trm",
+          "size": 401
+        },
+        {
+          "path": "output/job.xps",
+          "size": 684314
+        }
+      ]
+    }
+  ]
+}

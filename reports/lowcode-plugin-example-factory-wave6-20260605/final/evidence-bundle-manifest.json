@@ -1,0 +1,17 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "date": "2026-06-05",
+  "bundle_path": ".local/evidence-bundles/lowcode-plugin-example-factory-wave6-20260605.zip",
+  "sha256": "cd0ef40a5ed9e374ccd49158553f9434aaf6f364288d6daa11c957ff6b8f79af",
+  "size_bytes": 11680792,
+  "entry_count": 169,
+  "test_results": {
+    "passed": 3433,
+    "skipped": 18,
+    "failed": 0,
+    "duration_seconds": 339.71,
+    "baseline_wave5": 3389,
+    "delta": "+44"
+  },
+  "verdict": "SPRINT_COMPLETE"
+}

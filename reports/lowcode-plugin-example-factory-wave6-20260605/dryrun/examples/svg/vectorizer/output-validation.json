@@ -1,0 +1,12 @@
+{
+  "package_key": "svg/vectorizer",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/output.svg",
+      "size": 438
+    }
+  ]
+}

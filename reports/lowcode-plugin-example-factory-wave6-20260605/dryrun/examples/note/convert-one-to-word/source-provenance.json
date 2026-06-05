@@ -1,0 +1,12 @@
+{
+  "family": "note",
+  "plugin_slug": "convert-one-to-word",
+  "nuget_package": "Aspose.Note",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/note/convert-onenote-to-word/",
+  "fixture_strategy": "programmatic",
+  "api_note": "SaveFormat.Docx not available in 24.12.0; using HTML (Word-compatible)",
+  "fixture_source": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/_repair_wave6_packages.py"
+}

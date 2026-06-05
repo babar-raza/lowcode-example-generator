@@ -51,7 +51,7 @@ plugins:
 - plugin_slug: convert-mpp-to-excel
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-excel
   page_hash: 04409e41e63edc00
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -75,10 +75,18 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExXlsxOptions.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-excel
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/tasks/mpp-to-excel/
 - plugin_slug: convert-mpp-to-html
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-html
   page_hash: 224b5bdf76853c84
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -100,10 +108,18 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExHtmlSaveOptions.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-html
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/tasks/mpp-to-html/
 - plugin_slug: convert-mpp-to-image
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-image
   page_hash: 59a05725ee005f68
-  registry_status: CODE_HARVESTED
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -127,6 +143,14 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExIImageSavingCallback.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
+      package built and validated. 14/14 PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  canonical_url: https://products.aspose.net/tasks/mpp-to-png/
 - plugin_slug: read-project-data
   plugin_url: https://products.aspose.net/tasks/net/read-project-data
   page_hash: 3fc4bed1f635537e

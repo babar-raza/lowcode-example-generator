@@ -389,6 +389,184 @@ def generate_zip_fixture(dest: Path, entries: Optional[list] = None) -> FixtureR
     )
 
 
+def generate_eps_fixture(dest: Optional[Path] = None, title: str = "Aspose.Page EPS Demo") -> FixtureResult:
+    """Generate a minimal valid EPS (Encapsulated PostScript) file."""
+    eps_content = (
+        f"%!PS-Adobe-3.0 EPSF-3.0\n"
+        f"%%BoundingBox: 0 0 200 200\n"
+        f"%%Title: {title}\n"
+        f"%%Creator: lowcode-example-factory\n"
+        f"%%CreationDate: 2026-06-05\n"
+        f"%%EndComments\n"
+        f"% Draw border\n"
+        f"0.5 setlinewidth\n"
+        f"10 10 moveto\n"
+        f"190 10 lineto\n"
+        f"190 190 lineto\n"
+        f"10 190 lineto\n"
+        f"closepath stroke\n"
+        f"% Title text\n"
+        f"/Helvetica findfont 14 scalefont setfont\n"
+        f"20 160 moveto\n"
+        f"({title}) show\n"
+        f"% Description\n"
+        f"/Helvetica findfont 10 scalefont setfont\n"
+        f"20 130 moveto\n"
+        f"(EPS fixture generated for dry-run testing) show\n"
+        f"20 110 moveto\n"
+        f"(Aspose.Page for .NET) show\n"
+        f"%%EOF\n"
+    )
+    eps_bytes = eps_content.encode("ascii")
+    if dest is not None:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(eps_bytes)
+    return FixtureResult(
+        fixture_type="EPS",
+        path=dest,
+        size_bytes=len(eps_bytes),
+        strategy="inline",
+        description=f"Minimal EPS 200x200 with text and border: {title}",
+        provenance={"source": "inline_template", "bounding_box": "0 0 200 200", "format": "EPS-3.0"},
+    )
+
+
+def generate_psd_fixture(dest: Optional[Path] = None, width: int = 8, height: int = 8) -> FixtureResult:
+    """Generate a minimal valid PSD (Photoshop Document) file from binary spec.
+
+    Structure: Header + Color Mode Data (empty) + Image Resources (empty)
+    + Layer/Mask Info (empty) + Image Data (raw, white pixels).
+    """
+    # Header (26 bytes)
+    magic = b"8BPS"
+    version = struct.pack(">H", 1)          # version 1 = PSD
+    reserved = b"\x00" * 6
+    channels = struct.pack(">H", 3)         # 3 channels = RGB
+    h_bytes = struct.pack(">I", height)
+    w_bytes = struct.pack(">I", width)
+    bit_depth = struct.pack(">H", 8)        # 8-bit per channel
+    color_mode = struct.pack(">H", 3)       # 3 = RGB
+    header = magic + version + reserved + channels + h_bytes + w_bytes + bit_depth + color_mode
+
+    color_mode_data = struct.pack(">I", 0)  # empty section
+    image_resources = struct.pack(">I", 0)  # empty section
+    layer_mask_info = struct.pack(">I", 0)  # empty section
+
+    # Image data: compression=0 (raw), then all channel data in planar format
+    compression = struct.pack(">H", 0)
+    # White pixels: 0xFF for every pixel in every channel
+    pixels_per_channel = width * height
+    channel_data = bytes([0xFF]) * pixels_per_channel
+    image_data = compression + channel_data * 3  # R, G, B channels
+
+    psd_bytes = header + color_mode_data + image_resources + layer_mask_info + image_data
+
+    if dest is not None:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(psd_bytes)
+    return FixtureResult(
+        fixture_type="PSD",
+        path=dest,
+        size_bytes=len(psd_bytes),
+        strategy="programmatic",
+        description=f"Minimal PSD {width}x{height} RGB white, binary-constructed",
+        provenance={"width": width, "height": height, "channels": 3, "bit_depth": 8, "color_mode": "RGB"},
+    )
+
+
+def generate_rich_geojson_fixture(dest: Optional[Path] = None) -> FixtureResult:
+    """Generate a richer GeoJSON FeatureCollection with 5 features and attributes.
+
+    Includes Point, LineString, Polygon, MultiPoint, and MultiPolygon geometry types.
+    """
+    import json as _json
+    feature_collection = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [-122.4194, 37.7749]},
+                "properties": {"name": "San Francisco", "population": 873965, "country": "USA"},
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[-122.4194, 37.7749], [-118.2437, 34.0522], [-87.6298, 41.8781]],
+                },
+                "properties": {"name": "US Route", "distance_km": 3600, "type": "highway"},
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                        [-122.5, 37.7], [-122.3, 37.7], [-122.3, 37.9],
+                        [-122.5, 37.9], [-122.5, 37.7],
+                    ]],
+                },
+                "properties": {"name": "Bay Area Region", "area_km2": 400, "land_use": "urban"},
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "MultiPoint",
+                    "coordinates": [[-73.9857, 40.7484], [-0.1276, 51.5074], [2.3522, 48.8566]],
+                },
+                "properties": {"name": "World Cities", "category": "major_city"},
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                        [151.2093, -33.8688], [151.3, -33.8], [151.3, -33.9],
+                        [151.1, -33.95], [151.2093, -33.8688],
+                    ]],
+                },
+                "properties": {"name": "Sydney Metro", "area_km2": 200, "timezone": "AEST"},
+            },
+        ],
+    }
+    content = _json.dumps(feature_collection, indent=2).encode("utf-8")
+    if dest is not None:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(content)
+    return FixtureResult(
+        fixture_type="RICH_GEOJSON",
+        path=dest,
+        size_bytes=len(content),
+        strategy="inline",
+        description="Rich GeoJSON FeatureCollection: 5 features, mixed geometry types, attributes",
+        provenance={"features": 5, "geometry_types": ["Point", "LineString", "Polygon", "MultiPoint"], "has_attributes": True},
+    )
+
+
+def generate_latex_fixture(dest: Optional[Path] = None, title: str = "Aspose.TeX Demo") -> FixtureResult:
+    """Generate a minimal valid LaTeX source file (.tex)."""
+    latex_content = (
+        r"\documentclass{minimal}" + "\n"
+        r"\begin{document}" + "\n"
+        f"\\textbf{{{title}}}\\\\\n"
+        r"This document was compiled from LaTeX source" + "\n"
+        r"using Aspose.TeX for .NET.\\" + "\n"
+        r"Date: 2026-06-05\\" + "\n"
+        r"\end{document}" + "\n"
+    )
+    tex_bytes = latex_content.encode("utf-8")
+    if dest is not None:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(tex_bytes)
+    return FixtureResult(
+        fixture_type="LATEX",
+        path=dest,
+        size_bytes=len(tex_bytes),
+        strategy="inline",
+        description=f"Minimal LaTeX document: {title}",
+        provenance={"source": "inline_template", "document_class": "minimal"},
+    )
+
+
 # ── Internal PNG builder ─────────────────────────────────────────────────────
 
 def _png_chunk(chunk_type: bytes, data: bytes) -> bytes:

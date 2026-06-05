@@ -1,0 +1,52 @@
+family: finance
+package_id: Aspose.Finance
+github_repo: https://github.com/aspose-finance/Aspose.Finance-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+plugins:
+- plugin_slug: convert-xbrl
+  plugin_url: https://products.aspose.net/finance/net/convert-xbrl
+  page_hash: adc5e449572d1ed8
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - e023881c03af63f01e6d0c8236334b77
+  classes_used:
+  - XbrlDocument
+  - SaveOptions
+  github_links:
+  - https://raw.githubusercontent.com/aspose-finance/Aspose.Finance-for-.NET/master/CSharp/Conversion/ConvertXbrlToIXbrl.cs
+  next_action: Extract symbols from ConvertXbrlToIXbrl.cs and validate against DllReflector;
+    then advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/finance.md
+  - https://raw.githubusercontent.com/aspose-finance/Aspose.Finance-for-.NET/master/CSharp/Conversion/ConvertXbrlToIXbrl.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ConvertXbrlToIXbrl.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
+      Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  canonical_url: https://products.aspose.net/finance/convert-xbrl/
+- plugin_slug: parse-xbrl
+  plugin_url: https://products.aspose.net/finance/net/parse-xbrl
+  page_hash: dad9f1361828ca2a
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: NEEDS_MANUAL_MAPPING
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes: []
+  next_action: Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS);
+    fetch better example from GitHub
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/finance.md
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.

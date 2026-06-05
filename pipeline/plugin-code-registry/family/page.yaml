@@ -77,7 +77,7 @@ plugins:
   transformation_readiness_reason: Canonical URL confirmed; PsConverter.Process()
     with AddDataSource/AddSaveDataSource pattern confirmed on product page
   page_hash: 926675421dfbca20
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: DEDICATED_PLUGIN_CLASS
   code_hashes:
@@ -108,3 +108,7 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ClippingPS.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
+      Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.

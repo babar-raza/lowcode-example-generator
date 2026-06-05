@@ -281,3 +281,101 @@ class TestPackageInvariants:
         (pkg / "bin").mkdir()
         violations = check_package(pkg)
         assert any("INV-11" in v for v in violations)
+
+
+# ── Wave 5 fixture generator tests ───────────────────────────────────────────
+
+class TestWave5Generators:
+    def test_geojson_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_geojson_fixture
+        result = generate_geojson_fixture()
+        assert result.fixture_type == "GeoJSON"
+        assert result.size_bytes > 0
+        # Must be parseable JSON with correct structure
+        assert result.provenance["features"] == 2
+
+    def test_geojson_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_geojson_fixture
+        dest = tmpdir / "fixture.geojson"
+        result = generate_geojson_fixture(dest)
+        assert result.success
+        data = json.loads(dest.read_text())
+        assert data["type"] == "FeatureCollection"
+        assert len(data["features"]) == 2
+
+    def test_obj_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_obj_fixture
+        result = generate_obj_fixture()
+        assert result.fixture_type == "OBJ"
+        assert result.size_bytes > 0
+        assert result.provenance["vertices"] == 8
+
+    def test_obj_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_obj_fixture
+        dest = tmpdir / "model.obj"
+        result = generate_obj_fixture(dest)
+        assert result.success
+        content = dest.read_text()
+        assert content.startswith("# Minimal Wavefront OBJ")
+        assert content.count("v ") >= 8
+        assert content.count("f ") >= 6
+
+    def test_xbrl_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_xbrl_fixture
+        result = generate_xbrl_fixture()
+        assert result.fixture_type == "XBRL"
+        assert result.size_bytes > 0
+
+    def test_xbrl_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_xbrl_fixture
+        dest = tmpdir / "report.xbrl"
+        result = generate_xbrl_fixture(dest)
+        assert result.success
+        content = dest.read_text()
+        assert "FeatureCollection" not in content  # sanity
+        assert "<xbrl" in content or "xbrl" in content.lower()
+
+    def test_ps_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_ps_fixture
+        result = generate_ps_fixture(title="My Doc")
+        assert result.fixture_type == "PS"
+        assert result.size_bytes > 0
+
+    def test_ps_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_ps_fixture
+        dest = tmpdir / "doc.ps"
+        result = generate_ps_fixture(dest, title="Hello")
+        assert result.success
+        content = dest.read_text()
+        assert content.startswith("%!PS-Adobe-3.0")
+        assert "%%EOF" in content
+
+    def test_note_xml_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_note_xml_fixture
+        result = generate_note_xml_fixture()
+        assert result.fixture_type == "NOTE_XML"
+        assert result.size_bytes > 0
+
+    def test_note_xml_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_note_xml_fixture
+        dest = tmpdir / "note.xml"
+        result = generate_note_xml_fixture(dest, title="My Note")
+        assert result.success
+        content = dest.read_text()
+        assert "<Document" in content
+        assert "My Note" in content
+
+    def test_drawing_xml_inline(self):
+        from plugin_examples.fixture_factory.generators import generate_drawing_xml_fixture
+        result = generate_drawing_xml_fixture()
+        assert result.fixture_type == "DRAWING_XML"
+        assert result.size_bytes > 0
+
+    def test_drawing_xml_to_file(self, tmpdir):
+        from plugin_examples.fixture_factory.generators import generate_drawing_xml_fixture
+        dest = tmpdir / "drawing.xml"
+        result = generate_drawing_xml_fixture(dest)
+        assert result.success
+        content = dest.read_text()
+        assert "VisioDocument" in content
+        assert "Page-1" in content

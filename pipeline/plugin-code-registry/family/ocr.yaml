@@ -94,13 +94,13 @@ plugins:
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: scan-document
   plugin_url: https://products.aspose.net/ocr/net/scan-document
-  canonical_url: https://products.aspose.net/ocr/scanned-image-to-text/
+  canonical_url: https://products.aspose.net/ocr/scan-document/
   page_source_status: CANONICAL_URL_BEST_MATCH
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: Best-match canonical page /ocr/scanned-image-to-text/;
     same AsposeOcr + OcrInput + api.Recognize() pattern confirmed
   page_hash: 3ff7f5d06d923aea
-  registry_status: READY_FOR_TRANSFORMATION
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -123,6 +123,10 @@ plugins:
   - date: '2026-06-04'
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604.
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
+      Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
 - plugin_slug: image-text-finder
   plugin_url: https://products.aspose.net/ocr/image-text-finder/
   canonical_url: https://products.aspose.net/ocr/image-text-finder/

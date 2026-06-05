@@ -3,9 +3,9 @@ package_id: Aspose.Tasks
 github_repo: https://github.com/aspose-tasks/Aspose.Tasks-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
-- plugin_slug: convert-mpp-to-pdf
+- plugin_slug: project-to-pdf-converter
   canonical_plugin_slug: project-to-pdf-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-pdf
   canonical_url: https://products.aspose.net/tasks/project-to-pdf-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -47,12 +47,21 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/tasks/convert-mpp-to-pdf
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/tasks/convert-mpp-to-pdf
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-mpp-to-pdf'' -> ''project-to-pdf-converter''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/project-to-pdf-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
-- plugin_slug: convert-mpp-to-excel
+  legacy_aliases:
+  - convert-mpp-to-pdf
+  display_plugin_name: Project to PDF Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-mpp-to-pdf
+- plugin_slug: mpp-to-excel
   canonical_plugin_slug: mpp-to-excel
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-excel
   page_hash: 04409e41e63edc00
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -83,10 +92,19 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-excel
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-mpp-to-excel'' -> ''mpp-to-excel''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/mpp-to-excel
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-excel/
+  legacy_aliases:
+  - convert-mpp-to-excel
+  display_plugin_name: MPP to Excel Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-mpp-to-excel
 - plugin_slug: convert-mpp-to-html
   canonical_plugin_slug: mpp-to-html
   identity_status: SLUG_ALIAS_REQUIRED

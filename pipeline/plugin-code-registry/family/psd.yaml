@@ -185,6 +185,7 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/animation-maker
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: PSD Animation Maker for .NET
 - plugin_slug: photo-processor
   canonical_plugin_slug: photo-processor
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -228,3 +229,4 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/photo-processor
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: PSD Photo Processor for .NET

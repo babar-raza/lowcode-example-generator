@@ -33,6 +33,7 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   canonical_url: https://products.aspose.net/drawing/net/convert-drawing/
+  display_plugin_name: Drawing Converter for .NET
 - plugin_slug: create-drawing
   canonical_plugin_slug: create-drawing
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -63,3 +64,4 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   canonical_url: https://products.aspose.net/drawing/net/create-drawing/
+  display_plugin_name: Drawing Creator for .NET

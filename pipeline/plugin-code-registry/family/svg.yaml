@@ -48,6 +48,7 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/svg/svg-to-image-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: SVG to Image Converter for .NET
 - plugin_slug: convert-svg-to-png
   canonical_plugin_slug: svg-to-pdf-converter
   identity_status: SLUG_ALIAS_REQUIRED

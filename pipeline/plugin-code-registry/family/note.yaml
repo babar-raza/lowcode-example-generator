@@ -43,9 +43,9 @@ plugins:
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-one-to-pdf
   dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/note/convert-onenote-to-pdf
-- plugin_slug: convert-one-to-word
+- plugin_slug: convert-onenote-to-word
   canonical_plugin_slug: convert-onenote-to-word
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-word
   page_hash: 01e44912c61d9f2d
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -74,13 +74,22 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/note/convert-one-to-word
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-one-to-word'' -> ''convert-onenote-to-word''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-word
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/note/convert-onenote-to-word/
-- plugin_slug: convert-one-to-image
+  legacy_aliases:
+  - convert-one-to-word
+  display_plugin_name: OneNote to Word Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-one-to-word
+- plugin_slug: convert-onenote-to-image
   canonical_plugin_slug: convert-onenote-to-image
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-image
   page_hash: 42ff83ffec19bab4
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -111,7 +120,16 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/note/convert-one-to-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-one-to-image'' -> ''convert-onenote-to-image''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-image
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/note/convert-onenote-to-image/
+  legacy_aliases:
+  - convert-one-to-image
+  display_plugin_name: OneNote to Image Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-one-to-image

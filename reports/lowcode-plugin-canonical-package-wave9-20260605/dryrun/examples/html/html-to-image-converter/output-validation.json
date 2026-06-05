@@ -1,0 +1,16 @@
+{
+  "package_key": "html/html-to-image-converter",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/output.jpg",
+      "size": 223704
+    }
+  ],
+  "package": "html/html-to-image-converter",
+  "canonical_plugin_slug": "html-to-image-converter",
+  "migrated_from": "convert-html-to-image",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

@@ -1,0 +1,16 @@
+{
+  "package_key": "tasks/mpp-to-excel",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/project.xlsx",
+      "size": 5250
+    }
+  ],
+  "package": "tasks/mpp-to-excel",
+  "canonical_plugin_slug": "mpp-to-excel",
+  "migrated_from": "convert-mpp-to-excel",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

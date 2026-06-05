@@ -1,0 +1,84 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "total_migrations": 12,
+  "changes": [
+    "html: convert-html-to-word -> html-to-docx-converter",
+    "html: convert-html-to-image -> html-to-image-converter",
+    "imaging: compress-image -> image-compressor",
+    "imaging: crop-image -> image-cropper",
+    "imaging: filter-image -> image-filters",
+    "imaging: merge-images -> image-merger",
+    "imaging: watermark-image -> add-watermark",
+    "imaging: rotate-image -> image-rotator",
+    "note: convert-one-to-word -> convert-onenote-to-word",
+    "note: convert-one-to-image -> convert-onenote-to-image",
+    "tasks: convert-mpp-to-pdf -> project-to-pdf-converter",
+    "tasks: convert-mpp-to-excel -> mpp-to-excel"
+  ],
+  "before_by_family": {
+    "html": [
+      "html-to-pdf-converter",
+      "convert-html-to-word",
+      "convert-html-to-image",
+      "convert-html-to-xps",
+      "convert-html-to-markdown",
+      "merge-html"
+    ],
+    "imaging": [
+      "image-converter",
+      "image-resizer",
+      "compress-image",
+      "crop-image",
+      "filter-image",
+      "merge-images",
+      "watermark-image",
+      "rotate-image"
+    ],
+    "note": [
+      "convert-onenote-to-pdf",
+      "convert-one-to-word",
+      "convert-one-to-image"
+    ],
+    "tasks": [
+      "convert-mpp-to-pdf",
+      "convert-mpp-to-excel",
+      "convert-mpp-to-html",
+      "convert-mpp-to-image",
+      "read-project-data"
+    ]
+  },
+  "after_by_family": {
+    "html": [
+      "html-to-pdf-converter",
+      "html-to-docx-converter",
+      "html-to-image-converter",
+      "convert-html-to-xps",
+      "convert-html-to-markdown",
+      "merge-html"
+    ],
+    "imaging": [
+      "image-converter",
+      "image-resizer",
+      "image-compressor",
+      "image-cropper",
+      "image-filters",
+      "image-merger",
+      "add-watermark",
+      "image-rotator"
+    ],
+    "note": [
+      "convert-onenote-to-pdf",
+      "convert-onenote-to-word",
+      "convert-onenote-to-image"
+    ],
+    "tasks": [
+      "project-to-pdf-converter",
+      "mpp-to-excel",
+      "convert-mpp-to-html",
+      "convert-mpp-to-image",
+      "read-project-data"
+    ]
+  },
+  "verdict": "WAVE9_MIGRATION_DONE"
+}

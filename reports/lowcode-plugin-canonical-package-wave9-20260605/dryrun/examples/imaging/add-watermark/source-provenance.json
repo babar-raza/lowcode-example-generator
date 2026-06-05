@@ -1,0 +1,24 @@
+{
+  "family": "imaging",
+  "plugin_slug": "add-watermark",
+  "canonical_url": "https://products.aspose.net/imaging/add-watermark/",
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "nuget_package": "Aspose.Imaging",
+  "nuget_version": "24.12.0",
+  "github_links": [
+    "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/AddDiagonalWatermarkToImage.cs"
+  ],
+  "code_hashes": [
+    "6fc0083c2f13041e56128a2046fc7d81"
+  ],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_plugin_slug": "add-watermark",
+  "display_plugin_name": "Add Watermark to Image for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "migrated_from": "watermark-image",
+  "legacy_example_slug": "watermark-image",
+  "generation_sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "migrated_at": "2026-06-05"
+}

@@ -107,9 +107,9 @@ plugins:
   display_plugin_name: Image Resizer for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: resize-image
-- plugin_slug: compress-image
+- plugin_slug: image-compressor
   canonical_plugin_slug: image-compressor
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/compress-image
   canonical_url: https://products.aspose.net/imaging/image-compressor/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -150,12 +150,21 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
       reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/compress-image
       built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/compress-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''compress-image'' -> ''image-compressor''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-compressor
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
-- plugin_slug: crop-image
+  legacy_aliases:
+  - compress-image
+  display_plugin_name: Image Compressor for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: compress-image
+- plugin_slug: image-cropper
   canonical_plugin_slug: image-cropper
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/crop-image
   canonical_url: https://products.aspose.net/imaging/image-cropper/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -163,7 +172,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; Image.Crop(Rectangle) pattern confirmed
   page_hash: null
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-cropper
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -197,9 +206,18 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image
       built and ran PASS.
-- plugin_slug: filter-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''crop-image'' -> ''image-cropper''.'
+  legacy_aliases:
+  - crop-image
+  display_plugin_name: Image Cropper for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: crop-image
+- plugin_slug: image-filters
   canonical_plugin_slug: image-filters
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/filter-image
   canonical_url: https://products.aspose.net/imaging/image-filters/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -208,7 +226,7 @@ plugins:
     pattern confirmed
   page_hash: null
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-filters
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -242,9 +260,18 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image
       built and ran PASS.
-- plugin_slug: merge-images
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''filter-image'' -> ''image-filters''.'
+  legacy_aliases:
+  - filter-image
+  display_plugin_name: Image Filters for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: filter-image
+- plugin_slug: image-merger
   canonical_plugin_slug: image-merger
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/merge-images
   canonical_url: https://products.aspose.net/imaging/image-merger/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -253,7 +280,7 @@ plugins:
     for merge
   page_hash: null
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-merger
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -288,9 +315,18 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images
       built and ran PASS.
-- plugin_slug: watermark-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''merge-images'' -> ''image-merger''.'
+  legacy_aliases:
+  - merge-images
+  display_plugin_name: Image Merger for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: merge-images
+- plugin_slug: add-watermark
   canonical_plugin_slug: add-watermark
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/watermark-image
   canonical_url: https://products.aspose.net/imaging/add-watermark/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -299,7 +335,7 @@ plugins:
     pattern confirmed
   page_hash: null
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/add-watermark
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -336,9 +372,18 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image
       built and ran PASS.
-- plugin_slug: rotate-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''watermark-image'' -> ''add-watermark''.'
+  legacy_aliases:
+  - watermark-image
+  display_plugin_name: Add Watermark to Image for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: watermark-image
+- plugin_slug: image-rotator
   canonical_plugin_slug: image-rotator
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/imaging/net/rotate-image
   canonical_url: https://products.aspose.net/imaging/image-rotator/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -347,7 +392,7 @@ plugins:
     confirmed
   page_hash: null
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/rotate-image
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-rotator
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -382,3 +427,12 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/rotate-image
       built and ran PASS.
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''rotate-image'' -> ''image-rotator''.'
+  legacy_aliases:
+  - rotate-image
+  display_plugin_name: Image Rotator for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: rotate-image

@@ -1,0 +1,120 @@
+ M pipeline/configs/families/barcode.yml
+ M pipeline/configs/families/imaging.yml
+ M pipeline/configs/families/zip.yml
+ M pipeline/plugin-code-registry/family/drawing.yaml
+ M pipeline/plugin-code-registry/family/finance.yaml
+ M pipeline/plugin-code-registry/family/html.yaml
+ M pipeline/plugin-code-registry/family/imaging.yaml
+ M pipeline/plugin-code-registry/family/note.yaml
+ M pipeline/plugin-code-registry/family/ocr.yaml
+ M pipeline/plugin-code-registry/family/psd.yaml
+ M pipeline/plugin-code-registry/family/svg.yaml
+ M pipeline/plugin-code-registry/family/tasks.yaml
+ M pipeline/plugin-code-registry/family/tex.yaml
+ M pipeline/plugin-code-registry/family/zip.yaml
+ M pipeline/schemas/family-config.schema.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/coordinator/lane-ledger.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/sprint-closeout.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/taskcards/taskcards.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/html/html-to-pdf-converter/output-validation.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/imaging/image-converter/output-validation.json
+ M reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/note/convert-onenote-to-pdf/package-manifest.json
+ M reports/shareability-audit-20260603/verification/pytest-stdout.txt
+ M skills/canonical-plugin-identity-and-aliasing.md
+ M src/plugin_examples/commands/__init__.py
+ M src/plugin_examples/family_config/loader.py
+ M src/plugin_examples/family_config/models.py
+ M src/plugin_examples/runner.py
+ M workspace/pr-dry-run/cells-controlled-pilot/README.md
+ M workspace/pr-dry-run/words-controlled-pilot/README.md
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? "Exit\357\200\272 "
+?? echo
+?? fallback_candidates.json
+?? input1.pdf
+?? input1.pptx
+?? input2.pdf
+?? input2.pptx
+?? input_v1.docx
+?? input_v2.docx
+?? pipeline/plugin-capability-registry/
+?? pipeline/plugin-code-registry/README.md
+?? pipeline/plugin-code-registry/registry-index.json
+?? pipeline/plugin-code-registry/schema/
+?? pipeline/schemas/ai-suggestion-schema.json
+?? pipeline/schemas/plugin-capability-registry-schema.json
+?? reports/lowcode-final-publication-20260601/
+?? reports/lowcode-final-verify-20260603/
+?? reports/lowcode-merge-sprint-20260602/
+?? reports/lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/
+?? reports/lowcode-non-lowcode-fallback-implementation-20260604/
+?? reports/lowcode-non-lowcode-plugin-universe-20260604/
+?? reports/lowcode-plugin-canonical-package-wave9-20260605/
+?? reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/html/html-to-pdf-converter/package-manifest.json
+?? reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/imaging/image-converter/package-manifest.json
+?? reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/imaging/image-resizer/package-manifest.json
+?? reports/lowcode-plugin-code-registry-20260604/
+?? reports/lowcode-plugin-code-registry-reconciliation-20260604/
+?? reports/lowcode-plugin-example-factory-closeout-wave5-20260605/
+?? reports/lowcode-plugin-example-factory-parallel-wave-20260605/
+?? reports/lowcode-plugin-example-factory-wave-20260605/
+?? reports/lowcode-plugin-registry-expansion-20260604/
+?? reports/lowcode-post-pub-monitor-20260603/
+?? reports/lowcode-post-pub-normalize-20260603/
+?? reports/lowcode-post-pub-patrol-20260603/
+?? reports/lowcode-postmerge-verify-20260602/
+?? reports/lowcode-pub-proof-repair-20260601/
+?? reports/lowcode-system-repair-20260601/
+?? reports/lowcode-true-closure-20260531/
+?? scripts/_advance_registry_status.py
+?? scripts/_fix_imaging_programs.py
+?? scripts/_fix_tex_program.py
+?? scripts/_generate_wave4_packages.py
+?? scripts/_repair_yaml_files.py
+?? scripts/_run_wave_a_build.py
+?? scripts/batch_reflect.py
+?? scripts/build_catalog.py
+?? scripts/build_source_map.py
+?? scripts/generate_registry.py
+?? scripts/generate_wave_a_packages.py
+?? scripts/harvest_plugin_code.py
+?? scripts/nuget_availability.py
+?? skills/non-lowcode-family-manual-analysis.md
+?? skills/plugin-code-registry-authoring.md
+?? skills/plugin-code-to-example-transformation.md
+?? skills/plugin-source-code-harvest.md
+?? skills/products-plugin-page-harvest.md
+?? src/plugin_examples/ai_acceleration/
+?? src/plugin_examples/commands/catalog_discover.py
+?? src/plugin_examples/evidence_validator/rules/non_lowcode.py
+?? src/plugin_examples/fixture_factory/closeout_consistency_validators.py
+?? src/plugin_examples/fixture_factory/full_package_proof_validator.py
+?? src/plugin_examples/plugin_detector/heuristic_matcher.py
+?? src/plugin_examples/probe_generator/
+?? src/plugin_examples/website_catalog/
+?? src/workspace/
+?? template.docx
+?? test-cert.pfx
+?? tests/integration/test_runner_fallback_integration.py
+?? tests/unit/test_ai_suggestion_schema.py
+?? tests/unit/test_barcode_family_onboarding.py
+?? tests/unit/test_capability_registry_schema.py
+?? tests/unit/test_closeout_consistency_validators.py
+?? tests/unit/test_family_config_fallback_strategy.py
+?? tests/unit/test_full_package_proof_validator.py
+?? tests/unit/test_heuristic_matcher.py
+?? tests/unit/test_imaging_family_onboarding.py
+?? tests/unit/test_non_lowcode_validators.py
+?? tests/unit/test_probe_generator.py
+?? tests/unit/test_website_catalog_crawler.py
+42f4de6 feat(canonical-primary): Wave 8 sprint — canonical-primary registry + CPV validators
+699dcc0 feat(canonical-identity): Wave 7 sprint — canonical plugin identity + PIV validators
+df667d8 feat(plugin-factory): Wave 6 examples + fixture factory + AOC validators
+754452c feat(plugin-factory): Wave 5 examples + fixture factory Wave 5 generators + closeout repair
+7fd7663 feat(plugin-factory): Wave 4 examples + fixture factory + validator hardening

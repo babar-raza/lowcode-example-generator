@@ -1,0 +1,186 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "checks_total": 29,
+  "checks_pass": 29,
+  "checks_fail": 0,
+  "checks_warn": 0,
+  "verdict": "IV_PASS",
+  "errors": [],
+  "checks": [
+    {
+      "check": "IV-01: Wave8 lane-ledger all lanes COMPLETE",
+      "status": "PASS",
+      "detail": "pending=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-02: Wave8 taskcards all COMPLETE",
+      "status": "PASS",
+      "detail": "pending=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-03: Wave8 evidence_bundle not PENDING",
+      "status": "PASS",
+      "detail": "bundle_objective=",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-04: Wave8 packages have package-manifest.json",
+      "status": "PASS",
+      "detail": "missing=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-05: Wave8 packages output-validation PASS",
+      "status": "PASS",
+      "detail": "fail=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-06: canonical_primary_entries = 33",
+      "status": "PASS",
+      "detail": "actual=33",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-07: 12 Wave9 entries are CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "not_verified=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-08: Wave9 dryrun packages all exist",
+      "status": "PASS",
+      "detail": "missing=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-09: Wave9 packages have Program.cs",
+      "status": "PASS",
+      "detail": "missing_cs=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-10: Wave9 packages output-validation PASS",
+      "status": "PASS",
+      "detail": "not_pass=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-11: All CANONICAL_IDENTITY_VERIFIED have display_plugin_name",
+      "status": "PASS",
+      "detail": "missing=[]",
+      "severity": "WARNING"
+    },
+    {
+      "check": "IV-12: FPP validator module exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-13: CCV validator module exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-14: FPP test file exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-15: CCV test file exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-16: Publication matrix v2 exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-17: Publication matrix has 16 PUBLICATION_READY",
+      "status": "PASS",
+      "detail": "actual=16",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-18: Protected files unchanged",
+      "status": "PASS",
+      "detail": "changed=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-19: Wave9 lanes 0-I all COMPLETE",
+      "status": "PASS",
+      "detail": "not_complete=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-20: Wave9 taskcards TC-00..TC-0I all COMPLETE",
+      "status": "PASS",
+      "detail": "not_complete=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-21: FPP test log exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-22: CCV test log exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-23: Wave9 build-results 12 BUILT",
+      "status": "PASS",
+      "detail": "actual=12",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-24: Wave8 state verification doc exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-25: canonical-package-ledger.json exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-26: wave10-next-queue.json exists",
+      "status": "PASS",
+      "detail": "",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-27: Wave9 packages have source-provenance.json",
+      "status": "PASS",
+      "detail": "missing=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-28: Wave9 packages have package-manifest.json",
+      "status": "PASS",
+      "detail": "missing=[]",
+      "severity": "ERROR"
+    },
+    {
+      "check": "IV-29: No legacy aliases in PUBLICATION_READY matrix",
+      "status": "PASS",
+      "detail": "found=[]",
+      "severity": "ERROR"
+    }
+  ]
+}

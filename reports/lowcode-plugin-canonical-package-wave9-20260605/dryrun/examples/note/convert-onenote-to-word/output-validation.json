@@ -1,0 +1,16 @@
+{
+  "package_key": "note/convert-onenote-to-word",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/output.html",
+      "size": 920
+    }
+  ],
+  "package": "note/convert-onenote-to-word",
+  "canonical_plugin_slug": "convert-onenote-to-word",
+  "migrated_from": "convert-one-to-word",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

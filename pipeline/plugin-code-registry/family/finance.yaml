@@ -34,6 +34,7 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   canonical_url: https://products.aspose.net/finance/convert-xbrl/
+  display_plugin_name: XBRL Converter for .NET
 - plugin_slug: parse-xbrl
   canonical_plugin_slug: parse-xbrl
   identity_status: MISSING_CANONICAL_URL

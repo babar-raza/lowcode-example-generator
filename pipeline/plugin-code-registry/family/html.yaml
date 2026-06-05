@@ -64,9 +64,9 @@ plugins:
   display_plugin_name: HTML to PDF Converter for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-html-to-pdf
-- plugin_slug: convert-html-to-word
+- plugin_slug: html-to-docx-converter
   canonical_plugin_slug: html-to-docx-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-word
   page_hash: 04566ec714400b34
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -105,13 +105,22 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-word
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-html-to-word'' -> ''html-to-docx-converter''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-docx-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/html/html-to-docx-converter/
-- plugin_slug: convert-html-to-image
+  legacy_aliases:
+  - convert-html-to-word
+  display_plugin_name: HTML to DOCX Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-html-to-word
+- plugin_slug: html-to-image-converter
   canonical_plugin_slug: html-to-image-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-image
   page_hash: a9b3cc7d51950bbe
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -144,10 +153,19 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-image
+  - date: '2026-06-05'
+    status: CANONICAL_PRIMARY_MIGRATED
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
+      canonical migration: ''convert-html-to-image'' -> ''html-to-image-converter''.'
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-image-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/html/html-to-image-converter/
+  legacy_aliases:
+  - convert-html-to-image
+  display_plugin_name: HTML to Image Converter for .NET
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-html-to-image
 - plugin_slug: convert-html-to-xps
   canonical_plugin_slug: convert-html-to-xps
   identity_status: MISSING_CANONICAL_URL

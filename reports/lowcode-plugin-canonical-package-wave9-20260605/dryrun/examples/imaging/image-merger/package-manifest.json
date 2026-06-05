@@ -1,0 +1,20 @@
+{
+  "package_key": "imaging/image-merger",
+  "family": "imaging",
+  "plugin_slug": "image-merger",
+  "canonical_plugin_slug": "image-merger",
+  "canonical_url": "https://products.aspose.net/imaging/image-merger/",
+  "display_plugin_name": "Image Merger for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "nuget_package": "Aspose.Imaging",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "MIGRATED_FULL_PACKAGE",
+  "output_files": [
+    "merged.png",
+    "src1.bmp",
+    "src2.bmp"
+  ]
+}

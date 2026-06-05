@@ -36,17 +36,17 @@
     }
   },
   "lanes": [
-    {"lane": "0", "owner": "coordinator", "status": "IN_PROGRESS", "purpose": "Coordinator preflight + governance"},
-    {"lane": "A", "owner": "wave7-closeout", "status": "PENDING", "purpose": "Wave 7 closeout repair + verification"},
-    {"lane": "B", "owner": "registry-migration", "status": "PENDING", "purpose": "Canonical-primary registry migration"},
-    {"lane": "C", "owner": "example-migration", "status": "PENDING", "purpose": "Example path migration + alias compatibility"},
-    {"lane": "D", "owner": "tooling", "status": "PENDING", "purpose": "Factory tooling — canonical-first generation"},
-    {"lane": "E", "owner": "validators", "status": "PENDING", "purpose": "Validators — canonical-primary invariants"},
-    {"lane": "F", "owner": "publication-readiness", "status": "PENDING", "purpose": "Publication readiness — unified matrix"},
-    {"lane": "G", "owner": "wave8", "status": "PENDING", "purpose": "Wave 8 advancement — verified canonical only"},
-    {"lane": "H", "owner": "state-docs-skills", "status": "PENDING", "purpose": "State/docs/skills/taskcard sync"},
-    {"lane": "I", "owner": "iv", "status": "PENDING", "purpose": "Independent verification + adversarial review"},
-    {"lane": "J", "owner": "final", "status": "PENDING", "purpose": "Tests + commit + evidence bundle + closeout"}
+    {"lane": "0", "owner": "coordinator", "status": "COMPLETE", "purpose": "Coordinator preflight + governance"},
+    {"lane": "A", "owner": "wave7-closeout", "status": "COMPLETE", "purpose": "Wave 7 closeout repair + verification"},
+    {"lane": "B", "owner": "registry-migration", "status": "COMPLETE", "purpose": "Canonical-primary registry migration"},
+    {"lane": "C", "owner": "example-migration", "status": "COMPLETE", "purpose": "Example path migration + alias compatibility"},
+    {"lane": "D", "owner": "tooling", "status": "COMPLETE", "purpose": "Factory tooling — canonical-first generation"},
+    {"lane": "E", "owner": "validators", "status": "COMPLETE", "purpose": "Validators — canonical-primary invariants"},
+    {"lane": "F", "owner": "publication-readiness", "status": "COMPLETE", "purpose": "Publication readiness — unified matrix"},
+    {"lane": "G", "owner": "wave8", "status": "COMPLETE", "purpose": "Wave 8 advancement — verified canonical only"},
+    {"lane": "H", "owner": "state-docs-skills", "status": "COMPLETE", "purpose": "State/docs/skills/taskcard sync"},
+    {"lane": "I", "owner": "iv", "status": "COMPLETE", "purpose": "Independent verification + adversarial review"},
+    {"lane": "J", "owner": "final", "status": "COMPLETE", "purpose": "Tests + commit + evidence bundle + closeout"}
   ],
   "shared_file_delegation": {
     "pipeline/plugin-code-registry/**": "Lane B owns; all other lanes read-only",
@@ -54,6 +54,19 @@
     "cumulative-dryrun-ledger": "Lane H owns",
     "wave8-build-results": "Lane G owns"
   },
-  "lane_outcomes": {},
-  "verdict": "PENDING"
+  "lane_outcomes": {
+    "0": "COORDINATOR_READY",
+    "A": "WAVE7_CLOSED_WITH_CAVEATS",
+    "B": "REGISTRY_CANONICAL_PRIMARY_MIGRATED",
+    "C": "EXAMPLE_PATHS_MIGRATED",
+    "D": "LANE_D_COMPLETE",
+    "E": "LANE_E_COMPLETE",
+    "F": "PUBLICATION_MATRIX_BUILT",
+    "G": "WAVE8_CANONICAL_ADVANCEMENT_COMPLETE",
+    "H": "STATE_SYNCED",
+    "I": "IV_PASS",
+    "J": "SPRINT_COMPLETE"
+  },
+  "verdict": "SPRINT_COMPLETE",
+  "closeout_note": "Wave 8 repaired by Wave 9 sprint on 2026-06-05. Known residual gaps: csproj names use legacy slugs, package-manifest.json missing for 3/4 Wave 8 packages, evidence bundle excluded source files. Repaired in lowcode-plugin-canonical-package-wave9-20260605."
 }

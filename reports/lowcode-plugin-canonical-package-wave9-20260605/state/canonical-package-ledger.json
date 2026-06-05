@@ -1,0 +1,44 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "cumulative_state": {
+    "total_registry_entries": 72,
+    "canonical_identity_verified": 33,
+    "slug_alias_required": 17,
+    "missing_canonical_url": 22,
+    "canonical_primary_entries": 33,
+    "proven_packages_cumulative": 16,
+    "publication_ready_packages": 16
+  },
+  "wave_history": [
+    {"wave": 1, "sprint": "lowcode-plugin-example-factory-wave1", "packages": 3, "notes": "cells, words, pdf initial"},
+    {"wave": 2, "sprint": "lowcode-plugin-registry-expansion-20260604", "packages": 5, "notes": "html, tasks, svg, tex, ocr"},
+    {"wave": 3, "sprint": "lowcode-plugin-code-registry-reconciliation-20260604", "packages": 3, "notes": "reconciliation packages"},
+    {"wave": 8, "sprint": "lowcode-plugin-canonical-primary-wave8-20260605", "packages": 4, "notes": "imaging×2, html, note — first canonical-primary packages"},
+    {"wave": 9, "sprint": "lowcode-plugin-canonical-package-wave9-20260605", "packages": 12, "notes": "imaging×6, tasks×2, html×2, note×2 — canonical migration"}
+  ],
+  "publication_ready_keys": [
+    "imaging/image-converter",
+    "imaging/image-resizer",
+    "html/html-to-pdf-converter",
+    "note/convert-onenote-to-pdf",
+    "imaging/image-compressor",
+    "imaging/image-cropper",
+    "imaging/image-filters",
+    "imaging/image-merger",
+    "imaging/add-watermark",
+    "imaging/image-rotator",
+    "tasks/project-to-pdf-converter",
+    "tasks/mpp-to-excel",
+    "html/html-to-docx-converter",
+    "html/html-to-image-converter",
+    "note/convert-onenote-to-word",
+    "note/convert-onenote-to-image"
+  ],
+  "pending_migrations": {
+    "slug_alias_required_count": 17,
+    "missing_canonical_url_count": 22,
+    "notes": "Wave 10 will address SLUG_ALIAS_REQUIRED entries in remaining families"
+  },
+  "verdict": "CANONICAL_PACKAGE_LEDGER_CURRENT"
+}

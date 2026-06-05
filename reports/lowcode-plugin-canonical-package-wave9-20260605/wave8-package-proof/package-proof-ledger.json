@@ -1,0 +1,133 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "total_repairs": 5,
+  "repairs": [
+    "imaging/image-converter: added package-manifest.json",
+    "imaging/image-converter: fixed output-validation package field 'imaging/convert-image' -> 'imaging/image-converter'",
+    "imaging/image-resizer: added package-manifest.json",
+    "html/html-to-pdf-converter: added package-manifest.json",
+    "html/html-to-pdf-converter: fixed output-validation package field 'html/convert-html-to-pdf' -> 'html/html-to-pdf-converter'"
+  ],
+  "package_audit": [
+    {
+      "key": "imaging/image-converter",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-primary-wave8-20260605\\wave8\\dryrun\\examples\\imaging\\image-converter",
+      "repairs": [
+        "ADDED package-manifest.json",
+        "FIXED output-validation.json 'package' field: 'imaging/convert-image' -> 'imaging/image-converter'"
+      ],
+      "files_present": [
+        "Program.cs",
+        "README.md",
+        "source-provenance.json",
+        "output-validation.json",
+        "restore.log",
+        "build.log",
+        "run.log",
+        "imaging-convert-image.csproj"
+      ],
+      "files_missing": [
+        "package-manifest.json"
+      ],
+      "output_files": [
+        "converted.png"
+      ],
+      "status": "REPAIRED"
+    },
+    {
+      "key": "imaging/image-resizer",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-primary-wave8-20260605\\wave8\\dryrun\\examples\\imaging\\image-resizer",
+      "repairs": [
+        "ADDED package-manifest.json"
+      ],
+      "files_present": [
+        "Program.cs",
+        "README.md",
+        "source-provenance.json",
+        "output-validation.json",
+        "restore.log",
+        "build.log",
+        "run.log",
+        "imaging-resize-image.csproj"
+      ],
+      "files_missing": [
+        "package-manifest.json"
+      ],
+      "output_files": [
+        "resized.png",
+        "source.bmp"
+      ],
+      "status": "REPAIRED"
+    },
+    {
+      "key": "html/html-to-pdf-converter",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-primary-wave8-20260605\\wave8\\dryrun\\examples\\html\\html-to-pdf-converter",
+      "repairs": [
+        "ADDED package-manifest.json",
+        "FIXED output-validation.json 'package' field: 'html/convert-html-to-pdf' -> 'html/html-to-pdf-converter'"
+      ],
+      "files_present": [
+        "Program.cs",
+        "README.md",
+        "source-provenance.json",
+        "output-validation.json",
+        "restore.log",
+        "build.log",
+        "run.log",
+        "html-convert-html-to-pdf.csproj"
+      ],
+      "files_missing": [
+        "package-manifest.json"
+      ],
+      "output_files": [
+        "output.pdf"
+      ],
+      "status": "REPAIRED"
+    },
+    {
+      "key": "note/convert-onenote-to-pdf",
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-primary-wave8-20260605\\wave8\\dryrun\\examples\\note\\convert-onenote-to-pdf",
+      "repairs": [],
+      "files_present": [
+        "Program.cs",
+        "README.md",
+        "source-provenance.json",
+        "output-validation.json",
+        "package-manifest.json",
+        "restore.log",
+        "build.log",
+        "run.log",
+        "note-convert-one-to-pdf.csproj"
+      ],
+      "files_missing": [],
+      "output_files": [
+        "output.pdf"
+      ],
+      "status": "ALREADY_CORRECT"
+    }
+  ],
+  "piv_results": {
+    "imaging/image-converter": {
+      "passes": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "imaging/image-resizer": {
+      "passes": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "html/html-to-pdf-converter": {
+      "passes": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "note/convert-onenote-to-pdf": {
+      "passes": true,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "verdict": "WAVE8_PACKAGES_REPAIRED"
+}

@@ -1,0 +1,24 @@
+{
+  "family": "imaging",
+  "plugin_slug": "image-rotator",
+  "canonical_url": "https://products.aspose.net/imaging/image-rotator/",
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "nuget_package": "Aspose.Imaging",
+  "nuget_version": "24.12.0",
+  "github_links": [
+    "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/DICOM/FlipDICOMImage.cs"
+  ],
+  "code_hashes": [
+    "16cf1301838025a9be501094c7519639"
+  ],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_plugin_slug": "image-rotator",
+  "display_plugin_name": "Image Rotator for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "migrated_from": "rotate-image",
+  "legacy_example_slug": "rotate-image",
+  "generation_sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "migrated_at": "2026-06-05"
+}

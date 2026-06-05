@@ -1,0 +1,51 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "total_changes": 13,
+  "changes": [
+    "drawing/convert-drawing: set display_plugin_name = 'Drawing Converter for .NET'",
+    "drawing/create-drawing: set display_plugin_name = 'Drawing Creator for .NET'",
+    "finance/convert-xbrl: set display_plugin_name = 'XBRL Converter for .NET'",
+    "ocr/scan-document: set display_plugin_name = 'Document Scanner for .NET'",
+    "ocr/image-text-finder: set display_plugin_name = 'Image Text Finder for .NET'",
+    "ocr/invoice-to-text: set display_plugin_name = 'Invoice to Text Converter for .NET'",
+    "ocr/photo-to-text: set display_plugin_name = 'Photo to Text Converter for .NET'",
+    "ocr/table-to-text: set display_plugin_name = 'Table to Text Converter for .NET'",
+    "psd/animation-maker: set display_plugin_name = 'PSD Animation Maker for .NET'",
+    "psd/photo-processor: set display_plugin_name = 'PSD Photo Processor for .NET'",
+    "svg/svg-to-image-converter: set display_plugin_name = 'SVG to Image Converter for .NET'",
+    "tex/latex-figure-renderer: set display_plugin_name = 'LaTeX Figure Renderer for .NET'",
+    "zip/compress-files: set display_plugin_name = 'ZIP File Compressor for .NET'"
+  ],
+  "before": {
+    "drawing/convert-drawing": null,
+    "drawing/create-drawing": null,
+    "finance/convert-xbrl": null,
+    "ocr/scan-document": null,
+    "ocr/image-text-finder": null,
+    "ocr/invoice-to-text": null,
+    "ocr/photo-to-text": null,
+    "ocr/table-to-text": null,
+    "psd/animation-maker": null,
+    "psd/photo-processor": null,
+    "svg/svg-to-image-converter": null,
+    "tex/latex-figure-renderer": null,
+    "zip/compress-files": null
+  },
+  "after": {
+    "drawing/convert-drawing": "Drawing Converter for .NET",
+    "drawing/create-drawing": "Drawing Creator for .NET",
+    "finance/convert-xbrl": "XBRL Converter for .NET",
+    "ocr/scan-document": "Document Scanner for .NET",
+    "ocr/image-text-finder": "Image Text Finder for .NET",
+    "ocr/invoice-to-text": "Invoice to Text Converter for .NET",
+    "ocr/photo-to-text": "Photo to Text Converter for .NET",
+    "ocr/table-to-text": "Table to Text Converter for .NET",
+    "psd/animation-maker": "PSD Animation Maker for .NET",
+    "psd/photo-processor": "PSD Photo Processor for .NET",
+    "svg/svg-to-image-converter": "SVG to Image Converter for .NET",
+    "tex/latex-figure-renderer": "LaTeX Figure Renderer for .NET",
+    "zip/compress-files": "ZIP File Compressor for .NET"
+  },
+  "verdict": "DISPLAY_NAMES_POPULATED"
+}

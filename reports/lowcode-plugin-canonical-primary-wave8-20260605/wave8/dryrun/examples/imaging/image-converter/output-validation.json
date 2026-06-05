@@ -1,5 +1,5 @@
 {
-  "package": "imaging/convert-image",
+  "package": "imaging/image-converter",
   "restore_status": "SUCCESS",
   "build_status": "SUCCESS",
   "run_status": "SUCCESS",

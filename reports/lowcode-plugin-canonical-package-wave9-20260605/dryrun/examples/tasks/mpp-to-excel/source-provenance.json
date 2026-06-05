@@ -1,0 +1,19 @@
+{
+  "family": "tasks",
+  "plugin_slug": "mpp-to-excel",
+  "nuget_package": "Aspose.Tasks",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/tasks/mpp-to-excel/",
+  "fixture_strategy": "programmatic",
+  "fixture_source": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/_generate_wave6_packages.py",
+  "canonical_plugin_slug": "mpp-to-excel",
+  "display_plugin_name": "MPP to Excel Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "migrated_from": "convert-mpp-to-excel",
+  "legacy_example_slug": "convert-mpp-to-excel",
+  "generation_sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "migrated_at": "2026-06-05"
+}

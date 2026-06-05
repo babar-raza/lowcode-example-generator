@@ -47,6 +47,7 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  display_plugin_name: ZIP File Compressor for .NET
 - plugin_slug: extract-files
   canonical_plugin_slug: universal-extractor
   identity_status: SLUG_ALIAS_REQUIRED

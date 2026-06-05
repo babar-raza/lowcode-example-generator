@@ -13,7 +13,7 @@
     "7_validators_hardened": "COMPLETE — 12 CPV rules (CPV-01..CPV-12), 25/25 tests PASS",
     "8_state_docs_skills": "COMPLETE — canonical-primary-ledger, cumulative-ledger, wave9-queue, skills updated",
     "9_independent_verification": "COMPLETE — IV 80/80 PASS",
-    "10_evidence_bundle": "PENDING — Lane J final step"
+    "10_evidence_bundle": "COMPLETE — .local/evidence-bundles/lowcode-plugin-canonical-primary-wave8-20260605.zip SHA-256: 7c0ce5813e5d22cb31e90b476d33b536facbc2ae133d3c28418b0aa2beaa49dc (note: bundle used narrow ZIP patterns; .cs/.csproj/.log files excluded — repaired in Wave 9 sprint)"
   },
   "registry_state": {
     "before": {

@@ -1,0 +1,18 @@
+{
+  "package": "tasks/project-to-pdf-converter",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\project.pdf",
+      "size": 86013
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05",
+  "package_key": "tasks/project-to-pdf-converter",
+  "canonical_plugin_slug": "project-to-pdf-converter",
+  "migrated_from": "convert-mpp-to-pdf",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

@@ -133,6 +133,7 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  display_plugin_name: Document Scanner for .NET
 - plugin_slug: image-text-finder
   canonical_plugin_slug: image-text-finder
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -167,6 +168,7 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/image-text-finder
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: Image Text Finder for .NET
 - plugin_slug: invoice-to-text
   canonical_plugin_slug: invoice-to-text
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -200,6 +202,7 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/invoice-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: Invoice to Text Converter for .NET
 - plugin_slug: photo-to-text
   canonical_plugin_slug: photo-to-text
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -233,6 +236,7 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/photo-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: Photo to Text Converter for .NET
 - plugin_slug: table-to-text
   canonical_plugin_slug: table-to-text
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -266,3 +270,4 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/table-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  display_plugin_name: Table to Text Converter for .NET

@@ -1,5 +1,5 @@
 {
-  "package": "html/convert-html-to-pdf",
+  "package": "html/html-to-pdf-converter",
   "restore_status": "SUCCESS",
   "build_status": "SUCCESS",
   "run_status": "SUCCESS",

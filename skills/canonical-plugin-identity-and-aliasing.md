@@ -143,6 +143,50 @@ System-level validators. Run with: `run_canonical_primary_validators(packages, r
 
 CPV module: `src/plugin_examples/fixture_factory/canonical_primary_validators.py`
 
+## FPP Validators (Full Package Proof — Wave 9)
+
+FPP-01..FPP-12 validate that a package directory has complete proof files:
+
+| Rule   | Severity | Check |
+|--------|----------|-------|
+| FPP-01 | ERROR    | Program.cs must exist |
+| FPP-02 | ERROR    | *.csproj must exist |
+| FPP-03 | WARNING  | README.md should exist |
+| FPP-04 | ERROR    | source-provenance.json must exist |
+| FPP-05 | WARNING  | package-manifest.json should exist |
+| FPP-06 | WARNING  | restore.log should exist (root or logs/) |
+| FPP-07 | WARNING  | build.log should exist (root or logs/) |
+| FPP-08 | WARNING  | run.log should exist (root or logs/) |
+| FPP-09 | ERROR    | output-validation.json must exist |
+| FPP-10 | ERROR    | output/ must exist and be non-empty |
+| FPP-11 | ERROR    | PASS verdict must not be claimed if FPP errors present |
+| FPP-12 | WARNING  | METADATA_ONLY claimed but full package files present |
+
+FPP module: `src/plugin_examples/fixture_factory/full_package_proof_validator.py`
+
+## CCV Validators (Closeout Consistency — Wave 9)
+
+CCV-01..CCV-14 validate sprint governance document consistency:
+
+| Rule   | Severity | Check |
+|--------|----------|-------|
+| CCV-01 | ERROR    | Evidence bundle must not be PENDING when sprint verdict is COMPLETE |
+| CCV-02 | ERROR    | Lane ledger lanes must not be PENDING when sprint verdict is COMPLETE |
+| CCV-03 | ERROR    | Taskcards must not be PENDING when sprint verdict is COMPLETE |
+| CCV-04 | ERROR    | Test log must exist when closeout claims test count |
+| CCV-05 | WARNING  | Git status must be recorded when verdict is COMPLETE |
+| CCV-06 | WARNING  | Commit proof must be recorded when verdict is COMPLETE |
+| CCV-07 | ERROR    | CANONICAL_IDENTITY_VERIFIED entry must have canonical_url |
+| CCV-08 | WARNING  | CANONICAL_IDENTITY_VERIFIED entry must have display_plugin_name |
+| CCV-09 | ERROR    | Publication-clean candidates must have canonical_url |
+| CCV-10 | ERROR    | Package claiming PASS must have Program.cs |
+| CCV-11 | ERROR    | Package claiming PASS must have *.csproj |
+| CCV-12 | WARNING  | Package claiming PASS should have log files |
+| CCV-13 | ERROR    | Legacy alias slugs must not appear as publication candidates |
+| CCV-14 | ERROR/W  | Publication matrix must include canonical_url column |
+
+CCV module: `src/plugin_examples/fixture_factory/closeout_consistency_validators.py`
+
 ## Validator Module Path
 
 `src/plugin_examples/fixture_factory/plugin_identity_validators.py`

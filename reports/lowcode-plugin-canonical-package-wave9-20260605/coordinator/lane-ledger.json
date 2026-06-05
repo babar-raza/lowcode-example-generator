@@ -1,0 +1,86 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-canonical-package-wave9-20260605",
+  "prior_sprint": "lowcode-plugin-canonical-primary-wave8-20260605",
+  "prior_commit": "42f4de6",
+  "objective": "Canonical package proof + registry URL completion + Wave 9 canonical migration",
+  "preflight": {
+    "git_head": "42f4de6b42d20f21f3ff870adb3095b5cfa6a003",
+    "branch": "main",
+    "registry_status_counts": {
+      "TRANSFORMED_TO_EXAMPLE_DRYRUN": 48,
+      "CODE_HARVESTED": 8,
+      "NEEDS_MANUAL_MAPPING": 16,
+      "TOTAL": 72
+    },
+    "identity_counts": {
+      "CANONICAL_IDENTITY_VERIFIED": 21,
+      "SLUG_ALIAS_REQUIRED": 29,
+      "MISSING_CANONICAL_URL": 22,
+      "TOTAL": 72
+    },
+    "canonical_primary_entries": 21,
+    "canonical_url_null_for_verified": 0,
+    "display_name_missing_for_verified": "TBD — see Lane B",
+    "dryrun_packages": {
+      "cumulative": 56,
+      "wave8_packages": 4,
+      "wave8_package_gaps": "csproj names use legacy slugs, package-manifest.json missing for 3/4"
+    },
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "28c51b79f8dac9e7",
+      "pipeline/configs/families/words.yml": "ef21e9e514386a7e",
+      "pipeline/configs/families/pdf.yml": "de889ed24b3bc3a0",
+      "pipeline/configs/families/slides.yml": "4eec3d74e7c9cca5",
+      "pipeline/configs/families/email.yml": "3e872e96519168ba",
+      "pipeline/configs/families/diagram.yml": "306c16e4acdf4802",
+      "pipeline/format-authority/manifest.json": "3e96754355d7124f"
+    },
+    "wave8_known_defects": [
+      "lane-ledger.json lanes still show PENDING (not updated after completion)",
+      "taskcards.json taskcards still show PENDING",
+      "sprint-closeout.json evidence_bundle objective says PENDING",
+      "raw pytest stdout log not in evidence bundle",
+      "Wave 8 bundle excluded .cs/.csproj/.log files (ZIP patterns too narrow)",
+      "package-manifest.json missing from imaging/image-converter, imaging/image-resizer, html/html-to-pdf-converter",
+      "output-validation.json 'package' field still uses legacy slug in image-converter",
+      "display_plugin_name missing from many CANONICAL_IDENTITY_VERIFIED registry entries"
+    ]
+  },
+  "lanes": [
+    {"lane": "0", "owner": "coordinator", "status": "COMPLETE", "purpose": "Coordinator preflight + governance"},
+    {"lane": "A", "owner": "wave8-closeout", "status": "COMPLETE", "purpose": "Wave 8 closeout truth repair"},
+    {"lane": "B", "owner": "registry-url-completion", "status": "COMPLETE", "purpose": "Registry canonical URL + display name completion"},
+    {"lane": "C", "owner": "wave8-package-proof", "status": "COMPLETE", "purpose": "Wave 8 package proof audit and repair"},
+    {"lane": "D", "owner": "canonical-migration-wave9", "status": "COMPLETE", "purpose": "Canonical migration Wave 9 (12 entries)"},
+    {"lane": "E", "owner": "wave9-dryrun", "status": "COMPLETE", "purpose": "Wave 9 canonical dry-run packages"},
+    {"lane": "F", "owner": "factory-tooling", "status": "COMPLETE", "purpose": "Full-package-proof validator in factory tooling"},
+    {"lane": "G", "owner": "validators", "status": "COMPLETE", "purpose": "Validator hardening (14 new CCV rules)"},
+    {"lane": "H", "owner": "publication-readiness", "status": "COMPLETE", "purpose": "Publication matrix repair v2"},
+    {"lane": "I", "owner": "state-docs-skills", "status": "COMPLETE", "purpose": "State/docs/skills/taskcard sync"},
+    {"lane": "J", "owner": "iv", "status": "COMPLETE", "purpose": "Independent verification + adversarial review"},
+    {"lane": "K", "owner": "final", "status": "PENDING", "purpose": "Tests + commits + evidence bundle + closeout"}
+  ],
+  "shared_file_delegation": {
+    "pipeline/plugin-code-registry/**": "Lane B owns registry URL completion; Lane D owns migration; all other lanes read-only",
+    "unified-publication-matrix-v2": "Lane H owns",
+    "cumulative-dryrun-ledger": "Lane I owns",
+    "wave9-build-results": "Lane E owns",
+    "wave8-package-proof": "Lane C owns"
+  },
+  "lane_outcomes": {
+    "0": "Coordinator governance files created; lane-ledger.json and taskcards.json written",
+    "A": "Wave 8 lane-ledger.json, taskcards.json, sprint-closeout.json repaired; CPV test log captured",
+    "B": "display_plugin_name populated for 13 CANONICAL_IDENTITY_VERIFIED entries across 7 families",
+    "C": "Wave 8 packages: 5 repairs applied; all 4 packages PIV PASS",
+    "D": "12 SLUG_ALIAS_REQUIRED entries migrated to CANONICAL_IDENTITY_VERIFIED; canonical_primary_entries 21→33",
+    "E": "12 Wave 9 canonical dryrun packages built; PIV PASS 12/12",
+    "F": "FPP validator (FPP-01..FPP-12) created; 17/17 tests PASS",
+    "G": "CCV validator (CCV-01..CCV-14) created; 45/45 tests PASS",
+    "H": "unified-publication-matrix-v2.json built: 72 entries, 16 PUBLICATION_READY, 4 classifications",
+    "I": "canonical-package-ledger.json, wave10-next-queue.json written; skills updated",
+    "J": "IV 29/29 PASS; adversarial review: ADVERSARIAL_REVIEW_PASS; 1 additional fix (note/convert-onenote-to-pdf malformed JSON)"
+  },
+  "verdict": "PENDING"
+}

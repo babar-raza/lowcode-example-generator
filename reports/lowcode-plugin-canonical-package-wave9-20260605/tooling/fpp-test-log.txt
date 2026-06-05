@@ -1,0 +1,30 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 17 items
+
+tests/unit/test_full_package_proof_validator.py::test_fpp_full_package_passes PASSED [  5%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_01_missing_program_cs PASSED [ 11%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_02_missing_csproj PASSED [ 17%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_03_missing_readme_is_warning PASSED [ 23%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_04_missing_source_provenance PASSED [ 29%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_05_missing_package_manifest_is_warning PASSED [ 35%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_06_missing_restore_log_is_warning PASSED [ 41%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_06_restore_log_in_logs_subdir PASSED [ 47%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_09_missing_output_validation PASSED [ 52%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_10_empty_output_dir PASSED [ 58%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_10_missing_output_dir PASSED [ 64%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_11_pass_verdict_with_proof_errors PASSED [ 70%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_11_no_false_positive_with_clean_package PASSED [ 76%]
+tests/unit/test_full_package_proof_validator.py::test_fpp_12_metadata_only_with_full_files PASSED [ 82%]
+tests/unit/test_full_package_proof_validator.py::test_proof_result_properties PASSED [ 88%]
+tests/unit/test_full_package_proof_validator.py::test_proof_result_to_dict PASSED [ 94%]
+tests/unit/test_full_package_proof_validator.py::test_metadata_only_package_fails_fpp PASSED [100%]
+
+============================= 17 passed in 1.18s ==============================

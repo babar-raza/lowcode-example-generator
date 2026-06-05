@@ -1,0 +1,30 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images\\output\\canvas.bmp",
+      "size": 0
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images\\output\\merged.png",
+      "size": 1889
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images\\output\\src1.bmp",
+      "size": 90054
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images\\output\\src2.bmp",
+      "size": 90054
+    }
+  ],
+  "verdict": "PASS",
+  "package": "imaging/image-merger",
+  "package_key": "imaging/image-merger",
+  "canonical_plugin_slug": "image-merger",
+  "migrated_from": "merge-images",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

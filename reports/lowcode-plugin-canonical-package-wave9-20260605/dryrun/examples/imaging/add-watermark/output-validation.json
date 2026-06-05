@@ -1,0 +1,22 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\watermark-image",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\watermark-image\\output\\source-watermark.bmp",
+      "size": 0
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\watermark-image\\output\\watermarked.png",
+      "size": 3592
+    }
+  ],
+  "verdict": "PASS",
+  "package": "imaging/add-watermark",
+  "package_key": "imaging/add-watermark",
+  "canonical_plugin_slug": "add-watermark",
+  "migrated_from": "watermark-image",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave9-20260605"
+}

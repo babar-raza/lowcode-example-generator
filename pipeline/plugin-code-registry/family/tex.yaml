@@ -43,6 +43,7 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from LaTeXPdfConversionAlternative.cs
+  display_plugin_name: LaTeX Figure Renderer for .NET
 - plugin_slug: convert-latex-to-pdf
   canonical_plugin_slug: convert-latex-to-pdf
   identity_status: MISSING_CANONICAL_URL

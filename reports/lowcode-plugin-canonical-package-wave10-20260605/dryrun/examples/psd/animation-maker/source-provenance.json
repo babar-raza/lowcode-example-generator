@@ -1,0 +1,15 @@
+{
+  "package_key": "psd/animation-maker",
+  "canonical_plugin_slug": "animation-maker",
+  "canonical_url": "https://products.aspose.net/psd/animation-maker/",
+  "display_plugin_name": "PSD Animation Maker for .NET",
+  "legacy_example_slug": "",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "nuget_package": "Aspose.PSD",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "generated_at": "2026-06-05",
+  "family": "psd",
+  "plugin_slug": "animation-maker",
+  "legacy_slug": "animation-maker"
+}

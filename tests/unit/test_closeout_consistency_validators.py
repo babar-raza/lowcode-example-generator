@@ -1,6 +1,6 @@
 """
-Tests for Closeout Consistency Validators (CCV-01..CCV-14)
-Sprint: lowcode-plugin-canonical-package-wave9-20260605
+Tests for Closeout Consistency Validators (CCV-01..CCV-18)
+Sprint: lowcode-plugin-canonical-package-wave10-20260605
 """
 import json
 import pytest
@@ -22,6 +22,10 @@ from src.plugin_examples.fixture_factory.closeout_consistency_validators import 
     check_ccv_12_pass_package_has_logs,
     check_ccv_13_no_legacy_alias_as_publication_candidate,
     check_ccv_14_matrix_has_canonical_url_column,
+    check_ccv_15_publication_ready_has_package_proof,
+    check_ccv_16_registry_count_matches_claimed,
+    check_ccv_17_no_errors_with_complete_verdict,
+    check_ccv_18_bundle_entry_count_positive,
     CcvResult,
     CcvViolation,
 )
@@ -34,7 +38,7 @@ from src.plugin_examples.fixture_factory.closeout_consistency_validators import 
 def complete_closeout(**overrides):
     base = {
         "verdict": "SPRINT_COMPLETE",
-        "evidence_bundle": {"objective": "COMPLETE — bundle written"},
+        "evidence_bundle": {"objective": "COMPLETE — bundle written", "entries": 42},
         "commit_sha": "abc1234",
         "pytest_passed": 100,
     }
@@ -403,6 +407,168 @@ def test_ccv_14_no_violation_for_empty_matrix():
     result = CcvResult()
     check_ccv_14_matrix_has_canonical_url_column([], result)
     assert not any(v.rule == "CCV-14" for v in result.violations)
+
+
+# ---------------------------------------------------------------------------
+# CCV-15
+# ---------------------------------------------------------------------------
+
+def test_ccv_15_passes_when_program_cs_found(tmp_path):
+    pkg_dir = tmp_path / "imaging" / "image-compressor"
+    pkg_dir.mkdir(parents=True)
+    (pkg_dir / "Program.cs").write_text("// test")
+    result = CcvResult()
+    row = {"package_key": "imaging/image-compressor", "publication_status": "PUBLICATION_READY",
+           "canonical_url": "https://example.com"}
+    check_ccv_15_publication_ready_has_package_proof([row], [tmp_path], result)
+    assert not any(v.rule == "CCV-15" for v in result.violations)
+
+
+def test_ccv_15_error_when_program_cs_missing(tmp_path):
+    pkg_dir = tmp_path / "imaging" / "image-compressor"
+    pkg_dir.mkdir(parents=True)
+    # No Program.cs — only metadata
+    (pkg_dir / "source-provenance.json").write_text("{}")
+    result = CcvResult()
+    row = {"package_key": "imaging/image-compressor", "publication_status": "PUBLICATION_READY"}
+    check_ccv_15_publication_ready_has_package_proof([row], [tmp_path], result)
+    assert any(v.rule == "CCV-15" and v.severity == "ERROR" for v in result.violations)
+
+
+def test_ccv_15_skips_non_publication_rows(tmp_path):
+    result = CcvResult()
+    row = {"package_key": "imaging/image-compressor", "publication_status": "BLOCKED"}
+    check_ccv_15_publication_ready_has_package_proof([row], [tmp_path], result)
+    assert not any(v.rule == "CCV-15" for v in result.violations)
+
+
+def test_ccv_15_skips_when_no_pkg_base_dirs():
+    result = CcvResult()
+    row = {"package_key": "imaging/image-compressor", "publication_status": "PUBLICATION_READY"}
+    check_ccv_15_publication_ready_has_package_proof([row], None, result)
+    assert not any(v.rule == "CCV-15" for v in result.violations)
+
+
+def test_ccv_15_checks_multiple_base_dirs(tmp_path):
+    base1 = tmp_path / "wave8"
+    base2 = tmp_path / "wave9"
+    pkg_dir = base2 / "imaging" / "image-compressor"
+    pkg_dir.mkdir(parents=True)
+    (pkg_dir / "Program.cs").write_text("// test")
+    result = CcvResult()
+    row = {"package_key": "imaging/image-compressor", "publication_status": "PUBLICATION_READY"}
+    check_ccv_15_publication_ready_has_package_proof([row], [base1, base2], result)
+    assert not any(v.rule == "CCV-15" for v in result.violations)
+
+
+# ---------------------------------------------------------------------------
+# CCV-16
+# ---------------------------------------------------------------------------
+
+def test_ccv_16_passes_when_counts_match():
+    result = CcvResult()
+    closeout = complete_closeout(registry_total=70)
+    check_ccv_16_registry_count_matches_claimed(closeout, 70, result)
+    assert not any(v.rule == "CCV-16" for v in result.violations)
+
+
+def test_ccv_16_error_when_counts_mismatch():
+    result = CcvResult()
+    closeout = complete_closeout(registry_total=72)
+    check_ccv_16_registry_count_matches_claimed(closeout, 70, result)
+    assert any(v.rule == "CCV-16" and v.severity == "ERROR" for v in result.violations)
+
+
+def test_ccv_16_skips_when_no_claimed_count():
+    result = CcvResult()
+    check_ccv_16_registry_count_matches_claimed(complete_closeout(), 70, result)
+    assert not any(v.rule == "CCV-16" for v in result.violations)
+
+
+def test_ccv_16_skips_when_no_actual_count():
+    result = CcvResult()
+    closeout = complete_closeout(registry_total=70)
+    check_ccv_16_registry_count_matches_claimed(closeout, None, result)
+    assert not any(v.rule == "CCV-16" for v in result.violations)
+
+
+def test_ccv_16_uses_total_registry_entries_key():
+    result = CcvResult()
+    closeout = complete_closeout(total_registry_entries=70)
+    check_ccv_16_registry_count_matches_claimed(closeout, 70, result)
+    assert not any(v.rule == "CCV-16" for v in result.violations)
+
+
+# ---------------------------------------------------------------------------
+# CCV-17
+# ---------------------------------------------------------------------------
+
+def test_ccv_17_no_violation_when_no_errors():
+    result = CcvResult()
+    check_ccv_17_no_errors_with_complete_verdict(complete_closeout(), result)
+    assert not any(v.rule == "CCV-17" for v in result.violations)
+
+
+def test_ccv_17_error_when_complete_verdict_with_existing_errors():
+    result = CcvResult()
+    # Inject a prior ERROR violation
+    result.violations.append(CcvViolation("CCV-02", "ERROR", "lanes pending", ""))
+    check_ccv_17_no_errors_with_complete_verdict(complete_closeout(), result)
+    assert any(v.rule == "CCV-17" and v.severity == "ERROR" for v in result.violations)
+
+
+def test_ccv_17_no_check_when_verdict_pending():
+    result = CcvResult()
+    result.violations.append(CcvViolation("CCV-02", "ERROR", "lanes pending", ""))
+    check_ccv_17_no_errors_with_complete_verdict(pending_closeout(), result)
+    assert not any(v.rule == "CCV-17" for v in result.violations)
+
+
+def test_ccv_17_no_violation_when_only_warnings():
+    result = CcvResult()
+    result.violations.append(CcvViolation("CCV-08", "WARNING", "display name missing", ""))
+    check_ccv_17_no_errors_with_complete_verdict(complete_closeout(), result)
+    assert not any(v.rule == "CCV-17" for v in result.violations)
+
+
+# ---------------------------------------------------------------------------
+# CCV-18
+# ---------------------------------------------------------------------------
+
+def test_ccv_18_passes_when_entries_positive():
+    result = CcvResult()
+    closeout = complete_closeout(evidence_bundle={"objective": "COMPLETE", "entries": 42})
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    assert not any(v.rule == "CCV-18" for v in result.violations)
+
+
+def test_ccv_18_error_when_entries_zero():
+    result = CcvResult()
+    closeout = complete_closeout(evidence_bundle={"objective": "COMPLETE", "entries": 0})
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    assert any(v.rule == "CCV-18" and v.severity == "ERROR" for v in result.violations)
+
+
+def test_ccv_18_error_when_entries_missing():
+    result = CcvResult()
+    closeout = complete_closeout(evidence_bundle={"objective": "COMPLETE"})
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    assert any(v.rule == "CCV-18" and v.severity == "ERROR" for v in result.violations)
+
+
+def test_ccv_18_no_check_when_verdict_pending():
+    result = CcvResult()
+    closeout = pending_closeout(evidence_bundle={"objective": "PENDING", "entries": 0})
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    assert not any(v.rule == "CCV-18" for v in result.violations)
+
+
+def test_ccv_18_no_violation_when_bundle_not_dict():
+    result = CcvResult()
+    # If bundle is a plain string, CCV-18 should not crash or produce a violation
+    closeout = complete_closeout(evidence_bundle="COMPLETE — bundle written")
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    assert not any(v.rule == "CCV-18" for v in result.violations)
 
 
 # ---------------------------------------------------------------------------

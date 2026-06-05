@@ -359,6 +359,89 @@ def check_ccv_14_matrix_has_canonical_url_column(
 
 
 # ---------------------------------------------------------------------------
+# CCV-15: Publication-ready candidate must have full package proof (not metadata-only)
+# ---------------------------------------------------------------------------
+def check_ccv_15_publication_ready_has_package_proof(
+    matrix_rows: List[dict], pkg_base_dirs: Optional[List[Path]], result: CcvResult
+) -> None:
+    """Each PUBLICATION_CANDIDATE row must have a locatable package directory with Program.cs."""
+    clean_statuses = {"PUBLICATION_READY", "PUBLICATION_CLEAN", "CANONICAL_VERIFIED_FULL_PACKAGE",
+                      "PUBLICATION_CANDIDATE_LOCAL_CLEAN"}
+    if pkg_base_dirs is None:
+        return
+
+    for row in matrix_rows:
+        status = row.get("publication_status", row.get("classification", ""))
+        if status not in clean_statuses:
+            continue
+        key = row.get("package_key", "")
+        if not key:
+            continue
+        # Try to find the package dir in any of the base dirs
+        family, _, slug = key.partition("/")
+        found = False
+        for base in pkg_base_dirs:
+            pkg = base / family / slug
+            if pkg.exists() and (pkg / "Program.cs").exists():
+                found = True
+                break
+        if not found:
+            _add(result, "CCV-15", "ERROR",
+                 f"Publication-ready candidate {key!r} has no locatable Program.cs in known package dirs",
+                 f"key={key}")
+
+
+# ---------------------------------------------------------------------------
+# CCV-16: Registry entry count must match claimed total in closeout
+# ---------------------------------------------------------------------------
+def check_ccv_16_registry_count_matches_claimed(
+    closeout: dict, actual_registry_count: Optional[int], result: CcvResult
+) -> None:
+    claimed = closeout.get("registry_total") or closeout.get("total_registry_entries")
+    if claimed is None or actual_registry_count is None:
+        return
+    if int(claimed) != actual_registry_count:
+        _add(result, "CCV-16", "ERROR",
+             f"Closeout claims {claimed} registry entries but actual count is {actual_registry_count}",
+             f"claimed={claimed} actual={actual_registry_count}")
+
+
+# ---------------------------------------------------------------------------
+# CCV-17: Sprint verdict must not be COMPLETE if any ERROR violations exist
+# ---------------------------------------------------------------------------
+def check_ccv_17_no_errors_with_complete_verdict(closeout: dict, result: CcvResult) -> None:
+    """Self-referential: if this result already has ERRORs, COMPLETE verdict is inconsistent."""
+    # Count existing errors in result at call time
+    existing_errors = result.error_count
+    verdict = closeout.get("verdict", "")
+    complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE")
+    if any(k in verdict.upper() for k in complete_keywords) and existing_errors > 0:
+        _add(result, "CCV-17", "ERROR",
+             f"Sprint verdict is {verdict!r} but {existing_errors} CCV ERROR violation(s) exist",
+             f"existing_errors={existing_errors}")
+
+
+# ---------------------------------------------------------------------------
+# CCV-18: Evidence bundle entry count must be positive when verdict is COMPLETE
+# ---------------------------------------------------------------------------
+def check_ccv_18_bundle_entry_count_positive(closeout: dict, result: CcvResult) -> None:
+    verdict = closeout.get("verdict", "")
+    complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE")
+    if not any(k in verdict.upper() for k in complete_keywords):
+        return
+
+    bundle = closeout.get("evidence_bundle", {})
+    if not isinstance(bundle, dict):
+        return
+
+    entries = bundle.get("entries", 0)
+    if not entries or int(entries) == 0:
+        _add(result, "CCV-18", "ERROR",
+             "Sprint is COMPLETE but evidence bundle entries count is 0 or missing",
+             f"entries={entries}")
+
+
+# ---------------------------------------------------------------------------
 # Aggregate runner
 # ---------------------------------------------------------------------------
 def run_closeout_consistency_validators(
@@ -368,8 +451,10 @@ def run_closeout_consistency_validators(
     report_dir: Optional[Path] = None,
     registry_entries: Optional[List[dict]] = None,
     matrix_rows: Optional[List[dict]] = None,
+    pkg_base_dirs: Optional[List[Path]] = None,
+    actual_registry_count: Optional[int] = None,
 ) -> CcvResult:
-    """Run all 14 CCV rules and return aggregated result."""
+    """Run all 18 CCV rules and return aggregated result."""
     result = CcvResult()
 
     check_ccv_01_evidence_bundle_not_pending(closeout, result)
@@ -389,5 +474,14 @@ def run_closeout_consistency_validators(
 
     if matrix_rows is not None and registry_entries is not None:
         check_ccv_13_no_legacy_alias_as_publication_candidate(matrix_rows, registry_entries, result)
+
+    if matrix_rows is not None and pkg_base_dirs is not None:
+        check_ccv_15_publication_ready_has_package_proof(matrix_rows, pkg_base_dirs, result)
+
+    if actual_registry_count is not None:
+        check_ccv_16_registry_count_matches_claimed(closeout, actual_registry_count, result)
+
+    check_ccv_18_bundle_entry_count_positive(closeout, result)
+    check_ccv_17_no_errors_with_complete_verdict(closeout, result)
 
     return result

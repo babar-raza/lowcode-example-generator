@@ -1,0 +1,15 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\generate-qr-code",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\generate-qr-code\\output\\qr-code.png",
+      "size": 10153
+    }
+  ],
+  "verdict": "PASS",
+  "package_key": "barcode/2d-barcode-writer",
+  "package": "barcode/2d-barcode-writer"
+}

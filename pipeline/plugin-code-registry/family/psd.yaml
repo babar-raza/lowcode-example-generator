@@ -3,43 +3,16 @@ package_id: Aspose.PSD
 github_repo: https://github.com/aspose-psd/Aspose.Psd-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
-- plugin_slug: convert-psd-to-pdf
+- plugin_slug: psd-to-pdf
   canonical_plugin_slug: psd-to-pdf
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/psd/net/convert-psd-to-pdf
-  page_hash: 83cffccb6c81e4f5
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - a395c28323695d7f76843d29beedee4c
-  namespaces_used:
-  - Aspose.PSD.FileFormats.Ai
-  - Aspose.PSD.ImageOptions
-  classes_used:
-  - PdfOptions
-  - Image
-  github_links:
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/ModifyingAndConvertingImages/AI/AIToPDF.cs
-  next_action: Extract symbols from AIToPDF.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/psd.md
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/ModifyingAndConvertingImages/AI/AIToPDF.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from AIToPDF.cs
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
-      package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/psd/convert-psd-to-pdf
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/psd/psd-to-pdf/
+  display_plugin_name: PSD to PDF Converter for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-psd-to-pdf
+  legacy_aliases:
+  - convert-psd-to-pdf
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: convert-psd-to-png
   canonical_plugin_slug: image-converter
   identity_status: SLUG_ALIAS_REQUIRED
@@ -67,48 +40,6 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CroppingPSDWhenConvertingToPNG.cs
-- plugin_slug: psd-image-converter
-  canonical_plugin_slug: animation-maker
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/psd/net/convert-psd-to-jpg
-  canonical_url: https://products.aspose.net/psd/image-converter/
-  page_source_status: CANONICAL_URL_CONFIRMED
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: Canonical URL confirmed; Image.Load() + psdImage.Save(JpegOptions)
-    confirmed on page and source
-  page_hash: 7d72085ac9a80bcd
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - e220ac959a90a0cb19ba817097984bad
-  namespaces_used:
-  - Aspose.PSD.FileFormats.Psd
-  - Aspose.PSD.FileFormats.Psd.Resources
-  classes_used:
-  - JpegExifData
-  - Image
-  - PsdImage
-  github_links:
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/ModifyingAndConvertingImages/JPEG/AddThumbnailToEXIFSegment.cs
-  next_action: Extract symbols from AddThumbnailToEXIFSegment.cs and validate against
-    DllReflector; then advance to READY_FOR_TRANSFORMATION
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/psd.md
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/ModifyingAndConvertingImages/JPEG/AddThumbnailToEXIFSegment.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from AddThumbnailToEXIFSegment.cs
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
-      package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/psd/psd-image-converter
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
 - plugin_slug: edit-psd-layers
   canonical_plugin_slug: photo-processor
   identity_status: SLUG_ALIAS_REQUIRED
@@ -186,6 +117,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   display_plugin_name: PSD Animation Maker for .NET
+  legacy_aliases:
+  - psd-image-converter
 - plugin_slug: photo-processor
   canonical_plugin_slug: photo-processor
   identity_status: CANONICAL_IDENTITY_VERIFIED

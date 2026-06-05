@@ -41,7 +41,7 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: 'Sprint lowcode-plugin-registry-expansion-20260604. Canonical URL
       confirmed: /tasks/project-to-pdf-converter/. Official code: AsposeTasksConversion.cs
-      — Project.Save(path, PdfSaveOptions) confirmed.'
+      - Project.Save(path, PdfSaveOptions) confirmed.'
   - date: '2026-06-05'
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
@@ -105,78 +105,26 @@ plugins:
   display_plugin_name: MPP to Excel Converter for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-mpp-to-excel
-- plugin_slug: convert-mpp-to-html
+- plugin_slug: mpp-to-html
   canonical_plugin_slug: mpp-to-html
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-html
-  page_hash: 224b5bdf76853c84
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - de61533f18dfe74531a213840f150d61
-  classes_used:
-  - HtmlSaveOptions
-  - Project
-  - List
-  github_links:
-  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/SavingOptions/ExHtmlSaveOptions.cs
-  next_action: Extract symbols from ExHtmlSaveOptions.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
-  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/SavingOptions/ExHtmlSaveOptions.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExHtmlSaveOptions.cs
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
-      package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-html
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-html/
-- plugin_slug: convert-mpp-to-image
+  display_plugin_name: MPP to HTML Converter for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-mpp-to-html
+  legacy_aliases:
+  - convert-mpp-to-html
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
+- plugin_slug: mpp-to-png
   canonical_plugin_slug: mpp-to-png
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-image
-  page_hash: 59a05725ee005f68
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - 442fc9d660a8132062a6f196651ab82e
-  classes_used:
-  - FileStream
-  - List
-  - FileMode
-  - Project
-  - ResourcePrefixForNestedResources
-  github_links:
-  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExIImageSavingCallback.cs
-  next_action: Extract symbols from ExIImageSavingCallback.cs and validate against
-    DllReflector; then advance to READY_FOR_TRANSFORMATION
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
-  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExIImageSavingCallback.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExIImageSavingCallback.cs
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
-      package built and validated. 14/14 PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-image
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-png/
+  display_plugin_name: MPP to PNG Converter for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: convert-mpp-to-image
+  legacy_aliases:
+  - convert-mpp-to-image
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: read-project-data
   canonical_plugin_slug: read-project-data
   identity_status: MISSING_CANONICAL_URL

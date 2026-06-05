@@ -1,0 +1,15 @@
+{
+  "package": "barcode/1d-barcode-reader",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\result.txt",
+      "size": 218
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05",
+  "package_key": "barcode/1d-barcode-reader"
+}

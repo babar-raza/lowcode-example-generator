@@ -1,0 +1,15 @@
+{
+  "package_key": "tex/latex-figure-renderer",
+  "family": "tex",
+  "plugin_slug": "latex-figure-renderer",
+  "canonical_plugin_slug": "latex-figure-renderer",
+  "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/",
+  "display_plugin_name": "LaTeX Figure Renderer for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "latex-figure-renderer",
+  "nuget_package": "Aspose.TeX",
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "MIGRATED_FULL_PACKAGE"
+}

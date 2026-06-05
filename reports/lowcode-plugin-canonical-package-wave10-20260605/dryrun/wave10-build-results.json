@@ -1,0 +1,180 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "date": "2026-06-05",
+  "total": 17,
+  "built": 17,
+  "skipped": 0,
+  "results": [
+    {
+      "key": "barcode/1d-barcode-writer",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-code-registry-reconciliation-20260604\\transformation\\packages\\barcode-generate-barcode"
+    },
+    {
+      "key": "barcode/1d-barcode-reader",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\barcode\\recognize-barcode"
+    },
+    {
+      "key": "barcode/2d-barcode-writer",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\generate-qr-code"
+    },
+    {
+      "key": "barcode/2d-barcode-reader",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 2,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\scan-barcode"
+    },
+    {
+      "key": "drawing/convert-drawing",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-closeout-wave5-20260605\\dryrun\\examples\\drawing\\convert-drawing"
+    },
+    {
+      "key": "drawing/create-drawing",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-closeout-wave5-20260605\\dryrun\\examples\\drawing\\create-drawing"
+    },
+    {
+      "key": "finance/convert-xbrl",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-closeout-wave5-20260605\\dryrun\\examples\\finance\\convert-xbrl"
+    },
+    {
+      "key": "ocr/scan-document",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-closeout-wave5-20260605\\dryrun\\examples\\ocr\\scan-document"
+    },
+    {
+      "key": "ocr/image-text-finder",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\ocr\\image-text-finder"
+    },
+    {
+      "key": "ocr/invoice-to-text",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave6-20260605\\dryrun\\examples\\ocr\\invoice-to-text"
+    },
+    {
+      "key": "ocr/photo-to-text",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-identity-wave7-20260605\\dryrun\\examples\\ocr\\photo-to-text"
+    },
+    {
+      "key": "ocr/table-to-text",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-identity-wave7-20260605\\dryrun\\examples\\ocr\\table-to-text"
+    },
+    {
+      "key": "psd/animation-maker",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 2,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-identity-wave7-20260605\\dryrun\\examples\\psd\\animation-maker"
+    },
+    {
+      "key": "psd/photo-processor",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 2,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-identity-wave7-20260605\\dryrun\\examples\\psd\\photo-processor"
+    },
+    {
+      "key": "svg/svg-to-image-converter",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\svg\\svg-to-image-converter"
+    },
+    {
+      "key": "tex/latex-figure-renderer",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 1,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\tex\\latex-figure-renderer"
+    },
+    {
+      "key": "zip/compress-files",
+      "status": "BUILT",
+      "piv_pass": true,
+      "piv_errors": 0,
+      "piv_warnings": 0,
+      "output_files": 2,
+      "verdict": "PASS",
+      "source": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-code-registry-reconciliation-20260604\\transformation\\packages\\zip-compress-files"
+    }
+  ],
+  "verdict": "WAVE10_DRYRUN_DONE"
+}

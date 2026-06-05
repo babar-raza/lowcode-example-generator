@@ -48,116 +48,24 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   display_plugin_name: ZIP File Compressor for .NET
-- plugin_slug: extract-files
+- plugin_slug: universal-extractor
   canonical_plugin_slug: universal-extractor
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/zip/net/extract-files
   canonical_url: https://products.aspose.net/zip/universal-extractor/
-  page_source_status: CANONICAL_URL_CONFIRMED
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: Canonical URL confirmed as universal-extractor;
-    code needs manual mapping from GitHub
-  page_hash: 2887928eb901eb0a
-  registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes: []
-  next_action: Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS);
-    fetch extraction example from GitHub
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md
-  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
-  history:
-  - date: '2026-06-04'
-    status: NEEDS_MANUAL_MAPPING
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
-      sprint.
-  - date: '2026-06-04'
-    status: NEEDS_MANUAL_MAPPING
-    analyst_notes: Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
-      URL confirmed as /zip/universal-extractor/ but code mapping still needed.
-- plugin_slug: create-archive
+  display_plugin_name: ZIP Universal Extractor for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: extract-files
+  legacy_aliases:
+  - extract-files
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
+- plugin_slug: universal-compressor
   canonical_plugin_slug: universal-compressor
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/zip/net/create-archive
   canonical_url: https://products.aspose.net/zip/universal-compressor/
-  page_source_status: CANONICAL_URL_CONFIRMED
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: CODE_HARVESTED; create-archive merges with universal-compressor
-    canonical page
-  page_hash: 701757357e101650
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/zip/create-archive
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - 7202859f9ec7ce49ad7a4dfb5c303bd2
-  namespaces_used:
-  - Aspose.Zip.Saving
-  - Aspose.Zip
-  classes_used:
-  - Archive
-  - SelfExtractorOptions
-  github_links:
-  - https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFiles/CreateSelfExtractingArchive.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md
-  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CreateSelfExtractingArchive.cs
-  - date: '2026-06-04'
-    status: READY_FOR_TRANSFORMATION
-    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
-      URL confirmed: /zip/universal-compressor/.'
-- plugin_slug: compress-folder
-  canonical_plugin_slug: universal-compressor
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/zip/net/compress-folder
-  canonical_url: https://products.aspose.net/zip/universal-compressor/
-  page_source_status: CANONICAL_URL_CONFIRMED
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: CODE_HARVESTED; compress-folder merges with universal-compressor
-    canonical page
-  page_hash: 8fa4f5f35bb65fbb
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/zip/compress-folder
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - 1e45c5db1bd1e195118df25d47460e12
-  classes_used:
-  - DirectoryInfo
-  - Archive
-  - FileMode
-  - File
-  github_links:
-  - https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md
-  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CompressDirectory.cs
-  - date: '2026-06-04'
-    status: READY_FOR_TRANSFORMATION
-    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
-      URL confirmed: /zip/compress-folder/.'
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/zip/compress-folder
-      built and ran PASS.
+  display_plugin_name: ZIP Universal Compressor for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: create-archive
+  legacy_aliases:
+  - create-archive
+  - compress-folder
+  sprint: lowcode-plugin-canonical-package-wave10-20260605

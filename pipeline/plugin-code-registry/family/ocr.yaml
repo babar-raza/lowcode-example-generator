@@ -3,99 +3,26 @@ package_id: Aspose.OCR
 github_repo: https://github.com/aspose-ocr/Aspose.Ocr-for-.NET
 implementation_model: RECOGNITION_EXTRACTION_API
 plugins:
-- plugin_slug: recognize-text
+- plugin_slug: scanned-image-to-text
   canonical_plugin_slug: scanned-image-to-text
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/ocr/net/recognize-text
   canonical_url: https://products.aspose.net/ocr/scanned-image-to-text/
-  page_source_status: CANONICAL_URL_CONFIRMED
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as scanned-image-to-text;
-    AsposeOcr + OcrInput pattern confirmed
-  page_hash: 06081b43c409c3c9
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: RECOGNITION_EXTRACTION_API
-  code_hashes:
-  - bb1a1fb95c816f6e00c685381c701d82
-  namespaces_used:
-  - Aspose.OCR
-  classes_used:
-  - AsposeOcr
-  - OcrInput
-  - RecognitionResult
-  methods_used:
-  - new OcrInput(InputType.SingleImage)
-  - input.Add(stream)
-  - api.Recognize(input)
-  github_links:
-  - https://raw.githubusercontent.com/aspose-ocr/Aspose.OCR-for-.NET/master/Examples/Aspose.OCR.Examples.CSharp/PerformingandManagingOCR/RecognizeImageFromStream.cs
-  next_action: Transform to dry-run example package; requires fixture image
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/ocr.md
-  - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
-  - reports/lowcode-plugin-registry-expansion-20260604/code-harvest/raw-code/ocr-scanned-image-to-text-RecognizeImageFromStream.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from GetChoicesForRecognizedCharacters.cs
-  - date: '2026-06-04'
-    status: READY_FOR_TRANSFORMATION
-    analyst_notes: 'Sprint lowcode-plugin-registry-expansion-20260604. Canonical URL
-      confirmed: /ocr/scanned-image-to-text/. Official code: RecognizeImageFromStream.cs.'
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
-      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/recognize-text
-      built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/recognize-text
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
-- plugin_slug: extract-text
+  display_plugin_name: Scanned Image to Text Converter for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: recognize-text
+  legacy_aliases:
+  - recognize-text
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
+- plugin_slug: scanned-pdf-to-text
   canonical_plugin_slug: scanned-pdf-to-text
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/ocr/net/extract-text
   canonical_url: https://products.aspose.net/ocr/scanned-pdf-to-text/
-  page_source_status: CANONICAL_URL_BEST_MATCH
-  source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: Best-match canonical page is scanned-pdf-to-text;
-    code pattern same as recognize-text
-  page_hash: 4e29884ead428323
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  blocker_type: null
-  implementation_model: RECOGNITION_EXTRACTION_API
-  code_hashes:
-  - bb1a1fb95c816f6e00c685381c701d82
-  namespaces_used:
-  - Aspose.OCR
-  classes_used:
-  - AsposeOcr
-  - OcrInput
-  - RecognitionResult
-  github_links:
-  - https://raw.githubusercontent.com/aspose-ocr/Aspose.OCR-for-.NET/master/Examples/Aspose.OCR.Examples.CSharp/PerformingandManagingOCR/RecognizeImageFromStream.cs
-  next_action: Transform to dry-run example package
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
-  history:
-  - date: '2026-06-04'
-    status: NEEDS_MANUAL_MAPPING
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604.
-  - date: '2026-06-04'
-    status: READY_FOR_TRANSFORMATION
-    analyst_notes: 'Sprint lowcode-plugin-registry-expansion-20260604. Best-match
-      canonical: /ocr/scanned-pdf-to-text/. Same OcrInput pattern.'
-  - date: '2026-06-05'
-    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
-      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/extract-text
-      built and ran PASS.
-  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/extract-text
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
+  display_plugin_name: Scanned PDF to Text Converter for .NET
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  migration_status: CANONICAL_PRIMARY_MIGRATED
+  migrated_from: extract-text
+  legacy_aliases:
+  - extract-text
+  sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: scan-document
   canonical_plugin_slug: scan-document
   identity_status: CANONICAL_IDENTITY_VERIFIED

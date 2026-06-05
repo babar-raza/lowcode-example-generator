@@ -1,0 +1,52 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "date": "2026-06-05",
+  "verdict": "SPRINT_COMPLETE",
+  "lanes_complete": 10,
+  "lanes_total": 10,
+  "registry_state": {
+    "total_entries": 70,
+    "canonical_identity_verified": 43,
+    "slug_alias_required": 5,
+    "missing_canonical_url": 22,
+    "canonical_primary_delta": "+10 (33 -> 43)"
+  },
+  "packages": {
+    "wave8": 4,
+    "wave9": 12,
+    "wave10": 17,
+    "total_proven": 33,
+    "publication_ready": 16,
+    "publication_candidate_local_clean": 17
+  },
+  "validators": {
+    "ccv_rules": 18,
+    "ccv_tests": 64,
+    "ccv_result": "ALL_PASS",
+    "fpp_rules": 12,
+    "full_suite_passed": 3552,
+    "full_suite_skipped": 18,
+    "full_suite_failed": 0
+  },
+  "independent_verification": {
+    "checks_total": 52,
+    "checks_pass": 52,
+    "checks_fail": 0,
+    "verdict": "IV_PASS"
+  },
+  "adversarial_review": "ADVERSARIAL_REVIEW_PASS",
+  "protected_files_unchanged": true,
+  "evidence_bundle": {
+    "objective": "COMPLETE — bundle written",
+    "entries": 205,
+    "sha256": "6f97c7b3a3b6545bcad10c82bdc29e2e2d93f66705fe8d9ffd25848ffc8e2168",
+    "size_bytes": 158883,
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave10-20260605.zip"
+  },
+  "commit_sha": "PENDING",
+  "pytest_passed": 3552,
+  "pytest_skipped": 18,
+  "pytest_failed": 0,
+  "registry_total": 70,
+  "total_registry_entries": 70
+}

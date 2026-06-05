@@ -120,7 +120,19 @@ When a registry entry is canonical-primary, `plugin_slug` IS the canonical slug.
 ```
 
 Use `loader.lookup_by_alias(family, old_slug)` to resolve legacy slugs to canonical entries.
-Use `loader.canonical_primary_entries()` to get all 21 canonical-primary entries.
+Use `loader.canonical_primary_entries()` to get all 43 canonical-primary entries (as of Wave 10).
+
+## Wave 10 Registry State (2026-06-05)
+
+| Metric | Count |
+|---|---|
+| Total registry entries | 70 |
+| CANONICAL_IDENTITY_VERIFIED | 43 |
+| SLUG_ALIAS_REQUIRED | 5 |
+| MISSING_CANONICAL_URL | 22 |
+| Proven packages (Wave 8+9+10) | 33 |
+| PUBLICATION_READY (Wave 8+9) | 16 |
+| PUBLICATION_CANDIDATE_LOCAL_CLEAN (Wave 10) | 17 |
 
 ## CPV Validator Rules (CPV-01..CPV-12)
 

@@ -1,0 +1,13 @@
+{
+  "package_key": "ocr/invoice-to-text",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/invoice-data.txt",
+      "size": 112
+    }
+  ],
+  "package": "ocr/invoice-to-text"
+}

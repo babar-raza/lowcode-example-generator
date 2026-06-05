@@ -1,0 +1,15 @@
+{
+  "family": "ocr",
+  "plugin_slug": "scan-document",
+  "nuget_package": "Aspose.OCR",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/ocr/scan-document/",
+  "fixture_strategy": "programmatic",
+  "fixture_source": "scripts/_generate_wave5_packages.py",
+  "canonical_plugin_slug": "scan-document",
+  "legacy_slug": "scan-document",
+  "display_plugin_name": "Document Scanner for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+}

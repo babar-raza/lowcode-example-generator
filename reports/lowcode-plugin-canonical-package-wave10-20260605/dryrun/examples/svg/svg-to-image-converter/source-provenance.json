@@ -1,0 +1,13 @@
+{
+  "family": "svg",
+  "plugin_slug": "svg-to-image-converter",
+  "nuget_package": "Aspose.SVG",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
+  "canonical_plugin_slug": "svg-to-image-converter",
+  "legacy_slug": "svg-to-image-converter",
+  "display_plugin_name": "SVG to Image Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+}

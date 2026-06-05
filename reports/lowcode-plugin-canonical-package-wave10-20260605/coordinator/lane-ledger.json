@@ -1,0 +1,81 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-canonical-package-wave10-20260605",
+  "prior_sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "prior_commits": ["170ba67", "052b721"],
+  "objective": "Finalize Wave 9 closeout + Wave 10 canonical package expansion + publication packet",
+  "preflight": {
+    "git_head": "170ba67",
+    "branch": "main",
+    "git_status": "dirty — 19 modified files (pre-existing workspace/verification/runner changes unrelated to sprint)",
+    "registry_counts": {
+      "CANONICAL_IDENTITY_VERIFIED": 33,
+      "SLUG_ALIAS_REQUIRED": 17,
+      "MISSING_CANONICAL_URL": 22,
+      "total": 72,
+      "families": 18
+    },
+    "proven_packages": 16,
+    "slug_alias_required_with_canonical_url": 14,
+    "slug_alias_required_without_canonical_url": 3,
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "28c51b79f8dac9e7",
+      "pipeline/configs/families/words.yml": "ef21e9e514386a7e",
+      "pipeline/configs/families/pdf.yml": "de889ed24b3bc3a0",
+      "pipeline/configs/families/slides.yml": "4eec3d74e7c9cca5",
+      "pipeline/configs/families/email.yml": "3e872e96519168ba",
+      "pipeline/configs/families/diagram.yml": "306c16e4acdf4802",
+      "pipeline/format-authority/manifest.json": "3e96754355d7124f"
+    },
+    "wave9_known_defects": [
+      "Dirty working tree: pipeline/configs/families/barcode.yml, imaging.yml, zip.yml modified but not committed",
+      "pipeline/schemas/family-config.schema.json modified but not committed",
+      "src/plugin_examples/commands/__init__.py + loader.py + models.py + runner.py modified but not committed",
+      "wave9 lane-ledger/taskcards show SPRINT_COMPLETE per system-reminder — defects listed in spec are already resolved in committed files",
+      "Evidence bundle present: 150,885 bytes, 163 entries, SHA c6f05e13c92d8c7f"
+    ],
+    "wave10_source_packages_available": {
+      "barcode": 4,
+      "drawing": 2,
+      "finance": 1,
+      "ocr": 5,
+      "psd": 2,
+      "svg": 1,
+      "tex": 1,
+      "zip": 1,
+      "total": 17
+    }
+  },
+  "lanes": [
+    {"lane": "0", "owner": "coordinator", "status": "COMPLETE", "purpose": "Coordinator preflight + governance"},
+    {"lane": "A", "owner": "wave9-closeout", "status": "COMPLETE", "purpose": "Wave 9 closeout repair"},
+    {"lane": "B", "owner": "registry", "status": "COMPLETE", "purpose": "Registry proof + Wave 10 canonical migration"},
+    {"lane": "C", "owner": "package-proof", "status": "COMPLETE", "purpose": "Full package proof for all publication-ready candidates"},
+    {"lane": "D", "owner": "wave10-dryrun", "status": "COMPLETE", "purpose": "Wave 10 canonical dryrun packages"},
+    {"lane": "E", "owner": "validators", "status": "COMPLETE", "purpose": "Validator hardening (Wave 10 rules)"},
+    {"lane": "F", "owner": "publication", "status": "COMPLETE", "purpose": "Publication matrix v3 + approval packet"},
+    {"lane": "G", "owner": "state-docs", "status": "COMPLETE", "purpose": "State/docs/skills/taskcard sync"},
+    {"lane": "H", "owner": "iv", "status": "COMPLETE", "purpose": "Independent verification + adversarial review"},
+    {"lane": "I", "owner": "final", "status": "COMPLETE", "purpose": "Final integration, commits, bundle, closeout"}
+  ],
+  "shared_file_delegation": {
+    "pipeline/plugin-code-registry/**": "Lane B owns all registry migrations",
+    "publication-readiness": "Lane F owns matrix v3",
+    "cumulative-ledger": "Lane G owns",
+    "wave10-dryrun-packages": "Lane D owns",
+    "wave9-closeout-repair": "Lane A owns"
+  },
+  "lane_outcomes": {
+    "A": "WAVE9_CLOSED — commits 052b721 + 170ba67 verified, dirty tree classified PRE_EXISTING_UNRELATED",
+    "B": "REGISTRY_MIGRATED — 33→43 CANONICAL_IDENTITY_VERIFIED, 70 total entries",
+    "C": "PACKAGE_PROOF_COMPLETE — 16/16 Wave 8+9 packages FPP PASS",
+    "D": "WAVE10_DRYRUN_DONE — 17/17 packages built, all PIV PASS, all output-validation PASS",
+    "E": "VALIDATORS_HARDENED — CCV-15..CCV-18 added, 64/64 tests PASS, full suite 3552/0/18",
+    "F": "MATRIX_V3_COMPLETE — 70 entries, 16 PUBLICATION_READY, 17 PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+    "G": "STATE_UPDATED — canonical-package-ledger.json, wave11-next-queue.json, skills updated",
+    "H": "IV_PASS — 52/52 PASS, adversarial review PASS",
+    "I": "FINAL_COMPLETE — pytest 3552/0/18, git commit pending user approval"
+  },
+  "verdict": "SPRINT_COMPLETE"
+}

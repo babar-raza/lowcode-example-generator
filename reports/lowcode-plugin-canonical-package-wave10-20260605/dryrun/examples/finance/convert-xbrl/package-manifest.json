@@ -1,0 +1,15 @@
+{
+  "package_key": "finance/convert-xbrl",
+  "family": "finance",
+  "plugin_slug": "convert-xbrl",
+  "canonical_plugin_slug": "convert-xbrl",
+  "canonical_url": "https://products.aspose.net/finance/convert-xbrl/",
+  "display_plugin_name": "XBRL Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "convert-xbrl",
+  "nuget_package": "Aspose.Finance",
+  "sprint": "lowcode-plugin-canonical-package-wave10-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "MIGRATED_FULL_PACKAGE"
+}

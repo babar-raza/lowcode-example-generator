@@ -1,0 +1,48 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave9-20260605",
+  "verified_date": "2026-06-05",
+  "wave9_closeout_verdict": "WAVE9_CLOSED",
+  "commits_verified": {
+    "052b721": "feat(wave9): canonical package proof + registry URL completion + Wave 9 migration (180 files)",
+    "170ba67": "chore(wave9): sprint closeout — SPRINT_COMPLETE (4 files)"
+  },
+  "committed_state": {
+    "lane_ledger_verdict": "SPRINT_COMPLETE",
+    "all_lanes_complete": true,
+    "all_taskcards_complete": true,
+    "sprint_closeout_verdict": "SPRINT_COMPLETE",
+    "evidence_bundle_objective": "COMPLETE",
+    "evidence_bundle_sha256": "c6f05e13c92d8c7f3d543aeb6903d7c09129daa5338924c8300fcfaf1c14527c",
+    "pytest_passed": 3533,
+    "pytest_skipped": 18,
+    "pytest_failed": 0,
+    "iv_checks_pass": 29,
+    "canonical_primary_entries": 33,
+    "publication_ready": 16
+  },
+  "dirty_working_tree": {
+    "classification": "PRE_EXISTING_UNRELATED",
+    "files": [
+      "pipeline/configs/families/barcode.yml (pre-existing modification)",
+      "pipeline/configs/families/imaging.yml (pre-existing modification)",
+      "pipeline/configs/families/zip.yml (pre-existing modification)",
+      "pipeline/schemas/family-config.schema.json (pre-existing)",
+      "src/plugin_examples/commands/__init__.py (pre-existing)",
+      "src/plugin_examples/family_config/loader.py (pre-existing)",
+      "src/plugin_examples/family_config/models.py (pre-existing)",
+      "src/plugin_examples/runner.py (pre-existing)",
+      "workspace/**, reports/shareability-** (pre-existing workspace files)"
+    ],
+    "sprint_relevance": "NONE — these are pre-existing modifications unrelated to Wave 9 or Wave 10 sprint content",
+    "action": "NOT_COMMITTED_IN_SPRINT — these belong to the user's own working changes"
+  },
+  "wave9_spec_defects_status": {
+    "lane_k_pending": "RESOLVED — TC-0K shows COMPLETE in committed 170ba67",
+    "tc0k_pending": "RESOLVED — taskcards.json in commit shows TC-0K COMPLETE",
+    "verdict_pending": "RESOLVED — lane-ledger.json verdict=SPRINT_COMPLETE in commit",
+    "no_commit_proven": "RESOLVED — commits 052b721 + 170ba67 both verified",
+    "dirty_git_status": "ACKNOWLEDGED — pre-existing modifications unrelated to sprint; not sprint defects",
+    "bundle_partial_registry": "ACKNOWLEDGED — Wave 9 bundle had 163 entries; full registry proof added in Wave 10 Lane C",
+    "missing_final_closeout": "RESOLVED — final/sprint-closeout.json exists with SPRINT_COMPLETE verdict"
+  }
+}

@@ -71,16 +71,16 @@
     "wave11_hit_rate": "0/22",
     "wave12_hit_rate": "0/22 (candidates proposed, not web-verified)"
   },
-  "commit_sha": "PENDING",
+  "commit_sha": "a8892ef",
   "pytest_passed": 3634,
   "pytest_skipped": 18,
   "pytest_failed": 0,
   "registry_total": 67,
   "total_registry_entries": 67,
   "evidence_bundle": {
-    "sha256": "PENDING",
-    "size_bytes": 0,
-    "entries": 0,
+    "sha256": "8cfb5388954b813cda326a67214a23e864f983ff0fb22c00c05e692637feb556",
+    "size_bytes": 59998,
+    "entries": 45,
     "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave12-20260606.zip"
   }
 }

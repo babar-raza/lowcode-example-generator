@@ -1,0 +1,197 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "D",
+  "date": "2026-06-06",
+  "method": "PRODUCTS_PAGE_PATTERN_MATCHING",
+  "canonical_url_pattern": "https://products.aspose.net/{family}/{slug}/",
+  "wave11_hit_rate": "0/22 — no URLs discovered in Wave 11",
+  "wave12_discovery_scope": "22 MISSING_CANONICAL_URL entries",
+  "canonical_page_base": "https://products.aspose.net/",
+  "entries": [
+    {
+      "family": "barcode",
+      "slug": "read-barcode",
+      "candidate_url": "https://products.aspose.net/barcode/read-barcode/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "barcode family has confirmed canonical-primary pages; read-barcode slug follows family naming convention"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "candidate_url": "https://products.aspose.net/cad/convert-cad-to-pdf/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "cad family has 5 entries; canonical-primary URL pattern matches pdf/imaging/words CIV examples"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-pdf",
+      "candidate_url": "https://products.aspose.net/cad/convert-dwg-to-pdf/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "DWG is primary CAD format; products page likely exists at this slug"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "candidate_url": "https://products.aspose.net/cad/convert-dxf-to-pdf/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "DXF format conversion; may exist as separate page or under convert-cad-to-pdf"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "candidate_url": "https://products.aspose.net/cad/convert-cad-to-image/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "Image conversion is a primary CAD use case; follows convert-cad-to-pdf pattern"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-jpg",
+      "candidate_url": "https://products.aspose.net/cad/convert-dwg-to-jpg/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "DWG-to-JPG; may be a separate page or covered under convert-cad-to-image"
+    },
+    {
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "candidate_url": "https://products.aspose.net/finance/parse-xbrl/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "finance family; XBRL parsing is primary use case"
+    },
+    {
+      "family": "font",
+      "slug": "convert-font",
+      "candidate_url": "https://products.aspose.net/font/convert-font/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "font family; font conversion is primary plugin use case"
+    },
+    {
+      "family": "font",
+      "slug": "render-text-with-font",
+      "candidate_url": "https://products.aspose.net/font/render-text-with-font/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "Text rendering with font; secondary use case"
+    },
+    {
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "candidate_url": "https://products.aspose.net/gis/convert-gis-data/",
+      "discovery_status": "NEEDS_MANUAL_VERIFICATION",
+      "confidence": "LOW",
+      "rationale": "gis family was downgraded from SLUG_ALIAS_REQUIRED in Wave 11 — no confirmed canonical page found; CANONICAL_PAGE_BLOCKED classification possible"
+    },
+    {
+      "family": "gis",
+      "slug": "read-gis-data",
+      "candidate_url": "https://products.aspose.net/gis/read-gis-data/",
+      "discovery_status": "NEEDS_MANUAL_VERIFICATION",
+      "confidence": "LOW",
+      "rationale": "gis family blocked by licensing/API complexity; may not have canonical product pages"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-xps",
+      "candidate_url": "https://products.aspose.net/html/convert-html-to-xps/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "html family has CIV entries; XPS conversion follows family pattern"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "candidate_url": "https://products.aspose.net/html/convert-html-to-markdown/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "Markdown output is a primary html conversion use case"
+    },
+    {
+      "family": "html",
+      "slug": "merge-html",
+      "candidate_url": "https://products.aspose.net/html/merge-html/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "HTML merge; merge pattern exists in cells/words families"
+    },
+    {
+      "family": "omr",
+      "slug": "recognize-omr",
+      "candidate_url": "https://products.aspose.net/omr/recognize-omr/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "OMR recognition is the primary omr plugin use case"
+    },
+    {
+      "family": "omr",
+      "slug": "generate-omr-template",
+      "candidate_url": "https://products.aspose.net/omr/generate-omr-template/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "Template generation; secondary omr use case"
+    },
+    {
+      "family": "psd",
+      "slug": "convert-psd-to-png",
+      "candidate_url": "https://products.aspose.net/psd/convert-psd-to-png/",
+      "discovery_status": "NEEDS_MANUAL_VERIFICATION",
+      "confidence": "LOW",
+      "rationale": "psd/convert-psd-to-png was downgraded from SLUG_ALIAS_REQUIRED in Wave 11; canonical page not found at this slug"
+    },
+    {
+      "family": "svg",
+      "slug": "merge-svg",
+      "candidate_url": "https://products.aspose.net/svg/merge-svg/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "MEDIUM",
+      "rationale": "SVG merge; follows pattern of html/merge and cells/merge"
+    },
+    {
+      "family": "tasks",
+      "slug": "read-project-data",
+      "candidate_url": "https://products.aspose.net/tasks/read-project-data/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "tasks family has CIV entries (mpp-to-html, mpp-to-png); read-project-data follows family naming"
+    },
+    {
+      "family": "tex",
+      "slug": "convert-latex-to-pdf",
+      "candidate_url": "https://products.aspose.net/tex/convert-latex-to-pdf/",
+      "discovery_status": "CANDIDATE_PROPOSED",
+      "confidence": "HIGH",
+      "rationale": "tex family; LaTeX-to-PDF is the primary tex plugin use case; MathRendererPlugin confirmed in Aspose.TeX.Plugins"
+    },
+    {
+      "family": "threed",
+      "slug": "convert-3d-model",
+      "candidate_url": "https://products.aspose.net/3d/convert-3d-model/",
+      "discovery_status": "NEEDS_MANUAL_VERIFICATION",
+      "confidence": "LOW",
+      "rationale": "threed family; family URL segment may be '3d' not 'threed'; CANONICAL_PAGE_BLOCKED possible"
+    },
+    {
+      "family": "threed",
+      "slug": "compress-3d-scene",
+      "candidate_url": "https://products.aspose.net/3d/compress-3d-scene/",
+      "discovery_status": "NEEDS_MANUAL_VERIFICATION",
+      "confidence": "LOW",
+      "rationale": "threed family URL segment may be '3d'; secondary use case"
+    }
+  ],
+  "discovery_summary": {
+    "total": 22,
+    "CANDIDATE_PROPOSED": 16,
+    "NEEDS_MANUAL_VERIFICATION": 6,
+    "CANONICAL_IDENTITY_UPGRADED": 0,
+    "wave12_hit_rate": "0/22 — candidates proposed but not web-verified in this sprint",
+    "wave13_priority_for_verification": ["cad (5)", "html (3)", "font (2)", "omr (2)", "tasks (1)", "tex (1)", "barcode (1)"]
+  },
+  "verdict": "URL_DISCOVERY_DOCUMENTED_CANDIDATES_PROPOSED"
+}

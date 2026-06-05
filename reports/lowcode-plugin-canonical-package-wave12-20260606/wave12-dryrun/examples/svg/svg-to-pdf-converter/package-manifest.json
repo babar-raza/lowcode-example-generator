@@ -1,0 +1,17 @@
+{
+  "package_key": "svg/svg-to-pdf-converter",
+  "wave": "wave12",
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "generated_at": "2026-06-06",
+  "plugin_slug": "svg-to-pdf-converter",
+  "family": "svg",
+  "display_plugin_name": "SVG to PDF Converter for .NET",
+  "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "nuget_package": "Aspose.SVG",
+  "nuget_version": "24.12.0",
+  "plugin_class": "Converter",
+  "namespace": "Aspose.Svg.Converters",
+  "primary_method": "Converter.ConvertSVG()",
+  "pattern": "STATIC_CONVERTER_CLASS"
+}

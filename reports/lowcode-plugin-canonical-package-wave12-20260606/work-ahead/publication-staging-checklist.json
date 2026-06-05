@@ -1,0 +1,39 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "H",
+  "date": "2026-06-06",
+  "purpose": "Publication staging checklist for Waves 8-10 CVFP packages (33 total)",
+  "publication_workflow": [
+    "1. Clone destination repo for each family",
+    "2. Create feature branch: lowcode-examples-{family}-wave{N}",
+    "3. Copy canonical package examples (excluding bin/obj)",
+    "4. Commit with feat(lowcode-examples): add {N} examples",
+    "5. Push branch to destination repo",
+    "6. Create PR via gh pr create",
+    "7. Wait for merge approval (PLUGIN_EXAMPLES_MERGE_PR_APPROVAL gate)"
+  ],
+  "readiness_by_family": {
+    "barcode": {"cvfp_count": 4, "pclc_count": 0, "families_with_open_pr": false},
+    "cells": {"cvfp_count": 0, "pclc_count": 0, "note": "6 families have open PRs from 20260602 — see live_prs"},
+    "html": {"cvfp_count": 1, "pclc_count": 0},
+    "imaging": {"cvfp_count": 7, "pclc_count": 0},
+    "note": {"cvfp_count": 1, "pclc_count": 0},
+    "pdf": {"cvfp_count": 9, "pclc_count": 0, "note": "PR #22 open"},
+    "words": {"cvfp_count": 1, "pclc_count": 0, "note": "PR #8 open"},
+    "zip": {"cvfp_count": 2, "pclc_count": 2}
+  },
+  "live_prs_status": {
+    "note": "6 PRs from 20260602 are open — must not be auto-merged without explicit approval",
+    "cells_pr7": "OPEN",
+    "diagram_pr3": "OPEN",
+    "email_pr2": "OPEN",
+    "pdf_pr22": "OPEN",
+    "slides_pr2": "OPEN",
+    "words_pr8": "OPEN"
+  },
+  "blockers_for_wave12_publication": [
+    "Wave 12 packages (svg x2) are PCLC — need publication readiness review before PR creation",
+    "No approval gate is currently SET for Wave 12 families",
+    "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL gate NOT_SET"
+  ]
+}

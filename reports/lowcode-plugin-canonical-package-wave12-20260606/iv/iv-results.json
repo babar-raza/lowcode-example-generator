@@ -1,0 +1,340 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "date": "2026-06-06",
+  "checks_total": 55,
+  "checks_pass": 55,
+  "checks_fail": 0,
+  "verdict": "IV_PASS",
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "Wave 12 lane-ledger.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-02",
+      "description": "Wave 12 taskcards.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-03",
+      "description": "Wave 12 preflight-git-status.txt exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-04",
+      "description": "Wave 12 wave11-defect-inventory.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-05",
+      "description": "Lane-ledger has 11 lanes",
+      "status": "PASS",
+      "detail": "count=11"
+    },
+    {
+      "id": "IV-06",
+      "description": "Wave 11 taskcards.json updated \u2014 no PENDING",
+      "status": "PASS",
+      "detail": "All taskcards COMPLETE"
+    },
+    {
+      "id": "IV-07",
+      "description": "Wave 12 commit-proof-861d73a.txt exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-08",
+      "description": "Wave 12 commit-proof-1b9a94e.txt exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-09",
+      "description": "Wave 12 final-git-status-post-wave11.txt exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-10",
+      "description": "Wave 12 repair-summary.json verdict correct",
+      "status": "PASS",
+      "detail": "WAVE11_CLOSEOUT_REPAIR_COMPLETE"
+    },
+    {
+      "id": "IV-11",
+      "description": "svg/svg-to-pdf-converter Program.cs exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-12",
+      "description": "svg/svg-to-pdf-converter csproj exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-13",
+      "description": "svg/svg-to-pdf-converter output-validation.json verdict=PASS",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "IV-14",
+      "description": "svg/svg-to-pdf-converter has restore/build/run logs",
+      "status": "PASS",
+      "detail": "All 3 logs present"
+    },
+    {
+      "id": "IV-15",
+      "description": "svg/vectorizer output-validation.json verdict=PASS",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "IV-16",
+      "description": "svg/vectorizer has restore/build/run logs",
+      "status": "PASS",
+      "detail": "All 3 logs present"
+    },
+    {
+      "id": "IV-17",
+      "description": "Registry total = 67",
+      "status": "PASS",
+      "detail": "total=67"
+    },
+    {
+      "id": "IV-18",
+      "description": "Registry CIV = 45",
+      "status": "PASS",
+      "detail": "CIV=45"
+    },
+    {
+      "id": "IV-19",
+      "description": "Registry MISSING_CANONICAL_URL = 22",
+      "status": "PASS",
+      "detail": "MCU=22"
+    },
+    {
+      "id": "IV-20",
+      "description": "Registry SLUG_ALIAS_REQUIRED = 0",
+      "status": "PASS",
+      "detail": "SAR=0"
+    },
+    {
+      "id": "IV-21",
+      "description": "svg/svg-to-pdf-converter registry_status=CANONICAL_PACKAGE_PROVEN",
+      "status": "PASS",
+      "detail": "CANONICAL_PACKAGE_PROVEN"
+    },
+    {
+      "id": "IV-22",
+      "description": "svg/vectorizer registry_status=CANONICAL_PACKAGE_PROVEN",
+      "status": "PASS",
+      "detail": "CANONICAL_PACKAGE_PROVEN"
+    },
+    {
+      "id": "IV-23",
+      "description": "svg/svg-to-pdf-converter identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CIV"
+    },
+    {
+      "id": "IV-24",
+      "description": "svg/vectorizer identity_status=CANONICAL_IDENTITY_VERIFIED",
+      "status": "PASS",
+      "detail": "CIV"
+    },
+    {
+      "id": "IV-25",
+      "description": "svg.yaml parses without YAML errors",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-26",
+      "description": "Proven packages total = 45",
+      "status": "PASS",
+      "detail": "total=45"
+    },
+    {
+      "id": "IV-27",
+      "description": "proof-audit-report.json verdict=ALL_FPP_COMPLIANT",
+      "status": "PASS",
+      "detail": "ALL_FPP_COMPLIANT"
+    },
+    {
+      "id": "IV-28",
+      "description": "proof-audit-report.json fpp_pass=43 (Wave 8-11 audit)",
+      "status": "PASS",
+      "detail": "fpp_pass=43"
+    },
+    {
+      "id": "IV-29",
+      "description": "output-evidence-policy.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-30",
+      "description": "output-evidence-policy.json policy=MANIFEST_ONLY",
+      "status": "PASS",
+      "detail": "MANIFEST_ONLY"
+    },
+    {
+      "id": "IV-31",
+      "description": "url-discovery-results.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-32",
+      "description": "url-discovery-results.json has 22 entries",
+      "status": "PASS",
+      "detail": "entries=22"
+    },
+    {
+      "id": "IV-33",
+      "description": "url-discovery-results.json CANDIDATE_PROPOSED count >=16",
+      "status": "PASS",
+      "detail": "CANDIDATE_PROPOSED=16"
+    },
+    {
+      "id": "IV-34",
+      "description": "Wave 11 hit rate documented as 0/22",
+      "status": "PASS",
+      "detail": "wave11_hit_rate documented"
+    },
+    {
+      "id": "IV-35",
+      "description": "wave13-next-queue.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-36",
+      "description": "taskcard_closeout_validators.py exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-37",
+      "description": "test_taskcard_closeout_validators.py exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-38",
+      "description": "wave12-validator-results.json TCC_rules=6",
+      "status": "PASS",
+      "detail": "tcc_rule_count=6"
+    },
+    {
+      "id": "IV-39",
+      "description": "wave12-validator-results.json BMV_rules=5",
+      "status": "PASS",
+      "detail": "bmv_rule_count=5"
+    },
+    {
+      "id": "IV-40",
+      "description": "wave12-validator-results.json total_validator_rules=37",
+      "status": "PASS",
+      "detail": "total_validator_rules=37"
+    },
+    {
+      "id": "IV-41",
+      "description": "unified-publication-matrix-v5.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-42",
+      "description": "Matrix v5 CVFP=33",
+      "status": "PASS",
+      "detail": "CVFP=33"
+    },
+    {
+      "id": "IV-43",
+      "description": "Matrix v5 PCLC=12",
+      "status": "PASS",
+      "detail": "PCLC=12"
+    },
+    {
+      "id": "IV-44",
+      "description": "Matrix v5 MCU=22",
+      "status": "PASS",
+      "detail": "MCU=22"
+    },
+    {
+      "id": "IV-45",
+      "description": "Matrix v5 total=67",
+      "status": "PASS",
+      "detail": "total=67"
+    },
+    {
+      "id": "IV-46",
+      "description": "canonical-package-ledger.json total proven=45",
+      "status": "PASS",
+      "detail": "total=45"
+    },
+    {
+      "id": "IV-47",
+      "description": "sprint-state-summary.json proven_packages.total=45",
+      "status": "PASS",
+      "detail": "total=45"
+    },
+    {
+      "id": "IV-48",
+      "description": "work-ahead/wave13-candidate-matrix.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-49",
+      "description": "work-ahead/publication-staging-checklist.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-50",
+      "description": "state-docs/wave13-next-queue.json has 15 URL targets",
+      "status": "PASS",
+      "detail": "priority_groups=12"
+    },
+    {
+      "id": "IV-51",
+      "description": "Protected file unchanged: pipeline/configs/families/cells.yml",
+      "status": "PASS",
+      "detail": "hash=28c51b79"
+    },
+    {
+      "id": "IV-52",
+      "description": "Protected file unchanged: pipeline/configs/families/words.yml",
+      "status": "PASS",
+      "detail": "hash=ef21e9e5"
+    },
+    {
+      "id": "IV-53",
+      "description": "Protected file unchanged: pipeline/configs/families/pdf.yml",
+      "status": "PASS",
+      "detail": "hash=de889ed2"
+    },
+    {
+      "id": "IV-54",
+      "description": "Protected file unchanged: pipeline/configs/families/slides.yml",
+      "status": "PASS",
+      "detail": "hash=4eec3d74"
+    },
+    {
+      "id": "IV-55",
+      "description": "Protected file unchanged: pipeline/configs/families/email.yml",
+      "status": "PASS",
+      "detail": "hash=3e872e96"
+    }
+  ]
+}

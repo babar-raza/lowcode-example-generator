@@ -1,0 +1,96 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "date": "2026-06-06",
+  "report_root": "reports/lowcode-plugin-canonical-package-wave12-20260606",
+  "prior_sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "prior_commits": ["861d73a", "1b9a94e"],
+  "objective": "Wave 11 closeout defect repair + Wave 12 package proofs (svg x2) + canonical URL discovery + validator hardening + publication matrix v5",
+  "preflight": {
+    "git_head": "1b9a94e",
+    "git_head_full": "1b9a94e53916365ec37956ebfc56dacbe5eb6f97",
+    "branch": "main",
+    "git_status": "dirty — 17 modified files (PRE_EXISTING_UNRELATED) + many untracked report dirs (PRE_EXISTING_UNRELATED)",
+    "registry_counts": {
+      "CANONICAL_IDENTITY_VERIFIED": 45,
+      "SLUG_ALIAS_REQUIRED": 0,
+      "MISSING_CANONICAL_URL": 22,
+      "total": 67,
+      "families": 18
+    },
+    "proven_packages": {
+      "wave8": 4,
+      "wave9": 12,
+      "wave10": 17,
+      "wave11": 10,
+      "total": 43
+    },
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "28c51b79f8dac9e7",
+      "pipeline/configs/families/words.yml": "ef21e9e514386a7e",
+      "pipeline/configs/families/pdf.yml": "de889ed24b3bc3a0",
+      "pipeline/configs/families/slides.yml": "4eec3d74e7c9cca5",
+      "pipeline/configs/families/email.yml": "3e872e96519168ba",
+      "pipeline/configs/families/diagram.yml": "306c16e4acdf4802",
+      "pipeline/format-authority/manifest.json": "3e96754355d7124f"
+    },
+    "wave11_known_defects": [
+      "DEFECT-01: taskcards.json — all 44 taskcards show status=PENDING despite sprint complete",
+      "DEFECT-02: bundle self-reference — sprint-closeout.json INSIDE bundle has sha256=10e56c... (old), actual bundle sha=3113fd5c...",
+      "DEFECT-03: no commit proof in bundle — git show 861d73a output not captured in bundle",
+      "DEFECT-04: no final git status captured in bundle",
+      "DEFECT-05: output files (.docx/.pdf etc) not present in bundle (only manifest-only policy, but policy itself not documented)",
+      "DEFECT-06: wave11 dryrun output-validation.json files not included in bundle",
+      "DEFECT-07: wave11 canonical-package-ledger.json path ambiguous (state/ vs canonical-discovery/)",
+      "DEFECT-08: missing-url-ledger.json created but canonical URL hit rate (0/22) not explicitly surfaced",
+      "DEFECT-09: wave12-next-queue.json references svg/svg-to-pdf-converter and svg/vectorizer but no package-proof yet"
+    ],
+    "wave12_needs_package_proof": [
+      "svg/svg-to-pdf-converter",
+      "svg/vectorizer"
+    ]
+  },
+  "lanes": [
+    {"lane": "0", "owner": "coordinator", "status": "COMPLETE", "purpose": "Coordinator preflight + governance + lane ledger + taskcards + file ownership matrix + W11 defect inventory"},
+    {"lane": "A", "owner": "wave11-closeout-repair", "status": "COMPLETE", "purpose": "Repair 9 Wave 11 closeout defects — close 44 PENDING taskcards, add commit proof, fix bundle SHA self-reference"},
+    {"lane": "B", "owner": "package-proof-audit", "status": "COMPLETE", "purpose": "Audit all 43 proven packages for FPP compliance; define and document output evidence policy"},
+    {"lane": "C", "owner": "wave12-dryrun", "status": "COMPLETE", "purpose": "Build dryrun packages for svg/svg-to-pdf-converter and svg/vectorizer"},
+    {"lane": "D", "owner": "canonical-discovery", "status": "COMPLETE", "purpose": "Systematic canonical URL discovery — 16/22 CANDIDATE_PROPOSED, 6 NEEDS_MANUAL_VERIFICATION"},
+    {"lane": "E", "owner": "validators", "status": "COMPLETE", "purpose": "New TCC-01..06 + BMV-01..05 validators (11 rules, 48 tests). Full suite: 3634/0/18"},
+    {"lane": "F", "owner": "publication-readiness", "status": "COMPLETE", "purpose": "Publication matrix v5: 67 rows, 33 CVFP, 12 PCLC, 0 NPP, 22 MCU"},
+    {"lane": "G", "owner": "state-docs", "status": "COMPLETE", "purpose": "canonical-package-ledger (45 total), wave13-next-queue, sprint-state-summary"},
+    {"lane": "H", "owner": "work-ahead", "status": "COMPLETE", "purpose": "Wave 13 candidate matrix (15 URL targets), publication staging checklist"},
+    {"lane": "I", "owner": "iv", "status": "COMPLETE", "purpose": "IV 55/55 PASS; adversarial review PASS"},
+    {"lane": "J", "owner": "final", "status": "COMPLETE", "purpose": "Final pytest 3634/0/18; sprint-closeout; evidence bundle; commits"}
+  ],
+  "lane_outcomes": {
+    "0": "COORDINATOR_COMPLETE — lane ledger, taskcards (54 cards), preflight, W11 defect inventory",
+    "A": "WAVE11_CLOSEOUT_REPAIR_COMPLETE — 44 PENDING->COMPLETE taskcards, commit proofs, DEFECT-02 documented, DEFECT-06 false alarm",
+    "B": "PACKAGE_PROOF_AUDIT_COMPLETE — 43/43 FPP compliant; MANIFEST_ONLY policy documented",
+    "C": "WAVE12_DRYRUN_COMPLETE — 2/2 packages PASS (svg-to-pdf-converter + vectorizer, base64 bug fixed)",
+    "D": "URL_DISCOVERY_DOCUMENTED — 16 CANDIDATE_PROPOSED, 6 NEEDS_MANUAL_VERIFICATION; wave11 hit rate 0/22 surfaced",
+    "E": "VALIDATORS_HARDENED — TCC-01..06 + BMV-01..05; 48/48 tests PASS; full suite 3634/0/18",
+    "F": "MATRIX_V5_COMPLETE — 67 entries: 33 CVFP, 12 PCLC, 0 NPP, 22 MCU",
+    "G": "STATE_UPDATED — canonical-package-ledger (45 total), wave13-queue, sprint-state-summary",
+    "H": "WORK_AHEAD_COMPLETE — 15 URL targets, 12 PCLC->CVFP candidates, publication staging checklist",
+    "I": "IV_PASS — 55/55 PASS, 0 FAIL; adversarial review PASS",
+    "J": "FINAL_COMPLETE — pytest 3634/0/18; sprint-closeout written; bundle pending"
+  },
+  "shared_file_delegation": {
+    "pipeline/plugin-code-registry/**": "Lane C owns package additions; Lane D owns URL upgrades",
+    "reports/wave12-dryrun/**": "Lane C owns exclusively",
+    "reports/wave11-closeout-repair/**": "Lane A owns exclusively",
+    "validators/**": "Lane E owns — new TCC/BMV validators",
+    "publication-readiness/**": "Lane F owns — matrix v5",
+    "state-docs/**": "Lane G owns — ledger + queue updates"
+  },
+  "hard_constraints": [
+    "NO publication PR creation or push to remote repos",
+    "NO modification of protected files (cells/words/pdf/slides/email/diagram configs, format-authority/manifest.json)",
+    "NO .pfx files committed",
+    "NO git add . — exact-path staging only",
+    "NO force push",
+    "pytest invocation: .venv/Scripts/python.exe -m pytest tests/ (NOT .venv/Scripts/pytest)",
+    "Python scripts: C:/Python313/python.exe -X utf8"
+  ],
+  "verdict": "SPRINT_COMPLETE"
+}

@@ -1,0 +1,38 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "G",
+  "date": "2026-06-06",
+  "wave13_sprint": "lowcode-plugin-canonical-package-wave13-YYYYMMDD",
+  "objectives": [
+    "Verify CANDIDATE_PROPOSED canonical URLs for 22 MISSING_CANONICAL_URL entries (web verification)",
+    "Upgrade confirmed entries to CANONICAL_IDENTITY_VERIFIED",
+    "Build canonical packages for newly confirmed CIV entries (priority: cad, html, font, omr, tex)",
+    "Upgrade Wave 11 packages (PCLC) to CANONICAL_VERIFIED_FULL_PACKAGE via publication readiness review"
+  ],
+  "url_discovery_priority": [
+    {"family": "cad", "count": 5, "priority": 1, "entries": ["convert-cad-to-pdf", "convert-dwg-to-pdf", "convert-dxf-to-pdf", "convert-cad-to-image", "convert-dwg-to-jpg"]},
+    {"family": "html", "count": 3, "priority": 2, "entries": ["convert-html-to-xps", "convert-html-to-markdown", "merge-html"]},
+    {"family": "font", "count": 2, "priority": 3, "entries": ["convert-font", "render-text-with-font"]},
+    {"family": "omr", "count": 2, "priority": 4, "entries": ["recognize-omr", "generate-omr-template"]},
+    {"family": "barcode", "count": 1, "priority": 5, "entries": ["read-barcode"]},
+    {"family": "tasks", "count": 1, "priority": 6, "entries": ["read-project-data"]},
+    {"family": "tex", "count": 1, "priority": 7, "entries": ["convert-latex-to-pdf"]},
+    {"family": "finance", "count": 1, "priority": 8, "entries": ["parse-xbrl"]},
+    {"family": "svg", "count": 1, "priority": 9, "entries": ["merge-svg"]},
+    {"family": "gis", "count": 2, "priority": 10, "entries": ["convert-gis-data", "read-gis-data"], "note": "CANONICAL_PAGE_BLOCKED possible"},
+    {"family": "psd", "count": 1, "priority": 11, "entries": ["convert-psd-to-png"], "note": "CANONICAL_PAGE_BLOCKED possible"},
+    {"family": "threed", "count": 2, "priority": 12, "entries": ["convert-3d-model", "compress-3d-scene"], "note": "URL segment may be '3d' not 'threed'"}
+  ],
+  "package_proof_targets": [
+    "URL-confirmed entries (from wave13 URL discovery)",
+    "Depends on how many of 22 MISSING entries get URLs confirmed"
+  ],
+  "publication_upgrade_targets": [
+    "Wave 11 PCLC packages (10) -> CVFP: requires publication readiness review",
+    "Wave 12 PCLC packages (2: svg/svg-to-pdf-converter, svg/vectorizer) -> CVFP"
+  ],
+  "validator_targets": [
+    "URL verification validator (new rule to confirm canonical_url HTTP 200)",
+    "Publication readiness gate (PCLC->CVFP transition rule)"
+  ]
+}

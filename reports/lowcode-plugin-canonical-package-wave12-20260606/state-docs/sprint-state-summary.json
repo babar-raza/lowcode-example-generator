@@ -1,0 +1,49 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "G",
+  "date": "2026-06-06",
+  "registry_state": {
+    "total_entries": 67,
+    "CANONICAL_IDENTITY_VERIFIED": 45,
+    "SLUG_ALIAS_REQUIRED": 0,
+    "MISSING_CANONICAL_URL": 22
+  },
+  "proven_packages": {
+    "wave8": 4,
+    "wave9": 12,
+    "wave10": 17,
+    "wave11": 10,
+    "wave12": 2,
+    "total": 45
+  },
+  "publication_readiness": {
+    "CANONICAL_VERIFIED_FULL_PACKAGE": 33,
+    "PUBLICATION_CANDIDATE_LOCAL_CLEAN": 12,
+    "NEEDS_PACKAGE_PROOF": 0,
+    "MISSING_CANONICAL_URL": 22
+  },
+  "validators": {
+    "ccv_rules": 18,
+    "rbc_rules": 8,
+    "tcc_rules": 6,
+    "bmv_rules": 5,
+    "total_rules": 37
+  },
+  "live_prs": {
+    "note": "6 PRs open from 20260602 — no changes in Wave 12 sprint",
+    "cells": 7,
+    "diagram": 3,
+    "email": 2,
+    "pdf": 22,
+    "slides": 2,
+    "words": 8
+  },
+  "delta_from_wave11": {
+    "proven_packages": "+2 (43->45): svg/svg-to-pdf-converter + svg/vectorizer",
+    "PCLC": "+2 (10->12)",
+    "NEEDS_PACKAGE_PROOF": "-2 (2->0): both svg packages proven",
+    "MISSING_CANONICAL_URL": "0 (22->22)",
+    "validators": "+11 rules (37 total: +TCC-01..06 +BMV-01..05)",
+    "wave11_defects_repaired": "3/9 repaired directly (DEFECT-01,03,04), 1 false alarm (DEFECT-06), 5 documented/deferred"
+  }
+}

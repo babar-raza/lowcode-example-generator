@@ -1,0 +1,378 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "date": "2026-06-06",
+  "taskcard_policy": "All taskcards must be COMPLETE before sprint-closeout is written. No PENDING taskcards in final bundle.",
+  "taskcards": [
+    {
+      "id": "W12-L0-01",
+      "lane": "0",
+      "title": "Create Wave 12 report root directory structure",
+      "status": "COMPLETE",
+      "evidence": "reports/lowcode-plugin-canonical-package-wave12-20260606/ created with 12 subdirs"
+    },
+    {
+      "id": "W12-L0-02",
+      "lane": "0",
+      "title": "Capture preflight git status and log",
+      "status": "COMPLETE",
+      "evidence": "coordinator/preflight-git-status.txt — HEAD=1b9a94e, 17 modified PRE_EXISTING, registry 67/45/0/22"
+    },
+    {
+      "id": "W12-L0-03",
+      "lane": "0",
+      "title": "Create lane ledger with all 11 lanes",
+      "status": "COMPLETE",
+      "evidence": "coordinator/lane-ledger.json — 11 lanes defined (0+A-J)"
+    },
+    {
+      "id": "W12-L0-04",
+      "lane": "0",
+      "title": "Capture protected-file baseline hashes",
+      "status": "COMPLETE",
+      "evidence": "coordinator/lane-ledger.json preflight.protected_file_hashes — all 7 files verified"
+    },
+    {
+      "id": "W12-L0-05",
+      "lane": "0",
+      "title": "Create taskcards for all lanes before implementation",
+      "status": "COMPLETE",
+      "evidence": "taskcards/taskcards.json — this file"
+    },
+    {
+      "id": "W12-L0-06",
+      "lane": "0",
+      "title": "Document Wave 11 defect inventory (9 defects)",
+      "status": "COMPLETE",
+      "evidence": "coordinator/preflight-git-status.txt + lane-ledger.json preflight.wave11_known_defects"
+    },
+    {
+      "id": "W12-LA-01",
+      "lane": "A",
+      "title": "Close 44 Wave 11 taskcards (all PENDING → COMPLETE truthfully)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-02",
+      "lane": "A",
+      "title": "Add git show 861d73a commit proof to wave11-closeout-repair/",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-03",
+      "lane": "A",
+      "title": "Add final git status file to wave11-closeout-repair/",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-04",
+      "lane": "A",
+      "title": "Document and resolve DEFECT-02: bundle SHA self-reference",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-05",
+      "lane": "A",
+      "title": "Capture wave11 dryrun output-validation.json files (DEFECT-06)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-06",
+      "lane": "A",
+      "title": "Document output evidence policy — manifest-only vs full artifact (DEFECT-05)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LA-07",
+      "lane": "A",
+      "title": "Write wave11-closeout-repair/repair-summary.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LB-01",
+      "lane": "B",
+      "title": "Enumerate all 43 proven packages across Waves 8-11",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LB-02",
+      "lane": "B",
+      "title": "Verify each package has Program.cs, csproj, output-validation.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LB-03",
+      "lane": "B",
+      "title": "Verify each package has restore.log, build.log, run.log",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LB-04",
+      "lane": "B",
+      "title": "Write package-proof/proof-audit-report.json with per-package compliance status",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LB-05",
+      "lane": "B",
+      "title": "Write and publish output-evidence-policy.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LC-01",
+      "lane": "C",
+      "title": "Build dryrun package for svg/svg-to-pdf-converter",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LC-02",
+      "lane": "C",
+      "title": "Build dryrun package for svg/vectorizer",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LC-03",
+      "lane": "C",
+      "title": "Run PIV validators on both Wave 12 packages",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LC-04",
+      "lane": "C",
+      "title": "Capture restore.log, build.log, run.log for both packages",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LC-05",
+      "lane": "C",
+      "title": "Write wave12-dryrun/dryrun-results.json with both package results",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-01",
+      "lane": "D",
+      "title": "Enumerate all 22 MISSING_CANONICAL_URL entries with family + slug",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-02",
+      "lane": "D",
+      "title": "Research canonical page URLs for cad family (5 entries — priority)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-03",
+      "lane": "D",
+      "title": "Research canonical page URLs for omr family (2 entries)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-04",
+      "lane": "D",
+      "title": "Research canonical page URLs for font, threed, gis families (2+2+2 entries)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-05",
+      "lane": "D",
+      "title": "Write canonical-discovery/url-discovery-results.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LD-06",
+      "lane": "D",
+      "title": "Upgrade confirmed entries to CANONICAL_IDENTITY_VERIFIED in registry YAMLs",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LE-01",
+      "lane": "E",
+      "title": "Define Taskcard Closeout Consistency (TCC) validator rules",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LE-02",
+      "lane": "E",
+      "title": "Define Bundle Metadata Verification (BMV) validator rules",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LE-03",
+      "lane": "E",
+      "title": "Implement TCC + BMV validators in src/plugin_examples/fixture_factory/",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LE-04",
+      "lane": "E",
+      "title": "Write tests for TCC + BMV validators",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LE-05",
+      "lane": "E",
+      "title": "Run full pytest suite — target 3586+ passed, 0 failed",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LF-01",
+      "lane": "F",
+      "title": "Build publication matrix v5 incorporating Wave 12 package-proof upgrades",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LF-02",
+      "lane": "F",
+      "title": "Incorporate canonical URL discoveries into matrix v5",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LF-03",
+      "lane": "F",
+      "title": "Write publication-readiness/unified-publication-matrix-v5.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LG-01",
+      "lane": "G",
+      "title": "Close Wave 11 taskcards (update taskcards.json to all COMPLETE)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LG-02",
+      "lane": "G",
+      "title": "Update canonical-package-ledger.json with Wave 12 packages",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LG-03",
+      "lane": "G",
+      "title": "Write wave13-next-queue.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LG-04",
+      "lane": "G",
+      "title": "Write state-docs/sprint-state-summary.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LH-01",
+      "lane": "H",
+      "title": "Build Wave 13 candidate matrix (MISSING_CANONICAL_URL upgrade targets)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LH-02",
+      "lane": "H",
+      "title": "Write fixture plans for Wave 13 packages",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LH-03",
+      "lane": "H",
+      "title": "Write publication staging checklist for Wave 8-11 CVFP packages",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LI-01",
+      "lane": "I",
+      "title": "Run IV — 50+ independent verification checks",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LI-02",
+      "lane": "I",
+      "title": "Adversarial review — attempt to find contradictions in sprint deliverables",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LI-03",
+      "lane": "I",
+      "title": "Write iv/iv-results.json",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-01",
+      "lane": "J",
+      "title": "Run final pytest suite — 0 failed required",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-02",
+      "lane": "J",
+      "title": "Stage and commit Wave 12 files (exact-path staging)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-03",
+      "lane": "J",
+      "title": "Build evidence bundle ZIP with all sprint deliverables",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-04",
+      "lane": "J",
+      "title": "Update sprint-closeout.json with bundle SHA (correct self-referential order)",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-05",
+      "lane": "J",
+      "title": "Commit bundle SHA update as chore(wave12): commit",
+      "status": "PENDING",
+      "evidence": null
+    },
+    {
+      "id": "W12-LJ-06",
+      "lane": "J",
+      "title": "Rebuild bundle after chore commit — final authoritative bundle",
+      "status": "PENDING",
+      "evidence": null
+    }
+  ]
+}

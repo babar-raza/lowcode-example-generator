@@ -1,0 +1,103 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "0",
+  "date": "2026-06-06",
+  "subject": "Wave 11 closeout defect inventory",
+  "wave11_sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "wave11_commits": ["861d73a", "1b9a94e"],
+  "defects": [
+    {
+      "id": "DEFECT-01",
+      "severity": "HIGH",
+      "category": "TASKCARD_INTEGRITY",
+      "title": "All 44 Wave 11 taskcards show status=PENDING despite sprint being COMPLETE",
+      "description": "taskcards.json was created at the start of Lane 0 with all statuses PENDING. The taskcards were never updated as lanes completed. The sprint-closeout.json and lane-ledger.json both correctly show SPRINT_COMPLETE, but the taskcards file is contradictory.",
+      "file": "reports/lowcode-plugin-canonical-package-wave11-20260605/coordinator/taskcards.json",
+      "remediation": "Lane A will update all 44 taskcards to COMPLETE with truthful evidence references",
+      "assigned_lane": "A"
+    },
+    {
+      "id": "DEFECT-02",
+      "severity": "HIGH",
+      "category": "BUNDLE_INTEGRITY",
+      "title": "Bundle SHA self-reference: closeout inside bundle has old SHA",
+      "description": "The evidence bundle at SHA 3113fd5c... was built AFTER the final sprint-closeout.json update that recorded the old SHA (10e56c...). So the sprint-closeout.json INSIDE the bundle still says sha256=10e56c613469d53e9dc3821920b67f0e74ce1180893b8b0cf9c95dea08bfae85 (from the first bundle run), but the actual bundle is 3113fd5c...",
+      "stale_sha_inside_bundle": "10e56c613469d53e9dc3821920b67f0e74ce1180893b8b0cf9c95dea08bfae85",
+      "actual_bundle_sha": "3113fd5c9d9636d772612449a768df25440773000804787bd540a7782088e7b1",
+      "file": "reports/lowcode-plugin-canonical-package-wave11-20260605/final/sprint-closeout.json (inside bundle)",
+      "remediation": "Document defect clearly. Wave 12 final bundle will be authoritative; correct self-referential order implemented: build→SHA→update closeout→commit→rebuild→commit SHA update→rebuild final",
+      "assigned_lane": "A"
+    },
+    {
+      "id": "DEFECT-03",
+      "severity": "MEDIUM",
+      "category": "BUNDLE_COMPLETENESS",
+      "title": "No commit proof in bundle — git show 861d73a not captured",
+      "description": "The evidence bundle does not contain a captured git-show output for the main Wave 11 commit (861d73a). Commit proof is necessary for independent verification without access to the live repo.",
+      "file": "reports/lowcode-plugin-canonical-package-wave11-20260605/final/ (missing commit-proof.txt)",
+      "remediation": "Lane A: capture git show 861d73a > wave11-closeout-repair/commit-proof-861d73a.txt and include in Wave 12 bundle",
+      "assigned_lane": "A"
+    },
+    {
+      "id": "DEFECT-04",
+      "severity": "MEDIUM",
+      "category": "BUNDLE_COMPLETENESS",
+      "title": "No final git status captured in bundle",
+      "description": "No file captures the git status at the time of Wave 11 bundle creation. This makes it impossible to verify the dirty-file baseline from outside the repo.",
+      "file": "reports/lowcode-plugin-canonical-package-wave11-20260605/final/ (missing final-git-status.txt)",
+      "remediation": "Lane A: capture current git status into wave11-closeout-repair/final-git-status.txt",
+      "assigned_lane": "A"
+    },
+    {
+      "id": "DEFECT-05",
+      "severity": "LOW",
+      "category": "EVIDENCE_POLICY",
+      "title": "Output artifact policy undocumented — .docx/.pdf etc not in bundle",
+      "description": "The bundle contains output-validation.json manifests but not the actual output artifacts (e.g., .docx, .pdf, .png). This is intentional (manifest-only policy for size) but was never formally documented.",
+      "remediation": "Lane A/B: write output-evidence-policy.json formally documenting MANIFEST_ONLY policy with rationale",
+      "assigned_lane": "B"
+    },
+    {
+      "id": "DEFECT-06",
+      "severity": "MEDIUM",
+      "category": "BUNDLE_COMPLETENESS",
+      "title": "Wave 11 dryrun output-validation.json files not in bundle",
+      "description": "The _bundle.py INCLUDE_PATTERNS for Wave 11 include *.json files, so output-validation.json files should be present. However, if the dryrun output-validation.json files were named differently or placed in non-standard paths, they may be missing.",
+      "remediation": "Lane A: verify output-validation.json files are present for all 10 Wave 11 packages; re-bundle if any are missing",
+      "assigned_lane": "A"
+    },
+    {
+      "id": "DEFECT-07",
+      "severity": "LOW",
+      "category": "STATE_DOCS",
+      "title": "canonical-package-ledger.json path ambiguous",
+      "description": "The canonical-package-ledger.json may exist at state/ or canonical-discovery/ path within the Wave 11 report. The path was not standardized.",
+      "remediation": "Lane G: standardize at state-docs/canonical-package-ledger.json with canonical path documented",
+      "assigned_lane": "G"
+    },
+    {
+      "id": "DEFECT-08",
+      "severity": "LOW",
+      "category": "TRANSPARENCY",
+      "title": "missing-url-ledger.json canonical URL hit rate (0/22) not surfaced",
+      "description": "22 MISSING_CANONICAL_URL entries remain. The missing-url-ledger.json was created but doesn't explicitly state that the URL hit rate was 0/22 (no URLs discovered in Wave 11).",
+      "remediation": "Lane D: explicitly state Wave 11 URL hit rate = 0/22 in Wave 12 canonical-discovery results",
+      "assigned_lane": "D"
+    },
+    {
+      "id": "DEFECT-09",
+      "severity": "LOW",
+      "category": "QUEUE_ACCURACY",
+      "title": "wave12-next-queue references svg entries without package-proof yet",
+      "description": "The wave12-next-queue.json correctly identifies svg/svg-to-pdf-converter and svg/vectorizer as needing package-proof in Wave 12. This is a known planned item, not a true defect, but confirms these 2 packages must be proven in Wave 12 Lane C.",
+      "remediation": "Lane C: build packages for both svg entries; Lane G: update wave13-next-queue.json",
+      "assigned_lane": "C"
+    }
+  ],
+  "defect_summary": {
+    "total": 9,
+    "HIGH": 2,
+    "MEDIUM": 3,
+    "LOW": 4
+  }
+}

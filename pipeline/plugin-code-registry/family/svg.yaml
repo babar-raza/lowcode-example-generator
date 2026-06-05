@@ -78,10 +78,13 @@ plugins:
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; Converter.ConvertSVG()
     + PdfSaveOptions confirmed on product page
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/svg/svg-to-pdf-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/svg-to-pdf-converter
+  canonical_package_wave: wave12
+  canonical_package_proven_at: '2026-06-06'
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
@@ -91,9 +94,10 @@ plugins:
   - SVGDocument
   methods_used:
   - Converter.ConvertSVG()
-  next_action: Create dry-run example package
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
+  - reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/svg-to-pdf-converter/output-validation.json
   history:
   - date: '2026-06-04'
     status: READY_FOR_TRANSFORMATION
@@ -115,18 +119,19 @@ plugins:
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; Converter.ConvertImageToSVG()
     confirmed on product page
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
   classes_used:
-  - Converter
+  - ImageVectorizer
   - ImageVectorizerConfiguration
   methods_used:
-  - Converter.ConvertImageToSVG()
-  next_action: Create dry-run example package
+  - ImageVectorizer.Vectorize()
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
+  - reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer/output-validation.json
   history:
   - date: '2026-06-04'
     status: READY_FOR_TRANSFORMATION
@@ -135,14 +140,22 @@ plugins:
   - date: '2026-06-05'
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
-      package built and validated. 14/14 PASS.
+      package built but run.log showed FormatException (invalid base64 in fixture
+      creation). Marked DRYRUN_PASS in output-validation.json was incorrect.
   - date: '2026-06-05'
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint wave11-20260605. URL https://products.aspose.net/svg/vectorizer/
       confirmed canonical-primary format, plugin_slug matches canonical.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: 'Sprint wave12-20260606. Fixed base64 fixture (98-char invalid
+      -> 96-char valid 1x1 PNG). Package rebuilt and all logs pass. Output 426-byte
+      SVG produced.'
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer
-  dryrun_validation_status: DRYRUN_PASS
-  dryrun_validated_at: '2026-06-05'
+  dryrun_validation_status: DRYRUN_FAIL_CORRECTED
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer
+  canonical_package_wave: wave12
+  canonical_package_proven_at: '2026-06-06'
   legacy_aliases:
   - convert-svg-to-jpg
   migration_status: CANONICAL_PRIMARY_NATIVE

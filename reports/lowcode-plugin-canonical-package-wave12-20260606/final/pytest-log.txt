@@ -1,0 +1,13 @@
+Wave 12 Final pytest run
+Sprint: lowcode-plugin-canonical-package-wave12-20260606
+Date: 2026-06-06
+Command: .venv/Scripts/python.exe -m pytest tests/ -q
+
+Result: 3634 passed, 18 skipped, 10 subtests passed in 288.75s (0:04:48)
+
+Delta from Wave 11 baseline (3586/0/18):
+  +48 new tests (TCC-01..TCC-06 = 26 tests, BMV-01..BMV-05 = 22 tests)
+  0 failures
+  18 skipped (unchanged from Wave 11)
+
+Verdict: PYTEST_PASS

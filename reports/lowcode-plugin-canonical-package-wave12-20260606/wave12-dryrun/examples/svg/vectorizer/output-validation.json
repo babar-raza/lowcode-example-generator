@@ -1,0 +1,15 @@
+{
+  "package_key": "svg/vectorizer",
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "generated_at": "2026-06-06",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output/output.svg",
+      "size": 426
+    }
+  ],
+  "verdict": "PASS"
+}

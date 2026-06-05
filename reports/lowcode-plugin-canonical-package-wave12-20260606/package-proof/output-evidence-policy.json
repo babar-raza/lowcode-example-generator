@@ -1,0 +1,36 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "B",
+  "date": "2026-06-06",
+  "policy_name": "OUTPUT_EVIDENCE_POLICY",
+  "policy_version": "1.0",
+  "policy": "MANIFEST_ONLY",
+  "rationale": [
+    "Evidence bundles contain output-validation.json manifest (verdict, file paths, sizes, hashes) rather than actual output artifacts (.docx, .pdf, .png, .zip, etc.)",
+    "Reasons for MANIFEST_ONLY:",
+    "1. SIZE: Output artifacts (PDFs, images, Office files) can be 100KB-10MB each. With 43+ packages, full artifact inclusion would bloat bundles to 100MB+.",
+    "2. REPRODUCIBILITY: The manifest records exactly what was produced (filename, size, hash). Anyone with the source code + NuGet packages can reproduce identical or equivalent artifacts.",
+    "3. SECURITY: No proprietary or user-generated content is committed to the repository.",
+    "4. SUFFICIENCY: output-validation.json with verdict=PASS + file path + size + hash provides audit-grade evidence that the program ran successfully and produced expected output."
+  ],
+  "what_is_included_in_bundle": [
+    "Program.cs (source code)",
+    "*.csproj (project file with NuGet dependencies)",
+    "package-manifest.json (package metadata: plugin class, namespace, NuGet package)",
+    "output-validation.json (verdict, output file list with paths/sizes/hashes)",
+    "restore.log (nuget restore output)",
+    "build.log (dotnet build output)",
+    "run.log (dotnet run output)",
+    "source-provenance.json (link to original source package)"
+  ],
+  "what_is_excluded_from_bundle": [
+    "Actual output artifacts (.docx, .pdf, .png, .zip, .txt output files)",
+    "NuGet packages (bin/, obj/ directories)",
+    "Input fixture files (images, PDFs used as input)"
+  ],
+  "exception_cases": [
+    "Small text outputs (e.g., OCR result.txt) may be included when they are small (<5KB) and are needed for human readability of the result",
+    "Exception requires explicit annotation in output-validation.json under included_in_bundle: true"
+  ],
+  "verification_path": "Any verifier can check: (1) Program.cs + csproj are present; (2) output-validation.json shows verdict=PASS; (3) restore/build/run logs show successful execution; (4) output files listed in output-validation.json match expected filenames/extensions for the plugin type"
+}

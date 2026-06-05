@@ -1,0 +1,54 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "C",
+  "date": "2026-06-06",
+  "packages_built": 2,
+  "packages_pass": 2,
+  "packages_fail": 0,
+  "packages": [
+    {
+      "family": "svg",
+      "slug": "svg-to-pdf-converter",
+      "package_key": "svg/svg-to-pdf-converter",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "nuget_package": "Aspose.SVG 24.12.0",
+      "restore_status": "SUCCESS",
+      "build_status": "SUCCESS",
+      "run_status": "SUCCESS",
+      "output_file": "output/output.pdf",
+      "output_size_bytes": 32590,
+      "piv_verdict": "PASS",
+      "fpp_compliant": true,
+      "package_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/svg-to-pdf-converter",
+      "notes": "Ported from factory sprint. Program.cs unchanged. All 7 FPP artifacts present."
+    },
+    {
+      "family": "svg",
+      "slug": "vectorizer",
+      "package_key": "svg/vectorizer",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "nuget_package": "Aspose.SVG 24.12.0",
+      "restore_status": "SUCCESS",
+      "build_status": "SUCCESS",
+      "run_status": "SUCCESS",
+      "output_file": "output/output.svg",
+      "output_size_bytes": 426,
+      "piv_verdict": "PASS",
+      "fpp_compliant": true,
+      "package_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer",
+      "fix_applied": "VECTORIZER_BASE64_FIX — corrected invalid 98-char base64 to valid 96-char 1x1 PNG. Original factory package had FormatException on run.",
+      "notes": "Base64 fixture corrected. Run now produces valid 426-byte SVG output."
+    }
+  ],
+  "cumulative_proven_packages": {
+    "wave8": 4,
+    "wave9": 12,
+    "wave10": 17,
+    "wave11": 10,
+    "wave12": 2,
+    "total": 45
+  },
+  "verdict": "WAVE12_DRYRUN_COMPLETE"
+}

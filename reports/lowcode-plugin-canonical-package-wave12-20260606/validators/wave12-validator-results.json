@@ -1,0 +1,37 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "lane": "E",
+  "date": "2026-06-06",
+  "new_validators": {
+    "tcc_rules": ["TCC-01", "TCC-02", "TCC-03", "TCC-04", "TCC-05", "TCC-06"],
+    "tcc_rule_count": 6,
+    "tcc_description": "Taskcard Closeout Consistency — prevents PENDING taskcards at sprint closeout",
+    "tcc_tests": 26,
+    "tcc_result": "ALL_PASS",
+    "bmv_rules": ["BMV-01", "BMV-02", "BMV-03", "BMV-04", "BMV-05"],
+    "bmv_rule_count": 5,
+    "bmv_description": "Bundle Metadata Verification — prevents PENDING/null SHA, commit, entry count at closeout",
+    "bmv_tests": 22,
+    "bmv_result": "ALL_PASS",
+    "files": {
+      "validator": "src/plugin_examples/fixture_factory/taskcard_closeout_validators.py",
+      "test_file": "tests/unit/test_taskcard_closeout_validators.py"
+    }
+  },
+  "inherited_validators": {
+    "ccv_rules": 18,
+    "ccv_tests": 64,
+    "rbc_rules": 8,
+    "rbc_tests": 34
+  },
+  "total_validator_rules": 37,
+  "total_validator_tests_new": 48,
+  "defects_prevented": [
+    "DEFECT-01 (PENDING taskcards at closeout) -> TCC-01, TCC-06",
+    "DEFECT-02 (bundle SHA self-reference stale) -> BMV-01",
+    "DEFECT-03 (no commit proof) -> BMV-02",
+    "DEFECT-05 (output policy undocumented) -> documented in output-evidence-policy.json"
+  ],
+  "full_suite_result": "PENDING_BACKGROUND_RUN",
+  "verdict": "VALIDATORS_HARDENED"
+}

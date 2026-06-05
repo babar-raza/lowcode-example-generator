@@ -1,0 +1,147 @@
+family: tasks
+package_id: Aspose.Tasks
+github_repo: https://github.com/aspose-tasks/Aspose.Tasks-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+plugins:
+- plugin_slug: convert-mpp-to-pdf
+  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-pdf
+  canonical_url: https://products.aspose.net/tasks/project-to-pdf-converter/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: Canonical URL confirmed; code fetched from official
+    demo; Project.Save() pattern confirmed on page
+  page_hash: 652dc2460994d483
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - e3f1a9b2c7d04582f8e6a1c3d5b0f724
+  classes_used:
+  - Project
+  - PdfSaveOptions
+  methods_used:
+  - new Project(inFilePath)
+  - project.Save(outPath, (SaveOptions)pdfSaveOptions)
+  github_links:
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Demos/src/Aspose.Tasks.Live.Demos.UI/Models/AsposeTasksConversion.cs
+  next_action: Transform to dry-run example package; requires .mpp fixture or programmatic
+    project creation
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
+  - reports/lowcode-plugin-registry-expansion-20260604/code-harvest/raw-code/tasks-project-to-pdf-AsposeTasksConversion.cs
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604.
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-registry-expansion-20260604. Canonical URL
+      confirmed: /tasks/project-to-pdf-converter/. Official code: AsposeTasksConversion.cs
+      — Project.Save(path, PdfSaveOptions) confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/tasks/convert-mpp-to-pdf
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/tasks/convert-mpp-to-pdf
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: convert-mpp-to-excel
+  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-excel
+  page_hash: 04409e41e63edc00
+  registry_status: CODE_HARVESTED
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 00ea6fa7ec6a0a47a736c6e5881ea89d
+  classes_used:
+  - GanttChartColumn
+  - XlsxOptions
+  - AssignmentViewColumn
+  - ResourceViewColumn
+  - Project
+  github_links:
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExXlsxOptions.cs
+  next_action: Extract symbols from ExXlsxOptions.cs and validate against DllReflector;
+    then advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExXlsxOptions.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExXlsxOptions.cs
+- plugin_slug: convert-mpp-to-html
+  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-html
+  page_hash: 224b5bdf76853c84
+  registry_status: CODE_HARVESTED
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - de61533f18dfe74531a213840f150d61
+  classes_used:
+  - HtmlSaveOptions
+  - Project
+  - List
+  github_links:
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/SavingOptions/ExHtmlSaveOptions.cs
+  next_action: Extract symbols from ExHtmlSaveOptions.cs and validate against DllReflector;
+    then advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/SavingOptions/ExHtmlSaveOptions.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExHtmlSaveOptions.cs
+- plugin_slug: convert-mpp-to-image
+  plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-image
+  page_hash: 59a05725ee005f68
+  registry_status: CODE_HARVESTED
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 442fc9d660a8132062a6f196651ab82e
+  classes_used:
+  - FileStream
+  - List
+  - FileMode
+  - Project
+  - ResourcePrefixForNestedResources
+  github_links:
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExIImageSavingCallback.cs
+  next_action: Extract symbols from ExIImageSavingCallback.cs and validate against
+    DllReflector; then advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  - https://raw.githubusercontent.com/aspose-tasks/Aspose.Tasks-for-.NET/master/Examples/CSharp/ExIImageSavingCallback.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExIImageSavingCallback.cs
+- plugin_slug: read-project-data
+  plugin_url: https://products.aspose.net/tasks/net/read-project-data
+  page_hash: 3fc4bed1f635537e
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: NEEDS_MANUAL_MAPPING
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes: []
+  next_action: Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS);
+    fetch better example from GitHub
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.

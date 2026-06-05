@@ -1,0 +1,206 @@
+family: barcode
+package_id: Aspose.BarCode
+github_repo: https://github.com/aspose-barcode/Aspose.Barcode-for-.NET
+implementation_model: STATIC_CONVERTER_CLASS
+plugins:
+- plugin_slug: generate-barcode
+  plugin_url: https://products.aspose.net/barcode/net/generate-barcode
+  canonical_url: https://products.aspose.net/barcode/1d-barcode-writer/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 1d-barcode-writer;
+    BarcodeGenerator class available
+  page_hash: 1770337e14ce0847
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes:
+  - fb9f597b4f84aaa2922bc321594e9993
+  namespaces_used:
+  - Aspose.Drawing.Imaging
+  - Aspose.BarCode.Generation
+  - Aspose.Drawing
+  classes_used:
+  - BarcodeGenerator
+  github_links:
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs
+  next_action: Transform to dry-run example package; confirmed READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from StoreBarcodeOutputAsBitmap.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /barcode/1d-barcode-writer/. Classes confirmed via page crawl:
+      BarcodeGenerator, GenerateBarCodeImage.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/generate-barcode
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/generate-barcode
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: recognize-barcode
+  plugin_url: https://products.aspose.net/barcode/net/recognize-barcode
+  canonical_url: https://products.aspose.net/barcode/1d-barcode-reader/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 1d-barcode-reader;
+    BarCodeReader class available
+  page_hash: 18cf37c0cc7feeaa
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: RECOGNITION_EXTRACTION_API
+  code_hashes:
+  - ba39d178d1845a2f061eb6705336597f
+  namespaces_used:
+  - Aspose.BarCode.BarCodeRecognition
+  - Aspose.BarCode.Generation
+  classes_used:
+  - BarcodeGenerator
+  - BarCodeReader
+  github_links:
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs
+  next_action: Transform to dry-run example package; confirmed READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ReadAustraliaPostCTable.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /barcode/1d-barcode-reader/.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/recognize-barcode
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/recognize-barcode
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: generate-qr-code
+  plugin_url: https://products.aspose.net/barcode/net/generate-qr-code
+  canonical_url: https://products.aspose.net/barcode/2d-barcode-writer/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 2d-barcode-writer;
+    ComplexBarcodeGenerator class available
+  page_hash: de4a52c3c2c2ae3d
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/generate-qr-code
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes:
+  - 8ed8a18def765e930db7faf37bff34ed
+  namespaces_used:
+  - Aspose.BarCode.ComplexBarcode
+  - Aspose.BarCode.Generation
+  - Aspose.BarCode.BarCodeRecognition
+  classes_used:
+  - SwissQRCodetext
+  - ComplexBarcodeGenerator
+  - BarCodeReader
+  github_links:
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/SwissQRCodeGenRec.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/SwissQRCodeGenRec.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from SwissQRCodeGenRec.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /barcode/2d-barcode-writer/.'
+- plugin_slug: read-barcode
+  plugin_url: https://products.aspose.net/barcode/net/read-barcode
+  canonical_url: null
+  page_source_status: CANONICAL_URL_SPLIT_AMBIGUOUS
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: Old slug 'read-barcode' maps ambiguously to both
+    1d-barcode-reader and 2d-barcode-reader canonical pages
+  page_hash: 6d15352859a39bcc
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: CANONICAL_SPLIT_AMBIGUOUS
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes:
+  - 91aa497508d875515b5db6ddce715ebf
+  github_links:
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs
+  next_action: 'Resolve ambiguity: split into 1d-barcode-reader and 2d-barcode-reader
+    entries or merge with existing reader entries'
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ComplexBarcodesReadBase.cs
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Status
+      NEEDS_MANUAL_MAPPING: slug maps ambiguously.'
+- plugin_slug: scan-barcode
+  plugin_url: https://products.aspose.net/barcode/net/scan-barcode
+  canonical_url: https://products.aspose.net/barcode/2d-barcode-reader/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 2d-barcode-reader
+  page_hash: 279944f48eb8859c
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/scan-barcode
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: RECOGNITION_EXTRACTION_API
+  code_hashes:
+  - ba39d178d1845a2f061eb6705336597f
+  namespaces_used:
+  - Aspose.BarCode.BarCodeRecognition
+  - Aspose.BarCode.Generation
+  classes_used:
+  - BarcodeGenerator
+  - BarCodeReader
+  github_links:
+  - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ReadAustraliaPostCTable.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /barcode/2d-barcode-reader/.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package built
+      and ran DRYRUN_PASS.

@@ -1,0 +1,154 @@
+family: svg
+package_id: Aspose.SVG
+github_repo: https://github.com/aspose-svg/Aspose.Svg-for-.NET
+implementation_model: STATIC_CONVERTER_CLASS
+plugins:
+- plugin_slug: svg-to-image-converter
+  plugin_url: https://products.aspose.net/svg/net/convert-svg-to-pdf
+  canonical_url: https://products.aspose.net/svg/svg-to-image-converter/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: Canonical URL confirmed; Converter.ConvertSVG()
+    + ImageSaveOptions pattern confirmed on page and in fetched source
+  page_hash: cc5ba80fe5cf535f
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes:
+  - 62e8764581fb858a2fad4dff8522d2ac
+  namespaces_used:
+  - Aspose.Svg.Drawing
+  - Aspose.Svg.Rendering.Pdf
+  classes_used:
+  - Size
+  - Page
+  - PdfDevice
+  - PdfRenderingOptions
+  - SVGDocument
+  github_links:
+  - https://raw.githubusercontent.com/aspose-svg/Aspose.SVG-for-.NET/master/Examples/CSharp/LoadSaveConvert/ConvertSVGToPDF.cs
+  next_action: Extract symbols from ConvertSVGToPDF.cs and validate against DllReflector;
+    then advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
+  - https://raw.githubusercontent.com/aspose-svg/Aspose.SVG-for-.NET/master/Examples/CSharp/LoadSaveConvert/ConvertSVGToPDF.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ConvertSVGToPDF.cs
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/svg/svg-to-image-converter
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/svg/svg-to-image-converter
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: convert-svg-to-png
+  plugin_url: https://products.aspose.net/svg/net/convert-svg-to-png
+  page_hash: 802389969f803ae8
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: NEEDS_MANUAL_MAPPING
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes: []
+  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
+    fetch better example from GitHub
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.
+- plugin_slug: convert-svg-to-jpg
+  plugin_url: https://products.aspose.net/svg/net/convert-svg-to-jpg
+  page_hash: 8c8d6bac9a59f83c
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: NEEDS_MANUAL_MAPPING
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes: []
+  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
+    fetch better example from GitHub
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.
+- plugin_slug: merge-svg
+  plugin_url: https://products.aspose.net/svg/net/merge-svg
+  page_hash: 229ef264933622c5
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: NEEDS_MANUAL_MAPPING
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes: []
+  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
+    fetch better example from GitHub
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.
+- plugin_slug: svg-to-pdf-converter
+  plugin_url: https://products.aspose.net/svg/svg-to-pdf-converter/
+  canonical_url: https://products.aspose.net/svg/svg-to-pdf-converter/
+  page_source_status: PAGE_CRAWLED_THIS_SPRINT
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: New canonical page fetched; Converter.ConvertSVG()
+    + PdfSaveOptions confirmed on product page
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/svg/svg-to-pdf-converter
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes: []
+  classes_used:
+  - Converter
+  - PdfSaveOptions
+  - SVGDocument
+  methods_used:
+  - Converter.ConvertSVG()
+  next_action: Create dry-run example package
+  evidence_paths:
+  - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
+  history:
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
+      page.
+- plugin_slug: vectorizer
+  plugin_url: https://products.aspose.net/svg/vectorizer/
+  canonical_url: https://products.aspose.net/svg/vectorizer/
+  page_source_status: PAGE_CRAWLED_THIS_SPRINT
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: New canonical page fetched; Converter.ConvertImageToSVG()
+    confirmed on product page
+  registry_status: READY_FOR_TRANSFORMATION
+  blocker_type: null
+  implementation_model: STATIC_CONVERTER_CLASS
+  code_hashes: []
+  classes_used:
+  - Converter
+  - ImageVectorizerConfiguration
+  methods_used:
+  - Converter.ConvertImageToSVG()
+  next_action: Create dry-run example package
+  evidence_paths:
+  - reports/lowcode-plugin-registry-expansion-20260604/crawl/canonical-product-page-inventory.json
+  history:
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
+      page.

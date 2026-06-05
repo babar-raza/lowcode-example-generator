@@ -1,0 +1,350 @@
+family: imaging
+package_id: Aspose.Imaging
+github_repo: https://github.com/aspose-imaging/Aspose.Imaging-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+plugins:
+- plugin_slug: convert-image
+  plugin_url: https://products.aspose.net/imaging/net/convert-image
+  canonical_url: https://products.aspose.net/imaging/image-converter/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-converter;
+    Image.Save() pattern confirmed
+  page_hash: 7b7d01b33fbfdbc0
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 3487b7663cb22f1d962b2fbb40a538e0
+  namespaces_used:
+  - Aspose.Imaging.FileFormats.Jpeg
+  - Aspose.Imaging
+  - Aspose.Imaging.Examples.CSharp
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - JpegOptions
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs
+  next_action: Transform to dry-run example package; confirmed READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ConvertImageWithGrayscale.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /imaging/image-converter/.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/convert-image
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/convert-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: resize-image
+  plugin_url: https://products.aspose.net/imaging/net/resize-image
+  canonical_url: https://products.aspose.net/imaging/image-resizer/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-resizer
+  page_hash: decbb2536acebb5c
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/resize-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 56fc7b5e7c6cc66afecebbe676839751
+  classes_used:
+  - Image
+  methods_used:
+  - image.ResizeWidthProportionally()
+  - image.Save()
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Plugins/Aspose.UmbracoImageResizer/AfterSaveHandler.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from AfterSaveHandler.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
+      URL confirmed: /imaging/image-resizer/.'
+- plugin_slug: compress-image
+  plugin_url: https://products.aspose.net/imaging/net/compress-image
+  canonical_url: https://products.aspose.net/imaging/image-compressor/
+  page_source_status: CANONICAL_URL_CONFIRMED
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-compressor
+  page_hash: b8d2b69a85ef86c6
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - d3b9c0150cc88bcdbb5bce142ee9a7df
+  namespaces_used:
+  - Aspose.Imaging.ImageOptions
+  - Aspose.Imaging
+  - Aspose.Imaging.Examples.CSharp
+  classes_used:
+  - Image
+  - SvgOptions
+  - SvgRasterizationOptions
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CompressedVectorFormats.cs
+  next_action: Transform to dry-run example package
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CompressedVectorFormats.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      compress-image page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-parallel-wave-20260605. Package
+      reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/compress-image
+      built and ran PASS.
+  dryrun_package_path: reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/compress-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+- plugin_slug: crop-image
+  plugin_url: https://products.aspose.net/imaging/net/crop-image
+  canonical_url: https://products.aspose.net/imaging/image-cropper/
+  page_source_status: CANONICAL_URL_BEST_MATCH
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; Image.Crop(Rectangle) pattern confirmed
+  page_hash: null
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - Rectangle
+  - RasterImage
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CroppingbyRectangle.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CroppingbyRectangle.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      crop-image page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image
+      built and ran PASS.
+- plugin_slug: filter-image
+  plugin_url: https://products.aspose.net/imaging/net/filter-image
+  canonical_url: https://products.aspose.net/imaging/image-filters/
+  page_source_status: CANONICAL_URL_BEST_MATCH
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; RasterImage.Filter(GaussWienerFilterOptions)
+    pattern confirmed
+  page_hash: null
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - RasterImage
+  - GaussWienerFilterOptions
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ApplyGaussWienerFilter.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ApplyGaussWienerFilter.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      filter-image page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image
+      built and ran PASS.
+- plugin_slug: merge-images
+  plugin_url: https://products.aspose.net/imaging/net/merge-images
+  canonical_url: https://products.aspose.net/imaging/image-merger/
+  page_source_status: CANONICAL_URL_BEST_MATCH
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; Graphics.DrawImage pattern confirmed
+    for merge
+  page_hash: null
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - Graphics
+  - JpegOptions
+  - FileCreateSource
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CombiningImages.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CombiningImages.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      merge-images page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images
+      built and ran PASS.
+- plugin_slug: watermark-image
+  plugin_url: https://products.aspose.net/imaging/net/watermark-image
+  canonical_url: https://products.aspose.net/imaging/add-watermark/
+  page_source_status: CANONICAL_URL_BEST_MATCH
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; Graphics+Matrix rotation watermark
+    pattern confirmed
+  page_hash: null
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - Graphics
+  - Font
+  - SolidBrush
+  - Matrix
+  - StringFormat
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/AddDiagonalWatermarkToImage.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from AddDiagonalWatermarkToImage.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      watermark-image page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image
+      built and ran PASS.
+- plugin_slug: rotate-image
+  plugin_url: https://products.aspose.net/imaging/net/rotate-image
+  canonical_url: https://products.aspose.net/imaging/image-rotator/
+  page_source_status: CANONICAL_URL_BEST_MATCH
+  source_link_origin: GITHUB_REPO
+  transformation_readiness_reason: CODE_HARVESTED; RasterImage.Rotate(angle) pattern
+    confirmed
+  page_hash: null
+  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/rotate-image
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-05'
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.ImageOptions
+  classes_used:
+  - Image
+  - RasterImage
+  - BmpOptions
+  - FileMode
+  github_links:
+  - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/RotatingAnImage.cs
+  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md
+  - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from RotatingAnImage.cs
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. CANONICAL_URL_BEST_MATCH:
+      rotate-image page confirmed.'
+  - date: '2026-06-05'
+    status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+    analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/rotate-image
+      built and ran PASS.

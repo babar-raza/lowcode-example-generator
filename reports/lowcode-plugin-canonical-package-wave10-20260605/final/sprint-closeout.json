@@ -39,11 +39,11 @@
   "evidence_bundle": {
     "objective": "COMPLETE — bundle written",
     "entries": 205,
-    "sha256": "6f97c7b3a3b6545bcad10c82bdc29e2e2d93f66705fe8d9ffd25848ffc8e2168",
-    "size_bytes": 158883,
+    "sha256": "93ffb9138ef131cde87ceb6ffa5f1294211b364d12678842c2d0ca56ef1bc83e",
+    "size_bytes": 158946,
     "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave10-20260605.zip"
   },
-  "commit_sha": "PENDING",
+  "commit_sha": "cef9497",
   "pytest_passed": 3552,
   "pytest_skipped": 18,
   "pytest_failed": 0,

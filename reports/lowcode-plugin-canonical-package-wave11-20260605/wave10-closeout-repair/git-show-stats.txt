@@ -1,0 +1,28 @@
+commit cef9497b262c81c32b95ebff503452ace0d9df01
+Author: Babar Raza <babar.raza@aspose.com>
+Date:   Fri Jun 5 22:08:03 2026 +0500
+
+    feat(wave10): canonical package expansion + registry migration + validator hardening
+
+    - Registry: 33 -> 43 CANONICAL_IDENTITY_VERIFIED (10 new migrations); 70 total entries
+    - Wave 10: 17 new canonical dryrun packages
+    - Total proven packages: 33 (Wave 8: 4, Wave 9: 12, Wave 10: 17)
+    - CCV validators: added CCV-15..CCV-18; 64 tests PASS
+    - Publication matrix v3: 70 entries, 16 PUBLICATION_READY, 17 PUBLICATION_CANDIDATE_LOCAL_CLEAN
+    - IV: 52/52 PASS; adversarial review: PASS; full suite: 3552/0/18
+
+ 223 files changed, 7252 insertions(+), 466 deletions(-)
+
+---
+
+commit 8967b0bdc16503c42697247f3727988eaeb74e54
+Author: Babar Raza <babar.raza@aspose.com>
+Date:   Fri Jun 5 22:15:23 2026 +0500
+
+    chore(wave10): update evidence bundle SHA-256 in sprint closeout
+
+    Rebuilt bundle after final edits to sprint-closeout.json and lane-ledger.json.
+    New SHA-256: 93ffb9138ef131cde87ceb6ffa5f1294211b364d12678842c2d0ca56ef1bc83e
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ reports/lowcode-plugin-canonical-package-wave10-20260605/final/sprint-closeout.json

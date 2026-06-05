@@ -1,0 +1,32 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "date": "2026-06-05",
+  "wave12_primary_targets": [
+    {
+      "key": "svg/svg-to-pdf-converter",
+      "reason": "NEEDS_CANONICAL_PACKAGE",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "source_package": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/svg/svg-to-pdf-converter",
+      "action": "Migrate source package to canonical sprint directory"
+    },
+    {
+      "key": "svg/vectorizer",
+      "reason": "NEEDS_CANONICAL_PACKAGE",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "source_package": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer",
+      "action": "Migrate source package to canonical sprint directory"
+    }
+  ],
+  "wave12_secondary_targets": {
+    "note": "22 MISSING_CANONICAL_URL entries — URL discovery required first",
+    "priority_families": ["cad", "font", "gis", "omr", "threed"],
+    "ledger": "reports/lowcode-plugin-canonical-package-wave11-20260605/canonical-url-discovery/missing-url-ledger.json"
+  },
+  "approval_gate_pending": {
+    "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL",
+    "status": "NOT_SET",
+    "description": "Wave 11 packages (10 PUBLICATION_CANDIDATE_LOCAL_CLEAN) require this gate to advance to PUBLICATION_READY"
+  }
+}

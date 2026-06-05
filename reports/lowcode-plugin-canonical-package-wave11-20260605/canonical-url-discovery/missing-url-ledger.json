@@ -1,0 +1,240 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "date": "2026-06-05",
+  "total_missing": 22,
+  "note": "URL discovery deferred to Wave 12 \u2014 22 entries require Aspose product page crawl to confirm canonical URL pattern",
+  "upgraded_this_sprint": [
+    {
+      "key": "svg/svg-to-pdf-converter",
+      "action": "UPGRADED_TO_CIV",
+      "reason": "Canonical-primary URL confirmed, plugin_slug matches"
+    },
+    {
+      "key": "svg/vectorizer",
+      "action": "UPGRADED_TO_CIV",
+      "reason": "Canonical-primary URL confirmed, plugin_slug matches"
+    }
+  ],
+  "entries": [
+    {
+      "key": "barcode/read-barcode",
+      "family": "barcode",
+      "slug": "read-barcode",
+      "nuget": "Aspose.BarCode",
+      "plugin_url": "https://products.aspose.net/barcode/net/read-barcode",
+      "canonical_url": null,
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "cad/convert-cad-to-pdf",
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "nuget": "Aspose.CAD",
+      "plugin_url": "https://products.aspose.net/cad/net/convert-cad-to-pdf",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "cad/convert-dwg-to-pdf",
+      "family": "cad",
+      "slug": "convert-dwg-to-pdf",
+      "nuget": "Aspose.CAD",
+      "plugin_url": "https://products.aspose.net/cad/net/convert-dwg-to-pdf",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "cad/convert-dxf-to-pdf",
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "nuget": "Aspose.CAD",
+      "plugin_url": "https://products.aspose.net/cad/net/convert-dxf-to-pdf",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "cad/convert-cad-to-image",
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "nuget": "Aspose.CAD",
+      "plugin_url": "https://products.aspose.net/cad/net/convert-cad-to-image",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "cad/convert-dwg-to-jpg",
+      "family": "cad",
+      "slug": "convert-dwg-to-jpg",
+      "nuget": "Aspose.CAD",
+      "plugin_url": "https://products.aspose.net/cad/net/convert-dwg-to-jpg",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "finance/parse-xbrl",
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "nuget": "Aspose.Finance",
+      "plugin_url": "https://products.aspose.net/finance/net/parse-xbrl",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "font/convert-font",
+      "family": "font",
+      "slug": "convert-font",
+      "nuget": "Aspose.Font",
+      "plugin_url": "https://products.aspose.net/font/net/convert-font",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "font/render-text-with-font",
+      "family": "font",
+      "slug": "render-text-with-font",
+      "nuget": "Aspose.Font",
+      "plugin_url": "https://products.aspose.net/font/net/render-text-with-font",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "gis/convert-gis-data",
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "nuget": "Aspose.GIS",
+      "plugin_url": "https://products.aspose.net/gis/net/convert-gis-data",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "gis/read-gis-data",
+      "family": "gis",
+      "slug": "read-gis-data",
+      "nuget": "Aspose.GIS",
+      "plugin_url": "https://products.aspose.net/gis/net/read-gis-data",
+      "canonical_url": "https://products.aspose.net/gis/net/read-gis-data/",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "html/convert-html-to-xps",
+      "family": "html",
+      "slug": "convert-html-to-xps",
+      "nuget": "Aspose.HTML",
+      "plugin_url": "https://products.aspose.net/html/net/convert-html-to-xps",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "html/convert-html-to-markdown",
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "nuget": "Aspose.HTML",
+      "plugin_url": "https://products.aspose.net/html/net/convert-html-to-markdown",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "html/merge-html",
+      "family": "html",
+      "slug": "merge-html",
+      "nuget": "Aspose.HTML",
+      "plugin_url": "https://products.aspose.net/html/net/merge-html",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "omr/recognize-omr",
+      "family": "omr",
+      "slug": "recognize-omr",
+      "nuget": "Aspose.OMR",
+      "plugin_url": "https://products.aspose.net/omr/net/recognize-omr",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "omr/generate-omr-template",
+      "family": "omr",
+      "slug": "generate-omr-template",
+      "nuget": "Aspose.OMR",
+      "plugin_url": "https://products.aspose.net/omr/net/generate-omr-template",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "psd/convert-psd-to-png",
+      "family": "psd",
+      "slug": "convert-psd-to-png",
+      "nuget": "Aspose.PSD",
+      "plugin_url": "https://products.aspose.net/psd/net/convert-psd-to-png",
+      "canonical_url": "",
+      "registry_status": "CODE_HARVESTED",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "svg/merge-svg",
+      "family": "svg",
+      "slug": "merge-svg",
+      "nuget": "Aspose.SVG",
+      "plugin_url": "https://products.aspose.net/svg/net/merge-svg",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "tasks/read-project-data",
+      "family": "tasks",
+      "slug": "read-project-data",
+      "nuget": "Aspose.Tasks",
+      "plugin_url": "https://products.aspose.net/tasks/net/read-project-data",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "tex/convert-latex-to-pdf",
+      "family": "tex",
+      "slug": "convert-latex-to-pdf",
+      "nuget": "Aspose.TeX",
+      "plugin_url": "https://products.aspose.net/tex/net/convert-latex-to-pdf",
+      "canonical_url": "",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "threed/convert-3d-model",
+      "family": "threed",
+      "slug": "convert-3d-model",
+      "nuget": "Aspose.3D",
+      "plugin_url": "https://products.aspose.net/threed/net/convert-3d-model",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    },
+    {
+      "key": "threed/compress-3d-scene",
+      "family": "threed",
+      "slug": "compress-3d-scene",
+      "nuget": "Aspose.3D",
+      "plugin_url": "https://products.aspose.net/threed/net/compress-3d-scene",
+      "canonical_url": "",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "discovery_status": "PENDING_WAVE12"
+    }
+  ]
+}

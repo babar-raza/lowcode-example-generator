@@ -1,0 +1,6 @@
+OCR result (73 chars):
+
+ ************* Trial Licen
+ ************* Trial Licenses ************* 
+
+Fixture: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-parallel-wave-20260605\dryrun\examples\ocr\recognize-text\fixture.png

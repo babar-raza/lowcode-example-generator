@@ -1,0 +1,21 @@
+{
+  "package_key": "tasks/mpp-to-png",
+  "sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/project.png",
+      "size": 30602
+    },
+    {
+      "path": "output/project_2.png",
+      "size": 30828
+    },
+    {
+      "path": "output/project_3.png",
+      "size": 30818
+    }
+  ],
+  "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/"
+}

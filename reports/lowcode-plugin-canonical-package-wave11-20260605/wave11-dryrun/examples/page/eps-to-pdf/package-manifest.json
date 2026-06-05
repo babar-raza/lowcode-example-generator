@@ -1,0 +1,15 @@
+{
+  "package_key": "page/eps-to-pdf",
+  "family": "page",
+  "plugin_slug": "eps-to-pdf",
+  "canonical_plugin_slug": "eps-to-pdf",
+  "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+  "display_plugin_name": "EPS to PDF Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "convert-eps-to-pdf",
+  "nuget_package": "Aspose.Page",
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "CANONICAL_DRYRUN_PACKAGE"
+}

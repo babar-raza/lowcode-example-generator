@@ -1,0 +1,11 @@
+{
+  "package_key": "ocr/scanned-image-to-text",
+  "canonical_slug": "scanned-image-to-text",
+  "legacy_slug": "recognize-text",
+  "source_sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+  "nuget_package": "Aspose.OCR",
+  "migration_type": "CANONICAL_PRIMARY_MIGRATION",
+  "date": "2026-06-05"
+}

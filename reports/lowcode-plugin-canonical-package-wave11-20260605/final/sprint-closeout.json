@@ -1,0 +1,72 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "date": "2026-06-05",
+  "verdict": "SPRINT_COMPLETE",
+  "lanes_complete": 10,
+  "lanes_total": 10,
+  "registry_state": {
+    "total_entries": 67,
+    "canonical_identity_verified": 45,
+    "slug_alias_required": 0,
+    "missing_canonical_url": 22,
+    "canonical_primary_delta": "+2 (43 -> 45)",
+    "slug_alias_resolved_delta": "-5 (5 -> 0)",
+    "total_entries_delta": "-3 (70 -> 67)"
+  },
+  "packages": {
+    "wave8": 4,
+    "wave9": 12,
+    "wave10": 17,
+    "wave11": 10,
+    "total_proven": 43,
+    "publication_ready": 33,
+    "publication_candidate_local_clean": 10,
+    "needs_package_proof": 2
+  },
+  "validators": {
+    "ccv_rules": 18,
+    "ccv_tests": 64,
+    "ccv_result": "ALL_PASS",
+    "rbc_rules": 8,
+    "rbc_tests": 34,
+    "rbc_result": "ALL_PASS",
+    "total_rules": 26,
+    "total_tests": 98,
+    "full_suite_passed": 3586,
+    "full_suite_skipped": 18,
+    "full_suite_failed": 0
+  },
+  "independent_verification": {
+    "checks_total": 51,
+    "checks_pass": 51,
+    "checks_fail": 0,
+    "verdict": "IV_PASS"
+  },
+  "adversarial_review": "ADVERSARIAL_REVIEW_PASS",
+  "protected_files_unchanged": true,
+  "wave10_closeout_repair": {
+    "commits_verified": ["cef9497", "8967b0b"],
+    "logs_repaired": ["barcode/1d-barcode-writer", "zip/compress-files"],
+    "verdict": "WAVE10_CLOSEOUT_REPAIR_COMPLETE"
+  },
+  "wave11_slug_alias_resolution": {
+    "starting_count": 5,
+    "ending_count": 0,
+    "consolidated": ["psd/edit-psd-layers", "svg/convert-svg-to-png", "svg/convert-svg-to-jpg"],
+    "downgraded": ["gis/convert-gis-data", "psd/convert-psd-to-png"],
+    "verdict": "ALL_5_SLUG_ALIAS_REQUIRED_RESOLVED"
+  },
+  "evidence_bundle": {
+    "objective": "COMPLETE — bundle written",
+    "entries": 130,
+    "sha256": "10e56c613469d53e9dc3821920b67f0e74ce1180893b8b0cf9c95dea08bfae85",
+    "size_bytes": 101204,
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave11-20260605.zip"
+  },
+  "commit_sha": "PENDING",
+  "pytest_passed": 3586,
+  "pytest_skipped": 18,
+  "pytest_failed": 0,
+  "registry_total": 67,
+  "total_registry_entries": 67
+}

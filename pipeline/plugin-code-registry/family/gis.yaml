@@ -4,8 +4,7 @@ github_repo: https://github.com/aspose-gis/Aspose.Gis-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-gis-data
-  canonical_plugin_slug: read-gis-data
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/gis/net/convert-gis-data
   page_hash: 8660acdb24605901
   registry_status: NEEDS_MANUAL_MAPPING
@@ -25,6 +24,10 @@ plugins:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from App.xaml.cs
+  - date: '2026-06-05'
+    status: MISSING_CANONICAL_URL
+    analyst_notes: 'Sprint wave11-20260605. Downgraded from SLUG_ALIAS_REQUIRED: canonical
+      read-gis-data not in registry.'
 - plugin_slug: read-gis-data
   canonical_plugin_slug: read-gis-data
   identity_status: MISSING_CANONICAL_URL

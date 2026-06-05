@@ -49,46 +49,6 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   display_plugin_name: SVG to Image Converter for .NET
-- plugin_slug: convert-svg-to-png
-  canonical_plugin_slug: svg-to-pdf-converter
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/svg/net/convert-svg-to-png
-  page_hash: 802389969f803ae8
-  registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
-  implementation_model: STATIC_CONVERTER_CLASS
-  code_hashes: []
-  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
-    fetch better example from GitHub
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
-  history:
-  - date: '2026-06-04'
-    status: NEEDS_MANUAL_MAPPING
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
-      sprint.
-- plugin_slug: convert-svg-to-jpg
-  canonical_plugin_slug: vectorizer
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/svg/net/convert-svg-to-jpg
-  page_hash: 8c8d6bac9a59f83c
-  registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
-  implementation_model: STATIC_CONVERTER_CLASS
-  code_hashes: []
-  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
-    fetch better example from GitHub
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
-  history:
-  - date: '2026-06-04'
-    status: NEEDS_MANUAL_MAPPING
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
-      sprint.
 - plugin_slug: merge-svg
   canonical_plugin_slug: merge-svg
   identity_status: MISSING_CANONICAL_URL
@@ -111,7 +71,7 @@ plugins:
       sprint.
 - plugin_slug: svg-to-pdf-converter
   canonical_plugin_slug: svg-to-pdf-converter
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/svg/svg-to-pdf-converter/
   canonical_url: https://products.aspose.net/svg/svg-to-pdf-converter/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT
@@ -139,9 +99,16 @@ plugins:
     status: READY_FOR_TRANSFORMATION
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
+  - date: '2026-06-05'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint wave11-20260605. URL https://products.aspose.net/svg/svg-to-pdf-converter/
+      confirmed canonical-primary format, plugin_slug matches canonical.
+  legacy_aliases:
+  - convert-svg-to-png
+  migration_status: CANONICAL_PRIMARY_NATIVE
 - plugin_slug: vectorizer
   canonical_plugin_slug: vectorizer
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/svg/vectorizer/
   canonical_url: https://products.aspose.net/svg/vectorizer/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT
@@ -169,6 +136,13 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
+  - date: '2026-06-05'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint wave11-20260605. URL https://products.aspose.net/svg/vectorizer/
+      confirmed canonical-primary format, plugin_slug matches canonical.
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  legacy_aliases:
+  - convert-svg-to-jpg
+  migration_status: CANONICAL_PRIMARY_NATIVE

@@ -1,0 +1,55 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "lane": "D",
+  "date": "2026-06-05",
+  "starting_slug_alias_count": 5,
+  "resolutions": [
+    {
+      "entry": "psd/edit-psd-layers",
+      "canonical_plugin_slug": "photo-processor",
+      "resolution": "CONSOLIDATED",
+      "action": "Add edit-psd-layers to psd/photo-processor legacy_aliases, remove standalone entry",
+      "reason": "psd/photo-processor is CANONICAL_IDENTITY_VERIFIED — edit-psd-layers is a legacy slug for the same canonical page",
+      "registry_delta": -1
+    },
+    {
+      "entry": "svg/convert-svg-to-png",
+      "canonical_plugin_slug": "svg-to-pdf-converter",
+      "resolution": "CONSOLIDATED",
+      "action": "Add convert-svg-to-png to svg/svg-to-pdf-converter legacy_aliases, remove standalone entry",
+      "reason": "svg/svg-to-pdf-converter exists in registry — convert-svg-to-png is a legacy slug pointing to the same canonical",
+      "registry_delta": -1
+    },
+    {
+      "entry": "svg/convert-svg-to-jpg",
+      "canonical_plugin_slug": "vectorizer",
+      "resolution": "CONSOLIDATED",
+      "action": "Add convert-svg-to-jpg to svg/vectorizer legacy_aliases, remove standalone entry",
+      "reason": "svg/vectorizer exists in registry — convert-svg-to-jpg is a legacy slug pointing to the same canonical",
+      "registry_delta": -1
+    },
+    {
+      "entry": "gis/convert-gis-data",
+      "canonical_plugin_slug": "read-gis-data",
+      "resolution": "DOWNGRADED",
+      "action": "Set identity_status=MISSING_CANONICAL_URL, remove canonical_plugin_slug",
+      "reason": "No 'read-gis-data' entry exists in gis.yaml registry — canonical target unresolvable without URL discovery",
+      "registry_delta": 0
+    },
+    {
+      "entry": "psd/convert-psd-to-png",
+      "canonical_plugin_slug": "image-converter",
+      "resolution": "DOWNGRADED",
+      "action": "Set identity_status=MISSING_CANONICAL_URL, remove canonical_plugin_slug",
+      "reason": "No 'image-converter' entry exists in psd.yaml registry — uses non-LowCode PSD API (PngOptions/Image), canonical URL unknown",
+      "registry_delta": 0
+    }
+  ],
+  "registry_after": {
+    "total": 67,
+    "CANONICAL_IDENTITY_VERIFIED": 43,
+    "SLUG_ALIAS_REQUIRED": 0,
+    "MISSING_CANONICAL_URL": 24
+  },
+  "verdict": "ALL_5_SLUG_ALIAS_REQUIRED_RESOLVED"
+}

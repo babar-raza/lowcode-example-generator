@@ -1,0 +1,15 @@
+{
+  "package_key": "tasks/mpp-to-png",
+  "family": "tasks",
+  "plugin_slug": "mpp-to-png",
+  "canonical_plugin_slug": "mpp-to-png",
+  "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+  "display_plugin_name": "MPP to PNG Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "convert-mpp-to-image",
+  "nuget_package": "Aspose.Tasks",
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "CANONICAL_DRYRUN_PACKAGE"
+}

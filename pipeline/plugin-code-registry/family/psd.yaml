@@ -14,8 +14,7 @@ plugins:
   - convert-psd-to-pdf
   sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: convert-psd-to-png
-  canonical_plugin_slug: image-converter
-  identity_status: SLUG_ALIAS_REQUIRED
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/psd/net/convert-psd-to-png
   page_hash: ca9c247241de366a
   registry_status: CODE_HARVESTED
@@ -40,37 +39,10 @@ plugins:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CroppingPSDWhenConvertingToPNG.cs
-- plugin_slug: edit-psd-layers
-  canonical_plugin_slug: photo-processor
-  identity_status: SLUG_ALIAS_REQUIRED
-  plugin_url: https://products.aspose.net/psd/net/edit-psd-layers
-  page_hash: e6ec102890e1f28c
-  registry_status: CODE_HARVESTED
-  blocker_type: null
-  implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes:
-  - a299baac7843a61f6bde6dc8ab002ebf
-  namespaces_used:
-  - Aspose.PSD.ImageOptions
-  - Aspose.PSD.FileFormats.Png
-  classes_used:
-  - Image
-  - PngOptions
-  - FormatException
-  - PsdOptions
-  github_links:
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/Ai/SupportOfLayersInAi.cs
-  next_action: Extract symbols from SupportOfLayersInAi.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
-  evidence_paths:
-  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
-  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
-  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/psd.md
-  - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/Ai/SupportOfLayersInAi.cs
-  history:
-  - date: '2026-06-04'
-    status: CODE_HARVESTED
-    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from SupportOfLayersInAi.cs
+  - date: '2026-06-05'
+    status: MISSING_CANONICAL_URL
+    analyst_notes: 'Sprint wave11-20260605. Downgraded from SLUG_ALIAS_REQUIRED: canonical
+      image-converter not in registry, non-LowCode API.'
 - plugin_slug: animation-maker
   canonical_plugin_slug: animation-maker
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -163,3 +135,5 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   display_plugin_name: PSD Photo Processor for .NET
+  legacy_aliases:
+  - edit-psd-layers

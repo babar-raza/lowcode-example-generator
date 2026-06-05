@@ -1,0 +1,16 @@
+{
+  "package": "ocr/extract-text",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\extracted.txt",
+      "size": 109
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+  "package_key": "ocr/scanned-pdf-to-text"
+}

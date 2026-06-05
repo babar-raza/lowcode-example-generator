@@ -1,0 +1,15 @@
+{
+  "package_key": "page/ps-converter",
+  "family": "page",
+  "plugin_slug": "ps-converter",
+  "canonical_plugin_slug": "ps-converter",
+  "canonical_url": "https://products.aspose.net/page/ps-converter/",
+  "display_plugin_name": "PS Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "convert-ps-to-pdf",
+  "nuget_package": "Aspose.Page",
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "CANONICAL_DRYRUN_PACKAGE"
+}

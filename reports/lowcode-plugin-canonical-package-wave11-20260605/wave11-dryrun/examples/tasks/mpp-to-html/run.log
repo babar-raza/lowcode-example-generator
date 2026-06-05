@@ -1,0 +1,4 @@
+Unhandled exception. System.IO.FileNotFoundException: Could not find file 'C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-wave6-20260605\dryrun\examples\tasks\convert-mpp-to-html\output\project.html'.
+File name: 'C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-wave6-20260605\dryrun\examples\tasks\convert-mpp-to-html\output\project.html'
+   at System.IO.FileInfo.get_Length()
+   at Program.<Main>$(String[] args) in C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-wave6-20260605\dryrun\examples\tasks\convert-mpp-to-html\Program.cs:line 31

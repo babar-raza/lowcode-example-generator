@@ -1,0 +1,11 @@
+{
+  "package_key": "tasks/mpp-to-html",
+  "canonical_slug": "mpp-to-html",
+  "legacy_slug": "convert-mpp-to-html",
+  "source_sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "migration_sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+  "nuget_package": "Aspose.Tasks",
+  "migration_type": "CANONICAL_PRIMARY_MIGRATION",
+  "date": "2026-06-05"
+}

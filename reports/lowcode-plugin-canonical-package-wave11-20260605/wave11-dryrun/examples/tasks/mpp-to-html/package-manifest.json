@@ -1,0 +1,15 @@
+{
+  "package_key": "tasks/mpp-to-html",
+  "family": "tasks",
+  "plugin_slug": "mpp-to-html",
+  "canonical_plugin_slug": "mpp-to-html",
+  "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+  "display_plugin_name": "MPP to HTML Converter for .NET",
+  "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+  "migration_status": "CANONICAL_PRIMARY_MIGRATED",
+  "legacy_slug": "convert-mpp-to-html",
+  "nuget_package": "Aspose.Tasks",
+  "sprint": "lowcode-plugin-canonical-package-wave11-20260605",
+  "generated_at": "2026-06-05",
+  "proof_type": "CANONICAL_DRYRUN_PACKAGE"
+}

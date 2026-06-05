@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-drawing/Aspose.Drawing-for-.NET
 implementation_model: RENDERING_API
 plugins:
 - plugin_slug: convert-drawing
+  canonical_plugin_slug: convert-drawing
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/drawing/net/convert-drawing
   page_hash: a5cad0ccf9fb8adb
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -32,6 +34,8 @@ plugins:
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   canonical_url: https://products.aspose.net/drawing/net/convert-drawing/
 - plugin_slug: create-drawing
+  canonical_plugin_slug: create-drawing
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/drawing/net/create-drawing
   page_hash: db82df20d794551a
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN

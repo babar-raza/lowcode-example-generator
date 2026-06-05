@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-gis/Aspose.Gis-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-gis-data
+  canonical_plugin_slug: read-gis-data
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/gis/net/convert-gis-data
   page_hash: 8660acdb24605901
   registry_status: NEEDS_MANUAL_MAPPING
@@ -24,6 +26,8 @@ plugins:
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from App.xaml.cs
 - plugin_slug: read-gis-data
+  canonical_plugin_slug: read-gis-data
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/gis/net/read-gis-data
   page_hash: eb35e5e27e549069
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN

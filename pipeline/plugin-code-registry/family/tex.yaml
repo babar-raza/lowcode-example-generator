@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-tex/Aspose.Tex-for-.NET
 implementation_model: STATIC_CONVERTER_CLASS
 plugins:
 - plugin_slug: latex-figure-renderer
+  canonical_plugin_slug: latex-figure-renderer
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tex/net/convert-tex-to-pdf
   canonical_url: https://products.aspose.net/tex/latex-figure-renderer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -42,6 +44,8 @@ plugins:
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from LaTeXPdfConversionAlternative.cs
 - plugin_slug: convert-latex-to-pdf
+  canonical_plugin_slug: convert-latex-to-pdf
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/tex/net/convert-latex-to-pdf
   page_hash: 62f10fb5d57e6412
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN

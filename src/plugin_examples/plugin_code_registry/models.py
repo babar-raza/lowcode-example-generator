@@ -23,6 +23,23 @@ class PluginEntry:
     dryrun_package_path: Optional[str] = None
     dryrun_validation_status: Optional[str] = None
     publication_candidate_status: Optional[str] = None
+    # Canonical identity fields (added Sprint lowcode-plugin-canonical-identity-wave7-20260605)
+    canonical_plugin_slug: Optional[str] = None
+    identity_status: Optional[str] = None
+
+    @property
+    def effective_canonical_slug(self) -> str:
+        """The canonical plugin slug from products.aspose.net. Falls back to plugin_slug."""
+        if self.canonical_plugin_slug:
+            return self.canonical_plugin_slug
+        if self.canonical_url:
+            return self.canonical_url.rstrip("/").split("/")[-1]
+        return self.plugin_slug
+
+    @property
+    def is_identity_verified(self) -> bool:
+        """True only when canonical_plugin_slug is confirmed and matches canonical_url."""
+        return self.identity_status == "CANONICAL_IDENTITY_VERIFIED"
 
     @property
     def is_ready(self) -> bool:

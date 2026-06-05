@@ -1,0 +1,732 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "summary": {
+    "total": 72,
+    "CANONICAL_IDENTITY_VERIFIED": 11,
+    "SLUG_ALIAS_REQUIRED": 37,
+    "MISSING_CANONICAL_URL": 24
+  },
+  "entries": [
+    {
+      "family": "barcode",
+      "plugin_slug": "generate-barcode",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+      "canonical_plugin_slug": "1d-barcode-writer",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/generate-barcode",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "recognize-barcode",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-reader/",
+      "canonical_plugin_slug": "1d-barcode-reader",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/barcode/recognize-barcode",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "generate-qr-code",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-writer/",
+      "canonical_plugin_slug": "2d-barcode-writer",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/generate-qr-code",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "read-barcode",
+      "canonical_url": "",
+      "canonical_plugin_slug": "read-barcode",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/barcode/scan-barcode",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "scan-barcode",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-reader/",
+      "canonical_plugin_slug": "2d-barcode-reader",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-cad-to-pdf",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-cad-to-pdf",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dwg-to-pdf",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-dwg-to-pdf",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dxf-to-pdf",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-dxf-to-pdf",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-cad-to-image",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-cad-to-image",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dwg-to-jpg",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-dwg-to-jpg",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "drawing",
+      "plugin_slug": "convert-drawing",
+      "canonical_url": "https://products.aspose.net/drawing/net/convert-drawing/",
+      "canonical_plugin_slug": "convert-drawing",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "drawing",
+      "plugin_slug": "create-drawing",
+      "canonical_url": "https://products.aspose.net/drawing/net/create-drawing/",
+      "canonical_plugin_slug": "create-drawing",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "finance",
+      "plugin_slug": "convert-xbrl",
+      "canonical_url": "https://products.aspose.net/finance/convert-xbrl/",
+      "canonical_plugin_slug": "convert-xbrl",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "finance",
+      "plugin_slug": "parse-xbrl",
+      "canonical_url": "",
+      "canonical_plugin_slug": "parse-xbrl",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "font",
+      "plugin_slug": "convert-font",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-font",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "font",
+      "plugin_slug": "render-text-with-font",
+      "canonical_url": "",
+      "canonical_plugin_slug": "render-text-with-font",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "gis",
+      "plugin_slug": "convert-gis-data",
+      "canonical_url": "https://products.aspose.net/gis/net/read-gis-data/",
+      "canonical_plugin_slug": "read-gis-data",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "gis",
+      "plugin_slug": "read-gis-data",
+      "canonical_url": "",
+      "canonical_plugin_slug": "read-gis-data",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-pdf",
+      "canonical_url": "https://products.aspose.net/html/html-to-pdf-converter/",
+      "canonical_plugin_slug": "html-to-pdf-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/html/convert-html-to-pdf",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-word",
+      "canonical_url": "https://products.aspose.net/html/html-to-docx-converter/",
+      "canonical_plugin_slug": "html-to-docx-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-word",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-image",
+      "canonical_url": "https://products.aspose.net/html/html-to-image-converter/",
+      "canonical_plugin_slug": "html-to-image-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/html/convert-html-to-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-xps",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-html-to-xps",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-markdown",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-html-to-markdown",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "merge-html",
+      "canonical_url": "",
+      "canonical_plugin_slug": "merge-html",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "convert-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-converter/",
+      "canonical_plugin_slug": "image-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/convert-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "resize-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-resizer/",
+      "canonical_plugin_slug": "image-resizer",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/resize-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "compress-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-compressor/",
+      "canonical_plugin_slug": "image-compressor",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/imaging/compress-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "crop-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-cropper/",
+      "canonical_plugin_slug": "image-cropper",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "filter-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-filters/",
+      "canonical_plugin_slug": "image-filters",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "merge-images",
+      "canonical_url": "https://products.aspose.net/imaging/image-merger/",
+      "canonical_plugin_slug": "image-merger",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "watermark-image",
+      "canonical_url": "https://products.aspose.net/imaging/add-watermark/",
+      "canonical_plugin_slug": "add-watermark",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "rotate-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-rotator/",
+      "canonical_plugin_slug": "image-rotator",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/rotate-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-pdf",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-pdf/",
+      "canonical_plugin_slug": "convert-onenote-to-pdf",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/note/convert-one-to-word",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-word",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-word/",
+      "canonical_plugin_slug": "convert-onenote-to-word",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/note/convert-one-to-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-image",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-image/",
+      "canonical_plugin_slug": "convert-onenote-to-image",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "recognize-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+      "canonical_plugin_slug": "scanned-image-to-text",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/recognize-text",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "extract-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+      "canonical_plugin_slug": "scanned-pdf-to-text",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/ocr/extract-text",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "scan-document",
+      "canonical_url": "https://products.aspose.net/ocr/scan-document/",
+      "canonical_plugin_slug": "scan-document",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/image-text-finder",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "image-text-finder",
+      "canonical_url": "https://products.aspose.net/ocr/image-text-finder/",
+      "canonical_plugin_slug": "image-text-finder",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/invoice-to-text",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "invoice-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/invoice-to-text/",
+      "canonical_plugin_slug": "invoice-to-text",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "photo-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/photo-to-text/",
+      "canonical_plugin_slug": "photo-to-text",
+      "status": "READY_FOR_TRANSFORMATION",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "table-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/table-to-text/",
+      "canonical_plugin_slug": "table-to-text",
+      "status": "READY_FOR_TRANSFORMATION",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "omr",
+      "plugin_slug": "recognize-omr",
+      "canonical_url": "",
+      "canonical_plugin_slug": "recognize-omr",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "omr",
+      "plugin_slug": "generate-omr-template",
+      "canonical_url": "",
+      "canonical_plugin_slug": "generate-omr-template",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-xps-to-pdf",
+      "canonical_url": "https://products.aspose.net/page/xps-converter/",
+      "canonical_plugin_slug": "xps-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/page/convert-xps-to-pdf",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-eps-to-pdf",
+      "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+      "canonical_plugin_slug": "eps-to-pdf",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/page/convert-eps-to-pdf",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-ps-to-pdf",
+      "canonical_url": "https://products.aspose.net/page/ps-converter/",
+      "canonical_plugin_slug": "ps-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "convert-psd-to-pdf",
+      "canonical_url": "https://products.aspose.net/psd/psd-to-pdf/",
+      "canonical_plugin_slug": "psd-to-pdf",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/psd/convert-psd-to-pdf",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "convert-psd-to-png",
+      "canonical_url": "https://products.aspose.net/psd/image-converter/",
+      "canonical_plugin_slug": "image-converter",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/psd/psd-image-converter",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "psd-image-converter",
+      "canonical_url": "https://products.aspose.net/psd/animation-maker/",
+      "canonical_plugin_slug": "animation-maker",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "edit-psd-layers",
+      "canonical_url": "https://products.aspose.net/psd/photo-processor/",
+      "canonical_plugin_slug": "photo-processor",
+      "status": "CODE_HARVESTED",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "animation-maker",
+      "canonical_url": "",
+      "canonical_plugin_slug": "animation-maker",
+      "status": "READY_FOR_TRANSFORMATION",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "photo-processor",
+      "canonical_url": "",
+      "canonical_plugin_slug": "photo-processor",
+      "status": "READY_FOR_TRANSFORMATION",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "svg-to-image-converter",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
+      "canonical_plugin_slug": "svg-to-image-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/svg/svg-to-image-converter",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "convert-svg-to-png",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "canonical_plugin_slug": "svg-to-pdf-converter",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/svg/svg-to-pdf-converter",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "convert-svg-to-jpg",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "canonical_plugin_slug": "vectorizer",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "merge-svg",
+      "canonical_url": "",
+      "canonical_plugin_slug": "merge-svg",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "svg-to-pdf-converter",
+      "canonical_url": "",
+      "canonical_plugin_slug": "svg-to-pdf-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "vectorizer",
+      "canonical_url": "",
+      "canonical_plugin_slug": "vectorizer",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-pdf",
+      "canonical_url": "https://products.aspose.net/tasks/project-to-pdf-converter/",
+      "canonical_plugin_slug": "project-to-pdf-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/tasks/convert-mpp-to-pdf",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-excel",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-excel/",
+      "canonical_plugin_slug": "mpp-to-excel",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-excel",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-html",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+      "canonical_plugin_slug": "mpp-to-html",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-html",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-image",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+      "canonical_plugin_slug": "mpp-to-png",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tasks/convert-mpp-to-image",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "read-project-data",
+      "canonical_url": "",
+      "canonical_plugin_slug": "read-project-data",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "tex",
+      "plugin_slug": "latex-figure-renderer",
+      "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/",
+      "canonical_plugin_slug": "latex-figure-renderer",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/tex/latex-figure-renderer",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "tex",
+      "plugin_slug": "convert-latex-to-pdf",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-latex-to-pdf",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tex/convert-latex-to-pdf",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "threed",
+      "plugin_slug": "convert-3d-model",
+      "canonical_url": "",
+      "canonical_plugin_slug": "convert-3d-model",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "threed",
+      "plugin_slug": "compress-3d-scene",
+      "canonical_url": "",
+      "canonical_plugin_slug": "compress-3d-scene",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "",
+      "slug_mismatch": false,
+      "identity_status": "MISSING_CANONICAL_URL"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "compress-files",
+      "canonical_url": "https://products.aspose.net/zip/compress-files/",
+      "canonical_plugin_slug": "compress-files",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/zip/create-archive",
+      "slug_mismatch": false,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "extract-files",
+      "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+      "canonical_plugin_slug": "universal-extractor",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "dryrun_path": "reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/zip/compress-folder",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "create-archive",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "canonical_plugin_slug": "universal-compressor",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "compress-folder",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "canonical_plugin_slug": "universal-compressor",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "dryrun_path": "",
+      "slug_mismatch": true,
+      "identity_status": "SLUG_ALIAS_REQUIRED"
+    }
+  ]
+}

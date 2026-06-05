@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-tasks/Aspose.Tasks-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-mpp-to-pdf
+  canonical_plugin_slug: project-to-pdf-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-pdf
   canonical_url: https://products.aspose.net/tasks/project-to-pdf-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -49,6 +51,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: convert-mpp-to-excel
+  canonical_plugin_slug: mpp-to-excel
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-excel
   page_hash: 04409e41e63edc00
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -84,6 +88,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-excel/
 - plugin_slug: convert-mpp-to-html
+  canonical_plugin_slug: mpp-to-html
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-html
   page_hash: 224b5bdf76853c84
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -117,6 +123,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-html/
 - plugin_slug: convert-mpp-to-image
+  canonical_plugin_slug: mpp-to-png
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-image
   page_hash: 59a05725ee005f68
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -152,6 +160,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/tasks/mpp-to-png/
 - plugin_slug: read-project-data
+  canonical_plugin_slug: read-project-data
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/tasks/net/read-project-data
   page_hash: 3fc4bed1f635537e
   registry_status: NEEDS_MANUAL_MAPPING

@@ -1,0 +1,531 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "total_canonical_plugins": 47,
+  "methodology": "registry canonical_url fields (confirmed via prior URL reconciliation sprint) + direct page probes",
+  "page_probe_results": "barcode 4/4 OK; several pages BLOCKED_403 (geo-rate-limited, not missing)",
+  "canonical_plugins": {
+    "barcode/1d-barcode-writer": {
+      "family": "barcode",
+      "canonical_plugin_slug": "1d-barcode-writer",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+      "registry_plugin_slugs": [
+        "generate-barcode"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "1D Barcode Writer for .NET"
+    },
+    "barcode/1d-barcode-reader": {
+      "family": "barcode",
+      "canonical_plugin_slug": "1d-barcode-reader",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-reader/",
+      "registry_plugin_slugs": [
+        "recognize-barcode"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "1D Barcode Reader for .NET"
+    },
+    "barcode/2d-barcode-writer": {
+      "family": "barcode",
+      "canonical_plugin_slug": "2d-barcode-writer",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-writer/",
+      "registry_plugin_slugs": [
+        "generate-qr-code"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "2D Barcode Writer for .NET"
+    },
+    "barcode/2d-barcode-reader": {
+      "family": "barcode",
+      "canonical_plugin_slug": "2d-barcode-reader",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-reader/",
+      "registry_plugin_slugs": [
+        "scan-barcode"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "2D Barcode Reader for .NET"
+    },
+    "drawing/convert-drawing": {
+      "family": "drawing",
+      "canonical_plugin_slug": "convert-drawing",
+      "canonical_url": "https://products.aspose.net/drawing/net/convert-drawing/",
+      "registry_plugin_slugs": [
+        "convert-drawing"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "drawing/create-drawing": {
+      "family": "drawing",
+      "canonical_plugin_slug": "create-drawing",
+      "canonical_url": "https://products.aspose.net/drawing/net/create-drawing/",
+      "registry_plugin_slugs": [
+        "create-drawing"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "finance/convert-xbrl": {
+      "family": "finance",
+      "canonical_plugin_slug": "convert-xbrl",
+      "canonical_url": "https://products.aspose.net/finance/convert-xbrl/",
+      "registry_plugin_slugs": [
+        "convert-xbrl"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "gis/read-gis-data": {
+      "family": "gis",
+      "canonical_plugin_slug": "read-gis-data",
+      "canonical_url": "https://products.aspose.net/gis/net/read-gis-data/",
+      "registry_plugin_slugs": [
+        "convert-gis-data",
+        "read-gis-data"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "html/html-to-pdf-converter": {
+      "family": "html",
+      "canonical_plugin_slug": "html-to-pdf-converter",
+      "canonical_url": "https://products.aspose.net/html/html-to-pdf-converter/",
+      "registry_plugin_slugs": [
+        "convert-html-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "HTML to PDF Converter for .NET"
+    },
+    "html/html-to-docx-converter": {
+      "family": "html",
+      "canonical_plugin_slug": "html-to-docx-converter",
+      "canonical_url": "https://products.aspose.net/html/html-to-docx-converter/",
+      "registry_plugin_slugs": [
+        "convert-html-to-word"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "html/html-to-image-converter": {
+      "family": "html",
+      "canonical_plugin_slug": "html-to-image-converter",
+      "canonical_url": "https://products.aspose.net/html/html-to-image-converter/",
+      "registry_plugin_slugs": [
+        "convert-html-to-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "BLOCKED_403",
+      "page_h1": "HTML to Image Converter (URL reconciliation confirmed)"
+    },
+    "imaging/image-converter": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-converter",
+      "canonical_url": "https://products.aspose.net/imaging/image-converter/",
+      "registry_plugin_slugs": [
+        "convert-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "Image Format Converter for .NET"
+    },
+    "imaging/image-resizer": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-resizer",
+      "canonical_url": "https://products.aspose.net/imaging/image-resizer/",
+      "registry_plugin_slugs": [
+        "resize-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "Image Resizing with .NET Plugin"
+    },
+    "imaging/image-compressor": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-compressor",
+      "canonical_url": "https://products.aspose.net/imaging/image-compressor/",
+      "registry_plugin_slugs": [
+        "compress-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "imaging/image-cropper": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-cropper",
+      "canonical_url": "https://products.aspose.net/imaging/image-cropper/",
+      "registry_plugin_slugs": [
+        "crop-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "imaging/image-filters": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-filters",
+      "canonical_url": "https://products.aspose.net/imaging/image-filters/",
+      "registry_plugin_slugs": [
+        "filter-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "imaging/image-merger": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-merger",
+      "canonical_url": "https://products.aspose.net/imaging/image-merger/",
+      "registry_plugin_slugs": [
+        "merge-images"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "imaging/add-watermark": {
+      "family": "imaging",
+      "canonical_plugin_slug": "add-watermark",
+      "canonical_url": "https://products.aspose.net/imaging/add-watermark/",
+      "registry_plugin_slugs": [
+        "watermark-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "imaging/image-rotator": {
+      "family": "imaging",
+      "canonical_plugin_slug": "image-rotator",
+      "canonical_url": "https://products.aspose.net/imaging/image-rotator/",
+      "registry_plugin_slugs": [
+        "rotate-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "note/convert-onenote-to-pdf": {
+      "family": "note",
+      "canonical_plugin_slug": "convert-onenote-to-pdf",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-pdf/",
+      "registry_plugin_slugs": [
+        "convert-one-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "BLOCKED_403",
+      "page_h1": "Convert OneNote to PDF (URL reconciliation confirmed)"
+    },
+    "note/convert-onenote-to-word": {
+      "family": "note",
+      "canonical_plugin_slug": "convert-onenote-to-word",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-word/",
+      "registry_plugin_slugs": [
+        "convert-one-to-word"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "note/convert-onenote-to-image": {
+      "family": "note",
+      "canonical_plugin_slug": "convert-onenote-to-image",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-image/",
+      "registry_plugin_slugs": [
+        "convert-one-to-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/scanned-image-to-text": {
+      "family": "ocr",
+      "canonical_plugin_slug": "scanned-image-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+      "registry_plugin_slugs": [
+        "recognize-text"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "Scanned Image to Text OCR"
+    },
+    "ocr/scanned-pdf-to-text": {
+      "family": "ocr",
+      "canonical_plugin_slug": "scanned-pdf-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+      "registry_plugin_slugs": [
+        "extract-text"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/scan-document": {
+      "family": "ocr",
+      "canonical_plugin_slug": "scan-document",
+      "canonical_url": "https://products.aspose.net/ocr/scan-document/",
+      "registry_plugin_slugs": [
+        "scan-document"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/image-text-finder": {
+      "family": "ocr",
+      "canonical_plugin_slug": "image-text-finder",
+      "canonical_url": "https://products.aspose.net/ocr/image-text-finder/",
+      "registry_plugin_slugs": [
+        "image-text-finder"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/invoice-to-text": {
+      "family": "ocr",
+      "canonical_plugin_slug": "invoice-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/invoice-to-text/",
+      "registry_plugin_slugs": [
+        "invoice-to-text"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/photo-to-text": {
+      "family": "ocr",
+      "canonical_plugin_slug": "photo-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/photo-to-text/",
+      "registry_plugin_slugs": [
+        "photo-to-text"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "ocr/table-to-text": {
+      "family": "ocr",
+      "canonical_plugin_slug": "table-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/table-to-text/",
+      "registry_plugin_slugs": [
+        "table-to-text"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "page/xps-converter": {
+      "family": "page",
+      "canonical_plugin_slug": "xps-converter",
+      "canonical_url": "https://products.aspose.net/page/xps-converter/",
+      "registry_plugin_slugs": [
+        "convert-xps-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "page/eps-to-pdf": {
+      "family": "page",
+      "canonical_plugin_slug": "eps-to-pdf",
+      "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+      "registry_plugin_slugs": [
+        "convert-eps-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "BLOCKED_403",
+      "page_h1": "EPS to PDF (URL reconciliation confirmed)"
+    },
+    "page/ps-converter": {
+      "family": "page",
+      "canonical_plugin_slug": "ps-converter",
+      "canonical_url": "https://products.aspose.net/page/ps-converter/",
+      "registry_plugin_slugs": [
+        "convert-ps-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "psd/psd-to-pdf": {
+      "family": "psd",
+      "canonical_plugin_slug": "psd-to-pdf",
+      "canonical_url": "https://products.aspose.net/psd/psd-to-pdf/",
+      "registry_plugin_slugs": [
+        "convert-psd-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "BLOCKED_403",
+      "page_h1": "PSD to PDF (URL reconciliation confirmed)"
+    },
+    "psd/image-converter": {
+      "family": "psd",
+      "canonical_plugin_slug": "image-converter",
+      "canonical_url": "https://products.aspose.net/psd/image-converter/",
+      "registry_plugin_slugs": [
+        "convert-psd-to-png"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": ".NET PSD Image Converter"
+    },
+    "psd/animation-maker": {
+      "family": "psd",
+      "canonical_plugin_slug": "animation-maker",
+      "canonical_url": "https://products.aspose.net/psd/animation-maker/",
+      "registry_plugin_slugs": [
+        "psd-image-converter",
+        "animation-maker"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": ".NET Animation Maker"
+    },
+    "psd/photo-processor": {
+      "family": "psd",
+      "canonical_plugin_slug": "photo-processor",
+      "canonical_url": "https://products.aspose.net/psd/photo-processor/",
+      "registry_plugin_slugs": [
+        "edit-psd-layers",
+        "photo-processor"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": ".NET PSD Photo Processor"
+    },
+    "svg/svg-to-image-converter": {
+      "family": "svg",
+      "canonical_plugin_slug": "svg-to-image-converter",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
+      "registry_plugin_slugs": [
+        "svg-to-image-converter"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "svg/svg-to-pdf-converter": {
+      "family": "svg",
+      "canonical_plugin_slug": "svg-to-pdf-converter",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "registry_plugin_slugs": [
+        "convert-svg-to-png",
+        "svg-to-pdf-converter"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "SVG to PDF Converter for .NET"
+    },
+    "svg/vectorizer": {
+      "family": "svg",
+      "canonical_plugin_slug": "vectorizer",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "registry_plugin_slugs": [
+        "convert-svg-to-jpg",
+        "vectorizer"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "SVG Vectorizer for .NET"
+    },
+    "tasks/project-to-pdf-converter": {
+      "family": "tasks",
+      "canonical_plugin_slug": "project-to-pdf-converter",
+      "canonical_url": "https://products.aspose.net/tasks/project-to-pdf-converter/",
+      "registry_plugin_slugs": [
+        "convert-mpp-to-pdf"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "tasks/mpp-to-excel": {
+      "family": "tasks",
+      "canonical_plugin_slug": "mpp-to-excel",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-excel/",
+      "registry_plugin_slugs": [
+        "convert-mpp-to-excel"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "BLOCKED_403",
+      "page_h1": "MPP to Excel (URL reconciliation confirmed)"
+    },
+    "tasks/mpp-to-html": {
+      "family": "tasks",
+      "canonical_plugin_slug": "mpp-to-html",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+      "registry_plugin_slugs": [
+        "convert-mpp-to-html"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "tasks/mpp-to-png": {
+      "family": "tasks",
+      "canonical_plugin_slug": "mpp-to-png",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+      "registry_plugin_slugs": [
+        "convert-mpp-to-image"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "tex/latex-figure-renderer": {
+      "family": "tex",
+      "canonical_plugin_slug": "latex-figure-renderer",
+      "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/",
+      "registry_plugin_slugs": [
+        "latex-figure-renderer"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "zip/compress-files": {
+      "family": "zip",
+      "canonical_plugin_slug": "compress-files",
+      "canonical_url": "https://products.aspose.net/zip/compress-files/",
+      "registry_plugin_slugs": [
+        "compress-files"
+      ],
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "zip/universal-extractor": {
+      "family": "zip",
+      "canonical_plugin_slug": "universal-extractor",
+      "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+      "registry_plugin_slugs": [
+        "extract-files"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "NOT_PROBED",
+      "page_h1": ""
+    },
+    "zip/universal-compressor": {
+      "family": "zip",
+      "canonical_plugin_slug": "universal-compressor",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "registry_plugin_slugs": [
+        "compress-folder"
+      ],
+      "identity_status": "SLUG_ALIAS_REQUIRED",
+      "page_probe_status": "OK",
+      "page_h1": "Compress Directories in Various Formats via .NET"
+    }
+  }
+}

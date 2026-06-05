@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-finance/Aspose.Finance-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-xbrl
+  canonical_plugin_slug: convert-xbrl
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/finance/net/convert-xbrl
   page_hash: adc5e449572d1ed8
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -33,6 +35,8 @@ plugins:
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
   canonical_url: https://products.aspose.net/finance/convert-xbrl/
 - plugin_slug: parse-xbrl
+  canonical_plugin_slug: parse-xbrl
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/finance/net/parse-xbrl
   page_hash: dad9f1361828ca2a
   registry_status: NEEDS_MANUAL_MAPPING

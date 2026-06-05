@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-05",
+  "results": [
+    {
+      "package_key": "barcode/1d-barcode-writer",
+      "passes": true,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    {
+      "package_key": "barcode/2d-barcode-writer",
+      "passes": true,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    {
+      "package_key": "barcode/1d-barcode-reader",
+      "passes": true,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    {
+      "package_key": "barcode/2d-barcode-reader",
+      "passes": true,
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    }
+  ]
+}

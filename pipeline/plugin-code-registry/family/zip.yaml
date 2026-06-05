@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-zip/Aspose.Zip-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: compress-files
+  canonical_plugin_slug: compress-files
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/zip/net/compress-files
   canonical_url: https://products.aspose.net/zip/compress-files/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -46,6 +48,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
 - plugin_slug: extract-files
+  canonical_plugin_slug: universal-extractor
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/zip/net/extract-files
   canonical_url: https://products.aspose.net/zip/universal-extractor/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -74,6 +78,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed as /zip/universal-extractor/ but code mapping still needed.
 - plugin_slug: create-archive
+  canonical_plugin_slug: universal-compressor
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/zip/net/create-archive
   canonical_url: https://products.aspose.net/zip/universal-compressor/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -112,6 +118,8 @@ plugins:
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed: /zip/universal-compressor/.'
 - plugin_slug: compress-folder
+  canonical_plugin_slug: universal-compressor
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/zip/net/compress-folder
   canonical_url: https://products.aspose.net/zip/universal-compressor/
   page_source_status: CANONICAL_URL_CONFIRMED

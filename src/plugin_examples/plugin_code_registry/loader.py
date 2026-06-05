@@ -56,6 +56,8 @@ class PluginCodeRegistryLoader:
                 dryrun_package_path=raw.get("dryrun_package_path"),
                 dryrun_validation_status=raw.get("dryrun_validation_status"),
                 publication_candidate_status=raw.get("publication_candidate_status"),
+                canonical_plugin_slug=raw.get("canonical_plugin_slug"),
+                identity_status=raw.get("identity_status"),
             )
             plugins.append(entry)
         return FamilyRegistry(

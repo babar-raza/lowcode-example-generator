@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-barcode/Aspose.Barcode-for-.NET
 implementation_model: STATIC_CONVERTER_CLASS
 plugins:
 - plugin_slug: generate-barcode
+  canonical_plugin_slug: 1d-barcode-writer
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/barcode/net/generate-barcode
   canonical_url: https://products.aspose.net/barcode/1d-barcode-writer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -49,6 +51,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: recognize-barcode
+  canonical_plugin_slug: 1d-barcode-reader
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/barcode/net/recognize-barcode
   canonical_url: https://products.aspose.net/barcode/1d-barcode-reader/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -93,6 +97,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: generate-qr-code
+  canonical_plugin_slug: 2d-barcode-writer
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/barcode/net/generate-qr-code
   canonical_url: https://products.aspose.net/barcode/2d-barcode-writer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -134,6 +140,8 @@ plugins:
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed: /barcode/2d-barcode-writer/.'
 - plugin_slug: read-barcode
+  canonical_plugin_slug: read-barcode
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/barcode/net/read-barcode
   canonical_url: null
   page_source_status: CANONICAL_URL_SPLIT_AMBIGUOUS
@@ -164,6 +172,8 @@ plugins:
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Status
       NEEDS_MANUAL_MAPPING: slug maps ambiguously.'
 - plugin_slug: scan-barcode
+  canonical_plugin_slug: 2d-barcode-reader
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/barcode/net/scan-barcode
   canonical_url: https://products.aspose.net/barcode/2d-barcode-reader/
   page_source_status: CANONICAL_URL_CONFIRMED

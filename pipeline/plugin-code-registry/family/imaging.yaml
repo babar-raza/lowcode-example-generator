@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-imaging/Aspose.Imaging-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-image
+  canonical_plugin_slug: image-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/convert-image
   canonical_url: https://products.aspose.net/imaging/image-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -50,6 +52,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: resize-image
+  canonical_plugin_slug: image-resizer
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/resize-image
   canonical_url: https://products.aspose.net/imaging/image-resizer/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -86,6 +90,8 @@ plugins:
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Canonical
       URL confirmed: /imaging/image-resizer/.'
 - plugin_slug: compress-image
+  canonical_plugin_slug: image-compressor
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/compress-image
   canonical_url: https://products.aspose.net/imaging/image-compressor/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -130,6 +136,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: crop-image
+  canonical_plugin_slug: image-cropper
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/crop-image
   canonical_url: https://products.aspose.net/imaging/image-cropper/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -172,6 +180,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/crop-image
       built and ran PASS.
 - plugin_slug: filter-image
+  canonical_plugin_slug: image-filters
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/filter-image
   canonical_url: https://products.aspose.net/imaging/image-filters/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -215,6 +225,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/filter-image
       built and ran PASS.
 - plugin_slug: merge-images
+  canonical_plugin_slug: image-merger
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/merge-images
   canonical_url: https://products.aspose.net/imaging/image-merger/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -259,6 +271,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/merge-images
       built and ran PASS.
 - plugin_slug: watermark-image
+  canonical_plugin_slug: add-watermark
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/watermark-image
   canonical_url: https://products.aspose.net/imaging/add-watermark/
   page_source_status: CANONICAL_URL_BEST_MATCH
@@ -305,6 +319,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-example-factory-wave-20260605. Package reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/imaging/watermark-image
       built and ran PASS.
 - plugin_slug: rotate-image
+  canonical_plugin_slug: image-rotator
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/imaging/net/rotate-image
   canonical_url: https://products.aspose.net/imaging/image-rotator/
   page_source_status: CANONICAL_URL_BEST_MATCH

@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-psd/Aspose.Psd-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-psd-to-pdf
+  canonical_plugin_slug: psd-to-pdf
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/psd/net/convert-psd-to-pdf
   page_hash: 83cffccb6c81e4f5
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -39,6 +41,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/psd/psd-to-pdf/
 - plugin_slug: convert-psd-to-png
+  canonical_plugin_slug: image-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/psd/net/convert-psd-to-png
   page_hash: ca9c247241de366a
   registry_status: CODE_HARVESTED
@@ -64,6 +68,8 @@ plugins:
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from CroppingPSDWhenConvertingToPNG.cs
 - plugin_slug: psd-image-converter
+  canonical_plugin_slug: animation-maker
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/psd/net/convert-psd-to-jpg
   canonical_url: https://products.aspose.net/psd/image-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -104,6 +110,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: edit-psd-layers
+  canonical_plugin_slug: photo-processor
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/psd/net/edit-psd-layers
   page_hash: e6ec102890e1f28c
   registry_status: CODE_HARVESTED
@@ -133,6 +141,8 @@ plugins:
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from SupportOfLayersInAi.cs
 - plugin_slug: animation-maker
+  canonical_plugin_slug: animation-maker
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/psd/animation-maker/
   canonical_url: https://products.aspose.net/psd/animation-maker/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT
@@ -169,6 +179,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical
       page.
 - plugin_slug: photo-processor
+  canonical_plugin_slug: photo-processor
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/psd/photo-processor/
   canonical_url: https://products.aspose.net/psd/photo-processor/
   page_source_status: PAGE_CRAWLED_THIS_SPRINT

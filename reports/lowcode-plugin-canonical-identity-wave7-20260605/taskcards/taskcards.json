@@ -1,0 +1,105 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "taskcards": [
+    {
+      "id": "TC-00", "lane": "0", "owner": "coordinator", "status": "IN_PROGRESS",
+      "objective": "Coordinator preflight + governance",
+      "scope": "Report root, lane ledger, taskcards, preflight snapshot",
+      "owned_paths": ["reports/.../coordinator/", "reports/.../taskcards/"],
+      "forbidden_paths": ["pipeline/configs/families/*.yml", "pipeline/format-authority/"],
+      "acceptance_checks": ["lane-ledger.json exists", "taskcards.json exists", "preflight snapshot captured"],
+      "evidence": "coordinator/lane-ledger.json"
+    },
+    {
+      "id": "TC-0A", "lane": "A", "owner": "canonical-identity", "status": "PENDING",
+      "objective": "Build canonical plugin identity map from products.aspose.net pages",
+      "scope": "Crawl all known family pages, extract exact plugin slugs, verify BarCode 4 plugins",
+      "owned_paths": ["reports/.../canonical-identity/"],
+      "forbidden_paths": ["pipeline/plugin-code-registry/", "external repos"],
+      "acceptance_checks": ["canonical-plugin-identity-map.json created", "BarCode 4 plugins confirmed", "family-plugin-list.json created"],
+      "evidence": "canonical-identity/canonical-plugin-identity-map.json"
+    },
+    {
+      "id": "TC-0B", "lane": "B", "owner": "registry-identity", "status": "PENDING",
+      "objective": "Audit 72 registry entries + add identity fields + BarCode slug repair",
+      "scope": "All pipeline/plugin-code-registry/family/*.yaml files",
+      "owned_paths": ["reports/.../registry-identity/", "pipeline/plugin-code-registry/**"],
+      "forbidden_paths": ["pipeline/configs/families/*.yml", "pipeline/format-authority/"],
+      "acceptance_checks": ["registry-identity-audit.json: 72 entries classified", "BarCode 4 entries have canonical_plugin_slug", "legacy-alias-map.json created"],
+      "evidence": "registry-identity/registry-identity-audit.json"
+    },
+    {
+      "id": "TC-0C", "lane": "C", "owner": "dryrun-identity", "status": "PENDING",
+      "objective": "Audit 44 examples + build 4 canonical BarCode packages",
+      "scope": "All prior wave dryrun examples + new barcode/1d-barcode-writer etc.",
+      "owned_paths": ["reports/.../dryrun-identity/", "reports/.../dryrun/examples/barcode/"],
+      "forbidden_paths": ["external repos", "existing published 44 LowCode examples"],
+      "acceptance_checks": ["44 examples classified", "4 BarCode canonical packages PASS", "alias plan documented"],
+      "evidence": "dryrun-identity/barcode-canonical-example-repair.md"
+    },
+    {
+      "id": "TC-0D", "lane": "D", "owner": "factory-tooling", "status": "PENDING",
+      "objective": "Add canonical slug enforcement to registry loader and example factory",
+      "scope": "src/plugin_examples/plugin_code_registry/, src/plugin_examples/example_factory/",
+      "owned_paths": ["src/plugin_examples/plugin_code_registry/", "tests/unit/test_canonical_identity*.py"],
+      "forbidden_paths": ["protected files", "external repos"],
+      "acceptance_checks": ["loader exposes canonical_plugin_slug", "factory uses canonical slug for folder", "tests pass"],
+      "evidence": "tooling/canonical-identity-implementation.md"
+    },
+    {
+      "id": "TC-0E", "lane": "E", "owner": "validators", "status": "PENDING",
+      "objective": "Implement 14 plugin identity invariant validator rules",
+      "scope": "src/plugin_examples/fixture_factory/plugin_identity_validators.py (new)",
+      "owned_paths": ["src/plugin_examples/fixture_factory/", "tests/unit/test_plugin_identity_validators.py"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["14 rules implemented", "BarCode generic-name regression fixture", "tests pass"],
+      "evidence": "validators/plugin-identity-invariant-rules.md"
+    },
+    {
+      "id": "TC-0F", "lane": "F", "owner": "publication-readiness", "status": "PENDING",
+      "objective": "Reclassify all 44 examples by canonical identity verification status",
+      "scope": "reports/.../publication-readiness/",
+      "owned_paths": ["reports/.../publication-readiness/", "reports/.../state/"],
+      "forbidden_paths": ["protected files", "external repos"],
+      "acceptance_checks": ["reclassified-candidate-matrix.json: all 44 examples classified", "no unverified entry marked clean"],
+      "evidence": "publication-readiness/reclassified-candidate-matrix.json"
+    },
+    {
+      "id": "TC-0G", "lane": "G", "owner": "wave7-advancement", "status": "PENDING",
+      "objective": "Build Wave 7 packages for verified canonical plugin entries",
+      "scope": "Select from imaging/barcode/zip/gis candidates with verified canonical_url",
+      "owned_paths": ["reports/.../dryrun/wave7/", "reports/.../dryrun/examples/"],
+      "forbidden_paths": ["external repos", "protected files"],
+      "acceptance_checks": ["wave7-build-results.json: min 4 PASS", "all packages use canonical slug folders"],
+      "evidence": "dryrun/wave7/wave7-build-results.json"
+    },
+    {
+      "id": "TC-0H", "lane": "H", "owner": "state-docs-skills", "status": "PENDING",
+      "objective": "Update state ledgers + add canonical-plugin-identity skill",
+      "scope": "skills/, reports/.../state/",
+      "owned_paths": ["skills/", "reports/.../state/", "reports/.../taskcards/"],
+      "forbidden_paths": ["protected files"],
+      "acceptance_checks": ["canonical-plugin-identity-and-aliasing.md created", "cumulative ledger updated", "legacy alias ledger created"],
+      "evidence": "skills/canonical-plugin-identity-and-aliasing.md"
+    },
+    {
+      "id": "TC-0I", "lane": "I", "owner": "iv", "status": "PENDING",
+      "objective": "Independent verification: BarCode repair, 8+ examples, adversarial challenges",
+      "scope": "Read-only inspection of all outputs",
+      "owned_paths": ["reports/.../iv/", "reports/.../adversarial-review/"],
+      "forbidden_paths": ["implementation source", "registry files (write)"],
+      "acceptance_checks": ["BarCode 4 packages verified", "8+ examples inspected", "5+ adversarial challenges answered", "IV_ACCEPT or IV_ACCEPT_WITH_CAVEATS"],
+      "evidence": "iv/independent-verification-report.md"
+    },
+    {
+      "id": "TC-0J", "lane": "J", "owner": "final", "status": "PENDING",
+      "objective": "Run tests + commit + evidence bundle + final closeout",
+      "scope": "Full test suite + commit exact paths + ZIP bundle",
+      "owned_paths": ["reports/.../final/", ".local/evidence-bundles/"],
+      "forbidden_paths": ["external repos", "protected files"],
+      "acceptance_checks": ["tests pass", "protected files unchanged", "evidence bundle SHA-256 recorded", "SPRINT_COMPLETE"],
+      "evidence": "final/evidence-bundle-manifest.json"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "prior_sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "objective": "Canonical plugin identity repair + Wave 7 dry-run advancement",
+  "verdict": "IN_PROGRESS",
+  "cumulative_package_counts": {
+    "prior_wave_packages": 44,
+    "canonical_barcode_new": 4,
+    "wave7_new": 4,
+    "total_canonical_this_sprint": 8,
+    "cumulative_total": 52
+  },
+  "wave7_packages": [
+    {"key": "ocr/photo-to-text", "canonical_slug": "photo-to-text", "verdict": "PASS", "piv_errors": 0},
+    {"key": "ocr/table-to-text", "canonical_slug": "table-to-text", "verdict": "PASS", "piv_errors": 0},
+    {"key": "psd/animation-maker", "canonical_slug": "animation-maker", "verdict": "PASS", "piv_errors": 0},
+    {"key": "psd/photo-processor", "canonical_slug": "photo-processor", "verdict": "PASS", "piv_errors": 0}
+  ],
+  "canonical_barcode_packages": [
+    {"key": "barcode/1d-barcode-writer", "legacy_slug": "generate-barcode", "verdict": "PASS"},
+    {"key": "barcode/2d-barcode-writer", "legacy_slug": "generate-qr-code", "verdict": "PASS"},
+    {"key": "barcode/1d-barcode-reader", "legacy_slug": "recognize-barcode", "verdict": "PASS"},
+    {"key": "barcode/2d-barcode-reader", "legacy_slug": "scan-barcode", "verdict": "PASS"}
+  ],
+  "registry_identity_summary": {
+    "total_entries": 72,
+    "canonical_identity_verified": 11,
+    "slug_alias_required": 37,
+    "missing_canonical_url": 24,
+    "yaml_files_updated": 14,
+    "entries_enriched": 61
+  },
+  "piv_validator_summary": {
+    "rules_implemented": 14,
+    "unit_tests": 13,
+    "unit_tests_pass": 13,
+    "wave7_packages_validated": 4,
+    "wave7_piv_pass": 4,
+    "barcode_packages_validated": 4,
+    "barcode_piv_pass": 4
+  },
+  "publication_readiness": {
+    "prior_wave_identity_review_required": 44,
+    "canonical_barcode_clean": 4,
+    "wave7_clean": 4,
+    "total_clean_this_sprint": 8
+  },
+  "canonical_alias_ledger_path": "reports/lowcode-plugin-canonical-identity-wave7-20260605/registry-identity/legacy-alias-map.json",
+  "registry_audit_path": "reports/lowcode-plugin-canonical-identity-wave7-20260605/registry-identity/registry-identity-audit.json",
+  "wave7_build_results_path": "reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun-identity/wave7-build-results.json",
+  "barcode_build_results_path": "reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun-identity/barcode-canonical-build-results.json",
+  "piv_validators_path": "src/plugin_examples/fixture_factory/plugin_identity_validators.py"
+}

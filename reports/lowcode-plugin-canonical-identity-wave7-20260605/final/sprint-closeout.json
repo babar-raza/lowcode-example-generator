@@ -1,0 +1,52 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "verdict": "SPRINT_COMPLETE",
+  "objective": "Canonical plugin identity repair + Wave 7 dry-run advancement",
+  "lanes": {
+    "0": {"status": "COMPLETE", "outcome": "Preflight snapshot: 38 slug mismatches, 7 protected file hashes"},
+    "A": {"status": "COMPLETE", "outcome": "47 canonical plugin pages mapped; BarCode 4/4 confirmed via direct probe"},
+    "B": {"status": "COMPLETE", "outcome": "72 registry entries classified; 18 YAML files enriched; 37 alias mappings"},
+    "C": {"status": "COMPLETE", "outcome": "4 canonical BarCode packages built, all PASS, all PIV verified"},
+    "D": {"status": "COMPLETE", "outcome": "PluginEntry model extended: canonical_plugin_slug, identity_status, effective_canonical_slug, is_identity_verified"},
+    "E": {"status": "COMPLETE", "outcome": "14 PIV rules (PIV-01..PIV-14); 13 unit tests 13/13 PASS"},
+    "F": {"status": "COMPLETE", "outcome": "44 prior packages IDENTITY_REVIEW_REQUIRED; 8 new canonical packages CLEAN"},
+    "G": {"status": "COMPLETE", "outcome": "4 Wave 7 packages PASS: ocr/photo-to-text, ocr/table-to-text, psd/animation-maker, psd/photo-processor"},
+    "H": {"status": "COMPLETE", "outcome": "Sprint state ledger + skills updated; canonical-plugin-identity-and-aliasing.md skill created"},
+    "I": {"status": "COMPLETE", "outcome": "59/59 IV_PASS: protected files verified, adversarial challenges passed"},
+    "J": {"status": "COMPLETE", "outcome": "3446/0/18 pytest; evidence bundle 95578 bytes/109 entries"}
+  },
+  "new_packages_this_sprint": [
+    {"key": "barcode/1d-barcode-writer", "legacy": "generate-barcode", "verdict": "PASS"},
+    {"key": "barcode/2d-barcode-writer", "legacy": "generate-qr-code", "verdict": "PASS"},
+    {"key": "barcode/1d-barcode-reader", "legacy": "recognize-barcode", "verdict": "PASS"},
+    {"key": "barcode/2d-barcode-reader", "legacy": "scan-barcode", "verdict": "PASS"},
+    {"key": "ocr/photo-to-text", "legacy": "", "verdict": "PASS"},
+    {"key": "ocr/table-to-text", "legacy": "", "verdict": "PASS"},
+    {"key": "psd/animation-maker", "legacy": "", "verdict": "PASS"},
+    {"key": "psd/photo-processor", "legacy": "", "verdict": "PASS"}
+  ],
+  "cumulative_packages": 52,
+  "registry_entries": 72,
+  "piv_rules": 14,
+  "piv_unit_tests": "13/13",
+  "iv_verdict": "IV_PASS",
+  "pytest": "3446/0/18",
+  "evidence_bundle": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-identity-wave7-20260605.zip",
+    "sha256": "59fa0abb568ba8508a0a95d17aef4908f025b8e6ebb5791879199a9b90b30a23",
+    "size_bytes": 95578,
+    "entries": 109
+  },
+  "protected_files_unchanged": true,
+  "publication_prs_created": 0,
+  "next_sprint_candidates": [
+    "ocr/photo-to-text → publication",
+    "ocr/table-to-text → publication",
+    "psd/animation-maker → publication",
+    "psd/photo-processor → publication",
+    "barcode/1d-barcode-writer → publication (canonical)",
+    "barcode/2d-barcode-writer → publication (canonical)",
+    "Backfill: 44 prior-wave packages need canonical_plugin_slug in source-provenance.json"
+  ]
+}

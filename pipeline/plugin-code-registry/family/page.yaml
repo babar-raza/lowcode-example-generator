@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-page/Aspose.Page-for-.NET
 implementation_model: DEDICATED_PLUGIN_CLASS
 plugins:
 - plugin_slug: convert-xps-to-pdf
+  canonical_plugin_slug: xps-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/page/net/convert-xps-to-pdf
   canonical_url: https://products.aspose.net/page/xps-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -42,6 +44,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: convert-eps-to-pdf
+  canonical_plugin_slug: eps-to-pdf
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/page/net/convert-eps-to-pdf
   page_hash: ac05ee2c3f67b341
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -78,6 +82,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/page/eps-to-pdf/
 - plugin_slug: convert-ps-to-pdf
+  canonical_plugin_slug: ps-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/page/net/convert-ps-to-pdf
   canonical_url: https://products.aspose.net/page/ps-converter/
   page_source_status: CANONICAL_URL_CONFIRMED

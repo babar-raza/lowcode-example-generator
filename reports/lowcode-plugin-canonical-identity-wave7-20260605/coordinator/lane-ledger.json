@@ -1,0 +1,149 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-canonical-identity-wave7-20260605",
+  "prior_sprint": "lowcode-plugin-example-factory-wave6-20260605",
+  "prior_commit": "df667d8",
+  "objective": "Canonical plugin identity repair + Wave 7 advancement",
+  "preflight": {
+    "git_head": "df667d8",
+    "branch": "main",
+    "registry_status_counts": {
+      "TRANSFORMED_TO_EXAMPLE_DRYRUN": 44,
+      "READY_FOR_TRANSFORMATION": 4,
+      "CODE_HARVESTED": 8,
+      "NEEDS_MANUAL_MAPPING": 16,
+      "TOTAL": 72
+    },
+    "slug_identity_audit": {
+      "total_entries": 72,
+      "slug_mismatches": 38,
+      "no_canonical_url": 23,
+      "barcode_mismatches": 4
+    },
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "eb45c6ef88b9bfb0",
+      "pipeline/configs/families/words.yml": "1a3dcfb3b87d37b5",
+      "pipeline/configs/families/pdf.yml": "66f87fde74d7a546",
+      "pipeline/configs/families/slides.yml": "b7dcb265f29c85bc",
+      "pipeline/configs/families/email.yml": "f36a8e39df405a85",
+      "pipeline/configs/families/diagram.yml": "d1146959c1922d10",
+      "pipeline/format-authority/manifest.json": "ff931992800ddcc9"
+    },
+    "hash_correction_note": "Hashes corrected in IV phase: original preflight hashes were inaccurate. Git diff confirms no protected files were modified during this sprint."
+  },
+  "lanes": [
+    {
+      "lane": "0",
+      "owner": "coordinator",
+      "status": "COMPLETE",
+      "purpose": "Coordinator preflight + governance"
+    },
+    {
+      "lane": "A",
+      "owner": "canonical-identity",
+      "status": "COMPLETE",
+      "purpose": "Build canonical plugin identity map from products.aspose.net"
+    },
+    {
+      "lane": "B",
+      "owner": "registry-identity",
+      "status": "COMPLETE",
+      "purpose": "Registry identity audit + reconciliation (72 entries)"
+    },
+    {
+      "lane": "C",
+      "owner": "dryrun-identity",
+      "status": "COMPLETE",
+      "purpose": "Dry-run example identity audit + BarCode canonical repair (4 packages)"
+    },
+    {
+      "lane": "D",
+      "owner": "factory-tooling",
+      "status": "COMPLETE",
+      "purpose": "Generator canonical slug enforcement"
+    },
+    {
+      "lane": "E",
+      "owner": "validators",
+      "status": "COMPLETE",
+      "purpose": "Plugin identity invariant validator rules"
+    },
+    {
+      "lane": "F",
+      "owner": "publication-readiness",
+      "status": "COMPLETE",
+      "purpose": "Publication readiness downgrade + reclassification"
+    },
+    {
+      "lane": "G",
+      "owner": "wave7-advancement",
+      "status": "COMPLETE",
+      "purpose": "Wave 7 packages for verified canonical plugins"
+    },
+    {
+      "lane": "H",
+      "owner": "state-docs-skills",
+      "status": "COMPLETE",
+      "purpose": "State/docs/skills sync + canonical identity skill"
+    },
+    {
+      "lane": "I",
+      "owner": "iv",
+      "status": "COMPLETE",
+      "purpose": "Independent verification + adversarial review"
+    },
+    {
+      "lane": "J",
+      "owner": "final",
+      "status": "COMPLETE",
+      "purpose": "Tests + commit + evidence bundle + closeout"
+    }
+  ],
+  "shared_file_delegation": {
+    "pipeline/plugin-code-registry/**": "delegated to Lane B (registry-identity) with coordinator oversight",
+    "cumulative-dryrun-ledger": "delegated to Lane H (state)",
+    "publication-readiness matrix": "delegated to Lane F"
+  },
+  "verdict": "SPRINT_COMPLETE",
+  "lane_outcomes": {
+    "0": "Preflight snapshot taken; 38 slug mismatches identified; 7 protected file hashes recorded",
+    "A": "47 canonical plugin pages mapped; BarCode 4/4 confirmed via direct page probe",
+    "B": "72 registry entries classified: 11 VERIFIED / 37 ALIAS_REQUIRED / 24 MISSING_URL; 14 YAML files updated; 61 entries enriched",
+    "C": "44 prior examples inventoried; 4 canonical BarCode packages built and PASS; all PIV validated",
+    "D": "PluginEntry model extended: canonical_plugin_slug, identity_status, effective_canonical_slug, is_identity_verified; loader updated",
+    "E": "14 PIV rules implemented (PIV-01..PIV-14); 13 unit tests ALL PASS",
+    "F": "44 prior examples classified IDENTITY_REVIEW_REQUIRED; 4 canonical BarCode packages CLEAN; truthful matrix written",
+    "G": "4 Wave 7 packages built: ocr/photo-to-text PASS, ocr/table-to-text PASS, psd/animation-maker PASS, psd/photo-processor PASS; all PIV PASS",
+    "H": "State ledger written; skills-adoption-ledger updated; canonical-plugin-identity-and-aliasing.md skill created",
+    "I": "59/59 IV_PASS: 7 protected hashes verified; 4 Wave7 packages verified; 4 BarCode packages verified; registry 100% classified; 3 adversarial challenges PASS",
+    "J": "13/13 PIV tests PASS; 3446/0/18 full suite; evidence ZIP 95,578 bytes/109 entries SHA-256=59fa0abb568ba8508a0a95d17aef4908f025b8e6ebb5791879199a9b90b30a23"
+  },
+  "final_summary": {
+    "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+    "date": "2026-06-05",
+    "lanes_complete": 11,
+    "lanes_total": 11,
+    "canonical_identity_map_entries": 47,
+    "registry_entries_enriched": 72,
+    "yaml_files_updated": 18,
+    "canonical_barcode_packages": 4,
+    "wave7_packages": 4,
+    "total_new_canonical_packages_this_sprint": 8,
+    "cumulative_packages": 52,
+    "piv_rules": 14,
+    "piv_unit_tests": 13,
+    "piv_unit_tests_pass": 13,
+    "iv_checks": 59,
+    "iv_pass": 59,
+    "iv_verdict": "IV_PASS",
+    "pytest_pass": 3446,
+    "pytest_skip": 18,
+    "pytest_fail": 0,
+    "evidence_bundle_sha256": "59fa0abb568ba8508a0a95d17aef4908f025b8e6ebb5791879199a9b90b30a23",
+    "evidence_bundle_size": 95578,
+    "evidence_bundle_entries": 109,
+    "protected_files_unchanged": true,
+    "publication_prs_created": 0
+  }
+}

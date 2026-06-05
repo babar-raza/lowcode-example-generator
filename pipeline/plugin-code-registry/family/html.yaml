@@ -4,6 +4,8 @@ github_repo: https://github.com/aspose-html/Aspose.Html-for-.NET
 implementation_model: STATIC_CONVERTER_CLASS
 plugins:
 - plugin_slug: convert-html-to-pdf
+  canonical_plugin_slug: html-to-pdf-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-pdf
   canonical_url: https://products.aspose.net/html/html-to-pdf-converter/
   page_source_status: CANONICAL_URL_CONFIRMED
@@ -54,6 +56,8 @@ plugins:
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
 - plugin_slug: convert-html-to-word
+  canonical_plugin_slug: html-to-docx-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-word
   page_hash: 04566ec714400b34
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -97,6 +101,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/html/html-to-docx-converter/
 - plugin_slug: convert-html-to-image
+  canonical_plugin_slug: html-to-image-converter
+  identity_status: SLUG_ALIAS_REQUIRED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-image
   page_hash: a9b3cc7d51950bbe
   registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
@@ -134,6 +140,8 @@ plugins:
   dryrun_validated_at: '2026-06-05'
   canonical_url: https://products.aspose.net/html/html-to-image-converter/
 - plugin_slug: convert-html-to-xps
+  canonical_plugin_slug: convert-html-to-xps
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/html/net/convert-html-to-xps
   page_hash: e9c75fd94a2b21c6
   registry_status: CODE_HARVESTED
@@ -167,6 +175,8 @@ plugins:
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from EPUBtoXPSExample.cs
 - plugin_slug: convert-html-to-markdown
+  canonical_plugin_slug: convert-html-to-markdown
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/html/net/convert-html-to-markdown
   page_hash: 2753d17136e50057
   registry_status: NEEDS_MANUAL_MAPPING
@@ -185,6 +195,8 @@ plugins:
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
       sprint.
 - plugin_slug: merge-html
+  canonical_plugin_slug: merge-html
+  identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/html/net/merge-html
   page_hash: 00e28ed0c15626b8
   registry_status: NEEDS_MANUAL_MAPPING

@@ -1,0 +1,38 @@
+{
+  "sprint": "lowcode-plugin-canonical-identity-wave7-20260605",
+  "date": "2026-06-05",
+  "total": 4,
+  "pass": 4,
+  "fail": 0,
+  "verdict": "BARCODE_CANONICAL_PASS",
+  "results": [
+    {
+      "package_key": "barcode/1d-barcode-writer",
+      "canonical_plugin_slug": "1d-barcode-writer",
+      "status": "PASS",
+      "output_file": "barcode-1d.png",
+      "output_size": 25927
+    },
+    {
+      "package_key": "barcode/2d-barcode-writer",
+      "canonical_plugin_slug": "2d-barcode-writer",
+      "status": "PASS",
+      "output_file": "barcode-2d.png",
+      "output_size": 8345
+    },
+    {
+      "package_key": "barcode/1d-barcode-reader",
+      "canonical_plugin_slug": "1d-barcode-reader",
+      "status": "PASS",
+      "output_file": "1d-recognition.txt",
+      "output_size": 216
+    },
+    {
+      "package_key": "barcode/2d-barcode-reader",
+      "canonical_plugin_slug": "2d-barcode-reader",
+      "status": "PASS",
+      "output_file": "2d-recognition.txt",
+      "output_size": 218
+    }
+  ]
+}

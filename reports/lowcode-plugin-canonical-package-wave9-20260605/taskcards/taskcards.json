@@ -174,7 +174,7 @@
       "id": "TC-0K",
       "lane": "K",
       "owner": "final",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "objective": "Full pytest, registry schema validation, package proof validation, protected file diff, commit, bundle, SHA",
       "scope": "Final integration only",
       "owned_paths": ["reports/.../final/"],

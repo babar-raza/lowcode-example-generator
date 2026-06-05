@@ -60,7 +60,7 @@
     {"lane": "H", "owner": "publication-readiness", "status": "COMPLETE", "purpose": "Publication matrix repair v2"},
     {"lane": "I", "owner": "state-docs-skills", "status": "COMPLETE", "purpose": "State/docs/skills/taskcard sync"},
     {"lane": "J", "owner": "iv", "status": "COMPLETE", "purpose": "Independent verification + adversarial review"},
-    {"lane": "K", "owner": "final", "status": "PENDING", "purpose": "Tests + commits + evidence bundle + closeout"}
+    {"lane": "K", "owner": "final", "status": "COMPLETE", "purpose": "Tests + commits + evidence bundle + closeout"}
   ],
   "shared_file_delegation": {
     "pipeline/plugin-code-registry/**": "Lane B owns registry URL completion; Lane D owns migration; all other lanes read-only",
@@ -80,7 +80,8 @@
     "G": "CCV validator (CCV-01..CCV-14) created; 45/45 tests PASS",
     "H": "unified-publication-matrix-v2.json built: 72 entries, 16 PUBLICATION_READY, 4 classifications",
     "I": "canonical-package-ledger.json, wave10-next-queue.json written; skills updated",
-    "J": "IV 29/29 PASS; adversarial review: ADVERSARIAL_REVIEW_PASS; 1 additional fix (note/convert-onenote-to-pdf malformed JSON)"
+    "J": "IV 29/29 PASS; adversarial review: ADVERSARIAL_REVIEW_PASS; 1 additional fix (note/convert-onenote-to-pdf malformed JSON)",
+    "K": "pytest 3533/18/0; commit 052b721; bundle SHA c6f05e13c92d8c7f; 163 entries"
   },
-  "verdict": "PENDING"
+  "verdict": "SPRINT_COMPLETE"
 }

@@ -115,14 +115,14 @@
       "lane": "0",
       "scope": "coordinator",
       "title": "Create feat commit and chore commit",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "required_change": "git add -f all W17 report files; feat commit; then chore commit updating closeout/attestation with bundle SHA",
       "acceptance_checks": [
         "feat commit SHA recorded",
         "chore commit SHA recorded",
         "all W17 artifacts staged"
       ],
-      "evidence": "",
+      "evidence": "feat commit ad6642b1 (130 files, 5608 insertions); chore commit to follow with SHA update",
       "closeout_criteria": "two commits present in git log; feat_commit SHA in final-attestation",
       "rollback_plan": "git revert commits"
     },

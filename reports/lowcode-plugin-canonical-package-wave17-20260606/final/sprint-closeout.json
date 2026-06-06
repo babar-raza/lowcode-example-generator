@@ -4,14 +4,14 @@
   "date": "2026-06-06",
   "verdict": "SPRINT_COMPLETE",
   "protocol_version": "v2",
-  "feat_commit": "PENDING_FEAT_COMMIT",
+  "feat_commit": "ad6642b1",
   "evidence_bundle": {
     "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.zip",
     "sha256": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
     "size_bytes": 61586,
     "entry_count": 59,
     "external_sidecar": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.sha256",
-    "protocol_note": "SHA is authoritative in external sidecar only (v2 protocol — no ZIP-contains-own-SHA)"
+    "protocol_note": "SHA is authoritative in external sidecar only (v2 protocol \u2014 no ZIP-contains-own-SHA)"
   },
   "taskcards": {
     "total": 51,
@@ -20,13 +20,25 @@
     "iv_prerequisite_satisfied": true
   },
   "proven_packages": {
-    "wave17_new": ["threed/convert-3d-model", "font/convert-font"],
-    "wave17_blocked": ["finance/parse-xbrl"],
+    "wave17_new": [
+      "threed/convert-3d-model",
+      "font/convert-font"
+    ],
+    "wave17_blocked": [
+      "finance/parse-xbrl"
+    ],
     "total_proven": 55,
     "pclc_total": 22
   },
   "validators": {
-    "new_rules": ["TCV-01..03", "PEV-01..03", "BAV-01..03", "PRC-01..02", "PPL-01..03", "FGS-01..02"],
+    "new_rules": [
+      "TCV-01..03",
+      "PEV-01..03",
+      "BAV-01..03",
+      "PRC-01..02",
+      "PPL-01..03",
+      "FGS-01..02"
+    ],
     "total_new_rules": 16,
     "total_new_tests": 43,
     "full_suite": "3828 passed, 18 skipped, 0 failures"
@@ -39,7 +51,7 @@
     "adversarial_review_pass": true,
     "no_pfx_staged": true,
     "no_pfx_bundled": true,
-    "feat_commit_exists": false,
+    "feat_commit_exists": true,
     "bundle_sha_external": true,
     "zero_pytest_failures": true,
     "final_git_status_in_bundle": true,
@@ -50,9 +62,9 @@
     "no_pending_evidence_in_complete_taskcards": true
   },
   "key_decisions": [
-    "threed/convert-3d-model PROVEN — Scene+Box+FileFormat.WavefrontOBJ; restore/build/run PASS",
-    "font/convert-font PROVEN — Font.Open(FontDefinition); eval mode requires Source Code Pro TTF (OFL)",
-    "finance/parse-xbrl BLOCKED — XbrlDocument network dependency confirmed from W16; deferred to W18",
+    "threed/convert-3d-model PROVEN \u2014 Scene+Box+FileFormat.WavefrontOBJ; restore/build/run PASS",
+    "font/convert-font PROVEN \u2014 Font.Open(FontDefinition); eval mode requires Source Code Pro TTF (OFL)",
+    "finance/parse-xbrl BLOCKED \u2014 XbrlDocument network dependency confirmed from W16; deferred to W18",
     "W16 7 defects documented; 5 repaired in W17; 2 documented-only",
     "20 PR packets built in W17 publication dir (vs 6 in W16 bundle)",
     "16 new validators catching all W16 defect patterns",

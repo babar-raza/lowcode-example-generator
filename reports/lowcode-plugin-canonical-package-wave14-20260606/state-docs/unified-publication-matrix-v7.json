@@ -1,0 +1,550 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "version": "v7",
+  "date": "2026-06-06",
+  "registry_total": 67,
+  "civ": 66,
+  "mcu": 1,
+  "sar": 0,
+  "pclc": 14,
+  "cvfp": 52,
+  "npp": 1,
+  "rows": [
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-writer",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-reader",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-reader/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-writer",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-writer/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "barcode",
+      "slug": "read-barcode",
+      "identity_status": "MISSING_CANONICAL_URL",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "",
+      "publication_class": "NPP"
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-reader",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/barcode/2d-barcode-reader/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/cad/net/convert-cad-to-pdf",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/cad/net/convert-dwg-to-pdf",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/cad/net/convert-dxf-to-pdf",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/cad/net/convert-cad-to-image",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-jpg",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/cad/net/convert-dwg-to-jpg",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "drawing",
+      "slug": "convert-drawing",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/drawing/net/convert-drawing/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "drawing",
+      "slug": "create-drawing",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/drawing/net/create-drawing/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "finance",
+      "slug": "convert-xbrl",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/finance/convert-xbrl/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/finance/net/parse-xbrl",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "font",
+      "slug": "convert-font",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/font/net/convert-font",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "font",
+      "slug": "render-text-with-font",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/font/net/render-text-with-font",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/gis/net/convert-gis-data",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "gis",
+      "slug": "read-gis-data",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/gis/net/read-gis-data/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-pdf-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/html/html-to-pdf-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-docx-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/html/html-to-docx-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-image-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/html/html-to-image-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-xps",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/html/net/convert-html-to-xps",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/html/net/convert-html-to-markdown",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "html",
+      "slug": "merge-html",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/html/net/merge-html",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-resizer",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-resizer/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-compressor",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-compressor/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-cropper",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-cropper/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-filters",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-filters/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-merger",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-merger/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "add-watermark",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/add-watermark/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-rotator",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/imaging/image-rotator/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-pdf/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-word",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-word/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-image",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/note/convert-onenote-to-image/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "ocr",
+      "slug": "scanned-image-to-text",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "ocr",
+      "slug": "scanned-pdf-to-text",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "ocr",
+      "slug": "scan-document",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/ocr/scan-document/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "ocr",
+      "slug": "image-text-finder",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/ocr/image-text-finder/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/ocr/invoice-to-text/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/ocr/photo-to-text/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/ocr/table-to-text/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "omr",
+      "slug": "recognize-omr",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/omr/net/recognize-omr",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "omr",
+      "slug": "generate-omr-template",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/omr/net/generate-omr-template",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "page",
+      "slug": "xps-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/page/xps-converter/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "page",
+      "slug": "eps-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "page",
+      "slug": "ps-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/page/ps-converter/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "psd",
+      "slug": "psd-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/psd/psd-to-pdf/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "psd",
+      "slug": "convert-psd-to-png",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CODE_HARVESTED",
+      "canonical_url": "https://products.aspose.net/psd/net/convert-psd-to-png",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "psd",
+      "slug": "animation-maker",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/psd/animation-maker/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "psd",
+      "slug": "photo-processor",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/psd/photo-processor/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-image-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "svg",
+      "slug": "merge-svg",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/svg/net/merge-svg",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-pdf-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "svg",
+      "slug": "vectorizer",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "tasks",
+      "slug": "project-to-pdf-converter",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/tasks/project-to-pdf-converter/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-excel",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-excel/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-html",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-png",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "tasks",
+      "slug": "read-project-data",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/tasks/net/read-project-data",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "tex",
+      "slug": "latex-figure-renderer",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "tex",
+      "slug": "convert-latex-to-pdf",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/tex/net/convert-latex-to-pdf",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "threed",
+      "slug": "convert-3d-model",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/threed/net/convert-3d-model",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "threed",
+      "slug": "compress-3d-scene",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "NEEDS_MANUAL_MAPPING",
+      "canonical_url": "https://products.aspose.net/threed/net/compress-3d-scene",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "zip",
+      "slug": "compress-files",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "canonical_url": "https://products.aspose.net/zip/compress-files/",
+      "publication_class": "CVFP"
+    },
+    {
+      "family": "zip",
+      "slug": "universal-extractor",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+      "publication_class": "PCLC"
+    },
+    {
+      "family": "zip",
+      "slug": "universal-compressor",
+      "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "publication_class": "PCLC"
+    }
+  ]
+}

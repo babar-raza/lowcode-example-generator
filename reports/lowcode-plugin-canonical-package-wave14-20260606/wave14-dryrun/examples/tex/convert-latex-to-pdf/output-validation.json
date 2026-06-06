@@ -1,0 +1,26 @@
+{
+  "package_key": "tex/convert-latex-to-pdf",
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "generated_at": "2026-06-06",
+  "verdict": "PASS",
+  "canonical_url": "https://products.aspose.net/tex/net/convert-latex-to-pdf",
+  "catalog_verified": true,
+  "output_files": [
+    {
+      "path": "output/job.aux",
+      "size": 34
+    },
+    {
+      "path": "output/job.log",
+      "size": 1746
+    },
+    {
+      "path": "output/job.trm",
+      "size": 401
+    },
+    {
+      "path": "output/job.xps",
+      "size": 684312
+    }
+  ]
+}

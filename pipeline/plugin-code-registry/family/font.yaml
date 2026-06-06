@@ -9,8 +9,10 @@ implementation_model: LOAD_SAVE_OPTIONS
 
 plugins:
   - plugin_slug: convert-font
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/font/net/convert-font
+    canonical_url: https://products.aspose.net/font/net/convert-font
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 0a0f1f2f80a01f8f
     registry_status: NEEDS_MANUAL_MAPPING
     blocker_type: null
@@ -21,20 +23,26 @@ plugins:
       - "Aspose.Font.Examples.WorkingWithType1Fonts"
     classes_used:
       - "License"
-    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS)"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/font.md"
       - "https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/RunExamples.cs"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: NEEDS_MANUAL_MAPPING
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from RunExamples.cs"
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 0a0f1f2f80a01f8f). Upgraded MCU -> CIV."
 
   - plugin_slug: render-text-with-font
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/font/net/render-text-with-font
+    canonical_url: https://products.aspose.net/font/net/render-text-with-font
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 77a6bd8d0165f0d1
     registry_status: CODE_HARVESTED
     blocker_type: null
@@ -56,13 +64,17 @@ plugins:
       - "FileSystemStreamSource"
     github_links:
       - https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs
-    next_action: "Extract symbols from RenderingText.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from RenderingText.cs and advance to READY_FOR_TRANSFORMATION"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/font.md"
       - "https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: CODE_HARVESTED
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from RenderingText.cs"
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 77a6bd8d0165f0d1). Upgraded MCU -> CIV."

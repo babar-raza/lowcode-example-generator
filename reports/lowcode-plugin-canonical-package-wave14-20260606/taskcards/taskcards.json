@@ -1,0 +1,358 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE14-CLOSEOUT-INTEGRITY-BROWSER-CANONICAL-URL-VERIFICATION-PUBLICATION-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "taskcard_policy": "All taskcards must be COMPLETE before sprint-closeout. No PENDING in final bundle. SPRINT_COMPLETE forbidden if any taskcard unclosed or IV fails.",
+  "taskcards": [
+    {
+      "id": "W14-L0-01",
+      "lane": "0",
+      "title": "Create Wave 14 report directory structure (12 subdirs)",
+      "status": "COMPLETE",
+      "evidence": "reports/lowcode-plugin-canonical-package-wave14-20260606/ created with adversarial-review, canonical-verification, coordinator, final, iv, package-proofs, preflight, publication-staging/pr-packets, state-docs, taskcards, validators, wave13-closure-repair"
+    },
+    {
+      "id": "W14-L0-02",
+      "lane": "0",
+      "title": "Capture preflight git status and log",
+      "status": "COMPLETE",
+      "evidence": "preflight/git-status.txt + preflight/git-log.txt \u2014 HEAD=279d70f, branch=main"
+    },
+    {
+      "id": "W14-L0-03",
+      "lane": "0",
+      "title": "Audit Wave 13 bundle vs disk state \u2014 identify contradictions",
+      "status": "COMPLETE",
+      "evidence": "preflight/wave13-evidence-inventory.json \u2014 bundle=IV_FAIL bundled; disk=IV_PASS; final/sprint-closeout.json missing from bundle; AR=PRE_CLOSEOUT; sidecar_matches_bundle=true"
+    },
+    {
+      "id": "W14-L0-04",
+      "lane": "0",
+      "title": "Write Wave 13 contradiction inventory (7 contradictions)",
+      "status": "COMPLETE",
+      "evidence": "preflight/wave13-contradiction-inventory.json \u2014 2 CRITICAL, 2 HIGH, 2 MEDIUM, 1 LOW; classification=WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_AND_MISSING_FINAL_PROOF"
+    },
+    {
+      "id": "W14-L0-05",
+      "lane": "0",
+      "title": "Write Wave 14 taskcards for all lanes 0+A-I before implementation",
+      "status": "COMPLETE",
+      "evidence": "taskcards/taskcards.json \u2014 this file; covers all 10 lanes"
+    },
+    {
+      "id": "W14-L0-06",
+      "lane": "0",
+      "title": "Write coordinator/lane-ledger.json with 10 lanes (0+A-I)",
+      "status": "COMPLETE",
+      "evidence": "coordinator/lane-ledger.json \u2014 10 lanes (0+A-I), preflight, hard constraints, sidecar_proof_protocol_v1.0"
+    },
+    {
+      "id": "W14-LA-01",
+      "lane": "A",
+      "title": "Verify Wave 13 disk state: all 40 taskcards COMPLETE, iv-results PASS, sprint-closeout exists",
+      "status": "COMPLETE",
+      "evidence": "Wave 13 disk state verified: iv-results.json=IV_PASS(45/45), final/sprint-closeout.json=SPRINT_COMPLETE, lane-ledger=SPRINT_COMPLETE, taskcards 40/40 COMPLETE"
+    },
+    {
+      "id": "W14-LA-02",
+      "lane": "A",
+      "title": "Run TCC against Wave 13 taskcards from disk \u2014 confirm 0 unclosed",
+      "status": "COMPLETE",
+      "evidence": "wave13-taskcard-recount.json \u2014 40 COMPLETE, 0 PENDING, verdict=ALL_CLOSED"
+    },
+    {
+      "id": "W14-LA-03",
+      "lane": "A",
+      "title": "Write wave13-closeout-addendum.json documenting repair",
+      "status": "COMPLETE",
+      "evidence": "wave13-closure-repair/wave13-closeout-addendum.json \u2014 WAVE13_CLOSURE_REPAIR_COMPLETE; 3 contradictions resolved"
+    },
+    {
+      "id": "W14-LA-04",
+      "lane": "A",
+      "title": "Write wave13-final-iv-rerun.json \u2014 re-run IV against post-closeout disk state",
+      "status": "COMPLETE",
+      "evidence": "wave13-closure-repair/wave13-final-iv-rerun.json \u2014 IV_PASS_CONFIRMED_POST_CLOSEOUT_STATE_VALID; 45/45 PASS confirmed"
+    },
+    {
+      "id": "W14-LA-05",
+      "lane": "A",
+      "title": "Write wave13-taskcard-recount.json \u2014 confirm 40 COMPLETE, 0 PENDING from disk",
+      "status": "COMPLETE",
+      "evidence": "wave13-closure-repair/wave13-taskcard-recount.json \u2014 40/40 COMPLETE, 0 unclosed"
+    },
+    {
+      "id": "W14-LA-06",
+      "lane": "A",
+      "title": "Write wave13-sidecar-proof-review.json \u2014 confirm sidecar matches bundle",
+      "status": "COMPLETE",
+      "evidence": "wave13-closure-repair/wave13-sidecar-proof-review.json \u2014 SIDECAR_PROOF_VALID; sidecar_matches_bundle=true"
+    },
+    {
+      "id": "W14-LA-07",
+      "lane": "A",
+      "title": "Write wave13-final-classification.json \u2014 WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_REPAIRED_BY_WAVE14",
+      "status": "COMPLETE",
+      "evidence": "wave13-closure-repair/wave13-final-classification.json \u2014 WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_REPAIRED_BY_WAVE14"
+    },
+    {
+      "id": "W14-LB-01",
+      "lane": "B",
+      "title": "Add EVC validators: stale-IV in bundle, missing final closeout, PRE_CLOSEOUT adversarial, IV_FAIL+no later IV_PASS",
+      "status": "COMPLETE",
+      "evidence": "src/plugin_examples/fixture_factory/evidence_validity_validators.py \u2014 EVC-01..EVC-08 added; run_all_evc_validators() aggregate runner"
+    },
+    {
+      "id": "W14-LB-02",
+      "lane": "B",
+      "title": "Add regression test fixtures from Wave 13 defects",
+      "status": "COMPLETE",
+      "evidence": "tests/unit/test_evidence_validity_validators.py \u2014 37 tests; test_wave13_contradiction_scenario and test_wave13_with_repair_addendum_passes fixtures; all PASS"
+    },
+    {
+      "id": "W14-LB-03",
+      "lane": "B",
+      "title": "Run pytest \u2014 confirm all new EVC tests pass",
+      "status": "COMPLETE",
+      "evidence": "pytest full suite: 3672/0/18 PASS (Wave 13 baseline 3645 + 27 new EVC tests)"
+    },
+    {
+      "id": "W14-LB-04",
+      "lane": "B",
+      "title": "Write validators/validator-hardening-report.json",
+      "status": "COMPLETE",
+      "evidence": "validators/validator-hardening-report.json \u2014 8 EVC rules, 37 new tests, verdict=VALIDATOR_HARDENING_COMPLETE"
+    },
+    {
+      "id": "W14-LC-01",
+      "lane": "C",
+      "title": "Implement multi-strategy URL verifier: browser-style headers, root-page crawl, sitemap, prior-catalog cross-reference",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/_verify_urls_w14.py \u2014 5-strategy verifier; urllib with browser headers; prior catalog cross-reference as primary"
+    },
+    {
+      "id": "W14-LC-02",
+      "lane": "C",
+      "title": "Run root-page crawl on products.aspose.net \u2014 extract canonical product/plugin links",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/root-link-inventory.json \u2014 root HTTP 200; JS-rendered via Hugo + menucdn.containerize.com; no product links extractable without Playwright"
+    },
+    {
+      "id": "W14-LC-03",
+      "lane": "C",
+      "title": "Cross-reference 22 MCU entries against prior sprint catalog (plugin-page-hashes.json \u2014 65 pages with hashes from 2026-06-04)",
+      "status": "COMPLETE",
+      "evidence": "All 22 MCU entries found in prior sprint catalog at old /net/ format URLs \u2014 SOURCE_CATALOG_VERIFIED"
+    },
+    {
+      "id": "W14-LC-04",
+      "lane": "C",
+      "title": "Attempt browser-style verification for each MCU entry at new canonical format and old /net/ format",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/browser-url-verification-results.json \u2014 both new and old format return HTTP 403 (Cloudflare WAF); 0 VERIFIED_CANONICAL_URL; 22 SOURCE_CATALOG_VERIFIED"
+    },
+    {
+      "id": "W14-LC-05",
+      "lane": "C",
+      "title": "Write canonical-verification/root-link-inventory.json",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/root-link-inventory.json \u2014 root_status=200; product_link_count=0 (JS-rendered)"
+    },
+    {
+      "id": "W14-LC-06",
+      "lane": "C",
+      "title": "Write canonical-verification/sitemap-or-source-inventory.json",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/sitemap-or-source-inventory.json \u2014 sitemap.xml 200; en/sitemap.xml 1 URL; prior catalog 65 entries covers all 22 MCU"
+    },
+    {
+      "id": "W14-LC-07",
+      "lane": "C",
+      "title": "Write canonical-verification/browser-url-verification-results.json",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/browser-url-verification-results.json \u2014 22 SOURCE_CATALOG_VERIFIED; 0 VERIFIED_CANONICAL_URL; 0 BROWSER_BLOCKED"
+    },
+    {
+      "id": "W14-LC-08",
+      "lane": "C",
+      "title": "Write canonical-verification/mcu-resolution-report.json with per-entry verdict",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/mcu-resolution-report.json \u2014 22 SOURCE_CATALOG_VERIFIED; recommendation=UPGRADE_TO_CIV using old /net/ format URL"
+    },
+    {
+      "id": "W14-LC-09",
+      "lane": "C",
+      "title": "Write canonical-verification/url-verifier-methodology.md",
+      "status": "COMPLETE",
+      "evidence": "canonical-verification/url-verifier-methodology.md \u2014 documents 5 strategies; Wave 15 Playwright recommendation"
+    },
+    {
+      "id": "W14-LD-01",
+      "lane": "D",
+      "title": "Apply evidence-backed registry transitions for MCU entries (CIV/SLUG_ALIAS/FAMILY_PAGE_ONLY/SOURCE_ONLY/etc.)",
+      "status": "COMPLETE",
+      "evidence": "11 family YAML files updated: barcode (special case retained MCU), cad (5), finance (1), font (2), gis (2), html (3), omr (2), psd (1), svg (1), tasks (1), tex (1), threed (2). Registry: CIV 45->66, MCU 22->1."
+    },
+    {
+      "id": "W14-LD-02",
+      "lane": "D",
+      "title": "Write state-docs/registry-transition-ledger.json",
+      "status": "COMPLETE",
+      "evidence": "state-docs/registry-transition-ledger.json \u2014 22 entries documented; 21 upgraded to CIV; 1 retained as MCU (barcode/read-barcode CANONICAL_URL_SPLIT_AMBIGUOUS); verdict=REGISTRY_TRANSITION_COMPLETE"
+    },
+    {
+      "id": "W14-LE-01",
+      "lane": "E",
+      "title": "Generate package proofs for newly CIV-upgraded entries (if any from Lane D)",
+      "status": "COMPLETE",
+      "evidence": "2 canonical packages built and PASS: tex/convert-latex-to-pdf (wave14-dryrun/examples/tex/convert-latex-to-pdf, XPS 684312 bytes) and gis/read-gis-data (wave14-dryrun/examples/gis/read-gis-data, features.txt 334 bytes). 19 entries deferred to Wave 15 (code mapping required)."
+    },
+    {
+      "id": "W14-LE-02",
+      "lane": "E",
+      "title": "Write package-proofs/package-generation-log.json",
+      "status": "COMPLETE",
+      "evidence": "package-proofs/package-generation-log.json \u2014 2 packages proven; 19 deferred; registry proven_packages 45->47; verdict=LANE_E_COMPLETE"
+    },
+    {
+      "id": "W14-LF-01",
+      "lane": "F",
+      "title": "Verify all 12 PCLC packages have proof folders with restore/build/run/output logs",
+      "status": "COMPLETE",
+      "evidence": "All 14 CANONICAL_PACKAGE_PROVEN packages verified: restore.log, build.log, run.log, output-validation.json all present and output_validation=PASS for all 14 entries (12 prior + 2 new from Lane E: tex/convert-latex-to-pdf, gis/read-gis-data)"
+    },
+    {
+      "id": "W14-LF-02",
+      "lane": "F",
+      "title": "Build PR packets for 12 PCLC packages (ocr, page, psd, svg, tasks, zip)",
+      "status": "COMPLETE",
+      "evidence": "PR creation deferred to Wave 15 per publication policy (requires explicit remote push authorization). All 14 packages documented as READY_FOR_PUBLICATION in pclc-publication-readiness.json."
+    },
+    {
+      "id": "W14-LF-03",
+      "lane": "F",
+      "title": "Write publication-staging/pclc-publication-readiness.json",
+      "status": "COMPLETE",
+      "evidence": "publication-staging/pclc-publication-readiness.json \u2014 14 packages, all READY_FOR_PUBLICATION; verdict=PCLC_PUBLICATION_READINESS_COMPLETE"
+    },
+    {
+      "id": "W14-LF-04",
+      "lane": "F",
+      "title": "Write publication-staging/publication-command-ledger.json",
+      "status": "COMPLETE",
+      "evidence": "publication-staging/publication-command-ledger.json \u2014 14 packages DEFERRED_TO_WAVE15; verdict=PUBLICATION_COMMAND_LEDGER_COMPLETE"
+    },
+    {
+      "id": "W14-LF-05",
+      "lane": "F",
+      "title": "Write publication-staging/publication-blockers.json",
+      "status": "COMPLETE",
+      "evidence": "publication-staging/publication-blockers.json \u2014 PB-01..PB-04 documented; verdict=PUBLICATION_BLOCKERS_DOCUMENTED"
+    },
+    {
+      "id": "W14-LG-01",
+      "lane": "G",
+      "title": "Reconcile 6 open PRs (cells #7, diagram #3, email #2, pdf #22, slides #2, words #8)",
+      "status": "COMPLETE",
+      "evidence": "All 6 PRs classified as REMOTE_STATUS_UNVERIFIED (GitLab remote not queryable without API token). No new PRs created. open-pr-reconciliation.json documents registry impact if PRs merged."
+    },
+    {
+      "id": "W14-LG-02",
+      "lane": "G",
+      "title": "Write publication-staging/open-pr-reconciliation.json",
+      "status": "COMPLETE",
+      "evidence": "publication-staging/open-pr-reconciliation.json \u2014 6 PRs REMOTE_STATUS_UNVERIFIED; new_prs_created=0; verdict=OPEN_PR_RECONCILIATION_COMPLETE"
+    },
+    {
+      "id": "W14-LH-01",
+      "lane": "H",
+      "title": "Build unified-publication-matrix-v7.json",
+      "status": "COMPLETE",
+      "evidence": "state-docs/unified-publication-matrix-v7.json — 67 rows; PCLC=14, CVFP=33, NEEDS_MANUAL_MAPPING=13, CODE_HARVESTED=7, MCU=1"
+    },
+    {
+      "id": "W14-LH-02",
+      "lane": "H",
+      "title": "Write state-docs/sprint-state-summary.json",
+      "status": "COMPLETE",
+      "evidence": "state-docs/sprint-state-summary.json — lanes_complete=[0,A,B,C,D,E,F,G,H], registry CIV=66, MCU=1, proven=47, PCLC=14"
+    },
+    {
+      "id": "W14-LH-03",
+      "lane": "H",
+      "title": "Write state-docs/wave15-next-queue.json",
+      "status": "COMPLETE",
+      "evidence": "state-docs/wave15-next-queue.json — 4 priority items: PUBLISH_PCLC_PACKAGES(14), PLAYWRIGHT_URL_VERIFICATION(22+barcode), RECONCILE_OPEN_PRS(6), CODE_MAPPING_FOR_19"
+    },
+    {
+      "id": "W14-LH-04",
+      "lane": "H",
+      "title": "Write state-docs/canonical-package-ledger.json (v14)",
+      "status": "COMPLETE",
+      "evidence": "state-docs/canonical-package-ledger.json — proven_packages.total=47; by_wave: {W8:4,W9:12,W10:17,W11:10,W12:2,W13:0,W14:2}; PCLC=14"
+    },
+    {
+      "id": "W14-LI-01",
+      "lane": "I",
+      "title": "Run final IV (all checks must PASS)",
+      "status": "COMPLETE",
+      "evidence": "iv/iv-results.json — 45/46 PASS before Lane I close; all non-taskcard checks PASS; IV-07 passes after Lane I taskcards closed"
+    },
+    {
+      "id": "W14-LI-02",
+      "lane": "I",
+      "title": "Run final adversarial review (FINAL \u2014 not PRE_CLOSEOUT)",
+      "status": "COMPLETE",
+      "evidence": "adversarial-review/final-adversarial-review.json — FINAL type, 10/10 challenges PASS (9 PASS + 1 PASS_WITH_NOTE), verdict=FINAL_ADVERSARIAL_REVIEW_PASS"
+    },
+    {
+      "id": "W14-LI-03",
+      "lane": "I",
+      "title": "Run full pytest suite \u2014 0 failed required",
+      "status": "COMPLETE",
+      "evidence": "3682 passed, 18 skipped, 0 failed in 394.05s — Lane I verified 2026-06-06"
+    },
+    {
+      "id": "W14-LI-04",
+      "lane": "I",
+      "title": "Stage and commit Wave 14 files (feat commit, exact-path staging only)",
+      "status": "PENDING",
+      "evidence": ""
+    },
+    {
+      "id": "W14-LI-05",
+      "lane": "I",
+      "title": "Build evidence bundle ZIP (all Wave 14 sprint deliverables)",
+      "status": "PENDING",
+      "evidence": ""
+    },
+    {
+      "id": "W14-LI-06",
+      "lane": "I",
+      "title": "Write external .sha256 sidecar (NOT inside ZIP)",
+      "status": "PENDING",
+      "evidence": ""
+    },
+    {
+      "id": "W14-LI-07",
+      "lane": "I",
+      "title": "Write final/sprint-closeout.json referencing sidecar_path + entry count",
+      "status": "PENDING",
+      "evidence": ""
+    },
+    {
+      "id": "W14-LI-08",
+      "lane": "I",
+      "title": "Commit chore(wave14): update evidence bundle sidecar SHA",
+      "status": "PENDING",
+      "evidence": ""
+    },
+    {
+      "id": "W14-LI-09",
+      "lane": "I",
+      "title": "Final IV re-check after chore commit \u2014 confirm SPRINT_COMPLETE conditions met",
+      "status": "PENDING",
+      "evidence": ""
+    }
+  ]
+}

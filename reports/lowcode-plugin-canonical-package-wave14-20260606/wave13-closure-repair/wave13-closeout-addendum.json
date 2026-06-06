@@ -1,0 +1,52 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "addendum_sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "addendum_date": "2026-06-06",
+  "addendum_type": "WAVE13_STALE_CLOSEOUT_REPAIR",
+  "authored_by": "Wave 14 Lane A repair protocol",
+  "contradictions_resolved": [
+    {
+      "id": "W13-CONTRA-01",
+      "title": "Bundle contains IV_FAIL pre-closeout snapshot",
+      "resolution": "IV re-run confirms 45/45 PASS. Post-bundle commit 20836c6 updated iv-results.json to IV_PASS. Wave 14 repair addendum establishes IV_PASS as authoritative final state.",
+      "evidence": "reports/lowcode-plugin-canonical-package-wave14-20260606/wave13-closure-repair/wave13-final-iv-rerun.json"
+    },
+    {
+      "id": "W13-CONTRA-02",
+      "title": "final/sprint-closeout.json missing from bundle",
+      "resolution": "final/sprint-closeout.json was created in commit 20836c6 and updated in c7d45f0. Git confirms its existence on disk with verdict=SPRINT_COMPLETE. Content reproduced below for bundle completeness.",
+      "git_commit": "20836c6",
+      "closeout_summary": {
+        "feat_commit": "8d06c8b",
+        "chore_commit": "20836c6",
+        "bundle_entry_count": 25,
+        "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip.sha256",
+        "pytest_passed": 3645,
+        "iv_checks_pass": 45,
+        "verdict": "SPRINT_COMPLETE"
+      }
+    },
+    {
+      "id": "W13-CONTRA-03",
+      "title": "Adversarial review is PRE_CLOSEOUT only",
+      "resolution": "Wave 14 produces a final adversarial review as part of Lane I. Wave 13's pre-closeout adversarial review was an acknowledged limitation at the time of writing. All challenged items (AR-01..06) were resolved by post-closeout commits.",
+      "ar01_resolution": "Wave 13: 40/40 COMPLETE confirmed by disk read (wave13-taskcard-recount.json)",
+      "ar02_resolution": "URL 0/22 verified — genuine result; prior catalog cross-reference now confirms pages exist at /net/ format",
+      "ar03_resolution": "Wave 12: 52 COMPLETE, 1 DEFERRED, 0 PENDING — confirmed correct",
+      "ar04_resolution": "Protected files unchanged — IV-39..43 all PASS",
+      "ar05_resolution": "MCU=22 unchanged after Wave 11 PCLC upgrades — IV-22/25 PASS",
+      "ar06_resolution": "BMV-06 sidecar verified: sidecar_matches_bundle=true (wave13-sidecar-proof-review.json)"
+    }
+  ],
+  "wave13_final_state": {
+    "taskcards": "40/40 COMPLETE (wave13-taskcard-recount.json)",
+    "iv_result": "45/45 PASS (wave13-final-iv-rerun.json; disk iv-results.json)",
+    "sidecar": "SIDECAR_PROOF_VALID (wave13-sidecar-proof-review.json)",
+    "closeout_verdict": "SPRINT_COMPLETE (disk: final/sprint-closeout.json)",
+    "pytest": "3645/0/18 (confirmed from background task output)",
+    "git_commits": ["8d06c8b feat(wave13)", "20836c6 chore(wave13)", "c7d45f0 chore(wave13)", "279d70f chore(wave13)"]
+  },
+  "wave13_classification_superseded": "WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_AND_MISSING_FINAL_PROOF",
+  "wave13_classification_repaired": "WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_REPAIRED_BY_WAVE14",
+  "verdict": "WAVE13_CLOSURE_REPAIR_COMPLETE"
+}

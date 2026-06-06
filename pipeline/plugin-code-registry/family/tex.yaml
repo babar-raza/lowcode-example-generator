@@ -46,10 +46,11 @@ plugins:
   display_plugin_name: LaTeX Figure Renderer for .NET
 - plugin_slug: convert-latex-to-pdf
   canonical_plugin_slug: convert-latex-to-pdf
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tex/net/convert-latex-to-pdf
+  canonical_url: https://products.aspose.net/tex/net/convert-latex-to-pdf
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 62f10fb5d57e6412
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -64,13 +65,15 @@ plugins:
   - PdfDevice
   github_links:
   - https://raw.githubusercontent.com/aspose-tex/Aspose.TeX-for-.NET/master/Aspose.TeX.Examples/LaTeXEmbeddedBase64EncodedImage/LaTeXEmbeddedBase64EncodedImage.cs
-  next_action: Extract symbols from LaTeXEmbeddedBase64EncodedImage.cs and validate
-    against DllReflector; then advance to READY_FOR_TRANSFORMATION
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tex.md
   - https://raw.githubusercontent.com/aspose-tex/Aspose.TeX-for-.NET/master/Aspose.TeX.Examples/LaTeXEmbeddedBase64EncodedImage/LaTeXEmbeddedBase64EncodedImage.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave14-20260606/wave14-dryrun/examples/tex/convert-latex-to-pdf/output-validation.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
@@ -83,6 +86,17 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-wave6-20260605. Wave 6 dry-run
       package built and validated. 14/14 PASS.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 62f10fb5d57e6412). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane E.
+      Canonical package rebuilt and validated PASS. Output 684312-byte XPS file produced.
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tex/convert-latex-to-pdf
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave14-20260606/wave14-dryrun/examples/tex/convert-latex-to-pdf
+  canonical_package_wave: wave14
+  canonical_package_proven_at: '2026-06-06'

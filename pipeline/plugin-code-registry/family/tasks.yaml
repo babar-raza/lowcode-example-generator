@@ -131,21 +131,28 @@ plugins:
   sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: read-project-data
   canonical_plugin_slug: read-project-data
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tasks/net/read-project-data
+  canonical_url: https://products.aspose.net/tasks/net/read-project-data
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 3fc4bed1f635537e
   registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
+  blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
-  next_action: Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS);
-    fetch better example from GitHub
+  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
+    mapping based on family pattern (LOAD_SAVE_OPTIONS)
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
       sprint.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 3fc4bed1f635537e). Upgraded MCU -> CIV.

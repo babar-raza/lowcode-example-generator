@@ -1,0 +1,63 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-NEXT",
+  "generated_by": "lowcode-plugin-canonical-package-wave14-20260606 Lane H",
+  "date": "2026-06-06",
+  "priority_queue": [
+    {
+      "priority": 1,
+      "task": "PUBLISH_PCLC_PACKAGES",
+      "description": "Create publication PRs for all 14 CANONICAL_PACKAGE_PROVEN packages (deferred from Wave 14). Requires: git push to remote, gh pr create for each family.",
+      "packages": [
+        "gis/read-gis-data", "ocr/scanned-image-to-text", "ocr/scanned-pdf-to-text",
+        "page/xps-converter", "page/eps-to-pdf", "page/ps-converter",
+        "psd/psd-to-pdf", "svg/svg-to-pdf-converter", "svg/vectorizer",
+        "tasks/mpp-to-html", "tasks/mpp-to-png", "tex/convert-latex-to-pdf",
+        "zip/universal-extractor", "zip/universal-compressor"
+      ]
+    },
+    {
+      "priority": 2,
+      "task": "PLAYWRIGHT_URL_VERIFICATION",
+      "description": "Install Playwright/Chromium. Run headless browser against products.aspose.net to: (1) extract canonical product navigation links, (2) determine new canonical format slugs for 21 entries currently at /net/ format, (3) resolve barcode/read-barcode ambiguity between 1d-barcode-reader and 2d-barcode-reader.",
+      "blocker": "barcode/read-barcode MCU retained \u2014 ambiguity requires visual page inspection",
+      "entries_to_verify": [
+        "barcode/read-barcode (ambiguity resolution)",
+        "cad/convert-cad-to-pdf (new format confirmation)",
+        "cad/convert-dwg-to-pdf", "cad/convert-dxf-to-pdf", "cad/convert-cad-to-image",
+        "cad/convert-dwg-to-jpg", "finance/parse-xbrl", "font/convert-font",
+        "font/render-text-with-font", "gis/convert-gis-data", "gis/read-gis-data",
+        "html/convert-html-to-xps", "html/convert-html-to-markdown", "html/merge-html",
+        "omr/recognize-omr", "omr/generate-omr-template", "psd/convert-psd-to-png",
+        "svg/merge-svg", "tasks/read-project-data", "tex/convert-latex-to-pdf",
+        "threed/convert-3d-model", "threed/compress-3d-scene"
+      ]
+    },
+    {
+      "priority": 3,
+      "task": "RECONCILE_OPEN_PRS",
+      "description": "Check remote GitLab status for 6 open PRs (cells-7, diagram-3, email-2, pdf-22, slides-2, words-8). Classified REMOTE_STATUS_UNVERIFIED in Wave 14. If merged, update registry entries to PUBLISHED.",
+      "prs": ["cells-7", "diagram-3", "email-2", "pdf-22", "slides-2", "words-8"]
+    },
+    {
+      "priority": 4,
+      "task": "CODE_MAPPING_FOR_19_DEFERRED_ENTRIES",
+      "description": "19 entries are CIV but NEEDS_MANUAL_MAPPING or CODE_HARVESTED. Code mapping and package generation needed before they can advance to PCLC.",
+      "entries": [
+        "cad/convert-cad-to-pdf", "cad/convert-dwg-to-pdf", "cad/convert-dxf-to-pdf",
+        "cad/convert-cad-to-image", "cad/convert-dwg-to-jpg",
+        "finance/parse-xbrl", "font/convert-font", "font/render-text-with-font",
+        "gis/convert-gis-data", "html/convert-html-to-xps", "html/convert-html-to-markdown",
+        "html/merge-html", "omr/recognize-omr", "omr/generate-omr-template",
+        "psd/convert-psd-to-png", "svg/merge-svg", "tasks/read-project-data",
+        "threed/convert-3d-model", "threed/compress-3d-scene"
+      ]
+    }
+  ],
+  "registry_snapshot": {
+    "total": 67,
+    "civ": 66,
+    "mcu": 1,
+    "proven": 47,
+    "pclc": 14
+  }
+}

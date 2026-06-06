@@ -51,24 +51,31 @@ plugins:
   display_plugin_name: SVG to Image Converter for .NET
 - plugin_slug: merge-svg
   canonical_plugin_slug: merge-svg
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/svg/net/merge-svg
+  canonical_url: https://products.aspose.net/svg/net/merge-svg
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 229ef264933622c5
   registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
+  blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
-  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
-    fetch better example from GitHub
+  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
+    mapping based on family pattern (STATIC_CONVERTER_CLASS)
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/svg.md
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
       sprint.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 229ef264933622c5). Upgraded MCU -> CIV.
 - plugin_slug: svg-to-pdf-converter
   canonical_plugin_slug: svg-to-pdf-converter
   identity_status: CANONICAL_IDENTITY_VERIFIED

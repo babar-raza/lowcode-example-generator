@@ -168,8 +168,10 @@ plugins:
   migrated_from: convert-html-to-image
 - plugin_slug: convert-html-to-xps
   canonical_plugin_slug: convert-html-to-xps
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-xps
+  canonical_url: https://products.aspose.net/html/net/convert-html-to-xps
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: e9c75fd94a2b21c6
   registry_status: CODE_HARVESTED
   blocker_type: null
@@ -190,54 +192,73 @@ plugins:
   - File
   github_links:
   - https://raw.githubusercontent.com/aspose-html/Aspose.HTML-for-.NET/master/Examples/CSharp/Converting-Between-Formats/EPUB-Converter/EPUBtoXPSExample.cs
-  next_action: Extract symbols from EPUBtoXPSExample.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    EPUBtoXPSExample.cs and advance to READY_FOR_TRANSFORMATION
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
   - https://raw.githubusercontent.com/aspose-html/Aspose.HTML-for-.NET/master/Examples/CSharp/Converting-Between-Formats/EPUB-Converter/EPUBtoXPSExample.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from EPUBtoXPSExample.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash e9c75fd94a2b21c6). Upgraded MCU -> CIV.
 - plugin_slug: convert-html-to-markdown
   canonical_plugin_slug: convert-html-to-markdown
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-markdown
+  canonical_url: https://products.aspose.net/html/net/convert-html-to-markdown
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 2753d17136e50057
   registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
+  blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
-  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
-    fetch better example from GitHub
+  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
+    mapping based on family pattern (STATIC_CONVERTER_CLASS)
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
       sprint.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 2753d17136e50057). Upgraded MCU -> CIV.
 - plugin_slug: merge-html
   canonical_plugin_slug: merge-html
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/merge-html
+  canonical_url: https://products.aspose.net/html/net/merge-html
+  page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 00e28ed0c15626b8
   registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: NEEDS_MANUAL_MAPPING
+  blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
-  next_action: Manually write code mapping based on family pattern (STATIC_CONVERTER_CLASS);
-    fetch better example from GitHub
+  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
+    mapping based on family pattern (STATIC_CONVERTER_CLASS)
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
       sprint.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 00e28ed0c15626b8). Upgraded MCU -> CIV.

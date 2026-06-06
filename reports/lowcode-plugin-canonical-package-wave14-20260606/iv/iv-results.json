@@ -1,0 +1,293 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "date": "2026-06-06",
+  "checks_total": 46,
+  "checks_pass": 45,
+  "checks_fail": 1,
+  "hardening_notes": [
+    "IV-06: Reads Wave 13 taskcard statuses from disk (0 PENDING required)",
+    "IV-07: Reads Wave 14 taskcard statuses from disk (0 PENDING required)",
+    "IV-08: All COMPLETE taskcards must have evidence fields",
+    "IV-09..12: EVC validator module existence and test count verified",
+    "IV-18..19: Registry CIV=66/MCU=1 verified (21 Lane D upgrades)"
+  ],
+  "verdict": "IV_FAIL",
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "Wave 14 lane-ledger.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-02",
+      "description": "Wave 14 taskcards.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-03",
+      "description": "Wave 13 closeout addendum exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-04",
+      "description": "Wave 14 lane-ledger has 10 lanes (0+A-I)",
+      "status": "PASS",
+      "detail": "count=10"
+    },
+    {
+      "id": "IV-05",
+      "description": "Wave 14 lane-ledger sprint_id contains WAVE14",
+      "status": "PASS",
+      "detail": "sprint_id contains WAVE14"
+    },
+    {
+      "id": "IV-06",
+      "description": "Wave 13 taskcards: 0 unclosed (HARDENED \u2014 reads disk state)",
+      "status": "PASS",
+      "detail": "Wave 13: 40 COMPLETE, 0 PENDING"
+    },
+    {
+      "id": "IV-07",
+      "description": "Wave 14 taskcards: 0 PENDING (HARDENED \u2014 reads and counts from disk)",
+      "status": "FAIL",
+      "detail": "Wave 14 has 9 unclosed taskcards: ['W14-LI-01', 'W14-LI-02', 'W14-LI-03', 'W14-LI-04', 'W14-LI-05']"
+    },
+    {
+      "id": "IV-08",
+      "description": "Wave 14 COMPLETE taskcards all have evidence fields",
+      "status": "PASS",
+      "detail": "All COMPLETE taskcards have evidence fields"
+    },
+    {
+      "id": "IV-09",
+      "description": "evidence_validity_validators.py module exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-10",
+      "description": "EVC validator hardening report verdict=VALIDATOR_HARDENING_COMPLETE",
+      "status": "PASS",
+      "detail": "VALIDATOR_HARDENING_COMPLETE"
+    },
+    {
+      "id": "IV-11",
+      "description": "EVC hardening report: 8 rules added",
+      "status": "PASS",
+      "detail": "rules_added=8"
+    },
+    {
+      "id": "IV-12",
+      "description": "EVC test_evidence_validity_validators.py exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-13",
+      "description": "Wave 13 closeout addendum verdict contains COMPLETE",
+      "status": "PASS",
+      "detail": "verdict=WAVE13_CLOSURE_REPAIR_COMPLETE"
+    },
+    {
+      "id": "IV-14",
+      "description": "Wave 13 final-classification.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-15",
+      "description": "Wave 13 final-iv-rerun.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-16",
+      "description": "Wave 13 IV rerun shows IV_PASS on disk",
+      "status": "PASS",
+      "detail": "disk_iv_verdict=IV_PASS"
+    },
+    {
+      "id": "IV-17",
+      "description": "Registry total=67",
+      "status": "PASS",
+      "detail": "total=67"
+    },
+    {
+      "id": "IV-18",
+      "description": "Registry CIV=66 (21 MCU entries upgraded in Lane D)",
+      "status": "PASS",
+      "detail": "CIV=66"
+    },
+    {
+      "id": "IV-19",
+      "description": "Registry MCU=1 (only barcode/read-barcode retained \u2014 split ambiguity)",
+      "status": "PASS",
+      "detail": "MCU=1"
+    },
+    {
+      "id": "IV-20",
+      "description": "Registry SAR=0",
+      "status": "PASS",
+      "detail": "SAR=0"
+    },
+    {
+      "id": "IV-21",
+      "description": "registry-transition-ledger.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-22",
+      "description": "transition ledger verdict=REGISTRY_TRANSITION_COMPLETE",
+      "status": "PASS",
+      "detail": "REGISTRY_TRANSITION_COMPLETE"
+    },
+    {
+      "id": "IV-23",
+      "description": "transition ledger: 21 entries upgraded MCU->CIV",
+      "status": "PASS",
+      "detail": "upgraded_to_civ=21"
+    },
+    {
+      "id": "IV-24",
+      "description": "transition ledger: 1 retained as MCU (barcode/read-barcode)",
+      "status": "PASS",
+      "detail": "retained_as_mcu=1"
+    },
+    {
+      "id": "IV-25",
+      "description": "package-generation-log.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-26",
+      "description": "Lane E package log verdict=LANE_E_COMPLETE",
+      "status": "PASS",
+      "detail": "LANE_E_COMPLETE"
+    },
+    {
+      "id": "IV-27",
+      "description": "tex/convert-latex-to-pdf output-validation.json exists and PASS",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "IV-28",
+      "description": "gis/read-gis-data output-validation.json exists and PASS",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "IV-29",
+      "description": "Registry has 14 CANONICAL_PACKAGE_PROVEN entries",
+      "status": "PASS",
+      "detail": "PCLC_in_registry=14"
+    },
+    {
+      "id": "IV-30",
+      "description": "pclc-publication-readiness.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-31",
+      "description": "PCLC readiness total_pclc=14 and ready_for_publication=14",
+      "status": "PASS",
+      "detail": "total_pclc=14, ready_for_publication=14"
+    },
+    {
+      "id": "IV-32",
+      "description": "publication-command-ledger.json verdict=PUBLICATION_COMMAND_LEDGER_COMPLETE",
+      "status": "PASS",
+      "detail": "PUBLICATION_COMMAND_LEDGER_COMPLETE"
+    },
+    {
+      "id": "IV-33",
+      "description": "open-pr-reconciliation.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-34",
+      "description": "PR reconciliation documents 6 open PRs",
+      "status": "PASS",
+      "detail": "open_prs=6"
+    },
+    {
+      "id": "IV-35",
+      "description": "PR reconciliation new_prs_created_this_sprint=0 (hard constraint)",
+      "status": "PASS",
+      "detail": "new_prs_created_this_sprint=0"
+    },
+    {
+      "id": "IV-36",
+      "description": "unified-publication-matrix-v7.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-37",
+      "description": "matrix v7 registry_total=67",
+      "status": "PASS",
+      "detail": "registry_total=67"
+    },
+    {
+      "id": "IV-38",
+      "description": "canonical-package-ledger.json proven_packages.total=47",
+      "status": "PASS",
+      "detail": "proven_packages.total=47"
+    },
+    {
+      "id": "IV-39",
+      "description": "wave15-next-queue.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-40",
+      "description": "sprint-state-summary.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-41",
+      "description": "Protected file unchanged: pipeline/configs/families/cells.yml",
+      "status": "PASS",
+      "detail": "hash=28c51b79"
+    },
+    {
+      "id": "IV-42",
+      "description": "Protected file unchanged: pipeline/configs/families/words.yml",
+      "status": "PASS",
+      "detail": "hash=ef21e9e5"
+    },
+    {
+      "id": "IV-43",
+      "description": "Protected file unchanged: pipeline/configs/families/pdf.yml",
+      "status": "PASS",
+      "detail": "hash=de889ed2"
+    },
+    {
+      "id": "IV-44",
+      "description": "Protected file unchanged: pipeline/configs/families/slides.yml",
+      "status": "PASS",
+      "detail": "hash=4eec3d74"
+    },
+    {
+      "id": "IV-45",
+      "description": "Protected file unchanged: pipeline/configs/families/email.yml",
+      "status": "PASS",
+      "detail": "hash=3e872e96"
+    },
+    {
+      "id": "IV-46",
+      "description": "Wave 14 pytest baseline: 3682 tests registered (37 new EVC tests vs Wave 13 baseline 3645)",
+      "status": "PASS",
+      "detail": "pytest baseline=3682 (actual run: 3682 passed, 18 skipped, 0 failed \u2014 verified in Lane I)"
+    }
+  ]
+}

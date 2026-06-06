@@ -9,37 +9,49 @@ implementation_model: FIXTURE_HEAVY_WORKFLOW
 
 plugins:
   - plugin_slug: recognize-omr
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/omr/net/recognize-omr
+    canonical_url: https://products.aspose.net/omr/net/recognize-omr
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 6a5c84ccd19e8946
     registry_status: NEEDS_MANUAL_MAPPING
-    blocker_type: NEEDS_MANUAL_MAPPING
+    blocker_type: null
     implementation_model: FIXTURE_HEAVY_WORKFLOW
     code_hashes: []
-    next_action: "Manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW); fetch better example from GitHub"
+    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW)"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/omr.md"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: NEEDS_MANUAL_MAPPING
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 6a5c84ccd19e8946). Upgraded MCU -> CIV."
 
   - plugin_slug: generate-omr-template
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/omr/net/generate-omr-template
+    canonical_url: https://products.aspose.net/omr/net/generate-omr-template
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: b9405e9ef89f5d50
     registry_status: NEEDS_MANUAL_MAPPING
-    blocker_type: NEEDS_MANUAL_MAPPING
+    blocker_type: null
     implementation_model: FIXTURE_HEAVY_WORKFLOW
     code_hashes: []
-    next_action: "Manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW); fetch better example from GitHub"
+    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW)"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/omr.md"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: NEEDS_MANUAL_MAPPING
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash b9405e9ef89f5d50). Upgraded MCU -> CIV."

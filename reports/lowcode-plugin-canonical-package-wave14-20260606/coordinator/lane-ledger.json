@@ -1,0 +1,66 @@
+{
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE14-CLOSEOUT-INTEGRITY-BROWSER-CANONICAL-URL-VERIFICATION-PUBLICATION-ADVANCEMENT-001",
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "date": "2026-06-06",
+  "report_root": "reports/lowcode-plugin-canonical-package-wave14-20260606",
+  "prior_sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "prior_commits": ["8d06c8b", "20836c6", "c7d45f0", "279d70f"],
+  "wave13_classification": "WAVE13_PROGRESS_ACCEPTED_WITH_STALE_CLOSEOUT_AND_MISSING_FINAL_PROOF",
+  "wave13_accepted_work": [
+    "Wave 12 taskcard repair: 47 PENDING → 46 COMPLETE + 1 DEFERRED_TO_WAVE13",
+    "Validator hardening: BMV-06 + _is_closed_status + 11 new tests (suite 3645/0/18)",
+    "PCLC readiness: 12/12 READY_FOR_CVFP; 10 Wave 11 registry YAMLs upgraded",
+    "Matrix v6: 67/45 CIV/22 MCU/33 CVFP/12 PCLC",
+    "Lane-ledger and taskcards: 40/40 COMPLETE on disk; sidecar_matches_bundle=true"
+  ],
+  "wave13_contradictions": [
+    "CRITICAL: bundle contains IV_FAIL (44/45) — pre-closeout snapshot",
+    "CRITICAL: final/sprint-closeout.json missing from bundle",
+    "HIGH: adversarial review is PRE_CLOSEOUT only",
+    "MEDIUM: raw HTTP 403 used as terminal URL result; prior sprint catalog proves pages exist"
+  ],
+  "preflight": {
+    "git_head": "279d70f",
+    "branch": "main",
+    "registry_counts": {
+      "total": 67,
+      "CANONICAL_IDENTITY_VERIFIED": 45,
+      "SLUG_ALIAS_REQUIRED": 0,
+      "MISSING_CANONICAL_URL": 22
+    },
+    "proven_packages": {"wave8": 4, "wave9": 12, "wave10": 17, "wave11": 10, "wave12": 2, "wave13": 0, "total": 45},
+    "prior_sprint_catalog_available": "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json — 65 plugin pages with hashes; ALL 22 MCU entries present at /net/ format URLs"
+  },
+  "lanes": [
+    {"lane": "0", "status": "COMPLETE", "purpose": "Preflight, Wave 13 evidence audit, contradiction inventory, taskcards, lane-ledger"},
+    {"lane": "A", "status": "IN_PROGRESS", "purpose": "Wave 13 closeout repair — IV rerun, taskcard recount, sidecar proof, classification addendum"},
+    {"lane": "B", "status": "PENDING", "purpose": "Validator hardening — EVC rules for stale-IV, missing closeout, PRE_CLOSEOUT adversarial"},
+    {"lane": "C", "status": "PENDING", "purpose": "Browser/root/sitemap/prior-catalog canonical URL verification for 22 MCU entries"},
+    {"lane": "D", "status": "PENDING", "purpose": "Registry transitions based on Lane C evidence"},
+    {"lane": "E", "status": "PENDING", "purpose": "Package generation for newly CIV-verified entries"},
+    {"lane": "F", "status": "PENDING", "purpose": "Publication staging for 12 PCLC-ready packages — PR packets"},
+    {"lane": "G", "status": "PENDING", "purpose": "Existing open PR reconciliation"},
+    {"lane": "H", "status": "PENDING", "purpose": "State sync — matrix v7, ledger, wave15-queue, sprint-state-summary"},
+    {"lane": "I", "status": "PENDING", "purpose": "Final IV + adversarial review + pytest + bundle + external sidecar"}
+  ],
+  "hard_constraints": [
+    "NO publication PR creation or push to remote repos without explicit gate",
+    "NO modification of protected files",
+    "NO .pfx committed",
+    "NO git add . — exact-path staging only",
+    "NO SPRINT_COMPLETE if any taskcard is PENDING",
+    "NO SPRINT_COMPLETE if final IV is not PASS",
+    "NO SPRINT_COMPLETE if adversarial review is PRE_CLOSEOUT",
+    "NO SPRINT_COMPLETE if sidecar missing or does not match bundle bytes",
+    "NO SPRINT_COMPLETE if final/sprint-closeout.json missing from bundle",
+    "NO URL upgrade unless verified by browser/catalog/root/sitemap evidence",
+    "NO package proof without restore/build/run/output logs"
+  ],
+  "sidecar_proof_protocol": {
+    "version": "1.0",
+    "description": "SHA-256 sidecar file is NOT inside the ZIP — external file only",
+    "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave14-20260606.zip.sha256",
+    "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave14-20260606.zip"
+  },
+  "verdict": "LANE_0_COMPLETE_LANE_A_IN_PROGRESS"
+}

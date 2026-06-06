@@ -1,0 +1,12 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "source": "reports/lowcode-plugin-canonical-package-wave13-20260606/taskcards/taskcards.json",
+  "read_from": "disk",
+  "total_taskcards": 40,
+  "status_counts": {
+    "COMPLETE": 40
+  },
+  "unclosed_count": 0,
+  "unclosed_ids": [],
+  "verdict": "ALL_CLOSED"
+}

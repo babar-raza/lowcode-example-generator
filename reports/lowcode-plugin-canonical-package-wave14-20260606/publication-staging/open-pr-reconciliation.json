@@ -1,0 +1,66 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "lane": "G",
+  "date": "2026-06-06",
+  "source": "reports/lowcode-plugin-canonical-package-wave13-20260606/publication/pr-reconciliation.json",
+  "total_open_prs": 6,
+  "note": "Remote GitLab cannot be queried without network access and API token. All 6 PRs classified as REMOTE_STATUS_UNVERIFIED. Wave 15 must confirm merge/close status before removing from open PR list.",
+  "open_prs": [
+    {
+      "pr_id": "cells-7",
+      "family": "cells",
+      "title": "feat(cells): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: cells CVFP entries should be updated to PUBLISHED"
+    },
+    {
+      "pr_id": "diagram-3",
+      "family": "diagram",
+      "title": "feat(diagram): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: diagram CVFP entries should be updated to PUBLISHED"
+    },
+    {
+      "pr_id": "email-2",
+      "family": "email",
+      "title": "feat(email): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: email CVFP entries should be updated to PUBLISHED"
+    },
+    {
+      "pr_id": "pdf-22",
+      "family": "pdf",
+      "title": "feat(pdf): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: pdf CVFP entries should be updated to PUBLISHED"
+    },
+    {
+      "pr_id": "slides-2",
+      "family": "slides",
+      "title": "feat(slides): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: slides CVFP entries should be updated to PUBLISHED"
+    },
+    {
+      "pr_id": "words-8",
+      "family": "words",
+      "title": "feat(words): add canonical example packages",
+      "status": "REMOTE_STATUS_UNVERIFIED",
+      "created": "2026-06-02",
+      "local_classification": "OPEN_UNVERIFIED",
+      "registry_impact": "If merged: words CVFP entries should be updated to PUBLISHED"
+    }
+  ],
+  "new_prs_created_this_sprint": 0,
+  "verdict": "OPEN_PR_RECONCILIATION_COMPLETE"
+}

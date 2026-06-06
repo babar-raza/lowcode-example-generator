@@ -171,10 +171,13 @@ plugins:
   identity_status: MISSING_CANONICAL_URL
   plugin_url: https://products.aspose.net/barcode/net/read-barcode
   canonical_url: null
-  page_source_status: CANONICAL_URL_SPLIT_AMBIGUOUS
+  catalog_verified_url: https://products.aspose.net/barcode/net/read-barcode
+  page_source_status: SOURCE_CATALOG_VERIFIED_SPLIT_AMBIGUOUS
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: Old slug 'read-barcode' maps ambiguously to both
-    1d-barcode-reader and 2d-barcode-reader canonical pages
+    1d-barcode-reader and 2d-barcode-reader canonical pages; page confirmed in prior
+    sprint catalog (hash 6d15352859a39bcc) but canonical URL cannot be assigned
+    without Playwright disambiguation
   page_hash: 6d15352859a39bcc
   registry_status: NEEDS_MANUAL_MAPPING
   blocker_type: CANONICAL_SPLIT_AMBIGUOUS
@@ -183,13 +186,14 @@ plugins:
   - 91aa497508d875515b5db6ddce715ebf
   github_links:
   - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs
-  next_action: 'Resolve ambiguity: split into 1d-barcode-reader and 2d-barcode-reader
-    entries or merge with existing reader entries'
+  next_action: 'Wave 15: use Playwright to resolve ambiguity between 1d-barcode-reader
+    and 2d-barcode-reader; assign single canonical URL'
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
   - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
@@ -198,6 +202,12 @@ plugins:
     status: NEEDS_MANUAL_MAPPING
     analyst_notes: 'Sprint lowcode-plugin-code-registry-reconciliation-20260604. Status
       NEEDS_MANUAL_MAPPING: slug maps ambiguously.'
+  - date: '2026-06-06'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 6d15352859a39bcc) at old /net/
+      format URL. Ambiguity between 1d-barcode-reader and 2d-barcode-reader unresolved.
+      Retained as MCU pending Playwright disambiguation in Wave 15.'
 - plugin_slug: 2d-barcode-reader
   canonical_plugin_slug: 2d-barcode-reader
   identity_status: CANONICAL_IDENTITY_VERIFIED

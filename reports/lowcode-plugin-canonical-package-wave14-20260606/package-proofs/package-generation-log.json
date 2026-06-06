@@ -1,0 +1,98 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "lane": "E",
+  "date": "2026-06-06",
+  "scope": "Package generation for 21 newly CIV-upgraded entries from Lane D",
+  "assessment": {
+    "total_newly_civ": 21,
+    "package_ready": 2,
+    "needs_code_mapping": 10,
+    "code_harvested_not_ready": 6,
+    "special_mcu_retained": 1
+  },
+  "readiness_breakdown": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN_existing": [
+      "tex/convert-latex-to-pdf",
+      "gis/read-gis-data"
+    ],
+    "CODE_HARVESTED_not_package_ready": [
+      "cad/convert-cad-to-pdf",
+      "cad/convert-dwg-to-pdf",
+      "cad/convert-dxf-to-pdf",
+      "cad/convert-cad-to-image",
+      "html/convert-html-to-xps",
+      "psd/convert-psd-to-png"
+    ],
+    "NEEDS_MANUAL_MAPPING_code_not_ready": [
+      "cad/convert-dwg-to-jpg",
+      "finance/parse-xbrl",
+      "font/convert-font",
+      "gis/convert-gis-data",
+      "html/convert-html-to-markdown",
+      "html/merge-html",
+      "omr/recognize-omr",
+      "omr/generate-omr-template",
+      "svg/merge-svg",
+      "tasks/read-project-data"
+    ],
+    "NEEDS_MANUAL_MAPPING_fixture_heavy": [
+      "font/render-text-with-font",
+      "threed/convert-3d-model",
+      "threed/compress-3d-scene"
+    ],
+    "MCU_RETAINED_special_case": [
+      "barcode/read-barcode"
+    ]
+  },
+  "canonical_packages_built": [
+    {
+      "family": "tex",
+      "slug": "convert-latex-to-pdf",
+      "source_dryrun": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/tex/convert-latex-to-pdf",
+      "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave14-20260606/wave14-dryrun/examples/tex/convert-latex-to-pdf",
+      "dotnet_restore": "PASS",
+      "dotnet_build": "PASS",
+      "dotnet_run": "PASS",
+      "output_files": ["output/job.aux", "output/job.log", "output/job.trm", "output/job.xps"],
+      "output_validation": "PASS",
+      "registry_status_before": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "registry_status_after": "CANONICAL_PACKAGE_PROVEN"
+    },
+    {
+      "family": "gis",
+      "slug": "read-gis-data",
+      "source_dryrun": "reports/lowcode-plugin-example-factory-closeout-wave5-20260605/dryrun/examples/gis/read-gis-data",
+      "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave14-20260606/wave14-dryrun/examples/gis/read-gis-data",
+      "dotnet_restore": "PASS",
+      "dotnet_build": "PASS",
+      "dotnet_run": "PASS",
+      "output_files": ["output/features.txt"],
+      "output_validation": "PASS",
+      "registry_status_before": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "registry_status_after": "CANONICAL_PACKAGE_PROVEN"
+    }
+  ],
+  "deferred_entries": {
+    "reason": "CODE_HARVESTED/NEEDS_MANUAL_MAPPING entries require code mapping work before package generation is possible. Deferred to Wave 15.",
+    "count": 19,
+    "entries": [
+      "cad/convert-cad-to-pdf", "cad/convert-dwg-to-pdf", "cad/convert-dxf-to-pdf",
+      "cad/convert-cad-to-image", "cad/convert-dwg-to-jpg",
+      "finance/parse-xbrl",
+      "font/convert-font", "font/render-text-with-font",
+      "gis/convert-gis-data",
+      "html/convert-html-to-xps", "html/convert-html-to-markdown", "html/merge-html",
+      "omr/recognize-omr", "omr/generate-omr-template",
+      "psd/convert-psd-to-png",
+      "svg/merge-svg",
+      "tasks/read-project-data",
+      "threed/convert-3d-model", "threed/compress-3d-scene"
+    ]
+  },
+  "registry_delta": {
+    "proven_packages_before": 45,
+    "proven_packages_after": 47,
+    "new_proven": ["tex/convert-latex-to-pdf", "gis/read-gis-data"]
+  },
+  "verdict": "LANE_E_COMPLETE"
+}

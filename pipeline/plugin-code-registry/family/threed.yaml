@@ -9,8 +9,10 @@ implementation_model: LOAD_SAVE_OPTIONS
 
 plugins:
   - plugin_slug: convert-3d-model
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/threed/net/convert-3d-model
+    canonical_url: https://products.aspose.net/threed/net/convert-3d-model
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: c52ae85003fd7044
     registry_status: NEEDS_MANUAL_MAPPING
     blocker_type: null
@@ -26,20 +28,26 @@ plugins:
       - "Scene"
       - "SaveFileDialog"
       - "ControlPointEditor"
-    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS)"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/threed.md"
       - "https://raw.githubusercontent.com/aspose-3d/Aspose.3D-for-.NET/master/HardwareBasedRendering/Controls/SceneHierarchyTree.cs"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: NEEDS_MANUAL_MAPPING
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from SceneHierarchyTree.cs"
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash c52ae85003fd7044). Upgraded MCU -> CIV."
 
   - plugin_slug: compress-3d-scene
-    identity_status: MISSING_CANONICAL_URL
+    identity_status: CANONICAL_IDENTITY_VERIFIED
     plugin_url: https://products.aspose.net/threed/net/compress-3d-scene
+    canonical_url: https://products.aspose.net/threed/net/compress-3d-scene
+    page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: fe228ef9674ca4dd
     registry_status: NEEDS_MANUAL_MAPPING
     blocker_type: null
@@ -55,13 +63,17 @@ plugins:
       - "Scene"
       - "SaveFileDialog"
       - "ControlPointEditor"
-    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS)"
     evidence_paths:
       - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
       - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
       - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/threed.md"
       - "https://raw.githubusercontent.com/aspose-3d/Aspose.3D-for-.NET/master/HardwareBasedRendering/Controls/SceneHierarchyTree.cs"
+      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
     history:
       - date: "2026-06-04"
         status: NEEDS_MANUAL_MAPPING
         analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from SceneHierarchyTree.cs"
+      - date: "2026-06-06"
+        status: CANONICAL_IDENTITY_VERIFIED
+        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash fe228ef9674ca4dd). Upgraded MCU -> CIV."

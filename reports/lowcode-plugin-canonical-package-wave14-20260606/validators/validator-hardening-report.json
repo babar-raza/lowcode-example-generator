@@ -1,0 +1,69 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "lane": "B",
+  "date": "2026-06-06",
+  "subject": "EVC validator hardening against Wave 13 evidence integrity defects",
+  "new_module": "src/plugin_examples/fixture_factory/evidence_validity_validators.py",
+  "new_test_file": "tests/unit/test_evidence_validity_validators.py",
+  "rules_added": [
+    {
+      "id": "EVC-01",
+      "title": "Bundled IV must be IV_PASS or have a documented later IV_PASS repair",
+      "prevents": "W13-CONTRA-01: bundle contained IV_FAIL pre-closeout snapshot"
+    },
+    {
+      "id": "EVC-02",
+      "title": "Bundle must contain final/sprint-closeout.json or external-proof manifest",
+      "prevents": "W13-CONTRA-02: final/sprint-closeout.json missing from bundle"
+    },
+    {
+      "id": "EVC-03",
+      "title": "Adversarial review must not be PRE_CLOSEOUT only when SPRINT_COMPLETE claimed",
+      "prevents": "W13-CONTRA-03: only PRE_CLOSEOUT adversarial review present"
+    },
+    {
+      "id": "EVC-04",
+      "title": "IV verdict must agree with sprint verdict",
+      "prevents": "W13-CONTRA-04: taskcard claimed IV PASS while bundled IV showed IV_FAIL"
+    },
+    {
+      "id": "EVC-05",
+      "title": "PRE_CLOSEOUT adversarial review requires accompanying final review",
+      "prevents": "pre-closeout review that explicitly says 'final verification required' cannot be sole review"
+    },
+    {
+      "id": "EVC-06",
+      "title": "Sidecar path referenced in closeout must be verified by BMV-06",
+      "prevents": "closeout references sidecar that was not yet created at review time"
+    },
+    {
+      "id": "EVC-07",
+      "title": "Actual bundle entry count must match closeout record",
+      "prevents": "stale bundle with different entry count than closeout records"
+    },
+    {
+      "id": "EVC-08",
+      "title": "Sprint verdict must be consistent across closeout, lane-ledger, and IV result",
+      "prevents": "SPRINT_COMPLETE claim while lane-ledger or IV disagree"
+    }
+  ],
+  "regression_fixtures": [
+    {
+      "id": "RFX-01",
+      "name": "test_wave13_contradiction_scenario",
+      "description": "Exact Wave 13 defect state (IV_FAIL bundled, missing closeout, PRE_CLOSEOUT adversarial) — must FAIL EVC"
+    },
+    {
+      "id": "RFX-02",
+      "name": "test_wave13_with_repair_addendum_passes",
+      "description": "Wave 14 repair scenario (IV_FAIL overridden by addendum, final adversarial review present) — must PASS EVC"
+    }
+  ],
+  "test_counts": {
+    "new_tests": 37,
+    "baseline_before": 3645,
+    "expected_after": 3682,
+    "test_file": "tests/unit/test_evidence_validity_validators.py"
+  },
+  "verdict": "VALIDATOR_HARDENING_COMPLETE"
+}

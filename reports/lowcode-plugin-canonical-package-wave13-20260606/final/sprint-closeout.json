@@ -4,7 +4,7 @@
   "date": "2026-06-06",
   "classification": "WAVE13_CLOSURE_REPAIR_AND_HARDENING",
   "feat_commit": "8d06c8b",
-  "chore_commit": "PENDING",
+  "chore_commit": "20836c6",
   "bundle_protocol": "sidecar_proof_protocol_v1.0",
   "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip",
   "bundle_entry_count": 25,

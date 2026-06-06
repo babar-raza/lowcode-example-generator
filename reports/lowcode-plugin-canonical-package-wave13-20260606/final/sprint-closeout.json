@@ -1,0 +1,64 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE13-CLOSURE-INTEGRITY-URL-VERIFICATION-PACKAGE-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "classification": "WAVE13_CLOSURE_REPAIR_AND_HARDENING",
+  "feat_commit": "8d06c8b",
+  "chore_commit": "PENDING",
+  "bundle_protocol": "sidecar_proof_protocol_v1.0",
+  "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip",
+  "bundle_entry_count": 25,
+  "bundle_size_bytes": 47545,
+  "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip.sha256",
+  "sidecar_note": "SHA-256 stored externally (not inside ZIP) per sidecar_proof_protocol_v1.0. Read sidecar file to obtain authoritative hash.",
+  "pytest_passed": 3645,
+  "pytest_failed": 0,
+  "pytest_skipped": 18,
+  "iv_checks_pass": 45,
+  "iv_checks_fail": 0,
+  "iv_note": "IV re-run after all Lane H taskcards COMPLETE confirms 45/45 PASS including IV-07 (taskcard content check)",
+  "registry_state": {
+    "total": 67,
+    "civ": 45,
+    "sar": 0,
+    "mcu": 22
+  },
+  "proven_packages_total": 45,
+  "wave13_new_packages": 0,
+  "wave13_registry_upgrades": 10,
+  "pclc_ready_for_cvfp": 12,
+  "open_prs_monitored": 6,
+  "wave12_closure_repair": {
+    "taskcards_repaired": 46,
+    "taskcards_deferred": 1,
+    "deferred_task": "W12-LD-06",
+    "deferred_reason": "URL registry upgrade — HTTP verification not performed in Wave 12"
+  },
+  "validator_hardening": {
+    "new_rules": ["BMV-06"],
+    "updated_rules": ["TCC-01", "TCC-06", "BMV-01"],
+    "new_helper": "_is_closed_status",
+    "new_tests": 11,
+    "full_suite_pass": 3645
+  },
+  "url_verification": {
+    "urls_attempted": 22,
+    "verified": 0,
+    "result": "ALL_403_BOT_PROTECTION",
+    "upgrades": 0
+  },
+  "publication_staging": {
+    "new_prs": 0,
+    "wave11_wave12_staging": "DEFERRED_TO_WAVE14"
+  },
+  "wave14_priority_actions": [
+    "Create publication PRs for 12 PCLC packages (ocr, page, psd, tasks, zip)",
+    "Manual URL verification for 22 MCU entries (browser-based)",
+    "Monitor 6 open PRs (cells #7, diagram #3, email #2, pdf #22, slides #2, words #8)",
+    "Package generation for newly CIV-upgraded entries from Wave 14 URL verification"
+  ],
+  "tcc_result": "PASS",
+  "bmv_result": "PASS",
+  "adversarial_review_result": "ADVERSARIAL_REVIEW_PASS",
+  "verdict": "SPRINT_COMPLETE"
+}

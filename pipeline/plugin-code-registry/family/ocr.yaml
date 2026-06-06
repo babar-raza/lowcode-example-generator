@@ -8,6 +8,8 @@ plugins:
   canonical_url: https://products.aspose.net/ocr/scanned-image-to-text/
   display_plugin_name: Scanned Image to Text Converter for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/ocr/scanned-image-to-text
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: recognize-text
   legacy_aliases:
@@ -18,6 +20,8 @@ plugins:
   canonical_url: https://products.aspose.net/ocr/scanned-pdf-to-text/
   display_plugin_name: Scanned PDF to Text Converter for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/ocr/scanned-pdf-to-text
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: extract-text
   legacy_aliases:

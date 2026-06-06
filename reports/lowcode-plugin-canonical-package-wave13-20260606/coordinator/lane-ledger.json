@@ -1,0 +1,82 @@
+{
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE13-CLOSURE-INTEGRITY-URL-VERIFICATION-PACKAGE-ADVANCEMENT-001",
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "date": "2026-06-06",
+  "report_root": "reports/lowcode-plugin-canonical-package-wave13-20260606",
+  "prior_sprint": "lowcode-plugin-canonical-package-wave12-20260606",
+  "prior_commits": ["a8892ef", "1e82fab"],
+  "wave12_classification": "WAVE12_PROGRESS_ACCEPTED_WITH_CLOSURE_DEFECTS",
+  "wave12_closure_defects": [
+    "TASKCARD_DEFECT: 47/53 Wave 12 taskcards are PENDING despite sprint claiming SPRINT_COMPLETE",
+    "IV_GAP: IV checked file existence only (IV-05: lane count=11); did not validate taskcard COMPLETE status",
+    "BMV_GAP: Bundle SHA self-reference is mathematically dishonest; external sidecar protocol not implemented",
+    "URL_DEFICIT: 0/22 URLs web-verified; only pattern-based candidates proposed",
+    "ADVERSARIAL_GAP: adversarial review did not recompute taskcard status counts from disk"
+  ],
+  "wave12_accepted_work": [
+    "2 SVG packages proven: svg/svg-to-pdf-converter, svg/vectorizer (Base64 fix applied)",
+    "Wave 11 taskcards repaired (44 PENDING → COMPLETE)",
+    "Wave 11 commit proofs captured",
+    "43/43 FPP audit clean (Waves 8-11)",
+    "MANIFEST_ONLY output-evidence-policy documented",
+    "TCC-01..06 + BMV-01..05 validators implemented (48/48 tests pass)",
+    "Publication matrix v5 built (67 rows)",
+    "State docs: canonical-package-ledger (45 total), wave13-queue, sprint-state-summary",
+    "URL discovery: 16 CANDIDATE_PROPOSED (pattern-based, not HTTP-verified)"
+  ],
+  "preflight": {
+    "git_head": "1e82fab",
+    "git_head_full": "1e82fab08dbec302599ee4f2ea9d0019ca170bfa",
+    "branch": "main",
+    "registry_counts": {
+      "total": 67,
+      "CANONICAL_IDENTITY_VERIFIED": 45,
+      "SLUG_ALIAS_REQUIRED": 0,
+      "MISSING_CANONICAL_URL": 22
+    },
+    "proven_packages": {"wave8": 4, "wave9": 12, "wave10": 17, "wave11": 10, "wave12": 2, "total": 45},
+    "protected_file_hashes": {
+      "pipeline/configs/families/cells.yml": "28c51b79f8dac9e7",
+      "pipeline/configs/families/words.yml": "ef21e9e514386a7e",
+      "pipeline/configs/families/pdf.yml": "de889ed24b3bc3a0",
+      "pipeline/configs/families/slides.yml": "4eec3d74e7c9cca5",
+      "pipeline/configs/families/email.yml": "3e872e96519168ba",
+      "pipeline/configs/families/diagram.yml": "306c16e4acdf4802",
+      "pipeline/format-authority/manifest.json": "3e96754355d7124f"
+    }
+  },
+  "lanes": [
+    {"lane": "0", "status": "COMPLETE", "purpose": "Preflight, evidence audit, contradiction inventory, taskcards"},
+    {"lane": "A", "status": "COMPLETE", "purpose": "Wave 12 closure repair — truthful taskcard update + closure addendum"},
+    {"lane": "B", "status": "COMPLETE", "purpose": "Validator hardening — IV taskcard check, BMV sidecar protocol, URL consistency"},
+    {"lane": "C", "status": "COMPLETE", "purpose": "Canonical URL HTTP verification for 22 MISSING entries — 0/22 verified (403 bot-protection); 22 MCU unchanged"},
+    {"lane": "D", "status": "COMPLETE", "purpose": "Package generation for newly verified entries — null lane (0 CIV from Lane C; no packages built)"},
+    {"lane": "E", "status": "COMPLETE", "purpose": "PCLC-to-CVFP readiness review — 12/12 READY; registry updated; publication staging deferred Wave 14"},
+    {"lane": "F", "status": "COMPLETE", "purpose": "Publication staging + open PR reconciliation — 6 PRs MONITOR_ONLY; Wave 11-12 staging deferred Wave 14"},
+    {"lane": "G", "status": "COMPLETE", "purpose": "State sync — matrix v6, ledger (45 total), wave14-queue, sprint-state-summary"},
+    {"lane": "H", "status": "IN_PROGRESS", "purpose": "IV + adversarial review + pytest + bundle + external sidecar"}
+  ],
+  "hard_constraints": [
+    "NO publication PR creation or push to remote repos",
+    "NO modification of protected files",
+    "NO .pfx committed",
+    "NO git add . — exact-path staging only",
+    "NO SPRINT_COMPLETE claim if any current-sprint taskcard is PENDING",
+    "NO SPRINT_COMPLETE claim if TCC fails on current sprint taskcards",
+    "NO SPRINT_COMPLETE claim if sidecar SHA does not match actual ZIP bytes",
+    "NO URL upgrade unless HTTP verification returns 200 with product markers",
+    "NO package proof claim unless restore/build/run/output all PASS"
+  ],
+  "sidecar_proof_protocol": {
+    "version": "1.0",
+    "description": "Bundle SHA is recorded in an external .sha256 sidecar file, NOT inside the ZIP",
+    "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip.sha256",
+    "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip",
+    "closeout_fields": {
+      "sidecar_path": "path to external sidecar",
+      "bundle_entry_count": "number of files inside ZIP",
+      "content_manifest_note": "SHA is in sidecar, not inside ZIP"
+    }
+  },
+  "verdict": "LANE_H_IN_PROGRESS"
+}

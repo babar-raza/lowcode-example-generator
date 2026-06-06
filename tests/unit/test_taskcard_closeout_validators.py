@@ -1,9 +1,15 @@
 """
 Tests for TCC and BMV validators (taskcard closeout consistency + bundle metadata verification).
-Covers TCC-01..TCC-06 (6 rules, 4 tests each = 24) + BMV-01..BMV-05 (5 rules, 4 tests each = 20)
-= 44 tests total + 2 aggregate tests = 46 tests.
+Covers TCC-01..TCC-06 (6 rules) + BMV-01..BMV-06 (6 rules) + aggregate runners.
+
+Wave 13 additions:
+- TCC-01/06: DEFERRED_TO_* status is a valid closed state (not PENDING)
+- BMV-01: passes when sidecar_path present (defers to BMV-06)
+- BMV-06: external sidecar .sha256 verification
 """
 import pytest
+import pathlib
+import tempfile
 from src.plugin_examples.fixture_factory.taskcard_closeout_validators import (
     tcc_01_no_pending_taskcards,
     tcc_02_all_taskcards_have_evidence,
@@ -16,6 +22,7 @@ from src.plugin_examples.fixture_factory.taskcard_closeout_validators import (
     bmv_03_bundle_entry_count_positive,
     bmv_04_bundle_size_positive,
     bmv_05_pytest_passed_count_positive,
+    bmv_06_sidecar_sha_exists,
     run_all_tcc_validators,
     run_all_bmv_validators,
 )
@@ -65,8 +72,25 @@ class TestTCC01:
         assert result["status"] == "FAIL"
 
     def test_pass_empty_list(self):
-        # Empty list — no PENDING taskcards
+        # Empty list — no unclosed taskcards
         result = tcc_01_no_pending_taskcards([])
+        assert result["status"] == "PASS"
+
+    def test_pass_deferred_to_wave13(self):
+        # DEFERRED_TO_WAVE13 is a valid closed state — not PENDING
+        tcs = _make_taskcards(4)
+        tcs.append({"id": "TC-DEFERRED", "lane": "D", "status": "DEFERRED_TO_WAVE13", "evidence": None})
+        result = tcc_01_no_pending_taskcards(tcs)
+        assert result["status"] == "PASS"
+        assert "DEFERRED" in result["message"]
+
+    def test_pass_mixed_complete_and_deferred(self):
+        # Mix of COMPLETE and DEFERRED_TO_WAVE14 — all closed
+        tcs = [
+            {"id": "TC-01", "lane": "0", "status": "COMPLETE", "evidence": "some evidence"},
+            {"id": "TC-02", "lane": "A", "status": "DEFERRED_TO_WAVE14", "evidence": None},
+        ]
+        result = tcc_01_no_pending_taskcards(tcs)
         assert result["status"] == "PASS"
 
 
@@ -191,6 +215,13 @@ class TestTCC06:
         result = tcc_06_closeout_verdict_matches_taskcard_completion(tcs, "COORDINATOR_COMPLETE")
         assert result["status"] == "PASS"
 
+    def test_pass_sprint_complete_with_deferred(self):
+        # SPRINT_COMPLETE is valid if deferred tasks are formally acknowledged
+        tcs = _make_taskcards(9)
+        tcs.append({"id": "TC-DEFERRED", "status": "DEFERRED_TO_WAVE13"})
+        result = tcc_06_closeout_verdict_matches_taskcard_completion(tcs, "SPRINT_COMPLETE")
+        assert result["status"] == "PASS"
+
 
 # ---- BMV-01 ------------------------------------------------------------------
 
@@ -213,6 +244,13 @@ class TestBMV01:
         closeout = {**GOOD_CLOSEOUT, "evidence_bundle": {"sha256": "abc123", "size_bytes": 100, "entries": 10}}
         result = bmv_01_bundle_sha_not_pending(closeout)
         assert result["status"] == "FAIL"
+
+    def test_pass_with_sidecar_path(self):
+        # Wave 13+ sidecar protocol: SHA is external, BMV-01 defers to BMV-06
+        closeout = {**GOOD_CLOSEOUT, "sidecar_path": ".local/evidence-bundles/test.zip.sha256"}
+        result = bmv_01_bundle_sha_not_pending(closeout)
+        assert result["status"] == "PASS"
+        assert "sidecar" in result["message"].lower()
 
 
 # ---- BMV-02 ------------------------------------------------------------------
@@ -305,6 +343,50 @@ class TestBMV05:
         assert result["status"] == "FAIL"
 
 
+# ---- BMV-06 ------------------------------------------------------------------
+
+class TestBMV06:
+    def test_pass_no_sidecar_path(self):
+        # Legacy mode — no sidecar_path, BMV-06 is a no-op
+        result = bmv_06_sidecar_sha_exists(GOOD_CLOSEOUT)
+        assert result["status"] == "PASS"
+        assert "legacy" in result["message"].lower()
+
+    def test_pass_sidecar_exists_valid_sha(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sidecar = pathlib.Path(tmpdir) / "bundle.zip.sha256"
+            sha = "a" * 64
+            sidecar.write_text(sha, encoding="utf-8")
+            closeout = {**GOOD_CLOSEOUT, "sidecar_path": str(sidecar)}
+            result = bmv_06_sidecar_sha_exists(closeout)
+            assert result["status"] == "PASS"
+
+    def test_fail_sidecar_missing(self):
+        closeout = {**GOOD_CLOSEOUT, "sidecar_path": "/nonexistent/path/bundle.zip.sha256"}
+        result = bmv_06_sidecar_sha_exists(closeout)
+        assert result["status"] == "FAIL"
+        assert "not found" in result["message"].lower()
+
+    def test_fail_sidecar_invalid_content(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sidecar = pathlib.Path(tmpdir) / "bundle.zip.sha256"
+            sidecar.write_text("not-a-sha256", encoding="utf-8")
+            closeout = {**GOOD_CLOSEOUT, "sidecar_path": str(sidecar)}
+            result = bmv_06_sidecar_sha_exists(closeout)
+            assert result["status"] == "FAIL"
+
+    def test_pass_sidecar_with_root(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = pathlib.Path(tmpdir)
+            rel = ".local/evidence-bundles/test.zip.sha256"
+            sidecar = root / rel
+            sidecar.parent.mkdir(parents=True, exist_ok=True)
+            sidecar.write_text("b" * 64, encoding="utf-8")
+            closeout = {**GOOD_CLOSEOUT, "sidecar_path": rel}
+            result = bmv_06_sidecar_sha_exists(closeout, root=root)
+            assert result["status"] == "PASS"
+
+
 # ---- Aggregate TCC -----------------------------------------------------------
 
 class TestRunAllTCC:
@@ -323,6 +405,15 @@ class TestRunAllTCC:
         assert result["verdict"] == "FAIL"
         assert result["fail"] > 0
 
+    def test_pass_with_deferred_taskcard(self):
+        tcs = _make_taskcards(11, evidence="some evidence")
+        for i, tc in enumerate(tcs):
+            tc["lane"] = str(i % 6)
+        tcs.append({"id": "TC-DEFERRED", "lane": "D", "status": "DEFERRED_TO_WAVE13", "evidence": None})
+        result = run_all_tcc_validators(tcs, expected_lane_count=6, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE")
+        assert result["verdict"] == "ALL_PASS"
+        assert result["fail"] == 0
+
 
 # ---- Aggregate BMV -----------------------------------------------------------
 
@@ -337,3 +428,18 @@ class TestRunAllBMV:
         result = run_all_bmv_validators(closeout)
         assert result["verdict"] == "FAIL"
         assert result["fail"] > 0
+
+    def test_pass_sidecar_protocol(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = pathlib.Path(tmpdir)
+            rel = ".local/evidence-bundles/test.zip.sha256"
+            sidecar = root / rel
+            sidecar.parent.mkdir(parents=True, exist_ok=True)
+            sidecar.write_text("c" * 64, encoding="utf-8")
+            closeout = {
+                **GOOD_CLOSEOUT,
+                "sidecar_path": rel,
+                "bundle_entry_count": 50,
+            }
+            result = run_all_bmv_validators(closeout, root=root)
+            assert result["verdict"] == "ALL_PASS"

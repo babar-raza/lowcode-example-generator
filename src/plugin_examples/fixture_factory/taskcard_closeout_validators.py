@@ -1,13 +1,26 @@
 """
 Taskcard Closeout Consistency (TCC) Validators — TCC-01..TCC-06
-Bundle Metadata Verification (BMV) Validators — BMV-01..BMV-05
+Bundle Metadata Verification (BMV) Validators — BMV-01..BMV-06
 
-These validators prevent the Wave 11 closeout defects from recurring:
+These validators prevent the Wave 11/12 closeout defects from recurring:
 - TCC: Ensure no PENDING taskcards in a final bundle
 - BMV: Ensure bundle metadata (SHA, commit, entry count) is internally consistent
+       BMV-06 (Wave 13+): external .sha256 sidecar verification
 """
 from __future__ import annotations
+import pathlib
 from typing import Any
+
+
+def _is_closed_status(status: str | None) -> bool:
+    """Return True if taskcard status is a valid closed state.
+
+    Valid closed states: COMPLETE, or any DEFERRED_TO_* status.
+    PENDING and any unknown status are considered open.
+    """
+    if not status:
+        return False
+    return status == "COMPLETE" or status.startswith("DEFERRED_")
 
 
 # ---------------------------------------------------------------------------
@@ -15,17 +28,26 @@ from typing import Any
 # ---------------------------------------------------------------------------
 
 def tcc_01_no_pending_taskcards(taskcards: list[dict]) -> dict[str, Any]:
-    """TCC-01: All taskcards must have status=COMPLETE at closeout time.
-    Prevents: Wave 11 DEFECT-01 (all 44 taskcards PENDING despite sprint COMPLETE).
+    """TCC-01: All taskcards must be in a closed state at closeout time.
+
+    Valid closed states: COMPLETE or DEFERRED_TO_* (e.g. DEFERRED_TO_WAVE13).
+    Prevents: Wave 11 DEFECT-01 (44 taskcards PENDING at sprint close).
+    Prevents: Wave 12 closure defect (47/53 taskcards PENDING at sprint close).
     """
-    pending = [tc["id"] for tc in taskcards if tc.get("status") != "COMPLETE"]
-    if pending:
+    open_tasks = [tc["id"] for tc in taskcards if not _is_closed_status(tc.get("status"))]
+    if open_tasks:
         return {
             "rule": "TCC-01",
             "status": "FAIL",
-            "message": f"Found {len(pending)} PENDING taskcard(s): {pending[:5]}{'...' if len(pending) > 5 else ''}",
+            "message": f"Found {len(open_tasks)} unclosed taskcard(s): {open_tasks[:5]}{'...' if len(open_tasks) > 5 else ''}",
         }
-    return {"rule": "TCC-01", "status": "PASS", "message": f"All {len(taskcards)} taskcards are COMPLETE"}
+    deferred = [tc["id"] for tc in taskcards if (tc.get("status") or "").startswith("DEFERRED_")]
+    complete = len(taskcards) - len(deferred)
+    return {
+        "rule": "TCC-01",
+        "status": "PASS",
+        "message": f"All {len(taskcards)} taskcards closed: {complete} COMPLETE, {len(deferred)} DEFERRED",
+    }
 
 
 def tcc_02_all_taskcards_have_evidence(taskcards: list[dict]) -> dict[str, Any]:
@@ -91,24 +113,28 @@ def tcc_05_taskcards_before_closeout(taskcards: list[dict], closeout_date: str) 
 def tcc_06_closeout_verdict_matches_taskcard_completion(
     taskcards: list[dict], closeout_verdict: str
 ) -> dict[str, Any]:
-    """TCC-06: If closeout_verdict=SPRINT_COMPLETE, all taskcards must be COMPLETE."""
+    """TCC-06: If closeout_verdict=SPRINT_COMPLETE, all taskcards must be closed.
+
+    Closed states: COMPLETE or DEFERRED_TO_* (deferred tasks are formally acknowledged).
+    """
     if closeout_verdict != "SPRINT_COMPLETE":
         return {
             "rule": "TCC-06",
             "status": "PASS",
             "message": f"Verdict is {closeout_verdict} — TCC-06 only applies to SPRINT_COMPLETE",
         }
-    pending = [tc["id"] for tc in taskcards if tc.get("status") != "COMPLETE"]
-    if pending:
+    open_tasks = [tc["id"] for tc in taskcards if not _is_closed_status(tc.get("status"))]
+    if open_tasks:
         return {
             "rule": "TCC-06",
             "status": "FAIL",
-            "message": f"Verdict=SPRINT_COMPLETE but {len(pending)} taskcard(s) are PENDING: {pending[:5]}",
+            "message": f"Verdict=SPRINT_COMPLETE but {len(open_tasks)} taskcard(s) are unclosed: {open_tasks[:5]}",
         }
+    deferred = [tc["id"] for tc in taskcards if (tc.get("status") or "").startswith("DEFERRED_")]
     return {
         "rule": "TCC-06",
         "status": "PASS",
-        "message": f"Verdict=SPRINT_COMPLETE and all {len(taskcards)} taskcards are COMPLETE",
+        "message": f"Verdict=SPRINT_COMPLETE; {len(taskcards)} taskcards closed ({len(deferred)} DEFERRED)",
     }
 
 
@@ -118,8 +144,18 @@ def tcc_06_closeout_verdict_matches_taskcard_completion(
 
 def bmv_01_bundle_sha_not_pending(closeout: dict) -> dict[str, Any]:
     """BMV-01: Bundle SHA in sprint-closeout.json must not be PENDING or empty.
+
+    If sidecar_path is present in the closeout, this indicates the Wave 13+ external
+    sidecar protocol — SHA is stored outside the ZIP. BMV-01 defers to BMV-06 in that case.
     Prevents: Wave 11 DEFECT-02 scenario where closeout is written before bundle is built.
     """
+    # Sidecar protocol: SHA is in external file, not in closeout — defer to BMV-06
+    if closeout.get("sidecar_path"):
+        return {
+            "rule": "BMV-01",
+            "status": "PASS",
+            "message": "Sidecar protocol active — SHA stored externally; see BMV-06 for verification",
+        }
     sha = closeout.get("evidence_bundle", {}).get("sha256") or closeout.get("sha256") or ""
     if not sha or sha == "PENDING" or sha == "null":
         return {
@@ -195,6 +231,47 @@ def bmv_05_pytest_passed_count_positive(closeout: dict) -> dict[str, Any]:
     }
 
 
+def bmv_06_sidecar_sha_exists(
+    closeout: dict, root: "pathlib.Path | None" = None
+) -> dict[str, Any]:
+    """BMV-06: If sidecar_path is in closeout, verify the sidecar file exists and contains a valid SHA-256.
+
+    Implements the Wave 13+ external sidecar proof protocol:
+    - The ZIP bundle does NOT contain the bundle SHA (avoids self-referential impossibility).
+    - The SHA is written to an external .sha256 sidecar file alongside the ZIP.
+    - This rule verifies the sidecar file exists on disk and contains a 64-char lowercase hex string.
+
+    If sidecar_path is absent, BMV-06 passes (legacy bundle mode — SHA is in closeout via BMV-01).
+    """
+    sidecar_path_str = closeout.get("sidecar_path")
+    if not sidecar_path_str:
+        return {
+            "rule": "BMV-06",
+            "status": "PASS",
+            "message": "No sidecar_path in closeout — legacy bundle mode (SHA in evidence_bundle.sha256)",
+        }
+    sidecar = pathlib.Path(sidecar_path_str) if root is None else root / sidecar_path_str
+    if not sidecar.exists():
+        return {
+            "rule": "BMV-06",
+            "status": "FAIL",
+            "message": f"Sidecar file not found: {sidecar_path_str}",
+        }
+    content = sidecar.read_text(encoding="utf-8").strip()
+    valid_hex = set("0123456789abcdef")
+    if len(content) != 64 or not all(c in valid_hex for c in content):
+        return {
+            "rule": "BMV-06",
+            "status": "FAIL",
+            "message": f"Sidecar content is not a valid SHA-256 hex string: {content[:24]}...",
+        }
+    return {
+        "rule": "BMV-06",
+        "status": "PASS",
+        "message": f"Sidecar SHA-256 present and valid: {content[:16]}...",
+    }
+
+
 # ---------------------------------------------------------------------------
 # Aggregate runners
 # ---------------------------------------------------------------------------
@@ -225,14 +302,17 @@ def run_all_tcc_validators(
     }
 
 
-def run_all_bmv_validators(closeout: dict) -> dict[str, Any]:
-    """Run all BMV-01..BMV-05 validators and return aggregate result."""
+def run_all_bmv_validators(
+    closeout: dict, root: "pathlib.Path | None" = None
+) -> dict[str, Any]:
+    """Run all BMV-01..BMV-06 validators and return aggregate result."""
     results = [
         bmv_01_bundle_sha_not_pending(closeout),
         bmv_02_commit_sha_not_pending(closeout),
         bmv_03_bundle_entry_count_positive(closeout),
         bmv_04_bundle_size_positive(closeout),
         bmv_05_pytest_passed_count_positive(closeout),
+        bmv_06_sidecar_sha_exists(closeout, root=root),
     ]
     pass_count = sum(1 for r in results if r["status"] == "PASS")
     fail_count = sum(1 for r in results if r["status"] == "FAIL")

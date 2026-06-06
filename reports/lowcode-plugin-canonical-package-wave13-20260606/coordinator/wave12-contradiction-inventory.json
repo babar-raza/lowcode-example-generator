@@ -1,0 +1,85 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "lane": "0",
+  "date": "2026-06-06",
+  "subject": "Wave 12 closeout contradiction inventory",
+  "wave12_classification": "WAVE12_PROGRESS_ACCEPTED_WITH_CLOSURE_DEFECTS",
+  "contradictions": [
+    {
+      "id": "W12-CONTRADICTION-01",
+      "severity": "CRITICAL",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/taskcards/taskcards.json",
+      "claim": "Sprint-closeout claims SPRINT_COMPLETE; taskcard_policy states 'No PENDING taskcards in final bundle'",
+      "reality": "47/53 taskcards are PENDING; only 6/53 (Lane 0) are COMPLETE",
+      "root_cause": "Taskcards were created at Lane 0 with all statuses PENDING and never updated as work progressed — same as Wave 11 DEFECT-01",
+      "repair": "Wave 13 Lane A: update all 47 PENDING taskcards to COMPLETE (46) or DEFERRED_TO_WAVE13 (1: W12-LD-06)",
+      "evidence_on_disk": "46/47 PENDING tasks have deliverable files confirmed on disk"
+    },
+    {
+      "id": "W12-CONTRADICTION-02",
+      "severity": "HIGH",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/iv/iv-results.json",
+      "claim": "IV-05 checks 'Lane-ledger has 11 lanes' — passes",
+      "reality": "IV never checked whether Wave 12 taskcards were COMPLETE; only checked lane count",
+      "root_cause": "IV script was designed to check Wave 11 taskcard completeness (IV-06) but did not apply the same check to Wave 12 taskcards",
+      "repair": "Wave 13 Lane B: update IV to validate current-sprint taskcard statuses from disk, not just file existence or lane count"
+    },
+    {
+      "id": "W12-CONTRADICTION-03",
+      "severity": "HIGH",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/adversarial-review/adversarial-review.json",
+      "claim": "AR-01 states 'Wave 12 taskcards are set to COMPLETE as work is done' — CHALLENGE_FAILED",
+      "reality": "Wave 12 taskcards were NOT set to COMPLETE; 47/53 remained PENDING",
+      "root_cause": "Adversarial review checked the policy text and general claim, not actual disk state of taskcards/taskcards.json",
+      "repair": "Wave 13 Lane B: adversarial review must read and count taskcard statuses from disk"
+    },
+    {
+      "id": "W12-CONTRADICTION-04",
+      "severity": "MEDIUM",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/final/sprint-closeout.json",
+      "claim": "evidence_bundle.sha256 = '8cfb5388...' in committed closeout",
+      "reality": "Final authoritative bundle has SHA '0e42c971...' (rebuilt after chore commit)",
+      "root_cause": "Self-referential bundle SHA: ZIP cannot contain its own final SHA without one-step discrepancy",
+      "repair": "Wave 13 Lane B/H: external .sha256 sidecar protocol — sidecar is NOT inside ZIP; no self-reference possible"
+    },
+    {
+      "id": "W12-CONTRADICTION-05",
+      "severity": "MEDIUM",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/canonical-discovery/url-discovery-results.json",
+      "claim": "wave12_hit_rate: '0/22 (candidates proposed, not web-verified)' — honestly documented",
+      "reality": "URLs were guessed by pattern-matching, not HTTP-verified; all 22 remain MISSING_CANONICAL_URL",
+      "root_cause": "URL discovery was pattern-based only; no HTTP requests were made",
+      "repair": "Wave 13 Lane C: actual HTTP verification of all 22 candidate URLs",
+      "classification": "HONEST_DOCUMENTATION — not a false claim, but an unfulfilled objective"
+    },
+    {
+      "id": "W12-CONTRADICTION-06",
+      "severity": "LOW",
+      "file": "reports/lowcode-plugin-canonical-package-wave12-20260606/taskcards/taskcards.json",
+      "claim": "W12-LD-06: 'Upgrade confirmed entries to CANONICAL_IDENTITY_VERIFIED in registry YAMLs'",
+      "reality": "No URLs were confirmed; no registry upgrades were performed; task is genuinely PENDING/DEFERRED",
+      "root_cause": "Prerequisite (HTTP verification) was not done; task is contingent on Lane C results",
+      "repair": "Classify W12-LD-06 as DEFERRED_TO_WAVE13 in Lane A repair"
+    }
+  ],
+  "summary": {
+    "total_contradictions": 6,
+    "CRITICAL": 1,
+    "HIGH": 2,
+    "MEDIUM": 2,
+    "LOW": 1
+  },
+  "accepted_wave12_state": {
+    "proven_packages": 45,
+    "registry_total": 67,
+    "CIV": 45,
+    "MCU": 22,
+    "CVFP": 33,
+    "PCLC": 12,
+    "NPP": 0,
+    "svg_packages_proven": ["svg/svg-to-pdf-converter", "svg/vectorizer"],
+    "validators_added": ["TCC-01..06", "BMV-01..05"],
+    "tests_added": 48,
+    "full_suite": "3634/0/18"
+  }
+}

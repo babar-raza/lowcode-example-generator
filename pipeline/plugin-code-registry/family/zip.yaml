@@ -53,6 +53,8 @@ plugins:
   canonical_url: https://products.aspose.net/zip/universal-extractor/
   display_plugin_name: ZIP Universal Extractor for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/zip/universal-extractor
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: extract-files
   legacy_aliases:
@@ -63,6 +65,8 @@ plugins:
   canonical_url: https://products.aspose.net/zip/universal-compressor/
   display_plugin_name: ZIP Universal Compressor for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/zip/universal-compressor
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: create-archive
   legacy_aliases:

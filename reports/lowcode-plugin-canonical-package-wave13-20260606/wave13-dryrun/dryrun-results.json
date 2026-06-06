@@ -1,0 +1,14 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "lane": "D",
+  "date": "2026-06-06",
+  "subject": "Package generation for newly CIV-verified entries from Lane C",
+  "lane_c_result": {
+    "new_civ_entries": 0,
+    "reason": "All 22 URL verification attempts returned HTTP 403 (bot protection); 0 entries upgraded to CANONICAL_IDENTITY_VERIFIED"
+  },
+  "packages_built": 0,
+  "packages_list": [],
+  "verdict": "NO_NEW_PACKAGES_CIV_PREREQUISITES_NOT_MET",
+  "note": "Package generation requires CANONICAL_IDENTITY_VERIFIED status. Since Lane C produced 0 CIV upgrades (403 bot-protection blocks HTTP verification), no packages can be generated in Wave 13. Wave 14 Lane D is the contingent lane once manual URL verification resolves the MCU entries."
+}

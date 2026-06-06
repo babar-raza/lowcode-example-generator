@@ -1,0 +1,88 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "lane": "F",
+  "date": "2026-06-06",
+  "subject": "Open PR reconciliation + publication staging dry-run",
+  "constraint": "NO publication PR creation or push to remote repos in this sprint",
+  "open_prs": [
+    {
+      "family": "cells",
+      "pr_number": 7,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave8_wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge. No action possible without remote push access."
+    },
+    {
+      "family": "diagram",
+      "pr_number": 3,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge."
+    },
+    {
+      "family": "email",
+      "pr_number": 2,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge."
+    },
+    {
+      "family": "pdf",
+      "pr_number": 22,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave8_wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge."
+    },
+    {
+      "family": "slides",
+      "pr_number": 2,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge."
+    },
+    {
+      "family": "words",
+      "pr_number": 8,
+      "status": "OPEN",
+      "opened_sprint": "lowcode-post-pub-normalize-20260603",
+      "publication_class": "CANONICAL_VERIFIED_FULL_PACKAGE",
+      "wave": "wave8_wave9_wave10",
+      "reconciliation_action": "MONITOR_ONLY",
+      "note": "PR opened 20260602. Awaiting reviewer merge."
+    }
+  ],
+  "wave11_wave12_staging": {
+    "packages": [
+      "ocr/scanned-image-to-text", "ocr/scanned-pdf-to-text",
+      "page/xps-converter", "page/eps-to-pdf", "page/ps-converter",
+      "psd/psd-to-pdf", "svg/svg-to-pdf-converter", "svg/vectorizer",
+      "tasks/mpp-to-html", "tasks/mpp-to-png",
+      "zip/universal-extractor", "zip/universal-compressor"
+    ],
+    "count": 12,
+    "status": "STAGING_DEFERRED_TO_WAVE14",
+    "reason": "Hard constraint: NO publication PR creation in this sprint. All 12 packages are technically ready (FPP_PASS + CIV) and registry_status=CANONICAL_PACKAGE_PROVEN is now set. Wave 14 should create PRs for these families: ocr, page, psd, svg, tasks, zip."
+  },
+  "summary": {
+    "open_prs_monitored": 6,
+    "new_prs_created": 0,
+    "prs_merged": 0,
+    "wave14_pr_action_required": 6
+  },
+  "verdict": "PR_RECONCILIATION_COMPLETE_NO_NEW_PRS_CREATED"
+}

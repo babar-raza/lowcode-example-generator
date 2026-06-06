@@ -8,6 +8,8 @@ plugins:
   canonical_url: https://products.aspose.net/psd/psd-to-pdf/
   display_plugin_name: PSD to PDF Converter for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/psd/psd-to-pdf
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-psd-to-pdf
   legacy_aliases:

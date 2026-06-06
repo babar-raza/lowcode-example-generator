@@ -110,6 +110,8 @@ plugins:
   canonical_url: https://products.aspose.net/tasks/mpp-to-html/
   display_plugin_name: MPP to HTML Converter for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/tasks/mpp-to-html
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-mpp-to-html
   legacy_aliases:
@@ -120,6 +122,8 @@ plugins:
   canonical_url: https://products.aspose.net/tasks/mpp-to-png/
   display_plugin_name: MPP to PNG Converter for .NET
   identity_status: CANONICAL_IDENTITY_VERIFIED
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/tasks/mpp-to-png
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-mpp-to-image
   legacy_aliases:

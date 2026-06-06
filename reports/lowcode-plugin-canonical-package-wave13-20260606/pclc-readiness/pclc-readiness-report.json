@@ -1,0 +1,41 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave13-20260606",
+  "lane": "E",
+  "date": "2026-06-06",
+  "subject": "PCLC-to-CVFP readiness review — 12 packages",
+  "total_pclc": 12,
+  "packages": [
+    {"key": "ocr/scanned-image-to-text", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "ocr/scanned-pdf-to-text", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "page/xps-converter", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "page/eps-to-pdf", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "page/ps-converter", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "psd/psd-to-pdf", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "svg/svg-to-pdf-converter", "wave": "wave12", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "svg/vectorizer", "wave": "wave12", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "tasks/mpp-to-html", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "tasks/mpp-to-png", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "zip/universal-extractor", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"},
+    {"key": "zip/universal-compressor", "wave": "wave11", "fpp_pass": true, "civ": true, "output_verdict": "PASS", "readiness": "READY_FOR_CVFP"}
+  ],
+  "ready_for_cvfp": 12,
+  "blocked": 0,
+  "registry_updates_applied": {
+    "updated": 10,
+    "families": ["ocr", "page", "psd", "tasks", "zip"],
+    "field_added": "registry_status: CANONICAL_PACKAGE_PROVEN",
+    "field_added_2": "canonical_package_path",
+    "note": "Wave 12 SVG packages already had registry_status=CANONICAL_PACKAGE_PROVEN from Wave 12 Lane C"
+  },
+  "promotion_blocker": {
+    "type": "PUBLICATION_STAGING_NOT_DONE",
+    "detail": "All 12 packages are technically READY_FOR_CVFP (FPP_PASS + CIV + output-validation PASS). The blocker is publication PR creation — no PRs exist for Wave 11-12 packages. Hard constraint prevents PR creation in this sprint. Promotion to CVFP in publication matrix v6 will reflect registry status upgrade. Actual publication PRs are Wave 14 scope.",
+    "hard_constraint": "NO publication PR creation or push to remote repos"
+  },
+  "matrix_impact": {
+    "current_pclc": 12,
+    "post_readiness_pclc": 12,
+    "note": "Publication class in matrix v6 will reflect READY_FOR_CVFP status; actual CVFP promotion requires publication PR merge (Wave 14)"
+  },
+  "verdict": "ALL_12_PCLC_READY_FOR_CVFP_PUBLICATION_STAGING_DEFERRED_TO_WAVE14"
+}

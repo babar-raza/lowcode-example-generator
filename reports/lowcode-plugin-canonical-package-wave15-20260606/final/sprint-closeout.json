@@ -1,0 +1,91 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE15-EVIDENCE-AUTHORITY-PUBLICATION-URL-MAPPING-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "verdict": "SPRINT_COMPLETE",
+  "sidecar_proof_protocol": "v1.1",
+
+  "feat_commit": "2dddb28",
+  "chore_commit": "PENDING",
+
+  "iv_verdict": "IV_PASS",
+  "iv_checks_passed": 46,
+  "iv_checks_total": 46,
+
+  "adversarial_review_verdict": "ADVERSARIAL_REVIEW_PASS",
+  "adversarial_review_checks_passed": 12,
+  "adversarial_review_checks_total": 12,
+
+  "pytest_passed": 3714,
+  "pytest_skipped": 18,
+  "pytest_failed": 0,
+
+  "wave15_packages_proven": 2,
+  "wave15_packages": [
+    "html/convert-html-to-xps",
+    "psd/convert-psd-to-png"
+  ],
+
+  "proven_packages_total": 49,
+  "pclc_count": 16,
+
+  "registry_state": {
+    "total": 67,
+    "canonical_identity_verified": 66,
+    "missing_canonical_url": 0,
+    "split_confirmed_by_browser": 1,
+    "canonical_package_proven": 49
+  },
+
+  "url_corrections_applied": 21,
+  "cvb_validators_added": 5,
+
+  "wave14_contradiction_resolved": true,
+  "wave14_addendum": "reports/lowcode-plugin-canonical-package-wave15-20260606/wave14-closure-repair/wave14-closeout-addendum.json",
+
+  "evidence_bundle": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.zip",
+    "sha256": "2ff7f3bba497a7e0fe69817a9f9f5e7ff3bc186708c27225dffdc0e19acd3e35",
+    "size_bytes": 121640,
+    "entry_count": 50,
+    "sidecar_sha256_file": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.sha256"
+  },
+
+  "lanes_complete": {
+    "lane_0": "COMPLETE",
+    "lane_A": "COMPLETE",
+    "lane_B": "COMPLETE",
+    "lane_C": "COMPLETE",
+    "lane_D": "COMPLETE",
+    "lane_E": "COMPLETE",
+    "lane_F": "COMPLETE",
+    "lane_G": "COMPLETE",
+    "lane_H": "COMPLETE",
+    "lane_I": "COMPLETE"
+  },
+
+  "deferred_to_wave16": {
+    "count": 17,
+    "ledger": "reports/lowcode-plugin-canonical-package-wave15-20260606/package-generation/deferred-entry-mapping-ledger.json",
+    "next_queue": "reports/lowcode-plugin-canonical-package-wave15-20260606/state-docs/wave16-next-queue.json"
+  },
+
+  "open_prs_status": "RECONCILIATION_DEFERRED",
+  "open_prs_ledger": "reports/lowcode-plugin-canonical-package-wave15-20260606/state-docs/open-pr-reconciliation.json",
+
+  "sprint_complete_conditions": {
+    "all_taskcards_complete": true,
+    "iv_pass": true,
+    "adversarial_review_pass": true,
+    "pytest_zero_failures": true,
+    "feat_commit_exists": true,
+    "bundle_built_after_iv": true,
+    "closeout_written_after_bundle_frozen": true,
+    "sidecar_matches_bundle": true,
+    "cvb_01_bundled_iv_matches_closeout_iv": true,
+    "cvb_02_bundle_sha_matches_closeout": true,
+    "cvb_03_bundle_size_matches_closeout": true,
+    "cvb_04_bundle_entries_matches_closeout": true,
+    "cvb_05_external_sidecar_matches_bundle": true
+  }
+}

@@ -316,29 +316,29 @@
       "id": "W15-LI-04",
       "lane": "I",
       "title": "Stage and feat commit Wave 15 files (exact-path staging only)",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": "feat commit 2dddb28 — feat(wave15): Wave 14 closeout repair + URL corrections + CVB validators + 2 new packages + 14 PCLC PR packets (60 files changed, 3396 insertions)"
     },
     {
       "id": "W15-LI-05",
       "lane": "I",
       "title": "Build evidence bundle ZIP (all Wave 15 sprint deliverables)",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.zip — 50 entries, 121640 bytes, SHA-256=2ff7f3bba497a7e0fe69817a9f9f5e7ff3bc186708c27225dffdc0e19acd3e35"
     },
     {
       "id": "W15-LI-06",
       "lane": "I",
       "title": "Write external .sha256 sidecar (NOT inside ZIP)",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.sha256 — external sidecar written post-bundle-freeze per sidecar_proof_protocol v1.1"
     },
     {
       "id": "W15-LI-07",
       "lane": "I",
       "title": "Write final/sprint-closeout.json with verified bundle SHA/size/entries",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": "reports/lowcode-plugin-canonical-package-wave15-20260606/final/sprint-closeout.json — verdict=SPRINT_COMPLETE, SHA=2ff7f3bb..., size=121640, entries=50, all CVB conditions true"
     },
     {
       "id": "W15-LI-08",

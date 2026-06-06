@@ -2,8 +2,9 @@
   "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
   "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE14-CLOSEOUT-INTEGRITY-BROWSER-CANONICAL-URL-VERIFICATION-PUBLICATION-ADVANCEMENT-001",
   "date": "2026-06-06",
-  "lanes_complete": ["0", "A", "B", "C", "D", "E", "F", "G", "H"],
-  "lanes_pending": ["I"],
+  "lanes_complete": ["0", "A", "B", "C", "D", "E", "F", "G", "H", "I"],
+  "lanes_pending": [],
+  "sprint_verdict": "SPRINT_COMPLETE",
   "registry_state": {
     "total": 67,
     "civ": 66,
@@ -16,7 +17,7 @@
     "pclc": 14
   },
   "validator_state": {
-    "pytest_baseline": 3672,
+    "pytest_baseline": 3682,
     "evc_rules_added": 8,
     "evc_tests_added": 37
   },

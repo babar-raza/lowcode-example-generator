@@ -2,8 +2,8 @@
   "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
   "date": "2026-06-06",
   "checks_total": 46,
-  "checks_pass": 45,
-  "checks_fail": 1,
+  "checks_pass": 46,
+  "checks_fail": 0,
   "hardening_notes": [
     "IV-06: Reads Wave 13 taskcard statuses from disk (0 PENDING required)",
     "IV-07: Reads Wave 14 taskcard statuses from disk (0 PENDING required)",
@@ -11,7 +11,7 @@
     "IV-09..12: EVC validator module existence and test count verified",
     "IV-18..19: Registry CIV=66/MCU=1 verified (21 Lane D upgrades)"
   ],
-  "verdict": "IV_FAIL",
+  "verdict": "IV_PASS",
   "checks": [
     {
       "id": "IV-01",
@@ -52,8 +52,8 @@
     {
       "id": "IV-07",
       "description": "Wave 14 taskcards: 0 PENDING (HARDENED \u2014 reads and counts from disk)",
-      "status": "FAIL",
-      "detail": "Wave 14 has 9 unclosed taskcards: ['W14-LI-01', 'W14-LI-02', 'W14-LI-03', 'W14-LI-04', 'W14-LI-05']"
+      "status": "PASS",
+      "detail": "Wave 14: 50 COMPLETE, 0 DEFERRED, 0 PENDING"
     },
     {
       "id": "IV-08",

@@ -1,0 +1,10 @@
+79e7136 chore(wave15): close final taskcards LI-04/LI-08/LI-09 — SPRINT_COMPLETE
+bf2d101 chore(wave15): update evidence bundle SHA-256 in sprint closeout
+2dddb28 feat(wave15): Wave 14 closeout repair + URL corrections + CVB validators + 2 new packages + 14 PCLC PR packets
+20040c7 chore(wave14): update sprint-closeout with final chore commit SHA + IV results
+3dcacbe chore(wave14): update evidence bundle sidecar SHA + final sprint closeout
+48671e5 feat(wave14): registry MCU->CIV upgrades + EVC validators + canonical packages + publication staging
+279d70f chore(wave13): mark Lane H COMPLETE and sprint verdict SPRINT_COMPLETE in lane-ledger
+c7d45f0 chore(wave13): update closeout chore-commit SHA reference
+20836c6 chore(wave13): update evidence bundle sidecar SHA reference in sprint closeout
+8d06c8b feat(wave13): canonical package wave13 — closure repair + validator hardening + PCLC readiness

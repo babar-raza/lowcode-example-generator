@@ -1,0 +1,49 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "packages_attempted": 5,
+  "packages_proven": 4,
+  "packages_blocked": 1,
+  "packages_deferred": 4,
+  "results": [
+    {
+      "package": "html/convert-html-to-markdown",
+      "status": "CANONICAL_PACKAGE_PROVEN",
+      "output": "output.md",
+      "size": 358,
+      "nuget": "Aspose.HTML 24.12.0"
+    },
+    {
+      "package": "html/merge-html",
+      "status": "CANONICAL_PACKAGE_PROVEN",
+      "output": "merged.pdf",
+      "size": 38366,
+      "nuget": "Aspose.HTML 24.12.0"
+    },
+    {
+      "package": "gis/convert-gis-data",
+      "status": "CANONICAL_PACKAGE_PROVEN",
+      "output": "output.kml",
+      "size": 775,
+      "nuget": "Aspose.GIS 24.12.0"
+    },
+    {
+      "package": "tasks/read-project-data",
+      "status": "CANONICAL_PACKAGE_PROVEN",
+      "output": "project-data.txt",
+      "size": 334,
+      "nuget": "Aspose.Tasks 24.12.0"
+    },
+    {
+      "package": "finance/parse-xbrl",
+      "status": "BLOCKED",
+      "blocker": "NETWORK_DEPENDENCY \u2014 XBRL taxonomy schema fetch required; programmatic creation API complex"
+    }
+  ],
+  "deferred": [
+    "svg/merge-svg",
+    "threed/convert-3d-model",
+    "threed/compress-3d-scene",
+    "omr/generate-omr-template"
+  ]
+}

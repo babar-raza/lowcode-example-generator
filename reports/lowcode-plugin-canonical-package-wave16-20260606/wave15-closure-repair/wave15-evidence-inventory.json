@@ -1,0 +1,40 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "purpose": "Wave 15 evidence inventory captured for W16 Lane 0 preflight",
+  "wave15_bundle": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.zip",
+    "sha256": "2ff7f3bba497a7e0fe69817a9f9f5e7ff3bc186708c27225dffdc0e19acd3e35",
+    "size_bytes": 121640,
+    "entry_count": 50,
+    "taskcard_count_in_bundle": {
+      "COMPLETE": 44,
+      "PENDING": 6,
+      "total": 50
+    },
+    "note": "Bundle frozen at feat commit 2dddb28 before Lane I completion — protocol v1.1 limitation"
+  },
+  "wave15_disk": {
+    "sprint_closeout_path": "reports/lowcode-plugin-canonical-package-wave15-20260606/final/sprint-closeout.json",
+    "sprint_closeout_verdict": "SPRINT_COMPLETE",
+    "taskcards_path": "reports/lowcode-plugin-canonical-package-wave15-20260606/taskcards/taskcards.json",
+    "taskcard_count_on_disk": {
+      "COMPLETE": 50,
+      "PENDING": 0,
+      "total": 50
+    },
+    "external_sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.sha256",
+    "sidecar_sha256_matches_bundle": true
+  },
+  "wave15_commits": {
+    "feat_commit": "2dddb28",
+    "chore_closeout_commit": "bf2d101",
+    "chore_taskcards_commit": "79e7136"
+  },
+  "wave15_classification": "WAVE15_PROGRESS_ACCEPTED_WITH_PROTOCOL_V1_LIMITATIONS",
+  "wave15_proven_packages": [
+    "html/convert-html-to-xps",
+    "psd/convert-psd-to-png"
+  ],
+  "issues_documented_in_addendum": "wave15-closure-repair/wave15-closeout-addendum.json"
+}

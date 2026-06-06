@@ -1,0 +1,45 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "iv_protocol": "v2",
+  "pytest_run": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/ -q --tb=no",
+    "result": "3785 passed, 18 skipped, 0 failures",
+    "exit_code": 0,
+    "duration_seconds": 348
+  },
+  "new_validators_this_sprint": {
+    "EAV": "EAV-01..EAV-06 (6 rules, evidence_authority_validators.py)",
+    "PCLV": "PCLV-01..PCLV-03 (3 rules, pclc_consistency_validators.py)",
+    "SHV": "SHV-01..SHV-03 (3 rules, secret_hygiene_validators.py)",
+    "PRV": "PRV-01..PRV-04 (4 rules, publication_readiness_validators.py)",
+    "total_new_rules": 16,
+    "total_new_tests": 71
+  },
+  "iv_checks": [
+    {"id": "IV-01", "description": "4 W16 packages proven with PASS verdicts", "result": "PASS"},
+    {"id": "IV-02", "description": "All Program.cs use confirmed Aspose APIs", "result": "PASS"},
+    {"id": "IV-03", "description": "Registry YAMLs updated for all 4 W16 packages", "result": "PASS"},
+    {"id": "IV-04", "description": "All 20 PCLC have pr_packet_exists=true", "result": "PASS"},
+    {"id": "IV-05", "description": "barcode/read-barcode split correctly resolved", "result": "PASS"},
+    {"id": "IV-06", "description": "Wave 15 closure repair documented with addendum", "result": "PASS"},
+    {"id": "IV-07", "description": "EAV-01..06 validators implemented and tested", "result": "PASS"},
+    {"id": "IV-08", "description": "PCLV-01..03 and SHV-01..03 implemented and tested", "result": "PASS"},
+    {"id": "IV-09", "description": "PRV-01..04 implemented and tested (21 new tests pass)", "result": "PASS"},
+    {"id": "IV-10", "description": "PCLC count 20 consistent across all state docs", "result": "PASS"},
+    {"id": "IV-11", "description": "No secret files staged or committed", "result": "PASS"},
+    {"id": "IV-12", "description": "Wave 17 queue and work-ahead documented", "result": "PASS"},
+    {"id": "IV-13", "description": "Full pytest suite 0 failures (3785 pass)", "result": "PASS"},
+    {"id": "IV-14", "description": "Adversarial review 12/12 checks PASS", "result": "PASS"}
+  ],
+  "iv_summary": {
+    "total_checks": 14,
+    "pass": 14,
+    "fail": 0
+  },
+  "taskcard_prereq": {
+    "check": "All Wave 16 taskcards COMPLETE before IV_PASS (EAV-01 requirement)",
+    "status": "VERIFIED — taskcards.json updated to 42/42 COMPLETE before this file was written"
+  },
+  "iv_verdict": "IV_PASS"
+}

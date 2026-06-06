@@ -1,0 +1,129 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "target_sprint": "lowcode-plugin-canonical-package-wave17-YYYYMMDD",
+  "lane_e_source": "work-ahead",
+  "drafted_taskcards": [
+    {
+      "id": "W17-LI-01",
+      "scope": "lane_a_publication_push",
+      "title": "Push 20 PCLC PR packets to external GitLab repos",
+      "priority": "P0",
+      "status": "DRAFT",
+      "required_change": "Obtain GitLab push credentials; run scripts/run_live_publication.py for all 20 PCLC",
+      "gate": "EXTERNAL — human gate for live push credentials",
+      "acceptance_checks": [
+        "All 20 PRs created in target repos",
+        "PR numbers logged in publication-results.json",
+        "No credential artifacts committed"
+      ],
+      "depends_on": "Human approval + GitLab credentials"
+    },
+    {
+      "id": "W17-LI-02",
+      "scope": "lane_b_finance_xbrl",
+      "title": "Implement finance/parse-xbrl with offline taxonomy fixture",
+      "priority": "P1",
+      "status": "DRAFT",
+      "required_change": "Create minimal offline XBRL fixture XML with embedded schema (no schemaRef network call), or use alternative Aspose.Finance API path that does not require taxonomy resolution",
+      "gate": "LOCAL",
+      "acceptance_checks": [
+        "Program.cs compiles with Aspose.Finance 24.12.0",
+        "No network calls at runtime (air-gapped test)",
+        "output-validation.json verdict=PASS",
+        "output size > 0 bytes"
+      ],
+      "research_note": "XbrlDocument(path) triggers taxonomy fetch. Workaround options: (1) construct InlineXbrl inline without schemaRef, (2) use Aspose.Finance OFX format instead, (3) create fixture that uses generic schema not requiring IFRS download"
+    },
+    {
+      "id": "W17-LI-03",
+      "scope": "lane_b_3d_packages",
+      "title": "Prove threed/convert-3d-model package",
+      "priority": "P1",
+      "status": "DRAFT",
+      "required_change": "Generate Program.cs for Aspose.3D. Pattern: new Scene() -> add mesh -> save as OBJ/FBX/STL",
+      "gate": "LOCAL",
+      "acceptance_checks": [
+        "Program.cs compiles with Aspose.3D NuGet",
+        "Output file produced (OBJ/FBX/STL/GLB)",
+        "output-validation.json verdict=PASS"
+      ],
+      "api_probe_needed": true,
+      "probe_plan": "Try: new Scene(); var box = scene.RootNode.CreateChildNode(new Box()); scene.Save(outputPath, FileFormat.WavefrontOBJ);"
+    },
+    {
+      "id": "W17-LI-04",
+      "scope": "lane_b_svg_merge",
+      "title": "Prove svg/merge-svg package",
+      "priority": "P1",
+      "status": "DRAFT",
+      "required_change": "Generate Program.cs for Aspose.SVG merge. Pattern: load multiple SVG strings -> merge into single document -> save",
+      "gate": "LOCAL",
+      "acceptance_checks": [
+        "Program.cs compiles with Aspose.SVG NuGet",
+        "Merged SVG output produced",
+        "output-validation.json verdict=PASS"
+      ],
+      "api_probe_needed": true
+    },
+    {
+      "id": "W17-LI-05",
+      "scope": "lane_b_omr_packages",
+      "title": "Prove omr/recognize-omr-form package",
+      "priority": "P2",
+      "status": "DRAFT",
+      "required_change": "Generate Program.cs for Aspose.OMR. Pattern: create template programmatically -> generate form image -> recognize",
+      "gate": "LOCAL",
+      "api_probe_needed": true,
+      "blocker_risk": "May require binary image fixture — need to probe if programmatic template generation is possible"
+    },
+    {
+      "id": "W17-LI-06",
+      "scope": "lane_b_cad_packages",
+      "title": "Prove cad/convert-cad-to-pdf package",
+      "priority": "P2",
+      "status": "DRAFT",
+      "required_change": "Generate Program.cs for Aspose.CAD. Pattern: create DXF fixture programmatically -> load -> save as PDF",
+      "gate": "LOCAL",
+      "api_probe_needed": true,
+      "blocker_risk": "Binary DXF fixture may be required; probe programmatic CAD creation first"
+    },
+    {
+      "id": "W17-LI-07",
+      "scope": "lane_c_validators",
+      "title": "Add PRV-01..PRV-04 publication readiness validators",
+      "priority": "P1",
+      "status": "DRAFT",
+      "required_change": "Implement src/plugin_examples/fixture_factory/publication_readiness_validators.py with PRV-01..04 rules",
+      "gate": "LOCAL",
+      "acceptance_checks": [
+        "PRV-01: all PCLC have pr_packet_exists=true",
+        "PRV-02: all PR branches follow lowcode/{family}/{slug} pattern",
+        "PRV-03: no duplicate PR branches in matrix",
+        "PRV-04: pclc_total matches packages array length",
+        "≥16 new pytest tests, all PASS"
+      ]
+    },
+    {
+      "id": "W17-LI-08",
+      "scope": "lane_d_state",
+      "title": "Reconcile open PRs (#7 cells, #3 diagram, etc.) with PCLC publication matrix",
+      "priority": "P1",
+      "status": "DRAFT",
+      "required_change": "Check status of 6 open PRs (cells #7, diagram #3, email #2, pdf #22, slides #2, words #8); update publication matrix with PR statuses; close stale PRs if needed",
+      "gate": "EXTERNAL — requires GitLab read access",
+      "note": "Open PRs date from 20260602; may be stale or merged"
+    }
+  ],
+  "wave17_target_pclc_additions": 4,
+  "wave17_target_new_pclc_total": 24,
+  "wave17_target_proven_total": 57,
+  "wave17_api_probe_queue": [
+    "threed: Scene() + Box + FileFormat.WavefrontOBJ",
+    "svg: SVGDocument merge pattern",
+    "omr: template programmatic generation",
+    "cad: DXF programmatic creation",
+    "finance: XbrlDocument offline fixture",
+    "font: FontFactory or Font.Open + save as WOFF"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "blockers": [
+    {
+      "package": "finance/parse-xbrl",
+      "blocker_type": "API_NETWORK_DEPENDENCY",
+      "blocker_detail": "XbrlDocument(path) attempts to fetch XBRL taxonomy from external URL (e.g. https://xbrl.ifrs.org/taxonomy/2021-03-24/ifrs-full). No offline mode found in API. Programmatic creation requires complex custom Context/Unit/Item API with non-obvious constructor signatures. Two repair loops attempted.",
+      "api_evidence": "XbrlDocument constructor throws XbrlException: Can't find https://xbrl.ifrs.org/taxonomy/2021-03-24/ifrs-full when loading from file with schemaRef pointing to remote taxonomy. XbrlInstanceCollection.Add() creates instance but Context/Item constructors have complex requirements.",
+      "feasibility": "FIXTURE_BLOCKED — requires either (a) offline XBRL taxonomy file or (b) deeper API reverse-engineering",
+      "recommended_wave17_action": "Bundle local XBRL taxonomy (US-GAAP or simple custom schema) as file fixture; or use XbrlDocument programmatic creation with fully mapped constructor signatures",
+      "status": "BLOCKED"
+    },
+    {
+      "package": "svg/merge-svg",
+      "blocker_type": "API_UNCLEAR",
+      "blocker_detail": "Aspose.SVG merge API not immediately discoverable from existing proven packages. Need to probe SVGDocument merge/combine methods.",
+      "feasibility": "DEFERRED_TO_WAVE17 — Wave 16 deferred due to time constraints, not a hard blocker",
+      "status": "DEFERRED"
+    },
+    {
+      "package": "cad/convert-dxf-to-pdf",
+      "blocker_type": "BINARY_FIXTURE_REQUIRED",
+      "blocker_detail": "DXF/DWG files are binary formats that cannot be created programmatically without the full CAD SDK. No programmatic fixture creation path identified.",
+      "feasibility": "BINARY_FIXTURE_BLOCKED",
+      "status": "BLOCKED"
+    },
+    {
+      "package": "threed/convert-3d-model",
+      "blocker_type": "API_NOT_EXPLORED",
+      "blocker_detail": "Aspose.3D API not yet probed. May support programmatic 3D scene creation (Box, Sphere primitives).",
+      "feasibility": "POTENTIALLY_FEASIBLE — priority for Wave 17",
+      "status": "DEFERRED"
+    },
+    {
+      "package": "threed/compress-3d-scene",
+      "blocker_type": "API_NOT_EXPLORED",
+      "blocker_detail": "Depends on 3D scene creation which is not yet proven.",
+      "feasibility": "DEPENDENT_ON_THREED",
+      "status": "DEFERRED"
+    },
+    {
+      "package": "omr/recognize-omr",
+      "blocker_type": "BINARY_FIXTURE_REQUIRED",
+      "blocker_detail": "OMR recognition requires a scanned image fixture with OMR marks.",
+      "feasibility": "FIXTURE_BLOCKED",
+      "status": "BLOCKED"
+    },
+    {
+      "package": "omr/generate-omr-template",
+      "blocker_type": "API_NOT_EXPLORED",
+      "blocker_detail": "Aspose.OMR template generation API not yet probed. May be feasible without fixtures.",
+      "feasibility": "POTENTIALLY_FEASIBLE — priority for Wave 17",
+      "status": "DEFERRED"
+    }
+  ]
+}

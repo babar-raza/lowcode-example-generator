@@ -4,19 +4,30 @@ github_repo: https://github.com/aspose-gis/Aspose.Gis-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-gis-data
+  canonical_plugin_slug: convert-gis-data
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/gis/convert-gis-data/
   canonical_url: https://products.aspose.net/gis/convert-gis-data/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 8660acdb24605901
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
-  code_hashes: []
+  code_hashes:
+  - vectorlayer_convert_geojson_kml
   classes_used:
-  - Coordinates
-  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
-    mapping based on family pattern (LOAD_SAVE_OPTIONS)
+  - VectorLayer
+  namespaces_used:
+  - Aspose.Gis
+  methods_used:
+  - VectorLayer.Convert()
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/gis/convert-gis-data
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/gis/convert-gis-data
+  canonical_package_wave: wave16
+  canonical_package_proven_at: '2026-06-06'
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json

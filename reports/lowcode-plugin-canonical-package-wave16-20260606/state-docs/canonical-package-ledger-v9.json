@@ -1,0 +1,67 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "protocol_version": "v2",
+  "proven_packages": {
+    "total": 53,
+    "by_wave": {
+      "wave8": 4,
+      "wave9": 12,
+      "wave10": 17,
+      "wave11": 10,
+      "wave12": 2,
+      "wave13": 0,
+      "wave14": 2,
+      "wave15": 2,
+      "wave16": 4
+    }
+  },
+  "pclc_total": 20,
+  "pclc_breakdown": {
+    "wave11": 10,
+    "wave12": 2,
+    "wave14": 2,
+    "wave15": 2,
+    "wave16": 4
+  },
+  "published": 0,
+  "open_prs": 6,
+  "registry_state": {
+    "total": 67,
+    "canonical_identity_verified": 66,
+    "split_resolved_superseded": 1,
+    "missing_canonical_url": 0,
+    "canonical_package_proven": 53,
+    "pclc_ready": 20,
+    "published": 0
+  },
+  "wave16_new_packages": [
+    {
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "output": "output.md",
+      "size": 358
+    },
+    {
+      "family": "html",
+      "slug": "merge-html",
+      "output": "merged.pdf",
+      "size": 38366
+    },
+    {
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "output": "output.kml",
+      "size": 775
+    },
+    {
+      "family": "tasks",
+      "slug": "read-project-data",
+      "output": "project-data.txt",
+      "size": 334
+    }
+  ],
+  "wave16_new_pclc": 4,
+  "barcode_mcu_resolved": true,
+  "barcode_resolution": "read-barcode SUPERSEDED by split: 1d-barcode-reader + 2d-barcode-reader"
+}

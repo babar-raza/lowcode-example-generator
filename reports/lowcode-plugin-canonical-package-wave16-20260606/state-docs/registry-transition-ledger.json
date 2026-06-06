@@ -1,0 +1,49 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "transitions": [
+    {
+      "family": "barcode",
+      "slug": "read-barcode",
+      "from_status": "NEEDS_MANUAL_MAPPING",
+      "to_status": "SUPERSEDED_BY_SPLIT",
+      "from_identity": "MISSING_CANONICAL_URL",
+      "to_identity": "SPLIT_RESOLVED"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "from_status": "NEEDS_MANUAL_MAPPING",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "from_identity": "CANONICAL_IDENTITY_VERIFIED",
+      "to_identity": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "html",
+      "slug": "merge-html",
+      "from_status": "NEEDS_MANUAL_MAPPING",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "from_identity": "CANONICAL_IDENTITY_VERIFIED",
+      "to_identity": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "from_status": "NEEDS_MANUAL_MAPPING",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "from_identity": "CANONICAL_IDENTITY_VERIFIED",
+      "to_identity": "CANONICAL_IDENTITY_VERIFIED"
+    },
+    {
+      "family": "tasks",
+      "slug": "read-project-data",
+      "from_status": "NEEDS_MANUAL_MAPPING",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "from_identity": "CANONICAL_IDENTITY_VERIFIED",
+      "to_identity": "CANONICAL_IDENTITY_VERIFIED"
+    }
+  ],
+  "total_transitions": 5,
+  "mcu_delta": -1,
+  "canonical_package_delta": 4
+}

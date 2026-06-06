@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "nCPzXR7e1TU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-package-wave16-20260606\\wave16-dryrun\\examples\\finance\\parse-xbrl\\finance-parse-xbrl.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prora\\.nuget\\packages\\aspose.finance\\24.12.0\\aspose.finance.24.12.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

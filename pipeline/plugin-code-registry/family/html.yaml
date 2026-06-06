@@ -226,17 +226,33 @@ plugins:
   canonical_url: https://products.aspose.net/html/convert-html-to-markdown/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 2753d17136e50057
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
-  code_hashes: []
-  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
-    mapping based on family pattern (STATIC_CONVERTER_CLASS)
+  code_hashes:
+  - converter_converthtml_markdownsaveoptions
+  namespaces_used:
+  - Aspose.Html
+  - Aspose.Html.Converters
+  - Aspose.Html.Saving
+  classes_used:
+  - Converter
+  - MarkdownSaveOptions
+  methods_used:
+  - Converter.ConvertHTML()
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/convert-html-to-markdown/output-validation.json
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/convert-html-to-markdown
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/convert-html-to-markdown
+  canonical_package_wave: wave16
+  canonical_package_proven_at: '2026-06-06'
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
@@ -246,6 +262,11 @@ plugins:
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash 2753d17136e50057). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave16-20260606 Lane B.
+      Package built with Converter.ConvertHTML() + MarkdownSaveOptions. Output 358-byte
+      MD file produced. PASS.
 - plugin_slug: merge-html
   canonical_plugin_slug: merge-html
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -253,17 +274,33 @@ plugins:
   canonical_url: https://products.aspose.net/html/merge-html/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 00e28ed0c15626b8
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
-  code_hashes: []
-  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
-    mapping based on family pattern (STATIC_CONVERTER_CLASS)
+  code_hashes:
+  - converter_converthtml_pdfsaveoptions_merge
+  namespaces_used:
+  - Aspose.Html
+  - Aspose.Html.Converters
+  - Aspose.Html.Saving
+  classes_used:
+  - Converter
+  - PdfSaveOptions
+  methods_used:
+  - Converter.ConvertHTML()
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/merge-html/output-validation.json
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/merge-html
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/html/merge-html
+  canonical_package_wave: wave16
+  canonical_package_proven_at: '2026-06-06'
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
@@ -273,3 +310,8 @@ plugins:
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash 00e28ed0c15626b8). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave16-20260606 Lane B.
+      Package merges 2 HTML documents into single PDF using Converter.ConvertHTML()
+      + PdfSaveOptions. Output 38366-byte PDF produced. PASS.

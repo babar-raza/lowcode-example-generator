@@ -1,0 +1,37 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "protocol_version": "v2",
+  "closeout_type": "PRE_BUNDLE_CLOSEOUT",
+  "sha256_claim": "NONE — SHA will be recorded in external sidecar after bundle freeze (protocol v2)",
+  "note": "This file is inside the evidence bundle. Per Evidence Authority Protocol v2, no SHA self-reference is made here. The authoritative SHA is in the external .sha256 sidecar and final-attestation.json.",
+  "sprint_verdict": "SPRINT_COMPLETE",
+  "taskcards": {
+    "total": 42,
+    "complete": 42,
+    "pending": 0
+  },
+  "proven_packages": {
+    "wave16_new": 4,
+    "total": 53,
+    "pclc_total": 20
+  },
+  "validators": {
+    "EAV": "EAV-01..EAV-06",
+    "PCLV": "PCLV-01..PCLV-03",
+    "SHV": "SHV-01..SHV-03",
+    "PRV": "PRV-01..PRV-04",
+    "total_new_rules": 16,
+    "total_new_tests": 71,
+    "full_suite": "3785 passed, 18 skipped, 0 failures"
+  },
+  "iv_verdict": "IV_PASS",
+  "adversarial_review_verdict": "ADVERSARIAL_REVIEW_PASS",
+  "key_decisions": [
+    "barcode/read-barcode MCU resolved to SUPERSEDED_BY_SPLIT (1d + 2d entries both CIV)",
+    "finance/parse-xbrl BLOCKED — XBRL taxonomy network dependency, deferred to Wave 17",
+    "Wave 15 classified WAVE15_PROGRESS_ACCEPTED_WITH_PROTOCOL_V1_LIMITATIONS (honest gap, not fabrication)",
+    "Protocol v2: fixes ZIP-contains-own-SHA flaw via two-phase freeze model",
+    ".gitignore updated: *.pfx, *.pem, *.key, *.p12 patterns added"
+  ]
+}

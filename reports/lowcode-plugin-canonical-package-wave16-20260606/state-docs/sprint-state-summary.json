@@ -1,0 +1,53 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "date": "2026-06-06",
+  "verdict": "SPRINT_COMPLETE_PENDING_BUNDLE",
+  "wave15_status": "PROGRESS_ACCEPTED_WITH_PROTOCOL_V1_LIMITATIONS",
+  "registry_state": {
+    "total": 67,
+    "canonical_identity_verified": 66,
+    "split_resolved_superseded": 1,
+    "missing_canonical_url": 0,
+    "canonical_package_proven": 53,
+    "pclc_ready": 20,
+    "published": 0
+  },
+  "pclc_count": 20,
+  "pclc_breakdown": {
+    "wave11": 10,
+    "wave12": 2,
+    "wave14": 2,
+    "wave15": 2,
+    "wave16": 4
+  },
+  "proven_packages_total": 53,
+  "wave16_packages": 4,
+  "barcode_mcu_resolved": true,
+  "cvb_validators": 5,
+  "eav_validators": 6,
+  "pclv_validators": 3,
+  "shv_validators": 3,
+  "prv_validators": 4,
+  "new_validators_total": 16,
+  "pytest_baseline_before": 3634,
+  "pytest_new_tests": 71,
+  "pytest_actual_total": 3785,
+  "pytest_skipped": 18,
+  "pytest_failures": 0,
+  "open_prs": {
+    "count": 6,
+    "reconciliation": "DEFERRED_REMOTE_GATE",
+    "prs": [
+      "cells-7",
+      "diagram-3",
+      "email-2",
+      "pdf-22",
+      "slides-2",
+      "words-8"
+    ]
+  },
+  "finance_parse_xbrl": "BLOCKED \u2014 XBRL taxonomy network dependency",
+  "svg_merge_svg": "DEFERRED \u2014 Wave 17",
+  "publication_gate": "EXTERNAL \u2014 GitLab credentials required for live push",
+  "evidence_authority_protocol": "v2"
+}

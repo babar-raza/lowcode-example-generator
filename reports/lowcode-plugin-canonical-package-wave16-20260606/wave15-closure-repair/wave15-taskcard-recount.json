@@ -1,0 +1,30 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave16-20260606",
+  "subject": "lowcode-plugin-canonical-package-wave15-20260606",
+  "date": "2026-06-06",
+  "analysis": "BUNDLE_VS_DISK_DISCREPANCY_EXPLAINED",
+  "bundle_analysis": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.zip",
+    "sha256": "2ff7f3bba497a7e0fe69817a9f9f5e7ff3bc186708c27225dffdc0e19acd3e35",
+    "entries": 50,
+    "bundle_taskcards_complete": 44,
+    "bundle_taskcards_pending": 6,
+    "pending_in_bundle": ["W15-LI-04", "W15-LI-05", "W15-LI-06", "W15-LI-07", "W15-LI-08", "W15-LI-09"],
+    "bundle_frozen_at_commit": "2dddb28",
+    "note": "Bundle was frozen at feat commit 2dddb28 BEFORE Lane I completion. This is structurally expected under sidecar_proof_protocol_v1.1 — the bundle cannot contain the closeout that records its own SHA. However, the protocol v1.1 did not require the taskcards to be complete before bundle freeze, which is the gap Wave 16 addresses."
+  },
+  "disk_analysis": {
+    "disk_taskcards_complete": 50,
+    "disk_taskcards_pending": 0,
+    "closeout_exists_on_disk": true,
+    "closeout_path": "reports/lowcode-plugin-canonical-package-wave15-20260606/final/sprint-closeout.json",
+    "closeout_added_by_commit": "bf2d101",
+    "final_taskcards_closed_by_commit": "79e7136",
+    "sidecar_exists": true,
+    "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave15-20260606.sha256",
+    "sidecar_matches_bundle": true
+  },
+  "root_cause": "Protocol v1.1 froze the bundle before all closeout taskcards were marked COMPLETE. The 6 pending taskcards (LI-04..09) were completed in chore commits AFTER the bundle was frozen. The bundle therefore contains a stale taskcards.json with 6 PENDING entries, while disk has 50 COMPLETE. This is a protocol design gap, not a deception or fabrication.",
+  "classification": "WAVE15_PROGRESS_ACCEPTED_WITH_PROTOCOL_V1_LIMITATIONS",
+  "wave16_fix": "Evidence authority protocol v2 requires all taskcards COMPLETE before bundle freeze. Bundle will not contain final-closeout SHA reference. External attestation carries final authority."
+}

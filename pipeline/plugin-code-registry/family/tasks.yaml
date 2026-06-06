@@ -136,17 +136,20 @@ plugins:
   canonical_url: https://products.aspose.net/tasks/read-project-data/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 3fc4bed1f635537e
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
-  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
-    mapping based on family pattern (LOAD_SAVE_OPTIONS)
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/tasks/read-project-data
+  canonical_package_wave: wave16
+  canonical_package_proven_at: '2026-06-06'
+  next_action: Package proven in Wave 16; ready for PR publication
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/tasks.md
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave16-20260606/wave16-dryrun/examples/tasks/read-project-data/output-validation.json
   history:
   - date: '2026-06-04'
     status: NEEDS_MANUAL_MAPPING
@@ -156,3 +159,8 @@ plugins:
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash 3fc4bed1f635537e). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave16-20260606 Lane D.
+      Package proven via Wave 16 dry-run. Program.cs generates 3-task MPP project,
+      saves as XML, reloads and reads task data. Output 334 bytes. verdict=PASS.

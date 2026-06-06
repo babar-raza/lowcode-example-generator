@@ -168,32 +168,39 @@ plugins:
   migrated_from: generate-qr-code
 - plugin_slug: read-barcode
   canonical_plugin_slug: read-barcode
-  identity_status: MISSING_CANONICAL_URL
+  identity_status: SPLIT_RESOLVED
   plugin_url: https://products.aspose.net/barcode/net/read-barcode
   canonical_url: null
   catalog_verified_url: https://products.aspose.net/barcode/net/read-barcode
-  page_source_status: SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER
+  page_source_status: SPLIT_RESOLVED_BY_CANONICAL_ENTRIES
   source_link_origin: GITHUB_REPO
-  transformation_readiness_reason: Old slug 'read-barcode' maps ambiguously to both
-    1d-barcode-reader and 2d-barcode-reader canonical pages; page confirmed in prior
-    sprint catalog (hash 6d15352859a39bcc) but canonical URL cannot be assigned
-    without Playwright disambiguation
+  transformation_readiness_reason: 'Wave 16 resolution: read-barcode slug maps to
+    two distinct canonical pages. Both are already registered as separate CIV entries:
+    1d-barcode-reader (https://products.aspose.net/barcode/1d-barcode-reader/) and
+    2d-barcode-reader (https://products.aspose.net/barcode/2d-barcode-reader/). This
+    entry is SUPERSEDED by those two canonical entries.'
   page_hash: 6d15352859a39bcc
-  registry_status: NEEDS_MANUAL_MAPPING
-  blocker_type: CANONICAL_SPLIT_AMBIGUOUS
+  registry_status: SUPERSEDED_BY_SPLIT
+  blocker_type: null
+  split_resolved_by:
+  - 1d-barcode-reader
+  - 2d-barcode-reader
+  split_canonical_urls:
+  - https://products.aspose.net/barcode/1d-barcode-reader/
+  - https://products.aspose.net/barcode/2d-barcode-reader/
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
   - 91aa497508d875515b5db6ddce715ebf
   github_links:
   - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs
-  next_action: 'Wave 15: use Playwright to resolve ambiguity between 1d-barcode-reader
-    and 2d-barcode-reader; assign single canonical URL'
+  next_action: 'NONE — superseded. See 1d-barcode-reader and 2d-barcode-reader entries.'
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md
   - reports/lowcode-plugin-code-registry-reconciliation-20260604/reconciliation/old-to-canonical-url-map.json
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave16-20260606/state-docs/barcode-split-ledger.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
@@ -208,6 +215,12 @@ plugins:
       Page confirmed in prior sprint catalog (hash 6d15352859a39bcc) at old /net/
       format URL. Ambiguity between 1d-barcode-reader and 2d-barcode-reader unresolved.
       Retained as MCU pending Playwright disambiguation in Wave 15.'
+  - date: '2026-06-06'
+    status: SUPERSEDED_BY_SPLIT
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave16-20260606 Lane B.
+      Split resolved: read-barcode maps to two separate canonical pages already registered
+      as CIV entries: 1d-barcode-reader and 2d-barcode-reader. This entry superseded.
+      MCU count reduced by 1. Registry now has 0 MCU.'
 - plugin_slug: 2d-barcode-reader
   canonical_plugin_slug: 2d-barcode-reader
   identity_status: CANONICAL_IDENTITY_VERIFIED

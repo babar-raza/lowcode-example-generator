@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xbrl xmlns="http://www.xbrl.org/2003/instance"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xbrli="http://www.xbrl.org/2003/instance"
+      xmlns:link="http://www.xbrl.org/2003/linkbase"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:ifrs="http://xbrl.ifrs.org/taxonomy/2021-03-24/ifrs-full">
+  <link:schemaRef xlink:type="simple"
+    xlink:href="https://xbrl.ifrs.org/taxonomy/2021-03-24/ifrs-full" />
+  <context id="ctx1">
+    <entity><identifier scheme="http://www.example.com">EXMPL</identifier></entity>
+    <period><instant>2026-12-31</instant></period>
+  </context>
+  <ifrs:Assets contextRef="ctx1" decimals="0" unitRef="USD">1000000</ifrs:Assets>
+  <ifrs:Liabilities contextRef="ctx1" decimals="0" unitRef="USD">500000</ifrs:Liabilities>
+  <ifrs:Equity contextRef="ctx1" decimals="0" unitRef="USD">500000</ifrs:Equity>
+  <unit id="USD"><measure>iso4217:USD</measure></unit>
+</xbrl>

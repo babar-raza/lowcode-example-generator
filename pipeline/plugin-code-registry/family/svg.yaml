@@ -52,8 +52,8 @@ plugins:
 - plugin_slug: merge-svg
   canonical_plugin_slug: merge-svg
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/svg/net/merge-svg
-  canonical_url: https://products.aspose.net/svg/net/merge-svg
+  plugin_url: https://products.aspose.net/svg/merge-svg/
+  canonical_url: https://products.aspose.net/svg/merge-svg/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 229ef264933622c5
   registry_status: NEEDS_MANUAL_MAPPING

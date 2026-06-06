@@ -10,8 +10,8 @@ implementation_model: LOAD_SAVE_OPTIONS
 plugins:
   - plugin_slug: convert-font
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/font/net/convert-font
-    canonical_url: https://products.aspose.net/font/net/convert-font
+    plugin_url: https://products.aspose.net/font/convert-font/
+    canonical_url: https://products.aspose.net/font/convert-font/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 0a0f1f2f80a01f8f
     registry_status: NEEDS_MANUAL_MAPPING
@@ -40,8 +40,8 @@ plugins:
 
   - plugin_slug: render-text-with-font
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/font/net/render-text-with-font
-    canonical_url: https://products.aspose.net/font/net/render-text-with-font
+    plugin_url: https://products.aspose.net/font/render-text-with-font/
+    canonical_url: https://products.aspose.net/font/render-text-with-font/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 77a6bd8d0165f0d1
     registry_status: CODE_HARVESTED

@@ -1,0 +1,27 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "recount_date": "2026-06-06",
+  "recount_occasion": "Wave 15 Lane A — Wave 14 closure repair",
+  "source": "reports/lowcode-plugin-canonical-package-wave14-20260606/taskcards/taskcards.json",
+  "taskcard_state": {
+    "total": 50,
+    "complete": 50,
+    "pending": 0
+  },
+  "lane_breakdown": {
+    "L0": {"total": 6, "complete": 6, "pending": 0},
+    "LA": {"total": 6, "complete": 6, "pending": 0},
+    "LB": {"total": 5, "complete": 5, "pending": 0},
+    "LC": {"total": 7, "complete": 7, "pending": 0},
+    "LD": {"total": 3, "complete": 3, "pending": 0},
+    "LE": {"total": 3, "complete": 3, "pending": 0},
+    "LF": {"total": 2, "complete": 2, "pending": 0},
+    "LG": {"total": 5, "complete": 5, "pending": 0},
+    "LH": {"total": 4, "complete": 4, "pending": 0},
+    "LI": {"total": 9, "complete": 9, "pending": 0}
+  },
+  "iv07_check": "IV-07 requires 0 PENDING taskcards — confirmed: 50/50 COMPLETE, 0 PENDING",
+  "iv07_verdict": "PASS",
+  "note": "Taskcard state on disk is correct. The W14 bundle captured a stale snapshot in which 9 Lane I taskcards were still PENDING. The final taskcard flush happened before the IV re-run that produced 46/46 PASS, but after the bundle was built. Disk state is authoritative.",
+  "verdict": "TASKCARD_RECOUNT_PASS"
+}

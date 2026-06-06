@@ -16,12 +16,13 @@ plugins:
   - convert-psd-to-pdf
   sprint: lowcode-plugin-canonical-package-wave10-20260605
 - plugin_slug: convert-psd-to-png
+  canonical_plugin_slug: convert-psd-to-png
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/psd/net/convert-psd-to-png
-  canonical_url: https://products.aspose.net/psd/net/convert-psd-to-png
+  plugin_url: https://products.aspose.net/psd/convert-psd-to-png/
+  canonical_url: https://products.aspose.net/psd/convert-psd-to-png/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: ca9c247241de366a
-  registry_status: CODE_HARVESTED
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -32,14 +33,14 @@ plugins:
   - Rectangle
   github_links:
   - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/Conversion/CroppingPSDWhenConvertingToPNG.cs
-  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
-    CroppingPSDWhenConvertingToPNG.cs and advance to READY_FOR_TRANSFORMATION
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/psd.md
   - https://raw.githubusercontent.com/aspose-psd/Aspose.PSD-for-.NET/master/Examples/CSharp/Aspose/Conversion/CroppingPSDWhenConvertingToPNG.cs
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/psd/convert-psd-to-png/output-validation.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
@@ -52,6 +53,17 @@ plugins:
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash ca9c247241de366a). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave15-20260606 Lane G.
+      Package built with new PsdImage() + PngOptions. Output 2013-byte PNG produced.
+      PASS.
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/psd/convert-psd-to-png
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/psd/convert-psd-to-png
+  canonical_package_wave: wave15
+  canonical_package_proven_at: '2026-06-06'
 - plugin_slug: animation-maker
   canonical_plugin_slug: animation-maker
   identity_status: CANONICAL_IDENTITY_VERIFIED

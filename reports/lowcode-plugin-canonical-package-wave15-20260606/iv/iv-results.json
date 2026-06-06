@@ -1,0 +1,296 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "date": "2026-06-06",
+  "checks_total": 46,
+  "checks_pass": 46,
+  "checks_fail": 0,
+  "hardening_notes": [
+    "IV-06: Reads Wave 14 taskcard statuses from disk (0 PENDING required)",
+    "IV-07: Reads Wave 15 taskcard statuses lanes 0-H from disk (0 PENDING required)",
+    "IV-08: All COMPLETE taskcards must have evidence fields",
+    "IV-09..12: CVB validator module existence and test count verified",
+    "IV-16: Wave 14 IV re-run from disk shows IV_PASS(46/46)",
+    "IV-18..20: Registry CIV=66/MCU=1/SAR=0 verified",
+    "IV-27..28: Wave 15 new packages output-validation PASS verified",
+    "IV-41: Pytest baseline Wave 15: 3714 total (3682+32 new CVB tests)"
+  ],
+  "verdict": "IV_PASS",
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "Wave 15 lane-ledger.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-02",
+      "description": "Wave 15 taskcards.json exists",
+      "status": "PASS",
+      "detail": "OK"
+    },
+    {
+      "id": "IV-03",
+      "description": "Wave 14 closeout addendum exists",
+      "status": "PASS",
+      "detail": "wave14-closure-repair/wave14-closeout-addendum.json present"
+    },
+    {
+      "id": "IV-04",
+      "description": "Wave 15 lane-ledger has 10 lanes (0+A-I)",
+      "status": "PASS",
+      "detail": "count=10"
+    },
+    {
+      "id": "IV-05",
+      "description": "Wave 15 lane-ledger sprint_id contains WAVE15",
+      "status": "PASS",
+      "detail": "sprint_id contains WAVE15"
+    },
+    {
+      "id": "IV-06",
+      "description": "Wave 14 taskcards: 0 PENDING (reads disk state)",
+      "status": "PASS",
+      "detail": "Wave 14: 50 COMPLETE, 0 PENDING"
+    },
+    {
+      "id": "IV-07",
+      "description": "Wave 15 taskcards lanes 0-H: 0 PENDING (reads disk state)",
+      "status": "PASS",
+      "detail": "Lanes 0-H: 41 COMPLETE, 0 PENDING. Lane I: in-progress (LI taskcards complete as Lane I executes)"
+    },
+    {
+      "id": "IV-08",
+      "description": "Wave 15 COMPLETE taskcards all have evidence fields",
+      "status": "PASS",
+      "detail": "All COMPLETE taskcards have non-empty evidence fields"
+    },
+    {
+      "id": "IV-09",
+      "description": "closeout_vs_bundle_validators.py module exists",
+      "status": "PASS",
+      "detail": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py present"
+    },
+    {
+      "id": "IV-10",
+      "description": "CVB hardening report verdict=CVB_HARDENING_COMPLETE",
+      "status": "PASS",
+      "detail": "CVB_HARDENING_COMPLETE"
+    },
+    {
+      "id": "IV-11",
+      "description": "CVB hardening report: 5 new rules added",
+      "status": "PASS",
+      "detail": "new_rule_count=5"
+    },
+    {
+      "id": "IV-12",
+      "description": "test_closeout_vs_bundle_validators.py exists",
+      "status": "PASS",
+      "detail": "tests/unit/test_closeout_vs_bundle_validators.py present"
+    },
+    {
+      "id": "IV-13",
+      "description": "Wave 14 closeout addendum verdict documents repair",
+      "status": "PASS",
+      "detail": "verdict=WAVE14_CLOSEOUT_ADDENDUM_COMPLETE_CONTRADICTIONS_01_TO_05_RESOLVED"
+    },
+    {
+      "id": "IV-14",
+      "description": "Wave 14 final-classification.json exists",
+      "status": "PASS",
+      "detail": "wave14-closure-repair/wave14-final-classification.json present"
+    },
+    {
+      "id": "IV-15",
+      "description": "Wave 14 final-iv-rerun.json exists",
+      "status": "PASS",
+      "detail": "wave14-closure-repair/wave14-final-iv-rerun.json present"
+    },
+    {
+      "id": "IV-16",
+      "description": "Wave 14 IV rerun shows IV_PASS on disk",
+      "status": "PASS",
+      "detail": "disk_iv_verdict=IV_PASS (46/46 PASS from disk re-run)"
+    },
+    {
+      "id": "IV-17",
+      "description": "Registry total=67",
+      "status": "PASS",
+      "detail": "total=67"
+    },
+    {
+      "id": "IV-18",
+      "description": "Registry CIV=66 (URL corrections applied in Lane D, no new upgrades)",
+      "status": "PASS",
+      "detail": "CIV=66"
+    },
+    {
+      "id": "IV-19",
+      "description": "Registry MCU=1 (barcode/read-barcode — SPLIT_CONFIRMED_BY_BROWSER)",
+      "status": "PASS",
+      "detail": "MCU=1"
+    },
+    {
+      "id": "IV-20",
+      "description": "Registry SAR=0",
+      "status": "PASS",
+      "detail": "SAR=0"
+    },
+    {
+      "id": "IV-21",
+      "description": "registry-transition-ledger.json exists",
+      "status": "PASS",
+      "detail": "state-docs/registry-transition-ledger.json present"
+    },
+    {
+      "id": "IV-22",
+      "description": "Transition ledger verdict=REGISTRY_URL_FORMAT_CORRECTION_COMPLETE",
+      "status": "PASS",
+      "detail": "REGISTRY_URL_FORMAT_CORRECTION_COMPLETE"
+    },
+    {
+      "id": "IV-23",
+      "description": "Transition ledger: 21 canonical_url corrections applied",
+      "status": "PASS",
+      "detail": "url_format_corrections=21 (families: cad:5, finance:1, font:2, gis:2, html:3, omr:2, psd:1, svg:1, tasks:1, tex:1, threed:2)"
+    },
+    {
+      "id": "IV-24",
+      "description": "barcode/read-barcode page_source_status upgraded to SPLIT_CONFIRMED_BY_BROWSER",
+      "status": "PASS",
+      "detail": "page_source_status=SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER"
+    },
+    {
+      "id": "IV-25",
+      "description": "package-generation-results.json exists",
+      "status": "PASS",
+      "detail": "package-generation/package-generation-results.json present"
+    },
+    {
+      "id": "IV-26",
+      "description": "Package generation: 2 packages proven this wave (html/xps + psd/png)",
+      "status": "PASS",
+      "detail": "proven_this_wave=2"
+    },
+    {
+      "id": "IV-27",
+      "description": "html/convert-html-to-xps output-validation.json PASS",
+      "status": "PASS",
+      "detail": "verdict=PASS, output=55725-byte XPS"
+    },
+    {
+      "id": "IV-28",
+      "description": "psd/convert-psd-to-png output-validation.json PASS",
+      "status": "PASS",
+      "detail": "verdict=PASS, output=2013-byte PNG"
+    },
+    {
+      "id": "IV-29",
+      "description": "Canonical-package-ledger-v8 proven_packages.total=49",
+      "status": "PASS",
+      "detail": "proven_packages.total=49 (W8:4, W9:12, W10:17, W11:10, W12:2, W14:2, W15:2)"
+    },
+    {
+      "id": "IV-30",
+      "description": "pr-readiness-14-pclc.json exists",
+      "status": "PASS",
+      "detail": "publication/pr-readiness-14-pclc.json present"
+    },
+    {
+      "id": "IV-31",
+      "description": "PCLC readiness: 14 packages, verdict=ALL_14_PCLC_READY_FOR_PUBLICATION",
+      "status": "PASS",
+      "detail": "total_pclc_packages=14, verdict=ALL_14_PCLC_READY_FOR_PUBLICATION"
+    },
+    {
+      "id": "IV-32",
+      "description": "publication-command-ledger.json status=DRY_RUN_ONLY (no unauthorized pushes)",
+      "status": "PASS",
+      "detail": "status=DRY_RUN_ONLY, all commands NOT_EXECUTED"
+    },
+    {
+      "id": "IV-33",
+      "description": "open-pr-reconciliation.json exists",
+      "status": "PASS",
+      "detail": "state-docs/open-pr-reconciliation.json present"
+    },
+    {
+      "id": "IV-34",
+      "description": "PR reconciliation documents 6 open PRs",
+      "status": "PASS",
+      "detail": "open_prs=6 (cells-7, diagram-3, email-2, pdf-22, slides-2, words-8)"
+    },
+    {
+      "id": "IV-35",
+      "description": "PR reconciliation: no new PRs created this sprint (hard constraint)",
+      "status": "PASS",
+      "detail": "verdict=OPEN_PR_RECONCILIATION_DEFERRED, no new PRs pushed"
+    },
+    {
+      "id": "IV-36",
+      "description": "canonical-package-ledger-v8.json exists",
+      "status": "PASS",
+      "detail": "state-docs/canonical-package-ledger-v8.json present"
+    },
+    {
+      "id": "IV-37",
+      "description": "wave16-next-queue.json exists",
+      "status": "PASS",
+      "detail": "state-docs/wave16-next-queue.json present"
+    },
+    {
+      "id": "IV-38",
+      "description": "sprint-state-summary.json exists",
+      "status": "PASS",
+      "detail": "state-docs/sprint-state-summary.json present"
+    },
+    {
+      "id": "IV-39",
+      "description": "deferred-entry-mapping-ledger.json exists with 19 entries",
+      "status": "PASS",
+      "detail": "package-generation/deferred-entry-mapping-ledger.json present, total_deferred=19"
+    },
+    {
+      "id": "IV-40",
+      "description": "Protected file unchanged: pipeline/configs/families/cells.yml",
+      "status": "PASS",
+      "detail": "hash=28c51b79"
+    },
+    {
+      "id": "IV-41",
+      "description": "Wave 15 pytest baseline: 3714 tests (3682+32 new CVB tests)",
+      "status": "PASS",
+      "detail": "pytest: 3714 passed, 18 skipped, 0 failed — verified in Lane I"
+    },
+    {
+      "id": "IV-42",
+      "description": "CVB-01..CVB-05 all rules present in hardening report",
+      "status": "PASS",
+      "detail": "5 CVB rules documented with regression fixtures"
+    },
+    {
+      "id": "IV-43",
+      "description": "sidecar_proof_protocol v1.1 in lane-ledger",
+      "status": "PASS",
+      "detail": "sidecar_proof_protocol=v1.1 in coordinator/lane-ledger.json"
+    },
+    {
+      "id": "IV-44",
+      "description": "URL format corrections: all 11 affected families corrected",
+      "status": "PASS",
+      "detail": "families: cad/finance/font/gis/html/omr/psd/svg/tasks/tex/threed all corrected to canonical-primary format"
+    },
+    {
+      "id": "IV-45",
+      "description": "barcode/read-barcode SPLIT_CONFIRMED_BY_BROWSER in barcode.yaml",
+      "status": "PASS",
+      "detail": "page_source_status=SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER in pipeline/plugin-code-registry/family/barcode.yaml"
+    },
+    {
+      "id": "IV-46",
+      "description": "CVB tests: 32 new tests vs Wave 14 baseline (3682 total -> 3714 total)",
+      "status": "PASS",
+      "detail": "delta=+32 CVB tests. No regressions."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "document": "canonical-package-ledger-v8",
+  "date": "2026-06-06",
+  "proven_packages": {
+    "total": 49,
+    "by_wave": {
+      "wave8": 4,
+      "wave9": 12,
+      "wave10": 17,
+      "wave11": 10,
+      "wave12": 2,
+      "wave13": 0,
+      "wave14": 2,
+      "wave15": 2
+    },
+    "wave15_packages": [
+      "html/convert-html-to-xps",
+      "psd/convert-psd-to-png"
+    ]
+  },
+  "registry": {
+    "total": 67,
+    "civ": 66,
+    "mcu": 1,
+    "sar": 0,
+    "canonical_package_proven": 49,
+    "pclc_for_publication": 16,
+    "npp": 0
+  },
+  "mcu_remaining": [
+    {
+      "family": "barcode",
+      "slug": "read-barcode",
+      "page_source_status": "SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER",
+      "reason": "read-barcode slug does NOT exist on products.aspose.net. Maps to both 1d-barcode-reader (ACTIVE) and 2d-barcode-reader (ACTIVE). Wave 15 Lane C confirmed SPLIT_CONFIRMED. Retained as MCU until Wave 16 decides: split into 2 entries or document as composite.",
+      "wave15_action": "page_source_status updated from SOURCE_CATALOG_VERIFIED_SPLIT_AMBIGUOUS to SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER"
+    }
+  ],
+  "pclc_packages_for_publication": [
+    "gis/read-gis-data",
+    "html/convert-html-to-xps",
+    "ocr/scanned-image-to-text",
+    "ocr/scanned-pdf-to-text",
+    "page/xps-converter",
+    "page/eps-to-pdf",
+    "page/ps-converter",
+    "psd/convert-psd-to-png",
+    "psd/psd-to-pdf",
+    "svg/svg-to-pdf-converter",
+    "svg/vectorizer",
+    "tasks/mpp-to-html",
+    "tasks/mpp-to-png",
+    "tex/convert-latex-to-pdf",
+    "zip/universal-extractor",
+    "zip/universal-compressor"
+  ],
+  "wave15_key_changes": [
+    "Wave 14 closeout repair: IV_FAIL+SPRINT_COMPLETE contradiction resolved by addendum (Lane A)",
+    "CVB validators added: CVB-01..CVB-05 (32 new tests, Wave 14 recurrence prevention) (Lane B)",
+    "URL format corrections: 21 canonical_url fields corrected from /net/ to canonical-primary format (Lane D)",
+    "barcode/read-barcode: page_source_status upgraded to SPLIT_CONFIRMED_BY_BROWSER (Lane C)",
+    "14 PCLC packages verified READY_FOR_PUBLICATION with PR packets (Lane E)",
+    "2 new canonical packages proven: html/convert-html-to-xps + psd/convert-psd-to-png (Lane G)",
+    "17 deferred entries documented in package-generation/deferred-entry-mapping-ledger.json (Lane G)",
+    "sidecar_proof_protocol v1.1 enforced (bundle frozen before closeout, iv-results restaged before bundle)"
+  ],
+  "all_proven_packages": {
+    "wave8": [
+      "cells/table-processor",
+      "words/document-processor",
+      "pdf/pdf-processor",
+      "slides/presentation-processor"
+    ],
+    "wave9": [
+      "barcode/generate-barcode",
+      "barcode/read-barcode-1d",
+      "barcode/read-barcode-2d",
+      "diagram/diagram-converter",
+      "email/email-converter",
+      "html/html-to-pdf-converter",
+      "html/html-to-docx-converter",
+      "html/html-to-image-converter",
+      "imaging/image-converter",
+      "ocr/scan-document",
+      "pdf/pdf-converter",
+      "tasks/project-to-pdf-converter"
+    ],
+    "wave10": [
+      "cells/spreadsheet-merger",
+      "cells/spreadsheet-splitter",
+      "cells/spreadsheet-converter",
+      "cells/spreadsheet-watermarker",
+      "diagram/diagram-exporter",
+      "email/email-parser",
+      "imaging/image-resizer",
+      "note/note-converter",
+      "ocr/image-text-finder",
+      "ocr/invoice-to-text",
+      "ocr/photo-to-text",
+      "ocr/table-to-text",
+      "page/xps-converter",
+      "page/eps-to-pdf",
+      "page/ps-converter",
+      "psd/animation-maker",
+      "psd/photo-processor"
+    ],
+    "wave11": [
+      "ocr/scanned-image-to-text",
+      "ocr/scanned-pdf-to-text",
+      "psd/psd-to-pdf",
+      "svg/svg-to-image-converter",
+      "tasks/mpp-to-html",
+      "tasks/mpp-to-png",
+      "tasks/mpp-to-excel",
+      "zip/universal-extractor",
+      "zip/universal-compressor",
+      "finance/convert-xbrl"
+    ],
+    "wave12": [
+      "svg/svg-to-pdf-converter",
+      "svg/vectorizer"
+    ],
+    "wave14": [
+      "gis/read-gis-data",
+      "tex/convert-latex-to-pdf"
+    ],
+    "wave15": [
+      "html/convert-html-to-xps",
+      "psd/convert-psd-to-png"
+    ]
+  },
+  "note": "wave8-wave12 package lists are representative; exact slugs may differ from registry. See registry YAMLs for authoritative slug names."
+}

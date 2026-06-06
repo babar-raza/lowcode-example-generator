@@ -169,11 +169,11 @@ plugins:
 - plugin_slug: convert-html-to-xps
   canonical_plugin_slug: convert-html-to-xps
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/html/net/convert-html-to-xps
-  canonical_url: https://products.aspose.net/html/net/convert-html-to-xps
+  plugin_url: https://products.aspose.net/html/convert-html-to-xps/
+  canonical_url: https://products.aspose.net/html/convert-html-to-xps/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: e9c75fd94a2b21c6
-  registry_status: CODE_HARVESTED
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -192,14 +192,14 @@ plugins:
   - File
   github_links:
   - https://raw.githubusercontent.com/aspose-html/Aspose.HTML-for-.NET/master/Examples/CSharp/Converting-Between-Formats/EPUB-Converter/EPUBtoXPSExample.cs
-  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
-    EPUBtoXPSExample.cs and advance to READY_FOR_TRANSFORMATION
+  next_action: PUBLICATION_CANDIDATE_LOCAL_CLEAN
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
   - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/html.md
   - https://raw.githubusercontent.com/aspose-html/Aspose.HTML-for-.NET/master/Examples/CSharp/Converting-Between-Formats/EPUB-Converter/EPUBtoXPSExample.cs
   - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  - reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/html/convert-html-to-xps/output-validation.json
   history:
   - date: '2026-06-04'
     status: CODE_HARVESTED
@@ -208,11 +208,22 @@ plugins:
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash e9c75fd94a2b21c6). Upgraded MCU -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave15-20260606 Lane G.
+      Package built with Converter.ConvertHTML() + XpsSaveOptions. Output 55725-byte
+      XPS file produced. PASS.
+  dryrun_package_path: reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/html/convert-html-to-xps
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave15-20260606/wave15-dryrun/examples/html/convert-html-to-xps
+  canonical_package_wave: wave15
+  canonical_package_proven_at: '2026-06-06'
 - plugin_slug: convert-html-to-markdown
   canonical_plugin_slug: convert-html-to-markdown
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/html/net/convert-html-to-markdown
-  canonical_url: https://products.aspose.net/html/net/convert-html-to-markdown
+  plugin_url: https://products.aspose.net/html/convert-html-to-markdown/
+  canonical_url: https://products.aspose.net/html/convert-html-to-markdown/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 2753d17136e50057
   registry_status: NEEDS_MANUAL_MAPPING
@@ -238,8 +249,8 @@ plugins:
 - plugin_slug: merge-html
   canonical_plugin_slug: merge-html
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/html/net/merge-html
-  canonical_url: https://products.aspose.net/html/net/merge-html
+  plugin_url: https://products.aspose.net/html/merge-html/
+  canonical_url: https://products.aspose.net/html/merge-html/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 00e28ed0c15626b8
   registry_status: NEEDS_MANUAL_MAPPING

@@ -47,8 +47,8 @@ plugins:
 - plugin_slug: convert-latex-to-pdf
   canonical_plugin_slug: convert-latex-to-pdf
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/tex/net/convert-latex-to-pdf
-  canonical_url: https://products.aspose.net/tex/net/convert-latex-to-pdf
+  plugin_url: https://products.aspose.net/tex/convert-latex-to-pdf/
+  canonical_url: https://products.aspose.net/tex/convert-latex-to-pdf/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 62f10fb5d57e6412
   blocker_type: null

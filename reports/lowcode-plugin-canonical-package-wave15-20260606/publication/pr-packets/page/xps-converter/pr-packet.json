@@ -1,0 +1,22 @@
+{
+  "package_key": "page/xps-converter",
+  "family": "page",
+  "plugin_slug": "xps-converter",
+  "display_plugin_name": "XPS Converter for .NET",
+  "canonical_url": "https://products.aspose.net/page/xps-converter/",
+  "canonical_url_verification": "URL_ACCESS_BLOCKED_403",
+  "canonical_url_verification_method": "products.aspose.net/page deep page returned 403 (CDN rate-limit). Prior sprint catalog hash verified. Canonical URL format confirmed correct.",
+  "registry_status": "CANONICAL_PACKAGE_PROVEN",
+  "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/page/xps-converter",
+  "canonical_package_wave": "wave11",
+  "canonical_package_proven_at": "2026-06-05",
+  "output_validation_status": "PASS",
+  "output_validation_path": "reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/page/xps-converter/output-validation.json",
+  "pr_title": "feat(page): add xps-converter canonical example package",
+  "pr_branch": "feat/page-xps-converter",
+  "pr_target_dir": "workspace/examples/page/xps-converter",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "blockers": [],
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "generated_at": "2026-06-06"
+}

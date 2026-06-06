@@ -10,8 +10,8 @@ implementation_model: FIXTURE_HEAVY_WORKFLOW
 plugins:
   - plugin_slug: recognize-omr
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/omr/net/recognize-omr
-    canonical_url: https://products.aspose.net/omr/net/recognize-omr
+    plugin_url: https://products.aspose.net/omr/recognize-omr/
+    canonical_url: https://products.aspose.net/omr/recognize-omr/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 6a5c84ccd19e8946
     registry_status: NEEDS_MANUAL_MAPPING
@@ -34,8 +34,8 @@ plugins:
 
   - plugin_slug: generate-omr-template
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/omr/net/generate-omr-template
-    canonical_url: https://products.aspose.net/omr/net/generate-omr-template
+    plugin_url: https://products.aspose.net/omr/generate-omr-template/
+    canonical_url: https://products.aspose.net/omr/generate-omr-template/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: b9405e9ef89f5d50
     registry_status: NEEDS_MANUAL_MAPPING

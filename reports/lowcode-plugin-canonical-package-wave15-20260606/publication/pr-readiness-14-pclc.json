@@ -1,0 +1,136 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "document": "pr-readiness-14-pclc",
+  "date": "2026-06-06",
+  "lane": "E",
+  "total_pclc_packages": 14,
+  "all_output_validation_pass": true,
+  "all_canonical_url_corrected": true,
+  "url_verification_policy": "3 packages directly confirmed ACTIVE (zip/universal-extractor, svg/svg-to-pdf-converter, ocr/scanned-image-to-text). 11 packages returned 403 from CDN; identity retained via prior sprint catalog hash evidence. All canonical_url values corrected to canonical-primary format (no /net/ infix) per Lane D.",
+  "verdict": "ALL_14_PCLC_READY_FOR_PUBLICATION",
+  "packages": [
+    {
+      "package_key": "ocr/scanned-image-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/ocr/scanned-image-to-text/pr-packet.json"
+    },
+    {
+      "package_key": "ocr/scanned-pdf-to-text",
+      "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/ocr/scanned-pdf-to-text/pr-packet.json"
+    },
+    {
+      "package_key": "page/xps-converter",
+      "canonical_url": "https://products.aspose.net/page/xps-converter/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/page/xps-converter/pr-packet.json"
+    },
+    {
+      "package_key": "page/eps-to-pdf",
+      "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/page/eps-to-pdf/pr-packet.json"
+    },
+    {
+      "package_key": "page/ps-converter",
+      "canonical_url": "https://products.aspose.net/page/ps-converter/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/page/ps-converter/pr-packet.json"
+    },
+    {
+      "package_key": "psd/psd-to-pdf",
+      "canonical_url": "https://products.aspose.net/psd/psd-to-pdf/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/psd/psd-to-pdf/pr-packet.json"
+    },
+    {
+      "package_key": "tasks/mpp-to-html",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/tasks/mpp-to-html/pr-packet.json"
+    },
+    {
+      "package_key": "tasks/mpp-to-png",
+      "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/tasks/mpp-to-png/pr-packet.json"
+    },
+    {
+      "package_key": "zip/universal-extractor",
+      "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/zip/universal-extractor/pr-packet.json"
+    },
+    {
+      "package_key": "zip/universal-compressor",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave11",
+      "pr_packet": "publication/pr-packets/zip/universal-compressor/pr-packet.json"
+    },
+    {
+      "package_key": "svg/svg-to-pdf-converter",
+      "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave12",
+      "pr_packet": "publication/pr-packets/svg/svg-to-pdf-converter/pr-packet.json"
+    },
+    {
+      "package_key": "svg/vectorizer",
+      "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+      "url_verification": "CURRENT_CANONICAL_CONFIRMED",
+      "output_validation": "PASS",
+      "wave": "wave12",
+      "pr_packet": "publication/pr-packets/svg/vectorizer/pr-packet.json"
+    },
+    {
+      "package_key": "gis/read-gis-data",
+      "canonical_url": "https://products.aspose.net/gis/read-gis-data/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave14",
+      "pr_packet": "publication/pr-packets/gis/read-gis-data/pr-packet.json"
+    },
+    {
+      "package_key": "tex/convert-latex-to-pdf",
+      "canonical_url": "https://products.aspose.net/tex/convert-latex-to-pdf/",
+      "url_verification": "URL_ACCESS_BLOCKED_403",
+      "output_validation": "PASS",
+      "wave": "wave14",
+      "pr_packet": "publication/pr-packets/tex/convert-latex-to-pdf/pr-packet.json"
+    }
+  ],
+  "url_confirmation_summary": {
+    "CURRENT_CANONICAL_CONFIRMED": 5,
+    "URL_ACCESS_BLOCKED_403": 9
+  },
+  "packages_by_wave": {
+    "wave11": 10,
+    "wave12": 2,
+    "wave14": 2
+  },
+  "publication_gate": "HUMAN_APPROVAL_REQUIRED_FOR_PR_PUSH",
+  "publication_gate_note": "No PR has been pushed. All packets are dry-run records. Actual git push and PR creation require explicit user authorization."
+}

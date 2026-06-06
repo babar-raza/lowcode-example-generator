@@ -1,0 +1,55 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "lane": "D",
+  "date": "2026-06-06",
+  "policy": "Correct canonical_url format from /net/ infix to canonical-primary (no /net/) based on Wave 15 Lane C browser verification. Root page confirms canonical format: https://products.aspose.net/{family}/{slug}/",
+  "url_format_change": {
+    "from": "https://products.aspose.net/{family}/net/{slug}",
+    "to": "https://products.aspose.net/{family}/{slug}/",
+    "evidence": "canonical-verification/root-link-inventory.json + current-canonical-url-resolution.json"
+  },
+  "registry_state_before": {
+    "total": 67,
+    "civ": 66,
+    "mcu": 1,
+    "sar": 0
+  },
+  "registry_state_after": {
+    "total": 67,
+    "civ": 66,
+    "mcu": 1,
+    "sar": 0,
+    "note": "No identity_status changes in this wave — only canonical_url format corrected"
+  },
+  "url_corrections": [
+    {"family": "cad", "slug": "convert-cad-to-pdf", "before": "https://products.aspose.net/cad/net/convert-cad-to-pdf", "after": "https://products.aspose.net/cad/convert-cad-to-pdf/"},
+    {"family": "cad", "slug": "convert-dwg-to-pdf", "before": "https://products.aspose.net/cad/net/convert-dwg-to-pdf", "after": "https://products.aspose.net/cad/convert-dwg-to-pdf/"},
+    {"family": "cad", "slug": "convert-dxf-to-pdf", "before": "https://products.aspose.net/cad/net/convert-dxf-to-pdf", "after": "https://products.aspose.net/cad/convert-dxf-to-pdf/"},
+    {"family": "cad", "slug": "convert-cad-to-image", "before": "https://products.aspose.net/cad/net/convert-cad-to-image", "after": "https://products.aspose.net/cad/convert-cad-to-image/"},
+    {"family": "cad", "slug": "convert-dwg-to-jpg", "before": "https://products.aspose.net/cad/net/convert-dwg-to-jpg", "after": "https://products.aspose.net/cad/convert-dwg-to-jpg/"},
+    {"family": "finance", "slug": "parse-xbrl", "before": "https://products.aspose.net/finance/net/parse-xbrl", "after": "https://products.aspose.net/finance/parse-xbrl/"},
+    {"family": "font", "slug": "convert-font", "before": "https://products.aspose.net/font/net/convert-font", "after": "https://products.aspose.net/font/convert-font/"},
+    {"family": "font", "slug": "render-text-with-font", "before": "https://products.aspose.net/font/net/render-text-with-font", "after": "https://products.aspose.net/font/render-text-with-font/"},
+    {"family": "gis", "slug": "convert-gis-data", "before": "https://products.aspose.net/gis/net/convert-gis-data", "after": "https://products.aspose.net/gis/convert-gis-data/"},
+    {"family": "gis", "slug": "read-gis-data", "before": "https://products.aspose.net/gis/net/read-gis-data/", "after": "https://products.aspose.net/gis/read-gis-data/"},
+    {"family": "html", "slug": "convert-html-to-xps", "before": "https://products.aspose.net/html/net/convert-html-to-xps", "after": "https://products.aspose.net/html/convert-html-to-xps/"},
+    {"family": "html", "slug": "convert-html-to-markdown", "before": "https://products.aspose.net/html/net/convert-html-to-markdown", "after": "https://products.aspose.net/html/convert-html-to-markdown/"},
+    {"family": "html", "slug": "merge-html", "before": "https://products.aspose.net/html/net/merge-html", "after": "https://products.aspose.net/html/merge-html/"},
+    {"family": "omr", "slug": "recognize-omr", "before": "https://products.aspose.net/omr/net/recognize-omr", "after": "https://products.aspose.net/omr/recognize-omr/"},
+    {"family": "omr", "slug": "generate-omr-template", "before": "https://products.aspose.net/omr/net/generate-omr-template", "after": "https://products.aspose.net/omr/generate-omr-template/"},
+    {"family": "psd", "slug": "convert-psd-to-png", "before": "https://products.aspose.net/psd/net/convert-psd-to-png", "after": "https://products.aspose.net/psd/convert-psd-to-png/"},
+    {"family": "svg", "slug": "merge-svg", "before": "https://products.aspose.net/svg/net/merge-svg", "after": "https://products.aspose.net/svg/merge-svg/"},
+    {"family": "tasks", "slug": "read-project-data", "before": "https://products.aspose.net/tasks/net/read-project-data", "after": "https://products.aspose.net/tasks/read-project-data/"},
+    {"family": "tex", "slug": "convert-latex-to-pdf", "before": "https://products.aspose.net/tex/net/convert-latex-to-pdf", "after": "https://products.aspose.net/tex/convert-latex-to-pdf/"},
+    {"family": "threed", "slug": "convert-3d-model", "before": "https://products.aspose.net/threed/net/convert-3d-model", "after": "https://products.aspose.net/threed/convert-3d-model/"},
+    {"family": "threed", "slug": "compress-3d-scene", "before": "https://products.aspose.net/threed/net/compress-3d-scene", "after": "https://products.aspose.net/threed/compress-3d-scene/"}
+  ],
+  "barcode_mcu_update": {
+    "entry": "barcode/read-barcode",
+    "change": "page_source_status updated to SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED",
+    "note": "Browser confirmed: read-barcode slug does not exist; maps to 1d-barcode-reader AND 2d-barcode-reader. MCU retained."
+  },
+  "no_identity_status_changes": true,
+  "corrections_total": 21,
+  "verdict": "REGISTRY_URL_FORMAT_CORRECTION_COMPLETE"
+}

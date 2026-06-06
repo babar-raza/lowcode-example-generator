@@ -1,0 +1,22 @@
+{
+  "package_key": "svg/svg-to-pdf-converter",
+  "family": "svg",
+  "plugin_slug": "svg-to-pdf-converter",
+  "display_plugin_name": "SVG to PDF Converter for .NET",
+  "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+  "canonical_url_verification": "CURRENT_CANONICAL_CONFIRMED",
+  "canonical_url_verification_method": "products.aspose.net/svg/svg-to-pdf-converter/ directly fetched ACTIVE in Lane C Wave 15 sprint (root-link-inventory.json, current-canonical-url-resolution.json)",
+  "registry_status": "CANONICAL_PACKAGE_PROVEN",
+  "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/svg-to-pdf-converter",
+  "canonical_package_wave": "wave12",
+  "canonical_package_proven_at": "2026-06-06",
+  "output_validation_status": "PASS",
+  "output_validation_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/svg-to-pdf-converter/output-validation.json",
+  "pr_title": "feat(svg): add svg-to-pdf-converter canonical example package",
+  "pr_branch": "feat/svg-svg-to-pdf-converter",
+  "pr_target_dir": "workspace/examples/svg/svg-to-pdf-converter",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "blockers": [],
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "generated_at": "2026-06-06"
+}

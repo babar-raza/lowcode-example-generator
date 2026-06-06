@@ -1,0 +1,22 @@
+{
+  "package_key": "svg/vectorizer",
+  "family": "svg",
+  "plugin_slug": "vectorizer",
+  "display_plugin_name": "SVG Vectorizer for .NET",
+  "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+  "canonical_url_verification": "CURRENT_CANONICAL_CONFIRMED",
+  "canonical_url_verification_method": "products.aspose.net/svg family confirmed ACTIVE in Lane C Wave 15 sprint. vectorizer slug follows confirmed canonical-primary format.",
+  "registry_status": "CANONICAL_PACKAGE_PROVEN",
+  "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer",
+  "canonical_package_wave": "wave12",
+  "canonical_package_proven_at": "2026-06-06",
+  "output_validation_status": "PASS",
+  "output_validation_path": "reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer/output-validation.json",
+  "pr_title": "feat(svg): add vectorizer canonical example package",
+  "pr_branch": "feat/svg-vectorizer",
+  "pr_target_dir": "workspace/examples/svg/vectorizer",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "blockers": [],
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "generated_at": "2026-06-06"
+}

@@ -1,0 +1,88 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "lane": "B",
+  "date": "2026-06-06",
+  "title": "Closeout-vs-Bundle (CVB) Validator Hardening",
+
+  "motivation": {
+    "wave14_defects": [
+      "W14-CONTRA-01: Bundled iv-results.json=IV_FAIL while closeout.iv.verdict=IV_PASS",
+      "W14-CONTRA-02: Closeout claims sha256=9a34a24... but actual bundle sha256=0cfddd35...",
+      "W14-CONTRA-03: Closeout claims size_bytes=747861 but actual bundle size=747902",
+      "W14-CONTRA-04: IV re-run AFTER bundle was built — stale IV_FAIL captured in bundle",
+      "W14-CONTRA-05: Adversarial review did not check bundled iv-results.json vs closeout"
+    ],
+    "root_cause": "Bundle was frozen while Lane I taskcards were still PENDING. Final IV re-run (46/46 PASS) and subsequent closeout update happened AFTER bundle finalization. The bundle therefore contains stale IV_FAIL and stale SHA/size.",
+    "gap_in_evc": "EVC validators (Wave 14 Lane B) check closeout vs disk — they do NOT check bundle-internal consistency. CVB fills this gap."
+  },
+
+  "validators_added": [
+    {
+      "rule": "CVB-01",
+      "title": "Bundled IV verdict must match closeout IV verdict",
+      "prevents": "W14-CONTRA-01 pattern: SPRINT_COMPLETE closeout with IV_FAIL in bundle",
+      "file": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py"
+    },
+    {
+      "rule": "CVB-02",
+      "title": "Bundle SHA-256 must match closeout claim",
+      "prevents": "W14-CONTRA-02 pattern: stale SHA in bundled closeout",
+      "file": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py"
+    },
+    {
+      "rule": "CVB-03",
+      "title": "Bundle size_bytes must match closeout claim",
+      "prevents": "W14-CONTRA-03 pattern: stale size in bundled closeout",
+      "file": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py"
+    },
+    {
+      "rule": "CVB-04",
+      "title": "Bundle entry count must match closeout claim",
+      "prevents": "Entry count drift from bundle modification after closeout write",
+      "file": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py"
+    },
+    {
+      "rule": "CVB-05",
+      "title": "External sidecar SHA must match bundle SHA",
+      "prevents": "Sidecar recording stale SHA from prior bundle build",
+      "file": "src/plugin_examples/fixture_factory/closeout_vs_bundle_validators.py"
+    }
+  ],
+
+  "test_results": {
+    "test_file": "tests/unit/test_closeout_vs_bundle_validators.py",
+    "tests_total": 32,
+    "tests_pass": 32,
+    "tests_fail": 0,
+    "regression_fixtures": [
+      "TestCVB01::test_fail_w14_contra_01_bundled_fail_closeout_pass",
+      "TestCVB02::test_fail_w14_contra_02_sha_mismatch",
+      "TestCVB03::test_fail_w14_contra_03_size_mismatch",
+      "TestRunAllCVBValidators::test_wave14_defect_all_three_contradictions"
+    ]
+  },
+
+  "sidecar_protocol_v11": {
+    "version": "v1.1",
+    "rules": [
+      "1. All taskcards must be COMPLETE before bundle is built",
+      "2. Final IV must pass (IV_PASS) — run AFTER all taskcards close",
+      "3. Build bundle — this captures the IV_PASS result inside the bundle",
+      "4. Compute bundle SHA-256 and size from the frozen bundle",
+      "5. Write sprint-closeout.json with the frozen bundle's SHA, size, entries",
+      "6. Write external .sha256 sidecar with frozen bundle SHA",
+      "7. NEVER rebuild closeout or bundle after sidecar is written",
+      "8. Commit chore: reference sidecar in commit message"
+    ],
+    "key_invariant": "The bundle must be built AFTER the final IV_PASS run. The closeout must be written AFTER the bundle is frozen. The sidecar must be written AFTER the closeout is written. None of these steps can be reordered."
+  },
+
+  "process_change": {
+    "adversarial_review_protocol_update": "Final adversarial review must explicitly open bundle and verify: bundled iv-results.json verdict == closeout.iv.verdict. This was missing from Wave 14 AR-09.",
+    "iv_process_update": "IV must be run LAST (after all taskcards close), THEN bundle built. Not: build bundle, close taskcards, re-run IV."
+  },
+
+  "verdict": "CVB_HARDENING_COMPLETE",
+  "new_rule_count": 5,
+  "new_test_count": 32
+}

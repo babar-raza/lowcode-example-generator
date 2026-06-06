@@ -1,0 +1,15 @@
+{
+  "package_key": "psd/convert-psd-to-png",
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "generated_at": "2026-06-06",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output/output.png",
+      "size": 2013
+    }
+  ],
+  "verdict": "PASS"
+}

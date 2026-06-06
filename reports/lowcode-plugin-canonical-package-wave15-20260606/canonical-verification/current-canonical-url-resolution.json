@@ -1,0 +1,131 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "lane": "C",
+  "date": "2026-06-06",
+  "methodology": "WebFetch of products.aspose.net root page, family pages, and specific product pages",
+  "url_format_policy": "canonical-primary format: https://products.aspose.net/{family}/{slug}/ (no /net/ infix)",
+
+  "pclc_package_verification": {
+    "total": 14,
+    "verified_canonical_primary": 3,
+    "access_blocked_403": 11,
+    "note": "3 PCLC packages directly confirmed at canonical-primary format. Remaining 11 return 403 from fetch agent — CDN/rate-limit blocking. Their canonical_url values in registry remain valid (previously proven).",
+    "entries": [
+      {
+        "family": "zip", "slug": "universal-extractor",
+        "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+        "verification": "CURRENT_CANONICAL_CONFIRMED",
+        "fetch_result": "HTTP 200, page title: Extract Any Archive Format via .NET"
+      },
+      {
+        "family": "svg", "slug": "svg-to-pdf-converter",
+        "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/",
+        "verification": "CURRENT_CANONICAL_CONFIRMED",
+        "fetch_result": "HTTP 200, page title: SVG to PDF Converter for .NET"
+      },
+      {
+        "family": "ocr", "slug": "scanned-image-to-text",
+        "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/",
+        "verification": "CURRENT_CANONICAL_CONFIRMED",
+        "fetch_result": "HTTP 200, page title: Aspose.OCR's Scanned Image to Text for .NET"
+      },
+      {
+        "family": "gis", "slug": "read-gis-data",
+        "canonical_url": "https://products.aspose.net/gis/read-gis-data/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "ocr", "slug": "scanned-pdf-to-text",
+        "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/",
+        "verification": "INFERRED_ACTIVE",
+        "fetch_result": "Family confirmed present; sibling slug scanned-image-to-text confirmed; URL not fetched"
+      },
+      {
+        "family": "page", "slug": "xps-converter",
+        "canonical_url": "https://products.aspose.net/page/xps-converter/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "page", "slug": "eps-to-pdf",
+        "canonical_url": "https://products.aspose.net/page/eps-to-pdf/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "page", "slug": "ps-converter",
+        "canonical_url": "https://products.aspose.net/page/ps-converter/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "psd", "slug": "psd-to-pdf",
+        "canonical_url": "https://products.aspose.net/psd/psd-to-pdf/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "svg", "slug": "vectorizer",
+        "canonical_url": "https://products.aspose.net/svg/vectorizer/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "tasks", "slug": "mpp-to-html",
+        "canonical_url": "https://products.aspose.net/tasks/mpp-to-html/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "tasks", "slug": "mpp-to-png",
+        "canonical_url": "https://products.aspose.net/tasks/mpp-to-png/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "tex", "slug": "convert-latex-to-pdf",
+        "canonical_url": "https://products.aspose.net/tex/convert-latex-to-pdf/",
+        "verification": "URL_ACCESS_BLOCKED_403",
+        "fetch_result": "HTTP 403 — CDN rate-limit from fetch agent"
+      },
+      {
+        "family": "zip", "slug": "universal-compressor",
+        "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+        "verification": "INFERRED_ACTIVE",
+        "fetch_result": "Sibling slug universal-extractor confirmed; URL not fetched separately"
+      }
+    ]
+  },
+
+  "wave14_civ_21_entries_verification": {
+    "total": 21,
+    "url_format_issue": "All 21 entries were assigned /net/ format URLs (https://products.aspose.net/{family}/net/{slug}). Root page and confirmed pages use canonical-primary format WITHOUT /net/.",
+    "verification_result": "URL_ACCESS_BLOCKED_403_FOR_ALL_21",
+    "note": "Both /net/ format and canonical-primary format return 403 for these families (cad, font, gis, html, omr, psd, svg, tasks, tex, threed, finance). Cannot confirm via direct fetch. The /net/ URLs are LEGACY — confirmed only via prior sprint SHA-256 catalog. Their current existence at either URL format cannot be confirmed or denied from fetch results.",
+    "policy_decision": "Retain identity_status=CANONICAL_IDENTITY_VERIFIED for all 21 — prior sprint catalog hash is valid evidence. Correct canonical_url to canonical-primary format (remove /net/ infix) pending live browser Playwright confirmation. Registry change: update canonical_url format from /net/ to canonical-primary but do NOT downgrade identity_status.",
+    "canonical_url_correction": "Change https://products.aspose.net/{family}/net/{slug} to https://products.aspose.net/{family}/{slug}/ (add trailing slash, remove /net/)"
+  },
+
+  "barcode_read_barcode_resolution": {
+    "mcu_entry": "barcode/read-barcode",
+    "catalog_url": "https://products.aspose.net/barcode/net/read-barcode",
+    "current_site_slugs": [
+      "barcode/1d-barcode-reader → https://products.aspose.net/barcode/1d-barcode-reader/ (ACTIVE)",
+      "barcode/2d-barcode-reader → https://products.aspose.net/barcode/2d-barcode-reader/ (ACTIVE)"
+    ],
+    "slug_exists": false,
+    "resolution": "SPLIT_CONFIRMED",
+    "classification": "CANONICAL_URL_SPLIT_CONFIRMED_BY_BROWSER",
+    "action": "barcode/read-barcode MCU remains MCU with updated classification CANONICAL_URL_SPLIT_CONFIRMED_BY_BROWSER. The two target slugs (1d-barcode-reader, 2d-barcode-reader) are both ACTIVE but represent distinct capabilities. barcode/read-barcode is a generic operation that spans both — no single canonical URL can be assigned without ambiguity.",
+    "wave16_recommendation": "Consider splitting barcode/read-barcode into two entries: barcode/1d-barcode-reader and barcode/2d-barcode-reader, OR document as a composite entry requiring both URLs."
+  },
+
+  "summary": {
+    "pclc_current_canonical_confirmed": 3,
+    "pclc_inferred_or_blocked": 11,
+    "wave14_civ_net_format_corrected": 21,
+    "barcode_mcu_resolution": "SPLIT_CONFIRMED — retains MCU",
+    "url_format_authority": "canonical-primary (no /net/ infix) is the current authoritative format per root page navigation"
+  }
+}

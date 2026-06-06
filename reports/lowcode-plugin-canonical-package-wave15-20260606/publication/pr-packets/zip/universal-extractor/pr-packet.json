@@ -1,0 +1,22 @@
+{
+  "package_key": "zip/universal-extractor",
+  "family": "zip",
+  "plugin_slug": "universal-extractor",
+  "display_plugin_name": "ZIP Universal Extractor for .NET",
+  "canonical_url": "https://products.aspose.net/zip/universal-extractor/",
+  "canonical_url_verification": "CURRENT_CANONICAL_CONFIRMED",
+  "canonical_url_verification_method": "products.aspose.net/zip/universal-extractor/ directly fetched ACTIVE in Lane C Wave 15 sprint (root-link-inventory.json)",
+  "registry_status": "CANONICAL_PACKAGE_PROVEN",
+  "canonical_package_path": "reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/zip/universal-extractor",
+  "canonical_package_wave": "wave11",
+  "canonical_package_proven_at": "2026-06-05",
+  "output_validation_status": "PASS",
+  "output_validation_path": "reports/lowcode-plugin-canonical-package-wave11-20260605/wave11-dryrun/examples/zip/universal-extractor/output-validation.json",
+  "pr_title": "feat(zip): add universal-extractor canonical example package",
+  "pr_branch": "feat/zip-universal-extractor",
+  "pr_target_dir": "workspace/examples/zip/universal-extractor",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "blockers": [],
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "generated_at": "2026-06-06"
+}

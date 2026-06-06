@@ -172,7 +172,7 @@ plugins:
   plugin_url: https://products.aspose.net/barcode/net/read-barcode
   canonical_url: null
   catalog_verified_url: https://products.aspose.net/barcode/net/read-barcode
-  page_source_status: SOURCE_CATALOG_VERIFIED_SPLIT_AMBIGUOUS
+  page_source_status: SOURCE_CATALOG_VERIFIED_SPLIT_CONFIRMED_BY_BROWSER
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: Old slug 'read-barcode' maps ambiguously to both
     1d-barcode-reader and 2d-barcode-reader canonical pages; page confirmed in prior

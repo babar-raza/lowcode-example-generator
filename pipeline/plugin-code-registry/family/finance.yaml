@@ -38,8 +38,8 @@ plugins:
 - plugin_slug: parse-xbrl
   canonical_plugin_slug: parse-xbrl
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/finance/net/parse-xbrl
-  canonical_url: https://products.aspose.net/finance/net/parse-xbrl
+  plugin_url: https://products.aspose.net/finance/parse-xbrl/
+  canonical_url: https://products.aspose.net/finance/parse-xbrl/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: dad9f1361828ca2a
   registry_status: NEEDS_MANUAL_MAPPING

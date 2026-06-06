@@ -10,8 +10,8 @@ implementation_model: LOAD_SAVE_OPTIONS
 plugins:
   - plugin_slug: convert-cad-to-pdf
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/net/convert-cad-to-pdf
-    canonical_url: https://products.aspose.net/cad/net/convert-cad-to-pdf
+    plugin_url: https://products.aspose.net/cad/convert-cad-to-pdf/
+    canonical_url: https://products.aspose.net/cad/convert-cad-to-pdf/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: f6cbaaeed3859d1b
     registry_status: CODE_HARVESTED
@@ -41,8 +41,8 @@ plugins:
 
   - plugin_slug: convert-dwg-to-pdf
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/net/convert-dwg-to-pdf
-    canonical_url: https://products.aspose.net/cad/net/convert-dwg-to-pdf
+    plugin_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
+    canonical_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 8159951a04a245cb
     registry_status: CODE_HARVESTED
@@ -72,8 +72,8 @@ plugins:
 
   - plugin_slug: convert-dxf-to-pdf
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/net/convert-dxf-to-pdf
-    canonical_url: https://products.aspose.net/cad/net/convert-dxf-to-pdf
+    plugin_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
+    canonical_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: eaf327c214bcd274
     registry_status: CODE_HARVESTED
@@ -101,8 +101,8 @@ plugins:
 
   - plugin_slug: convert-cad-to-image
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/net/convert-cad-to-image
-    canonical_url: https://products.aspose.net/cad/net/convert-cad-to-image
+    plugin_url: https://products.aspose.net/cad/convert-cad-to-image/
+    canonical_url: https://products.aspose.net/cad/convert-cad-to-image/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: cb2d790dacfa48be
     registry_status: CODE_HARVESTED
@@ -135,8 +135,8 @@ plugins:
 
   - plugin_slug: convert-dwg-to-jpg
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/net/convert-dwg-to-jpg
-    canonical_url: https://products.aspose.net/cad/net/convert-dwg-to-jpg
+    plugin_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
+    canonical_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: 6970b9174150d268
     registry_status: NEEDS_MANUAL_MAPPING

@@ -5,8 +5,8 @@ implementation_model: LOAD_SAVE_OPTIONS
 plugins:
 - plugin_slug: convert-gis-data
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/gis/net/convert-gis-data
-  canonical_url: https://products.aspose.net/gis/net/convert-gis-data
+  plugin_url: https://products.aspose.net/gis/convert-gis-data/
+  canonical_url: https://products.aspose.net/gis/convert-gis-data/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 8660acdb24605901
   registry_status: NEEDS_MANUAL_MAPPING
@@ -39,7 +39,7 @@ plugins:
   canonical_plugin_slug: read-gis-data
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/gis/net/read-gis-data
-  canonical_url: https://products.aspose.net/gis/net/read-gis-data/
+  canonical_url: https://products.aspose.net/gis/read-gis-data/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: eb35e5e27e549069
   registry_status: CANONICAL_PACKAGE_PROVEN

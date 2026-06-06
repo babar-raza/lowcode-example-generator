@@ -10,8 +10,8 @@ implementation_model: LOAD_SAVE_OPTIONS
 plugins:
   - plugin_slug: convert-3d-model
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/threed/net/convert-3d-model
-    canonical_url: https://products.aspose.net/threed/net/convert-3d-model
+    plugin_url: https://products.aspose.net/threed/convert-3d-model/
+    canonical_url: https://products.aspose.net/threed/convert-3d-model/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: c52ae85003fd7044
     registry_status: NEEDS_MANUAL_MAPPING
@@ -45,8 +45,8 @@ plugins:
 
   - plugin_slug: compress-3d-scene
     identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/threed/net/compress-3d-scene
-    canonical_url: https://products.aspose.net/threed/net/compress-3d-scene
+    plugin_url: https://products.aspose.net/threed/compress-3d-scene/
+    canonical_url: https://products.aspose.net/threed/compress-3d-scene/
     page_source_status: SOURCE_CATALOG_VERIFIED
     page_hash: fe228ef9674ca4dd
     registry_status: NEEDS_MANUAL_MAPPING

@@ -1,0 +1,24 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave14-20260606",
+  "rerun_date": "2026-06-06",
+  "rerun_occasion": "Wave 15 Lane A — Wave 14 closure repair",
+  "iv_script": "reports/lowcode-plugin-canonical-package-wave14-20260606/iv/_run_iv.py",
+  "iv_rerun_verdict": "IV_PASS",
+  "iv_checks_total": 46,
+  "iv_checks_pass": 46,
+  "iv_checks_fail": 0,
+  "disk_iv_verdict": "IV_PASS",
+  "disk_iv_pass": 46,
+  "disk_iv_fail": 0,
+  "bundled_iv_verdict": "IV_FAIL",
+  "bundled_iv_pass": 45,
+  "bundled_iv_fail": 1,
+  "bundled_failing_check": "IV-07: Wave 14 taskcards: 0 PENDING — 9 unclosed Lane I taskcards at bundle capture time",
+  "disk_taskcard_state": {
+    "total": 50,
+    "complete": 50,
+    "pending": 0
+  },
+  "verdict": "DISK_IV_PASS_BUNDLE_STALE_IV_FAIL",
+  "note": "Wave 14 disk state is correct (IV_PASS, 0 PENDING taskcards). The bundle captured iv-results.json before the final IV re-run. The bundle is stale with respect to IV. This is the root cause of W14-CONTRA-01."
+}

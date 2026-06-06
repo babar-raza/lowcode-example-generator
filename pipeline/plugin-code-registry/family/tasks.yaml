@@ -132,8 +132,8 @@ plugins:
 - plugin_slug: read-project-data
   canonical_plugin_slug: read-project-data
   identity_status: CANONICAL_IDENTITY_VERIFIED
-  plugin_url: https://products.aspose.net/tasks/net/read-project-data
-  canonical_url: https://products.aspose.net/tasks/net/read-project-data
+  plugin_url: https://products.aspose.net/tasks/read-project-data/
+  canonical_url: https://products.aspose.net/tasks/read-project-data/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 3fc4bed1f635537e
   registry_status: NEEDS_MANUAL_MAPPING

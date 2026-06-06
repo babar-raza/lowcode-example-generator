@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="100"><text y="15" style="font-family:Times New Roman; font-size:15px; fill:red;" >Evaluation Only. Created with Aspose.SVG. Copyright 2018-2024 Aspose Pty Ltd.</text>
+  <g transform="translate(0,0)">
+<circle cx="50" cy="50" r="40" fill="blue"/>
+  <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">SVG1</text>
+  </g>
+  <g transform="translate(110,0)">
+<rect x="10" y="10" width="80" height="80" fill="red"/>
+  <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">SVG2</text>
+  </g>
+</svg>

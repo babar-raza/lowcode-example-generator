@@ -1,0 +1,24 @@
+{
+  "artifact_type": "BLOCKERS_BY_PACKAGE",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "total_blocked": 2,
+  "blockers": [
+    {
+      "package": "cad/convert-dwg-to-pdf",
+      "blocker_class": "FIXTURE_BLOCKED",
+      "blocker_detail": "DWG is binary proprietary format (Autodesk). Cannot hand-craft minimal text fixture. Requires real DWG file from external source.",
+      "resolution_path": "Download public-domain minimal DWG file and use as fixture in W19.",
+      "external_gate": false,
+      "local_resolution_possible": true
+    },
+    {
+      "package": "cad/convert-dwg-to-jpg",
+      "blocker_class": "FIXTURE_BLOCKED",
+      "blocker_detail": "Same as convert-dwg-to-pdf: DWG binary format requires external fixture file.",
+      "resolution_path": "Same DWG fixture as convert-dwg-to-pdf; reuse Program.cs with JpegOptions.",
+      "external_gate": false,
+      "local_resolution_possible": true
+    }
+  ]
+}

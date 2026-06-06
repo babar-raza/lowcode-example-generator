@@ -1,0 +1,20 @@
+{
+  "package": "finance/parse-xbrl",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.Finance 24.12.0",
+  "canonical_url": "https://products.aspose.net/finance/parse-xbrl/",
+  "api_used": "XbrlDocument(path) + doc.XbrlInstances[0].Contexts + doc.XbrlInstances[0].Units",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "fixture": "fixtures/minimal-xbrl.xml (hand-crafted offline XBRL with 1 context, 1 USD unit)",
+  "output_files": [
+    {"path": "output/parse-result.txt", "role": "parsed XBRL context/unit counts"}
+  ],
+  "output_validation_status": "PASS",
+  "output_marker_check": "parse-result.txt contains 'Contexts: 1, Units: 1'",
+  "w16_w17_blocker_resolution": "Previous blocker was IFRS taxonomy network fetch when loading SEC/IFRS files. Local fixture without external taxonomy references works offline. NETWORK_DEPENDENCY_BLOCKED was premature — re-classified as FIXTURE_REQUIRED (offline fixture now provided).",
+  "proven_wave": "W18",
+  "pclc_eligible": true
+}

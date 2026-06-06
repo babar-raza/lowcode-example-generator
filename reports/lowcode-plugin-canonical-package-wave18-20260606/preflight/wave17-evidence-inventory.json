@@ -1,0 +1,43 @@
+{
+  "artifact_type": "WAVE17_EVIDENCE_INVENTORY",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "inspected_sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.zip",
+  "bundle_sha256_observed": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+  "bundle_size_bytes": 61586,
+  "bundle_entry_count": 59,
+  "bundle_sha256_matches_reviewer": true,
+  "bundle_sha256_matches_disk": true,
+  "taskcards_in_bundle": {
+    "total_field": 51,
+    "actual_array_count": 51,
+    "complete_count": 47,
+    "pending_count": 4,
+    "pending_ids": ["W17-L0-05", "W17-L0-06", "W17-L0-07", "W17-LG-05"],
+    "total_field_accurate": true,
+    "note": "51 total field is ACCURATE (51 in array). But 47/51 COMPLETE, 4 PENDING. taskcards.json on disk shows 51/51 because disk was updated AFTER bundle freeze."
+  },
+  "sprint_closeout_in_bundle": false,
+  "final_attestation_in_bundle": false,
+  "external_sidecar_in_bundle": false,
+  "pr_packets_in_bundle": 20,
+  "package_logs_in_bundle": {
+    "threed_convert_3d_model": ["restore.log", "build.log", "run.log"],
+    "font_convert_font": ["restore.log", "build.log", "run.log"]
+  },
+  "git_status_in_bundle": false,
+  "pytest_raw_log_in_bundle": true,
+  "pytest_result_in_bundle": "3828 passed, 18 skipped, 0 failures",
+  "iv_verdict_in_bundle": "IV_PASS (16/16 checks)",
+  "adversarial_review_in_bundle": "ADVERSARIAL_REVIEW_PASS (12/12 checks)",
+  "findings": [
+    "FINDING-01: 4 of 51 taskcards PENDING in bundle (W17-L0-05, L0-06, L0-07, LG-05). sprint_status=IN_PROGRESS in bundle context.",
+    "FINDING-02: No sprint-closeout.json inside bundle. Disk version exists but was written post-freeze and overclaims 51/51 COMPLETE.",
+    "FINDING-03: No final-attestation.json inside bundle. Disk version exists but is external to bundle.",
+    "FINDING-04: No external .sha256 sidecar was included in the uploaded bundle (correct per v2 protocol — sidecar is external to bundle by design, but sidecar must exist on disk for v2 compliance).",
+    "FINDING-05: pclc_total=22 in state docs but unified-20-pclc-readiness-v2.json covers only 20 packages. threed/convert-3d-model and font/convert-font are proven but have no PR packets.",
+    "FINDING-06: Real package advancement is genuine: 2 packages proven (threed, font) with logs, 16 validators added, 3828 tests passed."
+  ],
+  "classification": "WAVE17_PROGRESS_ACCEPTED_WITH_REAL_ADVANCEMENT_BUT_INCOMPLETE_FINAL_ATTESTATION_AND_22_PCLC_RECONCILIATION_GAP"
+}

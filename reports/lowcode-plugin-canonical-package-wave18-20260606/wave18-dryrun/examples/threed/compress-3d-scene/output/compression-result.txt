@@ -1,0 +1,3 @@
+Compressed GLB binary:        7796 bytes
+Uncompressed FBX ASCII:      25615 bytes
+Size ratio (GLB/FBX):      30.4%

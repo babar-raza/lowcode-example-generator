@@ -1,0 +1,16 @@
+{
+  "artifact_type": "WAVE17_SIDECAR_ATTESTATION_REVIEW",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "sidecar_path_claimed": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.sha256",
+  "sidecar_exists_on_disk": true,
+  "sidecar_sha256_on_disk": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+  "bundle_sha256_actual": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+  "sidecar_sha_matches_bundle": true,
+  "final_attestation_path_claimed": "reports/lowcode-plugin-canonical-package-wave17-20260606/final/final-attestation.json",
+  "final_attestation_exists_on_disk": true,
+  "final_attestation_sha_claim": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+  "attestation_sha_matches_bundle": true,
+  "inside_bundle_has_attestation": false,
+  "review_verdict": "W17 sidecar and attestation exist on disk and SHA matches actual bundle. They were not uploaded in the bundle (correct per v2 protocol — external to bundle). The gap is that sprint_status=IN_PROGRESS inside the bundle (no sprint-closeout.json inside bundle). W18 addendum resolves this."
+}

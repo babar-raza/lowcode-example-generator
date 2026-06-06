@@ -1,0 +1,25 @@
+{
+  "artifact_type": "PR_PACKET",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE18-FINISH-LINE-MEGA-TRAIN-PUBLICATION-PACKAGE-CONSUMPTION-001",
+  "date": "2026-06-06",
+  "family": "cad",
+  "slug": "convert-cad-to-pdf",
+  "canonical_url": "https://products.aspose.net/cad/convert-cad-to-pdf/",
+  "proven_wave": "W18",
+  "pr_title": "feat(lowcode): add cad/convert-cad-to-pdf low-code example",
+  "pr_branch": "lowcode/cad/convert-cad-to-pdf",
+  "pr_body": "Adds the canonical low-code C# example for cad/convert-cad-to-pdf.\n\nCanonical URL: https://products.aspose.net/cad/convert-cad-to-pdf/\nProven in: W18",
+  "pr_packet_exists": true,
+  "pr_packet_wave": "W18",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "output_validation_status": "PASS",
+  "self_contained": true,
+  "execution_steps": [
+    "git checkout -b lowcode/cad/convert-cad-to-pdf",
+    "# Copy proven package from w18-dryrun/examples/cad/convert-cad-to-pdf/ to target SDK repo path",
+    "git add <exact-package-files>",
+    "git commit -m \"feat(lowcode): add cad/convert-cad-to-pdf low-code example\"",
+    "gh pr create --title \"feat(lowcode): add cad/convert-cad-to-pdf low-code example\" --body \"Canonical: https://products.aspose.net/cad/convert-cad-to-pdf/\" --base main"
+  ]
+}

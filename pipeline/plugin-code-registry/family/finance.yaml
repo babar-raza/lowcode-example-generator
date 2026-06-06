@@ -42,7 +42,7 @@ plugins:
   canonical_url: https://products.aspose.net/finance/parse-xbrl/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: dad9f1361828ca2a
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
@@ -61,4 +61,12 @@ plugins:
   - date: '2026-06-06'
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
-      Page confirmed in prior sprint catalog (hash dad9f1361828ca2a). Upgraded MCU -> CIV.
+      Page confirmed in prior sprint catalog (hash dad9f1361828ca2a). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/finance/parse-xbrl

@@ -1,0 +1,29 @@
+{
+  "artifact_type": "REMAINING_BLOCKERS_FINAL",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "local_blockers": [
+    {
+      "package": "cad/convert-dwg-to-pdf",
+      "class": "FIXTURE_BLOCKED",
+      "resolution": "Provide DWG binary fixture file"
+    },
+    {
+      "package": "cad/convert-dwg-to-jpg",
+      "class": "FIXTURE_BLOCKED",
+      "resolution": "Same DWG fixture as above"
+    }
+  ],
+  "external_gates": [
+    {
+      "item": "Live PR push for 33 PCLC packages",
+      "gate": "HUMAN_APPROVAL + GH/GL credentials"
+    },
+    {
+      "item": "Merge/release of 6 existing open PRs",
+      "gate": "External reviewer approval"
+    }
+  ],
+  "total_local_blockers": 2,
+  "total_external_gates": 2
+}

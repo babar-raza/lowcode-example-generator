@@ -92,10 +92,10 @@ def test_build_readiness_matrix(loader):
 def test_family_registry_ready_plugins(loader):
     barcode = loader.all_families().get("barcode")
     assert barcode is not None
-    # Count READY + TRANSFORMED (wave A advanced 2 barcode entries to TRANSFORMED)
+    # Count READY + TRANSFORMED + CANONICAL_PACKAGE_PROVEN (W18 advanced 1d/2d readers to PROVEN)
     active = [p for p in barcode.plugins if p.registry_status in (
-        "READY_FOR_TRANSFORMATION", "TRANSFORMED_TO_EXAMPLE_DRYRUN")]
-    assert len(active) >= 4, "barcode should have at least 4 READY/TRANSFORMED entries"
+        "READY_FOR_TRANSFORMATION", "TRANSFORMED_TO_EXAMPLE_DRYRUN", "CANONICAL_PACKAGE_PROVEN")]
+    assert len(active) >= 4, "barcode should have at least 4 active entries (READY/TRANSFORMED/PROVEN)"
 
 
 def test_plugin_entry_is_fixture_free_for_barcode():

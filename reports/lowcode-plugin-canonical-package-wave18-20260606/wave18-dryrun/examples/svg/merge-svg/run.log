@@ -1,0 +1,3 @@
+Merged SVG saved: output/merged.svg (582 bytes)
+PDF render of merged SVG: output/merged.pdf (28192 bytes)
+merge-svg: PASS - two SVG documents merged into one 220x100 SVG with embedded groups

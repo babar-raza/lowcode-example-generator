@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "k+9wzKymOlo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\threed\\compress-3d-scene\\threed-compress-3d-scene.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prora\\.nuget\\packages\\aspose.3d\\24.12.0\\aspose.3d.24.12.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

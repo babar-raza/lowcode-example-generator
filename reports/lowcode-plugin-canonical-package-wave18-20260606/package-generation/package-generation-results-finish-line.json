@@ -1,0 +1,103 @@
+{
+  "artifact_type": "PACKAGE_GENERATION_RESULTS_FINISH_LINE",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "packages_attempted": 13,
+  "packages_proven": 11,
+  "packages_blocked": 2,
+  "w17_blocker_reclassifications": [
+    "finance/parse-xbrl: was NETWORK_DEPENDENCY_BLOCKED; offline fixture works \u2014 reclassified PROVEN",
+    "cad/convert-dxf-to-pdf: was FIXTURE_BLOCKED (assumed binary DXF); ASCII DXF R12 hand-crafted \u2014 reclassified PROVEN"
+  ],
+  "proven": [
+    {
+      "package": "barcode/1d-barcode-reader",
+      "status": "PROVEN",
+      "output": "output/fixture_barcode.png + output/result.txt"
+    },
+    {
+      "package": "barcode/2d-barcode-reader",
+      "status": "PROVEN",
+      "output": "output/fixture_qr.png + output/result.txt"
+    },
+    {
+      "package": "threed/compress-3d-scene",
+      "status": "PROVEN",
+      "output": "output/scene-compressed.glb (7796B) + output/scene-uncompressed.fbx (25615B)"
+    },
+    {
+      "package": "svg/merge-svg",
+      "status": "PROVEN",
+      "output": "output/merged.svg (582B) + output/merged.pdf (28192B)"
+    },
+    {
+      "package": "font/render-text-with-font",
+      "status": "PROVEN",
+      "output": "output/render-report.txt (glyph IDs for 12 chars)"
+    },
+    {
+      "package": "finance/parse-xbrl",
+      "status": "PROVEN",
+      "output": "output/parse-result.txt (1 context, 1 unit)",
+      "breakthrough": "offline fixture works"
+    },
+    {
+      "package": "cad/convert-dxf-to-pdf",
+      "status": "PROVEN",
+      "output": "output/output.pdf (38457B)",
+      "breakthrough": "ASCII DXF R12 fixture"
+    },
+    {
+      "package": "cad/convert-cad-to-pdf",
+      "status": "PROVEN",
+      "output": "output/cad-output.pdf (39089B)"
+    },
+    {
+      "package": "cad/convert-cad-to-image",
+      "status": "PROVEN",
+      "output": "output/cad-output.png (10988B)"
+    },
+    {
+      "package": "omr/generate-omr-template",
+      "status": "PROVEN",
+      "output": "output/template.omr + output/template.png"
+    },
+    {
+      "package": "omr/recognize-omr",
+      "status": "PROVEN",
+      "output": "output/recognition-result.csv (19B)"
+    }
+  ],
+  "blocked": [
+    {
+      "package": "cad/convert-dwg-to-pdf",
+      "status": "FIXTURE_BLOCKED",
+      "reason": "DWG is binary format; cannot hand-craft. Requires real DWG file from external source.",
+      "blocker_class": "FIXTURE_BLOCKED"
+    },
+    {
+      "package": "cad/convert-dwg-to-jpg",
+      "status": "FIXTURE_BLOCKED",
+      "reason": "DWG is binary format; same blocker as convert-dwg-to-pdf.",
+      "blocker_class": "FIXTURE_BLOCKED"
+    }
+  ],
+  "not_attempted_this_wave": [
+    {
+      "package": "barcode/1d-barcode-writer",
+      "reason": "TRANSFORMED_TO_EXAMPLE_DRYRUN \u2014 existing proof from prior wave; canonical proof deferred"
+    },
+    {
+      "package": "barcode/2d-barcode-writer",
+      "reason": "TRANSFORMED_TO_EXAMPLE_DRYRUN \u2014 existing proof from prior wave; canonical proof deferred"
+    },
+    {
+      "package": "cad/convert-dwg-to-jpg",
+      "reason": "FIXTURE_BLOCKED (DWG binary)"
+    },
+    {
+      "package": "cad/convert-dwg-to-pdf",
+      "reason": "FIXTURE_BLOCKED (DWG binary)"
+    }
+  ]
+}

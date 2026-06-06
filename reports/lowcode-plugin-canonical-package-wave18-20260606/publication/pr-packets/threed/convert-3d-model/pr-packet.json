@@ -1,0 +1,25 @@
+{
+  "artifact_type": "PR_PACKET",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE18-FINISH-LINE-MEGA-TRAIN-PUBLICATION-PACKAGE-CONSUMPTION-001",
+  "date": "2026-06-06",
+  "family": "threed",
+  "slug": "convert-3d-model",
+  "canonical_url": "https://products.aspose.net/threed/convert-3d-model/",
+  "proven_wave": "W17",
+  "pr_title": "feat(lowcode): add threed/convert-3d-model low-code example",
+  "pr_branch": "lowcode/threed/convert-3d-model",
+  "pr_body": "Adds the canonical low-code C# example for threed/convert-3d-model.\n\nCanonical URL: https://products.aspose.net/threed/convert-3d-model/\nProven in: W17",
+  "pr_packet_exists": true,
+  "pr_packet_wave": "W18",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "output_validation_status": "PASS",
+  "self_contained": true,
+  "execution_steps": [
+    "git checkout -b lowcode/threed/convert-3d-model",
+    "# Copy proven package from w17-dryrun/examples/threed/convert-3d-model/ to target SDK repo path",
+    "git add <exact-package-files>",
+    "git commit -m \"feat(lowcode): add threed/convert-3d-model low-code example\"",
+    "gh pr create --title \"feat(lowcode): add threed/convert-3d-model low-code example\" --body \"Canonical: https://products.aspose.net/threed/convert-3d-model/\" --base main"
+  ]
+}

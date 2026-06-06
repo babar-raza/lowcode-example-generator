@@ -1,0 +1,3 @@
+DXF loaded successfully
+PDF output: 38457 bytes
+Status: PASS

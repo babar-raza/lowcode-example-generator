@@ -1,90 +1,101 @@
-# Plugin-Code Registry: font
-# Generated: 2026-06-04
-# Sprint: lowcode-plugin-code-registry-20260604
-
 family: font
 package_id: Aspose.Font
 github_repo: https://github.com/aspose-font/Aspose.Font-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
-
 plugins:
-  - plugin_slug: convert-font
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/font/convert-font/
-    canonical_url: https://products.aspose.net/font/convert-font/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: 0a0f1f2f80a01f8f
-    registry_status: CANONICAL_PACKAGE_PROVEN
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    canonical_package_path: "reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font"
-    canonical_package_wave: wave17
-    canonical_package_proven_at: "2026-06-06"
-    code_hashes: []
-    namespaces_used:
-      - "Aspose.Font"
-      - "Aspose.Font.Sources"
-    classes_used:
-      - "Font"
-      - "FontDefinition"
-      - "FontType"
-      - "FontFileDefinition"
-      - "FileSystemStreamSource"
-    next_action: "Publish via PR packet lowcode/font/convert-font"
-    evaluation_note: "Eval mode restriction: Arial triggers LicenseRestrictionException; Source Code Pro (OFL) passes"
-    evidence_paths:
-      - "reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/output-validation.json"
-      - "reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/restore.log"
-      - "reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/build.log"
-      - "reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/run.log"
-    history:
-      - date: "2026-06-04"
-        status: NEEDS_MANUAL_MAPPING
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from RunExamples.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 0a0f1f2f80a01f8f). Upgraded MCU -> CIV."
-      - date: "2026-06-06"
-        status: CANONICAL_PACKAGE_PROVEN
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave17-20260606 Lane C. dotnet restore+build+run PASS. Output: font-info.txt (Family/Style/Glyphs). API: Font.Open(FontDefinition(FontType.TTF, FileSystemStreamSource)). Fixture: SourceCodePro-Regular.ttf (OFL)."
-
-  - plugin_slug: render-text-with-font
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/font/render-text-with-font/
-    canonical_url: https://products.aspose.net/font/render-text-with-font/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: 77a6bd8d0165f0d1
-    registry_status: CODE_HARVESTED
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: [8e4e741c1d933d164c4f8e805f9fe3b1]
-    namespaces_used:
-      - "Aspose.Font.RenderingPath"
-      - "Aspose.Font.Ttf"
-      - "Aspose.Font.Sources"
-      - "Aspose.Font.Rendering"
-    classes_used:
-      - "Font"
-      - "GlyphOutlinePainter"
-      - "FontDefinition"
-      - "FontFileDefinition"
-      - "Bitmap"
-      - "TransformationMatrix"
-      - "GraphicsPath"
-      - "FileSystemStreamSource"
-    github_links:
-      - https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs
-    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from RenderingText.cs and advance to READY_FOR_TRANSFORMATION"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/font.md"
-      - "https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: CODE_HARVESTED
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from RenderingText.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 77a6bd8d0165f0d1). Upgraded MCU -> CIV."
+- plugin_slug: convert-font
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/font/convert-font/
+  canonical_url: https://products.aspose.net/font/convert-font/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: 0a0f1f2f80a01f8f
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font
+  canonical_package_wave: wave17
+  canonical_package_proven_at: '2026-06-06'
+  code_hashes: []
+  namespaces_used:
+  - Aspose.Font
+  - Aspose.Font.Sources
+  classes_used:
+  - Font
+  - FontDefinition
+  - FontType
+  - FontFileDefinition
+  - FileSystemStreamSource
+  next_action: Publish via PR packet lowcode/font/convert-font
+  evaluation_note: 'Eval mode restriction: Arial triggers LicenseRestrictionException;
+    Source Code Pro (OFL) passes'
+  evidence_paths:
+  - reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/output-validation.json
+  - reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/restore.log
+  - reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/build.log
+  - reports/lowcode-plugin-canonical-package-wave17-20260606/wave17-dryrun/examples/font/convert-font/run.log
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from RunExamples.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 0a0f1f2f80a01f8f). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave17-20260606 Lane C.
+      dotnet restore+build+run PASS. Output: font-info.txt (Family/Style/Glyphs).
+      API: Font.Open(FontDefinition(FontType.TTF, FileSystemStreamSource)). Fixture:
+      SourceCodePro-Regular.ttf (OFL).'
+- plugin_slug: render-text-with-font
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/font/render-text-with-font/
+  canonical_url: https://products.aspose.net/font/render-text-with-font/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: 77a6bd8d0165f0d1
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 8e4e741c1d933d164c4f8e805f9fe3b1
+  namespaces_used:
+  - Aspose.Font.RenderingPath
+  - Aspose.Font.Ttf
+  - Aspose.Font.Sources
+  - Aspose.Font.Rendering
+  classes_used:
+  - Font
+  - GlyphOutlinePainter
+  - FontDefinition
+  - FontFileDefinition
+  - Bitmap
+  - TransformationMatrix
+  - GraphicsPath
+  - FileSystemStreamSource
+  github_links:
+  - https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    RenderingText.cs and advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/font.md
+  - https://raw.githubusercontent.com/aspose-font/Aspose.Font-for-.NET/master/Examples/Aspose.Font.Examples/WorkingWithTrueTypeAndOpenTypeFonts/RenderingText.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from RenderingText.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 77a6bd8d0165f0d1). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/font/render-text-with-font

@@ -1,158 +1,190 @@
-# Plugin-Code Registry: cad
-# Generated: 2026-06-04
-# Sprint: lowcode-plugin-code-registry-20260604
-
 family: cad
 package_id: Aspose.CAD
 github_repo: https://github.com/aspose-cad/Aspose.Cad-for-.NET
 implementation_model: LOAD_SAVE_OPTIONS
-
 plugins:
-  - plugin_slug: convert-cad-to-pdf
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/convert-cad-to-pdf/
-    canonical_url: https://products.aspose.net/cad/convert-cad-to-pdf/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: f6cbaaeed3859d1b
-    registry_status: CODE_HARVESTED
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: [c21fac2d4c9b1502e9054d63a21056b8]
-    namespaces_used:
-      - "Aspose.CAD"
-    classes_used:
-      - "Image"
-    github_links:
-      - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNToPdf.cs
-    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from ExportDGNToPdf.cs and advance to READY_FOR_TRANSFORMATION"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md"
-      - "https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNToPdf.cs"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: CODE_HARVESTED
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ExportDGNToPdf.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash f6cbaaeed3859d1b). Upgraded MCU -> CIV."
-
-  - plugin_slug: convert-dwg-to-pdf
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
-    canonical_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: 8159951a04a245cb
-    registry_status: CODE_HARVESTED
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: [620b5de393c55b4f7b664513476ebfff]
-    namespaces_used:
-      - "Aspose.CAD"
-    classes_used:
-      - "Image"
-    github_links:
-      - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNAsPartofDWG.cs
-    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from ExportDGNAsPartofDWG.cs and advance to READY_FOR_TRANSFORMATION"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md"
-      - "https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNAsPartofDWG.cs"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: CODE_HARVESTED
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ExportDGNAsPartofDWG.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 8159951a04a245cb). Upgraded MCU -> CIV."
-
-  - plugin_slug: convert-dxf-to-pdf
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
-    canonical_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: eaf327c214bcd274
-    registry_status: CODE_HARVESTED
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: [4ec74aa9ce9c3292b37c0cd64675a02e]
-    classes_used:
-      - "Image"
-    github_links:
-      - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/DWGToDXF.cs
-    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from DWGToDXF.cs and advance to READY_FOR_TRANSFORMATION"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md"
-      - "https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/DWGToDXF.cs"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: CODE_HARVESTED
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from DWGToDXF.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash eaf327c214bcd274). Upgraded MCU -> CIV."
-
-  - plugin_slug: convert-cad-to-image
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/convert-cad-to-image/
-    canonical_url: https://products.aspose.net/cad/convert-cad-to-image/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: cb2d790dacfa48be
-    registry_status: CODE_HARVESTED
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: [224883fac3159bb0afffed47436b1756]
-    namespaces_used:
-      - "Aspose.CAD.FileFormats.Cad.CadConsts"
-      - "Aspose.CAD.FileFormats.Cad.CadObjects"
-    classes_used:
-      - "Image"
-      - "NotImplementedException"
-      - "List"
-    github_links:
-      - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/ParticularDWGToImage.cs
-    next_action: "Canonical URL confirmed via prior sprint catalog; extract symbols from ParticularDWGToImage.cs and advance to READY_FOR_TRANSFORMATION"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md"
-      - "https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/ParticularDWGToImage.cs"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: CODE_HARVESTED
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ParticularDWGToImage.cs"
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash cb2d790dacfa48be). Upgraded MCU -> CIV."
-
-  - plugin_slug: convert-dwg-to-jpg
-    identity_status: CANONICAL_IDENTITY_VERIFIED
-    plugin_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
-    canonical_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
-    page_source_status: SOURCE_CATALOG_VERIFIED
-    page_hash: 6970b9174150d268
-    registry_status: NEEDS_MANUAL_MAPPING
-    blocker_type: null
-    implementation_model: LOAD_SAVE_OPTIONS
-    code_hashes: []
-    next_action: "Canonical URL confirmed via prior sprint catalog; manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS)"
-    evidence_paths:
-      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
-      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
-      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md"
-      - "reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json"
-    history:
-      - date: "2026-06-04"
-        status: NEEDS_MANUAL_MAPPING
-        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."
-      - date: "2026-06-06"
-        status: CANONICAL_IDENTITY_VERIFIED
-        analyst_notes: "Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D. Page confirmed in prior sprint catalog (hash 6970b9174150d268). Upgraded MCU -> CIV."
+- plugin_slug: convert-cad-to-pdf
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/cad/convert-cad-to-pdf/
+  canonical_url: https://products.aspose.net/cad/convert-cad-to-pdf/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: f6cbaaeed3859d1b
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - c21fac2d4c9b1502e9054d63a21056b8
+  namespaces_used:
+  - Aspose.CAD
+  classes_used:
+  - Image
+  github_links:
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNToPdf.cs
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    ExportDGNToPdf.cs and advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNToPdf.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExportDGNToPdf.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash f6cbaaeed3859d1b). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/cad/convert-cad-to-pdf
+- plugin_slug: convert-dwg-to-pdf
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
+  canonical_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: 8159951a04a245cb
+  registry_status: CODE_HARVESTED
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 620b5de393c55b4f7b664513476ebfff
+  namespaces_used:
+  - Aspose.CAD
+  classes_used:
+  - Image
+  github_links:
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNAsPartofDWG.cs
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    ExportDGNAsPartofDWG.cs and advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DGN-Drawings/ExportDGNAsPartofDWG.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ExportDGNAsPartofDWG.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 8159951a04a245cb). Upgraded MCU
+      -> CIV.
+- plugin_slug: convert-dxf-to-pdf
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
+  canonical_url: https://products.aspose.net/cad/convert-dxf-to-pdf/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: eaf327c214bcd274
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 4ec74aa9ce9c3292b37c0cd64675a02e
+  classes_used:
+  - Image
+  github_links:
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/DWGToDXF.cs
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    DWGToDXF.cs and advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/DWGToDXF.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from DWGToDXF.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash eaf327c214bcd274). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/cad/convert-dxf-to-pdf
+- plugin_slug: convert-cad-to-image
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/cad/convert-cad-to-image/
+  canonical_url: https://products.aspose.net/cad/convert-cad-to-image/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: cb2d790dacfa48be
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes:
+  - 224883fac3159bb0afffed47436b1756
+  namespaces_used:
+  - Aspose.CAD.FileFormats.Cad.CadConsts
+  - Aspose.CAD.FileFormats.Cad.CadObjects
+  classes_used:
+  - Image
+  - NotImplementedException
+  - List
+  github_links:
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/ParticularDWGToImage.cs
+  next_action: Canonical URL confirmed via prior sprint catalog; extract symbols from
+    ParticularDWGToImage.cs and advance to READY_FOR_TRANSFORMATION
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md
+  - https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Src/DWG-Drawings/ParticularDWGToImage.cs
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: CODE_HARVESTED
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Code from ParticularDWGToImage.cs
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash cb2d790dacfa48be). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/cad/convert-cad-to-image
+- plugin_slug: convert-dwg-to-jpg
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
+  canonical_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
+  page_source_status: SOURCE_CATALOG_VERIFIED
+  page_hash: 6970b9174150d268
+  registry_status: NEEDS_MANUAL_MAPPING
+  blocker_type: null
+  implementation_model: LOAD_SAVE_OPTIONS
+  code_hashes: []
+  next_action: Canonical URL confirmed via prior sprint catalog; manually write code
+    mapping based on family pattern (LOAD_SAVE_OPTIONS)
+  evidence_paths:
+  - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
+  - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
+  - reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/cad.md
+  - reports/lowcode-non-lowcode-plugin-universe-20260604/catalog/plugin-page-hashes.json
+  history:
+  - date: '2026-06-04'
+    status: NEEDS_MANUAL_MAPPING
+    analyst_notes: Sprint lowcode-plugin-code-registry-20260604. Direction correction
+      sprint.
+  - date: '2026-06-06'
+    status: CANONICAL_IDENTITY_VERIFIED
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+      Page confirmed in prior sprint catalog (hash 6970b9174150d268). Upgraded MCU
+      -> CIV.

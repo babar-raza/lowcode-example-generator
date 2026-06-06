@@ -69,7 +69,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 1d-barcode-reader;
     BarCodeReader class available
   page_hash: 18cf37c0cc7feeaa
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -106,6 +106,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
       from legacy alias 'recognize-barcode' to canonical primary '1d-barcode-reader'.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/1d-barcode-reader
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -114,6 +118,9 @@ plugins:
   display_plugin_name: 1D Barcode Reader for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: recognize-barcode
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/barcode/1d-barcode-reader
 - plugin_slug: 2d-barcode-writer
   canonical_plugin_slug: 2d-barcode-writer
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -193,7 +200,7 @@ plugins:
   - 91aa497508d875515b5db6ddce715ebf
   github_links:
   - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs
-  next_action: 'NONE — superseded. See 1d-barcode-reader and 2d-barcode-reader entries.'
+  next_action: NONE — superseded. See 1d-barcode-reader and 2d-barcode-reader entries.
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -211,10 +218,10 @@ plugins:
       NEEDS_MANUAL_MAPPING: slug maps ambiguously.'
   - date: '2026-06-06'
     status: NEEDS_MANUAL_MAPPING
-    analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
       Page confirmed in prior sprint catalog (hash 6d15352859a39bcc) at old /net/
       format URL. Ambiguity between 1d-barcode-reader and 2d-barcode-reader unresolved.
-      Retained as MCU pending Playwright disambiguation in Wave 15.'
+      Retained as MCU pending Playwright disambiguation in Wave 15.
   - date: '2026-06-06'
     status: SUPERSEDED_BY_SPLIT
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave16-20260606 Lane B.
@@ -230,7 +237,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 2d-barcode-reader
   page_hash: 279944f48eb8859c
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/2d-barcode-reader
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -268,8 +275,15 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: Sprint lowcode-plugin-canonical-primary-wave8-20260605. Migrated
       from legacy alias 'scan-barcode' to canonical primary '2d-barcode-reader'.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
   legacy_aliases:
   - scan-barcode
   display_plugin_name: 2D Barcode Reader for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: scan-barcode
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/barcode/2d-barcode-reader

@@ -56,7 +56,7 @@ plugins:
   canonical_url: https://products.aspose.net/svg/merge-svg/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 229ef264933622c5
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes: []
@@ -75,7 +75,15 @@ plugins:
   - date: '2026-06-06'
     status: CANONICAL_IDENTITY_VERIFIED
     analyst_notes: Sprint lowcode-plugin-canonical-package-wave14-20260606 Lane D.
-      Page confirmed in prior sprint catalog (hash 229ef264933622c5). Upgraded MCU -> CIV.
+      Page confirmed in prior sprint catalog (hash 229ef264933622c5). Upgraded MCU
+      -> CIV.
+  - date: '2026-06-06'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-plugin-canonical-package-wave18-20260606 Lane C.
+      dotnet restore+build+run PASS.
+  canonical_package_wave: wave18
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave18-20260606/wave18-dryrun/examples/svg/merge-svg
 - plugin_slug: svg-to-pdf-converter
   canonical_plugin_slug: svg-to-pdf-converter
   identity_status: CANONICAL_IDENTITY_VERIFIED
@@ -155,9 +163,9 @@ plugins:
       confirmed canonical-primary format, plugin_slug matches canonical.
   - date: '2026-06-06'
     status: CANONICAL_PACKAGE_PROVEN
-    analyst_notes: 'Sprint wave12-20260606. Fixed base64 fixture (98-char invalid
-      -> 96-char valid 1x1 PNG). Package rebuilt and all logs pass. Output 426-byte
-      SVG produced.'
+    analyst_notes: Sprint wave12-20260606. Fixed base64 fixture (98-char invalid ->
+      96-char valid 1x1 PNG). Package rebuilt and all logs pass. Output 426-byte SVG
+      produced.
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer
   dryrun_validation_status: DRYRUN_FAIL_CORRECTED
   canonical_package_path: reports/lowcode-plugin-canonical-package-wave12-20260606/wave12-dryrun/examples/svg/vectorizer

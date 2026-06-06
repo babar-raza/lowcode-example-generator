@@ -1,0 +1,53 @@
+{
+  "artifact_type": "WAVE17_CONTRADICTION_INVENTORY",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "contradiction_count": 5,
+  "contradictions": [
+    {
+      "id": "W17-CONTRA-01",
+      "severity": "HIGH",
+      "title": "sprint-closeout.json overclaims 51/51 COMPLETE; bundle contains 47/51 COMPLETE",
+      "claim": "sprint-closeout.json (disk, post-freeze): taskcards.total=51, complete=51, pending=0, verdict=SPRINT_COMPLETE",
+      "reality": "Bundle taskcards.json: total=51, COMPLETE=47, PENDING=4 (W17-L0-05, L0-06, L0-07, LG-05)",
+      "root_cause": "sprint-closeout.json was written after bundle freeze with updated task counts, but bundle was not rebuilt to include it",
+      "repair_action": "W18 writes closeout-addendum classifying W17 correctly; W18 protocol freezes bundle BEFORE writing final closeout"
+    },
+    {
+      "id": "W17-CONTRA-02",
+      "severity": "HIGH",
+      "title": "No sprint-closeout.json or final-attestation.json inside bundle",
+      "claim": "W17 claimed SPRINT_COMPLETE with final-attestation.json",
+      "reality": "Neither sprint-closeout.json nor final-attestation.json appears in the 59-entry bundle",
+      "root_cause": "These files were created after bundle freeze and never re-bundled",
+      "repair_action": "W18 includes these files inside the bundle (or their W18 equivalents)"
+    },
+    {
+      "id": "W17-CONTRA-03",
+      "severity": "MEDIUM",
+      "title": "pclc_total=22 but only 20 PR packets in bundle",
+      "claim": "state-docs/canonical-package-ledger-v10.json: pclc_total=22",
+      "reality": "publication/unified-20-pclc-readiness-v2.json has 20 packages; threed/convert-3d-model and font/convert-font have no PR packets",
+      "root_cause": "PR packets for the 2 new W17 packages were not created before bundle freeze",
+      "repair_action": "W18 Lane B creates PR packets for threed/convert-3d-model and font/convert-font; W18 readiness file covers all 22+"
+    },
+    {
+      "id": "W17-CONTRA-04",
+      "severity": "LOW",
+      "title": "External .sha256 sidecar exists on disk but was not verified by reviewer",
+      "claim": "W17 sprint claimed sidecar written at .local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.sha256",
+      "reality": "Sidecar exists on disk (correct per v2 protocol — external to bundle), but reviewer could not confirm upload",
+      "root_cause": "v2 protocol correctly places sidecar external to ZIP; reviewer only had ZIP upload",
+      "repair_action": "W18 re-verifies W17 sidecar SHA on disk; W18 sidecar is confirmed by automated post-freeze verification"
+    },
+    {
+      "id": "W17-CONTRA-05",
+      "severity": "LOW",
+      "title": "W17 disk taskcards.json shows 51/51 COMPLETE but bundle shows 47/51",
+      "claim": "Disk taskcards.json (post-freeze update): 51/51 COMPLETE",
+      "reality": "Bundle (authoritative): 47/51 COMPLETE, 4 PENDING",
+      "root_cause": "4 closing taskcards were marked COMPLETE on disk after bundle freeze",
+      "repair_action": "W18 pre-bundle-closeout honestly documents N-4 complete before freeze; all 4 close as part of bundle closure"
+    }
+  ]
+}

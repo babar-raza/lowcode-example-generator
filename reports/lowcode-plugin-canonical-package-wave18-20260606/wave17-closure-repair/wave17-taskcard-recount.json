@@ -1,0 +1,21 @@
+{
+  "artifact_type": "WAVE17_TASKCARD_RECOUNT",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "inspected": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "source": "Bundle: .local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.zip",
+  "bundle_sha256": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+  "bundle_entry_count": 59,
+  "taskcards_in_bundle": {
+    "total_field": 51,
+    "actual_array_count": 51,
+    "total_field_accurate": true,
+    "complete_count": 47,
+    "pending_count": 4
+  },
+  "pending_taskcard_ids": ["W17-L0-05", "W17-L0-06", "W17-L0-07", "W17-LG-05"],
+  "pending_rationale": "These 4 taskcards are the bundle-closure steps themselves (freeze bundle, write sidecar, write attestation, verify SHA). They were PENDING inside the bundle because the bundle was frozen before they executed.",
+  "disk_taskcards_status": "51/51 COMPLETE — disk was updated after bundle freeze (correctly)",
+  "contradiction": "sprint-closeout.json (disk) claims 51/51 COMPLETE but bundle authority shows 47/51. sprint-closeout.json written post-freeze and not included in bundle.",
+  "resolution": "W18 classifies W17 as PROGRESS_ACCEPTED with known gaps. W17 real advancement (2 packages, 16 validators) is genuine. W18 closes remaining evidence gaps."
+}

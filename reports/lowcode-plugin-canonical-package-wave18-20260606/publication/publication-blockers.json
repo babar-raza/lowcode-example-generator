@@ -1,0 +1,13 @@
+{
+  "artifact_type": "PUBLICATION_BLOCKERS",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "blockers": [
+    {
+      "package": "all 33 PCLC",
+      "blocker": "Live PR push requires human approval and GH/GL credentials",
+      "class": "EXTERNAL_GATE",
+      "local_work_complete": true
+    }
+  ]
+}

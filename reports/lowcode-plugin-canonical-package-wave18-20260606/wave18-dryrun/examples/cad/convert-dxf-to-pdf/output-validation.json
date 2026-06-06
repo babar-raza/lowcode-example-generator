@@ -1,0 +1,21 @@
+{
+  "package": "cad/convert-dxf-to-pdf",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.CAD 24.12.0",
+  "canonical_url": "https://products.aspose.net/cad/convert-dxf-to-pdf/",
+  "api_used": "Image.Load(dxfPath) as DxfImage + CadRasterizationOptions + PdfOptions + image.Save(pdfPath)",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "fixture": "fixtures/minimal.dxf (hand-crafted ASCII DXF R12 with LINE and CIRCLE entities)",
+  "output_files": [
+    {"path": "output/output.pdf", "size_bytes": 38457, "role": "converted PDF"},
+    {"path": "output/conversion-result.txt", "role": "conversion status"}
+  ],
+  "output_validation_status": "PASS",
+  "output_marker_check": "output.pdf is 38457 bytes (non-empty). DxfImage loaded. CadRasterizationOptions 800x600.",
+  "w18_breakthrough": "Previous sprint classifed DXF as FIXTURE_BLOCKED (binary DXF assumed). ASCII DXF R12 is text format — valid minimal fixture hand-crafted and verified.",
+  "proven_wave": "W18",
+  "pclc_eligible": true
+}

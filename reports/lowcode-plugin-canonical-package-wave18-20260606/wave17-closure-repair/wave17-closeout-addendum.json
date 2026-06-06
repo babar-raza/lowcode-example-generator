@@ -1,0 +1,30 @@
+{
+  "artifact_type": "WAVE17_CLOSEOUT_ADDENDUM",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "addendum_for": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "prepared_by": "Wave 18 Lane A",
+  "classification": "WAVE17_PROGRESS_ACCEPTED_WITH_REAL_ADVANCEMENT_BUT_INCOMPLETE_FINAL_ATTESTATION_AND_22_PCLC_RECONCILIATION_GAP_REPAIRED_BY_WAVE18",
+  "real_advancements_confirmed": [
+    "2 new packages proven with restore+build+run logs: threed/convert-3d-model, font/convert-font",
+    "16 new validators added (TCV+PEV+BAV+PRC+PPL+FGS) with 43 new tests",
+    "pytest 3828 passed, 18 skipped, 0 failures",
+    "7 W16 defects documented; 5 repaired in W17",
+    "W16 defect patterns prevented by new validator rules",
+    "20 PR packets present in bundle for W11-W16 PCLC packages",
+    "IV 16/16 PASS, adversarial review 12/12 PASS — both inside bundle"
+  ],
+  "gaps_documented": [
+    "GAP-01: Bundle contains 47/51 COMPLETE taskcards (4 PENDING: W17-L0-05, L0-06, L0-07, LG-05)",
+    "GAP-02: sprint-closeout.json and final-attestation.json exist on disk but not inside bundle",
+    "GAP-03: PCLC total=22 but only 20 PR packets; threed and font lack PR packets",
+    "GAP-04: sprint_status=IN_PROGRESS in bundle (no SPRINT_COMPLETE file inside bundle)"
+  ],
+  "disposition": "W17 real package advancement is ACCEPTED. The 4 PENDING taskcards were legitimately closing tasks (bundle freeze, sidecar, attestation, post-freeze verification). These are repaired and completed by Wave 18, which creates PR packets for threed/font, closes all gaps, and attests the combined evidence bundle under v2 protocol.",
+  "wave18_repairs": [
+    "PR packets created for threed/convert-3d-model and font/convert-font",
+    "Unified publication readiness updated to cover all 22 PCLC packages",
+    "W17 sidecar on-disk SHA verified against bundle SHA",
+    "W17 classified correctly per this addendum"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "package": "cad/convert-cad-to-image",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.CAD 24.12.0",
+  "canonical_url": "https://products.aspose.net/cad/convert-cad-to-image/",
+  "api_used": "Image.Load(dxf) + CadRasterizationOptions(800x600) + PngOptions + image.Save(png)",
+  "restore": "PASS", "build": "PASS", "run": "PASS",
+  "fixture": "fixtures/minimal.dxf (ASCII DXF R12)",
+  "output_files": [{"path": "output/cad-output.png", "size_bytes": 10988}],
+  "output_validation_status": "PASS",
+  "proven_wave": "W18",
+  "pclc_eligible": true
+}

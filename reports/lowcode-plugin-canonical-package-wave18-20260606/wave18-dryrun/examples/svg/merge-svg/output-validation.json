@@ -1,0 +1,20 @@
+{
+  "package": "svg/merge-svg",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.SVG 24.12.0",
+  "canonical_url": "https://products.aspose.net/svg/merge-svg/",
+  "api_used": "SVGDocument(mergedSvgString, '.') + doc.Save(path) + PdfDevice(pdfPath) + doc.RenderTo(renderer)",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "output_files": [
+    {"path": "output/merged.svg", "size_bytes": 582, "role": "merged SVG document (two SVGs combined into one 220x100)"},
+    {"path": "output/merged.pdf", "size_bytes": 28192, "role": "PDF render of merged SVG"},
+    {"path": "output/merge-result.txt", "role": "merge confirmation"}
+  ],
+  "output_validation_status": "PASS",
+  "output_marker_check": "merged.svg is 582 bytes (non-empty), merged.pdf is 28192 bytes",
+  "proven_wave": "W18",
+  "pclc_eligible": true
+}

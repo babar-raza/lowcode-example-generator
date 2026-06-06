@@ -1,0 +1,12 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-canonical-package-wave18-20260606\wave18-dryrun\examples\omr\generate-omr-template\Program.cs(28,18): warning CS0618: 'OmrEngine.GenerateTemplate(MemoryStream, ImageCollection, Encoding)' is obsolete: 'This method is deprecated and will be removed in the release 25.1. Use the "Generate" method instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-canonical-package-wave18-20260606\wave18-dryrun\examples\omr\generate-omr-template\omr-generate-omr-template.csproj]
+  omr-generate-omr-template -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-canonical-package-wave18-20260606\wave18-dryrun\examples\omr\generate-omr-template\bin\Debug\net8.0\omr-generate-omr-template.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-canonical-package-wave18-20260606\wave18-dryrun\examples\omr\generate-omr-template\Program.cs(28,18): warning CS0618: 'OmrEngine.GenerateTemplate(MemoryStream, ImageCollection, Encoding)' is obsolete: 'This method is deprecated and will be removed in the release 25.1. Use the "Generate" method instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-canonical-package-wave18-20260606\wave18-dryrun\examples\omr\generate-omr-template\omr-generate-omr-template.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.92

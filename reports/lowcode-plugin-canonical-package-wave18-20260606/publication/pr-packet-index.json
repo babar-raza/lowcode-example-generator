@@ -1,0 +1,208 @@
+{
+  "artifact_type": "PR_PACKET_INDEX",
+  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
+  "date": "2026-06-06",
+  "total_pr_packets": 33,
+  "w17_existing": 20,
+  "w18_new": 13,
+  "packets": [
+    {
+      "family": "ocr",
+      "slug": "scanned-image-to-text",
+      "path": "publication/pr-packets/ocr/scanned-image-to-text/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "ocr",
+      "slug": "scanned-pdf-to-text",
+      "path": "publication/pr-packets/ocr/scanned-pdf-to-text/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "page",
+      "slug": "xps-converter",
+      "path": "publication/pr-packets/page/xps-converter/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "page",
+      "slug": "eps-to-pdf",
+      "path": "publication/pr-packets/page/eps-to-pdf/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "page",
+      "slug": "ps-converter",
+      "path": "publication/pr-packets/page/ps-converter/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "psd",
+      "slug": "psd-to-pdf",
+      "path": "publication/pr-packets/psd/psd-to-pdf/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-html",
+      "path": "publication/pr-packets/tasks/mpp-to-html/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-png",
+      "path": "publication/pr-packets/tasks/mpp-to-png/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "zip",
+      "slug": "universal-extractor",
+      "path": "publication/pr-packets/zip/universal-extractor/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "zip",
+      "slug": "universal-compressor",
+      "path": "publication/pr-packets/zip/universal-compressor/pr-packet.json",
+      "wave": "W11"
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-pdf-converter",
+      "path": "publication/pr-packets/svg/svg-to-pdf-converter/pr-packet.json",
+      "wave": "W12"
+    },
+    {
+      "family": "svg",
+      "slug": "vectorizer",
+      "path": "publication/pr-packets/svg/vectorizer/pr-packet.json",
+      "wave": "W12"
+    },
+    {
+      "family": "gis",
+      "slug": "read-gis-data",
+      "path": "publication/pr-packets/gis/read-gis-data/pr-packet.json",
+      "wave": "W14"
+    },
+    {
+      "family": "tex",
+      "slug": "convert-latex-to-pdf",
+      "path": "publication/pr-packets/tex/convert-latex-to-pdf/pr-packet.json",
+      "wave": "W14"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-xps",
+      "path": "publication/pr-packets/html/convert-html-to-xps/pr-packet.json",
+      "wave": "W15"
+    },
+    {
+      "family": "psd",
+      "slug": "convert-psd-to-png",
+      "path": "publication/pr-packets/psd/convert-psd-to-png/pr-packet.json",
+      "wave": "W15"
+    },
+    {
+      "family": "html",
+      "slug": "convert-html-to-markdown",
+      "path": "publication/pr-packets/html/convert-html-to-markdown/pr-packet.json",
+      "wave": "W16"
+    },
+    {
+      "family": "html",
+      "slug": "merge-html",
+      "path": "publication/pr-packets/html/merge-html/pr-packet.json",
+      "wave": "W16"
+    },
+    {
+      "family": "gis",
+      "slug": "convert-gis-data",
+      "path": "publication/pr-packets/gis/convert-gis-data/pr-packet.json",
+      "wave": "W16"
+    },
+    {
+      "family": "tasks",
+      "slug": "read-project-data",
+      "path": "publication/pr-packets/tasks/read-project-data/pr-packet.json",
+      "wave": "W16"
+    },
+    {
+      "family": "threed",
+      "slug": "convert-3d-model",
+      "path": "publication/pr-packets/threed/convert-3d-model/pr-packet.json",
+      "wave": "W17"
+    },
+    {
+      "family": "font",
+      "slug": "convert-font",
+      "path": "publication/pr-packets/font/convert-font/pr-packet.json",
+      "wave": "W17"
+    },
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-reader",
+      "path": "publication/pr-packets/barcode/1d-barcode-reader/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-reader",
+      "path": "publication/pr-packets/barcode/2d-barcode-reader/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "threed",
+      "slug": "compress-3d-scene",
+      "path": "publication/pr-packets/threed/compress-3d-scene/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "svg",
+      "slug": "merge-svg",
+      "path": "publication/pr-packets/svg/merge-svg/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "font",
+      "slug": "render-text-with-font",
+      "path": "publication/pr-packets/font/render-text-with-font/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "path": "publication/pr-packets/finance/parse-xbrl/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "path": "publication/pr-packets/cad/convert-dxf-to-pdf/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "path": "publication/pr-packets/cad/convert-cad-to-pdf/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "path": "publication/pr-packets/cad/convert-cad-to-image/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "omr",
+      "slug": "generate-omr-template",
+      "path": "publication/pr-packets/omr/generate-omr-template/pr-packet.json",
+      "wave": "W18"
+    },
+    {
+      "family": "omr",
+      "slug": "recognize-omr",
+      "path": "publication/pr-packets/omr/recognize-omr/pr-packet.json",
+      "wave": "W18"
+    }
+  ]
+}

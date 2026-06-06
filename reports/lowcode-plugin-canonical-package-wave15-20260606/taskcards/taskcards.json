@@ -344,15 +344,15 @@
       "id": "W15-LI-08",
       "lane": "I",
       "title": "Commit chore(wave15): update evidence bundle sidecar SHA",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": "chore commit bf2d101 — SHA=2ff7f3bba497a7e0..., size=121640, entries=50, sprint-closeout.json verdict=SPRINT_COMPLETE"
     },
     {
       "id": "W15-LI-09",
       "lane": "I",
       "title": "Final IV re-check after chore commit — confirm SPRINT_COMPLETE conditions met",
-      "status": "PENDING",
-      "evidence": ""
+      "status": "COMPLETE",
+      "evidence": "CVB-01..05 PASS, TCC PASS, feat=2dddb28, chore=bf2d101, closeout verdict=SPRINT_COMPLETE — all 9/9 post-chore checks PASS"
     }
   ]
 }

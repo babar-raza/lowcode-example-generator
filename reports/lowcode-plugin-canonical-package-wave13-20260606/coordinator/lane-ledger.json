@@ -54,7 +54,7 @@
     {"lane": "E", "status": "COMPLETE", "purpose": "PCLC-to-CVFP readiness review — 12/12 READY; registry updated; publication staging deferred Wave 14"},
     {"lane": "F", "status": "COMPLETE", "purpose": "Publication staging + open PR reconciliation — 6 PRs MONITOR_ONLY; Wave 11-12 staging deferred Wave 14"},
     {"lane": "G", "status": "COMPLETE", "purpose": "State sync — matrix v6, ledger (45 total), wave14-queue, sprint-state-summary"},
-    {"lane": "H", "status": "IN_PROGRESS", "purpose": "IV + adversarial review + pytest + bundle + external sidecar"}
+    {"lane": "H", "status": "COMPLETE", "purpose": "IV + adversarial review + pytest + bundle + external sidecar — feat=8d06c8b, chore=20836c6, c7d45f0"}
   ],
   "hard_constraints": [
     "NO publication PR creation or push to remote repos",
@@ -78,5 +78,17 @@
       "content_manifest_note": "SHA is in sidecar, not inside ZIP"
     }
   },
-  "verdict": "LANE_H_IN_PROGRESS"
+  "closeout": {
+    "feat_commit": "8d06c8b",
+    "chore_commit_1": "20836c6",
+    "chore_commit_2": "c7d45f0",
+    "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave13-20260606.zip",
+    "bundle_entry_count": 25,
+    "bundle_size_bytes": 47545,
+    "sidecar_sha256_prefix": "5f546656d4d187b9",
+    "pytest_passed": 3645,
+    "iv_pass": 45,
+    "iv_fail": 0
+  },
+  "verdict": "SPRINT_COMPLETE"
 }

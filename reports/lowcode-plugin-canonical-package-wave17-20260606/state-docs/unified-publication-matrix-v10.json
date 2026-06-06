@@ -1,0 +1,31 @@
+{
+  "artifact_type": "PUBLICATION_MATRIX",
+  "matrix_version": "v10",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "pclc_total": 22,
+  "pclc_packages": [
+    {"wave": "W11", "family": "ocr", "slug": "scanned-image-to-text", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "ocr", "slug": "scanned-pdf-to-text", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "page", "slug": "xps-converter", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "page", "slug": "eps-to-pdf", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "page", "slug": "ps-converter", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "psd", "slug": "psd-to-pdf", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "tasks", "slug": "mpp-to-html", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "tasks", "slug": "mpp-to-png", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "zip", "slug": "universal-extractor", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W11", "family": "zip", "slug": "universal-compressor", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W12", "family": "svg", "slug": "svg-to-pdf-converter", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W12", "family": "svg", "slug": "vectorizer", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W14", "family": "gis", "slug": "read-gis-data", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W14", "family": "tex", "slug": "convert-latex-to-pdf", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W15", "family": "html", "slug": "convert-html-to-xps", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W15", "family": "psd", "slug": "convert-psd-to-png", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W16", "family": "html", "slug": "convert-html-to-markdown", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W16", "family": "html", "slug": "merge-html", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W16", "family": "gis", "slug": "convert-gis-data", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W16", "family": "tasks", "slug": "read-project-data", "pr_packet_exists": true, "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN"},
+    {"wave": "W17", "family": "threed", "slug": "convert-3d-model", "pr_packet_exists": false, "publication_status": "PROOF_COMPLETE_NO_PR_PACKET_YET", "note": "Proven W17; PR packet TBD in W18 Lane B"},
+    {"wave": "W17", "family": "font", "slug": "convert-font", "pr_packet_exists": false, "publication_status": "PROOF_COMPLETE_NO_PR_PACKET_YET", "note": "Proven W17; PR packet TBD in W18 Lane B"}
+  ]
+}

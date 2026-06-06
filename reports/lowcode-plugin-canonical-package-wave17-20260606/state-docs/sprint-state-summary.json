@@ -1,0 +1,26 @@
+{
+  "artifact_type": "SPRINT_STATE_SUMMARY",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE17-ATTESTATION-PR-PACKET-PUBLICATION-PACKAGE-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "sprint_status": "IN_PROGRESS",
+  "lanes_complete": ["A", "B", "C", "D", "E", "F"],
+  "lanes_in_progress": ["G", "0-close"],
+  "proven_packages_this_sprint": ["threed/convert-3d-model", "font/convert-font"],
+  "proven_packages_total": 55,
+  "pclc_total": 22,
+  "pr_packets_on_disk": 20,
+  "validators_added": {
+    "TCV-01..TCV-03": "Taskcard count accuracy",
+    "PEV-01..PEV-03": "No PENDING evidence in COMPLETE taskcards",
+    "BAV-01..BAV-03": "Bundle vs attestation consistency",
+    "PRC-01..PRC-02": "PR packet count in bundle",
+    "PPL-01..PPL-03": "Package proof logs (restore/build/run)",
+    "FGS-01..FGS-02": "Final git status presence and .pfx hygiene",
+    "total_new_rules": 16
+  },
+  "w16_defects_documented": 7,
+  "w16_defects_repaired": 5,
+  "w16_defects_documented_only": 2,
+  "test_count_at_time_of_writing": "pending full suite run"
+}

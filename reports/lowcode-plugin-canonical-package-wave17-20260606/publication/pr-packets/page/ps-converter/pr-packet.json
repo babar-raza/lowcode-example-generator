@@ -1,0 +1,26 @@
+{
+  "artifact_type": "PR_PACKET",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE17-ATTESTATION-PR-PACKET-PUBLICATION-PACKAGE-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "family": "page",
+  "slug": "ps-converter",
+  "canonical_url": "https://products.aspose.net/page/ps-converter/",
+  "proven_wave": "W11",
+  "nuget_package": "Aspose.Page",
+  "pr_title": "feat(lowcode): add page/ps-converter low-code example",
+  "pr_branch": "lowcode/page/ps-converter",
+  "pr_body": "Adds the canonical low-code C# example for page/ps-converter.\n\nCanonical URL: https://products.aspose.net/page/ps-converter/\nProven in: W11",
+  "pr_packet_exists": true,
+  "pr_packet_wave": "W17",
+  "publication_status": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "output_validation_status": "PASS",
+  "self_contained": true,
+  "execution_steps": [
+    "git checkout -b lowcode/page/ps-converter",
+    "# Copy proven package from wavew11-dryrun/examples/page/ps-converter/ to target SDK repo path",
+    "git add .",
+    "git commit -m \"feat(lowcode): add page/ps-converter low-code example\"",
+    "gh pr create --title \"feat(lowcode): add page/ps-converter low-code example\" --body \"\" --base main"
+  ]
+}

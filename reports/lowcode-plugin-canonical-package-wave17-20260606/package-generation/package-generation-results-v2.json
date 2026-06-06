@@ -1,0 +1,78 @@
+{
+  "artifact_type": "PACKAGE_GENERATION_RESULTS",
+  "version": "v2",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "packages_attempted": 3,
+  "packages_proven": 2,
+  "packages_blocked": 1,
+  "new_pclc_total": 22,
+  "results": [
+    {
+      "package": "threed/convert-3d-model",
+      "family": "threed",
+      "slug": "convert-3d-model",
+      "nuget": "Aspose.3D",
+      "nuget_version_resolved": "latest",
+      "status": "PROVEN",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_file": "output/model.obj",
+      "api_pattern": "new Scene() + new Box(1,1,1) + scene.RootNode.CreateChildNode() + scene.Save(path, FileFormat.WavefrontOBJ)",
+      "restore_log": "wave17-dryrun/examples/threed/convert-3d-model/restore.log",
+      "build_log": "wave17-dryrun/examples/threed/convert-3d-model/build.log",
+      "run_log": "wave17-dryrun/examples/threed/convert-3d-model/run.log",
+      "output_validation": "wave17-dryrun/examples/threed/convert-3d-model/output-validation.json",
+      "note": "Was rank-1 in W16 work-ahead; proven in W17 Wave C.",
+      "pclc_eligible": true,
+      "proven_wave": "W17"
+    },
+    {
+      "package": "font/convert-font",
+      "family": "font",
+      "slug": "convert-font",
+      "nuget": "Aspose.Font",
+      "nuget_version_resolved": "26.6.0",
+      "status": "PROVEN",
+      "restore": "PASS",
+      "build": "PASS",
+      "run": "PASS",
+      "output_file": "output/font-info.txt",
+      "api_pattern": "Font.Open(FontDefinition(FontType.TTF, FontFileDefinition(FileSystemStreamSource(path))))",
+      "evaluation_note": "Eval mode restricts to specific fonts; used Source Code Pro (OFL license). Arial triggers LicenseRestrictionException.",
+      "fixture_font": "SourceCodePro-Regular.ttf (Google Fonts, Open Font License)",
+      "restore_log": "wave17-dryrun/examples/font/convert-font/restore.log",
+      "build_log": "wave17-dryrun/examples/font/convert-font/build.log",
+      "run_log": "wave17-dryrun/examples/font/convert-font/run.log",
+      "output_validation": "wave17-dryrun/examples/font/convert-font/output-validation.json",
+      "pclc_eligible": true,
+      "proven_wave": "W17"
+    },
+    {
+      "package": "finance/parse-xbrl",
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "nuget": "Aspose.Finance",
+      "status": "BLOCKED",
+      "blocker": "XbrlDocument(path) requires remote XBRL taxonomy fetch (https://xbrl.ifrs.org). No offline mode. Programmatic instance creation via XbrlInstanceCollection has complex Context/Unit/Item constructor requirements. Confirmed BLOCKED from W16 investigation.",
+      "recommended_action": "Bundle offline US-GAAP or custom XBRL schema fixture; deferred to W18.",
+      "pclc_eligible": false,
+      "proven_wave": null
+    }
+  ],
+  "registry_updates_required": [
+    {
+      "yaml": "pipeline/plugin-code-registry/family/threed.yaml",
+      "slug": "convert-3d-model",
+      "transition": "NEEDS_MANUAL_MAPPING -> CANONICAL_PACKAGE_PROVEN",
+      "canonical_package_wave": "wave17"
+    },
+    {
+      "yaml": "pipeline/plugin-code-registry/family/font.yaml",
+      "slug": "convert-font",
+      "transition": "NEEDS_MANUAL_MAPPING -> CANONICAL_PACKAGE_PROVEN",
+      "canonical_package_wave": "wave17"
+    }
+  ]
+}

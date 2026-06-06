@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "threed-convert-3d-model/1.0.0": {
+        "dependencies": {
+          "Aspose.3D": "26.4.0"
+        },
+        "runtime": {
+          "threed-convert-3d-model.dll": {}
+        }
+      },
+      "Aspose.3D/26.4.0": {
+        "runtime": {
+          "lib/net8.0/Aspose.3D.dll": {
+            "assemblyVersion": "26.4.0.0",
+            "fileVersion": "26.4.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "threed-convert-3d-model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aspose.3D/26.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+/f3Jp5ZT0sduNeyqRr1Oaz9bOayWADrNl49IhpQxJUqER2VljFPG0RMjfJLheh5bOmGfosCO3LmwQrpAtr6jQ==",
+      "path": "aspose.3d/26.4.0",
+      "hashPath": "aspose.3d.26.4.0.nupkg.sha512"
+    }
+  }
+}

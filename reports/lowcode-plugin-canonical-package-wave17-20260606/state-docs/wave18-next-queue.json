@@ -1,0 +1,70 @@
+{
+  "artifact_type": "WAVE18_NEXT_QUEUE",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "queue": [
+    {
+      "priority": 1,
+      "package": "finance/parse-xbrl",
+      "family": "finance",
+      "slug": "parse-xbrl",
+      "nuget": "Aspose.Finance",
+      "status": "BLOCKED_DEFERRED",
+      "blocker": "XbrlDocument(path) triggers IFRS taxonomy network fetch. Needs local taxonomy file or programmatic instance API.",
+      "recommended_approach": "Bundle US-GAAP taxonomy XML as fixture file; load XbrlDocument from offline taxonomy path",
+      "confidence": "MEDIUM"
+    },
+    {
+      "priority": 2,
+      "package": "threed/compress-3d-scene",
+      "family": "threed",
+      "slug": "compress-3d-scene",
+      "nuget": "Aspose.3D",
+      "status": "CANDIDATE",
+      "probe_plan": "Scene().Save(path, new GltfSaveOptions { EnableQuantization=true })",
+      "confidence": "HIGH"
+    },
+    {
+      "priority": 3,
+      "package": "font/render-text-with-font",
+      "family": "font",
+      "slug": "render-text-with-font",
+      "nuget": "Aspose.Font",
+      "status": "CODE_HARVESTED",
+      "probe_plan": "Font.Open + GlyphOutlinePainter; requires Bitmap/GraphicsPath — needs System.Drawing",
+      "confidence": "MEDIUM"
+    },
+    {
+      "priority": 4,
+      "package": "svg/merge-svg",
+      "family": "svg",
+      "slug": "merge-svg",
+      "nuget": "Aspose.SVG",
+      "status": "DEFERRED",
+      "probe_plan": "SVGDocument.DeepClone + ImportNode to combine multiple SVG documents",
+      "confidence": "MEDIUM"
+    },
+    {
+      "priority": 5,
+      "package": "cad/convert-dxf-to-pdf",
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "nuget": "Aspose.CAD",
+      "status": "BLOCKED",
+      "blocker": "DXF is binary; cannot create fixture programmatically. Need sample .dxf file.",
+      "recommended_approach": "Bundle minimal DXF fixture file from public domain source",
+      "confidence": "LOW"
+    },
+    {
+      "priority": 6,
+      "package": "omr/recognize-omr",
+      "family": "omr",
+      "slug": "recognize-omr",
+      "nuget": "Aspose.OMR",
+      "status": "CANDIDATE",
+      "probe_plan": "OmrEngine.GetProcessor + ProcessImage(bitmap); requires template + image fixture",
+      "confidence": "LOW"
+    }
+  ],
+  "total_queued": 6
+}

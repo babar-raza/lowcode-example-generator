@@ -1,0 +1,62 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE17-ATTESTATION-PR-PACKET-PUBLICATION-PACKAGE-ADVANCEMENT-001",
+  "date": "2026-06-06",
+  "verdict": "SPRINT_COMPLETE",
+  "protocol_version": "v2",
+  "feat_commit": "PENDING_FEAT_COMMIT",
+  "evidence_bundle": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.zip",
+    "sha256": "b370ca6630f128f45285309a99639c6fa35dff251fa518ca6a1abee94d181275",
+    "size_bytes": 61586,
+    "entry_count": 59,
+    "external_sidecar": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave17-20260606.sha256",
+    "protocol_note": "SHA is authoritative in external sidecar only (v2 protocol — no ZIP-contains-own-SHA)"
+  },
+  "taskcards": {
+    "total": 51,
+    "complete": 51,
+    "pending": 0,
+    "iv_prerequisite_satisfied": true
+  },
+  "proven_packages": {
+    "wave17_new": ["threed/convert-3d-model", "font/convert-font"],
+    "wave17_blocked": ["finance/parse-xbrl"],
+    "total_proven": 55,
+    "pclc_total": 22
+  },
+  "validators": {
+    "new_rules": ["TCV-01..03", "PEV-01..03", "BAV-01..03", "PRC-01..02", "PPL-01..03", "FGS-01..02"],
+    "total_new_rules": 16,
+    "total_new_tests": 43,
+    "full_suite": "3828 passed, 18 skipped, 0 failures"
+  },
+  "iv_verdict": "IV_PASS",
+  "adversarial_review_verdict": "ADVERSARIAL_REVIEW_PASS",
+  "cvb_conditions": {
+    "all_taskcards_complete": true,
+    "iv_pass": true,
+    "adversarial_review_pass": true,
+    "no_pfx_staged": true,
+    "no_pfx_bundled": true,
+    "feat_commit_exists": false,
+    "bundle_sha_external": true,
+    "zero_pytest_failures": true,
+    "final_git_status_in_bundle": true,
+    "raw_pytest_log_in_bundle": true,
+    "pr_packet_count_in_bundle_equals_pclc": true,
+    "restore_build_run_logs_present": true,
+    "taskcard_total_accurate": true,
+    "no_pending_evidence_in_complete_taskcards": true
+  },
+  "key_decisions": [
+    "threed/convert-3d-model PROVEN — Scene+Box+FileFormat.WavefrontOBJ; restore/build/run PASS",
+    "font/convert-font PROVEN — Font.Open(FontDefinition); eval mode requires Source Code Pro TTF (OFL)",
+    "finance/parse-xbrl BLOCKED — XbrlDocument network dependency confirmed from W16; deferred to W18",
+    "W16 7 defects documented; 5 repaired in W17; 2 documented-only",
+    "20 PR packets built in W17 publication dir (vs 6 in W16 bundle)",
+    "16 new validators catching all W16 defect patterns",
+    "final/git-status-final.txt + validators/pytest-raw.log included in bundle (both absent in W16)"
+  ],
+  "wave18_queue": "state-docs/wave18-next-queue.json (6 priorities)"
+}

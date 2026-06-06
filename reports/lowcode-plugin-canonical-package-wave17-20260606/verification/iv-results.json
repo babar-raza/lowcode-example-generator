@@ -1,0 +1,29 @@
+{
+  "artifact_type": "INDEPENDENT_VERIFICATION_RESULTS",
+  "sprint": "lowcode-plugin-canonical-package-wave17-20260606",
+  "date": "2026-06-06",
+  "iv_checks": [
+    {"check": "IV-01", "description": "taskcards.total matches len(taskcards)", "verdict": "PASS", "details": "total=51, len=51"},
+    {"check": "IV-02", "description": "All COMPLETE taskcards have non-PENDING, non-DEFERRED, non-empty evidence", "verdict": "PASS", "details": "40 COMPLETE, 0 violations"},
+    {"check": "IV-03", "description": "20 PR packets exist on disk", "verdict": "PASS", "details": "glob count=20"},
+    {"check": "IV-04", "description": "restore.log present per W17 proven package", "verdict": "PASS", "details": "threed/convert-3d-model:274B, font/convert-font:262B"},
+    {"check": "IV-05", "description": "build.log present per W17 proven package", "verdict": "PASS", "details": "threed/convert-3d-model:419B, font/convert-font:401B"},
+    {"check": "IV-06", "description": "run.log present per W17 proven package", "verdict": "PASS", "details": "threed/convert-3d-model:50B, font/convert-font:114B"},
+    {"check": "IV-07", "description": "final/git-status-final.txt present (post-sprint)", "verdict": "PASS", "details": "Captured after all sprint work; no .pfx"},
+    {"check": "IV-08", "description": "No .pfx in final git-status or git index", "verdict": "PASS", "details": "grep .pfx final-git-status: no matches"},
+    {"check": "IV-09", "description": "validators/pytest-raw.log present with pytest output", "verdict": "PASS", "details": "3828 passed, 18 skipped, 0 failures"},
+    {"check": "IV-10", "description": "pytest full suite: 0 failures", "verdict": "PASS", "details": "3828 passed"},
+    {"check": "IV-11", "description": "threed/convert-3d-model output-validation.json PASS", "verdict": "PASS", "details": "model.obj exists, non-empty, WavefrontOBJ header present"},
+    {"check": "IV-12", "description": "font/convert-font output-validation.json PASS", "verdict": "PASS", "details": "font-info.txt exists, Family: Source Code Pro ExtraLight, Glyphs: 1568"},
+    {"check": "IV-13", "description": "threed.yaml registry_status=CANONICAL_PACKAGE_PROVEN", "verdict": "PASS", "details": "convert-3d-model updated in W17"},
+    {"check": "IV-14", "description": "font.yaml registry_status=CANONICAL_PACKAGE_PROVEN", "verdict": "PASS", "details": "convert-font updated in W17"},
+    {"check": "IV-15", "description": "wave16-contradiction-inventory.json has 7 defects with severity", "verdict": "PASS", "details": "W16-DEF-01..07 documented"},
+    {"check": "IV-16", "description": "wave16-closeout-addendum-v2.json has repair verdicts for all 7 defects", "verdict": "PASS", "details": "5 REPAIRED_IN_W17, 2 DOCUMENTED"}
+  ],
+  "total_checks": 16,
+  "pass_count": 16,
+  "fail_count": 0,
+  "iv_verdict": "IV_PASS",
+  "pytest_count": "3828 passed, 18 skipped, 10 subtests passed",
+  "pytest_failures": 0
+}

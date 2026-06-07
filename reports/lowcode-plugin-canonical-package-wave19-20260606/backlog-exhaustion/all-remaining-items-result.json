@@ -1,0 +1,14 @@
+{
+  "artifact_type": "ALL_REMAINING_ITEMS_RESULT",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "registry_items_not_proven": [
+    {
+      "slug": "svg/svg-to-image-converter",
+      "status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "blocker_class": "CANONICAL_URL_UNRESOLVED",
+      "next_action": "Confirm canonical URL; page not confirmed in catalog"
+    }
+  ],
+  "all_locally_solvable_items_resolved": true
+}

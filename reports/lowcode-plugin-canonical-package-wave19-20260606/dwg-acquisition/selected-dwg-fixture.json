@@ -1,0 +1,17 @@
+{
+  "artifact_type": "SELECTED_DWG_FIXTURE",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "fixture_name": "Drawing11.dwg",
+  "source_repo": "https://github.com/aspose-cad/Aspose.CAD-for-.NET",
+  "source_path": "Examples/Data/DWG-Drawings/Drawing11.dwg",
+  "download_url": "https://raw.githubusercontent.com/aspose-cad/Aspose.CAD-for-.NET/master/Examples/Data/DWG-Drawings/Drawing11.dwg",
+  "size_bytes": 19378,
+  "sha256": "8a6e1bf534a3c689331607a88c0e6d46620c791a2b2b8b16b92ffed052b43599",
+  "selection_reason": "Smallest DWG file in repo (19378 bytes); loads successfully with Aspose.CAD 24.12.0",
+  "license_note": "Official Aspose sample data provided for API testing. Reuse for SDK example testing is consistent with official Aspose sample policy.",
+  "local_paths": [
+    "reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/cad/convert-dwg-to-pdf/fixtures/Drawing11.dwg",
+    "reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/cad/convert-dwg-to-jpg/fixtures/Drawing11.dwg"
+  ]
+}

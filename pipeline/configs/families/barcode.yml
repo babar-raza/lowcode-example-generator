@@ -1,13 +1,11 @@
 family: barcode
 display_name: Aspose.BarCode for .NET
-enabled: false
-status: disabled
-# CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
-# NuGet package resolved successfully; DllReflector found 0 plugin types.
-# Do not re-enable without evidence of a new LowCode namespace release.
-# NOTE: package_id below uses standard Aspose naming convention.
-# Verify exact NuGet package ID at nuget.org before enabling generation.
-# Discovery run will fail gracefully if package does not exist.
+enabled: true
+status: discovery_only
+# TC-IMPL-007: Updated 2026-06-04 for non-LowCode fallback sprint.
+# No LowCode namespace. Using fallback_strategy=capability_registry.
+# BarcodeGenerator.Save confirmed via DllReflector (Aspose.BarCode 26.5.0 / net8.0).
+# Probe verdict: see reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/
 
 nuget:
   package_id: Aspose.BarCode
@@ -27,6 +25,7 @@ plugin_detection:
   namespace_patterns:
     - Aspose.BarCode.LowCode
     - Aspose.BarCode.LowCode.*
+  fallback_strategy: capability_registry
 
 github:
   official_examples_repo:
@@ -35,7 +34,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-barcode-net
-    repo: Aspose.BarCode.LowCode-for-.NET-Examples
+    repo: Aspose.BarCode.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

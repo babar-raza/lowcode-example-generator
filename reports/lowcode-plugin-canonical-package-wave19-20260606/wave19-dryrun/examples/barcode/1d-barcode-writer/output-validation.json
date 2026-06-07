@@ -1,0 +1,18 @@
+{
+  "package": "barcode/1d-barcode-writer",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.BarCode 24.12.0",
+  "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+  "api_used": "BarcodeGenerator(EncodeTypes.Code128, data).Save(path, BarCodeImageFormat.Png)",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "output_files": [
+    {"path": "output/barcode-1d.png", "size_bytes": 21937, "role": "generated 1D Code128 barcode image"},
+    {"path": "output/result.txt", "role": "generation summary"}
+  ],
+  "output_validation_status": "PASS",
+  "proven_wave": "W19",
+  "pclc_eligible": true
+}

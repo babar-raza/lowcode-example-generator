@@ -1,0 +1,16 @@
+{
+  "artifact_type": "PUBLICATION_BLOCKERS",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "blockers": [
+    {
+      "class": "EXTERNAL_REVIEW_PENDING",
+      "description": "3 open PRs await human review and merge",
+      "repos": [
+        "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+        "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+        "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples"
+      ]
+    }
+  ]
+}

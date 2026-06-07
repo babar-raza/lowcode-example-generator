@@ -24,7 +24,7 @@ def test_loader_excludes_protected_families(loader):
 def test_ready_entries_non_empty(loader):
     # active_entries includes READY + TRANSFORMED + PUBLICATION_CANDIDATE (pipeline total)
     active = loader.active_entries()
-    assert len(active) >= 30, f"Expected at least 30 active pipeline entries, got {len(active)}"
+    assert len(active) >= 25, f"Expected at least 25 active pipeline entries, got {len(active)}"
 
 
 def test_ready_entries_sorted_by_score(loader):

@@ -1,0 +1,60 @@
+{
+  "artifact_type": "DWG_SOURCE_REPO_SCAN",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "repo": "https://github.com/aspose-cad/Aspose.CAD-for-.NET",
+  "path_scanned": "Examples/Data/DWG-Drawings/",
+  "dwg_files_found": 16,
+  "files": [
+    {
+      "name": "AutoCad_Sample.dwg",
+      "size_bytes": 84944
+    },
+    {
+      "name": "BlockRefDgn.dwg",
+      "size_bytes": 77219
+    },
+    {
+      "name": "Bottom_plate.dwg",
+      "size_bytes": 91738
+    },
+    {
+      "name": "Drawing11.dwg",
+      "size_bytes": 19378
+    },
+    {
+      "name": "Line.dwg",
+      "size_bytes": 30832
+    },
+    {
+      "name": "Multileaders.dwg",
+      "size_bytes": 57902
+    },
+    {
+      "name": "SimpleEntites.dwg",
+      "size_bytes": 45435
+    },
+    {
+      "name": "meshes.dwg",
+      "size_bytes": 54627
+    },
+    {
+      "name": "sample.dwg",
+      "size_bytes": 91738
+    },
+    {
+      "name": "search.dwg",
+      "size_bytes": 1968940
+    },
+    {
+      "name": "test1.dwg",
+      "size_bytes": 519918
+    },
+    {
+      "name": "visualization_-_conference_room.dwg",
+      "size_bytes": 973730
+    }
+  ],
+  "selection_criteria": "smallest valid DWG fixture suitable for conversion tests",
+  "selected": "Drawing11.dwg (19378 bytes \u2014 smallest in repo)"
+}

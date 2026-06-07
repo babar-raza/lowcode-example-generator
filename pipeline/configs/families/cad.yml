@@ -35,7 +35,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-cad-net
-    repo: Aspose.CAD.LowCode-for-.NET-Examples
+    repo: Aspose.CAD.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

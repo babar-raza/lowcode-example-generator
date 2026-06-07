@@ -1,0 +1,18 @@
+{
+  "artifact_type": "WAVE18_SIDECAR_ATTESTATION_REVIEW",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "w18_bundle_sha": "35c2f34c181f97c516c60f41350c4e7bf20e5d9e1757cd8e178d003092b55646",
+  "sidecar_in_bundle": false,
+  "sidecar_on_disk": true,
+  "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave18-20260606.sha256",
+  "attestation_in_bundle": false,
+  "attestation_on_disk": true,
+  "attestation_path": "reports/lowcode-plugin-canonical-package-wave18-20260606/final/final-attestation.json",
+  "sprint_closeout_in_bundle": false,
+  "sprint_closeout_on_disk": true,
+  "sprint_closeout_path": "reports/lowcode-plugin-canonical-package-wave18-20260606/final/sprint-closeout.json",
+  "protocol_compliance": "v2 COMPLIANT: sidecar and attestation are external (not in bundle). Correct per Evidence Authority Protocol v2.",
+  "reviewer_gap": "Reviewer only received ZIP; sidecar/attestation were not uploaded separately. W19 resolves with self-contained bundle.",
+  "verdict": "W18_SIDECAR_EXISTS_ON_DISK_MATCHES_BUNDLE_SHA"
+}

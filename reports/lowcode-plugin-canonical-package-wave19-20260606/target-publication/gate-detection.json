@@ -1,0 +1,9 @@
+{
+  "artifact_type": "GATE_DETECTION",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "APPROVE_LIVE_PR": true,
+  "GH_TOKEN": "SET (gh CLI authenticated as babar-raza, repo+workflow scopes)",
+  "GL_TOKEN": "NOT_REQUIRED (target repos are GitHub)",
+  "gate_verdict": "LIVE_PR_GATES_OPEN -- creating real PRs to all 3 target repos"
+}

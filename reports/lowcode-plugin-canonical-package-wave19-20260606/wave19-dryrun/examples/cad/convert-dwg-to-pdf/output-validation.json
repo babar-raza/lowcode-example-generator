@@ -1,0 +1,21 @@
+{
+  "package": "cad/convert-dwg-to-pdf",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "nuget_package": "Aspose.CAD 24.12.0",
+  "canonical_url": "https://products.aspose.net/cad/convert-dwg-to-pdf/",
+  "api_used": "Image.Load(dwgPath) + CadRasterizationOptions(PageWidth=1200, PageHeight=900) + PdfOptions + image.Save(pdfPath, pdfOpts)",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "fixture": "fixtures/Drawing11.dwg (19378 bytes, from github.com/aspose-cad/Aspose.CAD-for-.NET, public domain sample)",
+  "output_files": [
+    {"path": "output/output.pdf", "size_bytes": 43288, "role": "converted PDF from DWG drawing"},
+    {"path": "output/conversion-result.txt", "role": "conversion summary"}
+  ],
+  "output_validation_status": "PASS",
+  "output_marker_check": "output.pdf is 43288 bytes (non-empty); conversion-result.txt confirms DWG→PDF path",
+  "blocker_reclassification": "Was FIXTURE_BLOCKED (DWG binary format assumed uncreateable). Resolved by using Drawing11.dwg from aspose-cad/Aspose.CAD-for-.NET GitHub repo (public DWG sample).",
+  "proven_wave": "W19",
+  "pclc_eligible": true
+}

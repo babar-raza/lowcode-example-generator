@@ -1,0 +1,19 @@
+{
+  "artifact_type": "REPO_VALIDATION",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "family": "barcode",
+  "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+  "clone_status": "PASS",
+  "branch": "lowcode/wave19/barcode-plugin-examples",
+  "pushed": true,
+  "packages": [
+    "barcode/1d-barcode-reader",
+    "barcode/2d-barcode-reader",
+    "barcode/1d-barcode-writer",
+    "barcode/2d-barcode-writer"
+  ],
+  "pr_url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "status": "PR_CREATED"
+}

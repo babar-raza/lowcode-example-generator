@@ -1,0 +1,38 @@
+{
+  "artifact_type": "FULL_REGISTRY_DERIVED_BACKLOG",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "items_attempted": [
+    {
+      "slug": "cad/convert-dwg-to-pdf",
+      "prior_status": "CODE_HARVESTED",
+      "result": "CANONICAL_PACKAGE_PROVEN",
+      "wave": "W19"
+    },
+    {
+      "slug": "cad/convert-dwg-to-jpg",
+      "prior_status": "NEEDS_MANUAL_MAPPING",
+      "result": "CANONICAL_PACKAGE_PROVEN",
+      "wave": "W19"
+    },
+    {
+      "slug": "barcode/1d-barcode-writer",
+      "prior_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "result": "CANONICAL_PACKAGE_PROVEN",
+      "wave": "W19"
+    },
+    {
+      "slug": "barcode/2d-barcode-writer",
+      "prior_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "result": "CANONICAL_PACKAGE_PROVEN",
+      "wave": "W19"
+    },
+    {
+      "slug": "svg/svg-to-image-converter",
+      "prior_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "result": "DEFERRED",
+      "reason": "No canonical product page confirmed for svg-to-image-converter; svg-to-pdf-converter and vectorizer are the confirmed canonical slugs"
+    }
+  ],
+  "new_packages_proven_w19": 4
+}

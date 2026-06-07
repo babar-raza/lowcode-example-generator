@@ -1,0 +1,39 @@
+{
+  "artifact_type": "FINAL_BLOCKER_REGISTER",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "blockers": [
+    {
+      "id": "EXT-01",
+      "description": "barcode PR #1 awaiting human review+merge",
+      "class": "EXTERNAL_REVIEW",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1"
+    },
+    {
+      "id": "EXT-02",
+      "description": "svg PR #1 awaiting human review+merge",
+      "class": "EXTERNAL_REVIEW",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1"
+    },
+    {
+      "id": "EXT-03",
+      "description": "cad PR #1 awaiting human review+merge",
+      "class": "EXTERNAL_REVIEW",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1"
+    },
+    {
+      "id": "EXT-04",
+      "description": "6 older PRs in external review (cells#7,diagram#3,email#2,pdf#22,slides#2,words#8)",
+      "class": "EXTERNAL_REVIEW_LEGACY"
+    },
+    {
+      "id": "LOC-01",
+      "description": "svg/svg-to-image-converter: canonical URL unresolved",
+      "class": "LOCAL_PRODUCT_DECISION",
+      "blocker_resolution": "Confirm canonical URL with product team"
+    }
+  ]
+}

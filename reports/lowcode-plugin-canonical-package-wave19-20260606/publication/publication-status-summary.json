@@ -1,0 +1,10 @@
+{
+  "artifact_type": "PUBLICATION_STATUS_SUMMARY",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "barcode_pr": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+  "svg_pr": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1",
+  "cad_pr": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1",
+  "status": "PR_CREATED_ALL_3_TARGET_REPOS",
+  "remaining_gate": "HUMAN_REVIEW_AND_MERGE"
+}

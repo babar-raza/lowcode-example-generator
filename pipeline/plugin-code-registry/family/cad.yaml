@@ -50,8 +50,11 @@ plugins:
   canonical_url: https://products.aspose.net/cad/convert-dwg-to-pdf/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 8159951a04a245cb
-  registry_status: CODE_HARVESTED
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
+  canonical_package_wave: wave19
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/cad/convert-dwg-to-pdf
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
   - 620b5de393c55b4f7b664513476ebfff
@@ -167,8 +170,11 @@ plugins:
   canonical_url: https://products.aspose.net/cad/convert-dwg-to-jpg/
   page_source_status: SOURCE_CATALOG_VERIFIED
   page_hash: 6970b9174150d268
-  registry_status: NEEDS_MANUAL_MAPPING
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
+  canonical_package_wave: wave19
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/cad/convert-dwg-to-jpg
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
   next_action: Canonical URL confirmed via prior sprint catalog; manually write code

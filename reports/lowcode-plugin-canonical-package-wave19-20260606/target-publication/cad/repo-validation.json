@@ -1,0 +1,20 @@
+{
+  "artifact_type": "REPO_VALIDATION",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "family": "cad",
+  "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+  "clone_status": "PASS",
+  "branch": "lowcode/wave19/cad-plugin-examples",
+  "pushed": true,
+  "packages": [
+    "cad/convert-dxf-to-pdf",
+    "cad/convert-cad-to-pdf",
+    "cad/convert-cad-to-image",
+    "cad/convert-dwg-to-pdf",
+    "cad/convert-dwg-to-jpg"
+  ],
+  "pr_url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1",
+  "pr_number": 1,
+  "status": "PR_CREATED"
+}

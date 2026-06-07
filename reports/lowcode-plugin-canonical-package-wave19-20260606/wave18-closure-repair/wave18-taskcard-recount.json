@@ -1,0 +1,21 @@
+{
+  "artifact_type": "WAVE18_TASKCARD_RECOUNT",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "source": "bundle:reports/lowcode-plugin-canonical-package-wave18-20260606/taskcards/taskcards.json",
+  "bundle_sha": "35c2f34c181f97c516c60f41350c4e7bf20e5d9e1757cd8e178d003092b55646",
+  "total": 53,
+  "complete": 49,
+  "pending": 4,
+  "pending_ids": [
+    "W18-L0-07",
+    "W18-L0-08",
+    "W18-L0-09",
+    "W18-LH-03"
+  ],
+  "on_disk_total": 53,
+  "on_disk_complete": 53,
+  "on_disk_pending": 0,
+  "discrepancy_reason": "4 bundle-close taskcards (L0-07,L0-08,L0-09,LH-03) were updated to COMPLETE on-disk after bundle freeze; bundle is authoritative and shows 49/4",
+  "verdict": "BUNDLE_IS_AUTHORITATIVE_49_COMPLETE_4_PENDING"
+}

@@ -1,0 +1,48 @@
+{
+  "artifact_type": "LIVE_PR_RESULTS",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "prs_created": 3,
+  "total_packages_in_prs": 12,
+  "results": [
+    {
+      "family": "barcode",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+      "pr_number": 1,
+      "packages": [
+        "barcode/1d-barcode-reader",
+        "barcode/2d-barcode-reader",
+        "barcode/1d-barcode-writer",
+        "barcode/2d-barcode-writer"
+      ],
+      "status": "PR_CREATED"
+    },
+    {
+      "family": "svg",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1",
+      "pr_number": 1,
+      "packages": [
+        "svg/svg-to-pdf-converter",
+        "svg/vectorizer",
+        "svg/merge-svg"
+      ],
+      "status": "PR_CREATED"
+    },
+    {
+      "family": "cad",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr_url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1",
+      "pr_number": 1,
+      "packages": [
+        "cad/convert-dxf-to-pdf",
+        "cad/convert-cad-to-pdf",
+        "cad/convert-cad-to-image",
+        "cad/convert-dwg-to-pdf",
+        "cad/convert-dwg-to-jpg"
+      ],
+      "status": "PR_CREATED"
+    }
+  ]
+}

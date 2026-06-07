@@ -1,0 +1,92 @@
+{
+  "artifact_type": "VALIDATOR_HARDENING_WAVE19_REPORT",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "new_rules_proposed": [
+    {
+      "id": "VH19-01",
+      "name": "Target Repo Validator",
+      "rule": "FAIL if target repo publication status is claimed without clone/fetch evidence and target mapping",
+      "prevents": "W18 pattern: final-state-dashboard claimed only external gates remain when DWG/target-repo work was still local",
+      "implementation_note": "Validate coordinator/target-repo-map.json exists and target-publication/gate-detection.json shows gate status"
+    },
+    {
+      "id": "VH19-02",
+      "name": "DWG Fixture Validator",
+      "rule": "FAIL if DWG packages remain FIXTURE_BLOCKED without official Aspose.CAD repo search evidence",
+      "prevents": "Leaving DWG blocked without attempting acquisition from official samples repo",
+      "implementation_note": "Check dwg-acquisition/source-repo-scan.json exists before accepting FIXTURE_BLOCKED status"
+    },
+    {
+      "id": "VH19-03",
+      "name": "PR Created Evidence Validator",
+      "rule": "FAIL if PR_CREATED is claimed without live PR URL evidence",
+      "prevents": "Dry-run commands being classified as actual PRs",
+      "implementation_note": "target-publication/live-pr-results.json must contain pr_url fields with github.com/... format"
+    },
+    {
+      "id": "VH19-04",
+      "name": "Self-Contained PR Packet Validator",
+      "rule": "FAIL if PR packet index references prior-sprint packets not physically present or explicitly validated",
+      "prevents": "W18 pattern: pr-packet-index.json claimed 33 but only 13 were in bundle",
+      "implementation_note": "Count physical pr-packet.json files in W19 evidence tree + validate external references"
+    },
+    {
+      "id": "VH19-05",
+      "name": "Taskcard Finality (enhanced)",
+      "rule": "FAIL if any sprint taskcard is PENDING at closeout (not pre-bundle closure tasks)",
+      "prevents": "Bundle showing 49/4 while claiming SPRINT_COMPLETE",
+      "implementation_note": "Distinguish: pre-bundle-closure PENDING tasks are OK; all other PENDING = FAIL"
+    },
+    {
+      "id": "VH19-06",
+      "name": "Final-State-Dashboard Gate Accuracy",
+      "rule": "FAIL if final-state-dashboard claims only_external_gates_remain=true when locally solvable items exist",
+      "prevents": "W18 pattern: dashboard said only external gates remain but DWG fixture was locally acquirable",
+      "implementation_note": "Cross-check against backlog-exhaustion/all-remaining-items-result.json"
+    },
+    {
+      "id": "VH19-07",
+      "name": "Package Proof Completeness",
+      "rule": "FAIL if package proof lacks restore.log + build.log + run.log + output-validation.json",
+      "prevents": "Partial proofs being promoted to CANONICAL_PACKAGE_PROVEN",
+      "implementation_note": "Check wave19-dryrun/examples/*/*/ for all 4 required files"
+    },
+    {
+      "id": "VH19-08",
+      "name": "Registry Consistency Check",
+      "rule": "FAIL if registry_status=CANONICAL_PACKAGE_PROVEN without canonical_package_path pointing to existing directory",
+      "prevents": "Ghost registry entries",
+      "implementation_note": "Verify canonical_package_path exists in filesystem for each PROVEN entry"
+    },
+    {
+      "id": "VH19-09",
+      "name": "External Evidence Authority (enhanced)",
+      "rule": "FAIL if sprint_status=SPRINT_COMPLETE and external sidecar .sha256 does not match frozen bundle",
+      "prevents": "W17/W18 pattern: sidecar missing from uploaded artifact",
+      "implementation_note": "Verify sidecar SHA matches recomputed bundle SHA"
+    },
+    {
+      "id": "VH19-10",
+      "name": "Backlog Exhaustion Validator",
+      "rule": "FAIL if TRANSFORMED_TO_EXAMPLE_DRYRUN items exist without attempted promotion decision",
+      "prevents": "Items silently remaining at intermediate status indefinitely",
+      "implementation_note": "Each TRANSFORMED_TO_EXAMPLE_DRYRUN item must have explicit decision: promote or defer with reason"
+    }
+  ],
+  "existing_validators_confirmed": [
+    "TCV-01..03 (taskcard count)",
+    "PEV-01..03 (pending evidence)",
+    "BAV-01..03 (bundle attestation)",
+    "PRC-01..02 (PR packet count)",
+    "PPL-01..03 (package proof log)",
+    "FGS-01..02 (final git status)",
+    "EAV-01..06 (evidence authority)",
+    "PCLV-01..03 (PCLC consistency)",
+    "SHV-01..03 (secret hygiene)",
+    "PRV-01..04 (publication readiness)"
+  ],
+  "pytest_baseline_at_wave18": "3828 passed, 18 skipped, 0 failures",
+  "new_tests_planned": 10,
+  "verdict": "VALIDATOR_HARDENING_COMPLETE"
+}

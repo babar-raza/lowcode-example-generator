@@ -1,0 +1,13 @@
+{
+  "artifact_type": "FINAL_ATTESTATION",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE19-TRUE-FINISH-LINE-DWG-TARGET-REPO-PUBLICATION-MEGA-TRAIN-001",
+  "date": "2026-06-06",
+  "protocol_version": "v2",
+  "note": "Written AFTER bundle freeze per v2 protocol.",
+  "bundle_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave19-20260606.zip",
+  "sha256": "a82d285547f6b9ab786b7120197093128ce6428ae362bd663493d6a81a23bd2d",
+  "size_bytes": 91289,
+  "entry_count": 81,
+  "sidecar_path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave19-20260606.sha256"
+}

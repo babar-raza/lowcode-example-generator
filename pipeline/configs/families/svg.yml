@@ -32,7 +32,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-svg-net
-    repo: Aspose.SVG.LowCode-for-.NET-Examples
+    repo: Aspose.SVG.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

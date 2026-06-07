@@ -13,7 +13,10 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 1d-barcode-writer;
     BarcodeGenerator class available
   page_hash: 1770337e14ce0847
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_wave: wave19
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/barcode/1d-barcode-writer
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -131,7 +134,10 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as 2d-barcode-writer;
     ComplexBarcodeGenerator class available
   page_hash: de4a52c3c2c2ae3d
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  canonical_package_wave: wave19
+  canonical_package_proven_at: '2026-06-06'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave19-20260606/wave19-dryrun/examples/barcode/2d-barcode-writer
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/barcode/2d-barcode-writer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'

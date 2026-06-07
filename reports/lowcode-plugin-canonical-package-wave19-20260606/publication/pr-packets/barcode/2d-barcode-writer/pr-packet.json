@@ -1,0 +1,14 @@
+{
+  "artifact_type": "PR_PACKET",
+  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
+  "date": "2026-06-06",
+  "family": "barcode",
+  "slug": "2d-barcode-writer",
+  "canonical_url": "https://products.aspose.net/barcode/2d-barcode-writer/",
+  "proven_wave": "W19",
+  "pr_packet_exists": true,
+  "publication_status": "PR_CREATED",
+  "target_repo": "aspose-barcode-net/Aspose.Barcode.Plugins-for-.NET-Examples",
+  "pr_url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+  "output_validation_status": "PASS"
+}

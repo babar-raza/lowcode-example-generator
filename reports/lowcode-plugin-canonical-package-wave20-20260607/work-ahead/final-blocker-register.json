@@ -1,0 +1,50 @@
+{
+  "artifact_type": "FINAL_BLOCKER_REGISTER",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "local_blockers": [],
+  "external_blockers": [
+    {
+      "id": "EXT-01",
+      "description": "barcode PR#1 human review/approve/merge",
+      "url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+      "class": "EXTERNAL_APPROVAL",
+      "blocking_agent": false
+    },
+    {
+      "id": "EXT-02",
+      "description": "svg PR#1 human review/approve/merge",
+      "url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1",
+      "class": "EXTERNAL_APPROVAL",
+      "blocking_agent": false
+    },
+    {
+      "id": "EXT-03",
+      "description": "cad PR#1 human review/approve/merge",
+      "url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1",
+      "class": "EXTERNAL_APPROVAL",
+      "blocking_agent": false
+    },
+    {
+      "id": "EXT-04",
+      "description": "6 older PRs (cells#7, diagram#3, email#2, pdf#22, slides#2, words#8) status check",
+      "class": "CREDENTIAL_BLOCKED",
+      "blocking_agent": false,
+      "note": "Token missing read:org scope; human must check in GitHub UI"
+    },
+    {
+      "id": "EXT-05",
+      "description": "Create 9 target repos for remaining PCLC families (html, gis, tex, psd, tasks, font, 3d, omr, finance)",
+      "class": "EXTERNAL_REPO_CREATION",
+      "blocking_agent": false
+    },
+    {
+      "id": "EXT-06",
+      "description": "Release packages after merge (NuGet/GitHub Release creation)",
+      "class": "EXTERNAL_RELEASE",
+      "blocking_agent": false
+    }
+  ],
+  "all_local_work_complete": true,
+  "verdict": "APPROVAL_BLOCKED — all local work exhausted, only external human gates remain"
+}

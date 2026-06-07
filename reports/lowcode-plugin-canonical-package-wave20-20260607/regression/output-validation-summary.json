@@ -1,0 +1,14 @@
+{
+  "artifact_type": "OUTPUT_VALIDATION_SUMMARY",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "packages_verified": 5,
+  "all_pass": true,
+  "summary": {
+    "cad/convert-dwg-to-pdf": "VERIFIED",
+    "cad/convert-dwg-to-jpg": "VERIFIED",
+    "barcode/1d-barcode-writer": "VERIFIED",
+    "barcode/2d-barcode-writer": "VERIFIED",
+    "svg/svg-to-image-converter": "VERIFIED"
+  }
+}

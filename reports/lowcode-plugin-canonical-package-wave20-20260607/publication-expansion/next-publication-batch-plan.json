@@ -1,0 +1,8 @@
+{
+  "artifact_type": "NEXT_PUBLICATION_BATCH_PLAN",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "wave21_target": "Create Plugins-for-.NET-Examples repos for 9 remaining PCLC families",
+  "packages_ready_for_publication": 25,
+  "note": "25 PCLC packages (all families except barcode/svg/cad) await target repo creation before PR"
+}

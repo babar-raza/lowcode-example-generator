@@ -1,0 +1,64 @@
+{
+  "artifact_type": "OPEN_PR_RECONCILIATION",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "prs": [
+    {
+      "pr_id": "cells#7",
+      "repo": "aspose-cells/Aspose.Cells-for-.NET",
+      "pr_number": 7,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    },
+    {
+      "pr_id": "diagram#3",
+      "repo": "aspose-diagram/Aspose.Diagram-for-.NET",
+      "pr_number": 3,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    },
+    {
+      "pr_id": "email#2",
+      "repo": "aspose-email/Aspose.Email-for-.NET",
+      "pr_number": 2,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    },
+    {
+      "pr_id": "pdf#22",
+      "repo": "aspose-pdf/Aspose.PDF-for-.NET",
+      "pr_number": 22,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    },
+    {
+      "pr_id": "slides#2",
+      "repo": "aspose-slides/Aspose.Slides-for-.NET",
+      "pr_number": 2,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    },
+    {
+      "pr_id": "words#8",
+      "repo": "aspose-words/Aspose.Words-for-.NET",
+      "pr_number": 8,
+      "access_result": "CREDENTIAL_BLOCKED",
+      "note": "gh CLI token has repo+workflow scopes only; org repos require read:org scope for full access. Direct gh pr view may work but org visibility blocked.",
+      "classification": "EXTERNAL_REVIEW_PENDING",
+      "action_required": "Human reviewer must check status in GitHub UI"
+    }
+  ],
+  "credential_scope": "repo+workflow (missing read:org for org repo visibility)",
+  "recommendation": "Human reviewer to check each PR and report status",
+  "last_known_state": "ALL_OPEN (as of 2026-06-02 merge sprint)"
+}

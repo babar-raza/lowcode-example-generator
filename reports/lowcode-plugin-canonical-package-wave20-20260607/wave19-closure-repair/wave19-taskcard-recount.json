@@ -1,0 +1,24 @@
+{
+  "artifact_type": "WAVE19_TASKCARD_RECOUNT",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "w19_taskcards_in_bundle": {
+    "total": 60,
+    "complete": 56,
+    "pending": 4,
+    "pending_ids": [
+      "W19-L0-07",
+      "W19-L0-08",
+      "W19-L0-09",
+      "W19-LH-03"
+    ],
+    "note": "Bundle captures pre-freeze state by design (v2 protocol). Post-freeze, taskcards.json on disk was updated to 60/60."
+  },
+  "w19_taskcards_on_disk": {
+    "total": 60,
+    "complete": 60,
+    "pending": 0,
+    "note": "On-disk taskcards.json updated post-freeze per v2 protocol closeout"
+  },
+  "resolution": "CONSISTENT — pre-freeze PENDING state is expected. v2 protocol requires bundle to capture state before post-freeze tasks execute."
+}

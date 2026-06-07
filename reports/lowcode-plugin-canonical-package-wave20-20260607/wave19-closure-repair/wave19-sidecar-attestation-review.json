@@ -1,0 +1,17 @@
+{
+  "artifact_type": "WAVE19_SIDECAR_ATTESTATION_REVIEW",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "bundle_path": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-plugin-canonical-package-wave19-20260606.zip",
+  "bundle_sha256": "a82d285547f6b9ab786b7120197093128ce6428ae362bd663493d6a81a23bd2d",
+  "bundle_size": 91289,
+  "sidecar_path": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-plugin-canonical-package-wave19-20260606.sha256",
+  "sidecar_exists": true,
+  "sidecar_content": "a82d285547f6b9ab786b7120197093128ce6428ae362bd663493d6a81a23bd2d *lowcode-plugin-canonical-package-wave19-20260606.zip",
+  "sidecar_sha_matches_bundle": true,
+  "attestation_path": "c:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-canonical-package-wave19-20260606\\evidence-authority\\final-attestation.json",
+  "attestation_exists": true,
+  "attestation_sha_matches_bundle": true,
+  "overall_verdict": "PASS",
+  "note": "User observed 'no external sidecar uploaded' — reviewing file shows sidecar DOES exist at .local/evidence-bundles/ written by _wave19_bundle.py"
+}

@@ -1,0 +1,32 @@
+{
+  "artifact_type": "PR_REVIEW",
+  "pr_url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+  "title": "feat(lowcode): add Aspose.BarCode plugin examples (Wave 19)",
+  "state": "OPEN",
+  "branch": "lowcode/wave19/barcode-plugin-examples",
+  "mergeable": "MERGEABLE",
+  "status_checks": "NONE_REQUIRED",
+  "files_included": [
+    "examples/barcode/1d-barcode-reader/Program.cs",
+    "examples/barcode/1d-barcode-reader/README.md",
+    "examples/barcode/1d-barcode-reader/barcode-1d-barcode-reader.csproj",
+    "examples/barcode/1d-barcode-reader/output-validation.json",
+    "examples/barcode/1d-barcode-writer/Program.cs",
+    "examples/barcode/1d-barcode-writer/README.md",
+    "examples/barcode/1d-barcode-writer/barcode-1d-barcode-writer.csproj",
+    "examples/barcode/1d-barcode-writer/output-validation.json",
+    "examples/barcode/2d-barcode-reader/Program.cs",
+    "examples/barcode/2d-barcode-reader/README.md",
+    "examples/barcode/2d-barcode-reader/barcode-2d-barcode-reader.csproj",
+    "examples/barcode/2d-barcode-reader/output-validation.json",
+    "examples/barcode/2d-barcode-writer/Program.cs",
+    "examples/barcode/2d-barcode-writer/README.md",
+    "examples/barcode/2d-barcode-writer/barcode-2d-barcode-writer.csproj",
+    "examples/barcode/2d-barcode-writer/output-validation.json"
+  ],
+  "packages_count": 4,
+  "code_review": "PASS — clear naming, minimal pattern, output-validation.json present, no fixtures needed",
+  "security_review": "PASS — no secrets, no certificates, no oversized binaries",
+  "classification": "MERGE_READY_APPROVAL_BLOCKED",
+  "review_date": "2026-06-07"
+}

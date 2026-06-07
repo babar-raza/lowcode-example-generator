@@ -1,0 +1,19 @@
+name: CI — svg plugin examples
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        example: [examples/**/*.csproj]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore ${{ matrix.example }}
+      - run: dotnet build -c Release --no-restore ${{ matrix.example }}
+      - run: dotnet run -c Release --project ${{ matrix.example }}

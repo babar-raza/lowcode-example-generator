@@ -1,0 +1,18 @@
+{
+  "artifact_type": "SECURITY_SCAN_REPORT",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "secret_files_found": [
+    "test-cert.pfx",
+    "test.pfx",
+    "workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode/signer/test-cert.pfx",
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/test.pfx"
+  ],
+  "pfx_staged": false,
+  "pfx_committed": false,
+  "pfx_in_bundle": false,
+  "pfx_gitignored": true,
+  "pfx_classification": "TEST_CERTIFICATES \u2014 self-signed certs for words/signer and pdf/signature examples; NOT real credentials; NOT staged/committed; .gitignore covers *.pfx",
+  "verdict": "PASS \u2014 4 test PFX files found but all gitignored, none staged or committed",
+  "gitignore_coverage": ".gitignore has *.pfx, *.pem, *.key, *.p12 entries \u2014 confirmed effective"
+}

@@ -1,0 +1,17 @@
+{
+  "artifact_type": "SHARED_FILE_OWNERSHIP",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "svg_yaml": {
+    "owner": "Lane-G",
+    "written_by": "Lane-G (registry promotion svg-to-image-converter)"
+  },
+  "final_attestation": {
+    "owner": "Lane-0",
+    "written_by": "Lane-0 post-freeze"
+  },
+  "taskcards": {
+    "owner": "Lane-0",
+    "written_by": "scripts/_wave20_taskcards.py"
+  }
+}

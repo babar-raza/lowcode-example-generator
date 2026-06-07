@@ -1,0 +1,21 @@
+{
+  "package": "svg/svg-to-image-converter",
+  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
+  "date": "2026-06-07",
+  "nuget_package": "Aspose.SVG 24.12.0",
+  "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
+  "api_used": "SVGDocument(content, '.') + ImageSaveOptions(ImageFormat.Png) + Converter.ConvertSVG(doc, opts, outputPath)",
+  "restore": "PASS",
+  "build": "PASS",
+  "run": "PASS",
+  "exit_code": 0,
+  "output_files": [
+    {"path": "output/output.png", "size_bytes": 64359, "role": "SVG converted to PNG image"}
+  ],
+  "output_validation_status": "PASS",
+  "output_marker_check": "output.png is 64359 bytes (non-empty); run.log confirms SVG->PNG conversion",
+  "prior_classification": "W19 classified as CANONICAL_URL_UNRESOLVED — INCORRECT. Registry shows page_source_status=CANONICAL_URL_CONFIRMED and dryrun_validation_status=DRYRUN_PASS since 2026-06-05.",
+  "resolution": "CANONICAL_PACKAGE_PROVEN. Package built/ran successfully. Adding to SVG PR branch in W20.",
+  "proven_wave": "W20",
+  "pclc_eligible": true
+}

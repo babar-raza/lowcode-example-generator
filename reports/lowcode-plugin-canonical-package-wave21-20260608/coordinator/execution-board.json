@@ -1,0 +1,45 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave21-20260608",
+  "sprint_id": "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE21-NONLOWCODE-PIPELINE-PARITY-HEAL-EXECUTION-VERIFICATION-MEGA-TRAIN-001",
+  "date": "2026-06-08",
+  "objective": "Pipeline parity: LowCode and non-LowCode namespaces use identical downstream processing after candidate discovery",
+  "lanes": {
+    "0": "Coordinator / plan normalization",
+    "A": "Wave 20 closeout repair",
+    "B": "LowCode reference contract audit",
+    "C": "Non-LowCode PR audit",
+    "D": "Shared downstream contract design",
+    "E": "Pipeline architecture healing",
+    "F": "Non-LowCode PR repair (live push)",
+    "G": "LowCode regression guard",
+    "H": "Manifest/expected-output parity",
+    "I": "Dependency/central package management",
+    "J": "Repo scaffolding/CI parity",
+    "K": "Publication automation parity",
+    "L": "Validator hardening",
+    "M": "State/docs/taskcard sync",
+    "N": "Independent verification + adversarial review"
+  },
+  "total_flaws_found": 14,
+  "critical_flaws": 2,
+  "high_flaws": 7,
+  "pr_scope": {
+    "barcode": {
+      "pr": 1,
+      "packages": 4,
+      "can_push": true
+    },
+    "svg": {
+      "pr": 1,
+      "packages": 4,
+      "can_push": true
+    },
+    "cad": {
+      "pr": 1,
+      "packages": 5,
+      "can_push": true
+    }
+  },
+  "github_permissions": "admin+push on all 3 plugin repos",
+  "credential_status": "ACTIVE (repo+workflow scopes)"
+}

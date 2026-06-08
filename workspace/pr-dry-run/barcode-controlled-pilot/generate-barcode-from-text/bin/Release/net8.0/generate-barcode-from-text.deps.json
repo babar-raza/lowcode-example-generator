@@ -1,0 +1,83 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "generate-barcode-from-text/1.0.0": {
+        "dependencies": {
+          "Aspose.BarCode": "26.5.0"
+        },
+        "runtime": {
+          "generate-barcode-from-text.dll": {}
+        }
+      },
+      "Aspose.BarCode/26.5.0": {
+        "dependencies": {
+          "Aspose.Drawing.Common": "25.11.0",
+          "System.Text.Encoding.CodePages": "9.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/Aspose.BarCode.dll": {
+            "assemblyVersion": "26.5.0.0",
+            "fileVersion": "26.5.0.0"
+          }
+        }
+      },
+      "Aspose.Drawing.Common/25.11.0": {
+        "runtime": {
+          "lib/netstandard2.0/Aspose.Drawing.Common.dll": {
+            "assemblyVersion": "25.11.0.0",
+            "fileVersion": "25.11.0.0"
+          }
+        }
+      },
+      "System.Text.Encoding.CodePages/9.0.2": {
+        "runtime": {
+          "lib/net8.0/System.Text.Encoding.CodePages.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.225.6610"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Text.Encoding.CodePages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.225.6610"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "generate-barcode-from-text/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aspose.BarCode/26.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KhQB12qUvKVRxlHEaWWOgsUfGkzl6/O/RCByHLHCJw3cBmIg5U37bpTErJjvAAUxVcugusOQ+Tl2VPv66sS4xA==",
+      "path": "aspose.barcode/26.5.0",
+      "hashPath": "aspose.barcode.26.5.0.nupkg.sha512"
+    },
+    "Aspose.Drawing.Common/25.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iDxQCqT7x3r1v4cH0zfiB0G8jM46hEPaAoHzO11ZcITX7OeSY8IlP1pIrKLCAhWo6mFfgnlEpdMnxELDzYoumQ==",
+      "path": "aspose.drawing.common/25.11.0",
+      "hashPath": "aspose.drawing.common.25.11.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/9.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C52wMwwMvNUDTliAmQdgvX57nHTaOGKwfFSn3KRgMHbAdZlhxrJt6CV/IMz9h02BL5tHNf/0j6lS9By4te9nTA==",
+      "path": "system.text.encoding.codepages/9.0.2",
+      "hashPath": "system.text.encoding.codepages.9.0.2.nupkg.sha512"
+    }
+  }
+}

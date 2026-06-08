@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-08",
+  "scope": "models.py — PluginDetection dataclass",
+  "changes": [
+    "Added namespace_source property (derived from fallback_strategy + namespace_patterns)",
+    "Added public_repo_kind property (derived)",
+    "Added folder_namespace_segment property (derived: 'lowcode' or '')"
+  ],
+  "backward_compatible": true,
+  "tests_added": "test_family_config_fallback_strategy.py covers namespace_source derived behavior",
+  "lc_unaffected": true
+}

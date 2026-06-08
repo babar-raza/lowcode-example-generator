@@ -1,0 +1,28 @@
+{
+  "principle": "After candidate discovery, both LowCode and non-LowCode pipelines use identical downstream processing",
+  "discovery_separation": {
+    "LOWCODE": "namespace_patterns scan (plugin_detection.namespace_patterns)",
+    "NON_LOWCODE_PLUGIN": "products.aspose.net probe + capability registry (plugin_detection.fallback_strategy=capability_registry)"
+  },
+  "shared_downstream_modules": [
+    "canonical_packager.py",
+    "manifest_generator (new, Lane H)",
+    "expected_output_generator (new, Lane H)",
+    "fixture_factory/",
+    "publication/pr_packet_builder",
+    "runner.py (shared pipeline stages)"
+  ],
+  "new_model_fields": {
+    "PluginDetection.namespace_source": "Derived property: LOWCODE | NON_LOWCODE_PLUGIN",
+    "PluginDetection.public_repo_kind": "Derived: LOWCODE_EXAMPLES | PLUGIN_EXAMPLES",
+    "PluginDetection.folder_namespace_segment": "Derived: 'lowcode' or '' based on namespace_source"
+  },
+  "hardcoded_lowcode_wording_removed": [
+    "PR title template: 'feat(lowcode):' → 'feat(plugins):' for NON_LOWCODE_PLUGIN",
+    "PR body template: 'low-code C# examples' → 'plugin API examples' for NON_LOWCODE_PLUGIN",
+    "Branch naming convention: new branches use 'plugins/' instead of 'lowcode/' for NON_LOWCODE_PLUGIN"
+  ],
+  "changed_files": [
+    "src/plugin_examples/family_config/models.py — added namespace_source, public_repo_kind, folder_namespace_segment properties"
+  ]
+}

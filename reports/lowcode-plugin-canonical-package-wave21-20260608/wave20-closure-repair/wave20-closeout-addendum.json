@@ -1,0 +1,24 @@
+{
+  "artifact_type": "WAVE20_CLOSEOUT_ADDENDUM",
+  "sprint": "lowcode-plugin-canonical-package-wave21-20260608",
+  "date": "2026-06-08",
+  "subject": "lowcode-plugin-canonical-package-wave20-20260607",
+  "finding": "Wave 20 is properly closed under v2 Evidence Authority Protocol",
+  "reviewer_concern": "Sprint closeout JSON shows complete=55, pending=4; bundle has pre-freeze snapshot showing 4 pending post-freeze taskcards",
+  "explanation": "Under v2 protocol, sprint-closeout.json is included IN the bundle and frozen before post-freeze tasks complete. The 4 pending taskcards (bundle-freeze, sidecar, attestation, SHA-verify) complete AFTER freeze by design. This is correct protocol behavior.",
+  "sha_verification": {
+    "expected": "c1ecef20b6371ef7bc8fae6f71508ba25a7e7920279f75bde859c916621e7c6c",
+    "computed": "c1ecef20b6371ef7bc8fae6f71508ba25a7e7920279f75bde859c916621e7c6c",
+    "match": true
+  },
+  "size_bytes": 81919,
+  "entry_count": 67,
+  "sidecar_present": true,
+  "attestation_present": true,
+  "on_disk_taskcards": {
+    "total": 59,
+    "complete": 59,
+    "pending": 0
+  },
+  "verdict": "WAVE20_PROPERLY_CLOSED"
+}

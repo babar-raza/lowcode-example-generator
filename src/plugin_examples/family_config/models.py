@@ -38,6 +38,23 @@ class NuGetConfig:
 class PluginDetection:
     namespace_patterns: list[str]
     fallback_strategy: str | None = None
+    # namespace_source: LOWCODE (has namespace_patterns active) | NON_LOWCODE_PLUGIN (fallback_strategy set, no namespace)
+    # public_repo_kind: LOWCODE_EXAMPLES | PLUGIN_EXAMPLES (derived from namespace_source)
+    # folder_namespace_segment: 'lowcode' for LOWCODE, '' for NON_LOWCODE_PLUGIN in single-purpose repos
+
+    @property
+    def namespace_source(self) -> str:
+        """Derived: LOWCODE if namespace patterns are primary; NON_LOWCODE_PLUGIN if fallback only."""
+        return "NON_LOWCODE_PLUGIN" if self.fallback_strategy is not None and not self.namespace_patterns else "LOWCODE"
+
+    @property
+    def public_repo_kind(self) -> str:
+        return "PLUGIN_EXAMPLES" if self.namespace_source == "NON_LOWCODE_PLUGIN" else "LOWCODE_EXAMPLES"
+
+    @property
+    def folder_namespace_segment(self) -> str:
+        """Path segment for example folder: 'lowcode' for LowCode families, '' for plugin-only repos."""
+        return "" if self.namespace_source == "NON_LOWCODE_PLUGIN" else "lowcode"
 
 
 @dataclass(frozen=True)

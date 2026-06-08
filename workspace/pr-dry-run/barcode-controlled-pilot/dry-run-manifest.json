@@ -1,0 +1,24 @@
+{
+  "dry_run": true,
+  "family": "barcode",
+  "package_id": "Aspose.BarCode",
+  "version": "26.5.0",
+  "example_name": "generate-barcode-from-text",
+  "type_name": "BarcodeGenerator",
+  "namespace": "Aspose.BarCode.Generation",
+  "method_name": "Save",
+  "registry_status": "PROBE_CONFIRMED",
+  "registry_source": "pipeline/plugin-capability-registry/barcode.yaml",
+  "probe_evidence": "reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/output-validation.json",
+  "dry_run_validation": {
+    "restore_ok": true,
+    "build_ok": true,
+    "run_ok": true,
+    "output_file": "barcode-output.png",
+    "output_size_bytes": 12104,
+    "output_validated": true
+  },
+  "live_publication": false,
+  "live_publication_blocked_reason": "Sprint constraint: no publication PRs in this sprint",
+  "generated_at": "2026-06-04T00:00:00Z"
+}

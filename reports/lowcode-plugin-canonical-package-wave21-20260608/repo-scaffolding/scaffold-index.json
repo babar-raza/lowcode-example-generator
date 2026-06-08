@@ -1,0 +1,38 @@
+[
+  {
+    "family": "barcode",
+    "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+    "scaffolding": [
+      "Directory.Packages.props",
+      "Directory.Build.props",
+      "global.json",
+      ".gitignore",
+      ".github/workflows/build.yml",
+      "README.md"
+    ]
+  },
+  {
+    "family": "svg",
+    "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+    "scaffolding": [
+      "Directory.Packages.props",
+      "Directory.Build.props",
+      "global.json",
+      ".gitignore",
+      ".github/workflows/build.yml",
+      "README.md"
+    ]
+  },
+  {
+    "family": "cad",
+    "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+    "scaffolding": [
+      "Directory.Packages.props",
+      "Directory.Build.props",
+      "global.json",
+      ".gitignore",
+      ".github/workflows/build.yml",
+      "README.md"
+    ]
+  }
+]

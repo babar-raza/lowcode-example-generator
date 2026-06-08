@@ -1,0 +1,31 @@
+{
+  "coordinator_owns": [
+    "reports/lowcode-plugin-canonical-package-wave21-20260608/taskcards/taskcards.json",
+    "reports/lowcode-plugin-canonical-package-wave21-20260608/final/sprint-closeout.json",
+    "reports/lowcode-plugin-canonical-package-wave21-20260608/evidence-authority/final-attestation.json",
+    "reports/lowcode-plugin-canonical-package-wave21-20260608/coordinator/lane-ledger.json"
+  ],
+  "lane_D_owns": [
+    "reports/lowcode-plugin-canonical-package-wave21-20260608/contract/"
+  ],
+  "lane_E_owns": [
+    "src/plugin_examples/runner.py",
+    "src/plugin_examples/family_config/models.py",
+    "src/plugin_examples/family_config/loader.py",
+    "pipeline/schemas/family-config.schema.json"
+  ],
+  "lane_L_owns": [
+    "src/plugin_examples/fixture_factory/nonlowcode_parity_validators.py",
+    "tests/unit/test_nonlowcode_parity_validators.py"
+  ],
+  "lane_H_owns": [
+    "src/plugin_examples/manifest_generator/"
+  ],
+  "forbidden_modifications": [
+    "*.pfx",
+    "*.pem",
+    "*.key",
+    "*.p12",
+    ".local/evidence-bundles/lowcode-plugin-canonical-package-wave20-*"
+  ]
+}

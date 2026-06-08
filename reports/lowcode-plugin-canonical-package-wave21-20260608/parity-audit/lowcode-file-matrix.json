@@ -1,0 +1,23 @@
+{
+  "verified_repos": [
+    "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples"
+  ],
+  "root_structure": {
+    "README.md": true,
+    "Directory.Packages.props": true,
+    "Directory.Build.props": true,
+    "global.json": true
+  },
+  "example_path": "examples/words/lowcode/converter/",
+  "files": {
+    "Program.cs": true,
+    "words-converter.csproj": true,
+    "example.manifest.json": true,
+    "expected-output.json": true,
+    "README.md": true,
+    "input.docx": true,
+    "output.pdf": true
+  },
+  "central_pkg_mgmt": true,
+  "csproj_has_version": false
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "family": "barcode",
+    "slug": "1d-barcode-reader",
+    "manifest_path": "examples/barcode/1d-barcode-reader/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "barcode",
+    "slug": "2d-barcode-reader",
+    "manifest_path": "examples/barcode/2d-barcode-reader/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "barcode",
+    "slug": "1d-barcode-writer",
+    "manifest_path": "examples/barcode/1d-barcode-writer/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "barcode",
+    "slug": "2d-barcode-writer",
+    "manifest_path": "examples/barcode/2d-barcode-writer/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "svg",
+    "slug": "merge-svg",
+    "manifest_path": "examples/svg/merge-svg/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "svg",
+    "slug": "svg-to-pdf-converter",
+    "manifest_path": "examples/svg/svg-to-pdf-converter/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "svg",
+    "slug": "vectorizer",
+    "manifest_path": "examples/svg/vectorizer/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "svg",
+    "slug": "svg-to-image-converter",
+    "manifest_path": "examples/svg/svg-to-image-converter/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "cad",
+    "slug": "convert-dxf-to-pdf",
+    "manifest_path": "examples/cad/convert-dxf-to-pdf/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "cad",
+    "slug": "convert-cad-to-pdf",
+    "manifest_path": "examples/cad/convert-cad-to-pdf/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "cad",
+    "slug": "convert-cad-to-image",
+    "manifest_path": "examples/cad/convert-cad-to-image/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "cad",
+    "slug": "convert-dwg-to-pdf",
+    "manifest_path": "examples/cad/convert-dwg-to-pdf/example.manifest.json",
+    "push_status": "PUSHED"
+  },
+  {
+    "family": "cad",
+    "slug": "convert-dwg-to-jpg",
+    "manifest_path": "examples/cad/convert-dwg-to-jpg/example.manifest.json",
+    "push_status": "PUSHED"
+  }
+]

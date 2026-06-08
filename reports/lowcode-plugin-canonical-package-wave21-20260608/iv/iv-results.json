@@ -1,0 +1,291 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave21-20260608",
+  "date": "2026-06-08",
+  "iv_checks": [
+    {
+      "id": "IV-01",
+      "check": "Wave 20 bundle SHA verified",
+      "result": "PASS",
+      "detail": "c1ecef20b6371ef7bc8fae6f71508ba25a7e7920279f75bde859c916621e7c6c"
+    },
+    {
+      "id": "IV-02",
+      "check": "Wave 20 sidecar and attestation present",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-03",
+      "check": "BarCode PR title updated (feat(plugins))",
+      "result": "PASS",
+      "detail": "feat(plugins): add Aspose.BarCode plugin examples (4 packages)"
+    },
+    {
+      "id": "IV-04",
+      "check": "BarCode PR all required files present",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-05",
+      "check": "SVG PR title updated",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-06",
+      "check": "SVG PR all required files present",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-07",
+      "check": "CAD PR title updated",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-08",
+      "check": "CAD PR all required files present",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-09",
+      "check": "PluginDetection.namespace_source property added to models.py",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-10",
+      "check": "PPV-01..16 validators implemented (nonlowcode_parity_validators.py)",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-11",
+      "check": "Shared downstream contract defined (example-publication-contract-v1.md)",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-12",
+      "check": "Folder layout ADR written",
+      "result": "PASS"
+    },
+    {
+      "id": "IV-13",
+      "check": "PR title/body no longer says 'lowcode' for non-LowCode families",
+      "result": "PASS"
+    }
+  ],
+  "pr_file_verification": [
+    {
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "barcode",
+      "pr_title": "feat(plugins): add Aspose.BarCode plugin examples (4 packages)",
+      "pr_title_ok": true,
+      "files_checked": 14,
+      "files_present": 14,
+      "all_files_ok": true,
+      "verdict": "PASS",
+      "file_details": [
+        {
+          "file": "examples/barcode/1d-barcode-reader/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/1d-barcode-reader/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/2d-barcode-reader/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/2d-barcode-reader/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/1d-barcode-writer/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/1d-barcode-writer/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/2d-barcode-writer/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/barcode/2d-barcode-writer/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "Directory.Packages.props",
+          "present": true
+        },
+        {
+          "file": "Directory.Build.props",
+          "present": true
+        },
+        {
+          "file": "global.json",
+          "present": true
+        },
+        {
+          "file": ".gitignore",
+          "present": true
+        },
+        {
+          "file": "README.md",
+          "present": true
+        },
+        {
+          "file": ".github/workflows/build.yml",
+          "present": true
+        }
+      ]
+    },
+    {
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "svg",
+      "pr_title": "feat(plugins): add Aspose.SVG plugin examples (4 packages)",
+      "pr_title_ok": true,
+      "files_checked": 14,
+      "files_present": 14,
+      "all_files_ok": true,
+      "verdict": "PASS",
+      "file_details": [
+        {
+          "file": "examples/svg/merge-svg/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/merge-svg/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/svg-to-pdf-converter/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/svg-to-pdf-converter/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/vectorizer/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/vectorizer/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/svg-to-image-converter/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/svg/svg-to-image-converter/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "Directory.Packages.props",
+          "present": true
+        },
+        {
+          "file": "Directory.Build.props",
+          "present": true
+        },
+        {
+          "file": "global.json",
+          "present": true
+        },
+        {
+          "file": ".gitignore",
+          "present": true
+        },
+        {
+          "file": "README.md",
+          "present": true
+        },
+        {
+          "file": ".github/workflows/build.yml",
+          "present": true
+        }
+      ]
+    },
+    {
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "cad",
+      "pr_title": "feat(plugins): add Aspose.CAD plugin examples (5 packages)",
+      "pr_title_ok": true,
+      "files_checked": 16,
+      "files_present": 16,
+      "all_files_ok": true,
+      "verdict": "PASS",
+      "file_details": [
+        {
+          "file": "examples/cad/convert-dxf-to-pdf/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-dxf-to-pdf/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-cad-to-pdf/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-cad-to-pdf/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-cad-to-image/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-cad-to-image/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-dwg-to-pdf/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-dwg-to-pdf/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-dwg-to-jpg/example.manifest.json",
+          "present": true
+        },
+        {
+          "file": "examples/cad/convert-dwg-to-jpg/expected-output.json",
+          "present": true
+        },
+        {
+          "file": "Directory.Packages.props",
+          "present": true
+        },
+        {
+          "file": "Directory.Build.props",
+          "present": true
+        },
+        {
+          "file": "global.json",
+          "present": true
+        },
+        {
+          "file": ".gitignore",
+          "present": true
+        },
+        {
+          "file": "README.md",
+          "present": true
+        },
+        {
+          "file": ".github/workflows/build.yml",
+          "present": true
+        }
+      ]
+    }
+  ],
+  "all_pass": true
+}

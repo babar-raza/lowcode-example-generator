@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-08",
+  "local_blockers": [],
+  "external_blockers": [
+    {
+      "id": "EXT-01",
+      "description": "BarCode PR#1 merge \u2014 requires human maintainer approval"
+    },
+    {
+      "id": "EXT-02",
+      "description": "SVG PR#1 merge \u2014 requires human maintainer approval"
+    },
+    {
+      "id": "EXT-03",
+      "description": "CAD PR#1 merge \u2014 requires human maintainer approval"
+    },
+    {
+      "id": "EXT-04",
+      "description": "Branch deletion for BarCode/SVG/CAD after merge (post EXT-01..03)"
+    },
+    {
+      "id": "EXT-05",
+      "description": "Release pipeline for all 3 plugin repos (post merge)"
+    }
+  ],
+  "local_remaining": 0,
+  "external_remaining": 5
+}

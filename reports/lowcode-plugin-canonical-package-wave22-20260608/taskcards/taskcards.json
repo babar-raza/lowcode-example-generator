@@ -1,0 +1,305 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave22-20260608",
+  "date": "2026-06-08",
+  "total": 42,
+  "complete": 42,
+  "pending": 0,
+  "pending_ids": [],
+  "pending_note": "SPRINT_COMPLETE",
+  "taskcards": [
+    {
+      "id": "W22-L0-01",
+      "lane": "L0",
+      "title": "Create coordinator artifacts",
+      "status": "COMPLETE",
+      "evidence": "execution-board.json, shared-file-ownership.json, lane-ledger.json written"
+    },
+    {
+      "id": "W22-L0-02",
+      "lane": "L0",
+      "title": "Create pre-freeze closeout",
+      "status": "COMPLETE",
+      "evidence": "pre-bundle-closeout.json written"
+    },
+    {
+      "id": "W22-L0-03",
+      "lane": "L0",
+      "title": "Freeze evidence bundle",
+      "status": "COMPLETE",
+      "evidence": "lowcode-plugin-canonical-package-wave22-20260608.zip \u2014 55,024 bytes, 70 entries"
+    },
+    {
+      "id": "W22-L0-04",
+      "lane": "L0",
+      "title": "Write .sha256 sidecar",
+      "status": "COMPLETE",
+      "evidence": "lowcode-plugin-canonical-package-wave22-20260608.sha256"
+    },
+    {
+      "id": "W22-L0-05",
+      "lane": "L0",
+      "title": "Write final-attestation.json",
+      "status": "COMPLETE",
+      "evidence": "lowcode-plugin-canonical-package-wave22-20260608-final-attestation.json"
+    },
+    {
+      "id": "W22-L0-06",
+      "lane": "L0",
+      "title": "Verify post-freeze SHA",
+      "status": "COMPLETE",
+      "evidence": "SHA-256: 1831b4854be2f0431eb798b1cf4d20701833ba31267fa738a41343ed30bdb36b"
+    },
+    {
+      "id": "W22-LA-01",
+      "lane": "LA",
+      "title": "Audit wrong-stream evidence package",
+      "status": "COMPLETE",
+      "evidence": "declaration-review-package(140).zip classified WRONG_STREAM"
+    },
+    {
+      "id": "W22-LA-02",
+      "lane": "LA",
+      "title": "Locate correct plugin evidence bundles",
+      "status": "COMPLETE",
+      "evidence": "7+ plugin bundles found in .local/evidence-bundles/"
+    },
+    {
+      "id": "W22-LB-01",
+      "lane": "LB",
+      "title": "Extract LowCode reference contract from merged cells repo",
+      "status": "COMPLETE",
+      "evidence": "lowcode-reference-contract.json; 6/6 PRs merged, 6/6 branches deleted"
+    },
+    {
+      "id": "W22-LB-02",
+      "lane": "LB",
+      "title": "Document LowCode publication lifecycle",
+      "status": "COMPLETE",
+      "evidence": "lowcode-publication-lifecycle.json"
+    },
+    {
+      "id": "W22-LC-01",
+      "lane": "LC",
+      "title": "Audit all 3 plugin PRs (BarCode, SVG, CAD)",
+      "status": "COMPLETE",
+      "evidence": "7 flaws found (3 legacy branch, 3 open PR, 1 false-positive)"
+    },
+    {
+      "id": "W22-LC-02",
+      "lane": "LC",
+      "title": "Produce gap report vs LowCode reference",
+      "status": "COMPLETE",
+      "evidence": "nonlowcode-vs-lowcode-gap-report.md"
+    },
+    {
+      "id": "W22-LD-01",
+      "lane": "LD",
+      "title": "Write example-publication-contract-v1.md",
+      "status": "COMPLETE",
+      "evidence": "contract/example-publication-contract-v1.md"
+    },
+    {
+      "id": "W22-LD-02",
+      "lane": "LD",
+      "title": "Write nonlowcode-folder-layout-adr.md",
+      "status": "COMPLETE",
+      "evidence": "contract/nonlowcode-folder-layout-adr.md"
+    },
+    {
+      "id": "W22-LD-03",
+      "lane": "LD",
+      "title": "Write readme-contract.md",
+      "status": "COMPLETE",
+      "evidence": "contract/readme-contract.md"
+    },
+    {
+      "id": "W22-LD-04",
+      "lane": "LD",
+      "title": "Write pr-lifecycle-contract.md",
+      "status": "COMPLETE",
+      "evidence": "contract/pr-lifecycle-contract.md"
+    },
+    {
+      "id": "W22-LD-05",
+      "lane": "LD",
+      "title": "Write branch-naming-policy.md",
+      "status": "COMPLETE",
+      "evidence": "contract/branch-naming-policy.md"
+    },
+    {
+      "id": "W22-LE-01",
+      "lane": "LE",
+      "title": "Add discovery_method/target_repo/branch_prefix to PluginDetection",
+      "status": "COMPLETE",
+      "evidence": "src/plugin_examples/family_config/models.py"
+    },
+    {
+      "id": "W22-LE-02",
+      "lane": "LE",
+      "title": "Add effective_discovery_method/effective_branch_prefix derived properties",
+      "status": "COMPLETE",
+      "evidence": "models.py updated"
+    },
+    {
+      "id": "W22-LE-03",
+      "lane": "LE",
+      "title": "Document shared downstream module map",
+      "status": "COMPLETE",
+      "evidence": "pipeline-healing/shared-downstream-module-map.json"
+    },
+    {
+      "id": "W22-LF-01",
+      "lane": "LF",
+      "title": "Audit per-example README quality across all 13 examples",
+      "status": "COMPLETE",
+      "evidence": "readme-parity/readme-audit.json; 13/13 needed enhancement"
+    },
+    {
+      "id": "W22-LG-01",
+      "lane": "LG",
+      "title": "Push enhanced READMEs to all 3 PR branches",
+      "status": "COMPLETE",
+      "evidence": "13/13 PUSHED (pr-repair/live-push-results.json)"
+    },
+    {
+      "id": "W22-LG-02",
+      "lane": "LG",
+      "title": "Save patch packets for all enhanced READMEs",
+      "status": "COMPLETE",
+      "evidence": "readme-parity/readme-patches/ \u2014 13 patch packets"
+    },
+    {
+      "id": "W22-LH-01",
+      "lane": "LH",
+      "title": "Audit PR merge status (new plugin + legacy LowCode)",
+      "status": "COMPLETE",
+      "evidence": "3 plugin PRs: MERGE_READY_APPROVAL_BLOCKED; 6 legacy: MERGED_BRANCH_CLEANED"
+    },
+    {
+      "id": "W22-LH-02",
+      "lane": "LH",
+      "title": "Audit branch cleanup state",
+      "status": "COMPLETE",
+      "evidence": "pr-lifecycle/branch-cleanup-audit.json"
+    },
+    {
+      "id": "W22-LH-03",
+      "lane": "LH",
+      "title": "Write branch deletion policy",
+      "status": "COMPLETE",
+      "evidence": "pr-lifecycle/branch-deletion-policy.md"
+    },
+    {
+      "id": "W22-LH-04",
+      "lane": "LH",
+      "title": "Write branch cleanup dry-run log",
+      "status": "COMPLETE",
+      "evidence": "pr-lifecycle/branch-cleanup-script-dry-run.log"
+    },
+    {
+      "id": "W22-LH-05",
+      "lane": "LH",
+      "title": "Create merge and branch cleanup approval packet",
+      "status": "COMPLETE",
+      "evidence": "approval-packets/merge-and-branch-cleanup-approval.md"
+    },
+    {
+      "id": "W22-LI-01",
+      "lane": "LI",
+      "title": "Validate CI workflows for all 3 plugin repos",
+      "status": "COMPLETE",
+      "evidence": "target-ci/workflow-validation.json; all 3 have dotnet build CI"
+    },
+    {
+      "id": "W22-LJ-01",
+      "lane": "LJ",
+      "title": "Validate all manifests and expected-output files",
+      "status": "COMPLETE",
+      "evidence": "manifest-parity/; all 13 manifests and expected-outputs valid"
+    },
+    {
+      "id": "W22-LK-01",
+      "lane": "LK",
+      "title": "Verify central package management for all 3 repos",
+      "status": "COMPLETE",
+      "evidence": "dependency/; all 3 repos use Directory.Packages.props"
+    },
+    {
+      "id": "W22-LL-01",
+      "lane": "LL",
+      "title": "Document publication automation tooling with PR templates",
+      "status": "COMPLETE",
+      "evidence": "publication-automation/tooling-report.json"
+    },
+    {
+      "id": "W22-LL-02",
+      "lane": "LL",
+      "title": "Write merge dry-run command ledger",
+      "status": "COMPLETE",
+      "evidence": "publication-automation/dry-run-command-ledger.json"
+    },
+    {
+      "id": "W22-LM-01",
+      "lane": "LM",
+      "title": "Implement PLV-01..15 validators",
+      "status": "COMPLETE",
+      "evidence": "src/plugin_examples/fixture_factory/publication_lifecycle_validators.py"
+    },
+    {
+      "id": "W22-LM-02",
+      "lane": "LM",
+      "title": "Write 36 unit tests for PLV validators",
+      "status": "COMPLETE",
+      "evidence": "tests/unit/test_publication_lifecycle_validators.py; 36/36 PASS"
+    },
+    {
+      "id": "W22-LN-01",
+      "lane": "LN",
+      "title": "Update pipeline parity architecture doc",
+      "status": "COMPLETE",
+      "evidence": "state-docs/pipeline-parity-architecture.md"
+    },
+    {
+      "id": "W22-LN-02",
+      "lane": "LN",
+      "title": "Write final publication matrix",
+      "status": "COMPLETE",
+      "evidence": "state-docs/final-publication-matrix.json"
+    },
+    {
+      "id": "W22-LN-03",
+      "lane": "LN",
+      "title": "Write target repo map",
+      "status": "COMPLETE",
+      "evidence": "state-docs/target-repo-map.json"
+    },
+    {
+      "id": "W22-LN-04",
+      "lane": "LN",
+      "title": "Update final blocker register",
+      "status": "COMPLETE",
+      "evidence": "state-docs/final-blocker-register.json; 0 local, 5 external"
+    },
+    {
+      "id": "W22-LO-01",
+      "lane": "LO",
+      "title": "Run independent verification (15 IV checks)",
+      "status": "COMPLETE",
+      "evidence": "iv/iv-results.json; 15/15 PASS"
+    },
+    {
+      "id": "W22-LO-02",
+      "lane": "LO",
+      "title": "Run adversarial review (12 claims)",
+      "status": "COMPLETE",
+      "evidence": "adversarial-review/adversarial-review-final.json; 12/12 PASS"
+    },
+    {
+      "id": "W22-LO-03",
+      "lane": "LO",
+      "title": "Full regression test suite",
+      "status": "COMPLETE",
+      "evidence": "3898 passed, 18 skipped, 0 failures (337.37s); Wave21 3862 + 36 PLV = 3898"
+    }
+  ]
+}

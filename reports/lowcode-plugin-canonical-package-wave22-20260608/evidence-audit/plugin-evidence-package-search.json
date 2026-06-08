@@ -1,0 +1,85 @@
+{
+  "searched": ".local\\evidence-bundles",
+  "bundles_found": 13,
+  "bundles": [
+    {
+      "file": "lowcode-plugin-canonical-package-wave10-20260605.zip",
+      "size_bytes": 158946,
+      "sha_file": null,
+      "sha_verified": false
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave11-20260605.zip",
+      "size_bytes": 101262,
+      "sha_file": null,
+      "sha_verified": false
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave12-20260606.zip",
+      "size_bytes": 59997,
+      "sha_file": null,
+      "sha_verified": false
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave13-20260606.zip",
+      "size_bytes": 47545,
+      "sha_file": null,
+      "sha_verified": false
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave14-20260606.zip",
+      "size_bytes": 747902,
+      "sha_file": null,
+      "sha_verified": false
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave15-20260606.zip",
+      "size_bytes": 121640,
+      "sha_file": "lowcode-plugin-canonical-package-wave15-20260606.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave16-20260606.zip",
+      "size_bytes": 101013,
+      "sha_file": "lowcode-plugin-canonical-package-wave16-20260606.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave17-20260606.zip",
+      "size_bytes": 61586,
+      "sha_file": "lowcode-plugin-canonical-package-wave17-20260606.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave18-20260606.zip",
+      "size_bytes": 227811,
+      "sha_file": "lowcode-plugin-canonical-package-wave18-20260606.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave19-20260606.zip",
+      "size_bytes": 91289,
+      "sha_file": "lowcode-plugin-canonical-package-wave19-20260606.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave20-20260607.zip",
+      "size_bytes": 81919,
+      "sha_file": "lowcode-plugin-canonical-package-wave20-20260607.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave21-20260608.zip",
+      "size_bytes": 26693,
+      "sha_file": "lowcode-plugin-canonical-package-wave21-20260608.sha256",
+      "sha_verified": true
+    },
+    {
+      "file": "lowcode-plugin-canonical-package-wave9-20260605.zip",
+      "size_bytes": 150885,
+      "sha_file": null,
+      "sha_verified": false
+    }
+  ],
+  "conclusion": "13 plugin evidence bundles found; latest=W21"
+}

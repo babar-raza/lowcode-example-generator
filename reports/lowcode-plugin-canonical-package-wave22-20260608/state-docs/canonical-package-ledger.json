@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-08",
+  "total_pclc": 38,
+  "total_proven": 71,
+  "wave22_changes": {
+    "new_packages": 0,
+    "new_validators": 15,
+    "readme_enhancements": 13,
+    "pipeline_convergence_fields": 3
+  },
+  "by_family": {
+    "barcode": {
+      "pclc": 4,
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "pr_state": "OPEN"
+    },
+    "svg": {
+      "pclc": 4,
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "pr_state": "OPEN"
+    },
+    "cad": {
+      "pclc": 5,
+      "registry_status": "CANONICAL_PACKAGE_PROVEN",
+      "pr_state": "OPEN"
+    }
+  }
+}

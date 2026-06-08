@@ -1,0 +1,15 @@
+{
+  "package_name": "declaration-review-package(140).zip",
+  "searched_locations": [
+    ".",
+    "c:\\Users\\prora\\Downloads",
+    "c:\\Users\\prora\\Desktop"
+  ],
+  "found_at": [],
+  "classification": "WRONG_STREAM",
+  "reason": "This package name pattern ('declaration-review-package') matches Format Factory authority-conveyor/supervisor workflow artifacts, not Aspose plugin examples pipeline. Expected plugin pipeline evidence includes: PR artifacts, target repo references, example.manifest.json, expected-output.json, plugin family configs, and sprint taskcards in lowcode-plugin-canonical-package-waveN-YYYYMMDD format. This package lacks all of those identifiers.",
+  "action": "EXCLUDED_FROM_REVIEW \u2014 not used as proof of plugin pipeline success",
+  "disk_status": "NOT_FOUND_IN_WORKING_DIRECTORY",
+  "correct_evidence_bundle": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave21-20260608.zip",
+  "correct_bundle_sha": "cf677d8f51b55b66796f73d83e160bf2d5e22f9ba12171d196416719c4ea76f1"
+}

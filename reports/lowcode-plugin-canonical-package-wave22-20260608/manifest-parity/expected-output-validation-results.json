@@ -1,0 +1,83 @@
+{
+  "date": "2026-06-08",
+  "examples": [
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-reader",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-reader",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-writer",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-writer",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "svg",
+      "slug": "merge-svg",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-image-converter",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-pdf-converter",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "svg",
+      "slug": "vectorizer",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-jpg",
+      "expected_output_valid": true,
+      "issues": []
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-pdf",
+      "expected_output_valid": true,
+      "issues": []
+    }
+  ]
+}

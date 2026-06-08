@@ -1,0 +1,19 @@
+# Branch Cleanup Dry-Run Log
+
+Date: 2026-06-08
+
+[DRY-RUN] DELETE branch 'lowcode/wave19/barcode-plugin-examples' in aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples
+  Command: gh api repos/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/git/refs/heads/lowcode%2Fwave19%2Fbarcode-plugin-examples --method DELETE
+  Status: APPROVAL_BLOCKED — PR not yet merged
+  Pre-condition: PR must be confirmed merged before branch deletion
+
+[DRY-RUN] DELETE branch 'lowcode/wave19/svg-plugin-examples' in aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples
+  Command: gh api repos/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/git/refs/heads/lowcode%2Fwave19%2Fsvg-plugin-examples --method DELETE
+  Status: APPROVAL_BLOCKED — PR not yet merged
+  Pre-condition: PR must be confirmed merged before branch deletion
+
+[DRY-RUN] DELETE branch 'lowcode/wave19/cad-plugin-examples' in aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples
+  Command: gh api repos/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/git/refs/heads/lowcode%2Fwave19%2Fcad-plugin-examples --method DELETE
+  Status: APPROVAL_BLOCKED — PR not yet merged
+  Pre-condition: PR must be confirmed merged before branch deletion
+

@@ -1,0 +1,161 @@
+{
+  "date": "2026-06-08",
+  "examples": [
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-reader",
+      "path": "examples/barcode/1d-barcode-reader/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-reader",
+      "path": "examples/barcode/2d-barcode-reader/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "barcode",
+      "slug": "1d-barcode-writer",
+      "path": "examples/barcode/1d-barcode-writer/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "barcode",
+      "slug": "2d-barcode-writer",
+      "path": "examples/barcode/2d-barcode-writer/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "svg",
+      "slug": "merge-svg",
+      "path": "examples/svg/merge-svg/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-image-converter",
+      "path": "examples/svg/svg-to-image-converter/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "svg",
+      "slug": "svg-to-pdf-converter",
+      "path": "examples/svg/svg-to-pdf-converter/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "svg",
+      "slug": "vectorizer",
+      "path": "examples/svg/vectorizer/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-image",
+      "path": "examples/cad/convert-cad-to-image/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "cad",
+      "slug": "convert-cad-to-pdf",
+      "path": "examples/cad/convert-cad-to-pdf/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dxf-to-pdf",
+      "path": "examples/cad/convert-dxf-to-pdf/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-jpg",
+      "path": "examples/cad/convert-dwg-to-jpg/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    },
+    {
+      "family": "cad",
+      "slug": "convert-dwg-to-pdf",
+      "path": "examples/cad/convert-dwg-to-pdf/README.md",
+      "exists": true,
+      "quality": "MINIMAL",
+      "missing_sections": [
+        "purpose",
+        "prerequisites",
+        "expected_output"
+      ]
+    }
+  ]
+}

@@ -41,6 +41,14 @@ class PluginDetection:
     # namespace_source: LOWCODE (has namespace_patterns active) | NON_LOWCODE_PLUGIN (fallback_strategy set, no namespace)
     # public_repo_kind: LOWCODE_EXAMPLES | PLUGIN_EXAMPLES (derived from namespace_source)
     # folder_namespace_segment: 'lowcode' for LOWCODE, '' for NON_LOWCODE_PLUGIN in single-purpose repos
+    #
+    # Shared downstream fields (Wave 22: pipeline convergence)
+    # discovery_method: how candidates are discovered (namespace_scan | capability_registry_fallback)
+    # target_repo: GitHub repo for published examples (e.g. "org/Repo-Name")
+    # branch_prefix: branch naming prefix for new PR branches (e.g. "plugins" or "lowcode-examples")
+    discovery_method: str = ""
+    target_repo: str = ""
+    branch_prefix: str = ""
 
     @property
     def namespace_source(self) -> str:
@@ -55,6 +63,20 @@ class PluginDetection:
     def folder_namespace_segment(self) -> str:
         """Path segment for example folder: 'lowcode' for LowCode families, '' for plugin-only repos."""
         return "" if self.namespace_source == "NON_LOWCODE_PLUGIN" else "lowcode"
+
+    @property
+    def effective_discovery_method(self) -> str:
+        """Derived: namespace_scan for LowCode, capability_registry_fallback for non-LowCode."""
+        if self.discovery_method:
+            return self.discovery_method
+        return "capability_registry_fallback" if self.namespace_source == "NON_LOWCODE_PLUGIN" else "namespace_scan"
+
+    @property
+    def effective_branch_prefix(self) -> str:
+        """Derived: 'plugins' for non-LowCode repos, 'lowcode-examples' for LowCode repos."""
+        if self.branch_prefix:
+            return self.branch_prefix
+        return "plugins" if self.namespace_source == "NON_LOWCODE_PLUGIN" else "lowcode-examples"
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-08",
+  "entries": [
+    {
+      "family": "barcode",
+      "package": "Aspose.BarCode",
+      "version": "24.12.0",
+      "version_location": "Directory.Packages.props",
+      "csproj_explicit_version": false
+    },
+    {
+      "family": "svg",
+      "package": "Aspose.SVG",
+      "version": "24.12.0",
+      "version_location": "Directory.Packages.props",
+      "csproj_explicit_version": false
+    },
+    {
+      "family": "cad",
+      "package": "Aspose.CAD",
+      "version": "24.12.0",
+      "version_location": "Directory.Packages.props",
+      "csproj_explicit_version": false
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "date": "2026-06-08",
+  "prs": [
+    {
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "barcode",
+      "state": "open",
+      "merged_at": null,
+      "head_ref": "lowcode/wave19/barcode-plugin-examples",
+      "title": "feat(plugins): add Aspose.BarCode plugin examples (4 packages)",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "example_slugs": [],
+      "file_count": 38,
+      "flaws": [
+        {
+          "code": "W22-FLAW-BARCODE-01",
+          "severity": "MEDIUM",
+          "description": "Branch 'lowcode/wave19/barcode-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+          "policy": "New branches should use 'plugins/' prefix per ADR",
+          "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+          "status": "DOCUMENTED_LEGACY"
+        },
+        {
+          "code": "W22-FLAW-BARCODE-02",
+          "severity": "EXTERNAL_GATE",
+          "description": "PR is open \u2014 not yet merged",
+          "fix_strategy": "Requires human maintainer approval to merge",
+          "status": "APPROVAL_BLOCKED"
+        }
+      ]
+    },
+    {
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "svg",
+      "state": "open",
+      "merged_at": null,
+      "head_ref": "lowcode/wave19/svg-plugin-examples",
+      "title": "feat(plugins): add Aspose.SVG plugin examples (4 packages)",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "example_slugs": [],
+      "file_count": 40,
+      "flaws": [
+        {
+          "code": "W22-FLAW-SVG-01",
+          "severity": "MEDIUM",
+          "description": "Branch 'lowcode/wave19/svg-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+          "policy": "New branches should use 'plugins/' prefix per ADR",
+          "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+          "status": "DOCUMENTED_LEGACY"
+        },
+        {
+          "code": "W22-FLAW-SVG-02",
+          "severity": "EXTERNAL_GATE",
+          "description": "PR is open \u2014 not yet merged",
+          "fix_strategy": "Requires human maintainer approval to merge",
+          "status": "APPROVAL_BLOCKED"
+        }
+      ]
+    },
+    {
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "family": "cad",
+      "state": "open",
+      "merged_at": null,
+      "head_ref": "lowcode/wave19/cad-plugin-examples",
+      "title": "feat(plugins): add Aspose.CAD plugin examples (5 packages)",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "example_slugs": [
+        "fixtures"
+      ],
+      "file_count": 55,
+      "flaws": [
+        {
+          "code": "W22-FLAW-CAD-01",
+          "severity": "MEDIUM",
+          "description": "Branch 'lowcode/wave19/cad-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+          "policy": "New branches should use 'plugins/' prefix per ADR",
+          "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+          "status": "DOCUMENTED_LEGACY"
+        },
+        {
+          "code": "W22-FLAW-CAD-02",
+          "severity": "EXTERNAL_GATE",
+          "description": "PR is open \u2014 not yet merged",
+          "fix_strategy": "Requires human maintainer approval to merge",
+          "status": "APPROVAL_BLOCKED"
+        },
+        {
+          "code": "W22-FLAW-CAD-03",
+          "severity": "HIGH",
+          "description": "Missing README.md for fixtures",
+          "fix_strategy": "Push README.md to PR branch",
+          "status": "NEEDS_FIX"
+        }
+      ]
+    }
+  ]
+}

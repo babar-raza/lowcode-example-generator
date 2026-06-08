@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-08",
+  "capabilities": {
+    "target_repo_map": true,
+    "branch_prefix_policy": true,
+    "merge_branch_cleanup_dryrun": true,
+    "pr_body_title_templates": true,
+    "artifact_selection_policy": true,
+    "dryrun_and_live_gated_modes": true
+  },
+  "new_model_fields": [
+    "PluginDetection.discovery_method",
+    "PluginDetection.target_repo",
+    "PluginDetection.branch_prefix",
+    "PluginDetection.effective_discovery_method (derived)",
+    "PluginDetection.effective_branch_prefix (derived)"
+  ],
+  "pr_templates": {
+    "NON_LOWCODE_PLUGIN": {
+      "title": "feat(plugins): add Aspose.{Family} plugin examples ({N} packages)",
+      "body_intro": "Adds canonical C# plugin API examples for {N} Aspose.{Family} packages.",
+      "branch": "plugins/wave{N}/{family}-plugin-examples"
+    },
+    "LOWCODE": {
+      "title": "feat(lowcode): add {family} LowCode examples ({N} packages)",
+      "body_intro": "Adds canonical C# LowCode examples for {N} Aspose.{Family} packages.",
+      "branch": "lowcode-examples-{family}-{descriptor}"
+    }
+  },
+  "artifact_policy": {
+    "public_files": [
+      "Program.cs",
+      "<slug>.csproj",
+      "README.md",
+      "example.manifest.json",
+      "expected-output.json"
+    ],
+    "optional_public": [
+      "input.*",
+      "output.*",
+      "fixtures/*"
+    ],
+    "internal_only": [
+      "output-validation.json \u2014 kept for CI evidence but not required by consumers"
+    ]
+  }
+}

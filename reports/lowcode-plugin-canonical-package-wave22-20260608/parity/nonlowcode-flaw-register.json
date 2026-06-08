@@ -1,0 +1,70 @@
+{
+  "date": "2026-06-08",
+  "summary": {
+    "total": 7,
+    "by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 3,
+      "EXTERNAL_GATE": 3
+    },
+    "statuses": {
+      "NEEDS_FIX": 1,
+      "APPROVAL_BLOCKED": 3,
+      "DOCUMENTED_LEGACY": 3
+    }
+  },
+  "flaws": [
+    {
+      "code": "W22-FLAW-BARCODE-01",
+      "severity": "MEDIUM",
+      "description": "Branch 'lowcode/wave19/barcode-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+      "policy": "New branches should use 'plugins/' prefix per ADR",
+      "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+      "status": "DOCUMENTED_LEGACY"
+    },
+    {
+      "code": "W22-FLAW-BARCODE-02",
+      "severity": "EXTERNAL_GATE",
+      "description": "PR is open \u2014 not yet merged",
+      "fix_strategy": "Requires human maintainer approval to merge",
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "code": "W22-FLAW-SVG-01",
+      "severity": "MEDIUM",
+      "description": "Branch 'lowcode/wave19/svg-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+      "policy": "New branches should use 'plugins/' prefix per ADR",
+      "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+      "status": "DOCUMENTED_LEGACY"
+    },
+    {
+      "code": "W22-FLAW-SVG-02",
+      "severity": "EXTERNAL_GATE",
+      "description": "PR is open \u2014 not yet merged",
+      "fix_strategy": "Requires human maintainer approval to merge",
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "code": "W22-FLAW-CAD-01",
+      "severity": "MEDIUM",
+      "description": "Branch 'lowcode/wave19/cad-plugin-examples' uses 'lowcode/' prefix for non-LowCode plugin repo",
+      "policy": "New branches should use 'plugins/' prefix per ADR",
+      "fix_strategy": "Document as legacy; cannot rename open PR branch without closing PR. All future PRs must use plugins/ prefix.",
+      "status": "DOCUMENTED_LEGACY"
+    },
+    {
+      "code": "W22-FLAW-CAD-02",
+      "severity": "EXTERNAL_GATE",
+      "description": "PR is open \u2014 not yet merged",
+      "fix_strategy": "Requires human maintainer approval to merge",
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "code": "W22-FLAW-CAD-03",
+      "severity": "HIGH",
+      "description": "Missing README.md for fixtures",
+      "fix_strategy": "Push README.md to PR branch",
+      "status": "NEEDS_FIX"
+    }
+  ]
+}

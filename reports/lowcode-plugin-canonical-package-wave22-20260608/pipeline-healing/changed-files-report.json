@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "file": "src/plugin_examples/family_config/models.py",
+      "change": "Added discovery_method, target_repo, branch_prefix fields to PluginDetection; added effective_discovery_method and effective_branch_prefix derived properties",
+      "reason": "Both pipelines must use a common candidate schema after discovery; discovery_method distinguishes namespace_scan (LowCode) from capability_registry_fallback (non-LowCode)"
+    }
+  ]
+}

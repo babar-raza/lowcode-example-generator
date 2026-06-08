@@ -1,0 +1,12 @@
+# CAD CI Build Validation
+
+Date: 2026-06-08
+Repo: aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples
+Workflow exists: True
+Has dotnet restore: True
+Has dotnet build: True
+Triggers on PR: True
+Status: OK
+
+Note: Full dotnet build not run locally (requires repo checkout with correct SDK).
+CI workflow validates on each PR push. PRs are mergeable=true (GitHub confirms clean).

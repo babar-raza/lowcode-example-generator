@@ -1,0 +1,6 @@
+{
+  "validator": "WSEV-01 WrongStreamEvidenceValidator",
+  "date": "2026-06-08",
+  "result": "PASS",
+  "detail": "declaration-review-package(140).zip not present in working directory. Not used as pipeline proof. Correct W21 bundle verified at .local/evidence-bundles/lowcode-plugin-canonical-package-wave21-20260608.zip."
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-08",
+  "commands": [
+    {
+      "action": "MERGE_PR",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "command": "gh pr merge 1 --merge --repo aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "action": "MERGE_PR",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "command": "gh pr merge 1 --merge --repo aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "status": "APPROVAL_BLOCKED"
+    },
+    {
+      "action": "MERGE_PR",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr": 1,
+      "command": "gh pr merge 1 --merge --repo aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "status": "APPROVAL_BLOCKED"
+    }
+  ]
+}

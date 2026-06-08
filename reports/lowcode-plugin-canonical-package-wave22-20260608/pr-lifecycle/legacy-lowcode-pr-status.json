@@ -1,0 +1,69 @@
+{
+  "date": "2026-06-08",
+  "prs": [
+    {
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "pr": 7,
+      "family": "cells",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:04Z",
+      "head_ref": "lowcode-examples-cells-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    },
+    {
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "pr": 3,
+      "family": "diagram",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:08Z",
+      "head_ref": "lowcode-examples-diagram-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    },
+    {
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "pr": 2,
+      "family": "email",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:13Z",
+      "head_ref": "lowcode-examples-email-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    },
+    {
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "pr": 22,
+      "family": "pdf",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:18Z",
+      "head_ref": "lowcode-examples-pdf-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    },
+    {
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "pr": 2,
+      "family": "slides",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:23Z",
+      "head_ref": "lowcode-examples-slides-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    },
+    {
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "pr": 8,
+      "family": "words",
+      "state": "closed",
+      "merged_at": "2026-06-02T11:57:27Z",
+      "head_ref": "lowcode-examples-words-readme-io-final",
+      "branch_deleted": true,
+      "lifecycle_status": "MERGED_BRANCH_CLEANED"
+    }
+  ],
+  "summary": {
+    "merged": 6,
+    "branch_cleaned": 6
+  }
+}

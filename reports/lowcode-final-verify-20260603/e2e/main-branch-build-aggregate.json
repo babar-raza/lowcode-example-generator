@@ -1,0 +1,26 @@
+{
+  "cells": {
+    "total": 9,
+    "build_ok": 9
+  },
+  "diagram": {
+    "total": 2,
+    "build_ok": 2
+  },
+  "email": {
+    "total": 1,
+    "build_ok": 1
+  },
+  "pdf": {
+    "total": 20,
+    "build_ok": 20
+  },
+  "slides": {
+    "total": 3,
+    "build_ok": 3
+  },
+  "words": {
+    "total": 9,
+    "build_ok": 9
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "generated_at": "2026-06-04",
+  "finding": "URL structure changed from '/family/net/slug' to '/family/slug/' — '/net/' segment removed and slugs renamed to capability-descriptive form",
+  "url_reconciliation": {
+    "barcode": {
+      "old_url_pattern": "https://products.aspose.net/barcode/net/{slug}",
+      "new_url_pattern": "https://products.aspose.net/barcode/{slug}/",
+      "plugin_mapping": [
+        {
+          "old_slug": "generate-barcode",
+          "old_url": "https://products.aspose.net/barcode/net/generate-barcode",
+          "canonical_slug": "1d-barcode-writer",
+          "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+          "mapping_confidence": "HIGH",
+          "mapping_rationale": "generate-barcode maps to 1D Barcode Writer (BarcodeGenerator class used for 1D barcodes)"
+        },
+        {
+          "old_slug": "generate-qr-code",
+          "old_url": "https://products.aspose.net/barcode/net/generate-qr-code",
+          "canonical_slug": "2d-barcode-writer",
+          "canonical_url": "https://products.aspose.net/barcode/2d-barcode-writer/",
+          "mapping_confidence": "HIGH",
+          "mapping_rationale": "generate-qr-code is a 2D barcode generation capability; maps to 2D Barcode Writer"
+        },
+        {
+          "old_slug": "recognize-barcode",
+          "old_url": "https://products.aspose.net/barcode/net/recognize-barcode",
+          "canonical_slug": "1d-barcode-reader",
+          "canonical_url": "https://products.aspose.net/barcode/1d-barcode-reader/",
+          "mapping_confidence": "MEDIUM",
+          "mapping_rationale": "recognize-barcode maps to 1D Barcode Reader; BarCodeReader class used for 1D recognition"
+        },
+        {
+          "old_slug": "scan-barcode",
+          "old_url": "https://products.aspose.net/barcode/net/scan-barcode",
+          "canonical_slug": "2d-barcode-reader",
+          "canonical_url": "https://products.aspose.net/barcode/2d-barcode-reader/",
+          "mapping_confidence": "MEDIUM",
+          "mapping_rationale": "scan-barcode (QR scanning context) maps to 2D Barcode Reader"
+        },
+        {
+          "old_slug": "read-barcode",
+          "old_url": "https://products.aspose.net/barcode/net/read-barcode",
+          "canonical_slug": "SPLIT_ACROSS",
+          "canonical_url": null,
+          "mapping_confidence": "LOW",
+          "mapping_rationale": "read-barcode is generic and spans both 1D and 2D readers; no single canonical mapping"
+        }
+      ]
+    },
+    "imaging": {
+      "old_url_pattern": "https://products.aspose.net/imaging/net/{slug}",
+      "new_url_pattern": "https://products.aspose.net/imaging/{slug}/",
+      "plugin_mapping": [
+        {"old_slug": "convert-image", "old_url": "https://products.aspose.net/imaging/net/convert-image", "canonical_slug": "image-converter", "canonical_url": "https://products.aspose.net/imaging/image-converter/", "mapping_confidence": "HIGH"},
+        {"old_slug": "resize-image", "old_url": "https://products.aspose.net/imaging/net/resize-image", "canonical_slug": "image-resizer", "canonical_url": "https://products.aspose.net/imaging/image-resizer/", "mapping_confidence": "HIGH"},
+        {"old_slug": "compress-image", "old_url": "https://products.aspose.net/imaging/net/compress-image", "canonical_slug": "image-compressor", "canonical_url": "https://products.aspose.net/imaging/image-compressor/", "mapping_confidence": "HIGH"},
+        {"old_slug": "crop-image", "old_url": "https://products.aspose.net/imaging/net/crop-image", "canonical_slug": "image-cropper", "canonical_url": "https://products.aspose.net/imaging/image-cropper/", "mapping_confidence": "HIGH"},
+        {"old_slug": "rotate-image", "old_url": "https://products.aspose.net/imaging/net/rotate-image", "canonical_slug": "image-rotate-flip", "canonical_url": "https://products.aspose.net/imaging/image-rotate-flip/", "mapping_confidence": "HIGH"},
+        {"old_slug": "watermark-image", "old_url": "https://products.aspose.net/imaging/net/watermark-image", "canonical_slug": "image-effect-creator", "canonical_url": "https://products.aspose.net/imaging/image-effect-creator/", "mapping_confidence": "MEDIUM"},
+        {"old_slug": "merge-images", "old_url": "https://products.aspose.net/imaging/net/merge-images", "canonical_slug": "image-merger", "canonical_url": "https://products.aspose.net/imaging/image-merger/", "mapping_confidence": "HIGH"},
+        {"old_slug": "filter-image", "old_url": "https://products.aspose.net/imaging/net/filter-image", "canonical_slug": "image-effect-creator", "canonical_url": "https://products.aspose.net/imaging/image-effect-creator/", "mapping_confidence": "MEDIUM"},
+        {"old_slug": null, "old_url": null, "canonical_slug": "animation-maker", "canonical_url": "https://products.aspose.net/imaging/animation-maker/", "mapping_confidence": "NEW", "mapping_rationale": "New canonical page, no old registry entry"},
+        {"old_slug": null, "old_url": null, "canonical_slug": "photo-album-maker", "canonical_url": "https://products.aspose.net/imaging/photo-album-maker/", "mapping_confidence": "NEW", "mapping_rationale": "New canonical page, no old registry entry"},
+        {"old_slug": null, "old_url": null, "canonical_slug": "image-deskew", "canonical_url": "https://products.aspose.net/imaging/image-deskew/", "mapping_confidence": "NEW", "mapping_rationale": "New canonical page, no old registry entry"}
+      ]
+    },
+    "zip": {
+      "old_url_pattern": "https://products.aspose.net/zip/net/{slug}",
+      "new_url_pattern": "https://products.aspose.net/zip/{slug}/",
+      "plugin_mapping": [
+        {"old_slug": "compress-files", "old_url": "https://products.aspose.net/zip/net/compress-files", "canonical_slug": "universal-compressor", "canonical_url": "https://products.aspose.net/zip/universal-compressor/", "mapping_confidence": "HIGH"},
+        {"old_slug": "compress-folder", "old_url": "https://products.aspose.net/zip/net/compress-folder", "canonical_slug": "universal-compressor", "canonical_url": "https://products.aspose.net/zip/universal-compressor/", "mapping_confidence": "HIGH", "mapping_rationale": "Folder compression merges with universal compressor"},
+        {"old_slug": "create-archive", "old_url": "https://products.aspose.net/zip/net/create-archive", "canonical_slug": "universal-compressor", "canonical_url": "https://products.aspose.net/zip/universal-compressor/", "mapping_confidence": "HIGH", "mapping_rationale": "Archive creation merges with universal compressor"},
+        {"old_slug": "extract-files", "old_url": "https://products.aspose.net/zip/net/extract-files", "canonical_slug": "universal-extractor", "canonical_url": "https://products.aspose.net/zip/universal-extractor/", "mapping_confidence": "HIGH"},
+        {"old_slug": null, "old_url": null, "canonical_slug": "rar-extractor", "canonical_url": "https://products.aspose.net/zip/rar-extractor/", "mapping_confidence": "NEW", "mapping_rationale": "New canonical page, no old registry entry"}
+      ]
+    },
+    "html": {
+      "plugin_mapping": [
+        {"old_slug": "convert-html", "canonical_slug": "html-to-pdf-converter", "canonical_url": "https://products.aspose.net/html/html-to-pdf-converter/", "mapping_confidence": "HIGH"}
+      ]
+    },
+    "tasks": {
+      "plugin_mapping": [
+        {"old_slug": "convert-tasks", "canonical_slug": "project-to-pdf-converter", "canonical_url": "https://products.aspose.net/tasks/project-to-pdf-converter/", "mapping_confidence": "HIGH"}
+      ]
+    },
+    "cad": {
+      "plugin_mapping": [
+        {"old_slug": "convert-cad", "canonical_slug": "dwg-dxf-dwt-file-processor", "canonical_url": "https://products.aspose.net/cad/dwg-dxf-dwt-file-processor/", "mapping_confidence": "HIGH"}
+      ]
+    },
+    "ocr": {
+      "plugin_mapping": [
+        {"old_slug": "recognize-text", "canonical_slug": "scanned-image-to-text", "canonical_url": "https://products.aspose.net/ocr/scanned-image-to-text/", "mapping_confidence": "HIGH"},
+        {"old_slug": "recognize-pdf", "canonical_slug": "scanned-pdf-to-text", "canonical_url": "https://products.aspose.net/ocr/scanned-pdf-to-text/", "mapping_confidence": "HIGH"},
+        {"old_slug": null, "canonical_slug": "image-text-finder", "canonical_url": "https://products.aspose.net/ocr/image-text-finder/", "mapping_confidence": "NEW"},
+        {"old_slug": null, "canonical_slug": "invoice-to-text", "canonical_url": "https://products.aspose.net/ocr/invoice-to-text/", "mapping_confidence": "NEW"},
+        {"old_slug": null, "canonical_slug": "photo-to-text", "canonical_url": "https://products.aspose.net/ocr/photo-to-text/", "mapping_confidence": "NEW"},
+        {"old_slug": null, "canonical_slug": "table-to-text", "canonical_url": "https://products.aspose.net/ocr/table-to-text/", "mapping_confidence": "NEW"}
+      ]
+    },
+    "psd": {
+      "plugin_mapping": [
+        {"old_slug": "edit-psd", "canonical_slug": "graphics-editor", "canonical_url": "https://products.aspose.net/psd/graphics-editor/", "mapping_confidence": "HIGH"},
+        {"old_slug": "convert-psd", "canonical_slug": "image-converter", "canonical_url": "https://products.aspose.net/psd/image-converter/", "mapping_confidence": "HIGH"},
+        {"old_slug": null, "canonical_slug": "animation-maker", "canonical_url": "https://products.aspose.net/psd/animation-maker/", "mapping_confidence": "NEW"},
+        {"old_slug": null, "canonical_slug": "photo-processor", "canonical_url": "https://products.aspose.net/psd/photo-processor/", "mapping_confidence": "NEW"}
+      ]
+    },
+    "svg": {
+      "plugin_mapping": [
+        {"old_slug": "convert-svg", "canonical_slug": "svg-to-image-converter", "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/", "mapping_confidence": "HIGH"},
+        {"old_slug": null, "canonical_slug": "svg-to-pdf-converter", "canonical_url": "https://products.aspose.net/svg/svg-to-pdf-converter/", "mapping_confidence": "NEW"},
+        {"old_slug": null, "canonical_slug": "vectorizer", "canonical_url": "https://products.aspose.net/svg/vectorizer/", "mapping_confidence": "NEW"}
+      ]
+    },
+    "page": {
+      "plugin_mapping": [
+        {"old_slug": "convert-ps", "canonical_slug": "ps-converter", "canonical_url": "https://products.aspose.net/page/ps-converter/", "mapping_confidence": "HIGH"},
+        {"old_slug": "convert-xps", "canonical_slug": "xps-converter", "canonical_url": "https://products.aspose.net/page/xps-converter/", "mapping_confidence": "HIGH"}
+      ]
+    },
+    "tex": {
+      "plugin_mapping": [
+        {"old_slug": "render-latex", "canonical_slug": "latex-figure-renderer", "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/", "mapping_confidence": "HIGH"},
+        {"old_slug": null, "canonical_slug": "latex-math-renderer", "canonical_url": "https://products.aspose.net/tex/latex-math-renderer/", "mapping_confidence": "NEW"}
+      ]
+    },
+    "omr": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "gis": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "note": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "drawing": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "font": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "finance": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"},
+    "threed": {"status": "CRAWL_BLOCKED_403", "canonical_plugins": "unknown"}
+  },
+  "reconciliation_summary": {
+    "url_pattern_changed": true,
+    "old_pattern": "https://products.aspose.net/{family}/net/{slug}",
+    "new_pattern": "https://products.aspose.net/{family}/{slug}/",
+    "total_old_registry_entries": 65,
+    "total_canonical_entries_discovered": 37,
+    "high_confidence_mappings": 28,
+    "medium_confidence_mappings": 4,
+    "new_canonical_entries_no_old_match": 14,
+    "blocked_families_urls_unchanged": 7
+  }
+}

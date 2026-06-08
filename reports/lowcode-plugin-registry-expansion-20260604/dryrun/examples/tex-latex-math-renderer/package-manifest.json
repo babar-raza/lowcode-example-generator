@@ -1,0 +1,21 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "package_id": "tex-latex-math-renderer",
+  "family": "tex",
+  "plugin_slug": "latex-math-renderer",
+  "canonical_url": "https://products.aspose.net/tex/latex-math-renderer/",
+  "nuget_package": "Aspose.TeX",
+  "nuget_version": "24.12.0",
+  "implementation_model": "DEDICATED_PLUGIN_CLASS",
+  "key_classes": ["MathRendererPlugin", "PngMathRendererPluginOptions", "StringDataSource", "StreamDataSource"],
+  "key_namespace": "Aspose.TeX.Plugins",
+  "key_method": "MathRendererPlugin.Process(options)",
+  "fixture_required": false,
+  "fixture_notes": "Formula is an inline LaTeX string — no file fixture needed",
+  "dry_run_status": "VALIDATED",
+  "validation_ref": "reports/lowcode-plugin-registry-expansion-20260604/validation/snippets/snippet-validation-summary.json#snippet-007",
+  "output_format": "PNG",
+  "output_file": "output/output_math.png",
+  "output_size_bytes": 2595,
+  "namespace_discovery_note": "MathRendererPlugin is in Aspose.TeX.Plugins, NOT Aspose.TeX.Presentation.Image"
+}

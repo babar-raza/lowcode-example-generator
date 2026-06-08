@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AiSuggestion",
+  "description": "Schema for AI-suggested plugin type/method mappings. All AI outputs enter as AI_DRAFT only.",
+  "type": "object",
+  "required": ["type_name", "method_name", "status", "model"],
+  "properties": {
+    "type_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Fully-qualified or short type name suggested by the AI."
+    },
+    "method_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Method name suggested by the AI."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["AI_DRAFT", "REFLECTION_CONFIRMED", "PROBE_CONFIRMED", "REJECTED_BY_VALIDATOR"],
+      "description": "Status of this suggestion. AI outputs always start as AI_DRAFT."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence score in [0.0, 1.0]."
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Model ID used to generate this suggestion, or 'MANUAL_MAPPING' if no LLM was used."
+    },
+    "probe_evidence": {
+      "type": ["string", "null"],
+      "description": "Path to probe evidence. Required when status=PROBE_CONFIRMED."
+    },
+    "rejection_reason": {
+      "type": ["string", "null"],
+      "enum": ["TYPE_NOT_IN_REFLECTION", "METHOD_NOT_IN_REFLECTION", null],
+      "description": "Populated when status=REJECTED_BY_VALIDATOR."
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Human-readable rationale for this suggestion."
+    }
+  },
+  "if": {
+    "properties": { "status": { "const": "PROBE_CONFIRMED" } }
+  },
+  "then": {
+    "properties": {
+      "probe_evidence": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": ["probe_evidence"]
+  },
+  "additionalProperties": true
+}

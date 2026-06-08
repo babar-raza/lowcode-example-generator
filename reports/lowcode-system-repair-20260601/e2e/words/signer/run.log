@@ -1,0 +1,7 @@
+EXIT: 0
+--- STDOUT ---
+Example: words-signer
+Signing succeeded: output.docx, Signatures: 1
+Done.
+
+--- STDERR ---

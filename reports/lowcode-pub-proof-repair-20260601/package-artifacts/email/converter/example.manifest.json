@@ -1,0 +1,12 @@
+{
+  "family": "email",
+  "name": "converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Converter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "converter.csproj",
+  "files": [
+    "converter.csproj",
+    "Program.cs"
+  ]
+}

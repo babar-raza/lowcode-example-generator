@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "form-exporter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "FormExporter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "form-exporter.csproj",
+  "files": [
+    "form-exporter.csproj",
+    "Program.cs"
+  ]
+}

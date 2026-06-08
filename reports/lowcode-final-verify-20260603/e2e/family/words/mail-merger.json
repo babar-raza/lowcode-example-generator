@@ -1,0 +1,9 @@
+{
+  "example": "mail-merger",
+  "csproj": "words-mail-merger.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: words-mail-merger\nMail merge succeeded: output.docx\n",
+  "stderr_tail": ""
+}

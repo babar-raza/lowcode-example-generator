@@ -1,0 +1,27 @@
+{
+  "_comment": "Authoritative NuGet package ID mapping for non-LowCode Aspose plugin families. Never infer package IDs from family slugs — always use this table.",
+  "_created": "2026-06-04",
+  "_sprint": "non-lowcode-fallback-implementation-20260604",
+  "families": {
+    "barcode": "Aspose.BarCode",
+    "imaging": "Aspose.Imaging",
+    "zip": "Aspose.ZIP",
+    "html": "Aspose.HTML",
+    "cad": "Aspose.CAD",
+    "ocr": "Aspose.OCR",
+    "psd": "Aspose.PSD",
+    "svg": "Aspose.SVG",
+    "omr": "Aspose.OMR",
+    "gis": "Aspose.GIS",
+    "page": "Aspose.Page",
+    "tex": "Aspose.TeX",
+    "tasks": "Aspose.Tasks",
+    "note": "Aspose.Note",
+    "drawing": "Aspose.Drawing",
+    "font": "Aspose.Font",
+    "finance": "Aspose.Finance",
+    "threed": "Aspose.3D",
+    "epub": "Aspose.HTML",
+    "medical": "Aspose.Medical"
+  }
+}

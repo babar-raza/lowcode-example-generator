@@ -1,0 +1,39 @@
+{
+  "sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "generated_at": "2026-06-04",
+  "validator": "registry-readiness-check",
+  "description": "Verifies READY_FOR_TRANSFORMATION entries have canonical_url, code_hashes, and transformation_readiness_reason",
+  "checks_per_entry": {
+    "required_fields_for_READY_FOR_TRANSFORMATION": [
+      "canonical_url (not null)",
+      "code_hashes (non-empty)",
+      "transformation_readiness_reason"
+    ]
+  },
+  "entries_checked": [
+    {"family": "barcode", "slug": "generate-barcode", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "barcode", "slug": "recognize-barcode", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "barcode", "slug": "generate-qr-code", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "barcode", "slug": "scan-barcode", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "barcode", "slug": "read-barcode", "status": "NEEDS_MANUAL_MAPPING", "has_canonical_url": false, "note": "EXCLUDED from READY_FOR_TRANSFORMATION check — ambiguous mapping", "check": "SKIP"},
+    {"family": "imaging", "slug": "convert-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "resize-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "compress-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "crop-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "rotate-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "watermark-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "merge-images", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "imaging", "slug": "filter-image", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "zip", "slug": "compress-files", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "zip", "slug": "create-archive", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "zip", "slug": "compress-folder", "status": "READY_FOR_TRANSFORMATION", "has_canonical_url": true, "has_code_hashes": true, "has_readiness_reason": true, "check": "PASS"},
+    {"family": "zip", "slug": "extract-files", "status": "NEEDS_MANUAL_MAPPING", "has_canonical_url": true, "has_code_hashes": false, "note": "EXCLUDED — no code hashes yet", "check": "SKIP"}
+  ],
+  "summary": {
+    "entries_checked": 15,
+    "entries_skipped": 2,
+    "checks_passed": 15,
+    "checks_failed": 0,
+    "verdict": "REGISTRY_READINESS_CHECK_PASS — all 15 READY_FOR_TRANSFORMATION entries have required fields"
+  }
+}

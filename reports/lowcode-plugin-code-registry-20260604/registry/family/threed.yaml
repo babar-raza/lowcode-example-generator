@@ -1,0 +1,65 @@
+# Plugin-Code Registry: threed
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: threed
+package_id: Aspose.3D
+github_repo: https://github.com/aspose-threed/Aspose.Threed-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+
+plugins:
+  - plugin_slug: convert-3d-model
+    plugin_url: https://products.aspose.net/threed/net/convert-3d-model
+    page_hash: c52ae85003fd7044
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: []
+    namespaces_used:
+      - "Aspose.ThreeD"
+      - "Aspose.ThreeD.Entities"
+      - "Aspose.ThreeD.Shading"
+    classes_used:
+      - "SceneNodeWrapper"
+      - "ContextMenuStrip"
+      - "Scene"
+      - "SaveFileDialog"
+      - "ControlPointEditor"
+    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/threed.md"
+      - "https://raw.githubusercontent.com/aspose-3d/Aspose.3D-for-.NET/master/HardwareBasedRendering/Controls/SceneHierarchyTree.cs"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from SceneHierarchyTree.cs"
+
+  - plugin_slug: compress-3d-scene
+    plugin_url: https://products.aspose.net/threed/net/compress-3d-scene
+    page_hash: fe228ef9674ca4dd
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: []
+    namespaces_used:
+      - "Aspose.ThreeD"
+      - "Aspose.ThreeD.Entities"
+      - "Aspose.ThreeD.Shading"
+    classes_used:
+      - "SceneNodeWrapper"
+      - "ContextMenuStrip"
+      - "Scene"
+      - "SaveFileDialog"
+      - "ControlPointEditor"
+    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/threed.md"
+      - "https://raw.githubusercontent.com/aspose-3d/Aspose.3D-for-.NET/master/HardwareBasedRendering/Controls/SceneHierarchyTree.cs"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from SceneHierarchyTree.cs"

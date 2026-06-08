@@ -1,0 +1,570 @@
+[
+  {
+    "id": "CMD-001",
+    "timestamp": "2026-06-02T11:56:30.898394+00:00",
+    "command": "git status --short",
+    "purpose": "git status",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-002",
+    "timestamp": "2026-06-02T11:56:31.020935+00:00",
+    "command": "python --version",
+    "purpose": "Python version",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-003",
+    "timestamp": "2026-06-02T11:56:31.054684+00:00",
+    "command": "dotnet --version",
+    "purpose": "dotnet version",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-004",
+    "timestamp": "2026-06-02T11:56:31.262813+00:00",
+    "command": "gh --version",
+    "purpose": "gh version",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-005",
+    "timestamp": "2026-06-02T11:56:31.506433+00:00",
+    "command": "gh pr view 7 --repo aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state cells",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-006",
+    "timestamp": "2026-06-02T11:56:32.619997+00:00",
+    "command": "gh pr view 3 --repo aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state diagram",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-007",
+    "timestamp": "2026-06-02T11:56:33.772742+00:00",
+    "command": "gh pr view 2 --repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state email",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-008",
+    "timestamp": "2026-06-02T11:56:34.951760+00:00",
+    "command": "gh pr view 22 --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state pdf",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-009",
+    "timestamp": "2026-06-02T11:56:35.908378+00:00",
+    "command": "gh pr view 2 --repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state slides",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-010",
+    "timestamp": "2026-06-02T11:56:37.053571+00:00",
+    "command": "gh pr view 8 --repo aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples --json state,headRefName,baseRefName,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
+    "purpose": "PR state words",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-011",
+    "timestamp": "2026-06-02T11:56:38.153153+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions cells",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-012",
+    "timestamp": "2026-06-02T11:56:39.028242+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions diagram",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-013",
+    "timestamp": "2026-06-02T11:56:40.045498+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions email",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-014",
+    "timestamp": "2026-06-02T11:56:40.840603+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions pdf",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-015",
+    "timestamp": "2026-06-02T11:56:41.774014+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions slides",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-016",
+    "timestamp": "2026-06-02T11:56:42.622502+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples --jq {permission: .permissions, default_branch: .default_branch}",
+    "purpose": "Permissions words",
+    "phase": "preflight",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-017",
+    "timestamp": "2026-06-02T11:56:43.646415+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection cells",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-018",
+    "timestamp": "2026-06-02T11:56:44.442504+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection diagram",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-019",
+    "timestamp": "2026-06-02T11:56:45.240757+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection email",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-020",
+    "timestamp": "2026-06-02T11:56:46.039976+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection pdf",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-021",
+    "timestamp": "2026-06-02T11:56:46.932376+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection slides",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-022",
+    "timestamp": "2026-06-02T11:56:47.827691+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/branches/main/protection",
+    "purpose": "Branch protection words",
+    "phase": "preflight",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-023",
+    "timestamp": "2026-06-02T11:56:48.664654+00:00",
+    "command": "python -c import urllib.request,json;r=urllib.request.urlopen('https://api.nuget.org/v3-flatcontainer/aspose.pdf/index.json',timeout=10);d=json.loads(r.read());print(json.dumps(d['versions'][-5:]))",
+    "purpose": "NuGet version probe",
+    "phase": "formimporter",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-024",
+    "timestamp": "2026-06-02T11:56:49.739471+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/contents/examples/cells/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-cells-readme-io-final",
+    "purpose": "List examples on PR branch cells",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-025",
+    "timestamp": "2026-06-02T11:56:50.619136+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-cells-readme-io-final",
+    "purpose": "Check README on PR branch cells",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-026",
+    "timestamp": "2026-06-02T11:56:51.506130+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/contents/examples/diagram/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-diagram-readme-io-final",
+    "purpose": "List examples on PR branch diagram",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-027",
+    "timestamp": "2026-06-02T11:56:52.327143+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-diagram-readme-io-final",
+    "purpose": "Check README on PR branch diagram",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-028",
+    "timestamp": "2026-06-02T11:56:53.171533+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/contents/examples/email/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-email-readme-io-final",
+    "purpose": "List examples on PR branch email",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-029",
+    "timestamp": "2026-06-02T11:56:53.900682+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-email-readme-io-final",
+    "purpose": "Check README on PR branch email",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-030",
+    "timestamp": "2026-06-02T11:56:54.740676+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/contents/examples/pdf/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-pdf-readme-io-final",
+    "purpose": "List examples on PR branch pdf",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-031",
+    "timestamp": "2026-06-02T11:56:55.509022+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-pdf-readme-io-final",
+    "purpose": "Check README on PR branch pdf",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-032",
+    "timestamp": "2026-06-02T11:56:56.249178+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/contents/examples/slides/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-slides-readme-io-final",
+    "purpose": "List examples on PR branch slides",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-033",
+    "timestamp": "2026-06-02T11:56:57.040013+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-slides-readme-io-final",
+    "purpose": "Check README on PR branch slides",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-034",
+    "timestamp": "2026-06-02T11:56:57.872597+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/contents/examples/words/lowcode --jq [.[].name] -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-words-readme-io-final",
+    "purpose": "List examples on PR branch words",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-035",
+    "timestamp": "2026-06-02T11:56:58.674476+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/contents/README.md --jq .name -H Accept: application/vnd.github.v3+json -q ref=lowcode-examples-words-readme-io-final",
+    "purpose": "Check README on PR branch words",
+    "phase": "replay",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-036",
+    "timestamp": "2026-06-02T11:56:59.563974+00:00",
+    "command": "gh pr merge 7 --repo aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Cells examples (##7)",
+    "purpose": "Merge PR #7 for cells",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-037",
+    "timestamp": "2026-06-02T11:57:04.605308+00:00",
+    "command": "gh pr view 7 --repo aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for cells",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-038",
+    "timestamp": "2026-06-02T11:57:05.649337+00:00",
+    "command": "gh pr merge 3 --repo aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Diagram examples (##3)",
+    "purpose": "Merge PR #3 for diagram",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-039",
+    "timestamp": "2026-06-02T11:57:09.082970+00:00",
+    "command": "gh pr view 3 --repo aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for diagram",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-040",
+    "timestamp": "2026-06-02T11:57:10.240645+00:00",
+    "command": "gh pr merge 2 --repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Email examples (##2)",
+    "purpose": "Merge PR #2 for email",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-041",
+    "timestamp": "2026-06-02T11:57:14.244452+00:00",
+    "command": "gh pr view 2 --repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for email",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-042",
+    "timestamp": "2026-06-02T11:57:15.147493+00:00",
+    "command": "gh pr merge 22 --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Pdf examples (##22)",
+    "purpose": "Merge PR #22 for pdf",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-043",
+    "timestamp": "2026-06-02T11:57:19.041929+00:00",
+    "command": "gh pr view 22 --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for pdf",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-044",
+    "timestamp": "2026-06-02T11:57:20.109095+00:00",
+    "command": "gh pr merge 2 --repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Slides examples (##2)",
+    "purpose": "Merge PR #2 for slides",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-045",
+    "timestamp": "2026-06-02T11:57:23.720126+00:00",
+    "command": "gh pr view 2 --repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for slides",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-046",
+    "timestamp": "2026-06-02T11:57:24.653157+00:00",
+    "command": "gh pr merge 8 --repo aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples --merge --subject Merge: Add LowCode Words examples (##8)",
+    "purpose": "Merge PR #8 for words",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-047",
+    "timestamp": "2026-06-02T11:57:28.183243+00:00",
+    "command": "gh pr view 8 --repo aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples --json mergeCommit --jq .mergeCommit.oid",
+    "purpose": "Get merge SHA for words",
+    "phase": "merge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-048",
+    "timestamp": "2026-06-02T11:57:29.201655+00:00",
+    "command": "gh api -X DELETE repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-cells-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-cells-readme-io-final from aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-049",
+    "timestamp": "2026-06-02T11:57:30.273284+00:00",
+    "command": "gh api -X DELETE repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-diagram-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-diagram-readme-io-final from aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-050",
+    "timestamp": "2026-06-02T11:57:31.283917+00:00",
+    "command": "gh api -X DELETE repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-email-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-email-readme-io-final from aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-051",
+    "timestamp": "2026-06-02T11:57:32.327011+00:00",
+    "command": "gh api -X DELETE repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-pdf-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-pdf-readme-io-final from aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-052",
+    "timestamp": "2026-06-02T11:57:33.423933+00:00",
+    "command": "gh api -X DELETE repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-slides-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-slides-readme-io-final from aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-053",
+    "timestamp": "2026-06-02T11:57:34.332533+00:00",
+    "command": "gh api -X DELETE repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-words-readme-io-final",
+    "purpose": "Delete branch lowcode-examples-words-readme-io-final from aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "phase": "cleanup",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-054",
+    "timestamp": "2026-06-02T11:57:35.320939+00:00",
+    "command": "gh pr view 7 --repo aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge cells",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-055",
+    "timestamp": "2026-06-02T11:57:36.145199+00:00",
+    "command": "gh pr view 3 --repo aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge diagram",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-056",
+    "timestamp": "2026-06-02T11:57:37.141500+00:00",
+    "command": "gh pr view 2 --repo aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge email",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-057",
+    "timestamp": "2026-06-02T11:57:38.277448+00:00",
+    "command": "gh pr view 22 --repo aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge pdf",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-058",
+    "timestamp": "2026-06-02T11:57:39.160439+00:00",
+    "command": "gh pr view 2 --repo aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge slides",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-059",
+    "timestamp": "2026-06-02T11:57:40.086895+00:00",
+    "command": "gh pr view 8 --repo aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples --json state,mergedAt",
+    "purpose": "Check PR state after merge words",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-060",
+    "timestamp": "2026-06-02T11:57:40.999450+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-cells-readme-io-final",
+    "purpose": "Check branch exists cells",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-061",
+    "timestamp": "2026-06-02T11:57:41.891487+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-diagram-readme-io-final",
+    "purpose": "Check branch exists diagram",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-062",
+    "timestamp": "2026-06-02T11:57:42.706970+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-email-readme-io-final",
+    "purpose": "Check branch exists email",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-063",
+    "timestamp": "2026-06-02T11:57:43.605973+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-pdf-readme-io-final",
+    "purpose": "Check branch exists pdf",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-064",
+    "timestamp": "2026-06-02T11:57:44.395016+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-slides-readme-io-final",
+    "purpose": "Check branch exists slides",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-065",
+    "timestamp": "2026-06-02T11:57:45.097117+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/git/refs/heads/lowcode-examples-words-readme-io-final",
+    "purpose": "Check branch exists words",
+    "phase": "postmerge",
+    "exit_code": 1
+  },
+  {
+    "id": "CMD-066",
+    "timestamp": "2026-06-02T11:57:45.857208+00:00",
+    "command": "gh api repos/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/contents/examples/cells/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main cells",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-067",
+    "timestamp": "2026-06-02T11:57:46.633371+00:00",
+    "command": "gh api repos/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/contents/examples/diagram/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main diagram",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-068",
+    "timestamp": "2026-06-02T11:57:47.350004+00:00",
+    "command": "gh api repos/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/contents/examples/email/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main email",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-069",
+    "timestamp": "2026-06-02T11:57:48.330501+00:00",
+    "command": "gh api repos/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/contents/examples/pdf/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main pdf",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-070",
+    "timestamp": "2026-06-02T11:57:49.400706+00:00",
+    "command": "gh api repos/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/contents/examples/slides/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main slides",
+    "phase": "postmerge",
+    "exit_code": 0
+  },
+  {
+    "id": "CMD-071",
+    "timestamp": "2026-06-02T11:57:50.196607+00:00",
+    "command": "gh api repos/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/contents/examples/words/lowcode --jq [.[].name]",
+    "purpose": "Check examples on main words",
+    "phase": "postmerge",
+    "exit_code": 0
+  }
+]

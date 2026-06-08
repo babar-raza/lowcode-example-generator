@@ -1,0 +1,11 @@
+{
+  "family": "cells",
+  "name": "json-converter",
+  "label": "cells/json-converter",
+  "pilot": "cells-controlled-pilot",
+  "csproj": "json-converter.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

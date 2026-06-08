@@ -1,0 +1,27 @@
+{
+  "sprint": "non-lowcode-fallback-implementation-20260604",
+  "created": "2026-06-04T00:00:00Z",
+  "updated": "2026-06-04T06:00:00Z",
+  "lanes": {
+    "L-ALIAS":     {"taskcard": "TC-IMPL-010",    "status": "COMPLETE", "owned_files": ["pipeline/plugin-capability-registry/package-aliases.json"]},
+    "L-MODEL":     {"taskcard": "TC-IMPL-001",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/family_config/models.py", "pipeline/schemas/family-config.schema.json"]},
+    "L-CATALOG":   {"taskcard": "TC-IMPL-003",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/website_catalog/"]},
+    "L-HEURISTIC": {"taskcard": "TC-IMPL-004",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/plugin_detector/heuristic_matcher.py"]},
+    "L-AI":        {"taskcard": "TC-IMPL-009",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/ai_acceleration/"]},
+    "L-REFLECT":   {"taskcard": "TC-IMPL-011",    "status": "COMPLETE", "owned_files": ["reports/.../reflection/"]},
+    "L-REGISTRY":  {"taskcard": "TC-IMPL-002A",   "status": "COMPLETE", "owned_files": ["pipeline/plugin-capability-registry/schema.json", "pipeline/plugin-capability-registry/schema.yaml", "pipeline/plugin-capability-registry/README.md"]},
+    "L-RUNNER":    {"taskcard": "TC-IMPL-012",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/runner.py"]},
+    "L-PROBE":     {"taskcard": "TC-IMPL-005",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/probe_generator/"]},
+    "L-BARCODE":   {"taskcard": "TC-IMPL-007",    "status": "COMPLETE", "owned_files": ["pipeline/configs/families/barcode.yml", "reports/.../prototypes/barcode/"]},
+    "L-IMAGING":   {"taskcard": "TC-IMPL-008",    "status": "COMPLETE", "owned_files": ["pipeline/configs/families/imaging.yml", "reports/.../prototypes/imaging/"]},
+    "L-REGUPDATE": {"taskcard": "TC-IMPL-002B",   "status": "COMPLETE", "owned_files": ["pipeline/plugin-capability-registry/barcode.yaml", "pipeline/plugin-capability-registry/imaging.yaml"]},
+    "L-VALIDATOR": {"taskcard": "TC-IMPL-006",    "status": "COMPLETE", "owned_files": ["src/plugin_examples/evidence_validator/rules/non_lowcode.py"]},
+    "L-PILOT-BC":  {"taskcard": "MEGA-TRAIN-P-1", "status": "COMPLETE", "verdict": "PILOT_PASS_PROBE_CONFIRMED", "owned_files": ["reports/.../pilots/barcode/"]},
+    "L-PILOT-IMG": {"taskcard": "MEGA-TRAIN-P-2", "status": "COMPLETE", "verdict": "PILOT_PASS_PROBE_CONFIRMED", "owned_files": ["reports/.../pilots/imaging/"]},
+    "L-PILOT-CTL": {"taskcard": "MEGA-TRAIN-P-3", "status": "COMPLETE", "verdict": "CONTROL_PASS_SAFE_BLOCK",   "owned_files": ["reports/.../pilots/negative-control/"]},
+    "L-HEALING":   {"taskcard": "MEGA-TRAIN-Q",   "status": "COMPLETE", "defects": 0, "loops": 0,              "owned_files": ["reports/.../healing/"]},
+    "L-IV":        {"taskcard": "MEGA-TRAIN-R",   "status": "COMPLETE", "iv_verdict": "FINAL_IV_PASS",         "owned_files": ["reports/.../iv/"]}
+  },
+  "blockers": [],
+  "file_ownership_violations": []
+}

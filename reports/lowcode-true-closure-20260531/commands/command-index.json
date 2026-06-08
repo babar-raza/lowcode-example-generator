@@ -1,0 +1,847 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:59:34",
+  "total_commands": 105,
+  "commands": [
+    {
+      "seq": 1,
+      "ts": "2026-05-31T22:52:48",
+      "description": "git rev-parse HEAD",
+      "cmd": "git rev-parse HEAD",
+      "returncode": 0,
+      "stdout_file": "cmd0001-stdout.txt"
+    },
+    {
+      "seq": 2,
+      "ts": "2026-05-31T22:52:49",
+      "description": "git status --short",
+      "cmd": "git status --short",
+      "returncode": 0,
+      "stdout_file": "cmd0002-stdout.txt"
+    },
+    {
+      "seq": 3,
+      "ts": "2026-05-31T22:52:49",
+      "description": "git log --oneline -5",
+      "cmd": "git log --oneline -5",
+      "returncode": 0,
+      "stdout_file": "cmd0003-stdout.txt"
+    },
+    {
+      "seq": 4,
+      "ts": "2026-05-31T22:52:49",
+      "description": "python version",
+      "cmd": "C:\\Python313\\python.exe --version",
+      "returncode": 0,
+      "stdout_file": "cmd0004-stdout.txt"
+    },
+    {
+      "seq": 5,
+      "ts": "2026-05-31T22:52:49",
+      "description": "dotnet version",
+      "cmd": "dotnet --version",
+      "returncode": 0,
+      "stdout_file": "cmd0005-stdout.txt"
+    },
+    {
+      "seq": 6,
+      "ts": "2026-05-31T22:54:13",
+      "description": "build pdf-form-importer probe",
+      "cmd": "dotnet build -v q",
+      "returncode": 1,
+      "stdout_file": "cmd0006-stdout.txt"
+    },
+    {
+      "seq": 7,
+      "ts": "2026-05-31T22:54:17",
+      "description": "build pdf-timestamp probe",
+      "cmd": "dotnet build -v q",
+      "returncode": 1,
+      "stdout_file": "cmd0007-stdout.txt"
+    },
+    {
+      "seq": 8,
+      "ts": "2026-05-31T22:54:21",
+      "description": "build comparer",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0008-stdout.txt"
+    },
+    {
+      "seq": 9,
+      "ts": "2026-05-31T22:54:25",
+      "description": "run comparer",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0009-stdout.txt"
+    },
+    {
+      "seq": 10,
+      "ts": "2026-05-31T22:54:28",
+      "description": "build converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0010-stdout.txt"
+    },
+    {
+      "seq": 11,
+      "ts": "2026-05-31T22:54:34",
+      "description": "run converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0011-stdout.txt"
+    },
+    {
+      "seq": 12,
+      "ts": "2026-05-31T22:54:37",
+      "description": "build mail-merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0012-stdout.txt"
+    },
+    {
+      "seq": 13,
+      "ts": "2026-05-31T22:54:41",
+      "description": "run mail-merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0013-stdout.txt"
+    },
+    {
+      "seq": 14,
+      "ts": "2026-05-31T22:54:44",
+      "description": "build merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0014-stdout.txt"
+    },
+    {
+      "seq": 15,
+      "ts": "2026-05-31T22:54:48",
+      "description": "run merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0015-stdout.txt"
+    },
+    {
+      "seq": 16,
+      "ts": "2026-05-31T22:54:51",
+      "description": "build replacer",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0016-stdout.txt"
+    },
+    {
+      "seq": 17,
+      "ts": "2026-05-31T22:54:54",
+      "description": "run replacer",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0017-stdout.txt"
+    },
+    {
+      "seq": 18,
+      "ts": "2026-05-31T22:54:57",
+      "description": "build report-builder",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0018-stdout.txt"
+    },
+    {
+      "seq": 19,
+      "ts": "2026-05-31T22:55:01",
+      "description": "run report-builder",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0019-stdout.txt"
+    },
+    {
+      "seq": 20,
+      "ts": "2026-05-31T22:55:04",
+      "description": "build signer",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0020-stdout.txt"
+    },
+    {
+      "seq": 21,
+      "ts": "2026-05-31T22:55:09",
+      "description": "run signer",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0021-stdout.txt"
+    },
+    {
+      "seq": 22,
+      "ts": "2026-05-31T22:55:12",
+      "description": "build splitter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0022-stdout.txt"
+    },
+    {
+      "seq": 23,
+      "ts": "2026-05-31T22:55:17",
+      "description": "run splitter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0023-stdout.txt"
+    },
+    {
+      "seq": 24,
+      "ts": "2026-05-31T22:55:20",
+      "description": "build watermarker",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0024-stdout.txt"
+    },
+    {
+      "seq": 25,
+      "ts": "2026-05-31T22:55:25",
+      "description": "run watermarker",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0025-stdout.txt"
+    },
+    {
+      "seq": 26,
+      "ts": "2026-05-31T22:55:29",
+      "description": "build compress",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0026-stdout.txt"
+    },
+    {
+      "seq": 27,
+      "ts": "2026-05-31T22:55:33",
+      "description": "run compress",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0027-stdout.txt"
+    },
+    {
+      "seq": 28,
+      "ts": "2026-05-31T22:55:36",
+      "description": "build convert",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0028-stdout.txt"
+    },
+    {
+      "seq": 29,
+      "ts": "2026-05-31T22:55:41",
+      "description": "run convert",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0029-stdout.txt"
+    },
+    {
+      "seq": 30,
+      "ts": "2026-05-31T22:55:44",
+      "description": "build for-each",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0030-stdout.txt"
+    },
+    {
+      "seq": 31,
+      "ts": "2026-05-31T22:55:49",
+      "description": "run for-each",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0031-stdout.txt"
+    },
+    {
+      "seq": 32,
+      "ts": "2026-05-31T22:55:53",
+      "description": "build merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0032-stdout.txt"
+    },
+    {
+      "seq": 33,
+      "ts": "2026-05-31T22:55:58",
+      "description": "run merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0033-stdout.txt"
+    },
+    {
+      "seq": 34,
+      "ts": "2026-05-31T22:56:02",
+      "description": "build slides-compress",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0034-stdout.txt"
+    },
+    {
+      "seq": 35,
+      "ts": "2026-05-31T22:56:07",
+      "description": "run slides-compress",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0035-stdout.txt"
+    },
+    {
+      "seq": 36,
+      "ts": "2026-05-31T22:56:10",
+      "description": "build slides-convert",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0036-stdout.txt"
+    },
+    {
+      "seq": 37,
+      "ts": "2026-05-31T22:56:15",
+      "description": "run slides-convert",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0037-stdout.txt"
+    },
+    {
+      "seq": 38,
+      "ts": "2026-05-31T22:56:18",
+      "description": "build slides-merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0038-stdout.txt"
+    },
+    {
+      "seq": 39,
+      "ts": "2026-05-31T22:56:23",
+      "description": "run slides-merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0039-stdout.txt"
+    },
+    {
+      "seq": 40,
+      "ts": "2026-05-31T22:56:27",
+      "description": "build html-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0040-stdout.txt"
+    },
+    {
+      "seq": 41,
+      "ts": "2026-05-31T22:56:31",
+      "description": "run html-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0041-stdout.txt"
+    },
+    {
+      "seq": 42,
+      "ts": "2026-05-31T22:56:35",
+      "description": "build image-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0042-stdout.txt"
+    },
+    {
+      "seq": 43,
+      "ts": "2026-05-31T22:56:39",
+      "description": "run image-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0043-stdout.txt"
+    },
+    {
+      "seq": 44,
+      "ts": "2026-05-31T22:56:42",
+      "description": "build json-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0044-stdout.txt"
+    },
+    {
+      "seq": 45,
+      "ts": "2026-05-31T22:56:45",
+      "description": "run json-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0045-stdout.txt"
+    },
+    {
+      "seq": 46,
+      "ts": "2026-05-31T22:56:48",
+      "description": "build pdf-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0046-stdout.txt"
+    },
+    {
+      "seq": 47,
+      "ts": "2026-05-31T22:56:52",
+      "description": "run pdf-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0047-stdout.txt"
+    },
+    {
+      "seq": 48,
+      "ts": "2026-05-31T22:56:55",
+      "description": "build spreadsheet-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0048-stdout.txt"
+    },
+    {
+      "seq": 49,
+      "ts": "2026-05-31T22:56:58",
+      "description": "run spreadsheet-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0049-stdout.txt"
+    },
+    {
+      "seq": 50,
+      "ts": "2026-05-31T22:57:01",
+      "description": "build spreadsheet-locker",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0050-stdout.txt"
+    },
+    {
+      "seq": 51,
+      "ts": "2026-05-31T22:57:04",
+      "description": "run spreadsheet-locker",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0051-stdout.txt"
+    },
+    {
+      "seq": 52,
+      "ts": "2026-05-31T22:57:08",
+      "description": "build spreadsheet-merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0052-stdout.txt"
+    },
+    {
+      "seq": 53,
+      "ts": "2026-05-31T22:57:10",
+      "description": "run spreadsheet-merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0053-stdout.txt"
+    },
+    {
+      "seq": 54,
+      "ts": "2026-05-31T22:57:13",
+      "description": "build spreadsheet-splitter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0054-stdout.txt"
+    },
+    {
+      "seq": 55,
+      "ts": "2026-05-31T22:57:16",
+      "description": "run spreadsheet-splitter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0055-stdout.txt"
+    },
+    {
+      "seq": 56,
+      "ts": "2026-05-31T22:57:19",
+      "description": "build text-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0056-stdout.txt"
+    },
+    {
+      "seq": 57,
+      "ts": "2026-05-31T22:57:22",
+      "description": "run text-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0057-stdout.txt"
+    },
+    {
+      "seq": 58,
+      "ts": "2026-05-31T22:57:25",
+      "description": "build diagram-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0058-stdout.txt"
+    },
+    {
+      "seq": 59,
+      "ts": "2026-05-31T22:57:28",
+      "description": "run diagram-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0059-stdout.txt"
+    },
+    {
+      "seq": 60,
+      "ts": "2026-05-31T22:57:31",
+      "description": "build pdf-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0060-stdout.txt"
+    },
+    {
+      "seq": 61,
+      "ts": "2026-05-31T22:57:35",
+      "description": "run pdf-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0061-stdout.txt"
+    },
+    {
+      "seq": 62,
+      "ts": "2026-05-31T22:57:38",
+      "description": "build converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0062-stdout.txt"
+    },
+    {
+      "seq": 63,
+      "ts": "2026-05-31T22:57:40",
+      "description": "run converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0063-stdout.txt"
+    },
+    {
+      "seq": 64,
+      "ts": "2026-05-31T22:57:43",
+      "description": "build email-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0064-stdout.txt"
+    },
+    {
+      "seq": 65,
+      "ts": "2026-05-31T22:57:46",
+      "description": "run email-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0065-stdout.txt"
+    },
+    {
+      "seq": 66,
+      "ts": "2026-05-31T22:57:47",
+      "description": "build doc-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0066-stdout.txt"
+    },
+    {
+      "seq": 67,
+      "ts": "2026-05-31T22:57:47",
+      "description": "run doc-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0067-stdout.txt"
+    },
+    {
+      "seq": 68,
+      "ts": "2026-05-31T22:57:48",
+      "description": "build html",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0068-stdout.txt"
+    },
+    {
+      "seq": 69,
+      "ts": "2026-05-31T22:57:48",
+      "description": "run html",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0069-stdout.txt"
+    },
+    {
+      "seq": 70,
+      "ts": "2026-05-31T22:57:49",
+      "description": "build xls-converter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0070-stdout.txt"
+    },
+    {
+      "seq": 71,
+      "ts": "2026-05-31T22:57:49",
+      "description": "run xls-converter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0071-stdout.txt"
+    },
+    {
+      "seq": 72,
+      "ts": "2026-05-31T22:57:53",
+      "description": "build merger",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0072-stdout.txt"
+    },
+    {
+      "seq": 73,
+      "ts": "2026-05-31T22:57:58",
+      "description": "run merger",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0073-stdout.txt"
+    },
+    {
+      "seq": 74,
+      "ts": "2026-05-31T22:58:01",
+      "description": "build optimizer",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0074-stdout.txt"
+    },
+    {
+      "seq": 75,
+      "ts": "2026-05-31T22:58:05",
+      "description": "run optimizer",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0075-stdout.txt"
+    },
+    {
+      "seq": 76,
+      "ts": "2026-05-31T22:58:09",
+      "description": "build pdf-aconverter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0076-stdout.txt"
+    },
+    {
+      "seq": 77,
+      "ts": "2026-05-31T22:58:14",
+      "description": "run pdf-aconverter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0077-stdout.txt"
+    },
+    {
+      "seq": 78,
+      "ts": "2026-05-31T22:58:18",
+      "description": "build splitter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0078-stdout.txt"
+    },
+    {
+      "seq": 79,
+      "ts": "2026-05-31T22:58:23",
+      "description": "run splitter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0079-stdout.txt"
+    },
+    {
+      "seq": 80,
+      "ts": "2026-05-31T22:58:27",
+      "description": "build text-extractor",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0080-stdout.txt"
+    },
+    {
+      "seq": 81,
+      "ts": "2026-05-31T22:58:33",
+      "description": "run text-extractor",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0081-stdout.txt"
+    },
+    {
+      "seq": 82,
+      "ts": "2026-05-31T22:58:37",
+      "description": "build timestamp",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0082-stdout.txt"
+    },
+    {
+      "seq": 83,
+      "ts": "2026-05-31T22:58:45",
+      "description": "run timestamp",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0083-stdout.txt"
+    },
+    {
+      "seq": 84,
+      "ts": "2026-05-31T22:58:46",
+      "description": "build jpeg",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0084-stdout.txt"
+    },
+    {
+      "seq": 85,
+      "ts": "2026-05-31T22:58:46",
+      "description": "run jpeg",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0085-stdout.txt"
+    },
+    {
+      "seq": 86,
+      "ts": "2026-05-31T22:58:47",
+      "description": "build png",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0086-stdout.txt"
+    },
+    {
+      "seq": 87,
+      "ts": "2026-05-31T22:58:48",
+      "description": "run png",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0087-stdout.txt"
+    },
+    {
+      "seq": 88,
+      "ts": "2026-05-31T22:58:48",
+      "description": "build tiff",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0088-stdout.txt"
+    },
+    {
+      "seq": 89,
+      "ts": "2026-05-31T22:58:49",
+      "description": "run tiff",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0089-stdout.txt"
+    },
+    {
+      "seq": 90,
+      "ts": "2026-05-31T22:58:49",
+      "description": "build image-extractor",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0090-stdout.txt"
+    },
+    {
+      "seq": 91,
+      "ts": "2026-05-31T22:58:50",
+      "description": "run image-extractor",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0091-stdout.txt"
+    },
+    {
+      "seq": 92,
+      "ts": "2026-05-31T22:58:50",
+      "description": "build table-generator",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0092-stdout.txt"
+    },
+    {
+      "seq": 93,
+      "ts": "2026-05-31T22:58:51",
+      "description": "run table-generator",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0093-stdout.txt"
+    },
+    {
+      "seq": 94,
+      "ts": "2026-05-31T22:58:52",
+      "description": "build toc-generator",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 1,
+      "stdout_file": "cmd0094-stdout.txt"
+    },
+    {
+      "seq": 95,
+      "ts": "2026-05-31T22:58:52",
+      "description": "run toc-generator",
+      "cmd": "dotnet run --no-build",
+      "returncode": 1,
+      "stdout_file": "cmd0095-stdout.txt"
+    },
+    {
+      "seq": 96,
+      "ts": "2026-05-31T22:58:56",
+      "description": "build form-flattener",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0096-stdout.txt"
+    },
+    {
+      "seq": 97,
+      "ts": "2026-05-31T22:59:00",
+      "description": "run form-flattener",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0097-stdout.txt"
+    },
+    {
+      "seq": 98,
+      "ts": "2026-05-31T22:59:04",
+      "description": "build security",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0098-stdout.txt"
+    },
+    {
+      "seq": 99,
+      "ts": "2026-05-31T22:59:09",
+      "description": "run security",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0099-stdout.txt"
+    },
+    {
+      "seq": 100,
+      "ts": "2026-05-31T22:59:13",
+      "description": "build form-editor",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0100-stdout.txt"
+    },
+    {
+      "seq": 101,
+      "ts": "2026-05-31T22:59:17",
+      "description": "run form-editor",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0101-stdout.txt"
+    },
+    {
+      "seq": 102,
+      "ts": "2026-05-31T22:59:20",
+      "description": "build form-exporter",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0102-stdout.txt"
+    },
+    {
+      "seq": 103,
+      "ts": "2026-05-31T22:59:25",
+      "description": "run form-exporter",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0103-stdout.txt"
+    },
+    {
+      "seq": 104,
+      "ts": "2026-05-31T22:59:29",
+      "description": "build signature",
+      "cmd": "dotnet build -v q --no-incremental",
+      "returncode": 0,
+      "stdout_file": "cmd0104-stdout.txt"
+    },
+    {
+      "seq": 105,
+      "ts": "2026-05-31T22:59:34",
+      "description": "run signature",
+      "cmd": "dotnet run --no-build",
+      "returncode": 0,
+      "stdout_file": "cmd0105-stdout.txt"
+    }
+  ]
+}

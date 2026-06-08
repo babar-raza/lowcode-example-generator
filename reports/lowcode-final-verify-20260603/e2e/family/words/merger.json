@@ -1,0 +1,9 @@
+{
+  "example": "merger",
+  "csproj": "words-merger.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: words-merger\nDone.\n",
+  "stderr_tail": ""
+}

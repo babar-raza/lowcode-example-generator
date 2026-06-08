@@ -1,0 +1,82 @@
+{
+  "sprint": "non-lowcode-fallback-forward-sprint-20260604",
+  "generated_at": "2026-06-04T00:00:00Z",
+  "trains_completed": {
+    "TRAIN_A": {
+      "title": "Runner fallback status fix",
+      "status": "COMPLETE",
+      "changes": [
+        "_FALLBACK_USABLE_STATUSES expanded to PROBE_CANDIDATE + PROBE_CONFIRMED + VERIFIED_PUBLISHABLE",
+        "fallback_candidates.json artifact enriched with status_counts and exclusion_reason"
+      ],
+      "tests": 10,
+      "tests_pass": 10
+    },
+    "TRAIN_B": {
+      "title": "Complete catalog_discover.py CLI",
+      "status": "COMPLETE",
+      "changes": [
+        "src/plugin_examples/commands/catalog_discover.py created (220 lines)",
+        "PluginEntry extended with 11 new optional fields",
+        "Command registered in commands/__init__.py"
+      ],
+      "tests": 8,
+      "tests_pass": 8
+    },
+    "TRAIN_C": {
+      "title": "ZIP third-family pilot",
+      "status": "COMPLETE",
+      "verdict": "PILOT_PASS_PROBE_CONFIRMED",
+      "evidence": {
+        "nuget_version": "26.5.0",
+        "assembly_fingerprint": "02aa7aecd45442b01391a5bf5432d923e4381fb4fdd712dc88495530d901b0c7",
+        "candidate_type": "Archive",
+        "candidate_method": "Save",
+        "confidence_score": 0.9,
+        "probe_output_size_bytes": 319,
+        "probe_output_validated": true
+      }
+    },
+    "TRAIN_D": {
+      "title": "Registry bootstrap hardening",
+      "status": "COMPLETE",
+      "changes": [
+        "bootstrap_status, next_action, blocker_type, last_reflected_package_version, refresh_due added to barcode/imaging/zip registry YAMLs",
+        "bootstrap-status-matrix.json covers 7 families",
+        "family-next-action-ledger.md written",
+        "refresh-policy-proof.md written"
+      ]
+    },
+    "TRAIN_E": {
+      "title": "First dry-run BarCode example package",
+      "status": "COMPLETE",
+      "evidence": {
+        "example_name": "generate-barcode-from-text",
+        "type_name": "BarcodeGenerator",
+        "method_name": "Save",
+        "restore_ok": true,
+        "build_ok": true,
+        "run_ok": true,
+        "output_size_bytes": 12104,
+        "live_publication": false
+      }
+    },
+    "TRAIN_F": {
+      "title": "Tests and regression",
+      "status": "COMPLETE",
+      "sprint_specific_tests": 98,
+      "sprint_specific_pass": 98,
+      "sprint_specific_fail": 0,
+      "total_tests_collected": 3338,
+      "ruff_lint_pass": true,
+      "backward_compat_check": "PASS (6 LowCode YAMLs + format-authority unchanged)"
+    }
+  },
+  "families_with_probe_confirmed": [
+    "barcode",
+    "imaging",
+    "zip"
+  ],
+  "protected_files_changed": false,
+  "live_publication": false
+}

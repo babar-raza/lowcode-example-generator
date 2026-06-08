@@ -1,0 +1,56 @@
+{
+  "cells": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-cells-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "diagram": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-diagram-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "email": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-email-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "pdf": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-pdf-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "slides": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-slides-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "words": {
+    "baseRefName": "main",
+    "headRefName": "lowcode-examples-words-readme-io-final",
+    "mergeStateStatus": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  }
+}

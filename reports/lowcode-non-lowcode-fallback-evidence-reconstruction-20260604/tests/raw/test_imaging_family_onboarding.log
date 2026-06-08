@@ -1,0 +1,18 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 5 items
+
+tests/unit/test_imaging_family_onboarding.py::TestImagingConfigLoads::test_imaging_config_loads_without_error PASSED [ 20%]
+tests/unit/test_imaging_family_onboarding.py::TestImagingConfigLoads::test_imaging_fallback_strategy_is_capability_registry PASSED [ 40%]
+tests/unit/test_imaging_family_onboarding.py::TestImagingConfigLoads::test_imaging_registry_entry_validates_against_schema PASSED [ 60%]
+tests/unit/test_imaging_family_onboarding.py::TestImagingConfigLoads::test_imaging_onboarding_does_not_affect_lowcode_families PASSED [ 80%]
+tests/unit/test_imaging_family_onboarding.py::TestImagingConfigLoads::test_fixture_gen_creates_valid_png PASSED [100%]
+
+============================== 5 passed in 0.81s ==============================

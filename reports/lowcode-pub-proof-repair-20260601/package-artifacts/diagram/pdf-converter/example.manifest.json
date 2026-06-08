@@ -1,0 +1,12 @@
+{
+  "family": "diagram",
+  "name": "pdf-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "PdfConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-converter.csproj",
+  "files": [
+    "pdf-converter.csproj",
+    "Program.cs"
+  ]
+}

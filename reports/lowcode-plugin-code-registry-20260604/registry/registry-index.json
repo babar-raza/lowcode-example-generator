@@ -1,0 +1,456 @@
+{
+  "generated_at": "2026-06-04",
+  "sprint": "lowcode-plugin-code-registry-20260604",
+  "total_families": 18,
+  "total_plugins": 65,
+  "status_counts": {
+    "CODE_HARVESTED": 48,
+    "NEEDS_MANUAL_MAPPING": 17
+  },
+  "family_counts": {
+    "barcode": {
+      "total": 5,
+      "statuses": {
+        "CODE_HARVESTED": 5
+      }
+    },
+    "cad": {
+      "total": 5,
+      "statuses": {
+        "CODE_HARVESTED": 4,
+        "NEEDS_MANUAL_MAPPING": 1
+      }
+    },
+    "drawing": {
+      "total": 2,
+      "statuses": {
+        "CODE_HARVESTED": 2
+      }
+    },
+    "finance": {
+      "total": 2,
+      "statuses": {
+        "CODE_HARVESTED": 1,
+        "NEEDS_MANUAL_MAPPING": 1
+      }
+    },
+    "font": {
+      "total": 2,
+      "statuses": {
+        "NEEDS_MANUAL_MAPPING": 1,
+        "CODE_HARVESTED": 1
+      }
+    },
+    "gis": {
+      "total": 2,
+      "statuses": {
+        "NEEDS_MANUAL_MAPPING": 1,
+        "CODE_HARVESTED": 1
+      }
+    },
+    "html": {
+      "total": 6,
+      "statuses": {
+        "CODE_HARVESTED": 4,
+        "NEEDS_MANUAL_MAPPING": 2
+      }
+    },
+    "imaging": {
+      "total": 8,
+      "statuses": {
+        "CODE_HARVESTED": 8
+      }
+    },
+    "note": {
+      "total": 3,
+      "statuses": {
+        "CODE_HARVESTED": 3
+      }
+    },
+    "ocr": {
+      "total": 3,
+      "statuses": {
+        "CODE_HARVESTED": 2,
+        "NEEDS_MANUAL_MAPPING": 1
+      }
+    },
+    "omr": {
+      "total": 2,
+      "statuses": {
+        "NEEDS_MANUAL_MAPPING": 2
+      }
+    },
+    "page": {
+      "total": 3,
+      "statuses": {
+        "CODE_HARVESTED": 3
+      }
+    },
+    "psd": {
+      "total": 4,
+      "statuses": {
+        "CODE_HARVESTED": 4
+      }
+    },
+    "svg": {
+      "total": 4,
+      "statuses": {
+        "CODE_HARVESTED": 1,
+        "NEEDS_MANUAL_MAPPING": 3
+      }
+    },
+    "tasks": {
+      "total": 5,
+      "statuses": {
+        "NEEDS_MANUAL_MAPPING": 2,
+        "CODE_HARVESTED": 3
+      }
+    },
+    "tex": {
+      "total": 3,
+      "statuses": {
+        "CODE_HARVESTED": 3
+      }
+    },
+    "threed": {
+      "total": 2,
+      "statuses": {
+        "NEEDS_MANUAL_MAPPING": 2
+      }
+    },
+    "zip": {
+      "total": 4,
+      "statuses": {
+        "CODE_HARVESTED": 3,
+        "NEEDS_MANUAL_MAPPING": 1
+      }
+    }
+  },
+  "entries": [
+    {
+      "family": "barcode",
+      "plugin_slug": "generate-barcode",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "recognize-barcode",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "generate-qr-code",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "read-barcode",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "barcode",
+      "plugin_slug": "scan-barcode",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-cad-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dwg-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dxf-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-cad-to-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "cad",
+      "plugin_slug": "convert-dwg-to-jpg",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "drawing",
+      "plugin_slug": "convert-drawing",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "drawing",
+      "plugin_slug": "create-drawing",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "finance",
+      "plugin_slug": "convert-xbrl",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "finance",
+      "plugin_slug": "parse-xbrl",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "font",
+      "plugin_slug": "convert-font",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "font",
+      "plugin_slug": "render-text-with-font",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "gis",
+      "plugin_slug": "convert-gis-data",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "gis",
+      "plugin_slug": "read-gis-data",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-word",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-xps",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "convert-html-to-markdown",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "html",
+      "plugin_slug": "merge-html",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "convert-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "resize-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "compress-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "crop-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "rotate-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "watermark-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "merge-images",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "imaging",
+      "plugin_slug": "filter-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-word",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "note",
+      "plugin_slug": "convert-one-to-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "recognize-text",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "extract-text",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "ocr",
+      "plugin_slug": "scan-document",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "omr",
+      "plugin_slug": "recognize-omr",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "omr",
+      "plugin_slug": "generate-omr-template",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-xps-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-eps-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "page",
+      "plugin_slug": "convert-ps-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "convert-psd-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "convert-psd-to-png",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "convert-psd-to-jpg",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "psd",
+      "plugin_slug": "edit-psd-layers",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "convert-svg-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "convert-svg-to-png",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "convert-svg-to-jpg",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "svg",
+      "plugin_slug": "merge-svg",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-pdf",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-excel",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-html",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "convert-mpp-to-image",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "tasks",
+      "plugin_slug": "read-project-data",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "tex",
+      "plugin_slug": "convert-tex-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "tex",
+      "plugin_slug": "convert-latex-to-pdf",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "tex",
+      "plugin_slug": "convert-tex-to-svg",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "threed",
+      "plugin_slug": "convert-3d-model",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "threed",
+      "plugin_slug": "compress-3d-scene",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "compress-files",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "extract-files",
+      "status": "NEEDS_MANUAL_MAPPING"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "create-archive",
+      "status": "CODE_HARVESTED"
+    },
+    {
+      "family": "zip",
+      "plugin_slug": "compress-folder",
+      "status": "CODE_HARVESTED"
+    }
+  ]
+}

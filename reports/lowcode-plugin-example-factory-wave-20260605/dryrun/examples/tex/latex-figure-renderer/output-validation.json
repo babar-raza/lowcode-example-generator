@@ -1,0 +1,13 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\tex\\latex-figure-renderer",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\tex\\latex-figure-renderer\\output\\figure.png",
+      "size": 5049
+    }
+  ],
+  "verdict": "PASS"
+}

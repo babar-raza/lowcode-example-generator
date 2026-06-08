@@ -1,0 +1,9 @@
+{
+  "example": "text-extractor",
+  "csproj": "pdf-text-extractor.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Extracted text from 1 page(s)\n",
+  "stderr_tail": ""
+}

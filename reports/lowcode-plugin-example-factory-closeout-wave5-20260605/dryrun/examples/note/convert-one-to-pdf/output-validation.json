@@ -1,0 +1,12 @@
+{
+  "package_key": "note/convert-one-to-pdf",
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "generated_at": "2026-06-05",
+  "verdict": "PASS",
+  "output_files": [
+    {
+      "path": "output/output.pdf",
+      "size": 17790
+    }
+  ]
+}

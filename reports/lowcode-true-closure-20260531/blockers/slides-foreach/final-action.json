@@ -1,0 +1,9 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:54:17",
+  "final_action": "COMPANION_HELPER_EXAMPLE",
+  "main_class_count_change": "NO CHANGE (slides published_count stays 3)",
+  "package_status": "Keep example in pr-dry-run as companion; update README to mark as helper",
+  "denominator_action": "NO CHANGE",
+  "readme_action": "Add slides-for-each to helper/companion section, not main-class table"
+}

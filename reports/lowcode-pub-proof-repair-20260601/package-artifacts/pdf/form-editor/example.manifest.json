@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "form-editor",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "FormEditor",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "form-editor.csproj",
+  "files": [
+    "form-editor.csproj",
+    "Program.cs"
+  ]
+}

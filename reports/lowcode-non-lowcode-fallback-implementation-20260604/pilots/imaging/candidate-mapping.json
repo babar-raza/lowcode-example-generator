@@ -1,0 +1,15 @@
+{
+  "type_name": "Image",
+  "namespace": "Aspose.Imaging",
+  "method_name": "Save",
+  "confidence_score": 0.8,
+  "score_breakdown": {
+    "static_factory": 0.3,
+    "method_exists": 0.25,
+    "widely_used_api": 0.25
+  },
+  "match_rationale": "Image.Load(path).Save(path, options) is the canonical Aspose.Imaging API; MANUAL_MAPPING used (abstract class bypasses heuristic)",
+  "status": "PROBE_CANDIDATE",
+  "ai_source_flag": false,
+  "reflection_confirmed": true
+}

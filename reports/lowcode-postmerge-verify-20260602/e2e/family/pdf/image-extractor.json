@@ -1,0 +1,9 @@
+{
+  "example": "image-extractor",
+  "csproj": "pdf-image-extractor.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Images extracted\n",
+  "stderr_tail": ""
+}

@@ -1,0 +1,15 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:52:49",
+  "policy": "RUNTIME_ONLY",
+  "policy_rationale": "PFX is generated at runtime inside Program.cs using CertificateRequest + RSA.Create(2048). No static PFX is shipped.",
+  "static_pfx_found": [
+    "test-cert.pfx"
+  ],
+  "static_pfx_allowed": false,
+  "action": "Ensure no static .pfx file in package directory",
+  "password": "test-password (public test-only, not production)",
+  "certificate_type": "Self-signed test certificate (CN=Aspose Test Signer, O=Test, C=US)",
+  "validity": "Not-before: now-1day, Not-after: now+1year (test-only)",
+  "WARNING": "Static PFX found: [WindowsPath('C:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab/workspace/pr-dry-run/words-controlled-pilot/examples/words/lowcode/signer/test-cert.pfx')] — must be removed"
+}

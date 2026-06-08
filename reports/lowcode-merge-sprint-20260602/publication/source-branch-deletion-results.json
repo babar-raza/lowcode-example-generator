@@ -1,0 +1,41 @@
+{
+  "sprint": "lowcode-merge-sprint-20260602",
+  "results": [
+    {
+      "family": "cells",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-cells-readme-io-final",
+      "deleted": true
+    },
+    {
+      "family": "diagram",
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-diagram-readme-io-final",
+      "deleted": true
+    },
+    {
+      "family": "email",
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-email-readme-io-final",
+      "deleted": true
+    },
+    {
+      "family": "pdf",
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-pdf-readme-io-final",
+      "deleted": true
+    },
+    {
+      "family": "slides",
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-slides-readme-io-final",
+      "deleted": true
+    },
+    {
+      "family": "words",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "branch": "lowcode-examples-words-readme-io-final",
+      "deleted": true
+    }
+  ]
+}

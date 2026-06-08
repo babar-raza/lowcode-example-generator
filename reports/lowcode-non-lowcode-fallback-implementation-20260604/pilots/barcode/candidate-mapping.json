@@ -1,0 +1,16 @@
+{
+  "type_name": "BarcodeGenerator",
+  "namespace": "Aspose.BarCode.Generation",
+  "method_name": "Save",
+  "confidence_score": 0.95,
+  "score_breakdown": {
+    "verb_match": 0.4,
+    "class_suffix_match": 0.3,
+    "method_exists": 0.15,
+    "not_abstract": 0.1
+  },
+  "match_rationale": "BarcodeGenerator is the canonical plugin type; Save is the canonical output method",
+  "status": "PROBE_CANDIDATE",
+  "ai_source_flag": false,
+  "reflection_confirmed": true
+}

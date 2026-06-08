@@ -1,0 +1,1004 @@
+
+--- CMD 1: git rev-parse HEAD ---
+CMD: git rev-parse HEAD
+EXIT: 0
+STDOUT:
+6128cecc3e0cfa45e31677820a495de25bf57f03
+
+
+--- CMD 2: git status --short ---
+CMD: git status --short
+EXIT: 0
+STDOUT:
+?? .kilo/
+?? reports/lowcode-true-closure-20260531/
+?? scripts/build_blocker_closure_zip.py
+?? scripts/run_true_closure_evidence.py
+
+
+--- CMD 3: git log --oneline -5 ---
+CMD: git log --oneline -5
+EXIT: 0
+STDOUT:
+6128cec feat(blocker-closure): add words-signer + slides-for-each examples â€” 2 blockers closed
+90a578b feat(final-closure): full A-P evidence â€” 42/42 examples, 3222 pytest pass, 0 failures
+ec18258 feat(pub-closure): full A-N evidence closure â€” 42/42 examples, 3220 pytest pass
+48bc2d1 chore(pub-closure-c1): workspace state refresh from Run-B idempotency generations
+8d2a335 feat(pub-closure-b1): evaluator status model fix + workspace state refresh
+
+
+--- CMD 4: python version ---
+CMD: C:\Python313\python.exe --version
+EXIT: 0
+STDOUT:
+Python 3.13.2
+
+
+--- CMD 5: dotnet version ---
+CMD: dotnet --version
+EXIT: 0
+STDOUT:
+10.0.204
+
+
+--- CMD 6: build pdf-form-importer probe ---
+CMD: dotnet build -v q
+EXIT: 1
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\pdf-form-importer.csproj]
+
+Build FAILED.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\pdf-form-importer.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:01:23.70
+
+
+--- CMD 7: build pdf-timestamp probe ---
+CMD: dotnet build -v q
+EXIT: 1
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-timestamp\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-timestamp\pdf-timestamp.csproj]
+
+Build FAILED.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-timestamp\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-timestamp\pdf-timestamp.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:03.08
+
+
+--- CMD 8: build comparer ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.25
+
+
+--- CMD 9: run comparer ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-comparer
+Comparison succeeded: output.docx
+
+
+--- CMD 10: build converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.71
+
+
+--- CMD 11: run converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-converter
+Done.
+
+
+--- CMD 12: build mail-merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.71
+
+
+--- CMD 13: run mail-merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-mail-merger
+Mail merge succeeded: output.docx
+
+
+--- CMD 14: build merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.64
+
+
+--- CMD 15: run merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-merger
+Done.
+
+
+--- CMD 16: build replacer ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.49
+
+
+--- CMD 17: run replacer ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-replacer
+Done.
+
+
+--- CMD 18: build report-builder ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\report-builder.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\report-builder.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.43
+
+
+--- CMD 19: run report-builder ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-report-builder
+Report built: output.docx
+
+
+--- CMD 20: build signer ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.82
+
+
+--- CMD 21: run signer ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-signer
+Signing succeeded: output.docx, Signatures: 1
+Done.
+
+
+--- CMD 22: build splitter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.83
+
+
+--- CMD 23: run splitter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-splitter
+Done.
+
+
+--- CMD 24: build watermarker ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.86
+
+
+--- CMD 25: run watermarker ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: words-watermarker
+Done.
+
+
+--- CMD 26: build compress ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.86
+
+
+--- CMD 27: run compress ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-compress
+Compression succeeded: output.pptx
+
+
+--- CMD 28: build convert ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.68
+
+
+--- CMD 29: run convert ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-convert
+Conversion succeeded: output.pdf
+
+
+--- CMD 30: build for-each ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.68
+
+
+--- CMD 31: run for-each ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-for-each
+ForEach complete: 2 slides processed, output: output.pptx
+Done.
+
+
+--- CMD 32: build merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\merger\merger.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\merger\merger.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.12
+
+
+--- CMD 33: run merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-merger
+Done.
+
+
+--- CMD 34: build slides-compress ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.01
+
+
+--- CMD 35: run slides-compress ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-compress
+Compression succeeded: output.pptx
+
+
+--- CMD 36: build slides-convert ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.88
+
+
+--- CMD 37: run slides-convert ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-convert
+Conversion succeeded: output.pdf
+
+
+--- CMD 38: build slides-merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\slides-merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\slides-merger\slides-merger.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\slides-merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\slides-merger\slides-merger.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.79
+
+
+--- CMD 39: run slides-merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: slides-merger
+Done.
+
+
+--- CMD 40: build html-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.27
+
+
+--- CMD 41: run html-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-html-converter
+Done.
+
+
+--- CMD 42: build image-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.07
+
+
+--- CMD 43: run image-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-image-converter
+Done.
+
+
+--- CMD 44: build json-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.73
+
+
+--- CMD 45: run json-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-json-converter
+Done.
+
+
+--- CMD 46: build pdf-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.78
+
+
+--- CMD 47: run pdf-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-pdf-converter
+Done.
+
+
+--- CMD 48: build spreadsheet-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.65
+
+
+--- CMD 49: run spreadsheet-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-spreadsheet-converter
+Done.
+
+
+--- CMD 50: build spreadsheet-locker ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.80
+
+
+--- CMD 51: run spreadsheet-locker ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-spreadsheet-locker
+Done.
+
+
+--- CMD 52: build spreadsheet-merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.75
+
+
+--- CMD 53: run spreadsheet-merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-spreadsheet-merger
+Done.
+
+
+--- CMD 54: build spreadsheet-splitter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.61
+
+
+--- CMD 55: run spreadsheet-splitter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-spreadsheet-splitter
+Done.
+
+
+--- CMD 56: build text-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.55
+
+
+--- CMD 57: run text-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: cells-text-converter
+Done.
+
+
+--- CMD 58: build diagram-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\diagram-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\diagram-converter\diagram-converter.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\diagram-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\diagram-converter\diagram-converter.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.57
+
+
+--- CMD 59: run diagram-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Conversion succeeded, output file created at 'output.vdx'.
+
+
+--- CMD 60: build pdf-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\pdf-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\pdf-converter\pdf-converter.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\pdf-converter\Program.cs(9,16): warning CS0618: 'Page.DrawEllipse(double, double, double, double)' is obsolete: 'Use Page.DrawOwal(double x1, double y1, double x2, double y2) instead.' [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\diagram-controlled-pilot\examples\diagram\lowcode\pdf-converter\pdf-converter.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.57
+
+
+--- CMD 61: run pdf-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+PDF generated successfully: output.pdf
+
+
+--- CMD 62: build converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.63
+
+
+--- CMD 63: run converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: email-converter
+Conversion succeeded: output_html
+
+
+--- CMD 64: build email-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.52
+
+
+--- CMD 65: run email-converter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Example: email-converter
+Conversion succeeded: output_html
+
+
+--- CMD 66: build doc-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 67: run doc-converter ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot\examples\pdf\lowcode\doc-converter contains more than one project file.
+
+
+--- CMD 68: build html ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 69: run html ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot\examples\pdf\lowcode\html contains more than one project file.
+
+
+--- CMD 70: build xls-converter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 71: run xls-converter ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot\examples\pdf\lowcode\xls-converter contains more than one project file.
+
+
+--- CMD 72: build merger ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.46
+
+
+--- CMD 73: run merger ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Merged successfully
+
+
+--- CMD 74: build optimizer ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.62
+
+
+--- CMD 75: run optimizer ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Optimized successfully
+
+
+--- CMD 76: build pdf-aconverter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.06
+
+
+--- CMD 77: run pdf-aconverter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Converted to PDF/A-1B
+
+
+--- CMD 78: build splitter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.10
+
+
+--- CMD 79: run splitter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Split into 3 file(s)
+
+
+--- CMD 80: build text-extractor ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.47
+
+
+--- CMD 81: run text-extractor ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Extracted text from 1 page(s)
+
+
+--- CMD 82: build timestamp ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.21
+
+
+--- CMD 83: run timestamp ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Output: output_timestamped.pdf (exists=True, size=681232 bytes)
+Timestamp applied successfully
+Done.
+
+
+--- CMD 84: build jpeg ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 85: run jpeg ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr5\examples\pdf\lowcode\jpeg contains more than one project file.
+
+
+--- CMD 86: build png ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 87: run png ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr5\examples\pdf\lowcode\png contains more than one project file.
+
+
+--- CMD 88: build tiff ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 89: run tiff ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr5\examples\pdf\lowcode\tiff contains more than one project file.
+
+
+--- CMD 90: build image-extractor ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 91: run image-extractor ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr6\examples\pdf\lowcode\image-extractor contains more than one project file.
+
+
+--- CMD 92: build table-generator ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 93: run table-generator ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr6\examples\pdf\lowcode\table-generator contains more than one project file.
+
+
+--- CMD 94: build toc-generator ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 1
+STDOUT:
+MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.
+
+
+--- CMD 95: run toc-generator ---
+CMD: dotnet run --no-build
+EXIT: 1
+STDERR:
+Specify which project file to use because C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\pdf-controlled-pilot-pr6\examples\pdf\lowcode\toc-generator contains more than one project file.
+
+
+--- CMD 96: build form-flattener ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.93
+
+
+--- CMD 97: run form-flattener ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Form flattened
+
+
+--- CMD 98: build security ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.56
+
+
+--- CMD 99: run security ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+PDF encrypted
+
+
+--- CMD 100: build form-editor ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.86
+
+
+--- CMD 101: run form-editor ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Form fields removed
+
+
+--- CMD 102: build form-exporter ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.14
+
+
+--- CMD 103: run form-exporter ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+Form exported to JSON
+
+
+--- CMD 104: build signature ---
+CMD: dotnet build -v q --no-incremental
+EXIT: 0
+STDOUT:
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.23
+
+
+--- CMD 105: run signature ---
+CMD: dotnet run --no-build
+EXIT: 0
+STDOUT:
+PDF signed successfully.
+

@@ -1,0 +1,5 @@
+[PASS] D01: diagram-converter exit_code=0
+[PASS] D02: Program.cs contains File.Exists output verification
+[PASS] D03: expected-output.json declares file output (.vdx)
+[PASS] D04: output_file_count=0 explained by measurement artifact
+[PASS] D05: No code/classification changes needed

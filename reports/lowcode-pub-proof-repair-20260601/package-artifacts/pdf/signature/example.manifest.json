@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "signature",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Signature",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "signature.csproj",
+  "files": [
+    "Program.cs",
+    "signature.csproj"
+  ]
+}

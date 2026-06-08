@@ -1,0 +1,14 @@
+{
+  "follow_up_prs": [
+    {"repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples", "pr": 8, "title": "fix: remove duplicate .csproj files", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples", "pr": 3, "title": "fix: remove duplicate .csproj file", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples", "pr": 23, "title": "fix: remove duplicate .csproj files and static test.pfx", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples", "pr": 3, "title": "fix: remove duplicate .csproj files", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples", "pr": 9, "title": "fix: remove duplicate .csproj files and static test-cert.pfx", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples", "pr": 9, "title": "fix: add CopyToOutputDirectory for input.xlsx in text-converter", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples", "pr": 10, "title": "fix: add CopyToOutputDirectory for input.docx in 4 examples", "merged": true, "branch_deleted": true}
+  ],
+  "total_prs": 7,
+  "all_merged": true,
+  "all_branches_deleted": true
+}

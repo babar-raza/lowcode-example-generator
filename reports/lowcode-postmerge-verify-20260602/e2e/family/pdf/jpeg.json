@@ -1,0 +1,9 @@
+{
+  "example": "jpeg",
+  "csproj": "pdf-jpeg.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "JPEG created\n",
+  "stderr_tail": ""
+}

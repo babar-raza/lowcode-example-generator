@@ -1,0 +1,520 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:52:49",
+  "inventory": [
+    {
+      "family": "words",
+      "type_name": "Comparer",
+      "full_type": "Aspose.Words.LowCode.Comparer",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Compare methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "ComparerContext",
+      "full_type": "Aspose.Words.LowCode.ComparerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context/options model for Comparer",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Converter",
+      "full_type": "Aspose.Words.LowCode.Converter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "ConverterContext",
+      "full_type": "Aspose.Words.LowCode.ConverterContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context/options model for Converter",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "MailMerger",
+      "full_type": "Aspose.Words.LowCode.MailMerger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Execute methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "MailMergeDataSource",
+      "full_type": "Aspose.Words.LowCode.MailMergeDataSource",
+      "classification": "DATA_SOURCE",
+      "reason": "Data source interface for MailMerger",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "MailMergeOptions",
+      "full_type": "Aspose.Words.LowCode.MailMergeOptions",
+      "classification": "OPTIONS_MODEL",
+      "reason": "Options model for MailMerger",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "MailMergerContext",
+      "full_type": "Aspose.Words.LowCode.MailMergerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for MailMerger",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "MergeFormatMode",
+      "full_type": "Aspose.Words.LowCode.MergeFormatMode",
+      "classification": "ENUM",
+      "reason": "Enum for merge format",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Merger",
+      "full_type": "Aspose.Words.LowCode.Merger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Merge methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "MergerContext",
+      "full_type": "Aspose.Words.LowCode.MergerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for Merger",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Processor",
+      "full_type": "Aspose.Words.LowCode.Processor",
+      "classification": "NOT_LOWCODE_MAIN_CLASS",
+      "reason": "Abstract base class with INTERNAL constructor. No public constructor, all instance methods. CS1729+CS0120 proven. PERMANENTLY_BLOCKED.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "ProcessorContext",
+      "full_type": "Aspose.Words.LowCode.ProcessorContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for Processor (base class)",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Replacer",
+      "full_type": "Aspose.Words.LowCode.Replacer",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Replace methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "ReplacerContext",
+      "full_type": "Aspose.Words.LowCode.ReplacerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for Replacer",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "ReportBuilder",
+      "full_type": "Aspose.Words.LowCode.ReportBuilder",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static BuildReport methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "ReportBuilderContext",
+      "full_type": "Aspose.Words.LowCode.ReportBuilderContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for ReportBuilder",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "ReportBuilderOptions",
+      "full_type": "Aspose.Words.LowCode.ReportBuilderOptions",
+      "classification": "OPTIONS_MODEL",
+      "reason": "Options model for ReportBuilder",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "SignerContext",
+      "full_type": "Aspose.Words.LowCode.SignerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model providing CertificateHolder+SignOptions for DigitalSignatureUtil.Sign. NO Aspose.Words.LowCode.Signer class exists. Signing entry point is DigitalSignatureUtil in Aspose.Words.DigitalSignatures namespace — NOT a LowCode main class.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "SplitCriteria",
+      "full_type": "Aspose.Words.LowCode.SplitCriteria",
+      "classification": "ENUM",
+      "reason": "Enum for split criteria",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "SplitOptions",
+      "full_type": "Aspose.Words.LowCode.SplitOptions",
+      "classification": "OPTIONS_MODEL",
+      "reason": "Options model for Splitter",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Splitter",
+      "full_type": "Aspose.Words.LowCode.Splitter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Split methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "SplitterContext",
+      "full_type": "Aspose.Words.LowCode.SplitterContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for Splitter",
+      "is_main_class_example": false
+    },
+    {
+      "family": "words",
+      "type_name": "Watermarker",
+      "full_type": "Aspose.Words.LowCode.Watermarker",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static SetText/SetImage methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "words",
+      "type_name": "WatermarkerContext",
+      "full_type": "Aspose.Words.LowCode.WatermarkerContext",
+      "classification": "CONTEXT_MODEL",
+      "reason": "Context model for Watermarker",
+      "is_main_class_example": false
+    },
+    {
+      "family": "cells",
+      "type_name": "HtmlConverter",
+      "full_type": "Aspose.Cells.LowCode.HtmlConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert to HTML, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "ImageConverter",
+      "full_type": "Aspose.Cells.LowCode.ImageConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert to image, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "JsonConverter",
+      "full_type": "Aspose.Cells.LowCode.JsonConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert to JSON, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "PdfConverter",
+      "full_type": "Aspose.Cells.LowCode.PdfConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert to PDF, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetConverter",
+      "full_type": "Aspose.Cells.LowCode.SpreadsheetConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetLocker",
+      "full_type": "Aspose.Cells.LowCode.SpreadsheetLocker",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Lock methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetMerger",
+      "full_type": "Aspose.Cells.LowCode.SpreadsheetMerger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Merge methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetSplitter",
+      "full_type": "Aspose.Cells.LowCode.SpreadsheetSplitter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Split methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "TextConverter",
+      "full_type": "Aspose.Cells.LowCode.TextConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Convert to text, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetPrinter",
+      "full_type": "Aspose.Cells.LowCode.SpreadsheetPrinter",
+      "classification": "NOT_LOWCODE_MAIN_CLASS",
+      "reason": "NOT IN Aspose.Cells.LowCode API catalog. Was never a valid LowCode type. Removed from blocker list.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "pdf",
+      "type_name": "Converter",
+      "full_type": "Aspose.Pdf.LowCode.Converter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "DocConverter",
+      "full_type": "Aspose.Pdf.LowCode.DocConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormEditor",
+      "full_type": "Aspose.Pdf.LowCode.FormEditor",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormExporter",
+      "full_type": "Aspose.Pdf.LowCode.FormExporter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormFiller",
+      "full_type": "Aspose.Pdf.LowCode.FormFiller",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormFlattener",
+      "full_type": "Aspose.Pdf.LowCode.FormFlattener",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "ImageConverter",
+      "full_type": "Aspose.Pdf.LowCode.ImageConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Merger",
+      "full_type": "Aspose.Pdf.LowCode.Merger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Optimizer",
+      "full_type": "Aspose.Pdf.LowCode.Optimizer",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "PageNumberStamper",
+      "full_type": "Aspose.Pdf.LowCode.PageNumberStamper",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "PageSplitter",
+      "full_type": "Aspose.Pdf.LowCode.PageSplitter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "PdfAConverter",
+      "full_type": "Aspose.Pdf.LowCode.PdfAConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Redactor",
+      "full_type": "Aspose.Pdf.LowCode.Redactor",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Rotator",
+      "full_type": "Aspose.Pdf.LowCode.Rotator",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Security",
+      "full_type": "Aspose.Pdf.LowCode.Security",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "SignatureAdder",
+      "full_type": "Aspose.Pdf.LowCode.SignatureAdder",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "SignatureVerifier",
+      "full_type": "Aspose.Pdf.LowCode.SignatureVerifier",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "Stamper",
+      "full_type": "Aspose.Pdf.LowCode.Stamper",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "TextExtractor",
+      "full_type": "Aspose.Pdf.LowCode.TextExtractor",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormImporter",
+      "full_type": "Aspose.Pdf.LowCode.FormImporter",
+      "classification": "ENVIRONMENT_DEPENDENT_OPERATION",
+      "reason": "Requires external data source (XML/JSON/FDF). Minimal repro investigation required.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "pdf",
+      "type_name": "Timestamp",
+      "full_type": "Aspose.Pdf.LowCode.Timestamp",
+      "classification": "EXTERNAL_SERVICE_OPERATION",
+      "reason": "Requires TSA (Timestamp Authority) endpoint. Mock/env-config investigation required.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "slides",
+      "type_name": "Compress",
+      "full_type": "Aspose.Slides.LowCode.Compress",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "slides",
+      "type_name": "Convert",
+      "full_type": "Aspose.Slides.LowCode.Convert",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static ToPdf/ToJpeg/etc methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "slides",
+      "type_name": "Merger",
+      "full_type": "Aspose.Slides.LowCode.Merger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "Static Process methods, proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "slides",
+      "type_name": "Collect",
+      "full_type": "Aspose.Slides.LowCode.Collect",
+      "classification": "NON_RUNNABLE_HELPER",
+      "reason": "Utility collection helper. No standalone output. Not a workflow root.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "slides",
+      "type_name": "ForEach",
+      "full_type": "Aspose.Slides.LowCode.ForEach",
+      "classification": "NON_RUNNABLE_HELPER",
+      "reason": "Utility iterator helper. ForEach.Slide/Shape/Paragraph/etc iterate over presentation objects. Does not produce standalone output. Not a workflow root. Companion example OK but NOT a main-class example.",
+      "is_main_class_example": false
+    },
+    {
+      "family": "diagram",
+      "type_name": "Converter",
+      "full_type": "Aspose.Diagram.LowCode.Converter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "diagram",
+      "type_name": "Merger",
+      "full_type": "Aspose.Diagram.LowCode.Merger",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    },
+    {
+      "family": "email",
+      "type_name": "EmailConverter",
+      "full_type": "Aspose.Email.LowCode.EmailConverter",
+      "classification": "MAIN_WORKFLOW_CLASS",
+      "reason": "proven E2E",
+      "is_main_class_example": true
+    }
+  ],
+  "total_types": 64,
+  "main_class_count": 42
+}

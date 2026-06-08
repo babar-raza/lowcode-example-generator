@@ -1,0 +1,11 @@
+{
+  "family": "drawing",
+  "plugin_slug": "create-drawing",
+  "nuget_package": "Aspose.Drawing",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/drawing/net/create-drawing/",
+  "fixture_strategy": "programmatic",
+  "fixture_source": "scripts/_generate_wave5_packages.py"
+}

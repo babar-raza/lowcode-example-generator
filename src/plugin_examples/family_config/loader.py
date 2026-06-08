@@ -86,7 +86,8 @@ def _build_model(data: dict) -> FamilyConfig:
     )
 
     plugin_detection = PluginDetection(
-        namespace_patterns=data["plugin_detection"]["namespace_patterns"]
+        namespace_patterns=data["plugin_detection"]["namespace_patterns"],
+        fallback_strategy=data["plugin_detection"].get("fallback_strategy"),
     )
 
     github_data = data["github"]

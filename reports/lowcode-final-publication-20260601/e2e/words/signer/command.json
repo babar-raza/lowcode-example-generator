@@ -1,0 +1,25 @@
+{
+  "family": "words",
+  "name": "signer",
+  "label": "words/signer",
+  "pilot": "words-controlled-pilot",
+  "csproj": "signer.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 5220,
+    "output_files": [
+      {
+        "name": "input.docx",
+        "size": 1408
+      },
+      {
+        "name": "output.docx",
+        "size": 3812
+      }
+    ]
+  }
+}

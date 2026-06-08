@@ -1,0 +1,10 @@
+{
+  "all_prs_merged": true,
+  "no_dangling_branches": true,
+  "files_on_main_correct": true,
+  "pre_existing_extras_explained": {
+    "diagram": 2,
+    "pdf": 1
+  },
+  "overall": true
+}

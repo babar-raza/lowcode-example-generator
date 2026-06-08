@@ -1,0 +1,115 @@
+{
+  "sprint": "lowcode-merge-sprint-20260602",
+  "items_audited": 12,
+  "decisions_changed": 0,
+  "results": [
+    {
+      "key": "email/email-converter",
+      "family": "email",
+      "example": "email-converter",
+      "original_decision": "EXCLUDE_DUPLICATE",
+      "reaudit_verdict": "KEEP_EXCLUDED_DUPLICATE",
+      "note": "Confirmed duplicate. Original publishable example exists with same Program.cs.",
+      "changed": false
+    },
+    {
+      "key": "pdf/form-importer",
+      "family": "pdf",
+      "example": "form-importer",
+      "original_decision": "EXTERNAL_UPSTREAM_BUG",
+      "reaudit_verdict": "KEEP_EXCLUDED_UPSTREAM_BUG",
+      "note": "NullReferenceException in Aspose.PDF 26.5.0 Process(). Latest NuGet is 26.5.0. No newer version available.",
+      "changed": false
+    },
+    {
+      "key": "slides/for-each",
+      "family": "slides",
+      "example": "for-each",
+      "original_decision": "EXCLUDE_NON_RUNNABLE_HELPER",
+      "reaudit_verdict": "KEEP_EXCLUDED_HELPER",
+      "note": "ForEach is a utility iterator, not a standalone file I/O example.",
+      "changed": false
+    },
+    {
+      "key": "slides/slides-compress",
+      "family": "slides",
+      "example": "slides-compress",
+      "original_decision": "EXCLUDE_DUPLICATE",
+      "reaudit_verdict": "KEEP_EXCLUDED_DUPLICATE",
+      "note": "Confirmed duplicate. Original publishable example exists with same Program.cs.",
+      "changed": false
+    },
+    {
+      "key": "slides/slides-convert",
+      "family": "slides",
+      "example": "slides-convert",
+      "original_decision": "EXCLUDE_DUPLICATE",
+      "reaudit_verdict": "KEEP_EXCLUDED_DUPLICATE",
+      "note": "Confirmed duplicate. Original publishable example exists with same Program.cs.",
+      "changed": false
+    },
+    {
+      "key": "slides/slides-merger",
+      "family": "slides",
+      "example": "slides-merger",
+      "original_decision": "EXCLUDE_DUPLICATE",
+      "reaudit_verdict": "KEEP_EXCLUDED_DUPLICATE",
+      "note": "Confirmed duplicate. Original publishable example exists with same Program.cs.",
+      "changed": false
+    },
+    {
+      "key": "words/processor",
+      "family": "words",
+      "example": "processor",
+      "original_decision": "EXCLUDE_NOT_A_MAIN_CLASS",
+      "reaudit_verdict": "KEEP_EXCLUDED_NOT_MAIN_CLASS",
+      "note": "No public constructor (CS1729). Cannot instantiate. Confirmed via prior build test.",
+      "changed": false
+    },
+    {
+      "key": "words/ofd",
+      "family": "words",
+      "example": "ofd",
+      "original_decision": "EXCLUDE_UNSUPPORTED_FORMAT",
+      "reaudit_verdict": "KEEP_EXCLUDED_UNSUPPORTED_FORMAT",
+      "note": "Format not supported by the LowCode API. Runtime ArgumentException confirmed.",
+      "changed": false
+    },
+    {
+      "key": "cells/spreadsheet-printer",
+      "family": "cells",
+      "example": "spreadsheet-printer",
+      "original_decision": "EXCLUDE_NOT_IN_API_CATALOG",
+      "reaudit_verdict": "KEEP_EXCLUDED_NOT_IN_CATALOG",
+      "note": "No such type exists in the Aspose.Cells.LowCode namespace.",
+      "changed": false
+    },
+    {
+      "key": "pdf/pdf-extractor",
+      "family": "pdf",
+      "example": "pdf-extractor",
+      "original_decision": "EXCLUDE_NOT_A_MAIN_CLASS",
+      "reaudit_verdict": "KEEP_EXCLUDED_NOT_MAIN_CLASS",
+      "note": "Abstract base class. Concrete implementations (TextExtractor, ImageExtractor, Jpeg, Png, Tiff) are published.",
+      "changed": false
+    },
+    {
+      "key": "pdf/pdf-to-image",
+      "family": "pdf",
+      "example": "pdf-to-image",
+      "original_decision": "EXCLUDE_NOT_A_MAIN_CLASS",
+      "reaudit_verdict": "KEEP_EXCLUDED_NOT_MAIN_CLASS",
+      "note": "Abstract base class. Concrete implementations (TextExtractor, ImageExtractor, Jpeg, Png, Tiff) are published.",
+      "changed": false
+    },
+    {
+      "key": "pdf/ofd",
+      "family": "pdf",
+      "example": "ofd",
+      "original_decision": "EXCLUDE_UNSUPPORTED_FORMAT",
+      "reaudit_verdict": "KEEP_EXCLUDED_UNSUPPORTED_FORMAT",
+      "note": "Format not supported by the LowCode API. Runtime ArgumentException confirmed.",
+      "changed": false
+    }
+  ]
+}

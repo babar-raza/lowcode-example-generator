@@ -1,0 +1,38 @@
+{
+  "modified_tracked": [
+    "src/plugin_examples/family_config/models.py",
+    "src/plugin_examples/runner.py",
+    "pipeline/schemas/family-config.schema.json",
+    "pipeline/configs/families/barcode.yml",
+    "pipeline/configs/families/imaging.yml"
+  ],
+  "new_untracked": [
+    "src/plugin_examples/website_catalog/",
+    "src/plugin_examples/plugin_detector/heuristic_matcher.py",
+    "src/plugin_examples/probe_generator/",
+    "src/plugin_examples/ai_acceleration/",
+    "src/plugin_examples/evidence_validator/rules/non_lowcode.py",
+    "pipeline/plugin-capability-registry/",
+    "pipeline/schemas/ai-suggestion-schema.json",
+    "pipeline/schemas/plugin-capability-registry-schema.json",
+    "tests/unit/test_family_config_fallback_strategy.py",
+    "tests/unit/test_capability_registry_schema.py",
+    "tests/unit/test_website_catalog_crawler.py",
+    "tests/unit/test_heuristic_matcher.py",
+    "tests/unit/test_probe_generator.py",
+    "tests/unit/test_barcode_family_onboarding.py",
+    "tests/unit/test_imaging_family_onboarding.py",
+    "tests/unit/test_ai_suggestion_schema.py",
+    "tests/unit/test_non_lowcode_validators.py",
+    "tests/integration/test_runner_fallback_integration.py"
+  ],
+  "protected_unchanged": [
+    "pipeline/configs/families/cells.yml",
+    "pipeline/configs/families/words.yml",
+    "pipeline/configs/families/pdf.yml",
+    "pipeline/configs/families/slides.yml",
+    "pipeline/configs/families/email.yml",
+    "pipeline/configs/families/diagram.yml",
+    "pipeline/format-authority/manifest.json"
+  ]
+}

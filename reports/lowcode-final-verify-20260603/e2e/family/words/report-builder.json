@@ -1,0 +1,9 @@
+{
+  "example": "report-builder",
+  "csproj": "words-report-builder.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: words-report-builder\nReport built: output.docx\n",
+  "stderr_tail": ""
+}

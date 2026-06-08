@@ -1,0 +1,25 @@
+{
+  "family": "cells",
+  "name": "pdf-converter",
+  "label": "cells/pdf-converter",
+  "pilot": "cells-controlled-pilot",
+  "csproj": "pdf-converter.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 24824,
+    "output_files": [
+      {
+        "name": "output.pdf",
+        "size": 21693
+      },
+      {
+        "name": "input.xlsx",
+        "size": 3131
+      }
+    ]
+  }
+}

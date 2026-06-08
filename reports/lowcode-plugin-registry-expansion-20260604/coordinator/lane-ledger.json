@@ -1,0 +1,38 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "date": "2026-06-04",
+  "report_root": "reports/lowcode-plugin-registry-expansion-20260604",
+  "lanes": {
+    "0": {"name": "COORDINATOR", "status": "COMPLETE", "owner": "coordinator"},
+    "A": {"name": "CURRENT_STATE_INTAKE", "status": "COMPLETE", "owner": "intake"},
+    "B": {"name": "CANONICAL_PAGE_CRAWL", "status": "COMPLETE", "owner": "crawl"},
+    "C": {"name": "SOURCE_CODE_REHARVEST", "status": "COMPLETE", "owner": "code-harvest"},
+    "D": {"name": "REGISTRY_EXPANSION", "status": "COMPLETE", "owner": "registry"},
+    "E": {"name": "MANUAL_FAMILY_ANALYSIS", "status": "COMPLETE", "owner": "manual-analysis"},
+    "F": {"name": "SNIPPET_BUILD_RUN_VALIDATION", "status": "COMPLETE", "owner": "validation"},
+    "G": {"name": "DRYRUN_EXAMPLE_WAVE_2", "status": "COMPLETE", "owner": "dryrun"},
+    "H": {"name": "VALIDATOR_HARDENING", "status": "COMPLETE", "owner": "validators"},
+    "I": {"name": "SELF_HEALING_QA", "status": "COMPLETE", "owner": "qa"},
+    "J": {"name": "EVIDENCE_BUNDLE", "status": "COMPLETE", "owner": "coordinator"}
+  },
+  "file_edit_policy": "exact-path only; no git add .; no broad staging",
+  "blocker_classification_required": true,
+  "completion_summary": {
+    "completed_at": "2026-06-04",
+    "snippets_validated": 5,
+    "cumulative_snippets_validated": 8,
+    "dryrun_packages_wave2": 5,
+    "cumulative_dryrun_packages": 8,
+    "new_registry_entries": 25,
+    "registry_total_ready": 38,
+    "new_families_with_entries": ["html","tasks","ocr","svg","tex","page","psd"],
+    "blocked_families_classified": 7,
+    "manual_analyses_written": 8,
+    "validator_violations": 0,
+    "validator_warnings": 4,
+    "qa_checks_pass": 10,
+    "evidence_bundle_sha256": "bffda8018443d1bb94ea1e2ba058e51ccb36995d85e825389d9ca556ef1d7ae9",
+    "evidence_bundle_size_bytes": 193209,
+    "verdict": "SPRINT_COMPLETE"
+  }
+}

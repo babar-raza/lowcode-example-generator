@@ -1,0 +1,10 @@
+{
+  "family": "diagram",
+  "intended_examples": ["diagram-converter", "pdf-converter"],
+  "extra_folders": [
+    {"folder": "diagram-diagram-converter", "classification": "LEGACY_DUPLICATE_TO_REMOVE", "counterpart": "diagram-converter"},
+    {"folder": "diagram-pdf-converter", "classification": "LEGACY_DUPLICATE_TO_REMOVE", "counterpart": "pdf-converter"}
+  ],
+  "action": "Remove both via governed PR",
+  "post_removal_expected_count": 2
+}

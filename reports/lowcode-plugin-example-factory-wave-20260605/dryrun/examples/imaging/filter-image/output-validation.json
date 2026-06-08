@@ -1,0 +1,17 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\filter-image",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\filter-image\\output\\filtered.png",
+      "size": 22493
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\filter-image\\output\\source-filter.bmp",
+      "size": 180054
+    }
+  ],
+  "verdict": "PASS"
+}

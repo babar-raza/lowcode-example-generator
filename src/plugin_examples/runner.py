@@ -515,6 +515,92 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
     }
 
 
+_FALLBACK_USABLE_STATUSES = frozenset({
+    "PROBE_CANDIDATE",
+    "PROBE_CONFIRMED",
+    "VERIFIED_PUBLISHABLE",
+})
+
+_FALLBACK_EXCLUDED_STATUSES = frozenset({
+    "PROBE_FAILED",
+    "STATIC_MAPPING_REQUIRED",
+    "BLOCKED_PACKAGE_UNAVAILABLE",
+    "BLOCKED_REFLECTION_FAILED",
+    "BLOCKED_LICENSE_RESTRICTED",
+    "REJECTED_BY_VALIDATOR",
+    "WEBSITE_DISCOVERED",
+    "REFLECTION_CANDIDATE",
+    "AI_DRAFT",
+})
+
+
+def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
+    """Soft stage: load usable entries from the plugin-capability-registry.
+
+    Usable statuses: PROBE_CANDIDATE, PROBE_CONFIRMED, VERIFIED_PUBLISHABLE.
+    Excluded statuses: PROBE_FAILED, STATIC_MAPPING_REQUIRED, BLOCKED_*, REJECTED_BY_VALIDATOR.
+
+    Skips when:
+    - fallback_strategy is None (LowCode pipeline only)
+    - A LowCode namespace was detected (ctx.detection.is_eligible)
+    - No registry YAML file exists for this family
+
+    Never hard-stops. Never writes to format-authority.
+    Writes fallback_candidates.json to ctx.run_dir as a dry-run artifact.
+    """
+    import json
+    strategy = getattr(ctx.config.plugin_detection, "fallback_strategy", None)
+    if strategy is None:
+        return {"status": "SKIPPED", "reason": "fallback_strategy is None"}
+
+    if ctx.detection is not None and ctx.detection.is_eligible:
+        return {"status": "SKIPPED", "reason": "LowCode namespace found; fallback not needed"}
+
+    registry_path = ctx.repo_root / "pipeline" / "plugin-capability-registry" / f"{ctx.family}.yaml"
+    if not registry_path.exists():
+        return {"status": "SKIPPED", "reason": f"no registry file for {ctx.family}"}
+
+    try:
+        import yaml
+        with open(registry_path, encoding="utf-8") as fh:
+            registry_data = yaml.safe_load(fh)
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "SKIPPED", "reason": f"registry load error: {exc}"}
+
+    if not isinstance(registry_data, dict):
+        return {"status": "SKIPPED", "reason": "registry file is not a mapping"}
+
+    entries = registry_data.get("entries", [])
+    if not isinstance(entries, list):
+        entries = []
+
+    usable = [e for e in entries if isinstance(e, dict) and e.get("status") in _FALLBACK_USABLE_STATUSES]
+    excluded = [e for e in entries if isinstance(e, dict) and e.get("status") not in _FALLBACK_USABLE_STATUSES]
+    candidate_count = len(usable)
+
+    status_counts: dict[str, int] = {}
+    for e in entries:
+        if isinstance(e, dict):
+            s = e.get("status", "UNKNOWN")
+            status_counts[s] = status_counts.get(s, 0) + 1
+
+    artifact_path = ctx.run_dir / "fallback_candidates.json"
+    artifact_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(artifact_path, "w", encoding="utf-8") as fh:
+        json.dump({
+            "family": ctx.family,
+            "strategy": strategy,
+            "total_registry_entries": len(entries),
+            "usable_entries": candidate_count,
+            "excluded_entries": len(excluded),
+            "status_counts": status_counts,
+            "exclusion_reason": "statuses not in PROBE_CANDIDATE/PROBE_CONFIRMED/VERIFIED_PUBLISHABLE",
+            "candidates": usable,
+        }, fh, indent=2)
+
+    return {"status": "OK", "candidate_count": candidate_count, "fallback_mode": True}
+
+
 def _stage_api_delta(ctx: PipelineContext) -> dict:
     from plugin_examples.api_delta import compute_delta
     from plugin_examples.api_delta.delta_engine import write_delta_report
@@ -1517,6 +1603,7 @@ STAGE_DEFINITIONS = [
     ("reflection", 5, _stage_reflection),
     ("plugin_detection", 6, _stage_plugin_detection),
     ("source_of_truth_gate", 7, None),  # combined into plugin_detection
+    ("fallback_registry_lookup", 7, _stage_fallback_registry_lookup),  # soft stage; skips for LowCode families
     ("api_delta", 8, _stage_api_delta),
     ("impact_mapping", 9, _stage_impact_mapping),
     ("fixture_registry", 10, _stage_fixture_registry),

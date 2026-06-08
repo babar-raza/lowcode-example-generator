@@ -1,0 +1,61 @@
+{
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "date": "2026-06-05",
+  "prior_sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "cumulative_dryrun_packages": 30,
+  "wave_breakdown": {
+    "wave-a": 12,
+    "wave-4": 10,
+    "wave-5": 8
+  },
+  "wave5_packages": [
+    "drawing/convert-drawing",
+    "drawing/create-drawing",
+    "finance/convert-xbrl",
+    "gis/read-gis-data",
+    "note/convert-one-to-pdf",
+    "ocr/scan-document",
+    "page/convert-ps-to-pdf",
+    "zip/compress-files"
+  ],
+  "wave5_verdicts": {
+    "drawing/convert-drawing": "PASS",
+    "drawing/create-drawing": "PASS",
+    "finance/convert-xbrl": "PASS",
+    "gis/read-gis-data": "PASS",
+    "note/convert-one-to-pdf": "PASS",
+    "ocr/scan-document": "PASS",
+    "page/convert-ps-to-pdf": "PASS",
+    "zip/compress-files": "TRIAL_PASS"
+  },
+  "registry_status": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 30,
+    "READY_FOR_TRANSFORMATION": 8,
+    "CODE_HARVESTED": 18,
+    "NEEDS_MANUAL_MAPPING": 16
+  },
+  "publication_classification": "30/30 PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+  "consistency_checks": "4/4 PASS, 0 violations",
+  "new_modules": [
+    "src/plugin_examples/fixture_factory/closeout_validators.py",
+    "tests/unit/test_closeout_validators.py",
+    "tests/unit/test_fixture_factory.py (12 new Wave 5 tests)"
+  ],
+  "skills_updated": [
+    "skills/plugin-example-factory-dry-run.md"
+  ],
+  "api_discoveries": {
+    "Aspose.Drawing": "Uses System.Drawing namespace, not Aspose.Drawing",
+    "Aspose.Note Page/RichText": "Parameterless constructors; RichText needs ParagraphStyle.Default for PDF",
+    "Aspose.Finance SaveOptions": "new SaveOptions { SaveFormat = SaveFormat.IXBRL }",
+    "Aspose.GIS GetValue": "Wrap in try-catch; attribute may not be set for all features"
+  },
+  "next_wave_queue": [
+    {"key": "ocr/image-text-finder", "priority": "HIGH", "reason": "Same OCR pattern, READY_FOR_TRANSFORMATION"},
+    {"key": "ocr/invoice-to-text", "priority": "HIGH", "reason": "Same OCR pattern"},
+    {"key": "ocr/photo-to-text", "priority": "HIGH", "reason": "Same OCR pattern"},
+    {"key": "note/convert-one-to-word", "priority": "MEDIUM", "reason": "Same Note pattern"},
+    {"key": "note/convert-one-to-image", "priority": "MEDIUM", "reason": "Same Note pattern"},
+    {"key": "page/convert-eps-to-pdf", "priority": "MEDIUM", "reason": "EPS converter, CODE_HARVESTED"}
+  ]
+}

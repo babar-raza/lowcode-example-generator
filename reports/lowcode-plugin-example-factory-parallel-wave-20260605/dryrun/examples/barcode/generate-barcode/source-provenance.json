@@ -1,0 +1,9 @@
+{
+  "family": "barcode",
+  "plugin_slug": "generate-barcode",
+  "nuget_package": "Aspose.BarCode",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/"
+}

@@ -1,0 +1,26 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "wave": "A",
+  "description": "Transform now — fixture-free or easy programmatic fixture",
+  "generated_at": "2026-06-05",
+  "already_done_prior_waves": [
+    "barcode/generate-barcode", "imaging/convert-image", "zip/compress-files",
+    "html/html-to-pdf-converter", "tasks/project-to-pdf-converter",
+    "svg/svg-to-image-converter", "tex/latex-math-renderer", "ocr/scanned-image-to-text"
+  ],
+  "candidates": [
+    {"family": "barcode", "slug": "generate-qr-code", "priority": 1, "fixture": "none", "rationale": "BarcodeGenerator+QR, no fixture needed"},
+    {"family": "barcode", "slug": "scan-barcode", "priority": 2, "fixture": "generated-by-generate-qr-code", "rationale": "BarCodeReader on generated PNG"},
+    {"family": "svg", "slug": "svg-to-pdf-converter", "priority": 3, "fixture": "inline-string", "rationale": "Converter.ConvertSVG+PdfSaveOptions, inline SVG"},
+    {"family": "tex", "slug": "latex-figure-renderer", "priority": 4, "fixture": "inline-string", "rationale": "FigureRendererPlugin, inline TikZ LaTeX"},
+    {"family": "zip", "slug": "create-archive", "priority": 5, "fixture": "programmatic", "rationale": "Archive creation, no input files needed"},
+    {"family": "zip", "slug": "compress-folder", "priority": 6, "fixture": "programmatic-dir", "rationale": "Create temp dir with files, then compress"},
+    {"family": "imaging", "slug": "resize-image", "priority": 7, "fixture": "programmatic-bmp", "rationale": "Aspose.Imaging can generate BMP then resize"},
+    {"family": "imaging", "slug": "crop-image", "priority": 8, "fixture": "programmatic-bmp", "rationale": "Generate BMP then crop"},
+    {"family": "imaging", "slug": "filter-image", "priority": 9, "fixture": "programmatic-bmp", "rationale": "Generate BMP then apply Gaussian filter"},
+    {"family": "imaging", "slug": "merge-images", "priority": 10, "fixture": "programmatic-bmp-x2", "rationale": "Generate two BMPs then merge"},
+    {"family": "imaging", "slug": "watermark-image", "priority": 11, "fixture": "programmatic-bmp", "rationale": "Generate BMP then add diagonal watermark"},
+    {"family": "imaging", "slug": "rotate-image", "priority": 12, "fixture": "programmatic-bmp", "rationale": "Generate BMP then rotate/flip"}
+  ],
+  "target_count": 12
+}

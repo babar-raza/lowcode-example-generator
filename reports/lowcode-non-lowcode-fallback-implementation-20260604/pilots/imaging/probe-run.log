@@ -1,0 +1,3 @@
+dotnet run --project ImagingConverterProbe.csproj --configuration Release -- input.png probe-output.jpg
+Probe complete. Output: probe-output.jpg
+Exit code: 0

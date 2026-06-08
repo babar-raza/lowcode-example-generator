@@ -1,0 +1,9 @@
+{{
+  "package_key": "zip/compress-files",
+  "nuget_package": "Aspose.ZIP",
+  "nuget_version": "24.12.0",
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "generated_at": "2026-06-05",
+  "canonical_url": "https://products.aspose.net/zip/compress-files/",
+  "output_files": ["output/compressed.zip"]
+}}

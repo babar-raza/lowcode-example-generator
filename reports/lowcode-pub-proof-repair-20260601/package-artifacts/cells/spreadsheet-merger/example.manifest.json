@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "name": "spreadsheet-merger",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "SpreadsheetMerger",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "spreadsheet-merger.csproj",
+  "files": [
+    "Program.cs",
+    "spreadsheet-merger.csproj"
+  ]
+}

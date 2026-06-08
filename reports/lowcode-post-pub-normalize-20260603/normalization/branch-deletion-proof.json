@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-normalize-20260603",
+  "branches_deleted": [
+    {
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "branch": "fix/remove-legacy-duplicate-examples",
+      "deleted": true,
+      "remaining_branches": ["main"]
+    },
+    {
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "fix/remove-legacy-pdf-aconverter",
+      "deleted": true,
+      "remaining_branches": ["main"]
+    }
+  ],
+  "all_clean": true
+}

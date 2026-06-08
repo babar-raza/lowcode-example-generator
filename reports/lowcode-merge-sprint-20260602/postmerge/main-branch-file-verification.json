@@ -1,0 +1,99 @@
+{
+  "cells": {
+    "examples": [
+      "html-converter",
+      "image-converter",
+      "json-converter",
+      "pdf-converter",
+      "spreadsheet-converter",
+      "spreadsheet-locker",
+      "spreadsheet-merger",
+      "spreadsheet-splitter",
+      "text-converter"
+    ],
+    "count": 9,
+    "expected": 9,
+    "match": true
+  },
+  "diagram": {
+    "examples_published_by_us": [
+      "diagram-converter",
+      "pdf-converter"
+    ],
+    "examples_pre_existing": [
+      "diagram-diagram-converter",
+      "diagram-pdf-converter"
+    ],
+    "total_on_main": 4,
+    "our_published_count": 2,
+    "our_expected": 2,
+    "match": true,
+    "note": "2 pre-existing examples from prior PRs; our 2 published examples confirmed present"
+  },
+  "email": {
+    "examples": [
+      "converter"
+    ],
+    "count": 1,
+    "expected": 1,
+    "match": true
+  },
+  "pdf": {
+    "examples_published_by_us": [
+      "doc-converter",
+      "form-editor",
+      "form-exporter",
+      "form-flattener",
+      "html",
+      "image-extractor",
+      "jpeg",
+      "merger",
+      "optimizer",
+      "pdfa-converter",
+      "png",
+      "security",
+      "signature",
+      "splitter",
+      "table-generator",
+      "text-extractor",
+      "tiff",
+      "timestamp",
+      "toc-generator",
+      "xls-converter"
+    ],
+    "examples_pre_existing": [
+      "pdf-aconverter"
+    ],
+    "total_on_main": 21,
+    "our_published_count": 20,
+    "our_expected": 20,
+    "match": true,
+    "note": "1 pre-existing example (pdf-aconverter) from prior PR; our 20 published examples confirmed present"
+  },
+  "slides": {
+    "examples": [
+      "compress",
+      "convert",
+      "merger"
+    ],
+    "count": 3,
+    "expected": 3,
+    "match": true
+  },
+  "words": {
+    "examples": [
+      "comparer",
+      "converter",
+      "mail-merger",
+      "merger",
+      "replacer",
+      "report-builder",
+      "signer",
+      "splitter",
+      "watermarker"
+    ],
+    "count": 9,
+    "expected": 9,
+    "match": true
+  }
+}

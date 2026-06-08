@@ -1,0 +1,9 @@
+{
+  "example": "doc-converter",
+  "csproj": "pdf-doc-converter.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Converted to DOCX\n",
+  "stderr_tail": ""
+}

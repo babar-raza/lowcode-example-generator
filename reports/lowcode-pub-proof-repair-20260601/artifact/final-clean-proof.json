@@ -1,0 +1,12 @@
+{
+  "sprint": "lowcode-pub-proof-repair-20260601",
+  "zip_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-20260601-evidence.zip",
+  "actual_sha256": "f3b6c3078bd12b1592c75c3584cc0bd77028ef7601f2fde9531a8a8d87f8f7b0",
+  "actual_size": 150057,
+  "actual_entries": 230,
+  "sidecar_sha256_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-20260601-evidence.zip.sha256",
+  "sidecar_size_count_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-pub-proof-repair-20260601-evidence.zip.size-count.json",
+  "sidecar_verified": true,
+  "internal_manifest_contains_zip_hash": false,
+  "protocol": "NON_CIRCULAR_SIDECAR"
+}

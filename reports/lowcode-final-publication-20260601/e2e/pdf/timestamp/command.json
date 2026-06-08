@@ -1,0 +1,25 @@
+{
+  "family": "pdf",
+  "name": "timestamp",
+  "label": "pdf/timestamp",
+  "pilot": "pdf-controlled-pilot-pr11",
+  "csproj": "timestamp.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 710584,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 29375
+      },
+      {
+        "name": "output_timestamped.pdf",
+        "size": 681209
+      }
+    ]
+  }
+}

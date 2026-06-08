@@ -1,0 +1,59 @@
+{
+  "sprint": "lowcode-final-publication-20260601",
+  "total_rules": 10,
+  "pass": 10,
+  "fail": 0,
+  "all_pass": true,
+  "rules": [
+    {
+      "rule": "V01: Decision board has 56 items",
+      "status": "PASS",
+      "detail": "found 56"
+    },
+    {
+      "rule": "V02: No human-deferred items",
+      "status": "PASS",
+      "detail": "found 0"
+    },
+    {
+      "rule": "V03: Denominator model states 42 canonical",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "rule": "V04: Format authority contracts sum to 42",
+      "status": "PASS",
+      "detail": "found 42"
+    },
+    {
+      "rule": "V05: Completion queue has 42 POST_MERGE_VERIFIED",
+      "status": "PASS",
+      "detail": "found 42"
+    },
+    {
+      "rule": "V06: Decision counts sum to 56",
+      "status": "PASS",
+      "detail": "found 56"
+    },
+    {
+      "rule": "V07: Publish decisions = 44",
+      "status": "PASS",
+      "detail": "found 44"
+    },
+    {
+      "rule": "V08: Exclude decisions = 12",
+      "status": "PASS",
+      "detail": "found 12"
+    },
+    {
+      "rule": "V09: All policy files exist",
+      "status": "PASS",
+      "detail": "missing: []"
+    },
+    {
+      "rule": "V10: No static PFX in tracked git",
+      "status": "PASS",
+      "detail": "found: []"
+    }
+  ]
+}

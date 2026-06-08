@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "table-generator",
+  "label": "pdf/table-generator",
+  "pilot": "pdf-controlled-pilot-pr6",
+  "csproj": "pdf-table-generator.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

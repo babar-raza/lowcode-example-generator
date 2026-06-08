@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "html",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Html",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-html.csproj",
+  "files": [
+    "pdf-html.csproj",
+    "Program.cs"
+  ]
+}

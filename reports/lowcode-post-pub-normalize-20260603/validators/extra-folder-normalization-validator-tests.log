@@ -1,0 +1,27 @@
+Extra Folder Normalization Validator — lowcode-post-pub-normalize-20260603
+=========================================================================
+
+CHECK 1: Diagram folder count = intended (2) ...... PASS
+  Live: ["diagram-converter", "pdf-converter"]
+  Removed: diagram-diagram-converter, diagram-pdf-converter (PR #4)
+
+CHECK 2: PDF folder count = intended (20) ......... PASS
+  Live: 20 folders
+  Removed: pdf-aconverter (PR #25)
+
+CHECK 3: Cells folder count = intended (9) ........ PASS
+CHECK 4: Email folder count = intended (1) ........ PASS
+CHECK 5: Slides folder count = intended (3) ....... PASS
+CHECK 6: Words folder count = intended (9) ........ PASS
+
+CHECK 7: All extras classified in decision board .. PASS
+  extra-folder-audit.json: 3 entries, all LEGACY_DUPLICATE_TO_REMOVE
+
+CHECK 8: All repair PRs merged .................... PASS
+  Diagram PR #4: MERGED 2026-06-03T13:20:44Z
+  PDF PR #25: MERGED 2026-06-03T13:20:50Z
+
+CHECK 9: All repair branches deleted .............. PASS
+
+TOTAL: 9/9 PASS
+VERDICT: EXTRA_FOLDERS_NORMALIZED

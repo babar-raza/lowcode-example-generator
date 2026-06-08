@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-final-verify-20260603",
+  "validators": {
+    "V01": {"name": "Example Count Match", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V02": {"name": "No Excluded Example Leak", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V03": {"name": "Build Success", "status": "PASS", "evidence": ["e2e/main-branch-build-aggregate.json", "commands/stdout-stderr/*-build-*"]},
+    "V04": {"name": "Run Success", "status": "PASS", "evidence": ["e2e/main-branch-e2e-aggregate.json", "commands/stdout-stderr/*-run-*"]},
+    "V05": {"name": "No Static Certificate Files", "status": "PASS", "evidence": ["fixtures/no-static-certificate-proof.json"]},
+    "V06": {"name": "No Duplicate .csproj", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V07": {"name": "No bin/obj Artifacts", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V08": {"name": "README Completeness", "status": "PASS", "evidence": ["readme/live-readme-audit.json", "readme/readme-repair-prs.json"]},
+    "V09": {"name": "Directory.Packages.props Present", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V10": {"name": "Directory.Build.props Present", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V11": {"name": "global.json Present", "status": "PASS", "evidence": ["postmerge/main-file-verification/*.json"]},
+    "V12": {"name": "Branch Hygiene", "status": "PASS", "evidence": ["remote/branch-list-final.json", "postmerge/no-dangling-branches-proof.json"]},
+    "V13": {"name": "Command Ledger Completeness", "status": "PASS", "evidence": ["commands/command-index.json", "commands/raw-commands.log"]},
+    "V14": {"name": "Aggregate Consistency", "status": "PASS", "evidence": ["e2e/main-branch-build-aggregate.json", "e2e/main-branch-e2e-aggregate.json"]},
+    "V15": {"name": "FormImporter Upstream Bug", "status": "PASS", "evidence": ["blockers/formimporter/*.md"]},
+    "V16": {"name": "No Unauthorized Remote Mutations", "status": "PASS", "evidence": ["remote/pr-status-final.json", "postmerge/remote-hygiene-proof.json"]}
+  },
+  "total_pass": 16,
+  "total_fail": 0,
+  "verdict": "ALL_VALIDATORS_PASS"
+}

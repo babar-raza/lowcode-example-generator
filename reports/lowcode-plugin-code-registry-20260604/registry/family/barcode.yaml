@@ -1,0 +1,135 @@
+# Plugin-Code Registry: barcode
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: barcode
+package_id: Aspose.BarCode
+github_repo: https://github.com/aspose-barcode/Aspose.Barcode-for-.NET
+implementation_model: STATIC_CONVERTER_CLASS
+
+plugins:
+  - plugin_slug: generate-barcode
+    plugin_url: https://products.aspose.net/barcode/net/generate-barcode
+    page_hash: 1770337e14ce0847
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: STATIC_CONVERTER_CLASS
+    code_hashes: [fb9f597b4f84aaa2922bc321594e9993]
+    namespaces_used:
+      - "Aspose.Drawing.Imaging"
+      - "Aspose.BarCode.Generation"
+      - "Aspose.Drawing"
+    classes_used:
+      - "BarcodeGenerator"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs
+    next_action: "Extract symbols from StoreBarcodeOutputAsBitmap.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md"
+      - "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from StoreBarcodeOutputAsBitmap.cs"
+
+  - plugin_slug: recognize-barcode
+    plugin_url: https://products.aspose.net/barcode/net/recognize-barcode
+    page_hash: 18cf37c0cc7feeaa
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: STATIC_CONVERTER_CLASS
+    code_hashes: [ba39d178d1845a2f061eb6705336597f]
+    namespaces_used:
+      - "Aspose.BarCode.BarCodeRecognition"
+      - "Aspose.BarCode.Generation"
+    classes_used:
+      - "BarcodeGenerator"
+      - "BarCodeReader"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs
+    next_action: "Extract symbols from ReadAustraliaPostCTable.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md"
+      - "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ReadAustraliaPostCTable.cs"
+
+  - plugin_slug: generate-qr-code
+    plugin_url: https://products.aspose.net/barcode/net/generate-qr-code
+    page_hash: de4a52c3c2c2ae3d
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: STATIC_CONVERTER_CLASS
+    code_hashes: [8ed8a18def765e930db7faf37bff34ed]
+    namespaces_used:
+      - "Aspose.BarCode.ComplexBarcode"
+      - "Aspose.BarCode.Generation"
+      - "Aspose.BarCode.BarCodeRecognition"
+    classes_used:
+      - "SwissQRCodetext"
+      - "ComplexBarcodeGenerator"
+      - "BarCodeReader"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/SwissQRCodeGenRec.cs
+    next_action: "Extract symbols from SwissQRCodeGenRec.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md"
+      - "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/SwissQRCodeGenRec.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from SwissQRCodeGenRec.cs"
+
+  - plugin_slug: read-barcode
+    plugin_url: https://products.aspose.net/barcode/net/read-barcode
+    page_hash: 6d15352859a39bcc
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: STATIC_CONVERTER_CLASS
+    code_hashes: [91aa497508d875515b5db6ddce715ebf]
+    github_links:
+      - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs
+    next_action: "Extract symbols from ComplexBarcodesReadBase.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md"
+      - "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/ComplexBarcodes/ComplexBarcodesReadBase.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ComplexBarcodesReadBase.cs"
+
+  - plugin_slug: scan-barcode
+    plugin_url: https://products.aspose.net/barcode/net/scan-barcode
+    page_hash: 279944f48eb8859c
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: STATIC_CONVERTER_CLASS
+    code_hashes: [ba39d178d1845a2f061eb6705336597f]
+    namespaces_used:
+      - "Aspose.BarCode.BarCodeRecognition"
+      - "Aspose.BarCode.Generation"
+    classes_used:
+      - "BarcodeGenerator"
+      - "BarCodeReader"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs
+    next_action: "Extract symbols from ReadAustraliaPostCTable.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/barcode.md"
+      - "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ReadAustraliaPostCTable.cs"

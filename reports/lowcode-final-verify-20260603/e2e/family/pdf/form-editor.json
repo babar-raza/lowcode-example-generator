@@ -1,0 +1,9 @@
+{
+  "example": "form-editor",
+  "csproj": "form-editor.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Form fields removed\n",
+  "stderr_tail": ""
+}

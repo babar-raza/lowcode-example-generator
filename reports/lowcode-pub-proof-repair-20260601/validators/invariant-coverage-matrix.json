@@ -1,0 +1,69 @@
+{
+  "sprint": "lowcode-pub-proof-repair-20260601",
+  "total_rules": 12,
+  "pass": 12,
+  "fail": 0,
+  "all_pass": true,
+  "rules": [
+    {
+      "rule": "V01: Sidecar file will be validated post-ZIP",
+      "status": "PASS",
+      "detail": "deferred to post-build"
+    },
+    {
+      "rule": "V02: Package artifacts contain real directories",
+      "status": "PASS",
+      "detail": "found 44"
+    },
+    {
+      "rule": "V03: Command ledger has stdout/stderr files",
+      "status": "PASS",
+      "detail": "found 8"
+    },
+    {
+      "rule": "V04: per-example-output-proof.json exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "rule": "V05: E2E denominator does not claim FormImporter in 49",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "rule": "V06: Publishable count matches package count",
+      "status": "PASS",
+      "detail": "pkg=44"
+    },
+    {
+      "rule": "V07: Duplicates excluded from packages",
+      "status": "PASS",
+      "detail": "found: []"
+    },
+    {
+      "rule": "V08: Helper (slides/for-each) not in packages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "rule": "V09: FormImporter not in E2E pass counts",
+      "status": "PASS",
+      "detail": "FormImporter excluded from E2E by design"
+    },
+    {
+      "rule": "V10: No deferred decision items",
+      "status": "PASS",
+      "detail": "found 0"
+    },
+    {
+      "rule": "V11: E2E publishable all pass",
+      "status": "PASS",
+      "detail": "44/44"
+    },
+    {
+      "rule": "V12: No static PFX in tracked git",
+      "status": "PASS",
+      "detail": "found: []"
+    }
+  ]
+}

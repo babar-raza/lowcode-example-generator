@@ -1,0 +1,14 @@
+{
+  "package": "barcode/generate-barcode",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\barcode.png",
+      "size": 22648
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05"
+}

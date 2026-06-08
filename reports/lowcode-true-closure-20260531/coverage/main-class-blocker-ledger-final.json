@@ -1,0 +1,48 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "blockers": [
+    {
+      "family": "words",
+      "type_name": "Processor",
+      "classification": "NOT_LOWCODE_MAIN_CLASS",
+      "reason": "Abstract base class with INTERNAL constructor. No public constructor, all instance methods. CS1729+CS0120 proven. PERMANENTLY_BLOCKED.",
+      "status": "NOT_A_MAIN_CLASS"
+    },
+    {
+      "family": "cells",
+      "type_name": "SpreadsheetPrinter",
+      "classification": "NOT_LOWCODE_MAIN_CLASS",
+      "reason": "NOT IN Aspose.Cells.LowCode API catalog. Was never a valid LowCode type. Removed from blocker list.",
+      "status": "NOT_A_MAIN_CLASS"
+    },
+    {
+      "family": "pdf",
+      "type_name": "FormImporter",
+      "classification": "ENVIRONMENT_DEPENDENT_OPERATION",
+      "reason": "Requires external data source (XML/JSON/FDF). Minimal repro investigation required.",
+      "status": "ENVIRONMENT_BLOCKER"
+    },
+    {
+      "family": "pdf",
+      "type_name": "Timestamp",
+      "classification": "EXTERNAL_SERVICE_OPERATION",
+      "reason": "Requires TSA (Timestamp Authority) endpoint. Mock/env-config investigation required.",
+      "status": "EXTERNAL_SERVICE_BLOCKER"
+    },
+    {
+      "family": "slides",
+      "type_name": "Collect",
+      "classification": "NON_RUNNABLE_HELPER",
+      "reason": "Utility collection helper. No standalone output. Not a workflow root.",
+      "status": "NOT_A_MAIN_CLASS"
+    },
+    {
+      "family": "slides",
+      "type_name": "ForEach",
+      "classification": "NON_RUNNABLE_HELPER",
+      "reason": "Utility iterator helper. ForEach.Slide/Shape/Paragraph/etc iterate over presentation objects. Does not produce standalone output. Not a workflow root. Companion example OK but NOT a main-class example.",
+      "status": "NOT_A_MAIN_CLASS"
+    }
+  ],
+  "total": 6
+}

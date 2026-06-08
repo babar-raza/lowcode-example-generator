@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "tiff",
+  "label": "pdf/tiff",
+  "pilot": "pdf-controlled-pilot-pr5",
+  "csproj": "pdf-tiff.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

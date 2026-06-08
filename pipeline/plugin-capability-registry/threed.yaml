@@ -1,0 +1,79 @@
+# Plugin capability registry — Aspose.3D
+# TRAIN D: Plugin-level entries bootstrapped from DllReflector (26.4.0)
+# Reflection completed: 2026-06-04 — 291 types, Aspose.ThreeD namespace
+
+entries:
+  # Plugin 1: Convert 3D Model (convert-3d-model)
+  - family: threed
+    plugin_slug: convert-3d-model
+    operation_kind: THREE_D_CONVERSION
+    package_id: Aspose.3D
+    type_name: Scene
+    namespace: Aspose.ThreeD
+    method_name: Save
+    candidate_api_types:
+      - Aspose.ThreeD.Scene
+      - Aspose.ThreeD.Node
+    candidate_methods:
+      - Save
+      - FromFile
+      - Open
+    selected_api_mapping:
+      type_name: Scene
+      namespace: Aspose.ThreeD
+      method_name: Save
+      load_via: Scene.FromFile(fileName)
+      save_sig: Save(fileName, FileFormat)
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.78
+    confidence_rationale: >
+      DllReflector confirmed Aspose.ThreeD.Scene.Save (9 overloads) + FromFile.
+      3D model conversion: Scene.FromFile(input) → Save(output, FileFormat).
+      FileFormat.FBX/OBJ/STL enum values need reflection confirmation.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: PROBE_BLOCKED_LICENSE
+    last_reflected_package_version: "26.4.0"
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Compress 3D Scene (compress-3d-scene)
+  - family: threed
+    plugin_slug: compress-3d-scene
+    operation_kind: THREE_D_COMPRESSION
+    package_id: Aspose.3D
+    type_name: Scene
+    namespace: Aspose.ThreeD
+    method_name: Save
+    candidate_api_types:
+      - Aspose.ThreeD.Scene
+    candidate_methods:
+      - Save
+    selected_api_mapping:
+      type_name: Scene
+      namespace: Aspose.ThreeD
+      method_name: Save
+      save_sig: Save(fileName, FbxSaveOptions)
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.65
+    confidence_rationale: >
+      3D compression uses Save with FbxSaveOptions or GlbSaveOptions.
+      Trial license may produce watermarked/empty output.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: PROBE_BLOCKED_LICENSE
+    last_reflected_package_version: "26.4.0"
+    refresh_due: "2026-09-04"

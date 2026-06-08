@@ -1,0 +1,44 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "generated_at": "2026-06-04",
+  "priority_1_canonical_url_reconciliation": [
+    {"family": "html", "canonical_slug": "html-to-pdf-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade to READY_FOR_TRANSFORMATION"},
+    {"family": "tasks", "canonical_slug": "project-to-pdf-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "cad", "canonical_slug": "dwg-dxf-dwt-file-processor", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "page", "canonical_slug": "ps-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "page", "canonical_slug": "xps-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "ocr", "canonical_slug": "scanned-image-to-text", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "ocr", "canonical_slug": "scanned-pdf-to-text", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "psd", "canonical_slug": "image-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "psd", "canonical_slug": "graphics-editor", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "svg", "canonical_slug": "svg-to-image-converter", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"},
+    {"family": "tex", "canonical_slug": "latex-figure-renderer", "current_status": "CODE_HARVESTED", "action": "add canonical_url, upgrade"}
+  ],
+  "priority_2_thirteen_new_pages": [
+    "imaging/animation-maker", "imaging/photo-album-maker", "imaging/image-deskew",
+    "zip/rar-extractor",
+    "ocr/image-text-finder", "ocr/invoice-to-text", "ocr/photo-to-text", "ocr/table-to-text",
+    "psd/animation-maker", "psd/photo-processor",
+    "svg/svg-to-pdf-converter", "svg/vectorizer",
+    "tex/latex-math-renderer"
+  ],
+  "priority_3_blocked_family_retry": ["omr","gis","note","drawing","font","finance","threed"],
+  "priority_4_snippet_validation": [
+    "barcode/1d-barcode-writer (new canonical)",
+    "barcode/2d-barcode-writer",
+    "imaging/image-converter",
+    "zip/universal-compressor",
+    "html/html-to-pdf-converter",
+    "tasks/project-to-pdf-converter"
+  ],
+  "priority_5_dryrun_wave_2": [
+    "barcode/2d-barcode-writer",
+    "imaging/image-converter (canonical slug)",
+    "imaging/image-resizer",
+    "zip/universal-compressor (canonical slug)",
+    "html/html-to-pdf-converter",
+    "tasks/project-to-pdf-converter",
+    "ocr/scanned-image-to-text",
+    "psd/image-converter"
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "generated_at": "2026-06-05",
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "results": [
+    {
+      "key": "ocr/recognize-text",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\ocr\\recognize-text",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\result.txt",
+          "size": 288
+        }
+      ]
+    },
+    {
+      "key": "ocr/extract-text",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\ocr\\extract-text",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\extracted.txt",
+          "size": 109
+        }
+      ]
+    },
+    {
+      "key": "html/convert-html-to-pdf",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\html\\convert-html-to-pdf",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\output.pdf",
+          "size": 57397
+        }
+      ]
+    },
+    {
+      "key": "tasks/convert-mpp-to-pdf",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\tasks\\convert-mpp-to-pdf",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\project.pdf",
+          "size": 86013
+        }
+      ]
+    },
+    {
+      "key": "svg/svg-to-image-converter",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\svg\\svg-to-image-converter",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\output.png",
+          "size": 64359
+        }
+      ]
+    },
+    {
+      "key": "barcode/generate-barcode",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\barcode\\generate-barcode",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\barcode.png",
+          "size": 22648
+        }
+      ]
+    },
+    {
+      "key": "barcode/recognize-barcode",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\barcode\\recognize-barcode",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\result.txt",
+          "size": 218
+        }
+      ]
+    },
+    {
+      "key": "imaging/convert-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\imaging\\convert-image",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\converted.png",
+          "size": 1828
+        }
+      ]
+    },
+    {
+      "key": "imaging/compress-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\imaging\\compress-image",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "output_files": [
+        {
+          "path": "output\\compressed.jpg",
+          "size": 10368
+        }
+      ]
+    },
+    {
+      "key": "page/convert-xps-to-pdf",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\page\\convert-xps-to-pdf",
+      "restore": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "build": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "verdict": "PASS",
+      "run": {
+        "exit_code": 0,
+        "status": "SUCCESS"
+      },
+      "output_files": [
+        {
+          "path": "output/output.pdf",
+          "size": 18460
+        }
+      ],
+      "fix_note": "API corrected: XpsDocument.SaveAsPdf() not PdfDevice; rebuilt manually. error_snippet was from initial stale run before fix."
+    }
+  ]
+}

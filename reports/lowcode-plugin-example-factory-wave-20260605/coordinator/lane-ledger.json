@@ -1,0 +1,33 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-example-factory-wave-20260605",
+  "lanes": {
+    "0": {"name": "COORDINATOR", "status": "COMPLETE", "owner": "coordinator"},
+    "A": {"name": "INTAKE_REGISTRY_READINESS_WAVE_SELECTION", "status": "COMPLETE", "result": "12 candidates selected"},
+    "B": {"name": "REGISTRY_DRIVEN_EXAMPLE_GENERATOR_TOOLING", "status": "COMPLETE", "result": "22/22 tests pass, loader.py parents[3] fixed"},
+    "C": {"name": "FAMILY_SPECIFIC_TRANSFORMATION_TEMPLATES", "status": "COMPLETE", "result": "11 family templates in templates.py"},
+    "D": {"name": "DRYRUN_EXAMPLE_WAVE_3", "status": "COMPLETE", "result": "12/12 PASS (barcode×2, svg, tex, zip×2, imaging×6)"},
+    "E": {"name": "OFFICIAL_SNIPPET_VALIDATION_WAVE_3", "status": "COMPLETE", "result": "12/12 PASS via dotnet run"},
+    "F": {"name": "REGISTRY_EXPANSION_STATUS_ADVANCEMENT", "status": "COMPLETE", "result": "12 entries advanced to TRANSFORMED_TO_EXAMPLE_DRYRUN"},
+    "G": {"name": "BLOCKED_FAMILY_REOPENING_MANUAL_FALLBACK", "status": "COMPLETE", "result": "7 families confirmed DEFER_INDEFINITELY"},
+    "H": {"name": "FIXTURE_FACTORY_OUTPUT_VALIDATION_HARDENING", "status": "PARTIAL", "result": "output-validation.json written for all 12 packages; fixture factory deferred"},
+    "I": {"name": "VALIDATOR_HARDENING_REGRESSION_GUARDS", "status": "COMPLETE", "result": "14 new rules W01-W14 documented"},
+    "J": {"name": "PUBLICATION_READINESS_LOCAL_REVIEW", "status": "COMPLETE", "result": "12/12 PUBLICATION_CANDIDATE_LOCAL"},
+    "K": {"name": "SKILLS_AUTOMATION_UPDATE", "status": "DEFERRED", "result": "No new skills needed this sprint"},
+    "L": {"name": "TESTS_QA_SELF_HEALING_EVIDENCE", "status": "COMPLETE", "result": "22+18 tests pass, evidence bundle 195,102 bytes, SHA-256 written"}
+  },
+  "blocker_codes": [
+    "REGISTRY_INCOMPLETE", "CANONICAL_PAGE_BLOCKED", "SOURCE_FETCH_BLOCKED",
+    "MANUAL_MAPPING_REQUIRED", "FIXTURE_BLOCKED", "TEMPLATE_MISSING",
+    "BUILD_FAILED", "RUN_FAILED", "OUTPUT_VALIDATION_FAILED", "VALIDATOR_FAILED",
+    "PROTECTED_FILE_MUTATION", "PUBLICATION_BLOCKED_BY_POLICY", "EXTERNAL_SERVICE_BLOCKED"
+  ],
+  "policy": {
+    "no_publication_prs": true,
+    "no_external_repo_mutations": true,
+    "no_protected_yaml_modifications": true,
+    "exact_path_edits_only": true,
+    "continue_on_lane_block": true
+  }
+}

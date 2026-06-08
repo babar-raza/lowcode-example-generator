@@ -1,0 +1,318 @@
+{
+  "timestamp": "2026-06-03",
+  "results": {
+    "cells/html-converter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/image-converter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/json-converter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/pdf-converter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/spreadsheet-converter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/spreadsheet-locker": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/spreadsheet-merger": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/spreadsheet-splitter": {
+      "committed_inputs": [
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "cells/text-converter": {
+      "committed_inputs": [
+        "input.csv",
+        "input.xlsx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "diagram/diagram-converter": {
+      "committed_inputs": [
+        "input.vsdx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "diagram/pdf-converter": {
+      "committed_inputs": [
+        "input.vsdx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "email/converter": {
+      "committed_inputs": [
+        "input.eml"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/doc-converter": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/form-editor": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/form-exporter": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/form-flattener": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/html": {
+      "committed_inputs": [
+        "input.html"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/image-extractor": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/jpeg": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/merger": {
+      "committed_inputs": [
+        "input1.pdf",
+        "input2.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/optimizer": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/pdfa-converter": {
+      "committed_inputs": [],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/png": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/security": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/signature": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/splitter": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/table-generator": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/text-extractor": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/tiff": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/timestamp": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/toc-generator": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "pdf/xls-converter": {
+      "committed_inputs": [
+        "input.pdf"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "slides/compress": {
+      "committed_inputs": [
+        "input.pptx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "slides/convert": {
+      "committed_inputs": [
+        "input.pptx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "slides/merger": {
+      "committed_inputs": [
+        "input1.pptx",
+        "input2.pptx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "words/comparer": {
+      "committed_inputs": [
+        "input.docx",
+        "input_v1.docx",
+        "input_v2.docx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "words/converter": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "words/mail-merger": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "words/merger": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "words/replacer": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "words/report-builder": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "words/signer": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": true,
+      "ok": true
+    },
+    "words/splitter": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    },
+    "words/watermarker": {
+      "committed_inputs": [
+        "input.docx"
+      ],
+      "generates_input_at_runtime": false,
+      "ok": true
+    }
+  },
+  "all_ok": true,
+  "verdict": "PASS"
+}

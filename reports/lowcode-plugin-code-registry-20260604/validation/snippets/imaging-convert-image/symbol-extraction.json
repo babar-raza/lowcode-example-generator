@@ -1,0 +1,18 @@
+{
+  "family": "imaging",
+  "plugin_slug": "convert-image",
+  "source_file": "ConvertImageWithGrayscale.cs",
+  "source_url": "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs",
+  "code_hash": "3487b7663cb2...",
+  "note": "GIST-ID: 7850a7dd21684c1c466565d85085340c — this file references a known gist",
+  "extracted_symbols": {
+    "namespaces": ["Aspose.Imaging", "Aspose.Imaging.ImageOptions", "Aspose.Imaging.FileFormats.Jpeg"],
+    "classes": ["Image", "JpegOptions", "PngOptions"],
+    "constructors": ["new JpegOptions()", "new PngOptions()"],
+    "methods": ["Image.Load(path)", "image.Save(path, options)"],
+    "enums": ["JpegCompressionColorMode.Grayscale"]
+  },
+  "input_required": "any image file (JPEG, PNG, BMP, TIFF, GIF, EMF, SVG etc.)",
+  "output_type": "image file in target format",
+  "minimal_pattern": "using (Image image = Image.Load(inputPath)) { image.Save(outputPath, new JpegOptions()); }"
+}

@@ -1,0 +1,12 @@
+{
+  "source": "reports/lowcode-non-lowcode-fallback-implementation-20260604/reflection/public-api-inventory/barcode.json",
+  "package_id": "Aspose.BarCode",
+  "version": "26.5.0",
+  "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+  "type_confirmed": "BarcodeGenerator",
+  "namespace": "Aspose.BarCode.Generation",
+  "method_confirmed": "Save",
+  "pr01_pass": true,
+  "pr02_pass": true,
+  "pr03_pass": true
+}

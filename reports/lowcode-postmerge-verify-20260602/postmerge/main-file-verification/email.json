@@ -1,0 +1,25 @@
+{
+  "family": "email",
+  "examples_on_main": [
+    "converter"
+  ],
+  "our_published_examples": [
+    "converter"
+  ],
+  "pre_existing_examples": [],
+  "our_count": 1,
+  "expected_count": 1,
+  "count_match": true,
+  "excluded_leaked": [],
+  "no_excluded_leak": true,
+  "has_readme": true,
+  "readme_mentions_examples": {
+    "converter": true
+  },
+  "pfx_files": [],
+  "no_static_pfx": true,
+  "has_global_json": true,
+  "has_directory_build_props": true,
+  "has_directory_packages_props": true,
+  "all_ok": true
+}

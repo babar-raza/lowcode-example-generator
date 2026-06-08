@@ -1,0 +1,17 @@
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\zip-probe.exe
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\zip-probe.deps.json
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\zip-probe.runtimeconfig.json
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\zip-probe.dll
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\zip-probe.pdb
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\bin\Release\net8.0\Aspose.Zip.dll
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.csproj.AssemblyReference.cache
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.AssemblyInfoInputs.cache
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.AssemblyInfo.cs
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.csproj.CoreCompileInputs.cache
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.csproj.Up2Date
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.dll
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\refint\zip-probe.dll
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.pdb
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\zip-probe.genruntimeconfig.cache
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-non-lowcode-fallback-implementation-20260604\prototypes\zip\obj\Release\net8.0\ref\zip-probe.dll

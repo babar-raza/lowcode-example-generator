@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "merger",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Merger",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "merger.csproj",
+  "files": [
+    "merger.csproj",
+    "Program.cs"
+  ]
+}

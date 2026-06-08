@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 10 items
+
+tests/unit/test_probe_generator.py::TestProbeGeneratorValidation::test_generator_raises_when_type_not_in_reflection PASSED [ 10%]
+tests/unit/test_probe_generator.py::TestProbeGeneratorValidation::test_generator_raises_when_method_not_in_reflection PASSED [ 20%]
+tests/unit/test_probe_generator.py::TestProbeGeneratorOutput::test_generator_creates_cs_with_correct_namespace PASSED [ 30%]
+tests/unit/test_probe_generator.py::TestProbeGeneratorOutput::test_generator_creates_csproj_with_package_reference PASSED [ 40%]
+tests/unit/test_probe_generator.py::TestProbeGeneratorOutput::test_generator_writes_files_to_output_dir PASSED [ 50%]
+tests/unit/test_probe_generator.py::TestProbeRunnerTaxonomy::test_probe_result_has_all_required_fields_including_taxonomy PASSED [ 60%]
+tests/unit/test_probe_generator.py::TestProbeRunnerTaxonomy::test_runner_timeout_classified_as_probe_failed_timeout PASSED [ 70%]
+tests/unit/test_probe_generator.py::TestProbeRunnerTaxonomy::test_runner_zero_output_with_license_keyword_classified_as_probe_failed_license PASSED [ 80%]
+tests/unit/test_probe_generator.py::TestProbeRunnerTaxonomy::test_runner_build_failure_classified_as_probe_failed_build PASSED [ 90%]
+tests/unit/test_probe_generator.py::TestProbeRunnerTaxonomy::test_runner_validates_output_file_existence PASSED [100%]
+
+============================= 10 passed in 0.72s ==============================

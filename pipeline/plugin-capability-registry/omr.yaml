@@ -1,0 +1,68 @@
+# Plugin capability registry — Aspose.OMR
+# TRAIN D: Plugin-level entries (v26.1.0)
+# Reflection: deferred — 48.7MB DLL, very large
+
+entries:
+  # Plugin 1: Recognize OMR Sheet (recognize-omr)
+  - family: omr
+    plugin_slug: recognize-omr
+    operation_kind: OMR_RECOGNITION
+    package_id: Aspose.OMR
+    type_name: OmrEngine
+    namespace: Aspose.OMR.Api
+    method_name: GetTemplateProcessor
+    candidate_api_types:
+      - Aspose.OMR.Api.OmrEngine
+      - Aspose.OMR.Api.TemplateProcessor
+    candidate_methods:
+      - RecognizeImage
+      - GetTemplateProcessor
+    selected_api_mapping:
+      note: AI_DRAFT — pending DllReflector confirmation
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.50
+    confidence_rationale: >
+      OMR recognition requires template + scan image. Very large DLL (48.7MB).
+      Known API: OmrEngine → TemplateProcessor.RecognizeImage(image) → OmrPage.
+      Likely license-restricted in trial mode.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_LARGE_DLL
+    blocker_type: PROBE_BLOCKED_LICENSE
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Generate OMR Template (generate-omr-template)
+  - family: omr
+    plugin_slug: generate-omr-template
+    operation_kind: OMR_TEMPLATE_GENERATION
+    package_id: Aspose.OMR
+    type_name: OmrEngine
+    namespace: Aspose.OMR.Api
+    method_name: GenerateTemplate
+    candidate_api_types:
+      - Aspose.OMR.Api.OmrEngine
+    candidate_methods:
+      - GenerateTemplate
+    selected_api_mapping: null
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.48
+    confidence_rationale: OMR template generation uses OmrEngine.GenerateTemplate(textDefinition).
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_LARGE_DLL
+    blocker_type: PROBE_BLOCKED_LICENSE
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"

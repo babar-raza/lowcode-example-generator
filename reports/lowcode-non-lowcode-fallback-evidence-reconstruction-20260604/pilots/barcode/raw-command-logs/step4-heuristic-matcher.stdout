@@ -1,0 +1,12 @@
+{
+  "type": "BarcodeGenerator",
+  "method": "Save",
+  "confidence": 0.75,
+  "status": "PROBE_CANDIDATE"
+}
+{
+  "type": "BarcodeGenerator",
+  "method": "Generate",
+  "confidence": 0.75,
+  "status": "PROBE_CANDIDATE"
+}

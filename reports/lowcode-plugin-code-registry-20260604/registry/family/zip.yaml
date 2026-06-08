@@ -1,0 +1,103 @@
+# Plugin-Code Registry: zip
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: zip
+package_id: Aspose.ZIP
+github_repo: https://github.com/aspose-zip/Aspose.Zip-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+
+plugins:
+  - plugin_slug: compress-files
+    plugin_url: https://products.aspose.net/zip/net/compress-files
+    page_hash: b5ee2d83caeabdda
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [4110124fffb65637ebb4ecd7e2326b4d]
+    namespaces_used:
+      - "Aspose.Zip.Tar"
+      - "Aspose.Zip.Bzip2"
+    classes_used:
+      - "TarArchive"
+      - "Bzip2Archive"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressToTarXX/CompressToTarBz2.cs
+    next_action: "Extract symbols from CompressToTarBz2.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md"
+      - "https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressToTarXX/CompressToTarBz2.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CompressToTarBz2.cs"
+
+  - plugin_slug: extract-files
+    plugin_url: https://products.aspose.net/zip/net/extract-files
+    page_hash: 2887928eb901eb0a
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: NEEDS_MANUAL_MAPPING
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: []
+    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."
+
+  - plugin_slug: create-archive
+    plugin_url: https://products.aspose.net/zip/net/create-archive
+    page_hash: 701757357e101650
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [7202859f9ec7ce49ad7a4dfb5c303bd2]
+    namespaces_used:
+      - "Aspose.Zip.Saving"
+      - "Aspose.Zip"
+    classes_used:
+      - "Archive"
+      - "SelfExtractorOptions"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFiles/CreateSelfExtractingArchive.cs
+    next_action: "Extract symbols from CreateSelfExtractingArchive.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md"
+      - "https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFiles/CreateSelfExtractingArchive.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CreateSelfExtractingArchive.cs"
+
+  - plugin_slug: compress-folder
+    plugin_url: https://products.aspose.net/zip/net/compress-folder
+    page_hash: 8fa4f5f35bb65fbb
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [1e45c5db1bd1e195118df25d47460e12]
+    classes_used:
+      - "DirectoryInfo"
+      - "Archive"
+      - "FileMode"
+      - "File"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs
+    next_action: "Extract symbols from CompressDirectory.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/zip.md"
+      - "https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CompressDirectory.cs"

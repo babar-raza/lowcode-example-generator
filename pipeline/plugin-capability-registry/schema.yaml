@@ -1,0 +1,45 @@
+# Plugin Capability Registry — Entry Schema (YAML reference)
+# Authoritative schema is schema.json. This file is for human reference only.
+#
+# Status enum (12 values — authoritative):
+#   WEBSITE_DISCOVERED         # found on products.aspose.net; not yet reflected
+#   REFLECTION_CANDIDATE       # DllReflector confirmed type exists
+#   AI_DRAFT                   # AI suggested mapping; not yet reflection-validated
+#   PROBE_CANDIDATE            # reflection confirmed type + method; probe can run
+#   PROBE_CONFIRMED            # probe: build OK + run OK + output validated
+#   PROBE_FAILED               # probe failed; failure_taxonomy required
+#   VERIFIED_PUBLISHABLE       # governed review passed; probe_evidence required
+#   STATIC_MAPPING_REQUIRED    # no heuristic match; manual seed required
+#   BLOCKED_PACKAGE_UNAVAILABLE  # NuGet 404 or package not found
+#   BLOCKED_REFLECTION_FAILED    # DllReflector fails; extraction fails
+#   BLOCKED_LICENSE_RESTRICTED   # trial license prevents meaningful probe result
+#   REJECTED_BY_VALIDATOR        # AI type/method absent from DllReflector output
+#
+# Probe failure taxonomy (5 codes — used in failure_taxonomy field):
+#   PROBE_FAILED_LICENSE    # zero-byte output + trial/license keywords
+#   PROBE_FAILED_API        # type/method not found at runtime
+#   PROBE_FAILED_BUILD      # dotnet build non-zero exit
+#   PROBE_FAILED_RESTORE    # dotnet restore fails
+#   PROBE_FAILED_TIMEOUT    # process exceeded 60s timeout
+#
+# Required fields by status:
+#   VERIFIED_PUBLISHABLE → probe_evidence (non-empty string)
+#   PROBE_FAILED → failure_taxonomy (one of 5 codes above)
+#   REJECTED_BY_VALIDATOR → rejection_reason
+
+example_entry:
+  family: barcode
+  package_id: Aspose.BarCode
+  type_name: BarcodeGenerator
+  namespace: Aspose.BarCode.Generation
+  method_name: Save
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.0
+  confidence_rationale: "Initial discovery from products.aspose.net"
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: null

@@ -1,0 +1,28 @@
+[2026-06-01T12:43:50.425723+00:00] === SPRINT: lowcode-pub-proof-repair-20260601 ===
+[2026-06-01T12:43:50.434386+00:00] Found 49 examples, 56 decisions
+[2026-06-01T12:43:50.434403+00:00] === TRAIN C: PACKAGE ARTIFACTS ===
+[2026-06-01T12:43:51.177934+00:00] Package artifacts built: 44 (main=42, companion=1, env_dep=1)
+[2026-06-01T12:43:51.177958+00:00] === Running E2E (this takes several minutes) ===
+[2026-06-01T12:43:51.177961+00:00] === TRAIN E: E2E + OUTPUT VALIDATION ===
+[2026-06-01T12:47:05.001481+00:00] E2E publishable: 44/44 PASS
+[2026-06-01T12:47:05.001514+00:00] E2E diagnostic: 5/5 PASS
+[2026-06-01T12:47:05.001523+00:00] Output proofs: 49 total (44 pub, 5 diag)
+[2026-06-01T12:47:05.001607+00:00] === TRAIN F: DECISION BOARD LOCK ===
+[2026-06-01T12:47:05.024090+00:00] Decision board locked: 44 publish, 12 exclude
+[2026-06-01T12:47:05.024124+00:00] === TRAIN G: VALIDATORS ===
+[2026-06-01T12:47:05.024139+00:00]   [PASS] V01: Sidecar file will be validated post-ZIP — deferred to post-build
+[2026-06-01T12:47:05.046104+00:00]   [PASS] V02: Package artifacts contain real directories — found 44
+[2026-06-01T12:47:05.046661+00:00]   [FAIL] V03: Command ledger has stdout/stderr files — found 0
+[2026-06-01T12:47:05.046853+00:00]   [PASS] V04: per-example-output-proof.json exists
+[2026-06-01T12:47:05.047292+00:00]   [PASS] V05: E2E denominator does not claim FormImporter in 49
+[2026-06-01T12:47:05.047309+00:00]   [PASS] V06: Publishable count matches package count — pkg=44
+[2026-06-01T12:47:05.047821+00:00]   [PASS] V07: Duplicates excluded from packages — found: []
+[2026-06-01T12:47:05.047946+00:00]   [PASS] V08: Helper (slides/for-each) not in packages
+[2026-06-01T12:47:05.047964+00:00]   [PASS] V09: FormImporter not in E2E pass counts — FormImporter excluded from E2E by design
+[2026-06-01T12:47:05.048670+00:00]   [PASS] V10: No deferred decision items — found 0
+[2026-06-01T12:47:05.048686+00:00]   [PASS] V11: E2E publishable all pass — 44/44
+[2026-06-01T12:47:05.115535+00:00]   [PASS] V12: No static PFX in tracked git — found: []
+[2026-06-01T12:47:05.131402+00:00] Validators: 11/12 PASS
+[2026-06-01T12:47:05.131495+00:00] === TRAIN I: PUBLICATION DRY-RUN ===
+[2026-06-01T12:47:05.165276+00:00] Publication dry-run: 6 families, approval-blocked
+[REPAIR] Added 8 command stdout/stderr artifacts

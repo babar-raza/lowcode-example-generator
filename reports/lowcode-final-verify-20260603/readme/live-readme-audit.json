@@ -1,0 +1,222 @@
+{
+  "cells": {
+    "has_readme": true,
+    "examples_on_main": [
+      "html-converter",
+      "image-converter",
+      "json-converter",
+      "pdf-converter",
+      "spreadsheet-converter",
+      "spreadsheet-locker",
+      "spreadsheet-merger",
+      "spreadsheet-splitter",
+      "text-converter"
+    ],
+    "expected": [
+      "html-converter",
+      "image-converter",
+      "json-converter",
+      "pdf-converter",
+      "spreadsheet-converter",
+      "spreadsheet-locker",
+      "spreadsheet-merger",
+      "spreadsheet-splitter",
+      "text-converter"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "html-converter": true,
+      "image-converter": true,
+      "json-converter": true,
+      "pdf-converter": true,
+      "spreadsheet-converter": true,
+      "spreadsheet-locker": true,
+      "spreadsheet-merger": true,
+      "spreadsheet-splitter": true,
+      "text-converter": true
+    },
+    "missing_from_readme": [],
+    "all_mentioned": true,
+    "needs_repair": false
+  },
+  "diagram": {
+    "has_readme": true,
+    "examples_on_main": [
+      "diagram-converter",
+      "pdf-converter"
+    ],
+    "expected": [
+      "diagram-converter",
+      "pdf-converter"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "diagram-converter": true,
+      "pdf-converter": true
+    },
+    "missing_from_readme": [],
+    "all_mentioned": true,
+    "needs_repair": false
+  },
+  "email": {
+    "has_readme": true,
+    "examples_on_main": [
+      "converter"
+    ],
+    "expected": [
+      "converter"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "converter": true
+    },
+    "missing_from_readme": [],
+    "all_mentioned": true,
+    "needs_repair": false
+  },
+  "pdf": {
+    "has_readme": true,
+    "examples_on_main": [
+      "doc-converter",
+      "form-editor",
+      "form-exporter",
+      "form-flattener",
+      "html",
+      "image-extractor",
+      "jpeg",
+      "merger",
+      "optimizer",
+      "pdfa-converter",
+      "png",
+      "security",
+      "signature",
+      "splitter",
+      "table-generator",
+      "text-extractor",
+      "tiff",
+      "timestamp",
+      "toc-generator",
+      "xls-converter"
+    ],
+    "expected": [
+      "doc-converter",
+      "form-editor",
+      "form-exporter",
+      "form-flattener",
+      "html",
+      "image-extractor",
+      "jpeg",
+      "merger",
+      "optimizer",
+      "pdfa-converter",
+      "png",
+      "security",
+      "signature",
+      "splitter",
+      "table-generator",
+      "text-extractor",
+      "tiff",
+      "timestamp",
+      "toc-generator",
+      "xls-converter"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "doc-converter": true,
+      "form-editor": false,
+      "form-exporter": false,
+      "form-flattener": false,
+      "html": true,
+      "image-extractor": false,
+      "jpeg": true,
+      "merger": true,
+      "optimizer": true,
+      "pdfa-converter": false,
+      "png": true,
+      "security": true,
+      "signature": true,
+      "splitter": true,
+      "table-generator": false,
+      "text-extractor": false,
+      "tiff": true,
+      "timestamp": false,
+      "toc-generator": false,
+      "xls-converter": true
+    },
+    "missing_from_readme": [
+      "form-editor",
+      "form-exporter",
+      "form-flattener",
+      "image-extractor",
+      "pdfa-converter",
+      "table-generator",
+      "text-extractor",
+      "timestamp",
+      "toc-generator"
+    ],
+    "all_mentioned": false,
+    "needs_repair": true
+  },
+  "slides": {
+    "has_readme": true,
+    "examples_on_main": [
+      "compress",
+      "convert",
+      "merger"
+    ],
+    "expected": [
+      "compress",
+      "convert",
+      "merger"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "compress": true,
+      "convert": true,
+      "merger": true
+    },
+    "missing_from_readme": [],
+    "all_mentioned": true,
+    "needs_repair": false
+  },
+  "words": {
+    "has_readme": true,
+    "examples_on_main": [
+      "comparer",
+      "converter",
+      "mail-merger",
+      "merger",
+      "replacer",
+      "report-builder",
+      "signer",
+      "splitter",
+      "watermarker"
+    ],
+    "expected": [
+      "comparer",
+      "converter",
+      "mail-merger",
+      "merger",
+      "replacer",
+      "report-builder",
+      "signer",
+      "splitter",
+      "watermarker"
+    ],
+    "count_match": true,
+    "readme_mentions": {
+      "comparer": true,
+      "converter": true,
+      "mail-merger": true,
+      "merger": true,
+      "replacer": true,
+      "report-builder": true,
+      "signer": true,
+      "splitter": true,
+      "watermarker": true
+    },
+    "missing_from_readme": [],
+    "all_mentioned": true,
+    "needs_repair": false
+  }
+}

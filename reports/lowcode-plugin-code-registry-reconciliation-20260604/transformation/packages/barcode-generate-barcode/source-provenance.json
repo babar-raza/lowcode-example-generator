@@ -1,0 +1,17 @@
+{
+  "family": "barcode",
+  "plugin_slug": "generate-barcode",
+  "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+  "old_url": "https://products.aspose.net/barcode/net/generate-barcode",
+  "nuget_package": "Aspose.BarCode",
+  "nuget_version": "24.12.0",
+  "github_repo": "https://github.com/aspose-barcode/Aspose.BarCode-for-.NET",
+  "source_file": "Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs",
+  "source_raw_url": "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs",
+  "source_hash": "fb9f597b4f84aaa2922bc321594e9993",
+  "transformation_sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "transformation_date": "2026-06-04",
+  "classes_used": ["BarcodeGenerator", "EncodeTypes", "BarCodeImageFormat"],
+  "implementation_model": "STATIC_CONVERTER_CLASS",
+  "page_source_status": "CANONICAL_URL_CONFIRMED"
+}

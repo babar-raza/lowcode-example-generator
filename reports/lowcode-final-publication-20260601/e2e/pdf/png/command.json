@@ -1,0 +1,25 @@
+{
+  "family": "pdf",
+  "name": "png",
+  "label": "pdf/png",
+  "pilot": "pdf-controlled-pilot-pr5",
+  "csproj": "pdf-png.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 28837,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 28837
+      },
+      {
+        "name": "output.png",
+        "size": 0
+      }
+    ]
+  }
+}

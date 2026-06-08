@@ -1,0 +1,78 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "generated_at": "2026-06-04",
+  "rules_doc": "reports/lowcode-plugin-registry-expansion-20260604/validators/canonical-page-registry-validator-rules.md",
+  "scope": "pipeline/plugin-code-registry/family/*.yaml (non-protected families)",
+  "protected_families_skipped": ["cells", "words", "pdf", "slides", "email", "diagram"],
+  "total_plugins_checked": 78,
+  "ready_for_transformation_count": 38,
+  "violations": [],
+  "warnings": [
+    {
+      "rule": "R02",
+      "family": "imaging",
+      "slug": "watermark-image",
+      "issue": "CANONICAL_URL_BEST_MATCH — weak evidence; inference match to image-effect-creator page",
+      "severity": "WARNING"
+    },
+    {
+      "rule": "R02",
+      "family": "imaging",
+      "slug": "filter-image",
+      "issue": "CANONICAL_URL_BEST_MATCH — weak evidence; inference match to image-effect-creator page",
+      "severity": "WARNING"
+    },
+    {
+      "rule": "R02",
+      "family": "ocr",
+      "slug": "extract-text",
+      "issue": "CANONICAL_URL_BEST_MATCH — scanned-pdf-to-text page is close match but not the original plugin slug",
+      "severity": "WARNING"
+    },
+    {
+      "rule": "R02",
+      "family": "ocr",
+      "slug": "scan-document",
+      "issue": "CANONICAL_URL_BEST_MATCH — scanned-image-to-text page is close match",
+      "severity": "WARNING"
+    }
+  ],
+  "repairs_made_this_run": [
+    {
+      "family": "imaging",
+      "slug": "resize-image",
+      "rule": "R04",
+      "repair": "Added classes_used: [Image] and methods_used: [image.ResizeWidthProportionally(), image.Save()]"
+    },
+    {
+      "family": "ocr",
+      "slug": "scan-document",
+      "rule": "R07",
+      "repair": "Added transformation_readiness_reason"
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "rule": "R07",
+      "repair": "Added transformation_readiness_reason"
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "rule": "R07",
+      "repair": "Added transformation_readiness_reason"
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "rule": "R07",
+      "repair": "Added transformation_readiness_reason"
+    }
+  ],
+  "summary": {
+    "violations": 0,
+    "warnings": 4,
+    "verdict": "PASS",
+    "post_repair": true
+  }
+}

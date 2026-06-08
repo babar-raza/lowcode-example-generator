@@ -1,0 +1,9 @@
+{
+  "type_name": "Image",
+  "method_name": "Save",
+  "status": "REFLECTION_CONFIRMED",
+  "confidence": 0.8,
+  "model": "MANUAL_MAPPING",
+  "rationale": "Image.Save confirmed via DllReflector; abstract class handled via static Load factory",
+  "rejection_reason": null
+}

@@ -1,13 +1,11 @@
 family: zip
 display_name: Aspose.ZIP for .NET
-enabled: false
-status: disabled
-# CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
-# NuGet package resolved successfully; DllReflector found 0 plugin types.
-# Do not re-enable without evidence of a new LowCode namespace release.
-# NOTE: package_id below uses standard Aspose naming convention.
-# Verify exact NuGet package ID at nuget.org before enabling generation.
-# Discovery run will fail gracefully if package does not exist.
+enabled: true
+status: discovery_only
+# NON_LOWCODE_FALLBACK: No LowCode namespace found (confirmed by DllReflector 2026-06-04).
+# Archive.Save probe CONFIRMED 2026-06-04 — see prototypes/zip/output-validation.json.
+# fallback_strategy=capability_registry enables probe-based example generation pipeline.
+# See pipeline/plugin-capability-registry/zip.yaml for current probe status.
 
 nuget:
   package_id: Aspose.ZIP
@@ -24,6 +22,7 @@ nuget:
     max_depth: 2
 
 plugin_detection:
+  fallback_strategy: capability_registry
   namespace_patterns:
     - Aspose.ZIP.LowCode
     - Aspose.ZIP.LowCode.*

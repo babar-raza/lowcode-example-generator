@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "optimizer",
+  "label": "pdf/optimizer",
+  "pilot": "pdf-controlled-pilot-pr10",
+  "csproj": "optimizer.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

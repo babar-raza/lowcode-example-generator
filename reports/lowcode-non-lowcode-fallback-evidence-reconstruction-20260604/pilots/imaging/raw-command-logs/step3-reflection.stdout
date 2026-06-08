@@ -1,0 +1,8 @@
+{
+  "family_slug": "imaging",
+  "package_id": "Aspose.Imaging",
+  "version": "26.6.0",
+  "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+  "evidence_path": "reports/lowcode-non-lowcode-fallback-implementation-20260604/reflection/public-api-inventory/imaging.json",
+  "notes": "No *.LowCode* namespace. Image.Save confirmed via DllReflector (abstract class; static Load factory present). DicomImage.Save is concrete."
+}

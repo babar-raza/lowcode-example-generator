@@ -1,0 +1,22 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 9 items
+
+tests/unit/test_family_config_fallback_strategy.py::TestFallbackStrategyDefaults::test_fallback_strategy_defaults_to_none PASSED [ 11%]
+tests/unit/test_family_config_fallback_strategy.py::TestFallbackStrategyDefaults::test_fallback_strategy_capability_registry_accepted PASSED [ 22%]
+tests/unit/test_family_config_fallback_strategy.py::TestFallbackStrategyDefaults::test_fallback_strategy_invalid_value_raises_validation_error PASSED [ 33%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[cells] PASSED [ 44%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[words] PASSED [ 55%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[pdf] PASSED [ 66%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[slides] PASSED [ 77%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[email] PASSED [ 88%]
+tests/unit/test_family_config_fallback_strategy.py::TestLowCodeYamlsUnaffected::test_lowcode_yaml_loads_without_error[diagram] PASSED [100%]
+
+============================== 9 passed in 0.91s ==============================

@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "tiff",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Tiff",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-tiff.csproj",
+  "files": [
+    "pdf-tiff.csproj",
+    "Program.cs"
+  ]
+}

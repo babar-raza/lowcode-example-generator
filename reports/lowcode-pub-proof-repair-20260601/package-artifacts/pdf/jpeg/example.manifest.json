@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "jpeg",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Jpeg",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-jpeg.csproj",
+  "files": [
+    "pdf-jpeg.csproj",
+    "Program.cs"
+  ]
+}

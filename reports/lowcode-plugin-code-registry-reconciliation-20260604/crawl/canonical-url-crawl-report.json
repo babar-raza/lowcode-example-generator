@@ -1,0 +1,149 @@
+{
+  "sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "generated_at": "2026-06-04",
+  "crawl_method": "WebFetch with browser-like headers",
+  "root_page": "https://products.aspose.net/",
+  "root_page_status": "HTTP_200",
+  "url_pattern_finding": {
+    "old_pattern": "https://products.aspose.net/{family}/net/{slug}",
+    "new_pattern": "https://products.aspose.net/{family}/{slug}/",
+    "change_summary": "The '/net/' segment has been removed from canonical URLs. Plugin slugs have also been renamed to be more capability-descriptive."
+  },
+  "families_crawled": {
+    "barcode": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "1d-barcode-reader", "url": "https://products.aspose.net/barcode/1d-barcode-reader/", "title": "1D Barcode Reader for .NET"},
+        {"slug": "1d-barcode-writer", "url": "https://products.aspose.net/barcode/1d-barcode-writer/", "title": "1D Barcode Writer for .NET"},
+        {"slug": "2d-barcode-reader", "url": "https://products.aspose.net/barcode/2d-barcode-reader/", "title": "2D Barcode Reader for .NET"},
+        {"slug": "2d-barcode-writer", "url": "https://products.aspose.net/barcode/2d-barcode-writer/", "title": "2D Barcode Writer for .NET"}
+      ],
+      "plugin_count": 4,
+      "source_on_page": "no_inline_code",
+      "classes_confirmed": ["BarcodeGenerator", "GenerateBarCodeImage"],
+      "nuget_package": "Aspose.BarCode"
+    },
+    "imaging": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "animation-maker", "url": "https://products.aspose.net/imaging/animation-maker/", "title": "Animation Maker for .NET"},
+        {"slug": "image-converter", "url": "https://products.aspose.net/imaging/image-converter/", "title": "Image Converter for .NET"},
+        {"slug": "image-compressor", "url": "https://products.aspose.net/imaging/image-compressor/", "title": "Image Compressor for .NET"},
+        {"slug": "image-merger", "url": "https://products.aspose.net/imaging/image-merger/", "title": "Image Merger for .NET"},
+        {"slug": "image-resizer", "url": "https://products.aspose.net/imaging/image-resizer/", "title": "Image Resizer for .NET"},
+        {"slug": "photo-album-maker", "url": "https://products.aspose.net/imaging/photo-album-maker/", "title": "Photo Album Maker for .NET"},
+        {"slug": "image-cropper", "url": "https://products.aspose.net/imaging/image-cropper/", "title": "Image Cropper for .NET"},
+        {"slug": "image-effect-creator", "url": "https://products.aspose.net/imaging/image-effect-creator/", "title": "Image Effect Creator for .NET"},
+        {"slug": "image-deskew", "url": "https://products.aspose.net/imaging/image-deskew/", "title": "Image Deskew for .NET"},
+        {"slug": "image-rotate-flip", "url": "https://products.aspose.net/imaging/image-rotate-flip/", "title": "Image Rotate & Flip for .NET"}
+      ],
+      "plugin_count": 10,
+      "source_on_page": "no_inline_code",
+      "classes_confirmed": ["Image", "JpegOptions", "Image.Save()"],
+      "nuget_package": "Aspose.Imaging"
+    },
+    "zip": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "universal-compressor", "url": "https://products.aspose.net/zip/universal-compressor/", "title": "Universal Compressor for .NET"},
+        {"slug": "universal-extractor", "url": "https://products.aspose.net/zip/universal-extractor/", "title": "Universal Extractor for .NET"},
+        {"slug": "rar-extractor", "url": "https://products.aspose.net/zip/rar-extractor/", "title": "RAR Extractor for .NET"}
+      ],
+      "plugin_count": 3,
+      "source_on_page": "no_inline_code",
+      "classes_confirmed": ["ArchiveFactory.CompressDirectory"],
+      "nuget_package": "Aspose.Zip"
+    },
+    "html": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "html-to-pdf-converter", "url": "https://products.aspose.net/html/html-to-pdf-converter/", "title": "HTML to PDF Converter for .NET"}
+      ],
+      "plugin_count": 1,
+      "nuget_package": "Aspose.HTML"
+    },
+    "tasks": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "project-to-pdf-converter", "url": "https://products.aspose.net/tasks/project-to-pdf-converter/", "title": "Project to PDF Converter for .NET"}
+      ],
+      "plugin_count": 1,
+      "nuget_package": "Aspose.Tasks"
+    },
+    "cad": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "dwg-dxf-dwt-file-processor", "url": "https://products.aspose.net/cad/dwg-dxf-dwt-file-processor/", "title": "DXF/DWG/DWT File Processor for .NET"}
+      ],
+      "plugin_count": 1,
+      "nuget_package": "Aspose.CAD"
+    },
+    "ocr": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "image-text-finder", "url": "https://products.aspose.net/ocr/image-text-finder/", "title": "Image Text Finder for .NET"},
+        {"slug": "invoice-to-text", "url": "https://products.aspose.net/ocr/invoice-to-text/", "title": "Invoice to Text for .NET"},
+        {"slug": "photo-to-text", "url": "https://products.aspose.net/ocr/photo-to-text/", "title": "Photo to Text for .NET"},
+        {"slug": "scanned-image-to-text", "url": "https://products.aspose.net/ocr/scanned-image-to-text/", "title": "Scan to Text for .NET"},
+        {"slug": "scanned-pdf-to-text", "url": "https://products.aspose.net/ocr/scanned-pdf-to-text/", "title": "Scanned PDF to Text for .NET"},
+        {"slug": "table-to-text", "url": "https://products.aspose.net/ocr/table-to-text/", "title": "Table to Text for .NET"}
+      ],
+      "plugin_count": 6,
+      "nuget_package": "Aspose.OCR"
+    },
+    "psd": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "animation-maker", "url": "https://products.aspose.net/psd/animation-maker/", "title": "PSD Animation Maker for .NET"},
+        {"slug": "graphics-editor", "url": "https://products.aspose.net/psd/graphics-editor/", "title": "PSD Graphics Editor for .NET"},
+        {"slug": "image-converter", "url": "https://products.aspose.net/psd/image-converter/", "title": "PSD Image Converter for .NET"},
+        {"slug": "photo-processor", "url": "https://products.aspose.net/psd/photo-processor/", "title": "PSD Photo Processor for .NET"}
+      ],
+      "plugin_count": 4,
+      "nuget_package": "Aspose.PSD"
+    },
+    "svg": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "svg-to-image-converter", "url": "https://products.aspose.net/svg/svg-to-image-converter/", "title": "SVG to Image Converter for .NET"},
+        {"slug": "svg-to-pdf-converter", "url": "https://products.aspose.net/svg/svg-to-pdf-converter/", "title": "SVG to PDF Converter for .NET"},
+        {"slug": "vectorizer", "url": "https://products.aspose.net/svg/vectorizer/", "title": "SVG Vectorizer for .NET"}
+      ],
+      "plugin_count": 3,
+      "nuget_package": "Aspose.SVG"
+    },
+    "page": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "ps-converter", "url": "https://products.aspose.net/page/ps-converter/", "title": "PS Converter for .NET"},
+        {"slug": "xps-converter", "url": "https://products.aspose.net/page/xps-converter/", "title": "XPS Converter for .NET"}
+      ],
+      "plugin_count": 2,
+      "nuget_package": "Aspose.Page"
+    },
+    "tex": {
+      "family_page_status": "HTTP_200",
+      "canonical_plugins": [
+        {"slug": "latex-figure-renderer", "url": "https://products.aspose.net/tex/latex-figure-renderer/", "title": "LaTeX Figure Renderer for .NET"},
+        {"slug": "latex-math-renderer", "url": "https://products.aspose.net/tex/latex-math-renderer/", "title": "LaTeX Math Renderer for .NET"}
+      ],
+      "plugin_count": 2,
+      "nuget_package": "Aspose.TeX"
+    },
+    "omr": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "gis": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "note": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "drawing": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "font": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "finance": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0},
+    "threed": {"family_page_status": "HTTP_403", "canonical_plugins": [], "plugin_count": 0}
+  },
+  "crawl_summary": {
+    "total_families": 18,
+    "families_crawled_ok": 11,
+    "families_blocked_403": 7,
+    "total_canonical_plugins_discovered": 37,
+    "source_code_inline": false,
+    "source_code_github_referenced": true
+  }
+}

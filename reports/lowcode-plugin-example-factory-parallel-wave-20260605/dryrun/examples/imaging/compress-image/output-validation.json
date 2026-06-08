@@ -1,0 +1,14 @@
+{
+  "package": "imaging/compress-image",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\compressed.jpg",
+      "size": 10368
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05"
+}

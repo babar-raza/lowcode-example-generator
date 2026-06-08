@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-06-04",
+  "strategy": "Inline snippets extracted from plugin page HTML. Page HTML is 403-blocked.",
+  "blocker": "CRAWL_BLOCKED",
+  "blocker_reason": "products.aspose.net plugin pages return 403. Inline code snippets could not be extracted from page HTML.",
+  "total": 0,
+  "note": "GitHub repo examples are used as primary code evidence. Inline snippets would supplement these when page access is restored."
+}

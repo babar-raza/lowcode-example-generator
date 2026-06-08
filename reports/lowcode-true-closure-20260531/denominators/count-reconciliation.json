@@ -1,0 +1,32 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:54:17",
+  "contradictions": [
+    {
+      "id": "C001",
+      "status": "OPEN",
+      "item": "words/Signer in format-authority",
+      "action": "REMOVE — not a main class"
+    },
+    {
+      "id": "C002",
+      "status": "OPEN",
+      "item": "slides/ForEach in format-authority",
+      "action": "REMOVE — utility helper not main class"
+    }
+  ],
+  "total_format_authority_contracts": 44,
+  "expected_canonical_count": 42,
+  "format_authority_needs_revert": true,
+  "version_reconciliation": {
+    "words_denominator_source_version": "26.5.0",
+    "words_assembly_manifest_version": "25.5.0",
+    "words_directory_packages_props_version": "25.5.0",
+    "canonical_version": "25.5.0",
+    "versions_agree": true,
+    "note": "Denominator source_version 26.5.0 = API catalog version; assembly/props 25.5.0 = actual build package. These are DIFFERENT versions — catalog built from 26.5.0 DLL, examples built with 25.5.0."
+  },
+  "words_published_count": 8,
+  "slides_published_count": 3,
+  "cells_published_count": 9
+}

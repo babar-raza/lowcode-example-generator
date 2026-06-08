@@ -1,0 +1,114 @@
+# Plugin capability registry — Aspose.HTML
+# TRAIN D: Plugin-level entries (v26.5.0)
+# TRAIN C: Reflection COMPLETE — 613 types, Aspose.Html namespace
+# Dep resolved: Microsoft.Extensions.Logging.Abstractions v7.0.0
+# Status: REFLECTION_CANDIDATE — probe pending
+
+entries:
+  # Plugin 1: Convert HTML to PDF (convert-html-to-pdf) — REFLECTION_CANDIDATE
+  - family: html
+    plugin_slug: convert-html-to-pdf
+    operation_kind: HTML_CONVERSION
+    package_id: Aspose.HTML
+    type_name: Converter
+    namespace: Aspose.Html.Converters
+    method_name: ConvertHTML
+    candidate_api_types:
+      - Aspose.Html.Converters.Converter
+      - Aspose.Html.HtmlDocument
+    candidate_methods:
+      - ConvertHTML
+    selected_api_mapping:
+      type_name: Converter
+      namespace: Aspose.Html.Converters
+      method_name: ConvertHTML
+      note: DllReflector confirmed; Converter.ConvertHTML(url, PdfSaveOptions, outputPath)
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.78
+    confidence_rationale: >
+      DllReflector confirmed Aspose.Html.Converters.Converter.ConvertHTML (v26.5.0, 613 types).
+      Dep: Microsoft.Extensions.Logging.Abstractions v7.0.0 resolved.
+      ai_source_flag updated to false — type+method now confirmed in DllReflector output.
+      HallucinationValidator not required: reflection-confirmed, not AI_DRAFT.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Convert HTML to Word (convert-html-to-word) — REFLECTION_CANDIDATE
+  - family: html
+    plugin_slug: convert-html-to-word
+    operation_kind: HTML_CONVERSION
+    package_id: Aspose.HTML
+    type_name: Converter
+    namespace: Aspose.Html.Converters
+    method_name: ConvertHTML
+    candidate_api_types:
+      - Aspose.Html.Converters.Converter
+    candidate_methods:
+      - ConvertHTML
+    selected_api_mapping:
+      type_name: Converter
+      namespace: Aspose.Html.Converters
+      method_name: ConvertHTML
+      note: Same ConvertHTML API with DocSaveOptions for Word output
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.75
+    confidence_rationale: >
+      Same Converter.ConvertHTML API with DocSaveOptions (Word) instead of PdfSaveOptions.
+      DllReflector confirmed Converter type (v26.5.0, 613 types).
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"
+
+  # Plugin 3: Convert HTML to Image (convert-html-to-image) — REFLECTION_CANDIDATE
+  - family: html
+    plugin_slug: convert-html-to-image
+    operation_kind: HTML_RASTERIZATION
+    package_id: Aspose.HTML
+    type_name: Converter
+    namespace: Aspose.Html.Converters
+    method_name: ConvertHTML
+    candidate_api_types:
+      - Aspose.Html.Converters.Converter
+    candidate_methods:
+      - ConvertHTML
+    selected_api_mapping:
+      type_name: Converter
+      namespace: Aspose.Html.Converters
+      method_name: ConvertHTML
+      note: ConvertHTML with ImageSaveOptions for rasterization output
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.73
+    confidence_rationale: >
+      Same Converter.ConvertHTML API with ImageSaveOptions (PNG/JPG).
+      DllReflector confirmed (v26.5.0, 613 types).
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"

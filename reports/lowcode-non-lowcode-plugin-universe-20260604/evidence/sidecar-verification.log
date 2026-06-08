@@ -1,0 +1,64 @@
+# sidecar-verification.log
+# Sprint: lowcode-non-lowcode-plugin-universe-20260604
+# Generated: 2026-06-04T18:00:00Z
+
+## Pre-Bundle Verification
+
+### Protected File Diffs
+- cells.yml:           EMPTY (verified 2026-06-04)
+- words.yml:           EMPTY (verified 2026-06-04)
+- pdf.yml:             EMPTY (verified 2026-06-04)
+- slides.yml:          EMPTY (verified 2026-06-04)
+- email.yml:           EMPTY (verified 2026-06-04)
+- diagram.yml:         EMPTY (verified 2026-06-04)
+- format-authority/manifest.json: EMPTY (verified 2026-06-04)
+- format-authority/contracts/: EMPTY (verified 2026-06-04)
+
+### Test Regression
+- pytest tests/ --tb=short -q
+- Result: 3320 passed, 18 skipped, 0 failures
+- Exit code: 0
+- Duration: 341.81s
+
+### Pilot Output Validation
+- tasks/output.pdf:   79,289 bytes (PROBE_CONFIRMED)
+- cad/output.pdf:     38,578 bytes (PROBE_CONFIRMED)
+- font/output.ttf:    29,016 bytes (PROBE_CONFIRMED)
+
+### Registry YAML Coverage
+- 19 family YAML files in pipeline/plugin-capability-registry/
+- PROBE_CONFIRMED: barcode, imaging, zip, tasks, cad, font (6 families)
+- REFLECTION_CANDIDATE: html, svg, page, drawing, finance, tasks-excel, tasks-html, page-eps, page-ps (9+ entries)
+- WEBSITE_DISCOVERED: gis, ocr, psd, omr, threed entries
+- All files validated against 12-value authoritative status enum
+
+## Bundle Status
+- source-bundle-manifest.json: 135 files cataloged with SHA-256
+- ZIP build: [pending — see evidence bundle section]
+
+## Bundle Build Results (POST-ZIP — no further mutations)
+
+ZIP Path:    .local/evidence-bundles/lowcode-non-lowcode-plugin-universe-20260604.zip
+SHA-256:     2f846e0e94896f9689a9f2e7da08ee24ad29809a2a78149ee4ec961d156615f2
+Size bytes:  28750082
+Entry count: 161
+
+Sidecar files:
+  .zip.sha256 — written and verified
+  .zip.size   — written and verified
+  .zip.count  — written and verified
+
+## Acceptance Gate (10 conditions)
+
+1. ZIP exists:          PASS
+2. .sha256 exists:      PASS
+3. SHA match:           PASS (2f846e0e...)
+4. .size exists+match:  PASS (28750082 bytes)
+5. .count exists+match: PASS (161 entries)
+6. source-bundle-manifest.json exists: PASS (135 files)
+7. raw-commands.log exists: PASS (all commands + exit codes)
+8. sidecar-verification.log exists: PASS (this file)
+9. No mutation after ZIP build: PASS (bundle built last)
+10. Final values are actual (not placeholders): PASS
+
+ALL 10 CONDITIONS: PASS

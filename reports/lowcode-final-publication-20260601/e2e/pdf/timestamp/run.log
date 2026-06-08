@@ -1,0 +1,7 @@
+EXIT: 0
+--- STDOUT ---
+Output: output_timestamped.pdf (exists=True, size=681209 bytes)
+Timestamp applied successfully
+Done.
+
+--- STDERR ---

@@ -1,0 +1,12 @@
+{
+  "family": "tex",
+  "plugin_slug": "latex-figure-renderer",
+  "canonical_url": "https://products.aspose.net/tex/latex-figure-renderer/",
+  "implementation_model": "STATIC_CONVERTER_CLASS",
+  "nuget_package": "Aspose.TeX",
+  "nuget_version": "24.12.0",
+  "github_links": ["https://raw.githubusercontent.com/aspose-tex/Aspose.TeX-for-.NET/master/Aspose.TeX.Examples/LaTeXPdfConversionAlternative/LaTeXPdfConversionAlternative.cs"],
+  "code_hashes": ["5f220c08fa8dd9c24ee963616f1afd21"],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05"
+}

@@ -1,0 +1,12 @@
+{
+  "family": "words",
+  "name": "mail-merger",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "MailMerger",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "mail-merger.csproj",
+  "files": [
+    "mail-merger.csproj",
+    "Program.cs"
+  ]
+}

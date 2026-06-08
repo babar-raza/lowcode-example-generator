@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-06-03",
+  "branches_deleted": [
+    {"repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples", "branch": "fix/remove-legacy-duplicate-examples", "verified_deleted": true},
+    {"repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples", "branch": "fix/remove-legacy-pdf-aconverter", "verified_deleted": true}
+  ],
+  "post_deletion_state": {
+    "diagram": {"branches": ["main"]},
+    "pdf": {"branches": ["main"]}
+  }
+}

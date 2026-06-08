@@ -1,0 +1,26 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:52:49",
+  "type_name": "Aspose.Words.LowCode.Processor",
+  "reflection_findings": {
+    "public_constructors": 0,
+    "constructor_visibility": "INTERNAL",
+    "static_methods": 0,
+    "instance_methods": [
+      "From",
+      "To",
+      "Execute"
+    ],
+    "all_instance_methods_are_static": false
+  },
+  "compiler_errors": [
+    "CS1729: no public constructor",
+    "CS0120: instance method called statically"
+  ],
+  "api_investigation": "Processor is an abstract base class for all LowCode processors. Converter, Merger, Splitter etc. extend it. Cannot be instantiated by user code. No public factory.",
+  "classification": "NOT_LOWCODE_MAIN_CLASS",
+  "sub_classification": "ABSTRACT_BASE_CLASS_PERMANENTLY_BLOCKED",
+  "retry_condition": "Would require Aspose.Words adding public constructor or static factory method",
+  "status": "PERMANENTLY_BLOCKED",
+  "denominator_action": "NO CHANGE (already in permanently_blocked_workflow_roots)"
+}

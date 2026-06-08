@@ -1,0 +1,16 @@
+{
+  "method": "MANUAL_MAPPING",
+  "model": "MANUAL_MAPPING",
+  "type_name": "Archive",
+  "namespace": "Aspose.Zip",
+  "method_name": "Save",
+  "status": "AI_DRAFT",
+  "confidence": 0.9,
+  "probe_evidence": null,
+  "hallucination_validator_result": {
+    "type_in_reflection": true,
+    "method_in_reflection": true,
+    "advanced_status": "REFLECTION_CONFIRMED",
+    "rejection_reason": null
+  }
+}

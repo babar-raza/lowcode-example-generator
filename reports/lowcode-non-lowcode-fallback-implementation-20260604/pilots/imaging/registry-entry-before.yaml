@@ -1,0 +1,13 @@
+entries:
+  - family_slug: imaging
+    package_id: Aspose.Imaging
+    version: "26.6.0"
+    type_name: Image
+    method_name: Save
+    namespace: Aspose.Imaging
+    status: PROBE_CANDIDATE
+    confidence_score: 0.80
+    confidence_rationale: "MANUAL_MAPPING; abstract class with static Load factory confirmed in DllReflector"
+    last_validated: "2026-06-04T00:00:00Z"
+    assembly_fingerprint: "511467dc6a13f883468cf57c5d45b55d5555b2ba0fa31c990f006a4315b87392"
+    plugin_page_hash: "sha256:placeholder"

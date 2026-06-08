@@ -1,0 +1,21 @@
+{
+  "family": "pdf",
+  "name": "text-extractor",
+  "label": "pdf/text-extractor",
+  "pilot": "pdf-controlled-pilot-pr10",
+  "csproj": "text-extractor.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 1,
+    "output_total_bytes": 29371,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 29371
+      }
+    ]
+  }
+}

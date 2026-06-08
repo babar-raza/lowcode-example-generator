@@ -1,0 +1,11 @@
+{
+  "family": "email",
+  "name": "email-converter",
+  "label": "email/email-converter",
+  "pilot": "email-controlled-pilot",
+  "csproj": "email-converter.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

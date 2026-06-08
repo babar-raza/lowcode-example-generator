@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "name": "json-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "JsonConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "json-converter.csproj",
+  "files": [
+    "json-converter.csproj",
+    "Program.cs"
+  ]
+}

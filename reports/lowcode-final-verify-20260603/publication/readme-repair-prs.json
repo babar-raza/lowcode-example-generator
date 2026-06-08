@@ -1,0 +1,7 @@
+{
+  "prs": [
+    {"repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples", "pr": 24, "title": "fix: update README to list all 20 published examples", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples", "pr": 4, "title": "fix: correct example directory path in README", "merged": true, "branch_deleted": true},
+    {"repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples", "pr": 4, "title": "fix: correct example directory paths in README", "merged": true, "branch_deleted": true}
+  ]
+}

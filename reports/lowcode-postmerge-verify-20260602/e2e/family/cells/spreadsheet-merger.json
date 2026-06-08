@@ -1,0 +1,9 @@
+{
+  "example": "spreadsheet-merger",
+  "csproj": "cells-spreadsheet-merger.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: cells-spreadsheet-merger\nDone.\n",
+  "stderr_tail": ""
+}

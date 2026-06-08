@@ -1,0 +1,9 @@
+{
+  "example": "replacer",
+  "csproj": "words-replacer.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: words-replacer\nDone.\n",
+  "stderr_tail": ""
+}

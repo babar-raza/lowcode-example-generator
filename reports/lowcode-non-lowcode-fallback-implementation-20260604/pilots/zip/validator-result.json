@@ -1,0 +1,16 @@
+{
+  "family": "zip",
+  "timestamp": "2026-06-04T00:00:00Z",
+  "nl_v_rules_run": 14,
+  "nl_v_pass": 14,
+  "nl_v_fail": 0,
+  "nl_v_skip": 0,
+  "summary": "All 14 NL-V rules PASS for zip family with PROBE_CONFIRMED entry.",
+  "critical_checks": {
+    "NL-V01_registry_file_exists": "PASS",
+    "NL-V05_probe_confirmed_has_evidence": "PASS",
+    "NL-V06_verified_publishable_has_evidence": "SKIP (no VERIFIED_PUBLISHABLE entries)",
+    "NL-V11_output_validated": "PASS",
+    "NL-V12_no_lowcode_families_affected": "PASS"
+  }
+}

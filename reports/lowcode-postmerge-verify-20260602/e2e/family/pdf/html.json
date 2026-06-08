@@ -1,0 +1,9 @@
+{
+  "example": "html",
+  "csproj": "pdf-html.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "HTML converted to PDF\n",
+  "stderr_tail": ""
+}

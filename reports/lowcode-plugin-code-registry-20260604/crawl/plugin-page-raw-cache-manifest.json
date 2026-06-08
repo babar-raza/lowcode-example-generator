@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-06-04",
+  "cache_strategy": "github_repo_trees",
+  "direct_page_fetch": "CRAWL_BLOCKED_403",
+  "note": "Plugin page HTML content is 403-blocked from this environment. GitHub repo file trees are used as source authority.",
+  "github_trees_cached": [
+    {"family": "barcode", "path": ".local/code-cache/repo-trees/barcode-tree.json", "cs_files": 412},
+    {"family": "imaging", "path": ".local/code-cache/repo-trees/imaging-tree.json", "cs_files": 329},
+    {"family": "zip", "path": ".local/code-cache/repo-trees/zip-tree.json", "cs_files": 164},
+    {"family": "html", "path": ".local/code-cache/repo-trees/html-tree.json", "cs_files": 62},
+    {"family": "tasks", "path": ".local/code-cache/repo-trees/tasks-tree.json", "cs_files": 331},
+    {"family": "cad", "path": ".local/code-cache/repo-trees/cad-tree.json", "cs_files": 143},
+    {"family": "ocr", "path": ".local/code-cache/repo-trees/ocr-tree.json", "cs_files": 42},
+    {"family": "psd", "path": ".local/code-cache/repo-trees/psd-tree.json", "cs_files": 349},
+    {"family": "svg", "path": ".local/code-cache/repo-trees/svg-tree.json", "cs_files": 25},
+    {"family": "page", "path": ".local/code-cache/repo-trees/page-tree.json", "cs_files": 128},
+    {"family": "tex", "path": ".local/code-cache/repo-trees/tex-tree.json", "cs_files": 30},
+    {"family": "note", "path": ".local/code-cache/repo-trees/note-tree.json", "cs_files": 161},
+    {"family": "drawing", "path": ".local/code-cache/repo-trees/drawing-tree.json", "cs_files": 43},
+    {"family": "font", "path": ".local/code-cache/repo-trees/font-tree.json", "cs_files": 16},
+    {"family": "finance", "path": ".local/code-cache/repo-trees/finance-tree.json", "cs_files": 159},
+    {"family": "threed", "path": ".local/code-cache/repo-trees/threed-tree.json", "cs_files": 134},
+    {"family": "gis", "path": ".local/code-cache/repo-trees/gis-tree.json", "cs_files": 272},
+    {"family": "omr", "path": ".local/code-cache/repo-trees/omr-tree.json", "cs_files": 65}
+  ],
+  "total_cs_files_available": 3193
+}

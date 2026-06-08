@@ -1,0 +1,12 @@
+{
+  "family": "imaging",
+  "plugin_slug": "crop-image",
+  "canonical_url": "https://products.aspose.net/imaging/image-cropper/",
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "nuget_package": "Aspose.Imaging",
+  "nuget_version": "24.12.0",
+  "github_links": ["https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CropEMFFile.cs"],
+  "code_hashes": ["3aad688311d310d9ba26999932bfdc6e"],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05"
+}

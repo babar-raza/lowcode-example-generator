@@ -1,0 +1,63 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "lane": "G",
+  "description": "Blocked family retry and manual fallback analysis",
+  "analyzed_at": "2026-06-05",
+  "families_analyzed": [
+    {
+      "family": "omr",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.OMR does not have a LowCode-style conversion API. All OMR operations are recognition-based, not converter-based.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "gis",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.GIS does not surface on products.aspose.net as a lowcode plugin family. No candidate pages found.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "note",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.Note has a different API model (notebook-based, not converter). No lowcode plugin pages.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "drawing",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.Drawing is a System.Drawing replacement, not a document converter. No lowcode plugin pattern.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "font",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.Font is a font processing library. No lowcode plugin converter pages.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "finance",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.Finance (XBRL/OFX) does not have lowcode converter-style plugin pages.",
+      "next_action": "DEFER_INDEFINITELY"
+    },
+    {
+      "family": "threed",
+      "blocker_type": "CANONICAL_PAGE_BLOCKED",
+      "verdict": "CONFIRMED_BLOCKED",
+      "reason": "Aspose.3D has complex 3D scene API, no lowcode converter pages.",
+      "next_action": "DEFER_INDEFINITELY"
+    }
+  ],
+  "summary": "7/7 blocked families confirmed permanently blocked. No retries possible without upstream API changes.",
+  "wave_b_candidates": [
+    {"family": "psd", "slug": "psd-image-converter", "path": "intake/wave-b-fixture-work.json"},
+    {"family": "page", "slug": "convert-xps-to-pdf", "path": "intake/wave-b-fixture-work.json"},
+    {"family": "cad", "slug": "convert-cad-to-pdf", "path": "intake/wave-b-fixture-work.json"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "family": "zip",
+  "plugin_slug": "compress-files",
+  "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+  "old_url": "https://products.aspose.net/zip/net/compress-files",
+  "nuget_package": "Aspose.ZIP",
+  "nuget_version": "24.12.0",
+  "github_repo": "https://github.com/aspose-zip/Aspose.Zip-for-.NET",
+  "source_file": "Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs",
+  "source_raw_url": "https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs",
+  "source_hash": "4110124fffb65637ebb4ecd7e2326b4d",
+  "transformation_sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "transformation_date": "2026-06-04",
+  "classes_used": ["Archive", "DirectoryInfo", "FileStream"],
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "page_source_status": "CANONICAL_URL_CONFIRMED"
+}

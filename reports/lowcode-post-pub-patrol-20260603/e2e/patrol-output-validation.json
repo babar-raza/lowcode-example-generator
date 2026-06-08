@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-patrol-20260603",
+  "validations": [
+    {
+      "example": "diagram/diagram-converter",
+      "check": "produces output.vdx file",
+      "result": "PASS",
+      "output_file": "output.vdx",
+      "output_size": 17976,
+      "stdout": "Conversion succeeded, output file created at 'output.vdx'."
+    },
+    {
+      "example": "pdf/timestamp",
+      "check": "produces timestamped PDF via TSA server",
+      "result": "PASS",
+      "output_file": "output_timestamped.pdf",
+      "output_size": 681154,
+      "stdout": "Timestamp applied successfully",
+      "note": "Environment-dependent — requires network access to FreeTSA.org"
+    },
+    {
+      "example": "pdf/signature",
+      "check": "generates runtime certificate and signs PDF",
+      "result": "PASS",
+      "stdout": "PDF signed successfully.",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned",
+      "static_pfx_used": false
+    },
+    {
+      "example": "words/signer",
+      "check": "generates runtime certificate and signs DOCX",
+      "result": "PASS",
+      "stdout": "Signing succeeded: output.docx, Signatures: 1",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned",
+      "static_pfx_used": false
+    }
+  ],
+  "workspace_only_file_check": {
+    "result": "PASS",
+    "description": "No example hard-codes paths outside its project directory",
+    "method": "grep for C:\\, D:\\, /home/, /Users/ in all Program.cs files"
+  },
+  "all_pass": true,
+  "verdict": "OUTPUT_VALIDATION_PASS"
+}

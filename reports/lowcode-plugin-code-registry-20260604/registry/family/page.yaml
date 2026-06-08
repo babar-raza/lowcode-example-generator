@@ -1,0 +1,93 @@
+# Plugin-Code Registry: page
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: page
+package_id: Aspose.Page
+github_repo: https://github.com/aspose-page/Aspose.Page-for-.NET
+implementation_model: DEDICATED_PLUGIN_CLASS
+
+plugins:
+  - plugin_slug: convert-xps-to-pdf
+    plugin_url: https://products.aspose.net/page/net/convert-xps-to-pdf
+    page_hash: d67160c3c842459c
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: DEDICATED_PLUGIN_CLASS
+    code_hashes: [d1fddfaab35e4595e98793c872a02e21]
+    namespaces_used:
+      - "Aspose.Page.XPS.XpsModel"
+    classes_used:
+      - "XpsDocument"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithCanvas/ClippingXPS.cs
+    next_action: "Extract symbols from ClippingXPS.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/page.md"
+      - "https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithCanvas/ClippingXPS.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ClippingXPS.cs"
+
+  - plugin_slug: convert-eps-to-pdf
+    plugin_url: https://products.aspose.net/page/net/convert-eps-to-pdf
+    page_hash: ac05ee2c3f67b341
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: DEDICATED_PLUGIN_CLASS
+    code_hashes: [038aed21c24af5a8b34ce561025ded28]
+    namespaces_used:
+      - "Aspose.Page.Drawing"
+      - "Aspose.Page.EPS"
+    classes_used:
+      - "FileMode"
+      - "PsDocument"
+      - "SizeF"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithEPS/CropEPS.cs
+    next_action: "Extract symbols from CropEPS.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/page.md"
+      - "https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithEPS/CropEPS.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CropEPS.cs"
+
+  - plugin_slug: convert-ps-to-pdf
+    plugin_url: https://products.aspose.net/page/net/convert-ps-to-pdf
+    page_hash: 926675421dfbca20
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: DEDICATED_PLUGIN_CLASS
+    code_hashes: [757668ffd5b6eba3b4088485c4debce7]
+    namespaces_used:
+      - "Aspose.Page.Drawing.Drawing2D"
+      - "Aspose.Page.EPS.Device"
+      - "Aspose.Page.Drawing"
+    classes_used:
+      - "Font"
+      - "FileStream"
+      - "RectangleF"
+      - "GraphicsPath"
+      - "PsDocument"
+      - "PsSaveOptions"
+      - "SolidBrush"
+      - "FileMode"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithCanvas/ClippingPS.cs
+    next_action: "Extract symbols from ClippingPS.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/page.md"
+      - "https://raw.githubusercontent.com/aspose-page/Aspose.Page-for-.NET/master/Examples/Aspose.Page.Examples.CSharp/WorkingWithCanvas/ClippingPS.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ClippingPS.cs"

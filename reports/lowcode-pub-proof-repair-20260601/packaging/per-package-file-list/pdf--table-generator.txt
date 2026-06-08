@@ -1,0 +1,3 @@
+example.manifest.json
+pdf-table-generator.csproj
+Program.cs

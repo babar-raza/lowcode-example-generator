@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "name": "spreadsheet-splitter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "SpreadsheetSplitter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "spreadsheet-splitter.csproj",
+  "files": [
+    "Program.cs",
+    "spreadsheet-splitter.csproj"
+  ]
+}

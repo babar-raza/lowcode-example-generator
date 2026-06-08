@@ -1,0 +1,11 @@
+{
+  "family": "words",
+  "name": "replacer",
+  "label": "words/replacer",
+  "pilot": "words-controlled-pilot",
+  "csproj": "replacer.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

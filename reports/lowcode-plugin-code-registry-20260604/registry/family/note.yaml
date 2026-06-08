@@ -1,0 +1,81 @@
+# Plugin-Code Registry: note
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: note
+package_id: Aspose.Note
+github_repo: https://github.com/aspose-note/Aspose.Note-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+
+plugins:
+  - plugin_slug: convert-one-to-pdf
+    plugin_url: https://products.aspose.net/note/net/convert-one-to-pdf
+    page_hash: 5d310ca97989c769
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [d4c8ef00b87d55e285148f37d21ab31e]
+    classes_used:
+      - "Document"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Conversion/PdfConversion.cs
+    next_action: "Extract symbols from PdfConversion.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/note.md"
+      - "https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Conversion/PdfConversion.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from PdfConversion.cs"
+
+  - plugin_slug: convert-one-to-word
+    plugin_url: https://products.aspose.net/note/net/convert-one-to-word
+    page_hash: 01e44912c61d9f2d
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [dbbd55511d29f58c7a39fa3ef1e09a87]
+    namespaces_used:
+      - "Aspose.Note"
+    classes_used:
+      - "Document"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Loading-and-Saving/PasswordProtectedDoc.cs
+    next_action: "Extract symbols from PasswordProtectedDoc.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/note.md"
+      - "https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Loading-and-Saving/PasswordProtectedDoc.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from PasswordProtectedDoc.cs"
+
+  - plugin_slug: convert-one-to-image
+    plugin_url: https://products.aspose.net/note/net/convert-one-to-image
+    page_hash: 42ff83ffec19bab4
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [85b705097a418ba7a4e9ed2b6ca88151]
+    namespaces_used:
+      - "Aspose.Note"
+    classes_used:
+      - "Document"
+      - "MemoryStream"
+      - "Bitmap"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Images/ExtractImages.cs
+    next_action: "Extract symbols from ExtractImages.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/note.md"
+      - "https://raw.githubusercontent.com/aspose-note/Aspose.Note-for-.NET/master/Examples/CSharp/Images/ExtractImages.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ExtractImages.cs"

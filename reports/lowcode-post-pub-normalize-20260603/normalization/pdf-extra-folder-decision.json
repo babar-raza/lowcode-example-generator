@@ -1,0 +1,9 @@
+{
+  "family": "pdf",
+  "intended_examples": ["doc-converter", "form-editor", "form-exporter", "form-flattener", "html", "image-extractor", "jpeg", "merger", "optimizer", "pdfa-converter", "png", "security", "signature", "splitter", "table-generator", "text-extractor", "tiff", "timestamp", "toc-generator", "xls-converter"],
+  "extra_folders": [
+    {"folder": "pdf-aconverter", "classification": "LEGACY_DUPLICATE_TO_REMOVE", "counterpart": "pdfa-converter"}
+  ],
+  "action": "Remove via governed PR",
+  "post_removal_expected_count": 20
+}

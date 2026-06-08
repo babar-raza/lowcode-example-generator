@@ -1,0 +1,127 @@
+{
+  "family": "words",
+  "examples_on_main": [
+    "comparer",
+    "converter",
+    "mail-merger",
+    "merger",
+    "replacer",
+    "report-builder",
+    "signer",
+    "splitter",
+    "watermarker"
+  ],
+  "count": 9,
+  "expected": 9,
+  "count_match": true,
+  "excluded_leaked": [],
+  "no_excluded_leak": true,
+  "has_readme": true,
+  "readme_all_mentioned": true,
+  "readme_mentions": {
+    "comparer": true,
+    "converter": true,
+    "mail-merger": true,
+    "merger": true,
+    "replacer": true,
+    "report-builder": true,
+    "signer": true,
+    "splitter": true,
+    "watermarker": true
+  },
+  "per_example": [
+    {
+      "example": "comparer",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx",
+        "input_v1.docx",
+        "input_v2.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "converter",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "mail-merger",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "merger",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "replacer",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "report-builder",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "signer",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "splitter",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "watermarker",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.docx"
+      ],
+      "ok": true
+    }
+  ],
+  "all_ok": true
+}

@@ -1,0 +1,12 @@
+{
+  "family": "words",
+  "name": "signer",
+  "decision": "PUBLISH_COMPANION_EXAMPLE",
+  "type": "SignerContext",
+  "role": "CONTEXT_MODEL",
+  "csproj": "signer.csproj",
+  "files": [
+    "Program.cs",
+    "signer.csproj"
+  ]
+}

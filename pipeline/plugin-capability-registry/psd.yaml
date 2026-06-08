@@ -1,0 +1,70 @@
+# Plugin capability registry — Aspose.PSD
+# TRAIN D: Plugin-level entries (v26.5.0)
+# Reflection: BLOCKED — dep chain: Newtonsoft.Json 13.0.0 → Aspose.JavaAttributes 1.0.0 (Aspose-specific, not on public NuGet)
+
+entries:
+  # Plugin 1: Convert PSD to PDF (convert-psd-to-pdf)
+  - family: psd
+    plugin_slug: convert-psd-to-pdf
+    operation_kind: PSD_CONVERSION
+    package_id: Aspose.PSD
+    type_name: Image
+    namespace: Aspose.PSD
+    method_name: Save
+    candidate_api_types:
+      - Aspose.PSD.Image
+    candidate_methods:
+      - Save
+      - Load
+    selected_api_mapping:
+      type_name: Image
+      namespace: Aspose.PSD
+      load_method: Image.Load(string)
+      method_name: Save
+      note: Pending DllReflector confirmation with Newtonsoft.Json dep
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.68
+    confidence_rationale: >
+      Known PSD API: Image.Load(psdFile) → Save(pdfPath, PdfOptions).
+      Reflection deferred due to Newtonsoft.Json dependency conflict.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
+    blocker_type: REFLECTION_BLOCKED
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Convert PSD to PNG (convert-psd-to-png)
+  - family: psd
+    plugin_slug: convert-psd-to-png
+    operation_kind: PSD_RASTERIZATION
+    package_id: Aspose.PSD
+    type_name: Image
+    namespace: Aspose.PSD
+    method_name: Save
+    candidate_api_types:
+      - Aspose.PSD.Image
+    candidate_methods:
+      - Save
+    selected_api_mapping: null
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.66
+    confidence_rationale: Same Image.Load → Save with PngOptions.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
+    blocker_type: REFLECTION_BLOCKED
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"

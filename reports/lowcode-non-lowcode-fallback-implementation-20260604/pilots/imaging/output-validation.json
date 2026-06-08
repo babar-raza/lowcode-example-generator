@@ -1,0 +1,37 @@
+{
+  "probe_verdict": "PROBE_CONFIRMED",
+  "family": "imaging",
+  "package_id": "Aspose.Imaging",
+  "version": "26.6.0",
+  "type_name": "Image",
+  "namespace": "Aspose.Imaging",
+  "method_name": "Save",
+  "mapping_source": "MANUAL_MAPPING",
+  "runtime_type": "PngImage",
+  "restore_ok": true,
+  "build_ok": true,
+  "run_ok": true,
+  "output_validated": true,
+  "output_file": "probe-output.jpg",
+  "output_size_bytes": 1075,
+  "failure_taxonomy": null,
+  "fixture": {
+    "type": "TIER-1_PROGRAMMATIC",
+    "filename": "input.png",
+    "size_bytes": 69,
+    "generator": "fixture_gen.py",
+    "description": "1x1 red pixel PNG using Python bytes only; no binary committed"
+  },
+  "pr_checks": {
+    "PR-01_type_in_catalog": true,
+    "PR-02_method_in_type": true,
+    "PR-03_static_factory_load_returns_concrete_type": true,
+    "PR-05_output_path_as_arg": true,
+    "PR-07_timeout_60s": true,
+    "PR-08_stdout_stderr_captured": true,
+    "PR-09_output_validated": true,
+    "PR-10_license_keyword_check": "N/A (output exists and is non-empty)"
+  },
+  "timestamp": "2026-06-04T00:00:00Z",
+  "assembly_fingerprint": "511467dc6a13f883468cf57c5d45b55d5555b2ba0fa31c990f006a4315b87392"
+}

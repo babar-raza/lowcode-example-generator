@@ -1,0 +1,14 @@
+EXIT: 0
+--- STDOUT ---
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\report-builder.csproj]
+  report-builder -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\bin\Debug\net8.0\report-builder.dll
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\words-controlled-pilot\examples\words\lowcode\report-builder\report-builder.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.40
+
+--- STDERR ---

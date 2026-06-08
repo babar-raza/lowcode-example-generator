@@ -1,0 +1,14 @@
+{
+  "package": "barcode/recognize-barcode",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\result.txt",
+      "size": 218
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05"
+}

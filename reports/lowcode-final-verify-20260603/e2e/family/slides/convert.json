@@ -1,0 +1,9 @@
+{
+  "example": "convert",
+  "csproj": "slides-convert.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: slides-convert\nConversion succeeded: output.pdf\n",
+  "stderr_tail": ""
+}

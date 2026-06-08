@@ -1,0 +1,17 @@
+{
+  "family": "barcode",
+  "plugin_slug": "recognize-barcode",
+  "source_file": "ReadSimpleExample.cs",
+  "source_url": "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/Main/ReadSimpleExample.cs",
+  "code_hash": "442f7db75aff458f...",
+  "extracted_symbols": {
+    "namespaces": ["Aspose.BarCode.BarCodeRecognition"],
+    "classes": ["BarCodeReader", "BarCodeResult", "DecodeType"],
+    "constructors": ["new BarCodeReader(imagePath, DecodeType.Pdf417, DecodeType.DataMatrix, ...)"],
+    "methods": ["reader.ReadBarCodes()", "result.CodeType", "result.CodeText"],
+    "enums": ["DecodeType.Pdf417", "DecodeType.DataMatrix", "DecodeType.QR", "DecodeType.Code128", "DecodeType.EAN13"]
+  },
+  "input_required": "image file containing barcodes (PNG, JPEG, BMP etc.)",
+  "output_type": "BarCodeResult[] — code type + code text",
+  "minimal_pattern": "using (BarCodeReader reader = new BarCodeReader(imagePath, DecodeType.AllSupportedTypes)) { foreach (var r in reader.ReadBarCodes()) { Console.WriteLine(r.CodeType + \": \" + r.CodeText); } }"
+}

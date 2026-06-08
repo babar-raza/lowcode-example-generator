@@ -1,0 +1,113 @@
+{
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "date": "2026-06-05",
+  "wave": "wave-5",
+  "total": 8,
+  "publication_candidate_local_clean": 8,
+  "packages": [
+    {
+      "package_key": "zip/compress-files",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "compressed.zip",
+          "size": 42
+        }
+      ]
+    },
+    {
+      "package_key": "ocr/scan-document",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "scanned.txt",
+          "size": 337
+        }
+      ]
+    },
+    {
+      "package_key": "drawing/convert-drawing",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "converted.png",
+          "size": 6581
+        }
+      ]
+    },
+    {
+      "package_key": "drawing/create-drawing",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "drawing.png",
+          "size": 7820
+        }
+      ]
+    },
+    {
+      "package_key": "note/convert-one-to-pdf",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "output.pdf",
+          "size": 17790
+        }
+      ]
+    },
+    {
+      "package_key": "gis/read-gis-data",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "features.txt",
+          "size": 334
+        }
+      ]
+    },
+    {
+      "package_key": "page/convert-ps-to-pdf",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "output.pdf",
+          "size": 7013
+        }
+      ]
+    },
+    {
+      "package_key": "finance/convert-xbrl",
+      "wave": "wave-5",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "verdict": "PASS",
+      "invariant_violations": 0,
+      "output_files": [
+        {
+          "path": "report.ixbrl",
+          "size": 904
+        }
+      ]
+    }
+  ]
+}

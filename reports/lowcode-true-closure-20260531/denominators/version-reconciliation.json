@@ -1,0 +1,8 @@
+{
+  "words_denominator_source_version": "26.5.0",
+  "words_assembly_manifest_version": "25.5.0",
+  "words_directory_packages_props_version": "25.5.0",
+  "canonical_version": "25.5.0",
+  "versions_agree": true,
+  "note": "Denominator source_version 26.5.0 = API catalog version; assembly/props 25.5.0 = actual build package. These are DIFFERENT versions — catalog built from 26.5.0 DLL, examples built with 25.5.0."
+}

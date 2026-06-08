@@ -1,0 +1,13 @@
+{
+  "source": ".local/reflection-runs/zip/zip-reflection.json",
+  "family": "zip",
+  "package_id": "Aspose.ZIP",
+  "version": "26.5.0",
+  "target_framework": ".NETCoreApp,Version=v10.0",
+  "assembly_fingerprint": "02aa7aecd45442b01391a5bf5432d923e4381fb4fdd712dc88495530d901b0c7",
+  "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+  "lowcode_namespaces_found": [],
+  "candidate_type": "Archive",
+  "candidate_namespace": "Aspose.Zip",
+  "candidate_method": "Save"
+}

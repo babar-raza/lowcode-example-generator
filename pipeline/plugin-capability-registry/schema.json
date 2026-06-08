@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PluginCapabilityRegistryEntry",
+  "description": "Schema for a single entry in the plugin capability registry. Enforces the 12-value authoritative status enum and probe evidence requirements.",
+  "type": "object",
+  "required": ["family", "package_id", "type_name", "method_name", "status", "confidence_score"],
+  "properties": {
+    "family": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Family slug (e.g. barcode, imaging, zip)."
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "NuGet package ID (e.g. Aspose.BarCode). Never inferred from slug."
+    },
+    "type_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short or fully-qualified type name from DllReflector output."
+    },
+    "namespace": {
+      "type": "string",
+      "description": "Full namespace of the type."
+    },
+    "method_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary operation method name."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "WEBSITE_DISCOVERED",
+        "REFLECTION_CANDIDATE",
+        "AI_DRAFT",
+        "PROBE_CANDIDATE",
+        "PROBE_CONFIRMED",
+        "PROBE_FAILED",
+        "VERIFIED_PUBLISHABLE",
+        "STATIC_MAPPING_REQUIRED",
+        "BLOCKED_PACKAGE_UNAVAILABLE",
+        "BLOCKED_REFLECTION_FAILED",
+        "BLOCKED_LICENSE_RESTRICTED",
+        "REJECTED_BY_VALIDATOR"
+      ],
+      "description": "12-value authoritative status enum."
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.05,
+      "description": "Confidence score in [0.0, 1.05]."
+    },
+    "confidence_rationale": {
+      "type": "string",
+      "description": "Human-readable explanation of the confidence score."
+    },
+    "probe_evidence": {
+      "type": ["string", "null"],
+      "description": "Path to probe evidence artifacts. Required for VERIFIED_PUBLISHABLE and PROBE_CONFIRMED."
+    },
+    "failure_taxonomy": {
+      "type": ["string", "null"],
+      "enum": [
+        "PROBE_FAILED_LICENSE",
+        "PROBE_FAILED_API",
+        "PROBE_FAILED_BUILD",
+        "PROBE_FAILED_RESTORE",
+        "PROBE_FAILED_TIMEOUT",
+        null
+      ],
+      "description": "Failure taxonomy code. Required when status=PROBE_FAILED."
+    },
+    "rejection_reason": {
+      "type": ["string", "null"],
+      "enum": ["TYPE_NOT_IN_REFLECTION", "METHOD_NOT_IN_REFLECTION", null],
+      "description": "Required when status=REJECTED_BY_VALIDATOR."
+    },
+    "ai_source_flag": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this entry was AI-suggested; false if heuristic or manual."
+    },
+    "assembly_fingerprint": {
+      "type": ["string", "null"],
+      "description": "SHA-256 of the DLL used for reflection."
+    },
+    "plugin_page_hash": {
+      "type": ["string", "null"],
+      "description": "SHA-256 of the products.aspose.net plugin page HTML at crawl time."
+    },
+    "last_validated": {
+      "type": ["string", "null"],
+      "description": "ISO 8601 timestamp of last probe run or validation."
+    }
+  },
+  "if": {
+    "properties": { "status": { "const": "VERIFIED_PUBLISHABLE" } }
+  },
+  "then": {
+    "properties": {
+      "probe_evidence": { "type": "string", "minLength": 1 }
+    },
+    "required": ["probe_evidence"]
+  },
+  "else": {
+    "if": {
+      "properties": { "status": { "const": "PROBE_FAILED" } }
+    },
+    "then": {
+      "properties": {
+        "failure_taxonomy": {
+          "type": "string",
+          "enum": [
+            "PROBE_FAILED_LICENSE",
+            "PROBE_FAILED_API",
+            "PROBE_FAILED_BUILD",
+            "PROBE_FAILED_RESTORE",
+            "PROBE_FAILED_TIMEOUT"
+          ]
+        }
+      },
+      "required": ["failure_taxonomy"]
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,33 @@
+{
+  "family": "pdf",
+  "name": "splitter",
+  "label": "pdf/splitter",
+  "pilot": "pdf-controlled-pilot-pr10",
+  "csproj": "splitter.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 4,
+    "output_total_bytes": 201672,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 31096
+      },
+      {
+        "name": "output_page1.pdf",
+        "size": 56858
+      },
+      {
+        "name": "output_page2.pdf",
+        "size": 56859
+      },
+      {
+        "name": "output_page3.pdf",
+        "size": 56859
+      }
+    ]
+  }
+}

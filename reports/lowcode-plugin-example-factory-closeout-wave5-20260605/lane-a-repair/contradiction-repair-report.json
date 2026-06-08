@@ -1,0 +1,47 @@
+{
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "lane": "A",
+  "date": "2026-06-05",
+  "contradictions_repaired": [
+    {
+      "id": "C-01",
+      "description": "invariant-results.json listed 35 violations, implying real failures",
+      "root_cause": "Results were generated before INV-15 canonical_url and INV-16 trial-disclosure fixes were applied to Wave 4 packages",
+      "repair": "Re-ran check_package() on all 22 packages with current state; regenerated invariant-results.json",
+      "result": "22 INV-11 violations (bin/ directory — expected, not committed), 0 real violations, all 22 PASS"
+    },
+    {
+      "id": "C-02",
+      "description": "wave4-build-results.json had error_snippet in page/convert-xps-to-pdf entry despite verdict=PASS",
+      "root_cause": "Entry was partially updated when page fix was applied — verdict/passed/output_files were updated but the original error_snippet from the background script run was not removed",
+      "repair": "Removed error_snippet field; confirmed run exit_code=0; added explanatory fix_note",
+      "result": "Clean 10/10 PASS with no contradictory fields"
+    },
+    {
+      "id": "C-03",
+      "description": "lane-ledger claimed '3310+56=3366' tests passing but full suite shows 3376",
+      "root_cause": "3366 was from a unit-only test run (b9arc2iwq task output). Full suite (bl9ytfq9p) added 10 integration tests from test_runner_fallback_integration.py. The 56 new tests from the fixture factory were already included in 3366.",
+      "repair": "lane-ledger work_completed string updated to reflect 3376 (full suite). Separate unit-only note preserved.",
+      "result": "Authoritative count: 3376 passed, 18 skipped, 10 subtests passed",
+      "test_breakdown": {
+        "prior_suite_wave_a": 3310,
+        "new_fixture_factory_tests": 34,
+        "new_invariant_tests": 22,
+        "new_unit_tests_various": 10,
+        "total": 3376
+      }
+    },
+    {
+      "id": "C-04",
+      "description": "Prior evidence bundle SHA 65322179 was stale (built before page fix + INV-15/16 fixes)",
+      "root_cause": "Bundle was created during bidr1q2a4 background task which ran in parallel with the page fix work",
+      "repair": "Will rebuild final evidence bundle in Lane J after all mutations are complete",
+      "result": "PENDING — resolved in Lane J"
+    }
+  ],
+  "post_repair_state": {
+    "wave4_build_results": "10/10 PASS, clean (no error_snippets)",
+    "invariant_results": "22 packages, 0 real violations, 22/22 PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+    "test_count": "3376 passed, 18 skipped, 10 subtests"
+  }
+}

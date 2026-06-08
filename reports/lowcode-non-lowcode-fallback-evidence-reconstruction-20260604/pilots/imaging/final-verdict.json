@@ -1,0 +1,18 @@
+{
+  "pilot": "imaging",
+  "type": "FIXTURE_HEAVY_VERTICAL_SLICE",
+  "verdict": "PILOT_PASS_PROBE_CONFIRMED",
+  "replay_type": "MODULE_EXECUTION",
+  "steps_executed": 7,
+  "steps_passed": 7,
+  "fixture_size_bytes": 69,
+  "fixture_tier": "TIER-1",
+  "fixture_sha256_prefix": "b1ff9c8ea3a780ba",
+  "probe_verdict": "PROBE_CONFIRMED",
+  "probe_output_bytes": 1075,
+  "nl_v_passed": 14,
+  "nl_v_total": 14,
+  "format_authority_mutated": false,
+  "lowcode_yamls_mutated": false,
+  "timestamp": "2026-06-04T08:30:00Z"
+}

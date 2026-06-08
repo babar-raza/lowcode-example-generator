@@ -1,0 +1,29 @@
+{
+  "family": "words",
+  "name": "watermarker",
+  "label": "words/watermarker",
+  "pilot": "words-controlled-pilot",
+  "csproj": "watermarker.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 3,
+    "output_total_bytes": 44432,
+    "output_files": [
+      {
+        "name": "input.docx",
+        "size": 1408
+      },
+      {
+        "name": "output_image_watermark.docx",
+        "size": 21480
+      },
+      {
+        "name": "output_text_watermark.docx",
+        "size": 21544
+      }
+    ]
+  }
+}

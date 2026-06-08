@@ -1,0 +1,86 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:59:34",
+  "rules": [
+    {
+      "rule_id": "V-I-001",
+      "description": "artifact-verification metadata must match actual ZIP",
+      "check": "sha256(zip_file) == sidecar.sha256",
+      "failure_action": "ABORT — evidence bundle corrupted"
+    },
+    {
+      "rule_id": "V-I-002",
+      "description": "format-authority manifest contract count must equal sum of types across all family files",
+      "check": "sum(len(family['types']) for family in contracts) == canonical_count",
+      "expected": 42,
+      "failure_action": "FAIL — contract count drift"
+    },
+    {
+      "rule_id": "V-I-003",
+      "description": "Test assertions must match format-authority canonical count",
+      "check": "test_load_42_from_repo_local expects 42 (not 44)",
+      "failure_action": "FAIL — test expects wrong count"
+    },
+    {
+      "rule_id": "V-I-004",
+      "description": "SignerContext must not be counted as main-class without classification proof",
+      "check": "words_denominator.non_runnable_type_names contains SignerContext",
+      "failure_action": "FAIL — overcounting main-class coverage"
+    },
+    {
+      "rule_id": "V-I-005",
+      "description": "DigitalSignatureUtil example must not count as LowCode main-class without policy",
+      "check": "words-signer example.manifest.json.claimed_symbols does not include Aspose.Words.LowCode.Signer (no such class)",
+      "failure_action": "FAIL — false main-class claim"
+    },
+    {
+      "rule_id": "V-I-006",
+      "description": "Static PFX must not exist in package without provenance",
+      "check": "no *.pfx files in pr-dry-run example directories",
+      "failure_action": "FAIL — unproven static credential in package"
+    },
+    {
+      "rule_id": "V-I-007",
+      "description": "Program.cs must not generate PFX AND have static PFX",
+      "check": "if Program.cs contains CertificateRequest, no static .pfx in same directory",
+      "failure_action": "FAIL — redundant static PFX alongside runtime generation"
+    },
+    {
+      "rule_id": "V-I-008",
+      "description": "If slides-for-each is in package, README/denominator must mark it as helper not main-class",
+      "check": "slides_denominator.excluded_count_basis mentions ForEach",
+      "failure_action": "FAIL — helper example miscounted as main-class"
+    },
+    {
+      "rule_id": "V-I-009",
+      "description": "README controlled-pilot scope must include all and only main-class examples",
+      "check": "README table rows match denominator.runnable_scenario_ids",
+      "failure_action": "FAIL — README/denominator scope mismatch"
+    },
+    {
+      "rule_id": "V-I-010",
+      "description": "Package version must agree between denominator.source_version, assembly manifest, Directory.Packages.props",
+      "check": "assembly manifest package_version == Directory.Packages.props version",
+      "failure_action": "WARN — catalog version (for API reflection) may differ from build version"
+    },
+    {
+      "rule_id": "V-I-011",
+      "description": "Every blocker probe must have build.log and run.log or blocker-packet.md",
+      "check": "For each blocker directory: (build.log AND run.log) OR blocker-packet.md exists",
+      "failure_action": "FAIL — unproven blocker claim"
+    },
+    {
+      "rule_id": "V-I-012",
+      "description": "Final verdict must not claim all-main-class closure while Processor/OFD/FormImporter/Timestamp remain open",
+      "check": "verdict != LOWCODE_ALL_MAIN_CLASS_EXAMPLES_PUBLICATION_READY if open_true_blockers > 0",
+      "failure_action": "FAIL — overclaiming closure"
+    },
+    {
+      "rule_id": "V-I-013",
+      "description": "No push/PR/merge unless approval gates are explicitly set",
+      "check": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL == APPROVE_LIVE_PR before any git push",
+      "failure_action": "ABORT — unauthorized remote mutation"
+    }
+  ],
+  "total_rules": 13
+}

@@ -1,0 +1,919 @@
+{
+  "sprint": "non-lowcode-fallback-evidence-reconstruction-20260604",
+  "zip": "non-lowcode-fallback-evidence-reconstruction-20260604.zip",
+  "zip_sha256": "12a5e085088c5c68b3e8e66a3a35b6a44cc8e21ce5fce0f0c560cfd6ab617cd2",
+  "generated": "2026-06-04T09:30:00Z",
+  "entry_count": 182,
+  "entries": [
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/command-index.json",
+      "sha256": "e8f1d687b884db69ec7dd5a6c43eb95d41da49f8e9692ab137e47236fee8a771",
+      "size_bytes": 6209
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/raw-commands.log",
+      "sha256": "b1048cf6087a4c4eb361796e15c82298de9731c9fdfdbdeb165b1fbafb12c380",
+      "size_bytes": 2533
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-cells.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-cells.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-diagram.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-diagram.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-email.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-email.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-fa.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-fa.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-pdf.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-pdf.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-slides.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-slides.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-words.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/compat-words.stdout",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/full-regression.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/full-regression.stdout",
+      "sha256": "3b090c987d1906ba94afb4d086f74a75c121c59364fa9d80d66fe990ad37f3bd",
+      "size_bytes": 3863
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/git-status.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/git-status.stdout",
+      "sha256": "d797ddfe1a6c7bac78888bf40a74b9fb443ab6da122fac7cc95347bcae93c801",
+      "size_bytes": 2572
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/ruff-new-modules.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/ruff-new-modules.stdout",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "size_bytes": 20
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/runner-diff.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/runner-diff.stdout",
+      "sha256": "77e38c1d70b7cb241796eb92658ee7108b9def6db41fcc0b230b58847df3b090",
+      "size_bytes": 3217
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-family-config.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-family-config.stdout",
+      "sha256": "4eb30250bb620efd0a2cc8e6082f9e4d2ace42bf1b5698c1a780920f37c6dda8",
+      "size_bytes": 1875
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-heuristic-matcher.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-heuristic-matcher.stdout",
+      "sha256": "696a03159d80376c71f6f0bb49236ca59b32b7233723d075b58848b79898c4b4",
+      "size_bytes": 1538
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-nl-validators.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-nl-validators.stdout",
+      "sha256": "5f6ea1202e8ea5e70d41669d33d42f56a9d5a9177ced643caf732de9fd1b401b",
+      "size_bytes": 4090
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-probe-generator.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-probe-generator.stdout",
+      "sha256": "41992fd3e492550467de5424415ac2d1afba4db5bd935579470c022b48ddb048",
+      "size_bytes": 1909
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-registry-schema.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-registry-schema.stdout",
+      "sha256": "d04789574a6e24f8cf4739f818f4aac1998c64d796721171d1e74a35030ba745",
+      "size_bytes": 1738
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-runner-integration.stderr",
+      "sha256": "d29a0939bcb51176dd565a5e2d33214ce5204806b384bd80a72cb40861cdc7b9",
+      "size_bytes": 7
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/commands/stdout-stderr/test-runner-integration.stdout",
+      "sha256": "dba05eb56c4c38ad2382b11d995f323795c1b63a95a45f0cb26d834134a3bb5f",
+      "size_bytes": 1627
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/evidence/bundle-hygiene-policy.md",
+      "sha256": "efa51a54c70b282f82668ead25fed506e9a78685791fc187112ee9b772f9ed90",
+      "size_bytes": 1120
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/evidence/excluded-artifact-list.json",
+      "sha256": "b3a81b6887bf77ca324254a65520021c8843ca4d9b12310ee9769bc1bd57c818",
+      "size_bytes": 5220
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/evidence/included-artifact-list.json",
+      "sha256": "9298e0b8182877d8fc7ab6592e56df1ca801d0770080e2c884786d78851df524",
+      "size_bytes": 2856
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/healing/defect-ledger.json",
+      "sha256": "de8a02e8506e41e8f3fe3ddcbaa444d9e16062b6aa40d8295247a01464411597",
+      "size_bytes": 2057
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/healing/post-healing-qa.md",
+      "sha256": "23c9ee8ef258a476756646ef52588e4de029087dcd44b4c3e78aabcb15d181a0",
+      "size_bytes": 792
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/healing/repair-loop-1-result.md",
+      "sha256": "867759922cf36cd13fc71497fc2b6f3a58b3f144798add5987a34bf7ab332756",
+      "size_bytes": 914
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/healing/repair-taskcards.md",
+      "sha256": "25114df0675b9aebe36b222e48eae9cc93615a1cb32ff13fd3aefa2fb62ad16e",
+      "size_bytes": 1576
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/final-verdict.json",
+      "sha256": "4bfac8d331a46c060e1e9bb107d70a4d5dda9d8ebf01bd3eacd7e42e70385a8e",
+      "size_bytes": 446
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step1-catalog-load.stdout",
+      "sha256": "dd53c0719bbc5f8d0c7e334a0d5234048389c8a61bd5db7e2ed84f48ba2d5afb",
+      "size_bytes": 4417
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step2-alias-lookup.stdout",
+      "sha256": "1bd020cc73e7b20b48dacc6d8adf6520afff4ac89698687f58d0416eb766be4f",
+      "size_bytes": 64
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step3-reflection.stdout",
+      "sha256": "44837231b962842997905a88848463825783247cdf5e7d0e20b36997d61cceb8",
+      "size_bytes": 398
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step4-heuristic-matcher.stdout",
+      "sha256": "a7bd4262f50fa02cd45400055bb503e5c596b663cfac1a06e76c4e55cc20eee9",
+      "size_bytes": 228
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step5-ai-validation.stdout",
+      "sha256": "ade485581a9306229910c9a5cf3b82797f1817963ad9434f5aadedb1f93a4c5f",
+      "size_bytes": 133
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step6-nl-v-validator.stdout",
+      "sha256": "7d0ca81dc87d4d0f824461c0cd5e04d61e2a650442b003d6ad9f7728898bd3bc",
+      "size_bytes": 1917
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/raw-command-logs/step7-runner-dry-run.stdout",
+      "sha256": "2b05e00819281644cfcb2ddd1b7539655273e36ae7cca4aa1e6f7fe4da7700c6",
+      "size_bytes": 75
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/barcode/replay-report.md",
+      "sha256": "45e2bd5cc4287b3b457d929a7a2eca3b6b86b0d5e7b4a8a5021a3251fa3212bc",
+      "size_bytes": 1446
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/final-verdict.json",
+      "sha256": "ddfbb407614c26d05a1f0e01e73898146b0a66bfaa6bf9ea903389bc4dc149c7",
+      "size_bytes": 529
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step1-catalog.stdout",
+      "sha256": "8252283b930d616f40cd7ea2a1b88e4b42dfb08376c6a7b7781770f5fd225799",
+      "size_bytes": 64
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step2-alias.stdout",
+      "sha256": "ca9db4778a4257f9d83d1fc3a039c3e0d3f642bf4e4e2199751402c38d9e1c9e",
+      "size_bytes": 37
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step3-reflection.stdout",
+      "sha256": "d54629944b0d9aec33e15a1f097f7bbca13b7952111c66d0384ce665da7ed3bf",
+      "size_bytes": 437
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step4-fixture-gen.stdout",
+      "sha256": "9fce78c5863c993b160a5e7eb8af4d2d8f4e510b3afe66917095f3054ec699a5",
+      "size_bytes": 36
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step5-ai-validation.stdout",
+      "sha256": "a7f60414be1291b3301c2d11ea6fd8f86b6b4ee296b414b5fe81b4e45cefc290",
+      "size_bytes": 71
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/raw-command-logs/step6-nl-v.stdout",
+      "sha256": "f844405cfa72cd04ecdd67ed48606988fc71ba26b15e9be90bf9cba1ff148891",
+      "size_bytes": 29
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/imaging/replay-report.md",
+      "sha256": "b70796eb611db46ade616ea50e2c7bac1235f5999cb0c934a95e732bf86fe5ec",
+      "size_bytes": 1215
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/negative-control/final-verdict.json",
+      "sha256": "3b25811ed386a680dc56a8bf504f38f23c301b6f2ffd758829ebe4d0b2d34a53",
+      "size_bytes": 774
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/negative-control/hallucination-validator-run.stdout",
+      "sha256": "87bce73d3ed69820f3961ac3993264e37ec1a3059d10be3b7a56b88dba3f6aab",
+      "size_bytes": 387
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/pilots/negative-control/replay-report.md",
+      "sha256": "cc5618898f253675a350be12ff9ba5a6a9e1e3e624458963410bb7ff35184172",
+      "size_bytes": 710
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/qa/contradiction-register.json",
+      "sha256": "0a97c1c110955150e9f5f6b50b9927228027cb185a2a842e102b20125dbb3505",
+      "size_bytes": 3715
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/qa/previous-bundle-review.md",
+      "sha256": "a67038a8bdea5fddf5714aad38c3bfce1245250c2984cd9092f479adccb46f8e",
+      "size_bytes": 2302
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/qa/repair-plan.md",
+      "sha256": "8e08ca453d081bf71f1da569abebd7d6d001767ff9bce37d4e9db558fd99f322",
+      "size_bytes": 1199
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/source/changed-files-list.json",
+      "sha256": "493bead57427b32eff9664e39edfc2fba954d9e2f21f5d186ff42128d24abbe4",
+      "size_bytes": 1585
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/source/protected-files-diff-proof.md",
+      "sha256": "22ecd820e6b98f4816542a16779fb5240e379329f8f31c5ea36433b9e298e711",
+      "size_bytes": 831
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/source/snapshot-manifest.json",
+      "sha256": "6c7e84a877dffec67f0c546910f952c1c63dcff19a1a9beb5529c8acef435227",
+      "size_bytes": 8844
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/source/source-diffs.patch",
+      "sha256": "9b5520c45fba1d40e78e0c865c027e7e655fde58dea45850e077480d8c321b31",
+      "size_bytes": 7018
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/full-regression.log",
+      "sha256": "3b090c987d1906ba94afb4d086f74a75c121c59364fa9d80d66fe990ad37f3bd",
+      "size_bytes": 3863
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/ruff.log",
+      "sha256": "99cf1713d21036c7265613c502cc16dc7ef03a1750782dd13c64f1b1df3a1941",
+      "size_bytes": 37
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_ai_suggestion_schema.log",
+      "sha256": "0c2ae2c8ad67ebde80eac6884c9a97c471ec1261730accf1241fd3627cb11ece",
+      "size_bytes": 1593
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_barcode_family_onboarding.log",
+      "sha256": "fad8a37d3c8a85da0add8cc5133f2cbb814b4ae0ec3a2fc4bb3b028f514bde32",
+      "size_bytes": 1132
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_capability_registry_schema.log",
+      "sha256": "69d08312d08a0e48dbd295a9567e438e24d884d6f96c83daf516973bc78a03e0",
+      "size_bytes": 1738
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_family_config_fallback_strategy.log",
+      "sha256": "4c6f774df7eb88e6029f53b3de56d036d1a9976a3a18ee972c584ce4d331b718",
+      "size_bytes": 1875
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_heuristic_matcher.log",
+      "sha256": "341258e7325bdcea22cde9e48272ace5bcb1e4afa9b5aee016d6c1e5522f0afb",
+      "size_bytes": 1538
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_imaging_family_onboarding.log",
+      "sha256": "cb5652509845cc6d1c35f147008e208422c437dad1fc12f2abbdd5fa1a8a63f7",
+      "size_bytes": 1254
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_non_lowcode_validators.log",
+      "sha256": "cb35dc16926c43899d59adf6762a716209458b896866aec4dce6f82b2d0c1cbe",
+      "size_bytes": 4090
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_probe_generator.log",
+      "sha256": "3fa4e18725cfb0a90d0315ba85d67c665ce62dcf3c82e6e2ddbced976797287b",
+      "size_bytes": 1909
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_runner_fallback_integration.log",
+      "sha256": "cd3a6aeb7a35e7b1cd740863304231c5ef9925cf271a9b186137b5ef8606f3fa",
+      "size_bytes": 1627
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/raw/test_website_catalog_crawler.log",
+      "sha256": "07da42cb385f3c2a3af0388bc721f31fa48ffbb38dac27e14caec6b4795e9e75",
+      "size_bytes": 1550
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/tests/test-summary.json",
+      "sha256": "993e8145d1ae0dff2fa024b92bc5835a7b529ac5ea85d1022e73e5c98585f6c8",
+      "size_bytes": 2687
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/family_config/models.py",
+      "sha256": "ae418436d014dd94cb1695fe8360d39b7ddb4fd30e00a22a417d3fb8f4ac423f",
+      "size_bytes": 3306
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/runner.py",
+      "sha256": "1194f4815ca49616b48c6af813b3a5b8977e30877ea285f2e822b8ce605e46dc",
+      "size_bytes": 87355
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/website_catalog/__init__.py",
+      "sha256": "081bbb4377a442014d6f6a325762efae57a89a0ea32ce6ce60c66cf24160a3b6",
+      "size_bytes": 634
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/website_catalog/crawler.py",
+      "sha256": "3057ba9538c1cb35a1c7a6912923041655f82fc35b1ae364564512904a13569b",
+      "size_bytes": 6948
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/website_catalog/models.py",
+      "sha256": "efc437950210c8ac7164a8df60a117ed5d24e28be6609210235ee35dc54cd4dd",
+      "size_bytes": 694
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/website_catalog/drift_detector.py",
+      "sha256": "28b6c5b8ba916c59ebef2cb102b59c1be55a1d131956b9b101ee089a9fd653e8",
+      "size_bytes": 890
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/plugin_detector/heuristic_matcher.py",
+      "sha256": "62b223d0f6fead1c3f452e38567d89197ea06bfb5815f1c6813ac47875f49057",
+      "size_bytes": 6466
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/probe_generator/__init__.py",
+      "sha256": "d73e5a02252add821969651c1a013c592bd5c0aedc8ff5d5f8090e49a0032e5f",
+      "size_bytes": 420
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/probe_generator/generator.py",
+      "sha256": "b22cbf7e6a14f3390396772c4f1d4f42fa53b0d2f46dc96652bd7ef2292340d5",
+      "size_bytes": 5793
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/probe_generator/runner.py",
+      "sha256": "6fd8e205fe9b027c84e3484197827cae36d0637c54dbc4783f1730e82706ed00",
+      "size_bytes": 10292
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/ai_acceleration/__init__.py",
+      "sha256": "fde2651a9ae20d97a6d263bfea0bb9becd852533e39eb404ad271e324aed1aca",
+      "size_bytes": 277
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/ai_acceleration/suggestion.py",
+      "sha256": "7bfeb644e7203e52007078a120cbc397bd8885f44f10098ad936ceae6735f1b3",
+      "size_bytes": 2749
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/ai_acceleration/validator.py",
+      "sha256": "9c8b5fff077c149957e037e9118e7db9cfe5b61da488f1053fbc92eebe66ac86",
+      "size_bytes": 2535
+    },
+    {
+      "arc_path": "source-evidence/src/plugin_examples/evidence_validator/rules/non_lowcode.py",
+      "sha256": "5dccaff6ad531f2e970a3328ab978a58a7af93488063e5aae6f07d56f7076a1c",
+      "size_bytes": 21507
+    },
+    {
+      "arc_path": "source-evidence/pipeline/schemas/family-config.schema.json",
+      "sha256": "7210d503660c4498aaeadfaae3aab8bc5e5995ff8f07e1610f4501e6faa57a71",
+      "size_bytes": 9248
+    },
+    {
+      "arc_path": "source-evidence/pipeline/schemas/ai-suggestion-schema.json",
+      "sha256": "096312726ec5ef83e4ee9dc174109c90ddeecf7869e6972d51bb7aee77710387",
+      "size_bytes": 1951
+    },
+    {
+      "arc_path": "source-evidence/pipeline/schemas/plugin-capability-registry-schema.json",
+      "sha256": "d8847d6a7541c8fc652e9ee05ac93db7dad22b2e3c8b08c1489fd3a66f3cdc7a",
+      "size_bytes": 4057
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/schema.json",
+      "sha256": "d8847d6a7541c8fc652e9ee05ac93db7dad22b2e3c8b08c1489fd3a66f3cdc7a",
+      "size_bytes": 4057
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/schema.yaml",
+      "sha256": "c840000c43abfcc4c85bbe4bea10aafc4db759c5226483da4f25a9dc5b712d5a",
+      "size_bytes": 2181
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/package-aliases.json",
+      "sha256": "7718187a5b16d3b52c306677f4ff556321ccdabc9c385ad5d7014842544cf98d",
+      "size_bytes": 860
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/barcode.yaml",
+      "sha256": "a7ac15e09f003caa126adac749bfddbbc144ffd20a267704ba430033c225fd83",
+      "size_bytes": 1035
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/imaging.yaml",
+      "sha256": "5866298d401c8aa0321b3df8be0f2af3676cc343994f28d2ee7d0127e74ad8eb",
+      "size_bytes": 1178
+    },
+    {
+      "arc_path": "source-evidence/pipeline/plugin-capability-registry/website-catalog.json",
+      "sha256": "c77f063bf6b9fef224f9be03e3b690126bc83c84419acb46276694384345e65a",
+      "size_bytes": 3577
+    },
+    {
+      "arc_path": "source-evidence/pipeline/configs/families/barcode.yml",
+      "sha256": "60f6e2de7811bd8f7a105a7aa649b383691391cca54f369e87d58bd07af58f22",
+      "size_bytes": 1571
+    },
+    {
+      "arc_path": "source-evidence/pipeline/configs/families/imaging.yml",
+      "sha256": "ccb56c1f0c9e572585836d429c7394e4e2feb338424447b07ea4f5f315e8a05b",
+      "size_bytes": 1627
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_family_config_fallback_strategy.py",
+      "sha256": "4692a2b54cf22be93dbc881357ec841e097ac2aea9f4784421b02f73a8b2b536",
+      "size_bytes": 3880
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_capability_registry_schema.py",
+      "sha256": "5298873a87fec7fe372f932e6ffe93a0d9de7f5af0304e617903885285724b6f",
+      "size_bytes": 4704
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_website_catalog_crawler.py",
+      "sha256": "33ba85a9042b5e21edd5363dc199dae1510487bb0073ab0e330154c5c9a100ce",
+      "size_bytes": 4926
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_heuristic_matcher.py",
+      "sha256": "7a7ad23c195ca70cb9917eacddb7987a8e0fa2b7846f64e27e62e05399ec7341",
+      "size_bytes": 5151
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_probe_generator.py",
+      "sha256": "29ffe6ef3a16a902a3d3a527be4bc862a604a1944ee9ed392027636263fc0cef",
+      "size_bytes": 8222
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_barcode_family_onboarding.py",
+      "sha256": "19d25f2e21df0e00d65365b67c1a25a4856c013c8237f6bb1bce82e15042f3f6",
+      "size_bytes": 2948
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_imaging_family_onboarding.py",
+      "sha256": "93aa7244fe8ed2d3c12fe837e56607801fb0ec42d253def22112a4c5c52823ec",
+      "size_bytes": 3628
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_ai_suggestion_schema.py",
+      "sha256": "b085f1056d45f01b4025f7fe2412d741991c6f606cc4c81e45ab248b3d5cb1a3",
+      "size_bytes": 4840
+    },
+    {
+      "arc_path": "source-evidence/tests/unit/test_non_lowcode_validators.py",
+      "sha256": "1cb724c0b6ca910a57094f9fc856a49ce950fdebfc516c9059d00394e99f6155",
+      "size_bytes": 13645
+    },
+    {
+      "arc_path": "source-evidence/tests/integration/test_runner_fallback_integration.py",
+      "sha256": "b8c200fedc619715c1fc056ec744858f035eb7f96783088c2263ac9b5b049164",
+      "size_bytes": 6184
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/probe/Program.cs",
+      "sha256": "e3c8f52cff10b6fd623ff5ab4d49b08571d90a3020724d6a9b4f93658a61581d",
+      "size_bytes": 853
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/probe/BarcodeGeneratorProbe.csproj",
+      "sha256": "4765337281dfc9e77baf003509f8969d635214ea4bf9485d53cc961302f48dd1",
+      "size_bytes": 344
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/Program.cs",
+      "sha256": "d0d500e7cf6e1c0e7bf688d3008afa3869844b319867eb686101a7de753f15d4",
+      "size_bytes": 1079
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/fixture_gen.py",
+      "sha256": "1eee04a73739f425e02ff318f13c49244e006289af431f356deeeb1756588c05",
+      "size_bytes": 1583
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/output-validation.json",
+      "sha256": "b625ac08e659b36d23dfaf893331263d298609219bfd726548bf67d46ff173c1",
+      "size_bytes": 922
+    },
+    {
+      "arc_path": "source-evidence/reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/output-validation.json",
+      "sha256": "a806d2bb79dabef2ad03df15f78fbec937b38483f95d61f0ad52dfde3657945b",
+      "size_bytes": 1221
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/commands/raw-commands.log",
+      "sha256": "b7a76f7a7b4b621b38cb3f0c8d8248697b57e017916a5d634b01eb13d447d36d",
+      "size_bytes": 2597
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/coordinator/lane-ledger.json",
+      "sha256": "af948ab7c2015374d3ece755f44399372533058d6b3975733a72555a111740d3",
+      "size_bytes": 3062
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/evidence/sidecar-verification.log",
+      "sha256": "7e21ab8c6ebb7954a633abf8cc3fabe99be79c1d40d04d2ebc7e91286ef99b79",
+      "size_bytes": 859
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/evidence/source-bundle-manifest.json",
+      "sha256": "ad67608c047d12c04e077e66f3f687dde26408af02073677778d4ec510b61a4d",
+      "size_bytes": 29628
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/healing/pilot-defect-ledger.json",
+      "sha256": "09cf5a381be130437e6f5f7ad217c93d047007355f32e1b105402429cb6eb964",
+      "size_bytes": 772
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/healing/pilot-repair-taskcards.md",
+      "sha256": "3b0b1ef3a54136fff0ccf7b9eb99e036bb8ce156fc63d4a6c2381288d8bc0a64",
+      "size_bytes": 405
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/healing/post-healing-pilot-rerun-results.json",
+      "sha256": "bed489097bdc65227b7f7fb7f28b5a1cf203d3ad9fbba99331b3c95058abbbdb",
+      "size_bytes": 324
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/iv/pilot-acceptance-matrix.json",
+      "sha256": "2360b650e9eb543c135c129378a4fe4bbc5632462d09d3ba8fb8490aa383b768",
+      "size_bytes": 1578
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/iv/pilot-contradiction-register.json",
+      "sha256": "a80dbd0de135d6a3c683766b8a55915c2712a6da53cbbeedfdf9a43b54f7e54d",
+      "size_bytes": 215
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/iv/pilot-independent-verification.md",
+      "sha256": "f4c59ff25d5cbf7e9650c30cd466caa77b86d6b6a09c20b8be828842b943dfa7",
+      "size_bytes": 1538
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/ai-or-manual-suggestion.json",
+      "sha256": "066cbf99439a8786b1b4b044acd467fd720db40358e39659b9dc4096f1f8bf45",
+      "size_bytes": 283
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/candidate-mapping.json",
+      "sha256": "3a45b890c18e360f5ea3e73cc0ceed955d33ccff388616f5a4f88bd02ae1b8a1",
+      "size_bytes": 479
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/catalog-input.json",
+      "sha256": "e32be1436fbad88bba096462a75bf8bc6c2068025099b931e122b08ceaee6264",
+      "size_bytes": 282
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/e2e-pilot-report.md",
+      "sha256": "600dfbe7eb5575349a7b950caa5c515b78399bdb8df59532cc7023d92ac8477d",
+      "size_bytes": 479
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/final-pilot-verdict.md",
+      "sha256": "2b3d3b257917dea15ecca164a4eb0ae6776e29fadceb3845f31a2effaa10a0d9",
+      "size_bytes": 2220
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/output-validation.json",
+      "sha256": "b625ac08e659b36d23dfaf893331263d298609219bfd726548bf67d46ff173c1",
+      "size_bytes": 922
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/probe-build.log",
+      "sha256": "74430a91b261dbeeb28d93f5b2314e0d59c5672823442169057b65f46892698e",
+      "size_bytes": 216
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/probe-restore.log",
+      "sha256": "3ae95049dbf16f4a1066aed43e0dfe1a3428d837b6994a628b9d14e39775e9bf",
+      "size_bytes": 183
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/probe-run.log",
+      "sha256": "a3e324df05886fbc94d201e41bcf5b9baa247295b39566185f6480b9ee011f19",
+      "size_bytes": 151
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/reflection-input.json",
+      "sha256": "ee055aa53146347f4f7a43059c4a4639b0f3d353f91328321253270d46baa81d",
+      "size_bytes": 428
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/registry-entry-before.yaml",
+      "sha256": "17f1afb6db43584e1cb42247e92ab17d03d60eb0e6ebbe0806f741fe6225dd43",
+      "size_bytes": 532
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/runner-dry-run-result.json",
+      "sha256": "ced63d36e2f731a9469c2d78be9ea3749044fa27601c7cce46956b453a19d99d",
+      "size_bytes": 564
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/barcode/validator-result.json",
+      "sha256": "d9a7e23ea55ec0e885e5cd21f08eff1ee4bed666ddc90796775208fe7f7dd3d4",
+      "size_bytes": 2072
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/ai-or-manual-suggestion.json",
+      "sha256": "8260ad91cb17558910b745d54d1056b2f0d5f629d8aadeebf6c60533a99d3287",
+      "size_bytes": 277
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/candidate-mapping.json",
+      "sha256": "4e88925c183576082c53b087634ced5fce10982da8590ce22e73cdce8bbb86cc",
+      "size_bytes": 479
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/catalog-input.json",
+      "sha256": "1fba3dae9b4740f2e0b82cce7f0a539e083452724cccb4d06c31310444e5af37",
+      "size_bytes": 282
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/e2e-pilot-report.md",
+      "sha256": "222eca27f6e9cd4baf333efce9de89bd19369fa64eb3f08d6919681170d3bf35",
+      "size_bytes": 548
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/final-pilot-verdict.md",
+      "sha256": "dc965f7911c5780f055aea2882316553f45f1f9f952d22dda35cc7e999b22665",
+      "size_bytes": 1508
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/fixture-generation-proof.md",
+      "sha256": "7f8c5c890b4ff556a50af16a8f95868eea6496753a5a57041db8f907bea0dc11",
+      "size_bytes": 484
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/fixture-sha-proof.json",
+      "sha256": "3b139654932e5b3624a6e4f7ce2b071ef13d9d16bc13a78a0a8c250e45bdc3e7",
+      "size_bytes": 369
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/output-validation.json",
+      "sha256": "a806d2bb79dabef2ad03df15f78fbec937b38483f95d61f0ad52dfde3657945b",
+      "size_bytes": 1221
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/probe-build.log",
+      "sha256": "4c5b98ae6387056992676fc96a1702bffafef5a55510a4516c47a64be0b63687",
+      "size_bytes": 216
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/probe-restore.log",
+      "sha256": "862d96163ffec50ceb47876a1fff52c6a3e8d7f0ab2cce3476534595debdfd37",
+      "size_bytes": 182
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/probe-run.log",
+      "sha256": "f7a90c2342097a1060fc29249c7e86b10665c1cc959344a0dd14b446c5dee7c3",
+      "size_bytes": 161
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/reflection-input.json",
+      "sha256": "402228d0659e06534094db4fd9166ca8f7a7294b6bcc2354fcba1e825b5b2e59",
+      "size_bytes": 575
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/registry-entry-before.yaml",
+      "sha256": "1528cc89b2c8bd4f067b934a21de2435c3ff6858c32ee4af333b08e0e8f8134a",
+      "size_bytes": 517
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/runner-dry-run-result.json",
+      "sha256": "6d52e0c6a30008ba5383ca26d7b14e9cc0f7e70a3ab4d8fc241fad8d3bc586fb",
+      "size_bytes": 539
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/imaging/validator-result.json",
+      "sha256": "2f755ece51173989ae71e47d68c70293880e531de275a74cfd695cfcaf6754e7",
+      "size_bytes": 1901
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/negative-control/control-case-selection.md",
+      "sha256": "72bb8b3106592f14285ecb35cff2e24a570e2f5d242f27613030391348a8cb20",
+      "size_bytes": 1321
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/negative-control/control-run-result.json",
+      "sha256": "97ab60046509ebd650f4ea907e4cb8502dae113172b54070343bd9ff93dc80d2",
+      "size_bytes": 744
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/negative-control/final-pilot-verdict.md",
+      "sha256": "bea9b485bcc16184b6ffe9454286f75db4db600d74b663fb1c56eba5dfd0e580",
+      "size_bytes": 1355
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/pilots/negative-control/validator-result.json",
+      "sha256": "6fb794e7fadef38821fbb95771284c214eb926fc88d53dfa85d90a141460e953",
+      "size_bytes": 981
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/preflight/environment-proof.md",
+      "sha256": "8f4d9b51b69e29ec035645b312faeff3eeaf96341421a45fba57b5220f057915",
+      "size_bytes": 778
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/output-validation.json",
+      "sha256": "b625ac08e659b36d23dfaf893331263d298609219bfd726548bf67d46ff173c1",
+      "size_bytes": 922
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/probe/BarcodeGeneratorProbe.csproj",
+      "sha256": "4765337281dfc9e77baf003509f8969d635214ea4bf9485d53cc961302f48dd1",
+      "size_bytes": 344
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/probe/probe-output.png",
+      "sha256": "05380af613ea5bc8febd8fe398fd32a4ff24e7bbe2fbe09bf7160596d9ef3ada",
+      "size_bytes": 17210
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/probe/Program.cs",
+      "sha256": "e3c8f52cff10b6fd623ff5ab4d49b08571d90a3020724d6a9b4f93658a61581d",
+      "size_bytes": 853
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/output-validation.json",
+      "sha256": "a806d2bb79dabef2ad03df15f78fbec937b38483f95d61f0ad52dfde3657945b",
+      "size_bytes": 1221
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/fixture_gen.py",
+      "sha256": "1eee04a73739f425e02ff318f13c49244e006289af431f356deeeb1756588c05",
+      "size_bytes": 1583
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/ImagingProbe.csproj",
+      "sha256": "38aa3b5954bb4ea3c0cee3cacfb048d5ada46b2caaa6aa0e4cd641aae8e8ac33",
+      "size_bytes": 344
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/input.png",
+      "sha256": "b1ff9c8ea3a780bad09b346c423d2d0e46815926879b18e841d928376a946640",
+      "size_bytes": 69
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/probe-output.jpg",
+      "sha256": "bd19f5b08ce6b5af96ce7dca4fd560695af2cda97b6354c3849b210f2bd186d0",
+      "size_bytes": 1075
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/probe/Program.cs",
+      "sha256": "d0d500e7cf6e1c0e7bf688d3008afa3869844b319867eb686101a7de753f15d4",
+      "size_bytes": 1079
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/reflection/family-namespace-matrix.json",
+      "sha256": "b2b26916d018160b410629ec8b8402a8918953beb7e5ecf42e5872af64bb4f3f",
+      "size_bytes": 4774
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/reflection/nuget-availability-proof.json",
+      "sha256": "eaccbc22c6cd92103b99f4cca28988afde6ba737681d6a16e47220956d21d17c",
+      "size_bytes": 3879
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/reflection/package-fingerprint-ledger.json",
+      "sha256": "0f1d71be2b55d9662b857034abd96c601d72171c4a19ff687c37e56aa8651fb6",
+      "size_bytes": 953
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/reflection/public-api-inventory/barcode.json",
+      "sha256": "13274a307e40d2f7316bbb5fe3270b0a3e1ec6c6dc318f3c97bd2b2ac0fc5fbd",
+      "size_bytes": 328833
+    },
+    {
+      "arc_path": "lowcode-non-lowcode-fallback-implementation-20260604/reflection/public-api-inventory/imaging.json",
+      "sha256": "e8512bf8576565ca9e545785020a8e8350a9470c738142162c33c19b12ababc5",
+      "size_bytes": 2570779
+    }
+  ]
+}

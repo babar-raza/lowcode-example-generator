@@ -1,0 +1,94 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave15-20260606",
+  "audit_target": "lowcode-plugin-canonical-package-wave14-20260606",
+  "audit_date": "2026-06-06",
+
+  "bundle": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave14-20260606.zip",
+    "actual_sha256": "0cfddd35f4a013eff83e2d28266e90fe6c35f7e1a37ff82af7c78fe026fc4de4",
+    "actual_size_bytes": 747902,
+    "actual_entry_count": 51,
+    "computed_from": "hashlib.sha256 + zipfile.ZipFile analysis"
+  },
+
+  "sidecar": {
+    "path": ".local/evidence-bundles/lowcode-plugin-canonical-package-wave14-20260606.zip.sha256",
+    "exists": true,
+    "sidecar_sha_recorded": "0cfddd35f4a013eff83e2d28266e90fe6c35f7e1a37ff82af7c78fe026fc4de4",
+    "sidecar_matches_actual_bundle": true
+  },
+
+  "bundled_iv_results": {
+    "path_in_bundle": "reports/lowcode-plugin-canonical-package-wave14-20260606/iv/iv-results.json",
+    "bundled_verdict": "IV_FAIL",
+    "bundled_checks_pass": 45,
+    "bundled_checks_fail": 1,
+    "bundled_checks_total": 46,
+    "failing_check": "IV-07 — Wave 14 taskcards: 0 PENDING (9 unclosed Lane I taskcards at IV capture time)",
+    "note": "Bundle was finalized BEFORE the final IV re-run. iv-results.json on disk was updated post-bundle."
+  },
+
+  "disk_iv_results": {
+    "path_on_disk": "reports/lowcode-plugin-canonical-package-wave14-20260606/iv/iv-results.json",
+    "disk_verdict": "IV_PASS",
+    "disk_checks_pass": 46,
+    "disk_checks_fail": 0,
+    "committed_in": "chore commit 3dcacbe (after bundle was finalized)"
+  },
+
+  "bundled_closeout": {
+    "path_in_bundle": "reports/lowcode-plugin-canonical-package-wave14-20260606/final/sprint-closeout.json",
+    "claimed_verdict": "SPRINT_COMPLETE",
+    "claimed_iv_verdict": "IV_PASS",
+    "claimed_iv_checks_pass": 46,
+    "claimed_iv_checks_fail": 0,
+    "claimed_sha256": "9a34a24060d87a3368a05a3efc3b22def9bec82afef0528387fdd665d8f526b7",
+    "claimed_size_bytes": 747861,
+    "claimed_entries": 51
+  },
+
+  "disk_closeout": {
+    "path_on_disk": "reports/lowcode-plugin-canonical-package-wave14-20260606/final/sprint-closeout.json",
+    "claimed_verdict": "SPRINT_COMPLETE",
+    "claimed_sha256": "0cfddd35f4a013eff83e2d28266e90fe6c35f7e1a37ff82af7c78fe026fc4de4",
+    "claimed_size_bytes": 747902,
+    "claimed_entries": 51,
+    "note": "On-disk closeout was updated to correct SHA after bundle was finalized. Bundled closeout has stale SHA."
+  },
+
+  "taskcard_state": {
+    "disk_taskcards_total": 50,
+    "disk_taskcards_complete": 50,
+    "disk_taskcards_pending": 0,
+    "bundled_taskcards_complete": 50,
+    "bundled_taskcards_pending": 0,
+    "note": "All taskcards were closed before bundle was finalized. Taskcards are correct."
+  },
+
+  "adversarial_review": {
+    "type": "FINAL",
+    "path": "reports/lowcode-plugin-canonical-package-wave14-20260606/adversarial-review/final-adversarial-review.json",
+    "bundled": true,
+    "verdict": "FINAL_ADVERSARIAL_REVIEW_PASS",
+    "note": "Adversarial review passed but did NOT catch the IV_FAIL/SPRINT_COMPLETE contradiction because it checked taskcard state rather than bundled iv-results.json verdict."
+  },
+
+  "url_verification_state": {
+    "method": "prior_sprint_catalog_cross_reference",
+    "entries_upgraded": 21,
+    "verification_confidence": "CATALOG_CONFIRMED_OLD_NET_URL_ONLY",
+    "browser_verified": false,
+    "root_link_verified": false,
+    "current_canonical_urls_confirmed": false,
+    "note": "21 MCU->CIV upgrades used old /net/ catalog URLs. No current canonical URL was browser/root-link verified. Deferred to Wave 15."
+  },
+
+  "git_state": {
+    "branch": "main",
+    "head_commit": "20040c7",
+    "feat_commit": "48671e5",
+    "chore_commits": ["3dcacbe", "20040c7"]
+  },
+
+  "summary": "Wave 14 real progress is valid: CIV=66, MCU=1, PCLC=14, 2 new packages proven. However the bundle was finalized with a stale iv-results.json (IV_FAIL), stale closeout SHA, and stale closeout size. The disk state is correct. Wave 14 must be classified as WAVE14_PROGRESS_ACCEPTED_WITH_INVALID_CLEAN_CLOSEOUT_REPAIRED_BY_WAVE15."
+}

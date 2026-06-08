@@ -1,0 +1,7 @@
+{
+  "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL": "NOT_SET",
+  "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL": "NOT_SET",
+  "live_pr_allowed": false,
+  "merge_allowed": false,
+  "gh_token_present": true
+}

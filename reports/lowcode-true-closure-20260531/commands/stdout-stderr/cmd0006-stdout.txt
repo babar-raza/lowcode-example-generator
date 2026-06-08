@@ -1,0 +1,9 @@
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\pdf-form-importer.csproj]
+
+Build FAILED.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\Program.cs(3,18): error CS0234: The type or namespace name 'LowCode' does not exist in the namespace 'Aspose.Pdf' (are you missing an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\true-closure-20260531\probes\pdf-form-importer\pdf-form-importer.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:01:23.70

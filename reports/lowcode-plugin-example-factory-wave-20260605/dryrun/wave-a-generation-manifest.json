@@ -1,0 +1,67 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "wave": "A",
+  "generated_at": "2026-06-05",
+  "packages": [
+    {
+      "key": "barcode/generate-qr-code",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\generate-qr-code",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "barcode/scan-barcode",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\scan-barcode",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "svg/svg-to-pdf-converter",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\svg\\svg-to-pdf-converter",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "tex/latex-figure-renderer",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\tex\\latex-figure-renderer",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "zip/create-archive",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\create-archive",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "zip/compress-folder",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\compress-folder",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/resize-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\resize-image",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/crop-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\crop-image",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/filter-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\filter-image",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/merge-images",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/watermark-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\watermark-image",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "key": "imaging/rotate-image",
+      "pkg_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\rotate-image",
+      "status": "SCAFFOLDED"
+    }
+  ]
+}

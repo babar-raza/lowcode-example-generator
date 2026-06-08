@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "signature",
+  "label": "pdf/signature",
+  "pilot": "pdf-controlled-pilot-pr9",
+  "csproj": "signature.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

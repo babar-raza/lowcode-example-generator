@@ -1,0 +1,61 @@
+{
+  "sprint": "lowcode-merge-sprint-20260602",
+  "results": [
+    {
+      "family": "cells",
+      "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+      "pr_number": 7,
+      "pr_url": "https://github.com/aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples/pull/7",
+      "merged": true,
+      "merge_sha": "6c7342124798e5d19a8e6a2e75b51254c26c331c",
+      "error": ""
+    },
+    {
+      "family": "diagram",
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "pr_number": 3,
+      "pr_url": "https://github.com/aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples/pull/3",
+      "merged": true,
+      "merge_sha": "8c035d40c8163aaf3490aac2f01fedb140527454",
+      "error": ""
+    },
+    {
+      "family": "email",
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "pr_number": 2,
+      "pr_url": "https://github.com/aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples/pull/2",
+      "merged": true,
+      "merge_sha": "2adf4d401c1d44fd06a8ab30168a6fb3b737cdc3",
+      "error": ""
+    },
+    {
+      "family": "pdf",
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "pr_number": 22,
+      "pr_url": "https://github.com/aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples/pull/22",
+      "merged": true,
+      "merge_sha": "eb02e39a3961cab2fb72bd3be4f4befcfa87b300",
+      "error": ""
+    },
+    {
+      "family": "slides",
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "pr_number": 2,
+      "pr_url": "https://github.com/aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples/pull/2",
+      "merged": true,
+      "merge_sha": "98596b2490c7550aeeb617a535240e86cfbdc168",
+      "error": ""
+    },
+    {
+      "family": "words",
+      "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+      "pr_number": 8,
+      "pr_url": "https://github.com/aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples/pull/8",
+      "merged": true,
+      "merge_sha": "cfe4e3b85a647fd3d36d6e04a5cf7d9539f22766",
+      "error": ""
+    }
+  ],
+  "merged_count": 6,
+  "failed_count": 0
+}

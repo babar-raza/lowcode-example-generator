@@ -1,0 +1,12 @@
+{
+  "family": "diagram",
+  "name": "diagram-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "DiagramConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "diagram-converter.csproj",
+  "files": [
+    "diagram-converter.csproj",
+    "Program.cs"
+  ]
+}

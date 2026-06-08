@@ -1,0 +1,81 @@
+{
+  "family": "barcode",
+  "registry_file": "pipeline\\plugin-capability-registry\\barcode.yaml",
+  "total_rules": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "rule_id": "NL-V01",
+      "passed": true,
+      "evidence": "Registry file exists: barcode.yaml"
+    },
+    {
+      "rule_id": "NL-V02",
+      "passed": true,
+      "evidence": "status=PROBE_CONFIRMED"
+    },
+    {
+      "rule_id": "NL-V03",
+      "passed": true,
+      "evidence": "confidence_score=0.95"
+    },
+    {
+      "rule_id": "NL-V04",
+      "passed": true,
+      "evidence": "package_id=Aspose.BarCode"
+    },
+    {
+      "rule_id": "NL-V05",
+      "passed": true,
+      "evidence": "probe_evidence=reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/barcode/output-validation.json"
+    },
+    {
+      "rule_id": "NL-V06",
+      "passed": true,
+      "evidence": "SKIP: status is not VERIFIED_PUBLISHABLE"
+    },
+    {
+      "rule_id": "NL-V07",
+      "passed": true,
+      "evidence": "SKIP: status is not PROBE_FAILED"
+    },
+    {
+      "rule_id": "NL-V08",
+      "passed": true,
+      "evidence": "SKIP: status is not REJECTED_BY_VALIDATOR"
+    },
+    {
+      "rule_id": "NL-V09",
+      "passed": true,
+      "evidence": "assembly_fingerprint=0ec2ae6950854ca7..."
+    },
+    {
+      "rule_id": "NL-V10",
+      "passed": true,
+      "evidence": "last_validated=2026-06-04T00:00:00Z"
+    },
+    {
+      "rule_id": "NL-V11",
+      "passed": true,
+      "evidence": "status=PROBE_CONFIRMED (PROBE_UNKNOWN banned)"
+    },
+    {
+      "rule_id": "NL-V12",
+      "passed": true,
+      "evidence": "status is PROBE_CONFIRMED (not VERIFIED_PUBLISHABLE)"
+    },
+    {
+      "rule_id": "NL-V13",
+      "passed": true,
+      "evidence": "No format-authority reference in entry"
+    },
+    {
+      "rule_id": "NL-V14",
+      "passed": true,
+      "evidence": "type_name=BarcodeGenerator, method_name=Save"
+    }
+  ],
+  "verdict": "ALL_NL_V_RULES_PASS",
+  "timestamp": "2026-06-04T06:00:00Z"
+}

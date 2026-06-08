@@ -1,0 +1,3 @@
+example.manifest.json
+merger.csproj
+Program.cs

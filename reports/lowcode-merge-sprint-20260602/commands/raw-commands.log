@@ -1,0 +1,114 @@
+[2026-06-02T11:56:30.891313+00:00] === SPRINT: lowcode-merge-sprint-20260602 ===
+[2026-06-02T11:56:30.891494+00:00] === A: PREFLIGHT ===
+[2026-06-02T11:56:30.898405+00:00] CMD-001 [preflight] git status
+[2026-06-02T11:56:31.020946+00:00] CMD-002 [preflight] Python version
+[2026-06-02T11:56:31.054699+00:00] CMD-003 [preflight] dotnet version
+[2026-06-02T11:56:31.262825+00:00] CMD-004 [preflight] gh version
+[2026-06-02T11:56:31.506443+00:00] CMD-005 [preflight] PR state cells
+[2026-06-02T11:56:32.620008+00:00] CMD-006 [preflight] PR state diagram
+[2026-06-02T11:56:33.772752+00:00] CMD-007 [preflight] PR state email
+[2026-06-02T11:56:34.951769+00:00] CMD-008 [preflight] PR state pdf
+[2026-06-02T11:56:35.908396+00:00] CMD-009 [preflight] PR state slides
+[2026-06-02T11:56:37.053591+00:00] CMD-010 [preflight] PR state words
+[2026-06-02T11:56:38.153174+00:00] CMD-011 [preflight] Permissions cells
+[2026-06-02T11:56:39.028257+00:00] CMD-012 [preflight] Permissions diagram
+[2026-06-02T11:56:40.045511+00:00] CMD-013 [preflight] Permissions email
+[2026-06-02T11:56:40.840617+00:00] CMD-014 [preflight] Permissions pdf
+[2026-06-02T11:56:41.774028+00:00] CMD-015 [preflight] Permissions slides
+[2026-06-02T11:56:42.622519+00:00] CMD-016 [preflight] Permissions words
+[2026-06-02T11:56:43.646438+00:00] CMD-017 [preflight] Branch protection cells
+[2026-06-02T11:56:44.442523+00:00] CMD-018 [preflight] Branch protection diagram
+[2026-06-02T11:56:45.240781+00:00] CMD-019 [preflight] Branch protection email
+[2026-06-02T11:56:46.040001+00:00] CMD-020 [preflight] Branch protection pdf
+[2026-06-02T11:56:46.932394+00:00] CMD-021 [preflight] Branch protection slides
+[2026-06-02T11:56:47.827722+00:00] CMD-022 [preflight] Branch protection words
+[2026-06-02T11:56:48.638853+00:00] Preflight: HEAD=9db39ad7, PRs=ALL_OPEN, admin=YES, protection=NONE
+[2026-06-02T11:56:48.638939+00:00] === B: EXCLUDED-ITEM REAUDIT ===
+[2026-06-02T11:56:48.664547+00:00] Reaudit: 12 items, 0 changed
+[2026-06-02T11:56:48.664629+00:00] === C: FORMIMPORTER UPSTREAM BUG PROBE ===
+[2026-06-02T11:56:48.664656+00:00] CMD-023 [formimporter] NuGet version probe
+[2026-06-02T11:56:49.681901+00:00] FormImporter: current=26.5.0, latest=26.5.0, newer=False
+[2026-06-02T11:56:49.681989+00:00] === D: FIXTURE SYSTEM ===
+[2026-06-02T11:56:49.714898+00:00] Fixture system: documented, all self-contained
+[2026-06-02T11:56:49.714990+00:00] === E: DIAGRAM CONVERTER OUTPUT FIX ===
+[2026-06-02T11:56:49.738787+00:00] Diagram converter: root cause = measurement artifact, PASS
+[2026-06-02T11:56:49.738898+00:00] === F: PR BRANCH PACKAGE REPLAY ===
+[2026-06-02T11:56:49.739482+00:00] CMD-024 [replay] List examples on PR branch cells
+[2026-06-02T11:56:50.619148+00:00] CMD-025 [replay] Check README on PR branch cells
+[2026-06-02T11:56:51.506000+00:00]   cells: 0/9 examples, README=False, leaked=0
+[2026-06-02T11:56:51.506138+00:00] CMD-026 [replay] List examples on PR branch diagram
+[2026-06-02T11:56:52.327154+00:00] CMD-027 [replay] Check README on PR branch diagram
+[2026-06-02T11:56:53.171413+00:00]   diagram: 0/2 examples, README=False, leaked=0
+[2026-06-02T11:56:53.171541+00:00] CMD-028 [replay] List examples on PR branch email
+[2026-06-02T11:56:53.900703+00:00] CMD-029 [replay] Check README on PR branch email
+[2026-06-02T11:56:54.740552+00:00]   email: 0/1 examples, README=False, leaked=0
+[2026-06-02T11:56:54.740684+00:00] CMD-030 [replay] List examples on PR branch pdf
+[2026-06-02T11:56:55.509040+00:00] CMD-031 [replay] Check README on PR branch pdf
+[2026-06-02T11:56:56.249054+00:00]   pdf: 0/20 examples, README=False, leaked=0
+[2026-06-02T11:56:56.249190+00:00] CMD-032 [replay] List examples on PR branch slides
+[2026-06-02T11:56:57.040025+00:00] CMD-033 [replay] Check README on PR branch slides
+[2026-06-02T11:56:57.872481+00:00]   slides: 0/3 examples, README=False, leaked=0
+[2026-06-02T11:56:57.872607+00:00] CMD-034 [replay] List examples on PR branch words
+[2026-06-02T11:56:58.674490+00:00] CMD-035 [replay] Check README on PR branch words
+[2026-06-02T11:56:59.534184+00:00]   words: 0/9 examples, README=False, leaked=0
+[2026-06-02T11:56:59.542723+00:00] PR branch replay: ISSUES
+[2026-06-02T11:56:59.542813+00:00] === G: MERGE READINESS ===
+[2026-06-02T11:56:59.561130+00:00] Merge readiness: ALL_READY
+[2026-06-02T11:56:59.561216+00:00] === H: MERGE PRs ===
+[2026-06-02T11:56:59.563986+00:00] CMD-036 [merge] Merge PR #7 for cells
+[2026-06-02T11:57:04.605323+00:00] CMD-037 [merge] Get merge SHA for cells
+[2026-06-02T11:57:05.649289+00:00]   cells: MERGED sha=6c734212
+[2026-06-02T11:57:05.649340+00:00] CMD-038 [merge] Merge PR #3 for diagram
+[2026-06-02T11:57:09.082986+00:00] CMD-039 [merge] Get merge SHA for diagram
+[2026-06-02T11:57:10.240533+00:00]   diagram: MERGED sha=8c035d40
+[2026-06-02T11:57:10.240653+00:00] CMD-040 [merge] Merge PR #2 for email
+[2026-06-02T11:57:14.244466+00:00] CMD-041 [merge] Get merge SHA for email
+[2026-06-02T11:57:15.147383+00:00]   email: MERGED sha=2adf4d40
+[2026-06-02T11:57:15.147500+00:00] CMD-042 [merge] Merge PR #22 for pdf
+[2026-06-02T11:57:19.041941+00:00] CMD-043 [merge] Get merge SHA for pdf
+[2026-06-02T11:57:20.108972+00:00]   pdf: MERGED sha=eb02e39a
+[2026-06-02T11:57:20.109102+00:00] CMD-044 [merge] Merge PR #2 for slides
+[2026-06-02T11:57:23.720135+00:00] CMD-045 [merge] Get merge SHA for slides
+[2026-06-02T11:57:24.653070+00:00]   slides: MERGED sha=98596b24
+[2026-06-02T11:57:24.653163+00:00] CMD-046 [merge] Merge PR #8 for words
+[2026-06-02T11:57:28.183272+00:00] CMD-047 [merge] Get merge SHA for words
+[2026-06-02T11:57:29.195740+00:00]   words: MERGED sha=cfe4e3b8
+[2026-06-02T11:57:29.201484+00:00] Merge: 6/6
+[2026-06-02T11:57:29.201579+00:00] === I: BRANCH DELETION ===
+[2026-06-02T11:57:29.201659+00:00] CMD-048 [cleanup] Delete branch lowcode-examples-cells-readme-io-final from aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples
+[2026-06-02T11:57:30.273187+00:00]   cells: branch lowcode-examples-cells-readme-io-final DELETED
+[2026-06-02T11:57:30.273291+00:00] CMD-049 [cleanup] Delete branch lowcode-examples-diagram-readme-io-final from aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples
+[2026-06-02T11:57:31.283816+00:00]   diagram: branch lowcode-examples-diagram-readme-io-final DELETED
+[2026-06-02T11:57:31.283948+00:00] CMD-050 [cleanup] Delete branch lowcode-examples-email-readme-io-final from aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples
+[2026-06-02T11:57:32.326951+00:00]   email: branch lowcode-examples-email-readme-io-final DELETED
+[2026-06-02T11:57:32.327015+00:00] CMD-051 [cleanup] Delete branch lowcode-examples-pdf-readme-io-final from aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples
+[2026-06-02T11:57:33.423871+00:00]   pdf: branch lowcode-examples-pdf-readme-io-final DELETED
+[2026-06-02T11:57:33.423935+00:00] CMD-052 [cleanup] Delete branch lowcode-examples-slides-readme-io-final from aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples
+[2026-06-02T11:57:34.332469+00:00]   slides: branch lowcode-examples-slides-readme-io-final DELETED
+[2026-06-02T11:57:34.332540+00:00] CMD-053 [cleanup] Delete branch lowcode-examples-words-readme-io-final from aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples
+[2026-06-02T11:57:35.316541+00:00]   words: branch lowcode-examples-words-readme-io-final DELETED
+[2026-06-02T11:57:35.320817+00:00] Branch deletion: 6/6
+[2026-06-02T11:57:35.320908+00:00] === J: POST-MERGE VERIFICATION ===
+[2026-06-02T11:57:35.320943+00:00] CMD-054 [postmerge] Check PR state after merge cells
+[2026-06-02T11:57:36.145209+00:00] CMD-055 [postmerge] Check PR state after merge diagram
+[2026-06-02T11:57:37.141512+00:00] CMD-056 [postmerge] Check PR state after merge email
+[2026-06-02T11:57:38.277459+00:00] CMD-057 [postmerge] Check PR state after merge pdf
+[2026-06-02T11:57:39.160450+00:00] CMD-058 [postmerge] Check PR state after merge slides
+[2026-06-02T11:57:40.086922+00:00] CMD-059 [postmerge] Check PR state after merge words
+[2026-06-02T11:57:40.999463+00:00] CMD-060 [postmerge] Check branch exists cells
+[2026-06-02T11:57:41.891500+00:00] CMD-061 [postmerge] Check branch exists diagram
+[2026-06-02T11:57:42.706981+00:00] CMD-062 [postmerge] Check branch exists email
+[2026-06-02T11:57:43.605985+00:00] CMD-063 [postmerge] Check branch exists pdf
+[2026-06-02T11:57:44.395039+00:00] CMD-064 [postmerge] Check branch exists slides
+[2026-06-02T11:57:45.097133+00:00] CMD-065 [postmerge] Check branch exists words
+[2026-06-02T11:57:45.857220+00:00] CMD-066 [postmerge] Check examples on main cells
+[2026-06-02T11:57:46.633393+00:00] CMD-067 [postmerge] Check examples on main diagram
+[2026-06-02T11:57:47.350022+00:00] CMD-068 [postmerge] Check examples on main email
+[2026-06-02T11:57:48.330510+00:00] CMD-069 [postmerge] Check examples on main pdf
+[2026-06-02T11:57:49.400716+00:00] CMD-070 [postmerge] Check examples on main slides
+[2026-06-02T11:57:50.196617+00:00] CMD-071 [postmerge] Check examples on main words
+[2026-06-02T11:57:51.045467+00:00] Post-merge: prs_merged=True, no_dangling=True, files_ok=False
+[2026-06-02T11:57:51.045536+00:00] === K: FINAL VALIDATION AND IV ===
+[2026-06-02T11:57:51.067545+00:00] === IV ===
+[2026-06-02T11:57:51.084949+00:00] Validators: 9/12, IV: 8/11
+[2026-06-02T11:57:51.085003+00:00] Verdict: LOWCODE_PUBLICATION_REPAIR_REQUIRED

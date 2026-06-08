@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-06-05",
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "note": "Regenerated post-repair. INV-11 violations are expected (bin/ from dotnet build, not committed). No real violations.",
+  "total": 22,
+  "total_listed_violations": 22,
+  "inv11_bin_violations": 22,
+  "real_violations": 0,
+  "all_pass": true,
+  "packages": {
+    "barcode/generate-qr-code": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\generate-qr-code"
+    },
+    "barcode/scan-barcode": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\barcode\\scan-barcode"
+    },
+    "imaging/crop-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\crop-image"
+    },
+    "imaging/filter-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\filter-image"
+    },
+    "imaging/merge-images": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\merge-images"
+    },
+    "imaging/resize-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\resize-image"
+    },
+    "imaging/rotate-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\rotate-image"
+    },
+    "imaging/watermark-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\watermark-image"
+    },
+    "svg/svg-to-pdf-converter": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\svg\\svg-to-pdf-converter"
+    },
+    "tex/latex-figure-renderer": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\tex\\latex-figure-renderer"
+    },
+    "zip/compress-folder": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\compress-folder"
+    },
+    "zip/create-archive": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-a",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\create-archive"
+    },
+    "barcode/generate-barcode": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\barcode\\generate-barcode"
+    },
+    "barcode/recognize-barcode": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\barcode\\recognize-barcode"
+    },
+    "html/convert-html-to-pdf": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\html\\convert-html-to-pdf"
+    },
+    "imaging/compress-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\imaging\\compress-image"
+    },
+    "imaging/convert-image": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\imaging\\convert-image"
+    },
+    "ocr/extract-text": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\ocr\\extract-text"
+    },
+    "ocr/recognize-text": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\ocr\\recognize-text"
+    },
+    "page/convert-xps-to-pdf": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\page\\convert-xps-to-pdf"
+    },
+    "svg/svg-to-image-converter": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\svg\\svg-to-image-converter"
+    },
+    "tasks/convert-mpp-to-pdf": {
+      "violations": [
+        "INV-11: bin/ directory present (should not be committed)"
+      ],
+      "real_violations": [],
+      "verdict": "PASS",
+      "classification": "PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+      "wave": "wave-4",
+      "pkg_dir": "reports\\lowcode-plugin-example-factory-parallel-wave-20260605\\dryrun\\examples\\tasks\\convert-mpp-to-pdf"
+    }
+  }
+}

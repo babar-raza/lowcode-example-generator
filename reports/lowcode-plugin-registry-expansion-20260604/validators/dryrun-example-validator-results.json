@@ -1,0 +1,78 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "generated_at": "2026-06-04",
+  "wave": 2,
+  "dryrun_examples_checked": [
+    {
+      "package_id": "html-html-to-pdf",
+      "path": "reports/lowcode-plugin-registry-expansion-20260604/dryrun/examples/html-html-to-pdf",
+      "checks": {
+        "csproj_exists": true,
+        "program_cs_exists": true,
+        "manifest_exists": true,
+        "output_dir_exists": true,
+        "manifest_has_canonical_url": true,
+        "manifest_dry_run_status_validated": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "package_id": "tasks-project-to-pdf",
+      "path": "reports/lowcode-plugin-registry-expansion-20260604/dryrun/examples/tasks-project-to-pdf",
+      "checks": {
+        "csproj_exists": true,
+        "program_cs_exists": true,
+        "manifest_exists": true,
+        "output_dir_exists": true,
+        "manifest_has_canonical_url": true,
+        "manifest_dry_run_status_validated": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "package_id": "svg-svg-to-image",
+      "path": "reports/lowcode-plugin-registry-expansion-20260604/dryrun/examples/svg-svg-to-image",
+      "checks": {
+        "csproj_exists": true,
+        "program_cs_exists": true,
+        "manifest_exists": true,
+        "output_dir_exists": true,
+        "manifest_has_canonical_url": true,
+        "manifest_dry_run_status_validated": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "package_id": "tex-latex-math-renderer",
+      "path": "reports/lowcode-plugin-registry-expansion-20260604/dryrun/examples/tex-latex-math-renderer",
+      "checks": {
+        "csproj_exists": true,
+        "program_cs_exists": true,
+        "manifest_exists": true,
+        "output_dir_exists": true,
+        "manifest_has_canonical_url": true,
+        "manifest_dry_run_status_validated": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "package_id": "ocr-scanned-image-to-text",
+      "path": "reports/lowcode-plugin-registry-expansion-20260604/dryrun/examples/ocr-scanned-image-to-text",
+      "checks": {
+        "csproj_exists": true,
+        "program_cs_exists": true,
+        "manifest_exists": true,
+        "output_dir_exists": true,
+        "manifest_has_canonical_url": true,
+        "manifest_dry_run_status_validated": true
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "summary": {
+    "packages_checked": 5,
+    "pass": 5,
+    "fail": 0,
+    "verdict": "ALL_PASS"
+  }
+}

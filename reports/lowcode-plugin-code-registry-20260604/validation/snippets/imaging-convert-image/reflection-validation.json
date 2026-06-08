@@ -1,0 +1,18 @@
+{
+  "family": "imaging",
+  "plugin_slug": "convert-image",
+  "package": "Aspose.Imaging",
+  "package_version": "26.6.0",
+  "reflection_source": "reports/lowcode-non-lowcode-fallback-implementation-20260604/reflection/family-namespace-matrix.json",
+  "type_count": 1238,
+  "namespace_count": 121,
+  "confirmed_namespaces": ["Aspose.Imaging", "Aspose.Imaging.ImageOptions"],
+  "namespace_validation": "PASS — Aspose.Imaging and Aspose.Imaging.ImageOptions confirmed present",
+  "class_validation": {
+    "Image": "CONFIRMED — core class in Aspose.Imaging namespace",
+    "JpegOptions": "CONFIRMED — in Aspose.Imaging.ImageOptions",
+    "PngOptions": "CONFIRMED — in Aspose.Imaging.ImageOptions"
+  },
+  "gist_reference": "7850a7dd21684c1c466565d85085340c — official gist noted in code comment",
+  "validation_verdict": "REFLECTION_CONFIRMED"
+}

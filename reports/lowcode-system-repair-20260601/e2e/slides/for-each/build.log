@@ -1,0 +1,11 @@
+EXIT: 0
+--- STDOUT ---
+  for-each -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\slides-controlled-pilot\examples\slides\lowcode\for-each\bin\Debug\net8.0\for-each.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.24
+
+--- STDERR ---

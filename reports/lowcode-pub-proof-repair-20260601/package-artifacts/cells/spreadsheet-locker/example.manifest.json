@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "name": "spreadsheet-locker",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "SpreadsheetLocker",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "spreadsheet-locker.csproj",
+  "files": [
+    "Program.cs",
+    "spreadsheet-locker.csproj"
+  ]
+}

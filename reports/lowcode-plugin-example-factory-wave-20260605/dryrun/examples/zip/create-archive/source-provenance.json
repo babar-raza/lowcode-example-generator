@@ -1,0 +1,12 @@
+{
+  "family": "zip",
+  "plugin_slug": "create-archive",
+  "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+  "implementation_model": "LOAD_SAVE_OPTIONS",
+  "nuget_package": "Aspose.ZIP",
+  "nuget_version": "24.12.0",
+  "github_links": ["https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFiles/CreateSelfExtractingArchive.cs"],
+  "code_hashes": ["7202859f9ec7ce49ad7a4dfb5c303bd2"],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05"
+}

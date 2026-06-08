@@ -1,0 +1,9 @@
+{
+  "example": "security",
+  "csproj": "security.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "PDF encrypted\n",
+  "stderr_tail": ""
+}

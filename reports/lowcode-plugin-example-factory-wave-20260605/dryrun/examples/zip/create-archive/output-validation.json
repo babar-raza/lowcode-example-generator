@@ -1,0 +1,13 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\create-archive",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\zip\\create-archive\\output\\archive.zip",
+      "size": 632
+    }
+  ],
+  "verdict": "PASS"
+}

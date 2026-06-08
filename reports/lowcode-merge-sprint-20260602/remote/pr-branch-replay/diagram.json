@@ -1,0 +1,9 @@
+{
+  "family": "diagram",
+  "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+  "branch": "lowcode-examples-diagram-readme-io-final",
+  "status": "SUPERSEDED_BY_MERGE",
+  "note": "Branch merged into main and deleted. Post-merge main-branch verification confirms our 2 published examples present (plus 2 pre-existing).",
+  "verified_on_main": true,
+  "examples_confirmed": 2
+}

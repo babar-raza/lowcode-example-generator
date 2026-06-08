@@ -1,0 +1,224 @@
+# Plugin-Code Registry: imaging
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: imaging
+package_id: Aspose.Imaging
+github_repo: https://github.com/aspose-imaging/Aspose.Imaging-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+
+plugins:
+  - plugin_slug: convert-image
+    plugin_url: https://products.aspose.net/imaging/net/convert-image
+    page_hash: 7b7d01b33fbfdbc0
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [3487b7663cb22f1d962b2fbb40a538e0]
+    namespaces_used:
+      - "Aspose.Imaging.FileFormats.Jpeg"
+      - "Aspose.Imaging"
+      - "Aspose.Imaging.Examples.CSharp"
+      - "Aspose.Imaging.ImageOptions"
+    classes_used:
+      - "Image"
+      - "JpegOptions"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs
+    next_action: "Extract symbols from ConvertImageWithGrayscale.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ConvertImageWithGrayscale.cs"
+
+  - plugin_slug: resize-image
+    plugin_url: https://products.aspose.net/imaging/net/resize-image
+    page_hash: decbb2536acebb5c
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [56fc7b5e7c6cc66afecebbe676839751]
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Plugins/Aspose.UmbracoImageResizer/AfterSaveHandler.cs
+    next_action: "Extract symbols from AfterSaveHandler.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Plugins/Aspose.UmbracoImageResizer/AfterSaveHandler.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from AfterSaveHandler.cs"
+
+  - plugin_slug: compress-image
+    plugin_url: https://products.aspose.net/imaging/net/compress-image
+    page_hash: b8d2b69a85ef86c6
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [d3b9c0150cc88bcdbb5bce142ee9a7df]
+    namespaces_used:
+      - "Aspose.Imaging.ImageOptions"
+      - "Aspose.Imaging"
+      - "Aspose.Imaging.Examples.CSharp"
+    classes_used:
+      - "Image"
+      - "SvgOptions"
+      - "SvgRasterizationOptions"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CompressedVectorFormats.cs
+    next_action: "Extract symbols from CompressedVectorFormats.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CompressedVectorFormats.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CompressedVectorFormats.cs"
+
+  - plugin_slug: crop-image
+    plugin_url: https://products.aspose.net/imaging/net/crop-image
+    page_hash: f9d04e1d8ca3db10
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [3aad688311d310d9ba26999932bfdc6e]
+    namespaces_used:
+      - "Aspose.Imaging"
+      - "Aspose.Imaging.FileFormats.Emf"
+      - "Aspose.Imaging.Examples.CSharp"
+    classes_used:
+      - "Image"
+      - "Rectangle"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CropEMFFile.cs
+    next_action: "Extract symbols from CropEMFFile.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CropEMFFile.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CropEMFFile.cs"
+
+  - plugin_slug: rotate-image
+    plugin_url: https://products.aspose.net/imaging/net/rotate-image
+    page_hash: bf70cb85cb3063e4
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [16cf1301838025a9be501094c7519639]
+    namespaces_used:
+      - "Aspose.Imaging.FileFormats.Dicom"
+      - "Aspose.Imaging.ImageOptions"
+    classes_used:
+      - "DicomImage"
+      - "FileStream"
+      - "BmpOptions"
+      - "FileMode"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/DICOM/FlipDICOMImage.cs
+    next_action: "Extract symbols from FlipDICOMImage.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/DICOM/FlipDICOMImage.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from FlipDICOMImage.cs"
+
+  - plugin_slug: watermark-image
+    plugin_url: https://products.aspose.net/imaging/net/watermark-image
+    page_hash: 6297f8b1608be324
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [6fc0083c2f13041e56128a2046fc7d81]
+    namespaces_used:
+      - "Aspose.Imaging.Brushes"
+    classes_used:
+      - "Font"
+      - "SolidBrush"
+      - "Image"
+      - "StringFormat"
+      - "Matrix"
+      - "Graphics"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/AddDiagonalWatermarkToImage.cs
+    next_action: "Extract symbols from AddDiagonalWatermarkToImage.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/AddDiagonalWatermarkToImage.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from AddDiagonalWatermarkToImage.cs"
+
+  - plugin_slug: merge-images
+    plugin_url: https://products.aspose.net/imaging/net/merge-images
+    page_hash: 350eee7a01318690
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [e214bcf2c6512548d4aec83bef89529a]
+    namespaces_used:
+      - "Aspose.Imaging.Sources"
+      - "Aspose.Imaging.ImageOptions"
+      - "Aspose.Imaging"
+    classes_used:
+      - "Image"
+      - "JpegOptions"
+      - "FileCreateSource"
+      - "Graphics"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/DrawingAndFormattingImages/CombineImages.cs
+    next_action: "Extract symbols from CombineImages.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/DrawingAndFormattingImages/CombineImages.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from CombineImages.cs"
+
+  - plugin_slug: filter-image
+    plugin_url: https://products.aspose.net/imaging/net/filter-image
+    page_hash: bed596737c10bf77
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [e2aa2baa4226ee9d6348bbedc4e7e154]
+    namespaces_used:
+      - "Aspose.Imaging.ImageFilters.FilterOptions"
+      - "Aspose.Imaging"
+    classes_used:
+      - "Image"
+      - "GaussWienerFilterOptions"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ApplyGaussWienerFilter.cs
+    next_action: "Extract symbols from ApplyGaussWienerFilter.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/imaging.md"
+      - "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ApplyGaussWienerFilter.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from ApplyGaussWienerFilter.cs"

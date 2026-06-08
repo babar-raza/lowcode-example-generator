@@ -1,0 +1,54 @@
+{
+  "family": "slides",
+  "examples_on_main": [
+    "compress",
+    "convert",
+    "merger"
+  ],
+  "count": 3,
+  "expected": 3,
+  "count_match": true,
+  "excluded_leaked": [],
+  "no_excluded_leak": true,
+  "has_readme": true,
+  "readme_all_mentioned": true,
+  "readme_mentions": {
+    "compress": true,
+    "convert": true,
+    "merger": true
+  },
+  "per_example": [
+    {
+      "example": "compress",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.pptx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "convert",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input.pptx"
+      ],
+      "ok": true
+    },
+    {
+      "example": "merger",
+      "has_program_cs": true,
+      "has_single_csproj": true,
+      "duplicate_csproj": false,
+      "input_files": [
+        "input1.pptx",
+        "input2.pptx"
+      ],
+      "ok": true
+    }
+  ],
+  "all_ok": true
+}

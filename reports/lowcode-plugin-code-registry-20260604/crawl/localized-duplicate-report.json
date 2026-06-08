@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-06-04",
+  "strategy": "All URLs normalized to english canonical (no /en/ prefix)",
+  "locale_sitemaps": 36,
+  "duplicates_removed": "All localized URLs excluded; canonical /barcode/net/{slug} form used",
+  "canonical_count": 65
+}

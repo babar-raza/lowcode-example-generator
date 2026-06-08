@@ -1,0 +1,66 @@
+lowcode-post-pub-normalize-20260603 Validator Test Results
+============================================================
+Date: 2026-06-03
+
+V01 E2E Aggregate Backed by Raw Logs ... PASS
+  patrol-e2e-aggregate.json present
+  e2e/raw-logs/: 132 log files (44x3 phases)
+  commands/stdout-stderr/: 132 log files (flat copies)
+
+V02 README Lists All Published Examples . PASS
+  cells: 9/9, diagram: 2/2, email: 1/1
+  pdf: 20/20, slides: 3/3, words: 9/9
+
+V03 No Dangling Branches ............... PASS
+  6/6 repos: main-only, 0 open PRs
+
+V04 No Static Certificate Files ........ PASS
+  0 cert files across 6 repos
+
+V05 Diagram Converter Output ........... PASS
+  output.vdx created (17,976 bytes)
+
+V06 Timestamp Environment Documentation  PASS
+  Program.cs line 13: TSA comment
+  Program.cs line 32: graceful-failure catch
+
+V07 FormImporter Retry Status Current ... PASS
+  Last checked: 2026-06-03 (today)
+
+V08 Program.cs + .csproj Present ........ PASS
+  44/44 examples: Program.cs + exactly 1 .csproj
+
+V09 No Missing Required Fixture ......... PASS
+  All inputs committed or runtime-generated
+
+V10 Command Ledger Actually Exists ...... PASS
+  commands/raw-commands.log: PRESENT (text ledger with timestamps)
+  commands/command-index.json: PRESENT (structured index)
+  commands/stdout-stderr/: PRESENT (132 files)
+
+V11 No Unclassified Extra Folders ....... PASS
+  All folder counts match intended denominators:
+  cells=9/9 diagram=2/2 email=1/1 pdf=20/20 slides=3/3 words=9/9
+  3 legacy extras removed via PRs #4 (diagram) and #25 (pdf)
+
+V12 PDF pdfa-converter vs pdf-aconverter  PASS
+  pdf-aconverter REMOVED (PR #25 merged)
+  Only pdfa-converter remains
+
+V13 Diagram Prefixed vs Unprefixed ...... PASS
+  diagram-diagram-converter REMOVED (PR #4 merged)
+  diagram-pdf-converter REMOVED (PR #4 merged)
+  Only diagram-converter and pdf-converter remain
+
+V14 Validator References Valid Paths .... PASS
+  All referenced evidence paths exist in bundle:
+  - commands/raw-commands.log: YES
+  - commands/command-index.json: YES
+  - commands/stdout-stderr/: YES (132 files)
+  - e2e/raw-logs/: YES (132 files)
+  - e2e/patrol-e2e-aggregate.json: YES
+  - e2e/e2e-command-index.json: YES
+
+============================================================
+TOTAL: 14/14 PASS, 0 FAIL
+VERDICT: ALL_VALIDATORS_PASS

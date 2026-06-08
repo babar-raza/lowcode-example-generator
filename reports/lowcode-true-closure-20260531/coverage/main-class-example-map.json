@@ -1,0 +1,170 @@
+{
+  "words/Comparer": {
+    "scenario_id": "words-comparer",
+    "status": "published"
+  },
+  "words/Converter": {
+    "scenario_id": "words-converter",
+    "status": "published"
+  },
+  "words/MailMerger": {
+    "scenario_id": "words-mail-merger",
+    "status": "published"
+  },
+  "words/Merger": {
+    "scenario_id": "words-merger",
+    "status": "published"
+  },
+  "words/Replacer": {
+    "scenario_id": "words-replacer",
+    "status": "published"
+  },
+  "words/ReportBuilder": {
+    "scenario_id": "words-report-builder",
+    "status": "published"
+  },
+  "words/Splitter": {
+    "scenario_id": "words-splitter",
+    "status": "published"
+  },
+  "words/Watermarker": {
+    "scenario_id": "words-watermarker",
+    "status": "published"
+  },
+  "cells/HtmlConverter": {
+    "scenario_id": "cells-html-converter",
+    "status": "published"
+  },
+  "cells/ImageConverter": {
+    "scenario_id": "cells-image-converter",
+    "status": "published"
+  },
+  "cells/JsonConverter": {
+    "scenario_id": "cells-json-converter",
+    "status": "published"
+  },
+  "cells/PdfConverter": {
+    "scenario_id": "cells-pdf-converter",
+    "status": "published"
+  },
+  "cells/SpreadsheetConverter": {
+    "scenario_id": "cells-spreadsheet-converter",
+    "status": "published"
+  },
+  "cells/SpreadsheetLocker": {
+    "scenario_id": "cells-spreadsheet-locker",
+    "status": "published"
+  },
+  "cells/SpreadsheetMerger": {
+    "scenario_id": "cells-spreadsheet-merger",
+    "status": "published"
+  },
+  "cells/SpreadsheetSplitter": {
+    "scenario_id": "cells-spreadsheet-splitter",
+    "status": "published"
+  },
+  "cells/TextConverter": {
+    "scenario_id": "cells-text-converter",
+    "status": "published"
+  },
+  "pdf/Converter": {
+    "scenario_id": "pdf-converter",
+    "status": "published"
+  },
+  "pdf/DocConverter": {
+    "scenario_id": "pdf-doc-converter",
+    "status": "published"
+  },
+  "pdf/FormEditor": {
+    "scenario_id": "pdf-form-editor",
+    "status": "published"
+  },
+  "pdf/FormExporter": {
+    "scenario_id": "pdf-form-exporter",
+    "status": "published"
+  },
+  "pdf/FormFiller": {
+    "scenario_id": "pdf-form-filler",
+    "status": "published"
+  },
+  "pdf/FormFlattener": {
+    "scenario_id": "pdf-form-flattener",
+    "status": "published"
+  },
+  "pdf/ImageConverter": {
+    "scenario_id": "pdf-image-converter",
+    "status": "published"
+  },
+  "pdf/Merger": {
+    "scenario_id": "pdf-merger",
+    "status": "published"
+  },
+  "pdf/Optimizer": {
+    "scenario_id": "pdf-optimizer",
+    "status": "published"
+  },
+  "pdf/PageNumberStamper": {
+    "scenario_id": "pdf-page-number-stamper",
+    "status": "published"
+  },
+  "pdf/PageSplitter": {
+    "scenario_id": "pdf-page-splitter",
+    "status": "published"
+  },
+  "pdf/PdfAConverter": {
+    "scenario_id": "pdf-pdf-aconverter",
+    "status": "published"
+  },
+  "pdf/Redactor": {
+    "scenario_id": "pdf-redactor",
+    "status": "published"
+  },
+  "pdf/Rotator": {
+    "scenario_id": "pdf-rotator",
+    "status": "published"
+  },
+  "pdf/Security": {
+    "scenario_id": "pdf-security",
+    "status": "published"
+  },
+  "pdf/SignatureAdder": {
+    "scenario_id": "pdf-signature-adder",
+    "status": "published"
+  },
+  "pdf/SignatureVerifier": {
+    "scenario_id": "pdf-signature-verifier",
+    "status": "published"
+  },
+  "pdf/Stamper": {
+    "scenario_id": "pdf-stamper",
+    "status": "published"
+  },
+  "pdf/TextExtractor": {
+    "scenario_id": "pdf-text-extractor",
+    "status": "published"
+  },
+  "slides/Compress": {
+    "scenario_id": "slides-compress",
+    "status": "published"
+  },
+  "slides/Convert": {
+    "scenario_id": "slides-convert",
+    "status": "published"
+  },
+  "slides/Merger": {
+    "scenario_id": "slides-merger",
+    "status": "published"
+  },
+  "diagram/Converter": {
+    "scenario_id": "diagram-converter",
+    "status": "published"
+  },
+  "diagram/Merger": {
+    "scenario_id": "diagram-merger",
+    "status": "published"
+  },
+  "email/EmailConverter": {
+    "scenario_id": "email-email-converter",
+    "status": "published"
+  }
+}

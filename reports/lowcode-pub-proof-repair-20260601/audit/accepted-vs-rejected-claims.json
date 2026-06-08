@@ -1,0 +1,26 @@
+{
+  "previous_sprint": "lowcode-final-publication-20260601",
+  "classification": "PUBLICATION_DECISION_ACCEPTED_ARTIFACT_PACKAGE_PROOF_REPAIR_REQUIRED",
+  "accepted": [
+    "56/56 final decisions made",
+    "Zero human-deferred items",
+    "42 PUBLISH_MAIN_CLASS_EXAMPLE",
+    "1 PUBLISH_COMPANION_EXAMPLE (words/signer)",
+    "1 PUBLISH_ENVIRONMENT_DEPENDENT_EXAMPLE (pdf/timestamp)",
+    "12 exclusions correct",
+    "pytest 3222/0/18",
+    "Static PFX absent",
+    "FormImporter upstream-bug classification plausible",
+    "Signer companion classification plausible",
+    "ForEach exclusion plausible",
+    "Timestamp env-dep publish plausible"
+  ],
+  "rejected": [
+    "Artifact metadata inside ZIP does not match actual ZIP (pass-1/pass-2 values)",
+    "package-artifacts has only manifest, no actual packages",
+    "Command ledger summary-only, no stdout/stderr files",
+    "E2E denominator says FormImporter in 49 but it is not in E2E — actual 49th is slides/for-each",
+    "No separate per-example-output-proof.json",
+    "Publication proof incomplete until package+sidecar self-consistent"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "pilot": "negative-control",
+  "type": "NEGATIVE_CONTROL",
+  "verdict": "CONTROL_PASS_SAFE_BLOCK",
+  "replay_type": "MODULE_EXECUTION",
+  "hallucinator_type": "NonExistentConverter",
+  "validator_output": {
+    "input_type": "NonExistentConverter",
+    "input_method": "Convert",
+    "input_status": "AI_DRAFT",
+    "output_status": "REJECTED_BY_VALIDATOR",
+    "rejection_reason": "TYPE_NOT_IN_REFLECTION",
+    "probe_generated": false,
+    "registry_entry_created": false,
+    "verified_publishable": false,
+    "format_authority_mutated": false,
+    "control_verdict": "CONTROL_PASS_SAFE_BLOCK"
+  },
+  "probe_generated": false,
+  "verified_publishable_reached": false,
+  "format_authority_mutated": false,
+  "timestamp": "2026-06-04T08:30:00Z"
+}

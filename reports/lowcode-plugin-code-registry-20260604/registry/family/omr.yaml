@@ -1,0 +1,43 @@
+# Plugin-Code Registry: omr
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: omr
+package_id: Aspose.OMR
+github_repo: https://github.com/aspose-omr/Aspose.Omr-for-.NET
+implementation_model: FIXTURE_HEAVY_WORKFLOW
+
+plugins:
+  - plugin_slug: recognize-omr
+    plugin_url: https://products.aspose.net/omr/net/recognize-omr
+    page_hash: 6a5c84ccd19e8946
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: NEEDS_MANUAL_MAPPING
+    implementation_model: FIXTURE_HEAVY_WORKFLOW
+    code_hashes: []
+    next_action: "Manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/omr.md"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."
+
+  - plugin_slug: generate-omr-template
+    plugin_url: https://products.aspose.net/omr/net/generate-omr-template
+    page_hash: b9405e9ef89f5d50
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: NEEDS_MANUAL_MAPPING
+    implementation_model: FIXTURE_HEAVY_WORKFLOW
+    code_hashes: []
+    next_action: "Manually write code mapping based on family pattern (FIXTURE_HEAVY_WORKFLOW); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/omr.md"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Direction correction sprint."

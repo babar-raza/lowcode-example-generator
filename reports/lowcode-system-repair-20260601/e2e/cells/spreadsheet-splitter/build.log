@@ -1,0 +1,11 @@
+EXIT: 0
+--- STDOUT ---
+  spreadsheet-splitter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\cells-controlled-pilot\examples\cells\lowcode\spreadsheet-splitter\bin\Debug\net8.0\spreadsheet-splitter.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.66
+
+--- STDERR ---

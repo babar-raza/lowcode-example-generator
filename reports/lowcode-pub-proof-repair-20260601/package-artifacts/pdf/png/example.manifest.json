@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "png",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Png",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-png.csproj",
+  "files": [
+    "pdf-png.csproj",
+    "Program.cs"
+  ]
+}

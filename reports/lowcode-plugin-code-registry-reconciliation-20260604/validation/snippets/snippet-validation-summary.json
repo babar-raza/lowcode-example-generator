@@ -1,0 +1,98 @@
+{
+  "sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "generated_at": "2026-06-04",
+  "validation_method": "dotnet restore + dotnet build + dotnet run",
+  "dotnet_version": "net8.0",
+  "snippets": [
+    {
+      "id": "snippet-001",
+      "family": "barcode",
+      "plugin_slug": "generate-barcode",
+      "canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/",
+      "nuget_package": "Aspose.BarCode",
+      "nuget_version": "24.12.0",
+      "source_file": "https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeGeneration/BarcodeOutput/StoreBarcodeOutputAsBitmap.cs",
+      "key_classes": ["BarcodeGenerator", "EncodeTypes", "BarCodeImageFormat"],
+      "key_pattern": "new BarcodeGenerator(EncodeTypes.Code128, value).Save(path, BarCodeImageFormat.Png)",
+      "package_dir": "reports/lowcode-plugin-code-registry-reconciliation-20260604/transformation/packages/barcode-generate-barcode",
+      "restore_status": "SUCCESS",
+      "build_status": "SUCCESS",
+      "build_warnings": 0,
+      "build_errors": 0,
+      "run_status": "SUCCESS",
+      "run_exit_code": 0,
+      "output_validation": {
+        "output_file": "output/barcode_code128.png",
+        "file_exists": true,
+        "file_size_bytes": 5344,
+        "expected_format": "PNG",
+        "status": "OUTPUT_VALID"
+      },
+      "snippet_verdict": "SNIPPET_VALIDATED",
+      "api_change_detection": "NO_API_CHANGE — BarcodeGenerator and EncodeTypes APIs unchanged from Sprint 1 validation"
+    },
+    {
+      "id": "snippet-002",
+      "family": "imaging",
+      "plugin_slug": "convert-image",
+      "canonical_url": "https://products.aspose.net/imaging/image-converter/",
+      "nuget_package": "Aspose.Imaging",
+      "nuget_version": "24.12",
+      "source_file": "https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs",
+      "key_classes": ["Image", "JpegOptions", "Graphics", "BmpImage"],
+      "key_pattern": "Image.Load(path) → image.Save(outputPath, new JpegOptions { Quality = 85 })",
+      "package_dir": "reports/lowcode-plugin-code-registry-reconciliation-20260604/transformation/packages/imaging-convert-image",
+      "restore_status": "SUCCESS",
+      "build_status": "SUCCESS",
+      "build_warnings": 0,
+      "build_errors": 0,
+      "run_status": "SUCCESS",
+      "run_exit_code": 0,
+      "output_validation": {
+        "output_file": "output/output_converted.jpg",
+        "file_exists": true,
+        "file_size_bytes": 1111,
+        "expected_format": "JPEG",
+        "status": "OUTPUT_VALID"
+      },
+      "snippet_verdict": "SNIPPET_VALIDATED",
+      "api_change_detection": "NO_API_CHANGE — Image.Load/Save pattern confirmed"
+    },
+    {
+      "id": "snippet-003",
+      "family": "zip",
+      "plugin_slug": "compress-files",
+      "canonical_url": "https://products.aspose.net/zip/universal-compressor/",
+      "nuget_package": "Aspose.ZIP",
+      "nuget_version": "24.12.0",
+      "source_file": "https://raw.githubusercontent.com/aspose-zip/Aspose.ZIP-for-.NET/master/Examples/CSharp/CompressingAndDecompressingFolders/CompressDirectory.cs",
+      "key_classes": ["Archive", "DirectoryInfo", "FileStream"],
+      "key_pattern": "new Archive() → archive.CreateEntries(dirInfo) → archive.Save(zipStream)",
+      "package_dir": "reports/lowcode-plugin-code-registry-reconciliation-20260604/transformation/packages/zip-compress-files",
+      "restore_status": "SUCCESS",
+      "build_status": "SUCCESS",
+      "build_warnings": 0,
+      "build_errors": 0,
+      "run_status": "SUCCESS",
+      "run_exit_code": 0,
+      "output_validation": {
+        "output_file": "output/compressed_output.zip",
+        "file_exists": true,
+        "file_size_bytes": 868,
+        "expected_format": "ZIP",
+        "status": "OUTPUT_VALID"
+      },
+      "snippet_verdict": "SNIPPET_VALIDATED",
+      "api_change_detection": "NO_API_CHANGE — Archive.CreateEntries pattern confirmed; ArchiveFactory.CompressDirectory also available"
+    }
+  ],
+  "summary": {
+    "total_snippets": 3,
+    "snippets_validated": 3,
+    "snippets_failed": 0,
+    "build_successes": 3,
+    "run_successes": 3,
+    "output_valid": 3,
+    "verdict": "ALL_SNIPPETS_VALIDATED — 3/3 PASS"
+  }
+}

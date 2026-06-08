@@ -1,0 +1,81 @@
+{
+  "family": "imaging",
+  "registry_file": "pipeline\\plugin-capability-registry\\imaging.yaml",
+  "total_rules": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "rule_id": "NL-V01",
+      "passed": true,
+      "evidence": "Registry file exists: imaging.yaml"
+    },
+    {
+      "rule_id": "NL-V02",
+      "passed": true,
+      "evidence": "status=PROBE_CONFIRMED"
+    },
+    {
+      "rule_id": "NL-V03",
+      "passed": true,
+      "evidence": "confidence_score=0.8"
+    },
+    {
+      "rule_id": "NL-V04",
+      "passed": true,
+      "evidence": "package_id=Aspose.Imaging"
+    },
+    {
+      "rule_id": "NL-V05",
+      "passed": true,
+      "evidence": "probe_evidence present"
+    },
+    {
+      "rule_id": "NL-V06",
+      "passed": true,
+      "evidence": "SKIP: not VERIFIED_PUBLISHABLE"
+    },
+    {
+      "rule_id": "NL-V07",
+      "passed": true,
+      "evidence": "SKIP: not PROBE_FAILED"
+    },
+    {
+      "rule_id": "NL-V08",
+      "passed": true,
+      "evidence": "SKIP: not REJECTED_BY_VALIDATOR"
+    },
+    {
+      "rule_id": "NL-V09",
+      "passed": true,
+      "evidence": "fp=511467dc6a13f883..."
+    },
+    {
+      "rule_id": "NL-V10",
+      "passed": true,
+      "evidence": "last_validated=2026-06-04T00:00:00Z"
+    },
+    {
+      "rule_id": "NL-V11",
+      "passed": true,
+      "evidence": "status=PROBE_CONFIRMED (PROBE_UNKNOWN banned)"
+    },
+    {
+      "rule_id": "NL-V12",
+      "passed": true,
+      "evidence": "status is PROBE_CONFIRMED (not VERIFIED_PUBLISHABLE)"
+    },
+    {
+      "rule_id": "NL-V13",
+      "passed": true,
+      "evidence": "No format-authority ref in entry"
+    },
+    {
+      "rule_id": "NL-V14",
+      "passed": true,
+      "evidence": "type=Image, method=Save"
+    }
+  ],
+  "verdict": "ALL_NL_V_RULES_PASS",
+  "timestamp": "2026-06-04T06:00:00Z"
+}

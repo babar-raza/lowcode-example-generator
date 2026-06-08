@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-monitor-20260603",
+  "description": "Output validation for examples with specific output requirements",
+  "validations": [
+    {
+      "example": "diagram/diagram-converter",
+      "check": "produces output file",
+      "result": "PASS",
+      "output": "output.vdx created, conversion succeeded message printed"
+    },
+    {
+      "example": "pdf/timestamp",
+      "check": "produces timestamped PDF (environment-dependent)",
+      "result": "PASS",
+      "output": "output_timestamped.pdf created (681166 bytes), TSA responded",
+      "note": "Uses free TSA server — may fail in offline/restricted environments"
+    },
+    {
+      "example": "pdf/signature",
+      "check": "signs PDF using runtime-generated certificate",
+      "result": "PASS",
+      "output": "PDF signed successfully, no static PFX used",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned"
+    },
+    {
+      "example": "words/signer",
+      "check": "signs DOCX using runtime-generated certificate",
+      "result": "PASS",
+      "output": "output.docx with 1 signature",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned"
+    }
+  ],
+  "all_pass": true,
+  "verdict": "OUTPUT_VALIDATION_PASS"
+}

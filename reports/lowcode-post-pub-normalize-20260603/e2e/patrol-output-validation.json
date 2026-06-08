@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-normalize-20260603",
+  "validations": [
+    {
+      "example": "diagram/diagram-converter",
+      "check": "produces output.vdx file",
+      "result": "PASS",
+      "output_file": "output.vdx",
+      "output_size": 17976
+    },
+    {
+      "example": "pdf/timestamp",
+      "check": "produces timestamped PDF via TSA server",
+      "result": "PASS",
+      "output_file": "output_timestamped.pdf",
+      "output_size": 681227,
+      "note": "Environment-dependent — requires network access to TSA server"
+    },
+    {
+      "example": "pdf/signature",
+      "check": "signs PDF using runtime-generated certificate",
+      "result": "PASS",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned",
+      "static_pfx_used": false
+    },
+    {
+      "example": "words/signer",
+      "check": "signs DOCX using runtime-generated certificate",
+      "result": "PASS",
+      "certificate_source": "runtime RSA.Create(2048) + CertificateRequest.CreateSelfSigned",
+      "static_pfx_used": false
+    }
+  ],
+  "all_pass": true,
+  "verdict": "OUTPUT_VALIDATION_PASS"
+}

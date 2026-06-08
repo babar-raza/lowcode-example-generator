@@ -1,0 +1,238 @@
+{
+  "sprint": "non-lowcode-fallback-evidence-reconstruction-20260604",
+  "generated": "2026-06-04T08:00:00Z",
+  "total_files": 38,
+  "present": 38,
+  "missing": 0,
+  "missing_files": [],
+  "entries": [
+    {
+      "path": "src\\plugin_examples\\family_config\\models.py",
+      "sha256": "ae418436d014dd94cb1695fe8360d39b7ddb4fd30e00a22a417d3fb8f4ac423f",
+      "size_bytes": 3306,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\runner.py",
+      "sha256": "1194f4815ca49616b48c6af813b3a5b8977e30877ea285f2e822b8ce605e46dc",
+      "size_bytes": 87355,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\schemas\\family-config.schema.json",
+      "sha256": "7210d503660c4498aaeadfaae3aab8bc5e5995ff8f07e1610f4501e6faa57a71",
+      "size_bytes": 9248,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\configs\\families\\barcode.yml",
+      "sha256": "60f6e2de7811bd8f7a105a7aa649b383691391cca54f369e87d58bd07af58f22",
+      "size_bytes": 1571,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\configs\\families\\imaging.yml",
+      "sha256": "ccb56c1f0c9e572585836d429c7394e4e2feb338424447b07ea4f5f315e8a05b",
+      "size_bytes": 1627,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\website_catalog\\__init__.py",
+      "sha256": "081bbb4377a442014d6f6a325762efae57a89a0ea32ce6ce60c66cf24160a3b6",
+      "size_bytes": 634,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\website_catalog\\crawler.py",
+      "sha256": "3057ba9538c1cb35a1c7a6912923041655f82fc35b1ae364564512904a13569b",
+      "size_bytes": 6948,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\website_catalog\\models.py",
+      "sha256": "efc437950210c8ac7164a8df60a117ed5d24e28be6609210235ee35dc54cd4dd",
+      "size_bytes": 694,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\website_catalog\\drift_detector.py",
+      "sha256": "28b6c5b8ba916c59ebef2cb102b59c1be55a1d131956b9b101ee089a9fd653e8",
+      "size_bytes": 890,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\plugin_detector\\heuristic_matcher.py",
+      "sha256": "62b223d0f6fead1c3f452e38567d89197ea06bfb5815f1c6813ac47875f49057",
+      "size_bytes": 6466,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\probe_generator\\__init__.py",
+      "sha256": "d73e5a02252add821969651c1a013c592bd5c0aedc8ff5d5f8090e49a0032e5f",
+      "size_bytes": 420,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\probe_generator\\generator.py",
+      "sha256": "b22cbf7e6a14f3390396772c4f1d4f42fa53b0d2f46dc96652bd7ef2292340d5",
+      "size_bytes": 5793,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\probe_generator\\runner.py",
+      "sha256": "6fd8e205fe9b027c84e3484197827cae36d0637c54dbc4783f1730e82706ed00",
+      "size_bytes": 10292,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\ai_acceleration\\__init__.py",
+      "sha256": "fde2651a9ae20d97a6d263bfea0bb9becd852533e39eb404ad271e324aed1aca",
+      "size_bytes": 277,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\ai_acceleration\\suggestion.py",
+      "sha256": "7bfeb644e7203e52007078a120cbc397bd8885f44f10098ad936ceae6735f1b3",
+      "size_bytes": 2749,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\ai_acceleration\\validator.py",
+      "sha256": "9c8b5fff077c149957e037e9118e7db9cfe5b61da488f1053fbc92eebe66ac86",
+      "size_bytes": 2535,
+      "status": "PRESENT"
+    },
+    {
+      "path": "src\\plugin_examples\\evidence_validator\\rules\\non_lowcode.py",
+      "sha256": "5dccaff6ad531f2e970a3328ab978a58a7af93488063e5aae6f07d56f7076a1c",
+      "size_bytes": 21507,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\plugin-capability-registry\\schema.json",
+      "sha256": "d8847d6a7541c8fc652e9ee05ac93db7dad22b2e3c8b08c1489fd3a66f3cdc7a",
+      "size_bytes": 4057,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\plugin-capability-registry\\schema.yaml",
+      "sha256": "c840000c43abfcc4c85bbe4bea10aafc4db759c5226483da4f25a9dc5b712d5a",
+      "size_bytes": 2181,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\plugin-capability-registry\\package-aliases.json",
+      "sha256": "7718187a5b16d3b52c306677f4ff556321ccdabc9c385ad5d7014842544cf98d",
+      "size_bytes": 860,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\plugin-capability-registry\\barcode.yaml",
+      "sha256": "a7ac15e09f003caa126adac749bfddbbc144ffd20a267704ba430033c225fd83",
+      "size_bytes": 1035,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\plugin-capability-registry\\imaging.yaml",
+      "sha256": "5866298d401c8aa0321b3df8be0f2af3676cc343994f28d2ee7d0127e74ad8eb",
+      "size_bytes": 1178,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\schemas\\ai-suggestion-schema.json",
+      "sha256": "096312726ec5ef83e4ee9dc174109c90ddeecf7869e6972d51bb7aee77710387",
+      "size_bytes": 1951,
+      "status": "PRESENT"
+    },
+    {
+      "path": "pipeline\\schemas\\plugin-capability-registry-schema.json",
+      "sha256": "d8847d6a7541c8fc652e9ee05ac93db7dad22b2e3c8b08c1489fd3a66f3cdc7a",
+      "size_bytes": 4057,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_family_config_fallback_strategy.py",
+      "sha256": "4692a2b54cf22be93dbc881357ec841e097ac2aea9f4784421b02f73a8b2b536",
+      "size_bytes": 3880,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_capability_registry_schema.py",
+      "sha256": "5298873a87fec7fe372f932e6ffe93a0d9de7f5af0304e617903885285724b6f",
+      "size_bytes": 4704,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_website_catalog_crawler.py",
+      "sha256": "33ba85a9042b5e21edd5363dc199dae1510487bb0073ab0e330154c5c9a100ce",
+      "size_bytes": 4926,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_heuristic_matcher.py",
+      "sha256": "7a7ad23c195ca70cb9917eacddb7987a8e0fa2b7846f64e27e62e05399ec7341",
+      "size_bytes": 5151,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_probe_generator.py",
+      "sha256": "29ffe6ef3a16a902a3d3a527be4bc862a604a1944ee9ed392027636263fc0cef",
+      "size_bytes": 8222,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_barcode_family_onboarding.py",
+      "sha256": "19d25f2e21df0e00d65365b67c1a25a4856c013c8237f6bb1bce82e15042f3f6",
+      "size_bytes": 2948,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_imaging_family_onboarding.py",
+      "sha256": "93aa7244fe8ed2d3c12fe837e56607801fb0ec42d253def22112a4c5c52823ec",
+      "size_bytes": 3628,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_ai_suggestion_schema.py",
+      "sha256": "b085f1056d45f01b4025f7fe2412d741991c6f606cc4c81e45ab248b3d5cb1a3",
+      "size_bytes": 4840,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\unit\\test_non_lowcode_validators.py",
+      "sha256": "1cb724c0b6ca910a57094f9fc856a49ce950fdebfc516c9059d00394e99f6155",
+      "size_bytes": 13645,
+      "status": "PRESENT"
+    },
+    {
+      "path": "tests\\integration\\test_runner_fallback_integration.py",
+      "sha256": "b8c200fedc619715c1fc056ec744858f035eb7f96783088c2263ac9b5b049164",
+      "size_bytes": 6184,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports\\lowcode-non-lowcode-fallback-implementation-20260604\\prototypes\\barcode\\probe\\Program.cs",
+      "sha256": "e3c8f52cff10b6fd623ff5ab4d49b08571d90a3020724d6a9b4f93658a61581d",
+      "size_bytes": 853,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports\\lowcode-non-lowcode-fallback-implementation-20260604\\prototypes\\barcode\\probe\\BarcodeGeneratorProbe.csproj",
+      "sha256": "4765337281dfc9e77baf003509f8969d635214ea4bf9485d53cc961302f48dd1",
+      "size_bytes": 344,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports\\lowcode-non-lowcode-fallback-implementation-20260604\\prototypes\\imaging\\probe\\Program.cs",
+      "sha256": "d0d500e7cf6e1c0e7bf688d3008afa3869844b319867eb686101a7de753f15d4",
+      "size_bytes": 1079,
+      "status": "PRESENT"
+    },
+    {
+      "path": "reports\\lowcode-non-lowcode-fallback-implementation-20260604\\prototypes\\imaging\\probe\\fixture_gen.py",
+      "sha256": "1eee04a73739f425e02ff318f13c49244e006289af431f356deeeb1756588c05",
+      "size_bytes": 1583,
+      "status": "PRESENT"
+    }
+  ]
+}

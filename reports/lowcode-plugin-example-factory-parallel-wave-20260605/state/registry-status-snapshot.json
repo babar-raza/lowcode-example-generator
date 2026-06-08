@@ -1,0 +1,48 @@
+{
+  "date": "2026-06-05",
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "status_counts": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 22,
+    "NEEDS_MANUAL_MAPPING": 16,
+    "CODE_HARVESTED": 23,
+    "READY_FOR_TRANSFORMATION": 11
+  },
+  "transformed_entries": [
+    "barcode/generate-barcode",
+    "barcode/recognize-barcode",
+    "barcode/generate-qr-code",
+    "barcode/scan-barcode",
+    "html/convert-html-to-pdf",
+    "imaging/convert-image",
+    "imaging/resize-image",
+    "imaging/compress-image",
+    "imaging/crop-image",
+    "imaging/filter-image",
+    "imaging/merge-images",
+    "imaging/watermark-image",
+    "imaging/rotate-image",
+    "ocr/recognize-text",
+    "ocr/extract-text",
+    "page/convert-xps-to-pdf",
+    "svg/svg-to-image-converter",
+    "svg/svg-to-pdf-converter",
+    "tasks/convert-mpp-to-pdf",
+    "tex/latex-figure-renderer",
+    "zip/create-archive",
+    "zip/compress-folder"
+  ],
+  "ready_entries": [
+    "ocr/scan-document",
+    "ocr/image-text-finder",
+    "ocr/invoice-to-text",
+    "ocr/photo-to-text",
+    "ocr/table-to-text",
+    "page/convert-ps-to-pdf",
+    "psd/psd-image-converter",
+    "psd/animation-maker",
+    "psd/photo-processor",
+    "svg/vectorizer",
+    "zip/compress-files"
+  ],
+  "cumulative_dryrun_count": 22
+}

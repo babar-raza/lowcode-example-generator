@@ -1,0 +1,9 @@
+{
+  "example": "splitter",
+  "csproj": "words-splitter.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: words-splitter\nDone.\n",
+  "stderr_tail": ""
+}

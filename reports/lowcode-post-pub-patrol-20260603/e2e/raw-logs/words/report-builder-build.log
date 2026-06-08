@@ -1,0 +1,9 @@
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\words\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\words\examples\words\lowcode\report-builder\words-report-builder.csproj]
+
+Build succeeded.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\words\examples\words\lowcode\report-builder\Program.cs(33,23): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\words\examples\words\lowcode\report-builder\words-report-builder.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.64

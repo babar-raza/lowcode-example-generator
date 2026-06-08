@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "timestamp",
+  "label": "pdf/timestamp",
+  "pilot": "pdf-controlled-pilot-pr11",
+  "csproj": "timestamp.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

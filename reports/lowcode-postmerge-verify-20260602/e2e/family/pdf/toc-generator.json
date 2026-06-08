@@ -1,0 +1,9 @@
+{
+  "example": "toc-generator",
+  "csproj": "pdf-toc-generator.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "TOC added\n",
+  "stderr_tail": ""
+}

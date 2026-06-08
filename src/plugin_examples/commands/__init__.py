@@ -45,3 +45,5 @@ def register_all(subparsers):
     _execute_next_actions(subparsers)
     from plugin_examples.commands.next_actions import add_parser as _next_actions
     _next_actions(subparsers)
+    from plugin_examples.commands.catalog_discover import add_parser as _catalog_discover
+    _catalog_discover(subparsers)

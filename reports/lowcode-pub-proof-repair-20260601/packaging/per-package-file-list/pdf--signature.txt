@@ -1,0 +1,3 @@
+example.manifest.json
+Program.cs
+signature.csproj

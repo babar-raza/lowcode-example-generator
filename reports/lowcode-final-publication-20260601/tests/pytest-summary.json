@@ -1,0 +1,14 @@
+{
+  "sprint": "lowcode-final-publication-20260601",
+  "framework": "pytest 9.0.3",
+  "python": "3.13.2",
+  "platform": "win32",
+  "collected": 3240,
+  "passed": 3222,
+  "skipped": 18,
+  "failed": 0,
+  "subtests_passed": 10,
+  "duration_seconds": 335.20,
+  "raw_log": "reports/lowcode-final-publication-20260601/tests/pytest-raw-output.log",
+  "verdict": "ALL_PASS"
+}

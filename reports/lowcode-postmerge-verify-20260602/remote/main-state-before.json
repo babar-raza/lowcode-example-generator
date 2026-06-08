@@ -1,0 +1,44 @@
+{
+  "cells": {
+    "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "6c7342124798e5d19a8e6a2e75b51254c26c331c",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  },
+  "diagram": {
+    "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "8c035d40c8163aaf3490aac2f01fedb140527454",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  },
+  "email": {
+    "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "2adf4d401c1d44fd06a8ab30168a6fb3b737cdc3",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  },
+  "pdf": {
+    "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "eb02e39a3961cab2fb72bd3be4f4befcfa87b300",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  },
+  "slides": {
+    "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "98596b2490c7550aeeb617a535240e86cfbdc168",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  },
+  "words": {
+    "repo": "aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples",
+    "default_branch": "main",
+    "main_sha": "cfe4e3b85a647fd3d36d6e04a5cf7d9539f22766",
+    "branches": ["main"],
+    "permissions": {"admin": true, "push": true, "pull": true}
+  }
+}

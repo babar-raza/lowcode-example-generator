@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-patrol-20260603",
+  "validators": {
+    "V01": {"name": "E2E Aggregate Backed by Raw Logs", "status": "PASS", "evidence": ["e2e/patrol-e2e-aggregate.json", "e2e/raw-logs/"]},
+    "V02": {"name": "README Lists All Published Examples", "status": "PASS", "evidence": ["monitoring/readme-regression-check.json"]},
+    "V03": {"name": "No Dangling Branches", "status": "PASS", "evidence": ["monitoring/open-prs-and-branches.json"]},
+    "V04": {"name": "No Static Certificate Files", "status": "PASS", "evidence": ["fixtures/no-static-certificate-proof.json"]},
+    "V05": {"name": "Diagram Converter Creates Output", "status": "PASS", "evidence": ["e2e/patrol-output-validation.json"]},
+    "V06": {"name": "Timestamp Environment Documentation", "status": "PASS", "evidence": ["fixtures/environment-dependent-example-proof.json"]},
+    "V07": {"name": "FormImporter Retry Status Current", "status": "PASS", "evidence": ["blockers/formimporter/upstream-bug-status.md"]},
+    "V08": {"name": "Program.cs + .csproj Present", "status": "PASS", "evidence": ["monitoring/file-availability-check.json"]},
+    "V09": {"name": "No Missing Required Fixture", "status": "PASS", "evidence": ["fixtures/fixture-persistence-check.json"]},
+    "V10": {"name": "Command Ledger Present", "status": "PASS", "evidence": ["commands/raw-commands.log", "e2e/e2e-command-index.json"]}
+  },
+  "total_pass": 10,
+  "total_fail": 0,
+  "verdict": "ALL_VALIDATORS_PASS"
+}

@@ -1,0 +1,26 @@
+{
+  "cells": {
+    "reviewDecision": "",
+    "required": false
+  },
+  "diagram": {
+    "reviewDecision": "",
+    "required": false
+  },
+  "email": {
+    "reviewDecision": "",
+    "required": false
+  },
+  "pdf": {
+    "reviewDecision": "",
+    "required": false
+  },
+  "slides": {
+    "reviewDecision": "",
+    "required": false
+  },
+  "words": {
+    "reviewDecision": "",
+    "required": false
+  }
+}

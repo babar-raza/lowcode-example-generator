@@ -1,0 +1,12 @@
+{
+  "key": "diagram/diagram-converter",
+  "exit_code": 0,
+  "output_classification": "file",
+  "output_extension": ".vdx",
+  "output_verification_method": "File.Exists(outputPath) in Program.cs",
+  "measurement_artifact": true,
+  "root_cause": "Prior runs already created output files; spot-check counted only NEW files",
+  "actual_output_produced": true,
+  "fix_required": false,
+  "status": "PASS"
+}

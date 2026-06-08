@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-normalize-20260603",
+  "command_ledger": "commands/raw-commands.log",
+  "raw_logs_directory": "e2e/raw-logs/",
+  "raw_log_count": 132,
+  "stdout_stderr_directory": "commands/stdout-stderr/",
+  "stdout_stderr_count": 132,
+  "e2e_command_index": "e2e/e2e-command-index.json",
+  "convention": "E2E raw logs are stored in both e2e/raw-logs/ (per-family structure) and commands/stdout-stderr/ (flat structure). Both contain identical content. The raw-commands.log is a text ledger of all commands with timestamps and exit codes."
+}

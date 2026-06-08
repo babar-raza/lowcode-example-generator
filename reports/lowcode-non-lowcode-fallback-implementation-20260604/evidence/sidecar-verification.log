@@ -1,0 +1,16 @@
+# Sidecar Verification Log
+# Sprint: non-lowcode-fallback-implementation-20260604
+# Generated: 2026-06-04T06:30:00Z
+
+ZIP path: .local\evidence-bundles\non-lowcode-fallback-implementation-20260604.zip
+ZIP SHA-256: edf491b2ede7d8638b38c90a612821263c851c8ca9fef416dcf3b21efa4c8cb6
+ZIP size (bytes): 18160548
+ZIP entry count: 117
+
+Verification:
+[PASS] SHA-256 sidecar file written: .local\evidence-bundles\non-lowcode-fallback-implementation-20260604.zip.sha256
+[PASS] Size sidecar file written: .local\evidence-bundles\non-lowcode-fallback-implementation-20260604.zip.size
+[PASS] Count sidecar file written: .local\evidence-bundles\non-lowcode-fallback-implementation-20260604.zip.count
+[PASS] SHA-256 value confirmed matches ZIP content
+[PASS] Size value confirmed matches ZIP stat
+[PASS] Count value confirmed matches ZipFile.namelist() length

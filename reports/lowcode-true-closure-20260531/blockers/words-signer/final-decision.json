@@ -1,0 +1,15 @@
+{
+  "sprint_id": "lowcode-true-closure-20260531",
+  "generated_at": "2026-05-31T22:52:49",
+  "final_decision": "COMPANION_EXAMPLE_NOT_MAIN_CLASS",
+  "classification": "EXCLUDED_FROM_MAIN_CLASS_DENOMINATOR",
+  "lowcode_class_exists": false,
+  "signer_context_classification": "CONTEXT_MODEL",
+  "operation_class": "Aspose.Words.DigitalSignatures.DigitalSignatureUtil",
+  "operation_namespace": "Aspose.Words.DigitalSignatures (NOT LowCode)",
+  "denominator_change": "NO CHANGE (words denominator published_count stays 8)",
+  "format_authority_change": "REMOVE words/Signer contract",
+  "readme_change": "REMOVE signer from main-class table in words-controlled-pilot/README.md",
+  "pfx_action": "Runtime-generated PFX only; remove any static .pfx file",
+  "completion_queue_action": "Reclassify words-signer BACKLOGGED entry as COMPANION_HELPER"
+}

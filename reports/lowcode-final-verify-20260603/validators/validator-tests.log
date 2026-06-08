@@ -1,0 +1,69 @@
+lowcode-final-verify-20260603 Validator Test Results
+=====================================================
+Date: 2026-06-03
+
+V01 Example Count Match .............. PASS
+  cells: expected=9, actual=9
+  diagram: expected=2, actual=2 (+ 2 pre-existing excluded from count)
+  email: expected=1, actual=1
+  pdf: expected=20, actual=20 (19 ours + 1 pre-existing)
+  slides: expected=3, actual=3
+  words: expected=9, actual=9
+
+V02 No Excluded Example Leak ......... PASS
+  email-converter: not found (correct)
+  slides/for-each: not found (correct)
+  slides/slides-compress: not found (correct)
+  slides/slides-convert: not found (correct)
+  slides/slides-merger: not found (correct)
+
+V03 Build Success .................... PASS
+  44/44 examples: dotnet build exit code 0
+
+V04 Run Success ...................... PASS
+  44/44 examples: dotnet run exit code 0
+
+V05 No Static Certificate Files ...... PASS
+  0 certificate files found across 6 repos
+
+V06 No Duplicate .csproj ............. PASS
+  44/44 examples: exactly 1 .csproj per directory
+
+V07 No bin/obj Artifacts ............. PASS
+  0 bin/ or obj/ directories found in git
+
+V08 README Completeness .............. PASS
+  cells: 9/9 examples listed
+  diagram: 2/2 examples listed
+  email: 1/1 examples listed
+  pdf: 20/20 examples listed (fixed this sprint via PR #24)
+  slides: 3/3 examples listed (paths fixed this sprint via PR #4)
+  words: 9/9 examples listed
+
+V09 Directory.Packages.props ......... PASS
+  6/6 repos have Directory.Packages.props at root
+
+V10 Directory.Build.props ............ PASS
+  6/6 repos have Directory.Build.props at root
+
+V11 global.json ...................... PASS
+  6/6 repos have global.json at root
+
+V12 Branch Hygiene ................... PASS
+  6/6 repos: main-only, 0 open PRs
+
+V13 Command Ledger Completeness ...... PASS
+  132 command logs (44 restore + 44 build + 44 run) in stdout-stderr/
+
+V14 Aggregate Consistency ............ PASS
+  Build and E2E aggregates from single fresh run, no carryforward
+
+V15 FormImporter Upstream Bug ........ PASS
+  Documented: upstream-bug-status.md, minimal-repro-proof.md, retry-plan.md, latest-version-probe.md
+
+V16 No Unauthorized Remote Mutations . PASS
+  Only 3 README-fix PRs created/merged (pdf #24, email #4, slides #4)
+
+=====================================================
+TOTAL: 16/16 PASS, 0 FAIL
+VERDICT: ALL_VALIDATORS_PASS

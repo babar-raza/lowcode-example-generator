@@ -1,0 +1,75 @@
+{
+  "date": "2026-06-05",
+  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
+  "reassessment": [
+    {
+      "family": "drawing",
+      "assessment": "UNBLOCKED",
+      "status": "2/2 plugins now TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "details": "convert-drawing and create-drawing both PASS. Aspose.Drawing uses System.Drawing namespace. No outstanding blockers."
+    },
+    {
+      "family": "note",
+      "assessment": "PARTIALLY_UNBLOCKED",
+      "status": "1/3 TRANSFORMED, 2 CODE_HARVESTED",
+      "details": "convert-one-to-pdf now PASS (Wave 5). convert-one-to-word and convert-one-to-image share the same Document pattern — trivially unblockable in Wave 6 using SaveFormat.Docx/Png.",
+      "wave6_candidates": ["note/convert-one-to-word", "note/convert-one-to-image"]
+    },
+    {
+      "family": "gis",
+      "assessment": "PARTIALLY_UNBLOCKED",
+      "status": "1/2 TRANSFORMED, 1 NEEDS_MANUAL_MAPPING",
+      "details": "read-gis-data now PASS (Wave 5). convert-gis-data requires format conversion between vector formats (GeoJSON to Shapefile etc.) — Aspose.GIS API supports VectorLayer.Convert(). Feasible in Wave 6.",
+      "wave6_candidates": ["gis/convert-gis-data"]
+    },
+    {
+      "family": "finance",
+      "assessment": "PARTIALLY_UNBLOCKED",
+      "status": "1/2 TRANSFORMED, 1 NEEDS_MANUAL_MAPPING",
+      "details": "convert-xbrl now PASS (Wave 5). parse-xbrl requires further API research for parsing/extraction use case."
+    },
+    {
+      "family": "omr",
+      "assessment": "STILL_BLOCKED",
+      "status": "NEEDS_MANUAL_MAPPING",
+      "blocker": "OMR template generation requires a custom template file (.omr format) which cannot be generated programmatically without Aspose.OMR template editor.",
+      "recommendation": "DEFER to Wave 7+ — requires real .omr fixture file"
+    },
+    {
+      "family": "font",
+      "assessment": "PARTIALLY_BLOCKED",
+      "status": "1 CODE_HARVESTED, 1 NEEDS_MANUAL_MAPPING",
+      "details": "render-text-with-font (CODE_HARVESTED) could use programmatic font loading. convert-font blocked on format input file.",
+      "wave6_candidates": ["font/render-text-with-font"]
+    },
+    {
+      "family": "threed",
+      "assessment": "STILL_BLOCKED",
+      "status": "NEEDS_MANUAL_MAPPING (both)",
+      "blocker": "Aspose.3D API has complex scene setup. convert-3d-model requires reading a 3D file (OBJ/FBX) — OBJ fixture is now available via generate_obj_fixture(). Feasible in Wave 6.",
+      "wave6_candidates": ["threed/convert-3d-model"],
+      "unblock_strategy": "Use generate_obj_fixture() to write a minimal OBJ cube; Aspose.3D Scene.Open() then Scene.Save() as FBX"
+    },
+    {
+      "family": "psd",
+      "assessment": "PARTIALLY_BLOCKED",
+      "status": "3 READY, 3 CODE_HARVESTED",
+      "details": "psd-image-converter, animation-maker, photo-processor all READY_FOR_TRANSFORMATION. Requires .psd fixture but Aspose.PSD has programmatic PsdImage creation. Wave 6 candidate.",
+      "wave6_candidates": ["psd/psd-image-converter", "psd/convert-psd-to-pdf"],
+      "unblock_strategy": "new PsdImage(200, 150) -> AddLayers -> Save as PSD -> reload and convert"
+    },
+    {
+      "family": "cad",
+      "assessment": "BLOCKED",
+      "status": "CODE_HARVESTED (4) + NEEDS_MANUAL_MAPPING (1)",
+      "blocker": "CAD files (DWG/DXF) cannot be programmatically generated from first principles without a CAD API fixture generator.",
+      "recommendation": "DEFER — requires real DWG fixture or Aspose.CAD programmatic creation research"
+    }
+  ],
+  "summary": {
+    "unblocked_this_sprint": ["drawing", "note (partial)", "gis (partial)", "finance (partial)"],
+    "newly_identified_wave6": ["note/convert-one-to-word", "note/convert-one-to-image", "gis/convert-gis-data", "threed/convert-3d-model", "psd/psd-image-converter", "font/render-text-with-font"],
+    "defer_indefinitely": ["omr/recognize-omr", "cad (all)"],
+    "obj_fixture_enables_threed": true
+  }
+}

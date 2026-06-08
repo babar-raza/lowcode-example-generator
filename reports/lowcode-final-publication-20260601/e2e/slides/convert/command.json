@@ -1,0 +1,25 @@
+{
+  "family": "slides",
+  "name": "convert",
+  "label": "slides/convert",
+  "pilot": "slides-controlled-pilot",
+  "csproj": "convert.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 83332,
+    "output_files": [
+      {
+        "name": "output.pdf",
+        "size": 50462
+      },
+      {
+        "name": "input.pptx",
+        "size": 32870
+      }
+    ]
+  }
+}

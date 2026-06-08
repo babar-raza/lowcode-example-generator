@@ -1,0 +1,308 @@
+[
+  {
+    "family_slug": "barcode",
+    "package_id": "Aspose.BarCode",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\barcode.json",
+    "dll_sha256": null,
+    "type_count": 165,
+    "namespace_count": 5,
+    "namespaces_sample": [
+      "Aspose.BarCode",
+      "Aspose.BarCode.BarCodeRecognition",
+      "Aspose.BarCode.Common",
+      "Aspose.BarCode.ComplexBarcode",
+      "Aspose.BarCode.Generation"
+    ],
+    "notes": "DllReflector: 165 types, 5 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "prior_sprint"
+  },
+  {
+    "family_slug": "imaging",
+    "package_id": "Aspose.Imaging",
+    "version": "26.6.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\imaging.json",
+    "dll_sha256": null,
+    "type_count": 1238,
+    "namespace_count": 121,
+    "namespaces_sample": [
+      "Aspose.Imaging",
+      "Aspose.Imaging.ApsBuilder.Dib",
+      "Aspose.Imaging.AsyncTask",
+      "Aspose.Imaging.Brushes",
+      "Aspose.Imaging.CoreExceptions"
+    ],
+    "notes": "DllReflector: 1238 types, 121 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "prior_sprint"
+  },
+  {
+    "family_slug": "zip",
+    "package_id": "Aspose.ZIP",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\zip.json",
+    "dll_sha256": null,
+    "type_count": 151,
+    "namespace_count": 29,
+    "namespaces_sample": [
+      "Aspose.Zip",
+      "Aspose.Zip.Apple",
+      "Aspose.Zip.ArchiveInfo",
+      "Aspose.Zip.Arj",
+      "Aspose.Zip.Bzip2"
+    ],
+    "notes": "DllReflector: 151 types, 29 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "html",
+    "package_id": "Aspose.HTML",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\html.json",
+    "dll_sha256": null,
+    "type_count": 613,
+    "namespace_count": 49,
+    "namespaces_sample": [
+      "Aspose.Html",
+      "Aspose.Html.Accessibility",
+      "Aspose.Html.Accessibility.Results",
+      "Aspose.Html.Accessibility.Saving",
+      "Aspose.Html.Collections"
+    ],
+    "notes": "DllReflector: 613 types, 49 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "tasks",
+    "package_id": "Aspose.Tasks",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\tasks.json",
+    "dll_sha256": null,
+    "type_count": 367,
+    "namespace_count": 10,
+    "namespaces_sample": [
+      "Aspose.Tasks",
+      "Aspose.Tasks.Attributes",
+      "Aspose.Tasks.Connectivity",
+      "Aspose.Tasks.Leveling",
+      "Aspose.Tasks.Primavera"
+    ],
+    "notes": "DllReflector: 367 types, 10 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "cad",
+    "package_id": "Aspose.CAD",
+    "version": "26.1.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\cad.json",
+    "dll_sha256": null,
+    "type_count": 5028,
+    "namespace_count": 139,
+    "namespaces_sample": [
+      "Aspose.CAD",
+      "Aspose.CAD.Annotations",
+      "Aspose.CAD.CadExceptions",
+      "Aspose.CAD.CadExceptions.Compressors",
+      "Aspose.CAD.CadExceptions.ImageFormats"
+    ],
+    "notes": "DllReflector: 5028 types, 139 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "drawing",
+    "package_id": "Aspose.Drawing",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\drawing.json",
+    "dll_sha256": null,
+    "type_count": 112,
+    "namespace_count": 6,
+    "namespaces_sample": [
+      "System.Drawing",
+      "System.Drawing.AsposeDrawing",
+      "System.Drawing.Drawing2D",
+      "System.Drawing.Imaging",
+      "System.Drawing.Printing"
+    ],
+    "notes": "DllReflector: 112 types, 6 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "font",
+    "package_id": "Aspose.Font",
+    "version": "26.4.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\font.json",
+    "dll_sha256": null,
+    "type_count": 125,
+    "namespace_count": 21,
+    "namespaces_sample": [
+      "Aspose.Font",
+      "Aspose.Font.Cff",
+      "Aspose.Font.CffDataProviders",
+      "Aspose.Font.CffExceptions",
+      "Aspose.Font.Common_FontMerger"
+    ],
+    "notes": "DllReflector: 125 types, 21 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "finance",
+    "package_id": "Aspose.Finance",
+    "version": "26.5.22",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\finance.json",
+    "dll_sha256": null,
+    "type_count": 851,
+    "namespace_count": 31,
+    "namespaces_sample": [
+      "Aspose.Finance",
+      "Aspose.Finance.Ofx",
+      "Aspose.Finance.Ofx.Bank",
+      "Aspose.Finance.Ofx.BillerDelivery",
+      "Aspose.Finance.Ofx.BillerDirectory"
+    ],
+    "notes": "DllReflector: 851 types, 31 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "threed",
+    "package_id": "Aspose.3D",
+    "version": "26.4.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\threed.json",
+    "dll_sha256": null,
+    "type_count": 291,
+    "namespace_count": 11,
+    "namespaces_sample": [
+      "Aspose.ThreeD",
+      "Aspose.ThreeD.Animation",
+      "Aspose.ThreeD.Deformers",
+      "Aspose.ThreeD.Entities",
+      "Aspose.ThreeD.Formats"
+    ],
+    "notes": "DllReflector: 291 types, 11 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "svg",
+    "package_id": "Aspose.SVG",
+    "version": "26.5.0",
+    "namespace_status": "NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\svg.json",
+    "dll_sha256": null,
+    "type_count": 591,
+    "namespace_count": 36,
+    "namespaces_sample": [
+      "Aspose.Svg",
+      "Aspose.Svg.Builder",
+      "Aspose.Svg.Collections",
+      "Aspose.Svg.Converters",
+      "Aspose.Svg.DataTypes"
+    ],
+    "notes": "DllReflector: 591 types, 36 namespaces. Status: NO_LOWCODE_BUT_PLUGIN_SITE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "page",
+    "package_id": "Aspose.Page",
+    "version": "26.5.0",
+    "namespace_status": "PLUGINS_NAMESPACE_PRESENT",
+    "evidence_path": "reports\\lowcode-non-lowcode-plugin-universe-20260604\\reflection\\public-api-inventory\\page.json",
+    "dll_sha256": null,
+    "type_count": 280,
+    "namespace_count": 17,
+    "namespaces_sample": [
+      "Aspose.Page",
+      "Aspose.Page.Drawing",
+      "Aspose.Page.Drawing.Drawing2D",
+      "Aspose.Page.Drawing.Imaging",
+      "Aspose.Page.EPS"
+    ],
+    "notes": "DllReflector: 280 types, 17 namespaces. Status: PLUGINS_NAMESPACE_PRESENT.",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "ocr",
+    "package_id": "Aspose.OCR",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "psd",
+    "package_id": "Aspose.PSD",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "note",
+    "package_id": "Aspose.Note",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "tex",
+    "package_id": "Aspose.TeX",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "gis",
+    "package_id": "Aspose.GIS",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  },
+  {
+    "family_slug": "omr",
+    "package_id": "Aspose.OMR",
+    "version": null,
+    "namespace_status": "BLOCKED_REFLECTION_FAILED",
+    "evidence_path": null,
+    "dll_sha256": null,
+    "type_count": null,
+    "namespace_count": null,
+    "namespaces_sample": [],
+    "notes": "DllReflector reflection deferred \u2014 large DLL or dependency conflict",
+    "source": "this_sprint"
+  }
+]

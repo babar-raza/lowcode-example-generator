@@ -1,0 +1,11 @@
+EXIT: 0
+--- STDOUT ---
+  pdf-converter -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\pr-dry-run\cells-controlled-pilot\examples\cells\lowcode\pdf-converter\bin\Debug\net8.0\pdf-converter.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.75
+
+--- STDERR ---

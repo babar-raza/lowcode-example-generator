@@ -1,0 +1,682 @@
+{
+  "sprint": "lowcode-non-lowcode-plugin-universe-20260604",
+  "generated_at": "2026-06-04T18:00:00Z",
+  "files": [
+    {
+      "path": "catalog\\catalog-gaps.md",
+      "sha256": "c7dd8e936827e81210bc749d9b52174caad283b0099098b61cd0e7ddcf59c89e",
+      "size_bytes": 2611
+    },
+    {
+      "path": "catalog\\family-plugin-counts.json",
+      "sha256": "424af340ff42a63814e7748d97f1e7bc5ab0eae514025de7578b277cafc3ddc9",
+      "size_bytes": 385
+    },
+    {
+      "path": "catalog\\full-products-plugin-catalog.json",
+      "sha256": "3a04fdd83df98911b462a448dea00a95d6b3c7ffc76506514f193640876ed8b1",
+      "size_bytes": 47086
+    },
+    {
+      "path": "catalog\\missing-family-aliases.json",
+      "sha256": "07ad3128cbab9366c5515cc0bc71d5824c17e38d0ff2ce03a900e067b04cc74b",
+      "size_bytes": 231
+    },
+    {
+      "path": "catalog\\plugin-page-hashes.json",
+      "sha256": "bc578ee58df34e1fa665cc53fb40bb73b0c1b04632ccdf7a24124135d1030354",
+      "size_bytes": 5450
+    },
+    {
+      "path": "healing\\pilot-defect-ledger.json",
+      "sha256": "8667956ff1fd1cdd870b4fcf70697bf0c3cec148a3bb972ece6eae225cffb679",
+      "size_bytes": 2127
+    },
+    {
+      "path": "healing\\self-healing-ledger.md",
+      "sha256": "58c02f44223b423cf45d1464eadb64d9d5703547b6efd65e00456877db402dbf",
+      "size_bytes": 3533
+    },
+    {
+      "path": "mapping\\candidate-mapping-7-priority-families.md",
+      "sha256": "c739a859e5e7b2ad6bab24165b89dd7f06fe6fde3de0a1eff26f89b1d32c6e85",
+      "size_bytes": 8232
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\output-validation.json",
+      "sha256": "4210b120cf83ae6cdbd39a4fd683a0cdb6aa9c3e5de874bd067b3fd6181b9014",
+      "size_bytes": 1230
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\output.pdf",
+      "sha256": "4c8d580c0bd665c913ef369adc6b8146e2f49e8c71952dedae3db6c04fd62a69",
+      "size_bytes": 38578
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\Aspose.CAD.dll",
+      "sha256": "f4ee5c47f7335b77fd6bc3043b4ff0657e0c28d3d685d65c05d4e82c8eca34ce",
+      "size_bytes": 32446320
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\cad-probe.deps.json",
+      "sha256": "7bc04dbe2905616280ed8a677af51572c38a7d1f34edb279e606f47c4544a955",
+      "size_bytes": 1993
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\cad-probe.dll",
+      "sha256": "d28e5d55976db8116cf4e70ac218b1329c5cbefd028a999dc15af3b9fd7a2757",
+      "size_bytes": 6144
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\cad-probe.exe",
+      "sha256": "f22a49a7c872289f2afe63e7b29d053dcb1cf7f0d6a4b27c7ef8151d2cbaf4fc",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\cad-probe.pdb",
+      "sha256": "8edf277acfd9343190f43b1ac9240efb8b3780608d53243e428781fef1ee5d3f",
+      "size_bytes": 11760
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\cad-probe.runtimeconfig.json",
+      "sha256": "28329cf08f6505e73806b17558b187c02f0c1c516fe47ebfb7a013d082aaa306",
+      "size_bytes": 340
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net8.0\\System.Security.Cryptography.Pkcs.dll",
+      "sha256": "90dc19334edec6c22266ee36c78af43069e57323375e7da67696d85a57bf9ed6",
+      "size_bytes": 319776
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\bin\\Release\\net8.0\\System.Security.Cryptography.Pkcs.dll",
+      "sha256": "870997ec64167d031c6f2e4f3658fbc35ba8a7f7c2e7431583234e78fe5debdb",
+      "size_bytes": 264864
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\cad-probe.csproj",
+      "sha256": "62f0597341bee3ecf1f985c8fc3452ea75a5b3b14021fdfc23a524c886ae1fd9",
+      "size_bytes": 340
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\cad-probe.csproj.nuget.dgspec.json",
+      "sha256": "efc31d6f0b4ff7cfd90c7047f5fc0aa0f87a4eefe8b9512445accd4a267e9c72",
+      "size_bytes": 3775
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\cad-probe.csproj.nuget.g.props",
+      "sha256": "c426e5f7ccd91220692184d66876bec233b10fc35a1109835de29265d94a5c8d",
+      "size_bytes": 1302
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\cad-probe.csproj.nuget.g.targets",
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "size_bytes": 150
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\project.assets.json",
+      "sha256": "9b8b77fae71c910b3584f587d8749b89e6fd832ce0d6818fe2d2e1e764e5d7ea",
+      "size_bytes": 11763
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\project.nuget.cache",
+      "sha256": "9f976f10da73d89ef74d332cd578ca2ca470fbe7cf38400dae8d95b49255079b",
+      "size_bytes": 1349
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs",
+      "sha256": "f7a5d9789c863625e139ff99e1113a503830f6b85a88f6129916df83ac76b49e",
+      "size_bytes": 198
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\apphost.exe",
+      "sha256": "f22a49a7c872289f2afe63e7b29d053dcb1cf7f0d6a4b27c7ef8151d2cbaf4fc",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.AssemblyInfo.cs",
+      "sha256": "91d7a51ed4ab37da3d4239a76929d1fea5a9a91c01a5ff65c168afbe74b250d3",
+      "size_bytes": 1003
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.AssemblyInfoInputs.cache",
+      "sha256": "a29b4b412cdb75fed6c6334d0be49be213a6a9d13fc019e8436e42d1bdb5e4ea",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.assets.cache",
+      "sha256": "010b7984625b99a57d6f28327f1c899579246e69b23243a3fd2ade3cc3a425b9",
+      "size_bytes": 3300
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.csproj.AssemblyReference.cache",
+      "sha256": "40081f160c110de62e6ccb0cd7ff86c82f5da1a08ca5e55af2b5f6fec79ec6a4",
+      "size_bytes": 934
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.csproj.CoreCompileInputs.cache",
+      "sha256": "461810451753c61a7351a86ecec667d12fe77f516c19f450253299dc26b765d1",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.csproj.FileListAbsolute.txt",
+      "sha256": "f58e791c818b01eeab96f66a9960a4a901efe81b6675dee9a51680c4737b383f",
+      "size_bytes": 3870
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.csproj.Up2Date",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.dll",
+      "sha256": "d28e5d55976db8116cf4e70ac218b1329c5cbefd028a999dc15af3b9fd7a2757",
+      "size_bytes": 6144
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.GeneratedMSBuildEditorConfig.editorconfig",
+      "sha256": "75eefec9f542e4e8ecc183d0042e86eb99651f9974ff45f78792dc147b7f0cd3",
+      "size_bytes": 898
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.genruntimeconfig.cache",
+      "sha256": "6768f0513885a4a0383c6314f066718ab2f21788a45071f3b7f649bdb504269d",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.GlobalUsings.g.cs",
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227",
+      "size_bytes": 239
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\cad-probe.pdb",
+      "sha256": "8edf277acfd9343190f43b1ac9240efb8b3780608d53243e428781fef1ee5d3f",
+      "size_bytes": 11760
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\ref\\cad-probe.dll",
+      "sha256": "a9116b70d61ae2fa409c27cd1b7364202b31a5b865b3971ab69f400b6df977b4",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\obj\\Release\\net8.0\\refint\\cad-probe.dll",
+      "sha256": "a9116b70d61ae2fa409c27cd1b7364202b31a5b865b3971ab69f400b6df977b4",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\cad\\probe\\Program.cs",
+      "sha256": "f8190ed39d180cafe1858dd750e0240c1f204f67bebf172b55e1640636f2c7df",
+      "size_bytes": 1400
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\output-validation.json",
+      "sha256": "6e0778792aa7dc6f33ace0a3d57e145bef0787abb9d15427a1a34f2b6e1b1900",
+      "size_bytes": 1483
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\output.ttf",
+      "sha256": "df8d0d1475e4798d685928a1a963d72f89a456c7f6c2014467cfddcbed605c8a",
+      "size_bytes": 29016
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\Aspose.Font.dll",
+      "sha256": "a1fabd72ed3bd2f847ddf70bd5daba0f3bc8812daed1baea1e78ea8d89e124d7",
+      "size_bytes": 3200368
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\font-probe.deps.json",
+      "sha256": "526d230e1ff57de821a94820849db9592d115e2ff6166657168d3bf4b87a6233",
+      "size_bytes": 4497
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\font-probe.dll",
+      "sha256": "aca8590f396a28d00ab7a17e3149c880455676e05b29931a22bbd42f7d1a94ca",
+      "size_bytes": 6144
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\font-probe.exe",
+      "sha256": "7f91c4dd57f96e4e1ff62c75a8e4fa86eb18d804b275904ee95de2ed397c299b",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\font-probe.pdb",
+      "sha256": "9a8dc6894133c9233d386b9943491ca357385d785a9236352c8f5c09fe6ba330",
+      "size_bytes": 11872
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\font-probe.runtimeconfig.json",
+      "sha256": "28329cf08f6505e73806b17558b187c02f0c1c516fe47ebfb7a013d082aaa306",
+      "size_bytes": 340
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "sha256": "d7511a478b8116ba9d85bc22848cec5bcaf56d351a89b4f1801c835f5adaf9e4",
+      "size_bytes": 26752
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net7.0\\Microsoft.Win32.SystemEvents.dll",
+      "sha256": "4bf1b38f6f5acb5ae0927b87013a24733791244564578205dfeff57ab112fa17",
+      "size_bytes": 58496
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net7.0\\System.Drawing.Common.dll",
+      "sha256": "3fd911243a82a5b430011a8c2102d21a3028f794b4c4ed3ba61112c890d2c033",
+      "size_bytes": 614536
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net7.0\\System.Windows.Extensions.dll",
+      "sha256": "54433d0e22b3e827ad266dfb32ca736e8075f76e5bb9de5fec3f340ef384fbf0",
+      "size_bytes": 53888
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\System.Drawing.Common.dll",
+      "sha256": "1cbef69e470eafac9da174b5705c44c52067cb8b3304c0de23cc04ea43daee5d",
+      "size_bytes": 173696
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\System.Security.Permissions.dll",
+      "sha256": "e136aa788f5de55de83ae0403b49d48095937aa690cba60c4ca455bca5737aa1",
+      "size_bytes": 110736
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\bin\\Release\\net8.0\\System.Windows.Extensions.dll",
+      "sha256": "30d2c9966096f23410d8593eddaaf3c0217e1c7075520822dbe7d858d581309b",
+      "size_bytes": 27824
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\font-probe.csproj",
+      "sha256": "88d52c34e834fe234383b969bcceb20355b9088aa3df85d8f81c5ce583ca0587",
+      "size_bytes": 341
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\font-probe.csproj.nuget.dgspec.json",
+      "sha256": "233f441ec0b86c5e08e1482d469e52788684c63cacdabffb678bdd4fb83ee971",
+      "size_bytes": 3786
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\font-probe.csproj.nuget.g.props",
+      "sha256": "c426e5f7ccd91220692184d66876bec233b10fc35a1109835de29265d94a5c8d",
+      "size_bytes": 1302
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\font-probe.csproj.nuget.g.targets",
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "size_bytes": 150
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\project.assets.json",
+      "sha256": "3ad41f344822d2bc2bc309585eaba3e58ca7d3e473cfcd8c48bdc5be31032318",
+      "size_bytes": 15287
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\project.nuget.cache",
+      "sha256": "17b59d19b0f300ce8fe1a7ebdca44e1e563cec262427dd27bbad0244450b05e4",
+      "size_bytes": 1597
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs",
+      "sha256": "f7a5d9789c863625e139ff99e1113a503830f6b85a88f6129916df83ac76b49e",
+      "size_bytes": 198
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\apphost.exe",
+      "sha256": "7f91c4dd57f96e4e1ff62c75a8e4fa86eb18d804b275904ee95de2ed397c299b",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.AssemblyInfo.cs",
+      "sha256": "53e5cb6f17076bd159c25f7a87543844f91a606eb6348157b1735639ec0cd4aa",
+      "size_bytes": 1006
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.AssemblyInfoInputs.cache",
+      "sha256": "1a8cf8aebcb383935640132ae859142314de480e6f6348f806b35a939aa38f0c",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.assets.cache",
+      "sha256": "64a493ce9c1fb196ae67d235d43c10e496e73034235bc9463d76f4a64ac91f04",
+      "size_bytes": 4929
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.csproj.AssemblyReference.cache",
+      "sha256": "94143bd163bfea9e5847d2d2e153d0e395eb94b0194793b02033f37f0cb81037",
+      "size_bytes": 2341
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.csproj.CoreCompileInputs.cache",
+      "sha256": "380c1b9a71a617280aec8323c00f3a9ddfa785d29e8b9cec7e41b7a65259127d",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.csproj.FileListAbsolute.txt",
+      "sha256": "11353f052d0f49876e64af7d9e050b08dab83be84066c5fa989f3974c1b1ab8e",
+      "size_bytes": 4973
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.csproj.Up2Date",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.dll",
+      "sha256": "aca8590f396a28d00ab7a17e3149c880455676e05b29931a22bbd42f7d1a94ca",
+      "size_bytes": 6144
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.GeneratedMSBuildEditorConfig.editorconfig",
+      "sha256": "31050e3d65cac4e3d5fcbc693f4f6df2acd9416847c27334abb4ae383dd43b8f",
+      "size_bytes": 900
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.genruntimeconfig.cache",
+      "sha256": "36ed016900df85ded14acf86c5ff9a975a4465ba2b8e78eb29f891588759ba70",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.GlobalUsings.g.cs",
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227",
+      "size_bytes": 239
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\font-probe.pdb",
+      "sha256": "9a8dc6894133c9233d386b9943491ca357385d785a9236352c8f5c09fe6ba330",
+      "size_bytes": 11872
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\ref\\font-probe.dll",
+      "sha256": "58a2df882e81b0dc786dd73aaa764af4e1d7c923ca667d8c16fbf085a9081fe3",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\obj\\Release\\net8.0\\refint\\font-probe.dll",
+      "sha256": "58a2df882e81b0dc786dd73aaa764af4e1d7c923ca667d8c16fbf085a9081fe3",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\font\\probe\\Program.cs",
+      "sha256": "0ae17bfb7a9ca2bc1dd8d76b8ae4a955ca1ee6f76011c9e6cdf20d721b164184",
+      "size_bytes": 1682
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\output-validation.json",
+      "sha256": "1ae45bde21695e9d486b4a26ecde826942a5e48062a49643a4c5abf4e0903736",
+      "size_bytes": 993
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\output.pdf",
+      "sha256": "6a9351115f6049147ff4915bb294640182676bb1d437058aa9898c911eee995b",
+      "size_bytes": 79289
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\Aspose.Drawing.dll",
+      "sha256": "8a6ac58d05d6b08c39f0dd9c43aeb99e8639fc27fadb7aec0fbd4a8fcf3e2fca",
+      "size_bytes": 7819624
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\Aspose.Tasks.dll",
+      "sha256": "a5fdbe11ee32de886015c4fcd882bc4040446d1c3694ae190d714cca382148b0",
+      "size_bytes": 6121368
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "sha256": "ca495bf6c86b7f092d624928101985a941532d149dcd8acfea170f8a53be8850",
+      "size_bytes": 26224
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\runtimes\\unix\\lib\\net6.0\\System.Drawing.Common.dll",
+      "sha256": "89ea595ccb1fd1384480c1e30bd487c92af5d06d3b06f295323eff601acd9019",
+      "size_bytes": 427112
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net6.0\\Microsoft.Win32.SystemEvents.dll",
+      "sha256": "142cce4ed8ac9da22d69c38a6f22738abfb22090dc9313e8b58e6f91978e89af",
+      "size_bytes": 53352
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net6.0\\System.Drawing.Common.dll",
+      "sha256": "4d3001697df50cca54f32ed2dbbd1f3f415b48d5d756b1bf9500a43ae9b68da0",
+      "size_bytes": 454248
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\runtimes\\win\\lib\\net6.0\\System.Windows.Extensions.dll",
+      "sha256": "e72863f75a5adb5697158f16b00369ad3a95710235647626675a5c070f10ecd9",
+      "size_bytes": 43112
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\System.Drawing.Common.dll",
+      "sha256": "98d07e6b1e7d3641a8608a360b3dc273fe8a0f78926b6e1e5f679a7a074d491f",
+      "size_bytes": 175216
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\System.Security.Permissions.dll",
+      "sha256": "62068c0f6bffb0eb4ec1c6a45a16784caee7565f6c5404d8342089f4ff4b3712",
+      "size_bytes": 104048
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\System.Windows.Extensions.dll",
+      "sha256": "810e8767d02d70af173bc33cc1048ff31a7df015fd46cf423a309cc89c50dc69",
+      "size_bytes": 25712
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\tasks-probe.deps.json",
+      "sha256": "43262136ec570ba86ec51af0d5f5b00edc7c35878470a4e0aa0dd57350e883e6",
+      "size_bytes": 5309
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\tasks-probe.dll",
+      "sha256": "4b3167e5cb3a34518a51c257cb00ad07dae479018ae0e64bf225b26556b7a142",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\tasks-probe.exe",
+      "sha256": "1f086824324cadae0ed75560574cdef6c85b8728205b6762eea169a7574e1278",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\tasks-probe.pdb",
+      "sha256": "57aabda89ecb016961b14c7375a38e1f354c6333b1580f7898538a31032e3463",
+      "size_bytes": 11852
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\bin\\Release\\net8.0\\tasks-probe.runtimeconfig.json",
+      "sha256": "28329cf08f6505e73806b17558b187c02f0c1c516fe47ebfb7a013d082aaa306",
+      "size_bytes": 340
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\project.assets.json",
+      "sha256": "adb322e158f2cabf1eec9292cf17dc2d49f0913753a26db5f167d524559b3079",
+      "size_bytes": 21152
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\project.nuget.cache",
+      "sha256": "0a0ff145b36359318645176abcd3025b01cf5b0fef8510afbcfd50db296e9a8d",
+      "size_bytes": 1984
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs",
+      "sha256": "f7a5d9789c863625e139ff99e1113a503830f6b85a88f6129916df83ac76b49e",
+      "size_bytes": 198
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\apphost.exe",
+      "sha256": "1f086824324cadae0ed75560574cdef6c85b8728205b6762eea169a7574e1278",
+      "size_bytes": 151552
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\ref\\tasks-probe.dll",
+      "sha256": "e3eb6ab6f0061949ea8a313200eb7f54410ce640350ce147e36a4f8772f7a07c",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\refint\\tasks-probe.dll",
+      "sha256": "e3eb6ab6f0061949ea8a313200eb7f54410ce640350ce147e36a4f8772f7a07c",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-pr.271367AC.Up2Date",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.AssemblyInfo.cs",
+      "sha256": "54e97868f92339b9869ebc282462c651fa1938e540a66d98263a84eea3de31e9",
+      "size_bytes": 1009
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.AssemblyInfoInputs.cache",
+      "sha256": "ba5b120bcf64a0ba1dcda489545d7b5c2a507e9f04d5f718a0d3aa51e3661930",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.assets.cache",
+      "sha256": "7d52616c5ca2715c88bb7a71f98595ce796388f24a0c32d8e0011f071e3f0736",
+      "size_bytes": 7279
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.csproj.AssemblyReference.cache",
+      "sha256": "8eb8a221a9642cdc559c6fbe60224bdee03f1749d34b04056d43c0de1f746b58",
+      "size_bytes": 2787
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.csproj.CoreCompileInputs.cache",
+      "sha256": "e0891de64104c20c239a8402a1a8375e8870c1cd93fd04baed0c2807675ca055",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.csproj.FileListAbsolute.txt",
+      "sha256": "5a834bf36840d593a1efbc13394bddaba2c501175e83f2ba1287f9cde86aa6f8",
+      "size_bytes": 5439
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.dll",
+      "sha256": "4b3167e5cb3a34518a51c257cb00ad07dae479018ae0e64bf225b26556b7a142",
+      "size_bytes": 5632
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.GeneratedMSBuildEditorConfig.editorconfig",
+      "sha256": "90ceda294ec123b31a5390e7a2a320db4605467a0c8ec779b952b219181bdf92",
+      "size_bytes": 902
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.genruntimeconfig.cache",
+      "sha256": "37bfca4b482def07938ddbabe3e65c7a4ff188b5c4f23c5563833e2f13416bcc",
+      "size_bytes": 66
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.GlobalUsings.g.cs",
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227",
+      "size_bytes": 239
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\Release\\net8.0\\tasks-probe.pdb",
+      "sha256": "57aabda89ecb016961b14c7375a38e1f354c6333b1580f7898538a31032e3463",
+      "size_bytes": 11852
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\tasks-probe.csproj.nuget.dgspec.json",
+      "sha256": "b2ce9e2709d92d70a411cd3c85c9ba215f0c91681367760a819ab9a08a4c6e45",
+      "size_bytes": 3797
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\tasks-probe.csproj.nuget.g.props",
+      "sha256": "c426e5f7ccd91220692184d66876bec233b10fc35a1109835de29265d94a5c8d",
+      "size_bytes": 1302
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\obj\\tasks-probe.csproj.nuget.g.targets",
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "size_bytes": 150
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\Program.cs",
+      "sha256": "18af512c17951eb42e61888c48caaacc5a4909f66e4fe3f8417735d4b82e7db1",
+      "size_bytes": 964
+    },
+    {
+      "path": "pilots\\plugin-wave\\tasks\\probe\\tasks-probe.csproj",
+      "sha256": "f951c8d9ca229d55d705cbb002c47eafcbcd5d05f1461cd1b1a02aa121fe3030",
+      "size_bytes": 342
+    },
+    {
+      "path": "reflection\\family-namespace-matrix.json",
+      "sha256": "4818525a32ee64d383f7eeaa29aa212ff69e36911c02308b8494e09602341e4f",
+      "size_bytes": 10755
+    },
+    {
+      "path": "reflection\\package-fingerprint-ledger.json",
+      "sha256": "5e68a954a78c1044904b54397cf8ea974019368408c5761387481fa968330d5b",
+      "size_bytes": 5170
+    },
+    {
+      "path": "reflection\\public-api-inventory\\barcode.json",
+      "sha256": "ec5284435cce7ad72ca25f1d91211f8f12d1c7a8c9a1a20737cc809a85edd12c",
+      "size_bytes": 328668
+    },
+    {
+      "path": "reflection\\public-api-inventory\\cad.json",
+      "sha256": "9fd88f6ee0a8ca338631a385f049ffa5e1034a2ab7209975af95745665f465fb",
+      "size_bytes": 6704601
+    },
+    {
+      "path": "reflection\\public-api-inventory\\drawing.json",
+      "sha256": "81145a5ecb615d21fabf934580a1b2ba89c6cd8e64b16de7c773c7e16ed18dac",
+      "size_bytes": 622779
+    },
+    {
+      "path": "reflection\\public-api-inventory\\finance.json",
+      "sha256": "9d3b7daed78b79c2bc20e862430a835c8279f724210f2db74bca44e83d8a87a2",
+      "size_bytes": 1089463
+    },
+    {
+      "path": "reflection\\public-api-inventory\\font.json",
+      "sha256": "76439ac4b8e86849868a2a55d0e6d78c0cef3c5605c415ae7efc53f2d3c8d1b4",
+      "size_bytes": 302172
+    },
+    {
+      "path": "reflection\\public-api-inventory\\html.json",
+      "sha256": "8c10042c1b7f5715355d6eb18a558507cb35c03d3ea322c9481bf3c644d46e0e",
+      "size_bytes": 1423345
+    },
+    {
+      "path": "reflection\\public-api-inventory\\imaging.json",
+      "sha256": "e59d7910587fb6244161a81702b7c0df12da3857a5c324b267cb73789c9f006b",
+      "size_bytes": 2570149
+    },
+    {
+      "path": "reflection\\public-api-inventory\\page.json",
+      "sha256": "4f66e28e9baec5f55f10c6a3ecbc5a1699daad725cd544ca14c4bde29a3d55d3",
+      "size_bytes": 503767
+    },
+    {
+      "path": "reflection\\public-api-inventory\\svg.json",
+      "sha256": "934641c00b3cd44d55ccaca9396a4b514b0bae16f86cebcb2106fb2d21c56161",
+      "size_bytes": 1251423
+    },
+    {
+      "path": "reflection\\public-api-inventory\\tasks.json",
+      "sha256": "78a5c30cae431e150baeffd7c249d724836011437aea1ef61615c4c45a20fc7c",
+      "size_bytes": 1015515
+    },
+    {
+      "path": "reflection\\public-api-inventory\\threed.json",
+      "sha256": "82618a982799e05e3986e9ec6b7e0c455b59063286f339a74cb5ac1173538347",
+      "size_bytes": 642162
+    },
+    {
+      "path": "reflection\\public-api-inventory\\zip.json",
+      "sha256": "0cd6a62f029ac1d1a052e4bdf19710f34e8ba67818f7a868fc39f725119a8ab7",
+      "size_bytes": 316152
+    },
+    {
+      "path": "roadmap\\family-wave-roadmap.md",
+      "sha256": "d5954468d7962efafedaa44150964c2a7688c0d3c7ac6a3153b9fdbfbac9f884",
+      "size_bytes": 5547
+    },
+    {
+      "path": "universe\\nuget-availability-matrix.json",
+      "sha256": "20982f90aaee38919cc931a10bd4ccce3ddc467ec3022c45f2f0adb9fc8942fb",
+      "size_bytes": 7261
+    }
+  ],
+  "total_files": 135
+}

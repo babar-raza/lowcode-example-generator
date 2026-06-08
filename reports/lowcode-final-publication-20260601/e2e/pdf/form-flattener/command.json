@@ -1,0 +1,25 @@
+{
+  "family": "pdf",
+  "name": "form-flattener",
+  "label": "pdf/form-flattener",
+  "pilot": "pdf-controlled-pilot-pr7",
+  "csproj": "form-flattener.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 86806,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 29532
+      },
+      {
+        "name": "output.pdf",
+        "size": 57274
+      }
+    ]
+  }
+}

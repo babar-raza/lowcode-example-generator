@@ -1,0 +1,9 @@
+{
+  "example": "pdfa-converter",
+  "csproj": "pdf-pdf-aconverter.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Success: output file size = 625904 bytes\n",
+  "stderr_tail": ""
+}

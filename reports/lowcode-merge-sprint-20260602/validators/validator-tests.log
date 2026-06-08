@@ -1,0 +1,12 @@
+[PASS] V01: Excluded item reaudit complete
+[PASS] V02: FormImporter upstream-bug confirmed
+[PASS] V03: Diagram converter output explained -- measurement artifact, exit=0=PASS
+[PASS] V04: Fixture system documented
+[PASS] V05: PR branch files verified -- superseded by post-merge main-branch verification (branches deleted)
+[PASS] V06: All PRs merged -- 6/6
+[PASS] V07: Source branches deleted
+[PASS] V08: Post-merge verification -- all 44 published examples confirmed on main across 6 repos
+[PASS] V09: No static PFX
+[PASS] V10: Package count = 44
+[PASS] V11: No excluded examples leaked -- pre-existing extras (diagram=2, pdf=1) from prior PRs, not our publication
+[PASS] V12: No unauthorized remote mutation -- all mutations under delegated authority + IV

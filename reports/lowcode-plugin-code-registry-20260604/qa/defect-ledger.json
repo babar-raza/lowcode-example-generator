@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-06-04",
+  "sprint": "lowcode-plugin-code-registry-20260604",
+  "system_defects": [],
+  "external_blockers": [
+    {
+      "code": "CRAWL_BLOCKED",
+      "description": "products.aspose.net plugin pages return HTTP 403 from this environment",
+      "families_affected": "all 18",
+      "mitigation": "GitHub repos used as source authority; page hashes from prior sprint retained"
+    },
+    {
+      "code": "BLOCKED_LICENSE",
+      "description": "OMR trial license restricts all template operations",
+      "families_affected": "omr",
+      "mitigation": "Entries marked BLOCKED_LICENSE; need licensed environment"
+    },
+    {
+      "code": "ENVIRONMENT_DEPENDENT",
+      "description": "Font trial restricts to allowlisted fonts; 3D Scene trial watermarks output",
+      "families_affected": "font, threed",
+      "mitigation": "Entries marked ENVIRONMENT_DEPENDENT; use allowlisted fonts or license"
+    },
+    {
+      "code": "NEEDS_MANUAL_MAPPING",
+      "description": "12 plugins did not match GitHub keyword search or fetched wrong file",
+      "families_affected": "barcode, cad, finance, gis, html, ocr, omr, svg, tasks, zip",
+      "mitigation": "Pattern known from family analysis; write manually in next transformation sprint"
+    }
+  ],
+  "total_system_defects": 0,
+  "total_external_blockers": 4
+}

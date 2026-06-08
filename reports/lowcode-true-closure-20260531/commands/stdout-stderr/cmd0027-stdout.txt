@@ -1,0 +1,2 @@
+Example: slides-compress
+Compression succeeded: output.pptx

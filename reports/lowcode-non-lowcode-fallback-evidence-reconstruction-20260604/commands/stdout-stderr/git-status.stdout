@@ -1,0 +1,57 @@
+ M pipeline/configs/families/barcode.yml
+ M pipeline/configs/families/imaging.yml
+ M pipeline/schemas/family-config.schema.json
+ M reports/shareability-audit-20260603/verification/pytest-stdout.txt
+ M src/plugin_examples/family_config/loader.py
+ M src/plugin_examples/family_config/models.py
+ M src/plugin_examples/runner.py
+ M workspace/pr-dry-run/cells-controlled-pilot/README.md
+ M workspace/pr-dry-run/words-controlled-pilot/README.md
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? "Exit\357\200\272 "
+?? echo
+?? input1.pdf
+?? input1.pptx
+?? input2.pdf
+?? input2.pptx
+?? input_v1.docx
+?? input_v2.docx
+?? pipeline/plugin-capability-registry/
+?? pipeline/schemas/ai-suggestion-schema.json
+?? pipeline/schemas/plugin-capability-registry-schema.json
+?? reports/lowcode-final-publication-20260601/
+?? reports/lowcode-final-verify-20260603/
+?? reports/lowcode-merge-sprint-20260602/
+?? reports/lowcode-non-lowcode-fallback-evidence-reconstruction-20260604/
+?? reports/lowcode-non-lowcode-fallback-implementation-20260604/
+?? reports/lowcode-post-pub-monitor-20260603/
+?? reports/lowcode-post-pub-normalize-20260603/
+?? reports/lowcode-post-pub-patrol-20260603/
+?? reports/lowcode-postmerge-verify-20260602/
+?? reports/lowcode-pub-proof-repair-20260601/
+?? reports/lowcode-system-repair-20260601/
+?? reports/lowcode-true-closure-20260531/
+?? src/plugin_examples/ai_acceleration/
+?? src/plugin_examples/evidence_validator/rules/non_lowcode.py
+?? src/plugin_examples/plugin_detector/heuristic_matcher.py
+?? src/plugin_examples/probe_generator/
+?? src/plugin_examples/website_catalog/
+?? src/workspace/
+?? template.docx
+?? test-cert.pfx
+?? tests/integration/test_runner_fallback_integration.py
+?? tests/unit/test_ai_suggestion_schema.py
+?? tests/unit/test_barcode_family_onboarding.py
+?? tests/unit/test_capability_registry_schema.py
+?? tests/unit/test_family_config_fallback_strategy.py
+?? tests/unit/test_heuristic_matcher.py
+?? tests/unit/test_imaging_family_onboarding.py
+?? tests/unit/test_non_lowcode_validators.py
+?? tests/unit/test_probe_generator.py
+?? tests/unit/test_website_catalog_crawler.py

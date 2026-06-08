@@ -1,0 +1,11 @@
+{
+  "family": "pdf",
+  "name": "security",
+  "label": "pdf/security",
+  "pilot": "pdf-controlled-pilot-pr7",
+  "csproj": "security.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

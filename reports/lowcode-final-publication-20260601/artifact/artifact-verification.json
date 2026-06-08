@@ -1,0 +1,11 @@
+{
+  "sprint": "lowcode-final-publication-20260601",
+  "zip_name": "lowcode-final-publication-20260601-evidence.zip",
+  "zip_path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\.local\\evidence-bundles\\lowcode-final-publication-20260601-evidence.zip",
+  "pass1_sha256": "7e3a67a47e804d6cdac91c11117995a012ce0430b8d19362b1f3192237525c04",
+  "pass1_size": 202192,
+  "pass2_sha256": "27fe17fc7525b476bc416b8f2fdc5e36fe859f668ae318b8e3fb9e806c56810f",
+  "pass2_size": 202894,
+  "total_entries": 338,
+  "built_at": "2026-06-01T12:22:13.748053+00:00"
+}

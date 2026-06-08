@@ -1,0 +1,21 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 8 items
+
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaAcceptsValid::test_schema_accepts_website_discovered_entry PASSED [ 12%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaAcceptsValid::test_schema_accepts_probe_failed_with_taxonomy PASSED [ 25%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaAcceptsValid::test_schema_accepts_all_twelve_status_values PASSED [ 37%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaRejectsInvalid::test_schema_rejects_missing_required_field PASSED [ 50%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaRejectsInvalid::test_schema_rejects_invalid_status_value PASSED [ 62%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaRejectsInvalid::test_schema_rejects_verified_publishable_without_probe_evidence PASSED [ 75%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaRejectsInvalid::test_schema_rejects_probe_failed_without_taxonomy PASSED [ 87%]
+tests/unit/test_capability_registry_schema.py::TestRegistrySchemaRejectsInvalid::test_schema_rejects_confidence_score_above_maximum PASSED [100%]
+
+============================== 8 passed in 0.65s ==============================

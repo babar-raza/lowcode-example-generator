@@ -1,0 +1,12 @@
+{
+  "family": "barcode",
+  "plugin_slug": "scan-barcode",
+  "canonical_url": "https://products.aspose.net/barcode/2d-barcode-reader/",
+  "implementation_model": "RECOGNITION_EXTRACTION_API",
+  "nuget_package": "Aspose.BarCode",
+  "nuget_version": "24.12.0",
+  "github_links": ["https://raw.githubusercontent.com/aspose-barcode/Aspose.BarCode-for-.NET/master/Examples/CSharp/BarcodeRecognition/DecodingSettings/ReadAustraliaPostCTable.cs"],
+  "code_hashes": ["ba39d178d1845a2f061eb6705336597f"],
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "generated_at": "2026-06-05"
+}

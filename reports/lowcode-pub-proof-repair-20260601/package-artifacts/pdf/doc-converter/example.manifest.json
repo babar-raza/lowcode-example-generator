@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "doc-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "DocConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-doc-converter.csproj",
+  "files": [
+    "pdf-doc-converter.csproj",
+    "Program.cs"
+  ]
+}

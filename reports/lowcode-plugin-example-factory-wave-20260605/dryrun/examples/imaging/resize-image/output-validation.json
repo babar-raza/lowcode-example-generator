@@ -1,0 +1,17 @@
+{
+  "package_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\resize-image",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\resize-image\\output\\resized.png",
+      "size": 1515
+    },
+    {
+      "path": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-example-factory-wave-20260605\\dryrun\\examples\\imaging\\resize-image\\output\\source.bmp",
+      "size": 360054
+    }
+  ],
+  "verdict": "PASS"
+}

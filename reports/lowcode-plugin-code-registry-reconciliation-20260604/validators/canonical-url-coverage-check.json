@@ -1,0 +1,54 @@
+{
+  "sprint": "lowcode-plugin-code-registry-reconciliation-20260604",
+  "generated_at": "2026-06-04",
+  "validator": "canonical-url-coverage-check",
+  "description": "Verifies that all accessible canonical URLs have been mapped to registry entries",
+  "checks": [
+    {
+      "family": "barcode",
+      "canonical_plugins_discovered": 4,
+      "registry_entries_with_canonical_url": 4,
+      "entries_missing_canonical_url": 1,
+      "missing": ["read-barcode (CANONICAL_SPLIT_AMBIGUOUS)"],
+      "status": "PARTIAL — 1 entry has ambiguous mapping"
+    },
+    {
+      "family": "imaging",
+      "canonical_plugins_discovered": 10,
+      "registry_entries_with_canonical_url": 8,
+      "new_canonical_not_in_old_registry": 3,
+      "new_entries": ["animation-maker", "photo-album-maker", "image-deskew"],
+      "status": "PARTIAL — 3 new canonical pages not yet in registry"
+    },
+    {
+      "family": "zip",
+      "canonical_plugins_discovered": 3,
+      "registry_entries_with_canonical_url": 4,
+      "new_canonical_not_in_old_registry": 1,
+      "new_entries": ["rar-extractor"],
+      "status": "PARTIAL — 1 new canonical page (rar-extractor) not yet in registry"
+    },
+    {"family": "html", "canonical_plugins_discovered": 1, "registry_entries_with_canonical_url": 1, "status": "PASS"},
+    {"family": "tasks", "canonical_plugins_discovered": 1, "registry_entries_with_canonical_url": 1, "status": "PASS"},
+    {"family": "cad", "canonical_plugins_discovered": 1, "registry_entries_with_canonical_url": 1, "status": "PASS"},
+    {"family": "ocr", "canonical_plugins_discovered": 6, "registry_entries_with_canonical_url": 2, "new_canonical_not_in_old_registry": 4, "status": "PARTIAL"},
+    {"family": "psd", "canonical_plugins_discovered": 4, "registry_entries_with_canonical_url": 2, "new_canonical_not_in_old_registry": 2, "status": "PARTIAL"},
+    {"family": "svg", "canonical_plugins_discovered": 3, "registry_entries_with_canonical_url": 1, "new_canonical_not_in_old_registry": 2, "status": "PARTIAL"},
+    {"family": "page", "canonical_plugins_discovered": 2, "registry_entries_with_canonical_url": 2, "status": "PASS"},
+    {"family": "tex", "canonical_plugins_discovered": 2, "registry_entries_with_canonical_url": 1, "new_canonical_not_in_old_registry": 1, "status": "PARTIAL"},
+    {"family": "omr", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "gis", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "note", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "drawing", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "font", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "finance", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"},
+    {"family": "threed", "canonical_plugins_discovered": 0, "family_page_status": "HTTP_403", "status": "BLOCKED_403 — external"}
+  ],
+  "summary": {
+    "families_fully_covered": 5,
+    "families_partially_covered": 6,
+    "families_blocked_external": 7,
+    "new_canonical_pages_needing_registry_entries": 13,
+    "verdict": "CANONICAL_URL_COVERAGE_PARTIAL — 11/11 accessible families have at least one canonical URL mapped; 13 new canonical pages identified for future registry expansion"
+  }
+}

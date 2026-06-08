@@ -1,0 +1,7 @@
+{
+  "repairs_needed": 3,
+  "repairs_completed": 3,
+  "pdf": {"issue": "Only 3 of 20 examples listed", "fix": "Complete rewrite", "pr": 24, "merged": true},
+  "email": {"issue": "Path email-converter/ instead of converter/", "fix": "Path correction", "pr": 4, "merged": true},
+  "slides": {"issue": "Paths slides-compress/ etc instead of compress/ etc", "fix": "Path corrections", "pr": 4, "merged": true}
+}

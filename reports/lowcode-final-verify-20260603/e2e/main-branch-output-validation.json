@@ -1,0 +1,12 @@
+{
+  "validation_method": "exit_code_zero",
+  "total_examples": 44,
+  "exit_0_count": 44,
+  "non_zero_count": 0,
+  "special_cases": {
+    "diagram_converter": {"exit_code": 0, "note": "Creates input.vsdx programmatically, converts to output.vdx"},
+    "pdf_timestamp": {"exit_code": 0, "note": "Environment-dependent, handles TSA unavailability"},
+    "pdf_signature": {"exit_code": 0, "note": "Generates self-signed PFX at runtime"},
+    "words_signer": {"exit_code": 0, "note": "Generates self-signed PFX at runtime"}
+  }
+}

@@ -37,6 +37,7 @@ class NuGetConfig:
 @dataclass(frozen=True)
 class PluginDetection:
     namespace_patterns: list[str]
+    fallback_strategy: str | None = None
 
 
 @dataclass(frozen=True)

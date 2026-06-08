@@ -1,0 +1,12 @@
+{
+  "family": "words",
+  "name": "report-builder",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "ReportBuilder",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "report-builder.csproj",
+  "files": [
+    "Program.cs",
+    "report-builder.csproj"
+  ]
+}

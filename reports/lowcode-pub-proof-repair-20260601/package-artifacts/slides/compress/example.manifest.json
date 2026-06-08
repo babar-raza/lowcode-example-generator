@@ -1,0 +1,12 @@
+{
+  "family": "slides",
+  "name": "compress",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Compress",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "compress.csproj",
+  "files": [
+    "compress.csproj",
+    "Program.cs"
+  ]
+}

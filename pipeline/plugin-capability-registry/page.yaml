@@ -1,0 +1,113 @@
+# Plugin capability registry — Aspose.Page
+# TRAIN C: Reflection COMPLETE — 280 types, 17 namespaces (v26.5.0 net7.0)
+# DISCOVERY: Aspose.Page.Plugins namespace found (PsConverter with .Process())!
+# Status: PLUGINS_NAMESPACE_PRESENT — plugin-based API available
+
+entries:
+  # Plugin 1: Convert XPS to PDF (convert-xps-to-pdf) — REFLECTION_CANDIDATE
+  - family: page
+    plugin_slug: convert-xps-to-pdf
+    operation_kind: PAGE_CONVERSION
+    package_id: Aspose.Page
+    type_name: XpsDocument
+    namespace: Aspose.Page.XPS
+    method_name: SaveAsPdf
+    candidate_api_types:
+      - Aspose.Page.XPS.XpsDocument
+      - Aspose.Page.Plugins.PsConverter
+    candidate_methods:
+      - SaveAsPdf
+      - Merge
+      - Process
+    selected_api_mapping:
+      type_name: XpsDocument
+      namespace: Aspose.Page.XPS
+      method_name: SaveAsPdf
+      note: DllReflector confirmed; Plugins.PsConverter also available
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.75
+    confidence_rationale: >
+      DllReflector confirmed Aspose.Page.XPS.XpsDocument.SaveAsPdf (v26.5.0, 280 types).
+      BONUS: Aspose.Page.Plugins namespace found with PsConverter.Process() method.
+      Plugin-based API available for PS/EPS conversion (aligns with non-LowCode plugin strategy).
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Convert EPS to PDF (convert-eps-to-pdf) — REFLECTION_CANDIDATE
+  - family: page
+    plugin_slug: convert-eps-to-pdf
+    operation_kind: PAGE_CONVERSION
+    package_id: Aspose.Page
+    type_name: PsConverter
+    namespace: Aspose.Page.Plugins
+    method_name: Process
+    candidate_api_types:
+      - Aspose.Page.EPS.PsDocument
+      - Aspose.Page.Plugins.PsConverter
+    candidate_methods:
+      - Save
+      - Process
+    selected_api_mapping:
+      type_name: PsConverter
+      namespace: Aspose.Page.Plugins
+      method_name: Process
+      note: Plugin-based API — PsConverter.Process() confirmed in Aspose.Page.Plugins
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.78
+    confidence_rationale: >
+      Aspose.Page.Plugins.PsConverter.Process() confirmed by DllReflector.
+      This is the non-LowCode Plugins pattern aligned with sprint strategy.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"
+
+  # Plugin 3: Convert PS to PDF (convert-ps-to-pdf) — REFLECTION_CANDIDATE
+  - family: page
+    plugin_slug: convert-ps-to-pdf
+    operation_kind: PAGE_CONVERSION
+    package_id: Aspose.Page
+    type_name: PsConverter
+    namespace: Aspose.Page.Plugins
+    method_name: Process
+    candidate_api_types:
+      - Aspose.Page.Plugins.PsConverter
+    candidate_methods:
+      - Process
+    selected_api_mapping:
+      type_name: PsConverter
+      namespace: Aspose.Page.Plugins
+      method_name: Process
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.76
+    confidence_rationale: Same PsConverter.Process() for PS format.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.0"
+    refresh_due: "2026-09-04"

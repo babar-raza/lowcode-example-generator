@@ -1,0 +1,23 @@
+{
+  "sprint": "lowcode-final-publication-20260601",
+  "decision_authority": "AGENT_DELEGATED",
+  "companions": [
+    {
+      "example": "words/signer",
+      "decision": "PUBLISH_COMPANION_EXAMPLE",
+      "primary_type": "DigitalSignatureUtil.Sign",
+      "namespace": "Aspose.Words.DigitalSignatures",
+      "context_type": "SignerContext (CONTEXT_MODEL)",
+      "reason": "Useful reference code for document signing. Not a LowCode main class but provides clear value to users working with Aspose.Words digital signatures.",
+      "package_location": "words package, labeled as companion",
+      "denominator_impact": "NOT_COUNTED — outside canonical 42"
+    }
+  ],
+  "excluded_from_companion": [
+    {
+      "example": "slides/for-each",
+      "decision": "EXCLUDE_NON_RUNNABLE_HELPER",
+      "reason": "ForEach is a utility iterator taking Presentation + callback. No standalone file I/O. Users gain nothing from an iterator-only example."
+    }
+  ]
+}

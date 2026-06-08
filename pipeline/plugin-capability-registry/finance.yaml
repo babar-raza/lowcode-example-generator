@@ -1,0 +1,75 @@
+# Plugin capability registry — Aspose.Finance
+# TRAIN D: Plugin-level entries bootstrapped from DllReflector (26.5.22)
+# Reflection completed: 2026-06-04 — 851 types, Aspose.Finance namespace
+
+entries:
+  # Plugin 1: Convert XBRL (convert-xbrl)
+  - family: finance
+    plugin_slug: convert-xbrl
+    operation_kind: FINANCE_XBRL_CONVERSION
+    package_id: Aspose.Finance
+    type_name: XbrlDocument
+    namespace: Aspose.Finance.Xbrl
+    method_name: Save
+    candidate_api_types:
+      - Aspose.Finance.Xbrl.XbrlDocument
+    candidate_methods:
+      - Save
+    selected_api_mapping:
+      type_name: XbrlDocument
+      namespace: Aspose.Finance.Xbrl
+      method_name: Save
+      load_via: constructor or Load
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.75
+    confidence_rationale: >
+      DllReflector confirmed Aspose.Finance.Xbrl.XbrlDocument.Save (3 overloads).
+      XBRL conversion: load document → transform → Save to target format.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.22"
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Parse XBRL Data (parse-xbrl)
+  - family: finance
+    plugin_slug: parse-xbrl
+    operation_kind: FINANCE_XBRL_PARSING
+    package_id: Aspose.Finance
+    type_name: XbrlDocument
+    namespace: Aspose.Finance.Xbrl
+    method_name: Save
+    candidate_api_types:
+      - Aspose.Finance.Xbrl.XbrlDocument
+      - Aspose.Finance.Ofx.OfxDocument
+    candidate_methods:
+      - Save
+    selected_api_mapping:
+      type_name: XbrlDocument
+      namespace: Aspose.Finance.Xbrl
+      method_name: Save
+      parse_mode: load_and_inspect
+    status: REFLECTION_CANDIDATE
+    confidence_score: 0.68
+    confidence_rationale: >
+      Parse/read XBRL data: load XbrlDocument, iterate facts, serialize.
+      DllReflector confirmed XbrlDocument namespace with Save + data properties.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: false
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: REFLECTION_CANDIDATE
+    next_action: PROBE_CANDIDATE_PENDING_PROBE
+    blocker_type: null
+    last_reflected_package_version: "26.5.22"
+    refresh_due: "2026-09-04"

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-03",
+  "examples": [
+    {
+      "example": "pdf/timestamp",
+      "dependency": "TSA server",
+      "documented_in_code": true,
+      "graceful_failure": true,
+      "run_result": "PASS"
+    }
+  ],
+  "verdict": "PASS"
+}

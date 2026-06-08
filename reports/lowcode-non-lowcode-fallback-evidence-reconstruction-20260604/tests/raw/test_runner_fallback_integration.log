@@ -1,0 +1,19 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 6 items
+
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageSkipsForLowCodeFamilies::test_lowcode_families_skip_fallback_stage_when_strategy_none PASSED [ 16%]
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageSkipsForLowCodeFamilies::test_fallback_strategy_null_preserves_existing_detection_path PASSED [ 33%]
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageSkipsWhenLowCodeDetected::test_fallback_strategy_set_but_lowcode_namespace_found_skips PASSED [ 50%]
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageSkipsWhenNoRegistryFile::test_fallback_stage_skips_gracefully_when_no_registry_file PASSED [ 66%]
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageLoadsRegistryEntries::test_fallback_strategy_capability_registry_loads_registry_entries PASSED [ 83%]
+tests/integration/test_runner_fallback_integration.py::TestFallbackStageDoesNotMutateFormatAuthority::test_fallback_stage_does_not_mutate_format_authority PASSED [100%]
+
+============================== 6 passed in 0.58s ==============================

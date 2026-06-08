@@ -1,0 +1,30 @@
+{
+  "pipeline/configs/families/cells.yml": {
+    "sha256": "28c51b79f8dac9e704e63a46b51eb6b2044712207c315cab20fdac36649f4785",
+    "size": 3390
+  },
+  "pipeline/configs/families/words.yml": {
+    "sha256": "ef21e9e514386a7eff3092dfec815a0a2b6c2e68305b9033e9bc3cb8c5a7953a",
+    "size": 9419
+  },
+  "pipeline/configs/families/pdf.yml": {
+    "sha256": "de889ed24b3bc3a0f733a0239708256c2ca737c93a804433ecc74e86afb02d42",
+    "size": 28845
+  },
+  "pipeline/configs/families/slides.yml": {
+    "sha256": "4eec3d74e7c9cca585221bf22aa1ec71c17da40e28422ffbf63872e73347bb28",
+    "size": 4747
+  },
+  "pipeline/configs/families/email.yml": {
+    "sha256": "3e872e96519168ba03ba54372c1f25acd74d76351784df324f5e759dd7a4a357",
+    "size": 4061
+  },
+  "pipeline/configs/families/diagram.yml": {
+    "sha256": "306c16e4acdf48022d8a23cab2d3761a28e322c62a219c376c10b7c7a3f3db44",
+    "size": 2851
+  },
+  "pipeline/format-authority/manifest.json": {
+    "sha256": "3e96754355d7124fa98a42ffc875e88372ff3331a351f39f7a4a9038258a01d5",
+    "size": 1085
+  }
+}

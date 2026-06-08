@@ -1,0 +1,57 @@
+# Plugin-Code Registry: gis
+# Generated: 2026-06-04
+# Sprint: lowcode-plugin-code-registry-20260604
+
+family: gis
+package_id: Aspose.GIS
+github_repo: https://github.com/aspose-gis/Aspose.Gis-for-.NET
+implementation_model: LOAD_SAVE_OPTIONS
+
+plugins:
+  - plugin_slug: convert-gis-data
+    plugin_url: https://products.aspose.net/gis/net/convert-gis-data
+    page_hash: 8660acdb24605901
+    registry_status: NEEDS_MANUAL_MAPPING
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: []
+    classes_used:
+      - "Coordinates"
+    next_action: "Manually write code mapping based on family pattern (LOAD_SAVE_OPTIONS); fetch better example from GitHub"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/gis.md"
+      - "https://raw.githubusercontent.com/aspose-gis/Aspose.GIS-for-.NET/master/Apps/Geo.Coordinates.Convert/App.xaml.cs"
+    history:
+      - date: "2026-06-04"
+        status: NEEDS_MANUAL_MAPPING
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from App.xaml.cs"
+
+  - plugin_slug: read-gis-data
+    plugin_url: https://products.aspose.net/gis/net/read-gis-data
+    page_hash: eb35e5e27e549069
+    registry_status: CODE_HARVESTED
+    blocker_type: null
+    implementation_model: LOAD_SAVE_OPTIONS
+    code_hashes: [5e2b5e919552bedf7c53ce8289746014]
+    namespaces_used:
+      - "Aspose.Gis.Geometries"
+      - "Aspose.Gis.Formats.Shapefile"
+      - "Aspose.GIS.Examples.CSharp"
+    classes_used:
+      - "ShapefileOptions"
+      - "VectorLayer"
+      - "Point"
+    github_links:
+      - https://raw.githubusercontent.com/aspose-gis/Aspose.GIS-for-.NET/master/Examples/CSharp/Geometries/LimitPrecisionWhenReadingGeometries.cs
+    next_action: "Extract symbols from LimitPrecisionWhenReadingGeometries.cs and validate against DllReflector; then advance to READY_FOR_TRANSFORMATION"
+    evidence_paths:
+      - "reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json"
+      - "reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json"
+      - "reports/lowcode-plugin-code-registry-20260604/manual-analysis/family/gis.md"
+      - "https://raw.githubusercontent.com/aspose-gis/Aspose.GIS-for-.NET/master/Examples/CSharp/Geometries/LimitPrecisionWhenReadingGeometries.cs"
+    history:
+      - date: "2026-06-04"
+        status: CODE_HARVESTED
+        analyst_notes: "Sprint lowcode-plugin-code-registry-20260604. Code from LimitPrecisionWhenReadingGeometries.cs"

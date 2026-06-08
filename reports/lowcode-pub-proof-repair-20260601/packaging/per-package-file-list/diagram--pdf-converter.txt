@@ -1,0 +1,3 @@
+example.manifest.json
+pdf-converter.csproj
+Program.cs

@@ -1,0 +1,9 @@
+{
+  "cells": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "diagram": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "email": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "pdf": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "slides": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "words": {"branches": ["main"], "open_prs": 0, "clean": true},
+  "all_clean": true
+}

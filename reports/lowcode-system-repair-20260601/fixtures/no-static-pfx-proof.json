@@ -1,0 +1,18 @@
+{
+  "check": "no-static-pfx-in-packages",
+  "timestamp": "2026-06-01",
+  "git_tracked_pfx_count": 0,
+  "git_tracked_pfx_files": [],
+  "removed_pfx_files": [
+    "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/test.pfx",
+    "workspace/fixture-validation/pdf-signature-harness/test.pfx",
+    "workspace/fixture-validation/pdf-timestamp-harness/test-ts.pfx",
+    "reports/lowcode-final-closure-pass3-20260530/generated-source/pdf/pdf-signature/test.pfx"
+  ],
+  "runtime_generated_pfx": [
+    {"example": "words/signer", "file": "test-cert.pfx", "generated_by": "RSA.Create(2048)+CertificateRequest+CreateSelfSigned"},
+    {"example": "pdf/signature", "file": "test.pfx", "generated_by": "RSA.Create(2048)+CertificateRequest+CreateSelfSigned"}
+  ],
+  "policy": "RUNTIME_ONLY",
+  "pass": true
+}

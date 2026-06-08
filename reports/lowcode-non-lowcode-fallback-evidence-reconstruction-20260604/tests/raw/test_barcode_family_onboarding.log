@@ -1,0 +1,17 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 4 items
+
+tests/unit/test_barcode_family_onboarding.py::TestBarcodeConfigLoads::test_barcode_config_loads_without_error PASSED [ 25%]
+tests/unit/test_barcode_family_onboarding.py::TestBarcodeConfigLoads::test_barcode_fallback_strategy_is_capability_registry PASSED [ 50%]
+tests/unit/test_barcode_family_onboarding.py::TestBarcodeConfigLoads::test_barcode_registry_entry_validates_against_schema PASSED [ 75%]
+tests/unit/test_barcode_family_onboarding.py::TestBarcodeConfigLoads::test_barcode_onboarding_does_not_affect_cells_or_words PASSED [100%]
+
+============================== 4 passed in 0.72s ==============================

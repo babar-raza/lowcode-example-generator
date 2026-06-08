@@ -1,0 +1,166 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "lane": "J",
+  "description": "Publication-readiness local package review",
+  "reviewed_at": "2026-06-05",
+  "total_packages": 12,
+  "publication_candidates": 12,
+  "verdict": "12/12 ready for local publication review",
+  "candidates": [
+    {
+      "key": "barcode/generate-qr-code",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 10153,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "barcode/scan-barcode",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 23322,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "svg/svg-to-pdf-converter",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 32590,
+      "has_trial_watermark": false,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "tex/latex-figure-renderer",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 5049,
+      "has_trial_watermark": false,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "zip/create-archive",
+      "score": 4,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 632,
+      "has_trial_watermark": false,
+      "notes": [
+        "output_file_produced",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "zip/compress-folder",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 1419,
+      "has_trial_watermark": false,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/resize-image",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 360054,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/crop-image",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 270054,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/filter-image",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 180054,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/merge-images",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 90054,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/watermark-image",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 3592,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    },
+    {
+      "key": "imaging/rotate-image",
+      "score": 5,
+      "status": "PUBLICATION_CANDIDATE_LOCAL",
+      "output_size_bytes": 135054,
+      "has_trial_watermark": true,
+      "notes": [
+        "output_file_produced",
+        "output_>1KB",
+        "provenance_present",
+        "readme_present"
+      ]
+    }
+  ]
+}

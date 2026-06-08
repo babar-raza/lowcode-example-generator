@@ -1,0 +1,11 @@
+{
+  "family": "slides",
+  "name": "merger",
+  "label": "slides/merger",
+  "pilot": "slides-controlled-pilot",
+  "csproj": "merger.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

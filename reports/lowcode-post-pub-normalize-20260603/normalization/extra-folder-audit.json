@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-normalize-20260603",
+  "extra_folders": [
+    {
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "family": "diagram",
+      "folder": "diagram-diagram-converter",
+      "intended_counterpart": "diagram-converter",
+      "api_class": "DiagramConverter",
+      "overlap": "Both convert VSDX to VDX using DiagramConverter LowCode API",
+      "code_style": "class-based with temp directory (pilot pattern)",
+      "has_committed_input": false,
+      "classification": "LEGACY_DUPLICATE_TO_REMOVE"
+    },
+    {
+      "repo": "aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples",
+      "family": "diagram",
+      "folder": "diagram-pdf-converter",
+      "intended_counterpart": "pdf-converter",
+      "api_class": "PdfConverter",
+      "overlap": "Both convert VSDX to PDF using PdfConverter LowCode API",
+      "code_style": "namespace/class-based (pilot pattern)",
+      "has_committed_input": false,
+      "classification": "LEGACY_DUPLICATE_TO_REMOVE"
+    },
+    {
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "family": "pdf",
+      "folder": "pdf-aconverter",
+      "intended_counterpart": "pdfa-converter",
+      "api_class": "PdfAConverter",
+      "overlap": "Both convert PDF to PDF/A using PdfAConverter LowCode API",
+      "code_style": "top-level statements (pilot pattern)",
+      "has_committed_input": true,
+      "classification": "LEGACY_DUPLICATE_TO_REMOVE"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "total_considered": 56,
+  "publishable": 44,
+  "excluded": 12,
+  "main_class": 42,
+  "companion": 1,
+  "env_dependent": 1,
+  "denominator_unchanged": true
+}

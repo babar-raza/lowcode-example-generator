@@ -1,0 +1,82 @@
+{
+  "cells": {
+    "has_readme": true,
+    "example_mentions": {
+      "html-converter": true,
+      "image-converter": true,
+      "json-converter": true,
+      "pdf-converter": true,
+      "spreadsheet-converter": true,
+      "spreadsheet-locker": true,
+      "spreadsheet-merger": true,
+      "spreadsheet-splitter": true,
+      "text-converter": true
+    },
+    "all_mentioned": true
+  },
+  "diagram": {
+    "has_readme": true,
+    "example_mentions": {
+      "diagram-converter": true,
+      "pdf-converter": true
+    },
+    "all_mentioned": true
+  },
+  "email": {
+    "has_readme": true,
+    "example_mentions": {
+      "converter": true
+    },
+    "all_mentioned": true
+  },
+  "pdf": {
+    "has_readme": true,
+    "example_mentions": {
+      "doc-converter": true,
+      "form-editor": false,
+      "form-exporter": false,
+      "form-flattener": false,
+      "html": true,
+      "image-extractor": false,
+      "jpeg": true,
+      "merger": true,
+      "optimizer": true,
+      "pdfa-converter": false,
+      "png": true,
+      "security": true,
+      "signature": true,
+      "splitter": true,
+      "table-generator": false,
+      "text-extractor": false,
+      "tiff": true,
+      "timestamp": false,
+      "toc-generator": false,
+      "xls-converter": true
+    },
+    "all_mentioned": false
+  },
+  "slides": {
+    "has_readme": true,
+    "example_mentions": {
+      "compress": true,
+      "convert": true,
+      "merger": true
+    },
+    "all_mentioned": true
+  },
+  "words": {
+    "has_readme": true,
+    "example_mentions": {
+      "comparer": true,
+      "converter": true,
+      "mail-merger": true,
+      "merger": true,
+      "replacer": true,
+      "report-builder": true,
+      "signer": true,
+      "splitter": true,
+      "watermarker": true
+    },
+    "all_mentioned": true
+  }
+}

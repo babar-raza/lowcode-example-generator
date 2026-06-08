@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "/qce0eJor1g=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-registry-expansion-20260604\\validation\\snippets\\ocr-scanned-image-to-text\\ocr-scanned-image-to-text.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prora\\.nuget\\packages\\aspose.ocr\\24.12.0\\aspose.ocr.24.12.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.18.0\\microsoft.ml.onnxruntime.1.18.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.18.0\\microsoft.ml.onnxruntime.managed.1.18.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\system.drawing.common\\8.0.0\\system.drawing.common.8.0.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

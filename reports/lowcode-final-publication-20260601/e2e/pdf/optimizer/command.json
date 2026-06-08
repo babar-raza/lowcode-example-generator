@@ -1,0 +1,25 @@
+{
+  "family": "pdf",
+  "name": "optimizer",
+  "label": "pdf/optimizer",
+  "pilot": "pdf-controlled-pilot-pr10",
+  "csproj": "optimizer.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 2,
+    "output_total_bytes": 86382,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 29364
+      },
+      {
+        "name": "output.pdf",
+        "size": 57018
+      }
+    ]
+  }
+}

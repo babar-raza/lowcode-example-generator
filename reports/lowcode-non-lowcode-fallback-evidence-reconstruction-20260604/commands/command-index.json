@@ -1,0 +1,158 @@
+{
+  "commands": [
+    {
+      "id": "compat-cells",
+      "timestamp": "2026-06-04T10:50:34Z",
+      "command": "git diff pipeline/configs/families/cells.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-cells.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-cells.stderr"
+    },
+    {
+      "id": "compat-words",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/configs/families/words.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-words.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-words.stderr"
+    },
+    {
+      "id": "compat-pdf",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/configs/families/pdf.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-pdf.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-pdf.stderr"
+    },
+    {
+      "id": "compat-slides",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/configs/families/slides.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-slides.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-slides.stderr"
+    },
+    {
+      "id": "compat-email",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/configs/families/email.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-email.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-email.stderr"
+    },
+    {
+      "id": "compat-diagram",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/configs/families/diagram.yml",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-diagram.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-diagram.stderr"
+    },
+    {
+      "id": "compat-fa",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff pipeline/format-authority/manifest.json",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\compat-fa.stdout",
+      "stderr_file": "commands\\stdout-stderr\\compat-fa.stderr"
+    },
+    {
+      "id": "runner-diff",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git diff src/plugin_examples/runner.py",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\runner-diff.stdout",
+      "stderr_file": "commands\\stdout-stderr\\runner-diff.stderr"
+    },
+    {
+      "id": "git-status",
+      "timestamp": "2026-06-04T10:50:35Z",
+      "command": "git status --short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\git-status.stdout",
+      "stderr_file": "commands\\stdout-stderr\\git-status.stderr"
+    },
+    {
+      "id": "test-family-config",
+      "timestamp": "2026-06-04T10:51:11Z",
+      "command": "pytest tests/unit/test_family_config_fallback_strategy.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-family-config.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-family-config.stderr"
+    },
+    {
+      "id": "test-registry-schema",
+      "timestamp": "2026-06-04T10:51:12Z",
+      "command": "pytest tests/unit/test_capability_registry_schema.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-registry-schema.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-registry-schema.stderr"
+    },
+    {
+      "id": "test-heuristic-matcher",
+      "timestamp": "2026-06-04T10:51:14Z",
+      "command": "pytest tests/unit/test_heuristic_matcher.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-heuristic-matcher.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-heuristic-matcher.stderr"
+    },
+    {
+      "id": "test-probe-generator",
+      "timestamp": "2026-06-04T10:51:15Z",
+      "command": "pytest tests/unit/test_probe_generator.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-probe-generator.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-probe-generator.stderr"
+    },
+    {
+      "id": "test-nl-validators",
+      "timestamp": "2026-06-04T10:51:16Z",
+      "command": "pytest tests/unit/test_non_lowcode_validators.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-nl-validators.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-nl-validators.stderr"
+    },
+    {
+      "id": "test-runner-integration",
+      "timestamp": "2026-06-04T10:51:19Z",
+      "command": "pytest tests/integration/test_runner_fallback_integration.py -v --tb=short",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\test-runner-integration.stdout",
+      "stderr_file": "commands\\stdout-stderr\\test-runner-integration.stderr"
+    },
+    {
+      "id": "ruff-new-modules",
+      "timestamp": "2026-06-04T10:51:20Z",
+      "command": "ruff check src/plugin_examples/website_catalog/ src/plugin_examples/probe_generator/ src/plugin_examples/plugin_detector/heuristic_matcher.py src/plugin_examples/evidence_validator/rules/non_lowcode.py src/plugin_examples/ai_acceleration/",
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout_file": "commands\\stdout-stderr\\ruff-new-modules.stdout",
+      "stderr_file": "commands\\stdout-stderr\\ruff-new-modules.stderr"
+    },
+    {
+      "id": "full-regression",
+      "timestamp": "2026-06-04T10:57:55Z",
+      "command": "-m pytest tests/ --tb=short -q",
+      "cwd": ".",
+      "exit_code": 0,
+      "result_summary": "3316 passed, 18 skipped, 0 failed",
+      "stdout_file": "commands\\stdout-stderr\\full-regression.stdout",
+      "stderr_file": "commands\\stdout-stderr\\full-regression.stderr"
+    }
+  ]
+}

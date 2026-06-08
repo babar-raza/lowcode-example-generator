@@ -1,0 +1,9 @@
+{
+  "example": "signature",
+  "csproj": "signature.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "PDF signed successfully.\n",
+  "stderr_tail": ""
+}

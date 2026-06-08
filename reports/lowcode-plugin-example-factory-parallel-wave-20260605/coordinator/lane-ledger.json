@@ -1,0 +1,85 @@
+{
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "date": "2026-06-05",
+  "report_root": "reports/lowcode-plugin-example-factory-parallel-wave-20260605",
+  "lanes": [
+    {
+      "lane": "0",
+      "owner": "coordinator",
+      "status": "COMPLETE",
+      "purpose": "Coordinator/preflight",
+      "work_completed": "Lane board created; protected file baseline recorded; git status captured; initial registry counts recorded"
+    },
+    {
+      "lane": "A",
+      "owner": "evidence-repair",
+      "status": "COMPLETE",
+      "purpose": "Source/evidence truth + output validation",
+      "work_completed": "Prior bundle SHA mismatch documented and repaired; 22 packages revalidated with stricter rules; zero-byte intermediate file logic fixed; trial watermark disclosure added"
+    },
+    {
+      "lane": "B",
+      "owner": "wave4-examples",
+      "status": "COMPLETE",
+      "purpose": "Wave 4 dry-run packages",
+      "work_completed": "10/10 packages built and validated (ocr/recognize-text, ocr/extract-text, html/convert-html-to-pdf, tasks/convert-mpp-to-pdf, svg/svg-to-image-converter, barcode/generate-barcode, barcode/recognize-barcode, imaging/convert-image, imaging/compress-image, page/convert-xps-to-pdf); API fix for page (SaveAsPdf not PdfDevice)"
+    },
+    {
+      "lane": "C",
+      "owner": "factory-tooling",
+      "status": "COMPLETE",
+      "purpose": "Registry-driven factory tooling",
+      "work_completed": "generator.py: sprint param, package-manifest.json, _guard_no_external_write(); SOURCE_PROVENANCE_TEMPLATE updated"
+    },
+    {
+      "lane": "D",
+      "owner": "fixture-factory",
+      "status": "COMPLETE",
+      "purpose": "Fixture factory + output validation library",
+      "work_completed": "generators.py (PNG/BMP/SVG/HTML/ZIP), validators.py (format detection, output validation, publication classification), package_invariants.py (INV-01..INV-16)"
+    },
+    {
+      "lane": "E",
+      "owner": "validator-hardening",
+      "status": "COMPLETE",
+      "purpose": "Validator/invariant hardening",
+      "work_completed": "16 invariant rules implemented; all 22 packages validated with 0 real violations; test suite: 34 new tests pass"
+    },
+    {
+      "lane": "F",
+      "owner": "state-sync",
+      "status": "COMPLETE",
+      "purpose": "Skills/state/docs sync",
+      "work_completed": "cumulative-dryrun-ledger.json; registry-status-snapshot.json; next-wave-queue embedded in ledger"
+    },
+    {
+      "lane": "G",
+      "owner": "family-analysis",
+      "status": "COMPLETE",
+      "purpose": "Blocked family reassessment",
+      "work_completed": "7 families reassessed; DEFER_INDEFINITELY avoided; 5 Wave 5 candidates identified (drawing x2, note/convert-one-to-pdf, gis/read-gis-data, threed/convert-3d-model)"
+    },
+    {
+      "lane": "H",
+      "owner": "publication-readiness",
+      "status": "COMPLETE",
+      "purpose": "Publication-local readiness",
+      "work_completed": "22/22 packages classified PUBLICATION_CANDIDATE_LOCAL_CLEAN; cumulative-candidate-matrix.json written"
+    },
+    {
+      "lane": "I",
+      "owner": "iv-adversarial",
+      "status": "COMPLETE",
+      "purpose": "Independent verification",
+      "work_completed": "3 packages inspected manually; 6 contradictions resolved; protected files verified unchanged; adversarial challenges answered"
+    },
+    {
+      "lane": "J",
+      "owner": "final-integration",
+      "status": "COMPLETE",
+      "purpose": "Final tests/commits/bundle",
+      "work_completed": "3376 unit+integration tests pass (0 failures, 18 skipped, 10 subtests); protected files verified; invariant-results.json regenerated post-repair: 22/22 PASS, 0 real violations; wave4-build-results.json cleaned: 10/10 PASS"
+    }
+  ],
+  "verdict": "LOWCODE_PLUGIN_FACTORY_PARALLEL_WAVE_ACCEPTED_LOCAL"
+}

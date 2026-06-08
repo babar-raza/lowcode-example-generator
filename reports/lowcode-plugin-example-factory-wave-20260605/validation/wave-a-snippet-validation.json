@@ -1,0 +1,108 @@
+{
+  "sprint": "lowcode-plugin-example-factory-wave-20260605",
+  "lane": "E",
+  "description": "Snippet validation wave 3 - Wave A dry-run packages",
+  "validated_at": "2026-06-05",
+  "total_attempts": 12,
+  "pass": 12,
+  "fail": 0,
+  "method": "dotnet restore + dotnet build + dotnet run with output file check",
+  "validations": [
+    {
+      "slug": "barcode/generate-qr-code",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "qr-code.png(10153B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "barcode/scan-barcode",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "input-barcode.png(23322B), scan-result.txt(215B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "svg/svg-to-pdf-converter",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "output.pdf(32590B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "tex/latex-figure-renderer",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "figure.png(5049B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "zip/create-archive",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "archive.zip(632B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "zip/compress-folder",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "compressed-folder.zip(1419B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/resize-image",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "resized.png(1515B), source.bmp(360054B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/crop-image",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "cropped.png(1200B), source-crop.bmp(270054B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/filter-image",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "filtered.png(22493B), source-filter.bmp(180054B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/merge-images",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "canvas.bmp(0B), merged.png(1889B), src1.bmp(90054B), src2.bmp(90054B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/watermark-image",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "source-watermark.bmp(0B), watermarked.png(3592B)",
+      "verdict": "PASS"
+    },
+    {
+      "slug": "imaging/rotate-image",
+      "restore": "SUCCESS",
+      "build": "SUCCESS",
+      "run": "SUCCESS",
+      "output_files": "rotated.png(2501B), source-rotate.bmp(135054B)",
+      "verdict": "PASS"
+    }
+  ]
+}

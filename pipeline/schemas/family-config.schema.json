@@ -113,6 +113,12 @@
             "type": "string"
           },
           "minItems": 1
+        },
+        "fallback_strategy": {
+          "type": ["string", "null"],
+          "enum": ["capability_registry", "heuristic_only", null],
+          "default": null,
+          "description": "When set, enables non-LowCode fallback discovery for this family. null = LowCode pipeline only (default)."
         }
       }
     },

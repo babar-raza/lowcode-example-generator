@@ -1,0 +1,94 @@
+{
+  "updated": "2026-06-05",
+  "sprint": "lowcode-plugin-example-factory-parallel-wave-20260605",
+  "total_dryrun_packages": 30,
+  "packages_by_wave": {
+    "wave-a (lowcode-plugin-example-factory-wave-20260605)": [
+      "barcode/generate-qr-code",
+      "barcode/scan-barcode",
+      "imaging/crop-image",
+      "imaging/filter-image",
+      "imaging/merge-images",
+      "imaging/resize-image",
+      "imaging/rotate-image",
+      "imaging/watermark-image",
+      "svg/svg-to-pdf-converter",
+      "tex/latex-figure-renderer",
+      "zip/compress-folder",
+      "zip/create-archive"
+    ],
+    "wave-4 (lowcode-plugin-example-factory-parallel-wave-20260605)": [
+      "barcode/generate-barcode",
+      "barcode/recognize-barcode",
+      "html/convert-html-to-pdf",
+      "imaging/compress-image",
+      "imaging/convert-image",
+      "ocr/extract-text",
+      "ocr/recognize-text",
+      "page/convert-xps-to-pdf",
+      "svg/svg-to-image-converter",
+      "tasks/convert-mpp-to-pdf"
+    ],
+    "wave-5 (lowcode-plugin-example-factory-closeout-wave5-20260605)": [
+      "drawing/convert-drawing",
+      "drawing/create-drawing",
+      "finance/convert-xbrl",
+      "gis/read-gis-data",
+      "note/convert-one-to-pdf",
+      "ocr/scan-document",
+      "page/convert-ps-to-pdf",
+      "zip/compress-files"
+    ]
+  },
+  "publication_classification_counts": {
+    "PUBLICATION_CANDIDATE_LOCAL_CLEAN": 30
+  },
+  "registry_status": {
+    "TRANSFORMED_TO_EXAMPLE_DRYRUN": 30,
+    "READY_FOR_TRANSFORMATION": 8,
+    "CODE_HARVESTED": 18,
+    "NEEDS_MANUAL_MAPPING": 16
+  },
+  "next_wave_queue": [
+    {
+      "key": "ocr/image-text-finder",
+      "priority": "HIGH",
+      "reason": "Same OCR pattern, READY_FOR_TRANSFORMATION"
+    },
+    {
+      "key": "ocr/invoice-to-text",
+      "priority": "HIGH",
+      "reason": "Same OCR pattern, READY_FOR_TRANSFORMATION"
+    },
+    {
+      "key": "ocr/photo-to-text",
+      "priority": "HIGH",
+      "reason": "Same OCR pattern, READY_FOR_TRANSFORMATION"
+    },
+    {
+      "key": "zip/extract-files",
+      "priority": "MEDIUM",
+      "reason": "Extract pattern, needs API probe"
+    },
+    {
+      "key": "page/convert-eps-to-pdf",
+      "priority": "MEDIUM",
+      "reason": "EPS converter, code_hash present"
+    },
+    {
+      "key": "note/convert-one-to-word",
+      "priority": "MEDIUM",
+      "reason": "Same Note pattern as convert-one-to-pdf"
+    },
+    {
+      "key": "note/convert-one-to-image",
+      "priority": "MEDIUM",
+      "reason": "Same Note pattern"
+    },
+    {
+      "key": "finance/parse-xbrl",
+      "priority": "LOW",
+      "reason": "Needs NEEDS_MANUAL_MAPPING resolution"
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-post-pub-patrol-20260603",
+  "source": "fresh clones from main branches",
+  "raw_logs_directory": "e2e/raw-logs/",
+  "results": {
+    "cells": {
+      "total": 9,
+      "build_ok": 9,
+      "run_ok": 9,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "html-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "image-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "json-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "pdf-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "spreadsheet-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "spreadsheet-locker",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "spreadsheet-merger",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "spreadsheet-splitter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "text-converter",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    },
+    "diagram": {
+      "total": 2,
+      "build_ok": 2,
+      "run_ok": 2,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "diagram-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "pdf-converter",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    },
+    "email": {
+      "total": 1,
+      "build_ok": 1,
+      "run_ok": 1,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "converter",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    },
+    "pdf": {
+      "total": 20,
+      "build_ok": 20,
+      "run_ok": 20,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "doc-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "form-editor",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "form-exporter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "form-flattener",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "html",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "image-extractor",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "jpeg",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "merger",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "optimizer",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "pdfa-converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "png",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "security",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "signature",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "splitter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "table-generator",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "text-extractor",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "tiff",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "timestamp",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "toc-generator",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "xls-converter",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    },
+    "slides": {
+      "total": 3,
+      "build_ok": 3,
+      "run_ok": 3,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "compress",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "convert",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "merger",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    },
+    "words": {
+      "total": 9,
+      "build_ok": 9,
+      "run_ok": 9,
+      "build_fail": 0,
+      "run_fail": 0,
+      "details": [
+        {
+          "example": "comparer",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "converter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "mail-merger",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "merger",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "replacer",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "report-builder",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "signer",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "splitter",
+          "build": "PASS",
+          "run": "PASS"
+        },
+        {
+          "example": "watermarker",
+          "build": "PASS",
+          "run": "PASS"
+        }
+      ]
+    }
+  },
+  "totals": {
+    "total": 44,
+    "build_ok": 44,
+    "build_fail": 0,
+    "run_ok": 44,
+    "run_fail": 0
+  },
+  "verdict": "ALL_PASS"
+}

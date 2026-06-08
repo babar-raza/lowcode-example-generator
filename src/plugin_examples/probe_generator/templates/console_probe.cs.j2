@@ -1,0 +1,9 @@
+// Auto-generated probe — DO NOT EDIT
+// PR-01 and PR-02 confirmed before this file was generated.
+using System;
+using {{ namespace }};
+
+var outputPath = args.Length > 0 ? args[0] : "probe-output.bin";
+var obj = new {{ type_name }}();
+obj.{{ method_name }}(outputPath);
+Console.WriteLine("Probe complete: " + outputPath);

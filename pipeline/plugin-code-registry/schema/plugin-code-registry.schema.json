@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aspose.com/schemas/plugin-code-registry/1.0.0",
+  "title": "Plugin-Code Registry Entry",
+  "description": "Registry schema for non-LowCode Aspose plugin families. Every entry must trace to real product page and/or official source code.",
+  "type": "object",
+  "required": ["family", "plugin_slug", "plugin_url", "registry_status", "implementation_model", "next_action", "evidence_paths", "history"],
+  "properties": {
+    "family": {"type": "string", "description": "Family slug (e.g. barcode, imaging)"},
+    "plugin_slug": {"type": "string", "description": "Plugin URL slug (e.g. generate-barcode)"},
+    "plugin_url": {"type": "string", "format": "uri", "description": "Canonical products.aspose.net URL"},
+    "page_hash": {"type": "string", "description": "SHA-256 or truncated hash of page content at last fetch"},
+    "page_title": {"type": "string"},
+    "plugin_description": {"type": "string"},
+    "feature_boundary": {"type": "string"},
+    "input_formats": {"type": "array", "items": {"type": "string"}},
+    "output_formats": {"type": "array", "items": {"type": "string"}},
+    "source_links": {"type": "array", "items": {"type": "string"}},
+    "gist_links": {"type": "array", "items": {"type": "string"}},
+    "github_links": {"type": "array", "items": {"type": "string"}},
+    "inline_snippets": {"type": "array", "items": {"type": "string"}},
+    "code_hashes": {"type": "array", "items": {"type": "string"}},
+    "namespaces_used": {"type": "array", "items": {"type": "string"}},
+    "classes_used": {"type": "array", "items": {"type": "string"}},
+    "constructors_used": {"type": "array", "items": {"type": "string"}},
+    "methods_used": {"type": "array", "items": {"type": "string"}},
+    "enums_used": {"type": "array", "items": {"type": "string"}},
+    "package_id": {"type": "string"},
+    "package_version": {"type": "string"},
+    "implementation_model": {
+      "type": "string",
+      "enum": [
+        "REGULAR_API_LIMITED_FEATURE",
+        "DEDICATED_PLUGIN_CLASS",
+        "STATIC_CONVERTER_CLASS",
+        "LOAD_SAVE_OPTIONS",
+        "DOCUMENT_OBJECT_MODEL_WORKFLOW",
+        "RECOGNITION_EXTRACTION_API",
+        "RENDERING_API",
+        "FIXTURE_HEAVY_WORKFLOW",
+        "LICENSE_GATED_WORKFLOW",
+        "UNKNOWN_NEEDS_MANUAL_REVIEW"
+      ]
+    },
+    "registry_status": {
+      "type": "string",
+      "enum": [
+        "PAGE_DISCOVERED",
+        "CODE_HARVESTED",
+        "MANUALLY_ANALYZED",
+        "SYMBOLS_EXTRACTED",
+        "REFLECTION_CONFIRMED",
+        "PROBE_CONFIRMED",
+        "READY_FOR_TRANSFORMATION",
+        "TRANSFORMED_TO_EXAMPLE",
+        "BLOCKED_NO_CODE",
+        "BLOCKED_API_MISMATCH",
+        "BLOCKED_FIXTURE",
+        "BLOCKED_LICENSE",
+        "NEEDS_MANUAL_MAPPING",
+        "WEBSITE_PATTERN_UNVERIFIED",
+        "CODE_FETCH_FAILED"
+      ]
+    },
+    "transformation_plan": {"type": "string"},
+    "fixture_plan": {"type": "string"},
+    "validation_plan": {"type": "string"},
+    "next_action": {"type": "string", "description": "Required: what to do next with this entry"},
+    "blocker_type": {
+      "type": ["string", "null"],
+      "enum": [null, "BLOCKED_LICENSE", "BLOCKED_FIXTURE", "ENVIRONMENT_DEPENDENT", "BLOCKED_NO_CODE", "NEEDS_MANUAL_MAPPING", "CODE_FETCH_FAILED"]
+    },
+    "evidence_paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"},
+      "description": "Required: paths to evidence files supporting this entry"
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["date", "status", "analyst_notes"],
+        "properties": {
+          "date": {"type": "string"},
+          "page_hash": {"type": "string"},
+          "code_hash": {"type": "string"},
+          "package_version": {"type": "string"},
+          "status": {"type": "string"},
+          "analyst_notes": {"type": "string"}
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {"registry_status": {"const": "READY_FOR_TRANSFORMATION"}}
+  },
+  "then": {
+    "required": ["code_hashes"],
+    "properties": {
+      "code_hashes": {"minItems": 1}
+    }
+  }
+}

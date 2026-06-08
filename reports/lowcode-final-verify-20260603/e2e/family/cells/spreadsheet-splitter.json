@@ -1,0 +1,9 @@
+{
+  "example": "spreadsheet-splitter",
+  "csproj": "cells-spreadsheet-splitter.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Example: cells-spreadsheet-splitter\nDone.\n",
+  "stderr_tail": ""
+}

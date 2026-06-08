@@ -1,0 +1,415 @@
+{
+  "timestamp": "2026-06-03",
+  "results": {
+    "cells": [
+      {
+        "example": "html-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-html-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "image-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-image-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "json-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-json-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "pdf-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-pdf-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "spreadsheet-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-spreadsheet-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "spreadsheet-locker",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-spreadsheet-locker.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "spreadsheet-merger",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-spreadsheet-merger.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "spreadsheet-splitter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-spreadsheet-splitter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "text-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "cells-text-converter.csproj"
+        ],
+        "ok": true
+      }
+    ],
+    "diagram": [
+      {
+        "example": "diagram-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "diagram-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "pdf-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-converter.csproj"
+        ],
+        "ok": true
+      }
+    ],
+    "email": [
+      {
+        "example": "converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "email-converter.csproj"
+        ],
+        "ok": true
+      }
+    ],
+    "pdf": [
+      {
+        "example": "doc-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-doc-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "form-editor",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "form-editor.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "form-exporter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "form-exporter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "form-flattener",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "form-flattener.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "html",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-html.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "image-extractor",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-image-extractor.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "jpeg",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-jpeg.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "merger",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-merger.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "optimizer",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-optimizer.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "pdfa-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-pdf-aconverter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "png",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-png.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "security",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "security.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "signature",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "signature.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "splitter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-splitter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "table-generator",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-table-generator.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "text-extractor",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-text-extractor.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "tiff",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-tiff.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "timestamp",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "timestamp.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "toc-generator",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-toc-generator.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "xls-converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "pdf-xls-converter.csproj"
+        ],
+        "ok": true
+      }
+    ],
+    "slides": [
+      {
+        "example": "compress",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "slides-compress.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "convert",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "slides-convert.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "merger",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "slides-merger.csproj"
+        ],
+        "ok": true
+      }
+    ],
+    "words": [
+      {
+        "example": "comparer",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-comparer.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "converter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-converter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "mail-merger",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-mail-merger.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "merger",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-merger.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "replacer",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-replacer.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "report-builder",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-report-builder.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "signer",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "signer.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "splitter",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-splitter.csproj"
+        ],
+        "ok": true
+      },
+      {
+        "example": "watermarker",
+        "has_program_cs": true,
+        "csproj_count": 1,
+        "csproj_files": [
+          "words-watermarker.csproj"
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "all_ok": true,
+  "verdict": "PASS"
+}

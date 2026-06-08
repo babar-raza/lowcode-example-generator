@@ -1,0 +1,9 @@
+{
+  "family": "cells",
+  "repo": "aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples",
+  "branch": "lowcode-examples-cells-readme-io-final",
+  "status": "SUPERSEDED_BY_MERGE",
+  "note": "Branch merged into main and deleted. Pre-merge replay was blocked by gh api -q parameter bug. Post-merge main-branch verification confirms all 9 examples present.",
+  "verified_on_main": true,
+  "examples_confirmed": 9
+}

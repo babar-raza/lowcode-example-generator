@@ -1,0 +1,66 @@
+{
+  "sprint": "non-lowcode-fallback-evidence-reconstruction-20260604",
+  "timestamp": "2026-06-04T08:30:00Z",
+  "new_test_files": 10,
+  "new_tests_passed": 94,
+  "new_tests_failed": 0,
+  "mfl_floor": 72,
+  "mfl_satisfied": true,
+  "ruff": "PASS",
+  "individual_results": {
+    "test_family_config_fallback_strategy": {
+      "passed": 9,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_family_config_fallback_strategy.log"
+    },
+    "test_capability_registry_schema": {
+      "passed": 8,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_capability_registry_schema.log"
+    },
+    "test_website_catalog_crawler": {
+      "passed": 8,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_website_catalog_crawler.log"
+    },
+    "test_heuristic_matcher": {
+      "passed": 8,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_heuristic_matcher.log"
+    },
+    "test_probe_generator": {
+      "passed": 10,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_probe_generator.log"
+    },
+    "test_barcode_family_onboarding": {
+      "passed": 4,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_barcode_family_onboarding.log"
+    },
+    "test_imaging_family_onboarding": {
+      "passed": 5,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_imaging_family_onboarding.log"
+    },
+    "test_ai_suggestion_schema": {
+      "passed": 7,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_ai_suggestion_schema.log"
+    },
+    "test_non_lowcode_validators": {
+      "passed": 29,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_non_lowcode_validators.log"
+    },
+    "test_runner_fallback_integration": {
+      "passed": 6,
+      "failed": 0,
+      "log": "reports\\lowcode-non-lowcode-fallback-evidence-reconstruction-20260604\\tests\\raw\\test_runner_fallback_integration.log"
+    }
+  },
+  "full_regression": "3316 passed, 18 skipped, 0 failed (see tests/raw/full-regression.log)",
+  "full_regression_total": 3316,
+  "full_regression_skipped": 18,
+  "full_regression_failed": 0
+}

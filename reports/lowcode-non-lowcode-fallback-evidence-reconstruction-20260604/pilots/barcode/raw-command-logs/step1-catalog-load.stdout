@@ -1,0 +1,146 @@
+{
+  "_note": "Normalized website catalog from products.aspose.net. All entries are marketing_only=true (discovery only; not API authority). Populated by TC-IMPL-011.",
+  "crawled_at": "2026-06-04T00:00:00Z",
+  "families": [
+    {
+      "family": "barcode",
+      "package_id": "Aspose.BarCode",
+      "plugin_page_url": "https://products.aspose.net/barcode/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "imaging",
+      "package_id": "Aspose.Imaging",
+      "plugin_page_url": "https://products.aspose.net/imaging/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "zip",
+      "package_id": "Aspose.ZIP",
+      "plugin_page_url": "https://products.aspose.net/zip/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "html",
+      "package_id": "Aspose.HTML",
+      "plugin_page_url": "https://products.aspose.net/html/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "cad",
+      "package_id": "Aspose.CAD",
+      "plugin_page_url": "https://products.aspose.net/cad/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "ocr",
+      "package_id": "Aspose.OCR",
+      "plugin_page_url": "https://products.aspose.net/ocr/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "psd",
+      "package_id": "Aspose.PSD",
+      "plugin_page_url": "https://products.aspose.net/psd/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "svg",
+      "package_id": "Aspose.SVG",
+      "plugin_page_url": "https://products.aspose.net/svg/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "omr",
+      "package_id": "Aspose.OMR",
+      "plugin_page_url": "https://products.aspose.net/omr/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "gis",
+      "package_id": "Aspose.GIS",
+      "plugin_page_url": "https://products.aspose.net/gis/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "page",
+      "package_id": "Aspose.Page",
+      "plugin_page_url": "https://products.aspose.net/page/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "tex",
+      "package_id": "Aspose.TeX",
+      "plugin_page_url": "https://products.aspose.net/tex/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "tasks",
+      "package_id": "Aspose.Tasks",
+      "plugin_page_url": "https://products.aspose.net/tasks/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "note",
+      "package_id": "Aspose.Note",
+      "plugin_page_url": "https://products.aspose.net/note/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "drawing",
+      "package_id": "Aspose.Drawing",
+      "plugin_page_url": "https://products.aspose.net/drawing/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "font",
+      "package_id": "Aspose.Font",
+      "plugin_page_url": "https://products.aspose.net/font/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "finance",
+      "package_id": "Aspose.Finance",
+      "plugin_page_url": "https://products.aspose.net/finance/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "threed",
+      "package_id": "Aspose.3D",
+      "plugin_page_url": "https://products.aspose.net/3d/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "epub",
+      "package_id": "Aspose.HTML",
+      "plugin_page_url": "https://products.aspose.net/epub/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    },
+    {
+      "family": "medical",
+      "package_id": "Aspose.Medical",
+      "plugin_page_url": "https://products.aspose.net/medical/",
+      "marketing_only": true,
+      "status": "WEBSITE_DISCOVERED"
+    }
+  ]
+}

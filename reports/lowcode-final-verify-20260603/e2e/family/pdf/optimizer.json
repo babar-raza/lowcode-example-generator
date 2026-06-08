@@ -1,0 +1,9 @@
+{
+  "example": "optimizer",
+  "csproj": "pdf-optimizer.csproj",
+  "restore": "OK",
+  "build": "OK",
+  "exit_code": 0,
+  "stdout_tail": "Optimized successfully\n",
+  "stderr_tail": ""
+}

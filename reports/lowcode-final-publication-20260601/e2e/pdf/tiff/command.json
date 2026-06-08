@@ -1,0 +1,21 @@
+{
+  "family": "pdf",
+  "name": "tiff",
+  "label": "pdf/tiff",
+  "pilot": "pdf-controlled-pilot-pr5",
+  "csproj": "pdf-tiff.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 1,
+    "output_total_bytes": 28837,
+    "output_files": [
+      {
+        "name": "input.pdf",
+        "size": 28837
+      }
+    ]
+  }
+}

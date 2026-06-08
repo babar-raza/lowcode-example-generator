@@ -1,0 +1,28 @@
+{
+  "_sprint": "lowcode-plugin-code-registry-20260604",
+  "_created": "2026-06-04",
+  "ownership_rules": {
+    "reports/lowcode-plugin-code-registry-20260604/": "ANY_LANE — report outputs only",
+    "pipeline/plugin-code-registry/": "LANE_E only",
+    "skills/": "LANE_F only",
+    ".local/catalog-cache/": "LANE_B only",
+    ".local/code-cache/": "LANE_C only",
+    ".local/evidence-bundles/": "LANE_K only",
+    "src/plugin_examples/website_catalog/": "LANE_B only (if crawler improvements required)",
+    "pipeline/plugin-capability-registry/": "READ_ONLY — no writes",
+    "pipeline/configs/families/cells.yml": "PROTECTED — no writes",
+    "pipeline/configs/families/words.yml": "PROTECTED — no writes",
+    "pipeline/configs/families/pdf.yml": "PROTECTED — no writes",
+    "pipeline/configs/families/slides.yml": "PROTECTED — no writes",
+    "pipeline/configs/families/email.yml": "PROTECTED — no writes",
+    "pipeline/configs/families/diagram.yml": "PROTECTED — no writes",
+    "pipeline/format-authority/manifest.json": "PROTECTED — no writes",
+    "pipeline/format-authority/contracts/": "PROTECTED — no writes"
+  },
+  "no_cross_lane_writes": true,
+  "exact_path_rule": "All git operations must use exact file paths. No git add . or git add -A.",
+  "git_safety": {
+    "forbidden": ["git stash", "git reset --hard", "git clean", "git restore"],
+    "allowed": ["git add <exact-path>", "git commit", "git status", "git diff"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "family": "slides",
+  "name": "slides-convert",
+  "label": "slides/slides-convert",
+  "pilot": "slides-controlled-pilot",
+  "csproj": "slides-convert.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null
+}

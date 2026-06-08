@@ -1,0 +1,82 @@
+{
+  "sprint": "lowcode-plugin-registry-expansion-20260604",
+  "generated_at": "2026-06-04",
+  "checks": [
+    {
+      "id": "QA-01",
+      "description": "Protected YAML files (cells, words, pdf, slides, email, diagram) unchanged",
+      "method": "git diff pipeline/plugin-code-registry/family/{cells,words,pdf,slides,email,diagram}.yaml",
+      "result": "PASS",
+      "evidence": "No diff output for any of the 6 protected files"
+    },
+    {
+      "id": "QA-02",
+      "description": "All 13 new canonical pages present in crawl inventory",
+      "method": "Count entries in canonical-product-page-inventory.json with fetch_status=HTTP_200",
+      "result": "PASS",
+      "evidence": "24 pages fetched successfully, 7 families blocked (403). All 13 new pages included."
+    },
+    {
+      "id": "QA-03",
+      "description": "Registry validator: 0 violations after repair",
+      "method": "Run canonical-page-registry-validator against all non-protected YAML files",
+      "result": "PASS",
+      "evidence": "validators/registry-readiness-validator-results.json: 0 violations, 4 warnings (expected BEST_MATCH entries)"
+    },
+    {
+      "id": "QA-04",
+      "description": "5+ official snippets validated (restore+build+run PASS)",
+      "method": "Count snippet-validation-summary.json snippets with verdict=SNIPPET_VALIDATED",
+      "result": "PASS",
+      "evidence": "5/5 snippets PASS (html, tasks, svg, tex, ocr) + 3 from prior sprint = 8 cumulative"
+    },
+    {
+      "id": "QA-05",
+      "description": "5+ dry-run example packages with manifest files",
+      "method": "Count dryrun/examples/ packages with package-manifest.json",
+      "result": "PASS",
+      "evidence": "5 Wave 2 packages (html, tasks, svg, tex, ocr) + 3 Wave 1 = 8 total"
+    },
+    {
+      "id": "QA-06",
+      "description": "7 blocked families classified and documented",
+      "method": "Check blocked-family-retry-report.md for all 7 families",
+      "result": "PASS",
+      "evidence": "crawl/blocked-family-retry-report.md: omr, gis, note, drawing, font, finance, threed all CANONICAL_PAGE_BLOCKED"
+    },
+    {
+      "id": "QA-07",
+      "description": "Manual family analysis complete for all 8 non-LowCode families in scope",
+      "method": "Check manual-analysis/family/ for html, tasks, ocr, psd, svg, page, tex, cad",
+      "result": "PASS",
+      "evidence": "8 files present: html.md, tasks.md, ocr.md, psd.md, svg.md, page.md, tex.md, cad.md"
+    },
+    {
+      "id": "QA-08",
+      "description": "No reflection-first READY_FOR_TRANSFORMATION entries (R09 satisfied)",
+      "method": "All READY entries have canonical_url + page_source_status — validated by R01+R02 in registry validator",
+      "result": "PASS",
+      "evidence": "Registry validator PASS: all 38 READY entries have canonical evidence"
+    },
+    {
+      "id": "QA-09",
+      "description": "No publication PRs created, no external repo mutations",
+      "method": "Verify git log for absence of push/PR commands; no external clone operations",
+      "result": "PASS",
+      "evidence": "All work was local (reads, writes, dotnet run in reports/ dirs). No gh pr create. No git push."
+    },
+    {
+      "id": "QA-10",
+      "description": "Format-authority contracts untouched",
+      "method": "Check pipeline/format-authority/contracts/ for modifications",
+      "result": "PASS",
+      "evidence": "No format-authority files modified in this sprint"
+    }
+  ],
+  "summary": {
+    "total_checks": 10,
+    "pass": 10,
+    "fail": 0,
+    "verdict": "ALL_CHECKS_PASS"
+  }
+}

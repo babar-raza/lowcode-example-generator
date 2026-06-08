@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "table-generator",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "TableGenerator",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-table-generator.csproj",
+  "files": [
+    "pdf-table-generator.csproj",
+    "Program.cs"
+  ]
+}

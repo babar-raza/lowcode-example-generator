@@ -1,0 +1,12 @@
+{
+  "family": "cells",
+  "name": "text-converter",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "TextConverter",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "text-converter.csproj",
+  "files": [
+    "Program.cs",
+    "text-converter.csproj"
+  ]
+}

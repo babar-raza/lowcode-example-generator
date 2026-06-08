@@ -1,0 +1,3 @@
+Example: slides-for-each
+ForEach complete: 2 slides processed, output: output.pptx
+Done.

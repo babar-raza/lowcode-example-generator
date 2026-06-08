@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "security",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "Security",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "security.csproj",
+  "files": [
+    "Program.cs",
+    "security.csproj"
+  ]
+}

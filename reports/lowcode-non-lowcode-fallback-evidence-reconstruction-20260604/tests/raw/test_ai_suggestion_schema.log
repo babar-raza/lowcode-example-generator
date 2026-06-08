@@ -1,0 +1,20 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+collecting ... collected 7 items
+
+tests/unit/test_ai_suggestion_schema.py::TestAiSuggestionAcceptsValidDraft::test_ai_suggestion_accepts_valid_ai_draft PASSED [ 14%]
+tests/unit/test_ai_suggestion_schema.py::TestAiSuggestionAcceptsValidDraft::test_from_dict_constructs_ai_draft PASSED [ 28%]
+tests/unit/test_ai_suggestion_schema.py::TestAiSuggestionRejectsInvalidSchema::test_ai_suggestion_rejects_probe_confirmed_without_evidence PASSED [ 42%]
+tests/unit/test_ai_suggestion_schema.py::TestAiSuggestionRejectsInvalidSchema::test_ai_suggestion_rejects_invalid_status PASSED [ 57%]
+tests/unit/test_ai_suggestion_schema.py::TestHallucinationValidator::test_hallucination_validator_rejects_type_not_in_reflection PASSED [ 71%]
+tests/unit/test_ai_suggestion_schema.py::TestHallucinationValidator::test_hallucination_validator_advances_to_reflection_confirmed_when_both_present PASSED [ 85%]
+tests/unit/test_ai_suggestion_schema.py::TestHallucinationValidator::test_hallucination_validator_rejects_method_not_in_reflection PASSED [100%]
+
+============================== 7 passed in 0.47s ==============================

@@ -1,0 +1,44 @@
+{
+    "cells": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    },
+    "diagram": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    },
+    "email": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    },
+    "pdf": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    },
+    "slides": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    },
+    "words": {
+        "branches": [
+            "main"
+        ],
+        "branch_count": 1,
+        "open_prs": 0
+    }
+}

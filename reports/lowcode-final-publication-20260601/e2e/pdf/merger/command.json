@@ -1,0 +1,29 @@
+{
+  "family": "pdf",
+  "name": "merger",
+  "label": "pdf/merger",
+  "pilot": "pdf-controlled-pilot-pr10",
+  "csproj": "merger.csproj",
+  "e2e_pass": true,
+  "build_exit": 0,
+  "run_exit": 0,
+  "failure_reason": null,
+  "output_validation": {
+    "output_file_count": 3,
+    "output_total_bytes": 144301,
+    "output_files": [
+      {
+        "name": "input1.pdf",
+        "size": 29360
+      },
+      {
+        "name": "input2.pdf",
+        "size": 29361
+      },
+      {
+        "name": "output.pdf",
+        "size": 85580
+      }
+    ]
+  }
+}

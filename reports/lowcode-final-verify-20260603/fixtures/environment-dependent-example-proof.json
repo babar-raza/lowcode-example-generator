@@ -1,0 +1,5 @@
+[
+  {"family": "pdf", "example": "timestamp", "dependency": "TSA server", "behavior": "Handles unavailability gracefully, exit=0"},
+  {"family": "pdf", "example": "signature", "dependency": "None (runtime self-signed cert)", "behavior": "Generates PFX at runtime"},
+  {"family": "words", "example": "signer", "dependency": "None (runtime self-signed cert)", "behavior": "Generates PFX at runtime"}
+]

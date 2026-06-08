@@ -1,0 +1,35 @@
+{
+  "sprint": "lowcode-system-repair-20260601",
+  "findings": [
+    {
+      "id": "AF-1",
+      "severity": "INFO",
+      "category": "blocker_monitoring",
+      "finding": "FormImporter is a real API (builds in 26.5.0) that crashes at runtime. Future Aspose.PDF versions may fix the NullReferenceException.",
+      "action": "Monitor Aspose.PDF releases for Form.ImportJson fix"
+    },
+    {
+      "id": "AF-2",
+      "severity": "LOW",
+      "category": "external_dependency",
+      "finding": "Timestamp example depends on timestamp.digicert.com TSA endpoint.",
+      "action": "Has try/catch — fails gracefully. Monitor endpoint availability."
+    },
+    {
+      "id": "AF-3",
+      "severity": "LOW",
+      "category": "package_hygiene",
+      "finding": "4 duplicate package entries (slides-compress/convert/merger, email-converter) add confusion.",
+      "action": "Consider removing duplicate directories from packages in future sprint."
+    },
+    {
+      "id": "AF-4",
+      "severity": "INFO",
+      "category": "documentation",
+      "finding": "Words signer companion uses DigitalSignatures namespace, not LowCode. README must clearly label it as companion.",
+      "action": "README already labels it — no further action needed."
+    }
+  ],
+  "blocking_findings": 0,
+  "iv_verdict": "PASS"
+}

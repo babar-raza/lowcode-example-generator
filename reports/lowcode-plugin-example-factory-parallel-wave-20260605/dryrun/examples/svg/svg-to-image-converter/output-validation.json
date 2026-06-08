@@ -1,0 +1,14 @@
+{
+  "package": "svg/svg-to-image-converter",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\output.png",
+      "size": 64359
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05"
+}

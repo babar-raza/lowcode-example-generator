@@ -1,0 +1,3 @@
+example.manifest.json
+form-editor.csproj
+Program.cs

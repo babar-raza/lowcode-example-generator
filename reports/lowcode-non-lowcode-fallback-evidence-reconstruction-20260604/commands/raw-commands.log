@@ -1,0 +1,41 @@
+[2026-06-04T10:50:34Z] git diff pipeline/configs/families/cells.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/configs/families/words.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/configs/families/pdf.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/configs/families/slides.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/configs/families/email.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/configs/families/diagram.yml
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff pipeline/format-authority/manifest.json
+  exit_code: 0
+  stdout: (empty)
+[2026-06-04T10:50:35Z] git diff src/plugin_examples/runner.py
+  exit_code: 0
+  stdout: 'diff --git a/src/plugin_examples/runner.py b/src/plugin_examples/runner.py\nindex'
+[2026-06-04T10:50:35Z] git status --short
+  exit_code: 0
+  stdout: ' M pipeline/configs/families/barcode.yml\n M pipeline/configs/families/imaging.ym'
+[2026-06-04T10:51:11Z] pytest tests/unit/test_family_config_fallback_strategy.py -v --tb=short
+  exit_code: 0  result: ============================== 9 passed in 0.78s ==============================
+[2026-06-04T10:51:12Z] pytest tests/unit/test_capability_registry_schema.py -v --tb=short
+  exit_code: 0  result: ============================== 8 passed in 0.63s ==============================
+[2026-06-04T10:51:14Z] pytest tests/unit/test_heuristic_matcher.py -v --tb=short
+  exit_code: 0  result: ============================== 8 passed in 0.42s ==============================
+[2026-06-04T10:51:15Z] pytest tests/unit/test_probe_generator.py -v --tb=short
+  exit_code: 0  result: ============================= 10 passed in 0.70s ==============================
+[2026-06-04T10:51:16Z] pytest tests/unit/test_non_lowcode_validators.py -v --tb=short
+  exit_code: 0  result: ============================= 29 passed in 1.24s ==============================
+[2026-06-04T10:51:19Z] pytest tests/integration/test_runner_fallback_integration.py -v --tb=short
+  exit_code: 0  result: ============================== 6 passed in 0.56s ==============================
+[2026-06-04T10:51:20Z] ruff check src/plugin_examples/website_catalog/ src/plugin_examples/probe_generator/ src/plugin_examples/plugin_detector/heuristic_matcher.py src/plugin_examples/evidence_validator/rules/non_lowcode.py src/plugin_examples/ai_acceleration/
+  exit_code: 0  result: All checks passed!

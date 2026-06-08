@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-06-03",
+  "sprint": "lowcode-final-verify-20260603",
+  "description": "Verification that all feature branches from this sprint were deleted after merge",
+  "branches_deleted": [
+    {
+      "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
+      "branch": "fix/pdf-readme-all-examples",
+      "pr": 24,
+      "deleted_after_merge": true
+    },
+    {
+      "repo": "aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples",
+      "branch": "fix/email-readme-paths",
+      "pr": 4,
+      "deleted_after_merge": true
+    },
+    {
+      "repo": "aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples",
+      "branch": "fix/slides-readme-paths",
+      "pr": 4,
+      "deleted_after_merge": true
+    }
+  ],
+  "stale_branches_remaining": 0,
+  "all_clean": true
+}

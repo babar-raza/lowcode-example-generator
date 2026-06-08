@@ -1,0 +1,5 @@
+dotnet restore BarcodeGeneratorProbe.csproj
+  Determining projects to restore...
+  Restored BarcodeGeneratorProbe.csproj (in 2.1s)
+  Packages: Aspose.BarCode 26.5.0
+Exit code: 0

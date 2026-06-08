@@ -1,0 +1,69 @@
+# Plugin capability registry — Aspose.GIS
+# TRAIN D: Plugin-level entries (v26.5.0)
+# Reflection: BLOCKED — needs Aspose.Drawing.Common v25.3.0 dep (Aspose-specific, not in standard cache)
+
+entries:
+  # Plugin 1: Convert GIS Data (convert-gis-data)
+  - family: gis
+    plugin_slug: convert-gis-data
+    operation_kind: GIS_CONVERSION
+    package_id: Aspose.GIS
+    type_name: VectorLayer
+    namespace: Aspose.Gis
+    method_name: Convert
+    candidate_api_types:
+      - Aspose.Gis.VectorLayer
+      - Aspose.Gis.Dataset
+    candidate_methods:
+      - Convert
+    selected_api_mapping:
+      type_name: VectorLayer
+      namespace: Aspose.Gis
+      method_name: Convert
+      note: AI_DRAFT — pending DllReflector confirmation
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.55
+    confidence_rationale: >
+      GIS conversion: VectorLayer.Convert(source, dest, options) pattern.
+      14.5MB DLL with native geospatial dependencies. Probe requires valid GIS datasets.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
+    blocker_type: PROBE_BLOCKED_API
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"
+
+  # Plugin 2: Read GIS Data (read-gis-data)
+  - family: gis
+    plugin_slug: read-gis-data
+    operation_kind: GIS_PARSING
+    package_id: Aspose.GIS
+    type_name: VectorLayer
+    namespace: Aspose.Gis
+    method_name: Open
+    candidate_api_types:
+      - Aspose.Gis.VectorLayer
+    candidate_methods:
+      - Open
+    selected_api_mapping: null
+    status: WEBSITE_DISCOVERED
+    confidence_score: 0.52
+    confidence_rationale: GIS layer reading: VectorLayer.Open(path, driver) → iterate features.
+    probe_evidence: null
+    failure_taxonomy: null
+    rejection_reason: null
+    ai_source_flag: true
+    assembly_fingerprint: null
+    plugin_page_hash: null
+    last_validated: "2026-06-04T00:00:00Z"
+    bootstrap_status: WEBSITE_DISCOVERED
+    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
+    blocker_type: PROBE_BLOCKED_API
+    last_reflected_package_version: null
+    refresh_due: "2026-09-04"

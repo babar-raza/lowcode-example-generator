@@ -1,0 +1,14 @@
+{
+  "package": "page/convert-xps-to-pdf",
+  "restore_status": "SUCCESS",
+  "build_status": "SUCCESS",
+  "run_status": "SUCCESS",
+  "output_files": [
+    {
+      "path": "output\\output.pdf",
+      "size": 18460
+    }
+  ],
+  "verdict": "PASS",
+  "validated_at": "2026-06-05"
+}

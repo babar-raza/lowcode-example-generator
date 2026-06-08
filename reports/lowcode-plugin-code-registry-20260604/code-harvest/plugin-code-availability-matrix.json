@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-06-04",
+  "by_family": {
+    "barcode": {
+      "generate-barcode": "CODE_FOUND_REPOSITORY",
+      "recognize-barcode": "CODE_FOUND_REPOSITORY",
+      "generate-qr-code": "CODE_FOUND_REPOSITORY",
+      "read-barcode": "CODE_FOUND_REPOSITORY",
+      "scan-barcode": "CODE_FOUND_REPOSITORY"
+    },
+    "cad": {
+      "convert-cad-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-dwg-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-dxf-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-cad-to-image": "CODE_FOUND_REPOSITORY",
+      "convert-dwg-to-jpg": "NO_CODE_FOUND"
+    },
+    "drawing": {
+      "convert-drawing": "CODE_FOUND_REPOSITORY",
+      "create-drawing": "CODE_FOUND_REPOSITORY"
+    },
+    "finance": {
+      "convert-xbrl": "CODE_FOUND_REPOSITORY",
+      "parse-xbrl": "NO_CODE_FOUND"
+    },
+    "font": {
+      "convert-font": "CODE_FOUND_REPOSITORY",
+      "render-text-with-font": "CODE_FOUND_REPOSITORY"
+    },
+    "gis": {
+      "convert-gis-data": "CODE_FOUND_REPOSITORY",
+      "read-gis-data": "CODE_FOUND_REPOSITORY"
+    },
+    "html": {
+      "convert-html-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-html-to-word": "CODE_FOUND_REPOSITORY",
+      "convert-html-to-image": "CODE_FOUND_REPOSITORY",
+      "convert-html-to-xps": "CODE_FOUND_REPOSITORY",
+      "convert-html-to-markdown": "NO_CODE_FOUND",
+      "merge-html": "NO_CODE_FOUND"
+    },
+    "imaging": {
+      "convert-image": "CODE_FOUND_REPOSITORY",
+      "resize-image": "CODE_FOUND_REPOSITORY",
+      "compress-image": "CODE_FOUND_REPOSITORY",
+      "crop-image": "CODE_FOUND_REPOSITORY",
+      "rotate-image": "CODE_FOUND_REPOSITORY",
+      "watermark-image": "CODE_FOUND_REPOSITORY",
+      "merge-images": "CODE_FOUND_REPOSITORY",
+      "filter-image": "CODE_FOUND_REPOSITORY"
+    },
+    "note": {
+      "convert-one-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-one-to-word": "CODE_FOUND_REPOSITORY",
+      "convert-one-to-image": "CODE_FOUND_REPOSITORY"
+    },
+    "ocr": {
+      "recognize-text": "CODE_FOUND_REPOSITORY",
+      "extract-text": "NO_CODE_FOUND",
+      "scan-document": "CODE_FOUND_REPOSITORY"
+    },
+    "omr": {
+      "recognize-omr": "NO_CODE_FOUND",
+      "generate-omr-template": "NO_CODE_FOUND"
+    },
+    "page": {
+      "convert-xps-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-eps-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-ps-to-pdf": "CODE_FOUND_REPOSITORY"
+    },
+    "psd": {
+      "convert-psd-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-psd-to-png": "CODE_FOUND_REPOSITORY",
+      "convert-psd-to-jpg": "CODE_FOUND_REPOSITORY",
+      "edit-psd-layers": "CODE_FOUND_REPOSITORY"
+    },
+    "svg": {
+      "convert-svg-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-svg-to-png": "NO_CODE_FOUND",
+      "convert-svg-to-jpg": "NO_CODE_FOUND",
+      "merge-svg": "NO_CODE_FOUND"
+    },
+    "tasks": {
+      "convert-mpp-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-mpp-to-excel": "CODE_FOUND_REPOSITORY",
+      "convert-mpp-to-html": "CODE_FOUND_REPOSITORY",
+      "convert-mpp-to-image": "CODE_FOUND_REPOSITORY",
+      "read-project-data": "NO_CODE_FOUND"
+    },
+    "tex": {
+      "convert-tex-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-latex-to-pdf": "CODE_FOUND_REPOSITORY",
+      "convert-tex-to-svg": "CODE_FOUND_REPOSITORY"
+    },
+    "threed": {
+      "convert-3d-model": "CODE_FOUND_REPOSITORY",
+      "compress-3d-scene": "CODE_FOUND_REPOSITORY"
+    },
+    "zip": {
+      "compress-files": "CODE_FOUND_REPOSITORY",
+      "extract-files": "NO_CODE_FOUND",
+      "create-archive": "CODE_FOUND_REPOSITORY",
+      "compress-folder": "CODE_FOUND_REPOSITORY"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "family": "pdf",
+  "name": "toc-generator",
+  "decision": "PUBLISH_MAIN_CLASS_EXAMPLE",
+  "type": "TocGenerator",
+  "role": "WORKFLOW_ROOT",
+  "csproj": "pdf-toc-generator.csproj",
+  "files": [
+    "pdf-toc-generator.csproj",
+    "Program.cs"
+  ]
+}

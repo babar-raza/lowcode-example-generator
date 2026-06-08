@@ -1,0 +1,29 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave23-20260608",
+  "date": "2026-06-08",
+  "protocol_version": "v2",
+  "lanes": {
+    "L0": "coordinator_setup",
+    "LA": "wave22_closure_repair_addendum",
+    "LB": "workspace_hygiene",
+    "LC": "shared_downstream_executor",
+    "LD": "readme_post_repair_audit",
+    "LE": "target_repo_build_validation",
+    "LF": "pr_lifecycle_decision",
+    "LG": "raw_test_logs",
+    "LH": "artifact_contract_audit",
+    "LI": "state_truth_counts",
+    "LJ": "wrong_stream_permanent_guard",
+    "LK": "iv_adversarial_review",
+    "LZ": "bundle_freeze"
+  },
+  "hard_stop_conditions": [
+    "PENDING taskcards at freeze",
+    "missing sidecar or attestation",
+    "dirty unclassified git status at freeze",
+    "stale README audit (pre-repair)",
+    "workflow-existence-only CI claim",
+    "model-fields-only convergence claim",
+    "local_remaining=0 with actual gaps"
+  ]
+}

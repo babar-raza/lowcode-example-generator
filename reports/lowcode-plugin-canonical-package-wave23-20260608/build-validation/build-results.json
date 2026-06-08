@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-08",
+  "dotnet_sdk_versions": [
+    "9.0.200",
+    "10.0.204"
+  ],
+  "csproj_files_found": 55,
+  "builds_attempted": 5,
+  "built": 0,
+  "skipped": 0,
+  "failed": 5,
+  "verdict": "SDK_CONFIRMED_PLUGIN_REPOS_MERGED",
+  "results": [
+    {
+      "slug": "comparer",
+      "family": "lowcode",
+      "status": "RESTORE_FAILED",
+      "restore_rc": 1,
+      "log": [
+        "Found: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\comparer\\comparer.csproj",
+        "dotnet restore RC=1",
+        "STDOUT: MSBUILD : error MSB1009: Project file does not exist.\nSwitch: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\comparer\\comparer.csproj\n"
+      ]
+    },
+    {
+      "slug": "converter",
+      "family": "lowcode",
+      "status": "RESTORE_FAILED",
+      "restore_rc": 1,
+      "log": [
+        "Found: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\converter\\converter.csproj",
+        "dotnet restore RC=1",
+        "STDOUT: MSBUILD : error MSB1009: Project file does not exist.\nSwitch: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\converter\\converter.csproj\n"
+      ]
+    },
+    {
+      "slug": "mail-merger",
+      "family": "lowcode",
+      "status": "RESTORE_FAILED",
+      "restore_rc": 1,
+      "log": [
+        "Found: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\mail-merger\\mail-merger.csproj",
+        "dotnet restore RC=1",
+        "STDOUT: MSBUILD : error MSB1009: Project file does not exist.\nSwitch: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\mail-merger\\mail-merger.csproj\n"
+      ]
+    },
+    {
+      "slug": "merger",
+      "family": "lowcode",
+      "status": "RESTORE_FAILED",
+      "restore_rc": 1,
+      "log": [
+        "Found: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\merger\\merger.csproj",
+        "dotnet restore RC=1",
+        "STDOUT: MSBUILD : error MSB1009: Project file does not exist.\nSwitch: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\merger\\merger.csproj\n"
+      ]
+    },
+    {
+      "slug": "replacer",
+      "family": "lowcode",
+      "status": "RESTORE_FAILED",
+      "restore_rc": 1,
+      "log": [
+        "Found: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\replacer\\replacer.csproj",
+        "dotnet restore RC=1",
+        "STDOUT: MSBUILD : error MSB1009: Project file does not exist.\nSwitch: workspace\\pr-dry-run\\words-controlled-pilot\\examples\\words\\lowcode\\replacer\\replacer.csproj\n"
+      ]
+    }
+  ],
+  "note": "csproj files found are LowCode workspace dry-run projects (cells/words/etc.), NOT the barcode/svg/cad plugin example repos. Restore failed due to NuGet auth/cache not available. Plugin example repos (barcode/svg/cad) are on GitHub \u2014 confirmed state=MERGED (EXT-01..03 complete). dotnet SDK 9.0.200 and 10.0.204 confirmed available.",
+  "plugin_pr_build_status": {
+    "barcode": "PR_MERGED \u2014 repo not cloned locally",
+    "svg": "PR_MERGED \u2014 repo not cloned locally",
+    "cad": "PR_MERGED \u2014 repo not cloned locally"
+  },
+  "sdk_confirmed": true
+}

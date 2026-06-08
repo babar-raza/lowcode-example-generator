@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-08",
+  "wrong_stream_package_known": "declaration-review-package(140).zip",
+  "known_package_resolution": "EXCLUDED \u2014 wrong stream, not lowcode/plugins evidence",
+  "flaw_register_entry": null,
+  "flaw_resolved": false,
+  "active_violations": [
+    {
+      "path": "reports\\lowcode-plugin-canonical-package-wave22-20260608\\evidence-audit\\wrong-stream-package-review.json",
+      "type": "FILE_NAME",
+      "pattern": "wrong-stream",
+      "classification": "FALSE_POSITIVE_OWN_AUDIT_FILE",
+      "explanation": "This is a Wave 22 audit/validator result file documenting the wrong-stream exclusion \u2014 not a wrong-stream evidence file itself."
+    },
+    {
+      "path": "reports\\lowcode-plugin-canonical-package-wave22-20260608\\validators\\wrong-stream-evidence-validator-results.json",
+      "type": "FILE_NAME",
+      "pattern": "wrong-stream",
+      "classification": "FALSE_POSITIVE_OWN_AUDIT_FILE",
+      "explanation": "This is a Wave 22 audit/validator result file documenting the wrong-stream exclusion \u2014 not a wrong-stream evidence file itself."
+    }
+  ],
+  "violation_count": 2,
+  "plv_01_guard": "PLV-01 check_plv_01_wrong_stream_evidence() in publication_lifecycle_validators.py detects wrong-stream names at bundle time",
+  "verdict": "PASS_VIOLATIONS_ARE_FALSE_POSITIVES",
+  "false_positive_count": 2,
+  "true_violations": [],
+  "note": "Active violations are our own audit result files (wrong-stream-package-review.json, wrong-stream-evidence-validator-results.json) which DOCUMENT the exclusion of declaration-review-package(140).zip \u2014 not wrong-stream evidence themselves."
+}

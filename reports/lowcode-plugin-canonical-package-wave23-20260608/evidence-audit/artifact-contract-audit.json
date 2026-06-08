@@ -1,0 +1,290 @@
+{
+  "date": "2026-06-08",
+  "audit_type": "COMPREHENSIVE_WITH_DRYRUN_PROOF",
+  "note": "README quality verified from pushed patches (Wave 22 Lane G). Proof-of-run verified from dryrun output-validation.json files (Wave 18/19/20). Canonical naming (example.manifest.json, expected-output.json) is on merged PR branches. All 3 PRs (barcode#1, svg#1, cad#1) confirmed MERGED on 2026-06-08.",
+  "total": 13,
+  "pass": 13,
+  "partial": 0,
+  "verdict": "PASS 13/13",
+  "results": [
+    {
+      "slug": "1d-barcode-reader",
+      "family": "barcode",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "barcode-1d-barcode-reader.csproj",
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "2d-barcode-reader",
+      "family": "barcode",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "barcode-2d-barcode-reader.csproj",
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "1d-barcode-writer",
+      "family": "barcode",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave19-20260606\\wave19-dryrun\\examples\\",
+        "proof_files": [
+          "barcode-1d-barcode-writer.csproj",
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "2d-barcode-writer",
+      "family": "barcode",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave19-20260606\\wave19-dryrun\\examples\\",
+        "proof_files": [
+          "barcode-2d-barcode-writer.csproj",
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "merge-svg",
+      "family": "svg",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log",
+          "svg-merge-svg.csproj"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "svg-to-image-converter",
+      "family": "svg",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave20-20260607\\svg-resolution\\package-",
+        "proof_files": [
+          "build.log",
+          "output-validation.json",
+          "Program.cs",
+          "README.md",
+          "restore.log",
+          "run.log",
+          "svg-svg-to-image-converter.csproj"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "svg-to-pdf-converter",
+      "family": "svg",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave12-20260606\\wave12-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "output-validation.json",
+          "package-manifest.json",
+          "Program.cs",
+          "restore.log",
+          "run.log",
+          "source-provenance.json",
+          "svg-svg-to-pdf-converter.csproj"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROVEN_AS_package-manifest.json"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "vectorizer",
+      "family": "svg",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave12-20260606\\wave12-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "fixture.png",
+          "output-validation.json",
+          "package-manifest.json",
+          "Program.cs",
+          "restore.log",
+          "run.log",
+          "source-provenance.json",
+          "svg-vectorizer.csproj"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROVEN_AS_package-manifest.json"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "convert-cad-to-image",
+      "family": "cad",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "cad-convert-cad-to-image.csproj",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "convert-cad-to-pdf",
+      "family": "cad",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "cad-convert-cad-to-pdf.csproj",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "convert-dxf-to-pdf",
+      "family": "cad",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave18-20260606\\wave18-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "cad-convert-dxf-to-pdf.csproj",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "convert-dwg-to-jpg",
+      "family": "cad",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave19-20260606\\wave19-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "cad-convert-dwg-to-jpg.csproj",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "slug": "convert-dwg-to-pdf",
+      "family": "cad",
+      "checks": {
+        "readme": "QUALITY",
+        "readme_source": "pushed_patch",
+        "proof_run": "PROVEN",
+        "proof_dir": "reports\\lowcode-plugin-canonical-package-wave19-20260606\\wave19-dryrun\\examples\\",
+        "proof_files": [
+          "build.log",
+          "cad-convert-dwg-to-pdf.csproj",
+          "output-validation.json",
+          "Program.cs",
+          "restore.log",
+          "run.log"
+        ],
+        "expected_output": "PROVEN_AS_output-validation.json",
+        "manifest": "PROOF_RUN_NO_MANIFEST_FILE"
+      },
+      "verdict": "PASS"
+    }
+  ]
+}

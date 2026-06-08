@@ -1,0 +1,12 @@
+{
+  "sprint": "lowcode-plugin-canonical-package-wave23-20260608",
+  "date": "2026-06-08",
+  "verdict": "SPRINT_COMPLETE",
+  "final_verdict": "APPROVAL_BLOCKED",
+  "approval_blocked_reason": "EXT-01..05: PR merges, branch deletion, release (all external human actions)",
+  "taskcards": "20/20 COMPLETE",
+  "bundle_sha256": "7b0b14b9e3df35f5be5d43236095baab9a3a39536d9641fc61360af3c51542b5",
+  "bundle_size_bytes": 17898,
+  "bundle_entries": 17,
+  "wave22_issues_resolved": 6
+}

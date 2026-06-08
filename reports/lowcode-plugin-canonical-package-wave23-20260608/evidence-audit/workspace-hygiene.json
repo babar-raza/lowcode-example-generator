@@ -1,0 +1,151 @@
+{
+  "date": "2026-06-08",
+  "total_dirty_lines": 28,
+  "classified": [
+    {
+      "code": "M",
+      "path": "orkspace/pr-dry-run/cells-controlled-pilot/README.md",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/pr-dry-run/words-controlled-pilot/README.md",
+      "classification": "CONTROLLED_PILOT_UPDATE"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/cells-readme-backfill-simulation.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/cells-root-readme-audit.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/cells-root-readme-render-result.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/release-status.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/words-readme-backfill-simulation.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/words-root-readme-audit.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "M",
+      "path": "workspace/verification/latest/words-root-readme-render-result.json",
+      "classification": "WORKSPACE_ARTIFACT"
+    },
+    {
+      "code": "??",
+      "path": "echo",
+      "classification": "SHELL_ARTIFACT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "fallback_candidates.json",
+      "classification": "SCRATCH_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input1.pdf",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input1.pptx",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input2.pdf",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input2.pptx",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input_v1.docx",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "input_v2.docx",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "reports/lowcode-final-verify-20260603/commands/stdout-stderr/CMD-001.err",
+      "classification": "WAVE22_REPORTS"
+    },
+    {
+      "code": "??",
+      "path": "reports/lowcode-plugin-canonical-package-wave23-20260608/",
+      "classification": "WAVE22_REPORTS"
+    },
+    {
+      "code": "??",
+      "path": "reports/weekly-business-achievements/",
+      "classification": "WAVE22_REPORTS"
+    },
+    {
+      "code": "??",
+      "path": "scripts/_wave23_closeout.py",
+      "classification": "WAVE22_SCRIPTS"
+    },
+    {
+      "code": "??",
+      "path": "scripts/_wave23_coordinator.py",
+      "classification": "WAVE22_SCRIPTS"
+    },
+    {
+      "code": "??",
+      "path": "scripts/_wave23_freeze.py",
+      "classification": "WAVE22_SCRIPTS"
+    },
+    {
+      "code": "??",
+      "path": "scripts/_wave23_readme_build_lifecycle.py",
+      "classification": "WAVE22_SCRIPTS"
+    },
+    {
+      "code": "??",
+      "path": "src/plugin_examples/fixture_factory/shared_downstream_executor.py",
+      "classification": "WAVE23_STAGED"
+    },
+    {
+      "code": "??",
+      "path": "template.docx",
+      "classification": "TEST_INPUT_EXCLUDE"
+    },
+    {
+      "code": "??",
+      "path": "tests/unit/test_shared_downstream_executor.py",
+      "classification": "WAVE23_STAGED"
+    }
+  ],
+  "unclassified": [
+    {
+      "code": "??",
+      "path": "Exit\\357\\200\\272 "
+    }
+  ],
+  "blockers_for_freeze": [],
+  "freeze_safe": true,
+  "raw_git_status": "M workspace/pr-dry-run/cells-controlled-pilot/README.md\n M workspace/pr-dry-run/words-controlled-pilot/README.md\n M workspace/verification/latest/cells-readme-backfill-simulation.json\n M workspace/verification/latest/cells-root-readme-audit.json\n M workspace/verification/latest/cells-root-readme-render-result.json\n M workspace/verification/latest/release-status.json\n M workspace/verification/latest/words-readme-backfill-simulation.json\n M workspace/verification/latest/words-root-readme-audit.json\n M workspace/verification/latest/words-root-readme-render-result.json\n?? \"Exit\\357\\200\\272 \"\n?? echo\n?? fallback_candidates.json\n?? input1.pdf\n?? input1.pptx\n?? input2.pdf\n?? input2.pptx\n?? input_v1.docx\n?? input_v2.docx\n?? reports/lowcode-final-verify-20260603/commands/stdout-stderr/CMD-001.err\n?? reports/lowcode-plugin-canonical-package-wave23-20260608/\n?? reports/weekly-business-achievements/\n?? scripts/_wave23_closeout.py\n?? scripts/_wave23_coordinator.py\n?? scripts/_wave23_freeze.py\n?? scripts/_wave23_readme_build_lifecycle.py\n?? src/plugin_examples/fixture_factory/shared_downstream_executor.py\n?? template.docx\n?? tests/unit/test_shared_downstream_executor.py",
+  "classification_verdict": "CLEAN_CLASSIFIED"
+}

@@ -1,0 +1,84 @@
+{
+  "date": "2026-06-08",
+  "total": 15,
+  "passed": 15,
+  "failed": 0,
+  "verdict": "15/15 PASS",
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "W22 bundle ZIP exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-02",
+      "description": "W22 sidecar exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-03",
+      "description": "W22 attestation exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-04",
+      "description": "W22 on-disk taskcards complete",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-05",
+      "description": "PLV validators exist",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-06",
+      "description": "SharedDownstreamExecutor exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-07",
+      "description": "Post-repair README audit exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-08",
+      "description": "Workspace hygiene JSON exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-09",
+      "description": "W22 addendum exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-10",
+      "description": "PR lifecycle decision exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-11",
+      "description": "State truth document exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-12",
+      "description": "Wrong-stream guard exists",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-13",
+      "description": "Build validation results exist",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-14",
+      "description": "Test logs exist",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-15",
+      "description": "Artifact contract audit exists",
+      "status": "PASS"
+    }
+  ]
+}

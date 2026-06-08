@@ -415,7 +415,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-06-08 09:03 UTC
+Generated on: 2026-06-08 09:11 UTC
 
 ---
 

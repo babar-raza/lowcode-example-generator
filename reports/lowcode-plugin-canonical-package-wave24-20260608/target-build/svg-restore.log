@@ -1,0 +1,15 @@
+=== merge-svg restore RC=0 ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+=== svg-to-image-converter restore RC=0 ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+=== svg-to-pdf-converter restore RC=0 ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+=== vectorizer restore RC=0 ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.

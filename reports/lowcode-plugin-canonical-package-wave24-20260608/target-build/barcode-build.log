@@ -1,0 +1,35 @@
+=== 1d-barcode-reader build RC=0 ===
+  barcode-1d-barcode-reader -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\wave24-builds\barcode-plugin-examples\examples\barcode\1d-barcode-reader\bin\Release\net8.0\barcode-1d-barcode-reader.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+=== 2d-barcode-reader build RC=0 ===
+  barcode-2d-barcode-reader -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\wave24-builds\barcode-plugin-examples\examples\barcode\2d-barcode-reader\bin\Release\net8.0\barcode-2d-barcode-reader.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.65
+
+=== 1d-barcode-writer build RC=0 ===
+  barcode-1d-barcode-writer -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\wave24-builds\barcode-plugin-examples\examples\barcode\1d-barcode-writer\bin\Release\net8.0\barcode-1d-barcode-writer.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+
+=== 2d-barcode-writer build RC=0 ===
+  barcode-2d-barcode-writer -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\wave24-builds\barcode-plugin-examples\examples\barcode\2d-barcode-writer\bin\Release\net8.0\barcode-2d-barcode-writer.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.76

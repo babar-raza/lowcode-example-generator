@@ -1,0 +1,20 @@
+{
+  "stage_for_commit": [
+    "src/plugin_examples/fixture_factory/shared_downstream_executor.py",
+    "tests/unit/test_shared_downstream_executor.py"
+  ],
+  "already_committed": [
+    "src/plugin_examples/fixture_factory/shared_downstream_executor.py (committed in Wave 23 f56c1657)",
+    "tests/unit/test_shared_downstream_executor.py (committed in Wave 23 f56c1657)"
+  ],
+  "leave_unstaged": [
+    "workspace/pr-dry-run/* \u2014 controlled pilot updates (not sprint scope)",
+    "workspace/verification/latest/* \u2014 verification artifacts (not sprint scope)",
+    "Scratch files: input*.pdf/docx/pptx, template.docx, echo, fallback_candidates.json"
+  ],
+  "exclude": [
+    "Exit shell artifact",
+    "reports/weekly-business-achievements/",
+    "reports/lowcode-final-verify-20260603/"
+  ]
+}

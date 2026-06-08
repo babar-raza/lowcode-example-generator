@@ -1,0 +1,12 @@
+{
+  "wrong_stream_patterns_checked": [
+    "declaration-review",
+    "WRONG_STREAM"
+  ],
+  "report_dir_violations": [
+    "reports\\lowcode-plugin-canonical-package-wave22-20260608\\evidence-audit\\wrong-stream-package-review.json",
+    "reports\\lowcode-plugin-canonical-package-wave22-20260608\\validators\\wrong-stream-evidence-validator-results.json"
+  ],
+  "known_exclusion": "declaration-review-package(140).zip \u2014 EXCLUDED per W22 flaw register",
+  "verdict": "PASS"
+}

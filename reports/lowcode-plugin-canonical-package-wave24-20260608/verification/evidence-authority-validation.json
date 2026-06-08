@@ -1,0 +1,8 @@
+{
+  "bundle_sha_match": true,
+  "sidecar_present": true,
+  "attestation_present": true,
+  "sha256": "b864fd503828a54ed659af2c46bc3903658a98e710c986e1dcc46d7b1ad7ebcb",
+  "size_bytes": 32097,
+  "entry_count": 41
+}

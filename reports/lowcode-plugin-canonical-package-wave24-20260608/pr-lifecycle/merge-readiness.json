@@ -1,0 +1,14 @@
+{
+  "barcode": {
+    "classification": "MERGE_READY_APPROVAL_BLOCKED",
+    "url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1"
+  },
+  "svg": {
+    "classification": "MERGE_READY_APPROVAL_BLOCKED",
+    "url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1"
+  },
+  "cad": {
+    "classification": "MERGE_READY_APPROVAL_BLOCKED",
+    "url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1"
+  }
+}

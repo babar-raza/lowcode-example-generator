@@ -1,0 +1,152 @@
+{
+  "date": "2026-06-08",
+  "audit_type": "LIVE_PR_BRANCH",
+  "total": 13,
+  "quality_count": 13,
+  "verdict": "PASS",
+  "examples": [
+    {
+      "slug": "1d-barcode-reader",
+      "family": "barcode",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "2d-barcode-reader",
+      "family": "barcode",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "1d-barcode-writer",
+      "family": "barcode",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "2d-barcode-writer",
+      "family": "barcode",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "merge-svg",
+      "family": "svg",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "svg-to-image-converter",
+      "family": "svg",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "svg-to-pdf-converter",
+      "family": "svg",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "vectorizer",
+      "family": "svg",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "convert-cad-to-image",
+      "family": "cad",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "convert-cad-to-pdf",
+      "family": "cad",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "convert-dxf-to-pdf",
+      "family": "cad",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "convert-dwg-to-jpg",
+      "family": "cad",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    },
+    {
+      "slug": "convert-dwg-to-pdf",
+      "family": "cad",
+      "readme": "QUALITY",
+      "sections": [
+        "## Purpose",
+        "## Prerequisites",
+        "## Expected Output"
+      ],
+      "source": "LIVE_PR_BRANCH"
+    }
+  ]
+}

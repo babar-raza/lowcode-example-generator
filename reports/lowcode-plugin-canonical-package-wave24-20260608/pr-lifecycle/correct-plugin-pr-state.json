@@ -1,0 +1,83 @@
+{
+  "date": "2026-06-08",
+  "pr_checks": [
+    {
+      "family": "barcode",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "branch": "lowcode/wave19/barcode-plugin-examples",
+      "state": "OPEN",
+      "mergeable": "MERGEABLE",
+      "merge_state_status": "CLEAN",
+      "title": "feat(plugins): add Aspose.BarCode plugin examples (4 packages)",
+      "url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1",
+      "head_sha": "82014d827a24",
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "check_source": "gh_pr_view_live"
+    },
+    {
+      "family": "svg",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "branch": "lowcode/wave19/svg-plugin-examples",
+      "state": "OPEN",
+      "mergeable": "MERGEABLE",
+      "merge_state_status": "CLEAN",
+      "title": "feat(plugins): add Aspose.SVG plugin examples (4 packages)",
+      "url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1",
+      "head_sha": "67b1d9b5e92e",
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "check_source": "gh_pr_view_live"
+    },
+    {
+      "family": "cad",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "branch": "lowcode/wave19/cad-plugin-examples",
+      "state": "OPEN",
+      "mergeable": "MERGEABLE",
+      "merge_state_status": "CLEAN",
+      "title": "feat(plugins): add Aspose.CAD plugin examples (5 packages)",
+      "url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1",
+      "head_sha": "a8ac4b0ce5fa",
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "check_source": "gh_pr_view_live"
+    }
+  ],
+  "wrong_repo_correction": {
+    "w23_error": "Wave 23 checked product SDK repos (Aspose.BarCode-for-.NET etc.) instead of plugin example repos",
+    "wrong_repos": {
+      "barcode": "aspose-barcode/Aspose.BarCode-for-.NET",
+      "svg": "aspose-svg/Aspose.SVG-for-.NET",
+      "cad": "aspose-cad/Aspose.CAD-for-.NET"
+    },
+    "correct_repos": {
+      "barcode": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "svg": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "cad": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples"
+    },
+    "wrong_repo_state": "MERGED (product SDK repos had existing merged PRs \u2014 unrelated to plugin examples)",
+    "correct_pr_state": {
+      "barcode": "MERGE_READY_APPROVAL_BLOCKED",
+      "svg": "MERGE_READY_APPROVAL_BLOCKED",
+      "cad": "MERGE_READY_APPROVAL_BLOCKED"
+    },
+    "impact": "Wave 23 falsely reported EXT-01..03 COMPLETE. All 3 plugin PRs are OPEN."
+  },
+  "merge_readiness": {
+    "barcode": {
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "url": "https://github.com/aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples/pull/1"
+    },
+    "svg": {
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "url": "https://github.com/aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples/pull/1"
+    },
+    "cad": {
+      "classification": "MERGE_READY_APPROVAL_BLOCKED",
+      "url": "https://github.com/aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples/pull/1"
+    }
+  },
+  "ext_01_03_status": "PENDING \u2014 all 3 plugin PRs OPEN",
+  "verdict": "ALL_OPEN_MERGE_READY_APPROVAL_BLOCKED"
+}

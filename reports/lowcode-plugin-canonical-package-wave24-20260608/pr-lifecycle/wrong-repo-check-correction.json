@@ -1,0 +1,20 @@
+{
+  "w23_error": "Wave 23 checked product SDK repos (Aspose.BarCode-for-.NET etc.) instead of plugin example repos",
+  "wrong_repos": {
+    "barcode": "aspose-barcode/Aspose.BarCode-for-.NET",
+    "svg": "aspose-svg/Aspose.SVG-for-.NET",
+    "cad": "aspose-cad/Aspose.CAD-for-.NET"
+  },
+  "correct_repos": {
+    "barcode": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+    "svg": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+    "cad": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples"
+  },
+  "wrong_repo_state": "MERGED (product SDK repos had existing merged PRs \u2014 unrelated to plugin examples)",
+  "correct_pr_state": {
+    "barcode": "MERGE_READY_APPROVAL_BLOCKED",
+    "svg": "MERGE_READY_APPROVAL_BLOCKED",
+    "cad": "MERGE_READY_APPROVAL_BLOCKED"
+  },
+  "impact": "Wave 23 falsely reported EXT-01..03 COMPLETE. All 3 plugin PRs are OPEN."
+}

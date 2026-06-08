@@ -1,0 +1,17 @@
+{
+  "slug": "words-converter",
+  "namespace_source": "LOWCODE",
+  "discovery_method": "namespace_scan",
+  "artifact_contract": {
+    "manifest": "PRESENT",
+    "expected_output": "PRESENT",
+    "readme": "QUALITY",
+    "readme_sections": [
+      "## Purpose",
+      "## Prerequisites",
+      "## Expected Output"
+    ]
+  },
+  "publication_state": "READY_FOR_PR",
+  "ok": true
+}

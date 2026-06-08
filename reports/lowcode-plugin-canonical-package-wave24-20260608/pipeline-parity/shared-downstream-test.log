@@ -1,0 +1,24 @@
+============================= test session starts =============================
+collecting ... collected 19 items
+
+tests/unit/test_shared_downstream_executor.py::TestPluginCandidate::test_lowcode_candidate PASSED [  5%]
+tests/unit/test_shared_downstream_executor.py::TestPluginCandidate::test_nonlowcode_candidate PASSED [ 10%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_lowcode_quality_example_passes PASSED [ 15%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_nonlowcode_quality_example_passes PASSED [ 21%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_both_sources_identical_behavior_for_same_content PASSED [ 26%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_missing_manifest_fails PASSED [ 31%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_missing_expected_output_fails PASSED [ 36%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_minimal_readme_fails_in_strict_mode PASSED [ 42%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_no_example_dir_strict_fails PASSED [ 47%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_no_example_dir_nonstrict_passes_contract_as_not_provided PASSED [ 52%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_pr_packet_lowcode_uses_lowcode_prefix PASSED [ 57%]
+tests/unit/test_shared_downstream_executor.py::TestSharedDownstreamExecutor::test_pr_packet_nonlowcode_uses_plugins_prefix PASSED [ 63%]
+tests/unit/test_shared_downstream_executor.py::TestBatchExecution::test_batch_mixed_sources PASSED [ 68%]
+tests/unit/test_shared_downstream_executor.py::TestBatchExecution::test_batch_counts_failures PASSED [ 73%]
+tests/unit/test_shared_downstream_executor.py::TestDiscoveryAdapters::test_lowcode_discovery_returns_lowcode_source PASSED [ 78%]
+tests/unit/test_shared_downstream_executor.py::TestDiscoveryAdapters::test_lowcode_discovery_empty_patterns_matches_all PASSED [ 84%]
+tests/unit/test_shared_downstream_executor.py::TestDiscoveryAdapters::test_nonlowcode_discovery_returns_nonlowcode_source PASSED [ 89%]
+tests/unit/test_shared_downstream_executor.py::TestDiscoveryAdapters::test_nonlowcode_discovery_no_dir_match_still_returns_candidate PASSED [ 94%]
+tests/unit/test_shared_downstream_executor.py::TestDiscoveryAdapters::test_both_adapters_feed_same_executor PASSED [100%]
+
+============================= 19 passed in 0.77s ==============================

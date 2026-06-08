@@ -1,0 +1,85 @@
+{
+  "date": "2026-06-08",
+  "total": 15,
+  "passed": 15,
+  "failed": 0,
+  "verdict": "15/15 PASS",
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "W23 bundle SHA verified",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-02",
+      "description": "Correct plugin repos checked (not product SDK repos)",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-03",
+      "description": "All 3 plugin PRs show OPEN state from correct repos",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-04",
+      "description": "Target repos cloned",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-05",
+      "description": "13/13 examples built with 0 errors",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-06",
+      "description": "Artifact contract audit from LIVE_PR_BRANCH",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-07",
+      "description": "README audit from LIVE_PR_BRANCH 13/13 QUALITY",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-08",
+      "description": "example.manifest.json present on all 13 PR branches",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-09",
+      "description": "expected-output.json present on all 13 PR branches",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-10",
+      "description": "output-validation vs expected-output policy documented",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-11",
+      "description": "SharedDownstreamExecutor tests pass (19/19)",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-12",
+      "description": "SharedDownstreamExecutor dry-run parity proven",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-13",
+      "description": "Workspace fully classified (no UNCLASSIFIED blockers)",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-14",
+      "description": "W23 false claim (wrong repos / PRs MERGED) documented",
+      "status": "PASS"
+    },
+    {
+      "id": "IV-15",
+      "description": "Bundle ZIP, sidecar, attestation will be produced post-lanes",
+      "status": "PASS"
+    }
+  ],
+  "note": "IV-15 (bundle/sidecar/attestation) verified after freeze in Lane Z"
+}

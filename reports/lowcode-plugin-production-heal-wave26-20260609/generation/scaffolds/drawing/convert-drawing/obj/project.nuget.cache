@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "WsMfMa9NZq8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\drawing\\convert-drawing\\Aspose.Drawing.Plugins.convert.drawing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prora\\.nuget\\packages\\aspose.drawing\\26.5.0\\aspose.drawing.26.5.0.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\prora\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

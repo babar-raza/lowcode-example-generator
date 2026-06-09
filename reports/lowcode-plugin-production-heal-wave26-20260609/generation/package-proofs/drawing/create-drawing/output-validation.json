@@ -1,0 +1,9 @@
+{
+  "output_files_found": [
+    "output.png"
+  ],
+  "output_file_count": 1,
+  "run_stdout": "Aspose.Drawing - Create Drawing\nDrawing created successfully: output.png\n",
+  "run_exit_code": 0,
+  "validated_at": "2026-06-09T16:13:30+00:00"
+}

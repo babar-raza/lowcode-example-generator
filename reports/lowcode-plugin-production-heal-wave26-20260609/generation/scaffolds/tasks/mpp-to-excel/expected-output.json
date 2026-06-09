@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.xlsx"
+  ],
+  "expected_console_contains": [
+    "mpp to excel"
+  ],
+  "exit_code": 0
+}

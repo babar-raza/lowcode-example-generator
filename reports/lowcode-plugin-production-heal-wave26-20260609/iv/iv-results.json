@@ -1,0 +1,118 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:30:37+00:00",
+  "total_checks": 18,
+  "passed": 18,
+  "pending": 0,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "Test suite ran with raw logs captured",
+      "verdict": "PASS",
+      "evidence": "verification\\raw-test-logs\\full-pytest.log"
+    },
+    {
+      "id": "IV-02",
+      "description": "W25 closure contradictions documented",
+      "verdict": "PASS",
+      "evidence": "wave25-correction/wave25-addendum.json"
+    },
+    {
+      "id": "IV-03",
+      "description": "W25 taskcard/lane-ledger contradiction documented",
+      "verdict": "PASS",
+      "evidence": "wave25-correction/taskcard-lane-ledger-contradiction.json"
+    },
+    {
+      "id": "IV-04",
+      "description": "Scaffold generation covered all 28 DRYRUN packages",
+      "verdict": "PASS",
+      "evidence": "scaffold-generation-matrix.json: total=28"
+    },
+    {
+      "id": "IV-05",
+      "description": "Build matrix has per-package results for all 28",
+      "verdict": "PASS",
+      "evidence": "build-matrix-wave26.json: 28 results"
+    },
+    {
+      "id": "IV-06",
+      "description": "Registry transition ledger written",
+      "verdict": "PASS",
+      "evidence": "registry-transition-ledger.json: 19 promoted, 9 blocked"
+    },
+    {
+      "id": "IV-07",
+      "description": "Source evidence (commits, diffs, manifest) present",
+      "verdict": "PASS",
+      "evidence": "source-evidence/"
+    },
+    {
+      "id": "IV-08",
+      "description": "PR lifecycle AMG evaluation for all 3 PRs",
+      "verdict": "PASS",
+      "evidence": "pr-lifecycle/amg-results.json"
+    },
+    {
+      "id": "IV-09",
+      "description": "Security scan completed with verdict",
+      "verdict": "PASS",
+      "evidence": "security/security-scan-report.json"
+    },
+    {
+      "id": "IV-10",
+      "description": "State truth document present and dated",
+      "verdict": "PASS",
+      "evidence": "state-truth/state-truth-wave26.json"
+    },
+    {
+      "id": "IV-11",
+      "description": "Final blocker register written",
+      "verdict": "PASS",
+      "evidence": "state-truth/final-blocker-register.json"
+    },
+    {
+      "id": "IV-12",
+      "description": "No APPROVAL_BLOCKED from new code (uses EXECUTION_ENV_GATE_NOT_SET)",
+      "verdict": "PASS",
+      "evidence": "pr-lifecycle/amg-results.json"
+    },
+    {
+      "id": "IV-13",
+      "description": "Discovery evidence checked and documented",
+      "verdict": "PASS",
+      "evidence": "discovery/discovery-evidence.json"
+    },
+    {
+      "id": "IV-14",
+      "description": "Provenance/version drift validated",
+      "verdict": "PASS",
+      "evidence": "provenance/version-drift-results.json"
+    },
+    {
+      "id": "IV-15",
+      "description": "Non-LowCode E2E configuration checks done",
+      "verdict": "PASS",
+      "evidence": "nonlowcode-e2e/e2e-summary.json"
+    },
+    {
+      "id": "IV-16",
+      "description": "48 taskcards created",
+      "verdict": "PASS",
+      "evidence": "taskcards.json: 48 entries"
+    },
+    {
+      "id": "IV-17",
+      "description": "Lane ledger has 14 lanes",
+      "verdict": "PASS",
+      "evidence": "lane-ledger.json: 14 lanes"
+    },
+    {
+      "id": "IV-18",
+      "description": "Build prove raw log captured",
+      "verdict": "PASS",
+      "evidence": "generation/build-prove-raw.log"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T16:21:29+00:00",
+  "pclc": 38,
+  "pclc_note": "Count of CANONICAL_PACKAGE_PROVEN in registry (does not include wave26 newly proven yet)",
+  "proven_packages_pre_wave26": 71,
+  "wave26_newly_proven": 19,
+  "wave26_build_failed": 9,
+  "dryrun_packages_in_registry": 28,
+  "dryrun_scaffolded": 28,
+  "dryrun_build_pass": 19,
+  "dryrun_build_fail": 9,
+  "dryrun_still_blocked": 9,
+  "nonlowcode_enabled_families": [
+    "barcode",
+    "cad",
+    "svg"
+  ],
+  "nonlowcode_ready_for_dryrun": 2,
+  "nonlowcode_not_ready": 1,
+  "discovery_freshness": "METADATA_NOT_PRESENT",
+  "discovery_note": "Discovery infrastructure exists but no live sweep has populated validated_at/expires_at yet.",
+  "version_drift_status": "VERIFIED_POLICY_BASED",
+  "version_drift_note": "All families use latest-stable policy with no pinned version.",
+  "nuget_cache_status": "NO_LOCAL_CACHE",
+  "fixture_fetch_status": "TOKEN_AVAILABLE_NO_CACHE",
+  "pr_merge_status": "EXECUTION_ENV_GATE_NOT_SET",
+  "pr_merge_note": "All 3 PRs are OPEN, MERGEABLE. APPROVE_LIVE_MERGE not set in env.",
+  "security_verdict": "PASS_WITH_KNOWN_EXCEPTIONS",
+  "test_suite": "RUNNING",
+  "local_blockers": [
+    {
+      "id": "LB-01",
+      "blocker": "DRYRUN_BUILD_FAILED",
+      "count": 9,
+      "detail": "API signature mismatches for finance, note, ocr, psd, tex families"
+    },
+    {
+      "id": "LB-02",
+      "blocker": "DISCOVERY_METADATA_NOT_PRESENT",
+      "detail": "No live discovery sweep has populated freshness metadata"
+    },
+    {
+      "id": "LB-03",
+      "blocker": "NUGET_NO_LOCAL_CACHE",
+      "detail": "No NuGet packages in local SHA-256 manifest cache"
+    }
+  ],
+  "external_gates": [
+    {
+      "id": "EXT-01",
+      "gate": "APPROVE_LIVE_MERGE",
+      "status": "NOT_SET",
+      "impact": "PR merges not executed"
+    },
+    {
+      "id": "EXT-02",
+      "gate": "APPROVE_DELETE_BRANCH",
+      "status": "NOT_SET",
+      "impact": "Branch deletion not attempted"
+    }
+  ]
+}

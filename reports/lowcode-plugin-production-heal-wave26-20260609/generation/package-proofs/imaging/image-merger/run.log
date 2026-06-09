@@ -1,0 +1,8 @@
+EXIT=0 DURATION=3.6s
+
+STDOUT:
+Aspose.Imaging - Image Merger
+Images merged successfully: output-merged.png
+
+
+STDERR:

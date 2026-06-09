@@ -1,0 +1,8 @@
+EXIT=0 DURATION=12.4s
+
+STDOUT:
+Aspose.Tasks - Project to PDF Converter
+Project converted to PDF: output.pdf
+
+
+STDERR:

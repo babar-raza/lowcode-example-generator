@@ -1,0 +1,60 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:20:51+00:00",
+  "families_tested": 3,
+  "families_ready": 2,
+  "families_not_ready": 1,
+  "disabled_family_test": "CORRECTLY_BLOCKED",
+  "results": [
+    {
+      "family": "barcode",
+      "tested_at": "2026-06-09T16:20:51+00:00",
+      "tests": [],
+      "fallback_strategy": "capability_registry",
+      "fallback_configured": true,
+      "capability_entries": 5,
+      "probe_confirmed": 1,
+      "confirmed_entries": [
+        {
+          "type_name": "BarcodeGenerator",
+          "status": "PROBE_CONFIRMED"
+        }
+      ],
+      "sde_compatible": true,
+      "e2e_status": "READY_FOR_DRY_RUN"
+    },
+    {
+      "family": "svg",
+      "tested_at": "2026-06-09T16:20:51+00:00",
+      "tests": [],
+      "fallback_strategy": "capability_registry",
+      "fallback_configured": true,
+      "capability_entries": 2,
+      "probe_confirmed": 0,
+      "sde_compatible": false,
+      "e2e_status": "FALLBACK_CONFIGURED_NO_CONFIRMED_ENTRIES"
+    },
+    {
+      "family": "cad",
+      "tested_at": "2026-06-09T16:20:51+00:00",
+      "tests": [],
+      "fallback_strategy": "capability_registry",
+      "fallback_configured": true,
+      "capability_entries": 5,
+      "probe_confirmed": 1,
+      "confirmed_entries": [
+        {
+          "type_name": "Image",
+          "status": "PROBE_CONFIRMED"
+        }
+      ],
+      "sde_compatible": true,
+      "e2e_status": "READY_FOR_DRY_RUN"
+    }
+  ],
+  "unit_test_coverage": {
+    "test_fallback_to_generation_wiring.py": "9 tests \u2014 PASS",
+    "test_nonlowcode_end_to_end.py": "6 tests \u2014 PASS"
+  },
+  "note": "E2E validation performed via config checks + unit/integration test suite. Full pipeline dry-run requires NuGet restore which depends on network and license availability."
+}

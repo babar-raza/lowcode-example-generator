@@ -1,0 +1,8 @@
+EXIT=0 DURATION=2.8s
+
+STDOUT:
+  Determining projects to restore...
+  Restored C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\note\convert-onenote-to-image\Aspose.Note.Plugins.convert.onenote.to.image.csproj (in 794 ms).
+
+
+STDERR:

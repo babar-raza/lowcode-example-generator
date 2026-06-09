@@ -1,0 +1,8 @@
+EXIT=0 DURATION=3.6s
+
+STDOUT:
+Aspose.Imaging - Image Converter
+Image converted successfully: output.png
+
+
+STDERR:

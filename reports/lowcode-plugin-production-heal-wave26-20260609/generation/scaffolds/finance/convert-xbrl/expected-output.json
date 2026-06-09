@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.xbrl"
+  ],
+  "expected_console_contains": [
+    "convert xbrl"
+  ],
+  "exit_code": 0
+}

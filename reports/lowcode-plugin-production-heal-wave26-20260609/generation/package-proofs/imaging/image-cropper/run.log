@@ -1,0 +1,8 @@
+EXIT=0 DURATION=3.6s
+
+STDOUT:
+Aspose.Imaging - Image Cropper
+Image cropped successfully: output-cropped.png
+
+
+STDERR:

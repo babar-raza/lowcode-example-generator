@@ -1,0 +1,26 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "analyzed_by": "wave26",
+  "analysis_date": "2026-06-09T16:06:08+00:00",
+  "taskcard_summary": {
+    "total": 95,
+    "complete": 95,
+    "pending": 0,
+    "blocked": 0,
+    "complete_with_null_evidence": 59
+  },
+  "lane_ledger_summary": {
+    "total_lanes": 16,
+    "complete": 0,
+    "in_progress": 1,
+    "pending": 15
+  },
+  "execution_board_summary": {
+    "lanes_complete": 0,
+    "lanes_in_progress": 1,
+    "lanes_pending": 15
+  },
+  "agreement": false,
+  "diagnosis": "Lane-ledger and execution-board were only updated at sprint initialization (L0 IN_PROGRESS, all others PENDING). Taskcards were marked COMPLETE during implementation but the coordinator never updated lane-ledger or execution-board to reflect lane completions. This is a coordinator bookkeeping defect \u2014 the work was done but the meta-tracking did not keep pace.",
+  "lz_violation": "All 7 LZ taskcards report COMPLETE with null evidence_path. This violates the plan rule: No taskcard may be COMPLETE with null evidence_path. Bundle/sidecar/attestation files exist on disk (.local/evidence-bundles/) but are not inside the bundle and taskcards do not reference them."
+}

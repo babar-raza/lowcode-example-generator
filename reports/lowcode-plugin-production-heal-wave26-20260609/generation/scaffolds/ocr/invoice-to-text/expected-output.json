@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.txt"
+  ],
+  "expected_console_contains": [
+    "invoice to text"
+  ],
+  "exit_code": 0
+}

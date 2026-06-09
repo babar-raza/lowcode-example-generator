@@ -1,0 +1,84 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T16:08:34+00:00",
+  "lanes": {
+    "L0": {
+      "desc": "Coordinator, evidence authority repair, W25 correction, taskcards",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LA": {
+      "desc": "Source evidence materialization - diffs, snapshots, commit ledger",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LB": {
+      "desc": "DRYRUN scaffold generation for 28 packages",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LC": {
+      "desc": "DRYRUN build/prove - restore, build, run, output validation",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LD": {
+      "desc": "Fixture fetch/live cache validation with provenance",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LE": {
+      "desc": "Discovery freshness and drift validation",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LF": {
+      "desc": "Provenance/version-drift/NuGet SHA validation",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LG": {
+      "desc": "Non-LowCode real E2E runner dry-runs",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LH": {
+      "desc": "PR lifecycle live merge gate execution",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LI": {
+      "desc": "Raw test execution with full logs",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LJ": {
+      "desc": "State truth repair - accurate counts, blockers",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LK": {
+      "desc": "Security and provenance scan",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LL": {
+      "desc": "Independent verification and adversarial review",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    },
+    "LZ": {
+      "desc": "Bundle freeze, external sidecar, final attestation",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-09T16:30:37+00:00"
+    }
+  },
+  "updated_at": "2026-06-09T16:30:37+00:00",
+  "summary": {
+    "complete_lanes": 14,
+    "total_lanes": 14,
+    "taskcards_complete": 48,
+    "taskcards_total": 48
+  }
+}

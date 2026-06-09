@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-06-09T16:19:25+00:00",
+  "discovery_evidence_dir": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\workspace\\verification\\latest",
+  "discovery_files_found": [
+    "all-family-lowcode-discovery.json",
+    "followup-discovery-sweep-deps.json",
+    "lowcode-post-discovery-next-sprint-ledger.json",
+    "lowcode-post-discovery-roadmap-update.json",
+    "multi-family-discovery-claim-audit.json",
+    "b013-catalog-hash-enforcement-design.json",
+    "b013-catalog-hash-implementation-verdict.json",
+    "catalog-hash-strict-mode-policy.json",
+    "catalog-hash-strict-mode-preflight.json",
+    "catalog-hash-strict-mode-verdict.json",
+    "catalog-hash-validation.json",
+    "pdf-lowcode-catalog-inventory.json",
+    "readme-symbols-from-catalog-preflight-review.json",
+    "readme-symbols-from-catalog-result.json",
+    "words-catalog-review.json"
+  ],
+  "validated_at": "2026-05-30T07:11:09.380618+00:00",
+  "has_freshness_metadata": false,
+  "freshness_status": "METADATA_NOT_PRESENT",
+  "note": "Discovery evidence exists but lacks validated_at/expires_at timestamps. Infrastructure was added in W25 but not yet populated by a live discovery sweep."
+}

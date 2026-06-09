@@ -1,0 +1,9 @@
+{
+  "family": "tasks",
+  "slug": "project-to-pdf-converter",
+  "package_id": "Aspose.Tasks",
+  "generated_at": "2026-06-09T16:12:16+00:00",
+  "generator": "wave26-scaffold-generator",
+  "discovery_method": "capability_registry_dryrun",
+  "output_format": ".pdf"
+}

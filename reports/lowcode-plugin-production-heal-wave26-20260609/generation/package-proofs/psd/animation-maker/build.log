@@ -1,0 +1,15 @@
+EXIT=1 DURATION=2.8s
+
+STDOUT:
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\psd\animation-maker\Program.cs(5,21): error CS0246: The type or namespace name 'PsdImage' could not be found (are you missing a using directive or an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\psd\animation-maker\Aspose.Psd.Plugins.animation.maker.csproj]
+
+Build FAILED.
+
+C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\psd\animation-maker\Program.cs(5,21): error CS0246: The type or namespace name 'PsdImage' could not be found (are you missing a using directive or an assembly reference?) [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\psd\animation-maker\Aspose.Psd.Plugins.animation.maker.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:02.04
+
+
+STDERR:

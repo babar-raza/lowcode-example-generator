@@ -1,0 +1,232 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:17:29+00:00",
+  "promoted": 19,
+  "blocked": 9,
+  "transitions": [
+    {
+      "family": "drawing",
+      "slug": "convert-drawing",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "drawing",
+      "slug": "create-drawing",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "finance",
+      "slug": "convert-xbrl",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-pdf-converter",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-docx-converter",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-image-converter",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-converter",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-resizer",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-compressor",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-cropper",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-filters",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-merger",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "add-watermark",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-rotator",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-pdf",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-word",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-image",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "ocr",
+      "slug": "scan-document",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "ocr",
+      "slug": "image-text-finder",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "psd",
+      "slug": "animation-maker",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "psd",
+      "slug": "photo-processor",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "tasks",
+      "slug": "project-to-pdf-converter",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-excel",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    },
+    {
+      "family": "tex",
+      "slug": "latex-figure-renderer",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "DRYRUN_BLOCKED",
+      "blocker": "BUILD_FAILED",
+      "wave": "wave26"
+    },
+    {
+      "family": "zip",
+      "slug": "compress-files",
+      "from_status": "TRANSFORMED_TO_EXAMPLE_DRYRUN",
+      "to_status": "CANONICAL_PACKAGE_PROVEN",
+      "proven_at": "2026-06-09T16:17:29+00:00",
+      "wave": "wave26"
+    }
+  ]
+}

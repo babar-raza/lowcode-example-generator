@@ -1,0 +1,9 @@
+{
+  "command": ".venv/Scripts/python.exe -m pytest tests/ --tb=short",
+  "env": "Windows 11, Python 3.13, .venv",
+  "exit_code": 0,
+  "duration_s": 402.28,
+  "raw_result_line": "4043 passed, 18 skipped, 10 subtests passed in 402.28s (0:06:42)",
+  "log_path": "verification/raw-test-logs/full-pytest.log",
+  "executed_at": "2026-06-09T16:30:37+00:00"
+}

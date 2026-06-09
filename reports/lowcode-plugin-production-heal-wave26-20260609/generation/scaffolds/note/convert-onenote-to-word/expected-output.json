@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.docx"
+  ],
+  "expected_console_contains": [
+    "convert onenote to word"
+  ],
+  "exit_code": 0
+}

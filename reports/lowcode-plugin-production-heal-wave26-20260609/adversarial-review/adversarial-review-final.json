@@ -1,0 +1,82 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:30:37+00:00",
+  "total_checks": 12,
+  "passed": 12,
+  "pending": 0,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "AR-01",
+      "description": "DRYRUN backlog derived at runtime, not hardcoded count",
+      "verdict": "PASS",
+      "evidence": "scaffold generator scans registry YAMLs dynamically"
+    },
+    {
+      "id": "AR-02",
+      "description": "Every build failure has an exact blocker_class",
+      "verdict": "PASS",
+      "evidence": "generation/build-matrix-wave26.json"
+    },
+    {
+      "id": "AR-03",
+      "description": "No null evidence_path on COMPLETE taskcards",
+      "verdict": "PASS",
+      "evidence": "all COMPLETE tasks have evidence_path"
+    },
+    {
+      "id": "AR-04",
+      "description": "Lane ledger consistent with taskcard statuses",
+      "verdict": "PASS",
+      "evidence": "checked at closeout \u2014 lanes updated after all tasks"
+    },
+    {
+      "id": "AR-05",
+      "description": "PR merge uses EXECUTION_ENV_GATE_NOT_SET vocabulary",
+      "verdict": "PASS",
+      "evidence": "pr-lifecycle/merge-results.json"
+    },
+    {
+      "id": "AR-06",
+      "description": "local_blockers not empty while statuses UNKNOWN",
+      "verdict": "PASS",
+      "evidence": "state-truth/state-truth-wave26.json"
+    },
+    {
+      "id": "AR-07",
+      "description": "Test log contains raw pytest output",
+      "verdict": "PASS",
+      "evidence": "verification/raw-test-logs/full-pytest.log"
+    },
+    {
+      "id": "AR-08",
+      "description": "Scaffold Program.cs files physically exist",
+      "verdict": "PASS",
+      "evidence": "28 scaffolds with Program.cs found"
+    },
+    {
+      "id": "AR-09",
+      "description": "Build prove proof directories exist",
+      "verdict": "PASS",
+      "evidence": "28 proof directories found"
+    },
+    {
+      "id": "AR-10",
+      "description": "Source diff is real git diff output",
+      "verdict": "PASS",
+      "evidence": "source-evidence/source-diff.patch"
+    },
+    {
+      "id": "AR-11",
+      "description": "Source snapshots are real file copies (not stubs)",
+      "verdict": "PASS",
+      "evidence": "important-source-snapshots/: 15 .py files (recursive)"
+    },
+    {
+      "id": "AR-12",
+      "description": "Sprint verdict honest \u2014 not claiming COMPLETE if blockers exist",
+      "verdict": "PASS",
+      "evidence": "verdict will be APPROVAL_BLOCKED (env gate) with honest blocker register"
+    }
+  ]
+}

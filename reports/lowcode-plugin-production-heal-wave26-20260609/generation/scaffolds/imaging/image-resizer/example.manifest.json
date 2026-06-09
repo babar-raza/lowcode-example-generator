@@ -1,0 +1,9 @@
+{
+  "family": "imaging",
+  "slug": "image-resizer",
+  "package_id": "Aspose.Imaging",
+  "generated_at": "2026-06-09T16:12:15+00:00",
+  "generator": "wave26-scaffold-generator",
+  "discovery_method": "capability_registry_dryrun",
+  "output_format": ".png"
+}

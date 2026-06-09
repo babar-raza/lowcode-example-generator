@@ -1,0 +1,39 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:21:29+00:00",
+  "local_blockers": [
+    {
+      "id": "LB-01",
+      "blocker": "DRYRUN_BUILD_FAILED",
+      "count": 9,
+      "detail": "API signature mismatches for finance, note, ocr, psd, tex families"
+    },
+    {
+      "id": "LB-02",
+      "blocker": "DISCOVERY_METADATA_NOT_PRESENT",
+      "detail": "No live discovery sweep has populated freshness metadata"
+    },
+    {
+      "id": "LB-03",
+      "blocker": "NUGET_NO_LOCAL_CACHE",
+      "detail": "No NuGet packages in local SHA-256 manifest cache"
+    }
+  ],
+  "external_gates": [
+    {
+      "id": "EXT-01",
+      "gate": "APPROVE_LIVE_MERGE",
+      "status": "NOT_SET",
+      "impact": "PR merges not executed"
+    },
+    {
+      "id": "EXT-02",
+      "gate": "APPROVE_DELETE_BRANCH",
+      "status": "NOT_SET",
+      "impact": "Branch deletion not attempted"
+    }
+  ],
+  "total_local": 3,
+  "total_external": 2,
+  "false_local_blockers_empty": false
+}

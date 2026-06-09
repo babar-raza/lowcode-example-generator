@@ -1,0 +1,83 @@
+{
+  "sprint_corrected": "lowcode-plugin-production-heal-wave25-20260609",
+  "corrected_by": "lowcode-plugin-production-heal-wave26-20260609",
+  "correction_date": "2026-06-09T16:05:56+00:00",
+  "uploaded_bundle": {
+    "file": "lowcode-plugin-production-heal-wave25-20260609.zip",
+    "sha256": "c22119fa98fef3ea118f04d42ff6ce957269443075cd5b73be5d1f88563bb3be",
+    "size_bytes": 19075,
+    "entry_count": 15
+  },
+  "classification": "WAVE25_PROGRESS_REAL_BUT_CLOSURE_INVALID_AND_GENERATION_BLOCKED",
+  "contradictions": [
+    {
+      "id": "CONTRADICTION-01",
+      "area": "taskcards vs lane-ledger",
+      "finding": "taskcards.json reports 95/95 COMPLETE, but lane-ledger.json shows L0=IN_PROGRESS and all other 15 lanes PENDING. execution-board.json shows lanes_complete=0.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CONTRADICTION-02",
+      "area": "LZ taskcards evidence_path",
+      "finding": "All 7 LZ taskcards (bundle, sidecar, attestation, SHA verify, SPRINT_COMPLETE) are COMPLETE with evidence_path=null.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CONTRADICTION-03",
+      "area": "sidecar and attestation in bundle",
+      "finding": "Bundle contains no .sha256 sidecar file and no final-attestation.json. Both exist only outside the bundle on disk, which is correct protocol, but LZ taskcards claim COMPLETE without pointing to them.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CONTRADICTION-04",
+      "area": "DRYRUN generation",
+      "finding": "build-matrix.json reports 28 packages, 0 passed, 28 SCAFFOLD_NOT_FOUND. registry-transition-ledger.json promoted 0 packages. Yet state-truth claims local_blockers=[].",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CONTRADICTION-05",
+      "area": "state-truth local_blockers",
+      "finding": "state-truth.json says local_blockers=[] while dryrun_status=SCAFFOLD_NOT_FOUND_ALL_28, discovery_freshness=UNKNOWN, version_drift_status=UNKNOWN.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CONTRADICTION-06",
+      "area": "test evidence",
+      "finding": "validators/test-output.log is a human-written summary, not raw pytest transcript. Claims 4042 passed, 18 skipped, 0 failures but no raw log to verify.",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CONTRADICTION-07",
+      "area": "source evidence",
+      "finding": "Bundle contains no source diffs, snapshots, or changed-file manifest for the many claimed source changes. Implementation cannot be verified from bundle alone.",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CONTRADICTION-08",
+      "area": "59 null evidence_path taskcards",
+      "finding": "59 of 95 COMPLETE taskcards have evidence_path=null. These include all Lane F (non-LowCode wiring), Lane G (healing), Lane H (coordinator), Lane I (scaling) tasks.",
+      "severity": "HIGH"
+    }
+  ],
+  "real_progress_acknowledged": [
+    "AMG state machine (merge_approval_gate.py) with APPROVED_PUBLICATION_REPOS allowlist \u2014 code exists in repo",
+    "PLV-16/17 fixture source vs publication target validators \u2014 code exists in repo",
+    "Production-safe fixture fetcher with caching and provenance \u2014 code exists in repo",
+    "Discovery freshness gate with mode-aware staleness \u2014 code exists in repo",
+    "DriftDetector implementation \u2014 code exists in repo",
+    "NuGet SHA-256 manifest infrastructure \u2014 code exists in repo",
+    "Non-LowCode pipeline wiring (fallback_strategy + SharedDownstreamExecutor) \u2014 code exists in repo",
+    "Healing auto-learn infrastructure \u2014 code exists in repo",
+    "Coordinator automation pilot (new_sprint.py) \u2014 code exists in repo",
+    "141 new test files created \u2014 verifiable from repo",
+    "fallback_strategy added to 18 non-LowCode family configs \u2014 verifiable from repo",
+    "--family-config CLI flag \u2014 verifiable from repo"
+  ],
+  "wave25_final_verdict": "PROGRESS_REAL_CLOSURE_INVALID",
+  "correction_actions": [
+    "Wave 26 will not retroactively fix W25 taskcards; they stand as historical record.",
+    "Wave 26 will produce valid closure with consistent evidence.",
+    "Wave 26 will generate actual scaffolds for the 28 DRYRUN packages.",
+    "Wave 26 will provide raw test logs, source diffs, and complete evidence bundle."
+  ]
+}

@@ -1,0 +1,8 @@
+EXIT=0 DURATION=2.3s
+
+STDOUT:
+Aspose.Drawing - Convert Drawing
+Drawing converted successfully: output.png
+
+
+STDERR:

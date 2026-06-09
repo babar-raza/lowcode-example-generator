@@ -1,0 +1,8 @@
+EXIT=0 DURATION=2.7s
+
+STDOUT:
+Aspose.ZIP - File Compressor
+Files compressed successfully: output.zip
+
+
+STDERR:

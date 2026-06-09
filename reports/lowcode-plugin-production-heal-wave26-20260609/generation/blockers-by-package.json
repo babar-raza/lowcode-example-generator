@@ -1,0 +1,113 @@
+{
+  "total_blocked": 9,
+  "blockers": [
+    {
+      "family": "finance",
+      "slug": "convert-xbrl",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\finance\\convert-xbrl",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 5.974485158920288
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-pdf",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\note\\convert-onenote-to-pdf",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 6.45007061958313
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-word",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\note\\convert-onenote-to-word",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 5.002952814102173
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-image",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\note\\convert-onenote-to-image",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 5.117558717727661
+    },
+    {
+      "family": "ocr",
+      "slug": "scan-document",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\ocr\\scan-document",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 10.591655731201172
+    },
+    {
+      "family": "ocr",
+      "slug": "image-text-finder",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\ocr\\image-text-finder",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 5.010020732879639
+    },
+    {
+      "family": "psd",
+      "slug": "animation-maker",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\psd\\animation-maker",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 6.53385066986084
+    },
+    {
+      "family": "psd",
+      "slug": "photo-processor",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\psd\\photo-processor",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 4.905806064605713
+    },
+    {
+      "family": "tex",
+      "slug": "latex-figure-renderer",
+      "scaffold_dir": "reports\\lowcode-plugin-production-heal-wave26-20260609\\generation\\scaffolds\\tex\\latex-figure-renderer",
+      "restore_exit": 0,
+      "build_exit": 1,
+      "run_exit": null,
+      "output_files": [],
+      "build_status": "BUILD_FAILED",
+      "blocker_class": "BUILD_FAILED",
+      "duration_s": 26.398342847824097
+    }
+  ]
+}

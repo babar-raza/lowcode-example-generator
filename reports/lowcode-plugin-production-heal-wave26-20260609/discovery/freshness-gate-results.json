@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-09T16:19:25+00:00",
+  "tests": [
+    {
+      "mode": "read_only",
+      "behavior": "WARN on stale, do not block",
+      "code_path": "runner.py:_stage_load_config",
+      "verified": true,
+      "method": "code_review"
+    },
+    {
+      "mode": "dry_run",
+      "behavior": "WARN on stale, optionally refresh",
+      "code_path": "runner.py:_stage_load_config",
+      "verified": true,
+      "method": "code_review"
+    },
+    {
+      "mode": "publication",
+      "behavior": "BLOCK on stale (raises StageError)",
+      "code_path": "runner.py:_stage_load_config",
+      "verified": true,
+      "method": "code_review + unit test test_discovery_freshness_gate.py"
+    }
+  ],
+  "overall": "INFRASTRUCTURE_VERIFIED",
+  "note": "Gate modes verified via code review and unit tests. Live discovery sweep not executed in this sprint due to no stale baseline to test against."
+}

@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.png"
+  ],
+  "expected_console_contains": [
+    "create drawing"
+  ],
+  "exit_code": 0
+}

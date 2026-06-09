@@ -1,0 +1,13 @@
+EXIT=0 DURATION=2.4s
+
+STDOUT:
+  Aspose.Drawing.Plugins.create.drawing -> C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-production-heal-wave26-20260609\generation\scaffolds\drawing\create-drawing\bin\Debug\net8.0\Aspose.Drawing.Plugins.create.drawing.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.85
+
+
+STDERR:

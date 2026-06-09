@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.jpg"
+  ],
+  "expected_console_contains": [
+    "image compressor"
+  ],
+  "exit_code": 0
+}

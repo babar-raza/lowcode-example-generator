@@ -1,0 +1,8 @@
+EXIT=0 DURATION=4.1s
+
+STDOUT:
+Aspose.Imaging - Image Rotator
+Image rotated successfully: output-rotated.png
+
+
+STDERR:

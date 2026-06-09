@@ -1,0 +1,101 @@
+# Stage registry — Wave 25 Lane I pilot.
+# Optional YAML representation of STAGE_DEFINITIONS from runner.py.
+# If this file is present and valid, the runner loads stage definitions from here.
+# If missing or invalid YAML: runner falls back to hardcoded list silently (no crash).
+#
+# Field reference:
+#   name:       Stage function name (must match def _stage_{name} in runner.py)
+#   order:      Numeric order (used for evidence sorting only — not execution order)
+#   required:   If true, failure raises StageError. If false, stage is soft/degraded.
+#   description: Human-readable description for reporting.
+
+stages:
+  - name: load_config
+    order: 1
+    required: true
+    description: Load and validate family YAML config
+
+  - name: nuget_resolve
+    order: 2
+    required: true
+    description: Resolve NuGet package version
+
+  - name: nuget_download
+    order: 3
+    required: true
+    description: Download and extract NuGet package
+
+  - name: dependency_resolution
+    order: 4
+    required: false
+    description: Resolve transitive NuGet dependencies
+
+  - name: dll_extraction
+    order: 5
+    required: true
+    description: Extract and catalog DLL assemblies
+
+  - name: catalog_build
+    order: 6
+    required: true
+    description: Build plugin type catalog from reflection
+
+  - name: plugin_detection
+    order: 7
+    required: true
+    description: Detect LowCode-eligible plugin types
+
+  - name: source_of_truth_proof
+    order: 8
+    required: false
+    description: Generate source-of-truth proof artifact
+
+  - name: scenario_planning
+    order: 9
+    required: false
+    description: Plan generation scenarios from catalog
+
+  - name: fixture_registry
+    order: 10
+    required: false
+    description: Build fixture registry from configured sources
+
+  - name: fallback_registry_lookup
+    order: 11
+    required: false
+    description: Non-LowCode capability registry lookup (fallback strategy)
+
+  - name: api_delta
+    order: 12
+    required: false
+    description: Compute API delta vs prior catalog
+
+  - name: impact_mapping
+    order: 13
+    required: false
+    description: Map API delta to impacted examples
+
+  - name: llm_routing
+    order: 14
+    required: false
+    description: Initialize LLM router for generation
+
+  - name: generation
+    order: 15
+    required: false
+    description: Generate example code (LowCode or non-LowCode path)
+
+  - name: validation
+    order: 16
+    required: false
+    description: Build and run generated examples (dotnet restore/build/run)
+
+  - name: reviewer
+    order: 17
+    required: false
+    description: LLM reviewer gate for generated examples
+
+  - name: publisher
+    order: 18
+    required: false
+    description: Publish validated examples to GitHub PR

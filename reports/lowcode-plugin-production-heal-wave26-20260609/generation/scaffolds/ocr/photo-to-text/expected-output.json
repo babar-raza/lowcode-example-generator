@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.txt"
+  ],
+  "expected_console_contains": [
+    "photo to text"
+  ],
+  "exit_code": 0
+}

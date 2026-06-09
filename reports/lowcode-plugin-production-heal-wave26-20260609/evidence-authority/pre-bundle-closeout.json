@@ -1,0 +1,13 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave26-20260609",
+  "generated_at": "2026-06-09T16:30:37+00:00",
+  "git_status_at_closeout": "M reports/lowcode-plugin-production-heal-wave25-20260609/validators/test-output.log\n M workspace/pr-dry-run/cells-controlled-pilot/README.md\n M workspace/pr-dry-run/words-controlled-pilot/README.md\n M workspace/verification/latest/cells-readme-backfill-simulation.json\n M workspace/verification/latest/cells-root-readme-audit.json\n M workspace/verification/latest/cells-root-readme-render-result.json\n M workspace/verification/latest/release-status.json\n M workspace/verification/latest/words-readme-backfill-simulation.json\n M workspace/verification/latest/words-root-readme-audit.json\n M workspace/verification/latest/words-root-readme-render-result.json\n?? \"Exit\\357\\200\\272 \"\n?? echo\n?? fallback_candidates.json\n?? input1.pdf\n?? input1.pptx\n?? input2.pdf\n?? input2.pptx\n?? input_v1.docx\n?? input_v2.docx\n?? reports/lowcode-final-verify-20260603/commands/stdout-stderr/CMD-001.err\n?? reports/lowcode-plugin-production-heal-wave26-20260609/\n?? reports/weekly-business-achievements/\n?? scripts/_wave26_build_prove.py\n?? scripts/_wave26_closeout_freeze.py\n?? scripts/_wave26_iv_ar.py\n?? scripts/_wave26_parallel_lanes.py\n?? scripts/_wave26_scaffold_generator.py\n?? scripts/_wave26_setup_taskcards.py\n?? template.docx",
+  "pre_freeze_checks": {
+    "taskcards_json_exists": true,
+    "lane_ledger_exists": true,
+    "iv_results_exists": true,
+    "ar_results_exists": true,
+    "build_matrix_exists": true,
+    "state_truth_exists": true
+  }
+}

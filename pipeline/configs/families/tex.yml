@@ -27,6 +27,7 @@ plugin_detection:
   namespace_patterns:
     - Aspose.TeX.LowCode
     - Aspose.TeX.LowCode.*
+  fallback_strategy: capability_registry
 
 github:
   official_examples_repo:

@@ -13,6 +13,8 @@ def add_parser(subparsers):
     # Run command
     parser = subparsers.add_parser("run", help="Run the pipeline for a family")
     parser.add_argument("--family", required=True, help="Family name (e.g., cells)")
+    parser.add_argument("--family-config", metavar="PATH", default=None,
+                            help="Custom family config YAML path. Defaults to pipeline/configs/families/{family}.yml")
     parser.add_argument("--dry-run", action="store_true", help="Dry-run mode (default)")
     parser.add_argument("--template-mode", action="store_true",
                             help="Use template generation instead of LLM")
@@ -130,6 +132,7 @@ def handle(args) -> int:
         metrics_job_type=getattr(args, "metrics_job_type", None),
         metrics_strict=getattr(args, "metrics_strict", False),
         metrics_force_repost=getattr(args, "metrics_force_repost", False),
+        family_config_path=getattr(args, "family_config", None),
     )
     gs = report.get("gate_summary", {})
     verdict = report.get("verdict", "UNKNOWN")

@@ -308,12 +308,17 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
     import hashlib as _hashlib
     import re as _re
     from plugin_examples.family_config import load_family_config
-    config_path = ctx.repo_root / "pipeline" / "configs" / "families" / f"{ctx.family}.yml"
-    # Check disabled directory as fallback
-    if not config_path.exists():
-        disabled_path = ctx.repo_root / "pipeline" / "configs" / "families" / "disabled" / f"{ctx.family}.yml"
-        if disabled_path.exists():
-            config_path = disabled_path
+    # Allow CLI override via --family-config
+    override = getattr(ctx, "_family_config_path", None)
+    if override:
+        config_path = Path(override)
+    else:
+        config_path = ctx.repo_root / "pipeline" / "configs" / "families" / f"{ctx.family}.yml"
+        # Check disabled directory as fallback
+        if not config_path.exists():
+            disabled_path = ctx.repo_root / "pipeline" / "configs" / "families" / "disabled" / f"{ctx.family}.yml"
+            if disabled_path.exists():
+                config_path = disabled_path
     ctx.config = load_family_config(config_path)
     if ctx.config.status == "experimental" and not getattr(ctx, "_allow_experimental", False):
         raise RuntimeError(
@@ -847,6 +852,17 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
 
     # Write scenario input format map evidence
     _write_scenario_input_format_map(ctx.planning, ctx.evidence_dir)
+
+    # Write fixture resolution evidence (Lane B-4)
+    from plugin_examples.scenario_planner.planner import build_fixture_resolution_evidence
+    _family_config = None
+    if ctx.config and hasattr(ctx.config, "_raw_yaml"):
+        _family_config = ctx.config._raw_yaml
+    _fixture_resolution = build_fixture_resolution_evidence(ctx.planning, _family_config)
+    import json as _json_fr
+    _fr_path = ctx.evidence_dir / "scenario-fixture-resolution.json"
+    _fr_path.write_text(_json_fr.dumps(_fixture_resolution, indent=2), encoding="utf-8")
+    logger.info("Fixture resolution evidence written: %s", _fr_path)
 
     # Completeness gate — verify denominator equation after planning
     from plugin_examples.gates.completeness_gate import (
@@ -1834,6 +1850,7 @@ def run_pipeline(
     metrics_job_type: str | None = None,
     metrics_strict: bool = False,
     metrics_force_repost: bool = False,
+    family_config_path: str | None = None,
 ) -> dict:
     """Run the full pipeline and return a structured report dict."""
     if repo_root is None:
@@ -1866,6 +1883,7 @@ def run_pipeline(
         metrics_collector=metrics_collector,
     )
     ctx._allow_experimental = allow_experimental
+    ctx._family_config_path = family_config_path
 
     # ---------------------------------------------------------------------------
     # Replay setup (fail-closed; runs before any stage)

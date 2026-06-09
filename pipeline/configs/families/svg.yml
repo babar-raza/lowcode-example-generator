@@ -24,6 +24,7 @@ plugin_detection:
   namespace_patterns:
     - Aspose.SVG.LowCode
     - Aspose.SVG.LowCode.*
+  fallback_strategy: capability_registry
 
 github:
   official_examples_repo:

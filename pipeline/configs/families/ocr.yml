@@ -28,6 +28,7 @@ plugin_detection:
   namespace_patterns:
     - Aspose.OCR.LowCode
     - Aspose.OCR.LowCode.*
+  fallback_strategy: capability_registry
 
 github:
   official_examples_repo:

@@ -26,6 +26,7 @@ plugin_detection:
   namespace_patterns:
     - Aspose.OMR.LowCode
     - Aspose.OMR.LowCode.*
+  fallback_strategy: capability_registry
 
 github:
   official_examples_repo:

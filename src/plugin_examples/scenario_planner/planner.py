@@ -48,6 +48,8 @@ class Scenario:
     required_output_contract: str = ""  # canonical output from FormatContract
     format_contract_id: str = ""  # e.g. "cells/SpreadsheetConverter"
     format_contract_hash: str = ""  # for traceability
+    fixture_strategy: str = ""  # "real_github", "synthetic_fallback", "cache_hit", etc.
+    fixture_sources: list[dict] = field(default_factory=list)  # provenance refs
 
 
 @dataclass
@@ -692,3 +694,65 @@ def _needs_fixture(methods: list[dict]) -> bool:
             ):
                 return True
     return False
+
+
+def build_fixture_resolution_evidence(
+    planning_result: PlanningResult,
+    family_config: dict | None = None,
+) -> dict:
+    """Build fixture resolution evidence for all planned scenarios.
+
+    This produces a summary of how each scenario's fixture needs would be resolved
+    (real fetch, synthetic fallback, generated, programmatic, etc.). It does NOT
+    perform actual downloads — that is the runner's responsibility.
+
+    Args:
+        planning_result: Result from ``plan_scenarios()``.
+        family_config: Optional family YAML config dict (for repo info).
+
+    Returns:
+        Dict suitable for writing as ``scenario-fixture-resolution.json``.
+    """
+    from datetime import datetime, timezone
+
+    repo_configured = False
+    repo_info = None
+    if family_config:
+        github = family_config.get("github", {})
+        repo_info = github.get("official_examples_repo")
+        repo_configured = bool(repo_info and repo_info.get("owner") and repo_info.get("repo"))
+
+    scenarios = []
+    for s in planning_result.ready_scenarios + planning_result.blocked_scenarios:
+        entry: dict = {
+            "scenario_id": s.scenario_id,
+            "status": s.status,
+            "input_strategy": s.input_strategy,
+            "required_fixtures": s.required_fixtures,
+            "fixture_strategy": s.fixture_strategy or s.input_strategy,
+        }
+        if s.input_strategy == "existing_fixture":
+            entry["resolution"] = "registry_match"
+        elif s.input_strategy == "generated_fixture_file":
+            entry["resolution"] = "pipeline_generated"
+        elif s.input_strategy == "programmatic_input":
+            entry["resolution"] = "code_generated"
+        elif s.input_strategy == "no_valid_input_strategy":
+            entry["resolution"] = "blocked"
+            entry["blocker_class"] = "FIXTURE_BLOCKED"
+        else:
+            entry["resolution"] = "none_required"
+        scenarios.append(entry)
+
+    return {
+        "family": planning_result.family,
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "repo_configured": repo_configured,
+        "repo_info": {
+            "owner": repo_info.get("owner", "") if repo_info else "",
+            "repo": repo_info.get("repo", "") if repo_info else "",
+        } if repo_info else None,
+        "total_scenarios": len(scenarios),
+        "fixture_blocked_count": sum(1 for s in scenarios if s.get("blocker_class") == "FIXTURE_BLOCKED"),
+        "scenarios": scenarios,
+    }

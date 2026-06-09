@@ -203,12 +203,26 @@ class TestGitHub403Handling:
 
 
 class TestFixtureFetcher:
-    @patch("plugin_examples.fixture_registry.registry._fetch_github_file_listing", _mock_github_listing)
-    def test_dry_run_mode(self):
-        registry = build_fixture_registry("cells", CELLS_SOURCES)
-        results = fetch_fixtures(registry, Path("/tmp/fixtures"), dry_run=True)
-        assert len(results) > 0
-        assert results[0]["status"] == "dry_run"
+    def test_dry_run_mode(self, tmp_path):
+        """New fetch_fixtures API: dry_run=True returns FetchResult with strategy=dry_run_validated."""
+        from plugin_examples.fixture_registry.fixture_fetcher import fetch_fixtures as new_fetch_fixtures, FetchResult
+        repo_config = {
+            "owner": "aspose-cells",
+            "repo": "Aspose.Cells-for-.NET",
+            "branch": "master",
+            "fixture_paths": ["Examples/Data"],
+            "extension_allowlist": [".xlsx"],
+            "max_file_size_bytes": 5242880,
+            "max_total_size_bytes": 52428800,
+            "synthetic_fallback_allowed": True,
+        }
+        result = new_fetch_fixtures(
+            "cells", repo_config, [".xlsx"], tmp_path / "dest",
+            cache_root=tmp_path / "cache",
+            dry_run=True,
+        )
+        assert isinstance(result, FetchResult)
+        assert result.strategy == "dry_run_validated"
 
     def test_availability_check_found(self):
         registry = FixtureRegistry(family="cells")

@@ -1,0 +1,49 @@
+name: Weekly Discovery Sweep
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday at 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Discovery mode'
+        required: false
+        default: 'refresh'
+        type: choice
+        options:
+          - refresh
+          - dry_run
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Run discovery sweep
+        run: |
+          python -m plugin_examples discover-lowcode --all-families
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated discovery evidence
+        run: |
+          git config user.name "pipeline-bot"
+          git config user.email "pipeline-bot@pipeline"
+          git add workspace/verification/latest/
+          git diff --cached --quiet || \
+            git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

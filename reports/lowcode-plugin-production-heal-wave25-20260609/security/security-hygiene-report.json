@@ -1,0 +1,42 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "generated_at": "2026-06-09T00:00:00Z",
+  "shv_checks": [
+    {
+      "check_id": "SHV-01",
+      "description": "No .pfx, .pem, .key, .p12 files committed",
+      "result": "PASS",
+      "detail": "Verified .gitignore excludes *.pfx, *.pem, *.key, *.p12. No secrets in generated examples."
+    },
+    {
+      "check_id": "SHV-02",
+      "description": "No API keys or tokens in generated source code",
+      "result": "PASS",
+      "detail": "Generated Program.cs files use eval mode (SetLicense not called; no hardcoded keys)."
+    },
+    {
+      "check_id": "SHV-03",
+      "description": "Fixture files are data-only (no executable code in fixtures)",
+      "result": "PASS",
+      "detail": "All fixture files are data files (.xlsx, .docx, .pdf, .dwg, .dxf, .svg, .png, .jpg, .xbrl, .glb, etc.). No .exe, .dll, .sh, .ps1 fixtures."
+    }
+  ],
+  "fixture_provenance_checks": [
+    {
+      "check_id": "FPC-01",
+      "description": "All downloaded fixtures have provenance sidecars",
+      "result": "N/A",
+      "detail": "No live fixture downloads in this sprint (synthetic fallback used). Provenance sidecar infrastructure in place (Lane B)."
+    }
+  ],
+  "binary_provenance_checks": [
+    {
+      "check_id": "BPC-01",
+      "description": "NuGet DLLs have SHA-256 manifest",
+      "result": "INFRASTRUCTURE_READY",
+      "detail": "NuGet SHA-256 manifest infrastructure added (Lane D). Not yet populated for this sprint — will populate on next full pipeline run."
+    }
+  ],
+  "overall_verdict": "PASS",
+  "blockers": []
+}

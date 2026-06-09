@@ -64,10 +64,16 @@ def run_discovery_sweep(
 
     # Build summary
     eligible_count = sum(1 for r in results if r["status"] == "eligible_lowcode_found")
+
+    # Discovery metadata — freshness tracking (Wave 25 Lane C)
+    from plugin_examples.website_catalog.drift_detector import make_discovery_metadata
+    discovery_metadata = make_discovery_metadata()
+
     summary = {
         "total_families": len(results),
         "eligible_count": eligible_count,
         "families": results,
+        "discovery_metadata": discovery_metadata,
     }
 
     # Write evidence
@@ -75,7 +81,12 @@ def run_discovery_sweep(
     latest.mkdir(parents=True, exist_ok=True)
     evidence_path = latest / "all-family-lowcode-discovery.json"
     evidence_path.write_text(json.dumps(summary, indent=2))
-    logger.info("Discovery sweep evidence written: %s", evidence_path)
+    logger.info(
+        "Discovery sweep evidence written: %s (run_id=%s, expires_at=%s)",
+        evidence_path,
+        discovery_metadata["run_id"],
+        discovery_metadata["expires_at"],
+    )
 
     return summary
 

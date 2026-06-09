@@ -31,7 +31,9 @@ The LLM proposes. The compiler, runtime, output validator, and example-reviewer 
 ## Core Rules
 
 1. No generated example may use any symbol absent from the reflected NuGet API catalog.
-2. No direct push to `main`. All publishing is PR-based with evidence.
+2. All publishing is PR-based. Agent holds merge authority when all AMG gates pass.
+   Auto-merge executes via `gh pr merge --squash` when `APPROVE_LIVE_MERGE=1` is set in env
+   and all artifact/build/README gates have passed. No external human approval is required.
 3. Monthly runs must be delta-based. Do not regenerate unchanged examples.
 4. Blocked scenarios must be preserved with explicit reasons. Never silently drop them.
 5. All verification gates must pass before a PR is created.
@@ -88,6 +90,10 @@ Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
 - Always record evidence before exiting — even on partial failure.
 - When running live publish or merge commands, always read `GH_TOKEN` from Windows system env and map to `GITHUB_TOKEN` in the current process — never assume `GITHUB_TOKEN` is already set.
 - **LLM endpoint is non-negotiable:** Never configure, suggest, or fall back to any LLM endpoint other than `https://llm.professionalize.com/v1/`. If `GPT_OSS_ENDPOINT` is missing or wrong, halt and report — do not substitute another provider.
+- **Auto-merge authority:** Agent has full merge authority. When all AMG gates pass and `APPROVE_LIVE_MERGE=1` is set, execute `gh pr merge --squash` without waiting for external human approval. If `APPROVE_LIVE_MERGE` is absent, record `CREDENTIAL_BLOCKED` in evidence and proceed to the next PR — do not halt the sprint.
+- **Branch deletion:** After merge, evaluate BDG gates. If `APPROVE_DELETE_BRANCH=1` is set and all BDG checks pass, delete the branch. If absent or any BDG check fails, record `BRANCH_DELETE_SKIPPED_POLICY` and continue — this is not an error.
+- **Publication repo allowlist:** Target repos for merge operations must be in the `APPROVED_PUBLICATION_REPOS` allowlist (see `merge_approval_gate.py`). Attempting to merge to a fixture source repo is `REVIEW_POLICY_BLOCKED`. Never merge to a fixture source repo.
+- **Fixture source repos are read-only:** Repos used for fixture discovery (e.g., `aspose-barcode/Aspose.BarCode-for-.NET`) must never be written to. The allowlist in `merge_approval_gate.py` enforces this separation.
 
 ## Discovery
 

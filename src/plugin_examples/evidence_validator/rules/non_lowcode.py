@@ -1,4 +1,4 @@
-"""Evidence validation rules — NonLowCodeValidatorRules (NL-V01 through NL-V14).
+"""Evidence validation rules — NonLowCodeValidatorRules (NL-V01 through NL-V15).
 
 MANDATORY SKIP behavior (every rule):
   Returns passed=True (SKIP) when:
@@ -136,7 +136,7 @@ class NonLowCodeValidatorRules:
             return []
 
     # ------------------------------------------------------------------
-    # Rules NL-V01 through NL-V14
+    # Rules NL-V01 through NL-V15
     # ------------------------------------------------------------------
 
     def rule_nl_v01(self) -> "RuleResult":
@@ -437,3 +437,49 @@ class NonLowCodeValidatorRules:
         return _RuleResult(rule_id=rule_id, description=description,
                            severity="FAILURE", passed=False,
                            failure_detail=f"NL-V14: Missing type_name or method_name at indices: {violations}")
+
+    def rule_nl_v15(self) -> "RuleResult":
+        """NL-V15: When fallback_strategy is capability_registry and namespace_patterns is empty,
+        at least one entry must have status=PROBE_CONFIRMED.
+
+        Families with fallback_strategy=capability_registry and no namespace_patterns rely
+        entirely on the capability registry for discovery.  If no PROBE_CONFIRMED entry
+        exists, the non-LowCode pipeline produces zero generation-ready candidates and
+        the family is effectively dead — this must be surfaced as a failure, not silently
+        skipped.
+        """
+        rule_id = "NL-V15"
+        description = "capability_registry families with empty namespace_patterns must have at least one PROBE_CONFIRMED entry"
+        skip = self._nl_skip_check(rule_id, description)
+        if skip:
+            return skip
+
+        # Determine fallback_strategy and namespace_patterns from config
+        config = getattr(self, "config", None)
+        fallback_strategy = None
+        namespace_patterns: list = []
+        if config is not None:
+            pd = getattr(config, "plugin_detection", None)
+            if pd is not None:
+                fallback_strategy = getattr(pd, "fallback_strategy", None)
+                namespace_patterns = getattr(pd, "namespace_patterns", []) or []
+
+        # Only applies when fallback_strategy is capability_registry and namespace_patterns is empty
+        if fallback_strategy != "capability_registry" or namespace_patterns:
+            return _RuleResult(rule_id=rule_id, description=description,
+                               severity="FAILURE", passed=True,
+                               evidence="SKIP: rule only applies when fallback_strategy=capability_registry and namespace_patterns=[]")
+
+        entries = self._nl_load_registry_entries()
+        confirmed = [e for e in entries if e.get("status") == "PROBE_CONFIRMED"]
+        if confirmed:
+            return _RuleResult(rule_id=rule_id, description=description,
+                               severity="FAILURE", passed=True,
+                               evidence=f"{len(confirmed)} PROBE_CONFIRMED entries found — generation-ready candidates exist")
+        return _RuleResult(rule_id=rule_id, description=description,
+                           severity="FAILURE", passed=False,
+                           failure_detail=(
+                               "NL-V15: fallback_strategy=capability_registry with empty namespace_patterns "
+                               "but no PROBE_CONFIRMED entries — non-LowCode pipeline produces zero generation-ready candidates. "
+                               "Run probe validation to promote at least one entry to PROBE_CONFIRMED."
+                           ))

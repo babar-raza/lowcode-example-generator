@@ -145,6 +145,33 @@
             },
             "branch": {
               "type": "string"
+            },
+            "fixture_paths": {
+              "type": "array",
+              "items": {"type": "string"},
+              "default": ["Examples/Data"],
+              "description": "Paths within the repo to scan for fixture files."
+            },
+            "extension_allowlist": {
+              "type": "array",
+              "items": {"type": "string"},
+              "default": [".xlsx",".docx",".pdf",".dwg",".dxf",".svg",".ttf",".otf",".png",".jpg",".html",".zip",".xbrl",".glb",".3ds",".fbx",".tiff",".bmp",".odt",".csv",".eml",".vsdx",".sxc"],
+              "description": "File extensions allowed for download. Files outside this list are skipped."
+            },
+            "max_file_size_bytes": {
+              "type": "integer",
+              "default": 5242880,
+              "description": "Maximum individual fixture file size (5 MB default)."
+            },
+            "max_total_size_bytes": {
+              "type": "integer",
+              "default": 52428800,
+              "description": "Maximum total batch download size (50 MB default)."
+            },
+            "synthetic_fallback_allowed": {
+              "type": "boolean",
+              "default": true,
+              "description": "When true, fall back to synthetic fixtures if real download fails or GITHUB_TOKEN is absent."
             }
           }
         },
@@ -277,6 +304,12 @@
           "minItems": 1
         }
       }
+    },
+    "discovery_mode": {
+      "type": "string",
+      "enum": ["read_only", "dry_run", "publication"],
+      "default": "dry_run",
+      "description": "Controls discovery freshness and version drift gates. publication = hard-stop on stale; dry_run = warn; read_only = warn without refresh."
     },
     "template_hints": {
       "type": "object",

@@ -1,9 +1,16 @@
-"""NuGet v3 package fetcher with version resolution and caching."""
+"""NuGet v3 package fetcher with version resolution, caching, and SHA-256 manifest.
+
+Wave 25 Lane D adds a global SHA-256 manifest at ``.local/nuget-cache/sha-manifest.json``
+that records per-package-per-version SHA-256 hashes and revalidates cached files
+at most once per 24 hours. This is NOT reliant on ETag or Content-MD5 from CDN headers.
+"""
 
 from __future__ import annotations
 
+import json
 import logging
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -16,6 +23,87 @@ from plugin_examples.nuget_fetcher.cache import (
 )
 
 logger = logging.getLogger(__name__)
+
+# SHA manifest location and revalidation TTL
+_SHA_MANIFEST_PATH = Path(".local/nuget-cache/sha-manifest.json")
+_REVALIDATION_TTL_SECONDS = 24 * 3600
+
+
+def _load_sha_manifest() -> dict:
+    if _SHA_MANIFEST_PATH.exists():
+        try:
+            return json.loads(_SHA_MANIFEST_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+
+def _save_sha_manifest(manifest: dict) -> None:
+    _SHA_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _SHA_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+
+def _revalidate_sha_manifest(package_id: str, version: str, nupkg_path: Path) -> str | None:
+    """Verify cached .nupkg against SHA manifest; re-download if corrupted.
+
+    Returns the verified SHA-256, or None if the file does not exist.
+    Only revalidates at most once per 24 hours per package+version.
+    """
+    import time
+
+    if not nupkg_path.exists():
+        return None
+
+    manifest = _load_sha_manifest()
+    key = f"{package_id}/{version}"
+    entry = manifest.get(key, {})
+    stored_sha = entry.get("sha256")
+    last_revalidated = entry.get("last_revalidated")
+
+    now = time.time()
+    if last_revalidated:
+        try:
+            last_ts = datetime.fromisoformat(last_revalidated).timestamp()
+            if now - last_ts < _REVALIDATION_TTL_SECONDS:
+                # Not time to revalidate yet
+                return stored_sha
+        except Exception:
+            pass
+
+    # Revalidate
+    actual_sha = compute_sha256(nupkg_path)
+    if stored_sha and actual_sha != stored_sha:
+        logger.warning(
+            "NuGet SHA mismatch for %s %s: expected=%s actual=%s — deleting corrupted file",
+            package_id, version, stored_sha, actual_sha,
+        )
+        nupkg_path.unlink(missing_ok=True)
+        return None
+
+    # Update manifest with revalidated timestamp
+    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    manifest[key] = {
+        "sha256": actual_sha,
+        "downloaded_at": entry.get("downloaded_at", now_iso),
+        "last_revalidated": now_iso,
+        "source": f"https://api.nuget.org/v3-flatcontainer/{package_id.lower()}/{version.lower()}/{package_id.lower()}.{version.lower()}.nupkg",
+    }
+    _save_sha_manifest(manifest)
+    return actual_sha
+
+
+def _record_sha_manifest(package_id: str, version: str, sha256: str, source_url: str) -> None:
+    """Record a freshly downloaded package SHA in the global manifest."""
+    manifest = _load_sha_manifest()
+    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    key = f"{package_id}/{version}"
+    manifest[key] = {
+        "sha256": sha256,
+        "downloaded_at": now_iso,
+        "last_revalidated": now_iso,
+        "source": source_url,
+    }
+    _save_sha_manifest(manifest)
 
 NUGET_SERVICE_INDEX = "https://api.nuget.org/v3/index.json"
 
@@ -183,12 +271,20 @@ def fetch_package(
     if existing and existing.get("version") == version:
         cached = Path(existing.get("cached_path", ""))
         if check_cache(cached, existing.get("sha256")):
-            logger.info("Cache hit for %s %s", package_id, version)
-            return existing
+            # Revalidate against SHA manifest (max once per 24h)
+            verified_sha = _revalidate_sha_manifest(package_id, version, cached)
+            if verified_sha is not None:
+                logger.info("Cache hit for %s %s (sha revalidated)", package_id, version)
+                return existing
+            # SHA mismatch — file was deleted; fall through to re-download
+            logger.info("Cache invalidated for %s %s — re-downloading", package_id, version)
 
     # Download
     source_url = _download_nupkg(package_id, version, nupkg_path)
     sha256 = compute_sha256(nupkg_path)
+
+    # Record in SHA manifest
+    _record_sha_manifest(package_id, version, sha256, source_url)
 
     manifest = {
         "package_id": package_id,

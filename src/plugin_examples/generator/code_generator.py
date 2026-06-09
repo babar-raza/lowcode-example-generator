@@ -25,6 +25,7 @@ class GeneratedExample:
     repair_attempts: int = 0
     status: str = "generated"  # generated, repaired, failed
     failure_reason: str | None = None
+    generation_strategy: str = "llm_generated"  # llm_generated, template_first, catalog_fallback
 
 
 def generate_example(

@@ -231,6 +231,58 @@ def check_plv_15_evidence_authority(bundle_path: str, sha_file: str, attestation
     result.ok("PLV-15", "Evidence authority complete: bundle + sidecar + attestation present")
 
 
+# ── PLV-16: Fixture source repos never appear as publication targets ───────────
+_FIXTURE_SOURCE_REPO_OWNERS = frozenset({
+    "aspose-barcode", "aspose-svg", "aspose-cad", "aspose-cells", "aspose-words",
+    "aspose-html", "aspose-font", "aspose-imaging", "aspose-gis", "aspose-finance",
+    "aspose-omr", "aspose-note", "aspose-tasks", "aspose-page", "aspose-ocr",
+    "aspose-3d", "aspose-psd", "aspose-zip",
+})
+
+_APPROVED_PUBLICATION_REPOS = frozenset({
+    "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+    "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+    "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+})
+
+
+def check_plv_16_fixture_source_not_publication_target(
+    code_or_config_refs: list[str], result: PlvResult
+) -> None:
+    """Verify no publication code references fixture source repos as write targets.
+
+    ``code_or_config_refs`` is a list of repo strings (owner/repo) that appear
+    as PR or merge targets in the code being validated.
+    """
+    violations = []
+    for ref in code_or_config_refs:
+        owner = ref.split("/")[0] if "/" in ref else ref
+        if owner in _FIXTURE_SOURCE_REPO_OWNERS:
+            violations.append(ref)
+    if violations:
+        result.fail(
+            "PLV-16",
+            "Fixture source repo(s) referenced as publication targets — HS-11 violation",
+            detail=", ".join(violations),
+        )
+    else:
+        result.ok("PLV-16", "No fixture source repo referenced as publication target")
+
+
+# ── PLV-17: PR URL matches APPROVED_PUBLICATION_REPOS allowlist ───────────────
+def check_plv_17_pr_url_allowlist(pr_url: str, result: PlvResult) -> None:
+    """Verify PR URL repo is in the approved publication repos allowlist."""
+    matched = any(repo in pr_url for repo in _APPROVED_PUBLICATION_REPOS)
+    if not matched:
+        result.fail(
+            "PLV-17",
+            f"PR URL {pr_url!r} does not match APPROVED_PUBLICATION_REPOS allowlist",
+            detail=f"Allowed: {sorted(_APPROVED_PUBLICATION_REPOS)}",
+        )
+    else:
+        result.ok("PLV-17", f"PR URL matches allowlist: {pr_url!r}")
+
+
 def run_all_plv_checks(
     evidence_bundle_name: str,
     pr_packet: dict,
@@ -243,6 +295,8 @@ def run_all_plv_checks(
     bundle_path: str = "",
     sha_file: str = "",
     attestation_file: str = "",
+    publication_target_refs: list[str] | None = None,
+    pr_url: str = "",
 ) -> PlvResult:
     result = PlvResult()
     check_plv_01_wrong_stream_evidence(evidence_bundle_name, result)
@@ -268,4 +322,7 @@ def run_all_plv_checks(
         )
     if bundle_path:
         check_plv_15_evidence_authority(bundle_path, sha_file, attestation_file, result)
+    check_plv_16_fixture_source_not_publication_target(publication_target_refs or [], result)
+    if pr_url:
+        check_plv_17_pr_url_allowlist(pr_url, result)
     return result

@@ -240,3 +240,165 @@ class HealingIntelligenceLoader:
             ),
             "registries_present": self.registries_present(),
         }
+
+    def find_confirmed_repair(self, failure_reason: str) -> dict | None:
+        """Return a CONFIRMED repair pattern matching the failure reason, or None.
+
+        Only CONFIRMED repairs trigger the repair loop (not CANDIDATE).
+        """
+        sig = _normalize_reason(failure_reason)
+        for p in self._repair_patterns:
+            if p.get("status") != "CONFIRMED":
+                continue
+            pattern_sig = _normalize_reason(p.get("failure_reason", "") or p.get("name", ""))
+            if pattern_sig and sig and pattern_sig in sig:
+                return p
+        return None
+
+
+def _normalize_reason(reason: str) -> str:
+    """Normalize a failure reason string to a stable signature for matching."""
+    if not reason:
+        return ""
+    import re
+    # Lower-case, collapse whitespace, strip punctuation
+    normalized = reason.lower().strip()
+    normalized = re.sub(r"[^\w\s]", " ", normalized)
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized
+
+
+def auto_learn_from_run(
+    run_dir: Path,
+    family: str,
+    registry_path: Path,
+) -> dict:
+    """Additive-only: append new CANDIDATE failure patterns from a run; increment occurrences.
+
+    Design constraints:
+    - NEVER auto-promotes CANDIDATE to CONFIRMED.
+    - NEVER modifies or deletes existing CONFIRMED entries.
+    - Additive only — only appends new entries or increments counters.
+    - Writes updated failure-pattern-registry.json and auto-learned-patterns.json.
+
+    Args:
+        run_dir:       Directory of the completed pipeline run.
+        family:        Family name for context.
+        registry_path: Path to failure-pattern-registry.json.
+
+    Returns:
+        dict with ``added``, ``incremented``, ``skipped`` counts.
+    """
+    from datetime import datetime, timezone
+
+    def _utcnow() -> str:
+        return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+    # Load existing registry
+    if registry_path.exists():
+        try:
+            raw = json.loads(registry_path.read_text(encoding="utf-8"))
+            patterns: list[dict] = raw.get("patterns", []) if isinstance(raw, dict) else raw
+        except Exception:  # noqa: BLE001
+            patterns = []
+    else:
+        patterns = []
+
+    # Load failures from run directory
+    failures = _load_run_failures(run_dir)
+    if not failures:
+        return {"added": 0, "incremented": 0, "skipped": 0}
+
+    added = 0
+    incremented = 0
+    skipped = 0
+    auto_learned: list[dict] = []
+
+    for failure in failures:
+        sig = _normalize_reason(failure.get("failure_reason", "") or failure.get("reason", ""))
+        if not sig:
+            skipped += 1
+            continue
+
+        existing = _find_by_sig(patterns, sig)
+        if existing is None:
+            # New pattern — add as CANDIDATE only
+            new_entry: dict = {
+                "reason_signature": sig,
+                "family": family,
+                "scenario_id": failure.get("scenario_id"),
+                "first_seen": _utcnow(),
+                "last_seen": _utcnow(),
+                "occurrence_count": 1,
+                "status": "CANDIDATE",
+                "repair_hint": None,
+            }
+            patterns.append(new_entry)
+            auto_learned.append({"action": "added", "sig": sig, "family": family})
+            added += 1
+        else:
+            # Existing entry — increment occurrence_count only; NEVER change status
+            existing["occurrence_count"] = existing.get("occurrence_count", 1) + 1
+            existing["last_seen"] = _utcnow()
+            auto_learned.append({"action": "incremented", "sig": sig,
+                                  "count": existing["occurrence_count"]})
+            incremented += 1
+
+    # Persist updated registry
+    if added or incremented:
+        registry_path.parent.mkdir(parents=True, exist_ok=True)
+        registry_path.write_text(
+            json.dumps({"patterns": patterns}, indent=2),
+            encoding="utf-8",
+        )
+        # Write auto-learned-patterns.json evidence sidecar
+        evidence_path = run_dir / "auto-learned-patterns.json"
+        evidence_path.write_text(
+            json.dumps({
+                "family": family,
+                "run_dir": str(run_dir),
+                "generated_at": _utcnow(),
+                "added": added,
+                "incremented": incremented,
+                "skipped": skipped,
+                "entries": auto_learned,
+            }, indent=2),
+            encoding="utf-8",
+        )
+        logger.info(
+            "Healing auto-learn: +%d new patterns, %d incremented for %s",
+            added, incremented, family,
+        )
+
+    return {"added": added, "incremented": incremented, "skipped": skipped}
+
+
+def _load_run_failures(run_dir: Path) -> list[dict]:
+    """Load failure records from a run directory."""
+    failures: list[dict] = []
+    for candidate in ["reviewer-failures.json", "validation-results.json", "example-gate-results.json"]:
+        path = run_dir / candidate
+        if not path.exists():
+            # Try evidence subdir
+            path = run_dir / "evidence" / "latest" / candidate
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                failures.extend(f for f in data if isinstance(f, dict) and not f.get("passed", True))
+            elif isinstance(data, dict):
+                for v in data.values():
+                    if isinstance(v, list):
+                        failures.extend(f for f in v if isinstance(f, dict) and not f.get("passed", True))
+        except Exception:  # noqa: BLE001
+            pass
+    return failures
+
+
+def _find_by_sig(patterns: list[dict], sig: str) -> dict | None:
+    """Find an existing pattern entry by signature."""
+    for p in patterns:
+        if _normalize_reason(p.get("reason_signature", "")) == sig:
+            return p
+    return None

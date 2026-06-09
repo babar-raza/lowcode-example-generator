@@ -1,0 +1,21 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "generated_at": "2026-06-09T00:00:00Z",
+  "ar_checks": [
+    {"id": "AR-01", "check": "No false MERGED claims", "result": "PASS", "detail": "All 3 PRs correctly recorded as OPEN/CREDENTIAL_BLOCKED, not MERGED. W24 false-claim prevention in effect."},
+    {"id": "AR-02", "check": "DRYRUN packages not falsely claimed as proven", "result": "PASS", "detail": "28 TRANSFORMED_TO_EXAMPLE_DRYRUN packages documented as SCAFFOLD_NOT_FOUND. No false CANONICAL_PACKAGE_PROVEN claims."},
+    {"id": "AR-03", "check": "No fixture source repo confused with publication target", "result": "PASS", "detail": "PLV-16/17 + FIXTURE_SOURCE_REPOS frozenset + test coverage."},
+    {"id": "AR-04", "check": "APPROVAL_BLOCKED not produced by any new code path", "result": "PASS", "detail": "test_approval_blocked_never_produced_as_verdict passes."},
+    {"id": "AR-05", "check": "PROBE_CANDIDATE not fed to generation stage", "result": "PASS", "detail": "_GENERATION_READY_STATUSES = {PROBE_CONFIRMED, VERIFIED_PUBLISHABLE} only."},
+    {"id": "AR-06", "check": "Auto-steering never auto-promotes CANDIDATE to CONFIRMED", "result": "PASS", "detail": "apply_auto_steering_candidates() uses status=CANDIDATE only. Never writes CONFIRMED."},
+    {"id": "AR-07", "check": "Healing auto-learn never auto-promotes CANDIDATE to CONFIRMED", "result": "PASS", "detail": "auto_learn_from_run() only appends/increments; never changes status field."},
+    {"id": "AR-08", "check": "NuGet SHA-256 manifest used (not ETag)", "result": "PASS", "detail": "_revalidate_sha_manifest() computes sha256(local_file) — not ETag-based."},
+    {"id": "AR-09", "check": "Discovery freshness gate respects mode (publication=block, dry_run=warn)", "result": "PASS", "detail": "_stage_load_config() checks discovery_mode before raising vs warning."},
+    {"id": "AR-10", "check": "Repair loop capped (HS-09: no silent LLM calls beyond 2 retries)", "result": "PASS", "detail": "_REVIEWER_MAX_REPAIR_ATTEMPTS=2; each retry writes evidence."},
+    {"id": "AR-11", "check": "new_sprint.py does not overwrite without --force (no silent data loss)", "result": "PASS", "detail": "Returns rc=1 and prints error if file exists and --force not set."},
+    {"id": "AR-12", "check": "PR lifecycle verdict is machine-readable AMG vocabulary throughout", "result": "PASS", "detail": "CREDENTIAL_BLOCKED / AUTO_MERGE_AUTHORIZED used. APPROVAL_BLOCKED absent from new artifacts."}
+  ],
+  "passed": 12,
+  "total": 12,
+  "overall_verdict": "AR_PASS"
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import platform
 import sys
 import time
@@ -11,6 +12,10 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
+
+
+def _now_utc() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +74,9 @@ class PipelineContext:
     metrics_collector: Any = None
     # Healing intelligence loader — loaded at generation stage for advisory constraints.
     healing_intelligence: Any = None
+    # Non-LowCode fallback candidates — set by _stage_fallback_registry_lookup().
+    # Only PROBE_CONFIRMED and VERIFIED_PUBLISHABLE entries are included.
+    fallback_candidates: list | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -329,6 +337,36 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
             artifacts["constraints_hash"] = _hashlib.sha256(constraints_text.encode("utf-8")).hexdigest()
     except Exception:
         pass  # Non-fatal; integrity checks will report "skipped"
+
+    # Discovery freshness gate (Wave 25 Lane C) — mode-aware
+    try:
+        from plugin_examples.website_catalog.drift_detector import is_discovery_stale
+        discovery_mode = getattr(ctx.config, "discovery_mode", "dry_run") or "dry_run"
+        evidence_path = ctx.repo_root / "workspace" / "verification" / "latest" / "all-family-lowcode-discovery.json"
+        if evidence_path.exists():
+            import json as _json
+            _evidence = _json.loads(evidence_path.read_text(encoding="utf-8"))
+            _meta = _evidence.get("discovery_metadata", {})
+            if _meta and is_discovery_stale(_meta):
+                if discovery_mode == "publication":
+                    raise RuntimeError(
+                        f"DISCOVERY_EVIDENCE_STALE — expires_at={_meta.get('expires_at')}. "
+                        "Run discovery sweep to refresh before publication mode."
+                    )
+                else:
+                    logger.warning(
+                        "Discovery evidence is stale (expires_at=%s). "
+                        "Mode=%s — continuing with warning.",
+                        _meta.get("expires_at"), discovery_mode,
+                    )
+                    artifacts["discovery_freshness"] = "STALE_WARNING"
+            else:
+                artifacts["discovery_freshness"] = "FRESH"
+    except RuntimeError:
+        raise
+    except Exception:
+        pass  # Non-fatal — freshness check best-effort
+
     return artifacts
 
 
@@ -385,17 +423,66 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
         if drift
         else "none"
     )
+
+    discovery_mode = getattr(ctx.config, "discovery_mode", None) or "dry_run"
+
     if drift:
-        logger.warning(
-            "VERSION DRIFT DETECTED for family '%s': fetched=%s, denominator=%s. "
-            "The catalog hash check will likely fail at scenario_planning. %s",
-            ctx.family, fetched, denominator_version, action,
-        )
+        # Write mismatch evidence
+        mismatch_evidence = {
+            "family": ctx.family,
+            "pinned": denominator_version,
+            "live": fetched,
+            "detected_at": _now_utc(),
+        }
+        try:
+            import json as _json2
+            _mismatch_path = ctx.run_dir / "version-mismatch-alert.json"
+            _mismatch_path.write_text(_json2.dumps(mismatch_evidence, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+        if discovery_mode == "publication":
+            accept_drift = os.environ.get("ACCEPT_VERSION_DRIFT") == "1"
+            if not accept_drift:
+                raise RuntimeError(
+                    f"PINNED_VERSION_OUTDATED — family '{ctx.family}': "
+                    f"pinned={denominator_version} but live={fetched}. "
+                    "Set ACCEPT_VERSION_DRIFT=1 to proceed in publication mode."
+                )
+            else:
+                # Write drift acceptance record for audit trail
+                try:
+                    import json as _json3
+                    acceptance = {
+                        "family": ctx.family,
+                        "accepted_at": _now_utc(),
+                        "accepted_pinned": denominator_version,
+                        "accepted_live": fetched,
+                        "env_gate": "ACCEPT_VERSION_DRIFT=1",
+                    }
+                    (ctx.run_dir / "drift-acceptance-record.json").write_text(
+                        _json3.dumps(acceptance, indent=2), encoding="utf-8"
+                    )
+                except Exception:
+                    pass
+                logger.warning(
+                    "VERSION DRIFT ACCEPTED via ACCEPT_VERSION_DRIFT=1 for family '%s': "
+                    "pinned=%s, live=%s",
+                    ctx.family, denominator_version, fetched,
+                )
+        else:
+            logger.warning(
+                "VERSION DRIFT DETECTED for family '%s': fetched=%s, denominator=%s. "
+                "The catalog hash check will likely fail at scenario_planning. %s",
+                ctx.family, fetched, denominator_version, action,
+            )
+
     return {
         "fetched_version": fetched,
         "denominator_version": denominator_version,
         "drift_detected": drift,
         "action_required": action,
+        "discovery_mode": discovery_mode,
     }
 
 
@@ -578,6 +665,11 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
     excluded = [e for e in entries if isinstance(e, dict) and e.get("status") not in _FALLBACK_USABLE_STATUSES]
     candidate_count = len(usable)
 
+    # Only PROBE_CONFIRMED and VERIFIED_PUBLISHABLE feed generation.
+    # PROBE_CANDIDATE requires probe validation first and must not enter the generation stage.
+    _GENERATION_READY_STATUSES = frozenset({"PROBE_CONFIRMED", "VERIFIED_PUBLISHABLE"})
+    generation_ready = [e for e in usable if e.get("status") in _GENERATION_READY_STATUSES]
+
     status_counts: dict[str, int] = {}
     for e in entries:
         if isinstance(e, dict):
@@ -592,13 +684,42 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
             "strategy": strategy,
             "total_registry_entries": len(entries),
             "usable_entries": candidate_count,
+            "generation_ready_entries": len(generation_ready),
             "excluded_entries": len(excluded),
             "status_counts": status_counts,
             "exclusion_reason": "statuses not in PROBE_CANDIDATE/PROBE_CONFIRMED/VERIFIED_PUBLISHABLE",
+            "generation_exclusion_reason": "PROBE_CANDIDATE excluded from generation (requires probe validation first)",
             "candidates": usable,
         }, fh, indent=2)
 
-    return {"status": "OK", "candidate_count": candidate_count, "fallback_mode": True}
+    # Populate ctx.fallback_candidates with PluginCandidate objects for the generation stage.
+    if generation_ready:
+        from plugin_examples.fixture_factory.shared_downstream_executor import PluginCandidate
+        ctx.fallback_candidates = [
+            PluginCandidate(
+                slug=e.get("plugin_slug") or e.get("slug", "unknown"),
+                family=ctx.family,
+                namespace_source="NON_LOWCODE_PLUGIN",
+                discovery_method="capability_registry_fallback",
+                metadata={k: v for k, v in e.items() if k not in ("plugin_slug", "slug")},
+            )
+            for e in generation_ready
+        ]
+        logger.info(
+            "Non-LowCode fallback: %d generation-ready candidates for %s (PROBE_CONFIRMED/VERIFIED_PUBLISHABLE)",
+            len(ctx.fallback_candidates), ctx.family,
+        )
+    else:
+        ctx.fallback_candidates = []
+        if usable:
+            logger.info(
+                "Non-LowCode fallback: %d usable entries for %s, but none are generation-ready "
+                "(all are PROBE_CANDIDATE — probe validation required first)",
+                len(usable), ctx.family,
+            )
+
+    return {"status": "OK", "candidate_count": candidate_count,
+            "generation_ready": len(generation_ready), "fallback_mode": True}
 
 
 def _stage_api_delta(ctx: PipelineContext) -> dict:
@@ -789,6 +910,54 @@ def _stage_llm_preflight(ctx: PipelineContext) -> dict:
     }
 
 
+def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
+    """Non-LowCode generation path: runs SharedDownstreamExecutor for fallback candidates."""
+    import json as _json
+    from plugin_examples.fixture_factory.shared_downstream_executor import SharedDownstreamExecutor
+
+    candidates = ctx.fallback_candidates or []
+    if not candidates:
+        return {"examples_generated": 0, "reason": "no generation-ready fallback candidates"}
+
+    executor = SharedDownstreamExecutor(strict=False)
+    batch_result = executor.execute_batch(candidates)
+
+    # Convert DownstreamResult records to the project-dict format used by subsequent stages
+    for r in batch_result.results:
+        ctx.generated_projects.append({
+            "slug": r.slug,
+            "family": r.family,
+            "namespace_source": r.namespace_source,
+            "discovery_method": r.discovery_method,
+            "artifact_contract": r.artifact_contract,
+            "pr_packet": r.pr_packet,
+            "publication_state": r.publication_state,
+            "evidence": r.evidence,
+            "errors": r.errors,
+        })
+
+    summary = {
+        "candidates": batch_result.candidates,
+        "passed": batch_result.passed,
+        "failed": batch_result.failed,
+    }
+    summary_path = ctx.run_dir / "nonlowcode-generation-summary.json"
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path.write_text(_json.dumps(summary, indent=2), encoding="utf-8")
+
+    logger.info(
+        "Non-LowCode generation: %d candidates, %d passed, %d failed",
+        batch_result.candidates, batch_result.passed, batch_result.failed,
+    )
+    return {
+        "examples_generated": batch_result.candidates,
+        "generation_mode": "nonlowcode_executor",
+        "parity": "NON_LOWCODE_PLUGIN",
+        "passed": batch_result.passed,
+        "failed": batch_result.failed,
+    }
+
+
 def _stage_generation(ctx: PipelineContext) -> dict:
     from plugin_examples.generator import (
         build_packet,
@@ -814,7 +983,11 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             rec.mark_excluded(reason)
             rec.final_verdict = "EXCLUDED_BY_SCOPE"
 
+    # Non-LowCode routing: if fallback candidates are present and no LowCode scenarios are
+    # ready, delegate entirely to the shared downstream executor.
     if not ctx.planning or ctx.planning.ready_count == 0:
+        if ctx.fallback_candidates:
+            return _generate_nonlowcode_examples(ctx)
         return {"examples_generated": 0, "reason": "no ready scenarios"}
 
     # Load healing intelligence registries (advisory layer — does not override config)
@@ -1419,6 +1592,21 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
                     recommended_fix="Address reviewer feedback and regenerate",
                     priority="high",
                 )
+
+    # G-1: Auto-learn from run failures (additive CANDIDATE only — never promotes CONFIRMED).
+    try:
+        from plugin_examples.healing_intelligence.loader import auto_learn_from_run
+        registry_dir = (
+            ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence"
+        )
+        registry_path = registry_dir / "failure-pattern-registry.json"
+        learn_result = auto_learn_from_run(ctx.run_dir, ctx.family, registry_path)
+        logger.info(
+            "Healing auto-learn: +%d new, %d incremented, %d skipped for %s",
+            learn_result["added"], learn_result["incremented"], learn_result["skipped"], ctx.family,
+        )
+    except Exception as _e:  # noqa: BLE001
+        logger.warning("Healing auto-learn failed (non-blocking): %s", _e)
 
     return {
         "available": result.available,

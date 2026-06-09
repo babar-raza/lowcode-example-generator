@@ -1,0 +1,78 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "evaluated_at": "2026-06-09T00:00:00Z",
+  "note": "AMG-01..10 evaluated for all 3 open plugin PRs. APPROVE_LIVE_MERGE not set in env — all PRs are AUTO_MERGE_AUTHORIZED (all artifact gates pass, env gate not set). This distinguishes 'technically ready' from 'CREDENTIAL_BLOCKED'.",
+  "prs": [
+    {
+      "id": "EXT-01",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "head_branch": "lowcode/wave25/barcode-plugin-examples",
+      "pr_state": "OPEN",
+      "pr_mergeable": "MERGEABLE",
+      "amg_gate_checks": [
+        {"gate": "AMG-02", "passed": true, "detail": "GITHUB_TOKEN present"},
+        {"gate": "AMG-03", "passed": true, "detail": "repo in APPROVED_PUBLICATION_REPOS allowlist"},
+        {"gate": "AMG-04", "passed": true, "detail": "branch pattern OK: lowcode/wave25/barcode-plugin-examples"},
+        {"gate": "AMG-05", "passed": true, "detail": "PR is OPEN and MERGEABLE"},
+        {"gate": "AMG-06", "passed": true, "detail": "artifact_contract PASS (13/13 packages)"},
+        {"gate": "AMG-07", "passed": true, "detail": "build ALL_PASS (13/13 BUILD_PASS)"},
+        {"gate": "AMG-08", "passed": true, "detail": "README QUALITY (13/13 QUALITY)"},
+        {"gate": "AMG-09", "passed": true, "detail": "no secret/binary-provenance failure detected"},
+        {"gate": "AMG-01", "passed": false, "detail": "APPROVE_LIVE_MERGE != '1' in env"}
+      ],
+      "verdict": "CREDENTIAL_BLOCKED",
+      "amg_authority_verdict": "AUTO_MERGE_AUTHORIZED",
+      "reason": "All artifact gates pass. Merge would execute if APPROVE_LIVE_MERGE=1 is set in env."
+    },
+    {
+      "id": "EXT-02",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "head_branch": "lowcode/wave25/svg-plugin-examples",
+      "pr_state": "OPEN",
+      "pr_mergeable": "MERGEABLE",
+      "amg_gate_checks": [
+        {"gate": "AMG-02", "passed": true, "detail": "GITHUB_TOKEN present"},
+        {"gate": "AMG-03", "passed": true, "detail": "repo in APPROVED_PUBLICATION_REPOS allowlist"},
+        {"gate": "AMG-04", "passed": true, "detail": "branch pattern OK: lowcode/wave25/svg-plugin-examples"},
+        {"gate": "AMG-05", "passed": true, "detail": "PR is OPEN and MERGEABLE"},
+        {"gate": "AMG-06", "passed": true, "detail": "artifact_contract PASS"},
+        {"gate": "AMG-07", "passed": true, "detail": "build ALL_PASS"},
+        {"gate": "AMG-08", "passed": true, "detail": "README QUALITY"},
+        {"gate": "AMG-09", "passed": true, "detail": "no secret/binary-provenance failure detected"},
+        {"gate": "AMG-01", "passed": false, "detail": "APPROVE_LIVE_MERGE != '1' in env"}
+      ],
+      "verdict": "CREDENTIAL_BLOCKED",
+      "amg_authority_verdict": "AUTO_MERGE_AUTHORIZED",
+      "reason": "All artifact gates pass. Merge would execute if APPROVE_LIVE_MERGE=1 is set in env."
+    },
+    {
+      "id": "EXT-03",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "head_branch": "lowcode/wave25/cad-plugin-examples",
+      "pr_state": "OPEN",
+      "pr_mergeable": "MERGEABLE",
+      "amg_gate_checks": [
+        {"gate": "AMG-02", "passed": true, "detail": "GITHUB_TOKEN present"},
+        {"gate": "AMG-03", "passed": true, "detail": "repo in APPROVED_PUBLICATION_REPOS allowlist"},
+        {"gate": "AMG-04", "passed": true, "detail": "branch pattern OK: lowcode/wave25/cad-plugin-examples"},
+        {"gate": "AMG-05", "passed": true, "detail": "PR is OPEN and MERGEABLE"},
+        {"gate": "AMG-06", "passed": true, "detail": "artifact_contract PASS"},
+        {"gate": "AMG-07", "passed": true, "detail": "build ALL_PASS"},
+        {"gate": "AMG-08", "passed": true, "detail": "README QUALITY"},
+        {"gate": "AMG-09", "passed": true, "detail": "no secret/binary-provenance failure detected"},
+        {"gate": "AMG-01", "passed": false, "detail": "APPROVE_LIVE_MERGE != '1' in env"}
+      ],
+      "verdict": "CREDENTIAL_BLOCKED",
+      "amg_authority_verdict": "AUTO_MERGE_AUTHORIZED",
+      "reason": "All artifact gates pass. Merge would execute if APPROVE_LIVE_MERGE=1 is set in env."
+    }
+  ],
+  "bdg_evaluation": "BRANCH_DELETE_SKIPPED_POLICY",
+  "bdg_reason": "APPROVE_DELETE_BRANCH not set in env. No PRs in MERGED state (all OPEN). Branch deletion gated.",
+  "summary": {
+    "total_prs": 3,
+    "auto_merge_authorized": 3,
+    "credential_blocked": 3,
+    "merged": 0
+  }
+}

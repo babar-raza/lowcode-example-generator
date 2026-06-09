@@ -157,6 +157,77 @@ def write_delta_report(
     return path
 
 
+def apply_auto_steering_candidates(
+    delta: DeltaResult,
+    family: str,
+    existing_steering: dict | None = None,
+    output_path: Path | None = None,
+) -> dict:
+    """Add removed symbols as CANDIDATE steering entries (never CONFIRMED).
+
+    Safe auto-learning design:
+    - Only ADDITIVE: new CANDIDATE entries are appended; existing entries never mutated.
+    - Auto-promotion is forbidden: status stays CANDIDATE until human/agent review.
+    - CANDIDATE entries are treated as warnings during generation, not hard blocks.
+
+    Args:
+        delta:             DeltaResult from compute_delta().
+        family:            Family name.
+        existing_steering: Current steering dict (may contain "forbidden_symbols").
+        output_path:       If provided, write the auto-steering update JSON here.
+
+    Returns:
+        Updated steering dict with CANDIDATE entries added.
+    """
+    from datetime import datetime, timezone
+
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    steering = existing_steering or {}
+    forbidden = list(steering.get("forbidden_symbols", []))
+    existing_sigs = {e.get("symbol") for e in forbidden}
+
+    added_candidates: list[dict] = []
+
+    for removed_type in delta.removed_types:
+        sym = removed_type.full_name
+        if sym not in existing_sigs:
+            entry = {
+                "symbol": sym,
+                "reason": f"Removed in delta: {family} v{delta.old_version} → v{delta.new_version}",
+                "source": "auto_delta",
+                "status": "CANDIDATE",   # NEVER auto-promoted to CONFIRMED
+                "added_at": now,
+                "occurrence_count": 1,
+            }
+            forbidden.append(entry)
+            existing_sigs.add(sym)
+            added_candidates.append(entry)
+        else:
+            # Increment occurrence count for existing CANDIDATE
+            for e in forbidden:
+                if e.get("symbol") == sym and e.get("status") == "CANDIDATE":
+                    e["occurrence_count"] = e.get("occurrence_count", 1) + 1
+                    e["last_seen"] = now
+                    break
+
+    updated_steering = {**steering, "forbidden_symbols": forbidden}
+
+    if output_path is not None:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        auto_update = {
+            "family": family,
+            "generated_at": now,
+            "added_candidates": len(added_candidates),
+            "candidates": added_candidates,
+            "policy": "CANDIDATE status only — never auto-promoted to CONFIRMED",
+        }
+        with open(output_path, "w") as f:
+            json.dump(auto_update, f, indent=2)
+        logger.info("Auto-steering update written: %s (%d candidates)", output_path, len(added_candidates))
+
+    return updated_steering
+
+
 def _index_types(catalog: dict) -> dict[str, tuple[dict, str]]:
     """Index types by full_name -> (type_dict, namespace)."""
     index: dict[str, tuple[dict, str]] = {}

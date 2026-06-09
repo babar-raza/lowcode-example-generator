@@ -1,0 +1,75 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T11:37:28+00:00",
+  "total_lanes": 16,
+  "lanes_complete": 0,
+  "lanes_in_progress": 1,
+  "lanes_pending": 15,
+  "lanes": {
+    "L0": {
+      "status": "IN_PROGRESS",
+      "desc": "Coordinator, taskcards, hard-stop manifest, repo separation"
+    },
+    "LA": {
+      "status": "PENDING",
+      "desc": "Governance repair \u2014 AGENTS.md, merge_approval_gate.py AMG, PLV-16/17"
+    },
+    "LB": {
+      "status": "PENDING",
+      "desc": "Fixture system \u2014 schema, 17 family YAMLs, production-safe fetcher, provenance sidecars"
+    },
+    "LC": {
+      "status": "PENDING",
+      "desc": "Discovery freshness \u2014 metadata, drift detection, mode-aware gate, GitHub Actions workflow"
+    },
+    "LD": {
+      "status": "PENDING",
+      "desc": "Provenance hardening \u2014 version drift hard-stop, NuGet SHA manifest, API delta auto-steering"
+    },
+    "LE": {
+      "status": "PENDING",
+      "desc": "DRYRUN batch prove \u2014 dynamic backlog, build-and-prove script, registry transition ledger"
+    },
+    "LF": {
+      "status": "PENDING",
+      "desc": "Non-LowCode wiring \u2014 fallback_strategy configs, SDE routing, PR builder alignment, NLV-15"
+    },
+    "LG": {
+      "status": "PENDING",
+      "desc": "Healing architecture \u2014 additive auto-learn CANDIDATE, capped repair loop, scenario difficulty index"
+    },
+    "LH": {
+      "status": "PENDING",
+      "desc": "Coordinator automation pilot \u2014 _coordinator_base.py, new_sprint.py, template"
+    },
+    "LI": {
+      "status": "PENDING",
+      "desc": "Scaling pilots \u2014 --family-config flag, stage-registry YAML, family templates"
+    },
+    "LJ": {
+      "status": "PENDING",
+      "desc": "Full test suite \u2014 all new tests for every lane, actual counts from raw logs"
+    },
+    "LK": {
+      "status": "PENDING",
+      "desc": "State truth and registry transition ledger"
+    },
+    "LL": {
+      "status": "PENDING",
+      "desc": "PR lifecycle \u2014 AMG evaluation for 3 open PRs, merge if APPROVE_LIVE_MERGE=1"
+    },
+    "LM": {
+      "status": "PENDING",
+      "desc": "Security hygiene \u2014 SHV validators, fixture provenance check, binary audit"
+    },
+    "LN": {
+      "status": "PENDING",
+      "desc": "IV + adversarial review \u2014 15 IV checks + 12 AR checks + 15 W25-specific IV"
+    },
+    "LZ": {
+      "status": "PENDING",
+      "desc": "Bundle freeze \u2014 ZIP, SHA-256 sidecar, final attestation"
+    }
+  }
+}

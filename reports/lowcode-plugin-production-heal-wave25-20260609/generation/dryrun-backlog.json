@@ -1,0 +1,177 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T11:54:14+00:00",
+  "source": "registry YAMLs scanned at runtime (not hardcoded)",
+  "total_dryrun_packages": 28,
+  "packages": [
+    {
+      "family": "drawing",
+      "slug": "convert-drawing",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "drawing",
+      "slug": "create-drawing",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "finance",
+      "slug": "convert-xbrl",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-pdf-converter",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-docx-converter",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "html",
+      "slug": "html-to-image-converter",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-converter",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-resizer",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-compressor",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-cropper",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-filters",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-merger",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "add-watermark",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "imaging",
+      "slug": "image-rotator",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-pdf",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-word",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "note",
+      "slug": "convert-onenote-to-image",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "ocr",
+      "slug": "scan-document",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "ocr",
+      "slug": "image-text-finder",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "psd",
+      "slug": "animation-maker",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "psd",
+      "slug": "photo-processor",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "tasks",
+      "slug": "project-to-pdf-converter",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-excel",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "tex",
+      "slug": "latex-figure-renderer",
+      "pkg_path": null,
+      "status": "PENDING"
+    },
+    {
+      "family": "zip",
+      "slug": "compress-files",
+      "pkg_path": null,
+      "status": "PENDING"
+    }
+  ]
+}

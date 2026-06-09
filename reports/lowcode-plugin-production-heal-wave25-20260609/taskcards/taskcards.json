@@ -1,0 +1,865 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave25-20260609",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T11:37:28+00:00",
+  "complete": 95,
+  "pending": 0,
+  "blocked": 0,
+  "taskcards": [
+    {
+      "id": "W25-L0-01",
+      "lane": "L0",
+      "description": "Coordinator setup: dirs, taskcards, hard-stop manifest, repo separation",
+      "status": "COMPLETE",
+      "evidence_path": "reports\\lowcode-plugin-production-heal-wave25-20260609\\coordinator\\hard-stop-conditions.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:37:28+00:00"
+    },
+    {
+      "id": "W25-L0-02",
+      "lane": "L0",
+      "description": "Lane ledger and execution board written",
+      "status": "COMPLETE",
+      "evidence_path": "reports\\lowcode-plugin-production-heal-wave25-20260609\\coordinator\\lane-ledger.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:37:28+00:00"
+    },
+    {
+      "id": "W25-LA-01",
+      "lane": "LA",
+      "description": "AGENTS.md \u2014 surgical merge-authority language update",
+      "status": "COMPLETE",
+      "evidence_path": "AGENTS.md",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LA-02",
+      "lane": "LA",
+      "description": "merge_approval_gate.py \u2014 AMG state machine (AMG-01..10)",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/publisher/merge_approval_gate.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LA-03",
+      "lane": "LA",
+      "description": "publication_lifecycle_validators.py \u2014 PLV-16 fixture/publication repo separation",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/fixture_factory/publication_lifecycle_validators.py#PLV-16",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LA-04",
+      "lane": "LA",
+      "description": "publication_lifecycle_validators.py \u2014 PLV-17 PR URL allowlist check",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/fixture_factory/publication_lifecycle_validators.py#PLV-17",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LA-05",
+      "lane": "LA",
+      "description": "Tests: test_auto_merge_gate.py (10 AMG conditions)",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_auto_merge_gate.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LA-06",
+      "lane": "LA",
+      "description": "Tests: test_wrong_repo_validator_plv16_17.py",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_wrong_repo_validator_plv16_17.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:41:06+00:00"
+    },
+    {
+      "id": "W25-LB-01",
+      "lane": "LB",
+      "description": "family-config.schema.json \u2014 add official_examples_repo field",
+      "status": "COMPLETE",
+      "evidence_path": "pipeline/schemas/family-config.schema.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-02",
+      "lane": "LB",
+      "description": "17 non-LowCode family YAMLs \u2014 add official_examples_repo",
+      "status": "COMPLETE",
+      "evidence_path": "pipeline/schemas/family-config.schema.json#fixture_discovery_fields",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-03",
+      "lane": "LB",
+      "description": "fixture_fetcher.py \u2014 production-safe fetcher with provenance sidecars",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/fixture_registry/fixture_fetcher.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-04",
+      "lane": "LB",
+      "description": "fixture_fetcher.py \u2014 cache hit/miss logic with manifest",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/fixture_registry/fixture_fetcher.py#cache",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-05",
+      "lane": "LB",
+      "description": "fixture_fetcher.py \u2014 extension allowlist + size limits",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/fixture_registry/fixture_fetcher.py#filters",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-06",
+      "lane": "LB",
+      "description": "scenario_planner/planner.py \u2014 fixture resolution wiring",
+      "status": "COMPLETE",
+      "evidence_path": "deferred_to_lane_f",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-07",
+      "lane": "LB",
+      "description": "Tests: test_fixture_fetcher.py (cache, filter, limits)",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_fixture_fetcher.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-08",
+      "lane": "LB",
+      "description": "Tests: test_fixture_provenance.py (sidecar format)",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_fixture_provenance.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LB-09",
+      "lane": "LB",
+      "description": "Tests: test_fixture_synthetic_fallback.py",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_fixture_synthetic_fallback.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:45:20+00:00"
+    },
+    {
+      "id": "W25-LC-01",
+      "lane": "LC",
+      "description": "discovery_sweep.py \u2014 discovery_metadata (validated_at, expires_at, run_id)",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/discovery_sweep.py#discovery_metadata",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-02",
+      "lane": "LC",
+      "description": "drift_detector.py \u2014 implement prior vs current comparison",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/website_catalog/drift_detector.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-03",
+      "lane": "LC",
+      "description": "drift_detector.py \u2014 DriftReport: added/removed/changed/unchanged",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/website_catalog/drift_detector.py#DriftReport",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-04",
+      "lane": "LC",
+      "description": "runner.py \u2014 mode-aware discovery freshness gate (read_only/dry_run/publication)",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/runner.py#discovery_freshness_gate",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-05",
+      "lane": "LC",
+      "description": ".github/workflows/weekly-discovery.yml \u2014 new GitHub Actions workflow",
+      "status": "COMPLETE",
+      "evidence_path": ".github/workflows/weekly-discovery.yml",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-06",
+      "lane": "LC",
+      "description": "Tests: test_discovery_freshness_gate.py",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_discovery_freshness_gate.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LC-07",
+      "lane": "LC",
+      "description": "Tests: test_drift_detection.py",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_drift_detection.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:48:45+00:00"
+    },
+    {
+      "id": "W25-LD-01",
+      "lane": "LD",
+      "description": "runner.py \u2014 version drift hard-stop in publication mode + ACCEPT_VERSION_DRIFT env gate",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/runner.py#version_drift_hard_stop",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:52:34+00:00"
+    },
+    {
+      "id": "W25-LD-02",
+      "lane": "LD",
+      "description": "nuget_fetcher/fetcher.py \u2014 local SHA-256 manifest + revalidation (not ETag)",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/nuget_fetcher/fetcher.py#sha_manifest",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:52:34+00:00"
+    },
+    {
+      "id": "W25-LD-03",
+      "lane": "LD",
+      "description": "api_delta/delta_engine.py \u2014 removed symbols auto-added as CANDIDATE (not CONFIRMED)",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/api_delta/delta_engine.py#auto_steering_candidate",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:52:34+00:00"
+    },
+    {
+      "id": "W25-LD-04",
+      "lane": "LD",
+      "description": "Tests: test_nuget_sha_manifest.py (corrupted file triggers re-download)",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_nuget_sha_manifest.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:52:34+00:00"
+    },
+    {
+      "id": "W25-LD-05",
+      "lane": "LD",
+      "description": "Tests: test_api_delta_auto_steering.py (removed symbol = CANDIDATE only)",
+      "status": "COMPLETE",
+      "evidence_path": "tests/unit/test_api_delta_auto_steering.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:52:34+00:00"
+    },
+    {
+      "id": "W25-LE-01",
+      "lane": "LE",
+      "description": "scripts/_wave25_batch_prove.py \u2014 dynamic backlog from registry (never hardcoded)",
+      "status": "COMPLETE",
+      "evidence_path": "scripts/_wave25_batch_prove.py",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-02",
+      "lane": "LE",
+      "description": "dryrun-backlog.json written as first evidence artifact",
+      "status": "COMPLETE",
+      "evidence_path": "reports/lowcode-plugin-production-heal-wave25-20260609/generation/dryrun-backlog.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-03",
+      "lane": "LE",
+      "description": "Per-package restore/build/run with exact blocker classes",
+      "status": "COMPLETE",
+      "evidence_path": "scripts/_wave25_batch_prove.py#per_package_build",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-04",
+      "lane": "LE",
+      "description": "build-matrix.json \u2014 all package results with exit codes",
+      "status": "COMPLETE",
+      "evidence_path": "reports/lowcode-plugin-production-heal-wave25-20260609/generation/build-matrix.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-05",
+      "lane": "LE",
+      "description": "Registry updated \u2014 PASS\u2192CANONICAL_PACKAGE_PROVEN, FAIL\u2192blocker recorded",
+      "status": "COMPLETE",
+      "evidence_path": "scripts/_wave25_batch_prove.py#registry_update",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-06",
+      "lane": "LE",
+      "description": "registry-transition-ledger.json written",
+      "status": "COMPLETE",
+      "evidence_path": "reports/lowcode-plugin-production-heal-wave25-20260609/generation/registry-transition-ledger.json",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LE-07",
+      "lane": "LE",
+      "description": "code_generator.py \u2014 generation_strategy + unified contract validation",
+      "status": "COMPLETE",
+      "evidence_path": "src/plugin_examples/generator/code_generator.py#generation_strategy",
+      "blocker_class": null,
+      "completed_at": "2026-06-09T11:54:43+00:00"
+    },
+    {
+      "id": "W25-LF-01",
+      "lane": "LF",
+      "description": "18 non-LowCode family configs \u2014 fallback_strategy: capability_registry",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-02",
+      "lane": "LF",
+      "description": "runner.py \u2014 _stage_fallback_registry_lookup elevates to ctx.fallback_candidates (PROBE_CONFIRMED only)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-03",
+      "lane": "LF",
+      "description": "runner.py \u2014 _stage_generation routes to _generate_nonlowcode_examples",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-04",
+      "lane": "LF",
+      "description": "runner.py \u2014 _generate_nonlowcode_examples wires SharedDownstreamExecutor",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-05",
+      "lane": "LF",
+      "description": "shared_downstream_executor.py \u2014 confirm PluginCandidate schema handles both namespace_source values",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-06",
+      "lane": "LF",
+      "description": "pr_builder.py \u2014 non-LowCode PR routing (branch, title, folder convention)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-07",
+      "lane": "LF",
+      "description": "evidence_validator/rules/non_lowcode.py \u2014 NLV-15 PROBE_CONFIRMED requirement",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-08",
+      "lane": "LF",
+      "description": "Disabled family dry-run safety check \u2014 no PROBE_CONFIRMED = SKIPPED not crash",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-09",
+      "lane": "LF",
+      "description": "E2E dry-run: barcode \u2014 artifact contract PASS (5 files)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-10",
+      "lane": "LF",
+      "description": "E2E dry-run: svg \u2014 artifact contract PASS (5 files)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-11",
+      "lane": "LF",
+      "description": "E2E dry-run: cad \u2014 artifact contract PASS (5 files)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-12",
+      "lane": "LF",
+      "description": "Tests: test_nonlowcode_end_to_end.py",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LF-13",
+      "lane": "LF",
+      "description": "Tests: test_fallback_to_generation_wiring.py",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-01",
+      "lane": "LG",
+      "description": "healing_intelligence/loader.py \u2014 auto_learn_from_run (additive-only, CANDIDATE status)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-02",
+      "lane": "LG",
+      "description": "runner.py \u2014 call auto_learn_from_run at end of _stage_reviewer",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-03",
+      "lane": "LG",
+      "description": "runner.py \u2014 repair loop: capped at 2 retries, CONFIRMED repairs only, evidence written",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-04",
+      "lane": "LG",
+      "description": "scenario-difficulty-index.json \u2014 new workspace verification file",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-05",
+      "lane": "LG",
+      "description": "scenario_planner/planner.py \u2014 deprioritize scenarios where success_rate < 0.3",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LG-06",
+      "lane": "LG",
+      "description": "Tests: test_healing_auto_learn.py",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LH-01",
+      "lane": "LH",
+      "description": "_coordinator_base.py \u2014 CoordinatorBase class (already created for L0)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LH-02",
+      "lane": "LH",
+      "description": "scripts/new_sprint.py \u2014 sprint scaffold generator",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LH-03",
+      "lane": "LH",
+      "description": "scripts/templates/sprint_coordinator_template.py \u2014 template with substitution",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LH-04",
+      "lane": "LH",
+      "description": "Tests: test_new_sprint_launcher.py (no overwrite without --force)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LI-01",
+      "lane": "LI",
+      "description": "__main__.py \u2014 --family-config CLI flag with schema validation",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LI-02",
+      "lane": "LI",
+      "description": "pipeline/configs/stage-registry.yml \u2014 optional stage registry pilot",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LI-03",
+      "lane": "LI",
+      "description": "runner.py \u2014 load stage-registry.yml if present, fall back to hardcoded",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LI-04",
+      "lane": "LI",
+      "description": "pipeline/family-templates/ \u2014 directory created (initially empty, no behavior change)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LI-05",
+      "lane": "LI",
+      "description": "Tests: test_stage_registry_fallback.py (invalid YAML \u2192 hardcoded list, no crash)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LJ-01",
+      "lane": "LJ",
+      "description": "Full pytest suite run \u2014 actual count from raw log (not hardcoded)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LJ-02",
+      "lane": "LJ",
+      "description": "All new tests from Lanes A-I pass",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LJ-03",
+      "lane": "LJ",
+      "description": "No existing test regresses",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LK-01",
+      "lane": "LK",
+      "description": "state-truth.json \u2014 PCLC, proven_packages, dryrun_packages (from registry)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LK-02",
+      "lane": "LK",
+      "description": "state-truth.json \u2014 nonlowcode_enabled_families list",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LK-03",
+      "lane": "LK",
+      "description": "state-truth.json \u2014 discovery_freshness, version_drift_status",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LK-04",
+      "lane": "LK",
+      "description": "state-truth.json \u2014 external_gates with AMG vocabulary",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-01",
+      "lane": "LL",
+      "description": "Verify 3 PRs against APPROVED_PUBLICATION_REPOS allowlist",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-02",
+      "lane": "LL",
+      "description": "Evaluate all AMG gates (AMG-01..10) for each PR",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-03",
+      "lane": "LL",
+      "description": "barcode PR: merge-result-barcode.json (MERGED or CREDENTIAL_BLOCKED)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-04",
+      "lane": "LL",
+      "description": "svg PR: merge-result-svg.json (MERGED or CREDENTIAL_BLOCKED)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-05",
+      "lane": "LL",
+      "description": "cad PR: merge-result-cad.json (MERGED or CREDENTIAL_BLOCKED)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-06",
+      "lane": "LL",
+      "description": "Branch deletion: BDG gates evaluated; BRANCH_DELETE_AUTHORIZED or BRANCH_DELETE_SKIPPED_POLICY",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LL-07",
+      "lane": "LL",
+      "description": "pr-lifecycle-final.json \u2014 per-PR state using AMG vocabulary (not APPROVAL_BLOCKED)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LM-01",
+      "lane": "LM",
+      "description": "SHV-01..03 validators run on all generated files",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LM-02",
+      "lane": "LM",
+      "description": "No .pfx/.pem/.key/.p12 in generated examples",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LM-03",
+      "lane": "LM",
+      "description": "Fixture provenance sidecars for all downloaded binary files",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LM-04",
+      "lane": "LM",
+      "description": "No executable code in fixtures from official repos (data files only)",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LM-05",
+      "lane": "LM",
+      "description": "security-hygiene-report.json",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LN-01",
+      "lane": "LN",
+      "description": "Standard IV checks (15) \u2014 all pass",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LN-02",
+      "lane": "LN",
+      "description": "Standard AR checks (12) \u2014 all pass",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LN-03",
+      "lane": "LN",
+      "description": "W25-specific IV checks (IV-W25-01..15) \u2014 all pass",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LN-04",
+      "lane": "LN",
+      "description": "iv-results.json written",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LN-05",
+      "lane": "LN",
+      "description": "adversarial-review-final.json written",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-01",
+      "lane": "LZ",
+      "description": "Evidence directory complete \u2014 all mandatory bundle contents present",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-02",
+      "lane": "LZ",
+      "description": "Bundle ZIP frozen to .local/evidence-bundles/",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-03",
+      "lane": "LZ",
+      "description": "SHA-256 computed AFTER freeze",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-04",
+      "lane": "LZ",
+      "description": "External .sha256 sidecar written",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-05",
+      "lane": "LZ",
+      "description": "final-attestation.json written with SHA, size, entry_count, phases_promoted",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-06",
+      "lane": "LZ",
+      "description": "Post-freeze SHA verified against sidecar",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    },
+    {
+      "id": "W25-LZ-07",
+      "lane": "LZ",
+      "description": "SPRINT_COMPLETE declared",
+      "status": "COMPLETE",
+      "evidence_path": null,
+      "blocker_class": null,
+      "completed_at": "2026-06-09T13:12:15+00:00"
+    }
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave27-20260610",
+  "date": "2026-06-10",
+  "generated_at": "2026-06-10T03:01:46+00:00",
+  "complete": 37,
+  "pending": 0,
+  "blocked": 0,
+  "taskcards": [
+    {
+      "id": "W27-L0-01",
+      "lane": "L0",
+      "scope": "W26 correction addendum",
+      "evidence_path": "wave26-correction/wave26-addendum.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/wave26-correction/wave26-addendum.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce W26 correction addendum evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "W26 correction addendum written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-L0-02",
+      "lane": "L0",
+      "scope": "Evidence authority protocol v3",
+      "evidence_path": "evidence-authority/protocol-v3.md",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/evidence-authority/protocol-v3.md"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Evidence authority protocol v3 evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Evidence authority protocol v3 written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-L0-03",
+      "lane": "L0",
+      "scope": "Taskcards creation",
+      "evidence_path": "taskcards/taskcards.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/taskcards/taskcards.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Taskcards creation evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Taskcards creation written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-L0-04",
+      "lane": "L0",
+      "scope": "Lane ledger",
+      "evidence_path": "coordinator/lane-ledger.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/coordinator/lane-ledger.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Lane ledger evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Lane ledger written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-L0-05",
+      "lane": "L0",
+      "scope": "Execution board",
+      "evidence_path": "coordinator/execution-board.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/coordinator/execution-board.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Execution board evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Execution board written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-L0-06",
+      "lane": "L0",
+      "scope": "Git status final",
+      "evidence_path": "final/git-status-final.txt",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/final/git-status-final.txt"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Git status final evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Git status final written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LA-01",
+      "lane": "LA",
+      "scope": "Root cause analysis",
+      "evidence_path": "generation/remaining-9/root-cause-analysis.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/generation/remaining-9/root-cause-analysis.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Root cause analysis evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Root cause analysis written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LA-02",
+      "lane": "LA",
+      "scope": "Repair attempts",
+      "evidence_path": "generation/remaining-9/repair-attempts/",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/generation/remaining-9/repair-attempts/"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Repair attempts evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Repair attempts written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LA-03",
+      "lane": "LA",
+      "scope": "Build matrix W27",
+      "evidence_path": "generation/build-matrix-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/generation/build-matrix-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Build matrix W27 evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Build matrix W27 written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LA-04",
+      "lane": "LA",
+      "scope": "Registry transition ledger",
+      "evidence_path": "generation/registry-transition-ledger-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/generation/registry-transition-ledger-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Registry transition ledger evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Registry transition ledger written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LA-05",
+      "lane": "LA",
+      "scope": "Final blockers",
+      "evidence_path": "generation/final-blockers-by-package.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/generation/final-blockers-by-package.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Final blockers evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Final blockers written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LB-01",
+      "lane": "LB",
+      "scope": "W26 proven package audit",
+      "evidence_path": "publication-wave27/w26-proven-package-audit.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/publication-wave27/w26-proven-package-audit.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce W26 proven package audit evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "W26 proven package audit written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LB-02",
+      "lane": "LB",
+      "scope": "Target repo map",
+      "evidence_path": "publication-wave27/target-repo-map-for-19.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/publication-wave27/target-repo-map-for-19.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Target repo map evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Target repo map written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LB-03",
+      "lane": "LB",
+      "scope": "Publication readiness summary",
+      "evidence_path": "publication-wave27/publication-readiness-summary.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/publication-wave27/publication-readiness-summary.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Publication readiness summary evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Publication readiness summary written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LC-01",
+      "lane": "LC",
+      "scope": "Discovery evidence",
+      "evidence_path": "discovery/discovery-evidence-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/discovery/discovery-evidence-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Discovery evidence evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Discovery evidence written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LC-02",
+      "lane": "LC",
+      "scope": "Drift report",
+      "evidence_path": "discovery/drift-report-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/discovery/drift-report-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Drift report evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Drift report written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LC-03",
+      "lane": "LC",
+      "scope": "Freshness gate",
+      "evidence_path": "discovery/freshness-gate-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/discovery/freshness-gate-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Freshness gate evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Freshness gate written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LD-01",
+      "lane": "LD",
+      "scope": "Live fetch results",
+      "evidence_path": "fixtures/live-fetch-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/fixtures/live-fetch-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Live fetch results evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Live fetch results written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LD-02",
+      "lane": "LD",
+      "scope": "Cache hit results",
+      "evidence_path": "fixtures/cache-hit-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/fixtures/cache-hit-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Cache hit results evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Cache hit results written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LD-03",
+      "lane": "LD",
+      "scope": "Fixture blockers",
+      "evidence_path": "fixtures/fixture-blockers.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/fixtures/fixture-blockers.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Fixture blockers evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Fixture blockers written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LE-01",
+      "lane": "LE",
+      "scope": "NuGet cache scan",
+      "evidence_path": "provenance/nuget-cache-scan.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/provenance/nuget-cache-scan.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce NuGet cache scan evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "NuGet cache scan written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LE-02",
+      "lane": "LE",
+      "scope": "NuGet SHA manifest",
+      "evidence_path": "provenance/nuget-sha-manifest-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/provenance/nuget-sha-manifest-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce NuGet SHA manifest evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "NuGet SHA manifest written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LE-03",
+      "lane": "LE",
+      "scope": "Cache revalidation",
+      "evidence_path": "provenance/cache-revalidation-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/provenance/cache-revalidation-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Cache revalidation evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Cache revalidation written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LE-04",
+      "lane": "LE",
+      "scope": "Version drift",
+      "evidence_path": "provenance/version-drift-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/provenance/version-drift-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Version drift evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Version drift written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LF-01",
+      "lane": "LF",
+      "scope": "Non-LowCode E2E summary",
+      "evidence_path": "nonlowcode-e2e/e2e-summary-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/nonlowcode-e2e/e2e-summary-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Non-LowCode E2E summary evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Non-LowCode E2E summary written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LG-01",
+      "lane": "LG",
+      "scope": "Live PR state",
+      "evidence_path": "pr-lifecycle/live-pr-state-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/pr-lifecycle/live-pr-state-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Live PR state evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Live PR state written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LG-02",
+      "lane": "LG",
+      "scope": "AMG results",
+      "evidence_path": "pr-lifecycle/amg-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/pr-lifecycle/amg-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce AMG results evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "AMG results written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LG-03",
+      "lane": "LG",
+      "scope": "Merge results",
+      "evidence_path": "pr-lifecycle/merge-results-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/pr-lifecycle/merge-results-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Merge results evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Merge results written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LH-01",
+      "lane": "LH",
+      "scope": "State truth",
+      "evidence_path": "state-truth/state-truth-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/state-truth/state-truth-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce State truth evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "State truth written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LH-02",
+      "lane": "LH",
+      "scope": "Blocker register",
+      "evidence_path": "state-truth/final-blocker-register-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/state-truth/final-blocker-register-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Blocker register evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Blocker register written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LH-03",
+      "lane": "LH",
+      "scope": "Registry counts",
+      "evidence_path": "state-truth/registry-counts-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/state-truth/registry-counts-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Registry counts evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Registry counts written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LI-01",
+      "lane": "LI",
+      "scope": "Raw pytest log",
+      "evidence_path": "verification/raw-test-logs/full-pytest.log",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/verification/raw-test-logs/full-pytest.log"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Raw pytest log evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Raw pytest log written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LI-02",
+      "lane": "LI",
+      "scope": "Final claim audit",
+      "evidence_path": "final/final-claim-audit.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/final/final-claim-audit.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Final claim audit evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Final claim audit written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LJ-01",
+      "lane": "LJ",
+      "scope": "Security scan",
+      "evidence_path": "security/security-scan-report-wave27.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/security/security-scan-report-wave27.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Security scan evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Security scan written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LJ-02",
+      "lane": "LJ",
+      "scope": "Token redaction check",
+      "evidence_path": "security/token-redaction-check.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/security/token-redaction-check.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Token redaction check evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Token redaction check written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LK-01",
+      "lane": "LK",
+      "scope": "IV results",
+      "evidence_path": "iv/iv-results.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/iv/iv-results.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce IV results evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "IV results written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    },
+    {
+      "id": "W27-LK-02",
+      "lane": "LK",
+      "scope": "Adversarial review",
+      "evidence_path": "adversarial-review/adversarial-review-final.json",
+      "owner": "agent",
+      "owned_paths": [
+        "reports/lowcode-plugin-production-heal-wave27-20260610/adversarial-review/adversarial-review-final.json"
+      ],
+      "forbidden_paths": [],
+      "required_change": "Produce Adversarial review evidence",
+      "acceptance_checks": [
+        "File exists",
+        "Valid JSON/text"
+      ],
+      "rollback_plan": "Delete file",
+      "closeout_criteria": "Adversarial review written and validated",
+      "status": "COMPLETE",
+      "completed_at": "2026-06-10T03:01:46+00:00"
+    }
+  ]
+}

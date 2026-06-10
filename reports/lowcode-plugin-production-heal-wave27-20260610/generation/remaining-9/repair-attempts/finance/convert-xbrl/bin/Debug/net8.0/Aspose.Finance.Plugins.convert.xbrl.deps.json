@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Aspose.Finance.Plugins.convert.xbrl/1.0.0": {
+        "dependencies": {
+          "Aspose.Finance": "26.5.22"
+        },
+        "runtime": {
+          "Aspose.Finance.Plugins.convert.xbrl.dll": {}
+        }
+      },
+      "Aspose.Finance/26.5.22": {
+        "runtime": {
+          "lib/netstandard2.0/Aspose.Finance.dll": {
+            "assemblyVersion": "26.5.22.0",
+            "fileVersion": "26.5.22.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Aspose.Finance.Plugins.convert.xbrl/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aspose.Finance/26.5.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bej8pkGfhnz8K6Y68/hs1J/Q7CXHRNISaFqGUqQ3q5ECqFX781xhsrZfbyeZaORQSXqUaQtcjD0AOBK46q3PGQ==",
+      "path": "aspose.finance/26.5.22",
+      "hashPath": "aspose.finance.26.5.22.nupkg.sha512"
+    }
+  }
+}

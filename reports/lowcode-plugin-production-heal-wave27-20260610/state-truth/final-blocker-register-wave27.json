@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-10T03:01:45+00:00",
+  "local_blockers": [
+    {
+      "id": "BLK-01",
+      "description": "3 note packages have runtime eval license crash (BUILD_PASS, RUN_FAILED)",
+      "severity": "LOW",
+      "resolution": "Acquire Aspose.Note production license or accept as eval-mode limitation"
+    }
+  ],
+  "external_gates": [
+    {
+      "id": "EXT-01",
+      "gate": "APPROVE_LIVE_MERGE",
+      "status": "NOT_SET"
+    },
+    {
+      "id": "EXT-02",
+      "gate": "APPROVE_DELETE_BRANCH",
+      "status": "NOT_SET"
+    },
+    {
+      "id": "EXT-03",
+      "gate": "Release pipeline",
+      "status": "NOT_APPLICABLE"
+    }
+  ],
+  "total_local": 1,
+  "total_external": 3
+}

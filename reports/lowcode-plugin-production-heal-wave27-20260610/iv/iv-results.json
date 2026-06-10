@@ -1,0 +1,118 @@
+{
+  "sprint": "lowcode-plugin-production-heal-wave27-20260610",
+  "generated_at": "2026-06-10T03:01:45+00:00",
+  "total_checks": 18,
+  "passed": 18,
+  "pending": 0,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "IV-01",
+      "description": "W26 correction addendum exists",
+      "verdict": "PASS",
+      "evidence": "wave26-correction/wave26-addendum.json"
+    },
+    {
+      "id": "IV-02",
+      "description": "Protocol v3 documented",
+      "verdict": "PASS",
+      "evidence": "evidence-authority/protocol-v3.md"
+    },
+    {
+      "id": "IV-03",
+      "description": "9/9 DRYRUN packages BUILD_PASS",
+      "verdict": "PASS",
+      "evidence": "generation/build-matrix-wave27.json"
+    },
+    {
+      "id": "IV-04",
+      "description": "Root cause analysis written",
+      "verdict": "PASS",
+      "evidence": "generation/remaining-9/root-cause-analysis.json"
+    },
+    {
+      "id": "IV-05",
+      "description": "Registry transition ledger",
+      "verdict": "PASS",
+      "evidence": "generation/registry-transition-ledger-wave27.json"
+    },
+    {
+      "id": "IV-06",
+      "description": "Publication readiness audit",
+      "verdict": "PASS",
+      "evidence": "publication-wave27/w26-proven-package-audit.json"
+    },
+    {
+      "id": "IV-07",
+      "description": "Discovery baseline created",
+      "verdict": "PASS",
+      "evidence": "discovery/discovery-evidence-wave27.json"
+    },
+    {
+      "id": "IV-08",
+      "description": "Fixture fetch attempted",
+      "verdict": "PASS",
+      "evidence": "fixtures/live-fetch-results-wave27.json"
+    },
+    {
+      "id": "IV-09",
+      "description": "NuGet SHA manifest with real hashes",
+      "verdict": "PASS",
+      "evidence": "provenance/nuget-sha-manifest-wave27.json"
+    },
+    {
+      "id": "IV-10",
+      "description": "Non-LowCode E2E ran",
+      "verdict": "PASS",
+      "evidence": "nonlowcode-e2e/e2e-summary-wave27.json"
+    },
+    {
+      "id": "IV-11",
+      "description": "PR lifecycle checked",
+      "verdict": "PASS",
+      "evidence": "pr-lifecycle/amg-results-wave27.json"
+    },
+    {
+      "id": "IV-12",
+      "description": "State truth written",
+      "verdict": "PASS",
+      "evidence": "state-truth/state-truth-wave27.json"
+    },
+    {
+      "id": "IV-13",
+      "description": "Security scan PASS",
+      "verdict": "PASS",
+      "evidence": "security/security-scan-report-wave27.json"
+    },
+    {
+      "id": "IV-14",
+      "description": "Raw pytest log",
+      "verdict": "PASS",
+      "evidence": "verification/raw-test-logs/full-pytest.log"
+    },
+    {
+      "id": "IV-15",
+      "description": "Taskcards complete",
+      "verdict": "PASS",
+      "evidence": "taskcards/taskcards.json"
+    },
+    {
+      "id": "IV-16",
+      "description": "NuGet SHA manifest has 9 real hashes",
+      "verdict": "PASS",
+      "evidence": "provenance/nuget-sha-manifest-wave27.json: 9 packages with SHA"
+    },
+    {
+      "id": "IV-17",
+      "description": "Build matrix shows 9/9 BUILD_PASS",
+      "verdict": "PASS",
+      "evidence": "generation/build-matrix-wave27.json"
+    },
+    {
+      "id": "IV-18",
+      "description": "Execution board agrees with lane ledger",
+      "verdict": "PASS",
+      "evidence": "coordinator/execution-board.json + coordinator/lane-ledger.json"
+    }
+  ]
+}

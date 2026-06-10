@@ -1,0 +1,9 @@
+{
+  "expected_files": [
+    "output.pdf"
+  ],
+  "expected_console_contains": [
+    "convert onenote to pdf"
+  ],
+  "exit_code": 0
+}

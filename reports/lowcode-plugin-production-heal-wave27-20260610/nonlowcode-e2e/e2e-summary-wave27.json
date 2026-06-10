@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-06-10T02:54:41+00:00",
+  "results": [
+    {
+      "family": "barcode",
+      "status": "ERROR",
+      "error": "data must be str, not NoneType"
+    },
+    {
+      "family": "svg",
+      "status": "ERROR",
+      "error": "data must be str, not NoneType"
+    },
+    {
+      "family": "cad",
+      "status": "ERROR",
+      "error": "data must be str, not NoneType"
+    },
+    {
+      "family": "nonexistent_family_xyz",
+      "status": "ERROR",
+      "error": "data must be str, not NoneType"
+    }
+  ],
+  "completed": 0,
+  "failed": 4
+}

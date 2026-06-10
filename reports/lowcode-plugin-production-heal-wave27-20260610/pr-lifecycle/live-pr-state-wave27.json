@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-06-10T02:54:45+00:00",
+  "prs": [
+    {
+      "family": "barcode",
+      "repo": "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "title": "feat(plugins): add Aspose.BarCode plugin examples (4 packages)"
+    },
+    {
+      "family": "svg",
+      "repo": "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "title": "feat(plugins): add Aspose.SVG plugin examples (4 packages)"
+    },
+    {
+      "family": "cad",
+      "repo": "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+      "pr_number": 1,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "title": "feat(plugins): add Aspose.CAD plugin examples (5 packages)"
+    }
+  ]
+}

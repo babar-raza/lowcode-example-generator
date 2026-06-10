@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-06-10T02:54:33+00:00",
+  "entries": [
+    {
+      "family": "drawing",
+      "slug": "convert-drawing",
+      "target_repo": "aspose-drawing-net/Aspose.Drawing.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "drawing",
+      "slug": "create-drawing",
+      "target_repo": "aspose-drawing-net/Aspose.Drawing.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-pdf-converter",
+      "target_repo": "aspose-html-net/Aspose.HTML.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-docx-converter",
+      "target_repo": "aspose-html-net/Aspose.HTML.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-image-converter",
+      "target_repo": "aspose-html-net/Aspose.HTML.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-converter",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-resizer",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-compressor",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-cropper",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-filters",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-merger",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "add-watermark",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-rotator",
+      "target_repo": "aspose-imaging-net/Aspose.Imaging.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "target_repo": "NEEDS_CREATION",
+      "repo_exists": false
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "target_repo": "NEEDS_CREATION",
+      "repo_exists": false
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "target_repo": "NEEDS_CREATION",
+      "repo_exists": false
+    },
+    {
+      "family": "tasks",
+      "slug": "project-to-pdf-converter",
+      "target_repo": "aspose-tasks-net/Aspose.Tasks.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-excel",
+      "target_repo": "aspose-tasks-net/Aspose.Tasks.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    },
+    {
+      "family": "zip",
+      "slug": "compress-files",
+      "target_repo": "aspose-zip-net/Aspose.ZIP.LowCode-for-.NET-Examples",
+      "repo_exists": true
+    }
+  ],
+  "families_without_repo": [
+    "ocr"
+  ]
+}

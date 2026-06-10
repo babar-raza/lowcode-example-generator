@@ -1,0 +1,350 @@
+{
+  "generated_at": "2026-06-10T02:54:33+00:00",
+  "total_packages": 19,
+  "pr_ready": 19,
+  "needs_repair": 0,
+  "packages": [
+    {
+      "family": "drawing",
+      "slug": "convert-drawing",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "drawing",
+      "slug": "create-drawing",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-pdf-converter",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-docx-converter",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "html",
+      "slug": "html-to-image-converter",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-converter",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-resizer",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-compressor",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-cropper",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-filters",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-merger",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "add-watermark",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "imaging",
+      "slug": "image-rotator",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "ocr",
+      "slug": "invoice-to-text",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "ocr",
+      "slug": "photo-to-text",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "ocr",
+      "slug": "table-to-text",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "tasks",
+      "slug": "project-to-pdf-converter",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "tasks",
+      "slug": "mpp-to-excel",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    },
+    {
+      "family": "zip",
+      "slug": "compress-files",
+      "artifacts": {
+        "Program.cs": true,
+        "csproj": true,
+        "README.md": true,
+        "example.manifest.json": true,
+        "expected-output.json": true,
+        "source-provenance.json": true
+      },
+      "logs": {
+        "restore.log": true,
+        "build.log": true,
+        "run.log": true
+      },
+      "pr_ready": true
+    }
+  ]
+}

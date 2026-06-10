@@ -1,0 +1,51 @@
+ M .github/workflows/build-and-test.yml
+ M .gitignore
+ M pyproject.toml
+ M reports/lowcode-plugin-production-heal-wave25-20260609/validators/test-output.log
+ M src/plugin_examples/commands/__init__.py
+ M src/plugin_examples/commands/run.py
+ M src/plugin_examples/gates/example_gates.py
+ M src/plugin_examples/runner.py
+ M workspace/pr-dry-run/cells-controlled-pilot/README.md
+ M workspace/pr-dry-run/words-controlled-pilot/README.md
+ M workspace/verification/latest/cells-readme-backfill-simulation.json
+ M workspace/verification/latest/cells-root-readme-audit.json
+ M workspace/verification/latest/cells-root-readme-render-result.json
+ M workspace/verification/latest/release-status.json
+ M workspace/verification/latest/words-readme-backfill-simulation.json
+ M workspace/verification/latest/words-root-readme-audit.json
+ M workspace/verification/latest/words-root-readme-render-result.json
+?? "Exit\357\200\272 "
+?? echo
+?? fallback_candidates.json
+?? pipeline/format-authority/operation-kind-matrix.json
+?? pipeline/schemas/operation-kind-matrix.schema.json
+?? reports/lowcode-final-verify-20260603/commands/stdout-stderr/CMD-001.err
+?? reports/lowcode-plugin-production-heal-wave27-20260610/
+?? reports/project-maturity/
+?? reports/rating-healing-sprint-001/
+?? reports/weekly-business-achievements/
+?? scripts/_wave27_closeout.py
+?? scripts/_wave27_parallel_lanes.py
+?? scripts/_wave27_repair_9.py
+?? src/plugin_examples/commands/doctor.py
+?? src/plugin_examples/commands/verify_remote.py
+?? src/plugin_examples/fixture_factory/family_status_validators.py
+?? src/plugin_examples/fixture_factory/operation_kind_validators.py
+?? src/plugin_examples/fixture_factory/package_self_containment_validators.py
+?? src/plugin_examples/fixture_factory/readme_consistency_validators.py
+?? src/plugin_examples/generator/decision_audit.py
+?? src/plugin_examples/health/
+?? src/plugin_examples/publisher/remote_truth_verifier.py
+?? tests/integration/conftest.py
+?? tests/integration/test_cli_integration.py
+?? tests/integration/test_evidence_completeness_integration.py
+?? tests/integration/test_gate_integration.py
+?? tests/integration/test_generation_path_integration.py
+?? tests/unit/test_doctor_health_check.py
+?? tests/unit/test_family_status_validators.py
+?? tests/unit/test_generation_decision_audit.py
+?? tests/unit/test_operation_kind_validators.py
+?? tests/unit/test_package_self_containment_validators.py
+?? tests/unit/test_readme_consistency_validators.py
+?? tests/unit/test_remote_truth_verifier.py

@@ -1,0 +1,233 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "Aspose.Drawing/26.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Aspose.Drawing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Aspose.Drawing.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Aspose.PSD/26.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Aspose.Drawing": "26.2.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net8.0/Aspose.PSD.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Aspose.PSD.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Aspose.Drawing/26.2.0": {
+      "sha512": "P8xEQBciCeezae1AbphMY8+8yw9++630ipfQW8zF/M3Zfiwl5AEkq2HgFjpT24URV4ARqge+x6Bw2UgAWA90cQ==",
+      "type": "package",
+      "path": "aspose.drawing/26.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Aspose.Drawing for .NET.Agreements.pdf",
+        "License.txt",
+        "aspose.drawing.26.2.0.nupkg.sha512",
+        "aspose.drawing.nuspec",
+        "icon.png",
+        "lib/net40/Aspose.Drawing.dll",
+        "lib/net40/Aspose.Drawing.xml",
+        "lib/netstandard2.0/Aspose.Drawing.dll",
+        "lib/netstandard2.0/Aspose.Drawing.xml"
+      ]
+    },
+    "Aspose.PSD/26.5.0": {
+      "sha512": "jmzBoEDDfoshc0K2NPp5LR9xzbGQ/mFD5WM5PwPxkhqUIyUy+xd4dRm3EE7vFsxCTUGUPXfAmJLysgtTulXCsQ==",
+      "type": "package",
+      "path": "aspose.psd/26.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Help/Aspose.PSD.chm",
+        "LICENSE.txt",
+        "License/ThirdPartyLicenses.Aspose.PSD.Net.pdf",
+        "aspose.psd.26.5.0.nupkg.sha512",
+        "aspose.psd.nuspec",
+        "images/icon.png",
+        "lib/net10.0/Aspose.PSD.dll",
+        "lib/net10.0/Aspose.PSD.xml",
+        "lib/net20/Aspose.PSD.dll",
+        "lib/net20/Aspose.PSD.xml",
+        "lib/net35/Aspose.PSD.dll",
+        "lib/net35/Aspose.PSD.xml",
+        "lib/net40/Aspose.PSD.dll",
+        "lib/net40/Aspose.PSD.xml",
+        "lib/net5.0/Aspose.PSD.dll",
+        "lib/net5.0/Aspose.PSD.xml",
+        "lib/net6.0/Aspose.PSD.dll",
+        "lib/net6.0/Aspose.PSD.xml",
+        "lib/net7.0/Aspose.PSD.dll",
+        "lib/net7.0/Aspose.PSD.xml",
+        "lib/net8.0/Aspose.PSD.dll",
+        "lib/net8.0/Aspose.PSD.xml",
+        "lib/net9.0/Aspose.PSD.dll",
+        "lib/net9.0/Aspose.PSD.xml",
+        "lib/netstandard2.0/Aspose.PSD.dll",
+        "lib/netstandard2.0/Aspose.PSD.xml"
+      ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Aspose.PSD >= *"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\prora\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-production-heal-wave27-20260610\\generation\\remaining-9\\repair-attempts\\psd\\photo-processor\\Aspose.Psd.Plugins.photo.processor.csproj",
+      "projectName": "Aspose.Psd.Plugins.photo.processor",
+      "projectPath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-production-heal-wave27-20260610\\generation\\remaining-9\\repair-attempts\\psd\\photo-processor\\Aspose.Psd.Plugins.photo.processor.csproj",
+      "packagesPath": "C:\\Users\\prora\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\prora\\OneDrive\\Documents\\GitHub\\lowcode-example-generator-gitlab\\reports\\lowcode-plugin-production-heal-wave27-20260610\\generation\\remaining-9\\repair-attempts\\psd\\photo-processor\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\prora\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.200"
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "Aspose.PSD": {
+            "target": "Package",
+            "version": "[*, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.27, 8.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.27, 8.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.27, 8.0.27]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.27, 8.0.27]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

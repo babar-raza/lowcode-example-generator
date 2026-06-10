@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-06-10T02:54:33+00:00",
+  "read_only": "PASS",
+  "dry_run": "PASS",
+  "publication": "BLOCKED_NO_LIVE_API",
+  "overall": "BASELINE_CREATED_NOT_LIVE_VERIFIED",
+  "note": "Freshness gate passes for read_only and dry_run; publication requires live NuGet API"
+}

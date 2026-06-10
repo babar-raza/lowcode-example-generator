@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-06-10T02:54:33+00:00",
+  "status": "BASELINE_CREATED",
+  "has_detector_module": true,
+  "has_stage_registry": false,
+  "capability_registry_families": [
+    "barcode",
+    "cad",
+    "drawing",
+    "finance",
+    "font",
+    "gis",
+    "html",
+    "imaging",
+    "note",
+    "ocr",
+    "omr",
+    "page",
+    "psd",
+    "schema",
+    "svg",
+    "tasks",
+    "tex",
+    "threed",
+    "zip"
+  ],
+  "validated_at": "2026-06-10T02:54:33+00:00",
+  "expires_at": "2026-06-17T00:00:00Z",
+  "source": "capability_registry_scan",
+  "note": "Live NuGet/API discovery not available in local env; baseline created from registry YAMLs"
+}

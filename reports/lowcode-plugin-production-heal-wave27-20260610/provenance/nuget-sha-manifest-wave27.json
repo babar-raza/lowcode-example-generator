@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-06-10T02:54:37+00:00",
+  "entries": [
+    {
+      "package": "aspose.barcode",
+      "versions_found": [
+        "24.12.0",
+        "26.5.0"
+      ],
+      "latest_version": "26.5.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.barcode\\26.5.0\\aspose.barcode.26.5.0.nupkg",
+      "nupkg_sha256": "ffe05203335d5fa53afd3315bb2bf653ad928e5ef4dbc385ea48c4ba2323b109",
+      "nupkg_size": 15553395
+    },
+    {
+      "package": "aspose.svg",
+      "versions_found": [
+        "24.12.0",
+        "26.5.0"
+      ],
+      "latest_version": "26.5.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.svg\\26.5.0\\aspose.svg.26.5.0.nupkg",
+      "nupkg_sha256": "5a93784b05166f4a17aa899e77d9c6efa0ace93bb8ff43191c3fcab74d07f32f",
+      "nupkg_size": 4279358
+    },
+    {
+      "package": "aspose.cad",
+      "versions_found": [
+        "24.12.0",
+        "26.1.0"
+      ],
+      "latest_version": "26.1.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.cad\\26.1.0\\aspose.cad.26.1.0.nupkg",
+      "nupkg_sha256": "3f11f4aa2b00404acb5e179352ac6cb02ce2b6ea9354bc3c8582c0ab0a65856d",
+      "nupkg_size": 78851419
+    },
+    {
+      "package": "aspose.note",
+      "versions_found": [
+        "24.12.0",
+        "26.4.0"
+      ],
+      "latest_version": "26.4.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.note\\26.4.0\\aspose.note.26.4.0.nupkg",
+      "nupkg_sha256": "d42bbf01cbde6d0318c5dbbd6f6321e618bc1fb539c9eb2be28031ca4aff02bc",
+      "nupkg_size": 115024699
+    },
+    {
+      "package": "aspose.psd",
+      "versions_found": [
+        "24.12.0",
+        "26.5.0"
+      ],
+      "latest_version": "26.5.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.psd\\26.5.0\\aspose.psd.26.5.0.nupkg",
+      "nupkg_sha256": "64b656913331bd7e1d386805ade635151c86da8c83c65ac43ab0851db66aa5f2",
+      "nupkg_size": 36740164
+    },
+    {
+      "package": "aspose.ocr",
+      "versions_found": [
+        "24.12.0",
+        "26.5.0"
+      ],
+      "latest_version": "26.5.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.ocr\\26.5.0\\aspose.ocr.26.5.0.nupkg",
+      "nupkg_sha256": "8695fdc3b4f2e6658ea48f6c1a28550ac83f7fd7119765a42246e03dda23b83e",
+      "nupkg_size": 179578007
+    },
+    {
+      "package": "aspose.tex",
+      "versions_found": [
+        "24.12.0",
+        "26.4.0",
+        "26.6.0"
+      ],
+      "latest_version": "26.6.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.tex\\26.6.0\\aspose.tex.26.6.0.nupkg",
+      "nupkg_sha256": "1e2a3cd5fecfeb9d29ca4ea37e805ea473403d4f90f1d05aba6c7930faf4acfa",
+      "nupkg_size": 52741932
+    },
+    {
+      "package": "aspose.finance",
+      "versions_found": [
+        "24.12.0",
+        "26.5.22"
+      ],
+      "latest_version": "26.5.22",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.finance\\26.5.22\\aspose.finance.26.5.22.nupkg",
+      "nupkg_sha256": "e1f963a0a77c088bf4e18247be6cd4dbbe7b03297265d7ab0871a5e47335691d",
+      "nupkg_size": 6311539
+    },
+    {
+      "package": "aspose.imaging",
+      "versions_found": [
+        "24.12.0",
+        "26.5.0",
+        "26.6.0"
+      ],
+      "latest_version": "26.6.0",
+      "nupkg_path": "C:\\Users\\prora\\.nuget\\packages\\aspose.imaging\\26.6.0\\aspose.imaging.26.6.0.nupkg",
+      "nupkg_sha256": "52fabe866f195cf357500fcdb617a82cf5cfeb3520aee8fd46bcf2e5e4308621",
+      "nupkg_size": 71603558
+    }
+  ]
+}
